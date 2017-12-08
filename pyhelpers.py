@@ -34,20 +34,23 @@ import math
 from datetime import datetime
 
 
-def setup_orekit_curdir():
+def setup_orekit_curdir(filename='orekit-data.zip'):
     """Setup the java engine with orekit.
 
-    This functionsand loads the orekit-data.zip from the current directory
-    and sets up the orekit DataProviders to access it.
+    This function loads the orekit-data.zip from the current directory
+    and sets up the Orekit DataProviders to access it.
 
     The JVM needs to be initiated prior to calling this function:
 
         orekit.initVM()
 
+    Args:
+        filename (str): Name of zip with orekit data. Default filename is 'orekit-data.zip'
+
     """
 
     DM = DataProvidersManager.getInstance()
-    datafile = File('orekit-data.zip')
+    datafile = File(filename)
     if not datafile.exists():
         print('File :', datafile.absolutePath, ' not found')
 
