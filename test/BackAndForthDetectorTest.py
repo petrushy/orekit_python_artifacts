@@ -109,8 +109,6 @@ class BackAndForthDetectorTest(unittest.TestCase):
         self.assertEquals(4, visi.getVisiNb())
 
 if __name__ == '__main__':
-    #unittest.main()
-    
     suite = unittest.TestLoader().loadTestsFromTestCase(BackAndForthDetectorTest)
     ret = not unittest.TextTestRunner(verbosity=2).run(suite).wasSuccessful()
     sys.exit(ret)
