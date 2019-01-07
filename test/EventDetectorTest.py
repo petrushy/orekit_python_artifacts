@@ -121,7 +121,7 @@ class EventDetectorTest(unittest.TestCase):
         finalState = kepler.propagate(initialDate.shiftedBy(60*60*24.0*15))
 
         print(detector.passes)
-        self.assertEquals(52, detector.passes)
+        self.assertEqual(52, detector.passes)
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(EventDetectorTest)

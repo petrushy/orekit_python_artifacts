@@ -29,6 +29,9 @@ orekit.initVM()
 from orekit.pyhelpers import setup_orekit_curdir
 setup_orekit_curdir()   # orekit-data.zip shall be in current dir
 #from math import abs
+import unittest
+import sys
+
 
 from org.hipparchus.util import FastMath
 from org.orekit.bodies import CelestialBodyFactory
@@ -43,35 +46,46 @@ from org.orekit.time import AbsoluteDate
 from org.orekit.time import TimeScalesFactory
 from org.orekit.propagation.events import AltitudeDetector
 
-EME2000 = FramesFactory.getEME2000()
-initialDate = AbsoluteDate(2009,1,1,TimeScalesFactory.getUTC())
-a = 8000000.0
-e = 0.1
-earthRadius = 6378137.0
-earthF = 1.0 / 298.257223563
-apogee = a*(1+e)
-alt = apogee - earthRadius - 500
 
-#// initial state is at apogee
-initialOrbit = KeplerianOrbit(a,e,0.0,0.0,0.0,FastMath.PI,PositionAngle.MEAN,EME2000,
-                                                      initialDate,CelestialBodyFactory.getEarth().getGM())
-initialState = SpacecraftState(initialOrbit)
-kepPropagator = KeplerianPropagator(initialOrbit)
-altDetector = AltitudeDetector(alt, 
-    OneAxisEllipsoid(earthRadius, earthF, EME2000)).withHandler(StopOnEvent().of_(AltitudeDetector))
+class AltitudeDetectorTest(unittest.TestCase):
 
-# altitudeDetector should stop propagation upon reaching required altitude
-kepPropagator.addEventDetector(altDetector)
+    def testBackAndForth(self):
+        EME2000 = FramesFactory.getEME2000()
+        initialDate = AbsoluteDate(2009,1,1,TimeScalesFactory.getUTC())
+        a = 8000000.0
+        e = 0.1
+        earthRadius = 6378137.0
+        earthF = 1.0 / 298.257223563
+        apogee = a*(1+e)
+        alt = apogee - earthRadius - 500
 
-#// propagation to the future
-finalState = kepPropagator.propagate(initialDate.shiftedBy(1000.0))
-assert abs(finalState.getPVCoordinates().getPosition().getNorm()-earthRadius -alt)<1e-5
-assert abs(44.079 - finalState.getDate().durationFrom(initialDate))< 1.0e-3
+        #// initial state is at apogee
+        initialOrbit = KeplerianOrbit(a,e,0.0,0.0,0.0,FastMath.PI,PositionAngle.MEAN,EME2000,
+                                                              initialDate,CelestialBodyFactory.getEarth().getGM())
+        initialState = SpacecraftState(initialOrbit)
+        kepPropagator = KeplerianPropagator(initialOrbit)
+        altDetector = AltitudeDetector(alt,
+            OneAxisEllipsoid(earthRadius, earthF, EME2000)).withHandler(StopOnEvent().of_(AltitudeDetector))
 
-#// propagation to the past
-kepPropagator.resetInitialState(initialState)
-finalState = kepPropagator.propagate(initialDate.shiftedBy(-1000.0))
-assert abs(finalState.getPVCoordinates().getPosition().getNorm()-earthRadius - alt)< 1e-5
-assert abs(-44.079 - finalState.getDate().durationFrom(initialDate))< 1.0e-3
+        # altitudeDetector should stop propagation upon reaching required altitude
+        kepPropagator.addEventDetector(altDetector)
 
-print("AltitudeDetectorTest successfully run")
+        #// propagation to the future
+        finalState = kepPropagator.propagate(initialDate.shiftedBy(1000.0))
+        assert abs(finalState.getPVCoordinates().getPosition().getNorm()-earthRadius -alt)<1e-5
+        assert abs(44.079 - finalState.getDate().durationFrom(initialDate))< 1.0e-3
+
+        #// propagation to the past
+        kepPropagator.resetInitialState(initialState)
+        finalState = kepPropagator.propagate(initialDate.shiftedBy(-1000.0))
+        assert abs(finalState.getPVCoordinates().getPosition().getNorm()-earthRadius - alt)< 1e-5
+        assert abs(-44.079 - finalState.getDate().durationFrom(initialDate))< 1.0e-3
+
+        print("AltitudeDetectorTest successfully run")
+
+
+
+if __name__ == '__main__':
+    suite = unittest.TestLoader().loadTestsFromTestCase(AltitudeDetectorTest)
+    ret = not unittest.TextTestRunner(verbosity=2).run(suite).wasSuccessful()
+    sys.exit(ret)

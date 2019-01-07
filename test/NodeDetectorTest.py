@@ -27,6 +27,9 @@ Python version translated from Java by Petrus Hyvönen, SSC 2014
 import orekit
 orekit.initVM()
 
+import sys
+import unittest
+
 from orekit.pyhelpers import setup_orekit_curdir
 setup_orekit_curdir()   # orekit-data.zip shall be in current dir
 
@@ -45,59 +48,68 @@ from org.orekit.time import TimeScalesFactory
 from org.orekit.utils import Constants
 from orekit import JArray_double
 
-# Floats are needed to be specific in the orekit interface
-a = 800000.0 + Constants.WGS84_EARTH_EQUATORIAL_RADIUS
-e = 0.0001
-i = FastMath.toRadians(98.0)
-w = -90.0
-raan = 0.0
-v = 0.0
 
-inertialFrame = FramesFactory.getEME2000()
-initialDate = AbsoluteDate(2014, 1, 1, 0, 0, 0.0, TimeScalesFactory.getUTC())
-finalDate = initialDate.shiftedBy(70*24*60*60.0)
-initialOrbit = KeplerianOrbit(a, e, i, w, raan, v, PositionAngle.TRUE, inertialFrame, initialDate, Constants.WGS84_EARTH_MU)
-initialState = SpacecraftState(initialOrbit, 1000.0)
+class NodeDetectorTest(unittest.TestCase):
+    def testIssue138(self):
+        # Floats are needed to be specific in the orekit interface
+        a = 800000.0 + Constants.WGS84_EARTH_EQUATORIAL_RADIUS
+        e = 0.0001
+        i = FastMath.toRadians(98.0)
+        w = -90.0
+        raan = 0.0
+        v = 0.0
 
-tol = NumericalPropagator.tolerances(10.0, initialOrbit, initialOrbit.getType())
+        inertialFrame = FramesFactory.getEME2000()
+        initialDate = AbsoluteDate(2014, 1, 1, 0, 0, 0.0, TimeScalesFactory.getUTC())
+        finalDate = initialDate.shiftedBy(70*24*60*60.0)
+        initialOrbit = KeplerianOrbit(a, e, i, w, raan, v, PositionAngle.TRUE, inertialFrame, initialDate, Constants.WGS84_EARTH_MU)
+        initialState = SpacecraftState(initialOrbit, 1000.0)
 
-# Double array of doubles needs to be retyped to work
-integrator = DormandPrince853Integrator(0.001, 1000.0, 
-    JArray_double.cast_(tol[0]),
-    JArray_double.cast_(tol[1]))
+        tol = NumericalPropagator.tolerances(10.0, initialOrbit, initialOrbit.getType())
 
-propagator = NumericalPropagator(integrator)
-propagator.setInitialState(initialState)
+        # Double array of doubles needs to be retyped to work
+        integrator = DormandPrince853Integrator(0.001, 1000.0,
+            JArray_double.cast_(tol[0]),
+            JArray_double.cast_(tol[1]))
 
-# Define 2 instances of NodeDetector:
-rawDetector = NodeDetector(1e-6, 
-        initialState.getOrbit(), 
-        initialState.getFrame()).withHandler(ContinueOnEvent().of_(NodeDetector))
+        propagator = NumericalPropagator(integrator)
+        propagator.setInitialState(initialState)
 
-logger1 = EventsLogger()
-node1 = logger1.monitorDetector(rawDetector)
-logger2 = EventsLogger()
-node2 = logger2.monitorDetector(rawDetector)
+        # Define 2 instances of NodeDetector:
+        rawDetector = NodeDetector(1e-6,
+                initialState.getOrbit(),
+                initialState.getFrame()).withHandler(ContinueOnEvent().of_(NodeDetector))
 
-propagator.addEventDetector(node1)
-propagator.addEventDetector(node2)
+        logger1 = EventsLogger()
+        node1 = logger1.monitorDetector(rawDetector)
+        logger2 = EventsLogger()
+        node2 = logger2.monitorDetector(rawDetector)
 
-# First propagation
-propagator.setEphemerisMode()
-propagator.propagate(finalDate)
+        propagator.addEventDetector(node1)
+        propagator.addEventDetector(node2)
 
-assert 1998==logger1.getLoggedEvents().size()
-assert 1998== logger2.getLoggedEvents().size();
-logger1.clearLoggedEvents()
-logger2.clearLoggedEvents()
+        # First propagation
+        propagator.setEphemerisMode()
+        propagator.propagate(finalDate)
 
-postpro = propagator.getGeneratedEphemeris()
+        assert 1998==logger1.getLoggedEvents().size()
+        assert 1998== logger2.getLoggedEvents().size();
+        logger1.clearLoggedEvents()
+        logger2.clearLoggedEvents()
 
-# Post-processing
-postpro.addEventDetector(node1)
-postpro.addEventDetector(node2)
-postpro.propagate(finalDate)
-assert 1998==logger1.getLoggedEvents().size()
-assert 1998==logger2.getLoggedEvents().size()
+        postpro = propagator.getGeneratedEphemeris()
 
-print("NodeDetectorTest Successfully run")
+        # Post-processing
+        postpro.addEventDetector(node1)
+        postpro.addEventDetector(node2)
+        postpro.propagate(finalDate)
+        assert 1998==logger1.getLoggedEvents().size()
+        assert 1998==logger2.getLoggedEvents().size()
+
+        print("NodeDetectorTest Successfully run")
+
+
+if __name__ == '__main__':
+    suite = unittest.TestLoader().loadTestsFromTestCase(NodeDetectorTest)
+    ret = not unittest.TextTestRunner(verbosity=2).run(suite).wasSuccessful()
+    sys.exit(ret)
