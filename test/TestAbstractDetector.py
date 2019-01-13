@@ -107,7 +107,7 @@ class AbstractDetectorTest(unittest.TestCase):
         finalState = kepler.propagate(initialDate.shiftedBy(60*60*24.0*15))
 
         print(mycounter.passes)
-        self.assertEquals(52, mycounter.passes)
+        self.assertEqual(52, mycounter.passes)
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(AbstractDetectorTest)

@@ -49,7 +49,7 @@ import sys
 from orekit.pyhelpers import  setup_orekit_curdir
 setup_orekit_curdir()
 
-#%%
+
 class EventHandlerTest(unittest.TestCase):
 
     def testOwnContinueOnEvent(self):
@@ -80,7 +80,7 @@ class EventHandlerTest(unittest.TestCase):
         sta1Frame = TopocentricFrame(earth, station1, "station 1")
 
         elevation = math.radians(5.0)
-        #%%
+
         class myContinueOnEvent(PythonEventHandler):
 
             def eventOccurred(self, s, T, increasing):
@@ -104,12 +104,11 @@ class EventHandlerTest(unittest.TestCase):
 
         mylog = logger.getLoggedEvents()
         for ev in mylog:
-            #print 'Date: ',ev.getState().getDate(), ' Start pass: ',ev.isIncreasing()
             if ev.isIncreasing():
                 taken_passes = taken_passes + 1
 
-        #print 'Taken passes:',taken_passes
-        self.assertEquals(52, taken_passes)
+
+        self.assertEqual(52, taken_passes)
 
 
 if __name__ == '__main__':

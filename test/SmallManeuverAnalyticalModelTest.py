@@ -55,8 +55,6 @@ from org.orekit.utils import PVCoordinates
 
 from math import radians
 
-# from org.orekit.forces.maneuvers import getEphemeris
-
 import unittest
 import sys
 
@@ -92,8 +90,8 @@ class SmallManeuverAnalyticalModelTest(unittest.TestCase):
             modelError = PVCoordinates(pvWith, pvModel).getPosition().getNorm()
             if t.compareTo(t0) < 0:
                 # before maneuver, all positions should be equal
-                self.assertEquals(0, nominalDeltaP, 1.0e-10)
-                self.assertEquals(0, modelError, 1.0e-10)
+                self.assertEqual(0, nominalDeltaP, 1.0e-10)
+                self.assertEqual(0, modelError, 1.0e-10)
             else:
                 # after maneuver, model error should be less than 0.8m,
                 # despite nominal deltaP exceeds 1 kilometer after less than 3 orbits
@@ -123,7 +121,7 @@ class SmallManeuverAnalyticalModelTest(unittest.TestCase):
         withoutManeuver = self.getEphemeris(leo, mass, t0, Vector3D.ZERO, f, isp)
         withManeuver = self.getEphemeris(leo, mass, t0, dV, f, isp)
         model = SmallManeuverAnalyticalModel(withoutManeuver.propagate(t0), dV, isp)
-        self.assertEquals(t0.toString(), model.getDate().toString())
+        self.assertEqual(t0.toString(), model.getDate().toString())
 
         t = withoutManeuver.getMinDate()
         while t.compareTo(withoutManeuver.getMaxDate()) < 0:
@@ -134,8 +132,8 @@ class SmallManeuverAnalyticalModelTest(unittest.TestCase):
             modelError = PVCoordinates(pvWith, pvModel).getPosition().getNorm()
             if t.compareTo(t0) < 0:
                 # before maneuver, all positions should be equal
-                self.assertEquals(0, nominalDeltaP, 1.0e-10)
-                self.assertEquals(0, modelError, 1.0e-10)
+                self.assertEqual(0, nominalDeltaP, 1.0e-10)
+                self.assertEqual(0, modelError, 1.0e-10)
             else:
                 # after maneuver, model error should be less than 0.8m,
                 # despite nominal deltaP exceeds 1 kilometer after less than 3 orbits
@@ -166,7 +164,7 @@ class SmallManeuverAnalyticalModelTest(unittest.TestCase):
         withManeuver = self.getEphemeris(heo, mass, t0, dV, f, isp)
         model = SmallManeuverAnalyticalModel(withoutManeuver.propagate(t0), dV, isp)
 
-        self.assertEquals(t0.toString(), model.getDate().toString())
+        self.assertEqual(t0.toString(), model.getDate().toString())
 
         t = withoutManeuver.getMinDate()
         while t.compareTo(withoutManeuver.getMaxDate()) < 0:
@@ -177,8 +175,8 @@ class SmallManeuverAnalyticalModelTest(unittest.TestCase):
             modelError = PVCoordinates(pvWith, pvModel).getPosition().getNorm()
             if t.compareTo(t0) < 0:
                 # before maneuver, all positions should be equal
-                self.assertEquals(0, nominalDeltaP, 1.0e-10)
-                self.assertEquals(0, modelError, 1.0e-10)
+                self.assertEqual(0, nominalDeltaP, 1.0e-10)
+                self.assertEqual(0, modelError, 1.0e-10)
             else:
                 # after maneuver, model error should be less than 1700m,
                 # despite nominal deltaP exceeds 300 kilometers at perigee, after 3 orbits

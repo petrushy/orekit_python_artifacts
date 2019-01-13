@@ -28,7 +28,6 @@ import orekit
 orekit.initVM()
 from orekit.pyhelpers import setup_orekit_curdir
 setup_orekit_curdir()   # orekit-data.zip shall be in current dir
-#from math import abs
 import unittest
 import sys
 

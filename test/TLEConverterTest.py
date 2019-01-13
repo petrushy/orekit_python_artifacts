@@ -63,8 +63,8 @@ class TLEConverterTest(unittest.TestCase):
         drivers = builder.getPropagationParametersDrivers().getDrivers()
 
         # there should *not *be any drivers for central attraction coefficient (see issue  # 313)
-        self.assertEquals(1, drivers.size())
-        self.assertEquals("BSTAR", drivers.get(0).getName())
+        self.assertEqual(1, drivers.size())
+        self.assertEqual("BSTAR", drivers.get(0).getName())
 
         fitter = FiniteDifferencePropagatorConverter(builder, threshold, 1000)
         sample = Arrays.asList(sample)
@@ -77,24 +77,24 @@ class TLEConverterTest(unittest.TestCase):
         prop = TLEPropagator.cast_(fitter.getAdaptedPropagator())
         fitted = prop.getTLE()
 
-        self.assertAlmostEquals(expectedRMS, fitter.getRMS(), delta=0.001 * expectedRMS)
+        self.assertAlmostEqual(expectedRMS, fitter.getRMS(), delta=0.001 * expectedRMS)
 
-        self.assertEquals(tle.getSatelliteNumber(), fitted.getSatelliteNumber())
-        self.assertEquals(tle.getClassification(), fitted.getClassification())
-        self.assertEquals(tle.getLaunchYear(), fitted.getLaunchYear())
-        self.assertEquals(tle.getLaunchNumber(), fitted.getLaunchNumber())
-        self.assertEquals(tle.getLaunchPiece(), fitted.getLaunchPiece())
-        self.assertEquals(tle.getElementNumber(), fitted.getElementNumber())
-        self.assertEquals(tle.getRevolutionNumberAtEpoch(), fitted.getRevolutionNumberAtEpoch())
+        self.assertEqual(tle.getSatelliteNumber(), fitted.getSatelliteNumber())
+        self.assertEqual(tle.getClassification(), fitted.getClassification())
+        self.assertEqual(tle.getLaunchYear(), fitted.getLaunchYear())
+        self.assertEqual(tle.getLaunchNumber(), fitted.getLaunchNumber())
+        self.assertEqual(tle.getLaunchPiece(), fitted.getLaunchPiece())
+        self.assertEqual(tle.getElementNumber(), fitted.getElementNumber())
+        self.assertEqual(tle.getRevolutionNumberAtEpoch(), fitted.getRevolutionNumberAtEpoch())
 
         eps = 1.0e-5
-        self.assertAlmostEquals(tle.getMeanMotion(), fitted.getMeanMotion(), delta=eps * tle.getMeanMotion())
-        self.assertAlmostEquals(tle.getE(), fitted.getE(), delta=eps * tle.getE())
-        self.assertAlmostEquals(tle.getI(), fitted.getI(), delta=eps * tle.getI())
-        self.assertAlmostEquals(tle.getPerigeeArgument(), fitted.getPerigeeArgument(),
+        self.assertAlmostEqual(tle.getMeanMotion(), fitted.getMeanMotion(), delta=eps * tle.getMeanMotion())
+        self.assertAlmostEqual(tle.getE(), fitted.getE(), delta=eps * tle.getE())
+        self.assertAlmostEqual(tle.getI(), fitted.getI(), delta=eps * tle.getI())
+        self.assertAlmostEqual(tle.getPerigeeArgument(), fitted.getPerigeeArgument(),
                                 delta=eps * tle.getPerigeeArgument())
-        self.assertAlmostEquals(tle.getRaan(), fitted.getRaan(), delta=eps * tle.getRaan())
-        self.assertAlmostEquals(tle.getMeanAnomaly(), fitted.getMeanAnomaly(), delta=eps * tle.getMeanAnomaly())
+        self.assertAlmostEqual(tle.getRaan(), fitted.getRaan(), delta=eps * tle.getRaan())
+        self.assertAlmostEqual(tle.getMeanAnomaly(), fitted.getMeanAnomaly(), delta=eps * tle.getMeanAnomaly())
 
         if withBStar:
             self.assertAlmostEquals(tle.getBStar(), fitted.getBStar(), delta=eps * tle.getBStar())

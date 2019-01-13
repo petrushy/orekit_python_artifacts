@@ -106,7 +106,7 @@ class BackAndForthDetectorTest(unittest.TestCase):
         propagator.propagate(date1)
         propagator.propagate(date0)
 
-        self.assertEquals(4, visi.getVisiNb())
+        self.assertEqual(4, visi.getVisiNb())
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(BackAndForthDetectorTest)

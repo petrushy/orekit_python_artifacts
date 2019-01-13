@@ -95,8 +95,8 @@ class GroundFieldOfViewDetectorTest(unittest.TestCase):
         actual = logger.getLoggedEvents()
 
         # verify
-        self.assertEquals(2, expected.size())
-        self.assertEquals(2, actual.size())
+        self.assertEqual(2, expected.size())
+        self.assertEqual(2, actual.size())
 
         for i in range(0, 1):
             expectedDate = expected.get(i).getState().getDate()
