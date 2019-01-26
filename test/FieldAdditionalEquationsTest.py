@@ -91,7 +91,7 @@ class FieldAdditionalEquationsTest(unittest.TestCase):
     def setUp(self):
         # Initialize the data sources
         DM = DataProvidersManager.getInstance()
-        datafile = File('regular-data.zip')
+        datafile = File('resources.zip')
         if not datafile.exists():
             print('File :', datafile.absolutePath, ' not found')
 

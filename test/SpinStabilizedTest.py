@@ -61,7 +61,7 @@ class SpinStabilizedTest(unittest.TestCase):
 
     def setUp(self):
         DM = DataProvidersManager.getInstance()
-        datafile = File('regular-data.zip')
+        datafile = File('resources.zip')
         if not datafile.exists():
             print('File :', datafile.absolutePath, ' not found')
 
