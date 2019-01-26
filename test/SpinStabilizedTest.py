@@ -142,7 +142,7 @@ class SpinStabilizedTest(unittest.TestCase):
 
         self.assertAlmostEqual(2 * FastMath.PI / reference.getNorm(), 2 * FastMath.PI / spin0.getNorm(), delta=0.05)
         self.assertAlmostEqual(0.0, FastMath.toDegrees(Vector3D.angle(reference, spin0)), delta=1.0e-10)
-        self.assertAlmostEquals(0.0, FastMath.toDegrees(Vector3D.angle(Vector3D.PLUS_K, spin0)), delta=1.0e-10)
+        self.assertAlmostEqual(0.0, FastMath.toDegrees(Vector3D.angle(Vector3D.PLUS_K, spin0)), delta=1.0e-10)
 
     def checkField(self, field, provider, orbit, date, frame):
         attitudeD = provider.getAttitude(orbit, date, frame)

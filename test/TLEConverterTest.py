@@ -97,7 +97,7 @@ class TLEConverterTest(unittest.TestCase):
         self.assertAlmostEqual(tle.getMeanAnomaly(), fitted.getMeanAnomaly(), delta=eps * tle.getMeanAnomaly())
 
         if withBStar:
-            self.assertAlmostEquals(tle.getBStar(), fitted.getBStar(), delta=eps * tle.getBStar())
+            self.assertAlmostEqual(tle.getBStar(), fitted.getBStar(), delta=eps * tle.getBStar())
 
     def testConversionGeoPositionVelocity(self):
         self.checkFit(self.geoTLE, 86400, 300, 1.0e-3, False, False, 9.350e-8)

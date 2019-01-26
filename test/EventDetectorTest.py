@@ -23,11 +23,12 @@
  """
 
 import orekit
+
 orekit.initVM()
-#orekit.initVM(vmargs='-Xcheck:jni,-verbose:jni,-verbose:class,-XX:+UnlockDiagnosticVMOptions')
+# orekit.initVM(vmargs='-Xcheck:jni,-verbose:jni,-verbose:class,-XX:+UnlockDiagnosticVMOptions')
 
 from org.orekit.frames import FramesFactory, TopocentricFrame
-from org.orekit.bodies import  OneAxisEllipsoid, GeodeticPoint
+from org.orekit.bodies import OneAxisEllipsoid, GeodeticPoint
 from org.orekit.time import AbsoluteDate, TimeScalesFactory
 from org.orekit.orbits import KeplerianOrbit
 from org.orekit.utils import Constants
@@ -42,8 +43,10 @@ import math
 import unittest
 import sys
 
-from orekit.pyhelpers import  setup_orekit_curdir
+from orekit.pyhelpers import setup_orekit_curdir
+
 setup_orekit_curdir()
+
 
 class MyElevationDetector(PythonEventDetector):
     passes = 0
@@ -66,7 +69,7 @@ class MyElevationDetector(PythonEventDetector):
         return PythonAbstractDetector.DEFAULT_MAX_ITER
 
     def g(self, s):
-        tmp = self.topo.getElevation(s.getPVCoordinates().getPosition(), s.getFrame(), s.getDate())-self.elevation
+        tmp = self.topo.getElevation(s.getPVCoordinates().getPosition(), s.getFrame(), s.getDate()) - self.elevation
         return tmp
 
     def eventOccurred(self, s, increasing):
@@ -88,11 +91,10 @@ class MyElevationDetector(PythonEventDetector):
 class EventDetectorTest(unittest.TestCase):
 
     def testOwnElevationDetector(self):
-
         initialDate = AbsoluteDate(2014, 1, 1, 23, 30, 00.000, TimeScalesFactory.getUTC())
-        inertialFrame = FramesFactory.getEME2000() # inertial frame for orbit definition
-        position  = Vector3D(-6142438.668, 3492467.560, -25767.25680)
-        velocity  = Vector3D(505.8479685, 942.7809215, 7435.922231)
+        inertialFrame = FramesFactory.getEME2000()  # inertial frame for orbit definition
+        position = Vector3D(-6142438.668, 3492467.560, -25767.25680)
+        velocity = Vector3D(505.8479685, 942.7809215, 7435.922231)
         pvCoordinates = PVCoordinates(position, velocity)
         initialOrbit = KeplerianOrbit(pvCoordinates,
                                       inertialFrame,
@@ -108,9 +110,9 @@ class EventDetectorTest(unittest.TestCase):
 
         # Station
         longitude = radians(45.0)
-        latitude  = radians(25.0)
-        altitude  = 0
-        station1 = GeodeticPoint(latitude, longitude, float (altitude))
+        latitude = radians(25.0)
+        altitude = 0
+        station1 = GeodeticPoint(latitude, longitude, float(altitude))
         sta1Frame = TopocentricFrame(earth, station1, "station 1")
 
         elevation = math.radians(5.0)
@@ -118,10 +120,11 @@ class EventDetectorTest(unittest.TestCase):
         detector = MyElevationDetector(elevation, sta1Frame)
         kepler.addEventDetector(detector)
 
-        finalState = kepler.propagate(initialDate.shiftedBy(60*60*24.0*15))
+        finalState = kepler.propagate(initialDate.shiftedBy(60 * 60 * 24.0 * 15))
 
         print(detector.passes)
         self.assertEqual(52, detector.passes)
+
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(EventDetectorTest)

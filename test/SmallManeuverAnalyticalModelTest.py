@@ -79,7 +79,7 @@ class SmallManeuverAnalyticalModelTest(unittest.TestCase):
         withManeuver = self.getEphemeris(leo, mass, t0, dV, f, isp)
         model = SmallManeuverAnalyticalModel(withoutManeuver.propagate(t0), dV, isp)
 
-        self.assertEquals(t0.toString(), model.getDate().toString())
+        self.assertEqual(t0.toString(), model.getDate().toString())
 
         t = withoutManeuver.getMinDate()
         while t.compareTo(withoutManeuver.getMaxDate()) < 0:
