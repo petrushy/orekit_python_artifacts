@@ -37,6 +37,7 @@ from org.orekit.propagation.integration import AdditionalEquations
 from org.orekit.forces.gravity.potential import GravityFieldFactory
 from org.orekit.forces.gravity.potential import SHMFormatReader
 from java.io import File
+from java.lang import System
 
 
 from org.hipparchus.geometry.euclidean.threed import Vector3D
@@ -90,7 +91,7 @@ class AdditionalEquationsTest(unittest.TestCase):
         crawler = ZipJarCrawler(datafile)
         DM.clearProviders()
         DM.addProvider(crawler)
-        DataProvidersManager.OREKIT_DATA_PATH = 'potential/shm-format'
+        System.setProperty(DataProvidersManager.OREKIT_DATA_PATH, 'potential/shm-format')
         GravityFieldFactory.addPotentialCoefficientsReader(SHMFormatReader("^eigen_cg03c_coef$", False))
 
         mu = GravityFieldFactory.getUnnormalizedProvider(0, 0).getMu()
