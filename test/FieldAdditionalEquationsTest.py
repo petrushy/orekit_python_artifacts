@@ -37,6 +37,7 @@ from org.orekit.python import PythonFieldAdditionalEquations
 from org.orekit.forces.gravity.potential import GravityFieldFactory
 from org.orekit.forces.gravity.potential import SHMFormatReader
 from java.io import File
+from java.lang import System
 
 
 from org.hipparchus.geometry.euclidean.threed import Vector3D
