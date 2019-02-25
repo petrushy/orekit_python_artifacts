@@ -98,7 +98,7 @@ class FieldAdditionalEquationsTest(unittest.TestCase):
         crawler = ZipJarCrawler(datafile)
         DM.clearProviders()
         DM.addProvider(crawler)
-        DataProvidersManager.OREKIT_DATA_PATH = 'potential/shm-format'
+        System.setProperty(DataProvidersManager.OREKIT_DATA_PATH, 'potential/shm-format')
         GravityFieldFactory.addPotentialCoefficientsReader(SHMFormatReader("^eigen_cg03c_coef$", False))
 
         mu = GravityFieldFactory.getUnnormalizedProvider(0, 0).getMu()
