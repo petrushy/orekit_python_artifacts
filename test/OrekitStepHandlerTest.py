@@ -1,5 +1,6 @@
-"""
+# -*- coding: utf-8 -*-
 
+"""
 /* Copyright 2002-2019 CS Systèmes d'Information
  * Licensed to CS Systèmes d'Information (CS) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
