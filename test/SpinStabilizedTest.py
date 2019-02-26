@@ -81,7 +81,7 @@ class SpinStabilizedTest(unittest.TestCase):
                                    Vector3D.PLUS_I, Vector3D.PLUS_K)
 
         bbq = SpinStabilized(cbp, date, Vector3D.PLUS_K, rate)
-        pv: Vector3D = PVCoordinates(Vector3D(28812595.32012577, 5948437.4640250085, 0.0),
+        pv = PVCoordinates(Vector3D(28812595.32012577, 5948437.4640250085, 0.0),
                            Vector3D(0.0, 0.0, 3680.853673522056))
 
         kep = KeplerianOrbit(pv, FramesFactory.getEME2000(), date, 3.986004415e14)
