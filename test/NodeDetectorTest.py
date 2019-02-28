@@ -25,13 +25,15 @@ Python version translated from Java by Petrus Hyvönen, SSC 2014
 
 # Python orekit specifics
 import orekit
+
 orekit.initVM()
 
 import sys
 import unittest
 
 from orekit.pyhelpers import setup_orekit_curdir
-setup_orekit_curdir()   # orekit-data.zip shall be in current dir
+
+setup_orekit_curdir()  # orekit-data.zip shall be in current dir
 
 from org.orekit.propagation.events import EventsLogger
 from org.orekit.propagation.events import NodeDetector
@@ -61,24 +63,25 @@ class NodeDetectorTest(unittest.TestCase):
 
         inertialFrame = FramesFactory.getEME2000()
         initialDate = AbsoluteDate(2014, 1, 1, 0, 0, 0.0, TimeScalesFactory.getUTC())
-        finalDate = initialDate.shiftedBy(70*24*60*60.0)
-        initialOrbit = KeplerianOrbit(a, e, i, w, raan, v, PositionAngle.TRUE, inertialFrame, initialDate, Constants.WGS84_EARTH_MU)
+        finalDate = initialDate.shiftedBy(70 * 24 * 60 * 60.0)
+        initialOrbit = KeplerianOrbit(a, e, i, w, raan, v, PositionAngle.TRUE, inertialFrame, initialDate,
+                                      Constants.WGS84_EARTH_MU)
         initialState = SpacecraftState(initialOrbit, 1000.0)
 
         tol = NumericalPropagator.tolerances(10.0, initialOrbit, initialOrbit.getType())
 
         # Double array of doubles needs to be retyped to work
         integrator = DormandPrince853Integrator(0.001, 1000.0,
-            JArray_double.cast_(tol[0]),
-            JArray_double.cast_(tol[1]))
+                                                JArray_double.cast_(tol[0]),
+                                                JArray_double.cast_(tol[1]))
 
         propagator = NumericalPropagator(integrator)
         propagator.setInitialState(initialState)
 
         # Define 2 instances of NodeDetector:
         rawDetector = NodeDetector(1e-6,
-                initialState.getOrbit(),
-                initialState.getFrame()).withHandler(ContinueOnEvent().of_(NodeDetector))
+                                   initialState.getOrbit(),
+                                   initialState.getFrame()).withHandler(ContinueOnEvent().of_(NodeDetector))
 
         logger1 = EventsLogger()
         node1 = logger1.monitorDetector(rawDetector)
@@ -92,8 +95,8 @@ class NodeDetectorTest(unittest.TestCase):
         propagator.setEphemerisMode()
         propagator.propagate(finalDate)
 
-        assert 1998==logger1.getLoggedEvents().size()
-        assert 1998== logger2.getLoggedEvents().size();
+        assert 1998 == logger1.getLoggedEvents().size()
+        assert 1998 == logger2.getLoggedEvents().size();
         logger1.clearLoggedEvents()
         logger2.clearLoggedEvents()
 
@@ -103,8 +106,8 @@ class NodeDetectorTest(unittest.TestCase):
         postpro.addEventDetector(node1)
         postpro.addEventDetector(node2)
         postpro.propagate(finalDate)
-        assert 1998==logger1.getLoggedEvents().size()
-        assert 1998==logger2.getLoggedEvents().size()
+        assert 1998 == logger1.getLoggedEvents().size()
+        assert 1998 == logger2.getLoggedEvents().size()
 
         print("NodeDetectorTest Successfully run")
 

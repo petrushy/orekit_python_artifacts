@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """
 /* Copyright 2002-2018 CS Systèmes d'Information
  * Licensed to CS Systèmes d'Information (CS) under one or more
@@ -16,12 +18,13 @@
  * limitations under the License.
  */
 
-Python version translated from Java by Petrus Hyvönen, SSC 2018
+Python version translated from Java by Petrus Hyvönen, SSC 2019
 
 """
 
-import unittest
 import sys
+import unittest
+
 import orekit
 
 orekit.initVM()
@@ -30,44 +33,21 @@ from orekit.pyhelpers import setup_orekit_curdir
 setup_orekit_curdir()  # orekit-data.zip shall be in current dir
 
 from org.orekit.propagation.events import EventsLogger
-from org.orekit.propagation.events import NodeDetector
-from org.hipparchus.ode.nonstiff import DormandPrince853Integrator
 from org.hipparchus.util import FastMath
 from org.orekit.frames import FramesFactory
-from org.orekit.orbits import KeplerianOrbit
 from org.orekit.orbits import PositionAngle
-from org.orekit.propagation import SpacecraftState
-from org.orekit.propagation.events.handlers import ContinueOnEvent
-from org.orekit.propagation.numerical import NumericalPropagator
 from org.orekit.time import AbsoluteDate
 from org.orekit.time import TimeScalesFactory
 from org.orekit.utils import Constants
-from orekit import JArray_double
 from org.orekit.python import PythonOrekitFixedStepHandler
-
 from org.orekit.propagation.events import InterSatDirectViewDetector
-
 from org.hipparchus.geometry.euclidean.threed import Line
 from org.hipparchus.geometry.euclidean.threed import Vector3D
-# import org.hipparchus.util.FastMath;
-# import org.junit.Assert;
-# import org.junit.Before;
-# import org.junit.Test;
-# import org.orekit.Utils;
 from org.orekit.bodies import OneAxisEllipsoid
-# import org.orekit.frames.Frame;
-# import org.orekit.frames.FramesFactory;
 from org.orekit.frames import TopocentricFrame
 from org.orekit.orbits import CircularOrbit
-# import org.orekit.orbits.PositionAngle;
-# import org.orekit.propagation.Propagator;
-# import org.orekit.propagation.SpacecraftState;
 from org.orekit.propagation.analytical import KeplerianPropagator
-# import org.orekit.propagation.events.handlers.EventHandler;
-# import org.orekit.time.AbsoluteDate;
-# import org.orekit.time.TimeScale;
-# import org.orekit.time.TimeScalesFactory;
-# import org.orekit.utils.Constants;
+from org.orekit.propagation.events.handlers import EventHandler
 from org.orekit.utils import IERSConventions
 from org.orekit.python import PythonEventHandler
 
@@ -77,25 +57,28 @@ class GrazingHandler(PythonEventHandler):
     def eventOccurred(self, s, detector, increasing):
         # just before increasing events and just after decreasing events,
         # the master/slave line intersects Earth limb
-        detector = InterSatDirectViewDetector.cast_(detector) # Otherwise this is just a plain EventDetector
+        detector = InterSatDirectViewDetector.cast_(detector)  # Otherwise this is just a plain EventDetector
         earth = detector.getCentralBody()
         frame = earth.getBodyFrame()
-        dt = +1.0e-8 if increasing else -1.0e-8
+        dt = -1.0e-8 if increasing else +1.0e-8
 
         grazingDate = s.getDate().shiftedBy(dt)
         pMaster = s.shiftedBy(dt).getPVCoordinates(frame).getPosition()
         pSlave = detector.getSlave().getPVCoordinates(grazingDate, frame).getPosition()
         grazing = earth.getCartesianIntersectionPoint(Line(pMaster, pSlave, 1.0),
                                                       pMaster, frame, grazingDate)
+
         topo = TopocentricFrame(earth, earth.transform(grazing, frame, grazingDate),
                                 "grazing")
-        #             Assert.assertEquals(  0.0, FastMath.toDegrees(topo.getElevation(pMaster, frame, grazingDate)), 2.0e-4);
-        #             Assert.assertEquals(  0.0, FastMath.toDegrees(topo.getElevation(pSlave,  frame, grazingDate)), 2.0e-4);
-        #             Assert.assertEquals(180.0,
-        #                                 FastMath.abs(FastMath.toDegrees(topo.getAzimuth(pSlave,  frame, grazingDate) -
-        #                                                                 topo.getAzimuth(pMaster, frame, grazingDate))),
-        #                                 6.0e-14);
-        return PythonEventHandler.Action.CONTINUE
+
+        testvalue = FastMath.toDegrees(topo.getElevation(pMaster, frame, grazingDate))
+        assert -2.0e4 < testvalue < 2.0e4
+
+        testvalue = FastMath.abs(FastMath.toDegrees(topo.getAzimuth(pSlave, frame, grazingDate) -
+                                                    topo.getAzimuth(pMaster, frame, grazingDate)))
+        assert -6.0e-14 < testvalue - 180.0 < 6.0e-15
+
+        return EventHandler.Action.CONTINUE
 
     # The full interface is required for java to accept it as a class of that type
     def resetState(self, detector, oldState):
@@ -129,7 +112,7 @@ class InterSatDirectViewDetectorTest(unittest.TestCase):
 
         class StepHandler(PythonOrekitFixedStepHandler):
 
-            def init(self, state, time):
+            def init(self, s0, t, step):
                 pass
 
             def handleStep(self, state, isLast):
@@ -150,7 +133,7 @@ class InterSatDirectViewDetectorTest(unittest.TestCase):
 
         utc = TimeScalesFactory.getUTC()
         o1 = CircularOrbit(7200000.0, 1.0e-3, 2.0e-4,
-                           FastMath.toRadians(98.7), FastMath.toRadians(134.0),
+                           FastMath.toRadians(50.0), FastMath.toRadians(134.0),
                            FastMath.toRadians(21.0), PositionAngle.MEAN, FramesFactory.getGCRF(),
                            AbsoluteDate("2003-02-14T01:02:03.000", utc),
                            Constants.EIGEN5C_EARTH_MU)
@@ -168,7 +151,8 @@ class InterSatDirectViewDetectorTest(unittest.TestCase):
                                                     withMaxCheck(10.0).
                                                     withHandler(GrazingHandler().of_(InterSatDirectViewDetector))))
 
-        pA.propagate(o1.getDate().shiftedBy(4 * o1.getKeplerianPeriod()))
+        propdate = o1.getDate().shiftedBy(4 * o1.getKeplerianPeriod())
+        pA.propagate(propdate)
 
         self.assertEqual(7, loggerA.getLoggedEvents().size())
 
@@ -176,18 +160,14 @@ class InterSatDirectViewDetectorTest(unittest.TestCase):
         pB = KeplerianPropagator(o2)
         loggerB = EventsLogger()
         pB.addEventDetector(loggerB.monitorDetector(InterSatDirectViewDetector(earth, o1).
-                                                   withMaxCheck(10.0).
-                                                   withHandler(GrazingHandler().of_(InterSatDirectViewDetector))))
+                                                    withMaxCheck(10.0).
+                                                    withHandler(GrazingHandler().of_(InterSatDirectViewDetector))))
 
         pB.propagate(o1.getDate().shiftedBy(4 * o1.getKeplerianPeriod()))
-        self.assertEquals(7, loggerB.getLoggedEvents().size())
+        self.assertEqual(7, loggerB.getLoggedEvents().size())
 
-#     }
-#
-#
-#     @Before
-#     public void setUp() {
-#         Utils.setDataRoot("regular-data");
-#     }
-#
-# }
+
+if __name__ == '__main__':
+    suite = unittest.TestLoader().loadTestsFromTestCase(InterSatDirectViewDetectorTest)
+    ret = not unittest.TextTestRunner(verbosity=2).run(suite).wasSuccessful()
+    sys.exit(ret)
