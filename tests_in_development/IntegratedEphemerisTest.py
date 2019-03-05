@@ -19,31 +19,23 @@
  * limitations under the License.
  */
 
-Python version translated from Java by Petrus Hyvönen, SSC 2014
+Python version translated from Java by Petrus Hyvönen, SSC 2019
 
  """
 
-import  orekit
+import orekit
+
 orekit.initVM()
-#from orekit.pyhelpers import  setup_orekit_curdir
-from org.orekit import utils
+# from orekit.pyhelpers import  setup_orekit_curdir
 from orekit import JArray_double
+from orekit.pyhelpers import JArray_double2D
 
-
-
-# import java.io.ByteArrayInputStream;
-# import java.io.ByteArrayOutputStream;
-# import java.io.IOException;
-# import java.io.ObjectInputStream;
-# import java.io.ObjectOutputStream;
-#
-# import org.hipparchus.geometry.euclidean.threed.Vector3D;
 from org.hipparchus.geometry.euclidean.threed import Vector3D
-# import org.hipparchus.linear.Array2DRowRealMatrix;
-# import org.hipparchus.linear.MatrixUtils;
+from org.hipparchus.linear import Array2DRowRealMatrix
+from org.hipparchus.linear import MatrixUtils
 # import org.hipparchus.linear.RealMatrix;
 # import org.hipparchus.ode.nonstiff.AdaptiveStepsizeIntegrator;
-# import org.hipparchus.ode.nonstiff.DormandPrince853Integrator;
+from org.hipparchus.ode.nonstiff import DormandPrince853Integrator
 # import org.junit.Assert;
 # import org.junit.Before;
 # import org.junit.Test;
@@ -61,18 +53,18 @@ from org.hipparchus.geometry.euclidean.threed import Vector3D
 # import org.orekit.forces.radiation.RadiationSensitive;
 # import org.orekit.forces.radiation.SolarRadiationPressure;
 # import org.orekit.frames.Frame;
-# import org.orekit.frames.FramesFactory;
+from org.orekit.frames import FramesFactory
 # import org.orekit.orbits.EquinoctialOrbit;
 from org.orekit.orbits import EquinoctialOrbit
 
 # import org.orekit.orbits.Orbit;
-# import org.orekit.orbits.OrbitType;
+from org.orekit.orbits import OrbitType
 # import org.orekit.propagation.BoundedPropagator;
-# import org.orekit.propagation.SpacecraftState;
-# import org.orekit.propagation.analytical.KeplerianPropagator;
+from org.orekit.propagation import SpacecraftState
+from org.orekit.propagation.analytical import KeplerianPropagator
 # import org.orekit.propagation.numerical.JacobiansMapper;
-# import org.orekit.propagation.numerical.NumericalPropagator;
-# import org.orekit.propagation.numerical.PartialDerivativesEquations;
+from org.orekit.propagation.numerical import NumericalPropagator
+from org.orekit.propagation.numerical import PartialDerivativesEquations
 # import org.orekit.propagation.sampling.OrekitStepHandler;
 # import org.orekit.propagation.sampling.OrekitStepInterpolator;
 # import org.orekit.propagation.semianalytical.dsst.DSSTPropagator;
@@ -80,104 +72,94 @@ from org.orekit.orbits import EquinoctialOrbit
 # import org.orekit.propagation.semianalytical.dsst.forces.DSSTTesseral;
 # import org.orekit.propagation.semianalytical.dsst.forces.DSSTThirdBody;
 # import org.orekit.propagation.semianalytical.dsst.forces.DSSTZonal;
-# import org.orekit.time.AbsoluteDate;
+from org.orekit.time import AbsoluteDate
 # import org.orekit.utils.Constants;
 from org.orekit.utils import Constants
 # import org.orekit.utils.IERSConventions;
 # import org.orekit.utils.PVCoordinates;
+from org.orekit.data import DataProvidersManager, ZipJarCrawler
+from java.io import File
+from java.lang import System
+from org.orekit.python import PythonOrekitStepHandler
 
 from org.orekit.utils import PVCoordinates
 
-#
-
 import unittest
+
 
 class IntegratedEphemerisTest(unittest.TestCase):
 
-    def NormalKeplerIntegrationTest(self):
+    def testNormalKeplerIntegration(self):
         # Keplerian propagator definition
+        keplerEx = KeplerianPropagator(self.initialOrbit)
 
-        pass
+        # Integrated ephemeris
 
-    #keplerEx = KeplerianPropagator(initalOrbit)
+        # Propagation
 
-    # @Test
-    # public void testNormalKeplerIntegration() throws OrekitException {
-    #
-    #     // Keplerian propagator definition
-    #     KeplerianPropagator keplerEx = new KeplerianPropagator(initialOrbit);
-    #
-    #     // Integrated ephemeris
-    #
-    #     // Propagation
-    #     AbsoluteDate finalDate = initialOrbit.getDate().shiftedBy(Constants.JULIAN_DAY);
-    #     numericalPropagator.setEphemerisMode();
-    #     numericalPropagator.setInitialState(new SpacecraftState(initialOrbit));
-    #     numericalPropagator.propagate(finalDate);
-    #     Assert.assertTrue(numericalPropagator.getCalls() < 3200);
-    #     BoundedPropagator ephemeris = numericalPropagator.getGeneratedEphemeris();
-    #
-    #     // tests
-    #     for (int i = 1; i <= Constants.JULIAN_DAY; i++) {
-    #         AbsoluteDate intermediateDate = initialOrbit.getDate().shiftedBy(i);
-    #         SpacecraftState keplerIntermediateOrbit = keplerEx.propagate(intermediateDate);
-    #         SpacecraftState numericIntermediateOrbit = ephemeris.propagate(intermediateDate);
-    #         Vector3D kepPosition = keplerIntermediateOrbit.getPVCoordinates().getPosition();
-    #         Vector3D numPosition = numericIntermediateOrbit.getPVCoordinates().getPosition();
-    #         Assert.assertEquals(0, kepPosition.subtract(numPosition).getNorm(), 0.06);
-    #     }
-    #
-    #     // test inv
-    #     AbsoluteDate intermediateDate = initialOrbit.getDate().shiftedBy(41589);
-    #     SpacecraftState keplerIntermediateOrbit = keplerEx.propagate(intermediateDate);
-    #     SpacecraftState state = keplerEx.propagate(finalDate);
-    #     numericalPropagator.setInitialState(state);
-    #     numericalPropagator.setEphemerisMode();
-    #     numericalPropagator.propagate(initialOrbit.getDate());
-    #     BoundedPropagator invEphemeris = numericalPropagator.getGeneratedEphemeris();
-    #     SpacecraftState numericIntermediateOrbit = invEphemeris.propagate(intermediateDate);
-    #     Vector3D kepPosition = keplerIntermediateOrbit.getPVCoordinates().getPosition();
-    #     Vector3D numPosition = numericIntermediateOrbit.getPVCoordinates().getPosition();
-    #     Assert.assertEquals(0, kepPosition.subtract(numPosition).getNorm(), 10e-2);
-    #
-    # }
-    #
-    # @Test
-    # public void testPartialDerivativesIssue16() throws OrekitException {
-    #
-    #     final String eqName = "derivatives";
-    #     numericalPropagator.setEphemerisMode();
-    #     numericalPropagator.setOrbitType(OrbitType.CARTESIAN);
-    #     final PartialDerivativesEquations derivatives =
-    #         new PartialDerivativesEquations(eqName, numericalPropagator);
-    #     final SpacecraftState initialState =
-    #             derivatives.setInitialJacobians(new SpacecraftState(initialOrbit));
-    #     final JacobiansMapper mapper = derivatives.getMapper();
-    #     numericalPropagator.setInitialState(initialState);
-    #     numericalPropagator.propagate(initialOrbit.getDate().shiftedBy(3600.0));
-    #     BoundedPropagator ephemeris = numericalPropagator.getGeneratedEphemeris();
-    #     ephemeris.setMasterMode(new OrekitStepHandler() {
-    #
-    #         private final Array2DRowRealMatrix dYdY0 = new Array2DRowRealMatrix(6, 6);
-    #
-    #         public void handleStep(OrekitStepInterpolator interpolator, boolean isLast)
-    #             throws OrekitException {
-    #             SpacecraftState state = interpolator.getCurrentState();
-    #             Assert.assertEquals(mapper.getAdditionalStateDimension(),
-    #                                 state.getAdditionalState(eqName).length);
-    #             mapper.getStateJacobian(state, dYdY0.getDataRef());
-    #             mapper.getParametersJacobian(state, null); // no parameters, this is a no-op and should work
-    #             RealMatrix deltaId = dYdY0.subtract(MatrixUtils.createRealIdentityMatrix(6));
-    #             Assert.assertTrue(deltaId.getNorm() >  100);
-    #             Assert.assertTrue(deltaId.getNorm() < 3100);
-    #         }
-    #
-    #     });
-    #
-    #     ephemeris.propagate(initialOrbit.getDate().shiftedBy(1800.0));
-    #
-    # }
-    #
+        finalDate = self.initialOrbit.getDate().shiftedBy(Constants.JULIAN_DAY)
+        self.numericalPropagator.setEphemerisMode()
+        self.numericalPropagator.setInitialState(SpacecraftState(self.initialOrbit))
+        self.numericalPropagator.propagate(finalDate)
+
+        # Check the number of calls to the differential equations computation method.
+        self.assertTrue(self.numericalPropagator.getCalls() < 3200)
+        ephemeris = self.numericalPropagator.getGeneratedEphemeris()
+
+        # tests
+        i = 1
+        while i <= Constants.JULIAN_DAY:
+            intermediateDate = self.initialOrbit.getDate().shiftedBy(float(i))
+            keplerIntermediateOrbit = keplerEx.propagate(intermediateDate)
+            numericIntermediateOrbit = ephemeris.propagate(intermediateDate)
+            kepPosition = keplerIntermediateOrbit.getPVCoordinates().getPosition()
+            numPosition = numericIntermediateOrbit.getPVCoordinates().getPosition()
+            self.assertAlmostEqual(0, kepPosition.subtract(numPosition).getNorm(), delta=0.06)
+            i += 1
+
+        intermediateDate = self.initialOrbit.getDate().shiftedBy(41589.0)
+        keplerIntermediateOrbit = keplerEx.propagate(intermediateDate)
+        state = keplerEx.propagate(finalDate)
+        self.numericalPropagator.setInitialState(state)
+        self.numericalPropagator.setEphemerisMode()
+        self.numericalPropagator.propagate(self.initialOrbit.getDate())
+        invEphemeris = self.numericalPropagator.getGeneratedEphemeris()
+        numericIntermediateOrbit = invEphemeris.propagate(intermediateDate)
+        kepPosition = keplerIntermediateOrbit.getPVCoordinates().getPosition()
+        numPosition = numericIntermediateOrbit.getPVCoordinates().getPosition()
+        self.assertAlmostEqual(0, kepPosition.subtract(numPosition).getNorm(), delta=10e-2)
+
+    def testPartialDerivativesIssue16(self):
+
+        eqName = "derivatives"
+        self.numericalPropagator.setEphemerisMode()
+        self.numericalPropagator.setOrbitType(OrbitType.CARTESIAN)
+        derivatives = PartialDerivativesEquations(eqName, self.numericalPropagator)
+        initialState = derivatives.setInitialJacobians(SpacecraftState(self.initialOrbit))
+        mapper = derivatives.getMapper()
+        self.numericalPropagator.setInitialState(initialState)
+        self.numericalPropagator.propagate(self.initialOrbit.getDate().shiftedBy(3600.0))
+        ephemeris = self.numericalPropagator.getGeneratedEphemeris()
+
+        class myStepHandler(PythonOrekitStepHandler):
+            dYdY0 = Array2DRowRealMatrix(6, 6)
+
+            def init(self, s0, t):
+                pass
+
+            def handleStep(self, interpolator, isLast):
+                state = interpolator.getCurrentState()
+                assert mapper.getAdditionalStateDimension() == len(state.getAdditionalState(eqName))
+                mapper.getStateJacobian(state, self.dYdY0.getDataRef())
+                mapper.getParametersJacobian(state,
+                                             JArray_double2D(1, 1))  # no parameters, this is a no-op and should work
+                deltaId = self.dYdY0.subtract(MatrixUtils.createRealIdentityMatrix(6))
+                assert deltaId.getNorm() > 100
+                assert deltaId.getNorm() < 3100
+
+        ephemeris.setMasterMode(myStepHandler())
+        ephemeris.propagate(self.initialOrbit.getDate().shiftedBy(1800.0))
+
     # @Test
     # public void testGetFrame() throws OrekitException {
     #     // setup
@@ -290,9 +272,8 @@ class IntegratedEphemerisTest(unittest.TestCase):
     #
     # }
 
-
     def setUp(self):
-        #setup_orekit_curdir()
+        # setup_orekit_curdir()
 
         DM = DataProvidersManager.getInstance()
         datafile = File('regular-data.zip')
@@ -303,7 +284,7 @@ class IntegratedEphemerisTest(unittest.TestCase):
         DM.clearProviders()
         DM.addProvider(crawler)
 
-        utils.setDataRoot("regular-data:potential/icgem-format")
+        System.setProperty(DataProvidersManager.OREKIT_DATA_PATH, 'potential/icgem-format')
 
         # Definition of initial conditions with position and velocity
         position = Vector3D(7.0e6, 1.0e6, 4.0e6)
@@ -313,58 +294,17 @@ class IntegratedEphemerisTest(unittest.TestCase):
 
         initDate = AbsoluteDate.J2000_EPOCH.shiftedBy(584.)
 
-        initialOrbit = EquinoctialOrbit(PVCoordinates(position, velocity),
-                                        FramesFactory.getEME2000(), initDate, mu)
+        self.initialOrbit = EquinoctialOrbit(PVCoordinates(position, velocity),
+                                             FramesFactory.getEME2000(), initDate, mu)
 
         # Numerical propagator definition
-        absTolerance = JArray_double[0.0001, 1.0e-11, 1.0e-11, 1.0e-8, 1.0e-8, 1.0e-8, 0.001]
+        absTolerance = JArray_double([0.0001, 1.0e-11, 1.0e-11, 1.0e-8, 1.0e-8, 1.0e-8, 0.001])
+        relTolerance = JArray_double([1.0e-8, 1.0e-8, 1.0e-8, 1.0e-9, 1.0e-9, 1.0e-9, 1.0e-7])
 
+        integrator = DormandPrince853Integrator(0.001, 500.0, absTolerance, relTolerance)
+        integrator.setInitialStepSize(100.0)
+        self.numericalPropagator = NumericalPropagator(integrator)
 
-        #         };
-        #         double[] relTolerance = {
-        #             1.0e-8, 1.0e-8, 1.0e-8, 1.0e-9, 1.0e-9, 1.0e-9, 1.0e-7
-        #         };
-
-
-
-
-
-
-
-#     @Before
-#     public void setUp() {
-#
-#         Utils.setDataRoot("regular-data:potential/icgem-format");
-#         GravityFieldFactory.addPotentialCoefficientsReader(new ICGEMFormatReader("eigen-6s-truncated", true));
-#
-#         // Definition of initial conditions with position and velocity
-#         Vector3D position = new Vector3D(7.0e6, 1.0e6, 4.0e6);
-#         Vector3D velocity = new Vector3D(-500.0, 8000.0, 1000.0);
-#         double mu = 3.9860047e14;
-#
-#         AbsoluteDate initDate = AbsoluteDate.J2000_EPOCH.shiftedBy(584.);
-#         initialOrbit =
-#             new EquinoctialOrbit(new PVCoordinates(position, velocity),
-#                                  FramesFactory.getEME2000(), initDate, mu);
-#
-#         // Numerical propagator definition
-#         double[] absTolerance = {
-#             0.0001, 1.0e-11, 1.0e-11, 1.0e-8, 1.0e-8, 1.0e-8, 0.001
-#         };
-#         double[] relTolerance = {
-#             1.0e-8, 1.0e-8, 1.0e-8, 1.0e-9, 1.0e-9, 1.0e-9, 1.0e-7
-#         };
-#         AdaptiveStepsizeIntegrator integrator =
-#             new DormandPrince853Integrator(0.001, 500, absTolerance, relTolerance);
-#         integrator.setInitialStepSize(100);
-#         numericalPropagator = new NumericalPropagator(integrator);
-#
-#     }
-#
-#     private Orbit initialOrbit;
-#     private NumericalPropagator numericalPropagator;
-#
-# }
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(IntegratedEphemerisTest)
