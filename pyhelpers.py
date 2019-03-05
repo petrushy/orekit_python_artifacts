@@ -60,8 +60,8 @@ def setup_orekit_curdir(filename='orekit-data.zip'):
 
 
 def absolutedate_to_datetime(orekit_absolutedate):
-    """ Converts between orekit.AbsoluteDate objects
-    and python datetime objects (utc)"""
+    """ Converts from orekit.AbsoluteDate objects
+    to python datetime objects (utc)"""
 
     utc = TimeScalesFactory.getUTC()
     or_comp = orekit_absolutedate.getComponents(utc)
@@ -76,9 +76,10 @@ def absolutedate_to_datetime(orekit_absolutedate):
                     int(math.floor(seconds)),
                     int(1000000.0 * (seconds - math.floor(seconds))))
 
+
 def datetime_to_absolutedate(dt_date):
-    """ Converts between orekit.AbsoluteDate objects
-    and python datetime objects (utc)
+    """ Converts from python datetime objects (utc)
+    to orekit.AbsoluteDate objects.
 
     Args:
         dt_date (datetime): python datetime object to convert
@@ -97,12 +98,12 @@ def datetime_to_absolutedate(dt_date):
 
 
 def to_elevationmask(az, el):
-    ''' Converts an array of azimuths and elevations to a
+    """ Converts an array of azimuths and elevations to a
     orekit ElevationMask object. All unts in degrees.
 
         mask = to_elevationmask([0, 90, 180, 270], [5,10,8,5])
 
-    '''
+    """
 
     mask = JArray('object')(len(az))
 
@@ -112,8 +113,17 @@ def to_elevationmask(az, el):
 
     return ElevationMask(mask)
 
+
 def JArray_double2D(x, y):
-    '''Returns an JCC wrapped 2D double array'''
+    """Returns an JCC wrapped 2D double array
+
+    Args:
+        x: Number of rows in the array
+        y: Number of columns in the array
+
+    Note that the rows and columns are returned as objects and
+    are likely needed to be casted manually.
+    """
 
     arr = JArray('object')(x)
 
