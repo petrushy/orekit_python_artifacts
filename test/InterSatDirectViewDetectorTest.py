@@ -76,7 +76,7 @@ class GrazingHandler(PythonEventHandler):
 
         testvalue = FastMath.abs(FastMath.toDegrees(topo.getAzimuth(pSlave, frame, grazingDate) -
                                                     topo.getAzimuth(pMaster, frame, grazingDate)))
-        assert -6.0e-14 < testvalue - 180.0 < 6.0e-15
+        assert -6.0e-14 < testvalue - 180.0 < 6.0e-14
 
         return EventHandler.Action.CONTINUE
 
@@ -142,7 +142,7 @@ class InterSatDirectViewDetectorTest(unittest.TestCase):
                            FastMath.toRadians(56.0), FastMath.toRadians(111.0),
                            o1.getAlphaM() + 2.2e-6, PositionAngle.MEAN, o1.getFrame(),
                            o1.getDate(),
-                           Constants.EIGEN5C_EARTH_MU);
+                           Constants.EIGEN5C_EARTH_MU)
 
         # LEO as master, MEO as slave
         pA = KeplerianPropagator(o1)
