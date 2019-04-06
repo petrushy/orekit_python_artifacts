@@ -26,13 +26,14 @@ Python version translated from Java by Petrus Hyvönen, SSC 2019
 import orekit
 
 orekit.initVM()
-from orekit.pyhelpers import setup_orekit_curdir
+from orekit.pyhelpers import setup_orekit_curdir, datetime_to_absolutedate
 
 setup_orekit_curdir()
 
 from org.orekit.time import AbsoluteDate
 import unittest
 import sys
+from datetime import datetime
 
 from java.util import ArrayList
 # import java.util.List;
@@ -64,9 +65,29 @@ from org.orekit.utils import PVCoordinates
 # import org.orekit.utils.TimeStampedFieldPVCoordinates;
 from org.orekit.utils import TimeStampedPVCoordinates;
 from org.orekit.frames import Transform
+from org.orekit.frames import FramesFactory
 
 
 class TransformTest(unittest.TestCase):
+
+    def testPythonTransformType(self):
+        # Create initial TimeStampedPVCoordinates
+        pos = Vector3D(10000., 20000., 30000.)
+        vel = Vector3D(2000., 1000., 1500.)
+        date = datetime_to_absolutedate(datetime(2019, 4, 5))
+        pvt1 = TimeStampedPVCoordinates(date, pos, vel)
+        print(type(pvt1))
+
+        # Create transform
+        eme2000 = FramesFactory.getEME2000()
+        icrf = FramesFactory.getICRF()
+        transform = eme2000.getTransformTo(icrf, date)
+
+        # Transform the TimeStampedPVCoordinates
+        pvt2 = transform.transformPVCoordinates(pvt1)
+        print(type(pvt2))
+        # TimeStampedPVCoordinates.cast_(pvt2)
+        assert type(pvt2) == type(pvt1)
 
     def evolvingTransform(self, t0, dt):
 
