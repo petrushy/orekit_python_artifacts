@@ -33,6 +33,29 @@ from orekit import JArray
 import math
 from datetime import datetime
 
+import urllib.request
+import shutil
+
+
+def download_orekit_data_curdir(filename='orekit-data.zip'):
+    """
+    Orekit needs a number of orientation and model parameters. An example file is available on the
+    orekit gitlab. This funciton downloads that file to the current directory.
+
+    Note that for non-testing purposes, this file should
+
+    Args:
+        filename (str): Store the downloaded data as this filename/path. Default is "orekit-data.zip"
+    """
+    url = "https://gitlab.orekit.org/orekit/orekit-data/-/archive/master/orekit-data-master.zip"
+    # Download the orekit-data file and store it locally
+
+    with urllib.request.urlopen(url) as response, open("orekit-data.zip", 'wb') as out_file:
+        print('Downloading file from:', url)
+        shutil.copyfileobj(response, out_file)
+
+
+
 
 def setup_orekit_curdir(filename='orekit-data.zip'):
     """Setup the java engine with orekit.
@@ -53,6 +76,21 @@ def setup_orekit_curdir(filename='orekit-data.zip'):
     datafile = File(filename)
     if not datafile.exists():
         print('File :', datafile.absolutePath, ' not found')
+        print("""
+        
+        The Orekit library relies on some external data for physical models. 
+        Typical data are the Earth Orientation Parameters and the leap seconds history, 
+        both being provided by the IERS or the planetary ephemerides provided by JPL. 
+        Such data is stored in text or binary files with specific formats that Orekit knows 
+        how to read, and needs to be provided for the library to work.
+        
+        You can download a starting file with this data from the orekit gitlab at:
+        https://gitlab.orekit.org/orekit/orekit-data
+        
+        or by the function:
+        orekit.pyhelpers.download_orekit_data_curdir()
+        
+        """)
 
     crawler = ZipJarCrawler(datafile)
     DM.clearProviders()
