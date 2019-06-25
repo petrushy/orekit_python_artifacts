@@ -38,7 +38,7 @@ from org.orekit.propagation.events.handlers import EventHandler
 from org.hipparchus.geometry.euclidean.threed import Vector3D
 from org.orekit.python import PythonEventHandler
 from org.orekit.propagation.events import EventsLogger
-
+from org.hipparchus.ode.events import Action
 
 from math import radians
 import math
@@ -46,7 +46,7 @@ import unittest
 import sys
 
 #%% Setup Orekit
-from orekit.pyhelpers import  setup_orekit_curdir
+from orekit.pyhelpers import setup_orekit_curdir
 setup_orekit_curdir()
 
 
@@ -84,7 +84,7 @@ class EventHandlerTest(unittest.TestCase):
         class myContinueOnEvent(PythonEventHandler):
 
             def eventOccurred(self, s, T, increasing):
-                return EventHandler.Action.CONTINUE
+                return Action.CONTINUE
 
             def resetState(self, detector, oldState):
                 return oldState

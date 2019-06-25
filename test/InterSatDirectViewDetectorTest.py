@@ -50,6 +50,7 @@ from org.orekit.propagation.analytical import KeplerianPropagator
 from org.orekit.propagation.events.handlers import EventHandler
 from org.orekit.utils import IERSConventions
 from org.orekit.python import PythonEventHandler
+from org.hipparchus.ode.events import Action
 
 
 class GrazingHandler(PythonEventHandler):
@@ -78,7 +79,7 @@ class GrazingHandler(PythonEventHandler):
                                                     topo.getAzimuth(pMaster, frame, grazingDate)))
         assert -6.0e-14 < testvalue - 180.0 < 6.0e-14
 
-        return EventHandler.Action.CONTINUE
+        return Action.CONTINUE
 
     # The full interface is required for java to accept it as a class of that type
     def resetState(self, detector, oldState):

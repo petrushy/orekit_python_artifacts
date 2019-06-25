@@ -42,6 +42,8 @@ from org.orekit.time import TimeScalesFactory
 from org.orekit.utils import Constants
 from org.orekit.utils import IERSConventions
 from org.orekit.propagation.events import ElevationDetector
+from org.hipparchus.ode.events import Action
+
 import unittest
 import sys
 import math
@@ -58,7 +60,7 @@ class Visibility(PythonEventHandler): # implements EventHandler<ElevationDetecto
         
         def eventOccurred(self, s, ed, increasing):
             self._visiNb += 1
-            return EventHandler.Action.CONTINUE
+            return Action.CONTINUE
 #     
         def resetState(self, detector,  oldState):
             return oldState

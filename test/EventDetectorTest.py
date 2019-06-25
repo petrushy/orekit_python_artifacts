@@ -37,6 +37,8 @@ from org.orekit.utils import PVCoordinates, IERSConventions
 from org.orekit.propagation.events.handlers import EventHandler
 from org.hipparchus.geometry.euclidean.threed import Vector3D
 from org.orekit.python import PythonEventHandler, PythonAbstractDetector, PythonEventDetector
+from org.hipparchus.ode.events import Action
+
 
 from math import radians
 import math
@@ -76,7 +78,7 @@ class MyElevationDetector(PythonEventDetector):
         if increasing:
             self.passes = self.passes + 1
 
-        return EventHandler.Action.CONTINUE
+        return Action.CONTINUE
 
     def resetState(self, oldState):
         return oldState

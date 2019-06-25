@@ -40,6 +40,7 @@ from org.orekit.orbits import PositionAngle
 from org.orekit.utils import Constants
 from org.orekit.propagation.events.handlers import FieldStopOnDecreasing
 from org.orekit.propagation.events.handlers import FieldEventHandler
+from org.hipparchus.ode.events import Action
 
 
 class FieldStopOnDecreasingTest(unittest.TestCase):
@@ -91,7 +92,7 @@ class FieldStopOnDecreasingTest(unittest.TestCase):
         handler_casted = FieldEventHandler.cast_(handler)
         event = handler_casted.eventOccurred(s, None, True)
 
-        self.assertEqual(FieldEventHandler.Action.CONTINUE, event)
+        self.assertEqual(Action.CONTINUE, event)
 
 
 
