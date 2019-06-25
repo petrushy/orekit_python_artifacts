@@ -66,7 +66,7 @@ class FieldStopOnDecreasingTest(unittest.TestCase):
                                                      PositionAngle.MEAN,
                                                      FramesFactory.getEME2000(),
                                                      date,
-                                                     Constants.EIGEN5C_EARTH_MU))
+                                                     zero.add(Constants.EIGEN5C_EARTH_MU)))
 
         handler = FieldStopOnDecreasing()
         handler_casted = FieldEventHandler.cast_(handler)
@@ -86,7 +86,7 @@ class FieldStopOnDecreasingTest(unittest.TestCase):
                                                      PositionAngle.MEAN,
                                                      FramesFactory.getEME2000(),
                                                      date,
-                                                     Constants.EIGEN5C_EARTH_MU))
+                                                     zero.add(Constants.EIGEN5C_EARTH_MU)))
 
         handler = FieldStopOnDecreasing()
         handler_casted = FieldEventHandler.cast_(handler)
