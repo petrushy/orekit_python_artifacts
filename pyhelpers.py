@@ -13,28 +13,23 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-""" This document contains classes that are useful for using the orekit
-library in Python. """
+# This document contains classes that are useful for using the orekit
+# library in Python.
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-# Set up the orekit namespace
-import orekit
+import shutil
+from datetime import datetime
 
+import math
+from future.moves.urllib.request import urlopen
 from java.io import File
-
+from orekit import JArray
 from org.orekit.data import DataProvidersManager, ZipJarCrawler
 from org.orekit.time import TimeScalesFactory, AbsoluteDate
 from org.orekit.utils import ElevationMask
-from orekit import JArray
-
-import math
-from datetime import datetime
-
-import urllib.request
-import shutil
 
 
 def download_orekit_data_curdir(filename='orekit-data.zip'):
@@ -50,11 +45,9 @@ def download_orekit_data_curdir(filename='orekit-data.zip'):
     url = "https://gitlab.orekit.org/orekit/orekit-data/-/archive/master/orekit-data-master.zip"
     # Download the orekit-data file and store it locally
 
-    with urllib.request.urlopen(url) as response, open("orekit-data.zip", 'wb') as out_file:
+    with urlopen(url) as response, open("orekit-data.zip", 'wb') as out_file:
         print('Downloading file from:', url)
         shutil.copyfileobj(response, out_file)
-
-
 
 
 def setup_orekit_curdir(filename='orekit-data.zip'):
