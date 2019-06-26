@@ -24,12 +24,17 @@ import shutil
 from datetime import datetime
 
 import math
-from future.moves.urllib.request import urlopen
 from java.io import File
 from orekit import JArray
 from org.orekit.data import DataProvidersManager, ZipJarCrawler
 from org.orekit.time import TimeScalesFactory, AbsoluteDate
 from org.orekit.utils import ElevationMask
+
+
+try:
+    import urllib.request as urlrequest
+except ImportError:
+    import urllib as urlrequest
 
 
 def download_orekit_data_curdir(filename='orekit-data.zip'):
@@ -45,7 +50,7 @@ def download_orekit_data_curdir(filename='orekit-data.zip'):
     url = "https://gitlab.orekit.org/orekit/orekit-data/-/archive/master/orekit-data-master.zip"
     # Download the orekit-data file and store it locally
 
-    with urlopen(url) as response, open("orekit-data.zip", 'wb') as out_file:
+    with urlrequest.urlopen(url) as response, open("orekit-data.zip", 'wb') as out_file:
         print('Downloading file from:', url)
         shutil.copyfileobj(response, out_file)
 
