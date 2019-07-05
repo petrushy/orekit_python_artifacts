@@ -32,7 +32,7 @@ orekit.initVM()
 
 from orekit import JArray_double
 from org.orekit.data import DataProvidersManager, ZipJarCrawler
-from org.orekit.python import PythonFieldAdditionalEquations
+from org.orekit.propagation.integration import PythonFieldAdditionalEquations
 from org.orekit.forces.gravity.potential import GravityFieldFactory
 from org.orekit.forces.gravity.potential import SHMFormatReader
 from java.io import File

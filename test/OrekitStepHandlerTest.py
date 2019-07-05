@@ -58,12 +58,10 @@ from org.orekit.propagation.analytical import KeplerianPropagator
 from org.orekit.propagation.events import DateDetector
 from org.orekit.propagation.events.handlers import ContinueOnEvent
 from org.orekit.propagation.numerical import NumericalPropagator
+from org.orekit.propagation.sampling import PythonOrekitStepHandler, PythonOrekitFixedStepHandler
 from org.orekit.time import AbsoluteDate
 from org.orekit.time import TimeScalesFactory
 from org.orekit.utils import Constants
-from org.orekit.python import PythonOrekitStepHandler
-from org.orekit.python import PythonOrekitFixedStepHandler
-
 
 class OrekitStepHandlerTest(unittest.TestCase):
 

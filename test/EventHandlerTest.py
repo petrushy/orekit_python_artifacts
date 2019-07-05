@@ -34,9 +34,8 @@ from org.orekit.utils import Constants
 from org.orekit.propagation.analytical import KeplerianPropagator
 from org.orekit.utils import PVCoordinates, IERSConventions
 from org.orekit.propagation.events import ElevationDetector
-from org.orekit.propagation.events.handlers import EventHandler
+from org.orekit.propagation.events.handlers import EventHandler, PythonEventHandler
 from org.hipparchus.geometry.euclidean.threed import Vector3D
-from org.orekit.python import PythonEventHandler
 from org.orekit.propagation.events import EventsLogger
 from org.hipparchus.ode.events import Action
 

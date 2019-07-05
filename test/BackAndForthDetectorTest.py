@@ -35,8 +35,7 @@ from org.orekit.orbits import KeplerianOrbit
 from org.orekit.frames import FramesFactory
 from org.orekit.orbits import PositionAngle
 from org.orekit.propagation.analytical import KeplerianPropagator
-from org.orekit.propagation.events.handlers import EventHandler
-from org.orekit.python import PythonEventHandler
+from org.orekit.propagation.events.handlers import EventHandler, PythonEventHandler
 from org.orekit.time import AbsoluteDate
 from org.orekit.time import TimeScalesFactory
 from org.orekit.utils import Constants

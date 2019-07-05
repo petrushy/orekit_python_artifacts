@@ -10,10 +10,10 @@ from org.orekit.orbits import KeplerianOrbit
 from org.orekit.utils import Constants
 from org.orekit.propagation.analytical import KeplerianPropagator
 from org.orekit.utils import PVCoordinates, IERSConventions
-from org.orekit.propagation.events.handlers import EventHandler
+from org.orekit.propagation.events.handlers import PythonEventHandler
 from org.hipparchus.geometry.euclidean.threed import Vector3D
-from org.orekit.python import PythonEventHandler, PythonAbstractDetector
-from org.orekit.propagation.events.handlers import ContinueOnEvent, StopOnEvent
+from org.orekit.propagation.events import PythonAbstractDetector
+from org.orekit.propagation.events.handlers import StopOnEvent
 from org.hipparchus.ode.events import Action
 
 

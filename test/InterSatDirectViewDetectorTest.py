@@ -39,7 +39,7 @@ from org.orekit.orbits import PositionAngle
 from org.orekit.time import AbsoluteDate
 from org.orekit.time import TimeScalesFactory
 from org.orekit.utils import Constants
-from org.orekit.python import PythonOrekitFixedStepHandler
+from org.orekit.propagation.sampling import PythonOrekitFixedStepHandler
 from org.orekit.propagation.events import InterSatDirectViewDetector
 from org.hipparchus.geometry.euclidean.threed import Line
 from org.hipparchus.geometry.euclidean.threed import Vector3D
@@ -47,9 +47,9 @@ from org.orekit.bodies import OneAxisEllipsoid
 from org.orekit.frames import TopocentricFrame
 from org.orekit.orbits import CircularOrbit
 from org.orekit.propagation.analytical import KeplerianPropagator
-from org.orekit.propagation.events.handlers import EventHandler
+from org.orekit.propagation.events.handlers import EventHandler, PythonEventHandler
 from org.orekit.utils import IERSConventions
-from org.orekit.python import PythonEventHandler
+
 from org.hipparchus.ode.events import Action
 
 
