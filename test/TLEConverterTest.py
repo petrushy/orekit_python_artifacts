@@ -77,7 +77,9 @@ class TLEConverterTest(unittest.TestCase):
         prop = TLEPropagator.cast_(fitter.getAdaptedPropagator())
         fitted = prop.getTLE()
 
-        self.assertAlmostEqual(expectedRMS, fitter.getRMS(), delta=0.001 * expectedRMS)
+        tolerance = max(threshold, 0.001 * expectedRMS)
+
+        self.assertAlmostEqual(expectedRMS, fitter.getRMS(), delta=tolerance)
 
         self.assertEqual(tle.getSatelliteNumber(), fitted.getSatelliteNumber())
         self.assertEqual(tle.getClassification(), fitted.getClassification())
