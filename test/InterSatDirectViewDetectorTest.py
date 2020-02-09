@@ -55,7 +55,7 @@ from org.hipparchus.ode.events import Action
 
 class GrazingHandler(PythonEventHandler):
 
-    def init(self):
+    def init(self, initialstate, target):
         pass
 
     def eventOccurred(self, s, detector, increasing):

@@ -29,7 +29,7 @@ class PassCounter(PythonEventHandler):
     """Eventhandler that counts positive events"""
     passes = 0
 
-    def init(self):
+    def init(self, initialstate, target):
         pass
 
     def eventOccurred(self, s, T, increasing):
