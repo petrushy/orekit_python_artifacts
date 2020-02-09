@@ -55,6 +55,9 @@ from org.hipparchus.ode.events import Action
 
 class GrazingHandler(PythonEventHandler):
 
+    def init(self):
+        pass
+
     def eventOccurred(self, s, detector, increasing):
         # just before increasing events and just after decreasing events,
         # the master/slave line intersects Earth limb

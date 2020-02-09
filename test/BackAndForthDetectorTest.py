@@ -53,6 +53,9 @@ class Visibility(PythonEventHandler): # implements EventHandler<ElevationDetecto
         def __init__(self):
             self._visiNb = 0
             super(Visibility, self).__init__()
+
+        def init(self):
+            pass
         
         def getVisiNb(self): 
             return self._visiNb

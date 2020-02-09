@@ -82,6 +82,9 @@ class EventHandlerTest(unittest.TestCase):
 
         class myContinueOnEvent(PythonEventHandler):
 
+            def init(self):
+                pass
+
             def eventOccurred(self, s, T, increasing):
                 return Action.CONTINUE
 
