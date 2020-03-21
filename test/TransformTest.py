@@ -36,33 +36,12 @@ import sys
 from datetime import datetime
 
 from java.util import ArrayList
-# import java.util.List;
-#
-# import org.hipparchus.Field;
-# import org.hipparchus.geometry.euclidean.threed.FieldVector3D;
-# import org.hipparchus.geometry.euclidean.threed.Line;
 from org.hipparchus.geometry.euclidean.threed import Rotation;
 from org.hipparchus.geometry.euclidean.threed import RotationConvention;
 from org.hipparchus.geometry.euclidean.threed import Vector3D
-# import org.hipparchus.linear.MatrixUtils;
-# import org.hipparchus.linear.RealMatrix;
-# import org.hipparchus.random.RandomGenerator;
-# import org.hipparchus.random.Well19937a;
-# import org.hipparchus.util.Decimal64;
-# import org.hipparchus.util.Decimal64Field;
 from org.hipparchus.util import FastMath
-# import org.junit.Assert;
-# import org.junit.Test;
-# import org.orekit.Utils;
-# import org.orekit.time.AbsoluteDate;
-# import org.orekit.time.FieldAbsoluteDate;
-# import org.orekit.time.TimeScale;
-# import org.orekit.time.TimeScalesFactory;
 from org.orekit.utils import CartesianDerivativesFilter
-# import org.orekit.utils.Constants;
-# import org.orekit.utils.FieldPVCoordinates;
 from org.orekit.utils import PVCoordinates
-# import org.orekit.utils.TimeStampedFieldPVCoordinates;
 from org.orekit.utils import TimeStampedPVCoordinates;
 from org.orekit.frames import Transform
 from org.orekit.frames import FramesFactory
@@ -74,7 +53,7 @@ class TransformTest(unittest.TestCase):
         # Create initial TimeStampedPVCoordinates
         pos = Vector3D(10000., 20000., 30000.)
         vel = Vector3D(2000., 1000., 1500.)
-        date = datetime_to_absolutedate(datetime(2019, 4, 5))
+        date = datetime_to_absolutedate(datetime(2000, 3, 13))
         pvt1 = TimeStampedPVCoordinates(date, pos, vel)
         print(type(pvt1))
 
