@@ -27,7 +27,7 @@ import math
 import os
 from java.io import File
 from orekit import JArray
-from org.orekit.data import DataProvidersManager, ZipJarCrawler, DirectoryCrawler
+from org.orekit.data import DataProvidersManager, ZipJarCrawler, DirectoryCrawler, DataContext
 from org.orekit.time import TimeScalesFactory, AbsoluteDate
 from org.orekit.utils import ElevationMask
 
