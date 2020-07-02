@@ -28,7 +28,7 @@ import orekit
 orekit.initVM()
 from orekit.pyhelpers import setup_orekit_curdir, datetime_to_absolutedate
 
-setup_orekit_curdir()
+setup_orekit_curdir(filename="resources.zip")
 
 import unittest
 import sys
