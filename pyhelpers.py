@@ -78,7 +78,7 @@ def setup_orekit_curdir(filename='orekit-data.zip'):
     DM = DataContext.getDefault().getDataProvidersManager()
     datafile = File(filename)
     if not datafile.exists():
-        print('File or folder:', datafile.absolutePath, ' not found')
+        print('File or folder:', datafile.getAbsolutePath(), ' not found')
         print("""
 
         The Orekit library relies on some external data for physical models. 
@@ -94,6 +94,7 @@ def setup_orekit_curdir(filename='orekit-data.zip'):
         orekit.pyhelpers.download_orekit_data_curdir()
 
         """)
+        return
 
     if os.path.isdir(filename):
         crawler = DirectoryCrawler(datafile)
