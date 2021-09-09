@@ -104,7 +104,7 @@ def setup_orekit_curdir(filename='orekit-data.zip'):
         print('filename ', filename, ' is neither a file nor a folder')
     DM.clearProviders()
     DM.clearLoadedDataNames()
-    DM.clearFilters()
+    DM.resetFiltersToDefault()
     DM.addProvider(crawler)
 
 
