@@ -31,7 +31,7 @@ import orekit
 orekit.initVM()
 
 from orekit import JArray_double
-from org.orekit.data import DataProvidersManager, ZipJarCrawler
+from org.orekit.data import DataProvidersManager, ZipJarCrawler, DataContext
 from org.orekit.propagation.integration import PythonFieldAdditionalEquations
 from org.orekit.forces.gravity.potential import GravityFieldFactory
 from org.orekit.forces.gravity.potential import SHMFormatReader
@@ -77,7 +77,7 @@ class KlobucharModelTest(unittest.TestCase):
                                         [.1430e+06, 0.0, -.3280e+06, .1130e+06])
 
         # Initialize the data sources
-        DM = DataProvidersManager.getInstance()
+        DM = DataContext.getDefault().getDataProvidersManager()
         datafile = File('resources.zip')
         if not datafile.exists():
             print('File :', datafile.absolutePath, ' not found')

@@ -30,7 +30,7 @@ import unittest
 import orekit
 orekit.initVM()
 
-from org.orekit.data import DataProvidersManager, ZipJarCrawler
+from org.orekit.data import DataProvidersManager, ZipJarCrawler, DataContext
 from java.io import File
 
 from org.hipparchus.geometry.euclidean.threed import Rotation
@@ -60,7 +60,7 @@ from org.orekit.attitudes import CelestialBodyPointed, SpinStabilized, InertialP
 class SpinStabilizedTest(unittest.TestCase):
 
     def setUp(self):
-        DM = DataProvidersManager.getInstance()
+        DM = DataContext.getDefault().getDataProvidersManager()
         datafile = File('resources.zip')
         if not datafile.exists():
             print('File :', datafile.absolutePath, ' not found')

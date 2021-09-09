@@ -77,7 +77,7 @@ from org.orekit.time import AbsoluteDate
 from org.orekit.utils import Constants
 # import org.orekit.utils.IERSConventions;
 # import org.orekit.utils.PVCoordinates;
-from org.orekit.data import DataProvidersManager, ZipJarCrawler
+from org.orekit.data import DataProvidersManager, ZipJarCrawler, DataContext
 from java.io import File
 from java.lang import System
 from org.orekit.python import PythonOrekitStepHandler
@@ -275,7 +275,7 @@ class IntegratedEphemerisTest(unittest.TestCase):
     def setUp(self):
         # setup_orekit_curdir()
 
-        DM = DataProvidersManager.getInstance()
+        DM = DataContext.getDefault().getDataProvidersManager()
         datafile = File('regular-data.zip')
         if not datafile.exists():
             print('File :', datafile.absolutePath, ' not found')

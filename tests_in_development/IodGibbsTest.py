@@ -30,7 +30,7 @@ import unittest
 import orekit
 orekit.initVM()
 
-from org.orekit.data import DataProvidersManager, ZipJarCrawler
+from org.orekit.data import DataProvidersManager, ZipJarCrawler, DataContext
 from java.io import File
 
 # import java.util.List;
@@ -59,7 +59,7 @@ from .EstimationTestUtils import EstimationTestUtils
 class IodGibbsTest(unittest.TestCase):
 
     def testGibbs1(self):
-        DM = DataProvidersManager.getInstance()
+        DM = DataContext.getDefault().getDataProvidersManager()
         datafile = File('regular-data.zip')
         if not datafile.exists():
             print('File :', datafile.absolutePath, ' not found')

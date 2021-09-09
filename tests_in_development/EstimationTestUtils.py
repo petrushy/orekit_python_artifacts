@@ -32,7 +32,7 @@ from orekit.pyhelpers import  setup_orekit_curdir
 setup_orekit_curdir()
 
 from orekit import JArray_double
-from org.orekit.data import DataProvidersManager, ZipJarCrawler
+from org.orekit.data import DataProvidersManager, ZipJarCrawler, DataContext
 from java.util import Arrays, HashMap
 from java.io import File
 
@@ -91,7 +91,7 @@ from Context import Context
 
 class EstimationTestUtils():
     def eccentricContext(self, dataRoot):
-        DM = DataProvidersManager.getInstance()
+        DM = DataContext.getDefault().getDataProvidersManager()
         datafile = File('regular-data.zip')
         if not datafile.exists():
             print('File :', datafile.absolutePath, ' not found')
@@ -124,7 +124,7 @@ class EstimationTestUtils():
         GravityFieldFactory.addPotentialCoefficientsReader(GRGSFormatReader("grim4s4_gr", True))
         aaReader = AstronomicalAmplitudeReader("hf-fes2004.dat", 5, 2, 3, 1.0)
 
-        DataProvidersManager.getInstance().feed(aaReader.getSupportedNames(), aaReader)
+        DataContext.getDefault().getDataProvidersManager().feed(aaReader.getSupportedNames(), aaReader)
         map = aaReader.getAstronomicalAmplitudesMap()
         GravityFieldFactory.addOceanTidesReader(FESCHatEpsilonReader("fes2004-7x7.dat",
                                                                      0.01, FastMath.toRadians(1.0),

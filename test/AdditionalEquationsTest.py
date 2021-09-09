@@ -31,7 +31,7 @@ import orekit
 orekit.initVM()
 
 from orekit import JArray_double
-from org.orekit.data import DataProvidersManager, ZipJarCrawler
+from org.orekit.data import DataProvidersManager, ZipJarCrawler, DataContext
 from org.orekit.propagation.integration import PythonAdditionalEquations
 from org.orekit.propagation.integration import AdditionalEquations
 from org.orekit.forces.gravity.potential import GravityFieldFactory
@@ -83,7 +83,7 @@ class InitCheckerEquations(PythonAdditionalEquations):  # implements AdditionalE
 class AdditionalEquationsTest(unittest.TestCase):
 
     def setUp(self):
-        DM = DataProvidersManager.getInstance()
+        DM = DataContext.getDefault().getDataProvidersManager()
         datafile = File('resources.zip')
         if not datafile.exists():
             print('File :', datafile.absolutePath, ' not found')

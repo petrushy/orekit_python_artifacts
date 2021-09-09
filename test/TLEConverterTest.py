@@ -33,7 +33,7 @@ from org.orekit.propagation.conversion import FiniteDifferencePropagatorConverte
 from org.orekit.propagation.conversion import TLEPropagatorBuilder
 from org.orekit.propagation.analytical.tle import TLE
 from org.orekit.propagation.analytical.tle import TLEPropagator
-from org.orekit.data import DataProvidersManager, ZipJarCrawler
+from org.orekit.data import DataProvidersManager, ZipJarCrawler, DataContext
 from java.util import Arrays
 from java.io import File
 
@@ -122,7 +122,7 @@ class TLEConverterTest(unittest.TestCase):
     def setUp(self):
         #setup_orekit_curdir()
 
-        DM = DataProvidersManager.getInstance()
+        DM = DataContext.getDefault().getDataProvidersManager()
         datafile = File('resources.zip')
         if not datafile.exists():
             print('File :', datafile.absolutePath, ' not found')
