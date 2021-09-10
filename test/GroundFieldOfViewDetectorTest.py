@@ -34,7 +34,10 @@ from org.orekit.orbits import KeplerianOrbit, PositionAngle
 from org.orekit.utils import Constants
 from org.orekit.propagation.analytical import KeplerianPropagator
 from org.orekit.utils import IERSConventions
-from org.orekit.propagation.events import ElevationDetector, EventsLogger, FieldOfView, GroundFieldOfViewDetector
+from org.orekit.propagation.events import ElevationDetector, EventsLogger, GroundFieldOfViewDetector
+from org.orekit.geometry.fov import FieldOfView
+from org.orekit.geometry.fov import PolygonalFieldOfView
+# from org.orekit.geometry.fov import PolygonalFieldOfView.DefiningConeType
 from org.hipparchus.geometry.euclidean.threed import Vector3D
 
 from math import radians
@@ -80,13 +83,15 @@ class GroundFieldOfViewDetectorTest(unittest.TestCase):
         # half width of 60 deg pointed along +Z in antenna frame
         # not a perfect small circle b/c FoV makes a polygon with great circles
 
-        fov = FieldOfView(Vector3D.PLUS_K, Vector3D.PLUS_I, math.pi / 3.0, 16, 0.0)
+
+        fov = PolygonalFieldOfView(Vector3D.PLUS_K, PolygonalFieldOfView.DefiningConeType.INSIDE_CONE_TOUCHING_POLYGON_AT_EDGES_MIDDLE,
+                    Vector3D.PLUS_I, math.pi / 3.0, 16, 0.0)
 
         # simple case for fixed pointing to be similar to elevation detector.
         # could define new frame with varying rotation for slewing antenna.
         fovDetector = GroundFieldOfViewDetector(topo, fov).withMaxCheck(5.0)
         self.assertEqual(topo, fovDetector.getFrame())
-        self.assertEqual(fov, fovDetector.getFieldOfView())
+        self.assertEqual(fov, fovDetector.getFOV())
         logger = EventsLogger()
 
         prop = KeplerianPropagator(orbit)

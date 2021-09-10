@@ -82,7 +82,7 @@ class EventHandlerTest(unittest.TestCase):
 
         class myContinueOnEvent(PythonEventHandler):
 
-            def init(self, initialstate, target):
+            def init(self, initialstate, target, detector):
                 pass
 
             def eventOccurred(self, s, T, increasing):

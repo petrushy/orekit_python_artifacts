@@ -41,7 +41,7 @@ from java.lang import System
 
 
 from org.hipparchus.geometry.euclidean.threed import Vector3D
-from org.hipparchus import RealFieldElement
+from org.hipparchus import CalculusFieldElement
 
 from org.hipparchus.ode.nonstiff import DormandPrince853Integrator
 from org.hipparchus.ode.nonstiff import DormandPrince853FieldIntegrator
@@ -76,7 +76,7 @@ class InitCheckerEquations(PythonFieldAdditionalEquations):  # implements Additi
 
     # Part of AdditionalEquations interface
     def computeDerivatives(self, s, pDot):
-        zerovalue = RealFieldElement.cast_(s.getDate().getField().getZero()) # Not completely sure why this needs casting but becomes just an "Object" otherwise
+        zerovalue = CalculusFieldElement.cast_(s.getDate().getField().getZero()) # Not completely sure why this needs casting but becomes just an "Object" otherwise
         pDot[0] = zerovalue.add(1.5)
         return MathArrays.buildArray(s.getDate().getField(), 7)
 

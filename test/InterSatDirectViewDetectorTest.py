@@ -47,6 +47,7 @@ from org.orekit.bodies import OneAxisEllipsoid
 from org.orekit.frames import TopocentricFrame
 from org.orekit.orbits import CircularOrbit
 from org.orekit.propagation.analytical import KeplerianPropagator
+from org.orekit.propagation import Propagator
 from org.orekit.propagation.events.handlers import EventHandler, PythonEventHandler
 from org.orekit.utils import IERSConventions
 
@@ -55,7 +56,7 @@ from org.hipparchus.ode.events import Action
 
 class GrazingHandler(PythonEventHandler):
 
-    def init(self, initialstate, target):
+    def init(self, initialstate, target, detector):
         pass
 
     def eventOccurred(self, s, detector, increasing):
@@ -68,7 +69,7 @@ class GrazingHandler(PythonEventHandler):
 
         grazingDate = s.getDate().shiftedBy(dt)
         pMaster = s.shiftedBy(dt).getPVCoordinates(frame).getPosition()
-        pSlave = detector.getSlave().getPVCoordinates(grazingDate, frame).getPosition()
+        pSlave = detector.getSecondary().getPVCoordinates(grazingDate, frame).getPosition()
         grazing = earth.getCartesianIntersectionPoint(Line(pMaster, pSlave, 1.0),
                                                       pMaster, frame, grazingDate)
 
@@ -119,14 +120,17 @@ class InterSatDirectViewDetectorTest(unittest.TestCase):
             def init(self, s0, t, step):
                 pass
 
-            def handleStep(self, state, isLast):
+            def handleStep(self, state):
                 pos1 = state.getPVCoordinates().getPosition()
                 pos2 = o2.getPVCoordinates(state.getDate(), state.getFrame()).getPosition()
 
                 assert Vector3D.distance(pos1, pos2) > 8100.0
                 assert Vector3D.distance(pos1, pos2) < 16400.0
 
-        p.setMasterMode(10.0, StepHandler())
+            def finish(self,s):
+                pass
+
+        Propagator.cast_(p).setStepHandler(10.0, StepHandler())
         p.propagate(o1.getDate().shiftedBy(o1.getKeplerianPeriod()))
         self.assertEqual(0, logger.getLoggedEvents().size())
 
