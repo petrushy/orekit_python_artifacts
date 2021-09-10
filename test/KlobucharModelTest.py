@@ -40,7 +40,6 @@ from java.lang import System
 
 
 from org.hipparchus.geometry.euclidean.threed import Vector3D
-from org.hipparchus import RealFieldElement
 
 from org.hipparchus.ode.nonstiff import DormandPrince853Integrator
 from org.hipparchus.ode.nonstiff import DormandPrince853FieldIntegrator

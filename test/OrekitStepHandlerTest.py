@@ -55,6 +55,7 @@ from org.orekit.orbits import PositionAngle
 from org.orekit.propagation import Propagator
 from org.orekit.propagation import SpacecraftState
 from org.orekit.propagation.analytical import KeplerianPropagator
+from org.orekit.propagation import Propagator
 from org.orekit.propagation.events import DateDetector
 from org.orekit.propagation.events.handlers import ContinueOnEvent
 from org.orekit.propagation.numerical import NumericalPropagator
@@ -98,10 +99,13 @@ class OrekitStepHandlerTest(unittest.TestCase):
             def init(self, s0, t, step):  # All native defined calls needs to be implemented
                 pass
 
-            def handleStep(self, currentState, isLast):
+            def handleStep(self, currentState):
                 pass
 
-        kepler.setMasterMode(fixedStepSize, MyFixedHandler())
+            def finish(self, s):
+                pass
+
+        Propagator.cast_(kepler).setStepHandler(fixedStepSize, MyFixedHandler())
         kepler.propagate(initialDate.shiftedBy(propagationTime))
 
         stepSizeInSeconds = 120
@@ -143,11 +147,14 @@ class OrekitStepHandlerTest(unittest.TestCase):
             def init(self, s0, t):
                 pass
 
-            def handleStep(self, interpolator, isLast):
+            def handleStep(self, interpolator):
                 assert (expected.popleft() == interpolator.isPreviousStateInterpolated())
                 assert (expected.popleft() == interpolator.isCurrentStateInterpolated())
 
-        propagator.setMasterMode(MyHandler())
+            def finish(self, s):
+                pass
+
+        Propagator.cast_(propagator).setStepHandler(MyHandler())
         end = date.shiftedBy(120.0)
         prop_end = propagator.propagate(end)
         self.assertEqual(end, prop_end.getDate())

@@ -92,7 +92,7 @@ class NodeDetectorTest(unittest.TestCase):
         propagator.addEventDetector(node2)
 
         # First propagation
-        propagator.setEphemerisMode()
+        generator = propagator.getEphemerisGenerator()
         propagator.propagate(finalDate)
 
         assert 1998 == logger1.getLoggedEvents().size()
@@ -100,7 +100,7 @@ class NodeDetectorTest(unittest.TestCase):
         logger1.clearLoggedEvents()
         logger2.clearLoggedEvents()
 
-        postpro = propagator.getGeneratedEphemeris()
+        postpro = generator.getGeneratedEphemeris()
 
         # Post-processing
         postpro.addEventDetector(node1)

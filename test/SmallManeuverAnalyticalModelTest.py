@@ -44,7 +44,7 @@ from org.orekit.frames import LOFType
 from org.orekit.orbits import CircularOrbit
 from org.orekit.orbits import KeplerianOrbit
 from org.orekit.orbits import PositionAngle
-from org.orekit.propagation import SpacecraftState
+from org.orekit.propagation import SpacecraftState, Propagator
 from org.orekit.propagation.numerical import NumericalPropagator
 from org.orekit.time import AbsoluteDate
 from org.orekit.time import DateComponents
@@ -213,9 +213,9 @@ class SmallManeuverAnalyticalModelTest(unittest.TestCase):
             maneuver = ConstantThrustManeuver(t0, dt, f, isp, dV.normalize())
             propagator.addForceModel(maneuver)
 
-        propagator.setEphemerisMode()
+        generator = propagator.getEphemerisGenerator()
         propagator.propagate(t0.shiftedBy(5 * orbit.getKeplerianPeriod()))
-        return propagator.getGeneratedEphemeris()
+        return generator.getGeneratedEphemeris()
 
 
 if __name__ == '__main__':
