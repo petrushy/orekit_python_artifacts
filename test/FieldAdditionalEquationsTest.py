@@ -131,7 +131,7 @@ class FieldAdditionalEquationsTest(unittest.TestCase):
         # action
         integrator = DormandPrince853FieldIntegrator(field, 0.001, 200.0, JArray_double.cast_(self.tolerance[0]),
                                                      JArray_double.cast_(self.tolerance[1]))
-        integrator.setInitialStepSize(field.getZero().add(60.0))
+        integrator.setInitialStepSize(60.0)
         propagatorNumerical = FieldNumericalPropagator(field, integrator)
         propagatorNumerical.setInitialState(
             FieldSpacecraftState(field, self.initialState).addAdditionalState(checker.getName(),
