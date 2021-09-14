@@ -44,23 +44,27 @@ from org.hipparchus.geometry.euclidean.threed import Rotation, Vector3D
 
 from org.orekit.attitudes import AttitudeProvider, InertialProvider
 from org.orekit.bodies import CelestialBodyFactory
-from org.orekit.files.ccsds import AEMParser, AEMWriter, AEMFile, Keyword, StreamingAemWriter
+# from org.orekit.files.ccsds import AEMParser, AEMWriter, AEMFile, Keyword, StreamingAemWriter
+from org.orekit.files.ccsds.ndm import ParserBuilder
 from org.orekit.frames import FramesFactory
 from org.orekit.orbits import CartesianOrbit
 from org.orekit.propagation.analytical import KeplerianPropagator
 from org.orekit.time import AbsoluteDate, TimeScalesFactory, TimeScale
 from org.orekit.utils import IERSConventions, PVCoordinates
+from org.orekit.data import DataSource
+from org.orekit.files.ccsds.ndm.adm.aem import Aem
 
 class AEMTest(unittest.TestCase):
 
     def testAemParsing(self):
         """Test the parsing of an AEM file functionality"""
         inFilename = "./resources/ccsds/AEMExample.txt"
-        aemParser = AEMParser()
-        aemParser = aemParser.withMu(CelestialBodyFactory.getEarth().getGM()). \
-                    withConventions(IERSConventions.IERS_2010). \
-                    withSimpleEOP(True)
-        aemFile = aemParser.parse(inFilename)
+        aemFile = Aem.cast_(ParserBuilder().buildAemParser().parseMessage(DataSource(inFilename)))
+        #aemParser = AEMParser()
+        #aemParser = aemParser.withMu(CelestialBodyFactory.getEarth().getGM()). \
+        #           withConventions(IERSConventions.IERS_2010). \
+         #           withSimpleEOP(True)
+        #aemFile = aemParser.parse(inFilename)
         
         ####### Checks
 
