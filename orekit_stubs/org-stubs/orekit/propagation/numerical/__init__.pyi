@@ -11,7 +11,6 @@ import org.orekit.orbits
 import org.orekit.propagation
 import org.orekit.propagation.analytical.gnss.data
 import org.orekit.propagation.integration
-import org.orekit.propagation.numerical.class-use
 import org.orekit.propagation.numerical.cr3bp
 import org.orekit.time
 import org.orekit.utils
@@ -1369,5 +1368,4 @@ class __module_protocol__(typing.Protocol):
     NumericalPropagator: typing.Type[NumericalPropagator]
     PartialDerivativesEquations: typing.Type[PartialDerivativesEquations]
     TimeDerivativesEquations: typing.Type[TimeDerivativesEquations]
-    class-use: org.orekit.propagation.numerical.class-use.__module_protocol__
     cr3bp: org.orekit.propagation.numerical.cr3bp.__module_protocol__

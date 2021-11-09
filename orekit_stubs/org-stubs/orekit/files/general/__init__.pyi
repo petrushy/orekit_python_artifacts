@@ -3,7 +3,6 @@ import java.util
 import org.orekit.attitudes
 import org.orekit.bodies
 import org.orekit.data
-import org.orekit.files.general.class-use
 import org.orekit.frames
 import org.orekit.propagation
 import org.orekit.time
@@ -295,4 +294,3 @@ class __module_protocol__(typing.Protocol):
     EphemerisFileWriter: typing.Type[EphemerisFileWriter]
     OrekitAttitudeEphemerisFile: typing.Type[OrekitAttitudeEphemerisFile]
     OrekitEphemerisFile: typing.Type[OrekitEphemerisFile]
-    class-use: org.orekit.files.general.class-use.__module_protocol__

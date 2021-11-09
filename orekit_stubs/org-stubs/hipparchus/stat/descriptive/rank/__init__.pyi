@@ -3,7 +3,6 @@ import java.lang
 import java.util
 import org.hipparchus.random
 import org.hipparchus.stat.descriptive
-import org.hipparchus.stat.descriptive.rank.class-use
 import org.hipparchus.stat.ranking
 import org.hipparchus.util
 import typing
@@ -34,7 +33,7 @@ class Max(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
     @typing.overload
     def __init__(self, max: 'Max'): ...
     @typing.overload
-    def aggregate(self, iterable: java.lang.Iterable[typing.Any]) -> None:
+    def aggregate(self, iterable: typing.Union[java.lang.Iterable[typing.Any], typing.Sequence[typing.Any], typing.Set[typing.Any]]) -> None:
         """
             Aggregates the provided instance into this instance.
         
@@ -292,7 +291,7 @@ class Min(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
     @typing.overload
     def __init__(self, min: 'Min'): ...
     @typing.overload
-    def aggregate(self, iterable: java.lang.Iterable[typing.Any]) -> None:
+    def aggregate(self, iterable: typing.Union[java.lang.Iterable[typing.Any], typing.Sequence[typing.Any], typing.Set[typing.Any]]) -> None:
         """
             Aggregates the provided instance into this instance.
         
@@ -785,7 +784,7 @@ class RandomPercentile(org.hipparchus.stat.descriptive.AbstractStorelessUnivaria
     @typing.overload
     def __init__(self, randomPercentile: 'RandomPercentile'): ...
     @typing.overload
-    def aggregate(self, iterable: java.lang.Iterable[typing.Any]) -> None: ...
+    def aggregate(self, iterable: typing.Union[java.lang.Iterable[typing.Any], typing.Sequence[typing.Any], typing.Set[typing.Any]]) -> None: ...
     @typing.overload
     def aggregate(self, tArray: typing.List[typing.Any]) -> None: ...
     @typing.overload
@@ -884,9 +883,9 @@ class RandomPercentile(org.hipparchus.stat.descriptive.AbstractStorelessUnivaria
     def evaluate(self, double: float, doubleArray: typing.List[float], int: int, int2: int) -> float: ...
     @typing.overload
     def evaluate(self, doubleArray: typing.List[float], int: int, int2: int) -> float: ...
-    def getAggregateN(self, collection: typing.Union[java.util.Collection['RandomPercentile'], typing.Sequence['RandomPercentile']]) -> float: ...
-    def getAggregateQuantileRank(self, double: float, collection: typing.Union[java.util.Collection['RandomPercentile'], typing.Sequence['RandomPercentile']]) -> float: ...
-    def getAggregateRank(self, double: float, collection: typing.Union[java.util.Collection['RandomPercentile'], typing.Sequence['RandomPercentile']]) -> float: ...
+    def getAggregateN(self, collection: typing.Union[java.util.Collection['RandomPercentile'], typing.Sequence['RandomPercentile'], typing.Set['RandomPercentile']]) -> float: ...
+    def getAggregateQuantileRank(self, double: float, collection: typing.Union[java.util.Collection['RandomPercentile'], typing.Sequence['RandomPercentile'], typing.Set['RandomPercentile']]) -> float: ...
+    def getAggregateRank(self, double: float, collection: typing.Union[java.util.Collection['RandomPercentile'], typing.Sequence['RandomPercentile'], typing.Set['RandomPercentile']]) -> float: ...
     def getN(self) -> int:
         """
             Description copied from interface: :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getN`
@@ -1005,7 +1004,7 @@ class RandomPercentile(org.hipparchus.stat.descriptive.AbstractStorelessUnivaria
         
         """
         ...
-    def reduce(self, double: float, collection: typing.Union[java.util.Collection['RandomPercentile'], typing.Sequence['RandomPercentile']]) -> float: ...
+    def reduce(self, double: float, collection: typing.Union[java.util.Collection['RandomPercentile'], typing.Sequence['RandomPercentile'], typing.Set['RandomPercentile']]) -> float: ...
 
 
 class __module_protocol__(typing.Protocol):
@@ -1017,4 +1016,3 @@ class __module_protocol__(typing.Protocol):
     PSquarePercentile: typing.Type[PSquarePercentile]
     Percentile: typing.Type[Percentile]
     RandomPercentile: typing.Type[RandomPercentile]
-    class-use: org.hipparchus.stat.descriptive.rank.class-use.__module_protocol__

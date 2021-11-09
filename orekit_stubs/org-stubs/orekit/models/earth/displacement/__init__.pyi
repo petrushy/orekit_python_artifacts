@@ -3,7 +3,6 @@ import org.hipparchus.geometry.euclidean.threed
 import org.orekit.bodies
 import org.orekit.data
 import org.orekit.frames
-import org.orekit.models.earth.displacement.class-use
 import org.orekit.utils
 import typing
 
@@ -613,4 +612,3 @@ class __module_protocol__(typing.Protocol):
     StationDisplacement: typing.Type[StationDisplacement]
     TidalDisplacement: typing.Type[TidalDisplacement]
     Tide: typing.Type[Tide]
-    class-use: org.orekit.models.earth.displacement.class-use.__module_protocol__

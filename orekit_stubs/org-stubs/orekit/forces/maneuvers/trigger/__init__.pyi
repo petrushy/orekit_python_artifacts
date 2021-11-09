@@ -2,7 +2,6 @@ import java.util
 import java.util.stream
 import org.hipparchus
 import org.hipparchus.ode.events
-import org.orekit.forces.maneuvers.trigger.class-use
 import org.orekit.propagation
 import org.orekit.propagation.events
 import org.orekit.propagation.events.handlers
@@ -329,4 +328,3 @@ class __module_protocol__(typing.Protocol):
     DateBasedManeuverTriggers: typing.Type[DateBasedManeuverTriggers]
     EventBasedManeuverTriggers: typing.Type[EventBasedManeuverTriggers]
     ManeuverTriggers: typing.Type[ManeuverTriggers]
-    class-use: org.orekit.forces.maneuvers.trigger.class-use.__module_protocol__

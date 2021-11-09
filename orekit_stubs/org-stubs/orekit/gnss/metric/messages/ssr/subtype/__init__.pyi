@@ -1,6 +1,5 @@
 import java.util
 import org.orekit.gnss.metric.messages.ssr
-import org.orekit.gnss.metric.messages.ssr.subtype.class-use
 import org.orekit.models.earth.ionosphere
 import typing
 
@@ -202,4 +201,3 @@ class __module_protocol__(typing.Protocol):
     SsrIm201: typing.Type[SsrIm201]
     SsrIm201Data: typing.Type[SsrIm201Data]
     SsrIm201Header: typing.Type[SsrIm201Header]
-    class-use: org.orekit.gnss.metric.messages.ssr.subtype.class-use.__module_protocol__

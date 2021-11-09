@@ -1,7 +1,6 @@
 import org.orekit.data
 import org.orekit.frames
 import org.orekit.models.earth
-import org.orekit.models.earth.weather.class-use
 import org.orekit.time
 import typing
 
@@ -205,4 +204,3 @@ class __module_protocol__(typing.Protocol):
     GlobalPressureTemperature2Model: typing.Type[GlobalPressureTemperature2Model]
     GlobalPressureTemperatureModel: typing.Type[GlobalPressureTemperatureModel]
     WeatherModel: typing.Type[WeatherModel]
-    class-use: org.orekit.models.earth.weather.class-use.__module_protocol__

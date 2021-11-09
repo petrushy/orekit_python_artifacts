@@ -7,7 +7,6 @@ import org.orekit.orbits
 import org.orekit.propagation
 import org.orekit.propagation.analytical
 import org.orekit.propagation.events
-import org.orekit.propagation.integration.class-use
 import org.orekit.time
 import org.orekit.utils
 import typing
@@ -1162,4 +1161,3 @@ class __module_protocol__(typing.Protocol):
     FieldStateMapper: typing.Type[FieldStateMapper]
     IntegratedEphemeris: typing.Type[IntegratedEphemeris]
     StateMapper: typing.Type[StateMapper]
-    class-use: org.orekit.propagation.integration.class-use.__module_protocol__

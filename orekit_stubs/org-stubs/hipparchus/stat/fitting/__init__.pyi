@@ -6,7 +6,6 @@ import org.hipparchus.distribution.continuous
 import org.hipparchus.distribution.multivariate
 import org.hipparchus.random
 import org.hipparchus.stat.descriptive
-import org.hipparchus.stat.fitting.class-use
 import typing
 
 
@@ -62,4 +61,3 @@ class __module_protocol__(typing.Protocol):
 
     EmpiricalDistribution: typing.Type[EmpiricalDistribution]
     MultivariateNormalMixtureExpectationMaximization: typing.Type[MultivariateNormalMixtureExpectationMaximization]
-    class-use: org.hipparchus.stat.fitting.class-use.__module_protocol__

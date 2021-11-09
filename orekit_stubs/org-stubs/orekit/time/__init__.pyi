@@ -7,7 +7,6 @@ import org.hipparchus
 import org.orekit.data
 import org.orekit.frames
 import org.orekit.gnss
-import org.orekit.time.class-use
 import org.orekit.utils
 import typing
 
@@ -615,7 +614,7 @@ class FieldTimeInterpolable(typing.Generic[_FieldTimeInterpolable__T, _FieldTime
     @typing.overload
     def interpolate(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_FieldTimeInterpolable__KK], stream: java.util.stream.Stream[_FieldTimeInterpolable__T]) -> _FieldTimeInterpolable__T: ...
     @typing.overload
-    def interpolate(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_FieldTimeInterpolable__KK], collection: typing.Union[java.util.Collection[_FieldTimeInterpolable__T], typing.Sequence[_FieldTimeInterpolable__T]]) -> _FieldTimeInterpolable__T: ...
+    def interpolate(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_FieldTimeInterpolable__KK], collection: typing.Union[java.util.Collection[_FieldTimeInterpolable__T], typing.Sequence[_FieldTimeInterpolable__T], typing.Set[_FieldTimeInterpolable__T]]) -> _FieldTimeInterpolable__T: ...
 
 _FieldTimeShiftable__T = typing.TypeVar('_FieldTimeShiftable__T', bound=FieldTimeInterpolable)  # <T>
 _FieldTimeShiftable__KK = typing.TypeVar('_FieldTimeShiftable__KK', bound=org.hipparchus.CalculusFieldElement)  # <KK>
@@ -1187,7 +1186,7 @@ class TimeInterpolable(typing.Generic[_TimeInterpolable__T]):
     @typing.overload
     def interpolate(self, absoluteDate: 'AbsoluteDate', stream: java.util.stream.Stream[_TimeInterpolable__T]) -> _TimeInterpolable__T: ...
     @typing.overload
-    def interpolate(self, absoluteDate: 'AbsoluteDate', collection: typing.Union[java.util.Collection[_TimeInterpolable__T], typing.Sequence[_TimeInterpolable__T]]) -> _TimeInterpolable__T: ...
+    def interpolate(self, absoluteDate: 'AbsoluteDate', collection: typing.Union[java.util.Collection[_TimeInterpolable__T], typing.Sequence[_TimeInterpolable__T], typing.Set[_TimeInterpolable__T]]) -> _TimeInterpolable__T: ...
 
 class TimeScalarFunction:
     """
@@ -1792,7 +1791,7 @@ class TimeScales:
         """
         ...
     @staticmethod
-    def of(collection: typing.Union[java.util.Collection[OffsetModel], typing.Sequence[OffsetModel]], biFunction: typing.Union[java.util.function.BiFunction[org.orekit.utils.IERSConventions, 'TimeScales', java.util.Collection[org.orekit.frames.EOPEntry]], typing.Callable[[org.orekit.utils.IERSConventions, 'TimeScales'], java.util.Collection[org.orekit.frames.EOPEntry]]]) -> 'TimeScales': ...
+    def of(collection: typing.Union[java.util.Collection[OffsetModel], typing.Sequence[OffsetModel], typing.Set[OffsetModel]], biFunction: typing.Union[java.util.function.BiFunction[org.orekit.utils.IERSConventions, 'TimeScales', java.util.Collection[org.orekit.frames.EOPEntry]], typing.Callable[[org.orekit.utils.IERSConventions, 'TimeScales'], java.util.Collection[org.orekit.frames.EOPEntry]]]) -> 'TimeScales': ...
 
 class TimeScalesFactory(java.io.Serializable):
     """
@@ -6406,4 +6405,3 @@ class __module_protocol__(typing.Protocol):
     UTCTAIHistoryFilesLoader: typing.Type[UTCTAIHistoryFilesLoader]
     UTCTAIOffset: typing.Type[UTCTAIOffset]
     UTCTAIOffsetsLoader: typing.Type[UTCTAIOffsetsLoader]
-    class-use: org.orekit.time.class-use.__module_protocol__

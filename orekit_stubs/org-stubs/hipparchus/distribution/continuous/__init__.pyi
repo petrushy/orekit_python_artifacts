@@ -1,7 +1,6 @@
 import java.io
 import java.util
 import org.hipparchus.distribution
-import org.hipparchus.distribution.continuous.class-use
 import org.hipparchus.util
 import typing
 
@@ -3007,4 +3006,3 @@ class __module_protocol__(typing.Protocol):
     TriangularDistribution: typing.Type[TriangularDistribution]
     UniformRealDistribution: typing.Type[UniformRealDistribution]
     WeibullDistribution: typing.Type[WeibullDistribution]
-    class-use: org.hipparchus.distribution.continuous.class-use.__module_protocol__

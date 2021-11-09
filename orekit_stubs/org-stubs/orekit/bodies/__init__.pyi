@@ -4,7 +4,6 @@ import org.hipparchus
 import org.hipparchus.analysis.differentiation
 import org.hipparchus.geometry.euclidean.threed
 import org.hipparchus.geometry.euclidean.twod
-import org.orekit.bodies.class-use
 import org.orekit.data
 import org.orekit.frames
 import org.orekit.time
@@ -2264,4 +2263,3 @@ class __module_protocol__(typing.Protocol):
     JPLEphemeridesLoader: typing.Type[JPLEphemeridesLoader]
     LazyLoadedCelestialBodies: typing.Type[LazyLoadedCelestialBodies]
     OneAxisEllipsoid: typing.Type[OneAxisEllipsoid]
-    class-use: org.orekit.bodies.class-use.__module_protocol__

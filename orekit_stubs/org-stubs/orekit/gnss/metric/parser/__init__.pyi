@@ -4,7 +4,6 @@ import java.util
 import java.util.regex
 import org.orekit.gnss
 import org.orekit.gnss.metric.messages
-import org.orekit.gnss.metric.parser.class-use
 import org.orekit.utils.units
 import typing
 
@@ -828,4 +827,3 @@ class __module_protocol__(typing.Protocol):
     RtcmMessageType: typing.Type[RtcmMessageType]
     RtcmMessagesParser: typing.Type[RtcmMessagesParser]
     Units: typing.Type[Units]
-    class-use: org.orekit.gnss.metric.parser.class-use.__module_protocol__

@@ -1,7 +1,6 @@
 import java.lang
 import org.hipparchus.optim
 import org.hipparchus.optim.nonlinear.scalar
-import org.hipparchus.optim.nonlinear.scalar.gradient.class-use
 import typing
 
 
@@ -67,4 +66,3 @@ class __module_protocol__(typing.Protocol):
 
     NonLinearConjugateGradientOptimizer: typing.Type[NonLinearConjugateGradientOptimizer]
     Preconditioner: typing.Type[Preconditioner]
-    class-use: org.hipparchus.optim.nonlinear.scalar.gradient.class-use.__module_protocol__

@@ -2,7 +2,6 @@ import java.io
 import org.hipparchus
 import org.hipparchus.analysis
 import org.hipparchus.analysis.differentiation
-import org.hipparchus.analysis.polynomials.class-use
 import typing
 
 
@@ -944,4 +943,3 @@ class __module_protocol__(typing.Protocol):
     PolynomialFunctionNewtonForm: typing.Type[PolynomialFunctionNewtonForm]
     PolynomialSplineFunction: typing.Type[PolynomialSplineFunction]
     PolynomialsUtils: typing.Type[PolynomialsUtils]
-    class-use: org.hipparchus.analysis.polynomials.class-use.__module_protocol__

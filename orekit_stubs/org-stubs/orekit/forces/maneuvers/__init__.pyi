@@ -4,7 +4,6 @@ import org.hipparchus
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.attitudes
 import org.orekit.forces
-import org.orekit.forces.maneuvers.class-use
 import org.orekit.forces.maneuvers.propulsion
 import org.orekit.forces.maneuvers.trigger
 import org.orekit.frames
@@ -659,6 +658,5 @@ class __module_protocol__(typing.Protocol):
     ImpulseManeuver: typing.Type[ImpulseManeuver]
     Maneuver: typing.Type[Maneuver]
     SmallManeuverAnalyticalModel: typing.Type[SmallManeuverAnalyticalModel]
-    class-use: org.orekit.forces.maneuvers.class-use.__module_protocol__
     propulsion: org.orekit.forces.maneuvers.propulsion.__module_protocol__
     trigger: org.orekit.forces.maneuvers.trigger.__module_protocol__

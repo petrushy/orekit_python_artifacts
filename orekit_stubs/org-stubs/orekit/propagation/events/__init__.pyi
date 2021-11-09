@@ -12,7 +12,6 @@ import org.orekit.models
 import org.orekit.models.earth
 import org.orekit.orbits
 import org.orekit.propagation
-import org.orekit.propagation.events.class-use
 import org.orekit.propagation.events.handlers
 import org.orekit.propagation.sampling
 import org.orekit.time
@@ -1543,7 +1542,7 @@ class BooleanDetector(AbstractDetector['BooleanDetector']):
     """
     @typing.overload
     @staticmethod
-    def andCombine(collection: typing.Union[java.util.Collection[EventDetector], typing.Sequence[EventDetector]]) -> 'BooleanDetector':
+    def andCombine(collection: typing.Union[java.util.Collection[EventDetector], typing.Sequence[EventDetector], typing.Set[EventDetector]]) -> 'BooleanDetector':
         """
             Create a new event detector that is the logical AND of the given event detectors.
         
@@ -1681,7 +1680,7 @@ class BooleanDetector(AbstractDetector['BooleanDetector']):
         ...
     @typing.overload
     @staticmethod
-    def orCombine(collection: typing.Union[java.util.Collection[EventDetector], typing.Sequence[EventDetector]]) -> 'BooleanDetector':
+    def orCombine(collection: typing.Union[java.util.Collection[EventDetector], typing.Sequence[EventDetector], typing.Set[EventDetector]]) -> 'BooleanDetector':
         """
             Create a new event detector that is the logical OR or the given event detectors.
         
@@ -3951,5 +3950,4 @@ class __module_protocol__(typing.Protocol):
     NodeDetector: typing.Type[NodeDetector]
     PositionAngleDetector: typing.Type[PositionAngleDetector]
     VisibilityTrigger: typing.Type[VisibilityTrigger]
-    class-use: org.orekit.propagation.events.class-use.__module_protocol__
     handlers: org.orekit.propagation.events.handlers.__module_protocol__

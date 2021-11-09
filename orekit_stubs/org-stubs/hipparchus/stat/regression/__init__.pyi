@@ -1,6 +1,5 @@
 import java.io
 import org.hipparchus.linear
-import org.hipparchus.stat.regression.class-use
 import typing
 
 
@@ -559,4 +558,3 @@ class __module_protocol__(typing.Protocol):
     RegressionResults: typing.Type[RegressionResults]
     SimpleRegression: typing.Type[SimpleRegression]
     UpdatingMultipleLinearRegression: typing.Type[UpdatingMultipleLinearRegression]
-    class-use: org.hipparchus.stat.regression.class-use.__module_protocol__

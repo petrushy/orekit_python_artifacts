@@ -5,7 +5,6 @@ import org.hipparchus.geometry.euclidean.threed
 import org.orekit.attitudes
 import org.orekit.estimation.measurements
 import org.orekit.estimation.measurements.gnss
-import org.orekit.estimation.measurements.modifiers.class-use
 import org.orekit.models
 import org.orekit.models.earth.ionosphere
 import org.orekit.models.earth.troposphere
@@ -796,4 +795,3 @@ class __module_protocol__(typing.Protocol):
     TroposphericGradientConverter: typing.Type[TroposphericGradientConverter]
     TurnAroundRangeIonosphericDelayModifier: typing.Type[TurnAroundRangeIonosphericDelayModifier]
     TurnAroundRangeTroposphericDelayModifier: typing.Type[TurnAroundRangeTroposphericDelayModifier]
-    class-use: org.orekit.estimation.measurements.modifiers.class-use.__module_protocol__

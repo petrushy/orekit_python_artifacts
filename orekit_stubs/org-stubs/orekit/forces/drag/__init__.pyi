@@ -3,7 +3,6 @@ import java.util.stream
 import org.hipparchus
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.forces
-import org.orekit.forces.drag.class-use
 import org.orekit.frames
 import org.orekit.models.earth.atmosphere
 import org.orekit.propagation
@@ -304,4 +303,3 @@ class __module_protocol__(typing.Protocol):
     DragSensitive: typing.Type[DragSensitive]
     IsotropicDrag: typing.Type[IsotropicDrag]
     TimeSpanDragForce: typing.Type[TimeSpanDragForce]
-    class-use: org.orekit.forces.drag.class-use.__module_protocol__

@@ -3,7 +3,6 @@ import org.hipparchus.analysis
 import org.hipparchus.linear
 import org.hipparchus.optim
 import org.hipparchus.optim.nonlinear.scalar
-import org.hipparchus.optim.nonlinear.scalar.noderiv.class-use
 import org.hipparchus.random
 import typing
 
@@ -123,4 +122,3 @@ class __module_protocol__(typing.Protocol):
     NelderMeadSimplex: typing.Type[NelderMeadSimplex]
     PowellOptimizer: typing.Type[PowellOptimizer]
     SimplexOptimizer: typing.Type[SimplexOptimizer]
-    class-use: org.hipparchus.optim.nonlinear.scalar.noderiv.class-use.__module_protocol__

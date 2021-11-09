@@ -8,7 +8,6 @@ import org.orekit.data
 import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.ndm.odm
-import org.orekit.files.ccsds.ndm.odm.ocm.class-use
 import org.orekit.files.ccsds.ndm.odm.oem
 import org.orekit.files.ccsds.section
 import org.orekit.files.ccsds.utils
@@ -6548,4 +6547,3 @@ class __module_protocol__(typing.Protocol):
     TrajectoryStateHistory: typing.Type[TrajectoryStateHistory]
     TrajectoryStateHistoryMetadata: typing.Type[TrajectoryStateHistoryMetadata]
     TrajectoryStateHistoryMetadataKey: typing.Type[TrajectoryStateHistoryMetadataKey]
-    class-use: org.orekit.files.ccsds.ndm.odm.ocm.class-use.__module_protocol__

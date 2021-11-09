@@ -4,7 +4,6 @@ import org.hipparchus
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.bodies
 import org.orekit.forces
-import org.orekit.forces.gravity.class-use
 import org.orekit.forces.gravity.potential
 import org.orekit.frames
 import org.orekit.propagation
@@ -938,5 +937,4 @@ class __module_protocol__(typing.Protocol):
     SolidTides: typing.Type[SolidTides]
     ThirdBodyAttraction: typing.Type[ThirdBodyAttraction]
     ThirdBodyAttractionEpoch: typing.Type[ThirdBodyAttractionEpoch]
-    class-use: org.orekit.forces.gravity.class-use.__module_protocol__
     potential: org.orekit.forces.gravity.potential.__module_protocol__

@@ -7,7 +7,6 @@ import org.orekit.frames
 import org.orekit.orbits
 import org.orekit.propagation
 import org.orekit.propagation.analytical
-import org.orekit.propagation.analytical.tle.class-use
 import org.orekit.propagation.integration
 import org.orekit.time
 import org.orekit.utils
@@ -1968,4 +1967,3 @@ class __module_protocol__(typing.Protocol):
     TLEJacobiansMapper: typing.Type[TLEJacobiansMapper]
     TLEPartialDerivativesEquations: typing.Type[TLEPartialDerivativesEquations]
     TLEPropagator: typing.Type[TLEPropagator]
-    class-use: org.orekit.propagation.analytical.tle.class-use.__module_protocol__

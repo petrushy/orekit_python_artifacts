@@ -3,7 +3,6 @@ import java.util
 import org.hipparchus.geometry.euclidean.threed
 import org.hipparchus.geometry.spherical.twod
 import org.orekit.bodies
-import org.orekit.models.earth.tessellation.class-use
 import org.orekit.orbits
 import typing
 
@@ -247,4 +246,3 @@ class __module_protocol__(typing.Protocol):
     EllipsoidTessellator: typing.Type[EllipsoidTessellator]
     Tile: typing.Type[Tile]
     TileAiming: typing.Type[TileAiming]
-    class-use: org.orekit.models.earth.tessellation.class-use.__module_protocol__

@@ -2,7 +2,6 @@ import java.lang
 import java.util
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.data
-import org.orekit.files.sinex.class-use
 import org.orekit.time
 import typing
 
@@ -257,4 +256,3 @@ class __module_protocol__(typing.Protocol):
 
     SinexLoader: typing.Type[SinexLoader]
     Station: typing.Type[Station]
-    class-use: org.orekit.files.sinex.class-use.__module_protocol__

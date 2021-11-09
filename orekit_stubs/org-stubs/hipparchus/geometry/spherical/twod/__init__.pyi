@@ -5,7 +5,6 @@ import org.hipparchus.geometry.enclosing
 import org.hipparchus.geometry.euclidean.threed
 import org.hipparchus.geometry.partitioning
 import org.hipparchus.geometry.spherical.oned
-import org.hipparchus.geometry.spherical.twod.class-use
 import typing
 
 
@@ -637,7 +636,7 @@ class SphericalPolygonsSet(org.hipparchus.geometry.partitioning.AbstractRegion[S
     @typing.overload
     def __init__(self, double: float, s2PointArray: typing.List[S2Point]): ...
     @typing.overload
-    def __init__(self, collection: typing.Union[java.util.Collection[org.hipparchus.geometry.partitioning.SubHyperplane[Sphere2D]], typing.Sequence[org.hipparchus.geometry.partitioning.SubHyperplane[Sphere2D]]], double: float): ...
+    def __init__(self, collection: typing.Union[java.util.Collection[org.hipparchus.geometry.partitioning.SubHyperplane[Sphere2D]], typing.Sequence[org.hipparchus.geometry.partitioning.SubHyperplane[Sphere2D]], typing.Set[org.hipparchus.geometry.partitioning.SubHyperplane[Sphere2D]]], double: float): ...
     @typing.overload
     def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float): ...
     @typing.overload
@@ -709,4 +708,3 @@ class __module_protocol__(typing.Protocol):
     SphericalPolygonsSet: typing.Type[SphericalPolygonsSet]
     SubCircle: typing.Type[SubCircle]
     Vertex: typing.Type[Vertex]
-    class-use: org.hipparchus.geometry.spherical.twod.class-use.__module_protocol__

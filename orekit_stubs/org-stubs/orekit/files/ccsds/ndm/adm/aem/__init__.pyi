@@ -5,7 +5,6 @@ import org.orekit.attitudes
 import org.orekit.data
 import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.ndm.adm
-import org.orekit.files.ccsds.ndm.adm.aem.class-use
 import org.orekit.files.ccsds.section
 import org.orekit.files.ccsds.utils
 import org.orekit.files.ccsds.utils.generation
@@ -1071,4 +1070,3 @@ class __module_protocol__(typing.Protocol):
     AttitudeEntryKey: typing.Type[AttitudeEntryKey]
     AttitudeWriter: typing.Type[AttitudeWriter]
     StreamingAemWriter: typing.Type[StreamingAemWriter]
-    class-use: org.orekit.files.ccsds.ndm.adm.aem.class-use.__module_protocol__

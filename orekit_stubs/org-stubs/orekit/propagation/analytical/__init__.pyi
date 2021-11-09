@@ -5,7 +5,6 @@ import org.orekit.forces.gravity.potential
 import org.orekit.frames
 import org.orekit.orbits
 import org.orekit.propagation
-import org.orekit.propagation.analytical.class-use
 import org.orekit.propagation.analytical.gnss
 import org.orekit.propagation.analytical.tle
 import org.orekit.propagation.events
@@ -243,7 +242,7 @@ class AggregateBoundedPropagator(AbstractAnalyticalPropagator, org.orekit.propag
         Also see:
             :meth:`~org.orekit.propagation.analytical.AggregateBoundedPropagator.AggregateBoundedPropagator`
     """
-    def __init__(self, collection: typing.Union[java.util.Collection[org.orekit.propagation.BoundedPropagator], typing.Sequence[org.orekit.propagation.BoundedPropagator]]): ...
+    def __init__(self, collection: typing.Union[java.util.Collection[org.orekit.propagation.BoundedPropagator], typing.Sequence[org.orekit.propagation.BoundedPropagator], typing.Set[org.orekit.propagation.BoundedPropagator]]): ...
     def getInitialState(self) -> org.orekit.propagation.SpacecraftState:
         """
             Description copied from class: :meth:`~org.orekit.propagation.AbstractPropagator.getInitialState`
@@ -842,6 +841,5 @@ class __module_protocol__(typing.Protocol):
     FieldKeplerianPropagator: typing.Type[FieldKeplerianPropagator]
     J2DifferentialEffect: typing.Type[J2DifferentialEffect]
     KeplerianPropagator: typing.Type[KeplerianPropagator]
-    class-use: org.orekit.propagation.analytical.class-use.__module_protocol__
     gnss: org.orekit.propagation.analytical.gnss.__module_protocol__
     tle: org.orekit.propagation.analytical.tle.__module_protocol__

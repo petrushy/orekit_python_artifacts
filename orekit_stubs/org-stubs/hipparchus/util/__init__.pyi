@@ -7,7 +7,6 @@ import java.util
 import org.hipparchus
 import org.hipparchus.exception
 import org.hipparchus.random
-import org.hipparchus.util.class-use
 import typing
 
 
@@ -4912,4 +4911,3 @@ class __module_protocol__(typing.Protocol):
     SinCos: typing.Type[SinCos]
     SinhCosh: typing.Type[SinhCosh]
     Tuple: typing.Type[Tuple]
-    class-use: org.hipparchus.util.class-use.__module_protocol__

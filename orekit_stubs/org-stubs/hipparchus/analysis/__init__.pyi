@@ -1,5 +1,4 @@
 import org.hipparchus
-import org.hipparchus.analysis.class-use
 import org.hipparchus.analysis.differentiation
 import org.hipparchus.analysis.function
 import org.hipparchus.analysis.integration
@@ -851,7 +850,6 @@ class __module_protocol__(typing.Protocol):
     UnivariateFunction: typing.Type[UnivariateFunction]
     UnivariateMatrixFunction: typing.Type[UnivariateMatrixFunction]
     UnivariateVectorFunction: typing.Type[UnivariateVectorFunction]
-    class-use: org.hipparchus.analysis.class-use.__module_protocol__
     differentiation: org.hipparchus.analysis.differentiation.__module_protocol__
     function: org.hipparchus.analysis.function.__module_protocol__
     integration: org.hipparchus.analysis.integration.__module_protocol__

@@ -2,7 +2,6 @@ import java.io
 import org.hipparchus
 import org.hipparchus.analysis
 import org.hipparchus.analysis.differentiation
-import org.hipparchus.analysis.interpolation.class-use
 import org.hipparchus.analysis.polynomials
 import org.hipparchus.random
 import typing
@@ -626,4 +625,3 @@ class __module_protocol__(typing.Protocol):
     TrivariateGridInterpolator: typing.Type[TrivariateGridInterpolator]
     UnivariateInterpolator: typing.Type[UnivariateInterpolator]
     UnivariatePeriodicInterpolator: typing.Type[UnivariatePeriodicInterpolator]
-    class-use: org.hipparchus.analysis.interpolation.class-use.__module_protocol__

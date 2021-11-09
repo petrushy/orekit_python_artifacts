@@ -7,7 +7,6 @@ import org.hipparchus
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.bodies
 import org.orekit.data
-import org.orekit.frames.class-use
 import org.orekit.time
 import org.orekit.utils
 import typing
@@ -161,7 +160,7 @@ class EOPHistory(java.io.Serializable):
         Also see:
             :meth:`~serialized`
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, collection: typing.Union[java.util.Collection[EOPEntry], typing.Sequence[EOPEntry]], boolean: bool, timeScales: org.orekit.time.TimeScales): ...
+    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, collection: typing.Union[java.util.Collection[EOPEntry], typing.Sequence[EOPEntry], typing.Set[EOPEntry]], boolean: bool, timeScales: org.orekit.time.TimeScales): ...
     def checkEOPContinuity(self, double: float) -> None:
         """
             Check Earth orientation parameters continuity.
@@ -639,10 +638,10 @@ class FieldTransform(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable[
     _interpolate_2__T = typing.TypeVar('_interpolate_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def interpolate(fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_interpolate_0__T], collection: typing.Union[java.util.Collection['FieldTransform'[_interpolate_0__T]], typing.Sequence['FieldTransform'[_interpolate_0__T]]]) -> 'FieldTransform'[_interpolate_0__T]: ...
+    def interpolate(fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_interpolate_0__T], collection: typing.Union[java.util.Collection['FieldTransform'[_interpolate_0__T]], typing.Sequence['FieldTransform'[_interpolate_0__T]], typing.Set['FieldTransform'[_interpolate_0__T]]]) -> 'FieldTransform'[_interpolate_0__T]: ...
     @typing.overload
     @staticmethod
-    def interpolate(fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_interpolate_1__T], cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, collection: typing.Union[java.util.Collection['FieldTransform'[_interpolate_1__T]], typing.Sequence['FieldTransform'[_interpolate_1__T]]]) -> 'FieldTransform'[_interpolate_1__T]: ...
+    def interpolate(fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_interpolate_1__T], cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, collection: typing.Union[java.util.Collection['FieldTransform'[_interpolate_1__T]], typing.Sequence['FieldTransform'[_interpolate_1__T]], typing.Set['FieldTransform'[_interpolate_1__T]]]) -> 'FieldTransform'[_interpolate_1__T]: ...
     @typing.overload
     @staticmethod
     def interpolate(fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_interpolate_2__T], cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, stream: java.util.stream.Stream['FieldTransform'[_interpolate_2__T]]) -> 'FieldTransform'[_interpolate_2__T]: ...
@@ -1774,12 +1773,12 @@ class Transform(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Tran
         """
         ...
     @typing.overload
-    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, collection: typing.Union[java.util.Collection[org.orekit.time.TimeInterpolable], typing.Sequence[org.orekit.time.TimeInterpolable]]) -> org.orekit.time.TimeInterpolable: ...
+    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, collection: typing.Union[java.util.Collection[org.orekit.time.TimeInterpolable], typing.Sequence[org.orekit.time.TimeInterpolable], typing.Set[org.orekit.time.TimeInterpolable]]) -> org.orekit.time.TimeInterpolable: ...
     @typing.overload
     def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, stream: java.util.stream.Stream['Transform']) -> 'Transform': ...
     @typing.overload
     @staticmethod
-    def interpolate(absoluteDate: org.orekit.time.AbsoluteDate, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, collection: typing.Union[java.util.Collection['Transform'], typing.Sequence['Transform']]) -> 'Transform': ...
+    def interpolate(absoluteDate: org.orekit.time.AbsoluteDate, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, collection: typing.Union[java.util.Collection['Transform'], typing.Sequence['Transform'], typing.Set['Transform']]) -> 'Transform': ...
     def shiftedBy(self, double: float) -> 'Transform':
         """
             Get a time-shifted instance.
@@ -3550,4 +3549,3 @@ class __module_protocol__(typing.Protocol):
     TwoBodiesBaryFrame: typing.Type[TwoBodiesBaryFrame]
     UpdatableFrame: typing.Type[UpdatableFrame]
     VersionedITRF: typing.Type[VersionedITRF]
-    class-use: org.orekit.frames.class-use.__module_protocol__

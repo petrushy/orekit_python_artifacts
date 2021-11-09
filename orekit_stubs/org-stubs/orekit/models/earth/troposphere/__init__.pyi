@@ -4,7 +4,6 @@ import java.util
 import org.hipparchus
 import org.orekit.bodies
 import org.orekit.data
-import org.orekit.models.earth.troposphere.class-use
 import org.orekit.time
 import org.orekit.utils
 import typing
@@ -1340,4 +1339,3 @@ class __module_protocol__(typing.Protocol):
     ViennaModelType: typing.Type[ViennaModelType]
     ViennaOneModel: typing.Type[ViennaOneModel]
     ViennaThreeModel: typing.Type[ViennaThreeModel]
-    class-use: org.orekit.models.earth.troposphere.class-use.__module_protocol__

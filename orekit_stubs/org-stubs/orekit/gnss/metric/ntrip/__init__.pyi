@@ -3,7 +3,6 @@ import java.net
 import java.util
 import org.orekit.errors
 import org.orekit.gnss.metric.messages
-import org.orekit.gnss.metric.ntrip.class-use
 import org.orekit.gnss.metric.parser
 import typing
 
@@ -1264,4 +1263,3 @@ class __module_protocol__(typing.Protocol):
     StreamMonitor: typing.Type[StreamMonitor]
     StreamedMessage: typing.Type[StreamedMessage]
     Type: typing.Type[Type]
-    class-use: org.orekit.gnss.metric.ntrip.class-use.__module_protocol__

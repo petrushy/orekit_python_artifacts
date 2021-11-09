@@ -8,7 +8,6 @@ import org.orekit.data
 import org.orekit.estimation.measurements.gnss
 import org.orekit.gnss.antenna
 import org.orekit.gnss.attitude
-import org.orekit.gnss.class-use
 import org.orekit.gnss.clock
 import org.orekit.gnss.metric
 import org.orekit.gnss.navigation
@@ -1999,7 +1998,6 @@ class __module_protocol__(typing.Protocol):
     YUMAParser: typing.Type[YUMAParser]
     antenna: org.orekit.gnss.antenna.__module_protocol__
     attitude: org.orekit.gnss.attitude.__module_protocol__
-    class-use: org.orekit.gnss.class-use.__module_protocol__
     clock: org.orekit.gnss.clock.__module_protocol__
     metric: org.orekit.gnss.metric.__module_protocol__
     navigation: org.orekit.gnss.navigation.__module_protocol__

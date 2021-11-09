@@ -3,7 +3,6 @@ import java.util
 import org.orekit.data
 import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.ndm.odm
-import org.orekit.files.ccsds.ndm.odm.oem.class-use
 import org.orekit.files.ccsds.section
 import org.orekit.files.ccsds.utils
 import org.orekit.files.ccsds.utils.generation
@@ -957,4 +956,3 @@ class __module_protocol__(typing.Protocol):
     OemSegment: typing.Type[OemSegment]
     OemWriter: typing.Type[OemWriter]
     StreamingOemWriter: typing.Type[StreamingOemWriter]
-    class-use: org.orekit.files.ccsds.ndm.odm.oem.class-use.__module_protocol__

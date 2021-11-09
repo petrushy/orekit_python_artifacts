@@ -3,7 +3,6 @@ import java.util.stream
 import org.hipparchus
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.forces
-import org.orekit.forces.inertia.class-use
 import org.orekit.frames
 import org.orekit.propagation
 import org.orekit.propagation.events
@@ -106,4 +105,3 @@ class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.forces.inertia")``.
 
     InertialForces: typing.Type[InertialForces]
-    class-use: org.orekit.forces.inertia.class-use.__module_protocol__

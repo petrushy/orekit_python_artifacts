@@ -6,7 +6,6 @@ import org.hipparchus
 import org.hipparchus.geometry
 import org.hipparchus.geometry.enclosing
 import org.hipparchus.geometry.euclidean.oned
-import org.hipparchus.geometry.euclidean.threed.class-use
 import org.hipparchus.geometry.euclidean.twod
 import org.hipparchus.geometry.partitioning
 import typing
@@ -1689,7 +1688,7 @@ class PolyhedronsSet(org.hipparchus.geometry.partitioning.AbstractRegion[Euclide
     @typing.overload
     def __init__(self, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float): ...
     @typing.overload
-    def __init__(self, collection: typing.Union[java.util.Collection[org.hipparchus.geometry.partitioning.SubHyperplane[Euclidean3D]], typing.Sequence[org.hipparchus.geometry.partitioning.SubHyperplane[Euclidean3D]]], double: float): ...
+    def __init__(self, collection: typing.Union[java.util.Collection[org.hipparchus.geometry.partitioning.SubHyperplane[Euclidean3D]], typing.Sequence[org.hipparchus.geometry.partitioning.SubHyperplane[Euclidean3D]], typing.Set[org.hipparchus.geometry.partitioning.SubHyperplane[Euclidean3D]]], double: float): ...
     @typing.overload
     def __init__(self, list: java.util.List['Vector3D'], list2: java.util.List[typing.List[int]], double: float): ...
     @typing.overload
@@ -2784,4 +2783,3 @@ class __module_protocol__(typing.Protocol):
     SubPlane: typing.Type[SubPlane]
     Vector3D: typing.Type[Vector3D]
     Vector3DFormat: typing.Type[Vector3DFormat]
-    class-use: org.hipparchus.geometry.euclidean.threed.class-use.__module_protocol__

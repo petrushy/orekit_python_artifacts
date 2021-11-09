@@ -1,6 +1,5 @@
 import java.util
 import org.orekit.gnss.metric.messages
-import org.orekit.gnss.metric.messages.ssr.class-use
 import org.orekit.gnss.metric.messages.ssr.igm
 import org.orekit.gnss.metric.messages.ssr.subtype
 import typing
@@ -187,6 +186,5 @@ class __module_protocol__(typing.Protocol):
     SsrData: typing.Type[SsrData]
     SsrHeader: typing.Type[SsrHeader]
     SsrMessage: typing.Type[SsrMessage]
-    class-use: org.orekit.gnss.metric.messages.ssr.class-use.__module_protocol__
     igm: org.orekit.gnss.metric.messages.ssr.igm.__module_protocol__
     subtype: org.orekit.gnss.metric.messages.ssr.subtype.__module_protocol__

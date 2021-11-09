@@ -2,7 +2,6 @@ import java.io
 import java.lang
 import java.util
 import org.hipparchus.exception
-import org.hipparchus.optim.class-use
 import org.hipparchus.optim.linear
 import org.hipparchus.optim.nonlinear
 import org.hipparchus.optim.univariate
@@ -573,7 +572,6 @@ class __module_protocol__(typing.Protocol):
     SimplePointChecker: typing.Type[SimplePointChecker]
     SimpleValueChecker: typing.Type[SimpleValueChecker]
     SimpleVectorValueChecker: typing.Type[SimpleVectorValueChecker]
-    class-use: org.hipparchus.optim.class-use.__module_protocol__
     linear: org.hipparchus.optim.linear.__module_protocol__
     nonlinear: org.hipparchus.optim.nonlinear.__module_protocol__
     univariate: org.hipparchus.optim.univariate.__module_protocol__

@@ -3,7 +3,6 @@ import java.util
 import java.util.stream
 import org.hipparchus
 import org.hipparchus.geometry.euclidean.threed
-import org.orekit.attitudes.class-use
 import org.orekit.bodies
 import org.orekit.frames
 import org.orekit.propagation
@@ -118,7 +117,7 @@ class Attitude(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Attit
         """
         ...
     @typing.overload
-    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, collection: typing.Union[java.util.Collection[org.orekit.time.TimeInterpolable], typing.Sequence[org.orekit.time.TimeInterpolable]]) -> org.orekit.time.TimeInterpolable: ...
+    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, collection: typing.Union[java.util.Collection[org.orekit.time.TimeInterpolable], typing.Sequence[org.orekit.time.TimeInterpolable], typing.Set[org.orekit.time.TimeInterpolable]]) -> org.orekit.time.TimeInterpolable: ...
     @typing.overload
     def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, stream: java.util.stream.Stream['Attitude']) -> 'Attitude': ...
     def shiftedBy(self, double: float) -> 'Attitude':
@@ -295,7 +294,7 @@ class FieldAttitude(org.orekit.time.FieldTimeStamped[_FieldAttitude__T], org.ore
     def getRotationAcceleration(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldAttitude__T]: ...
     def getSpin(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldAttitude__T]: ...
     @typing.overload
-    def interpolate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], collection: typing.Union[java.util.Collection[_FieldAttitude__T], typing.Sequence[_FieldAttitude__T]]) -> _FieldAttitude__T: ...
+    def interpolate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], collection: typing.Union[java.util.Collection[_FieldAttitude__T], typing.Sequence[_FieldAttitude__T], typing.Set[_FieldAttitude__T]]) -> _FieldAttitude__T: ...
     @typing.overload
     def interpolate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldAttitude__T], stream: java.util.stream.Stream['FieldAttitude'[_FieldAttitude__T]]) -> 'FieldAttitude'[_FieldAttitude__T]: ...
     @typing.overload
@@ -963,7 +962,7 @@ class AggregateBoundedAttitudeProvider(BoundedAttitudeProvider):
         Since:
             10.3
     """
-    def __init__(self, collection: typing.Union[java.util.Collection[BoundedAttitudeProvider], typing.Sequence[BoundedAttitudeProvider]]): ...
+    def __init__(self, collection: typing.Union[java.util.Collection[BoundedAttitudeProvider], typing.Sequence[BoundedAttitudeProvider], typing.Set[BoundedAttitudeProvider]]): ...
     _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def getAttitude(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
@@ -1920,4 +1919,3 @@ class __module_protocol__(typing.Protocol):
     TargetPointing: typing.Type[TargetPointing]
     YawCompensation: typing.Type[YawCompensation]
     YawSteering: typing.Type[YawSteering]
-    class-use: org.orekit.attitudes.class-use.__module_protocol__

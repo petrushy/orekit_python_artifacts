@@ -1,7 +1,6 @@
 import java.lang
 import java.util
 import org.hipparchus.geometry
-import org.hipparchus.geometry.partitioning.class-use
 import typing
 
 
@@ -260,7 +259,7 @@ class NodesSet(java.lang.Iterable[BSPTree[_NodesSet__S]], typing.Generic[_NodesS
     """
     def __init__(self): ...
     def add(self, bSPTree: BSPTree[_NodesSet__S]) -> None: ...
-    def addAll(self, iterable: java.lang.Iterable[BSPTree[_NodesSet__S]]) -> None: ...
+    def addAll(self, iterable: typing.Union[java.lang.Iterable[BSPTree[_NodesSet__S]], typing.Sequence[BSPTree[_NodesSet__S]], typing.Set[BSPTree[_NodesSet__S]]]) -> None: ...
     def iterator(self) -> java.util.Iterator[BSPTree[_NodesSet__S]]: ...
 
 _Region__S = typing.TypeVar('_Region__S', bound=org.hipparchus.geometry.Space)  # <S>
@@ -708,4 +707,3 @@ class __module_protocol__(typing.Protocol):
     Side: typing.Type[Side]
     SubHyperplane: typing.Type[SubHyperplane]
     Transform: typing.Type[Transform]
-    class-use: org.hipparchus.geometry.partitioning.class-use.__module_protocol__

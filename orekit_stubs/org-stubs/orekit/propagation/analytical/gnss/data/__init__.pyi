@@ -1,4 +1,3 @@
-import org.orekit.propagation.analytical.gnss.data.class-use
 import org.orekit.time
 import typing
 
@@ -3515,4 +3514,3 @@ class __module_protocol__(typing.Protocol):
     QZSSNavigationMessage: typing.Type[QZSSNavigationMessage]
     SBASNavigationMessage: typing.Type[SBASNavigationMessage]
     SBASOrbitalElements: typing.Type[SBASOrbitalElements]
-    class-use: org.orekit.propagation.analytical.gnss.data.class-use.__module_protocol__

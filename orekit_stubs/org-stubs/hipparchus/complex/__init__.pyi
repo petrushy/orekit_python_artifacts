@@ -5,7 +5,6 @@ import java.util
 import org.hipparchus
 import org.hipparchus.analysis
 import org.hipparchus.analysis.integration
-import org.hipparchus.complex.class-use
 import org.hipparchus.util
 import typing
 
@@ -3026,4 +3025,3 @@ class __module_protocol__(typing.Protocol):
     FieldComplexUnivariateIntegrator: typing.Type[FieldComplexUnivariateIntegrator]
     Quaternion: typing.Type[Quaternion]
     RootsOfUnity: typing.Type[RootsOfUnity]
-    class-use: org.hipparchus.complex.class-use.__module_protocol__

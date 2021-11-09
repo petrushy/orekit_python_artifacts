@@ -1,6 +1,5 @@
 import java.lang
 import org.hipparchus
-import org.hipparchus.dfp.class-use
 import org.hipparchus.util
 import typing
 
@@ -1033,4 +1032,3 @@ class __module_protocol__(typing.Protocol):
     DfpDec: typing.Type[DfpDec]
     DfpField: typing.Type[DfpField]
     DfpMath: typing.Type[DfpMath]
-    class-use: org.hipparchus.dfp.class-use.__module_protocol__

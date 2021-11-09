@@ -6,7 +6,6 @@ import java.util.regex
 import jpype.protocol
 import org.hipparchus
 import org.orekit.bodies
-import org.orekit.data.class-use
 import org.orekit.forces.gravity.potential
 import org.orekit.frames
 import org.orekit.models.earth
@@ -2449,4 +2448,3 @@ class __module_protocol__(typing.Protocol):
     SimpleTimeStampedTableParser: typing.Type[SimpleTimeStampedTableParser]
     UnixCompressFilter: typing.Type[UnixCompressFilter]
     ZipJarCrawler: typing.Type[ZipJarCrawler]
-    class-use: org.orekit.data.class-use.__module_protocol__

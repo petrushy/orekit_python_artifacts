@@ -10,7 +10,6 @@ import org.orekit.models.earth.atmosphere
 import org.orekit.orbits
 import org.orekit.propagation
 import org.orekit.propagation.events
-import org.orekit.propagation.semianalytical.dsst.forces.class-use
 import org.orekit.propagation.semianalytical.dsst.utilities
 import org.orekit.time
 import org.orekit.utils
@@ -2812,4 +2811,3 @@ class __module_protocol__(typing.Protocol):
     FieldShortPeriodTerms: typing.Type[FieldShortPeriodTerms]
     ForceModelContext: typing.Type[ForceModelContext]
     ShortPeriodTerms: typing.Type[ShortPeriodTerms]
-    class-use: org.orekit.propagation.semianalytical.dsst.forces.class-use.__module_protocol__

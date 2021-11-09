@@ -3,7 +3,6 @@ import org.hipparchus
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.bodies
 import org.orekit.frames
-import org.orekit.models.earth.atmosphere.class-use
 import org.orekit.models.earth.atmosphere.data
 import org.orekit.time
 import org.orekit.utils
@@ -1241,5 +1240,4 @@ class __module_protocol__(typing.Protocol):
     NRLMSISE00: typing.Type[NRLMSISE00]
     NRLMSISE00InputParameters: typing.Type[NRLMSISE00InputParameters]
     SimpleExponentialAtmosphere: typing.Type[SimpleExponentialAtmosphere]
-    class-use: org.orekit.models.earth.atmosphere.class-use.__module_protocol__
     data: org.orekit.models.earth.atmosphere.data.__module_protocol__

@@ -4,7 +4,6 @@ import org.hipparchus.geometry.euclidean.threed
 import org.orekit.data
 import org.orekit.frames
 import org.orekit.gnss
-import org.orekit.gnss.antenna.class-use
 import org.orekit.gnss.attitude
 import org.orekit.time
 import org.orekit.utils
@@ -398,4 +397,3 @@ class __module_protocol__(typing.Protocol):
     ReceiverAntenna: typing.Type[ReceiverAntenna]
     SatelliteAntenna: typing.Type[SatelliteAntenna]
     SatelliteType: typing.Type[SatelliteType]
-    class-use: org.orekit.gnss.antenna.class-use.__module_protocol__

@@ -5,7 +5,6 @@ import org.hipparchus.analysis.differentiation
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.frames
 import org.orekit.orbits
-import org.orekit.propagation.semianalytical.dsst.utilities.class-use
 import org.orekit.propagation.semianalytical.dsst.utilities.hansen
 import org.orekit.time
 import typing
@@ -2312,5 +2311,4 @@ class __module_protocol__(typing.Protocol):
     NewcombOperators: typing.Type[NewcombOperators]
     ShortPeriodicsInterpolatedCoefficient: typing.Type[ShortPeriodicsInterpolatedCoefficient]
     UpperBounds: typing.Type[UpperBounds]
-    class-use: org.orekit.propagation.semianalytical.dsst.utilities.class-use.__module_protocol__
     hansen: org.orekit.propagation.semianalytical.dsst.utilities.hansen.__module_protocol__

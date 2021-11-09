@@ -5,7 +5,6 @@ import org.hipparchus.filtering.kalman
 import org.hipparchus.filtering.kalman.extended
 import org.hipparchus.linear
 import org.orekit.estimation.measurements
-import org.orekit.estimation.sequential.class-use
 import org.orekit.frames
 import org.orekit.orbits
 import org.orekit.propagation
@@ -405,7 +404,7 @@ class KalmanEstimator:
         
         """
         ...
-    def processMeasurements(self, iterable: java.lang.Iterable[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]]) -> typing.List[org.orekit.propagation.Propagator]: ...
+    def processMeasurements(self, iterable: typing.Union[java.lang.Iterable[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], typing.Sequence[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], typing.Set[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]]]) -> typing.List[org.orekit.propagation.Propagator]: ...
     def setObserver(self, kalmanObserver: 'KalmanObserver') -> None:
         """
             Set the observer.
@@ -1175,4 +1174,3 @@ class __module_protocol__(typing.Protocol):
     MeasurementDecorator: typing.Type[MeasurementDecorator]
     TLEKalmanModel: typing.Type[TLEKalmanModel]
     UnivariateProcessNoise: typing.Type[UnivariateProcessNoise]
-    class-use: org.orekit.estimation.sequential.class-use.__module_protocol__

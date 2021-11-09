@@ -2,7 +2,6 @@ import java.lang
 import java.util
 import org.hipparchus.random
 import org.orekit.estimation.measurements
-import org.orekit.estimation.measurements.generation.class-use
 import org.orekit.estimation.measurements.gnss
 import org.orekit.frames
 import org.orekit.propagation
@@ -557,4 +556,3 @@ class __module_protocol__(typing.Protocol):
     Scheduler: typing.Type[Scheduler]
     SignSemantic: typing.Type[SignSemantic]
     TurnAroundRangeBuilder: typing.Type[TurnAroundRangeBuilder]
-    class-use: org.orekit.estimation.measurements.generation.class-use.__module_protocol__

@@ -2,7 +2,6 @@ import java.io
 import java.lang
 import java.util
 import org.hipparchus.exception
-import org.hipparchus.stat.class-use
 import org.hipparchus.stat.correlation
 import org.hipparchus.stat.descriptive
 import org.hipparchus.stat.fitting
@@ -159,7 +158,7 @@ class Frequency(java.io.Serializable, typing.Generic[_Frequency__T]):
         """
         ...
     @typing.overload
-    def merge(self, collection: typing.Union[java.util.Collection['Frequency'[_Frequency__T]], typing.Sequence['Frequency'[_Frequency__T]]]) -> None: ...
+    def merge(self, collection: typing.Union[java.util.Collection['Frequency'[_Frequency__T]], typing.Sequence['Frequency'[_Frequency__T]], typing.Set['Frequency'[_Frequency__T]]]) -> None: ...
     @typing.overload
     def merge(self, frequency: 'Frequency'[_Frequency__T]) -> None: ...
     def toString(self) -> str:
@@ -534,7 +533,6 @@ class __module_protocol__(typing.Protocol):
     LocalizedStatFormats: typing.Type[LocalizedStatFormats]
     LongFrequency: typing.Type[LongFrequency]
     StatUtils: typing.Type[StatUtils]
-    class-use: org.hipparchus.stat.class-use.__module_protocol__
     correlation: org.hipparchus.stat.correlation.__module_protocol__
     descriptive: org.hipparchus.stat.descriptive.__module_protocol__
     fitting: org.hipparchus.stat.fitting.__module_protocol__

@@ -3,7 +3,6 @@ import org.orekit.data
 import org.orekit.frames
 import org.orekit.propagation
 import org.orekit.propagation.analytical
-import org.orekit.propagation.analytical.gnss.class-use
 import org.orekit.propagation.analytical.gnss.data
 import org.orekit.time
 import org.orekit.utils
@@ -683,5 +682,4 @@ class __module_protocol__(typing.Protocol):
     GNSSPropagatorBuilder: typing.Type[GNSSPropagatorBuilder]
     SBASPropagator: typing.Type[SBASPropagator]
     SBASPropagatorBuilder: typing.Type[SBASPropagatorBuilder]
-    class-use: org.orekit.propagation.analytical.gnss.class-use.__module_protocol__
     data: org.orekit.propagation.analytical.gnss.data.__module_protocol__

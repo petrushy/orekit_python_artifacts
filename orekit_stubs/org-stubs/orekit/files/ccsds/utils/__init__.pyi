@@ -3,7 +3,6 @@ import java.util.function
 import org.orekit.data
 import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
-import org.orekit.files.ccsds.utils.class-use
 import org.orekit.files.ccsds.utils.generation
 import org.orekit.files.ccsds.utils.lexical
 import org.orekit.files.ccsds.utils.parsing
@@ -169,7 +168,6 @@ class __module_protocol__(typing.Protocol):
 
     ContextBinding: typing.Type[ContextBinding]
     FileFormat: typing.Type[FileFormat]
-    class-use: org.orekit.files.ccsds.utils.class-use.__module_protocol__
     generation: org.orekit.files.ccsds.utils.generation.__module_protocol__
     lexical: org.orekit.files.ccsds.utils.lexical.__module_protocol__
     parsing: org.orekit.files.ccsds.utils.parsing.__module_protocol__

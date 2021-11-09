@@ -2,7 +2,6 @@ import java.io
 import org.hipparchus.analysis
 import org.hipparchus.optim
 import org.hipparchus.optim.nonlinear.scalar
-import org.hipparchus.optim.univariate.class-use
 import org.hipparchus.random
 import typing
 
@@ -259,4 +258,3 @@ class __module_protocol__(typing.Protocol):
     UnivariateObjectiveFunction: typing.Type[UnivariateObjectiveFunction]
     UnivariateOptimizer: typing.Type[UnivariateOptimizer]
     UnivariatePointValuePair: typing.Type[UnivariatePointValuePair]
-    class-use: org.hipparchus.optim.univariate.class-use.__module_protocol__

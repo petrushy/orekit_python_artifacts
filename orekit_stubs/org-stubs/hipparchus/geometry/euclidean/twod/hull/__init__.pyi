@@ -2,7 +2,6 @@ import java.io
 import java.util
 import org
 import org.hipparchus.geometry.euclidean.twod
-import org.hipparchus.geometry.euclidean.twod.hull.class-use
 import org.hipparchus.geometry.hull
 import org.hipparchus.geometry.partitioning
 import typing
@@ -26,7 +25,7 @@ class AklToussaintHeuristic:
             ` Akl-Toussaint heuristic (Wikipedia) <http://en.wikipedia.org/wiki/Convex_hull_algorithms#Akl-Toussaint_heuristic>`
     """
     @staticmethod
-    def reducePoints(collection: typing.Union[java.util.Collection[org.hipparchus.geometry.euclidean.twod.Vector2D], typing.Sequence[org.hipparchus.geometry.euclidean.twod.Vector2D]]) -> java.util.Collection[org.hipparchus.geometry.euclidean.twod.Vector2D]: ...
+    def reducePoints(collection: typing.Union[java.util.Collection[org.hipparchus.geometry.euclidean.twod.Vector2D], typing.Sequence[org.hipparchus.geometry.euclidean.twod.Vector2D], typing.Set[org.hipparchus.geometry.euclidean.twod.Vector2D]]) -> java.util.Collection[org.hipparchus.geometry.euclidean.twod.Vector2D]: ...
 
 class ConvexHull2D(org.hipparchus.geometry.hull.ConvexHull[org.hipparchus.geometry.euclidean.twod.Euclidean2D, org.hipparchus.geometry.euclidean.twod.Vector2D], java.io.Serializable):
     """
@@ -70,7 +69,7 @@ class ConvexHullGenerator2D(org.hipparchus.geometry.hull.ConvexHullGenerator[org
     
         Interface for convex hull generators in the two-dimensional euclidean space.
     """
-    def generate(self, collection: typing.Union[java.util.Collection[org.hipparchus.geometry.euclidean.twod.Vector2D], typing.Sequence[org.hipparchus.geometry.euclidean.twod.Vector2D]]) -> ConvexHull2D: ...
+    def generate(self, collection: typing.Union[java.util.Collection[org.hipparchus.geometry.euclidean.twod.Vector2D], typing.Sequence[org.hipparchus.geometry.euclidean.twod.Vector2D], typing.Set[org.hipparchus.geometry.euclidean.twod.Vector2D]]) -> ConvexHull2D: ...
 
 class MonotoneChain(org.hipparchus.geometry.euclidean.twod.hull.AbstractConvexHullGenerator2D):
     """
@@ -100,7 +99,7 @@ class MonotoneChain(org.hipparchus.geometry.euclidean.twod.hull.AbstractConvexHu
     def __init__(self, boolean: bool): ...
     @typing.overload
     def __init__(self, boolean: bool, double: float): ...
-    def findHullVertices(self, collection: typing.Union[java.util.Collection[org.hipparchus.geometry.euclidean.twod.Vector2D], typing.Sequence[org.hipparchus.geometry.euclidean.twod.Vector2D]]) -> java.util.Collection[org.hipparchus.geometry.euclidean.twod.Vector2D]: ...
+    def findHullVertices(self, collection: typing.Union[java.util.Collection[org.hipparchus.geometry.euclidean.twod.Vector2D], typing.Sequence[org.hipparchus.geometry.euclidean.twod.Vector2D], typing.Set[org.hipparchus.geometry.euclidean.twod.Vector2D]]) -> java.util.Collection[org.hipparchus.geometry.euclidean.twod.Vector2D]: ...
 
 class AbstractConvexHullGenerator2D: ...
 
@@ -113,4 +112,3 @@ class __module_protocol__(typing.Protocol):
     ConvexHull2D: typing.Type[ConvexHull2D]
     ConvexHullGenerator2D: typing.Type[ConvexHullGenerator2D]
     MonotoneChain: typing.Type[MonotoneChain]
-    class-use: org.hipparchus.geometry.euclidean.twod.hull.class-use.__module_protocol__
