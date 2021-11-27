@@ -1,7 +1,6 @@
 import java.io
 import java.lang
 import java.util
-import org.hipparchus.exception.class-use
 import typing
 
 
@@ -647,4 +646,3 @@ class __module_protocol__(typing.Protocol):
     MathRuntimeException: typing.Type[MathRuntimeException]
     NullArgumentException: typing.Type[NullArgumentException]
     UTF8Control: typing.Type[UTF8Control]
-    class-use: org.hipparchus.exception.class-use.__module_protocol__

@@ -7,7 +7,6 @@ import org.orekit.attitudes
 import org.orekit.frames
 import org.orekit.orbits
 import org.orekit.propagation.analytical
-import org.orekit.propagation.class-use
 import org.orekit.propagation.conversion
 import org.orekit.propagation.events
 import org.orekit.propagation.integration
@@ -573,7 +572,7 @@ class FieldSpacecraftState(org.orekit.time.FieldTimeStamped[_FieldSpacecraftStat
         """
         ...
     @typing.overload
-    def interpolate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], collection: typing.Union[java.util.Collection[_FieldSpacecraftState__T], typing.Sequence[_FieldSpacecraftState__T]]) -> _FieldSpacecraftState__T: ...
+    def interpolate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], collection: typing.Union[java.util.Collection[_FieldSpacecraftState__T], typing.Sequence[_FieldSpacecraftState__T], typing.Set[_FieldSpacecraftState__T]]) -> _FieldSpacecraftState__T: ...
     @typing.overload
     def interpolate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldSpacecraftState__T], stream: java.util.stream.Stream['FieldSpacecraftState'[_FieldSpacecraftState__T]]) -> 'FieldSpacecraftState'[_FieldSpacecraftState__T]: ...
     def isOrbitDefined(self) -> bool:
@@ -1408,7 +1407,7 @@ class SpacecraftState(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable
         """
         ...
     @typing.overload
-    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, collection: typing.Union[java.util.Collection[org.orekit.time.TimeInterpolable], typing.Sequence[org.orekit.time.TimeInterpolable]]) -> org.orekit.time.TimeInterpolable: ...
+    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, collection: typing.Union[java.util.Collection[org.orekit.time.TimeInterpolable], typing.Sequence[org.orekit.time.TimeInterpolable], typing.Set[org.orekit.time.TimeInterpolable]]) -> org.orekit.time.TimeInterpolable: ...
     @typing.overload
     def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, stream: java.util.stream.Stream['SpacecraftState']) -> 'SpacecraftState': ...
     def isOrbitDefined(self) -> bool:
@@ -1850,7 +1849,6 @@ class __module_protocol__(typing.Protocol):
     PropagatorsParallelizer: typing.Type[PropagatorsParallelizer]
     SpacecraftState: typing.Type[SpacecraftState]
     analytical: org.orekit.propagation.analytical.__module_protocol__
-    class-use: org.orekit.propagation.class-use.__module_protocol__
     conversion: org.orekit.propagation.conversion.__module_protocol__
     events: org.orekit.propagation.events.__module_protocol__
     integration: org.orekit.propagation.integration.__module_protocol__

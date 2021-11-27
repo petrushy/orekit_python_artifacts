@@ -1,6 +1,5 @@
 import org.hipparchus
 import org.hipparchus.analysis.polynomials
-import org.orekit.propagation.semianalytical.dsst.utilities.hansen.class-use
 import typing
 
 
@@ -543,4 +542,3 @@ class __module_protocol__(typing.Protocol):
     HansenUtilities: typing.Type[HansenUtilities]
     HansenZonalLinear: typing.Type[HansenZonalLinear]
     PolynomialFunctionMatrix: typing.Type[PolynomialFunctionMatrix]
-    class-use: org.orekit.propagation.semianalytical.dsst.utilities.hansen.class-use.__module_protocol__

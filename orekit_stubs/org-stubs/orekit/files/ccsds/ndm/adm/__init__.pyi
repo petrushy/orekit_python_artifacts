@@ -7,7 +7,6 @@ import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.ndm.adm.aem
 import org.orekit.files.ccsds.ndm.adm.apm
-import org.orekit.files.ccsds.ndm.adm.class-use
 import org.orekit.files.ccsds.section
 import org.orekit.files.ccsds.utils
 import org.orekit.files.ccsds.utils.lexical
@@ -685,4 +684,3 @@ class __module_protocol__(typing.Protocol):
     RotationXmlTokenBuilder: typing.Type[RotationXmlTokenBuilder]
     aem: org.orekit.files.ccsds.ndm.adm.aem.__module_protocol__
     apm: org.orekit.files.ccsds.ndm.adm.apm.__module_protocol__
-    class-use: org.orekit.files.ccsds.ndm.adm.class-use.__module_protocol__

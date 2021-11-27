@@ -2,7 +2,6 @@ import java.io
 import java.lang
 import java.util.function
 import org.hipparchus.linear
-import org.hipparchus.stat.descriptive.class-use
 import org.hipparchus.stat.descriptive.moment
 import org.hipparchus.stat.descriptive.rank
 import org.hipparchus.stat.descriptive.summary
@@ -50,7 +49,7 @@ class AggregatableStatistic(typing.Generic[_AggregatableStatistic__T]):
         """
         ...
     @typing.overload
-    def aggregate(self, iterable: java.lang.Iterable[_AggregatableStatistic__T]) -> None: ...
+    def aggregate(self, iterable: typing.Union[java.lang.Iterable[_AggregatableStatistic__T], typing.Sequence[_AggregatableStatistic__T], typing.Set[_AggregatableStatistic__T]]) -> None: ...
     @typing.overload
     def aggregate(self, tArray: typing.List[_AggregatableStatistic__T]) -> None: ...
 
@@ -187,7 +186,7 @@ class StatisticalSummary:
     """
     @typing.overload
     @staticmethod
-    def aggregate(iterable: java.lang.Iterable['StatisticalSummary']) -> 'StatisticalSummary':
+    def aggregate(iterable: typing.Union[java.lang.Iterable['StatisticalSummary'], typing.Sequence['StatisticalSummary'], typing.Set['StatisticalSummary']]) -> 'StatisticalSummary':
         """
             Computes aggregated statistical summaries.
         
@@ -1298,7 +1297,7 @@ class StreamingStatistics(StatisticalSummary, AggregatableStatistic['StreamingSt
         """
         ...
     @typing.overload
-    def aggregate(self, iterable: java.lang.Iterable[typing.Any]) -> None:
+    def aggregate(self, iterable: typing.Union[java.lang.Iterable[typing.Any], typing.Sequence[typing.Any], typing.Set[typing.Any]]) -> None:
         """
             Aggregates the provided instance into this instance.
         
@@ -1743,7 +1742,6 @@ class __module_protocol__(typing.Protocol):
     StreamingStatistics: typing.Type[StreamingStatistics]
     UnivariateStatistic: typing.Type[UnivariateStatistic]
     WeightedEvaluation: typing.Type[WeightedEvaluation]
-    class-use: org.hipparchus.stat.descriptive.class-use.__module_protocol__
     moment: org.hipparchus.stat.descriptive.moment.__module_protocol__
     rank: org.hipparchus.stat.descriptive.rank.__module_protocol__
     summary: org.hipparchus.stat.descriptive.summary.__module_protocol__

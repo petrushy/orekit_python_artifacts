@@ -1,6 +1,5 @@
 import java.lang
 import org.hipparchus.random
-import org.hipparchus.stat.ranking.class-use
 import typing
 
 
@@ -250,4 +249,3 @@ class __module_protocol__(typing.Protocol):
     NaturalRanking: typing.Type[NaturalRanking]
     RankingAlgorithm: typing.Type[RankingAlgorithm]
     TiesStrategy: typing.Type[TiesStrategy]
-    class-use: org.hipparchus.stat.ranking.class-use.__module_protocol__

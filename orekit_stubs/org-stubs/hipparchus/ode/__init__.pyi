@@ -6,7 +6,6 @@ import org.hipparchus.analysis
 import org.hipparchus.analysis.solvers
 import org.hipparchus.complex
 import org.hipparchus.exception
-import org.hipparchus.ode.class-use
 import org.hipparchus.ode.events
 import org.hipparchus.ode.nonstiff
 import org.hipparchus.ode.sampling
@@ -2580,7 +2579,6 @@ class __module_protocol__(typing.Protocol):
     SecondOrderODE: typing.Type[SecondOrderODE]
     SecondaryODE: typing.Type[SecondaryODE]
     VariationalEquation: typing.Type[VariationalEquation]
-    class-use: org.hipparchus.ode.class-use.__module_protocol__
     events: org.hipparchus.ode.events.__module_protocol__
     nonstiff: org.hipparchus.ode.nonstiff.__module_protocol__
     sampling: org.hipparchus.ode.sampling.__module_protocol__

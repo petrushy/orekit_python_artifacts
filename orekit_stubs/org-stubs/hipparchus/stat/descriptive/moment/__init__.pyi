@@ -1,7 +1,6 @@
 import java.io
 import java.lang
 import org.hipparchus.stat.descriptive
-import org.hipparchus.stat.descriptive.moment.class-use
 import org.hipparchus.stat.descriptive.summary
 import typing
 
@@ -37,7 +36,7 @@ class GeometricMean(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateS
     @typing.overload
     def __init__(self, sumOfLogs: org.hipparchus.stat.descriptive.summary.SumOfLogs): ...
     @typing.overload
-    def aggregate(self, iterable: java.lang.Iterable[typing.Any]) -> None:
+    def aggregate(self, iterable: typing.Union[java.lang.Iterable[typing.Any], typing.Sequence[typing.Any], typing.Set[typing.Any]]) -> None:
         """
             Aggregates the provided instance into this instance.
         
@@ -318,7 +317,7 @@ class Mean(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic,
     @typing.overload
     def __init__(self, mean: 'Mean'): ...
     @typing.overload
-    def aggregate(self, iterable: java.lang.Iterable[typing.Any]) -> None:
+    def aggregate(self, iterable: typing.Union[java.lang.Iterable[typing.Any], typing.Sequence[typing.Any], typing.Set[typing.Any]]) -> None:
         """
             Aggregates the provided instance into this instance.
         
@@ -806,7 +805,7 @@ class Variance(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatis
     @typing.overload
     def __init__(self, variance: 'Variance'): ...
     @typing.overload
-    def aggregate(self, iterable: java.lang.Iterable[typing.Any]) -> None:
+    def aggregate(self, iterable: typing.Union[java.lang.Iterable[typing.Any], typing.Sequence[typing.Any], typing.Set[typing.Any]]) -> None:
         """
             Aggregates the provided instance into this instance.
         
@@ -1001,7 +1000,7 @@ class SecondMoment(FirstMoment, org.hipparchus.stat.descriptive.AggregatableStat
     @typing.overload
     def __init__(self, secondMoment: 'SecondMoment'): ...
     @typing.overload
-    def aggregate(self, iterable: java.lang.Iterable[typing.Any]) -> None:
+    def aggregate(self, iterable: typing.Union[java.lang.Iterable[typing.Any], typing.Sequence[typing.Any], typing.Set[typing.Any]]) -> None:
         """
             Aggregates the provided instance into this instance.
         
@@ -1100,4 +1099,3 @@ class __module_protocol__(typing.Protocol):
     StandardDeviation: typing.Type[StandardDeviation]
     ThirdMoment: typing.Type[ThirdMoment]
     Variance: typing.Type[Variance]
-    class-use: org.hipparchus.stat.descriptive.moment.class-use.__module_protocol__

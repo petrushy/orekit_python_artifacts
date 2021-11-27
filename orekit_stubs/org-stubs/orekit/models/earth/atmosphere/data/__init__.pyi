@@ -5,7 +5,6 @@ import org.hipparchus.exception
 import org.orekit.data
 import org.orekit.errors
 import org.orekit.models.earth.atmosphere
-import org.orekit.models.earth.atmosphere.data.class-use
 import org.orekit.time
 import typing
 
@@ -655,4 +654,3 @@ class __module_protocol__(typing.Protocol):
     CssiSpaceWeatherData: typing.Type[CssiSpaceWeatherData]
     CssiSpaceWeatherDataLoader: typing.Type[CssiSpaceWeatherDataLoader]
     MarshallSolarActivityFutureEstimation: typing.Type[MarshallSolarActivityFutureEstimation]
-    class-use: org.orekit.models.earth.atmosphere.data.class-use.__module_protocol__

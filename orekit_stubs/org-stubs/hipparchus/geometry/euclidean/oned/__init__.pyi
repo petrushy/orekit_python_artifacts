@@ -4,7 +4,6 @@ import java.text
 import java.util
 import org.hipparchus.exception
 import org.hipparchus.geometry
-import org.hipparchus.geometry.euclidean.oned.class-use
 import org.hipparchus.geometry.partitioning
 import typing
 
@@ -125,7 +124,7 @@ class IntervalsSet(org.hipparchus.geometry.partitioning.AbstractRegion[Euclidean
     @typing.overload
     def __init__(self, double: float, double2: float, double3: float): ...
     @typing.overload
-    def __init__(self, collection: typing.Union[java.util.Collection[org.hipparchus.geometry.partitioning.SubHyperplane[Euclidean1D]], typing.Sequence[org.hipparchus.geometry.partitioning.SubHyperplane[Euclidean1D]]], double: float): ...
+    def __init__(self, collection: typing.Union[java.util.Collection[org.hipparchus.geometry.partitioning.SubHyperplane[Euclidean1D]], typing.Sequence[org.hipparchus.geometry.partitioning.SubHyperplane[Euclidean1D]], typing.Set[org.hipparchus.geometry.partitioning.SubHyperplane[Euclidean1D]]], double: float): ...
     @typing.overload
     def __init__(self, bSPTree: org.hipparchus.geometry.partitioning.BSPTree[Euclidean1D], double: float): ...
     def asList(self) -> java.util.List[Interval]: ...
@@ -788,4 +787,3 @@ class __module_protocol__(typing.Protocol):
     SubOrientedPoint: typing.Type[SubOrientedPoint]
     Vector1D: typing.Type[Vector1D]
     Vector1DFormat: typing.Type[Vector1DFormat]
-    class-use: org.hipparchus.geometry.euclidean.oned.class-use.__module_protocol__

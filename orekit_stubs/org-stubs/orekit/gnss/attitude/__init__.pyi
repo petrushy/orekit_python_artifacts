@@ -1,7 +1,6 @@
 import org
 import org.orekit.attitudes
 import org.orekit.frames
-import org.orekit.gnss.attitude.class-use
 import org.orekit.time
 import org.orekit.utils
 import typing
@@ -240,4 +239,3 @@ class __module_protocol__(typing.Protocol):
     Galileo: typing.Type[Galileo]
     GenericGNSS: typing.Type[GenericGNSS]
     Glonass: typing.Type[Glonass]
-    class-use: org.orekit.gnss.attitude.class-use.__module_protocol__

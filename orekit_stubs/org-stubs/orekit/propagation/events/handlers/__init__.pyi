@@ -3,7 +3,6 @@ import org.hipparchus
 import org.hipparchus.ode.events
 import org.orekit.propagation
 import org.orekit.propagation.events
-import org.orekit.propagation.events.handlers.class-use
 import org.orekit.time
 import typing
 
@@ -528,4 +527,3 @@ class __module_protocol__(typing.Protocol):
     StopOnDecreasing: typing.Type[StopOnDecreasing]
     StopOnEvent: typing.Type[StopOnEvent]
     StopOnIncreasing: typing.Type[StopOnIncreasing]
-    class-use: org.orekit.propagation.events.handlers.class-use.__module_protocol__

@@ -2,7 +2,6 @@ import java.io
 import java.lang
 import java.util
 import org.hipparchus.geometry
-import org.hipparchus.geometry.enclosing.class-use
 import typing
 
 
@@ -18,7 +17,7 @@ class Encloser(typing.Generic[_Encloser__S, _Encloser__P]):
         Also see:
             :class:`~org.hipparchus.geometry.enclosing.EnclosingBall`
     """
-    def enclose(self, iterable: java.lang.Iterable[_Encloser__P]) -> 'EnclosingBall'[_Encloser__S, _Encloser__P]: ...
+    def enclose(self, iterable: typing.Union[java.lang.Iterable[_Encloser__P], typing.Sequence[_Encloser__P], typing.Set[_Encloser__P]]) -> 'EnclosingBall'[_Encloser__S, _Encloser__P]: ...
 
 _EnclosingBall__S = typing.TypeVar('_EnclosingBall__S', bound=org.hipparchus.geometry.Space)  # <S>
 _EnclosingBall__P = typing.TypeVar('_EnclosingBall__P', bound=org.hipparchus.geometry.Point)  # <P>
@@ -131,8 +130,8 @@ class WelzlEncloser(Encloser[_WelzlEncloser__S, _WelzlEncloser__P], typing.Gener
         avoid performing local copies of data have been included.
     """
     def __init__(self, double: float, supportBallGenerator: SupportBallGenerator[_WelzlEncloser__S, _WelzlEncloser__P]): ...
-    def enclose(self, iterable: java.lang.Iterable[_WelzlEncloser__P]) -> EnclosingBall[_WelzlEncloser__S, _WelzlEncloser__P]: ...
-    def selectFarthest(self, iterable: java.lang.Iterable[_WelzlEncloser__P], enclosingBall: EnclosingBall[_WelzlEncloser__S, _WelzlEncloser__P]) -> _WelzlEncloser__P: ...
+    def enclose(self, iterable: typing.Union[java.lang.Iterable[_WelzlEncloser__P], typing.Sequence[_WelzlEncloser__P], typing.Set[_WelzlEncloser__P]]) -> EnclosingBall[_WelzlEncloser__S, _WelzlEncloser__P]: ...
+    def selectFarthest(self, iterable: typing.Union[java.lang.Iterable[_WelzlEncloser__P], typing.Sequence[_WelzlEncloser__P], typing.Set[_WelzlEncloser__P]], enclosingBall: EnclosingBall[_WelzlEncloser__S, _WelzlEncloser__P]) -> _WelzlEncloser__P: ...
 
 
 class __module_protocol__(typing.Protocol):
@@ -142,4 +141,3 @@ class __module_protocol__(typing.Protocol):
     EnclosingBall: typing.Type[EnclosingBall]
     SupportBallGenerator: typing.Type[SupportBallGenerator]
     WelzlEncloser: typing.Type[WelzlEncloser]
-    class-use: org.hipparchus.geometry.enclosing.class-use.__module_protocol__

@@ -1,6 +1,5 @@
 import org.hipparchus
 import org.hipparchus.complex
-import org.hipparchus.special.elliptic.jacobi.class-use
 import typing
 
 
@@ -726,4 +725,3 @@ class __module_protocol__(typing.Protocol):
     JacobiEllipticBuilder: typing.Type[JacobiEllipticBuilder]
     JacobiTheta: typing.Type[JacobiTheta]
     Theta: typing.Type[Theta]
-    class-use: org.hipparchus.special.elliptic.jacobi.class-use.__module_protocol__

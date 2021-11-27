@@ -1,7 +1,6 @@
 import java.lang
 import java.util
 import org.orekit.files.ccsds.definitions
-import org.orekit.files.ccsds.section.class-use
 import org.orekit.files.ccsds.utils
 import org.orekit.files.ccsds.utils.generation
 import org.orekit.files.ccsds.utils.lexical
@@ -743,4 +742,3 @@ class __module_protocol__(typing.Protocol):
     Segment: typing.Type[Segment]
     XmlStructureKey: typing.Type[XmlStructureKey]
     XmlStructureProcessingState: typing.Type[XmlStructureProcessingState]
-    class-use: org.orekit.files.ccsds.section.class-use.__module_protocol__

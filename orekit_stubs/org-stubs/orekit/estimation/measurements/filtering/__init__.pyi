@@ -1,5 +1,4 @@
 import org.orekit.estimation.measurements
-import org.orekit.estimation.measurements.filtering.class-use
 import org.orekit.propagation
 import typing
 
@@ -61,4 +60,3 @@ class __module_protocol__(typing.Protocol):
     ElevationFilter: typing.Type[ElevationFilter]
     MeasurementFilter: typing.Type[MeasurementFilter]
     ResidualFilter: typing.Type[ResidualFilter]
-    class-use: org.orekit.estimation.measurements.filtering.class-use.__module_protocol__

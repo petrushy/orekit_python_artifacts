@@ -6,7 +6,6 @@ import org.hipparchus
 import org.hipparchus.geometry
 import org.hipparchus.geometry.enclosing
 import org.hipparchus.geometry.euclidean.oned
-import org.hipparchus.geometry.euclidean.twod.class-use
 import org.hipparchus.geometry.euclidean.twod.hull
 import org.hipparchus.geometry.partitioning
 import typing
@@ -1147,7 +1146,7 @@ class PolygonsSet(org.hipparchus.geometry.partitioning.AbstractRegion[Euclidean2
     @typing.overload
     def __init__(self, double: float, vector2DArray: typing.List['Vector2D']): ...
     @typing.overload
-    def __init__(self, collection: typing.Union[java.util.Collection[org.hipparchus.geometry.partitioning.SubHyperplane[Euclidean2D]], typing.Sequence[org.hipparchus.geometry.partitioning.SubHyperplane[Euclidean2D]]], double: float): ...
+    def __init__(self, collection: typing.Union[java.util.Collection[org.hipparchus.geometry.partitioning.SubHyperplane[Euclidean2D]], typing.Sequence[org.hipparchus.geometry.partitioning.SubHyperplane[Euclidean2D]], typing.Set[org.hipparchus.geometry.partitioning.SubHyperplane[Euclidean2D]]], double: float): ...
     @typing.overload
     def __init__(self, bSPTree: org.hipparchus.geometry.partitioning.BSPTree[Euclidean2D], double: float): ...
     def buildNew(self, bSPTree: org.hipparchus.geometry.partitioning.BSPTree[Euclidean2D]) -> 'PolygonsSet': ...
@@ -1861,5 +1860,4 @@ class __module_protocol__(typing.Protocol):
     SubLine: typing.Type[SubLine]
     Vector2D: typing.Type[Vector2D]
     Vector2DFormat: typing.Type[Vector2DFormat]
-    class-use: org.hipparchus.geometry.euclidean.twod.class-use.__module_protocol__
     hull: org.hipparchus.geometry.euclidean.twod.hull.__module_protocol__

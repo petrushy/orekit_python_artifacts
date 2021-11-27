@@ -7,7 +7,6 @@ import org.orekit.errors
 import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.utils
-import org.orekit.files.ccsds.utils.lexical.class-use
 import org.orekit.time
 import org.orekit.utils.units
 import org.xml.sax
@@ -916,4 +915,3 @@ class __module_protocol__(typing.Protocol):
     UserDefinedXmlTokenBuilder: typing.Type[UserDefinedXmlTokenBuilder]
     XmlLexicalAnalyzer: typing.Type[XmlLexicalAnalyzer]
     XmlTokenBuilder: typing.Type[XmlTokenBuilder]
-    class-use: org.orekit.files.ccsds.utils.lexical.class-use.__module_protocol__

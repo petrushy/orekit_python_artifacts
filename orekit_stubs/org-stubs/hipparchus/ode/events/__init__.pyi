@@ -3,7 +3,6 @@ import org.hipparchus
 import org.hipparchus.analysis
 import org.hipparchus.analysis.solvers
 import org.hipparchus.ode
-import org.hipparchus.ode.events.class-use
 import org.hipparchus.ode.sampling
 import typing
 
@@ -741,4 +740,3 @@ class __module_protocol__(typing.Protocol):
     FieldODEEventHandler: typing.Type[FieldODEEventHandler]
     FilterType: typing.Type[FilterType]
     ODEEventHandler: typing.Type[ODEEventHandler]
-    class-use: org.hipparchus.ode.events.class-use.__module_protocol__

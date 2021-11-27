@@ -4,7 +4,6 @@ import org.hipparchus
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.attitudes
 import org.orekit.forces
-import org.orekit.forces.empirical.class-use
 import org.orekit.propagation
 import org.orekit.propagation.events
 import org.orekit.time
@@ -351,4 +350,3 @@ class __module_protocol__(typing.Protocol):
     ParametricAcceleration: typing.Type[ParametricAcceleration]
     PolynomialAccelerationModel: typing.Type[PolynomialAccelerationModel]
     TimeSpanParametricAcceleration: typing.Type[TimeSpanParametricAcceleration]
-    class-use: org.orekit.forces.empirical.class-use.__module_protocol__

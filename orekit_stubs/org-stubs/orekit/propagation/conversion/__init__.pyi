@@ -11,7 +11,6 @@ import org.orekit.frames
 import org.orekit.orbits
 import org.orekit.propagation
 import org.orekit.propagation.analytical.tle
-import org.orekit.propagation.conversion.class-use
 import org.orekit.propagation.integration
 import org.orekit.propagation.numerical
 import org.orekit.propagation.semianalytical.dsst
@@ -1203,4 +1202,3 @@ class __module_protocol__(typing.Protocol):
     PropagatorConverter: typing.Type[PropagatorConverter]
     TLEPropagatorBuilder: typing.Type[TLEPropagatorBuilder]
     ThreeEighthesIntegratorBuilder: typing.Type[ThreeEighthesIntegratorBuilder]
-    class-use: org.orekit.propagation.conversion.class-use.__module_protocol__

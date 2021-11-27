@@ -1,7 +1,6 @@
 import org.hipparchus
 import org.hipparchus.linear
 import org.hipparchus.ode
-import org.hipparchus.ode.nonstiff.class-use
 import typing
 
 
@@ -2790,4 +2789,3 @@ class __module_protocol__(typing.Protocol):
     StepsizeHelper: typing.Type[StepsizeHelper]
     ThreeEighthesFieldIntegrator: typing.Type[ThreeEighthesFieldIntegrator]
     ThreeEighthesIntegrator: typing.Type[ThreeEighthesIntegrator]
-    class-use: org.hipparchus.ode.nonstiff.class-use.__module_protocol__

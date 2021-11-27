@@ -1,7 +1,6 @@
 import java.util
 import org.hipparchus
 import org.orekit.propagation
-import org.orekit.propagation.sampling.class-use
 import org.orekit.time
 import typing
 
@@ -618,4 +617,3 @@ class __module_protocol__(typing.Protocol):
     OrekitStepInterpolator: typing.Type[OrekitStepInterpolator]
     OrekitStepNormalizer: typing.Type[OrekitStepNormalizer]
     StepHandlerMultiplexer: typing.Type[StepHandlerMultiplexer]
-    class-use: org.orekit.propagation.sampling.class-use.__module_protocol__

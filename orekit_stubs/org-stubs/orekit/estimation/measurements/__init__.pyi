@@ -5,7 +5,6 @@ import org.hipparchus
 import org.hipparchus.analysis.differentiation
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.bodies
-import org.orekit.estimation.measurements.class-use
 import org.orekit.estimation.measurements.filtering
 import org.orekit.estimation.measurements.generation
 import org.orekit.estimation.measurements.gnss
@@ -1609,7 +1608,6 @@ class __module_protocol__(typing.Protocol):
     Range: typing.Type[Range]
     RangeRate: typing.Type[RangeRate]
     TurnAroundRange: typing.Type[TurnAroundRange]
-    class-use: org.orekit.estimation.measurements.class-use.__module_protocol__
     filtering: org.orekit.estimation.measurements.filtering.__module_protocol__
     generation: org.orekit.estimation.measurements.generation.__module_protocol__
     gnss: org.orekit.estimation.measurements.gnss.__module_protocol__

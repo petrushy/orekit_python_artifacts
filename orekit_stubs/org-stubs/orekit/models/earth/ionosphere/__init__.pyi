@@ -5,7 +5,6 @@ import org.orekit.bodies
 import org.orekit.data
 import org.orekit.frames
 import org.orekit.gnss.metric.messages.ssr.subtype
-import org.orekit.models.earth.ionosphere.class-use
 import org.orekit.propagation
 import org.orekit.time
 import org.orekit.utils
@@ -956,4 +955,3 @@ class __module_protocol__(typing.Protocol):
     NeQuickModel: typing.Type[NeQuickModel]
     SingleLayerModelMappingFunction: typing.Type[SingleLayerModelMappingFunction]
     SsrVtecIonosphericModel: typing.Type[SsrVtecIonosphericModel]
-    class-use: org.orekit.models.earth.ionosphere.class-use.__module_protocol__

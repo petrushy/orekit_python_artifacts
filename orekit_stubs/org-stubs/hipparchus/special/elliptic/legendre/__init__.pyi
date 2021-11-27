@@ -1,6 +1,5 @@
 import org.hipparchus
 import org.hipparchus.complex
-import org.hipparchus.special.elliptic.legendre.class-use
 import typing
 
 
@@ -166,4 +165,3 @@ class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.hipparchus.special.elliptic.legendre")``.
 
     LegendreEllipticIntegral: typing.Type[LegendreEllipticIntegral]
-    class-use: org.hipparchus.special.elliptic.legendre.class-use.__module_protocol__

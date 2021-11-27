@@ -1,5 +1,4 @@
 import org.hipparchus.linear
-import org.hipparchus.stat.correlation.class-use
 import org.hipparchus.stat.ranking
 import typing
 
@@ -287,4 +286,3 @@ class __module_protocol__(typing.Protocol):
     PearsonsCorrelation: typing.Type[PearsonsCorrelation]
     SpearmansCorrelation: typing.Type[SpearmansCorrelation]
     StorelessCovariance: typing.Type[StorelessCovariance]
-    class-use: org.hipparchus.stat.correlation.class-use.__module_protocol__

@@ -1,4 +1,3 @@
-import org.hipparchus.stat.interval.class-use
 import typing
 
 
@@ -76,4 +75,3 @@ class __module_protocol__(typing.Protocol):
 
     BinomialProportion: typing.Type[BinomialProportion]
     ConfidenceInterval: typing.Type[ConfidenceInterval]
-    class-use: org.hipparchus.stat.interval.class-use.__module_protocol__

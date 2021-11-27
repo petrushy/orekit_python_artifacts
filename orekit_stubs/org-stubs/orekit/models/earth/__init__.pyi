@@ -9,7 +9,6 @@ import org.orekit.forces.gravity.potential
 import org.orekit.frames
 import org.orekit.models
 import org.orekit.models.earth.atmosphere
-import org.orekit.models.earth.class-use
 import org.orekit.models.earth.displacement
 import org.orekit.models.earth.ionosphere
 import org.orekit.models.earth.tessellation
@@ -1175,7 +1174,6 @@ class __module_protocol__(typing.Protocol):
     LazyLoadedGeoMagneticFields: typing.Type[LazyLoadedGeoMagneticFields]
     ReferenceEllipsoid: typing.Type[ReferenceEllipsoid]
     atmosphere: org.orekit.models.earth.atmosphere.__module_protocol__
-    class-use: org.orekit.models.earth.class-use.__module_protocol__
     displacement: org.orekit.models.earth.displacement.__module_protocol__
     ionosphere: org.orekit.models.earth.ionosphere.__module_protocol__
     tessellation: org.orekit.models.earth.tessellation.__module_protocol__

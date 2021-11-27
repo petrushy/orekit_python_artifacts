@@ -7,7 +7,6 @@ import org.orekit.data
 import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.ndm.adm
-import org.orekit.files.ccsds.ndm.adm.apm.class-use
 import org.orekit.files.ccsds.section
 import org.orekit.files.ccsds.utils
 import org.orekit.files.ccsds.utils.generation
@@ -1566,4 +1565,3 @@ class __module_protocol__(typing.Protocol):
     SpacecraftParametersKey: typing.Type[SpacecraftParametersKey]
     SpinStabilized: typing.Type[SpinStabilized]
     SpinStabilizedKey: typing.Type[SpinStabilizedKey]
-    class-use: org.orekit.files.ccsds.ndm.adm.apm.class-use.__module_protocol__

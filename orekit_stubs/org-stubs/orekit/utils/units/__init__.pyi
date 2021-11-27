@@ -2,7 +2,6 @@ import java.io
 import java.lang
 import java.util
 import org.hipparchus.fraction
-import org.orekit.utils.units.class-use
 import typing
 
 
@@ -814,4 +813,3 @@ class __module_protocol__(typing.Protocol):
     Unit: typing.Type[Unit]
     UnitsCache: typing.Type[UnitsCache]
     UnitsConverter: typing.Type[UnitsConverter]
-    class-use: org.orekit.utils.units.class-use.__module_protocol__

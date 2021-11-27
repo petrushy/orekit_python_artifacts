@@ -3,7 +3,6 @@ import org.hipparchus.linear
 import org.hipparchus.optim
 import org.hipparchus.optim.nonlinear.vector.leastsquares
 import org.hipparchus.util
-import org.orekit.estimation.leastsquares.class-use
 import org.orekit.estimation.measurements
 import org.orekit.orbits
 import org.orekit.propagation
@@ -540,4 +539,3 @@ class __module_protocol__(typing.Protocol):
     ModelObserver: typing.Type[ModelObserver]
     SequentialBatchLSEstimator: typing.Type[SequentialBatchLSEstimator]
     TLEBatchLSModel: typing.Type[TLEBatchLSModel]
-    class-use: org.orekit.estimation.leastsquares.class-use.__module_protocol__

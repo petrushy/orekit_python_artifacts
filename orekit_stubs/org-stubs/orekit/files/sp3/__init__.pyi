@@ -4,7 +4,6 @@ import java.util.function
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.data
 import org.orekit.files.general
-import org.orekit.files.sp3.class-use
 import org.orekit.frames
 import org.orekit.gnss
 import org.orekit.propagation
@@ -502,4 +501,3 @@ class __module_protocol__(typing.Protocol):
 
     SP3: typing.Type[SP3]
     SP3Parser: typing.Type[SP3Parser]
-    class-use: org.orekit.files.sp3.class-use.__module_protocol__

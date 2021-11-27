@@ -1,7 +1,6 @@
 import java.util
 import org.orekit.gnss
 import org.orekit.gnss.metric.messages.ssr
-import org.orekit.gnss.metric.messages.ssr.igm.class-use
 import typing
 
 
@@ -966,4 +965,3 @@ class __module_protocol__(typing.Protocol):
     SsrIgmData: typing.Type[SsrIgmData]
     SsrIgmHeader: typing.Type[SsrIgmHeader]
     SsrIgmMessage: typing.Type[SsrIgmMessage]
-    class-use: org.orekit.gnss.metric.messages.ssr.igm.class-use.__module_protocol__

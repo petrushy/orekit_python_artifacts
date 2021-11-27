@@ -2,7 +2,6 @@ import java.io
 import java.lang
 import org.hipparchus
 import org.hipparchus.ode
-import org.hipparchus.ode.sampling.class-use
 import typing
 
 
@@ -727,4 +726,3 @@ class __module_protocol__(typing.Protocol):
     StepNormalizer: typing.Type[StepNormalizer]
     StepNormalizerBounds: typing.Type[StepNormalizerBounds]
     StepNormalizerMode: typing.Type[StepNormalizerMode]
-    class-use: org.hipparchus.ode.sampling.class-use.__module_protocol__

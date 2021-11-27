@@ -1,5 +1,4 @@
 import java.io
-import org.orekit.models.class-use
 import org.orekit.models.earth
 import typing
 
@@ -34,5 +33,4 @@ class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.models")``.
 
     AtmosphericRefractionModel: typing.Type[AtmosphericRefractionModel]
-    class-use: org.orekit.models.class-use.__module_protocol__
     earth: org.orekit.models.earth.__module_protocol__

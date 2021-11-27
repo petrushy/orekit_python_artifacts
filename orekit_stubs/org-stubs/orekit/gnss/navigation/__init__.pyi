@@ -1,7 +1,6 @@
 import java.util
 import org.orekit.data
 import org.orekit.gnss
-import org.orekit.gnss.navigation.class-use
 import org.orekit.propagation.analytical.gnss.data
 import org.orekit.time
 import typing
@@ -475,4 +474,3 @@ class __module_protocol__(typing.Protocol):
 
     RinexNavigation: typing.Type[RinexNavigation]
     RinexNavigationParser: typing.Type[RinexNavigationParser]
-    class-use: org.orekit.gnss.navigation.class-use.__module_protocol__

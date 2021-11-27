@@ -10,7 +10,6 @@ import org.orekit.propagation
 import org.orekit.propagation.events
 import org.orekit.propagation.integration
 import org.orekit.propagation.numerical
-import org.orekit.propagation.numerical.cr3bp.class-use
 import org.orekit.time
 import org.orekit.utils
 import typing
@@ -263,4 +262,3 @@ class __module_protocol__(typing.Protocol):
     CR3BPForceModel: typing.Type[CR3BPForceModel]
     CR3BPMultipleShooter: typing.Type[CR3BPMultipleShooter]
     STMEquations: typing.Type[STMEquations]
-    class-use: org.orekit.propagation.numerical.cr3bp.class-use.__module_protocol__

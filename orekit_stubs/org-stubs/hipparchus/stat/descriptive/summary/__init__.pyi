@@ -1,7 +1,6 @@
 import java.io
 import java.lang
 import org.hipparchus.stat.descriptive
-import org.hipparchus.stat.descriptive.summary.class-use
 import typing
 
 
@@ -27,7 +26,7 @@ class Product(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatist
     @typing.overload
     def __init__(self, product: 'Product'): ...
     @typing.overload
-    def aggregate(self, iterable: java.lang.Iterable[typing.Any]) -> None:
+    def aggregate(self, iterable: typing.Union[java.lang.Iterable[typing.Any], typing.Sequence[typing.Any], typing.Set[typing.Any]]) -> None:
         """
             Aggregates the provided instance into this instance.
         
@@ -165,7 +164,7 @@ class Sum(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
     @typing.overload
     def __init__(self, sum: 'Sum'): ...
     @typing.overload
-    def aggregate(self, iterable: java.lang.Iterable[typing.Any]) -> None:
+    def aggregate(self, iterable: typing.Union[java.lang.Iterable[typing.Any], typing.Sequence[typing.Any], typing.Set[typing.Any]]) -> None:
         """
             Aggregates the provided instance into this instance.
         
@@ -310,7 +309,7 @@ class SumOfLogs(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStati
     @typing.overload
     def __init__(self, sumOfLogs: 'SumOfLogs'): ...
     @typing.overload
-    def aggregate(self, iterable: java.lang.Iterable[typing.Any]) -> None:
+    def aggregate(self, iterable: typing.Union[java.lang.Iterable[typing.Any], typing.Sequence[typing.Any], typing.Set[typing.Any]]) -> None:
         """
             Aggregates the provided instance into this instance.
         
@@ -444,7 +443,7 @@ class SumOfSquares(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateSt
     @typing.overload
     def __init__(self, sumOfSquares: 'SumOfSquares'): ...
     @typing.overload
-    def aggregate(self, iterable: java.lang.Iterable[typing.Any]) -> None:
+    def aggregate(self, iterable: typing.Union[java.lang.Iterable[typing.Any], typing.Sequence[typing.Any], typing.Set[typing.Any]]) -> None:
         """
             Aggregates the provided instance into this instance.
         
@@ -565,4 +564,3 @@ class __module_protocol__(typing.Protocol):
     Sum: typing.Type[Sum]
     SumOfLogs: typing.Type[SumOfLogs]
     SumOfSquares: typing.Type[SumOfSquares]
-    class-use: org.hipparchus.stat.descriptive.summary.class-use.__module_protocol__

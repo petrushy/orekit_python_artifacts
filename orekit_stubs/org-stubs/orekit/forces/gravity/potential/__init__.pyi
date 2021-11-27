@@ -2,7 +2,6 @@ import java.io
 import java.lang
 import java.util
 import org.orekit.data
-import org.orekit.forces.gravity.potential.class-use
 import org.orekit.time
 import typing
 
@@ -1699,4 +1698,3 @@ class __module_protocol__(typing.Protocol):
     TideSystem: typing.Type[TideSystem]
     TideSystemProvider: typing.Type[TideSystemProvider]
     UnnormalizedSphericalHarmonicsProvider: typing.Type[UnnormalizedSphericalHarmonicsProvider]
-    class-use: org.orekit.forces.gravity.potential.class-use.__module_protocol__

@@ -3,7 +3,6 @@ import org.orekit.data
 import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.section
 import org.orekit.files.ccsds.utils.lexical
-import org.orekit.files.ccsds.utils.parsing.class-use
 import org.orekit.utils
 import typing
 
@@ -348,4 +347,3 @@ class __module_protocol__(typing.Protocol):
     AbstractMessageParser: typing.Type[AbstractMessageParser]
     ErrorState: typing.Type[ErrorState]
     ProcessingState: typing.Type[ProcessingState]
-    class-use: org.orekit.files.ccsds.utils.parsing.class-use.__module_protocol__

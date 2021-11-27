@@ -1,5 +1,4 @@
 import org.hipparchus.analysis
-import org.hipparchus.special.class-use
 import org.hipparchus.special.elliptic
 import typing
 
@@ -186,5 +185,4 @@ class __module_protocol__(typing.Protocol):
     Beta: typing.Type[Beta]
     Erf: typing.Type[Erf]
     Gamma: typing.Type[Gamma]
-    class-use: org.hipparchus.special.class-use.__module_protocol__
     elliptic: org.hipparchus.special.elliptic.__module_protocol__

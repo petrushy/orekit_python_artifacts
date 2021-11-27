@@ -3,7 +3,6 @@ import java.util.stream
 import org.hipparchus
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.forces
-import org.orekit.forces.radiation.class-use
 import org.orekit.frames
 import org.orekit.propagation
 import org.orekit.propagation.events
@@ -684,4 +683,3 @@ class __module_protocol__(typing.Protocol):
     KnockeRediffusedForceModel: typing.Type[KnockeRediffusedForceModel]
     RadiationSensitive: typing.Type[RadiationSensitive]
     SolarRadiationPressure: typing.Type[SolarRadiationPressure]
-    class-use: org.orekit.forces.radiation.class-use.__module_protocol__

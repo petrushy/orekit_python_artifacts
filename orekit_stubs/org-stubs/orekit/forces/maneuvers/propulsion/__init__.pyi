@@ -2,7 +2,6 @@ import java.util
 import org.hipparchus
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.attitudes
-import org.orekit.forces.maneuvers.propulsion.class-use
 import org.orekit.frames
 import org.orekit.propagation
 import org.orekit.time
@@ -1084,4 +1083,3 @@ class __module_protocol__(typing.Protocol):
     ThrustDirectionAndAttitudeProvider: typing.Type[ThrustDirectionAndAttitudeProvider]
     ThrustDirectionProvider: typing.Type[ThrustDirectionProvider]
     ThrustPropulsionModel: typing.Type[ThrustPropulsionModel]
-    class-use: org.orekit.forces.maneuvers.propulsion.class-use.__module_protocol__

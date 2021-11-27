@@ -3,7 +3,6 @@ import org.hipparchus
 import org.hipparchus.analysis
 import org.hipparchus.analysis.differentiation
 import org.hipparchus.analysis.polynomials
-import org.hipparchus.analysis.solvers.class-use
 import org.hipparchus.complex
 import typing
 
@@ -1184,4 +1183,3 @@ class __module_protocol__(typing.Protocol):
     UnivariateDifferentiableSolver: typing.Type[UnivariateDifferentiableSolver]
     UnivariateSolver: typing.Type[UnivariateSolver]
     UnivariateSolverUtils: typing.Type[UnivariateSolverUtils]
-    class-use: org.hipparchus.analysis.solvers.class-use.__module_protocol__

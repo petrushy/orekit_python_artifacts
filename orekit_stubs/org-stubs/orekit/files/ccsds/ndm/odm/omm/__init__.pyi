@@ -3,7 +3,6 @@ import java.util
 import org.orekit.data
 import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.ndm.odm
-import org.orekit.files.ccsds.ndm.odm.omm.class-use
 import org.orekit.files.ccsds.section
 import org.orekit.files.ccsds.utils
 import org.orekit.files.ccsds.utils.generation
@@ -815,4 +814,3 @@ class __module_protocol__(typing.Protocol):
     OmmTle: typing.Type[OmmTle]
     OmmTleKey: typing.Type[OmmTleKey]
     OmmWriter: typing.Type[OmmWriter]
-    class-use: org.orekit.files.ccsds.ndm.odm.omm.class-use.__module_protocol__

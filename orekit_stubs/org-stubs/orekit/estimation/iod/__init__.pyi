@@ -1,5 +1,4 @@
 import org.hipparchus.geometry.euclidean.threed
-import org.orekit.estimation.iod.class-use
 import org.orekit.estimation.measurements
 import org.orekit.frames
 import org.orekit.orbits
@@ -416,4 +415,3 @@ class __module_protocol__(typing.Protocol):
     IodGooding: typing.Type[IodGooding]
     IodLambert: typing.Type[IodLambert]
     IodLaplace: typing.Type[IodLaplace]
-    class-use: org.orekit.estimation.iod.class-use.__module_protocol__

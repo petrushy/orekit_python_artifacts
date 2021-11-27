@@ -3,7 +3,6 @@ import java.lang
 import java.text
 import java.util
 import org.hipparchus.exception
-import org.orekit.errors.class-use
 import typing
 
 
@@ -955,4 +954,3 @@ class __module_protocol__(typing.Protocol):
     OrekitMessages: typing.Type[OrekitMessages]
     OrekitParseException: typing.Type[OrekitParseException]
     TimeStampedCacheException: typing.Type[TimeStampedCacheException]
-    class-use: org.orekit.errors.class-use.__module_protocol__

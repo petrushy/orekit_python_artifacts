@@ -2,7 +2,6 @@ import java.lang
 import java.util
 import org.orekit.bodies
 import org.orekit.data
-import org.orekit.files.ccsds.definitions.class-use
 import org.orekit.files.ccsds.utils
 import org.orekit.frames
 import org.orekit.time
@@ -1258,4 +1257,3 @@ class __module_protocol__(typing.Protocol):
     TimeConverter: typing.Type[TimeConverter]
     TimeSystem: typing.Type[TimeSystem]
     Units: typing.Type[Units]
-    class-use: org.orekit.files.ccsds.definitions.class-use.__module_protocol__

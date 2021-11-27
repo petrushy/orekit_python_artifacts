@@ -4,7 +4,6 @@ import java.util
 import org.hipparchus.analysis
 import org.hipparchus.linear
 import org.hipparchus.optim
-import org.hipparchus.optim.linear.class-use
 import org.hipparchus.optim.nonlinear.scalar
 import typing
 
@@ -100,7 +99,7 @@ class LinearConstraintSet(org.hipparchus.optim.OptimizationData):
         Class that represents a set of :class:`~org.hipparchus.optim.linear.LinearConstraint`.
     """
     @typing.overload
-    def __init__(self, collection: typing.Union[java.util.Collection[LinearConstraint], typing.Sequence[LinearConstraint]]): ...
+    def __init__(self, collection: typing.Union[java.util.Collection[LinearConstraint], typing.Sequence[LinearConstraint], typing.Set[LinearConstraint]]): ...
     @typing.overload
     def __init__(self, linearConstraintArray: typing.List[LinearConstraint]): ...
     def getConstraints(self) -> java.util.Collection[LinearConstraint]: ...
@@ -446,4 +445,3 @@ class __module_protocol__(typing.Protocol):
     Relationship: typing.Type[Relationship]
     SimplexSolver: typing.Type[SimplexSolver]
     SolutionCallback: typing.Type[SolutionCallback]
-    class-use: org.hipparchus.optim.linear.class-use.__module_protocol__

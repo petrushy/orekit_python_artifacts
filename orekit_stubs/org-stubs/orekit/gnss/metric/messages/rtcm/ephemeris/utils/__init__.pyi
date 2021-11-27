@@ -1,4 +1,3 @@
-import org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.class-use
 import typing
 
 
@@ -112,4 +111,3 @@ class __module_protocol__(typing.Protocol):
     GlonassUserRangeAccuracy: typing.Type[GlonassUserRangeAccuracy]
     SignalInSpaceAccuracy: typing.Type[SignalInSpaceAccuracy]
     UserRangeAccuracy: typing.Type[UserRangeAccuracy]
-    class-use: org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.class-use.__module_protocol__

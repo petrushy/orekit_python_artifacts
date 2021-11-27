@@ -5,7 +5,6 @@ import org.orekit.data
 import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.ndm.odm
-import org.orekit.files.ccsds.ndm.odm.opm.class-use
 import org.orekit.files.ccsds.section
 import org.orekit.files.ccsds.utils
 import org.orekit.files.ccsds.utils.generation
@@ -715,4 +714,3 @@ class __module_protocol__(typing.Protocol):
     OpmData: typing.Type[OpmData]
     OpmParser: typing.Type[OpmParser]
     OpmWriter: typing.Type[OpmWriter]
-    class-use: org.orekit.files.ccsds.ndm.odm.opm.class-use.__module_protocol__

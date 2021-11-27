@@ -1,7 +1,6 @@
 import java.io
 import org.hipparchus
 import org.hipparchus.analysis
-import org.hipparchus.analysis.differentiation.class-use
 import org.hipparchus.util
 import typing
 
@@ -8743,4 +8742,3 @@ class __module_protocol__(typing.Protocol):
     UnivariateFunctionDifferentiator: typing.Type[UnivariateFunctionDifferentiator]
     UnivariateMatrixFunctionDifferentiator: typing.Type[UnivariateMatrixFunctionDifferentiator]
     UnivariateVectorFunctionDifferentiator: typing.Type[UnivariateVectorFunctionDifferentiator]
-    class-use: org.hipparchus.analysis.differentiation.class-use.__module_protocol__

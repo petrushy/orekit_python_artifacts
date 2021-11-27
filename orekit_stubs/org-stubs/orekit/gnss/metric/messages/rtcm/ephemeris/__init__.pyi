@@ -1,5 +1,4 @@
 import org.orekit.gnss.metric.messages.rtcm
-import org.orekit.gnss.metric.messages.rtcm.ephemeris.class-use
 import org.orekit.gnss.metric.messages.rtcm.ephemeris.utils
 import org.orekit.propagation.analytical.gnss.data
 import org.orekit.time
@@ -1093,5 +1092,4 @@ class __module_protocol__(typing.Protocol):
     Rtcm1045Data: typing.Type[Rtcm1045Data]
     RtcmEphemerisData: typing.Type[RtcmEphemerisData]
     RtcmEphemerisMessage: typing.Type[RtcmEphemerisMessage]
-    class-use: org.orekit.gnss.metric.messages.rtcm.ephemeris.class-use.__module_protocol__
     utils: org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.__module_protocol__

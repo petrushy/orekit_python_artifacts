@@ -4,7 +4,6 @@ import java.util
 import java.util.function
 import org.orekit.frames
 import org.orekit.gnss
-import org.orekit.gnss.clock.class-use
 import org.orekit.time
 import org.orekit.utils
 import typing
@@ -650,4 +649,3 @@ class __module_protocol__(typing.Protocol):
 
     RinexClock: typing.Type[RinexClock]
     RinexClockParser: typing.Type[RinexClockParser]
-    class-use: org.orekit.gnss.clock.class-use.__module_protocol__

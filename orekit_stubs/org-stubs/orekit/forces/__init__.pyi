@@ -2,7 +2,6 @@ import java.util
 import java.util.stream
 import org.hipparchus
 import org.hipparchus.geometry.euclidean.threed
-import org.orekit.forces.class-use
 import org.orekit.forces.drag
 import org.orekit.forces.empirical
 import org.orekit.forces.gravity
@@ -442,7 +441,6 @@ class __module_protocol__(typing.Protocol):
     AbstractForceModel: typing.Type[AbstractForceModel]
     BoxAndSolarArraySpacecraft: typing.Type[BoxAndSolarArraySpacecraft]
     ForceModel: typing.Type[ForceModel]
-    class-use: org.orekit.forces.class-use.__module_protocol__
     drag: org.orekit.forces.drag.__module_protocol__
     empirical: org.orekit.forces.empirical.__module_protocol__
     gravity: org.orekit.forces.gravity.__module_protocol__

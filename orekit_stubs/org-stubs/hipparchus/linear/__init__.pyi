@@ -7,7 +7,6 @@ import org.hipparchus
 import org.hipparchus.analysis
 import org.hipparchus.complex
 import org.hipparchus.fraction
-import org.hipparchus.linear.class-use
 import org.hipparchus.util
 import typing
 
@@ -8036,4 +8035,3 @@ class __module_protocol__(typing.Protocol):
     SparseRealMatrix: typing.Type[SparseRealMatrix]
     SparseRealVector: typing.Type[SparseRealVector]
     SymmLQ: typing.Type[SymmLQ]
-    class-use: org.hipparchus.linear.class-use.__module_protocol__

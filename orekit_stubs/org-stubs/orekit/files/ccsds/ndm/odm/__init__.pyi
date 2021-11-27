@@ -4,7 +4,6 @@ import java.util.function
 import org.hipparchus.linear
 import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
-import org.orekit.files.ccsds.ndm.odm.class-use
 import org.orekit.files.ccsds.ndm.odm.ocm
 import org.orekit.files.ccsds.ndm.odm.oem
 import org.orekit.files.ccsds.ndm.odm.omm
@@ -1437,7 +1436,6 @@ class __module_protocol__(typing.Protocol):
     StateVectorWriter: typing.Type[StateVectorWriter]
     UserDefined: typing.Type[UserDefined]
     UserDefinedWriter: typing.Type[UserDefinedWriter]
-    class-use: org.orekit.files.ccsds.ndm.odm.class-use.__module_protocol__
     ocm: org.orekit.files.ccsds.ndm.odm.ocm.__module_protocol__
     oem: org.orekit.files.ccsds.ndm.odm.oem.__module_protocol__
     omm: org.orekit.files.ccsds.ndm.odm.omm.__module_protocol__

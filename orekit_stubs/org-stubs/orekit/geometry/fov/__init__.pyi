@@ -4,7 +4,6 @@ import org.hipparchus.geometry.euclidean.threed
 import org.hipparchus.geometry.spherical.twod
 import org.orekit.bodies
 import org.orekit.frames
-import org.orekit.geometry.fov.class-use
 import org.orekit.propagation.events
 import typing
 
@@ -475,4 +474,3 @@ class __module_protocol__(typing.Protocol):
     FieldOfView: typing.Type[FieldOfView]
     PolygonalFieldOfView: typing.Type[PolygonalFieldOfView]
     SmoothFieldOfView: typing.Type[SmoothFieldOfView]
-    class-use: org.orekit.geometry.fov.class-use.__module_protocol__

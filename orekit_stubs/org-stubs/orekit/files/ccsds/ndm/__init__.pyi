@@ -4,7 +4,6 @@ import org.orekit.data
 import org.orekit.files.ccsds.ndm.adm
 import org.orekit.files.ccsds.ndm.adm.aem
 import org.orekit.files.ccsds.ndm.adm.apm
-import org.orekit.files.ccsds.ndm.class-use
 import org.orekit.files.ccsds.ndm.odm
 import org.orekit.files.ccsds.ndm.odm.ocm
 import org.orekit.files.ccsds.ndm.odm.oem
@@ -662,6 +661,5 @@ class __module_protocol__(typing.Protocol):
     ParserBuilder: typing.Type[ParserBuilder]
     WriterBuilder: typing.Type[WriterBuilder]
     adm: org.orekit.files.ccsds.ndm.adm.__module_protocol__
-    class-use: org.orekit.files.ccsds.ndm.class-use.__module_protocol__
     odm: org.orekit.files.ccsds.ndm.odm.__module_protocol__
     tdm: org.orekit.files.ccsds.ndm.tdm.__module_protocol__

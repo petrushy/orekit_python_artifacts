@@ -3,7 +3,6 @@ import java.util
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.data
 import org.orekit.files.general
-import org.orekit.files.ilrs.class-use
 import org.orekit.frames
 import org.orekit.propagation
 import org.orekit.propagation.sampling
@@ -1683,4 +1682,3 @@ class __module_protocol__(typing.Protocol):
     CRDParser: typing.Type[CRDParser]
     ILRSHeader: typing.Type[ILRSHeader]
     StreamingCpfWriter: typing.Type[StreamingCpfWriter]
-    class-use: org.orekit.files.ilrs.class-use.__module_protocol__

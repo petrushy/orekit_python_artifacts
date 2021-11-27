@@ -1,6 +1,5 @@
 import org.hipparchus.analysis
 import org.hipparchus.analysis.differentiation
-import org.hipparchus.analysis.function.class-use
 import typing
 
 
@@ -1830,4 +1829,3 @@ class __module_protocol__(typing.Protocol):
     Tan: typing.Type[Tan]
     Tanh: typing.Type[Tanh]
     Ulp: typing.Type[Ulp]
-    class-use: org.hipparchus.analysis.function.class-use.__module_protocol__

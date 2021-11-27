@@ -4,7 +4,6 @@ import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.section
 import org.orekit.files.ccsds.utils
-import org.orekit.files.ccsds.utils.generation.class-use
 import org.orekit.time
 import org.orekit.utils.units
 import typing
@@ -485,4 +484,3 @@ class __module_protocol__(typing.Protocol):
     KvnGenerator: typing.Type[KvnGenerator]
     MessageWriter: typing.Type[MessageWriter]
     XmlGenerator: typing.Type[XmlGenerator]
-    class-use: org.orekit.files.ccsds.utils.generation.class-use.__module_protocol__

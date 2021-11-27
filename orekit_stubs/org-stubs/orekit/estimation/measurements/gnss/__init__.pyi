@@ -5,7 +5,6 @@ import org.hipparchus.linear
 import org.hipparchus.random
 import org.orekit.estimation.measurements
 import org.orekit.estimation.measurements.generation
-import org.orekit.estimation.measurements.gnss.class-use
 import org.orekit.gnss
 import org.orekit.propagation
 import org.orekit.time
@@ -1295,4 +1294,3 @@ class __module_protocol__(typing.Protocol):
     WideLaneCombination: typing.Type[WideLaneCombination]
     WindUp: typing.Type[WindUp]
     WindUpFactory: typing.Type[WindUpFactory]
-    class-use: org.orekit.estimation.measurements.gnss.class-use.__module_protocol__

@@ -1,6 +1,5 @@
 import java.util
 import org.hipparchus.distribution
-import org.hipparchus.distribution.multivariate.class-use
 import org.hipparchus.linear
 import org.hipparchus.random
 import org.hipparchus.util
@@ -190,4 +189,3 @@ class __module_protocol__(typing.Protocol):
     MixtureMultivariateNormalDistribution: typing.Type[MixtureMultivariateNormalDistribution]
     MixtureMultivariateRealDistribution: typing.Type[MixtureMultivariateRealDistribution]
     MultivariateNormalDistribution: typing.Type[MultivariateNormalDistribution]
-    class-use: org.hipparchus.distribution.multivariate.class-use.__module_protocol__
