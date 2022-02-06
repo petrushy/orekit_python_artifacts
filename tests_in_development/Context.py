@@ -36,7 +36,7 @@ from org.hipparchus.geometry.euclidean.threed import Vector3D
 from org.hipparchus.ode.nonstiff import DormandPrince853Integrator
 from orekit import JArray_double
 from org.orekit.data import DataProvidersManager, ZipJarCrawler
-from org.orekit.python import PythonAdditionalEquations
+from org.orekit.propagation.integration import PythonAdditionalEquations
 from org.orekit.forces.gravity.potential import GravityFieldFactory
 from org.orekit.forces.gravity.potential import SHMFormatReader
 from java.io import File

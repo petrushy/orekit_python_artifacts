@@ -35,7 +35,7 @@ from java.io import File
 
 # import java.util.List;
 #
-# import org.hipparchus.geometry.euclidean.threed.Vector3D;
+from org.hipparchus.geometry.euclidean.threed import Vector3D
 # import org.junit.Assert;
 # import org.junit.Test;
 # import org.orekit.estimation.Context;
@@ -46,31 +46,49 @@ from java.io import File
 # import org.orekit.frames.Frame;
 # import org.orekit.frames.FramesFactory;
 # import org.orekit.orbits.KeplerianOrbit;
-# import org.orekit.orbits.OrbitType;
-# import org.orekit.orbits.PositionAngle;
+from org.orekit.orbits import OrbitType
+from org.orekit.orbits import PositionAngle
 # import org.orekit.propagation.Propagator;
 # import org.orekit.propagation.conversion.NumericalPropagatorBuilder;
 # import org.orekit.time.AbsoluteDate;
 # import org.orekit.time.TimeScalesFactory;
+from org.orekit.estimation.measurements import ObservableSatellite, PV
+from PVMeasurementCreator import PVMeasurementCreator
+from org.orekit.estimation.iod import IodGibbs
+
 
 from .EstimationTestUtils import EstimationTestUtils
-
 
 class IodGibbsTest(unittest.TestCase):
 
     def testGibbs1(self):
-        DM = DataContext.getDefault().getDataProvidersManager()
-        datafile = File('regular-data.zip')
-        if not datafile.exists():
-            print('File :', datafile.absolutePath, ' not found')
-
-        crawler = ZipJarCrawler(datafile)
-        DM.clearProviders()
-        DM.addProvider(crawler)
-
-        context = EstimationTestUtils().eccentricContext("potential/tides")
+        context = EstimationTestUtils().eccentricContext("test/resources")
         mu = context.initialOrbit.getMu()
         frame = context.initialOrbit.getFrame()
+
+        propagatorBuilder = context.createBuilder(OrbitType.KEPLERIAN, PositionAngle.TRUE, True, 1.0e-6, 60.0, 0.001)
+
+        # create perfect range measurements
+        propagator = EstimationTestUtils().createPropagator(context.initialOrbit, propagatorBuilder)
+        satellite = ObservableSatellite(0)
+        measurements = EstimationTestUtils.createMeasurements(propagator, PVMeasurementCreator(),  0.0, 1.0, 60.0)
+
+        position1 = Vector3D(*[x for x in measurements[0].getObservedValue() if x<3])
+        pv1 = PV(measurements[0].getDate(), position1, Vector3D.ZERO, 0., 0., 1., satellite)
+
+        position2 = Vector3D(*[x for x in measurements[1].getObservedValue() if x<3])
+        pv2 = PV(measurements[1].getDate(), position2, Vector3D.ZERO, 0., 0., 1., satellite)
+
+        position3 = Vector3D(*[x for x in measurements[2].getObservedValue() if x < 3])
+        pv3 = PV(measurements[2].getDate(), position3, Vector3D.ZERO, 0., 0., 1., satellite)
+
+        # instantiate the IOD method
+
+        gibbs = IodGibbs(mu)
+        orbit = gibbs.estimate(frame, pv1, pv2, pv3)
+
+
+        pass
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(IodGibbsTest)

@@ -28,11 +28,11 @@ import orekit
 
 orekit.initVM()
 
-from orekit.pyhelpers import  setup_orekit_curdir
-setup_orekit_curdir()
+#from orekit.pyhelpers import  setup_orekit_curdir
+#setup_orekit_curdir()
 
 from orekit import JArray_double
-from org.orekit.data import DataProvidersManager, ZipJarCrawler, DataContext
+from org.orekit.data import DataProvidersManager, ZipJarCrawler, DataContext, DirectoryCrawler
 from java.util import Arrays, HashMap
 from java.io import File
 
@@ -85,6 +85,7 @@ from org.orekit.utils import Constants
 from org.orekit.utils import IERSConventions
 # from org.orekit.utils.PVCoordinates;
 # from org.orekit.utils.ParameterDriver;
+from org.orekit.propagation import Propagator
 
 from Context import Context
 
@@ -92,11 +93,11 @@ from Context import Context
 class EstimationTestUtils():
     def eccentricContext(self, dataRoot):
         DM = DataContext.getDefault().getDataProvidersManager()
-        datafile = File('regular-data.zip')
+        datafile = File(dataRoot)
         if not datafile.exists():
             print('File :', datafile.absolutePath, ' not found')
 
-        crawler = ZipJarCrawler(datafile)
+        crawler = DirectoryCrawler(datafile)
         #DM.clearProviders()
         DM.addProvider(crawler)
         #DataProvidersManager.OREKIT_DATA_PATH = dataRoot
@@ -153,6 +154,33 @@ class EstimationTestUtils():
 
         return context
 
+    def createPropagator(self, initialOrbit, propagatorBuilder):
+
+        # override orbital parameters
+        orbitArray = JArray_double(6)
+        propagatorBuilder.getOrbitType().mapOrbitToArray(initialOrbit,
+                                                         propagatorBuilder.getPositionAngle(),
+                                                         orbitArray, None);
+        for i in range(0, len(orbitArray)-1):
+            propagatorBuilder.getOrbitalParametersDrivers().getDrivers().get(i).setValue(orbitArray[i])
+
+        return propagatorBuilder.buildPropagator(propagatorBuilder.getSelectedNormalizedParameters())
+
+    def createMeasurements(propagator, creator, startPeriod,  endPeriod, step):
+        Propagator.cast_(propagator).setStepHandler(step, creator)
+        period = propagator.getInitialState().getKeplerianPeriod()
+        start  = propagator.getInitialState().getDate().shiftedBy(startPeriod * period)
+        end    = propagator.getInitialState().getDate().shiftedBy(endPeriod   * period)
+        propagator.propagate(start, end)
+
+        measurements = creator.getMeasurements()
+
+        for measurement in measurements:
+            for driver in measurement.getParametersDrivers():
+                if driver.getReferenceDate is None:
+                    driver.setReferenceDate(propagator.getInitialState().getDate())
+
+        return measurements
 
 """
 /** Utility class for orbit determination tests. */
@@ -546,5 +574,5 @@ public class EstimationTestUtils {
 
 if __name__ == '__main__':
     a = EstimationTestUtils()
-    Context = a.eccentricContext("potential/tides")
+    Context = a.eccentricContext("../test/resources")
     print(Context)
