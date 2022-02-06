@@ -8,7 +8,7 @@ Primary jar's for python orekit
 - Remove old python jar from repository
 - Check if updated hipparcus libraries exist, in that case update the ones in repo
 - Generate stub files:
-  - install stubgenj
+  - install stubgenj (https://gitlab.cern.ch/scripting-tools/stubgenj) and jpype
   - stubs are installed as a separate "package", located in orekit_stubs
   - subs are generated from both the java and javadoc jar files
   - remove the old data dirs in orekit_stubs, while in the orekit_stubs directory:
