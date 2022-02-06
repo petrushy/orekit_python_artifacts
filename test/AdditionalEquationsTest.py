@@ -31,7 +31,7 @@ import orekit
 orekit.initVM()
 
 from orekit import JArray_double
-from org.orekit.data import DataProvidersManager, ZipJarCrawler, DataContext
+from org.orekit.data import DataProvidersManager, ZipJarCrawler, DataContext, DirectoryCrawler
 from org.orekit.propagation.integration import PythonAdditionalEquations
 from org.orekit.propagation.integration import AdditionalEquations
 from org.orekit.forces.gravity.potential import GravityFieldFactory
@@ -84,11 +84,11 @@ class AdditionalEquationsTest(unittest.TestCase):
 
     def setUp(self):
         DM = DataContext.getDefault().getDataProvidersManager()
-        datafile = File('resources.zip')
+        datafile = File('resources')
         if not datafile.exists():
             print('File :', datafile.absolutePath, ' not found')
 
-        crawler = ZipJarCrawler(datafile)
+        crawler = DirectoryCrawler(datafile)
         DM.clearProviders()
         DM.addProvider(crawler)
         System.setProperty(DataProvidersManager.OREKIT_DATA_PATH, 'potential/shm-format')

@@ -23,7 +23,7 @@ import unittest
 import sys
 
 from orekit.pyhelpers import setup_orekit_curdir
-setup_orekit_curdir()
+setup_orekit_curdir("resources")
 
 class PassCounter(PythonEventHandler):
     """Eventhandler that counts positive events"""

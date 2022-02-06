@@ -37,7 +37,7 @@ jcc = orekit.initVM()
 # import static org.junit.Assert.assertNotNull
 # import static org.junit.Assert.assertTrue
 
-from org.orekit.data import DataProvidersManager, ZipJarCrawler, DataContext
+from org.orekit.data import DataProvidersManager, ZipJarCrawler, DataContext, DirectoryCrawler
 from java.io import File
 
 from java.util import Arrays
@@ -164,11 +164,11 @@ class OrekitStepHandlerTest(unittest.TestCase):
         #         Utils.setDataRoot("regular-data")
 
         DM = DataContext.getDefault().getDataProvidersManager()
-        datafile = File('resources.zip')
+        datafile = File('resources')
         if not datafile.exists():
             print('File :', datafile.absolutePath, ' not found')
 
-        crawler = ZipJarCrawler(datafile)
+        crawler = DirectoryCrawler(datafile)
         DM.clearProviders()
         DM.addProvider(crawler)
 

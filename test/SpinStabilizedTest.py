@@ -30,7 +30,7 @@ import unittest
 import orekit
 orekit.initVM()
 
-from org.orekit.data import DataProvidersManager, ZipJarCrawler, DataContext
+from org.orekit.data import DataProvidersManager, ZipJarCrawler, DataContext, DirectoryCrawler
 from java.io import File
 
 from org.hipparchus.geometry.euclidean.threed import Rotation
@@ -61,11 +61,11 @@ class SpinStabilizedTest(unittest.TestCase):
 
     def setUp(self):
         DM = DataContext.getDefault().getDataProvidersManager()
-        datafile = File('resources.zip')
+        datafile = File('resources')
         if not datafile.exists():
             print('File :', datafile.absolutePath, ' not found')
 
-        crawler = ZipJarCrawler(datafile)
+        crawler = DirectoryCrawler(datafile)
         DM.clearProviders()
         DM.addProvider(crawler)
 
