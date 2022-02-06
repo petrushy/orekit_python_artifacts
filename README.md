@@ -13,4 +13,10 @@ Primary jar's for python orekit
   - subs are generated from both the java and javadoc jar files (generate with mvn javadoc:jar -Dmaven.javadoc.failOnError)
   - remove the old data dirs in orekit_stubs, while in the orekit_stubs directory:
   - python -m stubgenj --convert-strings --classpath "../*.jar" org.orekit  org.hipparchus
-  - 
+
+in the orekit-feedstock repo:
+- to use local file system for testing:
+
+source:
+  path: ../../orekit_python_artifacts
+
