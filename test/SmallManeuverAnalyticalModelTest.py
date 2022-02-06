@@ -27,7 +27,7 @@ import orekit
 orekit.initVM()
 from orekit.pyhelpers import setup_orekit_curdir
 
-setup_orekit_curdir()
+setup_orekit_curdir("resources")
 
 from orekit import JArray_double, JArray
 

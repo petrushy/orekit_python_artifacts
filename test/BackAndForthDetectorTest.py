@@ -26,7 +26,7 @@ Python version translated from Java by Petrus Hyvönen, SSC 2014
 import  orekit
 orekit.initVM()
 from orekit.pyhelpers import  setup_orekit_curdir
-setup_orekit_curdir()
+setup_orekit_curdir("resources")
 
 from org.orekit.bodies import GeodeticPoint
 from org.orekit.bodies import OneAxisEllipsoid

@@ -27,7 +27,7 @@ Python version translated from Java by Petrus Hyvönen, SSC 2014
 import orekit
 orekit.initVM()
 from orekit.pyhelpers import setup_orekit_curdir
-setup_orekit_curdir()
+setup_orekit_curdir("resources")
 
 from org.hipparchus.geometry.euclidean.threed import Vector3D
 from org.hipparchus.util import FastMath

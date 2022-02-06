@@ -27,7 +27,7 @@ Python version translated from Java by Petrus Hyvönen, SSC 2014
 import orekit
 orekit.initVM()
 from orekit.pyhelpers import setup_orekit_curdir
-setup_orekit_curdir()   # orekit-data.zip shall be in current dir
+setup_orekit_curdir("resources")
 import unittest
 import sys
 

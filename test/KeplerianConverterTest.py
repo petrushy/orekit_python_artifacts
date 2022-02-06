@@ -111,7 +111,7 @@ class KeplerianConverterTest(unittest.TestCase):
 #        self.checkFit(self.orbit, 86400, 300, 1.0e-3, True, 2.65e-8, "toto");
     
     def setUp(self):
-        setup_orekit_curdir()
+        setup_orekit_curdir("resources")
 
         self.initDate = AbsoluteDate.J2000_EPOCH.shiftedBy(584.)
         self.orbit = EquinoctialOrbit(PVCoordinates(self.position, self.velocity),

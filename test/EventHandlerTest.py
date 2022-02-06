@@ -46,7 +46,7 @@ import sys
 
 #%% Setup Orekit
 from orekit.pyhelpers import setup_orekit_curdir
-setup_orekit_curdir()
+setup_orekit_curdir("resources")
 
 
 class EventHandlerTest(unittest.TestCase):

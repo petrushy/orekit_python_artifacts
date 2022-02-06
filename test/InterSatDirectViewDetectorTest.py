@@ -30,7 +30,7 @@ import orekit
 orekit.initVM()
 from orekit.pyhelpers import setup_orekit_curdir
 
-setup_orekit_curdir()  # orekit-data.zip shall be in current dir
+setup_orekit_curdir("resources")
 
 from org.orekit.propagation.events import EventsLogger
 from org.hipparchus.util import FastMath
