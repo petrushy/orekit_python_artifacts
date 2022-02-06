@@ -10,5 +10,7 @@ Primary jar's for python orekit
 - Generate stub files:
   - install stubgenj
   - stubs are installed as a separate "package", located in orekit_stubs
+  - subs are generated from both the java and javadoc jar files
   - remove the old data dirs in orekit_stubs, while in the orekit_stubs directory:
-  - python -m stubgenj --convert-strings --classpat "../*.jar" org.orekit  org.hipparchus java
+  - python -m stubgenj --convert-strings --classpath "../*.jar" org.orekit  org.hipparchus
+  - 
