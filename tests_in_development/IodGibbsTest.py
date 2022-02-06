@@ -73,13 +73,13 @@ class IodGibbsTest(unittest.TestCase):
         satellite = ObservableSatellite(0)
         measurements = EstimationTestUtils.createMeasurements(propagator, PVMeasurementCreator(),  0.0, 1.0, 60.0)
 
-        position1 = Vector3D(*[x for x in measurements[0].getObservedValue() if x<3])
+        position1 = Vector3D(*[x for x in measurements[0].getObservedValue()[0:3]])
         pv1 = PV(measurements[0].getDate(), position1, Vector3D.ZERO, 0., 0., 1., satellite)
 
-        position2 = Vector3D(*[x for x in measurements[1].getObservedValue() if x<3])
+        position2 = Vector3D(*[x for x in measurements[1].getObservedValue()[0:3]])
         pv2 = PV(measurements[1].getDate(), position2, Vector3D.ZERO, 0., 0., 1., satellite)
 
-        position3 = Vector3D(*[x for x in measurements[2].getObservedValue() if x < 3])
+        position3 = Vector3D(*[x for x in measurements[2].getObservedValue()[0:3]])
         pv3 = PV(measurements[2].getDate(), position3, Vector3D.ZERO, 0., 0., 1., satellite)
 
         # instantiate the IOD method
