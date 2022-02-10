@@ -44,13 +44,13 @@ from org.hipparchus.geometry.euclidean.threed import Vector3D
 # import org.orekit.estimation.measurements.PV;
 # import org.orekit.estimation.measurements.PVMeasurementCreator;
 # import org.orekit.frames.Frame;
-# import org.orekit.frames.FramesFactory;
+from org.orekit.frames import FramesFactory
 # import org.orekit.orbits.KeplerianOrbit;
 from org.orekit.orbits import OrbitType
 from org.orekit.orbits import PositionAngle
 # import org.orekit.propagation.Propagator;
 # import org.orekit.propagation.conversion.NumericalPropagatorBuilder;
-# import org.orekit.time.AbsoluteDate;
+from org.orekit.time import AbsoluteDate, TimeScalesFactory
 # import org.orekit.time.TimeScalesFactory;
 from org.orekit.estimation.measurements import ObservableSatellite, PV
 from PVMeasurementCreator import PVMeasurementCreator
@@ -62,7 +62,7 @@ from .EstimationTestUtils import EstimationTestUtils
 class IodGibbsTest(unittest.TestCase):
 
     def testGibbs1(self):
-        context = EstimationTestUtils().eccentricContext("test/resources")
+        context = EstimationTestUtils().eccentricContext("resources")
         mu = context.initialOrbit.getMu()
         frame = context.initialOrbit.getFrame()
 
@@ -87,8 +87,42 @@ class IodGibbsTest(unittest.TestCase):
         gibbs = IodGibbs(mu)
         orbit = gibbs.estimate(frame, pv1, pv2, pv3)
 
+        self.assertAlmostEquals(context.initialOrbit.getA(), orbit.getA(), delta=1.0e-9 * context.initialOrbit.getA())
+        self.assertAlmostEquals(context.initialOrbit.getE(), orbit.getE(), delta=1.0e-9 * context.initialOrbit.getA())
+        self.assertAlmostEquals(context.initialOrbit.getI(), orbit.getI(), delta=1.0e-9 * context.initialOrbit.getA())
 
         pass
+
+
+    def testGibbs2(self):
+
+        # test extracted from "Fundamentals of astrodynamics & applications", D. Vallado, 3rd ed, chap Initial Orbit Determination, Exple 7-3, p457
+        context = EstimationTestUtils().eccentricContext("resources")
+        mu = context.initialOrbit.getMu()
+
+        # Initialization
+        gibbs = IodGibbs(mu)
+
+        # Observation vector (EME2000)
+        posR1 = Vector3D(0.0, 0.0, 6378137.0)
+        posR2 = Vector3D(0.0, -4464696.0, -5102509.0)
+        posR3 = Vector3D(0.0, 5740323.0, 3189068.0)
+
+        # epoch corresponding to the observation vector
+        dateRef = AbsoluteDate(2000, 1, 1, 0, 0, 0.0, TimeScalesFactory.getUTC())
+        date2 = dateRef.shiftedBy(76.48)
+        date3 = dateRef.shiftedBy(153.04)
+
+        # Reference result (cf. Vallado)
+        velR2 = Vector3D(0.0, 5531.148, -5191.806)
+
+        # Gibbs IOD
+        orbit = gibbs.estimate(FramesFactory.getEME2000(),
+                                posR1, dateRef, posR2, date2, posR3, date3)
+
+        # test
+        self.assertAlmostEquals(0.0, orbit.getPVCoordinates().getVelocity().getNorm() - velR2.getNorm(), delta=1e-3)
+
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(IodGibbsTest)
