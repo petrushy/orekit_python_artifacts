@@ -55,6 +55,7 @@ from org.orekit.orbits import OrbitType, KeplerianOrbit
 from org.orekit.orbits import PositionAngle
 # import org.orekit.propagation.Propagator;
 from org.orekit.propagation.analytical import KeplerianPropagator
+from org.orekit.propagation.analytical.tle import TLE, TLEPropagator
 from org.orekit.propagation import SpacecraftState
 # import org.orekit.propagation.conversion.NumericalPropagatorBuilder;
 from org.orekit.time import AbsoluteDate, TimeScalesFactory
@@ -159,6 +160,37 @@ class IodLaplaceTest(unittest.TestCase):
         self.assertAlmostEquals(0.0, error[1], delta=0.8)
 
 
+    def testLaplaceKeplerian2(self):
+        # Estimate the orbit of Galaxy 15 based on Keplerian motion
+        date = AbsoluteDate(2019, 9, 29, 22, 0, 2.0, TimeScalesFactory.getUTC())
+        kep = KeplerianOrbit(42165414.60406032, 0.00021743441091199163, 0.0019139259842569903,
+    						      1.8142608912728584, 1.648821262690012,
+    						      0.11710513241172144, PositionAngle.MEAN, self.gcrf,
+    						      date, Constants.EGM96_EARTH_MU)
+
+        prop = KeplerianPropagator(kep)
+
+        error = self.estimateOrbit(prop, date, 60.0, 120.0).getErrorNorm()
+        self.assertAlmostEquals(0.0, error[0], delta=395.0)
+        self.assertAlmostEquals(0.0, error[1], delta=0.03)
+
+
+    def testLaplaceTLE1(self):
+        # Estimate the orbit of ISS (ZARYA) based on TLE propagation
+
+        tle1 = "1 25544U 98067A   19271.53261574  .00000256  00000-0  12497-4 0  9993"
+        tle2 = "2 25544  51.6447 208.7465 0007429  92.6235 253.7389 15.50110361191281"
+
+        tleParser = TLE(tle1, tle2)
+        tleProp = TLEPropagator.selectExtrapolator(tleParser)
+        obsDate1 = tleParser.getDate()
+
+        error = self.estimateOrbit(tleProp, obsDate1, 30.0, 60.0).getErrorNorm()
+
+        # With only 3 measurements, an error of 5km in position and 10 m/s in velocity is acceptable
+        # because the Laplace method uses only two-body dynamics
+        self.assertAlmostEquals(0.0, error[0], delta=5000.0)
+        self.assertAlmostEquals(0.0, error[1], delta=10.0)
 
 
 
