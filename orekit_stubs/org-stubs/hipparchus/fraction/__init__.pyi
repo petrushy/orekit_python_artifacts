@@ -3,8 +3,10 @@ import java.lang
 import java.math
 import java.text
 import java.util
+import java.util.stream
 import org
 import org.hipparchus
+import org.hipparchus.util
 import typing
 
 
@@ -121,7 +123,7 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
     @typing.overload
     def __init__(self, double: float, double2: float, int: int): ...
     @typing.overload
-    def __init__(self, double: float, int: int): ...
+    def __init__(self, double: float, long: int): ...
     @typing.overload
     def __init__(self, int: int): ...
     @typing.overload
@@ -261,6 +263,10 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
         
         """
         ...
+    @staticmethod
+    def convergent(double: float, int: int, convergenceTest: typing.Union['BigFraction.ConvergenceTest', typing.Callable]) -> org.hipparchus.util.Pair['BigFraction', bool]: ...
+    @staticmethod
+    def convergents(double: float, int: int) -> java.util.stream.Stream['BigFraction']: ...
     @typing.overload
     def divide(self, int: int) -> 'BigFraction':
         """
@@ -802,6 +808,8 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
         
         """
         ...
+    class ConvergenceTest:
+        def test(self, long: int, long2: int) -> bool: ...
 
 class BigFractionField(org.hipparchus.Field[BigFraction], java.io.Serializable):
     """
@@ -1051,6 +1059,10 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
         
         """
         ...
+    @staticmethod
+    def convergent(double: float, int: int, convergenceTest: typing.Union['Fraction.ConvergenceTest', typing.Callable]) -> org.hipparchus.util.Pair['Fraction', bool]: ...
+    @staticmethod
+    def convergents(double: float, int: int) -> java.util.stream.Stream['Fraction']: ...
     @typing.overload
     def divide(self, int: int) -> 'Fraction':
         """
@@ -1375,6 +1387,8 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
         
         """
         ...
+    class ConvergenceTest:
+        def test(self, int: int, int2: int) -> bool: ...
 
 class FractionField(org.hipparchus.Field[Fraction], java.io.Serializable):
     """

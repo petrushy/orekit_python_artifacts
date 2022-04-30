@@ -185,9 +185,8 @@ class CelestialBodyFrame(java.lang.Enum['CelestialBodyFrame']):
         
             .. code-block: java
             
-            
-            for (CelestialBodyFrame c : CelestialBodyFrame.values())
-                System.out.println(c);
+            for (CelestialBodyFrame c : CelestialBodyFrame.values())
+                System.out.println(c);
             
         
             Returns:
@@ -311,9 +310,8 @@ class CenterName(java.lang.Enum['CenterName']):
         
             .. code-block: java
             
-            
-            for (CenterName c : CenterName.values())
-                System.out.println(c);
+            for (CenterName c : CenterName.values())
+                System.out.println(c);
             
         
             Returns:
@@ -367,9 +365,8 @@ class DutyCycleType(java.lang.Enum['DutyCycleType']):
         
             .. code-block: java
             
-            
-            for (DutyCycleType c : DutyCycleType.values())
-                System.out.println(c);
+            for (DutyCycleType c : DutyCycleType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -464,9 +461,8 @@ class ElementsType(java.lang.Enum['ElementsType']):
         
             .. code-block: java
             
-            
-            for (ElementsType c : ElementsType.values())
-                System.out.println(c);
+            for (ElementsType c : ElementsType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -709,9 +705,8 @@ class OdMethodType(java.lang.Enum['OdMethodType']):
         
             .. code-block: java
             
-            
-            for (OdMethodType c : OdMethodType.values())
-                System.out.println(c);
+            for (OdMethodType c : OdMethodType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -774,9 +769,8 @@ class OnOff(java.lang.Enum['OnOff']):
         
             .. code-block: java
             
-            
-            for (OnOff c : OnOff.values())
-                System.out.println(c);
+            for (OnOff c : OnOff.values())
+                System.out.println(c);
             
         
             Returns:
@@ -871,9 +865,8 @@ class OrbitRelativeFrame(java.lang.Enum['OrbitRelativeFrame']):
         
             .. code-block: java
             
-            
-            for (OrbitRelativeFrame c : OrbitRelativeFrame.values())
-                System.out.println(c);
+            for (OrbitRelativeFrame c : OrbitRelativeFrame.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1112,9 +1105,8 @@ class TimeSystem(java.lang.Enum['TimeSystem']):
         
             .. code-block: java
             
-            
-            for (TimeSystem c : TimeSystem.values())
-                System.out.println(c);
+            for (TimeSystem c : TimeSystem.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1254,6 +1246,13 @@ class Units:
     public static final :class:`~org.orekit.utils.units.Unit` HZ_PER_S
     
         Hertz per second unit.
+    
+    """
+    ONE_PER_ER: typing.ClassVar[org.orekit.utils.units.Unit] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.Unit` ONE_PER_ER
+    
+        Earth radii reciprocal unit.
     
     """
 

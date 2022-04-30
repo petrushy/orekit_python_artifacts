@@ -1162,6 +1162,19 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
         
         """
         ...
+    def norm(self) -> float:
+        """
+            norm.
+        
+            Specified by:
+                :meth:`~org.hipparchus.CalculusFieldElement.norm` in interface :class:`~org.hipparchus.CalculusFieldElement`
+        
+            Returns:
+                norm(this)
+        
+        
+        """
+        ...
     def nthRoot(self, int: int) -> java.util.List['Complex']: ...
     @typing.overload
     def pow(self, double: float) -> 'Complex':
@@ -1961,7 +1974,7 @@ class ComplexUnivariateIntegrator:
     @typing.overload
     def integrate(self, int: int, calculusFieldUnivariateFunction: org.hipparchus.analysis.CalculusFieldUnivariateFunction[Complex], complex: Complex, complex2: Complex) -> Complex: ...
     @typing.overload
-    def integrate(self, int: int, calculusFieldUnivariateFunction: org.hipparchus.analysis.CalculusFieldUnivariateFunction[Complex], complex: Complex, complexArray: typing.List[Complex]) -> Complex: ...
+    def integrate(self, int: int, calculusFieldUnivariateFunction: org.hipparchus.analysis.CalculusFieldUnivariateFunction[Complex], complex: Complex, *complex2: Complex) -> Complex: ...
 
 class ComplexUtils:
     """
@@ -2604,7 +2617,7 @@ class FieldComplexUnivariateIntegrator(typing.Generic[_FieldComplexUnivariateInt
     @typing.overload
     def integrate(self, int: int, calculusFieldUnivariateFunction: org.hipparchus.analysis.CalculusFieldUnivariateFunction[FieldComplex[_FieldComplexUnivariateIntegrator__T]], fieldComplex: FieldComplex[_FieldComplexUnivariateIntegrator__T], fieldComplex2: FieldComplex[_FieldComplexUnivariateIntegrator__T]) -> FieldComplex[_FieldComplexUnivariateIntegrator__T]: ...
     @typing.overload
-    def integrate(self, int: int, calculusFieldUnivariateFunction: org.hipparchus.analysis.CalculusFieldUnivariateFunction[FieldComplex[_FieldComplexUnivariateIntegrator__T]], fieldComplex: FieldComplex[_FieldComplexUnivariateIntegrator__T], fieldComplexArray: typing.List[FieldComplex[_FieldComplexUnivariateIntegrator__T]]) -> FieldComplex[_FieldComplexUnivariateIntegrator__T]: ...
+    def integrate(self, int: int, calculusFieldUnivariateFunction: org.hipparchus.analysis.CalculusFieldUnivariateFunction[FieldComplex[_FieldComplexUnivariateIntegrator__T]], fieldComplex: FieldComplex[_FieldComplexUnivariateIntegrator__T], *fieldComplex2: FieldComplex[_FieldComplexUnivariateIntegrator__T]) -> FieldComplex[_FieldComplexUnivariateIntegrator__T]: ...
 
 class Quaternion(java.io.Serializable):
     """

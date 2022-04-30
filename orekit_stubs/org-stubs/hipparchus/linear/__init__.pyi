@@ -51,7 +51,7 @@ class AnyMatrix:
 
 class CholeskyDecomposition:
     """
-    public class CholeskyDecomposition extends Object
+    public class CholeskyDecomposition extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Calculates the Cholesky decomposition of a matrix.
     
@@ -166,11 +166,11 @@ class DecompositionSolver:
     
         Interface handling decomposition algorithms that can solve A × X = B.
     
-        Decomposition algorithms decompose an A matrix as a product of several specific matrices from which they can solve A Ã—
-        X = B in least squares sense: they find X such that ||A Ã— X - B|| is minimal.
+        Decomposition algorithms decompose an A matrix as a product of several specific matrices from which they can solve A ×
+        X = B in least squares sense: they find X such that ||A × X - B|| is minimal.
     
         Some solvers like :class:`~org.hipparchus.linear.LUDecomposition` can only find the solution for square matrices and
-        when the solution is an exact linear solution, i.e. when ||A Ã— X - B|| is exactly 0. Other solvers can also find
+        when the solution is an exact linear solution, i.e. when ||A × X - B|| is exactly 0. Other solvers can also find
         solutions with non-square matrix A and with non-null minimal norm. If an exact linear solution exists it is also the
         minimal norm solution.
     """
@@ -216,14 +216,75 @@ class DecompositionSolver:
     @typing.overload
     def solve(self, realVector: 'RealVector') -> 'RealVector': ...
 
+class DependentVectorsHandler(java.lang.Enum['DependentVectorsHandler']):
+    """
+    public enum DependentVectorsHandler extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.hipparchus.linear.DependentVectorsHandler`>
+    
+        Enumerate to specify how dependent vectors should be handled in
+        :meth:`~org.hipparchus.linear.MatrixUtils.orthonormalize` and :meth:`~org.hipparchus.linear.MatrixUtils.orthonormalize`.
+    
+        Since:
+            2.1
+    """
+    GENERATE_EXCEPTION: typing.ClassVar['DependentVectorsHandler'] = ...
+    ADD_ZERO_VECTOR: typing.ClassVar['DependentVectorsHandler'] = ...
+    REDUCE_BASE_TO_SPAN: typing.ClassVar['DependentVectorsHandler'] = ...
+    _manageDependent_1__T = typing.TypeVar('_manageDependent_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def manageDependent(self, int: int, list: java.util.List['RealVector']) -> int: ...
+    @typing.overload
+    def manageDependent(self, field: org.hipparchus.Field[_manageDependent_1__T], int: int, list: java.util.List['FieldVector'[_manageDependent_1__T]]) -> int: ...
+    _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
+    @typing.overload
+    @staticmethod
+    def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
+    @typing.overload
+    @staticmethod
+    def valueOf(string: str) -> 'DependentVectorsHandler':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (:class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        
+        
+        """
+        ...
+    @staticmethod
+    def values() -> typing.List['DependentVectorsHandler']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            for (DependentVectorsHandler c : DependentVectorsHandler.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
+
 class EigenDecomposition:
     """
-    public class EigenDecomposition extends Object
+    public class EigenDecomposition extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Calculates the eigen decomposition of a real matrix.
     
-        The eigen decomposition of matrix A is a set of two matrices: V and D such that A = V Ã— D Ã— V :sup:`T` . A, V and D
-        are all m Ã— m matrices.
+        The eigen decomposition of matrix A is a set of two matrices: V and D such that A = V × D × V :sup:`T` . A, V and D
+        are all m × m matrices.
     
         This class is similar in spirit to the :code:`EigenvalueDecomposition` class from the `JAMA
         <http://math.nist.gov/javanumerics/jama/>` library, with the following changes:
@@ -462,11 +523,11 @@ class FieldDecompositionSolver(typing.Generic[_FieldDecompositionSolver__T]):
     
         Interface handling decomposition algorithms that can solve A × X = B.
     
-        Decomposition algorithms decompose an A matrix has a product of several specific matrices from which they can solve A Ã—
-        X = B in least squares sense: they find X such that ||A Ã— X - B|| is minimal.
+        Decomposition algorithms decompose an A matrix has a product of several specific matrices from which they can solve A ×
+        X = B in least squares sense: they find X such that ||A × X - B|| is minimal.
     
         Some solvers like :class:`~org.hipparchus.linear.FieldLUDecomposition` can only find the solution for square matrices
-        and when the solution is an exact linear solution, i.e. when ||A Ã— X - B|| is exactly 0. Other solvers can also find
+        and when the solution is an exact linear solution, i.e. when ||A × X - B|| is exactly 0. Other solvers can also find
         solutions with non-square matrix A and with non-null minimal norm. If an exact linear solution exists it is also the
         minimal norm solution.
     """
@@ -515,12 +576,12 @@ class FieldDecompositionSolver(typing.Generic[_FieldDecompositionSolver__T]):
 _FieldLUDecomposition__T = typing.TypeVar('_FieldLUDecomposition__T', bound=org.hipparchus.FieldElement)  # <T>
 class FieldLUDecomposition(typing.Generic[_FieldLUDecomposition__T]):
     """
-    public class FieldLUDecomposition<T extends :class:`~org.hipparchus.FieldElement`<T>> extends Object
+    public class FieldLUDecomposition<T extends :class:`~org.hipparchus.FieldElement`<T>> extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Calculates the LUP-decomposition of a square matrix.
     
         The LUP-decomposition of a matrix A consists of three matrices L, U and P that satisfy: PA = LU, L is lower triangular,
-        and U is upper triangular and P is a permutation matrix. All matrices are mÃ—m.
+        and U is upper triangular and P is a permutation matrix. All matrices are m×m.
     
         This class is based on the class with similar name from the `JAMA <http://math.nist.gov/javanumerics/jama/>` library.
     
@@ -675,12 +736,12 @@ class FieldMatrixPreservingVisitor(typing.Generic[_FieldMatrixPreservingVisitor_
 _FieldQRDecomposition__T = typing.TypeVar('_FieldQRDecomposition__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldQRDecomposition(typing.Generic[_FieldQRDecomposition__T]):
     """
-    public class FieldQRDecomposition<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object
+    public class FieldQRDecomposition<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Calculates the QR-decomposition of a field matrix.
     
         The QR-decomposition of a matrix A consists of two matrices Q and R that satisfy: A = QR, Q is orthogonal (Q :sup:`T` Q
-        = I), and R is upper triangular. If A is mÃ—n, Q is mÃ—m and R mÃ—n.
+        = I), and R is upper triangular. If A is m×n, Q is m×m and R m×n.
     
         This class compute the decomposition using Householder reflectors.
     
@@ -879,10 +940,10 @@ class FieldVectorPreservingVisitor(typing.Generic[_FieldVectorPreservingVisitor_
 
 class IterativeLinearSolver:
     """
-    public abstract class IterativeLinearSolver extends Object
+    public abstract class IterativeLinearSolver extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
-        This abstract class defines an iterative solver for the linear system A Â· x = b. In what follows, the *residual* r is
-        defined as r = b - A Â· x, where A is the linear operator of the linear system, b is the right-hand side vector, and x
+        This abstract class defines an iterative solver for the linear system A · x = b. In what follows, the *residual* r is
+        defined as r = b - A · x, where A is the linear operator of the linear system, b is the right-hand side vector, and x
         the current estimate of the solution.
     """
     @typing.overload
@@ -990,12 +1051,12 @@ class IterativeLinearSolverEvent(org.hipparchus.util.IterationEvent):
 
 class LUDecomposition:
     """
-    public class LUDecomposition extends Object
+    public class LUDecomposition extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Calculates the LUP-decomposition of a square matrix.
     
-        The LUP-decomposition of a matrix A consists of three matrices L, U and P that satisfy: PÃ—A = LÃ—U. L is lower
-        triangular (with unit diagonal terms), U is upper triangular and P is a permutation matrix. All matrices are mÃ—m.
+        The LUP-decomposition of a matrix A consists of three matrices L, U and P that satisfy: P×A = L×U. L is lower
+        triangular (with unit diagonal terms), U is upper triangular and P is a permutation matrix. All matrices are m×m.
     
         As shown by the presence of the P matrix, this decomposition is implemented using partial pivoting.
     
@@ -1107,7 +1168,7 @@ class MatrixDecomposer:
 
 class MatrixUtils:
     """
-    public class MatrixUtils extends Object
+    public class MatrixUtils extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         A collection of static methods that operate on or return matrices.
     """
@@ -1218,7 +1279,7 @@ class MatrixUtils:
                 identity matrix
         
             Raises:
-                : if dimension is not positive
+                :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if dimension is not positive
         
         
         """
@@ -1231,7 +1292,7 @@ class MatrixUtils:
         """
             Returns a :class:`~org.hipparchus.linear.FieldMatrix` with specified dimensions.
         
-            The type of matrix returned depends on the dimension. Below 2 :sup:`12` elements (i.e. 4096 elements or 64Ã—64 for a
+            The type of matrix returned depends on the dimension. Below 2 :sup:`12` elements (i.e. 4096 elements or 64×64 for a
             square matrix), a :class:`~org.hipparchus.linear.FieldMatrix` instance is built. Above this threshold a
             :class:`~org.hipparchus.linear.BlockFieldMatrix` instance is built.
         
@@ -1246,12 +1307,13 @@ class MatrixUtils:
                 FieldMatrix with specified dimensions
         
             Also see:
+                :meth:`~org.hipparchus.linear.MatrixUtils.createFieldMatrix`
         
         public static <T extends :class:`~org.hipparchus.FieldElement`<T>> :class:`~org.hipparchus.linear.FieldMatrix`<T> createFieldMatrix(T[][] data) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`, :class:`~org.hipparchus.exception.NullArgumentException`
         
             Returns a :class:`~org.hipparchus.linear.FieldMatrix` whose entries are the the values in the the input array.
         
-            The type of matrix returned depends on the dimension. Below 2 :sup:`12` elements (i.e. 4096 elements or 64Ã—64 for a
+            The type of matrix returned depends on the dimension. Below 2 :sup:`12` elements (i.e. 4096 elements or 64×64 for a
             square matrix), a :class:`~org.hipparchus.linear.FieldMatrix` instance is built. Above this threshold a
             :class:`~org.hipparchus.linear.BlockFieldMatrix` instance is built.
         
@@ -1327,7 +1389,7 @@ class MatrixUtils:
                 identity matrix
         
             Raises:
-                : if dimension is not positive
+                :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if dimension is not positive
         
         
         """
@@ -1338,7 +1400,7 @@ class MatrixUtils:
         """
             Returns a :class:`~org.hipparchus.linear.RealMatrix` with specified dimensions.
         
-            The type of matrix returned depends on the dimension. Below 2 :sup:`12` elements (i.e. 4096 elements or 64Ã—64 for a
+            The type of matrix returned depends on the dimension. Below 2 :sup:`12` elements (i.e. 4096 elements or 64×64 for a
             square matrix) which can be stored in a 32kB array, a :class:`~org.hipparchus.linear.Array2DRowRealMatrix` instance is
             built. Above this threshold a :class:`~org.hipparchus.linear.BlockRealMatrix` instance is built.
         
@@ -1352,12 +1414,13 @@ class MatrixUtils:
                 RealMatrix with specified dimensions
         
             Also see:
+                :meth:`~org.hipparchus.linear.MatrixUtils.createRealMatrix`
         
         public static :class:`~org.hipparchus.linear.RealMatrix` createRealMatrix(double[][] data) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`, :class:`~org.hipparchus.exception.NullArgumentException`
         
             Returns a :class:`~org.hipparchus.linear.RealMatrix` whose entries are the the values in the the input array.
         
-            The type of matrix returned depends on the dimension. Below 2 :sup:`12` elements (i.e. 4096 elements or 64Ã—64 for a
+            The type of matrix returned depends on the dimension. Below 2 :sup:`12` elements (i.e. 4096 elements or 64×64 for a
             square matrix) which can be stored in a 32kB array, a :class:`~org.hipparchus.linear.Array2DRowRealMatrix` instance is
             built. Above this threshold a :class:`~org.hipparchus.linear.BlockRealMatrix` instance is built.
         
@@ -1440,10 +1503,11 @@ class MatrixUtils:
     @staticmethod
     def matrixExponential(realMatrix: 'RealMatrix') -> 'RealMatrix':
         """
-            Computes the matrix exponential of the given matrix. The algorithm implementation follows the Pade approximant method of
+            Computes the :class:`~org.hipparchus.linear.https:.mathworld.wolfram.com.MatrixExponential` of the given matrix. The
+            algorithm implementation follows the Pade approximant method of
         
-            Higham, Nicholas J. Ã¢â‚¬Å“The Scaling and Squaring Method for the Matrix Exponential Revisited.Ã¢â‚¬ï¿½ SIAM Journal on
-            Matrix Analysis and Applications 26, no. 4 (January 2005): 1179Ã¢â‚¬â€œ93.
+            Higham, Nicholas J. “The Scaling and Squaring Method for the Matrix Exponential Revisited.” SIAM Journal on Matrix
+            Analysis and Applications 26, no. 4 (January 2005): 1179–93.
         
             Parameters:
                 rm (:class:`~org.hipparchus.linear.RealMatrix`): RealMatrix whose inverse shall be computed
@@ -1457,6 +1521,13 @@ class MatrixUtils:
         
         """
         ...
+    _orthonormalize_1__T = typing.TypeVar('_orthonormalize_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    @staticmethod
+    def orthonormalize(list: java.util.List['RealVector'], double: float, dependentVectorsHandler: DependentVectorsHandler) -> java.util.List['RealVector']: ...
+    @typing.overload
+    @staticmethod
+    def orthonormalize(field: org.hipparchus.Field[_orthonormalize_1__T], list: java.util.List[FieldVector[_orthonormalize_1__T]], t: _orthonormalize_1__T, dependentVectorsHandler: DependentVectorsHandler) -> java.util.List[FieldVector[_orthonormalize_1__T]]: ...
     @staticmethod
     def serializeRealMatrix(realMatrix: 'RealMatrix', objectOutputStream: java.io.ObjectOutputStream) -> None: ...
     @staticmethod
@@ -1468,12 +1539,12 @@ class MatrixUtils:
 
 class QRDecomposition:
     """
-    public class QRDecomposition extends Object
+    public class QRDecomposition extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Calculates the QR-decomposition of a matrix.
     
         The QR-decomposition of a matrix A consists of two matrices Q and R that satisfy: A = QR, Q is orthogonal (Q :sup:`T` Q
-        = I), and R is upper triangular. If A is mÃ—n, Q is mÃ—m and R mÃ—n.
+        = I), and R is upper triangular. If A is m×n, Q is m×m and R m×n.
     
         This class compute the decomposition using Householder reflectors.
     
@@ -1572,7 +1643,7 @@ class RealLinearOperator:
         The motivation for such an interface is well stated by :meth:`~org.hipparchus.linear.RealLinearOperator.BARR1994`:
             We restrict ourselves to iterative methods, which work by repeatedly improving an approximate solution until it is
             accurate enough. These methods access the coefficient matrix A of the linear system only via the matrix-vector product y
-            = A Â· x (and perhaps z = A :sup:`T` Â· x). Thus the user need only supply a subroutine for computing y (and perhaps z)
+            = A · x (and perhaps z = A :sup:`T` · x). Thus the user need only supply a subroutine for computing y (and perhaps z)
             given x, which permits full exploitation of the sparsity or other special structure of A.
     
     
@@ -1674,7 +1745,7 @@ class RealMatrixChangingVisitor:
 
 class RealMatrixFormat:
     """
-    public class RealMatrixFormat extends Object
+    public class RealMatrixFormat extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Formats a :code:`nxm` matrix in components list format "{{a :sub:`0` :sub:`0` ,a :sub:`0` :sub:`1` , ..., a :sub:`0`
         :sub:`m-1` },{a :sub:`1` :sub:`0` , a :sub:`1` :sub:`1` , ..., a :sub:`1` :sub:`m-1` },{...},{ a :sub:`n-1` :sub:`0` , a
@@ -1688,8 +1759,9 @@ class RealMatrixFormat:
         , 1 , 1 } } " will be parsed without error and the same matrix will be returned. In the second case, however, the parse
         position after parsing will be just after the closing curly brace, i.e. just before the trailing space.
     
-        **Note:** the grouping functionality of the used null is disabled to prevent problems when parsing (e.g. 1,345.34 would
-        be a valid number but conflicts with the default column separator).
+        **Note:** the grouping functionality of the used
+        :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is` is disabled to
+        prevent problems when parsing (e.g. 1,345.34 would be a valid number but conflicts with the default column separator).
     """
     @typing.overload
     def __init__(self): ...
@@ -1714,8 +1786,8 @@ class RealMatrixFormat:
         
             Parameters:
                 matrix (:class:`~org.hipparchus.linear.RealMatrix`): the object to format.
-                toAppendTo (StringBuffer): where the text is to be appended
-                pos (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
+                toAppendTo (:class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is`): where the text is to be appended
+                pos (:class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition?is`): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
             Returns:
                 the value passed in as toAppendTo.
@@ -1730,7 +1802,8 @@ class RealMatrixFormat:
         """
             Get the set of locales for which real vectors formats are available.
         
-            This is the same set as the null set.
+            This is the same set as the
+            :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is` set.
         
             Returns:
                 available real vector format locales.
@@ -1789,7 +1862,7 @@ class RealMatrixFormat:
             Returns the default real vector format for the given locale.
         
             Parameters:
-                locale (Locale): the specific locale used by the format.
+                locale (:class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): the specific locale used by the format.
         
             Returns:
                 the real vector format specific to the given locale.
@@ -1846,7 +1919,7 @@ class RealMatrixFormat:
             Parse a string to produce a :class:`~org.hipparchus.linear.RealMatrix` object.
         
             Parameters:
-                source (String): String to parse.
+                source (:class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): String to parse.
         
             Returns:
                 the parsed :class:`~org.hipparchus.linear.RealMatrix` object.
@@ -1857,8 +1930,8 @@ class RealMatrixFormat:
             Parse a string to produce a :class:`~org.hipparchus.linear.RealMatrix` object.
         
             Parameters:
-                source (String): String to parse.
-                pos (ParsePosition): input/ouput parsing parameter.
+                source (:class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): String to parse.
+                pos (:class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.text.ParsePosition?is`): input/ouput parsing parameter.
         
             Returns:
                 the parsed :class:`~org.hipparchus.linear.RealMatrix` object.
@@ -1922,7 +1995,7 @@ class RealMatrixPreservingVisitor:
 
 class RealVector:
     """
-    public abstract class RealVector extends Object
+    public abstract class RealVector extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Class defining a real-valued vector with basic algebraic operations.
     
@@ -2503,7 +2576,7 @@ class RealVectorChangingVisitor:
 
 class RealVectorFormat:
     """
-    public class RealVectorFormat extends Object
+    public class RealVectorFormat extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Formats a vector in components list format "{v0; v1; ...; vk-1}".
     
@@ -2538,8 +2611,8 @@ class RealVectorFormat:
         
             Parameters:
                 vector (:class:`~org.hipparchus.linear.RealVector`): the object to format.
-                toAppendTo (StringBuffer): where the text is to be appended
-                pos (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
+                toAppendTo (:class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is`): where the text is to be appended
+                pos (:class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition?is`): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
             Returns:
                 the value passed in as toAppendTo.
@@ -2554,7 +2627,8 @@ class RealVectorFormat:
         """
             Get the set of locales for which real vectors formats are available.
         
-            This is the same set as the null set.
+            This is the same set as the
+            :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is` set.
         
             Returns:
                 available real vector format locales.
@@ -2603,7 +2677,7 @@ class RealVectorFormat:
             Returns the default real vector format for the given locale.
         
             Parameters:
-                locale (Locale): the specific locale used by the format.
+                locale (:class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): the specific locale used by the format.
         
             Returns:
                 the real vector format specific to the given locale.
@@ -2640,7 +2714,7 @@ class RealVectorFormat:
             Parse a string to produce a :class:`~org.hipparchus.linear.RealVector` object.
         
             Parameters:
-                source (String): String to parse.
+                source (:class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): String to parse.
         
             Returns:
                 the parsed :class:`~org.hipparchus.linear.RealVector` object.
@@ -2651,8 +2725,8 @@ class RealVectorFormat:
             Parse a string to produce a :class:`~org.hipparchus.linear.RealVector` object.
         
             Parameters:
-                source (String): String to parse.
-                pos (ParsePosition): input/ouput parsing parameter.
+                source (:class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): String to parse.
+                pos (:class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.text.ParsePosition?is`): input/ouput parsing parameter.
         
             Returns:
                 the parsed :class:`~org.hipparchus.linear.RealVector` object.
@@ -2709,7 +2783,7 @@ class RealVectorPreservingVisitor:
 
 class RectangularCholeskyDecomposition:
     """
-    public class RectangularCholeskyDecomposition extends Object
+    public class RectangularCholeskyDecomposition extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Calculates the rectangular Cholesky decomposition of a matrix.
     
@@ -2795,13 +2869,13 @@ class RiccatiEquationSolver:
 
 class SingularValueDecomposition:
     """
-    public class SingularValueDecomposition extends Object
+    public class SingularValueDecomposition extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Calculates the compact Singular Value Decomposition of a matrix.
     
-        The Singular Value Decomposition of matrix A is a set of three matrices: U, Î£ and V such that A = U Ã— Î£ Ã— V :sup:`T`
-        . Let A be a m Ã— n matrix, then U is a m Ã— p orthogonal matrix, Î£ is a p Ã— p diagonal matrix with positive or null
-        elements, V is a p Ã— n orthogonal matrix (hence V :sup:`T` is also orthogonal) where p=min(m,n).
+        The Singular Value Decomposition of matrix A is a set of three matrices: U, Σ and V such that A = U × Σ × V :sup:`T`
+        . Let A be a m × n matrix, then U is a m × p orthogonal matrix, Σ is a p × p diagonal matrix with positive or null
+        elements, V is a p × n orthogonal matrix (hence V :sup:`T` is also orthogonal) where p=min(m,n).
     
         This class is similar to the class with similar name from the `JAMA <http://math.nist.gov/javanumerics/jama/>` library,
         with the following changes:
@@ -2835,7 +2909,7 @@ class SingularValueDecomposition:
         """
             Returns the n × n covariance matrix.
         
-            The covariance matrix is V Ã— J Ã— V :sup:`T` where J is the diagonal matrix of the inverse of the squares of the
+            The covariance matrix is V × J × V :sup:`T` where J is the diagonal matrix of the inverse of the squares of the
             singular values.
         
             Parameters:
@@ -2845,7 +2919,7 @@ class SingularValueDecomposition:
                 covariance matrix
         
             Raises:
-                : if minSingularValue is larger than the largest singular value, meaning all singular values are ignored
+                :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if minSingularValue is larger than the largest singular value, meaning all singular values are ignored
         
         
         """
@@ -2865,7 +2939,7 @@ class SingularValueDecomposition:
         """
             Returns the L :sub:`2` norm of the matrix.
         
-            The L :sub:`2` norm is max(|A Ã— u| :sub:`2` / |u| :sub:`2` ), where |.| :sub:`2` denotes the vectorial 2-norm (i.e. the
+            The L :sub:`2` norm is max(|A × u| :sub:`2` / |u| :sub:`2` ), where |.| :sub:`2` denotes the vectorial 2-norm (i.e. the
             traditional euclidian norm).
         
             Returns:
@@ -2879,7 +2953,7 @@ class SingularValueDecomposition:
             Return the effective numerical matrix rank.
         
             The effective numerical rank is the number of non-negligible singular values. The threshold used to identify
-            non-negligible terms is max(m,n) Ã— ulp(s :sub:`1` ) where ulp(s :sub:`1` ) is the least significant bit of the largest
+            non-negligible terms is max(m,n) × ulp(s :sub:`1` ) where ulp(s :sub:`1` ) is the least significant bit of the largest
             singular value.
         
             Returns:
@@ -2986,7 +3060,7 @@ class SingularValueDecomposition:
 _ArrayFieldVector__T = typing.TypeVar('_ArrayFieldVector__T', bound=org.hipparchus.FieldElement)  # <T>
 class ArrayFieldVector(FieldVector[_ArrayFieldVector__T], java.io.Serializable, typing.Generic[_ArrayFieldVector__T]):
     """
-    public class ArrayFieldVector<T extends :class:`~org.hipparchus.FieldElement`<T>> extends Object implements :class:`~org.hipparchus.linear.FieldVector`<T>, Serializable
+    public class ArrayFieldVector<T extends :class:`~org.hipparchus.FieldElement`<T>> extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.linear.FieldVector`<T>, :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         This class implements the :class:`~org.hipparchus.linear.FieldVector` interface with a
         :class:`~org.hipparchus.FieldElement` array.
@@ -3056,10 +3130,11 @@ class ArrayFieldVector(FieldVector[_ArrayFieldVector__T], java.io.Serializable, 
             Test for the equality of two vectors.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                other (Object): Object to test for equality.
+                other (:class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality.
         
             Returns:
                 :code:`true` if two vector objects are equal, :code:`false` otherwise.
@@ -3120,7 +3195,8 @@ class ArrayFieldVector(FieldVector[_ArrayFieldVector__T], java.io.Serializable, 
             All NaN values have the same hash code.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a hash code value for this object
@@ -3203,7 +3279,8 @@ class ArrayFieldVector(FieldVector[_ArrayFieldVector__T], java.io.Serializable, 
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Since:
                 2.0
@@ -3230,7 +3307,7 @@ class ArrayFieldVector(FieldVector[_ArrayFieldVector__T], java.io.Serializable, 
 
 class ArrayRealVector(RealVector, java.io.Serializable):
     """
-    public class ArrayRealVector extends :class:`~org.hipparchus.linear.RealVector` implements Serializable
+    public class ArrayRealVector extends :class:`~org.hipparchus.linear.RealVector` implements :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         This class implements the :class:`~org.hipparchus.linear.RealVector` interface with a double array.
     
@@ -3346,7 +3423,7 @@ class ArrayRealVector(RealVector, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealVector.equals` in class :class:`~org.hipparchus.linear.RealVector`
         
             Parameters:
-                other (Object): Object to test for equality.
+                other (:class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality.
         
             Returns:
                 :code:`true` if two vector objects are equal, :code:`false` if :code:`other` is null, not an instance of
@@ -3641,7 +3718,8 @@ class ArrayRealVector(RealVector, java.io.Serializable):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -3797,7 +3875,7 @@ class ArrayRealVector(RealVector, java.io.Serializable):
 
 class CholeskyDecomposer(MatrixDecomposer):
     """
-    public class CholeskyDecomposer extends Object implements :class:`~org.hipparchus.linear.MatrixDecomposer`
+    public class CholeskyDecomposer extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.linear.MatrixDecomposer`
     
         Matrix decomposer using Cholseky decomposition.
     
@@ -3825,7 +3903,7 @@ class CholeskyDecomposer(MatrixDecomposer):
 _DefaultFieldMatrixChangingVisitor__T = typing.TypeVar('_DefaultFieldMatrixChangingVisitor__T', bound=org.hipparchus.FieldElement)  # <T>
 class DefaultFieldMatrixChangingVisitor(FieldMatrixChangingVisitor[_DefaultFieldMatrixChangingVisitor__T], typing.Generic[_DefaultFieldMatrixChangingVisitor__T]):
     """
-    public class DefaultFieldMatrixChangingVisitor<T extends :class:`~org.hipparchus.FieldElement`<T>> extends Object implements :class:`~org.hipparchus.linear.FieldMatrixChangingVisitor`<T>
+    public class DefaultFieldMatrixChangingVisitor<T extends :class:`~org.hipparchus.FieldElement`<T>> extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.linear.FieldMatrixChangingVisitor`<T>
     
         Default implementation of the :class:`~org.hipparchus.linear.FieldMatrixChangingVisitor` interface.
     
@@ -3840,8 +3918,8 @@ class DefaultFieldMatrixChangingVisitor(FieldMatrixChangingVisitor[_DefaultField
             This method is called once after all entries of the matrix have been visited.
         
             Specified by:
-                :meth:`~org.hipparchus.linear.FieldMatrixChangingVisitor.end`Â in
-                interfaceÂ :class:`~org.hipparchus.linear.FieldMatrixChangingVisitor`
+                :meth:`~org.hipparchus.linear.FieldMatrixChangingVisitor.end` in
+                interface :class:`~org.hipparchus.linear.FieldMatrixChangingVisitor`
         
             Returns:
                 the value that the :code:`walkInXxxOrder` must return
@@ -3856,8 +3934,8 @@ class DefaultFieldMatrixChangingVisitor(FieldMatrixChangingVisitor[_DefaultField
             This method is called once before any entry of the matrix is visited.
         
             Specified by:
-                :meth:`~org.hipparchus.linear.FieldMatrixChangingVisitor.start`Â in
-                interfaceÂ :class:`~org.hipparchus.linear.FieldMatrixChangingVisitor`
+                :meth:`~org.hipparchus.linear.FieldMatrixChangingVisitor.start` in
+                interface :class:`~org.hipparchus.linear.FieldMatrixChangingVisitor`
         
             Parameters:
                 rows (int): number of rows of the matrix
@@ -3875,8 +3953,8 @@ class DefaultFieldMatrixChangingVisitor(FieldMatrixChangingVisitor[_DefaultField
             Visit one matrix entry.
         
             Specified by:
-                :meth:`~org.hipparchus.linear.FieldMatrixChangingVisitor.visit`Â in
-                interfaceÂ :class:`~org.hipparchus.linear.FieldMatrixChangingVisitor`
+                :meth:`~org.hipparchus.linear.FieldMatrixChangingVisitor.visit` in
+                interface :class:`~org.hipparchus.linear.FieldMatrixChangingVisitor`
         
             Parameters:
                 row (int): row index of the entry
@@ -3893,7 +3971,7 @@ class DefaultFieldMatrixChangingVisitor(FieldMatrixChangingVisitor[_DefaultField
 _DefaultFieldMatrixPreservingVisitor__T = typing.TypeVar('_DefaultFieldMatrixPreservingVisitor__T', bound=org.hipparchus.FieldElement)  # <T>
 class DefaultFieldMatrixPreservingVisitor(FieldMatrixPreservingVisitor[_DefaultFieldMatrixPreservingVisitor__T], typing.Generic[_DefaultFieldMatrixPreservingVisitor__T]):
     """
-    public class DefaultFieldMatrixPreservingVisitor<T extends :class:`~org.hipparchus.FieldElement`<T>> extends Object implements :class:`~org.hipparchus.linear.FieldMatrixPreservingVisitor`<T>
+    public class DefaultFieldMatrixPreservingVisitor<T extends :class:`~org.hipparchus.FieldElement`<T>> extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.linear.FieldMatrixPreservingVisitor`<T>
     
         Default implementation of the :class:`~org.hipparchus.linear.FieldMatrixPreservingVisitor` interface.
     
@@ -3908,8 +3986,8 @@ class DefaultFieldMatrixPreservingVisitor(FieldMatrixPreservingVisitor[_DefaultF
             This method is called once after all entries of the matrix have been visited.
         
             Specified by:
-                :meth:`~org.hipparchus.linear.FieldMatrixPreservingVisitor.end`Â in
-                interfaceÂ :class:`~org.hipparchus.linear.FieldMatrixPreservingVisitor`
+                :meth:`~org.hipparchus.linear.FieldMatrixPreservingVisitor.end` in
+                interface :class:`~org.hipparchus.linear.FieldMatrixPreservingVisitor`
         
             Returns:
                 the value that the :code:`walkInXxxOrder` must return
@@ -3924,8 +4002,8 @@ class DefaultFieldMatrixPreservingVisitor(FieldMatrixPreservingVisitor[_DefaultF
             This method is called once before any entry of the matrix is visited.
         
             Specified by:
-                :meth:`~org.hipparchus.linear.FieldMatrixPreservingVisitor.start`Â in
-                interfaceÂ :class:`~org.hipparchus.linear.FieldMatrixPreservingVisitor`
+                :meth:`~org.hipparchus.linear.FieldMatrixPreservingVisitor.start` in
+                interface :class:`~org.hipparchus.linear.FieldMatrixPreservingVisitor`
         
             Parameters:
                 rows (int): number of rows of the matrix
@@ -3943,8 +4021,8 @@ class DefaultFieldMatrixPreservingVisitor(FieldMatrixPreservingVisitor[_DefaultF
             Visit one matrix entry.
         
             Specified by:
-                :meth:`~org.hipparchus.linear.FieldMatrixPreservingVisitor.visit`Â in
-                interfaceÂ :class:`~org.hipparchus.linear.FieldMatrixPreservingVisitor`
+                :meth:`~org.hipparchus.linear.FieldMatrixPreservingVisitor.visit` in
+                interface :class:`~org.hipparchus.linear.FieldMatrixPreservingVisitor`
         
             Parameters:
                 row (int): row index of the entry
@@ -3979,8 +4057,8 @@ class DefaultIterativeLinearSolverEvent(IterativeLinearSolverEvent):
             <http://www.archive.org/details/predictingbehavi00gree>`).
         
             Specified by:
-                :meth:`~org.hipparchus.linear.IterativeLinearSolverEvent.getNormOfResidual`Â in
-                classÂ :class:`~org.hipparchus.linear.IterativeLinearSolverEvent`
+                :meth:`~org.hipparchus.linear.IterativeLinearSolverEvent.getNormOfResidual` in
+                class :class:`~org.hipparchus.linear.IterativeLinearSolverEvent`
         
             Returns:
                 the norm of the residual, ||r||
@@ -4004,8 +4082,8 @@ class DefaultIterativeLinearSolverEvent(IterativeLinearSolverEvent):
             provided at construction time.
         
             Overrides:
-                :meth:`~org.hipparchus.linear.IterativeLinearSolverEvent.getResidual`Â in
-                classÂ :class:`~org.hipparchus.linear.IterativeLinearSolverEvent`
+                :meth:`~org.hipparchus.linear.IterativeLinearSolverEvent.getResidual` in
+                class :class:`~org.hipparchus.linear.IterativeLinearSolverEvent`
         
             Returns:
                 the updated residual, r
@@ -4020,8 +4098,8 @@ class DefaultIterativeLinearSolverEvent(IterativeLinearSolverEvent):
             :class:`~org.hipparchus.linear.IterativeLinearSolver`.
         
             Specified by:
-                :meth:`~org.hipparchus.linear.IterativeLinearSolverEvent.getRightHandSideVector`Â in
-                classÂ :class:`~org.hipparchus.linear.IterativeLinearSolverEvent`
+                :meth:`~org.hipparchus.linear.IterativeLinearSolverEvent.getRightHandSideVector` in
+                class :class:`~org.hipparchus.linear.IterativeLinearSolverEvent`
         
             Returns:
                 the right-hand side vector, b
@@ -4036,8 +4114,8 @@ class DefaultIterativeLinearSolverEvent(IterativeLinearSolverEvent):
             the source :class:`~org.hipparchus.linear.IterativeLinearSolver`.
         
             Specified by:
-                :meth:`~org.hipparchus.linear.IterativeLinearSolverEvent.getSolution`Â in
-                classÂ :class:`~org.hipparchus.linear.IterativeLinearSolverEvent`
+                :meth:`~org.hipparchus.linear.IterativeLinearSolverEvent.getSolution` in
+                class :class:`~org.hipparchus.linear.IterativeLinearSolverEvent`
         
             Returns:
                 the solution, x
@@ -4052,8 +4130,8 @@ class DefaultIterativeLinearSolverEvent(IterativeLinearSolverEvent):
             for the residual vector :code:`r` at construction time.
         
             Overrides:
-                :meth:`~org.hipparchus.linear.IterativeLinearSolverEvent.providesResidual`Â in
-                classÂ :class:`~org.hipparchus.linear.IterativeLinearSolverEvent`
+                :meth:`~org.hipparchus.linear.IterativeLinearSolverEvent.providesResidual` in
+                class :class:`~org.hipparchus.linear.IterativeLinearSolverEvent`
         
             Returns:
                 :code:`true` if :code:`r != null`
@@ -4064,7 +4142,7 @@ class DefaultIterativeLinearSolverEvent(IterativeLinearSolverEvent):
 
 class DefaultRealMatrixChangingVisitor(RealMatrixChangingVisitor):
     """
-    public class DefaultRealMatrixChangingVisitor extends Object implements :class:`~org.hipparchus.linear.RealMatrixChangingVisitor`
+    public class DefaultRealMatrixChangingVisitor extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.linear.RealMatrixChangingVisitor`
     
         Default implementation of the :class:`~org.hipparchus.linear.RealMatrixChangingVisitor` interface.
     
@@ -4079,8 +4157,8 @@ class DefaultRealMatrixChangingVisitor(RealMatrixChangingVisitor):
             This method is called once after all entries of the matrix have been visited.
         
             Specified by:
-                :meth:`~org.hipparchus.linear.RealMatrixChangingVisitor.end`Â in
-                interfaceÂ :class:`~org.hipparchus.linear.RealMatrixChangingVisitor`
+                :meth:`~org.hipparchus.linear.RealMatrixChangingVisitor.end` in
+                interface :class:`~org.hipparchus.linear.RealMatrixChangingVisitor`
         
             Returns:
                 the value that the :code:`walkInXxxOrder` must return
@@ -4095,8 +4173,8 @@ class DefaultRealMatrixChangingVisitor(RealMatrixChangingVisitor):
             This method is called once before any entry of the matrix is visited.
         
             Specified by:
-                :meth:`~org.hipparchus.linear.RealMatrixChangingVisitor.start`Â in
-                interfaceÂ :class:`~org.hipparchus.linear.RealMatrixChangingVisitor`
+                :meth:`~org.hipparchus.linear.RealMatrixChangingVisitor.start` in
+                interface :class:`~org.hipparchus.linear.RealMatrixChangingVisitor`
         
             Parameters:
                 rows (int): number of rows of the matrix
@@ -4114,8 +4192,8 @@ class DefaultRealMatrixChangingVisitor(RealMatrixChangingVisitor):
             Visit one matrix entry.
         
             Specified by:
-                :meth:`~org.hipparchus.linear.RealMatrixChangingVisitor.visit`Â in
-                interfaceÂ :class:`~org.hipparchus.linear.RealMatrixChangingVisitor`
+                :meth:`~org.hipparchus.linear.RealMatrixChangingVisitor.visit` in
+                interface :class:`~org.hipparchus.linear.RealMatrixChangingVisitor`
         
             Parameters:
                 row (int): row index of the entry
@@ -4131,7 +4209,7 @@ class DefaultRealMatrixChangingVisitor(RealMatrixChangingVisitor):
 
 class DefaultRealMatrixPreservingVisitor(RealMatrixPreservingVisitor):
     """
-    public class DefaultRealMatrixPreservingVisitor extends Object implements :class:`~org.hipparchus.linear.RealMatrixPreservingVisitor`
+    public class DefaultRealMatrixPreservingVisitor extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.linear.RealMatrixPreservingVisitor`
     
         Default implementation of the :class:`~org.hipparchus.linear.RealMatrixPreservingVisitor` interface.
     
@@ -4146,8 +4224,8 @@ class DefaultRealMatrixPreservingVisitor(RealMatrixPreservingVisitor):
             This method is called once after all entries of the matrix have been visited.
         
             Specified by:
-                :meth:`~org.hipparchus.linear.RealMatrixPreservingVisitor.end`Â in
-                interfaceÂ :class:`~org.hipparchus.linear.RealMatrixPreservingVisitor`
+                :meth:`~org.hipparchus.linear.RealMatrixPreservingVisitor.end` in
+                interface :class:`~org.hipparchus.linear.RealMatrixPreservingVisitor`
         
             Returns:
                 the value that the :code:`walkInXxxOrder` must return
@@ -4162,8 +4240,8 @@ class DefaultRealMatrixPreservingVisitor(RealMatrixPreservingVisitor):
             This method is called once before any entry of the matrix is visited.
         
             Specified by:
-                :meth:`~org.hipparchus.linear.RealMatrixPreservingVisitor.start`Â in
-                interfaceÂ :class:`~org.hipparchus.linear.RealMatrixPreservingVisitor`
+                :meth:`~org.hipparchus.linear.RealMatrixPreservingVisitor.start` in
+                interface :class:`~org.hipparchus.linear.RealMatrixPreservingVisitor`
         
             Parameters:
                 rows (int): number of rows of the matrix
@@ -4181,8 +4259,8 @@ class DefaultRealMatrixPreservingVisitor(RealMatrixPreservingVisitor):
             Visit one matrix entry.
         
             Specified by:
-                :meth:`~org.hipparchus.linear.RealMatrixPreservingVisitor.visit`Â in
-                interfaceÂ :class:`~org.hipparchus.linear.RealMatrixPreservingVisitor`
+                :meth:`~org.hipparchus.linear.RealMatrixPreservingVisitor.visit` in
+                interface :class:`~org.hipparchus.linear.RealMatrixPreservingVisitor`
         
             Parameters:
                 row (int): row index of the entry
@@ -4273,10 +4351,10 @@ class FieldMatrix(AnyMatrix, typing.Generic[_FieldMatrix__T]):
 
 class JacobiPreconditioner(RealLinearOperator):
     """
-    public class JacobiPreconditioner extends Object implements :class:`~org.hipparchus.linear.RealLinearOperator`
+    public class JacobiPreconditioner extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.linear.RealLinearOperator`
     
         This class implements the standard Jacobi (diagonal) preconditioner. For a matrix A :sub:`ij` , this preconditioner is M
-        = diag(1 / A :sub:`11` , 1 / A :sub:`22` , â€¦).
+        = diag(1 / A :sub:`11` , 1 / A :sub:`22` , …).
     """
     def __init__(self, doubleArray: typing.List[float], boolean: bool): ...
     @staticmethod
@@ -4286,8 +4364,8 @@ class JacobiPreconditioner(RealLinearOperator):
             Returns the dimension of the domain of this operator.
         
             Specified by:
-                :meth:`~org.hipparchus.linear.RealLinearOperator.getColumnDimension`Â in
-                interfaceÂ :class:`~org.hipparchus.linear.RealLinearOperator`
+                :meth:`~org.hipparchus.linear.RealLinearOperator.getColumnDimension` in
+                interface :class:`~org.hipparchus.linear.RealLinearOperator`
         
             Returns:
                 the number of columns of the underlying matrix
@@ -4300,8 +4378,8 @@ class JacobiPreconditioner(RealLinearOperator):
             Returns the dimension of the codomain of this operator.
         
             Specified by:
-                :meth:`~org.hipparchus.linear.RealLinearOperator.getRowDimension`Â in
-                interfaceÂ :class:`~org.hipparchus.linear.RealLinearOperator`
+                :meth:`~org.hipparchus.linear.RealLinearOperator.getRowDimension` in
+                interface :class:`~org.hipparchus.linear.RealLinearOperator`
         
             Returns:
                 the number of rows of the underlying matrix
@@ -4314,8 +4392,8 @@ class JacobiPreconditioner(RealLinearOperator):
             Returns the result of multiplying :code:`this` by the vector :code:`x`.
         
             Specified by:
-                :meth:`~org.hipparchus.linear.RealLinearOperator.operate`Â in
-                interfaceÂ :class:`~org.hipparchus.linear.RealLinearOperator`
+                :meth:`~org.hipparchus.linear.RealLinearOperator.operate` in
+                interface :class:`~org.hipparchus.linear.RealLinearOperator`
         
             Parameters:
                 x (:class:`~org.hipparchus.linear.RealVector`): the vector to operate on
@@ -4328,8 +4406,8 @@ class JacobiPreconditioner(RealLinearOperator):
         ...
     def sqrt(self) -> RealLinearOperator:
         """
-            Returns the square root of :code:`this` diagonal operator. More precisely, this method returns P = diag(1 / âˆšA
-            :sub:`11` , 1 / âˆšA :sub:`22` , â€¦).
+            Returns the square root of :code:`this` diagonal operator. More precisely, this method returns P = diag(1 / √A
+            :sub:`11` , 1 / √A :sub:`22` , …).
         
             Returns:
                 the square root of :code:`this` preconditioner
@@ -4340,7 +4418,7 @@ class JacobiPreconditioner(RealLinearOperator):
 
 class LUDecomposer(MatrixDecomposer):
     """
-    public class LUDecomposer extends Object implements :class:`~org.hipparchus.linear.MatrixDecomposer`
+    public class LUDecomposer extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.linear.MatrixDecomposer`
     
         Matrix decomposer using LU-decomposition.
     
@@ -4407,12 +4485,12 @@ class PreconditionedIterativeLinearSolver(IterativeLinearSolver):
     public abstract class PreconditionedIterativeLinearSolver extends :class:`~org.hipparchus.linear.IterativeLinearSolver`
     
     
-        This abstract class defines preconditioned iterative solvers. When A is ill-conditioned, instead of solving system A Â·
+        This abstract class defines preconditioned iterative solvers. When A is ill-conditioned, instead of solving system A ·
         x = b directly, it is preferable to solve either
         (M · A) · x = M · b
         (left preconditioning), or
         (A · M) · y = b,     followed by M · y = x
-        (right preconditioning), where M approximates in some way A :sup:`-1` , while matrix-vector products of the type M Â· y
+        (right preconditioning), where M approximates in some way A :sup:`-1` , while matrix-vector products of the type M · y
         remain comparatively easy to compute. In this library, M (not M :sup:`-1` !) is called the *preconditionner*.
     
         Concrete implementations of this abstract class must be provided with the preconditioner M, as a
@@ -4437,7 +4515,7 @@ class PreconditionedIterativeLinearSolver(IterativeLinearSolver):
 
 class QRDecomposer(MatrixDecomposer):
     """
-    public class QRDecomposer extends Object implements :class:`~org.hipparchus.linear.MatrixDecomposer`
+    public class QRDecomposer extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.linear.MatrixDecomposer`
     
         Matrix decomposer using QR-decomposition.
     
@@ -4469,7 +4547,7 @@ class RRQRDecomposition(QRDecomposition):
         Calculates the rank-revealing QR-decomposition of a matrix, with column pivoting.
     
         The rank-revealing QR-decomposition of a matrix A consists of three matrices Q, R and P such that AP=QR. Q is orthogonal
-        (Q :sup:`T` Q = I), and R is upper triangular. If A is mÃ—n, Q is mÃ—m and R is mÃ—n and P is nÃ—n.
+        (Q :sup:`T` Q = I), and R is upper triangular. If A is m×n, Q is m×m and R is m×n and P is n×n.
     
         QR decomposition with column pivoting produces a rank-revealing QR decomposition and the
         :meth:`~org.hipparchus.linear.RRQRDecomposition.getRank` method may be used to return the rank of the input matrix A.
@@ -4615,7 +4693,7 @@ class RealMatrix(AnyMatrix):
         ...
     def getNormInfty(self) -> float:
         """
-            Returns the ` maximum absolute row sum norm <http://mathworld.wolfram.com/MaximumAbsoluteRowSumNorm.html>` (L :sub:`âˆž`
+            Returns the ` maximum absolute row sum norm <http://mathworld.wolfram.com/MaximumAbsoluteRowSumNorm.html>` (L :sub:`∞`
             ) of the matrix.
         
             Returns:
@@ -5089,7 +5167,7 @@ class RealMatrix(AnyMatrix):
 
 class RiccatiEquationSolverImpl(RiccatiEquationSolver):
     """
-    public class RiccatiEquationSolverImpl extends Object implements :class:`~org.hipparchus.linear.RiccatiEquationSolver`
+    public class RiccatiEquationSolverImpl extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.linear.RiccatiEquationSolver`
     
         This solver computes the solution using the following approach: 1. Compute the Hamiltonian matrix 2. Extract its complex
         eigen vectors (not the best solution, a better solution would be ordered Schur transformation) 3. Approximate the
@@ -5101,8 +5179,8 @@ class RiccatiEquationSolverImpl(RiccatiEquationSolver):
             {inheritDoc}
         
             Specified by:
-                :meth:`~org.hipparchus.linear.RiccatiEquationSolver.getK`Â in
-                interfaceÂ :class:`~org.hipparchus.linear.RiccatiEquationSolver`
+                :meth:`~org.hipparchus.linear.RiccatiEquationSolver.getK` in
+                interface :class:`~org.hipparchus.linear.RiccatiEquationSolver`
         
             Returns:
                 the linear controller k
@@ -5115,8 +5193,8 @@ class RiccatiEquationSolverImpl(RiccatiEquationSolver):
             {inheritDoc}
         
             Specified by:
-                :meth:`~org.hipparchus.linear.RiccatiEquationSolver.getP`Â in
-                interfaceÂ :class:`~org.hipparchus.linear.RiccatiEquationSolver`
+                :meth:`~org.hipparchus.linear.RiccatiEquationSolver.getP` in
+                interface :class:`~org.hipparchus.linear.RiccatiEquationSolver`
         
             Returns:
                 the p
@@ -5127,7 +5205,7 @@ class RiccatiEquationSolverImpl(RiccatiEquationSolver):
 
 class SingularValueDecomposer(MatrixDecomposer):
     """
-    public class SingularValueDecomposer extends Object implements :class:`~org.hipparchus.linear.MatrixDecomposer`
+    public class SingularValueDecomposer extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.linear.MatrixDecomposer`
     
         Matrix decomposer using Singular Value Decomposition.
     
@@ -5155,7 +5233,7 @@ class SingularValueDecomposer(MatrixDecomposer):
 _SparseFieldVector__T = typing.TypeVar('_SparseFieldVector__T', bound=org.hipparchus.FieldElement)  # <T>
 class SparseFieldVector(FieldVector[_SparseFieldVector__T], java.io.Serializable, typing.Generic[_SparseFieldVector__T]):
     """
-    public class SparseFieldVector<T extends :class:`~org.hipparchus.FieldElement`<T>> extends Object implements :class:`~org.hipparchus.linear.FieldVector`<T>, Serializable
+    public class SparseFieldVector<T extends :class:`~org.hipparchus.FieldElement`<T>> extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.linear.FieldVector`<T>, :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         This class implements the :class:`~org.hipparchus.linear.FieldVector` interface with a
         :class:`~org.hipparchus.util.OpenIntToFieldHashMap` backing store.
@@ -5195,7 +5273,8 @@ class SparseFieldVector(FieldVector[_SparseFieldVector__T], java.io.Serializable
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -5220,7 +5299,8 @@ class SparseFieldVector(FieldVector[_SparseFieldVector__T], java.io.Serializable
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -5388,7 +5468,7 @@ class AbstractFieldMatrix(FieldMatrix[_AbstractFieldMatrix__T], typing.Generic[_
 
 class AbstractRealMatrix(RealMatrix, RealLinearOperator):
     """
-    public abstract class AbstractRealMatrix extends Object implements :class:`~org.hipparchus.linear.RealMatrix`, :class:`~org.hipparchus.linear.RealLinearOperator`
+    public abstract class AbstractRealMatrix extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.linear.RealMatrix`, :class:`~org.hipparchus.linear.RealLinearOperator`
     
         Basic implementation of RealMatrix methods regardless of the underlying storage.
     
@@ -5421,10 +5501,11 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
             matrix entries are equal.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                object (Object): the object to test equality against.
+                object (:class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): the object to test equality against.
         
             Returns:
                 true if object equals this
@@ -5441,8 +5522,8 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
                 :meth:`~org.hipparchus.linear.AnyMatrix.getColumnDimension` in interface :class:`~org.hipparchus.linear.AnyMatrix`
         
             Specified by:
-                :meth:`~org.hipparchus.linear.RealLinearOperator.getColumnDimension`Â in
-                interfaceÂ :class:`~org.hipparchus.linear.RealLinearOperator`
+                :meth:`~org.hipparchus.linear.RealLinearOperator.getColumnDimension` in
+                interface :class:`~org.hipparchus.linear.RealLinearOperator`
         
             Returns:
                 the number of columns.
@@ -5488,8 +5569,8 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
                 :meth:`~org.hipparchus.linear.AnyMatrix.getRowDimension` in interface :class:`~org.hipparchus.linear.AnyMatrix`
         
             Specified by:
-                :meth:`~org.hipparchus.linear.RealLinearOperator.getRowDimension`Â in
-                interfaceÂ :class:`~org.hipparchus.linear.RealLinearOperator`
+                :meth:`~org.hipparchus.linear.RealLinearOperator.getRowDimension` in
+                interface :class:`~org.hipparchus.linear.RealLinearOperator`
         
             Returns:
                 the number of rows.
@@ -5509,7 +5590,8 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
             Computes a hashcode for the matrix.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 hashcode for matrix
@@ -5589,7 +5671,8 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
             Get a string representation for this matrix.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a string representation for this matrix
@@ -6004,14 +6087,14 @@ class ConjugateGradient(PreconditionedIterativeLinearSolver):
     
         This is an implementation of the conjugate gradient method for :class:`~org.hipparchus.linear.RealLinearOperator`. It
         follows closely the template by :meth:`~org.hipparchus.linear.ConjugateGradient.BARR1994` (figure 2.5). The linear
-        system at hand is A Â· x = b, and the residual is r = b - A Â· x.
+        system at hand is A · x = b, and the residual is r = b - A · x.
     
         :class:`~org.hipparchus.linear`
     -------------------------------
     
     
-        A default stopping criterion is implemented. The iterations stop when || r || â‰¤ Î´ || b ||, where b is the right-hand
-        side vector, r the current estimate of the residual, and Î´ a user-specified tolerance. It should be noted that r is the
+        A default stopping criterion is implemented. The iterations stop when || r || ≤ δ || b ||, where b is the right-hand
+        side vector, r the current estimate of the residual, and δ a user-specified tolerance. It should be noted that r is the
         so-called *updated* residual, which might differ from the true residual due to rounding-off errors (see e.g.
         :meth:`~org.hipparchus.linear.ConjugateGradient.STRA2002`).
     
@@ -6019,7 +6102,7 @@ class ConjugateGradient(PreconditionedIterativeLinearSolver):
     ---------------
     
     
-        In the present context, an iteration should be understood as one evaluation of the matrix-vector product A Â· x. The
+        In the present context, an iteration should be understood as one evaluation of the matrix-vector product A · x. The
         initialization phase therefore counts as one iteration.
     
         :class:`~org.hipparchus.linear`
@@ -6047,7 +6130,7 @@ class ConjugateGradient(PreconditionedIterativeLinearSolver):
     """
     OPERATOR: typing.ClassVar[str] = ...
     """
-    public static final String OPERATOR
+    public static final :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` OPERATOR
     
         Key for the :meth:`~org.hipparchus.linear.ConjugateGradient.context`.
     
@@ -6058,7 +6141,7 @@ class ConjugateGradient(PreconditionedIterativeLinearSolver):
     """
     VECTOR: typing.ClassVar[str] = ...
     """
-    public static final String VECTOR
+    public static final :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` VECTOR
     
         Key for the :meth:`~org.hipparchus.linear.ConjugateGradient.context`.
     
@@ -6091,7 +6174,7 @@ class ConjugateGradient(PreconditionedIterativeLinearSolver):
 
 class OpenMapRealVector(SparseRealVector, java.io.Serializable):
     """
-    public class OpenMapRealVector extends :class:`~org.hipparchus.linear.SparseRealVector` implements Serializable
+    public class OpenMapRealVector extends :class:`~org.hipparchus.linear.SparseRealVector` implements :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         This class implements the :class:`~org.hipparchus.linear.RealVector` interface with a
         :class:`~org.hipparchus.util.OpenIntToDoubleHashMap` backing store.
@@ -6212,7 +6295,7 @@ class OpenMapRealVector(SparseRealVector, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealVector.equals` in class :class:`~org.hipparchus.linear.RealVector`
         
             Parameters:
-                obj (Object): Object to test for equality.
+                obj (:class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality.
         
             Returns:
                 :code:`true` if two vector objects are equal, :code:`false` if :code:`other` is null, not an instance of
@@ -6382,14 +6465,14 @@ class SymmLQ(PreconditionedIterativeLinearSolver):
         implementation is largely based on the FORTRAN code by Pr. Michael A. Saunders, available `here
         <http://www.stanford.edu/group/SOL/software/symmlq/f77/>`.
     
-        SYMMLQ is designed to solve the system of linear equations A Â· x = b where A is an n Ã— n self-adjoint linear operator
+        SYMMLQ is designed to solve the system of linear equations A · x = b where A is an n × n self-adjoint linear operator
         (defined as a :class:`~org.hipparchus.linear.RealLinearOperator`), and b is a given vector. The operator A is not
         required to be positive definite. If A is known to be definite, the method of conjugate gradients might be preferred,
         since it will require about the same number of iterations as SYMMLQ but slightly less work per iteration.
     
-        SYMMLQ is designed to solve the system (A - shift Â· I) Â· x = b, where shift is a specified scalar value. If shift and
+        SYMMLQ is designed to solve the system (A - shift · I) · x = b, where shift is a specified scalar value. If shift and
         b are suitably chosen, the computed vector x may approximate an (unnormalized) eigenvector of A, as in the methods of
-        inverse iteration and/or Rayleigh-quotient iteration. Again, the linear operator (A - shift Â· I) need not be positive
+        inverse iteration and/or Rayleigh-quotient iteration. Again, the linear operator (A - shift · I) need not be positive
         definite (but *must* be self-adjoint). The work per iteration is very slightly less if shift = 0.
     
         Preconditioning
@@ -6397,30 +6480,30 @@ class SymmLQ(PreconditionedIterativeLinearSolver):
     
     
         Preconditioning may reduce the number of iterations required. The solver may be provided with a positive definite
-        preconditioner M = P :sup:`T` Â· P that is known to approximate (A - shift Â· I) :sup:`-1` in some sense, where
-        matrix-vector products of the form M Â· y = x can be computed efficiently. Then SYMMLQ will implicitly solve the system
-        of equations P Â· (A - shift Â· I) Â· P :sup:`T` Â· x :sub:`hat` = P Â· b, i.e. A :sub:`hat` Â· x :sub:`hat` = b
-        :sub:`hat` , where A :sub:`hat` = P Â· (A - shift Â· I) Â· P :sup:`T` , b :sub:`hat` = P Â· b, and return the solution x
-        = P :sup:`T` Â· x :sub:`hat` . The associated residual is r :sub:`hat` = b :sub:`hat` - A :sub:`hat` Â· x :sub:`hat` = P
-        Â· [b - (A - shift Â· I) Â· x] = P Â· r.
+        preconditioner M = P :sup:`T` · P that is known to approximate (A - shift · I) :sup:`-1` in some sense, where
+        matrix-vector products of the form M · y = x can be computed efficiently. Then SYMMLQ will implicitly solve the system
+        of equations P · (A - shift · I) · P :sup:`T` · x :sub:`hat` = P · b, i.e. A :sub:`hat` · x :sub:`hat` = b
+        :sub:`hat` , where A :sub:`hat` = P · (A - shift · I) · P :sup:`T` , b :sub:`hat` = P · b, and return the solution x
+        = P :sup:`T` · x :sub:`hat` . The associated residual is r :sub:`hat` = b :sub:`hat` - A :sub:`hat` · x :sub:`hat` = P
+        · [b - (A - shift · I) · x] = P · r.
     
         In the case of preconditioning, the :class:`~org.hipparchus.linear.IterativeLinearSolverEvent`s that this solver fires
         are such that :meth:`~org.hipparchus.linear.IterativeLinearSolverEvent.getNormOfResidual` returns the norm of the
-        *preconditioned*, updated residual, ||P Â· r||, not the norm of the *true* residual ||r||.
+        *preconditioned*, updated residual, ||P · r||, not the norm of the *true* residual ||r||.
     
         :class:`~org.hipparchus.linear`
     -------------------------------
     
     
-        A default stopping criterion is implemented. The iterations stop when || rhat || â‰¤ Î´ || Ahat || || xhat ||, where
+        A default stopping criterion is implemented. The iterations stop when || rhat || ≤ δ || Ahat || || xhat ||, where
         xhat is the current estimate of the solution of the transformed system, rhat the current estimate of the corresponding
-        residual, and Î´ a user-specified tolerance.
+        residual, and δ a user-specified tolerance.
     
         Iteration count
     ---------------
     
     
-        In the present context, an iteration should be understood as one evaluation of the matrix-vector product A Â· x. The
+        In the present context, an iteration should be understood as one evaluation of the matrix-vector product A · x. The
         initialization phase therefore counts as one iteration. If the user requires checks on the symmetry of A, this entails
         one further matrix-vector product in the initial phase. This further product is *not* accounted for in the iteration
         count. In other words, the number of iterations required to reach convergence will be identical, whether checks have
@@ -6442,7 +6525,7 @@ class SymmLQ(PreconditionedIterativeLinearSolver):
           - :meth:`~org.hipparchus.linear.SymmLQ.solveInPlace`,
     
         should not be considered as an initial guess, as it is set to zero in the initial phase. If x :sub:`0` is known to be a
-        good approximation to x, one should compute r :sub:`0` = b - A Â· x, solve A Â· dx = r0, and set x = x :sub:`0` + dx.
+        good approximation to x, one should compute r :sub:`0` = b - A · x, solve A · dx = r0, and set x = x :sub:`0` + dx.
     
         :class:`~org.hipparchus.linear`
     -------------------------------
@@ -6454,8 +6537,8 @@ class SymmLQ(PreconditionedIterativeLinearSolver):
     
           - key :code:`"operator"` points to the offending linear operator, say L,
           - key :code:`"vector1"` points to the first offending vector, say x,
-          - key :code:`"vector2"` points to the second offending vector, say y, such that x :sup:`T` Â· L Â· y â‰  y :sup:`T` Â· L
-            Â· x (within a certain accuracy).
+          - key :code:`"vector2"` points to the second offending vector, say y, such that x :sup:`T` · L · y ≠ y :sup:`T` · L
+            · x (within a certain accuracy).
     
     
         :class:`~org.hipparchus.exception.MathIllegalArgumentException` might also be thrown in case the preconditioner is not
@@ -6590,7 +6673,7 @@ class Array2DRowFieldMatrix(AbstractFieldMatrix[_Array2DRowFieldMatrix__T], java
 
 class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
     """
-    public class Array2DRowRealMatrix extends :class:`~org.hipparchus.linear.AbstractRealMatrix` implements Serializable
+    public class Array2DRowRealMatrix extends :class:`~org.hipparchus.linear.AbstractRealMatrix` implements :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Implementation of :class:`~org.hipparchus.linear.RealMatrix` using a :code:`double[][]` array to store entries.
     
@@ -6637,12 +6720,12 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.AnyMatrix.getColumnDimension` in interface :class:`~org.hipparchus.linear.AnyMatrix`
         
             Specified by:
-                :meth:`~org.hipparchus.linear.RealLinearOperator.getColumnDimension`Â in
-                interfaceÂ :class:`~org.hipparchus.linear.RealLinearOperator`
+                :meth:`~org.hipparchus.linear.RealLinearOperator.getColumnDimension` in
+                interface :class:`~org.hipparchus.linear.RealLinearOperator`
         
             Specified by:
-                :meth:`~org.hipparchus.linear.AbstractRealMatrix.getColumnDimension`Â in
-                classÂ :class:`~org.hipparchus.linear.AbstractRealMatrix`
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.getColumnDimension` in
+                class :class:`~org.hipparchus.linear.AbstractRealMatrix`
         
             Returns:
                 the number of columns.
@@ -6686,12 +6769,12 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.AnyMatrix.getRowDimension` in interface :class:`~org.hipparchus.linear.AnyMatrix`
         
             Specified by:
-                :meth:`~org.hipparchus.linear.RealLinearOperator.getRowDimension`Â in
-                interfaceÂ :class:`~org.hipparchus.linear.RealLinearOperator`
+                :meth:`~org.hipparchus.linear.RealLinearOperator.getRowDimension` in
+                interface :class:`~org.hipparchus.linear.RealLinearOperator`
         
             Specified by:
-                :meth:`~org.hipparchus.linear.AbstractRealMatrix.getRowDimension`Â in
-                classÂ :class:`~org.hipparchus.linear.AbstractRealMatrix`
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.getRowDimension` in
+                class :class:`~org.hipparchus.linear.AbstractRealMatrix`
         
             Returns:
                 the number of rows.
@@ -6711,7 +6794,7 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 b (:class:`~org.hipparchus.linear.RealMatrix`): matrix to post Kronecker-multiply by
         
             Returns:
-                this â¨‚ b
+                this ⨂ b
         
         
         """
@@ -6816,8 +6899,8 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInColumnOrder` in interface :class:`~org.hipparchus.linear.RealMatrix`
         
             Overrides:
-                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInColumnOrder`Â in
-                classÂ :class:`~org.hipparchus.linear.AbstractRealMatrix`
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInColumnOrder` in
+                class :class:`~org.hipparchus.linear.AbstractRealMatrix`
         
             Parameters:
                 visitor (:class:`~org.hipparchus.linear.RealMatrixChangingVisitor`): visitor used to process all matrix entries
@@ -6845,8 +6928,8 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInColumnOrder` in interface :class:`~org.hipparchus.linear.RealMatrix`
         
             Overrides:
-                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInColumnOrder`Â in
-                classÂ :class:`~org.hipparchus.linear.AbstractRealMatrix`
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInColumnOrder` in
+                class :class:`~org.hipparchus.linear.AbstractRealMatrix`
         
             Parameters:
                 visitor (:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor`): visitor used to process all matrix entries
@@ -6876,8 +6959,8 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInColumnOrder` in interface :class:`~org.hipparchus.linear.RealMatrix`
         
             Overrides:
-                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInColumnOrder`Â in
-                classÂ :class:`~org.hipparchus.linear.AbstractRealMatrix`
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInColumnOrder` in
+                class :class:`~org.hipparchus.linear.AbstractRealMatrix`
         
             Parameters:
                 visitor (:class:`~org.hipparchus.linear.RealMatrixChangingVisitor`): visitor used to process all matrix entries
@@ -6914,8 +6997,8 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInColumnOrder` in interface :class:`~org.hipparchus.linear.RealMatrix`
         
             Overrides:
-                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInColumnOrder`Â in
-                classÂ :class:`~org.hipparchus.linear.AbstractRealMatrix`
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInColumnOrder` in
+                class :class:`~org.hipparchus.linear.AbstractRealMatrix`
         
             Parameters:
                 visitor (:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor`): visitor used to process all matrix entries
@@ -6962,8 +7045,8 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInRowOrder` in interface :class:`~org.hipparchus.linear.RealMatrix`
         
             Overrides:
-                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInRowOrder`Â in
-                classÂ :class:`~org.hipparchus.linear.AbstractRealMatrix`
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInRowOrder` in
+                class :class:`~org.hipparchus.linear.AbstractRealMatrix`
         
             Parameters:
                 visitor (:class:`~org.hipparchus.linear.RealMatrixChangingVisitor`): visitor used to process all matrix entries
@@ -6991,8 +7074,8 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInRowOrder` in interface :class:`~org.hipparchus.linear.RealMatrix`
         
             Overrides:
-                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInRowOrder`Â in
-                classÂ :class:`~org.hipparchus.linear.AbstractRealMatrix`
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInRowOrder` in
+                class :class:`~org.hipparchus.linear.AbstractRealMatrix`
         
             Parameters:
                 visitor (:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor`): visitor used to process all matrix entries
@@ -7022,8 +7105,8 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInRowOrder` in interface :class:`~org.hipparchus.linear.RealMatrix`
         
             Overrides:
-                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInRowOrder`Â in
-                classÂ :class:`~org.hipparchus.linear.AbstractRealMatrix`
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInRowOrder` in
+                class :class:`~org.hipparchus.linear.AbstractRealMatrix`
         
             Parameters:
                 visitor (:class:`~org.hipparchus.linear.RealMatrixChangingVisitor`): visitor used to process all matrix entries
@@ -7060,8 +7143,8 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInRowOrder` in interface :class:`~org.hipparchus.linear.RealMatrix`
         
             Overrides:
-                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInRowOrder`Â in
-                classÂ :class:`~org.hipparchus.linear.AbstractRealMatrix`
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInRowOrder` in
+                class :class:`~org.hipparchus.linear.AbstractRealMatrix`
         
             Parameters:
                 visitor (:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor`): visitor used to process all matrix entries
@@ -7193,7 +7276,7 @@ class BlockFieldMatrix(AbstractFieldMatrix[_BlockFieldMatrix__T], java.io.Serial
 
 class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
     """
-    public class BlockRealMatrix extends :class:`~org.hipparchus.linear.AbstractRealMatrix` implements Serializable
+    public class BlockRealMatrix extends :class:`~org.hipparchus.linear.AbstractRealMatrix` implements :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Cache-friendly implementation of RealMatrix using a flat arrays to store square blocks of the matrix.
     
@@ -7267,7 +7350,8 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
         """
             Create a data array in blocks layout.
         
-            This method can be used to create the array argument of the null constructor.
+            This method can be used to create the array argument of the
+            :meth:`~org.hipparchus.linear.BlockRealMatrix.BlockRealMatrix` constructor.
         
             Parameters:
                 rows (int): Number of rows in the new matrix.
@@ -7277,7 +7361,8 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 a new data array in blocks layout.
         
             Also see:
-                null, null
+                :meth:`~org.hipparchus.linear.BlockRealMatrix.toBlocksLayout`,
+                :meth:`~org.hipparchus.linear.BlockRealMatrix.BlockRealMatrix`
         
         
         """
@@ -7292,12 +7377,12 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.AnyMatrix.getColumnDimension` in interface :class:`~org.hipparchus.linear.AnyMatrix`
         
             Specified by:
-                :meth:`~org.hipparchus.linear.RealLinearOperator.getColumnDimension`Â in
-                interfaceÂ :class:`~org.hipparchus.linear.RealLinearOperator`
+                :meth:`~org.hipparchus.linear.RealLinearOperator.getColumnDimension` in
+                interface :class:`~org.hipparchus.linear.RealLinearOperator`
         
             Specified by:
-                :meth:`~org.hipparchus.linear.AbstractRealMatrix.getColumnDimension`Â in
-                classÂ :class:`~org.hipparchus.linear.AbstractRealMatrix`
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.getColumnDimension` in
+                class :class:`~org.hipparchus.linear.AbstractRealMatrix`
         
             Returns:
                 the number of columns.
@@ -7332,8 +7417,8 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealMatrix.getFrobeniusNorm` in interface :class:`~org.hipparchus.linear.RealMatrix`
         
             Overrides:
-                :meth:`~org.hipparchus.linear.AbstractRealMatrix.getFrobeniusNorm`Â in
-                classÂ :class:`~org.hipparchus.linear.AbstractRealMatrix`
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.getFrobeniusNorm` in
+                class :class:`~org.hipparchus.linear.AbstractRealMatrix`
         
             Returns:
                 norm
@@ -7357,7 +7442,7 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
         ...
     def getNormInfty(self) -> float:
         """
-            Returns the ` maximum absolute row sum norm <http://mathworld.wolfram.com/MaximumAbsoluteRowSumNorm.html>` (L :sub:`âˆž`
+            Returns the ` maximum absolute row sum norm <http://mathworld.wolfram.com/MaximumAbsoluteRowSumNorm.html>` (L :sub:`∞`
             ) of the matrix.
         
             Specified by:
@@ -7378,12 +7463,12 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.AnyMatrix.getRowDimension` in interface :class:`~org.hipparchus.linear.AnyMatrix`
         
             Specified by:
-                :meth:`~org.hipparchus.linear.RealLinearOperator.getRowDimension`Â in
-                interfaceÂ :class:`~org.hipparchus.linear.RealLinearOperator`
+                :meth:`~org.hipparchus.linear.RealLinearOperator.getRowDimension` in
+                interface :class:`~org.hipparchus.linear.RealLinearOperator`
         
             Specified by:
-                :meth:`~org.hipparchus.linear.AbstractRealMatrix.getRowDimension`Â in
-                classÂ :class:`~org.hipparchus.linear.AbstractRealMatrix`
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.getRowDimension` in
+                class :class:`~org.hipparchus.linear.AbstractRealMatrix`
         
             Returns:
                 the number of rows.
@@ -7443,8 +7528,8 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealMatrix.scalarMultiply` in interface :class:`~org.hipparchus.linear.RealMatrix`
         
             Overrides:
-                :meth:`~org.hipparchus.linear.AbstractRealMatrix.scalarMultiply`Â in
-                classÂ :class:`~org.hipparchus.linear.AbstractRealMatrix`
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.scalarMultiply` in
+                class :class:`~org.hipparchus.linear.AbstractRealMatrix`
         
             Parameters:
                 d (double): value to multiply all entries by
@@ -7503,8 +7588,8 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder` in interface :class:`~org.hipparchus.linear.RealMatrix`
         
             Overrides:
-                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInOptimizedOrder`Â in
-                classÂ :class:`~org.hipparchus.linear.AbstractRealMatrix`
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInOptimizedOrder` in
+                class :class:`~org.hipparchus.linear.AbstractRealMatrix`
         
             Parameters:
                 visitor (:class:`~org.hipparchus.linear.RealMatrixChangingVisitor`): visitor used to process all matrix entries
@@ -7531,8 +7616,8 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder` in interface :class:`~org.hipparchus.linear.RealMatrix`
         
             Overrides:
-                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInOptimizedOrder`Â in
-                classÂ :class:`~org.hipparchus.linear.AbstractRealMatrix`
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInOptimizedOrder` in
+                class :class:`~org.hipparchus.linear.AbstractRealMatrix`
         
             Parameters:
                 visitor (:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor`): visitor used to process all matrix entries
@@ -7561,8 +7646,8 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder` in interface :class:`~org.hipparchus.linear.RealMatrix`
         
             Overrides:
-                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInOptimizedOrder`Â in
-                classÂ :class:`~org.hipparchus.linear.AbstractRealMatrix`
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInOptimizedOrder` in
+                class :class:`~org.hipparchus.linear.AbstractRealMatrix`
         
             Parameters:
                 visitor (:class:`~org.hipparchus.linear.RealMatrixChangingVisitor`): visitor used to process all matrix entries
@@ -7598,8 +7683,8 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder` in interface :class:`~org.hipparchus.linear.RealMatrix`
         
             Overrides:
-                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInOptimizedOrder`Â in
-                classÂ :class:`~org.hipparchus.linear.AbstractRealMatrix`
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInOptimizedOrder` in
+                class :class:`~org.hipparchus.linear.AbstractRealMatrix`
         
             Parameters:
                 visitor (:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor`): visitor used to process all matrix entries
@@ -7646,8 +7731,8 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInRowOrder` in interface :class:`~org.hipparchus.linear.RealMatrix`
         
             Overrides:
-                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInRowOrder`Â in
-                classÂ :class:`~org.hipparchus.linear.AbstractRealMatrix`
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInRowOrder` in
+                class :class:`~org.hipparchus.linear.AbstractRealMatrix`
         
             Parameters:
                 visitor (:class:`~org.hipparchus.linear.RealMatrixChangingVisitor`): visitor used to process all matrix entries
@@ -7675,8 +7760,8 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInRowOrder` in interface :class:`~org.hipparchus.linear.RealMatrix`
         
             Overrides:
-                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInRowOrder`Â in
-                classÂ :class:`~org.hipparchus.linear.AbstractRealMatrix`
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInRowOrder` in
+                class :class:`~org.hipparchus.linear.AbstractRealMatrix`
         
             Parameters:
                 visitor (:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor`): visitor used to process all matrix entries
@@ -7706,8 +7791,8 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInRowOrder` in interface :class:`~org.hipparchus.linear.RealMatrix`
         
             Overrides:
-                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInRowOrder`Â in
-                classÂ :class:`~org.hipparchus.linear.AbstractRealMatrix`
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInRowOrder` in
+                class :class:`~org.hipparchus.linear.AbstractRealMatrix`
         
             Parameters:
                 visitor (:class:`~org.hipparchus.linear.RealMatrixChangingVisitor`): visitor used to process all matrix entries
@@ -7744,8 +7829,8 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInRowOrder` in interface :class:`~org.hipparchus.linear.RealMatrix`
         
             Overrides:
-                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInRowOrder`Â in
-                classÂ :class:`~org.hipparchus.linear.AbstractRealMatrix`
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.walkInRowOrder` in
+                class :class:`~org.hipparchus.linear.AbstractRealMatrix`
         
             Parameters:
                 visitor (:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor`): visitor used to process all matrix entries
@@ -7836,7 +7921,7 @@ class DiagonalMatrix(AbstractRealMatrix, java.io.Serializable):
 
 class OpenMapRealMatrix(AbstractRealMatrix, SparseRealMatrix, java.io.Serializable):
     """
-    public class OpenMapRealMatrix extends :class:`~org.hipparchus.linear.AbstractRealMatrix` implements :class:`~org.hipparchus.linear.SparseRealMatrix`, Serializable
+    public class OpenMapRealMatrix extends :class:`~org.hipparchus.linear.AbstractRealMatrix` implements :class:`~org.hipparchus.linear.SparseRealMatrix`, :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Sparse matrix implementation based on an open addressed map.
     
@@ -7881,12 +7966,12 @@ class OpenMapRealMatrix(AbstractRealMatrix, SparseRealMatrix, java.io.Serializab
                 :meth:`~org.hipparchus.linear.AnyMatrix.getColumnDimension` in interface :class:`~org.hipparchus.linear.AnyMatrix`
         
             Specified by:
-                :meth:`~org.hipparchus.linear.RealLinearOperator.getColumnDimension`Â in
-                interfaceÂ :class:`~org.hipparchus.linear.RealLinearOperator`
+                :meth:`~org.hipparchus.linear.RealLinearOperator.getColumnDimension` in
+                interface :class:`~org.hipparchus.linear.RealLinearOperator`
         
             Specified by:
-                :meth:`~org.hipparchus.linear.AbstractRealMatrix.getColumnDimension`Â in
-                classÂ :class:`~org.hipparchus.linear.AbstractRealMatrix`
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.getColumnDimension` in
+                class :class:`~org.hipparchus.linear.AbstractRealMatrix`
         
             Returns:
                 the number of columns.
@@ -7903,12 +7988,12 @@ class OpenMapRealMatrix(AbstractRealMatrix, SparseRealMatrix, java.io.Serializab
                 :meth:`~org.hipparchus.linear.AnyMatrix.getRowDimension` in interface :class:`~org.hipparchus.linear.AnyMatrix`
         
             Specified by:
-                :meth:`~org.hipparchus.linear.RealLinearOperator.getRowDimension`Â in
-                interfaceÂ :class:`~org.hipparchus.linear.RealLinearOperator`
+                :meth:`~org.hipparchus.linear.RealLinearOperator.getRowDimension` in
+                interface :class:`~org.hipparchus.linear.RealLinearOperator`
         
             Specified by:
-                :meth:`~org.hipparchus.linear.AbstractRealMatrix.getRowDimension`Â in
-                classÂ :class:`~org.hipparchus.linear.AbstractRealMatrix`
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.getRowDimension` in
+                class :class:`~org.hipparchus.linear.AbstractRealMatrix`
         
             Returns:
                 the number of rows.
@@ -7973,6 +8058,7 @@ class __module_protocol__(typing.Protocol):
     DefaultIterativeLinearSolverEvent: typing.Type[DefaultIterativeLinearSolverEvent]
     DefaultRealMatrixChangingVisitor: typing.Type[DefaultRealMatrixChangingVisitor]
     DefaultRealMatrixPreservingVisitor: typing.Type[DefaultRealMatrixPreservingVisitor]
+    DependentVectorsHandler: typing.Type[DependentVectorsHandler]
     DiagonalMatrix: typing.Type[DiagonalMatrix]
     EigenDecomposition: typing.Type[EigenDecomposition]
     FieldDecompositionSolver: typing.Type[FieldDecompositionSolver]

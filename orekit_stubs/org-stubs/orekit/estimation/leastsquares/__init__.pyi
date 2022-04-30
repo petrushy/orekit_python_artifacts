@@ -7,7 +7,6 @@ import org.orekit.estimation.measurements
 import org.orekit.orbits
 import org.orekit.propagation
 import org.orekit.propagation.conversion
-import org.orekit.propagation.integration
 import org.orekit.utils
 import typing
 
@@ -15,9 +14,10 @@ import typing
 
 class AbstractBatchLSModel(org.hipparchus.optim.nonlinear.vector.leastsquares.MultivariateJacobianFunction):
     """
-    public abstract class AbstractBatchLSModel extends Object implements MultivariateJacobianFunction
+    public abstract class AbstractBatchLSModel extends :class:`~org.orekit.estimation.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.MultivariateJacobianFunction?is`
     
-        Bridge between :class:`~org.orekit.estimation.measurements.ObservedMeasurement` and null.
+        Bridge between :class:`~org.orekit.estimation.measurements.ObservedMeasurement` and
+        :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem?is`.
     
         Since:
             11.0
@@ -31,7 +31,7 @@ class AbstractBatchLSModel(org.hipparchus.optim.nonlinear.vector.leastsquares.Mu
             Create the propagators and parameters corresponding to an evaluation point.
         
             Parameters:
-                point (RealVector): evaluation point
+                point (:class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.linear.RealVector?is`): evaluation point
         
             Returns:
                 an array of new propagators
@@ -114,7 +114,7 @@ class AbstractBatchLSModel(org.hipparchus.optim.nonlinear.vector.leastsquares.Mu
             Set the counter for evaluations.
         
             Parameters:
-                evaluationsCounter (Incrementor): counter for evaluations
+                evaluationsCounter (:class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.util.Incrementor?is`): counter for evaluations
         
         
         """
@@ -124,24 +124,16 @@ class AbstractBatchLSModel(org.hipparchus.optim.nonlinear.vector.leastsquares.Mu
             Set the counter for iterations.
         
             Parameters:
-                iterationsCounter (Incrementor): counter for iterations
+                iterationsCounter (:class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.util.Incrementor?is`): counter for iterations
         
         
         """
         ...
-    def value(self, realVector: org.hipparchus.linear.RealVector) -> org.hipparchus.util.Pair[org.hipparchus.linear.RealVector, org.hipparchus.linear.RealMatrix]:
-        """
-        
-            Specified by:
-                 in interface 
-        
-        
-        """
-        ...
+    def value(self, realVector: org.hipparchus.linear.RealVector) -> org.hipparchus.util.Pair[org.hipparchus.linear.RealVector, org.hipparchus.linear.RealMatrix]: ...
 
 class BatchLSEstimator:
     """
-    public class BatchLSEstimator extends Object
+    public class BatchLSEstimator extends :class:`~org.orekit.estimation.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Least squares estimator for orbit determination.
     
@@ -152,7 +144,7 @@ class BatchLSEstimator:
         Since:
             8.0
     """
-    def __init__(self, leastSquaresOptimizer: org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer, orbitDeterminationPropagatorBuilderArray: typing.List[org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder]): ...
+    def __init__(self, leastSquaresOptimizer: org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer, *orbitDeterminationPropagatorBuilder: org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder): ...
     def addMeasurement(self, observedMeasurement: org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]) -> None:
         """
             Add a measurement.
@@ -189,8 +181,8 @@ class BatchLSEstimator:
             values.
         
             For even more in-depth information, the :meth:`~org.orekit.estimation.leastsquares.BatchLSEstimator.getOptimum` method
-            provides detailed elements (covariance matrix, estimated parameters standard deviation, weighted Jacobian, RMS,
-            Ã�â€¡Ã‚Â², residuals and more).
+            provides detailed elements (covariance matrix, estimated parameters standard deviation, weighted Jacobian, RMS, χ²,
+            residuals and more).
         
             Returns:
                 propagators configured with estimated orbits as initial states, and all propagators estimated parameters also set
@@ -242,8 +234,10 @@ class BatchLSEstimator:
         """
             Get the optimum found.
         
-            The null object contains detailed elements (covariance matrix, estimated parameters standard deviation, weighted
-            Jacobian, RMS, Ã�â€¡Ã‚Â², residuals and more).
+            The
+            :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer.Optimum?is`
+            object contains detailed elements (covariance matrix, estimated parameters standard deviation, weighted Jacobian, RMS,
+            χ², residuals and more).
         
             Beware that the returned object is the raw view from the underlying mathematical library. At this raw level, parameters
             have :meth:`~org.orekit.utils.ParameterDriver.getNormalizedValue` whereas the space flight parameters have
@@ -278,8 +272,10 @@ class BatchLSEstimator:
         """
             Get the covariances matrix in space flight dynamics physical units.
         
-            This method retrieve the null from the [@link :meth:`~org.orekit.estimation.leastsquares.BatchLSEstimator.getOptimum`
-            and applies the scaling factors to it in order to convert it from raw normalized values back to physical values.
+            This method retrieve the
+            :meth:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation.html?is`
+            from the [@link :meth:`~org.orekit.estimation.leastsquares.BatchLSEstimator.getOptimum` and applies the scaling factors
+            to it in order to convert it from raw normalized values back to physical values.
         
             Parameters:
                 threshold (double): threshold to identify matrix singularity
@@ -306,26 +302,7 @@ class BatchLSEstimator:
         
         """
         ...
-    def setConvergenceChecker(self, convergenceChecker: org.hipparchus.optim.ConvergenceChecker[org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation]) -> None:
-        """
-            Set a custom convergence checker.
-        
-            Calling this method overrides any checker that could have been set beforehand by calling
-            :meth:`~org.orekit.estimation.leastsquares.BatchLSEstimator.setParametersConvergenceThreshold`. Both methods are
-            mutually exclusive.
-        
-            Parameters:
-                convergenceChecker (ConvergenceChecker<LeastSquaresProblem.Evaluation> convergenceChecker): convergence checker to set
-        
-            Since:
-                10.1
-        
-            Also see:
-                :meth:`~org.orekit.estimation.leastsquares.BatchLSEstimator.setParametersConvergenceThreshold`
-        
-        
-        """
-        ...
+    def setConvergenceChecker(self, convergenceChecker: org.hipparchus.optim.ConvergenceChecker[org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation]) -> None: ...
     def setMaxEvaluations(self, int: int) -> None:
         """
             Set the maximum number of model evaluations.
@@ -333,9 +310,12 @@ class BatchLSEstimator:
             The evaluations correspond to the orbit propagations and measurements estimations performed with a set of estimated
             parameters.
         
-            For null there is one evaluation at each iteration, so the maximum numbers may be set to the same value. For null, there
-            can be several evaluations at some iterations (typically for the first couple of iterations), so the maximum number of
-            evaluations may be set to a higher value than the maximum number of iterations.
+            For
+            :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.GaussNewtonOptimizer?is`
+            there is one evaluation at each iteration, so the maximum numbers may be set to the same value. For
+            :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.LevenbergMarquardtOptimizer?is`,
+            there can be several evaluations at some iterations (typically for the first couple of iterations), so the maximum
+            number of evaluations may be set to a higher value than the maximum number of iterations.
         
             Parameters:
                 maxEvaluations (int): maximum number of model evaluations
@@ -351,7 +331,8 @@ class BatchLSEstimator:
         """
             Set the maximum number of iterations.
         
-            The iterations correspond to the top level iterations of the null.
+            The iterations correspond to the top level iterations of the
+            :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer?is`.
         
             Parameters:
                 maxIterations (int): maxIterations maximum number of iterations
@@ -387,7 +368,7 @@ class BatchLSEstimator:
         
             So the convergence threshold specified here can be considered as a multiplication factor applied to scale. Since for all
             parameters the scale is often small (typically about 1 m for orbital positions for example), then the threshold should
-            not be too small. A value of 10Ã¢ï¿½Â»Ã‚Â³ is often quite accurate.
+            not be too small. A value of 10⁻³ is often quite accurate.
         
             Calling this method overrides any checker that could have been set beforehand by calling
             :meth:`~org.orekit.estimation.leastsquares.BatchLSEstimator.setConvergenceChecker`. Both methods are mutually exclusive.
@@ -396,7 +377,8 @@ class BatchLSEstimator:
                 parametersConvergenceThreshold (double): convergence threshold on normalized parameters (dimensionless, related to parameters scales)
         
             Also see:
-                :meth:`~org.orekit.estimation.leastsquares.BatchLSEstimator.setConvergenceChecker`, null
+                :meth:`~org.orekit.estimation.leastsquares.BatchLSEstimator.setConvergenceChecker`,
+                :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.EvaluationRmsChecker?is`
         
         
         """
@@ -426,7 +408,8 @@ class BatchLSObserver:
                 estimatedMeasurementsParameters (:class:`~org.orekit.utils.ParameterDriversList`): estimated measurements parameters
                 evaluationsProvider (:class:`~org.orekit.estimation.measurements.EstimationsProvider`): provider for measurements evaluations resulting from the current estimated orbit (this is an unmodifiable view of the
                     current evaluations, its content is changed at each iteration)
-                lspEvaluation (LeastSquaresProblem.Evaluation): current evaluation of the underlying null
+                lspEvaluation (:class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation?is`): current evaluation of the underlying
+                    :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem?is`
         
         
         """
@@ -451,7 +434,8 @@ class BatchLSModel(AbstractBatchLSModel):
     """
     public class BatchLSModel extends :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
     
-        Bridge between :class:`~org.orekit.estimation.measurements.ObservedMeasurement` and null.
+        Bridge between :class:`~org.orekit.estimation.measurements.ObservedMeasurement` and
+        :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem?is`.
     
         Since:
             8.0
@@ -462,7 +446,8 @@ class DSSTBatchLSModel(AbstractBatchLSModel):
     """
     public class DSSTBatchLSModel extends :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
     
-        Bridge between :class:`~org.orekit.estimation.measurements.ObservedMeasurement` and null.
+        Bridge between :class:`~org.orekit.estimation.measurements.ObservedMeasurement` and
+        :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem?is`.
     
         This class is an adaption of the :class:`~org.orekit.estimation.leastsquares.BatchLSModel` class but for the
         :class:`~org.orekit.propagation.semianalytical.dsst.DSSTPropagator`.
@@ -471,277 +456,6 @@ class DSSTBatchLSModel(AbstractBatchLSModel):
             10.0
     """
     def __init__(self, orbitDeterminationPropagatorBuilderArray: typing.List[org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: ModelObserver, propagationType: org.orekit.propagation.PropagationType, propagationType2: org.orekit.propagation.PropagationType): ...
-
-class PythonAbstractBatchLSModel(AbstractBatchLSModel):
-    """
-    public class PythonAbstractBatchLSModel extends :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
-    """
-    def __init__(self, orbitDeterminationPropagatorBuilderArray: typing.List[org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, abstractJacobiansMapperArray: typing.List[org.orekit.propagation.integration.AbstractJacobiansMapper], modelObserver: ModelObserver): ...
-    def configureDerivatives(self, propagator: org.orekit.propagation.Propagator) -> org.orekit.propagation.integration.AbstractJacobiansMapper:
-        """
-            Configure the propagator to compute derivatives.
-        
-            Specified by:
-                :meth:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel.configureDerivatives`Â in
-                classÂ :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
-        
-            Parameters:
-                propagators (:class:`~org.orekit.propagation.Propagator`): :class:`~org.orekit.propagation.Propagator` to configure
-        
-            Returns:
-                mapper for this propagator
-        
-        
-        """
-        ...
-    def configureOrbits(self, matricesHarvester: org.orekit.propagation.MatricesHarvester, propagator: org.orekit.propagation.Propagator) -> org.orekit.orbits.Orbit:
-        """
-            Description copied from class: :meth:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel.configureOrbits`
-            Configure the current estimated orbits.
-        
-            For DSST orbit determination, short period derivatives are also calculated.
-        
-            Specified by:
-                :meth:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel.configureOrbits`Â in
-                classÂ :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
-        
-            Parameters:
-                harvester (:class:`~org.orekit.propagation.MatricesHarvester`): harvester for matrices
-                propagator (:class:`~org.orekit.propagation.Propagator`): the orbit propagator
-        
-            Returns:
-                the current estimated orbits
-        
-        
-        """
-        ...
-    def createPropagators(self, realVector: org.hipparchus.linear.RealVector) -> typing.List[org.orekit.propagation.integration.AbstractIntegratedPropagator]:
-        """
-            Create the propagators and parameters corresponding to an evaluation point.
-        
-            Overrides:
-                :meth:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel.createPropagators`Â in
-                classÂ :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
-        
-            Parameters:
-                point (RealVector): evaluation point
-        
-            Returns:
-                an array of new propagators
-        
-        
-        """
-        ...
-    def fetchEvaluatedMeasurement(self, int: int, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]) -> None:
-        """
-            Fetch a measurement that was evaluated during propagation.
-        
-            Overrides:
-                :meth:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel.fetchEvaluatedMeasurement`Â in
-                classÂ :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
-        
-            Parameters:
-                index (int): index of the measurement first component
-                evaluation (:class:`~org.orekit.estimation.measurements.EstimatedMeasurement`<?> evaluation): measurement evaluation
-        
-        
-        """
-        ...
-    def finalize(self) -> None: ...
-    def getEvaluationsCount(self) -> int:
-        """
-            Get the evaluations count.
-        
-            Overrides:
-                :meth:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel.getEvaluationsCount`Â in
-                classÂ :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
-        
-            Returns:
-                evaluations count
-        
-        
-        """
-        ...
-    def getIterationsCount(self) -> int:
-        """
-            Get the iterations count.
-        
-            Overrides:
-                :meth:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel.getIterationsCount`Â in
-                classÂ :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
-        
-            Returns:
-                iterations count
-        
-        
-        """
-        ...
-    def getSelectedPropagationDriversForBuilder(self, int: int) -> org.orekit.utils.ParameterDriversList:
-        """
-            Get the selected propagation drivers for a propagatorBuilder.
-        
-            Overrides:
-                :meth:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel.getSelectedPropagationDriversForBuilder`Â in
-                classÂ :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
-        
-            Parameters:
-                iBuilder (int): index of the builder in the builders' array
-        
-            Returns:
-                the list of selected propagation drivers for propagatorBuilder of index iBuilder
-        
-        
-        """
-        ...
-    def isForwardPropagation(self) -> bool:
-        """
-            Return the forward propagation flag.
-        
-            Overrides:
-                :meth:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel.isForwardPropagation`Â in
-                classÂ :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
-        
-            Returns:
-                the forward propagation flag
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def setEvaluationsCounter(self, incrementor: org.hipparchus.util.Incrementor) -> None:
-        """
-            Set the counter for evaluations.
-        
-            Overrides:
-                :meth:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel.setEvaluationsCounter`Â in
-                classÂ :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
-        
-            Parameters:
-                evaluationsCounter (Incrementor): counter for evaluations
-        
-        
-        """
-        ...
-    def setIterationsCounter(self, incrementor: org.hipparchus.util.Incrementor) -> None:
-        """
-            Set the counter for iterations.
-        
-            Overrides:
-                :meth:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel.setIterationsCounter`Â in
-                classÂ :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
-        
-            Parameters:
-                iterationsCounter (Incrementor): counter for iterations
-        
-        
-        """
-        ...
-    def value(self, realVector: org.hipparchus.linear.RealVector) -> org.hipparchus.util.Pair[org.hipparchus.linear.RealVector, org.hipparchus.linear.RealMatrix]:
-        """
-            Description copied from class: :meth:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel.value`
-        
-            Specified by:
-                 in interface 
-        
-            Overrides:
-                :meth:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel.value`Â in
-                classÂ :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
-        
-        
-        """
-        ...
-
-class PythonBatchLSObserver(BatchLSObserver):
-    """
-    public class PythonBatchLSObserver extends Object implements :class:`~org.orekit.estimation.leastsquares.BatchLSObserver`
-    """
-    def __init__(self): ...
-    def evaluationPerformed(self, int: int, int2: int, orbitArray: typing.List[org.orekit.orbits.Orbit], parameterDriversList: org.orekit.utils.ParameterDriversList, parameterDriversList2: org.orekit.utils.ParameterDriversList, parameterDriversList3: org.orekit.utils.ParameterDriversList, estimationsProvider: org.orekit.estimation.measurements.EstimationsProvider, evaluation: org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation) -> None:
-        """
-            Notification callback for the end of each evaluation. Extension point for Python.
-        
-            Specified by:
-                 in interface :class:`~org.orekit.estimation.leastsquares.BatchLSObserver`
-        
-            Parameters:
-                iterationsCount (int): iterations count
-                evaluationsCount (int): evaluations count
-                orbits (:class:`~org.orekit.orbits.Orbit`[]): current estimated orbits
-                estimatedOrbitalParameters (:class:`~org.orekit.utils.ParameterDriversList`): estimated orbital parameters
-                estimatedPropagatorParameters (:class:`~org.orekit.utils.ParameterDriversList`): estimated propagator parameters
-                estimatedMeasurementsParameters (:class:`~org.orekit.utils.ParameterDriversList`): estimated measurements parameters
-                evaluationsProvider (:class:`~org.orekit.estimation.measurements.EstimationsProvider`): provider for measurements evaluations resulting from the current estimated orbit (this is an unmodifiable view of the
-                    current evaluations, its content is changed at each iteration)
-                lspEvaluation (LeastSquaresProblem.Evaluation): current evaluation of the underlying null
-        
-        
-        """
-        ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-
-class PythonModelObserver(ModelObserver):
-    """
-    public class PythonModelObserver extends Object implements :class:`~org.orekit.estimation.leastsquares.ModelObserver`
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    def modelCalled(self, orbitArray: typing.List[org.orekit.orbits.Orbit], map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any], org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]], typing.Mapping[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any], org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]]]) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
 
 class SequentialBatchLSEstimator(BatchLSEstimator):
     """
@@ -754,8 +468,11 @@ class SequentialBatchLSEstimator(BatchLSEstimator):
         not be taken into account. Thus, a sequential estimator is used to estimate the orbit, which uses the old results of the
         estimation and the new measurements.
     
-        In order to perform a sequential optimization, the user must configure a null. Depending if its input data are an empty
-        null, a complete :code:`Evaluation` or an a priori state and covariance, different configuration are possible.
+        In order to perform a sequential optimization, the user must configure a
+        :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer?is`.
+        Depending if its input data are an empty
+        :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation?is`,
+        a complete :code:`Evaluation` or an a priori state and covariance, different configuration are possible.
     
         **1. No input data from a previous estimation**
     
@@ -765,11 +482,17 @@ class SequentialBatchLSEstimator(BatchLSEstimator):
     
         :code:`final SequentialGaussNewtonOptimizer optimizer = new SequentialGaussNewtonOptimizer();`
     
-        By default, a null is used as decomposition algorithm. In addition, normal equations are not form. It is possible to
-        update these two default configurations by using:
+        By default, a
+        :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.linear.QRDecomposer?is` is
+        used as decomposition algorithm. In addition, normal equations are not form. It is possible to update these two default
+        configurations by using:
     
-          - null method: :code:`optimizer.withDecomposer(newDecomposer);`
-          - null method: :code:`optimizer.withFormNormalEquations(newFormNormalEquations);`
+          - 
+            meth:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer.html?is`
+            method: :code:`optimizer.withDecomposer(newDecomposer);`
+          - 
+            meth:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer.html?is`
+            method: :code:`optimizer.withFormNormalEquations(newFormNormalEquations);`
     
     
         **2. Initialization using a previous :code:`Evalutation`**
@@ -797,21 +520,24 @@ class SequentialBatchLSEstimator(BatchLSEstimator):
         The MatrixDecomposer and the flag about normal equations can again be updated using the two previous presented methods.
         The a priori state and covariance matrix can be set using:
     
-          - null method: :code:`optimizer.withAPrioriData(aPrioriState, aPrioriCovariance);`
+          - 
+            meth:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer.html?is`
+            method: :code:`optimizer.withAPrioriData(aPrioriState, aPrioriCovariance);`
     
     
         Since:
             11.0
     """
-    def __init__(self, sequentialGaussNewtonOptimizer: org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer, orbitDeterminationPropagatorBuilderArray: typing.List[org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder]): ...
+    def __init__(self, sequentialGaussNewtonOptimizer: org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer, *orbitDeterminationPropagatorBuilder: org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder): ...
 
 class TLEBatchLSModel(AbstractBatchLSModel):
     """
     Deprecated. 
     as of 11.1, replaced by :class:`~org.orekit.estimation.leastsquares.BatchLSModel`
-    @Deprecated public class TLEBatchLSModel extends :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
+    :class:`~org.orekit.estimation.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class TLEBatchLSModel extends :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
     
-        Bridge between :class:`~org.orekit.estimation.measurements.ObservedMeasurement` and null.
+        Bridge between :class:`~org.orekit.estimation.measurements.ObservedMeasurement` and
+        :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem?is`.
     
         Since:
             11.0
@@ -828,8 +554,5 @@ class __module_protocol__(typing.Protocol):
     BatchLSObserver: typing.Type[BatchLSObserver]
     DSSTBatchLSModel: typing.Type[DSSTBatchLSModel]
     ModelObserver: typing.Type[ModelObserver]
-    PythonAbstractBatchLSModel: typing.Type[PythonAbstractBatchLSModel]
-    PythonBatchLSObserver: typing.Type[PythonBatchLSObserver]
-    PythonModelObserver: typing.Type[PythonModelObserver]
     SequentialBatchLSEstimator: typing.Type[SequentialBatchLSEstimator]
     TLEBatchLSModel: typing.Type[TLEBatchLSModel]

@@ -436,9 +436,8 @@ class AemMetadataKey(java.lang.Enum['AemMetadataKey']):
         
             .. code-block: java
             
-            
-            for (AemMetadataKey c : AemMetadataKey.values())
-                System.out.println(c);
+            for (AemMetadataKey c : AemMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -963,9 +962,8 @@ class AttitudeEntryKey(java.lang.Enum['AttitudeEntryKey']):
         
             .. code-block: java
             
-            
-            for (AttitudeEntryKey c : AttitudeEntryKey.values())
-                System.out.println(c);
+            for (AttitudeEntryKey c : AttitudeEntryKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1007,24 +1005,23 @@ class StreamingAemWriter(java.lang.AutoCloseable):
     
         .. code-block: java
         
-        
-         Propagator propagator = ...; // pre-configured propagator
-         AEMWriter  aemWriter  = ...; // pre-configured writer
-           try (Generator out = ...;  // set-up output stream
-                StreamingAemWriter sw = new StreamingAemWriter(out, aemWriter)) { // set-up streaming writer
-        
-             // write segment 1
-             propagator.getMultiplexer().add(step, sw.newSegment());
-             propagator.propagate(startDate1, stopDate1);
-        
-             ...
-        
-             // write segment n
-             propagator.getMultiplexer().clear();
-             propagator.getMultiplexer().add(step, sw.newSegment());
-             propagator.propagate(startDateN, stopDateN);
-        
-           }
+         Propagator propagator = ...; // pre-configured propagator
+         AEMWriter  aemWriter  = ...; // pre-configured writer
+           try (Generator out = ...;  // set-up output stream
+                StreamingAemWriter sw = new StreamingAemWriter(out, aemWriter)) { // set-up streaming writer
+        
+             // write segment 1
+             propagator.getMultiplexer().add(step, sw.newSegment());
+             propagator.propagate(startDate1, stopDate1);
+        
+             ...
+        
+             // write segment n
+             propagator.getMultiplexer().clear();
+             propagator.getMultiplexer().add(step, sw.newSegment());
+             propagator.propagate(startDateN, stopDateN);
+        
+           }
          
     
         Since:

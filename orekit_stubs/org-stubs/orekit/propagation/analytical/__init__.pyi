@@ -26,45 +26,10 @@ class AbstractAnalyticalGradientConverter(org.orekit.propagation.integration.Abs
         Since:
             11.1
     """
-    def getParameters(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient]) -> typing.List[org.hipparchus.analysis.differentiation.Gradient]:
-        """
-            Get the model parameters.
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<Gradient> state): state as returned by :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalGradientConverter.getState`
-        
-            Returns:
-                the model parameters
-        
-        
-        """
-        ...
+    def getParameters(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient]) -> typing.List[org.hipparchus.analysis.differentiation.Gradient]: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    def getPropagator(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient], gradientArray: typing.List[org.hipparchus.analysis.differentiation.Gradient]) -> 'FieldAbstractAnalyticalPropagator'[org.hipparchus.analysis.differentiation.Gradient]:
-        """
-            Get the converted analytical orbit propagator.
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<Gradient> state): state as returned by :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalGradientConverter.getState`
-                parameters (Gradient[]): model parameters as returned by
-                    :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalGradientConverter.getParameters`
-        
-            Returns:
-                the converted analytical orbit propagator
-        
-        
-        """
-        ...
-    def getState(self) -> org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient]:
-        """
-            Get the state with the number of parameters consistent with the propagation model.
-        
-            Returns:
-                state with the number of parameters consistent with the propagation model
-        
-        
-        """
-        ...
+    def getPropagator(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient], gradientArray: typing.List[org.hipparchus.analysis.differentiation.Gradient]) -> 'FieldAbstractAnalyticalPropagator'[org.hipparchus.analysis.differentiation.Gradient]: ...
+    def getState(self) -> org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient]: ...
 
 class AbstractAnalyticalMatricesHarvester(org.orekit.propagation.AbstractMatricesHarvester):
     """
@@ -82,8 +47,8 @@ class AbstractAnalyticalMatricesHarvester(org.orekit.propagation.AbstractMatrice
             This method is called when propagation starts, i.e. when configuration is completed
         
             Specified by:
-                :meth:`~org.orekit.propagation.AbstractMatricesHarvester.freezeColumnsNames`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractMatricesHarvester`
+                :meth:`~org.orekit.propagation.AbstractMatricesHarvester.freezeColumnsNames` in
+                class :class:`~org.orekit.propagation.AbstractMatricesHarvester`
         
         
         """
@@ -98,35 +63,18 @@ class AbstractAnalyticalMatricesHarvester(org.orekit.propagation.AbstractMatrice
         
         """
         ...
-    def getJacobiansColumnsNames(self) -> java.util.List[str]:
-        """
-            Get the names of the parameters in the matrix returned by
-            :meth:`~org.orekit.propagation.MatricesHarvester.getParametersJacobian`.
-        
-            Beware that the names of the parameters are fully known only once all force models have been set up and their parameters
-            properly selected. Applications that retrieve the matrices harvester first and select the force model parameters to
-            retrieve afterwards (but obviously before starting propagation) must take care to wait until the parameters have been
-            set up before they call this method. Calling the method too early would return wrong results.
-        
-            The names are returned in the Jacobians matrix columns order
-        
-            Returns:
-                names of the parameters (i.e. columns) of the Jacobian matrix
-        
-        
-        """
-        ...
+    def getJacobiansColumnsNames(self) -> java.util.List[str]: ...
     def getParametersJacobian(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.hipparchus.linear.RealMatrix:
         """
             Get the Jacobian with respect to propagation parameters.
         
             Specified by:
-                :meth:`~org.orekit.propagation.MatricesHarvester.getParametersJacobian`Â in
-                interfaceÂ :class:`~org.orekit.propagation.MatricesHarvester`
+                :meth:`~org.orekit.propagation.MatricesHarvester.getParametersJacobian` in
+                interface :class:`~org.orekit.propagation.MatricesHarvester`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractMatricesHarvester.getParametersJacobian`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractMatricesHarvester`
+                :meth:`~org.orekit.propagation.AbstractMatricesHarvester.getParametersJacobian` in
+                class :class:`~org.orekit.propagation.AbstractMatricesHarvester`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -142,12 +90,12 @@ class AbstractAnalyticalMatricesHarvester(org.orekit.propagation.AbstractMatrice
             Extract state transition matrix from state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.MatricesHarvester.getStateTransitionMatrix`Â in
-                interfaceÂ :class:`~org.orekit.propagation.MatricesHarvester`
+                :meth:`~org.orekit.propagation.MatricesHarvester.getStateTransitionMatrix` in
+                interface :class:`~org.orekit.propagation.MatricesHarvester`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractMatricesHarvester.getStateTransitionMatrix`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractMatricesHarvester`
+                :meth:`~org.orekit.propagation.AbstractMatricesHarvester.getStateTransitionMatrix` in
+                class :class:`~org.orekit.propagation.AbstractMatricesHarvester`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -170,12 +118,12 @@ class AbstractAnalyticalMatricesHarvester(org.orekit.propagation.AbstractMatrice
             use it at all.
         
             Specified by:
-                :meth:`~org.orekit.propagation.MatricesHarvester.setReferenceState`Â in
-                interfaceÂ :class:`~org.orekit.propagation.MatricesHarvester`
+                :meth:`~org.orekit.propagation.MatricesHarvester.setReferenceState` in
+                interface :class:`~org.orekit.propagation.MatricesHarvester`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractMatricesHarvester.setReferenceState`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractMatricesHarvester`
+                :meth:`~org.orekit.propagation.AbstractMatricesHarvester.setReferenceState` in
+                class :class:`~org.orekit.propagation.AbstractMatricesHarvester`
         
             Parameters:
                 reference (:class:`~org.orekit.propagation.SpacecraftState`): reference state to set
@@ -243,10 +191,9 @@ class AbstractAnalyticalPropagator(org.orekit.propagation.AbstractPropagator):
         
             .. code-block: java
             
-            
-               EphemerisGenerator generator = propagator.getEphemerisGenerator();
-               propagator.propagate(target);
-               BoundedPropagator ephemeris = generator.getGeneratedEphemeris();
+               EphemerisGenerator generator = propagator.getEphemerisGenerator();
+               propagator.propagate(target);
+               BoundedPropagator ephemeris = generator.getGeneratedEphemeris();
              
         
             Returns:
@@ -292,13 +239,14 @@ class AbstractAnalyticalPropagator(org.orekit.propagation.AbstractPropagator):
 _FieldAbstractAnalyticalPropagator__T = typing.TypeVar('_FieldAbstractAnalyticalPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAbstractAnalyticalPropagator(org.orekit.propagation.FieldAbstractPropagator[_FieldAbstractAnalyticalPropagator__T], typing.Generic[_FieldAbstractAnalyticalPropagator__T]):
     """
-    public abstract class FieldAbstractAnalyticalPropagator<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.FieldAbstractPropagator`<T>
+    public abstract class FieldAbstractAnalyticalPropagator<T extends :class:`~org.orekit.propagation.analytical.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.FieldAbstractPropagator`<T>
     
         Common handling of :class:`~org.orekit.propagation.FieldPropagator` methods for analytical propagators.
     
         This abstract class allows to provide easily the full set of :class:`~org.orekit.propagation.FieldPropagator` methods,
         including all propagation modes support and discrete events support for any simple propagation method. Only two methods
-        must be implemented by derived classes: null and
+        must be implemented by derived classes:
+        :meth:`~org.orekit.propagation.analytical.FieldAbstractAnalyticalPropagator.propagateOrbit` and
         :meth:`~org.orekit.propagation.analytical.FieldAbstractAnalyticalPropagator.getMass`. The first method should perform
         straightforward propagation starting from some internally stored initial state up to the specified target date.
     """
@@ -363,8 +311,8 @@ class AdapterPropagator(AbstractAnalyticalPropagator):
                 :meth:`~org.orekit.propagation.Propagator.getInitialState` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.getInitialState`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.getInitialState` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Returns:
                 initial state
@@ -390,8 +338,8 @@ class AdapterPropagator(AbstractAnalyticalPropagator):
                 :meth:`~org.orekit.propagation.Propagator.resetInitialState` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): new initial state to consider
@@ -422,8 +370,8 @@ class AggregateBoundedPropagator(AbstractAnalyticalPropagator, org.orekit.propag
                 :meth:`~org.orekit.propagation.Propagator.getInitialState` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.getInitialState`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.getInitialState` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Returns:
                 initial state
@@ -437,8 +385,8 @@ class AggregateBoundedPropagator(AbstractAnalyticalPropagator, org.orekit.propag
             Get the last date of the range.
         
             Specified by:
-                :meth:`~org.orekit.propagation.BoundedPropagator.getMaxDate`Â in
-                interfaceÂ :class:`~org.orekit.propagation.BoundedPropagator`
+                :meth:`~org.orekit.propagation.BoundedPropagator.getMaxDate` in
+                interface :class:`~org.orekit.propagation.BoundedPropagator`
         
             Returns:
                 the last date of the range
@@ -452,8 +400,8 @@ class AggregateBoundedPropagator(AbstractAnalyticalPropagator, org.orekit.propag
             Get the first date of the range.
         
             Specified by:
-                :meth:`~org.orekit.propagation.BoundedPropagator.getMinDate`Â in
-                interfaceÂ :class:`~org.orekit.propagation.BoundedPropagator`
+                :meth:`~org.orekit.propagation.BoundedPropagator.getMinDate` in
+                interface :class:`~org.orekit.propagation.BoundedPropagator`
         
             Returns:
                 the first date of the range
@@ -467,12 +415,12 @@ class AggregateBoundedPropagator(AbstractAnalyticalPropagator, org.orekit.propag
             Get the :class:`~org.orekit.utils.PVCoordinates` of the body in the selected frame.
         
             Specified by:
-                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates`Â in
-                interfaceÂ :class:`~org.orekit.utils.PVCoordinatesProvider`
+                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates` in
+                interface :class:`~org.orekit.utils.PVCoordinatesProvider`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.getPVCoordinates`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.getPVCoordinates` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
@@ -493,8 +441,8 @@ class AggregateBoundedPropagator(AbstractAnalyticalPropagator, org.orekit.propag
                 :meth:`~org.orekit.propagation.Propagator.resetInitialState` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): new initial state to consider
@@ -512,7 +460,7 @@ class BrouwerLyddanePropagator(AbstractAnalyticalPropagator):
     
         At the opposite of the :class:`~org.orekit.propagation.analytical.EcksteinHechlerPropagator`, the Brouwer-Lyddane model
         is suited for elliptical orbits, there is no problem having a rather small eccentricity or inclination (Lyddane helped
-        to solve this issue with the Brouwer model). Singularity for the critical inclination i = 63.4Ã‚Â° is avoided using the
+        to solve this issue with the Brouwer model). Singularity for the critical inclination i = 63.4° is avoided using the
         method developed in Warren Phipps' 1992 thesis.
     
         By default, Brouwer-Lyddane model considers only the perturbations due to zonal harmonics. However, for low Earth
@@ -524,7 +472,7 @@ class BrouwerLyddanePropagator(AbstractAnalyticalPropagator):
         parameter for the TLE. If the value of M2 is equal to
         :meth:`~org.orekit.propagation.analytical.BrouwerLyddanePropagator.M2`, the along-track secular effects are not
         considered in the dynamical model. Typical values for M2 are not known. It depends on the orbit type. However, the value
-        of M2 must be very small (e.g. between 1.0e-14 and 1.0e-15). The unit of M2 is rad/sÃ‚Â². The along-track effects,
+        of M2 must be very small (e.g. between 1.0e-14 and 1.0e-15). The unit of M2 is rad/s². The along-track effects,
         represented by the secular rates of the mean semi-major axis and eccentricity, are computed following Eq. 2.38, 2.41,
         and 2.45 of Warren Phipps' thesis.
     
@@ -539,7 +487,7 @@ class BrouwerLyddanePropagator(AbstractAnalyticalPropagator):
     """
     M2_NAME: typing.ClassVar[str] = ...
     """
-    public static final String M2_NAME
+    public static final :class:`~org.orekit.propagation.analytical.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` M2_NAME
     
         Parameter name for M2 coefficient.
     
@@ -607,10 +555,10 @@ class BrouwerLyddanePropagator(AbstractAnalyticalPropagator):
         ...
     def getMu(self) -> float:
         """
-            Get the central attraction coefficient Î¼.
+            Get the central attraction coefficient μ.
         
             Returns:
-                mu central attraction coefficient (mÂ³/sÂ²)
+                mu central attraction coefficient (m³/s²)
         
         
         """
@@ -631,8 +579,8 @@ class BrouwerLyddanePropagator(AbstractAnalyticalPropagator):
             Extrapolate an orbit up to a specific target date.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator.propagateOrbit`Â in
-                classÂ :class:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator`
+                :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator.propagateOrbit` in
+                class :class:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): target date for the orbit
@@ -654,8 +602,8 @@ class BrouwerLyddanePropagator(AbstractAnalyticalPropagator):
                 :meth:`~org.orekit.propagation.Propagator.resetInitialState` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): new initial state to consider
@@ -747,10 +695,10 @@ class EcksteinHechlerPropagator(AbstractAnalyticalPropagator):
         ...
     def getMu(self) -> float:
         """
-            Get the central attraction coefficient Î¼.
+            Get the central attraction coefficient μ.
         
             Returns:
-                mu central attraction coefficient (mÂ³/sÂ²)
+                mu central attraction coefficient (m³/s²)
         
             Since:
                 11.1
@@ -776,8 +724,8 @@ class EcksteinHechlerPropagator(AbstractAnalyticalPropagator):
             Extrapolate an orbit up to a specific target date.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator.propagateOrbit`Â in
-                classÂ :class:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator`
+                :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator.propagateOrbit` in
+                class :class:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): target date for the orbit
@@ -799,8 +747,8 @@ class EcksteinHechlerPropagator(AbstractAnalyticalPropagator):
                 :meth:`~org.orekit.propagation.Propagator.resetInitialState` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): new initial state to consider
@@ -861,8 +809,8 @@ class Ephemeris(AbstractAnalyticalPropagator, org.orekit.propagation.BoundedProp
             specified date.
         
             Overrides:
-                :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator.basicPropagate`Â in
-                classÂ :class:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator`
+                :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator.basicPropagate` in
+                class :class:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): target date for propagation
@@ -895,8 +843,8 @@ class Ephemeris(AbstractAnalyticalPropagator, org.orekit.propagation.BoundedProp
                 :meth:`~org.orekit.propagation.Propagator.getFrame` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.getFrame`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.getFrame` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Returns:
                 frame in which the orbit is propagated
@@ -915,8 +863,8 @@ class Ephemeris(AbstractAnalyticalPropagator, org.orekit.propagation.BoundedProp
                 :meth:`~org.orekit.propagation.Propagator.getInitialState` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.getInitialState`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.getInitialState` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Returns:
                 initial state
@@ -929,12 +877,12 @@ class Ephemeris(AbstractAnalyticalPropagator, org.orekit.propagation.BoundedProp
             Get all the names of all managed states.
         
             Specified by:
-                :meth:`~org.orekit.propagation.Propagator.getManagedAdditionalStates`Â in
-                interfaceÂ :class:`~org.orekit.propagation.Propagator`
+                :meth:`~org.orekit.propagation.Propagator.getManagedAdditionalStates` in
+                interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.getManagedAdditionalStates`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.getManagedAdditionalStates` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Returns:
                 names of all managed states
@@ -947,8 +895,8 @@ class Ephemeris(AbstractAnalyticalPropagator, org.orekit.propagation.BoundedProp
             Get the last date of the range.
         
             Specified by:
-                :meth:`~org.orekit.propagation.BoundedPropagator.getMaxDate`Â in
-                interfaceÂ :class:`~org.orekit.propagation.BoundedPropagator`
+                :meth:`~org.orekit.propagation.BoundedPropagator.getMaxDate` in
+                interface :class:`~org.orekit.propagation.BoundedPropagator`
         
             Returns:
                 the last date of the range
@@ -961,8 +909,8 @@ class Ephemeris(AbstractAnalyticalPropagator, org.orekit.propagation.BoundedProp
             Get the first date of the range.
         
             Specified by:
-                :meth:`~org.orekit.propagation.BoundedPropagator.getMinDate`Â in
-                interfaceÂ :class:`~org.orekit.propagation.BoundedPropagator`
+                :meth:`~org.orekit.propagation.BoundedPropagator.getMinDate` in
+                interface :class:`~org.orekit.propagation.BoundedPropagator`
         
             Returns:
                 the first date of the range
@@ -975,12 +923,12 @@ class Ephemeris(AbstractAnalyticalPropagator, org.orekit.propagation.BoundedProp
             Get the :class:`~org.orekit.utils.PVCoordinates` of the body in the selected frame.
         
             Specified by:
-                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates`Â in
-                interfaceÂ :class:`~org.orekit.utils.PVCoordinatesProvider`
+                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates` in
+                interface :class:`~org.orekit.utils.PVCoordinatesProvider`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.getPVCoordinates`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.getPVCoordinates` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
@@ -1007,15 +955,15 @@ class Ephemeris(AbstractAnalyticalPropagator, org.orekit.propagation.BoundedProp
             and happens to change the unmanaged additional state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.Propagator.isAdditionalStateManaged`Â in
-                interfaceÂ :class:`~org.orekit.propagation.Propagator`
+                :meth:`~org.orekit.propagation.Propagator.isAdditionalStateManaged` in
+                interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.isAdditionalStateManaged`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.isAdditionalStateManaged` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Parameters:
-                name (String): name of the additional state
+                name (:class:`~org.orekit.propagation.analytical.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional state
         
             Returns:
                 true if the additional state is managed
@@ -1033,8 +981,8 @@ class Ephemeris(AbstractAnalyticalPropagator, org.orekit.propagation.BoundedProp
                 :meth:`~org.orekit.propagation.Propagator.resetInitialState` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): new initial state to consider
@@ -1046,15 +994,15 @@ class Ephemeris(AbstractAnalyticalPropagator, org.orekit.propagation.BoundedProp
 _FieldBrouwerLyddanePropagator__T = typing.TypeVar('_FieldBrouwerLyddanePropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldBrouwerLyddanePropagator(FieldAbstractAnalyticalPropagator[_FieldBrouwerLyddanePropagator__T], typing.Generic[_FieldBrouwerLyddanePropagator__T]):
     """
-    public class FieldBrouwerLyddanePropagator<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.analytical.FieldAbstractAnalyticalPropagator`<T>
+    public class FieldBrouwerLyddanePropagator<T extends :class:`~org.orekit.propagation.analytical.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.FieldAbstractAnalyticalPropagator`<T>
     
         This class propagates a :class:`~org.orekit.propagation.FieldSpacecraftState` using the analytical Brouwer-Lyddane model
         (from J2 to J5 zonal harmonics).
     
         At the opposite of the :class:`~org.orekit.propagation.analytical.FieldEcksteinHechlerPropagator`, the Brouwer-Lyddane
         model is suited for elliptical orbits, there is no problem having a rather small eccentricity or inclination (Lyddane
-        helped to solve this issue with the Brouwer model). Singularity for the critical inclination i = 63.4Ã‚Â° is avoided
-        using the method developed in Warren Phipps' 1992 thesis.
+        helped to solve this issue with the Brouwer model). Singularity for the critical inclination i = 63.4° is avoided using
+        the method developed in Warren Phipps' 1992 thesis.
     
         By default, Brouwer-Lyddane model considers only the perturbations due to zonal harmonics. However, for low Earth
         orbits, the magnitude of the perturbative acceleration due to atmospheric drag can be significant. Warren Phipps' 1992
@@ -1065,7 +1013,7 @@ class FieldBrouwerLyddanePropagator(FieldAbstractAnalyticalPropagator[_FieldBrou
         :meth:`~org.orekit.propagation.analytical.tle.FieldTLE.getBStar` parameter for the TLE. If the value of M2 is equal to
         :meth:`~org.orekit.propagation.analytical.BrouwerLyddanePropagator.M2`, the along-track secular effects are not
         considered in the dynamical model. Typical values for M2 are not known. It depends on the orbit type. However, the value
-        of M2 must be very small (e.g. between 1.0e-14 and 1.0e-15). The unit of M2 is rad/sÃ‚Â². The along-track effects,
+        of M2 must be very small (e.g. between 1.0e-14 and 1.0e-15). The unit of M2 is rad/s². The along-track effects,
         represented by the secular rates of the mean semi-major axis and eccentricity, are computed following Eq. 2.38, 2.41,
         and 2.45 of Warren Phipps' thesis.
     
@@ -1123,7 +1071,7 @@ class FieldBrouwerLyddanePropagator(FieldAbstractAnalyticalPropagator[_FieldBrou
 _FieldEcksteinHechlerPropagator__T = typing.TypeVar('_FieldEcksteinHechlerPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldEcksteinHechlerPropagator(FieldAbstractAnalyticalPropagator[_FieldEcksteinHechlerPropagator__T], typing.Generic[_FieldEcksteinHechlerPropagator__T]):
     """
-    public class FieldEcksteinHechlerPropagator<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.analytical.FieldAbstractAnalyticalPropagator`<T>
+    public class FieldEcksteinHechlerPropagator<T extends :class:`~org.orekit.propagation.analytical.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.FieldAbstractAnalyticalPropagator`<T>
     
         This class propagates a :class:`~org.orekit.propagation.FieldSpacecraftState` using the analytical Eckstein-Hechler
         model.
@@ -1169,7 +1117,7 @@ class FieldEcksteinHechlerPropagator(FieldAbstractAnalyticalPropagator[_FieldEck
 _FieldKeplerianPropagator__T = typing.TypeVar('_FieldKeplerianPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldKeplerianPropagator(FieldAbstractAnalyticalPropagator[_FieldKeplerianPropagator__T], typing.Generic[_FieldKeplerianPropagator__T]):
     """
-    public class FieldKeplerianPropagator<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.analytical.FieldAbstractAnalyticalPropagator`<T>
+    public class FieldKeplerianPropagator<T extends :class:`~org.orekit.propagation.analytical.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.FieldAbstractAnalyticalPropagator`<T>
     
         Simple Keplerian orbit propagator.
     
@@ -1215,8 +1163,8 @@ class KeplerianPropagator(AbstractAnalyticalPropagator):
                 :meth:`~org.orekit.propagation.Propagator.resetInitialState` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): new initial state to consider
@@ -1225,203 +1173,14 @@ class KeplerianPropagator(AbstractAnalyticalPropagator):
         """
         ...
 
-class PythonAbstractAnalyticalGradientConverter(AbstractAnalyticalGradientConverter):
-    """
-    public class PythonAbstractAnalyticalGradientConverter extends :class:`~org.orekit.propagation.analytical.AbstractAnalyticalGradientConverter`
-    """
-    def finalize(self) -> None: ...
-    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    def getPropagator(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient], gradientArray: typing.List[org.hipparchus.analysis.differentiation.Gradient]) -> FieldAbstractAnalyticalPropagator[org.hipparchus.analysis.differentiation.Gradient]:
-        """
-            Get the converted analytical orbit propagator.
-        
-            Specified by:
-                 in class :class:`~org.orekit.propagation.analytical.AbstractAnalyticalGradientConverter`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<Gradient> state): state as returned by :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalGradientConverter.getState`
-                parameters (Gradient[]): model parameters as returned by
-                    :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalGradientConverter.getParameters`
-        
-            Returns:
-                the converted analytical orbit propagator
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-
-class PythonAbstractAnalyticalMatricesHarvester(AbstractAnalyticalMatricesHarvester):
-    """
-    public class PythonAbstractAnalyticalMatricesHarvester extends :class:`~org.orekit.propagation.analytical.AbstractAnalyticalMatricesHarvester`
-    """
-    def finalize(self) -> None: ...
-    def getGradientConverter(self) -> AbstractAnalyticalGradientConverter:
-        """
-            Get the gradient converter related to the analytical orbit propagator.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalMatricesHarvester.getGradientConverter`Â in
-                classÂ :class:`~org.orekit.propagation.analytical.AbstractAnalyticalMatricesHarvester`
-        
-            Returns:
-                the gradient converter
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-
-class PythonAbstractAnalyticalPropagator(AbstractAnalyticalPropagator):
-    """
-    public class PythonAbstractAnalyticalPropagator extends :class:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator`
-    """
-    def __init__(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
-    def finalize(self) -> None: ...
-    def getMass(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Get the mass. Extension point for Python.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator.getMass`Â in
-                classÂ :class:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): target date for the orbit
-        
-            Returns:
-                mass mass
-        
-        
-        """
-        ...
-    def propagateOrbit(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.orbits.Orbit:
-        """
-            Extrapolate an orbit up to a specific target date. Extension point for Python.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator.propagateOrbit`Â in
-                classÂ :class:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): target date for the orbit
-        
-            Returns:
-                extrapolated parameters
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def resetIntermediateState(self, spacecraftState: org.orekit.propagation.SpacecraftState, boolean: bool) -> None:
-        """
-            Reset an intermediate state. Extension point for Python.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator.resetIntermediateState`Â in
-                classÂ :class:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): new intermediate state to consider
-                forward (boolean): if true, the intermediate state is valid for
-        
-        
-        """
-        ...
-
-_PythonFieldAbstractAnalyticalPropagator__T = typing.TypeVar('_PythonFieldAbstractAnalyticalPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class PythonFieldAbstractAnalyticalPropagator(FieldAbstractAnalyticalPropagator[_PythonFieldAbstractAnalyticalPropagator__T], typing.Generic[_PythonFieldAbstractAnalyticalPropagator__T]):
-    """
-    public class PythonFieldAbstractAnalyticalPropagator<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.analytical.FieldAbstractAnalyticalPropagator`<T>
-    """
-    def __init__(self, field: org.hipparchus.Field[_PythonFieldAbstractAnalyticalPropagator__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
-    def finalize(self) -> None: ...
-    def getMass(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldAbstractAnalyticalPropagator__T]) -> _PythonFieldAbstractAnalyticalPropagator__T: ...
-    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    def propagateOrbit(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldAbstractAnalyticalPropagator__T], tArray: typing.List[_PythonFieldAbstractAnalyticalPropagator__T]) -> org.orekit.orbits.FieldOrbit[_PythonFieldAbstractAnalyticalPropagator__T]: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def resetIntermediateState(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldAbstractAnalyticalPropagator__T], boolean: bool) -> None: ...
-
 class J2DifferentialEffect(AdapterPropagator.DifferentialEffect):
     """
-    public class J2DifferentialEffect extends Object implements :class:`~org.orekit.propagation.analytical.AdapterPropagator.DifferentialEffect`
+    public class J2DifferentialEffect extends :class:`~org.orekit.propagation.analytical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.analytical.AdapterPropagator.DifferentialEffect`
     
         Analytical model for J2 effect.
     
         This class computes the differential effect of J2 due to an initial orbit offset. A typical case is when an inclination
-        maneuver changes an orbit inclination at time tÃ¢â€šâ‚¬. As ascending node drift rate depends on inclination, the change
+        maneuver changes an orbit inclination at time t₀. As ascending node drift rate depends on inclination, the change
         induces a time-dependent change in ascending node for later dates.
     
         Also see:
@@ -1441,10 +1200,10 @@ class J2DifferentialEffect(AdapterPropagator.DifferentialEffect):
             Compute the effect of the maneuver on an orbit.
         
             Parameters:
-                orbit1 (:class:`~org.orekit.orbits.Orbit`): original orbit at tâ‚�, without maneuver
+                orbit1 (:class:`~org.orekit.orbits.Orbit`): original orbit at t₁, without maneuver
         
             Returns:
-                orbit at tâ‚�, taking the maneuver into account if tâ‚� > tâ‚€
+                orbit at t₁, taking the maneuver into account if t₁ > t₀
         
             Also see:
                 :meth:`~org.orekit.propagation.analytical.J2DifferentialEffect.apply`
@@ -1455,8 +1214,8 @@ class J2DifferentialEffect(AdapterPropagator.DifferentialEffect):
             for time *after* the maneuver occurrence.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.AdapterPropagator.DifferentialEffect.apply`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.AdapterPropagator.DifferentialEffect`
+                :meth:`~org.orekit.propagation.analytical.AdapterPropagator.DifferentialEffect.apply` in
+                interface :class:`~org.orekit.propagation.analytical.AdapterPropagator.DifferentialEffect`
         
             Parameters:
                 state1 (:class:`~org.orekit.propagation.SpacecraftState`): original state *without* the effect
@@ -1488,9 +1247,5 @@ class __module_protocol__(typing.Protocol):
     FieldKeplerianPropagator: typing.Type[FieldKeplerianPropagator]
     J2DifferentialEffect: typing.Type[J2DifferentialEffect]
     KeplerianPropagator: typing.Type[KeplerianPropagator]
-    PythonAbstractAnalyticalGradientConverter: typing.Type[PythonAbstractAnalyticalGradientConverter]
-    PythonAbstractAnalyticalMatricesHarvester: typing.Type[PythonAbstractAnalyticalMatricesHarvester]
-    PythonAbstractAnalyticalPropagator: typing.Type[PythonAbstractAnalyticalPropagator]
-    PythonFieldAbstractAnalyticalPropagator: typing.Type[PythonFieldAbstractAnalyticalPropagator]
     gnss: org.orekit.propagation.analytical.gnss.__module_protocol__
     tle: org.orekit.propagation.analytical.tle.__module_protocol__

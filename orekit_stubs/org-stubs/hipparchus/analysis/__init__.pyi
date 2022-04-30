@@ -347,7 +347,7 @@ class FunctionUtils:
     """
     @typing.overload
     @staticmethod
-    def add(univariateFunctionArray: typing.List['UnivariateFunction']) -> 'UnivariateFunction':
+    def add(*univariateFunction: 'UnivariateFunction') -> 'UnivariateFunction':
         """
             Adds functions.
         
@@ -370,7 +370,7 @@ class FunctionUtils:
         ...
     @typing.overload
     @staticmethod
-    def add(univariateDifferentiableFunctionArray: typing.List[org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction]) -> org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction: ...
+    def add(*univariateDifferentiableFunction: org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction) -> org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction: ...
     @typing.overload
     @staticmethod
     def collector(bivariateFunction: BivariateFunction, double: float) -> 'MultivariateFunction':
@@ -430,7 +430,7 @@ class FunctionUtils:
         ...
     @typing.overload
     @staticmethod
-    def compose(univariateFunctionArray: typing.List['UnivariateFunction']) -> 'UnivariateFunction':
+    def compose(*univariateFunction: 'UnivariateFunction') -> 'UnivariateFunction':
         """
             Composes functions.
         
@@ -459,7 +459,7 @@ class FunctionUtils:
         ...
     @typing.overload
     @staticmethod
-    def compose(univariateDifferentiableFunctionArray: typing.List[org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction]) -> org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction: ...
+    def compose(*univariateDifferentiableFunction: org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction) -> org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction: ...
     @typing.overload
     @staticmethod
     def derivative(multivariateDifferentiableFunction: org.hipparchus.analysis.differentiation.MultivariateDifferentiableFunction, intArray: typing.List[int]) -> 'MultivariateFunction':
@@ -537,7 +537,7 @@ class FunctionUtils:
         ...
     @typing.overload
     @staticmethod
-    def multiply(univariateFunctionArray: typing.List['UnivariateFunction']) -> 'UnivariateFunction':
+    def multiply(*univariateFunction: 'UnivariateFunction') -> 'UnivariateFunction':
         """
             Multiplies functions.
         
@@ -560,7 +560,7 @@ class FunctionUtils:
         ...
     @typing.overload
     @staticmethod
-    def multiply(univariateDifferentiableFunctionArray: typing.List[org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction]) -> org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction: ...
+    def multiply(*univariateDifferentiableFunction: org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction) -> org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction: ...
     @staticmethod
     def sample(univariateFunction: 'UnivariateFunction', double: float, double2: float, int: int) -> typing.List[float]: ...
     @typing.overload
@@ -619,7 +619,7 @@ class FunctionUtils:
         ...
     @typing.overload
     @staticmethod
-    def toDifferentiable(univariateFunction: 'UnivariateFunction', univariateFunctionArray: typing.List['UnivariateFunction']) -> org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction: ...
+    def toDifferentiable(univariateFunction: 'UnivariateFunction', *univariateFunction2: 'UnivariateFunction') -> org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction: ...
 
 class MultivariateFunction:
     """
@@ -669,7 +669,7 @@ class ParametricUnivariateFunction:
     
         An interface representing a real function that depends on one independent variable plus some extra parameters.
     """
-    def gradient(self, double: float, doubleArray: typing.List[float]) -> typing.List[float]:
+    def gradient(self, double: float, *double2: float) -> typing.List[float]:
         """
             Compute the gradient of the function with respect to its parameters.
         
@@ -683,7 +683,7 @@ class ParametricUnivariateFunction:
         
         """
         ...
-    def value(self, double: float, doubleArray: typing.List[float]) -> float:
+    def value(self, double: float, *double2: float) -> float:
         """
             Compute the value of the function.
         

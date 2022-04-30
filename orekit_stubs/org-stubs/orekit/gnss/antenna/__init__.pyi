@@ -263,57 +263,12 @@ class SatelliteType(java.lang.Enum['SatelliteType']):
         
             .. code-block: java
             
-            
-            for (SatelliteType c : SatelliteType.values())
-                System.out.println(c);
+            for (SatelliteType c : SatelliteType.values())
+                System.out.println(c);
             
         
             Returns:
                 an array containing the constants of this enum type, in the order they are declared
-        
-        
-        """
-        ...
-
-class PythonPhaseCenterVariationFunction(PhaseCenterVariationFunction):
-    """
-    public class PythonPhaseCenterVariationFunction extends Object implements :class:`~org.orekit.gnss.antenna.PhaseCenterVariationFunction`
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def value(self, double: float, double2: float) -> float:
-        """
-            Evaluate phase center variation in one signal direction.
-        
-            Specified by:
-                :meth:`~org.orekit.gnss.antenna.PhaseCenterVariationFunction.value`Â in
-                interfaceÂ :class:`~org.orekit.gnss.antenna.PhaseCenterVariationFunction`
-        
-            Parameters:
-                polarAngle (double): angle from antenna axial direction (zenith angle for receiver antennas, nadir angle for GNSS satellites antennas)
-                azimuthAngle (double): angle around axial direction
-        
-            Returns:
-                phase center variation in the signal direction (m)
         
         
         """
@@ -438,7 +393,6 @@ class __module_protocol__(typing.Protocol):
     AntexLoader: typing.Type[AntexLoader]
     FrequencyPattern: typing.Type[FrequencyPattern]
     PhaseCenterVariationFunction: typing.Type[PhaseCenterVariationFunction]
-    PythonPhaseCenterVariationFunction: typing.Type[PythonPhaseCenterVariationFunction]
     ReceiverAntenna: typing.Type[ReceiverAntenna]
     SatelliteAntenna: typing.Type[SatelliteAntenna]
     SatelliteType: typing.Type[SatelliteType]

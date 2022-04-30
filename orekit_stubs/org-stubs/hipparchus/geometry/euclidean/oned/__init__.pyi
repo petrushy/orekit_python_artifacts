@@ -11,7 +11,7 @@ import typing
 
 class Euclidean1D(java.io.Serializable, org.hipparchus.geometry.Space):
     """
-    public class Euclidean1D extends Object implements Serializable, :class:`~org.hipparchus.geometry.Space`
+    public class Euclidean1D extends :class:`~org.hipparchus.geometry.euclidean.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.euclidean.oned.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.hipparchus.geometry.Space`
     
         This class implements a one-dimensional space.
     
@@ -48,7 +48,7 @@ class Euclidean1D(java.io.Serializable, org.hipparchus.geometry.Space):
 
 class Interval:
     """
-    public class Interval extends Object
+    public class Interval extends :class:`~org.hipparchus.geometry.euclidean.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This class represents a 1D interval.
     
@@ -115,7 +115,7 @@ class Interval:
 
 class IntervalsSet(org.hipparchus.geometry.partitioning.AbstractRegion[Euclidean1D, Euclidean1D], java.lang.Iterable[typing.List[float]]):
     """
-    public class IntervalsSet extends :class:`~org.hipparchus.geometry.partitioning.AbstractRegion`<:class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`,:class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`> implements Iterable<double[]>
+    public class IntervalsSet extends :class:`~org.hipparchus.geometry.partitioning.AbstractRegion`<:class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`,:class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`> implements :class:`~org.hipparchus.geometry.euclidean.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable?is`<double[]>
     
         This class represents a 1D region: a set of intervals.
     """
@@ -159,7 +159,8 @@ class IntervalsSet(org.hipparchus.geometry.partitioning.AbstractRegion[Euclidean
             The iterator does *not* support the optional :code:`remove` operation.
         
             Specified by:
-                 in interface 
+                :meth:`~org.hipparchus.geometry.euclidean.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable.html?is` in
+                interface :class:`~org.hipparchus.geometry.euclidean.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable?is`
         
         
         """
@@ -168,7 +169,7 @@ class IntervalsSet(org.hipparchus.geometry.partitioning.AbstractRegion[Euclidean
 
 class OrientedPoint(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean1D]):
     """
-    public class OrientedPoint extends Object implements :class:`~org.hipparchus.geometry.partitioning.Hyperplane`<:class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`>
+    public class OrientedPoint extends :class:`~org.hipparchus.geometry.euclidean.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.partitioning.Hyperplane`<:class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`>
     
         This class represents a 1D oriented hyperplane.
     
@@ -184,8 +185,8 @@ class OrientedPoint(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean1D]
             Since instances are immutable, this method directly returns the instance.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.copySelf`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.copySelf` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Returns:
                 the instance itself
@@ -203,8 +204,8 @@ class OrientedPoint(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean1D]
             should *not* be used otherwise.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.emptyHyperplane`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.emptyHyperplane` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Returns:
                 a dummy sub hyperplane
@@ -231,8 +232,8 @@ class OrientedPoint(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean1D]
             Get the tolerance below which points are considered to belong to the hyperplane.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.getTolerance`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.getTolerance` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Returns:
                 tolerance below which points are considered to belong to the hyperplane
@@ -268,8 +269,8 @@ class OrientedPoint(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean1D]
             should *not* be used otherwise.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.wholeHyperplane`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.wholeHyperplane` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Returns:
                 a dummy sub hyperplane
@@ -282,8 +283,8 @@ class OrientedPoint(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean1D]
             Build a region covering the whole space.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.wholeSpace`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.wholeSpace` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Returns:
                 a region containing the instance (really an :class:`~org.hipparchus.geometry.euclidean.oned.IntervalsSet` instance)
@@ -308,12 +309,12 @@ class SubOrientedPoint(org.hipparchus.geometry.partitioning.AbstractSubHyperplan
             Get the size of the instance.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.SubHyperplane.getSize`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.SubHyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.SubHyperplane.getSize` in
+                interface :class:`~org.hipparchus.geometry.partitioning.SubHyperplane`
         
             Overrides:
-                :meth:`~org.hipparchus.geometry.partitioning.AbstractSubHyperplane.getSize`Â in
-                classÂ :class:`~org.hipparchus.geometry.partitioning.AbstractSubHyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.AbstractSubHyperplane.getSize` in
+                class :class:`~org.hipparchus.geometry.partitioning.AbstractSubHyperplane`
         
             Returns:
                 the size of the instance (this is a length in 1D, an area in 2D, a volume in 3D ...)
@@ -326,12 +327,12 @@ class SubOrientedPoint(org.hipparchus.geometry.partitioning.AbstractSubHyperplan
             Check if the instance is empty.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.SubHyperplane.isEmpty`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.SubHyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.SubHyperplane.isEmpty` in
+                interface :class:`~org.hipparchus.geometry.partitioning.SubHyperplane`
         
             Overrides:
-                :meth:`~org.hipparchus.geometry.partitioning.AbstractSubHyperplane.isEmpty`Â in
-                classÂ :class:`~org.hipparchus.geometry.partitioning.AbstractSubHyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.AbstractSubHyperplane.isEmpty` in
+                class :class:`~org.hipparchus.geometry.partitioning.AbstractSubHyperplane`
         
             Returns:
                 true if the instance is empty
@@ -343,7 +344,7 @@ class SubOrientedPoint(org.hipparchus.geometry.partitioning.AbstractSubHyperplan
 
 class Vector1D(org.hipparchus.geometry.Vector[Euclidean1D]):
     """
-    public class Vector1D extends Object implements :class:`~org.hipparchus.geometry.Vector`<:class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`>
+    public class Vector1D extends :class:`~org.hipparchus.geometry.euclidean.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.Vector`<:class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`>
     
         This class represents a 1D vector.
     
@@ -478,14 +479,40 @@ class Vector1D(org.hipparchus.geometry.Vector[Euclidean1D]):
             :meth:`~org.hipparchus.geometry.euclidean.oned.Vector1D.NaN`.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.geometry.euclidean.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.geometry.euclidean.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                other (Object): Object to test for equality to this
+                other (:class:`~org.hipparchus.geometry.euclidean.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality to this
         
             Returns:
                 true if two 1D vector objects are equal, false if object is null, not an instance of Vector1D, or not equal to this
                 Vector1D instance
+        
+        
+        """
+        ...
+    def equalsIeee754(self, object: typing.Any) -> bool:
+        """
+            Test for the equality of two 1D vectors.
+        
+            If all coordinates of two 1D vectors are exactly the same, and none are :code:`NaN`, the two 1D vectors are considered
+            to be equal.
+        
+            In compliance with IEEE754 handling, if any coordinates of any of the two vectors are :code:`NaN`, then the vectors are
+            considered different. This implies that
+            :meth:`~org.hipparchus.geometry.euclidean.oned.Vector1D.NaN`.equals(:meth:`~org.hipparchus.geometry.euclidean.oned.Vector1D.NaN`)
+            returns :code:`false` despite the instance is checked against itself.
+        
+            Parameters:
+                other (:class:`~org.hipparchus.geometry.euclidean.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality to this
+        
+            Returns:
+                true if two 1D vector objects are equal, false if object is null, not an instance of Vector1D, or not equal to this
+                Vector1D instance
+        
+            Since:
+                2.1
         
         
         """
@@ -588,7 +615,8 @@ class Vector1D(org.hipparchus.geometry.Vector[Euclidean1D]):
             All NaN values have the same hash code.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.geometry.euclidean.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.geometry.euclidean.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a hash code value for this object
@@ -662,7 +690,8 @@ class Vector1D(org.hipparchus.geometry.Vector[Euclidean1D]):
             Get a string representation of this vector.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.geometry.euclidean.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.geometry.euclidean.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a string representation of this vector
@@ -678,7 +707,7 @@ class Vector1D(org.hipparchus.geometry.Vector[Euclidean1D]):
                 :meth:`~org.hipparchus.geometry.Vector.toString` in interface :class:`~org.hipparchus.geometry.Vector`
         
             Parameters:
-                format (NumberFormat): the custom format for components
+                format (:class:`~org.hipparchus.geometry.euclidean.oned.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is`): the custom format for components
         
             Returns:
                 a string representation of this vector
@@ -701,8 +730,11 @@ class Vector1DFormat(org.hipparchus.geometry.VectorFormat[Euclidean1D]):
         be parsed without error and the same vector will be returned. In the second case, however, the parse position after
         parsing will be just after the closing curly brace, i.e. just before the trailing space.
     
-        **Note:** using "," as a separator may interfere with the grouping separator of the default null for the current locale.
-        Thus it is advised to use a null instance with disabled grouping in such a case.
+        **Note:** using "," as a separator may interfere with the grouping separator of the default
+        :class:`~org.hipparchus.geometry.euclidean.oned.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is` for
+        the current locale. Thus it is advised to use a
+        :class:`~org.hipparchus.geometry.euclidean.oned.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is`
+        instance with disabled grouping in such a case.
     """
     @typing.overload
     def __init__(self): ...
@@ -737,7 +769,7 @@ class Vector1DFormat(org.hipparchus.geometry.VectorFormat[Euclidean1D]):
             Returns the default 1D vector format for the given locale.
         
             Parameters:
-                locale (Locale): the specific locale used by the format.
+                locale (:class:`~org.hipparchus.geometry.euclidean.oned.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): the specific locale used by the format.
         
             Returns:
                 the 1D vector format specific to the given locale.
@@ -757,8 +789,8 @@ class Vector1DFormat(org.hipparchus.geometry.VectorFormat[Euclidean1D]):
                 :meth:`~org.hipparchus.geometry.VectorFormat.parse` in class :class:`~org.hipparchus.geometry.VectorFormat`
         
             Parameters:
-                source (String): the string to parse
-                pos (ParsePosition): input/output parsing parameter.
+                source (:class:`~org.hipparchus.geometry.euclidean.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the string to parse
+                pos (:class:`~org.hipparchus.geometry.euclidean.oned.https:.docs.oracle.com.javase.8.docs.api.java.text.ParsePosition?is`): input/output parsing parameter.
         
             Returns:
                 the parsed :class:`~org.hipparchus.geometry.Vector` object.

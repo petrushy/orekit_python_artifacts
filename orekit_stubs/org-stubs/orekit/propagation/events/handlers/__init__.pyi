@@ -143,7 +143,7 @@ class EventMultipleHandler(EventHandler[_EventMultipleHandler__D], typing.Generi
     """
     def __init__(self): ...
     def addHandler(self, eventHandler: EventHandler[_EventMultipleHandler__D]) -> 'EventMultipleHandler'[_EventMultipleHandler__D]: ...
-    def addHandlers(self, eventHandlerArray: typing.List[EventHandler[_EventMultipleHandler__D]]) -> 'EventMultipleHandler'[_EventMultipleHandler__D]: ...
+    def addHandlers(self, *eventHandler: EventHandler[_EventMultipleHandler__D]) -> 'EventMultipleHandler'[_EventMultipleHandler__D]: ...
     def eventOccurred(self, spacecraftState: org.orekit.propagation.SpacecraftState, d: _EventMultipleHandler__D, boolean: bool) -> org.hipparchus.ode.events.Action:
         """
             eventOccurred method mirrors the same interface method as in :class:`~org.orekit.propagation.events.EventDetector` and
@@ -303,154 +303,6 @@ class FieldStopOnIncreasing(FieldEventHandler[_FieldStopOnIncreasing__KK, _Field
     """
     def __init__(self): ...
     def eventOccurred(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldStopOnIncreasing__T], kK: _FieldStopOnIncreasing__KK, boolean: bool) -> org.hipparchus.ode.events.Action: ...
-
-_PythonEventHandler__T = typing.TypeVar('_PythonEventHandler__T', bound=org.orekit.propagation.events.EventDetector)  # <T>
-class PythonEventHandler(EventHandler[_PythonEventHandler__T], typing.Generic[_PythonEventHandler__T]):
-    """
-    public class PythonEventHandler<T extends :class:`~org.orekit.propagation.events.EventDetector`> extends Object implements :class:`~org.orekit.propagation.events.handlers.EventHandler`<T>
-    
-        This interface represents space-dynamics aware events detectors.
-    
-        It mirrors the :code:`EventHandler` interface from ` Apache Commons Math <http://commons.apache.org/math/>` but provides
-        a space-dynamics interface to the methods.
-    
-        Events detectors are a useful solution to meet the requirements of propagators concerning discrete conditions. The state
-        of each event detector is queried by the integrator at each step. When the sign of the underlying g switching function
-        changes, the step is rejected and reduced, in order to make sure the sign changes occur only at steps boundaries.
-    
-        When step ends exactly at a switching function sign change, the corresponding event is triggered, by calling the
-        :code:`#eventOccurred(SpacecraftState, boolean)` method. The method can do whatever it needs with the event (logging it,
-        performing some processing, ignore it ...). The return value of the method will be used by the propagator to stop or
-        resume propagation, possibly changing the state vector.
-    """
-    def __init__(self): ...
-    def eventOccurred(self, spacecraftState: org.orekit.propagation.SpacecraftState, t: _PythonEventHandler__T, boolean: bool) -> org.hipparchus.ode.events.Action:
-        """
-            eventOccurred method mirrors the same interface method as in :class:`~org.orekit.propagation.events.EventDetector` and
-            its subclasses, but with an additional parameter that allows the calling method to pass in an object from the detector
-            which would have potential additional data to allow the implementing class to determine the correct return state.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.handlers.EventHandler`
-        
-            Parameters:
-                s (:class:`~org.orekit.propagation.SpacecraftState`): SpaceCraft state to be used in the evaluation
-                detector (:class:`~org.orekit.propagation.events.handlers.PythonEventHandler`): object with appropriate type that can be used in determining correct return state
-                increasing (boolean): with the event occured in an "increasing" or "decreasing" slope direction
-        
-            Returns:
-                the Action that the calling detector should pass back to the evaluation system
-        
-            Raises:
-                :class:`~org.orekit.errors.OrekitException`: if some specific error occurs
-        
-        
-        """
-        ...
-    def finalize(self) -> None: ...
-    def getPythonObject(self) -> int: ...
-    def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate, t: _PythonEventHandler__T) -> None:
-        """
-            Initialize event handler at the start of a propagation.
-        
-            This method is called once at the start of the propagation. It may be used by the event handler to initialize some
-            internal data if needed.
-        
-            The default implementation does nothing
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.events.handlers.EventHandler.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.handlers.EventHandler`
-        
-            Parameters:
-                initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial state
-                target (:class:`~org.orekit.time.AbsoluteDate`): target date for the propagation
-                detector (:class:`~org.orekit.propagation.events.handlers.PythonEventHandler`): event detector related to the event handler
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def resetState(self, t: _PythonEventHandler__T, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.orekit.propagation.SpacecraftState:
-        """
-            Reset the state prior to continue propagation.
-        
-            This method is called after the step handler has returned and before the next step is started, but only when
-            :meth:`~org.orekit.propagation.events.handlers.PythonEventHandler.eventOccurred` has itself returned the null indicator.
-            It allows the user to reset the state for the next step, without perturbing the step handler of the finishing step. If
-            the :meth:`~org.orekit.propagation.events.handlers.PythonEventHandler.eventOccurred` never returns the null indicator,
-            this function will never be called, and it is safe to simply return null.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.events.handlers.EventHandler.resetState`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.handlers.EventHandler`
-        
-            Parameters:
-                detector (:class:`~org.orekit.propagation.events.handlers.PythonEventHandler`): object with appropriate type that can be used in determining correct return state
-                oldState (:class:`~org.orekit.propagation.SpacecraftState`): old state
-        
-            Returns:
-                new state
-        
-            Raises:
-                :class:`~org.orekit.errors.OrekitException`: if the state cannot be reseted
-        
-        
-        """
-        ...
-
-_PythonFieldEventHandler__KK = typing.TypeVar('_PythonFieldEventHandler__KK', bound=org.orekit.propagation.events.FieldEventDetector)  # <KK>
-_PythonFieldEventHandler__T = typing.TypeVar('_PythonFieldEventHandler__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class PythonFieldEventHandler(FieldEventHandler[_PythonFieldEventHandler__KK, _PythonFieldEventHandler__T], typing.Generic[_PythonFieldEventHandler__KK, _PythonFieldEventHandler__T]):
-    """
-    public class PythonFieldEventHandler<KK extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>,T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<KK,T>
-    """
-    def __init__(self): ...
-    def eventOccurred(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldEventHandler__T], kK: _PythonFieldEventHandler__KK, boolean: bool) -> org.hipparchus.ode.events.Action: ...
-    def finalize(self) -> None: ...
-    @typing.overload
-    def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldEventHandler__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldEventHandler__T], kK: _PythonFieldEventHandler__KK) -> None: ...
-    @typing.overload
-    def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldEventHandler__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldEventHandler__T]) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def resetState(self, kK: _PythonFieldEventHandler__KK, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldEventHandler__T]) -> org.orekit.propagation.FieldSpacecraftState[_PythonFieldEventHandler__T]: ...
 
 _RecordAndContinue__Event__T = typing.TypeVar('_RecordAndContinue__Event__T')  # <T>
 _RecordAndContinue__T = typing.TypeVar('_RecordAndContinue__T', bound=org.orekit.propagation.events.EventDetector)  # <T>
@@ -616,8 +468,6 @@ class __module_protocol__(typing.Protocol):
     FieldStopOnDecreasing: typing.Type[FieldStopOnDecreasing]
     FieldStopOnEvent: typing.Type[FieldStopOnEvent]
     FieldStopOnIncreasing: typing.Type[FieldStopOnIncreasing]
-    PythonEventHandler: typing.Type[PythonEventHandler]
-    PythonFieldEventHandler: typing.Type[PythonFieldEventHandler]
     RecordAndContinue: typing.Type[RecordAndContinue]
     StopOnDecreasing: typing.Type[StopOnDecreasing]
     StopOnEvent: typing.Type[StopOnEvent]

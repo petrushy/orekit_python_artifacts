@@ -1137,7 +1137,7 @@ class PolygonsSet(org.hipparchus.geometry.partitioning.AbstractRegion[Euclidean2
     @typing.overload
     def __init__(self, double: float, double2: float, double3: float, double4: float, double5: float): ...
     @typing.overload
-    def __init__(self, double: float, vector2DArray: typing.List['Vector2D']): ...
+    def __init__(self, double: float, *vector2D: 'Vector2D'): ...
     @typing.overload
     def __init__(self, collection: typing.Union[java.util.Collection[org.hipparchus.geometry.partitioning.SubHyperplane[Euclidean2D]], typing.Sequence[org.hipparchus.geometry.partitioning.SubHyperplane[Euclidean2D]], typing.Set[org.hipparchus.geometry.partitioning.SubHyperplane[Euclidean2D]]], double: float): ...
     @typing.overload
@@ -1505,6 +1505,56 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D]):
             Returns:
                 true if two 2D vector objects are equal, false if object is null, not an instance of Vector2D, or not equal to this
                 Vector2D instance
+        
+        
+        """
+        ...
+    def equalsIeee754(self, object: typing.Any) -> bool:
+        """
+            Test for the equality of two 2D vectors.
+        
+            If all coordinates of two 2D vectors are exactly the same, and none are :code:`NaN`, the two 2D vectors are considered
+            to be equal.
+        
+            In compliance with IEEE754 handling, if any coordinates of any of the two vectors are :code:`NaN`, then the vectors are
+            considered different. This implies that
+            :meth:`~org.hipparchus.geometry.euclidean.twod.Vector2D.NaN`.equals(:meth:`~org.hipparchus.geometry.euclidean.twod.Vector2D.NaN`)
+            returns :code:`false` despite the instance is checked against itself.
+        
+            Parameters:
+                other (Object): Object to test for equality to this
+        
+            Returns:
+                true if two 2D vector objects are equal, false if object is null, not an instance of Vector2D, or not equal to this
+                Vector2D instance
+        
+            Since:
+                2.1
+        
+        
+        """
+        ...
+    def equalsIeee754(self, object: typing.Any) -> bool:
+        """
+            Test for the equality of two 2D vectors.
+        
+            If all coordinates of two 2D vectors are exactly the same, and none are :code:`NaN`, the two 2D vectors are considered
+            to be equal.
+        
+            In compliance with IEEE754 handling, if any coordinates of any of the two vectors are :code:`NaN`, then the vectors are
+            considered different. This implies that
+            :meth:`~org.hipparchus.geometry.euclidean.twod.Vector2D.NaN`.equals(:meth:`~org.hipparchus.geometry.euclidean.twod.Vector2D.NaN`)
+            returns :code:`false` despite the instance is checked against itself.
+        
+            Parameters:
+                other (:class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality to this
+        
+            Returns:
+                true if two 2D vector objects are equal, false if object is null, not an instance of Vector2D, or not equal to this
+                Vector2D instance
+        
+            Since:
+                2.1
         
         
         """

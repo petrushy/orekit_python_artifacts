@@ -23,8 +23,7 @@ class IonosphericMappingFunction:
     
         .. code-block: java
         
-        
-         STEC = VTEC * m(e)
+         STEC = VTEC * m(e)
          
     
         With m(e) the ionospheric mapping function and e the satellite elevation.
@@ -168,17 +167,16 @@ class KlobucharIonoCoefficientsLoader(org.orekit.data.AbstractSelfFeedingLoader,
     
         .. code-block: java
         
-        
-              2              NAVIGATION DATA     GPS                 RINEX VERSION / TYPE
-         INXFIT V5.3         AIUB                06-JAN-17 09:12     PGM / RUN BY / DATE
-         CODE'S KLOBUCHAR-STYLE IONOSPHERE MODEL FOR DAY 001, 2017   COMMENT
-         Contact address: code(at)aiub.unibe.ch                      COMMENT
-         Data archive:    ftp.unibe.ch/aiub/CODE/                    COMMENT
-                          www.aiub.unibe.ch/download/CODE/           COMMENT
-         WARNING: USE DATA AT SOUTHERN POLAR REGION WITH CARE        COMMENT
-             1.2821D-08 -9.6222D-09 -3.5982D-07 -6.0901D-07          ION ALPHA
-             1.0840D+05 -1.3197D+05 -2.6331D+05  4.0570D+05          ION BETA
-                                                                     END OF HEADER
+              2              NAVIGATION DATA     GPS                 RINEX VERSION / TYPE
+         INXFIT V5.3         AIUB                06-JAN-17 09:12     PGM / RUN BY / DATE
+         CODE'S KLOBUCHAR-STYLE IONOSPHERE MODEL FOR DAY 001, 2017   COMMENT
+         Contact address: code(at)aiub.unibe.ch                      COMMENT
+         Data archive:    ftp.unibe.ch/aiub/CODE/                    COMMENT
+                          www.aiub.unibe.ch/download/CODE/           COMMENT
+         WARNING: USE DATA AT SOUTHERN POLAR REGION WITH CARE        COMMENT
+             1.2821D-08 -9.6222D-09 -3.5982D-07 -6.0901D-07          ION ALPHA
+             1.0840D+05 -1.3197D+05 -2.6331D+05  4.0570D+05          ION BETA
+                                                                     END OF HEADER
          
     
         It is not safe for multiple threads to share a single instance of this class.
@@ -400,10 +398,9 @@ class GlobalIonosphereMapModel(org.orekit.data.AbstractSelfFeedingLoader, Ionosp
     
         .. code-block: java
         
-        
-                   40.3
-            Î´ =  --------  *  STEC      with, STEC = VTEC * F(elevation)
-                    fÂ²
+                   40.3
+            Î´ =  --------  *  STEC      with, STEC = VTEC * F(elevation)
+                    fÂ²
          
         With:
     
@@ -428,34 +425,33 @@ class GlobalIonosphereMapModel(org.orekit.data.AbstractSelfFeedingLoader, Ionosp
     
         .. code-block: java
         
-        
-              1.0            IONOSPHERE MAPS     GPS                 IONEX VERSION / TYPE
-         BIMINX V5.3         AIUB                16-JAN-19 07:26     PGM / RUN BY / DATE
-         BROADCAST IONOSPHERE MODEL FOR DAY 015, 2019                COMMENT
-           2019     1    15     0     0     0                        EPOCH OF FIRST MAP
-           2019     1    16     0     0     0                        EPOCH OF LAST MAP
-           3600                                                      INTERVAL
-             25                                                      # OF MAPS IN FILE
-           NONE                                                      MAPPING FUNCTION
-              0.0                                                    ELEVATION CUTOFF
-                                                                     OBSERVABLES USED
-           6371.0                                                    BASE RADIUS
-              2                                                      MAP DIMENSION
-            350.0 350.0   0.0                                        HGT1 / HGT2 / DHGT
-             87.5 -87.5  -2.5                                        LAT1 / LAT2 / DLAT
-           -180.0 180.0   5.0                                        LON1 / LON2 / DLON
-             -1                                                      EXPONENT
-         TEC/RMS values in 0.1 TECU; 9999, if no value available     COMMENT
-                                                                     END OF HEADER
-              1                                                      START OF TEC MAP
-           2019     1    15     0     0     0                        EPOCH OF CURRENT MAP
-             87.5-180.0 180.0   5.0 350.0                            LAT/LON1/LON2/DLON/H
-            92   92   92   92   92   92   92   92   92   92   92   92   92   92   92   92
-            92   92   92   92   92   92   92   92   92   92   92   92   92   92   92   92
-            92   92   92   92   92   92   92   92   92   92   92   92   92   92   92   92
-            92   92   92   92   92   92   92   92   92   92   92   92   92   92   92   92
-            92   92   92   92   92   92   92   92   92
-            ...
+              1.0            IONOSPHERE MAPS     GPS                 IONEX VERSION / TYPE
+         BIMINX V5.3         AIUB                16-JAN-19 07:26     PGM / RUN BY / DATE
+         BROADCAST IONOSPHERE MODEL FOR DAY 015, 2019                COMMENT
+           2019     1    15     0     0     0                        EPOCH OF FIRST MAP
+           2019     1    16     0     0     0                        EPOCH OF LAST MAP
+           3600                                                      INTERVAL
+             25                                                      # OF MAPS IN FILE
+           NONE                                                      MAPPING FUNCTION
+              0.0                                                    ELEVATION CUTOFF
+                                                                     OBSERVABLES USED
+           6371.0                                                    BASE RADIUS
+              2                                                      MAP DIMENSION
+            350.0 350.0   0.0                                        HGT1 / HGT2 / DHGT
+             87.5 -87.5  -2.5                                        LAT1 / LAT2 / DLAT
+           -180.0 180.0   5.0                                        LON1 / LON2 / DLON
+             -1                                                      EXPONENT
+         TEC/RMS values in 0.1 TECU; 9999, if no value available     COMMENT
+                                                                     END OF HEADER
+              1                                                      START OF TEC MAP
+           2019     1    15     0     0     0                        EPOCH OF CURRENT MAP
+             87.5-180.0 180.0   5.0 350.0                            LAT/LON1/LON2/DLON/H
+            92   92   92   92   92   92   92   92   92   92   92   92   92   92   92   92
+            92   92   92   92   92   92   92   92   92   92   92   92   92   92   92   92
+            92   92   92   92   92   92   92   92   92   92   92   92   92   92   92   92
+            92   92   92   92   92   92   92   92   92   92   92   92   92   92   92   92
+            92   92   92   92   92   92   92   92   92
+            ...
          
     
         Also see:
@@ -807,203 +803,6 @@ class NeQuickModel(IonosphericModel):
         """
         ...
 
-class PythonIonosphericMappingFunction(IonosphericMappingFunction):
-    """
-    public class PythonIonosphericMappingFunction extends Object implements :class:`~org.orekit.models.earth.ionosphere.IonosphericMappingFunction`
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    _mappingFactor_1__T = typing.TypeVar('_mappingFactor_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def mappingFactor(self, double: float) -> float:
-        """
-            This method allows the computation of the ionospheric mapping factor.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.ionosphere.IonosphericMappingFunction.mappingFactor`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericMappingFunction`
-        
-            Parameters:
-                elevation (double): the elevation of the satellite, in radians.
-        
-            Returns:
-                the ionospheric mapping factor.
-        
-        """
-        ...
-    @typing.overload
-    def mappingFactor(self, t: _mappingFactor_1__T) -> _mappingFactor_1__T:
-        """
-            This method allows the computation of the ionospheric mapping factor.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.ionosphere.IonosphericMappingFunction.mappingFactor`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericMappingFunction`
-        
-            Parameters:
-                elevation (T): the elevation of the satellite, in radians.
-        
-            Returns:
-                the ionospheric mapping factor.
-        
-        
-        """
-        ...
-    _mappingFactor_T__T = typing.TypeVar('_mappingFactor_T__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def mappingFactor_T(self, t: _mappingFactor_T__T) -> _mappingFactor_T__T:
-        """
-            This method allows the computation of the ionospheric mapping factor.
-        
-            Parameters:
-                elevation (T): the elevation of the satellite, in radians.
-        
-            Returns:
-                the ionospheric mapping factor.
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-
-class PythonIonosphericModel(IonosphericModel):
-    """
-    public class PythonIonosphericModel extends Object implements :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
-    
-    
-        Also see:
-            :meth:`~serialized`
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    _getParameters_1__T = typing.TypeVar('_getParameters_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def getParameters(self) -> typing.List[float]:
-        """
-            Get ionospheric model parameters.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.getParameters`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
-        
-            Returns:
-                ionospheric model parameters
-        
-        """
-        ...
-    @typing.overload
-    def getParameters(self, field: org.hipparchus.Field[_getParameters_1__T]) -> typing.List[_getParameters_1__T]:
-        """
-            Get ionospheric model parameters.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.getParameters`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
-        
-            Parameters:
-                field (Field<T> field): field to which the elements belong
-        
-            Returns:
-                ionospheric model parameters
-        
-        
-        """
-        ...
-    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    _getParameters_F__T = typing.TypeVar('_getParameters_F__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getParameters_F(self, field: org.hipparchus.Field[_getParameters_F__T]) -> typing.List[_getParameters_F__T]: ...
-    _pathDelay_1__T = typing.TypeVar('_pathDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def pathDelay(self, spacecraftState: org.orekit.propagation.SpacecraftState, topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, doubleArray: typing.List[float]) -> float:
-        """
-            Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
-        
-            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0Ã‚Â° the
-            path delay will be equal to zero.
-        
-            For individual use of the ionospheric model (i.e. not for orbit determination), another method signature can be
-            implemented to compute the path delay for any elevation angle.
-        
-            Specified by:
-                 in interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
-                baseFrame (:class:`~org.orekit.frames.TopocentricFrame`): base frame associated with the station
-                frequency (double): frequency of the signal in Hz
-                parameters (double[]): ionospheric model parameters
-        
-            Returns:
-                the path delay due to the ionosphere in m
-        
-        """
-        ...
-    @typing.overload
-    def pathDelay(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_pathDelay_1__T], topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, tArray: typing.List[_pathDelay_1__T]) -> _pathDelay_1__T:
-        """
-            Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
-        
-            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0Ã‚Â° the
-            path delay will be equal to zero.
-        
-            For individual use of the ionospheric model (i.e. not for orbit determination), another method signature can be
-            implemented to compute the path delay for any elevation angle.
-        
-            Specified by:
-                 in interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
-                baseFrame (:class:`~org.orekit.frames.TopocentricFrame`): base frame associated with the station
-                frequency (double): frequency of the signal in Hz
-                parameters (T[]): ionospheric model parameters
-        
-            Returns:
-                the path delay due to the ionosphere in m
-        
-        
-        """
-        ...
-    _pathDelay_FTdT__T = typing.TypeVar('_pathDelay_FTdT__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def pathDelay_FTdT(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_pathDelay_FTdT__T], topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, tArray: typing.List[_pathDelay_FTdT__T]) -> _pathDelay_FTdT__T: ...
-    def pathDelay_STdd(self, spacecraftState: org.orekit.propagation.SpacecraftState, topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, doubleArray: typing.List[float]) -> float: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-
 class SingleLayerModelMappingFunction(IonosphericMappingFunction):
     """
     public class SingleLayerModelMappingFunction extends Object implements :class:`~org.orekit.models.earth.ionosphere.IonosphericMappingFunction`
@@ -1144,7 +943,5 @@ class __module_protocol__(typing.Protocol):
     KlobucharIonoCoefficientsLoader: typing.Type[KlobucharIonoCoefficientsLoader]
     KlobucharIonoModel: typing.Type[KlobucharIonoModel]
     NeQuickModel: typing.Type[NeQuickModel]
-    PythonIonosphericMappingFunction: typing.Type[PythonIonosphericMappingFunction]
-    PythonIonosphericModel: typing.Type[PythonIonosphericModel]
     SingleLayerModelMappingFunction: typing.Type[SingleLayerModelMappingFunction]
     SsrVtecIonosphericModel: typing.Type[SsrVtecIonosphericModel]

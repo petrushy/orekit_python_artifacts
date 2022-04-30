@@ -21,21 +21,23 @@ import typing
 
 class AccurateFormatter:
     """
-    public class AccurateFormatter extends Object
+    public class AccurateFormatter extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Formatter used to produce strings from data with high accuracy.
     
         When producing test output from computed data, we want the shortest decimal representation of a floating point number
         that maintains round-trip safety. That is, a correct parser can recover the exact original number.
     
-        For efficiency, this class uses the null algorithm for producing shortest string representation with round-trip safety.
+        For efficiency, this class uses the
+        :class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.util.RyuDouble?is` algorithm for producing
+        shortest string representation with round-trip safety.
     
         Since:
             11.0
     """
     STANDARDIZED_LOCALE: typing.ClassVar[java.util.Locale] = ...
     """
-    public static final Locale STANDARDIZED_LOCALE
+    public static final :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is` STANDARDIZED_LOCALE
     
         Standardized locale to use, to ensure files can be exchanged without internationalization issues.
     
@@ -74,7 +76,7 @@ class AccurateFormatter:
 
 class AngularCoordinates(org.orekit.time.TimeShiftable['AngularCoordinates'], java.io.Serializable):
     """
-    public class AngularCoordinates extends Object implements :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.utils.AngularCoordinates`>, Serializable
+    public class AngularCoordinates extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.utils.AngularCoordinates`>, :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Simple container for rotation/rotation rate/rotation acceleration triplets.
     
@@ -214,8 +216,8 @@ class AngularCoordinates(org.orekit.time.TimeShiftable['AngularCoordinates'], ja
             Estimation is based on a simple fixed rate rotation during the time interval between the two orientations.
         
             Parameters:
-                start (Rotation): start orientation
-                end (Rotation): end orientation
+                start (:class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Rotation?is`): start orientation
+                end (:class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Rotation?is`): end orientation
                 dt (double): time elapsed between the dates of the two orientations
         
             Returns:
@@ -228,7 +230,7 @@ class AngularCoordinates(org.orekit.time.TimeShiftable['AngularCoordinates'], ja
         """
             Convert rotation, rate and acceleration to modified Rodrigues vector and derivatives.
         
-            The modified Rodrigues vector is tan(Î¸/4) u where Î¸ and u are the rotation angle and axis respectively.
+            The modified Rodrigues vector is tan(θ/4) u where θ and u are the rotation angle and axis respectively.
         
             Parameters:
                 sign (double): multiplicative sign for quaternion components
@@ -237,6 +239,7 @@ class AngularCoordinates(org.orekit.time.TimeShiftable['AngularCoordinates'], ja
                 modified Rodrigues vector and derivatives (vector on row 0, first derivative on row 1, second derivative on row 2)
         
             Also see:
+                :meth:`~org.orekit.utils.AngularCoordinates.createFromModifiedRodrigues`
         
         
         """
@@ -256,7 +259,7 @@ class AngularCoordinates(org.orekit.time.TimeShiftable['AngularCoordinates'], ja
             Get the rotation acceleration.
         
             Returns:
-                the rotation acceleration vector dÎ©/dt (rad/sÂ²).
+                the rotation acceleration vector dΩ/dt (rad/s²).
         
         
         """
@@ -266,7 +269,7 @@ class AngularCoordinates(org.orekit.time.TimeShiftable['AngularCoordinates'], ja
             Get the rotation rate.
         
             Returns:
-                the rotation rate vector Î© (rad/s).
+                the rotation rate vector Ω (rad/s).
         
         
         """
@@ -327,49 +330,13 @@ class AngularCoordinates(org.orekit.time.TimeShiftable['AngularCoordinates'], ja
         
         """
         ...
-    def toDerivativeStructureRotation(self, int: int) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[org.hipparchus.analysis.differentiation.DerivativeStructure]:
-        """
-            Transform the instance to a null<null>.
-        
-            The null coordinates correspond to time-derivatives up to the user-specified order.
-        
-            Parameters:
-                order (int): derivation order for the vector components
-        
-            Returns:
-                rotation with time-derivatives embedded within the coordinates
-        
-        
-        """
-        ...
-    def toUnivariateDerivative1Rotation(self) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[org.hipparchus.analysis.differentiation.UnivariateDerivative1]:
-        """
-            Transform the instance to a null<null>.
-        
-            The null coordinates correspond to time-derivatives up to the order 1.
-        
-            Returns:
-                rotation with time-derivatives embedded within the coordinates
-        
-        
-        """
-        ...
-    def toUnivariateDerivative2Rotation(self) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[org.hipparchus.analysis.differentiation.UnivariateDerivative2]:
-        """
-            Transform the instance to a null<null>.
-        
-            The null coordinates correspond to time-derivatives up to the order 2.
-        
-            Returns:
-                rotation with time-derivatives embedded within the coordinates
-        
-        
-        """
-        ...
+    def toDerivativeStructureRotation(self, int: int) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[org.hipparchus.analysis.differentiation.DerivativeStructure]: ...
+    def toUnivariateDerivative1Rotation(self) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[org.hipparchus.analysis.differentiation.UnivariateDerivative1]: ...
+    def toUnivariateDerivative2Rotation(self) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[org.hipparchus.analysis.differentiation.UnivariateDerivative2]: ...
 
 class AngularDerivativesFilter(java.lang.Enum['AngularDerivativesFilter']):
     """
-    public enum AngularDerivativesFilter extends Enum<:class:`~org.orekit.utils.AngularDerivativesFilter`>
+    public enum AngularDerivativesFilter extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.utils.AngularDerivativesFilter`>
     
         Enumerate for selecting which derivatives to use in :class:`~org.orekit.utils.TimeStampedAngularCoordinates` and
         :class:`~org.orekit.utils.TimeStampedFieldAngularCoordinates` interpolation.
@@ -409,14 +376,14 @@ class AngularDerivativesFilter(java.lang.Enum['AngularDerivativesFilter']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -429,9 +396,8 @@ class AngularDerivativesFilter(java.lang.Enum['AngularDerivativesFilter']):
         
             .. code-block: java
             
-            
-            for (AngularDerivativesFilter c : AngularDerivativesFilter.values())
-                System.out.println(c);
+            for (AngularDerivativesFilter c : AngularDerivativesFilter.values())
+                System.out.println(c);
             
         
             Returns:
@@ -443,7 +409,7 @@ class AngularDerivativesFilter(java.lang.Enum['AngularDerivativesFilter']):
 
 class CartesianDerivativesFilter(java.lang.Enum['CartesianDerivativesFilter']):
     """
-    public enum CartesianDerivativesFilter extends Enum<:class:`~org.orekit.utils.CartesianDerivativesFilter`>
+    public enum CartesianDerivativesFilter extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.utils.CartesianDerivativesFilter`>
     
         Enumerate for selecting which derivatives to use in :class:`~org.orekit.utils.TimeStampedPVCoordinates` and
         :class:`~org.orekit.utils.TimeStampedFieldPVCoordinates` interpolation.
@@ -482,14 +448,14 @@ class CartesianDerivativesFilter(java.lang.Enum['CartesianDerivativesFilter']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -502,9 +468,8 @@ class CartesianDerivativesFilter(java.lang.Enum['CartesianDerivativesFilter']):
         
             .. code-block: java
             
-            
-            for (CartesianDerivativesFilter c : CartesianDerivativesFilter.values())
-                System.out.println(c);
+            for (CartesianDerivativesFilter c : CartesianDerivativesFilter.values())
+                System.out.println(c);
             
         
             Returns:
@@ -549,7 +514,7 @@ class Constants:
         Solar radius as defined by IAU 2015 resolution B3: 695700000.0 m.
     
         Also see:
-            IAU 2015 resolutions, :meth:`~constant`
+            :class:`~org.orekit.utils.https:.www.iau.org.static.resolutions.IAU2015_English.pdf`, :meth:`~constant`
     
     
     """
@@ -557,7 +522,7 @@ class Constants:
     """
     static final double IAU_2015_NOMINAL_SUN_GM
     
-        Sun attraction coefficient as defined by IAU 2015 resolution B3: 1.3271244e20 (mÂ³/sÂ²).
+        Sun attraction coefficient as defined by IAU 2015 resolution B3: 1.3271244e20 (m³/s²).
     
         Also see:
             :meth:`~constant`
@@ -590,7 +555,7 @@ class Constants:
     """
     static final double IAU_2015_NOMINAL_EARTH_GM
     
-        Earth attraction coefficient as defined by IAU 2015 resolution B3: 3.986004e14 (mÂ³/sÂ²).
+        Earth attraction coefficient as defined by IAU 2015 resolution B3: 3.986004e14 (m³/s²).
     
         Also see:
             :meth:`~constant`
@@ -623,7 +588,7 @@ class Constants:
     """
     static final double IAU_2015_NOMINAL_JUPITER_GM
     
-        Jupiter attraction coefficient as defined by IAU 2015 resolution B3: 1.2668653e17 (mÂ³/sÂ²).
+        Jupiter attraction coefficient as defined by IAU 2015 resolution B3: 1.2668653e17 (m³/s²).
     
         Also see:
             :meth:`~constant`
@@ -689,7 +654,7 @@ class Constants:
     """
     static final double G0_STANDARD_GRAVITY
     
-        Standard gravity constant, used in maneuvers definition: 9.80665 m/sÂ².
+        Standard gravity constant, used in maneuvers definition: 9.80665 m/s².
     
         Also see:
             :meth:`~constant`
@@ -755,7 +720,7 @@ class Constants:
     """
     static final double WGS84_EARTH_MU
     
-        Earth gravitational constant from WGS84 model: 3.986004418e14 mÂ³/sÂ².
+        Earth gravitational constant from WGS84 model: 3.986004418e14 m³/s².
     
         Also see:
             :meth:`~constant`
@@ -810,7 +775,7 @@ class Constants:
     """
     static final double GRS80_EARTH_MU
     
-        Earth gravitational constant from GRS80 model: 3.986005e14 mÂ³/sÂ².
+        Earth gravitational constant from GRS80 model: 3.986005e14 m³/s².
     
         Also see:
             :meth:`~constant`
@@ -843,7 +808,7 @@ class Constants:
     """
     static final double EGM96_EARTH_MU
     
-        Earth gravitational constant from EGM96 model: 3.986004415e14 mÂ³/sÂ².
+        Earth gravitational constant from EGM96 model: 3.986004415e14 m³/s².
     
         Also see:
             :meth:`~constant`
@@ -942,7 +907,7 @@ class Constants:
     """
     static final double GRIM5C1_EARTH_MU
     
-        Earth gravitational constant from GRIM5C1 model: 3.986004415e14 mÂ³/sÂ².
+        Earth gravitational constant from GRIM5C1 model: 3.986004415e14 m³/s².
     
         Also see:
             :meth:`~constant`
@@ -1019,7 +984,7 @@ class Constants:
     """
     static final double EIGEN5C_EARTH_MU
     
-        Earth gravitational constant from EIGEN5C model: 3.986004415e14 mÂ³/sÂ².
+        Earth gravitational constant from EIGEN5C model: 3.986004415e14 m³/s².
     
         Also see:
             :meth:`~constant`
@@ -1118,7 +1083,7 @@ class Constants:
     """
     static final double IERS96_EARTH_MU
     
-        Earth gravitational constant from IERS96 model: 3.986004418e14 mÂ³/sÂ².
+        Earth gravitational constant from IERS96 model: 3.986004418e14 m³/s².
     
         Also see:
             :meth:`~constant`
@@ -1173,7 +1138,7 @@ class Constants:
     """
     static final double IERS2003_EARTH_MU
     
-        Earth gravitational constant from IERS2003 model: 3.986004418e14 mÂ³/sÂ².
+        Earth gravitational constant from IERS2003 model: 3.986004418e14 m³/s².
     
         Also see:
             :meth:`~constant`
@@ -1228,7 +1193,7 @@ class Constants:
     """
     static final double IERS2010_EARTH_MU
     
-        Earth gravitational constant from IERS2010 model: 3.986004418e14 mÂ³/sÂ².
+        Earth gravitational constant from IERS2010 model: 3.986004418e14 m³/s².
     
         Also see:
             :meth:`~constant`
@@ -1250,7 +1215,7 @@ class Constants:
     """
     static final double JPL_SSD_GAUSSIAN_GRAVITATIONAL_CONSTANT
     
-        Gaussian gravitational constant: 0.01720209895 âˆš(AUÂ³/dÂ²).
+        Gaussian gravitational constant: 0.01720209895 √(AU³/d²).
     
         Also see:
             :meth:`~constant`
@@ -1272,7 +1237,7 @@ class Constants:
     """
     static final double JPL_SSD_SUN_GM
     
-        Sun attraction coefficient (mÂ³/sÂ²).
+        Sun attraction coefficient (m³/s²).
     
         Also see:
             :meth:`~constant`
@@ -1294,7 +1259,7 @@ class Constants:
     """
     static final double JPL_SSD_MERCURY_GM
     
-        Sun/Mercury attraction coefficient (mÂ³/sÂ²).
+        Sun/Mercury attraction coefficient (m³/s²).
     
         Also see:
             :meth:`~constant`
@@ -1316,7 +1281,7 @@ class Constants:
     """
     static final double JPL_SSD_VENUS_GM
     
-        Sun/Venus attraction coefficient (mÂ³/sÂ²).
+        Sun/Venus attraction coefficient (m³/s²).
     
         Also see:
             :meth:`~constant`
@@ -1338,7 +1303,7 @@ class Constants:
     """
     static final double JPL_SSD_EARTH_PLUS_MOON_GM
     
-        Sun/(Earth + Moon) attraction coefficient (mÂ³/sÂ²).
+        Sun/(Earth + Moon) attraction coefficient (m³/s²).
     
         Also see:
             :meth:`~constant`
@@ -1360,7 +1325,7 @@ class Constants:
     """
     static final double JPL_SSD_MOON_GM
     
-        Moon attraction coefficient (mÂ³/sÂ²).
+        Moon attraction coefficient (m³/s²).
     
         Also see:
             :meth:`~constant`
@@ -1371,7 +1336,7 @@ class Constants:
     """
     static final double JPL_SSD_EARTH_GM
     
-        Earth attraction coefficient (mÂ³/sÂ²).
+        Earth attraction coefficient (m³/s²).
     
         Also see:
             :meth:`~constant`
@@ -1393,7 +1358,7 @@ class Constants:
     """
     static final double JPL_SSD_MARS_SYSTEM_GM
     
-        Sun/(Mars system) attraction coefficient (mÂ³/sÂ²).
+        Sun/(Mars system) attraction coefficient (m³/s²).
     
         Also see:
             :meth:`~constant`
@@ -1415,7 +1380,7 @@ class Constants:
     """
     static final double JPL_SSD_JUPITER_SYSTEM_GM
     
-        Sun/(Jupiter system) ttraction coefficient (mÂ³/sÂ²).
+        Sun/(Jupiter system) ttraction coefficient (m³/s²).
     
         Also see:
             :meth:`~constant`
@@ -1437,7 +1402,7 @@ class Constants:
     """
     static final double JPL_SSD_SATURN_SYSTEM_GM
     
-        Sun/(Saturn system) attraction coefficient (mÂ³/sÂ²).
+        Sun/(Saturn system) attraction coefficient (m³/s²).
     
         Also see:
             :meth:`~constant`
@@ -1459,7 +1424,7 @@ class Constants:
     """
     static final double JPL_SSD_URANUS_SYSTEM_GM
     
-        Sun/(Uranus system) attraction coefficient (mÂ³/sÂ²).
+        Sun/(Uranus system) attraction coefficient (m³/s²).
     
         Also see:
             :meth:`~constant`
@@ -1481,7 +1446,7 @@ class Constants:
     """
     static final double JPL_SSD_NEPTUNE_SYSTEM_GM
     
-        Sun/(Neptune system) attraction coefficient (mÂ³/sÂ²).
+        Sun/(Neptune system) attraction coefficient (m³/s²).
     
         Also see:
             :meth:`~constant`
@@ -1503,7 +1468,7 @@ class Constants:
     """
     static final double JPL_SSD_PLUTO_SYSTEM_GM
     
-        Sun/(Pluto system) ttraction coefficient (mÂ³/sÂ²).
+        Sun/(Pluto system) ttraction coefficient (m³/s²).
     
         Also see:
             :meth:`~constant`
@@ -1513,7 +1478,7 @@ class Constants:
 
 class Differentiation:
     """
-    public class Differentiation extends Object
+    public class Differentiation extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Utility class for differentiating various kinds of functions.
     
@@ -1560,9 +1525,9 @@ class Differentiation:
 
 class DoubleArrayDictionary(java.io.Serializable):
     """
-    public class DoubleArrayDictionary extends Object implements Serializable
+    public class DoubleArrayDictionary extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
-        String â†’ double[] mapping, for small number of keys.
+        String → double[] mapping, for small number of keys.
     
         This class is a low overhead for a very small number of keys. It is based on simple array and string comparison. It
         plays the same role a :code:`Map<String, double[]>` but with reduced features and not intended for large number of keys.
@@ -1593,7 +1558,7 @@ class DoubleArrayDictionary(java.io.Serializable):
             Get the value corresponding to a key.
         
             Parameters:
-                key (String): entry key
+                key (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): entry key
         
             Returns:
                 copy of the value corresponding to the key or null if key not present
@@ -1607,7 +1572,7 @@ class DoubleArrayDictionary(java.io.Serializable):
             Get a complete entry.
         
             Parameters:
-                key (String): entry key
+                key (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): entry key
         
             Returns:
                 entry with key if it exists, null otherwise
@@ -1624,7 +1589,7 @@ class DoubleArrayDictionary(java.io.Serializable):
             The new entry is always put at the end.
         
             Parameters:
-                key (String): entry key
+                key (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): entry key
                 value (double[]): entry value
         
         
@@ -1633,11 +1598,6 @@ class DoubleArrayDictionary(java.io.Serializable):
     @typing.overload
     def putAll(self, map: typing.Union[java.util.Map[str, typing.List[float]], typing.Mapping[str, typing.List[float]]]) -> None:
         """
-            Put all the entries from the map in the dictionary.
-        
-            Parameters:
-                map (Map<String,double[]> map): map to copy into the instance
-        
             Put all the entries from another dictionary.
         
             Parameters:
@@ -1653,7 +1613,7 @@ class DoubleArrayDictionary(java.io.Serializable):
             Remove an entry.
         
             Parameters:
-                key (String): key of the entry to remove
+                key (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): key of the entry to remove
         
             Returns:
                 true if an entry has been removed, false if the key was not present
@@ -1671,18 +1631,7 @@ class DoubleArrayDictionary(java.io.Serializable):
         
         """
         ...
-    def toMap(self) -> java.util.Map[str, typing.List[float]]:
-        """
-            Create a map from the instance.
-        
-            The map contains a copy of the instance data
-        
-            Returns:
-                copy of the dictionary, as an independent map
-        
-        
-        """
-        ...
+    def toMap(self) -> java.util.Map[str, typing.List[float]]: ...
     def toString(self) -> str:
         """
             Get a string representation of the dictionary.
@@ -1690,7 +1639,8 @@ class DoubleArrayDictionary(java.io.Serializable):
             This string representation is intended for improving displays in debuggers only.
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 string representation of the dictionary
@@ -1703,7 +1653,8 @@ class DoubleArrayDictionary(java.io.Serializable):
             Get an unmodifiable view of the dictionary.
         
             The return dictionary is backed by the original instance and offers :code:`read-only` access to it, but all operations
-            that modify it throw an null.
+            that modify it throw an
+            :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.UnsupportedOperationException?is`.
         
             Returns:
                 unmodifiable view of the dictionary
@@ -1715,12 +1666,13 @@ class DoubleArrayDictionary(java.io.Serializable):
         def getKey(self) -> str: ...
         def getValue(self) -> typing.List[float]: ...
         def increment(self, doubleArray: typing.List[float]) -> None: ...
+        def scaledIncrement(self, double: float, entry: 'DoubleArrayDictionary.Entry') -> None: ...
         def size(self) -> int: ...
         def zero(self) -> None: ...
 
 class ElevationMask(java.io.Serializable):
     """
-    public class ElevationMask extends Object implements Serializable
+    public class ElevationMask extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Class for modeling the ground elevation values around a given point.
     
@@ -1750,9 +1702,10 @@ class ElevationMask(java.io.Serializable):
 _FieldAngularCoordinates__T = typing.TypeVar('_FieldAngularCoordinates__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAngularCoordinates(typing.Generic[_FieldAngularCoordinates__T]):
     """
-    public class FieldAngularCoordinates<T extends CalculusFieldElement<T>> extends Object
+    public class FieldAngularCoordinates<T extends :class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
-        Simple container for rotation / rotation rate pairs, using null.
+        Simple container for rotation / rotation rate pairs, using
+        :class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`.
     
         The state can be slightly shifted to close dates. This shift is based on a simple quadratic model. It is *not* intended
         as a replacement for proper attitude propagation but should be sufficient for either small time shifts or coarse
@@ -1820,8 +1773,8 @@ class FieldAngularCoordinates(typing.Generic[_FieldAngularCoordinates__T]):
             Estimation is based on a simple fixed rate rotation during the time interval between the two orientations.
         
             Parameters:
-                start (FieldRotation<T> start): start orientation
-                end (FieldRotation<T> end): end orientation
+                start (:class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldRotation?is`<T> start): start orientation
+                end (:class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldRotation?is`<T> end): end orientation
                 dt (double): time elapsed between the dates of the two orientations
         
             Returns:
@@ -1832,8 +1785,8 @@ class FieldAngularCoordinates(typing.Generic[_FieldAngularCoordinates__T]):
             Estimation is based on a simple fixed rate rotation during the time interval between the two orientations.
         
             Parameters:
-                start (FieldRotation<T> start): start orientation
-                end (FieldRotation<T> end): end orientation
+                start (:class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldRotation?is`<T> start): start orientation
+                end (:class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldRotation?is`<T> end): end orientation
                 dt (T): time elapsed between the dates of the two orientations
         
             Returns:
@@ -1852,7 +1805,7 @@ class FieldAngularCoordinates(typing.Generic[_FieldAngularCoordinates__T]):
             Fixed orientation parallel with reference frame (identity rotation, zero rotation rate and acceleration).
         
             Parameters:
-                field (Field<T> field): field for the components
+                field (:class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field for the components
         
             Returns:
                 a new fixed orientation parallel with reference frame
@@ -1864,7 +1817,7 @@ class FieldAngularCoordinates(typing.Generic[_FieldAngularCoordinates__T]):
         """
             Convert rotation, rate and acceleration to modified Rodrigues vector and derivatives.
         
-            The modified Rodrigues vector is tan(Î¸/4) u where Î¸ and u are the rotation angle and axis respectively.
+            The modified Rodrigues vector is tan(θ/4) u where θ and u are the rotation angle and axis respectively.
         
             Parameters:
                 sign (double): multiplicative sign for quaternion components
@@ -1876,6 +1829,7 @@ class FieldAngularCoordinates(typing.Generic[_FieldAngularCoordinates__T]):
                 9.0
         
             Also see:
+                :meth:`~org.orekit.utils.FieldAngularCoordinates.createFromModifiedRodrigues`
         
         
         """
@@ -1906,9 +1860,9 @@ class FieldAngularCoordinates(typing.Generic[_FieldAngularCoordinates__T]):
 _FieldArrayDictionary__T = typing.TypeVar('_FieldArrayDictionary__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldArrayDictionary(typing.Generic[_FieldArrayDictionary__T]):
     """
-    public class FieldArrayDictionary<T extends CalculusFieldElement<T>> extends Object
+    public class FieldArrayDictionary<T extends :class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
-        String â†’ CalculusFieldElement[] mapping, for small number of keys.
+        String → CalculusFieldElement[] mapping, for small number of keys.
     
         This class is a low overhead for a very small number of keys. It is based on simple array and string comparison. It
         plays the same role a :code:`Map<String, T[]>` but with reduced features and not intended for large number of keys. For
@@ -1936,7 +1890,7 @@ class FieldArrayDictionary(typing.Generic[_FieldArrayDictionary__T]):
             Get the value corresponding to a key.
         
             Parameters:
-                key (String): entry key
+                key (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): entry key
         
             Returns:
                 copy of the value corresponding to the key or null if key not present
@@ -1950,7 +1904,7 @@ class FieldArrayDictionary(typing.Generic[_FieldArrayDictionary__T]):
             Get a complete entry.
         
             Parameters:
-                key (String): entry key
+                key (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): entry key
         
             Returns:
                 entry with key if it exists, null otherwise
@@ -1969,7 +1923,7 @@ class FieldArrayDictionary(typing.Generic[_FieldArrayDictionary__T]):
             The new entry is always put at the end.
         
             Parameters:
-                key (String): entry key
+                key (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): entry key
                 value (:class:`~org.orekit.utils.FieldArrayDictionary`[]): entry value
         
             Add an entry.
@@ -1979,7 +1933,7 @@ class FieldArrayDictionary(typing.Generic[_FieldArrayDictionary__T]):
             The new entry is always put at the end.
         
             Parameters:
-                key (String): entry key
+                key (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): entry key
                 value (double[]): entry value
         
         
@@ -1996,7 +1950,7 @@ class FieldArrayDictionary(typing.Generic[_FieldArrayDictionary__T]):
             remove an entry.
         
             Parameters:
-                key (String): key of the entry to remove
+                key (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): key of the entry to remove
         
             Returns:
                 true if an entry has been removed, false if the key was not present
@@ -2022,7 +1976,8 @@ class FieldArrayDictionary(typing.Generic[_FieldArrayDictionary__T]):
             This string representation is intended for improving displays in debuggers only.
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 string representation of the dictionary
@@ -2038,13 +1993,17 @@ class FieldArrayDictionary(typing.Generic[_FieldArrayDictionary__T]):
         def increment(self, doubleArray: typing.List[float]) -> None: ...
         @typing.overload
         def increment(self, tArray: typing.List[_FieldArrayDictionary__T]) -> None: ...
+        @typing.overload
+        def scaledIncrement(self, double: float, fieldArrayDictionary: 'FieldArrayDictionary.Entry') -> None: ...
+        @typing.overload
+        def scaledIncrement(self, t: _FieldArrayDictionary__T, fieldArrayDictionary: 'FieldArrayDictionary.Entry') -> None: ...
         def size(self) -> int: ...
         def zero(self) -> None: ...
 
 _FieldLegendrePolynomials__T = typing.TypeVar('_FieldLegendrePolynomials__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldLegendrePolynomials(typing.Generic[_FieldLegendrePolynomials__T]):
     """
-    public class FieldLegendrePolynomials<T extends CalculusFieldElement<T>> extends Object
+    public class FieldLegendrePolynomials<T extends :class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Computes the P :sub:`nm` (t) coefficients.
     
@@ -2073,9 +2032,10 @@ class FieldLegendrePolynomials(typing.Generic[_FieldLegendrePolynomials__T]):
 _FieldPVCoordinates__T = typing.TypeVar('_FieldPVCoordinates__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldPVCoordinates(org.orekit.time.TimeShiftable['FieldPVCoordinates'[_FieldPVCoordinates__T]], typing.Generic[_FieldPVCoordinates__T]):
     """
-    public class FieldPVCoordinates<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.utils.FieldPVCoordinates`<T>>
+    public class FieldPVCoordinates<T extends :class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.utils.FieldPVCoordinates`<T>>
     
-        Simple container for Position/Velocity pairs, using null.
+        Simple container for Position/Velocity pairs, using
+        :class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`.
     
         The state can be slightly shifted to close dates. This shift is based on a simple linear model. It is *not* intended as
         a replacement for proper orbit propagation (it is not even Keplerian!) but should be sufficient for either small time
@@ -2136,8 +2096,8 @@ class FieldPVCoordinates(org.orekit.time.TimeShiftable['FieldPVCoordinates'[_Fie
             Estimation is based on a simple fixed velocity translation during the time interval between the two positions.
         
             Parameters:
-                start (FieldVector3D<T> start): start position
-                end (FieldVector3D<T> end): end position
+                start (:class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> start): start position
+                end (:class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> end): end position
                 dt (double): time elapsed between the dates of the two positions
         
             Returns:
@@ -2158,7 +2118,7 @@ class FieldPVCoordinates(org.orekit.time.TimeShiftable['FieldPVCoordinates'[_Fie
             Get fixed position/velocity at origin (both p, v and a are zero vectors).
         
             Parameters:
-                field (Field<T> field): field for the components
+                field (:class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field for the components
         
             Returns:
                 a new fixed position/velocity at origin
@@ -2189,7 +2149,8 @@ class FieldPVCoordinates(org.orekit.time.TimeShiftable['FieldPVCoordinates'[_Fie
             Return a string representation of this position/velocity pair.
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 string representation of this position/velocity pair
@@ -2205,7 +2166,7 @@ class FieldPVCoordinates(org.orekit.time.TimeShiftable['FieldPVCoordinates'[_Fie
 _FieldPVCoordinatesProvider__T = typing.TypeVar('_FieldPVCoordinatesProvider__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldPVCoordinatesProvider(typing.Generic[_FieldPVCoordinatesProvider__T]):
     """
-    public interface FieldPVCoordinatesProvider<T extends CalculusFieldElement<T>>
+    public interface FieldPVCoordinatesProvider<T extends :class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>>
     
         Interface for PV coordinates providers.
     """
@@ -2217,7 +2178,7 @@ _FieldTimeSpanMap__T = typing.TypeVar('_FieldTimeSpanMap__T')  # <T>
 _FieldTimeSpanMap__D = typing.TypeVar('_FieldTimeSpanMap__D', bound=org.hipparchus.CalculusFieldElement)  # <D>
 class FieldTimeSpanMap(typing.Generic[_FieldTimeSpanMap__T, _FieldTimeSpanMap__D]):
     """
-    public class FieldTimeSpanMap<T,D extends CalculusFieldElement<D>> extends Object
+    public class FieldTimeSpanMap<T,D extends :class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<D>> extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Container for objects that apply to spans of time.
     
@@ -2237,7 +2198,7 @@ class FieldTimeSpanMap(typing.Generic[_FieldTimeSpanMap__T, _FieldTimeSpanMap__D
 
 class IERSConventions(java.lang.Enum['IERSConventions']):
     """
-    public enum IERSConventions extends Enum<:class:`~org.orekit.utils.IERSConventions`>
+    public enum IERSConventions extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.utils.IERSConventions`>
     
         Supported IERS conventions.
     
@@ -2282,7 +2243,7 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
             Since:
                 10.1
         
-        :class:`~org.orekit.annotation.DefaultDataContext` public <T extends CalculusFieldElement<T>> T evaluateTC(:class:`~org.orekit.time.FieldAbsoluteDate`<T> date)
+        :class:`~org.orekit.annotation.DefaultDataContext` public <T extends :class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> T evaluateTC(:class:`~org.orekit.time.FieldAbsoluteDate`<T> date)
         
             Evaluate the date offset between the current date and the
             :meth:`~org.orekit.utils.IERSConventions.getNutationReferenceEpoch`.
@@ -2577,9 +2538,8 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
             Get the nominal values of the displacement numbers.
         
             Returns:
-                an array containing hÃ¢ï¿½Â½Ã¢ï¿½Â°Ã¢ï¿½Â¾, hÃ¢ï¿½Â½Ã‚Â²Ã¢ï¿½Â¾, hÃ¢â€šÆ’, hI diurnal, hI semi-diurnal,
-                lÃ¢ï¿½Â½Ã¢ï¿½Â°Ã¢ï¿½Â¾, lÃ¢ï¿½Â½Ã‚Â¹Ã¢ï¿½Â¾ diurnal, lÃ¢ï¿½Â½Ã‚Â¹Ã¢ï¿½Â¾ semi-diurnal, lÃ¢ï¿½Â½Ã‚Â²Ã¢ï¿½Â¾, lÃ¢â€šÆ’, lI
-                diurnal, lI semi-diurnal, HÃ¢â€šâ‚¬ permanent deformation amplitude
+                an array containing h⁽⁰⁾, h⁽²⁾, h₃, hI diurnal, hI semi-diurnal, l⁽⁰⁾, l⁽¹⁾ diurnal, l⁽¹⁾
+                semi-diurnal, l⁽²⁾, l₃, lI diurnal, lI semi-diurnal, H₀ permanent deformation amplitude
         
             Since:
                 9.1
@@ -2644,10 +2604,10 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
     @typing.overload
     def getNutationCorrectionConverter(self) -> 'IERSConventions.NutationCorrectionConverter':
         """
-            Create a function converting nutation corrections between Î´X/Î´Y and Î´Î”Ïˆ/Î´Î”Îµ.
+            Create a function converting nutation corrections between δX/δY and δΔψ/δΔε.
         
-              - Î´X/Î´Y nutation corrections are used with the Non-Rotating Origin paradigm.
-              - Î´Î”Ïˆ/Î´Î”Îµ nutation corrections are used with the equinox-based paradigm.
+              - δX/δY nutation corrections are used with the Non-Rotating Origin paradigm.
+              - δΔψ/δΔε nutation corrections are used with the equinox-based paradigm.
         
         
             This method uses the :meth:`~org.orekit.data.DataContext.getDefault`.
@@ -2666,10 +2626,10 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
     @typing.overload
     def getNutationCorrectionConverter(self, timeScales: org.orekit.time.TimeScales) -> 'IERSConventions.NutationCorrectionConverter':
         """
-            Create a function converting nutation corrections between Î´X/Î´Y and Î´Î”Ïˆ/Î´Î”Îµ.
+            Create a function converting nutation corrections between δX/δY and δΔψ/δΔε.
         
-              - Î´X/Î´Y nutation corrections are used with the Non-Rotating Origin paradigm.
-              - Î´Î”Ïˆ/Î´Î”Îµ nutation corrections are used with the equinox-based paradigm.
+              - δX/δY nutation corrections are used with the Non-Rotating Origin paradigm.
+              - δΔψ/δΔε nutation corrections are used with the equinox-based paradigm.
         
         
             Parameters:
@@ -2689,14 +2649,14 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
         """
             Get the function computing the nutation angles.
         
-            The function returned computes the two classical angles ÃŽâ€�ÃŽÂ¨ and ÃŽâ€�ÃŽÂµ, and the correction to the equation of
-            equinoxes introduced since 1997-02-27 by IAU 1994 resolution C7 (the correction is forced to 0 before this date)
+            The function returned computes the two classical angles ΔΨ and Δε, and the correction to the equation of equinoxes
+            introduced since 1997-02-27 by IAU 1994 resolution C7 (the correction is forced to 0 before this date)
         
             Parameters:
                 timeScales (:class:`~org.orekit.time.TimeScales`): used in the computation including TAI and TT.
         
             Returns:
-                function computing the nutation in longitude Î”Î¨ and Î”Îµ and the correction of equation of equinoxes
+                function computing the nutation in longitude ΔΨ and Δε and the correction of equation of equinoxes
         
             Since:
                 10.1
@@ -2711,11 +2671,11 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
         
             This method uses the :meth:`~org.orekit.data.DataContext.getDefault`.
         
-            The function returned computes the two classical angles ÃŽâ€�ÃŽÂ¨ and ÃŽâ€�ÃŽÂµ, and the correction to the equation of
-            equinoxes introduced since 1997-02-27 by IAU 1994 resolution C7 (the correction is forced to 0 before this date)
+            The function returned computes the two classical angles ΔΨ and Δε, and the correction to the equation of equinoxes
+            introduced since 1997-02-27 by IAU 1994 resolution C7 (the correction is forced to 0 before this date)
         
             Returns:
-                function computing the nutation in longitude Î”Î¨ and Î”Îµ and the correction of equation of equinoxes
+                function computing the nutation in longitude ΔΨ and Δε and the correction of equation of equinoxes
         
             Since:
                 6.1
@@ -2759,13 +2719,13 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
         ...
     def getOceanPoleTide(self, eOPHistory: org.orekit.frames.EOPHistory) -> org.orekit.time.TimeVectorFunction:
         """
-            Get the function computing ocean pole tide (Î”Câ‚‚â‚�, Î”Sâ‚‚â‚�).
+            Get the function computing ocean pole tide (ΔC₂₁, ΔS₂₁).
         
             Parameters:
                 eopHistory (:class:`~org.orekit.frames.EOPHistory`): EOP history
         
             Returns:
-                model for ocean pole tide (Î”Câ‚‚â‚€, Î”Câ‚‚â‚�, Î”Sâ‚‚â‚�, Î”Câ‚‚â‚‚, Î”Sâ‚‚â‚‚).
+                model for ocean pole tide (ΔC₂₀, ΔC₂₁, ΔS₂₁, ΔC₂₂, ΔS₂₂).
         
             Since:
                 6.1
@@ -2775,7 +2735,7 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
         ...
     def getPermanentTide(self) -> float:
         """
-            Get the permanent tide to be *removed* from Î”Câ‚‚â‚€ when zero-tide potentials are used.
+            Get the permanent tide to be *removed* from ΔC₂₀ when zero-tide potentials are used.
         
             Returns:
                 permanent tide to remove
@@ -2788,9 +2748,9 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
         """
             Get the function computing the precession angles.
         
-            The function returned computes the three precession angles Ã�Ë† :sub:`A` (around Z axis), Ã�â€° :sub:`A` (around X axis)
-            and Ã�â€¡ :sub:`A` (around Z axis). The constant angle ÃŽÂµÃ¢â€šâ‚¬ for the fourth rotation (around X axis) can be
-            retrieved by evaluating the function returned by :meth:`~org.orekit.utils.IERSConventions.getMeanObliquityFunction` at
+            The function returned computes the three precession angles ψ :sub:`A` (around Z axis), ω :sub:`A` (around X axis) and
+            χ :sub:`A` (around Z axis). The constant angle ε₀ for the fourth rotation (around X axis) can be retrieved by
+            evaluating the function returned by :meth:`~org.orekit.utils.IERSConventions.getMeanObliquityFunction` at
             :meth:`~org.orekit.utils.IERSConventions.getNutationReferenceEpoch`.
         
             Parameters:
@@ -2810,9 +2770,9 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
         """
             Get the function computing the precession angles.
         
-            The function returned computes the three precession angles Ã�Ë† :sub:`A` (around Z axis), Ã�â€° :sub:`A` (around X axis)
-            and Ã�â€¡ :sub:`A` (around Z axis). The constant angle ÃŽÂµÃ¢â€šâ‚¬ for the fourth rotation (around X axis) can be
-            retrieved by evaluating the function returned by :meth:`~org.orekit.utils.IERSConventions.getMeanObliquityFunction` at
+            The function returned computes the three precession angles ψ :sub:`A` (around Z axis), ω :sub:`A` (around X axis) and
+            χ :sub:`A` (around Z axis). The constant angle ε₀ for the fourth rotation (around X axis) can be retrieved by
+            evaluating the function returned by :meth:`~org.orekit.utils.IERSConventions.getMeanObliquityFunction` at
             :meth:`~org.orekit.utils.IERSConventions.getNutationReferenceEpoch`.
         
             This method uses the :meth:`~org.orekit.data.DataContext.getDefault`.
@@ -2830,13 +2790,13 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
         ...
     def getSolidPoleTide(self, eOPHistory: org.orekit.frames.EOPHistory) -> org.orekit.time.TimeVectorFunction:
         """
-            Get the function computing solid pole tide (Î”Câ‚‚â‚�, Î”Sâ‚‚â‚�).
+            Get the function computing solid pole tide (ΔC₂₁, ΔS₂₁).
         
             Parameters:
                 eopHistory (:class:`~org.orekit.frames.EOPHistory`): EOP history
         
             Returns:
-                model for solid pole tide (Î”Câ‚‚â‚€, Î”Câ‚‚â‚�, Î”Sâ‚‚â‚�, Î”Câ‚‚â‚‚, Î”Sâ‚‚â‚‚).
+                model for solid pole tide (ΔC₂₀, ΔC₂₁, ΔS₂₁, ΔC₂₂, ΔS₂₂).
         
             Since:
                 6.1
@@ -2862,7 +2822,7 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
             Since:
                 9.1
         
-        protected static :class:`~org.orekit.data.PoissonSeries.CompiledSeries` getTidalDisplacementFrequencyCorrectionDiurnal(String tableName, int cols, int rIp, int rOp, int tIp, int tOp)
+        protected static :class:`~org.orekit.data.PoissonSeries.CompiledSeries` getTidalDisplacementFrequencyCorrectionDiurnal(:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` tableName, int cols, int rIp, int rOp, int tIp, int tOp)
         
             Get the correction function for tidal displacement for diurnal tides.
         
@@ -2875,12 +2835,12 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
         
         
             Parameters:
-                tableName (String): name for the diurnal tides table
+                tableName (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name for the diurnal tides table
                 cols (int): total number of columns of the diurnal tides table
-                rIp (int): column holding âˆ†Rf(ip) in the diurnal tides table, counting from 1
-                rOp (int): column holding âˆ†Rf(op) in the diurnal tides table, counting from 1
-                tIp (int): column holding âˆ†Tf(ip) in the diurnal tides table, counting from 1
-                tOp (int): column holding âˆ†Tf(op) in the diurnal tides table, counting from 1
+                rIp (int): column holding ∆Rf(ip) in the diurnal tides table, counting from 1
+                rOp (int): column holding ∆Rf(op) in the diurnal tides table, counting from 1
+                tIp (int): column holding ∆Tf(ip) in the diurnal tides table, counting from 1
+                tOp (int): column holding ∆Tf(op) in the diurnal tides table, counting from 1
         
             Returns:
                 correction function for tidal displacement for diurnal tides
@@ -2905,7 +2865,7 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
             Since:
                 9.1
         
-        protected static :class:`~org.orekit.data.PoissonSeries.CompiledSeries` getTidalDisplacementFrequencyCorrectionZonal(String tableName, int cols, int rIp, int rOp, int tIp, int tOp)
+        protected static :class:`~org.orekit.data.PoissonSeries.CompiledSeries` getTidalDisplacementFrequencyCorrectionZonal(:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` tableName, int cols, int rIp, int rOp, int tIp, int tOp)
         
             Get the correction function for tidal displacement for zonal tides.
         
@@ -2914,12 +2874,12 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
         
         
             Parameters:
-                tableName (String): name for the zonal tides table
+                tableName (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name for the zonal tides table
                 cols (int): total number of columns of the table
-                rIp (int): column holding âˆ†Rf(ip) in the table, counting from 1
-                rOp (int): column holding âˆ†Rf(op) in the table, counting from 1
-                tIp (int): column holding âˆ†Tf(ip) in the table, counting from 1
-                tOp (int): column holding âˆ†Tf(op) in the table, counting from 1
+                rIp (int): column holding ∆Rf(ip) in the table, counting from 1
+                rOp (int): column holding ∆Rf(op) in the table, counting from 1
+                tIp (int): column holding ∆Tf(ip) in the table, counting from 1
+                tOp (int): column holding ∆Tf(op) in the table, counting from 1
         
             Returns:
                 correction function for tidal displacement for zonal tides
@@ -2933,14 +2893,14 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
     @typing.overload
     def getTideFrequencyDependenceFunction(self, timeScale: org.orekit.time.TimeScale, timeScales: org.orekit.time.TimeScales) -> org.orekit.time.TimeVectorFunction:
         """
-            Get the function computing frequency dependent terms (Î”Câ‚‚â‚€, Î”Câ‚‚â‚�, Î”Sâ‚‚â‚�, Î”Câ‚‚â‚‚, Î”Sâ‚‚â‚‚).
+            Get the function computing frequency dependent terms (ΔC₂₀, ΔC₂₁, ΔS₂₁, ΔC₂₂, ΔS₂₂).
         
             Parameters:
                 ut1 (:class:`~org.orekit.time.TimeScale`): UT1 time scale
                 timeScales (:class:`~org.orekit.time.TimeScales`): other time scales used in the computation including TAI and TT.
         
             Returns:
-                frequency dependence model for tides computation (Î”Câ‚‚â‚€, Î”Câ‚‚â‚�, Î”Sâ‚‚â‚�, Î”Câ‚‚â‚‚, Î”Sâ‚‚â‚‚).
+                frequency dependence model for tides computation (ΔC₂₀, ΔC₂₁, ΔS₂₁, ΔC₂₂, ΔS₂₂).
         
             Since:
                 10.1
@@ -2951,7 +2911,7 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
     @typing.overload
     def getTideFrequencyDependenceFunction(self, timeScale: org.orekit.time.TimeScale) -> org.orekit.time.TimeVectorFunction:
         """
-            Get the function computing frequency dependent terms (Î”Câ‚‚â‚€, Î”Câ‚‚â‚�, Î”Sâ‚‚â‚�, Î”Câ‚‚â‚‚, Î”Sâ‚‚â‚‚).
+            Get the function computing frequency dependent terms (ΔC₂₀, ΔC₂₁, ΔS₂₁, ΔC₂₂, ΔS₂₂).
         
             This method uses the :meth:`~org.orekit.data.DataContext.getDefault`.
         
@@ -2959,7 +2919,7 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
                 ut1 (:class:`~org.orekit.time.TimeScale`): UT1 time scale
         
             Returns:
-                frequency dependence model for tides computation (Î”Câ‚‚â‚€, Î”Câ‚‚â‚�, Î”Sâ‚‚â‚�, Î”Câ‚‚â‚‚, Î”Sâ‚‚â‚‚).
+                frequency dependence model for tides computation (ΔC₂₀, ΔC₂₁, ΔS₂₁, ΔC₂₂, ΔS₂₂).
         
             Since:
                 6.1
@@ -3020,14 +2980,14 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -3040,9 +3000,8 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
         
             .. code-block: java
             
-            
-            for (IERSConventions c : IERSConventions.values())
-                System.out.println(c);
+            for (IERSConventions c : IERSConventions.values())
+                System.out.println(c);
             
         
             Returns:
@@ -3057,7 +3016,7 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
 
 class InterpolationTableLoader(org.orekit.data.DataLoader):
     """
-    public class InterpolationTableLoader extends Object implements :class:`~org.orekit.data.DataLoader`
+    public class InterpolationTableLoader extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataLoader`
     
         Used to read an interpolation table from a data file.
     """
@@ -3114,7 +3073,7 @@ class InterpolationTableLoader(org.orekit.data.DataLoader):
 
 class LagrangianPoints(java.lang.Enum['LagrangianPoints']):
     """
-    public enum LagrangianPoints extends Enum<:class:`~org.orekit.utils.LagrangianPoints`>
+    public enum LagrangianPoints extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.utils.LagrangianPoints`>
     
         Enumerate for selecting which Lagrangian Point to consider in different classes.
     
@@ -3138,14 +3097,14 @@ class LagrangianPoints(java.lang.Enum['LagrangianPoints']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -3158,9 +3117,8 @@ class LagrangianPoints(java.lang.Enum['LagrangianPoints']):
         
             .. code-block: java
             
-            
-            for (LagrangianPoints c : LagrangianPoints.values())
-                System.out.println(c);
+            for (LagrangianPoints c : LagrangianPoints.values())
+                System.out.println(c);
             
         
             Returns:
@@ -3172,7 +3130,7 @@ class LagrangianPoints(java.lang.Enum['LagrangianPoints']):
 
 class LegendrePolynomials:
     """
-    public class LegendrePolynomials extends Object
+    public class LegendrePolynomials extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Computes the P :sub:`nm` (t) coefficients.
     
@@ -3200,7 +3158,7 @@ class LegendrePolynomials:
 
 class LoveNumbers(java.io.Serializable):
     """
-    public class LoveNumbers extends Object implements Serializable
+    public class LoveNumbers extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Container for Love numbers.
     
@@ -3277,7 +3235,7 @@ class MultipleShooting:
 
 class OrekitConfiguration:
     """
-    public class OrekitConfiguration extends Object
+    public class OrekitConfiguration extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Utility class for setting global configuration parameters.
     """
@@ -3306,7 +3264,7 @@ class OrekitConfiguration:
 
 class PVCoordinates(org.orekit.time.TimeShiftable['PVCoordinates'], java.io.Serializable):
     """
-    public class PVCoordinates extends Object implements :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.utils.PVCoordinates`>, Serializable
+    public class PVCoordinates extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.utils.PVCoordinates`>, :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Simple container for Position/Velocity/Acceleration triplets.
     
@@ -3370,8 +3328,8 @@ class PVCoordinates(org.orekit.time.TimeShiftable['PVCoordinates'], java.io.Seri
             Estimation is based on a simple fixed velocity translation during the time interval between the two positions.
         
             Parameters:
-                start (Vector3D): start position
-                end (Vector3D): end position
+                start (:class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): start position
+                end (:class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): end position
                 dt (double): time elapsed between the dates of the two positions
         
             Returns:
@@ -3385,7 +3343,7 @@ class PVCoordinates(org.orekit.time.TimeShiftable['PVCoordinates'], java.io.Seri
             Gets the acceleration.
         
             Returns:
-                the acceleration vector (m/sÂ²).
+                the acceleration vector (m/s²).
         
         
         """
@@ -3394,8 +3352,8 @@ class PVCoordinates(org.orekit.time.TimeShiftable['PVCoordinates'], java.io.Seri
         """
             Get the angular velocity (spin) of this point as seen from the origin.
         
-            The angular velocity vector is parallel to the :meth:`~org.orekit.utils.PVCoordinates.getMomentum` and is computed by
-            Ã�â€° = p Ã— v / ||p||Ã‚Â²
+            The angular velocity vector is parallel to the :meth:`~org.orekit.utils.PVCoordinates.getMomentum` and is computed by ω
+            = p × v / ||p||²
         
             Returns:
                 the angular velocity vector
@@ -3410,13 +3368,13 @@ class PVCoordinates(org.orekit.time.TimeShiftable['PVCoordinates'], java.io.Seri
         """
             Gets the momentum.
         
-            This vector is the p âŠ— v where p is position, v is velocity and âŠ— is cross product. To get the real physical angular
+            This vector is the p ⊗ v where p is position, v is velocity and ⊗ is cross product. To get the real physical angular
             momentum you need to multiply this vector by the mass.
         
             The returned vector is recomputed each time this method is called, it is not cached.
         
             Returns:
-                a new instance of the momentum vector (mÂ²/s).
+                a new instance of the momentum vector (m²/s).
         
         
         """
@@ -3485,54 +3443,15 @@ class PVCoordinates(org.orekit.time.TimeShiftable['PVCoordinates'], java.io.Seri
         
         """
         ...
-    def toDerivativeStructurePV(self, int: int) -> FieldPVCoordinates[org.hipparchus.analysis.differentiation.DerivativeStructure]:
-        """
-            Transform the instance to a :class:`~org.orekit.utils.FieldPVCoordinates`<null>.
-        
-            The null coordinates correspond to time-derivatives up to the user-specified order. As both the instance components
-            :meth:`~org.orekit.utils.PVCoordinates.getPosition`, :meth:`~org.orekit.utils.PVCoordinates.getVelocity` and
-            :meth:`~org.orekit.utils.PVCoordinates.getAcceleration` and the null of the components holds time-derivatives, there are
-            several ways to retrieve these derivatives. If for example the :code:`order` is set to 2, then both
-            :code:`pv.getPosition().getX().getPartialDerivative(2)`, :code:`pv.getVelocity().getX().getPartialDerivative(1)` and
-            :code:`pv.getAcceleration().getX().getValue()` return the exact same value.
-        
-            If derivation order is 1, the first derivative of acceleration will be computed as a Keplerian-only jerk. If derivation
-            order is 2, the second derivative of velocity (which is also the first derivative of acceleration) will be computed as a
-            Keplerian-only jerk, and the second derivative of acceleration will be computed as a Keplerian-only jounce.
-        
-            Parameters:
-                order (int): derivation order for the vector components (must be either 0, 1 or 2)
-        
-            Returns:
-                pv coordinates with time-derivatives embedded within the coordinates
-        
-            Since:
-                9.2
-        
-        
-        """
-        ...
-    def toDerivativeStructureVector(self, int: int) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.DerivativeStructure]:
-        """
-            Transform the instance to a null<null>.
-        
-            The null coordinates correspond to time-derivatives up to the user-specified order.
-        
-            Parameters:
-                order (int): derivation order for the vector components (must be either 0, 1 or 2)
-        
-            Returns:
-                vector with time-derivatives embedded within the coordinates
-        
-        
-        """
-        ...
+    def toDerivativeStructurePV(self, int: int) -> FieldPVCoordinates[org.hipparchus.analysis.differentiation.DerivativeStructure]: ...
+    def toDerivativeStructureVector(self, int: int) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.DerivativeStructure]: ...
     def toString(self) -> str:
         """
             Return a string representation of this position/velocity pair.
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 string representation of this position/velocity pair
@@ -3540,75 +3459,10 @@ class PVCoordinates(org.orekit.time.TimeShiftable['PVCoordinates'], java.io.Seri
         
         """
         ...
-    def toUnivariateDerivative1PV(self) -> FieldPVCoordinates[org.hipparchus.analysis.differentiation.UnivariateDerivative1]:
-        """
-            Transform the instance to a :class:`~org.orekit.utils.FieldPVCoordinates`<null>.
-        
-            The null coordinates correspond to time-derivatives up to the order 1. The first derivative of acceleration will be
-            computed as a Keplerian-only jerk.
-        
-            Returns:
-                pv coordinates with time-derivatives embedded within the coordinates
-        
-            Since:
-                10.2
-        
-        
-        """
-        ...
-    def toUnivariateDerivative1Vector(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.UnivariateDerivative1]:
-        """
-            Transform the instance to a null<null>.
-        
-            The null coordinates correspond to time-derivatives up to the order 1.
-        
-            Returns:
-                vector with time-derivatives embedded within the coordinates
-        
-            Since:
-                10.2
-        
-            Also see:
-                :meth:`~org.orekit.utils.PVCoordinates.toUnivariateDerivative2Vector`
-        
-        
-        """
-        ...
-    def toUnivariateDerivative2PV(self) -> FieldPVCoordinates[org.hipparchus.analysis.differentiation.UnivariateDerivative2]:
-        """
-            Transform the instance to a :class:`~org.orekit.utils.FieldPVCoordinates`<null>.
-        
-            The null coordinates correspond to time-derivatives up to the order 2. As derivation order is 2, the second derivative
-            of velocity (which is also the first derivative of acceleration) will be computed as a Keplerian-only jerk, and the
-            second derivative of acceleration will be computed as a Keplerian-only jounce.
-        
-            Returns:
-                pv coordinates with time-derivatives embedded within the coordinates
-        
-            Since:
-                10.2
-        
-        
-        """
-        ...
-    def toUnivariateDerivative2Vector(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.UnivariateDerivative2]:
-        """
-            Transform the instance to a null<null>.
-        
-            The null coordinates correspond to time-derivatives up to the order 2.
-        
-            Returns:
-                vector with time-derivatives embedded within the coordinates
-        
-            Since:
-                10.2
-        
-            Also see:
-                :meth:`~org.orekit.utils.PVCoordinates.toUnivariateDerivative1Vector`
-        
-        
-        """
-        ...
+    def toUnivariateDerivative1PV(self) -> FieldPVCoordinates[org.hipparchus.analysis.differentiation.UnivariateDerivative1]: ...
+    def toUnivariateDerivative1Vector(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.UnivariateDerivative1]: ...
+    def toUnivariateDerivative2PV(self) -> FieldPVCoordinates[org.hipparchus.analysis.differentiation.UnivariateDerivative2]: ...
+    def toUnivariateDerivative2Vector(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.UnivariateDerivative2]: ...
 
 class PVCoordinatesProvider:
     """
@@ -3633,7 +3487,7 @@ class PVCoordinatesProvider:
 
 class ParameterDriver:
     """
-    public class ParameterDriver extends Object
+    public class ParameterDriver extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Class allowing to drive the value of a parameter.
     
@@ -3754,16 +3608,13 @@ class ParameterDriver:
             Returns:
                 current parameter value
         
-        """
-        ...
-    @typing.overload
-    def getValue(self, int: int, map: typing.Union[java.util.Map[str, int], typing.Mapping[str, int]]) -> org.hipparchus.analysis.differentiation.Gradient:
-        """
+        public :class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.differentiation.Gradient?is` getValue(int freeParameters, :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.util.Map?is`<:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`,:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`> indices)
+        
             Get the value as a gradient.
         
             Parameters:
                 freeParameters (int): total number of free parameters in the gradient
-                indices (Map<String,Integer> indices): indices of the differentiation parameters in derivatives computations
+                indices (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.util.Map?is`<:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`,:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`> indices): indices of the differentiation parameters in derivatives computations
         
             Returns:
                 value with derivatives
@@ -3774,6 +3625,8 @@ class ParameterDriver:
         
         """
         ...
+    @typing.overload
+    def getValue(self, int: int, map: typing.Union[java.util.Map[str, int], typing.Mapping[str, int]]) -> org.hipparchus.analysis.differentiation.Gradient: ...
     def isSelected(self) -> bool:
         """
             Check if parameter is selected.
@@ -3845,7 +3698,7 @@ class ParameterDriver:
             Change the name of this parameter driver.
         
             Parameters:
-                name (String): new name
+                name (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): new name
         
         
         """
@@ -3935,7 +3788,8 @@ class ParameterDriver:
             Get a text representation of the parameter.
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 text representation of the parameter, in the form name = value.
@@ -4021,7 +3875,7 @@ class ParameterObserver:
             The default implementation does nothing
         
             Parameters:
-                previousName (String): previous name
+                previousName (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): previous name
                 driver (:class:`~org.orekit.utils.ParameterDriver`): parameter driver that has been changed
         
             Since:
@@ -4108,13 +3962,13 @@ class ParameterObserver:
 
 class SecularAndHarmonic:
     """
-    public class SecularAndHarmonic extends Object
+    public class SecularAndHarmonic extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Class for fitting evolution of osculating orbital parameters.
     
         This class allows conversion from osculating parameters to mean parameters.
     """
-    def __init__(self, int: int, doubleArray: typing.List[float]): ...
+    def __init__(self, int: int, *double: float): ...
     def addPoint(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> None:
         """
             Add a fitting point.
@@ -4281,7 +4135,7 @@ class SecularAndHarmonic:
         
         """
         ...
-    def resetFitting(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float]) -> None:
+    def resetFitting(self, absoluteDate: org.orekit.time.AbsoluteDate, *double: float) -> None:
         """
             Reset fitting.
         
@@ -4381,7 +4235,7 @@ _TimeSpanMap__Transition__S = typing.TypeVar('_TimeSpanMap__Transition__S')  # <
 _TimeSpanMap__T = typing.TypeVar('_TimeSpanMap__T')  # <T>
 class TimeSpanMap(typing.Generic[_TimeSpanMap__T]):
     """
-    public class TimeSpanMap<T> extends Object
+    public class TimeSpanMap<T> extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Container for objects that apply to spans of time.
     
@@ -4392,9 +4246,12 @@ class TimeSpanMap(typing.Generic[_TimeSpanMap__T]):
         span.
     
         Typical uses of :class:`~org.orekit.utils.TimeSpanMap` are to hold piecewise data, like for example an orbit count that
-        changes at ascending nodes (in which case the entry would be an null), or a visibility status between several objects
-        (in which case the entry would be a null) or a drag coefficient that is expected to be estimated daily or three-hourly
-        (this is how :class:`~org.orekit.forces.drag.TimeSpanDragForce` is implemented).
+        changes at ascending nodes (in which case the entry would be an
+        :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`), or a visibility status
+        between several objects (in which case the entry would be a
+        :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Boolean?is`) or a drag coefficient that is
+        expected to be estimated daily or three-hourly (this is how :class:`~org.orekit.forces.drag.TimeSpanDragForce` is
+        implemented).
     
         Time span maps are built progressively. At first, they contain one :class:`~org.orekit.utils.TimeSpanMap.Span` only
         whose validity extends from past infinity to future infinity. Then new entries are added one at a time, associated with
@@ -4414,11 +4271,99 @@ class TimeSpanMap(typing.Generic[_TimeSpanMap__T]):
     @typing.overload
     def addValidAfter(self, t: _TimeSpanMap__T, absoluteDate: org.orekit.time.AbsoluteDate, boolean: bool) -> 'TimeSpanMap.Span'[_TimeSpanMap__T]: ...
     @typing.overload
-    def addValidAfter(self, t: _TimeSpanMap__T, absoluteDate: org.orekit.time.AbsoluteDate) -> None: ...
+    def addValidAfter(self, t: _TimeSpanMap__T, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+        """
+            Deprecated. as of 11.1, replaced by :meth:`~org.orekit.utils.TimeSpanMap.addValidAfter`
+            Add an entry valid after a limit date.
+        
+            Calling this method is equivalent to call :meth:`~org.orekit.utils.TimeSpanMap.addValidAfter`.
+        
+            Parameters:
+                entry (:class:`~org.orekit.utils.TimeSpanMap`): entry to add
+                earliestValidityDate (:class:`~org.orekit.time.AbsoluteDate`): date after which the entry is valid
+        
+        public :class:`~org.orekit.utils.TimeSpanMap.Span`<:class:`~org.orekit.utils.TimeSpanMap`> addValidAfter(:class:`~org.orekit.utils.TimeSpanMap` entry, :class:`~org.orekit.time.AbsoluteDate` earliestValidityDate, boolean erasesLater)
+        
+            Add an entry valid after a limit date.
+        
+            As an entry is valid, it truncates or overrides the validity of the neighboring entries already present in the map.
+        
+            If the map already contains transitions that occur earlier than :code:`earliestValidityDate`, the :code:`erasesEarlier`
+            parameter controls what to do with them. Lets consider the time span [tₖ ; tₖ₊₁[ associated with entry eₖ that
+            would have been valid at time :code:`earliestValidityDate` prior to the call to the method (i.e. tₖ <
+            :code:`earliestValidityDate` < tₖ₊₁).
+        
+              - if :code:`erasesEarlier` is :code:`true`, then all earlier transitions up to and including tₖ are erased, and the
+                :code:`entry` will be valid from past infinity to :code:`earliestValidityDate`
+              - if :code:`erasesEarlier` is :code:`false`, then all earlier transitions are preserved, and the :code:`entry` will be
+                valid from tₖ to :code:`earliestValidityDate`
+        
+        
+            In both cases, the existing entry eₖ time span will be truncated and will be valid only from
+            :code:`earliestValidityDate` to tₖ₊₁.
+        
+            Parameters:
+                entry (:class:`~org.orekit.utils.TimeSpanMap`): entry to add
+                earliestValidityDate (:class:`~org.orekit.time.AbsoluteDate`): date after which the entry is valid
+                erasesLater (boolean): if true, the entry erases all existing transitions that are later than :code:`earliestValidityDate`
+        
+            Returns:
+                span with added entry
+        
+            Since:
+                11.1
+        
+        
+        """
+        ...
     @typing.overload
     def addValidBefore(self, t: _TimeSpanMap__T, absoluteDate: org.orekit.time.AbsoluteDate, boolean: bool) -> 'TimeSpanMap.Span'[_TimeSpanMap__T]: ...
     @typing.overload
-    def addValidBefore(self, t: _TimeSpanMap__T, absoluteDate: org.orekit.time.AbsoluteDate) -> None: ...
+    def addValidBefore(self, t: _TimeSpanMap__T, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+        """
+            Deprecated. as of 11.1, replaced by :meth:`~org.orekit.utils.TimeSpanMap.addValidBefore`
+            Add an entry valid before a limit date.
+        
+            Calling this method is equivalent to call :meth:`~org.orekit.utils.TimeSpanMap.addValidAfter`.
+        
+            Parameters:
+                entry (:class:`~org.orekit.utils.TimeSpanMap`): entry to add
+                latestValidityDate (:class:`~org.orekit.time.AbsoluteDate`): date before which the entry is valid
+        
+        public :class:`~org.orekit.utils.TimeSpanMap.Span`<:class:`~org.orekit.utils.TimeSpanMap`> addValidBefore(:class:`~org.orekit.utils.TimeSpanMap` entry, :class:`~org.orekit.time.AbsoluteDate` latestValidityDate, boolean erasesEarlier)
+        
+            Add an entry valid before a limit date.
+        
+            As an entry is valid, it truncates or overrides the validity of the neighboring entries already present in the map.
+        
+            If the map already contains transitions that occur earlier than :code:`latestValidityDate`, the :code:`erasesEarlier`
+            parameter controls what to do with them. Lets consider the time span [tₖ ; tₖ₊₁[ associated with entry eₖ that
+            would have been valid at time :code:`latestValidityDate` prior to the call to the method (i.e. tₖ <
+            :code:`latestValidityDate` < tₖ₊₁).
+        
+              - if :code:`erasesEarlier` is :code:`true`, then all earlier transitions up to and including tₖ are erased, and the
+                :code:`entry` will be valid from past infinity to :code:`latestValidityDate`
+              - if :code:`erasesEarlier` is :code:`false`, then all earlier transitions are preserved, and the :code:`entry` will be
+                valid from tₖ to :code:`latestValidityDate`
+        
+        
+            In both cases, the existing entry eₖ time span will be truncated and will be valid only from
+            :code:`latestValidityDate` to tₖ₊₁.
+        
+            Parameters:
+                entry (:class:`~org.orekit.utils.TimeSpanMap`): entry to add
+                latestValidityDate (:class:`~org.orekit.time.AbsoluteDate`): date before which the entry is valid
+                erasesEarlier (boolean): if true, the entry erases all existing transitions that are earlier than :code:`latestValidityDate`
+        
+            Returns:
+                span with added entry
+        
+            Since:
+                11.1
+        
+        
+        """
+        ...
     def addValidBetween(self, t: _TimeSpanMap__T, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> 'TimeSpanMap.Span'[_TimeSpanMap__T]: ...
     def extractRange(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> 'TimeSpanMap'[_TimeSpanMap__T]: ...
     def forEach(self, consumer: typing.Union[java.util.function.Consumer[_TimeSpanMap__T], typing.Callable[[_TimeSpanMap__T], None]]) -> None: ...
@@ -4535,7 +4480,7 @@ class TimeStampedGenerator(typing.Generic[_TimeStampedGenerator__T]):
 
 class AbstractMultipleShooting(MultipleShooting):
     """
-    public abstract class AbstractMultipleShooting extends Object implements :class:`~org.orekit.utils.MultipleShooting`
+    public abstract class AbstractMultipleShooting extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.utils.MultipleShooting`
     
         Multiple shooting method using only constraints on state vectors of patch points (and possibly on epoch and integration
         time).
@@ -4671,7 +4616,7 @@ class ExtendedPVCoordinatesProvider(PVCoordinatesProvider):
             Convert to a :class:`~org.orekit.utils.FieldPVCoordinatesProvider` with a specific type.
         
             Parameters:
-                field (Field<T> field): field for the argument and value
+                field (:class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field for the argument and value
         
             Returns:
                 converted function
@@ -4683,7 +4628,7 @@ class ExtendedPVCoordinatesProvider(PVCoordinatesProvider):
 _GenericTimeStampedCache__T = typing.TypeVar('_GenericTimeStampedCache__T', bound=org.orekit.time.TimeStamped)  # <T>
 class GenericTimeStampedCache(TimeStampedCache[_GenericTimeStampedCache__T], typing.Generic[_GenericTimeStampedCache__T]):
     """
-    public class GenericTimeStampedCache<T extends :class:`~org.orekit.time.TimeStamped`> extends Object implements :class:`~org.orekit.utils.TimeStampedCache`<T>
+    public class GenericTimeStampedCache<T extends :class:`~org.orekit.time.TimeStamped`> extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.utils.TimeStampedCache`<T>
     
         Generic thread-safe cache for :class:`~org.orekit.time.TimeStamped` data.
     """
@@ -4821,7 +4766,7 @@ class GenericTimeStampedCache(TimeStampedCache[_GenericTimeStampedCache__T], typ
 _ImmutableTimeStampedCache__T = typing.TypeVar('_ImmutableTimeStampedCache__T', bound=org.orekit.time.TimeStamped)  # <T>
 class ImmutableTimeStampedCache(TimeStampedCache[_ImmutableTimeStampedCache__T], typing.Generic[_ImmutableTimeStampedCache__T]):
     """
-    public class ImmutableTimeStampedCache<T extends :class:`~org.orekit.time.TimeStamped`> extends Object implements :class:`~org.orekit.utils.TimeStampedCache`<T>
+    public class ImmutableTimeStampedCache<T extends :class:`~org.orekit.time.TimeStamped`> extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.utils.TimeStampedCache`<T>
     
         A cache of :class:`~org.orekit.time.TimeStamped` data that provides concurrency through immutability. This strategy is
         suitable when all of the cached data is stored in memory. (For example, :class:`~org.orekit.time.UTCScale`) This class
@@ -4876,7 +4821,8 @@ class ImmutableTimeStampedCache(TimeStampedCache[_ImmutableTimeStampedCache__T],
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -4884,7 +4830,7 @@ class ImmutableTimeStampedCache(TimeStampedCache[_ImmutableTimeStampedCache__T],
 
 class ParameterDriversList:
     """
-    public class ParameterDriversList extends Object
+    public class ParameterDriversList extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Class managing several :class:`~org.orekit.utils.ParameterDriver`, taking care of duplicated names.
     
@@ -4931,7 +4877,7 @@ class ParameterDriversList:
             Find a :class:`~org.orekit.utils.ParameterDriversList.DelegatingDriver` by name.
         
             Parameters:
-                name (String): name to check
+                name (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name to check
         
             Returns:
                 a :class:`~org.orekit.utils.ParameterDriversList.DelegatingDriver` managing this parameter name
@@ -4961,477 +4907,6 @@ class ParameterDriversList:
         ...
     class DelegatingDriver(ParameterDriver):
         def getRawDrivers(self) -> java.util.List[ParameterDriver]: ...
-
-_PythonFieldPVCoordinatesProvider__T = typing.TypeVar('_PythonFieldPVCoordinatesProvider__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class PythonFieldPVCoordinatesProvider(FieldPVCoordinatesProvider[_PythonFieldPVCoordinatesProvider__T], typing.Generic[_PythonFieldPVCoordinatesProvider__T]):
-    """
-    public class PythonFieldPVCoordinatesProvider<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T>
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    def getPVCoordinates(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldPVCoordinatesProvider__T], frame: org.orekit.frames.Frame) -> 'TimeStampedFieldPVCoordinates'[_PythonFieldPVCoordinatesProvider__T]: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-
-class PythonMultipleShooting(MultipleShooting):
-    """
-    public class PythonMultipleShooting extends Object implements :class:`~org.orekit.utils.MultipleShooting`
-    """
-    def __init__(self): ...
-    def compute(self) -> java.util.List[org.orekit.propagation.SpacecraftState]: ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-
-class PythonPVCoordinatesProvider(PVCoordinatesProvider):
-    """
-    public class PythonPVCoordinatesProvider extends Object implements :class:`~org.orekit.utils.PVCoordinatesProvider`
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    def getPVCoordinates(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> 'TimeStampedPVCoordinates':
-        """
-            Get the :class:`~org.orekit.utils.PVCoordinates` of the body in the selected frame.
-        
-            Specified by:
-                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates`Â in
-                interfaceÂ :class:`~org.orekit.utils.PVCoordinatesProvider`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                frame (:class:`~org.orekit.frames.Frame`): the frame where to define the position
-        
-            Returns:
-                time-stamped position/velocity of the body (m and m/s)
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-
-class PythonParameterFunction(ParameterFunction):
-    """
-    public class PythonParameterFunction extends Object implements :class:`~org.orekit.utils.ParameterFunction`
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def value(self, parameterDriver: ParameterDriver) -> float:
-        """
-            Evaluate the function.
-        
-            Specified by:
-                :meth:`~org.orekit.utils.ParameterFunction.value` in interface :class:`~org.orekit.utils.ParameterFunction`
-        
-            Parameters:
-                parameterDriver (:class:`~org.orekit.utils.ParameterDriver`): driver for the parameter.
-        
-            Returns:
-                scalar value of the function
-        
-        
-        """
-        ...
-
-class PythonParameterObserver(ParameterObserver):
-    """
-    public class PythonParameterObserver extends Object implements :class:`~org.orekit.utils.ParameterObserver`
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    def maxValueChanged(self, double: float, parameterDriver: ParameterDriver) -> None:
-        """
-            Notify that a parameter maximum value has been changed.
-        
-            The default implementation does nothing
-        
-            Specified by:
-                :meth:`~org.orekit.utils.ParameterObserver.maxValueChanged` in interface :class:`~org.orekit.utils.ParameterObserver`
-        
-            Parameters:
-                previousMaxValue (double): previous maximum value
-                driver (:class:`~org.orekit.utils.ParameterDriver`): parameter driver that has been changed
-        
-            Since:
-                9.0
-        
-        
-        """
-        ...
-    def minValueChanged(self, double: float, parameterDriver: ParameterDriver) -> None:
-        """
-            Notify that a parameter minimum value has been changed.
-        
-            The default implementation does nothing
-        
-            Specified by:
-                :meth:`~org.orekit.utils.ParameterObserver.minValueChanged` in interface :class:`~org.orekit.utils.ParameterObserver`
-        
-            Parameters:
-                previousMinValue (double): previous minimum value
-                driver (:class:`~org.orekit.utils.ParameterDriver`): parameter driver that has been changed
-        
-            Since:
-                9.0
-        
-        
-        """
-        ...
-    def nameChanged(self, string: str, parameterDriver: ParameterDriver) -> None:
-        """
-            Notify that a parameter name has been changed.
-        
-            The default implementation does nothing
-        
-            Specified by:
-                :meth:`~org.orekit.utils.ParameterObserver.nameChanged` in interface :class:`~org.orekit.utils.ParameterObserver`
-        
-            Parameters:
-                previousName (String): previous name
-                driver (:class:`~org.orekit.utils.ParameterDriver`): parameter driver that has been changed
-        
-            Since:
-                9.0
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def referenceDateChanged(self, absoluteDate: org.orekit.time.AbsoluteDate, parameterDriver: ParameterDriver) -> None:
-        """
-            Notify that a parameter reference date has been changed.
-        
-            The default implementation does nothing
-        
-            Specified by:
-                :meth:`~org.orekit.utils.ParameterObserver.referenceDateChanged`Â in
-                interfaceÂ :class:`~org.orekit.utils.ParameterObserver`
-        
-            Parameters:
-                previousReferenceDate (:class:`~org.orekit.time.AbsoluteDate`): previous date (null if it is the first time the reference date is changed)
-                driver (:class:`~org.orekit.utils.ParameterDriver`): parameter driver that has been changed
-        
-            Since:
-                9.0
-        
-        
-        """
-        ...
-    def referenceValueChanged(self, double: float, parameterDriver: ParameterDriver) -> None:
-        """
-            Notify that a parameter reference value has been changed.
-        
-            The default implementation does nothing
-        
-            Specified by:
-                :meth:`~org.orekit.utils.ParameterObserver.referenceValueChanged`Â in
-                interfaceÂ :class:`~org.orekit.utils.ParameterObserver`
-        
-            Parameters:
-                previousReferenceValue (double): previous reference value
-                driver (:class:`~org.orekit.utils.ParameterDriver`): parameter driver that has been changed
-        
-            Since:
-                9.0
-        
-        
-        """
-        ...
-    def scaleChanged(self, double: float, parameterDriver: ParameterDriver) -> None:
-        """
-            Notify that a parameter scale has been changed.
-        
-            The default implementation does nothing
-        
-            Specified by:
-                :meth:`~org.orekit.utils.ParameterObserver.scaleChanged` in interface :class:`~org.orekit.utils.ParameterObserver`
-        
-            Parameters:
-                previousScale (double): previous scale
-                driver (:class:`~org.orekit.utils.ParameterDriver`): parameter driver that has been changed
-        
-            Since:
-                9.0
-        
-        
-        """
-        ...
-    def selectionChanged(self, boolean: bool, parameterDriver: ParameterDriver) -> None:
-        """
-            Notify that a parameter selection status has been changed.
-        
-            The default implementation does nothing
-        
-            Specified by:
-                :meth:`~org.orekit.utils.ParameterObserver.selectionChanged` in interface :class:`~org.orekit.utils.ParameterObserver`
-        
-            Parameters:
-                previousSelection (boolean): previous selection
-                driver (:class:`~org.orekit.utils.ParameterDriver`): parameter driver that has been changed
-        
-            Since:
-                9.0
-        
-        
-        """
-        ...
-    def valueChanged(self, double: float, parameterDriver: ParameterDriver) -> None:
-        """
-            Notify that a parameter value has been changed.
-        
-            Specified by:
-                :meth:`~org.orekit.utils.ParameterObserver.valueChanged` in interface :class:`~org.orekit.utils.ParameterObserver`
-        
-            Parameters:
-                previousValue (double): previous value
-                driver (:class:`~org.orekit.utils.ParameterDriver`): parameter driver that has been changed
-        
-        
-        """
-        ...
-
-class PythonStateFunction(StateFunction):
-    """
-    public class PythonStateFunction extends Object implements :class:`~org.orekit.utils.StateFunction`
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def value(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]:
-        """
-            Evaluate the function.
-        
-            Specified by:
-                :meth:`~org.orekit.utils.StateFunction.value` in interface :class:`~org.orekit.utils.StateFunction`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state as the sole free parameter of the function.
-        
-            Returns:
-                vector value of the function
-        
-        
-        """
-        ...
-
-class PythonStateJacobian(StateJacobian):
-    """
-    public class PythonStateJacobian extends Object implements :class:`~org.orekit.utils.StateJacobian`
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def value(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[typing.List[float]]:
-        """
-            Evaluate the Jacobian of the function.
-        
-            Specified by:
-                :meth:`~org.orekit.utils.StateJacobian.value` in interface :class:`~org.orekit.utils.StateJacobian`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state as the sole free parameter of the function.
-        
-            Returns:
-                Jacobian matric
-        
-        
-        """
-        ...
-
-_PythonTimeStampedCache__T = typing.TypeVar('_PythonTimeStampedCache__T', bound=org.orekit.time.TimeStamped)  # <T>
-class PythonTimeStampedCache(TimeStampedCache[_PythonTimeStampedCache__T], typing.Generic[_PythonTimeStampedCache__T]):
-    """
-    public class PythonTimeStampedCache<T extends :class:`~org.orekit.time.TimeStamped`> extends Object implements :class:`~org.orekit.utils.TimeStampedCache`<T>
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    def getEarliest(self) -> _PythonTimeStampedCache__T: ...
-    def getLatest(self) -> _PythonTimeStampedCache__T: ...
-    def getNeighbors(self, absoluteDate: org.orekit.time.AbsoluteDate) -> java.util.stream.Stream[_PythonTimeStampedCache__T]: ...
-    def getNeighborsSize(self) -> int:
-        """
-            Get the fixed size of the lists returned by :meth:`~org.orekit.utils.PythonTimeStampedCache.getNeighbors`.
-        
-            Specified by:
-                :meth:`~org.orekit.utils.TimeStampedCache.getNeighborsSize` in interface :class:`~org.orekit.utils.TimeStampedCache`
-        
-            Returns:
-                size of the list
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-
-_PythonTimeStampedGenerator__T = typing.TypeVar('_PythonTimeStampedGenerator__T', bound=org.orekit.time.TimeStamped)  # <T>
-class PythonTimeStampedGenerator(TimeStampedGenerator[_PythonTimeStampedGenerator__T], typing.Generic[_PythonTimeStampedGenerator__T]):
-    """
-    public class PythonTimeStampedGenerator<T extends :class:`~org.orekit.time.TimeStamped`> extends Object implements :class:`~org.orekit.utils.TimeStampedGenerator`<T>
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    def generate(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> java.util.List[_PythonTimeStampedGenerator__T]: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
 
 class TimeStampedAngularCoordinates(AngularCoordinates, org.orekit.time.TimeStamped):
     """
@@ -5566,7 +5041,7 @@ class TimeStampedAngularCoordinates(AngularCoordinates, org.orekit.time.TimeStam
 _TimeStampedFieldAngularCoordinates__T = typing.TypeVar('_TimeStampedFieldAngularCoordinates__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class TimeStampedFieldAngularCoordinates(FieldAngularCoordinates[_TimeStampedFieldAngularCoordinates__T], org.orekit.time.FieldTimeStamped[_TimeStampedFieldAngularCoordinates__T], typing.Generic[_TimeStampedFieldAngularCoordinates__T]):
     """
-    public class TimeStampedFieldAngularCoordinates<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.utils.FieldAngularCoordinates`<T> implements :class:`~org.orekit.time.FieldTimeStamped`<T>
+    public class TimeStampedFieldAngularCoordinates<T extends :class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.utils.FieldAngularCoordinates`<T> implements :class:`~org.orekit.time.FieldTimeStamped`<T>
     
         :class:`~org.orekit.time.TimeStamped` version of :class:`~org.orekit.utils.FieldAngularCoordinates`.
     
@@ -5608,7 +5083,7 @@ class TimeStampedFieldAngularCoordinates(FieldAngularCoordinates[_TimeStampedFie
 _TimeStampedFieldPVCoordinates__T = typing.TypeVar('_TimeStampedFieldPVCoordinates__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class TimeStampedFieldPVCoordinates(FieldPVCoordinates[_TimeStampedFieldPVCoordinates__T], org.orekit.time.FieldTimeStamped[_TimeStampedFieldPVCoordinates__T], typing.Generic[_TimeStampedFieldPVCoordinates__T]):
     """
-    public class TimeStampedFieldPVCoordinates<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.utils.FieldPVCoordinates`<T> implements :class:`~org.orekit.time.FieldTimeStamped`<T>
+    public class TimeStampedFieldPVCoordinates<T extends :class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.utils.FieldPVCoordinates`<T> implements :class:`~org.orekit.time.FieldTimeStamped`<T>
     
         :class:`~org.orekit.time.TimeStamped` version of :class:`~org.orekit.utils.FieldPVCoordinates`.
     
@@ -5860,7 +5335,7 @@ class TimeStampedPVCoordinates(PVCoordinates, org.orekit.time.TimeStamped):
 
 class AbsolutePVCoordinates(TimeStampedPVCoordinates, org.orekit.time.TimeStamped, org.orekit.time.TimeInterpolable['AbsolutePVCoordinates'], java.io.Serializable, PVCoordinatesProvider):
     """
-    public class AbsolutePVCoordinates extends :class:`~org.orekit.utils.TimeStampedPVCoordinates` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.time.TimeInterpolable`<:class:`~org.orekit.utils.AbsolutePVCoordinates`>, Serializable, :class:`~org.orekit.utils.PVCoordinatesProvider`
+    public class AbsolutePVCoordinates extends :class:`~org.orekit.utils.TimeStampedPVCoordinates` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.time.TimeInterpolable`<:class:`~org.orekit.utils.AbsolutePVCoordinates`>, :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.orekit.utils.PVCoordinatesProvider`
     
         Position - Velocity - Acceleration linked to a date and a frame.
     
@@ -5929,8 +5404,8 @@ class AbsolutePVCoordinates(TimeStampedPVCoordinates, org.orekit.time.TimeStampe
             Get the :class:`~org.orekit.utils.PVCoordinates` of the body in the selected frame.
         
             Specified by:
-                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates`Â in
-                interfaceÂ :class:`~org.orekit.utils.PVCoordinatesProvider`
+                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates` in
+                interface :class:`~org.orekit.utils.PVCoordinatesProvider`
         
             Parameters:
                 otherDate (:class:`~org.orekit.time.AbsoluteDate`): current date
@@ -5969,8 +5444,8 @@ class AbsolutePVCoordinates(TimeStampedPVCoordinates, org.orekit.time.TimeStampe
                 :meth:`~org.orekit.time.TimeShiftable.shiftedBy` in interface :class:`~org.orekit.time.TimeShiftable`
         
             Overrides:
-                :meth:`~org.orekit.utils.TimeStampedPVCoordinates.shiftedBy`Â in
-                classÂ :class:`~org.orekit.utils.TimeStampedPVCoordinates`
+                :meth:`~org.orekit.utils.TimeStampedPVCoordinates.shiftedBy` in
+                class :class:`~org.orekit.utils.TimeStampedPVCoordinates`
         
             Parameters:
                 dt (double): time shift in seconds
@@ -6001,7 +5476,7 @@ class AbsolutePVCoordinates(TimeStampedPVCoordinates, org.orekit.time.TimeStampe
 _FieldAbsolutePVCoordinates__T = typing.TypeVar('_FieldAbsolutePVCoordinates__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAbsolutePVCoordinates(TimeStampedFieldPVCoordinates[_FieldAbsolutePVCoordinates__T], org.orekit.time.FieldTimeStamped[_FieldAbsolutePVCoordinates__T], org.orekit.time.FieldTimeInterpolable['FieldAbsolutePVCoordinates'[_FieldAbsolutePVCoordinates__T], _FieldAbsolutePVCoordinates__T], FieldPVCoordinatesProvider[_FieldAbsolutePVCoordinates__T], typing.Generic[_FieldAbsolutePVCoordinates__T]):
     """
-    public class FieldAbsolutePVCoordinates<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.utils.TimeStampedFieldPVCoordinates`<T> implements :class:`~org.orekit.time.FieldTimeStamped`<T>, :class:`~org.orekit.time.FieldTimeInterpolable`<:class:`~org.orekit.utils.FieldAbsolutePVCoordinates`<T>,T>, :class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T>
+    public class FieldAbsolutePVCoordinates<T extends :class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.utils.TimeStampedFieldPVCoordinates`<T> implements :class:`~org.orekit.time.FieldTimeStamped`<T>, :class:`~org.orekit.time.FieldTimeInterpolable`<:class:`~org.orekit.utils.FieldAbsolutePVCoordinates`<T>,T>, :class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T>
     
         Field implementation of AbsolutePVCoordinates.
     
@@ -6095,131 +5570,6 @@ class MultipleShooter(AbstractMultipleShooting):
     @typing.overload
     def __init__(self, list: java.util.List[org.orekit.propagation.SpacecraftState], list2: java.util.List[org.orekit.propagation.numerical.NumericalPropagator], list3: java.util.List[org.orekit.propagation.numerical.EpochDerivativesEquations], double: float, double2: float, int: int): ...
 
-class PythonAbstractMultipleShooting(AbstractMultipleShooting):
-    """
-    public class PythonAbstractMultipleShooting extends :class:`~org.orekit.utils.AbstractMultipleShooting`
-    """
-    def __init__(self, list: java.util.List[org.orekit.propagation.SpacecraftState], list2: java.util.List[org.orekit.propagation.numerical.NumericalPropagator], double: float, double2: float, int: int, string: str): ...
-    def computeAdditionalConstraints(self, list: java.util.List[org.orekit.propagation.SpacecraftState]) -> typing.List[float]: ...
-    def computeAdditionalJacobianMatrix(self, list: java.util.List[org.orekit.propagation.SpacecraftState]) -> typing.List[typing.List[float]]: ...
-    def finalize(self) -> None: ...
-    def getAugmentedInitialState(self, spacecraftState: org.orekit.propagation.SpacecraftState, additionalEquations: org.orekit.propagation.integration.AdditionalEquations) -> org.orekit.propagation.SpacecraftState:
-        """
-            Compute the additional state from the additionalEquations.
-        
-            Overrides:
-                :meth:`~org.orekit.utils.AbstractMultipleShooting.getAugmentedInitialState`Â in
-                classÂ :class:`~org.orekit.utils.AbstractMultipleShooting`
-        
-            Parameters:
-                initialState (:class:`~org.orekit.propagation.SpacecraftState`): SpacecraftState without the additional state
-                additionalEquations2 (:class:`~org.orekit.propagation.integration.AdditionalEquations`): Additional Equations.
-        
-            Returns:
-                augmentedSP SpacecraftState with the additional state within.
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-
-class PythonExtendedPVCoordinatesProvider(ExtendedPVCoordinatesProvider):
-    """
-    public class PythonExtendedPVCoordinatesProvider extends Object implements :class:`~org.orekit.utils.ExtendedPVCoordinatesProvider`
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    _getPVCoordinates_1__T = typing.TypeVar('_getPVCoordinates_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def getPVCoordinates(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> TimeStampedPVCoordinates:
-        """
-            Get the :class:`~org.orekit.utils.PVCoordinates` of the body in the selected frame.
-        
-            Specified by:
-                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates`Â in
-                interfaceÂ :class:`~org.orekit.utils.PVCoordinatesProvider`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                frame (:class:`~org.orekit.frames.Frame`): the frame where to define the position
-        
-            Returns:
-                time-stamped position/velocity of the body (m and m/s)
-        
-        
-        """
-        ...
-    @typing.overload
-    def getPVCoordinates(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPVCoordinates_1__T], frame: org.orekit.frames.Frame) -> TimeStampedFieldPVCoordinates[_getPVCoordinates_1__T]:
-        """
-            Get the :class:`~org.orekit.utils.FieldPVCoordinates` of the body in the selected frame.
-        
-            Specified by:
-                :meth:`~org.orekit.utils.ExtendedPVCoordinatesProvider.getPVCoordinates`Â in
-                interfaceÂ :class:`~org.orekit.utils.ExtendedPVCoordinatesProvider`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                frame (:class:`~org.orekit.frames.Frame`): the frame where to define the position
-        
-            Returns:
-                time-stamped position/velocity of the body (m and m/s)
-        
-        """
-        ...
-    _getPVCoordinates_FF__T = typing.TypeVar('_getPVCoordinates_FF__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getPVCoordinates_FF(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPVCoordinates_FF__T], frame: org.orekit.frames.Frame) -> TimeStampedFieldPVCoordinates[_getPVCoordinates_FF__T]:
-        """
-            Get the :class:`~org.orekit.utils.FieldPVCoordinates` of the body in the selected frame.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                frame (:class:`~org.orekit.frames.Frame`): the frame where to define the position
-        
-            Returns:
-                time-stamped position/velocity of the body (m and m/s)
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-
 
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.utils")``.
@@ -6259,17 +5609,6 @@ class __module_protocol__(typing.Protocol):
     ParameterDriversList: typing.Type[ParameterDriversList]
     ParameterFunction: typing.Type[ParameterFunction]
     ParameterObserver: typing.Type[ParameterObserver]
-    PythonAbstractMultipleShooting: typing.Type[PythonAbstractMultipleShooting]
-    PythonExtendedPVCoordinatesProvider: typing.Type[PythonExtendedPVCoordinatesProvider]
-    PythonFieldPVCoordinatesProvider: typing.Type[PythonFieldPVCoordinatesProvider]
-    PythonMultipleShooting: typing.Type[PythonMultipleShooting]
-    PythonPVCoordinatesProvider: typing.Type[PythonPVCoordinatesProvider]
-    PythonParameterFunction: typing.Type[PythonParameterFunction]
-    PythonParameterObserver: typing.Type[PythonParameterObserver]
-    PythonStateFunction: typing.Type[PythonStateFunction]
-    PythonStateJacobian: typing.Type[PythonStateJacobian]
-    PythonTimeStampedCache: typing.Type[PythonTimeStampedCache]
-    PythonTimeStampedGenerator: typing.Type[PythonTimeStampedGenerator]
     SecularAndHarmonic: typing.Type[SecularAndHarmonic]
     StateFunction: typing.Type[StateFunction]
     StateJacobian: typing.Type[StateJacobian]

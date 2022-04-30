@@ -31,7 +31,7 @@ class EnclosingBall(java.io.Serializable, typing.Generic[_EnclosingBall__S, _Enc
             :class:`~org.hipparchus.geometry.Space`, :class:`~org.hipparchus.geometry.Point`,
             :class:`~org.hipparchus.geometry.enclosing.Encloser`, :meth:`~serialized`
     """
-    def __init__(self, p: _EnclosingBall__P, double: float, pArray: typing.List[_EnclosingBall__P]): ...
+    def __init__(self, p: _EnclosingBall__P, double: float, *p2: _EnclosingBall__P): ...
     @typing.overload
     def contains(self, p: _EnclosingBall__P) -> bool:
         """

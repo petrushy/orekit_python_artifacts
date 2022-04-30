@@ -362,6 +362,366 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
         Since:
             2.0
     """
+    @typing.overload
+    def arccd(self, double: float) -> _FieldJacobiElliptic__T:
+        """
+            Evaluate inverse of Jacobi elliptic function cd.
+        
+            Parameters:
+                x (:class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`): value of Jacobi elliptic function :code:`cd(u|m)`
+        
+            Returns:
+                u such that :code:`x=cd(u|m)`
+        
+            Since:
+                2.1
+        
+            Evaluate inverse of Jacobi elliptic function cd.
+        
+            Parameters:
+                x (double): value of Jacobi elliptic function :code:`cd(u|m)`
+        
+            Returns:
+                u such that :code:`x=cd(u|m)`
+        
+            Since:
+                2.1
+        
+        
+        """
+        ...
+    @typing.overload
+    def arccd(self, t: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
+    @typing.overload
+    def arccn(self, double: float) -> _FieldJacobiElliptic__T:
+        """
+            Evaluate inverse of Jacobi elliptic function cn.
+        
+            Parameters:
+                x (:class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`): value of Jacobi elliptic function :code:`cn(u|m)`
+        
+            Returns:
+                u such that :code:`x=cn(u|m)`
+        
+            Since:
+                2.1
+        
+            Evaluate inverse of Jacobi elliptic function cn.
+        
+            Parameters:
+                x (double): value of Jacobi elliptic function :code:`cn(u|m)`
+        
+            Returns:
+                u such that :code:`x=cn(u|m)`
+        
+            Since:
+                2.1
+        
+        
+        """
+        ...
+    @typing.overload
+    def arccn(self, t: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
+    @typing.overload
+    def arccs(self, double: float) -> _FieldJacobiElliptic__T:
+        """
+            Evaluate inverse of Jacobi elliptic function cs.
+        
+            Parameters:
+                x (:class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`): value of Jacobi elliptic function :code:`cs(u|m)`
+        
+            Returns:
+                u such that :code:`x=cs(u|m)`
+        
+            Since:
+                2.1
+        
+            Evaluate inverse of Jacobi elliptic function cs.
+        
+            Parameters:
+                x (double): value of Jacobi elliptic function :code:`cs(u|m)`
+        
+            Returns:
+                u such that :code:`x=cs(u|m)`
+        
+            Since:
+                2.1
+        
+        
+        """
+        ...
+    @typing.overload
+    def arccs(self, t: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
+    @typing.overload
+    def arcdc(self, double: float) -> _FieldJacobiElliptic__T:
+        """
+            Evaluate inverse of Jacobi elliptic function dc.
+        
+            Parameters:
+                x (:class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`): value of Jacobi elliptic function :code:`dc(u|m)`
+        
+            Returns:
+                u such that :code:`x=dc(u|m)`
+        
+            Since:
+                2.1
+        
+            Evaluate inverse of Jacobi elliptic function dc.
+        
+            Parameters:
+                x (double): value of Jacobi elliptic function :code:`dc(u|m)`
+        
+            Returns:
+                u such that :code:`x=dc(u|m)`
+        
+            Since:
+                2.1
+        
+        
+        """
+        ...
+    @typing.overload
+    def arcdc(self, t: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
+    @typing.overload
+    def arcdn(self, double: float) -> _FieldJacobiElliptic__T:
+        """
+            Evaluate inverse of Jacobi elliptic function dn.
+        
+            Parameters:
+                x (:class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`): value of Jacobi elliptic function :code:`dn(u|m)`
+        
+            Returns:
+                u such that :code:`x=dn(u|m)`
+        
+            Since:
+                2.1
+        
+            Evaluate inverse of Jacobi elliptic function dn.
+        
+            Parameters:
+                x (double): value of Jacobi elliptic function :code:`dn(u|m)`
+        
+            Returns:
+                u such that :code:`x=dn(u|m)`
+        
+            Since:
+                2.1
+        
+        
+        """
+        ...
+    @typing.overload
+    def arcdn(self, t: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
+    @typing.overload
+    def arcds(self, double: float) -> _FieldJacobiElliptic__T:
+        """
+            Evaluate inverse of Jacobi elliptic function ds.
+        
+            Parameters:
+                x (:class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`): value of Jacobi elliptic function :code:`ds(u|m)`
+        
+            Returns:
+                u such that :code:`x=ds(u|m)`
+        
+            Since:
+                2.1
+        
+            Evaluate inverse of Jacobi elliptic function ds.
+        
+            Parameters:
+                x (double): value of Jacobi elliptic function :code:`ds(u|m)`
+        
+            Returns:
+                u such that :code:`x=ds(u|m)`
+        
+            Since:
+                2.1
+        
+        
+        """
+        ...
+    @typing.overload
+    def arcds(self, t: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
+    @typing.overload
+    def arcnc(self, double: float) -> _FieldJacobiElliptic__T:
+        """
+            Evaluate inverse of Jacobi elliptic function nc.
+        
+            Parameters:
+                x (:class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`): value of Jacobi elliptic function :code:`nc(u|m)`
+        
+            Returns:
+                u such that :code:`x=nc(u|m)`
+        
+            Since:
+                2.1
+        
+            Evaluate inverse of Jacobi elliptic function nc.
+        
+            Parameters:
+                x (double): value of Jacobi elliptic function :code:`nc(u|m)`
+        
+            Returns:
+                u such that :code:`x=nc(u|m)`
+        
+            Since:
+                2.1
+        
+        
+        """
+        ...
+    @typing.overload
+    def arcnc(self, t: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
+    @typing.overload
+    def arcnd(self, double: float) -> _FieldJacobiElliptic__T:
+        """
+            Evaluate inverse of Jacobi elliptic function nd.
+        
+            Parameters:
+                x (:class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`): value of Jacobi elliptic function :code:`nd(u|m)`
+        
+            Returns:
+                u such that :code:`x=nd(u|m)`
+        
+            Since:
+                2.1
+        
+            Evaluate inverse of Jacobi elliptic function nd.
+        
+            Parameters:
+                x (double): value of Jacobi elliptic function :code:`nd(u|m)`
+        
+            Returns:
+                u such that :code:`x=nd(u|m)`
+        
+            Since:
+                2.1
+        
+        
+        """
+        ...
+    @typing.overload
+    def arcnd(self, t: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
+    @typing.overload
+    def arcns(self, double: float) -> _FieldJacobiElliptic__T:
+        """
+            Evaluate inverse of Jacobi elliptic function ns.
+        
+            Parameters:
+                x (:class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`): value of Jacobi elliptic function :code:`ns(u|m)`
+        
+            Returns:
+                u such that :code:`x=ns(u|m)`
+        
+            Since:
+                2.1
+        
+            Evaluate inverse of Jacobi elliptic function ns.
+        
+            Parameters:
+                x (double): value of Jacobi elliptic function :code:`ns(u|m)`
+        
+            Returns:
+                u such that :code:`x=ns(u|m)`
+        
+            Since:
+                2.1
+        
+        
+        """
+        ...
+    @typing.overload
+    def arcns(self, t: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
+    @typing.overload
+    def arcsc(self, double: float) -> _FieldJacobiElliptic__T:
+        """
+            Evaluate inverse of Jacobi elliptic function sc.
+        
+            Parameters:
+                x (:class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`): value of Jacobi elliptic function :code:`sc(u|m)`
+        
+            Returns:
+                u such that :code:`x=sc(u|m)`
+        
+            Since:
+                2.1
+        
+            Evaluate inverse of Jacobi elliptic function sc.
+        
+            Parameters:
+                x (double): value of Jacobi elliptic function :code:`sc(u|m)`
+        
+            Returns:
+                u such that :code:`x=sc(u|m)`
+        
+            Since:
+                2.1
+        
+        
+        """
+        ...
+    @typing.overload
+    def arcsc(self, t: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
+    @typing.overload
+    def arcsd(self, double: float) -> _FieldJacobiElliptic__T:
+        """
+            Evaluate inverse of Jacobi elliptic function sd.
+        
+            Parameters:
+                x (:class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`): value of Jacobi elliptic function :code:`sd(u|m)`
+        
+            Returns:
+                u such that :code:`x=sd(u|m)`
+        
+            Since:
+                2.1
+        
+            Evaluate inverse of Jacobi elliptic function sd.
+        
+            Parameters:
+                x (double): value of Jacobi elliptic function :code:`sd(u|m)`
+        
+            Returns:
+                u such that :code:`x=sd(u|m)`
+        
+            Since:
+                2.1
+        
+        
+        """
+        ...
+    @typing.overload
+    def arcsd(self, t: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
+    @typing.overload
+    def arcsn(self, double: float) -> _FieldJacobiElliptic__T:
+        """
+            Evaluate inverse of Jacobi elliptic function sn.
+        
+            Parameters:
+                x (:class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`): value of Jacobi elliptic function :code:`sn(u|m)`
+        
+            Returns:
+                u such that :code:`x=sn(u|m)`
+        
+            Since:
+                2.1
+        
+            Evaluate inverse of Jacobi elliptic function sn.
+        
+            Parameters:
+                x (double): value of Jacobi elliptic function :code:`sn(u|m)`
+        
+            Returns:
+                u such that :code:`x=sn(u|m)`
+        
+            Since:
+                2.1
+        
+        
+        """
+        ...
+    @typing.overload
+    def arcsn(self, t: _FieldJacobiElliptic__T) -> _FieldJacobiElliptic__T: ...
     def getM(self) -> _FieldJacobiElliptic__T:
         """
             Get the parameter of the function.
@@ -477,6 +837,198 @@ class JacobiElliptic:
         Since:
             2.0
     """
+    def arccd(self, double: float) -> float:
+        """
+            Evaluate inverse of Jacobi elliptic function cd.
+        
+            Parameters:
+                x (double): value of Jacobi elliptic function :code:`cd(u|m)`
+        
+            Returns:
+                u such that :code:`x=cd(u|m)`
+        
+            Since:
+                2.1
+        
+        
+        """
+        ...
+    def arccn(self, double: float) -> float:
+        """
+            Evaluate inverse of Jacobi elliptic function cn.
+        
+            Parameters:
+                x (double): value of Jacobi elliptic function :code:`cn(u|m)`
+        
+            Returns:
+                u such that :code:`x=cn(u|m)`
+        
+            Since:
+                2.1
+        
+        
+        """
+        ...
+    def arccs(self, double: float) -> float:
+        """
+            Evaluate inverse of Jacobi elliptic function cs.
+        
+            Parameters:
+                x (double): value of Jacobi elliptic function :code:`cs(u|m)`
+        
+            Returns:
+                u such that :code:`x=cs(u|m)`
+        
+            Since:
+                2.1
+        
+        
+        """
+        ...
+    def arcdc(self, double: float) -> float:
+        """
+            Evaluate inverse of Jacobi elliptic function dc.
+        
+            Parameters:
+                x (double): value of Jacobi elliptic function :code:`dc(u|m)`
+        
+            Returns:
+                u such that :code:`x=dc(u|m)`
+        
+            Since:
+                2.1
+        
+        
+        """
+        ...
+    def arcdn(self, double: float) -> float:
+        """
+            Evaluate inverse of Jacobi elliptic function dn.
+        
+            Parameters:
+                x (double): value of Jacobi elliptic function :code:`dn(u|m)`
+        
+            Returns:
+                u such that :code:`x=dn(u|m)`
+        
+            Since:
+                2.1
+        
+        
+        """
+        ...
+    def arcds(self, double: float) -> float:
+        """
+            Evaluate inverse of Jacobi elliptic function ds.
+        
+            Parameters:
+                x (double): value of Jacobi elliptic function :code:`ds(u|m)`
+        
+            Returns:
+                u such that :code:`x=ds(u|m)`
+        
+            Since:
+                2.1
+        
+        
+        """
+        ...
+    def arcnc(self, double: float) -> float:
+        """
+            Evaluate inverse of Jacobi elliptic function nc.
+        
+            Parameters:
+                x (double): value of Jacobi elliptic function :code:`nc(u|m)`
+        
+            Returns:
+                u such that :code:`x=nc(u|m)`
+        
+            Since:
+                2.1
+        
+        
+        """
+        ...
+    def arcnd(self, double: float) -> float:
+        """
+            Evaluate inverse of Jacobi elliptic function nd.
+        
+            Parameters:
+                x (double): value of Jacobi elliptic function :code:`nd(u|m)`
+        
+            Returns:
+                u such that :code:`x=nd(u|m)`
+        
+            Since:
+                2.1
+        
+        
+        """
+        ...
+    def arcns(self, double: float) -> float:
+        """
+            Evaluate inverse of Jacobi elliptic function ns.
+        
+            Parameters:
+                x (double): value of Jacobi elliptic function :code:`ns(u|m)`
+        
+            Returns:
+                u such that :code:`x=ns(u|m)`
+        
+            Since:
+                2.1
+        
+        
+        """
+        ...
+    def arcsc(self, double: float) -> float:
+        """
+            Evaluate inverse of Jacobi elliptic function sc.
+        
+            Parameters:
+                x (double): value of Jacobi elliptic function :code:`sc(u|m)`
+        
+            Returns:
+                u such that :code:`x=sc(u|m)`
+        
+            Since:
+                2.1
+        
+        
+        """
+        ...
+    def arcsd(self, double: float) -> float:
+        """
+            Evaluate inverse of Jacobi elliptic function sd.
+        
+            Parameters:
+                x (double): value of Jacobi elliptic function :code:`sd(u|m)`
+        
+            Returns:
+                u such that :code:`x=sd(u|m)`
+        
+            Since:
+                2.1
+        
+        
+        """
+        ...
+    def arcsn(self, double: float) -> float:
+        """
+            Evaluate inverse of Jacobi elliptic function sn.
+        
+            Parameters:
+                x (double): value of Jacobi elliptic function :code:`sn(u|m)`
+        
+            Returns:
+                u such that :code:`x=sn(u|m)`
+        
+            Since:
+                2.1
+        
+        
+        """
+        ...
     def getM(self) -> float:
         """
             Get the parameter of the function.

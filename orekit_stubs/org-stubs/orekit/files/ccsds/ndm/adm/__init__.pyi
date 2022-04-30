@@ -208,9 +208,8 @@ class AdmMetadataKey(java.lang.Enum['AdmMetadataKey']):
         
             .. code-block: java
             
-            
-            for (AdmMetadataKey c : AdmMetadataKey.values())
-                System.out.println(c);
+            for (AdmMetadataKey c : AdmMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -519,7 +518,7 @@ class AttitudeType(java.lang.Enum['AttitudeType']):
     EULER_ANGLE_RATE: typing.ClassVar['AttitudeType'] = ...
     SPIN: typing.ClassVar['AttitudeType'] = ...
     SPIN_NUTATION: typing.ClassVar['AttitudeType'] = ...
-    def build(self, boolean: bool, boolean2: bool, rotationOrder: org.hipparchus.geometry.euclidean.threed.RotationOrder, boolean3: bool, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float]) -> org.orekit.utils.TimeStampedAngularCoordinates:
+    def build(self, boolean: bool, boolean2: bool, rotationOrder: org.hipparchus.geometry.euclidean.threed.RotationOrder, boolean3: bool, absoluteDate: org.orekit.time.AbsoluteDate, *double: float) -> org.orekit.utils.TimeStampedAngularCoordinates:
         """
             Get the angular coordinates corresponding to the attitude data.
         
@@ -644,9 +643,8 @@ class AttitudeType(java.lang.Enum['AttitudeType']):
         
             .. code-block: java
             
-            
-            for (AttitudeType c : AttitudeType.values())
-                System.out.println(c);
+            for (AttitudeType c : AttitudeType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -670,193 +668,6 @@ class RotationXmlTokenBuilder(org.orekit.files.ccsds.utils.lexical.XmlTokenBuild
     def __init__(self): ...
     def buildTokens(self, boolean: bool, string: str, string2: str, attributes: org.xml.sax.Attributes, int: int, string3: str) -> java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]: ...
 
-_PythonAdmParser__T = typing.TypeVar('_PythonAdmParser__T', bound=org.orekit.files.ccsds.ndm.NdmConstituent)  # <T>
-_PythonAdmParser__P = typing.TypeVar('_PythonAdmParser__P', bound=org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser)  # <P>
-class PythonAdmParser(AdmParser[_PythonAdmParser__T, _PythonAdmParser__P], typing.Generic[_PythonAdmParser__T, _PythonAdmParser__P]):
-    """
-    public class PythonAdmParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<?,?>,P extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<T,?>> extends :class:`~org.orekit.files.ccsds.ndm.adm.AdmParser`<T,P>
-    """
-    def build(self) -> _PythonAdmParser__T:
-        """
-            Build the file from parsed entries.
-        
-            Returns:
-                parsed file
-        
-        
-        """
-        ...
-    def finalize(self) -> None: ...
-    def finalizeData(self) -> bool:
-        """
-            Finalize data after parsing.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def finalizeHeader(self) -> bool:
-        """
-            Finalize header after parsing.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def finalizeMetadata(self) -> bool:
-        """
-            Finalize metadata after parsing.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def getHeader(self) -> org.orekit.files.ccsds.section.Header:
-        """
-            Get file header to fill.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                file header to fill
-        
-        
-        """
-        ...
-    def inData(self) -> bool:
-        """
-            Acknowledge data parsing has started.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def inHeader(self) -> bool:
-        """
-            Acknowledge header parsing has started.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def inMetadata(self) -> bool:
-        """
-            Acknowledge metada parsing has started.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def prepareData(self) -> bool:
-        """
-            Prepare data for parsing.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def prepareHeader(self) -> bool:
-        """
-            Prepare header for parsing.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def prepareMetadata(self) -> bool:
-        """
-            Prepare metadata for parsing.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def reset(self, fileFormat: org.orekit.files.ccsds.utils.FileFormat) -> None:
-        """
-            Reset parser to initial state before parsing.
-        
-            Parameters:
-                fileFormat (:class:`~org.orekit.files.ccsds.utils.FileFormat`): format of the file ready to be parsed
-        
-        
-        """
-        ...
-
 
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.ndm.adm")``.
@@ -867,7 +678,6 @@ class __module_protocol__(typing.Protocol):
     AdmParser: typing.Type[AdmParser]
     AttitudeEndoints: typing.Type[AttitudeEndoints]
     AttitudeType: typing.Type[AttitudeType]
-    PythonAdmParser: typing.Type[PythonAdmParser]
     RotationXmlTokenBuilder: typing.Type[RotationXmlTokenBuilder]
     aem: org.orekit.files.ccsds.ndm.adm.aem.__module_protocol__
     apm: org.orekit.files.ccsds.ndm.adm.apm.__module_protocol__

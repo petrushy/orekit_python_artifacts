@@ -81,9 +81,8 @@ class HeaderKey(java.lang.Enum['HeaderKey']):
         
             .. code-block: java
             
-            
-            for (HeaderKey c : HeaderKey.values())
-                System.out.println(c);
+            for (HeaderKey c : HeaderKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -178,9 +177,8 @@ class KvnStructureKey(java.lang.Enum['KvnStructureKey']):
         
             .. code-block: java
             
-            
-            for (KvnStructureKey c : KvnStructureKey.values())
-                System.out.println(c);
+            for (KvnStructureKey c : KvnStructureKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -277,9 +275,8 @@ class MetadataKey(java.lang.Enum['MetadataKey']):
         
             .. code-block: java
             
-            
-            for (MetadataKey c : MetadataKey.values())
-                System.out.println(c);
+            for (MetadataKey c : MetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -405,9 +402,8 @@ class XmlStructureKey(java.lang.Enum['XmlStructureKey']):
         
             .. code-block: java
             
-            
-            for (XmlStructureKey c : XmlStructureKey.values())
-                System.out.println(c);
+            for (XmlStructureKey c : XmlStructureKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -576,74 +572,6 @@ class Data(Section):
     """
     ...
 
-class PythonAbstractWriter(AbstractWriter):
-    """
-    public class PythonAbstractWriter extends :class:`~org.orekit.files.ccsds.section.AbstractWriter`
-    """
-    def __init__(self, string: str, string2: str): ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def writeContent(self, generator: org.orekit.files.ccsds.utils.generation.Generator) -> None: ...
-
-class PythonSection(Section):
-    """
-    public class PythonSection extends Object implements :class:`~org.orekit.files.ccsds.section.Section`
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def validate(self, double: float) -> None:
-        """
-            Check is all mandatory entries have been initialized.
-        
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
-        
-            Parameters:
-                version (double): format version
-        
-        
-        """
-        ...
-
 class Header(CommentsContainer):
     """
     public class Header extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
@@ -805,47 +733,6 @@ class Metadata(CommentsContainer):
         """
         ...
 
-class PyhonData(Data):
-    """
-    public class PyhonData extends Object implements :class:`~org.orekit.files.ccsds.section.Data`
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def validate(self, double: float) -> None:
-        """
-            Check is all mandatory entries have been initialized.
-        
-            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
-        
-            Parameters:
-                version (double): format version
-        
-        
-        """
-        ...
-
 
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.section")``.
@@ -860,9 +747,6 @@ class __module_protocol__(typing.Protocol):
     KvnStructureProcessingState: typing.Type[KvnStructureProcessingState]
     Metadata: typing.Type[Metadata]
     MetadataKey: typing.Type[MetadataKey]
-    PyhonData: typing.Type[PyhonData]
-    PythonAbstractWriter: typing.Type[PythonAbstractWriter]
-    PythonSection: typing.Type[PythonSection]
     Section: typing.Type[Section]
     Segment: typing.Type[Segment]
     XmlStructureKey: typing.Type[XmlStructureKey]

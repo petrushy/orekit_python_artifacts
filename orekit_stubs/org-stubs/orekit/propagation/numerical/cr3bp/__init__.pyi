@@ -18,7 +18,7 @@ import typing
 
 class CR3BPConstants:
     """
-    public class CR3BPConstants extends Object
+    public class CR3BPConstants extends :class:`~org.orekit.propagation.numerical.cr3bp.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Set of useful physical CR3BP constants using JPL data.
     
@@ -81,7 +81,7 @@ class CR3BPForceModel(org.orekit.forces.AbstractForceModel):
     """
     MASS_RATIO_SUFFIX: typing.ClassVar[str] = ...
     """
-    public static final String MASS_RATIO_SUFFIX
+    public static final :class:`~org.orekit.propagation.numerical.cr3bp.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MASS_RATIO_SUFFIX
     
         Suffix for parameter name for Mass Ratio enabling Jacobian processing.
     
@@ -148,6 +148,11 @@ class CR3BPForceModel(org.orekit.forces.AbstractForceModel):
             Returns:
                 Spacecraft Potential
         
+        """
+        ...
+    @typing.overload
+    def getPotential(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getPotential_1__T]) -> org.hipparchus.analysis.differentiation.FieldDerivativeStructure[_getPotential_1__T]:
+        """
             Calculate spacecraft potential.
         
             Parameters:
@@ -159,8 +164,6 @@ class CR3BPForceModel(org.orekit.forces.AbstractForceModel):
         
         """
         ...
-    @typing.overload
-    def getPotential(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getPotential_1__T]) -> org.hipparchus.analysis.differentiation.FieldDerivativeStructure[_getPotential_1__T]: ...
 
 class CR3BPMultipleShooter(org.orekit.utils.AbstractMultipleShooting):
     """
@@ -179,7 +182,7 @@ class CR3BPMultipleShooter(org.orekit.utils.AbstractMultipleShooting):
 
 class STMEquations(org.orekit.propagation.integration.AdditionalDerivativesProvider, org.orekit.propagation.integration.AdditionalEquations):
     """
-    public class STMEquations extends Object implements :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`, :class:`~org.orekit.propagation.integration.AdditionalEquations`
+    public class STMEquations extends :class:`~org.orekit.propagation.numerical.cr3bp.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`, :class:`~org.orekit.propagation.integration.AdditionalEquations`
     
         Class calculating the state transition matrix coefficient for CR3BP Computation.
     
@@ -200,7 +203,8 @@ class STMEquations(org.orekit.propagation.integration.AdditionalDerivativesProvi
             during the same propagation.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
+                :meth:`~org.orekit.propagation.integration.AdditionalEquations.computeDerivatives` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional state
@@ -217,8 +221,8 @@ class STMEquations(org.orekit.propagation.integration.AdditionalDerivativesProvi
             Compute the derivatives related to the additional state parameters.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.derivatives`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.derivatives` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional states this equations depend on (according to the
@@ -235,8 +239,8 @@ class STMEquations(org.orekit.propagation.integration.AdditionalDerivativesProvi
             Get the dimension of the generated derivative.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getDimension`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getDimension` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
             Returns:
                 dimension of the generated
@@ -249,12 +253,12 @@ class STMEquations(org.orekit.propagation.integration.AdditionalDerivativesProvi
             Get the name of the additional derivatives (which will become state once integrated).
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getName`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getName` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalEquations.getName`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalEquations`
+                :meth:`~org.orekit.propagation.integration.AdditionalEquations.getName` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
         
             Returns:
                 name of the additional state (names containing "orekit" with any case are reserved for the library internal use)
@@ -280,12 +284,12 @@ class STMEquations(org.orekit.propagation.integration.AdditionalDerivativesProvi
             Initialize the generator at the start of propagation.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.init` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalEquations.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalEquations`
+                :meth:`~org.orekit.propagation.integration.AdditionalEquations.init` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
         
             Parameters:
                 initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial state information at the start of propagation

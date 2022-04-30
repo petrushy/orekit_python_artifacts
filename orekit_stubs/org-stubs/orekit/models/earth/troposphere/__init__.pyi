@@ -251,26 +251,25 @@ class ViennaModelCoefficientsLoader(org.orekit.data.AbstractSelfFeedingLoader, o
     
         .. code-block: java
         
-        
-         ! Version:            1.0
-         ! Source:             J. Boehm, TU Vienna (created: 2018-11-20)
-         ! Data_types:         VMF1 (lat lon ah aw zhd zwd)
-         ! Epoch:              2018 11 19 18 00  0.0
-         ! Scale_factor:       1.e+00
-         ! Range/resolution:   -90 90 0 360 2 2.5
-         ! Comment:            http://vmf.geo.tuwien.ac.at/trop_products/GRID/2.5x2/VMF1/VMF1_OP/
-          90.0   0.0 0.00116059  0.00055318  2.3043  0.0096
-          90.0   2.5 0.00116059  0.00055318  2.3043  0.0096
-          90.0   5.0 0.00116059  0.00055318  2.3043  0.0096
-          90.0   7.5 0.00116059  0.00055318  2.3043  0.0096
-          90.0  10.0 0.00116059  0.00055318  2.3043  0.0096
-          90.0  12.5 0.00116059  0.00055318  2.3043  0.0096
-          90.0  15.0 0.00116059  0.00055318  2.3043  0.0096
-          90.0  17.5 0.00116059  0.00055318  2.3043  0.0096
-          90.0  20.0 0.00116059  0.00055318  2.3043  0.0096
-          90.0  22.5 0.00116059  0.00055318  2.3043  0.0096
-          90.0  25.0 0.00116059  0.00055318  2.3043  0.0096
-          90.0  27.5 0.00116059  0.00055318  2.3043  0.0096
+         ! Version:            1.0
+         ! Source:             J. Boehm, TU Vienna (created: 2018-11-20)
+         ! Data_types:         VMF1 (lat lon ah aw zhd zwd)
+         ! Epoch:              2018 11 19 18 00  0.0
+         ! Scale_factor:       1.e+00
+         ! Range/resolution:   -90 90 0 360 2 2.5
+         ! Comment:            http://vmf.geo.tuwien.ac.at/trop_products/GRID/2.5x2/VMF1/VMF1_OP/
+          90.0   0.0 0.00116059  0.00055318  2.3043  0.0096
+          90.0   2.5 0.00116059  0.00055318  2.3043  0.0096
+          90.0   5.0 0.00116059  0.00055318  2.3043  0.0096
+          90.0   7.5 0.00116059  0.00055318  2.3043  0.0096
+          90.0  10.0 0.00116059  0.00055318  2.3043  0.0096
+          90.0  12.5 0.00116059  0.00055318  2.3043  0.0096
+          90.0  15.0 0.00116059  0.00055318  2.3043  0.0096
+          90.0  17.5 0.00116059  0.00055318  2.3043  0.0096
+          90.0  20.0 0.00116059  0.00055318  2.3043  0.0096
+          90.0  22.5 0.00116059  0.00055318  2.3043  0.0096
+          90.0  25.0 0.00116059  0.00055318  2.3043  0.0096
+          90.0  27.5 0.00116059  0.00055318  2.3043  0.0096
          
     
         It is not safe for multiple threads to share a single instance of this class.
@@ -420,9 +419,8 @@ class ViennaModelType(java.lang.Enum['ViennaModelType']):
         
             .. code-block: java
             
-            
-            for (ViennaModelType c : ViennaModelType.values())
-                System.out.println(c);
+            for (ViennaModelType c : ViennaModelType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -804,156 +802,6 @@ class NiellMappingFunctionModel(MappingFunction):
         """
         ...
 
-class PythonDiscreteTroposphericModel(DiscreteTroposphericModel):
-    """
-    public class PythonDiscreteTroposphericModel extends Object implements :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    _getParameters_1__T = typing.TypeVar('_getParameters_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def getParameters(self) -> typing.List[float]:
-        """
-            Get tropospheric model parameters. Extension point for Python.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.getParameters`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
-        
-            Returns:
-                tropospheric model parameters
-        
-        """
-        ...
-    @typing.overload
-    def getParameters(self, field: org.hipparchus.Field[_getParameters_1__T]) -> typing.List[_getParameters_1__T]:
-        """
-            Get tropospheric model parameters. Extension point for Python.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.getParameters`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
-        
-            Parameters:
-                field (Field<T> field): field to which the elements belong
-        
-            Returns:
-                tropospheric model parameters
-        
-        
-        """
-        ...
-    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    _getParameters_F__T = typing.TypeVar('_getParameters_F__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getParameters_F(self, field: org.hipparchus.Field[_getParameters_F__T]) -> typing.List[_getParameters_F__T]:
-        """
-            Get tropospheric model parameters. Extension point for Python.
-        
-            Parameters:
-                field (Field<T> field): field to which the elements belong
-        
-            Returns:
-                tropospheric model parameters
-        
-        
-        """
-        ...
-    _pathDelay_1__T = typing.TypeVar('_pathDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def pathDelay(self, double: float, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite. Extension point for
-            Python.
-        
-            Specified by:
-                 in interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
-        
-            Parameters:
-                elevation (double): the elevation of the satellite, in radians
-                height (:class:`~org.orekit.bodies.GeodeticPoint`): the height of the station in m above sea level
-                parameters (double[]): tropospheric model parameters.
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                the path delay due to the troposphere in m
-        
-        """
-        ...
-    @typing.overload
-    def pathDelay(self, t: _pathDelay_1__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_1__T], tArray: typing.List[_pathDelay_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_1__T]) -> _pathDelay_1__T:
-        """
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite. Redirects to
-            pathDelay_TTTF(...) for Python extension
-        
-            Specified by:
-                 in interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
-        
-            Parameters:
-                elevation (T): the elevation of the satellite, in radians
-                height (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): the height of the station in m above sea level
-                parameters (T[]): tropospheric model parameters.
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-        
-            Returns:
-                the path delay due to the troposphere in m
-        
-        
-        """
-        ...
-    _pathDelay_TTTF__T = typing.TypeVar('_pathDelay_TTTF__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def pathDelay_TTTF(self, t: _pathDelay_TTTF__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_TTTF__T], tArray: typing.List[_pathDelay_TTTF__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_TTTF__T]) -> _pathDelay_TTTF__T:
-        """
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite. Extension point for
-            Python. Called by pathDelay for this parameter set.
-        
-            Parameters:
-                elevation (T): the elevation of the satellite, in radians
-                height (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): the height of the station in m above sea level
-                parameters (T[]): tropospheric model parameters.
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-        
-            Returns:
-                the path delay due to the troposphere in m
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-
-class PythonMappingFunction(MappingFunction):
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    _mappingFactors_1__T = typing.TypeVar('_mappingFactors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def mappingFactors(self, double: float, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]: ...
-    @typing.overload
-    def mappingFactors(self, t: _mappingFactors_1__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_1__T]) -> typing.List[_mappingFactors_1__T]: ...
-    _mappingFactors_TTTF__T = typing.TypeVar('_mappingFactors_TTTF__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def mappingFactors_TTTF(self, t: _mappingFactors_TTTF__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_TTTF__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_TTTF__T]) -> typing.List[_mappingFactors_TTTF__T]: ...
-    def pythonDecRef(self) -> None: ...
-    @typing.overload
-    def pythonExtension(self) -> int: ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
-
 class SaastamoinenModel(DiscreteTroposphericModel):
     """
     public class SaastamoinenModel extends Object implements :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
@@ -963,9 +811,8 @@ class SaastamoinenModel(DiscreteTroposphericModel):
     
         .. code-block: java
         
-        
-         Î´ = 2.277e-3 / cos z * (P + (1255 / T + 0.05) * e - B * tanÂ²
-         z) + Î´R
+         Î´ = 2.277e-3 / cos z * (P + (1255 / T + 0.05) * e - B * tanÂ²
+         z) + Î´R
          
         with the following input data provided to the model:
     
@@ -1470,8 +1317,6 @@ class __module_protocol__(typing.Protocol):
     MariniMurrayModel: typing.Type[MariniMurrayModel]
     MendesPavlisModel: typing.Type[MendesPavlisModel]
     NiellMappingFunctionModel: typing.Type[NiellMappingFunctionModel]
-    PythonDiscreteTroposphericModel: typing.Type[PythonDiscreteTroposphericModel]
-    PythonMappingFunction: typing.Type[PythonMappingFunction]
     SaastamoinenModel: typing.Type[SaastamoinenModel]
     TimeSpanEstimatedTroposphericModel: typing.Type[TimeSpanEstimatedTroposphericModel]
     TroposphericModelUtils: typing.Type[TroposphericModelUtils]

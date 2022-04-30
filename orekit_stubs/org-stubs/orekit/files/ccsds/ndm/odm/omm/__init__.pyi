@@ -315,9 +315,8 @@ class OmmMetadataKey(java.lang.Enum['OmmMetadataKey']):
         
             .. code-block: java
             
-            
-            for (OmmMetadataKey c : OmmMetadataKey.values())
-                System.out.println(c);
+            for (OmmMetadataKey c : OmmMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -703,6 +702,7 @@ class OmmTleKey(java.lang.Enum['OmmTleKey']):
         Since:
             11.0
     """
+    COMMENT: typing.ClassVar['OmmTleKey'] = ...
     EPHEMERIS_TYPE: typing.ClassVar['OmmTleKey'] = ...
     CLASSIFICATION_TYPE: typing.ClassVar['OmmTleKey'] = ...
     NORAD_CAT_ID: typing.ClassVar['OmmTleKey'] = ...
@@ -758,9 +758,8 @@ class OmmTleKey(java.lang.Enum['OmmTleKey']):
         
             .. code-block: java
             
-            
-            for (OmmTleKey c : OmmTleKey.values())
-                System.out.println(c);
+            for (OmmTleKey c : OmmTleKey.values())
+                System.out.println(c);
             
         
             Returns:

@@ -332,9 +332,8 @@ class ParsedUnitsBehavior(java.lang.Enum['ParsedUnitsBehavior']):
         
             .. code-block: java
             
-            
-            for (ParsedUnitsBehavior c : ParsedUnitsBehavior.values())
-                System.out.println(c);
+            for (ParsedUnitsBehavior c : ParsedUnitsBehavior.values())
+                System.out.println(c);
             
         
             Returns:
@@ -561,139 +560,6 @@ class ParserBuilder(AbstractBuilder['ParserBuilder']):
         """
         ...
 
-_PythonAbstractBuilder__T = typing.TypeVar('_PythonAbstractBuilder__T', bound=AbstractBuilder)  # <T>
-class PythonAbstractBuilder(AbstractBuilder[_PythonAbstractBuilder__T], typing.Generic[_PythonAbstractBuilder__T]):
-    """
-    public class PythonAbstractBuilder<T extends :class:`~org.orekit.files.ccsds.ndm.AbstractBuilder`<T>> extends :class:`~org.orekit.files.ccsds.ndm.AbstractBuilder`<T>
-    """
-    def create(self, iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, rangeUnitsConverter: org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter) -> _PythonAbstractBuilder__T:
-        """
-            Build an instance.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.ndm.AbstractBuilder.create`Â in
-                classÂ :class:`~org.orekit.files.ccsds.ndm.AbstractBuilder`
-        
-            Parameters:
-                newConventions (:class:`~org.orekit.utils.IERSConventions`): IERS Conventions
-                newDataContext (:class:`~org.orekit.data.DataContext`): used to retrieve frames, time scales, etc.
-                newMissionReferenceDate (:class:`~org.orekit.time.AbsoluteDate`): reference date for Mission Elapsed Time or Mission Relative Time time systems
-                newRangeUnitsConverter (:class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`): converter for :code:`Range Units`
-        
-            Returns:
-                new instance
-        
-        
-        """
-        ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-
-_PythonNdmConstituent__H = typing.TypeVar('_PythonNdmConstituent__H', bound=org.orekit.files.ccsds.section.Header)  # <H>
-_PythonNdmConstituent__S = typing.TypeVar('_PythonNdmConstituent__S', bound=org.orekit.files.ccsds.section.Segment)  # <S>
-class PythonNdmConstituent(NdmConstituent[_PythonNdmConstituent__H, _PythonNdmConstituent__S], typing.Generic[_PythonNdmConstituent__H, _PythonNdmConstituent__S]):
-    """
-    public class PythonNdmConstituent<H extends :class:`~org.orekit.files.ccsds.section.Header`,S extends :class:`~org.orekit.files.ccsds.section.Segment`<?,?>> extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<H,S>
-    """
-    def finalize(self) -> None: ...
-    def getConventions(self) -> org.orekit.utils.IERSConventions:
-        """
-            Get IERS conventions.
-        
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.ndm.NdmConstituent.getConventions`Â in
-                classÂ :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`
-        
-            Returns:
-                IERS conventions
-        
-        
-        """
-        ...
-    def getDataContext(self) -> org.orekit.data.DataContext:
-        """
-            Get the data context.
-        
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.ndm.NdmConstituent.getDataContext`Â in
-                classÂ :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`
-        
-            Returns:
-                the data context used for creating frames, time scales, etc.
-        
-        
-        """
-        ...
-    def getHeader(self) -> _PythonNdmConstituent__H:
-        """
-            Get the header.
-        
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.ndm.NdmConstituent.getHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`
-        
-            Returns:
-                header
-        
-            Since:
-                11.0
-        
-        
-        """
-        ...
-    def getSegments(self) -> java.util.List[_PythonNdmConstituent__S]: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def validate(self) -> None:
-        """
-            Validate the file message for required and forbidden entries.
-        
-            This method throws an exception if file does not meet format requirements. The requirements may depend on format
-            version, which is found in header.
-        
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.ndm.NdmConstituent.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`
-        
-        
-        """
-        ...
-
 class WriterBuilder(AbstractBuilder['WriterBuilder']):
     """
     public class WriterBuilder extends :class:`~org.orekit.files.ccsds.ndm.AbstractBuilder`<:class:`~org.orekit.files.ccsds.ndm.WriterBuilder`>
@@ -802,8 +668,6 @@ class __module_protocol__(typing.Protocol):
     NdmWriter: typing.Type[NdmWriter]
     ParsedUnitsBehavior: typing.Type[ParsedUnitsBehavior]
     ParserBuilder: typing.Type[ParserBuilder]
-    PythonAbstractBuilder: typing.Type[PythonAbstractBuilder]
-    PythonNdmConstituent: typing.Type[PythonNdmConstituent]
     WriterBuilder: typing.Type[WriterBuilder]
     adm: org.orekit.files.ccsds.ndm.adm.__module_protocol__
     odm: org.orekit.files.ccsds.ndm.odm.__module_protocol__

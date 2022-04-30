@@ -428,9 +428,8 @@ class CovarianceHistoryMetadataKey(java.lang.Enum['CovarianceHistoryMetadataKey'
         
             .. code-block: java
             
-            
-            for (CovarianceHistoryMetadataKey c : CovarianceHistoryMetadataKey.values())
-                System.out.println(c);
+            for (CovarianceHistoryMetadataKey c : CovarianceHistoryMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -488,9 +487,8 @@ class ManBasis(java.lang.Enum['ManBasis']):
         
             .. code-block: java
             
-            
-            for (ManBasis c : ManBasis.values())
-                System.out.println(c);
+            for (ManBasis c : ManBasis.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1109,9 +1107,8 @@ class ManeuverFieldType(java.lang.Enum['ManeuverFieldType']):
         
             .. code-block: java
             
-            
-            for (ManeuverFieldType c : ManeuverFieldType.values())
-                System.out.println(c);
+            for (ManeuverFieldType c : ManeuverFieldType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1830,9 +1827,8 @@ class ManeuverHistoryMetadataKey(java.lang.Enum['ManeuverHistoryMetadataKey']):
         
             .. code-block: java
             
-            
-            for (ManeuverHistoryMetadataKey c : ManeuverHistoryMetadataKey.values())
-                System.out.println(c);
+            for (ManeuverHistoryMetadataKey c : ManeuverHistoryMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1888,9 +1884,8 @@ class ObjectType(java.lang.Enum['ObjectType']):
         
             .. code-block: java
             
-            
-            for (ObjectType c : ObjectType.values())
-                System.out.println(c);
+            for (ObjectType c : ObjectType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -2136,9 +2131,8 @@ class OcmDataSubStructureKey(java.lang.Enum['OcmDataSubStructureKey']):
         
             .. code-block: java
             
-            
-            for (OcmDataSubStructureKey c : OcmDataSubStructureKey.values())
-                System.out.println(c);
+            for (OcmDataSubStructureKey c : OcmDataSubStructureKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -3118,9 +3112,8 @@ class OcmMetadataKey(java.lang.Enum['OcmMetadataKey']):
         
             .. code-block: java
             
-            
-            for (OcmMetadataKey c : OcmMetadataKey.values())
-                System.out.println(c);
+            for (OcmMetadataKey c : OcmMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -3498,9 +3491,8 @@ class OpsStatus(java.lang.Enum['OpsStatus']):
         
             .. code-block: java
             
-            
-            for (OpsStatus c : OpsStatus.values())
-                System.out.println(c);
+            for (OpsStatus c : OpsStatus.values())
+                System.out.println(c);
             
         
             Returns:
@@ -3575,9 +3567,8 @@ class OrbitCategory(java.lang.Enum['OrbitCategory']):
         
             .. code-block: java
             
-            
-            for (OrbitCategory c : OrbitCategory.values())
-                System.out.println(c);
+            for (OrbitCategory c : OrbitCategory.values())
+                System.out.println(c);
             
         
             Returns:
@@ -4261,9 +4252,8 @@ class OrbitDeterminationKey(java.lang.Enum['OrbitDeterminationKey']):
         
             .. code-block: java
             
-            
-            for (OrbitDeterminationKey c : OrbitDeterminationKey.values())
-                System.out.println(c);
+            for (OrbitDeterminationKey c : OrbitDeterminationKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -4319,9 +4309,8 @@ class Ordering(java.lang.Enum['Ordering']):
         
             .. code-block: java
             
-            
-            for (Ordering c : Ordering.values())
-                System.out.println(c);
+            for (Ordering c : Ordering.values())
+                System.out.println(c);
             
         
             Returns:
@@ -4994,9 +4983,8 @@ class PerturbationsKey(java.lang.Enum['PerturbationsKey']):
         
             .. code-block: java
             
-            
-            for (PerturbationsKey c : PerturbationsKey.values())
-                System.out.println(c);
+            for (PerturbationsKey c : PerturbationsKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -5978,9 +5966,8 @@ class PhysicalPropertiesKey(java.lang.Enum['PhysicalPropertiesKey']):
         
             .. code-block: java
             
-            
-            for (PhysicalPropertiesKey c : PhysicalPropertiesKey.values())
-                System.out.println(c);
+            for (PhysicalPropertiesKey c : PhysicalPropertiesKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -6035,9 +6022,8 @@ class ShadowModel(java.lang.Enum['ShadowModel']):
         
             .. code-block: java
             
-            
-            for (ShadowModel c : ShadowModel.values())
-                System.out.println(c);
+            for (ShadowModel c : ShadowModel.values())
+                System.out.println(c);
             
         
             Returns:
@@ -6659,9 +6645,8 @@ class TrajectoryStateHistoryMetadataKey(java.lang.Enum['TrajectoryStateHistoryMe
         
             .. code-block: java
             
-            
-            for (TrajectoryStateHistoryMetadataKey c : TrajectoryStateHistoryMetadataKey.values())
-                System.out.println(c);
+            for (TrajectoryStateHistoryMetadataKey c : TrajectoryStateHistoryMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:

@@ -893,7 +893,7 @@ class PoissonSeries:
     """
     def __init__(self, polynomialNutation: 'PolynomialNutation', map: typing.Union[java.util.Map[int, 'SeriesTerm'], typing.Mapping[int, 'SeriesTerm']]): ...
     @staticmethod
-    def compile(poissonSeriesArray: typing.List['PoissonSeries']) -> 'PoissonSeries.CompiledSeries': ...
+    def compile(*poissonSeries: 'PoissonSeries') -> 'PoissonSeries.CompiledSeries': ...
     def getNonPolynomialSize(self) -> int:
         """
             Get the number of different terms in the non-polynomial part.
@@ -981,16 +981,15 @@ class PoissonSeriesParser:
     
         .. code-block: java
         
-        
-         âˆ†Ïˆ = Î£ (Ai+A'it) sin(ARGUMENT), âˆ†Îµ = Î£ (Bi+B'it) cos(ARGUMENT)
-        
-              MULTIPLIERS OF      PERIOD           LONGITUDE         OBLIQUITY
-          l    l'   F    D   Om     days         Ai       A'i       Bi       B'i
-        
-          0    0    0    0    1   -6798.4    -171996    -174.2    92025      8.9
-          0    0    2   -2    2     182.6     -13187      -1.6     5736     -3.1
-          0    0    2    0    2      13.7      -2274      -0.2      977     -0.5
-          0    0    0    0    2   -3399.2       2062       0.2     -895      0.5
+         âˆ†Ïˆ = Î£ (Ai+A'it) sin(ARGUMENT), âˆ†Îµ = Î£ (Bi+B'it) cos(ARGUMENT)
+        
+              MULTIPLIERS OF      PERIOD           LONGITUDE         OBLIQUITY
+          l    l'   F    D   Om     days         Ai       A'i       Bi       B'i
+        
+          0    0    0    0    1   -6798.4    -171996    -174.2    92025      8.9
+          0    0    2   -2    2     182.6     -13187      -1.6     5736     -3.1
+          0    0    2    0    2      13.7      -2274      -0.2      977     -0.5
+          0    0    0    0    2   -3399.2       2062       0.2     -895      0.5
          
     
         In order to parse the nutation in longitude from the previous table, the following settings should be used:
@@ -1018,46 +1017,45 @@ class PoissonSeriesParser:
     
         .. code-block: java
         
-        
-         ---------------------------------------------------------------------------------------------------
-        
-         (unit microarcsecond; cut-off: 0.1 microarcsecond)
-         (ARG being for various combination of the fundamental arguments of the nutation theory)
-        
-           Sum_i[A_i * sin(ARG) + A"_i * cos(ARG)]
-        
-         + Sum_i[A'_i * sin(ARG) + A"'_i * cos(ARG)] * t           (see Chapter 5, Eq. (35))
-        
-         The Table below provides the values for A_i and A"_i (j=0) and then A'_i and A"'_i (j=1)
-        
-         The expressions for the fundamental arguments appearing in columns 4 to 8 (luni-solar part)
-         and in columns 9 to 17 (planetary part) are those of the IERS Conventions 2003
-        
-         ----------------------------------------------------------------------------------------------------------
-         j = 0  Number of terms = 1320
-         ----------------------------------------------------------------------------------------------------------
-             i        A_i             A"_i     l    l'   F    D    Om  L_Me L_Ve  L_E L_Ma  L_J L_Sa  L_U L_Ne  p_A
-         ----------------------------------------------------------------------------------------------------------
-             1   -17206424.18        3338.60    0    0    0    0    1    0    0    0    0    0    0    0    0    0
-             2    -1317091.22       -1369.60    0    0    2   -2    2    0    0    0    0    0    0    0    0    0
-             3     -227641.81         279.60    0    0    2    0    2    0    0    0    0    0    0    0    0    0
-             4      207455.40         -69.80    0    0    0    0    2    0    0    0    0    0    0    0    0    0
-             5      147587.70        1181.70    0    1    0    0    0    0    0    0    0    0    0    0    0    0
-        
-         ...
-        
-          1319          -0.10           0.00    0    0    0    0    0    1    0   -3    0    0    0    0    0   -2
-          1320          -0.10           0.00    0    0    0    0    0    0    0    1    0    1   -2    0    0    0
-        
-         --------------------------------------------------------------------------------------------------------------
-         j = 1  Number of terms = 38
-         --------------------------------------------------------------------------------------------------------------
-            i          A'_i            A"'_i    l    l'   F    D   Om L_Me L_Ve  L_E L_Ma  L_J L_Sa  L_U L_Ne  p_A
-         --------------------------------------------------------------------------------------------------------------
-          1321      -17418.82           2.89    0    0    0    0    1    0    0    0    0    0    0    0    0    0
-          1322        -363.71          -1.50    0    1    0    0    0    0    0    0    0    0    0    0    0    0
-          1323        -163.84           1.20    0    0    2   -2    2    0    0    0    0    0    0    0    0    0
-          1324         122.74           0.20    0    1    2   -2    2    0    0    0    0    0    0    0    0    0
+         ---------------------------------------------------------------------------------------------------
+        
+         (unit microarcsecond; cut-off: 0.1 microarcsecond)
+         (ARG being for various combination of the fundamental arguments of the nutation theory)
+        
+           Sum_i[A_i * sin(ARG) + A"_i * cos(ARG)]
+        
+         + Sum_i[A'_i * sin(ARG) + A"'_i * cos(ARG)] * t           (see Chapter 5, Eq. (35))
+        
+         The Table below provides the values for A_i and A"_i (j=0) and then A'_i and A"'_i (j=1)
+        
+         The expressions for the fundamental arguments appearing in columns 4 to 8 (luni-solar part)
+         and in columns 9 to 17 (planetary part) are those of the IERS Conventions 2003
+        
+         ----------------------------------------------------------------------------------------------------------
+         j = 0  Number of terms = 1320
+         ----------------------------------------------------------------------------------------------------------
+             i        A_i             A"_i     l    l'   F    D    Om  L_Me L_Ve  L_E L_Ma  L_J L_Sa  L_U L_Ne  p_A
+         ----------------------------------------------------------------------------------------------------------
+             1   -17206424.18        3338.60    0    0    0    0    1    0    0    0    0    0    0    0    0    0
+             2    -1317091.22       -1369.60    0    0    2   -2    2    0    0    0    0    0    0    0    0    0
+             3     -227641.81         279.60    0    0    2    0    2    0    0    0    0    0    0    0    0    0
+             4      207455.40         -69.80    0    0    0    0    2    0    0    0    0    0    0    0    0    0
+             5      147587.70        1181.70    0    1    0    0    0    0    0    0    0    0    0    0    0    0
+        
+         ...
+        
+          1319          -0.10           0.00    0    0    0    0    0    1    0   -3    0    0    0    0    0   -2
+          1320          -0.10           0.00    0    0    0    0    0    0    0    1    0    1   -2    0    0    0
+        
+         --------------------------------------------------------------------------------------------------------------
+         j = 1  Number of terms = 38
+         --------------------------------------------------------------------------------------------------------------
+            i          A'_i            A"'_i    l    l'   F    D   Om L_Me L_Ve  L_E L_Ma  L_J L_Sa  L_U L_Ne  p_A
+         --------------------------------------------------------------------------------------------------------------
+          1321      -17418.82           2.89    0    0    0    0    1    0    0    0    0    0    0    0    0    0
+          1322        -363.71          -1.50    0    1    0    0    0    0    0    0    0    0    0    0    0    0
+          1323        -163.84           1.20    0    0    2   -2    2    0    0    0    0    0    0    0    0    0
+          1324         122.74           0.20    0    1    2   -2    2    0    0    0    0    0    0    0    0    0
          
     
         In order to parse the nutation in longitude from the previous table, the following settings should be used:
@@ -1086,21 +1084,20 @@ class PoissonSeriesParser:
     
         .. code-block: java
         
-        
-         The in-phase (ip) amplitudes (Aâ‚� Î´kfR Hf) and the out-of-phase (op) amplitudes (Aâ‚� Î´kfI Hf)
-         of the corrections for frequency dependence of kâ‚‚â‚�â�½â�°â�¾, taking the nominal value kâ‚‚â‚� for the
-         diurnal tides as (0.29830 âˆ’ i 0.00144). Units: 10â�»Â¹Â² . The entries for Î´kfR and Î´kfI are in
-         units of 10â�»â�µ. Multipliers of the Doodson arguments identifying the tidal terms are given,
-         as also those of the Delaunay variables characterizing the nutations produced by these
-         terms.
-        
-         Name   deg/hr    Doodson  Ï„  s  h  p  N' ps   l  l' F  D  Î©  Î´kfR  Î´kfI     Amp.    Amp.
-                            No.                                       /10âˆ’5 /10âˆ’5    (ip)    (op)
-           2Qâ‚� 12.85429   125,755  1 -3  0  2   0  0   2  0  2  0  2    -29     3    -0.1     0.0
-            Ïƒâ‚� 12.92714   127,555  1 -3  2  0   0  0   0  0  2  2  2    -30     3    -0.1     0.0
-               13.39645   135,645  1 -2  0  1  -1  0   1  0  2  0  1    -45     5    -0.1     0.0
-            Qâ‚� 13.39866   135,655  1 -2  0  1   0  0   1  0  2  0  2    -46     5    -0.7     0.1
-            Ï�â‚� 13.47151   137,455  1 -2  2 -1   0  0  -1  0  2  2  2    -49     5    -0.1     0.0
+         The in-phase (ip) amplitudes (Aâ‚� Î´kfR Hf) and the out-of-phase (op) amplitudes (Aâ‚� Î´kfI Hf)
+         of the corrections for frequency dependence of kâ‚‚â‚�â�½â�°â�¾, taking the nominal value kâ‚‚â‚� for the
+         diurnal tides as (0.29830 âˆ’ i 0.00144). Units: 10â�»Â¹Â² . The entries for Î´kfR and Î´kfI are in
+         units of 10â�»â�µ. Multipliers of the Doodson arguments identifying the tidal terms are given,
+         as also those of the Delaunay variables characterizing the nutations produced by these
+         terms.
+        
+         Name   deg/hr    Doodson  Ï„  s  h  p  N' ps   l  l' F  D  Î©  Î´kfR  Î´kfI     Amp.    Amp.
+                            No.                                       /10âˆ’5 /10âˆ’5    (ip)    (op)
+           2Qâ‚� 12.85429   125,755  1 -3  0  2   0  0   2  0  2  0  2    -29     3    -0.1     0.0
+            Ïƒâ‚� 12.92714   127,555  1 -3  2  0   0  0   0  0  2  2  2    -30     3    -0.1     0.0
+               13.39645   135,645  1 -2  0  1  -1  0   1  0  2  0  1    -45     5    -0.1     0.0
+            Qâ‚� 13.39866   135,655  1 -2  0  1   0  0   1  0  2  0  2    -46     5    -0.7     0.1
+            Ï�â‚� 13.47151   137,455  1 -2  2 -1   0  0  -1  0  2  2  2    -49     5    -0.1     0.0
          
     
           - totalColumns = 18 (see :meth:`~org.orekit.data.PoissonSeriesParser.PoissonSeriesParser`)
@@ -1255,7 +1252,7 @@ class PolynomialNutation(java.io.Serializable):
         Also see:
             :class:`~org.orekit.data.PoissonSeries`, :meth:`~serialized`
     """
-    def __init__(self, doubleArray: typing.List[float]): ...
+    def __init__(self, *double: float): ...
     _derivative_1__T = typing.TypeVar('_derivative_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def derivative(self, double: float) -> float:
@@ -1657,9 +1654,9 @@ class ClasspathCrawler(DataProvider):
             :class:`~org.orekit.data.DataProvidersManager`
     """
     @typing.overload
-    def __init__(self, classLoader: java.lang.ClassLoader, stringArray: typing.List[str]): ...
+    def __init__(self, classLoader: java.lang.ClassLoader, *string: str): ...
     @typing.overload
-    def __init__(self, stringArray: typing.List[str]): ...
+    def __init__(self, *string: str): ...
     def feed(self, pattern: java.util.regex.Pattern, dataLoader: DataLoader, dataProvidersManager: DataProvidersManager) -> bool:
         """
             Feed a data file loader by browsing the data collection.
@@ -2155,342 +2152,6 @@ class LazyLoadedDataContext(DataContext):
         """
         ...
 
-class PythonAbstractSelfFeedingLoader(AbstractSelfFeedingLoader):
-    """
-    public class PythonAbstractSelfFeedingLoader extends :class:`~org.orekit.data.AbstractSelfFeedingLoader`
-    """
-    def __init__(self, string: str, dataProvidersManager: DataProvidersManager): ...
-
-class PythonDataContext(DataContext):
-    """
-    public class PythonDataContext extends Object implements :class:`~org.orekit.data.DataContext`
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    def getCelestialBodies(self) -> org.orekit.bodies.CelestialBodies:
-        """
-            Get a factory constructing :class:`~org.orekit.bodies.CelestialBody`s based on the auxiliary data in this context.
-        
-            Specified by:
-                :meth:`~org.orekit.data.DataContext.getCelestialBodies` in interface :class:`~org.orekit.data.DataContext`
-        
-            Returns:
-                the set of common celestial bodies using this data context.
-        
-        
-        """
-        ...
-    def getFrames(self) -> org.orekit.frames.Frames:
-        """
-            Get a factory constructing :class:`~org.orekit.frames.Frame`s based on the auxiliary data in this context.
-        
-            Specified by:
-                :meth:`~org.orekit.data.DataContext.getFrames` in interface :class:`~org.orekit.data.DataContext`
-        
-            Returns:
-                the set of common reference frames using this data context.
-        
-        
-        """
-        ...
-    def getGeoMagneticFields(self) -> org.orekit.models.earth.GeoMagneticFields:
-        """
-            Get a factory constructing :class:`~org.orekit.models.earth.GeoMagneticField`s based on the auxiliary data in this
-            context.
-        
-            Specified by:
-                :meth:`~org.orekit.data.DataContext.getGeoMagneticFields` in interface :class:`~org.orekit.data.DataContext`
-        
-            Returns:
-                the geomagnetic fields using this data context.
-        
-        
-        """
-        ...
-    def getGravityFields(self) -> org.orekit.forces.gravity.potential.GravityFields:
-        """
-            Get a factory constructing gravity fields based on the auxiliary data in this context.
-        
-            Specified by:
-                :meth:`~org.orekit.data.DataContext.getGravityFields` in interface :class:`~org.orekit.data.DataContext`
-        
-            Returns:
-                the gravity fields using this data context.
-        
-        
-        """
-        ...
-    def getTimeScales(self) -> org.orekit.time.TimeScales:
-        """
-            Get a factory for constructing :class:`~org.orekit.time.TimeScale`s based on the auxiliary data in this context.
-        
-            Specified by:
-                :meth:`~org.orekit.data.DataContext.getTimeScales` in interface :class:`~org.orekit.data.DataContext`
-        
-            Returns:
-                the set of common time scales using this data context.
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-
-class PythonDataFilter(DataFilter):
-    """
-    public class PythonDataFilter extends Object implements :class:`~org.orekit.data.DataFilter`
-    """
-    def __init__(self): ...
-    def filter(self, dataSource: DataSource) -> DataSource: ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-
-class PythonDataLoader(DataLoader):
-    """
-    public class PythonDataLoader extends Object implements :class:`~org.orekit.data.DataLoader`
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    def loadData(self, inputStream: java.io.InputStream, string: str) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def stillAcceptsData(self) -> bool:
-        """
-            Check if the loader still accepts new data. Extension point for Python.
-        
-            This method is used to speed up data loading by interrupting crawling the data sets as soon as a loader has found the
-            data it was waiting for. For loaders that can merge data from any number of sources (for example JPL ephemerides or
-            Earth Orientation Parameters that are split among several files), this method should always return true to make sure no
-            data is left over.
-        
-            Specified by:
-                :meth:`~org.orekit.data.DataLoader.stillAcceptsData` in interface :class:`~org.orekit.data.DataLoader`
-        
-            Returns:
-                true while the loader still accepts new data
-        
-        
-        """
-        ...
-
-class PythonDataProvider(DataProvider):
-    """
-    public class PythonDataProvider extends Object implements :class:`~org.orekit.data.DataProvider`
-    """
-    def __init__(self): ...
-    def feed(self, pattern: java.util.regex.Pattern, dataLoader: DataLoader, dataProvidersManager: DataProvidersManager) -> bool:
-        """
-            Feed a data file loader by browsing the data collection.
-        
-            The method crawls all files referenced in the instance (for example all files in a directories tree) and for each file
-            supported by the file loader it asks the file loader to load it.
-        
-            If the method completes without exception, then the data loader is considered to have been fed successfully and the top
-            level :class:`~org.orekit.data.DataProvidersManager` will return immediately without attempting to use the next
-            configured providers.
-        
-            If the method completes abruptly with an exception, then the top level :class:`~org.orekit.data.DataProvidersManager`
-            will try to use the next configured providers, in case another one can feed the :class:`~org.orekit.data.DataLoader`.
-        
-            The default implementation will be removed in 11.0. It calls :code:`#feed(Pattern, DataLoader)`.
-        
-            Specified by:
-                :meth:`~org.orekit.data.DataProvider.feed` in interface :class:`~org.orekit.data.DataProvider`
-        
-            Parameters:
-                supported (Pattern): pattern for file names supported by the visitor
-                visitor (:class:`~org.orekit.data.DataLoader`): data file visitor to use
-                manager (:class:`~org.orekit.data.DataProvidersManager`): with the filters to apply to the resources.
-        
-            Returns:
-                true if some data has been loaded
-        
-        
-        """
-        ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-
-class PythonSeriesTerm(SeriesTerm):
-    """
-    public class PythonSeriesTerm extends Object
-    """
-    def __init__(self): ...
-    _argument_1__T = typing.TypeVar('_argument_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def argument(self, bodiesElements: BodiesElements) -> float:
-        """
-            Compute the argument for the current date.
-        
-            Parameters:
-                elements (:class:`~org.orekit.data.BodiesElements`): luni-solar and planetary elements for the current date
-        
-            Returns:
-                current value of the argument
-        
-        """
-        ...
-    @typing.overload
-    def argument(self, fieldBodiesElements: FieldBodiesElements[_argument_1__T]) -> _argument_1__T:
-        """
-            Compute the argument for the current date.
-        
-            Parameters:
-                elements (:class:`~org.orekit.data.FieldBodiesElements`<T> elements): luni-solar and planetary elements for the current date
-        
-            Returns:
-                current value of the argument
-        
-        
-        """
-        ...
-    _argumentDerivative_1__T = typing.TypeVar('_argumentDerivative_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def argumentDerivative(self, bodiesElements: BodiesElements) -> float:
-        """
-            Compute the time derivative of the argument for the current date.
-        
-            Parameters:
-                elements (:class:`~org.orekit.data.BodiesElements`): luni-solar and planetary elements for the current date
-        
-            Returns:
-                current time derivative of the argument
-        
-        """
-        ...
-    @typing.overload
-    def argumentDerivative(self, fieldBodiesElements: FieldBodiesElements[_argumentDerivative_1__T]) -> _argumentDerivative_1__T:
-        """
-            Compute the time derivative of the argument for the current date.
-        
-            Parameters:
-                elements (:class:`~org.orekit.data.FieldBodiesElements`<T> elements): luni-solar and planetary elements for the current date
-        
-            Returns:
-                current time derivative of the argument
-        
-        
-        """
-        ...
-    _argumentDerivative_F__T = typing.TypeVar('_argumentDerivative_F__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def argumentDerivative_F(self, fieldBodiesElements: FieldBodiesElements[_argumentDerivative_F__T]) -> _argumentDerivative_F__T:
-        """
-            Compute the time derivative of the argument for the current date. Extension point for Python.
-        
-            Parameters:
-                elements (:class:`~org.orekit.data.FieldBodiesElements`<T> elements): luni-solar and planetary elements for the current date
-        
-            Returns:
-                current time derivative of the argument
-        
-        
-        """
-        ...
-    _argument_F__T = typing.TypeVar('_argument_F__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def argument_F(self, fieldBodiesElements: FieldBodiesElements[_argument_F__T]) -> _argument_F__T:
-        """
-            Compute the argument for the current date. Extension point for Python
-        
-            Parameters:
-                elements (:class:`~org.orekit.data.FieldBodiesElements`<T> elements): luni-solar and planetary elements for the current date
-        
-            Returns:
-                current value of the argument
-        
-        
-        """
-        ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-
 class UnixCompressFilter(DataFilter):
     """
     public class UnixCompressFilter extends Object implements :class:`~org.orekit.data.DataFilter`
@@ -2717,7 +2378,7 @@ class FilesListCrawler(AbstractListCrawler[java.io.File]):
         Also see:
             :class:`~org.orekit.data.DataProvidersManager`
     """
-    def __init__(self, fileArray: typing.List[java.io.File]): ...
+    def __init__(self, *file: typing.Union[java.io.File, jpype.protocol.SupportsPath]): ...
 
 class NetworkCrawler(AbstractListCrawler[java.net.URL]):
     """
@@ -2739,11 +2400,10 @@ class NetworkCrawler(AbstractListCrawler[java.net.URL]):
     
         .. code-block: java
         
-        
-           System.setProperty("http.proxyHost",     "proxy.your.domain.com");
-           System.setProperty("http.proxyPort",     "8080");
-           System.setProperty("http.nonProxyHosts", "localhost|*.your.domain.com");
-           Authenticator.setDefault(new AuthenticatorDialog());
+           System.setProperty("http.proxyHost",     "proxy.your.domain.com");
+           System.setProperty("http.proxyPort",     "8080");
+           System.setProperty("http.nonProxyHosts", "localhost|*.your.domain.com");
+           Authenticator.setDefault(new AuthenticatorDialog());
          
     
         All :meth:`~org.orekit.data.FiltersManager.addFilter` :class:`~org.orekit.data.DataFilter` are applied.
@@ -2755,7 +2415,7 @@ class NetworkCrawler(AbstractListCrawler[java.net.URL]):
         Also see:
             :class:`~org.orekit.data.DataProvidersManager`
     """
-    def __init__(self, uRLArray: typing.List[java.net.URL]): ...
+    def __init__(self, *uRL: java.net.URL): ...
     def setTimeout(self, int: int) -> None:
         """
             Set the timeout for connection.
@@ -2764,82 +2424,6 @@ class NetworkCrawler(AbstractListCrawler[java.net.URL]):
                 timeout (int): connection timeout in milliseconds
         
         
-        """
-        ...
-
-_PythonAbstractListCrawler__T = typing.TypeVar('_PythonAbstractListCrawler__T')  # <T>
-class PythonAbstractListCrawler(AbstractListCrawler[_PythonAbstractListCrawler__T], typing.Generic[_PythonAbstractListCrawler__T]):
-    """
-    public class PythonAbstractListCrawler<T> extends :class:`~org.orekit.data.AbstractListCrawler`<T>
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    def getBaseName(self, t: _PythonAbstractListCrawler__T) -> str:
-        """
-            Get the base name of an input.
-        
-            Specified by:
-                :meth:`~org.orekit.data.AbstractListCrawler.getBaseName` in class :class:`~org.orekit.data.AbstractListCrawler`
-        
-            Parameters:
-                input (:class:`~org.orekit.data.PythonAbstractListCrawler`): input to consider
-        
-            Returns:
-                base name of the input
-        
-        
-        """
-        ...
-    def getCompleteName(self, t: _PythonAbstractListCrawler__T) -> str:
-        """
-            Get the complete name of a input.
-        
-            Specified by:
-                :meth:`~org.orekit.data.AbstractListCrawler.getCompleteName` in class :class:`~org.orekit.data.AbstractListCrawler`
-        
-            Parameters:
-                input (:class:`~org.orekit.data.PythonAbstractListCrawler`): input to consider
-        
-            Returns:
-                complete name of the input
-        
-        
-        """
-        ...
-    def getStream(self, t: _PythonAbstractListCrawler__T) -> java.io.InputStream: ...
-    def getZipJarCrawler(self, t: _PythonAbstractListCrawler__T) -> ZipJarCrawler:
-        """
-            Get a zip/jar crawler for an input.
-        
-            Specified by:
-                :meth:`~org.orekit.data.AbstractListCrawler.getZipJarCrawler` in class :class:`~org.orekit.data.AbstractListCrawler`
-        
-            Parameters:
-                input (:class:`~org.orekit.data.PythonAbstractListCrawler`): input to consider
-        
-            Returns:
-                zip/jar crawler for an input
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
         """
         ...
 
@@ -2873,13 +2457,6 @@ class __module_protocol__(typing.Protocol):
     PoissonSeriesParser: typing.Type[PoissonSeriesParser]
     PolynomialNutation: typing.Type[PolynomialNutation]
     PolynomialParser: typing.Type[PolynomialParser]
-    PythonAbstractListCrawler: typing.Type[PythonAbstractListCrawler]
-    PythonAbstractSelfFeedingLoader: typing.Type[PythonAbstractSelfFeedingLoader]
-    PythonDataContext: typing.Type[PythonDataContext]
-    PythonDataFilter: typing.Type[PythonDataFilter]
-    PythonDataLoader: typing.Type[PythonDataLoader]
-    PythonDataProvider: typing.Type[PythonDataProvider]
-    PythonSeriesTerm: typing.Type[PythonSeriesTerm]
     SeriesTerm: typing.Type[SeriesTerm]
     SimpleTimeStampedTableParser: typing.Type[SimpleTimeStampedTableParser]
     UnixCompressFilter: typing.Type[UnixCompressFilter]

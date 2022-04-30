@@ -13,7 +13,6 @@ import org.orekit.gnss
 import org.orekit.models
 import org.orekit.orbits
 import org.orekit.propagation
-import org.orekit.python
 import org.orekit.time
 import org.orekit.utils
 import typing
@@ -37,6 +36,5 @@ class __module_protocol__(typing.Protocol):
     models: org.orekit.models.__module_protocol__
     orbits: org.orekit.orbits.__module_protocol__
     propagation: org.orekit.propagation.__module_protocol__
-    python: org.orekit.python.__module_protocol__
     time: org.orekit.time.__module_protocol__
     utils: org.orekit.utils.__module_protocol__

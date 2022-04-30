@@ -47,46 +47,6 @@ class GlonassUserRangeAccuracy(AccuracyProvider):
         """
         ...
 
-class PythonAccuracyProvider(AccuracyProvider):
-    """
-    public class PythonAccuracyProvider extends Object implements :class:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider`
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    def getAccuracy(self) -> float:
-        """
-            Get the accuracy of the ephemeris data from an accuracy index.
-        
-            Specified by:
-                :meth:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider.getAccuracy`Â in
-                interfaceÂ :class:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider`
-        
-            Returns:
-                accuracy in meters
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-
 class SignalInSpaceAccuracy(AccuracyProvider):
     """
     public class SignalInSpaceAccuracy extends Object implements :class:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider`
@@ -149,6 +109,5 @@ class __module_protocol__(typing.Protocol):
 
     AccuracyProvider: typing.Type[AccuracyProvider]
     GlonassUserRangeAccuracy: typing.Type[GlonassUserRangeAccuracy]
-    PythonAccuracyProvider: typing.Type[PythonAccuracyProvider]
     SignalInSpaceAccuracy: typing.Type[SignalInSpaceAccuracy]
     UserRangeAccuracy: typing.Type[UserRangeAccuracy]

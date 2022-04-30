@@ -11,7 +11,7 @@ import typing
 
 class Circle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere2D'], org.hipparchus.geometry.partitioning.Embedding['Sphere2D', org.hipparchus.geometry.spherical.oned.Sphere1D]):
     """
-    public class Circle extends Object implements :class:`~org.hipparchus.geometry.partitioning.Hyperplane`<:class:`~org.hipparchus.geometry.spherical.twod.Sphere2D`>, :class:`~org.hipparchus.geometry.partitioning.Embedding`<:class:`~org.hipparchus.geometry.spherical.twod.Sphere2D`,:class:`~org.hipparchus.geometry.spherical.oned.Sphere1D`>
+    public class Circle extends :class:`~org.hipparchus.geometry.spherical.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.partitioning.Hyperplane`<:class:`~org.hipparchus.geometry.spherical.twod.Sphere2D`>, :class:`~org.hipparchus.geometry.partitioning.Embedding`<:class:`~org.hipparchus.geometry.spherical.twod.Sphere2D`,:class:`~org.hipparchus.geometry.spherical.oned.Sphere1D`>
     
         This class represents an oriented great circle on the 2-sphere.
     
@@ -36,8 +36,8 @@ class Circle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere2D'], org.hi
             are shared (except for immutable objects).
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.copySelf`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.copySelf` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Returns:
                 a new hyperplane, copy of the instance
@@ -50,8 +50,8 @@ class Circle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere2D'], org.hi
             Build a sub-hyperplane covering nothing.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.emptyHyperplane`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.emptyHyperplane` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Returns:
                 a sub-hyperplane covering nothing
@@ -180,8 +180,8 @@ class Circle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere2D'], org.hi
             Get the tolerance below which points are considered to belong to the hyperplane.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.getTolerance`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.getTolerance` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Returns:
                 tolerance below which points are considered to belong to the hyperplane
@@ -254,8 +254,8 @@ class Circle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere2D'], org.hi
             Build a sub-hyperplane covering the whole hyperplane.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.wholeHyperplane`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.wholeHyperplane` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Returns:
                 a sub-hyperplane covering the whole hyperplane
@@ -268,8 +268,8 @@ class Circle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere2D'], org.hi
             Build a region covering the whole space.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.wholeSpace`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.wholeSpace` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Returns:
                 a region containing the instance (really a :class:`~org.hipparchus.geometry.spherical.twod.SphericalPolygonsSet`
@@ -281,7 +281,7 @@ class Circle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere2D'], org.hi
 
 class Edge:
     """
-    public class Edge extends Object
+    public class Edge extends :class:`~org.hipparchus.geometry.spherical.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Spherical polygons boundary edge.
     
@@ -349,7 +349,7 @@ class Edge:
 
 class S2Point(org.hipparchus.geometry.Point['Sphere2D']):
     """
-    public class S2Point extends Object implements :class:`~org.hipparchus.geometry.Point`<:class:`~org.hipparchus.geometry.spherical.twod.Sphere2D`>
+    public class S2Point extends :class:`~org.hipparchus.geometry.spherical.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.Point`<:class:`~org.hipparchus.geometry.spherical.twod.Sphere2D`>
     
         This class represents a point on the 2-sphere.
     
@@ -440,19 +440,45 @@ class S2Point(org.hipparchus.geometry.Point['Sphere2D']):
             If all coordinates of two points are exactly the same, and none are :code:`Double.NaN`, the two points are considered to
             be equal.
         
-            :code:`NaN` coordinates are considered to affect globally the vector and be equals to each other - i.e, if either (or
-            all) coordinates of the 2D vector are equal to :code:`Double.NaN`, the 2D vector is equal to
+            :code:`NaN` coordinates are considered to affect globally the point and be equals to each other - i.e, if either (or
+            all) coordinates of the point are equal to :code:`Double.NaN`, the point is equal to
             :meth:`~org.hipparchus.geometry.spherical.twod.S2Point.NaN`.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.geometry.spherical.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.geometry.spherical.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                other (Object): Object to test for equality to this
+                other (:class:`~org.hipparchus.geometry.spherical.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality to this
         
             Returns:
                 true if two points on the 2-sphere objects are equal, false if object is null, not an instance of S2Point, or not equal
                 to this S2Point instance
+        
+        
+        """
+        ...
+    def equalsIeee754(self, object: typing.Any) -> bool:
+        """
+            Test for the equality of two points on the 2-sphere.
+        
+            If all coordinates of two points are exactly the same, and none are :code:`Double.NaN`, the two points are considered to
+            be equal.
+        
+            In compliance with IEEE754 handling, if any coordinates of any of the two points are :code:`NaN`, then the points are
+            considered different. This implies that
+            :meth:`~org.hipparchus.geometry.spherical.twod.S2Point.NaN`.equals(:meth:`~org.hipparchus.geometry.spherical.twod.S2Point.NaN`)
+            returns :code:`false` despite the instance is checked against itself.
+        
+            Parameters:
+                other (:class:`~org.hipparchus.geometry.spherical.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality to this
+        
+            Returns:
+                true if two points objects are equal, false if object is null, not an instance of S2Point, or not equal to this S2Point
+                instance
+        
+            Since:
+                2.1
         
         
         """
@@ -508,12 +534,13 @@ class S2Point(org.hipparchus.geometry.Point['Sphere2D']):
         ...
     def hashCode(self) -> int:
         """
-            Get a hashCode for the 2D vector.
+            Get a hashCode for the point.
         
             All NaN values have the same hash code.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.geometry.spherical.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.geometry.spherical.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a hash code value for this object
@@ -548,7 +575,8 @@ class S2Point(org.hipparchus.geometry.Point['Sphere2D']):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.geometry.spherical.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.geometry.spherical.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -556,7 +584,7 @@ class S2Point(org.hipparchus.geometry.Point['Sphere2D']):
 
 class Sphere2D(java.io.Serializable, org.hipparchus.geometry.Space):
     """
-    public class Sphere2D extends Object implements Serializable, :class:`~org.hipparchus.geometry.Space`
+    public class Sphere2D extends :class:`~org.hipparchus.geometry.spherical.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.spherical.twod.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.hipparchus.geometry.Space`
     
         This class implements a two-dimensional sphere (i.e. the regular sphere).
     
@@ -631,7 +659,7 @@ class SphericalPolygonsSet(org.hipparchus.geometry.partitioning.AbstractRegion[S
     @typing.overload
     def __init__(self, double: float): ...
     @typing.overload
-    def __init__(self, double: float, s2PointArray: typing.List[S2Point]): ...
+    def __init__(self, double: float, *s2Point: S2Point): ...
     @typing.overload
     def __init__(self, collection: typing.Union[java.util.Collection[org.hipparchus.geometry.partitioning.SubHyperplane[Sphere2D]], typing.Sequence[org.hipparchus.geometry.partitioning.SubHyperplane[Sphere2D]], typing.Set[org.hipparchus.geometry.partitioning.SubHyperplane[Sphere2D]]], double: float): ...
     @typing.overload
@@ -655,7 +683,7 @@ class SubCircle(org.hipparchus.geometry.partitioning.AbstractSubHyperplane[Spher
 
 class Vertex:
     """
-    public class Vertex extends Object
+    public class Vertex extends :class:`~org.hipparchus.geometry.spherical.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Spherical polygons boundary vertex.
     

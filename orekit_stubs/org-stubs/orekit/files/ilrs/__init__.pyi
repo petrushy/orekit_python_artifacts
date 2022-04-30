@@ -1672,32 +1672,6 @@ class CRDHeader(ILRSHeader):
         @staticmethod
         def values() -> typing.List['CRDHeader.RangeType']: ...
 
-class PythonILRSHeader(ILRSHeader):
-    """
-    public class PythonILRSHeader extends :class:`~org.orekit.files.ilrs.ILRSHeader`
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-
 
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ilrs")``.
@@ -1711,5 +1685,4 @@ class __module_protocol__(typing.Protocol):
     CRDHeader: typing.Type[CRDHeader]
     CRDParser: typing.Type[CRDParser]
     ILRSHeader: typing.Type[ILRSHeader]
-    PythonILRSHeader: typing.Type[PythonILRSHeader]
     StreamingCpfWriter: typing.Type[StreamingCpfWriter]

@@ -194,9 +194,8 @@ class CartesianCovarianceKey(java.lang.Enum['CartesianCovarianceKey']):
         
             .. code-block: java
             
-            
-            for (CartesianCovarianceKey c : CartesianCovarianceKey.values())
-                System.out.println(c);
+            for (CartesianCovarianceKey c : CartesianCovarianceKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -277,9 +276,8 @@ class CommonMetadataKey(java.lang.Enum['CommonMetadataKey']):
         
             .. code-block: java
             
-            
-            for (CommonMetadataKey c : CommonMetadataKey.values())
-                System.out.println(c);
+            for (CommonMetadataKey c : CommonMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -612,9 +610,8 @@ class KeplerianElementsKey(java.lang.Enum['KeplerianElementsKey']):
         
             .. code-block: java
             
-            
-            for (KeplerianElementsKey c : KeplerianElementsKey.values())
-                System.out.println(c);
+            for (KeplerianElementsKey c : KeplerianElementsKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -711,9 +708,8 @@ class OdmMetadataKey(java.lang.Enum['OdmMetadataKey']):
         
             .. code-block: java
             
-            
-            for (OdmMetadataKey c : OdmMetadataKey.values())
-                System.out.println(c);
+            for (OdmMetadataKey c : OdmMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -957,9 +953,8 @@ class SpacecraftParametersKey(java.lang.Enum['SpacecraftParametersKey']):
         
             .. code-block: java
             
-            
-            for (SpacecraftParametersKey c : SpacecraftParametersKey.values())
-                System.out.println(c);
+            for (SpacecraftParametersKey c : SpacecraftParametersKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1150,9 +1145,8 @@ class StateVectorKey(java.lang.Enum['StateVectorKey']):
         
             .. code-block: java
             
-            
-            for (StateVectorKey c : StateVectorKey.values())
-                System.out.println(c);
+            for (StateVectorKey c : StateVectorKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1430,193 +1424,6 @@ class CommonMetadata(OdmMetadata):
         """
         ...
 
-_PythonOdmParser__T = typing.TypeVar('_PythonOdmParser__T', bound=org.orekit.files.ccsds.ndm.NdmConstituent)  # <T>
-_PythonOdmParser__P = typing.TypeVar('_PythonOdmParser__P', bound=OdmParser)  # <P>
-class PythonOdmParser(OdmParser[_PythonOdmParser__T, _PythonOdmParser__P], typing.Generic[_PythonOdmParser__T, _PythonOdmParser__P]):
-    """
-    public class PythonOdmParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<?,?>,P extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmParser`<T,?>> extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmParser`<T,P>
-    """
-    def build(self) -> _PythonOdmParser__T:
-        """
-            Build the file from parsed entries.
-        
-            Returns:
-                parsed file
-        
-        
-        """
-        ...
-    def finalize(self) -> None: ...
-    def finalizeData(self) -> bool:
-        """
-            Finalize data after parsing.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def finalizeHeader(self) -> bool:
-        """
-            Finalize header after parsing.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def finalizeMetadata(self) -> bool:
-        """
-            Finalize metadata after parsing.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def getHeader(self) -> org.orekit.files.ccsds.section.Header:
-        """
-            Get file header to fill.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                file header to fill
-        
-        
-        """
-        ...
-    def inData(self) -> bool:
-        """
-            Acknowledge data parsing has started.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def inHeader(self) -> bool:
-        """
-            Acknowledge header parsing has started.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def inMetadata(self) -> bool:
-        """
-            Acknowledge metada parsing has started.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def prepareData(self) -> bool:
-        """
-            Prepare data for parsing.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def prepareHeader(self) -> bool:
-        """
-            Prepare header for parsing.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def prepareMetadata(self) -> bool:
-        """
-            Prepare metadata for parsing.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
-        
-            Returns:
-                true if parser was able to perform the action
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def reset(self, fileFormat: org.orekit.files.ccsds.utils.FileFormat) -> None:
-        """
-            Reset parser to initial state before parsing.
-        
-            Parameters:
-                fileFormat (:class:`~org.orekit.files.ccsds.utils.FileFormat`): format of the file ready to be parsed
-        
-        
-        """
-        ...
-
 
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.ndm.odm")``.
@@ -1632,7 +1439,6 @@ class __module_protocol__(typing.Protocol):
     OdmMetadata: typing.Type[OdmMetadata]
     OdmMetadataKey: typing.Type[OdmMetadataKey]
     OdmParser: typing.Type[OdmParser]
-    PythonOdmParser: typing.Type[PythonOdmParser]
     SpacecraftParameters: typing.Type[SpacecraftParameters]
     SpacecraftParametersKey: typing.Type[SpacecraftParametersKey]
     SpacecraftParametersWriter: typing.Type[SpacecraftParametersWriter]

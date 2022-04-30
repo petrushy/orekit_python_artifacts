@@ -34,7 +34,7 @@ class IodGibbs:
                 date3 (:class:`~org.orekit.time.AbsoluteDate`): date of measure 3
         
             Returns:
-                an initial orbit estimation
+                an initial orbit estimation at the central date (i.e., date of the second position measurement)
         
         
         """
@@ -51,7 +51,7 @@ class IodGibbs:
                 p3 (:class:`~org.orekit.estimation.measurements.Position`): Third position measurement
         
             Returns:
-                an initial orbit estimation
+                an initial orbit estimation at the central date (i.e., date of the second position measurement)
         
             Since:
                 11.0
@@ -65,7 +65,7 @@ class IodGibbs:
                 pv3 (:class:`~org.orekit.estimation.measurements.PV`): PV measure 3 taken in frame
         
             Returns:
-                an initial orbit estimation
+                an initial orbit estimation at the central date (i.e., date of the second PV measurement)
         
         """
         ...
@@ -106,7 +106,7 @@ class IodGooding:
                 direction (boolean): true if posigrade (short way)
         
             Returns:
-                an estimate of the Keplerian orbit
+                an estimate of the Keplerian orbit at the central date (i.e., date of the second angular observation)
         
             Orbit got from Observed Three Lines of Sight (angles only). assuming there was less than an half revolution between
             start and final date
@@ -126,7 +126,7 @@ class IodGooding:
                 rho3init (double): initial guess of the range problem. range 3, in meters
         
             Returns:
-                an estimate of the Keplerian orbit
+                an estimate of the Keplerian orbit at the central date (i.e., date of the second angular observation)
         
         
         """
@@ -149,7 +149,7 @@ class IodGooding:
                 direction (boolean): true if posigrade (short way)
         
             Returns:
-                an estimate of the Keplerian orbit
+                an estimate of the Keplerian orbit at the central date (i.e., date of the second angular observation)
         
             Since:
                 11.0
@@ -165,7 +165,7 @@ class IodGooding:
                 rho3init (double): initial guess of the range problem. range 3, in meters
         
             Returns:
-                an estimate of the Keplerian orbit
+                an estimate of the Keplerian orbit at the central date (i.e., date of the second angular observation)
         
             Since:
                 11.0
@@ -281,7 +281,7 @@ class IodLambert:
                 t2 (:class:`~org.orekit.time.AbsoluteDate`): date of observation 2
         
             Returns:
-                an initial Keplerian orbit estimate
+                an initial Keplerian orbit estimate at the first observation date t1
         
         
         """
@@ -312,7 +312,7 @@ class IodLambert:
                 p2 (:class:`~org.orekit.estimation.measurements.Position`): second position measurement
         
             Returns:
-                an initial orbit estimation
+                an initial Keplerian orbit estimation at the first observation date t1
         
             Since:
                 11.0
@@ -345,7 +345,7 @@ class IodLaplace:
                 raDec3 (:class:`~org.orekit.estimation.measurements.AngularRaDec`): third angular observation
         
             Returns:
-                estimate of the orbit at the central date or null if no estimate is possible with the given data
+                estimate of the orbit at the central date obsDate2 or null if no estimate is possible with the given data
         
             Since:
                 11.0
@@ -363,7 +363,7 @@ class IodLaplace:
                 los3 (Vector3D): line of sight unit vector 3
         
             Returns:
-                estimate of the orbit at the central date dateObs2 or null if no estimate is possible with the given data
+                estimate of the orbit at the central date obsDate2 or null if no estimate is possible with the given data
         
         
         """

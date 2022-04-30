@@ -768,9 +768,8 @@ class TokenType(java.lang.Enum['TokenType']):
         
             .. code-block: java
             
-            
-            for (TokenType c : TokenType.values())
-                System.out.println(c);
+            for (TokenType c : TokenType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -837,8 +836,7 @@ class MessageVersionXmlTokenBuilder(XmlTokenBuilder):
     
         .. code-block: java
         
-        
-           <opm id="CCSDS_OPM_VERS" verion="3.0">
+           <opm id="CCSDS_OPM_VERS" verion="3.0">
          
     
         This :class:`~org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder` will generate two
@@ -854,178 +852,6 @@ class MessageVersionXmlTokenBuilder(XmlTokenBuilder):
     """
     def __init__(self): ...
     def buildTokens(self, boolean: bool, string: str, string2: str, attributes: org.xml.sax.Attributes, int: int, string3: str) -> java.util.List[ParseToken]: ...
-
-class PythonLexicalAnalyzer(LexicalAnalyzer):
-    """
-    public class PythonLexicalAnalyzer extends Object implements :class:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer`
-    """
-    def __init__(self): ...
-    _accept__T = typing.TypeVar('_accept__T')  # <T>
-    def accept(self, messageParser: MessageParser[_accept__T]) -> _accept__T:
-        """
-            Parse a CCSDS Message.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer.accept`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer`
-        
-            Parameters:
-                messageParser (:class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`<T> messageParser): CCSDS Message parser to use
-        
-            Returns:
-                parsed fileO
-        
-        
-        """
-        ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-
-_PythonMessageParser__T = typing.TypeVar('_PythonMessageParser__T')  # <T>
-class PythonMessageParser(MessageParser[_PythonMessageParser__T], typing.Generic[_PythonMessageParser__T]):
-    """
-    public class PythonMessageParser<T> extends Object implements :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`<T>
-    """
-    def __init__(self): ...
-    def build(self) -> _PythonMessageParser__T:
-        """
-            Build the file from parsed entries.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.build`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
-        
-            Returns:
-                parsed file
-        
-        
-        """
-        ...
-    def finalize(self) -> None: ...
-    def getFormatVersionKey(self) -> str:
-        """
-            Get the key for format version.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.getFormatVersionKey`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
-        
-            Returns:
-                format version key
-        
-        
-        """
-        ...
-    def getSpecialXmlElementsBuilders(self) -> java.util.Map[str, XmlTokenBuilder]: ...
-    def parseMessage(self, dataSource: org.orekit.data.DataSource) -> _PythonMessageParser__T:
-        """
-            Parse a data source.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.parseMessage`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
-        
-            Parameters:
-                source (:class:`~org.orekit.data.DataSource`): data source to parse
-        
-            Returns:
-                parsed file
-        
-        
-        """
-        ...
-    def process(self, parseToken: ParseToken) -> None:
-        """
-            Process a parse token.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.process`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
-        
-            Parameters:
-                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def reset(self, fileFormat: org.orekit.files.ccsds.utils.FileFormat) -> None:
-        """
-            Reset parser to initial state before parsing.
-        
-            Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.reset`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
-        
-            Parameters:
-                fileFormat (:class:`~org.orekit.files.ccsds.utils.FileFormat`): format of the file ready to be parsed
-        
-        
-        """
-        ...
-
-class PythonXmlTokenBuilder(XmlTokenBuilder):
-    """
-    public class PythonXmlTokenBuilder extends Object implements :class:`~org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder`
-    """
-    def __init__(self): ...
-    def buildTokens(self, boolean: bool, string: str, string2: str, attributes: org.xml.sax.Attributes, int: int, string3: str) -> java.util.List[ParseToken]: ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
 
 class RegularXmlTokenBuilder(XmlTokenBuilder):
     """
@@ -1053,8 +879,7 @@ class UserDefinedXmlTokenBuilder(XmlTokenBuilder):
     
         .. code-block: java
         
-        
-           <USER_DEFINED parameter="SOME_PARAMETER_NAME">value</USER_DEFINED>
+           <USER_DEFINED parameter="SOME_PARAMETER_NAME">value</USER_DEFINED>
          
     
         This :class:`~org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder` will generate a single
@@ -1106,9 +931,6 @@ class __module_protocol__(typing.Protocol):
     MessageParser: typing.Type[MessageParser]
     MessageVersionXmlTokenBuilder: typing.Type[MessageVersionXmlTokenBuilder]
     ParseToken: typing.Type[ParseToken]
-    PythonLexicalAnalyzer: typing.Type[PythonLexicalAnalyzer]
-    PythonMessageParser: typing.Type[PythonMessageParser]
-    PythonXmlTokenBuilder: typing.Type[PythonXmlTokenBuilder]
     RegularXmlTokenBuilder: typing.Type[RegularXmlTokenBuilder]
     TokenType: typing.Type[TokenType]
     UserDefinedXmlTokenBuilder: typing.Type[UserDefinedXmlTokenBuilder]
