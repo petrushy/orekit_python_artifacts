@@ -332,6 +332,314 @@ class CssiSpaceWeatherDataLoader(org.orekit.data.DataLoader):
         def readLineOrThrow(self, localizable: org.hipparchus.exception.Localizable, *object: typing.Any) -> str: ...
         def unableToParseLine(self, throwable: java.lang.Throwable) -> org.orekit.errors.OrekitException: ...
 
+class DtcDataLoader(org.orekit.data.DataLoader):
+    """
+    public class DtcDataLoader extends Object implements :class:`~org.orekit.data.DataLoader`
+    
+        This class reads solar activity data from DTCFILE files for the class
+        :class:`~org.orekit.models.earth.atmosphere.data.JB2008SpaceEnvironmentData`. The code in this class is based of the
+        CssiSpaceWeatherDataLoader class. The DTCFILE file contain pre-computed data from Space Environment using the Dst
+        indices as well as Ap indices. This computation can be realised using the Fortran code provided by Space Environment
+        Technologies. See this link for more information.
+    
+        The data is provided by Space Environment Technologies through their website Link.
+        The work done for this class is based on the CssiSpaceWeatherDataLoader class by ClÃƒÂ©ment Jonglez, the JB2008
+        interface by Pascal Parraud, and corrections for DataLoader implementation by Bryan Cazabonne and Evan Ward .
+    
+        Since:
+            11.2
+    """
+    def __init__(self, timeScale: org.orekit.time.TimeScale): ...
+    def getDataSet(self) -> java.util.SortedSet['DtcDataLoader.LineParameters']: ...
+    def getMaxDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Gets the available data range maximum date.
+        
+            Returns:
+                the maximum date.
+        
+        
+        """
+        ...
+    def getMinDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Gets the available data range minimum date.
+        
+            Returns:
+                the minimum date.
+        
+        
+        """
+        ...
+    def loadData(self, inputStream: java.io.InputStream, string: str) -> None: ...
+    def stillAcceptsData(self) -> bool:
+        """
+            Check if the loader still accepts new data.
+        
+            This method is used to speed up data loading by interrupting crawling the data sets as soon as a loader has found the
+            data it was waiting for. For loaders that can merge data from any number of sources (for example JPL ephemerides or
+            Earth Orientation Parameters that are split among several files), this method should always return true to make sure no
+            data is left over.
+        
+            Specified by:
+                :meth:`~org.orekit.data.DataLoader.stillAcceptsData` in interface :class:`~org.orekit.data.DataLoader`
+        
+            Returns:
+                true while the loader still accepts new data
+        
+        
+        """
+        ...
+    class LineParameters(org.orekit.time.TimeStamped, java.io.Serializable):
+        def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float): ...
+        def getDSTDTC(self) -> float: ...
+        def getDate(self) -> org.orekit.time.AbsoluteDate: ...
+
+class JB2008SpaceEnvironmentData(org.orekit.models.earth.atmosphere.JB2008InputParameters):
+    """
+    public class JB2008SpaceEnvironmentData extends Object implements :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
+    
+        This class provides a container for the solar indices data required by the JB2008 atmospheric model. This container only
+        stores information provided in the SOLFSMY and DTCFILE text file provided by Space Environment Technologies. Therefore
+        it doesn't provide the geomagnetic storm indices available in the SOLRESAP file. The
+        :class:`~org.orekit.data.DataLoader` implementations and the parsing are handled by the
+        :class:`~org.orekit.models.earth.atmosphere.data.SOLFSMYDataLoader`
+        :class:`~org.orekit.models.earth.atmosphere.data.DtcDataLoader` classes.
+    
+        Data are available on Space Environment Technologies' `website <http://sol.spacenvironment.net/jb2008>`. The work done
+        for this class is based on the CssiSpaceWeatherData class by ClÃƒÂ©ment Jonglez, the JB2008 interface by Pascal Parraud,
+        and corrections for the CssiSpaceWeatherData implementation by Bryan Cazabonne and Evan Ward.
+    
+        Since:
+            11.2
+    
+        Also see:
+            :meth:`~serialized`
+    """
+    DEFAULT_SUPPORTED_NAMES_SOLFSMY: typing.ClassVar[str] = ...
+    """
+    public static final String DEFAULT_SUPPORTED_NAMES_SOLFSMY
+    
+        Default regular expression for supported names that works with test and published files for the SOLFSMY file.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    DEFAULT_SUPPORTED_NAMES_DTC: typing.ClassVar[str] = ...
+    """
+    public static final String DEFAULT_SUPPORTED_NAMES_DTC
+    
+        Default regular expression for supported names that works with test and published files for the DTCFILE file.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    @typing.overload
+    def __init__(self, string: str, string2: str): ...
+    @typing.overload
+    def __init__(self, string: str, string2: str, dataProvidersManager: org.orekit.data.DataProvidersManager, timeScale: org.orekit.time.TimeScale): ...
+    def getDSTDTC(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+        """
+            Get the temperature change computed from Dst index.
+        
+            Specified by:
+                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getDSTDTC`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
+        
+            Returns:
+                the temperature change computed from Dst index
+        
+        
+        """
+        ...
+    def getF10(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+        """
+            Get the value of the instantaneous solar flux index (1e :sup:`-22` *Watt/(mÂ²*Hertz)).
+        
+            Tabular time 1.0 day earlier.
+        
+            Specified by:
+                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getF10`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
+        
+            Returns:
+                the instantaneous F10.7 index
+        
+        
+        """
+        ...
+    def getF10B(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+        """
+            Get the value of the mean solar flux. Averaged 81-day centered F10.7 B index on the input time.
+        
+            Tabular time 1.0 day earlier.
+        
+            Specified by:
+                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getF10B`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
+        
+            Returns:
+                the mean solar flux F10.7B index
+        
+        
+        """
+        ...
+    def getMaxDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Gets the available data range maximum date.
+        
+            Specified by:
+                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getMaxDate`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
+        
+            Returns:
+                the maximum date.
+        
+        
+        """
+        ...
+    def getMinDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Gets the available data range minimum date.
+        
+            Specified by:
+                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getMinDate`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
+        
+            Returns:
+                the minimum date.
+        
+        
+        """
+        ...
+    def getS10(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+        """
+            Get the EUV index (26-34 nm) scaled to F10.
+        
+            Tabular time 1.0 day earlier.
+        
+            Specified by:
+                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getS10`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
+        
+            Returns:
+                the the EUV S10 index
+        
+        
+        """
+        ...
+    def getS10B(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+        """
+            Get the EUV 81-day averaged centered index.
+        
+            Tabular time 1.0 day earlier.
+        
+            Specified by:
+                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getS10B`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
+        
+            Returns:
+                the the mean EUV S10B index
+        
+        
+        """
+        ...
+    def getXM10(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+        """
+            Get the MG2 index scaled to F10.
+        
+            Tabular time 2.0 days earlier.
+        
+            Specified by:
+                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getXM10`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
+        
+            Returns:
+                the the MG2 index
+        
+        
+        """
+        ...
+    def getXM10B(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+        """
+            Get the MG2 81-day average centered index.
+        
+            Tabular time 2.0 days earlier.
+        
+            Specified by:
+                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getXM10B`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
+        
+            Returns:
+                the the mean MG2 index
+        
+        
+        """
+        ...
+    def getY10(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+        """
+            Get the Solar X-Ray & Lya index scaled to F10.
+        
+            Tabular time 5.0 days earlier.
+        
+            Specified by:
+                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getY10`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
+        
+            Returns:
+                the Solar X-Ray & Lya index scaled to F10
+        
+        
+        """
+        ...
+    def getY10B(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+        """
+            Get the Solar X-Ray & Lya 81-day ave. centered index.
+        
+            Tabular time 5.0 days earlier.
+        
+            Specified by:
+                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getY10B`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): the current date
+        
+            Returns:
+                the Solar X-Ray & Lya 81-day ave. centered index
+        
+        
+        """
+        ...
+
 class MarshallSolarActivityFutureEstimation(org.orekit.data.AbstractSelfFeedingLoader, org.orekit.data.DataLoader, org.orekit.models.earth.atmosphere.DTM2000InputParameters, org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters):
     """
     public class MarshallSolarActivityFutureEstimation extends :class:`~org.orekit.data.AbstractSelfFeedingLoader` implements :class:`~org.orekit.data.DataLoader`, :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`, :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
@@ -644,10 +952,81 @@ class MarshallSolarActivityFutureEstimation(org.orekit.data.AbstractSelfFeedingL
         @staticmethod
         def values() -> typing.List['MarshallSolarActivityFutureEstimation.StrengthLevel']: ...
 
+class SOLFSMYDataLoader(org.orekit.data.DataLoader):
+    """
+    public class SOLFSMYDataLoader extends Object implements :class:`~org.orekit.data.DataLoader`
+    
+        This class reads solar activity data from SOLFSMY files for the class
+        :class:`~org.orekit.models.earth.atmosphere.data.JB2008SpaceEnvironmentData`. The code in this class is based of the
+        CssiSpaceWeatherDataLoader.
+    
+        The data is provided by Space Environment Technologies through their website Link.
+        The work done for this class is based on the CssiWpaceWeatherDataLoader class by ClÃƒÂ©ment Jonglez, the JB2008
+        interface by Pascal Parraud, and corrections for DataLoader implementation by Bryan Cazabonne and Evan Ward .
+    
+        Since:
+            11.2
+    """
+    def __init__(self, timeScale: org.orekit.time.TimeScale): ...
+    def getDataSet(self) -> java.util.SortedSet['SOLFSMYDataLoader.LineParameters']: ...
+    def getMaxDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Gets the available data range maximum date.
+        
+            Returns:
+                the maximum date.
+        
+        
+        """
+        ...
+    def getMinDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Gets the available data range minimum date.
+        
+            Returns:
+                the minimum date.
+        
+        
+        """
+        ...
+    def loadData(self, inputStream: java.io.InputStream, string: str) -> None: ...
+    def stillAcceptsData(self) -> bool:
+        """
+            Check if the loader still accepts new data.
+        
+            This method is used to speed up data loading by interrupting crawling the data sets as soon as a loader has found the
+            data it was waiting for. For loaders that can merge data from any number of sources (for example JPL ephemerides or
+            Earth Orientation Parameters that are split among several files), this method should always return true to make sure no
+            data is left over.
+        
+            Specified by:
+                :meth:`~org.orekit.data.DataLoader.stillAcceptsData` in interface :class:`~org.orekit.data.DataLoader`
+        
+            Returns:
+                true while the loader still accepts new data
+        
+        
+        """
+        ...
+    class LineParameters(org.orekit.time.TimeStamped, java.io.Serializable):
+        def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float): ...
+        def getDate(self) -> org.orekit.time.AbsoluteDate: ...
+        def getF10(self) -> float: ...
+        def getF10B(self) -> float: ...
+        def getS10(self) -> float: ...
+        def getS10B(self) -> float: ...
+        def getXM10(self) -> float: ...
+        def getXM10B(self) -> float: ...
+        def getY10(self) -> float: ...
+        def getY10B(self) -> float: ...
+
 
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.models.earth.atmosphere.data")``.
 
     CssiSpaceWeatherData: typing.Type[CssiSpaceWeatherData]
     CssiSpaceWeatherDataLoader: typing.Type[CssiSpaceWeatherDataLoader]
+    DtcDataLoader: typing.Type[DtcDataLoader]
+    JB2008SpaceEnvironmentData: typing.Type[JB2008SpaceEnvironmentData]
     MarshallSolarActivityFutureEstimation: typing.Type[MarshallSolarActivityFutureEstimation]
+    SOLFSMYDataLoader: typing.Type[SOLFSMYDataLoader]

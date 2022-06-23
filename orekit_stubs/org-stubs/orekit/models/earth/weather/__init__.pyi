@@ -49,12 +49,13 @@ class GlobalPressureTemperature2Model(WeatherModel):
     
         .. code-block: java
         
-         %  lat    lon   p:a0    A1   B1   A2   B2  T:a0    A1   B1   A2   B2
-           87.5    2.5 101421    21  409 -217 -122 259.2 -13.2 -6.1  2.6  0.3
-           87.5    7.5 101416    21  411 -213 -120 259.3 -13.1 -6.1  2.6  0.3
-           87.5   12.5 101411    22  413 -209 -118 259.3 -13.1 -6.1  2.6  0.3
-           87.5   17.5 101407    23  415 -205 -116 259.4 -13.0 -6.1  2.6  0.3
-           ...
+        
+         %  lat    lon   p:a0    A1   B1   A2   B2  T:a0    A1   B1   A2   B2
+           87.5    2.5 101421    21  409 -217 -122 259.2 -13.2 -6.1  2.6  0.3
+           87.5    7.5 101416    21  411 -213 -120 259.3 -13.1 -6.1  2.6  0.3
+           87.5   12.5 101411    22  413 -209 -118 259.3 -13.1 -6.1  2.6  0.3
+           87.5   17.5 101407    23  415 -205 -116 259.4 -13.0 -6.1  2.6  0.3
+           ...
          
     
         Also see:
@@ -197,10 +198,53 @@ class GlobalPressureTemperatureModel(WeatherModel):
         """
         ...
 
+class PythonWeatherModel(WeatherModel):
+    """
+    public class PythonWeatherModel extends Object implements :class:`~org.orekit.models.earth.weather.WeatherModel`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+    def weatherParameters(self, double: float, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+        """
+            Calculates the weather parameters of the model. In order to obtain the correct values of the parameters this method has
+            to be call just after the construction of the model.
+        
+            Specified by:
+                :meth:`~org.orekit.models.earth.weather.WeatherModel.weatherParameters`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.weather.WeatherModel`
+        
+            Parameters:
+                stationHeight (double): the height of the station in m
+                currentDate (:class:`~org.orekit.time.AbsoluteDate`): current date
+        
+        
+        """
+        ...
+
 
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.models.earth.weather")``.
 
     GlobalPressureTemperature2Model: typing.Type[GlobalPressureTemperature2Model]
     GlobalPressureTemperatureModel: typing.Type[GlobalPressureTemperatureModel]
+    PythonWeatherModel: typing.Type[PythonWeatherModel]
     WeatherModel: typing.Type[WeatherModel]

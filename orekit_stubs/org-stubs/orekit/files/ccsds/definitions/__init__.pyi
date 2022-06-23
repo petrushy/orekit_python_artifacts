@@ -21,6 +21,8 @@ class BodyFacade:
             11.0
     """
     def __init__(self, string: str, celestialBody: org.orekit.bodies.CelestialBody): ...
+    @staticmethod
+    def create(centerName: 'CenterName') -> 'BodyFacade': ...
     def getBody(self) -> org.orekit.bodies.CelestialBody:
         """
             Get the celestial body.
@@ -57,6 +59,7 @@ class CelestialBodyFrame(java.lang.Enum['CelestialBodyFrame']):
     GRC: typing.ClassVar['CelestialBodyFrame'] = ...
     GTOD: typing.ClassVar['CelestialBodyFrame'] = ...
     ICRF: typing.ClassVar['CelestialBodyFrame'] = ...
+    ITRF2020: typing.ClassVar['CelestialBodyFrame'] = ...
     ITRF2014: typing.ClassVar['CelestialBodyFrame'] = ...
     ITRF2008: typing.ClassVar['CelestialBodyFrame'] = ...
     ITRF2005: typing.ClassVar['CelestialBodyFrame'] = ...
@@ -185,8 +188,9 @@ class CelestialBodyFrame(java.lang.Enum['CelestialBodyFrame']):
         
             .. code-block: java
             
-            for (CelestialBodyFrame c : CelestialBodyFrame.values())
-                System.out.println(c);
+            
+            for (CelestialBodyFrame c : CelestialBodyFrame.values())
+                System.out.println(c);
             
         
             Returns:
@@ -310,8 +314,9 @@ class CenterName(java.lang.Enum['CenterName']):
         
             .. code-block: java
             
-            for (CenterName c : CenterName.values())
-                System.out.println(c);
+            
+            for (CenterName c : CenterName.values())
+                System.out.println(c);
             
         
             Returns:
@@ -365,8 +370,9 @@ class DutyCycleType(java.lang.Enum['DutyCycleType']):
         
             .. code-block: java
             
-            for (DutyCycleType c : DutyCycleType.values())
-                System.out.println(c);
+            
+            for (DutyCycleType c : DutyCycleType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -461,8 +467,9 @@ class ElementsType(java.lang.Enum['ElementsType']):
         
             .. code-block: java
             
-            for (ElementsType c : ElementsType.values())
-                System.out.println(c);
+            
+            for (ElementsType c : ElementsType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -705,8 +712,9 @@ class OdMethodType(java.lang.Enum['OdMethodType']):
         
             .. code-block: java
             
-            for (OdMethodType c : OdMethodType.values())
-                System.out.println(c);
+            
+            for (OdMethodType c : OdMethodType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -769,8 +777,9 @@ class OnOff(java.lang.Enum['OnOff']):
         
             .. code-block: java
             
-            for (OnOff c : OnOff.values())
-                System.out.println(c);
+            
+            for (OnOff c : OnOff.values())
+                System.out.println(c);
             
         
             Returns:
@@ -865,8 +874,126 @@ class OrbitRelativeFrame(java.lang.Enum['OrbitRelativeFrame']):
         
             .. code-block: java
             
-            for (OrbitRelativeFrame c : OrbitRelativeFrame.values())
-                System.out.println(c);
+            
+            for (OrbitRelativeFrame c : OrbitRelativeFrame.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
+
+class PocMethodFacade:
+    """
+    public class PocMethodFacade extends Object
+    
+        Facade in front of several probability of collision methods in CCSDS messages.
+    
+        Since:
+            11.2
+    """
+    def __init__(self, string: str, pocMethodType: 'PocMethodType'): ...
+    def getName(self) -> str:
+        """
+            Get the name of the method.
+        
+            Returns:
+                name of the method
+        
+        
+        """
+        ...
+    def getType(self) -> 'PocMethodType':
+        """
+            Get the method type.
+        
+            Returns:
+                method type
+        
+        
+        """
+        ...
+    @staticmethod
+    def parse(string: str) -> 'PocMethodFacade':
+        """
+            Parse a string from CDM.
+        
+            Parameters:
+                s (String): string to parse
+        
+            Returns:
+                PoC method facade
+        
+        
+        """
+        ...
+
+class PocMethodType(java.lang.Enum['PocMethodType']):
+    """
+    public enum PocMethodType extends Enum<:class:`~org.orekit.files.ccsds.definitions.PocMethodType`>
+    
+        Type of probability of collision method used in CCSDS :class:`~org.orekit.files.ccsds.ndm.cdm.Cdm`.
+    
+        The list of available methods is available on the SANA.
+    
+        Since:
+            11.2
+    
+        Also see:
+            SANA CDM Collision Probability Methods
+    """
+    AKELLAALFRIEND_2000: typing.ClassVar['PocMethodType'] = ...
+    ALFANO_2005: typing.ClassVar['PocMethodType'] = ...
+    ALFANO_MAX_PROBABILITY: typing.ClassVar['PocMethodType'] = ...
+    ALFANO_PARAL_2007: typing.ClassVar['PocMethodType'] = ...
+    ALFANO_TUBES_2007: typing.ClassVar['PocMethodType'] = ...
+    ALFANO_VOXELS_2006: typing.ClassVar['PocMethodType'] = ...
+    ALFRIEND_1999: typing.ClassVar['PocMethodType'] = ...
+    CHAN_1997: typing.ClassVar['PocMethodType'] = ...
+    CHAN_2003: typing.ClassVar['PocMethodType'] = ...
+    FOSTER_1992: typing.ClassVar['PocMethodType'] = ...
+    MCKINLEY_2006: typing.ClassVar['PocMethodType'] = ...
+    PATERA_2001: typing.ClassVar['PocMethodType'] = ...
+    PATERA_2003: typing.ClassVar['PocMethodType'] = ...
+    PATERA_2005: typing.ClassVar['PocMethodType'] = ...
+    _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
+    @typing.overload
+    @staticmethod
+    def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
+    @typing.overload
+    @staticmethod
+    def valueOf(string: str) -> 'PocMethodType':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (String): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                : if this enum type has no constant with the specified name
+                : if the argument is null
+        
+        
+        """
+        ...
+    @staticmethod
+    def values() -> typing.List['PocMethodType']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            
+            for (PocMethodType c : PocMethodType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1105,8 +1232,9 @@ class TimeSystem(java.lang.Enum['TimeSystem']):
         
             .. code-block: java
             
-            for (TimeSystem c : TimeSystem.values())
-                System.out.println(c);
+            
+            for (TimeSystem c : TimeSystem.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1150,6 +1278,97 @@ class Units:
         mÂ² unit.
     
     """
+    M4: typing.ClassVar[org.orekit.utils.units.Unit] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.Unit` M4
+    
+        mâ�´ unit.
+    
+    """
+    M_PER_S: typing.ClassVar[org.orekit.utils.units.Unit] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.Unit` M_PER_S
+    
+        Meters per second units.
+    
+    """
+    M_PER_S2: typing.ClassVar[org.orekit.utils.units.Unit] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.Unit` M_PER_S2
+    
+        Meters per square second units.
+    
+    """
+    M2_PER_S: typing.ClassVar[org.orekit.utils.units.Unit] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.Unit` M2_PER_S
+    
+        Square meters per second units.
+    
+    """
+    M2_PER_S2: typing.ClassVar[org.orekit.utils.units.Unit] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.Unit` M2_PER_S2
+    
+        Square meters per square second units.
+    
+    """
+    M2_PER_S3: typing.ClassVar[org.orekit.utils.units.Unit] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.Unit` M2_PER_S3
+    
+        Square meters per cube second units.
+    
+    """
+    M2_PER_S4: typing.ClassVar[org.orekit.utils.units.Unit] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.Unit` M2_PER_S4
+    
+        Square meters per sâ�´ units.
+    
+    """
+    M2_PER_KG: typing.ClassVar[org.orekit.utils.units.Unit] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.Unit` M2_PER_KG
+    
+        mÂ² per kilograms units.
+    
+    """
+    M3_PER_KG: typing.ClassVar[org.orekit.utils.units.Unit] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.Unit` M3_PER_KG
+    
+        mÂ³ per kilograms units.
+    
+    """
+    M4_PER_KG: typing.ClassVar[org.orekit.utils.units.Unit] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.Unit` M4_PER_KG
+    
+        mâ�´ per kilograms units.
+    
+    """
+    M4_PER_KG2: typing.ClassVar[org.orekit.utils.units.Unit] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.Unit` M4_PER_KG2
+    
+        mâ�´ per square kilograms units.
+    
+    """
+    M3_PER_KGS: typing.ClassVar[org.orekit.utils.units.Unit] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.Unit` M3_PER_KGS
+    
+        Cubic meters per kilograms second units.
+    
+    """
+    M3_PER_KGS2: typing.ClassVar[org.orekit.utils.units.Unit] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.Unit` M3_PER_KGS2
+    
+        Cubic meters per kilograms (square second) units.
+    
+    """
     NB_PER_Y: typing.ClassVar[org.orekit.utils.units.Unit] = ...
     """
     public static final :class:`~org.orekit.utils.units.Unit` NB_PER_Y
@@ -1168,21 +1387,21 @@ class Units:
     """
     public static final :class:`~org.orekit.utils.units.Unit` KM_PER_S
     
-        Kilometers par second units.
+        Kilometers per second units.
     
     """
     KM_PER_S2: typing.ClassVar[org.orekit.utils.units.Unit] = ...
     """
     public static final :class:`~org.orekit.utils.units.Unit` KM_PER_S2
     
-        Kilometers par square second units.
+        Kilometers per square second units.
     
     """
     KM2_PER_S: typing.ClassVar[org.orekit.utils.units.Unit] = ...
     """
     public static final :class:`~org.orekit.utils.units.Unit` KM2_PER_S
     
-        Square kilometers par second units.
+        Square kilometers per second units.
     
     """
     KM2_PER_S2: typing.ClassVar[org.orekit.utils.units.Unit] = ...
@@ -1248,6 +1467,13 @@ class Units:
         Hertz per second unit.
     
     """
+    W_PER_KG: typing.ClassVar[org.orekit.utils.units.Unit] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.Unit` W_PER_KG
+    
+        Watt per kilograms units.
+    
+    """
     ONE_PER_ER: typing.ClassVar[org.orekit.utils.units.Unit] = ...
     """
     public static final :class:`~org.orekit.utils.units.Unit` ONE_PER_ER
@@ -1271,6 +1497,8 @@ class __module_protocol__(typing.Protocol):
     OdMethodType: typing.Type[OdMethodType]
     OnOff: typing.Type[OnOff]
     OrbitRelativeFrame: typing.Type[OrbitRelativeFrame]
+    PocMethodFacade: typing.Type[PocMethodFacade]
+    PocMethodType: typing.Type[PocMethodType]
     SpacecraftBodyFrame: typing.Type[SpacecraftBodyFrame]
     TimeConverter: typing.Type[TimeConverter]
     TimeSystem: typing.Type[TimeSystem]

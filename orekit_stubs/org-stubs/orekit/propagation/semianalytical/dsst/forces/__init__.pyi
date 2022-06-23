@@ -2,6 +2,7 @@ import java.util
 import org.hipparchus
 import org.orekit.attitudes
 import org.orekit.bodies
+import org.orekit.forces
 import org.orekit.forces.drag
 import org.orekit.forces.gravity.potential
 import org.orekit.forces.radiation
@@ -17,9 +18,9 @@ import typing
 
 
 
-class DSSTForceModel:
+class DSSTForceModel(org.orekit.utils.ParametersDriversProvider):
     """
-    public interface DSSTForceModel
+    public interface DSSTForceModel extends :class:`~org.orekit.utils.ParametersDriversProvider`
     
         This interface represents a force modifying spacecraft motion for a
         :class:`~org.orekit.propagation.semianalytical.dsst.DSSTPropagator`.
@@ -27,17 +28,14 @@ class DSSTForceModel:
         Objects implementing this interface are intended to be added to a
         :class:`~org.orekit.propagation.semianalytical.dsst.DSSTPropagator` before the propagation is started.
     
-        The propagator will call at the very beginning of a propagation the
-        :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms` method allowing
-        preliminary computation such as truncation if needed.
+        The propagator will call at the very beginning of a propagation the null method allowing preliminary computation such as
+        truncation if needed.
     
         Then the propagator will call at each step:
     
-          1.  the :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate` method. The force model
-            instance will extract all the state data needed to compute the mean element rates that contribute to the mean state
-            derivative.
-          2.  the :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms` method, if
-            osculating parameters are desired, on a sample of points within the last step.
+          1.  the null method. The force model instance will extract all the state data needed to compute the mean element rates that
+            contribute to the mean state derivative.
+          2.  the null method, if osculating parameters are desired, on a sample of points within the last step.
     """
     def getEventsDetectors(self) -> typing.List[org.orekit.propagation.events.EventDetector]:
         """
@@ -55,7 +53,7 @@ class DSSTForceModel:
             Get the discrete events related to the model.
         
             Parameters:
-                field (:class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field used by default
+                field (Field<T> field): field used by default
         
             Returns:
                 array of events detectors or null if the model is not related to any discrete events
@@ -115,7 +113,7 @@ class DSSTForceModel:
             Get force model parameters.
         
             Parameters:
-                field (:class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
+                field (Field<T> field): field to which the elements belong
         
             Returns:
                 force model parameters
@@ -126,7 +124,6 @@ class DSSTForceModel:
         
         """
         ...
-    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _init_0__T = typing.TypeVar('_init_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_init_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_init_0__T]) -> None:
@@ -185,20 +182,18 @@ class DSSTForceModel:
             Update the short period terms.
         
             The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to
-            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
+            were returned during the call to null.
         
             Parameters:
                 parameters (double[]): values of the force model parameters
                 meanStates (:class:`~org.orekit.propagation.SpacecraftState`...): mean states information: date, kinematics, attitude
         
-        <T extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> void updateShortPeriodTerms(T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
+        <T extends CalculusFieldElement<T>> void updateShortPeriodTerms(T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
         
             Update the short period terms.
         
             The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to
-            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
+            were returned during the call to null.
         
             Parameters:
                 parameters (T[]): values of the force model parameters
@@ -213,7 +208,7 @@ class DSSTForceModel:
 _FieldForceModelContext__T = typing.TypeVar('_FieldForceModelContext__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldForceModelContext(typing.Generic[_FieldForceModelContext__T]):
     """
-    public abstract class FieldForceModelContext<T extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    public abstract class FieldForceModelContext<T extends CalculusFieldElement<T>> extends Object
     
         Base class for dsst force models parameter containers.
     
@@ -225,7 +220,7 @@ class FieldForceModelContext(typing.Generic[_FieldForceModelContext__T]):
 _FieldShortPeriodTerms__T = typing.TypeVar('_FieldShortPeriodTerms__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldShortPeriodTerms(typing.Generic[_FieldShortPeriodTerms__T]):
     """
-    public interface FieldShortPeriodTerms<T extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>>
+    public interface FieldShortPeriodTerms<T extends CalculusFieldElement<T>>
     
         Additive short period terms contributing to the mean to osculating orbit mapping.
     
@@ -257,7 +252,7 @@ class FieldShortPeriodTerms(typing.Generic[_FieldShortPeriodTerms__T]):
 
 class ForceModelContext:
     """
-    public abstract class ForceModelContext extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    public abstract class ForceModelContext extends Object
     
         Base class for dsst force models attributes containers.
     
@@ -290,7 +285,24 @@ class ShortPeriodTerms:
         Also see:
             :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
     """
-    def getCoefficients(self, absoluteDate: org.orekit.time.AbsoluteDate, set: java.util.Set[str]) -> java.util.Map[str, typing.List[float]]: ...
+    def getCoefficients(self, absoluteDate: org.orekit.time.AbsoluteDate, set: java.util.Set[str]) -> java.util.Map[str, typing.List[float]]:
+        """
+            Computes the coefficients involved in the contributions.
+        
+            This method is intended mainly for validation purposes. Its output is highly dependent on the implementation details in
+            each force model and may change from version to version. It is *not* recommended to use it for any operational purposes.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                selected (Set<String> selected): set of coefficients that should be put in the map (empty set means all coefficients are selected)
+        
+            Returns:
+                the selected coefficients of the short periodic variations, in a map where all keys start with
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms.getCoefficientsKeyPrefix`
+        
+        
+        """
+        ...
     def getCoefficientsKeyPrefix(self) -> str:
         """
             Get the prefix for short period coefficients keys.
@@ -325,7 +337,7 @@ class ShortPeriodTerms:
 
 class AbstractGaussianContribution(DSSTForceModel):
     """
-    public abstract class AbstractGaussianContribution extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+    public abstract class AbstractGaussianContribution extends Object implements :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
     
         Common handling of :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel` methods for Gaussian
         contributions to DSST propagation.
@@ -336,7 +348,7 @@ class AbstractGaussianContribution(DSSTForceModel):
         This class implements the notion of numerical averaging of the DSST theory. Numerical averaging is mainly used for
         non-conservative disturbing forces such as atmospheric drag and solar radiation pressure.
     
-        Gaussian contributions can be expressed as: da :sub:`i` /dt = δa :sub:`i` /δv . q
+        Gaussian contributions can be expressed as: da :sub:`i` /dt = Î´a :sub:`i` /Î´v . q
     
     
         where:
@@ -361,8 +373,7 @@ class AbstractGaussianContribution(DSSTForceModel):
             Computes the mean equinoctial elements rates da :sub:`i` / dt.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
@@ -393,8 +404,7 @@ class AbstractGaussianContribution(DSSTForceModel):
             Computes the mean equinoctial elements rates da :sub:`i` / dt.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): current state information: date, kinematics, attitude
@@ -430,8 +440,8 @@ class AbstractGaussianContribution(DSSTForceModel):
             The default implementation of this method does nothing.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.init` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.init`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 initialState (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> initialState): spacecraft state at the start of propagation.
@@ -448,8 +458,8 @@ class AbstractGaussianContribution(DSSTForceModel):
             The default implementation of this method does nothing.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.init` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.init`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 initialState (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state at the start of propagation.
@@ -469,8 +479,8 @@ class AbstractGaussianContribution(DSSTForceModel):
             Register an attitude provider that can be used by the force model.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.registerAttitudeProvider` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.registerAttitudeProvider`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 provider (:class:`~org.orekit.attitudes.AttitudeProvider`): the :class:`~org.orekit.attitudes.AttitudeProvider`
@@ -485,28 +495,24 @@ class AbstractGaussianContribution(DSSTForceModel):
             Update the short period terms.
         
             The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to
-            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
+            were returned during the call to null.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 parameters (double[]): values of the force model parameters
                 meanStates (:class:`~org.orekit.propagation.SpacecraftState`...): mean states information: date, kinematics, attitude
         
-        public <T extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> void updateShortPeriodTerms(T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
+        public <T extends CalculusFieldElement<T>> void updateShortPeriodTerms(T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
         
             Update the short period terms.
         
             The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to
-            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
+            were returned during the call to null.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 parameters (T[]): values of the force model parameters
@@ -604,7 +610,7 @@ class AbstractGaussianContributionContext(ForceModelContext):
         ...
     def getTon2a(self) -> float:
         """
-            Get ton2a = 2 / (n² * a).
+            Get ton2a = 2 / (nÂ² * a).
         
             Returns:
                 ton2a
@@ -615,7 +621,7 @@ class AbstractGaussianContributionContext(ForceModelContext):
 
 class DSSTNewtonianAttraction(DSSTForceModel):
     """
-    public class DSSTNewtonianAttraction extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+    public class DSSTNewtonianAttraction extends Object implements :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
     
         Force model for Newtonian central body attraction for the
         :class:`~org.orekit.propagation.semianalytical.dsst.DSSTPropagator`.
@@ -625,7 +631,7 @@ class DSSTNewtonianAttraction(DSSTForceModel):
     """
     CENTRAL_ATTRACTION_COEFFICIENT: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` CENTRAL_ATTRACTION_COEFFICIENT
+    public static final String CENTRAL_ATTRACTION_COEFFICIENT
     
         Name of the single parameter of this model: the central attraction coefficient.
     
@@ -640,8 +646,8 @@ class DSSTNewtonianAttraction(DSSTForceModel):
             Get the discrete events related to the model.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getEventsDetectors` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getEventsDetectors`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Returns:
                 array of events detectors or null if the model is not related to any discrete events
@@ -655,11 +661,11 @@ class DSSTNewtonianAttraction(DSSTForceModel):
             Get the discrete events related to the model.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getFieldEventsDetectors` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getFieldEventsDetectors`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
-                field (:class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field used by default
+                field (Field<T> field): field used by default
         
             Returns:
                 array of events detectors or null if the model is not related to any discrete events
@@ -674,8 +680,7 @@ class DSSTNewtonianAttraction(DSSTForceModel):
             Computes the mean equinoctial elements rates da :sub:`i` / dt.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
@@ -693,8 +698,7 @@ class DSSTNewtonianAttraction(DSSTForceModel):
             Computes the mean equinoctial elements rates da :sub:`i` / dt.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): current state information: date, kinematics, attitude
@@ -709,10 +713,10 @@ class DSSTNewtonianAttraction(DSSTForceModel):
         ...
     def getMu(self) -> float:
         """
-            Get the central attraction coefficient μ.
+            Get the central attraction coefficient Î¼.
         
             Returns:
-                mu central attraction coefficient (m³/s²)
+                mu central attraction coefficient (mÂ³/sÂ²)
         
         
         """
@@ -730,8 +734,8 @@ class DSSTNewtonianAttraction(DSSTForceModel):
             Register an attitude provider that can be used by the force model.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.registerAttitudeProvider` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.registerAttitudeProvider`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 provider (:class:`~org.orekit.attitudes.AttitudeProvider`): the :class:`~org.orekit.attitudes.AttitudeProvider`
@@ -746,28 +750,24 @@ class DSSTNewtonianAttraction(DSSTForceModel):
             Update the short period terms.
         
             The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to
-            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
+            were returned during the call to null.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 parameters (double[]): values of the force model parameters
                 meanStates (:class:`~org.orekit.propagation.SpacecraftState`...): mean states information: date, kinematics, attitude
         
-        public <T extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> void updateShortPeriodTerms(T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
+        public <T extends CalculusFieldElement<T>> void updateShortPeriodTerms(T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
         
             Update the short period terms.
         
             The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to
-            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
+            were returned during the call to null.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 parameters (T[]): values of the force model parameters
@@ -795,7 +795,7 @@ class DSSTNewtonianAttractionContext(ForceModelContext):
     def __init__(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, doubleArray: typing.List[float]): ...
     def getGM(self) -> float:
         """
-            Get standard gravitational parameter μ for the body in m³/s².
+            Get standard gravitational parameter Î¼ for the body in mÂ³/sÂ².
         
             Returns:
                 gm
@@ -806,7 +806,7 @@ class DSSTNewtonianAttractionContext(ForceModelContext):
 
 class DSSTTesseral(DSSTForceModel):
     """
-    public class DSSTTesseral extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+    public class DSSTTesseral extends Object implements :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
     
         Tesseral contribution to the central body gravitational perturbation.
     
@@ -814,7 +814,7 @@ class DSSTTesseral(DSSTForceModel):
     """
     SHORT_PERIOD_PREFIX: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` SHORT_PERIOD_PREFIX
+    public static final String SHORT_PERIOD_PREFIX
     
         Name of the prefix for short period coefficients keys.
     
@@ -825,7 +825,7 @@ class DSSTTesseral(DSSTForceModel):
     """
     CM_COEFFICIENTS: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` CM_COEFFICIENTS
+    public static final String CM_COEFFICIENTS
     
         Identifier for cMm coefficients.
     
@@ -836,7 +836,7 @@ class DSSTTesseral(DSSTForceModel):
     """
     SM_COEFFICIENTS: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` SM_COEFFICIENTS
+    public static final String SM_COEFFICIENTS
     
         Identifier for sMm coefficients.
     
@@ -854,8 +854,8 @@ class DSSTTesseral(DSSTForceModel):
             Get the discrete events related to the model.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getEventsDetectors` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getEventsDetectors`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Returns:
                 array of events detectors or null if the model is not related to any discrete events
@@ -869,11 +869,11 @@ class DSSTTesseral(DSSTForceModel):
             Get the discrete events related to the model.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getFieldEventsDetectors` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getFieldEventsDetectors`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
-                field (:class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field used by default
+                field (Field<T> field): field used by default
         
             Returns:
                 array of events detectors or null if the model is not related to any discrete events
@@ -888,8 +888,7 @@ class DSSTTesseral(DSSTForceModel):
             Computes the mean equinoctial elements rates da :sub:`i` / dt.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 spacecraftState (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
@@ -907,8 +906,7 @@ class DSSTTesseral(DSSTForceModel):
             Computes the mean equinoctial elements rates da :sub:`i` / dt.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 spacecraftState (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> spacecraftState): current state information: date, kinematics, attitude
@@ -934,8 +932,8 @@ class DSSTTesseral(DSSTForceModel):
             Register an attitude provider that can be used by the force model.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.registerAttitudeProvider` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.registerAttitudeProvider`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 attitudeProvider (:class:`~org.orekit.attitudes.AttitudeProvider`): the :class:`~org.orekit.attitudes.AttitudeProvider`
@@ -950,28 +948,24 @@ class DSSTTesseral(DSSTForceModel):
             Update the short period terms.
         
             The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to
-            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
+            were returned during the call to null.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 parameters (double[]): values of the force model parameters
                 meanStates (:class:`~org.orekit.propagation.SpacecraftState`...): mean states information: date, kinematics, attitude
         
-        public <T extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> void updateShortPeriodTerms(T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
+        public <T extends CalculusFieldElement<T>> void updateShortPeriodTerms(T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
         
             Update the short period terms.
         
             The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to
-            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
+            were returned during the call to null.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 parameters (T[]): values of the force model parameters
@@ -1029,7 +1023,7 @@ class DSSTTesseralContext(ForceModelContext):
         ...
     def getChi(self) -> float:
         """
-            Get Χ = 1 / sqrt(1 - e²) = 1 / B.
+            Get Χ = 1 / sqrt(1 - eÂ²) = 1 / B.
         
             Returns:
                 chi
@@ -1039,7 +1033,7 @@ class DSSTTesseralContext(ForceModelContext):
         ...
     def getChi2(self) -> float:
         """
-            Get Χ².
+            Get ΧÂ².
         
             Returns:
                 chi2
@@ -1059,7 +1053,7 @@ class DSSTTesseralContext(ForceModelContext):
         ...
     def getE2(self) -> float:
         """
-            Get ecc².
+            Get eccÂ².
         
             Returns:
                 e2
@@ -1081,7 +1075,7 @@ class DSSTTesseralContext(ForceModelContext):
         ...
     def getMoa(self) -> float:
         """
-            Get μ / a .
+            Get Î¼ / a .
         
             Returns:
                 moa
@@ -1133,7 +1127,7 @@ class DSSTTesseralContext(ForceModelContext):
         ...
     def getTheta(self) -> float:
         """
-            Get Central body rotation angle θ.
+            Get Central body rotation angle Î¸.
         
             Returns:
                 theta
@@ -1144,13 +1138,13 @@ class DSSTTesseralContext(ForceModelContext):
 
 class DSSTThirdBody(DSSTForceModel):
     """
-    public class DSSTThirdBody extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+    public class DSSTThirdBody extends Object implements :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
     
         Third body attraction perturbation to the :class:`~org.orekit.propagation.semianalytical.dsst.DSSTPropagator`.
     """
     SHORT_PERIOD_PREFIX: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` SHORT_PERIOD_PREFIX
+    public static final String SHORT_PERIOD_PREFIX
     
         Name of the prefix for short period coefficients keys.
     
@@ -1161,7 +1155,7 @@ class DSSTThirdBody(DSSTForceModel):
     """
     ATTRACTION_COEFFICIENT: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ATTRACTION_COEFFICIENT
+    public static final String ATTRACTION_COEFFICIENT
     
         Name of the single parameter of this model: the attraction coefficient.
     
@@ -1186,8 +1180,8 @@ class DSSTThirdBody(DSSTForceModel):
             Get the discrete events related to the model.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getEventsDetectors` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getEventsDetectors`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Returns:
                 array of events detectors or null if the model is not related to any discrete events
@@ -1201,11 +1195,11 @@ class DSSTThirdBody(DSSTForceModel):
             Get the discrete events related to the model.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getFieldEventsDetectors` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getFieldEventsDetectors`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
-                field (:class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field used by default
+                field (Field<T> field): field used by default
         
             Returns:
                 array of events detectors or null if the model is not related to any discrete events
@@ -1220,8 +1214,7 @@ class DSSTThirdBody(DSSTForceModel):
             Computes the mean equinoctial elements rates da :sub:`i` / dt.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 currentState (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
@@ -1239,8 +1232,7 @@ class DSSTThirdBody(DSSTForceModel):
             Computes the mean equinoctial elements rates da :sub:`i` / dt.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 currentState (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> currentState): current state information: date, kinematics, attitude
@@ -1266,8 +1258,8 @@ class DSSTThirdBody(DSSTForceModel):
             Register an attitude provider that can be used by the force model.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.registerAttitudeProvider` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.registerAttitudeProvider`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 provider (:class:`~org.orekit.attitudes.AttitudeProvider`): the :class:`~org.orekit.attitudes.AttitudeProvider`
@@ -1282,28 +1274,24 @@ class DSSTThirdBody(DSSTForceModel):
             Update the short period terms.
         
             The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to
-            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
+            were returned during the call to null.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 parameters (double[]): values of the force model parameters
                 meanStates (:class:`~org.orekit.propagation.SpacecraftState`...): mean states information: date, kinematics, attitude
         
-        public <T extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> void updateShortPeriodTerms(T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
+        public <T extends CalculusFieldElement<T>> void updateShortPeriodTerms(T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
         
             Update the short period terms.
         
             The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to
-            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
+            were returned during the call to null.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 parameters (T[]): values of the force model parameters
@@ -1330,7 +1318,7 @@ class DSSTThirdBodyContext(ForceModelContext):
     """
     def getA(self) -> float:
         """
-            Get A = sqrt(μ * a).
+            Get A = sqrt(Î¼ * a).
         
             Returns:
                 A
@@ -1340,10 +1328,10 @@ class DSSTThirdBodyContext(ForceModelContext):
         ...
     def getAlpha(self) -> float:
         """
-            Get direction cosine α for central body.
+            Get direction cosine Î± for central body.
         
             Returns:
-                α
+                Î±
         
         
         """
@@ -1360,30 +1348,30 @@ class DSSTThirdBodyContext(ForceModelContext):
         ...
     def getBB(self) -> float:
         """
-            Get B².
+            Get BÂ².
         
             Returns:
-                B²
+                BÂ²
         
         
         """
         ...
     def getBBB(self) -> float:
         """
-            Get B³.
+            Get BÂ³.
         
             Returns:
-                B³
+                BÂ³
         
         
         """
         ...
     def getBeta(self) -> float:
         """
-            Get direction cosine β for central body.
+            Get direction cosine Î² for central body.
         
             Returns:
-                β
+                Î²
         
         
         """
@@ -1410,17 +1398,17 @@ class DSSTThirdBodyContext(ForceModelContext):
         ...
     def getGamma(self) -> float:
         """
-            Get direction cosine γ for central body.
+            Get direction cosine Î³ for central body.
         
             Returns:
-                γ
+                Î³
         
         
         """
         ...
     def getHXXX(self) -> float:
         """
-            Get hXXX = h * Χ³.
+            Get hXXX = h * ΧÂ³.
         
             Returns:
                 hXXX
@@ -1430,7 +1418,7 @@ class DSSTThirdBodyContext(ForceModelContext):
         ...
     def getKXXX(self) -> float:
         """
-            Get kXXX = h * Χ³.
+            Get kXXX = h * ΧÂ³.
         
             Returns:
                 kXXX
@@ -1532,7 +1520,7 @@ class DSSTThirdBodyContext(ForceModelContext):
         ...
     def getX(self) -> float:
         """
-            Get Χ = 1 / sqrt(1 - e²) = 1 / B.
+            Get Χ = 1 / sqrt(1 - eÂ²) = 1 / B.
         
             Returns:
                 Χ
@@ -1542,7 +1530,7 @@ class DSSTThirdBodyContext(ForceModelContext):
         ...
     def getb(self) -> float:
         """
-            Get b = 1 / (1 + sqrt(1 - e²)) = 1 / (1 + B).
+            Get b = 1 / (1 + sqrt(1 - eÂ²)) = 1 / (1 + B).
         
             Returns:
                 b
@@ -1553,13 +1541,13 @@ class DSSTThirdBodyContext(ForceModelContext):
 
 class DSSTZonal(DSSTForceModel):
     """
-    public class DSSTZonal extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+    public class DSSTZonal extends Object implements :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
     
         Zonal contribution to the central body gravitational perturbation.
     """
     SHORT_PERIOD_PREFIX: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` SHORT_PERIOD_PREFIX
+    public static final String SHORT_PERIOD_PREFIX
     
         Name of the prefix for short period coefficients keys.
     
@@ -1577,8 +1565,8 @@ class DSSTZonal(DSSTForceModel):
             Get the discrete events related to the model.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getEventsDetectors` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getEventsDetectors`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Returns:
                 array of events detectors or null if the model is not related to any discrete events
@@ -1592,11 +1580,11 @@ class DSSTZonal(DSSTForceModel):
             Get the discrete events related to the model.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getFieldEventsDetectors` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getFieldEventsDetectors`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
-                field (:class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field used by default
+                field (Field<T> field): field used by default
         
             Returns:
                 array of events detectors or null if the model is not related to any discrete events
@@ -1611,8 +1599,7 @@ class DSSTZonal(DSSTForceModel):
             Computes the mean equinoctial elements rates da :sub:`i` / dt.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 spacecraftState (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
@@ -1630,8 +1617,7 @@ class DSSTZonal(DSSTForceModel):
             Computes the mean equinoctial elements rates da :sub:`i` / dt.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 spacecraftState (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> spacecraftState): current state information: date, kinematics, attitude
@@ -1667,8 +1653,8 @@ class DSSTZonal(DSSTForceModel):
             Register an attitude provider that can be used by the force model.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.registerAttitudeProvider` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.registerAttitudeProvider`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 attitudeProvider (:class:`~org.orekit.attitudes.AttitudeProvider`): the :class:`~org.orekit.attitudes.AttitudeProvider`
@@ -1683,28 +1669,24 @@ class DSSTZonal(DSSTForceModel):
             Update the short period terms.
         
             The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to
-            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
+            were returned during the call to null.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 parameters (double[]): values of the force model parameters
                 meanStates (:class:`~org.orekit.propagation.SpacecraftState`...): mean states information: date, kinematics, attitude
         
-        public <T extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> void updateShortPeriodTerms(T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
+        public <T extends CalculusFieldElement<T>> void updateShortPeriodTerms(T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
         
             Update the short period terms.
         
             The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to
-            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
+            were returned during the call to null.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms` in
-                interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 parameters (T[]): values of the force model parameters
@@ -1762,7 +1744,7 @@ class DSSTZonalContext(ForceModelContext):
         ...
     def getCXO2N2A2(self) -> float:
         """
-            Get (C * χ) / ( 2 * n² * a² ).
+            Get (C * Ï‡) / ( 2 * nÂ² * aÂ² ).
         
             Returns:
                 cxo2n2a2
@@ -1782,7 +1764,7 @@ class DSSTZonalContext(ForceModelContext):
         ...
     def getK2MH2(self) -> float:
         """
-            Get k² - h².
+            Get kÂ² - hÂ².
         
             Returns:
                 k2mh2
@@ -1792,7 +1774,7 @@ class DSSTZonalContext(ForceModelContext):
         ...
     def getK2MH2O2(self) -> float:
         """
-            Get (k² - h²) / 2.
+            Get (kÂ² - hÂ²) / 2.
         
             Returns:
                 k2mh2o2
@@ -1834,7 +1816,7 @@ class DSSTZonalContext(ForceModelContext):
         ...
     def getMuoa(self) -> float:
         """
-            Get μ / a .
+            Get Î¼ / a .
         
             Returns:
                 muoa
@@ -1844,7 +1826,7 @@ class DSSTZonalContext(ForceModelContext):
         ...
     def getOON2A2(self) -> float:
         """
-            Get 1 / (n² * a²).
+            Get 1 / (nÂ² * aÂ²).
         
             Returns:
                 oon2a2
@@ -1874,7 +1856,7 @@ class DSSTZonalContext(ForceModelContext):
         ...
     def getX(self) -> float:
         """
-            Get Χ = 1 / sqrt(1 - e²) = 1 / B.
+            Get Χ = 1 / sqrt(1 - eÂ²) = 1 / B.
         
             Returns:
                 Χ
@@ -1884,7 +1866,7 @@ class DSSTZonalContext(ForceModelContext):
         ...
     def getX2ON2A2XP1(self) -> float:
         """
-            Get (χ²) / (n² * a² * (χ + 1 ) ).
+            Get (Ï‡Â²) / (nÂ² * aÂ² * (Ï‡ + 1 ) ).
         
             Returns:
                 x2on2a2xp1
@@ -1894,7 +1876,7 @@ class DSSTZonalContext(ForceModelContext):
         ...
     def getX3ON2A(self) -> float:
         """
-            Get χ³ / (n² * a).
+            Get Ï‡Â³ / (nÂ² * a).
         
             Returns:
                 x3on2a
@@ -1904,7 +1886,7 @@ class DSSTZonalContext(ForceModelContext):
         ...
     def getXON2A2(self) -> float:
         """
-            Get χ / (n² * a²).
+            Get Ï‡ / (nÂ² * aÂ²).
         
             Returns:
                 xon2a2
@@ -1914,20 +1896,20 @@ class DSSTZonalContext(ForceModelContext):
         ...
     def getXX(self) -> float:
         """
-            Get Χ².
+            Get ΧÂ².
         
             Returns:
-                Χ².
+                ΧÂ².
         
         
         """
         ...
     def getXXX(self) -> float:
         """
-            Get Χ³.
+            Get ΧÂ³.
         
             Returns:
-                Χ³
+                ΧÂ³
         
         
         """
@@ -1936,7 +1918,7 @@ class DSSTZonalContext(ForceModelContext):
 _FieldAbstractGaussianContributionContext__T = typing.TypeVar('_FieldAbstractGaussianContributionContext__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAbstractGaussianContributionContext(FieldForceModelContext[_FieldAbstractGaussianContributionContext__T], typing.Generic[_FieldAbstractGaussianContributionContext__T]):
     """
-    public class FieldAbstractGaussianContributionContext<T extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.FieldForceModelContext`<T>
+    public class FieldAbstractGaussianContributionContext<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.FieldForceModelContext`<T>
     
         This class is a container for the common "field" parameters used in
         :class:`~org.orekit.propagation.semianalytical.dsst.forces.AbstractGaussianContribution`.
@@ -1948,7 +1930,7 @@ class FieldAbstractGaussianContributionContext(FieldForceModelContext[_FieldAbst
     """
     def getA(self) -> _FieldAbstractGaussianContributionContext__T:
         """
-            Get A = sqrt(μ * a).
+            Get A = sqrt(Î¼ * a).
         
             Returns:
                 A
@@ -2030,7 +2012,7 @@ class FieldAbstractGaussianContributionContext(FieldForceModelContext[_FieldAbst
         ...
     def getTon2a(self) -> _FieldAbstractGaussianContributionContext__T:
         """
-            Get ton2a = 2 / (n² * a).
+            Get ton2a = 2 / (nÂ² * a).
         
             Returns:
                 ton2a
@@ -2042,7 +2024,7 @@ class FieldAbstractGaussianContributionContext(FieldForceModelContext[_FieldAbst
 _FieldDSSTNewtonianAttractionContext__T = typing.TypeVar('_FieldDSSTNewtonianAttractionContext__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldDSSTNewtonianAttractionContext(FieldForceModelContext[_FieldDSSTNewtonianAttractionContext__T], typing.Generic[_FieldDSSTNewtonianAttractionContext__T]):
     """
-    public class FieldDSSTNewtonianAttractionContext<T extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.FieldForceModelContext`<T>
+    public class FieldDSSTNewtonianAttractionContext<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.FieldForceModelContext`<T>
     
         This class is a container for the common "field" parameters used in
         :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTNewtonianAttraction`.
@@ -2055,7 +2037,7 @@ class FieldDSSTNewtonianAttractionContext(FieldForceModelContext[_FieldDSSTNewto
     """
     def getGM(self) -> _FieldDSSTNewtonianAttractionContext__T:
         """
-            Get standard gravitational parameter μ for the body in m³/s².
+            Get standard gravitational parameter Î¼ for the body in mÂ³/sÂ².
         
             Returns:
                 gm
@@ -2067,7 +2049,7 @@ class FieldDSSTNewtonianAttractionContext(FieldForceModelContext[_FieldDSSTNewto
 _FieldDSSTTesseralContext__T = typing.TypeVar('_FieldDSSTTesseralContext__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldDSSTTesseralContext(FieldForceModelContext[_FieldDSSTTesseralContext__T], typing.Generic[_FieldDSSTTesseralContext__T]):
     """
-    public class FieldDSSTTesseralContext<T extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.FieldForceModelContext`<T>
+    public class FieldDSSTTesseralContext<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.FieldForceModelContext`<T>
     
         This class is a container for the common "field" parameters used in
         :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTTesseral`.
@@ -2111,7 +2093,7 @@ class FieldDSSTTesseralContext(FieldForceModelContext[_FieldDSSTTesseralContext_
         ...
     def getChi(self) -> _FieldDSSTTesseralContext__T:
         """
-            Get Χ = 1 / sqrt(1 - e²) = 1 / B.
+            Get Χ = 1 / sqrt(1 - eÂ²) = 1 / B.
         
             Returns:
                 chi
@@ -2121,7 +2103,7 @@ class FieldDSSTTesseralContext(FieldForceModelContext[_FieldDSSTTesseralContext_
         ...
     def getChi2(self) -> _FieldDSSTTesseralContext__T:
         """
-            Get Χ².
+            Get ΧÂ².
         
             Returns:
                 chi2
@@ -2141,7 +2123,7 @@ class FieldDSSTTesseralContext(FieldForceModelContext[_FieldDSSTTesseralContext_
         ...
     def getE2(self) -> _FieldDSSTTesseralContext__T:
         """
-            Get ecc².
+            Get eccÂ².
         
             Returns:
                 e2
@@ -2163,7 +2145,7 @@ class FieldDSSTTesseralContext(FieldForceModelContext[_FieldDSSTTesseralContext_
         ...
     def getMoa(self) -> _FieldDSSTTesseralContext__T:
         """
-            Get μ / a .
+            Get Î¼ / a .
         
             Returns:
                 moa
@@ -2215,7 +2197,7 @@ class FieldDSSTTesseralContext(FieldForceModelContext[_FieldDSSTTesseralContext_
         ...
     def getTheta(self) -> _FieldDSSTTesseralContext__T:
         """
-            Get Central body rotation angle θ.
+            Get Central body rotation angle Î¸.
         
             Returns:
                 theta
@@ -2227,7 +2209,7 @@ class FieldDSSTTesseralContext(FieldForceModelContext[_FieldDSSTTesseralContext_
 _FieldDSSTThirdBodyContext__T = typing.TypeVar('_FieldDSSTThirdBodyContext__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldDSSTThirdBodyContext(FieldForceModelContext[_FieldDSSTThirdBodyContext__T], typing.Generic[_FieldDSSTThirdBodyContext__T]):
     """
-    public class FieldDSSTThirdBodyContext<T extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.FieldForceModelContext`<T>
+    public class FieldDSSTThirdBodyContext<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.FieldForceModelContext`<T>
     
         This class is a container for the common "field" parameters used in
         :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTThirdBody`.
@@ -2240,7 +2222,7 @@ class FieldDSSTThirdBodyContext(FieldForceModelContext[_FieldDSSTThirdBodyContex
     """
     def getA(self) -> _FieldDSSTThirdBodyContext__T:
         """
-            Get A = sqrt(μ * a).
+            Get A = sqrt(Î¼ * a).
         
             Returns:
                 A
@@ -2250,10 +2232,10 @@ class FieldDSSTThirdBodyContext(FieldForceModelContext[_FieldDSSTThirdBodyContex
         ...
     def getAlpha(self) -> _FieldDSSTThirdBodyContext__T:
         """
-            Get direction cosine α for central body.
+            Get direction cosine Î± for central body.
         
             Returns:
-                α
+                Î±
         
         
         """
@@ -2270,30 +2252,30 @@ class FieldDSSTThirdBodyContext(FieldForceModelContext[_FieldDSSTThirdBodyContex
         ...
     def getBB(self) -> _FieldDSSTThirdBodyContext__T:
         """
-            Get B².
+            Get BÂ².
         
             Returns:
-                B²
+                BÂ²
         
         
         """
         ...
     def getBBB(self) -> _FieldDSSTThirdBodyContext__T:
         """
-            Get B³.
+            Get BÂ³.
         
             Returns:
-                B³
+                BÂ³
         
         
         """
         ...
     def getBeta(self) -> _FieldDSSTThirdBodyContext__T:
         """
-            Get direction cosine β for central body.
+            Get direction cosine Î² for central body.
         
             Returns:
-                β
+                Î²
         
         
         """
@@ -2320,17 +2302,17 @@ class FieldDSSTThirdBodyContext(FieldForceModelContext[_FieldDSSTThirdBodyContex
         ...
     def getGamma(self) -> _FieldDSSTThirdBodyContext__T:
         """
-            Get direction cosine γ for central body.
+            Get direction cosine Î³ for central body.
         
             Returns:
-                γ
+                Î³
         
         
         """
         ...
     def getHXXX(self) -> _FieldDSSTThirdBodyContext__T:
         """
-            Get hXXX = h * Χ³.
+            Get hXXX = h * ΧÂ³.
         
             Returns:
                 hXXX
@@ -2340,7 +2322,7 @@ class FieldDSSTThirdBodyContext(FieldForceModelContext[_FieldDSSTThirdBodyContex
         ...
     def getKXXX(self) -> _FieldDSSTThirdBodyContext__T:
         """
-            Get kXXX = h * Χ³.
+            Get kXXX = h * ΧÂ³.
         
             Returns:
                 kXXX
@@ -2442,7 +2424,7 @@ class FieldDSSTThirdBodyContext(FieldForceModelContext[_FieldDSSTThirdBodyContex
         ...
     def getX(self) -> _FieldDSSTThirdBodyContext__T:
         """
-            Get Χ = 1 / sqrt(1 - e²) = 1 / B.
+            Get Χ = 1 / sqrt(1 - eÂ²) = 1 / B.
         
             Returns:
                 Χ
@@ -2452,7 +2434,7 @@ class FieldDSSTThirdBodyContext(FieldForceModelContext[_FieldDSSTThirdBodyContex
         ...
     def getb(self) -> _FieldDSSTThirdBodyContext__T:
         """
-            Get b = 1 / (1 + sqrt(1 - e²)) = 1 / (1 + B).
+            Get b = 1 / (1 + sqrt(1 - eÂ²)) = 1 / (1 + B).
         
             Returns:
                 b
@@ -2464,7 +2446,7 @@ class FieldDSSTThirdBodyContext(FieldForceModelContext[_FieldDSSTThirdBodyContex
 _FieldDSSTZonalContext__T = typing.TypeVar('_FieldDSSTZonalContext__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldDSSTZonalContext(FieldForceModelContext[_FieldDSSTZonalContext__T], typing.Generic[_FieldDSSTZonalContext__T]):
     """
-    public class FieldDSSTZonalContext<T extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.FieldForceModelContext`<T>
+    public class FieldDSSTZonalContext<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.FieldForceModelContext`<T>
     
         This class is a container for the common "field" parameters used in
         :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTZonal`.
@@ -2508,7 +2490,7 @@ class FieldDSSTZonalContext(FieldForceModelContext[_FieldDSSTZonalContext__T], t
         ...
     def getCXO2N2A2(self) -> _FieldDSSTZonalContext__T:
         """
-            Get (C * χ) / ( 2 * n² * a² ).
+            Get (C * Ï‡) / ( 2 * nÂ² * aÂ² ).
         
             Returns:
                 cxo2n2a2
@@ -2528,7 +2510,7 @@ class FieldDSSTZonalContext(FieldForceModelContext[_FieldDSSTZonalContext__T], t
         ...
     def getK2MH2(self) -> _FieldDSSTZonalContext__T:
         """
-            Get k² - h².
+            Get kÂ² - hÂ².
         
             Returns:
                 k2mh2
@@ -2538,7 +2520,7 @@ class FieldDSSTZonalContext(FieldForceModelContext[_FieldDSSTZonalContext__T], t
         ...
     def getK2MH2O2(self) -> _FieldDSSTZonalContext__T:
         """
-            Get (k² - h²) / 2.
+            Get (kÂ² - hÂ²) / 2.
         
             Returns:
                 k2mh2o2
@@ -2580,7 +2562,7 @@ class FieldDSSTZonalContext(FieldForceModelContext[_FieldDSSTZonalContext__T], t
         ...
     def getMuoa(self) -> _FieldDSSTZonalContext__T:
         """
-            Get μ / a .
+            Get Î¼ / a .
         
             Returns:
                 muoa
@@ -2590,7 +2572,7 @@ class FieldDSSTZonalContext(FieldForceModelContext[_FieldDSSTZonalContext__T], t
         ...
     def getOON2A2(self) -> _FieldDSSTZonalContext__T:
         """
-            Get 1 / (n² * a²).
+            Get 1 / (nÂ² * aÂ²).
         
             Returns:
                 oon2a2
@@ -2620,7 +2602,7 @@ class FieldDSSTZonalContext(FieldForceModelContext[_FieldDSSTZonalContext__T], t
         ...
     def getX(self) -> _FieldDSSTZonalContext__T:
         """
-            Get Χ = 1 / sqrt(1 - e²) = 1 / B.
+            Get Χ = 1 / sqrt(1 - eÂ²) = 1 / B.
         
             Returns:
                 Χ
@@ -2630,7 +2612,7 @@ class FieldDSSTZonalContext(FieldForceModelContext[_FieldDSSTZonalContext__T], t
         ...
     def getX2ON2A2XP1(self) -> _FieldDSSTZonalContext__T:
         """
-            Get (χ²) / (n² * a² * (χ + 1 ) ).
+            Get (Ï‡Â²) / (nÂ² * aÂ² * (Ï‡ + 1 ) ).
         
             Returns:
                 x2on2a2xp1
@@ -2640,7 +2622,7 @@ class FieldDSSTZonalContext(FieldForceModelContext[_FieldDSSTZonalContext__T], t
         ...
     def getX3ON2A(self) -> _FieldDSSTZonalContext__T:
         """
-            Get χ³ / (n² * a).
+            Get Ï‡Â³ / (nÂ² * a).
         
             Returns:
                 x3on2a
@@ -2650,7 +2632,7 @@ class FieldDSSTZonalContext(FieldForceModelContext[_FieldDSSTZonalContext__T], t
         ...
     def getXON2A2(self) -> _FieldDSSTZonalContext__T:
         """
-            Get χ / (n² * a²).
+            Get Ï‡ / (nÂ² * aÂ²).
         
             Returns:
                 xon2a2
@@ -2660,20 +2642,333 @@ class FieldDSSTZonalContext(FieldForceModelContext[_FieldDSSTZonalContext__T], t
         ...
     def getXX(self) -> _FieldDSSTZonalContext__T:
         """
-            Get Χ².
+            Get ΧÂ².
         
             Returns:
-                Χ².
+                ΧÂ².
         
         
         """
         ...
     def getXXX(self) -> _FieldDSSTZonalContext__T:
         """
-            Get Χ³.
+            Get ΧÂ³.
         
             Returns:
-                Χ³
+                ΧÂ³
+        
+        
+        """
+        ...
+
+class PythonDSSTForceModel(DSSTForceModel):
+    """
+    public class PythonDSSTForceModel extends Object implements :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def getEventsDetectors(self) -> typing.List[org.orekit.propagation.events.EventDetector]:
+        """
+            Get the discrete events related to the model.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getEventsDetectors`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+        
+            Returns:
+                array of events detectors or null if the model is not related to any discrete events
+        
+        
+        """
+        ...
+    _getFieldEventsDetectors__T = typing.TypeVar('_getFieldEventsDetectors__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    def getFieldEventsDetectors(self, field: org.hipparchus.Field[_getFieldEventsDetectors__T]) -> typing.List[org.orekit.propagation.events.FieldEventDetector[_getFieldEventsDetectors__T]]:
+        """
+            Get the discrete events related to the model.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getFieldEventsDetectors`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+        
+            Parameters:
+                field (Field<T> field): field used by default
+        
+            Returns:
+                array of events detectors or null if the model is not related to any discrete events
+        
+        
+        """
+        ...
+    _getMeanElementRate_1__T = typing.TypeVar('_getMeanElementRate_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getMeanElementRate(self, spacecraftState: org.orekit.propagation.SpacecraftState, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, doubleArray: typing.List[float]) -> typing.List[float]:
+        """
+            Computes the mean equinoctial elements rates da :sub:`i` / dt.
+        
+            Specified by:
+                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
+                auxiliaryElements (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements`): auxiliary elements related to the current orbit
+                parameters (double[]): values of the force model parameters
+        
+            Returns:
+                the mean element rates dai/dt
+        
+        """
+        ...
+    @typing.overload
+    def getMeanElementRate(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getMeanElementRate_1__T], fieldAuxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_getMeanElementRate_1__T], tArray: typing.List[_getMeanElementRate_1__T]) -> typing.List[_getMeanElementRate_1__T]:
+        """
+            Description copied from interface: 
+            Computes the mean equinoctial elements rates da :sub:`i` / dt.
+        
+            Specified by:
+                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): current state information: date, kinematics, attitude
+                auxiliaryElements (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements`<T> auxiliaryElements): auxiliary elements related to the current orbit
+                parameters (T[]): values of the force model parameters
+        
+            Returns:
+                the mean element rates dai/dt
+        
+        
+        """
+        ...
+    _getMeanElementRate_FFT__T = typing.TypeVar('_getMeanElementRate_FFT__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    def getMeanElementRate_FFT(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getMeanElementRate_FFT__T], fieldAuxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_getMeanElementRate_FFT__T], tArray: typing.List[_getMeanElementRate_FFT__T]) -> typing.List[_getMeanElementRate_FFT__T]:
+        """
+            Computes the mean equinoctial elements rates da :sub:`i` / dt.
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): current state information: date, kinematics, attitude
+                auxiliaryElements (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements`<T> auxiliaryElements): auxiliary elements related to the current orbit
+                parameters (T[]): values of the force model parameters
+        
+            Returns:
+                the mean element rates dai/dt
+        
+        
+        """
+        ...
+    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
+    _initializeShortPeriodTerms_0__T = typing.TypeVar('_initializeShortPeriodTerms_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def initializeShortPeriodTerms(self, fieldAuxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_initializeShortPeriodTerms_0__T], propagationType: org.orekit.propagation.PropagationType, tArray: typing.List[_initializeShortPeriodTerms_0__T]) -> java.util.List[FieldShortPeriodTerms[_initializeShortPeriodTerms_0__T]]: ...
+    @typing.overload
+    def initializeShortPeriodTerms(self, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements, propagationType: org.orekit.propagation.PropagationType, doubleArray: typing.List[float]) -> java.util.List[ShortPeriodTerms]: ...
+    _initializeShortPeriodTerms_FPT__T = typing.TypeVar('_initializeShortPeriodTerms_FPT__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    def initializeShortPeriodTerms_FPT(self, fieldAuxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_initializeShortPeriodTerms_FPT__T], propagationType: org.orekit.propagation.PropagationType, tArray: typing.List[_initializeShortPeriodTerms_FPT__T]) -> java.util.List[FieldShortPeriodTerms[_initializeShortPeriodTerms_FPT__T]]: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+    def registerAttitudeProvider(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider) -> None:
+        """
+            Register an attitude provider.
+        
+            Register an attitude provider that can be used by the force model.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.registerAttitudeProvider`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+        
+            Parameters:
+                provider (:class:`~org.orekit.attitudes.AttitudeProvider`): the :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+        
+        """
+        ...
+    _updateShortPeriodTerms_1__T = typing.TypeVar('_updateShortPeriodTerms_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def updateShortPeriodTerms(self, doubleArray: typing.List[float], *spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
+        """
+            Update the short period terms.
+        
+            The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
+            were returned during the call to null.
+        
+            Specified by:
+                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+        
+            Parameters:
+                parameters (double[]): values of the force model parameters
+                meanStates (:class:`~org.orekit.propagation.SpacecraftState`...): mean states information: date, kinematics, attitude
+        
+        public <T extends CalculusFieldElement<T>> void updateShortPeriodTerms(T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
+        
+            Description copied from interface: 
+            Update the short period terms.
+        
+            The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
+            were returned during the call to null.
+        
+            Specified by:
+                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+        
+            Parameters:
+                parameters (T[]): values of the force model parameters
+                meanStates (:class:`~org.orekit.propagation.FieldSpacecraftState`<T>...): mean states information: date, kinematics, attitude
+        
+        
+        """
+        ...
+    @typing.overload
+    def updateShortPeriodTerms(self, tArray: typing.List[_updateShortPeriodTerms_1__T], *fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_updateShortPeriodTerms_1__T]) -> None: ...
+    _updateShortPeriodTerms_TF__T = typing.TypeVar('_updateShortPeriodTerms_TF__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    def updateShortPeriodTerms_TF(self, tArray: typing.List[_updateShortPeriodTerms_TF__T], *fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_updateShortPeriodTerms_TF__T]) -> None: ...
+
+_PythonFieldShortPeriodTerms__T = typing.TypeVar('_PythonFieldShortPeriodTerms__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class PythonFieldShortPeriodTerms(FieldShortPeriodTerms[_PythonFieldShortPeriodTerms__T], typing.Generic[_PythonFieldShortPeriodTerms__T]):
+    """
+    public class PythonFieldShortPeriodTerms<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.semianalytical.dsst.forces.FieldShortPeriodTerms`<T>
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def getCoefficients(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldShortPeriodTerms__T], set: java.util.Set[str]) -> java.util.Map[str, typing.List[_PythonFieldShortPeriodTerms__T]]: ...
+    def getCoefficientsKeyPrefix(self) -> str:
+        """
+            Get the prefix for short period coefficients keys.
+        
+            This prefix is used to identify the coefficients of the current force model from the coefficients pertaining to other
+            force models. All the keys in the map returned by
+            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.PythonFieldShortPeriodTerms.getCoefficients` start with this
+            prefix, which must be unique among all providers.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.FieldShortPeriodTerms.getCoefficientsKeyPrefix`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.FieldShortPeriodTerms`
+        
+            Returns:
+                the prefix for short periodic coefficients keys
+        
+            Also see:
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.PythonFieldShortPeriodTerms.getCoefficients`
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+    def value(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_PythonFieldShortPeriodTerms__T]) -> typing.List[_PythonFieldShortPeriodTerms__T]: ...
+
+class PythonShortPeriodTerms(ShortPeriodTerms):
+    """
+    public class PythonShortPeriodTerms extends Object implements :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def getCoefficients(self, absoluteDate: org.orekit.time.AbsoluteDate, set: java.util.Set[str]) -> java.util.Map[str, typing.List[float]]:
+        """
+            Computes the coefficients involved in the contributions.
+        
+            This method is intended mainly for validation purposes. Its output is highly dependent on the implementation details in
+            each force model and may change from version to version. It is *not* recommended to use it for any operational purposes.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms.getCoefficients`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                selected (Set<String> selected): set of coefficients that should be put in the map (empty set means all coefficients are selected)
+        
+            Returns:
+                the selected coefficients of the short periodic variations, in a map where all keys start with
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.PythonShortPeriodTerms.getCoefficientsKeyPrefix`
+        
+        
+        """
+        ...
+    def getCoefficientsKeyPrefix(self) -> str:
+        """
+            Get the prefix for short period coefficients keys.
+        
+            This prefix is used to identify the coefficients of the current force model from the coefficients pertaining to other
+            force models. All the keys in the map returned by
+            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.PythonShortPeriodTerms.getCoefficients` start with this
+            prefix, which must be unique among all providers.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms.getCoefficientsKeyPrefix`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms`
+        
+            Returns:
+                the prefix for short periodic coefficients keys
+        
+            Also see:
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.PythonShortPeriodTerms.getCoefficients`
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+    def value(self, orbit: org.orekit.orbits.Orbit) -> typing.List[float]:
+        """
+            Evaluate the contributions of the short period terms.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms.value`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms`
+        
+            Parameters:
+                meanOrbit (:class:`~org.orekit.orbits.Orbit`): mean orbit to which the short period contribution applies
+        
+            Returns:
+                short period terms contributions
         
         
         """
@@ -2729,7 +3024,7 @@ class DSSTAtmosphericDrag(AbstractGaussianContribution):
             Get the discrete events related to the model.
         
             Parameters:
-                field (:class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field used by default
+                field (Field<T> field): field used by default
         
             Returns:
                 array of events detectors or null if the model is not related to any discrete events
@@ -2803,7 +3098,7 @@ class DSSTSolarRadiationPressure(AbstractGaussianContribution):
             Get the discrete events related to the model.
         
             Parameters:
-                field (:class:`~org.orekit.propagation.semianalytical.dsst.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field used by default
+                field (Field<T> field): field used by default
         
             Returns:
                 array of events detectors or null if the model is not related to any discrete events
@@ -2819,6 +3114,97 @@ class DSSTSolarRadiationPressure(AbstractGaussianContribution):
                 the spacecraft shape.
         
         
+        """
+        ...
+
+class PythonAbstractGaussianContribution(AbstractGaussianContribution):
+    """
+    public class PythonAbstractGaussianContribution extends :class:`~org.orekit.propagation.semianalytical.dsst.forces.AbstractGaussianContribution`
+    """
+    def __init__(self, string: str, double: float, forceModel: org.orekit.forces.ForceModel, double2: float): ...
+    def finalize(self) -> None: ...
+    def getEventsDetectors(self) -> typing.List[org.orekit.propagation.events.EventDetector]:
+        """
+            Get the discrete events related to the model. Extension point for Python.
+        
+            Returns:
+                array of events detectors or null if the model is not related to any discrete events
+        
+        
+        """
+        ...
+    _getFieldEventsDetectors__T = typing.TypeVar('_getFieldEventsDetectors__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    def getFieldEventsDetectors(self, field: org.hipparchus.Field[_getFieldEventsDetectors__T]) -> typing.List[org.orekit.propagation.events.FieldEventDetector[_getFieldEventsDetectors__T]]:
+        """
+            Get the discrete events related to the model.
+        
+            Parameters:
+                field (Field<T> field): field used by default
+        
+            Returns:
+                array of events detectors or null if the model is not related to any discrete events
+        
+        
+        """
+        ...
+    _getLLimits_1__T = typing.TypeVar('_getLLimits_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getLLimits(self, spacecraftState: org.orekit.propagation.SpacecraftState, auxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements) -> typing.List[float]:
+        """
+            Compute the limits in L, the true longitude, for integration.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.AbstractGaussianContribution.getLLimits`Â in
+                classÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.AbstractGaussianContribution`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
+                auxiliaryElements (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.AuxiliaryElements`): auxiliary elements related to the current orbit
+        
+            Returns:
+                the integration limits in L
+        
+        """
+        ...
+    @typing.overload
+    def getLLimits(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getLLimits_1__T], fieldAuxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_getLLimits_1__T]) -> typing.List[_getLLimits_1__T]:
+        """
+            Compute the limits in L, the true longitude, for integration.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.AbstractGaussianContribution.getLLimits`Â in
+                classÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.AbstractGaussianContribution`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): current state information: date, kinematics, attitude
+                auxiliaryElements (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements`<T> auxiliaryElements): auxiliary elements related to the current orbit
+        
+            Returns:
+                the integration limits in L
+        
+        
+        """
+        ...
+    _getLLimits_FF__T = typing.TypeVar('_getLLimits_FF__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    def getLLimits_FF(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getLLimits_FF__T], fieldAuxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_getLLimits_FF__T]) -> typing.List[_getLLimits_FF__T]: ...
+    def getParametersDriversWithoutMu(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
         """
         ...
 
@@ -2847,4 +3233,8 @@ class __module_protocol__(typing.Protocol):
     FieldForceModelContext: typing.Type[FieldForceModelContext]
     FieldShortPeriodTerms: typing.Type[FieldShortPeriodTerms]
     ForceModelContext: typing.Type[ForceModelContext]
+    PythonAbstractGaussianContribution: typing.Type[PythonAbstractGaussianContribution]
+    PythonDSSTForceModel: typing.Type[PythonDSSTForceModel]
+    PythonFieldShortPeriodTerms: typing.Type[PythonFieldShortPeriodTerms]
+    PythonShortPeriodTerms: typing.Type[PythonShortPeriodTerms]
     ShortPeriodTerms: typing.Type[ShortPeriodTerms]

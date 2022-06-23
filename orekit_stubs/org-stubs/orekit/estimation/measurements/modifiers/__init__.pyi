@@ -44,6 +44,25 @@ class AbstractRelativisticClockModifier:
     """
     def __init__(self): ...
 
+class AbstractRelativisticJ2ClockModifier:
+    """
+    public class AbstractRelativisticJ2ClockModifier extends Object
+    
+        Class modifying theoretical measurements with relativistic J2 clock correction.
+    
+        Relativistic clock correction of the effects caused by the oblateness of Earth on the gravity potential.
+    
+        The time delay caused by this effect is computed based on the orbital parameters of the emitter's orbit.
+    
+        Since:
+            11.2
+    
+        Also see:
+            "Teunissen, Peter, and Oliver Montenbruck, eds. Springer handbook of global navigation satellite systems. Chapter 19.2.
+            Equation 19.18 Springer, 2017."
+    """
+    def __init__(self, double: float, double2: float, double3: float): ...
+
 class AbstractShapiroBaseModifier:
     """
     public class AbstractShapiroBaseModifier extends Object
@@ -110,6 +129,127 @@ class AngularTroposphericDelayModifier(org.orekit.estimation.measurements.Estima
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.AngularAzEl]) -> None: ...
 
+class BaseRangeIonosphericDelayModifier:
+    """
+    public abstract class BaseRangeIonosphericDelayModifier extends Object
+    
+        Base class modifying theoretical range measurement with ionospheric delay. The effect of ionospheric correction on the
+        range is directly computed through the computation of the ionospheric delay. The ionospheric delay depends on the
+        frequency of the signal (GNSS, VLBI, ...). For optical measurements (e.g. SLR), the ray is not affected by ionosphere
+        charged particles.
+    
+        Since 10.0, state derivatives and ionospheric parameters derivates are computed using automatic differentiation.
+    
+        Since:
+            11.2
+    """
+    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
+
+class BaseRangeRateIonosphericDelayModifier:
+    """
+    public abstract class BaseRangeRateIonosphericDelayModifier extends Object
+    
+        Base class modifying theoretical range-rate measurement with ionospheric delay. The effect of ionospheric correction on
+        the range-rate is directly computed through the computation of the ionospheric delay difference with respect to time.
+        The ionospheric delay depends on the frequency of the signal (GNSS, VLBI, ...). For optical measurements (e.g. SLR), the
+        ray is not affected by ionosphere charged particles.
+    
+        Since 10.0, state derivatives and ionospheric parameters derivates are computed using automatic differentiation.
+    
+        Since:
+            11.2
+    """
+    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
+
+class BaseRangeRateTroposphericDelayModifier:
+    """
+    public abstract class BaseRangeRateTroposphericDelayModifier extends Object
+    
+        Baselass modifying theoretical range-rate measurements with tropospheric delay. The effect of tropospheric correction on
+        the range-rate is directly computed through the computation of the tropospheric delay difference with respect to time.
+        In general, for GNSS, VLBI, ... there is hardly any frequency dependence in the delay. For SLR techniques however, the
+        frequency dependence is sensitive.
+    
+        Since:
+            11.2
+    """
+    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
+    _rangeRateErrorTroposphericModel_1__T = typing.TypeVar('_rangeRateErrorTroposphericModel_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def rangeRateErrorTroposphericModel(self, groundStation: org.orekit.estimation.measurements.GroundStation, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
+        """
+            Compute the measurement error due to Troposphere.
+        
+            Parameters:
+                station (:class:`~org.orekit.estimation.measurements.GroundStation`): station
+                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
+        
+            Returns:
+                the measurement error due to Troposphere
+        
+        """
+        ...
+    @typing.overload
+    def rangeRateErrorTroposphericModel(self, groundStation: org.orekit.estimation.measurements.GroundStation, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_rangeRateErrorTroposphericModel_1__T], tArray: typing.List[_rangeRateErrorTroposphericModel_1__T]) -> _rangeRateErrorTroposphericModel_1__T:
+        """
+            Compute the measurement error due to Troposphere.
+        
+            Parameters:
+                station (:class:`~org.orekit.estimation.measurements.GroundStation`): station
+                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
+                parameters (T[]): tropospheric model parameters
+        
+            Returns:
+                the measurement error due to Troposphere
+        
+        
+        """
+        ...
+
+class BaseRangeTroposphericDelayModifier:
+    """
+    public abstract class BaseRangeTroposphericDelayModifier extends Object
+    
+        Base class modifying theoretical range measurements with tropospheric delay. The effect of tropospheric correction on
+        the range is directly computed through the computation of the tropospheric delay. In general, for GNSS, VLBI, ... there
+        is hardly any frequency dependence in the delay. For SLR techniques however, the frequency dependence is sensitive.
+    
+        Since:
+            11.2
+    """
+    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
+    _rangeErrorTroposphericModel_1__T = typing.TypeVar('_rangeErrorTroposphericModel_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def rangeErrorTroposphericModel(self, groundStation: org.orekit.estimation.measurements.GroundStation, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
+        """
+            Compute the measurement error due to Troposphere.
+        
+            Parameters:
+                station (:class:`~org.orekit.estimation.measurements.GroundStation`): station
+                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
+        
+            Returns:
+                the measurement error due to Troposphere
+        
+        """
+        ...
+    @typing.overload
+    def rangeErrorTroposphericModel(self, groundStation: org.orekit.estimation.measurements.GroundStation, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_rangeErrorTroposphericModel_1__T], tArray: typing.List[_rangeErrorTroposphericModel_1__T]) -> _rangeErrorTroposphericModel_1__T:
+        """
+            Compute the measurement error due to Troposphere.
+        
+            Parameters:
+                station (:class:`~org.orekit.estimation.measurements.GroundStation`): station
+                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
+                parameters (T[]): tropospheric model parameters
+        
+            Returns:
+                the measurement error due to Troposphere
+        
+        
+        """
+        ...
+
 _Bias__T = typing.TypeVar('_Bias__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class Bias(org.orekit.estimation.measurements.EstimationModifier[_Bias__T], typing.Generic[_Bias__T]):
     """
@@ -124,57 +264,16 @@ class Bias(org.orekit.estimation.measurements.EstimationModifier[_Bias__T], typi
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[_Bias__T]) -> None: ...
 
-class IonosphericGradientConverter(org.orekit.propagation.integration.AbstractGradientConverter):
+class ModifierGradientConverter(org.orekit.propagation.integration.AbstractGradientConverter):
     """
-    public class IonosphericGradientConverter extends :class:`~org.orekit.propagation.integration.AbstractGradientConverter`
+    public class ModifierGradientConverter extends :class:`~org.orekit.propagation.integration.AbstractGradientConverter`
     
         Converter for states and parameters arrays.
     
         Since:
-            10.2
+            11.2
     """
     def __init__(self, spacecraftState: org.orekit.propagation.SpacecraftState, int: int, attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
-    def getFreeStateParameters(self) -> int:
-        """
-            Get the number of free state parameters.
-        
-            Overrides:
-                :meth:`~org.orekit.propagation.integration.AbstractGradientConverter.getFreeStateParameters`Â in
-                classÂ :class:`~org.orekit.propagation.integration.AbstractGradientConverter`
-        
-            Returns:
-                number of free state parameters
-        
-        
-        """
-        ...
-    def getParameters(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient], ionosphericModel: org.orekit.models.earth.ionosphere.IonosphericModel) -> typing.List[org.hipparchus.analysis.differentiation.Gradient]:
-        """
-            Get the ionospheric model parameters.
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<Gradient> state): state as returned by :meth:`~org.orekit.estimation.measurements.modifiers.IonosphericGradientConverter.getState`
-                ionoModel (:class:`~org.orekit.models.earth.ionosphere.IonosphericModel`): ionospheric model associated with the parameters
-        
-            Returns:
-                ionospheric model parameters
-        
-        
-        """
-        ...
-    def getState(self, ionosphericModel: org.orekit.models.earth.ionosphere.IonosphericModel) -> org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient]:
-        """
-            Get the state with the number of parameters consistent with ionospheric model.
-        
-            Parameters:
-                ionoModel (:class:`~org.orekit.models.earth.ionosphere.IonosphericModel`): ionospheric model
-        
-            Returns:
-                state with the number of parameters consistent with ionospheric model
-        
-        
-        """
-        ...
 
 class OnBoardAntennaInterSatellitesPhaseModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.gnss.InterSatellitesPhase]):
     """
@@ -309,155 +408,95 @@ class PhaseTroposphericDelayModifier(org.orekit.estimation.measurements.Estimati
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.gnss.Phase]) -> None: ...
 
-class RangeIonosphericDelayModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.Range]):
+class RangeModifierUtil:
     """
-    public class RangeIonosphericDelayModifier extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.Range`>
+    public class RangeModifierUtil extends Object
     
-        Class modifying theoretical range measurement with ionospheric delay. The effect of ionospheric correction on the range
-        is directly computed through the computation of the ionospheric delay. The ionospheric delay depends on the frequency of
-        the signal (GNSS, VLBI, ...). For optical measurements (e.g. SLR), the ray is not affected by ionosphere charged
-        particles.
-    
-        Since 10.0, state derivatives and ionospheric parameters derivates are computed using automatic differentiation.
+        Utility class modifying theoretical range measurement.
     
         Since:
-            8.0
+            11.2
+    """
+    _modify__T = typing.TypeVar('_modify__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
+    @staticmethod
+    def modify(estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[_modify__T], parametersDriversProvider: org.orekit.utils.ParametersDriversProvider, abstractGradientConverter: org.orekit.propagation.integration.AbstractGradientConverter, groundStation: org.orekit.estimation.measurements.GroundStation, parametricModelEffect: typing.Union['ParametricModelEffect', typing.Callable], parametricModelEffectGradient: typing.Union['ParametricModelEffectGradient', typing.Callable]) -> None:
+        """
+            Apply a modifier to an estimated measurement.
+        
+            Parameters:
+                estimated (:class:`~org.orekit.estimation.measurements.EstimatedMeasurement`<T> estimated): estimated measurement to modify
+                station (:class:`~org.orekit.utils.ParametersDriversProvider`): ground station
+                converter (:class:`~org.orekit.propagation.integration.AbstractGradientConverter`): gradient converter
+                parametricModel (:class:`~org.orekit.estimation.measurements.GroundStation`): parametric modifier model
+                modelEffect (org.orekit.estimation.measurements.modifiers.ParametricModelEffect): model effect
+                modelEffectGradient (org.orekit.estimation.measurements.modifiers.ParametricModelEffectGradient): model effect gradient
+        
+        
+        """
+        ...
+
+class RangeRateModifierUtil:
+    """
+    public class RangeRateModifierUtil extends Object
+    
+        Utility class modifying theoretical range-rate measurement.
+    
+        Since:
+            11.2
+    """
+    _modify__T = typing.TypeVar('_modify__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
+    @staticmethod
+    def modify(estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[_modify__T], parametersDriversProvider: org.orekit.utils.ParametersDriversProvider, abstractGradientConverter: org.orekit.propagation.integration.AbstractGradientConverter, groundStation: org.orekit.estimation.measurements.GroundStation, parametricModelEffect: typing.Union['ParametricModelEffect', typing.Callable], parametricModelEffectGradient: typing.Union['ParametricModelEffectGradient', typing.Callable]) -> None:
+        """
+            Apply a modifier to an estimated measurement.
+        
+            Parameters:
+                estimated (:class:`~org.orekit.estimation.measurements.EstimatedMeasurement`<T> estimated): estimated measurement to modify
+                station (:class:`~org.orekit.utils.ParametersDriversProvider`): ground station
+                converter (:class:`~org.orekit.propagation.integration.AbstractGradientConverter`): gradient converter
+                parametricModel (:class:`~org.orekit.estimation.measurements.GroundStation`): parametric modifier model
+                modelEffect (org.orekit.estimation.measurements.modifiers.ParametricModelEffect): model effect
+                modelEffectGradient (org.orekit.estimation.measurements.modifiers.ParametricModelEffectGradient): model effect gradient
+        
+        
+        """
+        ...
+
+class TDOAIonosphericDelayModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.TDOA]):
+    """
+    public class TDOAIonosphericDelayModifier extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.TDOA`>
+    
+        Class modifying theoretical TDOA measurements with ionospheric delay.
+    
+        The effect of ionospheric correction on the TDOA is a time delay computed directly from the difference in ionospheric
+        delays for each downlink.
+    
+        The ionospheric delay depends on the frequency of the signal.
+    
+        Since:
+            11.2
     """
     def __init__(self, ionosphericModel: org.orekit.models.earth.ionosphere.IonosphericModel, double: float): ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.Range]) -> None: ...
+    def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.TDOA]) -> None: ...
 
-class RangeRateIonosphericDelayModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.RangeRate]):
+class TDOATroposphericDelayModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.TDOA]):
     """
-    public class RangeRateIonosphericDelayModifier extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.RangeRate`>
+    public class TDOATroposphericDelayModifier extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.TDOA`>
     
-        Class modifying theoretical range-rate measurement with ionospheric delay. The effect of ionospheric correction on the
-        range-rate is directly computed through the computation of the ionospheric delay difference with respect to time. The
-        ionospheric delay depends on the frequency of the signal (GNSS, VLBI, ...). For optical measurements (e.g. SLR), the ray
-        is not affected by ionosphere charged particles.
+        Class modifying theoretical TDOA measurements with tropospheric delay.
     
-        Since 10.0, state derivatives and ionospheric parameters derivates are computed using automatic differentiation.
+        The effect of tropospheric correction on the TDOA is a time delay computed directly from the difference in tropospheric
+        delays for each downlink.
+    
+        Tropospheric delay is not frequency dependent for signals up to 15 GHz.
     
         Since:
-            8.0
-    """
-    def __init__(self, ionosphericModel: org.orekit.models.earth.ionosphere.IonosphericModel, double: float, boolean: bool): ...
-    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.RangeRate]) -> None: ...
-
-class RangeRateTroposphericDelayModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.RangeRate]):
-    """
-    public class RangeRateTroposphericDelayModifier extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.RangeRate`>
-    
-        Class modifying theoretical range-rate measurements with tropospheric delay. The effect of tropospheric correction on
-        the range-rate is directly computed through the computation of the tropospheric delay difference with respect to time.
-        In general, for GNSS, VLBI, ... there is hardly any frequency dependence in the delay. For SLR techniques however, the
-        frequency dependence is sensitive.
-    
-        Since:
-            8.0
-    """
-    def __init__(self, discreteTroposphericModel: org.orekit.models.earth.troposphere.DiscreteTroposphericModel, boolean: bool): ...
-    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.RangeRate]) -> None: ...
-    _rangeRateErrorTroposphericModel_1__T = typing.TypeVar('_rangeRateErrorTroposphericModel_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def rangeRateErrorTroposphericModel(self, groundStation: org.orekit.estimation.measurements.GroundStation, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
-        """
-            Compute the measurement error due to Troposphere.
-        
-            Parameters:
-                station (:class:`~org.orekit.estimation.measurements.GroundStation`): station
-                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
-        
-            Returns:
-                the measurement error due to Troposphere
-        
-        """
-        ...
-    @typing.overload
-    def rangeRateErrorTroposphericModel(self, groundStation: org.orekit.estimation.measurements.GroundStation, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_rangeRateErrorTroposphericModel_1__T], tArray: typing.List[_rangeRateErrorTroposphericModel_1__T]) -> _rangeRateErrorTroposphericModel_1__T:
-        """
-            Compute the measurement error due to Troposphere.
-        
-            Parameters:
-                station (:class:`~org.orekit.estimation.measurements.GroundStation`): station
-                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
-                parameters (T[]): tropospheric model parameters
-        
-            Returns:
-                the measurement error due to Troposphere
-        
-        
-        """
-        ...
-
-class RangeTroposphericDelayModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.Range]):
-    """
-    public class RangeTroposphericDelayModifier extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.Range`>
-    
-        Class modifying theoretical range measurement with tropospheric delay. The effect of tropospheric correction on the
-        range is directly computed through the computation of the tropospheric delay. In general, for GNSS, VLBI, ... there is
-        hardly any frequency dependence in the delay. For SLR techniques however, the frequency dependence is sensitive.
-    
-        Since:
-            8.0
+            11.2
     """
     def __init__(self, discreteTroposphericModel: org.orekit.models.earth.troposphere.DiscreteTroposphericModel): ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.Range]) -> None: ...
-
-class TroposphericGradientConverter(org.orekit.propagation.integration.AbstractGradientConverter):
-    """
-    public class TroposphericGradientConverter extends :class:`~org.orekit.propagation.integration.AbstractGradientConverter`
-    
-        Converter for states and parameters arrays.
-    
-        Since:
-            10.2
-    """
-    def __init__(self, spacecraftState: org.orekit.propagation.SpacecraftState, int: int, attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
-    def getFreeStateParameters(self) -> int:
-        """
-            Get the number of free state parameters.
-        
-            Overrides:
-                :meth:`~org.orekit.propagation.integration.AbstractGradientConverter.getFreeStateParameters`Â in
-                classÂ :class:`~org.orekit.propagation.integration.AbstractGradientConverter`
-        
-            Returns:
-                number of free state parameters
-        
-        
-        """
-        ...
-    def getParameters(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient], discreteTroposphericModel: org.orekit.models.earth.troposphere.DiscreteTroposphericModel) -> typing.List[org.hipparchus.analysis.differentiation.Gradient]:
-        """
-            Get the tropospheric model parameters.
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<Gradient> state): state as returned by :meth:`~org.orekit.estimation.measurements.modifiers.TroposphericGradientConverter.getState`
-                tropoModel (:class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`): tropospheric model associated with the parameters
-        
-            Returns:
-                tropospheric model parameters
-        
-        
-        """
-        ...
-    def getState(self, discreteTroposphericModel: org.orekit.models.earth.troposphere.DiscreteTroposphericModel) -> org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient]:
-        """
-            Get the state with the number of parameters consistent with tropospheric model.
-        
-            Parameters:
-                tropoModel (:class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`): tropospheric model
-        
-            Returns:
-                state with the number of parameters consistent with tropospheric model
-        
-        
-        """
-        ...
+    def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.TDOA]) -> None: ...
 
 class TurnAroundRangeIonosphericDelayModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.TurnAroundRange]):
     """
@@ -492,6 +531,76 @@ class TurnAroundRangeTroposphericDelayModifier(org.orekit.estimation.measurement
     def __init__(self, discreteTroposphericModel: org.orekit.models.earth.troposphere.DiscreteTroposphericModel): ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.TurnAroundRange]) -> None: ...
+
+class ParametricModelEffect: ...
+
+class ParametricModelEffectGradient: ...
+
+class BistaticRangeIonosphericDelayModifier(BaseRangeIonosphericDelayModifier, org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.BistaticRange]):
+    """
+    public class BistaticRangeIonosphericDelayModifier extends :class:`~org.orekit.estimation.measurements.modifiers.BaseRangeIonosphericDelayModifier` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.BistaticRange`>
+    
+        Class modifying theoretical bistatic range measurement with ionospheric delay. The effect of ionospheric correction on
+        the range is directly computed through the computation of the ionospheric delay.
+    
+        The ionospheric delay depends on the frequency of the signal (GNSS, VLBI, ...). For optical measurements (e.g. SLR), the
+        ray is not affected by ionosphere charged particles.
+    
+        Since 10.0, state derivatives and ionospheric parameters derivates are computed using automatic differentiation.
+    
+        Since:
+            11.2
+    """
+    def __init__(self, ionosphericModel: org.orekit.models.earth.ionosphere.IonosphericModel, double: float): ...
+    def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.BistaticRange]) -> None: ...
+
+class BistaticRangeRateIonosphericDelayModifier(BaseRangeRateIonosphericDelayModifier, org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.BistaticRangeRate]):
+    """
+    public class BistaticRangeRateIonosphericDelayModifier extends :class:`~org.orekit.estimation.measurements.modifiers.BaseRangeRateIonosphericDelayModifier` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.BistaticRangeRate`>
+    
+        Class modifying theoretical bistatic range-rate measurement with ionospheric delay.
+    
+        The effect of ionospheric correction on the bistatic range-rate is directly computed through the computation of the
+        ionospheric delay difference with respect to time.
+    
+        The ionospheric delay depends on the frequency of the signal.
+    
+        Since:
+            11.2
+    """
+    def __init__(self, ionosphericModel: org.orekit.models.earth.ionosphere.IonosphericModel, double: float): ...
+    def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.BistaticRangeRate]) -> None: ...
+
+class BistaticRangeRateTroposphericDelayModifier(BaseRangeRateTroposphericDelayModifier, org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.BistaticRangeRate]):
+    """
+    public class BistaticRangeRateTroposphericDelayModifier extends :class:`~org.orekit.estimation.measurements.modifiers.BaseRangeRateTroposphericDelayModifier` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.BistaticRangeRate`>
+    
+        Class modifying theoretical bistatic range-rate measurements with tropospheric delay.
+    
+        The effect of tropospheric correction on the bistatic range-rate is directly computed through the computation of the
+        tropospheric delay difference with respect to time.
+    
+        Tropospheric delay is not frequency dependent for signals up to 15 GHz.
+    
+        Since:
+            11.2
+    """
+    def __init__(self, discreteTroposphericModel: org.orekit.models.earth.troposphere.DiscreteTroposphericModel): ...
+    def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.BistaticRangeRate]) -> None: ...
+
+class BistaticRangeTroposphericDelayModifier(BaseRangeTroposphericDelayModifier, org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.BistaticRange]):
+    """
+    public class BistaticRangeTroposphericDelayModifier extends :class:`~org.orekit.estimation.measurements.modifiers.BaseRangeTroposphericDelayModifier` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.BistaticRange`>
+    
+        Class modifying theoretical bistatic range measurement with tropospheric delay. The effect of tropospheric correction on
+        the range is directly computed through the computation of the tropospheric delay. In general, for GNSS, VLBI, ... there
+        is hardly any frequency dependence in the delay. For SLR techniques however, the frequency dependence is sensitive.
+    
+        Since:
+            11.2
+    """
+    def __init__(self, discreteTroposphericModel: org.orekit.models.earth.troposphere.DiscreteTroposphericModel): ...
+    def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.BistaticRange]) -> None: ...
 
 _DynamicOutlierFilter__T = typing.TypeVar('_DynamicOutlierFilter__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class DynamicOutlierFilter(OutlierFilter[_DynamicOutlierFilter__T], typing.Generic[_DynamicOutlierFilter__T]):
@@ -543,6 +652,19 @@ class InterSatellitesPhaseAmbiguityModifier(AbstractAmbiguityModifier, org.oreki
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.gnss.InterSatellitesPhase]) -> None: ...
 
+class IonosphericGradientConverter(ModifierGradientConverter):
+    """
+    Deprecated. 
+    as of 11.2, replaced by :class:`~org.orekit.estimation.measurements.modifiers.ModifierGradientConverter`
+    @Deprecated public class IonosphericGradientConverter extends :class:`~org.orekit.estimation.measurements.modifiers.ModifierGradientConverter`
+    
+        Converter for states and parameters arrays.
+    
+        Since:
+            10.2
+    """
+    def __init__(self, spacecraftState: org.orekit.propagation.SpacecraftState, int: int, attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
+
 class OneWayGNSSPhaseAmbiguityModifier(AbstractAmbiguityModifier, org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.gnss.OneWayGNSSPhase]):
     """
     public class OneWayGNSSPhaseAmbiguityModifier extends :class:`~org.orekit.estimation.measurements.modifiers.AbstractAmbiguityModifier` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.gnss.OneWayGNSSPhase`>
@@ -568,6 +690,189 @@ class PhaseAmbiguityModifier(AbstractAmbiguityModifier, org.orekit.estimation.me
     def __init__(self, int: int, double: float): ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.gnss.Phase]) -> None: ...
+
+class PythonParametricModelEffect(ParametricModelEffect):
+    """
+    public class PythonParametricModelEffect extends Object
+    """
+    def __init__(self): ...
+    def evaluate(self, groundStation: org.orekit.estimation.measurements.GroundStation, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
+        """
+            Evaluate the parametric model effect.
+        
+            Parameters:
+                station (:class:`~org.orekit.estimation.measurements.GroundStation`): station
+                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
+        
+            Returns:
+                the measurement error due to parametric model
+        
+        
+        """
+        ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
+class PythonParametricModelEffectGradient(ParametricModelEffectGradient):
+    """
+    public class PythonParametricModelEffectGradient extends Object
+    """
+    def __init__(self): ...
+    def evaluate(self, groundStation: org.orekit.estimation.measurements.GroundStation, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient], gradientArray: typing.List[org.hipparchus.analysis.differentiation.Gradient]) -> org.hipparchus.analysis.differentiation.Gradient:
+        """
+            Evaluate the parametric model effect.
+        
+            Parameters:
+                station (:class:`~org.orekit.estimation.measurements.GroundStation`): station
+                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<Gradient> state): spacecraft state
+                parameters (Gradient[]): parametric model parameters
+        
+            Returns:
+                the measurement error due to parametric model
+        
+        
+        """
+        ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
+class RangeIonosphericDelayModifier(BaseRangeIonosphericDelayModifier, org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.Range]):
+    """
+    public class RangeIonosphericDelayModifier extends :class:`~org.orekit.estimation.measurements.modifiers.BaseRangeIonosphericDelayModifier` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.Range`>
+    
+        Class modifying theoretical range measurement with ionospheric delay. The effect of ionospheric correction on the range
+        is directly computed through the computation of the ionospheric delay. The ionospheric delay depends on the frequency of
+        the signal (GNSS, VLBI, ...). For optical measurements (e.g. SLR), the ray is not affected by ionosphere charged
+        particles.
+    
+        Since 10.0, state derivatives and ionospheric parameters derivates are computed using automatic differentiation.
+    
+        Since:
+            8.0
+    """
+    def __init__(self, ionosphericModel: org.orekit.models.earth.ionosphere.IonosphericModel, double: float): ...
+    def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.Range]) -> None: ...
+
+class RangeRateIonosphericDelayModifier(BaseRangeRateIonosphericDelayModifier, org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.RangeRate]):
+    """
+    public class RangeRateIonosphericDelayModifier extends :class:`~org.orekit.estimation.measurements.modifiers.BaseRangeRateIonosphericDelayModifier` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.RangeRate`>
+    
+        Class modifying theoretical range-rate measurement with ionospheric delay. The effect of ionospheric correction on the
+        range-rate is directly computed through the computation of the ionospheric delay difference with respect to time. The
+        ionospheric delay depends on the frequency of the signal (GNSS, VLBI, ...). For optical measurements (e.g. SLR), the ray
+        is not affected by ionosphere charged particles.
+    
+        Since 10.0, state derivatives and ionospheric parameters derivates are computed using automatic differentiation.
+    
+        Since:
+            8.0
+    """
+    def __init__(self, ionosphericModel: org.orekit.models.earth.ionosphere.IonosphericModel, double: float, boolean: bool): ...
+    def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.RangeRate]) -> None: ...
+
+class RangeRateTroposphericDelayModifier(BaseRangeRateTroposphericDelayModifier, org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.RangeRate]):
+    """
+    public class RangeRateTroposphericDelayModifier extends :class:`~org.orekit.estimation.measurements.modifiers.BaseRangeRateTroposphericDelayModifier` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.RangeRate`>
+    
+        Class modifying theoretical range-rate measurements with tropospheric delay. The effect of tropospheric correction on
+        the range-rate is directly computed through the computation of the tropospheric delay difference with respect to time.
+        In general, for GNSS, VLBI, ... there is hardly any frequency dependence in the delay. For SLR techniques however, the
+        frequency dependence is sensitive.
+    
+        Since:
+            8.0
+    """
+    def __init__(self, discreteTroposphericModel: org.orekit.models.earth.troposphere.DiscreteTroposphericModel, boolean: bool): ...
+    def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.RangeRate]) -> None: ...
+    _rangeRateErrorTroposphericModel_1__T = typing.TypeVar('_rangeRateErrorTroposphericModel_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def rangeRateErrorTroposphericModel(self, groundStation: org.orekit.estimation.measurements.GroundStation, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
+        """
+            Compute the measurement error due to Troposphere.
+        
+            Overrides:
+                
+                meth:`~org.orekit.estimation.measurements.modifiers.BaseRangeRateTroposphericDelayModifier.rangeRateErrorTroposphericModel`Â in
+                classÂ :class:`~org.orekit.estimation.measurements.modifiers.BaseRangeRateTroposphericDelayModifier`
+        
+            Parameters:
+                station (:class:`~org.orekit.estimation.measurements.GroundStation`): station
+                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
+        
+            Returns:
+                the measurement error due to Troposphere
+        
+        """
+        ...
+    @typing.overload
+    def rangeRateErrorTroposphericModel(self, groundStation: org.orekit.estimation.measurements.GroundStation, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_rangeRateErrorTroposphericModel_1__T], tArray: typing.List[_rangeRateErrorTroposphericModel_1__T]) -> _rangeRateErrorTroposphericModel_1__T:
+        """
+            Compute the measurement error due to Troposphere.
+        
+            Overrides:
+                 in class :class:`~org.orekit.estimation.measurements.modifiers.BaseRangeRateTroposphericDelayModifier`
+        
+            Parameters:
+                station (:class:`~org.orekit.estimation.measurements.GroundStation`): station
+                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
+                parameters (T[]): tropospheric model parameters
+        
+            Returns:
+                the measurement error due to Troposphere
+        
+        
+        """
+        ...
+
+class RangeTroposphericDelayModifier(BaseRangeTroposphericDelayModifier, org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.Range]):
+    """
+    public class RangeTroposphericDelayModifier extends :class:`~org.orekit.estimation.measurements.modifiers.BaseRangeTroposphericDelayModifier` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.Range`>
+    
+        Class modifying theoretical range measurement with tropospheric delay. The effect of tropospheric correction on the
+        range is directly computed through the computation of the tropospheric delay. In general, for GNSS, VLBI, ... there is
+        hardly any frequency dependence in the delay. For SLR techniques however, the frequency dependence is sensitive.
+    
+        Since:
+            8.0
+    """
+    def __init__(self, discreteTroposphericModel: org.orekit.models.earth.troposphere.DiscreteTroposphericModel): ...
+    def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.Range]) -> None: ...
 
 class RelativisticClockInterSatellitesPhaseModifier(AbstractRelativisticClockModifier, org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.gnss.InterSatellitesPhase]):
     """
@@ -709,6 +1014,132 @@ class RelativisticClockRangeRateModifier(AbstractRelativisticClockModifier, org.
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.RangeRate]) -> None: ...
 
+class RelativisticJ2ClockInterSatellitesPhaseModifier(AbstractRelativisticJ2ClockModifier, org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.gnss.InterSatellitesPhase]):
+    """
+    public class RelativisticJ2ClockInterSatellitesPhaseModifier extends :class:`~org.orekit.estimation.measurements.modifiers.AbstractRelativisticJ2ClockModifier` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.gnss.InterSatellitesPhase`>
+    
+        Class modifying theoretical inter-satellites phase measurements with relativistic J2 clock correction.
+    
+        Relativistic clock correction of the effects caused by the oblateness of Earth on the gravity potential.
+    
+        The time delay caused by this effect is computed based on the orbital parameters of the emitter's orbit.
+    
+        Since:
+            11.2
+    
+        Also see:
+            "Teunissen, Peter, and Oliver Montenbruck, eds. Springer handbook of global navigation satellite systems. Chapter 19.2.
+            Equation 19.18 Springer, 2017."
+    """
+    def __init__(self, double: float, double2: float, double3: float): ...
+    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
+    def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.gnss.InterSatellitesPhase]) -> None: ...
+
+class RelativisticJ2ClockInterSatellitesRangeModifier(AbstractRelativisticJ2ClockModifier, org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.InterSatellitesRange]):
+    """
+    public class RelativisticJ2ClockInterSatellitesRangeModifier extends :class:`~org.orekit.estimation.measurements.modifiers.AbstractRelativisticJ2ClockModifier` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.InterSatellitesRange`>
+    
+        Class modifying theoretical inter-satellites range measurements with relativistic J2 clock correction.
+    
+        Relativistic clock correction of the effects caused by the oblateness of Earth on the gravity potential.
+    
+        The time delay caused by this effect is computed based on the orbital parameters of the emitter's orbit.
+    
+        Since:
+            11.2
+    
+        Also see:
+            "Teunissen, Peter, and Oliver Montenbruck, eds. Springer handbook of global navigation satellite systems. Chapter 19.2.
+            Equation 19.18 Springer, 2017."
+    """
+    def __init__(self, double: float, double2: float, double3: float): ...
+    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
+    def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.InterSatellitesRange]) -> None: ...
+
+class RelativisticJ2ClockOneWayGNSSPhaseModifier(AbstractRelativisticJ2ClockModifier, org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.gnss.OneWayGNSSPhase]):
+    """
+    public class RelativisticJ2ClockOneWayGNSSPhaseModifier extends :class:`~org.orekit.estimation.measurements.modifiers.AbstractRelativisticJ2ClockModifier` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.gnss.OneWayGNSSPhase`>
+    
+        Class modifying theoretical one-way phase measurements with relativistic J2 clock correction.
+    
+        Relativistic clock correction of the effects caused by the oblateness of Earth on the gravity potential.
+    
+        The time delay caused by this effect is computed based on the orbital parameters of the emitter's orbit.
+    
+        Since:
+            11.2
+    
+        Also see:
+            "Teunissen, Peter, and Oliver Montenbruck, eds. Springer handbook of global navigation satellite systems. Chapter 19.2.
+            Equation 19.18 Springer, 2017."
+    """
+    def __init__(self, double: float, double2: float, double3: float): ...
+    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
+    def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.gnss.OneWayGNSSPhase]) -> None: ...
+
+class RelativisticJ2ClockOneWayGNSSRangeModifier(AbstractRelativisticJ2ClockModifier, org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.gnss.OneWayGNSSRange]):
+    """
+    public class RelativisticJ2ClockOneWayGNSSRangeModifier extends :class:`~org.orekit.estimation.measurements.modifiers.AbstractRelativisticJ2ClockModifier` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.gnss.OneWayGNSSRange`>
+    
+        Class modifying one-way GNSS range theoretical measurements with relativistic J2 clock correction.
+    
+        Relativistic clock correction of the effects caused by the oblateness of Earth on the gravity potential.
+    
+        The time delay caused by this effect is computed based on the orbital parameters of the emitter's orbit.
+    
+        Since:
+            11.2
+    
+        Also see:
+            "Teunissen, Peter, and Oliver Montenbruck, eds. Springer handbook of global navigation satellite systems. Chapter 19.2.
+            Equation 19.18 Springer, 2017."
+    """
+    def __init__(self, double: float, double2: float, double3: float): ...
+    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
+    def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.gnss.OneWayGNSSRange]) -> None: ...
+
+class RelativisticJ2ClockPhaseModifier(AbstractRelativisticJ2ClockModifier, org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.gnss.Phase]):
+    """
+    public class RelativisticJ2ClockPhaseModifier extends :class:`~org.orekit.estimation.measurements.modifiers.AbstractRelativisticJ2ClockModifier` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.gnss.Phase`>
+    
+        Class modifying theoretical phase measurements with relativistic J2 clock correction.
+    
+        Relativistic clock correction of the effects caused by the oblateness of Earth on the gravity potential.
+    
+        The time delay caused by this effect is computed based on the orbital parameters of the emitter's orbit.
+    
+        Since:
+            11.2
+    
+        Also see:
+            "Teunissen, Peter, and Oliver Montenbruck, eds. Springer handbook of global navigation satellite systems. Chapter 19.2.
+            Equation 19.18 Springer, 2017."
+    """
+    def __init__(self, double: float, double2: float, double3: float): ...
+    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
+    def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.gnss.Phase]) -> None: ...
+
+class RelativisticJ2ClockRangeModifier(AbstractRelativisticJ2ClockModifier, org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.Range]):
+    """
+    public class RelativisticJ2ClockRangeModifier extends :class:`~org.orekit.estimation.measurements.modifiers.AbstractRelativisticJ2ClockModifier` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.Range`>
+    
+        Class modifying theoretical range measurements with relativistic J2 clock correction.
+    
+        Relativistic clock correction of the effects caused by the oblateness of Earth on the gravity potential.
+    
+        The time delay caused by this effect is computed based on the orbital parameters of the emitter's orbit.
+    
+        Since:
+            11.2
+    
+        Also see:
+            "Teunissen, Peter, and Oliver Montenbruck, eds. Springer handbook of global navigation satellite systems. Chapter 19.2.
+            Equation 19.18 Springer, 2017."
+    """
+    def __init__(self, double: float, double2: float, double3: float): ...
+    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
+    def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.Range]) -> None: ...
+
 class ShapiroInterSatellitePhaseModifier(AbstractShapiroBaseModifier, org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.gnss.InterSatellitesPhase]):
     """
     public class ShapiroInterSatellitePhaseModifier extends :class:`~org.orekit.estimation.measurements.modifiers.AbstractShapiroBaseModifier` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.gnss.InterSatellitesPhase`>
@@ -799,20 +1230,43 @@ class ShapiroRangeModifier(AbstractShapiroBaseModifier, org.orekit.estimation.me
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.Range]) -> None: ...
 
+class TroposphericGradientConverter(ModifierGradientConverter):
+    """
+    Deprecated. 
+    as of 11.2, replaced by :class:`~org.orekit.estimation.measurements.modifiers.ModifierGradientConverter`
+    @Deprecated public class TroposphericGradientConverter extends :class:`~org.orekit.estimation.measurements.modifiers.ModifierGradientConverter`
+    
+        Converter for states and parameters arrays.
+    
+        Since:
+            10.2
+    """
+    def __init__(self, spacecraftState: org.orekit.propagation.SpacecraftState, int: int, attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
+
 
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.estimation.measurements.modifiers")``.
 
     AbstractAmbiguityModifier: typing.Type[AbstractAmbiguityModifier]
     AbstractRelativisticClockModifier: typing.Type[AbstractRelativisticClockModifier]
+    AbstractRelativisticJ2ClockModifier: typing.Type[AbstractRelativisticJ2ClockModifier]
     AbstractShapiroBaseModifier: typing.Type[AbstractShapiroBaseModifier]
     AngularIonosphericDelayModifier: typing.Type[AngularIonosphericDelayModifier]
     AngularRadioRefractionModifier: typing.Type[AngularRadioRefractionModifier]
     AngularTroposphericDelayModifier: typing.Type[AngularTroposphericDelayModifier]
+    BaseRangeIonosphericDelayModifier: typing.Type[BaseRangeIonosphericDelayModifier]
+    BaseRangeRateIonosphericDelayModifier: typing.Type[BaseRangeRateIonosphericDelayModifier]
+    BaseRangeRateTroposphericDelayModifier: typing.Type[BaseRangeRateTroposphericDelayModifier]
+    BaseRangeTroposphericDelayModifier: typing.Type[BaseRangeTroposphericDelayModifier]
     Bias: typing.Type[Bias]
+    BistaticRangeIonosphericDelayModifier: typing.Type[BistaticRangeIonosphericDelayModifier]
+    BistaticRangeRateIonosphericDelayModifier: typing.Type[BistaticRangeRateIonosphericDelayModifier]
+    BistaticRangeRateTroposphericDelayModifier: typing.Type[BistaticRangeRateTroposphericDelayModifier]
+    BistaticRangeTroposphericDelayModifier: typing.Type[BistaticRangeTroposphericDelayModifier]
     DynamicOutlierFilter: typing.Type[DynamicOutlierFilter]
     InterSatellitesPhaseAmbiguityModifier: typing.Type[InterSatellitesPhaseAmbiguityModifier]
     IonosphericGradientConverter: typing.Type[IonosphericGradientConverter]
+    ModifierGradientConverter: typing.Type[ModifierGradientConverter]
     OnBoardAntennaInterSatellitesPhaseModifier: typing.Type[OnBoardAntennaInterSatellitesPhaseModifier]
     OnBoardAntennaInterSatellitesRangeModifier: typing.Type[OnBoardAntennaInterSatellitesRangeModifier]
     OnBoardAntennaOneWayGNSSPhaseModifier: typing.Type[OnBoardAntennaOneWayGNSSPhaseModifier]
@@ -822,11 +1276,17 @@ class __module_protocol__(typing.Protocol):
     OnBoardAntennaTurnAroundRangeModifier: typing.Type[OnBoardAntennaTurnAroundRangeModifier]
     OneWayGNSSPhaseAmbiguityModifier: typing.Type[OneWayGNSSPhaseAmbiguityModifier]
     OutlierFilter: typing.Type[OutlierFilter]
+    ParametricModelEffect: typing.Type[ParametricModelEffect]
+    ParametricModelEffectGradient: typing.Type[ParametricModelEffectGradient]
     PhaseAmbiguityModifier: typing.Type[PhaseAmbiguityModifier]
     PhaseIonosphericDelayModifier: typing.Type[PhaseIonosphericDelayModifier]
     PhaseTroposphericDelayModifier: typing.Type[PhaseTroposphericDelayModifier]
+    PythonParametricModelEffect: typing.Type[PythonParametricModelEffect]
+    PythonParametricModelEffectGradient: typing.Type[PythonParametricModelEffectGradient]
     RangeIonosphericDelayModifier: typing.Type[RangeIonosphericDelayModifier]
+    RangeModifierUtil: typing.Type[RangeModifierUtil]
     RangeRateIonosphericDelayModifier: typing.Type[RangeRateIonosphericDelayModifier]
+    RangeRateModifierUtil: typing.Type[RangeRateModifierUtil]
     RangeRateTroposphericDelayModifier: typing.Type[RangeRateTroposphericDelayModifier]
     RangeTroposphericDelayModifier: typing.Type[RangeTroposphericDelayModifier]
     RelativisticClockInterSatellitesPhaseModifier: typing.Type[RelativisticClockInterSatellitesPhaseModifier]
@@ -836,12 +1296,20 @@ class __module_protocol__(typing.Protocol):
     RelativisticClockPhaseModifier: typing.Type[RelativisticClockPhaseModifier]
     RelativisticClockRangeModifier: typing.Type[RelativisticClockRangeModifier]
     RelativisticClockRangeRateModifier: typing.Type[RelativisticClockRangeRateModifier]
+    RelativisticJ2ClockInterSatellitesPhaseModifier: typing.Type[RelativisticJ2ClockInterSatellitesPhaseModifier]
+    RelativisticJ2ClockInterSatellitesRangeModifier: typing.Type[RelativisticJ2ClockInterSatellitesRangeModifier]
+    RelativisticJ2ClockOneWayGNSSPhaseModifier: typing.Type[RelativisticJ2ClockOneWayGNSSPhaseModifier]
+    RelativisticJ2ClockOneWayGNSSRangeModifier: typing.Type[RelativisticJ2ClockOneWayGNSSRangeModifier]
+    RelativisticJ2ClockPhaseModifier: typing.Type[RelativisticJ2ClockPhaseModifier]
+    RelativisticJ2ClockRangeModifier: typing.Type[RelativisticJ2ClockRangeModifier]
     ShapiroInterSatellitePhaseModifier: typing.Type[ShapiroInterSatellitePhaseModifier]
     ShapiroInterSatelliteRangeModifier: typing.Type[ShapiroInterSatelliteRangeModifier]
     ShapiroOneWayGNSSPhaseModifier: typing.Type[ShapiroOneWayGNSSPhaseModifier]
     ShapiroOneWayGNSSRangeModifier: typing.Type[ShapiroOneWayGNSSRangeModifier]
     ShapiroPhaseModifier: typing.Type[ShapiroPhaseModifier]
     ShapiroRangeModifier: typing.Type[ShapiroRangeModifier]
+    TDOAIonosphericDelayModifier: typing.Type[TDOAIonosphericDelayModifier]
+    TDOATroposphericDelayModifier: typing.Type[TDOATroposphericDelayModifier]
     TroposphericGradientConverter: typing.Type[TroposphericGradientConverter]
     TurnAroundRangeIonosphericDelayModifier: typing.Type[TurnAroundRangeIonosphericDelayModifier]
     TurnAroundRangeTroposphericDelayModifier: typing.Type[TurnAroundRangeTroposphericDelayModifier]

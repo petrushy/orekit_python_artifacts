@@ -1534,31 +1534,6 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D]):
         
         """
         ...
-    def equalsIeee754(self, object: typing.Any) -> bool:
-        """
-            Test for the equality of two 2D vectors.
-        
-            If all coordinates of two 2D vectors are exactly the same, and none are :code:`NaN`, the two 2D vectors are considered
-            to be equal.
-        
-            In compliance with IEEE754 handling, if any coordinates of any of the two vectors are :code:`NaN`, then the vectors are
-            considered different. This implies that
-            :meth:`~org.hipparchus.geometry.euclidean.twod.Vector2D.NaN`.equals(:meth:`~org.hipparchus.geometry.euclidean.twod.Vector2D.NaN`)
-            returns :code:`false` despite the instance is checked against itself.
-        
-            Parameters:
-                other (:class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality to this
-        
-            Returns:
-                true if two 2D vector objects are equal, false if object is null, not an instance of Vector2D, or not equal to this
-                Vector2D instance
-        
-            Since:
-                2.1
-        
-        
-        """
-        ...
     def getNorm(self) -> float:
         """
             Get the L :sub:`2` norm for the vector.

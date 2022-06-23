@@ -183,6 +183,26 @@ class EstimatedEarthFrameProvider(org.orekit.frames.TransformProvider):
         
         """
         ...
+    def getStaticTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.frames.StaticTransform:
+        """
+            Get a transform for only rotations and translations on the specified date.
+        
+            The default implementation returns :meth:`~org.orekit.frames.TransformProvider.getTransform` but implementations may
+            override it for better performance.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.TransformProvider.getStaticTransform`Â in
+                interfaceÂ :class:`~org.orekit.frames.TransformProvider`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date.
+        
+            Returns:
+                the static transform.
+        
+        
+        """
+        ...
     _getTransform_0__T = typing.TypeVar('_getTransform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def getTransform(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTransform_0__T]) -> org.orekit.frames.FieldTransform[_getTransform_0__T]:
@@ -1032,6 +1052,172 @@ class ObservedMeasurement(ComparableMeasurement, typing.Generic[_ObservedMeasure
         """
         ...
 
+class PythonComparableMeasurement(ComparableMeasurement):
+    """
+    public class PythonComparableMeasurement extends Object implements :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
+    """
+    def __init__(self): ...
+    def compareTo(self, comparableMeasurement: ComparableMeasurement) -> int:
+        """
+        
+            Measurements comparison is primarily chronological, but measurements with the same date are sorted based on the observed
+            value. Even if they have the same value too, they will *not* be considered equal if they correspond to different
+            instances. This allows to store measurements in null without losing any measurements, even redundant ones.
+            Extension point for Python.
+        
+            Measurements comparison is primarily chronological, but measurements with the same date are sorted based on the observed
+            value. Even if they have the same value too, they will *not* be considered equal if they correspond to different
+            instances. This allows to store measurements in null without losing any measurements, even redundant ones.
+        
+            Specified by:
+                 in interface 
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.ComparableMeasurement.compareTo`Â in
+                interfaceÂ :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
+        
+            Parameters:
+                other (:class:`~org.orekit.estimation.measurements.ComparableMeasurement`): 
+        
+        """
+        ...
+    def finalize(self) -> None: ...
+    def getDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Get the date. Extension point for Python.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeStamped.getDate` in interface :class:`~org.orekit.time.TimeStamped`
+        
+            Returns:
+                date attached to the object
+        
+        
+        """
+        ...
+    def getObservedValue(self) -> typing.List[float]:
+        """
+            Get the observed value.
+        
+            The observed value is the value that was measured by the instrument.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.ComparableMeasurement.getObservedValue`Â in
+                interfaceÂ :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
+        
+            Returns:
+                observed value (array of size :code:`#getDimension()`
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
+_PythonEstimationModifier__T = typing.TypeVar('_PythonEstimationModifier__T', bound=ObservedMeasurement)  # <T>
+class PythonEstimationModifier(EstimationModifier[_PythonEstimationModifier__T], typing.Generic[_PythonEstimationModifier__T]):
+    """
+    public class PythonEstimationModifier<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<T>
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
+    def modify(self, estimatedMeasurement: EstimatedMeasurement[_PythonEstimationModifier__T]) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
+class PythonEstimationsProvider(EstimationsProvider):
+    """
+    public class PythonEstimationsProvider extends Object implements :class:`~org.orekit.estimation.measurements.EstimationsProvider`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def getEstimatedMeasurement(self, int: int) -> EstimatedMeasurement[typing.Any]:
+        """
+            Get one estimated measurement.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.EstimationsProvider.getEstimatedMeasurement`Â in
+                interfaceÂ :class:`~org.orekit.estimation.measurements.EstimationsProvider`
+        
+            Parameters:
+                index (int): index of the estimated measurement, must be between 0 and
+                    :meth:`~org.orekit.estimation.measurements.PythonEstimationsProvider.getNumber` - 1, chronologically sorted
+        
+            Returns:
+                estimated measurement at specified index
+        
+        
+        """
+        ...
+    def getNumber(self) -> int:
+        """
+            Get the number of evaluations available.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.EstimationsProvider.getNumber`Â in
+                interfaceÂ :class:`~org.orekit.estimation.measurements.EstimationsProvider`
+        
+            Returns:
+                number of evaluations available
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
 _AbstractMeasurement__T = typing.TypeVar('_AbstractMeasurement__T', bound=ObservedMeasurement)  # <T>
 class AbstractMeasurement(ObservedMeasurement[_AbstractMeasurement__T], typing.Generic[_AbstractMeasurement__T]):
     """
@@ -1225,6 +1411,182 @@ class AbstractMeasurement(ObservedMeasurement[_AbstractMeasurement__T], typing.G
         """
         ...
 
+_PythonObservedMeasurement__T = typing.TypeVar('_PythonObservedMeasurement__T', bound=ObservedMeasurement)  # <T>
+class PythonObservedMeasurement(ObservedMeasurement[_PythonObservedMeasurement__T], typing.Generic[_PythonObservedMeasurement__T]):
+    """
+    public class PythonObservedMeasurement<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends Object implements :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>
+    """
+    def __init__(self): ...
+    def addModifier(self, estimationModifier: EstimationModifier[_PythonObservedMeasurement__T]) -> None: ...
+    def compareTo(self, comparableMeasurement: ComparableMeasurement) -> int:
+        """
+        
+            Measurements comparison is primarily chronological, but measurements with the same date are sorted based on the observed
+            value. Even if they have the same value too, they will *not* be considered equal if they correspond to different
+            instances. This allows to store measurements in null without losing any measurements, even redundant ones.
+        
+            Measurements comparison is primarily chronological, but measurements with the same date are sorted based on the observed
+            value. Even if they have the same value too, they will *not* be considered equal if they correspond to different
+            instances. This allows to store measurements in null without losing any measurements, even redundant ones.
+        
+            Specified by:
+                 in interface 
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.ComparableMeasurement.compareTo`Â in
+                interfaceÂ :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
+        
+            Parameters:
+                other (:class:`~org.orekit.estimation.measurements.ComparableMeasurement`): 
+        
+        """
+        ...
+    def estimate(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> EstimatedMeasurement[_PythonObservedMeasurement__T]: ...
+    def finalize(self) -> None: ...
+    def getBaseWeight(self) -> typing.List[float]:
+        """
+            Get the base weight associated with the measurement
+        
+            The base weight is used on residuals already normalized thanks to
+            :meth:`~org.orekit.estimation.measurements.PythonObservedMeasurement.getTheoreticalStandardDeviation` to increase or
+            decrease relative effect of some measurements with respect to other measurements. It is a dimensionless value, typically
+            between 0 and 1 (but it can really have any non-negative value).
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.getBaseWeight`Â in
+                interfaceÂ :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
+        
+            Returns:
+                base weight
+        
+            Also see:
+                :meth:`~org.orekit.estimation.measurements.PythonObservedMeasurement.getTheoreticalStandardDeviation`,
+                :code:`EstimatedMeasurement#getCurrentWeight()`
+        
+        
+        """
+        ...
+    def getDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Get the date.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeStamped.getDate` in interface :class:`~org.orekit.time.TimeStamped`
+        
+            Returns:
+                date attached to the object
+        
+        
+        """
+        ...
+    def getDimension(self) -> int:
+        """
+            Get the dimension of the measurement.
+        
+            Dimension is the size of the array containing the value. It will be one for a scalar measurement like a range or
+            range-rate, but 6 for a position-velocity measurement.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.getDimension`Â in
+                interfaceÂ :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
+        
+            Returns:
+                dimension of the measurement
+        
+        
+        """
+        ...
+    def getModifiers(self) -> java.util.List[EstimationModifier[_PythonObservedMeasurement__T]]: ...
+    def getObservedValue(self) -> typing.List[float]:
+        """
+            Get the observed value.
+        
+            The observed value is the value that was measured by the instrument.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.ComparableMeasurement.getObservedValue`Â in
+                interfaceÂ :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
+        
+            Returns:
+                observed value (array of size :meth:`~org.orekit.estimation.measurements.PythonObservedMeasurement.getDimension`
+        
+        
+        """
+        ...
+    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
+    def getSatellites(self) -> java.util.List[ObservableSatellite]: ...
+    def getTheoreticalStandardDeviation(self) -> typing.List[float]:
+        """
+            Get the theoretical standard deviation.
+        
+            The theoretical standard deviation is a theoretical value used for normalizing the residuals. It acts as a weighting
+            factor to mix appropriately measurements with different units and different accuracy. The value has the same dimension
+            as the measurement itself (i.e. when a residual is divided by this value, it becomes dimensionless).
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.getTheoreticalStandardDeviation`Â in
+                interfaceÂ :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
+        
+            Returns:
+                expected standard deviation
+        
+            Also see:
+                :meth:`~org.orekit.estimation.measurements.PythonObservedMeasurement.getBaseWeight`
+        
+        
+        """
+        ...
+    def isEnabled(self) -> bool:
+        """
+            Check if a measurement is enabled.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.isEnabled`Â in
+                interfaceÂ :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
+        
+            Returns:
+                true if the measurement is enabled
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+    def setEnabled(self, boolean: bool) -> None:
+        """
+            Enable or disable a measurement.
+        
+            Disabling a measurement allow to not consider it at one stage of the orbit determination (for example when it appears to
+            be an outlier as per current estimated covariance).
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.setEnabled`Â in
+                interfaceÂ :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
+        
+            Parameters:
+                enabled (boolean): if true the measurement will be enabled, otherwise it will be disabled
+        
+        
+        """
+        ...
+
 class AngularAzEl(AbstractMeasurement['AngularAzEl']):
     """
     public class AngularAzEl extends :class:`~org.orekit.estimation.measurements.AbstractMeasurement`<:class:`~org.orekit.estimation.measurements.AngularAzEl`>
@@ -1276,6 +1638,73 @@ class AngularRaDec(AbstractMeasurement['AngularRaDec']):
         
             Returns:
                 ground station from which measurement is performed
+        
+        
+        """
+        ...
+
+class BistaticRange(AbstractMeasurement['BistaticRange']):
+    """
+    public class BistaticRange extends :class:`~org.orekit.estimation.measurements.AbstractMeasurement`<:class:`~org.orekit.estimation.measurements.BistaticRange`>
+    
+        Class modeling a bistatic range measurement using an emitter ground station and a receiver ground station.
+    
+        The measurement is considered to be a signal:
+    
+          - Emitted from the emitter ground station
+          - Reflected on the spacecraft
+          - Received on the receiver ground station
+    
+        The date of the measurement corresponds to the reception on ground of the reflected signal.
+    
+        The motion of the stations and the spacecraft during the signal flight time are taken into account.
+    
+        Since:
+            11.2
+    """
+    def __init__(self, groundStation: GroundStation, groundStation2: GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, observableSatellite: ObservableSatellite): ...
+    def getEmitterStation(self) -> GroundStation: ...
+    def getReceiverStation(self) -> GroundStation: ...
+
+class BistaticRangeRate(AbstractMeasurement['BistaticRangeRate']):
+    """
+    public class BistaticRangeRate extends :class:`~org.orekit.estimation.measurements.AbstractMeasurement`<:class:`~org.orekit.estimation.measurements.BistaticRangeRate`>
+    
+        Class modeling a bistatic range rate measurement using an emitter ground station and a receiver ground station.
+    
+        The measurement is considered to be a signal:
+    
+          - Emitted from the emitter ground station
+          - Reflected on the spacecraft
+          - Received on the receiver ground station
+    
+        The date of the measurement corresponds to the reception on ground of the reflected signal. The quantity measured at the
+        receiver is the bistatic radial velocity as the sum of the radial velocities with respect to the two stations.
+    
+        The motion of the stations and the spacecraft during the signal flight time are taken into account.
+    
+        The Doppler measurement can be obtained by multiplying the velocity by (fe/c), where fe is the emission frequency.
+    
+        Since:
+            11.2
+    """
+    def __init__(self, groundStation: GroundStation, groundStation2: GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, observableSatellite: ObservableSatellite): ...
+    def getEmitterStation(self) -> GroundStation:
+        """
+            Get the emitter ground station.
+        
+            Returns:
+                emitter ground station
+        
+        
+        """
+        ...
+    def getReceiverStation(self) -> GroundStation:
+        """
+            Get the receiver ground station.
+        
+            Returns:
+                receiver ground station
         
         
         """
@@ -1476,6 +1905,51 @@ class Position(AbstractMeasurement['Position']):
         """
         ...
 
+_PythonAbstractMeasurement__T = typing.TypeVar('_PythonAbstractMeasurement__T', bound=ObservedMeasurement)  # <T>
+class PythonAbstractMeasurement(AbstractMeasurement[_PythonAbstractMeasurement__T], typing.Generic[_PythonAbstractMeasurement__T]):
+    """
+    public class PythonAbstractMeasurement<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.AbstractMeasurement`<T>
+    """
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, list: java.util.List[ObservableSatellite]): ...
+    def addParameterDriver(self, parameterDriver: org.orekit.utils.ParameterDriver) -> None:
+        """
+            Add a parameter driver.
+        
+            Overrides:
+                :meth:`~org.orekit.estimation.measurements.AbstractMeasurement.addParameterDriver`Â in
+                classÂ :class:`~org.orekit.estimation.measurements.AbstractMeasurement`
+        
+            Parameters:
+                driver (:class:`~org.orekit.utils.ParameterDriver`): parameter driver to add
+        
+            Since:
+                9.3
+        
+        
+        """
+        ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+    def theoreticalEvaluation(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> EstimatedMeasurement[_PythonAbstractMeasurement__T]: ...
+
 class Range(AbstractMeasurement['Range']):
     """
     public class Range extends :class:`~org.orekit.estimation.measurements.AbstractMeasurement`<:class:`~org.orekit.estimation.measurements.Range`>
@@ -1566,6 +2040,47 @@ class RangeRate(AbstractMeasurement['RangeRate']):
         """
         ...
 
+class TDOA(AbstractMeasurement['TDOA']):
+    """
+    public class TDOA extends :class:`~org.orekit.estimation.measurements.AbstractMeasurement`<:class:`~org.orekit.estimation.measurements.TDOA`>
+    
+        Class modeling a Time Difference of Arrival measurement with a satellite as emitter and two ground stations as
+        receivers.
+    
+        TDOA measures the difference in signal arrival time between the emitter and receivers, corresponding to a difference in
+        ranges from the two receivers to the emitter.
+    
+        The date of the measurement corresponds to the reception of the signal by the prime station. The measurement corresponds
+        to the date of the measurement minus the date of reception of the signal by the second station: :code:`tdoa = tr
+        :sub:`1` - tr :sub:`2``
+    
+        The motion of the stations and the satellite during the signal flight time are taken into account.
+    
+        Since:
+            11.2
+    """
+    def __init__(self, groundStation: GroundStation, groundStation2: GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, observableSatellite: ObservableSatellite): ...
+    def getPrimeStation(self) -> GroundStation:
+        """
+            Get the prime ground station, the one that gives the date of the measurement.
+        
+            Returns:
+                prime ground station
+        
+        
+        """
+        ...
+    def getSecondStation(self) -> GroundStation:
+        """
+            Get the second ground station, the one that gives the measurement.
+        
+            Returns:
+                second ground station
+        
+        
+        """
+        ...
+
 class TurnAroundRange(AbstractMeasurement['TurnAroundRange']):
     """
     public class TurnAroundRange extends :class:`~org.orekit.estimation.measurements.AbstractMeasurement`<:class:`~org.orekit.estimation.measurements.TurnAroundRange`>
@@ -1610,6 +2125,8 @@ class __module_protocol__(typing.Protocol):
     AbstractMeasurement: typing.Type[AbstractMeasurement]
     AngularAzEl: typing.Type[AngularAzEl]
     AngularRaDec: typing.Type[AngularRaDec]
+    BistaticRange: typing.Type[BistaticRange]
+    BistaticRangeRate: typing.Type[BistaticRangeRate]
     ComparableMeasurement: typing.Type[ComparableMeasurement]
     EstimatedEarthFrameProvider: typing.Type[EstimatedEarthFrameProvider]
     EstimatedMeasurement: typing.Type[EstimatedMeasurement]
@@ -1622,8 +2139,14 @@ class __module_protocol__(typing.Protocol):
     ObservedMeasurement: typing.Type[ObservedMeasurement]
     PV: typing.Type[PV]
     Position: typing.Type[Position]
+    PythonAbstractMeasurement: typing.Type[PythonAbstractMeasurement]
+    PythonComparableMeasurement: typing.Type[PythonComparableMeasurement]
+    PythonEstimationModifier: typing.Type[PythonEstimationModifier]
+    PythonEstimationsProvider: typing.Type[PythonEstimationsProvider]
+    PythonObservedMeasurement: typing.Type[PythonObservedMeasurement]
     Range: typing.Type[Range]
     RangeRate: typing.Type[RangeRate]
+    TDOA: typing.Type[TDOA]
     TurnAroundRange: typing.Type[TurnAroundRange]
     filtering: org.orekit.estimation.measurements.filtering.__module_protocol__
     generation: org.orekit.estimation.measurements.generation.__module_protocol__

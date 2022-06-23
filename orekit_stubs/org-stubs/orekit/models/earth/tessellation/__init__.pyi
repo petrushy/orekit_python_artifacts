@@ -233,6 +233,51 @@ class DivertedSingularityAiming(TileAiming):
         ...
     def getSingularPoints(self) -> java.util.List[org.orekit.bodies.GeodeticPoint]: ...
 
+class PythonTileAiming(TileAiming):
+    """
+    public class PythonTileAiming extends Object implements :class:`~org.orekit.models.earth.tessellation.TileAiming`
+    """
+    def __init__(self): ...
+    def alongTileDirection(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, geodeticPoint: org.orekit.bodies.GeodeticPoint) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Find the along tile direction for tessellation at specified point.
+        
+            Specified by:
+                :meth:`~org.orekit.models.earth.tessellation.TileAiming.alongTileDirection`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.tessellation.TileAiming`
+        
+            Parameters:
+                point (Vector3D): point on the ellipsoid (Cartesian coordinates)
+                gp (:class:`~org.orekit.bodies.GeodeticPoint`): point on the ellipsoid (geodetic coordinates)
+        
+            Returns:
+                normalized along tile direction
+        
+        
+        """
+        ...
+    def finalize(self) -> None: ...
+    def getSingularPoints(self) -> java.util.List[org.orekit.bodies.GeodeticPoint]: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
 
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.models.earth.tessellation")``.
@@ -241,5 +286,6 @@ class __module_protocol__(typing.Protocol):
     ConstantAzimuthAiming: typing.Type[ConstantAzimuthAiming]
     DivertedSingularityAiming: typing.Type[DivertedSingularityAiming]
     EllipsoidTessellator: typing.Type[EllipsoidTessellator]
+    PythonTileAiming: typing.Type[PythonTileAiming]
     Tile: typing.Type[Tile]
     TileAiming: typing.Type[TileAiming]

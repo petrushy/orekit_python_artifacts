@@ -9,7 +9,7 @@ import typing
 
 class Duration(org.orekit.propagation.AdditionalStateProvider):
     """
-    public class Duration extends :class:`~org.orekit.forces.maneuvers.jacobians.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.AdditionalStateProvider`
+    public class Duration extends Object implements :class:`~org.orekit.propagation.AdditionalStateProvider`
     
         Generator for one column of a Jacobian matrix for special case of maneuver duration.
     
@@ -28,8 +28,8 @@ class Duration(org.orekit.propagation.AdditionalStateProvider):
             Get the additional state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.AdditionalStateProvider.getAdditionalState` in
-                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
+                :meth:`~org.orekit.propagation.AdditionalStateProvider.getAdditionalState`Â in
+                interfaceÂ :class:`~org.orekit.propagation.AdditionalStateProvider`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state to which additional state should correspond
@@ -45,8 +45,8 @@ class Duration(org.orekit.propagation.AdditionalStateProvider):
             Get the name of the additional state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.AdditionalStateProvider.getName` in
-                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
+                :meth:`~org.orekit.propagation.AdditionalStateProvider.getName`Â in
+                interfaceÂ :class:`~org.orekit.propagation.AdditionalStateProvider`
         
             Returns:
                 name of the additional state (names containing "orekit" with any case are reserved for the library internal use)
@@ -57,7 +57,7 @@ class Duration(org.orekit.propagation.AdditionalStateProvider):
 
 class MassDepletionDelay(org.orekit.propagation.integration.AdditionalDerivativesProvider):
     """
-    public class MassDepletionDelay extends :class:`~org.orekit.forces.maneuvers.jacobians.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+    public class MassDepletionDelay extends Object implements :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
     
         Generator for effect of delaying mass depletion when delaying a maneuver.
     
@@ -66,7 +66,7 @@ class MassDepletionDelay(org.orekit.propagation.integration.AdditionalDerivative
     """
     PREFIX: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.forces.maneuvers.jacobians.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` PREFIX
+    public static final String PREFIX
     
         Prefix for state name.
     
@@ -76,31 +76,36 @@ class MassDepletionDelay(org.orekit.propagation.integration.AdditionalDerivative
     
     """
     def __init__(self, string: str, boolean: bool, maneuver: org.orekit.forces.maneuvers.Maneuver): ...
-    def derivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]:
+    def combinedDerivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.orekit.propagation.integration.CombinedDerivatives:
         """
-            Compute the derivatives related to the additional state parameters.
+            Compute the derivatives related to the additional state (and optionally main state increments).
+        
+            As of 11.2, there is a default implementation that calls the deprecated
+            :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.derivatives` method. This has been done for
+            backward compatibility only and will be removed in 12.0.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.derivatives` in
-                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.combinedDerivatives`Â in
+                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional states this equations depend on (according to the
                     :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.yield` method)
         
             Returns:
-                computed derivatives
+                computed combined derivatives, which may include some incremental coupling effect to add to main state derivatives
         
         
         """
         ...
+    def derivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]: ...
     def getDimension(self) -> int:
         """
             Get the dimension of the generated column.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getDimension` in
-                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getDimension`Â in
+                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
             Returns:
                 dimension of the generated column
@@ -113,8 +118,8 @@ class MassDepletionDelay(org.orekit.propagation.integration.AdditionalDerivative
             Get the name of the additional derivatives (which will become state once integrated).
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getName` in
-                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getName`Â in
+                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
             Returns:
                 name of the additional state (names containing "orekit" with any case are reserved for the library internal use)
@@ -127,8 +132,8 @@ class MassDepletionDelay(org.orekit.propagation.integration.AdditionalDerivative
             Initialize the generator at the start of propagation.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.init` in
-                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.init`Â in
+                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
             Parameters:
                 initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial state information at the start of propagation
@@ -140,7 +145,7 @@ class MassDepletionDelay(org.orekit.propagation.integration.AdditionalDerivative
 
 class MedianDate(org.orekit.propagation.AdditionalStateProvider):
     """
-    public class MedianDate extends :class:`~org.orekit.forces.maneuvers.jacobians.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.AdditionalStateProvider`
+    public class MedianDate extends Object implements :class:`~org.orekit.propagation.AdditionalStateProvider`
     
         Generator for one column of a Jacobian matrix for special case of maneuver median date.
     
@@ -159,8 +164,8 @@ class MedianDate(org.orekit.propagation.AdditionalStateProvider):
             Get the additional state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.AdditionalStateProvider.getAdditionalState` in
-                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
+                :meth:`~org.orekit.propagation.AdditionalStateProvider.getAdditionalState`Â in
+                interfaceÂ :class:`~org.orekit.propagation.AdditionalStateProvider`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state to which additional state should correspond
@@ -176,8 +181,8 @@ class MedianDate(org.orekit.propagation.AdditionalStateProvider):
             Get the name of the additional state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.AdditionalStateProvider.getName` in
-                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
+                :meth:`~org.orekit.propagation.AdditionalStateProvider.getName`Â in
+                interfaceÂ :class:`~org.orekit.propagation.AdditionalStateProvider`
         
             Returns:
                 name of the additional state (names containing "orekit" with any case are reserved for the library internal use)
@@ -188,7 +193,7 @@ class MedianDate(org.orekit.propagation.AdditionalStateProvider):
 
 class TriggerDate(org.orekit.propagation.AdditionalStateProvider, org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter):
     """
-    public class TriggerDate extends :class:`~org.orekit.forces.maneuvers.jacobians.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.AdditionalStateProvider`, :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter`
+    public class TriggerDate extends Object implements :class:`~org.orekit.propagation.AdditionalStateProvider`, :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter`
     
         Generator for one column of a Jacobian matrix for special case of trigger dates.
     
@@ -259,8 +264,8 @@ class TriggerDate(org.orekit.propagation.AdditionalStateProvider, org.orekit.for
             Get the additional state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.AdditionalStateProvider.getAdditionalState` in
-                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
+                :meth:`~org.orekit.propagation.AdditionalStateProvider.getAdditionalState`Â in
+                interfaceÂ :class:`~org.orekit.propagation.AdditionalStateProvider`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state to which additional state should correspond
@@ -286,8 +291,8 @@ class TriggerDate(org.orekit.propagation.AdditionalStateProvider, org.orekit.for
             Get the name of the additional state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.AdditionalStateProvider.getName` in
-                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
+                :meth:`~org.orekit.propagation.AdditionalStateProvider.getName`Â in
+                interfaceÂ :class:`~org.orekit.propagation.AdditionalStateProvider`
         
             Returns:
                 name of the additional state (names containing "orekit" with any case are reserved for the library internal use)
@@ -297,17 +302,19 @@ class TriggerDate(org.orekit.propagation.AdditionalStateProvider, org.orekit.for
         ...
     def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
-            Initialization method called at propagation start.
-        
-            The default implementation does nothing.
+            Initialize the additional state provider at the start of propagation.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter.init` in
-                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter`
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter.init`Â in
+                interfaceÂ :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.AdditionalStateProvider.init`Â in
+                interfaceÂ :class:`~org.orekit.propagation.AdditionalStateProvider`
         
             Parameters:
-                initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial spacecraft state (at the start of propagation).
-                target (:class:`~org.orekit.time.AbsoluteDate`): date of propagation. Not equal to :code:`initialState.getDate()`.
+                initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial state information at the start of propagation
+                target (:class:`~org.orekit.time.AbsoluteDate`): date of propagation
         
         
         """
@@ -322,8 +329,8 @@ class TriggerDate(org.orekit.propagation.AdditionalStateProvider, org.orekit.for
             have :code:`start` set to :code:`false` and the second call will have :code:`start` set to :code:`true`.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter.maneuverTriggered` in
-                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter`
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter.maneuverTriggered`Â in
+                interfaceÂ :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state at trigger date (before applying the maneuver)
@@ -337,8 +344,8 @@ class TriggerDate(org.orekit.propagation.AdditionalStateProvider, org.orekit.for
             Reset state as a maneuver triggers.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter.resetState` in
-                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter`
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter.resetState`Â in
+                interfaceÂ :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state at trigger date

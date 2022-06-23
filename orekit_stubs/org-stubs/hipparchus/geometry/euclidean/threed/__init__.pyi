@@ -2427,31 +2427,6 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D]
         
         """
         ...
-    def equalsIeee754(self, object: typing.Any) -> bool:
-        """
-            Test for the equality of two 3D vectors.
-        
-            If all coordinates of two 3D vectors are exactly the same, and none are :code:`NaN`, the two 3D vectors are considered
-            to be equal.
-        
-            In compliance with IEEE754 handling, if any coordinates of any of the two vectors are :code:`NaN`, then the vectors are
-            considered different. This implies that
-            :meth:`~org.hipparchus.geometry.euclidean.threed.Vector3D.NaN`.equals(:meth:`~org.hipparchus.geometry.euclidean.threed.Vector3D.NaN`)
-            returns :code:`false` despite the instance is checked against itself.
-        
-            Parameters:
-                other (:class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality to this
-        
-            Returns:
-                true if two 3D vector objects are equal, false if object is null, not an instance of Vector3D, or not equal to this
-                Vector3D instance
-        
-            Since:
-                2.1
-        
-        
-        """
-        ...
     def getAlpha(self) -> float:
         """
             Get the azimuth of the vector.

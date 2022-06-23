@@ -3,6 +3,7 @@ import java.lang
 import java.util
 import java.util.function
 import java.util.stream
+import org
 import org.hipparchus
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.bodies
@@ -518,13 +519,14 @@ class FieldTransform(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable[
     
         .. code-block: java
         
-         Vector3D translation  = new Vector3D(-1, 0, 0);
-         Vector3D velocity     = new Vector3D(-2, 0, 0);
-         Vector3D acceleration = new Vector3D(-3, 0, 0);
-        
-         Transform R1toR2 = new Transform(date, translation, velocity, acceleration);
-        
-         PVB = R1toR2.transformPVCoordinate(PVA);
+        
+         Vector3D translation  = new Vector3D(-1, 0, 0);
+         Vector3D velocity     = new Vector3D(-2, 0, 0);
+         Vector3D acceleration = new Vector3D(-3, 0, 0);
+        
+         Transform R1toR2 = new Transform(date, translation, velocity, acceleration);
+        
+         PVB = R1toR2.transformPVCoordinate(PVA);
          
     
         Example of rotation from R :sub:`A` to R :sub:`B`
@@ -542,12 +544,13 @@ class FieldTransform(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable[
     
         .. code-block: java
         
-         Rotation rotation = new Rotation(Vector3D.PLUS_K, FastMath.PI / 2);
-         Vector3D rotationRate = new Vector3D(0, 0, -2);
-        
-         Transform R1toR2 = new Transform(rotation, rotationRate);
-        
-         PVB = R1toR2.transformPVCoordinates(PVA);
+        
+         Rotation rotation = new Rotation(Vector3D.PLUS_K, FastMath.PI / 2);
+         Vector3D rotationRate = new Vector3D(0, 0, -2);
+        
+         Transform R1toR2 = new Transform(rotation, rotationRate);
+        
+         PVB = R1toR2.transformPVCoordinates(PVA);
          
     
         Since:
@@ -702,7 +705,8 @@ class Frame(java.io.Serializable):
     
         When we say a :class:`~org.orekit.frames.Transform` t is *from frame :sub:`A` to frame :sub:`B`*, we mean that if the
         coordinates of some absolute vector (say the direction of a distant star for example) has coordinates u :sub:`A` in
-        frame :sub:`A` and u :sub:`B` in frame :sub:`B` , then u :sub:`B` =:meth:`~org.orekit.frames.Transform.transformVector`.
+        frame :sub:`A` and u :sub:`B` in frame :sub:`B` , then u :sub:`B`
+        =:meth:`~org.orekit.frames.StaticTransform.transformVector`.
     
         The transforms may be constant or varying, depending on the implementation of the
         :class:`~org.orekit.frames.TransformProvider` used to define the frame. For simple fixed transforms, using
@@ -788,6 +792,26 @@ class Frame(java.io.Serializable):
         
             Returns:
                 the unique instance of the root frame
+        
+        
+        """
+        ...
+    def getStaticTransformTo(self, frame: 'Frame', absoluteDate: org.orekit.time.AbsoluteDate) -> 'StaticTransform':
+        """
+            Get the static portion of the transform from the instance to another frame. The returned transform is static in the
+            sense that it includes translations and rotations, but not rates.
+        
+            This method is often more performant than :meth:`~org.orekit.frames.Frame.getTransformTo` when rates are not needed.
+        
+            Parameters:
+                destination (:class:`~org.orekit.frames.Frame`): destination frame to which we want to transform vectors
+                date (:class:`~org.orekit.time.AbsoluteDate`): the date (can be null if it is sure than no date dependent frame is used)
+        
+            Returns:
+                static transform from the instance to the destination frame
+        
+            Since:
+                11.2
         
         
         """
@@ -1141,8 +1165,9 @@ class LOFType(java.lang.Enum['LOFType']):
         
             .. code-block: java
             
-            for (LOFType c : LOFType.values())
-                System.out.println(c);
+            
+            for (LOFType c : LOFType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1474,8 +1499,9 @@ class Predefined(java.lang.Enum['Predefined']):
         
             .. code-block: java
             
-            for (Predefined c : Predefined.values())
-                System.out.println(c);
+            
+            for (Predefined c : Predefined.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1485,209 +1511,88 @@ class Predefined(java.lang.Enum['Predefined']):
         """
         ...
 
-class Transform(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Transform'], org.orekit.time.TimeInterpolable['Transform'], java.io.Serializable):
+class StaticTransform(org.orekit.time.TimeStamped):
     """
-    public class Transform extends Object implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.frames.Transform`>, :class:`~org.orekit.time.TimeInterpolable`<:class:`~org.orekit.frames.Transform`>, Serializable
+    public interface StaticTransform extends :class:`~org.orekit.time.TimeStamped`
     
-        Transformation class in three dimensional space.
+        A transform that only includes translation and rotation. It is static in the sense that no rates thereof are included.
     
-        This class represents the transformation engine between :class:`~org.orekit.frames.Frame`. It is used both to define the
-        relationship between each frame and its parent frame and to gather all individual transforms into one operation when
-        converting between frames far away from each other.
-    
-        The convention used in OREKIT is vectorial transformation. It means that a transformation is defined as a transform to
-        apply to the coordinates of a vector expressed in the old frame to obtain the same vector expressed in the new frame.
-    
-        Instances of this class are guaranteed to be immutable.
-    
-        Examples
-    ----------
-    
-    
-        Example of translation from R :sub:`A` to R :sub:`B`
-    ------------------------------------------------------
-    
-    
-        We want to transform the :class:`~org.orekit.utils.PVCoordinates` PV :sub:`A` to PV :sub:`B` with :
-    
-        PV :sub:`A` = ({1, 0, 0}, {2, 0, 0}, {3, 0, 0});
-    
-    
-        PV :sub:`B` = ({0, 0, 0}, {0, 0, 0}, {0, 0, 0});
-    
-        The transform to apply then is defined as follows :
-    
-        .. code-block: java
-        
-         Vector3D translation  = new Vector3D(-1, 0, 0);
-         Vector3D velocity     = new Vector3D(-2, 0, 0);
-         Vector3D acceleration = new Vector3D(-3, 0, 0);
-        
-         Transform R1toR2 = new Transform(date, translation, velocity, acceleration);
-        
-         PVB = R1toR2.transformPVCoordinates(PVA);
-         
-    
-        Example of rotation from R :sub:`A` to R :sub:`B`
-    ---------------------------------------------------
-    
-    
-        We want to transform the :class:`~org.orekit.utils.PVCoordinates` PV :sub:`A` to PV :sub:`B` with
-    
-        PV :sub:`A` = ({1, 0, 0}, { 1, 0, 0});
-    
-    
-        PV :sub:`B` = ({0, 1, 0}, {-2, 1, 0});
-    
-        The transform to apply then is defined as follows :
-    
-        .. code-block: java
-        
-         Rotation rotation = new Rotation(Vector3D.PLUS_K, FastMath.PI / 2);
-         Vector3D rotationRate = new Vector3D(0, 0, -2);
-        
-         Transform R1toR2 = new Transform(rotation, rotationRate);
-        
-         PVB = R1toR2.transformPVCoordinates(PVA);
-         
+        Since:
+            11.2
     
         Also see:
-            :meth:`~serialized`
+            :class:`~org.orekit.frames.Transform`
     """
-    IDENTITY: typing.ClassVar['Transform'] = ...
-    """
-    public static final :class:`~org.orekit.frames.Transform` IDENTITY
-    
-        Identity transform.
-    
-    """
-    @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, rotation: org.hipparchus.geometry.euclidean.threed.Rotation): ...
-    @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, rotation: org.hipparchus.geometry.euclidean.threed.Rotation, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
-    @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, rotation: org.hipparchus.geometry.euclidean.threed.Rotation, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
-    @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
-    @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
-    @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D3: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
-    @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, transform: 'Transform', transform2: 'Transform'): ...
-    @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, angularCoordinates: org.orekit.utils.AngularCoordinates): ...
-    @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinates: org.orekit.utils.PVCoordinates): ...
-    def freeze(self) -> 'Transform':
+    @staticmethod
+    def compose(absoluteDate: org.orekit.time.AbsoluteDate, staticTransform: 'StaticTransform', staticTransform2: 'StaticTransform') -> 'StaticTransform':
         """
-            Get a frozen transform.
+            Build a transform by combining two existing ones.
         
-            This method creates a copy of the instance but frozen in time, i.e. with velocity, acceleration and rotation rate forced
-            to zero.
+            Note that the dates of the two existing transformed are *ignored*, and the combined transform date is set to the date
+            supplied in this constructor without any attempt to shift the raw transforms. This is a design choice allowing user full
+            control of the combination.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): date of the transform
+                first (:class:`~org.orekit.frames.StaticTransform`): first transform applied
+                second (:class:`~org.orekit.frames.StaticTransform`): second transform applied
         
             Returns:
-                a new transform, without any time-dependent parts
-        
-        
-        """
-        ...
-    def getAcceleration(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Get the second time derivative of the translation.
-        
-            Returns:
-                second time derivative of the translation
+                the newly created static transform that has the same effect as applying :code:`first`, then :code:`second`.
         
             Also see:
-                :meth:`~org.orekit.frames.Transform.getCartesian`, :meth:`~org.orekit.frames.Transform.getTranslation`,
-                :meth:`~org.orekit.frames.Transform.getVelocity`
+                :meth:`~org.orekit.frames.StaticTransform.of`
         
         
         """
         ...
-    def getAngular(self) -> org.orekit.utils.AngularCoordinates:
+    @staticmethod
+    def compositeRotation(staticTransform: 'StaticTransform', staticTransform2: 'StaticTransform') -> org.hipparchus.geometry.euclidean.threed.Rotation:
         """
-            Get the underlying elementary angular part.
+            Compute a composite rotation.
         
-            A transform can be uniquely represented as an elementary translation followed by an elementary rotation. This method
-            returns this unique elementary rotation with its derivative.
+            Parameters:
+                first (:class:`~org.orekit.frames.StaticTransform`): first applied transform
+                second (:class:`~org.orekit.frames.StaticTransform`): second applied transform
         
             Returns:
-                underlying elementary angular part
-        
-            Also see:
-                :meth:`~org.orekit.frames.Transform.getRotation`, :meth:`~org.orekit.frames.Transform.getRotationRate`,
-                :meth:`~org.orekit.frames.Transform.getRotationAcceleration`
+                rotation part of the composite transform
         
         
         """
         ...
-    def getCartesian(self) -> org.orekit.utils.PVCoordinates:
+    @staticmethod
+    def compositeTranslation(staticTransform: 'StaticTransform', staticTransform2: 'StaticTransform') -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Get the underlying elementary Cartesian part.
+            Compute a composite translation.
         
-            A transform can be uniquely represented as an elementary translation followed by an elementary rotation. This method
-            returns this unique elementary translation with its derivative.
+            Parameters:
+                first (:class:`~org.orekit.frames.StaticTransform`): first applied transform
+                second (:class:`~org.orekit.frames.StaticTransform`): second applied transform
         
             Returns:
-                underlying elementary Cartesian part
-        
-            Also see:
-                :meth:`~org.orekit.frames.Transform.getTranslation`, :meth:`~org.orekit.frames.Transform.getVelocity`
+                translation part of the composite transform
         
         
         """
         ...
-    def getDate(self) -> org.orekit.time.AbsoluteDate:
+    @staticmethod
+    def getIdentity() -> 'StaticTransform':
         """
-            Get the date.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeStamped.getDate` in interface :class:`~org.orekit.time.TimeStamped`
+            Get the identity static transform.
         
             Returns:
-                date attached to the object
+                identity transform.
         
         
         """
         ...
-    def getInverse(self) -> 'Transform':
+    def getInverse(self) -> 'StaticTransform':
         """
             Get the inverse transform of the instance.
         
             Returns:
                 inverse transform of the instance
-        
-        
-        """
-        ...
-    def getJacobian(self, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, doubleArray: typing.List[typing.List[float]]) -> None:
-        """
-            Compute the Jacobian of the :meth:`~org.orekit.frames.Transform.transformPVCoordinates` method of the transform.
-        
-            Element :code:`jacobian[i][j]` is the derivative of Cartesian coordinate i of the transformed
-            :class:`~org.orekit.utils.PVCoordinates` with respect to Cartesian coordinate j of the input
-            :class:`~org.orekit.utils.PVCoordinates` in method :meth:`~org.orekit.frames.Transform.transformPVCoordinates`.
-        
-            This definition implies that if we define position-velocity coordinates
-        
-            .. code-block: java
-            
-             PVâ‚� = transform.transformPVCoordinates(PVâ‚€), then
-             
-        
-            their differentials dPVâ‚� and dPVâ‚€ will obey the following relation where J is the matrix computed by this method:
-        
-            .. code-block: java
-            
-             dPVâ‚� = J × dPVâ‚€
-             
-        
-            Parameters:
-                selector (:class:`~org.orekit.utils.CartesianDerivativesFilter`): selector specifying the size of the upper left corner that must be filled (either 3x3 for positions only, 6x6 for
-                    positions and velocities, 9x9 for positions, velocities and accelerations)
-                jacobian (double[][]):             placeholder matrix whose upper-left corner is to be filled with the Jacobian, the rest of the matrix remaining untouched
         
         
         """
@@ -1702,40 +1607,6 @@ class Transform(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Tran
             Returns:
                 underlying elementary rotation
         
-            Also see:
-                :meth:`~org.orekit.frames.Transform.getAngular`, :meth:`~org.orekit.frames.Transform.getRotationRate`,
-                :meth:`~org.orekit.frames.Transform.getRotationAcceleration`
-        
-        
-        """
-        ...
-    def getRotationAcceleration(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Get the second time derivative of the rotation.
-        
-            Returns:
-                Second time derivative of the rotation
-        
-            Also see:
-                :meth:`~org.orekit.frames.Transform.getAngular`, :meth:`~org.orekit.frames.Transform.getRotation`,
-                :meth:`~org.orekit.frames.Transform.getRotationRate`
-        
-        
-        """
-        ...
-    def getRotationRate(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Get the first time derivative of the rotation.
-        
-            The norm represents the angular rate.
-        
-            Returns:
-                First time derivative of the rotation
-        
-            Also see:
-                :meth:`~org.orekit.frames.Transform.getAngular`, :meth:`~org.orekit.frames.Transform.getRotation`,
-                :meth:`~org.orekit.frames.Transform.getRotationAcceleration`
-        
         
         """
         ...
@@ -1749,50 +1620,62 @@ class Transform(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Tran
             Returns:
                 underlying elementary translation
         
-            Also see:
-                :meth:`~org.orekit.frames.Transform.getCartesian`, :meth:`~org.orekit.frames.Transform.getVelocity`,
-                :meth:`~org.orekit.frames.Transform.getAcceleration`
-        
         
         """
         ...
-    def getVelocity(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Get the first time derivative of the translation.
-        
-            Returns:
-                first time derivative of the translation
-        
-            Also see:
-                :meth:`~org.orekit.frames.Transform.getCartesian`, :meth:`~org.orekit.frames.Transform.getTranslation`,
-                :meth:`~org.orekit.frames.Transform.getAcceleration`
-        
-        
-        """
-        ...
-    @typing.overload
-    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, collection: typing.Union[java.util.Collection[org.orekit.time.TimeInterpolable], typing.Sequence[org.orekit.time.TimeInterpolable], typing.Set[org.orekit.time.TimeInterpolable]]) -> org.orekit.time.TimeInterpolable: ...
-    @typing.overload
-    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, stream: java.util.stream.Stream['Transform']) -> 'Transform': ...
     @typing.overload
     @staticmethod
-    def interpolate(absoluteDate: org.orekit.time.AbsoluteDate, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, collection: typing.Union[java.util.Collection['Transform'], typing.Sequence['Transform'], typing.Set['Transform']]) -> 'Transform': ...
-    def shiftedBy(self, double: float) -> 'Transform':
+    def of(absoluteDate: org.orekit.time.AbsoluteDate, rotation: org.hipparchus.geometry.euclidean.threed.Rotation) -> 'StaticTransform':
         """
-            Get a time-shifted instance.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeShiftable.shiftedBy` in interface :class:`~org.orekit.time.TimeShiftable`
+            Create a new static transform from a rotation and zero translation.
         
             Parameters:
-                dt (double): time shift in seconds
+                date (:class:`~org.orekit.time.AbsoluteDate`): of translation.
+                rotation (Rotation): to apply after the translation. That is after translating applying this rotation produces positions expressed in the new
+                    frame.
         
             Returns:
-                a new instance, shifted with respect to instance (which is not changed)
+                the newly created static transform.
+        
+            Also see:
+                :meth:`~org.orekit.frames.StaticTransform.of`
+        
+            Create a new static transform from a translation and rotation.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): of translation.
+                translation (Vector3D): to apply, expressed in the old frame. That is, the opposite of the coordinates of the new origin in the old frame.
+        
+            Returns:
+                the newly created static transform.
+        
+            Also see:
+                :meth:`~org.orekit.frames.StaticTransform.of`
+        
+            Create a new static transform from a translation and rotation.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): of translation.
+                translation (Vector3D): to apply, expressed in the old frame. That is, the opposite of the coordinates of the new origin in the old frame.
+                rotation (Rotation): to apply after the translation. That is after translating applying this rotation produces positions expressed in the new
+                    frame.
+        
+            Returns:
+                the newly created static transform.
+        
+            Also see:
+                :meth:`~org.orekit.frames.StaticTransform.compose`, :meth:`~org.orekit.frames.StaticTransform.of`,
+                :meth:`~org.orekit.frames.StaticTransform.of`
         
         
         """
         ...
+    @typing.overload
+    @staticmethod
+    def of(absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> 'StaticTransform': ...
+    @typing.overload
+    @staticmethod
+    def of(absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, rotation: org.hipparchus.geometry.euclidean.threed.Rotation) -> 'StaticTransform': ...
     def transformLine(self, line: org.hipparchus.geometry.euclidean.threed.Line) -> org.hipparchus.geometry.euclidean.threed.Line:
         """
             Transform a line.
@@ -1806,73 +1689,6 @@ class Transform(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Tran
         
         """
         ...
-    _transformPVCoordinates_0__T = typing.TypeVar('_transformPVCoordinates_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    _transformPVCoordinates_2__T = typing.TypeVar('_transformPVCoordinates_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def transformPVCoordinates(self, fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_transformPVCoordinates_0__T]) -> org.orekit.utils.FieldPVCoordinates[_transformPVCoordinates_0__T]:
-        """
-            Transform :class:`~org.orekit.utils.FieldPVCoordinates` including kinematic effects.
-        
-            Parameters:
-                pv (:class:`~org.orekit.utils.FieldPVCoordinates`<T> pv): position-velocity to transform.
-        
-            Returns:
-                transformed position-velocity
-        
-            Transform :class:`~org.orekit.utils.TimeStampedFieldPVCoordinates` including kinematic effects.
-        
-            In order to allow the user more flexibility, this method does *not* check for consistency between the transform
-            :meth:`~org.orekit.frames.Transform.getDate` and the time-stamped position-velocity
-            :meth:`~org.orekit.utils.TimeStampedFieldPVCoordinates.getDate`. The returned value will always have the same
-            :meth:`~org.orekit.utils.TimeStampedFieldPVCoordinates.getDate` as the input argument, regardless of the instance
-            :meth:`~org.orekit.frames.Transform.getDate`.
-        
-            Parameters:
-                pv (:class:`~org.orekit.utils.TimeStampedFieldPVCoordinates`<T> pv): time-stamped position-velocity to transform.
-        
-            Returns:
-                transformed time-stamped position-velocity
-        
-            Since:
-                7.0
-        
-        
-        """
-        ...
-    @typing.overload
-    def transformPVCoordinates(self, pVCoordinates: org.orekit.utils.PVCoordinates) -> org.orekit.utils.PVCoordinates:
-        """
-            Transform :class:`~org.orekit.utils.PVCoordinates` including kinematic effects.
-        
-            Parameters:
-                pva (:class:`~org.orekit.utils.PVCoordinates`): the position-velocity-acceleration triplet to transform.
-        
-            Returns:
-                transformed position-velocity-acceleration
-        
-            Transform :class:`~org.orekit.utils.TimeStampedPVCoordinates` including kinematic effects.
-        
-            In order to allow the user more flexibility, this method does *not* check for consistency between the transform
-            :meth:`~org.orekit.frames.Transform.getDate` and the time-stamped position-velocity
-            :meth:`~org.orekit.utils.TimeStampedPVCoordinates.getDate`. The returned value will always have the same
-            :meth:`~org.orekit.utils.TimeStampedPVCoordinates.getDate` as the input argument, regardless of the instance
-            :meth:`~org.orekit.frames.Transform.getDate`.
-        
-            Parameters:
-                pv (:class:`~org.orekit.utils.TimeStampedPVCoordinates`): time-stamped position-velocity to transform.
-        
-            Returns:
-                transformed time-stamped position-velocity
-        
-            Since:
-                7.0
-        
-        """
-        ...
-    @typing.overload
-    def transformPVCoordinates(self, timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_transformPVCoordinates_2__T]) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_transformPVCoordinates_2__T]: ...
-    @typing.overload
-    def transformPVCoordinates(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates) -> org.orekit.utils.TimeStampedPVCoordinates: ...
     _transformPosition_0__T = typing.TypeVar('_transformPosition_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def transformPosition(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transformPosition_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transformPosition_0__T]:
@@ -1930,7 +1746,7 @@ class Transform(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Tran
         """
         ...
 
-class TransformGenerator(org.orekit.utils.TimeStampedGenerator[Transform]):
+class TransformGenerator(org.orekit.utils.TimeStampedGenerator['Transform']):
     """
     public class TransformGenerator extends Object implements :class:`~org.orekit.utils.TimeStampedGenerator`<:class:`~org.orekit.frames.Transform`>
     
@@ -1943,7 +1759,7 @@ class TransformGenerator(org.orekit.utils.TimeStampedGenerator[Transform]):
             :class:`~org.orekit.utils.GenericTimeStampedCache`
     """
     def __init__(self, int: int, transformProvider: 'TransformProvider', double: float): ...
-    def generate(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> java.util.List[Transform]: ...
+    def generate(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> java.util.List['Transform']: ...
 
 class TransformProvider(java.io.Serializable):
     """
@@ -1953,6 +1769,22 @@ class TransformProvider(java.io.Serializable):
     
         The transform provider interface is mainly used to define the transform between a frame and its parent frame.
     """
+    def getStaticTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> StaticTransform:
+        """
+            Get a transform for only rotations and translations on the specified date.
+        
+            The default implementation returns :meth:`~org.orekit.frames.TransformProvider.getTransform` but implementations may
+            override it for better performance.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date.
+        
+            Returns:
+                the static transform.
+        
+        
+        """
+        ...
     _getTransform_0__T = typing.TypeVar('_getTransform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def getTransform(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTransform_0__T]) -> FieldTransform[_getTransform_0__T]:
@@ -1972,7 +1804,7 @@ class TransformProvider(java.io.Serializable):
         """
         ...
     @typing.overload
-    def getTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> Transform:
+    def getTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> 'Transform':
         """
             Get the :class:`~org.orekit.frames.Transform` corresponding to specified date.
         
@@ -2162,7 +1994,7 @@ class EclipticProvider(TransformProvider):
         """
         ...
     @typing.overload
-    def getTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> Transform:
+    def getTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> 'Transform':
         """
             Description copied from interface: :meth:`~org.orekit.frames.TransformProvider.getTransform`
             Get the :class:`~org.orekit.frames.Transform` corresponding to specified date.
@@ -2209,7 +2041,7 @@ class FixedTransformProvider(TransformProvider):
         Also see:
             :meth:`~serialized`
     """
-    def __init__(self, transform: Transform): ...
+    def __init__(self, transform: 'Transform'): ...
     _getTransform_0__T = typing.TypeVar('_getTransform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def getTransform(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTransform_0__T]) -> FieldTransform[_getTransform_0__T]:
@@ -2229,7 +2061,7 @@ class FixedTransformProvider(TransformProvider):
         """
         ...
     @typing.overload
-    def getTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> Transform:
+    def getTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> 'Transform':
         """
             Get the :class:`~org.orekit.frames.Transform` corresponding to specified date.
         
@@ -2277,6 +2109,26 @@ class HelmertTransformation(TransformProvider):
         
         """
         ...
+    def getStaticTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> StaticTransform:
+        """
+            Get a transform for only rotations and translations on the specified date.
+        
+            The default implementation returns :meth:`~org.orekit.frames.TransformProvider.getTransform` but implementations may
+            override it for better performance.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.TransformProvider.getStaticTransform`Â in
+                interfaceÂ :class:`~org.orekit.frames.TransformProvider`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date.
+        
+            Returns:
+                the static transform.
+        
+        
+        """
+        ...
     _getTransform_0__T = typing.TypeVar('_getTransform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def getTransform(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTransform_0__T]) -> FieldTransform[_getTransform_0__T]:
@@ -2296,7 +2148,7 @@ class HelmertTransformation(TransformProvider):
         """
         ...
     @typing.overload
-    def getTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> Transform:
+    def getTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> 'Transform':
         """
             Get the :class:`~org.orekit.frames.Transform` corresponding to specified date.
         
@@ -2312,6 +2164,19 @@ class HelmertTransformation(TransformProvider):
         """
         ...
     class Predefined(java.lang.Enum['HelmertTransformation.Predefined']):
+        ITRF_2020_TO_ITRF_2014: typing.ClassVar['HelmertTransformation.Predefined'] = ...
+        ITRF_2020_TO_ITRF_2008: typing.ClassVar['HelmertTransformation.Predefined'] = ...
+        ITRF_2020_TO_ITRF_2005: typing.ClassVar['HelmertTransformation.Predefined'] = ...
+        ITRF_2020_TO_ITRF_2000: typing.ClassVar['HelmertTransformation.Predefined'] = ...
+        ITRF_2020_TO_ITRF_1997: typing.ClassVar['HelmertTransformation.Predefined'] = ...
+        ITRF_2020_TO_ITRF_1996: typing.ClassVar['HelmertTransformation.Predefined'] = ...
+        ITRF_2020_TO_ITRF_1994: typing.ClassVar['HelmertTransformation.Predefined'] = ...
+        ITRF_2020_TO_ITRF_1993: typing.ClassVar['HelmertTransformation.Predefined'] = ...
+        ITRF_2020_TO_ITRF_1992: typing.ClassVar['HelmertTransformation.Predefined'] = ...
+        ITRF_2020_TO_ITRF_1991: typing.ClassVar['HelmertTransformation.Predefined'] = ...
+        ITRF_2020_TO_ITRF_1990: typing.ClassVar['HelmertTransformation.Predefined'] = ...
+        ITRF_2020_TO_ITRF_1989: typing.ClassVar['HelmertTransformation.Predefined'] = ...
+        ITRF_2020_TO_ITRF_1988: typing.ClassVar['HelmertTransformation.Predefined'] = ...
         ITRF_2014_TO_ITRF_2008: typing.ClassVar['HelmertTransformation.Predefined'] = ...
         ITRF_2014_TO_ITRF_2005: typing.ClassVar['HelmertTransformation.Predefined'] = ...
         ITRF_2014_TO_ITRF_2000: typing.ClassVar['HelmertTransformation.Predefined'] = ...
@@ -2345,6 +2210,8 @@ class HelmertTransformation(TransformProvider):
         def getTransformation(self) -> 'HelmertTransformation': ...
         @typing.overload
         def getTransformation(self, timeScale: org.orekit.time.TimeScale) -> 'HelmertTransformation': ...
+        @staticmethod
+        def selectPredefined(int: int, int2: int) -> 'HelmertTransformation.Predefined': ...
         _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
         @typing.overload
         @staticmethod
@@ -2367,6 +2234,7 @@ class ITRFVersion(java.lang.Enum['ITRFVersion']):
         Also see:
             :class:`~org.orekit.frames.EOPEntry`, :class:`~org.orekit.frames.HelmertTransformation`
     """
+    ITRF_2020: typing.ClassVar['ITRFVersion'] = ...
     ITRF_2014: typing.ClassVar['ITRFVersion'] = ...
     ITRF_2008: typing.ClassVar['ITRFVersion'] = ...
     ITRF_2005: typing.ClassVar['ITRFVersion'] = ...
@@ -2429,6 +2297,20 @@ class ITRFVersion(java.lang.Enum['ITRFVersion']):
     @typing.overload
     @staticmethod
     def getITRFVersion(string: str) -> 'ITRFVersion': ...
+    @staticmethod
+    def getLast() -> 'ITRFVersion':
+        """
+            Get last supported ITRF version.
+        
+            Returns:
+                last supported ITRF version
+        
+            Since:
+                11.2
+        
+        
+        """
+        ...
     def getName(self) -> str:
         """
             Get the name the frame version.
@@ -2481,8 +2363,9 @@ class ITRFVersion(java.lang.Enum['ITRFVersion']):
         
             .. code-block: java
             
-            for (ITRFVersion c : ITRFVersion.values())
-                System.out.println(c);
+            
+            for (ITRFVersion c : ITRFVersion.values())
+                System.out.println(c);
             
         
             Returns:
@@ -2494,11 +2377,12 @@ class ITRFVersion(java.lang.Enum['ITRFVersion']):
     class Converter(TransformProvider):
         def getDestination(self) -> 'ITRFVersion': ...
         def getOrigin(self) -> 'ITRFVersion': ...
+        def getStaticTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> StaticTransform: ...
         _getTransform_0__T = typing.TypeVar('_getTransform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
         @typing.overload
         def getTransform(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTransform_0__T]) -> FieldTransform[_getTransform_0__T]: ...
         @typing.overload
-        def getTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> Transform: ...
+        def getTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> 'Transform': ...
 
 class ITRFVersionLoader(ItrfVersionProvider):
     """
@@ -2628,7 +2512,7 @@ class InterpolatingTransformProvider(TransformProvider):
         """
         ...
     @typing.overload
-    def getTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> Transform:
+    def getTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> 'Transform':
         """
             Get the :class:`~org.orekit.frames.Transform` corresponding to specified date.
         
@@ -2666,6 +2550,26 @@ class L1TransformProvider(TransformProvider):
             :meth:`~serialized`
     """
     def __init__(self, celestialBody: org.orekit.bodies.CelestialBody, celestialBody2: org.orekit.bodies.CelestialBody): ...
+    def getStaticTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> StaticTransform:
+        """
+            Get a transform for only rotations and translations on the specified date.
+        
+            The default implementation returns :meth:`~org.orekit.frames.TransformProvider.getTransform` but implementations may
+            override it for better performance.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.TransformProvider.getStaticTransform`Â in
+                interfaceÂ :class:`~org.orekit.frames.TransformProvider`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date.
+        
+            Returns:
+                the static transform.
+        
+        
+        """
+        ...
     _getTransform_0__T = typing.TypeVar('_getTransform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def getTransform(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTransform_0__T]) -> FieldTransform[_getTransform_0__T]:
@@ -2685,7 +2589,7 @@ class L1TransformProvider(TransformProvider):
         """
         ...
     @typing.overload
-    def getTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> Transform:
+    def getTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> 'Transform':
         """
             Get the :class:`~org.orekit.frames.Transform` corresponding to specified date.
         
@@ -2729,6 +2633,245 @@ class LocalOrbitalFrame(Frame):
     """
     def __init__(self, frame: Frame, lOFType: LOFType, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, string: str): ...
 
+class PythonEOPHistoryLoader(EOPHistoryLoader):
+    """
+    public class PythonEOPHistoryLoader extends Object implements :class:`~org.orekit.frames.EOPHistoryLoader`
+    """
+    def __init__(self): ...
+    def fillHistory(self, nutationCorrectionConverter: org.orekit.utils.IERSConventions.NutationCorrectionConverter, sortedSet: java.util.SortedSet[EOPEntry]) -> None: ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
+class PythonItrfVersionProvider(ItrfVersionProvider):
+    """
+    public class PythonItrfVersionProvider extends Object implements :class:`~org.orekit.frames.ItrfVersionProvider`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def getConfiguration(self, string: str, int: int) -> ITRFVersionLoader.ITRFVersionConfiguration:
+        """
+            Get the ITRF version configuration defined by a given file at specified date.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.ItrfVersionProvider.getConfiguration`Â in
+                interfaceÂ :class:`~org.orekit.frames.ItrfVersionProvider`
+        
+            Parameters:
+                name (String): EOP file name
+                mjd (int): date of the EOP in modified Julian day
+        
+            Returns:
+                configuration valid around specified date in the file
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
+class PythonStaticTransform(StaticTransform):
+    """
+    public class PythonStaticTransform extends Object implements :class:`~org.orekit.frames.StaticTransform`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def getDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Get the date.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeStamped.getDate` in interface :class:`~org.orekit.time.TimeStamped`
+        
+            Returns:
+                date attached to the object
+        
+        
+        """
+        ...
+    def getInverse(self) -> StaticTransform:
+        """
+            Get the inverse transform of the instance.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.StaticTransform.getInverse` in interface :class:`~org.orekit.frames.StaticTransform`
+        
+            Returns:
+                inverse transform of the instance
+        
+        
+        """
+        ...
+    def getRotation(self) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+        """
+            Get the underlying elementary rotation.
+        
+            A transform can be uniquely represented as an elementary translation followed by an elementary rotation. This method
+            returns this unique elementary rotation.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.StaticTransform.getRotation` in interface :class:`~org.orekit.frames.StaticTransform`
+        
+            Returns:
+                underlying elementary rotation
+        
+        
+        """
+        ...
+    def getTranslation(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Get the underlying elementary translation.
+        
+            A transform can be uniquely represented as an elementary translation followed by an elementary rotation. This method
+            returns this unique elementary translation.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.StaticTransform.getTranslation` in interface :class:`~org.orekit.frames.StaticTransform`
+        
+            Returns:
+                underlying elementary translation
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
+class PythonTransformProvider(TransformProvider):
+    """
+    public class PythonTransformProvider extends Object implements :class:`~org.orekit.frames.TransformProvider`
+    
+    
+        Also see:
+            :meth:`~serialized`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    _getTransform_1__T = typing.TypeVar('_getTransform_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> 'Transform':
+        """
+            Get the :class:`~org.orekit.frames.Transform` corresponding to specified date.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.TransformProvider.getTransform` in interface :class:`~org.orekit.frames.TransformProvider`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+        
+            Returns:
+                transform at specified date
+        
+        """
+        ...
+    @typing.overload
+    def getTransform(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTransform_1__T]) -> FieldTransform[_getTransform_1__T]:
+        """
+            Get the :class:`~org.orekit.frames.FieldTransform` corresponding to specified date.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.TransformProvider.getTransform` in interface :class:`~org.orekit.frames.TransformProvider`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
+        
+            Returns:
+                transform at specified date
+        
+            Since:
+                9.0
+        
+        
+        """
+        ...
+    _getTransform_F__T = typing.TypeVar('_getTransform_F__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    def getTransform_F(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTransform_F__T]) -> FieldTransform[_getTransform_F__T]:
+        """
+            Get the :class:`~org.orekit.frames.FieldTransform` corresponding to specified date.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
+        
+            Returns:
+                transform at specified date
+        
+            Since:
+                9.0
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
 class ShiftingTransformProvider(TransformProvider):
     """
     public class ShiftingTransformProvider extends Object implements :class:`~org.orekit.frames.TransformProvider`
@@ -2765,6 +2908,26 @@ class ShiftingTransformProvider(TransformProvider):
         
         """
         ...
+    def getStaticTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> StaticTransform:
+        """
+            Get a transform for only rotations and translations on the specified date.
+        
+            The default implementation returns :meth:`~org.orekit.frames.TransformProvider.getTransform` but implementations may
+            override it for better performance.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.TransformProvider.getStaticTransform`Â in
+                interfaceÂ :class:`~org.orekit.frames.TransformProvider`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date.
+        
+            Returns:
+                the static transform.
+        
+        
+        """
+        ...
     def getStep(self) -> float:
         """
             Get the grid points time step.
@@ -2794,7 +2957,7 @@ class ShiftingTransformProvider(TransformProvider):
         """
         ...
     @typing.overload
-    def getTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> Transform:
+    def getTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> 'Transform':
         """
             Get the :class:`~org.orekit.frames.Transform` corresponding to specified date.
         
@@ -3160,6 +3323,413 @@ class TopocentricFrame(Frame, org.orekit.utils.PVCoordinatesProvider):
         """
         ...
 
+class Transform(org.orekit.time.TimeInterpolable['Transform'], org.orekit.time.TimeShiftable['Transform'], java.io.Serializable, StaticTransform):
+    """
+    public class Transform extends Object implements :class:`~org.orekit.time.TimeInterpolable`<:class:`~org.orekit.frames.Transform`>, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.frames.Transform`>, Serializable, :class:`~org.orekit.frames.StaticTransform`
+    
+        Transformation class in three dimensional space.
+    
+        This class represents the transformation engine between :class:`~org.orekit.frames.Frame`. It is used both to define the
+        relationship between each frame and its parent frame and to gather all individual transforms into one operation when
+        converting between frames far away from each other.
+    
+        The convention used in OREKIT is vectorial transformation. It means that a transformation is defined as a transform to
+        apply to the coordinates of a vector expressed in the old frame to obtain the same vector expressed in the new frame.
+    
+        Instances of this class are guaranteed to be immutable.
+    
+        Examples
+    ----------
+    
+    
+        Example of translation from R :sub:`A` to R :sub:`B`
+    ------------------------------------------------------
+    
+    
+        We want to transform the :class:`~org.orekit.utils.PVCoordinates` PV :sub:`A` to PV :sub:`B` with :
+    
+        PV :sub:`A` = ({1, 0, 0}, {2, 0, 0}, {3, 0, 0});
+    
+    
+        PV :sub:`B` = ({0, 0, 0}, {0, 0, 0}, {0, 0, 0});
+    
+        The transform to apply then is defined as follows :
+    
+        .. code-block: java
+        
+        
+         Vector3D translation  = new Vector3D(-1, 0, 0);
+         Vector3D velocity     = new Vector3D(-2, 0, 0);
+         Vector3D acceleration = new Vector3D(-3, 0, 0);
+        
+         Transform R1toR2 = new Transform(date, translation, velocity, acceleration);
+        
+         PVB = R1toR2.transformPVCoordinates(PVA);
+         
+    
+        Example of rotation from R :sub:`A` to R :sub:`B`
+    ---------------------------------------------------
+    
+    
+        We want to transform the :class:`~org.orekit.utils.PVCoordinates` PV :sub:`A` to PV :sub:`B` with
+    
+        PV :sub:`A` = ({1, 0, 0}, { 1, 0, 0});
+    
+    
+        PV :sub:`B` = ({0, 1, 0}, {-2, 1, 0});
+    
+        The transform to apply then is defined as follows :
+    
+        .. code-block: java
+        
+        
+         Rotation rotation = new Rotation(Vector3D.PLUS_K, FastMath.PI / 2);
+         Vector3D rotationRate = new Vector3D(0, 0, -2);
+        
+         Transform R1toR2 = new Transform(rotation, rotationRate);
+        
+         PVB = R1toR2.transformPVCoordinates(PVA);
+         
+    
+        Also see:
+            :meth:`~serialized`
+    """
+    IDENTITY: typing.ClassVar['Transform'] = ...
+    """
+    public static final :class:`~org.orekit.frames.Transform` IDENTITY
+    
+        Identity transform.
+    
+    """
+    @typing.overload
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, rotation: org.hipparchus.geometry.euclidean.threed.Rotation): ...
+    @typing.overload
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, rotation: org.hipparchus.geometry.euclidean.threed.Rotation, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
+    @typing.overload
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, rotation: org.hipparchus.geometry.euclidean.threed.Rotation, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
+    @typing.overload
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
+    @typing.overload
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
+    @typing.overload
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D3: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
+    @typing.overload
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, transform: 'Transform', transform2: 'Transform'): ...
+    @typing.overload
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, angularCoordinates: org.orekit.utils.AngularCoordinates): ...
+    @typing.overload
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinates: org.orekit.utils.PVCoordinates): ...
+    def freeze(self) -> 'Transform':
+        """
+            Get a frozen transform.
+        
+            This method creates a copy of the instance but frozen in time, i.e. with velocity, acceleration and rotation rate forced
+            to zero.
+        
+            Returns:
+                a new transform, without any time-dependent parts
+        
+        
+        """
+        ...
+    def getAcceleration(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Get the second time derivative of the translation.
+        
+            Returns:
+                second time derivative of the translation
+        
+            Also see:
+                :meth:`~org.orekit.frames.Transform.getCartesian`, :meth:`~org.orekit.frames.Transform.getTranslation`,
+                :meth:`~org.orekit.frames.Transform.getVelocity`
+        
+        
+        """
+        ...
+    def getAngular(self) -> org.orekit.utils.AngularCoordinates:
+        """
+            Get the underlying elementary angular part.
+        
+            A transform can be uniquely represented as an elementary translation followed by an elementary rotation. This method
+            returns this unique elementary rotation with its derivative.
+        
+            Returns:
+                underlying elementary angular part
+        
+            Also see:
+                :meth:`~org.orekit.frames.Transform.getRotation`, :meth:`~org.orekit.frames.Transform.getRotationRate`,
+                :meth:`~org.orekit.frames.Transform.getRotationAcceleration`
+        
+        
+        """
+        ...
+    def getCartesian(self) -> org.orekit.utils.PVCoordinates:
+        """
+            Get the underlying elementary Cartesian part.
+        
+            A transform can be uniquely represented as an elementary translation followed by an elementary rotation. This method
+            returns this unique elementary translation with its derivative.
+        
+            Returns:
+                underlying elementary Cartesian part
+        
+            Also see:
+                :meth:`~org.orekit.frames.Transform.getTranslation`, :meth:`~org.orekit.frames.Transform.getVelocity`
+        
+        
+        """
+        ...
+    def getDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Get the date.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeStamped.getDate` in interface :class:`~org.orekit.time.TimeStamped`
+        
+            Returns:
+                date attached to the object
+        
+        
+        """
+        ...
+    def getInverse(self) -> 'Transform':
+        """
+            Get the inverse transform of the instance.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.StaticTransform.getInverse` in interface :class:`~org.orekit.frames.StaticTransform`
+        
+            Returns:
+                inverse transform of the instance
+        
+        
+        """
+        ...
+    def getJacobian(self, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, doubleArray: typing.List[typing.List[float]]) -> None:
+        """
+            Compute the Jacobian of the :meth:`~org.orekit.frames.Transform.transformPVCoordinates` method of the transform.
+        
+            Element :code:`jacobian[i][j]` is the derivative of Cartesian coordinate i of the transformed
+            :class:`~org.orekit.utils.PVCoordinates` with respect to Cartesian coordinate j of the input
+            :class:`~org.orekit.utils.PVCoordinates` in method :meth:`~org.orekit.frames.Transform.transformPVCoordinates`.
+        
+            This definition implies that if we define position-velocity coordinates
+        
+            .. code-block: java
+            
+            
+             PVâ‚� = transform.transformPVCoordinates(PVâ‚€), then
+             
+        
+            their differentials dPVâ‚� and dPVâ‚€ will obey the following relation where J is the matrix computed by this method:
+        
+            .. code-block: java
+            
+            
+             dPVâ‚� = J × dPVâ‚€
+             
+        
+            Parameters:
+                selector (:class:`~org.orekit.utils.CartesianDerivativesFilter`): selector specifying the size of the upper left corner that must be filled (either 3x3 for positions only, 6x6 for
+                    positions and velocities, 9x9 for positions, velocities and accelerations)
+                jacobian (double[][]):             placeholder matrix whose upper-left corner is to be filled with the Jacobian, the rest of the matrix remaining untouched
+        
+        
+        """
+        ...
+    def getRotation(self) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+        """
+            Get the underlying elementary rotation.
+        
+            A transform can be uniquely represented as an elementary translation followed by an elementary rotation. This method
+            returns this unique elementary rotation.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.StaticTransform.getRotation` in interface :class:`~org.orekit.frames.StaticTransform`
+        
+            Returns:
+                underlying elementary rotation
+        
+            Also see:
+                :meth:`~org.orekit.frames.Transform.getAngular`, :meth:`~org.orekit.frames.Transform.getRotationRate`,
+                :meth:`~org.orekit.frames.Transform.getRotationAcceleration`
+        
+        
+        """
+        ...
+    def getRotationAcceleration(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Get the second time derivative of the rotation.
+        
+            Returns:
+                Second time derivative of the rotation
+        
+            Also see:
+                :meth:`~org.orekit.frames.Transform.getAngular`, :meth:`~org.orekit.frames.Transform.getRotation`,
+                :meth:`~org.orekit.frames.Transform.getRotationRate`
+        
+        
+        """
+        ...
+    def getRotationRate(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Get the first time derivative of the rotation.
+        
+            The norm represents the angular rate.
+        
+            Returns:
+                First time derivative of the rotation
+        
+            Also see:
+                :meth:`~org.orekit.frames.Transform.getAngular`, :meth:`~org.orekit.frames.Transform.getRotation`,
+                :meth:`~org.orekit.frames.Transform.getRotationAcceleration`
+        
+        
+        """
+        ...
+    def getTranslation(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Get the underlying elementary translation.
+        
+            A transform can be uniquely represented as an elementary translation followed by an elementary rotation. This method
+            returns this unique elementary translation.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.StaticTransform.getTranslation` in interface :class:`~org.orekit.frames.StaticTransform`
+        
+            Returns:
+                underlying elementary translation
+        
+            Also see:
+                :meth:`~org.orekit.frames.Transform.getCartesian`, :meth:`~org.orekit.frames.Transform.getVelocity`,
+                :meth:`~org.orekit.frames.Transform.getAcceleration`
+        
+        
+        """
+        ...
+    def getVelocity(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Get the first time derivative of the translation.
+        
+            Returns:
+                first time derivative of the translation
+        
+            Also see:
+                :meth:`~org.orekit.frames.Transform.getCartesian`, :meth:`~org.orekit.frames.Transform.getTranslation`,
+                :meth:`~org.orekit.frames.Transform.getAcceleration`
+        
+        
+        """
+        ...
+    @typing.overload
+    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, collection: typing.Union[java.util.Collection[org.orekit.time.TimeInterpolable], typing.Sequence[org.orekit.time.TimeInterpolable], typing.Set[org.orekit.time.TimeInterpolable]]) -> org.orekit.time.TimeInterpolable: ...
+    @typing.overload
+    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, stream: java.util.stream.Stream['Transform']) -> 'Transform': ...
+    @typing.overload
+    @staticmethod
+    def interpolate(absoluteDate: org.orekit.time.AbsoluteDate, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, collection: typing.Union[java.util.Collection['Transform'], typing.Sequence['Transform'], typing.Set['Transform']]) -> 'Transform': ...
+    def shiftedBy(self, double: float) -> 'Transform':
+        """
+            Get a time-shifted instance.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeShiftable.shiftedBy` in interface :class:`~org.orekit.time.TimeShiftable`
+        
+            Parameters:
+                dt (double): time shift in seconds
+        
+            Returns:
+                a new instance, shifted with respect to instance (which is not changed)
+        
+        
+        """
+        ...
+    def staticShiftedBy(self, double: float) -> StaticTransform:
+        """
+            Shift the transform in time considering all rates, then return only the translation and rotation portion of the
+            transform.
+        
+            Parameters:
+                dt (double): time shift in seconds.
+        
+            Returns:
+                shifted transform as a static transform. It is static in the sense that it can only be used to transform directions and
+                positions, but not velocities or accelerations.
+        
+            Also see:
+                :meth:`~org.orekit.frames.Transform.shiftedBy`
+        
+        
+        """
+        ...
+    _transformPVCoordinates_0__T = typing.TypeVar('_transformPVCoordinates_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _transformPVCoordinates_2__T = typing.TypeVar('_transformPVCoordinates_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def transformPVCoordinates(self, fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_transformPVCoordinates_0__T]) -> org.orekit.utils.FieldPVCoordinates[_transformPVCoordinates_0__T]:
+        """
+            Transform :class:`~org.orekit.utils.FieldPVCoordinates` including kinematic effects.
+        
+            Parameters:
+                pv (:class:`~org.orekit.utils.FieldPVCoordinates`<T> pv): position-velocity to transform.
+        
+            Returns:
+                transformed position-velocity
+        
+            Transform :class:`~org.orekit.utils.TimeStampedFieldPVCoordinates` including kinematic effects.
+        
+            In order to allow the user more flexibility, this method does *not* check for consistency between the transform
+            :meth:`~org.orekit.frames.Transform.getDate` and the time-stamped position-velocity
+            :meth:`~org.orekit.utils.TimeStampedFieldPVCoordinates.getDate`. The returned value will always have the same
+            :meth:`~org.orekit.utils.TimeStampedFieldPVCoordinates.getDate` as the input argument, regardless of the instance
+            :meth:`~org.orekit.frames.Transform.getDate`.
+        
+            Parameters:
+                pv (:class:`~org.orekit.utils.TimeStampedFieldPVCoordinates`<T> pv): time-stamped position-velocity to transform.
+        
+            Returns:
+                transformed time-stamped position-velocity
+        
+            Since:
+                7.0
+        
+        
+        """
+        ...
+    @typing.overload
+    def transformPVCoordinates(self, pVCoordinates: org.orekit.utils.PVCoordinates) -> org.orekit.utils.PVCoordinates:
+        """
+            Transform :class:`~org.orekit.utils.PVCoordinates` including kinematic effects.
+        
+            Parameters:
+                pva (:class:`~org.orekit.utils.PVCoordinates`): the position-velocity-acceleration triplet to transform.
+        
+            Returns:
+                transformed position-velocity-acceleration
+        
+            Transform :class:`~org.orekit.utils.TimeStampedPVCoordinates` including kinematic effects.
+        
+            In order to allow the user more flexibility, this method does *not* check for consistency between the transform
+            :meth:`~org.orekit.frames.Transform.getDate` and the time-stamped position-velocity
+            :meth:`~org.orekit.utils.TimeStampedPVCoordinates.getDate`. The returned value will always have the same
+            :meth:`~org.orekit.utils.TimeStampedPVCoordinates.getDate` as the input argument, regardless of the instance
+            :meth:`~org.orekit.frames.Transform.getDate`.
+        
+            Parameters:
+                pv (:class:`~org.orekit.utils.TimeStampedPVCoordinates`): time-stamped position-velocity to transform.
+        
+            Returns:
+                transformed time-stamped position-velocity
+        
+            Since:
+                7.0
+        
+        """
+        ...
+    @typing.overload
+    def transformPVCoordinates(self, timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_transformPVCoordinates_2__T]) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_transformPVCoordinates_2__T]: ...
+    @typing.overload
+    def transformPVCoordinates(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates) -> org.orekit.utils.TimeStampedPVCoordinates: ...
+
 class TwoBodiesBaryFrame(Frame):
     """
     public class TwoBodiesBaryFrame extends :class:`~org.orekit.frames.Frame`
@@ -3185,15 +3755,16 @@ class UpdatableFrame(Frame):
     
         .. code-block: java
         
-                      GCRF
-                        |
-          --------------------------------
-          |             |                |
-         Sun        satellite          Earth
-                        |                |
-                on-board antenna   ground station
-                                         |
-                                  tracking antenna
+        
+                      GCRF
+                        |
+          --------------------------------
+          |             |                |
+         Sun        satellite          Earth
+                        |                |
+                on-board antenna   ground station
+                                         |
+                                  tracking antenna
          
     
         Tracking measurements really correspond to the link between the ground and on-board antennas. This is tightly linked to
@@ -3221,15 +3792,16 @@ class UpdatableFrame(Frame):
         
             .. code-block: java
             
-                          GCRF
-                            |
-              --------------------------------
-              |             |                |
-             Sun        satellite          Earth
-                            |                |
-                    on-board antenna   ground station
-                                             |
-                                      tracking antenna
+            
+                          GCRF
+                            |
+              --------------------------------
+              |             |                |
+             Sun        satellite          Earth
+                            |                |
+                    on-board antenna   ground station
+                                             |
+                                      tracking antenna
              
         
             Tracking measurements really correspond to the link between the ground and on-board antennas. This is tightly linked to
@@ -3241,8 +3813,9 @@ class UpdatableFrame(Frame):
         
             .. code-block: java
             
-             satellite.updateTransform(onBoardAntenna, trackingAntenna,
-                                       measurementTransform, date);
+            
+             satellite.updateTransform(onBoardAntenna, trackingAntenna,
+                                       measurementTransform, date);
              
         
             One way to represent the behavior of the method is to consider the sub-tree rooted at the instance on one hand
@@ -3336,6 +3909,26 @@ class GTODProvider(EOPBasedTransformProvider):
         
             Also see:
                 :meth:`~org.orekit.frames.FramesFactory.getNonInterpolatingTransform`
+        
+        
+        """
+        ...
+    def getStaticTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> StaticTransform:
+        """
+            Get a transform for only rotations and translations on the specified date.
+        
+            The default implementation returns :meth:`~org.orekit.frames.TransformProvider.getTransform` but implementations may
+            override it for better performance.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.TransformProvider.getStaticTransform`Â in
+                interfaceÂ :class:`~org.orekit.frames.TransformProvider`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date.
+        
+            Returns:
+                the static transform.
         
         
         """
@@ -3502,11 +4095,202 @@ class LazyLoadedFrames(AbstractFrames):
         """
         ...
 
+class PythonAbstractFrames(AbstractFrames):
+    """
+    public class PythonAbstractFrames extends :class:`~org.orekit.frames.AbstractFrames`
+    """
+    def __init__(self, timeScales: org.orekit.time.TimeScales, supplier: typing.Union[java.util.function.Supplier[Frame], typing.Callable[[], Frame]]): ...
+    def finalize(self) -> None: ...
+    def getEOPHistory(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool) -> EOPHistory:
+        """
+            Get Earth Orientation Parameters history.
+        
+            Parameters:
+                conventions (:class:`~org.orekit.utils.IERSConventions`): conventions for which EOP history is requested
+                simpleEOP (boolean): if true, tidal effects are ignored when interpolating EOP
+        
+            Returns:
+                Earth Orientation Parameters history
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
+class PythonEOPBasedTransformProvider(EOPBasedTransformProvider):
+    """
+    public class PythonEOPBasedTransformProvider extends Object implements :class:`~org.orekit.frames.EOPBasedTransformProvider`
+    
+    
+        Also see:
+            :meth:`~serialized`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def getEOPHistory(self) -> EOPHistory:
+        """
+            Get the EOP history.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.EOPBasedTransformProvider.getEOPHistory`Â in
+                interfaceÂ :class:`~org.orekit.frames.EOPBasedTransformProvider`
+        
+            Returns:
+                EOP history
+        
+        
+        """
+        ...
+    def getNonInterpolatingProvider(self) -> EOPBasedTransformProvider:
+        """
+            Get a version of the provider that does *not* cache tidal corrections.
+        
+            This method removes the performance enhancing interpolation features that are used by default in EOP-based provider, in
+            order to focus on accuracy. The interpolation features are intended to save processing time by avoiding doing tidal
+            correction evaluation at each time step and caching some results. This method can be used to avoid this (it is
+            automatically called by :meth:`~org.orekit.frames.FramesFactory.getNonInterpolatingTransform`, when very high accuracy
+            is desired, or for testing purposes. It should be used with care, as doing the full computation is *really* costly.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.EOPBasedTransformProvider.getNonInterpolatingProvider`Â in
+                interfaceÂ :class:`~org.orekit.frames.EOPBasedTransformProvider`
+        
+            Returns:
+                version of the provider that does *not* cache tidal corrections
+        
+            Also see:
+                :meth:`~org.orekit.frames.FramesFactory.getNonInterpolatingTransform`
+        
+        
+        """
+        ...
+    _getTransform_1__T = typing.TypeVar('_getTransform_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> Transform:
+        """
+            Get the :class:`~org.orekit.frames.Transform` corresponding to specified date.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.TransformProvider.getTransform` in interface :class:`~org.orekit.frames.TransformProvider`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+        
+            Returns:
+                transform at specified date
+        
+        """
+        ...
+    @typing.overload
+    def getTransform(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTransform_1__T]) -> FieldTransform[_getTransform_1__T]:
+        """
+            Get the :class:`~org.orekit.frames.FieldTransform` corresponding to specified date.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.TransformProvider.getTransform` in interface :class:`~org.orekit.frames.TransformProvider`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
+        
+            Returns:
+                transform at specified date
+        
+            Since:
+                9.0
+        
+        
+        """
+        ...
+    _getTransform_F__T = typing.TypeVar('_getTransform_F__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    def getTransform_F(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTransform_F__T]) -> FieldTransform[_getTransform_F__T]:
+        """
+            Get the :class:`~org.orekit.frames.FieldTransform` corresponding to specified date.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
+        
+            Returns:
+                transform at specified date
+        
+            Since:
+                9.0
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
+class PythonAbstractEopParser(org.orekit.frames.AbstractEopParser):
+    """
+    public class PythonAbstractEopParser extends Object
+    """
+    def __init__(self, nutationCorrectionConverter: org.orekit.utils.IERSConventions.NutationCorrectionConverter, itrfVersionProvider: ItrfVersionProvider, timeScale: org.orekit.time.TimeScale): ...
+    def finalize(self) -> None: ...
+    def parse(self, inputStream: java.io.InputStream, string: str) -> java.util.Collection[EOPEntry]: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
+class AbstractEopParser: ...
+
 
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.frames")``.
 
     AbstractEopLoader: typing.Type[AbstractEopLoader]
+    AbstractEopParser: typing.Type[AbstractEopParser]
     AbstractFrames: typing.Type[AbstractFrames]
     CR3BPRotatingFrame: typing.Type[CR3BPRotatingFrame]
     EOPBasedTransformProvider: typing.Type[EOPBasedTransformProvider]
@@ -3538,7 +4322,15 @@ class __module_protocol__(typing.Protocol):
     OrphanFrame: typing.Type[OrphanFrame]
     PoleCorrection: typing.Type[PoleCorrection]
     Predefined: typing.Type[Predefined]
+    PythonAbstractEopParser: typing.Type[PythonAbstractEopParser]
+    PythonAbstractFrames: typing.Type[PythonAbstractFrames]
+    PythonEOPBasedTransformProvider: typing.Type[PythonEOPBasedTransformProvider]
+    PythonEOPHistoryLoader: typing.Type[PythonEOPHistoryLoader]
+    PythonItrfVersionProvider: typing.Type[PythonItrfVersionProvider]
+    PythonStaticTransform: typing.Type[PythonStaticTransform]
+    PythonTransformProvider: typing.Type[PythonTransformProvider]
     ShiftingTransformProvider: typing.Type[ShiftingTransformProvider]
+    StaticTransform: typing.Type[StaticTransform]
     TopocentricFrame: typing.Type[TopocentricFrame]
     Transform: typing.Type[Transform]
     TransformGenerator: typing.Type[TransformGenerator]

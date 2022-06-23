@@ -428,8 +428,9 @@ class CovarianceHistoryMetadataKey(java.lang.Enum['CovarianceHistoryMetadataKey'
         
             .. code-block: java
             
-            for (CovarianceHistoryMetadataKey c : CovarianceHistoryMetadataKey.values())
-                System.out.println(c);
+            
+            for (CovarianceHistoryMetadataKey c : CovarianceHistoryMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -487,8 +488,9 @@ class ManBasis(java.lang.Enum['ManBasis']):
         
             .. code-block: java
             
-            for (ManBasis c : ManBasis.values())
-                System.out.println(c);
+            
+            for (ManBasis c : ManBasis.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1107,8 +1109,9 @@ class ManeuverFieldType(java.lang.Enum['ManeuverFieldType']):
         
             .. code-block: java
             
-            for (ManeuverFieldType c : ManeuverFieldType.values())
-                System.out.println(c);
+            
+            for (ManeuverFieldType c : ManeuverFieldType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1827,8 +1830,9 @@ class ManeuverHistoryMetadataKey(java.lang.Enum['ManeuverHistoryMetadataKey']):
         
             .. code-block: java
             
-            for (ManeuverHistoryMetadataKey c : ManeuverHistoryMetadataKey.values())
-                System.out.println(c);
+            
+            for (ManeuverHistoryMetadataKey c : ManeuverHistoryMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1884,8 +1888,9 @@ class ObjectType(java.lang.Enum['ObjectType']):
         
             .. code-block: java
             
-            for (ObjectType c : ObjectType.values())
-                System.out.println(c);
+            
+            for (ObjectType c : ObjectType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -2131,8 +2136,9 @@ class OcmDataSubStructureKey(java.lang.Enum['OcmDataSubStructureKey']):
         
             .. code-block: java
             
-            for (OcmDataSubStructureKey c : OcmDataSubStructureKey.values())
-                System.out.println(c);
+            
+            for (OcmDataSubStructureKey c : OcmDataSubStructureKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -2271,6 +2277,34 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
         
         """
         ...
+    def getNextLeapEpoch(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Get the epoch of next leap second.
+        
+            Returns:
+                epoch of next leap second
+        
+            Since:
+                11.2
+        
+        
+        """
+        ...
+    def getNextLeapTaimutc(self) -> float:
+        """
+            Get the difference (TAI Ã¢â‚¬â€œ UTC) in seconds incorporated at epoch
+            :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getNextLeapEpoch`.
+        
+            Returns:
+                difference (TAI Ã¢â‚¬â€œ UTC) in seconds incorporated at epoch
+                :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getNextLeapEpoch`
+        
+            Since:
+                11.2
+        
+        
+        """
+        ...
     def getNextMessageEpoch(self) -> org.orekit.time.AbsoluteDate:
         """
             Get the creation date of next message from a given originator.
@@ -2357,6 +2391,19 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
         
             Returns:
                 address of Programmatic Point Of Contact at originator
+        
+        
+        """
+        ...
+    def getOriginatorEmail(self) -> str:
+        """
+            Get the email address of Programmatic Point Of Contact at originator.
+        
+            Returns:
+                email address of Programmatic Point Of Contact at originator
+        
+            Since:
+                11.2
         
         
         """
@@ -2508,6 +2555,19 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
         
             Returns:
                 address of Technical Point Of Contact at originator
+        
+        
+        """
+        ...
+    def getTechEmail(self) -> str:
+        """
+            Get the email address of Technical Point Of Contact at originator.
+        
+            Returns:
+                email address of Technical Point Of Contact at originator
+        
+            Since:
+                11.2
         
         
         """
@@ -2693,6 +2753,34 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
         
         """
         ...
+    def setNextLeapEpoch(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+        """
+            Set the epoch of next leap second.
+        
+            Parameters:
+                nextLeapEpoch (:class:`~org.orekit.time.AbsoluteDate`): epoch of next leap second
+        
+            Since:
+                11.2
+        
+        
+        """
+        ...
+    def setNextLeapTaimutc(self, double: float) -> None:
+        """
+            Set the difference (TAI Ã¢â‚¬â€œ UTC) in seconds incorporated at epoch
+            :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getNextLeapEpoch`.
+        
+            Parameters:
+                nextLeapTaimutc (double): difference (TAI Ã¢â‚¬â€œ UTC) in seconds incorporated at epoch
+                    :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getNextLeapEpoch`
+        
+            Since:
+                11.2
+        
+        
+        """
+        ...
     def setNextMessageEpoch(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
             Set the creation date of next message from a given originator.
@@ -2783,6 +2871,19 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
         
         """
         ...
+    def setOriginatorEmail(self, string: str) -> None:
+        """
+            Set the email address of Programmatic Point Of Contact at originator.
+        
+            Parameters:
+                originatorEmail (String): email address of Programmatic Point Of Contact at originator
+        
+            Since:
+                11.2
+        
+        
+        """
+        ...
     def setOriginatorPOC(self, string: str) -> None:
         """
             Set the programmatic Point Of Contact at originator.
@@ -2795,7 +2896,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
         ...
     def setOriginatorPhone(self, string: str) -> None:
         """
-            GSet the phone number of Programmatic Point Of Contact at originator.
+            Set the phone number of Programmatic Point Of Contact at originator.
         
             Parameters:
                 originatorPhone (String): phone number of Programmatic Point Of Contact at originator
@@ -2934,6 +3035,19 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
         
         """
         ...
+    def setTechEmail(self, string: str) -> None:
+        """
+            Set the email address of Technical Point Of Contact at originator.
+        
+            Parameters:
+                techEmail (String): email address of Technical Point Of Contact at originator
+        
+            Since:
+                11.2
+        
+        
+        """
+        ...
     def setTechOrg(self, string: str) -> None:
         """
             Set the creating agency or operator.
@@ -3031,19 +3145,21 @@ class OcmMetadataKey(java.lang.Enum['OcmMetadataKey']):
     ORIGINATOR_POC: typing.ClassVar['OcmMetadataKey'] = ...
     ORIGINATOR_POSITION: typing.ClassVar['OcmMetadataKey'] = ...
     ORIGINATOR_PHONE: typing.ClassVar['OcmMetadataKey'] = ...
+    ORIGINATOR_EMAIL: typing.ClassVar['OcmMetadataKey'] = ...
     ORIGINATOR_ADDRESS: typing.ClassVar['OcmMetadataKey'] = ...
     TECH_ORG: typing.ClassVar['OcmMetadataKey'] = ...
     TECH_POC: typing.ClassVar['OcmMetadataKey'] = ...
     TECH_POSITION: typing.ClassVar['OcmMetadataKey'] = ...
     TECH_PHONE: typing.ClassVar['OcmMetadataKey'] = ...
+    TECH_EMAIL: typing.ClassVar['OcmMetadataKey'] = ...
     TECH_ADDRESS: typing.ClassVar['OcmMetadataKey'] = ...
     PREVIOUS_MESSAGE_ID: typing.ClassVar['OcmMetadataKey'] = ...
     NEXT_MESSAGE_ID: typing.ClassVar['OcmMetadataKey'] = ...
-    ADM_MESSAGE_LINK: typing.ClassVar['OcmMetadataKey'] = ...
-    CDM_MESSAGE_LINK: typing.ClassVar['OcmMetadataKey'] = ...
-    PRM_MESSAGE_LINK: typing.ClassVar['OcmMetadataKey'] = ...
-    RDM_MESSAGE_LINK: typing.ClassVar['OcmMetadataKey'] = ...
-    TDM_MESSAGE_LINK: typing.ClassVar['OcmMetadataKey'] = ...
+    ADM_MSG_LINK: typing.ClassVar['OcmMetadataKey'] = ...
+    CDM_MSG_LINK: typing.ClassVar['OcmMetadataKey'] = ...
+    PRM_MSG_LINK: typing.ClassVar['OcmMetadataKey'] = ...
+    RDM_MSG_LINK: typing.ClassVar['OcmMetadataKey'] = ...
+    TDM_MSG_LINK: typing.ClassVar['OcmMetadataKey'] = ...
     OPERATOR: typing.ClassVar['OcmMetadataKey'] = ...
     OWNER: typing.ClassVar['OcmMetadataKey'] = ...
     COUNTRY: typing.ClassVar['OcmMetadataKey'] = ...
@@ -3061,6 +3177,8 @@ class OcmMetadataKey(java.lang.Enum['OcmMetadataKey']):
     STOP_TIME: typing.ClassVar['OcmMetadataKey'] = ...
     TIME_SPAN: typing.ClassVar['OcmMetadataKey'] = ...
     TAIMUTC_AT_TZERO: typing.ClassVar['OcmMetadataKey'] = ...
+    NEXT_LEAP_EPOCH: typing.ClassVar['OcmMetadataKey'] = ...
+    NEXT_LEAP_TAIMUTC: typing.ClassVar['OcmMetadataKey'] = ...
     UT1MUTC_AT_TZERO: typing.ClassVar['OcmMetadataKey'] = ...
     EOP_SOURCE: typing.ClassVar['OcmMetadataKey'] = ...
     INTERP_METHOD_EOP: typing.ClassVar['OcmMetadataKey'] = ...
@@ -3112,8 +3230,9 @@ class OcmMetadataKey(java.lang.Enum['OcmMetadataKey']):
         
             .. code-block: java
             
-            for (OcmMetadataKey c : OcmMetadataKey.values())
-                System.out.println(c);
+            
+            for (OcmMetadataKey c : OcmMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -3491,8 +3610,9 @@ class OpsStatus(java.lang.Enum['OpsStatus']):
         
             .. code-block: java
             
-            for (OpsStatus c : OpsStatus.values())
-                System.out.println(c);
+            
+            for (OpsStatus c : OpsStatus.values())
+                System.out.println(c);
             
         
             Returns:
@@ -3567,8 +3687,9 @@ class OrbitCategory(java.lang.Enum['OrbitCategory']):
         
             .. code-block: java
             
-            for (OrbitCategory c : OrbitCategory.values())
-                System.out.println(c);
+            
+            for (OrbitCategory c : OrbitCategory.values())
+                System.out.println(c);
             
         
             Returns:
@@ -3647,22 +3768,22 @@ class OrbitDetermination(org.orekit.files.ccsds.section.CommentsContainer):
         
         """
         ...
+    def getEpochEigenInt(self) -> float:
+        """
+            Get positional error ellipsoid 1Ïƒ intermediate eigenvalue at the epoch of OD.
+        
+            Returns:
+                positional error ellipsoid 1Ïƒ intermediate eigenvalue at the epoch of OD
+        
+        
+        """
+        ...
     def getEpochEigenMaj(self) -> float:
         """
             Get positional error ellipsoid 1Ïƒ major eigenvalue at the epoch of OD.
         
             Returns:
                 positional error ellipsoid 1Ïƒ major eigenvalue at the epoch of OD
-        
-        
-        """
-        ...
-    def getEpochEigenMed(self) -> float:
-        """
-            Get positional error ellipsoid 1Ïƒ intermediate eigenvalue at the epoch of OD.
-        
-            Returns:
-                positional error ellipsoid 1Ïƒ intermediate eigenvalue at the epoch of OD
         
         
         """
@@ -3769,10 +3890,10 @@ class OrbitDetermination(org.orekit.files.ccsds.section.CommentsContainer):
         ...
     def getRecommendedOdSpan(self) -> float:
         """
-            Get sime span of observation recommended for the OD of the object.
+            Get time span of observation recommended for the OD of the object.
         
             Returns:
-                sime span of observation recommended for the OD of the object
+                time span of observation recommended for the OD of the object
         
         
         """
@@ -3927,22 +4048,22 @@ class OrbitDetermination(org.orekit.files.ccsds.section.CommentsContainer):
         
         """
         ...
+    def setEpochEigenInt(self, double: float) -> None:
+        """
+            Set positional error ellipsoid 1Ïƒ intermediate eigenvalue at the epoch of OD.
+        
+            Parameters:
+                epochEigenInt (double): positional error ellipsoid 1Ïƒ intermediate eigenvalue at the epoch of OD
+        
+        
+        """
+        ...
     def setEpochEigenMaj(self, double: float) -> None:
         """
             Set positional error ellipsoid 1Ïƒ major eigenvalue at the epoch of OD.
         
             Parameters:
                 epochEigenMaj (double): positional error ellipsoid 1Ïƒ major eigenvalue at the epoch of OD
-        
-        
-        """
-        ...
-    def setEpochEigenMed(self, double: float) -> None:
-        """
-            Set positional error ellipsoid 1Ïƒ intermediate eigenvalue at the epoch of OD.
-        
-            Parameters:
-                epochEigenMed (double): positional error ellipsoid 1Ïƒ intermediate eigenvalue at the epoch of OD
         
         
         """
@@ -4049,10 +4170,10 @@ class OrbitDetermination(org.orekit.files.ccsds.section.CommentsContainer):
         ...
     def setRecommendedOdSpan(self, double: float) -> None:
         """
-            Set sime span of observation recommended for the OD of the object.
+            Set time span of observation recommended for the OD of the object.
         
             Parameters:
-                recommendedOdSpan (double): sime span of observation recommended for the OD of the object
+                recommendedOdSpan (double): time span of observation recommended for the OD of the object
         
         
         """
@@ -4191,7 +4312,7 @@ class OrbitDeterminationKey(java.lang.Enum['OrbitDeterminationKey']):
     TRACKS_USED: typing.ClassVar['OrbitDeterminationKey'] = ...
     MAXIMUM_OBS_GAP: typing.ClassVar['OrbitDeterminationKey'] = ...
     OD_EPOCH_EIGMAJ: typing.ClassVar['OrbitDeterminationKey'] = ...
-    OD_EPOCH_EIGMED: typing.ClassVar['OrbitDeterminationKey'] = ...
+    OD_EPOCH_EIGINT: typing.ClassVar['OrbitDeterminationKey'] = ...
     OD_EPOCH_EIGMIN: typing.ClassVar['OrbitDeterminationKey'] = ...
     OD_MAX_PRED_EIGMAJ: typing.ClassVar['OrbitDeterminationKey'] = ...
     OD_MIN_PRED_EIGMIN: typing.ClassVar['OrbitDeterminationKey'] = ...
@@ -4252,8 +4373,9 @@ class OrbitDeterminationKey(java.lang.Enum['OrbitDeterminationKey']):
         
             .. code-block: java
             
-            for (OrbitDeterminationKey c : OrbitDeterminationKey.values())
-                System.out.println(c);
+            
+            for (OrbitDeterminationKey c : OrbitDeterminationKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -4309,8 +4431,9 @@ class Ordering(java.lang.Enum['Ordering']):
         
             .. code-block: java
             
-            for (Ordering c : Ordering.values())
-                System.out.println(c);
+            
+            for (Ordering c : Ordering.values())
+                System.out.println(c);
             
         
             Returns:
@@ -4983,8 +5106,9 @@ class PerturbationsKey(java.lang.Enum['PerturbationsKey']):
         
             .. code-block: java
             
-            for (PerturbationsKey c : PerturbationsKey.values())
-                System.out.println(c);
+            
+            for (PerturbationsKey c : PerturbationsKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -5323,12 +5447,15 @@ class PhysicalProperties(org.orekit.files.ccsds.section.CommentsContainer):
         
         """
         ...
-    def getReflectivity(self) -> float:
+    def getReflectance(self) -> float:
         """
-            Get the typical (50th percentile) coefficient of reflectivity.
+            Get the typical (50th percentile) coefficient of reflectance.
         
             Returns:
-                typical (50th percentile) coefficient of reflectivity
+                typical (50th percentile) coefficient of reflectance
+        
+            Since:
+                11.2
         
         
         """
@@ -5748,12 +5875,15 @@ class PhysicalProperties(org.orekit.files.ccsds.section.CommentsContainer):
         
         """
         ...
-    def setReflectivity(self, double: float) -> None:
+    def setReflectance(self, double: float) -> None:
         """
-            Set the typical (50th percentile) coefficient of reflectivity.
+            Set the typical (50th percentile) coefficient of reflectance.
         
             Parameters:
-                reflectivity (double): typical (50th percentile) coefficient of reflectivity
+                reflectance (double): typical (50th percentile) coefficient of reflectance
+        
+            Since:
+                11.2
         
         
         """
@@ -5903,7 +6033,7 @@ class PhysicalPropertiesKey(java.lang.Enum['PhysicalPropertiesKey']):
     VM_APPARENT_MIN: typing.ClassVar['PhysicalPropertiesKey'] = ...
     VM_APPARENT: typing.ClassVar['PhysicalPropertiesKey'] = ...
     VM_APPARENT_MAX: typing.ClassVar['PhysicalPropertiesKey'] = ...
-    REFLECTIVITY: typing.ClassVar['PhysicalPropertiesKey'] = ...
+    REFLECTANCE: typing.ClassVar['PhysicalPropertiesKey'] = ...
     ATT_CONTROL_MODE: typing.ClassVar['PhysicalPropertiesKey'] = ...
     ATT_ACTUATOR_TYPE: typing.ClassVar['PhysicalPropertiesKey'] = ...
     ATT_KNOWLEDGE: typing.ClassVar['PhysicalPropertiesKey'] = ...
@@ -5966,8 +6096,9 @@ class PhysicalPropertiesKey(java.lang.Enum['PhysicalPropertiesKey']):
         
             .. code-block: java
             
-            for (PhysicalPropertiesKey c : PhysicalPropertiesKey.values())
-                System.out.println(c);
+            
+            for (PhysicalPropertiesKey c : PhysicalPropertiesKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -6022,8 +6153,9 @@ class ShadowModel(java.lang.Enum['ShadowModel']):
         
             .. code-block: java
             
-            for (ShadowModel c : ShadowModel.values())
-                System.out.println(c);
+            
+            for (ShadowModel c : ShadowModel.values())
+                System.out.println(c);
             
         
             Returns:
@@ -6287,6 +6419,19 @@ class TrajectoryStateHistoryMetadata(org.orekit.files.ccsds.section.CommentsCont
         
         """
         ...
+    def getPropagator(self) -> str:
+        """
+            Get the orbit propagator used to generate this trajectory.
+        
+            Returns:
+                orbit propagator used to generate this trajectory
+        
+            Since:
+                11.2
+        
+        
+        """
+        ...
     def getTrajBasis(self) -> str:
         """
             Get basis of this trajectory state time history data.
@@ -6450,6 +6595,19 @@ class TrajectoryStateHistoryMetadata(org.orekit.files.ccsds.section.CommentsCont
         
         """
         ...
+    def setPropagator(self, string: str) -> None:
+        """
+            Set the orbit propagator used to generate this trajectory.
+        
+            Parameters:
+                propagator (String): orbit propagator used to generate this trajectory
+        
+            Since:
+                11.2
+        
+        
+        """
+        ...
     def setTrajBasis(self, string: str) -> None:
         """
             Set basis of this trajectory state time history data.
@@ -6588,7 +6746,7 @@ class TrajectoryStateHistoryMetadataKey(java.lang.Enum['TrajectoryStateHistoryMe
     TRAJ_BASIS_ID: typing.ClassVar['TrajectoryStateHistoryMetadataKey'] = ...
     INTERPOLATION: typing.ClassVar['TrajectoryStateHistoryMetadataKey'] = ...
     INTERPOLATION_DEGREE: typing.ClassVar['TrajectoryStateHistoryMetadataKey'] = ...
-    ORB_AVERAGING: typing.ClassVar['TrajectoryStateHistoryMetadataKey'] = ...
+    PROPAGATOR: typing.ClassVar['TrajectoryStateHistoryMetadataKey'] = ...
     CENTER_NAME: typing.ClassVar['TrajectoryStateHistoryMetadataKey'] = ...
     TRAJ_REF_FRAME: typing.ClassVar['TrajectoryStateHistoryMetadataKey'] = ...
     TRAJ_FRAME_EPOCH: typing.ClassVar['TrajectoryStateHistoryMetadataKey'] = ...
@@ -6596,6 +6754,7 @@ class TrajectoryStateHistoryMetadataKey(java.lang.Enum['TrajectoryStateHistoryMe
     USEABLE_STOP_TIME: typing.ClassVar['TrajectoryStateHistoryMetadataKey'] = ...
     ORB_REVNUM: typing.ClassVar['TrajectoryStateHistoryMetadataKey'] = ...
     ORB_REVNUM_BASIS: typing.ClassVar['TrajectoryStateHistoryMetadataKey'] = ...
+    ORB_AVERAGING: typing.ClassVar['TrajectoryStateHistoryMetadataKey'] = ...
     TRAJ_TYPE: typing.ClassVar['TrajectoryStateHistoryMetadataKey'] = ...
     TRAJ_UNITS: typing.ClassVar['TrajectoryStateHistoryMetadataKey'] = ...
     def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, trajectoryStateHistoryMetadata: TrajectoryStateHistoryMetadata) -> bool:
@@ -6645,8 +6804,9 @@ class TrajectoryStateHistoryMetadataKey(java.lang.Enum['TrajectoryStateHistoryMe
         
             .. code-block: java
             
-            for (TrajectoryStateHistoryMetadataKey c : TrajectoryStateHistoryMetadataKey.values())
-                System.out.println(c);
+            
+            for (TrajectoryStateHistoryMetadataKey c : TrajectoryStateHistoryMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:

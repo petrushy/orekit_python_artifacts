@@ -29,11 +29,8 @@ class ImpulseManeuver(org.orekit.propagation.events.AbstractDetector['ImpulseMan
         This class implements an impulse maneuver as a discrete event that can be provided to any
         :class:`~org.orekit.propagation.Propagator`.
     
-        The maneuver is triggered when an underlying event generates a
-        :meth:`~org.orekit.forces.maneuvers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is` event,
-        in which case this class will generate a
-        :meth:`~org.orekit.forces.maneuvers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is` event
-        (the stop event from the underlying object is therefore filtered out). In the simple cases, the underlying event
+        The maneuver is triggered when an underlying event generates a null event, in which case this class will generate a null
+        event (the stop event from the underlying object is therefore filtered out). In the simple cases, the underlying event
         detector may be a basic :class:`~org.orekit.propagation.events.DateDetector`, but it can also be a more elaborate
         :class:`~org.orekit.propagation.events.ApsideDetector` for apogee maneuvers for example.
     
@@ -65,12 +62,12 @@ class ImpulseManeuver(org.orekit.propagation.events.AbstractDetector['ImpulseMan
             the integrator will need to find its roots to locate the events.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g` in
-                interface :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
+                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
-                class :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
+                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -134,12 +131,12 @@ class ImpulseManeuver(org.orekit.propagation.events.AbstractDetector['ImpulseMan
             method it should call :code:`super.init(s0, t)`.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.init` in
-                interface :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.init`Â in
+                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
         
             Overrides:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.init` in
-                class :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.init`Â in
+                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
@@ -156,7 +153,7 @@ class Maneuver(org.orekit.forces.AbstractForceModel):
         A generic model for maneuvers. It contains: - An attitude override, this is the attitude used during the maneuver, it
         can be different than the one used for propagation; - A maneuver triggers object from the trigger sub-package. It
         defines the triggers used to start and stop the maneuvers (dates or events for example). - A propulsion model from
-        sub-package propulsion. It defines the thrust or ΔV, isp, flow rate etc.. Both the propulsion model and the maneuver
+        sub-package propulsion. It defines the thrust or ÃŽâ€�V, isp, flow rate etc.. Both the propulsion model and the maneuver
         triggers can contain parameter drivers (for estimation). The convention here is that the propulsion model drivers are
         given before the maneuver triggers when calling the method
         :meth:`~org.orekit.forces.maneuvers.Maneuver.getParametersDrivers`
@@ -169,7 +166,7 @@ class Maneuver(org.orekit.forces.AbstractForceModel):
     @typing.overload
     def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], tArray: typing.List[_acceleration_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
         """
-            Description copied from interface: :meth:`~org.orekit.forces.ForceModel.acceleration`
+            Description copied from interface: 
             Compute acceleration.
         
             Parameters:
@@ -185,7 +182,7 @@ class Maneuver(org.orekit.forces.AbstractForceModel):
     @typing.overload
     def acceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Description copied from interface: :meth:`~org.orekit.forces.ForceModel.acceleration`
+            Description copied from interface: 
             Compute acceleration.
         
             Parameters:
@@ -215,8 +212,7 @@ class Maneuver(org.orekit.forces.AbstractForceModel):
         """
             Compute the contribution of the force model to the perturbing acceleration.
         
-            The default implementation simply adds the :meth:`~org.orekit.forces.ForceModel.acceleration` as a non-Keplerian
-            acceleration.
+            The default implementation simply adds the null as a non-Keplerian acceleration.
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
@@ -286,8 +282,8 @@ class Maneuver(org.orekit.forces.AbstractForceModel):
     def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_init_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_init_0__T]) -> None:
         """
             Initialize the force model at the start of propagation. This method will be called before any calls to
-            :meth:`~org.orekit.forces.ForceModel.addContribution`, :meth:`~org.orekit.forces.ForceModel.addContribution`,
-            :meth:`~org.orekit.forces.ForceModel.acceleration` or :meth:`~org.orekit.forces.ForceModel.acceleration`
+            :meth:`~org.orekit.forces.ForceModel.addContribution`, :meth:`~org.orekit.forces.ForceModel.addContribution`, null or
+            null
         
             The default implementation of this method does nothing.
         
@@ -302,8 +298,8 @@ class Maneuver(org.orekit.forces.AbstractForceModel):
     def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
             Initialize the force model at the start of propagation. This method will be called before any calls to
-            :meth:`~org.orekit.forces.ForceModel.addContribution`, :meth:`~org.orekit.forces.ForceModel.addContribution`,
-            :meth:`~org.orekit.forces.ForceModel.acceleration` or :meth:`~org.orekit.forces.ForceModel.acceleration`
+            :meth:`~org.orekit.forces.ForceModel.addContribution`, :meth:`~org.orekit.forces.ForceModel.addContribution`, null or
+            null
         
             The default implementation of this method does nothing.
         
@@ -316,28 +312,28 @@ class Maneuver(org.orekit.forces.AbstractForceModel):
 
 class SmallManeuverAnalyticalModel(org.orekit.propagation.analytical.AdapterPropagator.DifferentialEffect):
     """
-    public class SmallManeuverAnalyticalModel extends :class:`~org.orekit.forces.maneuvers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.analytical.AdapterPropagator.DifferentialEffect`
+    public class SmallManeuverAnalyticalModel extends Object implements :class:`~org.orekit.propagation.analytical.AdapterPropagator.DifferentialEffect`
     
         Analytical model for small maneuvers.
     
-        The aim of this model is to compute quickly the effect at date t₁ of a small maneuver performed at an earlier date
-        t₀. Both the direct effect of the maneuver and the Jacobian of this effect with respect to maneuver parameters are
-        available.
+        The aim of this model is to compute quickly the effect at date tÃ¢â€šï¿½ of a small maneuver performed at an earlier
+        date tÃ¢â€šâ‚¬. Both the direct effect of the maneuver and the Jacobian of this effect with respect to maneuver
+        parameters are available.
     
         These effect are computed analytically using two Jacobian matrices:
     
-          1.  J₀: Jacobian of Keplerian or equinoctial elements with respect to Cartesian parameters at date t₀ allows to compute
-            maneuver effect as a change in orbital elements at maneuver date t₀,
-          2.  J :sub:`1/0` : Jacobian of Keplerian or equinoctial elements at date t₁ with respect to Keplerian or equinoctial
-            elements at date t₀ allows to propagate the change in orbital elements to final date t₁.
+          1.  JÃ¢â€šâ‚¬: Jacobian of Keplerian or equinoctial elements with respect to Cartesian parameters at date tÃ¢â€šâ‚¬ allows
+            to compute maneuver effect as a change in orbital elements at maneuver date tÃ¢â€šâ‚¬,
+          2.  J :sub:`1/0` : Jacobian of Keplerian or equinoctial elements at date tÃ¢â€šï¿½ with respect to Keplerian or equinoctial
+            elements at date tÃ¢â€šâ‚¬ allows to propagate the change in orbital elements to final date tÃ¢â€šï¿½.
     
     
         The second Jacobian, J :sub:`1/0` , is computed using a simple Keplerian model, i.e. it is the identity except for the
         mean motion row which also includes an off-diagonal element due to semi-major axis change.
     
-        The orbital elements change at date t₁ can be added to orbital elements extracted from state, and the final elements
-        taking account the changes are then converted back to appropriate type, which may be different from Keplerian or
-        equinoctial elements.
+        The orbital elements change at date tÃ¢â€šï¿½ can be added to orbital elements extracted from state, and the final
+        elements taking account the changes are then converted back to appropriate type, which may be different from Keplerian
+        or equinoctial elements.
     
         Note that this model takes *only* Keplerian effects into account. This means that using only this class to compute an
         inclination maneuver in Low Earth Orbit will *not* change ascending node drift rate despite inclination has changed (the
@@ -354,30 +350,28 @@ class SmallManeuverAnalyticalModel(org.orekit.propagation.analytical.AdapterProp
             Compute the effect of the maneuver on an orbit.
         
             Parameters:
-                orbit1 (:class:`~org.orekit.orbits.Orbit`): original orbit at t₁, without maneuver
+                orbit1 (:class:`~org.orekit.orbits.Orbit`): original orbit at tâ‚�, without maneuver
         
             Returns:
-                orbit at t₁, taking the maneuver into account if t₁ > t₀
+                orbit at tâ‚�, taking the maneuver into account if tâ‚� > tâ‚€
         
             Also see:
-                :meth:`~org.orekit.forces.maneuvers.SmallManeuverAnalyticalModel.apply`,
-                :meth:`~org.orekit.forces.maneuvers.SmallManeuverAnalyticalModel.getJacobian`
+                :meth:`~org.orekit.forces.maneuvers.SmallManeuverAnalyticalModel.apply`, null
         
             Compute the effect of the maneuver on a spacecraft state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.AdapterPropagator.DifferentialEffect.apply` in
-                interface :class:`~org.orekit.propagation.analytical.AdapterPropagator.DifferentialEffect`
+                :meth:`~org.orekit.propagation.analytical.AdapterPropagator.DifferentialEffect.apply`Â in
+                interfaceÂ :class:`~org.orekit.propagation.analytical.AdapterPropagator.DifferentialEffect`
         
             Parameters:
-                state1 (:class:`~org.orekit.propagation.SpacecraftState`): original spacecraft state at t₁, without maneuver
+                state1 (:class:`~org.orekit.propagation.SpacecraftState`): original spacecraft state at tâ‚�, without maneuver
         
             Returns:
-                spacecraft state at t₁, taking the maneuver into account if t₁ > t₀
+                spacecraft state at tâ‚�, taking the maneuver into account if tâ‚� > tâ‚€
         
             Also see:
-                :meth:`~org.orekit.forces.maneuvers.SmallManeuverAnalyticalModel.apply`,
-                :meth:`~org.orekit.forces.maneuvers.SmallManeuverAnalyticalModel.getJacobian`
+                :meth:`~org.orekit.forces.maneuvers.SmallManeuverAnalyticalModel.apply`, null
         
         
         """
@@ -425,14 +419,13 @@ class SmallManeuverAnalyticalModel(org.orekit.propagation.analytical.AdapterProp
             Compute the Jacobian of the orbit with respect to maneuver parameters.
         
             The Jacobian matrix is a 6x4 matrix. Element jacobian[i][j] corresponds to the partial derivative of orbital parameter i
-            with respect to maneuver parameter j. The rows order is the same order as used in
-            :meth:`~org.orekit.orbits.Orbit.getJacobianWrtCartesian` method. Columns (0, 1, 2) correspond to the velocity increment
-            coordinates (ΔV :sub:`x` , ΔV :sub:`y` , ΔV :sub:`z` ) in the inertial frame returned by
-            :meth:`~org.orekit.forces.maneuvers.SmallManeuverAnalyticalModel.getInertialFrame`, and column 3 corresponds to the
-            maneuver date t₀.
+            with respect to maneuver parameter j. The rows order is the same order as used in null method. Columns (0, 1, 2)
+            correspond to the velocity increment coordinates (ÃŽâ€�V :sub:`x` , ÃŽâ€�V :sub:`y` , ÃŽâ€�V :sub:`z` ) in the inertial
+            frame returned by :meth:`~org.orekit.forces.maneuvers.SmallManeuverAnalyticalModel.getInertialFrame`, and column 3
+            corresponds to the maneuver date tÃ¢â€šâ‚¬.
         
             Parameters:
-                orbit1 (:class:`~org.orekit.orbits.Orbit`): original orbit at t₁, without maneuver
+                orbit1 (:class:`~org.orekit.orbits.Orbit`): original orbit at tâ‚�, without maneuver
                 positionAngle (:class:`~org.orekit.orbits.PositionAngle`): type of the position angle to use
                 jacobian (double[][]): placeholder 6x4 (or larger) matrix to be filled with the Jacobian, if matrix is larger than 6x4, only the 6x4 upper left
                     corner will be modified

@@ -92,7 +92,7 @@ class CovarianceMatrixProvider:
 
 class EskfMeasurementHandler(org.orekit.propagation.sampling.OrekitStepHandler):
     """
-    public class EskfMeasurementHandler extends :class:`~org.orekit.estimation.sequential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
+    public class EskfMeasurementHandler extends Object implements :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
     
         :class:`~org.orekit.propagation.sampling.OrekitStepHandler` picking up
         :class:`~org.orekit.estimation.measurements.ObservedMeasurement` for the
@@ -107,8 +107,8 @@ class EskfMeasurementHandler(org.orekit.propagation.sampling.OrekitStepHandler):
             Handle the current step.
         
             Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.handleStep` in
-                interface :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
+                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.handleStep`Â in
+                interfaceÂ :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
         
             Parameters:
                 interpolator (:class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`): interpolator set up for the current step
@@ -126,8 +126,8 @@ class EskfMeasurementHandler(org.orekit.propagation.sampling.OrekitStepHandler):
             The default method does nothing
         
             Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.init` in
-                interface :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
+                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.init`Â in
+                interfaceÂ :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
         
             Parameters:
                 s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
@@ -319,7 +319,7 @@ class KalmanEstimation:
 
 class KalmanEstimator:
     """
-    public class KalmanEstimator extends :class:`~org.orekit.estimation.sequential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    public class KalmanEstimator extends Object
     
         Implementation of a Kalman filter to perform orbit determination.
     
@@ -467,7 +467,7 @@ class KalmanEstimator:
 
 class KalmanEstimatorBuilder:
     """
-    public class KalmanEstimatorBuilder extends :class:`~org.orekit.estimation.sequential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    public class KalmanEstimatorBuilder extends Object
     
         Builder for a Kalman filter estimator.
     
@@ -522,7 +522,7 @@ class KalmanEstimatorBuilder:
             Configure the matrix decomposer.
         
             Parameters:
-                matrixDecomposer (:class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.linear.MatrixDecomposer?is`): decomposer to use for the correction phase
+                matrixDecomposer (MatrixDecomposer): decomposer to use for the correction phase
         
             Returns:
                 this object.
@@ -575,11 +575,9 @@ class KalmanObserver:
 
 class MeasurementDecorator(org.hipparchus.filtering.kalman.Measurement):
     """
-    public class MeasurementDecorator extends :class:`~org.orekit.estimation.sequential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.Measurement?is`
+    public class MeasurementDecorator extends Object implements Measurement
     
-        Decorator adding
-        :class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.Measurement?is`
-        API to an :class:`~org.orekit.estimation.measurements.ObservedMeasurement`.
+        Decorator adding null API to an :class:`~org.orekit.estimation.measurements.ObservedMeasurement`.
     
         Since:
             9.2
@@ -589,9 +587,7 @@ class MeasurementDecorator(org.hipparchus.filtering.kalman.Measurement):
         """
         
             Specified by:
-                
-                meth:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.Measurement.html?is` in
-                interface :class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.Measurement?is`
+                 in interface 
         
         
         """
@@ -610,9 +606,7 @@ class MeasurementDecorator(org.hipparchus.filtering.kalman.Measurement):
         """
         
             Specified by:
-                
-                meth:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.Measurement.html?is` in
-                interface :class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.Measurement?is`
+                 in interface 
         
         
         """
@@ -621,9 +615,7 @@ class MeasurementDecorator(org.hipparchus.filtering.kalman.Measurement):
         """
         
             Specified by:
-                
-                meth:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.Measurement.html?is` in
-                interface :class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.Measurement?is`
+                 in interface 
         
         
         """
@@ -631,7 +623,7 @@ class MeasurementDecorator(org.hipparchus.filtering.kalman.Measurement):
 
 class SemiAnalyticalKalmanEstimator:
     """
-    public class SemiAnalyticalKalmanEstimator extends :class:`~org.orekit.estimation.sequential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    public class SemiAnalyticalKalmanEstimator extends Object
     
         Implementation of an Extended Semi-analytical Kalman Filter (ESKF) to perform orbit determination.
     
@@ -763,7 +755,7 @@ class SemiAnalyticalKalmanEstimator:
 
 class SemiAnalyticalKalmanEstimatorBuilder:
     """
-    public class SemiAnalyticalKalmanEstimatorBuilder extends :class:`~org.orekit.estimation.sequential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    public class SemiAnalyticalKalmanEstimatorBuilder extends Object
     
         Builder for a Semi-analytical Kalman Filter.
     
@@ -806,7 +798,7 @@ class SemiAnalyticalKalmanEstimatorBuilder:
             Configure the matrix decomposer.
         
             Parameters:
-                matrixDecomposer (:class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.linear.MatrixDecomposer?is`): decomposer to use for the correction phase
+                matrixDecomposer (MatrixDecomposer): decomposer to use for the correction phase
         
             Returns:
                 this object.
@@ -833,7 +825,7 @@ class SemiAnalyticalKalmanEstimatorBuilder:
 
 class AbstractCovarianceMatrixProvider(CovarianceMatrixProvider):
     """
-    public abstract class AbstractCovarianceMatrixProvider extends :class:`~org.orekit.estimation.sequential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.sequential.CovarianceMatrixProvider`
+    public abstract class AbstractCovarianceMatrixProvider extends Object implements :class:`~org.orekit.estimation.sequential.CovarianceMatrixProvider`
     
         Abstract provider handling a predefined initial covariance matrix.
     
@@ -860,8 +852,8 @@ class AbstractCovarianceMatrixProvider(CovarianceMatrixProvider):
             In most cases, the initial covariance matrix will be the output matrix of a previous run of the Kalman filter.
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.CovarianceMatrixProvider.getInitialCovarianceMatrix` in
-                interface :class:`~org.orekit.estimation.sequential.CovarianceMatrixProvider`
+                :meth:`~org.orekit.estimation.sequential.CovarianceMatrixProvider.getInitialCovarianceMatrix`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.CovarianceMatrixProvider`
         
             Parameters:
                 initial (:class:`~org.orekit.propagation.SpacecraftState`): initial state state
@@ -879,7 +871,7 @@ class AbstractCovarianceMatrixProvider(CovarianceMatrixProvider):
 
 class AbstractKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.extended.NonLinearProcess[MeasurementDecorator]):
     """
-    public abstract class AbstractKalmanModel extends :class:`~org.orekit.estimation.sequential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.sequential.KalmanEstimation`, :class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.extended.NonLinearProcess?is`<:class:`~org.orekit.estimation.sequential.MeasurementDecorator`>
+    public abstract class AbstractKalmanModel extends Object implements :class:`~org.orekit.estimation.sequential.KalmanEstimation`, NonLinearProcess<:class:`~org.orekit.estimation.sequential.MeasurementDecorator`>
     
         Abstract class defining the process model dynamics to use with a
         :class:`~org.orekit.estimation.sequential.KalmanEstimator`.
@@ -893,7 +885,7 @@ class AbstractKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.exte
         
             Parameters:
                 observedMeasurement (:class:`~org.orekit.estimation.measurements.ObservedMeasurement`<?> observedMeasurement): measurement that has just been processed
-                estimate (:class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.ProcessEstimate?is`): corrected estimate
+                estimate (ProcessEstimate): corrected estimate
         
         
         """
@@ -906,8 +898,8 @@ class AbstractKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.exte
             This estimation has been evaluated on the last corrected orbits
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getCorrectedMeasurement` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getCorrectedMeasurement`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 corrected measurement
@@ -920,8 +912,8 @@ class AbstractKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.exte
             Get the corrected spacecraft states.
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getCorrectedSpacecraftStates` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getCorrectedSpacecraftStates`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 corrected spacecraft states
@@ -934,8 +926,8 @@ class AbstractKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.exte
             Get the current date.
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getCurrentDate` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getCurrentDate`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 current date
@@ -948,8 +940,8 @@ class AbstractKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.exte
             Get the current measurement number.
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getCurrentMeasurementNumber` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getCurrentMeasurementNumber`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 current measurement number
@@ -972,8 +964,8 @@ class AbstractKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.exte
             Get the list of estimated measurements parameters.
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getEstimatedMeasurementsParameters` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getEstimatedMeasurementsParameters`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 the list of estimated measurements parameters
@@ -986,8 +978,8 @@ class AbstractKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.exte
             Get the list of estimated orbital parameters.
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getEstimatedOrbitalParameters` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getEstimatedOrbitalParameters`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 the list of estimated orbital parameters
@@ -1000,8 +992,8 @@ class AbstractKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.exte
             Get the list of estimated propagation parameters.
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getEstimatedPropagationParameters` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getEstimatedPropagationParameters`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 the list of estimated propagation parameters
@@ -1023,9 +1015,7 @@ class AbstractKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.exte
         """
         
             Specified by:
-                
-                meth:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.extended.NonLinearProcess.html?is` in
-                interface :class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.extended.NonLinearProcess?is`
+                 in interface 
         
         
         """
@@ -1034,31 +1024,19 @@ class AbstractKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.exte
         """
         
             Specified by:
-                
-                meth:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.extended.NonLinearProcess.html?is` in
-                interface :class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.extended.NonLinearProcess?is`
+                 in interface 
         
         
         """
         ...
-    def getMappers(self) -> typing.List[org.orekit.propagation.integration.AbstractJacobiansMapper]:
-        """
-            Deprecated. as of 11.1, not used anymore
-            Getter for the jacobian mappers.
-        
-            Returns:
-                the jacobian mappers
-        
-        
-        """
-        ...
+    def getMappers(self) -> typing.List[org.orekit.propagation.integration.AbstractJacobiansMapper]: ...
     def getPhysicalEstimatedCovarianceMatrix(self) -> org.hipparchus.linear.RealMatrix:
         """
             Get the "physical" estimated covariance matrix (i.e. not normalized)
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalEstimatedCovarianceMatrix` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalEstimatedCovarianceMatrix`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 the "physical" estimated covariance matrix
@@ -1071,8 +1049,8 @@ class AbstractKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.exte
             Get the "physical" estimated state (i.e. not normalized)
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalEstimatedState` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalEstimatedState`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 the "physical" estimated state
@@ -1085,8 +1063,8 @@ class AbstractKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.exte
             Get the physical innovation covariance matrix.
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalInnovationCovarianceMatrix` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalInnovationCovarianceMatrix`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 physical innovation covariance matrix (may be null for initial process estimate or if the measurement has been ignored)
@@ -1099,8 +1077,8 @@ class AbstractKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.exte
             Get the physical Kalman gain matrix.
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalKalmanGain` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalKalmanGain`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 Kalman gain matrix (may be null for initial process estimate or if the measurement has been ignored)
@@ -1113,8 +1091,8 @@ class AbstractKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.exte
             Get the physical Jacobian of the measurement with respect to the state (H matrix).
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalMeasurementJacobian` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalMeasurementJacobian`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 physical Jacobian of the measurement with respect to the state (may be null for initial process estimate or if the
@@ -1128,8 +1106,8 @@ class AbstractKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.exte
             Get physical state transition matrix between previous state and estimated (but not yet corrected) state.
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalStateTransitionMatrix` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalStateTransitionMatrix`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 state transition matrix between previous state and estimated state (but not yet corrected) (may be null for initial
@@ -1145,8 +1123,8 @@ class AbstractKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.exte
             This estimation has been evaluated on the last predicted orbits
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPredictedMeasurement` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPredictedMeasurement`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 predicted measurement
@@ -1159,8 +1137,8 @@ class AbstractKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.exte
             Get the predicted spacecraft states.
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPredictedSpacecraftStates` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPredictedSpacecraftStates`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 predicted spacecraft states
@@ -1191,17 +1169,7 @@ class AbstractKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.exte
         
         """
         ...
-    def setMappers(self, abstractJacobiansMapperArray: typing.List[org.orekit.propagation.integration.AbstractJacobiansMapper]) -> None:
-        """
-            Deprecated. as of 11.1, replaced by :meth:`~org.orekit.estimation.sequential.AbstractKalmanModel.setHarvesters`
-            Setter for the jacobian mappers.
-        
-            Parameters:
-                mappers (:class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`[]): the jacobian mappers to set
-        
-        
-        """
-        ...
+    def setMappers(self, abstractJacobiansMapperArray: typing.List[org.orekit.propagation.integration.AbstractJacobiansMapper]) -> None: ...
     def setReferenceTrajectories(self, propagatorArray: typing.List[org.orekit.propagation.Propagator]) -> None:
         """
             Setter for the reference trajectories.
@@ -1213,9 +1181,399 @@ class AbstractKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.exte
         """
         ...
 
+class PythonCovarianceMatrixProvider(CovarianceMatrixProvider):
+    """
+    public class PythonCovarianceMatrixProvider extends Object implements :class:`~org.orekit.estimation.sequential.CovarianceMatrixProvider`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def getInitialCovarianceMatrix(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.hipparchus.linear.RealMatrix:
+        """
+            Get the initial covariance matrix. Extension point for Python.
+        
+            The initial covariance matrix is a covariance matrix corresponding to the parameters managed by the
+            :class:`~org.orekit.estimation.sequential.KalmanEstimator`. The number of rows/columns and their order are as follows:
+        
+              - The first 6 components correspond to the 6 orbital parameters of the associated propagator. All 6 parameters must always
+                be present, regardless of the fact they are estimated or not.
+              - The following components correspond to the subset of propagation parameters of the associated propagator that are
+                estimated.
+              - The remaining components correspond to the subset of measurements parameters that are estimated, considering all
+                measurements, even the ones that correspond to spacecrafts not related to the associated propagator
+        
+        
+            In most cases, the initial covariance matrix will be the output matrix of a previous run of the Kalman filter.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.sequential.CovarianceMatrixProvider.getInitialCovarianceMatrix`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.CovarianceMatrixProvider`
+        
+            Parameters:
+                initial (:class:`~org.orekit.propagation.SpacecraftState`): initial state state
+        
+            Returns:
+                physical (i.e. non normalized) initial covariance matrix
+        
+            Also see:
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitalParametersDrivers`,
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPropagationParametersDrivers`
+        
+        
+        """
+        ...
+    def getProcessNoiseMatrix(self, spacecraftState: org.orekit.propagation.SpacecraftState, spacecraftState2: org.orekit.propagation.SpacecraftState) -> org.hipparchus.linear.RealMatrix:
+        """
+            Get the process noise matrix between previous and current states. Extension point for Python.
+        
+            The process noise matrix is a covariance matrix corresponding to the parameters managed by the
+            :class:`~org.orekit.estimation.sequential.KalmanEstimator`. The number of rows/columns and their order are as follows:
+        
+              - The first 6 components correspond to the 6 orbital parameters of the associated propagator. All 6 parameters must always
+                be present, regardless of the fact they are estimated or not.
+              - The following components correspond to the subset of propagation parameters of the associated propagator that are
+                estimated.
+              - The remaining components correspond to the subset of measurements parameters that are estimated, considering all
+                measurements, even the ones that correspond to spacecrafts not related to the associated propagator
+        
+        
+            In most cases, the process noise for the part corresponding to measurements (the final rows and columns) will be set to
+            0 for the process noise corresponding to the evolution between a non-null previous and current state.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.sequential.CovarianceMatrixProvider.getProcessNoiseMatrix`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.CovarianceMatrixProvider`
+        
+            Parameters:
+                previous (:class:`~org.orekit.propagation.SpacecraftState`): previous state
+                current (:class:`~org.orekit.propagation.SpacecraftState`): current state
+        
+            Returns:
+                physical (i.e. non normalized) process noise matrix between previous and current states
+        
+            Also see:
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitalParametersDrivers`,
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPropagationParametersDrivers`
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
+class PythonKalmanEstimation(KalmanEstimation):
+    """
+    public class PythonKalmanEstimation extends Object implements :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def getCorrectedMeasurement(self) -> org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]:
+        """
+            Get the estimated measurement.
+        
+            This estimation has been evaluated on the last corrected orbits
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getCorrectedMeasurement`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+        
+            Returns:
+                corrected measurement
+        
+        
+        """
+        ...
+    def getCorrectedSpacecraftStates(self) -> typing.List[org.orekit.propagation.SpacecraftState]:
+        """
+            Get the corrected spacecraft states.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getCorrectedSpacecraftStates`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+        
+            Returns:
+                corrected spacecraft states
+        
+        
+        """
+        ...
+    def getCurrentDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Get the current date.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getCurrentDate`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+        
+            Returns:
+                current date
+        
+        
+        """
+        ...
+    def getCurrentMeasurementNumber(self) -> int:
+        """
+            Get the current measurement number.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getCurrentMeasurementNumber`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+        
+            Returns:
+                current measurement number
+        
+        
+        """
+        ...
+    def getEstimatedMeasurementsParameters(self) -> org.orekit.utils.ParameterDriversList:
+        """
+            Get the list of estimated measurements parameters.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getEstimatedMeasurementsParameters`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+        
+            Returns:
+                the list of estimated measurements parameters
+        
+        
+        """
+        ...
+    def getEstimatedOrbitalParameters(self) -> org.orekit.utils.ParameterDriversList:
+        """
+            Get the list of estimated orbital parameters.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getEstimatedOrbitalParameters`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+        
+            Returns:
+                the list of estimated orbital parameters
+        
+        
+        """
+        ...
+    def getEstimatedPropagationParameters(self) -> org.orekit.utils.ParameterDriversList:
+        """
+            Get the list of estimated propagation parameters.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getEstimatedPropagationParameters`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+        
+            Returns:
+                the list of estimated propagation parameters
+        
+        
+        """
+        ...
+    def getPhysicalEstimatedCovarianceMatrix(self) -> org.hipparchus.linear.RealMatrix:
+        """
+            Get the "physical" estimated covariance matrix (i.e. not normalized)
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalEstimatedCovarianceMatrix`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+        
+            Returns:
+                the "physical" estimated covariance matrix
+        
+        
+        """
+        ...
+    def getPhysicalEstimatedState(self) -> org.hipparchus.linear.RealVector:
+        """
+            Get the "physical" estimated state (i.e. not normalized)
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalEstimatedState`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+        
+            Returns:
+                the "physical" estimated state
+        
+        
+        """
+        ...
+    def getPhysicalInnovationCovarianceMatrix(self) -> org.hipparchus.linear.RealMatrix:
+        """
+            Get the physical innovation covariance matrix.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalInnovationCovarianceMatrix`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+        
+            Returns:
+                physical innovation covariance matrix (may be null for initial process estimate or if the measurement has been ignored)
+        
+            Since:
+                9.3
+        
+        
+        """
+        ...
+    def getPhysicalKalmanGain(self) -> org.hipparchus.linear.RealMatrix:
+        """
+            Get the physical Kalman gain matrix.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalKalmanGain`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+        
+            Returns:
+                Kalman gain matrix (may be null for initial process estimate or if the measurement has been ignored)
+        
+            Since:
+                9.3
+        
+        
+        """
+        ...
+    def getPhysicalMeasurementJacobian(self) -> org.hipparchus.linear.RealMatrix:
+        """
+            Get the physical Jacobian of the measurement with respect to the state (H matrix).
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalMeasurementJacobian`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+        
+            Returns:
+                physical Jacobian of the measurement with respect to the state (may be null for initial process estimate or if the
+                measurement has been ignored)
+        
+            Since:
+                9.3
+        
+        
+        """
+        ...
+    def getPhysicalStateTransitionMatrix(self) -> org.hipparchus.linear.RealMatrix:
+        """
+            Get physical state transition matrix between previous state and estimated (but not yet corrected) state.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalStateTransitionMatrix`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+        
+            Returns:
+                state transition matrix between previous state and estimated state (but not yet corrected) (may be null for initial
+                process estimate)
+        
+            Since:
+                9.3
+        
+        
+        """
+        ...
+    def getPredictedMeasurement(self) -> org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]:
+        """
+            Get the predicted measurement.
+        
+            This estimation has been evaluated on the last predicted orbits
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPredictedMeasurement`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+        
+            Returns:
+                predicted measurement
+        
+        
+        """
+        ...
+    def getPredictedSpacecraftStates(self) -> typing.List[org.orekit.propagation.SpacecraftState]:
+        """
+            Get the predicted spacecraft states.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPredictedSpacecraftStates`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+        
+            Returns:
+                predicted spacecraft states
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
+class PythonKalmanObserver(KalmanObserver):
+    """
+    public class PythonKalmanObserver extends Object implements :class:`~org.orekit.estimation.sequential.KalmanObserver`
+    """
+    def __init__(self): ...
+    def evaluationPerformed(self, kalmanEstimation: KalmanEstimation) -> None:
+        """
+            Notification callback after each one of a Kalman filter estimation.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.sequential.KalmanObserver.evaluationPerformed`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanObserver`
+        
+            Parameters:
+                estimation (:class:`~org.orekit.estimation.sequential.KalmanEstimation`): estimation performed by Kalman estimator
+        
+        
+        """
+        ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
 class SemiAnalyticalKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.extended.NonLinearProcess[MeasurementDecorator]):
     """
-    public class SemiAnalyticalKalmanModel extends :class:`~org.orekit.estimation.sequential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.sequential.KalmanEstimation`, :class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.extended.NonLinearProcess?is`<:class:`~org.orekit.estimation.sequential.MeasurementDecorator`>
+    public class SemiAnalyticalKalmanModel extends Object implements :class:`~org.orekit.estimation.sequential.KalmanEstimation`, NonLinearProcess<:class:`~org.orekit.estimation.sequential.MeasurementDecorator`>
     
         Process model to use with a :class:`~org.orekit.estimation.sequential.SemiAnalyticalKalmanEstimator`.
     
@@ -1234,7 +1592,7 @@ class SemiAnalyticalKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalma
         
             Parameters:
                 observedMeasurement (:class:`~org.orekit.estimation.measurements.ObservedMeasurement`<?> observedMeasurement): measurement that has just been processed
-                estimate (:class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.ProcessEstimate?is`): corrected estimate
+                estimate (ProcessEstimate): corrected estimate
         
         
         """
@@ -1252,8 +1610,8 @@ class SemiAnalyticalKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalma
             This estimation has been evaluated on the last corrected orbits
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getCorrectedMeasurement` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getCorrectedMeasurement`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 corrected measurement
@@ -1266,8 +1624,8 @@ class SemiAnalyticalKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalma
             Get the corrected spacecraft states.
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getCorrectedSpacecraftStates` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getCorrectedSpacecraftStates`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 corrected spacecraft states
@@ -1280,8 +1638,8 @@ class SemiAnalyticalKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalma
             Get the current date.
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getCurrentDate` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getCurrentDate`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 current date
@@ -1294,8 +1652,8 @@ class SemiAnalyticalKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalma
             Get the current measurement number.
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getCurrentMeasurementNumber` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getCurrentMeasurementNumber`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 current measurement number
@@ -1318,8 +1676,8 @@ class SemiAnalyticalKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalma
             Get the list of estimated measurements parameters.
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getEstimatedMeasurementsParameters` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getEstimatedMeasurementsParameters`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 the list of estimated measurements parameters
@@ -1332,8 +1690,8 @@ class SemiAnalyticalKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalma
             Get the list of estimated orbital parameters.
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getEstimatedOrbitalParameters` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getEstimatedOrbitalParameters`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 the list of estimated orbital parameters
@@ -1346,8 +1704,8 @@ class SemiAnalyticalKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalma
             Get the list of estimated propagation parameters.
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getEstimatedPropagationParameters` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getEstimatedPropagationParameters`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 the list of estimated propagation parameters
@@ -1369,9 +1727,7 @@ class SemiAnalyticalKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalma
         """
         
             Specified by:
-                
-                meth:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.extended.NonLinearProcess.html?is` in
-                interface :class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.extended.NonLinearProcess?is`
+                 in interface 
         
         
         """
@@ -1380,9 +1736,7 @@ class SemiAnalyticalKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalma
         """
         
             Specified by:
-                
-                meth:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.extended.NonLinearProcess.html?is` in
-                interface :class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.extended.NonLinearProcess?is`
+                 in interface 
         
         
         """
@@ -1402,8 +1756,8 @@ class SemiAnalyticalKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalma
             Get the "physical" estimated covariance matrix (i.e. not normalized)
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalEstimatedCovarianceMatrix` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalEstimatedCovarianceMatrix`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 the "physical" estimated covariance matrix
@@ -1416,8 +1770,8 @@ class SemiAnalyticalKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalma
             Get the "physical" estimated state (i.e. not normalized)
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalEstimatedState` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalEstimatedState`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 the "physical" estimated state
@@ -1430,8 +1784,8 @@ class SemiAnalyticalKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalma
             Get the physical innovation covariance matrix.
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalInnovationCovarianceMatrix` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalInnovationCovarianceMatrix`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 physical innovation covariance matrix (may be null for initial process estimate or if the measurement has been ignored)
@@ -1444,8 +1798,8 @@ class SemiAnalyticalKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalma
             Get the physical Kalman gain matrix.
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalKalmanGain` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalKalmanGain`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 Kalman gain matrix (may be null for initial process estimate or if the measurement has been ignored)
@@ -1458,8 +1812,8 @@ class SemiAnalyticalKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalma
             Get the physical Jacobian of the measurement with respect to the state (H matrix).
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalMeasurementJacobian` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalMeasurementJacobian`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 physical Jacobian of the measurement with respect to the state (may be null for initial process estimate or if the
@@ -1473,8 +1827,8 @@ class SemiAnalyticalKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalma
             Get physical state transition matrix between previous state and estimated (but not yet corrected) state.
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalStateTransitionMatrix` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPhysicalStateTransitionMatrix`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 state transition matrix between previous state and estimated state (but not yet corrected) (may be null for initial
@@ -1490,8 +1844,8 @@ class SemiAnalyticalKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalma
             This estimation has been evaluated on the last predicted orbits
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPredictedMeasurement` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPredictedMeasurement`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 predicted measurement
@@ -1504,8 +1858,8 @@ class SemiAnalyticalKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalma
             Get the predicted spacecraft states.
         
             Specified by:
-                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPredictedSpacecraftStates` in
-                interface :class:`~org.orekit.estimation.sequential.KalmanEstimation`
+                :meth:`~org.orekit.estimation.sequential.KalmanEstimation.getPredictedSpacecraftStates`Â in
+                interfaceÂ :class:`~org.orekit.estimation.sequential.KalmanEstimation`
         
             Returns:
                 predicted spacecraft states
@@ -1618,7 +1972,7 @@ class DSSTKalmanModel(AbstractKalmanModel):
     """
     Deprecated. 
     as of 11.1, replaced by :class:`~org.orekit.estimation.sequential.SemiAnalyticalKalmanModel`
-    :class:`~org.orekit.estimation.sequential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class DSSTKalmanModel extends :class:`~org.orekit.estimation.sequential.AbstractKalmanModel`
+    @Deprecated public class DSSTKalmanModel extends :class:`~org.orekit.estimation.sequential.AbstractKalmanModel`
     
         Class defining the process model dynamics to use with a :class:`~org.orekit.estimation.sequential.KalmanEstimator`.
     
@@ -1641,11 +1995,113 @@ class KalmanModel(AbstractKalmanModel):
     """
     def __init__(self, list: java.util.List[org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder], list2: java.util.List[CovarianceMatrixProvider], parameterDriversList: org.orekit.utils.ParameterDriversList, covarianceMatrixProvider: CovarianceMatrixProvider): ...
 
+class PythonAbstractCovarianceMatrixProvider(AbstractCovarianceMatrixProvider):
+    """
+    public class PythonAbstractCovarianceMatrixProvider extends :class:`~org.orekit.estimation.sequential.AbstractCovarianceMatrixProvider`
+    """
+    def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix): ...
+    def finalize(self) -> None: ...
+    def getProcessNoiseMatrix(self, spacecraftState: org.orekit.propagation.SpacecraftState, spacecraftState2: org.orekit.propagation.SpacecraftState) -> org.hipparchus.linear.RealMatrix:
+        """
+            Get the process noise matrix between previous and current states. Extension point for Python.
+        
+            The process noise matrix is a covariance matrix corresponding to the parameters managed by the
+            :class:`~org.orekit.estimation.sequential.KalmanEstimator`. The number of rows/columns and their order are as follows:
+        
+              - The first 6 components correspond to the 6 orbital parameters of the associated propagator. All 6 parameters must always
+                be present, regardless of the fact they are estimated or not.
+              - The following components correspond to the subset of propagation parameters of the associated propagator that are
+                estimated.
+              - The remaining components correspond to the subset of measurements parameters that are estimated, considering all
+                measurements, even the ones that correspond to spacecrafts not related to the associated propagator
+        
+        
+            In most cases, the process noise for the part corresponding to measurements (the final rows and columns) will be set to
+            0 for the process noise corresponding to the evolution between a non-null previous and current state.
+        
+            Parameters:
+                previous (:class:`~org.orekit.propagation.SpacecraftState`): previous state
+                current (:class:`~org.orekit.propagation.SpacecraftState`): current state
+        
+            Returns:
+                physical (i.e. non normalized) process noise matrix between previous and current states
+        
+            Also see:
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitalParametersDrivers`,
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPropagationParametersDrivers`
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
+class PythonAbstractKalmanModel(AbstractKalmanModel):
+    """
+    public class PythonAbstractKalmanModel extends :class:`~org.orekit.estimation.sequential.AbstractKalmanModel`
+    """
+    @typing.overload
+    def __init__(self, list: java.util.List[org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder], list2: java.util.List[CovarianceMatrixProvider], parameterDriversList: org.orekit.utils.ParameterDriversList, covarianceMatrixProvider: CovarianceMatrixProvider, matricesHarvesterArray: typing.List[org.orekit.propagation.MatricesHarvester]): ...
+    @typing.overload
+    def __init__(self, list: java.util.List[org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder], list2: java.util.List[CovarianceMatrixProvider], parameterDriversList: org.orekit.utils.ParameterDriversList, covarianceMatrixProvider: CovarianceMatrixProvider, matricesHarvesterArray: typing.List[org.orekit.propagation.MatricesHarvester], propagationType: org.orekit.propagation.PropagationType, propagationType2: org.orekit.propagation.PropagationType): ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+    def updateReferenceTrajectories(self, propagatorArray: typing.List[org.orekit.propagation.Propagator], propagationType: org.orekit.propagation.PropagationType, propagationType2: org.orekit.propagation.PropagationType) -> None:
+        """
+            Update the reference trajectories using the propagators as input.
+        
+            Specified by:
+                 in class :class:`~org.orekit.estimation.sequential.AbstractKalmanModel`
+        
+            Parameters:
+                propagators (:class:`~org.orekit.propagation.Propagator`[]): The new propagators to use
+                pType (:class:`~org.orekit.propagation.PropagationType`): propagationType type of the orbit used for the propagation (mean or osculating)
+                sType (:class:`~org.orekit.propagation.PropagationType`): type of the elements used to define the orbital state (mean or osculating)
+        
+        
+        """
+        ...
+
 class TLEKalmanModel(AbstractKalmanModel):
     """
     Deprecated. 
     as of 11.1, replaced by :class:`~org.orekit.estimation.sequential.KalmanModel`
-    :class:`~org.orekit.estimation.sequential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class TLEKalmanModel extends :class:`~org.orekit.estimation.sequential.AbstractKalmanModel`
+    @Deprecated public class TLEKalmanModel extends :class:`~org.orekit.estimation.sequential.AbstractKalmanModel`
     
         Class defining the process model dynamics to use with a :class:`~org.orekit.estimation.sequential.KalmanEstimator`.
     
@@ -1662,10 +2118,8 @@ class UnivariateProcessNoise(AbstractCovarianceMatrixProvider):
     public class UnivariateProcessNoise extends :class:`~org.orekit.estimation.sequential.AbstractCovarianceMatrixProvider`
     
         Provider for a temporal evolution of the process noise matrix. All parameters (orbital or propagation) are time
-        dependent and provided as
-        :class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.UnivariateFunction?is`.
-        The argument of the functions is a duration in seconds (between current and previous spacecraft state). The output of
-        the functions must be of the dimension of a standard deviation. The method
+        dependent and provided as null. The argument of the functions is a duration in seconds (between current and previous
+        spacecraft state). The output of the functions must be of the dimension of a standard deviation. The method
         :meth:`~org.orekit.estimation.sequential.UnivariateProcessNoise.getProcessNoiseMatrix` then square the values so that
         they are consistent with a covariance matrix.
     
@@ -1795,6 +2249,11 @@ class __module_protocol__(typing.Protocol):
     KalmanModel: typing.Type[KalmanModel]
     KalmanObserver: typing.Type[KalmanObserver]
     MeasurementDecorator: typing.Type[MeasurementDecorator]
+    PythonAbstractCovarianceMatrixProvider: typing.Type[PythonAbstractCovarianceMatrixProvider]
+    PythonAbstractKalmanModel: typing.Type[PythonAbstractKalmanModel]
+    PythonCovarianceMatrixProvider: typing.Type[PythonCovarianceMatrixProvider]
+    PythonKalmanEstimation: typing.Type[PythonKalmanEstimation]
+    PythonKalmanObserver: typing.Type[PythonKalmanObserver]
     SemiAnalyticalKalmanEstimator: typing.Type[SemiAnalyticalKalmanEstimator]
     SemiAnalyticalKalmanEstimatorBuilder: typing.Type[SemiAnalyticalKalmanEstimatorBuilder]
     SemiAnalyticalKalmanModel: typing.Type[SemiAnalyticalKalmanModel]

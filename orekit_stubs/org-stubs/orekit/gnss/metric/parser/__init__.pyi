@@ -332,8 +332,9 @@ class IgsSsrDataField(java.lang.Enum['IgsSsrDataField'], DataField):
         
             .. code-block: java
             
-            for (IgsSsrDataField c : IgsSsrDataField.values())
-                System.out.println(c);
+            
+            for (IgsSsrDataField c : IgsSsrDataField.values())
+                System.out.println(c);
             
         
             Returns:
@@ -450,8 +451,9 @@ class IgsSsrMessageType(java.lang.Enum['IgsSsrMessageType'], MessageType):
         
             .. code-block: java
             
-            for (IgsSsrMessageType c : IgsSsrMessageType.values())
-                System.out.println(c);
+            
+            for (IgsSsrMessageType c : IgsSsrMessageType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -666,8 +668,9 @@ class RtcmDataField(java.lang.Enum['RtcmDataField'], DataField):
         
             .. code-block: java
             
-            for (RtcmDataField c : RtcmDataField.values())
-                System.out.println(c);
+            
+            for (RtcmDataField c : RtcmDataField.values())
+                System.out.println(c);
             
         
             Returns:
@@ -750,8 +753,9 @@ class RtcmMessageType(java.lang.Enum['RtcmMessageType'], MessageType):
         
             .. code-block: java
             
-            for (RtcmMessageType c : RtcmMessageType.values())
-                System.out.println(c);
+            
+            for (RtcmMessageType c : RtcmMessageType.values())
+                System.out.println(c);
             
         
             Returns:

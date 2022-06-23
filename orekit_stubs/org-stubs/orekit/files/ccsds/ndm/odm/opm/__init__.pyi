@@ -222,8 +222,9 @@ class ManeuverKey(java.lang.Enum['ManeuverKey']):
         
             .. code-block: java
             
-            for (ManeuverKey c : ManeuverKey.values())
-                System.out.println(c);
+            
+            for (ManeuverKey c : ManeuverKey.values())
+                System.out.println(c);
             
         
             Returns:

@@ -1,4 +1,5 @@
 import org
+import org.hipparchus
 import org.orekit.attitudes
 import org.orekit.frames
 import org.orekit.time
@@ -33,6 +34,120 @@ class GNSSAttitudeProvider(org.orekit.attitudes.AttitudeProvider):
     def validityStart(self) -> org.orekit.time.AbsoluteDate:
         """
             Get start of validity for this provider.
+        
+            Returns:
+                start of validity for this provider
+        
+        
+        """
+        ...
+
+class PythonGNSSAttitudeProvider(GNSSAttitudeProvider):
+    """
+    public class PythonGNSSAttitudeProvider extends Object implements :class:`~org.orekit.gnss.attitude.GNSSAttitudeProvider`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getAttitude(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.attitudes.Attitude:
+        """
+            Compute the attitude corresponding to an orbital state.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitude` in interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Parameters:
+                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
+        
+            Returns:
+                attitude attitude on the specified date and position-velocity state
+        
+        """
+        ...
+    @typing.overload
+    def getAttitude(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> org.orekit.attitudes.FieldAttitude[_getAttitude_1__T]:
+        """
+            Compute the attitude corresponding to an orbital state.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitude` in interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Parameters:
+                pvProv (:class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T> pvProv): local position-velocity provider around current date
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
+                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
+        
+            Returns:
+                attitude attitude on the specified date and position-velocity state
+        
+            Since:
+                9.0
+        
+        
+        """
+        ...
+    _getAttitude_FFF__T = typing.TypeVar('_getAttitude_FFF__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    def getAttitude_FFF(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_FFF__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_FFF__T], frame: org.orekit.frames.Frame) -> org.orekit.attitudes.FieldAttitude[_getAttitude_FFF__T]:
+        """
+            Compute the attitude corresponding to an orbital state.
+        
+            Parameters:
+                pvProv (:class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T> pvProv): local position-velocity provider around current date
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
+                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
+        
+            Returns:
+                attitude attitude on the specified date and position-velocity state
+        
+            Since:
+                9.0
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+    def validityEnd(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Get end of validity for this provider.
+        
+            Specified by:
+                :meth:`~org.orekit.gnss.attitude.GNSSAttitudeProvider.validityEnd`Â in
+                interfaceÂ :class:`~org.orekit.gnss.attitude.GNSSAttitudeProvider`
+        
+            Returns:
+                end of validity for this provider
+        
+        
+        """
+        ...
+    def validityStart(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Get start of validity for this provider.
+        
+            Specified by:
+                :meth:`~org.orekit.gnss.attitude.GNSSAttitudeProvider.validityStart`Â in
+                interfaceÂ :class:`~org.orekit.gnss.attitude.GNSSAttitudeProvider`
         
             Returns:
                 start of validity for this provider
@@ -239,3 +354,4 @@ class __module_protocol__(typing.Protocol):
     Galileo: typing.Type[Galileo]
     GenericGNSS: typing.Type[GenericGNSS]
     Glonass: typing.Type[Glonass]
+    PythonGNSSAttitudeProvider: typing.Type[PythonGNSSAttitudeProvider]

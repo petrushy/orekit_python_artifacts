@@ -14,7 +14,7 @@ import typing
 _BaseOptimizer__P = typing.TypeVar('_BaseOptimizer__P')  # <P>
 class BaseOptimizer(typing.Generic[_BaseOptimizer__P]):
     """
-    public abstract class BaseOptimizer<P> extends :class:`~org.hipparchus.optim.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    public abstract class BaseOptimizer<P> extends Object
     
         Base class for implementing optimizers. It contains the boiler-plate code for counting the number of evaluations of the
         objective function and the number of iterations of the algorithm, and storing the convergence checker. *It is not a
@@ -74,7 +74,7 @@ class ConvergenceChecker(typing.Generic[_ConvergenceChecker__P]):
 
 class LocalizedOptimFormats(java.lang.Enum['LocalizedOptimFormats'], org.hipparchus.exception.Localizable):
     """
-    public enum LocalizedOptimFormats extends :class:`~org.hipparchus.optim.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.hipparchus.optim.LocalizedOptimFormats`> implements :class:`~org.hipparchus.optim.https:.www.hipparchus.org.hipparchus`
+    public enum LocalizedOptimFormats extends Enum<:class:`~org.hipparchus.optim.LocalizedOptimFormats`> implements Localizable
     
         Enumeration for localized messages formats used in exceptions messages.
     
@@ -99,8 +99,7 @@ class LocalizedOptimFormats(java.lang.Enum['LocalizedOptimFormats'], org.hipparc
         """
         
             Specified by:
-                :meth:`~org.hipparchus.optim.https:.www.hipparchus.org.hipparchus` in
-                interface :class:`~org.hipparchus.optim.https:.www.hipparchus.org.hipparchus`
+                 in interface 
         
         
         """
@@ -109,8 +108,7 @@ class LocalizedOptimFormats(java.lang.Enum['LocalizedOptimFormats'], org.hipparc
         """
         
             Specified by:
-                :meth:`~org.hipparchus.optim.https:.www.hipparchus.org.hipparchus` in
-                interface :class:`~org.hipparchus.optim.https:.www.hipparchus.org.hipparchus`
+                 in interface 
         
         
         """
@@ -127,14 +125,14 @@ class LocalizedOptimFormats(java.lang.Enum['LocalizedOptimFormats'], org.hipparc
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (:class:`~org.hipparchus.optim.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+                name (String): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                :class:`~org.hipparchus.optim.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.hipparchus.optim.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+                : if this enum type has no constant with the specified name
+                : if the argument is null
         
         
         """
@@ -199,13 +197,12 @@ class OptimizationProblem(typing.Generic[_OptimizationProblem__P]):
 
 class PointValuePair(org.hipparchus.util.Pair[typing.List[float], float], java.io.Serializable):
     """
-    public class PointValuePair extends :class:`~org.hipparchus.optim.https:.www.hipparchus.org.hipparchus`<double[],:class:`~org.hipparchus.optim.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double?is`> implements :class:`~org.hipparchus.optim.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public class PointValuePair extends Pair<double[],Double> implements Serializable
     
         This class holds a point and the value of an objective function at that point.
     
         Also see:
-            :class:`~org.hipparchus.optim.PointVectorValuePair`,
-            :class:`~org.hipparchus.optim.https:.www.hipparchus.org.hipparchus`, :meth:`~serialized`
+            :class:`~org.hipparchus.optim.PointVectorValuePair`, null, :meth:`~serialized`
     """
     @typing.overload
     def __init__(self, doubleArray: typing.List[float], double2: float): ...
@@ -234,13 +231,12 @@ class PointValuePair(org.hipparchus.util.Pair[typing.List[float], float], java.i
 
 class PointVectorValuePair(org.hipparchus.util.Pair[typing.List[float], typing.List[float]], java.io.Serializable):
     """
-    public class PointVectorValuePair extends :class:`~org.hipparchus.optim.https:.www.hipparchus.org.hipparchus`<double[],double[]> implements :class:`~org.hipparchus.optim.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public class PointVectorValuePair extends Pair<double[],double[]> implements Serializable
     
         This class holds a point and the vectorial value of an objective function at that point.
     
         Also see:
-            :class:`~org.hipparchus.optim.PointValuePair`, :class:`~org.hipparchus.optim.https:.www.hipparchus.org.hipparchus`,
-            :meth:`~serialized`
+            :class:`~org.hipparchus.optim.PointValuePair`, null, :meth:`~serialized`
     """
     @typing.overload
     def __init__(self, doubleArray: typing.List[float], doubleArray2: typing.List[float]): ...
@@ -271,8 +267,7 @@ class PointVectorValuePair(org.hipparchus.util.Pair[typing.List[float], typing.L
             Gets the value of the objective function.
         
             Overrides:
-                :meth:`~org.hipparchus.optim.https:.www.hipparchus.org.hipparchus` in
-                class :class:`~org.hipparchus.optim.https:.www.hipparchus.org.hipparchus`
+                 in class 
         
             Returns:
                 a copy of the stored value of the objective function.
@@ -294,7 +289,7 @@ class PointVectorValuePair(org.hipparchus.util.Pair[typing.List[float], typing.L
 _AbstractConvergenceChecker__P = typing.TypeVar('_AbstractConvergenceChecker__P')  # <P>
 class AbstractConvergenceChecker(ConvergenceChecker[_AbstractConvergenceChecker__P], typing.Generic[_AbstractConvergenceChecker__P]):
     """
-    public abstract class AbstractConvergenceChecker<P> extends :class:`~org.hipparchus.optim.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.optim.ConvergenceChecker`<P>
+    public abstract class AbstractConvergenceChecker<P> extends Object implements :class:`~org.hipparchus.optim.ConvergenceChecker`<P>
     
         Base class for all convergence checker implementations.
     """
@@ -304,8 +299,8 @@ class AbstractConvergenceChecker(ConvergenceChecker[_AbstractConvergenceChecker_
             Check if the optimization algorithm has converged.
         
             Specified by:
-                :meth:`~org.hipparchus.optim.ConvergenceChecker.converged` in
-                interface :class:`~org.hipparchus.optim.ConvergenceChecker`
+                :meth:`~org.hipparchus.optim.ConvergenceChecker.converged`Â in
+                interfaceÂ :class:`~org.hipparchus.optim.ConvergenceChecker`
         
             Parameters:
                 iteration (int): Current iteration.
@@ -340,7 +335,7 @@ class AbstractConvergenceChecker(ConvergenceChecker[_AbstractConvergenceChecker_
 _AbstractOptimizationProblem__P = typing.TypeVar('_AbstractOptimizationProblem__P')  # <P>
 class AbstractOptimizationProblem(OptimizationProblem[_AbstractOptimizationProblem__P], typing.Generic[_AbstractOptimizationProblem__P]):
     """
-    public abstract class AbstractOptimizationProblem<P> extends :class:`~org.hipparchus.optim.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.optim.OptimizationProblem`<P>
+    public abstract class AbstractOptimizationProblem<P> extends Object implements :class:`~org.hipparchus.optim.OptimizationProblem`<P>
     
         Base class for implementing optimization problems. It contains the boiler-plate code for counting the number of
         evaluations of the objective function and the number of iterations of the algorithm, and storing the convergence
@@ -352,8 +347,8 @@ class AbstractOptimizationProblem(OptimizationProblem[_AbstractOptimizationProbl
             Get a independent Incrementor that counts up to the maximum number of evaluations and then throws an exception.
         
             Specified by:
-                :meth:`~org.hipparchus.optim.OptimizationProblem.getEvaluationCounter` in
-                interface :class:`~org.hipparchus.optim.OptimizationProblem`
+                :meth:`~org.hipparchus.optim.OptimizationProblem.getEvaluationCounter`Â in
+                interfaceÂ :class:`~org.hipparchus.optim.OptimizationProblem`
         
             Returns:
                 a counter for the evaluations.
@@ -366,8 +361,8 @@ class AbstractOptimizationProblem(OptimizationProblem[_AbstractOptimizationProbl
             Get a independent Incrementor that counts up to the maximum number of iterations and then throws an exception.
         
             Specified by:
-                :meth:`~org.hipparchus.optim.OptimizationProblem.getIterationCounter` in
-                interface :class:`~org.hipparchus.optim.OptimizationProblem`
+                :meth:`~org.hipparchus.optim.OptimizationProblem.getIterationCounter`Â in
+                interfaceÂ :class:`~org.hipparchus.optim.OptimizationProblem`
         
             Returns:
                 a counter for the evaluations.
@@ -450,7 +445,7 @@ class BaseMultivariateOptimizer(BaseOptimizer[_BaseMultivariateOptimizer__P], ty
 _ConvergenceCheckerAndMultiplexer__P = typing.TypeVar('_ConvergenceCheckerAndMultiplexer__P')  # <P>
 class ConvergenceCheckerAndMultiplexer(ConvergenceChecker[_ConvergenceCheckerAndMultiplexer__P], typing.Generic[_ConvergenceCheckerAndMultiplexer__P]):
     """
-    public class ConvergenceCheckerAndMultiplexer<P> extends :class:`~org.hipparchus.optim.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.optim.ConvergenceChecker`<P>
+    public class ConvergenceCheckerAndMultiplexer<P> extends Object implements :class:`~org.hipparchus.optim.ConvergenceChecker`<P>
     
         Multiplexer for :class:`~org.hipparchus.optim.ConvergenceChecker`, checking *all* the checkers converged.
     
@@ -466,8 +461,8 @@ class ConvergenceCheckerAndMultiplexer(ConvergenceChecker[_ConvergenceCheckerAnd
             Check if the optimization algorithm has converged.
         
             Specified by:
-                :meth:`~org.hipparchus.optim.ConvergenceChecker.converged` in
-                interface :class:`~org.hipparchus.optim.ConvergenceChecker`
+                :meth:`~org.hipparchus.optim.ConvergenceChecker.converged`Â in
+                interfaceÂ :class:`~org.hipparchus.optim.ConvergenceChecker`
         
             Parameters:
                 iteration (int): Current iteration.
@@ -484,7 +479,7 @@ class ConvergenceCheckerAndMultiplexer(ConvergenceChecker[_ConvergenceCheckerAnd
 _ConvergenceCheckerOrMultiplexer__P = typing.TypeVar('_ConvergenceCheckerOrMultiplexer__P')  # <P>
 class ConvergenceCheckerOrMultiplexer(ConvergenceChecker[_ConvergenceCheckerOrMultiplexer__P], typing.Generic[_ConvergenceCheckerOrMultiplexer__P]):
     """
-    public class ConvergenceCheckerOrMultiplexer<P> extends :class:`~org.hipparchus.optim.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.optim.ConvergenceChecker`<P>
+    public class ConvergenceCheckerOrMultiplexer<P> extends Object implements :class:`~org.hipparchus.optim.ConvergenceChecker`<P>
     
         Multiplexer for :class:`~org.hipparchus.optim.ConvergenceChecker`, checking *one* of the checkers converged.
     
@@ -500,8 +495,8 @@ class ConvergenceCheckerOrMultiplexer(ConvergenceChecker[_ConvergenceCheckerOrMu
             Check if the optimization algorithm has converged.
         
             Specified by:
-                :meth:`~org.hipparchus.optim.ConvergenceChecker.converged` in
-                interface :class:`~org.hipparchus.optim.ConvergenceChecker`
+                :meth:`~org.hipparchus.optim.ConvergenceChecker.converged`Â in
+                interfaceÂ :class:`~org.hipparchus.optim.ConvergenceChecker`
         
             Parameters:
                 iteration (int): Current iteration.
@@ -521,7 +516,7 @@ class InitialGuess(OptimizationData):
 
 class MaxEval(OptimizationData):
     """
-    public class MaxEval extends :class:`~org.hipparchus.optim.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.optim.OptimizationData`
+    public class MaxEval extends Object implements :class:`~org.hipparchus.optim.OptimizationData`
     
         Maximum number of evaluations of the function to be optimized.
     """
@@ -542,8 +537,7 @@ class MaxEval(OptimizationData):
             Factory method that creates instance of this class that represents a virtually unlimited number of evaluations.
         
             Returns:
-                a new instance suitable for allowing
-                :meth:`~org.hipparchus.optim.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer.html?is` evaluations.
+                a new instance suitable for allowing null evaluations.
         
         
         """
@@ -551,7 +545,7 @@ class MaxEval(OptimizationData):
 
 class MaxIter(OptimizationData):
     """
-    public class MaxIter extends :class:`~org.hipparchus.optim.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.optim.OptimizationData`
+    public class MaxIter extends Object implements :class:`~org.hipparchus.optim.OptimizationData`
     
         Maximum number of iterations performed by an (iterative) algorithm.
     """
@@ -572,8 +566,7 @@ class MaxIter(OptimizationData):
             Factory method that creates instance of this class that represents a virtually unlimited number of iterations.
         
             Returns:
-                a new instance suitable for allowing
-                :meth:`~org.hipparchus.optim.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer.html?is` evaluations.
+                a new instance suitable for allowing null evaluations.
         
         
         """

@@ -577,8 +577,9 @@ class ApmQuaternionKey(java.lang.Enum['ApmQuaternionKey']):
         
             .. code-block: java
             
-            for (ApmQuaternionKey c : ApmQuaternionKey.values())
-                System.out.println(c);
+            
+            for (ApmQuaternionKey c : ApmQuaternionKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -847,8 +848,9 @@ class EulerKey(java.lang.Enum['EulerKey']):
         
             .. code-block: java
             
-            for (EulerKey c : EulerKey.values())
-                System.out.println(c);
+            
+            for (EulerKey c : EulerKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1042,8 +1044,9 @@ class ManeuverKey(java.lang.Enum['ManeuverKey']):
         
             .. code-block: java
             
-            for (ManeuverKey c : ManeuverKey.values())
-                System.out.println(c);
+            
+            for (ManeuverKey c : ManeuverKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1287,8 +1290,9 @@ class SpacecraftParametersKey(java.lang.Enum['SpacecraftParametersKey']):
         
             .. code-block: java
             
-            for (SpacecraftParametersKey c : SpacecraftParametersKey.values())
-                System.out.println(c);
+            
+            for (SpacecraftParametersKey c : SpacecraftParametersKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1545,8 +1549,9 @@ class SpinStabilizedKey(java.lang.Enum['SpinStabilizedKey']):
         
             .. code-block: java
             
-            for (SpinStabilizedKey c : SpinStabilizedKey.values())
-                System.out.println(c);
+            
+            for (SpinStabilizedKey c : SpinStabilizedKey.values())
+                System.out.println(c);
             
         
             Returns:

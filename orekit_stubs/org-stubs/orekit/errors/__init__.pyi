@@ -317,6 +317,7 @@ class OrekitMessages(java.lang.Enum['OrekitMessages'], org.hipparchus.exception.
     BACKWARD_PROPAGATION_NOT_ALLOWED: typing.ClassVar['OrekitMessages'] = ...
     NO_STATION_ECCENTRICITY_FOR_EPOCH: typing.ClassVar['OrekitMessages'] = ...
     INCONSISTENT_SELECTION: typing.ClassVar['OrekitMessages'] = ...
+    NOT_STRICTLY_POSITIVE: typing.ClassVar['OrekitMessages'] = ...
     def getLocalizedString(self, locale: java.util.Locale) -> str:
         """
         
@@ -367,8 +368,9 @@ class OrekitMessages(java.lang.Enum['OrekitMessages'], org.hipparchus.exception.
         
             .. code-block: java
             
-            for (OrekitMessages c : OrekitMessages.values())
-                System.out.println(c);
+            
+            for (OrekitMessages c : OrekitMessages.values())
+                System.out.println(c);
             
         
             Returns:
@@ -860,6 +862,74 @@ class OrekitParseException(java.text.ParseException, LocalizedException):
         """
         ...
 
+class PythonLocalizedException(LocalizedException):
+    """
+    public class PythonLocalizedException extends Object implements :class:`~org.orekit.errors.LocalizedException`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def getMessage(self, locale: java.util.Locale) -> str:
+        """
+            Gets the message in a specified locale.
+        
+            Specified by:
+                :meth:`~org.orekit.errors.LocalizedException.getMessage` in interface :class:`~org.orekit.errors.LocalizedException`
+        
+            Parameters:
+                locale (Locale): Locale in which the message should be translated
+        
+            Returns:
+                localized message
+        
+        
+        """
+        ...
+    def getParts(self) -> typing.List[typing.Any]:
+        """
+            Get the variable parts of the error message.
+        
+            Specified by:
+                :meth:`~org.orekit.errors.LocalizedException.getParts` in interface :class:`~org.orekit.errors.LocalizedException`
+        
+            Returns:
+                a copy of the variable parts of the error message
+        
+        
+        """
+        ...
+    def getSpecifier(self) -> org.hipparchus.exception.Localizable:
+        """
+            Get the localizable specifier of the error message.
+        
+            Specified by:
+                :meth:`~org.orekit.errors.LocalizedException.getSpecifier` in interface :class:`~org.orekit.errors.LocalizedException`
+        
+            Returns:
+                localizable specifier of the error message
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
 class FrameAncestorException(OrekitException):
     """
     public class FrameAncestorException extends :class:`~org.orekit.errors.OrekitException`
@@ -937,4 +1007,5 @@ class __module_protocol__(typing.Protocol):
     OrekitInternalError: typing.Type[OrekitInternalError]
     OrekitMessages: typing.Type[OrekitMessages]
     OrekitParseException: typing.Type[OrekitParseException]
+    PythonLocalizedException: typing.Type[PythonLocalizedException]
     TimeStampedCacheException: typing.Type[TimeStampedCacheException]

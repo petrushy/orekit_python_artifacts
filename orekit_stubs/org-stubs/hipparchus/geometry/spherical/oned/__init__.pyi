@@ -11,7 +11,7 @@ import typing
 
 class Arc:
     """
-    public class Arc extends :class:`~org.hipparchus.geometry.spherical.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    public class Arc extends Object
     
         This class represents an arc on a circle.
     
@@ -120,7 +120,7 @@ class Arc:
 
 class ArcsSet(org.hipparchus.geometry.partitioning.AbstractRegion['Sphere1D', 'Sphere1D'], java.lang.Iterable[typing.List[float]]):
     """
-    public class ArcsSet extends :class:`~org.hipparchus.geometry.partitioning.AbstractRegion`<:class:`~org.hipparchus.geometry.spherical.oned.Sphere1D`,:class:`~org.hipparchus.geometry.spherical.oned.Sphere1D`> implements :class:`~org.hipparchus.geometry.spherical.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable?is`<double[]>
+    public class ArcsSet extends :class:`~org.hipparchus.geometry.partitioning.AbstractRegion`<:class:`~org.hipparchus.geometry.spherical.oned.Sphere1D`,:class:`~org.hipparchus.geometry.spherical.oned.Sphere1D`> implements Iterable<double[]>
     
         This class represents a region of a circle: a set of arcs.
     
@@ -145,8 +145,7 @@ class ArcsSet(org.hipparchus.geometry.partitioning.AbstractRegion['Sphere1D', 'S
             The iterator does *not* support the optional :code:`remove` operation.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.spherical.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable.html?is` in
-                interface :class:`~org.hipparchus.geometry.spherical.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable?is`
+                 in interface 
         
         
         """
@@ -175,7 +174,7 @@ class ArcsSet(org.hipparchus.geometry.partitioning.AbstractRegion['Sphere1D', 'S
 
 class LimitAngle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere1D']):
     """
-    public class LimitAngle extends :class:`~org.hipparchus.geometry.spherical.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.partitioning.Hyperplane`<:class:`~org.hipparchus.geometry.spherical.oned.Sphere1D`>
+    public class LimitAngle extends Object implements :class:`~org.hipparchus.geometry.partitioning.Hyperplane`<:class:`~org.hipparchus.geometry.spherical.oned.Sphere1D`>
     
         This class represents a 1D oriented hyperplane on the circle.
     
@@ -191,8 +190,8 @@ class LimitAngle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere1D']):
             Since instances are immutable, this method directly returns the instance.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.copySelf` in
-                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.copySelf`Â in
+                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Returns:
                 the instance itself
@@ -210,8 +209,8 @@ class LimitAngle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere1D']):
             should *not* be used otherwise.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.emptyHyperplane` in
-                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.emptyHyperplane`Â in
+                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Returns:
                 a sub-hyperplane covering nothing
@@ -248,8 +247,8 @@ class LimitAngle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere1D']):
             Get the tolerance below which points are considered to belong to the hyperplane.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.getTolerance` in
-                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.getTolerance`Â in
+                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Returns:
                 tolerance below which points are considered to belong to the hyperplane
@@ -279,8 +278,8 @@ class LimitAngle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere1D']):
             should *not* be used otherwise.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.wholeHyperplane` in
-                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.wholeHyperplane`Â in
+                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Returns:
                 a dummy sub hyperplane
@@ -293,8 +292,8 @@ class LimitAngle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere1D']):
             Build a region covering the whole space.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.wholeSpace` in
-                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.wholeSpace`Â in
+                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Returns:
                 a region containing the instance (really an :class:`~org.hipparchus.geometry.spherical.oned.ArcsSet` instance)
@@ -305,7 +304,7 @@ class LimitAngle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere1D']):
 
 class S1Point(org.hipparchus.geometry.Point['Sphere1D']):
     """
-    public class S1Point extends :class:`~org.hipparchus.geometry.spherical.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.Point`<:class:`~org.hipparchus.geometry.spherical.oned.Sphere1D`>
+    public class S1Point extends Object implements :class:`~org.hipparchus.geometry.Point`<:class:`~org.hipparchus.geometry.spherical.oned.Sphere1D`>
     
         This class represents a point on the 1-sphere.
     
@@ -352,11 +351,10 @@ class S1Point(org.hipparchus.geometry.Point['Sphere1D']):
             :meth:`~org.hipparchus.geometry.spherical.oned.S1Point.NaN`.
         
             Overrides:
-                :meth:`~org.hipparchus.geometry.spherical.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
-                class :class:`~org.hipparchus.geometry.spherical.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+                 in class 
         
             Parameters:
-                other (:class:`~org.hipparchus.geometry.spherical.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality to this
+                other (Object): Object to test for equality to this
         
             Returns:
                 true if two points on the 1-sphere objects are equal, false if object is null, not an instance of S1Point, or not equal
@@ -378,7 +376,7 @@ class S1Point(org.hipparchus.geometry.Point['Sphere1D']):
             returns :code:`false` despite the instance is checked against itself.
         
             Parameters:
-                other (:class:`~org.hipparchus.geometry.spherical.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality to this
+                other (Object): Object to test for equality to this
         
             Returns:
                 true if two points objects are equal, false if object is null, not an instance of S1Point, or not equal to this S1Point
@@ -433,8 +431,7 @@ class S1Point(org.hipparchus.geometry.Point['Sphere1D']):
             All NaN values have the same hash code.
         
             Overrides:
-                :meth:`~org.hipparchus.geometry.spherical.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
-                class :class:`~org.hipparchus.geometry.spherical.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+                 in class 
         
             Returns:
                 a hash code value for this object
@@ -458,7 +455,7 @@ class S1Point(org.hipparchus.geometry.Point['Sphere1D']):
 
 class Sphere1D(java.io.Serializable, org.hipparchus.geometry.Space):
     """
-    public class Sphere1D extends :class:`~org.hipparchus.geometry.spherical.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.spherical.oned.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.hipparchus.geometry.Space`
+    public class Sphere1D extends Object implements Serializable, :class:`~org.hipparchus.geometry.Space`
     
         This class implements a one-dimensional sphere (i.e. a circle).
     
@@ -525,12 +522,12 @@ class SubLimitAngle(org.hipparchus.geometry.partitioning.AbstractSubHyperplane[S
             Get the size of the instance.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.SubHyperplane.getSize` in
-                interface :class:`~org.hipparchus.geometry.partitioning.SubHyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.SubHyperplane.getSize`Â in
+                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.SubHyperplane`
         
             Overrides:
-                :meth:`~org.hipparchus.geometry.partitioning.AbstractSubHyperplane.getSize` in
-                class :class:`~org.hipparchus.geometry.partitioning.AbstractSubHyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.AbstractSubHyperplane.getSize`Â in
+                classÂ :class:`~org.hipparchus.geometry.partitioning.AbstractSubHyperplane`
         
             Returns:
                 the size of the instance (this is a length in 1D, an area in 2D, a volume in 3D ...)
@@ -543,12 +540,12 @@ class SubLimitAngle(org.hipparchus.geometry.partitioning.AbstractSubHyperplane[S
             Check if the instance is empty.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.SubHyperplane.isEmpty` in
-                interface :class:`~org.hipparchus.geometry.partitioning.SubHyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.SubHyperplane.isEmpty`Â in
+                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.SubHyperplane`
         
             Overrides:
-                :meth:`~org.hipparchus.geometry.partitioning.AbstractSubHyperplane.isEmpty` in
-                class :class:`~org.hipparchus.geometry.partitioning.AbstractSubHyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.AbstractSubHyperplane.isEmpty`Â in
+                classÂ :class:`~org.hipparchus.geometry.partitioning.AbstractSubHyperplane`
         
             Returns:
                 true if the instance is empty

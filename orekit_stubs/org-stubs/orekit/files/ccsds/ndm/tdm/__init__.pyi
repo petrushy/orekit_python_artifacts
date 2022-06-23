@@ -59,8 +59,9 @@ class AngleType(java.lang.Enum['AngleType']):
         
             .. code-block: java
             
-            for (AngleType c : AngleType.values())
-                System.out.println(c);
+            
+            for (AngleType c : AngleType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -113,8 +114,9 @@ class CorrectionApplied(java.lang.Enum['CorrectionApplied']):
         
             .. code-block: java
             
-            for (CorrectionApplied c : CorrectionApplied.values())
-                System.out.println(c);
+            
+            for (CorrectionApplied c : CorrectionApplied.values())
+                System.out.println(c);
             
         
             Returns:
@@ -168,8 +170,9 @@ class DataQuality(java.lang.Enum['DataQuality']):
         
             .. code-block: java
             
-            for (DataQuality c : DataQuality.values())
-                System.out.println(c);
+            
+            for (DataQuality c : DataQuality.values())
+                System.out.println(c);
             
         
             Returns:
@@ -223,8 +226,9 @@ class IntegrationReference(java.lang.Enum['IntegrationReference']):
         
             .. code-block: java
             
-            for (IntegrationReference c : IntegrationReference.values())
-                System.out.println(c);
+            
+            for (IntegrationReference c : IntegrationReference.values())
+                System.out.println(c);
             
         
             Returns:
@@ -422,8 +426,9 @@ class ObservationType(java.lang.Enum['ObservationType']):
         
             .. code-block: java
             
-            for (ObservationType c : ObservationType.values())
-                System.out.println(c);
+            
+            for (ObservationType c : ObservationType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -520,8 +525,9 @@ class RangeMode(java.lang.Enum['RangeMode']):
         
             .. code-block: java
             
-            for (RangeMode c : RangeMode.values())
-                System.out.println(c);
+            
+            for (RangeMode c : RangeMode.values())
+                System.out.println(c);
             
         
             Returns:
@@ -575,8 +581,9 @@ class RangeUnits(java.lang.Enum['RangeUnits']):
         
             .. code-block: java
             
-            for (RangeUnits c : RangeUnits.values())
-                System.out.println(c);
+            
+            for (RangeUnits c : RangeUnits.values())
+                System.out.println(c);
             
         
             Returns:
@@ -735,8 +742,9 @@ class TdmDataKey(java.lang.Enum['TdmDataKey']):
         
             .. code-block: java
             
-            for (TdmDataKey c : TdmDataKey.values())
-                System.out.println(c);
+            
+            for (TdmDataKey c : TdmDataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1787,8 +1795,9 @@ class TdmMetadataKey(java.lang.Enum['TdmMetadataKey']):
         
             .. code-block: java
             
-            for (TdmMetadataKey c : TdmMetadataKey.values())
-                System.out.println(c);
+            
+            for (TdmMetadataKey c : TdmMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -2059,8 +2068,9 @@ class TimetagReference(java.lang.Enum['TimetagReference']):
         
             .. code-block: java
             
-            for (TimetagReference c : TimetagReference.values())
-                System.out.println(c);
+            
+            for (TimetagReference c : TimetagReference.values())
+                System.out.println(c);
             
         
             Returns:
@@ -2113,8 +2123,9 @@ class TrackingMode(java.lang.Enum['TrackingMode']):
         
             .. code-block: java
             
-            for (TrackingMode c : TrackingMode.values())
-                System.out.println(c);
+            
+            for (TrackingMode c : TrackingMode.values())
+                System.out.println(c);
             
         
             Returns:
@@ -2174,6 +2185,70 @@ class IdentityConverter(RangeUnitsConverter):
         """
         ...
 
+class PythonRangeUnitsConverter(RangeUnitsConverter):
+    """
+    public class PythonRangeUnitsConverter extends Object implements :class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def metersToRu(self, tdmMetadata: TdmMetadata, absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> float:
+        """
+            Convert a range expressed in meters.
+        
+            Specified by:
+                :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter.metersToRu`Â in
+                interfaceÂ :class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`
+        
+            Parameters:
+                metadata (:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata`): metadata corresponding to the observation
+                date (:class:`~org.orekit.time.AbsoluteDate`): observation date
+                range (double): range value in meters
+        
+            Returns:
+                range range value in :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU`
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+    def ruToMeters(self, tdmMetadata: TdmMetadata, absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> float:
+        """
+            Convert a range expressed in :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU`.
+        
+            Specified by:
+                :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter.ruToMeters`Â in
+                interfaceÂ :class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`
+        
+            Parameters:
+                metadata (:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata`): metadata corresponding to the observation
+                date (:class:`~org.orekit.time.AbsoluteDate`): observation date
+                range (double): range value in :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU`
+        
+            Returns:
+                range range value in meters
+        
+        
+        """
+        ...
+
 
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.ndm.tdm")``.
@@ -2186,6 +2261,7 @@ class __module_protocol__(typing.Protocol):
     Observation: typing.Type[Observation]
     ObservationType: typing.Type[ObservationType]
     ObservationsBlock: typing.Type[ObservationsBlock]
+    PythonRangeUnitsConverter: typing.Type[PythonRangeUnitsConverter]
     RangeMode: typing.Type[RangeMode]
     RangeUnits: typing.Type[RangeUnits]
     RangeUnitsConverter: typing.Type[RangeUnitsConverter]

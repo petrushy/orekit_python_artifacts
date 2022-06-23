@@ -86,8 +86,9 @@ class InterpolationMethod(java.lang.Enum['InterpolationMethod']):
         
             .. code-block: java
             
-            for (InterpolationMethod c : InterpolationMethod.values())
-                System.out.println(c);
+            
+            for (InterpolationMethod c : InterpolationMethod.values())
+                System.out.println(c);
             
         
             Returns:
@@ -397,8 +398,9 @@ class OemMetadataKey(java.lang.Enum['OemMetadataKey']):
         
             .. code-block: java
             
-            for (OemMetadataKey c : OemMetadataKey.values())
-                System.out.println(c);
+            
+            for (OemMetadataKey c : OemMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -894,23 +896,24 @@ class StreamingOemWriter(java.lang.AutoCloseable):
     
         .. code-block: java
         
-         Propagator propagator = ...; // pre-configured propagator
-         OEMWriter  aemWriter  = ...; // pre-configured writer
-           try (Generator out = ...;  // set-up output stream
-                StreamingOemWriter sw = new StreamingOemWriter(out, oemWriter)) { // set-up streaming writer
-        
-             // write segment 1
-             propagator.getMultiplexer().add(step, sw.newSegment());
-             propagator.propagate(startDate1, stopDate1);
-        
-             ...
-        
-             // write segment n
-             propagator.getMultiplexer().clear();
-             propagator.getMultiplexer().add(step, sw.newSegment());
-             propagator.propagate(startDateN, stopDateN);
-        
-           }
+        
+         Propagator propagator = ...; // pre-configured propagator
+         OEMWriter  aemWriter  = ...; // pre-configured writer
+           try (Generator out = ...;  // set-up output stream
+                StreamingOemWriter sw = new StreamingOemWriter(out, oemWriter)) { // set-up streaming writer
+        
+             // write segment 1
+             propagator.getMultiplexer().add(step, sw.newSegment());
+             propagator.propagate(startDate1, stopDate1);
+        
+             ...
+        
+             // write segment n
+             propagator.getMultiplexer().clear();
+             propagator.getMultiplexer().add(step, sw.newSegment());
+             propagator.propagate(startDateN, stopDateN);
+        
+           }
          
     
         Also see:

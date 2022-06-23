@@ -557,8 +557,9 @@ class Frequency(java.lang.Enum['Frequency']):
         
             .. code-block: java
             
-            for (Frequency c : Frequency.values())
-                System.out.println(c);
+            
+            for (Frequency c : Frequency.values())
+                System.out.println(c);
             
         
             Returns:
@@ -662,8 +663,9 @@ class MeasurementType(java.lang.Enum['MeasurementType']):
         
             .. code-block: java
             
-            for (MeasurementType c : MeasurementType.values())
-                System.out.println(c);
+            
+            for (MeasurementType c : MeasurementType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1175,8 +1177,9 @@ class ObservationType(java.lang.Enum['ObservationType']):
         
             .. code-block: java
             
-            for (ObservationType c : ObservationType.values())
-                System.out.println(c);
+            
+            for (ObservationType c : ObservationType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1746,8 +1749,9 @@ class SatelliteSystem(java.lang.Enum['SatelliteSystem']):
         
             .. code-block: java
             
-            for (SatelliteSystem c : SatelliteSystem.values())
-                System.out.println(c);
+            
+            for (SatelliteSystem c : SatelliteSystem.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1815,8 +1819,9 @@ class SignalCode(java.lang.Enum['SignalCode']):
         
             .. code-block: java
             
-            for (SignalCode c : SignalCode.values())
-                System.out.println(c);
+            
+            for (SignalCode c : SignalCode.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1901,8 +1906,9 @@ class TimeSystem(java.lang.Enum['TimeSystem']):
         
             .. code-block: java
             
-            for (TimeSystem c : TimeSystem.values())
-                System.out.println(c);
+            
+            for (TimeSystem c : TimeSystem.values())
+                System.out.println(c);
             
         
             Returns:

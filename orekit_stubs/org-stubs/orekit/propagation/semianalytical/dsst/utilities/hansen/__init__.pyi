@@ -308,9 +308,10 @@ class HansenUtilities:
         
             .. code-block: java
             
-                   / 1   0 \
-              Iâ‚‚ = |       |
-                   \ 0   1 /
+            
+                   / 1   0 \
+              Iâ‚‚ = |       |
+                   \ 0   1 /
              
         
             Returns:
@@ -326,13 +327,14 @@ class HansenUtilities:
         
             .. code-block: java
             
-                   / 1  0  0  0 \
-                   |            |
-                   | 0  1  0  0 |
-              Iâ‚„ = |            |
-                   | 0  0  1  0 |
-                   |            |
-                   \ 0  0  0  1 /
+            
+                   / 1  0  0  0 \
+                   |            |
+                   | 0  1  0  0 |
+              Iâ‚„ = |            |
+                   | 0  0  1  0 |
+                   |            |
+                   \ 0  0  0  1 /
              
         
             Returns:
@@ -348,9 +350,10 @@ class HansenUtilities:
         
             .. code-block: java
             
-                   / 0   0 \
-              Eâ‚‚ = |       |
-                   \ 0   0 /
+            
+                   / 0   0 \
+              Eâ‚‚ = |       |
+                   \ 0   0 /
              
         
             Returns:
@@ -366,13 +369,14 @@ class HansenUtilities:
         
             .. code-block: java
             
-                   / 0  0  0  0 \
-                   |            |
-                   | 0  0  0  0 |
-              Eâ‚„ = |            |
-                   | 0  0  0  0 |
-                   |            |
-                   \ 0  0  0  0 /
+            
+                   / 0  0  0  0 \
+                   |            |
+                   | 0  0  0  0 |
+              Eâ‚„ = |            |
+                   | 0  0  0  0 |
+                   |            |
+                   \ 0  0  0  0 /
              
         
             Returns:

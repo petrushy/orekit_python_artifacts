@@ -18,7 +18,7 @@ import typing
 _FieldTLE__T = typing.TypeVar('_FieldTLE__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldTLE(org.orekit.time.FieldTimeStamped[_FieldTLE__T], java.io.Serializable, typing.Generic[_FieldTLE__T]):
     """
-    public class FieldTLE<T extends :class:`~org.orekit.propagation.analytical.tle.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.FieldTimeStamped`<T>, :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public class FieldTLE<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.time.FieldTimeStamped`<T>, Serializable
     
         This class is a container for a single set of TLE data.
     
@@ -32,8 +32,7 @@ class FieldTLE(org.orekit.time.FieldTimeStamped[_FieldTLE__T], java.io.Serializa
         :meth:`~org.orekit.propagation.analytical.tle.FieldTLE.getI`, etc. without any reference to the
         :class:`~org.orekit.propagation.analytical.tle.TLEPropagator` is prone to errors.
     
-        More information on the TLE format can be found on the
-        :class:`~org.orekit.propagation.analytical.tle.https:.www.celestrak.com`
+        More information on the TLE format can be found on the CelesTrak website.
     
         Since:
             11.0
@@ -109,7 +108,7 @@ class FieldTLE(org.orekit.time.FieldTimeStamped[_FieldTLE__T], java.io.Serializa
     """
     B_STAR: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` B_STAR
+    public static final String B_STAR
     
         Parameter name for B* coefficient.
     
@@ -135,11 +134,10 @@ class FieldTLE(org.orekit.time.FieldTimeStamped[_FieldTLE__T], java.io.Serializa
             are equal.
         
             Overrides:
-                :meth:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
-                class :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+                 in class 
         
             Parameters:
-                o (:class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): other tle
+                o (Object): other tle
         
             Returns:
                 true if this tle equals the provided tle
@@ -288,7 +286,7 @@ class FieldTLE(org.orekit.time.FieldTimeStamped[_FieldTLE__T], java.io.Serializa
             Get the mean motion first derivative.
         
             Returns:
-                the mean motion first derivative (rad/s²)
+                the mean motion first derivative (rad/sÂ²)
         
         
         """
@@ -298,7 +296,7 @@ class FieldTLE(org.orekit.time.FieldTimeStamped[_FieldTLE__T], java.io.Serializa
             Get the mean motion second derivative.
         
             Returns:
-                the mean motion second derivative (rad/s³)
+                the mean motion second derivative (rad/sÂ³)
         
         
         """
@@ -350,8 +348,7 @@ class FieldTLE(org.orekit.time.FieldTimeStamped[_FieldTLE__T], java.io.Serializa
             Get a hashcode for this tle.
         
             Overrides:
-                :meth:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
-                class :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+                 in class 
         
             Returns:
                 hashcode
@@ -365,8 +362,8 @@ class FieldTLE(org.orekit.time.FieldTimeStamped[_FieldTLE__T], java.io.Serializa
             Check the lines format validity.
         
             Parameters:
-                line1 (:class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the first element
-                line2 (:class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the second element
+                line1 (String): the first element
+                line2 (String): the second element
         
             Returns:
                 true if format is recognized (non null lines, 69 characters length, line content), false if not
@@ -435,8 +432,7 @@ class FieldTLE(org.orekit.time.FieldTimeStamped[_FieldTLE__T], java.io.Serializa
             The representation is simply the two lines separated by the platform line separator.
         
             Overrides:
-                :meth:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
-                class :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+                 in class 
         
             Returns:
                 string representation of this TLE set
@@ -458,7 +454,7 @@ class FieldTLE(org.orekit.time.FieldTimeStamped[_FieldTLE__T], java.io.Serializa
 _FieldTLEPropagator__T = typing.TypeVar('_FieldTLEPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldTLEPropagator(org.orekit.propagation.analytical.FieldAbstractAnalyticalPropagator[_FieldTLEPropagator__T], typing.Generic[_FieldTLEPropagator__T]):
     """
-    public abstract class FieldTLEPropagator<T extends :class:`~org.orekit.propagation.analytical.tle.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.FieldAbstractAnalyticalPropagator`<T>
+    public abstract class FieldTLEPropagator<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.analytical.FieldAbstractAnalyticalPropagator`<T>
     
         This class provides elements to propagate TLE's.
     
@@ -467,16 +463,13 @@ class FieldTLEPropagator(org.orekit.propagation.analytical.FieldAbstractAnalytic
         appropriate for TLE's only.
     
         Deep- or near- space propagator is selected internally according to NORAD recommendations so that the user has not to
-        worry about the used computation methods. One instance is created for each TLE (this instance can only be get using
-        :meth:`~org.orekit.propagation.analytical.tle.FieldTLEPropagator.selectExtrapolator` method, and can compute
-        :class:`~org.orekit.utils.PVCoordinates` at any time. Maximum accuracy is guaranteed in a 24h range period before and
-        after the provided TLE epoch (of course this accuracy is not really measurable nor predictable: according to
-        :class:`~org.orekit.propagation.analytical.tle.https:.www.celestrak.com`, the precision is close to one kilometer and
-        error won't probably rise above 2 km).
+        worry about the used computation methods. One instance is created for each TLE (this instance can only be get using null
+        method, and can compute :class:`~org.orekit.utils.PVCoordinates` at any time. Maximum accuracy is guaranteed in a 24h
+        range period before and after the provided TLE epoch (of course this accuracy is not really measurable nor predictable:
+        according to CelesTrak, the precision is close to one kilometer and error won't probably rise above 2 km).
     
-        This implementation is largely inspired from the paper and source code
-        :class:`~org.orekit.propagation.analytical.tle.https:.www.celestrak.com.publications.AIAA.2006` and is fully compliant
-        with its results and tests cases.
+        This implementation is largely inspired from the paper and source code Revisiting Spacetrack Report #3 and is fully
+        compliant with its results and tests cases.
     
         Since:
             11.0
@@ -495,8 +488,8 @@ class FieldTLEPropagator(org.orekit.propagation.analytical.FieldAbstractAnalytic
                 :meth:`~org.orekit.propagation.FieldPropagator.getFrame` in interface :class:`~org.orekit.propagation.FieldPropagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.FieldAbstractPropagator.getFrame` in
-                class :class:`~org.orekit.propagation.FieldAbstractPropagator`
+                :meth:`~org.orekit.propagation.FieldAbstractPropagator.getFrame`Â in
+                classÂ :class:`~org.orekit.propagation.FieldAbstractPropagator`
         
             Returns:
                 frame in which the orbit is propagated
@@ -546,7 +539,7 @@ class FieldTLEPropagator(org.orekit.propagation.analytical.FieldAbstractAnalytic
             Returns:
                 the correct propagator.
         
-        :class:`~org.orekit.annotation.DefaultDataContext` public static <T extends :class:`~org.orekit.propagation.analytical.tle.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> :class:`~org.orekit.propagation.analytical.tle.FieldTLEPropagator`<T> selectExtrapolator(:class:`~org.orekit.propagation.analytical.tle.FieldTLE`<T> tle, :class:`~org.orekit.attitudes.AttitudeProvider` attitudeProvider, T mass, T[] parameters)
+        :class:`~org.orekit.annotation.DefaultDataContext` public static <T extends CalculusFieldElement<T>> :class:`~org.orekit.propagation.analytical.tle.FieldTLEPropagator`<T> selectExtrapolator(:class:`~org.orekit.propagation.analytical.tle.FieldTLE`<T> tle, :class:`~org.orekit.attitudes.AttitudeProvider` attitudeProvider, T mass, T[] parameters)
         
             Selects the extrapolator to use with the selected TLE.
         
@@ -562,7 +555,6 @@ class FieldTLEPropagator(org.orekit.propagation.analytical.FieldAbstractAnalytic
                 the correct propagator.
         
             Also see:
-                :meth:`~org.orekit.propagation.analytical.tle.FieldTLEPropagator.selectExtrapolator`
         
             Selects the extrapolator to use with the selected TLE.
         
@@ -591,7 +583,7 @@ class FieldTLEPropagator(org.orekit.propagation.analytical.FieldAbstractAnalytic
 
 class TLE(org.orekit.time.TimeStamped, java.io.Serializable):
     """
-    public class TLE extends :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public class TLE extends Object implements :class:`~org.orekit.time.TimeStamped`, Serializable
     
         This class is a container for a single set of TLE data.
     
@@ -604,8 +596,7 @@ class TLE(org.orekit.time.TimeStamped, java.io.Serializable):
         :meth:`~org.orekit.propagation.analytical.tle.TLE.getE`, :meth:`~org.orekit.propagation.analytical.tle.TLE.getI`, etc.
         without any reference to the :class:`~org.orekit.propagation.analytical.tle.TLEPropagator` is prone to errors.
     
-        More information on the TLE format can be found on the
-        :class:`~org.orekit.propagation.analytical.tle.https:.www.celestrak.com`
+        More information on the TLE format can be found on the CelesTrak website.
     
         Also see:
             :meth:`~serialized`
@@ -678,7 +669,7 @@ class TLE(org.orekit.time.TimeStamped, java.io.Serializable):
     """
     B_STAR: typing.ClassVar[str] = ...
     """
-    public static final :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` B_STAR
+    public static final String B_STAR
     
         Parameter name for B* coefficient.
     
@@ -704,11 +695,10 @@ class TLE(org.orekit.time.TimeStamped, java.io.Serializable):
             equal.
         
             Overrides:
-                :meth:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
-                class :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+                 in class 
         
             Parameters:
-                o (:class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): other tle
+                o (Object): other tle
         
             Returns:
                 true if this tle equals the provided tle
@@ -867,7 +857,7 @@ class TLE(org.orekit.time.TimeStamped, java.io.Serializable):
             Get the mean motion first derivative.
         
             Returns:
-                the mean motion first derivative (rad/s²)
+                the mean motion first derivative (rad/sÂ²)
         
         
         """
@@ -877,7 +867,7 @@ class TLE(org.orekit.time.TimeStamped, java.io.Serializable):
             Get the mean motion second derivative.
         
             Returns:
-                the mean motion second derivative (rad/s³)
+                the mean motion second derivative (rad/sÂ³)
         
         
         """
@@ -887,7 +877,7 @@ class TLE(org.orekit.time.TimeStamped, java.io.Serializable):
             Get parameter driver from its name.
         
             Parameters:
-                name (:class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): parameter name
+                name (String): parameter name
         
             Returns:
                 parameter driver
@@ -954,8 +944,7 @@ class TLE(org.orekit.time.TimeStamped, java.io.Serializable):
             Get a hashcode for this tle.
         
             Overrides:
-                :meth:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
-                class :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+                 in class 
         
             Returns:
                 hashcode
@@ -969,8 +958,8 @@ class TLE(org.orekit.time.TimeStamped, java.io.Serializable):
             Check the lines format validity.
         
             Parameters:
-                line1 (:class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the first element
-                line2 (:class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the second element
+                line1 (String): the first element
+                line2 (String): the second element
         
             Returns:
                 true if format is recognized (non null lines, 69 characters length, line content), false if not
@@ -1037,8 +1026,7 @@ class TLE(org.orekit.time.TimeStamped, java.io.Serializable):
             The representation is simply the two lines separated by the platform line separator.
         
             Overrides:
-                :meth:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
-                class :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+                 in class 
         
             Returns:
                 string representation of this TLE set
@@ -1049,7 +1037,7 @@ class TLE(org.orekit.time.TimeStamped, java.io.Serializable):
 
 class TLEConstants:
     """
-    public class TLEConstants extends :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    public class TLEConstants extends Object
     
         Constants necessary to TLE propagation. This constants are used in the WGS-72 model, compliant with NORAD
         implementations.
@@ -1513,7 +1501,7 @@ class TLEConstants:
     """
     public static final double MU
     
-        Earth gravity coefficient in m³/s².
+        Earth gravity coefficient in mÂ³/sÂ².
     
         Also see:
             :meth:`~constant`
@@ -1550,21 +1538,7 @@ class TLEJacobiansMapper(org.orekit.propagation.integration.AbstractJacobiansMap
     
     """
     def __init__(self, string: str, parameterDriversList: org.orekit.utils.ParameterDriversList, tLEPropagator: 'TLEPropagator'): ...
-    def analyticalDerivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
-        """
-            Deprecated. as of 11.1, not used anymore
-            Not used anymore.
-        
-            Overrides:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.analyticalDerivatives` in
-                class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
-        
-            Parameters:
-                s (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
-        
-        
-        """
-        ...
+    def analyticalDerivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> None: ...
     @typing.overload
     def getParametersJacobian(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.hipparchus.linear.RealMatrix:
         """
@@ -1576,15 +1550,13 @@ class TLEJacobiansMapper(org.orekit.propagation.integration.AbstractJacobiansMap
             which can safely be null in this case.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getParametersJacobian` in
-                class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
+                 in class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
                 dYdP (double[][]): placeholder where to put the Jacobian with respect to parameters
         
             Also see:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getStateJacobian`
         
         
         """
@@ -1599,15 +1571,13 @@ class TLEJacobiansMapper(org.orekit.propagation.integration.AbstractJacobiansMap
         
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getStateJacobian` in
-                class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
+                 in class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
                 dYdY0 (double[][]): placeholder where to put the Jacobian with respect to state
         
             Also see:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getParametersJacobian`
         
         
         """
@@ -1617,17 +1587,15 @@ class TLEJacobiansMapper(org.orekit.propagation.integration.AbstractJacobiansMap
             Set the Jacobian with respect to state into a one-dimensional additional state array.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.setInitialJacobians` in
-                class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
+                 in class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
-                dY1dY0 (double[][]): Jacobian of current state at time t₁ with respect to state at some previous time t₀
-                dY1dP (double[][]): Jacobian of current state at time t₁ with respect to parameters (may be null if there are no parameters)
+                dY1dY0 (double[][]): Jacobian of current state at time tâ‚� with respect to state at some previous time tâ‚€
+                dY1dP (double[][]): Jacobian of current state at time tâ‚� with respect to parameters (may be null if there are no parameters)
                 p (double[]): placeholder where to put the one-dimensional additional state
         
             Also see:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getStateJacobian`
         
         
         """
@@ -1636,7 +1604,7 @@ class TLEJacobiansMapper(org.orekit.propagation.integration.AbstractJacobiansMap
 class TLEPartialDerivativesEquations:
     """
     Deprecated.
-    :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class TLEPartialDerivativesEquations extends :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    @Deprecated public class TLEPartialDerivativesEquations extends Object
     
         Set of additional equations computing the partial derivatives of the state (orbit) with respect to initial state.
     
@@ -1659,8 +1627,7 @@ class TLEPartialDerivativesEquations:
                 a mapper between two-dimensional Jacobians and one-dimensional additional state, with the same name as the instance
         
             Also see:
-                :meth:`~org.orekit.propagation.analytical.tle.TLEPartialDerivativesEquations.setInitialJacobians`,
-                :meth:`~org.orekit.propagation.analytical.tle.TLEPartialDerivativesEquations.setInitialJacobians`
+                :meth:`~org.orekit.propagation.analytical.tle.TLEPartialDerivativesEquations.setInitialJacobians`, null
         
         
         """
@@ -1682,9 +1649,7 @@ class TLEPartialDerivativesEquations:
             Deprecated. 
             Set the initial value of the Jacobian with respect to state and parameter.
         
-            This method is equivalent to call
-            :meth:`~org.orekit.propagation.analytical.tle.TLEPartialDerivativesEquations.setInitialJacobians` with dYdY0 set to the
-            identity matrix and dYdP set to a zero matrix.
+            This method is equivalent to call null with dYdY0 set to the identity matrix and dYdP set to a zero matrix.
         
             The force models parameters for which partial derivatives are desired, *must* have been
             :meth:`~org.orekit.utils.ParameterDriver.setSelected` before this method is called, so proper matrices dimensions are
@@ -1709,8 +1674,8 @@ class TLEPartialDerivativesEquations:
         
             Parameters:
                 s1 (:class:`~org.orekit.propagation.SpacecraftState`): current state
-                dY1dY0 (double[][]): Jacobian of current state at time t₁ with respect to state at some previous time t₀ (must be 6x6)
-                dY1dP (double[][]): Jacobian of current state at time t₁ with respect to parameters (may be null if no parameters are selected)
+                dY1dY0 (double[][]): Jacobian of current state at time tâ‚� with respect to state at some previous time tâ‚€ (must be 6x6)
+                dY1dP (double[][]): Jacobian of current state at time tâ‚� with respect to parameters (may be null if no parameters are selected)
         
             Returns:
                 state with initial Jacobians added
@@ -1733,13 +1698,11 @@ class TLEPropagator(org.orekit.propagation.analytical.AbstractAnalyticalPropagat
         worry about the used computation methods. One instance is created for each TLE (this instance can only be get using
         :meth:`~org.orekit.propagation.analytical.tle.TLEPropagator.selectExtrapolator` method, and can compute
         :class:`~org.orekit.utils.PVCoordinates` at any time. Maximum accuracy is guaranteed in a 24h range period before and
-        after the provided TLE epoch (of course this accuracy is not really measurable nor predictable: according to
-        :class:`~org.orekit.propagation.analytical.tle.https:.www.celestrak.com`, the precision is close to one kilometer and
-        error won't probably rise above 2 km).
+        after the provided TLE epoch (of course this accuracy is not really measurable nor predictable: according to CelesTrak,
+        the precision is close to one kilometer and error won't probably rise above 2 km).
     
-        This implementation is largely inspired from the paper and source code
-        :class:`~org.orekit.propagation.analytical.tle.https:.www.celestrak.com.publications.AIAA.2006` and is fully compliant
-        with its results and tests cases.
+        This implementation is largely inspired from the paper and source code Revisiting Spacetrack Report #3 and is fully
+        compliant with its results and tests cases.
     
         Also see:
             :class:`~org.orekit.propagation.analytical.tle.TLE`
@@ -1755,8 +1718,8 @@ class TLEPropagator(org.orekit.propagation.analytical.AbstractAnalyticalPropagat
                 :meth:`~org.orekit.propagation.Propagator.getFrame` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.getFrame` in
-                class :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.getFrame`Â in
+                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
         
             Returns:
                 frame in which the orbit is propagated
@@ -1815,8 +1778,8 @@ class TLEPropagator(org.orekit.propagation.analytical.AbstractAnalyticalPropagat
                 :meth:`~org.orekit.propagation.Propagator.resetInitialState` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState` in
-                class :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState`Â in
+                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): new initial state to consider
@@ -1887,16 +1850,15 @@ class TLEPropagator(org.orekit.propagation.analytical.AbstractAnalyticalPropagat
 _FieldSGP4__T = typing.TypeVar('_FieldSGP4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldSGP4(FieldTLEPropagator[_FieldSGP4__T], typing.Generic[_FieldSGP4__T]):
     """
-    public class FieldSGP4<T extends :class:`~org.orekit.propagation.analytical.tle.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.tle.FieldTLEPropagator`<T>
+    public class FieldSGP4<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.analytical.tle.FieldTLEPropagator`<T>
     
         This class contains methods to compute propagated coordinates with the SGP4 model.
     
         The user should not bother in this class since it is handled internaly by the
         :class:`~org.orekit.propagation.analytical.tle.TLEPropagator`.
     
-        This implementation is largely inspired from the paper and source code
-        :class:`~org.orekit.propagation.analytical.tle.https:.www.celestrak.com.publications.AIAA.2006` and is fully compliant
-        with its results and tests cases.
+        This implementation is largely inspired from the paper and source code Revisiting Spacetrack Report #3 and is fully
+        compliant with its results and tests cases.
     
         Since:
             11.0
@@ -1905,6 +1867,60 @@ class FieldSGP4(FieldTLEPropagator[_FieldSGP4__T], typing.Generic[_FieldSGP4__T]
     def __init__(self, fieldTLE: FieldTLE[_FieldSGP4__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, t: _FieldSGP4__T, tArray: typing.List[_FieldSGP4__T]): ...
     @typing.overload
     def __init__(self, fieldTLE: FieldTLE[_FieldSGP4__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, t: _FieldSGP4__T, frame: org.orekit.frames.Frame, tArray: typing.List[_FieldSGP4__T]): ...
+
+class PythonTLEPropagator(TLEPropagator):
+    """
+    public class PythonTLEPropagator extends :class:`~org.orekit.propagation.analytical.tle.TLEPropagator`
+    """
+    @typing.overload
+    def __init__(self, tLE: TLE, attitudeProvider: org.orekit.attitudes.AttitudeProvider, double: float): ...
+    @typing.overload
+    def __init__(self, tLE: TLE, attitudeProvider: org.orekit.attitudes.AttitudeProvider, double: float, frame: org.orekit.frames.Frame): ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+    def sxpInitialize(self) -> None:
+        """
+            Initialization proper to each propagator (SGP or SDP).
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.tle.TLEPropagator.sxpInitialize`Â in
+                classÂ :class:`~org.orekit.propagation.analytical.tle.TLEPropagator`
+        
+        
+        """
+        ...
+    def sxpPropagate(self, double: float) -> None:
+        """
+            Propagation proper to each propagator (SGP or SDP).
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.tle.TLEPropagator.sxpPropagate`Â in
+                classÂ :class:`~org.orekit.propagation.analytical.tle.TLEPropagator`
+        
+            Parameters:
+                t (double): the offset from initial epoch (min)
+        
+        
+        """
+        ...
 
 class SGP4(TLEPropagator):
     """
@@ -1915,9 +1931,8 @@ class SGP4(TLEPropagator):
         The user should not bother in this class since it is handled internaly by the
         :class:`~org.orekit.propagation.analytical.tle.TLEPropagator`.
     
-        This implementation is largely inspired from the paper and source code
-        :class:`~org.orekit.propagation.analytical.tle.https:.www.celestrak.com.publications.AIAA.2006` and is fully compliant
-        with its results and tests cases.
+        This implementation is largely inspired from the paper and source code Revisiting Spacetrack Report #3 and is fully
+        compliant with its results and tests cases.
     """
     @typing.overload
     def __init__(self, tLE: TLE, attitudeProvider: org.orekit.attitudes.AttitudeProvider, double: float): ...
@@ -1933,9 +1948,8 @@ class DeepSDP4(org.orekit.propagation.analytical.tle.SDP4):
         The user should not bother in this class since it is handled internaly by the
         :class:`~org.orekit.propagation.analytical.tle.TLEPropagator`.
     
-        This implementation is largely inspired from the paper and source code
-        :class:`~org.orekit.propagation.analytical.tle.https:.www.celestrak.com.publications.AIAA.2006` and is fully compliant
-        with its results and tests cases.
+        This implementation is largely inspired from the paper and source code Revisiting Spacetrack Report #3 and is fully
+        compliant with its results and tests cases.
     """
     @typing.overload
     def __init__(self, tLE: TLE, attitudeProvider: org.orekit.attitudes.AttitudeProvider, double: float): ...
@@ -1945,16 +1959,15 @@ class DeepSDP4(org.orekit.propagation.analytical.tle.SDP4):
 _FieldDeepSDP4__T = typing.TypeVar('_FieldDeepSDP4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldDeepSDP4(org.orekit.propagation.analytical.tle.FieldSDP4[_FieldDeepSDP4__T], typing.Generic[_FieldDeepSDP4__T]):
     """
-    public class FieldDeepSDP4<T extends :class:`~org.orekit.propagation.analytical.tle.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.tle.FieldTLEPropagator`<T>
+    public class FieldDeepSDP4<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.analytical.tle.FieldTLEPropagator`<T>
     
         This class contains the methods that compute deep space perturbation terms.
     
         The user should not bother in this class since it is handled internaly by the
         :class:`~org.orekit.propagation.analytical.tle.TLEPropagator`.
     
-        This implementation is largely inspired from the paper and source code
-        :class:`~org.orekit.propagation.analytical.tle.https:.www.celestrak.com.publications.AIAA.2006` and is fully compliant
-        with its results and tests cases.
+        This implementation is largely inspired from the paper and source code Revisiting Spacetrack Report #3 and is fully
+        compliant with its results and tests cases.
     
         Since:
             11.0
@@ -1963,6 +1976,58 @@ class FieldDeepSDP4(org.orekit.propagation.analytical.tle.FieldSDP4[_FieldDeepSD
     def __init__(self, fieldTLE: FieldTLE[_FieldDeepSDP4__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, t: _FieldDeepSDP4__T, tArray: typing.List[_FieldDeepSDP4__T]): ...
     @typing.overload
     def __init__(self, fieldTLE: FieldTLE[_FieldDeepSDP4__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, t: _FieldDeepSDP4__T, frame: org.orekit.frames.Frame, tArray: typing.List[_FieldDeepSDP4__T]): ...
+
+_PythonFieldSDP4__T = typing.TypeVar('_PythonFieldSDP4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class PythonFieldSDP4(org.orekit.propagation.analytical.tle.FieldSDP4[_PythonFieldSDP4__T], typing.Generic[_PythonFieldSDP4__T]):
+    """
+    public class PythonFieldSDP4<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.analytical.tle.FieldTLEPropagator`<T>
+    """
+    def deepPeriodicEffects(self, t: _PythonFieldSDP4__T) -> None:
+        """
+            Computes periodic terms from current coordinates and epoch.
+        
+            Parameters:
+                t (:class:`~org.orekit.propagation.analytical.tle.PythonFieldSDP4`): offset from initial epoch (min)
+        
+        
+        """
+        ...
+    def deepSecularEffects(self, t: _PythonFieldSDP4__T) -> None:
+        """
+            Computes secular terms from current coordinates and epoch.
+        
+            Parameters:
+                t (:class:`~org.orekit.propagation.analytical.tle.PythonFieldSDP4`): offset from initial epoch (min)
+        
+        
+        """
+        ...
+    def finalize(self) -> None: ...
+    def luniSolarTermsComputation(self) -> None:
+        """
+            Computes luni - solar terms from initial coordinates and epoch.
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
 
 class FieldSDP4: ...
 
@@ -1978,6 +2043,8 @@ class __module_protocol__(typing.Protocol):
     FieldSGP4: typing.Type[FieldSGP4]
     FieldTLE: typing.Type[FieldTLE]
     FieldTLEPropagator: typing.Type[FieldTLEPropagator]
+    PythonFieldSDP4: typing.Type[PythonFieldSDP4]
+    PythonTLEPropagator: typing.Type[PythonTLEPropagator]
     SDP4: typing.Type[SDP4]
     SGP4: typing.Type[SGP4]
     TLE: typing.Type[TLE]

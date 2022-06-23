@@ -8,32 +8,33 @@ import typing
 
 class Parser:
     """
-    public class Parser extends :class:`~org.orekit.utils.units.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    public class Parser extends Object
     
         Parser for units.
     
-        This fairly basic parser uses recursive descent with the following grammar, where '*' can in fact be either '*', '×',
-        '.', or '·', '/' can be either '/' or '⁄' and '^' can be either '^', "**" or implicit with switch to superscripts,
-        and fraction are either unicode fractions like ½ or ⅞ or the decimal value 0.5. The special cases "n/a" returns a
-        null list. It is intended to manage the special unit :meth:`~org.orekit.utils.units.Unit.NONE`.
+        This fairly basic parser uses recursive descent with the following grammar, where '*' can in fact be either '*',
+        'Ãƒâ€”', '.', or 'Ã‚Â·', '/' can be either '/' or 'Ã¢ï¿½â€ž' and '^' can be either '^', "**" or implicit with switch to
+        superscripts, and fraction are either unicode fractions like Ã‚Â½ or Ã¢â€¦Å¾ or the decimal value 0.5. The special cases
+        "n/a" returns a null list. It is intended to manage the special unit :meth:`~org.orekit.utils.units.Unit.NONE`.
     
         .. code-block: java
         
-           unit         ::=  "n/a" | chain
-           chain        ::=  operand { ('*' | '/') operand }
-           operand      ::=  integer | integer term | term
-           term         ::=  '√' base | base power
-           power        ::=  '^' exponent | ε
-           exponent     ::=  'fraction'   | integer | '(' integer denominator ')'
-           denominator  ::=  '/' integer  | ε
-           base         ::=  identifier | '(' chain ')'
+        
+           unit         ::=  "n/a" | chain
+           chain        ::=  operand { ('*' | '/') operand }
+           operand      ::=  integer | integer term | term
+           term         ::=  'âˆš' base | base power
+           power        ::=  '^' exponent | Îµ
+           exponent     ::=  'fraction'   | integer | '(' integer denominator ')'
+           denominator  ::=  '/' integer  | Îµ
+           base         ::=  identifier | '(' chain ')'
          
     
-        This parses correctly units like MHz, km/√d, kg.m.s⁻¹, µas^⅖/(h**(2)×m)³, km/√(kg.s), √kg*km** (3/2)
-        /(µs^2*Ω⁻⁷), km**0.5/s, #/y, 2rev/d², 1/s.
+        This parses correctly units like MHz, km/Ã¢Ë†Å¡d, kg.m.sÃ¢ï¿½Â»Ã‚Â¹, Ã‚Âµas^Ã¢â€¦â€“/(h**(2)Ãƒâ€”m)Ã‚Â³,
+        km/Ã¢Ë†Å¡(kg.s), Ã¢Ë†Å¡kg*km** (3/2) /(Ã‚Âµs^2*ÃŽÂ©Ã¢ï¿½Â»Ã¢ï¿½Â·), km**0.5/s, #/y, 2rev/dÃ‚Â², 1/s.
     
-        Note that we don't accept combining square roots and power on the same operand; km/√d³ is refused (but km/√(d³) is
-        accepted). We also accept a single integer prefix and only at the start of the specification.
+        Note that we don't accept combining square roots and power on the same operand; km/Ã¢Ë†Å¡dÃ‚Â³ is refused (but
+        km/Ã¢Ë†Å¡(dÃ‚Â³) is accepted). We also accept a single integer prefix and only at the start of the specification.
     
         Since:
             11.0
@@ -43,7 +44,7 @@ class Parser:
 
 class PowerTerm:
     """
-    public class PowerTerm extends :class:`~org.orekit.utils.units.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    public class PowerTerm extends Object
     
         A container for a term with associated power.
     
@@ -83,7 +84,7 @@ class PowerTerm:
 
 class Unit(java.io.Serializable):
     """
-    public class Unit extends :class:`~org.orekit.utils.units.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.utils.units.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public class Unit extends Object implements Serializable
     
         Basic handling of multiplicative units.
     
@@ -96,7 +97,7 @@ class Unit(java.io.Serializable):
             11.0
     
         Also see:
-            :class:`~org.orekit.utils.units.https:.github.com.netomi.uom`, :meth:`~serialized`
+            UOM, :meth:`~serialized`
     """
     NONE: typing.ClassVar['Unit'] = ...
     """
@@ -154,7 +155,7 @@ class Unit(java.io.Serializable):
         Julian year unit.
     
         Also see:
-            :class:`~org.orekit.utils.units.https:.www.iau.org.publications.proceedings_rules.units`
+            SI Units at IAU
     
     
     """
@@ -325,7 +326,7 @@ class Unit(java.io.Serializable):
             Create an alias for a unit.
         
             Parameters:
-                newName (:class:`~org.orekit.utils.units.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the new unit
+                newName (String): name of the new unit
         
             Returns:
                 a new unit representing same unit as the instance but with a different name
@@ -338,7 +339,7 @@ class Unit(java.io.Serializable):
             Create quotient of units.
         
             Parameters:
-                newName (:class:`~org.orekit.utils.units.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the new unit
+                newName (String): name of the new unit
                 other (:class:`~org.orekit.utils.units.Unit`): unit to divide with
         
             Returns:
@@ -354,11 +355,10 @@ class Unit(java.io.Serializable):
             The name is not considered so aliases are considered equal.
         
             Overrides:
-                :meth:`~org.orekit.utils.units.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
-                class :class:`~org.orekit.utils.units.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+                 in class 
         
             Parameters:
-                unit (:class:`~org.orekit.utils.units.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): other unit
+                unit (Object): other unit
         
             Returns:
                 true if the instance and the other unit refer to the same unit
@@ -380,7 +380,7 @@ class Unit(java.io.Serializable):
             Convert a value from SI units.
         
             Parameters:
-                value (:class:`~org.orekit.utils.units.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double?is`): value SI unit
+                value (Double): value SI unit
         
             Returns:
                 value in instance units
@@ -465,8 +465,7 @@ class Unit(java.io.Serializable):
             Get a hashcode for this unit.
         
             Overrides:
-                :meth:`~org.orekit.utils.units.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
-                class :class:`~org.orekit.utils.units.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+                 in class 
         
             Returns:
                 hashcode
@@ -479,7 +478,7 @@ class Unit(java.io.Serializable):
             Create product of units.
         
             Parameters:
-                newName (:class:`~org.orekit.utils.units.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the new unit
+                newName (String): name of the new unit
                 other (:class:`~org.orekit.utils.units.Unit`): unit to multiply with
         
             Returns:
@@ -511,44 +510,44 @@ class Unit(java.io.Serializable):
                 multiples must be based on "g")
         
             degrees
-              the base symbol for degrees is "°" (U+00B0, DEGREE SIGN), but we also accept "◦" (U+25E6, WHITE BULLET) and "deg"
+              the base symbol for degrees is "Â°" (U+00B0, DEGREE SIGN), but we also accept "â—¦" (U+25E6, WHITE BULLET) and "deg"
         
             arcminute
-              The base symbol for arcminute is "′" (U+2032, PRIME) but we also accept "'" (U+0027, APOSTROPHE)
+              The base symbol for arcminute is "â€²" (U+2032, PRIME) but we also accept "'" (U+0027, APOSTROPHE)
         
             arcsecond
-              The base symbol for arcsecond is "″" (U+2033, DOUBLE PRIME) but we also accept "''" (two occurrences of U+0027,
+              The base symbol for arcsecond is "Ã¢â‚¬Â³" (U+2033, DOUBLE PRIME) but we also accept "''" (two occurrences of U+0027,
                 APOSTROPHE), "\"" (U+0022, QUOTATION MARK) and "as"
         
         
             All the SI prefix (from "y", yocto, to "Y", Yotta) are accepted, as well as integer prefixes. The standard symbol for
-            micro 10⁻⁶ is "µ" (U+00B5, MICRO SIGN), but we also accept "μ" (U+03BC, GREEK SMALL LETTER MU). Beware that some
-            combinations are forbidden, for example "Pa" is Pascal, not peta-years, and "as" is arcsecond for this parser, not
-            atto-seconds, because many people in the space field use mas for milliarcseconds and µas for microarcseconds. Beware
-            that prefixes are case-sensitive! Integer prefixes can be used to specify units like "30s", but only once at the
-            beginning of the specification (i.e. "2rev/d²" is accepted, but "rev/(2d)²" is refused). Conforming with SI brochure
-            "The International System of Units" (9th edition, 2019), each SI prefix is part of the unit and precedes the unit symbol
-            without a separator (i.e. MHz is seen as one identifier).
+            micro 10Ã¢ï¿½Â»Ã¢ï¿½Â¶ is "Ã‚Âµ" (U+00B5, MICRO SIGN), but we also accept "ÃŽÂ¼" (U+03BC, GREEK SMALL LETTER MU). Beware
+            that some combinations are forbidden, for example "Pa" is Pascal, not peta-years, and "as" is arcsecond for this parser,
+            not atto-seconds, because many people in the space field use mas for milliarcseconds and Ã‚Âµas for microarcseconds.
+            Beware that prefixes are case-sensitive! Integer prefixes can be used to specify units like "30s", but only once at the
+            beginning of the specification (i.e. "2rev/dÃ‚Â²" is accepted, but "rev/(2d)Ã‚Â²" is refused). Conforming with SI
+            brochure "The International System of Units" (9th edition, 2019), each SI prefix is part of the unit and precedes the
+            unit symbol without a separator (i.e. MHz is seen as one identifier).
         
             multiplication
-              can specified with either "*" (U+002A, ASTERISK), "×" (U+00D7, MULTIPLICATION SIGN), "." (U+002E, FULL STOP) or "·"
-                (U+00B7, MIDDLE DOT) as the operator
+              can specified with either "*" (U+002A, ASTERISK), "Ãƒâ€”" (U+00D7, MULTIPLICATION SIGN), "." (U+002E, FULL STOP) or
+                "Ã‚Â·" (U+00B7, MIDDLE DOT) as the operator
         
             division
-              can be specified with either "/" (U+002F, SOLIDUS) or "⁄" (U+2044, FRACTION SLASH) as the operator
+              can be specified with either "/" (U+002F, SOLIDUS) or "â�„" (U+2044, FRACTION SLASH) as the operator
         
             powers
               can be specified either by
         
-                  - prefixing with the unicode "√" (U+221A, SQUARE ROOT) character
+                  - prefixing with the unicode "âˆš" (U+221A, SQUARE ROOT) character
                   - postfixing with "**", "^" or implicitly using unicode superscripts
         
         
         
             Exponents can be specified in different ways:
         
-              - as an integer, as in "m^-2" or "m⁻²"
-              - directly as unicode characters for the few fractions that unicode supports, as in "Ω^⅞"
+              - as an integer, as in "m^-2" or "mâ�»Â²"
+              - directly as unicode characters for the few fractions that unicode supports, as in "Î©^â…ž"
               - as the special decimal value 0.5 which is used by CCSDS, as in "km**0.5"
               - as a pair of parentheses surrounding two integers separated by a solidus or fraction slash, as in "Pa^(11/12)"
         
@@ -557,11 +556,11 @@ class Unit(java.io.Serializable):
             used. Unicode superscripts are not allowed for fractional exponents because unicode does not provide a superscript
             solidus. Negative exponents can be used too.
         
-            These rules mean all the following (silly) examples are parsed properly: MHz, km/√d, kg.m.s⁻¹,
-            µas^⅖/(h**(2)×m)³, km/√(kg.s), km**0.5, 2rev/d²
+            These rules mean all the following (silly) examples are parsed properly: MHz, km/Ã¢Ë†Å¡d, kg.m.sÃ¢ï¿½Â»Ã‚Â¹,
+            Ã‚Âµas^Ã¢â€¦â€“/(h**(2)Ãƒâ€”m)Ã‚Â³, km/Ã¢Ë†Å¡(kg.s), km**0.5, 2rev/dÃ‚Â²
         
             Parameters:
-                unitSpecification (:class:`~org.orekit.utils.units.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): unit specification to parse
+                unitSpecification (String): unit specification to parse
         
             Returns:
                 parsed unit
@@ -574,8 +573,8 @@ class Unit(java.io.Serializable):
             Create power of unit.
         
             Parameters:
-                newName (:class:`~org.orekit.utils.units.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the new unit
-                exponent (:class:`~org.orekit.utils.units.https:.www.hipparchus.org.apidocs.org.hipparchus.fraction.Fraction?is`): exponent to apply
+                newName (String): name of the new unit
+                exponent (Fraction): exponent to apply
         
             Returns:
                 a new unit representing the power of the instance
@@ -611,7 +610,7 @@ class Unit(java.io.Serializable):
             Scale a unit.
         
             Parameters:
-                newName (:class:`~org.orekit.utils.units.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the new unit
+                newName (String): name of the new unit
                 factor (double): scaling factor
         
             Returns:
@@ -625,7 +624,7 @@ class Unit(java.io.Serializable):
             Create root of unit.
         
             Parameters:
-                newName (:class:`~org.orekit.utils.units.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the new unit
+                newName (String): name of the new unit
         
             Returns:
                 a new unit representing the square root of the instance
@@ -647,7 +646,7 @@ class Unit(java.io.Serializable):
             Convert a value to SI units.
         
             Parameters:
-                value (:class:`~org.orekit.utils.units.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double?is`): value instance unit
+                value (Double): value instance unit
         
             Returns:
                 value in SI units
@@ -661,8 +660,7 @@ class Unit(java.io.Serializable):
         """
         
             Overrides:
-                :meth:`~org.orekit.utils.units.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
-                class :class:`~org.orekit.utils.units.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+                 in class 
         
         
         """
@@ -670,7 +668,7 @@ class Unit(java.io.Serializable):
 
 class UnitsCache:
     """
-    public class UnitsCache extends :class:`~org.orekit.utils.units.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    public class UnitsCache extends Object
     
         Cache for parsed units.
     
@@ -686,7 +684,7 @@ class UnitsCache:
             units is encountered many times (for example when parsing CCSDS messages with many entries).
         
             Parameters:
-                specification (:class:`~org.orekit.utils.units.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): units specification (may be null)
+                specification (String): units specification (may be null)
         
             Returns:
                 parsed units (:meth:`~org.orekit.utils.units.Unit.NONE` if specification is null)
@@ -697,7 +695,7 @@ class UnitsCache:
 
 class UnitsConverter:
     """
-    public class UnitsConverter extends :class:`~org.orekit.utils.units.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    public class UnitsConverter extends Object
     
         Converter between units.
     
@@ -766,7 +764,7 @@ class UnitsConverter:
     """
     public static final :class:`~org.orekit.utils.units.UnitsConverter` KM3_P_S2_TO_M3_P_S2
     
-        km³/s² to m³/s² converter.
+        kmÂ³/sÂ² to mÂ³/sÂ² converter.
     
     """
     def __init__(self, unit: Unit, unit2: Unit): ...
@@ -807,8 +805,7 @@ class UnitsConverter:
         """
         
             Overrides:
-                :meth:`~org.orekit.utils.units.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
-                class :class:`~org.orekit.utils.units.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+                 in class 
         
         
         """

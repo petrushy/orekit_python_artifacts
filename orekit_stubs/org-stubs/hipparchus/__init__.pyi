@@ -1,5 +1,4 @@
 import org.hipparchus.analysis
-import org.hipparchus.clustering
 import org.hipparchus.complex
 import org.hipparchus.dfp
 import org.hipparchus.distribution
@@ -14,7 +13,6 @@ import org.hipparchus.optim
 import org.hipparchus.random
 import org.hipparchus.special
 import org.hipparchus.stat
-import org.hipparchus.transform
 import org.hipparchus.util
 import typing
 
@@ -863,7 +861,6 @@ class __module_protocol__(typing.Protocol):
     Field: typing.Type[Field]
     FieldElement: typing.Type[FieldElement]
     analysis: org.hipparchus.analysis.__module_protocol__
-    clustering: org.hipparchus.clustering.__module_protocol__
     complex: org.hipparchus.complex.__module_protocol__
     dfp: org.hipparchus.dfp.__module_protocol__
     distribution: org.hipparchus.distribution.__module_protocol__
@@ -878,5 +875,4 @@ class __module_protocol__(typing.Protocol):
     random: org.hipparchus.random.__module_protocol__
     special: org.hipparchus.special.__module_protocol__
     stat: org.hipparchus.stat.__module_protocol__
-    transform: org.hipparchus.transform.__module_protocol__
     util: org.hipparchus.util.__module_protocol__

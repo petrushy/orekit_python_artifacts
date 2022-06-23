@@ -151,8 +151,9 @@ class FileFormat(java.lang.Enum['FileFormat']):
         
             .. code-block: java
             
-            for (FileFormat c : FileFormat.values())
-                System.out.println(c);
+            
+            for (FileFormat c : FileFormat.values())
+                System.out.println(c);
             
         
             Returns:

@@ -2,20 +2,226 @@ import java.lang
 import java.util
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.data
+import org.orekit.frames
 import org.orekit.time
 import org.orekit.utils
 import typing
 
 
 
-class SinexLoader:
+class SinexEopEntry(org.orekit.time.TimeStamped):
     """
-    public class SinexLoader extends :class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    public class SinexEopEntry extends Object implements :class:`~org.orekit.time.TimeStamped`
+    
+        Container for EOP entry read in a Sinex file.
+    
+        Since:
+            11.2
+    """
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate): ...
+    def getDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Get the date.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeStamped.getDate` in interface :class:`~org.orekit.time.TimeStamped`
+        
+            Returns:
+                date attached to the object
+        
+        
+        """
+        ...
+    def getLod(self) -> float:
+        """
+            Get the length of day.
+        
+            Returns:
+                the length of day
+        
+        
+        """
+        ...
+    def getNutLn(self) -> float:
+        """
+            Get the nutation correction in longitude.
+        
+            Returns:
+                the nutation correction in longitude
+        
+        
+        """
+        ...
+    def getNutOb(self) -> float:
+        """
+            Get the nutation correction in obliquity.
+        
+            Returns:
+                the nutation correction in obliquity in radians
+        
+        
+        """
+        ...
+    def getNutX(self) -> float:
+        """
+            Get the nutation correction X.
+        
+            Returns:
+                the nutation correction X in radians
+        
+        
+        """
+        ...
+    def getNutY(self) -> float:
+        """
+            Get the nutation correction Y.
+        
+            Returns:
+                the nutation correction Y in radians
+        
+        
+        """
+        ...
+    def getUt1MinusUtc(self) -> float:
+        """
+            Get the UT1-UTC offset.
+        
+            Returns:
+                the UT1-UTC offset
+        
+        
+        """
+        ...
+    def getXPo(self) -> float:
+        """
+            Get the X polar motion.
+        
+            Returns:
+                the X polar motion in radians
+        
+        
+        """
+        ...
+    def getYPo(self) -> float:
+        """
+            Get the Y polar motion.
+        
+            Returns:
+                the Y polar motion in radians
+        
+        
+        """
+        ...
+    def setLod(self, double: float) -> None:
+        """
+            Set the length of day.
+        
+            Parameters:
+                lod (double): the length of day to set
+        
+        
+        """
+        ...
+    def setNutLn(self, double: float) -> None:
+        """
+            Set the nutation correction in longitude.
+        
+            Parameters:
+                nutLn (double): the nutation correction in longitude to set
+        
+        
+        """
+        ...
+    def setNutOb(self, double: float) -> None:
+        """
+            Set the nutation correction in obliquity.
+        
+            Parameters:
+                nutOb (double): the nutation correction in obliquity to set in radians
+        
+        
+        """
+        ...
+    def setNutX(self, double: float) -> None:
+        """
+            Set the nutation correction X.
+        
+            Parameters:
+                nutX (double): the nutation correction X to set in radians
+        
+        
+        """
+        ...
+    def setNutY(self, double: float) -> None:
+        """
+            Set the nutation correction Y.
+        
+            Parameters:
+                nutY (double): the nutation correction Y to set in radians
+        
+        
+        """
+        ...
+    def setUt1MinusUtc(self, double: float) -> None:
+        """
+            Set the UT1-UTC offset.
+        
+            Parameters:
+                ut1MinusUtc (double): the value to set
+        
+        
+        """
+        ...
+    def setxPo(self, double: float) -> None:
+        """
+            Set the X polar motion.
+        
+            Parameters:
+                xPo (double): the X polar motion to set in radians
+        
+        
+        """
+        ...
+    def setyPo(self, double: float) -> None:
+        """
+            Set the Y polar motion.
+        
+            Parameters:
+                yPo (double): the Y polar motion to set in radians
+        
+        
+        """
+        ...
+    def toEopEntry(self, nutationCorrectionConverter: org.orekit.utils.IERSConventions.NutationCorrectionConverter, iTRFVersion: org.orekit.frames.ITRFVersion, timeScale: org.orekit.time.TimeScale) -> org.orekit.frames.EOPEntry:
+        """
+            Converts to an :class:`~org.orekit.frames.EOPEntry`.
+        
+            Parameters:
+                converter (:class:`~org.orekit.utils.IERSConventions.NutationCorrectionConverter`): converter to use for nutation corrections
+                version (:class:`~org.orekit.frames.ITRFVersion`): ITRF version
+                scale (:class:`~org.orekit.time.TimeScale`): time scale for epochs
+        
+            Returns:
+                an :code:`EOPEntry`
+        
+        
+        """
+        ...
+
+class SinexLoader(org.orekit.frames.EOPHistoryLoader):
+    """
+    public class SinexLoader extends Object implements :class:`~org.orekit.frames.EOPHistoryLoader`
     
         Loader for Solution INdependent EXchange (SINEX) files.
     
         For now only few keys are supported: SITE/ID, SITE/ECCENTRICITY, SOLUTION/EPOCHS and SOLUTION/ESTIMATE. They represent
         the minimum set of parameters that are interesting to consider in a SINEX file.
+    
+        The parsing of EOP parameters for multiple files in different SinexLoader object, fed into the default DataContext might
+        pose a problem in case validity dates are overlapping. As Sinex daily solution files provide a single EOP entry, the
+        Sinex loader will add points at the limits of data dates (startDate, endDate) of the Sinex file, which in case of
+        overlap will lead to inconsistencies in the final EOPHistory object. Multiple files can be parsed using a single
+        SinexLoader with a regex to overcome this issue.
     
         Since:
             10.3
@@ -28,12 +234,27 @@ class SinexLoader:
     def __init__(self, dataSource: org.orekit.data.DataSource): ...
     @typing.overload
     def __init__(self, dataSource: org.orekit.data.DataSource, timeScale: org.orekit.time.TimeScale): ...
+    def fillHistory(self, nutationCorrectionConverter: org.orekit.utils.IERSConventions.NutationCorrectionConverter, sortedSet: java.util.SortedSet[org.orekit.frames.EOPEntry]) -> None: ...
+    def getITRFVersion(self) -> org.orekit.frames.ITRFVersion:
+        """
+            Get the ITRF version used for the EOP entries processing.
+        
+            Returns:
+                the ITRF Version used for the EOP processing.
+        
+            Since:
+                11.2
+        
+        
+        """
+        ...
+    def getParsedEop(self) -> java.util.Map[org.orekit.time.AbsoluteDate, SinexEopEntry]: ...
     def getStation(self, string: str) -> 'Station':
         """
             Get the station corresponding to the given site code.
         
             Parameters:
-                siteCode (:class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): site code
+                siteCode (String): site code
         
             Returns:
                 the corresponding station
@@ -42,10 +263,23 @@ class SinexLoader:
         """
         ...
     def getStations(self) -> java.util.Map[str, 'Station']: ...
+    def setITRFVersion(self, int: int) -> None:
+        """
+            Set the ITRF version used in EOP entries processing.
+        
+            Parameters:
+                year (int): Year of the ITRF Version used for parsing EOP.
+        
+            Since:
+                11.2
+        
+        
+        """
+        ...
 
 class Station:
     """
-    public class Station extends :class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    public class Station extends Object
     
         Station model.
     
@@ -63,11 +297,11 @@ class Station:
             Add a station eccentricity vector entry valid after a limit date.
         
         
-            Using :code:`addStationEccentricitiesValidAfter(entry, t)` will make :code:`entry` valid in [t, +∞[ (note the closed
-            bracket).
+            Using :code:`addStationEccentricitiesValidAfter(entry, t)` will make :code:`entry` valid in [t, +Ã¢Ë†Å¾[ (note the
+            closed bracket).
         
             Parameters:
-                entry (:class:`~org.orekit.files.sinex.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): station eccentricity vector entry
+                entry (Vector3D): station eccentricity vector entry
                 earliestValidityDate (:class:`~org.orekit.time.AbsoluteDate`): date after which the entry is valid (must be different from **all** dates already used for transitions)
         
             Since:
@@ -81,11 +315,11 @@ class Station:
             Add a station eccentricity vector entry valid before a limit date.
         
         
-            Using :code:`addStationEccentricitiesValidBefore(entry, t)` will make :code:`entry` valid in ]-∞, t[ (note the open
+            Using :code:`addStationEccentricitiesValidBefore(entry, t)` will make :code:`entry` valid in ]-Ã¢Ë†Å¾, t[ (note the open
             bracket).
         
             Parameters:
-                entry (:class:`~org.orekit.files.sinex.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): station eccentricity vector entry
+                entry (Vector3D): station eccentricity vector entry
                 latestValidityDate (:class:`~org.orekit.time.AbsoluteDate`): date before which the entry is valid (must be different from **all** dates already used for transitions)
         
             Since:
@@ -148,7 +382,19 @@ class Station:
         
         """
         ...
-    def getEccentricitiesTimeSpanMap(self) -> org.orekit.utils.TimeSpanMap[org.hipparchus.geometry.euclidean.threed.Vector3D]: ...
+    def getEccentricitiesTimeSpanMap(self) -> org.orekit.utils.TimeSpanMap[org.hipparchus.geometry.euclidean.threed.Vector3D]:
+        """
+            Get the TimeSpanMap of site antenna eccentricities.
+        
+            Returns:
+                the TimeSpanMap of site antenna eccentricities
+        
+            Since:
+                11.1
+        
+        
+        """
+        ...
     def getEpoch(self) -> org.orekit.time.AbsoluteDate:
         """
             Get the coordinates reference epoch.
@@ -214,7 +460,7 @@ class Station:
             Set the DOMES number.
         
             Parameters:
-                domes (:class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the DOMES number to set
+                domes (String): the DOMES number to set
         
         
         """
@@ -234,7 +480,7 @@ class Station:
             Set the last known station antenna eccentricities.
         
             Parameters:
-                eccentricities (:class:`~org.orekit.files.sinex.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): the eccenticities to set (m)
+                eccentricities (Vector3D): the eccenticities to set (m)
         
         
         """
@@ -254,7 +500,7 @@ class Station:
             Set the station position.
         
             Parameters:
-                position (:class:`~org.orekit.files.sinex.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): the position to set
+                position (Vector3D): the position to set
         
         
         """
@@ -264,7 +510,7 @@ class Station:
             Set the site code (station identifier).
         
             Parameters:
-                siteCode (:class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the site code to set
+                siteCode (String): the site code to set
         
         
         """
@@ -294,7 +540,7 @@ class Station:
             Set the station velocity.
         
             Parameters:
-                velocity (:class:`~org.orekit.files.sinex.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): the velocity to set
+                velocity (Vector3D): the velocity to set
         
         
         """
@@ -319,5 +565,6 @@ class Station:
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.sinex")``.
 
+    SinexEopEntry: typing.Type[SinexEopEntry]
     SinexLoader: typing.Type[SinexLoader]
     Station: typing.Type[Station]

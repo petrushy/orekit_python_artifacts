@@ -52,6 +52,20 @@ class CPF(org.orekit.files.general.EphemerisFile['CPF.CPFCoordinate', 'CPF.CPFEp
     @typing.overload
     def addSatelliteCoordinate(self, cPFCoordinate: 'CPF.CPFCoordinate') -> None: ...
     def addSatelliteCoordinates(self, string: str, list: java.util.List['CPF.CPFCoordinate']) -> None: ...
+    def addSatelliteVelocityToCPFCoordinate(self, string: str, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> None:
+        """
+            Add the velocity to the last CPF coordinate entry.
+        
+            Parameters:
+                id (String): satellite ILRS identifier
+                velocity (Vector3D): the velocity vector of the satellite
+        
+            Since:
+                11.2
+        
+        
+        """
+        ...
     def getComments(self) -> java.util.List[str]:
         """
             Get the comments contained in the file.
@@ -204,7 +218,10 @@ class CPFWriter(org.orekit.files.general.EphemerisFileWriter):
         Also see:
             1.0 file format, 2.0 file format
     """
+    @typing.overload
     def __init__(self, cPFHeader: 'CPFHeader', timeScale: org.orekit.time.TimeScale): ...
+    @typing.overload
+    def __init__(self, cPFHeader: 'CPFHeader', timeScale: org.orekit.time.TimeScale, boolean: bool): ...
     _write_0__C = typing.TypeVar('_write_0__C', bound=org.orekit.utils.TimeStampedPVCoordinates)  # <C>
     _write_0__S = typing.TypeVar('_write_0__S', bound=org.orekit.files.general.EphemerisFile.EphemerisSegment)  # <S>
     _write_1__C = typing.TypeVar('_write_1__C', bound=org.orekit.utils.TimeStampedPVCoordinates)  # <C>
@@ -906,7 +923,10 @@ class StreamingCpfWriter:
         Since:
             10.3
     """
+    @typing.overload
     def __init__(self, appendable: java.lang.Appendable, timeScale: org.orekit.time.TimeScale, cPFHeader: 'CPFHeader'): ...
+    @typing.overload
+    def __init__(self, appendable: java.lang.Appendable, timeScale: org.orekit.time.TimeScale, cPFHeader: 'CPFHeader', boolean: bool): ...
     def newSegment(self, frame: org.orekit.frames.Frame) -> 'StreamingCpfWriter.Segment':
         """
             Create a writer for a new CPF ephemeris segment.
@@ -1672,6 +1692,32 @@ class CRDHeader(ILRSHeader):
         @staticmethod
         def values() -> typing.List['CRDHeader.RangeType']: ...
 
+class PythonILRSHeader(ILRSHeader):
+    """
+    public class PythonILRSHeader extends :class:`~org.orekit.files.ilrs.ILRSHeader`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
 
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ilrs")``.
@@ -1685,4 +1731,5 @@ class __module_protocol__(typing.Protocol):
     CRDHeader: typing.Type[CRDHeader]
     CRDParser: typing.Type[CRDParser]
     ILRSHeader: typing.Type[ILRSHeader]
+    PythonILRSHeader: typing.Type[PythonILRSHeader]
     StreamingCpfWriter: typing.Type[StreamingCpfWriter]
