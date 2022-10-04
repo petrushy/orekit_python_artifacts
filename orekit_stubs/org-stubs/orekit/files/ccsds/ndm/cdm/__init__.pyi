@@ -426,6 +426,9 @@ class CdmData(org.orekit.files.ccsds.section.Data):
         """
             Get the covariance matrix logical block.
         
+            The RTN Covariance Matrix is provided in the 9Ãƒâ€”9 Lower Triangular Form. All parameters of the 6Ãƒâ€”6
+            position/velocity submatrix are mandatory. The remaining elements will return NaN if not provided.
+        
             Returns:
                 covariance matrix block
         
@@ -2033,7 +2036,19 @@ class Maneuvrable(java.lang.Enum['Maneuvrable']):
     """
     YES: typing.ClassVar['Maneuvrable'] = ...
     NO: typing.ClassVar['Maneuvrable'] = ...
-    NOT_APPLICABLE: typing.ClassVar['Maneuvrable'] = ...
+    N_A: typing.ClassVar['Maneuvrable'] = ...
+    @staticmethod
+    def getEnum(string: str) -> 'Maneuvrable': ...
+    def getValue(self) -> str: ...
+    def toString(self) -> str:
+        """
+        
+            Overrides:
+                 in class 
+        
+        
+        """
+        ...
     _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
     @typing.overload
     @staticmethod
@@ -2405,6 +2420,9 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
         Container for RTN covariance matrix data. This class as a RealMatrix as attribute which can be acces with
         getRTNCovariaxMatrix method. Beware that there are thus 2 ways to modify the RTN covariance : setC... ( setCrr, setCtr
         ...) which should be prioritized and getRTNCovariaxMatrix.setEntry(row, col, value).
+    
+        The RTN Covariance Matrix is provided in the 9Ãƒâ€”9 Lower Triangular Form. All parameters of the 6Ãƒâ€”6
+        position/velocity submatrix are mandatory. The remaining elements will return NaN if not provided.
     
         Since:
             11.2
@@ -2863,6 +2881,9 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
     def getRTNCovarianceMatrix(self) -> org.hipparchus.linear.RealMatrix:
         """
             Get the RTN covariance matrix.
+        
+            The RTN Covariance Matrix is provided in the 9Ãƒâ€”9 Lower Triangular Form. All parameters of the 6Ãƒâ€”6
+            position/velocity submatrix are mandatory. The remaining elements will return NaN if not provided.
         
             Returns:
                 the RTN covariance matrix

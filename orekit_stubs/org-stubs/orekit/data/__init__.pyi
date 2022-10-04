@@ -2381,6 +2381,33 @@ class PythonDataProvider(DataProvider):
         """
         ...
 
+class PythonReaderOpener(DataSource.ReaderOpener):
+    """
+    public class PythonReaderOpener extends Object implements :class:`~org.orekit.data.DataSource.ReaderOpener`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def openOnce(self) -> java.io.Reader: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
 class PythonSeriesTerm(SeriesTerm):
     """
     public class PythonSeriesTerm extends Object
@@ -2471,6 +2498,33 @@ class PythonSeriesTerm(SeriesTerm):
         """
         ...
     def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
+class PythonStreamOpener(DataSource.StreamOpener):
+    """
+    public class PythonStreamOpener extends Object implements :class:`~org.orekit.data.DataSource.StreamOpener`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def openOnce(self) -> java.io.InputStream: ...
     def pythonDecRef(self) -> None:
         """
             Part of JCC Python interface to object
@@ -2879,7 +2933,9 @@ class __module_protocol__(typing.Protocol):
     PythonDataFilter: typing.Type[PythonDataFilter]
     PythonDataLoader: typing.Type[PythonDataLoader]
     PythonDataProvider: typing.Type[PythonDataProvider]
+    PythonReaderOpener: typing.Type[PythonReaderOpener]
     PythonSeriesTerm: typing.Type[PythonSeriesTerm]
+    PythonStreamOpener: typing.Type[PythonStreamOpener]
     SeriesTerm: typing.Type[SeriesTerm]
     SimpleTimeStampedTableParser: typing.Type[SimpleTimeStampedTableParser]
     UnixCompressFilter: typing.Type[UnixCompressFilter]

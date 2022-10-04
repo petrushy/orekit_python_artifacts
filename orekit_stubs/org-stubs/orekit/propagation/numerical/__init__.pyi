@@ -1,4 +1,5 @@
 import java.util
+import org
 import org.hipparchus
 import org.hipparchus.geometry.euclidean.threed
 import org.hipparchus.linear
@@ -1614,6 +1615,16 @@ class PythonTimeDerivativesEquations(TimeDerivativesEquations):
         """
         ...
 
+class PythonPartialsObserver(org.orekit.propagation.numerical.StateTransitionMatrixGenerator.PartialsObserver):
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def partialsComputed(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[float], doubleArray2: typing.List[float]) -> None: ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None: ...
+
 
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.propagation.numerical")``.
@@ -1629,6 +1640,7 @@ class __module_protocol__(typing.Protocol):
     NumericalPropagator: typing.Type[NumericalPropagator]
     PartialDerivativesEquations: typing.Type[PartialDerivativesEquations]
     PythonFieldTimeDerivativesEquations: typing.Type[PythonFieldTimeDerivativesEquations]
+    PythonPartialsObserver: typing.Type[PythonPartialsObserver]
     PythonTimeDerivativesEquations: typing.Type[PythonTimeDerivativesEquations]
     TimeDerivativesEquations: typing.Type[TimeDerivativesEquations]
     cr3bp: org.orekit.propagation.numerical.cr3bp.__module_protocol__

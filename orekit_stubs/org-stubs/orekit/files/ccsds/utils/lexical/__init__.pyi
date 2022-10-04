@@ -6,6 +6,7 @@ import org.orekit.data
 import org.orekit.errors
 import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
+import org.orekit.files.ccsds.ndm.cdm
 import org.orekit.files.ccsds.utils
 import org.orekit.time
 import org.orekit.utils.units
@@ -562,6 +563,19 @@ class ParseToken:
         
         """
         ...
+    def processAsManeuvrableEnum(self, maneuvrableConsumer: 'ParseToken.ManeuvrableConsumer') -> bool:
+        """
+            Process the content of the Maneuvrable enum.
+        
+            Parameters:
+                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.ManeuvrableConsumer`): consumer of the enum
+        
+            Returns:
+                always returns :code:`true`
+        
+        
+        """
+        ...
     def processAsNormalizedCharacter(self, charConsumer: 'ParseToken.CharConsumer') -> bool:
         """
             Process the content as a normalized character.
@@ -702,6 +716,8 @@ class ParseToken:
         def accept(self, intArray: typing.List[int]) -> None: ...
     class LabeledDoubleConsumer:
         def accept(self, char: str, double: float) -> None: ...
+    class ManeuvrableConsumer:
+        def accept(self, maneuvrable: org.orekit.files.ccsds.ndm.cdm.Maneuvrable) -> None: ...
     class StringConsumer:
         def accept(self, string: str) -> None: ...
     class StringListConsumer:
