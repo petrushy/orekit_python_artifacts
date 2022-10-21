@@ -84,7 +84,8 @@ class EpochDerivativesEquations(org.orekit.propagation.integration.AdditionalDer
             during the same propagation.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
+                :meth:`~org.orekit.propagation.integration.AdditionalEquations.computeDerivatives`Â in
+                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalEquations`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional state
@@ -119,7 +120,8 @@ class EpochDerivativesEquations(org.orekit.propagation.integration.AdditionalDer
                 a mapper between two-dimensional Jacobians and one-dimensional additional state, with the same name as the instance
         
             Also see:
-                :meth:`~org.orekit.propagation.numerical.EpochDerivativesEquations.setInitialJacobians`, null
+                :meth:`~org.orekit.propagation.numerical.EpochDerivativesEquations.setInitialJacobians`,
+                :meth:`~org.orekit.propagation.numerical.EpochDerivativesEquations.setInitialJacobians`
         
         
         """
@@ -179,7 +181,9 @@ class EpochDerivativesEquations(org.orekit.propagation.integration.AdditionalDer
         """
             Set the initial value of the Jacobian with respect to state and parameter.
         
-            This method is equivalent to call null with dYdY0 set to the identity matrix and dYdP set to a zero matrix.
+            This method is equivalent to call
+            :meth:`~org.orekit.propagation.numerical.EpochDerivativesEquations.setInitialJacobians` with dYdY0 set to the identity
+            matrix and dYdP set to a zero matrix.
         
             The force models parameters for which partial derivatives are desired, *must* have been
             :meth:`~org.orekit.utils.ParameterDriver.setSelected` before this method is called, so proper matrices dimensions are
@@ -714,13 +718,15 @@ class JacobiansMapper(org.orekit.propagation.integration.AbstractJacobiansMapper
             which can safely be null in this case.
         
             Specified by:
-                 in class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
+                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getParametersJacobian`Â in
+                classÂ :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
                 dYdP (double[][]): placeholder where to put the Jacobian with respect to parameters
         
             Also see:
+                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getStateJacobian`
         
         
         """
@@ -735,13 +741,15 @@ class JacobiansMapper(org.orekit.propagation.integration.AbstractJacobiansMapper
         
         
             Specified by:
-                 in class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
+                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getStateJacobian`Â in
+                classÂ :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
                 dYdY0 (double[][]): placeholder where to put the Jacobian with respect to state
         
             Also see:
+                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getParametersJacobian`
         
         
         """
@@ -754,7 +762,8 @@ class JacobiansMapper(org.orekit.propagation.integration.AbstractJacobiansMapper
             array.
         
             Specified by:
-                 in class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
+                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.setInitialJacobians`Â in
+                classÂ :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -763,6 +772,7 @@ class JacobiansMapper(org.orekit.propagation.integration.AbstractJacobiansMapper
                 p (double[]): placeholder where to put the one-dimensional additional state
         
             Also see:
+                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getStateJacobian`
         
         
         """
@@ -1115,10 +1125,10 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
 
 class PartialDerivativesEquations(org.orekit.propagation.integration.AdditionalDerivativesProvider, org.orekit.propagation.integration.AdditionalEquations):
     """
-    Deprecated. 
-    as of 11.1, replaced by :meth:`~org.orekit.propagation.Propagator.setupMatricesComputation`
     @Deprecated public class PartialDerivativesEquations extends Object implements :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`, :class:`~org.orekit.propagation.integration.AdditionalEquations`
     
+        Deprecated.
+        as of 11.1, replaced by :meth:`~org.orekit.propagation.Propagator.setupMatricesComputation`
         :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider` computing the partial derivatives of the
         state (orbit) with respect to initial state and force models parameters.
     
@@ -1144,7 +1154,7 @@ class PartialDerivativesEquations(org.orekit.propagation.integration.AdditionalD
     def __init__(self, string: str, numericalPropagator: NumericalPropagator): ...
     def combinedDerivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.orekit.propagation.integration.CombinedDerivatives:
         """
-            Deprecated. 
+            Deprecated.
             Compute the derivatives related to the additional state (and optionally main state increments).
         
             As of 11.2, there is a default implementation that calls the deprecated
@@ -1167,7 +1177,7 @@ class PartialDerivativesEquations(org.orekit.propagation.integration.AdditionalD
         ...
     def computeDerivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[float]) -> typing.List[float]:
         """
-            Deprecated. 
+            Deprecated.
             Compute the derivatives related to the additional state parameters.
         
             When this method is called, the spacecraft state contains the main state (orbit, attitude and mass), all the states
@@ -1176,7 +1186,8 @@ class PartialDerivativesEquations(org.orekit.propagation.integration.AdditionalD
             during the same propagation.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
+                :meth:`~org.orekit.propagation.integration.AdditionalEquations.computeDerivatives`Â in
+                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalEquations`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional state
@@ -1191,7 +1202,7 @@ class PartialDerivativesEquations(org.orekit.propagation.integration.AdditionalD
     def derivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]: ...
     def getDimension(self) -> int:
         """
-            Deprecated. 
+            Deprecated.
             Get the dimension of the generated derivative.
         
             Specified by:
@@ -1206,21 +1217,22 @@ class PartialDerivativesEquations(org.orekit.propagation.integration.AdditionalD
         ...
     def getMapper(self) -> JacobiansMapper:
         """
-            Deprecated. 
+            Deprecated.
             Get a mapper between two-dimensional Jacobians and one-dimensional additional state.
         
             Returns:
                 a mapper between two-dimensional Jacobians and one-dimensional additional state, with the same name as the instance
         
             Also see:
-                :meth:`~org.orekit.propagation.numerical.PartialDerivativesEquations.setInitialJacobians`, null
+                :meth:`~org.orekit.propagation.numerical.PartialDerivativesEquations.setInitialJacobians`,
+                :meth:`~org.orekit.propagation.numerical.PartialDerivativesEquations.setInitialJacobians`
         
         
         """
         ...
     def getName(self) -> str:
         """
-            Deprecated. 
+            Deprecated.
             Get the name of the additional derivatives (which will become state once integrated).
         
             Specified by:
@@ -1239,7 +1251,7 @@ class PartialDerivativesEquations(org.orekit.propagation.integration.AdditionalD
         ...
     def getSelectedParameters(self) -> org.orekit.utils.ParameterDriversList:
         """
-            Deprecated. 
+            Deprecated.
             Get the selected parameters, in Jacobian matrix column order.
         
             The force models parameters for which partial derivatives are desired, *must* have been
@@ -1253,7 +1265,7 @@ class PartialDerivativesEquations(org.orekit.propagation.integration.AdditionalD
         ...
     def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
-            Deprecated. 
+            Deprecated.
             Initialize the generator at the start of propagation.
         
             Specified by:
@@ -1273,7 +1285,7 @@ class PartialDerivativesEquations(org.orekit.propagation.integration.AdditionalD
         ...
     def isInitialize(self) -> bool:
         """
-            Deprecated. 
+            Deprecated.
             Get the flag for the initialization of the state jacobian.
         
             Returns:
@@ -1288,10 +1300,12 @@ class PartialDerivativesEquations(org.orekit.propagation.integration.AdditionalD
     @typing.overload
     def setInitialJacobians(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.orekit.propagation.SpacecraftState:
         """
-            Deprecated. 
+            Deprecated.
             Set the initial value of the Jacobian with respect to state and parameter.
         
-            This method is equivalent to call null with dYdY0 set to the identity matrix and dYdP set to a zero matrix.
+            This method is equivalent to call
+            :meth:`~org.orekit.propagation.numerical.PartialDerivativesEquations.setInitialJacobians` with dYdY0 set to the identity
+            matrix and dYdP set to a zero matrix.
         
             The force models parameters for which partial derivatives are desired, *must* have been
             :meth:`~org.orekit.utils.ParameterDriver.setSelected` before this method is called, so proper matrices dimensions are
@@ -1314,7 +1328,7 @@ class PartialDerivativesEquations(org.orekit.propagation.integration.AdditionalD
     @typing.overload
     def setInitialJacobians(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[typing.List[float]], doubleArray2: typing.List[typing.List[float]]) -> org.orekit.propagation.SpacecraftState:
         """
-            Deprecated. 
+            Deprecated.
             Set the initial value of the Jacobian with respect to state and parameter.
         
             The returned state must be added to the propagator (it is not done automatically, as the user may need to add more
@@ -1427,10 +1441,10 @@ class AbsoluteJacobiansMapper(JacobiansMapper):
 
 class AbsolutePartialDerivativesEquations(PartialDerivativesEquations):
     """
-    Deprecated. 
-    as of 11.1, this class is not used anymore
     @Deprecated public class AbsolutePartialDerivativesEquations extends :class:`~org.orekit.propagation.numerical.PartialDerivativesEquations`
     
+        Deprecated.
+        as of 11.1, this class is not used anymore
         :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider` computing the partial derivatives of the
         state (orbit) with respect to initial state and force models parameters.
     
@@ -1459,7 +1473,7 @@ class AbsolutePartialDerivativesEquations(PartialDerivativesEquations):
     def __init__(self, string: str, numericalPropagator: NumericalPropagator): ...
     def getMapper(self) -> AbsoluteJacobiansMapper:
         """
-            Deprecated. 
+            Deprecated.
             Get a mapper between two-dimensional Jacobians and one-dimensional additional state.
         
             Overrides:
@@ -1470,7 +1484,8 @@ class AbsolutePartialDerivativesEquations(PartialDerivativesEquations):
                 a mapper between two-dimensional Jacobians and one-dimensional additional state, with the same name as the instance
         
             Also see:
-                :meth:`~org.orekit.propagation.numerical.PartialDerivativesEquations.setInitialJacobians`, null
+                :meth:`~org.orekit.propagation.numerical.PartialDerivativesEquations.setInitialJacobians`,
+                :meth:`~org.orekit.propagation.numerical.PartialDerivativesEquations.setInitialJacobians`
         
         
         """

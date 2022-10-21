@@ -1079,7 +1079,7 @@ class LOFType(java.lang.Enum['LOFType']):
             Returns:
                 rotation from inertial frame to local orbital frame
         
-        public abstract <T extends CalculusFieldElement<T>> FieldRotation<T> rotationFromInertial(Field<T> field, :class:`~org.orekit.utils.FieldPVCoordinates`<T> pv)
+        public abstract <T extends CalculusFieldElement<T>> FieldRotation<T> rotationFromInertial (Field<T> field, :class:`~org.orekit.utils.FieldPVCoordinates`<T> pv)
         
             Get the rotation from inertial frame to local orbital frame.
         
@@ -1097,6 +1097,88 @@ class LOFType(java.lang.Enum['LOFType']):
             Since:
                 9.0
         
+        
+        """
+        ...
+    _rotationFromLOFInToLOFOut_0__T = typing.TypeVar('_rotationFromLOFInToLOFOut_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    @staticmethod
+    def rotationFromLOFInToLOFOut(field: org.hipparchus.Field[_rotationFromLOFInToLOFOut_0__T], lOFType: 'LOFType', lOFType2: 'LOFType', fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_rotationFromLOFInToLOFOut_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_rotationFromLOFInToLOFOut_0__T]:
+        """
+            Get the rotation from input to output :class:`~org.orekit.frames.LOFType`.
+        
+            This rotation does not include any time derivatives.
+        
+            Parameters:
+                field (Field<T> field): field to which the elements belong
+                in (:class:`~org.orekit.frames.LOFType`): input commonly used local orbital frame
+                out (:class:`~org.orekit.frames.LOFType`): output commonly used local orbital frame
+                pv (:class:`~org.orekit.utils.FieldPVCoordinates`<T> pv): position-velocity of the spacecraft in some inertial frame
+        
+            Returns:
+                rotation from input to output :class:`~org.orekit.frames.LOFType`.
+        
+            Since:
+                11.3
+        
+        
+        """
+        ...
+    @typing.overload
+    @staticmethod
+    def rotationFromLOFInToLOFOut(lOFType: 'LOFType', lOFType2: 'LOFType', pVCoordinates: org.orekit.utils.PVCoordinates) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+        """
+            Get the rotation from input to output :class:`~org.orekit.frames.LOFType`.
+        
+            This rotation does not include any time derivatives.
+        
+            Parameters:
+                in (:class:`~org.orekit.frames.LOFType`): input commonly used local orbital frame
+                out (:class:`~org.orekit.frames.LOFType`): output commonly used local orbital frame
+                pv (:class:`~org.orekit.utils.PVCoordinates`): position-velocity of the spacecraft in some inertial frame
+        
+            Returns:
+                rotation from input to output :class:`~org.orekit.frames.LOFType`.
+        
+            Since:
+                11.3
+        
+        """
+        ...
+    _rotationFromLOFType_0__T = typing.TypeVar('_rotationFromLOFType_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def rotationFromLOFType(self, field: org.hipparchus.Field[_rotationFromLOFType_0__T], lOFType: 'LOFType', fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_rotationFromLOFType_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_rotationFromLOFType_0__T]:
+        """
+            Get the rotation from input :class:`~org.orekit.frames.LOFType` to the instance.
+        
+            Parameters:
+                field (Field<T> field): field to which the elements belong
+                fromLOF (:class:`~org.orekit.frames.LOFType`): input local orbital frame
+                pv (:class:`~org.orekit.utils.FieldPVCoordinates`<T> pv): position-velocity of the spacecraft in some inertial frame
+        
+            Returns:
+                rotation from input local orbital frame to the instance
+        
+            Since:
+                11.3
+        
+        
+        """
+        ...
+    @typing.overload
+    def rotationFromLOFType(self, lOFType: 'LOFType', pVCoordinates: org.orekit.utils.PVCoordinates) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+        """
+            Get the rotation from input :class:`~org.orekit.frames.LOFType` to the instance.
+        
+            Parameters:
+                fromLOF (:class:`~org.orekit.frames.LOFType`): input local orbital frame
+                pv (:class:`~org.orekit.utils.PVCoordinates`): position-velocity of the spacecraft in some inertial frame
+        
+            Returns:
+                rotation from input local orbital frame to the instance
+        
+            Since:
+                11.3
         
         """
         ...
@@ -1130,6 +1212,55 @@ class LOFType(java.lang.Enum['LOFType']):
         
             Returns:
                 transform from the frame where position-velocity are defined to local orbital frame
+        
+        """
+        ...
+    _transformFromLOFInToLOFOut_0__T = typing.TypeVar('_transformFromLOFInToLOFOut_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    @staticmethod
+    def transformFromLOFInToLOFOut(field: org.hipparchus.Field[_transformFromLOFInToLOFOut_0__T], lOFType: 'LOFType', lOFType2: 'LOFType', fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_transformFromLOFInToLOFOut_0__T], fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_transformFromLOFInToLOFOut_0__T]) -> FieldTransform[_transformFromLOFInToLOFOut_0__T]:
+        """
+            Get the transform from input to output :class:`~org.orekit.frames.LOFType`.
+        
+            This method simply builds the transform using the rotation obtained from
+            :meth:`~org.orekit.frames.LOFType.rotationFromLOFInToLOFOut`
+        
+            Parameters:
+                field (Field<T> field): field to which the elements belong
+                in (:class:`~org.orekit.frames.LOFType`): input commonly used local orbital frame
+                out (:class:`~org.orekit.frames.LOFType`): output commonly used local orbital frame
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
+                pv (:class:`~org.orekit.utils.FieldPVCoordinates`<T> pv): position-velocity of the spacecraft in some inertial frame
+        
+            Returns:
+                rotation from input to output :class:`~org.orekit.frames.LOFType`.
+        
+            Since:
+                11.3
+        
+        
+        """
+        ...
+    @typing.overload
+    @staticmethod
+    def transformFromLOFInToLOFOut(lOFType: 'LOFType', lOFType2: 'LOFType', absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinates: org.orekit.utils.PVCoordinates) -> 'Transform':
+        """
+            Get the transform from input to output :class:`~org.orekit.frames.LOFType`.
+        
+            This method simply builds the transform using the rotation obtained from
+            :meth:`~org.orekit.frames.LOFType.rotationFromLOFInToLOFOut`
+        
+            Parameters:
+                in (:class:`~org.orekit.frames.LOFType`): input commonly used local orbital frame
+                out (:class:`~org.orekit.frames.LOFType`): output commonly used local orbital frame
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                pv (:class:`~org.orekit.utils.PVCoordinates`): position-velocity of the spacecraft in some inertial frame
+        
+            Returns:
+                rotation from input to output :class:`~org.orekit.frames.LOFType`.
+        
+            Since:
+                11.3
         
         """
         ...

@@ -4,8 +4,10 @@ import java.lang
 import java.math
 import java.text
 import java.util
+import java.util.stream
 import org.hipparchus
 import org.hipparchus.exception
+import org.hipparchus.linear
 import org.hipparchus.random
 import typing
 
@@ -399,6 +401,37 @@ class CombinatoricsUtils:
     
         Combinatorial utilities.
     """
+    MAX_BELL: typing.ClassVar[int] = ...
+    """
+    public static final int MAX_BELL
+    
+        Maximum index of Bell number that fits into a long.
+    
+        Since:
+            2.2
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    @staticmethod
+    def bellNumber(int: int) -> int:
+        """
+            Compute the Bell number (number of partitions of a set).
+        
+            Parameters:
+                n (int): number of elements of the set
+        
+            Returns:
+                Bell number Bâ‚™
+        
+            Since:
+                2.2
+        
+        
+        """
+        ...
     @staticmethod
     def binomialCoefficient(int: int, int2: int) -> int: ...
     @staticmethod
@@ -441,6 +474,49 @@ class CombinatoricsUtils:
     def factorialDouble(int: int) -> float: ...
     @staticmethod
     def factorialLog(int: int) -> float: ...
+    _partitions__T = typing.TypeVar('_partitions__T')  # <T>
+    @staticmethod
+    def partitions(list: java.util.List[_partitions__T]) -> java.util.stream.Stream[typing.List[java.util.List[_partitions__T]]]:
+        """
+            Generate a stream of partitions of a list.
+        
+            This method implements the iterative algorithm described in Short Note: A Fast Iterative Algorithm for Generating Set
+            Partitions by B. DjokiÃ„â€¡, M. Miyakawa, S. Sekiguchi, I. Semba, and I. StojmenoviÃ„â€¡ (The Computer Journal, Volume
+            32, Issue 3, 1989, Pages 281Ã¢â‚¬â€œ282, https://doi.org/10.1093/comjnl/32.3.281
+        
+            Parameters:
+                list (List<T> list): list to partition
+        
+            Returns:
+                stream of partitions of the list, each partition is an array or parts and each part is a list of elements
+        
+            Since:
+                2.2
+        
+        
+        """
+        ...
+    _permutations__T = typing.TypeVar('_permutations__T')  # <T>
+    @staticmethod
+    def permutations(list: java.util.List[_permutations__T]) -> java.util.stream.Stream[java.util.List[_permutations__T]]:
+        """
+            Generate a stream of permutations of a list.
+        
+            This method implements the SteinhausÃ¢â‚¬â€œJohnsonÃ¢â‚¬â€œTrotter algorithm with Even's speedup
+            SteinhausÃ¢â‚¬â€œJohnsonÃ¢â‚¬â€œTrotter algorithm
+        
+            Parameters:
+                list (List<T> list): list to permute
+        
+            Returns:
+                stream of permutations of the list
+        
+            Since:
+                2.2
+        
+        
+        """
+        ...
     @staticmethod
     def stirlingS2(int: int, int2: int) -> int: ...
     class FactorialLog:
@@ -3744,6 +3820,49 @@ class ResizableDoubleArray(java.io.Serializable):
         @staticmethod
         def values() -> typing.List['ResizableDoubleArray.ExpansionMode']: ...
 
+class RosenNumberPartitionIterator(java.util.Iterator[typing.List[int]]):
+    """
+    public class RosenNumberPartitionIterator extends Object implements Iterator<int[]>
+    
+        An iterator that generates all partitions of :code:`n` elements, into :code:`k` parts containing the number of elements
+        in each part, based on Rosen's algorithm.
+    
+        This is a copy of the class (with slight edits) with the same name from the Symja Library. The original file was
+        published under the terms of the GPLV3 license, but the Hipparchus project was explicitly allowed to include it
+        relicensed to Apache V2.
+    
+        See Kenneth H. Rosen, Discrete Mathematics and Its Applications, 2nd edition (NY: McGraw-Hill, 1991), pp. 284-286
+    """
+    def __init__(self, int: int, int2: int): ...
+    def hasNext(self) -> bool:
+        """
+        
+            Specified by:
+                 in interface 
+        
+            Also see:
+        
+        
+        """
+        ...
+    def next(self) -> typing.List[int]:
+        """
+        
+            Specified by:
+                 in interface 
+        
+            Also see:
+        
+        
+        """
+        ...
+    def reset(self) -> None:
+        """
+            Reset this iterator to the start condition.
+        
+        """
+        ...
+
 class RyuDouble:
     DEFAULT_LOW_EXP: typing.ClassVar[int] = ...
     DEFAULT_HIGH_EXP: typing.ClassVar[int] = ...
@@ -4839,10 +4958,219 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
         """
         ...
 
+class UnscentedTransformProvider:
+    """
+    public interface UnscentedTransformProvider
+    
+        Provider for unscented transform.
+    
+        Since:
+            2.2
+    """
+    def getWc(self) -> org.hipparchus.linear.RealVector:
+        """
+            Get the covariance weights.
+        
+            Returns:
+                the covariance weights
+        
+        
+        """
+        ...
+    def getWm(self) -> org.hipparchus.linear.RealVector:
+        """
+            Get the mean weights.
+        
+            Returns:
+                the mean weights
+        
+        
+        """
+        ...
+    def unscentedTransform(self, realVector: org.hipparchus.linear.RealVector, realMatrix: org.hipparchus.linear.RealMatrix) -> typing.List[org.hipparchus.linear.RealVector]:
+        """
+            Perform the unscented transform from a state and its covariance.
+        
+            Parameters:
+                state (:class:`~org.hipparchus.linear.RealVector`): process state
+                covariance (:class:`~org.hipparchus.linear.RealMatrix`): covariance associated with the process state
+        
+            Returns:
+                an array containing the sigma points of the unscented transform
+        
+        
+        """
+        ...
+
+class AbstractUnscentedTransform(UnscentedTransformProvider):
+    """
+    public abstract class AbstractUnscentedTransform extends Object implements :class:`~org.hipparchus.util.UnscentedTransformProvider`
+    
+        Base class for unscented transform providers.
+    
+        Since:
+            2.2
+    """
+    def __init__(self, int: int): ...
+    def unscentedTransform(self, realVector: org.hipparchus.linear.RealVector, realMatrix: org.hipparchus.linear.RealMatrix) -> typing.List[org.hipparchus.linear.RealVector]:
+        """
+            Perform the unscented transform from a state and its covariance.
+        
+            Let n be the state dimension and Si be the ith row of the covariance matrix square root. The returned array is organized
+            as follow. Element 0 contains the process state, also called the mean state. Elements from 1 to n contain the process
+            state + Si. Finally, elements from n + 1 to 2n contain the process state - Si
+        
+            Specified by:
+                :meth:`~org.hipparchus.util.UnscentedTransformProvider.unscentedTransform`Â in
+                interfaceÂ :class:`~org.hipparchus.util.UnscentedTransformProvider`
+        
+            Parameters:
+                state (:class:`~org.hipparchus.linear.RealVector`): process state
+                covariance (:class:`~org.hipparchus.linear.RealMatrix`): covariance associated with the process state
+        
+            Returns:
+                an array containing the sigma points of the unscented transform
+        
+        
+        """
+        ...
+
+class JulierUnscentedTransform(AbstractUnscentedTransform):
+    """
+    public class JulierUnscentedTransform extends :class:`~org.hipparchus.util.AbstractUnscentedTransform`
+    
+        Unscented transform as defined by Julier and Uhlmann.
+    
+        The unscented transform uses three parameters: alpha, beta and kappa. Alpha determines the spread of the sigma points
+        around the process state, kappa is a secondary scaling parameter, and beta is used to incorporate prior knowledge of the
+        distribution of the process state.
+    
+        The Julier transform is a particular case of :class:`~org.hipparchus.util.MerweUnscentedTransform` with alpha = 1 and
+        beta = 0.
+    
+        Since:
+            2.2
+    
+        Also see:
+            "S. J. Julier and J. K. Uhlmann. A New Extension of the Kalman Filter to Nonlinear Systems. Proc. SPIE 3068, Signal
+            Processing, Sensor Fusion, and Target Recognition VI, 182 (July 28, 1997)"
+    """
+    DEFAULT_KAPPA: typing.ClassVar[float] = ...
+    """
+    public static final double DEFAULT_KAPPA
+    
+        Default value for kappa, (0.0, see reference).
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    @typing.overload
+    def __init__(self, int: int): ...
+    @typing.overload
+    def __init__(self, int: int, double: float): ...
+    def getWc(self) -> org.hipparchus.linear.RealVector:
+        """
+            Get the covariance weights.
+        
+            Returns:
+                the covariance weights
+        
+        
+        """
+        ...
+    def getWm(self) -> org.hipparchus.linear.RealVector:
+        """
+            Get the mean weights.
+        
+            Returns:
+                the mean weights
+        
+        
+        """
+        ...
+
+class MerweUnscentedTransform(AbstractUnscentedTransform):
+    """
+    public class MerweUnscentedTransform extends :class:`~org.hipparchus.util.AbstractUnscentedTransform`
+    
+        Unscented transform as defined by Merwe and Wan.
+    
+        The unscented transform uses three parameters: alpha, beta and kappa. Alpha determines the spread of the sigma points
+        around the process state, kappa is a secondary scaling parameter, and beta is used to incorporate prior knowledge of the
+        distribution of the process state.
+    
+        Since:
+            2.2
+    
+        Also see:
+            "E. A. Wan and R. Van der Merwe, The unscented Kalman filter for nonlinear estimation, in Proc. Symp. Adaptive Syst.
+            Signal Process., Commun. Contr., Lake Louise, AB, Canada, Oct. 2000."
+    """
+    DEFAULT_ALPHA: typing.ClassVar[float] = ...
+    """
+    public static final double DEFAULT_ALPHA
+    
+        Default value for alpha (0.5, see reference).
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    DEFAULT_BETA: typing.ClassVar[float] = ...
+    """
+    public static final double DEFAULT_BETA
+    
+        Default value for beta (2.0, see reference).
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    DEFAULT_KAPPA: typing.ClassVar[float] = ...
+    """
+    public static final double DEFAULT_KAPPA
+    
+        Default value for kappa, (0.0, see reference).
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    @typing.overload
+    def __init__(self, int: int): ...
+    @typing.overload
+    def __init__(self, int: int, double: float, double2: float, double3: float): ...
+    def getWc(self) -> org.hipparchus.linear.RealVector:
+        """
+            Get the covariance weights.
+        
+            Returns:
+                the covariance weights
+        
+        
+        """
+        ...
+    def getWm(self) -> org.hipparchus.linear.RealVector:
+        """
+            Get the mean weights.
+        
+            Returns:
+                the mean weights
+        
+        
+        """
+        ...
+
 
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.hipparchus.util")``.
 
+    AbstractUnscentedTransform: typing.Type[AbstractUnscentedTransform]
     ArithmeticUtils: typing.Type[ArithmeticUtils]
     BigReal: typing.Type[BigReal]
     BigRealField: typing.Type[BigRealField]
@@ -4860,9 +5188,11 @@ class __module_protocol__(typing.Protocol):
     IterationEvent: typing.Type[IterationEvent]
     IterationListener: typing.Type[IterationListener]
     IterationManager: typing.Type[IterationManager]
+    JulierUnscentedTransform: typing.Type[JulierUnscentedTransform]
     KthSelector: typing.Type[KthSelector]
     MathArrays: typing.Type[MathArrays]
     MathUtils: typing.Type[MathUtils]
+    MerweUnscentedTransform: typing.Type[MerweUnscentedTransform]
     MultidimensionalCounter: typing.Type[MultidimensionalCounter]
     OpenIntToDoubleHashMap: typing.Type[OpenIntToDoubleHashMap]
     OpenIntToFieldHashMap: typing.Type[OpenIntToFieldHashMap]
@@ -4870,7 +5200,9 @@ class __module_protocol__(typing.Protocol):
     PivotingStrategy: typing.Type[PivotingStrategy]
     Precision: typing.Type[Precision]
     ResizableDoubleArray: typing.Type[ResizableDoubleArray]
+    RosenNumberPartitionIterator: typing.Type[RosenNumberPartitionIterator]
     RyuDouble: typing.Type[RyuDouble]
     SinCos: typing.Type[SinCos]
     SinhCosh: typing.Type[SinhCosh]
     Tuple: typing.Type[Tuple]
+    UnscentedTransformProvider: typing.Type[UnscentedTransformProvider]

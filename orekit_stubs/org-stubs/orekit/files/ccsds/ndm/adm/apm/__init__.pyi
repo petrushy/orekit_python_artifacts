@@ -20,7 +20,7 @@ import typing
 
 class Apm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.section.Header, org.orekit.files.ccsds.section.Segment[org.orekit.files.ccsds.ndm.adm.AdmMetadata, 'ApmData']]):
     """
-    public class Apm extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.section.Header`,:class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.adm.AdmMetadata`,:class:`~org.orekit.files.ccsds.ndm.adm.apm.ApmData`>>
+    public class Apm extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.section.Header`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.adm.AdmMetadata`, :class:`~org.orekit.files.ccsds.ndm.adm.apm.ApmData`>>
     
         This class stores all the information of the Attitude Parameter Message (APM) File parsed by APMParser. It contains the
         header and the metadata and a the data lines.
@@ -215,7 +215,7 @@ class ApmData(org.orekit.files.ccsds.section.Data):
 
 class ApmParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Apm, 'ApmParser']):
     """
-    public class ApmParser extends :class:`~org.orekit.files.ccsds.ndm.adm.AdmParser`<:class:`~org.orekit.files.ccsds.ndm.adm.apm.Apm`,:class:`~org.orekit.files.ccsds.ndm.adm.apm.ApmParser`>
+    public class ApmParser extends :class:`~org.orekit.files.ccsds.ndm.adm.AdmParser`<:class:`~org.orekit.files.ccsds.ndm.adm.apm.Apm`, :class:`~org.orekit.files.ccsds.ndm.adm.apm.ApmParser`>
     
         A parser for the CCSDS APM (Attitude Parameter Message).
     
@@ -591,7 +591,7 @@ class ApmQuaternionKey(java.lang.Enum['ApmQuaternionKey']):
 
 class ApmWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[org.orekit.files.ccsds.section.Header, org.orekit.files.ccsds.section.Segment[org.orekit.files.ccsds.ndm.adm.AdmMetadata, ApmData], Apm]):
     """
-    public class ApmWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.section.Header`,:class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.adm.AdmMetadata`,:class:`~org.orekit.files.ccsds.ndm.adm.apm.ApmData`>,:class:`~org.orekit.files.ccsds.ndm.adm.apm.Apm`>
+    public class ApmWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.section.Header`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.adm.AdmMetadata`, :class:`~org.orekit.files.ccsds.ndm.adm.apm.ApmData`>, :class:`~org.orekit.files.ccsds.ndm.adm.apm.Apm`>
     
         Writer for CCSDS Orbit Parameter Message.
     

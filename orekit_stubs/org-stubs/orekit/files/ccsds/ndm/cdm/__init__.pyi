@@ -5,6 +5,7 @@ import org.hipparchus.linear
 import org.orekit.data
 import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
+import org.orekit.files.ccsds.ndm.odm
 import org.orekit.files.ccsds.ndm.odm.ocm
 import org.orekit.files.ccsds.section
 import org.orekit.files.ccsds.utils
@@ -18,9 +19,249 @@ import typing
 
 
 
-class AdditionalParameters(org.orekit.files.ccsds.section.CommentsContainer):
+class AdditionalCovarianceMetadata(org.orekit.files.ccsds.section.CommentsContainer):
     """
-    public class AdditionalParameters extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+    public class AdditionalCovarianceMetadata extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+    
+        Container for the additional covariance metadata (optional).
+    """
+    def __init__(self): ...
+    def getDcpSensitivityVectorPosition(self) -> typing.List[float]:
+        """
+            Get the DCP sensitivity vector (position errors at TCA).
+        
+            Returns:
+                the dcpSensitivityVectorPosition
+        
+        
+        """
+        ...
+    def getDcpSensitivityVectorVelocity(self) -> typing.List[float]:
+        """
+            Get the DCP sensitivity vector (velocity errors at TCA).
+        
+            Returns:
+                the dcpSensitivityVectorVelocity
+        
+        
+        """
+        ...
+    def getDensityForecastUncertainty(self) -> float:
+        """
+            Get the atmospheric density forecast error.
+        
+            Returns:
+                densityForecastUncertainty
+        
+        
+        """
+        ...
+    def getScreeningDataSource(self) -> str:
+        """
+            Get the source (or origin) of the specific orbital data for this object.
+        
+            Returns:
+                the screeningDataSource
+        
+        
+        """
+        ...
+    def getcScaleFactor(self) -> float:
+        """
+            Get the (median) suggested covariance scale factor.
+        
+            Returns:
+                the cScaleFactor
+        
+        
+        """
+        ...
+    def getcScaleFactorMax(self) -> float:
+        """
+            Get the maximum suggested covariance scale factor.
+        
+            Returns:
+                the cScaleFactorMax
+        
+        
+        """
+        ...
+    def getcScaleFactorMin(self) -> float:
+        """
+            Get the minimum suggested covariance scale factor.
+        
+            Returns:
+                the cScaleFactorMin
+        
+        
+        """
+        ...
+    def setDcpSensitivityVectorPosition(self, doubleArray: typing.List[float]) -> None:
+        """
+            Set the DCP sensitivity vector (position errors at TCA).
+        
+            Parameters:
+                dcpSensitivityVectorPosition (double[]): the dcpSensitivityVectorPosition to set
+        
+        
+        """
+        ...
+    def setDcpSensitivityVectorVelocity(self, doubleArray: typing.List[float]) -> None:
+        """
+            Set the DCP sensitivity vector (velocity errors at TCA).
+        
+            Parameters:
+                dcpSensitivityVectorVelocity (double[]): the dcpSensitivityVectorVelocity to set
+        
+        
+        """
+        ...
+    def setDensityForecastUncertainty(self, double: float) -> None:
+        """
+            Set the atmospheric density forecast error.
+        
+            Parameters:
+                densityForecastUncertainty (double): the cScaleFactorMax to set
+        
+        
+        """
+        ...
+    def setScreeningDataSource(self, string: str) -> None:
+        """
+            Set the source (or origin) of the specific orbital data for this object.
+        
+            Parameters:
+                screeningDataSource (String): the screeningDataSource to set
+        
+        
+        """
+        ...
+    def setcScaleFactor(self, double: float) -> None:
+        """
+            Set the (median) suggested covariance scale factor.
+        
+            Parameters:
+                cScaleFactor (double): the cScaleFactor to set
+        
+        
+        """
+        ...
+    def setcScaleFactorMax(self, double: float) -> None:
+        """
+            set the maximum suggested covariance scale factor.
+        
+            Parameters:
+                cScaleFactorMax (double): the cScaleFactorMax to set
+        
+        
+        """
+        ...
+    def setcScaleFactorMin(self, double: float) -> None:
+        """
+            Set the minimum suggested covariance scale factor.
+        
+            Parameters:
+                cScaleFactorMin (double): the cScaleFactorMin to set
+        
+        
+        """
+        ...
+    def validate(self, double: float) -> None:
+        """
+            Check is all mandatory entries have been initialized.
+        
+            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        
+            Specified by:
+                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
+        
+            Overrides:
+                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate`Â in
+                classÂ :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+        
+            Parameters:
+                version (double): format version
+        
+        
+        """
+        ...
+
+class AdditionalCovarianceMetadataKey(java.lang.Enum['AdditionalCovarianceMetadataKey']):
+    """
+    public enum AdditionalCovarianceMetadataKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.cdm.AdditionalCovarianceMetadataKey`>
+    
+        Keys for :class:`~org.orekit.files.ccsds.ndm.cdm.AdditionalCovarianceMetadata` entries.
+    """
+    COMMENT: typing.ClassVar['AdditionalCovarianceMetadataKey'] = ...
+    DENSITY_FORECAST_UNCERTAINTY: typing.ClassVar['AdditionalCovarianceMetadataKey'] = ...
+    CSCALE_FACTOR_MIN: typing.ClassVar['AdditionalCovarianceMetadataKey'] = ...
+    CSCALE_FACTOR: typing.ClassVar['AdditionalCovarianceMetadataKey'] = ...
+    CSCALE_FACTOR_MAX: typing.ClassVar['AdditionalCovarianceMetadataKey'] = ...
+    SCREENING_DATA_SOURCE: typing.ClassVar['AdditionalCovarianceMetadataKey'] = ...
+    DCP_SENSITIVITY_VECTOR_POSITION: typing.ClassVar['AdditionalCovarianceMetadataKey'] = ...
+    DCP_SENSITIVITY_VECTOR_VELOCITY: typing.ClassVar['AdditionalCovarianceMetadataKey'] = ...
+    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, additionalCovarianceMetadata: AdditionalCovarianceMetadata) -> bool:
+        """
+            Process one token.
+        
+            Parameters:
+                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
+                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
+                container (:class:`~org.orekit.files.ccsds.ndm.cdm.AdditionalCovarianceMetadata`): container to fill
+        
+            Returns:
+                true of token was accepted
+        
+        
+        """
+        ...
+    _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
+    @typing.overload
+    @staticmethod
+    def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
+    @typing.overload
+    @staticmethod
+    def valueOf(string: str) -> 'AdditionalCovarianceMetadataKey':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (String): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                : if this enum type has no constant with the specified name
+                : if the argument is null
+        
+        
+        """
+        ...
+    @staticmethod
+    def values() -> typing.List['AdditionalCovarianceMetadataKey']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            
+            for (AdditionalCovarianceMetadataKey c : AdditionalCovarianceMetadataKey.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
+
+class AdditionalParameters(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
+    """
+    public class AdditionalParameters extends :class:`~org.orekit.files.ccsds.ndm.CommonPhysicalProperties`
     
         Container for additional parameters data block.
     
@@ -28,6 +269,16 @@ class AdditionalParameters(org.orekit.files.ccsds.section.CommentsContainer):
             11.2
     """
     def __init__(self): ...
+    def getApoapsisAltitude(self) -> float:
+        """
+            Get the distance of the furthest point in the objects orbit above the equatorial radius of the central body.
+        
+            Returns:
+                the apoapsisAltitude
+        
+        
+        """
+        ...
     def getAreaDRG(self) -> float:
         """
             Get the effective area of the object exposed to atmospheric drag.
@@ -44,6 +295,26 @@ class AdditionalParameters(org.orekit.files.ccsds.section.CommentsContainer):
         
             Returns:
                 the object area (in mÂ²)
+        
+        
+        """
+        ...
+    def getAreaPCMax(self) -> float:
+        """
+            Get the maximum area of the object to be used to compute the collision probability.
+        
+            Returns:
+                the areaPCMax
+        
+        
+        """
+        ...
+    def getAreaPCMin(self) -> float:
+        """
+            Set the minimum area of the object to be used to compute the collision probability.
+        
+            Returns:
+                the areaPCMin
         
         
         """
@@ -78,12 +349,62 @@ class AdditionalParameters(org.orekit.files.ccsds.section.CommentsContainer):
         
         """
         ...
+    def getCovConfidence(self) -> float:
+        """
+            Get the measure of the confidence in the covariance errors matching reality.
+        
+            Returns:
+                the covConfidence
+        
+        
+        """
+        ...
+    def getCovConfidenceMethod(self) -> str:
+        """
+            Get the method used for the calculation of COV_CONFIDENCE.
+        
+            Returns:
+                the covConfidenceMethod
+        
+        
+        """
+        ...
+    def getHbr(self) -> float:
+        """
+            Get the object hard body radius.
+        
+            Returns:
+                the object hard body radius.
+        
+        
+        """
+        ...
+    def getInclination(self) -> float:
+        """
+            Get the angle between the objects orbit plane and the orbit centers equatorial plane.
+        
+            Returns:
+                the inclination
+        
+        
+        """
+        ...
     def getMass(self) -> float:
         """
             Get the mass of the object.
         
             Returns:
                 the mass (in kg) of the object
+        
+        
+        """
+        ...
+    def getPeriapsissAltitude(self) -> float:
+        """
+            Get the distance of the closest point in the objects orbit above the equatorial radius of the central body.
+        
+            Returns:
+                the periapsissAltitude
         
         
         """
@@ -109,6 +430,16 @@ class AdditionalParameters(org.orekit.files.ccsds.section.CommentsContainer):
         
         """
         ...
+    def setApoapsisAltitude(self, double: float) -> None:
+        """
+            Set the distance of the furthest point in the objects orbit above the equatorial radius of the central body.
+        
+            Parameters:
+                apoapsisAltitude (double): the apoapsisHeight to set
+        
+        
+        """
+        ...
     def setAreaDRG(self, double: float) -> None:
         """
             Set the effective area of the object exposed to atmospheric drag.
@@ -125,6 +456,26 @@ class AdditionalParameters(org.orekit.files.ccsds.section.CommentsContainer):
         
             Parameters:
                 areaPC (double): area (in mÂ²) value to be set
+        
+        
+        """
+        ...
+    def setAreaPCMax(self, double: float) -> None:
+        """
+            Set the maximum area for the object to be used to compute the collision probability.
+        
+            Parameters:
+                areaPCMax (double): the areaPCMax to set
+        
+        
+        """
+        ...
+    def setAreaPCMin(self, double: float) -> None:
+        """
+            Get the minimum area of the object to be used to compute the collision probability.
+        
+            Parameters:
+                areaPCMin (double): the areaPCMin to set
         
         
         """
@@ -159,12 +510,62 @@ class AdditionalParameters(org.orekit.files.ccsds.section.CommentsContainer):
         
         """
         ...
+    def setCovConfidence(self, double: float) -> None:
+        """
+            Set the measure of the confidence in the covariance errors matching reality.
+        
+            Parameters:
+                covConfidence (double): the covConfidence to set
+        
+        
+        """
+        ...
+    def setCovConfidenceMethod(self, string: str) -> None:
+        """
+            Set the method used for the calculation of COV_CONFIDENCE.
+        
+            Parameters:
+                covConfidenceMethod (String): the covConfidenceMethod to set
+        
+        
+        """
+        ...
+    def setHbr(self, double: float) -> None:
+        """
+            Set the object hard body radius.
+        
+            Parameters:
+                hbr (double): the object hard body radius.
+        
+        
+        """
+        ...
+    def setInclination(self, double: float) -> None:
+        """
+            Set the angle between the objects orbit plane and the orbit centers equatorial plane.
+        
+            Parameters:
+                inclination (double): the inclination to set
+        
+        
+        """
+        ...
     def setMass(self, double: float) -> None:
         """
             Set the mass of the object.
         
             Parameters:
                 mass (double): mass (in kg) of the object to be set
+        
+        
+        """
+        ...
+    def setPeriapsissAltitude(self, double: float) -> None:
+        """
+            Set the distance of the closest point in the objects orbit above the equatorial radius of the central body.
+        
+            Parameters:
+                periapsissAltitude (double): the periapsissHeight to set
         
         
         """
@@ -200,8 +601,8 @@ class AdditionalParameters(org.orekit.files.ccsds.section.CommentsContainer):
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+                :meth:`~org.orekit.files.ccsds.ndm.CommonPhysicalProperties.validate`Â in
+                classÂ :class:`~org.orekit.files.ccsds.ndm.CommonPhysicalProperties`
         
             Parameters:
                 version (double): format version
@@ -221,13 +622,41 @@ class AdditionalParametersKey(java.lang.Enum['AdditionalParametersKey']):
     """
     COMMENT: typing.ClassVar['AdditionalParametersKey'] = ...
     AREA_PC: typing.ClassVar['AdditionalParametersKey'] = ...
+    AREA_PC_MIN: typing.ClassVar['AdditionalParametersKey'] = ...
+    AREA_PC_MAX: typing.ClassVar['AdditionalParametersKey'] = ...
     AREA_DRG: typing.ClassVar['AdditionalParametersKey'] = ...
     AREA_SRP: typing.ClassVar['AdditionalParametersKey'] = ...
+    OEB_PARENT_FRAME: typing.ClassVar['AdditionalParametersKey'] = ...
+    OEB_PARENT_FRAME_EPOCH: typing.ClassVar['AdditionalParametersKey'] = ...
+    OEB_Q1: typing.ClassVar['AdditionalParametersKey'] = ...
+    OEB_Q2: typing.ClassVar['AdditionalParametersKey'] = ...
+    OEB_Q3: typing.ClassVar['AdditionalParametersKey'] = ...
+    OEB_QC: typing.ClassVar['AdditionalParametersKey'] = ...
+    OEB_MAX: typing.ClassVar['AdditionalParametersKey'] = ...
+    OEB_INT: typing.ClassVar['AdditionalParametersKey'] = ...
+    OEB_MIN: typing.ClassVar['AdditionalParametersKey'] = ...
+    AREA_ALONG_OEB_MAX: typing.ClassVar['AdditionalParametersKey'] = ...
+    AREA_ALONG_OEB_INT: typing.ClassVar['AdditionalParametersKey'] = ...
+    AREA_ALONG_OEB_MIN: typing.ClassVar['AdditionalParametersKey'] = ...
+    RCS: typing.ClassVar['AdditionalParametersKey'] = ...
+    RCS_MIN: typing.ClassVar['AdditionalParametersKey'] = ...
+    RCS_MAX: typing.ClassVar['AdditionalParametersKey'] = ...
+    VM_ABSOLUTE: typing.ClassVar['AdditionalParametersKey'] = ...
+    VM_APPARENT_MIN: typing.ClassVar['AdditionalParametersKey'] = ...
+    VM_APPARENT: typing.ClassVar['AdditionalParametersKey'] = ...
+    VM_APPARENT_MAX: typing.ClassVar['AdditionalParametersKey'] = ...
+    REFLECTANCE: typing.ClassVar['AdditionalParametersKey'] = ...
     MASS: typing.ClassVar['AdditionalParametersKey'] = ...
+    HBR: typing.ClassVar['AdditionalParametersKey'] = ...
     CD_AREA_OVER_MASS: typing.ClassVar['AdditionalParametersKey'] = ...
     CR_AREA_OVER_MASS: typing.ClassVar['AdditionalParametersKey'] = ...
     THRUST_ACCELERATION: typing.ClassVar['AdditionalParametersKey'] = ...
     SEDR: typing.ClassVar['AdditionalParametersKey'] = ...
+    APOAPSIS_ALTITUDE: typing.ClassVar['AdditionalParametersKey'] = ...
+    PERIAPSIS_ALTITUDE: typing.ClassVar['AdditionalParametersKey'] = ...
+    INCLINATION: typing.ClassVar['AdditionalParametersKey'] = ...
+    COV_CONFIDENCE: typing.ClassVar['AdditionalParametersKey'] = ...
+    COV_CONFIDENCE_METHOD: typing.ClassVar['AdditionalParametersKey'] = ...
     def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, additionalParameters: AdditionalParameters) -> bool:
         """
             Process one token.
@@ -298,9 +727,61 @@ class AdditionalParametersWriter(org.orekit.files.ccsds.section.AbstractWriter):
     """
     ...
 
+class AltCovarianceType(java.lang.Enum['AltCovarianceType']):
+    """
+    public enum AltCovarianceType extends Enum<:class:`~org.orekit.files.ccsds.ndm.cdm.AltCovarianceType`>
+    
+        Flag indicating the type of alternate covariance information provided.
+    """
+    XYZ: typing.ClassVar['AltCovarianceType'] = ...
+    CSIG3EIGVEC3: typing.ClassVar['AltCovarianceType'] = ...
+    _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
+    @typing.overload
+    @staticmethod
+    def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
+    @typing.overload
+    @staticmethod
+    def valueOf(string: str) -> 'AltCovarianceType':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (String): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                : if this enum type has no constant with the specified name
+                : if the argument is null
+        
+        
+        """
+        ...
+    @staticmethod
+    def values() -> typing.List['AltCovarianceType']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            
+            for (AltCovarianceType c : AltCovarianceType.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
+
 class Cdm(org.orekit.files.ccsds.ndm.NdmConstituent['CdmHeader', 'CdmSegment']):
     """
-    public class Cdm extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.ndm.cdm.CdmHeader`,:class:`~org.orekit.files.ccsds.ndm.cdm.CdmSegment`>
+    public class Cdm extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.ndm.cdm.CdmHeader`, :class:`~org.orekit.files.ccsds.ndm.cdm.CdmSegment`>
     
         This class stores all the information of the Conjunction Data Message (CDM) File parsed by CdmParser. It contains the
         header and a list of segments each containing metadata and a list of data lines.
@@ -381,6 +862,18 @@ class Cdm(org.orekit.files.ccsds.ndm.NdmConstituent['CdmHeader', 'CdmSegment']):
         
         """
         ...
+    def getUserDefinedParameters(self) -> org.orekit.files.ccsds.ndm.odm.UserDefined:
+        """
+            Get user defined parameters.
+        
+            This method will return null if the user defined block is not present in the CDM
+        
+            Returns:
+                file data
+        
+        
+        """
+        ...
 
 class CdmData(org.orekit.files.ccsds.section.Data):
     """
@@ -391,7 +884,26 @@ class CdmData(org.orekit.files.ccsds.section.Data):
         Since:
             11.2
     """
+    @typing.overload
     def __init__(self, commentsContainer: org.orekit.files.ccsds.section.CommentsContainer, oDParameters: 'ODParameters', additionalParameters: AdditionalParameters, stateVector: 'StateVector', rTNCovariance: 'RTNCovariance'): ...
+    @typing.overload
+    def __init__(self, commentsContainer: org.orekit.files.ccsds.section.CommentsContainer, oDParameters: 'ODParameters', additionalParameters: AdditionalParameters, stateVector: 'StateVector', rTNCovariance: 'RTNCovariance', additionalCovarianceMetadata: AdditionalCovarianceMetadata): ...
+    @typing.overload
+    def __init__(self, commentsContainer: org.orekit.files.ccsds.section.CommentsContainer, oDParameters: 'ODParameters', additionalParameters: AdditionalParameters, stateVector: 'StateVector', rTNCovariance: 'RTNCovariance', sigmaEigenvectorsCovariance: 'SigmaEigenvectorsCovariance', additionalCovarianceMetadata: AdditionalCovarianceMetadata): ...
+    @typing.overload
+    def __init__(self, commentsContainer: org.orekit.files.ccsds.section.CommentsContainer, oDParameters: 'ODParameters', additionalParameters: AdditionalParameters, stateVector: 'StateVector', rTNCovariance: 'RTNCovariance', xYZCovariance: 'XYZCovariance', additionalCovarianceMetadata: AdditionalCovarianceMetadata): ...
+    def getAdditionalCovMetadataBlock(self) -> AdditionalCovarianceMetadata:
+        """
+            Get the additional covariance metadata logical block.
+        
+            This method will return null if the block is not defined in the CDM.
+        
+            Returns:
+                the additional covariance metadata logical block
+        
+        
+        """
+        ...
     def getAdditionalParametersBlock(self) -> AdditionalParameters:
         """
             Get the additional parameters logical block.
@@ -435,12 +947,67 @@ class CdmData(org.orekit.files.ccsds.section.Data):
         
         """
         ...
+    def getSig3Eigvec3CovarianceBlock(self) -> 'SigmaEigenvectorsCovariance':
+        """
+            Get the Sigma / Eigenvector covariance logical block.
+        
+            This block is not mandatory and on condition that :meth:`~org.orekit.files.ccsds.ndm.cdm.CdmMetadataKey.ALT_COV_TYPE` =
+            :meth:`~org.orekit.files.ccsds.ndm.cdm.AltCovarianceType.CSIG3EIGVEC3`.
+        
+            This method will return null if the block is not defined in the CDM.
+        
+            Returns:
+                the Sigma / Eigenvector covariance block
+        
+        
+        """
+        ...
     def getStateVectorBlock(self) -> 'StateVector':
         """
             Get the state vector logical block.
         
             Returns:
                 state vector block
+        
+        
+        """
+        ...
+    def getUserDefinedBlock(self) -> org.orekit.files.ccsds.ndm.odm.UserDefined:
+        """
+            Get the user defined logical block.
+        
+            This method will return null if the block is not defined in the CDM.
+        
+            Returns:
+                the additional covariance metadata logical block
+        
+        
+        """
+        ...
+    def getXYZCovarianceBlock(self) -> 'XYZCovariance':
+        """
+            Get the Covariance Matrix in the XYZ Coordinate Frame (defined by value of
+            :meth:`~org.orekit.files.ccsds.ndm.cdm.CdmMetadataKey.ALT_COV_REF_FRAME`).
+        
+            This block is not mandatory and on condition that :meth:`~org.orekit.files.ccsds.ndm.cdm.CdmMetadataKey.ALT_COV_TYPE` =
+            :meth:`~org.orekit.files.ccsds.ndm.cdm.AltCovarianceType.XYZ`.
+        
+            This method will return null if the block is not defined in the CDM.
+        
+            Returns:
+                XYZ covariance matrix block
+        
+        
+        """
+        ...
+    def setUserDefinedBlock(self, userDefined: org.orekit.files.ccsds.ndm.odm.UserDefined) -> None:
+        """
+            Set the user defined logical block.
+        
+            This block is added at the end of the CDM parsing as common to both Object 1 and 2.
+        
+            Parameters:
+                userDefinedBlock (:class:`~org.orekit.files.ccsds.ndm.odm.UserDefined`): the user defined block to set
         
         
         """
@@ -471,12 +1038,32 @@ class CdmHeader(org.orekit.files.ccsds.section.Header):
             11.2
     """
     def __init__(self, double: float): ...
+    def getClassification(self) -> str:
+        """
+            Get the classification or caveats text message of this CDM.
+        
+            Returns:
+                the classification
+        
+        
+        """
+        ...
     def getMessageFor(self) -> str:
         """
             Get the spacecraft name for which the CDM is provided stored in MESSAGE_FOR key.
         
             Returns:
                 messageFor the spacecraft name for which the CDM is provided.
+        
+        
+        """
+        ...
+    def setClassification(self, string: str) -> None:
+        """
+            Set the classification or caveats text message of this CDM.
+        
+            Parameters:
+                classification (String): the classification to set
         
         
         """
@@ -520,6 +1107,7 @@ class CdmHeaderKey(java.lang.Enum['CdmHeaderKey']):
             11.2
     """
     MESSAGE_FOR: typing.ClassVar['CdmHeaderKey'] = ...
+    CLASSIFICATION: typing.ClassVar['CdmHeaderKey'] = ...
     def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, cdmHeader: CdmHeader) -> bool:
         """
             Process an token.
@@ -609,7 +1197,7 @@ class CdmHeaderProcessingState(org.orekit.files.ccsds.utils.parsing.ProcessingSt
 
 class CdmMessageWriter(org.orekit.files.ccsds.utils.generation.MessageWriter[CdmHeader, 'CdmSegment', Cdm]):
     """
-    public abstract class CdmMessageWriter extends Object implements :class:`~org.orekit.files.ccsds.utils.generation.MessageWriter`<:class:`~org.orekit.files.ccsds.ndm.cdm.CdmHeader`,:class:`~org.orekit.files.ccsds.ndm.cdm.CdmSegment`,:class:`~org.orekit.files.ccsds.ndm.cdm.Cdm`>
+    public abstract class CdmMessageWriter extends Object implements :class:`~org.orekit.files.ccsds.utils.generation.MessageWriter`<:class:`~org.orekit.files.ccsds.ndm.cdm.CdmHeader`, :class:`~org.orekit.files.ccsds.ndm.cdm.CdmSegment`, :class:`~org.orekit.files.ccsds.ndm.cdm.Cdm`>
     
         Cdm message writer.
     
@@ -684,6 +1272,36 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
             11.2
     """
     def __init__(self): ...
+    def getAdmMsgLink(self) -> str:
+        """
+            Get the unique identifier of Attitude Data Message(s) that are linked (relevant) to this Conjunction Data Message.
+        
+            Returns:
+                the admMsgLink
+        
+        
+        """
+        ...
+    def getAltCovRefFrame(self) -> org.orekit.files.ccsds.definitions.FrameFacade:
+        """
+            Get the value of :code:`ALT_COV_REF_FRAME` as an Orekit :class:`~org.orekit.frames.Frame`.
+        
+            Returns:
+                the reference frame
+        
+        
+        """
+        ...
+    def getAltCovType(self) -> AltCovarianceType:
+        """
+            Get the flag indicating the type of alternate covariance information provided.
+        
+            Returns:
+                the altCovType
+        
+        
+        """
+        ...
     def getAtmosphericModel(self) -> str:
         """
             Get name of atmospheric model.
@@ -710,6 +1328,16 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
         
             Returns:
                 the name of covariance calculation method
+        
+        
+        """
+        ...
+    def getCovarianceSource(self) -> str:
+        """
+            Get the source of the covariance data.
+        
+            Returns:
+                the covarianceSource
         
         
         """
@@ -846,6 +1474,27 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
         
         """
         ...
+    def getObsBeforeNextMessage(self) -> org.orekit.files.ccsds.definitions.YesNoUnknown:
+        """
+            Get the flag indicating whether new tracking observations are anticipated prior to the issue of the next CDM associated
+            with the event specified by CONJUNCTION_ID.
+        
+            Returns:
+                the obsBeforeNextMessage
+        
+        
+        """
+        ...
+    def getOdmMsgLink(self) -> str:
+        """
+            Get the unique identifier of Orbit Data Message(s) that are linked (relevant) to this Conjunction Data Message.
+        
+            Returns:
+                the odmMsgLink
+        
+        
+        """
+        ...
     def getOperatorContactPosition(self) -> str:
         """
             Get the contact position of the owner / operator of the object.
@@ -927,6 +1576,36 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
         
         """
         ...
+    def setAdmMsgLink(self, string: str) -> None:
+        """
+            Set the unique identifier of Attitude Data Message(s) that are linked (relevant) to this Conjunction Data Message.
+        
+            Parameters:
+                admMsgLink (String): the admMsgLink to set
+        
+        
+        """
+        ...
+    def setAltCovRefFrame(self, frameFacade: org.orekit.files.ccsds.definitions.FrameFacade) -> None:
+        """
+            Set the name of the reference frame in which the alternate covariance data are given.
+        
+            Parameters:
+                altCovRefFrame (:class:`~org.orekit.files.ccsds.definitions.FrameFacade`): alternate covariance reference frame
+        
+        
+        """
+        ...
+    def setAltCovType(self, altCovarianceType: AltCovarianceType) -> None:
+        """
+            Set the flag indicating the type of alternate covariance information provided.
+        
+            Parameters:
+                altCovType (:class:`~org.orekit.files.ccsds.ndm.cdm.AltCovarianceType`): the altCovType to set
+        
+        
+        """
+        ...
     def setAtmosphericModel(self, string: str) -> None:
         """
             Set name of atmospheric model.
@@ -953,6 +1632,16 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
         
             Parameters:
                 covarianceMethod (:class:`~org.orekit.files.ccsds.ndm.cdm.CovarianceMethod`): method name for covariance calculation
+        
+        
+        """
+        ...
+    def setCovarianceSource(self, string: str) -> None:
+        """
+            Set the source of the covariance data.
+        
+            Parameters:
+                covarianceSource (String): the covarianceSource to set
         
         
         """
@@ -1056,6 +1745,27 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
         
             Parameters:
                 objectType (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.ObjectType`): type of object
+        
+        
+        """
+        ...
+    def setObsBeforeNextMessage(self, yesNoUnknown: org.orekit.files.ccsds.definitions.YesNoUnknown) -> None:
+        """
+            Set the flag indicating whether new tracking observations are anticipated prior to the issue of the next CDM associated
+            with the event specified by CONJUNCTION_ID.
+        
+            Parameters:
+                obsBeforeNextMessage (:class:`~org.orekit.files.ccsds.definitions.YesNoUnknown`): the obsBeforeNextMessage to set
+        
+        
+        """
+        ...
+    def setOdmMsgLink(self, string: str) -> None:
+        """
+            Set the unique identifier of Orbit Data Message(s) that are linked (relevant) to this Conjunction Data Message.
+        
+            Parameters:
+                odmMsgLink (String): the odmMsgLink to set
         
         
         """
@@ -1178,11 +1888,17 @@ class CdmMetadataKey(java.lang.Enum['CdmMetadataKey']):
     OPERATOR_ORGANIZATION: typing.ClassVar['CdmMetadataKey'] = ...
     OPERATOR_PHONE: typing.ClassVar['CdmMetadataKey'] = ...
     OPERATOR_EMAIL: typing.ClassVar['CdmMetadataKey'] = ...
+    ODM_MSG_LINK: typing.ClassVar['CdmMetadataKey'] = ...
+    ADM_MSG_LINK: typing.ClassVar['CdmMetadataKey'] = ...
     EPHEMERIS_NAME: typing.ClassVar['CdmMetadataKey'] = ...
+    OBS_BEFORE_NEXT_MESSAGE: typing.ClassVar['CdmMetadataKey'] = ...
     COVARIANCE_METHOD: typing.ClassVar['CdmMetadataKey'] = ...
+    COVARIANCE_SOURCE: typing.ClassVar['CdmMetadataKey'] = ...
     MANEUVERABLE: typing.ClassVar['CdmMetadataKey'] = ...
     ORBIT_CENTER: typing.ClassVar['CdmMetadataKey'] = ...
     REF_FRAME: typing.ClassVar['CdmMetadataKey'] = ...
+    ALT_COV_TYPE: typing.ClassVar['CdmMetadataKey'] = ...
+    ALT_COV_REF_FRAME: typing.ClassVar['CdmMetadataKey'] = ...
     GRAVITY_MODEL: typing.ClassVar['CdmMetadataKey'] = ...
     ATMOSPHERIC_MODEL: typing.ClassVar['CdmMetadataKey'] = ...
     N_BODY_PERTURBATIONS: typing.ClassVar['CdmMetadataKey'] = ...
@@ -1261,7 +1977,7 @@ class CdmMetadataWriter(org.orekit.files.ccsds.section.AbstractWriter):
 
 class CdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[Cdm, 'CdmParser']):
     """
-    public class CdmParser extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<:class:`~org.orekit.files.ccsds.ndm.cdm.Cdm`,:class:`~org.orekit.files.ccsds.ndm.cdm.CdmParser`>
+    public class CdmParser extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<:class:`~org.orekit.files.ccsds.ndm.cdm.Cdm`, :class:`~org.orekit.files.ccsds.ndm.cdm.CdmParser`>
     
         Base class for Conjunction Data Message parsers.
     
@@ -1466,6 +2182,28 @@ class CdmRelativeMetadata:
         
         """
         ...
+    def checkScreenVolumeConditions(self) -> None: ...
+    def getApproachAngle(self) -> float:
+        """
+            Get the approach angle computed between Objects 1 and 2 in the RTN coordinate frame relative to object 1.
+        
+            Returns:
+                the approachAngle
+        
+        
+        """
+        ...
+    def getCollisionPercentile(self) -> typing.List[int]:
+        """
+            Get the array of 1 to n elements indicating the percentile(s) for which estimates of the collision probability are
+            provided in the COLLISION_PROBABILITY variable.
+        
+            Returns:
+                the collisionPercentile
+        
+        
+        """
+        ...
     def getCollisionProbaMethod(self) -> org.orekit.files.ccsds.definitions.PocMethodFacade:
         """
             Get the method that was used to calculate the collision probability.
@@ -1496,12 +2234,81 @@ class CdmRelativeMetadata:
         
         """
         ...
+    def getConjunctionId(self) -> str:
+        """
+            Get the Originatorâ€™s ID that uniquely identifies the conjunction to which the message refers.
+        
+            Returns:
+                the conjunction id
+        
+        
+        """
+        ...
+    def getMahalanobisDistance(self) -> float:
+        """
+            Get the Mahalanobis Distance. The length of the relative position vector, normalized to one-sigma dispersions of the
+            combined error covariance in the direction of the relative position vector.
+        
+            Returns:
+                the mahalanobisDistance
+        
+        
+        """
+        ...
+    def getMaxCollisionProbability(self) -> float:
+        """
+        
+            Returns:
+                the maxCollisionProbability
+        
+        
+        """
+        ...
+    def getMaxCollisionProbabilityMethod(self) -> org.orekit.files.ccsds.definitions.PocMethodFacade:
+        """
+        
+            Returns:
+                the maxCollisionProbabilityMethod
+        
+        
+        """
+        ...
     def getMissDistance(self) -> float:
         """
             Get the norm of relative position vector at TCA.
         
             Returns:
                 the miss distance (in m)
+        
+        
+        """
+        ...
+    def getNextMessageEpoch(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Get Scheduled UTC epoch of the next CDM associated with the event identified by CONJUNCTION_ID.
+        
+            Returns:
+                the nextMessageEpoch
+        
+        
+        """
+        ...
+    def getPreviousMessageEpoch(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Get the UTC epoch of the previous CDM issued for the event identified by CONJUNCTION_ID.
+        
+            Returns:
+                the previousMessageEpoch
+        
+        
+        """
+        ...
+    def getPreviousMessageId(self) -> str:
+        """
+            Get the ID of previous CDM issued for event identified by CONJUNCTION_ID.
+        
+            Returns:
+                the previousMessageId
         
         
         """
@@ -1558,12 +2365,41 @@ class CdmRelativeMetadata:
         
         """
         ...
+    def getScreenPcThreshold(self) -> float:
+        """
+            Get the collision probability screening threshold used to identify this conjunction.
+        
+            Returns:
+                the screenPcThreshold
+        
+        
+        """
+        ...
+    def getScreenType(self) -> 'ScreenType':
+        """
+            Get the type of screening to be used.
+        
+            Returns:
+                the screenType
+        
+        
+        """
+        ...
     def getScreenVolumeFrame(self) -> 'ScreenVolumeFrame':
         """
             Get the name of the Object1 centered reference frame in which the screening volume data are given.
         
             Returns:
                 name of screen volume frame
+        
+        
+        """
+        ...
+    def getScreenVolumeRadius(self) -> float:
+        """
+        
+            Returns:
+                the screenVolumeRadius
         
         
         """
@@ -1610,6 +2446,33 @@ class CdmRelativeMetadata:
         
         """
         ...
+    def getSefiCollisionProbability(self) -> float:
+        """
+        
+            Returns:
+                the sefiCollisionProbability
+        
+        
+        """
+        ...
+    def getSefiCollisionProbabilityMethod(self) -> org.orekit.files.ccsds.definitions.PocMethodFacade:
+        """
+        
+            Returns:
+                the sefiCollisionProbabilityMethod
+        
+        
+        """
+        ...
+    def getSefiFragmentationModel(self) -> str:
+        """
+        
+            Returns:
+                the sefiFragmentationModel
+        
+        
+        """
+        ...
     def getStartScreenPeriod(self) -> org.orekit.time.AbsoluteDate:
         """
             Get the start time in UTC of the screening period for the conjunction assessment.
@@ -1651,6 +2514,27 @@ class CdmRelativeMetadata:
         
         """
         ...
+    def setApproachAngle(self, double: float) -> None:
+        """
+            Set the approach angle computed between Objects 1 and 2 in the RTN coordinate frame relative to object 1.
+        
+            Parameters:
+                approachAngle (double): the approachAngle to set
+        
+        
+        """
+        ...
+    def setCollisionPercentile(self, intArray: typing.List[int]) -> None:
+        """
+            Set the array of 1 to n elements indicating the percentile(s) for which estimates of the collision probability are
+            provided in the COLLISION_PROBABILITY variable.
+        
+            Parameters:
+                collisionPercentile (int[]): the collisionPercentile to set
+        
+        
+        """
+        ...
     def setCollisionProbaMethod(self, pocMethodFacade: org.orekit.files.ccsds.definitions.PocMethodFacade) -> None:
         """
             Set the method that was used to calculate the collision probability.
@@ -1671,12 +2555,81 @@ class CdmRelativeMetadata:
         
         """
         ...
+    def setConjunctionId(self, string: str) -> None:
+        """
+            Set the Originatorâ€™s ID that uniquely identifies the conjunction to which the message refers.
+        
+            Parameters:
+                conjunctionId (String): the conjunction id to be set
+        
+        
+        """
+        ...
+    def setMahalanobisDistance(self, double: float) -> None:
+        """
+            Set the Mahalanobis Distance. The length of the relative position vector, normalized to one-sigma dispersions of the
+            combined error covariance in the direction of the relative position vector.
+        
+            Parameters:
+                mahalanobisDistance (double): the mahalanobisDistance to set
+        
+        
+        """
+        ...
+    def setMaxCollisionProbability(self, double: float) -> None:
+        """
+        
+            Parameters:
+                maxCollisionProbability (double): the maxCollisionProbability to set
+        
+        
+        """
+        ...
+    def setMaxCollisionProbabilityMethod(self, pocMethodFacade: org.orekit.files.ccsds.definitions.PocMethodFacade) -> None:
+        """
+        
+            Parameters:
+                pocMethodFacade (:class:`~org.orekit.files.ccsds.definitions.PocMethodFacade`): the maxCollisionProbabilityMethod to set
+        
+        
+        """
+        ...
     def setMissDistance(self, double: float) -> None:
         """
             Set the norm of relative position vector at TCA.
         
             Parameters:
                 missDistance (double): the miss distance to be set (in m)
+        
+        
+        """
+        ...
+    def setNextMessageEpoch(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+        """
+            Set Scheduled UTC epoch of the next CDM associated with the event identified by CONJUNCTION_ID.
+        
+            Parameters:
+                nextMessageEpoch (:class:`~org.orekit.time.AbsoluteDate`): the nextMessageEpoch to set
+        
+        
+        """
+        ...
+    def setPreviousMessageEpoch(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+        """
+            Set the UTC epoch of the previous CDM issued for the event identified by CONJUNCTION_ID.
+        
+            Parameters:
+                previousMessageEpoch (:class:`~org.orekit.time.AbsoluteDate`): the previousMessageEpoch to set
+        
+        
+        """
+        ...
+    def setPreviousMessageId(self, string: str) -> None:
+        """
+            Set the ID of previous CDM issued for event identified by CONJUNCTION_ID.
+        
+            Parameters:
+                previousMessageId (String): the previousMessageId to set
         
         
         """
@@ -1771,12 +2724,41 @@ class CdmRelativeMetadata:
         
         """
         ...
+    def setScreenPcThreshold(self, double: float) -> None:
+        """
+            Set the collision probability screening threshold used to identify this conjunction.
+        
+            Parameters:
+                screenPcThreshold (double): the screenPcThreshold to set
+        
+        
+        """
+        ...
+    def setScreenType(self, screenType: 'ScreenType') -> None:
+        """
+            Set the type of screening to be used.
+        
+            Parameters:
+                screenType (:class:`~org.orekit.files.ccsds.ndm.cdm.ScreenType`): the screenType to set
+        
+        
+        """
+        ...
     def setScreenVolumeFrame(self, screenVolumeFrame: 'ScreenVolumeFrame') -> None:
         """
             Set the name of the Object1 centered reference frame in which the screening volume data are given.
         
             Parameters:
                 screenVolumeFrame (:class:`~org.orekit.files.ccsds.ndm.cdm.ScreenVolumeFrame`): name of screen volume frame
+        
+        
+        """
+        ...
+    def setScreenVolumeRadius(self, double: float) -> None:
+        """
+        
+            Parameters:
+                screenVolumeRadius (double): the screenVolumeRadius to set
         
         
         """
@@ -1819,6 +2801,33 @@ class CdmRelativeMetadata:
         
             Parameters:
                 screenVolumeZ (double): third component size of the screening volume (in m)
+        
+        
+        """
+        ...
+    def setSefiCollisionProbability(self, double: float) -> None:
+        """
+        
+            Parameters:
+                sefiCollisionProbability (double): the sefiCollisionProbability to set
+        
+        
+        """
+        ...
+    def setSefiCollisionProbabilityMethod(self, pocMethodFacade: org.orekit.files.ccsds.definitions.PocMethodFacade) -> None:
+        """
+        
+            Parameters:
+                pocMethodFacade (:class:`~org.orekit.files.ccsds.definitions.PocMethodFacade`): the sefiCollisionProbabilityMethod to set
+        
+        
+        """
+        ...
+    def setSefiFragmentationModel(self, string: str) -> None:
+        """
+        
+            Parameters:
+                sefiFragmentationModel (String): the sefiFragmentationModel to set
         
         
         """
@@ -1880,8 +2889,10 @@ class CdmRelativeMetadataKey(java.lang.Enum['CdmRelativeMetadataKey']):
         Since:
             11.2
     """
+    CONJUNCTION_ID: typing.ClassVar['CdmRelativeMetadataKey'] = ...
     TCA: typing.ClassVar['CdmRelativeMetadataKey'] = ...
     MISS_DISTANCE: typing.ClassVar['CdmRelativeMetadataKey'] = ...
+    MAHALANOBIS_DISTANCE: typing.ClassVar['CdmRelativeMetadataKey'] = ...
     RELATIVE_SPEED: typing.ClassVar['CdmRelativeMetadataKey'] = ...
     RELATIVE_POSITION_R: typing.ClassVar['CdmRelativeMetadataKey'] = ...
     RELATIVE_POSITION_T: typing.ClassVar['CdmRelativeMetadataKey'] = ...
@@ -1889,17 +2900,30 @@ class CdmRelativeMetadataKey(java.lang.Enum['CdmRelativeMetadataKey']):
     RELATIVE_VELOCITY_R: typing.ClassVar['CdmRelativeMetadataKey'] = ...
     RELATIVE_VELOCITY_T: typing.ClassVar['CdmRelativeMetadataKey'] = ...
     RELATIVE_VELOCITY_N: typing.ClassVar['CdmRelativeMetadataKey'] = ...
+    APPROACH_ANGLE: typing.ClassVar['CdmRelativeMetadataKey'] = ...
     START_SCREEN_PERIOD: typing.ClassVar['CdmRelativeMetadataKey'] = ...
     STOP_SCREEN_PERIOD: typing.ClassVar['CdmRelativeMetadataKey'] = ...
     SCREEN_VOLUME_FRAME: typing.ClassVar['CdmRelativeMetadataKey'] = ...
+    SCREEN_TYPE: typing.ClassVar['CdmRelativeMetadataKey'] = ...
     SCREEN_VOLUME_SHAPE: typing.ClassVar['CdmRelativeMetadataKey'] = ...
+    SCREEN_VOLUME_RADIUS: typing.ClassVar['CdmRelativeMetadataKey'] = ...
     SCREEN_VOLUME_X: typing.ClassVar['CdmRelativeMetadataKey'] = ...
     SCREEN_VOLUME_Y: typing.ClassVar['CdmRelativeMetadataKey'] = ...
     SCREEN_VOLUME_Z: typing.ClassVar['CdmRelativeMetadataKey'] = ...
     SCREEN_ENTRY_TIME: typing.ClassVar['CdmRelativeMetadataKey'] = ...
     SCREEN_EXIT_TIME: typing.ClassVar['CdmRelativeMetadataKey'] = ...
+    SCREEN_PC_THRESHOLD: typing.ClassVar['CdmRelativeMetadataKey'] = ...
+    COLLISION_PERCENTILE: typing.ClassVar['CdmRelativeMetadataKey'] = ...
     COLLISION_PROBABILITY: typing.ClassVar['CdmRelativeMetadataKey'] = ...
     COLLISION_PROBABILITY_METHOD: typing.ClassVar['CdmRelativeMetadataKey'] = ...
+    COLLISION_MAX_PROBABILITY: typing.ClassVar['CdmRelativeMetadataKey'] = ...
+    COLLISION_MAX_PC_METHOD: typing.ClassVar['CdmRelativeMetadataKey'] = ...
+    SEFI_COLLISION_PROBABILITY: typing.ClassVar['CdmRelativeMetadataKey'] = ...
+    SEFI_COLLISION_PROBABILITY_METHOD: typing.ClassVar['CdmRelativeMetadataKey'] = ...
+    SEFI_FRAGMENTATION_MODEL: typing.ClassVar['CdmRelativeMetadataKey'] = ...
+    PREVIOUS_MESSAGE_ID: typing.ClassVar['CdmRelativeMetadataKey'] = ...
+    PREVIOUS_MESSAGE_EPOCH: typing.ClassVar['CdmRelativeMetadataKey'] = ...
+    NEXT_MESSAGE_EPOCH: typing.ClassVar['CdmRelativeMetadataKey'] = ...
     def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, cdmRelativeMetadata: CdmRelativeMetadata) -> bool:
         """
             Process one token.
@@ -1961,7 +2985,7 @@ class CdmRelativeMetadataKey(java.lang.Enum['CdmRelativeMetadataKey']):
 
 class CdmSegment(org.orekit.files.ccsds.section.Segment[CdmMetadata, CdmData]):
     """
-    public class CdmSegment extends :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.cdm.CdmMetadata`,:class:`~org.orekit.files.ccsds.ndm.cdm.CdmData`>
+    public class CdmSegment extends :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.cdm.CdmMetadata`, :class:`~org.orekit.files.ccsds.ndm.cdm.CdmData`>
     
         This class stores the metadata and data for one object.
     
@@ -2133,6 +3157,16 @@ class ODParameters(org.orekit.files.ccsds.section.CommentsContainer):
         
         """
         ...
+    def getOdEpoch(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Get the epoch of the orbit determination used for this message.
+        
+            Returns:
+                the odEpoch the epoch of the orbit determination used for this message
+        
+        
+        """
+        ...
     def getRecommendedOdSpan(self) -> float:
         """
             Get the recommended OD time span calculated for the object.
@@ -2229,6 +3263,16 @@ class ODParameters(org.orekit.files.ccsds.section.CommentsContainer):
         
             Parameters:
                 obsUsed (int): the number of observations used
+        
+        
+        """
+        ...
+    def setOdEpoch(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+        """
+            Set the epoch of the orbit determination used for this message.
+        
+            Parameters:
+                odEpoch (:class:`~org.orekit.time.AbsoluteDate`): the odEpoch to set
         
         
         """
@@ -2343,6 +3387,7 @@ class ODParametersKey(java.lang.Enum['ODParametersKey']):
     TRACKS_USED: typing.ClassVar['ODParametersKey'] = ...
     RESIDUALS_ACCEPTED: typing.ClassVar['ODParametersKey'] = ...
     WEIGHTED_RMS: typing.ClassVar['ODParametersKey'] = ...
+    OD_EPOCH: typing.ClassVar['ODParametersKey'] = ...
     def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, oDParameters: ODParameters) -> bool:
         """
             Process one token.
@@ -3500,6 +4545,59 @@ class RTNCovarianceWriter(org.orekit.files.ccsds.section.AbstractWriter):
     """
     ...
 
+class ScreenType(java.lang.Enum['ScreenType']):
+    """
+    public enum ScreenType extends Enum<:class:`~org.orekit.files.ccsds.ndm.cdm.ScreenType`>
+    
+        Screening type options allowed in CCSDS Conjunction Data Messages.
+    """
+    SHAPE: typing.ClassVar['ScreenType'] = ...
+    PC: typing.ClassVar['ScreenType'] = ...
+    PC_MAX: typing.ClassVar['ScreenType'] = ...
+    _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
+    @typing.overload
+    @staticmethod
+    def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
+    @typing.overload
+    @staticmethod
+    def valueOf(string: str) -> 'ScreenType':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (String): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                : if this enum type has no constant with the specified name
+                : if the argument is null
+        
+        
+        """
+        ...
+    @staticmethod
+    def values() -> typing.List['ScreenType']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            
+            for (ScreenType c : ScreenType.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
+
 class ScreenVolumeFrame(java.lang.Enum['ScreenVolumeFrame']):
     """
     public enum ScreenVolumeFrame extends Enum<:class:`~org.orekit.files.ccsds.ndm.cdm.ScreenVolumeFrame`>
@@ -3566,6 +4664,7 @@ class ScreenVolumeShape(java.lang.Enum['ScreenVolumeShape']):
     """
     ELLIPSOID: typing.ClassVar['ScreenVolumeShape'] = ...
     BOX: typing.ClassVar['ScreenVolumeShape'] = ...
+    SPHERE: typing.ClassVar['ScreenVolumeShape'] = ...
     _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
     @typing.overload
     @staticmethod
@@ -3600,6 +4699,137 @@ class ScreenVolumeShape(java.lang.Enum['ScreenVolumeShape']):
             
             
             for (ScreenVolumeShape c : ScreenVolumeShape.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
+
+class SigmaEigenvectorsCovariance(org.orekit.files.ccsds.section.CommentsContainer):
+    """
+    public class SigmaEigenvectorsCovariance extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+    
+        Container for Sigma/Eigenvectors Covariance data. The positional covariance one-sigma dispersions corresponding to the
+        major, intermediate and minor eigenvalues, followed by the associated eigenvectors. The data is presented on a single
+        line (12 values separated by spaces). (Condition: Mandatory if ALT_COV_TYPE = CSIG3EIGVEC3)
+    """
+    def __init__(self, boolean: bool): ...
+    def getCsig3eigvec3(self) -> typing.List[float]:
+        """
+            Get the Sigma/Eigenvectors Covariance data.
+        
+            The Sigma/Eigenvectors Covariance data is only provided if
+            :meth:`~org.orekit.files.ccsds.ndm.cdm.CdmMetadataKey.ALT_COV_TYPE` is
+            :meth:`~org.orekit.files.ccsds.ndm.cdm.AltCovarianceType.CSIG3EIGVEC3`, otherwise its terms will return NaN.
+        
+            Returns:
+                covarianceData the covariance data in the Sigma/Eigenvectors format.
+        
+        
+        """
+        ...
+    def isAltCovFlagSet(self) -> bool:
+        """
+            Get the flag indicating whether the alternate covariance type set in the CDM Object metadata section is
+            Sigma/Eigenvectors Covariance.
+        
+            Returns:
+                the altCovFlag
+        
+        
+        """
+        ...
+    def setCsig3eigvec3(self, doubleArray: typing.List[float]) -> None:
+        """
+            Set the Sigma/Eigenvectors Covariance data.
+        
+            Parameters:
+                csig3eigvec3 (double[]): the covariance data in the Sigma/Eigenvectors format.
+        
+        
+        """
+        ...
+    def validate(self, double: float) -> None:
+        """
+            Check is all mandatory entries have been initialized.
+        
+            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        
+            Specified by:
+                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
+        
+            Overrides:
+                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate`Â in
+                classÂ :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+        
+            Parameters:
+                version (double): format version
+        
+        
+        """
+        ...
+
+class SigmaEigenvectorsCovarianceKey(java.lang.Enum['SigmaEigenvectorsCovarianceKey']):
+    """
+    public enum SigmaEigenvectorsCovarianceKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.cdm.SigmaEigenvectorsCovarianceKey`>
+    
+        Keys for :class:`~org.orekit.files.ccsds.ndm.cdm.SigmaEigenvectorsCovariance` entries.
+    """
+    COMMENT: typing.ClassVar['SigmaEigenvectorsCovarianceKey'] = ...
+    CSIG3EIGVEC3: typing.ClassVar['SigmaEigenvectorsCovarianceKey'] = ...
+    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, sigmaEigenvectorsCovariance: SigmaEigenvectorsCovariance) -> bool:
+        """
+            Process one token.
+        
+            Parameters:
+                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
+                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
+                container (:class:`~org.orekit.files.ccsds.ndm.cdm.SigmaEigenvectorsCovariance`): container to fill
+        
+            Returns:
+                true of token was accepted
+        
+        
+        """
+        ...
+    _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
+    @typing.overload
+    @staticmethod
+    def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
+    @typing.overload
+    @staticmethod
+    def valueOf(string: str) -> 'SigmaEigenvectorsCovarianceKey':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (String): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                : if this enum type has no constant with the specified name
+                : if the argument is null
+        
+        
+        """
+        ...
+    @staticmethod
+    def values() -> typing.List['SigmaEigenvectorsCovarianceKey']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            
+            for (SigmaEigenvectorsCovarianceKey c : SigmaEigenvectorsCovarianceKey.values())
                 System.out.println(c);
             
         
@@ -3806,6 +5036,1092 @@ class StateVectorWriter(org.orekit.files.ccsds.section.AbstractWriter):
     """
     ...
 
+class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
+    """
+    public class XYZCovariance extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+    
+        Container for XYZ covariance matrix data. This class as a RealMatrix as attribute which can be acces with
+        getXYZCovariaxMatrix method. Beware that there are thus 2 ways to modify the XYZ covariance : setC... ( setCxx, setCyx
+        ...) which should be prioritized and getXYZCovariaxMatrix.setEntry(row, col, value).
+    
+        The XYZ Covariance Matrix is only provided if :meth:`~org.orekit.files.ccsds.ndm.cdm.CdmMetadataKey.ALT_COV_TYPE` is
+        :meth:`~org.orekit.files.ccsds.ndm.cdm.AltCovarianceType.XYZ`, otherwise its terms will return NaN.
+    
+        When available, the matrix is given in the 9Ãƒâ€”9 Lower Triangular Form. All parameters of the 6Ãƒâ€”6
+        position/velocity submatrix are mandatory. The remaining elements will return NaN if not provided.
+    """
+    def __init__(self, boolean: bool): ...
+    def getCdrgdrg(self) -> float:
+        """
+            Get the object [7,7] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [7,7] in covariance matrix (in mâ�´/kgÂ²)
+        
+        
+        """
+        ...
+    def getCdrgx(self) -> float:
+        """
+            Get the object [7,1] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [7,1] in covariance matrix (in mÂ³/kg)
+        
+        
+        """
+        ...
+    def getCdrgxdot(self) -> float:
+        """
+            Get the object [7,4] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [7,4] in covariance matrix (in mÂ³/(kg.s))
+        
+        
+        """
+        ...
+    def getCdrgy(self) -> float:
+        """
+            Get the object [7,2] in covariance matrix.
+        
+            Returns:
+                the object [7,2] in covariance matrix (in mÂ³/kg)
+        
+        
+        """
+        ...
+    def getCdrgydot(self) -> float:
+        """
+            Get the object [7,5] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [7,5] in covariance matrix (in mÂ³/(kg.s))
+        
+        
+        """
+        ...
+    def getCdrgz(self) -> float:
+        """
+            Get the object [7,3] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [7,3] in covariance matrix (in mÂ³/kg)
+        
+        
+        """
+        ...
+    def getCdrgzdot(self) -> float:
+        """
+            Get the object [7,6] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [7,6] in covariance matrix (in mÂ³/(kg.s))
+        
+        
+        """
+        ...
+    def getCsrpdrg(self) -> float:
+        """
+            Get the object [8,7] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [8,7] in covariance matrix (in mâ�´/kgÂ²)
+        
+        
+        """
+        ...
+    def getCsrpsrp(self) -> float:
+        """
+            Get the object [8,8] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [8,8] in covariance matrix (in mâ�´/kgÂ²)
+        
+        
+        """
+        ...
+    def getCsrpx(self) -> float:
+        """
+            Get the object [8,1] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [8,1] in covariance matrix (in mÂ³/kg)
+        
+        
+        """
+        ...
+    def getCsrpxdot(self) -> float:
+        """
+            Get the object [8,4] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [8,4] in covariance matrix (in mÂ³/(kg.s))
+        
+        
+        """
+        ...
+    def getCsrpy(self) -> float:
+        """
+            Get the object [8,2] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [8,2] in covariance matrix (in mÂ³/kg)
+        
+        
+        """
+        ...
+    def getCsrpydot(self) -> float:
+        """
+            Get the object [8,5] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [8,5] in covariance matrix (in mÂ³/(kg.s))
+        
+        
+        """
+        ...
+    def getCsrpz(self) -> float:
+        """
+            Get the object [8,3] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [8,3] in covariance matrix (in mÂ³/kg)
+        
+        
+        """
+        ...
+    def getCsrpzdot(self) -> float:
+        """
+            Get the object [8,6] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [8,6] in covariance matrix (in mÂ³/(kg.s))
+        
+        
+        """
+        ...
+    def getCthrdrg(self) -> float:
+        """
+            Get the object [9,7] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [9,7] in covariance matrix (in mÂ³/(kg.sÂ²))
+        
+        
+        """
+        ...
+    def getCthrsrp(self) -> float:
+        """
+            Get the object [9,8] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [9,8] in covariance matrix (in mÂ³/(kg.sÂ²))
+        
+        
+        """
+        ...
+    def getCthrthr(self) -> float:
+        """
+            Get the object [9,9] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [9,9] in covariance matrix (in mÂ²/sâ�´)
+        
+        
+        """
+        ...
+    def getCthrx(self) -> float:
+        """
+            Get the object [9,1] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [9,1] in covariance matrix (in mÂ²/sÂ²)
+        
+        
+        """
+        ...
+    def getCthrxdot(self) -> float:
+        """
+            Get the object [9,4] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [9,4] in covariance matrix (in mÂ²/sÂ³)
+        
+        
+        """
+        ...
+    def getCthry(self) -> float:
+        """
+            Get the object [9,2] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [9,2] in covariance matrix (in mÂ²/sÂ²)
+        
+        
+        """
+        ...
+    def getCthrydot(self) -> float:
+        """
+            Get the object [9,5] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [9,5] in covariance matrix (in mÂ²/sÂ³)
+        
+        
+        """
+        ...
+    def getCthrz(self) -> float:
+        """
+            Get the object [9,3] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [9,3] in covariance matrix (in mÂ²/sÂ²)
+        
+        
+        """
+        ...
+    def getCthrzdot(self) -> float:
+        """
+            Get the object [9,6] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [9,6] in covariance matrix (in mÂ²/sÂ³)
+        
+        
+        """
+        ...
+    def getCxdotx(self) -> float:
+        """
+            Get the object [4,1] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [4,1] in covariance matrix (in mÂ²/s)
+        
+        
+        """
+        ...
+    def getCxdotxdot(self) -> float:
+        """
+            Get the object [4, 4] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [4, 4] in covariance matrix (in mÂ²/sÂ²)
+        
+        
+        """
+        ...
+    def getCxdoty(self) -> float:
+        """
+            Get the object [4,2] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [4,2] in covariance matrix (in mÂ²/s)
+        
+        
+        """
+        ...
+    def getCxdotz(self) -> float:
+        """
+            Get the object [4, 3] in covariance matrix (with index starting at 1) .
+        
+            Returns:
+                the object [4, 3] in covariance matrix (in mÂ²/s)
+        
+        
+        """
+        ...
+    def getCxx(self) -> float:
+        """
+            Get the object [1,1] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [1,1] in covariance matrix (in mÂ²)
+        
+        
+        """
+        ...
+    def getCydotx(self) -> float:
+        """
+            Get the object [5, 1] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [5, 1] in covariance matrix (in mÂ²/s)
+        
+        
+        """
+        ...
+    def getCydotxdot(self) -> float:
+        """
+            Get the object [5,4] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [5,4] in covariance matrix (in mÂ²/sÂ²)
+        
+        
+        """
+        ...
+    def getCydoty(self) -> float:
+        """
+            Get the object [5,2] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [5,2] in covariance matrix (in mÂ²/s)
+        
+        
+        """
+        ...
+    def getCydotydot(self) -> float:
+        """
+            Get the object [5,5] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [5,5] in covariance matrix (in mÂ²/sÂ²)
+        
+        
+        """
+        ...
+    def getCydotz(self) -> float:
+        """
+            Get the object [5,3] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [5,3] in covariance matrix (in mÂ²/s)
+        
+        
+        """
+        ...
+    def getCyx(self) -> float:
+        """
+            Get the object [2,1] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [2,1] in covariance matrix (in mÂ²)
+        
+        
+        """
+        ...
+    def getCyy(self) -> float:
+        """
+            Get the object [2,2] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [2,2] in covariance matrix (in mÂ²)
+        
+        
+        """
+        ...
+    def getCzdotx(self) -> float:
+        """
+            Get the object [6,1] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [6,1] in covariance matrix (in mÂ²/s)
+        
+        
+        """
+        ...
+    def getCzdotxdot(self) -> float:
+        """
+            Get the object [6,4] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [6,4] in covariance matrix (in mÂ²/sÂ²)
+        
+        
+        """
+        ...
+    def getCzdoty(self) -> float:
+        """
+            Get the object [6,2] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [6,2] in covariance matrix (in mÂ²/s)
+        
+        
+        """
+        ...
+    def getCzdotydot(self) -> float:
+        """
+            Get the object [6,5] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [6,5] in covariance matrix (in mÂ²/sÂ²)
+        
+        
+        """
+        ...
+    def getCzdotz(self) -> float:
+        """
+            Get the object [6,3] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [6,3] in covariance matrix (in mÂ²/s)
+        
+        
+        """
+        ...
+    def getCzdotzdot(self) -> float:
+        """
+            Get the object [6,6] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [6,6] in covariance matrix (in mÂ²/sÂ²)
+        
+        
+        """
+        ...
+    def getCzx(self) -> float:
+        """
+            Get the object [3,1] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [3,1] in covariance matrix (in mÂ²)
+        
+        
+        """
+        ...
+    def getCzy(self) -> float:
+        """
+            Get the object [3,2] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [3,2] in covariance matrix (in mÂ²)
+        
+        
+        """
+        ...
+    def getCzz(self) -> float:
+        """
+            Get the object [3,3] in covariance matrix (with index starting at 1).
+        
+            Returns:
+                the object [3,3] in covariance matrix (in mÂ²)
+        
+        
+        """
+        ...
+    def getXYZCovarianceMatrix(self) -> org.hipparchus.linear.RealMatrix:
+        """
+            Get the XYZ covariance matrix.
+        
+            The XYZ Covariance Matrix is only provided if :meth:`~org.orekit.files.ccsds.ndm.cdm.CdmMetadataKey.ALT_COV_TYPE` is
+            :meth:`~org.orekit.files.ccsds.ndm.cdm.AltCovarianceType.XYZ`, otherwise its terms will return NaN.
+        
+            When available, the matrix is given in the 9Ãƒâ€”9 Lower Triangular Form. All parameters of the 6Ãƒâ€”6
+            position/velocity submatrix are mandatory. The remaining elements will return NaN if not provided.
+        
+            Returns:
+                the XYZ covariance matrix
+        
+        
+        """
+        ...
+    def isCovXYZset(self) -> bool:
+        """
+            Get the flag indicating whether the alternate covariance type set in the CDM Object metadata section is XYZ.
+        
+            Returns:
+                the covXYZset
+        
+        
+        """
+        ...
+    def setCdrgdrg(self, double: float) -> None:
+        """
+            Set the object [7,7] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CDRGDRG (double): = object [7,7] in covariance matrix (in mâ�´/kgÂ²)
+        
+        
+        """
+        ...
+    def setCdrgx(self, double: float) -> None:
+        """
+            Set the object [7,1] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CDRGX (double): = object [7,1] in covariance matrix (in mÂ³/kg)
+        
+        
+        """
+        ...
+    def setCdrgxdot(self, double: float) -> None:
+        """
+            Set the object [7,4] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CDRGXdot (double): = object [7,4] in covariance matrix (in mÂ³/(kg.s))
+        
+        
+        """
+        ...
+    def setCdrgy(self, double: float) -> None:
+        """
+            Set the object [7,2] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CDRGY (double): = object [7,2] in covariance matrix (in mÂ³/kg)
+        
+        
+        """
+        ...
+    def setCdrgydot(self, double: float) -> None:
+        """
+            Set the object [7,5] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CDRGYdot (double): = object [7,5] in covariance matrix (in mÂ³/(kg.s))
+        
+        
+        """
+        ...
+    def setCdrgz(self, double: float) -> None:
+        """
+            Set the object [7,3] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CDRGZ (double): = object [7,3] in covariance matrix (in mÂ³/kg)
+        
+        
+        """
+        ...
+    def setCdrgzdot(self, double: float) -> None:
+        """
+            Set the object [7,6] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CDRGZdot (double): = object [7,6] in covariance matrix (in mÂ³/(kg.s))
+        
+        
+        """
+        ...
+    def setCovarianceMatrixEntry(self, int: int, int2: int, double: float) -> None:
+        """
+            Set an entry in the XYZ covariance matrix.
+        
+            Both m(j, k) and m(k, j) are set.
+        
+            Parameters:
+                j (int): row index (must be between 0 and 5 (inclusive)
+                k (int): column index (must be between 0 and 5 (inclusive)
+                entry (double): value of the matrix entry
+        
+        
+        """
+        ...
+    def setCsrpdrg(self, double: float) -> None:
+        """
+            Set the object [8,7] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CSRPDRG (double): = object [8,7] in covariance matrix (in mâ�´/kgÂ²)
+        
+        
+        """
+        ...
+    def setCsrpsrp(self, double: float) -> None:
+        """
+            Set the object [8,8] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CSRPSRP (double): = object [8,8] in covariance matrix (in mâ�´/kgÂ²)
+        
+        
+        """
+        ...
+    def setCsrpx(self, double: float) -> None:
+        """
+            Set the object [8,1] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CSRPX (double): = object [8,1] in covariance matrix (in mÂ³/kg)
+        
+        
+        """
+        ...
+    def setCsrpxdot(self, double: float) -> None:
+        """
+            Set the object [8,4] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CSRPXdot (double): = object [8,4] in covariance matrix (in mÂ³/(kg.s))
+        
+        
+        """
+        ...
+    def setCsrpy(self, double: float) -> None:
+        """
+            Set the object [8,2] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CSRPY (double): = object [8,2] in covariance matrix (in mÂ³/kg)
+        
+        
+        """
+        ...
+    def setCsrpydot(self, double: float) -> None:
+        """
+            Set the object [8,5] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CSRPYdot (double): = object [8,5] in covariance matrix (in mÂ³/(kg.s))
+        
+        
+        """
+        ...
+    def setCsrpz(self, double: float) -> None:
+        """
+            Set the object [8,3] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CSRPZ (double): = object [8,3] in covariance matrix (in mÂ³/kg)
+        
+        
+        """
+        ...
+    def setCsrpzdot(self, double: float) -> None:
+        """
+            Set the object [8,6] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CSRPZdot (double): = object [8,6] in covariance matrix (in mÂ³/(kg.s))
+        
+        
+        """
+        ...
+    def setCthrdrg(self, double: float) -> None:
+        """
+            Set the object [9,7] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CTHRDRG (double): = object [9,7] in covariance matrix (in mÂ³/(kg.sÂ²))
+        
+        
+        """
+        ...
+    def setCthrsrp(self, double: float) -> None:
+        """
+            Set the object [9,8] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CTHRSRP (double): = object [9,8] in covariance matrix (in mÂ³/(kg.sÂ²))
+        
+        
+        """
+        ...
+    def setCthrthr(self, double: float) -> None:
+        """
+            Set the object [9,9] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CTHRTHR (double): = object [9,9] in covariance matrix (in mÂ²/sâ�´)
+        
+        
+        """
+        ...
+    def setCthrx(self, double: float) -> None:
+        """
+            Set the object [9,1] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CTHRX (double): = object [9,1] in covariance matrix (in mÂ²/sÂ²)
+        
+        
+        """
+        ...
+    def setCthrxdot(self, double: float) -> None:
+        """
+            Set the object [9,4] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CTHRXdot (double): = object [9,4] in covariance matrix (in mÂ²/sÂ³)
+        
+        
+        """
+        ...
+    def setCthry(self, double: float) -> None:
+        """
+            Set the object [9,2] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CTHRY (double): = object [9,2] in covariance matrix (in mÂ²/sÂ²)
+        
+        
+        """
+        ...
+    def setCthrydot(self, double: float) -> None:
+        """
+            Set the object [9,5] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CTHRYdot (double): = object [9,5] in covariance matrix (in mÂ²/sÂ³)
+        
+        
+        """
+        ...
+    def setCthrz(self, double: float) -> None:
+        """
+            Set the object [9,3] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CTHRZ (double): = object [9,3] in covariance matrix (in mÂ²/sÂ²)
+        
+        
+        """
+        ...
+    def setCthrzdot(self, double: float) -> None:
+        """
+            Set the object [9,6] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CTHRZdot (double): = object [9,6] in covariance matrix (in mÂ²/sÂ³)
+        
+        
+        """
+        ...
+    def setCxdotx(self, double: float) -> None:
+        """
+            Set the object [4,1] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CXdotX (double): = object [4,1] in covariance matrix (in mÂ²/s)
+        
+        
+        """
+        ...
+    def setCxdotxdot(self, double: float) -> None:
+        """
+            Set the object [4, 4] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CXdotXdot (double): = object [4, 4] in covariance matrix (in mÂ²/sÂ²)
+        
+        
+        """
+        ...
+    def setCxdoty(self, double: float) -> None:
+        """
+            Set the object [4, 2] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CXdotY (double): = object [4, 2] in covariance matrix (in mÂ²/s)
+        
+        
+        """
+        ...
+    def setCxdotz(self, double: float) -> None:
+        """
+            Set the object [4, 3] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CXdotZ (double): = object [4,3] in covariance matrix (in mÂ²/s)
+        
+        
+        """
+        ...
+    def setCxx(self, double: float) -> None:
+        """
+            Set the object [1,1] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CXX (double): = object [1,1] in covariance matrix (in mÂ²)
+        
+        
+        """
+        ...
+    def setCydotx(self, double: float) -> None:
+        """
+            Set the object [5,1] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CYdotX (double): = object [5,1] in covariance matrix (in mÂ²/s)
+        
+        
+        """
+        ...
+    def setCydotxdot(self, double: float) -> None:
+        """
+            Set the object [5,4] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CYdotXdot (double): = object [5,4] in covariance matrix (in mÂ²/sÂ²)
+        
+        
+        """
+        ...
+    def setCydoty(self, double: float) -> None:
+        """
+            Set the object [5,2] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CYdotY (double): = object [5,2] in covariance matrix (in mÂ²/s)
+        
+        
+        """
+        ...
+    def setCydotydot(self, double: float) -> None:
+        """
+            Set the object [5,5] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CYdotYdot (double): = object [5,5] in covariance matrix (in mÂ²/sÂ²)
+        
+        
+        """
+        ...
+    def setCydotz(self, double: float) -> None:
+        """
+            Set the object [5,3] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CYdotZ (double): = object [5,3] in covariance matrix (in mÂ²/s)
+        
+        
+        """
+        ...
+    def setCyx(self, double: float) -> None:
+        """
+            Set the object [2,1] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CYX (double): = object [2,1] in covariance matrix (in mÂ²)
+        
+        
+        """
+        ...
+    def setCyy(self, double: float) -> None:
+        """
+            Set the object [2,2] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CYY (double): = object [2,2] in covariance matrix (in mÂ²)
+        
+        
+        """
+        ...
+    def setCzdotx(self, double: float) -> None:
+        """
+            Set the object [6,1] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CZdotX (double): = object [6,1] in covariance matrix (in mÂ²/s)
+        
+        
+        """
+        ...
+    def setCzdotxdot(self, double: float) -> None:
+        """
+            Set the object [6,4] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CZdotXdot (double): = object [6,4] in covariance matrix (in mÂ²/sÂ²)
+        
+        
+        """
+        ...
+    def setCzdoty(self, double: float) -> None:
+        """
+            Set the object [6,2] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CZdotY (double): = object [6,2] in covariance matrix (in mÂ²/s)
+        
+        
+        """
+        ...
+    def setCzdotydot(self, double: float) -> None:
+        """
+            Set the object [6,5] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CZdotYdot (double): = object [6,5] in covariance matrix (in mÂ²/sÂ²)
+        
+        
+        """
+        ...
+    def setCzdotz(self, double: float) -> None:
+        """
+            Set the object [6,3] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CZdotZ (double): = object [6,3] in covariance matrix (in mÂ²/s)
+        
+        
+        """
+        ...
+    def setCzdotzdot(self, double: float) -> None:
+        """
+            Set the object [6,6] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CZdotZdot (double): = object [6,6] in covariance matrix (in mÂ²/sÂ²)
+        
+        
+        """
+        ...
+    def setCzx(self, double: float) -> None:
+        """
+            Set the object [3,1] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CZX (double): = object [3,1] in covariance matrix (in mÂ²)
+        
+        
+        """
+        ...
+    def setCzy(self, double: float) -> None:
+        """
+            Set the object [3,2] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CZY (double): = object [3,2] in covariance matrix (in mÂ²)
+        
+        
+        """
+        ...
+    def setCzz(self, double: float) -> None:
+        """
+            Set the object [3,3] in covariance matrix (with index starting at 1).
+        
+            Parameters:
+                CZZ (double): = object [3,3] in covariance matrix (in mÂ²)
+        
+        
+        """
+        ...
+    def validate(self, double: float) -> None:
+        """
+            Check is all mandatory entries have been initialized.
+        
+            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        
+            Specified by:
+                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
+        
+            Overrides:
+                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate`Â in
+                classÂ :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+        
+            Parameters:
+                version (double): format version
+        
+        
+        """
+        ...
+
+class XYZCovarianceKey(java.lang.Enum['XYZCovarianceKey']):
+    """
+    public enum XYZCovarianceKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.cdm.XYZCovarianceKey`>
+    
+        Keys for :class:`~org.orekit.files.ccsds.ndm.cdm.XYZCovariance` entries.
+    """
+    COMMENT: typing.ClassVar['XYZCovarianceKey'] = ...
+    CX_X: typing.ClassVar['XYZCovarianceKey'] = ...
+    CY_X: typing.ClassVar['XYZCovarianceKey'] = ...
+    CY_Y: typing.ClassVar['XYZCovarianceKey'] = ...
+    CZ_X: typing.ClassVar['XYZCovarianceKey'] = ...
+    CZ_Y: typing.ClassVar['XYZCovarianceKey'] = ...
+    CZ_Z: typing.ClassVar['XYZCovarianceKey'] = ...
+    CXDOT_X: typing.ClassVar['XYZCovarianceKey'] = ...
+    CXDOT_Y: typing.ClassVar['XYZCovarianceKey'] = ...
+    CXDOT_Z: typing.ClassVar['XYZCovarianceKey'] = ...
+    CXDOT_XDOT: typing.ClassVar['XYZCovarianceKey'] = ...
+    CYDOT_X: typing.ClassVar['XYZCovarianceKey'] = ...
+    CYDOT_Y: typing.ClassVar['XYZCovarianceKey'] = ...
+    CYDOT_Z: typing.ClassVar['XYZCovarianceKey'] = ...
+    CYDOT_XDOT: typing.ClassVar['XYZCovarianceKey'] = ...
+    CYDOT_YDOT: typing.ClassVar['XYZCovarianceKey'] = ...
+    CZDOT_X: typing.ClassVar['XYZCovarianceKey'] = ...
+    CZDOT_Y: typing.ClassVar['XYZCovarianceKey'] = ...
+    CZDOT_Z: typing.ClassVar['XYZCovarianceKey'] = ...
+    CZDOT_XDOT: typing.ClassVar['XYZCovarianceKey'] = ...
+    CZDOT_YDOT: typing.ClassVar['XYZCovarianceKey'] = ...
+    CZDOT_ZDOT: typing.ClassVar['XYZCovarianceKey'] = ...
+    CDRG_X: typing.ClassVar['XYZCovarianceKey'] = ...
+    CDRG_Y: typing.ClassVar['XYZCovarianceKey'] = ...
+    CDRG_Z: typing.ClassVar['XYZCovarianceKey'] = ...
+    CDRG_XDOT: typing.ClassVar['XYZCovarianceKey'] = ...
+    CDRG_YDOT: typing.ClassVar['XYZCovarianceKey'] = ...
+    CDRG_ZDOT: typing.ClassVar['XYZCovarianceKey'] = ...
+    CDRG_DRG: typing.ClassVar['XYZCovarianceKey'] = ...
+    CSRP_X: typing.ClassVar['XYZCovarianceKey'] = ...
+    CSRP_Y: typing.ClassVar['XYZCovarianceKey'] = ...
+    CSRP_Z: typing.ClassVar['XYZCovarianceKey'] = ...
+    CSRP_XDOT: typing.ClassVar['XYZCovarianceKey'] = ...
+    CSRP_YDOT: typing.ClassVar['XYZCovarianceKey'] = ...
+    CSRP_ZDOT: typing.ClassVar['XYZCovarianceKey'] = ...
+    CSRP_DRG: typing.ClassVar['XYZCovarianceKey'] = ...
+    CSRP_SRP: typing.ClassVar['XYZCovarianceKey'] = ...
+    CTHR_X: typing.ClassVar['XYZCovarianceKey'] = ...
+    CTHR_Y: typing.ClassVar['XYZCovarianceKey'] = ...
+    CTHR_Z: typing.ClassVar['XYZCovarianceKey'] = ...
+    CTHR_XDOT: typing.ClassVar['XYZCovarianceKey'] = ...
+    CTHR_YDOT: typing.ClassVar['XYZCovarianceKey'] = ...
+    CTHR_ZDOT: typing.ClassVar['XYZCovarianceKey'] = ...
+    CTHR_DRG: typing.ClassVar['XYZCovarianceKey'] = ...
+    CTHR_SRP: typing.ClassVar['XYZCovarianceKey'] = ...
+    CTHR_THR: typing.ClassVar['XYZCovarianceKey'] = ...
+    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, xYZCovariance: XYZCovariance) -> bool:
+        """
+            Process one token.
+        
+            Parameters:
+                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
+                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
+                container (:class:`~org.orekit.files.ccsds.ndm.cdm.XYZCovariance`): container to fill
+        
+            Returns:
+                true of token was accepted
+        
+        
+        """
+        ...
+    _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
+    @typing.overload
+    @staticmethod
+    def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
+    @typing.overload
+    @staticmethod
+    def valueOf(string: str) -> 'XYZCovarianceKey':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (String): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                : if this enum type has no constant with the specified name
+                : if the argument is null
+        
+        
+        """
+        ...
+    @staticmethod
+    def values() -> typing.List['XYZCovarianceKey']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            
+            for (XYZCovarianceKey c : XYZCovarianceKey.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
+
 class XmlSubStructureKey(java.lang.Enum['XmlSubStructureKey']):
     """
     public enum XmlSubStructureKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.cdm.XmlSubStructureKey`>
@@ -3823,6 +6139,7 @@ class XmlSubStructureKey(java.lang.Enum['XmlSubStructureKey']):
     additionalParameters: typing.ClassVar['XmlSubStructureKey'] = ...
     stateVector: typing.ClassVar['XmlSubStructureKey'] = ...
     covarianceMatrix: typing.ClassVar['XmlSubStructureKey'] = ...
+    userDefinedParameters: typing.ClassVar['XmlSubStructureKey'] = ...
     def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, cdmParser: CdmParser) -> bool:
         """
             Process one token.
@@ -3920,9 +6237,12 @@ class CdmWriter(CdmMessageWriter):
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.ndm.cdm")``.
 
+    AdditionalCovarianceMetadata: typing.Type[AdditionalCovarianceMetadata]
+    AdditionalCovarianceMetadataKey: typing.Type[AdditionalCovarianceMetadataKey]
     AdditionalParameters: typing.Type[AdditionalParameters]
     AdditionalParametersKey: typing.Type[AdditionalParametersKey]
     AdditionalParametersWriter: typing.Type[AdditionalParametersWriter]
+    AltCovarianceType: typing.Type[AltCovarianceType]
     Cdm: typing.Type[Cdm]
     CdmData: typing.Type[CdmData]
     CdmHeader: typing.Type[CdmHeader]
@@ -3945,9 +6265,14 @@ class __module_protocol__(typing.Protocol):
     RTNCovariance: typing.Type[RTNCovariance]
     RTNCovarianceKey: typing.Type[RTNCovarianceKey]
     RTNCovarianceWriter: typing.Type[RTNCovarianceWriter]
+    ScreenType: typing.Type[ScreenType]
     ScreenVolumeFrame: typing.Type[ScreenVolumeFrame]
     ScreenVolumeShape: typing.Type[ScreenVolumeShape]
+    SigmaEigenvectorsCovariance: typing.Type[SigmaEigenvectorsCovariance]
+    SigmaEigenvectorsCovarianceKey: typing.Type[SigmaEigenvectorsCovarianceKey]
     StateVector: typing.Type[StateVector]
     StateVectorKey: typing.Type[StateVectorKey]
     StateVectorWriter: typing.Type[StateVectorWriter]
+    XYZCovariance: typing.Type[XYZCovariance]
+    XYZCovarianceKey: typing.Type[XYZCovarianceKey]
     XmlSubStructureKey: typing.Type[XmlSubStructureKey]

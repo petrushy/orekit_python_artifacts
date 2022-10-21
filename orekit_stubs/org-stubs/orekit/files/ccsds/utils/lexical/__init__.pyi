@@ -413,6 +413,19 @@ class ParseToken:
         
         """
         ...
+    def processAsDoubleArray(self, doubleArrayConsumer: 'ParseToken.DoubleArrayConsumer') -> bool:
+        """
+            Process the content as an array of doubles.
+        
+            Parameters:
+                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.DoubleArrayConsumer`): consumer of the array
+        
+            Returns:
+                always returns :code:`true`
+        
+        
+        """
+        ...
     def processAsDoublyIndexedDouble(self, int: int, int2: int, unit: org.orekit.utils.units.Unit, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, doublyIndexedDoubleConsumer: 'ParseToken.DoublyIndexedDoubleConsumer') -> bool:
         """
             Process the content as a doubly-indexed double.
@@ -470,6 +483,19 @@ class ParseToken:
                 allowCelestial (boolean): if true, :class:`~org.orekit.files.ccsds.definitions.CelestialBodyFrame` are allowed
                 allowOrbit (boolean): if true, :class:`~org.orekit.files.ccsds.definitions.OrbitRelativeFrame` are allowed
                 allowSpacecraft (boolean): if true, :class:`~org.orekit.files.ccsds.definitions.SpacecraftBodyFrame` are allowed
+        
+            Returns:
+                always returns :code:`true`
+        
+        
+        """
+        ...
+    def processAsFreeTextString(self, stringConsumer: 'ParseToken.StringConsumer') -> bool:
+        """
+            Process the content as free text string.
+        
+            Parameters:
+                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.StringConsumer`): consumer of the string
         
             Returns:
                 always returns :code:`true`
@@ -536,7 +562,20 @@ class ParseToken:
         ...
     def processAsIntegerArray(self, integerArrayConsumer: 'ParseToken.IntegerArrayConsumer') -> bool:
         """
-            Process the content as an array of integers.
+            Process the content as an array of integers. Spaces are replaced by commas.
+        
+            Parameters:
+                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.IntegerArrayConsumer`): consumer of the array
+        
+            Returns:
+                always returns :code:`true`
+        
+        
+        """
+        ...
+    def processAsIntegerArrayNoSpace(self, integerArrayConsumer: 'ParseToken.IntegerArrayConsumer') -> bool:
+        """
+            Process the content as an array of integers. No spaces between commas are allowed.
         
             Parameters:
                 consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.IntegerArrayConsumer`): consumer of the array
@@ -696,6 +735,8 @@ class ParseToken:
         def accept(self, char: str) -> None: ...
     class DateConsumer:
         def accept(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None: ...
+    class DoubleArrayConsumer:
+        def accept(self, doubleArray: typing.List[float]) -> None: ...
     class DoubleConsumer:
         def accept(self, double: float) -> None: ...
     class DoublyIndexedDoubleConsumer:

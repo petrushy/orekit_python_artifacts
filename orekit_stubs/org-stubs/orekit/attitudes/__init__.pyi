@@ -252,7 +252,7 @@ class AttitudeProvider:
 _FieldAttitude__T = typing.TypeVar('_FieldAttitude__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAttitude(org.orekit.time.FieldTimeStamped[_FieldAttitude__T], org.orekit.time.FieldTimeShiftable['FieldAttitude'[_FieldAttitude__T], _FieldAttitude__T], org.orekit.time.FieldTimeInterpolable['FieldAttitude'[_FieldAttitude__T], _FieldAttitude__T], typing.Generic[_FieldAttitude__T]):
     """
-    public class FieldAttitude<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.time.FieldTimeStamped`<T>, :class:`~org.orekit.time.FieldTimeShiftable`<:class:`~org.orekit.attitudes.FieldAttitude`<T>,T>, :class:`~org.orekit.time.FieldTimeInterpolable`<:class:`~org.orekit.attitudes.FieldAttitude`<T>,T>
+    public class FieldAttitude<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.time.FieldTimeStamped`<T>, :class:`~org.orekit.time.FieldTimeShiftable`<:class:`~org.orekit.attitudes.FieldAttitude`<T>, T>, :class:`~org.orekit.time.FieldTimeInterpolable`<:class:`~org.orekit.attitudes.FieldAttitude`<T>, T>
     
         This class handles attitude definition at a given date.
     
@@ -806,7 +806,7 @@ class GroundPointing(AttitudeProvider):
             Returns:
                 observed ground point position (element 0) and velocity (at index 1) in specified frame
         
-        public abstract <T extends CalculusFieldElement<T>> :class:`~org.orekit.utils.TimeStampedFieldPVCoordinates`<T> getTargetPV(:class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T> pvProv, :class:`~org.orekit.time.FieldAbsoluteDate`<T> date, :class:`~org.orekit.frames.Frame` frame)
+        public abstract <T extends CalculusFieldElement<T>> :class:`~org.orekit.utils.TimeStampedFieldPVCoordinates`<T> getTargetPV (:class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T> pvProv, :class:`~org.orekit.time.FieldAbsoluteDate`<T> date, :class:`~org.orekit.frames.Frame` frame)
         
             Compute the target point position/velocity in specified frame.
         

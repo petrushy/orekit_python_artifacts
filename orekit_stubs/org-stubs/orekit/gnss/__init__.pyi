@@ -1634,7 +1634,7 @@ class SEMParser(org.orekit.data.AbstractSelfFeedingLoader, org.orekit.data.DataL
         
             This feature is useful when the file selection is already set up by the :class:`~org.orekit.data.DataProvidersManager`
             configuration.
-        public void loadData(InputStream input, String name) throws IOException, ParseException, :class:`~org.orekit.errors.OrekitException`
+        public void loadData (InputStream input, String name) throws IOException, ParseException, :class:`~org.orekit.errors.OrekitException`
         
             Description copied from interface: :meth:`~org.orekit.data.DataLoader.loadData`
             Load data from a stream.
@@ -1975,7 +1975,7 @@ class YUMAParser(org.orekit.data.AbstractSelfFeedingLoader, org.orekit.data.Data
         
             This feature is useful when the file selection is already set up by the :class:`~org.orekit.data.DataProvidersManager`
             configuration.
-        public void loadData(InputStream input, String name) throws IOException, ParseException, :class:`~org.orekit.errors.OrekitException`
+        public void loadData (InputStream input, String name) throws IOException, ParseException, :class:`~org.orekit.errors.OrekitException`
         
             Description copied from interface: :meth:`~org.orekit.data.DataLoader.loadData`
             Load data from a stream.

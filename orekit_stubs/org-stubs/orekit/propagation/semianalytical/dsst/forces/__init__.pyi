@@ -28,14 +28,17 @@ class DSSTForceModel(org.orekit.utils.ParametersDriversProvider):
         Objects implementing this interface are intended to be added to a
         :class:`~org.orekit.propagation.semianalytical.dsst.DSSTPropagator` before the propagation is started.
     
-        The propagator will call at the very beginning of a propagation the null method allowing preliminary computation such as
-        truncation if needed.
+        The propagator will call at the very beginning of a propagation the
+        :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms` method allowing
+        preliminary computation such as truncation if needed.
     
         Then the propagator will call at each step:
     
-          1.  the null method. The force model instance will extract all the state data needed to compute the mean element rates that
-            contribute to the mean state derivative.
-          2.  the null method, if osculating parameters are desired, on a sample of points within the last step.
+          1.  the :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate` method. The force model
+            instance will extract all the state data needed to compute the mean element rates that contribute to the mean state
+            derivative.
+          2.  the :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms` method, if
+            osculating parameters are desired, on a sample of points within the last step.
     """
     def getEventsDetectors(self) -> typing.List[org.orekit.propagation.events.EventDetector]:
         """
@@ -182,18 +185,20 @@ class DSSTForceModel(org.orekit.utils.ParametersDriversProvider):
             Update the short period terms.
         
             The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to null.
+            were returned during the call to
+            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
         
             Parameters:
                 parameters (double[]): values of the force model parameters
                 meanStates (:class:`~org.orekit.propagation.SpacecraftState`...): mean states information: date, kinematics, attitude
         
-        <T extends CalculusFieldElement<T>> void updateShortPeriodTerms(T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
+        <T extends CalculusFieldElement<T>> void updateShortPeriodTerms (T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
         
             Update the short period terms.
         
             The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to null.
+            were returned during the call to
+            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
         
             Parameters:
                 parameters (T[]): values of the force model parameters
@@ -373,7 +378,8 @@ class AbstractGaussianContribution(DSSTForceModel):
             Computes the mean equinoctial elements rates da :sub:`i` / dt.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
@@ -404,7 +410,8 @@ class AbstractGaussianContribution(DSSTForceModel):
             Computes the mean equinoctial elements rates da :sub:`i` / dt.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): current state information: date, kinematics, attitude
@@ -495,24 +502,28 @@ class AbstractGaussianContribution(DSSTForceModel):
             Update the short period terms.
         
             The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to null.
+            were returned during the call to
+            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 parameters (double[]): values of the force model parameters
                 meanStates (:class:`~org.orekit.propagation.SpacecraftState`...): mean states information: date, kinematics, attitude
         
-        public <T extends CalculusFieldElement<T>> void updateShortPeriodTerms(T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
+        public <T extends CalculusFieldElement<T>> void updateShortPeriodTerms (T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
         
             Update the short period terms.
         
             The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to null.
+            were returned during the call to
+            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 parameters (T[]): values of the force model parameters
@@ -680,7 +691,8 @@ class DSSTNewtonianAttraction(DSSTForceModel):
             Computes the mean equinoctial elements rates da :sub:`i` / dt.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
@@ -698,7 +710,8 @@ class DSSTNewtonianAttraction(DSSTForceModel):
             Computes the mean equinoctial elements rates da :sub:`i` / dt.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): current state information: date, kinematics, attitude
@@ -750,24 +763,28 @@ class DSSTNewtonianAttraction(DSSTForceModel):
             Update the short period terms.
         
             The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to null.
+            were returned during the call to
+            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 parameters (double[]): values of the force model parameters
                 meanStates (:class:`~org.orekit.propagation.SpacecraftState`...): mean states information: date, kinematics, attitude
         
-        public <T extends CalculusFieldElement<T>> void updateShortPeriodTerms(T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
+        public <T extends CalculusFieldElement<T>> void updateShortPeriodTerms (T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
         
             Update the short period terms.
         
             The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to null.
+            were returned during the call to
+            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 parameters (T[]): values of the force model parameters
@@ -888,7 +905,8 @@ class DSSTTesseral(DSSTForceModel):
             Computes the mean equinoctial elements rates da :sub:`i` / dt.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 spacecraftState (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
@@ -906,7 +924,8 @@ class DSSTTesseral(DSSTForceModel):
             Computes the mean equinoctial elements rates da :sub:`i` / dt.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 spacecraftState (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> spacecraftState): current state information: date, kinematics, attitude
@@ -948,24 +967,28 @@ class DSSTTesseral(DSSTForceModel):
             Update the short period terms.
         
             The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to null.
+            were returned during the call to
+            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 parameters (double[]): values of the force model parameters
                 meanStates (:class:`~org.orekit.propagation.SpacecraftState`...): mean states information: date, kinematics, attitude
         
-        public <T extends CalculusFieldElement<T>> void updateShortPeriodTerms(T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
+        public <T extends CalculusFieldElement<T>> void updateShortPeriodTerms (T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
         
             Update the short period terms.
         
             The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to null.
+            were returned during the call to
+            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 parameters (T[]): values of the force model parameters
@@ -1214,7 +1237,8 @@ class DSSTThirdBody(DSSTForceModel):
             Computes the mean equinoctial elements rates da :sub:`i` / dt.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 currentState (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
@@ -1232,7 +1256,8 @@ class DSSTThirdBody(DSSTForceModel):
             Computes the mean equinoctial elements rates da :sub:`i` / dt.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 currentState (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> currentState): current state information: date, kinematics, attitude
@@ -1274,24 +1299,28 @@ class DSSTThirdBody(DSSTForceModel):
             Update the short period terms.
         
             The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to null.
+            were returned during the call to
+            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 parameters (double[]): values of the force model parameters
                 meanStates (:class:`~org.orekit.propagation.SpacecraftState`...): mean states information: date, kinematics, attitude
         
-        public <T extends CalculusFieldElement<T>> void updateShortPeriodTerms(T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
+        public <T extends CalculusFieldElement<T>> void updateShortPeriodTerms (T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
         
             Update the short period terms.
         
             The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to null.
+            were returned during the call to
+            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 parameters (T[]): values of the force model parameters
@@ -1599,7 +1628,8 @@ class DSSTZonal(DSSTForceModel):
             Computes the mean equinoctial elements rates da :sub:`i` / dt.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 spacecraftState (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
@@ -1617,7 +1647,8 @@ class DSSTZonal(DSSTForceModel):
             Computes the mean equinoctial elements rates da :sub:`i` / dt.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 spacecraftState (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> spacecraftState): current state information: date, kinematics, attitude
@@ -1669,24 +1700,28 @@ class DSSTZonal(DSSTForceModel):
             Update the short period terms.
         
             The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to null.
+            were returned during the call to
+            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 parameters (double[]): values of the force model parameters
                 meanStates (:class:`~org.orekit.propagation.SpacecraftState`...): mean states information: date, kinematics, attitude
         
-        public <T extends CalculusFieldElement<T>> void updateShortPeriodTerms(T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
+        public <T extends CalculusFieldElement<T>> void updateShortPeriodTerms (T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
         
             Update the short period terms.
         
             The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to null.
+            were returned during the call to
+            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 parameters (T[]): values of the force model parameters
@@ -2706,7 +2741,8 @@ class PythonDSSTForceModel(DSSTForceModel):
             Computes the mean equinoctial elements rates da :sub:`i` / dt.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
@@ -2721,11 +2757,13 @@ class PythonDSSTForceModel(DSSTForceModel):
     @typing.overload
     def getMeanElementRate(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getMeanElementRate_1__T], fieldAuxiliaryElements: org.orekit.propagation.semianalytical.dsst.utilities.FieldAuxiliaryElements[_getMeanElementRate_1__T], tArray: typing.List[_getMeanElementRate_1__T]) -> typing.List[_getMeanElementRate_1__T]:
         """
-            Description copied from interface: 
+            Description copied from
+            interface:Â :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate`
             Computes the mean equinoctial elements rates da :sub:`i` / dt.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.getMeanElementRate`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): current state information: date, kinematics, attitude
@@ -2804,25 +2842,30 @@ class PythonDSSTForceModel(DSSTForceModel):
             Update the short period terms.
         
             The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to null.
+            were returned during the call to
+            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.PythonDSSTForceModel.initializeShortPeriodTerms`.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 parameters (double[]): values of the force model parameters
                 meanStates (:class:`~org.orekit.propagation.SpacecraftState`...): mean states information: date, kinematics, attitude
         
-        public <T extends CalculusFieldElement<T>> void updateShortPeriodTerms(T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
+        public <T extends CalculusFieldElement<T>> void updateShortPeriodTerms (T[] parameters, :class:`~org.orekit.propagation.FieldSpacecraftState`<T>... meanStates)
         
-            Description copied from interface: 
+            Description copied from
+            interface:Â :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms`
             Update the short period terms.
         
             The :class:`~org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms` that will be updated are the ones that
-            were returned during the call to null.
+            were returned during the call to
+            :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.initializeShortPeriodTerms`.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel.updateShortPeriodTerms`Â in
+                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`
         
             Parameters:
                 parameters (T[]): values of the force model parameters

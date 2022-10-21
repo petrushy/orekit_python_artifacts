@@ -1,6 +1,7 @@
 import java.io
 import org.hipparchus
 import org.hipparchus.analysis
+import org.hipparchus.linear
 import org.hipparchus.util
 import typing
 
@@ -36,7 +37,7 @@ class DSCompiler:
         Note that the ordering changes with number of parameters and derivation order. For example given 2 parameters x and y,
         df/dy is stored at index 2 when derivation order is set to 1 (in this case the array has three elements: f, df/dx and
         df/dy). If derivation order is set to 2, then df/dy will be stored at index 3 (in this case the array has six elements:
-        f, df/dx, df/dxdx, df/dy, df/dxdy and df/dydy).
+        f, df/dx, dÃ‚Â²f/dxdx, df/dy, dÃ‚Â²f/dxdy and dÃ‚Â²f/dydy).
     
         Given this structure, users can perform some simple operations like adding, subtracting or multiplying constants and
         negating the elements by themselves, knowing if they want to mutate their array or create a new array. These simple
@@ -103,7 +104,8 @@ class DSCompiler:
          
     
         Also see:
-            :class:`~org.hipparchus.analysis.differentiation.DerivativeStructure`
+            :class:`~org.hipparchus.analysis.differentiation.DerivativeStructure`,
+            :class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`
     """
     _acos_1__T = typing.TypeVar('_acos_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
@@ -557,7 +559,29 @@ class DSCompiler:
                 index (int): of the partial derivative
         
             Returns:
-                orders derivation orders with respect to each parameter
+                derivation orders with respect to each parameter
+        
+            Also see:
+                :meth:`~org.hipparchus.analysis.differentiation.DSCompiler.getPartialDerivativeIndex`
+        
+        
+        """
+        ...
+    def getPartialDerivativeOrdersSum(self, int: int) -> int:
+        """
+            Get the sum of derivation orders for a specific index in the array.
+        
+            This method return the sum of the elements returned by
+            :meth:`~org.hipparchus.analysis.differentiation.DSCompiler.getPartialDerivativeIndex`, using precomputed values
+        
+            Parameters:
+                index (int): of the partial derivative
+        
+            Returns:
+                sum of derivation orders with respect to each parameter
+        
+            Since:
+                2.2
         
             Also see:
                 :meth:`~org.hipparchus.analysis.differentiation.DSCompiler.getPartialDerivativeIndex`
@@ -973,6 +997,44 @@ class DSCompiler:
     def pow(self, tArray: typing.List[_pow_6__T], int: int, int2: int, tArray2: typing.List[_pow_6__T], int3: int) -> None: ...
     @typing.overload
     def pow(self, tArray: typing.List[_pow_7__T], int: int, tArray2: typing.List[_pow_7__T], int2: int, tArray3: typing.List[_pow_7__T], int3: int) -> None: ...
+    _rebase_1__T = typing.TypeVar('_rebase_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def rebase(self, doubleArray: typing.List[float], int: int, dSCompiler: 'DSCompiler', doubleArray2: typing.List[float], doubleArray3: typing.List[float], int2: int) -> None:
+        """
+            Rebase derivative structure with respect to low level parameter functions.
+        
+            Parameters:
+                ds (double[]): array holding the derivative structure
+                dsOffset (int): offset of the derivative structure in its array
+                baseCompiler (:class:`~org.hipparchus.analysis.differentiation.DSCompiler`): compiler associated with the low level parameter functions
+                p (double[]): array holding the low level parameter functions (one flat array)
+                result (double[]): array where result must be stored (for composition the result array *cannot* be the input
+                resultOffset (int): offset of the result in its array
+        
+            Since:
+                2.2
+        
+        """
+        ...
+    @typing.overload
+    def rebase(self, tArray: typing.List[_rebase_1__T], int: int, dSCompiler: 'DSCompiler', tArray2: typing.List[_rebase_1__T], tArray3: typing.List[_rebase_1__T], int2: int) -> None:
+        """
+            Rebase derivative structure with respect to low level parameter functions.
+        
+            Parameters:
+                ds (T[]): array holding the derivative structure
+                dsOffset (int): offset of the derivative structure in its array
+                baseCompiler (:class:`~org.hipparchus.analysis.differentiation.DSCompiler`): compiler associated with the low level parameter functions
+                p (T[]): array holding the low level parameter functions (one flat array)
+                result (T[]): array where result must be stored (for composition the result array *cannot* be the input
+                resultOffset (int): offset of the result in its array
+        
+            Since:
+                2.2
+        
+        
+        """
+        ...
     _remainder_1__T = typing.TypeVar('_remainder_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def remainder(self, doubleArray: typing.List[float], int: int, doubleArray2: typing.List[float], int2: int, doubleArray3: typing.List[float], int3: int) -> None:
@@ -1507,6 +1569,81 @@ class FieldGradientField(org.hipparchus.Field['FieldGradient'[_FieldGradientFiel
         
         """
         ...
+
+_FieldTaylorMap__T = typing.TypeVar('_FieldTaylorMap__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldTaylorMap(typing.Generic[_FieldTaylorMap__T]):
+    """
+    public class FieldTaylorMap<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object
+    
+        Container for a Taylor map.
+    
+        A Taylor map is a set of n :class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` \((f_1, f_2, \ldots,
+        f_n)\) depending on m parameters \((p_1, p_2, \ldots, p_m)\), with positive n and m.
+    
+        Since:
+            2.2
+    """
+    @typing.overload
+    def __init__(self, tArray: typing.List[_FieldTaylorMap__T], fieldDerivativeStructureArray: typing.List['FieldDerivativeStructure'[_FieldTaylorMap__T]]): ...
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldTaylorMap__T], int: int, int2: int, int3: int): ...
+    def compose(self, fieldTaylorMap: 'FieldTaylorMap'[_FieldTaylorMap__T]) -> 'FieldTaylorMap'[_FieldTaylorMap__T]: ...
+    def getFunction(self, int: int) -> 'FieldDerivativeStructure'[_FieldTaylorMap__T]: ...
+    def getNbFunctions(self) -> int:
+        """
+            Get the number of functions of the map.
+        
+            Returns:
+                number of functions of the map
+        
+        
+        """
+        ...
+    def getNbParameters(self) -> int:
+        """
+            Get the number of parameters of the map.
+        
+            Returns:
+                number of parameters of the map
+        
+        
+        """
+        ...
+    def getPoint(self) -> typing.List[_FieldTaylorMap__T]:
+        """
+            Get the point at which map is evaluated.
+        
+            Returns:
+                point at which map is evaluated
+        
+        
+        """
+        ...
+    def invert(self, fieldMatrixDecomposer: org.hipparchus.linear.FieldMatrixDecomposer[_FieldTaylorMap__T]) -> 'FieldTaylorMap'[_FieldTaylorMap__T]: ...
+    @typing.overload
+    def value(self, *double: float) -> typing.List[_FieldTaylorMap__T]:
+        """
+            Evaluate Taylor expansion of the map at some offset.
+        
+            Parameters:
+                deltaP (double...): parameters offsets \((\Delta p_1, \Delta p_2, \ldots, \Delta p_n)\)
+        
+            Returns:
+                value of the Taylor expansion at \((p_1 + \Delta p_1, p_2 + \Delta p_2, \ldots, p_n + \Delta p_n)\)
+        
+            Evaluate Taylor expansion of the map at some offset.
+        
+            Parameters:
+                deltaP (:class:`~org.hipparchus.analysis.differentiation.FieldTaylorMap`...): parameters offsets \((\Delta p_1, \Delta p_2, \ldots, \Delta p_n)\)
+        
+            Returns:
+                value of the Taylor expansion at \((p_1 + \Delta p_1, p_2 + \Delta p_2, \ldots, p_n + \Delta p_n)\)
+        
+        
+        """
+        ...
+    @typing.overload
+    def value(self, *t: _FieldTaylorMap__T) -> typing.List[_FieldTaylorMap__T]: ...
 
 _FieldUnivariateDerivative1Field__T = typing.TypeVar('_FieldUnivariateDerivative1Field__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldUnivariateDerivative1Field(org.hipparchus.Field['FieldUnivariateDerivative1'[_FieldUnivariateDerivative1Field__T]], typing.Generic[_FieldUnivariateDerivative1Field__T]):
@@ -2875,6 +3012,117 @@ class SparseGradient(org.hipparchus.CalculusFieldElement['SparseGradient'], java
         """
         ...
 
+class TaylorMap:
+    """
+    public class TaylorMap extends Object
+    
+        Container for a Taylor map.
+    
+        A Taylor map is a set of n :class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` \((f_1, f_2, \ldots,
+        f_n)\) depending on m parameters \((p_1, p_2, \ldots, p_m)\), with positive n and m.
+    
+        Since:
+            2.2
+    """
+    @typing.overload
+    def __init__(self, doubleArray: typing.List[float], derivativeStructureArray: typing.List['DerivativeStructure']): ...
+    @typing.overload
+    def __init__(self, int: int, int2: int, int3: int): ...
+    def compose(self, taylorMap: 'TaylorMap') -> 'TaylorMap':
+        """
+            Compose the instance with another Taylor map as \(\mathrm{this} \circ \mathrm{other}\).
+        
+            Parameters:
+                other (:class:`~org.hipparchus.analysis.differentiation.TaylorMap`): map with which instance must be composed
+        
+            Returns:
+                composed map \(\mathrm{this} \circ \mathrm{other}\)
+        
+        
+        """
+        ...
+    def getFunction(self, int: int) -> 'DerivativeStructure':
+        """
+            Get a function from the map.
+        
+            Parameters:
+                i (int): index of the function (must be between 0 included and
+                    :meth:`~org.hipparchus.analysis.differentiation.TaylorMap.getNbFunctions` excluded
+        
+            Returns:
+                function at index i
+        
+        
+        """
+        ...
+    def getNbFunctions(self) -> int:
+        """
+            Get the number of functions of the map.
+        
+            Returns:
+                number of functions of the map
+        
+        
+        """
+        ...
+    def getNbParameters(self) -> int:
+        """
+            Get the number of parameters of the map.
+        
+            Returns:
+                number of parameters of the map
+        
+        
+        """
+        ...
+    def getPoint(self) -> typing.List[float]:
+        """
+            Get the point at which map is evaluated.
+        
+            Returns:
+                point at which map is evaluated
+        
+        
+        """
+        ...
+    def invert(self, matrixDecomposer: org.hipparchus.linear.MatrixDecomposer) -> 'TaylorMap':
+        """
+            Invert the instance.
+        
+            Consider :meth:`~org.hipparchus.analysis.differentiation.TaylorMap.value` of the map with small parameters offsets
+            \((\Delta p_1, \Delta p_2, \ldots, \Delta p_n)\) which leads to evaluation offsets \((f_1 + df_1, f_2 + df_2, \ldots,
+            f_n + df_n)\). The map inversion defines a Taylor map that computes \((\Delta p_1, \Delta p_2, \ldots, \Delta p_n)\)
+            from \((df_1, df_2, \ldots, df_n)\).
+        
+            The map must be square to be invertible (i.e. the number of functions and the number of parameters in the functions must
+            match)
+        
+            Parameters:
+                decomposer (:class:`~org.hipparchus.linear.MatrixDecomposer`): matrix decomposer to user for inverting the linear part
+        
+            Returns:
+                inverted map
+        
+            Also see:
+                chapter 2 of Advances in Imaging and Electron Physics, vol 108 by Martin Berz
+        
+        
+        """
+        ...
+    def value(self, *double: float) -> typing.List[float]:
+        """
+            Evaluate Taylor expansion of the map at some offset.
+        
+            Parameters:
+                deltaP (double...): parameters offsets \((\Delta p_1, \Delta p_2, \ldots, \Delta p_n)\)
+        
+            Returns:
+                value of the Taylor expansion at \((p_1 + \Delta p_1, p_2 + \Delta p_2, \ldots, p_n + \Delta p_n)\)
+        
+        
+        """
+        ...
+
 class UnivariateDerivative1Field(org.hipparchus.Field['UnivariateDerivative1'], java.io.Serializable):
     """
     public class UnivariateDerivative1Field extends Object implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.analysis.differentiation.UnivariateDerivative1`>, Serializable
@@ -3405,6 +3653,27 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
         
         """
         ...
+    def differentiate(self, int: int, int2: int) -> 'DerivativeStructure':
+        """
+            Differentiate w.r.t. one independent variable.
+        
+            Rigorously, if the derivatives of a function are known up to order N, the ones of its M-th derivative w.r.t. a given
+            variable (seen as a function itself) are only known up to order N-M. However, this method still casts the output as a
+            DerivativeStructure of order N with zeroes for the higher order terms.
+        
+            Parameters:
+                varIndex (int): Index of independent variable w.r.t. which differentiation is done.
+                differentiationOrder (int): Number of times the differentiation operator must be applied. If non-positive, call the integration operator instead.
+        
+            Returns:
+                DerivativeStructure on which differentiation operator has been applied a certain number of times
+        
+            Since:
+                2.2
+        
+        
+        """
+        ...
     @typing.overload
     def divide(self, double: float) -> 'DerivativeStructure':
         """
@@ -3629,6 +3898,27 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
     @typing.overload
     @staticmethod
     def hypot(derivativeStructure: 'DerivativeStructure', derivativeStructure2: 'DerivativeStructure') -> 'DerivativeStructure': ...
+    def integrate(self, int: int, int2: int) -> 'DerivativeStructure':
+        """
+            Integrate w.r.t. one independent variable.
+        
+            Rigorously, if the derivatives of a function are known up to order N, the ones of its M-th integral w.r.t. a given
+            variable (seen as a function itself) are actually known up to order N+M. However, this method still casts the output as
+            a DerivativeStructure of order N. The integration constants are systematically set to zero.
+        
+            Parameters:
+                varIndex (int): Index of independent variable w.r.t. which integration is done.
+                integrationOrder (int): Number of times the integration operator must be applied. If non-positive, call the differentiation operator.
+        
+            Returns:
+                DerivativeStructure on which integration operator has been applied a certain number of times.
+        
+            Since:
+                2.2
+        
+        
+        """
+        ...
     @typing.overload
     def linearCombination(self, double: float, derivativeStructure: 'DerivativeStructure', double2: float, derivativeStructure2: 'DerivativeStructure') -> 'DerivativeStructure': ...
     @typing.overload
@@ -3822,6 +4112,42 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
     @typing.overload
     @staticmethod
     def pow(double: float, derivativeStructure: 'DerivativeStructure') -> 'DerivativeStructure': ...
+    def rebase(self, *derivativeStructure: 'DerivativeStructure') -> 'DerivativeStructure':
+        """
+            Rebase instance with respect to low level parameter functions.
+        
+            The instance is considered to be a function of
+            :meth:`~org.hipparchus.analysis.differentiation.DerivativeStructure.getFreeParameters` up to order
+            :meth:`~org.hipparchus.analysis.differentiation.DerivativeStructure.getOrder` \(f(p_0, p_1, \ldots p_{n-1})\). Its
+            :meth:`~org.hipparchus.analysis.differentiation.DerivativeStructure.getPartialDerivative` are therefore \(f,
+            \frac{\partial f}{\partial p_0}, \frac{\partial f}{\partial p_1}, \ldots \frac{\partial^2 f}{\partial p_0^2},
+            \frac{\partial^2 f}{\partial p_0 p_1}, \ldots \frac{\partial^o f}{\partial p_{n-1}^o}\). The free parameters \(p_0, p_1,
+            \ldots p_{n-1}\) are considered to be functions of \(m\) lower level other parameters \(q_0, q_1, \ldots q_{m-1}\).
+            \( \begin{align} p_0 & = p_0(q_0, q_1, \ldots q_{m-1})\\ p_1 & = p_1(q_0, q_1, \ldots q_{m-1})\\ p_{n-1} & =
+            p_{n-1}(q_0, q_1, \ldots q_{m-1}) \end{align}\)
+        
+            This method compute the composition of the partial derivatives of \(f\) and the partial derivatives of \(p_0, p_1,
+            \ldots p_{n-1}\), i.e. the :meth:`~org.hipparchus.analysis.differentiation.DerivativeStructure.getPartialDerivative` of
+            the value returned will be \(f, \frac{\partial f}{\partial q_0}, \frac{\partial f}{\partial q_1}, \ldots
+            \frac{\partial^2 f}{\partial q_0^2}, \frac{\partial^2 f}{\partial q_0 q_1}, \ldots \frac{\partial^o f}{\partial
+            q_{m-1}^o}\).
+        
+            The number of parameters must match
+            :meth:`~org.hipparchus.analysis.differentiation.DerivativeStructure.getFreeParameters` and the derivation orders of the
+            instance and parameters must also match.
+        
+            Parameters:
+                p (:class:`~org.hipparchus.analysis.differentiation.DerivativeStructure`...): base parameters with respect to which partial derivatives were computed in the instance
+        
+            Returns:
+                derivative structure with partial derivatives computed with respect to the lower level parameters used in the \(p_i\)
+        
+            Since:
+                2.2
+        
+        
+        """
+        ...
     def reciprocal(self) -> 'DerivativeStructure':
         """
             Returns the multiplicative inverse of :code:`this` element.
@@ -4149,6 +4475,7 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
     def copySign(self, fieldDerivativeStructure: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     def cos(self) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     def cosh(self) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
+    def differentiate(self, int: int, int2: int) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
     def divide(self, double: float) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
@@ -4254,6 +4581,7 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
     @typing.overload
     @staticmethod
     def hypot(fieldDerivativeStructure: 'FieldDerivativeStructure'[_hypot_1__T], fieldDerivativeStructure2: 'FieldDerivativeStructure'[_hypot_1__T]) -> 'FieldDerivativeStructure'[_hypot_1__T]: ...
+    def integrate(self, int: int, int2: int) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
     def linearCombination(self, double: float, fieldDerivativeStructure: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T], double2: float, fieldDerivativeStructure2: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
@@ -4357,6 +4685,7 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
         
         """
         ...
+    def rebase(self, *fieldDerivativeStructure: 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     def reciprocal(self) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
     @typing.overload
     def remainder(self, double: float) -> 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]: ...
@@ -8685,6 +9014,7 @@ class __module_protocol__(typing.Protocol):
     FieldDerivativeStructure: typing.Type[FieldDerivativeStructure]
     FieldGradient: typing.Type[FieldGradient]
     FieldGradientField: typing.Type[FieldGradientField]
+    FieldTaylorMap: typing.Type[FieldTaylorMap]
     FieldUnivariateDerivative: typing.Type[FieldUnivariateDerivative]
     FieldUnivariateDerivative1: typing.Type[FieldUnivariateDerivative1]
     FieldUnivariateDerivative1Field: typing.Type[FieldUnivariateDerivative1Field]
@@ -8698,6 +9028,7 @@ class __module_protocol__(typing.Protocol):
     MultivariateDifferentiableFunction: typing.Type[MultivariateDifferentiableFunction]
     MultivariateDifferentiableVectorFunction: typing.Type[MultivariateDifferentiableVectorFunction]
     SparseGradient: typing.Type[SparseGradient]
+    TaylorMap: typing.Type[TaylorMap]
     UnivariateDerivative: typing.Type[UnivariateDerivative]
     UnivariateDerivative1: typing.Type[UnivariateDerivative1]
     UnivariateDerivative1Field: typing.Type[UnivariateDerivative1Field]

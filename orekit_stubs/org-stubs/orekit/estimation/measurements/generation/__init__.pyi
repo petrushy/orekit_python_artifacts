@@ -286,7 +286,8 @@ class PythonMeasurementBuilder(MeasurementBuilder[_PythonMeasurementBuilder__T],
             Generate a single measurement.
         
             Specified by:
-                 in interface :class:`~org.orekit.estimation.measurements.generation.MeasurementBuilder`
+                :meth:`~org.orekit.estimation.measurements.generation.MeasurementBuilder.build`Â in
+                interfaceÂ :class:`~org.orekit.estimation.measurements.generation.MeasurementBuilder`
         
             Parameters:
                 states (:class:`~org.orekit.propagation.SpacecraftState`[]): all spacecraft states (i.e. including ones that may not be relevant for the current builder)

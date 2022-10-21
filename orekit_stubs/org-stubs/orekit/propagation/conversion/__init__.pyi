@@ -118,16 +118,18 @@ class PropagatorBuilder:
         ...
     def getOrbitType(self) -> org.orekit.orbits.OrbitType:
         """
-            Get the orbit type expected for the 6 first parameters in null.
+            Get the orbit type expected for the 6 first parameters in
+            :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`.
         
             Returns:
-                orbit type to use in null
+                orbit type to use in :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`
         
             Since:
                 7.1
         
             Also see:
-                null, :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPositionAngle`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`,
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPositionAngle`
         
         
         """
@@ -147,16 +149,18 @@ class PropagatorBuilder:
         ...
     def getPositionAngle(self) -> org.orekit.orbits.PositionAngle:
         """
-            Get the position angle type expected for the 6 first parameters in null.
+            Get the position angle type expected for the 6 first parameters in
+            :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`.
         
             Returns:
-                position angle type to use in null
+                position angle type to use in :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`
         
             Since:
                 7.1
         
             Also see:
-                null, :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitType`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`,
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitType`
         
         
         """
@@ -224,7 +228,7 @@ class PropagatorConverter:
             Returns:
                 adapted propagator
         
-        :class:`~org.orekit.propagation.Propagator` convert(List<:class:`~org.orekit.propagation.SpacecraftState`> states, boolean positionOnly, List<String> freeParameters)
+        :class:`~org.orekit.propagation.Propagator` convert (List<:class:`~org.orekit.propagation.SpacecraftState`> states, boolean positionOnly, List<String> freeParameters)
         
             Find the propagator that minimize the mean square error for a sample of
             :class:`~org.orekit.propagation.SpacecraftState`.
@@ -237,7 +241,7 @@ class PropagatorConverter:
             Returns:
                 adapted propagator
         
-        :class:`~org.orekit.propagation.Propagator` convert(List<:class:`~org.orekit.propagation.SpacecraftState`> states, boolean positionOnly, String... freeParameters)
+        :class:`~org.orekit.propagation.Propagator` convert (List<:class:`~org.orekit.propagation.SpacecraftState`> states, boolean positionOnly, String... freeParameters)
         
             Find the propagator that minimize the mean square error for a sample of
             :class:`~org.orekit.propagation.SpacecraftState`.
@@ -345,17 +349,19 @@ class AbstractPropagatorBuilder(PropagatorBuilder):
         ...
     def getOrbitType(self) -> org.orekit.orbits.OrbitType:
         """
-            Get the orbit type expected for the 6 first parameters in null.
+            Get the orbit type expected for the 6 first parameters in
+            :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`.
         
             Specified by:
                 :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitType`Â in
                 interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
-                orbit type to use in null
+                orbit type to use in :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`
         
             Also see:
-                null, :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPositionAngle`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`,
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPositionAngle`
         
         
         """
@@ -376,17 +382,19 @@ class AbstractPropagatorBuilder(PropagatorBuilder):
         ...
     def getPositionAngle(self) -> org.orekit.orbits.PositionAngle:
         """
-            Get the position angle type expected for the 6 first parameters in null.
+            Get the position angle type expected for the 6 first parameters in
+            :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`.
         
             Specified by:
                 :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPositionAngle`Â in
                 interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
-                position angle type to use in null
+                position angle type to use in :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`
         
             Also see:
-                null, :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitType`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`,
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitType`
         
         
         """
@@ -904,7 +912,8 @@ class PythonPropagatorBuilder(PropagatorBuilder):
             Build a propagator.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`Â in
+                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
@@ -946,20 +955,22 @@ class PythonPropagatorBuilder(PropagatorBuilder):
         ...
     def getOrbitType(self) -> org.orekit.orbits.OrbitType:
         """
-            Get the orbit type expected for the 6 first parameters in null.
+            Get the orbit type expected for the 6 first parameters in
+            :meth:`~org.orekit.propagation.conversion.PythonPropagatorBuilder.buildPropagator`.
         
             Specified by:
                 :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitType`Â in
                 interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
-                orbit type to use in null
+                orbit type to use in :meth:`~org.orekit.propagation.conversion.PythonPropagatorBuilder.buildPropagator`
         
             Since:
                 7.1
         
             Also see:
-                null, :meth:`~org.orekit.propagation.conversion.PythonPropagatorBuilder.getPositionAngle`
+                :meth:`~org.orekit.propagation.conversion.PythonPropagatorBuilder.buildPropagator`,
+                :meth:`~org.orekit.propagation.conversion.PythonPropagatorBuilder.getPositionAngle`
         
         
         """
@@ -983,20 +994,22 @@ class PythonPropagatorBuilder(PropagatorBuilder):
         ...
     def getPositionAngle(self) -> org.orekit.orbits.PositionAngle:
         """
-            Get the position angle type expected for the 6 first parameters in null.
+            Get the position angle type expected for the 6 first parameters in
+            :meth:`~org.orekit.propagation.conversion.PythonPropagatorBuilder.buildPropagator`.
         
             Specified by:
                 :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPositionAngle`Â in
                 interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
-                position angle type to use in null
+                position angle type to use in :meth:`~org.orekit.propagation.conversion.PythonPropagatorBuilder.buildPropagator`
         
             Since:
                 7.1
         
             Also see:
-                null, :meth:`~org.orekit.propagation.conversion.PythonPropagatorBuilder.getOrbitType`
+                :meth:`~org.orekit.propagation.conversion.PythonPropagatorBuilder.buildPropagator`,
+                :meth:`~org.orekit.propagation.conversion.PythonPropagatorBuilder.getOrbitType`
         
         
         """
@@ -1092,7 +1105,7 @@ class PythonPropagatorConverter(PropagatorConverter):
             Returns:
                 adapted propagator
         
-        public :class:`~org.orekit.propagation.Propagator` convert(List<:class:`~org.orekit.propagation.SpacecraftState`> states, boolean positionOnly, List<String> freeParameters)
+        public :class:`~org.orekit.propagation.Propagator` convert (List<:class:`~org.orekit.propagation.SpacecraftState`> states, boolean positionOnly, List<String> freeParameters)
         
             Find the propagator that minimize the mean square error for a sample of
             :class:`~org.orekit.propagation.SpacecraftState`.
@@ -1109,7 +1122,7 @@ class PythonPropagatorConverter(PropagatorConverter):
             Returns:
                 adapted propagator
         
-        public :class:`~org.orekit.propagation.Propagator` convert(List<:class:`~org.orekit.propagation.SpacecraftState`> states, boolean positionOnly, String... freeParameters)
+        public :class:`~org.orekit.propagation.Propagator` convert (List<:class:`~org.orekit.propagation.SpacecraftState`> states, boolean positionOnly, String... freeParameters)
         
             Find the propagator that minimize the mean square error for a sample of
             :class:`~org.orekit.propagation.SpacecraftState`.
@@ -1233,7 +1246,8 @@ class BrouwerLyddanePropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminat
             Build a propagator.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`Â in
+                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
@@ -1277,7 +1291,8 @@ class DSSTPropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminationPropaga
             Build a propagator.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`Â in
+                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
@@ -1386,7 +1401,38 @@ class EcksteinHechlerPropagatorBuilder(AbstractPropagatorBuilder, OrbitDetermina
             Build a propagator.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`Â in
+                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+        
+            Parameters:
+                normalizedParameters (double[]): normalized values for the selected parameters
+        
+            Returns:
+                an initialized propagator
+        
+        
+        """
+        ...
+
+class EphemerisPropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminationPropagatorBuilder):
+    """
+    public class EphemerisPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder` implements :class:`~org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder`
+    
+        Builder for Ephemeris propagator.
+    
+        Since:
+            11.3
+    """
+    def __init__(self, list: java.util.List[org.orekit.propagation.SpacecraftState], int: int, double: float, attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
+    def buildKalmanModel(self, list: java.util.List[OrbitDeterminationPropagatorBuilder], list2: java.util.List[org.orekit.estimation.sequential.CovarianceMatrixProvider], parameterDriversList: org.orekit.utils.ParameterDriversList, covarianceMatrixProvider: org.orekit.estimation.sequential.CovarianceMatrixProvider) -> org.orekit.estimation.sequential.AbstractKalmanModel: ...
+    def buildLSModel(self, orbitDeterminationPropagatorBuilderArray: typing.List[OrbitDeterminationPropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.AbstractBatchLSModel: ...
+    def buildPropagator(self, doubleArray: typing.List[float]) -> org.orekit.propagation.Propagator:
+        """
+            Build a propagator..
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`Â in
+                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
@@ -1440,7 +1486,8 @@ class KeplerianPropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminationPr
             Build a propagator.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`Â in
+                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
@@ -1484,7 +1531,8 @@ class NumericalPropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminationPr
             Build a propagator.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`Â in
+                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
@@ -1648,7 +1696,8 @@ class PythonOrbitDeterminationPropagatorBuilder(OrbitDeterminationPropagatorBuil
             Build a propagator.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`Â in
+                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
@@ -1690,20 +1739,23 @@ class PythonOrbitDeterminationPropagatorBuilder(OrbitDeterminationPropagatorBuil
         ...
     def getOrbitType(self) -> org.orekit.orbits.OrbitType:
         """
-            Get the orbit type expected for the 6 first parameters in null.
+            Get the orbit type expected for the 6 first parameters in
+            :meth:`~org.orekit.propagation.conversion.PythonOrbitDeterminationPropagatorBuilder.buildPropagator`.
         
             Specified by:
                 :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitType`Â in
                 interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
-                orbit type to use in null
+                orbit type to use in
+                :meth:`~org.orekit.propagation.conversion.PythonOrbitDeterminationPropagatorBuilder.buildPropagator`
         
             Since:
                 7.1
         
             Also see:
-                null, :meth:`~org.orekit.propagation.conversion.PythonOrbitDeterminationPropagatorBuilder.getPositionAngle`
+                :meth:`~org.orekit.propagation.conversion.PythonOrbitDeterminationPropagatorBuilder.buildPropagator`,
+                :meth:`~org.orekit.propagation.conversion.PythonOrbitDeterminationPropagatorBuilder.getPositionAngle`
         
         
         """
@@ -1727,20 +1779,23 @@ class PythonOrbitDeterminationPropagatorBuilder(OrbitDeterminationPropagatorBuil
         ...
     def getPositionAngle(self) -> org.orekit.orbits.PositionAngle:
         """
-            Get the position angle type expected for the 6 first parameters in null.
+            Get the position angle type expected for the 6 first parameters in
+            :meth:`~org.orekit.propagation.conversion.PythonOrbitDeterminationPropagatorBuilder.buildPropagator`.
         
             Specified by:
                 :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPositionAngle`Â in
                 interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
-                position angle type to use in null
+                position angle type to use in
+                :meth:`~org.orekit.propagation.conversion.PythonOrbitDeterminationPropagatorBuilder.buildPropagator`
         
             Since:
                 7.1
         
             Also see:
-                null, :meth:`~org.orekit.propagation.conversion.PythonOrbitDeterminationPropagatorBuilder.getOrbitType`
+                :meth:`~org.orekit.propagation.conversion.PythonOrbitDeterminationPropagatorBuilder.buildPropagator`,
+                :meth:`~org.orekit.propagation.conversion.PythonOrbitDeterminationPropagatorBuilder.getOrbitType`
         
         
         """
@@ -1836,7 +1891,8 @@ class TLEPropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminationPropagat
             Build a propagator.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`Â in
+                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
@@ -1872,6 +1928,7 @@ class __module_protocol__(typing.Protocol):
     DormandPrince54IntegratorBuilder: typing.Type[DormandPrince54IntegratorBuilder]
     DormandPrince853IntegratorBuilder: typing.Type[DormandPrince853IntegratorBuilder]
     EcksteinHechlerPropagatorBuilder: typing.Type[EcksteinHechlerPropagatorBuilder]
+    EphemerisPropagatorBuilder: typing.Type[EphemerisPropagatorBuilder]
     EulerIntegratorBuilder: typing.Type[EulerIntegratorBuilder]
     FiniteDifferencePropagatorConverter: typing.Type[FiniteDifferencePropagatorConverter]
     GillIntegratorBuilder: typing.Type[GillIntegratorBuilder]

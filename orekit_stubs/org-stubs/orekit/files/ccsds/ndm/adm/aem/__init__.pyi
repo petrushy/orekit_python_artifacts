@@ -21,7 +21,7 @@ import typing
 
 class Aem(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.section.Header, 'AemSegment'], org.orekit.files.general.AttitudeEphemerisFile[org.orekit.utils.TimeStampedAngularCoordinates, 'AemSegment']):
     """
-    public class Aem extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.section.Header`,:class:`~org.orekit.files.ccsds.ndm.adm.aem.AemSegment`> implements :class:`~org.orekit.files.general.AttitudeEphemerisFile`<:class:`~org.orekit.utils.TimeStampedAngularCoordinates`,:class:`~org.orekit.files.ccsds.ndm.adm.aem.AemSegment`>
+    public class Aem extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.section.Header`, :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemSegment`> implements :class:`~org.orekit.files.general.AttitudeEphemerisFile`<:class:`~org.orekit.utils.TimeStampedAngularCoordinates`, :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemSegment`>
     
         This class stores all the information of the Attitude Ephemeris Message (AEM) File parsed by AEMParser. It contains the
         header and a list of Attitude Ephemerides Blocks each containing metadata and a list of attitude ephemerides data lines.
@@ -450,7 +450,7 @@ class AemMetadataKey(java.lang.Enum['AemMetadataKey']):
 
 class AemParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Aem, 'AemParser'], org.orekit.files.general.AttitudeEphemerisFileParser[Aem]):
     """
-    public class AemParser extends :class:`~org.orekit.files.ccsds.ndm.adm.AdmParser`<:class:`~org.orekit.files.ccsds.ndm.adm.aem.Aem`,:class:`~org.orekit.files.ccsds.ndm.adm.aem.AemParser`> implements :class:`~org.orekit.files.general.AttitudeEphemerisFileParser`<:class:`~org.orekit.files.ccsds.ndm.adm.aem.Aem`>
+    public class AemParser extends :class:`~org.orekit.files.ccsds.ndm.adm.AdmParser`<:class:`~org.orekit.files.ccsds.ndm.adm.aem.Aem`, :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemParser`> implements :class:`~org.orekit.files.general.AttitudeEphemerisFileParser`<:class:`~org.orekit.files.ccsds.ndm.adm.aem.Aem`>
     
         A parser for the CCSDS AEM (Attitude Ephemeris Message).
     
@@ -651,7 +651,7 @@ class AemParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Aem, 'AemParser'], org.
 
 class AemSatelliteEphemeris(org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris[org.orekit.utils.TimeStampedAngularCoordinates, 'AemSegment']):
     """
-    public class AemSatelliteEphemeris extends Object implements :class:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris`<:class:`~org.orekit.utils.TimeStampedAngularCoordinates`,:class:`~org.orekit.files.ccsds.ndm.adm.aem.AemSegment`>
+    public class AemSatelliteEphemeris extends Object implements :class:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris`<:class:`~org.orekit.utils.TimeStampedAngularCoordinates`, :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemSegment`>
     
         AEM ephemeris blocks for a single satellite.
     """
@@ -702,7 +702,7 @@ class AemSatelliteEphemeris(org.orekit.files.general.AttitudeEphemerisFile.Satel
 
 class AemSegment(org.orekit.files.ccsds.section.Segment[AemMetadata, AemData], org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment[org.orekit.utils.TimeStampedAngularCoordinates]):
     """
-    public class AemSegment extends :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.adm.aem.AemMetadata`,:class:`~org.orekit.files.ccsds.ndm.adm.aem.AemData`> implements :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`<:class:`~org.orekit.utils.TimeStampedAngularCoordinates`>
+    public class AemSegment extends :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.adm.aem.AemMetadata`, :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemData`> implements :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`<:class:`~org.orekit.utils.TimeStampedAngularCoordinates`>
     
         This class stores the metadata and data for one attitude segment.
     
@@ -812,7 +812,7 @@ class AemSegment(org.orekit.files.ccsds.section.Segment[AemMetadata, AemData], o
 
 class AemWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[org.orekit.files.ccsds.section.Header, AemSegment, Aem]):
     """
-    public class AemWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.section.Header`,:class:`~org.orekit.files.ccsds.ndm.adm.aem.AemSegment`,:class:`~org.orekit.files.ccsds.ndm.adm.aem.Aem`>
+    public class AemWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.section.Header`, :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemSegment`, :class:`~org.orekit.files.ccsds.ndm.adm.aem.Aem`>
     
         A writer for Attitude Ephemeris Messsage (AEM) files.
     

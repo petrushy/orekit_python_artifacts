@@ -546,6 +546,38 @@ class FrameFacade:
         """
         ...
     @staticmethod
+    def getTransform(frameFacade: 'FrameFacade', frameFacade2: 'FrameFacade', frame3: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider) -> org.orekit.frames.Transform:
+        """
+            Get the transform between :class:`~org.orekit.files.ccsds.definitions.FrameFacade`.
+        
+            In case both input and output frames are :class:`~org.orekit.files.ccsds.definitions.OrbitRelativeFrame`, the returned
+            transform will only be composed of a null. Only :class:`~org.orekit.frames.LOFType` will be recognized.
+        
+            Note that if the input/output :class:`~org.orekit.files.ccsds.definitions.FrameFacade` is defined using a :
+        
+              - **:class:`~org.orekit.files.ccsds.definitions.CelestialBodyFrame`**
+              - **:class:`~org.orekit.files.ccsds.definitions.SpacecraftBodyFrame`**
+        
+            then **an exception will be thrown** (currently not supported).
+        
+            Note that the pivot frame provided **must be inertial** and **consistent** to what you are working with (i.e GCRF if
+            around Earth for example).
+        
+            Parameters:
+                frameIn (:class:`~org.orekit.files.ccsds.definitions.FrameFacade`): the input :class:`~org.orekit.files.ccsds.definitions.FrameFacade` to convert from
+                frameOut (:class:`~org.orekit.files.ccsds.definitions.FrameFacade`): the output :class:`~org.orekit.files.ccsds.definitions.FrameFacade` to convert to
+                inertialPivotFrame (:class:`~org.orekit.frames.Frame`): **inertial** frame used as a pivot to create the transform
+                date (:class:`~org.orekit.time.AbsoluteDate`): the date for the transform
+                pv (:class:`~org.orekit.utils.PVCoordinatesProvider`): the position and velocity coordinates provider (required in case one of the frames is an
+                    :class:`~org.orekit.files.ccsds.definitions.OrbitRelativeFrame`)
+        
+            Returns:
+                the transform between :class:`~org.orekit.files.ccsds.definitions.FrameFacade`.
+        
+        
+        """
+        ...
+    @staticmethod
     def map(frame: org.orekit.frames.Frame) -> 'FrameFacade':
         """
             Map an Orekit frame to a CCSDS frame facade.
@@ -554,7 +586,7 @@ class FrameFacade:
                 frame (:class:`~org.orekit.frames.Frame`): a reference frame.
         
             Returns:
-                the CCSDSFrame corresponding to the Orekit frame
+                the CCSDS frame corresponding to the Orekit frame
         
         
         """
@@ -1482,6 +1514,59 @@ class Units:
     
     """
 
+class YesNoUnknown(java.lang.Enum['YesNoUnknown']):
+    """
+    public enum YesNoUnknown extends Enum<:class:`~org.orekit.files.ccsds.definitions.YesNoUnknown`>
+    
+        Yes, No, Unknown values for various elements.
+    """
+    YES: typing.ClassVar['YesNoUnknown'] = ...
+    NO: typing.ClassVar['YesNoUnknown'] = ...
+    UNKOWN: typing.ClassVar['YesNoUnknown'] = ...
+    _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
+    @typing.overload
+    @staticmethod
+    def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
+    @typing.overload
+    @staticmethod
+    def valueOf(string: str) -> 'YesNoUnknown':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (String): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                : if this enum type has no constant with the specified name
+                : if the argument is null
+        
+        
+        """
+        ...
+    @staticmethod
+    def values() -> typing.List['YesNoUnknown']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            
+            for (YesNoUnknown c : YesNoUnknown.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
+
 
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.definitions")``.
@@ -1503,3 +1588,4 @@ class __module_protocol__(typing.Protocol):
     TimeConverter: typing.Type[TimeConverter]
     TimeSystem: typing.Type[TimeSystem]
     Units: typing.Type[Units]
+    YesNoUnknown: typing.Type[YesNoUnknown]

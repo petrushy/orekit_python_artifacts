@@ -142,7 +142,7 @@ class HolmesFeatherstoneAttractionModel(org.orekit.forces.AbstractForceModel, or
             Compute acceleration.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.ForceModel`
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
@@ -160,7 +160,7 @@ class HolmesFeatherstoneAttractionModel(org.orekit.forces.AbstractForceModel, or
             Compute acceleration.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.ForceModel`
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
@@ -405,7 +405,8 @@ class NewtonianAttraction(org.orekit.forces.AbstractForceModel):
         """
             Compute the contribution of the force model to the perturbing acceleration.
         
-            The default implementation simply adds the null as a non-Keplerian acceleration.
+            The default implementation simply adds the :meth:`~org.orekit.forces.ForceModel.acceleration` as a non-Keplerian
+            acceleration.
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude

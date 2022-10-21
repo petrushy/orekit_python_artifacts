@@ -159,7 +159,7 @@ _SsrMessage__H = typing.TypeVar('_SsrMessage__H', bound=SsrHeader)  # <H>
 _SsrMessage__D = typing.TypeVar('_SsrMessage__D', bound=SsrData)  # <D>
 class SsrMessage(org.orekit.gnss.metric.messages.ParsedMessage, typing.Generic[_SsrMessage__H, _SsrMessage__D]):
     """
-    public class SsrMessage<H extends :class:`~org.orekit.gnss.metric.messages.ssr.SsrHeader`,D extends :class:`~org.orekit.gnss.metric.messages.ssr.SsrData`> extends :class:`~org.orekit.gnss.metric.messages.ParsedMessage`
+    public class SsrMessage<H extends :class:`~org.orekit.gnss.metric.messages.ssr.SsrHeader`, D extends :class:`~org.orekit.gnss.metric.messages.ssr.SsrData`> extends :class:`~org.orekit.gnss.metric.messages.ParsedMessage`
     
         Base class for SSR messages.
     

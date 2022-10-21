@@ -222,7 +222,8 @@ class STMEquations(org.orekit.propagation.integration.AdditionalDerivativesProvi
             during the same propagation.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
+                :meth:`~org.orekit.propagation.integration.AdditionalEquations.computeDerivatives`Â in
+                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalEquations`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional state

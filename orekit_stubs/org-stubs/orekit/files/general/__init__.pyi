@@ -19,7 +19,7 @@ _AttitudeEphemerisFile__C = typing.TypeVar('_AttitudeEphemerisFile__C', bound=or
 _AttitudeEphemerisFile__S = typing.TypeVar('_AttitudeEphemerisFile__S', bound='AttitudeEphemerisFile.AttitudeEphemerisSegment')  # <S>
 class AttitudeEphemerisFile(typing.Generic[_AttitudeEphemerisFile__C, _AttitudeEphemerisFile__S]):
     """
-    public interface AttitudeEphemerisFile<C extends :class:`~org.orekit.utils.TimeStampedAngularCoordinates`,S extends :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`<C>>
+    public interface AttitudeEphemerisFile<C extends :class:`~org.orekit.utils.TimeStampedAngularCoordinates`, S extends :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`<C>>
     
         An interface for accessing the data stored in an attitude ephemeris file.
     
@@ -57,7 +57,7 @@ class AttitudeEphemerisFile(typing.Generic[_AttitudeEphemerisFile__C, _AttitudeE
 _AttitudeEphemerisFileParser__T = typing.TypeVar('_AttitudeEphemerisFileParser__T', bound=AttitudeEphemerisFile)  # <T>
 class AttitudeEphemerisFileParser(typing.Generic[_AttitudeEphemerisFileParser__T]):
     """
-    public interface AttitudeEphemerisFileParser<T extends :class:`~org.orekit.files.general.AttitudeEphemerisFile`<?,?>>
+    public interface AttitudeEphemerisFileParser<T extends :class:`~org.orekit.files.general.AttitudeEphemerisFile`<?, ?>>
     
         Parse an ephemeris file.
     
@@ -108,7 +108,7 @@ _EphemerisFile__C = typing.TypeVar('_EphemerisFile__C', bound=org.orekit.utils.T
 _EphemerisFile__S = typing.TypeVar('_EphemerisFile__S', bound='EphemerisFile.EphemerisSegment')  # <S>
 class EphemerisFile(typing.Generic[_EphemerisFile__C, _EphemerisFile__S]):
     """
-    public interface EphemerisFile<C extends :class:`~org.orekit.utils.TimeStampedPVCoordinates`,S extends :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`<C>>
+    public interface EphemerisFile<C extends :class:`~org.orekit.utils.TimeStampedPVCoordinates`, S extends :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`<C>>
     
         An interface for accessing the data stored in an ephemeris file and using the data to create a working
         :class:`~org.orekit.propagation.Propagator`.
@@ -145,7 +145,7 @@ class EphemerisFile(typing.Generic[_EphemerisFile__C, _EphemerisFile__S]):
 _EphemerisFileParser__T = typing.TypeVar('_EphemerisFileParser__T', bound=EphemerisFile)  # <T>
 class EphemerisFileParser(typing.Generic[_EphemerisFileParser__T]):
     """
-    public interface EphemerisFileParser<T extends :class:`~org.orekit.files.general.EphemerisFile`<?,?>>
+    public interface EphemerisFileParser<T extends :class:`~org.orekit.files.general.EphemerisFile`<?, ?>>
     
         Parse an ephemeris file.
     """
@@ -188,7 +188,7 @@ class EphemerisFileWriter:
 
 class OrekitAttitudeEphemerisFile(AttitudeEphemerisFile[org.orekit.utils.TimeStampedAngularCoordinates, 'OrekitAttitudeEphemerisFile.OrekitAttitudeEphemerisSegment']):
     """
-    public class OrekitAttitudeEphemerisFile extends Object implements :class:`~org.orekit.files.general.AttitudeEphemerisFile`<:class:`~org.orekit.utils.TimeStampedAngularCoordinates`,:class:`~org.orekit.files.general.OrekitAttitudeEphemerisFile.OrekitAttitudeEphemerisSegment`>
+    public class OrekitAttitudeEphemerisFile extends Object implements :class:`~org.orekit.files.general.AttitudeEphemerisFile`<:class:`~org.orekit.utils.TimeStampedAngularCoordinates`, :class:`~org.orekit.files.general.OrekitAttitudeEphemerisFile.OrekitAttitudeEphemerisSegment`>
     
         A class for encapsulating Orekit propagators within an :class:`~org.orekit.files.general.AttitudeEphemerisFile`
         complaint object that makes for easy serialization to external ephemeris formats like AEM.
@@ -233,7 +233,7 @@ class OrekitAttitudeEphemerisFile(AttitudeEphemerisFile[org.orekit.utils.TimeSta
 
 class OrekitEphemerisFile(EphemerisFile[org.orekit.utils.TimeStampedPVCoordinates, 'OrekitEphemerisFile.OrekitEphemerisSegment']):
     """
-    public class OrekitEphemerisFile extends Object implements :class:`~org.orekit.files.general.EphemerisFile`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`,:class:`~org.orekit.files.general.OrekitEphemerisFile.OrekitEphemerisSegment`>
+    public class OrekitEphemerisFile extends Object implements :class:`~org.orekit.files.general.EphemerisFile`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`, :class:`~org.orekit.files.general.OrekitEphemerisFile.OrekitEphemerisSegment`>
     
         A class for encapsulating Orekit propagators within an :class:`~org.orekit.files.general.EphemerisFile` complaint object
         that makes for easy serialization to external ephemeris formats like OEM.

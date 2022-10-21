@@ -480,7 +480,8 @@ class EstimatedTroposphericModel(DiscreteTroposphericModel):
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
             Specified by:
-                 in interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (double): the elevation of the satellite, in radians
@@ -499,7 +500,8 @@ class EstimatedTroposphericModel(DiscreteTroposphericModel):
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
             Specified by:
-                 in interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (T): the elevation of the satellite, in radians
@@ -537,7 +539,8 @@ class FixedTroposphericDelay(DiscreteTroposphericModel):
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
             Specified by:
-                 in interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (double): the elevation of the satellite, in radians
@@ -556,7 +559,8 @@ class FixedTroposphericDelay(DiscreteTroposphericModel):
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
             Specified by:
-                 in interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (T): the elevation of the satellite, in radians
@@ -679,7 +683,8 @@ class MariniMurrayModel(DiscreteTroposphericModel):
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
             Specified by:
-                 in interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (double): the elevation of the satellite, in radians
@@ -698,7 +703,8 @@ class MariniMurrayModel(DiscreteTroposphericModel):
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
             Specified by:
-                 in interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (T): the elevation of the satellite, in radians
@@ -865,7 +871,8 @@ class PythonDiscreteTroposphericModel(DiscreteTroposphericModel):
             Python.
         
             Specified by:
-                 in interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (double): the elevation of the satellite, in radians
@@ -885,7 +892,8 @@ class PythonDiscreteTroposphericModel(DiscreteTroposphericModel):
             pathDelay_TTTF(...) for Python extension
         
             Specified by:
-                 in interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (T): the elevation of the satellite, in radians
@@ -1020,7 +1028,8 @@ class SaastamoinenModel(DiscreteTroposphericModel):
                 10.2
         
             Also see:
-                null, null
+                :meth:`~org.orekit.models.earth.troposphere.SaastamoinenModel.pathDelay`,
+                :meth:`~org.orekit.models.earth.troposphere.SaastamoinenModel.pathDelay`
         
         
         """
@@ -1055,7 +1064,8 @@ class SaastamoinenModel(DiscreteTroposphericModel):
             threshold will use the value obtained for the threshold itself.
         
             Specified by:
-                 in interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (double): the elevation of the satellite, in radians
@@ -1084,7 +1094,8 @@ class SaastamoinenModel(DiscreteTroposphericModel):
             threshold will use the value obtained for the threshold itself.
         
             Specified by:
-                 in interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (T): the elevation of the satellite, in radians
@@ -1113,7 +1124,8 @@ class SaastamoinenModel(DiscreteTroposphericModel):
                 10.2
         
             Also see:
-                null, null
+                :meth:`~org.orekit.models.earth.troposphere.SaastamoinenModel.pathDelay`,
+                :meth:`~org.orekit.models.earth.troposphere.SaastamoinenModel.pathDelay`
         
         
         """
@@ -1199,8 +1211,9 @@ class TimeSpanEstimatedTroposphericModel(DiscreteTroposphericModel):
     @typing.overload
     def extractParameters(self, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]:
         """
-            Extract the proper parameter drivers' values from the array in input of the null method. Parameters are filtered given
-            an input date.
+            Extract the proper parameter drivers' values from the array in input of the
+            :meth:`~org.orekit.models.earth.troposphere.TimeSpanEstimatedTroposphericModel.pathDelay` method. Parameters are
+            filtered given an input date.
         
             Parameters:
                 parameters (double[]): the input parameters array
@@ -1214,8 +1227,9 @@ class TimeSpanEstimatedTroposphericModel(DiscreteTroposphericModel):
     @typing.overload
     def extractParameters(self, tArray: typing.List[_extractParameters_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_extractParameters_1__T]) -> typing.List[_extractParameters_1__T]:
         """
-            Extract the proper parameter drivers' values from the array in input of the null method. Parameters are filtered given
-            an input date.
+            Extract the proper parameter drivers' values from the array in input of the
+            :meth:`~org.orekit.models.earth.troposphere.TimeSpanEstimatedTroposphericModel.pathDelay` method. Parameters are
+            filtered given an input date.
         
             Parameters:
                 parameters (T[]): the input parameters array
@@ -1250,7 +1264,8 @@ class TimeSpanEstimatedTroposphericModel(DiscreteTroposphericModel):
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
             Specified by:
-                 in interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (double): the elevation of the satellite, in radians
@@ -1269,7 +1284,8 @@ class TimeSpanEstimatedTroposphericModel(DiscreteTroposphericModel):
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
             Specified by:
-                 in interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (T): the elevation of the satellite, in radians
@@ -1401,7 +1417,8 @@ class ViennaOneModel(DiscreteTroposphericModel, MappingFunction):
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
             Specified by:
-                 in interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (double): the elevation of the satellite, in radians
@@ -1420,7 +1437,8 @@ class ViennaOneModel(DiscreteTroposphericModel, MappingFunction):
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
             Specified by:
-                 in interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (T): the elevation of the satellite, in radians

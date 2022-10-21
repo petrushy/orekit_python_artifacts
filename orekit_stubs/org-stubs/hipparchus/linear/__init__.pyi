@@ -684,6 +684,18 @@ class FieldMatrixChangingVisitor(typing.Generic[_FieldMatrixChangingVisitor__T])
         """
         ...
 
+_FieldMatrixDecomposer__T = typing.TypeVar('_FieldMatrixDecomposer__T', bound=org.hipparchus.FieldElement)  # <T>
+class FieldMatrixDecomposer(typing.Generic[_FieldMatrixDecomposer__T]):
+    """
+    public interface FieldMatrixDecomposer<T extends :class:`~org.hipparchus.FieldElement`<T>>
+    
+        Interface for all algorithms providing matrix decomposition.
+    
+        Since:
+            2.2
+    """
+    def decompose(self, fieldMatrix: 'FieldMatrix'[_FieldMatrixDecomposer__T]) -> FieldDecompositionSolver[_FieldMatrixDecomposer__T]: ...
+
 _FieldMatrixPreservingVisitor__T = typing.TypeVar('_FieldMatrixPreservingVisitor__T', bound=org.hipparchus.FieldElement)  # <T>
 class FieldMatrixPreservingVisitor(typing.Generic[_FieldMatrixPreservingVisitor__T]):
     """
@@ -933,6 +945,63 @@ class FieldVectorPreservingVisitor(typing.Generic[_FieldVectorPreservingVisitor_
             Parameters:
                 index (int): the index of the entry being visited
                 value (:class:`~org.hipparchus.linear.FieldVectorPreservingVisitor`): the value of the entry being visited
+        
+        
+        """
+        ...
+
+class HessenbergTransformer:
+    """
+    public class HessenbergTransformer extends Object
+    
+        Class transforming a general real matrix to Hessenberg form.
+    
+        A m Ã— m matrix A can be written as the product of three matrices: A = P Ã— H Ã— P :sup:`T` with P an orthogonal matrix
+        and H a Hessenberg matrix. Both P and H are m Ã— m matrices.
+    
+        Transformation to Hessenberg form is often not a goal by itself, but it is an intermediate step in more general
+        decomposition algorithms like :class:`~org.hipparchus.linear.EigenDecomposition`. This class is therefore intended for
+        internal use by the library and is not public. As a consequence of this explicitly limited scope, many methods directly
+        returns references to internal arrays, not copies.
+    
+        This class is based on the method orthes in class EigenvalueDecomposition from the `JAMA
+        <http://math.nist.gov/javanumerics/jama/>` library.
+    
+        Also see:
+            `MathWorld <http://mathworld.wolfram.com/HessenbergDecomposition.html>`, `Householder Transformations
+            <http://en.wikipedia.org/wiki/Householder_transformation>`
+    """
+    def __init__(self, realMatrix: 'RealMatrix'): ...
+    def getH(self) -> 'RealMatrix':
+        """
+            Returns the Hessenberg matrix H of the transform.
+        
+            Returns:
+                the H matrix
+        
+        
+        """
+        ...
+    def getP(self) -> 'RealMatrix':
+        """
+            Returns the matrix P of the transform.
+        
+            P is an orthogonal matrix, i.e. its inverse is also its transpose.
+        
+            Returns:
+                the P matrix
+        
+        
+        """
+        ...
+    def getPT(self) -> 'RealMatrix':
+        """
+            Returns the transpose of the matrix P of the transform.
+        
+            P is an orthogonal matrix, i.e. its inverse is also its transpose.
+        
+            Returns:
+                the transpose of the P matrix
         
         
         """
@@ -2861,6 +2930,121 @@ class RiccatiEquationSolver:
         """
         ...
 
+class SchurTransformer:
+    """
+    public class SchurTransformer extends Object
+    
+        Class transforming a general real matrix to Schur form.
+    
+        A m Ã— m matrix A can be written as the product of three matrices: A = P Ã— T Ã— P :sup:`T` with P an orthogonal matrix
+        and T an quasi-triangular matrix. Both P and T are m Ã— m matrices.
+    
+        Transformation to Schur form is often not a goal by itself, but it is an intermediate step in more general decomposition
+        algorithms like :class:`~org.hipparchus.linear.EigenDecomposition`. This class is therefore intended for internal use by
+        the library and is not public. As a consequence of this explicitly limited scope, many methods directly returns
+        references to internal arrays, not copies.
+    
+        This class is based on the method hqr2 in class EigenvalueDecomposition from the `JAMA
+        <http://math.nist.gov/javanumerics/jama/>` library.
+    
+        Also see:
+            `Schur Decomposition - MathWorld <http://mathworld.wolfram.com/SchurDecomposition.html>`, `Schur Decomposition -
+            Wikipedia <http://en.wikipedia.org/wiki/Schur_decomposition>`, `Householder Transformations
+            <http://en.wikipedia.org/wiki/Householder_transformation>`
+    """
+    def __init__(self, realMatrix: 'RealMatrix'): ...
+    def getP(self) -> 'RealMatrix':
+        """
+            Returns the matrix P of the transform.
+        
+            P is an orthogonal matrix, i.e. its inverse is also its transpose.
+        
+            Returns:
+                the P matrix
+        
+        
+        """
+        ...
+    def getPT(self) -> 'RealMatrix':
+        """
+            Returns the transpose of the matrix P of the transform.
+        
+            P is an orthogonal matrix, i.e. its inverse is also its transpose.
+        
+            Returns:
+                the transpose of the P matrix
+        
+        
+        """
+        ...
+    def getT(self) -> 'RealMatrix':
+        """
+            Returns the quasi-triangular Schur matrix T of the transform.
+        
+            Returns:
+                the T matrix
+        
+        
+        """
+        ...
+
+class SemiDefinitePositiveCholeskyDecomposition:
+    """
+    public class SemiDefinitePositiveCholeskyDecomposition extends Object
+    
+        Calculates the Cholesky decomposition of a positive semidefinite matrix.
+    
+        The classic Cholesky decomposition (:class:`~org.hipparchus.linear.CholeskyDecomposition`) applies to real symmetric
+        positive-definite matrix. This class extends the Cholesky decomposition to positive semidefinite matrix. The main
+        application is for estimation based on the Unscented Kalman Filter.
+    
+        Since:
+            2.2
+    
+        Also see:
+            "J. Hartikainen, A. Solin, and S. SÃƒÂ¤rkkÃƒÂ¤. Optimal Ã¯Â¬ï¿½ltering with Kalman Ã¯Â¬ï¿½lters and smoothers, Dept. of
+            Biomedica Engineering and Computational Sciences, Aalto University School of Science, Aug. 2011."
+    """
+    POSITIVITY_THRESHOLD: typing.ClassVar[float] = ...
+    """
+    public static final double POSITIVITY_THRESHOLD
+    
+        Default threshold below which elements are not considered positive.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    @typing.overload
+    def __init__(self, realMatrix: 'RealMatrix'): ...
+    @typing.overload
+    def __init__(self, realMatrix: 'RealMatrix', double: float): ...
+    def getL(self) -> 'RealMatrix':
+        """
+            Returns the matrix L of the decomposition.
+        
+            L is an lower-triangular matrix
+        
+            Returns:
+                the L matrix
+        
+        
+        """
+        ...
+    def getLT(self) -> 'RealMatrix':
+        """
+            Returns the transpose of the matrix L of the decomposition.
+        
+            L :sup:`T` is an upper-triangular matrix
+        
+            Returns:
+                the transpose of the matrix L of the decomposition
+        
+        
+        """
+        ...
+
 class SingularValueDecomposition:
     """
     public class SingularValueDecomposition extends Object
@@ -4261,6 +4445,19 @@ class DefaultRealMatrixPreservingVisitor(RealMatrixPreservingVisitor):
         """
         ...
 
+_FieldLUDecomposer__T = typing.TypeVar('_FieldLUDecomposer__T', bound=org.hipparchus.FieldElement)  # <T>
+class FieldLUDecomposer(FieldMatrixDecomposer[_FieldLUDecomposer__T], typing.Generic[_FieldLUDecomposer__T]):
+    """
+    public class FieldLUDecomposer<T extends :class:`~org.hipparchus.FieldElement`<T>> extends Object implements :class:`~org.hipparchus.linear.FieldMatrixDecomposer`<T>
+    
+        Matrix decomposer using LU-decomposition.
+    
+        Since:
+            2.2
+    """
+    def __init__(self, predicate: typing.Union[java.util.function.Predicate[_FieldLUDecomposer__T], typing.Callable[[_FieldLUDecomposer__T], bool]]): ...
+    def decompose(self, fieldMatrix: 'FieldMatrix'[_FieldLUDecomposer__T]) -> FieldDecompositionSolver[_FieldLUDecomposer__T]: ...
+
 _FieldMatrix__T = typing.TypeVar('_FieldMatrix__T', bound=org.hipparchus.FieldElement)  # <T>
 class FieldMatrix(AnyMatrix, typing.Generic[_FieldMatrix__T]):
     def add(self, fieldMatrix: 'FieldMatrix'[_FieldMatrix__T]) -> 'FieldMatrix'[_FieldMatrix__T]: ...
@@ -4338,6 +4535,19 @@ class FieldMatrix(AnyMatrix, typing.Generic[_FieldMatrix__T]):
     def walkInRowOrder(self, fieldMatrixPreservingVisitor: FieldMatrixPreservingVisitor[_FieldMatrix__T]) -> _FieldMatrix__T: ...
     @typing.overload
     def walkInRowOrder(self, fieldMatrixPreservingVisitor: FieldMatrixPreservingVisitor[_FieldMatrix__T], int: int, int2: int, int3: int, int4: int) -> _FieldMatrix__T: ...
+
+_FieldQRDecomposer__T = typing.TypeVar('_FieldQRDecomposer__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldQRDecomposer(FieldMatrixDecomposer[_FieldQRDecomposer__T], typing.Generic[_FieldQRDecomposer__T]):
+    """
+    public class FieldQRDecomposer<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object implements :class:`~org.hipparchus.linear.FieldMatrixDecomposer`<T>
+    
+        Matrix decomposer using QR-decomposition.
+    
+        Since:
+            2.2
+    """
+    def __init__(self, t: _FieldQRDecomposer__T): ...
+    def decompose(self, fieldMatrix: FieldMatrix[_FieldQRDecomposer__T]) -> FieldDecompositionSolver[_FieldQRDecomposer__T]: ...
 
 class JacobiPreconditioner(RealLinearOperator):
     """
@@ -8045,14 +8255,18 @@ class __module_protocol__(typing.Protocol):
     DiagonalMatrix: typing.Type[DiagonalMatrix]
     EigenDecomposition: typing.Type[EigenDecomposition]
     FieldDecompositionSolver: typing.Type[FieldDecompositionSolver]
+    FieldLUDecomposer: typing.Type[FieldLUDecomposer]
     FieldLUDecomposition: typing.Type[FieldLUDecomposition]
     FieldMatrix: typing.Type[FieldMatrix]
     FieldMatrixChangingVisitor: typing.Type[FieldMatrixChangingVisitor]
+    FieldMatrixDecomposer: typing.Type[FieldMatrixDecomposer]
     FieldMatrixPreservingVisitor: typing.Type[FieldMatrixPreservingVisitor]
+    FieldQRDecomposer: typing.Type[FieldQRDecomposer]
     FieldQRDecomposition: typing.Type[FieldQRDecomposition]
     FieldVector: typing.Type[FieldVector]
     FieldVectorChangingVisitor: typing.Type[FieldVectorChangingVisitor]
     FieldVectorPreservingVisitor: typing.Type[FieldVectorPreservingVisitor]
+    HessenbergTransformer: typing.Type[HessenbergTransformer]
     IterativeLinearSolver: typing.Type[IterativeLinearSolver]
     IterativeLinearSolverEvent: typing.Type[IterativeLinearSolverEvent]
     JacobiPreconditioner: typing.Type[JacobiPreconditioner]
@@ -8080,6 +8294,8 @@ class __module_protocol__(typing.Protocol):
     RectangularCholeskyDecomposition: typing.Type[RectangularCholeskyDecomposition]
     RiccatiEquationSolver: typing.Type[RiccatiEquationSolver]
     RiccatiEquationSolverImpl: typing.Type[RiccatiEquationSolverImpl]
+    SchurTransformer: typing.Type[SchurTransformer]
+    SemiDefinitePositiveCholeskyDecomposition: typing.Type[SemiDefinitePositiveCholeskyDecomposition]
     SingularValueDecomposer: typing.Type[SingularValueDecomposer]
     SingularValueDecomposition: typing.Type[SingularValueDecomposition]
     SparseFieldMatrix: typing.Type[SparseFieldMatrix]

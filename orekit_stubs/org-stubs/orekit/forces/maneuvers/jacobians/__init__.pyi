@@ -305,12 +305,12 @@ class TriggerDate(org.orekit.propagation.AdditionalStateProvider, org.orekit.for
             Initialize the additional state provider at the start of propagation.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter.init`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter`
-        
-            Specified by:
                 :meth:`~org.orekit.propagation.AdditionalStateProvider.init`Â in
                 interfaceÂ :class:`~org.orekit.propagation.AdditionalStateProvider`
+        
+            Specified by:
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter.init`Â in
+                interfaceÂ :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter`
         
             Parameters:
                 initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial state information at the start of propagation

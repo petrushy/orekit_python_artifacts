@@ -323,7 +323,8 @@ class EstimatedIonosphericModel(IonosphericModel):
             implemented to compute the path delay for any elevation angle.
         
             Specified by:
-                 in interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -362,7 +363,8 @@ class EstimatedIonosphericModel(IonosphericModel):
             implemented to compute the path delay for any elevation angle.
         
             Specified by:
-                 in interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
@@ -516,7 +518,7 @@ class GlobalIonosphereMapModel(org.orekit.data.AbstractSelfFeedingLoader, Ionosp
             Returns:
                 the path delay due to the ionosphere in m
         
-            Description copied from interface: 
+            Description copied from interface: :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
             This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0Ã‚Â° the
@@ -526,7 +528,8 @@ class GlobalIonosphereMapModel(org.orekit.data.AbstractSelfFeedingLoader, Ionosp
             implemented to compute the path delay for any elevation angle.
         
             Specified by:
-                 in interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -557,7 +560,7 @@ class GlobalIonosphereMapModel(org.orekit.data.AbstractSelfFeedingLoader, Ionosp
             Returns:
                 the path delay due to the ionosphere in m
         
-            Description copied from interface: 
+            Description copied from interface: :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
             This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0Ã‚Â° the
@@ -567,7 +570,8 @@ class GlobalIonosphereMapModel(org.orekit.data.AbstractSelfFeedingLoader, Ionosp
             implemented to compute the path delay for any elevation angle.
         
             Specified by:
-                 in interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
@@ -638,7 +642,8 @@ class KlobucharIonoModel(IonosphericModel):
             implemented to compute the path delay for any elevation angle.
         
             Specified by:
-                 in interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -680,7 +685,8 @@ class KlobucharIonoModel(IonosphericModel):
             implemented to compute the path delay for any elevation angle.
         
             Specified by:
-                 in interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
@@ -719,7 +725,7 @@ class NeQuickModel(IonosphericModel):
     @typing.overload
     def pathDelay(self, spacecraftState: org.orekit.propagation.SpacecraftState, topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, doubleArray: typing.List[float]) -> float:
         """
-            Description copied from interface: 
+            Description copied from interface: :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
             This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0Ã‚Â° the
@@ -729,7 +735,8 @@ class NeQuickModel(IonosphericModel):
             implemented to compute the path delay for any elevation angle.
         
             Specified by:
-                 in interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -745,7 +752,7 @@ class NeQuickModel(IonosphericModel):
     @typing.overload
     def pathDelay(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_pathDelay_1__T], topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, tArray: typing.List[_pathDelay_1__T]) -> _pathDelay_1__T:
         """
-            Description copied from interface: 
+            Description copied from interface: :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
             This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0Ã‚Â° the
@@ -755,7 +762,8 @@ class NeQuickModel(IonosphericModel):
             implemented to compute the path delay for any elevation angle.
         
             Specified by:
-                 in interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
@@ -941,7 +949,8 @@ class PythonIonosphericModel(IonosphericModel):
             implemented to compute the path delay for any elevation angle.
         
             Specified by:
-                 in interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -966,7 +975,8 @@ class PythonIonosphericModel(IonosphericModel):
             implemented to compute the path delay for any elevation angle.
         
             Specified by:
-                 in interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
@@ -1092,7 +1102,8 @@ class SsrVtecIonosphericModel(IonosphericModel):
             implemented to compute the path delay for any elevation angle.
         
             Specified by:
-                 in interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -1117,7 +1128,8 @@ class SsrVtecIonosphericModel(IonosphericModel):
             implemented to compute the path delay for any elevation angle.
         
             Specified by:
-                 in interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`Â in
+                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state

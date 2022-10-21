@@ -654,10 +654,10 @@ class InterSatellitesPhaseAmbiguityModifier(AbstractAmbiguityModifier, org.oreki
 
 class IonosphericGradientConverter(ModifierGradientConverter):
     """
-    Deprecated. 
-    as of 11.2, replaced by :class:`~org.orekit.estimation.measurements.modifiers.ModifierGradientConverter`
     @Deprecated public class IonosphericGradientConverter extends :class:`~org.orekit.estimation.measurements.modifiers.ModifierGradientConverter`
     
+        Deprecated.
+        as of 11.2, replaced by :class:`~org.orekit.estimation.measurements.modifiers.ModifierGradientConverter`
         Converter for states and parameters arrays.
     
         Since:
@@ -846,7 +846,9 @@ class RangeRateTroposphericDelayModifier(BaseRangeRateTroposphericDelayModifier,
             Compute the measurement error due to Troposphere.
         
             Overrides:
-                 in class :class:`~org.orekit.estimation.measurements.modifiers.BaseRangeRateTroposphericDelayModifier`
+                
+                meth:`~org.orekit.estimation.measurements.modifiers.BaseRangeRateTroposphericDelayModifier.rangeRateErrorTroposphericModel`Â in
+                classÂ :class:`~org.orekit.estimation.measurements.modifiers.BaseRangeRateTroposphericDelayModifier`
         
             Parameters:
                 station (:class:`~org.orekit.estimation.measurements.GroundStation`): station
@@ -1232,10 +1234,10 @@ class ShapiroRangeModifier(AbstractShapiroBaseModifier, org.orekit.estimation.me
 
 class TroposphericGradientConverter(ModifierGradientConverter):
     """
-    Deprecated. 
-    as of 11.2, replaced by :class:`~org.orekit.estimation.measurements.modifiers.ModifierGradientConverter`
     @Deprecated public class TroposphericGradientConverter extends :class:`~org.orekit.estimation.measurements.modifiers.ModifierGradientConverter`
     
+        Deprecated.
+        as of 11.2, replaced by :class:`~org.orekit.estimation.measurements.modifiers.ModifierGradientConverter`
         Converter for states and parameters arrays.
     
         Since:

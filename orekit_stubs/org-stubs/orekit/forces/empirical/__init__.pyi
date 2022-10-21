@@ -156,8 +156,8 @@ class ParametricAcceleration(org.orekit.forces.AbstractForceModel):
     def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
             Initialize the force model at the start of propagation. This method will be called before any calls to
-            :meth:`~org.orekit.forces.ForceModel.addContribution`, :meth:`~org.orekit.forces.ForceModel.addContribution`, null or
-            null
+            :meth:`~org.orekit.forces.ForceModel.addContribution`, :meth:`~org.orekit.forces.ForceModel.addContribution`,
+            :meth:`~org.orekit.forces.ForceModel.acceleration` or :meth:`~org.orekit.forces.ForceModel.acceleration`
         
             The default implementation of this method does nothing.
         
@@ -242,7 +242,8 @@ class HarmonicAccelerationModel(AccelerationModel):
             acceleratin is towards the opposite of the direction specified at construction.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.empirical.AccelerationModel`
+                :meth:`~org.orekit.forces.empirical.AccelerationModel.signedAmplitude`Â in
+                interfaceÂ :class:`~org.orekit.forces.empirical.AccelerationModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
@@ -262,7 +263,8 @@ class HarmonicAccelerationModel(AccelerationModel):
             acceleratin is towards the opposite of the direction specified at construction.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.empirical.AccelerationModel`
+                :meth:`~org.orekit.forces.empirical.AccelerationModel.signedAmplitude`Â in
+                interfaceÂ :class:`~org.orekit.forces.empirical.AccelerationModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): current state information: date, kinematics, attitude
@@ -313,7 +315,8 @@ class PolynomialAccelerationModel(AccelerationModel):
             acceleratin is towards the opposite of the direction specified at construction.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.empirical.AccelerationModel`
+                :meth:`~org.orekit.forces.empirical.AccelerationModel.signedAmplitude`Â in
+                interfaceÂ :class:`~org.orekit.forces.empirical.AccelerationModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
@@ -333,7 +336,8 @@ class PolynomialAccelerationModel(AccelerationModel):
             acceleratin is towards the opposite of the direction specified at construction.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.empirical.AccelerationModel`
+                :meth:`~org.orekit.forces.empirical.AccelerationModel.signedAmplitude`Â in
+                interfaceÂ :class:`~org.orekit.forces.empirical.AccelerationModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): current state information: date, kinematics, attitude
@@ -382,7 +386,8 @@ class PythonAccelerationModel(AccelerationModel):
             acceleratin is towards the opposite of the direction specified at construction.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.empirical.AccelerationModel`
+                :meth:`~org.orekit.forces.empirical.AccelerationModel.signedAmplitude`Â in
+                interfaceÂ :class:`~org.orekit.forces.empirical.AccelerationModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
@@ -402,7 +407,8 @@ class PythonAccelerationModel(AccelerationModel):
             acceleratin is towards the opposite of the direction specified at construction.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.empirical.AccelerationModel`
+                :meth:`~org.orekit.forces.empirical.AccelerationModel.signedAmplitude`Â in
+                interfaceÂ :class:`~org.orekit.forces.empirical.AccelerationModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): current state information: date, kinematics, attitude

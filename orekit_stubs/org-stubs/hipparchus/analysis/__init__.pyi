@@ -55,6 +55,87 @@ class CalculusFieldBivariateFunction(typing.Generic[_CalculusFieldBivariateFunct
         """
         ...
 
+_CalculusFieldMultivariateFunction__T = typing.TypeVar('_CalculusFieldMultivariateFunction__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class CalculusFieldMultivariateFunction(typing.Generic[_CalculusFieldMultivariateFunction__T]):
+    """
+    public interface CalculusFieldMultivariateFunction<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>>
+    
+        An interface representing a scalar multivariate function.
+    
+        Since:
+            2.2
+    
+        Also see:
+            :class:`~org.hipparchus.analysis.MultivariateFunction`
+    """
+    def value(self, *t: _CalculusFieldMultivariateFunction__T) -> _CalculusFieldMultivariateFunction__T:
+        """
+            Compute the value of the function.
+        
+            Parameters:
+                x (:class:`~org.hipparchus.analysis.CalculusFieldMultivariateFunction`...): Point at which the function value should be computed.
+        
+            Returns:
+                the value of the function.
+        
+        
+        """
+        ...
+
+_CalculusFieldMultivariateMatrixFunction__T = typing.TypeVar('_CalculusFieldMultivariateMatrixFunction__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class CalculusFieldMultivariateMatrixFunction(typing.Generic[_CalculusFieldMultivariateMatrixFunction__T]):
+    """
+    public interface CalculusFieldMultivariateMatrixFunction<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>>
+    
+        An interface representing a matrix multivariate function.
+    
+        Since:
+            2.2
+    
+        Also see:
+            :class:`~org.hipparchus.analysis.MultivariateMatrixFunction`
+    """
+    def value(self, *t: _CalculusFieldMultivariateMatrixFunction__T) -> typing.List[typing.List[_CalculusFieldMultivariateMatrixFunction__T]]:
+        """
+            Compute the value of the function.
+        
+            Parameters:
+                x (:class:`~org.hipparchus.analysis.CalculusFieldMultivariateMatrixFunction`...): Point at which the function value should be computed.
+        
+            Returns:
+                the value of the function.
+        
+        
+        """
+        ...
+
+_CalculusFieldMultivariateVectorFunction__T = typing.TypeVar('_CalculusFieldMultivariateVectorFunction__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class CalculusFieldMultivariateVectorFunction(typing.Generic[_CalculusFieldMultivariateVectorFunction__T]):
+    """
+    public interface CalculusFieldMultivariateVectorFunction<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>>
+    
+        An interface representing a vector multivariate function.
+    
+        Since:
+            2.2
+    
+        Also see:
+            :class:`~org.hipparchus.analysis.MultivariateVectorFunction`
+    """
+    def value(self, *t: _CalculusFieldMultivariateVectorFunction__T) -> typing.List[_CalculusFieldMultivariateVectorFunction__T]:
+        """
+            Compute the value of the function.
+        
+            Parameters:
+                x (:class:`~org.hipparchus.analysis.CalculusFieldMultivariateVectorFunction`...): Point at which the function value should be computed.
+        
+            Returns:
+                the value of the function.
+        
+        
+        """
+        ...
+
 _CalculusFieldUnivariateFunction__T = typing.TypeVar('_CalculusFieldUnivariateFunction__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class CalculusFieldUnivariateFunction(typing.Generic[_CalculusFieldUnivariateFunction__T]):
     """
@@ -209,6 +290,129 @@ class FieldBivariateFunction:
         
             Returns:
                 the value.
+        
+        
+        """
+        ...
+
+class FieldMultivariateFunction:
+    """
+    public interface FieldMultivariateFunction
+    
+        An interface representing a scalar multivariate function for any field type.
+    
+        Since:
+            2.2
+    
+        Also see:
+            :class:`~org.hipparchus.analysis.MultivariateFunction`
+    """
+    _toCalculusFieldMultivariateFunction__T = typing.TypeVar('_toCalculusFieldMultivariateFunction__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    def toCalculusFieldMultivariateFunction(self, field: org.hipparchus.Field[_toCalculusFieldMultivariateFunction__T]) -> CalculusFieldMultivariateFunction[_toCalculusFieldMultivariateFunction__T]:
+        """
+            Convert to a :class:`~org.hipparchus.analysis.CalculusFieldMultivariateFunction` with a specific type.
+        
+            Parameters:
+                field (:class:`~org.hipparchus.Field`<T> field): field for the argument and value
+        
+            Returns:
+                converted function
+        
+        
+        """
+        ...
+    _value__T = typing.TypeVar('_value__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    def value(self, *t: _value__T) -> _value__T:
+        """
+            Compute the value of the function.
+        
+            Parameters:
+                x (T...): Point at which the function value should be computed.
+        
+            Returns:
+                the value of the function.
+        
+        
+        """
+        ...
+
+class FieldMultivariateMatrixFunction:
+    """
+    public interface FieldMultivariateMatrixFunction
+    
+        An interface representing a matrix multivariate function for any field type.
+    
+        Since:
+            2.2
+    
+        Also see:
+            :class:`~org.hipparchus.analysis.MultivariateMatrixFunction`
+    """
+    _toCalculusFieldMultivariateMatrixFunction__T = typing.TypeVar('_toCalculusFieldMultivariateMatrixFunction__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    def toCalculusFieldMultivariateMatrixFunction(self, field: org.hipparchus.Field[_toCalculusFieldMultivariateMatrixFunction__T]) -> CalculusFieldMultivariateMatrixFunction[_toCalculusFieldMultivariateMatrixFunction__T]:
+        """
+            Convert to a :class:`~org.hipparchus.analysis.CalculusFieldMultivariateMatrixFunction` with a specific type.
+        
+            Parameters:
+                field (:class:`~org.hipparchus.Field`<T> field): field for the argument and value
+        
+            Returns:
+                converted function
+        
+        
+        """
+        ...
+    _value__T = typing.TypeVar('_value__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    def value(self, *t: _value__T) -> typing.List[typing.List[_value__T]]:
+        """
+            Compute the value of the function.
+        
+            Parameters:
+                x (T...): Point at which the function value should be computed.
+        
+            Returns:
+                the value of the function.
+        
+        
+        """
+        ...
+
+class FieldMultivariateVectorFunction:
+    """
+    public interface FieldMultivariateVectorFunction
+    
+        An interface representing a vector multivariate function for any field type.
+    
+        Since:
+            2.2
+    
+        Also see:
+            :class:`~org.hipparchus.analysis.MultivariateVectorFunction`
+    """
+    _toCalculusFieldMultivariateVectorFunction__T = typing.TypeVar('_toCalculusFieldMultivariateVectorFunction__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    def toCalculusFieldMultivariateVectorFunction(self, field: org.hipparchus.Field[_toCalculusFieldMultivariateVectorFunction__T]) -> CalculusFieldMultivariateVectorFunction[_toCalculusFieldMultivariateVectorFunction__T]:
+        """
+            Convert to a :class:`~org.hipparchus.analysis.CalculusFieldMultivariateVectorFunction` with a specific type.
+        
+            Parameters:
+                field (:class:`~org.hipparchus.Field`<T> field): field for the argument and value
+        
+            Returns:
+                converted function
+        
+        
+        """
+        ...
+    _value__T = typing.TypeVar('_value__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    def value(self, *t: _value__T) -> typing.List[_value__T]:
+        """
+            Compute the value of the function.
+        
+            Parameters:
+                x (T...): Point at which the function value should be computed.
+        
+            Returns:
+                the value of the function.
         
         
         """
@@ -832,10 +1036,16 @@ class __module_protocol__(typing.Protocol):
 
     BivariateFunction: typing.Type[BivariateFunction]
     CalculusFieldBivariateFunction: typing.Type[CalculusFieldBivariateFunction]
+    CalculusFieldMultivariateFunction: typing.Type[CalculusFieldMultivariateFunction]
+    CalculusFieldMultivariateMatrixFunction: typing.Type[CalculusFieldMultivariateMatrixFunction]
+    CalculusFieldMultivariateVectorFunction: typing.Type[CalculusFieldMultivariateVectorFunction]
     CalculusFieldUnivariateFunction: typing.Type[CalculusFieldUnivariateFunction]
     CalculusFieldUnivariateMatrixFunction: typing.Type[CalculusFieldUnivariateMatrixFunction]
     CalculusFieldUnivariateVectorFunction: typing.Type[CalculusFieldUnivariateVectorFunction]
     FieldBivariateFunction: typing.Type[FieldBivariateFunction]
+    FieldMultivariateFunction: typing.Type[FieldMultivariateFunction]
+    FieldMultivariateMatrixFunction: typing.Type[FieldMultivariateMatrixFunction]
+    FieldMultivariateVectorFunction: typing.Type[FieldMultivariateVectorFunction]
     FieldUnivariateFunction: typing.Type[FieldUnivariateFunction]
     FieldUnivariateMatrixFunction: typing.Type[FieldUnivariateMatrixFunction]
     FieldUnivariateVectorFunction: typing.Type[FieldUnivariateVectorFunction]

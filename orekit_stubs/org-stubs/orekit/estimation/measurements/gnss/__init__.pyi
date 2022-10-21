@@ -305,6 +305,17 @@ class InterSatellitesPhase(org.orekit.estimation.measurements.AbstractMeasuremen
         Since:
             10.3
     """
+    MEASUREMENT_TYPE: typing.ClassVar[str] = ...
+    """
+    public static final String MEASUREMENT_TYPE
+    
+        Type of the measurement.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
     AMBIGUITY_NAME: typing.ClassVar[str] = ...
     """
     public static final String AMBIGUITY_NAME
@@ -500,6 +511,17 @@ class OneWayGNSSPhase(org.orekit.estimation.measurements.AbstractMeasurement['On
         Since:
             10.3
     """
+    MEASUREMENT_TYPE: typing.ClassVar[str] = ...
+    """
+    public static final String MEASUREMENT_TYPE
+    
+        Type of the measurement.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
     AMBIGUITY_NAME: typing.ClassVar[str] = ...
     """
     public static final String AMBIGUITY_NAME
@@ -552,6 +574,17 @@ class OneWayGNSSRange(org.orekit.estimation.measurements.AbstractMeasurement['On
         Since:
             10.3
     """
+    MEASUREMENT_TYPE: typing.ClassVar[str] = ...
+    """
+    public static final String MEASUREMENT_TYPE
+    
+        Type of the measurement.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
     def __init__(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, double: float, absoluteDate: org.orekit.time.AbsoluteDate, double2: float, double3: float, double4: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
 
 class Phase(org.orekit.estimation.measurements.AbstractMeasurement['Phase']):
@@ -567,6 +600,17 @@ class Phase(org.orekit.estimation.measurements.AbstractMeasurement['Phase']):
     
         Since:
             9.2
+    """
+    MEASUREMENT_TYPE: typing.ClassVar[str] = ...
+    """
+    public static final String MEASUREMENT_TYPE
+    
+        Type of the measurement.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
     """
     AMBIGUITY_NAME: typing.ClassVar[str] = ...
     """
@@ -779,7 +823,8 @@ class AbstractLambdaMethod(IntegerLeastSquareSolver):
             Find the best solutions to an Integer Least Square problem.
         
             Specified by:
-                 in interface :class:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolver`
+                :meth:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolver.solveILS`Â in
+                interfaceÂ :class:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolver`
         
             Parameters:
                 nbSol (int): number of solutions to search for
@@ -929,7 +974,8 @@ class PythonAmbiguityAcceptance(AmbiguityAcceptance):
             Check if one of the candidate solutions can be accepted.
         
             Specified by:
-                 in interface :class:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance`
+                :meth:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance.accept`Â in
+                interfaceÂ :class:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance`
         
             Parameters:
                 candidates (:class:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolution`[]): candidate solutions of the Integer Least Squares problem, in increasing squared distance order (the array contains at
@@ -1033,7 +1079,8 @@ class PythonIntegerLeastSquareSolver(IntegerLeastSquareSolver):
             Find the best solutions to an Integer Least Square problem.
         
             Specified by:
-                 in interface :class:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolver`
+                :meth:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolver.solveILS`Â in
+                interfaceÂ :class:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolver`
         
             Parameters:
                 nbSol (int): number of solutions to search for
@@ -1126,7 +1173,8 @@ class SimpleRatioAmbiguityAcceptance(AmbiguityAcceptance):
             :code:`candidate[0]` will be accepted
         
             Specified by:
-                 in interface :class:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance`
+                :meth:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance.accept`Â in
+                interfaceÂ :class:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance`
         
             Parameters:
                 candidates (:class:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolution`[]): candidate solutions of the Integer Least Squares problem, in increasing squared distance order (the array contains at

@@ -728,7 +728,7 @@ _OdmParser__T = typing.TypeVar('_OdmParser__T', bound=org.orekit.files.ccsds.ndm
 _OdmParser__P = typing.TypeVar('_OdmParser__P', bound='OdmParser')  # <P>
 class OdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[_OdmParser__T, _OdmParser__P], typing.Generic[_OdmParser__T, _OdmParser__P]):
     """
-    public abstract class OdmParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<?,?>,P extends OdmParser<T,?>> extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<T,P>
+    public abstract class OdmParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<?, ?>, P extends OdmParser<T, ?>> extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<T, P>
     
         Common parser for Orbit Parameter/Ephemeris/Mean/Comprehensive Messages.
     
@@ -1435,7 +1435,7 @@ _PythonOdmParser__T = typing.TypeVar('_PythonOdmParser__T', bound=org.orekit.fil
 _PythonOdmParser__P = typing.TypeVar('_PythonOdmParser__P', bound=OdmParser)  # <P>
 class PythonOdmParser(OdmParser[_PythonOdmParser__T, _PythonOdmParser__P], typing.Generic[_PythonOdmParser__T, _PythonOdmParser__P]):
     """
-    public class PythonOdmParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<?,?>,P extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmParser`<T,?>> extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmParser`<T,P>
+    public class PythonOdmParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<?, ?>, P extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmParser`<T, ?>> extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmParser`<T, P>
     """
     def __init__(self, string: str, string2: str, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, double: float, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior): ...
     def build(self) -> _PythonOdmParser__T:

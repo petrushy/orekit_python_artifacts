@@ -69,7 +69,8 @@ class BoxAndSolarArraySpacecraft(org.orekit.forces.radiation.RadiationSensitive,
             The computation includes all spacecraft specific characteristics like shape, area and coefficients.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.drag.DragSensitive`
+                :meth:`~org.orekit.forces.drag.DragSensitive.dragAcceleration`Â in
+                interfaceÂ :class:`~org.orekit.forces.drag.DragSensitive`
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
@@ -95,7 +96,8 @@ class BoxAndSolarArraySpacecraft(org.orekit.forces.radiation.RadiationSensitive,
             The computation includes all spacecraft specific characteristics like shape, area and coefficients.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.drag.DragSensitive`
+                :meth:`~org.orekit.forces.drag.DragSensitive.dragAcceleration`Â in
+                interfaceÂ :class:`~org.orekit.forces.drag.DragSensitive`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
@@ -155,7 +157,8 @@ class BoxAndSolarArraySpacecraft(org.orekit.forces.radiation.RadiationSensitive,
             Compute the acceleration due to radiation pressure.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.radiation.RadiationSensitive`
+                :meth:`~org.orekit.forces.radiation.RadiationSensitive.radiationPressureAcceleration`Â in
+                interfaceÂ :class:`~org.orekit.forces.radiation.RadiationSensitive`
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
@@ -178,7 +181,8 @@ class BoxAndSolarArraySpacecraft(org.orekit.forces.radiation.RadiationSensitive,
             Compute the acceleration due to radiation pressure.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.radiation.RadiationSensitive`
+                :meth:`~org.orekit.forces.radiation.RadiationSensitive.radiationPressureAcceleration`Â in
+                interfaceÂ :class:`~org.orekit.forces.radiation.RadiationSensitive`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
@@ -274,7 +278,8 @@ class ForceModel(org.orekit.utils.ParametersDriversProvider):
         """
             Compute the contribution of the force model to the perturbing acceleration.
         
-            The default implementation simply adds the null as a non-Keplerian acceleration.
+            The default implementation simply adds the :meth:`~org.orekit.forces.ForceModel.acceleration` as a non-Keplerian
+            acceleration.
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
@@ -351,8 +356,8 @@ class ForceModel(org.orekit.utils.ParametersDriversProvider):
     def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_init_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_init_0__T]) -> None:
         """
             Initialize the force model at the start of propagation. This method will be called before any calls to
-            :meth:`~org.orekit.forces.ForceModel.addContribution`, :meth:`~org.orekit.forces.ForceModel.addContribution`, null or
-            null
+            :meth:`~org.orekit.forces.ForceModel.addContribution`, :meth:`~org.orekit.forces.ForceModel.addContribution`,
+            :meth:`~org.orekit.forces.ForceModel.acceleration` or :meth:`~org.orekit.forces.ForceModel.acceleration`
         
             The default implementation of this method does nothing.
         
@@ -367,8 +372,8 @@ class ForceModel(org.orekit.utils.ParametersDriversProvider):
     def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
             Initialize the force model at the start of propagation. This method will be called before any calls to
-            :meth:`~org.orekit.forces.ForceModel.addContribution`, :meth:`~org.orekit.forces.ForceModel.addContribution`, null or
-            null
+            :meth:`~org.orekit.forces.ForceModel.addContribution`, :meth:`~org.orekit.forces.ForceModel.addContribution`,
+            :meth:`~org.orekit.forces.ForceModel.acceleration` or :meth:`~org.orekit.forces.ForceModel.acceleration`
         
             The default implementation of this method does nothing.
         
@@ -457,7 +462,7 @@ class PythonForceModel(ForceModel):
             Compute acceleration.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.ForceModel`
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
@@ -472,7 +477,7 @@ class PythonForceModel(ForceModel):
             Compute acceleration.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.ForceModel`
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
@@ -513,7 +518,8 @@ class PythonForceModel(ForceModel):
         """
             Compute the contribution of the force model to the perturbing acceleration.
         
-            The default implementation simply adds the null as a non-Keplerian acceleration.
+            The default implementation simply adds the :meth:`~org.orekit.forces.PythonForceModel.acceleration` as a non-Keplerian
+            acceleration.
         
             Specified by:
                 :meth:`~org.orekit.forces.ForceModel.addContribution` in interface :class:`~org.orekit.forces.ForceModel`
@@ -644,7 +650,8 @@ class PythonForceModel(ForceModel):
         """
             Initialize the force model at the start of propagation. This method will be called before any calls to
             :meth:`~org.orekit.forces.PythonForceModel.addContribution`,
-            :meth:`~org.orekit.forces.PythonForceModel.addContribution`, null or null
+            :meth:`~org.orekit.forces.PythonForceModel.addContribution`, :meth:`~org.orekit.forces.PythonForceModel.acceleration` or
+            :meth:`~org.orekit.forces.PythonForceModel.acceleration`
         
             The default implementation of this method does nothing.
         

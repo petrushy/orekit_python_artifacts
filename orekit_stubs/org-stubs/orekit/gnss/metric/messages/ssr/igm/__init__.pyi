@@ -301,7 +301,7 @@ _SsrIgmMessage__H = typing.TypeVar('_SsrIgmMessage__H', bound=SsrIgmHeader)  # <
 _SsrIgmMessage__D = typing.TypeVar('_SsrIgmMessage__D', bound=SsrIgmData)  # <D>
 class SsrIgmMessage(org.orekit.gnss.metric.messages.ssr.SsrMessage[_SsrIgmMessage__H, _SsrIgmMessage__D], typing.Generic[_SsrIgmMessage__H, _SsrIgmMessage__D]):
     """
-    public class SsrIgmMessage<H extends :class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgmHeader`,D extends :class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgmData`> extends :class:`~org.orekit.gnss.metric.messages.ssr.SsrMessage`<H,D>
+    public class SsrIgmMessage<H extends :class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgmHeader`, D extends :class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgmData`> extends :class:`~org.orekit.gnss.metric.messages.ssr.SsrMessage`<H, D>
     
         The IGS Generic SSR Message types provide elements to calculate GNSS satellite corrections. Corrections are orbit and
         clock corrections, code and phase biases, and the user range accuracy.
@@ -323,7 +323,7 @@ class SsrIgmMessage(org.orekit.gnss.metric.messages.ssr.SsrMessage[_SsrIgmMessag
 
 class SsrIgm01(SsrIgmMessage['SsrIgm01Header', 'SsrIgm01Data']):
     """
-    public class SsrIgm01 extends :class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgmMessage`<:class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm01Header`,:class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm01Data`>
+    public class SsrIgm01 extends :class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgmMessage`<:class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm01Header`, :class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm01Data`>
     
         GNSS SSR Orbit Correction Message.
     
@@ -419,7 +419,7 @@ class SsrIgm01Header(SsrIgmHeader):
 
 class SsrIgm02(SsrIgmMessage['SsrIgm02Header', 'SsrIgm02Data']):
     """
-    public class SsrIgm02 extends :class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgmMessage`<:class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm02Header`,:class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm02Data`>
+    public class SsrIgm02 extends :class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgmMessage`<:class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm02Header`, :class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm02Data`>
     
         GNSS SSR Clock Correction Message.
     
@@ -473,7 +473,7 @@ class SsrIgm02Header(SsrIgmHeader):
 
 class SsrIgm03(SsrIgmMessage['SsrIgm03Header', 'SsrIgm03Data']):
     """
-    public class SsrIgm03 extends :class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgmMessage`<:class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm03Header`,:class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm03Data`>
+    public class SsrIgm03 extends :class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgmMessage`<:class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm03Header`, :class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm03Data`>
     
         GNSS SSR Combined Orbit and Clock Correction Message.
     
@@ -589,7 +589,7 @@ class SsrIgm03Header(SsrIgmHeader):
 
 class SsrIgm04(SsrIgmMessage['SsrIgm04Header', 'SsrIgm04Data']):
     """
-    public class SsrIgm04 extends :class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgmMessage`<:class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm04Header`,:class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm04Data`>
+    public class SsrIgm04 extends :class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgmMessage`<:class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm04Header`, :class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm04Data`>
     
         GNSS SSR High Rate Clock Correction Message.
     
@@ -643,7 +643,7 @@ class SsrIgm04Header(SsrIgmHeader):
 
 class SsrIgm05(SsrIgmMessage['SsrIgm05Header', 'SsrIgm05Data']):
     """
-    public class SsrIgm05 extends :class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgmMessage`<:class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm05Header`,:class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm05Data`>
+    public class SsrIgm05 extends :class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgmMessage`<:class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm05Header`, :class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm05Data`>
     
         GNSS SSR Code Bias Message.
     
@@ -721,7 +721,7 @@ class SsrIgm05Header(SsrIgmHeader):
 
 class SsrIgm06(SsrIgmMessage['SsrIgm06Header', 'SsrIgm06Data']):
     """
-    public class SsrIgm06 extends :class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgmMessage`<:class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm06Header`,:class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm06Data`>
+    public class SsrIgm06 extends :class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgmMessage`<:class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm06Header`, :class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm06Data`>
     
         GNSS SSR Phase Bias Message.
     
@@ -881,7 +881,7 @@ class SsrIgm06Header(SsrIgmHeader):
 
 class SsrIgm07(SsrIgmMessage['SsrIgm07Header', 'SsrIgm07Data']):
     """
-    public class SsrIgm07 extends :class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgmMessage`<:class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm07Header`,:class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm07Data`>
+    public class SsrIgm07 extends :class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgmMessage`<:class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm07Header`, :class:`~org.orekit.gnss.metric.messages.ssr.igm.SsrIgm07Data`>
     
         GNSS SSR SSR URA Message.
     

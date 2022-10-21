@@ -463,10 +463,11 @@ class FieldTLEPropagator(org.orekit.propagation.analytical.FieldAbstractAnalytic
         appropriate for TLE's only.
     
         Deep- or near- space propagator is selected internally according to NORAD recommendations so that the user has not to
-        worry about the used computation methods. One instance is created for each TLE (this instance can only be get using null
-        method, and can compute :class:`~org.orekit.utils.PVCoordinates` at any time. Maximum accuracy is guaranteed in a 24h
-        range period before and after the provided TLE epoch (of course this accuracy is not really measurable nor predictable:
-        according to CelesTrak, the precision is close to one kilometer and error won't probably rise above 2 km).
+        worry about the used computation methods. One instance is created for each TLE (this instance can only be get using
+        :meth:`~org.orekit.propagation.analytical.tle.FieldTLEPropagator.selectExtrapolator` method, and can compute
+        :class:`~org.orekit.utils.PVCoordinates` at any time. Maximum accuracy is guaranteed in a 24h range period before and
+        after the provided TLE epoch (of course this accuracy is not really measurable nor predictable: according to CelesTrak,
+        the precision is close to one kilometer and error won't probably rise above 2 km).
     
         This implementation is largely inspired from the paper and source code Revisiting Spacetrack Report #3 and is fully
         compliant with its results and tests cases.
@@ -539,7 +540,7 @@ class FieldTLEPropagator(org.orekit.propagation.analytical.FieldAbstractAnalytic
             Returns:
                 the correct propagator.
         
-        :class:`~org.orekit.annotation.DefaultDataContext` public static <T extends CalculusFieldElement<T>> :class:`~org.orekit.propagation.analytical.tle.FieldTLEPropagator`<T> selectExtrapolator(:class:`~org.orekit.propagation.analytical.tle.FieldTLE`<T> tle, :class:`~org.orekit.attitudes.AttitudeProvider` attitudeProvider, T mass, T[] parameters)
+        :class:`~org.orekit.annotation.DefaultDataContext` public static <T extends CalculusFieldElement<T>> :class:`~org.orekit.propagation.analytical.tle.FieldTLEPropagator`<T> selectExtrapolator (:class:`~org.orekit.propagation.analytical.tle.FieldTLE`<T> tle, :class:`~org.orekit.attitudes.AttitudeProvider` attitudeProvider, T mass, T[] parameters)
         
             Selects the extrapolator to use with the selected TLE.
         
@@ -555,6 +556,7 @@ class FieldTLEPropagator(org.orekit.propagation.analytical.FieldAbstractAnalytic
                 the correct propagator.
         
             Also see:
+                :meth:`~org.orekit.propagation.analytical.tle.FieldTLEPropagator.selectExtrapolator`
         
             Selects the extrapolator to use with the selected TLE.
         
@@ -1550,13 +1552,15 @@ class TLEJacobiansMapper(org.orekit.propagation.integration.AbstractJacobiansMap
             which can safely be null in this case.
         
             Specified by:
-                 in class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
+                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getParametersJacobian`Â in
+                classÂ :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
                 dYdP (double[][]): placeholder where to put the Jacobian with respect to parameters
         
             Also see:
+                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getStateJacobian`
         
         
         """
@@ -1571,13 +1575,15 @@ class TLEJacobiansMapper(org.orekit.propagation.integration.AbstractJacobiansMap
         
         
             Specified by:
-                 in class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
+                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getStateJacobian`Â in
+                classÂ :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
                 dYdY0 (double[][]): placeholder where to put the Jacobian with respect to state
         
             Also see:
+                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getParametersJacobian`
         
         
         """
@@ -1587,7 +1593,8 @@ class TLEJacobiansMapper(org.orekit.propagation.integration.AbstractJacobiansMap
             Set the Jacobian with respect to state into a one-dimensional additional state array.
         
             Specified by:
-                 in class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
+                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.setInitialJacobians`Â in
+                classÂ :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -1596,6 +1603,7 @@ class TLEJacobiansMapper(org.orekit.propagation.integration.AbstractJacobiansMap
                 p (double[]): placeholder where to put the one-dimensional additional state
         
             Also see:
+                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getStateJacobian`
         
         
         """
@@ -1603,9 +1611,9 @@ class TLEJacobiansMapper(org.orekit.propagation.integration.AbstractJacobiansMap
 
 class TLEPartialDerivativesEquations:
     """
-    Deprecated.
     @Deprecated public class TLEPartialDerivativesEquations extends Object
     
+        Deprecated.
         Set of additional equations computing the partial derivatives of the state (orbit) with respect to initial state.
     
         This set of equations are automatically added to an
@@ -1620,21 +1628,22 @@ class TLEPartialDerivativesEquations:
     def __init__(self, string: str, tLEPropagator: 'TLEPropagator'): ...
     def getMapper(self) -> TLEJacobiansMapper:
         """
-            Deprecated. 
+            Deprecated.
             Get a mapper between two-dimensional Jacobians and one-dimensional additional state.
         
             Returns:
                 a mapper between two-dimensional Jacobians and one-dimensional additional state, with the same name as the instance
         
             Also see:
-                :meth:`~org.orekit.propagation.analytical.tle.TLEPartialDerivativesEquations.setInitialJacobians`, null
+                :meth:`~org.orekit.propagation.analytical.tle.TLEPartialDerivativesEquations.setInitialJacobians`,
+                :meth:`~org.orekit.propagation.analytical.tle.TLEPartialDerivativesEquations.setInitialJacobians`
         
         
         """
         ...
     def getName(self) -> str:
         """
-            Deprecated. 
+            Deprecated.
             Get the name of the additional state.
         
             Returns:
@@ -1646,10 +1655,12 @@ class TLEPartialDerivativesEquations:
     @typing.overload
     def setInitialJacobians(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.orekit.propagation.SpacecraftState:
         """
-            Deprecated. 
+            Deprecated.
             Set the initial value of the Jacobian with respect to state and parameter.
         
-            This method is equivalent to call null with dYdY0 set to the identity matrix and dYdP set to a zero matrix.
+            This method is equivalent to call
+            :meth:`~org.orekit.propagation.analytical.tle.TLEPartialDerivativesEquations.setInitialJacobians` with dYdY0 set to the
+            identity matrix and dYdP set to a zero matrix.
         
             The force models parameters for which partial derivatives are desired, *must* have been
             :meth:`~org.orekit.utils.ParameterDriver.setSelected` before this method is called, so proper matrices dimensions are
@@ -1666,7 +1677,7 @@ class TLEPartialDerivativesEquations:
     @typing.overload
     def setInitialJacobians(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[typing.List[float]], doubleArray2: typing.List[typing.List[float]]) -> org.orekit.propagation.SpacecraftState:
         """
-            Deprecated. 
+            Deprecated.
             Set the initial value of the Jacobian with respect to state and parameter.
         
             The returned state must be added to the propagator (it is not done automatically, as the user may need to add more
@@ -1803,7 +1814,7 @@ class TLEPropagator(org.orekit.propagation.analytical.AbstractAnalyticalPropagat
             Since:
                 10.1
         
-        :class:`~org.orekit.annotation.DefaultDataContext` public static :class:`~org.orekit.propagation.analytical.tle.TLEPropagator` selectExtrapolator(:class:`~org.orekit.propagation.analytical.tle.TLE` tle, :class:`~org.orekit.attitudes.AttitudeProvider` attitudeProvider, double mass)
+        :class:`~org.orekit.annotation.DefaultDataContext` public static :class:`~org.orekit.propagation.analytical.tle.TLEPropagator` selectExtrapolator (:class:`~org.orekit.propagation.analytical.tle.TLE` tle, :class:`~org.orekit.attitudes.AttitudeProvider` attitudeProvider, double mass)
         
             Selects the extrapolator to use with the selected TLE.
         

@@ -138,7 +138,7 @@ class KvnStructureKey(java.lang.Enum['KvnStructureKey']):
         
             Parameters:
                 token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                parser (:class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<?,?> parser): file parser
+                parser (:class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<?, ?> parser): file parser
         
             Returns:
                 true of token was accepted
@@ -315,7 +315,7 @@ _Segment__M = typing.TypeVar('_Segment__M', bound='Metadata')  # <M>
 _Segment__D = typing.TypeVar('_Segment__D', bound='Data')  # <D>
 class Segment(typing.Generic[_Segment__M, _Segment__D]):
     """
-    public class Segment<M extends :class:`~org.orekit.files.ccsds.section.Metadata`,D extends :class:`~org.orekit.files.ccsds.section.Data`> extends Object
+    public class Segment<M extends :class:`~org.orekit.files.ccsds.section.Metadata`, D extends :class:`~org.orekit.files.ccsds.section.Data`> extends Object
     
         NDM segments are (:class:`~org.orekit.files.ccsds.section.Metadata`, :class:`~org.orekit.files.ccsds.section.Data`)
         pairs.
@@ -365,7 +365,7 @@ class XmlStructureKey(java.lang.Enum['XmlStructureKey']):
         
             Parameters:
                 token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                parser (:class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<?,?> parser): file parser
+                parser (:class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<?, ?> parser): file parser
         
             Returns:
                 true of token was accepted
@@ -587,7 +587,8 @@ class PythonAbstractWriter(AbstractWriter):
             Convert an array of integer to a comma-separated list.
         
             Overrides:
-                 in class :class:`~org.orekit.files.ccsds.section.AbstractWriter`
+                :meth:`~org.orekit.files.ccsds.section.AbstractWriter.intArrayToString`Â in
+                classÂ :class:`~org.orekit.files.ccsds.section.AbstractWriter`
         
             Parameters:
                 integers (int[]): integers to write

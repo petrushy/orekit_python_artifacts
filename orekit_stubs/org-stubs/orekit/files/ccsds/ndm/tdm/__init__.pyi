@@ -640,7 +640,7 @@ class RangeUnitsConverter:
 
 class Tdm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.section.Header, org.orekit.files.ccsds.section.Segment['TdmMetadata', ObservationsBlock]]):
     """
-    public class Tdm extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.section.Header`,:class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata`,:class:`~org.orekit.files.ccsds.ndm.tdm.ObservationsBlock`>>
+    public class Tdm extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.section.Header`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata`, :class:`~org.orekit.files.ccsds.ndm.tdm.ObservationsBlock`>>
     
         This class stores all the information of the CCSDS Tracking Data Message parsed by TDMParser or TDMXMLParser.
     
@@ -1407,7 +1407,7 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Setter for the external ephemeris names for participants.
         
             Parameters:
-                ephemerisNames (Map<Integer,String> ephemerisNames): external ephemeris names for participants
+                ephemerisNames (Map<Integer, String> ephemerisNames): external ephemeris names for participants
         
         
         """
@@ -1477,7 +1477,7 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Setter for the participants.
         
             Parameters:
-                participants (Map<Integer,String> participants): the participants to set
+                participants (Map<Integer, String> participants): the participants to set
         
         
         """
@@ -1567,7 +1567,7 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Setter for the receiveDelays.
         
             Parameters:
-                receiveDelays (Map<Integer,Double> receiveDelays): the receiveDelays to set
+                receiveDelays (Map<Integer, Double> receiveDelays): the receiveDelays to set
         
         
         """
@@ -1637,7 +1637,7 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Setter for the transmitDelays.
         
             Parameters:
-                transmitDelays (Map<Integer,Double> transmitDelays): the transmitDelays to set
+                transmitDelays (Map<Integer, Double> transmitDelays): the transmitDelays to set
         
         
         """
@@ -1809,7 +1809,7 @@ class TdmMetadataKey(java.lang.Enum['TdmMetadataKey']):
 
 class TdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[Tdm, 'TdmParser']):
     """
-    public class TdmParser extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<:class:`~org.orekit.files.ccsds.ndm.tdm.Tdm`,:class:`~org.orekit.files.ccsds.ndm.tdm.TdmParser`>
+    public class TdmParser extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<:class:`~org.orekit.files.ccsds.ndm.tdm.Tdm`, :class:`~org.orekit.files.ccsds.ndm.tdm.TdmParser`>
     
         Class for CCSDS Tracking Data Message parsers.
     
@@ -1993,7 +1993,7 @@ class TdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[T
 
 class TdmWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[org.orekit.files.ccsds.section.Header, org.orekit.files.ccsds.section.Segment[TdmMetadata, ObservationsBlock], Tdm]):
     """
-    public class TdmWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.section.Header`,:class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata`,:class:`~org.orekit.files.ccsds.ndm.tdm.ObservationsBlock`>,:class:`~org.orekit.files.ccsds.ndm.tdm.Tdm`>
+    public class TdmWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.section.Header`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata`, :class:`~org.orekit.files.ccsds.ndm.tdm.ObservationsBlock`>, :class:`~org.orekit.files.ccsds.ndm.tdm.Tdm`>
     
         Writer for CCSDS Tracking Data Message.
     

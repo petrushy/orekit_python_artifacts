@@ -1,6 +1,5 @@
 import java.lang
 import java.util
-import org.hipparchus.complex
 import org.hipparchus.geometry.euclidean.threed
 import org.hipparchus.linear
 import org.orekit.bodies
@@ -1902,7 +1901,7 @@ class ObjectType(java.lang.Enum['ObjectType']):
 
 class Ocm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.section.Header, org.orekit.files.ccsds.section.Segment['OcmMetadata', 'OcmData']], org.orekit.files.general.EphemerisFile[org.orekit.utils.TimeStampedPVCoordinates, 'TrajectoryStateHistory']):
     """
-    public class Ocm extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.section.Header`,:class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata`,:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmData`>> implements :class:`~org.orekit.files.general.EphemerisFile`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`,:class:`~org.orekit.files.ccsds.ndm.odm.ocm.TrajectoryStateHistory`>
+    public class Ocm extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.section.Header`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata`, :class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmData`>> implements :class:`~org.orekit.files.general.EphemerisFile`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`, :class:`~org.orekit.files.ccsds.ndm.odm.ocm.TrajectoryStateHistory`>
     
         This class gathers the informations present in the Orbit Comprehensive Message (OCM).
     
@@ -3244,7 +3243,7 @@ class OcmMetadataKey(java.lang.Enum['OcmMetadataKey']):
 
 class OcmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Ocm, 'OcmParser'], org.orekit.files.general.EphemerisFileParser[Ocm]):
     """
-    public class OcmParser extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmParser`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`,:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmParser`> implements :class:`~org.orekit.files.general.EphemerisFileParser`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`>
+    public class OcmParser extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmParser`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`, :class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmParser`> implements :class:`~org.orekit.files.general.EphemerisFileParser`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`>
     
         A parser for the CCSDS OCM (Orbit Comprehensive Message).
     
@@ -3446,7 +3445,7 @@ class OcmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Ocm, 'OcmParser'], org.
 
 class OcmSatelliteEphemeris(org.orekit.files.general.EphemerisFile.SatelliteEphemeris[org.orekit.utils.TimeStampedPVCoordinates, 'TrajectoryStateHistory']):
     """
-    public class OcmSatelliteEphemeris extends Object implements :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`,:class:`~org.orekit.files.ccsds.ndm.odm.ocm.TrajectoryStateHistory`>
+    public class OcmSatelliteEphemeris extends Object implements :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`, :class:`~org.orekit.files.ccsds.ndm.odm.ocm.TrajectoryStateHistory`>
     
         OCM ephemeris blocks for a single satellite.
     
@@ -3519,7 +3518,7 @@ class OcmSatelliteEphemeris(org.orekit.files.general.EphemerisFile.SatelliteEphe
 
 class OcmWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[org.orekit.files.ccsds.section.Header, org.orekit.files.ccsds.section.Segment[OcmMetadata, OcmData], Ocm]):
     """
-    public class OcmWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.section.Header`,:class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata`,:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmData`>,:class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`>
+    public class OcmWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.section.Header`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata`, :class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmData`>, :class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`>
     
         Writer for CCSDS Orbit Comprehensive Message.
     
@@ -5118,9 +5117,9 @@ class PerturbationsKey(java.lang.Enum['PerturbationsKey']):
         """
         ...
 
-class PhysicalProperties(org.orekit.files.ccsds.section.CommentsContainer):
+class PhysicalProperties(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
     """
-    public class PhysicalProperties extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+    public class PhysicalProperties extends :class:`~org.orekit.files.ccsds.ndm.CommonPhysicalProperties`
     
         Spacecraft physical properties.
     
@@ -5307,16 +5306,6 @@ class PhysicalProperties(org.orekit.files.ccsds.section.CommentsContainer):
         
         """
         ...
-    def getMaxRcs(self) -> float:
-        """
-            Get the maximum radar cross-section.
-        
-            Returns:
-                maximum radar cross-section
-        
-        
-        """
-        ...
     def getMaxThrust(self) -> float:
         """
             Get the maximum composite thrust the spacecraft can accomplish.
@@ -5333,129 +5322,6 @@ class PhysicalProperties(org.orekit.files.ccsds.section.CommentsContainer):
         
             Returns:
                 minimum cross-sectional area for collision probability estimation purposes
-        
-        
-        """
-        ...
-    def getMinRcs(self) -> float:
-        """
-            Get the minimum radar cross-section.
-        
-            Returns:
-                minimum radar cross-section
-        
-        
-        """
-        ...
-    def getOebAreaAlongIntermediate(self) -> float:
-        """
-            Get the cross-sectional area of Optimally Enclosing Box along Y-OEB.
-        
-            Returns:
-                cross-sectional area of Optimally Enclosing Box along Y-OEB
-        
-        
-        """
-        ...
-    def getOebAreaAlongMax(self) -> float:
-        """
-            Get the cross-sectional area of Optimally Enclosing Box along X-OEB.
-        
-            Returns:
-                cross-sectional area of Optimally Enclosing Box along X-OEB
-        
-        
-        """
-        ...
-    def getOebAreaAlongMin(self) -> float:
-        """
-            Get the cross-sectional area of Optimally Enclosing Box along Z-OEB.
-        
-            Returns:
-                cross-sectional area of Optimally Enclosing Box along X-OEB
-        
-        
-        """
-        ...
-    def getOebIntermediate(self) -> float:
-        """
-            Get the dimensions of Optimally Enclosing Box along Y-OEB (i.e intermediate).
-        
-            Returns:
-                dimensions of Optimally Enclosing Box along Y-OEB (i.e intermediate).
-        
-        
-        """
-        ...
-    def getOebMax(self) -> float:
-        """
-            Get the dimensions of Optimally Enclosing Box along X-OEB (i.e max).
-        
-            Returns:
-                dimensions of Optimally Enclosing Box along X-OEB (i.e max)
-        
-        
-        """
-        ...
-    def getOebMin(self) -> float:
-        """
-            Get the dimensions of Optimally Enclosing Box along Z-OEB (i.e min).
-        
-            Returns:
-                dimensions of Optimally Enclosing Box along Z-OEB (i.e min)
-        
-        
-        """
-        ...
-    def getOebParentFrame(self) -> org.orekit.files.ccsds.definitions.FrameFacade:
-        """
-            Get the Optimally Enclosing Box parent reference frame.
-        
-            Returns:
-                Optimally Enclosing Box parent reference frame
-        
-        
-        """
-        ...
-    def getOebParentFrameEpoch(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Get the Optimally Enclosing Box parent reference frame epoch.
-        
-            Returns:
-                Optimally Enclosing Box parent reference frame epoch
-        
-        
-        """
-        ...
-    def getOebQ(self) -> org.hipparchus.complex.Quaternion:
-        """
-            Get the quaternion defining Optimally Enclosing Box.
-        
-            Returns:
-                quaternion defining Optimally Enclosing Box
-        
-        
-        """
-        ...
-    def getRcs(self) -> float:
-        """
-            Get the typical (50th percentile) radar cross-section.
-        
-            Returns:
-                typical (50th percentile) radar cross-section
-        
-        
-        """
-        ...
-    def getReflectance(self) -> float:
-        """
-            Get the typical (50th percentile) coefficient of reflectance.
-        
-            Returns:
-                typical (50th percentile) coefficient of reflectance
-        
-            Since:
-                11.2
         
         
         """
@@ -5506,46 +5372,6 @@ class PhysicalProperties(org.orekit.files.ccsds.section.CommentsContainer):
         
             Returns:
                 typical (50th percentile) cross-sectional area for collision probability estimation purposes
-        
-        
-        """
-        ...
-    def getVmAbsolute(self) -> float:
-        """
-            Get the typical (50th percentile) visual magnitude.
-        
-            Returns:
-                typical (50th percentile) visual magnitude
-        
-        
-        """
-        ...
-    def getVmApparent(self) -> float:
-        """
-            Get the typical (50th percentile) apparent visual magnitude.
-        
-            Returns:
-                typical (50th percentile) apparent visual magnitude
-        
-        
-        """
-        ...
-    def getVmApparentMax(self) -> float:
-        """
-            Get the maximum apparent visual magnitude.
-        
-            Returns:
-                maximum apparent visual magnitude
-        
-        
-        """
-        ...
-    def getVmApparentMin(self) -> float:
-        """
-            Get the minimum apparent visual magnitude.
-        
-            Returns:
-                minimum apparent visual magnitude
         
         
         """
@@ -5734,16 +5560,6 @@ class PhysicalProperties(org.orekit.files.ccsds.section.CommentsContainer):
         
         """
         ...
-    def setMaxRcs(self, double: float) -> None:
-        """
-            Set the maximum radar cross-section.
-        
-            Parameters:
-                maxRcs (double): maximum radar cross-section
-        
-        
-        """
-        ...
     def setMaxThrust(self, double: float) -> None:
         """
             Set the maximum composite thrust the spacecraft can accomplish.
@@ -5760,130 +5576,6 @@ class PhysicalProperties(org.orekit.files.ccsds.section.CommentsContainer):
         
             Parameters:
                 minAreaForCollisionProbability (double): minimum cross-sectional area for collision probability estimation purposes
-        
-        
-        """
-        ...
-    def setMinRcs(self, double: float) -> None:
-        """
-            Set the minimum radar cross-section.
-        
-            Parameters:
-                minRcs (double): minimum radar cross-section
-        
-        
-        """
-        ...
-    def setOebAreaAlongIntermediate(self, double: float) -> None:
-        """
-            Set the cross-sectional area of Optimally Enclosing Box along Y-OEB.
-        
-            Parameters:
-                oebAreaAlongIntermediate (double): cross-sectional area of Optimally Enclosing Box along X-OEB
-        
-        
-        """
-        ...
-    def setOebAreaAlongMax(self, double: float) -> None:
-        """
-            Set the cross-sectional area of Optimally Enclosing Box along X-OEB.
-        
-            Parameters:
-                oebAreaAlongMax (double): cross-sectional area of Optimally Enclosing Box along X-OEB
-        
-        
-        """
-        ...
-    def setOebAreaAlongMin(self, double: float) -> None:
-        """
-            Set the cross-sectional area of Optimally Enclosing Box along Z-OEB.
-        
-            Parameters:
-                oebAreaAlongMin (double): cross-sectional area of Optimally Enclosing Box along X-OEB
-        
-        
-        """
-        ...
-    def setOebIntermediate(self, double: float) -> None:
-        """
-            Set the dimensions of Optimally Enclosing Box along Y-OEB (i.e intermediate).
-        
-            Parameters:
-                oebIntermediate (double): dimensions of Optimally Enclosing Box along Y-OEB (i.e intermediate).
-        
-        
-        """
-        ...
-    def setOebMax(self, double: float) -> None:
-        """
-            Set the dimensions of Optimally Enclosing Box along X-OEB (i.e max).
-        
-            Parameters:
-                oebMax (double): dimensions of Optimally Enclosing Box along X-OEB (i.e max)
-        
-        
-        """
-        ...
-    def setOebMin(self, double: float) -> None:
-        """
-            Set the dimensions of Optimally Enclosing Box along Z-OEB (i.e min).
-        
-            Parameters:
-                oebMin (double): dimensions of Optimally Enclosing Box along Z-OEB (i.e min)
-        
-        
-        """
-        ...
-    def setOebParentFrame(self, frameFacade: org.orekit.files.ccsds.definitions.FrameFacade) -> None:
-        """
-            Set the Optimally Enclosing Box parent reference frame.
-        
-            Parameters:
-                oebParentFrame (:class:`~org.orekit.files.ccsds.definitions.FrameFacade`): Optimally Enclosing Box parent reference frame
-        
-        
-        """
-        ...
-    def setOebParentFrameEpoch(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Set the Optimally Enclosing Box parent reference frame epoch.
-        
-            Parameters:
-                oebParentFrameEpoch (:class:`~org.orekit.time.AbsoluteDate`): Optimally Enclosing Box parent reference frame epoch
-        
-        
-        """
-        ...
-    def setOebQ(self, int: int, double: float) -> None:
-        """
-            set the component of quaternion defining Optimally Enclosing Box.
-        
-            Parameters:
-                i (int): index of the component
-                qI (double): component of quaternion defining Optimally Enclosing Box
-        
-        
-        """
-        ...
-    def setRcs(self, double: float) -> None:
-        """
-            Set the typical (50th percentile) radar cross-section.
-        
-            Parameters:
-                rcs (double): typical (50th percentile) radar cross-section
-        
-        
-        """
-        ...
-    def setReflectance(self, double: float) -> None:
-        """
-            Set the typical (50th percentile) coefficient of reflectance.
-        
-            Parameters:
-                reflectance (double): typical (50th percentile) coefficient of reflectance
-        
-            Since:
-                11.2
         
         
         """
@@ -5934,46 +5626,6 @@ class PhysicalProperties(org.orekit.files.ccsds.section.CommentsContainer):
         
             Parameters:
                 typAreaForCollisionProbability (double): typical (50th percentile) cross-sectional area for collision probability estimation purposes
-        
-        
-        """
-        ...
-    def setVmAbsolute(self, double: float) -> None:
-        """
-            Set the typical (50th percentile) visual magnitude.
-        
-            Parameters:
-                vmAbsolute (double): typical (50th percentile) visual magnitude
-        
-        
-        """
-        ...
-    def setVmApparent(self, double: float) -> None:
-        """
-            Set the typical (50th percentile) apparent visual magnitude.
-        
-            Parameters:
-                vmApparent (double): typical (50th percentile) apparent visual magnitude
-        
-        
-        """
-        ...
-    def setVmApparentMax(self, double: float) -> None:
-        """
-            Set the maximum apparent visual magnitude.
-        
-            Parameters:
-                vmApparentMax (double): maximum apparent visual magnitude
-        
-        
-        """
-        ...
-    def setVmApparentMin(self, double: float) -> None:
-        """
-            Set the minimum apparent visual magnitude.
-        
-            Parameters:
-                vmApparentMin (double): minimum apparent visual magnitude
         
         
         """

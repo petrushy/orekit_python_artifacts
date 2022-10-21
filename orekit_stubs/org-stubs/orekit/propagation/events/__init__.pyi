@@ -389,7 +389,7 @@ _FieldEventState__D = typing.TypeVar('_FieldEventState__D', bound=FieldEventDete
 _FieldEventState__T = typing.TypeVar('_FieldEventState__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldEventState(typing.Generic[_FieldEventState__D, _FieldEventState__T]):
     """
-    public class FieldEventState<D extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>,T extends CalculusFieldElement<T>> extends Object
+    public class FieldEventState<D extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends CalculusFieldElement<T>> extends Object
     
         This class handles the state for one :class:`~org.orekit.propagation.events.FieldEventDetector` during integration
         steps.
@@ -993,7 +993,7 @@ _FieldAbstractDetector__D = typing.TypeVar('_FieldAbstractDetector__D', bound=Fi
 _FieldAbstractDetector__T = typing.TypeVar('_FieldAbstractDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAbstractDetector(FieldEventDetector[_FieldAbstractDetector__T], typing.Generic[_FieldAbstractDetector__D, _FieldAbstractDetector__T]):
     """
-    public abstract class FieldAbstractDetector<D extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>,T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.events.FieldEventDetector`<T>
+    public abstract class FieldAbstractDetector<D extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.events.FieldEventDetector`<T>
     
         Common parts shared by several orbital events finders.
     
@@ -1826,7 +1826,7 @@ class BooleanDetector(AbstractDetector['BooleanDetector']):
                 :meth:`~org.orekit.propagation.events.BooleanDetector.orCombine`,
                 :meth:`~org.orekit.propagation.events.BooleanDetector.notCombine`
         
-        public static :class:`~org.orekit.propagation.events.BooleanDetector` andCombine(Collection<? extends :class:`~org.orekit.propagation.events.EventDetector`> detectors)
+        public static :class:`~org.orekit.propagation.events.BooleanDetector` andCombine (Collection<? extends :class:`~org.orekit.propagation.events.EventDetector`> detectors)
         
             Create a new event detector that is the logical AND of the given event detectors.
         
@@ -1964,7 +1964,7 @@ class BooleanDetector(AbstractDetector['BooleanDetector']):
                 :meth:`~org.orekit.propagation.events.BooleanDetector.andCombine`,
                 :meth:`~org.orekit.propagation.events.BooleanDetector.notCombine`
         
-        public static :class:`~org.orekit.propagation.events.BooleanDetector` orCombine(Collection<? extends :class:`~org.orekit.propagation.events.EventDetector`> detectors)
+        public static :class:`~org.orekit.propagation.events.BooleanDetector` orCombine (Collection<? extends :class:`~org.orekit.propagation.events.EventDetector`> detectors)
         
             Create a new event detector that is the logical OR of the given event detectors.
         
@@ -2007,7 +2007,7 @@ class DateDetector(AbstractDetector['DateDetector'], org.orekit.time.TimeStamped
     
         As of version 5.1, it is an enhanced date detector:
     
-          - it can be defined without prior date (:meth:`~org.orekit.propagation.events.DateDetector.DateDetector`)
+          - it can be defined without prior date (:meth:`~org.orekit.propagation.events.DateDetector.%3Cinit%3E`)
           - several dates can be added (:meth:`~org.orekit.propagation.events.DateDetector.addEventDate`)
     
     
@@ -2713,10 +2713,84 @@ class EventSlopeFilter(AbstractDetector['EventSlopeFilter'[_EventSlopeFilter__T]
         """
         ...
 
+class ExtremumApproachDetector(AbstractDetector['ExtremumApproachDetector']):
+    """
+    public class ExtremumApproachDetector extends :class:`~org.orekit.propagation.events.AbstractDetector`<:class:`~org.orekit.propagation.events.ExtremumApproachDetector`>
+    
+        Finder for extremum approach events.
+    
+        This class finds extremum approach events (i.e. closest or farthest approach).
+    
+        The default implementation behavior is to null propagation at farthest approach and to null propagation at closest
+        approach. This can be changed by calling :meth:`~org.orekit.propagation.events.AbstractDetector.withHandler` after
+        construction (go to the end of the documentation to see an example).
+    
+        As this detector needs two objects (moving relative to each other), it embeds one
+        :class:`~org.orekit.utils.PVCoordinatesProvider` for the secondary object and is registered as an event detector in the
+        propagator of the primary object. The secondary object :class:`~org.orekit.utils.PVCoordinatesProvider` will therefore
+        be driven by this detector (and hence by the propagator in which this detector is registered).
+    
+        **In order to avoid infinite recursion, care must be taken to have the secondary object provider being *completely
+        independent* from anything else. In particular, if the provider is a propagator, it should *not* be run together in a
+        :class:`~org.orekit.propagation.PropagatorsParallelizer` with the propagator this detector is registered in. It is fine
+        however to configure two separate propagators PsA and PsB with similar settings for the secondary object and one
+        propagator Pm for the primary object and then use Psa in this detector registered within Pm while Pm and Psb are run in
+        the context of a :class:`~org.orekit.propagation.PropagatorsParallelizer`.**
+    
+        For efficiency reason during the event search loop, it is recommended to have the secondary provider be an analytical
+        propagator or an ephemeris. A numerical propagator as a secondary propagator works but is expected to be computationally
+        costly.
+    
+        Also, it is possible to detect solely one type of event using an
+        :class:`~org.orekit.propagation.events.EventSlopeFilter`. For example in order to only detect closest approach, one
+        should type the following :
+    
+        .. code-block: java
+        
+        
+         ExtremumApproachDetector extremumApproachDetector = new ExtremumApproachDetector(secondaryPVProvider);
+         EventDetector closeApproachDetector = new EventSlopeFilter<ExtremumApproachDetector>(extremumApproachDetector,FilterType.TRIGGER_ONLY_INCREASING_EVENTS);
+          
+         
+    
+        Since:
+            11.3
+    
+        Also see:
+            :meth:`~org.orekit.propagation.Propagator.addEventDetector`, :class:`~org.orekit.propagation.events.EventSlopeFilter`,
+            :class:`~org.orekit.propagation.events.FilterType`
+    """
+    @typing.overload
+    def __init__(self, double: float, double2: float, int: int, eventHandler: org.orekit.propagation.events.handlers.EventHandler['ExtremumApproachDetector'], pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider): ...
+    @typing.overload
+    def __init__(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider): ...
+    def g(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
+        """
+            The :code:`g` is positive when the primary object is getting further away from the secondary object and is negative when
+            it is getting closer to it.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
+                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
+                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+        
+            Parameters:
+                s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
+        
+            Returns:
+                value of the switching function
+        
+        
+        """
+        ...
+
 _FieldAltitudeDetector__T = typing.TypeVar('_FieldAltitudeDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAltitudeDetector(FieldAbstractDetector['FieldAltitudeDetector'[_FieldAltitudeDetector__T], _FieldAltitudeDetector__T], typing.Generic[_FieldAltitudeDetector__T]):
     """
-    public class FieldAltitudeDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldAltitudeDetector`<T>,T>
+    public class FieldAltitudeDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldAltitudeDetector`<T>, T>
     
         Finder for satellite altitude crossing events.
     
@@ -2762,7 +2836,7 @@ class FieldAltitudeDetector(FieldAbstractDetector['FieldAltitudeDetector'[_Field
 _FieldApsideDetector__T = typing.TypeVar('_FieldApsideDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldApsideDetector(FieldAbstractDetector['FieldApsideDetector'[_FieldApsideDetector__T], _FieldApsideDetector__T], typing.Generic[_FieldApsideDetector__T]):
     """
-    public class FieldApsideDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldApsideDetector`<T>,T>
+    public class FieldApsideDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldApsideDetector`<T>, T>
     
         Finder for apside crossing events.
     
@@ -2788,7 +2862,7 @@ class FieldApsideDetector(FieldAbstractDetector['FieldApsideDetector'[_FieldApsi
 _FieldDateDetector__T = typing.TypeVar('_FieldDateDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldDateDetector(FieldAbstractDetector['FieldDateDetector'[_FieldDateDetector__T], _FieldDateDetector__T], org.orekit.time.FieldTimeStamped[_FieldDateDetector__T], typing.Generic[_FieldDateDetector__T]):
     """
-    public class FieldDateDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldDateDetector`<T>,T> implements :class:`~org.orekit.time.FieldTimeStamped`<T>
+    public class FieldDateDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldDateDetector`<T>, T> implements :class:`~org.orekit.time.FieldTimeStamped`<T>
     
         Finder for date events.
     
@@ -2796,7 +2870,7 @@ class FieldDateDetector(FieldAbstractDetector['FieldDateDetector'[_FieldDateDete
     
         As of version 5.1, it is an enhanced date detector:
     
-          - it can be defined without prior date (:meth:`~org.orekit.propagation.events.FieldDateDetector.FieldDateDetector`)
+          - it can be defined without prior date (:meth:`~org.orekit.propagation.events.FieldDateDetector.%3Cinit%3E`)
           - several dates can be added (:meth:`~org.orekit.propagation.events.FieldDateDetector.addEventDate`)
     
     
@@ -2819,7 +2893,7 @@ class FieldDateDetector(FieldAbstractDetector['FieldDateDetector'[_FieldDateDete
 _FieldEclipseDetector__T = typing.TypeVar('_FieldEclipseDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldEclipseDetector(FieldAbstractDetector['FieldEclipseDetector'[_FieldEclipseDetector__T], _FieldEclipseDetector__T], typing.Generic[_FieldEclipseDetector__T]):
     """
-    public class FieldEclipseDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldEclipseDetector`<T>,T>
+    public class FieldEclipseDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldEclipseDetector`<T>, T>
     
         Finder for satellite eclipse related events.
     
@@ -2895,7 +2969,7 @@ class FieldEclipseDetector(FieldAbstractDetector['FieldEclipseDetector'[_FieldEc
 _FieldElevationDetector__T = typing.TypeVar('_FieldElevationDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldElevationDetector(FieldAbstractDetector['FieldElevationDetector'[_FieldElevationDetector__T], _FieldElevationDetector__T], typing.Generic[_FieldElevationDetector__T]):
     """
-    public class FieldElevationDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldElevationDetector`<T>,T>
+    public class FieldElevationDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldElevationDetector`<T>, T>
     
         Finder for satellite raising/setting events that allows for the setting of azimuth and/or elevation bounds or a ground
         azimuth/elevation mask input. Each calculation be configured to use atmospheric refraction as well.
@@ -2966,7 +3040,7 @@ class FieldElevationDetector(FieldAbstractDetector['FieldElevationDetector'[_Fie
 _FieldFunctionalDetector__T = typing.TypeVar('_FieldFunctionalDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldFunctionalDetector(FieldAbstractDetector['FieldFunctionalDetector'[_FieldFunctionalDetector__T], _FieldFunctionalDetector__T], typing.Generic[_FieldFunctionalDetector__T]):
     """
-    public class FieldFunctionalDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldFunctionalDetector`<T>,T>
+    public class FieldFunctionalDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldFunctionalDetector`<T>, T>
     
         A detector that implements the :meth:`~org.orekit.propagation.events.FieldFunctionalDetector.g` function using a lambda
         that can be set using :meth:`~org.orekit.propagation.events.FieldFunctionalDetector.withFunction`.
@@ -2992,7 +3066,7 @@ class FieldFunctionalDetector(FieldAbstractDetector['FieldFunctionalDetector'[_F
 _FieldLatitudeCrossingDetector__T = typing.TypeVar('_FieldLatitudeCrossingDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldLatitudeCrossingDetector(FieldAbstractDetector['FieldLatitudeCrossingDetector'[_FieldLatitudeCrossingDetector__T], _FieldLatitudeCrossingDetector__T], typing.Generic[_FieldLatitudeCrossingDetector__T]):
     """
-    public class FieldLatitudeCrossingDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldLatitudeCrossingDetector`<T>,T>
+    public class FieldLatitudeCrossingDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldLatitudeCrossingDetector`<T>, T>
     
         Detector for geographic latitude crossing.
     
@@ -3030,7 +3104,7 @@ class FieldLatitudeCrossingDetector(FieldAbstractDetector['FieldLatitudeCrossing
 _FieldNodeDetector__T = typing.TypeVar('_FieldNodeDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldNodeDetector(FieldAbstractDetector['FieldNodeDetector'[_FieldNodeDetector__T], _FieldNodeDetector__T], typing.Generic[_FieldNodeDetector__T]):
     """
-    public class FieldNodeDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldNodeDetector`<T>,T>
+    public class FieldNodeDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldNodeDetector`<T>, T>
     
         Finder for node crossing events.
     
@@ -3149,7 +3223,7 @@ class FieldOfViewDetector(AbstractDetector['FieldOfViewDetector']):
 _FieldParameterDrivenDateIntervalDetector__T = typing.TypeVar('_FieldParameterDrivenDateIntervalDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldParameterDrivenDateIntervalDetector(FieldAbstractDetector['FieldParameterDrivenDateIntervalDetector'[_FieldParameterDrivenDateIntervalDetector__T], _FieldParameterDrivenDateIntervalDetector__T], typing.Generic[_FieldParameterDrivenDateIntervalDetector__T]):
     """
-    public class FieldParameterDrivenDateIntervalDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldParameterDrivenDateIntervalDetector`<T>,T>
+    public class FieldParameterDrivenDateIntervalDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldParameterDrivenDateIntervalDetector`<T>, T>
     
         Detector for date intervals that may be offset thanks to parameter drivers.
     
@@ -4498,7 +4572,7 @@ _PythonFieldAbstractDetector__D = typing.TypeVar('_PythonFieldAbstractDetector__
 _PythonFieldAbstractDetector__T = typing.TypeVar('_PythonFieldAbstractDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldAbstractDetector(FieldAbstractDetector[_PythonFieldAbstractDetector__D, _PythonFieldAbstractDetector__T], typing.Generic[_PythonFieldAbstractDetector__D, _PythonFieldAbstractDetector__T]):
     """
-    public class PythonFieldAbstractDetector<D extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>,T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<D,T>
+    public class PythonFieldAbstractDetector<D extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<D, T>
     """
     def __init__(self, t: _PythonFieldAbstractDetector__T, t2: _PythonFieldAbstractDetector__T, int: int, fieldEventHandler: org.orekit.propagation.events.handlers.FieldEventHandler[_PythonFieldAbstractDetector__D, _PythonFieldAbstractDetector__T]): ...
     def create(self, t: _PythonFieldAbstractDetector__T, t2: _PythonFieldAbstractDetector__T, int: int, fieldEventHandler: org.orekit.propagation.events.handlers.FieldEventHandler[_PythonFieldAbstractDetector__D, _PythonFieldAbstractDetector__T]) -> _PythonFieldAbstractDetector__D: ...
@@ -4547,6 +4621,7 @@ class __module_protocol__(typing.Protocol):
     EventSlopeFilter: typing.Type[EventSlopeFilter]
     EventState: typing.Type[EventState]
     EventsLogger: typing.Type[EventsLogger]
+    ExtremumApproachDetector: typing.Type[ExtremumApproachDetector]
     FieldAbstractDetector: typing.Type[FieldAbstractDetector]
     FieldAltitudeDetector: typing.Type[FieldAltitudeDetector]
     FieldApsideDetector: typing.Type[FieldApsideDetector]

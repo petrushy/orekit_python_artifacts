@@ -219,7 +219,8 @@ class IsotropicDrag(DragSensitive):
             The computation includes all spacecraft specific characteristics like shape, area and coefficients.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.drag.DragSensitive`
+                :meth:`~org.orekit.forces.drag.DragSensitive.dragAcceleration`Â in
+                interfaceÂ :class:`~org.orekit.forces.drag.DragSensitive`
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
@@ -245,7 +246,8 @@ class IsotropicDrag(DragSensitive):
             The computation includes all spacecraft specific characteristics like shape, area and coefficients.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.drag.DragSensitive`
+                :meth:`~org.orekit.forces.drag.DragSensitive.dragAcceleration`Â in
+                interfaceÂ :class:`~org.orekit.forces.drag.DragSensitive`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
@@ -359,7 +361,8 @@ class PythonDragSensitive(DragSensitive):
             The computation includes all spacecraft specific characteristics like shape, area and coefficients.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.drag.DragSensitive`
+                :meth:`~org.orekit.forces.drag.DragSensitive.dragAcceleration`Â in
+                interfaceÂ :class:`~org.orekit.forces.drag.DragSensitive`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
@@ -379,7 +382,8 @@ class PythonDragSensitive(DragSensitive):
             The computation includes all spacecraft specific characteristics like shape, area and coefficients.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.drag.DragSensitive`
+                :meth:`~org.orekit.forces.drag.DragSensitive.dragAcceleration`Â in
+                interfaceÂ :class:`~org.orekit.forces.drag.DragSensitive`
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date

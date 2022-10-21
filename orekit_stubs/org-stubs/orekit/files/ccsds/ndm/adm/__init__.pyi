@@ -235,7 +235,7 @@ _AdmParser__T = typing.TypeVar('_AdmParser__T', bound=org.orekit.files.ccsds.ndm
 _AdmParser__P = typing.TypeVar('_AdmParser__P', bound=org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser)  # <P>
 class AdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[_AdmParser__T, _AdmParser__P], typing.Generic[_AdmParser__T, _AdmParser__P]):
     """
-    public abstract class AdmParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<?,?>,P extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<T,?>> extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<T,P>
+    public abstract class AdmParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<?, ?>, P extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<T, ?>> extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<T, P>
     
         Base class for Attitude Data Message parsers.
     
@@ -674,7 +674,7 @@ _PythonAdmParser__T = typing.TypeVar('_PythonAdmParser__T', bound=org.orekit.fil
 _PythonAdmParser__P = typing.TypeVar('_PythonAdmParser__P', bound=org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser)  # <P>
 class PythonAdmParser(AdmParser[_PythonAdmParser__T, _PythonAdmParser__P], typing.Generic[_PythonAdmParser__T, _PythonAdmParser__P]):
     """
-    public class PythonAdmParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<?,?>,P extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<T,?>> extends :class:`~org.orekit.files.ccsds.ndm.adm.AdmParser`<T,P>
+    public class PythonAdmParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<?, ?>, P extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<T, ?>> extends :class:`~org.orekit.files.ccsds.ndm.adm.AdmParser`<T, P>
     """
     def build(self) -> _PythonAdmParser__T:
         """

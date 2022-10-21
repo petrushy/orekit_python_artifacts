@@ -64,10 +64,216 @@ class CR3BPDifferentialCorrection:
         """
         ...
 
+class FieldKeplerianAnomalyUtility:
+    """
+    public class FieldKeplerianAnomalyUtility extends Object
+    
+        Utility methods for converting between different Keplerian anomalies.
+    """
+    _ellipticEccentricToMean__T = typing.TypeVar('_ellipticEccentricToMean__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @staticmethod
+    def ellipticEccentricToMean(t: _ellipticEccentricToMean__T, t2: _ellipticEccentricToMean__T) -> _ellipticEccentricToMean__T:
+        """
+            Computes the elliptic mean anomaly from the elliptic eccentric anomaly.
+        
+            Parameters:
+                e (T): eccentricity such that 0 ≤ e < 1
+                E (T): elliptic eccentric anomaly (rad)
+        
+            Returns:
+                elliptic mean anomaly (rad)
+        
+        
+        """
+        ...
+    _ellipticEccentricToTrue__T = typing.TypeVar('_ellipticEccentricToTrue__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @staticmethod
+    def ellipticEccentricToTrue(t: _ellipticEccentricToTrue__T, t2: _ellipticEccentricToTrue__T) -> _ellipticEccentricToTrue__T:
+        """
+            Computes the elliptic true anomaly from the elliptic eccentric anomaly.
+        
+            Parameters:
+                e (T): eccentricity such that 0 ≤ e < 1
+                E (T): elliptic eccentric anomaly (rad)
+        
+            Returns:
+                elliptic true anomaly (rad)
+        
+        
+        """
+        ...
+    _ellipticMeanToEccentric__T = typing.TypeVar('_ellipticMeanToEccentric__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @staticmethod
+    def ellipticMeanToEccentric(t: _ellipticMeanToEccentric__T, t2: _ellipticMeanToEccentric__T) -> _ellipticMeanToEccentric__T:
+        """
+            Computes the elliptic eccentric anomaly from the elliptic mean anomaly.
+        
+            The algorithm used here for solving hyperbolic Kepler equation is from Odell, A.W., Gooding, R.H. "Procedures for
+            solving Kepler's equation." Celestial Mechanics 38, 307Ã¢â‚¬â€œ334 (1986). https://doi.org/10.1007/BF01238923
+        
+            Parameters:
+                e (T): eccentricity such that 0 ≤ e < 1
+                M (T): elliptic mean anomaly (rad)
+        
+            Returns:
+                elliptic eccentric anomaly (rad)
+        
+        
+        """
+        ...
+    _ellipticMeanToTrue__T = typing.TypeVar('_ellipticMeanToTrue__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @staticmethod
+    def ellipticMeanToTrue(t: _ellipticMeanToTrue__T, t2: _ellipticMeanToTrue__T) -> _ellipticMeanToTrue__T:
+        """
+            Computes the elliptic true anomaly from the elliptic mean anomaly.
+        
+            Parameters:
+                e (T): eccentricity such that 0 ≤ e < 1
+                M (T): elliptic mean anomaly (rad)
+        
+            Returns:
+                elliptic true anomaly (rad)
+        
+        
+        """
+        ...
+    _ellipticTrueToEccentric__T = typing.TypeVar('_ellipticTrueToEccentric__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @staticmethod
+    def ellipticTrueToEccentric(t: _ellipticTrueToEccentric__T, t2: _ellipticTrueToEccentric__T) -> _ellipticTrueToEccentric__T:
+        """
+            Computes the elliptic eccentric anomaly from the elliptic true anomaly.
+        
+            Parameters:
+                e (T): eccentricity such that 0 ≤ e < 1
+                v (T): elliptic true anomaly (rad)
+        
+            Returns:
+                elliptic eccentric anomaly (rad)
+        
+        
+        """
+        ...
+    _ellipticTrueToMean__T = typing.TypeVar('_ellipticTrueToMean__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @staticmethod
+    def ellipticTrueToMean(t: _ellipticTrueToMean__T, t2: _ellipticTrueToMean__T) -> _ellipticTrueToMean__T:
+        """
+            Computes the elliptic mean anomaly from the elliptic true anomaly.
+        
+            Parameters:
+                e (T): eccentricity such that 0 ≤ e < 1
+                v (T): elliptic true anomaly (rad)
+        
+            Returns:
+                elliptic mean anomaly (rad)
+        
+        
+        """
+        ...
+    _hyperbolicEccentricToMean__T = typing.TypeVar('_hyperbolicEccentricToMean__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @staticmethod
+    def hyperbolicEccentricToMean(t: _hyperbolicEccentricToMean__T, t2: _hyperbolicEccentricToMean__T) -> _hyperbolicEccentricToMean__T:
+        """
+            Computes the hyperbolic mean anomaly from the hyperbolic eccentric anomaly.
+        
+            Parameters:
+                e (T): eccentricity > 1
+                H (T): hyperbolic eccentric anomaly
+        
+            Returns:
+                hyperbolic mean anomaly
+        
+        
+        """
+        ...
+    _hyperbolicEccentricToTrue__T = typing.TypeVar('_hyperbolicEccentricToTrue__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @staticmethod
+    def hyperbolicEccentricToTrue(t: _hyperbolicEccentricToTrue__T, t2: _hyperbolicEccentricToTrue__T) -> _hyperbolicEccentricToTrue__T:
+        """
+            Computes the hyperbolic true anomaly from the hyperbolic eccentric anomaly.
+        
+            Parameters:
+                e (T): eccentricity > 1
+                H (T): hyperbolic eccentric anomaly
+        
+            Returns:
+                hyperbolic true anomaly (rad)
+        
+        
+        """
+        ...
+    _hyperbolicMeanToEccentric__T = typing.TypeVar('_hyperbolicMeanToEccentric__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @staticmethod
+    def hyperbolicMeanToEccentric(t: _hyperbolicMeanToEccentric__T, t2: _hyperbolicMeanToEccentric__T) -> _hyperbolicMeanToEccentric__T:
+        """
+            Computes the hyperbolic eccentric anomaly from the hyperbolic mean anomaly.
+        
+            The algorithm used here for solving hyperbolic Kepler equation is from Gooding, R.H., Odell, A.W. "The hyperbolic Kepler
+            equation (and the elliptic equation revisited)." Celestial Mechanics 44, 267Ã¢â‚¬â€œ282 (1988).
+            https://doi.org/10.1007/BF01235540
+        
+            Parameters:
+                e (T): eccentricity > 1
+                M (T): hyperbolic mean anomaly
+        
+            Returns:
+                hyperbolic eccentric anomaly
+        
+        
+        """
+        ...
+    _hyperbolicMeanToTrue__T = typing.TypeVar('_hyperbolicMeanToTrue__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @staticmethod
+    def hyperbolicMeanToTrue(t: _hyperbolicMeanToTrue__T, t2: _hyperbolicMeanToTrue__T) -> _hyperbolicMeanToTrue__T:
+        """
+            Computes the hyperbolic true anomaly from the hyperbolic mean anomaly.
+        
+            Parameters:
+                e (T): eccentricity > 1
+                M (T): hyperbolic mean anomaly
+        
+            Returns:
+                hyperbolic true anomaly (rad)
+        
+        
+        """
+        ...
+    _hyperbolicTrueToEccentric__T = typing.TypeVar('_hyperbolicTrueToEccentric__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @staticmethod
+    def hyperbolicTrueToEccentric(t: _hyperbolicTrueToEccentric__T, t2: _hyperbolicTrueToEccentric__T) -> _hyperbolicTrueToEccentric__T:
+        """
+            Computes the hyperbolic eccentric anomaly from the hyperbolic true anomaly.
+        
+            Parameters:
+                e (T): eccentricity > 1
+                v (T): hyperbolic true anomaly (rad)
+        
+            Returns:
+                hyperbolic eccentric anomaly
+        
+        
+        """
+        ...
+    _hyperbolicTrueToMean__T = typing.TypeVar('_hyperbolicTrueToMean__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @staticmethod
+    def hyperbolicTrueToMean(t: _hyperbolicTrueToMean__T, t2: _hyperbolicTrueToMean__T) -> _hyperbolicTrueToMean__T:
+        """
+            Computes the hyperbolic mean anomaly from the hyperbolic true anomaly.
+        
+            Parameters:
+                e (T): eccentricity > 1
+                v (T): hyperbolic true anomaly (rad)
+        
+            Returns:
+                hyperbolic mean anomaly
+        
+        
+        """
+        ...
+
 _FieldOrbit__T = typing.TypeVar('_FieldOrbit__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], org.orekit.time.FieldTimeStamped[_FieldOrbit__T], org.orekit.time.FieldTimeShiftable['FieldOrbit'[_FieldOrbit__T], _FieldOrbit__T], org.orekit.time.FieldTimeInterpolable['FieldOrbit'[_FieldOrbit__T], _FieldOrbit__T], typing.Generic[_FieldOrbit__T]):
     """
-    public abstract class FieldOrbit<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T>, :class:`~org.orekit.time.FieldTimeStamped`<T>, :class:`~org.orekit.time.FieldTimeShiftable`<:class:`~org.orekit.orbits.FieldOrbit`<T>,T>, :class:`~org.orekit.time.FieldTimeInterpolable`<:class:`~org.orekit.orbits.FieldOrbit`<T>,T>
+    public abstract class FieldOrbit<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T>, :class:`~org.orekit.time.FieldTimeStamped`<T>, :class:`~org.orekit.time.FieldTimeShiftable`<:class:`~org.orekit.orbits.FieldOrbit`<T>, T>, :class:`~org.orekit.time.FieldTimeInterpolable`<:class:`~org.orekit.orbits.FieldOrbit`<T>, T>
     
         This class handles orbital parameters.
     
@@ -448,6 +654,200 @@ class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], or
         """
         ...
 
+class KeplerianAnomalyUtility:
+    """
+    public final class KeplerianAnomalyUtility extends Object
+    
+        Utility methods for converting between different Keplerian anomalies.
+    """
+    @staticmethod
+    def ellipticEccentricToMean(double: float, double2: float) -> float:
+        """
+            Computes the elliptic mean anomaly from the elliptic eccentric anomaly.
+        
+            Parameters:
+                e (double): eccentricity such that 0 ≤ e < 1
+                E (double): elliptic eccentric anomaly (rad)
+        
+            Returns:
+                elliptic mean anomaly (rad)
+        
+        
+        """
+        ...
+    @staticmethod
+    def ellipticEccentricToTrue(double: float, double2: float) -> float:
+        """
+            Computes the elliptic true anomaly from the elliptic eccentric anomaly.
+        
+            Parameters:
+                e (double): eccentricity such that 0 ≤ e < 1
+                E (double): elliptic eccentric anomaly (rad)
+        
+            Returns:
+                elliptic true anomaly (rad)
+        
+        
+        """
+        ...
+    @staticmethod
+    def ellipticMeanToEccentric(double: float, double2: float) -> float:
+        """
+            Computes the elliptic eccentric anomaly from the elliptic mean anomaly.
+        
+            The algorithm used here for solving hyperbolic Kepler equation is from Odell, A.W., Gooding, R.H. "Procedures for
+            solving Kepler's equation." Celestial Mechanics 38, 307Ã¢â‚¬â€œ334 (1986). https://doi.org/10.1007/BF01238923
+        
+            Parameters:
+                e (double): eccentricity such that 0 ≤ e < 1
+                M (double): elliptic mean anomaly (rad)
+        
+            Returns:
+                elliptic eccentric anomaly (rad)
+        
+        
+        """
+        ...
+    @staticmethod
+    def ellipticMeanToTrue(double: float, double2: float) -> float:
+        """
+            Computes the elliptic true anomaly from the elliptic mean anomaly.
+        
+            Parameters:
+                e (double): eccentricity such that 0 ≤ e < 1
+                M (double): elliptic mean anomaly (rad)
+        
+            Returns:
+                elliptic true anomaly (rad)
+        
+        
+        """
+        ...
+    @staticmethod
+    def ellipticTrueToEccentric(double: float, double2: float) -> float:
+        """
+            Computes the elliptic eccentric anomaly from the elliptic true anomaly.
+        
+            Parameters:
+                e (double): eccentricity such that 0 ≤ e < 1
+                v (double): elliptic true anomaly (rad)
+        
+            Returns:
+                elliptic eccentric anomaly (rad)
+        
+        
+        """
+        ...
+    @staticmethod
+    def ellipticTrueToMean(double: float, double2: float) -> float:
+        """
+            Computes the elliptic mean anomaly from the elliptic true anomaly.
+        
+            Parameters:
+                e (double): eccentricity such that 0 ≤ e < 1
+                v (double): elliptic true anomaly (rad)
+        
+            Returns:
+                elliptic mean anomaly (rad)
+        
+        
+        """
+        ...
+    @staticmethod
+    def hyperbolicEccentricToMean(double: float, double2: float) -> float:
+        """
+            Computes the hyperbolic mean anomaly from the hyperbolic eccentric anomaly.
+        
+            Parameters:
+                e (double): eccentricity > 1
+                H (double): hyperbolic eccentric anomaly
+        
+            Returns:
+                hyperbolic mean anomaly
+        
+        
+        """
+        ...
+    @staticmethod
+    def hyperbolicEccentricToTrue(double: float, double2: float) -> float:
+        """
+            Computes the hyperbolic true anomaly from the hyperbolic eccentric anomaly.
+        
+            Parameters:
+                e (double): eccentricity > 1
+                H (double): hyperbolic eccentric anomaly
+        
+            Returns:
+                hyperbolic true anomaly (rad)
+        
+        
+        """
+        ...
+    @staticmethod
+    def hyperbolicMeanToEccentric(double: float, double2: float) -> float:
+        """
+            Computes the hyperbolic eccentric anomaly from the hyperbolic mean anomaly.
+        
+            The algorithm used here for solving hyperbolic Kepler equation is from Gooding, R.H., Odell, A.W. "The hyperbolic Kepler
+            equation (and the elliptic equation revisited)." Celestial Mechanics 44, 267Ã¢â‚¬â€œ282 (1988).
+            https://doi.org/10.1007/BF01235540
+        
+            Parameters:
+                e (double): eccentricity > 1
+                M (double): hyperbolic mean anomaly
+        
+            Returns:
+                hyperbolic eccentric anomaly
+        
+        
+        """
+        ...
+    @staticmethod
+    def hyperbolicMeanToTrue(double: float, double2: float) -> float:
+        """
+            Computes the hyperbolic true anomaly from the hyperbolic mean anomaly.
+        
+            Parameters:
+                e (double): eccentricity > 1
+                M (double): hyperbolic mean anomaly
+        
+            Returns:
+                hyperbolic true anomaly (rad)
+        
+        
+        """
+        ...
+    @staticmethod
+    def hyperbolicTrueToEccentric(double: float, double2: float) -> float:
+        """
+            Computes the hyperbolic eccentric anomaly from the hyperbolic true anomaly.
+        
+            Parameters:
+                e (double): eccentricity > 1
+                v (double): hyperbolic true anomaly (rad)
+        
+            Returns:
+                hyperbolic eccentric anomaly
+        
+        
+        """
+        ...
+    @staticmethod
+    def hyperbolicTrueToMean(double: float, double2: float) -> float:
+        """
+            Computes the hyperbolic mean anomaly from the hyperbolic true anomaly.
+        
+            Parameters:
+                e (double): eccentricity > 1
+                v (double): hyperbolic true anomaly (rad)
+        
+            Returns:
+                hyperbolic mean anomaly
+        
+        
+        """
+        ...
+
 class LibrationOrbit:
     """
     public abstract class LibrationOrbit extends Object
@@ -467,9 +867,10 @@ class LibrationOrbit:
         
             This will update :meth:`~org.orekit.orbits.LibrationOrbit.initialPV` and
             :meth:`~org.orekit.orbits.LibrationOrbit.orbitalPeriod` parameters.
-        @Deprecated public void applyDifferentialCorrection(:class:`~org.orekit.attitudes.AttitudeProvider` attitudeProvider, :class:`~org.orekit.time.TimeScale` utc)
+        @Deprecated public void applyDifferentialCorrection (:class:`~org.orekit.attitudes.AttitudeProvider` attitudeProvider, :class:`~org.orekit.time.TimeScale` utc)
         
-            Deprecated. as of 11.1, replaced by :meth:`~org.orekit.orbits.LibrationOrbit.applyDifferentialCorrection`
+            Deprecated.
+            as of 11.1, replaced by :meth:`~org.orekit.orbits.LibrationOrbit.applyDifferentialCorrection`
             Apply differential correction.
         
             This will update :meth:`~org.orekit.orbits.LibrationOrbit.initialPV` and
@@ -1428,7 +1829,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
             Returns:
                 converted orbit with type guaranteed to match (so it can be cast safely)
         
-        public abstract <T extends CalculusFieldElement<T>> :class:`~org.orekit.orbits.FieldOrbit`<T> convertType(:class:`~org.orekit.orbits.FieldOrbit`<T> orbit)
+        public abstract <T extends CalculusFieldElement<T>> :class:`~org.orekit.orbits.FieldOrbit`<T> convertType (:class:`~org.orekit.orbits.FieldOrbit`<T> orbit)
         
             Convert an orbit to the instance type.
         
@@ -1467,8 +1868,9 @@ class OrbitType(java.lang.Enum['OrbitType']):
         """
             Convert state array to orbital parameters.
         
-            Note that all implementations of this method *must* be consistent with the implementation of the null method for the
-            corresponding orbit type in terms of parameters order and meaning.
+            Note that all implementations of this method *must* be consistent with the implementation of the
+            :meth:`~org.orekit.orbits.Orbit.getJacobianWrtCartesian` method for the corresponding orbit type in terms of parameters
+            order and meaning.
         
             Parameters:
                 array (double[]): state as a flat array (it can have more than 6 elements, extra elements are ignored)
@@ -1482,12 +1884,13 @@ class OrbitType(java.lang.Enum['OrbitType']):
             Returns:
                 orbit corresponding to the flat array as a space dynamics object
         
-        public abstract <T extends CalculusFieldElement<T>> :class:`~org.orekit.orbits.FieldOrbit`<T> mapArrayToOrbit(T[] array, T[] arrayDot, :class:`~org.orekit.orbits.PositionAngle` type, :class:`~org.orekit.time.FieldAbsoluteDate`<T> date, T mu, :class:`~org.orekit.frames.Frame` frame)
+        public abstract <T extends CalculusFieldElement<T>> :class:`~org.orekit.orbits.FieldOrbit`<T> mapArrayToOrbit (T[] array, T[] arrayDot, :class:`~org.orekit.orbits.PositionAngle` type, :class:`~org.orekit.time.FieldAbsoluteDate`<T> date, T mu, :class:`~org.orekit.frames.Frame` frame)
         
             Convert state array to orbital parameters.
         
-            Note that all implementations of this method *must* be consistent with the implementation of the null method for the
-            corresponding orbit type in terms of parameters order and meaning.
+            Note that all implementations of this method *must* be consistent with the implementation of the
+            :meth:`~org.orekit.orbits.Orbit.getJacobianWrtCartesian` method for the corresponding orbit type in terms of parameters
+            order and meaning.
         
             Parameters:
                 array (T[]): state as a flat array (it can have more than 6 elements, extra elements are ignored)
@@ -1511,8 +1914,9 @@ class OrbitType(java.lang.Enum['OrbitType']):
         """
             Convert orbit to state array.
         
-            Note that all implementations of this method *must* be consistent with the implementation of the null method for the
-            corresponding orbit type in terms of parameters order and meaning.
+            Note that all implementations of this method *must* be consistent with the implementation of the
+            :meth:`~org.orekit.orbits.Orbit.getJacobianWrtCartesian` method for the corresponding orbit type in terms of parameters
+            order and meaning.
         
             Parameters:
                 orbit (:class:`~org.orekit.orbits.Orbit`): orbit to map
@@ -1521,12 +1925,13 @@ class OrbitType(java.lang.Enum['OrbitType']):
                 stateVectorDot (double[]): flat array into which the state vector derivative should be mapped (it can be null if derivatives are not desired, and
                     it can have more than 6 elements, extra elements are untouched)
         
-        public abstract <T extends CalculusFieldElement<T>> void mapOrbitToArray(:class:`~org.orekit.orbits.FieldOrbit`<T> orbit, :class:`~org.orekit.orbits.PositionAngle` type, T[] stateVector, T[] stateVectorDot)
+        public abstract <T extends CalculusFieldElement<T>> void mapOrbitToArray (:class:`~org.orekit.orbits.FieldOrbit`<T> orbit, :class:`~org.orekit.orbits.PositionAngle` type, T[] stateVector, T[] stateVectorDot)
         
             Convert orbit to state array.
         
-            Note that all implementations of this method *must* be consistent with the implementation of the null method for the
-            corresponding orbit type in terms of parameters order and meaning.
+            Note that all implementations of this method *must* be consistent with the implementation of the
+            :meth:`~org.orekit.orbits.Orbit.getJacobianWrtCartesian` method for the corresponding orbit type in terms of parameters
+            order and meaning.
         
             Parameters:
                 orbit (:class:`~org.orekit.orbits.FieldOrbit`<T> orbit): orbit to map
@@ -1800,7 +2205,7 @@ class CartesianOrbit(Orbit):
             orbital state.
         
             Specified by:
-                 in class :class:`~org.orekit.orbits.Orbit`
+                :meth:`~org.orekit.orbits.Orbit.addKeplerContribution` in class :class:`~org.orekit.orbits.Orbit`
         
             Parameters:
                 type (:class:`~org.orekit.orbits.PositionAngle`): type of the position angle in the state
@@ -2247,7 +2652,7 @@ class CircularOrbit(Orbit):
             orbital state.
         
             Specified by:
-                 in class :class:`~org.orekit.orbits.Orbit`
+                :meth:`~org.orekit.orbits.Orbit.addKeplerContribution` in class :class:`~org.orekit.orbits.Orbit`
         
             Parameters:
                 type (:class:`~org.orekit.orbits.PositionAngle`): type of the position angle in the state
@@ -2914,7 +3319,7 @@ class EquinoctialOrbit(Orbit):
             orbital state.
         
             Specified by:
-                 in class :class:`~org.orekit.orbits.Orbit`
+                :meth:`~org.orekit.orbits.Orbit.addKeplerContribution` in class :class:`~org.orekit.orbits.Orbit`
         
             Parameters:
                 type (:class:`~org.orekit.orbits.PositionAngle`): type of the position angle in the state
@@ -3431,7 +3836,7 @@ class FieldCartesianOrbit(FieldOrbit[_FieldCartesianOrbit__T], typing.Generic[_F
             orbital state.
         
             Specified by:
-                 in class :class:`~org.orekit.orbits.FieldOrbit`
+                :meth:`~org.orekit.orbits.FieldOrbit.addKeplerContribution` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Parameters:
                 type (:class:`~org.orekit.orbits.PositionAngle`): type of the position angle in the state
@@ -3844,7 +4249,7 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
             orbital state.
         
             Specified by:
-                 in class :class:`~org.orekit.orbits.FieldOrbit`
+                :meth:`~org.orekit.orbits.FieldOrbit.addKeplerContribution` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Parameters:
                 type (:class:`~org.orekit.orbits.PositionAngle`): type of the position angle in the state
@@ -4472,7 +4877,7 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], typing.Generi
             orbital state.
         
             Specified by:
-                 in class :class:`~org.orekit.orbits.FieldOrbit`
+                :meth:`~org.orekit.orbits.FieldOrbit.addKeplerContribution` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Parameters:
                 type (:class:`~org.orekit.orbits.PositionAngle`): type of the position angle in the state
@@ -4983,7 +5388,7 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], typing.Generic[_F
             orbital state.
         
             Specified by:
-                 in class :class:`~org.orekit.orbits.FieldOrbit`
+                :meth:`~org.orekit.orbits.FieldOrbit.addKeplerContribution` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Parameters:
                 type (:class:`~org.orekit.orbits.PositionAngle`): type of the position angle in the state
@@ -4998,6 +5403,8 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], typing.Generic[_F
     @staticmethod
     def ellipticEccentricToMean(t: _ellipticEccentricToMean__T, t2: _ellipticEccentricToMean__T) -> _ellipticEccentricToMean__T:
         """
+            Deprecated.
+            As of 11.3, replaced by :meth:`~org.orekit.orbits.FieldKeplerianAnomalyUtility.ellipticEccentricToMean`.
             Computes the mean anomaly from the elliptic eccentric anomaly.
         
             Parameters:
@@ -5014,6 +5421,8 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], typing.Generic[_F
     @staticmethod
     def ellipticEccentricToTrue(t: _ellipticEccentricToTrue__T, t2: _ellipticEccentricToTrue__T) -> _ellipticEccentricToTrue__T:
         """
+            Deprecated.
+            As of 11.3, replaced by :meth:`~org.orekit.orbits.FieldKeplerianAnomalyUtility.ellipticEccentricToMean`.
             Computes the true anomaly from the elliptic eccentric anomaly.
         
             Parameters:
@@ -5483,6 +5892,8 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], typing.Generic[_F
     @staticmethod
     def hyperbolicEccentricToMean(t: _hyperbolicEccentricToMean__T, t2: _hyperbolicEccentricToMean__T) -> _hyperbolicEccentricToMean__T:
         """
+            Deprecated.
+            As of 11.3, replaced by :meth:`~org.orekit.orbits.FieldKeplerianAnomalyUtility.hyperbolicEccentricToMean`.
             Computes the mean anomaly from the hyperbolic eccentric anomaly.
         
             Parameters:
@@ -5499,6 +5910,8 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], typing.Generic[_F
     @staticmethod
     def hyperbolicEccentricToTrue(t: _hyperbolicEccentricToTrue__T, t2: _hyperbolicEccentricToTrue__T) -> _hyperbolicEccentricToTrue__T:
         """
+            Deprecated.
+            As of 11.3, replaced by :meth:`~org.orekit.orbits.FieldKeplerianAnomalyUtility.hyperbolicEccentricToTrue`.
             Computes the true anomaly from the hyperbolic eccentric anomaly.
         
             Parameters:
@@ -5519,10 +5932,9 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], typing.Generic[_F
     @staticmethod
     def meanToEllipticEccentric(t: _meanToEllipticEccentric__T, t2: _meanToEllipticEccentric__T) -> _meanToEllipticEccentric__T:
         """
+            Deprecated.
+            As of 11.3, replaced by :meth:`~org.orekit.orbits.FieldKeplerianAnomalyUtility.ellipticMeanToEccentric`.
             Computes the elliptic eccentric anomaly from the mean anomaly.
-        
-            The algorithm used here for solving Kepler equation has been published in: "Procedures for solving Kepler's Equation",
-            A. W. Odell and R. H. Gooding, Celestial Mechanics 38 (1986) 307-334
         
             Parameters:
                 M (T): mean anomaly (rad)
@@ -5538,10 +5950,9 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], typing.Generic[_F
     @staticmethod
     def meanToHyperbolicEccentric(t: _meanToHyperbolicEccentric__T, t2: _meanToHyperbolicEccentric__T) -> _meanToHyperbolicEccentric__T:
         """
+            Deprecated.
+            As of 11.3, replaced by :meth:`~org.orekit.orbits.FieldKeplerianAnomalyUtility.hyperbolicMeanToEccentric`.
             Computes the hyperbolic eccentric anomaly from the mean anomaly.
-        
-            The algorithm used here for solving hyperbolic Kepler equation is Danby's iterative method (3rd order) with Vallado's
-            initial guess.
         
             Parameters:
                 M (T): mean anomaly (rad)
@@ -5587,6 +5998,8 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], typing.Generic[_F
     @staticmethod
     def trueToEllipticEccentric(t: _trueToEllipticEccentric__T, t2: _trueToEllipticEccentric__T) -> _trueToEllipticEccentric__T:
         """
+            Deprecated.
+            As of 11.3, replaced by :meth:`~org.orekit.orbits.FieldKeplerianAnomalyUtility.ellipticTrueToEccentric`.
             Computes the elliptic eccentric anomaly from the true anomaly.
         
             Parameters:
@@ -5603,6 +6016,8 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], typing.Generic[_F
     @staticmethod
     def trueToHyperbolicEccentric(t: _trueToHyperbolicEccentric__T, t2: _trueToHyperbolicEccentric__T) -> _trueToHyperbolicEccentric__T:
         """
+            Deprecated.
+            As of 11.3, replaced by :meth:`~org.orekit.orbits.FieldKeplerianAnomalyUtility.hyperbolicTrueToEccentric`.
             Computes the hyperbolic eccentric anomaly from the true anomaly.
         
             Parameters:
@@ -5682,7 +6097,7 @@ class KeplerianOrbit(Orbit):
             orbital state.
         
             Specified by:
-                 in class :class:`~org.orekit.orbits.Orbit`
+                :meth:`~org.orekit.orbits.Orbit.addKeplerContribution` in class :class:`~org.orekit.orbits.Orbit`
         
             Parameters:
                 type (:class:`~org.orekit.orbits.PositionAngle`): type of the position angle in the state
@@ -5696,6 +6111,8 @@ class KeplerianOrbit(Orbit):
     @staticmethod
     def ellipticEccentricToMean(double: float, double2: float) -> float:
         """
+            Deprecated.
+            As of 11.3, replaced by :meth:`~org.orekit.orbits.KeplerianAnomalyUtility.ellipticEccentricToMean`.
             Computes the mean anomaly from the elliptic eccentric anomaly.
         
             Parameters:
@@ -5705,15 +6122,14 @@ class KeplerianOrbit(Orbit):
             Returns:
                 M the mean anomaly
         
-            Since:
-                9.0
-        
         
         """
         ...
     @staticmethod
     def ellipticEccentricToTrue(double: float, double2: float) -> float:
         """
+            Deprecated.
+            As of 11.3, replaced by :meth:`~org.orekit.orbits.KeplerianAnomalyUtility.ellipticEccentricToTrue`.
             Computes the true anomaly from the elliptic eccentric anomaly.
         
             Parameters:
@@ -5722,9 +6138,6 @@ class KeplerianOrbit(Orbit):
         
             Returns:
                 v the true anomaly
-        
-            Since:
-                9.0
         
         
         """
@@ -6204,6 +6617,8 @@ class KeplerianOrbit(Orbit):
     @staticmethod
     def hyperbolicEccentricToMean(double: float, double2: float) -> float:
         """
+            Deprecated.
+            As of 11.3, replaced by :meth:`~org.orekit.orbits.KeplerianAnomalyUtility.hyperbolicEccentricToMean`.
             Computes the mean anomaly from the hyperbolic eccentric anomaly.
         
             Parameters:
@@ -6213,15 +6628,14 @@ class KeplerianOrbit(Orbit):
             Returns:
                 M the mean anomaly
         
-            Since:
-                9.0
-        
         
         """
         ...
     @staticmethod
     def hyperbolicEccentricToTrue(double: float, double2: float) -> float:
         """
+            Deprecated.
+            As of 11.3, replaced by :meth:`~org.orekit.orbits.KeplerianAnomalyUtility.hyperbolicEccentricToTrue`.
             Computes the true anomaly from the hyperbolic eccentric anomaly.
         
             Parameters:
@@ -6241,10 +6655,9 @@ class KeplerianOrbit(Orbit):
     @staticmethod
     def meanToEllipticEccentric(double: float, double2: float) -> float:
         """
+            Deprecated.
+            As of 11.3, replaced by :meth:`~org.orekit.orbits.KeplerianAnomalyUtility.ellipticMeanToEccentric`.
             Computes the elliptic eccentric anomaly from the mean anomaly.
-        
-            The algorithm used here for solving Kepler equation has been published in: "Procedures for solving Kepler's Equation",
-            A. W. Odell and R. H. Gooding, Celestial Mechanics 38 (1986) 307-334
         
             Parameters:
                 M (double): mean anomaly (rad)
@@ -6252,24 +6665,6 @@ class KeplerianOrbit(Orbit):
         
             Returns:
                 E the eccentric anomaly
-        
-        
-        """
-        ...
-    @staticmethod
-    def meanToHyperbolicEccentric(double: float, double2: float) -> float:
-        """
-            Computes the hyperbolic eccentric anomaly from the mean anomaly.
-        
-            The algorithm used here for solving hyperbolic Kepler equation is Danby's iterative method (3rd order) with Vallado's
-            initial guess.
-        
-            Parameters:
-                M (double): mean anomaly (rad)
-                ecc (double): eccentricity
-        
-            Returns:
-                H the hyperbolic eccentric anomaly
         
         
         """
@@ -6314,6 +6709,8 @@ class KeplerianOrbit(Orbit):
     @staticmethod
     def trueToEllipticEccentric(double: float, double2: float) -> float:
         """
+            Deprecated.
+            As of 11.3, replaced by :meth:`~org.orekit.orbits.KeplerianAnomalyUtility.ellipticTrueToEccentric`.
             Computes the elliptic eccentric anomaly from the true anomaly.
         
             Parameters:
@@ -6323,15 +6720,14 @@ class KeplerianOrbit(Orbit):
             Returns:
                 E the elliptic eccentric anomaly
         
-            Since:
-                9.0
-        
         
         """
         ...
     @staticmethod
     def trueToHyperbolicEccentric(double: float, double2: float) -> float:
         """
+            Deprecated.
+            As of 11.3, replaced by :meth:`~org.orekit.orbits.KeplerianAnomalyUtility.hyperbolicTrueToEccentric`.
             Computes the hyperbolic eccentric anomaly from the true anomaly.
         
             Parameters:
@@ -6340,9 +6736,6 @@ class KeplerianOrbit(Orbit):
         
             Returns:
                 H the hyperbolic eccentric anomaly
-        
-            Since:
-                9.0
         
         
         """
@@ -6424,7 +6817,7 @@ class PythonOrbit(Orbit):
             orbital state.
         
             Specified by:
-                 in class :class:`~org.orekit.orbits.Orbit`
+                :meth:`~org.orekit.orbits.Orbit.addKeplerContribution` in class :class:`~org.orekit.orbits.Orbit`
         
             Parameters:
                 type (:class:`~org.orekit.orbits.PositionAngle`): type of the position angle in the state
@@ -6865,9 +7258,11 @@ class __module_protocol__(typing.Protocol):
     FieldCartesianOrbit: typing.Type[FieldCartesianOrbit]
     FieldCircularOrbit: typing.Type[FieldCircularOrbit]
     FieldEquinoctialOrbit: typing.Type[FieldEquinoctialOrbit]
+    FieldKeplerianAnomalyUtility: typing.Type[FieldKeplerianAnomalyUtility]
     FieldKeplerianOrbit: typing.Type[FieldKeplerianOrbit]
     FieldOrbit: typing.Type[FieldOrbit]
     HaloOrbit: typing.Type[HaloOrbit]
+    KeplerianAnomalyUtility: typing.Type[KeplerianAnomalyUtility]
     KeplerianOrbit: typing.Type[KeplerianOrbit]
     LibrationOrbit: typing.Type[LibrationOrbit]
     LibrationOrbitFamily: typing.Type[LibrationOrbitFamily]

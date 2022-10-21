@@ -236,7 +236,7 @@ class ManeuverKey(java.lang.Enum['ManeuverKey']):
 
 class Opm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.section.Header, org.orekit.files.ccsds.section.Segment[org.orekit.files.ccsds.ndm.odm.CommonMetadata, 'OpmData']], org.orekit.time.TimeStamped):
     """
-    public class Opm extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.section.Header`,:class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.odm.CommonMetadata`,:class:`~org.orekit.files.ccsds.ndm.odm.opm.OpmData`>> implements :class:`~org.orekit.time.TimeStamped`
+    public class Opm extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.section.Header`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.odm.CommonMetadata`, :class:`~org.orekit.files.ccsds.ndm.odm.opm.OpmData`>> implements :class:`~org.orekit.time.TimeStamped`
     
         This class gathers the informations present in the Orbital Parameter Message (OPM).
     
@@ -496,7 +496,7 @@ class OpmData(org.orekit.files.ccsds.section.Data):
 
 class OpmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Opm, 'OpmParser']):
     """
-    public class OpmParser extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmParser`<:class:`~org.orekit.files.ccsds.ndm.odm.opm.Opm`,:class:`~org.orekit.files.ccsds.ndm.odm.opm.OpmParser`>
+    public class OpmParser extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmParser`<:class:`~org.orekit.files.ccsds.ndm.odm.opm.Opm`, :class:`~org.orekit.files.ccsds.ndm.odm.opm.OpmParser`>
     
         A parser for the CCSDS OPM (Orbit Parameter Message).
     
@@ -673,7 +673,7 @@ class OpmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Opm, 'OpmParser']):
 
 class OpmWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[org.orekit.files.ccsds.section.Header, org.orekit.files.ccsds.section.Segment[org.orekit.files.ccsds.ndm.odm.CommonMetadata, OpmData], Opm]):
     """
-    public class OpmWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.section.Header`,:class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.odm.CommonMetadata`,:class:`~org.orekit.files.ccsds.ndm.odm.opm.OpmData`>,:class:`~org.orekit.files.ccsds.ndm.odm.opm.Opm`>
+    public class OpmWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.section.Header`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.odm.CommonMetadata`, :class:`~org.orekit.files.ccsds.ndm.odm.opm.OpmData`>, :class:`~org.orekit.files.ccsds.ndm.odm.opm.Opm`>
     
         Writer for CCSDS Orbit Parameter Message.
     

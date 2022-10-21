@@ -72,9 +72,9 @@ class AbstractAnalyticalGradientConverter(org.orekit.propagation.integration.Abs
     @typing.overload
     def getState(self, parametersDriversProvider: org.orekit.utils.ParametersDriversProvider) -> org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient]: ...
 
-class AbstractAnalyticalMatricesHarvester(org.orekit.propagation.AbstractMatricesHarvester):
+class AbstractAnalyticalMatricesHarvester(org.orekit.propagation.AbstractMatricesHarvester, org.orekit.propagation.AdditionalStateProvider):
     """
-    public abstract class AbstractAnalyticalMatricesHarvester extends :class:`~org.orekit.propagation.AbstractMatricesHarvester`
+    public abstract class AbstractAnalyticalMatricesHarvester extends :class:`~org.orekit.propagation.AbstractMatricesHarvester` implements :class:`~org.orekit.propagation.AdditionalStateProvider`
     
         Base class harvester between two-dimensional Jacobian matrices and analytical orbit propagator.
     
@@ -90,6 +90,23 @@ class AbstractAnalyticalMatricesHarvester(org.orekit.propagation.AbstractMatrice
             Specified by:
                 :meth:`~org.orekit.propagation.AbstractMatricesHarvester.freezeColumnsNames`Â in
                 classÂ :class:`~org.orekit.propagation.AbstractMatricesHarvester`
+        
+        
+        """
+        ...
+    def getAdditionalState(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]:
+        """
+            Get the additional state.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.AdditionalStateProvider.getAdditionalState`Â in
+                interfaceÂ :class:`~org.orekit.propagation.AdditionalStateProvider`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state to which additional state should correspond
+        
+            Returns:
+                additional state corresponding to spacecraft state
         
         
         """
@@ -116,8 +133,26 @@ class AbstractAnalyticalMatricesHarvester(org.orekit.propagation.AbstractMatrice
         
             The names are returned in the Jacobians matrix columns order
         
+            Specified by:
+                :meth:`~org.orekit.propagation.MatricesHarvester.getJacobiansColumnsNames`Â in
+                interfaceÂ :class:`~org.orekit.propagation.MatricesHarvester`
+        
             Returns:
                 names of the parameters (i.e. columns) of the Jacobian matrix
+        
+        
+        """
+        ...
+    def getName(self) -> str:
+        """
+            Get the name of the additional state.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.AdditionalStateProvider.getName`Â in
+                interfaceÂ :class:`~org.orekit.propagation.AdditionalStateProvider`
+        
+            Returns:
+                name of the additional state (names containing "orekit" with any case are reserved for the library internal use)
         
         
         """
@@ -304,7 +339,8 @@ class FieldAbstractAnalyticalPropagator(org.orekit.propagation.FieldAbstractProp
     
         This abstract class allows to provide easily the full set of :class:`~org.orekit.propagation.FieldPropagator` methods,
         including all propagation modes support and discrete events support for any simple propagation method. Only two methods
-        must be implemented by derived classes: null and
+        must be implemented by derived classes:
+        :meth:`~org.orekit.propagation.analytical.FieldAbstractAnalyticalPropagator.propagateOrbit` and
         :meth:`~org.orekit.propagation.analytical.FieldAbstractAnalyticalPropagator.getMass`. The first method should perform
         straightforward propagation starting from some internally stored initial state up to the specified target date.
     """
@@ -415,10 +451,16 @@ class AggregateBoundedPropagator(AbstractAnalyticalPropagator, org.orekit.propag
         A :class:`~org.orekit.propagation.BoundedPropagator` that covers a larger time span from several constituent propagators
         that cover shorter time spans.
     
+        Since:
+            9.0
+    
         Also see:
-            :meth:`~org.orekit.propagation.analytical.AggregateBoundedPropagator.AggregateBoundedPropagator`
+            :meth:`~org.orekit.propagation.analytical.AggregateBoundedPropagator.%3Cinit%3E`
     """
+    @typing.overload
     def __init__(self, collection: typing.Union[java.util.Collection[org.orekit.propagation.BoundedPropagator], typing.Sequence[org.orekit.propagation.BoundedPropagator], typing.Set[org.orekit.propagation.BoundedPropagator]]): ...
+    @typing.overload
+    def __init__(self, navigableMap: java.util.NavigableMap[org.orekit.time.AbsoluteDate, org.orekit.propagation.Propagator], absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate): ...
     def getInitialState(self) -> org.orekit.propagation.SpacecraftState:
         """
             Description copied from class: :meth:`~org.orekit.propagation.AbstractPropagator.getInitialState`
@@ -1636,7 +1678,8 @@ class PythonAbstractAnalyticalGradientConverter(AbstractAnalyticalGradientConver
             Get the converted analytical orbit propagator.
         
             Specified by:
-                 in class :class:`~org.orekit.propagation.analytical.AbstractAnalyticalGradientConverter`
+                :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalGradientConverter.getPropagator`Â in
+                classÂ :class:`~org.orekit.propagation.analytical.AbstractAnalyticalGradientConverter`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<Gradient> state): state as returned by :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalGradientConverter.getState`

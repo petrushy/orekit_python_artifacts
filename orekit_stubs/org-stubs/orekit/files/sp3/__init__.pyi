@@ -15,7 +15,7 @@ import typing
 
 class SP3(org.orekit.files.general.EphemerisFile['SP3.SP3Coordinate', 'SP3.SP3Ephemeris']):
     """
-    public class SP3 extends Object implements :class:`~org.orekit.files.general.EphemerisFile`<:class:`~org.orekit.files.sp3.SP3.SP3Coordinate`,:class:`~org.orekit.files.sp3.SP3.SP3Ephemeris`>
+    public class SP3 extends Object implements :class:`~org.orekit.files.general.EphemerisFile`<:class:`~org.orekit.files.sp3.SP3.SP3Coordinate`, :class:`~org.orekit.files.sp3.SP3.SP3Ephemeris`>
     
         Represents a parsed SP3 orbit file.
     """

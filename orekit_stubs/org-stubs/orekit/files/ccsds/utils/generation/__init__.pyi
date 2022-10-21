@@ -135,7 +135,7 @@ _MessageWriter__S = typing.TypeVar('_MessageWriter__S', bound=org.orekit.files.c
 _MessageWriter__F = typing.TypeVar('_MessageWriter__F', bound=org.orekit.files.ccsds.ndm.NdmConstituent)  # <F>
 class MessageWriter(typing.Generic[_MessageWriter__H, _MessageWriter__S, _MessageWriter__F]):
     """
-    public interface MessageWriter<H extends :class:`~org.orekit.files.ccsds.section.Header`,S extends :class:`~org.orekit.files.ccsds.section.Segment`<?,?>,F extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<H,S>>
+    public interface MessageWriter<H extends :class:`~org.orekit.files.ccsds.section.Header`, S extends :class:`~org.orekit.files.ccsds.section.Segment`<?, ?>, F extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<H, S>>
     
         Interface for writing Navigation Data Message (NDM) files.
     
@@ -293,7 +293,7 @@ _AbstractMessageWriter__S = typing.TypeVar('_AbstractMessageWriter__S', bound=or
 _AbstractMessageWriter__F = typing.TypeVar('_AbstractMessageWriter__F', bound=org.orekit.files.ccsds.ndm.NdmConstituent)  # <F>
 class AbstractMessageWriter(MessageWriter[_AbstractMessageWriter__H, _AbstractMessageWriter__S, _AbstractMessageWriter__F], typing.Generic[_AbstractMessageWriter__H, _AbstractMessageWriter__S, _AbstractMessageWriter__F]):
     """
-    public abstract class AbstractMessageWriter<H extends :class:`~org.orekit.files.ccsds.section.Header`,S extends :class:`~org.orekit.files.ccsds.section.Segment`<?,?>,F extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<H,S>> extends Object implements :class:`~org.orekit.files.ccsds.utils.generation.MessageWriter`<H,S,F>
+    public abstract class AbstractMessageWriter<H extends :class:`~org.orekit.files.ccsds.section.Header`, S extends :class:`~org.orekit.files.ccsds.section.Segment`<?, ?>, F extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<H, S>> extends Object implements :class:`~org.orekit.files.ccsds.utils.generation.MessageWriter`<H, S, F>
     
         Base class for Navigation Data Message (NDM) files.
     
@@ -522,7 +522,7 @@ _PythonMessageWriter__S = typing.TypeVar('_PythonMessageWriter__S', bound=org.or
 _PythonMessageWriter__F = typing.TypeVar('_PythonMessageWriter__F', bound=org.orekit.files.ccsds.ndm.NdmConstituent)  # <F>
 class PythonMessageWriter(MessageWriter[_PythonMessageWriter__H, _PythonMessageWriter__S, _PythonMessageWriter__F], typing.Generic[_PythonMessageWriter__H, _PythonMessageWriter__S, _PythonMessageWriter__F]):
     """
-    public class PythonMessageWriter<H extends :class:`~org.orekit.files.ccsds.section.Header`,S extends :class:`~org.orekit.files.ccsds.section.Segment`<?,?>,F extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<H,S>> extends Object implements :class:`~org.orekit.files.ccsds.utils.generation.MessageWriter`<H,S,F>
+    public class PythonMessageWriter<H extends :class:`~org.orekit.files.ccsds.section.Header`, S extends :class:`~org.orekit.files.ccsds.section.Segment`<?, ?>, F extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<H, S>> extends Object implements :class:`~org.orekit.files.ccsds.utils.generation.MessageWriter`<H, S, F>
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -660,7 +660,7 @@ _PythonAbstractMessageWriter__S = typing.TypeVar('_PythonAbstractMessageWriter__
 _PythonAbstractMessageWriter__F = typing.TypeVar('_PythonAbstractMessageWriter__F', bound=org.orekit.files.ccsds.ndm.NdmConstituent)  # <F>
 class PythonAbstractMessageWriter(AbstractMessageWriter[_PythonAbstractMessageWriter__H, _PythonAbstractMessageWriter__S, _PythonAbstractMessageWriter__F], typing.Generic[_PythonAbstractMessageWriter__H, _PythonAbstractMessageWriter__S, _PythonAbstractMessageWriter__F]):
     """
-    public class PythonAbstractMessageWriter<H extends :class:`~org.orekit.files.ccsds.section.Header`,S extends :class:`~org.orekit.files.ccsds.section.Segment`<?,?>,F extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<H,S>> extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<H,S,F>
+    public class PythonAbstractMessageWriter<H extends :class:`~org.orekit.files.ccsds.section.Header`, S extends :class:`~org.orekit.files.ccsds.section.Segment`<?, ?>, F extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<H, S>> extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<H, S, F>
     """
     def __init__(self, string: str, string2: str, double: float, contextBinding: org.orekit.files.ccsds.utils.ContextBinding): ...
     def finalize(self) -> None: ...

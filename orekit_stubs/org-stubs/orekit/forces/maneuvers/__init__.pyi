@@ -166,7 +166,7 @@ class Maneuver(org.orekit.forces.AbstractForceModel):
     @typing.overload
     def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], tArray: typing.List[_acceleration_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
         """
-            Description copied from interface: 
+            Description copied from interface: :meth:`~org.orekit.forces.ForceModel.acceleration`
             Compute acceleration.
         
             Parameters:
@@ -182,7 +182,7 @@ class Maneuver(org.orekit.forces.AbstractForceModel):
     @typing.overload
     def acceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Description copied from interface: 
+            Description copied from interface: :meth:`~org.orekit.forces.ForceModel.acceleration`
             Compute acceleration.
         
             Parameters:
@@ -212,7 +212,8 @@ class Maneuver(org.orekit.forces.AbstractForceModel):
         """
             Compute the contribution of the force model to the perturbing acceleration.
         
-            The default implementation simply adds the null as a non-Keplerian acceleration.
+            The default implementation simply adds the :meth:`~org.orekit.forces.ForceModel.acceleration` as a non-Keplerian
+            acceleration.
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
@@ -282,8 +283,8 @@ class Maneuver(org.orekit.forces.AbstractForceModel):
     def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_init_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_init_0__T]) -> None:
         """
             Initialize the force model at the start of propagation. This method will be called before any calls to
-            :meth:`~org.orekit.forces.ForceModel.addContribution`, :meth:`~org.orekit.forces.ForceModel.addContribution`, null or
-            null
+            :meth:`~org.orekit.forces.ForceModel.addContribution`, :meth:`~org.orekit.forces.ForceModel.addContribution`,
+            :meth:`~org.orekit.forces.ForceModel.acceleration` or :meth:`~org.orekit.forces.ForceModel.acceleration`
         
             The default implementation of this method does nothing.
         
@@ -298,8 +299,8 @@ class Maneuver(org.orekit.forces.AbstractForceModel):
     def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
             Initialize the force model at the start of propagation. This method will be called before any calls to
-            :meth:`~org.orekit.forces.ForceModel.addContribution`, :meth:`~org.orekit.forces.ForceModel.addContribution`, null or
-            null
+            :meth:`~org.orekit.forces.ForceModel.addContribution`, :meth:`~org.orekit.forces.ForceModel.addContribution`,
+            :meth:`~org.orekit.forces.ForceModel.acceleration` or :meth:`~org.orekit.forces.ForceModel.acceleration`
         
             The default implementation of this method does nothing.
         
@@ -356,7 +357,8 @@ class SmallManeuverAnalyticalModel(org.orekit.propagation.analytical.AdapterProp
                 orbit at tâ‚�, taking the maneuver into account if tâ‚� > tâ‚€
         
             Also see:
-                :meth:`~org.orekit.forces.maneuvers.SmallManeuverAnalyticalModel.apply`, null
+                :meth:`~org.orekit.forces.maneuvers.SmallManeuverAnalyticalModel.apply`,
+                :meth:`~org.orekit.forces.maneuvers.SmallManeuverAnalyticalModel.getJacobian`
         
             Compute the effect of the maneuver on a spacecraft state.
         
@@ -371,7 +373,8 @@ class SmallManeuverAnalyticalModel(org.orekit.propagation.analytical.AdapterProp
                 spacecraft state at tâ‚�, taking the maneuver into account if tâ‚� > tâ‚€
         
             Also see:
-                :meth:`~org.orekit.forces.maneuvers.SmallManeuverAnalyticalModel.apply`, null
+                :meth:`~org.orekit.forces.maneuvers.SmallManeuverAnalyticalModel.apply`,
+                :meth:`~org.orekit.forces.maneuvers.SmallManeuverAnalyticalModel.getJacobian`
         
         
         """
@@ -419,10 +422,11 @@ class SmallManeuverAnalyticalModel(org.orekit.propagation.analytical.AdapterProp
             Compute the Jacobian of the orbit with respect to maneuver parameters.
         
             The Jacobian matrix is a 6x4 matrix. Element jacobian[i][j] corresponds to the partial derivative of orbital parameter i
-            with respect to maneuver parameter j. The rows order is the same order as used in null method. Columns (0, 1, 2)
-            correspond to the velocity increment coordinates (ÃŽâ€�V :sub:`x` , ÃŽâ€�V :sub:`y` , ÃŽâ€�V :sub:`z` ) in the inertial
-            frame returned by :meth:`~org.orekit.forces.maneuvers.SmallManeuverAnalyticalModel.getInertialFrame`, and column 3
-            corresponds to the maneuver date tÃ¢â€šâ‚¬.
+            with respect to maneuver parameter j. The rows order is the same order as used in
+            :meth:`~org.orekit.orbits.Orbit.getJacobianWrtCartesian` method. Columns (0, 1, 2) correspond to the velocity increment
+            coordinates (ÃŽâ€�V :sub:`x` , ÃŽâ€�V :sub:`y` , ÃŽâ€�V :sub:`z` ) in the inertial frame returned by
+            :meth:`~org.orekit.forces.maneuvers.SmallManeuverAnalyticalModel.getInertialFrame`, and column 3 corresponds to the
+            maneuver date tÃ¢â€šâ‚¬.
         
             Parameters:
                 orbit1 (:class:`~org.orekit.orbits.Orbit`): original orbit at tâ‚�, without maneuver

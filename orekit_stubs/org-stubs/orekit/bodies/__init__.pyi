@@ -600,7 +600,7 @@ class CelestialBodyFactory:
         :meth:`~org.orekit.bodies.CelestialBodyFactory.getEarthMoonBarycenter`) or children from other body-centered frames. For
         example, the path from EME2000 to Jupiter-centered frame is: EME2000, Earth-Moon barycenter centered, solar system
         barycenter centered, Jupiter-centered. The defining transforms of these frames are combinations of simple linear
-        :meth:`~org.orekit.frames.Transform.Transform` transforms without any rotation. The frame axes are therefore always
+        :meth:`~org.orekit.frames.Transform.%3Cinit%3E` transforms without any rotation. The frame axes are therefore always
         parallel to :meth:`~org.orekit.frames.FramesFactory.getEME2000` frame axes.
     
         The position of the bodies provided by this class are interpolated using the JPL DE 405/DE 406 ephemerides.
@@ -1434,6 +1434,78 @@ class IAUPole(java.io.Serializable):
         """
         ...
 
+class Loxodrome:
+    """
+    public class Loxodrome extends Object
+    
+        Perform calculations on a loxodrome (commonly, a rhumb line) on an ellipsoid.
+    
+        A loxodrome or rhumb line is an arc on an ellipsoid's surface that intersects every meridian at the same angle.
+    
+        Since:
+            11.3
+    """
+    @typing.overload
+    def __init__(self, geodeticPoint: GeodeticPoint, double: float, oneAxisEllipsoid: 'OneAxisEllipsoid'): ...
+    @typing.overload
+    def __init__(self, geodeticPoint: GeodeticPoint, double: float, oneAxisEllipsoid: 'OneAxisEllipsoid', double2: float): ...
+    def getAltitude(self) -> float:
+        """
+            Get the altitude above the reference body.
+        
+            Returns:
+                the altitude above the reference body
+        
+        
+        """
+        ...
+    def getAzimuth(self) -> float:
+        """
+            Get the azimuth.
+        
+            Returns:
+                the azimuth
+        
+        
+        """
+        ...
+    def getBody(self) -> 'OneAxisEllipsoid':
+        """
+            Get the body on which the loxodrome is defined.
+        
+            Returns:
+                the body on which the loxodrome is defined
+        
+        
+        """
+        ...
+    def getPoint(self) -> GeodeticPoint:
+        """
+            Get the geodetic point defining the loxodrome.
+        
+            Returns:
+                the geodetic point defining the loxodrome
+        
+        
+        """
+        ...
+    def pointAtDistance(self, double: float) -> GeodeticPoint:
+        """
+            Calculate the point at the specified distance from the origin point along the loxodrome. A positive distance follows the
+            line in the azumuth direction (i.e. northward for arcs with azimuth angles :code:`[3pi/2, 2pi]` or :code:`[0, pi/2]`).
+            Negative distances travel in the opposite direction along the rhumb line. Distance is computed at the altitude of the
+            origin point.
+        
+            Parameters:
+                distance (double): the distance to travel (meters)
+        
+            Returns:
+                the point at the specified distance from the origin
+        
+        
+        """
+        ...
+
 class JPLEphemeridesLoader(org.orekit.data.AbstractSelfFeedingLoader, CelestialBodyLoader):
     """
     public class JPLEphemeridesLoader extends :class:`~org.orekit.data.AbstractSelfFeedingLoader` implements :class:`~org.orekit.bodies.CelestialBodyLoader`
@@ -1930,6 +2002,53 @@ class LazyLoadedCelestialBodies(CelestialBodies):
         """
         ...
 
+class LoxodromeArc(Loxodrome):
+    """
+    public class LoxodromeArc extends :class:`~org.orekit.bodies.Loxodrome`
+    
+        Loxodrome defined by a start and ending point.
+    
+        Since:
+            11.3
+    """
+    @typing.overload
+    def __init__(self, geodeticPoint: GeodeticPoint, geodeticPoint2: GeodeticPoint, oneAxisEllipsoid: 'OneAxisEllipsoid'): ...
+    @typing.overload
+    def __init__(self, geodeticPoint: GeodeticPoint, geodeticPoint2: GeodeticPoint, oneAxisEllipsoid: 'OneAxisEllipsoid', double: float): ...
+    def calculatePointAlongArc(self, double: float) -> GeodeticPoint:
+        """
+            Calculate a point at a specific percentage along the arc.
+        
+            Parameters:
+                fraction (double): the fraction along the arc to compute the point
+        
+            Returns:
+                the point along the arc
+        
+        
+        """
+        ...
+    def getDistance(self) -> float:
+        """
+            Compute the distance of the arc along the surface of the ellipsoid.
+        
+            Returns:
+                the distance (meters)
+        
+        
+        """
+        ...
+    def getFinalPoint(self) -> GeodeticPoint:
+        """
+            Get the final point of the arc.
+        
+            Returns:
+                the ending point of the arc
+        
+        
+        """
+        ...
+
 class OneAxisEllipsoid(Ellipsoid, BodyShape):
     """
     public class OneAxisEllipsoid extends :class:`~org.orekit.bodies.Ellipsoid` implements :class:`~org.orekit.bodies.BodyShape`
@@ -1944,6 +2063,78 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
             :meth:`~serialized`
     """
     def __init__(self, double: float, double2: float, frame: org.orekit.frames.Frame): ...
+    _azimuthBetweenPoints_1__T = typing.TypeVar('_azimuthBetweenPoints_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def azimuthBetweenPoints(self, geodeticPoint: GeodeticPoint, geodeticPoint2: GeodeticPoint) -> float:
+        """
+            Compute the azimuth angle from local north between the two points. The angle is calculated clockwise from local north at
+            the origin point and follows the rhumb line to the destination point.
+        
+            Parameters:
+                origin (:class:`~org.orekit.bodies.GeodeticPoint`): the origin point, at which the azimuth angle will be computed (non-:code:`null`)
+                destination (:class:`~org.orekit.bodies.GeodeticPoint`): the destination point, to which the angle is defined (non-:code:`null`)
+        
+            Returns:
+                the resulting azimuth angle (radians, :code:`[0-2pi)`)
+        
+            Since:
+                11.3
+        
+        """
+        ...
+    @typing.overload
+    def azimuthBetweenPoints(self, fieldGeodeticPoint: FieldGeodeticPoint[_azimuthBetweenPoints_1__T], fieldGeodeticPoint2: FieldGeodeticPoint[_azimuthBetweenPoints_1__T]) -> _azimuthBetweenPoints_1__T:
+        """
+            Compute the azimuth angle from local north between the two points. The angle is calculated clockwise from local north at
+            the origin point and follows the rhumb line to the destination point.
+        
+            Parameters:
+                origin (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> origin): the origin point, at which the azimuth angle will be computed (non-:code:`null`)
+                destination (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> destination): the destination point, to which the angle is defined (non-:code:`null`)
+        
+            Returns:
+                the resulting azimuth angle (radians, :code:`[0-2pi)`)
+        
+            Since:
+                11.3
+        
+        
+        """
+        ...
+    _geodeticToIsometricLatitude_1__T = typing.TypeVar('_geodeticToIsometricLatitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def geodeticToIsometricLatitude(self, double: float) -> float:
+        """
+            Compute the isometric latitude corresponding to the provided latitude.
+        
+            Parameters:
+                geodeticLatitude (double): the latitude (radians, within interval :code:`[-pi/2, +pi/2]`)
+        
+            Returns:
+                the isometric latitude (radians)
+        
+            Since:
+                11.3
+        
+        """
+        ...
+    @typing.overload
+    def geodeticToIsometricLatitude(self, t: _geodeticToIsometricLatitude_1__T) -> _geodeticToIsometricLatitude_1__T:
+        """
+            Compute the isometric latitude corresponding to the provided latitude.
+        
+            Parameters:
+                geodeticLatitude (T): the latitude (radians, within interval :code:`[-pi/2, +pi/2]`)
+        
+            Returns:
+                the isometric latitude (radians)
+        
+            Since:
+                11.3
+        
+        
+        """
+        ...
     def getBodyFrame(self) -> org.orekit.frames.Frame:
         """
             Get body frame related to body shape.
@@ -2002,6 +2193,26 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
         
             Since:
                 9.3
+        
+        """
+        ...
+    def getEccentricity(self) -> float:
+        """
+            Get the first eccentricity of the ellipsoid: e = sqrt(f * (2.0 - f)).
+        
+            Returns:
+                the eccentricity
+        
+        
+        """
+        ...
+    def getEccentricitySquared(self) -> float:
+        """
+            Get the first eccentricity squared of the ellipsoid: e^2 = f * (2.0 - f).
+        
+            Returns:
+                the eccentricity squared
+        
         
         """
         ...
@@ -3125,6 +3336,8 @@ class __module_protocol__(typing.Protocol):
     IAUPole: typing.Type[IAUPole]
     JPLEphemeridesLoader: typing.Type[JPLEphemeridesLoader]
     LazyLoadedCelestialBodies: typing.Type[LazyLoadedCelestialBodies]
+    Loxodrome: typing.Type[Loxodrome]
+    LoxodromeArc: typing.Type[LoxodromeArc]
     OneAxisEllipsoid: typing.Type[OneAxisEllipsoid]
     PythonBodyShape: typing.Type[PythonBodyShape]
     PythonCelestialBodies: typing.Type[PythonCelestialBodies]

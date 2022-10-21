@@ -18,7 +18,7 @@ import typing
 
 class Omm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.section.Header, org.orekit.files.ccsds.section.Segment['OmmMetadata', 'OmmData']], org.orekit.time.TimeStamped):
     """
-    public class Omm extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.section.Header`,:class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.odm.omm.OmmMetadata`,:class:`~org.orekit.files.ccsds.ndm.odm.omm.OmmData`>> implements :class:`~org.orekit.time.TimeStamped`
+    public class Omm extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.section.Header`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.odm.omm.OmmMetadata`, :class:`~org.orekit.files.ccsds.ndm.odm.omm.OmmData`>> implements :class:`~org.orekit.time.TimeStamped`
     
         This class gathers the informations present in the Orbital Mean-Elements Message (OMM).
     
@@ -329,7 +329,7 @@ class OmmMetadataKey(java.lang.Enum['OmmMetadataKey']):
 
 class OmmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Omm, 'OmmParser']):
     """
-    public class OmmParser extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmParser`<:class:`~org.orekit.files.ccsds.ndm.odm.omm.Omm`,:class:`~org.orekit.files.ccsds.ndm.odm.omm.OmmParser`>
+    public class OmmParser extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmParser`<:class:`~org.orekit.files.ccsds.ndm.odm.omm.Omm`, :class:`~org.orekit.files.ccsds.ndm.odm.omm.OmmParser`>
     
         A parser for the CCSDS OMM (Orbiter Mean-Elements Message).
     
@@ -773,7 +773,7 @@ class OmmTleKey(java.lang.Enum['OmmTleKey']):
 
 class OmmWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[org.orekit.files.ccsds.section.Header, org.orekit.files.ccsds.section.Segment[OmmMetadata, OmmData], Omm]):
     """
-    public class OmmWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.section.Header`,:class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.odm.omm.OmmMetadata`,:class:`~org.orekit.files.ccsds.ndm.odm.omm.OmmData`>,:class:`~org.orekit.files.ccsds.ndm.odm.omm.Omm`>
+    public class OmmWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.section.Header`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.odm.omm.OmmMetadata`, :class:`~org.orekit.files.ccsds.ndm.odm.omm.OmmData`>, :class:`~org.orekit.files.ccsds.ndm.odm.omm.Omm`>
     
         Writer for CCSDS Orbit Mean Mean-Elements Message.
     

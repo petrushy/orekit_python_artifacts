@@ -81,7 +81,7 @@ _FieldEventHandler__KK = typing.TypeVar('_FieldEventHandler__KK', bound=org.orek
 _FieldEventHandler__T = typing.TypeVar('_FieldEventHandler__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldEventHandler(typing.Generic[_FieldEventHandler__KK, _FieldEventHandler__T]):
     """
-    public interface FieldEventHandler<KK extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>,T extends CalculusFieldElement<T>>
+    public interface FieldEventHandler<KK extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends CalculusFieldElement<T>>
     
         An interface defining how to override event handling behavior in the standard propagator eventing classes without
         requiring subclassing. In cases where one wishes to use anonymous classes rather than explicit subclassing this allows
@@ -223,7 +223,7 @@ _FieldContinueOnEvent__KK = typing.TypeVar('_FieldContinueOnEvent__KK', bound=or
 _FieldContinueOnEvent__T = typing.TypeVar('_FieldContinueOnEvent__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldContinueOnEvent(FieldEventHandler[_FieldContinueOnEvent__KK, _FieldContinueOnEvent__T], typing.Generic[_FieldContinueOnEvent__KK, _FieldContinueOnEvent__T]):
     """
-    public class FieldContinueOnEvent<KK extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>,T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<KK,T>
+    public class FieldContinueOnEvent<KK extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<KK, T>
     
         Event handler which will always return null as a state.
     """
@@ -236,7 +236,7 @@ _FieldRecordAndContinue__T = typing.TypeVar('_FieldRecordAndContinue__T', bound=
 _FieldRecordAndContinue__E = typing.TypeVar('_FieldRecordAndContinue__E', bound=org.hipparchus.CalculusFieldElement)  # <E>
 class FieldRecordAndContinue(FieldEventHandler[_FieldRecordAndContinue__T, _FieldRecordAndContinue__E], typing.Generic[_FieldRecordAndContinue__T, _FieldRecordAndContinue__E]):
     """
-    public class FieldRecordAndContinue<T extends :class:`~org.orekit.propagation.events.FieldEventDetector`<E>,E extends CalculusFieldElement<E>> extends Object implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<T,E>
+    public class FieldRecordAndContinue<T extends :class:`~org.orekit.propagation.events.FieldEventDetector`<E>, E extends CalculusFieldElement<E>> extends Object implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<T, E>
     
         Handler that will record every time an event occurs and always return null.
     
@@ -271,7 +271,7 @@ _FieldStopOnDecreasing__KK = typing.TypeVar('_FieldStopOnDecreasing__KK', bound=
 _FieldStopOnDecreasing__T = typing.TypeVar('_FieldStopOnDecreasing__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldStopOnDecreasing(FieldEventHandler[_FieldStopOnDecreasing__KK, _FieldStopOnDecreasing__T], typing.Generic[_FieldStopOnDecreasing__KK, _FieldStopOnDecreasing__T]):
     """
-    public class FieldStopOnDecreasing<KK extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>,T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<KK,T>
+    public class FieldStopOnDecreasing<KK extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<KK, T>
     
         Handle a detection event and choose what to do next.
     
@@ -284,7 +284,7 @@ _FieldStopOnEvent__KK = typing.TypeVar('_FieldStopOnEvent__KK', bound=org.orekit
 _FieldStopOnEvent__T = typing.TypeVar('_FieldStopOnEvent__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldStopOnEvent(FieldEventHandler[_FieldStopOnEvent__KK, _FieldStopOnEvent__T], typing.Generic[_FieldStopOnEvent__KK, _FieldStopOnEvent__T]):
     """
-    public class FieldStopOnEvent<KK extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>,T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<KK,T>
+    public class FieldStopOnEvent<KK extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<KK, T>
     
         Event handler which will always return null as a state.
     """
@@ -295,7 +295,7 @@ _FieldStopOnIncreasing__KK = typing.TypeVar('_FieldStopOnIncreasing__KK', bound=
 _FieldStopOnIncreasing__T = typing.TypeVar('_FieldStopOnIncreasing__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldStopOnIncreasing(FieldEventHandler[_FieldStopOnIncreasing__KK, _FieldStopOnIncreasing__T], typing.Generic[_FieldStopOnIncreasing__KK, _FieldStopOnIncreasing__T]):
     """
-    public class FieldStopOnIncreasing<KK extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>,T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<KK,T>
+    public class FieldStopOnIncreasing<KK extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<KK, T>
     
         Handle a detection event and choose what to do next.
     
@@ -422,7 +422,7 @@ _PythonFieldEventHandler__KK = typing.TypeVar('_PythonFieldEventHandler__KK', bo
 _PythonFieldEventHandler__T = typing.TypeVar('_PythonFieldEventHandler__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldEventHandler(FieldEventHandler[_PythonFieldEventHandler__KK, _PythonFieldEventHandler__T], typing.Generic[_PythonFieldEventHandler__KK, _PythonFieldEventHandler__T]):
     """
-    public class PythonFieldEventHandler<KK extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>,T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<KK,T>
+    public class PythonFieldEventHandler<KK extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<KK, T>
     """
     def __init__(self): ...
     def eventOccurred(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldEventHandler__T], kK: _PythonFieldEventHandler__KK, boolean: bool) -> org.hipparchus.ode.events.Action: ...

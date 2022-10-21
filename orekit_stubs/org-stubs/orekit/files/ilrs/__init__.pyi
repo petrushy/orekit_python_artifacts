@@ -14,7 +14,7 @@ import typing
 
 class CPF(org.orekit.files.general.EphemerisFile['CPF.CPFCoordinate', 'CPF.CPFEphemeris']):
     """
-    public class CPF extends Object implements :class:`~org.orekit.files.general.EphemerisFile`<:class:`~org.orekit.files.ilrs.CPF.CPFCoordinate`,:class:`~org.orekit.files.ilrs.CPF.CPFEphemeris`>
+    public class CPF extends Object implements :class:`~org.orekit.files.general.EphemerisFile`<:class:`~org.orekit.files.ilrs.CPF.CPFCoordinate`, :class:`~org.orekit.files.ilrs.CPF.CPFEphemeris`>
     
         This class stores all the information of the Consolidated laser ranging Prediction File (CPF) parsed by CPFParser. It
         contains the header and a list of ephemeris entry.

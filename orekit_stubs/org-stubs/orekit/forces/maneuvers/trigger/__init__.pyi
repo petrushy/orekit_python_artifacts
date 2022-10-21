@@ -253,7 +253,8 @@ class AbstractManeuverTriggers(ManeuverTriggers):
             Find out if the maneuver is firing or not.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.isFiring`Â in
+                interfaceÂ :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
@@ -270,7 +271,8 @@ class AbstractManeuverTriggers(ManeuverTriggers):
             Find out if the maneuver is firing or not.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.isFiring`Â in
+                interfaceÂ :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<S> date): current date
@@ -375,7 +377,8 @@ class EventBasedManeuverTriggers(ManeuverTriggers, org.orekit.propagation.events
             Find out if the maneuver is firing or not.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.isFiring`Â in
+                interfaceÂ :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
@@ -403,7 +406,8 @@ class EventBasedManeuverTriggers(ManeuverTriggers, org.orekit.propagation.events
             Find out if the maneuver is firing or not.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.isFiring`Â in
+                interfaceÂ :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
@@ -490,7 +494,8 @@ class PythonManeuverTriggers(ManeuverTriggers):
             Find out if the maneuver is firing or not.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.isFiring`Â in
+                interfaceÂ :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
@@ -508,7 +513,8 @@ class PythonManeuverTriggers(ManeuverTriggers):
             Find out if the maneuver is firing or not.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.isFiring`Â in
+                interfaceÂ :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
@@ -686,7 +692,7 @@ _StartStopEventsTrigger__A = typing.TypeVar('_StartStopEventsTrigger__A', bound=
 _StartStopEventsTrigger__O = typing.TypeVar('_StartStopEventsTrigger__O', bound=org.orekit.propagation.events.AbstractDetector)  # <O>
 class StartStopEventsTrigger(AbstractManeuverTriggers, typing.Generic[_StartStopEventsTrigger__A, _StartStopEventsTrigger__O]):
     """
-    public abstract class StartStopEventsTrigger<A extends :class:`~org.orekit.propagation.events.AbstractDetector`<A>,O extends :class:`~org.orekit.propagation.events.AbstractDetector`<O>> extends :class:`~org.orekit.forces.maneuvers.trigger.AbstractManeuverTriggers`
+    public abstract class StartStopEventsTrigger<A extends :class:`~org.orekit.propagation.events.AbstractDetector`<A>, O extends :class:`~org.orekit.propagation.events.AbstractDetector`<O>> extends :class:`~org.orekit.forces.maneuvers.trigger.AbstractManeuverTriggers`
     
         Maneuver triggers based on a pair of event detectors that defines firing start and stop.
     
@@ -865,7 +871,7 @@ _PythonStartStopEventsTrigger__A = typing.TypeVar('_PythonStartStopEventsTrigger
 _PythonStartStopEventsTrigger__O = typing.TypeVar('_PythonStartStopEventsTrigger__O', bound=org.orekit.propagation.events.AbstractDetector)  # <O>
 class PythonStartStopEventsTrigger(StartStopEventsTrigger[_PythonStartStopEventsTrigger__A, _PythonStartStopEventsTrigger__O], typing.Generic[_PythonStartStopEventsTrigger__A, _PythonStartStopEventsTrigger__O]):
     """
-    public class PythonStartStopEventsTrigger<A extends :class:`~org.orekit.propagation.events.AbstractDetector`<A>,O extends :class:`~org.orekit.propagation.events.AbstractDetector`<O>> extends :class:`~org.orekit.forces.maneuvers.trigger.StartStopEventsTrigger`<A,O>
+    public class PythonStartStopEventsTrigger<A extends :class:`~org.orekit.propagation.events.AbstractDetector`<A>, O extends :class:`~org.orekit.propagation.events.AbstractDetector`<O>> extends :class:`~org.orekit.forces.maneuvers.trigger.StartStopEventsTrigger`<A, O>
     """
     def __init__(self, a: _PythonStartStopEventsTrigger__A, o: _PythonStartStopEventsTrigger__O): ...
     _convertStartDetector__D = typing.TypeVar('_convertStartDetector__D', bound=org.orekit.propagation.events.FieldEventDetector)  # <D>

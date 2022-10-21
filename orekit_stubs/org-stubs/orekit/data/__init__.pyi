@@ -995,7 +995,7 @@ class PoissonSeriesParser:
     
         In order to parse the nutation in longitude from the previous table, the following settings should be used:
     
-          - totalColumns = 10 (see :meth:`~org.orekit.data.PoissonSeriesParser.PoissonSeriesParser`)
+          - totalColumns = 10 (see :meth:`~org.orekit.data.PoissonSeriesParser.%3Cinit%3E`)
           - firstDelaunay = 1 (see :meth:`~org.orekit.data.PoissonSeriesParser.withFirstDelaunay`)
           - no calls to :meth:`~org.orekit.data.PoissonSeriesParser.withFirstPlanetary` as there are no planetary columns in this
             table
@@ -1005,7 +1005,7 @@ class PoissonSeriesParser:
     
         In order to parse the nutation in obliquity from the previous table, the following settings should be used:
     
-          - totalColumns = 10 (see :meth:`~org.orekit.data.PoissonSeriesParser.PoissonSeriesParser`)
+          - totalColumns = 10 (see :meth:`~org.orekit.data.PoissonSeriesParser.%3Cinit%3E`)
           - firstDelaunay = 1 (see :meth:`~org.orekit.data.PoissonSeriesParser.withFirstDelaunay`)
           - no calls to :meth:`~org.orekit.data.PoissonSeriesParser.withFirstPlanetary` as there are no planetary columns in this
             table
@@ -1062,7 +1062,7 @@ class PoissonSeriesParser:
     
         In order to parse the nutation in longitude from the previous table, the following settings should be used:
     
-          - totalColumns = 17 (see :meth:`~org.orekit.data.PoissonSeriesParser.PoissonSeriesParser`)
+          - totalColumns = 17 (see :meth:`~org.orekit.data.PoissonSeriesParser.%3Cinit%3E`)
           - firstDelaunay = 4 (see :meth:`~org.orekit.data.PoissonSeriesParser.withFirstDelaunay`)
           - firstPlanetary = 9 (see :meth:`~org.orekit.data.PoissonSeriesParser.withFirstPlanetary`)
           - sinCosColumns = 2,3 (we specify only degree 0, so when we read section j = 0 we read degree 0, when we read section j =
@@ -1103,7 +1103,7 @@ class PoissonSeriesParser:
             Ï�â‚� 13.47151   137,455  1 -2  2 -1   0  0  -1  0  2  2  2    -49     5    -0.1     0.0
          
     
-          - totalColumns = 18 (see :meth:`~org.orekit.data.PoissonSeriesParser.PoissonSeriesParser`)
+          - totalColumns = 18 (see :meth:`~org.orekit.data.PoissonSeriesParser.%3Cinit%3E`)
           - optionalColumn = 1 (see :meth:`~org.orekit.data.PoissonSeriesParser.withOptionalColumn`)
           - firstDoodson, Doodson number = 4, 3 (see :meth:`~org.orekit.data.PoissonSeriesParser.withDoodson`)
           - firstDelaunay = 10 (see :meth:`~org.orekit.data.PoissonSeriesParser.withFirstDelaunay`)
@@ -1823,200 +1823,25 @@ class DirectoryCrawler(DataProvider):
 
 _FieldBodiesElements__T = typing.TypeVar('_FieldBodiesElements__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldBodiesElements(FieldDelaunayArguments[_FieldBodiesElements__T], typing.Generic[_FieldBodiesElements__T]):
-    """
-    public final class FieldBodiesElements<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.data.FieldDelaunayArguments`<T>
-    
-        Elements of the bodies having an effect on nutation.
-    
-        This class is a simple placeholder, it does not provide any processing method.
-    
-        Since:
-            6.1
-    
-        Also see:
-            :class:`~org.orekit.data.BodiesElements`
-    """
     def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldBodiesElements__T], t: _FieldBodiesElements__T, t2: _FieldBodiesElements__T, t3: _FieldBodiesElements__T, t4: _FieldBodiesElements__T, t5: _FieldBodiesElements__T, t6: _FieldBodiesElements__T, t7: _FieldBodiesElements__T, t8: _FieldBodiesElements__T, t9: _FieldBodiesElements__T, t10: _FieldBodiesElements__T, t11: _FieldBodiesElements__T, t12: _FieldBodiesElements__T, t13: _FieldBodiesElements__T, t14: _FieldBodiesElements__T, t15: _FieldBodiesElements__T, t16: _FieldBodiesElements__T, t17: _FieldBodiesElements__T, t18: _FieldBodiesElements__T, t19: _FieldBodiesElements__T, t20: _FieldBodiesElements__T, t21: _FieldBodiesElements__T, t22: _FieldBodiesElements__T, t23: _FieldBodiesElements__T, t24: _FieldBodiesElements__T, t25: _FieldBodiesElements__T, t26: _FieldBodiesElements__T, t27: _FieldBodiesElements__T, t28: _FieldBodiesElements__T, t29: _FieldBodiesElements__T, t30: _FieldBodiesElements__T, t31: _FieldBodiesElements__T): ...
-    def getLE(self) -> _FieldBodiesElements__T:
-        """
-            Get the mean Earth longitude.
-        
-            Returns:
-                mean Earth longitude.
-        
-        
-        """
-        ...
-    def getLEDot(self) -> _FieldBodiesElements__T:
-        """
-            Get the mean Earth longitude time derivative.
-        
-            Returns:
-                mean Earth longitude time derivative.
-        
-        
-        """
-        ...
-    def getLJu(self) -> _FieldBodiesElements__T:
-        """
-            Get the mean Jupiter longitude.
-        
-            Returns:
-                mean Jupiter longitude.
-        
-        
-        """
-        ...
-    def getLJuDot(self) -> _FieldBodiesElements__T:
-        """
-            Get the mean Jupiter longitude time derivative.
-        
-            Returns:
-                mean Jupiter longitude time derivative.
-        
-        
-        """
-        ...
-    def getLMa(self) -> _FieldBodiesElements__T:
-        """
-            Get the mean Mars longitude.
-        
-            Returns:
-                mean Mars longitude.
-        
-        
-        """
-        ...
-    def getLMaDot(self) -> _FieldBodiesElements__T:
-        """
-            Get the mean Mars longitude time derivative.
-        
-            Returns:
-                mean Mars longitude time derivative.
-        
-        
-        """
-        ...
-    def getLMe(self) -> _FieldBodiesElements__T:
-        """
-            Get the mean Mercury longitude.
-        
-            Returns:
-                mean Mercury longitude.
-        
-        
-        """
-        ...
-    def getLMeDot(self) -> _FieldBodiesElements__T:
-        """
-            Get the mean Mercury longitude time derivative.
-        
-            Returns:
-                mean Mercury longitude time derivative.
-        
-        
-        """
-        ...
-    def getLNe(self) -> _FieldBodiesElements__T:
-        """
-            Get the mean Neptune longitude.
-        
-            Returns:
-                mean Neptune longitude.
-        
-        
-        """
-        ...
-    def getLNeDot(self) -> _FieldBodiesElements__T:
-        """
-            Get the mean Neptune longitude time derivative.
-        
-            Returns:
-                mean Neptune longitude time derivative.
-        
-        
-        """
-        ...
-    def getLSa(self) -> _FieldBodiesElements__T:
-        """
-            Get the mean Saturn longitude.
-        
-            Returns:
-                mean Saturn longitude.
-        
-        
-        """
-        ...
-    def getLSaDot(self) -> _FieldBodiesElements__T:
-        """
-            Get the mean Saturn longitude time derivative.
-        
-            Returns:
-                mean Saturn longitude time derivative.
-        
-        
-        """
-        ...
-    def getLUr(self) -> _FieldBodiesElements__T:
-        """
-            Get the mean Uranus longitude.
-        
-            Returns:
-                mean Uranus longitude.
-        
-        
-        """
-        ...
-    def getLUrDot(self) -> _FieldBodiesElements__T:
-        """
-            Get the mean Uranus longitude time derivative.
-        
-            Returns:
-                mean Uranus longitude time derivative.
-        
-        
-        """
-        ...
-    def getLVe(self) -> _FieldBodiesElements__T:
-        """
-            Get the mean Venus longitude.
-        
-            Returns:
-                mean Venus longitude.
-        
-        
-        """
-        ...
-    def getLVeDot(self) -> _FieldBodiesElements__T:
-        """
-            Get the mean Venus longitude time derivative.
-        
-            Returns:
-                mean Venus longitude time derivative.
-        
-        
-        """
-        ...
-    def getPa(self) -> _FieldBodiesElements__T:
-        """
-            Get the general accumulated precession in longitude.
-        
-            Returns:
-                general accumulated precession in longitude.
-        
-        
-        """
-        ...
-    def getPaDot(self) -> _FieldBodiesElements__T:
-        """
-            Get the general accumulated precession in longitude time derivative.
-        
-            Returns:
-                general accumulated precession in longitude time derivative.
-        
-        
-        """
-        ...
+    def getLE(self) -> _FieldBodiesElements__T: ...
+    def getLEDot(self) -> _FieldBodiesElements__T: ...
+    def getLJu(self) -> _FieldBodiesElements__T: ...
+    def getLJuDot(self) -> _FieldBodiesElements__T: ...
+    def getLMa(self) -> _FieldBodiesElements__T: ...
+    def getLMaDot(self) -> _FieldBodiesElements__T: ...
+    def getLMe(self) -> _FieldBodiesElements__T: ...
+    def getLMeDot(self) -> _FieldBodiesElements__T: ...
+    def getLNe(self) -> _FieldBodiesElements__T: ...
+    def getLNeDot(self) -> _FieldBodiesElements__T: ...
+    def getLSa(self) -> _FieldBodiesElements__T: ...
+    def getLSaDot(self) -> _FieldBodiesElements__T: ...
+    def getLUr(self) -> _FieldBodiesElements__T: ...
+    def getLUrDot(self) -> _FieldBodiesElements__T: ...
+    def getLVe(self) -> _FieldBodiesElements__T: ...
+    def getLVeDot(self) -> _FieldBodiesElements__T: ...
+    def getPa(self) -> _FieldBodiesElements__T: ...
+    def getPaDot(self) -> _FieldBodiesElements__T: ...
 
 class GzipFilter(DataFilter):
     """

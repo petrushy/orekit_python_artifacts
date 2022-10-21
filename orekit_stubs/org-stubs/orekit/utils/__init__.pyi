@@ -7,6 +7,7 @@ import org.hipparchus
 import org.hipparchus.analysis.differentiation
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.attitudes
+import org.orekit.bodies
 import org.orekit.data
 import org.orekit.frames
 import org.orekit.orbits
@@ -239,6 +240,7 @@ class AngularCoordinates(org.orekit.time.TimeShiftable['AngularCoordinates'], ja
                 modified Rodrigues vector and derivatives (vector on row 0, first derivative on row 1, second derivative on row 2)
         
             Also see:
+                :meth:`~org.orekit.utils.AngularCoordinates.createFromModifiedRodrigues`
         
         
         """
@@ -1659,7 +1661,7 @@ class DoubleArrayDictionary(java.io.Serializable):
             Put all the entries from the map in the dictionary.
         
             Parameters:
-                map (Map<String,double[]> map): map to copy into the instance
+                map (Map<String, double[]> map): map to copy into the instance
         
             Put all the entries from another dictionary.
         
@@ -1900,6 +1902,7 @@ class FieldAngularCoordinates(typing.Generic[_FieldAngularCoordinates__T]):
                 9.0
         
             Also see:
+                :meth:`~org.orekit.utils.FieldAngularCoordinates.createFromModifiedRodrigues`
         
         
         """
@@ -2245,7 +2248,7 @@ _FieldTimeSpanMap__T = typing.TypeVar('_FieldTimeSpanMap__T')  # <T>
 _FieldTimeSpanMap__D = typing.TypeVar('_FieldTimeSpanMap__D', bound=org.hipparchus.CalculusFieldElement)  # <D>
 class FieldTimeSpanMap(typing.Generic[_FieldTimeSpanMap__T, _FieldTimeSpanMap__D]):
     """
-    public class FieldTimeSpanMap<T,D extends CalculusFieldElement<D>> extends Object
+    public class FieldTimeSpanMap<T, D extends CalculusFieldElement<D>> extends Object
     
         Container for objects that apply to spans of time.
     
@@ -2310,7 +2313,7 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
             Since:
                 10.1
         
-        :class:`~org.orekit.annotation.DefaultDataContext` public <T extends CalculusFieldElement<T>> T evaluateTC(:class:`~org.orekit.time.FieldAbsoluteDate`<T> date)
+        :class:`~org.orekit.annotation.DefaultDataContext` public <T extends CalculusFieldElement<T>> T evaluateTC (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date)
         
             Evaluate the date offset between the current date and the
             :meth:`~org.orekit.utils.IERSConventions.getNutationReferenceEpoch`.
@@ -2890,7 +2893,7 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
             Since:
                 9.1
         
-        protected static :class:`~org.orekit.data.PoissonSeries.CompiledSeries` getTidalDisplacementFrequencyCorrectionDiurnal(String tableName, int cols, int rIp, int rOp, int tIp, int tOp)
+        protected static :class:`~org.orekit.data.PoissonSeries.CompiledSeries` getTidalDisplacementFrequencyCorrectionDiurnal (String tableName, int cols, int rIp, int rOp, int tIp, int tOp)
         
             Get the correction function for tidal displacement for diurnal tides.
         
@@ -2933,7 +2936,7 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
             Since:
                 9.1
         
-        protected static :class:`~org.orekit.data.PoissonSeries.CompiledSeries` getTidalDisplacementFrequencyCorrectionZonal(String tableName, int cols, int rIp, int rOp, int tIp, int tOp)
+        protected static :class:`~org.orekit.data.PoissonSeries.CompiledSeries` getTidalDisplacementFrequencyCorrectionZonal (String tableName, int cols, int rIp, int rOp, int tIp, int tOp)
         
             Get the correction function for tidal displacement for zonal tides.
         
@@ -3811,7 +3814,7 @@ class ParameterDriver:
         
             Parameters:
                 freeParameters (int): total number of free parameters in the gradient
-                indices (Map<String,Integer> indices): indices of the differentiation parameters in derivatives computations
+                indices (Map<String, Integer> indices): indices of the differentiation parameters in derivatives computations
         
             Returns:
                 value with derivatives
@@ -4592,6 +4595,137 @@ class TimeStampedGenerator(typing.Generic[_TimeStampedGenerator__T]):
     """
     def generate(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> java.util.List[_TimeStampedGenerator__T]: ...
 
+class WaypointPVBuilder:
+    """
+    public class WaypointPVBuilder extends Object
+    
+        Builder class, enabling incremental building of an :class:`~org.orekit.utils.PVCoordinatesProvider` instance using
+        waypoints defined on an ellipsoid. Given a series of waypoints (:code:`(date, point)` tuples), build a
+        :class:`~org.orekit.utils.PVCoordinatesProvider` representing the path. The static methods provide implementations for
+        the most common path definitions (cartesian, great-circle, loxodrome). If these methods are insufficient, the public
+        constructor provides a way to customize the path definition. This class connects the path segments using the
+        :class:`~org.orekit.utils.AggregatedPVCoordinatesProvider`. As such, no effort is made to smooth the velocity between
+        segments. While position is unaffected, the velocity may be discontinuous between adjacent time points. Thus, care
+        should be taken when modeling paths with abrupt direction changes (e.g. fast-moving aircraft); understand how the
+        :class:`~org.orekit.utils.PVCoordinatesProvider` will be used in the particular application.
+    
+        Since:
+            11.3
+    """
+    def __init__(self, interpolationFactory: typing.Union['WaypointPVBuilder.InterpolationFactory', typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid): ...
+    def addWaypoint(self, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> 'WaypointPVBuilder':
+        """
+            Add a waypoint.
+        
+            Parameters:
+                point (:class:`~org.orekit.bodies.GeodeticPoint`): the waypoint location
+                date (:class:`~org.orekit.time.AbsoluteDate`): the waypoint time
+        
+            Returns:
+                this instance
+        
+        
+        """
+        ...
+    def build(self) -> PVCoordinatesProvider:
+        """
+            Build a :class:`~org.orekit.utils.PVCoordinatesProvider` from the waypoints added to this builder.
+        
+            Returns:
+                the coordinates provider instance.
+        
+        
+        """
+        ...
+    @staticmethod
+    def cartesianBuilder(oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid) -> 'WaypointPVBuilder':
+        """
+            Construct a waypoint builder interpolating points using a linear cartesian interpolation.
+        
+            Parameters:
+                body (:class:`~org.orekit.bodies.OneAxisEllipsoid`): the reference ellipsoid on which the waypoints are defined.
+        
+            Returns:
+                the waypoint builder
+        
+        
+        """
+        ...
+    def constantAfter(self) -> 'WaypointPVBuilder':
+        """
+            Indicate the resulting :class:`~org.orekit.utils.PVCoordinatesProvider` provide a constant location of the last waypoint
+            after to the last time.
+        
+            Returns:
+                this instance
+        
+        
+        """
+        ...
+    def constantBefore(self) -> 'WaypointPVBuilder':
+        """
+            Indicate the resulting :class:`~org.orekit.utils.PVCoordinatesProvider` provide a constant location of the first
+            waypoint prior to the first time.
+        
+            Returns:
+                this instance
+        
+        
+        """
+        ...
+    @staticmethod
+    def greatCircleBuilder(oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid) -> 'WaypointPVBuilder':
+        """
+            Construct a waypoint builder interpolating points using a great-circle. The altitude of the intermediate points is
+            linearly interpolated from the bounding waypoints. Extrapolating before the first waypoint or after the last waypoint
+            may result in undefined altitudes.
+        
+            Parameters:
+                body (:class:`~org.orekit.bodies.OneAxisEllipsoid`): the reference ellipsoid on which the waypoints are defined.
+        
+            Returns:
+                the waypoint builder
+        
+        
+        """
+        ...
+    def invalidAfter(self) -> 'WaypointPVBuilder':
+        """
+            Indicate the resulting :class:`~org.orekit.utils.PVCoordinatesProvider` should be invalid after the last waypoint.
+        
+            Returns:
+                this instance
+        
+        
+        """
+        ...
+    def invalidBefore(self) -> 'WaypointPVBuilder':
+        """
+            Indicate the resulting :class:`~org.orekit.utils.PVCoordinatesProvider` should be invalid before the first waypoint.
+        
+            Returns:
+                this instance
+        
+        
+        """
+        ...
+    @staticmethod
+    def loxodromeBuilder(oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid) -> 'WaypointPVBuilder':
+        """
+            Construct a waypoint builder interpolating points using a loxodrome (or Rhumbline).
+        
+            Parameters:
+                body (:class:`~org.orekit.bodies.OneAxisEllipsoid`): the reference ellipsoid on which the waypoints are defined.
+        
+            Returns:
+                the waypoint builder
+        
+        
+        """
+        ...
+    class InterpolationFactory:
+        def create(self, absoluteDate: org.orekit.time.AbsoluteDate, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate2: org.orekit.time.AbsoluteDate, geodeticPoint2: org.orekit.bodies.GeodeticPoint, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid) -> PVCoordinatesProvider: ...
+
 class AbstractMultipleShooting(MultipleShooting):
     """
     public abstract class AbstractMultipleShooting extends Object implements :class:`~org.orekit.utils.MultipleShooting`
@@ -4648,6 +4782,112 @@ class AbstractMultipleShooting(MultipleShooting):
                 patchNumber (int): Patch point with constraint
                 componentIndex (int): Component of the patch points which are constrained.
                 isFree (boolean): constraint value
+        
+        
+        """
+        ...
+
+class AggregatedPVCoordinatesProvider(PVCoordinatesProvider):
+    """
+    public class AggregatedPVCoordinatesProvider extends Object implements :class:`~org.orekit.utils.PVCoordinatesProvider`
+    
+        Aggreate multiple :class:`~org.orekit.utils.PVCoordinatesProvider` instances together This can be used to describe an
+        aircraft or surface vehicle.
+    
+        Since:
+            11.3
+    """
+    @typing.overload
+    def __init__(self, timeSpanMap: TimeSpanMap[PVCoordinatesProvider]): ...
+    @typing.overload
+    def __init__(self, timeSpanMap: TimeSpanMap[PVCoordinatesProvider], absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate): ...
+    def getMaxDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Get the last date of the range.
+        
+            Returns:
+                the last date of the range
+        
+        
+        """
+        ...
+    def getMinDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Get the first date of the range.
+        
+            Returns:
+                the first date of the range
+        
+        
+        """
+        ...
+    def getPVCoordinates(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> 'TimeStampedPVCoordinates':
+        """
+            Description copied from interface: :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates`
+            Get the :class:`~org.orekit.utils.PVCoordinates` of the body in the selected frame.
+        
+            Specified by:
+                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates`Â in
+                interfaceÂ :class:`~org.orekit.utils.PVCoordinatesProvider`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                frame (:class:`~org.orekit.frames.Frame`): the frame where to define the position
+        
+            Returns:
+                time-stamped position/velocity of the body (m and m/s)
+        
+        
+        """
+        ...
+    class Builder:
+        @typing.overload
+        def __init__(self): ...
+        @typing.overload
+        def __init__(self, pVCoordinatesProvider: PVCoordinatesProvider): ...
+        def addPVProviderAfter(self, absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinatesProvider: PVCoordinatesProvider, boolean: bool) -> 'AggregatedPVCoordinatesProvider.Builder': ...
+        def addPVProviderBefore(self, absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinatesProvider: PVCoordinatesProvider, boolean: bool) -> 'AggregatedPVCoordinatesProvider.Builder': ...
+        def build(self) -> 'AggregatedPVCoordinatesProvider': ...
+        def invalidAfter(self, absoluteDate: org.orekit.time.AbsoluteDate) -> 'AggregatedPVCoordinatesProvider.Builder': ...
+        def invalidBefore(self, absoluteDate: org.orekit.time.AbsoluteDate) -> 'AggregatedPVCoordinatesProvider.Builder': ...
+    class InvalidPVProvider(PVCoordinatesProvider):
+        def __init__(self): ...
+        def getPVCoordinates(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> 'TimeStampedPVCoordinates': ...
+
+class ConstantPVCoordinatesProvider(PVCoordinatesProvider):
+    """
+    public class ConstantPVCoordinatesProvider extends Object implements :class:`~org.orekit.utils.PVCoordinatesProvider`
+    
+        Provider based on a single point. When :meth:`~org.orekit.utils.ConstantPVCoordinatesProvider.getPVCoordinates` is
+        called, the constant point will be translated to the destination frame and returned. This behavior is different than
+        :meth:`~org.orekit.utils.AbsolutePVCoordinates.getPVCoordinates` (which uses
+        :meth:`~org.orekit.utils.AbsolutePVCoordinates.shiftedBy` internally.). Use this class when no shifting should be
+        performed (e.g. representing a fixed point on the ground).
+    
+        Since:
+            11.3
+    """
+    @typing.overload
+    def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame): ...
+    @typing.overload
+    def __init__(self, geodeticPoint: org.orekit.bodies.GeodeticPoint, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid): ...
+    @typing.overload
+    def __init__(self, pVCoordinates: PVCoordinates, frame: org.orekit.frames.Frame): ...
+    def getPVCoordinates(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> 'TimeStampedPVCoordinates':
+        """
+            Description copied from interface: :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates`
+            Get the :class:`~org.orekit.utils.PVCoordinates` of the body in the selected frame.
+        
+            Specified by:
+                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates`Â in
+                interfaceÂ :class:`~org.orekit.utils.PVCoordinatesProvider`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                frame (:class:`~org.orekit.frames.Frame`): the frame where to define the position
+        
+            Returns:
+                time-stamped position/velocity of the body (m and m/s)
         
         
         """
@@ -6087,7 +6327,7 @@ class AbsolutePVCoordinates(TimeStampedPVCoordinates, org.orekit.time.TimeStampe
 _FieldAbsolutePVCoordinates__T = typing.TypeVar('_FieldAbsolutePVCoordinates__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAbsolutePVCoordinates(TimeStampedFieldPVCoordinates[_FieldAbsolutePVCoordinates__T], org.orekit.time.FieldTimeStamped[_FieldAbsolutePVCoordinates__T], org.orekit.time.FieldTimeInterpolable['FieldAbsolutePVCoordinates'[_FieldAbsolutePVCoordinates__T], _FieldAbsolutePVCoordinates__T], FieldPVCoordinatesProvider[_FieldAbsolutePVCoordinates__T], typing.Generic[_FieldAbsolutePVCoordinates__T]):
     """
-    public class FieldAbsolutePVCoordinates<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.utils.TimeStampedFieldPVCoordinates`<T> implements :class:`~org.orekit.time.FieldTimeStamped`<T>, :class:`~org.orekit.time.FieldTimeInterpolable`<:class:`~org.orekit.utils.FieldAbsolutePVCoordinates`<T>,T>, :class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T>
+    public class FieldAbsolutePVCoordinates<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.utils.TimeStampedFieldPVCoordinates`<T> implements :class:`~org.orekit.time.FieldTimeStamped`<T>, :class:`~org.orekit.time.FieldTimeInterpolable`<:class:`~org.orekit.utils.FieldAbsolutePVCoordinates`<T>, T>, :class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T>
     
         Field implementation of AbsolutePVCoordinates.
     
@@ -6313,9 +6553,11 @@ class __module_protocol__(typing.Protocol):
     AbsolutePVCoordinates: typing.Type[AbsolutePVCoordinates]
     AbstractMultipleShooting: typing.Type[AbstractMultipleShooting]
     AccurateFormatter: typing.Type[AccurateFormatter]
+    AggregatedPVCoordinatesProvider: typing.Type[AggregatedPVCoordinatesProvider]
     AngularCoordinates: typing.Type[AngularCoordinates]
     AngularDerivativesFilter: typing.Type[AngularDerivativesFilter]
     CartesianDerivativesFilter: typing.Type[CartesianDerivativesFilter]
+    ConstantPVCoordinatesProvider: typing.Type[ConstantPVCoordinatesProvider]
     Constants: typing.Type[Constants]
     DateDriver: typing.Type[DateDriver]
     Differentiation: typing.Type[Differentiation]
@@ -6368,4 +6610,5 @@ class __module_protocol__(typing.Protocol):
     TimeStampedFieldPVCoordinates: typing.Type[TimeStampedFieldPVCoordinates]
     TimeStampedGenerator: typing.Type[TimeStampedGenerator]
     TimeStampedPVCoordinates: typing.Type[TimeStampedPVCoordinates]
+    WaypointPVBuilder: typing.Type[WaypointPVBuilder]
     units: org.orekit.utils.units.__module_protocol__

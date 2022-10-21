@@ -7,7 +7,7 @@ import typing
 
 class SsrIm201(org.orekit.gnss.metric.messages.ssr.SsrMessage['SsrIm201Header', 'SsrIm201Data']):
     """
-    public class SsrIm201 extends :class:`~org.orekit.gnss.metric.messages.ssr.SsrMessage`<:class:`~org.orekit.gnss.metric.messages.ssr.subtype.SsrIm201Header`,:class:`~org.orekit.gnss.metric.messages.ssr.subtype.SsrIm201Data`>
+    public class SsrIm201 extends :class:`~org.orekit.gnss.metric.messages.ssr.SsrMessage`<:class:`~org.orekit.gnss.metric.messages.ssr.subtype.SsrIm201Header`, :class:`~org.orekit.gnss.metric.messages.ssr.subtype.SsrIm201Data`>
     
         SSR Ionosphere VTEC Spherical Harmonics Message.
     

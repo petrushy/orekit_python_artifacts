@@ -366,7 +366,7 @@ class FieldPropagator(org.orekit.utils.FieldPVCoordinatesProvider[_FieldPropagat
 _FieldSpacecraftState__T = typing.TypeVar('_FieldSpacecraftState__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldSpacecraftState(org.orekit.time.FieldTimeStamped[_FieldSpacecraftState__T], org.orekit.time.FieldTimeShiftable['FieldSpacecraftState'[_FieldSpacecraftState__T], _FieldSpacecraftState__T], org.orekit.time.FieldTimeInterpolable['FieldSpacecraftState'[_FieldSpacecraftState__T], _FieldSpacecraftState__T], typing.Generic[_FieldSpacecraftState__T]):
     """
-    public class FieldSpacecraftState<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.time.FieldTimeStamped`<T>, :class:`~org.orekit.time.FieldTimeShiftable`<:class:`~org.orekit.propagation.FieldSpacecraftState`<T>,T>, :class:`~org.orekit.time.FieldTimeInterpolable`<:class:`~org.orekit.propagation.FieldSpacecraftState`<T>,T>
+    public class FieldSpacecraftState<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.time.FieldTimeStamped`<T>, :class:`~org.orekit.time.FieldTimeShiftable`<:class:`~org.orekit.propagation.FieldSpacecraftState`<T>, T>, :class:`~org.orekit.time.FieldTimeInterpolable`<:class:`~org.orekit.propagation.FieldSpacecraftState`<T>, T>
     
         This class is the representation of a complete state holding orbit, attitude and mass information at a given date.
     
@@ -1854,6 +1854,166 @@ class SpacecraftState(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable
         """
         ...
 
+class StateCovariance(org.orekit.time.TimeStamped):
+    """
+    public class StateCovariance extends Object implements :class:`~org.orekit.time.TimeStamped`
+    
+        This class is the representation of a covariance matrix at a given date.
+    
+        Currently, the covariance only represents the orbital elements.
+    
+        It is possible to change the covariance frame by using the
+        :meth:`~org.orekit.propagation.StateCovariance.changeCovarianceFrame` or
+        :meth:`~org.orekit.propagation.StateCovariance.changeCovarianceFrame` method. These methods are based on Equations (18)
+        and (20) of *Covariance Transformations for Satellite Flight Dynamics Operations* by David A. SVallado.
+    
+        Finally, covariance orbit type can be changed using the
+        :meth:`~org.orekit.propagation.StateCovariance.changeCovarianceType` method.
+    
+        Since:
+            11.3
+    """
+    @typing.overload
+    def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame, orbitType: org.orekit.orbits.OrbitType, positionAngle: org.orekit.orbits.PositionAngle): ...
+    @typing.overload
+    def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix, absoluteDate: org.orekit.time.AbsoluteDate, lOFType: org.orekit.frames.LOFType): ...
+    @typing.overload
+    def changeCovarianceFrame(self, orbit: org.orekit.orbits.Orbit, frame: org.orekit.frames.Frame) -> 'StateCovariance':
+        """
+            Get the covariance in a given local orbital frame.
+        
+            Parameters:
+                orbit (:class:`~org.orekit.orbits.Orbit`): orbit to which the covariance matrix should correspond
+                lofOut (:class:`~org.orekit.frames.LOFType`): output local orbital frame
+        
+            Returns:
+                a new covariance state, expressed in the output local orbital frame
+        
+            Get the covariance in the output frame.
+        
+            Parameters:
+                orbit (:class:`~org.orekit.orbits.Orbit`): orbit to which the covariance matrix should correspond
+                frameOut (:class:`~org.orekit.frames.Frame`): output frame
+        
+            Returns:
+                a new covariance state, expressed in the output frame
+        
+        
+        """
+        ...
+    @typing.overload
+    def changeCovarianceFrame(self, orbit: org.orekit.orbits.Orbit, lOFType: org.orekit.frames.LOFType) -> 'StateCovariance': ...
+    def changeCovarianceType(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngle: org.orekit.orbits.PositionAngle) -> 'StateCovariance':
+        """
+            Get the covariance matrix in another orbit type.
+        
+            The covariance orbit type **cannot** be changed if the covariance matrix is expressed in a
+            :class:`~org.orekit.frames.LOFType` or a non-pseudo inertial frame.
+        
+            Parameters:
+                orbit (:class:`~org.orekit.orbits.Orbit`): orbit to which the covariance matrix should correspond
+                outOrbitType (:class:`~org.orekit.orbits.OrbitType`): target orbit type of the state covariance matrix
+                outAngleType (:class:`~org.orekit.orbits.PositionAngle`): target position angle type of the state covariance matrix
+        
+            Returns:
+                a new covariance state, expressed in the target orbit type with the target position angle
+        
+            Also see:
+                :meth:`~org.orekit.propagation.StateCovariance.changeCovarianceFrame`
+        
+        
+        """
+        ...
+    def getDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Get the date..
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeStamped.getDate` in interface :class:`~org.orekit.time.TimeStamped`
+        
+            Returns:
+                date attached to the object
+        
+        
+        """
+        ...
+    def getFrame(self) -> org.orekit.frames.Frame:
+        """
+            Get the covariance frame.
+        
+            Returns:
+                the covariance frame (can be null)
+        
+            Also see:
+                :meth:`~org.orekit.propagation.StateCovariance.getLOFType`
+        
+        
+        """
+        ...
+    def getLOFType(self) -> org.orekit.frames.LOFType:
+        """
+            Get the covariance LOF type.
+        
+            Returns:
+                the covariance LOF type (can be null)
+        
+            Also see:
+                :meth:`~org.orekit.propagation.StateCovariance.getFrame`
+        
+        
+        """
+        ...
+    def getMatrix(self) -> org.hipparchus.linear.RealMatrix:
+        """
+            Get the covariance matrix.
+        
+            Returns:
+                the covariance matrix
+        
+        
+        """
+        ...
+    def getOrbitType(self) -> org.orekit.orbits.OrbitType:
+        """
+            Get the covariance orbit type.
+        
+            Returns:
+                the covariance orbit type
+        
+        
+        """
+        ...
+    def getPositionAngle(self) -> org.orekit.orbits.PositionAngle:
+        """
+            Get the covariance angle type.
+        
+            Returns:
+                the covariance angle type
+        
+        
+        """
+        ...
+    def shiftedBy(self, orbit: org.orekit.orbits.Orbit, double: float) -> 'StateCovariance':
+        """
+            Get a time-shifted covariance matrix.
+        
+            The shifting model is a Keplerian one. In other words, the state transition matrix is computed supposing Keplerian
+            motion.
+        
+            Shifting is *not* intended as a replacement for proper covariance propagation, but should be sufficient for small time
+            shifts or coarse accuracy.
+        
+            Parameters:
+                orbit (:class:`~org.orekit.orbits.Orbit`): orbit to which the covariance matrix should correspond
+                dt (double): time shift in seconds
+        
+            Returns:
+                a new covariance state, shifted with respect to the instance
+        
+        
+        """
+        ...
+
 class AbstractMatricesHarvester(MatricesHarvester):
     """
     public abstract class AbstractMatricesHarvester extends Object implements :class:`~org.orekit.propagation.MatricesHarvester`
@@ -3160,6 +3320,140 @@ class PythonPropagator(Propagator):
         """
         ...
 
+class StateCovarianceMatrixProvider(AdditionalStateProvider):
+    """
+    public class StateCovarianceMatrixProvider extends Object implements :class:`~org.orekit.propagation.AdditionalStateProvider`
+    
+        Additional state provider for state covariance matrix.
+    
+        This additional state provider allows computing a propagated covariance matrix based on a user defined input state
+        covariance matrix. The computation of the propagated covariance matrix uses the State Transition Matrix between the
+        propagated spacecraft state and the initial state. As a result, the user must define the name
+        :meth:`~org.orekit.propagation.StateCovarianceMatrixProvider.stmName`.
+    
+        As the State Transition Matrix and the input state covariance matrix can be expressed in different orbit types, the user
+        must specify both orbit types when building the covariance provider. In addition, the position angle used in both
+        matrices must also be specified.
+    
+        In order to add this additional state provider to an orbit propagator, user must use the
+        :meth:`~org.orekit.propagation.Propagator.addAdditionalStateProvider` method.
+    
+        For a given propagated spacecraft :code:`state`, the propagated state covariance matrix is accessible through the method
+        :meth:`~org.orekit.propagation.StateCovarianceMatrixProvider.getStateCovariance`
+    
+        Since:
+            11.3
+    """
+    def __init__(self, string: str, string2: str, matricesHarvester: MatricesHarvester, orbitType: org.orekit.orbits.OrbitType, positionAngle: org.orekit.orbits.PositionAngle, stateCovariance: StateCovariance): ...
+    def getAdditionalState(self, spacecraftState: SpacecraftState) -> typing.List[float]:
+        """
+            Get the additional state.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.AdditionalStateProvider.getAdditionalState`Â in
+                interfaceÂ :class:`~org.orekit.propagation.AdditionalStateProvider`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state to which additional state should correspond
+        
+            Returns:
+                additional state corresponding to spacecraft state
+        
+        
+        """
+        ...
+    def getCovarianceOrbitType(self) -> org.orekit.orbits.OrbitType:
+        """
+            Get the orbit type in which the covariance matrix is expressed.
+        
+            Returns:
+                the orbit type
+        
+        
+        """
+        ...
+    def getName(self) -> str:
+        """
+            Get the name of the additional state.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.AdditionalStateProvider.getName`Â in
+                interfaceÂ :class:`~org.orekit.propagation.AdditionalStateProvider`
+        
+            Returns:
+                name of the additional state (names containing "orekit" with any case are reserved for the library internal use)
+        
+        
+        """
+        ...
+    @typing.overload
+    def getStateCovariance(self, spacecraftState: SpacecraftState) -> StateCovariance:
+        """
+            Get the state covariance.
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state to which the covariance matrix should correspond
+        
+            Returns:
+                the state covariance
+        
+            Also see:
+                :meth:`~org.orekit.propagation.StateCovarianceMatrixProvider.getStateCovariance`,
+                :meth:`~org.orekit.propagation.StateCovarianceMatrixProvider.getStateCovariance`
+        
+            Get the state covariance expressed in a given frame.
+        
+            The output covariance matrix is expressed in the same orbit type as
+            :meth:`~org.orekit.propagation.StateCovarianceMatrixProvider.getCovarianceOrbitType`.
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state to which the covariance matrix should correspond
+                frame (:class:`~org.orekit.frames.Frame`): output frame for which the output covariance matrix must be expressed (must be inertial)
+        
+            Returns:
+                the state covariance expressed in :code:`frame`
+        
+            Also see:
+                :meth:`~org.orekit.propagation.StateCovarianceMatrixProvider.getStateCovariance`,
+                :meth:`~org.orekit.propagation.StateCovarianceMatrixProvider.getStateCovariance`
+        
+            Get the state covariance expressed in a given orbit type.
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state to which the covariance matrix should correspond
+                orbitType (:class:`~org.orekit.orbits.OrbitType`): output orbit type
+                angleType (:class:`~org.orekit.orbits.PositionAngle`): output position angle (not used if orbitType equals :code:`CARTESIAN`)
+        
+            Returns:
+                the state covariance in :code:`orbitType` and :code:`angleType`
+        
+            Also see:
+                :meth:`~org.orekit.propagation.StateCovarianceMatrixProvider.getStateCovariance`,
+                :meth:`~org.orekit.propagation.StateCovarianceMatrixProvider.getStateCovariance`
+        
+        
+        """
+        ...
+    @typing.overload
+    def getStateCovariance(self, spacecraftState: SpacecraftState, frame: org.orekit.frames.Frame) -> StateCovariance: ...
+    @typing.overload
+    def getStateCovariance(self, spacecraftState: SpacecraftState, orbitType: org.orekit.orbits.OrbitType, positionAngle: org.orekit.orbits.PositionAngle) -> StateCovariance: ...
+    def init(self, spacecraftState: SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+        """
+            Initialize the additional state provider at the start of propagation.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.AdditionalStateProvider.init`Â in
+                interfaceÂ :class:`~org.orekit.propagation.AdditionalStateProvider`
+        
+            Parameters:
+                initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial state information at the start of propagation
+                target (:class:`~org.orekit.time.AbsoluteDate`): date of propagation
+        
+        
+        """
+        ...
+
 class PythonAbstractMatricesHarvester(AbstractMatricesHarvester):
     """
     public class PythonAbstractMatricesHarvester extends :class:`~org.orekit.propagation.AbstractMatricesHarvester`
@@ -3897,6 +4191,8 @@ class __module_protocol__(typing.Protocol):
     PythonMatricesHarvester: typing.Type[PythonMatricesHarvester]
     PythonPropagator: typing.Type[PythonPropagator]
     SpacecraftState: typing.Type[SpacecraftState]
+    StateCovariance: typing.Type[StateCovariance]
+    StateCovarianceMatrixProvider: typing.Type[StateCovarianceMatrixProvider]
     analytical: org.orekit.propagation.analytical.__module_protocol__
     conversion: org.orekit.propagation.conversion.__module_protocol__
     events: org.orekit.propagation.events.__module_protocol__

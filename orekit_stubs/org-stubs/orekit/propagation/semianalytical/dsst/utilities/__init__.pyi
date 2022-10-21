@@ -1333,7 +1333,9 @@ class FieldShortPeriodicsInterpolatedCoefficient(typing.Generic[_FieldShortPerio
         Representation of a coefficient that need to be interpolated over time.
     
         The short periodics coefficients can be interpolated for faster computation. This class stores computed values of the
-        coefficients through the method null and gives an interpolated result through the method
+        coefficients through the method
+        :meth:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldShortPeriodicsInterpolatedCoefficient.addGridPoint`
+        and gives an interpolated result through the method
         :meth:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldShortPeriodicsInterpolatedCoefficient.value`.
     """
     def __init__(self, int: int): ...
@@ -2021,7 +2023,9 @@ class ShortPeriodicsInterpolatedCoefficient:
         Representation of a coefficient that need to be interpolated over time.
     
         The short periodics coefficients can be interpolated for faster computation. This class stores computed values of the
-        coefficients through the method null and gives an interpolated result through the method
+        coefficients through the method
+        :meth:`~org.orekit.propagation.semianalytical.dsst.utilities.ShortPeriodicsInterpolatedCoefficient.addGridPoint` and
+        gives an interpolated result through the method
         :meth:`~org.orekit.propagation.semianalytical.dsst.utilities.ShortPeriodicsInterpolatedCoefficient.value`.
     """
     def __init__(self, int: int): ...

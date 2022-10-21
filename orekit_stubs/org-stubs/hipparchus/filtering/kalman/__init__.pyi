@@ -1,5 +1,6 @@
 import org.hipparchus.filtering.kalman.extended
 import org.hipparchus.filtering.kalman.linear
+import org.hipparchus.filtering.kalman.unscented
 import org.hipparchus.linear
 import typing
 
@@ -229,3 +230,4 @@ class __module_protocol__(typing.Protocol):
     ProcessEstimate: typing.Type[ProcessEstimate]
     extended: org.hipparchus.filtering.kalman.extended.__module_protocol__
     linear: org.hipparchus.filtering.kalman.linear.__module_protocol__
+    unscented: org.hipparchus.filtering.kalman.unscented.__module_protocol__

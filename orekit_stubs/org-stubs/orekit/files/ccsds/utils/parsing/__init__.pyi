@@ -157,7 +157,7 @@ _AbstractConstituentParser__T = typing.TypeVar('_AbstractConstituentParser__T', 
 _AbstractConstituentParser__P = typing.TypeVar('_AbstractConstituentParser__P', bound='AbstractConstituentParser')  # <P>
 class AbstractConstituentParser(AbstractMessageParser[_AbstractConstituentParser__T], typing.Generic[_AbstractConstituentParser__T, _AbstractConstituentParser__P]):
     """
-    public abstract class AbstractConstituentParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<?,?>,P extends AbstractConstituentParser<T,?>> extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractMessageParser`<T>
+    public abstract class AbstractConstituentParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<?, ?>, P extends AbstractConstituentParser<T, ?>> extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractMessageParser`<T>
     
         Parser for CCSDS messages.
     
@@ -390,7 +390,7 @@ _PythonAbstractConstituentParser__T = typing.TypeVar('_PythonAbstractConstituent
 _PythonAbstractConstituentParser__P = typing.TypeVar('_PythonAbstractConstituentParser__P', bound=AbstractConstituentParser)  # <P>
 class PythonAbstractConstituentParser(AbstractConstituentParser[_PythonAbstractConstituentParser__T, _PythonAbstractConstituentParser__P], typing.Generic[_PythonAbstractConstituentParser__T, _PythonAbstractConstituentParser__P]):
     """
-    public class PythonAbstractConstituentParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<?,?>,P extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<T,?>> extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<T,P>
+    public class PythonAbstractConstituentParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<?, ?>, P extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<T, ?>> extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<T, P>
     """
     def build(self) -> _PythonAbstractConstituentParser__T:
         """

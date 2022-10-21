@@ -330,7 +330,8 @@ class IsotropicRadiationCNES95Convention(RadiationSensitive):
             Compute the acceleration due to radiation pressure.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.radiation.RadiationSensitive`
+                :meth:`~org.orekit.forces.radiation.RadiationSensitive.radiationPressureAcceleration`Â in
+                interfaceÂ :class:`~org.orekit.forces.radiation.RadiationSensitive`
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
@@ -353,7 +354,8 @@ class IsotropicRadiationCNES95Convention(RadiationSensitive):
             Compute the acceleration due to radiation pressure.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.radiation.RadiationSensitive`
+                :meth:`~org.orekit.forces.radiation.RadiationSensitive.radiationPressureAcceleration`Â in
+                interfaceÂ :class:`~org.orekit.forces.radiation.RadiationSensitive`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
@@ -398,7 +400,8 @@ class IsotropicRadiationClassicalConvention(RadiationSensitive):
             Compute the acceleration due to radiation pressure.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.radiation.RadiationSensitive`
+                :meth:`~org.orekit.forces.radiation.RadiationSensitive.radiationPressureAcceleration`Â in
+                interfaceÂ :class:`~org.orekit.forces.radiation.RadiationSensitive`
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
@@ -421,7 +424,8 @@ class IsotropicRadiationClassicalConvention(RadiationSensitive):
             Compute the acceleration due to radiation pressure.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.radiation.RadiationSensitive`
+                :meth:`~org.orekit.forces.radiation.RadiationSensitive.radiationPressureAcceleration`Â in
+                interfaceÂ :class:`~org.orekit.forces.radiation.RadiationSensitive`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
@@ -466,7 +470,8 @@ class IsotropicRadiationSingleCoefficient(RadiationSensitive):
             Compute the acceleration due to radiation pressure.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.radiation.RadiationSensitive`
+                :meth:`~org.orekit.forces.radiation.RadiationSensitive.radiationPressureAcceleration`Â in
+                interfaceÂ :class:`~org.orekit.forces.radiation.RadiationSensitive`
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
@@ -489,7 +494,8 @@ class IsotropicRadiationSingleCoefficient(RadiationSensitive):
             Compute the acceleration due to radiation pressure.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.radiation.RadiationSensitive`
+                :meth:`~org.orekit.forces.radiation.RadiationSensitive.radiationPressureAcceleration`Â in
+                interfaceÂ :class:`~org.orekit.forces.radiation.RadiationSensitive`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
@@ -569,8 +575,9 @@ class PythonAbstractRadiationForceModel(AbstractRadiationForceModel):
     def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
             Initialize the force model at the start of propagation. This method will be called before any calls to
-            :meth:`~org.orekit.forces.ForceModel.addContribution`, :meth:`~org.orekit.forces.ForceModel.addContribution`, null or
-            null
+            :meth:`~org.orekit.forces.ForceModel.addContribution`, :meth:`~org.orekit.forces.ForceModel.addContribution`,
+            :meth:`~org.orekit.forces.radiation.PythonAbstractRadiationForceModel.acceleration` or
+            :meth:`~org.orekit.forces.radiation.PythonAbstractRadiationForceModel.acceleration`
         
             The default implementation of this method does nothing.
         
@@ -615,7 +622,8 @@ class PythonRadiationSensitive(RadiationSensitive):
             Compute the acceleration due to radiation pressure.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.radiation.RadiationSensitive`
+                :meth:`~org.orekit.forces.radiation.RadiationSensitive.radiationPressureAcceleration`Â in
+                interfaceÂ :class:`~org.orekit.forces.radiation.RadiationSensitive`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
@@ -632,7 +640,8 @@ class PythonRadiationSensitive(RadiationSensitive):
             Compute the acceleration due to radiation pressure.
         
             Specified by:
-                 in interface :class:`~org.orekit.forces.radiation.RadiationSensitive`
+                :meth:`~org.orekit.forces.radiation.RadiationSensitive.radiationPressureAcceleration`Â in
+                interfaceÂ :class:`~org.orekit.forces.radiation.RadiationSensitive`
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date

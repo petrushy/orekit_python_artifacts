@@ -100,7 +100,7 @@ class InterpolationMethod(java.lang.Enum['InterpolationMethod']):
 
 class Oem(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.section.Header, 'OemSegment'], org.orekit.files.general.EphemerisFile[org.orekit.utils.TimeStampedPVCoordinates, 'OemSegment']):
     """
-    public class Oem extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.section.Header`,:class:`~org.orekit.files.ccsds.ndm.odm.oem.OemSegment`> implements :class:`~org.orekit.files.general.EphemerisFile`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`,:class:`~org.orekit.files.ccsds.ndm.odm.oem.OemSegment`>
+    public class Oem extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.section.Header`, :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemSegment`> implements :class:`~org.orekit.files.general.EphemerisFile`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`, :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemSegment`>
     
         This class stores all the information of the OEM File parsed by OEMParser.
     
@@ -412,7 +412,7 @@ class OemMetadataKey(java.lang.Enum['OemMetadataKey']):
 
 class OemParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Oem, 'OemParser'], org.orekit.files.general.EphemerisFileParser[Oem]):
     """
-    public class OemParser extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmParser`<:class:`~org.orekit.files.ccsds.ndm.odm.oem.Oem`,:class:`~org.orekit.files.ccsds.ndm.odm.oem.OemParser`> implements :class:`~org.orekit.files.general.EphemerisFileParser`<:class:`~org.orekit.files.ccsds.ndm.odm.oem.Oem`>
+    public class OemParser extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmParser`<:class:`~org.orekit.files.ccsds.ndm.odm.oem.Oem`, :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemParser`> implements :class:`~org.orekit.files.general.EphemerisFileParser`<:class:`~org.orekit.files.ccsds.ndm.odm.oem.Oem`>
     
         A parser for the CCSDS OEM (Orbit Ephemeris Message).
     
@@ -613,7 +613,7 @@ class OemParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Oem, 'OemParser'], org.
 
 class OemSatelliteEphemeris(org.orekit.files.general.EphemerisFile.SatelliteEphemeris[org.orekit.utils.TimeStampedPVCoordinates, 'OemSegment']):
     """
-    public class OemSatelliteEphemeris extends Object implements :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`,:class:`~org.orekit.files.ccsds.ndm.odm.oem.OemSegment`>
+    public class OemSatelliteEphemeris extends Object implements :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`, :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemSegment`>
     
         OEM ephemeris blocks for a single satellite.
     
@@ -686,7 +686,7 @@ class OemSatelliteEphemeris(org.orekit.files.general.EphemerisFile.SatelliteEphe
 
 class OemSegment(org.orekit.files.ccsds.section.Segment[OemMetadata, OemData], org.orekit.files.general.EphemerisFile.EphemerisSegment[org.orekit.utils.TimeStampedPVCoordinates]):
     """
-    public class OemSegment extends :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.odm.oem.OemMetadata`,:class:`~org.orekit.files.ccsds.ndm.odm.oem.OemData`> implements :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`>
+    public class OemSegment extends :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.odm.oem.OemMetadata`, :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemData`> implements :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`>
     
         The Ephemerides Blocks class contain metadata, the list of ephemerides data lines and optional covariance matrices (and
         their metadata). The reason for which the ephemerides have been separated into blocks is that the ephemerides of two
@@ -816,7 +816,7 @@ class OemSegment(org.orekit.files.ccsds.section.Segment[OemMetadata, OemData], o
 
 class OemWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[org.orekit.files.ccsds.section.Header, OemSegment, Oem]):
     """
-    public class OemWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.section.Header`,:class:`~org.orekit.files.ccsds.ndm.odm.oem.OemSegment`,:class:`~org.orekit.files.ccsds.ndm.odm.oem.Oem`>
+    public class OemWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.section.Header`, :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemSegment`, :class:`~org.orekit.files.ccsds.ndm.odm.oem.Oem`>
     
         A writer for Orbit Ephemeris Message (OEM) files.
     

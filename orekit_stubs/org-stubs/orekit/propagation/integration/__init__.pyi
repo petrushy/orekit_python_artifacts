@@ -426,6 +426,7 @@ class AbstractJacobiansMapper(org.orekit.propagation.MatricesHarvester):
                 dYdP (double[][]): placeholder where to put the Jacobian with respect to parameters
         
             Also see:
+                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getStateJacobian`
         
         
         """
@@ -459,6 +460,7 @@ class AbstractJacobiansMapper(org.orekit.propagation.MatricesHarvester):
                 dYdY0 (double[][]): placeholder where to put the Jacobian with respect to state
         
             Also see:
+                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getParametersJacobian`
         
         
         """
@@ -492,6 +494,7 @@ class AbstractJacobiansMapper(org.orekit.propagation.MatricesHarvester):
                 p (double[]): placeholder where to put the one-dimensional additional state
         
             Also see:
+                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getStateJacobian`
         
         
         """
@@ -602,10 +605,10 @@ class AdditionalDerivativesProvider:
 
 class AdditionalEquations:
     """
-    Deprecated. 
-    as of 11.1, replaced by :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
     @Deprecated public interface AdditionalEquations
     
+        Deprecated.
+        as of 11.1, replaced by :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         This interface allows users to add their own differential equations to a numerical propagator.
     
         In some cases users may need to integrate some problem-specific equations along with classical spacecraft equations of
@@ -623,9 +626,11 @@ class AdditionalEquations:
         The additional parameters are gathered in a simple p array. The additional equations compute the pDot array, which is
         the time-derivative of the p array. Since the additional parameters p may also have an influence on the equations of
         motion themselves that should be accumulated to the main state derivatives (for example an equation linked to a complex
-        thrust model may induce an acceleration and a mass change), the null method can return a double array that will be
-        *added* to the main state derivatives. This means these equations can be used as an additional force model if needed. If
-        the additional parameters have no influence at all on the main spacecraft state, a null reference may be returned.
+        thrust model may induce an acceleration and a mass change), the
+        :meth:`~org.orekit.propagation.integration.AdditionalEquations.computeDerivatives` method can return a double array that
+        will be *added* to the main state derivatives. This means these equations can be used as an additional force model if
+        needed. If the additional parameters have no influence at all on the main spacecraft state, a null reference may be
+        returned.
     
         This interface is the numerical (read not already integrated) counterpart of the
         :class:`~org.orekit.propagation.AdditionalStateProvider` interface. It allows to append various additional state
@@ -638,7 +643,7 @@ class AdditionalEquations:
     """
     def computeDerivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[float]) -> typing.List[float]:
         """
-            Deprecated. 
+            Deprecated.
             Compute the derivatives related to the additional state parameters.
         
             When this method is called, the spacecraft state contains the main state (orbit, attitude and mass), all the states
@@ -658,7 +663,7 @@ class AdditionalEquations:
         ...
     def getName(self) -> str:
         """
-            Deprecated. 
+            Deprecated.
             Get the name of the additional state.
         
             Returns:
@@ -669,10 +674,11 @@ class AdditionalEquations:
         ...
     def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
-            Deprecated. 
+            Deprecated.
             Initialize the equations at the start of propagation.
         
-            This method will be called once at propagation start, before any calls to null.
+            This method will be called once at propagation start, before any calls to
+            :meth:`~org.orekit.propagation.integration.AdditionalEquations.computeDerivatives`.
         
             The default implementation of this method does nothing.
         
@@ -946,10 +952,10 @@ class FieldAdditionalDerivativesProvider(typing.Generic[_FieldAdditionalDerivati
 _FieldAdditionalEquations__T = typing.TypeVar('_FieldAdditionalEquations__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAdditionalEquations(typing.Generic[_FieldAdditionalEquations__T]):
     """
-    Deprecated. 
-    as of 11.1, replaced by :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider`
     @Deprecated public interface FieldAdditionalEquations<T extends CalculusFieldElement<T>>
     
+        Deprecated.
+        as of 11.1, replaced by :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider`
         This interface allows users to add their own differential equations to a numerical propagator.
     
         In some cases users may need to integrate some problem-specific equations along with classical spacecraft equations of
@@ -967,9 +973,11 @@ class FieldAdditionalEquations(typing.Generic[_FieldAdditionalEquations__T]):
         The additional parameters are gathered in a simple p array. The additional equations compute the pDot array, which is
         the time-derivative of the p array. Since the additional parameters p may also have an influence on the equations of
         motion themselves that should be accumulated to the main state derivatives (for example an equation linked to a complex
-        thrust model may induce an acceleration and a mass change), the null method can return a double array that will be
-        *added* to the main state derivatives. This means these equations can be used as an additional force model if needed. If
-        the additional parameters have no influence at all on the main spacecraft state, a null reference may be returned.
+        thrust model may induce an acceleration and a mass change), the
+        :meth:`~org.orekit.propagation.integration.FieldAdditionalEquations.computeDerivatives` method can return a double array
+        that will be *added* to the main state derivatives. This means these equations can be used as an additional force model
+        if needed. If the additional parameters have no influence at all on the main spacecraft state, a null reference may be
+        returned.
     
         This interface is the numerical (read not already integrated) counterpart of the
         :class:`~org.orekit.propagation.FieldAdditionalStateProvider` interface. It allows to append various additional state
@@ -982,7 +990,7 @@ class FieldAdditionalEquations(typing.Generic[_FieldAdditionalEquations__T]):
     def computeDerivatives(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldAdditionalEquations__T], tArray: typing.List[_FieldAdditionalEquations__T]) -> typing.List[_FieldAdditionalEquations__T]: ...
     def getName(self) -> str:
         """
-            Deprecated. 
+            Deprecated.
             Get the name of the additional state.
         
             Returns:
@@ -1479,10 +1487,10 @@ class StateMapper:
 
 class AdditionalEquationsAdapter(AdditionalDerivativesProvider):
     """
-    Deprecated. 
-    must be removed in 12.0 when :class:`~org.orekit.propagation.integration.AdditionalEquations` is removed
     @Deprecated public class AdditionalEquationsAdapter extends Object implements :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
     
+        Deprecated.
+        must be removed in 12.0 when :class:`~org.orekit.propagation.integration.AdditionalEquations` is removed
         Temporary adapter from :class:`~org.orekit.propagation.integration.AdditionalEquations` to
         :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`.
     
@@ -1492,7 +1500,7 @@ class AdditionalEquationsAdapter(AdditionalDerivativesProvider):
     def __init__(self, additionalEquations: AdditionalEquations, supplier: typing.Union[java.util.function.Supplier[org.orekit.propagation.SpacecraftState], typing.Callable[[], org.orekit.propagation.SpacecraftState]]): ...
     def combinedDerivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> CombinedDerivatives:
         """
-            Deprecated. 
+            Deprecated.
             Compute the derivatives related to the additional state (and optionally main state increments).
         
             As of 11.2, there is a default implementation that calls the deprecated
@@ -1516,7 +1524,7 @@ class AdditionalEquationsAdapter(AdditionalDerivativesProvider):
     def derivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]: ...
     def getDimension(self) -> int:
         """
-            Deprecated. 
+            Deprecated.
             Get the dimension of the generated derivative.
         
             Specified by:
@@ -1531,7 +1539,7 @@ class AdditionalEquationsAdapter(AdditionalDerivativesProvider):
         ...
     def getName(self) -> str:
         """
-            Deprecated. 
+            Deprecated.
             Get the name of the additional derivatives (which will become state once integrated).
         
             Specified by:
@@ -1546,7 +1554,7 @@ class AdditionalEquationsAdapter(AdditionalDerivativesProvider):
         ...
     def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
-            Deprecated. 
+            Deprecated.
             Initialize the generator at the start of propagation.
         
             Specified by:
@@ -1564,10 +1572,10 @@ class AdditionalEquationsAdapter(AdditionalDerivativesProvider):
 _FieldAdditionalEquationsAdapter__T = typing.TypeVar('_FieldAdditionalEquationsAdapter__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAdditionalEquationsAdapter(FieldAdditionalDerivativesProvider[_FieldAdditionalEquationsAdapter__T], typing.Generic[_FieldAdditionalEquationsAdapter__T]):
     """
-    Deprecated. 
-    must be removed in 12.0 when :class:`~org.orekit.propagation.integration.AdditionalEquations` is removed
     @Deprecated public class FieldAdditionalEquationsAdapter<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider`<T>
     
+        Deprecated.
+        must be removed in 12.0 when :class:`~org.orekit.propagation.integration.AdditionalEquations` is removed
         Temporary adapter from :class:`~org.orekit.propagation.integration.FieldAdditionalEquations` to
         :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider`.
     
@@ -1579,7 +1587,7 @@ class FieldAdditionalEquationsAdapter(FieldAdditionalDerivativesProvider[_FieldA
     def derivatives(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldAdditionalEquationsAdapter__T]) -> typing.List[_FieldAdditionalEquationsAdapter__T]: ...
     def getDimension(self) -> int:
         """
-            Deprecated. 
+            Deprecated.
             Get the dimension of the generated derivative.
         
             Specified by:
@@ -1594,7 +1602,7 @@ class FieldAdditionalEquationsAdapter(FieldAdditionalDerivativesProvider[_FieldA
         ...
     def getName(self) -> str:
         """
-            Deprecated. 
+            Deprecated.
             Get the name of the additional derivatives (which will become state once integrated).
         
             Specified by:
@@ -1782,9 +1790,11 @@ class PythonAdditionalEquations(AdditionalEquations):
         The additional parameters are gathered in a simple p array. The additional equations compute the pDot array, which is
         the time-derivative of the p array. Since the additional parameters p may also have an influence on the equations of
         motion themselves that should be accumulated to the main state derivatives (for example an equation linked to a complex
-        thrust model may induce an acceleration and a mass change), the null method can return a double array that will be
-        *added* to the main state derivatives. This means these equations can be used as an additional force model if needed. If
-        the additional parameters have no influence at all on the main spacecraft state, a null reference may be returned.
+        thrust model may induce an acceleration and a mass change), the
+        :meth:`~org.orekit.propagation.integration.PythonAdditionalEquations.computeDerivatives` method can return a double
+        array that will be *added* to the main state derivatives. This means these equations can be used as an additional force
+        model if needed. If the additional parameters have no influence at all on the main spacecraft state, a null reference
+        may be returned.
     
         This interface is the numerical (read not already integrated) counterpart of the
         :class:`~org.orekit.propagation.AdditionalStateProvider` interface. It allows to append various additional state
@@ -1805,7 +1815,8 @@ class PythonAdditionalEquations(AdditionalEquations):
             during the same propagation.
         
             Specified by:
-                 in interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
+                :meth:`~org.orekit.propagation.integration.AdditionalEquations.computeDerivatives`Â in
+                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalEquations`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional state
@@ -1836,7 +1847,8 @@ class PythonAdditionalEquations(AdditionalEquations):
         """
             Extension point for Python. Initialize the equations at the start of propagation.
         
-            This method will be called once at propagation start, before any calls to null.
+            This method will be called once at propagation start, before any calls to
+            :meth:`~org.orekit.propagation.integration.AdditionalEquations.computeDerivatives`.
         
             The default implementation of this method does nothing.
         
@@ -1979,9 +1991,11 @@ class PythonFieldAdditionalEquations(FieldAdditionalEquations[_PythonFieldAdditi
         The additional parameters are gathered in a simple p array. The additional equations compute the pDot array, which is
         the time-derivative of the p array. Since the additional parameters p may also have an influence on the equations of
         motion themselves that should be accumulated to the main state derivatives (for example an equation linked to a complex
-        thrust model may induce an acceleration and a mass change), the null method can return a double array that will be
-        *added* to the main state derivatives. This means these equations can be used as an additional force model if needed. If
-        the additional parameters have no influence at all on the main spacecraft state, a null reference may be returned.
+        thrust model may induce an acceleration and a mass change), the
+        :meth:`~org.orekit.propagation.integration.PythonFieldAdditionalEquations.computeDerivatives` method can return a double
+        array that will be *added* to the main state derivatives. This means these equations can be used as an additional force
+        model if needed. If the additional parameters have no influence at all on the main spacecraft state, a null reference
+        may be returned.
     
         This interface is the numerical (read not already integrated) counterpart of the
         :class:`~org.orekit.propagation.FieldAdditionalStateProvider` interface. It allows to append various additional state

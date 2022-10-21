@@ -228,7 +228,7 @@ class EstimatedEarthFrameProvider(org.orekit.frames.TransformProvider):
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<Gradient> date): date of the transform
                 freeParameters (int): total number of free parameters in the gradient
-                indices (Map<String,Integer> indices): indices of the estimated parameters in derivatives computations
+                indices (Map<String, Integer> indices): indices of the estimated parameters in derivatives computations
         
             Returns:
                 computed transform with derivatives
@@ -535,7 +535,7 @@ class GroundStation:
                 inertial (:class:`~org.orekit.frames.Frame`): inertial frame to transform to
                 clockDate (:class:`~org.orekit.time.AbsoluteDate`): date of the transform as read by the ground station clock (i.e. clock offset *not* compensated)
                 freeParameters (int): total number of free parameters in the gradient
-                indices (Map<String,Integer> indices): indices of the estimated parameters in derivatives computations
+                indices (Map<String, Integer> indices): indices of the estimated parameters in derivatives computations
         
             Returns:
                 transform between offset frame and inertial frame, at *real* measurement date (i.e. with clock, Earth and station
@@ -556,7 +556,7 @@ class GroundStation:
                 inertial (:class:`~org.orekit.frames.Frame`): inertial frame to transform to
                 offsetCompensatedDate (:class:`~org.orekit.time.FieldAbsoluteDate`<Gradient> offsetCompensatedDate): date of the transform, clock offset and its derivatives already compensated
                 freeParameters (int): total number of free parameters in the gradient
-                indices (Map<String,Integer> indices): indices of the estimated parameters in derivatives computations
+                indices (Map<String, Integer> indices): indices of the estimated parameters in derivatives computations
         
             Returns:
                 transform between offset frame and inertial frame, at specified date
@@ -862,7 +862,8 @@ class EstimatedMeasurement(ComparableMeasurement, typing.Generic[_EstimatedMeasu
         """
             Get state size.
         
-            Warning, the null method must have been called before this method is called.
+            Warning, the :meth:`~org.orekit.estimation.measurements.EstimatedMeasurement.setStateDerivatives` method must have been
+            called before this method is called.
         
             Returns:
                 state size
@@ -1004,6 +1005,18 @@ class ObservedMeasurement(ComparableMeasurement, typing.Generic[_ObservedMeasure
         
             Returns:
                 dimension of the measurement
+        
+        
+        """
+        ...
+    def getMeasurementType(self) -> str:
+        """
+            Get the type of measurement.
+        
+            Default behavior is to return the class simple name as a String.
+        
+            Returns:
+                type of measurement
         
         
         """
@@ -1460,8 +1473,7 @@ class PythonObservedMeasurement(ObservedMeasurement[_PythonObservedMeasurement__
                 base weight
         
             Also see:
-                :meth:`~org.orekit.estimation.measurements.PythonObservedMeasurement.getTheoreticalStandardDeviation`,
-                :code:`EstimatedMeasurement#getCurrentWeight()`
+                :meth:`~org.orekit.estimation.measurements.PythonObservedMeasurement.getTheoreticalStandardDeviation`
         
         
         """
@@ -1492,6 +1504,21 @@ class PythonObservedMeasurement(ObservedMeasurement[_PythonObservedMeasurement__
         
             Returns:
                 dimension of the measurement
+        
+        
+        """
+        ...
+    def getMeasurementType(self) -> str:
+        """
+            Get the type of measurement.
+        
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.getMeasurementType`Â in
+                interfaceÂ :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
+        
+            Returns:
+                type of measurement
         
         
         """
@@ -1598,6 +1625,17 @@ class AngularAzEl(AbstractMeasurement['AngularAzEl']):
         Since:
             8.0
     """
+    MEASUREMENT_TYPE: typing.ClassVar[str] = ...
+    """
+    public static final String MEASUREMENT_TYPE
+    
+        Type of the measurement.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
     def __init__(self, groundStation: GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], doubleArray2: typing.List[float], doubleArray3: typing.List[float], observableSatellite: ObservableSatellite): ...
     def getStation(self) -> GroundStation:
         """
@@ -1620,6 +1658,17 @@ class AngularRaDec(AbstractMeasurement['AngularRaDec']):
     
         Since:
             9.0
+    """
+    MEASUREMENT_TYPE: typing.ClassVar[str] = ...
+    """
+    public static final String MEASUREMENT_TYPE
+    
+        Type of the measurement.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
     """
     def __init__(self, groundStation: GroundStation, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], doubleArray2: typing.List[float], doubleArray3: typing.List[float], observableSatellite: ObservableSatellite): ...
     def getReferenceFrame(self) -> org.orekit.frames.Frame:
@@ -1662,6 +1711,17 @@ class BistaticRange(AbstractMeasurement['BistaticRange']):
         Since:
             11.2
     """
+    MEASUREMENT_TYPE: typing.ClassVar[str] = ...
+    """
+    public static final String MEASUREMENT_TYPE
+    
+        Type of the measurement.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
     def __init__(self, groundStation: GroundStation, groundStation2: GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, observableSatellite: ObservableSatellite): ...
     def getEmitterStation(self) -> GroundStation: ...
     def getReceiverStation(self) -> GroundStation: ...
@@ -1687,6 +1747,17 @@ class BistaticRangeRate(AbstractMeasurement['BistaticRangeRate']):
     
         Since:
             11.2
+    """
+    MEASUREMENT_TYPE: typing.ClassVar[str] = ...
+    """
+    public static final String MEASUREMENT_TYPE
+    
+        Type of the measurement.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
     """
     def __init__(self, groundStation: GroundStation, groundStation2: GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, observableSatellite: ObservableSatellite): ...
     def getEmitterStation(self) -> GroundStation:
@@ -1741,6 +1812,17 @@ class InterSatellitesRange(AbstractMeasurement['InterSatellitesRange']):
         Since:
             9.0
     """
+    MEASUREMENT_TYPE: typing.ClassVar[str] = ...
+    """
+    public static final String MEASUREMENT_TYPE
+    
+        Type of the measurement.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
     def __init__(self, observableSatellite: ObservableSatellite, observableSatellite2: ObservableSatellite, boolean: bool, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float): ...
     def isTwoWay(self) -> bool:
         """
@@ -1765,6 +1847,17 @@ class MultiplexedMeasurement(AbstractMeasurement['MultiplexedMeasurement']):
         Since:
             10.1
     """
+    MEASUREMENT_TYPE: typing.ClassVar[str] = ...
+    """
+    public static final String MEASUREMENT_TYPE
+    
+        Type of the measurement.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
     def __init__(self, list: java.util.List[ObservedMeasurement[typing.Any]]): ...
     def getEstimatedMeasurements(self) -> java.util.List[EstimatedMeasurement[typing.Any]]: ...
     def getMeasurements(self) -> java.util.List[ObservedMeasurement[typing.Any]]: ...
@@ -1782,6 +1875,17 @@ class PV(AbstractMeasurement['PV']):
     
         Also see:
             :class:`~org.orekit.estimation.measurements.Position`
+    """
+    MEASUREMENT_TYPE: typing.ClassVar[str] = ...
+    """
+    public static final String MEASUREMENT_TYPE
+    
+        Type of the measurement.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
     """
     @typing.overload
     def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float, double2: float, double3: float, observableSatellite: ObservableSatellite): ...
@@ -1857,6 +1961,17 @@ class Position(AbstractMeasurement['Position']):
     
         Also see:
             :class:`~org.orekit.estimation.measurements.PV`
+    """
+    MEASUREMENT_TYPE: typing.ClassVar[str] = ...
+    """
+    public static final String MEASUREMENT_TYPE
+    
+        Type of the measurement.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
     """
     @typing.overload
     def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float, double2: float, observableSatellite: ObservableSatellite): ...
@@ -1983,6 +2098,17 @@ class Range(AbstractMeasurement['Range']):
         Since:
             8.0
     """
+    MEASUREMENT_TYPE: typing.ClassVar[str] = ...
+    """
+    public static final String MEASUREMENT_TYPE
+    
+        Type of the measurement.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
     def __init__(self, groundStation: GroundStation, boolean: bool, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, observableSatellite: ObservableSatellite): ...
     def getStation(self) -> GroundStation:
         """
@@ -2017,6 +2143,17 @@ class RangeRate(AbstractMeasurement['RangeRate']):
     
         Since:
             8.0
+    """
+    MEASUREMENT_TYPE: typing.ClassVar[str] = ...
+    """
+    public static final String MEASUREMENT_TYPE
+    
+        Type of the measurement.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
     """
     def __init__(self, groundStation: GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, boolean: bool, observableSatellite: ObservableSatellite): ...
     def getStation(self) -> GroundStation:
@@ -2059,6 +2196,17 @@ class TDOA(AbstractMeasurement['TDOA']):
         Since:
             11.2
     """
+    MEASUREMENT_TYPE: typing.ClassVar[str] = ...
+    """
+    public static final String MEASUREMENT_TYPE
+    
+        Type of the measurement.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
     def __init__(self, groundStation: GroundStation, groundStation2: GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, observableSatellite: ObservableSatellite): ...
     def getPrimeStation(self) -> GroundStation:
         """
@@ -2095,6 +2243,17 @@ class TurnAroundRange(AbstractMeasurement['TurnAroundRange']):
     
         Since:
             9.0
+    """
+    MEASUREMENT_TYPE: typing.ClassVar[str] = ...
+    """
+    public static final String MEASUREMENT_TYPE
+    
+        Type of the measurement.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
     """
     def __init__(self, groundStation: GroundStation, groundStation2: GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, observableSatellite: ObservableSatellite): ...
     def getPrimaryStation(self) -> GroundStation:

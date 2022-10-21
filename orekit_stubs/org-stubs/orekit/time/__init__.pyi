@@ -457,7 +457,7 @@ class DateTimeComponents(java.io.Serializable, java.lang.Comparable['DateTimeCom
                 offset in seconds between the two instants (positive if the instance is posterior to the argument)
         
             Also see:
-                :meth:`~org.orekit.time.DateTimeComponents.DateTimeComponents`
+                :meth:`~org.orekit.time.DateTimeComponents.%3Cinit%3E`
         
         
         """
@@ -480,6 +480,30 @@ class DateTimeComponents(java.io.Serializable, java.lang.Comparable['DateTimeCom
         
             Raises:
                 : if string cannot be parsed
+        
+        
+        """
+        ...
+    def roundIfNeeded(self, int: int, int2: int) -> 'DateTimeComponents':
+        """
+            Round this date-time to the given precision if needed to prevent rounding up to an invalid seconds number. This is
+            useful, for example, when writing custom date-time formatting methods so one does not, e.g., end up with "60.0" seconds
+            during a normal minute when the value of seconds is :code:`59.999`. This method will instead round up the minute, hour,
+            day, month, and year as needed.
+        
+            Parameters:
+                minuteDuration (int): 59, 60, 61, or 62 seconds depending on the date being close to a leap second introduction and the magnitude of the leap
+                    second.
+                fractionDigits (int): the number of decimal digits after the decimal point in the seconds number that will be printed. This date-time is
+                    rounded to :code:`fractionDigits` after the decimal point if necessary to prevent rounding up to :code:`minuteDuration`.
+                    :code:`fractionDigits` must be greater than or equal to :code:`0`.
+        
+            Returns:
+                a date-time within :code:`0.5 * 10**-fractionDigits` seconds of this, and with a seconds number that will not round up
+                to :code:`minuteDuration` when rounded to :code:`fractionDigits` after the decimal point.
+        
+            Since:
+                11.3
         
         
         """
@@ -626,7 +650,7 @@ _FieldTimeInterpolable__T = typing.TypeVar('_FieldTimeInterpolable__T', bound='F
 _FieldTimeInterpolable__KK = typing.TypeVar('_FieldTimeInterpolable__KK', bound=org.hipparchus.CalculusFieldElement)  # <KK>
 class FieldTimeInterpolable(typing.Generic[_FieldTimeInterpolable__T, _FieldTimeInterpolable__KK]):
     """
-    public interface FieldTimeInterpolable<T extends FieldTimeInterpolable<T,KK>,KK extends CalculusFieldElement<KK>>
+    public interface FieldTimeInterpolable<T extends FieldTimeInterpolable<T, KK>, KK extends CalculusFieldElement<KK>>
     
         This interface represents objects that can be interpolated in time.
     """
@@ -639,7 +663,7 @@ _FieldTimeShiftable__T = typing.TypeVar('_FieldTimeShiftable__T', bound=FieldTim
 _FieldTimeShiftable__KK = typing.TypeVar('_FieldTimeShiftable__KK', bound=org.hipparchus.CalculusFieldElement)  # <KK>
 class FieldTimeShiftable(typing.Generic[_FieldTimeShiftable__T, _FieldTimeShiftable__KK]):
     """
-    public interface FieldTimeShiftable<T extends :class:`~org.orekit.time.FieldTimeInterpolable`<T,KK>,KK extends CalculusFieldElement<KK>>
+    public interface FieldTimeShiftable<T extends :class:`~org.orekit.time.FieldTimeInterpolable`<T, KK>, KK extends CalculusFieldElement<KK>>
     
         This interface represents objects that can be shifted in time.
     
@@ -1011,7 +1035,7 @@ class TimeComponents(java.io.Serializable, java.lang.Comparable['TimeComponents'
             .. code-block: java
             
             
-                  0 <= secondInDayA + secondInDayB < 86400
+                 0 <= secondInDayA + secondInDayB < 86400
                  :code:`0 <= (secondInDayA + secondInDayB) % 60 + leap <= minuteDuration`
                  :code:`0 <= leap <= minuteDuration - 60                        if minuteDuration >= 60`
                  :code:`0 >= leap >= minuteDuration - 60                        if minuteDuration <  60`
@@ -2038,18 +2062,20 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
             location view (mainly for input/output or conversions)
     
             locations represent the coordinate of one event with respect to a :class:`~org.orekit.time.TimeScale`. The related
-            methods are :meth:`~org.orekit.time.AbsoluteDate.AbsoluteDate`, :meth:`~org.orekit.time.AbsoluteDate.AbsoluteDate`,
-            :meth:`~org.orekit.time.AbsoluteDate.AbsoluteDate`, :meth:`~org.orekit.time.AbsoluteDate.AbsoluteDate`, null,
-            :meth:`~org.orekit.time.AbsoluteDate.toDate`, :meth:`~org.orekit.time.AbsoluteDate.toString`,
-            :meth:`~org.orekit.time.AbsoluteDate.toString`, and :meth:`~org.orekit.time.AbsoluteDate.timeScalesOffset`.
+            methods are :meth:`~org.orekit.time.AbsoluteDate.%3Cinit%3E`, :meth:`~org.orekit.time.AbsoluteDate.%3Cinit%3E`,
+            :meth:`~org.orekit.time.AbsoluteDate.%3Cinit%3E`, :meth:`~org.orekit.time.AbsoluteDate.%3Cinit%3E`,
+            :meth:`~org.orekit.time.AbsoluteDate.parseCCSDSCalendarSegmentedTimeCode`, :meth:`~org.orekit.time.AbsoluteDate.toDate`,
+            :meth:`~org.orekit.time.AbsoluteDate.toString`, :meth:`~org.orekit.time.AbsoluteDate.toString`, and
+            :meth:`~org.orekit.time.AbsoluteDate.timeScalesOffset`.
           - 
             offset view (mainly for physical computation)
     
             offsets represent either the flow of time between two events (two instances of the class) or durations. They are counted
             in seconds, are continuous and could be measured using only a virtually perfect stopwatch. The related methods are
-            :meth:`~org.orekit.time.AbsoluteDate.AbsoluteDate`, null, null, :meth:`~org.orekit.time.AbsoluteDate.durationFrom`,
-            :meth:`~org.orekit.time.AbsoluteDate.compareTo`, :meth:`~org.orekit.time.AbsoluteDate.equals` and
-            :meth:`~org.orekit.time.AbsoluteDate.hashCode`.
+            :meth:`~org.orekit.time.AbsoluteDate.%3Cinit%3E`, :meth:`~org.orekit.time.AbsoluteDate.parseCCSDSUnsegmentedTimeCode`,
+            :meth:`~org.orekit.time.AbsoluteDate.parseCCSDSDaySegmentedTimeCode`,
+            :meth:`~org.orekit.time.AbsoluteDate.durationFrom`, :meth:`~org.orekit.time.AbsoluteDate.compareTo`,
+            :meth:`~org.orekit.time.AbsoluteDate.equals` and :meth:`~org.orekit.time.AbsoluteDate.hashCode`.
     
     
         A few reference epochs which are commonly used in space systems have been defined. These epochs can be used as the basis
@@ -2338,7 +2364,7 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
             This method gives the same result (with less computation) as calling :meth:`~org.orekit.time.AbsoluteDate.offsetFrom`
             with a second argument set to one of the regular scales cited above.
         
-            This method is the reverse of the :meth:`~org.orekit.time.AbsoluteDate.AbsoluteDate` constructor.
+            This method is the reverse of the :meth:`~org.orekit.time.AbsoluteDate.%3Cinit%3E` constructor.
         
             Parameters:
                 instant (:class:`~org.orekit.time.AbsoluteDate`): instant to subtract from the instance
@@ -2347,7 +2373,7 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
                 offset in seconds between the two instants (positive if the instance is posterior to the argument)
         
             Also see:
-                :meth:`~org.orekit.time.AbsoluteDate.offsetFrom`, :meth:`~org.orekit.time.AbsoluteDate.AbsoluteDate`
+                :meth:`~org.orekit.time.AbsoluteDate.offsetFrom`, :meth:`~org.orekit.time.AbsoluteDate.%3Cinit%3E`
         
         
         """
@@ -2643,7 +2669,7 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
             the physical duration of the corresponding time interval as returned by the
             :meth:`~org.orekit.time.AbsoluteDate.durationFrom` method is 2 seconds.
         
-            This method is the reverse of the :meth:`~org.orekit.time.AbsoluteDate.AbsoluteDate` constructor.
+            This method is the reverse of the :meth:`~org.orekit.time.AbsoluteDate.%3Cinit%3E` constructor.
         
             Parameters:
                 instant (:class:`~org.orekit.time.AbsoluteDate`): instant to subtract from the instance
@@ -2653,7 +2679,7 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
                 apparent clock offset in seconds between the two instants (positive if the instance is posterior to the argument)
         
             Also see:
-                :meth:`~org.orekit.time.AbsoluteDate.durationFrom`, :meth:`~org.orekit.time.AbsoluteDate.AbsoluteDate`
+                :meth:`~org.orekit.time.AbsoluteDate.durationFrom`, :meth:`~org.orekit.time.AbsoluteDate.%3Cinit%3E`
         
         
         """
@@ -3446,18 +3472,20 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], TimeShiftable['
             location view (mainly for input/output or conversions)
     
             locations represent the coordinate of one event with respect to a :class:`~org.orekit.time.TimeScale`. The related
-            methods are :meth:`~org.orekit.time.FieldAbsoluteDate.FieldAbsoluteDate`,
-            :meth:`~org.orekit.time.FieldAbsoluteDate.FieldAbsoluteDate`,
-            :meth:`~org.orekit.time.FieldAbsoluteDate.FieldAbsoluteDate`,
-            :meth:`~org.orekit.time.FieldAbsoluteDate.FieldAbsoluteDate`, :meth:`~org.orekit.time.FieldAbsoluteDate.createGPSDate`,
-            null, :meth:`~org.orekit.time.FieldAbsoluteDate.toDate`, :meth:`~org.orekit.time.FieldAbsoluteDate.toString`,
+            methods are :meth:`~org.orekit.time.FieldAbsoluteDate.%3Cinit%3E`,
+            :meth:`~org.orekit.time.FieldAbsoluteDate.%3Cinit%3E`, :meth:`~org.orekit.time.FieldAbsoluteDate.%3Cinit%3E`,
+            :meth:`~org.orekit.time.FieldAbsoluteDate.%3Cinit%3E`, :meth:`~org.orekit.time.FieldAbsoluteDate.createGPSDate`,
+            :meth:`~org.orekit.time.FieldAbsoluteDate.parseCCSDSCalendarSegmentedTimeCode`,
+            :meth:`~org.orekit.time.FieldAbsoluteDate.toDate`, :meth:`~org.orekit.time.FieldAbsoluteDate.toString`,
             :meth:`~org.orekit.time.FieldAbsoluteDate.toString`, and :meth:`~org.orekit.time.FieldAbsoluteDate.timeScalesOffset`.
           - 
             offset view (mainly for physical computation)
     
             offsets represent either the flow of time between two events (two instances of the class) or durations. They are counted
             in seconds, are continuous and could be measured using only a virtually perfect stopwatch. The related methods are
-            :meth:`~org.orekit.time.FieldAbsoluteDate.FieldAbsoluteDate`, null, null,
+            :meth:`~org.orekit.time.FieldAbsoluteDate.%3Cinit%3E`,
+            :meth:`~org.orekit.time.FieldAbsoluteDate.parseCCSDSUnsegmentedTimeCode`,
+            :meth:`~org.orekit.time.FieldAbsoluteDate.parseCCSDSDaySegmentedTimeCode`,
             :meth:`~org.orekit.time.FieldAbsoluteDate.durationFrom`, :meth:`~org.orekit.time.FieldAbsoluteDate.compareTo`,
             :meth:`~org.orekit.time.FieldAbsoluteDate.equals` and :meth:`~org.orekit.time.FieldAbsoluteDate.hashCode`.
     
@@ -3663,7 +3691,7 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], TimeShiftable['
             :meth:`~org.orekit.time.FieldAbsoluteDate.offsetFrom` with a second argument set to one of the regular scales cited
             above.
         
-            This method is the reverse of the :meth:`~org.orekit.time.FieldAbsoluteDate.FieldAbsoluteDate` constructor.
+            This method is the reverse of the :meth:`~org.orekit.time.FieldAbsoluteDate.%3Cinit%3E` constructor.
         
             Parameters:
                 instant (:class:`~org.orekit.time.AbsoluteDate`): instant to subtract from the instance
@@ -3672,7 +3700,7 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], TimeShiftable['
                 offset in seconds between the two instants (positive if the instance is posterior to the argument)
         
             Also see:
-                :meth:`~org.orekit.time.FieldAbsoluteDate.offsetFrom`, :meth:`~org.orekit.time.FieldAbsoluteDate.FieldAbsoluteDate`
+                :meth:`~org.orekit.time.FieldAbsoluteDate.offsetFrom`, :meth:`~org.orekit.time.FieldAbsoluteDate.%3Cinit%3E`
         
         
         """
@@ -4553,7 +4581,7 @@ class GNSSDate(java.io.Serializable, TimeStamped):
                 9.3.1
         
             Also see:
-                :meth:`~org.orekit.time.GNSSDate.setRolloverReference`, :meth:`~org.orekit.time.GNSSDate.GNSSDate`
+                :meth:`~org.orekit.time.GNSSDate.setRolloverReference`, :meth:`~org.orekit.time.GNSSDate.%3Cinit%3E`
         
         
         """
@@ -4576,7 +4604,7 @@ class GNSSDate(java.io.Serializable, TimeStamped):
         """
             Set a reference date for ensuring continuity across GNSS week rollover.
         
-            Instance created using the :meth:`~org.orekit.time.GNSSDate.GNSSDate` constructor and with a week number between 0 and
+            Instance created using the :meth:`~org.orekit.time.GNSSDate.%3Cinit%3E` constructor and with a week number between 0 and
             the constellation week cycle (cycleW) after this method has been called will fix the week number to ensure they
             correspond to dates between :code:`reference - cycleW / 2 weeks` and :code:`reference + cycleW / 2 weeks`.
         
@@ -4590,7 +4618,7 @@ class GNSSDate(java.io.Serializable, TimeStamped):
                 9.3.1
         
             Also see:
-                :meth:`~org.orekit.time.GNSSDate.getRolloverReference`, :meth:`~org.orekit.time.GNSSDate.GNSSDate`
+                :meth:`~org.orekit.time.GNSSDate.getRolloverReference`, :meth:`~org.orekit.time.GNSSDate.%3Cinit%3E`
         
         
         """
@@ -4929,7 +4957,7 @@ _PythonFieldTimeInterpolable__T = typing.TypeVar('_PythonFieldTimeInterpolable__
 _PythonFieldTimeInterpolable__KK = typing.TypeVar('_PythonFieldTimeInterpolable__KK', bound=org.hipparchus.CalculusFieldElement)  # <KK>
 class PythonFieldTimeInterpolable(FieldTimeInterpolable[_PythonFieldTimeInterpolable__T, _PythonFieldTimeInterpolable__KK], typing.Generic[_PythonFieldTimeInterpolable__T, _PythonFieldTimeInterpolable__KK]):
     """
-    public class PythonFieldTimeInterpolable<T extends :class:`~org.orekit.time.FieldTimeInterpolable`<T,KK>,KK extends CalculusFieldElement<KK>> extends Object implements :class:`~org.orekit.time.FieldTimeInterpolable`<T,KK>
+    public class PythonFieldTimeInterpolable<T extends :class:`~org.orekit.time.FieldTimeInterpolable`<T, KK>, KK extends CalculusFieldElement<KK>> extends Object implements :class:`~org.orekit.time.FieldTimeInterpolable`<T, KK>
     """
     def __init__(self): ...
     @typing.overload
@@ -4941,7 +4969,7 @@ _PythonFieldTimeShiftable__T = typing.TypeVar('_PythonFieldTimeShiftable__T', bo
 _PythonFieldTimeShiftable__KK = typing.TypeVar('_PythonFieldTimeShiftable__KK', bound=org.hipparchus.CalculusFieldElement)  # <KK>
 class PythonFieldTimeShiftable(FieldTimeShiftable[_PythonFieldTimeShiftable__T, _PythonFieldTimeShiftable__KK], typing.Generic[_PythonFieldTimeShiftable__T, _PythonFieldTimeShiftable__KK]):
     """
-    public class PythonFieldTimeShiftable<T extends :class:`~org.orekit.time.FieldTimeInterpolable`<T,KK>,KK extends CalculusFieldElement<KK>> extends Object implements :class:`~org.orekit.time.FieldTimeShiftable`<T,KK>
+    public class PythonFieldTimeShiftable<T extends :class:`~org.orekit.time.FieldTimeInterpolable`<T, KK>, KK extends CalculusFieldElement<KK>> extends Object implements :class:`~org.orekit.time.FieldTimeShiftable`<T, KK>
     """
     def __init__(self): ...
     def finalize(self) -> None: ...

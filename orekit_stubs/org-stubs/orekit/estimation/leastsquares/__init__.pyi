@@ -679,7 +679,8 @@ class PythonBatchLSObserver(BatchLSObserver):
             Notification callback for the end of each evaluation. Extension point for Python.
         
             Specified by:
-                 in interface :class:`~org.orekit.estimation.leastsquares.BatchLSObserver`
+                :meth:`~org.orekit.estimation.leastsquares.BatchLSObserver.evaluationPerformed`Â in
+                interfaceÂ :class:`~org.orekit.estimation.leastsquares.BatchLSObserver`
         
             Parameters:
                 iterationsCount (int): iterations count
@@ -807,10 +808,10 @@ class SequentialBatchLSEstimator(BatchLSEstimator):
 
 class TLEBatchLSModel(AbstractBatchLSModel):
     """
-    Deprecated. 
-    as of 11.1, replaced by :class:`~org.orekit.estimation.leastsquares.BatchLSModel`
     @Deprecated public class TLEBatchLSModel extends :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
     
+        Deprecated.
+        as of 11.1, replaced by :class:`~org.orekit.estimation.leastsquares.BatchLSModel`
         Bridge between :class:`~org.orekit.estimation.measurements.ObservedMeasurement` and null.
     
         Since:
