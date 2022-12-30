@@ -129,7 +129,7 @@ class BrouwerLyddanePropagatorTest(unittest.TestCase):
         BLFinalState = BLextrapolator.propagate(initDate.shiftedBy(timeshift))
         BLOrbit = KeplerianOrbit.cast_(OrbitType.KEPLERIAN.convertType(BLFinalState.getOrbit()))
 
-        self.assertAlmostEquals(NumOrbit.getA(), BLOrbit.getA(), delta=0.072)
+        self.assertAlmostEquals(NumOrbit.getA(), BLOrbit.getA(), delta=0.2)
         self.assertAlmostEquals(NumOrbit.getE(), BLOrbit.getE(), delta=0.00000028)
         self.assertAlmostEquals(NumOrbit.getI(), BLOrbit.getI(), delta=0.000004)
         self.assertAlmostEquals(MathUtils.normalizeAngle(NumOrbit.getPerigeeArgument(), FastMath.PI),
