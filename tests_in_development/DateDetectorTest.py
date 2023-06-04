@@ -4,7 +4,7 @@ import orekit
 orekit.initVM()
 
 from orekit.pyhelpers import  setup_orekit_curdir
-setup_orekit_curdir("resources")
+setup_orekit_curdir("../test/resources")
 
 from org.hipparchus.ode.nonstiff import AdaptiveStepsizeIntegrator
 
@@ -49,6 +49,8 @@ class DateDetectorTest(unittest.TestCase):
                 return True
 
         class InterpolatorStepHandler(PythonOrekitStepHandler):
+            def init(self, spacecraftState: SpacecraftState, absoluteDate: AbsoluteDate) -> None:
+                pass
 
             def handleStep(self, interpolator, isLast):
                 prev = interpolator.getPreviousState()
@@ -59,6 +61,9 @@ class DateDetectorTest(unittest.TestCase):
                 restricted_curr = restricted.getCurrentState()
                 restricted_dt = restricted_curr.getDate().durationFrom(restricted_prev.getDate())
                 self.assertEqual(dt * 0.5, restricted_dt, 1.0e-10)
+
+            def finish(self, spacecraftState: SpacecraftState) -> None:
+                pass
 
         self.propagator.addAdditionalDerivativesProvider(DummyAdditionalDerivativesProvider())
         self.propagator.setInitialState(self.propagator.getInitialState().addAdditionalState("dummy", JArray_double([0.0])))
