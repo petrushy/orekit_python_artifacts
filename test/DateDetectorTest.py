@@ -20,9 +20,6 @@ from org.orekit.utils import PVCoordinates
 from org.hipparchus.geometry.euclidean.threed import Vector3D
 from org.hipparchus.ode.nonstiff import DormandPrince853Integrator
 from orekit import JArray_double
-from orekit.pyhelpers import setup_orekit_curdir
-
-setup_orekit_curdir()
 
 
 class DateDetectorTest(unittest.TestCase):

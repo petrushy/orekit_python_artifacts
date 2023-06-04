@@ -24,7 +24,7 @@ from org.orekit.data import DataContext, DirectoryCrawler
 class OrekitFixedRateTest(unittest.TestCase):
     def setUp(self):
         DM = DataContext.getDefault().getDataProvidersManager()
-        datafile = File('../tests_in_development/resources')
+        datafile = File('resources')
         if not datafile.exists():
             print('File :', datafile.absolutePath, ' not found')
 
