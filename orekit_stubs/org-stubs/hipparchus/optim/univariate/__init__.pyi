@@ -9,7 +9,7 @@ import typing
 
 class BracketFinder:
     """
-    public class BracketFinder extends Object
+    public class BracketFinder extends :class:`~org.hipparchus.optim.univariate.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Provide an interval that brackets a local optimum of a function. This code is based on a Python implementation (from
         *SciPy*, module :code:`optimize.py` v0.5).
@@ -107,13 +107,13 @@ class BracketFinder:
             Search new points that bracket a local optimum of the function.
         
             Parameters:
-                func (UnivariateFunction): Function whose optimum should be bracketed.
+                func (:class:`~org.hipparchus.optim.univariate.https:.www.hipparchus.org.hipparchus`): Function whose optimum should be bracketed.
                 goal (:class:`~org.hipparchus.optim.nonlinear.scalar.GoalType`): :class:`~org.hipparchus.optim.nonlinear.scalar.GoalType`.
                 xA (double): Initial point.
                 xB (double): Initial point.
         
             Raises:
-                : if the maximum number of evaluations is exceeded.
+                :class:`~org.hipparchus.optim.univariate.https:.www.hipparchus.org.hipparchus`: if the maximum number of evaluations is exceeded.
         
         
         """
@@ -137,7 +137,7 @@ class SimpleUnivariateValueChecker(org.hipparchus.optim.AbstractConvergenceCheck
 
 class UnivariateObjectiveFunction(org.hipparchus.optim.OptimizationData):
     """
-    public class UnivariateObjectiveFunction extends Object implements :class:`~org.hipparchus.optim.OptimizationData`
+    public class UnivariateObjectiveFunction extends :class:`~org.hipparchus.optim.univariate.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.optim.OptimizationData`
     
         Scalar function to be optimized.
     """
@@ -202,7 +202,7 @@ class UnivariateOptimizer(org.hipparchus.optim.BaseOptimizer['UnivariatePointVal
 
 class UnivariatePointValuePair(java.io.Serializable):
     """
-    public class UnivariatePointValuePair extends Object implements Serializable
+    public class UnivariatePointValuePair extends :class:`~org.hipparchus.optim.univariate.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.optim.univariate.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         This class holds a point and the value of an objective function at this point. This is a simple immutable container.
     

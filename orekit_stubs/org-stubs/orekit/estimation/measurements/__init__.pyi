@@ -20,7 +20,7 @@ import typing
 
 class ComparableMeasurement(org.orekit.time.TimeStamped, java.lang.Comparable['ComparableMeasurement']):
     """
-    public interface ComparableMeasurement extends :class:`~org.orekit.time.TimeStamped`, Comparable<:class:`~org.orekit.estimation.measurements.ComparableMeasurement`>
+    public interface ComparableMeasurement extends :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`<:class:`~org.orekit.estimation.measurements.ComparableMeasurement`>
     
         Base interface for comparing measurements regardless of their type.
     
@@ -32,10 +32,13 @@ class ComparableMeasurement(org.orekit.time.TimeStamped, java.lang.Comparable['C
         
             Measurements comparison is primarily chronological, but measurements with the same date are sorted based on the observed
             value. Even if they have the same value too, they will *not* be considered equal if they correspond to different
-            instances. This allows to store measurements in null without losing any measurements, even redundant ones.
+            instances. This allows to store measurements in
+            :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.util.SortedSet?is` without
+            losing any measurements, even redundant ones.
         
             Specified by:
-                 in interface 
+                :meth:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable.html?is` in
+                interface :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`
         
         
         """
@@ -55,7 +58,7 @@ class ComparableMeasurement(org.orekit.time.TimeStamped, java.lang.Comparable['C
 
 class EstimatedEarthFrameProvider(org.orekit.frames.TransformProvider):
     """
-    public class EstimatedEarthFrameProvider extends Object implements :class:`~org.orekit.frames.TransformProvider`
+    public class EstimatedEarthFrameProvider extends :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.TransformProvider`
     
         Class modeling an Earth frame whose Earth Orientation Parameters can be estimated.
     
@@ -191,8 +194,8 @@ class EstimatedEarthFrameProvider(org.orekit.frames.TransformProvider):
             override it for better performance.
         
             Specified by:
-                :meth:`~org.orekit.frames.TransformProvider.getStaticTransform`Â in
-                interfaceÂ :class:`~org.orekit.frames.TransformProvider`
+                :meth:`~org.orekit.frames.TransformProvider.getStaticTransform` in
+                interface :class:`~org.orekit.frames.TransformProvider`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date.
@@ -218,17 +221,14 @@ class EstimatedEarthFrameProvider(org.orekit.frames.TransformProvider):
             Returns:
                 transform at specified date
         
-        """
-        ...
-    @typing.overload
-    def getTransform(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[org.hipparchus.analysis.differentiation.Gradient], int: int, map: typing.Union[java.util.Map[str, int], typing.Mapping[str, int]]) -> org.orekit.frames.FieldTransform[org.hipparchus.analysis.differentiation.Gradient]:
-        """
+        public :class:`~org.orekit.frames.FieldTransform`<:class:`~org.orekit.estimation.measurements.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.differentiation.Gradient?is`> getTransform (:class:`~org.orekit.time.FieldAbsoluteDate`<:class:`~org.orekit.estimation.measurements.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.differentiation.Gradient?is`> date, int freeParameters, :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.util.Map?is`<:class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`, :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`> indices)
+        
             Get the transform with derivatives.
         
             Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<Gradient> date): date of the transform
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<:class:`~org.orekit.estimation.measurements.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.differentiation.Gradient?is`> date): date of the transform
                 freeParameters (int): total number of free parameters in the gradient
-                indices (Map<String, Integer> indices): indices of the estimated parameters in derivatives computations
+                indices (:class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.util.Map?is`<:class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`, :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`> indices): indices of the estimated parameters in derivatives computations
         
             Returns:
                 computed transform with derivatives
@@ -239,6 +239,8 @@ class EstimatedEarthFrameProvider(org.orekit.frames.TransformProvider):
         
         """
         ...
+    @typing.overload
+    def getTransform(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[org.hipparchus.analysis.differentiation.Gradient], int: int, map: typing.Union[java.util.Map[str, int], typing.Mapping[str, int]]) -> org.orekit.frames.FieldTransform[org.hipparchus.analysis.differentiation.Gradient]: ...
     @typing.overload
     def getTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.frames.Transform:
         """
@@ -323,7 +325,7 @@ class EstimationsProvider:
 
 class GroundStation:
     """
-    public class GroundStation extends Object
+    public class GroundStation extends :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Class modeling a ground station that can perform some measurements.
     
@@ -363,7 +365,7 @@ class GroundStation:
     """
     OFFSET_SUFFIX: typing.ClassVar[str] = ...
     """
-    public static final String OFFSET_SUFFIX
+    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` OFFSET_SUFFIX
     
         Suffix for ground station position and clock offset parameters names.
     
@@ -374,7 +376,7 @@ class GroundStation:
     """
     DRIFT_SUFFIX: typing.ClassVar[str] = ...
     """
-    public static final String DRIFT_SUFFIX
+    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DRIFT_SUFFIX
     
         Suffix for ground clock drift parameters name.
     
@@ -385,7 +387,7 @@ class GroundStation:
     """
     INTERMEDIATE_SUFFIX: typing.ClassVar[str] = ...
     """
-    public static final String INTERMEDIATE_SUFFIX
+    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` INTERMEDIATE_SUFFIX
     
         Suffix for ground station intermediate frame name.
     
@@ -524,49 +526,7 @@ class GroundStation:
         """
         ...
     @typing.overload
-    def getOffsetToInertial(self, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, int: int, map: typing.Union[java.util.Map[str, int], typing.Mapping[str, int]]) -> org.orekit.frames.FieldTransform[org.hipparchus.analysis.differentiation.Gradient]:
-        """
-            Get the transform between offset frame and inertial frame with derivatives.
-        
-            As the East and North vectors are not well defined at pole, the derivatives of these two vectors diverge to infinity as
-            we get closer to the pole. So this method should not be used for stations less than 0.0001 degree from either poles.
-        
-            Parameters:
-                inertial (:class:`~org.orekit.frames.Frame`): inertial frame to transform to
-                clockDate (:class:`~org.orekit.time.AbsoluteDate`): date of the transform as read by the ground station clock (i.e. clock offset *not* compensated)
-                freeParameters (int): total number of free parameters in the gradient
-                indices (Map<String, Integer> indices): indices of the estimated parameters in derivatives computations
-        
-            Returns:
-                transform between offset frame and inertial frame, at *real* measurement date (i.e. with clock, Earth and station
-                offsets applied)
-        
-            Since:
-                10.2
-        
-            Also see:
-                :meth:`~org.orekit.estimation.measurements.GroundStation.getOffsetToInertial`
-        
-            Get the transform between offset frame and inertial frame with derivatives.
-        
-            As the East and North vectors are not well defined at pole, the derivatives of these two vectors diverge to infinity as
-            we get closer to the pole. So this method should not be used for stations less than 0.0001 degree from either poles.
-        
-            Parameters:
-                inertial (:class:`~org.orekit.frames.Frame`): inertial frame to transform to
-                offsetCompensatedDate (:class:`~org.orekit.time.FieldAbsoluteDate`<Gradient> offsetCompensatedDate): date of the transform, clock offset and its derivatives already compensated
-                freeParameters (int): total number of free parameters in the gradient
-                indices (Map<String, Integer> indices): indices of the estimated parameters in derivatives computations
-        
-            Returns:
-                transform between offset frame and inertial frame, at specified date
-        
-            Since:
-                10.2
-        
-        
-        """
-        ...
+    def getOffsetToInertial(self, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, int: int, map: typing.Union[java.util.Map[str, int], typing.Mapping[str, int]]) -> org.orekit.frames.FieldTransform[org.hipparchus.analysis.differentiation.Gradient]: ...
     @typing.overload
     def getOffsetToInertial(self, frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[org.hipparchus.analysis.differentiation.Gradient], int: int, map: typing.Union[java.util.Map[str, int], typing.Mapping[str, int]]) -> org.orekit.frames.FieldTransform[org.hipparchus.analysis.differentiation.Gradient]: ...
     @typing.overload
@@ -585,6 +545,49 @@ class GroundStation:
             Returns:
                 transform between offset frame and inertial frame, at *real* measurement date (i.e. with clock, Earth and station
                 offsets applied)
+        
+        public :class:`~org.orekit.frames.FieldTransform`<:class:`~org.orekit.estimation.measurements.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.differentiation.Gradient?is`> getOffsetToInertial (:class:`~org.orekit.frames.Frame` inertial, :class:`~org.orekit.time.AbsoluteDate` clockDate, int freeParameters, :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.util.Map?is`<:class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`, :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`> indices)
+        
+            Get the transform between offset frame and inertial frame with derivatives.
+        
+            As the East and North vectors are not well defined at pole, the derivatives of these two vectors diverge to infinity as
+            we get closer to the pole. So this method should not be used for stations less than 0.0001 degree from either poles.
+        
+            Parameters:
+                inertial (:class:`~org.orekit.frames.Frame`): inertial frame to transform to
+                clockDate (:class:`~org.orekit.time.AbsoluteDate`): date of the transform as read by the ground station clock (i.e. clock offset *not* compensated)
+                freeParameters (int): total number of free parameters in the gradient
+                indices (:class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.util.Map?is`<:class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`, :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`> indices): indices of the estimated parameters in derivatives computations
+        
+            Returns:
+                transform between offset frame and inertial frame, at *real* measurement date (i.e. with clock, Earth and station
+                offsets applied)
+        
+            Since:
+                10.2
+        
+            Also see:
+                :meth:`~org.orekit.estimation.measurements.GroundStation.getOffsetToInertial`
+        
+        public :class:`~org.orekit.frames.FieldTransform`<:class:`~org.orekit.estimation.measurements.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.differentiation.Gradient?is`> getOffsetToInertial (:class:`~org.orekit.frames.Frame` inertial, :class:`~org.orekit.time.FieldAbsoluteDate`<:class:`~org.orekit.estimation.measurements.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.differentiation.Gradient?is`> offsetCompensatedDate, int freeParameters, :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.util.Map?is`<:class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`, :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`> indices)
+        
+            Get the transform between offset frame and inertial frame with derivatives.
+        
+            As the East and North vectors are not well defined at pole, the derivatives of these two vectors diverge to infinity as
+            we get closer to the pole. So this method should not be used for stations less than 0.0001 degree from either poles.
+        
+            Parameters:
+                inertial (:class:`~org.orekit.frames.Frame`): inertial frame to transform to
+                offsetCompensatedDate (:class:`~org.orekit.time.FieldAbsoluteDate`<:class:`~org.orekit.estimation.measurements.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.differentiation.Gradient?is`> offsetCompensatedDate): date of the transform, clock offset and its derivatives already compensated
+                freeParameters (int): total number of free parameters in the gradient
+                indices (:class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.util.Map?is`<:class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`, :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`> indices): indices of the estimated parameters in derivatives computations
+        
+            Returns:
+                transform between offset frame and inertial frame, at specified date
+        
+            Since:
+                10.2
+        
         
         """
         ...
@@ -676,7 +679,7 @@ class GroundStation:
 
 class ObservableSatellite:
     """
-    public class ObservableSatellite extends Object
+    public class ObservableSatellite extends :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Class modeling a satellite that can be observed.
     
@@ -685,7 +688,7 @@ class ObservableSatellite:
     """
     CLOCK_OFFSET_PREFIX: typing.ClassVar[str] = ...
     """
-    public static final String CLOCK_OFFSET_PREFIX
+    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` CLOCK_OFFSET_PREFIX
     
         Prefix for clock offset parameter driver, the propagator index will be appended to it.
     
@@ -696,7 +699,7 @@ class ObservableSatellite:
     """
     CLOCK_DRIFT_PREFIX: typing.ClassVar[str] = ...
     """
-    public static final String CLOCK_DRIFT_PREFIX
+    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` CLOCK_DRIFT_PREFIX
     
         Prefix for clock drift parameter driver, the propagator index will be appended to it.
     
@@ -749,7 +752,7 @@ class ObservableSatellite:
 _EstimatedMeasurement__T = typing.TypeVar('_EstimatedMeasurement__T', bound='ObservedMeasurement')  # <T>
 class EstimatedMeasurement(ComparableMeasurement, typing.Generic[_EstimatedMeasurement__T]):
     """
-    public class EstimatedMeasurement<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends Object implements :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
+    public class EstimatedMeasurement<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
     
         Class holding an estimated theoretical value associated to an
         :class:`~org.orekit.estimation.measurements.ObservedMeasurement`.
@@ -819,8 +822,8 @@ class EstimatedMeasurement(ComparableMeasurement, typing.Generic[_EstimatedMeasu
             The observed value is the value that was measured by the instrument.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.ComparableMeasurement.getObservedValue`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
+                :meth:`~org.orekit.estimation.measurements.ComparableMeasurement.getObservedValue` in
+                interface :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
         
             Returns:
                 observed value
@@ -1067,7 +1070,7 @@ class ObservedMeasurement(ComparableMeasurement, typing.Generic[_ObservedMeasure
 
 class PythonComparableMeasurement(ComparableMeasurement):
     """
-    public class PythonComparableMeasurement extends Object implements :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
+    public class PythonComparableMeasurement extends :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
     """
     def __init__(self): ...
     def compareTo(self, comparableMeasurement: ComparableMeasurement) -> int:
@@ -1075,19 +1078,24 @@ class PythonComparableMeasurement(ComparableMeasurement):
         
             Measurements comparison is primarily chronological, but measurements with the same date are sorted based on the observed
             value. Even if they have the same value too, they will *not* be considered equal if they correspond to different
-            instances. This allows to store measurements in null without losing any measurements, even redundant ones.
+            instances. This allows to store measurements in
+            :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.util.SortedSet?is` without
+            losing any measurements, even redundant ones.
             Extension point for Python.
         
             Measurements comparison is primarily chronological, but measurements with the same date are sorted based on the observed
             value. Even if they have the same value too, they will *not* be considered equal if they correspond to different
-            instances. This allows to store measurements in null without losing any measurements, even redundant ones.
+            instances. This allows to store measurements in
+            :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.util.SortedSet?is` without
+            losing any measurements, even redundant ones.
         
             Specified by:
-                 in interface 
+                :meth:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable.html?is` in
+                interface :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.ComparableMeasurement.compareTo`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
+                :meth:`~org.orekit.estimation.measurements.ComparableMeasurement.compareTo` in
+                interface :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
         
             Parameters:
                 other (:class:`~org.orekit.estimation.measurements.ComparableMeasurement`): 
@@ -1115,8 +1123,8 @@ class PythonComparableMeasurement(ComparableMeasurement):
             The observed value is the value that was measured by the instrument.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.ComparableMeasurement.getObservedValue`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
+                :meth:`~org.orekit.estimation.measurements.ComparableMeasurement.getObservedValue` in
+                interface :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
         
             Returns:
                 observed value (array of size :code:`#getDimension()`
@@ -1147,7 +1155,7 @@ class PythonComparableMeasurement(ComparableMeasurement):
 _PythonEstimationModifier__T = typing.TypeVar('_PythonEstimationModifier__T', bound=ObservedMeasurement)  # <T>
 class PythonEstimationModifier(EstimationModifier[_PythonEstimationModifier__T], typing.Generic[_PythonEstimationModifier__T]):
     """
-    public class PythonEstimationModifier<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<T>
+    public class PythonEstimationModifier<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<T>
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -1175,7 +1183,7 @@ class PythonEstimationModifier(EstimationModifier[_PythonEstimationModifier__T],
 
 class PythonEstimationsProvider(EstimationsProvider):
     """
-    public class PythonEstimationsProvider extends Object implements :class:`~org.orekit.estimation.measurements.EstimationsProvider`
+    public class PythonEstimationsProvider extends :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.EstimationsProvider`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -1184,8 +1192,8 @@ class PythonEstimationsProvider(EstimationsProvider):
             Get one estimated measurement.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.EstimationsProvider.getEstimatedMeasurement`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.EstimationsProvider`
+                :meth:`~org.orekit.estimation.measurements.EstimationsProvider.getEstimatedMeasurement` in
+                interface :class:`~org.orekit.estimation.measurements.EstimationsProvider`
         
             Parameters:
                 index (int): index of the estimated measurement, must be between 0 and
@@ -1202,8 +1210,8 @@ class PythonEstimationsProvider(EstimationsProvider):
             Get the number of evaluations available.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.EstimationsProvider.getNumber`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.EstimationsProvider`
+                :meth:`~org.orekit.estimation.measurements.EstimationsProvider.getNumber` in
+                interface :class:`~org.orekit.estimation.measurements.EstimationsProvider`
         
             Returns:
                 number of evaluations available
@@ -1234,7 +1242,7 @@ class PythonEstimationsProvider(EstimationsProvider):
 _AbstractMeasurement__T = typing.TypeVar('_AbstractMeasurement__T', bound=ObservedMeasurement)  # <T>
 class AbstractMeasurement(ObservedMeasurement[_AbstractMeasurement__T], typing.Generic[_AbstractMeasurement__T]):
     """
-    public abstract class AbstractMeasurement<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends Object implements :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>
+    public abstract class AbstractMeasurement<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>
     
         Abstract class handling measurements boilerplate.
     
@@ -1253,8 +1261,8 @@ class AbstractMeasurement(ObservedMeasurement[_AbstractMeasurement__T], typing.G
             0 and 1 (but it can really have any non-negative value).
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.getBaseWeight`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
+                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.getBaseWeight` in
+                interface :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
         
             Returns:
                 base weight
@@ -1266,28 +1274,7 @@ class AbstractMeasurement(ObservedMeasurement[_AbstractMeasurement__T], typing.G
         """
         ...
     @staticmethod
-    def getCoordinates(spacecraftState: org.orekit.propagation.SpacecraftState, int: int, int2: int) -> org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.analysis.differentiation.Gradient]:
-        """
-            Get Cartesian coordinates as derivatives.
-        
-            The position will correspond to variables :code:`firstDerivative`, :code:`firstDerivative + 1` and
-            :code:`firstDerivative + 2`. The velocity will correspond to variables :code:`firstDerivative + 3`,
-            :code:`firstDerivative + 4` and :code:`firstDerivative + 5`. The acceleration will correspond to constants.
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): state of the satellite considered
-                firstDerivative (int): index of the first derivative
-                freeParameters (int): total number of free parameters in the gradient
-        
-            Returns:
-                Cartesian coordinates as derivatives
-        
-            Since:
-                10.2
-        
-        
-        """
-        ...
+    def getCoordinates(spacecraftState: org.orekit.propagation.SpacecraftState, int: int, int2: int) -> org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.analysis.differentiation.Gradient]: ...
     def getDate(self) -> org.orekit.time.AbsoluteDate:
         """
             Get the date.
@@ -1309,8 +1296,8 @@ class AbstractMeasurement(ObservedMeasurement[_AbstractMeasurement__T], typing.G
             range-rate, but 6 for a position-velocity measurement.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.getDimension`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
+                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.getDimension` in
+                interface :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
         
             Returns:
                 dimension of the measurement
@@ -1326,8 +1313,8 @@ class AbstractMeasurement(ObservedMeasurement[_AbstractMeasurement__T], typing.G
             The observed value is the value that was measured by the instrument.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.ComparableMeasurement.getObservedValue`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
+                :meth:`~org.orekit.estimation.measurements.ComparableMeasurement.getObservedValue` in
+                interface :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
         
             Returns:
                 observed value
@@ -1346,8 +1333,8 @@ class AbstractMeasurement(ObservedMeasurement[_AbstractMeasurement__T], typing.G
             as the measurement itself (i.e. when a residual is divided by this value, it becomes dimensionless).
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.getTheoreticalStandardDeviation`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
+                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.getTheoreticalStandardDeviation` in
+                interface :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
         
             Returns:
                 expected standard deviation
@@ -1363,8 +1350,8 @@ class AbstractMeasurement(ObservedMeasurement[_AbstractMeasurement__T], typing.G
             Check if a measurement is enabled.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.isEnabled`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
+                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.isEnabled` in
+                interface :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
         
             Returns:
                 true if the measurement is enabled
@@ -1380,8 +1367,8 @@ class AbstractMeasurement(ObservedMeasurement[_AbstractMeasurement__T], typing.G
             be an outlier as per current estimated covariance).
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.setEnabled`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
+                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.setEnabled` in
+                interface :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
         
             Parameters:
                 enabled (boolean): if true the measurement will be enabled, otherwise it will be disabled
@@ -1398,7 +1385,7 @@ class AbstractMeasurement(ObservedMeasurement[_AbstractMeasurement__T], typing.G
         
             Parameters:
                 adjustableEmitterPV (:class:`~org.orekit.utils.TimeStampedPVCoordinates`): position/velocity of emitter that may be adjusted
-                receiverPosition (Vector3D): fixed position of receiver at :code:`signalArrivalDate`, in the same frame as :code:`adjustableEmitterPV`
+                receiverPosition (:class:`~org.orekit.estimation.measurements.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): fixed position of receiver at :code:`signalArrivalDate`, in the same frame as :code:`adjustableEmitterPV`
                 signalArrivalDate (:class:`~org.orekit.time.AbsoluteDate`): date at which the signal arrives to receiver
         
             Returns:
@@ -1414,7 +1401,7 @@ class AbstractMeasurement(ObservedMeasurement[_AbstractMeasurement__T], typing.G
         
             Parameters:
                 adjustableEmitterPV (:class:`~org.orekit.utils.TimeStampedFieldPVCoordinates`<T> adjustableEmitterPV): position/velocity of emitter that may be adjusted
-                receiverPosition (FieldVector3D<T> receiverPosition): fixed position of receiver at :code:`signalArrivalDate`, in the same frame as :code:`adjustableEmitterPV`
+                receiverPosition (:class:`~org.orekit.estimation.measurements.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> receiverPosition): fixed position of receiver at :code:`signalArrivalDate`, in the same frame as :code:`adjustableEmitterPV`
                 signalArrivalDate (:class:`~org.orekit.time.FieldAbsoluteDate`<T> signalArrivalDate): date at which the signal arrives to receiver
         
             Returns:
@@ -1427,7 +1414,7 @@ class AbstractMeasurement(ObservedMeasurement[_AbstractMeasurement__T], typing.G
 _PythonObservedMeasurement__T = typing.TypeVar('_PythonObservedMeasurement__T', bound=ObservedMeasurement)  # <T>
 class PythonObservedMeasurement(ObservedMeasurement[_PythonObservedMeasurement__T], typing.Generic[_PythonObservedMeasurement__T]):
     """
-    public class PythonObservedMeasurement<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends Object implements :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>
+    public class PythonObservedMeasurement<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>
     """
     def __init__(self): ...
     def addModifier(self, estimationModifier: EstimationModifier[_PythonObservedMeasurement__T]) -> None: ...
@@ -1436,18 +1423,23 @@ class PythonObservedMeasurement(ObservedMeasurement[_PythonObservedMeasurement__
         
             Measurements comparison is primarily chronological, but measurements with the same date are sorted based on the observed
             value. Even if they have the same value too, they will *not* be considered equal if they correspond to different
-            instances. This allows to store measurements in null without losing any measurements, even redundant ones.
+            instances. This allows to store measurements in
+            :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.util.SortedSet?is` without
+            losing any measurements, even redundant ones.
         
             Measurements comparison is primarily chronological, but measurements with the same date are sorted based on the observed
             value. Even if they have the same value too, they will *not* be considered equal if they correspond to different
-            instances. This allows to store measurements in null without losing any measurements, even redundant ones.
+            instances. This allows to store measurements in
+            :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.util.SortedSet?is` without
+            losing any measurements, even redundant ones.
         
             Specified by:
-                 in interface 
+                :meth:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable.html?is` in
+                interface :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.ComparableMeasurement.compareTo`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
+                :meth:`~org.orekit.estimation.measurements.ComparableMeasurement.compareTo` in
+                interface :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
         
             Parameters:
                 other (:class:`~org.orekit.estimation.measurements.ComparableMeasurement`): 
@@ -1466,8 +1458,8 @@ class PythonObservedMeasurement(ObservedMeasurement[_PythonObservedMeasurement__
             between 0 and 1 (but it can really have any non-negative value).
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.getBaseWeight`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
+                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.getBaseWeight` in
+                interface :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
         
             Returns:
                 base weight
@@ -1499,8 +1491,8 @@ class PythonObservedMeasurement(ObservedMeasurement[_PythonObservedMeasurement__
             range-rate, but 6 for a position-velocity measurement.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.getDimension`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
+                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.getDimension` in
+                interface :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
         
             Returns:
                 dimension of the measurement
@@ -1514,8 +1506,8 @@ class PythonObservedMeasurement(ObservedMeasurement[_PythonObservedMeasurement__
         
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.getMeasurementType`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
+                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.getMeasurementType` in
+                interface :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
         
             Returns:
                 type of measurement
@@ -1531,8 +1523,8 @@ class PythonObservedMeasurement(ObservedMeasurement[_PythonObservedMeasurement__
             The observed value is the value that was measured by the instrument.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.ComparableMeasurement.getObservedValue`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
+                :meth:`~org.orekit.estimation.measurements.ComparableMeasurement.getObservedValue` in
+                interface :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
         
             Returns:
                 observed value (array of size :meth:`~org.orekit.estimation.measurements.PythonObservedMeasurement.getDimension`
@@ -1551,8 +1543,8 @@ class PythonObservedMeasurement(ObservedMeasurement[_PythonObservedMeasurement__
             as the measurement itself (i.e. when a residual is divided by this value, it becomes dimensionless).
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.getTheoreticalStandardDeviation`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
+                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.getTheoreticalStandardDeviation` in
+                interface :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
         
             Returns:
                 expected standard deviation
@@ -1568,8 +1560,8 @@ class PythonObservedMeasurement(ObservedMeasurement[_PythonObservedMeasurement__
             Check if a measurement is enabled.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.isEnabled`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
+                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.isEnabled` in
+                interface :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
         
             Returns:
                 true if the measurement is enabled
@@ -1604,8 +1596,8 @@ class PythonObservedMeasurement(ObservedMeasurement[_PythonObservedMeasurement__
             be an outlier as per current estimated covariance).
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.setEnabled`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
+                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.setEnabled` in
+                interface :class:`~org.orekit.estimation.measurements.ObservedMeasurement`
         
             Parameters:
                 enabled (boolean): if true the measurement will be enabled, otherwise it will be disabled
@@ -1627,7 +1619,7 @@ class AngularAzEl(AbstractMeasurement['AngularAzEl']):
     """
     MEASUREMENT_TYPE: typing.ClassVar[str] = ...
     """
-    public static final String MEASUREMENT_TYPE
+    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEASUREMENT_TYPE
     
         Type of the measurement.
     
@@ -1661,7 +1653,7 @@ class AngularRaDec(AbstractMeasurement['AngularRaDec']):
     """
     MEASUREMENT_TYPE: typing.ClassVar[str] = ...
     """
-    public static final String MEASUREMENT_TYPE
+    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEASUREMENT_TYPE
     
         Type of the measurement.
     
@@ -1713,7 +1705,7 @@ class BistaticRange(AbstractMeasurement['BistaticRange']):
     """
     MEASUREMENT_TYPE: typing.ClassVar[str] = ...
     """
-    public static final String MEASUREMENT_TYPE
+    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEASUREMENT_TYPE
     
         Type of the measurement.
     
@@ -1750,7 +1742,7 @@ class BistaticRangeRate(AbstractMeasurement['BistaticRangeRate']):
     """
     MEASUREMENT_TYPE: typing.ClassVar[str] = ...
     """
-    public static final String MEASUREMENT_TYPE
+    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEASUREMENT_TYPE
     
         Type of the measurement.
     
@@ -1800,10 +1792,10 @@ class InterSatellitesRange(AbstractMeasurement['InterSatellitesRange']):
           - as measurement date is evaluated at reception time, the real physical date of the measurement is the observed date to
             which the local satellite clock offset is subtracted
           - as range is evaluated using the total signal time of flight, for one-way measurements the observed range is the real
-            physical signal time of flight to which (ÃŽâ€�tl - ÃŽâ€�tr) Ã¢Â¨â€° c is added, where ÃŽâ€�tl (resp. ÃŽâ€�tr) is the
-            clock offset for the local satellite (resp. remote satellite). A similar effect exists in two-way measurements but it is
-            computed as (ÃŽâ€�tl - ÃŽâ€�tl) Ã¢Â¨â€° c / 2 as the local satellite clock is used for both initial emission and final
-            reception and therefore it evaluates to zero.
+            physical signal time of flight to which (Δtl - Δtr) ⨉ c is added, where Δtl (resp. Δtr) is the clock offset for
+            the local satellite (resp. remote satellite). A similar effect exists in two-way measurements but it is computed as
+            (Δtl - Δtl) ⨉ c / 2 as the local satellite clock is used for both initial emission and final reception and therefore
+            it evaluates to zero.
     
     
         The motion of both satellites during the signal flight time is taken into account. The date of the measurement
@@ -1814,7 +1806,7 @@ class InterSatellitesRange(AbstractMeasurement['InterSatellitesRange']):
     """
     MEASUREMENT_TYPE: typing.ClassVar[str] = ...
     """
-    public static final String MEASUREMENT_TYPE
+    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEASUREMENT_TYPE
     
         Type of the measurement.
     
@@ -1849,7 +1841,7 @@ class MultiplexedMeasurement(AbstractMeasurement['MultiplexedMeasurement']):
     """
     MEASUREMENT_TYPE: typing.ClassVar[str] = ...
     """
-    public static final String MEASUREMENT_TYPE
+    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEASUREMENT_TYPE
     
         Type of the measurement.
     
@@ -1878,7 +1870,7 @@ class PV(AbstractMeasurement['PV']):
     """
     MEASUREMENT_TYPE: typing.ClassVar[str] = ...
     """
-    public static final String MEASUREMENT_TYPE
+    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEASUREMENT_TYPE
     
         Type of the measurement.
     
@@ -1903,12 +1895,12 @@ class PV(AbstractMeasurement['PV']):
         
             This is the 6x6 matrix M such that:
         
-            Mij = Pij/(Ïƒi.Ïƒj)
+            Mij = Pij/(σi.σj)
         
             Where:
         
               - P is the covariance matrix
-              - Ïƒi is the i-th standard deviation (ÏƒiÂ² = Pii)
+              - σi is the i-th standard deviation (σi² = Pii)
         
         
             Returns:
@@ -1964,7 +1956,7 @@ class Position(AbstractMeasurement['Position']):
     """
     MEASUREMENT_TYPE: typing.ClassVar[str] = ...
     """
-    public static final String MEASUREMENT_TYPE
+    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEASUREMENT_TYPE
     
         Type of the measurement.
     
@@ -1985,12 +1977,12 @@ class Position(AbstractMeasurement['Position']):
         
             This is the 3x3 matrix M such that:
         
-            Mij = Pij/(Ïƒi.Ïƒj)
+            Mij = Pij/(σi.σj)
         
             Where:
         
               - P is the covariance matrix
-              - Ïƒi is the i-th standard deviation (ÏƒiÂ² = Pii)
+              - σi is the i-th standard deviation (σi² = Pii)
         
         
             Returns:
@@ -2031,8 +2023,8 @@ class PythonAbstractMeasurement(AbstractMeasurement[_PythonAbstractMeasurement__
             Add a parameter driver.
         
             Overrides:
-                :meth:`~org.orekit.estimation.measurements.AbstractMeasurement.addParameterDriver`Â in
-                classÂ :class:`~org.orekit.estimation.measurements.AbstractMeasurement`
+                :meth:`~org.orekit.estimation.measurements.AbstractMeasurement.addParameterDriver` in
+                class :class:`~org.orekit.estimation.measurements.AbstractMeasurement`
         
             Parameters:
                 driver (:class:`~org.orekit.utils.ParameterDriver`): parameter driver to add
@@ -2088,10 +2080,10 @@ class Range(AbstractMeasurement['Range']):
           - as measurement date is evaluated at reception time, the real physical date of the measurement is the observed date to
             which the receiving ground station clock offset is subtracted
           - as range is evaluated using the total signal time of flight, for one-way measurements the observed range is the real
-            physical signal time of flight to which (ÃŽâ€�tg - ÃŽâ€�ts) Ã¢Â¨â€° c is added, where ÃŽâ€�tg (resp. ÃŽâ€�ts) is the
-            clock offset for the receiving ground station (resp. emitting satellite). A similar effect exists in two-way
-            measurements but it is computed as (ÃŽâ€�tg - ÃŽâ€�tg) Ã¢Â¨â€° c / 2 as the same ground station clock is used for
-            initial emission and final reception and therefore it evaluates to zero.
+            physical signal time of flight to which (Δtg - Δts) ⨉ c is added, where Δtg (resp. Δts) is the clock offset for
+            the receiving ground station (resp. emitting satellite). A similar effect exists in two-way measurements but it is
+            computed as (Δtg - Δtg) ⨉ c / 2 as the same ground station clock is used for initial emission and final reception
+            and therefore it evaluates to zero.
     
     
     
@@ -2100,7 +2092,7 @@ class Range(AbstractMeasurement['Range']):
     """
     MEASUREMENT_TYPE: typing.ClassVar[str] = ...
     """
-    public static final String MEASUREMENT_TYPE
+    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEASUREMENT_TYPE
     
         Type of the measurement.
     
@@ -2146,7 +2138,7 @@ class RangeRate(AbstractMeasurement['RangeRate']):
     """
     MEASUREMENT_TYPE: typing.ClassVar[str] = ...
     """
-    public static final String MEASUREMENT_TYPE
+    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEASUREMENT_TYPE
     
         Type of the measurement.
     
@@ -2198,7 +2190,7 @@ class TDOA(AbstractMeasurement['TDOA']):
     """
     MEASUREMENT_TYPE: typing.ClassVar[str] = ...
     """
-    public static final String MEASUREMENT_TYPE
+    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEASUREMENT_TYPE
     
         Type of the measurement.
     
@@ -2246,7 +2238,7 @@ class TurnAroundRange(AbstractMeasurement['TurnAroundRange']):
     """
     MEASUREMENT_TYPE: typing.ClassVar[str] = ...
     """
-    public static final String MEASUREMENT_TYPE
+    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEASUREMENT_TYPE
     
         Type of the measurement.
     

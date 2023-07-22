@@ -14,7 +14,7 @@ import typing
 
 class BodyShape(java.io.Serializable):
     """
-    public interface BodyShape extends Serializable
+    public interface BodyShape extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Interface representing the rigid surface shape of a natural body.
     
@@ -42,8 +42,8 @@ class BodyShape(java.io.Serializable):
             one that is closest to the close point.
         
             Parameters:
-                line (FieldLine<T> line): test line (may intersect the body or not)
-                close (FieldVector3D<T> close): point used for intersections selection
+                line (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldLine?is`<T> line): test line (may intersect the body or not)
+                close (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> close): point used for intersections selection
                 frame (:class:`~org.orekit.frames.Frame`): frame in which line is expressed
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the line in given frame
         
@@ -66,8 +66,8 @@ class BodyShape(java.io.Serializable):
             one that is closest to the close point.
         
             Parameters:
-                line (Line): test line (may intersect the body or not)
-                close (Vector3D): point used for intersections selection
+                line (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Line?is`): test line (may intersect the body or not)
+                close (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point used for intersections selection
                 frame (:class:`~org.orekit.frames.Frame`): frame in which line is expressed
                 date (:class:`~org.orekit.time.AbsoluteDate`): date of the line in given frame
         
@@ -82,7 +82,7 @@ class BodyShape(java.io.Serializable):
             Project a point to the ground.
         
             Parameters:
-                point (Vector3D): point to project
+                point (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point to project
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
                 frame (:class:`~org.orekit.frames.Frame`): frame in which moving point is expressed
         
@@ -143,7 +143,7 @@ class BodyShape(java.io.Serializable):
             Transform a Cartesian point to a surface-relative point.
         
             Parameters:
-                point (Vector3D): Cartesian point
+                point (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): Cartesian point
                 frame (:class:`~org.orekit.frames.Frame`): frame in which Cartesian point is expressed
                 date (:class:`~org.orekit.time.AbsoluteDate`): date of the computation (used for frames conversions)
         
@@ -166,7 +166,7 @@ class BodyShape(java.io.Serializable):
             Transform a Cartesian point to a surface-relative point.
         
             Parameters:
-                point (FieldVector3D<T> point): Cartesian point
+                point (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> point): Cartesian point
                 frame (:class:`~org.orekit.frames.Frame`): frame in which Cartesian point is expressed
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the computation (used for frames conversions)
         
@@ -183,7 +183,7 @@ class BodyShape(java.io.Serializable):
 
 class CR3BPFactory:
     """
-    public class CR3BPFactory extends Object
+    public class CR3BPFactory extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Factory class creating predefined CR3BP system using CR3BPSystem class. For example, Earth-Moon CR3BP System.
     
@@ -218,7 +218,7 @@ class CR3BPFactory:
 
 class CR3BPSystem:
     """
-    public class CR3BPSystem extends Object
+    public class CR3BPSystem extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Class creating, from two different celestial bodies, the corresponding system with respect to the Circular Restricted
         Three Body problem hypotheses.
@@ -376,7 +376,7 @@ class CelestialBodies:
             :class:`~org.orekit.bodies.CelestialBodyFactory`.
         
             Parameters:
-                name (String): name of the celestial body
+                name (:class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the celestial body
         
             Returns:
                 celestial body
@@ -525,7 +525,7 @@ class CelestialBodies:
 
 class CelestialBody(java.io.Serializable, org.orekit.utils.ExtendedPVCoordinatesProvider):
     """
-    public interface CelestialBody extends Serializable, :class:`~org.orekit.utils.ExtendedPVCoordinatesProvider`
+    public interface CelestialBody extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.orekit.utils.ExtendedPVCoordinatesProvider`
     
         Interface for celestial bodies like Sun, Moon or solar system planets.
     
@@ -552,7 +552,7 @@ class CelestialBody(java.io.Serializable, org.orekit.utils.ExtendedPVCoordinates
             Get the attraction coefficient of the body.
         
             Returns:
-                attraction coefficient of the body (mÂ³/sÂ²)
+                attraction coefficient of the body (m³/s²)
         
         
         """
@@ -586,7 +586,7 @@ class CelestialBody(java.io.Serializable, org.orekit.utils.ExtendedPVCoordinates
 
 class CelestialBodyFactory:
     """
-    public class CelestialBodyFactory extends Object
+    public class CelestialBodyFactory extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Factory class for bodies of the solar system.
     
@@ -607,7 +607,7 @@ class CelestialBodyFactory:
     """
     SOLAR_SYSTEM_BARYCENTER: typing.ClassVar[str] = ...
     """
-    public static final String SOLAR_SYSTEM_BARYCENTER
+    public static final :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` SOLAR_SYSTEM_BARYCENTER
     
         Predefined name for solar system barycenter.
     
@@ -618,7 +618,7 @@ class CelestialBodyFactory:
     """
     SUN: typing.ClassVar[str] = ...
     """
-    public static final String SUN
+    public static final :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` SUN
     
         Predefined name for Sun.
     
@@ -629,7 +629,7 @@ class CelestialBodyFactory:
     """
     MERCURY: typing.ClassVar[str] = ...
     """
-    public static final String MERCURY
+    public static final :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MERCURY
     
         Predefined name for Mercury.
     
@@ -640,7 +640,7 @@ class CelestialBodyFactory:
     """
     VENUS: typing.ClassVar[str] = ...
     """
-    public static final String VENUS
+    public static final :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` VENUS
     
         Predefined name for Venus.
     
@@ -651,7 +651,7 @@ class CelestialBodyFactory:
     """
     EARTH_MOON: typing.ClassVar[str] = ...
     """
-    public static final String EARTH_MOON
+    public static final :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` EARTH_MOON
     
         Predefined name for Earth-Moon barycenter.
     
@@ -662,7 +662,7 @@ class CelestialBodyFactory:
     """
     EARTH: typing.ClassVar[str] = ...
     """
-    public static final String EARTH
+    public static final :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` EARTH
     
         Predefined name for Earth.
     
@@ -673,7 +673,7 @@ class CelestialBodyFactory:
     """
     MOON: typing.ClassVar[str] = ...
     """
-    public static final String MOON
+    public static final :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MOON
     
         Predefined name for Moon.
     
@@ -684,7 +684,7 @@ class CelestialBodyFactory:
     """
     MARS: typing.ClassVar[str] = ...
     """
-    public static final String MARS
+    public static final :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MARS
     
         Predefined name for Mars.
     
@@ -695,7 +695,7 @@ class CelestialBodyFactory:
     """
     JUPITER: typing.ClassVar[str] = ...
     """
-    public static final String JUPITER
+    public static final :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` JUPITER
     
         Predefined name for Jupiter.
     
@@ -706,7 +706,7 @@ class CelestialBodyFactory:
     """
     SATURN: typing.ClassVar[str] = ...
     """
-    public static final String SATURN
+    public static final :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` SATURN
     
         Predefined name for Saturn.
     
@@ -717,7 +717,7 @@ class CelestialBodyFactory:
     """
     URANUS: typing.ClassVar[str] = ...
     """
-    public static final String URANUS
+    public static final :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` URANUS
     
         Predefined name for Uranus.
     
@@ -728,7 +728,7 @@ class CelestialBodyFactory:
     """
     NEPTUNE: typing.ClassVar[str] = ...
     """
-    public static final String NEPTUNE
+    public static final :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` NEPTUNE
     
         Predefined name for Neptune.
     
@@ -739,7 +739,7 @@ class CelestialBodyFactory:
     """
     PLUTO: typing.ClassVar[str] = ...
     """
-    public static final String PLUTO
+    public static final :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` PLUTO
     
         Predefined name for Pluto.
     
@@ -810,7 +810,7 @@ class CelestialBodyLoader:
             Load celestial body.
         
             Parameters:
-                name (String): name of the celestial body
+                name (:class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the celestial body
         
             Returns:
                 loaded celestial body
@@ -821,7 +821,7 @@ class CelestialBodyLoader:
 
 class Ellipse(java.io.Serializable):
     """
-    public class Ellipse extends Object implements Serializable
+    public class Ellipse extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Model of a 2D ellipse in 3D space.
     
@@ -871,7 +871,7 @@ class Ellipse(java.io.Serializable):
             Find the center of curvature (point on the evolute) at the nadir of a point.
         
             Parameters:
-                point (Vector2D): point in the ellipse plane
+                point (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.twod.Vector2D?is`): point in the ellipse plane
         
             Returns:
                 center of curvature of the ellipse directly at point nadir
@@ -931,7 +931,7 @@ class Ellipse(java.io.Serializable):
             Find the closest ellipse point.
         
             Parameters:
-                p (Vector2D): point in the ellipse plane to project on the ellipse itself
+                p (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.twod.Vector2D?is`): point in the ellipse plane to project on the ellipse itself
         
             Returns:
                 closest point belonging to 2D meridian ellipse
@@ -954,7 +954,7 @@ class Ellipse(java.io.Serializable):
             Project a point to the ellipse plane.
         
             Parameters:
-                p (Vector3D): point defined with respect to 3D frame
+                p (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point defined with respect to 3D frame
         
             Returns:
                 point defined with respect to ellipse
@@ -970,7 +970,7 @@ class Ellipse(java.io.Serializable):
             Create a point from its ellipse-relative coordinates.
         
             Parameters:
-                p (Vector2D): point defined with respect to ellipse
+                p (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.twod.Vector2D?is`): point defined with respect to ellipse
         
             Returns:
                 point defined with respect to 3D frame
@@ -984,7 +984,7 @@ class Ellipse(java.io.Serializable):
 
 class Ellipsoid(java.io.Serializable):
     """
-    public class Ellipsoid extends Object implements Serializable
+    public class Ellipsoid extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Modeling of a general three-axes ellipsoid.
     
@@ -1041,7 +1041,7 @@ class Ellipsoid(java.io.Serializable):
             Check if a point is inside the ellipsoid.
         
             Parameters:
-                point (Vector3D): point to check, in the ellipsoid frame
+                point (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point to check, in the ellipsoid frame
         
             Returns:
                 true if the point is inside the ellipsoid (or exactly on ellipsoid surface)
@@ -1057,9 +1057,10 @@ class Ellipsoid(java.io.Serializable):
 _FieldGeodeticPoint__T = typing.TypeVar('_FieldGeodeticPoint__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldGeodeticPoint(typing.Generic[_FieldGeodeticPoint__T]):
     """
-    public class FieldGeodeticPoint<T extends CalculusFieldElement<T>> extends Object
+    public class FieldGeodeticPoint<T extends :class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
-        Point location relative to a 2D body surface, using null.
+        Point location relative to a 2D body surface, using
+        :class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`.
     
         Instance of this class are guaranteed to be immutable.
     
@@ -1074,7 +1075,8 @@ class FieldGeodeticPoint(typing.Generic[_FieldGeodeticPoint__T]):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -1095,7 +1097,7 @@ class FieldGeodeticPoint(typing.Generic[_FieldGeodeticPoint__T]):
             Get the latitude.
         
             Returns:
-                latitude, an angular value in the range [-Ï€/2, Ï€/2]
+                latitude, an angular value in the range [-π/2, π/2]
         
         
         """
@@ -1105,7 +1107,7 @@ class FieldGeodeticPoint(typing.Generic[_FieldGeodeticPoint__T]):
             Get the longitude.
         
             Returns:
-                longitude, an angular value in the range [-Ï€, Ï€]
+                longitude, an angular value in the range [-π, π]
         
         
         """
@@ -1119,7 +1121,8 @@ class FieldGeodeticPoint(typing.Generic[_FieldGeodeticPoint__T]):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -1128,7 +1131,8 @@ class FieldGeodeticPoint(typing.Generic[_FieldGeodeticPoint__T]):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -1136,7 +1140,7 @@ class FieldGeodeticPoint(typing.Generic[_FieldGeodeticPoint__T]):
 
 class GeodeticPoint(java.io.Serializable):
     """
-    public class GeodeticPoint extends Object implements Serializable
+    public class GeodeticPoint extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Point location relative to a 2D body surface.
     
@@ -1172,7 +1176,8 @@ class GeodeticPoint(java.io.Serializable):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -1207,7 +1212,7 @@ class GeodeticPoint(java.io.Serializable):
             Get the latitude.
         
             Returns:
-                latitude, an angular value in the range [-Ï€/2, Ï€/2]
+                latitude, an angular value in the range [-π/2, π/2]
         
         
         """
@@ -1217,7 +1222,7 @@ class GeodeticPoint(java.io.Serializable):
             Get the longitude.
         
             Returns:
-                longitude, an angular value in the range [-Ï€, Ï€]
+                longitude, an angular value in the range [-π, π]
         
         
         """
@@ -1301,7 +1306,8 @@ class GeodeticPoint(java.io.Serializable):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -1310,7 +1316,8 @@ class GeodeticPoint(java.io.Serializable):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -1318,7 +1325,7 @@ class GeodeticPoint(java.io.Serializable):
 
 class IAUPole(java.io.Serializable):
     """
-    public interface IAUPole extends Serializable
+    public interface IAUPole extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Interface for IAU pole and prime meridian orientations.
     
@@ -1436,11 +1443,12 @@ class IAUPole(java.io.Serializable):
 
 class Loxodrome:
     """
-    public class Loxodrome extends Object
+    public class Loxodrome extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Perform calculations on a loxodrome (commonly, a rhumb line) on an ellipsoid.
     
-        A loxodrome or rhumb line is an arc on an ellipsoid's surface that intersects every meridian at the same angle.
+        A :class:`~org.orekit.bodies.https:.en.wikipedia.org.wiki.Rhumb_line` is an arc on an ellipsoid's surface that
+        intersects every meridian at the same angle.
     
         Since:
             11.3
@@ -1531,7 +1539,7 @@ class JPLEphemeridesLoader(org.orekit.data.AbstractSelfFeedingLoader, CelestialB
     """
     DEFAULT_DE_SUPPORTED_NAMES: typing.ClassVar[str] = ...
     """
-    public static final String DEFAULT_DE_SUPPORTED_NAMES
+    public static final :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_DE_SUPPORTED_NAMES
     
         Default supported files name pattern for JPL DE files.
     
@@ -1542,7 +1550,7 @@ class JPLEphemeridesLoader(org.orekit.data.AbstractSelfFeedingLoader, CelestialB
     """
     DEFAULT_INPOP_SUPPORTED_NAMES: typing.ClassVar[str] = ...
     """
-    public static final String DEFAULT_INPOP_SUPPORTED_NAMES
+    public static final :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_INPOP_SUPPORTED_NAMES
     
         Default supported files name pattern for IMCCE INPOP files.
     
@@ -1577,7 +1585,7 @@ class JPLEphemeridesLoader(org.orekit.data.AbstractSelfFeedingLoader, CelestialB
             GM_Sun, Mars gravity: GM4 or GM_Mar...).
         
             Parameters:
-                names (String...): alternate names of the constant
+                names (:class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`...): alternate names of the constant
         
             Returns:
                 value of the constant of NaN if the constant is not defined
@@ -1603,7 +1611,7 @@ class JPLEphemeridesLoader(org.orekit.data.AbstractSelfFeedingLoader, CelestialB
                 body (:class:`~org.orekit.bodies.JPLEphemeridesLoader.EphemerisType`): body for which the gravitational coefficient is requested
         
             Returns:
-                gravitational coefficient in mÂ³/sÂ²
+                gravitational coefficient in m³/s²
         
         
         """
@@ -1623,11 +1631,11 @@ class JPLEphemeridesLoader(org.orekit.data.AbstractSelfFeedingLoader, CelestialB
             Load celestial body.
         
             Specified by:
-                :meth:`~org.orekit.bodies.CelestialBodyLoader.loadCelestialBody`Â in
-                interfaceÂ :class:`~org.orekit.bodies.CelestialBodyLoader`
+                :meth:`~org.orekit.bodies.CelestialBodyLoader.loadCelestialBody` in
+                interface :class:`~org.orekit.bodies.CelestialBodyLoader`
         
             Parameters:
-                name (String): name of the celestial body
+                name (:class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the celestial body
         
             Returns:
                 loaded celestial body
@@ -1667,7 +1675,7 @@ class JPLEphemeridesLoader(org.orekit.data.AbstractSelfFeedingLoader, CelestialB
 
 class LazyLoadedCelestialBodies(CelestialBodies):
     """
-    public class LazyLoadedCelestialBodies extends Object implements :class:`~org.orekit.bodies.CelestialBodies`
+    public class LazyLoadedCelestialBodies extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.bodies.CelestialBodies`
     
         This class lazily loads auxiliary data when it is needed by a requested body. It is designed to match the behavior of
         :class:`~org.orekit.bodies.CelestialBodyFactory` in Orekit 10.0.
@@ -1684,7 +1692,7 @@ class LazyLoadedCelestialBodies(CelestialBodies):
             Add a loader for celestial bodies.
         
             Parameters:
-                name (String): name of the body (may be one of the predefined names or a user-defined name)
+                name (:class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the body (may be one of the predefined names or a user-defined name)
                 loader (:class:`~org.orekit.bodies.CelestialBodyLoader`): custom loader to add for the body
         
             Also see:
@@ -1701,12 +1709,13 @@ class LazyLoadedCelestialBodies(CelestialBodies):
             Add the default loaders for all predefined celestial bodies.
         
             Parameters:
-                supportedNames (String): regular expression for supported files names (may be null if the default JPL file names are used)
+                supportedNames (:class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for supported files names (may be null if the default JPL file names are used)
         
                     The default loaders look for DE405 or DE406 JPL ephemerides.
         
             Also see:
-                DE405 JPL ephemerides, DE406 JPL ephemerides,
+                :class:`~org.orekit.bodies.ftp:.ssd.jpl.nasa.gov.pub.eph.planets.Linux.de405`,
+                :class:`~org.orekit.bodies.ftp:.ssd.jpl.nasa.gov.pub.eph.planets.Linux.de406`,
                 :meth:`~org.orekit.bodies.LazyLoadedCelestialBodies.addCelestialBodyLoader`,
                 :meth:`~org.orekit.bodies.LazyLoadedCelestialBodies.addDefaultCelestialBodyLoader`,
                 :meth:`~org.orekit.bodies.LazyLoadedCelestialBodies.clearCelestialBodyLoaders`,
@@ -1715,13 +1724,14 @@ class LazyLoadedCelestialBodies(CelestialBodies):
             Add the default loaders for celestial bodies.
         
             Parameters:
-                name (String): name of the body (if not one of the predefined names, the method does nothing)
-                supportedNames (String): regular expression for supported files names (may be null if the default JPL file names are used)
+                name (:class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the body (if not one of the predefined names, the method does nothing)
+                supportedNames (:class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for supported files names (may be null if the default JPL file names are used)
         
                     The default loaders look for DE405 or DE406 JPL ephemerides.
         
             Also see:
-                DE405 JPL ephemerides, DE406 JPL ephemerides,
+                :class:`~org.orekit.bodies.ftp:.ssd.jpl.nasa.gov.pub.eph.planets.Linux.de405`,
+                :class:`~org.orekit.bodies.ftp:.ssd.jpl.nasa.gov.pub.eph.planets.Linux.de406`,
                 :meth:`~org.orekit.bodies.LazyLoadedCelestialBodies.addCelestialBodyLoader`,
                 :meth:`~org.orekit.bodies.LazyLoadedCelestialBodies.addDefaultCelestialBodyLoader`,
                 :meth:`~org.orekit.bodies.LazyLoadedCelestialBodies.clearCelestialBodyLoaders`,
@@ -1749,7 +1759,7 @@ class LazyLoadedCelestialBodies(CelestialBodies):
             Clear the specified celestial body from the internal cache.
         
             Parameters:
-                name (String): name of the body
+                name (:class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the body
         
         """
         ...
@@ -1777,7 +1787,7 @@ class LazyLoadedCelestialBodies(CelestialBodies):
             :class:`~org.orekit.bodies.CelestialBodyLoader`.
         
             Parameters:
-                name (String): name of the body
+                name (:class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the body
         
             Also see:
                 :meth:`~org.orekit.bodies.LazyLoadedCelestialBodies.addCelestialBodyLoader`,
@@ -1801,7 +1811,7 @@ class LazyLoadedCelestialBodies(CelestialBodies):
                 :meth:`~org.orekit.bodies.CelestialBodies.getBody` in interface :class:`~org.orekit.bodies.CelestialBodies`
         
             Parameters:
-                name (String): name of the celestial body
+                name (:class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the celestial body
         
             Returns:
                 celestial body
@@ -1833,8 +1843,8 @@ class LazyLoadedCelestialBodies(CelestialBodies):
             :meth:`~org.orekit.frames.FramesFactory.getICRF` (and therefore also :meth:`~org.orekit.frames.FramesFactory.getGCRF`)
         
             Specified by:
-                :meth:`~org.orekit.bodies.CelestialBodies.getEarthMoonBarycenter`Â in
-                interfaceÂ :class:`~org.orekit.bodies.CelestialBodies`
+                :meth:`~org.orekit.bodies.CelestialBodies.getEarthMoonBarycenter` in
+                interface :class:`~org.orekit.bodies.CelestialBodies`
         
             Returns:
                 Earth-Moon barycenter bodies pair
@@ -1950,8 +1960,8 @@ class LazyLoadedCelestialBodies(CelestialBodies):
             :meth:`~org.orekit.frames.FramesFactory.getICRF` (and therefore also :meth:`~org.orekit.frames.FramesFactory.getGCRF`)
         
             Specified by:
-                :meth:`~org.orekit.bodies.CelestialBodies.getSolarSystemBarycenter`Â in
-                interfaceÂ :class:`~org.orekit.bodies.CelestialBodies`
+                :meth:`~org.orekit.bodies.CelestialBodies.getSolarSystemBarycenter` in
+                interface :class:`~org.orekit.bodies.CelestialBodies`
         
             Returns:
                 solar system barycenter aggregated body
@@ -2105,7 +2115,8 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
     @typing.overload
     def geodeticToIsometricLatitude(self, double: float) -> float:
         """
-            Compute the isometric latitude corresponding to the provided latitude.
+            Compute the :class:`~org.orekit.bodies.https:.mathworld.wolfram.com.IsometricLatitude` corresponding to the provided
+            latitude.
         
             Parameters:
                 geodeticLatitude (double): the latitude (radians, within interval :code:`[-pi/2, +pi/2]`)
@@ -2121,7 +2132,8 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
     @typing.overload
     def geodeticToIsometricLatitude(self, t: _geodeticToIsometricLatitude_1__T) -> _geodeticToIsometricLatitude_1__T:
         """
-            Compute the isometric latitude corresponding to the provided latitude.
+            Compute the :class:`~org.orekit.bodies.https:.mathworld.wolfram.com.IsometricLatitude` corresponding to the provided
+            latitude.
         
             Parameters:
                 geodeticLatitude (T): the latitude (radians, within interval :code:`[-pi/2, +pi/2]`)
@@ -2159,8 +2171,8 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
             one that is closest to the close point.
         
             Parameters:
-                line (FieldLine<T> line): test line (may intersect the body or not)
-                close (FieldVector3D<T> close): point used for intersections selection
+                line (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldLine?is`<T> line): test line (may intersect the body or not)
+                close (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> close): point used for intersections selection
                 frame (:class:`~org.orekit.frames.Frame`): frame in which line is expressed
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the line in given frame
         
@@ -2183,8 +2195,8 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
             one that is closest to the close point.
         
             Parameters:
-                line (Line): test line (may intersect the body or not)
-                close (Vector3D): point used for intersections selection
+                line (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Line?is`): test line (may intersect the body or not)
+                close (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point used for intersections selection
                 frame (:class:`~org.orekit.frames.Frame`): frame in which line is expressed
                 date (:class:`~org.orekit.time.AbsoluteDate`): date of the line in given frame
         
@@ -2250,8 +2262,8 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
                 :meth:`~org.orekit.bodies.BodyShape.getIntersectionPoint` in interface :class:`~org.orekit.bodies.BodyShape`
         
             Parameters:
-                line (FieldLine<T> line): test line (may intersect the body or not)
-                close (FieldVector3D<T> close): point used for intersections selection
+                line (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldLine?is`<T> line): test line (may intersect the body or not)
+                close (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> close): point used for intersections selection
                 frame (:class:`~org.orekit.frames.Frame`): frame in which line is expressed
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the line in given frame
         
@@ -2274,8 +2286,8 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
                 :meth:`~org.orekit.bodies.BodyShape.getIntersectionPoint` in interface :class:`~org.orekit.bodies.BodyShape`
         
             Parameters:
-                line (Line): test line (may intersect the body or not)
-                close (Vector3D): point used for intersections selection
+                line (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Line?is`): test line (may intersect the body or not)
+                close (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point used for intersections selection
                 frame (:class:`~org.orekit.frames.Frame`): frame in which line is expressed
                 date (:class:`~org.orekit.time.AbsoluteDate`): date of the line in given frame
         
@@ -2293,7 +2305,7 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
                 :meth:`~org.orekit.bodies.BodyShape.projectToGround` in interface :class:`~org.orekit.bodies.BodyShape`
         
             Parameters:
-                point (Vector3D): point to project
+                point (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point to project
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
                 frame (:class:`~org.orekit.frames.Frame`): frame in which moving point is expressed
         
@@ -2375,8 +2387,9 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
         
             Transform a Cartesian point to a surface-relative point.
         
-            This method is based on Toshio Fukushima's algorithm which uses Halley's method. transformation from Cartesian to
-            Geodetic Coordinates Accelerated by Halley's Method, Toshio Fukushima, Journal of Geodesy 9(12):689-693, February 2006
+            This method is based on Toshio Fukushima's algorithm which uses Halley's method.
+            :class:`~org.orekit.bodies.https:.www.researchgate.net.publication.227215135_Transformation_from_Cartesian_to_Geodetic_Coordinates_Accelerated_by_Halley's_Method`,
+            Toshio Fukushima, Journal of Geodesy 9(12):689-693, February 2006
         
             Some changes have been added to the original method:
         
@@ -2389,12 +2402,43 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
                 :meth:`~org.orekit.bodies.BodyShape.transform` in interface :class:`~org.orekit.bodies.BodyShape`
         
             Parameters:
-                point (Vector3D): Cartesian point
+                point (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): Cartesian point
                 frame (:class:`~org.orekit.frames.Frame`): frame in which Cartesian point is expressed
                 date (:class:`~org.orekit.time.AbsoluteDate`): date of the computation (used for frames conversions)
         
             Returns:
                 point at the same location but as a surface-relative point
+        
+        """
+        ...
+    @typing.overload
+    def transform(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transform_2__T], frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_transform_2__T]) -> FieldGeodeticPoint[_transform_2__T]:
+        """
+            Transform a Cartesian point to a surface-relative point.
+        
+            This method is based on Toshio Fukushima's algorithm which uses Halley's method.
+            :class:`~org.orekit.bodies.https:.www.researchgate.net.publication.227215135_Transformation_from_Cartesian_to_Geodetic_Coordinates_Accelerated_by_Halley's_Method`,
+            Toshio Fukushima, Journal of Geodesy 9(12):689-693, February 2006
+        
+            Some changes have been added to the original method:
+        
+              - in order to handle more accurately corner cases near the pole
+              - in order to handle properly corner cases near the equatorial plane, even far inside the ellipsoid
+              - in order to handle very flat ellipsoids
+        
+        
+            Specified by:
+                :meth:`~org.orekit.bodies.BodyShape.transform` in interface :class:`~org.orekit.bodies.BodyShape`
+        
+            Parameters:
+                point (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> point): Cartesian point
+                frame (:class:`~org.orekit.frames.Frame`): frame in which Cartesian point is expressed
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the computation (used for frames conversions)
+        
+            Returns:
+                point at the same location but as a surface-relative point
+        
+        public :class:`~org.orekit.bodies.FieldGeodeticPoint`<:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.differentiation.DerivativeStructure?is`> transform (:class:`~org.orekit.utils.PVCoordinates` point, :class:`~org.orekit.frames.Frame` frame, :class:`~org.orekit.time.AbsoluteDate` date)
         
             Transform a Cartesian point to a surface-relative point.
         
@@ -2410,41 +2454,13 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
         """
         ...
     @typing.overload
-    def transform(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transform_2__T], frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_transform_2__T]) -> FieldGeodeticPoint[_transform_2__T]:
-        """
-            Transform a Cartesian point to a surface-relative point.
-        
-            This method is based on Toshio Fukushima's algorithm which uses Halley's method. transformation from Cartesian to
-            Geodetic Coordinates Accelerated by Halley's Method, Toshio Fukushima, Journal of Geodesy 9(12):689-693, February 2006
-        
-            Some changes have been added to the original method:
-        
-              - in order to handle more accurately corner cases near the pole
-              - in order to handle properly corner cases near the equatorial plane, even far inside the ellipsoid
-              - in order to handle very flat ellipsoids
-        
-        
-            Specified by:
-                :meth:`~org.orekit.bodies.BodyShape.transform` in interface :class:`~org.orekit.bodies.BodyShape`
-        
-            Parameters:
-                point (FieldVector3D<T> point): Cartesian point
-                frame (:class:`~org.orekit.frames.Frame`): frame in which Cartesian point is expressed
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the computation (used for frames conversions)
-        
-            Returns:
-                point at the same location but as a surface-relative point
-        
-        """
-        ...
-    @typing.overload
     def transform(self, pVCoordinates: org.orekit.utils.PVCoordinates, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> FieldGeodeticPoint[org.hipparchus.analysis.differentiation.DerivativeStructure]: ...
     @typing.overload
     def transform(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> GeodeticPoint: ...
 
 class PythonBodyShape(BodyShape):
     """
-    public class PythonBodyShape extends Object implements :class:`~org.orekit.bodies.BodyShape`
+    public class PythonBodyShape extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.bodies.BodyShape`
     
     
         Also see:
@@ -2479,8 +2495,8 @@ class PythonBodyShape(BodyShape):
                 :meth:`~org.orekit.bodies.BodyShape.getIntersectionPoint` in interface :class:`~org.orekit.bodies.BodyShape`
         
             Parameters:
-                line (FieldLine<T> line): test line (may intersect the body or not)
-                close (FieldVector3D<T> close): point used for intersections selection
+                line (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldLine?is`<T> line): test line (may intersect the body or not)
+                close (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> close): point used for intersections selection
                 frame (:class:`~org.orekit.frames.Frame`): frame in which line is expressed
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the line in given frame
         
@@ -2506,8 +2522,8 @@ class PythonBodyShape(BodyShape):
                 :meth:`~org.orekit.bodies.BodyShape.getIntersectionPoint` in interface :class:`~org.orekit.bodies.BodyShape`
         
             Parameters:
-                line (Line): test line (may intersect the body or not)
-                close (Vector3D): point used for intersections selection
+                line (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Line?is`): test line (may intersect the body or not)
+                close (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point used for intersections selection
                 frame (:class:`~org.orekit.frames.Frame`): frame in which line is expressed
                 date (:class:`~org.orekit.time.AbsoluteDate`): date of the line in given frame
         
@@ -2525,7 +2541,7 @@ class PythonBodyShape(BodyShape):
                 :meth:`~org.orekit.bodies.BodyShape.projectToGround` in interface :class:`~org.orekit.bodies.BodyShape`
         
             Parameters:
-                point (Vector3D): point to project
+                point (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point to project
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
                 frame (:class:`~org.orekit.frames.Frame`): frame in which moving point is expressed
         
@@ -2594,7 +2610,7 @@ class PythonBodyShape(BodyShape):
                 :meth:`~org.orekit.bodies.BodyShape.transform` in interface :class:`~org.orekit.bodies.BodyShape`
         
             Parameters:
-                point (Vector3D): Cartesian point
+                point (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): Cartesian point
                 frame (:class:`~org.orekit.frames.Frame`): frame in which Cartesian point is expressed
                 date (:class:`~org.orekit.time.AbsoluteDate`): date of the computation (used for frames conversions)
         
@@ -2612,6 +2628,13 @@ class PythonBodyShape(BodyShape):
             Returns:
                 point at the same location but as a Cartesian point
         
+        """
+        ...
+    @typing.overload
+    def transform(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> GeodeticPoint: ...
+    @typing.overload
+    def transform(self, fieldGeodeticPoint: FieldGeodeticPoint[_transform_2__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transform_2__T]:
+        """
             Transform a surface-relative point to a Cartesian point. Redirects to FieldVector3Dtransfor(...) for Python extension.
         
             Specified by:
@@ -2630,10 +2653,6 @@ class PythonBodyShape(BodyShape):
         """
         ...
     @typing.overload
-    def transform(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> GeodeticPoint: ...
-    @typing.overload
-    def transform(self, fieldGeodeticPoint: FieldGeodeticPoint[_transform_2__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transform_2__T]: ...
-    @typing.overload
     def transform(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_transform_3__T], frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_transform_3__T]) -> FieldGeodeticPoint[_transform_3__T]:
         """
             Transform a Cartesian point to a surface-relative point. Redirects to transform_FFF(...) for Python extension
@@ -2642,7 +2661,7 @@ class PythonBodyShape(BodyShape):
                 :meth:`~org.orekit.bodies.BodyShape.transform` in interface :class:`~org.orekit.bodies.BodyShape`
         
             Parameters:
-                point (FieldVector3D<T> point): Cartesian point
+                point (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> point): Cartesian point
                 frame (:class:`~org.orekit.frames.Frame`): frame in which Cartesian point is expressed
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the computation (used for frames conversions)
         
@@ -2677,7 +2696,7 @@ class PythonBodyShape(BodyShape):
             Transform a Cartesian point to a surface-relative point. Extension point for Python.
         
             Parameters:
-                point (FieldVector3D<T> point): Cartesian point
+                point (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> point): Cartesian point
                 frame (:class:`~org.orekit.frames.Frame`): frame in which Cartesian point is expressed
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the computation (used for frames conversions)
         
@@ -2693,7 +2712,7 @@ class PythonBodyShape(BodyShape):
 
 class PythonCelestialBodies(CelestialBodies):
     """
-    public class PythonCelestialBodies extends Object implements :class:`~org.orekit.bodies.CelestialBodies`
+    public class PythonCelestialBodies extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.bodies.CelestialBodies`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -2706,7 +2725,7 @@ class PythonCelestialBodies(CelestialBodies):
                 :meth:`~org.orekit.bodies.CelestialBodies.getBody` in interface :class:`~org.orekit.bodies.CelestialBodies`
         
             Parameters:
-                name (String): name of the celestial body
+                name (:class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the celestial body
         
             Returns:
                 celestial body
@@ -2736,8 +2755,8 @@ class PythonCelestialBodies(CelestialBodies):
             :meth:`~org.orekit.frames.FramesFactory.getICRF` (and therefore also :meth:`~org.orekit.frames.FramesFactory.getGCRF`)
         
             Specified by:
-                :meth:`~org.orekit.bodies.CelestialBodies.getEarthMoonBarycenter`Â in
-                interfaceÂ :class:`~org.orekit.bodies.CelestialBodies`
+                :meth:`~org.orekit.bodies.CelestialBodies.getEarthMoonBarycenter` in
+                interface :class:`~org.orekit.bodies.CelestialBodies`
         
             Returns:
                 Earth-Moon barycenter bodies pair
@@ -2845,8 +2864,8 @@ class PythonCelestialBodies(CelestialBodies):
             :meth:`~org.orekit.frames.FramesFactory.getICRF` (and therefore also :meth:`~org.orekit.frames.FramesFactory.getGCRF`)
         
             Specified by:
-                :meth:`~org.orekit.bodies.CelestialBodies.getSolarSystemBarycenter`Â in
-                interfaceÂ :class:`~org.orekit.bodies.CelestialBodies`
+                :meth:`~org.orekit.bodies.CelestialBodies.getSolarSystemBarycenter` in
+                interface :class:`~org.orekit.bodies.CelestialBodies`
         
             Returns:
                 solar system barycenter aggregated body
@@ -2915,7 +2934,7 @@ class PythonCelestialBodies(CelestialBodies):
 
 class PythonCelestialBody(CelestialBody):
     """
-    public class PythonCelestialBody extends Object implements :class:`~org.orekit.bodies.CelestialBody`
+    public class PythonCelestialBody extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.bodies.CelestialBody`
     
     
         Also see:
@@ -2949,7 +2968,7 @@ class PythonCelestialBody(CelestialBody):
                 :meth:`~org.orekit.bodies.CelestialBody.getGM` in interface :class:`~org.orekit.bodies.CelestialBody`
         
             Returns:
-                attraction coefficient of the body (mÂ³/sÂ²)
+                attraction coefficient of the body (m³/s²)
         
         
         """
@@ -2962,8 +2981,8 @@ class PythonCelestialBody(CelestialBody):
             frames.
         
             Specified by:
-                :meth:`~org.orekit.bodies.CelestialBody.getInertiallyOrientedFrame`Â in
-                interfaceÂ :class:`~org.orekit.bodies.CelestialBody`
+                :meth:`~org.orekit.bodies.CelestialBody.getInertiallyOrientedFrame` in
+                interface :class:`~org.orekit.bodies.CelestialBody`
         
             Returns:
                 an inertially oriented, body centered frame
@@ -2991,11 +3010,11 @@ class PythonCelestialBody(CelestialBody):
     @typing.overload
     def getPVCoordinates(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates:
         """
-            Get the :code:`PVCoordinates` of the body in the selected frame. Extension point for Python.
+            Get the :class:`~org.orekit.utils.PVCoordinates` of the body in the selected frame. Extension point for Python.
         
             Specified by:
-                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates`Â in
-                interfaceÂ :class:`~org.orekit.utils.PVCoordinatesProvider`
+                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates` in
+                interface :class:`~org.orekit.utils.PVCoordinatesProvider`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
@@ -3010,12 +3029,12 @@ class PythonCelestialBody(CelestialBody):
     @typing.overload
     def getPVCoordinates(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPVCoordinates_1__T], frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_getPVCoordinates_1__T]:
         """
-            Get the :code:`FieldPVCoordinates` of the body in the selected frame. Links to getPVCoordinates_FF() for Python
-            extension
+            Get the :class:`~org.orekit.utils.FieldPVCoordinates` of the body in the selected frame. Links to getPVCoordinates_FF()
+            for Python extension
         
             Specified by:
-                :meth:`~org.orekit.utils.ExtendedPVCoordinatesProvider.getPVCoordinates`Â in
-                interfaceÂ :class:`~org.orekit.utils.ExtendedPVCoordinatesProvider`
+                :meth:`~org.orekit.utils.ExtendedPVCoordinatesProvider.getPVCoordinates` in
+                interface :class:`~org.orekit.utils.ExtendedPVCoordinatesProvider`
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
@@ -3029,8 +3048,8 @@ class PythonCelestialBody(CelestialBody):
     _getPVCoordinates_FF__T = typing.TypeVar('_getPVCoordinates_FF__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     def getPVCoordinates_FF(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPVCoordinates_FF__T], frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_getPVCoordinates_FF__T]:
         """
-            Get the :code:`FieldPVCoordinates` of the body in the selected frame. Extension point for Python. Links to
-            getPVCoordinates()
+            Get the :class:`~org.orekit.utils.FieldPVCoordinates` of the body in the selected frame. Extension point for Python.
+            Links to getPVCoordinates()
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
@@ -3067,11 +3086,11 @@ class PythonCelestialBody(CelestialBody):
             Convert to a :class:`~org.orekit.utils.FieldPVCoordinatesProvider` with a specific type. Extension point for Python.
         
             Specified by:
-                :meth:`~org.orekit.utils.ExtendedPVCoordinatesProvider.toFieldPVCoordinatesProvider`Â in
-                interfaceÂ :class:`~org.orekit.utils.ExtendedPVCoordinatesProvider`
+                :meth:`~org.orekit.utils.ExtendedPVCoordinatesProvider.toFieldPVCoordinatesProvider` in
+                interface :class:`~org.orekit.utils.ExtendedPVCoordinatesProvider`
         
             Parameters:
-                field (Field<T> field): field for the argument and value
+                field (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field for the argument and value
         
             Returns:
                 converted function
@@ -3082,7 +3101,7 @@ class PythonCelestialBody(CelestialBody):
 
 class PythonCelestialBodyLoader(CelestialBodyLoader):
     """
-    public class PythonCelestialBodyLoader extends Object implements :class:`~org.orekit.bodies.CelestialBodyLoader`
+    public class PythonCelestialBodyLoader extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.bodies.CelestialBodyLoader`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -3091,11 +3110,11 @@ class PythonCelestialBodyLoader(CelestialBodyLoader):
             Load celestial body. Extension point for Python.
         
             Specified by:
-                :meth:`~org.orekit.bodies.CelestialBodyLoader.loadCelestialBody`Â in
-                interfaceÂ :class:`~org.orekit.bodies.CelestialBodyLoader`
+                :meth:`~org.orekit.bodies.CelestialBodyLoader.loadCelestialBody` in
+                interface :class:`~org.orekit.bodies.CelestialBodyLoader`
         
             Parameters:
-                name (String): name of the celestial body
+                name (:class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the celestial body
         
             Returns:
                 loaded celestial body
@@ -3125,7 +3144,7 @@ class PythonCelestialBodyLoader(CelestialBodyLoader):
 
 class PythonIAUPole(IAUPole):
     """
-    public class PythonIAUPole extends Object implements :class:`~org.orekit.bodies.IAUPole`
+    public class PythonIAUPole extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.bodies.IAUPole`
     
     
         Also see:
@@ -3151,6 +3170,11 @@ class PythonIAUPole(IAUPole):
             Since:
                 9.1
         
+        """
+        ...
+    @typing.overload
+    def getNode(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getNode_1__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getNode_1__T]:
+        """
             Get the body Q Node direction in ICRF frame.
         
             Specified by:
@@ -3168,8 +3192,6 @@ class PythonIAUPole(IAUPole):
         
         """
         ...
-    @typing.overload
-    def getNode(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getNode_1__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getNode_1__T]: ...
     _getNode_F__T = typing.TypeVar('_getNode_F__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     def getNode_F(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getNode_F__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getNode_F__T]:
         """
@@ -3202,6 +3224,11 @@ class PythonIAUPole(IAUPole):
             Returns:
                 body North pole direction in ICRF frame
         
+        """
+        ...
+    @typing.overload
+    def getPole(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPole_1__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getPole_1__T]:
+        """
             Get the body North pole direction in ICRF frame.
         
             Specified by:
@@ -3219,8 +3246,6 @@ class PythonIAUPole(IAUPole):
         
         """
         ...
-    @typing.overload
-    def getPole(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPole_1__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getPole_1__T]: ...
     _getPole_F__T = typing.TypeVar('_getPole_F__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     def getPole_F(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPole_F__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getPole_F__T]:
         """

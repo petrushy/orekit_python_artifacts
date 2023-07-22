@@ -9,7 +9,7 @@ import typing
 
 class AbstractMultivariateRealDistribution(org.hipparchus.distribution.MultivariateRealDistribution):
     """
-    public abstract class AbstractMultivariateRealDistribution extends Object implements :class:`~org.hipparchus.distribution.MultivariateRealDistribution`
+    public abstract class AbstractMultivariateRealDistribution extends :class:`~org.hipparchus.distribution.multivariate.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.distribution.MultivariateRealDistribution`
     
         Base class for multivariate probability distributions.
     """
@@ -19,8 +19,8 @@ class AbstractMultivariateRealDistribution(org.hipparchus.distribution.Multivari
             :meth:`~org.hipparchus.distribution.MultivariateRealDistribution.sample` method.
         
             Specified by:
-                :meth:`~org.hipparchus.distribution.MultivariateRealDistribution.getDimension`Â in
-                interfaceÂ :class:`~org.hipparchus.distribution.MultivariateRealDistribution`
+                :meth:`~org.hipparchus.distribution.MultivariateRealDistribution.getDimension` in
+                interface :class:`~org.hipparchus.distribution.MultivariateRealDistribution`
         
             Returns:
                 the number of variables.
@@ -33,8 +33,8 @@ class AbstractMultivariateRealDistribution(org.hipparchus.distribution.Multivari
             Reseeds the random generator used to generate samples.
         
             Specified by:
-                :meth:`~org.hipparchus.distribution.MultivariateRealDistribution.reseedRandomGenerator`Â in
-                interfaceÂ :class:`~org.hipparchus.distribution.MultivariateRealDistribution`
+                :meth:`~org.hipparchus.distribution.MultivariateRealDistribution.reseedRandomGenerator` in
+                interface :class:`~org.hipparchus.distribution.MultivariateRealDistribution`
         
             Parameters:
                 seed (long): Seed with which to initialize the random number generator.
@@ -48,8 +48,8 @@ class AbstractMultivariateRealDistribution(org.hipparchus.distribution.Multivari
             Generates a random value vector sampled from this distribution.
         
             Specified by:
-                :meth:`~org.hipparchus.distribution.MultivariateRealDistribution.sample`Â in
-                interfaceÂ :class:`~org.hipparchus.distribution.MultivariateRealDistribution`
+                :meth:`~org.hipparchus.distribution.MultivariateRealDistribution.sample` in
+                interface :class:`~org.hipparchus.distribution.MultivariateRealDistribution`
         
             Returns:
                 a random value vector.
@@ -62,8 +62,8 @@ class AbstractMultivariateRealDistribution(org.hipparchus.distribution.Multivari
             Generates a list of a random value vectors from the distribution.
         
             Specified by:
-                :meth:`~org.hipparchus.distribution.MultivariateRealDistribution.sample`Â in
-                interfaceÂ :class:`~org.hipparchus.distribution.MultivariateRealDistribution`
+                :meth:`~org.hipparchus.distribution.MultivariateRealDistribution.sample` in
+                interface :class:`~org.hipparchus.distribution.MultivariateRealDistribution`
         
             Parameters:
                 sampleSize (int): the number of random vectors to generate.
@@ -111,12 +111,12 @@ class MixtureMultivariateRealDistribution(AbstractMultivariateRealDistribution, 
             Reseeds the random generator used to generate samples.
         
             Specified by:
-                :meth:`~org.hipparchus.distribution.MultivariateRealDistribution.reseedRandomGenerator`Â in
-                interfaceÂ :class:`~org.hipparchus.distribution.MultivariateRealDistribution`
+                :meth:`~org.hipparchus.distribution.MultivariateRealDistribution.reseedRandomGenerator` in
+                interface :class:`~org.hipparchus.distribution.MultivariateRealDistribution`
         
             Overrides:
-                :meth:`~org.hipparchus.distribution.multivariate.AbstractMultivariateRealDistribution.reseedRandomGenerator`Â in
-                classÂ :class:`~org.hipparchus.distribution.multivariate.AbstractMultivariateRealDistribution`
+                :meth:`~org.hipparchus.distribution.multivariate.AbstractMultivariateRealDistribution.reseedRandomGenerator` in
+                class :class:`~org.hipparchus.distribution.multivariate.AbstractMultivariateRealDistribution`
         
             Parameters:
                 seed (long): Seed with which to initialize the random number generator.
@@ -130,12 +130,12 @@ class MixtureMultivariateRealDistribution(AbstractMultivariateRealDistribution, 
             Generates a random value vector sampled from this distribution.
         
             Specified by:
-                :meth:`~org.hipparchus.distribution.MultivariateRealDistribution.sample`Â in
-                interfaceÂ :class:`~org.hipparchus.distribution.MultivariateRealDistribution`
+                :meth:`~org.hipparchus.distribution.MultivariateRealDistribution.sample` in
+                interface :class:`~org.hipparchus.distribution.MultivariateRealDistribution`
         
             Specified by:
-                :meth:`~org.hipparchus.distribution.multivariate.AbstractMultivariateRealDistribution.sample`Â in
-                classÂ :class:`~org.hipparchus.distribution.multivariate.AbstractMultivariateRealDistribution`
+                :meth:`~org.hipparchus.distribution.multivariate.AbstractMultivariateRealDistribution.sample` in
+                class :class:`~org.hipparchus.distribution.multivariate.AbstractMultivariateRealDistribution`
         
             Returns:
                 a random value vector.

@@ -15,7 +15,7 @@ import typing
 
 class CR3BPDifferentialCorrection:
     """
-    public class CR3BPDifferentialCorrection extends Object
+    public class CR3BPDifferentialCorrection extends :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Class implementing the differential correction method for Halo or Lyapunov Orbits. It is not a simple differential
         correction, it uses higher order terms to be more accurate and meet orbits requirements.
@@ -66,7 +66,7 @@ class CR3BPDifferentialCorrection:
 
 class FieldKeplerianAnomalyUtility:
     """
-    public class FieldKeplerianAnomalyUtility extends Object
+    public class FieldKeplerianAnomalyUtility extends :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Utility methods for converting between different Keplerian anomalies.
     """
@@ -109,7 +109,7 @@ class FieldKeplerianAnomalyUtility:
             Computes the elliptic eccentric anomaly from the elliptic mean anomaly.
         
             The algorithm used here for solving hyperbolic Kepler equation is from Odell, A.W., Gooding, R.H. "Procedures for
-            solving Kepler's equation." Celestial Mechanics 38, 307Ã¢â‚¬â€œ334 (1986). https://doi.org/10.1007/BF01238923
+            solving Kepler's equation." Celestial Mechanics 38, 307–334 (1986). https://doi.org/10.1007/BF01238923
         
             Parameters:
                 e (T): eccentricity such that 0 ≤ e < 1
@@ -208,7 +208,7 @@ class FieldKeplerianAnomalyUtility:
             Computes the hyperbolic eccentric anomaly from the hyperbolic mean anomaly.
         
             The algorithm used here for solving hyperbolic Kepler equation is from Gooding, R.H., Odell, A.W. "The hyperbolic Kepler
-            equation (and the elliptic equation revisited)." Celestial Mechanics 44, 267Ã¢â‚¬â€œ282 (1988).
+            equation (and the elliptic equation revisited)." Celestial Mechanics 44, 267–282 (1988).
             https://doi.org/10.1007/BF01235540
         
             Parameters:
@@ -273,7 +273,7 @@ class FieldKeplerianAnomalyUtility:
 _FieldOrbit__T = typing.TypeVar('_FieldOrbit__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], org.orekit.time.FieldTimeStamped[_FieldOrbit__T], org.orekit.time.FieldTimeShiftable['FieldOrbit'[_FieldOrbit__T], _FieldOrbit__T], org.orekit.time.FieldTimeInterpolable['FieldOrbit'[_FieldOrbit__T], _FieldOrbit__T], typing.Generic[_FieldOrbit__T]):
     """
-    public abstract class FieldOrbit<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T>, :class:`~org.orekit.time.FieldTimeStamped`<T>, :class:`~org.orekit.time.FieldTimeShiftable`<:class:`~org.orekit.orbits.FieldOrbit`<T>, T>, :class:`~org.orekit.time.FieldTimeInterpolable`<:class:`~org.orekit.orbits.FieldOrbit`<T>, T>
+    public abstract class FieldOrbit<T extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T>, :class:`~org.orekit.time.FieldTimeStamped`<T>, :class:`~org.orekit.time.FieldTimeShiftable`<:class:`~org.orekit.orbits.FieldOrbit`<T>, T>, :class:`~org.orekit.time.FieldTimeInterpolable`<:class:`~org.orekit.orbits.FieldOrbit`<T>, T>
     
         This class handles orbital parameters.
     
@@ -532,7 +532,7 @@ class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], or
             Get the eccentric longitude argument.
         
             Returns:
-                E + Ï‰ + Î© eccentric longitude argument (rad)
+                E + ω + Ω eccentric longitude argument (rad)
         
         
         """
@@ -544,7 +544,7 @@ class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], or
             If the orbit was created without derivatives, the value returned is null.
         
             Returns:
-                d(E + Ï‰ + Î©)/dt eccentric longitude argument derivative (rad/s)
+                d(E + ω + Ω)/dt eccentric longitude argument derivative (rad/s)
         
         
         """
@@ -554,7 +554,7 @@ class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], or
             Get the mean longitude argument.
         
             Returns:
-                M + Ï‰ + Î© mean longitude argument (rad)
+                M + ω + Ω mean longitude argument (rad)
         
         
         """
@@ -566,7 +566,7 @@ class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], or
             If the orbit was created without derivatives, the value returned is null.
         
             Returns:
-                d(M + Ï‰ + Î©)/dt mean longitude argument derivative (rad/s)
+                d(M + ω + Ω)/dt mean longitude argument derivative (rad/s)
         
         
         """
@@ -576,7 +576,7 @@ class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], or
             Get the true longitude argument.
         
             Returns:
-                v + Ï‰ + Î© true longitude argument (rad)
+                v + ω + Ω true longitude argument (rad)
         
         
         """
@@ -588,17 +588,17 @@ class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], or
             If the orbit was created without derivatives, the value returned is null.
         
             Returns:
-                d(v + Ï‰ + Î©)/dt true longitude argument derivative (rad/s)
+                d(v + ω + Ω)/dt true longitude argument derivative (rad/s)
         
         
         """
         ...
     def getMu(self) -> _FieldOrbit__T:
         """
-            Get the central attraction coefficient used for position and velocity conversions (mÂ³/sÂ²).
+            Get the central attraction coefficient used for position and velocity conversions (m³/s²).
         
             Returns:
-                central attraction coefficient used for position and velocity conversions (mÂ³/sÂ²)
+                central attraction coefficient used for position and velocity conversions (m³/s²)
         
         
         """
@@ -656,7 +656,7 @@ class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], or
 
 class KeplerianAnomalyUtility:
     """
-    public final class KeplerianAnomalyUtility extends Object
+    public final class KeplerianAnomalyUtility extends :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Utility methods for converting between different Keplerian anomalies.
     """
@@ -696,7 +696,7 @@ class KeplerianAnomalyUtility:
             Computes the elliptic eccentric anomaly from the elliptic mean anomaly.
         
             The algorithm used here for solving hyperbolic Kepler equation is from Odell, A.W., Gooding, R.H. "Procedures for
-            solving Kepler's equation." Celestial Mechanics 38, 307Ã¢â‚¬â€œ334 (1986). https://doi.org/10.1007/BF01238923
+            solving Kepler's equation." Celestial Mechanics 38, 307–334 (1986). https://doi.org/10.1007/BF01238923
         
             Parameters:
                 e (double): eccentricity such that 0 ≤ e < 1
@@ -789,7 +789,7 @@ class KeplerianAnomalyUtility:
             Computes the hyperbolic eccentric anomaly from the hyperbolic mean anomaly.
         
             The algorithm used here for solving hyperbolic Kepler equation is from Gooding, R.H., Odell, A.W. "The hyperbolic Kepler
-            equation (and the elliptic equation revisited)." Celestial Mechanics 44, 267Ã¢â‚¬â€œ282 (1988).
+            equation (and the elliptic equation revisited)." Celestial Mechanics 44, 267–282 (1988).
             https://doi.org/10.1007/BF01235540
         
             Parameters:
@@ -850,7 +850,7 @@ class KeplerianAnomalyUtility:
 
 class LibrationOrbit:
     """
-    public abstract class LibrationOrbit extends Object
+    public abstract class LibrationOrbit extends :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Base class for libration orbits.
     
@@ -867,8 +867,11 @@ class LibrationOrbit:
         
             This will update :meth:`~org.orekit.orbits.LibrationOrbit.initialPV` and
             :meth:`~org.orekit.orbits.LibrationOrbit.orbitalPeriod` parameters.
-        @Deprecated public void applyDifferentialCorrection (:class:`~org.orekit.attitudes.AttitudeProvider` attitudeProvider, :class:`~org.orekit.time.TimeScale` utc)
-        
+        """
+        ...
+    @typing.overload
+    def applyDifferentialCorrection(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider, timeScale: org.orekit.time.TimeScale) -> None:
+        """
             Deprecated.
             as of 11.1, replaced by :meth:`~org.orekit.orbits.LibrationOrbit.applyDifferentialCorrection`
             Apply differential correction.
@@ -883,8 +886,6 @@ class LibrationOrbit:
         
         """
         ...
-    @typing.overload
-    def applyDifferentialCorrection(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider, timeScale: org.orekit.time.TimeScale) -> None: ...
     def getInitialPV(self) -> org.orekit.utils.PVCoordinates:
         """
             Return the initialPV on the libration orbit.
@@ -925,7 +926,7 @@ class LibrationOrbit:
 
 class LibrationOrbitFamily(java.lang.Enum['LibrationOrbitFamily']):
     """
-    public enum LibrationOrbitFamily extends Enum<:class:`~org.orekit.orbits.LibrationOrbitFamily`>
+    public enum LibrationOrbitFamily extends :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.orbits.LibrationOrbitFamily`>
     
         Enumerate for :class:`~org.orekit.orbits.LibrationOrbit` family.
     
@@ -948,14 +949,14 @@ class LibrationOrbitFamily(java.lang.Enum['LibrationOrbitFamily']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -968,9 +969,8 @@ class LibrationOrbitFamily(java.lang.Enum['LibrationOrbitFamily']):
         
             .. code-block: java
             
-            
-            for (LibrationOrbitFamily c : LibrationOrbitFamily.values())
-                System.out.println(c);
+            for (LibrationOrbitFamily c : LibrationOrbitFamily.values())
+                System.out.println(c);
             
         
             Returns:
@@ -982,7 +982,7 @@ class LibrationOrbitFamily(java.lang.Enum['LibrationOrbitFamily']):
 
 class LibrationOrbitType(java.lang.Enum['LibrationOrbitType']):
     """
-    public enum LibrationOrbitType extends Enum<:class:`~org.orekit.orbits.LibrationOrbitType`>
+    public enum LibrationOrbitType extends :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.orbits.LibrationOrbitType`>
     
         Enumerate for :class:`~org.orekit.orbits.LibrationOrbit` type.
     
@@ -1003,14 +1003,14 @@ class LibrationOrbitType(java.lang.Enum['LibrationOrbitType']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -1023,9 +1023,8 @@ class LibrationOrbitType(java.lang.Enum['LibrationOrbitType']):
         
             .. code-block: java
             
-            
-            for (LibrationOrbitType c : LibrationOrbitType.values())
-                System.out.println(c);
+            for (LibrationOrbitType c : LibrationOrbitType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1037,7 +1036,7 @@ class LibrationOrbitType(java.lang.Enum['LibrationOrbitType']):
 
 class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'], org.orekit.time.TimeInterpolable['Orbit'], java.io.Serializable, org.orekit.utils.PVCoordinatesProvider):
     """
-    public abstract class Orbit extends Object implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.orbits.Orbit`>, :class:`~org.orekit.time.TimeInterpolable`<:class:`~org.orekit.orbits.Orbit`>, Serializable, :class:`~org.orekit.utils.PVCoordinatesProvider`
+    public abstract class Orbit extends :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.orbits.Orbit`>, :class:`~org.orekit.time.TimeInterpolable`<:class:`~org.orekit.orbits.Orbit`>, :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.orekit.utils.PVCoordinatesProvider`
     
         This class handles orbital parameters.
     
@@ -1086,7 +1085,8 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
         
             Note that the semi-major axis is considered negative for hyperbolic orbits.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Returns:
                 semi-major axis derivative (m/s)
@@ -1127,7 +1127,8 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
         """
             Get the eccentricity derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Returns:
                 eccentricity derivative
@@ -1155,7 +1156,8 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
         """
             Get the first component of the equinoctial eccentricity vector.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Returns:
                 first component of the equinoctial eccentricity vector
@@ -1183,7 +1185,8 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
         """
             Get the second component of the equinoctial eccentricity vector.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Returns:
                 second component of the equinoctial eccentricity vector
@@ -1221,7 +1224,8 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
         """
             Get the first component of the inclination vector derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Returns:
                 first component of the inclination vector derivative
@@ -1249,7 +1253,8 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
         """
             Get the second component of the inclination vector derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Returns:
                 second component of the inclination vector derivative
@@ -1277,7 +1282,8 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
         """
             Get the inclination derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Returns:
                 inclination derivative (rad/s)
@@ -1352,7 +1358,7 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
             Get the eccentric longitude argument.
         
             Returns:
-                E + Ï‰ + Î© eccentric longitude argument (rad)
+                E + ω + Ω eccentric longitude argument (rad)
         
         
         """
@@ -1361,10 +1367,11 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
         """
             Get the eccentric longitude argument derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Returns:
-                d(E + Ï‰ + Î©)/dt eccentric longitude argument derivative (rad/s)
+                d(E + ω + Ω)/dt eccentric longitude argument derivative (rad/s)
         
             Since:
                 9.0
@@ -1380,7 +1387,7 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
             Get the mean longitude argument.
         
             Returns:
-                M + Ï‰ + Î© mean longitude argument (rad)
+                M + ω + Ω mean longitude argument (rad)
         
         
         """
@@ -1389,10 +1396,11 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
         """
             Get the mean longitude argument derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Returns:
-                d(M + Ï‰ + Î©)/dt mean longitude argument derivative (rad/s)
+                d(M + ω + Ω)/dt mean longitude argument derivative (rad/s)
         
             Since:
                 9.0
@@ -1408,7 +1416,7 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
             Get the true longitude argument.
         
             Returns:
-                v + Ï‰ + Î© true longitude argument (rad)
+                v + ω + Ω true longitude argument (rad)
         
         
         """
@@ -1417,10 +1425,11 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
         """
             Get the true longitude argument derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Returns:
-                d(v + Ï‰ + Î©)/dt true longitude argument derivative (rad/s)
+                d(v + ω + Ω)/dt true longitude argument derivative (rad/s)
         
             Since:
                 9.0
@@ -1472,8 +1481,8 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
             Get the :class:`~org.orekit.utils.PVCoordinates` of the body in the selected frame.
         
             Specified by:
-                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates`Â in
-                interfaceÂ :class:`~org.orekit.utils.PVCoordinatesProvider`
+                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates` in
+                interface :class:`~org.orekit.utils.PVCoordinatesProvider`
         
             Parameters:
                 otherDate (:class:`~org.orekit.time.AbsoluteDate`): current date
@@ -1540,7 +1549,7 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
 
 class OrbitType(java.lang.Enum['OrbitType']):
     """
-    public enum OrbitType extends Enum<:class:`~org.orekit.orbits.OrbitType`>
+    public enum OrbitType extends :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.orbits.OrbitType`>
     
         Enumerate for :class:`~org.orekit.orbits.Orbit` parameters types.
     """
@@ -1550,7 +1559,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
     KEPLERIAN: typing.ClassVar['OrbitType'] = ...
     POS_X: typing.ClassVar[str] = ...
     """
-    public static final String POS_X
+    public static final :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` POS_X
     
         Name for position along X.
     
@@ -1561,7 +1570,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
     """
     POS_Y: typing.ClassVar[str] = ...
     """
-    public static final String POS_Y
+    public static final :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` POS_Y
     
         Name for position along Y.
     
@@ -1572,7 +1581,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
     """
     POS_Z: typing.ClassVar[str] = ...
     """
-    public static final String POS_Z
+    public static final :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` POS_Z
     
         Name for position along Z.
     
@@ -1583,7 +1592,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
     """
     VEL_X: typing.ClassVar[str] = ...
     """
-    public static final String VEL_X
+    public static final :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` VEL_X
     
         Name for velocity along X.
     
@@ -1594,7 +1603,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
     """
     VEL_Y: typing.ClassVar[str] = ...
     """
-    public static final String VEL_Y
+    public static final :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` VEL_Y
     
         Name for velocity along Y.
     
@@ -1605,7 +1614,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
     """
     VEL_Z: typing.ClassVar[str] = ...
     """
-    public static final String VEL_Z
+    public static final :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` VEL_Z
     
         Name for velocity along Z.
     
@@ -1616,7 +1625,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
     """
     A: typing.ClassVar[str] = ...
     """
-    public static final String A
+    public static final :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` A
     
         Name for semi major axis.
     
@@ -1627,7 +1636,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
     """
     ECC: typing.ClassVar[str] = ...
     """
-    public static final String ECC
+    public static final :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ECC
     
         Name for eccentricity.
     
@@ -1638,7 +1647,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
     """
     E_X: typing.ClassVar[str] = ...
     """
-    public static final String E_X
+    public static final :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` E_X
     
         Name for eccentricity vector first component.
     
@@ -1649,7 +1658,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
     """
     E_Y: typing.ClassVar[str] = ...
     """
-    public static final String E_Y
+    public static final :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` E_Y
     
         Name for eccentricity vector second component.
     
@@ -1660,7 +1669,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
     """
     INC: typing.ClassVar[str] = ...
     """
-    public static final String INC
+    public static final :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` INC
     
         Name for inclination.
     
@@ -1671,7 +1680,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
     """
     H_X: typing.ClassVar[str] = ...
     """
-    public static final String H_X
+    public static final :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` H_X
     
         Name for inclination vector first component.
     
@@ -1682,7 +1691,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
     """
     H_Y: typing.ClassVar[str] = ...
     """
-    public static final String H_Y
+    public static final :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` H_Y
     
         Name for inclination vector second component .
     
@@ -1693,7 +1702,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
     """
     PA: typing.ClassVar[str] = ...
     """
-    public static final String PA
+    public static final :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` PA
     
         Name for perigee argument.
     
@@ -1704,7 +1713,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
     """
     RAAN: typing.ClassVar[str] = ...
     """
-    public static final String RAAN
+    public static final :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` RAAN
     
         Name for right ascension of ascending node.
     
@@ -1715,7 +1724,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
     """
     MEAN_ANOM: typing.ClassVar[str] = ...
     """
-    public static final String MEAN_ANOM
+    public static final :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEAN_ANOM
     
         Name for mean anomaly.
     
@@ -1726,7 +1735,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
     """
     ECC_ANOM: typing.ClassVar[str] = ...
     """
-    public static final String ECC_ANOM
+    public static final :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ECC_ANOM
     
         Name for eccentric anomaly.
     
@@ -1737,7 +1746,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
     """
     TRUE_ANOM: typing.ClassVar[str] = ...
     """
-    public static final String TRUE_ANOM
+    public static final :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` TRUE_ANOM
     
         Name for mean anomaly.
     
@@ -1748,7 +1757,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
     """
     MEAN_LAT_ARG: typing.ClassVar[str] = ...
     """
-    public static final String MEAN_LAT_ARG
+    public static final :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEAN_LAT_ARG
     
         Name for mean argument of latitude.
     
@@ -1759,7 +1768,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
     """
     ECC_LAT_ARG: typing.ClassVar[str] = ...
     """
-    public static final String ECC_LAT_ARG
+    public static final :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ECC_LAT_ARG
     
         Name for eccentric argument of latitude.
     
@@ -1770,7 +1779,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
     """
     TRUE_LAT_ARG: typing.ClassVar[str] = ...
     """
-    public static final String TRUE_LAT_ARG
+    public static final :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` TRUE_LAT_ARG
     
         Name for mean argument of latitude.
     
@@ -1781,7 +1790,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
     """
     MEAN_LON_ARG: typing.ClassVar[str] = ...
     """
-    public static final String MEAN_LON_ARG
+    public static final :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEAN_LON_ARG
     
         Name for mean argument of longitude.
     
@@ -1792,7 +1801,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
     """
     ECC_LON_ARG: typing.ClassVar[str] = ...
     """
-    public static final String ECC_LON_ARG
+    public static final :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ECC_LON_ARG
     
         Name for eccentric argument of longitude.
     
@@ -1803,7 +1812,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
     """
     TRUE_LON_ARG: typing.ClassVar[str] = ...
     """
-    public static final String TRUE_LON_ARG
+    public static final :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` TRUE_LON_ARG
     
         Name for mean argument of longitude.
     
@@ -1829,7 +1838,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
             Returns:
                 converted orbit with type guaranteed to match (so it can be cast safely)
         
-        public abstract <T extends CalculusFieldElement<T>> :class:`~org.orekit.orbits.FieldOrbit`<T> convertType (:class:`~org.orekit.orbits.FieldOrbit`<T> orbit)
+        public abstract <T extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> :class:`~org.orekit.orbits.FieldOrbit`<T> convertType (:class:`~org.orekit.orbits.FieldOrbit`<T> orbit)
         
             Convert an orbit to the instance type.
         
@@ -1878,13 +1887,13 @@ class OrbitType(java.lang.Enum['OrbitType']):
                     elements, extra elements are ignored)
                 type (:class:`~org.orekit.orbits.PositionAngle`): type of the angle
                 date (:class:`~org.orekit.time.AbsoluteDate`): integration date
-                mu (double): central attraction coefficient used for propagation (mÂ³/sÂ²)
+                mu (double): central attraction coefficient used for propagation (m³/s²)
                 frame (:class:`~org.orekit.frames.Frame`): frame in which integration is performed
         
             Returns:
                 orbit corresponding to the flat array as a space dynamics object
         
-        public abstract <T extends CalculusFieldElement<T>> :class:`~org.orekit.orbits.FieldOrbit`<T> mapArrayToOrbit (T[] array, T[] arrayDot, :class:`~org.orekit.orbits.PositionAngle` type, :class:`~org.orekit.time.FieldAbsoluteDate`<T> date, T mu, :class:`~org.orekit.frames.Frame` frame)
+        public abstract <T extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> :class:`~org.orekit.orbits.FieldOrbit`<T> mapArrayToOrbit (T[] array, T[] arrayDot, :class:`~org.orekit.orbits.PositionAngle` type, :class:`~org.orekit.time.FieldAbsoluteDate`<T> date, T mu, :class:`~org.orekit.frames.Frame` frame)
         
             Convert state array to orbital parameters.
         
@@ -1897,7 +1906,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
                 arrayDot (T[]): state derivative as a flat array (it can be null, in which case Keplerian motion is assumed,
                 type (:class:`~org.orekit.orbits.PositionAngle`): type of the angle
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): integration date
-                mu (T): central attraction coefficient used for propagation (mÂ³/sÂ²)
+                mu (T): central attraction coefficient used for propagation (m³/s²)
                 frame (:class:`~org.orekit.frames.Frame`): frame in which integration is performed
         
             Returns:
@@ -1925,7 +1934,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
                 stateVectorDot (double[]): flat array into which the state vector derivative should be mapped (it can be null if derivatives are not desired, and
                     it can have more than 6 elements, extra elements are untouched)
         
-        public abstract <T extends CalculusFieldElement<T>> void mapOrbitToArray (:class:`~org.orekit.orbits.FieldOrbit`<T> orbit, :class:`~org.orekit.orbits.PositionAngle` type, T[] stateVector, T[] stateVectorDot)
+        public abstract <T extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> void mapOrbitToArray (:class:`~org.orekit.orbits.FieldOrbit`<T> orbit, :class:`~org.orekit.orbits.PositionAngle` type, T[] stateVector, T[] stateVectorDot)
         
             Convert orbit to state array.
         
@@ -1951,11 +1960,10 @@ class OrbitType(java.lang.Enum['OrbitType']):
         """
             Normalize one orbit with respect to a reference one.
         
-            Given a, angular component ÃŽÂ¶ of an orbit and the corresponding angular component ÃŽÂ¶Ã¡ÂµÂ£ in the reference orbit,
-            the angular component ÃŽÂ¶Ã¢â€šâ„¢ of the normalized orbit will be ÃŽÂ¶Ã¢â€šâ„¢ = ÃŽÂ¶ + 2kÃ�â‚¬ where k is chosen such
-            that ÃŽÂ¶Ã¡ÂµÂ£ - Ã�â‚¬ Ã¢â€°Â¤ ÃŽÂ¶Ã¢â€šâ„¢ Ã¢â€°Â¤ ÃŽÂ¶Ã¡ÂµÂ£ + Ã�â‚¬. This is intended to avoid too large
-            discontinuities and is particularly useful for normalizing the orbit after an impulsive maneuver with respect to the
-            reference picked up before the maneuver.
+            Given a, angular component ζ of an orbit and the corresponding angular component ζᵣ in the reference orbit, the
+            angular component ζₙ of the normalized orbit will be ζₙ = ζ + 2kπ where k is chosen such that ζᵣ - π ≤
+            ζₙ ≤ ζᵣ + π. This is intended to avoid too large discontinuities and is particularly useful for normalizing the
+            orbit after an impulsive maneuver with respect to the reference picked up before the maneuver.
         
             Parameters:
                 orbit (:class:`~org.orekit.orbits.Orbit`): orbit to normalize
@@ -1982,14 +1990,14 @@ class OrbitType(java.lang.Enum['OrbitType']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -2002,9 +2010,8 @@ class OrbitType(java.lang.Enum['OrbitType']):
         
             .. code-block: java
             
-            
-            for (OrbitType c : OrbitType.values())
-                System.out.println(c);
+            for (OrbitType c : OrbitType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -2016,7 +2023,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
 
 class PositionAngle(java.lang.Enum['PositionAngle']):
     """
-    public enum PositionAngle extends Enum<:class:`~org.orekit.orbits.PositionAngle`>
+    public enum PositionAngle extends :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.orbits.PositionAngle`>
     
         Enumerate for true, eccentric and mean position angles.
     
@@ -2039,14 +2046,14 @@ class PositionAngle(java.lang.Enum['PositionAngle']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -2059,9 +2066,8 @@ class PositionAngle(java.lang.Enum['PositionAngle']):
         
             .. code-block: java
             
-            
-            for (PositionAngle c : PositionAngle.values())
-                System.out.println(c);
+            for (PositionAngle c : PositionAngle.values())
+                System.out.println(c);
             
         
             Returns:
@@ -2073,7 +2079,7 @@ class PositionAngle(java.lang.Enum['PositionAngle']):
 
 class RichardsonExpansion:
     """
-    public class RichardsonExpansion extends Object
+    public class RichardsonExpansion extends :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Class implementing the Third-Order Richardson Expansion.
     
@@ -2237,7 +2243,8 @@ class CartesianOrbit(Orbit):
         
             Note that the semi-major axis is considered negative for hyperbolic orbits.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getADot` in class :class:`~org.orekit.orbits.Orbit`
@@ -2268,7 +2275,8 @@ class CartesianOrbit(Orbit):
         """
             Get the eccentricity derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getEDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -2299,7 +2307,8 @@ class CartesianOrbit(Orbit):
         """
             Get the first component of the equinoctial eccentricity vector.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getEquinoctialExDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -2330,7 +2339,8 @@ class CartesianOrbit(Orbit):
         """
             Get the second component of the equinoctial eccentricity vector.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getEquinoctialEyDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -2361,7 +2371,8 @@ class CartesianOrbit(Orbit):
         """
             Get the first component of the inclination vector derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getHxDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -2392,7 +2403,8 @@ class CartesianOrbit(Orbit):
         """
             Get the second component of the inclination vector derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getHyDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -2423,7 +2435,8 @@ class CartesianOrbit(Orbit):
         """
             Get the inclination derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getIDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -2445,7 +2458,7 @@ class CartesianOrbit(Orbit):
                 :meth:`~org.orekit.orbits.Orbit.getLE` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                E + Ï‰ + Î© eccentric longitude argument (rad)
+                E + ω + Ω eccentric longitude argument (rad)
         
         
         """
@@ -2454,13 +2467,14 @@ class CartesianOrbit(Orbit):
         """
             Get the eccentric longitude argument derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getLEDot` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                d(E + Ï‰ + Î©)/dt eccentric longitude argument derivative (rad/s)
+                d(E + ω + Ω)/dt eccentric longitude argument derivative (rad/s)
         
             Also see:
                 :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
@@ -2476,7 +2490,7 @@ class CartesianOrbit(Orbit):
                 :meth:`~org.orekit.orbits.Orbit.getLM` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                M + Ï‰ + Î© mean longitude argument (rad)
+                M + ω + Ω mean longitude argument (rad)
         
         
         """
@@ -2485,13 +2499,14 @@ class CartesianOrbit(Orbit):
         """
             Get the mean longitude argument derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getLMDot` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                d(M + Ï‰ + Î©)/dt mean longitude argument derivative (rad/s)
+                d(M + ω + Ω)/dt mean longitude argument derivative (rad/s)
         
             Also see:
                 :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
@@ -2507,7 +2522,7 @@ class CartesianOrbit(Orbit):
                 :meth:`~org.orekit.orbits.Orbit.getLv` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                v + Ï‰ + Î© true longitude argument (rad)
+                v + ω + Ω true longitude argument (rad)
         
         
         """
@@ -2516,13 +2531,14 @@ class CartesianOrbit(Orbit):
         """
             Get the true longitude argument derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getLvDot` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                d(v + Ï‰ + Î©)/dt true longitude argument derivative (rad/s)
+                d(v + ω + Ω)/dt true longitude argument derivative (rad/s)
         
             Also see:
                 :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
@@ -2596,7 +2612,8 @@ class CartesianOrbit(Orbit):
             Returns a string representation of this Orbit object.
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a string representation of this object
@@ -2614,18 +2631,18 @@ class CircularOrbit(Orbit):
         The parameters used internally are the circular elements which can be related to Keplerian elements as follows:
     
           - a
-          - e :sub:`x` = e cos(Ï‰)
-          - e :sub:`y` = e sin(Ï‰)
+          - e :sub:`x` = e cos(ω)
+          - e :sub:`y` = e sin(ω)
           - i
-          - Î©
-          - Î± :sub:`v` = v + Ï‰
+          - Ω
+          - α :sub:`v` = v + ω
     
-        where Î© stands for the Right Ascension of the Ascending Node and Î± :sub:`v` stands for the true latitude argument
+        where Ω stands for the Right Ascension of the Ascending Node and α :sub:`v` stands for the true latitude argument
     
         The conversion equations from and to Keplerian elements given above hold only when both sides are unambiguously defined,
         i.e. when orbit is neither equatorial nor circular. When orbit is circular (but not equatorial), the circular parameters
-        are still unambiguously defined whereas some Keplerian elements (more precisely Ã�â€° and ÃŽÂ©) become ambiguous. When
-        orbit is equatorial, neither the Keplerian nor the circular parameters can be defined unambiguously.
+        are still unambiguously defined whereas some Keplerian elements (more precisely ω and Ω) become ambiguous. When orbit
+        is equatorial, neither the Keplerian nor the circular parameters can be defined unambiguously.
         :class:`~org.orekit.orbits.EquinoctialOrbit` is the recommended way to represent orbits.
     
         The instance :code:`CircularOrbit` is guaranteed to be immutable.
@@ -2669,9 +2686,9 @@ class CircularOrbit(Orbit):
             Computes the mean latitude argument from the eccentric latitude argument.
         
             Parameters:
-                alphaE (double): = E + Ï‰ mean latitude argument (rad)
-                ex (double): e cos(Ï‰), first component of circular eccentricity vector
-                ey (double): e sin(Ï‰), second component of circular eccentricity vector
+                alphaE (double): = E + ω mean latitude argument (rad)
+                ex (double): e cos(ω), first component of circular eccentricity vector
+                ey (double): e sin(ω), second component of circular eccentricity vector
         
             Returns:
                 the mean latitude argument.
@@ -2685,9 +2702,9 @@ class CircularOrbit(Orbit):
             Computes the true latitude argument from the eccentric latitude argument.
         
             Parameters:
-                alphaE (double): = E + Ï‰ eccentric latitude argument (rad)
-                ex (double): e cos(Ï‰), first component of circular eccentricity vector
-                ey (double): e sin(Ï‰), second component of circular eccentricity vector
+                alphaE (double): = E + ω eccentric latitude argument (rad)
+                ex (double): e cos(ω), first component of circular eccentricity vector
+                ey (double): e sin(ω), second component of circular eccentricity vector
         
             Returns:
                 the true latitude argument.
@@ -2716,7 +2733,8 @@ class CircularOrbit(Orbit):
         
             Note that the semi-major axis is considered negative for hyperbolic orbits.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getADot` in class :class:`~org.orekit.orbits.Orbit`
@@ -2747,7 +2765,8 @@ class CircularOrbit(Orbit):
         """
             Get the latitude argument derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Parameters:
                 type (:class:`~org.orekit.orbits.PositionAngle`): type of the angle
@@ -2766,7 +2785,7 @@ class CircularOrbit(Orbit):
             Get the eccentric latitude argument.
         
             Returns:
-                E + Ï‰ eccentric latitude argument (rad)
+                E + ω eccentric latitude argument (rad)
         
         
         """
@@ -2775,10 +2794,11 @@ class CircularOrbit(Orbit):
         """
             Get the eccentric latitude argument derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Returns:
-                d(E + Ï‰)/dt eccentric latitude argument derivative (rad/s)
+                d(E + ω)/dt eccentric latitude argument derivative (rad/s)
         
             Since:
                 9.0
@@ -2791,7 +2811,7 @@ class CircularOrbit(Orbit):
             Get the mean latitude argument.
         
             Returns:
-                M + Ï‰ mean latitude argument (rad)
+                M + ω mean latitude argument (rad)
         
         
         """
@@ -2800,10 +2820,11 @@ class CircularOrbit(Orbit):
         """
             Get the mean latitude argument derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Returns:
-                d(M + Ï‰)/dt mean latitude argument derivative (rad/s)
+                d(M + ω)/dt mean latitude argument derivative (rad/s)
         
             Since:
                 9.0
@@ -2816,7 +2837,7 @@ class CircularOrbit(Orbit):
             Get the true latitude argument.
         
             Returns:
-                v + Ï‰ true latitude argument (rad)
+                v + ω true latitude argument (rad)
         
         
         """
@@ -2825,10 +2846,11 @@ class CircularOrbit(Orbit):
         """
             Get the true latitude argument derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Returns:
-                v + Ï‰ true latitude argument derivative (rad/s)
+                v + ω true latitude argument derivative (rad/s)
         
             Since:
                 9.0
@@ -2841,7 +2863,7 @@ class CircularOrbit(Orbit):
             Get the first component of the circular eccentricity vector.
         
             Returns:
-                ex = e cos(Ï‰), first component of the circular eccentricity vector
+                ex = e cos(ω), first component of the circular eccentricity vector
         
         
         """
@@ -2851,7 +2873,7 @@ class CircularOrbit(Orbit):
             Get the first component of the circular eccentricity vector derivative.
         
             Returns:
-                ex = e cos(Ï‰), first component of the circular eccentricity vector derivative
+                ex = e cos(ω), first component of the circular eccentricity vector derivative
         
             Since:
                 9.0
@@ -2864,7 +2886,7 @@ class CircularOrbit(Orbit):
             Get the second component of the circular eccentricity vector.
         
             Returns:
-                ey = e sin(Ï‰), second component of the circular eccentricity vector
+                ey = e sin(ω), second component of the circular eccentricity vector
         
         
         """
@@ -2874,7 +2896,7 @@ class CircularOrbit(Orbit):
             Get the second component of the circular eccentricity vector derivative.
         
             Returns:
-                ey = e sin(Ï‰), second component of the circular eccentricity vector derivative
+                ey = e sin(ω), second component of the circular eccentricity vector derivative
         
         
         """
@@ -2896,7 +2918,8 @@ class CircularOrbit(Orbit):
         """
             Get the eccentricity derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getEDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -2927,7 +2950,8 @@ class CircularOrbit(Orbit):
         """
             Get the first component of the equinoctial eccentricity vector.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getEquinoctialExDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -2958,7 +2982,8 @@ class CircularOrbit(Orbit):
         """
             Get the second component of the equinoctial eccentricity vector.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getEquinoctialEyDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -2989,7 +3014,8 @@ class CircularOrbit(Orbit):
         """
             Get the first component of the inclination vector derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getHxDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -3020,7 +3046,8 @@ class CircularOrbit(Orbit):
         """
             Get the second component of the inclination vector derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getHyDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -3051,7 +3078,8 @@ class CircularOrbit(Orbit):
         """
             Get the inclination derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getIDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -3073,7 +3101,7 @@ class CircularOrbit(Orbit):
                 :meth:`~org.orekit.orbits.Orbit.getLE` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                E + Ï‰ + Î© eccentric longitude argument (rad)
+                E + ω + Ω eccentric longitude argument (rad)
         
         
         """
@@ -3082,13 +3110,14 @@ class CircularOrbit(Orbit):
         """
             Get the eccentric longitude argument derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getLEDot` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                d(E + Ï‰ + Î©)/dt eccentric longitude argument derivative (rad/s)
+                d(E + ω + Ω)/dt eccentric longitude argument derivative (rad/s)
         
             Also see:
                 :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
@@ -3104,7 +3133,7 @@ class CircularOrbit(Orbit):
                 :meth:`~org.orekit.orbits.Orbit.getLM` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                M + Ï‰ + Î© mean longitude argument (rad)
+                M + ω + Ω mean longitude argument (rad)
         
         
         """
@@ -3113,13 +3142,14 @@ class CircularOrbit(Orbit):
         """
             Get the mean longitude argument derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getLMDot` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                d(M + Ï‰ + Î©)/dt mean longitude argument derivative (rad/s)
+                d(M + ω + Ω)/dt mean longitude argument derivative (rad/s)
         
             Also see:
                 :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
@@ -3135,7 +3165,7 @@ class CircularOrbit(Orbit):
                 :meth:`~org.orekit.orbits.Orbit.getLv` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                v + Ï‰ + Î© true longitude argument (rad)
+                v + ω + Ω true longitude argument (rad)
         
         
         """
@@ -3144,13 +3174,14 @@ class CircularOrbit(Orbit):
         """
             Get the true longitude argument derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getLvDot` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                d(v + Ï‰ + Î©)/dt true longitude argument derivative (rad/s)
+                d(v + ω + Ω)/dt true longitude argument derivative (rad/s)
         
             Also see:
                 :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
@@ -3172,7 +3203,8 @@ class CircularOrbit(Orbit):
         """
             Get the right ascension of the ascending node derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Returns:
                 right ascension of the ascending node derivative (rad/s)
@@ -3206,9 +3238,9 @@ class CircularOrbit(Orbit):
             Computes the eccentric latitude argument from the mean latitude argument.
         
             Parameters:
-                alphaM (double): = M + Ï‰ mean latitude argument (rad)
-                ex (double): e cos(Ï‰), first component of circular eccentricity vector
-                ey (double): e sin(Ï‰), second component of circular eccentricity vector
+                alphaM (double): = M + ω mean latitude argument (rad)
+                ex (double): e cos(ω), first component of circular eccentricity vector
+                ey (double): e sin(ω), second component of circular eccentricity vector
         
             Returns:
                 the eccentric latitude argument.
@@ -3245,7 +3277,8 @@ class CircularOrbit(Orbit):
             Returns a string representation of this Orbit object.
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a string representation of this object
@@ -3259,9 +3292,9 @@ class CircularOrbit(Orbit):
             Computes the eccentric latitude argument from the true latitude argument.
         
             Parameters:
-                alphaV (double): = V + Ï‰ true latitude argument (rad)
-                ex (double): e cos(Ï‰), first component of circular eccentricity vector
-                ey (double): e sin(Ï‰), second component of circular eccentricity vector
+                alphaV (double): = V + ω true latitude argument (rad)
+                ex (double): e cos(ω), first component of circular eccentricity vector
+                ey (double): e sin(ω), second component of circular eccentricity vector
         
             Returns:
                 the eccentric latitude argument.
@@ -3280,20 +3313,19 @@ class EquinoctialOrbit(Orbit):
     
         .. code-block: java
         
-        
-             a
-             ex = e cos(Ï‰ + Î©)
-             ey = e sin(Ï‰ + Î©)
-             hx = tan(i/2) cos(Î©)
-             hy = tan(i/2) sin(Î©)
-             lv = v + Ï‰ + Î©
+             a
+             ex = e cos(ω + Ω)
+             ey = e sin(ω + Ω)
+             hx = tan(i/2) cos(Ω)
+             hy = tan(i/2) sin(Ω)
+             lv = v + ω + Ω
            
-        where Ï‰ stands for the Perigee Argument and Î© stands for the Right Ascension of the Ascending Node.
+        where ω stands for the Perigee Argument and Ω stands for the Right Ascension of the Ascending Node.
     
         The conversion equations from and to Keplerian elements given above hold only when both sides are unambiguously defined,
         i.e. when orbit is neither equatorial nor circular. When orbit is either equatorial or circular, the equinoctial
-        parameters are still unambiguously defined whereas some Keplerian elements (more precisely Ã�â€° and ÃŽÂ©) become
-        ambiguous. For this reason, equinoctial parameters are the recommended way to represent orbits.
+        parameters are still unambiguously defined whereas some Keplerian elements (more precisely ω and Ω) become ambiguous.
+        For this reason, equinoctial parameters are the recommended way to represent orbits.
     
         The instance :code:`EquinoctialOrbit` is guaranteed to be immutable.
     
@@ -3336,7 +3368,7 @@ class EquinoctialOrbit(Orbit):
             Computes the mean longitude argument from the eccentric longitude argument.
         
             Parameters:
-                lE (double): = E + Ï‰ + Î© mean longitude argument (rad)
+                lE (double): = E + ω + Ω mean longitude argument (rad)
                 ex (double): first component of the eccentricity vector
                 ey (double): second component of the eccentricity vector
         
@@ -3352,7 +3384,7 @@ class EquinoctialOrbit(Orbit):
             Computes the true longitude argument from the eccentric longitude argument.
         
             Parameters:
-                lE (double): = E + Ï‰ + Î© eccentric longitude argument (rad)
+                lE (double): = E + ω + Ω eccentric longitude argument (rad)
                 ex (double): first component of the eccentricity vector
                 ey (double): second component of the eccentricity vector
         
@@ -3383,7 +3415,8 @@ class EquinoctialOrbit(Orbit):
         
             Note that the semi-major axis is considered negative for hyperbolic orbits.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getADot` in class :class:`~org.orekit.orbits.Orbit`
@@ -3414,7 +3447,8 @@ class EquinoctialOrbit(Orbit):
         """
             Get the eccentricity derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getEDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -3445,7 +3479,8 @@ class EquinoctialOrbit(Orbit):
         """
             Get the first component of the equinoctial eccentricity vector.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getEquinoctialExDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -3476,7 +3511,8 @@ class EquinoctialOrbit(Orbit):
         """
             Get the second component of the equinoctial eccentricity vector.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getEquinoctialEyDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -3507,7 +3543,8 @@ class EquinoctialOrbit(Orbit):
         """
             Get the first component of the inclination vector derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getHxDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -3538,7 +3575,8 @@ class EquinoctialOrbit(Orbit):
         """
             Get the second component of the inclination vector derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getHyDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -3569,7 +3607,8 @@ class EquinoctialOrbit(Orbit):
         """
             Get the inclination derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getIDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -3617,7 +3656,7 @@ class EquinoctialOrbit(Orbit):
                 :meth:`~org.orekit.orbits.Orbit.getLE` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                E + Ï‰ + Î© eccentric longitude argument (rad)
+                E + ω + Ω eccentric longitude argument (rad)
         
         
         """
@@ -3626,13 +3665,14 @@ class EquinoctialOrbit(Orbit):
         """
             Get the eccentric longitude argument derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getLEDot` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                d(E + Ï‰ + Î©)/dt eccentric longitude argument derivative (rad/s)
+                d(E + ω + Ω)/dt eccentric longitude argument derivative (rad/s)
         
             Also see:
                 :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
@@ -3648,7 +3688,7 @@ class EquinoctialOrbit(Orbit):
                 :meth:`~org.orekit.orbits.Orbit.getLM` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                M + Ï‰ + Î© mean longitude argument (rad)
+                M + ω + Ω mean longitude argument (rad)
         
         
         """
@@ -3657,13 +3697,14 @@ class EquinoctialOrbit(Orbit):
         """
             Get the mean longitude argument derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getLMDot` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                d(M + Ï‰ + Î©)/dt mean longitude argument derivative (rad/s)
+                d(M + ω + Ω)/dt mean longitude argument derivative (rad/s)
         
             Also see:
                 :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
@@ -3679,7 +3720,7 @@ class EquinoctialOrbit(Orbit):
                 :meth:`~org.orekit.orbits.Orbit.getLv` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                v + Ï‰ + Î© true longitude argument (rad)
+                v + ω + Ω true longitude argument (rad)
         
         
         """
@@ -3688,13 +3729,14 @@ class EquinoctialOrbit(Orbit):
         """
             Get the true longitude argument derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getLvDot` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                d(v + Ï‰ + Î©)/dt true longitude argument derivative (rad/s)
+                d(v + ω + Ω)/dt true longitude argument derivative (rad/s)
         
             Also see:
                 :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
@@ -3725,7 +3767,7 @@ class EquinoctialOrbit(Orbit):
             Computes the eccentric longitude argument from the mean longitude argument.
         
             Parameters:
-                lM (double): = M + Ï‰ + Î© mean longitude argument (rad)
+                lM (double): = M + ω + Ω mean longitude argument (rad)
                 ex (double): first component of the eccentricity vector
                 ey (double): second component of the eccentricity vector
         
@@ -3764,7 +3806,8 @@ class EquinoctialOrbit(Orbit):
             Returns a string representation of this equinoctial parameters object.
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a string representation of this object
@@ -3778,7 +3821,7 @@ class EquinoctialOrbit(Orbit):
             Computes the eccentric longitude argument from the true longitude argument.
         
             Parameters:
-                lv (double): = v + Ï‰ + Î© true longitude argument (rad)
+                lv (double): = v + ω + Ω true longitude argument (rad)
                 ex (double): first component of the eccentricity vector
                 ey (double): second component of the eccentricity vector
         
@@ -3792,7 +3835,7 @@ class EquinoctialOrbit(Orbit):
 _FieldCartesianOrbit__T = typing.TypeVar('_FieldCartesianOrbit__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldCartesianOrbit(FieldOrbit[_FieldCartesianOrbit__T], typing.Generic[_FieldCartesianOrbit__T]):
     """
-    public class FieldCartesianOrbit<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.orbits.FieldOrbit`<T>
+    public class FieldCartesianOrbit<T extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.orbits.FieldOrbit`<T>
     
         This class holds Cartesian orbital parameters.
     
@@ -4053,7 +4096,7 @@ class FieldCartesianOrbit(FieldOrbit[_FieldCartesianOrbit__T], typing.Generic[_F
                 :meth:`~org.orekit.orbits.FieldOrbit.getLE` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                E + Ï‰ + Î© eccentric longitude argument (rad)
+                E + ω + Ω eccentric longitude argument (rad)
         
         
         """
@@ -4068,7 +4111,7 @@ class FieldCartesianOrbit(FieldOrbit[_FieldCartesianOrbit__T], typing.Generic[_F
                 :meth:`~org.orekit.orbits.FieldOrbit.getLEDot` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                d(E + Ï‰ + Î©)/dt eccentric longitude argument derivative (rad/s)
+                d(E + ω + Ω)/dt eccentric longitude argument derivative (rad/s)
         
         
         """
@@ -4081,7 +4124,7 @@ class FieldCartesianOrbit(FieldOrbit[_FieldCartesianOrbit__T], typing.Generic[_F
                 :meth:`~org.orekit.orbits.FieldOrbit.getLM` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                M + Ï‰ + Î© mean longitude argument (rad)
+                M + ω + Ω mean longitude argument (rad)
         
         
         """
@@ -4096,7 +4139,7 @@ class FieldCartesianOrbit(FieldOrbit[_FieldCartesianOrbit__T], typing.Generic[_F
                 :meth:`~org.orekit.orbits.FieldOrbit.getLMDot` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                d(M + Ï‰ + Î©)/dt mean longitude argument derivative (rad/s)
+                d(M + ω + Ω)/dt mean longitude argument derivative (rad/s)
         
         
         """
@@ -4109,7 +4152,7 @@ class FieldCartesianOrbit(FieldOrbit[_FieldCartesianOrbit__T], typing.Generic[_F
                 :meth:`~org.orekit.orbits.FieldOrbit.getLv` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                v + Ï‰ + Î© true longitude argument (rad)
+                v + ω + Ω true longitude argument (rad)
         
         
         """
@@ -4124,7 +4167,7 @@ class FieldCartesianOrbit(FieldOrbit[_FieldCartesianOrbit__T], typing.Generic[_F
                 :meth:`~org.orekit.orbits.FieldOrbit.getLvDot` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                d(v + Ï‰ + Î©)/dt true longitude argument derivative (rad/s)
+                d(v + ω + Ω)/dt true longitude argument derivative (rad/s)
         
         
         """
@@ -4189,7 +4232,8 @@ class FieldCartesianOrbit(FieldOrbit[_FieldCartesianOrbit__T], typing.Generic[_F
             Returns a string representation of this Orbit object.
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a string representation of this object
@@ -4201,25 +4245,25 @@ class FieldCartesianOrbit(FieldOrbit[_FieldCartesianOrbit__T], typing.Generic[_F
 _FieldCircularOrbit__T = typing.TypeVar('_FieldCircularOrbit__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_FieldCircularOrbit__T]):
     """
-    public class FieldCircularOrbit<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.orbits.FieldOrbit`<T>
+    public class FieldCircularOrbit<T extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.orbits.FieldOrbit`<T>
     
         This class handles circular orbital parameters.
     
         The parameters used internally are the circular elements which can be related to Keplerian elements as follows:
     
           - a
-          - e :sub:`x` = e cos(Ï‰)
-          - e :sub:`y` = e sin(Ï‰)
+          - e :sub:`x` = e cos(ω)
+          - e :sub:`y` = e sin(ω)
           - i
-          - Î©
-          - Î± :sub:`v` = v + Ï‰
+          - Ω
+          - α :sub:`v` = v + ω
     
-        where Î© stands for the Right Ascension of the Ascending Node and Î± :sub:`v` stands for the true latitude argument
+        where Ω stands for the Right Ascension of the Ascending Node and α :sub:`v` stands for the true latitude argument
     
         The conversion equations from and to Keplerian elements given above hold only when both sides are unambiguously defined,
         i.e. when orbit is neither equatorial nor circular. When orbit is circular (but not equatorial), the circular parameters
-        are still unambiguously defined whereas some Keplerian elements (more precisely Ã�â€° and ÃŽÂ©) become ambiguous. When
-        orbit is equatorial, neither the Keplerian nor the circular parameters can be defined unambiguously.
+        are still unambiguously defined whereas some Keplerian elements (more precisely ω and Ω) become ambiguous. When orbit
+        is equatorial, neither the Keplerian nor the circular parameters can be defined unambiguously.
         :class:`~org.orekit.orbits.EquinoctialOrbit` is the recommended way to represent orbits.
     
         The instance :code:`CircularOrbit` is guaranteed to be immutable.
@@ -4267,9 +4311,9 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
             Computes the mean latitude argument from the eccentric latitude argument.
         
             Parameters:
-                alphaE (T): = E + Ï‰ eccentric latitude argument (rad)
-                ex (T): e cos(Ï‰), first component of circular eccentricity vector
-                ey (T): e sin(Ï‰), second component of circular eccentricity vector
+                alphaE (T): = E + ω eccentric latitude argument (rad)
+                ex (T): e cos(ω), first component of circular eccentricity vector
+                ey (T): e sin(ω), second component of circular eccentricity vector
         
             Returns:
                 the mean latitude argument.
@@ -4284,9 +4328,9 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
             Computes the true latitude argument from the eccentric latitude argument.
         
             Parameters:
-                alphaE (T): = E + Ï‰ eccentric latitude argument (rad)
-                ex (T): e cos(Ï‰), first component of circular eccentricity vector
-                ey (T): e sin(Ï‰), second component of circular eccentricity vector
+                alphaE (T): = E + ω eccentric latitude argument (rad)
+                ex (T): e cos(ω), first component of circular eccentricity vector
+                ey (T): e sin(ω), second component of circular eccentricity vector
         
             Returns:
                 the true latitude argument.
@@ -4357,7 +4401,7 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
             Get the eccentric latitude argument.
         
             Returns:
-                E + Ï‰ eccentric latitude argument (rad)
+                E + ω eccentric latitude argument (rad)
         
         
         """
@@ -4367,7 +4411,7 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
             Get the eccentric latitude argument derivative.
         
             Returns:
-                d(E + Ï‰)/dt eccentric latitude argument derivative (rad/s)
+                d(E + ω)/dt eccentric latitude argument derivative (rad/s)
         
         
         """
@@ -4377,7 +4421,7 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
             Get the mean latitude argument.
         
             Returns:
-                M + Ï‰ mean latitude argument (rad)
+                M + ω mean latitude argument (rad)
         
         
         """
@@ -4387,7 +4431,7 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
             Get the mean latitude argument derivative.
         
             Returns:
-                d(M + Ï‰)/dt mean latitude argument derivative (rad/s)
+                d(M + ω)/dt mean latitude argument derivative (rad/s)
         
         
         """
@@ -4397,7 +4441,7 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
             Get the true latitude argument.
         
             Returns:
-                v + Ï‰ true latitude argument (rad)
+                v + ω true latitude argument (rad)
         
         
         """
@@ -4407,7 +4451,7 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
             Get the true latitude argument derivative.
         
             Returns:
-                d(v + Ï‰)/dt true latitude argument derivative (rad/s)
+                d(v + ω)/dt true latitude argument derivative (rad/s)
         
         
         """
@@ -4417,7 +4461,7 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
             Get the first component of the circular eccentricity vector.
         
             Returns:
-                ex = e cos(Ï‰), first component of the circular eccentricity vector
+                ex = e cos(ω), first component of the circular eccentricity vector
         
         
         """
@@ -4427,7 +4471,7 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
             Get the first component of the circular eccentricity vector derivative.
         
             Returns:
-                d(ex)/dt = d(e cos(Ï‰))/dt, first component of the circular eccentricity vector derivative
+                d(ex)/dt = d(e cos(ω))/dt, first component of the circular eccentricity vector derivative
         
         
         """
@@ -4437,7 +4481,7 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
             Get the second component of the circular eccentricity vector.
         
             Returns:
-                ey = e sin(Ï‰), second component of the circular eccentricity vector
+                ey = e sin(ω), second component of the circular eccentricity vector
         
         
         """
@@ -4447,7 +4491,7 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
             Get the second component of the circular eccentricity vector derivative.
         
             Returns:
-                d(ey)/dt = d(e sin(Ï‰))/dt, second component of the circular eccentricity vector derivative
+                d(ey)/dt = d(e sin(ω))/dt, second component of the circular eccentricity vector derivative
         
         
         """
@@ -4626,7 +4670,7 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
                 :meth:`~org.orekit.orbits.FieldOrbit.getLE` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                E + Ï‰ + Î© eccentric longitude argument (rad)
+                E + ω + Ω eccentric longitude argument (rad)
         
         
         """
@@ -4641,7 +4685,7 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
                 :meth:`~org.orekit.orbits.FieldOrbit.getLEDot` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                d(E + Ï‰ + Î©)/dt eccentric longitude argument derivative (rad/s)
+                d(E + ω + Ω)/dt eccentric longitude argument derivative (rad/s)
         
         
         """
@@ -4654,7 +4698,7 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
                 :meth:`~org.orekit.orbits.FieldOrbit.getLM` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                M + Ï‰ + Î© mean longitude argument (rad)
+                M + ω + Ω mean longitude argument (rad)
         
         
         """
@@ -4669,7 +4713,7 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
                 :meth:`~org.orekit.orbits.FieldOrbit.getLMDot` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                d(M + Ï‰ + Î©)/dt mean longitude argument derivative (rad/s)
+                d(M + ω + Ω)/dt mean longitude argument derivative (rad/s)
         
         
         """
@@ -4682,7 +4726,7 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
                 :meth:`~org.orekit.orbits.FieldOrbit.getLv` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                v + Ï‰ + Î© true longitude argument (rad)
+                v + ω + Ω true longitude argument (rad)
         
         
         """
@@ -4697,7 +4741,7 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
                 :meth:`~org.orekit.orbits.FieldOrbit.getLvDot` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                d(v + Ï‰ + Î©)/dt true longitude argument derivative (rad/s)
+                d(v + ω + Ω)/dt true longitude argument derivative (rad/s)
         
         
         """
@@ -4766,9 +4810,9 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
             Computes the eccentric latitude argument from the mean latitude argument.
         
             Parameters:
-                alphaM (T): = M + Ï‰ mean latitude argument (rad)
-                ex (T): e cos(Ï‰), first component of circular eccentricity vector
-                ey (T): e sin(Ï‰), second component of circular eccentricity vector
+                alphaM (T): = M + ω mean latitude argument (rad)
+                ex (T): e cos(ω), first component of circular eccentricity vector
+                ey (T): e sin(ω), second component of circular eccentricity vector
         
             Returns:
                 the eccentric latitude argument.
@@ -4798,7 +4842,8 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
             Returns a string representation of this Orbit object.
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a string representation of this object
@@ -4813,9 +4858,9 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
             Computes the eccentric latitude argument from the true latitude argument.
         
             Parameters:
-                alphaV (T): = v + Ï‰ true latitude argument (rad)
-                ex (T): e cos(Ï‰), first component of circular eccentricity vector
-                ey (T): e sin(Ï‰), second component of circular eccentricity vector
+                alphaV (T): = v + ω true latitude argument (rad)
+                ex (T): e cos(ω), first component of circular eccentricity vector
+                ey (T): e sin(ω), second component of circular eccentricity vector
         
             Returns:
                 the eccentric latitude argument.
@@ -4827,7 +4872,7 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
 _FieldEquinoctialOrbit__T = typing.TypeVar('_FieldEquinoctialOrbit__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], typing.Generic[_FieldEquinoctialOrbit__T]):
     """
-    public class FieldEquinoctialOrbit<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.orbits.FieldOrbit`<T>
+    public class FieldEquinoctialOrbit<T extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.orbits.FieldOrbit`<T>
     
         This class handles equinoctial orbital parameters, which can support both circular and equatorial orbits.
     
@@ -4835,20 +4880,19 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], typing.Generi
     
         .. code-block: java
         
-        
-             a
-             ex = e cos(Ï‰ + Î©)
-             ey = e sin(Ï‰ + Î©)
-             hx = tan(i/2) cos(Î©)
-             hy = tan(i/2) sin(Î©)
-             lv = v + Ï‰ + Î©
+             a
+             ex = e cos(ω + Ω)
+             ey = e sin(ω + Ω)
+             hx = tan(i/2) cos(Ω)
+             hy = tan(i/2) sin(Ω)
+             lv = v + ω + Ω
            
-        where Ï‰ stands for the Perigee Argument and Î© stands for the Right Ascension of the Ascending Node.
+        where ω stands for the Perigee Argument and Ω stands for the Right Ascension of the Ascending Node.
     
         The conversion equations from and to Keplerian elements given above hold only when both sides are unambiguously defined,
         i.e. when orbit is neither equatorial nor circular. When orbit is either equatorial or circular, the equinoctial
-        parameters are still unambiguously defined whereas some Keplerian elements (more precisely Ã�â€° and ÃŽÂ©) become
-        ambiguous. For this reason, equinoctial parameters are the recommended way to represent orbits.
+        parameters are still unambiguously defined whereas some Keplerian elements (more precisely ω and Ω) become ambiguous.
+        For this reason, equinoctial parameters are the recommended way to represent orbits.
     
         The instance :code:`EquinoctialOrbit` is guaranteed to be immutable.
     
@@ -4895,7 +4939,7 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], typing.Generi
             Computes the mean longitude argument from the eccentric longitude argument.
         
             Parameters:
-                lE (T): = E + Ï‰ + Î© mean longitude argument (rad)
+                lE (T): = E + ω + Ω mean longitude argument (rad)
                 ex (T): first component of the eccentricity vector
                 ey (T): second component of the eccentricity vector
         
@@ -4912,7 +4956,7 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], typing.Generi
             Computes the true longitude argument from the eccentric longitude argument.
         
             Parameters:
-                lE (T): = E + Ï‰ + Î© eccentric longitude argument (rad)
+                lE (T): = E + ω + Ω eccentric longitude argument (rad)
                 ex (T): first component of the eccentricity vector
                 ey (T): second component of the eccentricity vector
         
@@ -5154,7 +5198,7 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], typing.Generi
                 :meth:`~org.orekit.orbits.FieldOrbit.getLE` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                E + Ï‰ + Î© eccentric longitude argument (rad)
+                E + ω + Ω eccentric longitude argument (rad)
         
         
         """
@@ -5169,7 +5213,7 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], typing.Generi
                 :meth:`~org.orekit.orbits.FieldOrbit.getLEDot` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                d(E + Ï‰ + Î©)/dt eccentric longitude argument derivative (rad/s)
+                d(E + ω + Ω)/dt eccentric longitude argument derivative (rad/s)
         
         
         """
@@ -5182,7 +5226,7 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], typing.Generi
                 :meth:`~org.orekit.orbits.FieldOrbit.getLM` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                M + Ï‰ + Î© mean longitude argument (rad)
+                M + ω + Ω mean longitude argument (rad)
         
         
         """
@@ -5197,7 +5241,7 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], typing.Generi
                 :meth:`~org.orekit.orbits.FieldOrbit.getLMDot` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                d(M + Ï‰ + Î©)/dt mean longitude argument derivative (rad/s)
+                d(M + ω + Ω)/dt mean longitude argument derivative (rad/s)
         
         
         """
@@ -5210,7 +5254,7 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], typing.Generi
                 :meth:`~org.orekit.orbits.FieldOrbit.getLv` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                v + Ï‰ + Î© true longitude argument (rad)
+                v + ω + Ω true longitude argument (rad)
         
         
         """
@@ -5225,7 +5269,7 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], typing.Generi
                 :meth:`~org.orekit.orbits.FieldOrbit.getLvDot` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                d(v + Ï‰ + Î©)/dt true longitude argument derivative (rad/s)
+                d(v + ω + Ω)/dt true longitude argument derivative (rad/s)
         
         
         """
@@ -5274,7 +5318,7 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], typing.Generi
             Computes the eccentric longitude argument from the mean longitude argument.
         
             Parameters:
-                lM (T): = M + Ï‰ + Î© mean longitude argument (rad)
+                lM (T): = M + ω + Ω mean longitude argument (rad)
                 ex (T): first component of the eccentricity vector
                 ey (T): second component of the eccentricity vector
         
@@ -5306,7 +5350,8 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], typing.Generi
             Returns a string representation of this equinoctial parameters object.
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a string representation of this object
@@ -5321,7 +5366,7 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], typing.Generi
             Computes the eccentric longitude argument from the true longitude argument.
         
             Parameters:
-                lv (T): = v + Ï‰ + Î© true longitude argument (rad)
+                lv (T): = v + ω + Ω true longitude argument (rad)
                 ex (T): first component of the eccentricity vector
                 ey (T): second component of the eccentricity vector
         
@@ -5335,7 +5380,7 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], typing.Generi
 _FieldKeplerianOrbit__T = typing.TypeVar('_FieldKeplerianOrbit__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], typing.Generic[_FieldKeplerianOrbit__T]):
     """
-    public class FieldKeplerianOrbit<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.orbits.FieldOrbit`<T>
+    public class FieldKeplerianOrbit<T extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.orbits.FieldOrbit`<T>
     
         This class handles traditional Keplerian orbital parameters.
     
@@ -5343,22 +5388,21 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], typing.Generic[_F
     
         .. code-block: java
         
-        
-             a
-             e
-             i
-             Ï‰
-             Î©
-             v
+             a
+             e
+             i
+             ω
+             Ω
+             v
            
-        where Ã�â€° stands for the Perigee Argument, ÃŽÂ© stands for the Right Ascension of the Ascending Node and v stands for
-        the true anomaly.
+        where ω stands for the Perigee Argument, Ω stands for the Right Ascension of the Ascending Node and v stands for the
+        true anomaly.
     
         This class supports hyperbolic orbits, using the convention that semi major axis is negative for such orbits (and of
         course eccentricity is greater than 1).
     
-        When orbit is either equatorial or circular, some Keplerian elements (more precisely Ã�â€° and ÃŽÂ©) become ambiguous so
-        this class should not be used for such orbits. For this reason, :class:`~org.orekit.orbits.EquinoctialOrbit` is the
+        When orbit is either equatorial or circular, some Keplerian elements (more precisely ω and Ω) become ambiguous so this
+        class should not be used for such orbits. For this reason, :class:`~org.orekit.orbits.EquinoctialOrbit` is the
         recommended way to represent orbits.
     
         The instance :code:`KeplerianOrbit` is guaranteed to be immutable.
@@ -5422,7 +5466,7 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], typing.Generic[_F
     def ellipticEccentricToTrue(t: _ellipticEccentricToTrue__T, t2: _ellipticEccentricToTrue__T) -> _ellipticEccentricToTrue__T:
         """
             Deprecated.
-            As of 11.3, replaced by :meth:`~org.orekit.orbits.FieldKeplerianAnomalyUtility.ellipticEccentricToMean`.
+            As of 11.3, replaced by :meth:`~org.orekit.orbits.FieldKeplerianAnomalyUtility.ellipticEccentricToTrue`.
             Computes the true anomaly from the elliptic eccentric anomaly.
         
             Parameters:
@@ -5691,7 +5735,7 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], typing.Generic[_F
                 :meth:`~org.orekit.orbits.FieldOrbit.getLE` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                E + Ï‰ + Î© eccentric longitude argument (rad)
+                E + ω + Ω eccentric longitude argument (rad)
         
         
         """
@@ -5706,7 +5750,7 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], typing.Generic[_F
                 :meth:`~org.orekit.orbits.FieldOrbit.getLEDot` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                d(E + Ï‰ + Î©)/dt eccentric longitude argument derivative (rad/s)
+                d(E + ω + Ω)/dt eccentric longitude argument derivative (rad/s)
         
         
         """
@@ -5719,7 +5763,7 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], typing.Generic[_F
                 :meth:`~org.orekit.orbits.FieldOrbit.getLM` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                M + Ï‰ + Î© mean longitude argument (rad)
+                M + ω + Ω mean longitude argument (rad)
         
         
         """
@@ -5734,7 +5778,7 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], typing.Generic[_F
                 :meth:`~org.orekit.orbits.FieldOrbit.getLMDot` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                d(M + Ï‰ + Î©)/dt mean longitude argument derivative (rad/s)
+                d(M + ω + Ω)/dt mean longitude argument derivative (rad/s)
         
         
         """
@@ -5747,7 +5791,7 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], typing.Generic[_F
                 :meth:`~org.orekit.orbits.FieldOrbit.getLv` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                v + Ï‰ + Î© true longitude argument (rad)
+                v + ω + Ω true longitude argument (rad)
         
         
         """
@@ -5762,7 +5806,7 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], typing.Generic[_F
                 :meth:`~org.orekit.orbits.FieldOrbit.getLvDot` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                d(v + Ï‰ + Î©)/dt true longitude argument derivative (rad/s)
+                d(v + ω + Ω)/dt true longitude argument derivative (rad/s)
         
         
         """
@@ -5986,7 +6030,8 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], typing.Generic[_F
             Returns a string representation of this Keplerian parameters object.
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a string representation of this object
@@ -6055,22 +6100,21 @@ class KeplerianOrbit(Orbit):
     
         .. code-block: java
         
-        
-             a
-             e
-             i
-             Ï‰
-             Î©
-             v
+             a
+             e
+             i
+             ω
+             Ω
+             v
            
-        where Ã�â€° stands for the Perigee Argument, ÃŽÂ© stands for the Right Ascension of the Ascending Node and v stands for
-        the true anomaly.
+        where ω stands for the Perigee Argument, Ω stands for the Right Ascension of the Ascending Node and v stands for the
+        true anomaly.
     
         This class supports hyperbolic orbits, using the convention that semi major axis is negative for such orbits (and of
         course eccentricity is greater than 1).
     
-        When orbit is either equatorial or circular, some Keplerian elements (more precisely Ã�â€° and ÃŽÂ©) become ambiguous so
-        this class should not be used for such orbits. For this reason, :class:`~org.orekit.orbits.EquinoctialOrbit` is the
+        When orbit is either equatorial or circular, some Keplerian elements (more precisely ω and Ω) become ambiguous so this
+        class should not be used for such orbits. For this reason, :class:`~org.orekit.orbits.EquinoctialOrbit` is the
         recommended way to represent orbits.
     
         The instance :code:`KeplerianOrbit` is guaranteed to be immutable.
@@ -6163,7 +6207,8 @@ class KeplerianOrbit(Orbit):
         
             Note that the semi-major axis is considered negative for hyperbolic orbits.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getADot` in class :class:`~org.orekit.orbits.Orbit`
@@ -6223,7 +6268,8 @@ class KeplerianOrbit(Orbit):
         """
             Get the eccentricity derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getEDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -6277,7 +6323,8 @@ class KeplerianOrbit(Orbit):
         """
             Get the first component of the equinoctial eccentricity vector.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getEquinoctialExDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -6308,7 +6355,8 @@ class KeplerianOrbit(Orbit):
         """
             Get the second component of the equinoctial eccentricity vector.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getEquinoctialEyDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -6339,7 +6387,8 @@ class KeplerianOrbit(Orbit):
         """
             Get the first component of the inclination vector derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getHxDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -6370,7 +6419,8 @@ class KeplerianOrbit(Orbit):
         """
             Get the second component of the inclination vector derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getHyDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -6401,7 +6451,8 @@ class KeplerianOrbit(Orbit):
         """
             Get the inclination derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getIDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -6423,7 +6474,7 @@ class KeplerianOrbit(Orbit):
                 :meth:`~org.orekit.orbits.Orbit.getLE` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                E + Ï‰ + Î© eccentric longitude argument (rad)
+                E + ω + Ω eccentric longitude argument (rad)
         
         
         """
@@ -6432,13 +6483,14 @@ class KeplerianOrbit(Orbit):
         """
             Get the eccentric longitude argument derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getLEDot` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                d(E + Ï‰ + Î©)/dt eccentric longitude argument derivative (rad/s)
+                d(E + ω + Ω)/dt eccentric longitude argument derivative (rad/s)
         
             Also see:
                 :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
@@ -6454,7 +6506,7 @@ class KeplerianOrbit(Orbit):
                 :meth:`~org.orekit.orbits.Orbit.getLM` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                M + Ï‰ + Î© mean longitude argument (rad)
+                M + ω + Ω mean longitude argument (rad)
         
         
         """
@@ -6463,13 +6515,14 @@ class KeplerianOrbit(Orbit):
         """
             Get the mean longitude argument derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getLMDot` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                d(M + Ï‰ + Î©)/dt mean longitude argument derivative (rad/s)
+                d(M + ω + Ω)/dt mean longitude argument derivative (rad/s)
         
             Also see:
                 :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
@@ -6485,7 +6538,7 @@ class KeplerianOrbit(Orbit):
                 :meth:`~org.orekit.orbits.Orbit.getLv` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                v + Ï‰ + Î© true longitude argument (rad)
+                v + ω + Ω true longitude argument (rad)
         
         
         """
@@ -6494,13 +6547,14 @@ class KeplerianOrbit(Orbit):
         """
             Get the true longitude argument derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getLvDot` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                d(v + Ï‰ + Î©)/dt true longitude argument derivative (rad/s)
+                d(v + ω + Ω)/dt true longitude argument derivative (rad/s)
         
             Also see:
                 :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
@@ -6545,7 +6599,8 @@ class KeplerianOrbit(Orbit):
         """
             Get the perigee argument derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Returns:
                 perigee argument derivative (rad/s)
@@ -6570,7 +6625,8 @@ class KeplerianOrbit(Orbit):
         """
             Get the right ascension of the ascending node derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Returns:
                 right ascension of the ascending node derivative (rad/s)
@@ -6698,7 +6754,8 @@ class KeplerianOrbit(Orbit):
             Returns a string representation of this Keplerian parameters object.
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a string representation of this object
@@ -6850,7 +6907,8 @@ class PythonOrbit(Orbit):
         
             Note that the semi-major axis is considered negative for hyperbolic orbits.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getADot` in class :class:`~org.orekit.orbits.Orbit`
@@ -6884,7 +6942,8 @@ class PythonOrbit(Orbit):
         """
             Get the eccentricity derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getEDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -6918,7 +6977,8 @@ class PythonOrbit(Orbit):
         """
             Get the first component of the equinoctial eccentricity vector.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getEquinoctialExDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -6952,7 +7012,8 @@ class PythonOrbit(Orbit):
         """
             Get the second component of the equinoctial eccentricity vector.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getEquinoctialEyDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -6986,7 +7047,8 @@ class PythonOrbit(Orbit):
         """
             Get the first component of the inclination vector derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getHxDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -7020,7 +7082,8 @@ class PythonOrbit(Orbit):
         """
             Get the second component of the inclination vector derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getHyDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -7054,7 +7117,8 @@ class PythonOrbit(Orbit):
         """
             Get the inclination derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getIDot` in class :class:`~org.orekit.orbits.Orbit`
@@ -7079,7 +7143,7 @@ class PythonOrbit(Orbit):
                 :meth:`~org.orekit.orbits.Orbit.getLE` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                E + Ï‰ + Î© eccentric longitude argument (rad)
+                E + ω + Ω eccentric longitude argument (rad)
         
         
         """
@@ -7088,13 +7152,14 @@ class PythonOrbit(Orbit):
         """
             Get the eccentric longitude argument derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getLEDot` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                d(E + Ï‰ + Î©)/dt eccentric longitude argument derivative (rad/s)
+                d(E + ω + Ω)/dt eccentric longitude argument derivative (rad/s)
         
             Since:
                 9.0
@@ -7113,7 +7178,7 @@ class PythonOrbit(Orbit):
                 :meth:`~org.orekit.orbits.Orbit.getLM` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                M + Ï‰ + Î© mean longitude argument (rad)
+                M + ω + Ω mean longitude argument (rad)
         
         
         """
@@ -7122,13 +7187,14 @@ class PythonOrbit(Orbit):
         """
             Get the mean longitude argument derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getLMDot` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                d(M + Ï‰ + Î©)/dt mean longitude argument derivative (rad/s)
+                d(M + ω + Ω)/dt mean longitude argument derivative (rad/s)
         
             Since:
                 9.0
@@ -7147,7 +7213,7 @@ class PythonOrbit(Orbit):
                 :meth:`~org.orekit.orbits.Orbit.getLv` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                v + Ï‰ + Î© true longitude argument (rad)
+                v + ω + Ω true longitude argument (rad)
         
         
         """
@@ -7156,13 +7222,14 @@ class PythonOrbit(Orbit):
         """
             Get the true longitude argument derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
+            If the orbit was created without derivatives, the value returned is
+            :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getLvDot` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                d(v + Ï‰ + Î©)/dt true longitude argument derivative (rad/s)
+                d(v + ω + Ω)/dt true longitude argument derivative (rad/s)
         
             Since:
                 9.0

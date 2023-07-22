@@ -12,7 +12,7 @@ import typing
 
 class AbstractWriter:
     """
-    public abstract class AbstractWriter extends Object
+    public abstract class AbstractWriter extends :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Top level class for writing CCSDS message sections.
     
@@ -23,7 +23,7 @@ class AbstractWriter:
 
 class HeaderKey(java.lang.Enum['HeaderKey']):
     """
-    public enum HeaderKey extends Enum<:class:`~org.orekit.files.ccsds.section.HeaderKey`>
+    public enum HeaderKey extends :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.section.HeaderKey`>
     
         Keywords allowed in :class:`~org.orekit.files.ccsds.section.Header`.
     
@@ -61,14 +61,14 @@ class HeaderKey(java.lang.Enum['HeaderKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -81,9 +81,8 @@ class HeaderKey(java.lang.Enum['HeaderKey']):
         
             .. code-block: java
             
-            
-            for (HeaderKey c : HeaderKey.values())
-                System.out.println(c);
+            for (HeaderKey c : HeaderKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -95,7 +94,7 @@ class HeaderKey(java.lang.Enum['HeaderKey']):
 
 class HeaderProcessingState(org.orekit.files.ccsds.utils.parsing.ProcessingState):
     """
-    public class HeaderProcessingState extends Object implements :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
+    public class HeaderProcessingState extends :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
     
         :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState` for :class:`~org.orekit.files.ccsds.section.Header`.
     
@@ -108,8 +107,8 @@ class HeaderProcessingState(org.orekit.files.ccsds.utils.parsing.ProcessingState
             Process one token.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.ProcessingState.processToken`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.ProcessingState.processToken` in
+                interface :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
         
             Parameters:
                 token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
@@ -123,7 +122,7 @@ class HeaderProcessingState(org.orekit.files.ccsds.utils.parsing.ProcessingState
 
 class KvnStructureKey(java.lang.Enum['KvnStructureKey']):
     """
-    public enum KvnStructureKey extends Enum<:class:`~org.orekit.files.ccsds.section.KvnStructureKey`>
+    public enum KvnStructureKey extends :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.section.KvnStructureKey`>
     
         Keys for :meth:`~org.orekit.files.ccsds.utils.FileFormat.KVN` format structure.
     
@@ -158,14 +157,14 @@ class KvnStructureKey(java.lang.Enum['KvnStructureKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -178,9 +177,8 @@ class KvnStructureKey(java.lang.Enum['KvnStructureKey']):
         
             .. code-block: java
             
-            
-            for (KvnStructureKey c : KvnStructureKey.values())
-                System.out.println(c);
+            for (KvnStructureKey c : KvnStructureKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -192,7 +190,7 @@ class KvnStructureKey(java.lang.Enum['KvnStructureKey']):
 
 class KvnStructureProcessingState(org.orekit.files.ccsds.utils.parsing.ProcessingState):
     """
-    public class KvnStructureProcessingState extends Object implements :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
+    public class KvnStructureProcessingState extends :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
     
         :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState` for structure of
         :meth:`~org.orekit.files.ccsds.utils.FileFormat.KVN` CCSDS Messages.
@@ -206,8 +204,8 @@ class KvnStructureProcessingState(org.orekit.files.ccsds.utils.parsing.Processin
             Process one token.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.ProcessingState.processToken`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.ProcessingState.processToken` in
+                interface :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
         
             Parameters:
                 token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
@@ -221,7 +219,7 @@ class KvnStructureProcessingState(org.orekit.files.ccsds.utils.parsing.Processin
 
 class MetadataKey(java.lang.Enum['MetadataKey']):
     """
-    public enum MetadataKey extends Enum<:class:`~org.orekit.files.ccsds.section.MetadataKey`>
+    public enum MetadataKey extends :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.section.MetadataKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.section.Metadata` entries.
     
@@ -257,14 +255,14 @@ class MetadataKey(java.lang.Enum['MetadataKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -277,9 +275,8 @@ class MetadataKey(java.lang.Enum['MetadataKey']):
         
             .. code-block: java
             
-            
-            for (MetadataKey c : MetadataKey.values())
-                System.out.println(c);
+            for (MetadataKey c : MetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -315,7 +312,7 @@ _Segment__M = typing.TypeVar('_Segment__M', bound='Metadata')  # <M>
 _Segment__D = typing.TypeVar('_Segment__D', bound='Data')  # <D>
 class Segment(typing.Generic[_Segment__M, _Segment__D]):
     """
-    public class Segment<M extends :class:`~org.orekit.files.ccsds.section.Metadata`, D extends :class:`~org.orekit.files.ccsds.section.Data`> extends Object
+    public class Segment<M extends :class:`~org.orekit.files.ccsds.section.Metadata`, D extends :class:`~org.orekit.files.ccsds.section.Data`> extends :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         NDM segments are (:class:`~org.orekit.files.ccsds.section.Metadata`, :class:`~org.orekit.files.ccsds.section.Data`)
         pairs.
@@ -347,7 +344,7 @@ class Segment(typing.Generic[_Segment__M, _Segment__D]):
 
 class XmlStructureKey(java.lang.Enum['XmlStructureKey']):
     """
-    public enum XmlStructureKey extends Enum<:class:`~org.orekit.files.ccsds.section.XmlStructureKey`>
+    public enum XmlStructureKey extends :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.section.XmlStructureKey`>
     
         Keys for :meth:`~org.orekit.files.ccsds.utils.FileFormat.XML` format structure.
     
@@ -385,14 +382,14 @@ class XmlStructureKey(java.lang.Enum['XmlStructureKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -405,9 +402,8 @@ class XmlStructureKey(java.lang.Enum['XmlStructureKey']):
         
             .. code-block: java
             
-            
-            for (XmlStructureKey c : XmlStructureKey.values())
-                System.out.println(c);
+            for (XmlStructureKey c : XmlStructureKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -419,7 +415,7 @@ class XmlStructureKey(java.lang.Enum['XmlStructureKey']):
 
 class XmlStructureProcessingState(org.orekit.files.ccsds.utils.parsing.ProcessingState):
     """
-    public class XmlStructureProcessingState extends Object implements :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
+    public class XmlStructureProcessingState extends :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
     
         :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState` for structure of
         :meth:`~org.orekit.files.ccsds.utils.FileFormat.XML` CCSDS Messages.
@@ -433,8 +429,8 @@ class XmlStructureProcessingState(org.orekit.files.ccsds.utils.parsing.Processin
             Process one token.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.ProcessingState.processToken`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.ProcessingState.processToken` in
+                interface :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
         
             Parameters:
                 token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
@@ -448,7 +444,7 @@ class XmlStructureProcessingState(org.orekit.files.ccsds.utils.parsing.Processin
 
 class CommentsContainer(Section):
     """
-    public class CommentsContainer extends Object implements :class:`~org.orekit.files.ccsds.section.Section`
+    public class CommentsContainer extends :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.section.Section`
     
         Container for comments in various CCSDS messages.
     
@@ -478,7 +474,7 @@ class CommentsContainer(Section):
             Comments are accepted only at start. Once other content is stored in the same section, comments are refused.
         
             Parameters:
-                comment (String): comment line
+                comment (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): comment line
         
             Returns:
                 true if comment was accepted
@@ -492,8 +488,8 @@ class CommentsContainer(Section):
         
             Parameters:
                 version (double): format version
-                field (Object): field to check
-                key (Enum<?> key): key associated with the field
+                field (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): field to check
+                key (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<?> key): key associated with the field
                 minVersion (double): version at which key started to be allowed
                 maxVersion (double): version at which key started to be forbidden
         
@@ -506,7 +502,7 @@ class CommentsContainer(Section):
         
             Parameters:
                 field (double): field to check
-                key (Enum<?> key): key associated with the field
+                key (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<?> key): key associated with the field
         
         
         """
@@ -517,7 +513,7 @@ class CommentsContainer(Section):
         
             Parameters:
                 field (int): field to check
-                key (Enum<?> key): key associated with the field
+                key (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<?> key): key associated with the field
         
         
         """
@@ -527,22 +523,13 @@ class CommentsContainer(Section):
             Complain if a field is null.
         
             Parameters:
-                field (Object): field to check
-                key (Enum<?> key): key associated with the field
+                field (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): field to check
+                key (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<?> key): key associated with the field
         
         
         """
         ...
-    def getComments(self) -> java.util.List[str]:
-        """
-            Get the comments.
-        
-            Returns:
-                comments
-        
-        
-        """
-        ...
+    def getComments(self) -> java.util.List[str]: ...
     def refuseFurtherComments(self) -> None:
         """
             Set flag to refuse further comments.
@@ -587,8 +574,8 @@ class PythonAbstractWriter(AbstractWriter):
             Convert an array of integer to a comma-separated list.
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.section.AbstractWriter.intArrayToString`Â in
-                classÂ :class:`~org.orekit.files.ccsds.section.AbstractWriter`
+                :meth:`~org.orekit.files.ccsds.section.AbstractWriter.intArrayToString` in
+                class :class:`~org.orekit.files.ccsds.section.AbstractWriter`
         
             Parameters:
                 integers (int[]): integers to write
@@ -622,7 +609,7 @@ class PythonAbstractWriter(AbstractWriter):
 
 class PythonSection(Section):
     """
-    public class PythonSection extends Object implements :class:`~org.orekit.files.ccsds.section.Section`
+    public class PythonSection extends :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.section.Section`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -736,7 +723,7 @@ class Header(CommentsContainer):
             Set the ID that uniquely identifies a message from a given originator.
         
             Parameters:
-                messageId (String): ID that uniquely identifies a message from a given originator
+                messageId (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): ID that uniquely identifies a message from a given originator
         
         
         """
@@ -746,7 +733,7 @@ class Header(CommentsContainer):
             Set the file originator.
         
             Parameters:
-                originator (String): the originator to be set
+                originator (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the originator to be set
         
         
         """
@@ -761,8 +748,8 @@ class Header(CommentsContainer):
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
+                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
         
             Parameters:
                 version (double): format version
@@ -812,8 +799,8 @@ class Metadata(CommentsContainer):
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
+                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
         
             Parameters:
                 version (double): format version
@@ -824,7 +811,7 @@ class Metadata(CommentsContainer):
 
 class PyhonData(Data):
     """
-    public class PyhonData extends Object implements :class:`~org.orekit.files.ccsds.section.Data`
+    public class PyhonData extends :class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.section.Data`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...

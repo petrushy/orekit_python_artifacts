@@ -24,7 +24,7 @@ class AbstractEopLoader(org.orekit.data.AbstractSelfFeedingLoader):
 
 class EOPEntry(org.orekit.time.TimeStamped, java.io.Serializable):
     """
-    public class EOPEntry extends Object implements :class:`~org.orekit.time.TimeStamped`, Serializable
+    public class EOPEntry extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         This class holds an Earth Orientation Parameters entry.
     
@@ -47,20 +47,20 @@ class EOPEntry(org.orekit.time.TimeStamped, java.io.Serializable):
         ...
     def getDdEps(self) -> float:
         """
-            Get the correction for nutation in obliquity Î´Î”Îµ.
+            Get the correction for nutation in obliquity δΔε.
         
             Returns:
-                correction for nutation in obliquity Î´Î”Îµ
+                correction for nutation in obliquity δΔε
         
         
         """
         ...
     def getDdPsi(self) -> float:
         """
-            Get the correction for nutation in longitude Î´Î”Î¨.
+            Get the correction for nutation in longitude δΔΨ.
         
             Returns:
-                correction for nutation in longitude Î´Î”Î¨
+                correction for nutation in longitude δΔΨ
         
         
         """
@@ -154,7 +154,7 @@ class EOPEntry(org.orekit.time.TimeStamped, java.io.Serializable):
 
 class EOPHistory(java.io.Serializable):
     """
-    public class EOPHistory extends Object implements Serializable
+    public class EOPHistory extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         This class loads any kind of Earth Orientation Parameter data throughout a large time range.
     
@@ -205,7 +205,7 @@ class EOPHistory(java.io.Serializable):
                 date (:class:`~org.orekit.time.AbsoluteDate`): date at which the correction is desired
         
             Returns:
-                nutation correction in longitude Î”Î¨ and in obliquity Î”Îµ (zero if date is outside covered range)
+                nutation correction in longitude ΔΨ and in obliquity Δε (zero if date is outside covered range)
         
         """
         ...
@@ -220,7 +220,7 @@ class EOPHistory(java.io.Serializable):
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date at which the correction is desired
         
             Returns:
-                nutation correction in longitude Î”Î¨ and in obliquity Î”Îµ (zero if date is outside covered range)
+                nutation correction in longitude ΔΨ and in obliquity Δε (zero if date is outside covered range)
         
         
         """
@@ -298,7 +298,7 @@ class EOPHistory(java.io.Serializable):
                 date (:class:`~org.orekit.time.AbsoluteDate`): date at which the correction is desired
         
             Returns:
-                nutation correction in Celestial Intermediat Pole coordinates Î´X and Î´Y (zero if date is outside covered range)
+                nutation correction in Celestial Intermediat Pole coordinates δX and δY (zero if date is outside covered range)
         
         """
         ...
@@ -313,7 +313,7 @@ class EOPHistory(java.io.Serializable):
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date at which the correction is desired
         
             Returns:
-                nutation correction in Celestial Intermediat Pole coordinates Î´X and Î´Y (zero if date is outside covered range)
+                nutation correction in Celestial Intermediat Pole coordinates δX and δY (zero if date is outside covered range)
         
         
         """
@@ -453,7 +453,7 @@ class EOPHistoryLoader:
 _FieldPoleCorrection__T = typing.TypeVar('_FieldPoleCorrection__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldPoleCorrection(typing.Generic[_FieldPoleCorrection__T]):
     """
-    public class FieldPoleCorrection<T extends CalculusFieldElement<T>> extends Object
+    public class FieldPoleCorrection<T extends :class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Simple container class for pole correction parameters.
     
@@ -487,7 +487,7 @@ class FieldPoleCorrection(typing.Generic[_FieldPoleCorrection__T]):
 _FieldTransform__T = typing.TypeVar('_FieldTransform__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldTransform(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['FieldTransform'[_FieldTransform__T]], typing.Generic[_FieldTransform__T]):
     """
-    public class FieldTransform<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.frames.FieldTransform`<T>>
+    public class FieldTransform<T extends :class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.frames.FieldTransform`<T>>
     
         Transformation class in three dimensional space.
     
@@ -519,14 +519,13 @@ class FieldTransform(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable[
     
         .. code-block: java
         
-        
-         Vector3D translation  = new Vector3D(-1, 0, 0);
-         Vector3D velocity     = new Vector3D(-2, 0, 0);
-         Vector3D acceleration = new Vector3D(-3, 0, 0);
-        
-         Transform R1toR2 = new Transform(date, translation, velocity, acceleration);
-        
-         PVB = R1toR2.transformPVCoordinate(PVA);
+         Vector3D translation  = new Vector3D(-1, 0, 0);
+         Vector3D velocity     = new Vector3D(-2, 0, 0);
+         Vector3D acceleration = new Vector3D(-3, 0, 0);
+        
+         Transform R1toR2 = new Transform(date, translation, velocity, acceleration);
+        
+         PVB = R1toR2.transformPVCoordinate(PVA);
          
     
         Example of rotation from R :sub:`A` to R :sub:`B`
@@ -544,13 +543,12 @@ class FieldTransform(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable[
     
         .. code-block: java
         
-        
-         Rotation rotation = new Rotation(Vector3D.PLUS_K, FastMath.PI / 2);
-         Vector3D rotationRate = new Vector3D(0, 0, -2);
-        
-         Transform R1toR2 = new Transform(rotation, rotationRate);
-        
-         PVB = R1toR2.transformPVCoordinates(PVA);
+         Rotation rotation = new Rotation(Vector3D.PLUS_K, FastMath.PI / 2);
+         Vector3D rotationRate = new Vector3D(0, 0, -2);
+        
+         Transform R1toR2 = new Transform(rotation, rotationRate);
+        
+         PVB = R1toR2.transformPVCoordinates(PVA);
          
     
         Since:
@@ -601,7 +599,7 @@ class FieldTransform(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable[
             Get the identity transform.
         
             Parameters:
-                field (Field<T> field): field for the components
+                field (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field for the components
         
             Returns:
                 identity transform
@@ -619,9 +617,9 @@ class FieldTransform(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable[
             :class:`~org.orekit.utils.FieldPVCoordinates` in method
             :meth:`~org.orekit.frames.FieldTransform.transformPVCoordinates`.
         
-            This definition implies that if we define position-velocity coordinates :code:`PVÃ¢â€šï¿½ =
-            transform.transformPVCoordinates(PVÃ¢â€šâ‚¬)` then their differentials dPVÃ¢â€šï¿½ and dPVÃ¢â€šâ‚¬ will obey the
-            following relation where J is the matrix computed by this method: :code:`dPVÃ¢â€šï¿½ = J Ã— dPVÃ¢â€šâ‚¬`
+            This definition implies that if we define position-velocity coordinates :code:`PV₁ =
+            transform.transformPVCoordinates(PV₀)` then their differentials dPV₁ and dPV₀ will obey the following relation
+            where J is the matrix computed by this method: :code:`dPV₁ = J × dPV₀`
         
             Parameters:
                 selector (:class:`~org.orekit.utils.CartesianDerivativesFilter`): selector specifying the size of the upper left corner that must be filled (either 3x3 for positions only, 6x6 for
@@ -676,7 +674,7 @@ class FieldTransform(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable[
 _FieldTransformGenerator__T = typing.TypeVar('_FieldTransformGenerator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldTransformGenerator(org.orekit.utils.TimeStampedGenerator[FieldTransform[_FieldTransformGenerator__T]], typing.Generic[_FieldTransformGenerator__T]):
     """
-    public class FieldTransformGenerator<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.utils.TimeStampedGenerator`<:class:`~org.orekit.frames.FieldTransform`<T>>
+    public class FieldTransformGenerator<T extends :class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.utils.TimeStampedGenerator`<:class:`~org.orekit.frames.FieldTransform`<T>>
     
         Generator to use field transforms in :class:`~org.orekit.utils.GenericTimeStampedCache`.
     
@@ -691,7 +689,7 @@ class FieldTransformGenerator(org.orekit.utils.TimeStampedGenerator[FieldTransfo
 
 class Frame(java.io.Serializable):
     """
-    public class Frame extends Object implements Serializable
+    public class Frame extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Tridimensional references frames class.
     
@@ -757,7 +755,7 @@ class Frame(java.io.Serializable):
             Parameters:
                 reference (:class:`~org.orekit.frames.Frame`): frame with respect to which the instance will be frozen
                 freezingDate (:class:`~org.orekit.time.AbsoluteDate`): freezing date
-                frozenName (String): name of the frozen frame
+                frozenName (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the frozen frame
         
             Returns:
                 a frozen version of the instance
@@ -888,7 +886,8 @@ class Frame(java.io.Serializable):
             New definition of the java.util toString() method.
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 the name
@@ -1037,7 +1036,7 @@ class ItrfVersionProvider:
             Get the ITRF version configuration defined by a given file at specified date.
         
             Parameters:
-                name (String): EOP file name
+                name (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): EOP file name
                 mjd (int): date of the EOP in modified Julian day
         
             Returns:
@@ -1049,7 +1048,7 @@ class ItrfVersionProvider:
 
 class LOFType(java.lang.Enum['LOFType']):
     """
-    public enum LOFType extends Enum<:class:`~org.orekit.frames.LOFType`>
+    public enum LOFType extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.frames.LOFType`>
     
         Enumerate for different types of Local Orbital Frames.
     """
@@ -1079,7 +1078,7 @@ class LOFType(java.lang.Enum['LOFType']):
             Returns:
                 rotation from inertial frame to local orbital frame
         
-        public abstract <T extends CalculusFieldElement<T>> FieldRotation<T> rotationFromInertial (Field<T> field, :class:`~org.orekit.utils.FieldPVCoordinates`<T> pv)
+        public abstract <T extends :class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> :class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldRotation?is`<T> rotationFromInertial (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field, :class:`~org.orekit.utils.FieldPVCoordinates`<T> pv)
         
             Get the rotation from inertial frame to local orbital frame.
         
@@ -1088,7 +1087,7 @@ class LOFType(java.lang.Enum['LOFType']):
             transform must be extracted from it.
         
             Parameters:
-                field (Field<T> field): field to which the elements belong
+                field (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
                 pv (:class:`~org.orekit.utils.FieldPVCoordinates`<T> pv): position-velocity of the spacecraft in some inertial frame
         
             Returns:
@@ -1110,7 +1109,7 @@ class LOFType(java.lang.Enum['LOFType']):
             This rotation does not include any time derivatives.
         
             Parameters:
-                field (Field<T> field): field to which the elements belong
+                field (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
                 in (:class:`~org.orekit.frames.LOFType`): input commonly used local orbital frame
                 out (:class:`~org.orekit.frames.LOFType`): output commonly used local orbital frame
                 pv (:class:`~org.orekit.utils.FieldPVCoordinates`<T> pv): position-velocity of the spacecraft in some inertial frame
@@ -1152,7 +1151,7 @@ class LOFType(java.lang.Enum['LOFType']):
             Get the rotation from input :class:`~org.orekit.frames.LOFType` to the instance.
         
             Parameters:
-                field (Field<T> field): field to which the elements belong
+                field (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
                 fromLOF (:class:`~org.orekit.frames.LOFType`): input local orbital frame
                 pv (:class:`~org.orekit.utils.FieldPVCoordinates`<T> pv): position-velocity of the spacecraft in some inertial frame
         
@@ -1226,7 +1225,7 @@ class LOFType(java.lang.Enum['LOFType']):
             :meth:`~org.orekit.frames.LOFType.rotationFromLOFInToLOFOut`
         
             Parameters:
-                field (Field<T> field): field to which the elements belong
+                field (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
                 in (:class:`~org.orekit.frames.LOFType`): input commonly used local orbital frame
                 out (:class:`~org.orekit.frames.LOFType`): output commonly used local orbital frame
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
@@ -1276,14 +1275,14 @@ class LOFType(java.lang.Enum['LOFType']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -1296,9 +1295,8 @@ class LOFType(java.lang.Enum['LOFType']):
         
             .. code-block: java
             
-            
-            for (LOFType c : LOFType.values())
-                System.out.println(c);
+            for (LOFType c : LOFType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1310,7 +1308,7 @@ class LOFType(java.lang.Enum['LOFType']):
 
 class LazyLoadedEop:
     """
-    public class LazyLoadedEop extends Object
+    public class LazyLoadedEop extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Loads Earth Orientation Parameters (EOP) from a configured set of :class:`~org.orekit.frames.EOPHistoryLoader`s on
         demand. Methods are synchronized so it is safe for access from multiple threads.
@@ -1402,7 +1400,7 @@ class LazyLoadedEop:
 
 class OrphanFrame(java.io.Serializable):
     """
-    public class OrphanFrame extends Object implements Serializable
+    public class OrphanFrame extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Prototype frame that can be built from leaf to roots and later attached to a tree.
     
@@ -1485,7 +1483,8 @@ class OrphanFrame(java.io.Serializable):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -1493,7 +1492,7 @@ class OrphanFrame(java.io.Serializable):
 
 class PoleCorrection(java.io.Serializable):
     """
-    public class PoleCorrection extends Object implements Serializable
+    public class PoleCorrection extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Simple container class for pole correction parameters.
     
@@ -1533,7 +1532,7 @@ class PoleCorrection(java.io.Serializable):
 
 class Predefined(java.lang.Enum['Predefined']):
     """
-    public enum Predefined extends Enum<:class:`~org.orekit.frames.Predefined`>
+    public enum Predefined extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.frames.Predefined`>
     
         Predefined frames provided by :class:`~org.orekit.frames.Frames`.
     """
@@ -1610,14 +1609,14 @@ class Predefined(java.lang.Enum['Predefined']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -1630,9 +1629,8 @@ class Predefined(java.lang.Enum['Predefined']):
         
             .. code-block: java
             
-            
-            for (Predefined c : Predefined.values())
-                System.out.println(c);
+            for (Predefined c : Predefined.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1762,7 +1760,7 @@ class StaticTransform(org.orekit.time.TimeStamped):
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): of translation.
-                rotation (Rotation): to apply after the translation. That is after translating applying this rotation produces positions expressed in the new
+                rotation (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Rotation?is`): to apply after the translation. That is after translating applying this rotation produces positions expressed in the new
                     frame.
         
             Returns:
@@ -1775,7 +1773,7 @@ class StaticTransform(org.orekit.time.TimeStamped):
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): of translation.
-                translation (Vector3D): to apply, expressed in the old frame. That is, the opposite of the coordinates of the new origin in the old frame.
+                translation (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): to apply, expressed in the old frame. That is, the opposite of the coordinates of the new origin in the old frame.
         
             Returns:
                 the newly created static transform.
@@ -1787,8 +1785,8 @@ class StaticTransform(org.orekit.time.TimeStamped):
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): of translation.
-                translation (Vector3D): to apply, expressed in the old frame. That is, the opposite of the coordinates of the new origin in the old frame.
-                rotation (Rotation): to apply after the translation. That is after translating applying this rotation produces positions expressed in the new
+                translation (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): to apply, expressed in the old frame. That is, the opposite of the coordinates of the new origin in the old frame.
+                rotation (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Rotation?is`): to apply after the translation. That is after translating applying this rotation produces positions expressed in the new
                     frame.
         
             Returns:
@@ -1812,7 +1810,7 @@ class StaticTransform(org.orekit.time.TimeStamped):
             Transform a line.
         
             Parameters:
-                line (Line): to transform
+                line (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Line?is`): to transform
         
             Returns:
                 transformed line
@@ -1827,7 +1825,7 @@ class StaticTransform(org.orekit.time.TimeStamped):
             Transform a position vector (including translation effects).
         
             Parameters:
-                position (FieldVector3D<T> position): vector to transform
+                position (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): vector to transform
         
             Returns:
                 transformed position
@@ -1841,7 +1839,7 @@ class StaticTransform(org.orekit.time.TimeStamped):
             Transform a position vector (including translation effects).
         
             Parameters:
-                position (Vector3D): vector to transform
+                position (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): vector to transform
         
             Returns:
                 transformed position
@@ -1855,7 +1853,7 @@ class StaticTransform(org.orekit.time.TimeStamped):
             Transform a vector (ignoring translation effects).
         
             Parameters:
-                vector (FieldVector3D<T> vector): vector to transform
+                vector (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> vector): vector to transform
         
             Returns:
                 transformed vector
@@ -1869,7 +1867,7 @@ class StaticTransform(org.orekit.time.TimeStamped):
             Transform a vector (ignoring translation effects).
         
             Parameters:
-                vector (Vector3D): vector to transform
+                vector (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): vector to transform
         
             Returns:
                 transformed vector
@@ -1879,7 +1877,7 @@ class StaticTransform(org.orekit.time.TimeStamped):
 
 class TransformGenerator(org.orekit.utils.TimeStampedGenerator['Transform']):
     """
-    public class TransformGenerator extends Object implements :class:`~org.orekit.utils.TimeStampedGenerator`<:class:`~org.orekit.frames.Transform`>
+    public class TransformGenerator extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.utils.TimeStampedGenerator`<:class:`~org.orekit.frames.Transform`>
     
         Generator to use transforms in :class:`~org.orekit.utils.GenericTimeStampedCache`.
     
@@ -1894,7 +1892,7 @@ class TransformGenerator(org.orekit.utils.TimeStampedGenerator['Transform']):
 
 class TransformProvider(java.io.Serializable):
     """
-    public interface TransformProvider extends Serializable
+    public interface TransformProvider extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Interface for Transform providers.
     
@@ -1950,7 +1948,7 @@ class TransformProvider(java.io.Serializable):
 
 class TransformProviderUtils:
     """
-    public class TransformProviderUtils extends Object
+    public class TransformProviderUtils extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Utility for Transform providers.
     
@@ -2085,7 +2083,7 @@ class EOPBasedTransformProvider(TransformProvider):
 
 class EclipticProvider(TransformProvider):
     """
-    public class EclipticProvider extends Object implements :class:`~org.orekit.frames.TransformProvider`
+    public class EclipticProvider extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.TransformProvider`
     
         An inertial frame aligned with the ecliptic.
     
@@ -2165,7 +2163,7 @@ class FactoryManagedFrame(Frame):
 
 class FixedTransformProvider(TransformProvider):
     """
-    public class FixedTransformProvider extends Object implements :class:`~org.orekit.frames.TransformProvider`
+    public class FixedTransformProvider extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.TransformProvider`
     
         Transform provider using fixed transform.
     
@@ -2210,7 +2208,7 @@ class FixedTransformProvider(TransformProvider):
 
 class HelmertTransformation(TransformProvider):
     """
-    public class HelmertTransformation extends Object implements :class:`~org.orekit.frames.TransformProvider`
+    public class HelmertTransformation extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.TransformProvider`
     
         Transformation class for geodetic systems.
     
@@ -2248,8 +2246,8 @@ class HelmertTransformation(TransformProvider):
             override it for better performance.
         
             Specified by:
-                :meth:`~org.orekit.frames.TransformProvider.getStaticTransform`Â in
-                interfaceÂ :class:`~org.orekit.frames.TransformProvider`
+                :meth:`~org.orekit.frames.TransformProvider.getStaticTransform` in
+                interface :class:`~org.orekit.frames.TransformProvider`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date.
@@ -2355,7 +2353,7 @@ class HelmertTransformation(TransformProvider):
 
 class ITRFVersion(java.lang.Enum['ITRFVersion']):
     """
-    public enum ITRFVersion extends Enum<:class:`~org.orekit.frames.ITRFVersion`>
+    public enum ITRFVersion extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.frames.ITRFVersion`>
     
         Enumerate for ITRF versions.
     
@@ -2417,7 +2415,7 @@ class ITRFVersion(java.lang.Enum['ITRFVersion']):
             Find an ITRF version from its name.
         
             Parameters:
-                name (String): name of the frame version (case is ignored)
+                name (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the frame version (case is ignored)
         
             Returns:
                 ITRF version
@@ -2474,14 +2472,14 @@ class ITRFVersion(java.lang.Enum['ITRFVersion']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -2494,9 +2492,8 @@ class ITRFVersion(java.lang.Enum['ITRFVersion']):
         
             .. code-block: java
             
-            
-            for (ITRFVersion c : ITRFVersion.values())
-                System.out.println(c);
+            for (ITRFVersion c : ITRFVersion.values())
+                System.out.println(c);
             
         
             Returns:
@@ -2517,7 +2514,7 @@ class ITRFVersion(java.lang.Enum['ITRFVersion']):
 
 class ITRFVersionLoader(ItrfVersionProvider):
     """
-    public class ITRFVersionLoader extends Object implements :class:`~org.orekit.frames.ItrfVersionProvider`
+    public class ITRFVersionLoader extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.ItrfVersionProvider`
     
         Loader for ITRF version configuration file.
     
@@ -2539,7 +2536,7 @@ class ITRFVersionLoader(ItrfVersionProvider):
     """
     SUPPORTED_NAMES: typing.ClassVar[str] = ...
     """
-    public static final String SUPPORTED_NAMES
+    public static final :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` SUPPORTED_NAMES
     
         Regular expression for supported files names.
     
@@ -2560,11 +2557,11 @@ class ITRFVersionLoader(ItrfVersionProvider):
             Get the ITRF version configuration defined by a given file at specified date.
         
             Specified by:
-                :meth:`~org.orekit.frames.ItrfVersionProvider.getConfiguration`Â in
-                interfaceÂ :class:`~org.orekit.frames.ItrfVersionProvider`
+                :meth:`~org.orekit.frames.ItrfVersionProvider.getConfiguration` in
+                interface :class:`~org.orekit.frames.ItrfVersionProvider`
         
             Parameters:
-                name (String): EOP file name
+                name (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): EOP file name
                 mjd (int): date of the EOP in modified Julian day
         
             Returns:
@@ -2581,7 +2578,7 @@ class ITRFVersionLoader(ItrfVersionProvider):
 
 class InterpolatingTransformProvider(TransformProvider):
     """
-    public class InterpolatingTransformProvider extends Object implements :class:`~org.orekit.frames.TransformProvider`
+    public class InterpolatingTransformProvider extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.TransformProvider`
     
         Transform provider using thread-safe interpolation on transforms sample.
     
@@ -2673,7 +2670,7 @@ class L1Frame(Frame):
 
 class L1TransformProvider(TransformProvider):
     """
-    public class L1TransformProvider extends Object implements :class:`~org.orekit.frames.TransformProvider`
+    public class L1TransformProvider extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.TransformProvider`
     
         L1 Transform provider for a frame on the L1 Lagrange point of two celestial bodies.
     
@@ -2689,8 +2686,8 @@ class L1TransformProvider(TransformProvider):
             override it for better performance.
         
             Specified by:
-                :meth:`~org.orekit.frames.TransformProvider.getStaticTransform`Â in
-                interfaceÂ :class:`~org.orekit.frames.TransformProvider`
+                :meth:`~org.orekit.frames.TransformProvider.getStaticTransform` in
+                interface :class:`~org.orekit.frames.TransformProvider`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date.
@@ -2766,7 +2763,7 @@ class LocalOrbitalFrame(Frame):
 
 class PythonEOPHistoryLoader(EOPHistoryLoader):
     """
-    public class PythonEOPHistoryLoader extends Object implements :class:`~org.orekit.frames.EOPHistoryLoader`
+    public class PythonEOPHistoryLoader extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.EOPHistoryLoader`
     """
     def __init__(self): ...
     def fillHistory(self, nutationCorrectionConverter: org.orekit.utils.IERSConventions.NutationCorrectionConverter, sortedSet: java.util.SortedSet[EOPEntry]) -> None: ...
@@ -2793,7 +2790,7 @@ class PythonEOPHistoryLoader(EOPHistoryLoader):
 
 class PythonItrfVersionProvider(ItrfVersionProvider):
     """
-    public class PythonItrfVersionProvider extends Object implements :class:`~org.orekit.frames.ItrfVersionProvider`
+    public class PythonItrfVersionProvider extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.ItrfVersionProvider`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -2802,11 +2799,11 @@ class PythonItrfVersionProvider(ItrfVersionProvider):
             Get the ITRF version configuration defined by a given file at specified date.
         
             Specified by:
-                :meth:`~org.orekit.frames.ItrfVersionProvider.getConfiguration`Â in
-                interfaceÂ :class:`~org.orekit.frames.ItrfVersionProvider`
+                :meth:`~org.orekit.frames.ItrfVersionProvider.getConfiguration` in
+                interface :class:`~org.orekit.frames.ItrfVersionProvider`
         
             Parameters:
-                name (String): EOP file name
+                name (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): EOP file name
                 mjd (int): date of the EOP in modified Julian day
         
             Returns:
@@ -2837,7 +2834,7 @@ class PythonItrfVersionProvider(ItrfVersionProvider):
 
 class PythonStaticTransform(StaticTransform):
     """
-    public class PythonStaticTransform extends Object implements :class:`~org.orekit.frames.StaticTransform`
+    public class PythonStaticTransform extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.StaticTransform`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -2921,7 +2918,7 @@ class PythonStaticTransform(StaticTransform):
 
 class PythonTransformProvider(TransformProvider):
     """
-    public class PythonTransformProvider extends Object implements :class:`~org.orekit.frames.TransformProvider`
+    public class PythonTransformProvider extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.TransformProvider`
     
     
         Also see:
@@ -3005,7 +3002,7 @@ class PythonTransformProvider(TransformProvider):
 
 class ShiftingTransformProvider(TransformProvider):
     """
-    public class ShiftingTransformProvider extends Object implements :class:`~org.orekit.frames.TransformProvider`
+    public class ShiftingTransformProvider extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.TransformProvider`
     
         Transform provider using thread-safe shifts on transforms sample.
     
@@ -3047,8 +3044,8 @@ class ShiftingTransformProvider(TransformProvider):
             override it for better performance.
         
             Specified by:
-                :meth:`~org.orekit.frames.TransformProvider.getStaticTransform`Â in
-                interfaceÂ :class:`~org.orekit.frames.TransformProvider`
+                :meth:`~org.orekit.frames.TransformProvider.getStaticTransform` in
+                interface :class:`~org.orekit.frames.TransformProvider`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date.
@@ -3152,7 +3149,7 @@ class TopocentricFrame(Frame, org.orekit.utils.PVCoordinatesProvider):
             direction from local point to given point. Azimuth angles are counted clockwise, i.e positive towards the East.
         
             Parameters:
-                extPoint (Vector3D): point for which elevation shall be computed
+                extPoint (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point for which elevation shall be computed
                 frame (:class:`~org.orekit.frames.Frame`): frame in which the point is defined
                 date (:class:`~org.orekit.time.AbsoluteDate`): computation date
         
@@ -3170,7 +3167,7 @@ class TopocentricFrame(Frame, org.orekit.utils.PVCoordinatesProvider):
             direction from local point to given point. Azimuth angles are counted clockwise, i.e positive towards the East.
         
             Parameters:
-                extPoint (FieldVector3D<T> extPoint): point for which elevation shall be computed
+                extPoint (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> extPoint): point for which elevation shall be computed
                 frame (:class:`~org.orekit.frames.Frame`): frame in which the point is defined
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): computation date
         
@@ -3207,7 +3204,7 @@ class TopocentricFrame(Frame, org.orekit.utils.PVCoordinatesProvider):
             The elevation is the angle between the local horizontal and the direction from local point to given point.
         
             Parameters:
-                extPoint (Vector3D): point for which elevation shall be computed
+                extPoint (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point for which elevation shall be computed
                 frame (:class:`~org.orekit.frames.Frame`): frame in which the point is defined
                 date (:class:`~org.orekit.time.AbsoluteDate`): computation date
         
@@ -3224,7 +3221,7 @@ class TopocentricFrame(Frame, org.orekit.utils.PVCoordinatesProvider):
             The elevation is the angle between the local horizontal and the direction from local point to given point.
         
             Parameters:
-                extPoint (FieldVector3D<T> extPoint): point for which elevation shall be computed
+                extPoint (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> extPoint): point for which elevation shall be computed
                 frame (:class:`~org.orekit.frames.Frame`): frame in which the point is defined
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): computation date
         
@@ -3272,8 +3269,8 @@ class TopocentricFrame(Frame, org.orekit.utils.PVCoordinatesProvider):
             Get the :class:`~org.orekit.utils.PVCoordinates` of the topocentric frame origin in the selected frame.
         
             Specified by:
-                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates`Â in
-                interfaceÂ :class:`~org.orekit.utils.PVCoordinatesProvider`
+                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates` in
+                interface :class:`~org.orekit.utils.PVCoordinatesProvider`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
@@ -3302,7 +3299,7 @@ class TopocentricFrame(Frame, org.orekit.utils.PVCoordinatesProvider):
             Get the surface point defining the origin of the frame.
         
             Parameters:
-                field (Field<T> field): of the elements
+                field (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): of the elements
         
             Returns:
                 surface point defining the origin of the frame
@@ -3330,7 +3327,7 @@ class TopocentricFrame(Frame, org.orekit.utils.PVCoordinatesProvider):
             Get the range of a point with regards to the topocentric frame center point.
         
             Parameters:
-                extPoint (Vector3D): point for which range shall be computed
+                extPoint (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point for which range shall be computed
                 frame (:class:`~org.orekit.frames.Frame`): frame in which the point is defined
                 date (:class:`~org.orekit.time.AbsoluteDate`): computation date
         
@@ -3345,7 +3342,7 @@ class TopocentricFrame(Frame, org.orekit.utils.PVCoordinatesProvider):
             Get the range of a point with regards to the topocentric frame center point.
         
             Parameters:
-                extPoint (FieldVector3D<T> extPoint): point for which range shall be computed
+                extPoint (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> extPoint): point for which range shall be computed
                 frame (:class:`~org.orekit.frames.Frame`): frame in which the point is defined
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): computation date
         
@@ -3456,7 +3453,7 @@ class TopocentricFrame(Frame, org.orekit.utils.PVCoordinatesProvider):
 
 class Transform(org.orekit.time.TimeInterpolable['Transform'], org.orekit.time.TimeShiftable['Transform'], java.io.Serializable, StaticTransform):
     """
-    public class Transform extends Object implements :class:`~org.orekit.time.TimeInterpolable`<:class:`~org.orekit.frames.Transform`>, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.frames.Transform`>, Serializable, :class:`~org.orekit.frames.StaticTransform`
+    public class Transform extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeInterpolable`<:class:`~org.orekit.frames.Transform`>, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.frames.Transform`>, :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.orekit.frames.StaticTransform`
     
         Transformation class in three dimensional space.
     
@@ -3488,14 +3485,13 @@ class Transform(org.orekit.time.TimeInterpolable['Transform'], org.orekit.time.T
     
         .. code-block: java
         
-        
-         Vector3D translation  = new Vector3D(-1, 0, 0);
-         Vector3D velocity     = new Vector3D(-2, 0, 0);
-         Vector3D acceleration = new Vector3D(-3, 0, 0);
-        
-         Transform R1toR2 = new Transform(date, translation, velocity, acceleration);
-        
-         PVB = R1toR2.transformPVCoordinates(PVA);
+         Vector3D translation  = new Vector3D(-1, 0, 0);
+         Vector3D velocity     = new Vector3D(-2, 0, 0);
+         Vector3D acceleration = new Vector3D(-3, 0, 0);
+        
+         Transform R1toR2 = new Transform(date, translation, velocity, acceleration);
+        
+         PVB = R1toR2.transformPVCoordinates(PVA);
          
     
         Example of rotation from R :sub:`A` to R :sub:`B`
@@ -3513,13 +3509,12 @@ class Transform(org.orekit.time.TimeInterpolable['Transform'], org.orekit.time.T
     
         .. code-block: java
         
-        
-         Rotation rotation = new Rotation(Vector3D.PLUS_K, FastMath.PI / 2);
-         Vector3D rotationRate = new Vector3D(0, 0, -2);
-        
-         Transform R1toR2 = new Transform(rotation, rotationRate);
-        
-         PVB = R1toR2.transformPVCoordinates(PVA);
+         Rotation rotation = new Rotation(Vector3D.PLUS_K, FastMath.PI / 2);
+         Vector3D rotationRate = new Vector3D(0, 0, -2);
+        
+         Transform R1toR2 = new Transform(rotation, rotationRate);
+        
+         PVB = R1toR2.transformPVCoordinates(PVA);
          
     
         Also see:
@@ -3648,16 +3643,14 @@ class Transform(org.orekit.time.TimeInterpolable['Transform'], org.orekit.time.T
         
             .. code-block: java
             
-            
-             PVâ‚� = transform.transformPVCoordinates(PVâ‚€), then
+             PV₁ = transform.transformPVCoordinates(PV₀), then
              
         
-            their differentials dPVâ‚� and dPVâ‚€ will obey the following relation where J is the matrix computed by this method:
+            their differentials dPV₁ and dPV₀ will obey the following relation where J is the matrix computed by this method:
         
             .. code-block: java
             
-            
-             dPVâ‚� = J × dPVâ‚€
+             dPV₁ = J × dPV₀
              
         
             Parameters:
@@ -3886,16 +3879,15 @@ class UpdatableFrame(Frame):
     
         .. code-block: java
         
-        
-                      GCRF
-                        |
-          --------------------------------
-          |             |                |
-         Sun        satellite          Earth
-                        |                |
-                on-board antenna   ground station
-                                         |
-                                  tracking antenna
+                      GCRF
+                        |
+          --------------------------------
+          |             |                |
+         Sun        satellite          Earth
+                        |                |
+                on-board antenna   ground station
+                                         |
+                                  tracking antenna
          
     
         Tracking measurements really correspond to the link between the ground and on-board antennas. This is tightly linked to
@@ -3923,16 +3915,15 @@ class UpdatableFrame(Frame):
         
             .. code-block: java
             
-            
-                          GCRF
-                            |
-              --------------------------------
-              |             |                |
-             Sun        satellite          Earth
-                            |                |
-                    on-board antenna   ground station
-                                             |
-                                      tracking antenna
+                          GCRF
+                            |
+              --------------------------------
+              |             |                |
+             Sun        satellite          Earth
+                            |                |
+                    on-board antenna   ground station
+                                             |
+                                      tracking antenna
              
         
             Tracking measurements really correspond to the link between the ground and on-board antennas. This is tightly linked to
@@ -3944,9 +3935,8 @@ class UpdatableFrame(Frame):
         
             .. code-block: java
             
-            
-             satellite.updateTransform(onBoardAntenna, trackingAntenna,
-                                       measurementTransform, date);
+             satellite.updateTransform(onBoardAntenna, trackingAntenna,
+                                       measurementTransform, date);
              
         
             One way to represent the behavior of the method is to consider the sub-tree rooted at the instance on one hand
@@ -3993,7 +3983,7 @@ class VersionedITRF(Frame):
 
 class GTODProvider(EOPBasedTransformProvider):
     """
-    public class GTODProvider extends Object implements :class:`~org.orekit.frames.EOPBasedTransformProvider`
+    public class GTODProvider extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.EOPBasedTransformProvider`
     
         Greenwich True Of Date Frame, also known as True of Date Rotating frame (TDR) or Greenwich Rotating Coordinate frame
         (GCR).
@@ -4012,8 +4002,8 @@ class GTODProvider(EOPBasedTransformProvider):
             Get the EOP history.
         
             Specified by:
-                :meth:`~org.orekit.frames.EOPBasedTransformProvider.getEOPHistory`Â in
-                interfaceÂ :class:`~org.orekit.frames.EOPBasedTransformProvider`
+                :meth:`~org.orekit.frames.EOPBasedTransformProvider.getEOPHistory` in
+                interface :class:`~org.orekit.frames.EOPBasedTransformProvider`
         
             Returns:
                 EOP history
@@ -4032,8 +4022,8 @@ class GTODProvider(EOPBasedTransformProvider):
             is desired, or for testing purposes. It should be used with care, as doing the full computation is *really* costly.
         
             Specified by:
-                :meth:`~org.orekit.frames.EOPBasedTransformProvider.getNonInterpolatingProvider`Â in
-                interfaceÂ :class:`~org.orekit.frames.EOPBasedTransformProvider`
+                :meth:`~org.orekit.frames.EOPBasedTransformProvider.getNonInterpolatingProvider` in
+                interface :class:`~org.orekit.frames.EOPBasedTransformProvider`
         
             Returns:
                 version of the provider that does *not* cache tidal corrections
@@ -4052,8 +4042,8 @@ class GTODProvider(EOPBasedTransformProvider):
             override it for better performance.
         
             Specified by:
-                :meth:`~org.orekit.frames.TransformProvider.getStaticTransform`Â in
-                interfaceÂ :class:`~org.orekit.frames.TransformProvider`
+                :meth:`~org.orekit.frames.TransformProvider.getStaticTransform` in
+                interface :class:`~org.orekit.frames.TransformProvider`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date.
@@ -4121,12 +4111,12 @@ class LazyLoadedFrames(AbstractFrames):
             :meth:`~org.orekit.utils.IERSConventions.IERS_1996` conventions.
         
             Parameters:
-                rapidDataColumnsSupportedNames (String): regular expression for supported rapid data columns EOP files names (may be null if the default IERS file names are
+                rapidDataColumnsSupportedNames (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for supported rapid data columns EOP files names (may be null if the default IERS file names are
                     used)
-                rapidDataXMLSupportedNames (String): regular expression for supported rapid data XML EOP files names (may be null if the default IERS file names are used)
-                eopC04SupportedNames (String): regular expression for supported EOP C04 files names (may be null if the default IERS file names are used)
-                bulletinBSupportedNames (String): regular expression for supported bulletin B files names (may be null if the default IERS file names are used)
-                bulletinASupportedNames (String): regular expression for supported bulletin A files names (may be null if the default IERS file names are used)
+                rapidDataXMLSupportedNames (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for supported rapid data XML EOP files names (may be null if the default IERS file names are used)
+                eopC04SupportedNames (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for supported EOP C04 files names (may be null if the default IERS file names are used)
+                bulletinBSupportedNames (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for supported bulletin B files names (may be null if the default IERS file names are used)
+                bulletinASupportedNames (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for supported bulletin A files names (may be null if the default IERS file names are used)
         
             Also see:
                 `IERS EOP C04 files <http://hpiers.obspm.fr/eoppc/eop/eopc04/>`,
@@ -4145,12 +4135,12 @@ class LazyLoadedFrames(AbstractFrames):
             :meth:`~org.orekit.utils.IERSConventions.IERS_2003` and :meth:`~org.orekit.utils.IERSConventions.IERS_2010` conventions.
         
             Parameters:
-                rapidDataColumnsSupportedNames (String): regular expression for supported rapid data columns EOP files names (may be null if the default IERS file names are
+                rapidDataColumnsSupportedNames (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for supported rapid data columns EOP files names (may be null if the default IERS file names are
                     used)
-                rapidDataXMLSupportedNames (String): regular expression for supported rapid data XML EOP files names (may be null if the default IERS file names are used)
-                eopC04SupportedNames (String): regular expression for supported EOP C04 files names (may be null if the default IERS file names are used)
-                bulletinBSupportedNames (String): regular expression for supported bulletin B files names (may be null if the default IERS file names are used)
-                bulletinASupportedNames (String): regular expression for supported bulletin A files names (may be null if the default IERS file names are used)
+                rapidDataXMLSupportedNames (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for supported rapid data XML EOP files names (may be null if the default IERS file names are used)
+                eopC04SupportedNames (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for supported EOP C04 files names (may be null if the default IERS file names are used)
+                bulletinBSupportedNames (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for supported bulletin B files names (may be null if the default IERS file names are used)
+                bulletinASupportedNames (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for supported bulletin A files names (may be null if the default IERS file names are used)
         
             Also see:
                 `IERS EOP C04 files <http://hpiers.obspm.fr/eoppc/eop/eopc04/>`,
@@ -4268,7 +4258,7 @@ class PythonAbstractFrames(AbstractFrames):
 
 class PythonEOPBasedTransformProvider(EOPBasedTransformProvider):
     """
-    public class PythonEOPBasedTransformProvider extends Object implements :class:`~org.orekit.frames.EOPBasedTransformProvider`
+    public class PythonEOPBasedTransformProvider extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.EOPBasedTransformProvider`
     
     
         Also see:
@@ -4281,8 +4271,8 @@ class PythonEOPBasedTransformProvider(EOPBasedTransformProvider):
             Get the EOP history.
         
             Specified by:
-                :meth:`~org.orekit.frames.EOPBasedTransformProvider.getEOPHistory`Â in
-                interfaceÂ :class:`~org.orekit.frames.EOPBasedTransformProvider`
+                :meth:`~org.orekit.frames.EOPBasedTransformProvider.getEOPHistory` in
+                interface :class:`~org.orekit.frames.EOPBasedTransformProvider`
         
             Returns:
                 EOP history
@@ -4301,8 +4291,8 @@ class PythonEOPBasedTransformProvider(EOPBasedTransformProvider):
             is desired, or for testing purposes. It should be used with care, as doing the full computation is *really* costly.
         
             Specified by:
-                :meth:`~org.orekit.frames.EOPBasedTransformProvider.getNonInterpolatingProvider`Â in
-                interfaceÂ :class:`~org.orekit.frames.EOPBasedTransformProvider`
+                :meth:`~org.orekit.frames.EOPBasedTransformProvider.getNonInterpolatingProvider` in
+                interface :class:`~org.orekit.frames.EOPBasedTransformProvider`
         
             Returns:
                 version of the provider that does *not* cache tidal corrections
@@ -4389,7 +4379,7 @@ class PythonEOPBasedTransformProvider(EOPBasedTransformProvider):
 
 class PythonAbstractEopParser(org.orekit.frames.AbstractEopParser):
     """
-    public class PythonAbstractEopParser extends Object
+    public class PythonAbstractEopParser extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     """
     def __init__(self, nutationCorrectionConverter: org.orekit.utils.IERSConventions.NutationCorrectionConverter, itrfVersionProvider: ItrfVersionProvider, timeScale: org.orekit.time.TimeScale): ...
     def finalize(self) -> None: ...

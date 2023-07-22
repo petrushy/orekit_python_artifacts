@@ -80,7 +80,7 @@ class Measurement:
 
 class ProcessEstimate:
     """
-    public class ProcessEstimate extends Object
+    public class ProcessEstimate extends :class:`~org.hipparchus.filtering.kalman.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Holder for process state and covariance.
     
@@ -184,7 +184,7 @@ class ProcessEstimate:
 _AbstractKalmanFilter__T = typing.TypeVar('_AbstractKalmanFilter__T', bound=Measurement)  # <T>
 class AbstractKalmanFilter(KalmanFilter[_AbstractKalmanFilter__T], typing.Generic[_AbstractKalmanFilter__T]):
     """
-    public abstract class AbstractKalmanFilter<T extends :class:`~org.hipparchus.filtering.kalman.Measurement`> extends Object implements :class:`~org.hipparchus.filtering.kalman.KalmanFilter`<T>
+    public abstract class AbstractKalmanFilter<T extends :class:`~org.hipparchus.filtering.kalman.Measurement`> extends :class:`~org.hipparchus.filtering.kalman.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.filtering.kalman.KalmanFilter`<T>
     
         Shared parts between linear and non-linear Kalman filters.
     
@@ -196,8 +196,8 @@ class AbstractKalmanFilter(KalmanFilter[_AbstractKalmanFilter__T], typing.Generi
             Get the corrected state.
         
             Specified by:
-                :meth:`~org.hipparchus.filtering.kalman.KalmanFilter.getCorrected`Â in
-                interfaceÂ :class:`~org.hipparchus.filtering.kalman.KalmanFilter`
+                :meth:`~org.hipparchus.filtering.kalman.KalmanFilter.getCorrected` in
+                interface :class:`~org.hipparchus.filtering.kalman.KalmanFilter`
         
             Returns:
                 corrected state
@@ -210,8 +210,8 @@ class AbstractKalmanFilter(KalmanFilter[_AbstractKalmanFilter__T], typing.Generi
             Get the predicted state.
         
             Specified by:
-                :meth:`~org.hipparchus.filtering.kalman.KalmanFilter.getPredicted`Â in
-                interfaceÂ :class:`~org.hipparchus.filtering.kalman.KalmanFilter`
+                :meth:`~org.hipparchus.filtering.kalman.KalmanFilter.getPredicted` in
+                interface :class:`~org.hipparchus.filtering.kalman.KalmanFilter`
         
             Returns:
                 predicted state

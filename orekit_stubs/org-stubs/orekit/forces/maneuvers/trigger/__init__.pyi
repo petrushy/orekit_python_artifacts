@@ -14,7 +14,7 @@ import typing
 _FieldManeuverTriggersResetter__T = typing.TypeVar('_FieldManeuverTriggersResetter__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldManeuverTriggersResetter(typing.Generic[_FieldManeuverTriggersResetter__T]):
     """
-    public interface FieldManeuverTriggersResetter<T extends CalculusFieldElement<T>>
+    public interface FieldManeuverTriggersResetter<T extends :class:`~org.orekit.forces.maneuvers.trigger.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>>
     
         Resetter for maneuver triggers.
     
@@ -170,7 +170,7 @@ class ManeuverTriggersResetter:
 
 class AbstractManeuverTriggers(ManeuverTriggers):
     """
-    public abstract class AbstractManeuverTriggers extends Object implements :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
+    public abstract class AbstractManeuverTriggers extends :class:`~org.orekit.forces.maneuvers.trigger.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
     
         Base class for triggers.
     
@@ -184,7 +184,7 @@ class AbstractManeuverTriggers(ManeuverTriggers):
             Add a resetter.
         
             Parameters:
-                field (Field<T> field): field to which the state belongs
+                field (:class:`~org.orekit.forces.maneuvers.trigger.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the state belongs
                 resetter (:class:`~org.orekit.forces.maneuvers.trigger.FieldManeuverTriggersResetter`<T> resetter): resetter to add
         
         
@@ -200,16 +200,7 @@ class AbstractManeuverTriggers(ManeuverTriggers):
         
         """
         ...
-    def getFirings(self) -> org.orekit.utils.TimeSpanMap[bool]:
-        """
-            Get the firings detected during last propagation.
-        
-            Returns:
-                firings detected during last propagation
-        
-        
-        """
-        ...
+    def getFirings(self) -> org.orekit.utils.TimeSpanMap[bool]: ...
     _init_0__T = typing.TypeVar('_init_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_init_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_init_0__T]) -> None:
@@ -219,8 +210,8 @@ class AbstractManeuverTriggers(ManeuverTriggers):
             The default implementation does nothing.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.init`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.init` in
+                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
         
             Parameters:
                 initialState (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> initialState): initial spacecraft state (at the start of propagation).
@@ -237,8 +228,8 @@ class AbstractManeuverTriggers(ManeuverTriggers):
             The default implementation does nothing.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.init`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.init` in
+                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
         
             Parameters:
                 initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial spacecraft state (at the start of propagation).
@@ -253,8 +244,8 @@ class AbstractManeuverTriggers(ManeuverTriggers):
             Find out if the maneuver is firing or not.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.isFiring`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.isFiring` in
+                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
@@ -271,8 +262,8 @@ class AbstractManeuverTriggers(ManeuverTriggers):
             Find out if the maneuver is firing or not.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.isFiring`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.isFiring` in
+                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<S> date): current date
@@ -287,7 +278,7 @@ class AbstractManeuverTriggers(ManeuverTriggers):
 
 class EventBasedManeuverTriggers(ManeuverTriggers, org.orekit.propagation.events.handlers.EventHandler[org.orekit.propagation.events.EventDetector]):
     """
-    public class EventBasedManeuverTriggers extends Object implements :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`, :class:`~org.orekit.propagation.events.handlers.EventHandler`<:class:`~org.orekit.propagation.events.EventDetector`>
+    public class EventBasedManeuverTriggers extends :class:`~org.orekit.forces.maneuvers.trigger.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`, :class:`~org.orekit.propagation.events.handlers.EventHandler`<:class:`~org.orekit.propagation.events.EventDetector`>
     
         Maneuver triggers based on start and stop detectors. This allow a succession of burn interval. The thruster starts
         firing when the start detector becomes positive. The thruster stops firing when the stop detector becomes positive. The
@@ -308,8 +299,8 @@ class EventBasedManeuverTriggers(ManeuverTriggers, org.orekit.propagation.events
             which would have potential additional data to allow the implementing class to determine the correct return state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.handlers.EventHandler`
+                :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred` in
+                interface :class:`~org.orekit.propagation.events.handlers.EventHandler`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): SpaceCraft state to be used in the evaluation
@@ -360,8 +351,8 @@ class EventBasedManeuverTriggers(ManeuverTriggers, org.orekit.propagation.events
             The default implementation does nothing.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.init`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.init` in
+                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
         
             Parameters:
                 initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial spacecraft state (at the start of propagation).
@@ -377,8 +368,8 @@ class EventBasedManeuverTriggers(ManeuverTriggers, org.orekit.propagation.events
             Find out if the maneuver is firing or not.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.isFiring`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.isFiring` in
+                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
@@ -406,8 +397,8 @@ class EventBasedManeuverTriggers(ManeuverTriggers, org.orekit.propagation.events
             Find out if the maneuver is firing or not.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.isFiring`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.isFiring` in
+                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
@@ -433,7 +424,7 @@ class EventBasedManeuverTriggers(ManeuverTriggers, org.orekit.propagation.events
 _PythonFieldManeuverTriggersResetter__T = typing.TypeVar('_PythonFieldManeuverTriggersResetter__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldManeuverTriggersResetter(FieldManeuverTriggersResetter[_PythonFieldManeuverTriggersResetter__T], typing.Generic[_PythonFieldManeuverTriggersResetter__T]):
     """
-    public class PythonFieldManeuverTriggersResetter<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.forces.maneuvers.trigger.FieldManeuverTriggersResetter`<T>
+    public class PythonFieldManeuverTriggersResetter<T extends :class:`~org.orekit.forces.maneuvers.trigger.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.forces.maneuvers.trigger.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.maneuvers.trigger.FieldManeuverTriggersResetter`<T>
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -461,7 +452,7 @@ class PythonFieldManeuverTriggersResetter(FieldManeuverTriggersResetter[_PythonF
 
 class PythonManeuverTriggers(ManeuverTriggers):
     """
-    public class PythonManeuverTriggers extends Object implements :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
+    public class PythonManeuverTriggers extends :class:`~org.orekit.forces.maneuvers.trigger.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -477,8 +468,8 @@ class PythonManeuverTriggers(ManeuverTriggers):
             Initialization method. Called in when Maneuver.init(...) is called (from ForceModel.init(...)).
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.init`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.init` in
+                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
         
             Parameters:
                 initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial spacecraft state (at the start of propagation).
@@ -494,8 +485,8 @@ class PythonManeuverTriggers(ManeuverTriggers):
             Find out if the maneuver is firing or not.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.isFiring`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.isFiring` in
+                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
@@ -513,8 +504,8 @@ class PythonManeuverTriggers(ManeuverTriggers):
             Find out if the maneuver is firing or not.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.isFiring`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.isFiring` in
+                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
@@ -549,7 +540,7 @@ class PythonManeuverTriggers(ManeuverTriggers):
 
 class PythonManeuverTriggersResetter(ManeuverTriggersResetter):
     """
-    public class PythonManeuverTriggersResetter extends Object implements :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter`
+    public class PythonManeuverTriggersResetter extends :class:`~org.orekit.forces.maneuvers.trigger.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -563,8 +554,8 @@ class PythonManeuverTriggersResetter(ManeuverTriggersResetter):
             have :code:`start` set to :code:`false` and the second call will have :code:`start` set to :code:`true`.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter.maneuverTriggered`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter`
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter.maneuverTriggered` in
+                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state at trigger date (before applying the maneuver)
@@ -597,8 +588,8 @@ class PythonManeuverTriggersResetter(ManeuverTriggersResetter):
             Reset state as a maneuver triggers.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter.resetState`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter`
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter.resetState` in
+                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state at trigger date
@@ -655,8 +646,8 @@ class PythonAbstractManeuverTriggers(AbstractManeuverTriggers):
             Method to check if the thruster is firing on initialization. can be called by sub classes
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.AbstractManeuverTriggers.isFiringOnInitialState`Â in
-                classÂ :class:`~org.orekit.forces.maneuvers.trigger.AbstractManeuverTriggers`
+                :meth:`~org.orekit.forces.maneuvers.trigger.AbstractManeuverTriggers.isFiringOnInitialState` in
+                class :class:`~org.orekit.forces.maneuvers.trigger.AbstractManeuverTriggers`
         
             Parameters:
                 initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial spacecraft state
@@ -741,7 +732,7 @@ class DateBasedManeuverTriggers(IntervalEventTrigger[org.orekit.propagation.even
     """
     DEFAULT_NAME: typing.ClassVar[str] = ...
     """
-    public static final String DEFAULT_NAME
+    public static final :class:`~org.orekit.forces.maneuvers.trigger.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_NAME
     
         Default name for trigger.
     
@@ -818,26 +809,25 @@ class PythonIntervalEventTrigger(IntervalEventTrigger[_PythonIntervalEventTrigge
         
             .. code-block: java
             
-            
-                 protected <D extends FieldEventDetector<S>, S extends CalculusFieldElement<S>>
-                     FieldAbstractDetector<D, S> convertIntervalDetector(final Field<S> field, final XyzDetector detector) {
-            
-                     final FieldAbsoluteDate<S> date  = new FieldAbsoluteDate<>(field, detector.getDate());
-                     final S                    param = field.getZero().newInstance(detector.getParam());
-            
-                     final FieldAbstractDetector<D, S> converted = (FieldAbstractDetector<D, S>) new FieldXyzDetector<>(date, param);
-                     return converted;
-            
-                 }
-             
+                 protected <D extends FieldEventDetector<S>, S extends CalculusFieldElement<S>>
+                     FieldAbstractDetector<D, S> convertIntervalDetector(final Field<S> field, final XyzDetector detector) {
+            
+                     final FieldAbsoluteDate<S> date  = new FieldAbsoluteDate<>(field, detector.getDate());
+                     final S                    param = field.getZero().newInstance(detector.getParam());
+            
+                     final FieldAbstractDetector<D, S> converted = (FieldAbstractDetector<D, S>) new FieldXyzDetector<>(date, param);
+                     return converted;
+            
+                 }
+             
              
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.IntervalEventTrigger.convertIntervalDetector`Â in
-                classÂ :class:`~org.orekit.forces.maneuvers.trigger.IntervalEventTrigger`
+                :meth:`~org.orekit.forces.maneuvers.trigger.IntervalEventTrigger.convertIntervalDetector` in
+                class :class:`~org.orekit.forces.maneuvers.trigger.IntervalEventTrigger`
         
             Parameters:
-                field (Field<S> field): field to which the state belongs
+                field (:class:`~org.orekit.forces.maneuvers.trigger.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<S> field): field to which the state belongs
                 detector (:class:`~org.orekit.forces.maneuvers.trigger.PythonIntervalEventTrigger`): primitive firing intervals detector to convert
         
             Returns:
@@ -890,26 +880,25 @@ class PythonStartStopEventsTrigger(StartStopEventsTrigger[_PythonStartStopEvents
         
             .. code-block: java
             
-            
-                 protected <D extends FieldEventDetector<S>, S extends CalculusFieldElement<S>>
-                     FieldAbstractDetector<D, S> convertStartDetector(final Field<S> field, final XyzDetector detector) {
-            
-                     final FieldAbsoluteDate<S> date  = new FieldAbsoluteDate<>(field, detector.getDate());
-                     final S                    param = field.getZero().newInstance(detector.getParam());
-            
-                     final FieldAbstractDetector<D, S> converted = (FieldAbstractDetector<D, S>) new FieldXyzDetector<>(date, param);
-                     return converted;
-            
-                 }
-             
+                 protected <D extends FieldEventDetector<S>, S extends CalculusFieldElement<S>>
+                     FieldAbstractDetector<D, S> convertStartDetector(final Field<S> field, final XyzDetector detector) {
+            
+                     final FieldAbsoluteDate<S> date  = new FieldAbsoluteDate<>(field, detector.getDate());
+                     final S                    param = field.getZero().newInstance(detector.getParam());
+            
+                     final FieldAbstractDetector<D, S> converted = (FieldAbstractDetector<D, S>) new FieldXyzDetector<>(date, param);
+                     return converted;
+            
+                 }
+             
              
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.StartStopEventsTrigger.convertStartDetector`Â in
-                classÂ :class:`~org.orekit.forces.maneuvers.trigger.StartStopEventsTrigger`
+                :meth:`~org.orekit.forces.maneuvers.trigger.StartStopEventsTrigger.convertStartDetector` in
+                class :class:`~org.orekit.forces.maneuvers.trigger.StartStopEventsTrigger`
         
             Parameters:
-                field (Field<S> field): field to which the state belongs
+                field (:class:`~org.orekit.forces.maneuvers.trigger.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<S> field): field to which the state belongs
                 detector (:class:`~org.orekit.forces.maneuvers.trigger.PythonStartStopEventsTrigger`): primitive firing start detector to convert
         
             Returns:
@@ -934,26 +923,25 @@ class PythonStartStopEventsTrigger(StartStopEventsTrigger[_PythonStartStopEvents
         
             .. code-block: java
             
-            
-                 protected <D extends FieldEventDetector<S>, S extends CalculusFieldElement<S>>
-                     FieldAbstractDetector<D, S> convertStopDetector(final Field<S> field, final XyzDetector detector) {
-            
-                     final FieldAbsoluteDate<S> date  = new FieldAbsoluteDate<>(field, detector.getDate());
-                     final S                    param = field.getZero().newInstance(detector.getParam());
-            
-                     final FieldAbstractDetector<D, S> converted = (FieldAbstractDetector<D, S>) new FieldXyzDetector<>(date, param);
-                     return converted;
-            
-                 }
-             
+                 protected <D extends FieldEventDetector<S>, S extends CalculusFieldElement<S>>
+                     FieldAbstractDetector<D, S> convertStopDetector(final Field<S> field, final XyzDetector detector) {
+            
+                     final FieldAbsoluteDate<S> date  = new FieldAbsoluteDate<>(field, detector.getDate());
+                     final S                    param = field.getZero().newInstance(detector.getParam());
+            
+                     final FieldAbstractDetector<D, S> converted = (FieldAbstractDetector<D, S>) new FieldXyzDetector<>(date, param);
+                     return converted;
+            
+                 }
+             
              
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.StartStopEventsTrigger.convertStopDetector`Â in
-                classÂ :class:`~org.orekit.forces.maneuvers.trigger.StartStopEventsTrigger`
+                :meth:`~org.orekit.forces.maneuvers.trigger.StartStopEventsTrigger.convertStopDetector` in
+                class :class:`~org.orekit.forces.maneuvers.trigger.StartStopEventsTrigger`
         
             Parameters:
-                field (Field<S> field): field to which the state belongs
+                field (:class:`~org.orekit.forces.maneuvers.trigger.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<S> field): field to which the state belongs
                 detector (:class:`~org.orekit.forces.maneuvers.trigger.PythonStartStopEventsTrigger`): primitive firing stop detector to convert
         
             Returns:

@@ -19,7 +19,7 @@ class ExtendedKalmanFilter(org.hipparchus.filtering.kalman.AbstractKalmanFilter[
 
 class NonLinearEvolution:
     """
-    public class NonLinearEvolution extends Object
+    public class NonLinearEvolution extends :class:`~org.hipparchus.filtering.kalman.extended.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Container for :class:`~org.hipparchus.filtering.kalman.extended.NonLinearProcess` evolution data.
     
@@ -103,7 +103,7 @@ class NonLinearProcess(typing.Generic[_NonLinearProcess__T]):
         
             Parameters:
                 previousTime (double): time of the previous state
-                previousState (RealVector): process state at :code:`previousTime`
+                previousState (:class:`~org.hipparchus.filtering.kalman.extended.https:.www.hipparchus.org.hipparchus`): process state at :code:`previousTime`
                 measurement (:class:`~org.hipparchus.filtering.kalman.extended.NonLinearProcess`): measurement to process
         
             Returns:
@@ -119,7 +119,7 @@ class NonLinearProcess(typing.Generic[_NonLinearProcess__T]):
             Parameters:
                 measurement (:class:`~org.hipparchus.filtering.kalman.extended.NonLinearProcess`): measurement to process
                 evolution (:class:`~org.hipparchus.filtering.kalman.extended.NonLinearEvolution`):             evolution returned by a previous call to :meth:`~org.hipparchus.filtering.kalman.extended.NonLinearProcess.getEvolution`
-                innovationCovarianceMatrix (RealMatrix): innovation covariance matrix, defined as \(h.P.h^T + r\) where h is the
+                innovationCovarianceMatrix (:class:`~org.hipparchus.filtering.kalman.extended.https:.www.hipparchus.org.hipparchus`): innovation covariance matrix, defined as \(h.P.h^T + r\) where h is the
                     :meth:`~org.hipparchus.filtering.kalman.extended.NonLinearEvolution.getMeasurementJacobian`, P is the predicted
                     covariance and r is :meth:`~org.hipparchus.filtering.kalman.Measurement.getCovariance`
         

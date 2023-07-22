@@ -6,7 +6,7 @@ import typing
 
 class Abs(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Abs extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Abs extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         Absolute value function.
     """
@@ -18,8 +18,8 @@ class Abs(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFuncti
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -35,8 +35,8 @@ class Abs(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFuncti
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 x (T): the point for which the function value should be computed
@@ -50,7 +50,7 @@ class Abs(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFuncti
 
 class Acos(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Acos extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Acos extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         Arc-cosine function.
     """
@@ -62,8 +62,8 @@ class Acos(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -79,8 +79,8 @@ class Acos(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 x (T): the point for which the function value should be computed
@@ -94,7 +94,7 @@ class Acos(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
 
 class Acosh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Acosh extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Acosh extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         Hyperbolic arc-cosine function.
     """
@@ -106,8 +106,8 @@ class Acosh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -123,8 +123,8 @@ class Acosh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 x (T): the point for which the function value should be computed
@@ -138,7 +138,7 @@ class Acosh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
 
 class Add(org.hipparchus.analysis.BivariateFunction):
     """
-    public class Add extends Object implements :class:`~org.hipparchus.analysis.BivariateFunction`
+    public class Add extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.BivariateFunction`
     
         Add the two operands.
     """
@@ -148,8 +148,8 @@ class Add(org.hipparchus.analysis.BivariateFunction):
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.BivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.BivariateFunction`
+                :meth:`~org.hipparchus.analysis.BivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.BivariateFunction`
         
             Parameters:
                 x (double): Abscissa for which the function value should be computed.
@@ -164,7 +164,7 @@ class Add(org.hipparchus.analysis.BivariateFunction):
 
 class Asin(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Asin extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Asin extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         Arc-sine function.
     """
@@ -176,8 +176,8 @@ class Asin(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -193,8 +193,8 @@ class Asin(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 x (T): the point for which the function value should be computed
@@ -208,7 +208,7 @@ class Asin(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
 
 class Asinh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Asinh extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Asinh extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         Hyperbolic arc-sine function.
     """
@@ -220,8 +220,8 @@ class Asinh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -237,8 +237,8 @@ class Asinh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 x (T): the point for which the function value should be computed
@@ -252,7 +252,7 @@ class Asinh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
 
 class Atan(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Atan extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Atan extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         Arc-tangent function.
     """
@@ -264,8 +264,8 @@ class Atan(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -281,8 +281,8 @@ class Atan(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 x (T): the point for which the function value should be computed
@@ -296,7 +296,7 @@ class Atan(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
 
 class Atan2(org.hipparchus.analysis.BivariateFunction):
     """
-    public class Atan2 extends Object implements :class:`~org.hipparchus.analysis.BivariateFunction`
+    public class Atan2 extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.BivariateFunction`
     
         Arc-tangent function.
     """
@@ -306,8 +306,8 @@ class Atan2(org.hipparchus.analysis.BivariateFunction):
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.BivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.BivariateFunction`
+                :meth:`~org.hipparchus.analysis.BivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.BivariateFunction`
         
             Parameters:
                 x (double): Abscissa for which the function value should be computed.
@@ -322,7 +322,7 @@ class Atan2(org.hipparchus.analysis.BivariateFunction):
 
 class Atanh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Atanh extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Atanh extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         Hyperbolic arc-tangent function.
     """
@@ -334,8 +334,8 @@ class Atanh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -351,8 +351,8 @@ class Atanh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 x (T): the point for which the function value should be computed
@@ -366,7 +366,7 @@ class Atanh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
 
 class Cbrt(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Cbrt extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Cbrt extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         Cube root function.
     """
@@ -378,8 +378,8 @@ class Cbrt(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -395,8 +395,8 @@ class Cbrt(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 x (T): the point for which the function value should be computed
@@ -410,7 +410,7 @@ class Cbrt(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
 
 class Ceil(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Ceil extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Ceil extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         :code:`ceil` function.
     """
@@ -422,8 +422,8 @@ class Ceil(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -439,8 +439,8 @@ class Ceil(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 x (T): the point for which the function value should be computed
@@ -454,7 +454,7 @@ class Ceil(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
 
 class Constant(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Constant extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Constant extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         Constant function.
     """
@@ -466,8 +466,8 @@ class Constant(org.hipparchus.analysis.differentiation.UnivariateDifferentiableF
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -483,8 +483,8 @@ class Constant(org.hipparchus.analysis.differentiation.UnivariateDifferentiableF
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 t (T): the point for which the function value should be computed
@@ -498,7 +498,7 @@ class Constant(org.hipparchus.analysis.differentiation.UnivariateDifferentiableF
 
 class Cos(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Cos extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Cos extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         Cosine function.
     """
@@ -510,8 +510,8 @@ class Cos(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFuncti
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -527,8 +527,8 @@ class Cos(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFuncti
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 x (T): the point for which the function value should be computed
@@ -542,7 +542,7 @@ class Cos(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFuncti
 
 class Cosh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Cosh extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Cosh extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         Hyperbolic cosine function.
     """
@@ -554,8 +554,8 @@ class Cosh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -571,8 +571,8 @@ class Cosh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 x (T): the point for which the function value should be computed
@@ -586,7 +586,7 @@ class Cosh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
 
 class Divide(org.hipparchus.analysis.BivariateFunction):
     """
-    public class Divide extends Object implements :class:`~org.hipparchus.analysis.BivariateFunction`
+    public class Divide extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.BivariateFunction`
     
         Divide the first operand by the second.
     """
@@ -596,8 +596,8 @@ class Divide(org.hipparchus.analysis.BivariateFunction):
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.BivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.BivariateFunction`
+                :meth:`~org.hipparchus.analysis.BivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.BivariateFunction`
         
             Parameters:
                 x (double): Abscissa for which the function value should be computed.
@@ -612,7 +612,7 @@ class Divide(org.hipparchus.analysis.BivariateFunction):
 
 class Exp(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Exp extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Exp extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         Exponential function.
     """
@@ -624,8 +624,8 @@ class Exp(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFuncti
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -641,8 +641,8 @@ class Exp(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFuncti
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 x (T): the point for which the function value should be computed
@@ -656,7 +656,7 @@ class Exp(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFuncti
 
 class Expm1(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Expm1 extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Expm1 extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         :code:`e :sup:`x` -1` function.
     """
@@ -668,8 +668,8 @@ class Expm1(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -685,8 +685,8 @@ class Expm1(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 x (T): the point for which the function value should be computed
@@ -700,7 +700,7 @@ class Expm1(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
 
 class Floor(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Floor extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Floor extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         :code:`floor` function.
     """
@@ -712,8 +712,8 @@ class Floor(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -729,8 +729,8 @@ class Floor(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 x (T): the point for which the function value should be computed
@@ -744,7 +744,7 @@ class Floor(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
 
 class Gaussian(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Gaussian extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Gaussian extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         ` Gaussian <http://en.wikipedia.org/wiki/Gaussian_function>` function.
     """
@@ -761,8 +761,8 @@ class Gaussian(org.hipparchus.analysis.differentiation.UnivariateDifferentiableF
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -775,8 +775,8 @@ class Gaussian(org.hipparchus.analysis.differentiation.UnivariateDifferentiableF
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 t (T): the point for which the function value should be computed
@@ -800,7 +800,7 @@ class Gaussian(org.hipparchus.analysis.differentiation.UnivariateDifferentiableF
 
 class HarmonicOscillator(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class HarmonicOscillator extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class HarmonicOscillator extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         ` simple harmonic oscillator <http://en.wikipedia.org/wiki/Harmonic_oscillator>` function.
     """
@@ -812,8 +812,8 @@ class HarmonicOscillator(org.hipparchus.analysis.differentiation.UnivariateDiffe
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -826,8 +826,8 @@ class HarmonicOscillator(org.hipparchus.analysis.differentiation.UnivariateDiffe
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 t (T): the point for which the function value should be computed
@@ -851,7 +851,7 @@ class HarmonicOscillator(org.hipparchus.analysis.differentiation.UnivariateDiffe
 
 class Identity(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Identity extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Identity extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         Identity function.
     """
@@ -863,8 +863,8 @@ class Identity(org.hipparchus.analysis.differentiation.UnivariateDifferentiableF
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -880,8 +880,8 @@ class Identity(org.hipparchus.analysis.differentiation.UnivariateDifferentiableF
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 t (T): the point for which the function value should be computed
@@ -895,7 +895,7 @@ class Identity(org.hipparchus.analysis.differentiation.UnivariateDifferentiableF
 
 class Inverse(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Inverse extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Inverse extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         Inverse function.
     """
@@ -907,8 +907,8 @@ class Inverse(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFu
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -924,8 +924,8 @@ class Inverse(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFu
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 t (T): the point for which the function value should be computed
@@ -939,7 +939,7 @@ class Inverse(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFu
 
 class Log(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Log extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Log extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         Natural logarithm function.
     """
@@ -951,8 +951,8 @@ class Log(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFuncti
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -968,8 +968,8 @@ class Log(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFuncti
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 x (T): the point for which the function value should be computed
@@ -983,7 +983,7 @@ class Log(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFuncti
 
 class Log10(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Log10 extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Log10 extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         Base 10 logarithm function.
     """
@@ -995,8 +995,8 @@ class Log10(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -1012,8 +1012,8 @@ class Log10(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 x (T): the point for which the function value should be computed
@@ -1027,7 +1027,7 @@ class Log10(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
 
 class Log1p(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Log1p extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Log1p extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         :code:`log(1 + p)` function.
     """
@@ -1039,8 +1039,8 @@ class Log1p(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -1056,8 +1056,8 @@ class Log1p(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 x (T): the point for which the function value should be computed
@@ -1071,7 +1071,7 @@ class Log1p(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
 
 class Logistic(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Logistic extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Logistic extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         ` Generalised logistic <http://en.wikipedia.org/wiki/Generalised_logistic_function>` function.
     """
@@ -1083,8 +1083,8 @@ class Logistic(org.hipparchus.analysis.differentiation.UnivariateDifferentiableF
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -1100,8 +1100,8 @@ class Logistic(org.hipparchus.analysis.differentiation.UnivariateDifferentiableF
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 t (T): the point for which the function value should be computed
@@ -1119,7 +1119,7 @@ class Logistic(org.hipparchus.analysis.differentiation.UnivariateDifferentiableF
 
 class Logit(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Logit extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Logit extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         ` Logit <http://en.wikipedia.org/wiki/Logit>` function. It is the inverse of the
         :class:`~org.hipparchus.analysis.function.Sigmoid` function.
@@ -1140,7 +1140,7 @@ class Logit(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
 
 class Max(org.hipparchus.analysis.BivariateFunction):
     """
-    public class Max extends Object implements :class:`~org.hipparchus.analysis.BivariateFunction`
+    public class Max extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.BivariateFunction`
     
         Maximum function.
     """
@@ -1150,8 +1150,8 @@ class Max(org.hipparchus.analysis.BivariateFunction):
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.BivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.BivariateFunction`
+                :meth:`~org.hipparchus.analysis.BivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.BivariateFunction`
         
             Parameters:
                 x (double): Abscissa for which the function value should be computed.
@@ -1166,7 +1166,7 @@ class Max(org.hipparchus.analysis.BivariateFunction):
 
 class Min(org.hipparchus.analysis.BivariateFunction):
     """
-    public class Min extends Object implements :class:`~org.hipparchus.analysis.BivariateFunction`
+    public class Min extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.BivariateFunction`
     
         Minimum function.
     """
@@ -1176,8 +1176,8 @@ class Min(org.hipparchus.analysis.BivariateFunction):
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.BivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.BivariateFunction`
+                :meth:`~org.hipparchus.analysis.BivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.BivariateFunction`
         
             Parameters:
                 x (double): Abscissa for which the function value should be computed.
@@ -1192,7 +1192,7 @@ class Min(org.hipparchus.analysis.BivariateFunction):
 
 class Minus(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Minus extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Minus extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         Minus function.
     """
@@ -1204,8 +1204,8 @@ class Minus(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -1221,8 +1221,8 @@ class Minus(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 t (T): the point for which the function value should be computed
@@ -1236,7 +1236,7 @@ class Minus(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
 
 class Multiply(org.hipparchus.analysis.BivariateFunction):
     """
-    public class Multiply extends Object implements :class:`~org.hipparchus.analysis.BivariateFunction`
+    public class Multiply extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.BivariateFunction`
     
         Multiply the two operands.
     """
@@ -1246,8 +1246,8 @@ class Multiply(org.hipparchus.analysis.BivariateFunction):
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.BivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.BivariateFunction`
+                :meth:`~org.hipparchus.analysis.BivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.BivariateFunction`
         
             Parameters:
                 x (double): Abscissa for which the function value should be computed.
@@ -1262,7 +1262,7 @@ class Multiply(org.hipparchus.analysis.BivariateFunction):
 
 class Pow(org.hipparchus.analysis.BivariateFunction):
     """
-    public class Pow extends Object implements :class:`~org.hipparchus.analysis.BivariateFunction`
+    public class Pow extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.BivariateFunction`
     
         Power function.
     """
@@ -1272,8 +1272,8 @@ class Pow(org.hipparchus.analysis.BivariateFunction):
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.BivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.BivariateFunction`
+                :meth:`~org.hipparchus.analysis.BivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.BivariateFunction`
         
             Parameters:
                 x (double): Abscissa for which the function value should be computed.
@@ -1288,7 +1288,7 @@ class Pow(org.hipparchus.analysis.BivariateFunction):
 
 class Power(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Power extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Power extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         Power function.
     """
@@ -1300,8 +1300,8 @@ class Power(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -1317,8 +1317,8 @@ class Power(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 t (T): the point for which the function value should be computed
@@ -1332,7 +1332,7 @@ class Power(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
 
 class Rint(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Rint extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Rint extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         :code:`rint` function.
     """
@@ -1344,8 +1344,8 @@ class Rint(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -1361,8 +1361,8 @@ class Rint(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 x (T): the point for which the function value should be computed
@@ -1376,7 +1376,7 @@ class Rint(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
 
 class Sigmoid(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Sigmoid extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Sigmoid extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         ` Sigmoid <http://en.wikipedia.org/wiki/Sigmoid_function>` function. It is the inverse of the
         :class:`~org.hipparchus.analysis.function.Logit` function. A more flexible version, the generalised logistic, is
@@ -1393,8 +1393,8 @@ class Sigmoid(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFu
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -1407,8 +1407,8 @@ class Sigmoid(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFu
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 t (T): the point for which the function value should be computed
@@ -1432,7 +1432,7 @@ class Sigmoid(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFu
 
 class Sin(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Sin extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Sin extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         Sine function.
     """
@@ -1444,8 +1444,8 @@ class Sin(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFuncti
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -1461,8 +1461,8 @@ class Sin(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFuncti
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 x (T): the point for which the function value should be computed
@@ -1476,7 +1476,7 @@ class Sin(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFuncti
 
 class Sinc(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Sinc extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Sinc extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         `Sinc <http://en.wikipedia.org/wiki/Sinc_function>` function, defined by
     
@@ -1496,8 +1496,8 @@ class Sinc(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -1510,8 +1510,8 @@ class Sinc(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 t (T): the point for which the function value should be computed
@@ -1531,7 +1531,7 @@ class Sinc(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
 
 class Sinh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Sinh extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Sinh extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         Hyperbolic sine function.
     """
@@ -1543,8 +1543,8 @@ class Sinh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -1560,8 +1560,8 @@ class Sinh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 x (T): the point for which the function value should be computed
@@ -1575,7 +1575,7 @@ class Sinh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
 
 class Sqrt(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Sqrt extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Sqrt extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         Square-root function.
     """
@@ -1587,8 +1587,8 @@ class Sqrt(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -1604,8 +1604,8 @@ class Sqrt(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 x (T): the point for which the function value should be computed
@@ -1619,7 +1619,7 @@ class Sqrt(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
 
 class StepFunction(org.hipparchus.analysis.UnivariateFunction):
     """
-    public class StepFunction extends Object implements :class:`~org.hipparchus.analysis.UnivariateFunction`
+    public class StepFunction extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.UnivariateFunction`
     
         ` Step function <http://en.wikipedia.org/wiki/Step_function>`.
     """
@@ -1629,8 +1629,8 @@ class StepFunction(org.hipparchus.analysis.UnivariateFunction):
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -1644,7 +1644,7 @@ class StepFunction(org.hipparchus.analysis.UnivariateFunction):
 
 class Subtract(org.hipparchus.analysis.BivariateFunction):
     """
-    public class Subtract extends Object implements :class:`~org.hipparchus.analysis.BivariateFunction`
+    public class Subtract extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.BivariateFunction`
     
         Subtract the second operand from the first.
     """
@@ -1654,8 +1654,8 @@ class Subtract(org.hipparchus.analysis.BivariateFunction):
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.BivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.BivariateFunction`
+                :meth:`~org.hipparchus.analysis.BivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.BivariateFunction`
         
             Parameters:
                 x (double): Abscissa for which the function value should be computed.
@@ -1670,7 +1670,7 @@ class Subtract(org.hipparchus.analysis.BivariateFunction):
 
 class Tan(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Tan extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Tan extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         Tangent function.
     """
@@ -1682,8 +1682,8 @@ class Tan(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFuncti
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -1699,8 +1699,8 @@ class Tan(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFuncti
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 x (T): the point for which the function value should be computed
@@ -1714,7 +1714,7 @@ class Tan(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFuncti
 
 class Tanh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
     """
-    public class Tanh extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+    public class Tanh extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
     
         Hyperbolic tangent function.
     """
@@ -1726,8 +1726,8 @@ class Tanh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.
@@ -1743,8 +1743,8 @@ class Tanh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 x (T): the point for which the function value should be computed
@@ -1758,7 +1758,7 @@ class Tanh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
 
 class Ulp(org.hipparchus.analysis.UnivariateFunction):
     """
-    public class Ulp extends Object implements :class:`~org.hipparchus.analysis.UnivariateFunction`
+    public class Ulp extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.UnivariateFunction`
     
         :code:`ulp` function.
     """
@@ -1768,8 +1768,8 @@ class Ulp(org.hipparchus.analysis.UnivariateFunction):
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Point at which the function value should be computed.

@@ -28,7 +28,7 @@ import typing
 _AbstractBuilder__T = typing.TypeVar('_AbstractBuilder__T', bound='AbstractBuilder')  # <T>
 class AbstractBuilder(typing.Generic[_AbstractBuilder__T]):
     """
-    public abstract class AbstractBuilder<T extends AbstractBuilder<T>> extends Object
+    public abstract class AbstractBuilder<T extends AbstractBuilder<T>> extends :class:`~org.orekit.files.ccsds.ndm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Abstract builder for all :class:`~org.orekit.files.ccsds.ndm.NdmConstituent` files parsers/writers.
     
@@ -496,8 +496,8 @@ class CommonPhysicalProperties(org.orekit.files.ccsds.section.CommentsContainer)
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
+                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
         
             Parameters:
                 version (double): format version
@@ -508,7 +508,7 @@ class CommonPhysicalProperties(org.orekit.files.ccsds.section.CommentsContainer)
 
 class Ndm:
     """
-    public class Ndm extends Object
+    public class Ndm extends :class:`~org.orekit.files.ccsds.ndm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         CCSDS Navigation Data Message. This class is a container for comments and
         :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`.
@@ -517,26 +517,17 @@ class Ndm:
             11.0
     """
     def __init__(self, list: java.util.List[str], list2: java.util.List['NdmConstituent'[typing.Any, typing.Any]]): ...
-    def getComments(self) -> java.util.List[str]:
-        """
-            Get an unmodifiable view of the comments.
-        
-            Returns:
-                unmodifiable view of the comment
-        
-        
-        """
-        ...
+    def getComments(self) -> java.util.List[str]: ...
     def getConstituents(self) -> java.util.List['NdmConstituent'[typing.Any, typing.Any]]: ...
 
 _NdmConstituent__H = typing.TypeVar('_NdmConstituent__H', bound=org.orekit.files.ccsds.section.Header)  # <H>
 _NdmConstituent__S = typing.TypeVar('_NdmConstituent__S', bound=org.orekit.files.ccsds.section.Segment)  # <S>
 class NdmConstituent(typing.Generic[_NdmConstituent__H, _NdmConstituent__S]):
     """
-    public abstract class NdmConstituent<H extends :class:`~org.orekit.files.ccsds.section.Header`, S extends :class:`~org.orekit.files.ccsds.section.Segment`<?, ?>> extends Object
+    public abstract class NdmConstituent<H extends :class:`~org.orekit.files.ccsds.section.Header`, S extends :class:`~org.orekit.files.ccsds.section.Segment`<?, ?>> extends :class:`~org.orekit.files.ccsds.ndm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Constituents of a CCSDS Navigation Data Message. Constituents may be Attitude Data Message (ADM), Orbit Data Message
-        (ODM), Tracking Data Message (TDM)Ã¢â‚¬Â¦ Each constituent has its own header and a list of segments.
+        (ODM), Tracking Data Message (TDM)… Each constituent has its own header and a list of segments.
     
         Since:
             10.2
@@ -602,7 +593,7 @@ class NdmParser(org.orekit.files.ccsds.utils.parsing.AbstractMessageParser[Ndm])
             Comments are accepted only at start. Once other content is stored in the same section, comments are refused.
         
             Parameters:
-                comment (String): comment line
+                comment (:class:`~org.orekit.files.ccsds.ndm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): comment line
         
             Returns:
                 true if comment was accepted
@@ -634,7 +625,7 @@ class NdmParser(org.orekit.files.ccsds.utils.parsing.AbstractMessageParser[Ndm])
 
 class NdmWriter:
     """
-    public class NdmWriter extends Object
+    public class NdmWriter extends :class:`~org.orekit.files.ccsds.ndm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Writer for CCSDS Navigation Data Message.
     
@@ -651,7 +642,7 @@ class NdmWriter:
 
 class ParsedUnitsBehavior(java.lang.Enum['ParsedUnitsBehavior']):
     """
-    public enum ParsedUnitsBehavior extends Enum<:class:`~org.orekit.files.ccsds.ndm.ParsedUnitsBehavior`>
+    public enum ParsedUnitsBehavior extends :class:`~org.orekit.files.ccsds.ndm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.ParsedUnitsBehavior`>
     
         Behavior adopted for units that have been parsed from a CCSDS message.
     
@@ -687,14 +678,14 @@ class ParsedUnitsBehavior(java.lang.Enum['ParsedUnitsBehavior']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -707,9 +698,8 @@ class ParsedUnitsBehavior(java.lang.Enum['ParsedUnitsBehavior']):
         
             .. code-block: java
             
-            
-            for (ParsedUnitsBehavior c : ParsedUnitsBehavior.values())
-                System.out.println(c);
+            for (ParsedUnitsBehavior c : ParsedUnitsBehavior.values())
+                System.out.println(c);
             
         
             Returns:
@@ -956,14 +946,14 @@ class PythonAbstractBuilder(AbstractBuilder[_PythonAbstractBuilder__T], typing.G
             Build an instance.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.ndm.AbstractBuilder.create`Â in
-                classÂ :class:`~org.orekit.files.ccsds.ndm.AbstractBuilder`
+                :meth:`~org.orekit.files.ccsds.ndm.AbstractBuilder.create` in
+                class :class:`~org.orekit.files.ccsds.ndm.AbstractBuilder`
         
             Parameters:
                 newConventions (:class:`~org.orekit.utils.IERSConventions`): IERS Conventions
                 newDataContext (:class:`~org.orekit.data.DataContext`): used to retrieve frames, time scales, etc.
                 newMissionReferenceDate (:class:`~org.orekit.time.AbsoluteDate`): reference date for Mission Elapsed Time or Mission Relative Time time systems
-                newRangeUnitsConverter (:class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`): converter for :code:`Range Units`
+                newRangeUnitsConverter (:class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`): converter for :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU`
         
             Returns:
                 new instance
@@ -1004,8 +994,8 @@ class PythonNdmConstituent(NdmConstituent[_PythonNdmConstituent__H, _PythonNdmCo
             Get IERS conventions.
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.ndm.NdmConstituent.getConventions`Â in
-                classÂ :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`
+                :meth:`~org.orekit.files.ccsds.ndm.NdmConstituent.getConventions` in
+                class :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`
         
             Returns:
                 IERS conventions
@@ -1018,8 +1008,8 @@ class PythonNdmConstituent(NdmConstituent[_PythonNdmConstituent__H, _PythonNdmCo
             Get the data context.
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.ndm.NdmConstituent.getDataContext`Â in
-                classÂ :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`
+                :meth:`~org.orekit.files.ccsds.ndm.NdmConstituent.getDataContext` in
+                class :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`
         
             Returns:
                 the data context used for creating frames, time scales, etc.
@@ -1032,8 +1022,8 @@ class PythonNdmConstituent(NdmConstituent[_PythonNdmConstituent__H, _PythonNdmCo
             Get the header.
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.ndm.NdmConstituent.getHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`
+                :meth:`~org.orekit.files.ccsds.ndm.NdmConstituent.getHeader` in
+                class :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`
         
             Returns:
                 header
@@ -1072,8 +1062,8 @@ class PythonNdmConstituent(NdmConstituent[_PythonNdmConstituent__H, _PythonNdmCo
             version, which is found in header.
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.ndm.NdmConstituent.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`
+                :meth:`~org.orekit.files.ccsds.ndm.NdmConstituent.validate` in
+                class :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`
         
         
         """

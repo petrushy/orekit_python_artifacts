@@ -9,7 +9,7 @@ import typing
 
 class RinexNavigation:
     """
-    public class RinexNavigation extends Object
+    public class RinexNavigation extends :class:`~org.orekit.gnss.navigation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Represents a parsed RINEX navigation messages files.
     
@@ -32,7 +32,7 @@ class RinexNavigation:
             Add a comment line.
         
             Parameters:
-                comment (String): the comment line to add
+                comment (:class:`~org.orekit.gnss.navigation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the comment line to add
         
         
         """
@@ -301,7 +301,7 @@ class RinexNavigation:
             Setter for the agency name.
         
             Parameters:
-                agencyName (String): the agency name to set
+                agencyName (:class:`~org.orekit.gnss.navigation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the agency name to set
         
         
         """
@@ -321,7 +321,7 @@ class RinexNavigation:
             Setter for the creation date as a string.
         
             Parameters:
-                creationDateString (String): the creation date as a string to set
+                creationDateString (:class:`~org.orekit.gnss.navigation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the creation date as a string to set
         
         
         """
@@ -331,7 +331,7 @@ class RinexNavigation:
             Setter for the creation time as a string.
         
             Parameters:
-                creationTimeString (String): the creation time as a string to set
+                creationTimeString (:class:`~org.orekit.gnss.navigation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the creation time as a string to set
         
         
         """
@@ -341,7 +341,7 @@ class RinexNavigation:
             Setter for the creation time zone.
         
             Parameters:
-                creationTimeZoneString (String): the creation time zone as a string to set
+                creationTimeZoneString (:class:`~org.orekit.gnss.navigation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the creation time zone as a string to set
         
         
         """
@@ -351,7 +351,7 @@ class RinexNavigation:
             Setter for the file type.
         
             Parameters:
-                fileType (String): must be 'N' for navigation data
+                fileType (:class:`~org.orekit.gnss.navigation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): must be 'N' for navigation data
         
         
         """
@@ -371,7 +371,7 @@ class RinexNavigation:
             Setter for the ionospheric correction type.
         
             Parameters:
-                ionosphericCorrectionType (String): the ionospheric correction type to set
+                ionosphericCorrectionType (:class:`~org.orekit.gnss.navigation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the ionospheric correction type to set
         
         
         """
@@ -421,7 +421,7 @@ class RinexNavigation:
             Setter for the program name.
         
             Parameters:
-                programName (String): the program name to set
+                programName (:class:`~org.orekit.gnss.navigation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the program name to set
         
         
         """
@@ -446,7 +446,7 @@ class RinexNavigation:
 
 class RinexNavigationParser:
     """
-    public class RinexNavigationParser extends Object
+    public class RinexNavigationParser extends :class:`~org.orekit.gnss.navigation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Parser for RINEX navigation messages files.
     
@@ -456,8 +456,11 @@ class RinexNavigationParser:
             11.0
     
         Also see:
-            3.01 navigation messages file format, 3.02 navigation messages file format, 3.03 navigation messages file format, 3.04
-            navigation messages file format, 3.05 navigation messages file format
+            :class:`~org.orekit.gnss.navigation.https:.files.igs.org.pub.data.format.rinex301.pdf`,
+            :class:`~org.orekit.gnss.navigation.https:.files.igs.org.pub.data.format.rinex302.pdf`,
+            :class:`~org.orekit.gnss.navigation.https:.files.igs.org.pub.data.format.rinex303.pdf`,
+            :class:`~org.orekit.gnss.navigation.https:.files.igs.org.pub.data.format.rinex304.pdf`,
+            :class:`~org.orekit.gnss.navigation.https:.files.igs.org.pub.data.format.rinex305.pdf`
     """
     @typing.overload
     def __init__(self): ...

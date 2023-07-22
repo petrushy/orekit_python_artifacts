@@ -20,7 +20,7 @@ class BesselJ(org.hipparchus.analysis.UnivariateFunction):
 
 class Beta:
     """
-    public class Beta extends Object
+    public class Beta extends :class:`~org.hipparchus.special.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
     
         This is a utility class that provides computation methods related to the Beta family of functions.
@@ -41,8 +41,8 @@ class Beta:
     @staticmethod
     def logBeta(double: float, double2: float) -> float:
         """
-            Returns the value of log B(p, q) for 0 Ã¢â€°Â¤ x Ã¢â€°Â¤ 1 and p, q > 0. Based on the *NSWC Library of Mathematics
-            Subroutines* implementation, :code:`DBETLN`.
+            Returns the value of log B(p, q) for 0 ≤ x ≤ 1 and p, q > 0. Based on the *NSWC Library of Mathematics Subroutines*
+            implementation, :code:`DBETLN`.
         
             Parameters:
                 p (double): First argument.

@@ -13,26 +13,26 @@ import typing
 
 class AuxiliaryElements:
     """
-    public class AuxiliaryElements extends Object
+    public class AuxiliaryElements extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Container class for common parameters used by all DSST forces.
     
-        Most of them are defined in Danielson paper at Â§ 2.1.
+        Most of them are defined in Danielson paper at § 2.1.
     """
     def __init__(self, orbit: org.orekit.orbits.Orbit, int: int): ...
     def getAlpha(self) -> float:
         """
-            Get direction cosine Î± for central body.
+            Get direction cosine α for central body.
         
             Returns:
-                Î±
+                α
         
         
         """
         ...
     def getB(self) -> float:
         """
-            Get B = sqrt(1 - eÂ²).
+            Get B = sqrt(1 - e²).
         
             Returns:
                 B
@@ -42,17 +42,17 @@ class AuxiliaryElements:
         ...
     def getBeta(self) -> float:
         """
-            Get direction cosine Î² for central body.
+            Get direction cosine β for central body.
         
             Returns:
-                Î²
+                β
         
         
         """
         ...
     def getC(self) -> float:
         """
-            Get C = 1 + pÂ² + qÂ².
+            Get C = 1 + p² + q².
         
             Returns:
                 C
@@ -92,10 +92,10 @@ class AuxiliaryElements:
         ...
     def getGamma(self) -> float:
         """
-            Get direction cosine Î³ for central body.
+            Get direction cosine γ for central body.
         
             Returns:
-                Î³
+                γ
         
         
         """
@@ -251,7 +251,7 @@ class AuxiliaryElements:
 
 class CjSjCoefficient:
     """
-    public class CjSjCoefficient extends Object
+    public class CjSjCoefficient extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Compute the S :sub:`j` (k, h) and the C :sub:`j` (k, h) series and their partial derivatives with respect to k and h.
     
@@ -259,8 +259,11 @@ class CjSjCoefficient:
     
         C :sub:`j` (k, h) + i S :sub:`j` (k, h) = (k+ih) :sup:`j`
     
-        The C :sub:`j` (k, h) and the S :sub:`j` (k, h) elements are store as an null of null number, the C :sub:`j` (k, h)
-        being represented by the real and the S :sub:`j` (k, h) by the imaginary part.
+        The C :sub:`j` (k, h) and the S :sub:`j` (k, h) elements are store as an
+        :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.docs.oracle.com.javase.8.docs.api.java.util.ArrayList?is`
+        of
+        :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.www.hipparchus.org.apidocs.org.hipparchus.complex.Complex?is`
+        number, the C :sub:`j` (k, h) being represented by the real and the S :sub:`j` (k, h) by the imaginary part.
     """
     def __init__(self, double: float, double2: float): ...
     def getCj(self, int: int) -> float:
@@ -344,7 +347,7 @@ class CjSjCoefficient:
 
 class CoefficientsFactory:
     """
-    public class CoefficientsFactory extends Object
+    public class CoefficientsFactory extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This class is designed to provide coefficient from the DSST theory.
     """
@@ -382,7 +385,7 @@ class CoefficientsFactory:
                 alpha (T): 1st direction cosine
                 beta (T): 2nd direction cosine
                 order (int): development order
-                field (Field<T> field): field of elements
+                field (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field of elements
         
             Returns:
                 Array of G :sub:`s` and H :sub:`s` polynomials for s from 0 to order.
@@ -398,13 +401,13 @@ class CoefficientsFactory:
     @staticmethod
     def computeQns(double: float, int: int, int2: int) -> typing.List[typing.List[float]]:
         """
-            Compute the Q :sub:`n,s` coefficients evaluated at Î³ from the recurrence formula 2.8.3-(2).
+            Compute the Q :sub:`n,s` coefficients evaluated at γ from the recurrence formula 2.8.3-(2).
         
             Q :sub:`n,s` coefficients are computed for n = 0 to nMax and s = 0 to sMax + 1 in order to also get the derivative dQ
-            :sub:`n,s` /dÃŽÂ³ = Q(n, s + 1)
+            :sub:`n,s` /dγ = Q(n, s + 1)
         
             Parameters:
-                gamma (double): Î³ angle
+                gamma (double): γ angle
                 nMax (int): n max value
                 sMax (int): s max value
         
@@ -417,13 +420,13 @@ class CoefficientsFactory:
     @staticmethod
     def computeQns(t: _computeQns_1__T, int: int, int2: int) -> typing.List[typing.List[_computeQns_1__T]]:
         """
-            Compute the Q :sub:`n,s` coefficients evaluated at Î³ from the recurrence formula 2.8.3-(2).
+            Compute the Q :sub:`n,s` coefficients evaluated at γ from the recurrence formula 2.8.3-(2).
         
             Q :sub:`n,s` coefficients are computed for n = 0 to nMax and s = 0 to sMax + 1 in order to also get the derivative dQ
-            :sub:`n,s` /dÃŽÂ³ = Q(n, s + 1)
+            :sub:`n,s` /dγ = Q(n, s + 1)
         
             Parameters:
-                gamma (T): Î³ angle
+                gamma (T): γ angle
                 nMax (int): n max value
                 sMax (int): s max value
         
@@ -436,12 +439,14 @@ class CoefficientsFactory:
     @staticmethod
     def computeVns(int: int) -> java.util.TreeMap['CoefficientsFactory.NSKey', float]: ...
     @staticmethod
+    def computeVnsCoefficients(int: int) -> java.util.SortedMap['CoefficientsFactory.NSKey', float]: ...
+    @staticmethod
     def getVmns(int: int, int2: int, int3: int) -> float:
         """
             Get the V :sub:`n,s` :sup:`m` coefficient from V :sub:`n,s` .
         
         
-            See Â§ 2.8.2 in Danielson paper.
+            See § 2.8.2 in Danielson paper.
         
             Parameters:
                 m (int): m
@@ -465,26 +470,26 @@ class CoefficientsFactory:
 _FieldAuxiliaryElements__T = typing.TypeVar('_FieldAuxiliaryElements__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAuxiliaryElements(typing.Generic[_FieldAuxiliaryElements__T]):
     """
-    public class FieldAuxiliaryElements<T extends CalculusFieldElement<T>> extends Object
+    public class FieldAuxiliaryElements<T extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Container class for common parameters used by all DSST forces.
     
-        Most of them are defined in Danielson paper at Â§ 2.1.
+        Most of them are defined in Danielson paper at § 2.1.
     """
     def __init__(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_FieldAuxiliaryElements__T], int: int): ...
     def getAlpha(self) -> _FieldAuxiliaryElements__T:
         """
-            Get direction cosine Î± for central body.
+            Get direction cosine α for central body.
         
             Returns:
-                Î±
+                α
         
         
         """
         ...
     def getB(self) -> _FieldAuxiliaryElements__T:
         """
-            Get B = sqrt(1 - eÂ²).
+            Get B = sqrt(1 - e²).
         
             Returns:
                 B
@@ -494,17 +499,17 @@ class FieldAuxiliaryElements(typing.Generic[_FieldAuxiliaryElements__T]):
         ...
     def getBeta(self) -> _FieldAuxiliaryElements__T:
         """
-            Get direction cosine Î² for central body.
+            Get direction cosine β for central body.
         
             Returns:
-                Î²
+                β
         
         
         """
         ...
     def getC(self) -> _FieldAuxiliaryElements__T:
         """
-            Get C = 1 + pÂ² + qÂ².
+            Get C = 1 + p² + q².
         
             Returns:
                 C
@@ -535,10 +540,10 @@ class FieldAuxiliaryElements(typing.Generic[_FieldAuxiliaryElements__T]):
         ...
     def getGamma(self) -> _FieldAuxiliaryElements__T:
         """
-            Get direction cosine Î³ for central body.
+            Get direction cosine γ for central body.
         
             Returns:
-                Î³
+                γ
         
         
         """
@@ -664,11 +669,24 @@ class FieldAuxiliaryElements(typing.Generic[_FieldAuxiliaryElements__T]):
     def getVectorF(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldAuxiliaryElements__T]: ...
     def getVectorG(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldAuxiliaryElements__T]: ...
     def getVectorW(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldAuxiliaryElements__T]: ...
+    def toAuxiliaryElements(self) -> AuxiliaryElements:
+        """
+            Transforms the FieldAuxiliaryElements instance into an AuxiliaryElements instance.
+        
+            Returns:
+                the AuxiliaryElements instance
+        
+            Since:
+                11.3.3
+        
+        
+        """
+        ...
 
 _FieldCjSjCoefficient__T = typing.TypeVar('_FieldCjSjCoefficient__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldCjSjCoefficient(typing.Generic[_FieldCjSjCoefficient__T]):
     """
-    public class FieldCjSjCoefficient<T extends CalculusFieldElement<T>> extends Object
+    public class FieldCjSjCoefficient<T extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Compute the S :sub:`j` (k, h) and the C :sub:`j` (k, h) series and their partial derivatives with respect to k and h.
     
@@ -676,8 +694,11 @@ class FieldCjSjCoefficient(typing.Generic[_FieldCjSjCoefficient__T]):
     
         C :sub:`j` (k, h) + i S :sub:`j` (k, h) = (k+ih) :sup:`j`
     
-        The C :sub:`j` (k, h) and the S :sub:`j` (k, h) elements are store as an null of null number, the C :sub:`j` (k, h)
-        being represented by the real and the S :sub:`j` (k, h) by the imaginary part.
+        The C :sub:`j` (k, h) and the S :sub:`j` (k, h) elements are store as an
+        :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.docs.oracle.com.javase.8.docs.api.java.util.ArrayList?is`
+        of
+        :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.www.hipparchus.org.apidocs.org.hipparchus.complex.Complex?is`
+        number, the C :sub:`j` (k, h) being represented by the real and the S :sub:`j` (k, h) by the imaginary part.
     """
     def __init__(self, t: _FieldCjSjCoefficient__T, t2: _FieldCjSjCoefficient__T, field: org.hipparchus.Field[_FieldCjSjCoefficient__T]): ...
     def getCj(self, int: int) -> _FieldCjSjCoefficient__T:
@@ -762,10 +783,10 @@ class FieldCjSjCoefficient(typing.Generic[_FieldCjSjCoefficient__T]):
 _FieldGHIJjsPolynomials__T = typing.TypeVar('_FieldGHIJjsPolynomials__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldGHIJjsPolynomials(typing.Generic[_FieldGHIJjsPolynomials__T]):
     """
-    public class FieldGHIJjsPolynomials<T extends CalculusFieldElement<T>> extends Object
+    public class FieldGHIJjsPolynomials<T extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Compute the G :sub:`js` , H :sub:`js` , I :sub:`js` and J :sub:`js` polynomials in the equinoctial elements h, k and the
-        direction cosines ÃŽÂ± and ÃŽÂ² and their partial derivatives with respect to k, h, ÃŽÂ± and ÃŽÂ².
+        direction cosines α and β and their partial derivatives with respect to k, h, α and β.
     
         The expressions used are equations 4.1-(10) from the Danielson paper.
     """
@@ -828,28 +849,28 @@ class FieldGHIJjsPolynomials(typing.Generic[_FieldGHIJjsPolynomials__T]):
         ...
     def getdGjsdAlpha(self, int: int, int2: int) -> _FieldGHIJjsPolynomials__T:
         """
-            Get the dG :sub:`js` / dÎ± coefficient.
+            Get the dG :sub:`js` / dα coefficient.
         
             Parameters:
                 j (int): j subscript
                 s (int): s subscript
         
             Returns:
-                the dG :sub:`js` / dÎ±
+                the dG :sub:`js` / dα
         
         
         """
         ...
     def getdGjsdBeta(self, int: int, int2: int) -> _FieldGHIJjsPolynomials__T:
         """
-            Get the dG :sub:`js` / dÎ² coefficient.
+            Get the dG :sub:`js` / dβ coefficient.
         
             Parameters:
                 j (int): j subscript
                 s (int): s subscript
         
             Returns:
-                the dG :sub:`js` / dÎ²
+                the dG :sub:`js` / dβ
         
         
         """
@@ -884,28 +905,28 @@ class FieldGHIJjsPolynomials(typing.Generic[_FieldGHIJjsPolynomials__T]):
         ...
     def getdHjsdAlpha(self, int: int, int2: int) -> _FieldGHIJjsPolynomials__T:
         """
-            Get the dH :sub:`js` / dÎ± coefficient.
+            Get the dH :sub:`js` / dα coefficient.
         
             Parameters:
                 j (int): j subscript
                 s (int): s subscript
         
             Returns:
-                the H :sub:`js` / dÎ±
+                the H :sub:`js` / dα
         
         
         """
         ...
     def getdHjsdBeta(self, int: int, int2: int) -> _FieldGHIJjsPolynomials__T:
         """
-            Get the dH :sub:`js` / dÎ² coefficient.
+            Get the dH :sub:`js` / dβ coefficient.
         
             Parameters:
                 j (int): j subscript
                 s (int): s subscript
         
             Returns:
-                the H :sub:`js` / dÎ²
+                the H :sub:`js` / dβ
         
         
         """
@@ -940,28 +961,28 @@ class FieldGHIJjsPolynomials(typing.Generic[_FieldGHIJjsPolynomials__T]):
         ...
     def getdIjsdAlpha(self, int: int, int2: int) -> _FieldGHIJjsPolynomials__T:
         """
-            Get the dI :sub:`js` / dÎ± coefficient.
+            Get the dI :sub:`js` / dα coefficient.
         
             Parameters:
                 j (int): j subscript
                 s (int): s subscript
         
             Returns:
-                the I :sub:`js` / dÎ±
+                the I :sub:`js` / dα
         
         
         """
         ...
     def getdIjsdBeta(self, int: int, int2: int) -> _FieldGHIJjsPolynomials__T:
         """
-            Get the dI :sub:`js` / dÎ² coefficient.
+            Get the dI :sub:`js` / dβ coefficient.
         
             Parameters:
                 j (int): j subscript
                 s (int): s subscript
         
             Returns:
-                the I :sub:`js` / dÎ²
+                the I :sub:`js` / dβ
         
         
         """
@@ -996,28 +1017,28 @@ class FieldGHIJjsPolynomials(typing.Generic[_FieldGHIJjsPolynomials__T]):
         ...
     def getdJjsdAlpha(self, int: int, int2: int) -> _FieldGHIJjsPolynomials__T:
         """
-            Get the dJ :sub:`js` / dÎ± coefficient.
+            Get the dJ :sub:`js` / dα coefficient.
         
             Parameters:
                 j (int): j subscript
                 s (int): s subscript
         
             Returns:
-                the J :sub:`js` / dÎ±
+                the J :sub:`js` / dα
         
         
         """
         ...
     def getdJjsdBeta(self, int: int, int2: int) -> _FieldGHIJjsPolynomials__T:
         """
-            Get the dJ :sub:`js` / dÎ² coefficient.
+            Get the dJ :sub:`js` / dβ coefficient.
         
             Parameters:
                 j (int): j subscript
                 s (int): s subscript
         
             Returns:
-                the J :sub:`js` / dÎ²
+                the J :sub:`js` / dβ
         
         
         """
@@ -1054,10 +1075,10 @@ class FieldGHIJjsPolynomials(typing.Generic[_FieldGHIJjsPolynomials__T]):
 _FieldGHmsjPolynomials__T = typing.TypeVar('_FieldGHmsjPolynomials__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldGHmsjPolynomials(typing.Generic[_FieldGHmsjPolynomials__T]):
     """
-    public class FieldGHmsjPolynomials<T extends CalculusFieldElement<T>> extends Object
+    public class FieldGHmsjPolynomials<T extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Compute the G :sub:`ms` :sup:`j` and the H :sub:`ms` :sup:`j` polynomials in the equinoctial elements h, k and the
-        direction cosines ÃŽÂ± and ÃŽÂ² and their partial derivatives with respect to k, h, ÃŽÂ± and ÃŽÂ².
+        direction cosines α and β and their partial derivatives with respect to k, h, α and β.
     
         The expressions used are equations 2.7.5-(1)(2) from the Danielson paper.
     """
@@ -1094,7 +1115,7 @@ class FieldGHmsjPolynomials(typing.Generic[_FieldGHmsjPolynomials__T]):
         ...
     def getdGmsdAlpha(self, int: int, int2: int, int3: int) -> _FieldGHmsjPolynomials__T:
         """
-            Get the dG :sub:`ms` :sup:`j` / d :sub:`Î±` coefficient.
+            Get the dG :sub:`ms` :sup:`j` / d :sub:`α` coefficient.
         
             Parameters:
                 m (int): m subscript
@@ -1102,14 +1123,14 @@ class FieldGHmsjPolynomials(typing.Generic[_FieldGHmsjPolynomials__T]):
                 j (int): order
         
             Returns:
-                dG :sub:`ms` :sup:`j` / d :sub:`Î±`
+                dG :sub:`ms` :sup:`j` / d :sub:`α`
         
         
         """
         ...
     def getdGmsdBeta(self, int: int, int2: int, int3: int) -> _FieldGHmsjPolynomials__T:
         """
-            Get the dG :sub:`ms` :sup:`j` / d :sub:`Î²` coefficient.
+            Get the dG :sub:`ms` :sup:`j` / d :sub:`β` coefficient.
         
             Parameters:
                 m (int): m subscript
@@ -1117,7 +1138,7 @@ class FieldGHmsjPolynomials(typing.Generic[_FieldGHmsjPolynomials__T]):
                 j (int): order
         
             Returns:
-                dG :sub:`ms` :sup:`j` / d :sub:`Î²`
+                dG :sub:`ms` :sup:`j` / d :sub:`β`
         
         
         """
@@ -1154,7 +1175,7 @@ class FieldGHmsjPolynomials(typing.Generic[_FieldGHmsjPolynomials__T]):
         ...
     def getdHmsdAlpha(self, int: int, int2: int, int3: int) -> _FieldGHmsjPolynomials__T:
         """
-            Get the dH :sub:`ms` :sup:`j` / d :sub:`Î±` coefficient.
+            Get the dH :sub:`ms` :sup:`j` / d :sub:`α` coefficient.
         
             Parameters:
                 m (int): m subscript
@@ -1162,14 +1183,14 @@ class FieldGHmsjPolynomials(typing.Generic[_FieldGHmsjPolynomials__T]):
                 j (int): order
         
             Returns:
-                dH :sub:`ms` :sup:`j` / d :sub:`Î±`
+                dH :sub:`ms` :sup:`j` / d :sub:`α`
         
         
         """
         ...
     def getdHmsdBeta(self, int: int, int2: int, int3: int) -> _FieldGHmsjPolynomials__T:
         """
-            Get the dH :sub:`ms` :sup:`j` / d :sub:`Î²` coefficient.
+            Get the dH :sub:`ms` :sup:`j` / d :sub:`β` coefficient.
         
             Parameters:
                 m (int): m subscript
@@ -1177,7 +1198,7 @@ class FieldGHmsjPolynomials(typing.Generic[_FieldGHmsjPolynomials__T]):
                 j (int): order
         
             Returns:
-                dH :sub:`ms` :sup:`j` / d :sub:`Î²`
+                dH :sub:`ms` :sup:`j` / d :sub:`β`
         
         
         """
@@ -1216,9 +1237,9 @@ class FieldGHmsjPolynomials(typing.Generic[_FieldGHmsjPolynomials__T]):
 _FieldGammaMnsFunction__T = typing.TypeVar('_FieldGammaMnsFunction__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldGammaMnsFunction(typing.Generic[_FieldGammaMnsFunction__T]):
     """
-    public class FieldGammaMnsFunction<T extends CalculusFieldElement<T>> extends Object
+    public class FieldGammaMnsFunction<T extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
-        Compute the Γ :sup:`m` :sub:`n,s` (Î³) function from equation 2.7.1-(13).
+        Compute the Γ :sup:`m` :sub:`n,s` (γ) function from equation 2.7.1-(13).
     """
     def __init__(self, int: int, t: _FieldGammaMnsFunction__T, int2: int, field: org.hipparchus.Field[_FieldGammaMnsFunction__T]): ...
     def getDerivative(self, int: int, int2: int, int3: int) -> _FieldGammaMnsFunction__T:
@@ -1231,7 +1252,7 @@ class FieldGammaMnsFunction(typing.Generic[_FieldGammaMnsFunction__T]):
                 s (int): s
         
             Returns:
-                dΓ :sup:`m` :sub:`n,s` (Î³)/dÎ³
+                dΓ :sup:`m` :sub:`n,s` (γ)/dγ
         
         
         """
@@ -1246,7 +1267,7 @@ class FieldGammaMnsFunction(typing.Generic[_FieldGammaMnsFunction__T]):
                 s (int): s
         
             Returns:
-                Γ :sup:`m` :sub:`n, s` (Î³)
+                Γ :sup:`m` :sub:`n, s` (γ)
         
         
         """
@@ -1255,7 +1276,7 @@ class FieldGammaMnsFunction(typing.Generic[_FieldGammaMnsFunction__T]):
 _FieldInterpolationGrid__T = typing.TypeVar('_FieldInterpolationGrid__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldInterpolationGrid(typing.Generic[_FieldInterpolationGrid__T]):
     """
-    public interface FieldInterpolationGrid<T extends CalculusFieldElement<T>>
+    public interface FieldInterpolationGrid<T extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>>
     
         Interface for interpolation grids.
     
@@ -1284,40 +1305,40 @@ class FieldInterpolationGrid(typing.Generic[_FieldInterpolationGrid__T]):
 _FieldLnsCoefficients__T = typing.TypeVar('_FieldLnsCoefficients__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldLnsCoefficients(typing.Generic[_FieldLnsCoefficients__T]):
     """
-    public class FieldLnsCoefficients<T extends CalculusFieldElement<T>> extends Object
+    public class FieldLnsCoefficients<T extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
-        Compute the L :sub:`n` :sup:`s` (Î³).
+        Compute the L :sub:`n` :sup:`s` (γ).
     
         The fomula used is:
     
     
-        L :sub:`n` :sup:`s` (Î³) = ( R / a ) :sup:`n` V :sub:`ns` Q :sup:`ns` (Î³)
+        L :sub:`n` :sup:`s` (γ) = ( R / a ) :sup:`n` V :sub:`ns` Q :sup:`ns` (γ)
     """
-    def __init__(self, int: int, int2: int, tArray: typing.List[typing.List[_FieldLnsCoefficients__T]], treeMap: java.util.TreeMap[CoefficientsFactory.NSKey, float], t3: _FieldLnsCoefficients__T, field: org.hipparchus.Field[_FieldLnsCoefficients__T]): ...
+    def __init__(self, int: int, int2: int, tArray: typing.List[typing.List[_FieldLnsCoefficients__T]], sortedMap: java.util.SortedMap[CoefficientsFactory.NSKey, float], t2: _FieldLnsCoefficients__T, field: org.hipparchus.Field[_FieldLnsCoefficients__T]): ...
     def getLns(self, int: int, int2: int) -> _FieldLnsCoefficients__T:
         """
-            Get the value of L :sub:`n` :sup:`s` (Î³).
+            Get the value of L :sub:`n` :sup:`s` (γ).
         
             Parameters:
                 n (int): n index
                 s (int): s index
         
             Returns:
-                L :sub:`n` :sup:`s` (Î³)
+                L :sub:`n` :sup:`s` (γ)
         
         
         """
         ...
     def getdLnsdGamma(self, int: int, int2: int) -> _FieldLnsCoefficients__T:
         """
-            Get the value of dL :sub:`n` :sup:`s` / dÎ³ (Î³).
+            Get the value of dL :sub:`n` :sup:`s` / dγ (γ).
         
             Parameters:
                 n (int): n index
                 s (int): s index
         
             Returns:
-                L :sub:`n` :sup:`s` (Î³)
+                L :sub:`n` :sup:`s` (γ)
         
         
         """
@@ -1326,7 +1347,7 @@ class FieldLnsCoefficients(typing.Generic[_FieldLnsCoefficients__T]):
 _FieldShortPeriodicsInterpolatedCoefficient__T = typing.TypeVar('_FieldShortPeriodicsInterpolatedCoefficient__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldShortPeriodicsInterpolatedCoefficient(typing.Generic[_FieldShortPeriodicsInterpolatedCoefficient__T]):
     """
-    public class FieldShortPeriodicsInterpolatedCoefficient<T extends CalculusFieldElement<T>> extends Object
+    public class FieldShortPeriodicsInterpolatedCoefficient<T extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Interpolated short periodics coefficients.
     
@@ -1350,10 +1371,10 @@ class FieldShortPeriodicsInterpolatedCoefficient(typing.Generic[_FieldShortPerio
 
 class GHIJjsPolynomials:
     """
-    public class GHIJjsPolynomials extends Object
+    public class GHIJjsPolynomials extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Compute the G :sub:`js` , H :sub:`js` , I :sub:`js` and J :sub:`js` polynomials in the equinoctial elements h, k and the
-        direction cosines ÃŽÂ± and ÃŽÂ² and their partial derivatives with respect to k, h, ÃŽÂ± and ÃŽÂ².
+        direction cosines α and β and their partial derivatives with respect to k, h, α and β.
     
         The expressions used are equations 4.1-(10) from the Danielson paper.
     """
@@ -1416,28 +1437,28 @@ class GHIJjsPolynomials:
         ...
     def getdGjsdAlpha(self, int: int, int2: int) -> float:
         """
-            Get the dG :sub:`js` / dÎ± coefficient.
+            Get the dG :sub:`js` / dα coefficient.
         
             Parameters:
                 j (int): j subscript
                 s (int): s subscript
         
             Returns:
-                the dG :sub:`js` / dÎ±
+                the dG :sub:`js` / dα
         
         
         """
         ...
     def getdGjsdBeta(self, int: int, int2: int) -> float:
         """
-            Get the dG :sub:`js` / dÎ² coefficient.
+            Get the dG :sub:`js` / dβ coefficient.
         
             Parameters:
                 j (int): j subscript
                 s (int): s subscript
         
             Returns:
-                the dG :sub:`js` / dÎ²
+                the dG :sub:`js` / dβ
         
         
         """
@@ -1472,28 +1493,28 @@ class GHIJjsPolynomials:
         ...
     def getdHjsdAlpha(self, int: int, int2: int) -> float:
         """
-            Get the dH :sub:`js` / dÎ± coefficient.
+            Get the dH :sub:`js` / dα coefficient.
         
             Parameters:
                 j (int): j subscript
                 s (int): s subscript
         
             Returns:
-                the H :sub:`js` / dÎ±
+                the H :sub:`js` / dα
         
         
         """
         ...
     def getdHjsdBeta(self, int: int, int2: int) -> float:
         """
-            Get the dH :sub:`js` / dÎ² coefficient.
+            Get the dH :sub:`js` / dβ coefficient.
         
             Parameters:
                 j (int): j subscript
                 s (int): s subscript
         
             Returns:
-                the H :sub:`js` / dÎ²
+                the H :sub:`js` / dβ
         
         
         """
@@ -1528,28 +1549,28 @@ class GHIJjsPolynomials:
         ...
     def getdIjsdAlpha(self, int: int, int2: int) -> float:
         """
-            Get the dI :sub:`js` / dÎ± coefficient.
+            Get the dI :sub:`js` / dα coefficient.
         
             Parameters:
                 j (int): j subscript
                 s (int): s subscript
         
             Returns:
-                the I :sub:`js` / dÎ±
+                the I :sub:`js` / dα
         
         
         """
         ...
     def getdIjsdBeta(self, int: int, int2: int) -> float:
         """
-            Get the dI :sub:`js` / dÎ² coefficient.
+            Get the dI :sub:`js` / dβ coefficient.
         
             Parameters:
                 j (int): j subscript
                 s (int): s subscript
         
             Returns:
-                the I :sub:`js` / dÎ²
+                the I :sub:`js` / dβ
         
         
         """
@@ -1584,28 +1605,28 @@ class GHIJjsPolynomials:
         ...
     def getdJjsdAlpha(self, int: int, int2: int) -> float:
         """
-            Get the dJ :sub:`js` / dÎ± coefficient.
+            Get the dJ :sub:`js` / dα coefficient.
         
             Parameters:
                 j (int): j subscript
                 s (int): s subscript
         
             Returns:
-                the J :sub:`js` / dÎ±
+                the J :sub:`js` / dα
         
         
         """
         ...
     def getdJjsdBeta(self, int: int, int2: int) -> float:
         """
-            Get the dJ :sub:`js` / dÎ² coefficient.
+            Get the dJ :sub:`js` / dβ coefficient.
         
             Parameters:
                 j (int): j subscript
                 s (int): s subscript
         
             Returns:
-                the J :sub:`js` / dÎ²
+                the J :sub:`js` / dβ
         
         
         """
@@ -1641,10 +1662,10 @@ class GHIJjsPolynomials:
 
 class GHmsjPolynomials:
     """
-    public class GHmsjPolynomials extends Object
+    public class GHmsjPolynomials extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Compute the G :sub:`ms` :sup:`j` and the H :sub:`ms` :sup:`j` polynomials in the equinoctial elements h, k and the
-        direction cosines ÃŽÂ± and ÃŽÂ² and their partial derivatives with respect to k, h, ÃŽÂ± and ÃŽÂ².
+        direction cosines α and β and their partial derivatives with respect to k, h, α and β.
     
         The expressions used are equations 2.7.5-(1)(2) from the Danielson paper.
     """
@@ -1681,7 +1702,7 @@ class GHmsjPolynomials:
         ...
     def getdGmsdAlpha(self, int: int, int2: int, int3: int) -> float:
         """
-            Get the dG :sub:`ms` :sup:`j` / d :sub:`Î±` coefficient.
+            Get the dG :sub:`ms` :sup:`j` / d :sub:`α` coefficient.
         
             Parameters:
                 m (int): m subscript
@@ -1689,14 +1710,14 @@ class GHmsjPolynomials:
                 j (int): order
         
             Returns:
-                dG :sub:`ms` :sup:`j` / d :sub:`Î±`
+                dG :sub:`ms` :sup:`j` / d :sub:`α`
         
         
         """
         ...
     def getdGmsdBeta(self, int: int, int2: int, int3: int) -> float:
         """
-            Get the dG :sub:`ms` :sup:`j` / d :sub:`Î²` coefficient.
+            Get the dG :sub:`ms` :sup:`j` / d :sub:`β` coefficient.
         
             Parameters:
                 m (int): m subscript
@@ -1704,7 +1725,7 @@ class GHmsjPolynomials:
                 j (int): order
         
             Returns:
-                dG :sub:`ms` :sup:`j` / d :sub:`Î²`
+                dG :sub:`ms` :sup:`j` / d :sub:`β`
         
         
         """
@@ -1741,7 +1762,7 @@ class GHmsjPolynomials:
         ...
     def getdHmsdAlpha(self, int: int, int2: int, int3: int) -> float:
         """
-            Get the dH :sub:`ms` :sup:`j` / d :sub:`Î±` coefficient.
+            Get the dH :sub:`ms` :sup:`j` / d :sub:`α` coefficient.
         
             Parameters:
                 m (int): m subscript
@@ -1749,14 +1770,14 @@ class GHmsjPolynomials:
                 j (int): order
         
             Returns:
-                dH :sub:`ms` :sup:`j` / d :sub:`Î±`
+                dH :sub:`ms` :sup:`j` / d :sub:`α`
         
         
         """
         ...
     def getdHmsdBeta(self, int: int, int2: int, int3: int) -> float:
         """
-            Get the dH :sub:`ms` :sup:`j` / d :sub:`Î²` coefficient.
+            Get the dH :sub:`ms` :sup:`j` / d :sub:`β` coefficient.
         
             Parameters:
                 m (int): m subscript
@@ -1764,7 +1785,7 @@ class GHmsjPolynomials:
                 j (int): order
         
             Returns:
-                dH :sub:`ms` :sup:`j` / d :sub:`Î²`
+                dH :sub:`ms` :sup:`j` / d :sub:`β`
         
         
         """
@@ -1802,9 +1823,9 @@ class GHmsjPolynomials:
 
 class GammaMnsFunction:
     """
-    public class GammaMnsFunction extends Object
+    public class GammaMnsFunction extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
-        Compute the Γ :sup:`m` :sub:`n,s` (Î³) function from equation 2.7.1-(13).
+        Compute the Γ :sup:`m` :sub:`n,s` (γ) function from equation 2.7.1-(13).
     """
     def __init__(self, int: int, double: float, int2: int): ...
     def getDerivative(self, int: int, int2: int, int3: int) -> float:
@@ -1817,7 +1838,7 @@ class GammaMnsFunction:
                 s (int): s
         
             Returns:
-                dΓ :sup:`m` :sub:`n,s` (Î³)/dÎ³
+                dΓ :sup:`m` :sub:`n,s` (γ)/dγ
         
         
         """
@@ -1832,7 +1853,7 @@ class GammaMnsFunction:
                 s (int): s
         
             Returns:
-                Γ :sup:`m` :sub:`n, s` (Î³)
+                Γ :sup:`m` :sub:`n, s` (γ)
         
         
         """
@@ -1868,11 +1889,12 @@ class InterpolationGrid:
 
 class JacobiPolynomials:
     """
-    public class JacobiPolynomials extends Object
+    public class JacobiPolynomials extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Provider of the Jacobi polynomials P :sub:`l` :sup:`v,w` .
     
-        This class is used for :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTTesseral` computation.
+        This class is used for :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTTesseral` computation and
+        :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTThirdBody`.
     
         Since:
             6.1
@@ -1882,7 +1904,7 @@ class JacobiPolynomials:
     @staticmethod
     def getValue(int: int, int2: int, int3: int, fieldGradient: org.hipparchus.analysis.differentiation.FieldGradient[_getValue_0__T]) -> org.hipparchus.analysis.differentiation.FieldGradient[_getValue_0__T]:
         """
-            Returns the value and derivatives of the Jacobi polynomial P :sub:`l` :sup:`v,w` evaluated at Î³.
+            Returns the value and derivatives of the Jacobi polynomial P :sub:`l` :sup:`v,w` evaluated at γ.
         
             This method is guaranteed to be thread-safe
         
@@ -1890,10 +1912,10 @@ class JacobiPolynomials:
                 l (int): degree of the polynomial
                 v (int): v value
                 w (int): w value
-                gamma (FieldGradient<T> gamma): Î³ value
+                gamma (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.differentiation.FieldGradient?is`<T> gamma): γ value
         
             Returns:
-                value and derivatives of the Jacobi polynomial P :sub:`l` :sup:`v,w` (Î³)
+                value and derivatives of the Jacobi polynomial P :sub:`l` :sup:`v,w` (γ)
         
             Since:
                 10.2
@@ -1905,61 +1927,93 @@ class JacobiPolynomials:
     @staticmethod
     def getValue(int: int, int2: int, int3: int, gradient: org.hipparchus.analysis.differentiation.Gradient) -> org.hipparchus.analysis.differentiation.Gradient:
         """
-            Returns the value and derivatives of the Jacobi polynomial P :sub:`l` :sup:`v,w` evaluated at Î³.
+            Returns the value and derivatives of the Jacobi polynomial P :sub:`l` :sup:`v,w` evaluated at γ.
         
             This method is guaranteed to be thread-safe
+        
+            It's not used in the code anymore, see
+            :meth:`~org.orekit.propagation.semianalytical.dsst.utilities.JacobiPolynomials.getValueAndDerivative`, but was kept for
+            validation purpose.
         
             Parameters:
                 l (int): degree of the polynomial
                 v (int): v value
                 w (int): w value
-                gamma (Gradient): Î³ value
+                gamma (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.differentiation.Gradient?is`): γ value
         
             Returns:
-                value and derivatives of the Jacobi polynomial P :sub:`l` :sup:`v,w` (Î³)
+                value and derivatives of the Jacobi polynomial P :sub:`l` :sup:`v,w` (γ)
         
             Since:
                 10.2
         
         """
         ...
+    @staticmethod
+    def getValueAndDerivative(int: int, int2: int, int3: int, double: float) -> typing.List[float]:
+        """
+            Returns the value and derivatives of the Jacobi polynomial P :sub:`l` :sup:`v,w` evaluated at γ.
+        
+            This method is guaranteed to be thread-safe
+        
+            It was added to improve performances of DSST propagation with tesseral gravity field or third-body perturbations.
+        
+            See issue :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.gitlab.orekit.org.orekit.orekit.`.
+        
+            It appeared the "Gradient" version was degrading performances. This last was however kept for validation purposes.
+        
+            Parameters:
+                l (int): degree of the polynomial
+                v (int): v value
+                w (int): w value
+                x (double): x value
+        
+            Returns:
+                value and derivatives of the Jacobi polynomial P :sub:`l` :sup:`v,w` (γ)
+        
+            Since:
+                11.3.3
+        
+        
+        """
+        ...
 
 class LnsCoefficients:
     """
-    public class LnsCoefficients extends Object
+    public class LnsCoefficients extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
-        Compute the L :sub:`n` :sup:`s` (Î³).
+        Compute the L :sub:`n` :sup:`s` (γ).
     
         The fomula used is:
     
     
-        L :sub:`n` :sup:`s` (Î³) = ( R / a ) :sup:`n` V :sub:`ns` Q :sup:`ns` (Î³)
+        L :sub:`n` :sup:`s` (γ) = ( R / a ) :sup:`n` V :sub:`ns` Q :sup:`ns` (γ)
     """
-    def __init__(self, int: int, int2: int, doubleArray: typing.List[typing.List[float]], treeMap: java.util.TreeMap[CoefficientsFactory.NSKey, float], double2: float): ...
+    def __init__(self, int: int, int2: int, doubleArray: typing.List[typing.List[float]], sortedMap: java.util.SortedMap[CoefficientsFactory.NSKey, float], double2: float): ...
     def getLns(self, int: int, int2: int) -> float:
         """
-            Get the value of L :sub:`n` :sup:`s` (Î³).
+            Get the value of L :sub:`n` :sup:`s` (γ).
         
             Parameters:
                 n (int): n index
                 s (int): s index
         
             Returns:
-                L :sub:`n` :sup:`s` (Î³)
+                L :sub:`n` :sup:`s` (γ)
         
         
         """
         ...
     def getdLnsdGamma(self, int: int, int2: int) -> float:
         """
-            Get the value of dL :sub:`n` :sup:`s` / dÎ³ (Î³).
+            Get the value of dL :sub:`n` :sup:`s` / dγ (γ).
         
             Parameters:
                 n (int): n index
                 s (int): s index
         
             Returns:
-                L :sub:`n` :sup:`s` (Î³)
+                L :sub:`n` :sup:`s` (γ)
         
         
         """
@@ -1967,48 +2021,50 @@ class LnsCoefficients:
 
 class NewcombOperators:
     """
-    public class NewcombOperators extends Object
+    public class NewcombOperators extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Implementation of the Modified Newcomb Operators.
     
         From equations 2.7.3 - (12)(13) of the Danielson paper, those operators are defined as:
     
-        4(Ï� + Ïƒ)Y :sub:`Ï�,Ïƒ` :sup:`n,s` =
+        4(ρ + σ)Y :sub:`ρ,σ` :sup:`n,s` =
     
     
-        2(2s - n)Y :sub:`Ï�-1,Ïƒ` :sup:`n,s+1` + (s - n)Y :sub:`Ï�-2,Ïƒ` :sup:`n,s+2`
+        2(2s - n)Y :sub:`ρ-1,σ` :sup:`n,s+1` + (s - n)Y :sub:`ρ-2,σ` :sup:`n,s+2`
     
     
-        - 2(2s + n)Y :sub:`Ï�,Ïƒ-1` :sup:`n,s-1` - (s+n)Y :sub:`Ï�,Ïƒ-2` :sup:`n,s-2`
+        - 2(2s + n)Y :sub:`ρ,σ-1` :sup:`n,s-1` - (s+n)Y :sub:`ρ,σ-2` :sup:`n,s-2`
     
     
-        + 2(2Ï� + 2Ïƒ + 2 + 3n)Y :sub:`Ï�-1,Ïƒ-1` :sup:`n,s`
+        + 2(2ρ + 2σ + 2 + 3n)Y :sub:`ρ-1,σ-1` :sup:`n,s`
     
         Initialization is given by : Y :sub:`0,0` :sup:`n,s` = 1
     
-        Internally, the Modified Newcomb Operators are stored as an array of null :
+        Internally, the Modified Newcomb Operators are stored as an array of
+        :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.polynomials.PolynomialFunction?is`
+        :
     
-        Y :sub:`Ï�,Ïƒ` :sup:`n,s` = P :sub:`k0` + P :sub:`k1` n + ... + P :sub:`kj` n :sup:`j`
+        Y :sub:`ρ,σ` :sup:`n,s` = P :sub:`k0` + P :sub:`k1` n + ... + P :sub:`kj` n :sup:`j`
     
         where the P :sub:`kj` are given by
     
-        P :sub:`kj` = âˆ‘ :sub:`j=0;Ï�` a :sub:`j` s :sup:`j`
+        P :sub:`kj` = ∑ :sub:`j=0;ρ` a :sub:`j` s :sup:`j`
     """
     @staticmethod
     def getValue(int: int, int2: int, int3: int, int4: int) -> float:
         """
-            Get the Newcomb operator evaluated at n, s, Ï�, Ïƒ.
+            Get the Newcomb operator evaluated at n, s, ρ, σ.
         
             This method is guaranteed to be thread-safe
         
             Parameters:
-                rho (int): Ï� index
-                sigma (int): Ïƒ index
+                rho (int): ρ index
+                sigma (int): σ index
                 n (int): n index
                 s (int): s index
         
             Returns:
-                Y :sub:`Ï�,Ïƒ` :sup:`n,s`
+                Y :sub:`ρ,σ` :sup:`n,s`
         
         
         """
@@ -2016,7 +2072,7 @@ class NewcombOperators:
 
 class ShortPeriodicsInterpolatedCoefficient:
     """
-    public class ShortPeriodicsInterpolatedCoefficient extends Object
+    public class ShortPeriodicsInterpolatedCoefficient extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Interpolated short periodics coefficients.
     
@@ -2062,7 +2118,7 @@ class ShortPeriodicsInterpolatedCoefficient:
 
 class UpperBounds:
     """
-    public class UpperBounds extends Object
+    public class UpperBounds extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Utility class to compute upper bounds for truncation algorithms.
     """
@@ -2074,8 +2130,8 @@ class UpperBounds:
             Get the upper bound value D :sub:`n` :sup:`l` (Χ).
         
             Parameters:
-                xx (double): value of ΧÂ²
-                xpl (double): value of Χ * (ΧÂ² / 2) :sup:`l`
+                xx (double): value of Χ²
+                xpl (double): value of Χ * (Χ² / 2) :sup:`l`
                 n (int): index n (power of a/R)
                 l (int): index l (power of eccentricity)
         
@@ -2091,8 +2147,8 @@ class UpperBounds:
             Get the upper bound value D :sub:`n` :sup:`l` (Χ).
         
             Parameters:
-                xx (T): value of ΧÂ²
-                xpl (T): value of Χ * (ΧÂ² / 2) :sup:`l`
+                xx (T): value of Χ²
+                xpl (T): value of Χ * (Χ² / 2) :sup:`l`
                 n (int): index n (power of a/R)
                 l (int): index l (power of eccentricity)
         
@@ -2107,18 +2163,18 @@ class UpperBounds:
     @staticmethod
     def getRnml(double: float, int: int, int2: int, int3: int, int4: int, int5: int) -> float:
         """
-            Get the upper bound value R :sup:`Îµ` :sub:`n,m,l` (Î³).
+            Get the upper bound value R :sup:`ε` :sub:`n,m,l` (γ).
         
             Parameters:
-                gamma (double): value of Î³
+                gamma (double): value of γ
                 n (int): index n
                 l (int): index l
                 m (int): index m
-                eps (int): Îµ value (+1/-1)
+                eps (int): ε value (+1/-1)
                 irf (int): retrograde factor I (+1/-1)
         
             Returns:
-                the upper bound R :sup:`Îµ` :sub:`n,m,l` (Î³)
+                the upper bound R :sup:`ε` :sub:`n,m,l` (γ)
         
         """
         ...
@@ -2126,18 +2182,18 @@ class UpperBounds:
     @staticmethod
     def getRnml(t: _getRnml_1__T, int: int, int2: int, int3: int, int4: int, int5: int) -> _getRnml_1__T:
         """
-            Get the upper bound value R :sup:`Îµ` :sub:`n,m,l` (Î³).
+            Get the upper bound value R :sup:`ε` :sub:`n,m,l` (γ).
         
             Parameters:
-                gamma (T): value of Î³
+                gamma (T): value of γ
                 n (int): index n
                 l (int): index l
                 m (int): index m
-                eps (int): Îµ value (+1/-1)
+                eps (int): ε value (+1/-1)
                 irf (int): retrograde factor I (+1/-1)
         
             Returns:
-                the upper bound R :sup:`Îµ` :sub:`n,m,l` (Î³)
+                the upper bound R :sup:`ε` :sub:`n,m,l` (γ)
         
         
         """
@@ -2146,7 +2202,7 @@ class UpperBounds:
 _FieldFixedNumberInterpolationGrid__T = typing.TypeVar('_FieldFixedNumberInterpolationGrid__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldFixedNumberInterpolationGrid(FieldInterpolationGrid[_FieldFixedNumberInterpolationGrid__T], typing.Generic[_FieldFixedNumberInterpolationGrid__T]):
     """
-    public class FieldFixedNumberInterpolationGrid<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldInterpolationGrid`<T>
+    public class FieldFixedNumberInterpolationGrid<T extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldInterpolationGrid`<T>
     
         Interpolation grid where a fixed number of points are evenly spaced between the start and the end of the integration
         step.
@@ -2162,8 +2218,8 @@ class FieldFixedNumberInterpolationGrid(FieldInterpolationGrid[_FieldFixedNumber
             The step is defined by its start and its end time.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldInterpolationGrid.getGridPoints`Â in
-                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldInterpolationGrid`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldInterpolationGrid.getGridPoints` in
+                interface :class:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldInterpolationGrid`
         
             Parameters:
                 stepStart (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldFixedNumberInterpolationGrid`): start of the step
@@ -2179,7 +2235,7 @@ class FieldFixedNumberInterpolationGrid(FieldInterpolationGrid[_FieldFixedNumber
 _FieldMaxGapInterpolationGrid__T = typing.TypeVar('_FieldMaxGapInterpolationGrid__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldMaxGapInterpolationGrid(FieldInterpolationGrid[_FieldMaxGapInterpolationGrid__T], typing.Generic[_FieldMaxGapInterpolationGrid__T]):
     """
-    public class FieldMaxGapInterpolationGrid<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldInterpolationGrid`<T>
+    public class FieldMaxGapInterpolationGrid<T extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldInterpolationGrid`<T>
     
         Interpolation grid where points obey a maximum time gap.
     
@@ -2196,8 +2252,8 @@ class FieldMaxGapInterpolationGrid(FieldInterpolationGrid[_FieldMaxGapInterpolat
             The step is defined by its start and its end time.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldInterpolationGrid.getGridPoints`Â in
-                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldInterpolationGrid`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldInterpolationGrid.getGridPoints` in
+                interface :class:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldInterpolationGrid`
         
             Parameters:
                 stepStart (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldMaxGapInterpolationGrid`): start of the step
@@ -2212,7 +2268,7 @@ class FieldMaxGapInterpolationGrid(FieldInterpolationGrid[_FieldMaxGapInterpolat
 
 class FixedNumberInterpolationGrid(InterpolationGrid):
     """
-    public class FixedNumberInterpolationGrid extends Object implements :class:`~org.orekit.propagation.semianalytical.dsst.utilities.InterpolationGrid`
+    public class FixedNumberInterpolationGrid extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.semianalytical.dsst.utilities.InterpolationGrid`
     
         Interpolation grid where a fixed number of points are evenly spaced between the start and the end of the integration
         step.
@@ -2228,8 +2284,8 @@ class FixedNumberInterpolationGrid(InterpolationGrid):
             The step is defined by its start and its end time.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.utilities.InterpolationGrid.getGridPoints`Â in
-                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.utilities.InterpolationGrid`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.utilities.InterpolationGrid.getGridPoints` in
+                interface :class:`~org.orekit.propagation.semianalytical.dsst.utilities.InterpolationGrid`
         
             Parameters:
                 stepStart (double): start of the step
@@ -2244,7 +2300,7 @@ class FixedNumberInterpolationGrid(InterpolationGrid):
 
 class MaxGapInterpolationGrid(InterpolationGrid):
     """
-    public class MaxGapInterpolationGrid extends Object implements :class:`~org.orekit.propagation.semianalytical.dsst.utilities.InterpolationGrid`
+    public class MaxGapInterpolationGrid extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.semianalytical.dsst.utilities.InterpolationGrid`
     
         Interpolation grid where points obey a maximum time gap.
     
@@ -2261,8 +2317,8 @@ class MaxGapInterpolationGrid(InterpolationGrid):
             The step is defined by its start and its end time.
         
             Specified by:
-                :meth:`~org.orekit.propagation.semianalytical.dsst.utilities.InterpolationGrid.getGridPoints`Â in
-                interfaceÂ :class:`~org.orekit.propagation.semianalytical.dsst.utilities.InterpolationGrid`
+                :meth:`~org.orekit.propagation.semianalytical.dsst.utilities.InterpolationGrid.getGridPoints` in
+                interface :class:`~org.orekit.propagation.semianalytical.dsst.utilities.InterpolationGrid`
         
             Parameters:
                 stepStart (double): start of the step

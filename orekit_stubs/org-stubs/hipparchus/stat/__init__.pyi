@@ -16,7 +16,7 @@ import typing
 _Frequency__T = typing.TypeVar('_Frequency__T', bound=java.lang.Comparable)  # <T>
 class Frequency(java.io.Serializable, typing.Generic[_Frequency__T]):
     """
-    public class Frequency<T extends Comparable<T>> extends Object implements Serializable
+    public class Frequency<T extends :class:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`<T>> extends :class:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Maintains a frequency distribution of Comparable values.
     
@@ -50,7 +50,8 @@ class Frequency(java.io.Serializable, typing.Generic[_Frequency__T]):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -139,7 +140,8 @@ class Frequency(java.io.Serializable, typing.Generic[_Frequency__T]):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -164,7 +166,8 @@ class Frequency(java.io.Serializable, typing.Generic[_Frequency__T]):
             Return a string representation of this frequency distribution.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a string representation.
@@ -176,7 +179,7 @@ class Frequency(java.io.Serializable, typing.Generic[_Frequency__T]):
 
 class LocalizedStatFormats(java.lang.Enum['LocalizedStatFormats'], org.hipparchus.exception.Localizable):
     """
-    public enum LocalizedStatFormats extends Enum<:class:`~org.hipparchus.stat.LocalizedStatFormats`> implements Localizable
+    public enum LocalizedStatFormats extends :class:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.hipparchus.stat.LocalizedStatFormats`> implements :class:`~org.hipparchus.stat.https:.www.hipparchus.org.hipparchus`
     
         Enumeration for localized messages formats used in exceptions messages.
     
@@ -205,7 +208,8 @@ class LocalizedStatFormats(java.lang.Enum['LocalizedStatFormats'], org.hipparchu
         """
         
             Specified by:
-                 in interface 
+                :meth:`~org.hipparchus.stat.https:.www.hipparchus.org.hipparchus` in
+                interface :class:`~org.hipparchus.stat.https:.www.hipparchus.org.hipparchus`
         
         
         """
@@ -214,7 +218,8 @@ class LocalizedStatFormats(java.lang.Enum['LocalizedStatFormats'], org.hipparchu
         """
         
             Specified by:
-                 in interface 
+                :meth:`~org.hipparchus.stat.https:.www.hipparchus.org.hipparchus` in
+                interface :class:`~org.hipparchus.stat.https:.www.hipparchus.org.hipparchus`
         
         
         """
@@ -231,14 +236,14 @@ class LocalizedStatFormats(java.lang.Enum['LocalizedStatFormats'], org.hipparchu
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -264,7 +269,7 @@ class LocalizedStatFormats(java.lang.Enum['LocalizedStatFormats'], org.hipparchu
 
 class StatUtils:
     """
-    public final class StatUtils extends Object
+    public final class StatUtils extends :class:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         StatUtils provides static methods for computing statistics based on data stored in double[] arrays.
     """
@@ -322,7 +327,7 @@ class StatUtils:
                 array of array of the most frequently occurring element(s) sorted in ascending order.
         
             Raises:
-                : if the indices are invalid or the array is null
+                :class:`~org.hipparchus.stat.https:.www.hipparchus.org.hipparchus`: if the indices are invalid or the array is null
         
         
         """
@@ -402,7 +407,7 @@ class StatUtils:
 
 class LongFrequency(Frequency[int]):
     """
-    public class LongFrequency extends :class:`~org.hipparchus.stat.Frequency`<Long>
+    public class LongFrequency extends :class:`~org.hipparchus.stat.Frequency`<:class:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.Long?is`>
     
         Maintains a frequency distribution of Long values.
     

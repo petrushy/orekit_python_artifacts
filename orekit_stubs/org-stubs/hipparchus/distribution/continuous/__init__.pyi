@@ -8,7 +8,7 @@ import typing
 
 class AbstractRealDistribution(org.hipparchus.distribution.RealDistribution, java.io.Serializable):
     """
-    public abstract class AbstractRealDistribution extends Object implements :class:`~org.hipparchus.distribution.RealDistribution`, Serializable
+    public abstract class AbstractRealDistribution extends :class:`~org.hipparchus.distribution.continuous.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.distribution.RealDistribution`, :class:`~org.hipparchus.distribution.continuous.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Base class for probability distributions on the reals.
     
@@ -31,8 +31,8 @@ class AbstractRealDistribution(org.hipparchus.distribution.RealDistribution, jav
             The default implementation simply computes the logarithm of :code:`density(x)`.
         
             Specified by:
-                :meth:`~org.hipparchus.distribution.RealDistribution.logDensity`Â in
-                interfaceÂ :class:`~org.hipparchus.distribution.RealDistribution`
+                :meth:`~org.hipparchus.distribution.RealDistribution.logDensity` in
+                interface :class:`~org.hipparchus.distribution.RealDistribution`
         
             Parameters:
                 x (double): the point at which the PDF is evaluated
@@ -186,12 +186,12 @@ class BetaDistribution(AbstractRealDistribution):
             The default implementation simply computes the logarithm of :code:`density(x)`.
         
             Specified by:
-                :meth:`~org.hipparchus.distribution.RealDistribution.logDensity`Â in
-                interfaceÂ :class:`~org.hipparchus.distribution.RealDistribution`
+                :meth:`~org.hipparchus.distribution.RealDistribution.logDensity` in
+                interface :class:`~org.hipparchus.distribution.RealDistribution`
         
             Overrides:
-                :meth:`~org.hipparchus.distribution.continuous.AbstractRealDistribution.logDensity`Â in
-                classÂ :class:`~org.hipparchus.distribution.continuous.AbstractRealDistribution`
+                :meth:`~org.hipparchus.distribution.continuous.AbstractRealDistribution.logDensity` in
+                class :class:`~org.hipparchus.distribution.continuous.AbstractRealDistribution`
         
             Parameters:
                 x (double): the point at which the PDF is evaluated
@@ -461,12 +461,12 @@ class ChiSquaredDistribution(AbstractRealDistribution):
             The default implementation simply computes the logarithm of :code:`density(x)`.
         
             Specified by:
-                :meth:`~org.hipparchus.distribution.RealDistribution.logDensity`Â in
-                interfaceÂ :class:`~org.hipparchus.distribution.RealDistribution`
+                :meth:`~org.hipparchus.distribution.RealDistribution.logDensity` in
+                interface :class:`~org.hipparchus.distribution.RealDistribution`
         
             Overrides:
-                :meth:`~org.hipparchus.distribution.continuous.AbstractRealDistribution.logDensity`Â in
-                classÂ :class:`~org.hipparchus.distribution.continuous.AbstractRealDistribution`
+                :meth:`~org.hipparchus.distribution.continuous.AbstractRealDistribution.logDensity` in
+                class :class:`~org.hipparchus.distribution.continuous.AbstractRealDistribution`
         
             Parameters:
                 x (double): the point at which the PDF is evaluated
@@ -841,12 +841,12 @@ class ExponentialDistribution(AbstractRealDistribution):
             The default implementation simply computes the logarithm of :code:`density(x)`.
         
             Specified by:
-                :meth:`~org.hipparchus.distribution.RealDistribution.logDensity`Â in
-                interfaceÂ :class:`~org.hipparchus.distribution.RealDistribution`
+                :meth:`~org.hipparchus.distribution.RealDistribution.logDensity` in
+                interface :class:`~org.hipparchus.distribution.RealDistribution`
         
             Overrides:
-                :meth:`~org.hipparchus.distribution.continuous.AbstractRealDistribution.logDensity`Â in
-                classÂ :class:`~org.hipparchus.distribution.continuous.AbstractRealDistribution`
+                :meth:`~org.hipparchus.distribution.continuous.AbstractRealDistribution.logDensity` in
+                class :class:`~org.hipparchus.distribution.continuous.AbstractRealDistribution`
         
             Parameters:
                 x (double): the point at which the PDF is evaluated
@@ -1010,12 +1010,12 @@ class FDistribution(AbstractRealDistribution):
             The default implementation simply computes the logarithm of :code:`density(x)`.
         
             Specified by:
-                :meth:`~org.hipparchus.distribution.RealDistribution.logDensity`Â in
-                interfaceÂ :class:`~org.hipparchus.distribution.RealDistribution`
+                :meth:`~org.hipparchus.distribution.RealDistribution.logDensity` in
+                interface :class:`~org.hipparchus.distribution.RealDistribution`
         
             Overrides:
-                :meth:`~org.hipparchus.distribution.continuous.AbstractRealDistribution.logDensity`Â in
-                classÂ :class:`~org.hipparchus.distribution.continuous.AbstractRealDistribution`
+                :meth:`~org.hipparchus.distribution.continuous.AbstractRealDistribution.logDensity` in
+                class :class:`~org.hipparchus.distribution.continuous.AbstractRealDistribution`
         
             Parameters:
                 x (double): the point at which the PDF is evaluated
@@ -1172,12 +1172,12 @@ class GammaDistribution(AbstractRealDistribution):
             The default implementation simply computes the logarithm of :code:`density(x)`.
         
             Specified by:
-                :meth:`~org.hipparchus.distribution.RealDistribution.logDensity`Â in
-                interfaceÂ :class:`~org.hipparchus.distribution.RealDistribution`
+                :meth:`~org.hipparchus.distribution.RealDistribution.logDensity` in
+                interface :class:`~org.hipparchus.distribution.RealDistribution`
         
             Overrides:
-                :meth:`~org.hipparchus.distribution.continuous.AbstractRealDistribution.logDensity`Â in
-                classÂ :class:`~org.hipparchus.distribution.continuous.AbstractRealDistribution`
+                :meth:`~org.hipparchus.distribution.continuous.AbstractRealDistribution.logDensity` in
+                class :class:`~org.hipparchus.distribution.continuous.AbstractRealDistribution`
         
             Parameters:
                 x (double): the point at which the PDF is evaluated
@@ -1481,7 +1481,7 @@ class LevyDistribution(AbstractRealDistribution):
              f(x; μ, c) = √(c / 2π) * e :sup:`-c / 2 (x - μ)`  / (x - μ) :sup:`3/2` 
              
         
-            For this distribution, :code:`X`, this method returns :code:`P(X < x)`. If :code:`x` is less than location parameter Î¼,
+            For this distribution, :code:`X`, this method returns :code:`P(X < x)`. If :code:`x` is less than location parameter μ,
             :code:`Double.NaN` is returned, as in these cases the distribution is not defined.
         
             Parameters:
@@ -1586,12 +1586,12 @@ class LevyDistribution(AbstractRealDistribution):
             :meth:`~org.hipparchus.distribution.continuous.LevyDistribution.density` for computation details.
         
             Specified by:
-                :meth:`~org.hipparchus.distribution.RealDistribution.logDensity`Â in
-                interfaceÂ :class:`~org.hipparchus.distribution.RealDistribution`
+                :meth:`~org.hipparchus.distribution.RealDistribution.logDensity` in
+                interface :class:`~org.hipparchus.distribution.RealDistribution`
         
             Overrides:
-                :meth:`~org.hipparchus.distribution.continuous.AbstractRealDistribution.logDensity`Â in
-                classÂ :class:`~org.hipparchus.distribution.continuous.AbstractRealDistribution`
+                :meth:`~org.hipparchus.distribution.continuous.AbstractRealDistribution.logDensity` in
+                class :class:`~org.hipparchus.distribution.continuous.AbstractRealDistribution`
         
             Parameters:
                 x (double): the point at which the PDF is evaluated
@@ -1773,12 +1773,12 @@ class LogNormalDistribution(AbstractRealDistribution):
             :meth:`~org.hipparchus.distribution.continuous.LogNormalDistribution.density` for computation details.
         
             Specified by:
-                :meth:`~org.hipparchus.distribution.RealDistribution.logDensity`Â in
-                interfaceÂ :class:`~org.hipparchus.distribution.RealDistribution`
+                :meth:`~org.hipparchus.distribution.RealDistribution.logDensity` in
+                interface :class:`~org.hipparchus.distribution.RealDistribution`
         
             Overrides:
-                :meth:`~org.hipparchus.distribution.continuous.AbstractRealDistribution.logDensity`Â in
-                classÂ :class:`~org.hipparchus.distribution.continuous.AbstractRealDistribution`
+                :meth:`~org.hipparchus.distribution.continuous.AbstractRealDistribution.logDensity` in
+                class :class:`~org.hipparchus.distribution.continuous.AbstractRealDistribution`
         
             Parameters:
                 x (double): the point at which the PDF is evaluated
@@ -2181,12 +2181,12 @@ class NormalDistribution(AbstractRealDistribution):
             The default implementation simply computes the logarithm of :code:`density(x)`.
         
             Specified by:
-                :meth:`~org.hipparchus.distribution.RealDistribution.logDensity`Â in
-                interfaceÂ :class:`~org.hipparchus.distribution.RealDistribution`
+                :meth:`~org.hipparchus.distribution.RealDistribution.logDensity` in
+                interface :class:`~org.hipparchus.distribution.RealDistribution`
         
             Overrides:
-                :meth:`~org.hipparchus.distribution.continuous.AbstractRealDistribution.logDensity`Â in
-                classÂ :class:`~org.hipparchus.distribution.continuous.AbstractRealDistribution`
+                :meth:`~org.hipparchus.distribution.continuous.AbstractRealDistribution.logDensity` in
+                class :class:`~org.hipparchus.distribution.continuous.AbstractRealDistribution`
         
             Parameters:
                 x (double): the point at which the PDF is evaluated
@@ -2209,12 +2209,12 @@ class ParetoDistribution(AbstractRealDistribution):
     
         .. code-block: java
         
-          Î± * k^Î± / x^(Î± + 1)
+          α * k^α / x^(α + 1)
          
     
     
           - :code:`k` is the *scale* parameter: this is the minimum possible value of :code:`X`,
-          - :code:`Î±` is the *shape* parameter: this is the Pareto index
+          - :code:`α` is the *shape* parameter: this is the Pareto index
     
     
         Also see:
@@ -2233,10 +2233,10 @@ class ParetoDistribution(AbstractRealDistribution):
             :code:`P(X <= x)`. In other words, this method represents the (cumulative) distribution function (CDF) for this
             distribution.
         
-            For scale :code:`k`, and shape :code:`Î±` of this distribution, the CDF is given by
+            For scale :code:`k`, and shape :code:`α` of this distribution, the CDF is given by
         
               - :code:`0` if :code:`x < k`,
-              - :code:`1 - (k / x)^Î±` otherwise.
+              - :code:`1 - (k / x)^α` otherwise.
         
         
             Parameters:
@@ -2256,10 +2256,10 @@ class ParetoDistribution(AbstractRealDistribution):
             :code:`Double.POSITIVE_INFINITY`, :code:`Double.NaN`, or the limit inferior or limit superior of the difference
             quotient.
         
-            For scale :code:`k`, and shape :code:`Î±` of this distribution, the PDF is given by
+            For scale :code:`k`, and shape :code:`α` of this distribution, the PDF is given by
         
               - :code:`0` if :code:`x < k`,
-              - :code:`Î± * k^Î± / x^(Î± + 1)` otherwise.
+              - :code:`α * k^α / x^(α + 1)` otherwise.
         
         
             Parameters:
@@ -2275,10 +2275,10 @@ class ParetoDistribution(AbstractRealDistribution):
         """
             Use this method to get the numerical value of the mean of this distribution.
         
-            For scale :code:`k` and shape :code:`Î±`, the mean is given by
+            For scale :code:`k` and shape :code:`α`, the mean is given by
         
-              - :code:`âˆž` if :code:`Î± <= 1`,
-              - :code:`Î± * k / (Î± - 1)` otherwise.
+              - :code:`∞` if :code:`α <= 1`,
+              - :code:`α * k / (α - 1)` otherwise.
         
         
             Returns:
@@ -2291,10 +2291,10 @@ class ParetoDistribution(AbstractRealDistribution):
         """
             Use this method to get the numerical value of the variance of this distribution.
         
-            For scale :code:`k` and shape :code:`Î±`, the variance is given by
+            For scale :code:`k` and shape :code:`α`, the variance is given by
         
-              - :code:`âˆž` if :code:`1 < Î± <= 2`,
-              - :code:`k^2 * Î± / ((Î± - 1)^2 * (Î± - 2))` otherwise.
+              - :code:`∞` if :code:`1 < α <= 2`,
+              - :code:`k^2 * α / ((α - 1)^2 * (α - 2))` otherwise.
         
         
             Returns:
@@ -2381,12 +2381,12 @@ class ParetoDistribution(AbstractRealDistribution):
             :meth:`~org.hipparchus.distribution.continuous.ParetoDistribution.density` for computation details.
         
             Specified by:
-                :meth:`~org.hipparchus.distribution.RealDistribution.logDensity`Â in
-                interfaceÂ :class:`~org.hipparchus.distribution.RealDistribution`
+                :meth:`~org.hipparchus.distribution.RealDistribution.logDensity` in
+                interface :class:`~org.hipparchus.distribution.RealDistribution`
         
             Overrides:
-                :meth:`~org.hipparchus.distribution.continuous.AbstractRealDistribution.logDensity`Â in
-                classÂ :class:`~org.hipparchus.distribution.continuous.AbstractRealDistribution`
+                :meth:`~org.hipparchus.distribution.continuous.AbstractRealDistribution.logDensity` in
+                class :class:`~org.hipparchus.distribution.continuous.AbstractRealDistribution`
         
             Parameters:
                 x (double): the point at which the PDF is evaluated
@@ -2537,12 +2537,12 @@ class TDistribution(AbstractRealDistribution):
             The default implementation simply computes the logarithm of :code:`density(x)`.
         
             Specified by:
-                :meth:`~org.hipparchus.distribution.RealDistribution.logDensity`Â in
-                interfaceÂ :class:`~org.hipparchus.distribution.RealDistribution`
+                :meth:`~org.hipparchus.distribution.RealDistribution.logDensity` in
+                interface :class:`~org.hipparchus.distribution.RealDistribution`
         
             Overrides:
-                :meth:`~org.hipparchus.distribution.continuous.AbstractRealDistribution.logDensity`Â in
-                classÂ :class:`~org.hipparchus.distribution.continuous.AbstractRealDistribution`
+                :meth:`~org.hipparchus.distribution.continuous.AbstractRealDistribution.logDensity` in
+                class :class:`~org.hipparchus.distribution.continuous.AbstractRealDistribution`
         
             Parameters:
                 x (double): the point at which the PDF is evaluated
@@ -2924,12 +2924,12 @@ class WeibullDistribution(AbstractRealDistribution):
             Returns :code:`0` when :code:`p == 0` and :code:`Double.POSITIVE_INFINITY` when :code:`p == 1`.
         
             Specified by:
-                :meth:`~org.hipparchus.distribution.RealDistribution.inverseCumulativeProbability`Â in
-                interfaceÂ :class:`~org.hipparchus.distribution.RealDistribution`
+                :meth:`~org.hipparchus.distribution.RealDistribution.inverseCumulativeProbability` in
+                interface :class:`~org.hipparchus.distribution.RealDistribution`
         
             Overrides:
-                :meth:`~org.hipparchus.distribution.continuous.AbstractRealDistribution.inverseCumulativeProbability`Â in
-                classÂ :class:`~org.hipparchus.distribution.continuous.AbstractRealDistribution`
+                :meth:`~org.hipparchus.distribution.continuous.AbstractRealDistribution.inverseCumulativeProbability` in
+                class :class:`~org.hipparchus.distribution.continuous.AbstractRealDistribution`
         
             Parameters:
                 p (double): the cumulative probability
@@ -2964,12 +2964,12 @@ class WeibullDistribution(AbstractRealDistribution):
             The default implementation simply computes the logarithm of :code:`density(x)`.
         
             Specified by:
-                :meth:`~org.hipparchus.distribution.RealDistribution.logDensity`Â in
-                interfaceÂ :class:`~org.hipparchus.distribution.RealDistribution`
+                :meth:`~org.hipparchus.distribution.RealDistribution.logDensity` in
+                interface :class:`~org.hipparchus.distribution.RealDistribution`
         
             Overrides:
-                :meth:`~org.hipparchus.distribution.continuous.AbstractRealDistribution.logDensity`Â in
-                classÂ :class:`~org.hipparchus.distribution.continuous.AbstractRealDistribution`
+                :meth:`~org.hipparchus.distribution.continuous.AbstractRealDistribution.logDensity` in
+                class :class:`~org.hipparchus.distribution.continuous.AbstractRealDistribution`
         
             Parameters:
                 x (double): the point at which the PDF is evaluated

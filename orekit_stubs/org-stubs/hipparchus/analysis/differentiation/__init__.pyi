@@ -9,7 +9,7 @@ import typing
 
 class DSCompiler:
     """
-    public class DSCompiler extends Object
+    public class DSCompiler extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Class holding "compiled" computation rules for derivative structures.
     
@@ -37,7 +37,7 @@ class DSCompiler:
         Note that the ordering changes with number of parameters and derivation order. For example given 2 parameters x and y,
         df/dy is stored at index 2 when derivation order is set to 1 (in this case the array has three elements: f, df/dx and
         df/dy). If derivation order is set to 2, then df/dy will be stored at index 3 (in this case the array has six elements:
-        f, df/dx, dÃ‚Â²f/dxdx, df/dy, dÃ‚Â²f/dxdy and dÃ‚Â²f/dydy).
+        f, df/dx, d²f/dxdx, df/dy, d²f/dxdy and d²f/dydy).
     
         Given this structure, users can perform some simple operations like adding, subtracting or multiplying constants and
         negating the elements by themselves, knowing if they want to mutate their array or create a new array. These simple
@@ -1328,7 +1328,7 @@ class DSCompiler:
 
 class DSFactory(java.io.Serializable):
     """
-    public class DSFactory extends Object implements Serializable
+    public class DSFactory extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Factory for :class:`~org.hipparchus.analysis.differentiation.DerivativeStructure`.
     
@@ -1435,7 +1435,7 @@ _FDSFactory__DerivativeField__T = typing.TypeVar('_FDSFactory__DerivativeField__
 _FDSFactory__T = typing.TypeVar('_FDSFactory__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FDSFactory(typing.Generic[_FDSFactory__T]):
     """
-    public class FDSFactory<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object
+    public class FDSFactory<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Factory for :class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`.
     
@@ -1525,7 +1525,7 @@ class FieldDerivative(org.hipparchus.CalculusFieldElement[_FieldDerivative__T], 
 _FieldGradientField__T = typing.TypeVar('_FieldGradientField__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldGradientField(org.hipparchus.Field['FieldGradient'[_FieldGradientField__T]], typing.Generic[_FieldGradientField__T]):
     """
-    public class FieldGradientField<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.analysis.differentiation.FieldGradient`<T>>
+    public class FieldGradientField<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.analysis.differentiation.FieldGradient`<T>>
     
         Field for :class:`~org.hipparchus.analysis.differentiation.Gradient` instances.
     
@@ -1536,7 +1536,8 @@ class FieldGradientField(org.hipparchus.Field['FieldGradient'[_FieldGradientFiel
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -1564,7 +1565,8 @@ class FieldGradientField(org.hipparchus.Field['FieldGradient'[_FieldGradientFiel
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -1573,7 +1575,7 @@ class FieldGradientField(org.hipparchus.Field['FieldGradient'[_FieldGradientFiel
 _FieldTaylorMap__T = typing.TypeVar('_FieldTaylorMap__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldTaylorMap(typing.Generic[_FieldTaylorMap__T]):
     """
-    public class FieldTaylorMap<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object
+    public class FieldTaylorMap<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Container for a Taylor map.
     
@@ -1648,7 +1650,7 @@ class FieldTaylorMap(typing.Generic[_FieldTaylorMap__T]):
 _FieldUnivariateDerivative1Field__T = typing.TypeVar('_FieldUnivariateDerivative1Field__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldUnivariateDerivative1Field(org.hipparchus.Field['FieldUnivariateDerivative1'[_FieldUnivariateDerivative1Field__T]], typing.Generic[_FieldUnivariateDerivative1Field__T]):
     """
-    public class FieldUnivariateDerivative1Field<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative1`<T>>
+    public class FieldUnivariateDerivative1Field<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative1`<T>>
     
         Field for :class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative1` instances.
     
@@ -1659,7 +1661,8 @@ class FieldUnivariateDerivative1Field(org.hipparchus.Field['FieldUnivariateDeriv
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -1686,7 +1689,8 @@ class FieldUnivariateDerivative1Field(org.hipparchus.Field['FieldUnivariateDeriv
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -1695,7 +1699,7 @@ class FieldUnivariateDerivative1Field(org.hipparchus.Field['FieldUnivariateDeriv
 _FieldUnivariateDerivative2Field__T = typing.TypeVar('_FieldUnivariateDerivative2Field__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldUnivariateDerivative2Field(org.hipparchus.Field['FieldUnivariateDerivative2'[_FieldUnivariateDerivative2Field__T]], typing.Generic[_FieldUnivariateDerivative2Field__T]):
     """
-    public class FieldUnivariateDerivative2Field<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2`<T>>
+    public class FieldUnivariateDerivative2Field<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2`<T>>
     
         Field for :class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2` instances.
     
@@ -1706,7 +1710,8 @@ class FieldUnivariateDerivative2Field(org.hipparchus.Field['FieldUnivariateDeriv
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -1733,7 +1738,8 @@ class FieldUnivariateDerivative2Field(org.hipparchus.Field['FieldUnivariateDeriv
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -1741,7 +1747,7 @@ class FieldUnivariateDerivative2Field(org.hipparchus.Field['FieldUnivariateDeriv
 
 class GradientField(org.hipparchus.Field['Gradient']):
     """
-    public class GradientField extends Object implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.analysis.differentiation.Gradient`>
+    public class GradientField extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.analysis.differentiation.Gradient`>
     
         Field for :class:`~org.hipparchus.analysis.differentiation.Gradient` instances.
     
@@ -1752,7 +1758,8 @@ class GradientField(org.hipparchus.Field['Gradient']):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -1776,7 +1783,7 @@ class GradientField(org.hipparchus.Field['Gradient']):
             Get the multiplicative identity of the field.
         
             The multiplicative identity is the element e :sub:`1` of the field such that for all elements a of the field, the
-            equalities a Ã— e :sub:`1` = e :sub:`1` Ã— a = a hold.
+            equalities a × e :sub:`1` = e :sub:`1` × a = a hold.
         
             Specified by:
                 :meth:`~org.hipparchus.Field.getOne` in interface :class:`~org.hipparchus.Field`
@@ -1808,7 +1815,8 @@ class GradientField(org.hipparchus.Field['Gradient']):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -1816,7 +1824,7 @@ class GradientField(org.hipparchus.Field['Gradient']):
 
 class GradientFunction(org.hipparchus.analysis.MultivariateVectorFunction):
     """
-    public class GradientFunction extends Object implements :class:`~org.hipparchus.analysis.MultivariateVectorFunction`
+    public class GradientFunction extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.MultivariateVectorFunction`
     
         Class representing the gradient of a multivariate function.
     
@@ -1828,7 +1836,8 @@ class GradientFunction(org.hipparchus.analysis.MultivariateVectorFunction):
             Compute the value for the function at the given point.
         
             Specified by:
-                 in interface :class:`~org.hipparchus.analysis.MultivariateVectorFunction`
+                :meth:`~org.hipparchus.analysis.MultivariateVectorFunction.value` in
+                interface :class:`~org.hipparchus.analysis.MultivariateVectorFunction`
         
             Parameters:
                 point (double[]): point at which the function must be evaluated
@@ -1842,7 +1851,7 @@ class GradientFunction(org.hipparchus.analysis.MultivariateVectorFunction):
 
 class JacobianFunction(org.hipparchus.analysis.MultivariateMatrixFunction):
     """
-    public class JacobianFunction extends Object implements :class:`~org.hipparchus.analysis.MultivariateMatrixFunction`
+    public class JacobianFunction extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.MultivariateMatrixFunction`
     
         Class representing the Jacobian of a multivariate vector function.
     
@@ -1856,7 +1865,8 @@ class JacobianFunction(org.hipparchus.analysis.MultivariateMatrixFunction):
             Compute the value for the function at the given point.
         
             Specified by:
-                 in interface :class:`~org.hipparchus.analysis.MultivariateMatrixFunction`
+                :meth:`~org.hipparchus.analysis.MultivariateMatrixFunction.value` in
+                interface :class:`~org.hipparchus.analysis.MultivariateMatrixFunction`
         
             Parameters:
                 point (double[]): point at which the function must be evaluated
@@ -1894,7 +1904,7 @@ class MultivariateDifferentiableVectorFunction(org.hipparchus.analysis.Multivari
 
 class SparseGradient(org.hipparchus.CalculusFieldElement['SparseGradient'], java.io.Serializable):
     """
-    public class SparseGradient extends Object implements :class:`~org.hipparchus.CalculusFieldElement`<:class:`~org.hipparchus.analysis.differentiation.SparseGradient`>, Serializable
+    public class SparseGradient extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.CalculusFieldElement`<:class:`~org.hipparchus.analysis.differentiation.SparseGradient`>, :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         First derivative computation with large number of variables.
     
@@ -2245,10 +2255,11 @@ class SparseGradient(org.hipparchus.CalculusFieldElement['SparseGradient'], java
             Sparse gradients are considered equal if they have the same value and the same derivatives.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                other (Object): Object to test for equality to this
+                other (:class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality to this
         
             Returns:
                 true if two sparse gradients are equal
@@ -2311,7 +2322,7 @@ class SparseGradient(org.hipparchus.CalculusFieldElement['SparseGradient'], java
     def getField(self) -> org.hipparchus.Field['SparseGradient']: ...
     def getPi(self) -> 'SparseGradient':
         """
-            Get the Archimedes constant Ï€.
+            Get the Archimedes constant π.
         
             Archimedes constant is the ratio of a circle's circumference to its diameter.
         
@@ -2319,7 +2330,7 @@ class SparseGradient(org.hipparchus.CalculusFieldElement['SparseGradient'], java
                 :meth:`~org.hipparchus.CalculusFieldElement.getPi` in interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Returns:
-                Archimedes constant Ï€
+                Archimedes constant π
         
         
         """
@@ -2352,7 +2363,8 @@ class SparseGradient(org.hipparchus.CalculusFieldElement['SparseGradient'], java
             Get a hashCode for the derivative structure.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a hash code value for this object
@@ -2363,7 +2375,7 @@ class SparseGradient(org.hipparchus.CalculusFieldElement['SparseGradient'], java
     @typing.overload
     def hypot(self, sparseGradient: 'SparseGradient') -> 'SparseGradient':
         """
-            Returns the hypotenuse of a triangle with sides :code:`this` and :code:`y` - sqrt(*this* :sup:`2` Â +*y* :sup:`2` )
+            Returns the hypotenuse of a triangle with sides :code:`this` and :code:`y` - sqrt(*this* :sup:`2`  +*y* :sup:`2` )
             avoiding intermediate overflow or underflow.
         
               - If either argument is infinite, then the result is positive infinity.
@@ -2379,7 +2391,7 @@ class SparseGradient(org.hipparchus.CalculusFieldElement['SparseGradient'], java
             Returns:
                 sqrt(*this* :sup:`2`  +*y* :sup:`2` )
         
-            Returns the hypotenuse of a triangle with sides :code:`x` and :code:`y` - sqrt(*x* :sup:`2` Â +*y* :sup:`2` ) avoiding
+            Returns the hypotenuse of a triangle with sides :code:`x` and :code:`y` - sqrt(*x* :sup:`2`  +*y* :sup:`2` ) avoiding
             intermediate overflow or underflow.
         
               - If either argument is infinite, then the result is positive infinity.
@@ -2405,8 +2417,8 @@ class SparseGradient(org.hipparchus.CalculusFieldElement['SparseGradient'], java
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (:class:`~org.hipparchus.analysis.differentiation.SparseGradient`): first factor of the first term
@@ -2424,8 +2436,8 @@ class SparseGradient(org.hipparchus.CalculusFieldElement['SparseGradient'], java
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (double): first factor of the first term
@@ -2443,8 +2455,8 @@ class SparseGradient(org.hipparchus.CalculusFieldElement['SparseGradient'], java
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (:class:`~org.hipparchus.analysis.differentiation.SparseGradient`): first factor of the first term
@@ -2464,8 +2476,8 @@ class SparseGradient(org.hipparchus.CalculusFieldElement['SparseGradient'], java
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (double): first factor of the first term
@@ -2485,8 +2497,8 @@ class SparseGradient(org.hipparchus.CalculusFieldElement['SparseGradient'], java
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (:class:`~org.hipparchus.analysis.differentiation.SparseGradient`): first factor of the first term
@@ -2508,8 +2520,8 @@ class SparseGradient(org.hipparchus.CalculusFieldElement['SparseGradient'], java
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (double): first factor of the first term
@@ -2541,7 +2553,8 @@ class SparseGradient(org.hipparchus.CalculusFieldElement['SparseGradient'], java
             Compute a linear combination.
         
             Specified by:
-                 in interface :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a (double[]): Factors.
@@ -3014,7 +3027,7 @@ class SparseGradient(org.hipparchus.CalculusFieldElement['SparseGradient'], java
 
 class TaylorMap:
     """
-    public class TaylorMap extends Object
+    public class TaylorMap extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Container for a Taylor map.
     
@@ -3104,7 +3117,7 @@ class TaylorMap:
                 inverted map
         
             Also see:
-                chapter 2 of Advances in Imaging and Electron Physics, vol 108 by Martin Berz
+                :class:`~org.hipparchus.analysis.differentiation.https:.doi.org.10.1016.S1076`
         
         
         """
@@ -3125,7 +3138,7 @@ class TaylorMap:
 
 class UnivariateDerivative1Field(org.hipparchus.Field['UnivariateDerivative1'], java.io.Serializable):
     """
-    public class UnivariateDerivative1Field extends Object implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.analysis.differentiation.UnivariateDerivative1`>, Serializable
+    public class UnivariateDerivative1Field extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.analysis.differentiation.UnivariateDerivative1`>, :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Field for :class:`~org.hipparchus.analysis.differentiation.UnivariateDerivative1` instances.
     
@@ -3141,7 +3154,8 @@ class UnivariateDerivative1Field(org.hipparchus.Field['UnivariateDerivative1'], 
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -3162,7 +3176,7 @@ class UnivariateDerivative1Field(org.hipparchus.Field['UnivariateDerivative1'], 
             Get the multiplicative identity of the field.
         
             The multiplicative identity is the element e :sub:`1` of the field such that for all elements a of the field, the
-            equalities a Ã— e :sub:`1` = e :sub:`1` Ã— a = a hold.
+            equalities a × e :sub:`1` = e :sub:`1` × a = a hold.
         
             Specified by:
                 :meth:`~org.hipparchus.Field.getOne` in interface :class:`~org.hipparchus.Field`
@@ -3194,7 +3208,8 @@ class UnivariateDerivative1Field(org.hipparchus.Field['UnivariateDerivative1'], 
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -3202,7 +3217,7 @@ class UnivariateDerivative1Field(org.hipparchus.Field['UnivariateDerivative1'], 
 
 class UnivariateDerivative2Field(org.hipparchus.Field['UnivariateDerivative2'], java.io.Serializable):
     """
-    public class UnivariateDerivative2Field extends Object implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.analysis.differentiation.UnivariateDerivative2`>, Serializable
+    public class UnivariateDerivative2Field extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.analysis.differentiation.UnivariateDerivative2`>, :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Field for :class:`~org.hipparchus.analysis.differentiation.UnivariateDerivative2` instances.
     
@@ -3218,7 +3233,8 @@ class UnivariateDerivative2Field(org.hipparchus.Field['UnivariateDerivative2'], 
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -3239,7 +3255,7 @@ class UnivariateDerivative2Field(org.hipparchus.Field['UnivariateDerivative2'], 
             Get the multiplicative identity of the field.
         
             The multiplicative identity is the element e :sub:`1` of the field such that for all elements a of the field, the
-            equalities a Ã— e :sub:`1` = e :sub:`1` Ã— a = a hold.
+            equalities a × e :sub:`1` = e :sub:`1` × a = a hold.
         
             Specified by:
                 :meth:`~org.hipparchus.Field.getOne` in interface :class:`~org.hipparchus.Field`
@@ -3271,7 +3287,8 @@ class UnivariateDerivative2Field(org.hipparchus.Field['UnivariateDerivative2'], 
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -3387,7 +3404,7 @@ class UnivariateVectorFunctionDifferentiator:
 
 class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializable):
     """
-    public class DerivativeStructure extends Object implements :class:`~org.hipparchus.analysis.differentiation.Derivative`<:class:`~org.hipparchus.analysis.differentiation.DerivativeStructure`>, Serializable
+    public class DerivativeStructure extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.Derivative`<:class:`~org.hipparchus.analysis.differentiation.DerivativeStructure`>, :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Class representing both the value and the differentials of a function.
     
@@ -3717,10 +3734,11 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
             and the same derivatives.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                other (Object): Object to test for equality to this
+                other (:class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality to this
         
             Returns:
                 true if two derivative structures are equal
@@ -3810,8 +3828,8 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
             Get the number of free parameters.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.Derivative.getFreeParameters`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.Derivative`
+                :meth:`~org.hipparchus.analysis.differentiation.Derivative.getFreeParameters` in
+                interface :class:`~org.hipparchus.analysis.differentiation.Derivative`
         
             Returns:
                 number of free parameters
@@ -3825,8 +3843,8 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
             Get the derivation order.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.Derivative.getOrder`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.Derivative`
+                :meth:`~org.hipparchus.analysis.differentiation.Derivative.getOrder` in
+                interface :class:`~org.hipparchus.analysis.differentiation.Derivative`
         
             Returns:
                 derivation order
@@ -3837,7 +3855,7 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
     def getPartialDerivative(self, *int: int) -> float: ...
     def getPi(self) -> 'DerivativeStructure':
         """
-            Get the Archimedes constant Ï€.
+            Get the Archimedes constant π.
         
             Archimedes constant is the ratio of a circle's circumference to its diameter.
         
@@ -3845,7 +3863,7 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
                 :meth:`~org.hipparchus.CalculusFieldElement.getPi` in interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Returns:
-                Archimedes constant Ï€
+                Archimedes constant π
         
         
         """
@@ -3868,8 +3886,8 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
             Get the value part of the derivative structure.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.Derivative.getValue`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.Derivative`
+                :meth:`~org.hipparchus.analysis.differentiation.Derivative.getValue` in
+                interface :class:`~org.hipparchus.analysis.differentiation.Derivative`
         
             Returns:
                 value part of the derivative structure
@@ -3885,7 +3903,8 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
             Get a hashCode for the derivative structure.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a hash code value for this object
@@ -4409,7 +4428,7 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
 _FieldDerivativeStructure__T = typing.TypeVar('_FieldDerivativeStructure__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]], typing.Generic[_FieldDerivativeStructure__T]):
     """
-    public class FieldDerivativeStructure<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object implements :class:`~org.hipparchus.analysis.differentiation.FieldDerivative`<T,:class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`<T>>
+    public class FieldDerivativeStructure<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.FieldDerivative`<T,:class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`<T>>
     
         Class representing both the value and the differentials of a function.
     
@@ -4519,8 +4538,8 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
             Get the number of free parameters.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.FieldDerivative.getFreeParameters`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.FieldDerivative`
+                :meth:`~org.hipparchus.analysis.differentiation.FieldDerivative.getFreeParameters` in
+                interface :class:`~org.hipparchus.analysis.differentiation.FieldDerivative`
         
             Returns:
                 number of free parameters
@@ -4534,8 +4553,8 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
             Get the derivation order.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.FieldDerivative.getOrder`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.FieldDerivative`
+                :meth:`~org.hipparchus.analysis.differentiation.FieldDerivative.getOrder` in
+                interface :class:`~org.hipparchus.analysis.differentiation.FieldDerivative`
         
             Returns:
                 derivation order
@@ -4563,8 +4582,8 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
             Get the value part of the derivative structure.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.FieldDerivative.getValue`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.FieldDerivative`
+                :meth:`~org.hipparchus.analysis.differentiation.FieldDerivative.getValue` in
+                interface :class:`~org.hipparchus.analysis.differentiation.FieldDerivative`
         
             Returns:
                 value part of the derivative structure
@@ -4721,7 +4740,7 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
 _FieldGradient__T = typing.TypeVar('_FieldGradient__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldGradient(FieldDerivative[_FieldGradient__T, 'FieldGradient'[_FieldGradient__T]], typing.Generic[_FieldGradient__T]):
     """
-    public class FieldGradient<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object implements :class:`~org.hipparchus.analysis.differentiation.FieldDerivative`<T,:class:`~org.hipparchus.analysis.differentiation.FieldGradient`<T>>
+    public class FieldGradient<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.FieldDerivative`<T,:class:`~org.hipparchus.analysis.differentiation.FieldGradient`<T>>
     
         Class representing both the value and the differentials of a function.
     
@@ -4810,10 +4829,11 @@ class FieldGradient(FieldDerivative[_FieldGradient__T, 'FieldGradient'[_FieldGra
             univariate derivatives are considered equal if they have the same derivatives.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                other (Object): Object to test for equality to this
+                other (:class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality to this
         
             Returns:
                 true if two univariate derivatives are equal
@@ -4845,8 +4865,8 @@ class FieldGradient(FieldDerivative[_FieldGradient__T, 'FieldGradient'[_FieldGra
             Get the number of free parameters.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.FieldDerivative.getFreeParameters`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.FieldDerivative`
+                :meth:`~org.hipparchus.analysis.differentiation.FieldDerivative.getFreeParameters` in
+                interface :class:`~org.hipparchus.analysis.differentiation.FieldDerivative`
         
             Returns:
                 number of free parameters
@@ -4869,8 +4889,8 @@ class FieldGradient(FieldDerivative[_FieldGradient__T, 'FieldGradient'[_FieldGra
             Get the derivation order.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.FieldDerivative.getOrder`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.FieldDerivative`
+                :meth:`~org.hipparchus.analysis.differentiation.FieldDerivative.getOrder` in
+                interface :class:`~org.hipparchus.analysis.differentiation.FieldDerivative`
         
             Returns:
                 derivation order
@@ -4901,8 +4921,8 @@ class FieldGradient(FieldDerivative[_FieldGradient__T, 'FieldGradient'[_FieldGra
             Get the value part of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.FieldDerivative.getValue`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.FieldDerivative`
+                :meth:`~org.hipparchus.analysis.differentiation.FieldDerivative.getValue` in
+                interface :class:`~org.hipparchus.analysis.differentiation.FieldDerivative`
         
             Returns:
                 value part of the value of the function
@@ -4916,7 +4936,8 @@ class FieldGradient(FieldDerivative[_FieldGradient__T, 'FieldGradient'[_FieldGra
             Get a hashCode for the univariate derivative.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a hash code value for this object
@@ -5101,7 +5122,7 @@ _FieldUnivariateDerivative__S = typing.TypeVar('_FieldUnivariateDerivative__S', 
 _FieldUnivariateDerivative__T = typing.TypeVar('_FieldUnivariateDerivative__T', bound='FieldUnivariateDerivative')  # <T>
 class FieldUnivariateDerivative(FieldDerivative[_FieldUnivariateDerivative__S, _FieldUnivariateDerivative__T], typing.Generic[_FieldUnivariateDerivative__S, _FieldUnivariateDerivative__T]):
     """
-    public abstract class FieldUnivariateDerivative<S extends :class:`~org.hipparchus.CalculusFieldElement`<S>,T extends FieldUnivariateDerivative<S,T>> extends Object implements :class:`~org.hipparchus.analysis.differentiation.FieldDerivative`<S,T>
+    public abstract class FieldUnivariateDerivative<S extends :class:`~org.hipparchus.CalculusFieldElement`<S>,T extends FieldUnivariateDerivative<S,T>> extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.FieldDerivative`<S,T>
     
         Abstract class representing both the value and the differentials of a function.
     
@@ -5115,8 +5136,8 @@ class FieldUnivariateDerivative(FieldDerivative[_FieldUnivariateDerivative__S, _
             Get the number of free parameters.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.FieldDerivative.getFreeParameters`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.FieldDerivative`
+                :meth:`~org.hipparchus.analysis.differentiation.FieldDerivative.getFreeParameters` in
+                interface :class:`~org.hipparchus.analysis.differentiation.FieldDerivative`
         
             Returns:
                 number of free parameters
@@ -5129,7 +5150,7 @@ class FieldUnivariateDerivative(FieldDerivative[_FieldUnivariateDerivative__S, _
 
 class FiniteDifferencesDifferentiator(UnivariateFunctionDifferentiator, UnivariateVectorFunctionDifferentiator, UnivariateMatrixFunctionDifferentiator, java.io.Serializable):
     """
-    public class FiniteDifferencesDifferentiator extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateFunctionDifferentiator`, :class:`~org.hipparchus.analysis.differentiation.UnivariateVectorFunctionDifferentiator`, :class:`~org.hipparchus.analysis.differentiation.UnivariateMatrixFunctionDifferentiator`, Serializable
+    public class FiniteDifferencesDifferentiator extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateFunctionDifferentiator`, :class:`~org.hipparchus.analysis.differentiation.UnivariateVectorFunctionDifferentiator`, :class:`~org.hipparchus.analysis.differentiation.UnivariateMatrixFunctionDifferentiator`, :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Univariate functions differentiator using finite differences.
     
@@ -5176,8 +5197,8 @@ class FiniteDifferencesDifferentiator(UnivariateFunctionDifferentiator, Univaria
             the number of points.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateFunctionDifferentiator.differentiate`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateFunctionDifferentiator`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateFunctionDifferentiator.differentiate` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateFunctionDifferentiator`
         
             Parameters:
                 function (:class:`~org.hipparchus.analysis.UnivariateFunction`): function to differentiate
@@ -5193,8 +5214,8 @@ class FiniteDifferencesDifferentiator(UnivariateFunctionDifferentiator, Univaria
             the number of points.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateVectorFunctionDifferentiator.differentiate`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateVectorFunctionDifferentiator`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateVectorFunctionDifferentiator.differentiate` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateVectorFunctionDifferentiator`
         
             Parameters:
                 function (:class:`~org.hipparchus.analysis.UnivariateVectorFunction`): function to differentiate
@@ -5210,8 +5231,8 @@ class FiniteDifferencesDifferentiator(UnivariateFunctionDifferentiator, Univaria
             the number of points.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateMatrixFunctionDifferentiator.differentiate`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateMatrixFunctionDifferentiator`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateMatrixFunctionDifferentiator.differentiate` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateMatrixFunctionDifferentiator`
         
             Parameters:
                 function (:class:`~org.hipparchus.analysis.UnivariateMatrixFunction`): function to differentiate
@@ -5249,7 +5270,7 @@ class FiniteDifferencesDifferentiator(UnivariateFunctionDifferentiator, Univaria
 
 class Gradient(Derivative['Gradient'], org.hipparchus.CalculusFieldElement['Gradient'], java.io.Serializable):
     """
-    public class Gradient extends Object implements :class:`~org.hipparchus.analysis.differentiation.Derivative`<:class:`~org.hipparchus.analysis.differentiation.Gradient`>, :class:`~org.hipparchus.CalculusFieldElement`<:class:`~org.hipparchus.analysis.differentiation.Gradient`>, Serializable
+    public class Gradient extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.Derivative`<:class:`~org.hipparchus.analysis.differentiation.Gradient`>, :class:`~org.hipparchus.CalculusFieldElement`<:class:`~org.hipparchus.analysis.differentiation.Gradient`>, :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Class representing both the value and the differentials of a function.
     
@@ -5459,8 +5480,8 @@ class Gradient(Derivative['Gradient'], org.hipparchus.CalculusFieldElement['Grad
             Compute composition of the instance by a univariate function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.Derivative.compose`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.Derivative`
+                :meth:`~org.hipparchus.analysis.differentiation.Derivative.compose` in
+                interface :class:`~org.hipparchus.analysis.differentiation.Derivative`
         
             Parameters:
                 f (double...): array of value and derivatives of the function at the current point (i.e.
@@ -5582,10 +5603,11 @@ class Gradient(Derivative['Gradient'], org.hipparchus.CalculusFieldElement['Grad
             univariate derivatives are considered equal if they have the same derivatives.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                other (Object): Object to test for equality to this
+                other (:class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality to this
         
             Returns:
                 true if two univariate derivatives are equal
@@ -5665,8 +5687,8 @@ class Gradient(Derivative['Gradient'], org.hipparchus.CalculusFieldElement['Grad
             Get the number of free parameters.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.Derivative.getFreeParameters`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.Derivative`
+                :meth:`~org.hipparchus.analysis.differentiation.Derivative.getFreeParameters` in
+                interface :class:`~org.hipparchus.analysis.differentiation.Derivative`
         
             Returns:
                 number of free parameters
@@ -5692,8 +5714,8 @@ class Gradient(Derivative['Gradient'], org.hipparchus.CalculusFieldElement['Grad
             Get the derivation order.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.Derivative.getOrder`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.Derivative`
+                :meth:`~org.hipparchus.analysis.differentiation.Derivative.getOrder` in
+                interface :class:`~org.hipparchus.analysis.differentiation.Derivative`
         
             Returns:
                 derivation order
@@ -5707,7 +5729,7 @@ class Gradient(Derivative['Gradient'], org.hipparchus.CalculusFieldElement['Grad
     def getPartialDerivative(self, *int: int) -> float: ...
     def getPi(self) -> 'Gradient':
         """
-            Get the Archimedes constant Ï€.
+            Get the Archimedes constant π.
         
             Archimedes constant is the ratio of a circle's circumference to its diameter.
         
@@ -5715,7 +5737,7 @@ class Gradient(Derivative['Gradient'], org.hipparchus.CalculusFieldElement['Grad
                 :meth:`~org.hipparchus.CalculusFieldElement.getPi` in interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Returns:
-                Archimedes constant Ï€
+                Archimedes constant π
         
         
         """
@@ -5738,8 +5760,8 @@ class Gradient(Derivative['Gradient'], org.hipparchus.CalculusFieldElement['Grad
             Get the value part of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.Derivative.getValue`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.Derivative`
+                :meth:`~org.hipparchus.analysis.differentiation.Derivative.getValue` in
+                interface :class:`~org.hipparchus.analysis.differentiation.Derivative`
         
             Returns:
                 value part of the value of the function
@@ -5752,7 +5774,8 @@ class Gradient(Derivative['Gradient'], org.hipparchus.CalculusFieldElement['Grad
             Get a hashCode for the univariate derivative.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a hash code value for this object
@@ -5762,7 +5785,7 @@ class Gradient(Derivative['Gradient'], org.hipparchus.CalculusFieldElement['Grad
         ...
     def hypot(self, gradient: 'Gradient') -> 'Gradient':
         """
-            Returns the hypotenuse of a triangle with sides :code:`this` and :code:`y` - sqrt(*this* :sup:`2` Â +*y* :sup:`2` )
+            Returns the hypotenuse of a triangle with sides :code:`this` and :code:`y` - sqrt(*this* :sup:`2`  +*y* :sup:`2` )
             avoiding intermediate overflow or underflow.
         
               - If either argument is infinite, then the result is positive infinity.
@@ -5787,8 +5810,8 @@ class Gradient(Derivative['Gradient'], org.hipparchus.CalculusFieldElement['Grad
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (:class:`~org.hipparchus.analysis.differentiation.Gradient`): first factor of the first term
@@ -5806,8 +5829,8 @@ class Gradient(Derivative['Gradient'], org.hipparchus.CalculusFieldElement['Grad
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (double): first factor of the first term
@@ -5825,8 +5848,8 @@ class Gradient(Derivative['Gradient'], org.hipparchus.CalculusFieldElement['Grad
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (:class:`~org.hipparchus.analysis.differentiation.Gradient`): first factor of the first term
@@ -5846,8 +5869,8 @@ class Gradient(Derivative['Gradient'], org.hipparchus.CalculusFieldElement['Grad
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (double): first factor of the first term
@@ -5867,8 +5890,8 @@ class Gradient(Derivative['Gradient'], org.hipparchus.CalculusFieldElement['Grad
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (:class:`~org.hipparchus.analysis.differentiation.Gradient`): first factor of the first term
@@ -5890,8 +5913,8 @@ class Gradient(Derivative['Gradient'], org.hipparchus.CalculusFieldElement['Grad
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (double): first factor of the first term
@@ -5923,7 +5946,8 @@ class Gradient(Derivative['Gradient'], org.hipparchus.CalculusFieldElement['Grad
             Compute a linear combination.
         
             Specified by:
-                 in interface :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a (:class:`~org.hipparchus.analysis.differentiation.Gradient`[]): Factors.
@@ -5935,7 +5959,8 @@ class Gradient(Derivative['Gradient'], org.hipparchus.CalculusFieldElement['Grad
             Compute a linear combination.
         
             Specified by:
-                 in interface :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a (double[]): Factors.
@@ -6414,7 +6439,7 @@ class Gradient(Derivative['Gradient'], org.hipparchus.CalculusFieldElement['Grad
 _UnivariateDerivative__T = typing.TypeVar('_UnivariateDerivative__T', bound='UnivariateDerivative')  # <T>
 class UnivariateDerivative(Derivative[_UnivariateDerivative__T], org.hipparchus.CalculusFieldElement[_UnivariateDerivative__T], java.io.Serializable, typing.Generic[_UnivariateDerivative__T]):
     """
-    public abstract class UnivariateDerivative<T extends UnivariateDerivative<T>> extends Object implements :class:`~org.hipparchus.analysis.differentiation.Derivative`<T>, :class:`~org.hipparchus.CalculusFieldElement`<T>, Serializable
+    public abstract class UnivariateDerivative<T extends UnivariateDerivative<T>> extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.Derivative`<T>, :class:`~org.hipparchus.CalculusFieldElement`<T>, :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Abstract class representing both the value and the differentials of a function.
     
@@ -6431,8 +6456,8 @@ class UnivariateDerivative(Derivative[_UnivariateDerivative__T], org.hipparchus.
             Get the number of free parameters.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.Derivative.getFreeParameters`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.Derivative`
+                :meth:`~org.hipparchus.analysis.differentiation.Derivative.getFreeParameters` in
+                interface :class:`~org.hipparchus.analysis.differentiation.Derivative`
         
             Returns:
                 number of free parameters
@@ -6529,10 +6554,11 @@ class FieldUnivariateDerivative1(FieldUnivariateDerivative[_FieldUnivariateDeriv
             univariate derivatives are considered equal if they have the same derivatives.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                other (Object): Object to test for equality to this
+                other (:class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality to this
         
             Returns:
                 true if two univariate derivatives are equal
@@ -6548,8 +6574,8 @@ class FieldUnivariateDerivative1(FieldUnivariateDerivative[_FieldUnivariateDeriv
             Get a derivative from the univariate derivative.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative.getDerivative`Â in
-                classÂ :class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative`
+                :meth:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative.getDerivative` in
+                class :class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative`
         
             Parameters:
                 n (int): derivation order (must be between 0 and
@@ -6625,7 +6651,8 @@ class FieldUnivariateDerivative1(FieldUnivariateDerivative[_FieldUnivariateDeriv
             Get a hashCode for the univariate derivative.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a hash code value for this object
@@ -6751,18 +6778,18 @@ class FieldUnivariateDerivative1(FieldUnivariateDerivative[_FieldUnivariateDeriv
             Evaluate Taylor expansion of a univariate derivative.
         
             Parameters:
-                delta (double): parameter offset Î”x
+                delta (double): parameter offset Δx
         
             Returns:
-                value of the Taylor expansion at x + Î”x
+                value of the Taylor expansion at x + Δx
         
             Evaluate Taylor expansion of a univariate derivative.
         
             Parameters:
-                delta (:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative1`): parameter offset Î”x
+                delta (:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative1`): parameter offset Δx
         
             Returns:
-                value of the Taylor expansion at x + Î”x
+                value of the Taylor expansion at x + Δx
         
         
         """
@@ -6851,10 +6878,11 @@ class FieldUnivariateDerivative2(FieldUnivariateDerivative[_FieldUnivariateDeriv
             univariate derivatives are considered equal if they have the same derivatives.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                other (Object): Object to test for equality to this
+                other (:class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality to this
         
             Returns:
                 true if two univariate derivatives are equal
@@ -6870,8 +6898,8 @@ class FieldUnivariateDerivative2(FieldUnivariateDerivative[_FieldUnivariateDeriv
             Get a derivative from the univariate derivative.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative.getDerivative`Â in
-                classÂ :class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative`
+                :meth:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative.getDerivative` in
+                class :class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative`
         
             Parameters:
                 n (int): derivation order (must be between 0 and
@@ -6961,7 +6989,8 @@ class FieldUnivariateDerivative2(FieldUnivariateDerivative[_FieldUnivariateDeriv
             Get a hashCode for the univariate derivative.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a hash code value for this object
@@ -7087,18 +7116,18 @@ class FieldUnivariateDerivative2(FieldUnivariateDerivative[_FieldUnivariateDeriv
             Evaluate Taylor expansion a univariate derivative.
         
             Parameters:
-                delta (double): parameter offset Î”x
+                delta (double): parameter offset Δx
         
             Returns:
-                value of the Taylor expansion at x + Î”x
+                value of the Taylor expansion at x + Δx
         
             Evaluate Taylor expansion a univariate derivative.
         
             Parameters:
-                delta (:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2`): parameter offset Î”x
+                delta (:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2`): parameter offset Δx
         
             Returns:
-                value of the Taylor expansion at x + Î”x
+                value of the Taylor expansion at x + Δx
         
         
         """
@@ -7148,7 +7177,7 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1']):
     """
     public static final :class:`~org.hipparchus.analysis.differentiation.UnivariateDerivative1` PI
     
-        The constant value of Ï€ as a :code:`UnivariateDerivative1`.
+        The constant value of π as a :code:`UnivariateDerivative1`.
     
         Since:
             2.0
@@ -7384,10 +7413,11 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1']):
             univariate derivatives are considered equal if they have the same derivatives.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                other (Object): Object to test for equality to this
+                other (:class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality to this
         
             Returns:
                 true if two univariate derivatives are equal
@@ -7430,8 +7460,8 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1']):
             Get a derivative from the univariate derivative.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDerivative.getDerivative`Â in
-                classÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDerivative`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDerivative.getDerivative` in
+                class :class:`~org.hipparchus.analysis.differentiation.UnivariateDerivative`
         
             Parameters:
                 n (int): derivation order (must be between 0 and :meth:`~org.hipparchus.analysis.differentiation.Derivative.getOrder`, both
@@ -7490,12 +7520,12 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1']):
         ...
     def getPi(self) -> 'UnivariateDerivative1':
         """
-            Get the Archimedes constant Ï€.
+            Get the Archimedes constant π.
         
             Archimedes constant is the ratio of a circle's circumference to its diameter.
         
             Returns:
-                Archimedes constant Ï€
+                Archimedes constant π
         
         
         """
@@ -7525,7 +7555,8 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1']):
             Get a hashCode for the univariate derivative.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a hash code value for this object
@@ -7535,7 +7566,7 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1']):
         ...
     def hypot(self, univariateDerivative1: 'UnivariateDerivative1') -> 'UnivariateDerivative1':
         """
-            Returns the hypotenuse of a triangle with sides :code:`this` and :code:`y` - sqrt(*this* :sup:`2` Â +*y* :sup:`2` )
+            Returns the hypotenuse of a triangle with sides :code:`this` and :code:`y` - sqrt(*this* :sup:`2`  +*y* :sup:`2` )
             avoiding intermediate overflow or underflow.
         
               - If either argument is infinite, then the result is positive infinity.
@@ -7990,10 +8021,10 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1']):
             Evaluate Taylor expansion a univariate derivative.
         
             Parameters:
-                delta (double): parameter offset Î”x
+                delta (double): parameter offset Δx
         
             Returns:
-                value of the Taylor expansion at x + Î”x
+                value of the Taylor expansion at x + Δx
         
         
         """
@@ -8013,8 +8044,8 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1']):
             Convert the instance to a :class:`~org.hipparchus.analysis.differentiation.DerivativeStructure`.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDerivative.toDerivativeStructure`Â in
-                classÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDerivative`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDerivative.toDerivativeStructure` in
+                class :class:`~org.hipparchus.analysis.differentiation.UnivariateDerivative`
         
             Returns:
                 derivative structure with same value and derivative as the instance
@@ -8086,7 +8117,7 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
     """
     public static final :class:`~org.hipparchus.analysis.differentiation.UnivariateDerivative2` PI
     
-        The constant value of Ï€ as a :code:`UnivariateDerivative2`.
+        The constant value of π as a :code:`UnivariateDerivative2`.
     
         Since:
             2.0
@@ -8322,10 +8353,11 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
             univariate derivatives are considered equal if they have the same derivatives.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                other (Object): Object to test for equality to this
+                other (:class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality to this
         
             Returns:
                 true if two univariate derivatives are equal
@@ -8368,8 +8400,8 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
             Get a derivative from the univariate derivative.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDerivative.getDerivative`Â in
-                classÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDerivative`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDerivative.getDerivative` in
+                class :class:`~org.hipparchus.analysis.differentiation.UnivariateDerivative`
         
             Parameters:
                 n (int): derivation order (must be between 0 and :meth:`~org.hipparchus.analysis.differentiation.Derivative.getOrder`, both
@@ -8429,12 +8461,12 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
         ...
     def getPi(self) -> 'UnivariateDerivative2':
         """
-            Get the Archimedes constant Ï€.
+            Get the Archimedes constant π.
         
             Archimedes constant is the ratio of a circle's circumference to its diameter.
         
             Returns:
-                Archimedes constant Ï€
+                Archimedes constant π
         
         
         """
@@ -8478,7 +8510,8 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
             Get a hashCode for the univariate derivative.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a hash code value for this object
@@ -8488,7 +8521,7 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
         ...
     def hypot(self, univariateDerivative2: 'UnivariateDerivative2') -> 'UnivariateDerivative2':
         """
-            Returns the hypotenuse of a triangle with sides :code:`this` and :code:`y` - sqrt(*this* :sup:`2` Â +*y* :sup:`2` )
+            Returns the hypotenuse of a triangle with sides :code:`this` and :code:`y` - sqrt(*this* :sup:`2`  +*y* :sup:`2` )
             avoiding intermediate overflow or underflow.
         
               - If either argument is infinite, then the result is positive infinity.
@@ -8943,10 +8976,10 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
             Evaluate Taylor expansion a univariate derivative.
         
             Parameters:
-                delta (double): parameter offset Î”x
+                delta (double): parameter offset Δx
         
             Returns:
-                value of the Taylor expansion at x + Î”x
+                value of the Taylor expansion at x + Δx
         
         
         """
@@ -8966,8 +8999,8 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
             Convert the instance to a :class:`~org.hipparchus.analysis.differentiation.DerivativeStructure`.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDerivative.toDerivativeStructure`Â in
-                classÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDerivative`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDerivative.toDerivativeStructure` in
+                class :class:`~org.hipparchus.analysis.differentiation.UnivariateDerivative`
         
             Returns:
                 derivative structure with same value and derivative as the instance

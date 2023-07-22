@@ -11,7 +11,7 @@ import typing
 _EnumeratedDistribution__T = typing.TypeVar('_EnumeratedDistribution__T')  # <T>
 class EnumeratedDistribution(java.io.Serializable, typing.Generic[_EnumeratedDistribution__T]):
     """
-    public class EnumeratedDistribution<T> extends Object implements Serializable
+    public class EnumeratedDistribution<T> extends :class:`~org.hipparchus.distribution.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.distribution.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         A generic implementation of a ` discrete probability distribution (Wikipedia)
         <http://en.wikipedia.org/wiki/Probability_distribution#Discrete_probability_distribution>` over a finite sample space,

@@ -31,9 +31,9 @@ class AggregatableStatistic(typing.Generic[_AggregatableStatistic__T]):
                 others (:class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`...): the other instances to aggregate into this instance
         
             Raises:
-                : if either others or any instance is null
+                :class:`~org.hipparchus.stat.descriptive.https:.www.hipparchus.org.hipparchus`: if either others or any instance is null
         
-        default void aggregate(Iterable<:class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`> others)
+        default void aggregate(:class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable?is`<:class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`> others)
         
             Aggregates the results from the provided instances into this instance.
         
@@ -41,10 +41,10 @@ class AggregatableStatistic(typing.Generic[_AggregatableStatistic__T]):
             after this operation should be the same as if a single statistic would have been applied over the combined dataset.
         
             Parameters:
-                others (Iterable<:class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`> others): the other instances to aggregate into this instance
+                others (:class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable?is`<:class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`> others): the other instances to aggregate into this instance
         
             Raises:
-                : if either others or any instance is null
+                :class:`~org.hipparchus.stat.descriptive.https:.www.hipparchus.org.hipparchus`: if either others or any instance is null
         
         
         """
@@ -202,9 +202,9 @@ class StatisticalSummary:
                 summary statistics for the combined dataset
         
             Raises:
-                : if the input is null
+                :class:`~org.hipparchus.stat.descriptive.https:.www.hipparchus.org.hipparchus`: if the input is null
         
-        static :class:`~org.hipparchus.stat.descriptive.StatisticalSummary` aggregate(Iterable<? extends :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`> statistics)
+        static :class:`~org.hipparchus.stat.descriptive.StatisticalSummary` aggregate(:class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable?is`<? extends :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`> statistics)
         
             Computes aggregated statistical summaries.
         
@@ -213,13 +213,13 @@ class StatisticalSummary:
             over the combined dataset.
         
             Parameters:
-                statistics (Iterable<? extends :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`> statistics): iterable of StatisticalSummary instances to aggregate
+                statistics (:class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable?is`<? extends :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`> statistics): iterable of StatisticalSummary instances to aggregate
         
             Returns:
                 summary statistics for the combined dataset
         
             Raises:
-                : if the input is null
+                :class:`~org.hipparchus.stat.descriptive.https:.www.hipparchus.org.hipparchus`: if the input is null
         
         
         """
@@ -353,7 +353,7 @@ class StorelessMultivariateStatistic:
 
 class UnivariateStatistic(org.hipparchus.util.MathArrays.Function):
     """
-    public interface UnivariateStatistic extends MathArrays.Function
+    public interface UnivariateStatistic extends :class:`~org.hipparchus.stat.descriptive.https:.www.hipparchus.org.hipparchus`
     
         Base interface implemented by all statistics.
     """
@@ -385,7 +385,7 @@ class WeightedEvaluation:
 
 class AbstractUnivariateStatistic(UnivariateStatistic):
     """
-    public abstract class AbstractUnivariateStatistic extends Object implements :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
+    public abstract class AbstractUnivariateStatistic extends :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
     
         Abstract base class for implementations of the :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic` interface.
     """
@@ -394,8 +394,8 @@ class AbstractUnivariateStatistic(UnivariateStatistic):
             Returns a copy of the statistic with the same internal state.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.copy`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.copy` in
+                interface :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
         
             Returns:
                 a copy of the statistic
@@ -432,7 +432,7 @@ class AbstractUnivariateStatistic(UnivariateStatistic):
             Also see:
                 :meth:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic.evaluate`
         
-        public void setData(double[] values, int begin, int length) throws MathIllegalArgumentException
+        public void setData(double[] values, int begin, int length) throws :class:`~org.hipparchus.stat.descriptive.https:.www.hipparchus.org.hipparchus`
         
             Set the data array. The input array is copied, not referenced.
         
@@ -442,7 +442,7 @@ class AbstractUnivariateStatistic(UnivariateStatistic):
                 length (int): the number of elements to include
         
             Raises:
-                : if values is null or the indices are not valid
+                :class:`~org.hipparchus.stat.descriptive.https:.www.hipparchus.org.hipparchus`: if values is null or the indices are not valid
         
             Also see:
                 :meth:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic.evaluate`
@@ -455,7 +455,7 @@ class AbstractUnivariateStatistic(UnivariateStatistic):
 
 class DescriptiveStatistics(StatisticalSummary, java.util.function.DoubleConsumer, java.io.Serializable):
     """
-    public class DescriptiveStatistics extends Object implements :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`, DoubleConsumer, Serializable
+    public class DescriptiveStatistics extends :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`, :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.util.function.DoubleConsumer?is`, :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Maintains a dataset of values of a single variable and computes descriptive statistics based on stored data.
     
@@ -483,7 +483,9 @@ class DescriptiveStatistics(StatisticalSummary, java.util.function.DoubleConsume
         """
         
             Specified by:
-                 in interface 
+                
+                meth:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.util.function.DoubleConsumer.html?is` in
+                interface :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.util.function.DoubleConsumer?is`
         
         
         """
@@ -571,8 +573,8 @@ class DescriptiveStatistics(StatisticalSummary, java.util.function.DoubleConsume
             Returns the maximum of the available values
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getMax`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getMax` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
         
             Returns:
                 The max or Double.NaN if no values have been added.
@@ -585,8 +587,8 @@ class DescriptiveStatistics(StatisticalSummary, java.util.function.DoubleConsume
             Returns the ` arithmetic mean <http://www.xycoon.com/arithmetic_mean.htm>` of the available values
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getMean`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getMean` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
         
             Returns:
                 The mean or Double.NaN if no values have been added.
@@ -599,8 +601,8 @@ class DescriptiveStatistics(StatisticalSummary, java.util.function.DoubleConsume
             Returns the minimum of the available values
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getMin`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getMin` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
         
             Returns:
                 The min or Double.NaN if no values have been added.
@@ -613,8 +615,8 @@ class DescriptiveStatistics(StatisticalSummary, java.util.function.DoubleConsume
             Returns the number of available values
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getN`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getN` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
         
             Returns:
                 The number of available values
@@ -675,8 +677,8 @@ class DescriptiveStatistics(StatisticalSummary, java.util.function.DoubleConsume
             Returns the standard deviation of the available values.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getStandardDeviation`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getStandardDeviation` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
         
             Returns:
                 The standard deviation, Double.NaN if no values have been added or 0.0 for a single value set.
@@ -689,8 +691,8 @@ class DescriptiveStatistics(StatisticalSummary, java.util.function.DoubleConsume
             Returns the sum of the values that have been added to Univariate.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getSum`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getSum` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
         
             Returns:
                 The sum or Double.NaN if no values have been added
@@ -724,8 +726,8 @@ class DescriptiveStatistics(StatisticalSummary, java.util.function.DoubleConsume
             Returns the variance of the available values.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getVariance`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getVariance` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
         
             Returns:
                 The variance, Double.NaN if no values have been added or 0.0 for a single value set.
@@ -752,7 +754,8 @@ class DescriptiveStatistics(StatisticalSummary, java.util.function.DoubleConsume
             on a separate line.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 String with line feeds displaying statistics
@@ -763,18 +766,19 @@ class DescriptiveStatistics(StatisticalSummary, java.util.function.DoubleConsume
 
 class MultivariateSummaryStatistics(StatisticalMultivariateSummary, java.io.Serializable):
     """
-    public class MultivariateSummaryStatistics extends Object implements :class:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary`, Serializable
+    public class MultivariateSummaryStatistics extends :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary`, :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
-        Computes summary statistics for a stream of n-tuples added using the null method. The data values are not stored in
-        memory, so this class can be used to compute statistics for very large n-tuple streams.
+        Computes summary statistics for a stream of n-tuples added using the
+        :meth:`~org.hipparchus.stat.descriptive.MultivariateSummaryStatistics.addValue` method. The data values are not stored
+        in memory, so this class can be used to compute statistics for very large n-tuple streams.
     
         To compute statistics for a stream of n-tuples, construct a
-        :class:`~org.hipparchus.stat.descriptive.MultivariateSummaryStatistics` instance with dimension n and then use null to
-        add n-tuples. The :code:`getXxx` methods where Xxx is a statistic return an array of :code:`double` values, where for
-        :code:`i = 0,...,n-1` the i :sup:`th` array element is the value of the given statistic for data range consisting of the
-        i :sup:`th` element of each of the input n-tuples. For example, if :code:`addValue` is called with actual parameters {0,
-        1, 2}, then {3, 4, 5} and finally {6, 7, 8}, :code:`getSum` will return a three-element array with values {0+3+6, 1+4+7,
-        2+5+8}
+        :class:`~org.hipparchus.stat.descriptive.MultivariateSummaryStatistics` instance with dimension n and then use
+        :meth:`~org.hipparchus.stat.descriptive.MultivariateSummaryStatistics.addValue` to add n-tuples. The :code:`getXxx`
+        methods where Xxx is a statistic return an array of :code:`double` values, where for :code:`i = 0,...,n-1` the i
+        :sup:`th` array element is the value of the given statistic for data range consisting of the i :sup:`th` element of each
+        of the input n-tuples. For example, if :code:`addValue` is called with actual parameters {0, 1, 2}, then {3, 4, 5} and
+        finally {6, 7, 8}, :code:`getSum` will return a three-element array with values {0+3+6, 1+4+7, 2+5+8}
     
         Note: This class is not thread-safe.
     
@@ -798,10 +802,11 @@ class MultivariateSummaryStatistics(StatisticalMultivariateSummary, java.io.Seri
             values as this.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                object (Object): the object to test equality against.
+                object (:class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): the object to test equality against.
         
             Returns:
                 true if object equals this
@@ -814,8 +819,8 @@ class MultivariateSummaryStatistics(StatisticalMultivariateSummary, java.io.Seri
             Returns the covariance of the available values.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary.getCovariance`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary.getCovariance` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary`
         
             Returns:
                 The covariance, null if no multivariate sample have been added or a zeroed matrix for a single value set.
@@ -828,8 +833,8 @@ class MultivariateSummaryStatistics(StatisticalMultivariateSummary, java.io.Seri
             Returns the dimension of the data
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary.getDimension`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary.getDimension` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary`
         
             Returns:
                 The dimension of the data
@@ -843,8 +848,8 @@ class MultivariateSummaryStatistics(StatisticalMultivariateSummary, java.io.Seri
             to each multivariate sample
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary.getGeometricMean`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary.getGeometricMean` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary`
         
             Returns:
                 the array of component geometric means
@@ -858,8 +863,8 @@ class MultivariateSummaryStatistics(StatisticalMultivariateSummary, java.io.Seri
             multivariate sample
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary.getMax`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary.getMax` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary`
         
             Returns:
                 the array of component maxima
@@ -873,8 +878,8 @@ class MultivariateSummaryStatistics(StatisticalMultivariateSummary, java.io.Seri
             multivariate sample
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary.getMean`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary.getMean` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary`
         
             Returns:
                 the array of component means
@@ -888,8 +893,8 @@ class MultivariateSummaryStatistics(StatisticalMultivariateSummary, java.io.Seri
             multivariate sample
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary.getMin`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary.getMin` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary`
         
             Returns:
                 the array of component minima
@@ -902,8 +907,8 @@ class MultivariateSummaryStatistics(StatisticalMultivariateSummary, java.io.Seri
             Returns the number of available values
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary.getN`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary.getN` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary`
         
             Returns:
                 The number of available values
@@ -914,11 +919,11 @@ class MultivariateSummaryStatistics(StatisticalMultivariateSummary, java.io.Seri
     def getStandardDeviation(self) -> typing.List[float]:
         """
             Returns an array whose i :sup:`th` entry is the standard deviation of the i :sup:`th` entries of the arrays that have
-            been added using null
+            been added using :meth:`~org.hipparchus.stat.descriptive.MultivariateSummaryStatistics.addValue`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary.getStandardDeviation`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary.getStandardDeviation` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary`
         
             Returns:
                 the array of component standard deviations
@@ -932,8 +937,8 @@ class MultivariateSummaryStatistics(StatisticalMultivariateSummary, java.io.Seri
             multivariate sample
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary.getSum`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary.getSum` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary`
         
             Returns:
                 the array of component sums
@@ -947,8 +952,8 @@ class MultivariateSummaryStatistics(StatisticalMultivariateSummary, java.io.Seri
             each multivariate sample
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary.getSumLog`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary.getSumLog` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary`
         
             Returns:
                 the array of component log sums
@@ -962,8 +967,8 @@ class MultivariateSummaryStatistics(StatisticalMultivariateSummary, java.io.Seri
             to each multivariate sample
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary.getSumSq`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary.getSumSq` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalMultivariateSummary`
         
             Returns:
                 the array of component sums of squares
@@ -976,7 +981,8 @@ class MultivariateSummaryStatistics(StatisticalMultivariateSummary, java.io.Seri
             Returns hash code based on values of statistics
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 hash code
@@ -989,7 +995,8 @@ class MultivariateSummaryStatistics(StatisticalMultivariateSummary, java.io.Seri
             Generates a text report displaying summary statistics from values that have been added.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 String with line feeds displaying statistics
@@ -1000,7 +1007,7 @@ class MultivariateSummaryStatistics(StatisticalMultivariateSummary, java.io.Seri
 
 class StatisticalSummaryValues(java.io.Serializable, StatisticalSummary):
     """
-    public class StatisticalSummaryValues extends Object implements Serializable, :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
+    public class StatisticalSummaryValues extends :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
     
         Value object representing the results of a univariate statistical summary.
     
@@ -1014,10 +1021,11 @@ class StatisticalSummaryValues(java.io.Serializable, StatisticalSummary):
             this.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                object (Object): the object to test equality against.
+                object (:class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): the object to test equality against.
         
             Returns:
                 true if object equals this
@@ -1031,8 +1039,8 @@ class StatisticalSummaryValues(java.io.Serializable, StatisticalSummary):
             Returns the maximum of the available values
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getMax`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getMax` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
         
             Returns:
                 Returns the max.
@@ -1046,8 +1054,8 @@ class StatisticalSummaryValues(java.io.Serializable, StatisticalSummary):
             Returns the ` arithmetic mean <http://www.xycoon.com/arithmetic_mean.htm>` of the available values
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getMean`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getMean` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
         
             Returns:
                 Returns the mean.
@@ -1061,8 +1069,8 @@ class StatisticalSummaryValues(java.io.Serializable, StatisticalSummary):
             Returns the minimum of the available values
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getMin`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getMin` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
         
             Returns:
                 Returns the min.
@@ -1076,8 +1084,8 @@ class StatisticalSummaryValues(java.io.Serializable, StatisticalSummary):
             Returns the number of available values
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getN`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getN` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
         
             Returns:
                 Returns the number of values.
@@ -1091,8 +1099,8 @@ class StatisticalSummaryValues(java.io.Serializable, StatisticalSummary):
             Returns the standard deviation of the available values.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getStandardDeviation`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getStandardDeviation` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
         
             Returns:
                 Returns the standard deviation
@@ -1106,8 +1114,8 @@ class StatisticalSummaryValues(java.io.Serializable, StatisticalSummary):
             Returns the sum of the values that have been added to Univariate.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getSum`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getSum` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
         
             Returns:
                 Returns the sum.
@@ -1121,8 +1129,8 @@ class StatisticalSummaryValues(java.io.Serializable, StatisticalSummary):
             Returns the variance of the available values.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getVariance`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getVariance` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
         
             Returns:
                 Returns the variance.
@@ -1135,7 +1143,8 @@ class StatisticalSummaryValues(java.io.Serializable, StatisticalSummary):
             Returns hash code based on values of statistics
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 hash code
@@ -1148,7 +1157,8 @@ class StatisticalSummaryValues(java.io.Serializable, StatisticalSummary):
             Generates a text report displaying values of statistics. Each statistic is displayed on a separate line.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 String with line feeds displaying statistics
@@ -1159,23 +1169,27 @@ class StatisticalSummaryValues(java.io.Serializable, StatisticalSummary):
 
 class StorelessUnivariateStatistic(UnivariateStatistic, java.util.function.DoubleConsumer):
     """
-    public interface StorelessUnivariateStatistic extends :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`, DoubleConsumer
+    public interface StorelessUnivariateStatistic extends :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`, :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.util.function.DoubleConsumer?is`
     
         Extends the definition of :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic` with
-        :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.increment` and null methods for adding values and
+        :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.increment` and
+        :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.incrementAll` methods for adding values and
         updating internal state.
     
         This interface is designed to be used for calculating statistics that can be computed in one pass through the data
         without storing the full array of sample values.
     
-        Note: unless otherwise stated, the null and null methods do **NOT** alter the internal state of the respective
-        statistic.
+        Note: unless otherwise stated, the :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.evaluate` and
+        :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.evaluate` methods do **NOT** alter the internal
+        state of the respective statistic.
     """
     def accept(self, double: float) -> None:
         """
         
             Specified by:
-                 in interface 
+                
+                meth:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.util.function.DoubleConsumer.html?is` in
+                interface :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.util.function.DoubleConsumer?is`
         
         
         """
@@ -1191,8 +1205,8 @@ class StorelessUnivariateStatistic(UnivariateStatistic, java.util.function.Doubl
             Returns a copy of the statistic with the same internal state.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.copy`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.copy` in
+                interface :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
         
             Returns:
                 a copy of the statistic
@@ -1241,7 +1255,7 @@ class StorelessUnivariateStatistic(UnivariateStatistic, java.util.function.Doubl
 
 class StreamingStatistics(StatisticalSummary, AggregatableStatistic['StreamingStatistics'], java.util.function.DoubleConsumer, java.io.Serializable):
     """
-    public class StreamingStatistics extends Object implements :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`, :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`<:class:`~org.hipparchus.stat.descriptive.StreamingStatistics`>, DoubleConsumer, Serializable
+    public class StreamingStatistics extends :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`, :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`<:class:`~org.hipparchus.stat.descriptive.StreamingStatistics`>, :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.util.function.DoubleConsumer?is`, :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Computes summary statistics for a stream of data values added using the
         :meth:`~org.hipparchus.stat.descriptive.StreamingStatistics.addValue` method. The data values are not stored in memory,
@@ -1268,7 +1282,9 @@ class StreamingStatistics(StatisticalSummary, AggregatableStatistic['StreamingSt
         """
         
             Specified by:
-                 in interface 
+                
+                meth:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.util.function.DoubleConsumer.html?is` in
+                interface :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.util.function.DoubleConsumer?is`
         
         
         """
@@ -1294,8 +1310,8 @@ class StreamingStatistics(StatisticalSummary, AggregatableStatistic['StreamingSt
             false, but other.computeMoments is true, the moment data in other will be lost.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AggregatableStatistic.aggregate`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AggregatableStatistic.aggregate` in
+                interface :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`
         
             Parameters:
                 other (:class:`~org.hipparchus.stat.descriptive.StreamingStatistics`): the instance to aggregate into this instance
@@ -1341,10 +1357,11 @@ class StreamingStatistics(StatisticalSummary, AggregatableStatistic['StreamingSt
             this.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                object (Object): the object to test equality against.
+                object (:class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): the object to test equality against.
         
             Returns:
                 true if object equals this
@@ -1369,8 +1386,8 @@ class StreamingStatistics(StatisticalSummary, AggregatableStatistic['StreamingSt
             Returns the maximum of the available values
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getMax`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getMax` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
         
             Returns:
                 The max or Double.NaN if no values have been added.
@@ -1383,8 +1400,8 @@ class StreamingStatistics(StatisticalSummary, AggregatableStatistic['StreamingSt
             Returns the ` arithmetic mean <http://www.xycoon.com/arithmetic_mean.htm>` of the available values
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getMean`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getMean` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
         
             Returns:
                 The mean or Double.NaN if no values have been added.
@@ -1409,8 +1426,8 @@ class StreamingStatistics(StatisticalSummary, AggregatableStatistic['StreamingSt
             Returns the minimum of the available values
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getMin`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getMin` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
         
             Returns:
                 The min or Double.NaN if no values have been added.
@@ -1423,8 +1440,8 @@ class StreamingStatistics(StatisticalSummary, AggregatableStatistic['StreamingSt
             Returns the number of available values
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getN`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getN` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
         
             Returns:
                 The number of available values
@@ -1492,8 +1509,8 @@ class StreamingStatistics(StatisticalSummary, AggregatableStatistic['StreamingSt
             Double.NaN is returned if no values have been added.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getStandardDeviation`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getStandardDeviation` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
         
             Returns:
                 the standard deviation
@@ -1506,8 +1523,8 @@ class StreamingStatistics(StatisticalSummary, AggregatableStatistic['StreamingSt
             Returns the sum of the values that have been added to Univariate.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getSum`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getSum` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
         
             Returns:
                 The sum or Double.NaN if no values have been added
@@ -1554,8 +1571,8 @@ class StreamingStatistics(StatisticalSummary, AggregatableStatistic['StreamingSt
             Returns the variance of the available values.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getVariance`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
+                :meth:`~org.hipparchus.stat.descriptive.StatisticalSummary.getVariance` in
+                interface :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
         
             Returns:
                 The variance, Double.NaN if no values have been added or 0.0 for a single value set.
@@ -1568,7 +1585,8 @@ class StreamingStatistics(StatisticalSummary, AggregatableStatistic['StreamingSt
             Returns hash code based on values of statistics.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 hash code
@@ -1581,7 +1599,8 @@ class StreamingStatistics(StatisticalSummary, AggregatableStatistic['StreamingSt
             Generates a text report displaying summary statistics from values that have been added.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 String with line feeds displaying statistics
@@ -1603,7 +1622,7 @@ class StreamingStatistics(StatisticalSummary, AggregatableStatistic['StreamingSt
 
 class AbstractStorelessUnivariateStatistic(StorelessUnivariateStatistic):
     """
-    public abstract class AbstractStorelessUnivariateStatistic extends Object implements :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+    public abstract class AbstractStorelessUnivariateStatistic extends :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
     
         Abstract base class for implementations of the :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         interface.
@@ -1616,8 +1635,8 @@ class AbstractStorelessUnivariateStatistic(StorelessUnivariateStatistic):
             Clears the internal state of the Statistic
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.clear`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.clear` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
         
         """
@@ -1627,12 +1646,12 @@ class AbstractStorelessUnivariateStatistic(StorelessUnivariateStatistic):
             Returns a copy of the statistic with the same internal state.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.copy`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.copy` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.copy`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.copy` in
+                interface :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
         
             Returns:
                 a copy of the statistic
@@ -1647,10 +1666,11 @@ class AbstractStorelessUnivariateStatistic(StorelessUnivariateStatistic):
             returning the same values as this for :code:`getResult()` and :code:`getN()`.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                object (Object): object to test equality against.
+                object (:class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): object to test equality against.
         
             Returns:
                 true if object returns the same value as this
@@ -1663,8 +1683,8 @@ class AbstractStorelessUnivariateStatistic(StorelessUnivariateStatistic):
             Returns the current value of the Statistic.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getResult`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getResult` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Returns:
                 value of the statistic, :code:`Double.NaN` if it has been cleared or just instantiated.
@@ -1677,7 +1697,8 @@ class AbstractStorelessUnivariateStatistic(StorelessUnivariateStatistic):
             Returns hash code based on getResult() and getN().
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 hash code
@@ -1690,8 +1711,8 @@ class AbstractStorelessUnivariateStatistic(StorelessUnivariateStatistic):
             Updates the internal state of the statistic to reflect the addition of the new value.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.increment`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.increment` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Parameters:
                 d (double): the new value.
@@ -1703,7 +1724,8 @@ class AbstractStorelessUnivariateStatistic(StorelessUnivariateStatistic):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """

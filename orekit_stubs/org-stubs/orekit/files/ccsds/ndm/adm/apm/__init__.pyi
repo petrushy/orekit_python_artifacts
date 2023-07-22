@@ -30,7 +30,7 @@ class Apm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.secti
     """
     ROOT: typing.ClassVar[str] = ...
     """
-    public static final String ROOT
+    public static final :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ROOT
     
         Root element for XML files.
     
@@ -41,7 +41,7 @@ class Apm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.secti
     """
     FORMAT_VERSION_KEY: typing.ClassVar[str] = ...
     """
-    public static final String FORMAT_VERSION_KEY
+    public static final :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` FORMAT_VERSION_KEY
     
         Key for format version.
     
@@ -95,7 +95,7 @@ class Apm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.secti
 
 class ApmData(org.orekit.files.ccsds.section.Data):
     """
-    public class ApmData extends Object implements :class:`~org.orekit.files.ccsds.section.Data`
+    public class ApmData extends :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.section.Data`
     
         Container for Attitude Parameter Message data.
     
@@ -113,16 +113,7 @@ class ApmData(org.orekit.files.ccsds.section.Data):
         
         """
         ...
-    def getComments(self) -> java.util.List[str]:
-        """
-            Get the comments.
-        
-            Returns:
-                comments
-        
-        
-        """
-        ...
+    def getComments(self) -> java.util.List[str]: ...
     def getEulerBlock(self) -> 'Euler':
         """
             Get the Euler angles logical block.
@@ -238,8 +229,8 @@ class ApmParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Apm, 'ApmParser']):
             Finalize data after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -252,8 +243,8 @@ class ApmParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Apm, 'ApmParser']):
             Finalize header after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -266,8 +257,8 @@ class ApmParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Apm, 'ApmParser']):
             Finalize metadata after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -280,8 +271,8 @@ class ApmParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Apm, 'ApmParser']):
             Get file header to fill.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 file header to fill
@@ -294,8 +285,8 @@ class ApmParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Apm, 'ApmParser']):
             Acknowledge data parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -308,8 +299,8 @@ class ApmParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Apm, 'ApmParser']):
             Acknowledge header parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -322,8 +313,8 @@ class ApmParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Apm, 'ApmParser']):
             Acknowledge metada parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -336,8 +327,8 @@ class ApmParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Apm, 'ApmParser']):
             Prepare data for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -350,8 +341,8 @@ class ApmParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Apm, 'ApmParser']):
             Prepare header for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -364,8 +355,8 @@ class ApmParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Apm, 'ApmParser']):
             Prepare metadata for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -386,7 +377,7 @@ class ApmParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Apm, 'ApmParser']):
 
 class ApmQuaternion(org.orekit.files.ccsds.section.Section):
     """
-    public class ApmQuaternion extends Object implements :class:`~org.orekit.files.ccsds.section.Section`
+    public class ApmQuaternion extends :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.section.Section`
     
         Container for Attitude Parameter Message quaternion logical block.
     
@@ -509,7 +500,7 @@ class ApmQuaternion(org.orekit.files.ccsds.section.Section):
 
 class ApmQuaternionKey(java.lang.Enum['ApmQuaternionKey']):
     """
-    public enum ApmQuaternionKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.adm.apm.ApmQuaternionKey`>
+    public enum ApmQuaternionKey extends :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.adm.apm.ApmQuaternionKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.adm.apm.ApmQuaternion` entries.
     
@@ -557,14 +548,14 @@ class ApmQuaternionKey(java.lang.Enum['ApmQuaternionKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -577,9 +568,8 @@ class ApmQuaternionKey(java.lang.Enum['ApmQuaternionKey']):
         
             .. code-block: java
             
-            
-            for (ApmQuaternionKey c : ApmQuaternionKey.values())
-                System.out.println(c);
+            for (ApmQuaternionKey c : ApmQuaternionKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -711,7 +701,7 @@ class Euler(org.orekit.files.ccsds.section.CommentsContainer):
             Set the rotation order for Euler angles.
         
             Parameters:
-                eulerRotSeq (RotationOrder): order to be set
+                eulerRotSeq (:class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.RotationOrder?is`): order to be set
         
         
         """
@@ -768,8 +758,8 @@ class Euler(org.orekit.files.ccsds.section.CommentsContainer):
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
+                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
         
             Parameters:
                 version (double): format version
@@ -780,7 +770,7 @@ class Euler(org.orekit.files.ccsds.section.CommentsContainer):
 
 class EulerKey(java.lang.Enum['EulerKey']):
     """
-    public enum EulerKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.adm.apm.EulerKey`>
+    public enum EulerKey extends :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.adm.apm.EulerKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.adm.apm.ApmData` entries.
     
@@ -828,14 +818,14 @@ class EulerKey(java.lang.Enum['EulerKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -848,9 +838,8 @@ class EulerKey(java.lang.Enum['EulerKey']):
         
             .. code-block: java
             
-            
-            for (EulerKey c : EulerKey.values())
-                System.out.println(c);
+            for (EulerKey c : EulerKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -945,7 +934,7 @@ class Maneuver(org.orekit.files.ccsds.section.CommentsContainer):
             Set Coordinate system for the torque vector, for absolute frames.
         
             Parameters:
-                refFrameString (String): coordinate system for the torque vector, for absolute frames
+                refFrameString (:class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): coordinate system for the torque vector, for absolute frames
         
         
         """
@@ -971,8 +960,8 @@ class Maneuver(org.orekit.files.ccsds.section.CommentsContainer):
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
+                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
         
             Parameters:
                 version (double): format version
@@ -983,7 +972,7 @@ class Maneuver(org.orekit.files.ccsds.section.CommentsContainer):
 
 class ManeuverKey(java.lang.Enum['ManeuverKey']):
     """
-    public enum ManeuverKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.adm.apm.ManeuverKey`>
+    public enum ManeuverKey extends :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.adm.apm.ManeuverKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.adm.apm.Maneuver` entries.
     
@@ -1024,14 +1013,14 @@ class ManeuverKey(java.lang.Enum['ManeuverKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -1044,9 +1033,8 @@ class ManeuverKey(java.lang.Enum['ManeuverKey']):
         
             .. code-block: java
             
-            
-            for (ManeuverKey c : ManeuverKey.values())
-                System.out.println(c);
+            for (ManeuverKey c : ManeuverKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1068,7 +1056,7 @@ class SpacecraftParameters(org.orekit.files.ccsds.section.CommentsContainer):
     def __init__(self): ...
     def getI11(self) -> float:
         """
-            Get the moment of Inertia about the 1-axis (N.mÂ²).
+            Get the moment of Inertia about the 1-axis (N.m²).
         
             Returns:
                 the moment of Inertia about the 1-axis.
@@ -1078,7 +1066,7 @@ class SpacecraftParameters(org.orekit.files.ccsds.section.CommentsContainer):
         ...
     def getI12(self) -> float:
         """
-            Get the moment of Inertia about the 1 and 2 axes (N.mÂ²).
+            Get the moment of Inertia about the 1 and 2 axes (N.m²).
         
             Returns:
                 the moment of Inertia about the 1 and 2 axes.
@@ -1088,7 +1076,7 @@ class SpacecraftParameters(org.orekit.files.ccsds.section.CommentsContainer):
         ...
     def getI13(self) -> float:
         """
-            Get the moment of Inertia about the 1 and 3 axes (N.mÂ²).
+            Get the moment of Inertia about the 1 and 3 axes (N.m²).
         
             Returns:
                 the moment of Inertia about the 1 and 3 axes.
@@ -1098,7 +1086,7 @@ class SpacecraftParameters(org.orekit.files.ccsds.section.CommentsContainer):
         ...
     def getI22(self) -> float:
         """
-            Get the moment of Inertia about the 2-axis (N.mÂ²).
+            Get the moment of Inertia about the 2-axis (N.m²).
         
             Returns:
                 the moment of Inertia about the 2-axis.
@@ -1108,7 +1096,7 @@ class SpacecraftParameters(org.orekit.files.ccsds.section.CommentsContainer):
         ...
     def getI23(self) -> float:
         """
-            Get the moment of Inertia about the 2 and 3 axes (N.mÂ²).
+            Get the moment of Inertia about the 2 and 3 axes (N.m²).
         
             Returns:
                 the moment of Inertia about the 2 and 3 axes.
@@ -1118,7 +1106,7 @@ class SpacecraftParameters(org.orekit.files.ccsds.section.CommentsContainer):
         ...
     def getI33(self) -> float:
         """
-            Get the moment of Inertia about the 3-axis (N.mÂ²).
+            Get the moment of Inertia about the 3-axis (N.m²).
         
             Returns:
                 the moment of Inertia about the 3-axis.
@@ -1138,7 +1126,7 @@ class SpacecraftParameters(org.orekit.files.ccsds.section.CommentsContainer):
         ...
     def setI11(self, double: float) -> None:
         """
-            Set the moment of Inertia about the 1-axis (N.mÂ²).
+            Set the moment of Inertia about the 1-axis (N.m²).
         
             Parameters:
                 i11 (double): moment of Inertia about the 1-axis
@@ -1148,7 +1136,7 @@ class SpacecraftParameters(org.orekit.files.ccsds.section.CommentsContainer):
         ...
     def setI12(self, double: float) -> None:
         """
-            Set the moment of Inertia about the 1 and 2 axes (N.mÂ²).
+            Set the moment of Inertia about the 1 and 2 axes (N.m²).
         
             Parameters:
                 i12 (double): moment of Inertia about the 1 and 2 axes
@@ -1158,7 +1146,7 @@ class SpacecraftParameters(org.orekit.files.ccsds.section.CommentsContainer):
         ...
     def setI13(self, double: float) -> None:
         """
-            Set the moment of Inertia about the 1 and 3 axes (N.mÂ²).
+            Set the moment of Inertia about the 1 and 3 axes (N.m²).
         
             Parameters:
                 i13 (double): moment of Inertia about the 1 and 3 axes
@@ -1168,7 +1156,7 @@ class SpacecraftParameters(org.orekit.files.ccsds.section.CommentsContainer):
         ...
     def setI22(self, double: float) -> None:
         """
-            Set the moment of Inertia about the 2-axis (N.mÂ²).
+            Set the moment of Inertia about the 2-axis (N.m²).
         
             Parameters:
                 i22 (double): moment of Inertia about the 2-axis
@@ -1178,7 +1166,7 @@ class SpacecraftParameters(org.orekit.files.ccsds.section.CommentsContainer):
         ...
     def setI23(self, double: float) -> None:
         """
-            Set the moment of Inertia about the 2 and 3 axes (N.mÂ²).
+            Set the moment of Inertia about the 2 and 3 axes (N.m²).
         
             Parameters:
                 i23 (double): moment of Inertia about the 2 and 3 axes
@@ -1188,7 +1176,7 @@ class SpacecraftParameters(org.orekit.files.ccsds.section.CommentsContainer):
         ...
     def setI33(self, double: float) -> None:
         """
-            Set the moment of Inertia about the 3-axis (N.mÂ²).
+            Set the moment of Inertia about the 3-axis (N.m²).
         
             Parameters:
                 i33 (double): moment of Inertia about the 3-axis
@@ -1216,8 +1204,8 @@ class SpacecraftParameters(org.orekit.files.ccsds.section.CommentsContainer):
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
+                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
         
             Parameters:
                 version (double): format version
@@ -1228,7 +1216,7 @@ class SpacecraftParameters(org.orekit.files.ccsds.section.CommentsContainer):
 
 class SpacecraftParametersKey(java.lang.Enum['SpacecraftParametersKey']):
     """
-    public enum SpacecraftParametersKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.adm.apm.SpacecraftParametersKey`>
+    public enum SpacecraftParametersKey extends :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.adm.apm.SpacecraftParametersKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.adm.apm.SpacecraftParameters` entries.
     
@@ -1270,14 +1258,14 @@ class SpacecraftParametersKey(java.lang.Enum['SpacecraftParametersKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -1290,9 +1278,8 @@ class SpacecraftParametersKey(java.lang.Enum['SpacecraftParametersKey']):
         
             .. code-block: java
             
-            
-            for (SpacecraftParametersKey c : SpacecraftParametersKey.values())
-                System.out.println(c);
+            for (SpacecraftParametersKey c : SpacecraftParametersKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1472,8 +1459,8 @@ class SpinStabilized(org.orekit.files.ccsds.section.CommentsContainer):
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
+                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
         
             Parameters:
                 version (double): format version
@@ -1484,7 +1471,7 @@ class SpinStabilized(org.orekit.files.ccsds.section.CommentsContainer):
 
 class SpinStabilizedKey(java.lang.Enum['SpinStabilizedKey']):
     """
-    public enum SpinStabilizedKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.adm.apm.SpinStabilizedKey`>
+    public enum SpinStabilizedKey extends :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.adm.apm.SpinStabilizedKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.adm.apm.SpinStabilized` entries.
     
@@ -1529,14 +1516,14 @@ class SpinStabilizedKey(java.lang.Enum['SpinStabilizedKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.adm.apm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -1549,9 +1536,8 @@ class SpinStabilizedKey(java.lang.Enum['SpinStabilizedKey']):
         
             .. code-block: java
             
-            
-            for (SpinStabilizedKey c : SpinStabilizedKey.values())
-                System.out.println(c);
+            for (SpinStabilizedKey c : SpinStabilizedKey.values())
+                System.out.println(c);
             
         
             Returns:

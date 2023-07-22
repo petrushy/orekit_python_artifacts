@@ -54,7 +54,7 @@ class FieldOfView:
             :meth:`~org.orekit.geometry.fov.FieldOfView.getMargin` into account), which correspond to sign changes of the offset.
         
             Parameters:
-                lineOfSight (Vector3D): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
+                lineOfSight (:class:`~org.orekit.geometry.fov.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
                 angularRadius (double): target body angular radius
                 trigger (:class:`~org.orekit.propagation.events.VisibilityTrigger`): visibility trigger for spherical bodies
         
@@ -73,7 +73,7 @@ class FieldOfView:
             Find the direction on Field Of View Boundary closest to a line of sight.
         
             Parameters:
-                lineOfSight (Vector3D): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
+                lineOfSight (:class:`~org.orekit.geometry.fov.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
         
             Returns:
                 direction on Field Of View Boundary closest to a line of sight
@@ -84,7 +84,7 @@ class FieldOfView:
 
 class AbstractFieldOfView(FieldOfView):
     """
-    public abstract class AbstractFieldOfView extends Object implements :class:`~org.orekit.geometry.fov.FieldOfView`
+    public abstract class AbstractFieldOfView extends :class:`~org.orekit.geometry.fov.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.geometry.fov.FieldOfView`
     
         Abstract class representing a spacecraft sensor Field Of View.
     
@@ -112,7 +112,7 @@ class AbstractFieldOfView(FieldOfView):
 
 class PythonFieldOfView(FieldOfView):
     """
-    public class PythonFieldOfView extends Object implements :class:`~org.orekit.geometry.fov.FieldOfView`
+    public class PythonFieldOfView extends :class:`~org.orekit.geometry.fov.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.geometry.fov.FieldOfView`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -154,11 +154,11 @@ class PythonFieldOfView(FieldOfView):
             offset.
         
             Specified by:
-                :meth:`~org.orekit.geometry.fov.FieldOfView.offsetFromBoundary`Â in
-                interfaceÂ :class:`~org.orekit.geometry.fov.FieldOfView`
+                :meth:`~org.orekit.geometry.fov.FieldOfView.offsetFromBoundary` in
+                interface :class:`~org.orekit.geometry.fov.FieldOfView`
         
             Parameters:
-                lineOfSight (Vector3D): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
+                lineOfSight (:class:`~org.orekit.geometry.fov.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
                 angularRadius (double): target body angular radius
                 trigger (:class:`~org.orekit.propagation.events.VisibilityTrigger`): visibility trigger for spherical bodies
         
@@ -177,11 +177,11 @@ class PythonFieldOfView(FieldOfView):
             Find the direction on Field Of View Boundary closest to a line of sight.
         
             Specified by:
-                :meth:`~org.orekit.geometry.fov.FieldOfView.projectToBoundary`Â in
-                interfaceÂ :class:`~org.orekit.geometry.fov.FieldOfView`
+                :meth:`~org.orekit.geometry.fov.FieldOfView.projectToBoundary` in
+                interface :class:`~org.orekit.geometry.fov.FieldOfView`
         
             Parameters:
-                lineOfSight (Vector3D): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
+                lineOfSight (:class:`~org.orekit.geometry.fov.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
         
             Returns:
                 direction on Field Of View Boundary closest to a line of sight
@@ -253,7 +253,7 @@ class PolygonalFieldOfView(AbstractFieldOfView):
             :meth:`~org.orekit.geometry.fov.FieldOfView.getMargin` into account), which correspond to sign changes of the offset.
         
             Parameters:
-                lineOfSight (Vector3D): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
+                lineOfSight (:class:`~org.orekit.geometry.fov.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
                 angularRadius (double): target body angular radius
                 trigger (:class:`~org.orekit.propagation.events.VisibilityTrigger`): visibility trigger for spherical bodies
         
@@ -272,7 +272,7 @@ class PolygonalFieldOfView(AbstractFieldOfView):
             Find the direction on Field Of View Boundary closest to a line of sight.
         
             Parameters:
-                lineOfSight (Vector3D): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
+                lineOfSight (:class:`~org.orekit.geometry.fov.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
         
             Returns:
                 direction on Field Of View Boundary closest to a line of sight
@@ -319,7 +319,7 @@ class PythonAbstractFieldOfView(AbstractFieldOfView):
             offset.
         
             Parameters:
-                lineOfSight (Vector3D): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
+                lineOfSight (:class:`~org.orekit.geometry.fov.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
                 angularRadius (double): target body angular radius
                 trigger (:class:`~org.orekit.propagation.events.VisibilityTrigger`): visibility trigger for spherical bodies
         
@@ -338,7 +338,7 @@ class PythonAbstractFieldOfView(AbstractFieldOfView):
             Find the direction on Field Of View Boundary closest to a line of sight.
         
             Parameters:
-                lineOfSight (Vector3D): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
+                lineOfSight (:class:`~org.orekit.geometry.fov.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
         
             Returns:
                 direction on Field Of View Boundary closest to a line of sight
@@ -456,7 +456,7 @@ class CircularFieldOfView(SmoothFieldOfView):
             :meth:`~org.orekit.geometry.fov.FieldOfView.getMargin` into account), which correspond to sign changes of the offset.
         
             Parameters:
-                lineOfSight (Vector3D): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
+                lineOfSight (:class:`~org.orekit.geometry.fov.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
                 angularRadius (double): target body angular radius
                 trigger (:class:`~org.orekit.propagation.events.VisibilityTrigger`): visibility trigger for spherical bodies
         
@@ -475,7 +475,7 @@ class CircularFieldOfView(SmoothFieldOfView):
             Find the direction on Field Of View Boundary closest to a line of sight.
         
             Parameters:
-                lineOfSight (Vector3D): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
+                lineOfSight (:class:`~org.orekit.geometry.fov.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
         
             Returns:
                 direction on Field Of View Boundary closest to a line of sight
@@ -607,7 +607,7 @@ class EllipticalFieldOfView(SmoothFieldOfView):
             :meth:`~org.orekit.geometry.fov.FieldOfView.getMargin` into account), which correspond to sign changes of the offset.
         
             Parameters:
-                lineOfSight (Vector3D): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
+                lineOfSight (:class:`~org.orekit.geometry.fov.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
                 angularRadius (double): target body angular radius
                 trigger (:class:`~org.orekit.propagation.events.VisibilityTrigger`): visibility trigger for spherical bodies
         
@@ -626,7 +626,7 @@ class EllipticalFieldOfView(SmoothFieldOfView):
             Find the direction on Field Of View Boundary closest to a line of sight.
         
             Parameters:
-                lineOfSight (Vector3D): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
+                lineOfSight (:class:`~org.orekit.geometry.fov.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
         
             Returns:
                 direction on Field Of View Boundary closest to a line of sight
@@ -659,7 +659,7 @@ class PythonSmoothFieldOfView(SmoothFieldOfView):
             offset.
         
             Parameters:
-                lineOfSight (Vector3D): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
+                lineOfSight (:class:`~org.orekit.geometry.fov.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
                 angularRadius (double): target body angular radius
                 trigger (:class:`~org.orekit.propagation.events.VisibilityTrigger`): visibility trigger for spherical bodies
         
@@ -678,7 +678,7 @@ class PythonSmoothFieldOfView(SmoothFieldOfView):
             Find the direction on Field Of View Boundary closest to a line of sight.
         
             Parameters:
-                lineOfSight (Vector3D): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
+                lineOfSight (:class:`~org.orekit.geometry.fov.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
         
             Returns:
                 direction on Field Of View Boundary closest to a line of sight

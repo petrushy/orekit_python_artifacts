@@ -7,7 +7,7 @@ import typing
 
 class UnscentedEvolution:
     """
-    public class UnscentedEvolution extends Object
+    public class UnscentedEvolution extends :class:`~org.hipparchus.filtering.kalman.unscented.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Container for :class:`~org.hipparchus.filtering.kalman.unscented.UnscentedProcess` evolution data.
     
@@ -90,7 +90,7 @@ class UnscentedProcess(typing.Generic[_UnscentedProcess__T]):
         
             Parameters:
                 previousTime (double): time of the previous state
-                sigmaPoints (RealVector[]): sigma points
+                sigmaPoints (:class:`~org.hipparchus.filtering.kalman.unscented.https:.www.hipparchus.org.hipparchus`[]): sigma points
                 measurement (:class:`~org.hipparchus.filtering.kalman.unscented.UnscentedProcess`): measurement to process
         
             Returns:
@@ -105,9 +105,9 @@ class UnscentedProcess(typing.Generic[_UnscentedProcess__T]):
         
             Parameters:
                 measurement (:class:`~org.hipparchus.filtering.kalman.unscented.UnscentedProcess`): measurement to process
-                predictedMeasurement (RealVector): predicted measurement
-                predictedState (RealVector): predicted state
-                innovationCovarianceMatrix (RealMatrix): innovation covariance matrix
+                predictedMeasurement (:class:`~org.hipparchus.filtering.kalman.unscented.https:.www.hipparchus.org.hipparchus`): predicted measurement
+                predictedState (:class:`~org.hipparchus.filtering.kalman.unscented.https:.www.hipparchus.org.hipparchus`): predicted state
+                innovationCovarianceMatrix (:class:`~org.hipparchus.filtering.kalman.unscented.https:.www.hipparchus.org.hipparchus`): innovation covariance matrix
         
             Returns:
                 innovation brought by a measurement, may be null if measurement should be rejected

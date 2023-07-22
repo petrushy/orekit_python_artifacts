@@ -7,7 +7,7 @@ import typing
 
 class ClockCorrection:
     """
-    public class ClockCorrection extends Object
+    public class ClockCorrection extends :class:`~org.orekit.gnss.metric.messages.ssr.igm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Container for SSR clock correction data.
     
@@ -19,7 +19,7 @@ class ClockCorrection:
         """
             Get the delta clock C0.
         
-            The reference time t0 is SSR Epoch Time (IDF003) plus Â½ SSR Update Interval.
+            The reference time t0 is SSR Epoch Time (IDF003) plus ½ SSR Update Interval.
         
             Returns:
                 the delta clock C0 in seconds
@@ -31,7 +31,7 @@ class ClockCorrection:
         """
             Get the delta clock C1.
         
-            The reference time t0 is SSR Epoch Time (IDF003) plus Â½ SSR Update Interval.
+            The reference time t0 is SSR Epoch Time (IDF003) plus ½ SSR Update Interval.
         
             Returns:
                 the delta clock C1 in seconds
@@ -43,7 +43,7 @@ class ClockCorrection:
         """
             Get the delta clock C2.
         
-            The reference time t0 is SSR Epoch Time (IDF003) plus Â½ SSR Update Interval.
+            The reference time t0 is SSR Epoch Time (IDF003) plus ½ SSR Update Interval.
         
             Returns:
                 the delta clock C2 in seconds
@@ -54,7 +54,7 @@ class ClockCorrection:
 
 class CodeBias:
     """
-    public class CodeBias extends Object
+    public class CodeBias extends :class:`~org.orekit.gnss.metric.messages.ssr.igm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Container for code bias data.
     
@@ -85,7 +85,7 @@ class CodeBias:
 
 class OrbitCorrection:
     """
-    public class OrbitCorrection extends Object
+    public class OrbitCorrection extends :class:`~org.orekit.gnss.metric.messages.ssr.igm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Container for SSR orbit correction data.
     
@@ -97,7 +97,7 @@ class OrbitCorrection:
         """
             Get the along-track orbit correction for broadcast ephemeris.
         
-            The reference time t0 is SSR Epoch Time (IDF003) plus Â½ SSR Update Interval.
+            The reference time t0 is SSR Epoch Time (IDF003) plus ½ SSR Update Interval.
         
             Returns:
                 the along-track orbit correction for broadcast ephemeris in meters
@@ -109,7 +109,7 @@ class OrbitCorrection:
         """
             Get the cross-track orbit correction for broadcast ephemeris.
         
-            The reference time t0 is SSR Epoch Time (IDF003) plus Â½ SSR Update Interval.
+            The reference time t0 is SSR Epoch Time (IDF003) plus ½ SSR Update Interval.
         
             Returns:
                 the cross-track orbit correction for broadcast ephemeris
@@ -121,7 +121,7 @@ class OrbitCorrection:
         """
             Get the radial orbit correction for broadcast ephemeris.
         
-            The reference time t0 is SSR Epoch Time (IDF003) plus Â½ SSR Update Interval.
+            The reference time t0 is SSR Epoch Time (IDF003) plus ½ SSR Update Interval.
         
             Returns:
                 the radial orbit correction for broadcast ephemeris in meters
@@ -133,7 +133,7 @@ class OrbitCorrection:
         """
             Get the velocity of along-track orbit correction for broadcast ephemeris.
         
-            The reference time t0 is SSR Epoch Time (IDF003) plus Â½ SSR Update Interval.
+            The reference time t0 is SSR Epoch Time (IDF003) plus ½ SSR Update Interval.
         
             Returns:
                 the velocity of along-track orbit correction for broadcast ephemeris in m/s
@@ -145,7 +145,7 @@ class OrbitCorrection:
         """
             Get the velocity of cross-track orbit correction for broadcast ephemeris.
         
-            The reference time t0 is SSR Epoch Time (IDF003) plus Â½ SSR Update Interval.
+            The reference time t0 is SSR Epoch Time (IDF003) plus ½ SSR Update Interval.
         
             Returns:
                 the velocity of cross-track orbit correction for broadcast ephemeris in m/s
@@ -157,7 +157,7 @@ class OrbitCorrection:
         """
             Get the velocity of radial orbit correction for broadcast ephemeris.
         
-            The reference time t0 is SSR Epoch Time (IDF003) plus Â½ SSR Update Interval.
+            The reference time t0 is SSR Epoch Time (IDF003) plus ½ SSR Update Interval.
         
             Returns:
                 the velocity of Radial orbit correction for broadcast ephemeris in m/s
@@ -168,7 +168,7 @@ class OrbitCorrection:
 
 class PhaseBias:
     """
-    public class PhaseBias extends Object
+    public class PhaseBias extends :class:`~org.orekit.gnss.metric.messages.ssr.igm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Container for phase bias data.
     

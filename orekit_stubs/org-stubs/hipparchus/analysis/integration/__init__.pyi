@@ -148,7 +148,7 @@ class UnivariateIntegrator:
 _BaseAbstractFieldUnivariateIntegrator__T = typing.TypeVar('_BaseAbstractFieldUnivariateIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class BaseAbstractFieldUnivariateIntegrator(FieldUnivariateIntegrator[_BaseAbstractFieldUnivariateIntegrator__T], typing.Generic[_BaseAbstractFieldUnivariateIntegrator__T]):
     """
-    public abstract class BaseAbstractFieldUnivariateIntegrator<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object implements :class:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator`<T>
+    public abstract class BaseAbstractFieldUnivariateIntegrator<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.integration.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator`<T>
     
         Provide a default implementation for several generic functions.
     
@@ -204,8 +204,8 @@ class BaseAbstractFieldUnivariateIntegrator(FieldUnivariateIntegrator[_BaseAbstr
             Get the absolute accuracy.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator.getAbsoluteAccuracy`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator`
+                :meth:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator.getAbsoluteAccuracy` in
+                interface :class:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator`
         
             Returns:
                 the accuracy
@@ -218,8 +218,8 @@ class BaseAbstractFieldUnivariateIntegrator(FieldUnivariateIntegrator[_BaseAbstr
             Get the number of function evaluations of the last run of the integrator.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator.getEvaluations`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator`
+                :meth:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator.getEvaluations` in
+                interface :class:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator`
         
             Returns:
                 number of function evaluations
@@ -233,8 +233,8 @@ class BaseAbstractFieldUnivariateIntegrator(FieldUnivariateIntegrator[_BaseAbstr
             Get the number of iterations of the last run of the integrator.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator.getIterations`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator`
+                :meth:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator.getIterations` in
+                interface :class:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator`
         
             Returns:
                 number of iterations
@@ -247,8 +247,8 @@ class BaseAbstractFieldUnivariateIntegrator(FieldUnivariateIntegrator[_BaseAbstr
             Get the upper limit for the number of iterations.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator.getMaximalIterationCount`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator`
+                :meth:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator.getMaximalIterationCount` in
+                interface :class:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator`
         
             Returns:
                 the actual upper limit
@@ -261,8 +261,8 @@ class BaseAbstractFieldUnivariateIntegrator(FieldUnivariateIntegrator[_BaseAbstr
             Get the min limit for the number of iterations.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator.getMinimalIterationCount`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator`
+                :meth:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator.getMinimalIterationCount` in
+                interface :class:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator`
         
             Returns:
                 the actual min limit
@@ -275,8 +275,8 @@ class BaseAbstractFieldUnivariateIntegrator(FieldUnivariateIntegrator[_BaseAbstr
             Get the relative accuracy.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator.getRelativeAccuracy`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator`
+                :meth:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator.getRelativeAccuracy` in
+                interface :class:`~org.hipparchus.analysis.integration.FieldUnivariateIntegrator`
         
             Returns:
                 the accuracy
@@ -288,7 +288,7 @@ class BaseAbstractFieldUnivariateIntegrator(FieldUnivariateIntegrator[_BaseAbstr
 
 class BaseAbstractUnivariateIntegrator(UnivariateIntegrator):
     """
-    public abstract class BaseAbstractUnivariateIntegrator extends Object implements :class:`~org.hipparchus.analysis.integration.UnivariateIntegrator`
+    public abstract class BaseAbstractUnivariateIntegrator extends :class:`~org.hipparchus.analysis.integration.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.integration.UnivariateIntegrator`
     
         Provide a default implementation for several generic functions.
     """
@@ -341,8 +341,8 @@ class BaseAbstractUnivariateIntegrator(UnivariateIntegrator):
             Get the absolute accuracy.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.integration.UnivariateIntegrator.getAbsoluteAccuracy`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.integration.UnivariateIntegrator`
+                :meth:`~org.hipparchus.analysis.integration.UnivariateIntegrator.getAbsoluteAccuracy` in
+                interface :class:`~org.hipparchus.analysis.integration.UnivariateIntegrator`
         
             Returns:
                 the accuracy
@@ -355,8 +355,8 @@ class BaseAbstractUnivariateIntegrator(UnivariateIntegrator):
             Get the number of function evaluations of the last run of the integrator.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.integration.UnivariateIntegrator.getEvaluations`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.integration.UnivariateIntegrator`
+                :meth:`~org.hipparchus.analysis.integration.UnivariateIntegrator.getEvaluations` in
+                interface :class:`~org.hipparchus.analysis.integration.UnivariateIntegrator`
         
             Returns:
                 number of function evaluations
@@ -369,8 +369,8 @@ class BaseAbstractUnivariateIntegrator(UnivariateIntegrator):
             Get the number of iterations of the last run of the integrator.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.integration.UnivariateIntegrator.getIterations`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.integration.UnivariateIntegrator`
+                :meth:`~org.hipparchus.analysis.integration.UnivariateIntegrator.getIterations` in
+                interface :class:`~org.hipparchus.analysis.integration.UnivariateIntegrator`
         
             Returns:
                 number of iterations
@@ -383,8 +383,8 @@ class BaseAbstractUnivariateIntegrator(UnivariateIntegrator):
             Get the upper limit for the number of iterations.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.integration.UnivariateIntegrator.getMaximalIterationCount`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.integration.UnivariateIntegrator`
+                :meth:`~org.hipparchus.analysis.integration.UnivariateIntegrator.getMaximalIterationCount` in
+                interface :class:`~org.hipparchus.analysis.integration.UnivariateIntegrator`
         
             Returns:
                 the actual upper limit
@@ -397,8 +397,8 @@ class BaseAbstractUnivariateIntegrator(UnivariateIntegrator):
             Get the min limit for the number of iterations.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.integration.UnivariateIntegrator.getMinimalIterationCount`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.integration.UnivariateIntegrator`
+                :meth:`~org.hipparchus.analysis.integration.UnivariateIntegrator.getMinimalIterationCount` in
+                interface :class:`~org.hipparchus.analysis.integration.UnivariateIntegrator`
         
             Returns:
                 the actual min limit
@@ -411,8 +411,8 @@ class BaseAbstractUnivariateIntegrator(UnivariateIntegrator):
             Get the relative accuracy.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.integration.UnivariateIntegrator.getRelativeAccuracy`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.integration.UnivariateIntegrator`
+                :meth:`~org.hipparchus.analysis.integration.UnivariateIntegrator.getRelativeAccuracy` in
+                interface :class:`~org.hipparchus.analysis.integration.UnivariateIntegrator`
         
             Returns:
                 the accuracy

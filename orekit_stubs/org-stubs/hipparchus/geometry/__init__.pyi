@@ -14,7 +14,7 @@ import typing
 
 class LocalizedGeometryFormats(java.lang.Enum['LocalizedGeometryFormats'], org.hipparchus.exception.Localizable):
     """
-    public enum LocalizedGeometryFormats extends Enum<:class:`~org.hipparchus.geometry.LocalizedGeometryFormats`> implements Localizable
+    public enum LocalizedGeometryFormats extends :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.hipparchus.geometry.LocalizedGeometryFormats`> implements :class:`~org.hipparchus.geometry.https:.www.hipparchus.org.hipparchus`
     
         Enumeration for localized messages formats used in exceptions messages.
     
@@ -50,7 +50,8 @@ class LocalizedGeometryFormats(java.lang.Enum['LocalizedGeometryFormats'], org.h
         """
         
             Specified by:
-                 in interface 
+                :meth:`~org.hipparchus.geometry.https:.www.hipparchus.org.hipparchus` in
+                interface :class:`~org.hipparchus.geometry.https:.www.hipparchus.org.hipparchus`
         
         
         """
@@ -59,7 +60,8 @@ class LocalizedGeometryFormats(java.lang.Enum['LocalizedGeometryFormats'], org.h
         """
         
             Specified by:
-                 in interface 
+                :meth:`~org.hipparchus.geometry.https:.www.hipparchus.org.hipparchus` in
+                interface :class:`~org.hipparchus.geometry.https:.www.hipparchus.org.hipparchus`
         
         
         """
@@ -76,14 +78,14 @@ class LocalizedGeometryFormats(java.lang.Enum['LocalizedGeometryFormats'], org.h
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -110,7 +112,7 @@ class LocalizedGeometryFormats(java.lang.Enum['LocalizedGeometryFormats'], org.h
 _Point__S = typing.TypeVar('_Point__S', bound='Space')  # <S>
 class Point(java.io.Serializable, typing.Generic[_Point__S]):
     """
-    public interface Point<S extends :class:`~org.hipparchus.geometry.Space`> extends Serializable
+    public interface Point<S extends :class:`~org.hipparchus.geometry.Space`> extends :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         This interface represents a generic geometrical point.
     
@@ -141,7 +143,7 @@ class Point(java.io.Serializable, typing.Generic[_Point__S]):
 
 class Space(java.io.Serializable):
     """
-    public interface Space extends Serializable
+    public interface Space extends :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         This interface represents a generic space, with affine and vectorial counterparts.
     
@@ -163,7 +165,7 @@ class Space(java.io.Serializable):
 _VectorFormat__S = typing.TypeVar('_VectorFormat__S', bound=Space)  # <S>
 class VectorFormat(typing.Generic[_VectorFormat__S]):
     """
-    public abstract class VectorFormat<S extends :class:`~org.hipparchus.geometry.Space`> extends Object
+    public abstract class VectorFormat<S extends :class:`~org.hipparchus.geometry.Space`> extends :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Formats a vector in components list format "{x; y; ...}".
     
@@ -175,12 +177,15 @@ class VectorFormat(typing.Generic[_VectorFormat__S]):
         ; 1 } " will be parsed without error and the same vector will be returned. In the second case, however, the parse
         position after parsing will be just after the closing curly brace, i.e. just before the trailing space.
     
-        **Note:** using "," as a separator may interfere with the grouping separator of the default null for the current locale.
-        Thus it is advised to use a null instance with disabled grouping in such a case.
+        **Note:** using "," as a separator may interfere with the grouping separator of the default
+        :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is` for the current
+        locale. Thus it is advised to use a
+        :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is` instance with
+        disabled grouping in such a case.
     """
     DEFAULT_PREFIX: typing.ClassVar[str] = ...
     """
-    public static final String DEFAULT_PREFIX
+    public static final :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_PREFIX
     
         The default prefix: "{".
     
@@ -191,7 +196,7 @@ class VectorFormat(typing.Generic[_VectorFormat__S]):
     """
     DEFAULT_SUFFIX: typing.ClassVar[str] = ...
     """
-    public static final String DEFAULT_SUFFIX
+    public static final :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_SUFFIX
     
         The default suffix: "}".
     
@@ -202,7 +207,7 @@ class VectorFormat(typing.Generic[_VectorFormat__S]):
     """
     DEFAULT_SEPARATOR: typing.ClassVar[str] = ...
     """
-    public static final String DEFAULT_SEPARATOR
+    public static final :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_SEPARATOR
     
         The default separator: ", ".
     
@@ -217,8 +222,8 @@ class VectorFormat(typing.Generic[_VectorFormat__S]):
             Formats the coordinates of a :class:`~org.hipparchus.geometry.Vector` to produce a string.
         
             Parameters:
-                toAppendTo (StringBuffer): where the text is to be appended
-                pos (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
+                toAppendTo (:class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is`): where the text is to be appended
+                pos (:class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition?is`): On input: an alignment field, if desired. On output: the offsets of the alignment field
                 coordinates (double...): coordinates of the object to format.
         
             Returns:
@@ -234,7 +239,8 @@ class VectorFormat(typing.Generic[_VectorFormat__S]):
         """
             Get the set of locales for which point/vector formats are available.
         
-            This is the same set as the null set.
+            This is the same set as the
+            :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is` set.
         
             Returns:
                 available point/vector format locales.
@@ -368,7 +374,7 @@ class Vector(Point[_Vector__S], typing.Generic[_Vector__S]):
             Get a string representation of this vector.
         
             Parameters:
-                format (NumberFormat): the custom format for components
+                format (:class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is`): the custom format for components
         
             Returns:
                 a string representation of this vector

@@ -59,10 +59,12 @@ class EventHandler(typing.Generic[_EventHandler__T]):
             Reset the state prior to continue propagation.
         
             This method is called after the step handler has returned and before the next step is started, but only when
-            :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred` has itself returned the null indicator. It
-            allows the user to reset the state for the next step, without perturbing the step handler of the finishing step. If the
-            :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred` never returns the null indicator, this
-            function will never be called, and it is safe to simply return null.
+            :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred` has itself returned the
+            :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+            indicator. It allows the user to reset the state for the next step, without perturbing the step handler of the finishing
+            step. If the :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred` never returns the
+            :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+            indicator, this function will never be called, and it is safe to simply return null.
         
             The default implementation simply return its argument.
         
@@ -81,7 +83,7 @@ _FieldEventHandler__KK = typing.TypeVar('_FieldEventHandler__KK', bound=org.orek
 _FieldEventHandler__T = typing.TypeVar('_FieldEventHandler__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldEventHandler(typing.Generic[_FieldEventHandler__KK, _FieldEventHandler__T]):
     """
-    public interface FieldEventHandler<KK extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends CalculusFieldElement<T>>
+    public interface FieldEventHandler<KK extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends :class:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>>
     
         An interface defining how to override event handling behavior in the standard propagator eventing classes without
         requiring subclassing. In cases where one wishes to use anonymous classes rather than explicit subclassing this allows
@@ -100,9 +102,11 @@ class FieldEventHandler(typing.Generic[_FieldEventHandler__KK, _FieldEventHandle
 _ContinueOnEvent__T = typing.TypeVar('_ContinueOnEvent__T', bound=org.orekit.propagation.events.EventDetector)  # <T>
 class ContinueOnEvent(EventHandler[_ContinueOnEvent__T], typing.Generic[_ContinueOnEvent__T]):
     """
-    public class ContinueOnEvent<T extends :class:`~org.orekit.propagation.events.EventDetector`> extends Object implements :class:`~org.orekit.propagation.events.handlers.EventHandler`<T>
+    public class ContinueOnEvent<T extends :class:`~org.orekit.propagation.events.EventDetector`> extends :class:`~org.orekit.propagation.events.handlers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.handlers.EventHandler`<T>
     
-        Event handler which will always return null as a state.
+        Event handler which will always return
+        :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        as a state.
     
         Since:
             6.1
@@ -113,8 +117,8 @@ class ContinueOnEvent(EventHandler[_ContinueOnEvent__T], typing.Generic[_Continu
             Specific implementation of the eventOccurred interface.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.handlers.EventHandler`
+                :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred` in
+                interface :class:`~org.orekit.propagation.events.handlers.EventHandler`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): SpaceCraft state to be used in the evaluation
@@ -122,7 +126,9 @@ class ContinueOnEvent(EventHandler[_ContinueOnEvent__T], typing.Generic[_Continu
                 increasing (boolean): with the event occurred in an "increasing" or "decreasing" slope direction
         
             Returns:
-                null under all circumstances
+                
+                meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+                under all circumstances
         
         
         """
@@ -131,12 +137,21 @@ class ContinueOnEvent(EventHandler[_ContinueOnEvent__T], typing.Generic[_Continu
 _EventMultipleHandler__D = typing.TypeVar('_EventMultipleHandler__D', bound=org.orekit.propagation.events.EventDetector)  # <D>
 class EventMultipleHandler(EventHandler[_EventMultipleHandler__D], typing.Generic[_EventMultipleHandler__D]):
     """
-    public class EventMultipleHandler<D extends :class:`~org.orekit.propagation.events.EventDetector`> extends Object implements :class:`~org.orekit.propagation.events.handlers.EventHandler`<D>
+    public class EventMultipleHandler<D extends :class:`~org.orekit.propagation.events.EventDetector`> extends :class:`~org.orekit.propagation.events.handlers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.handlers.EventHandler`<D>
     
         Facade handlers that allows to use several handlers for one detector. Otherwise, the use of several detectors, each
         associated with one handler, that detect the same event can lead to non-deterministic behaviour. This handler manages
         several handlers. The action returned is based on a priority rule (see
-        :meth:`~org.orekit.propagation.events.handlers.EventMultipleHandler.eventOccurred`) : null > null > null > null > null
+        :meth:`~org.orekit.propagation.events.handlers.EventMultipleHandler.eventOccurred`) :
+        :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        >
+        :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        >
+        :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        >
+        :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        >
+        :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
     
         Since:
             10.3
@@ -152,12 +167,14 @@ class EventMultipleHandler(EventHandler[_EventMultipleHandler__D], typing.Generi
             MultipleEventHandler class implies a different behaviour on event detections than with other handlers : Without the
             MultipleEventHandler, there is a total order on event occurrences. Handlers H1, H2, ... that are associated with
             different instances of :class:`~org.orekit.propagation.events.AbstractDetector` are successively called and Action from
-            H1 can prevent H2 from happening if H1 returned null. With the MultipleEventHandler class, when event E occurs, all
-            methods eventOccurred of Handlers H1, H2... from MultiEventHandler attributes are called, then Action is decided.
+            H1 can prevent H2 from happening if H1 returned
+            :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`.
+            With the MultipleEventHandler class, when event E occurs, all methods eventOccurred of Handlers H1, H2... from
+            MultiEventHandler attributes are called, then Action is decided.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.handlers.EventHandler`
+                :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred` in
+                interface :class:`~org.orekit.propagation.events.handlers.EventHandler`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): SpaceCraft state to be used in the evaluation
@@ -183,8 +200,8 @@ class EventMultipleHandler(EventHandler[_EventMultipleHandler__D], typing.Generi
             All handlers' init methods are successively called, the order method is the order in which handlers are added
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.handlers.EventHandler.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.handlers.EventHandler`
+                :meth:`~org.orekit.propagation.events.handlers.EventHandler.init` in
+                interface :class:`~org.orekit.propagation.events.handlers.EventHandler`
         
             Parameters:
                 initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial state
@@ -198,14 +215,15 @@ class EventMultipleHandler(EventHandler[_EventMultipleHandler__D], typing.Generi
         """
             Reset the state prior to continue propagation.
         
-            All handlers that return null when calling
-            :meth:`~org.orekit.propagation.events.handlers.EventMultipleHandler.eventOccurred` are saved in resetStateHandlers.
-            Their methods resetState are successively called. The order for calling resetState methods is the order in which
-            handlers are added.
+            All handlers that return
+            :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+            when calling :meth:`~org.orekit.propagation.events.handlers.EventMultipleHandler.eventOccurred` are saved in
+            resetStateHandlers. Their methods resetState are successively called. The order for calling resetState methods is the
+            order in which handlers are added.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.handlers.EventHandler.resetState`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.handlers.EventHandler`
+                :meth:`~org.orekit.propagation.events.handlers.EventHandler.resetState` in
+                interface :class:`~org.orekit.propagation.events.handlers.EventHandler`
         
             Parameters:
                 detector (:class:`~org.orekit.propagation.events.handlers.EventMultipleHandler`): object with appropriate type that can be used in determining correct return state
@@ -223,9 +241,11 @@ _FieldContinueOnEvent__KK = typing.TypeVar('_FieldContinueOnEvent__KK', bound=or
 _FieldContinueOnEvent__T = typing.TypeVar('_FieldContinueOnEvent__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldContinueOnEvent(FieldEventHandler[_FieldContinueOnEvent__KK, _FieldContinueOnEvent__T], typing.Generic[_FieldContinueOnEvent__KK, _FieldContinueOnEvent__T]):
     """
-    public class FieldContinueOnEvent<KK extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<KK, T>
+    public class FieldContinueOnEvent<KK extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends :class:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.handlers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<KK, T>
     
-        Event handler which will always return null as a state.
+        Event handler which will always return
+        :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        as a state.
     """
     def __init__(self): ...
     def eventOccurred(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldContinueOnEvent__T], kK: _FieldContinueOnEvent__KK, boolean: bool) -> org.hipparchus.ode.events.Action: ...
@@ -236,9 +256,10 @@ _FieldRecordAndContinue__T = typing.TypeVar('_FieldRecordAndContinue__T', bound=
 _FieldRecordAndContinue__E = typing.TypeVar('_FieldRecordAndContinue__E', bound=org.hipparchus.CalculusFieldElement)  # <E>
 class FieldRecordAndContinue(FieldEventHandler[_FieldRecordAndContinue__T, _FieldRecordAndContinue__E], typing.Generic[_FieldRecordAndContinue__T, _FieldRecordAndContinue__E]):
     """
-    public class FieldRecordAndContinue<T extends :class:`~org.orekit.propagation.events.FieldEventDetector`<E>, E extends CalculusFieldElement<E>> extends Object implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<T, E>
+    public class FieldRecordAndContinue<T extends :class:`~org.orekit.propagation.events.FieldEventDetector`<E>, E extends :class:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<E>> extends :class:`~org.orekit.propagation.events.handlers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<T, E>
     
-        Handler that will record every time an event occurs and always return null.
+        Handler that will record every time an event occurs and always return
+        :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`.
     
         As this handler stores all observed events it may consume large amounts of memory depending on the duration of
         propagation and the frequency of events.
@@ -271,11 +292,15 @@ _FieldStopOnDecreasing__KK = typing.TypeVar('_FieldStopOnDecreasing__KK', bound=
 _FieldStopOnDecreasing__T = typing.TypeVar('_FieldStopOnDecreasing__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldStopOnDecreasing(FieldEventHandler[_FieldStopOnDecreasing__KK, _FieldStopOnDecreasing__T], typing.Generic[_FieldStopOnDecreasing__KK, _FieldStopOnDecreasing__T]):
     """
-    public class FieldStopOnDecreasing<KK extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<KK, T>
+    public class FieldStopOnDecreasing<KK extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends :class:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.handlers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<KK, T>
     
         Handle a detection event and choose what to do next.
     
-        KKhe implementation behavior is to null propagation when ascending and to null propagation when descending.
+        KKhe implementation behavior is to
+        :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation when ascending and to
+        :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation when descending.
     """
     def __init__(self): ...
     def eventOccurred(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldStopOnDecreasing__T], kK: _FieldStopOnDecreasing__KK, boolean: bool) -> org.hipparchus.ode.events.Action: ...
@@ -284,9 +309,11 @@ _FieldStopOnEvent__KK = typing.TypeVar('_FieldStopOnEvent__KK', bound=org.orekit
 _FieldStopOnEvent__T = typing.TypeVar('_FieldStopOnEvent__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldStopOnEvent(FieldEventHandler[_FieldStopOnEvent__KK, _FieldStopOnEvent__T], typing.Generic[_FieldStopOnEvent__KK, _FieldStopOnEvent__T]):
     """
-    public class FieldStopOnEvent<KK extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<KK, T>
+    public class FieldStopOnEvent<KK extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends :class:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.handlers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<KK, T>
     
-        Event handler which will always return null as a state.
+        Event handler which will always return
+        :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        as a state.
     """
     def __init__(self): ...
     def eventOccurred(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldStopOnEvent__T], kK: _FieldStopOnEvent__KK, boolean: bool) -> org.hipparchus.ode.events.Action: ...
@@ -295,11 +322,15 @@ _FieldStopOnIncreasing__KK = typing.TypeVar('_FieldStopOnIncreasing__KK', bound=
 _FieldStopOnIncreasing__T = typing.TypeVar('_FieldStopOnIncreasing__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldStopOnIncreasing(FieldEventHandler[_FieldStopOnIncreasing__KK, _FieldStopOnIncreasing__T], typing.Generic[_FieldStopOnIncreasing__KK, _FieldStopOnIncreasing__T]):
     """
-    public class FieldStopOnIncreasing<KK extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<KK, T>
+    public class FieldStopOnIncreasing<KK extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends :class:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.handlers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<KK, T>
     
         Handle a detection event and choose what to do next.
     
-        The implementation behavior is to null propagation when descending and to null propagation when ascending.
+        The implementation behavior is to
+        :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation when descending and to
+        :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation when ascending.
     """
     def __init__(self): ...
     def eventOccurred(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldStopOnIncreasing__T], kK: _FieldStopOnIncreasing__KK, boolean: bool) -> org.hipparchus.ode.events.Action: ...
@@ -307,7 +338,7 @@ class FieldStopOnIncreasing(FieldEventHandler[_FieldStopOnIncreasing__KK, _Field
 _PythonEventHandler__T = typing.TypeVar('_PythonEventHandler__T', bound=org.orekit.propagation.events.EventDetector)  # <T>
 class PythonEventHandler(EventHandler[_PythonEventHandler__T], typing.Generic[_PythonEventHandler__T]):
     """
-    public class PythonEventHandler<T extends :class:`~org.orekit.propagation.events.EventDetector`> extends Object implements :class:`~org.orekit.propagation.events.handlers.EventHandler`<T>
+    public class PythonEventHandler<T extends :class:`~org.orekit.propagation.events.EventDetector`> extends :class:`~org.orekit.propagation.events.handlers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.handlers.EventHandler`<T>
     
         This interface represents space-dynamics aware events detectors.
     
@@ -331,8 +362,8 @@ class PythonEventHandler(EventHandler[_PythonEventHandler__T], typing.Generic[_P
             which would have potential additional data to allow the implementing class to determine the correct return state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.handlers.EventHandler`
+                :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred` in
+                interface :class:`~org.orekit.propagation.events.handlers.EventHandler`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): SpaceCraft state to be used in the evaluation
@@ -360,8 +391,8 @@ class PythonEventHandler(EventHandler[_PythonEventHandler__T], typing.Generic[_P
             The default implementation does nothing
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.handlers.EventHandler.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.handlers.EventHandler`
+                :meth:`~org.orekit.propagation.events.handlers.EventHandler.init` in
+                interface :class:`~org.orekit.propagation.events.handlers.EventHandler`
         
             Parameters:
                 initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial state
@@ -395,14 +426,16 @@ class PythonEventHandler(EventHandler[_PythonEventHandler__T], typing.Generic[_P
             Reset the state prior to continue propagation.
         
             This method is called after the step handler has returned and before the next step is started, but only when
-            :meth:`~org.orekit.propagation.events.handlers.PythonEventHandler.eventOccurred` has itself returned the null indicator.
-            It allows the user to reset the state for the next step, without perturbing the step handler of the finishing step. If
-            the :meth:`~org.orekit.propagation.events.handlers.PythonEventHandler.eventOccurred` never returns the null indicator,
-            this function will never be called, and it is safe to simply return null.
+            :meth:`~org.orekit.propagation.events.handlers.PythonEventHandler.eventOccurred` has itself returned the
+            :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+            indicator. It allows the user to reset the state for the next step, without perturbing the step handler of the finishing
+            step. If the :meth:`~org.orekit.propagation.events.handlers.PythonEventHandler.eventOccurred` never returns the
+            :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+            indicator, this function will never be called, and it is safe to simply return null.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.handlers.EventHandler.resetState`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.handlers.EventHandler`
+                :meth:`~org.orekit.propagation.events.handlers.EventHandler.resetState` in
+                interface :class:`~org.orekit.propagation.events.handlers.EventHandler`
         
             Parameters:
                 detector (:class:`~org.orekit.propagation.events.handlers.PythonEventHandler`): object with appropriate type that can be used in determining correct return state
@@ -422,7 +455,7 @@ _PythonFieldEventHandler__KK = typing.TypeVar('_PythonFieldEventHandler__KK', bo
 _PythonFieldEventHandler__T = typing.TypeVar('_PythonFieldEventHandler__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldEventHandler(FieldEventHandler[_PythonFieldEventHandler__KK, _PythonFieldEventHandler__T], typing.Generic[_PythonFieldEventHandler__KK, _PythonFieldEventHandler__T]):
     """
-    public class PythonFieldEventHandler<KK extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<KK, T>
+    public class PythonFieldEventHandler<KK extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends :class:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.handlers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<KK, T>
     """
     def __init__(self): ...
     def eventOccurred(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldEventHandler__T], kK: _PythonFieldEventHandler__KK, boolean: bool) -> org.hipparchus.ode.events.Action: ...
@@ -456,9 +489,10 @@ _RecordAndContinue__Event__T = typing.TypeVar('_RecordAndContinue__Event__T')  #
 _RecordAndContinue__T = typing.TypeVar('_RecordAndContinue__T', bound=org.orekit.propagation.events.EventDetector)  # <T>
 class RecordAndContinue(EventHandler[_RecordAndContinue__T], typing.Generic[_RecordAndContinue__T]):
     """
-    public class RecordAndContinue<T extends :class:`~org.orekit.propagation.events.EventDetector`> extends Object implements :class:`~org.orekit.propagation.events.handlers.EventHandler`<T>
+    public class RecordAndContinue<T extends :class:`~org.orekit.propagation.events.EventDetector`> extends :class:`~org.orekit.propagation.events.handlers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.handlers.EventHandler`<T>
     
-        Handler that will record every time an event occurs and always return null.
+        Handler that will record every time an event occurs and always return
+        :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`.
     
         As this handler stores all observed events it may consume large amounts of memory depending on the duration of
         propagation and the frequency of events.
@@ -481,8 +515,8 @@ class RecordAndContinue(EventHandler[_RecordAndContinue__T], typing.Generic[_Rec
             which would have potential additional data to allow the implementing class to determine the correct return state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.handlers.EventHandler`
+                :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred` in
+                interface :class:`~org.orekit.propagation.events.handlers.EventHandler`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): SpaceCraft state to be used in the evaluation
@@ -505,11 +539,15 @@ class RecordAndContinue(EventHandler[_RecordAndContinue__T], typing.Generic[_Rec
 _StopOnDecreasing__T = typing.TypeVar('_StopOnDecreasing__T', bound=org.orekit.propagation.events.EventDetector)  # <T>
 class StopOnDecreasing(EventHandler[_StopOnDecreasing__T], typing.Generic[_StopOnDecreasing__T]):
     """
-    public class StopOnDecreasing<T extends :class:`~org.orekit.propagation.events.EventDetector`> extends Object implements :class:`~org.orekit.propagation.events.handlers.EventHandler`<T>
+    public class StopOnDecreasing<T extends :class:`~org.orekit.propagation.events.EventDetector`> extends :class:`~org.orekit.propagation.events.handlers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.handlers.EventHandler`<T>
     
         Handle a detection event and choose what to do next.
     
-        The implementation behavior is to null propagation when ascending and to null propagation when descending.
+        The implementation behavior is to
+        :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation when ascending and to
+        :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation when descending.
     
         Since:
             6.1
@@ -519,11 +557,15 @@ class StopOnDecreasing(EventHandler[_StopOnDecreasing__T], typing.Generic[_StopO
         """
             Handle a detection event and choose what to do next.
         
-            The implementation behavior is to null propagation when ascending and to null propagation when descending.
+            The implementation behavior is to
+            :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+            propagation when ascending and to
+            :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+            propagation when descending.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.handlers.EventHandler`
+                :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred` in
+                interface :class:`~org.orekit.propagation.events.handlers.EventHandler`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information : date, kinematics, attitude
@@ -531,7 +573,10 @@ class StopOnDecreasing(EventHandler[_StopOnDecreasing__T], typing.Generic[_StopO
                 increasing (boolean): if true, the value of the switching function increases when times increases around event
         
             Returns:
-                null or null
+                
+                meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+                or
+                :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
         
         
         """
@@ -540,9 +585,11 @@ class StopOnDecreasing(EventHandler[_StopOnDecreasing__T], typing.Generic[_StopO
 _StopOnEvent__T = typing.TypeVar('_StopOnEvent__T', bound=org.orekit.propagation.events.EventDetector)  # <T>
 class StopOnEvent(EventHandler[_StopOnEvent__T], typing.Generic[_StopOnEvent__T]):
     """
-    public class StopOnEvent<T extends :class:`~org.orekit.propagation.events.EventDetector`> extends Object implements :class:`~org.orekit.propagation.events.handlers.EventHandler`<T>
+    public class StopOnEvent<T extends :class:`~org.orekit.propagation.events.EventDetector`> extends :class:`~org.orekit.propagation.events.handlers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.handlers.EventHandler`<T>
     
-        Event handler which will always return null as a state.
+        Event handler which will always return
+        :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        as a state.
     
         Since:
             6.1
@@ -553,8 +600,8 @@ class StopOnEvent(EventHandler[_StopOnEvent__T], typing.Generic[_StopOnEvent__T]
             Specific implementation of the eventOccurred interface.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.handlers.EventHandler`
+                :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred` in
+                interface :class:`~org.orekit.propagation.events.handlers.EventHandler`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): SpaceCraft state to be used in the evaluation
@@ -562,7 +609,9 @@ class StopOnEvent(EventHandler[_StopOnEvent__T], typing.Generic[_StopOnEvent__T]
                 increasing (boolean): with the event occurred in an "increasing" or "decreasing" slope direction
         
             Returns:
-                null under all circumstances
+                
+                meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+                under all circumstances
         
         
         """
@@ -571,11 +620,15 @@ class StopOnEvent(EventHandler[_StopOnEvent__T], typing.Generic[_StopOnEvent__T]
 _StopOnIncreasing__T = typing.TypeVar('_StopOnIncreasing__T', bound=org.orekit.propagation.events.EventDetector)  # <T>
 class StopOnIncreasing(EventHandler[_StopOnIncreasing__T], typing.Generic[_StopOnIncreasing__T]):
     """
-    public class StopOnIncreasing<T extends :class:`~org.orekit.propagation.events.EventDetector`> extends Object implements :class:`~org.orekit.propagation.events.handlers.EventHandler`<T>
+    public class StopOnIncreasing<T extends :class:`~org.orekit.propagation.events.EventDetector`> extends :class:`~org.orekit.propagation.events.handlers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.handlers.EventHandler`<T>
     
         Handle a detection event and choose what to do next.
     
-        The implementation behavior is to null propagation when descending and to null propagation when ascending.
+        The implementation behavior is to
+        :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation when descending and to
+        :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation when ascending.
     
         Since:
             6.1
@@ -585,11 +638,15 @@ class StopOnIncreasing(EventHandler[_StopOnIncreasing__T], typing.Generic[_StopO
         """
             Handle a detection event and choose what to do next.
         
-            The implementation behavior is to null propagation when descending and to null propagation when ascending.
+            The implementation behavior is to
+            :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+            propagation when descending and to
+            :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+            propagation when ascending.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.handlers.EventHandler`
+                :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred` in
+                interface :class:`~org.orekit.propagation.events.handlers.EventHandler`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information : date, kinematics, attitude
@@ -597,7 +654,10 @@ class StopOnIncreasing(EventHandler[_StopOnIncreasing__T], typing.Generic[_StopO
                 increasing (boolean): if true, the value of the switching function increases when times increases around event
         
             Returns:
-                null or null
+                
+                meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+                or
+                :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
         
         
         """

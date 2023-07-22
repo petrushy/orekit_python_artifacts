@@ -5,7 +5,7 @@ import typing
 
 class DefaultDataContextPlugin(com.sun.source.util.Plugin, com.sun.source.util.TaskListener):
     """
-    @SupportedAnnotationTypes("org.orekit.annotation.DefaultDataContext") @SupportedSourceVersion(RELEASE_8) public class DefaultDataContextPlugin extends Object implements com.sun.source.util.Plugin, com.sun.source.util.TaskListener
+    :class:`~org.orekit.compiler.plugin.https:.docs.oracle.com.javase.8.docs.api.javax.annotation.processing.SupportedAnnotationTypes?is`("org.orekit.annotation.DefaultDataContext") :class:`~org.orekit.compiler.plugin.https:.docs.oracle.com.javase.8.docs.api.javax.annotation.processing.SupportedSourceVersion?is`(:meth:`~org.orekit.compiler.plugin.https:.docs.oracle.com.javase.8.docs.api.javax.lang.model.SourceVersion.html?is`) public class DefaultDataContextPlugin extends :class:`~org.orekit.compiler.plugin.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements com.sun.source.util.Plugin, com.sun.source.util.TaskListener
     
         Processes :class:`~org.orekit.annotation.DefaultDataContext` to issue warnings at compile time.
     

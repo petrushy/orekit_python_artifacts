@@ -14,7 +14,7 @@ import typing
 
 class DiskGenerator(org.hipparchus.geometry.enclosing.SupportBallGenerator['Euclidean2D', 'Vector2D']):
     """
-    public class DiskGenerator extends Object implements :class:`~org.hipparchus.geometry.enclosing.SupportBallGenerator`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`,:class:`~org.hipparchus.geometry.euclidean.twod.Vector2D`>
+    public class DiskGenerator extends :class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.enclosing.SupportBallGenerator`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`,:class:`~org.hipparchus.geometry.euclidean.twod.Vector2D`>
     
         Class generating an enclosing ball from its support points.
     """
@@ -23,7 +23,7 @@ class DiskGenerator(org.hipparchus.geometry.enclosing.SupportBallGenerator['Eucl
 
 class Euclidean2D(java.io.Serializable, org.hipparchus.geometry.Space):
     """
-    public class Euclidean2D extends Object implements Serializable, :class:`~org.hipparchus.geometry.Space`
+    public class Euclidean2D extends :class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.hipparchus.geometry.Space`
     
         This class implements a two-dimensional space.
     
@@ -74,9 +74,10 @@ class Euclidean2D(java.io.Serializable, org.hipparchus.geometry.Space):
 _FieldVector2D__T = typing.TypeVar('_FieldVector2D__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldVector2D(typing.Generic[_FieldVector2D__T]):
     """
-    public class FieldVector2D<T extends CalculusFieldElement<T>> extends Object
+    public class FieldVector2D<T extends :class:`~org.hipparchus.geometry.euclidean.twod.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
-        This class is a re-implementation of :class:`~org.hipparchus.geometry.euclidean.twod.Vector2D` using null.
+        This class is a re-implementation of :class:`~org.hipparchus.geometry.euclidean.twod.Vector2D` using
+        :class:`~org.hipparchus.geometry.euclidean.twod.https:.www.hipparchus.org.hipparchus`.
     
         Instance of this class are guaranteed to be immutable.
     
@@ -458,6 +459,7 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
                 the dot product this.v
         
             Also see:
+                :meth:`~org.hipparchus.geometry.euclidean.twod.https:.www.hipparchus.org.hipparchus`
         
         
         """
@@ -468,17 +470,19 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
         """
             Test for the equality of two 2D vectors.
         
-            If all coordinates of two 2D vectors are exactly the same, and none of their null are :code:`NaN`, the two 2D vectors
+            If all coordinates of two 2D vectors are exactly the same, and none of their
+            :meth:`~org.hipparchus.geometry.euclidean.twod.https:.www.hipparchus.org.hipparchus` are :code:`NaN`, the two 2D vectors
             are considered to be equal.
         
             :code:`NaN` coordinates are considered to affect globally the vector and be equals to each other - i.e, if either (or
             all) real part of the coordinates of the 3D vector are :code:`NaN`, the 2D vector is :code:`NaN`.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                other (Object): Object to test for equality to this
+                other (:class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality to this
         
             Returns:
                 true if two 2D vector objects are equal, false if object is null, not an instance of FieldVector2D, or not equal to this
@@ -494,7 +498,7 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
             Get opposite of the first canonical vector (coordinates: -1).
         
             Parameters:
-                field (Field<T> field): field for the components
+                field (:class:`~org.hipparchus.geometry.euclidean.twod.https:.www.hipparchus.org.hipparchus`<T> field): field for the components
         
             Returns:
                 a new vector
@@ -509,7 +513,7 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
             Get opposite of the second canonical vector (coordinates: 0, -1).
         
             Parameters:
-                field (Field<T> field): field for the components
+                field (:class:`~org.hipparchus.geometry.euclidean.twod.https:.www.hipparchus.org.hipparchus`<T> field): field for the components
         
             Returns:
                 a new vector
@@ -524,7 +528,7 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
             Get a vector with all coordinates set to NaN.
         
             Parameters:
-                field (Field<T> field): field for the components
+                field (:class:`~org.hipparchus.geometry.euclidean.twod.https:.www.hipparchus.org.hipparchus`<T> field): field for the components
         
             Returns:
                 a new vector
@@ -539,7 +543,7 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
             Get a vector with all coordinates set to negative infinity.
         
             Parameters:
-                field (Field<T> field): field for the components
+                field (:class:`~org.hipparchus.geometry.euclidean.twod.https:.www.hipparchus.org.hipparchus`<T> field): field for the components
         
             Returns:
                 a new vector
@@ -594,7 +598,7 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
             Get first canonical vector (coordinates: 1, 0).
         
             Parameters:
-                field (Field<T> field): field for the components
+                field (:class:`~org.hipparchus.geometry.euclidean.twod.https:.www.hipparchus.org.hipparchus`<T> field): field for the components
         
             Returns:
                 a new vector
@@ -609,7 +613,7 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
             Get second canonical vector (coordinates: 0, 1).
         
             Parameters:
-                field (Field<T> field): field for the components
+                field (:class:`~org.hipparchus.geometry.euclidean.twod.https:.www.hipparchus.org.hipparchus`<T> field): field for the components
         
             Returns:
                 a new vector
@@ -624,7 +628,7 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
             Get a vector with all coordinates set to positive infinity.
         
             Parameters:
-                field (Field<T> field): field for the components
+                field (:class:`~org.hipparchus.geometry.euclidean.twod.https:.www.hipparchus.org.hipparchus`<T> field): field for the components
         
             Returns:
                 a new vector
@@ -665,7 +669,7 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
             Get null vector (coordinates: 0, 0).
         
             Parameters:
-                field (Field<T> field): field for the components
+                field (:class:`~org.hipparchus.geometry.euclidean.twod.https:.www.hipparchus.org.hipparchus`<T> field): field for the components
         
             Returns:
                 a new vector
@@ -680,7 +684,8 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
             All NaN values have the same hash code.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a hash code value for this object
@@ -755,6 +760,7 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
                 vector coordinates
         
             Also see:
+                :meth:`~org.hipparchus.geometry.euclidean.twod.FieldVector2D.FieldVector2D`
         
         
         """
@@ -765,7 +771,8 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
             Get a string representation of this vector.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a string representation of this vector
@@ -778,7 +785,7 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
             Get a string representation of this vector.
         
             Parameters:
-                format (NumberFormat): the custom format for components
+                format (:class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is`): the custom format for components
         
             Returns:
                 a string representation of this vector
@@ -799,7 +806,7 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
 
 class Line(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean2D], org.hipparchus.geometry.partitioning.Embedding[Euclidean2D, org.hipparchus.geometry.euclidean.oned.Euclidean1D]):
     """
-    public class Line extends Object implements :class:`~org.hipparchus.geometry.partitioning.Hyperplane`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`>, :class:`~org.hipparchus.geometry.partitioning.Embedding`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`,:class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`>
+    public class Line extends :class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.partitioning.Hyperplane`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`>, :class:`~org.hipparchus.geometry.partitioning.Embedding`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`,:class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`>
     
         This class represents an oriented line in the 2D plane.
     
@@ -844,8 +851,8 @@ class Line(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean2D], org.hip
             are shared (except for immutable objects).
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.copySelf`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.copySelf` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Returns:
                 a new hyperplane, copy of the instance
@@ -874,8 +881,8 @@ class Line(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean2D], org.hip
             Build a sub-hyperplane covering nothing.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.emptyHyperplane`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.emptyHyperplane` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Returns:
                 a sub-hyperplane covering nothing
@@ -927,8 +934,8 @@ class Line(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean2D], org.hip
             the hyperplane, and it is negative if the point is on the other side, according to the hyperplane natural orientation.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.getOffset`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.getOffset` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Parameters:
                 point (:class:`~org.hipparchus.geometry.Point`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`> point): point to check
@@ -992,8 +999,8 @@ class Line(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean2D], org.hip
             Get the tolerance below which points are considered to belong to the hyperplane.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.getTolerance`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.getTolerance` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Returns:
                 tolerance below which points are considered to belong to the hyperplane
@@ -1102,8 +1109,8 @@ class Line(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean2D], org.hip
             Build a sub-hyperplane covering the whole hyperplane.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.wholeHyperplane`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.wholeHyperplane` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Returns:
                 a sub-hyperplane covering the whole hyperplane
@@ -1116,8 +1123,8 @@ class Line(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean2D], org.hip
             Build a region covering the whole space.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.wholeSpace`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.wholeSpace` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Returns:
                 a region containing the instance (really a :class:`~org.hipparchus.geometry.euclidean.twod.PolygonsSet` instance)
@@ -1171,7 +1178,7 @@ class PolygonsSet(org.hipparchus.geometry.partitioning.AbstractRegion[Euclidean2
 
 class Segment:
     """
-    public class Segment extends Object
+    public class Segment extends :class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Simple container for a two-points segment.
     """
@@ -1275,7 +1282,7 @@ class SubLine(org.hipparchus.geometry.partitioning.AbstractSubHyperplane[Euclide
 
 class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D]):
     """
-    public class Vector2D extends Object implements :class:`~org.hipparchus.geometry.Vector`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`>
+    public class Vector2D extends :class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.Vector`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`>
     
         This class represents a 2D vector.
     
@@ -1497,10 +1504,11 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D]):
             :meth:`~org.hipparchus.geometry.euclidean.twod.Vector2D.NaN`.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                other (Object): Object to test for equality to this
+                other (:class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality to this
         
             Returns:
                 true if two 2D vector objects are equal, false if object is null, not an instance of Vector2D, or not equal to this
@@ -1522,7 +1530,7 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D]):
             returns :code:`false` despite the instance is checked against itself.
         
             Parameters:
-                other (Object): Object to test for equality to this
+                other (:class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality to this
         
             Returns:
                 true if two 2D vector objects are equal, false if object is null, not an instance of Vector2D, or not equal to this
@@ -1645,7 +1653,8 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D]):
             All NaN values have the same hash code.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a hash code value for this object
@@ -1741,6 +1750,7 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D]):
                 vector coordinates
         
             Also see:
+                :meth:`~org.hipparchus.geometry.euclidean.twod.Vector2D.Vector2D`
         
         
         """
@@ -1751,7 +1761,8 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D]):
             Get a string representation of this vector.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a string representation of this vector
@@ -1767,7 +1778,7 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D]):
                 :meth:`~org.hipparchus.geometry.Vector.toString` in interface :class:`~org.hipparchus.geometry.Vector`
         
             Parameters:
-                format (NumberFormat): the custom format for components
+                format (:class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is`): the custom format for components
         
             Returns:
                 a string representation of this vector
@@ -1790,8 +1801,11 @@ class Vector2DFormat(org.hipparchus.geometry.VectorFormat[Euclidean2D]):
         " will be parsed without error and the same vector will be returned. In the second case, however, the parse position
         after parsing will be just after the closing curly brace, i.e. just before the trailing space.
     
-        **Note:** using "," as a separator may interfere with the grouping separator of the default null for the current locale.
-        Thus it is advised to use a null instance with disabled grouping in such a case.
+        **Note:** using "," as a separator may interfere with the grouping separator of the default
+        :class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is` for
+        the current locale. Thus it is advised to use a
+        :class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is`
+        instance with disabled grouping in such a case.
     """
     @typing.overload
     def __init__(self): ...
@@ -1826,7 +1840,7 @@ class Vector2DFormat(org.hipparchus.geometry.VectorFormat[Euclidean2D]):
             Returns the default 2D vector format for the given locale.
         
             Parameters:
-                locale (Locale): the specific locale used by the format.
+                locale (:class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): the specific locale used by the format.
         
             Returns:
                 the 2D vector format specific to the given locale.
@@ -1846,8 +1860,8 @@ class Vector2DFormat(org.hipparchus.geometry.VectorFormat[Euclidean2D]):
                 :meth:`~org.hipparchus.geometry.VectorFormat.parse` in class :class:`~org.hipparchus.geometry.VectorFormat`
         
             Parameters:
-                source (String): the string to parse
-                pos (ParsePosition): input/output parsing parameter.
+                source (:class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the string to parse
+                pos (:class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.text.ParsePosition?is`): input/output parsing parameter.
         
             Returns:
                 the parsed :class:`~org.hipparchus.geometry.Vector` object.

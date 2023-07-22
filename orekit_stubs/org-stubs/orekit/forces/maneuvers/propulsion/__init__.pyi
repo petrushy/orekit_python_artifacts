@@ -122,7 +122,7 @@ class PropulsionModel:
 
 class ThrustDirectionAndAttitudeProvider(org.orekit.attitudes.AttitudeProvider):
     """
-    public class ThrustDirectionAndAttitudeProvider extends Object implements :class:`~org.orekit.attitudes.AttitudeProvider`
+    public class ThrustDirectionAndAttitudeProvider extends :class:`~org.orekit.forces.maneuvers.propulsion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudeProvider`
     
         This class is used in to both manage the attitude of the satellite and the direction of thrust. It is used in
         ConfigurableLowThrustManeuver to set the spacecraft attitude according to the expected thrust direction. The direction
@@ -140,7 +140,7 @@ class ThrustDirectionAndAttitudeProvider(org.orekit.attitudes.AttitudeProvider):
         
             Parameters:
                 attitudeProvider (:class:`~org.orekit.attitudes.AttitudeProvider`): the object that provide the satellite attitude
-                direction (Vector3D): thruster axis in satellite frame
+                direction (:class:`~org.orekit.forces.maneuvers.propulsion.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): thruster axis in satellite frame
         
             Returns:
                 a new instance
@@ -156,7 +156,7 @@ class ThrustDirectionAndAttitudeProvider(org.orekit.attitudes.AttitudeProvider):
             Parameters:
                 thrustDirectionFrame (:class:`~org.orekit.frames.Frame`): reference frame for thrust direction
                 variableDirectionInFrame (:class:`~org.orekit.forces.maneuvers.propulsion.ThrustDirectionProvider`): the object providing the thrust direction
-                thrusterAxisInSatelliteFrame (Vector3D): thruster axis in satellite frame
+                thrusterAxisInSatelliteFrame (:class:`~org.orekit.forces.maneuvers.propulsion.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): thruster axis in satellite frame
         
             Returns:
                 a new instance
@@ -172,7 +172,7 @@ class ThrustDirectionAndAttitudeProvider(org.orekit.attitudes.AttitudeProvider):
             Parameters:
                 thrustDirectionLofType (:class:`~org.orekit.frames.LOFType`): Local Orbital Frame type
                 variableDirectionInFrame (:class:`~org.orekit.forces.maneuvers.propulsion.ThrustDirectionProvider`): the object providing the thrust direction
-                thrusterAxisInSatelliteFrame (Vector3D): thruster axis in satellite frame
+                thrusterAxisInSatelliteFrame (:class:`~org.orekit.forces.maneuvers.propulsion.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): thruster axis in satellite frame
         
             Returns:
                 a new instance
@@ -187,7 +187,7 @@ class ThrustDirectionAndAttitudeProvider(org.orekit.attitudes.AttitudeProvider):
             be managed by this object
         
             Parameters:
-                direction (Vector3D): constant direction in the satellite frame
+                direction (:class:`~org.orekit.forces.maneuvers.propulsion.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): constant direction in the satellite frame
         
             Returns:
                 a new instance
@@ -281,7 +281,7 @@ class ThrustDirectionProvider:
 
 class ConstantThrustDirectionProvider(ThrustDirectionProvider):
     """
-    public class ConstantThrustDirectionProvider extends Object implements :class:`~org.orekit.forces.maneuvers.propulsion.ThrustDirectionProvider`
+    public class ConstantThrustDirectionProvider extends :class:`~org.orekit.forces.maneuvers.propulsion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.maneuvers.propulsion.ThrustDirectionProvider`
     
         Simple implementation of VariableThrustDirectionVector, providing a constant direction.
     
@@ -292,12 +292,12 @@ class ConstantThrustDirectionProvider(ThrustDirectionProvider):
     def computeThrustDirection(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Description copied from
-            interface:Â :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustDirectionProvider.computeThrustDirection`
+            interface: :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustDirectionProvider.computeThrustDirection`
             Compute the thrust direction corresponding to an orbital state.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustDirectionProvider.computeThrustDirection`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.ThrustDirectionProvider`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustDirectionProvider.computeThrustDirection` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.ThrustDirectionProvider`
         
             Parameters:
                 pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
@@ -313,7 +313,7 @@ class ConstantThrustDirectionProvider(ThrustDirectionProvider):
 
 class PythonPropulsionModel(PropulsionModel):
     """
-    public class PythonPropulsionModel extends Object implements :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
+    public class PythonPropulsionModel extends :class:`~org.orekit.forces.maneuvers.propulsion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -324,8 +324,8 @@ class PythonPropulsionModel(PropulsionModel):
             Get the acceleration of the spacecraft during maneuver and in maneuver frame.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getAcceleration`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getAcceleration` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current spacecraft state
@@ -335,11 +335,16 @@ class PythonPropulsionModel(PropulsionModel):
             Returns:
                 acceleration
         
+        """
+        ...
+    @typing.overload
+    def getAcceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getAcceleration_1__T], fieldAttitude: org.orekit.attitudes.FieldAttitude[_getAcceleration_1__T], tArray: typing.List[_getAcceleration_1__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getAcceleration_1__T]:
+        """
             Get the acceleration of the spacecraft during maneuver and in maneuver frame.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getAcceleration`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getAcceleration` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current spacecraft state
@@ -352,8 +357,6 @@ class PythonPropulsionModel(PropulsionModel):
         
         """
         ...
-    @typing.overload
-    def getAcceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getAcceleration_1__T], fieldAttitude: org.orekit.attitudes.FieldAttitude[_getAcceleration_1__T], tArray: typing.List[_getAcceleration_1__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getAcceleration_1__T]: ...
     _getAcceleration_FFT__T = typing.TypeVar('_getAcceleration_FFT__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     def getAcceleration_FFT(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getAcceleration_FFT__T], fieldAttitude: org.orekit.attitudes.FieldAttitude[_getAcceleration_FFT__T], tArray: typing.List[_getAcceleration_FFT__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getAcceleration_FFT__T]: ...
     _getMassDerivatives_1__T = typing.TypeVar('_getMassDerivatives_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -363,8 +366,8 @@ class PythonPropulsionModel(PropulsionModel):
             Get the mass derivative (i.e. flow rate in kg/s) during maneuver.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getMassDerivatives`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getMassDerivatives` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current spacecraft state
@@ -381,8 +384,8 @@ class PythonPropulsionModel(PropulsionModel):
             Get the mass derivative (i.e. flow rate in kg/s) during maneuver.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getMassDerivatives`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getMassDerivatives` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current spacecraft state
@@ -401,8 +404,8 @@ class PythonPropulsionModel(PropulsionModel):
             Get the maneuver name.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getName`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getName` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
         
             Returns:
                 the maneuver name
@@ -420,8 +423,8 @@ class PythonPropulsionModel(PropulsionModel):
             Initialization method. Called in when Maneuver.init(...) is called (from ForceModel.init(...))
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.init`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.init` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
         
             Parameters:
                 initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial spacecraft state (at the start of propagation).
@@ -452,7 +455,7 @@ class PythonPropulsionModel(PropulsionModel):
 
 class PythonThrustDirectionProvider(ThrustDirectionProvider):
     """
-    public class PythonThrustDirectionProvider extends Object implements :class:`~org.orekit.forces.maneuvers.propulsion.ThrustDirectionProvider`
+    public class PythonThrustDirectionProvider extends :class:`~org.orekit.forces.maneuvers.propulsion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.maneuvers.propulsion.ThrustDirectionProvider`
     """
     def __init__(self): ...
     def computeThrustDirection(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
@@ -460,8 +463,8 @@ class PythonThrustDirectionProvider(ThrustDirectionProvider):
             Compute the thrust direction corresponding to an orbital state.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustDirectionProvider.computeThrustDirection`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.ThrustDirectionProvider`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustDirectionProvider.computeThrustDirection` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.ThrustDirectionProvider`
         
             Parameters:
                 pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
@@ -512,8 +515,8 @@ class ThrustPropulsionModel(PropulsionModel):
             thrust vector in S/C frame.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getAcceleration`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getAcceleration` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current spacecraft state
@@ -533,8 +536,8 @@ class ThrustPropulsionModel(PropulsionModel):
             thrust vector in S/C frame.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getAcceleration`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getAcceleration` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current spacecraft state
@@ -620,8 +623,8 @@ class ThrustPropulsionModel(PropulsionModel):
             flow rate value.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getMassDerivatives`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getMassDerivatives` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current spacecraft state
@@ -639,8 +642,8 @@ class ThrustPropulsionModel(PropulsionModel):
             flow rate value.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getMassDerivatives`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getMassDerivatives` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current spacecraft state
@@ -708,7 +711,7 @@ class ThrustPropulsionModel(PropulsionModel):
 
 class AbstractConstantThrustPropulsionModel(ThrustPropulsionModel):
     """
-    public abstract class AbstractConstantThrustPropulsionModel extends Object implements :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
+    public abstract class AbstractConstantThrustPropulsionModel extends :class:`~org.orekit.forces.maneuvers.propulsion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
     
         This abstract class simply serve as a container for a constant thrust maneuver. It re-writes all spacecraft dependent
         methods from :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel` and removes their dependencies to
@@ -750,8 +753,8 @@ class AbstractConstantThrustPropulsionModel(ThrustPropulsionModel):
             Get the flow rate (kg/s). Here the flow rate do not depend on current S/C state
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getFlowRate`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getFlowRate` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current spacecraft state
@@ -762,8 +765,8 @@ class AbstractConstantThrustPropulsionModel(ThrustPropulsionModel):
             Get the flow rate (kg/s). Here the flow rate do not depend on current S/C state
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getFlowRate`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getFlowRate` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current spacecraft state
@@ -780,7 +783,7 @@ class AbstractConstantThrustPropulsionModel(ThrustPropulsionModel):
             Returns:
                 flow rate (kg/s)
         
-        public abstract <T extends CalculusFieldElement<T>> T getFlowRate (T[] parameters)
+        public abstract <T extends :class:`~org.orekit.forces.maneuvers.propulsion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> T getFlowRate (T[] parameters)
         
             Get the flow rate (kg/s). Here it does not depend on current S/C state.
         
@@ -805,8 +808,8 @@ class AbstractConstantThrustPropulsionModel(ThrustPropulsionModel):
             Get the flow rate (kg/s). Here the flow rate do not depend on current S/C state
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getFlowRate`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getFlowRate` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current spacecraft state
@@ -835,8 +838,8 @@ class AbstractConstantThrustPropulsionModel(ThrustPropulsionModel):
             Get the maneuver name.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getName`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.getName` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
         
             Returns:
                 the maneuver name
@@ -877,8 +880,8 @@ class AbstractConstantThrustPropulsionModel(ThrustPropulsionModel):
             Get the thrust vector in spacecraft frame (N). Here the thrust vector do not depend on current S/C state.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getThrustVector`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getThrustVector` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current spacecraft state
@@ -889,8 +892,8 @@ class AbstractConstantThrustPropulsionModel(ThrustPropulsionModel):
             Get the thrust vector in spacecraft frame (N). Here the thrust vector do not depend on current S/C state.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getThrustVector`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getThrustVector` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current spacecraft state
@@ -906,6 +909,8 @@ class AbstractConstantThrustPropulsionModel(ThrustPropulsionModel):
         
             Returns:
                 thrust vector in spacecraft frame (N)
+        
+        public abstract <T extends :class:`~org.orekit.forces.maneuvers.propulsion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> :class:`~org.orekit.forces.maneuvers.propulsion.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> getThrustVector (T[] parameters)
         
             Get the thrust vector in spacecraft frame (N). Here it does not depend on current S/C state.
         
@@ -924,8 +929,8 @@ class AbstractConstantThrustPropulsionModel(ThrustPropulsionModel):
             Get the thrust vector in spacecraft frame (N). Here the thrust vector do not depend on current S/C state.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getThrustVector`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getThrustVector` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current spacecraft state
@@ -943,7 +948,7 @@ class AbstractConstantThrustPropulsionModel(ThrustPropulsionModel):
 
 class PythonThrustPropulsionModel(ThrustPropulsionModel):
     """
-    public class PythonThrustPropulsionModel extends Object implements :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
+    public class PythonThrustPropulsionModel extends :class:`~org.orekit.forces.maneuvers.propulsion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -954,8 +959,8 @@ class PythonThrustPropulsionModel(ThrustPropulsionModel):
             Get the flow rate (kg/s).
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getFlowRate`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getFlowRate` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current spacecraft state
@@ -966,8 +971,8 @@ class PythonThrustPropulsionModel(ThrustPropulsionModel):
             Get the flow rate (kg/s).
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getFlowRate`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getFlowRate` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current spacecraft state
@@ -986,8 +991,8 @@ class PythonThrustPropulsionModel(ThrustPropulsionModel):
             Get the flow rate (kg/s).
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getFlowRate`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getFlowRate` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current spacecraft state
@@ -1008,8 +1013,8 @@ class PythonThrustPropulsionModel(ThrustPropulsionModel):
             Get the thrust vector in spacecraft frame (N).
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getThrustVector`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getThrustVector` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current spacecraft state
@@ -1020,8 +1025,8 @@ class PythonThrustPropulsionModel(ThrustPropulsionModel):
             Get the thrust vector in spacecraft frame (N).
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getThrustVector`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getThrustVector` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current spacecraft state
@@ -1033,13 +1038,15 @@ class PythonThrustPropulsionModel(ThrustPropulsionModel):
         """
         ...
     @typing.overload
-    def getThrustVector(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def getThrustVector(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    @typing.overload
+    def getThrustVector(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getThrustVector_2__T], tArray: typing.List[_getThrustVector_2__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getThrustVector_2__T]:
         """
             Get the thrust vector in spacecraft frame (N).
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getThrustVector`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel.getThrustVector` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.ThrustPropulsionModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current spacecraft state
@@ -1051,8 +1058,6 @@ class PythonThrustPropulsionModel(ThrustPropulsionModel):
         
         """
         ...
-    @typing.overload
-    def getThrustVector(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getThrustVector_2__T], tArray: typing.List[_getThrustVector_2__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getThrustVector_2__T]: ...
     _getThrustVector_FT__T = typing.TypeVar('_getThrustVector_FT__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     def getThrustVector_FT(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getThrustVector_FT__T], tArray: typing.List[_getThrustVector_FT__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getThrustVector_FT__T]: ...
     _init_0__T = typing.TypeVar('_init_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -1065,8 +1070,8 @@ class PythonThrustPropulsionModel(ThrustPropulsionModel):
             Initialization method. Called in when Maneuver.init(...) is called (from ForceModel.init(...))
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.init`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.init` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
         
             Parameters:
                 initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial spacecraft state (at the start of propagation).
@@ -1108,7 +1113,7 @@ class BasicConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel):
     """
     THRUST: typing.ClassVar[str] = ...
     """
-    public static final String THRUST
+    public static final :class:`~org.orekit.forces.maneuvers.propulsion.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` THRUST
     
         Parameter name for thrust.
     
@@ -1119,7 +1124,7 @@ class BasicConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel):
     """
     FLOW_RATE: typing.ClassVar[str] = ...
     """
-    public static final String FLOW_RATE
+    public static final :class:`~org.orekit.forces.maneuvers.propulsion.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` FLOW_RATE
     
         Parameter name for flow rate.
     
@@ -1155,8 +1160,8 @@ class BasicConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel):
             Get the flow rate (kg/s). Here it does not depend on current S/C state.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getFlowRate`Â in
-                classÂ :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getFlowRate` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
         
             Parameters:
                 parameters (double[]): propulsion model parameters
@@ -1174,8 +1179,8 @@ class BasicConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel):
             Get the flow rate (kg/s). Here it does not depend on current S/C.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getFlowRate`Â in
-                classÂ :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getFlowRate` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
         
             Returns:
                 flow rate (kg/s)
@@ -1192,8 +1197,8 @@ class BasicConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel):
             Get the flow rate (kg/s). Here it does not depend on current S/C state.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getFlowRate`Â in
-                classÂ :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getFlowRate` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
         
             Parameters:
                 parameters (T[]): propulsion model parameters
@@ -1215,8 +1220,8 @@ class BasicConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel):
             Get the thrust vector in spacecraft frame (N). Here it does not depend on current S/C state.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector`Â in
-                classÂ :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
         
             Parameters:
                 parameters (T[]): propulsion model parameters
@@ -1233,8 +1238,8 @@ class BasicConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel):
             Get the thrust vector in spacecraft frame (N). Here it does not depend on current S/C state.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector`Â in
-                classÂ :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
         
             Parameters:
                 parameters (double[]): propulsion model parameters
@@ -1252,8 +1257,8 @@ class BasicConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel):
             Get the thrust vector in spacecraft frame (N). Here it does not depend on current S/C state.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector`Â in
-                classÂ :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
         
             Returns:
                 thrust vector in spacecraft frame (N)
@@ -1277,8 +1282,8 @@ class PythonAbstractConstantThrustPropulsionModel(AbstractConstantThrustPropulsi
             Get the flow rate (kg/s). Here it does not depend on current S/C state.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getFlowRate`Â in
-                classÂ :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getFlowRate` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
         
             Parameters:
                 parameters (double[]): propulsion model parameters
@@ -1296,8 +1301,8 @@ class PythonAbstractConstantThrustPropulsionModel(AbstractConstantThrustPropulsi
             Get the flow rate (kg/s). Here it does not depend on current S/C.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getFlowRate`Â in
-                classÂ :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getFlowRate` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
         
             Returns:
                 flow rate (kg/s)
@@ -1314,8 +1319,8 @@ class PythonAbstractConstantThrustPropulsionModel(AbstractConstantThrustPropulsi
             Get the flow rate (kg/s). Here it does not depend on current S/C state.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getFlowRate`Â in
-                classÂ :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getFlowRate` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
         
             Parameters:
                 parameters (T[]): propulsion model parameters
@@ -1344,8 +1349,8 @@ class PythonAbstractConstantThrustPropulsionModel(AbstractConstantThrustPropulsi
         """
         
             Overrides:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getInitialFlowrate`Â in
-                classÂ :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getInitialFlowrate` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
         
         
         """
@@ -1354,8 +1359,8 @@ class PythonAbstractConstantThrustPropulsionModel(AbstractConstantThrustPropulsi
         """
         
             Overrides:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getInitialThrustVector`Â in
-                classÂ :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getInitialThrustVector` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
         
         
         """
@@ -1368,8 +1373,8 @@ class PythonAbstractConstantThrustPropulsionModel(AbstractConstantThrustPropulsi
             Get the thrust vector in spacecraft frame (N). Here it does not depend on current S/C state.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector`Â in
-                classÂ :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
         
             Returns:
                 thrust vector in spacecraft frame (N)
@@ -1382,8 +1387,8 @@ class PythonAbstractConstantThrustPropulsionModel(AbstractConstantThrustPropulsi
             Get the thrust vector in spacecraft frame (N). Here it does not depend on current S/C state.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector`Â in
-                classÂ :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
         
             Parameters:
                 parameters (double[]): propulsion model parameters
@@ -1391,11 +1396,18 @@ class PythonAbstractConstantThrustPropulsionModel(AbstractConstantThrustPropulsi
             Returns:
                 thrust vector in spacecraft frame (N)
         
+        """
+        ...
+    @typing.overload
+    def getThrustVector(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getThrustVector_2__T], tArray: typing.List[_getThrustVector_2__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getThrustVector_2__T]: ...
+    @typing.overload
+    def getThrustVector(self, tArray: typing.List[_getThrustVector_3__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getThrustVector_3__T]:
+        """
             Get the thrust vector in spacecraft frame (N). Here it does not depend on current S/C state.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector`Â in
-                classÂ :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
         
             Parameters:
                 parameters (T[]): propulsion model parameters
@@ -1406,10 +1418,6 @@ class PythonAbstractConstantThrustPropulsionModel(AbstractConstantThrustPropulsi
         
         """
         ...
-    @typing.overload
-    def getThrustVector(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getThrustVector_2__T], tArray: typing.List[_getThrustVector_2__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getThrustVector_2__T]: ...
-    @typing.overload
-    def getThrustVector(self, tArray: typing.List[_getThrustVector_3__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getThrustVector_3__T]: ...
     @typing.overload
     def getThrustVector(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
     @typing.overload
@@ -1437,8 +1445,8 @@ class PythonAbstractConstantThrustPropulsionModel(AbstractConstantThrustPropulsi
             Initialization method. Called in when Maneuver.init(...) is called (from ForceModel.init(...))
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.init`Â in
-                interfaceÂ :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel.init` in
+                interface :class:`~org.orekit.forces.maneuvers.propulsion.PropulsionModel`
         
             Parameters:
                 initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial spacecraft state (at the start of propagation).
@@ -1479,7 +1487,7 @@ class ScaledConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel)
     """
     THRUSTX_SCALE_FACTOR: typing.ClassVar[str] = ...
     """
-    public static final String THRUSTX_SCALE_FACTOR
+    public static final :class:`~org.orekit.forces.maneuvers.propulsion.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` THRUSTX_SCALE_FACTOR
     
         Parameter name for the scale factor on the X component of the thrust in S/C frame.
     
@@ -1490,7 +1498,7 @@ class ScaledConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel)
     """
     THRUSTY_SCALE_FACTOR: typing.ClassVar[str] = ...
     """
-    public static final String THRUSTY_SCALE_FACTOR
+    public static final :class:`~org.orekit.forces.maneuvers.propulsion.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` THRUSTY_SCALE_FACTOR
     
         Parameter name for the scale factor on the Y component of the thrust in S/C frame.
     
@@ -1501,7 +1509,7 @@ class ScaledConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel)
     """
     THRUSTZ_SCALE_FACTOR: typing.ClassVar[str] = ...
     """
-    public static final String THRUSTZ_SCALE_FACTOR
+    public static final :class:`~org.orekit.forces.maneuvers.propulsion.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` THRUSTZ_SCALE_FACTOR
     
         Parameter name for the scale factor on the Z component of the thrust in S/C frame.
     
@@ -1519,8 +1527,8 @@ class ScaledConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel)
             Get the flow rate (kg/s). Here it does not depend on current S/C state.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getFlowRate`Â in
-                classÂ :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getFlowRate` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
         
             Parameters:
                 parameters (double[]): propulsion model parameters
@@ -1538,8 +1546,8 @@ class ScaledConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel)
             Get the flow rate (kg/s). Here it does not depend on current S/C.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getFlowRate`Â in
-                classÂ :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getFlowRate` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
         
             Returns:
                 flow rate (kg/s)
@@ -1556,8 +1564,8 @@ class ScaledConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel)
             Get the flow rate (kg/s). Here it does not depend on current S/C state.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getFlowRate`Â in
-                classÂ :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getFlowRate` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
         
             Parameters:
                 parameters (T[]): propulsion model parameters
@@ -1579,8 +1587,8 @@ class ScaledConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel)
             Get the thrust vector in spacecraft frame (N). Here it does not depend on current S/C state.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector`Â in
-                classÂ :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
         
             Parameters:
                 parameters (T[]): propulsion model parameters
@@ -1597,8 +1605,8 @@ class ScaledConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel)
             Get the thrust vector in spacecraft frame (N). Here it does not depend on current S/C state.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector`Â in
-                classÂ :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
         
             Parameters:
                 parameters (double[]): propulsion model parameters
@@ -1616,8 +1624,8 @@ class ScaledConstantThrustPropulsionModel(AbstractConstantThrustPropulsionModel)
             Get the thrust vector in spacecraft frame (N). Here it does not depend on current S/C state.
         
             Specified by:
-                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector`Â in
-                classÂ :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
+                :meth:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel.getThrustVector` in
+                class :class:`~org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel`
         
             Returns:
                 thrust vector in spacecraft frame (N)

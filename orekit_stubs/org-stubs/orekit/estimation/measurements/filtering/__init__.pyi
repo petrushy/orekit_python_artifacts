@@ -9,7 +9,7 @@ import typing
 
 class DualFrequencySmoother:
     """
-    public class DualFrequencySmoother extends Object
+    public class DualFrequencySmoother extends :class:`~org.orekit.estimation.measurements.filtering.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Handler to perform pseudo-range smoothing using Divergence-Free phase combinations.
     
@@ -72,7 +72,7 @@ class MeasurementFilter(typing.Generic[_MeasurementFilter__T]):
 
 class SingleFrequencySmoother:
     """
-    public class SingleFrequencySmoother extends Object
+    public class SingleFrequencySmoother extends :class:`~org.orekit.estimation.measurements.filtering.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Handler to perform pseudo-range smoothing using single frequency measurements.
     
@@ -114,7 +114,7 @@ class SingleFrequencySmoother:
 
 class SmoothedObservationDataSet:
     """
-    public class SmoothedObservationDataSet extends Object
+    public class SmoothedObservationDataSet extends :class:`~org.orekit.estimation.measurements.filtering.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Container used to store smoothed observation data along with the original data set it originates from.
     
@@ -146,7 +146,7 @@ class SmoothedObservationDataSet:
 _ElevationFilter__T = typing.TypeVar('_ElevationFilter__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class ElevationFilter(MeasurementFilter[_ElevationFilter__T], typing.Generic[_ElevationFilter__T]):
     """
-    public class ElevationFilter<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends Object implements :class:`~org.orekit.estimation.measurements.filtering.MeasurementFilter`<T>
+    public class ElevationFilter<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.filtering.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.filtering.MeasurementFilter`<T>
     
         Elevation pre-processing filter.
     
@@ -159,7 +159,7 @@ class ElevationFilter(MeasurementFilter[_ElevationFilter__T], typing.Generic[_El
 _PythonMeasurementFilter__T = typing.TypeVar('_PythonMeasurementFilter__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class PythonMeasurementFilter(MeasurementFilter[_PythonMeasurementFilter__T], typing.Generic[_PythonMeasurementFilter__T]):
     """
-    public class PythonMeasurementFilter<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends Object implements :class:`~org.orekit.estimation.measurements.filtering.MeasurementFilter`<T>
+    public class PythonMeasurementFilter<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.filtering.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.filtering.MeasurementFilter`<T>
     
         Interface for measurement pre-processing filter.
     
@@ -200,7 +200,7 @@ class PythonMeasurementFilter(MeasurementFilter[_PythonMeasurementFilter__T], ty
 _ResidualFilter__T = typing.TypeVar('_ResidualFilter__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class ResidualFilter(MeasurementFilter[_ResidualFilter__T], typing.Generic[_ResidualFilter__T]):
     """
-    public class ResidualFilter<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends Object implements :class:`~org.orekit.estimation.measurements.filtering.MeasurementFilter`<T>
+    public class ResidualFilter<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.filtering.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.filtering.MeasurementFilter`<T>
     
         Residual pre-processing filter.
     
@@ -215,7 +215,7 @@ class ResidualFilter(MeasurementFilter[_ResidualFilter__T], typing.Generic[_Resi
 
 class DualFrequencyHatchFilter(org.orekit.estimation.measurements.filtering.HatchFilter):
     """
-    public class DualFrequencyHatchFilter extends Object
+    public class DualFrequencyHatchFilter extends :class:`~org.orekit.estimation.measurements.filtering.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Hatch Filter using Carrier-Phase measurements taken at two different frequencies, to form a Divergence-Free phase
         combination.
@@ -227,7 +227,7 @@ class DualFrequencyHatchFilter(org.orekit.estimation.measurements.filtering.Hatc
             11.2
     
         Also see:
-            "Subirana, J. S., Hernandez-Pajares, M., and JosÃƒÂ© Miguel Juan Zornoza. (2013). GNSS Data Processing: Fundamentals and
+            "Subirana, J. S., Hernandez-Pajares, M., and José Miguel Juan Zornoza. (2013). GNSS Data Processing: Fundamentals and
             Algorithms. European Space Agency. Section 4.2.3.1.1"
     """
     def __init__(self, observationData: org.orekit.gnss.ObservationData, observationData2: org.orekit.gnss.ObservationData, observationData3: org.orekit.gnss.ObservationData, double: float, double2: float, double3: float, int: int): ...
@@ -246,36 +246,18 @@ class DualFrequencyHatchFilter(org.orekit.estimation.measurements.filtering.Hatc
         
         """
         ...
-    def getFirstFrequencyPhaseHistory(self) -> java.util.ArrayList[float]:
-        """
-            Get the history of phase values of the first frequency.
-        
-            Returns:
-                the history of phase values of the first frequency
-        
-        
-        """
-        ...
-    def getSecondFrequencyPhaseHistory(self) -> java.util.ArrayList[float]:
-        """
-            Get the history of phase values of the second frequency.
-        
-            Returns:
-                the history of phase values of the second frequency
-        
-        
-        """
-        ...
+    def getFirstFrequencyPhaseHistory(self) -> java.util.ArrayList[float]: ...
+    def getSecondFrequencyPhaseHistory(self) -> java.util.ArrayList[float]: ...
 
 class PythonHatchFilter(org.orekit.estimation.measurements.filtering.HatchFilter):
     """
-    public class PythonHatchFilter extends Object
+    public class PythonHatchFilter extends :class:`~org.orekit.estimation.measurements.filtering.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     """
     ...
 
 class SingleFrequencyHatchFilter(org.orekit.estimation.measurements.filtering.HatchFilter):
     """
-    public class SingleFrequencyHatchFilter extends Object
+    public class SingleFrequencyHatchFilter extends :class:`~org.orekit.estimation.measurements.filtering.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Single frequency Hatch filter.
     
@@ -286,7 +268,7 @@ class SingleFrequencyHatchFilter(org.orekit.estimation.measurements.filtering.Ha
             11.2
     
         Also see:
-            "Subirana, J. S., Hernandez-Pajares, M., and JosÃƒÂ© Miguel Juan Zornoza. (2013). GNSS Data Processing: Fundamentals and
+            "Subirana, J. S., Hernandez-Pajares, M., and José Miguel Juan Zornoza. (2013). GNSS Data Processing: Fundamentals and
             Algorithms. European Space Agency.", "Zhou, Z., and Li, B. (2017). Optimal Doppler-aided smoothing strategy for GNSS
             navigation. GPS solutions, 21(1), 197-210."
     """

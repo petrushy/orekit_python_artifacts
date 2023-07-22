@@ -7,7 +7,7 @@ import typing
 
 class RtcmData:
     """
-    public class RtcmData extends Object
+    public class RtcmData extends :class:`~org.orekit.gnss.metric.messages.rtcm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Container for common data in RTCM message.
     

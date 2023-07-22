@@ -8,7 +8,7 @@ import typing
 
 class EvaluationRmsChecker(org.hipparchus.optim.ConvergenceChecker['LeastSquaresProblem.Evaluation']):
     """
-    public class EvaluationRmsChecker extends Object implements :class:`~org.hipparchus.optim.ConvergenceChecker`<:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation`>
+    public class EvaluationRmsChecker extends :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.optim.ConvergenceChecker`<:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation`>
     
         Check if an optimization has converged based on the change in computed RMS.
     """
@@ -21,8 +21,8 @@ class EvaluationRmsChecker(org.hipparchus.optim.ConvergenceChecker['LeastSquares
             Check if the optimization algorithm has converged.
         
             Specified by:
-                :meth:`~org.hipparchus.optim.ConvergenceChecker.converged`Â in
-                interfaceÂ :class:`~org.hipparchus.optim.ConvergenceChecker`
+                :meth:`~org.hipparchus.optim.ConvergenceChecker.converged` in
+                interface :class:`~org.hipparchus.optim.ConvergenceChecker`
         
             Parameters:
                 iteration (int): Current iteration.
@@ -38,7 +38,7 @@ class EvaluationRmsChecker(org.hipparchus.optim.ConvergenceChecker['LeastSquares
 
 class LeastSquaresBuilder:
     """
-    public class LeastSquaresBuilder extends Object
+    public class LeastSquaresBuilder extends :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         A mutable builder for :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem`s.
     
@@ -104,8 +104,8 @@ class LeastSquaresBuilder:
             Configure the model function.
         
             Parameters:
-                value (MultivariateVectorFunction): the model function value
-                jacobian (MultivariateMatrixFunction): the Jacobian of :code:`value`
+                value (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.www.hipparchus.org.hipparchus`): the model function value
+                jacobian (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.www.hipparchus.org.hipparchus`): the Jacobian of :code:`value`
         
             Returns:
                 this
@@ -145,7 +145,7 @@ class LeastSquaresBuilder:
             Configure the initial guess.
         
             Parameters:
-                newStart (RealVector): the initial guess.
+                newStart (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.www.hipparchus.org.hipparchus`): the initial guess.
         
             Returns:
                 this
@@ -169,7 +169,7 @@ class LeastSquaresBuilder:
             Configure the observed data.
         
             Parameters:
-                newTarget (RealVector): the observed data.
+                newTarget (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.www.hipparchus.org.hipparchus`): the observed data.
         
             Returns:
                 this
@@ -192,7 +192,7 @@ class LeastSquaresBuilder:
             Configure the weight matrix.
         
             Parameters:
-                newWeight (RealMatrix): the weight matrix
+                newWeight (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.www.hipparchus.org.hipparchus`): the weight matrix
         
             Returns:
                 this
@@ -203,7 +203,7 @@ class LeastSquaresBuilder:
 
 class LeastSquaresFactory:
     """
-    public class LeastSquaresFactory extends Object
+    public class LeastSquaresFactory extends :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         A Factory for creating :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem`s.
     """
@@ -216,7 +216,7 @@ class LeastSquaresFactory:
         
             Parameters:
                 problem (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem`): the problem to track.
-                counter (Incrementor): the counter to increment.
+                counter (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.www.hipparchus.org.hipparchus`): the counter to increment.
         
             Returns:
                 a least squares problem that tracks evaluations
@@ -241,12 +241,13 @@ class LeastSquaresFactory:
     @staticmethod
     def model(multivariateVectorFunction: org.hipparchus.analysis.MultivariateVectorFunction, multivariateMatrixFunction: org.hipparchus.analysis.MultivariateMatrixFunction) -> 'MultivariateJacobianFunction':
         """
-            Combine a null with a null to produce a
+            Combine a :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.www.hipparchus.org.hipparchus` with a
+            :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.www.hipparchus.org.hipparchus` to produce a
             :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.MultivariateJacobianFunction`.
         
             Parameters:
-                value (MultivariateVectorFunction): the vector value function
-                jacobian (MultivariateMatrixFunction): the Jacobian function
+                value (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.www.hipparchus.org.hipparchus`): the vector value function
+                jacobian (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.www.hipparchus.org.hipparchus`): the Jacobian function
         
             Returns:
                 a function that computes both at the same time
@@ -261,7 +262,7 @@ class LeastSquaresFactory:
         
             Parameters:
                 problem (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem`): the unweighted problem
-                weights (RealVector): the diagonal of the weight matrix
+                weights (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.www.hipparchus.org.hipparchus`): the diagonal of the weight matrix
         
             Returns:
                 a new :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem` with the weights applied. The
@@ -277,7 +278,7 @@ class LeastSquaresFactory:
         
             Parameters:
                 problem (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem`): the unweighted problem
-                weights (RealMatrix): the matrix of weights
+                weights (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.www.hipparchus.org.hipparchus`): the matrix of weights
         
             Returns:
                 a new :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem` with the weights applied. The
@@ -311,13 +312,13 @@ class LeastSquaresProblem(org.hipparchus.optim.OptimizationProblem['LeastSquares
             Evaluate the model at the specified point.
         
             Parameters:
-                point (RealVector): the parameter values.
+                point (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.www.hipparchus.org.hipparchus`): the parameter values.
         
             Returns:
                 the model's value and derivative at the given point.
         
             Raises:
-                : if the maximal number of evaluations (of the model vector function) is exceeded.
+                :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.www.hipparchus.org.hipparchus`: if the maximal number of evaluations (of the model vector function) is exceeded.
         
         
         """
@@ -369,19 +370,7 @@ class MultivariateJacobianFunction:
     
         A interface for functions that compute a vector of values and can compute their derivatives (Jacobian).
     """
-    def value(self, realVector: org.hipparchus.linear.RealVector) -> org.hipparchus.util.Pair[org.hipparchus.linear.RealVector, org.hipparchus.linear.RealMatrix]:
-        """
-            Compute the function value and its Jacobian.
-        
-            Parameters:
-                point (RealVector): the abscissae
-        
-            Returns:
-                the values and their Jacobian of this vector valued function.
-        
-        
-        """
-        ...
+    def value(self, realVector: org.hipparchus.linear.RealVector) -> org.hipparchus.util.Pair[org.hipparchus.linear.RealVector, org.hipparchus.linear.RealMatrix]: ...
 
 class ParameterValidator:
     """
@@ -394,7 +383,7 @@ class ParameterValidator:
             Validates the set of parameters.
         
             Parameters:
-                params (RealVector): Input parameters.
+                params (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.www.hipparchus.org.hipparchus`): Input parameters.
         
             Returns:
                 the validated values.
@@ -414,7 +403,7 @@ class AbstractEvaluation(LeastSquaresProblem.Evaluation):
 
 class LeastSquaresAdapter(LeastSquaresProblem):
     """
-    public class LeastSquaresAdapter extends Object implements :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem`
+    public class LeastSquaresAdapter extends :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem`
     
         An adapter that delegates to another implementation of
         :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem`.
@@ -425,11 +414,11 @@ class LeastSquaresAdapter(LeastSquaresProblem):
             Evaluate the model at the specified point.
         
             Specified by:
-                :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.evaluate`Â in
-                interfaceÂ :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem`
+                :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.evaluate` in
+                interface :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem`
         
             Parameters:
-                point (RealVector): 
+                point (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.www.hipparchus.org.hipparchus`): 
             Returns:
                 the model's value and derivative at the given point.
         
@@ -442,8 +431,8 @@ class LeastSquaresAdapter(LeastSquaresProblem):
             Get a independent Incrementor that counts up to the maximum number of evaluations and then throws an exception.
         
             Specified by:
-                :meth:`~org.hipparchus.optim.OptimizationProblem.getEvaluationCounter`Â in
-                interfaceÂ :class:`~org.hipparchus.optim.OptimizationProblem`
+                :meth:`~org.hipparchus.optim.OptimizationProblem.getEvaluationCounter` in
+                interface :class:`~org.hipparchus.optim.OptimizationProblem`
         
             Returns:
                 a counter for the evaluations.
@@ -456,8 +445,8 @@ class LeastSquaresAdapter(LeastSquaresProblem):
             Get a independent Incrementor that counts up to the maximum number of iterations and then throws an exception.
         
             Specified by:
-                :meth:`~org.hipparchus.optim.OptimizationProblem.getIterationCounter`Â in
-                interfaceÂ :class:`~org.hipparchus.optim.OptimizationProblem`
+                :meth:`~org.hipparchus.optim.OptimizationProblem.getIterationCounter` in
+                interface :class:`~org.hipparchus.optim.OptimizationProblem`
         
             Returns:
                 a counter for the evaluations.
@@ -470,8 +459,8 @@ class LeastSquaresAdapter(LeastSquaresProblem):
             Get the number of observations (rows in the Jacobian) in this problem.
         
             Specified by:
-                :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.getObservationSize`Â in
-                interfaceÂ :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem`
+                :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.getObservationSize` in
+                interface :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem`
         
             Returns:
                 the number of scalar observations
@@ -484,8 +473,8 @@ class LeastSquaresAdapter(LeastSquaresProblem):
             Get the number of parameters (columns in the Jacobian) in this problem.
         
             Specified by:
-                :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.getParameterSize`Â in
-                interfaceÂ :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem`
+                :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.getParameterSize` in
+                interface :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem`
         
             Returns:
                 the number of scalar parameters
@@ -498,8 +487,8 @@ class LeastSquaresAdapter(LeastSquaresProblem):
             Gets the initial guess.
         
             Specified by:
-                :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.getStart`Â in
-                interfaceÂ :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem`
+                :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.getStart` in
+                interface :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem`
         
             Returns:
                 the initial guess values.
@@ -580,7 +569,7 @@ class GaussNewtonOptimizer(LeastSquaresOptimizer):
 
 class LevenbergMarquardtOptimizer(LeastSquaresOptimizer):
     """
-    public class LevenbergMarquardtOptimizer extends Object implements :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer`
+    public class LevenbergMarquardtOptimizer extends :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer`
     
         This class solves a least-squares problem using the Levenberg-Marquardt algorithm.
     
@@ -591,7 +580,7 @@ class LevenbergMarquardtOptimizer(LeastSquaresOptimizer):
         The resolution engine is a simple translation of the MINPACK `lmder <http://www.netlib.org/minpack/lmder.f>` routine
         with minor changes. The changes include the over-determined resolution, the use of inherited convergence checker and the
         Q.R. decomposition which has been rewritten following the algorithm described in the P. Lascaux and R. Theodor book
-        *Analyse numÃ©rique matricielle appliquÃ©e Ã  l'art de l'ingÃ©nieur*, Masson 1986.
+        *Analyse numérique matricielle appliquée à l'art de l'ingénieur*, Masson 1986.
     
         The authors of the original fortran version are:
     
@@ -677,8 +666,8 @@ class LevenbergMarquardtOptimizer(LeastSquaresOptimizer):
             Solve the non-linear least squares problem.
         
             Specified by:
-                :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer.optimize`Â in
-                interfaceÂ :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer`
+                :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer.optimize` in
+                interface :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer`
         
             Parameters:
                 problem (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem`): the problem definition, including model function and convergence criteria.

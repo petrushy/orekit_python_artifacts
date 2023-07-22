@@ -129,7 +129,7 @@ class MessageType:
 
 class MessagesParser:
     """
-    public abstract class MessagesParser extends Object
+    public abstract class MessagesParser extends :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Parser for IGS encoded messages.
     
@@ -154,7 +154,7 @@ class MessagesParser:
 
 class Units:
     """
-    public class Units extends Object
+    public class Units extends :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Units used in RTCM and IGS SSR messages.
     
@@ -213,7 +213,7 @@ class Units:
 
 class AbstractEncodedMessages(EncodedMessage):
     """
-    public abstract class AbstractEncodedMessages extends Object implements :class:`~org.orekit.gnss.metric.parser.EncodedMessage`
+    public abstract class AbstractEncodedMessages extends :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.gnss.metric.parser.EncodedMessage`
     
         Encoded messages as a sequence of bytes.
     
@@ -226,8 +226,8 @@ class AbstractEncodedMessages(EncodedMessage):
             Extract the next n bits from the encoded message.
         
             Specified by:
-                :meth:`~org.orekit.gnss.metric.parser.EncodedMessage.extractBits`Â in
-                interfaceÂ :class:`~org.orekit.gnss.metric.parser.EncodedMessage`
+                :meth:`~org.orekit.gnss.metric.parser.EncodedMessage.extractBits` in
+                interface :class:`~org.orekit.gnss.metric.parser.EncodedMessage`
         
             Parameters:
                 n (int): number of bits to extract (cannot exceed 32 bits)
@@ -243,8 +243,8 @@ class AbstractEncodedMessages(EncodedMessage):
             Start message extraction.
         
             Specified by:
-                :meth:`~org.orekit.gnss.metric.parser.EncodedMessage.start`Â in
-                interfaceÂ :class:`~org.orekit.gnss.metric.parser.EncodedMessage`
+                :meth:`~org.orekit.gnss.metric.parser.EncodedMessage.start` in
+                interface :class:`~org.orekit.gnss.metric.parser.EncodedMessage`
         
         
         """
@@ -252,7 +252,7 @@ class AbstractEncodedMessages(EncodedMessage):
 
 class IgsSsrDataField(java.lang.Enum['IgsSsrDataField'], DataField):
     """
-    public enum IgsSsrDataField extends Enum<:class:`~org.orekit.gnss.metric.parser.IgsSsrDataField`> implements :class:`~org.orekit.gnss.metric.parser.DataField`
+    public enum IgsSsrDataField extends :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.metric.parser.IgsSsrDataField`> implements :class:`~org.orekit.gnss.metric.parser.DataField`
     
         Enum containing all intermediate level data fields that can be parsed to build an IGS SSR message.
     
@@ -312,14 +312,14 @@ class IgsSsrDataField(java.lang.Enum['IgsSsrDataField'], DataField):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -332,9 +332,8 @@ class IgsSsrDataField(java.lang.Enum['IgsSsrDataField'], DataField):
         
             .. code-block: java
             
-            
-            for (IgsSsrDataField c : IgsSsrDataField.values())
-                System.out.println(c);
+            for (IgsSsrDataField c : IgsSsrDataField.values())
+                System.out.println(c);
             
         
             Returns:
@@ -346,7 +345,7 @@ class IgsSsrDataField(java.lang.Enum['IgsSsrDataField'], DataField):
 
 class IgsSsrMessageType(java.lang.Enum['IgsSsrMessageType'], MessageType):
     """
-    public enum IgsSsrMessageType extends Enum<:class:`~org.orekit.gnss.metric.parser.IgsSsrMessageType`> implements :class:`~org.orekit.gnss.metric.parser.MessageType`
+    public enum IgsSsrMessageType extends :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.metric.parser.IgsSsrMessageType`> implements :class:`~org.orekit.gnss.metric.parser.MessageType`
     
         Enum containing the supported IGS SSR messages types.
     
@@ -370,7 +369,7 @@ class IgsSsrMessageType(java.lang.Enum['IgsSsrMessageType'], MessageType):
             Get the message type corresponding to a message number.
         
             Parameters:
-                number (String): message number
+                number (:class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): message number
         
             Returns:
                 the message type corresponding to the message number
@@ -431,14 +430,14 @@ class IgsSsrMessageType(java.lang.Enum['IgsSsrMessageType'], MessageType):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -451,9 +450,8 @@ class IgsSsrMessageType(java.lang.Enum['IgsSsrMessageType'], MessageType):
         
             .. code-block: java
             
-            
-            for (IgsSsrMessageType c : IgsSsrMessageType.values())
-                System.out.println(c);
+            for (IgsSsrMessageType c : IgsSsrMessageType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -476,7 +474,7 @@ class IgsSsrMessagesParser(MessagesParser):
 
 class RtcmDataField(java.lang.Enum['RtcmDataField'], DataField):
     """
-    public enum RtcmDataField extends Enum<:class:`~org.orekit.gnss.metric.parser.RtcmDataField`> implements :class:`~org.orekit.gnss.metric.parser.DataField`
+    public enum RtcmDataField extends :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.metric.parser.RtcmDataField`> implements :class:`~org.orekit.gnss.metric.parser.DataField`
     
         Enum containing all intermediate level data fields that can be parsed to build a RTCM message.
     
@@ -648,14 +646,14 @@ class RtcmDataField(java.lang.Enum['RtcmDataField'], DataField):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -668,9 +666,8 @@ class RtcmDataField(java.lang.Enum['RtcmDataField'], DataField):
         
             .. code-block: java
             
-            
-            for (RtcmDataField c : RtcmDataField.values())
-                System.out.println(c);
+            for (RtcmDataField c : RtcmDataField.values())
+                System.out.println(c);
             
         
             Returns:
@@ -682,7 +679,7 @@ class RtcmDataField(java.lang.Enum['RtcmDataField'], DataField):
 
 class RtcmMessageType(java.lang.Enum['RtcmMessageType'], MessageType):
     """
-    public enum RtcmMessageType extends Enum<:class:`~org.orekit.gnss.metric.parser.RtcmMessageType`> implements :class:`~org.orekit.gnss.metric.parser.MessageType`
+    public enum RtcmMessageType extends :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.metric.parser.RtcmMessageType`> implements :class:`~org.orekit.gnss.metric.parser.MessageType`
     
         Enum containing the supported RTCM messages types.
     
@@ -690,7 +687,7 @@ class RtcmMessageType(java.lang.Enum['RtcmMessageType'], MessageType):
             11.0
     
         Also see:
-            "RTCM STANDARD 10403.3, DIFFERENTIAL GNSS (GLOBAL NAVIGATION SATELLITE SYSTEMS) SERVICES â€“ VERSION 3, October 2016."
+            "RTCM STANDARD 10403.3, DIFFERENTIAL GNSS (GLOBAL NAVIGATION SATELLITE SYSTEMS) SERVICES – VERSION 3, October 2016."
     """
     RTCM_1019: typing.ClassVar['RtcmMessageType'] = ...
     RTCM_1020: typing.ClassVar['RtcmMessageType'] = ...
@@ -703,7 +700,7 @@ class RtcmMessageType(java.lang.Enum['RtcmMessageType'], MessageType):
             Get the message type corresponding to a message number.
         
             Parameters:
-                rtcmNumber (String): message number
+                rtcmNumber (:class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): message number
         
             Returns:
                 the message type corresponding to the message number
@@ -733,14 +730,14 @@ class RtcmMessageType(java.lang.Enum['RtcmMessageType'], MessageType):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -753,9 +750,8 @@ class RtcmMessageType(java.lang.Enum['RtcmMessageType'], MessageType):
         
             .. code-block: java
             
-            
-            for (RtcmMessageType c : RtcmMessageType.values())
-                System.out.println(c);
+            for (RtcmMessageType c : RtcmMessageType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -791,12 +787,12 @@ class ByteArrayEncodedMessages(AbstractEncodedMessages):
             Start message extraction.
         
             Specified by:
-                :meth:`~org.orekit.gnss.metric.parser.EncodedMessage.start`Â in
-                interfaceÂ :class:`~org.orekit.gnss.metric.parser.EncodedMessage`
+                :meth:`~org.orekit.gnss.metric.parser.EncodedMessage.start` in
+                interface :class:`~org.orekit.gnss.metric.parser.EncodedMessage`
         
             Overrides:
-                :meth:`~org.orekit.gnss.metric.parser.AbstractEncodedMessages.start`Â in
-                classÂ :class:`~org.orekit.gnss.metric.parser.AbstractEncodedMessages`
+                :meth:`~org.orekit.gnss.metric.parser.AbstractEncodedMessages.start` in
+                class :class:`~org.orekit.gnss.metric.parser.AbstractEncodedMessages`
         
         
         """

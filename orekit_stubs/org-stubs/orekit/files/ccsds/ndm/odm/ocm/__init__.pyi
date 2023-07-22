@@ -23,7 +23,7 @@ import typing
 
 class Covariance(org.orekit.time.TimeStamped):
     """
-    public class Covariance extends Object implements :class:`~org.orekit.time.TimeStamped`
+    public class Covariance extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`
     
         Covariance entry.
     
@@ -67,7 +67,7 @@ class Covariance(org.orekit.time.TimeStamped):
 
 class CovarianceHistory:
     """
-    public class CovarianceHistory extends Object
+    public class CovarianceHistory extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Covariance history.
     
@@ -221,7 +221,7 @@ class CovarianceHistoryMetadata(org.orekit.files.ccsds.section.CommentsContainer
             Set basis of this covariance time history data.
         
             Parameters:
-                covBasis (String): basis of this covariance time history data
+                covBasis (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): basis of this covariance time history data
         
         
         """
@@ -231,7 +231,7 @@ class CovarianceHistoryMetadata(org.orekit.files.ccsds.section.CommentsContainer
             Set identification number of the orbit determination or simulation upon which this covariance is based.
         
             Parameters:
-                covBasisID (String): identification number of the orbit determination or simulation upon which this covariance is based
+                covBasisID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): identification number of the orbit determination or simulation upon which this covariance is based
         
         
         """
@@ -261,7 +261,7 @@ class CovarianceHistoryMetadata(org.orekit.files.ccsds.section.CommentsContainer
             Set covariance identification number.
         
             Parameters:
-                covID (String): covariance identification number
+                covID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): covariance identification number
         
         
         """
@@ -271,7 +271,7 @@ class CovarianceHistoryMetadata(org.orekit.files.ccsds.section.CommentsContainer
             Set identification number of next covariance.
         
             Parameters:
-                covNextID (String): identification number of next covariance
+                covNextID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): identification number of next covariance
         
         
         """
@@ -291,7 +291,7 @@ class CovarianceHistoryMetadata(org.orekit.files.ccsds.section.CommentsContainer
             Set identification number of previous covariance.
         
             Parameters:
-                covPrevID (String): identification number of previous covariance
+                covPrevID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): identification number of previous covariance
         
         
         """
@@ -347,8 +347,8 @@ class CovarianceHistoryMetadata(org.orekit.files.ccsds.section.CommentsContainer
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
+                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
         
             Parameters:
                 version (double): format version
@@ -359,7 +359,7 @@ class CovarianceHistoryMetadata(org.orekit.files.ccsds.section.CommentsContainer
 
 class CovarianceHistoryMetadataKey(java.lang.Enum['CovarianceHistoryMetadataKey']):
     """
-    public enum CovarianceHistoryMetadataKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.CovarianceHistoryMetadataKey`>
+    public enum CovarianceHistoryMetadataKey extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.CovarianceHistoryMetadataKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.odm.ocm.CovarianceHistoryMetadata` entries.
     
@@ -407,14 +407,14 @@ class CovarianceHistoryMetadataKey(java.lang.Enum['CovarianceHistoryMetadataKey'
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -427,9 +427,8 @@ class CovarianceHistoryMetadataKey(java.lang.Enum['CovarianceHistoryMetadataKey'
         
             .. code-block: java
             
-            
-            for (CovarianceHistoryMetadataKey c : CovarianceHistoryMetadataKey.values())
-                System.out.println(c);
+            for (CovarianceHistoryMetadataKey c : CovarianceHistoryMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -441,7 +440,7 @@ class CovarianceHistoryMetadataKey(java.lang.Enum['CovarianceHistoryMetadataKey'
 
 class ManBasis(java.lang.Enum['ManBasis']):
     """
-    public enum ManBasis extends Enum<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.ManBasis`>
+    public enum ManBasis extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.ManBasis`>
     
         Basis of maneuver used in CCSDS :class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`.
     
@@ -467,14 +466,14 @@ class ManBasis(java.lang.Enum['ManBasis']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -487,9 +486,8 @@ class ManBasis(java.lang.Enum['ManBasis']):
         
             .. code-block: java
             
-            
-            for (ManBasis c : ManBasis.values())
-                System.out.println(c);
+            for (ManBasis c : ManBasis.values())
+                System.out.println(c);
             
         
             Returns:
@@ -501,7 +499,7 @@ class ManBasis(java.lang.Enum['ManBasis']):
 
 class Maneuver(org.orekit.time.TimeStamped):
     """
-    public class Maneuver extends Object implements :class:`~org.orekit.time.TimeStamped`
+    public class Maneuver extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`
     
         Maneuver entry.
     
@@ -521,10 +519,10 @@ class Maneuver(org.orekit.time.TimeStamped):
         ...
     def getAccelerationDirectionSigma(self) -> float:
         """
-            Get one Ïƒ angular off-nominal acceleration direction.
+            Get one σ angular off-nominal acceleration direction.
         
             Returns:
-                one Ïƒ angular off-nominal acceleration direction
+                one σ angular off-nominal acceleration direction
         
         
         """
@@ -541,10 +539,10 @@ class Maneuver(org.orekit.time.TimeStamped):
         ...
     def getAccelerationMagnitudeSigma(self) -> float:
         """
-            Get one Ïƒ percent error on acceleration magnitude.
+            Get one σ percent error on acceleration magnitude.
         
             Returns:
-                one Ïƒ percent error on acceleration magnitude
+                one σ percent error on acceleration magnitude
         
         
         """
@@ -574,10 +572,10 @@ class Maneuver(org.orekit.time.TimeStamped):
         ...
     def getDeployDirSigma(self) -> float:
         """
-            Get one Ïƒ angular off-nominal deployment vector direction.
+            Get one σ angular off-nominal deployment vector direction.
         
             Returns:
-                one Ïƒ angular off-nominal deployment vector direction
+                one σ angular off-nominal deployment vector direction
         
         
         """
@@ -604,20 +602,20 @@ class Maneuver(org.orekit.time.TimeStamped):
         ...
     def getDeployDvRatio(self) -> float:
         """
-            Get ratio of child-to-host Î”V vectors.
+            Get ratio of child-to-host ΔV vectors.
         
             Returns:
-                ratio of child-to-host Î”V vectors
+                ratio of child-to-host ΔV vectors
         
         
         """
         ...
     def getDeployDvSigma(self) -> float:
         """
-            Get one Ïƒ percent error on deployment Î”V magnitude.
+            Get one σ percent error on deployment ΔV magnitude.
         
             Returns:
-                one Ïƒ percent error on deployment Î”V magnitude
+                one σ percent error on deployment ΔV magnitude
         
         
         """
@@ -637,7 +635,7 @@ class Maneuver(org.orekit.time.TimeStamped):
             Get decrement in host mass as a result of deployment.
         
             Returns:
-                decrement in host mass as a result of deployment (shall be â‰¤ 0)
+                decrement in host mass as a result of deployment (shall be ≤ 0)
         
         
         """
@@ -664,20 +662,20 @@ class Maneuver(org.orekit.time.TimeStamped):
         ...
     def getDvDirSigma(self) -> float:
         """
-            Get one Ïƒ angular off-nominal Î”V direction.
+            Get one σ angular off-nominal ΔV direction.
         
             Returns:
-                one Ïƒ angular off-nominal Î”V direction
+                one σ angular off-nominal ΔV direction
         
         
         """
         ...
     def getDvMagSigma(self) -> float:
         """
-            Get one Ïƒ percent error on Î”V magnitude.
+            Get one σ percent error on ΔV magnitude.
         
             Returns:
-                one Ïƒ percent error on Î”V magnitude
+                one σ percent error on ΔV magnitude
         
         
         """
@@ -694,20 +692,20 @@ class Maneuver(org.orekit.time.TimeStamped):
         ...
     def getThrustDirectionSigma(self) -> float:
         """
-            Get one Ïƒ angular off-nominal thrust direction.
+            Get one σ angular off-nominal thrust direction.
         
             Returns:
-                one Ïƒ angular off-nominal thrust direction
+                one σ angular off-nominal thrust direction
         
         
         """
         ...
     def getThrustEfficiency(self) -> float:
         """
-            Get thrust efficiency Î·.
+            Get thrust efficiency η.
         
             Returns:
-                thrust efficiency Î· (typically between 0.0 and 1.0)
+                thrust efficiency η (typically between 0.0 and 1.0)
         
         
         """
@@ -734,10 +732,10 @@ class Maneuver(org.orekit.time.TimeStamped):
         ...
     def getThrustMagnitudeSigma(self) -> float:
         """
-            Get one Ïƒ percent error on thrust magnitude.
+            Get one σ percent error on thrust magnitude.
         
             Returns:
-                one Ïƒ percent error on thrust magnitude
+                one σ percent error on thrust magnitude
         
         
         """
@@ -755,10 +753,10 @@ class Maneuver(org.orekit.time.TimeStamped):
         ...
     def setAccelerationDirectionSigma(self, double: float) -> None:
         """
-            Set one Ïƒ angular off-nominal acceleration direction.
+            Set one σ angular off-nominal acceleration direction.
         
             Parameters:
-                accelerationDirectionSigma (double): one Ïƒ angular off-nominal acceleration direction
+                accelerationDirectionSigma (double): one σ angular off-nominal acceleration direction
         
         
         """
@@ -775,10 +773,10 @@ class Maneuver(org.orekit.time.TimeStamped):
         ...
     def setAccelerationMagnitudeSigma(self, double: float) -> None:
         """
-            Set one Ïƒ percent error on acceleration magnitude.
+            Set one σ percent error on acceleration magnitude.
         
             Parameters:
-                accelerationMagnitudeSigma (double): one Ïƒ percent error on acceleration magnitude
+                accelerationMagnitudeSigma (double): one σ percent error on acceleration magnitude
         
         
         """
@@ -805,10 +803,10 @@ class Maneuver(org.orekit.time.TimeStamped):
         ...
     def setDeployDirSigma(self, double: float) -> None:
         """
-            Set one Ïƒ angular off-nominal deployment vector direction.
+            Set one σ angular off-nominal deployment vector direction.
         
             Parameters:
-                deployDirSigma (double): one Ïƒ angular off-nominal deployment vector direction
+                deployDirSigma (double): one σ angular off-nominal deployment vector direction
         
         
         """
@@ -836,20 +834,20 @@ class Maneuver(org.orekit.time.TimeStamped):
         ...
     def setDeployDvRatio(self, double: float) -> None:
         """
-            Set ratio of child-to-host Î”V vectors.
+            Set ratio of child-to-host ΔV vectors.
         
             Parameters:
-                deployDvRatio (double): ratio of child-to-host Î”V vectors
+                deployDvRatio (double): ratio of child-to-host ΔV vectors
         
         
         """
         ...
     def setDeployDvSigma(self, double: float) -> None:
         """
-            Set one Ïƒ percent error on deployment Î”V magnitude.
+            Set one σ percent error on deployment ΔV magnitude.
         
             Parameters:
-                deployDvSigma (double): one Ïƒ percent error on deployment Î”V magnitude
+                deployDvSigma (double): one σ percent error on deployment ΔV magnitude
         
         
         """
@@ -859,7 +857,7 @@ class Maneuver(org.orekit.time.TimeStamped):
             Set identifier of resulting "child" object deployed from this host.
         
             Parameters:
-                deployId (String): identifier of resulting "child" object deployed from this host
+                deployId (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): identifier of resulting "child" object deployed from this host
         
         
         """
@@ -869,7 +867,7 @@ class Maneuver(org.orekit.time.TimeStamped):
             Set decrement in host mass as a result of deployment.
         
             Parameters:
-                deployMass (double): decrement in host mass as a result of deployment (shall be â‰¤ 0)
+                deployMass (double): decrement in host mass as a result of deployment (shall be ≤ 0)
         
         
         """
@@ -897,20 +895,20 @@ class Maneuver(org.orekit.time.TimeStamped):
         ...
     def setDvDirSigma(self, double: float) -> None:
         """
-            Set one Ïƒ angular off-nominal Î”V direction.
+            Set one σ angular off-nominal ΔV direction.
         
             Parameters:
-                dvDirSigma (double): one Ïƒ angular off-nominal Î”V direction
+                dvDirSigma (double): one σ angular off-nominal ΔV direction
         
         
         """
         ...
     def setDvMagSigma(self, double: float) -> None:
         """
-            Set one Ïƒ percent error on Î”V magnitude.
+            Set one σ percent error on ΔV magnitude.
         
             Parameters:
-                dvMagSigma (double): one Ïƒ percent error on Î”V magnitude
+                dvMagSigma (double): one σ percent error on ΔV magnitude
         
         
         """
@@ -928,20 +926,20 @@ class Maneuver(org.orekit.time.TimeStamped):
         ...
     def setThrustDirectionSigma(self, double: float) -> None:
         """
-            Set one Ïƒ angular off-nominal thrust direction.
+            Set one σ angular off-nominal thrust direction.
         
             Parameters:
-                thrustDirectionSigma (double): one Ïƒ angular off-nominal thrust direction
+                thrustDirectionSigma (double): one σ angular off-nominal thrust direction
         
         
         """
         ...
     def setThrustEfficiency(self, double: float) -> None:
         """
-            Set thrust efficiency Î·.
+            Set thrust efficiency η.
         
             Parameters:
-                thrustEfficiency (double): thrust efficiency Î· (typically between 0.0 and 1.0)
+                thrustEfficiency (double): thrust efficiency η (typically between 0.0 and 1.0)
         
         
         """
@@ -968,10 +966,10 @@ class Maneuver(org.orekit.time.TimeStamped):
         ...
     def setThrustMagnitudeSigma(self, double: float) -> None:
         """
-            Set one Ïƒ percent error on thrust magnitude.
+            Set one σ percent error on thrust magnitude.
         
             Parameters:
-                thrustMagnitudeSigma (double): one Ïƒ percent error on thrust magnitude
+                thrustMagnitudeSigma (double): one σ percent error on thrust magnitude
         
         
         """
@@ -979,7 +977,7 @@ class Maneuver(org.orekit.time.TimeStamped):
 
 class ManeuverFieldType(java.lang.Enum['ManeuverFieldType']):
     """
-    public enum ManeuverFieldType extends Enum<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.ManeuverFieldType`>
+    public enum ManeuverFieldType extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.ManeuverFieldType`>
     
         Maneuver field type used in CCSDS :class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`.
     
@@ -1067,11 +1065,11 @@ class ManeuverFieldType(java.lang.Enum['ManeuverFieldType']):
             Process one field.
         
             Parameters:
-                field (String): field to process
+                field (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): field to process
                 context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
                 maneuver (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.Maneuver`): maneuver to fill
                 lineNumber (int): line number at which the field occurs
-                fileName (String): name of the file in which the field occurs
+                fileName (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the file in which the field occurs
         
         
         """
@@ -1088,14 +1086,14 @@ class ManeuverFieldType(java.lang.Enum['ManeuverFieldType']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -1108,9 +1106,8 @@ class ManeuverFieldType(java.lang.Enum['ManeuverFieldType']):
         
             .. code-block: java
             
-            
-            for (ManeuverFieldType c : ManeuverFieldType.values())
-                System.out.println(c);
+            for (ManeuverFieldType c : ManeuverFieldType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1122,7 +1119,7 @@ class ManeuverFieldType(java.lang.Enum['ManeuverFieldType']):
 
 class ManeuverHistory:
     """
-    public class ManeuverHistory extends Object
+    public class ManeuverHistory extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Maneuver history.
     
@@ -1415,16 +1412,7 @@ class ManeuverHistoryMetadata(org.orekit.files.ccsds.section.CommentsContainer):
         
         """
         ...
-    def getManPurpose(self) -> java.util.List[str]:
-        """
-            Get the purposes of the maneuver.
-        
-            Returns:
-                purposes of the maneuver
-        
-        
-        """
-        ...
+    def getManPurpose(self) -> java.util.List[str]: ...
     def getManReferenceFrame(self) -> org.orekit.files.ccsds.definitions.FrameFacade:
         """
             Get reference frame of the maneuver.
@@ -1454,7 +1442,7 @@ class ManeuverHistoryMetadata(org.orekit.files.ccsds.section.CommentsContainer):
             cycle.
         
             Parameters:
-                dcBodyTrigger (Vector3D): direction in :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.ManeuverHistoryMetadata.getDcBodyFrame` for triggering duty
+                dcBodyTrigger (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): direction in :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.ManeuverHistoryMetadata.getDcBodyFrame` for triggering duty
                     cycle
         
         
@@ -1525,7 +1513,7 @@ class ManeuverHistoryMetadata(org.orekit.files.ccsds.section.CommentsContainer):
             Set reference direction for triggering duty cycle.
         
             Parameters:
-                dcRefDir (Vector3D): reference direction for triggering duty cycle
+                dcRefDir (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): reference direction for triggering duty cycle
         
         
         """
@@ -1615,7 +1603,7 @@ class ManeuverHistoryMetadata(org.orekit.files.ccsds.section.CommentsContainer):
             Set identification number of the orbit determination or simulation upon which this maneuver is based.
         
             Parameters:
-                manBasisID (String): identification number of the orbit determination or simulation upon which this maneuver is based
+                manBasisID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): identification number of the orbit determination or simulation upon which this maneuver is based
         
         
         """
@@ -1626,7 +1614,7 @@ class ManeuverHistoryMetadata(org.orekit.files.ccsds.section.CommentsContainer):
             Set identifier of the device used for this maneuver.
         
             Parameters:
-                manDeviceID (String): identifier of the device used for this maneuver
+                manDeviceID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): identifier of the device used for this maneuver
         
         
         """
@@ -1646,7 +1634,7 @@ class ManeuverHistoryMetadata(org.orekit.files.ccsds.section.CommentsContainer):
             Set maneuver identification number.
         
             Parameters:
-                manID (String): maneuver identification number
+                manID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): maneuver identification number
         
         
         """
@@ -1666,7 +1654,7 @@ class ManeuverHistoryMetadata(org.orekit.files.ccsds.section.CommentsContainer):
             Set identification number of next maneuver.
         
             Parameters:
-                manNextID (String): identification number of next maneuver
+                manNextID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): identification number of next maneuver
         
         
         """
@@ -1676,7 +1664,7 @@ class ManeuverHistoryMetadata(org.orekit.files.ccsds.section.CommentsContainer):
             Set prediction source on which this maneuver is based.
         
             Parameters:
-                manPredSource (String): prediction source on which this maneuver is based
+                manPredSource (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): prediction source on which this maneuver is based
         
         
         """
@@ -1696,21 +1684,12 @@ class ManeuverHistoryMetadata(org.orekit.files.ccsds.section.CommentsContainer):
             Set identification number of previous maneuver.
         
             Parameters:
-                manPrevID (String): identification number of previous maneuver
+                manPrevID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): identification number of previous maneuver
         
         
         """
         ...
-    def setManPurpose(self, list: java.util.List[str]) -> None:
-        """
-            Set the purposes of the maneuver.
-        
-            Parameters:
-                manPurpose (List<String> manPurpose): purposes of the maneuver
-        
-        
-        """
-        ...
+    def setManPurpose(self, list: java.util.List[str]) -> None: ...
     def setManReferenceFrame(self, frameFacade: org.orekit.files.ccsds.definitions.FrameFacade) -> None:
         """
             Set reference frame of the maneuver.
@@ -1732,8 +1711,8 @@ class ManeuverHistoryMetadata(org.orekit.files.ccsds.section.CommentsContainer):
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
+                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
         
             Parameters:
                 version (double): format version
@@ -1744,7 +1723,7 @@ class ManeuverHistoryMetadata(org.orekit.files.ccsds.section.CommentsContainer):
 
 class ManeuverHistoryMetadataKey(java.lang.Enum['ManeuverHistoryMetadataKey']):
     """
-    public enum ManeuverHistoryMetadataKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.ManeuverHistoryMetadataKey`>
+    public enum ManeuverHistoryMetadataKey extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.ManeuverHistoryMetadataKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.odm.ocm.ManeuverHistoryMetadata` entries.
     
@@ -1809,14 +1788,14 @@ class ManeuverHistoryMetadataKey(java.lang.Enum['ManeuverHistoryMetadataKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -1829,9 +1808,8 @@ class ManeuverHistoryMetadataKey(java.lang.Enum['ManeuverHistoryMetadataKey']):
         
             .. code-block: java
             
-            
-            for (ManeuverHistoryMetadataKey c : ManeuverHistoryMetadataKey.values())
-                System.out.println(c);
+            for (ManeuverHistoryMetadataKey c : ManeuverHistoryMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1843,7 +1821,7 @@ class ManeuverHistoryMetadataKey(java.lang.Enum['ManeuverHistoryMetadataKey']):
 
 class ObjectType(java.lang.Enum['ObjectType']):
     """
-    public enum ObjectType extends Enum<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.ObjectType`>
+    public enum ObjectType extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.ObjectType`>
     
         Object type used in CCSDS :class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`.
     
@@ -1867,14 +1845,14 @@ class ObjectType(java.lang.Enum['ObjectType']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -1887,9 +1865,8 @@ class ObjectType(java.lang.Enum['ObjectType']):
         
             .. code-block: java
             
-            
-            for (ObjectType c : ObjectType.values())
-                System.out.println(c);
+            for (ObjectType c : ObjectType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1910,7 +1887,7 @@ class Ocm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.secti
     """
     ROOT: typing.ClassVar[str] = ...
     """
-    public static final String ROOT
+    public static final :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ROOT
     
         Root element for XML messages.
     
@@ -1921,7 +1898,7 @@ class Ocm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.secti
     """
     FORMAT_VERSION_KEY: typing.ClassVar[str] = ...
     """
-    public static final String FORMAT_VERSION_KEY
+    public static final :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` FORMAT_VERSION_KEY
     
         Key for format version.
     
@@ -1932,7 +1909,7 @@ class Ocm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.secti
     """
     TRAJ_LINE: typing.ClassVar[str] = ...
     """
-    public static final String TRAJ_LINE
+    public static final :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` TRAJ_LINE
     
         Trajectory line element for XML messages.
     
@@ -1943,7 +1920,7 @@ class Ocm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.secti
     """
     COV_LINE: typing.ClassVar[str] = ...
     """
-    public static final String COV_LINE
+    public static final :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` COV_LINE
     
         Covariance line element for XML messages.
     
@@ -1954,7 +1931,7 @@ class Ocm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.secti
     """
     MAN_LINE: typing.ClassVar[str] = ...
     """
-    public static final String MAN_LINE
+    public static final :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MAN_LINE
     
         Maneuver line element for XML messages.
     
@@ -1965,7 +1942,7 @@ class Ocm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.secti
     """
     UNKNOWN_OBJECT: typing.ClassVar[str] = ...
     """
-    public static final String UNKNOWN_OBJECT
+    public static final :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` UNKNOWN_OBJECT
     
         Default name for unknown object.
     
@@ -1999,7 +1976,7 @@ class Ocm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.secti
 
 class OcmData(org.orekit.files.ccsds.section.Data):
     """
-    public class OcmData extends Object implements :class:`~org.orekit.files.ccsds.section.Data`
+    public class OcmData extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.section.Data`
     
         Data container for Orbit Comprehensive Messages.
     
@@ -2068,7 +2045,7 @@ class OcmData(org.orekit.files.ccsds.section.Data):
 
 class OcmDataSubStructureKey(java.lang.Enum['OcmDataSubStructureKey']):
     """
-    public enum OcmDataSubStructureKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmDataSubStructureKey`>
+    public enum OcmDataSubStructureKey extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmDataSubStructureKey`>
     
         Keywords for OCM data sub-structure.
     
@@ -2115,14 +2092,14 @@ class OcmDataSubStructureKey(java.lang.Enum['OcmDataSubStructureKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -2135,9 +2112,8 @@ class OcmDataSubStructureKey(java.lang.Enum['OcmDataSubStructureKey']):
         
             .. code-block: java
             
-            
-            for (OcmDataSubStructureKey c : OcmDataSubStructureKey.values())
-                System.out.println(c);
+            for (OcmDataSubStructureKey c : OcmDataSubStructureKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -2166,16 +2142,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
         
         """
         ...
-    def getAlternateNames(self) -> java.util.List[str]:
-        """
-            Get the alternate names for this space object.
-        
-            Returns:
-                alternate names
-        
-        
-        """
-        ...
+    def getAlternateNames(self) -> java.util.List[str]: ...
     def getCatalogName(self) -> str:
         """
             Get the specification of satellite catalog source.
@@ -2291,11 +2258,11 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
         ...
     def getNextLeapTaimutc(self) -> float:
         """
-            Get the difference (TAI Ã¢â‚¬â€œ UTC) in seconds incorporated at epoch
+            Get the difference (TAI – UTC) in seconds incorporated at epoch
             :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getNextLeapEpoch`.
         
             Returns:
-                difference (TAI Ã¢â‚¬â€œ UTC) in seconds incorporated at epoch
+                difference (TAI – UTC) in seconds incorporated at epoch
                 :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getNextLeapEpoch`
         
             Since:
@@ -2344,16 +2311,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
         
         """
         ...
-    def getOcmDataElements(self) -> java.util.List[str]:
-        """
-            Get the list of elements of information data blocks included in this message.
-        
-            Returns:
-                list of elements of information data blocks included in this message
-        
-        
-        """
-        ...
+    def getOcmDataElements(self) -> java.util.List[str]: ...
     def getOperator(self) -> str:
         """
             Get the operator of the space object.
@@ -2529,11 +2487,10 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
         ...
     def getTaimutcT0(self) -> float:
         """
-            Get the difference (TAI Ã¢â‚¬â€œ UTC) in seconds at epoch
-            :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`.
+            Get the difference (TAI – UTC) in seconds at epoch :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`.
         
             Returns:
-                difference (TAI â€“ UTC) in seconds at epoch :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`
+                difference (TAI – UTC) in seconds at epoch :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`
         
         
         """
@@ -2623,11 +2580,10 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
         ...
     def getUt1mutcT0(self) -> float:
         """
-            Get the difference (UT1 Ã¢â‚¬â€œ UTC) in seconds at epoch
-            :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`.
+            Get the difference (UT1 – UTC) in seconds at epoch :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`.
         
             Returns:
-                difference (UT1 â€“ UTC) in seconds at epoch :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`
+                difference (UT1 – UTC) in seconds at epoch :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`
         
         
         """
@@ -2637,27 +2593,18 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the Unique identifier of Attitude Data Message linked to this Orbit Data Message.
         
             Parameters:
-                admMessageLink (String): Unique identifier of Attitude Data Message linked to this Orbit Data Message
+                admMessageLink (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): Unique identifier of Attitude Data Message linked to this Orbit Data Message
         
         
         """
         ...
-    def setAlternateNames(self, list: java.util.List[str]) -> None:
-        """
-            Set the alternate names for this space object.
-        
-            Parameters:
-                alternateNames (List<String> alternateNames): alternate names
-        
-        
-        """
-        ...
+    def setAlternateNames(self, list: java.util.List[str]) -> None: ...
     def setCatalogName(self, string: str) -> None:
         """
             Set the specification of satellite catalog source.
         
             Parameters:
-                catalogName (String): specification of satellite catalog source
+                catalogName (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): specification of satellite catalog source
         
         
         """
@@ -2667,7 +2614,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the Unique identifier of Conjunction Data Message linked to this Orbit Data Message.
         
             Parameters:
-                cdmMessageLink (String): Unique identifier of Conjunction Data Message linked to this Orbit Data Message
+                cdmMessageLink (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): Unique identifier of Conjunction Data Message linked to this Orbit Data Message
         
         
         """
@@ -2677,7 +2624,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the source and version of celestial body (e.g. Sun/Earth/Planetary).
         
             Parameters:
-                celestialSource (String): source and version of celestial body (e.g. Sun/Earth/Planetary)
+                celestialSource (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): source and version of celestial body (e.g. Sun/Earth/Planetary)
         
         
         """
@@ -2687,7 +2634,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the message classification.
         
             Parameters:
-                classification (String): message classification
+                classification (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): message classification
         
         
         """
@@ -2697,7 +2644,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the name of the constellation this space object belongs to.
         
             Parameters:
-                constellation (String): name of the constellation this space object belongs to
+                constellation (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the constellation this space object belongs to
         
         
         """
@@ -2707,7 +2654,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the name of the country where the space object owner is based.
         
             Parameters:
-                country (String): name of the country where the space object owner is based
+                country (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the country where the space object owner is based
         
         
         """
@@ -2717,7 +2664,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the source and version of Earth Orientation Parameters.
         
             Parameters:
-                eopSource (String): source and version of Earth Orientation Parameters
+                eopSource (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): source and version of Earth Orientation Parameters
         
         
         """
@@ -2737,7 +2684,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the international designator for the object.
         
             Parameters:
-                internationalDesignator (String): international designator for the object
+                internationalDesignator (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): international designator for the object
         
         
         """
@@ -2747,7 +2694,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the interpolation method for Earth Orientation Parameters.
         
             Parameters:
-                interpMethodEOP (String): interpolation method for Earth Orientation Parameters
+                interpMethodEOP (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): interpolation method for Earth Orientation Parameters
         
         
         """
@@ -2767,11 +2714,11 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
         ...
     def setNextLeapTaimutc(self, double: float) -> None:
         """
-            Set the difference (TAI Ã¢â‚¬â€œ UTC) in seconds incorporated at epoch
+            Set the difference (TAI – UTC) in seconds incorporated at epoch
             :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getNextLeapEpoch`.
         
             Parameters:
-                nextLeapTaimutc (double): difference (TAI Ã¢â‚¬â€œ UTC) in seconds incorporated at epoch
+                nextLeapTaimutc (double): difference (TAI – UTC) in seconds incorporated at epoch
                     :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getNextLeapEpoch`
         
             Since:
@@ -2795,7 +2742,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the unique ID identifying next message from a given originator.
         
             Parameters:
-                nextMessageID (String): unique ID identifying next message from a given originator
+                nextMessageID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): unique ID identifying next message from a given originator
         
         
         """
@@ -2805,7 +2752,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the unique satellite identification designator for the object.
         
             Parameters:
-                objectDesignator (String): unique satellite identification designator for the object
+                objectDesignator (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): unique satellite identification designator for the object
         
         
         """
@@ -2820,22 +2767,13 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
         
         """
         ...
-    def setOcmDataElements(self, list: java.util.List[str]) -> None:
-        """
-            Set the list of elements of information data blocks included in this message.
-        
-            Parameters:
-                ocmDataElements (List<String> ocmDataElements): list of elements of information data blocks included in this message
-        
-        
-        """
-        ...
+    def setOcmDataElements(self, list: java.util.List[str]) -> None: ...
     def setOperator(self, string: str) -> None:
         """
             Set the operator of the space object.
         
             Parameters:
-                operator (String): operator of the space object
+                operator (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): operator of the space object
         
         
         """
@@ -2865,7 +2803,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the address of Programmatic Point Of Contact at originator.
         
             Parameters:
-                originatorAddress (String): address of Programmatic Point Of Contact at originator
+                originatorAddress (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): address of Programmatic Point Of Contact at originator
         
         
         """
@@ -2875,7 +2813,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the email address of Programmatic Point Of Contact at originator.
         
             Parameters:
-                originatorEmail (String): email address of Programmatic Point Of Contact at originator
+                originatorEmail (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): email address of Programmatic Point Of Contact at originator
         
             Since:
                 11.2
@@ -2888,7 +2826,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the programmatic Point Of Contact at originator.
         
             Parameters:
-                originatorPOC (String): programmatic Point Of Contact at originator
+                originatorPOC (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): programmatic Point Of Contact at originator
         
         
         """
@@ -2898,7 +2836,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the phone number of Programmatic Point Of Contact at originator.
         
             Parameters:
-                originatorPhone (String): phone number of Programmatic Point Of Contact at originator
+                originatorPhone (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): phone number of Programmatic Point Of Contact at originator
         
         
         """
@@ -2908,7 +2846,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the position of Programmatic Point Of Contact at originator.
         
             Parameters:
-                originatorPosition (String): position of Programmatic Point Of Contact at originator
+                originatorPosition (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): position of Programmatic Point Of Contact at originator
         
         
         """
@@ -2918,7 +2856,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the owner of the space object.
         
             Parameters:
-                owner (String): owner of the space object
+                owner (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): owner of the space object
         
         
         """
@@ -2938,7 +2876,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the unique ID identifying previous message from a given originator.
         
             Parameters:
-                previousMessageID (String): unique ID identifying previous message from a given originator
+                previousMessageID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): unique ID identifying previous message from a given originator
         
         
         """
@@ -2948,7 +2886,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the Unique identifier of Pointing Request Message linked to this Orbit Data Message.
         
             Parameters:
-                prmMessageLink (String): Unique identifier of Pointing Request Message linked to this Orbit Data Message
+                prmMessageLink (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): Unique identifier of Pointing Request Message linked to this Orbit Data Message
         
         
         """
@@ -2958,7 +2896,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the Unique identifier of Reentry Data Message linked to this Orbit Data Message.
         
             Parameters:
-                rdmMessageLink (String): Unique identifier of Reentry Data Message linked to this Orbit Data Message
+                rdmMessageLink (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): Unique identifier of Reentry Data Message linked to this Orbit Data Message
         
         
         """
@@ -3005,11 +2943,10 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
         ...
     def setTaimutcT0(self, double: float) -> None:
         """
-            Set the difference (TAI Ã¢â‚¬â€œ UTC) in seconds at epoch
-            :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`.
+            Set the difference (TAI – UTC) in seconds at epoch :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`.
         
             Parameters:
-                taimutcT0 (double): difference (TAI â€“ UTC) in seconds at epoch :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`
+                taimutcT0 (double): difference (TAI – UTC) in seconds at epoch :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`
         
         
         """
@@ -3019,7 +2956,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the Unique identifier of Tracking Data Message linked to this Orbit Data Message.
         
             Parameters:
-                tdmMessageLink (String): Unique identifier of Tracking Data Message linked to this Orbit Data Message
+                tdmMessageLink (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): Unique identifier of Tracking Data Message linked to this Orbit Data Message
         
         
         """
@@ -3029,7 +2966,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the address of Technical Point Of Contact at originator.
         
             Parameters:
-                techAddress (String): address of Technical Point Of Contact at originator
+                techAddress (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): address of Technical Point Of Contact at originator
         
         
         """
@@ -3039,7 +2976,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the email address of Technical Point Of Contact at originator.
         
             Parameters:
-                techEmail (String): email address of Technical Point Of Contact at originator
+                techEmail (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): email address of Technical Point Of Contact at originator
         
             Since:
                 11.2
@@ -3052,7 +2989,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the creating agency or operator.
         
             Parameters:
-                techOrg (String): creating agency or operator
+                techOrg (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): creating agency or operator
         
         
         """
@@ -3062,7 +2999,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the Technical Point Of Contact at originator.
         
             Parameters:
-                techPOC (String): Technical Point Of Contact at originator
+                techPOC (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): Technical Point Of Contact at originator
         
         
         """
@@ -3072,7 +3009,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the phone number of Technical Point Of Contact at originator.
         
             Parameters:
-                techPhone (String): phone number of Technical Point Of Contact at originator
+                techPhone (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): phone number of Technical Point Of Contact at originator
         
         
         """
@@ -3082,7 +3019,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
             Set the position of Technical Point Of Contact at originator.
         
             Parameters:
-                techPosition (String): position of Technical Point Of Contact at originator
+                techPosition (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): position of Technical Point Of Contact at originator
         
         
         """
@@ -3099,11 +3036,10 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
         ...
     def setUt1mutcT0(self, double: float) -> None:
         """
-            Set the difference (UT1 Ã¢â‚¬â€œ UTC) in seconds at epoch
-            :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`.
+            Set the difference (UT1 – UTC) in seconds at epoch :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`.
         
             Parameters:
-                ut1mutcT0 (double): difference (UT1 â€“ UTC) in seconds at epoch :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`
+                ut1mutcT0 (double): difference (UT1 – UTC) in seconds at epoch :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata.getEpochT0`
         
         
         """
@@ -3129,7 +3065,7 @@ class OcmMetadata(org.orekit.files.ccsds.ndm.odm.OdmMetadata):
 
 class OcmMetadataKey(java.lang.Enum['OcmMetadataKey']):
     """
-    public enum OcmMetadataKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadataKey`>
+    public enum OcmMetadataKey extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadataKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmMetadata` entries.
     
@@ -3209,14 +3145,14 @@ class OcmMetadataKey(java.lang.Enum['OcmMetadataKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -3229,9 +3165,8 @@ class OcmMetadataKey(java.lang.Enum['OcmMetadataKey']):
         
             .. code-block: java
             
-            
-            for (OcmMetadataKey c : OcmMetadataKey.values())
-                System.out.println(c);
+            for (OcmMetadataKey c : OcmMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -3261,8 +3196,8 @@ class OcmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Ocm, 'OcmParser'], org.
             Build the file from parsed entries.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.build`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.build` in
+                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
         
             Returns:
                 parsed file
@@ -3275,8 +3210,8 @@ class OcmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Ocm, 'OcmParser'], org.
             Finalize data after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -3289,8 +3224,8 @@ class OcmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Ocm, 'OcmParser'], org.
             Finalize header after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -3303,8 +3238,8 @@ class OcmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Ocm, 'OcmParser'], org.
             Finalize metadata after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -3317,8 +3252,8 @@ class OcmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Ocm, 'OcmParser'], org.
             Get file header to fill.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 file header to fill
@@ -3332,8 +3267,8 @@ class OcmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Ocm, 'OcmParser'], org.
             Acknowledge data parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -3346,8 +3281,8 @@ class OcmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Ocm, 'OcmParser'], org.
             Acknowledge header parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -3360,8 +3295,8 @@ class OcmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Ocm, 'OcmParser'], org.
             Acknowledge metada parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -3374,8 +3309,8 @@ class OcmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Ocm, 'OcmParser'], org.
             Parse an ephemeris file from a data source.
         
             Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFileParser.parse`Â in
-                interfaceÂ :class:`~org.orekit.files.general.EphemerisFileParser`
+                :meth:`~org.orekit.files.general.EphemerisFileParser.parse` in
+                interface :class:`~org.orekit.files.general.EphemerisFileParser`
         
             Parameters:
                 source (:class:`~org.orekit.data.DataSource`): source providing the data to parse
@@ -3391,8 +3326,8 @@ class OcmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Ocm, 'OcmParser'], org.
             Prepare data for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -3405,8 +3340,8 @@ class OcmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Ocm, 'OcmParser'], org.
             Prepare header for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -3419,8 +3354,8 @@ class OcmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Ocm, 'OcmParser'], org.
             Prepare metadata for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -3433,8 +3368,8 @@ class OcmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Ocm, 'OcmParser'], org.
             Reset parser to initial state before parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.reset`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.reset` in
+                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
         
             Parameters:
                 fileFormat (:class:`~org.orekit.files.ccsds.utils.FileFormat`): format of the file ready to be parsed
@@ -3445,7 +3380,7 @@ class OcmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Ocm, 'OcmParser'], org.
 
 class OcmSatelliteEphemeris(org.orekit.files.general.EphemerisFile.SatelliteEphemeris[org.orekit.utils.TimeStampedPVCoordinates, 'TrajectoryStateHistory']):
     """
-    public class OcmSatelliteEphemeris extends Object implements :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`, :class:`~org.orekit.files.ccsds.ndm.odm.ocm.TrajectoryStateHistory`>
+    public class OcmSatelliteEphemeris extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`, :class:`~org.orekit.files.ccsds.ndm.odm.ocm.TrajectoryStateHistory`>
     
         OCM ephemeris blocks for a single satellite.
     
@@ -3458,8 +3393,8 @@ class OcmSatelliteEphemeris(org.orekit.files.general.EphemerisFile.SatelliteEphe
             Get the satellite ID. The satellite ID is unique only within the same ephemeris file.
         
             Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getId`Â in
-                interfaceÂ :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
+                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getId` in
+                interface :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
         
             Returns:
                 the satellite's ID, never :code:`null`.
@@ -3472,12 +3407,12 @@ class OcmSatelliteEphemeris(org.orekit.files.general.EphemerisFile.SatelliteEphe
             Get the standard gravitational parameter for the satellite.
         
             Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getMu`Â in
-                interfaceÂ :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
+                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getMu` in
+                interface :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
         
             Returns:
                 the gravitational parameter used in :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getPropagator`, in
-                mÃ‚Â³/sÃ‚Â².
+                m³/s².
         
         
         """
@@ -3490,8 +3425,8 @@ class OcmSatelliteEphemeris(org.orekit.files.general.EphemerisFile.SatelliteEphe
             The date returned by this method is equivalent to :code:`getPropagator().getMinDate()`.
         
             Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getStart`Â in
-                interfaceÂ :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
+                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getStart` in
+                interface :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
         
             Returns:
                 ephemeris start date.
@@ -3506,8 +3441,8 @@ class OcmSatelliteEphemeris(org.orekit.files.general.EphemerisFile.SatelliteEphe
             The date returned by this method is equivalent to :code:`getPropagator().getMaxDate()`.
         
             Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getStop`Â in
-                interfaceÂ :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
+                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getStop` in
+                interface :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
         
             Returns:
                 ephemeris end date.
@@ -3552,7 +3487,7 @@ class OcmWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[or
 
 class OpsStatus(java.lang.Enum['OpsStatus']):
     """
-    public enum OpsStatus extends Enum<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OpsStatus`>
+    public enum OpsStatus extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OpsStatus`>
     
         Operational status used in CCSDS :class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`.
     
@@ -3572,7 +3507,8 @@ class OpsStatus(java.lang.Enum['OpsStatus']):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum.html?is` in
+                class :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`
         
         
         """
@@ -3589,14 +3525,14 @@ class OpsStatus(java.lang.Enum['OpsStatus']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -3609,9 +3545,8 @@ class OpsStatus(java.lang.Enum['OpsStatus']):
         
             .. code-block: java
             
-            
-            for (OpsStatus c : OpsStatus.values())
-                System.out.println(c);
+            for (OpsStatus c : OpsStatus.values())
+                System.out.println(c);
             
         
             Returns:
@@ -3623,7 +3558,7 @@ class OpsStatus(java.lang.Enum['OpsStatus']):
 
 class OrbitCategory(java.lang.Enum['OrbitCategory']):
     """
-    public enum OrbitCategory extends Enum<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitCategory`>
+    public enum OrbitCategory extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitCategory`>
     
         Orbit category used in CCSDS :class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`.
     
@@ -3649,7 +3584,8 @@ class OrbitCategory(java.lang.Enum['OrbitCategory']):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum.html?is` in
+                class :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`
         
         
         """
@@ -3666,14 +3602,14 @@ class OrbitCategory(java.lang.Enum['OrbitCategory']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -3686,9 +3622,8 @@ class OrbitCategory(java.lang.Enum['OrbitCategory']):
         
             .. code-block: java
             
-            
-            for (OrbitCategory c : OrbitCategory.values())
-                System.out.println(c);
+            for (OrbitCategory c : OrbitCategory.values())
+                System.out.println(c);
             
         
             Returns:
@@ -3737,26 +3672,8 @@ class OrbitDetermination(org.orekit.files.ccsds.section.CommentsContainer):
         
         """
         ...
-    def getConsiderParameters(self) -> java.util.List[str]:
-        """
-            Get description of consider parameters.
-        
-            Returns:
-                description of consider parameters
-        
-        
-        """
-        ...
-    def getDataTypes(self) -> java.util.List[str]:
-        """
-            Get observation data types used.
-        
-            Returns:
-                observation data types used
-        
-        
-        """
-        ...
+    def getConsiderParameters(self) -> java.util.List[str]: ...
+    def getDataTypes(self) -> java.util.List[str]: ...
     def getEpoch(self) -> org.orekit.time.AbsoluteDate:
         """
             Get time tag for orbit determination solved-for state.
@@ -3769,30 +3686,30 @@ class OrbitDetermination(org.orekit.files.ccsds.section.CommentsContainer):
         ...
     def getEpochEigenInt(self) -> float:
         """
-            Get positional error ellipsoid 1Ïƒ intermediate eigenvalue at the epoch of OD.
+            Get positional error ellipsoid 1σ intermediate eigenvalue at the epoch of OD.
         
             Returns:
-                positional error ellipsoid 1Ïƒ intermediate eigenvalue at the epoch of OD
+                positional error ellipsoid 1σ intermediate eigenvalue at the epoch of OD
         
         
         """
         ...
     def getEpochEigenMaj(self) -> float:
         """
-            Get positional error ellipsoid 1Ïƒ major eigenvalue at the epoch of OD.
+            Get positional error ellipsoid 1σ major eigenvalue at the epoch of OD.
         
             Returns:
-                positional error ellipsoid 1Ïƒ major eigenvalue at the epoch of OD
+                positional error ellipsoid 1σ major eigenvalue at the epoch of OD
         
         
         """
         ...
     def getEpochEigenMin(self) -> float:
         """
-            Get positional error ellipsoid 1Ïƒ minor eigenvalue at the epoch of OD.
+            Get positional error ellipsoid 1σ minor eigenvalue at the epoch of OD.
         
             Returns:
-                positional error ellipsoid 1Ïƒ minor eigenvalue at the epoch of OD
+                positional error ellipsoid 1σ minor eigenvalue at the epoch of OD
         
         
         """
@@ -3819,10 +3736,10 @@ class OrbitDetermination(org.orekit.files.ccsds.section.CommentsContainer):
         ...
     def getMaxPredictedEigenMaj(self) -> float:
         """
-            Get maximum predicted major eigenvalue of 1Ïƒ positional error ellipsoid over entire time span of the OCM.
+            Get maximum predicted major eigenvalue of 1σ positional error ellipsoid over entire time span of the OCM.
         
             Returns:
-                maximum predicted major eigenvalue of 1Ïƒ positional error ellipsoid over entire time span of the OCM
+                maximum predicted major eigenvalue of 1σ positional error ellipsoid over entire time span of the OCM
         
         
         """
@@ -3849,10 +3766,10 @@ class OrbitDetermination(org.orekit.files.ccsds.section.CommentsContainer):
         ...
     def getMinPredictedEigenMin(self) -> float:
         """
-            Get minimum predicted minor eigenvalue of 1Ïƒ positional error ellipsoid over entire time span of the OCM.
+            Get minimum predicted minor eigenvalue of 1σ positional error ellipsoid over entire time span of the OCM.
         
             Returns:
-                minimum predicted v eigenvalue of 1Ïƒ positional error ellipsoid over entire time span of the OCM
+                minimum predicted v eigenvalue of 1σ positional error ellipsoid over entire time span of the OCM
         
         
         """
@@ -3897,16 +3814,7 @@ class OrbitDetermination(org.orekit.files.ccsds.section.CommentsContainer):
         
         """
         ...
-    def getSensors(self) -> java.util.List[str]:
-        """
-            Get description of sensors used.
-        
-            Returns:
-                description of sensors used
-        
-        
-        """
-        ...
+    def getSensors(self) -> java.util.List[str]: ...
     def getSensorsN(self) -> int:
         """
             Get number of sensors used.
@@ -3927,16 +3835,7 @@ class OrbitDetermination(org.orekit.files.ccsds.section.CommentsContainer):
         
         """
         ...
-    def getSolveStates(self) -> java.util.List[str]:
-        """
-            Get description of state elements solved-for.
-        
-            Returns:
-                description of state elements solved-for
-        
-        
-        """
-        ...
+    def getSolveStates(self) -> java.util.List[str]: ...
     def getTimeSinceFirstObservation(self) -> float:
         """
             Get time elapsed between first accepted observation on epoch.
@@ -4017,26 +3916,8 @@ class OrbitDetermination(org.orekit.files.ccsds.section.CommentsContainer):
         
         """
         ...
-    def setConsiderParameters(self, list: java.util.List[str]) -> None:
-        """
-            Set description of consider parameters.
-        
-            Parameters:
-                considerParameters (List<String> considerParameters): description of consider parameters
-        
-        
-        """
-        ...
-    def setDataTypes(self, list: java.util.List[str]) -> None:
-        """
-            Set observation data types used.
-        
-            Parameters:
-                dataTypes (List<String> dataTypes): observation data types used
-        
-        
-        """
-        ...
+    def setConsiderParameters(self, list: java.util.List[str]) -> None: ...
+    def setDataTypes(self, list: java.util.List[str]) -> None: ...
     def setEpoch(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
             Set time tag for orbit determination solved-for state.
@@ -4049,30 +3930,30 @@ class OrbitDetermination(org.orekit.files.ccsds.section.CommentsContainer):
         ...
     def setEpochEigenInt(self, double: float) -> None:
         """
-            Set positional error ellipsoid 1Ïƒ intermediate eigenvalue at the epoch of OD.
+            Set positional error ellipsoid 1σ intermediate eigenvalue at the epoch of OD.
         
             Parameters:
-                epochEigenInt (double): positional error ellipsoid 1Ïƒ intermediate eigenvalue at the epoch of OD
+                epochEigenInt (double): positional error ellipsoid 1σ intermediate eigenvalue at the epoch of OD
         
         
         """
         ...
     def setEpochEigenMaj(self, double: float) -> None:
         """
-            Set positional error ellipsoid 1Ïƒ major eigenvalue at the epoch of OD.
+            Set positional error ellipsoid 1σ major eigenvalue at the epoch of OD.
         
             Parameters:
-                epochEigenMaj (double): positional error ellipsoid 1Ïƒ major eigenvalue at the epoch of OD
+                epochEigenMaj (double): positional error ellipsoid 1σ major eigenvalue at the epoch of OD
         
         
         """
         ...
     def setEpochEigenMin(self, double: float) -> None:
         """
-            Set positional error ellipsoid 1Ïƒ minor eigenvalue at the epoch of OD.
+            Set positional error ellipsoid 1σ minor eigenvalue at the epoch of OD.
         
             Parameters:
-                epochEigenMin (double): positional error ellipsoid 1Ïƒ minor eigenvalue at the epoch of OD
+                epochEigenMin (double): positional error ellipsoid 1σ minor eigenvalue at the epoch of OD
         
         
         """
@@ -4092,17 +3973,17 @@ class OrbitDetermination(org.orekit.files.ccsds.section.CommentsContainer):
             Set identification number.
         
             Parameters:
-                id (String): identification number
+                id (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): identification number
         
         
         """
         ...
     def setMaxPredictedEigenMaj(self, double: float) -> None:
         """
-            Set maximum predicted major eigenvalue of 1Ïƒ positional error ellipsoid over entire time span of the OCM.
+            Set maximum predicted major eigenvalue of 1σ positional error ellipsoid over entire time span of the OCM.
         
             Parameters:
-                maxPredictedEigenMaj (double): maximum predicted major eigenvalue of 1Ïƒ positional error ellipsoid over entire time span of the OCM
+                maxPredictedEigenMaj (double): maximum predicted major eigenvalue of 1σ positional error ellipsoid over entire time span of the OCM
         
         
         """
@@ -4129,10 +4010,10 @@ class OrbitDetermination(org.orekit.files.ccsds.section.CommentsContainer):
         ...
     def setMinPredictedEigenMin(self, double: float) -> None:
         """
-            Set minimum predicted minor eigenvalue of 1Ïƒ positional error ellipsoid over entire time span of the OCM.
+            Set minimum predicted minor eigenvalue of 1σ positional error ellipsoid over entire time span of the OCM.
         
             Parameters:
-                minPredictedEigenMin (double): minimum predicted minor eigenvalue of 1Ïƒ positional error ellipsoid over entire time span of the OCM
+                minPredictedEigenMin (double): minimum predicted minor eigenvalue of 1σ positional error ellipsoid over entire time span of the OCM
         
         
         """
@@ -4162,7 +4043,7 @@ class OrbitDetermination(org.orekit.files.ccsds.section.CommentsContainer):
             Set identification of previous orbit determination.
         
             Parameters:
-                prevId (String): identification of previous orbit determination
+                prevId (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): identification of previous orbit determination
         
         
         """
@@ -4177,16 +4058,7 @@ class OrbitDetermination(org.orekit.files.ccsds.section.CommentsContainer):
         
         """
         ...
-    def setSensors(self, list: java.util.List[str]) -> None:
-        """
-            Set description of sensors used.
-        
-            Parameters:
-                sensors (List<String> sensors): description of sensors used
-        
-        
-        """
-        ...
+    def setSensors(self, list: java.util.List[str]) -> None: ...
     def setSensorsN(self, int: int) -> None:
         """
             Set number of sensors used.
@@ -4207,16 +4079,7 @@ class OrbitDetermination(org.orekit.files.ccsds.section.CommentsContainer):
         
         """
         ...
-    def setSolveStates(self, list: java.util.List[str]) -> None:
-        """
-            Set description of state elements solved-for.
-        
-            Parameters:
-                solveStates (List<String> solveStates): description of state elements solved-for
-        
-        
-        """
-        ...
+    def setSolveStates(self, list: java.util.List[str]) -> None: ...
     def setTimeSinceFirstObservation(self, double: float) -> None:
         """
             Set time elapsed between first accepted observation on epoch.
@@ -4277,8 +4140,8 @@ class OrbitDetermination(org.orekit.files.ccsds.section.CommentsContainer):
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
+                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
         
             Parameters:
                 version (double): format version
@@ -4289,7 +4152,7 @@ class OrbitDetermination(org.orekit.files.ccsds.section.CommentsContainer):
 
 class OrbitDeterminationKey(java.lang.Enum['OrbitDeterminationKey']):
     """
-    public enum OrbitDeterminationKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitDeterminationKey`>
+    public enum OrbitDeterminationKey extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitDeterminationKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitDetermination` entries.
     
@@ -4352,14 +4215,14 @@ class OrbitDeterminationKey(java.lang.Enum['OrbitDeterminationKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -4372,9 +4235,8 @@ class OrbitDeterminationKey(java.lang.Enum['OrbitDeterminationKey']):
         
             .. code-block: java
             
-            
-            for (OrbitDeterminationKey c : OrbitDeterminationKey.values())
-                System.out.println(c);
+            for (OrbitDeterminationKey c : OrbitDeterminationKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -4386,7 +4248,7 @@ class OrbitDeterminationKey(java.lang.Enum['OrbitDeterminationKey']):
 
 class Ordering(java.lang.Enum['Ordering']):
     """
-    public enum Ordering extends Enum<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ordering`>
+    public enum Ordering extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ordering`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.odm.ocm.Covariance` elements ordering.
     
@@ -4410,14 +4272,14 @@ class Ordering(java.lang.Enum['Ordering']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -4430,9 +4292,8 @@ class Ordering(java.lang.Enum['Ordering']):
         
             .. code-block: java
             
-            
-            for (Ordering c : Ordering.values())
-                System.out.println(c);
+            for (Ordering c : Ordering.values())
+                System.out.println(c);
             
         
             Returns:
@@ -4524,10 +4385,10 @@ class Perturbations(org.orekit.files.ccsds.section.CommentsContainer):
         ...
     def getFixedGeomagneticAp(self) -> float:
         """
-            Get fixed (time invariant) value of the planetary 3-hour-range geomagnetic index aâ‚š.
+            Get fixed (time invariant) value of the planetary 3-hour-range geomagnetic index aₚ.
         
             Returns:
-                fixed (time invariant) value of the planetary 3-hour-range geomagnetic index aâ‚š
+                fixed (time invariant) value of the planetary 3-hour-range geomagnetic index aₚ
         
         
         """
@@ -4544,10 +4405,10 @@ class Perturbations(org.orekit.files.ccsds.section.CommentsContainer):
         ...
     def getFixedGeomagneticKp(self) -> float:
         """
-            Get fixed (time invariant) value of the planetary 3-hour-range geomagnetic index Kâ‚š.
+            Get fixed (time invariant) value of the planetary 3-hour-range geomagnetic index Kₚ.
         
             Returns:
-                fixed (time invariant) value of the planetary 3-hour-range geomagnetic index Kâ‚š
+                fixed (time invariant) value of the planetary 3-hour-range geomagnetic index Kₚ
         
         
         """
@@ -4759,7 +4620,7 @@ class Perturbations(org.orekit.files.ccsds.section.CommentsContainer):
             Set albedo model.
         
             Parameters:
-                albedoModel (String): albedo model
+                albedoModel (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): albedo model
         
         
         """
@@ -4769,7 +4630,7 @@ class Perturbations(org.orekit.files.ccsds.section.CommentsContainer):
             Set name of atmospheric model.
         
             Parameters:
-                atmosphericModel (String): name of atmospheric model
+                atmosphericModel (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of atmospheric model
         
         
         """
@@ -4816,10 +4677,10 @@ class Perturbations(org.orekit.files.ccsds.section.CommentsContainer):
         ...
     def setFixedGeomagneticAp(self, double: float) -> None:
         """
-            Set fixed (time invariant) value of the planetary 3-hour-range geomagnetic index aâ‚š.
+            Set fixed (time invariant) value of the planetary 3-hour-range geomagnetic index aₚ.
         
             Parameters:
-                fixedGeomagneticAp (double): fixed (time invariant) value of the planetary 3-hour-range geomagnetic index aâ‚š
+                fixedGeomagneticAp (double): fixed (time invariant) value of the planetary 3-hour-range geomagnetic index aₚ
         
         
         """
@@ -4836,10 +4697,10 @@ class Perturbations(org.orekit.files.ccsds.section.CommentsContainer):
         ...
     def setFixedGeomagneticKp(self, double: float) -> None:
         """
-            Set fixed (time invariant) value of the planetary 3-hour-range geomagnetic index Kâ‚š.
+            Set fixed (time invariant) value of the planetary 3-hour-range geomagnetic index Kₚ.
         
             Parameters:
-                fixedGeomagneticKp (double): fixed (time invariant) value of the planetary 3-hour-range geomagnetic index Kâ‚š
+                fixedGeomagneticKp (double): fixed (time invariant) value of the planetary 3-hour-range geomagnetic index Kₚ
         
         
         """
@@ -4919,7 +4780,7 @@ class Perturbations(org.orekit.files.ccsds.section.CommentsContainer):
             Set gravity model.
         
             Parameters:
-                name (String): name of the model
+                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the model
                 degree (int): degree of the model
                 order (int): order of the model
         
@@ -4931,7 +4792,7 @@ class Perturbations(org.orekit.files.ccsds.section.CommentsContainer):
             Set the interpolation method for Space Weather data.
         
             Parameters:
-                interpMethodSW (String): interpolation method for Space Weather data
+                interpMethodSW (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): interpolation method for Space Weather data
         
         
         """
@@ -4952,7 +4813,7 @@ class Perturbations(org.orekit.files.ccsds.section.CommentsContainer):
             Set ocean tides model.
         
             Parameters:
-                oceanTidesModel (String): ocean tides model
+                oceanTidesModel (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): ocean tides model
         
         
         """
@@ -4962,7 +4823,7 @@ class Perturbations(org.orekit.files.ccsds.section.CommentsContainer):
             Set reduction theory used for precession and nutation modeling.
         
             Parameters:
-                reductionTheory (String): reduction theory used for precession and nutation modeling
+                reductionTheory (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): reduction theory used for precession and nutation modeling
         
         
         """
@@ -4983,7 +4844,7 @@ class Perturbations(org.orekit.files.ccsds.section.CommentsContainer):
             Set solid tides model.
         
             Parameters:
-                solidTidesModel (String): solid tides model
+                solidTidesModel (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): solid tides model
         
         
         """
@@ -5003,7 +4864,7 @@ class Perturbations(org.orekit.files.ccsds.section.CommentsContainer):
             Set Space Weather data source.
         
             Parameters:
-                spaceWeatherSource (String): Space Weather data source
+                spaceWeatherSource (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): Space Weather data source
         
         
         """
@@ -5013,7 +4874,7 @@ class Perturbations(org.orekit.files.ccsds.section.CommentsContainer):
             Set Solar Radiation Pressure model.
         
             Parameters:
-                srpModel (String): Solar Radiation Pressure model
+                srpModel (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): Solar Radiation Pressure model
         
         
         """
@@ -5021,7 +4882,7 @@ class Perturbations(org.orekit.files.ccsds.section.CommentsContainer):
 
 class PerturbationsKey(java.lang.Enum['PerturbationsKey']):
     """
-    public enum PerturbationsKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.PerturbationsKey`>
+    public enum PerturbationsKey extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.PerturbationsKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.odm.ocm.Perturbations` entries.
     
@@ -5085,14 +4946,14 @@ class PerturbationsKey(java.lang.Enum['PerturbationsKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -5105,9 +4966,8 @@ class PerturbationsKey(java.lang.Enum['PerturbationsKey']):
         
             .. code-block: java
             
-            
-            for (PerturbationsKey c : PerturbationsKey.values())
-                System.out.println(c);
+            for (PerturbationsKey c : PerturbationsKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -5178,10 +5038,10 @@ class PhysicalProperties(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
         ...
     def getBolDv(self) -> float:
         """
-            Get the total Î”V capability at beginning of life.
+            Get the total ΔV capability at beginning of life.
         
             Returns:
-                total Î”V capability at beginning of life
+                total ΔV capability at beginning of life
         
         
         """
@@ -5196,16 +5056,7 @@ class PhysicalProperties(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
         
         """
         ...
-    def getDockedWith(self) -> java.util.List[str]:
-        """
-            Get the other space objects this object is docked to.
-        
-            Returns:
-                the oother space objects this object is docked to
-        
-        
-        """
-        ...
+    def getDockedWith(self) -> java.util.List[str]: ...
     def getDragCoefficient(self) -> float:
         """
             Get the nominal drag coefficient.
@@ -5228,10 +5079,10 @@ class PhysicalProperties(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
         ...
     def getDragUncertainty(self) -> float:
         """
-            Get the drag coefficient 1Ïƒ uncertainty.
+            Get the drag coefficient 1σ uncertainty.
         
             Returns:
-                drag coefficient 1Ïƒ uncertainty (in %)
+                drag coefficient 1σ uncertainty (in %)
         
         
         """
@@ -5328,10 +5179,10 @@ class PhysicalProperties(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
         ...
     def getRemainingDv(self) -> float:
         """
-            Get the total Î”V remaining for spacecraft.
+            Get the total ΔV remaining for spacecraft.
         
             Returns:
-                total Î”V remaining for spacecraft
+                total ΔV remaining for spacecraft
         
         
         """
@@ -5358,10 +5209,10 @@ class PhysicalProperties(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
         ...
     def getSrpUncertainty(self) -> float:
         """
-            Get the SRP coefficient 1Ïƒ uncertainty.
+            Get the SRP coefficient 1σ uncertainty.
         
             Returns:
-                SRP coefficient 1Ïƒ uncertainty
+                SRP coefficient 1σ uncertainty
         
         
         """
@@ -5378,10 +5229,10 @@ class PhysicalProperties(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
         ...
     def getWetMass(self) -> float:
         """
-            Get the total mass at Tâ‚€.
+            Get the total mass at T₀.
         
             Returns:
-                total mass at Tâ‚€
+                total mass at T₀
         
         
         """
@@ -5391,7 +5242,7 @@ class PhysicalProperties(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
             Set the type of actuator for attitude control.
         
             Parameters:
-                attitudeActuatorType (String): type of actuator for attitude control
+                attitudeActuatorType (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): type of actuator for attitude control
         
         
         """
@@ -5411,7 +5262,7 @@ class PhysicalProperties(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
             Set the attitude control mode.
         
             Parameters:
-                attitudeControlMode (String): attitude control mode
+                attitudeControlMode (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): attitude control mode
         
         
         """
@@ -5438,10 +5289,10 @@ class PhysicalProperties(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
         ...
     def setBolDv(self, double: float) -> None:
         """
-            Set the total Î”V capability at beginning of life.
+            Set the total ΔV capability at beginning of life.
         
             Parameters:
-                bolDv (double): total Î”V capability at beginning of life
+                bolDv (double): total ΔV capability at beginning of life
         
         
         """
@@ -5451,21 +5302,12 @@ class PhysicalProperties(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
             Set the bus model name.
         
             Parameters:
-                busModel (String): bus model name
+                busModel (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): bus model name
         
         
         """
         ...
-    def setDockedWith(self, list: java.util.List[str]) -> None:
-        """
-            Set the other space objects this object is docked to.
-        
-            Parameters:
-                dockedWith (List<String> dockedWith): the other space objects this object is docked to
-        
-        
-        """
-        ...
+    def setDockedWith(self, list: java.util.List[str]) -> None: ...
     def setDragCoefficient(self, double: float) -> None:
         """
             Set the the nominal drag coefficient.
@@ -5488,10 +5330,10 @@ class PhysicalProperties(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
         ...
     def setDragUncertainty(self, double: float) -> None:
         """
-            Set the drag coefficient 1Ïƒ uncertainty.
+            Set the drag coefficient 1σ uncertainty.
         
             Parameters:
-                dragUncertainty (double): drag coefficient 1Ïƒ uncertainty (in %)
+                dragUncertainty (double): drag coefficient 1σ uncertainty (in %)
         
         
         """
@@ -5545,7 +5387,7 @@ class PhysicalProperties(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
             Set manufacturer name.
         
             Parameters:
-                manufacturer (String): manufacturer name
+                manufacturer (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): manufacturer name
         
         
         """
@@ -5582,10 +5424,10 @@ class PhysicalProperties(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
         ...
     def setRemainingDv(self, double: float) -> None:
         """
-            Set the total Î”V remaining for spacecraft.
+            Set the total ΔV remaining for spacecraft.
         
             Parameters:
-                remainingDv (double): total Î”V remaining for spacecraft
+                remainingDv (double): total ΔV remaining for spacecraft
         
         
         """
@@ -5612,10 +5454,10 @@ class PhysicalProperties(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
         ...
     def setSrpUncertainty(self, double: float) -> None:
         """
-            Set the SRP coefficient 1Ïƒ uncertainty.
+            Set the SRP coefficient 1σ uncertainty.
         
             Parameters:
-                srpUncertainty (double): SRP coefficient 1Ïƒ uncertainty.
+                srpUncertainty (double): SRP coefficient 1σ uncertainty.
         
         
         """
@@ -5632,10 +5474,10 @@ class PhysicalProperties(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
         ...
     def setWetMass(self, double: float) -> None:
         """
-            Set the total mass at Tâ‚€.
+            Set the total mass at T₀.
         
             Parameters:
-                wetMass (double): total mass at Tâ‚€
+                wetMass (double): total mass at T₀
         
         
         """
@@ -5643,7 +5485,7 @@ class PhysicalProperties(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
 
 class PhysicalPropertiesKey(java.lang.Enum['PhysicalPropertiesKey']):
     """
-    public enum PhysicalPropertiesKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.PhysicalPropertiesKey`>
+    public enum PhysicalPropertiesKey extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.PhysicalPropertiesKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.odm.ocm.PhysicalProperties` entries.
     
@@ -5728,14 +5570,14 @@ class PhysicalPropertiesKey(java.lang.Enum['PhysicalPropertiesKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -5748,9 +5590,8 @@ class PhysicalPropertiesKey(java.lang.Enum['PhysicalPropertiesKey']):
         
             .. code-block: java
             
-            
-            for (PhysicalPropertiesKey c : PhysicalPropertiesKey.values())
-                System.out.println(c);
+            for (PhysicalPropertiesKey c : PhysicalPropertiesKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -5762,7 +5603,7 @@ class PhysicalPropertiesKey(java.lang.Enum['PhysicalPropertiesKey']):
 
 class ShadowModel(java.lang.Enum['ShadowModel']):
     """
-    public enum ShadowModel extends Enum<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.ShadowModel`>
+    public enum ShadowModel extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.ShadowModel`>
     
         Shadow model for solar radiation pressure.
     
@@ -5785,14 +5626,14 @@ class ShadowModel(java.lang.Enum['ShadowModel']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -5805,9 +5646,8 @@ class ShadowModel(java.lang.Enum['ShadowModel']):
         
             .. code-block: java
             
-            
-            for (ShadowModel c : ShadowModel.values())
-                System.out.println(c);
+            for (ShadowModel c : ShadowModel.values())
+                System.out.println(c);
             
         
             Returns:
@@ -5819,7 +5659,7 @@ class ShadowModel(java.lang.Enum['ShadowModel']):
 
 class TrajectoryState(org.orekit.time.TimeStamped):
     """
-    public class TrajectoryState extends Object implements :class:`~org.orekit.time.TimeStamped`
+    public class TrajectoryState extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`
     
         Trajectory state entry.
     
@@ -5875,7 +5715,7 @@ class TrajectoryState(org.orekit.time.TimeStamped):
             Convert to Cartesian coordinates.
         
             Parameters:
-                mu (double): gravitational parameter in mÂ³/sÂ²
+                mu (double): gravitational parameter in m³/s²
         
             Returns:
                 Cartesian coordinates
@@ -5886,7 +5726,7 @@ class TrajectoryState(org.orekit.time.TimeStamped):
 
 class TrajectoryStateHistory(org.orekit.files.general.EphemerisFile.EphemerisSegment[org.orekit.utils.TimeStampedPVCoordinates]):
     """
-    public class TrajectoryStateHistory extends Object implements :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`>
+    public class TrajectoryStateHistory extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`>
     
         Trajectory state history.
     
@@ -5902,8 +5742,8 @@ class TrajectoryStateHistory(org.orekit.files.general.EphemerisFile.EphemerisSeg
             valid.
         
             Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getAvailableDerivatives`Â in
-                interfaceÂ :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getAvailableDerivatives` in
+                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
         
             Returns:
                 a value indicating if the file contains velocity and/or acceleration data.
@@ -5918,8 +5758,8 @@ class TrajectoryStateHistory(org.orekit.files.general.EphemerisFile.EphemerisSeg
             :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getCoordinates`.
         
             Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getFrame`Â in
-                interfaceÂ :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getFrame` in
+                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
         
             Returns:
                 the reference frame for this segment. Never :code:`null`.
@@ -5932,8 +5772,8 @@ class TrajectoryStateHistory(org.orekit.files.general.EphemerisFile.EphemerisSeg
             Get the number of samples to use in interpolation.
         
             Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getInterpolationSamples`Â in
-                interfaceÂ :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getInterpolationSamples` in
+                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
         
             Returns:
                 the number of points to use for interpolation.
@@ -5956,12 +5796,12 @@ class TrajectoryStateHistory(org.orekit.files.general.EphemerisFile.EphemerisSeg
             Get the standard gravitational parameter for the satellite.
         
             Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getMu`Â in
-                interfaceÂ :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getMu` in
+                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
         
             Returns:
                 the gravitational parameter used in :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getPropagator`, in
-                mÃ‚Â³/sÃ‚Â².
+                m³/s².
         
         
         """
@@ -5973,8 +5813,8 @@ class TrajectoryStateHistory(org.orekit.files.general.EphemerisFile.EphemerisSeg
             The date returned by this method is equivalent to :code:`getPropagator().getMinDate()`.
         
             Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getStart`Â in
-                interfaceÂ :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getStart` in
+                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
         
             Returns:
                 ephemeris segment start date.
@@ -5989,8 +5829,8 @@ class TrajectoryStateHistory(org.orekit.files.general.EphemerisFile.EphemerisSeg
             The date returned by this method is equivalent to :code:`getPropagator().getMaxDate()`.
         
             Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getStop`Â in
-                interfaceÂ :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getStop` in
+                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
         
             Returns:
                 ephemeris segment end date.
@@ -6220,7 +6060,7 @@ class TrajectoryStateHistoryMetadata(org.orekit.files.ccsds.section.CommentsCont
             Set type of averaging (Osculating, mean Brouwer, other.
         
             Parameters:
-                orbAveraging (String): type of averaging (Osculating, mean Brouwer, other .).
+                orbAveraging (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): type of averaging (Osculating, mean Brouwer, other .).
         
         
         """
@@ -6252,7 +6092,7 @@ class TrajectoryStateHistoryMetadata(org.orekit.files.ccsds.section.CommentsCont
             Set the orbit propagator used to generate this trajectory.
         
             Parameters:
-                propagator (String): orbit propagator used to generate this trajectory
+                propagator (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): orbit propagator used to generate this trajectory
         
             Since:
                 11.2
@@ -6265,7 +6105,7 @@ class TrajectoryStateHistoryMetadata(org.orekit.files.ccsds.section.CommentsCont
             Set basis of this trajectory state time history data.
         
             Parameters:
-                trajBasis (String): basis of this trajectory state time history data
+                trajBasis (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): basis of this trajectory state time history data
         
         
         """
@@ -6275,7 +6115,7 @@ class TrajectoryStateHistoryMetadata(org.orekit.files.ccsds.section.CommentsCont
             Set identification number of the orbit determination or simulation upon which this trajectory is based.
         
             Parameters:
-                trajBasisID (String): identification number of the orbit determination or simulation upon which this trajectory is based
+                trajBasisID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): identification number of the orbit determination or simulation upon which this trajectory is based
         
         
         """
@@ -6295,7 +6135,7 @@ class TrajectoryStateHistoryMetadata(org.orekit.files.ccsds.section.CommentsCont
             Set trajectory identification number.
         
             Parameters:
-                trajID (String): trajectory identification number
+                trajID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): trajectory identification number
         
         
         """
@@ -6305,7 +6145,7 @@ class TrajectoryStateHistoryMetadata(org.orekit.files.ccsds.section.CommentsCont
             Set identification number of next trajectory.
         
             Parameters:
-                trajNextID (String): identification number of next trajectory
+                trajNextID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): identification number of next trajectory
         
         
         """
@@ -6315,7 +6155,7 @@ class TrajectoryStateHistoryMetadata(org.orekit.files.ccsds.section.CommentsCont
             Set identification number of previous trajectory.
         
             Parameters:
-                trajPrevID (String): identification number of previous trajectory
+                trajPrevID (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): identification number of previous trajectory
         
         
         """
@@ -6371,8 +6211,8 @@ class TrajectoryStateHistoryMetadata(org.orekit.files.ccsds.section.CommentsCont
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
+                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
         
             Parameters:
                 version (double): format version
@@ -6383,7 +6223,7 @@ class TrajectoryStateHistoryMetadata(org.orekit.files.ccsds.section.CommentsCont
 
 class TrajectoryStateHistoryMetadataKey(java.lang.Enum['TrajectoryStateHistoryMetadataKey']):
     """
-    public enum TrajectoryStateHistoryMetadataKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.TrajectoryStateHistoryMetadataKey`>
+    public enum TrajectoryStateHistoryMetadataKey extends :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.ocm.TrajectoryStateHistoryMetadataKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.odm.ocm.TrajectoryStateHistoryMetadata` entries.
     
@@ -6436,14 +6276,14 @@ class TrajectoryStateHistoryMetadataKey(java.lang.Enum['TrajectoryStateHistoryMe
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -6456,9 +6296,8 @@ class TrajectoryStateHistoryMetadataKey(java.lang.Enum['TrajectoryStateHistoryMe
         
             .. code-block: java
             
-            
-            for (TrajectoryStateHistoryMetadataKey c : TrajectoryStateHistoryMetadataKey.values())
-                System.out.println(c);
+            for (TrajectoryStateHistoryMetadataKey c : TrajectoryStateHistoryMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:

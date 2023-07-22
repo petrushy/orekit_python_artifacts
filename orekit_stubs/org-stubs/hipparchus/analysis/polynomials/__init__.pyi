@@ -9,7 +9,7 @@ import typing
 _FieldPolynomialFunction__T = typing.TypeVar('_FieldPolynomialFunction__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldPolynomialFunction(org.hipparchus.analysis.CalculusFieldUnivariateFunction[_FieldPolynomialFunction__T], typing.Generic[_FieldPolynomialFunction__T]):
     """
-    public class FieldPolynomialFunction<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object implements :class:`~org.hipparchus.analysis.CalculusFieldUnivariateFunction`<T>
+    public class FieldPolynomialFunction<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.polynomials.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.CalculusFieldUnivariateFunction`<T>
     
         Immutable representation of a real polynomial function with real coefficients.
     
@@ -109,8 +109,8 @@ class FieldPolynomialFunction(org.hipparchus.analysis.CalculusFieldUnivariateFun
             :code:`coefficients[n] * x^n + ... + coefficients[1] * x + coefficients[0]`
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.CalculusFieldUnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.CalculusFieldUnivariateFunction`
+                :meth:`~org.hipparchus.analysis.CalculusFieldUnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.CalculusFieldUnivariateFunction`
         
             Parameters:
                 x (:class:`~org.hipparchus.analysis.polynomials.FieldPolynomialFunction`): Argument for which the function value should be computed.
@@ -130,7 +130,7 @@ class FieldPolynomialFunction(org.hipparchus.analysis.CalculusFieldUnivariateFun
 _FieldPolynomialSplineFunction__T = typing.TypeVar('_FieldPolynomialSplineFunction__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldPolynomialSplineFunction(org.hipparchus.analysis.CalculusFieldUnivariateFunction[_FieldPolynomialSplineFunction__T], typing.Generic[_FieldPolynomialSplineFunction__T]):
     """
-    public class FieldPolynomialSplineFunction<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object implements :class:`~org.hipparchus.analysis.CalculusFieldUnivariateFunction`<T>
+    public class FieldPolynomialSplineFunction<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.polynomials.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.CalculusFieldUnivariateFunction`<T>
     
         Represents a polynomial spline function.
     
@@ -215,8 +215,8 @@ class FieldPolynomialSplineFunction(org.hipparchus.analysis.CalculusFieldUnivari
             details on the algorithm for computing the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.CalculusFieldUnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.CalculusFieldUnivariateFunction`
+                :meth:`~org.hipparchus.analysis.CalculusFieldUnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.CalculusFieldUnivariateFunction`
         
             Parameters:
                 v (:class:`~org.hipparchus.analysis.polynomials.FieldPolynomialSplineFunction`): Point for which the function value should be computed.
@@ -236,7 +236,7 @@ class FieldPolynomialSplineFunction(org.hipparchus.analysis.CalculusFieldUnivari
 
 class PolynomialFunction(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction, org.hipparchus.analysis.FieldUnivariateFunction, java.io.Serializable):
     """
-    public class PolynomialFunction extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`, :class:`~org.hipparchus.analysis.FieldUnivariateFunction`, Serializable
+    public class PolynomialFunction extends :class:`~org.hipparchus.analysis.polynomials.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`, :class:`~org.hipparchus.analysis.FieldUnivariateFunction`, :class:`~org.hipparchus.analysis.polynomials.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Immutable representation of a real polynomial function with real coefficients.
     
@@ -283,7 +283,8 @@ class PolynomialFunction(org.hipparchus.analysis.differentiation.UnivariateDiffe
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.polynomials.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.polynomials.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -304,7 +305,8 @@ class PolynomialFunction(org.hipparchus.analysis.differentiation.UnivariateDiffe
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.polynomials.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.polynomials.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -385,7 +387,8 @@ class PolynomialFunction(org.hipparchus.analysis.differentiation.UnivariateDiffe
             x^2` if the negative coefficient is not the first one displayed).
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.analysis.polynomials.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.analysis.polynomials.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a string representation of the polynomial.
@@ -405,8 +408,8 @@ class PolynomialFunction(org.hipparchus.analysis.differentiation.UnivariateDiffe
             :code:`coefficients[n] * x^n + ... + coefficients[1] * x + coefficients[0]`
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 x (double): Argument for which the function value should be computed.
@@ -422,8 +425,8 @@ class PolynomialFunction(org.hipparchus.analysis.differentiation.UnivariateDiffe
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 t (T): the point for which the function value should be computed
@@ -440,8 +443,8 @@ class PolynomialFunction(org.hipparchus.analysis.differentiation.UnivariateDiffe
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.FieldUnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.FieldUnivariateFunction`
+                :meth:`~org.hipparchus.analysis.FieldUnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.FieldUnivariateFunction`
         
             Parameters:
                 t (T): Point at which the function value should be computed.
@@ -470,7 +473,7 @@ class PolynomialFunction(org.hipparchus.analysis.differentiation.UnivariateDiffe
 
 class PolynomialFunctionLagrangeForm(org.hipparchus.analysis.UnivariateFunction):
     """
-    public class PolynomialFunctionLagrangeForm extends Object implements :class:`~org.hipparchus.analysis.UnivariateFunction`
+    public class PolynomialFunctionLagrangeForm extends :class:`~org.hipparchus.analysis.polynomials.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.UnivariateFunction`
     
         Implements the representation of a real polynomial function in ` Lagrange Form
         <http://mathworld.wolfram.com/LagrangeInterpolatingPolynomial.html>`. For reference, see **Introduction to Numerical
@@ -535,8 +538,8 @@ class PolynomialFunctionLagrangeForm(org.hipparchus.analysis.UnivariateFunction)
             Calculate the function value at the given point.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 z (double): Point at which the function value is to be computed.
@@ -557,7 +560,7 @@ class PolynomialFunctionLagrangeForm(org.hipparchus.analysis.UnivariateFunction)
 
 class PolynomialFunctionNewtonForm(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction, org.hipparchus.analysis.FieldUnivariateFunction):
     """
-    public class PolynomialFunctionNewtonForm extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`, :class:`~org.hipparchus.analysis.FieldUnivariateFunction`
+    public class PolynomialFunctionNewtonForm extends :class:`~org.hipparchus.analysis.polynomials.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`, :class:`~org.hipparchus.analysis.FieldUnivariateFunction`
     
         Implements the representation of a real polynomial function in Newton Form. For reference, see **Elementary Numerical
         Analysis**, ISBN 0070124477, chapter 2.
@@ -622,8 +625,8 @@ class PolynomialFunctionNewtonForm(org.hipparchus.analysis.differentiation.Univa
             Calculate the function value at the given point.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 z (double): Point at which the function value is to be computed.
@@ -639,8 +642,8 @@ class PolynomialFunctionNewtonForm(org.hipparchus.analysis.differentiation.Univa
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 t (T): the point for which the function value should be computed
@@ -651,8 +654,8 @@ class PolynomialFunctionNewtonForm(org.hipparchus.analysis.differentiation.Univa
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.FieldUnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.FieldUnivariateFunction`
+                :meth:`~org.hipparchus.analysis.FieldUnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.FieldUnivariateFunction`
         
             Parameters:
                 t (T): Point at which the function value should be computed.
@@ -668,7 +671,7 @@ class PolynomialFunctionNewtonForm(org.hipparchus.analysis.differentiation.Univa
 
 class PolynomialSplineFunction(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction, org.hipparchus.analysis.FieldUnivariateFunction):
     """
-    public class PolynomialSplineFunction extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`, :class:`~org.hipparchus.analysis.FieldUnivariateFunction`
+    public class PolynomialSplineFunction extends :class:`~org.hipparchus.analysis.polynomials.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`, :class:`~org.hipparchus.analysis.FieldUnivariateFunction`
     
         Represents a polynomial spline function.
     
@@ -756,8 +759,8 @@ class PolynomialSplineFunction(org.hipparchus.analysis.differentiation.Univariat
             details on the algorithm for computing the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.UnivariateFunction`
+                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
         
             Parameters:
                 v (double): Point for which the function value should be computed.
@@ -777,8 +780,8 @@ class PolynomialSplineFunction(org.hipparchus.analysis.differentiation.Univariat
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
+                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
+                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
         
             Parameters:
                 t (T): the point for which the function value should be computed
@@ -789,8 +792,8 @@ class PolynomialSplineFunction(org.hipparchus.analysis.differentiation.Univariat
             Compute the value of the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.FieldUnivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.FieldUnivariateFunction`
+                :meth:`~org.hipparchus.analysis.FieldUnivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.FieldUnivariateFunction`
         
             Parameters:
                 t (T): Point at which the function value should be computed.
@@ -806,7 +809,7 @@ class PolynomialSplineFunction(org.hipparchus.analysis.differentiation.Univariat
 
 class PolynomialsUtils:
     """
-    public class PolynomialsUtils extends Object
+    public class PolynomialsUtils extends :class:`~org.hipparchus.analysis.polynomials.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         A collection of static methods that operate on or return polynomials.
     """
@@ -815,8 +818,8 @@ class PolynomialsUtils:
         """
             Create a Chebyshev polynomial of the first kind.
         
-            Chebyshev polynomials of the first kind are orthogonal polynomials. They can be defined by the following recurrence
-            relations:
+            :class:`~org.hipparchus.analysis.polynomials.https:.en.wikipedia.org.wiki.Chebyshev_polynomials` are orthogonal
+            polynomials. They can be defined by the following recurrence relations:
         
             \( T_0(x) = 1 \\ T_1(x) = x \\ T_{k+1}(x) = 2x T_k(x) - T_{k-1}(x) \)
         

@@ -7,7 +7,7 @@ import typing
 
 class Localizable(java.io.Serializable):
     """
-    public interface Localizable extends Serializable
+    public interface Localizable extends :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Interface for localizable strings.
     """
@@ -16,7 +16,7 @@ class Localizable(java.io.Serializable):
             Gets the localized string.
         
             Parameters:
-                locale (Locale): locale into which to get the string.
+                locale (:class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): locale into which to get the string.
         
             Returns:
                 the localized string or the source string if no localized version is available.
@@ -48,7 +48,7 @@ class LocalizedException:
             Gets the message in a specified locale.
         
             Parameters:
-                locale (Locale): Locale in which the message should be translated
+                locale (:class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): Locale in which the message should be translated
         
             Returns:
                 localized message
@@ -79,7 +79,7 @@ class LocalizedException:
 
 class UTF8Control(java.util.ResourceBundle.Control):
     """
-    public class UTF8Control extends ResourceBundle.Control
+    public class UTF8Control extends :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.util.ResourceBundle.Control?is`
     
         Control class loading properties in UTF-8 encoding.
     
@@ -92,7 +92,7 @@ class UTF8Control(java.util.ResourceBundle.Control):
 
 class DummyLocalizable(Localizable):
     """
-    public class DummyLocalizable extends Object implements :class:`~org.hipparchus.exception.Localizable`
+    public class DummyLocalizable extends :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.exception.Localizable`
     
         Dummy implementation of the :class:`~org.hipparchus.exception.Localizable` interface, without localization.
     
@@ -105,11 +105,11 @@ class DummyLocalizable(Localizable):
             Gets the localized string.
         
             Specified by:
-                :meth:`~org.hipparchus.exception.Localizable.getLocalizedString`Â in
-                interfaceÂ :class:`~org.hipparchus.exception.Localizable`
+                :meth:`~org.hipparchus.exception.Localizable.getLocalizedString` in
+                interface :class:`~org.hipparchus.exception.Localizable`
         
             Parameters:
-                locale (Locale): locale into which to get the string.
+                locale (:class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): locale into which to get the string.
         
             Returns:
                 the localized string or the source string if no localized version is available.
@@ -122,8 +122,8 @@ class DummyLocalizable(Localizable):
             Gets the source (non-localized) string.
         
             Specified by:
-                :meth:`~org.hipparchus.exception.Localizable.getSourceString`Â in
-                interfaceÂ :class:`~org.hipparchus.exception.Localizable`
+                :meth:`~org.hipparchus.exception.Localizable.getSourceString` in
+                interface :class:`~org.hipparchus.exception.Localizable`
         
             Returns:
                 the source string.
@@ -135,7 +135,8 @@ class DummyLocalizable(Localizable):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -143,7 +144,7 @@ class DummyLocalizable(Localizable):
 
 class LocalizedCoreFormats(java.lang.Enum['LocalizedCoreFormats'], Localizable):
     """
-    public enum LocalizedCoreFormats extends Enum<:class:`~org.hipparchus.exception.LocalizedCoreFormats`> implements :class:`~org.hipparchus.exception.Localizable`
+    public enum LocalizedCoreFormats extends :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.hipparchus.exception.LocalizedCoreFormats`> implements :class:`~org.hipparchus.exception.Localizable`
     
         Enumeration for localized messages formats used in exceptions messages.
     
@@ -341,11 +342,11 @@ class LocalizedCoreFormats(java.lang.Enum['LocalizedCoreFormats'], Localizable):
             Gets the localized string.
         
             Specified by:
-                :meth:`~org.hipparchus.exception.Localizable.getLocalizedString`Â in
-                interfaceÂ :class:`~org.hipparchus.exception.Localizable`
+                :meth:`~org.hipparchus.exception.Localizable.getLocalizedString` in
+                interface :class:`~org.hipparchus.exception.Localizable`
         
             Parameters:
-                locale (Locale): locale into which to get the string.
+                locale (:class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): locale into which to get the string.
         
             Returns:
                 the localized string or the source string if no localized version is available.
@@ -358,8 +359,8 @@ class LocalizedCoreFormats(java.lang.Enum['LocalizedCoreFormats'], Localizable):
             Gets the source (non-localized) string.
         
             Specified by:
-                :meth:`~org.hipparchus.exception.Localizable.getSourceString`Â in
-                interfaceÂ :class:`~org.hipparchus.exception.Localizable`
+                :meth:`~org.hipparchus.exception.Localizable.getSourceString` in
+                interface :class:`~org.hipparchus.exception.Localizable`
         
             Returns:
                 the source string.
@@ -379,14 +380,14 @@ class LocalizedCoreFormats(java.lang.Enum['LocalizedCoreFormats'], Localizable):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -412,7 +413,7 @@ class LocalizedCoreFormats(java.lang.Enum['LocalizedCoreFormats'], Localizable):
 
 class MathRuntimeException(java.lang.RuntimeException, LocalizedException):
     """
-    public class MathRuntimeException extends RuntimeException implements :class:`~org.hipparchus.exception.LocalizedException`
+    public class MathRuntimeException extends :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.RuntimeException?is` implements :class:`~org.hipparchus.exception.LocalizedException`
     
         All exceptions thrown by the Hipparchus code inherit from this class.
     
@@ -441,7 +442,7 @@ class MathRuntimeException(java.lang.RuntimeException, LocalizedException):
             Create an exception for an internal error.
         
             Parameters:
-                cause (Throwable): root cause
+                cause (:class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`): root cause
         
             Returns:
                 a new runtime exception, indicating an internal error and wrapping the given throwable
@@ -453,7 +454,8 @@ class MathRuntimeException(java.lang.RuntimeException, LocalizedException):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
         
         
         """
@@ -463,7 +465,8 @@ class MathRuntimeException(java.lang.RuntimeException, LocalizedException):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
         
         
         """
@@ -474,11 +477,11 @@ class MathRuntimeException(java.lang.RuntimeException, LocalizedException):
             Gets the message in a specified locale.
         
             Specified by:
-                :meth:`~org.hipparchus.exception.LocalizedException.getMessage`Â in
-                interfaceÂ :class:`~org.hipparchus.exception.LocalizedException`
+                :meth:`~org.hipparchus.exception.LocalizedException.getMessage` in
+                interface :class:`~org.hipparchus.exception.LocalizedException`
         
             Parameters:
-                locale (Locale): Locale in which the message should be translated
+                locale (:class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): Locale in which the message should be translated
         
             Returns:
                 localized message
@@ -490,8 +493,8 @@ class MathRuntimeException(java.lang.RuntimeException, LocalizedException):
             Get the variable parts of the error message.
         
             Specified by:
-                :meth:`~org.hipparchus.exception.LocalizedException.getParts`Â in
-                interfaceÂ :class:`~org.hipparchus.exception.LocalizedException`
+                :meth:`~org.hipparchus.exception.LocalizedException.getParts` in
+                interface :class:`~org.hipparchus.exception.LocalizedException`
         
             Returns:
                 a copy of the variable parts of the error message
@@ -504,8 +507,8 @@ class MathRuntimeException(java.lang.RuntimeException, LocalizedException):
             Get the localizable specifier of the error message.
         
             Specified by:
-                :meth:`~org.hipparchus.exception.LocalizedException.getSpecifier`Â in
-                interfaceÂ :class:`~org.hipparchus.exception.LocalizedException`
+                :meth:`~org.hipparchus.exception.LocalizedException.getSpecifier` in
+                interface :class:`~org.hipparchus.exception.LocalizedException`
         
             Returns:
                 localizable specifier of the error message
@@ -516,14 +519,15 @@ class MathRuntimeException(java.lang.RuntimeException, LocalizedException):
 
 class NullArgumentException(java.lang.NullPointerException, LocalizedException):
     """
-    public class NullArgumentException extends NullPointerException implements :class:`~org.hipparchus.exception.LocalizedException`
+    public class NullArgumentException extends :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is` implements :class:`~org.hipparchus.exception.LocalizedException`
     
         All conditions checks that fail due to a :code:`null` argument must throw this exception. This class is meant to signal
         a precondition violation ("null is an illegal argument") and so does not extend the standard
         :code:`NullPointerException`. Propagation of :code:`NullPointerException` from within Hipparchus is construed to be a
         bug.
     
-        Note: from 1.0 onwards, this class extends null instead of
+        Note: from 1.0 onwards, this class extends
+        :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is` instead of
         :class:`~org.hipparchus.exception.MathIllegalArgumentException`.
     
         Also see:
@@ -537,7 +541,8 @@ class NullArgumentException(java.lang.NullPointerException, LocalizedException):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
         
         
         """
@@ -547,7 +552,8 @@ class NullArgumentException(java.lang.NullPointerException, LocalizedException):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
         
         
         """
@@ -558,11 +564,11 @@ class NullArgumentException(java.lang.NullPointerException, LocalizedException):
             Gets the message in a specified locale.
         
             Specified by:
-                :meth:`~org.hipparchus.exception.LocalizedException.getMessage`Â in
-                interfaceÂ :class:`~org.hipparchus.exception.LocalizedException`
+                :meth:`~org.hipparchus.exception.LocalizedException.getMessage` in
+                interface :class:`~org.hipparchus.exception.LocalizedException`
         
             Parameters:
-                locale (Locale): Locale in which the message should be translated
+                locale (:class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): Locale in which the message should be translated
         
             Returns:
                 localized message
@@ -574,8 +580,8 @@ class NullArgumentException(java.lang.NullPointerException, LocalizedException):
             Get the variable parts of the error message.
         
             Specified by:
-                :meth:`~org.hipparchus.exception.LocalizedException.getParts`Â in
-                interfaceÂ :class:`~org.hipparchus.exception.LocalizedException`
+                :meth:`~org.hipparchus.exception.LocalizedException.getParts` in
+                interface :class:`~org.hipparchus.exception.LocalizedException`
         
             Returns:
                 a copy of the variable parts of the error message
@@ -588,8 +594,8 @@ class NullArgumentException(java.lang.NullPointerException, LocalizedException):
             Get the localizable specifier of the error message.
         
             Specified by:
-                :meth:`~org.hipparchus.exception.LocalizedException.getSpecifier`Â in
-                interfaceÂ :class:`~org.hipparchus.exception.LocalizedException`
+                :meth:`~org.hipparchus.exception.LocalizedException.getSpecifier` in
+                interface :class:`~org.hipparchus.exception.LocalizedException`
         
             Returns:
                 localizable specifier of the error message
@@ -603,7 +609,8 @@ class MathIllegalArgumentException(MathRuntimeException):
     public class MathIllegalArgumentException extends :class:`~org.hipparchus.exception.MathRuntimeException`
     
         Base class for all preconditions violation exceptions. In most cases, this class should not be instantiated directly: it
-        should serve as a base class to create all the exceptions that have the semantics of the standard null.
+        should serve as a base class to create all the exceptions that have the semantics of the standard
+        :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`.
     
         Also see:
             :meth:`~serialized`

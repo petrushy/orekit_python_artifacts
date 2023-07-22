@@ -16,7 +16,7 @@ import typing
 
 class AngleType(java.lang.Enum['AngleType']):
     """
-    public enum AngleType extends Enum<:class:`~org.orekit.files.ccsds.ndm.tdm.AngleType`>
+    public enum AngleType extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.tdm.AngleType`>
     
         Antenna geometry represented in the angle date.
     
@@ -39,14 +39,14 @@ class AngleType(java.lang.Enum['AngleType']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -59,9 +59,8 @@ class AngleType(java.lang.Enum['AngleType']):
         
             .. code-block: java
             
-            
-            for (AngleType c : AngleType.values())
-                System.out.println(c);
+            for (AngleType c : AngleType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -73,7 +72,7 @@ class AngleType(java.lang.Enum['AngleType']):
 
 class CorrectionApplied(java.lang.Enum['CorrectionApplied']):
     """
-    public enum CorrectionApplied extends Enum<:class:`~org.orekit.files.ccsds.ndm.tdm.CorrectionApplied`>
+    public enum CorrectionApplied extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.tdm.CorrectionApplied`>
     
         Indicator for corrections application.
     
@@ -94,14 +93,14 @@ class CorrectionApplied(java.lang.Enum['CorrectionApplied']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -114,9 +113,8 @@ class CorrectionApplied(java.lang.Enum['CorrectionApplied']):
         
             .. code-block: java
             
-            
-            for (CorrectionApplied c : CorrectionApplied.values())
-                System.out.println(c);
+            for (CorrectionApplied c : CorrectionApplied.values())
+                System.out.println(c);
             
         
             Returns:
@@ -128,7 +126,7 @@ class CorrectionApplied(java.lang.Enum['CorrectionApplied']):
 
 class DataQuality(java.lang.Enum['DataQuality']):
     """
-    public enum DataQuality extends Enum<:class:`~org.orekit.files.ccsds.ndm.tdm.DataQuality`>
+    public enum DataQuality extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.tdm.DataQuality`>
     
         Quality of the data.
     
@@ -150,14 +148,14 @@ class DataQuality(java.lang.Enum['DataQuality']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -170,9 +168,8 @@ class DataQuality(java.lang.Enum['DataQuality']):
         
             .. code-block: java
             
-            
-            for (DataQuality c : DataQuality.values())
-                System.out.println(c);
+            for (DataQuality c : DataQuality.values())
+                System.out.println(c);
             
         
             Returns:
@@ -184,7 +181,7 @@ class DataQuality(java.lang.Enum['DataQuality']):
 
 class IntegrationReference(java.lang.Enum['IntegrationReference']):
     """
-    public enum IntegrationReference extends Enum<:class:`~org.orekit.files.ccsds.ndm.tdm.IntegrationReference`>
+    public enum IntegrationReference extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.tdm.IntegrationReference`>
     
         Relationship between time tag and integration interval.
     
@@ -206,14 +203,14 @@ class IntegrationReference(java.lang.Enum['IntegrationReference']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -226,9 +223,8 @@ class IntegrationReference(java.lang.Enum['IntegrationReference']):
         
             .. code-block: java
             
-            
-            for (IntegrationReference c : IntegrationReference.values())
-                System.out.println(c);
+            for (IntegrationReference c : IntegrationReference.values())
+                System.out.println(c);
             
         
             Returns:
@@ -240,7 +236,7 @@ class IntegrationReference(java.lang.Enum['IntegrationReference']):
 
 class Observation:
     """
-    public class Observation extends Object
+    public class Observation extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         The Observation class contains the data from an observation line.
     
@@ -252,7 +248,7 @@ class Observation:
     
     
         WARNING. The same class handles many different measurements types (range, Doppler, clocks, pressure, power to noise
-        ratioÃ¢â‚¬Â¦). Since Orekit 11.0, it uses only SI units, so angular measurements have already been converted in radians,
+        ratio…). Since Orekit 11.0, it uses only SI units, so angular measurements have already been converted in radians,
         range has been converted in meters (according to the :meth:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata.getRangeUnits`,
         Doppler has been converted to meters per second. Up to Orekit 10.x, the measurements were raw measurements as read in
         the TDM.
@@ -291,7 +287,7 @@ class Observation:
 
 class ObservationType(java.lang.Enum['ObservationType']):
     """
-    public enum ObservationType extends Enum<:class:`~org.orekit.files.ccsds.ndm.tdm.ObservationType`>
+    public enum ObservationType extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.tdm.ObservationType`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.tdm.Observation` entries.
     
@@ -406,14 +402,14 @@ class ObservationType(java.lang.Enum['ObservationType']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -426,9 +422,8 @@ class ObservationType(java.lang.Enum['ObservationType']):
         
             .. code-block: java
             
-            
-            for (ObservationType c : ObservationType.values())
-                System.out.println(c);
+            for (ObservationType c : ObservationType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -483,7 +478,7 @@ class ObservationsBlock(org.orekit.files.ccsds.section.CommentsContainer, org.or
 
 class RangeMode(java.lang.Enum['RangeMode']):
     """
-    public enum RangeMode extends Enum<:class:`~org.orekit.files.ccsds.ndm.tdm.RangeMode`>
+    public enum RangeMode extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.tdm.RangeMode`>
     
         Type of range tones.
     
@@ -505,14 +500,14 @@ class RangeMode(java.lang.Enum['RangeMode']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -525,9 +520,8 @@ class RangeMode(java.lang.Enum['RangeMode']):
         
             .. code-block: java
             
-            
-            for (RangeMode c : RangeMode.values())
-                System.out.println(c);
+            for (RangeMode c : RangeMode.values())
+                System.out.println(c);
             
         
             Returns:
@@ -539,7 +533,7 @@ class RangeMode(java.lang.Enum['RangeMode']):
 
 class RangeUnits(java.lang.Enum['RangeUnits']):
     """
-    public enum RangeUnits extends Enum<:class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits`>
+    public enum RangeUnits extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits`>
     
         Units of the range observable.
     
@@ -561,14 +555,14 @@ class RangeUnits(java.lang.Enum['RangeUnits']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -581,9 +575,8 @@ class RangeUnits(java.lang.Enum['RangeUnits']):
         
             .. code-block: java
             
-            
-            for (RangeUnits c : RangeUnits.values())
-                System.out.println(c);
+            for (RangeUnits c : RangeUnits.values())
+                System.out.println(c);
             
         
             Returns:
@@ -654,14 +647,15 @@ class Tdm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.secti
     
         References:
     
-        CCSDS 503.0-B-1 recommended standard ("Tracking Data Message", Blue Book, Version 1.0, November 2007).
+        :class:`~org.orekit.files.ccsds.ndm.tdm.https:.public.ccsds.org.Pubs.503x0b1c1.pdf` ("Tracking Data Message", Blue Book,
+        Version 1.0, November 2007).
     
         Since:
             9.0
     """
     ROOT: typing.ClassVar[str] = ...
     """
-    public static final String ROOT
+    public static final :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ROOT
     
         Root element for XML files.
     
@@ -672,7 +666,7 @@ class Tdm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.secti
     """
     FORMAT_VERSION_KEY: typing.ClassVar[str] = ...
     """
-    public static final String FORMAT_VERSION_KEY
+    public static final :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` FORMAT_VERSION_KEY
     
         Key for format version.
     
@@ -685,7 +679,7 @@ class Tdm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.secti
 
 class TdmDataKey(java.lang.Enum['TdmDataKey']):
     """
-    public enum TdmDataKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.tdm.TdmDataKey`>
+    public enum TdmDataKey extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.tdm.TdmDataKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.tdm.Observation` entries, except the measurements themselves.
     
@@ -722,14 +716,14 @@ class TdmDataKey(java.lang.Enum['TdmDataKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -742,9 +736,8 @@ class TdmDataKey(java.lang.Enum['TdmDataKey']):
         
             .. code-block: java
             
-            
-            for (TdmDataKey c : TdmDataKey.values())
-                System.out.println(c);
+            for (TdmDataKey c : TdmDataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -762,7 +755,8 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
     
         References:
     
-        CCSDS 503.0-B-1 recommended standard. Â§3.3 ("Tracking Data Message", Blue Book, Version 1.0, November 2007).
+        :class:`~org.orekit.files.ccsds.ndm.tdm.https:.public.ccsds.org.Pubs.503x0b1c1.pdf`. §3.3 ("Tracking Data Message",
+        Blue Book, Version 1.0, November 2007).
     
         Since:
             9.0
@@ -774,7 +768,7 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
         
             Parameters:
                 participantNumber (int): the number of the participant
-                ephemerisName (String): name of the ephemeris for the participant
+                ephemerisName (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the ephemeris for the participant
         
         
         """
@@ -785,7 +779,7 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
         
             Parameters:
                 participantNumber (int): the number of the participant to add
-                participant (String): the name of the participant to add
+                participant (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the participant to add
         
         
         """
@@ -901,7 +895,7 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Getter for the radar cross section correction.
         
             Returns:
-                the radar cross section correction in mÂ²
+                the radar cross section correction in m²
         
         
         """
@@ -967,16 +961,7 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
         
         """
         ...
-    def getEphemerisNames(self) -> java.util.Map[int, str]:
-        """
-            Getter for external ephemeris names for participants.
-        
-            Returns:
-                external ephemeris names for participants
-        
-        
-        """
-        ...
+    def getEphemerisNames(self) -> java.util.Map[int, str]: ...
     def getFreqOffset(self) -> float:
         """
             Getter for the freqOffset.
@@ -1037,16 +1022,7 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
         
         """
         ...
-    def getParticipants(self) -> java.util.Map[int, str]:
-        """
-            Getter for the participants.
-        
-            Returns:
-                the participants
-        
-        
-        """
-        ...
+    def getParticipants(self) -> java.util.Map[int, str]: ...
     def getPath(self) -> typing.List[int]:
         """
             Getter for the path.
@@ -1141,16 +1117,7 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
         
         """
         ...
-    def getReceiveDelays(self) -> java.util.Map[int, float]:
-        """
-            Getter for receiveDelays.
-        
-            Returns:
-                the receiveDelays
-        
-        
-        """
-        ...
+    def getReceiveDelays(self) -> java.util.Map[int, float]: ...
     def getReferenceFrame(self) -> org.orekit.files.ccsds.definitions.FrameFacade:
         """
             Get the the value of :code:`REFERENCE_FRAME` as an Orekit :class:`~org.orekit.frames.Frame`.
@@ -1211,16 +1178,7 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
         
         """
         ...
-    def getTransmitDelays(self) -> java.util.Map[int, float]:
-        """
-            Getter for the transmitDelays.
-        
-            Returns:
-                the transmitDelays
-        
-        
-        """
-        ...
+    def getTransmitDelays(self) -> java.util.Map[int, float]: ...
     def getTurnaroundDenominator(self) -> int:
         """
             Getter for the turnaroundDenominator.
@@ -1326,7 +1284,7 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Setter for the radar cross section correction.
         
             Parameters:
-                correctionRcs (double): the radar cross section correction in mÂ² to set
+                correctionRcs (double): the radar cross section correction in m² to set
         
         
         """
@@ -1402,16 +1360,7 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
         
         """
         ...
-    def setEphemerisNames(self, map: typing.Union[java.util.Map[int, str], typing.Mapping[int, str]]) -> None:
-        """
-            Setter for the external ephemeris names for participants.
-        
-            Parameters:
-                ephemerisNames (Map<Integer, String> ephemerisNames): external ephemeris names for participants
-        
-        
-        """
-        ...
+    def setEphemerisNames(self, map: typing.Union[java.util.Map[int, str], typing.Mapping[int, str]]) -> None: ...
     def setFreqOffset(self, double: float) -> None:
         """
             Setter for the freqOffset.
@@ -1457,7 +1406,7 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Set the interpolation method to be used.
         
             Parameters:
-                interpolationMethod (String): the interpolation method to be set
+                interpolationMethod (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the interpolation method to be set
         
         
         """
@@ -1472,16 +1421,7 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
         
         """
         ...
-    def setParticipants(self, map: typing.Union[java.util.Map[int, str], typing.Mapping[int, str]]) -> None:
-        """
-            Setter for the participants.
-        
-            Parameters:
-                participants (Map<Integer, String> participants): the participants to set
-        
-        
-        """
-        ...
+    def setParticipants(self, map: typing.Union[java.util.Map[int, str], typing.Mapping[int, str]]) -> None: ...
     def setPath(self, intArray: typing.List[int]) -> None:
         """
             Setter for the path.
@@ -1557,21 +1497,12 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Setter for the receiveBand.
         
             Parameters:
-                receiveBand (String): the receiveBand to set
+                receiveBand (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the receiveBand to set
         
         
         """
         ...
-    def setReceiveDelays(self, map: typing.Union[java.util.Map[int, float], typing.Mapping[int, float]]) -> None:
-        """
-            Setter for the receiveDelays.
-        
-            Parameters:
-                receiveDelays (Map<Integer, Double> receiveDelays): the receiveDelays to set
-        
-        
-        """
-        ...
+    def setReceiveDelays(self, map: typing.Union[java.util.Map[int, float], typing.Mapping[int, float]]) -> None: ...
     def setReferenceFrame(self, frameFacade: org.orekit.files.ccsds.definitions.FrameFacade) -> None:
         """
             Set the reference frame in which data are given: used for RADEC tracking data.
@@ -1617,7 +1548,7 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Setter for the tracking data identifier.
         
             Parameters:
-                trackId (String): tracking data identifier
+                trackId (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): tracking data identifier
         
         
         """
@@ -1627,21 +1558,12 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Setter for the transmitBand.
         
             Parameters:
-                transmitBand (String): the transmitBand to set
+                transmitBand (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the transmitBand to set
         
         
         """
         ...
-    def setTransmitDelays(self, map: typing.Union[java.util.Map[int, float], typing.Mapping[int, float]]) -> None:
-        """
-            Setter for the transmitDelays.
-        
-            Parameters:
-                transmitDelays (Map<Integer, Double> transmitDelays): the transmitDelays to set
-        
-        
-        """
-        ...
+    def setTransmitDelays(self, map: typing.Union[java.util.Map[int, float], typing.Mapping[int, float]]) -> None: ...
     def setTurnaroundDenominator(self, int: int) -> None:
         """
             Setter for the turnaroundDenominator.
@@ -1683,7 +1605,7 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
 
 class TdmMetadataKey(java.lang.Enum['TdmMetadataKey']):
     """
-    public enum TdmMetadataKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadataKey`>
+    public enum TdmMetadataKey extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadataKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata` entries.
     
@@ -1775,14 +1697,14 @@ class TdmMetadataKey(java.lang.Enum['TdmMetadataKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -1795,9 +1717,8 @@ class TdmMetadataKey(java.lang.Enum['TdmMetadataKey']):
         
             .. code-block: java
             
-            
-            for (TdmMetadataKey c : TdmMetadataKey.values())
-                System.out.println(c);
+            for (TdmMetadataKey c : TdmMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1820,10 +1741,11 @@ class TdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[T
     
         References:
     
-        - CCSDS 503.0-B-1 recommended standard ("Tracking Data Message", Blue Book, Issue 1, November 2007).
+        - :class:`~org.orekit.files.ccsds.ndm.tdm.https:.public.ccsds.org.Pubs.503x0b1c1.pdf` ("Tracking Data Message", Blue
+        Book, Issue 1, November 2007).
     
-        - CCSDS 505.0-B-1 recommended standard ("XML Specification for Navigation Data Message", Blue Book, Issue 1, December
-        2010).
+        - :class:`~org.orekit.files.ccsds.ndm.tdm.https:.public.ccsds.org.Pubs.505x0b1.pdf` ("XML Specification for Navigation
+        Data Message", Blue Book, Issue 1, December 2010).
     
     
         Since:
@@ -1845,8 +1767,8 @@ class TdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[T
             Finalize data after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -1859,8 +1781,8 @@ class TdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[T
             Finalize header after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -1873,8 +1795,8 @@ class TdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[T
             Finalize metadata after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -1887,8 +1809,8 @@ class TdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[T
             Get file header to fill.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 file header to fill
@@ -1901,8 +1823,8 @@ class TdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[T
             Acknowledge data parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -1915,8 +1837,8 @@ class TdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[T
             Acknowledge header parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -1929,8 +1851,8 @@ class TdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[T
             Acknowledge metada parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -1943,8 +1865,8 @@ class TdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[T
             Prepare data for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -1957,8 +1879,8 @@ class TdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[T
             Prepare header for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -1971,8 +1893,8 @@ class TdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[T
             Prepare metadata for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -2027,7 +1949,7 @@ class TdmWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[or
 
 class TimetagReference(java.lang.Enum['TimetagReference']):
     """
-    public enum TimetagReference extends Enum<:class:`~org.orekit.files.ccsds.ndm.tdm.TimetagReference`>
+    public enum TimetagReference extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.tdm.TimetagReference`>
     
         Reference for time tag.
     
@@ -2048,14 +1970,14 @@ class TimetagReference(java.lang.Enum['TimetagReference']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -2068,9 +1990,8 @@ class TimetagReference(java.lang.Enum['TimetagReference']):
         
             .. code-block: java
             
-            
-            for (TimetagReference c : TimetagReference.values())
-                System.out.println(c);
+            for (TimetagReference c : TimetagReference.values())
+                System.out.println(c);
             
         
             Returns:
@@ -2082,7 +2003,7 @@ class TimetagReference(java.lang.Enum['TimetagReference']):
 
 class TrackingMode(java.lang.Enum['TrackingMode']):
     """
-    public enum TrackingMode extends Enum<:class:`~org.orekit.files.ccsds.ndm.tdm.TrackingMode`>
+    public enum TrackingMode extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.tdm.TrackingMode`>
     
         Tracking mode.
     
@@ -2103,14 +2024,14 @@ class TrackingMode(java.lang.Enum['TrackingMode']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -2123,9 +2044,8 @@ class TrackingMode(java.lang.Enum['TrackingMode']):
         
             .. code-block: java
             
-            
-            for (TrackingMode c : TrackingMode.values())
-                System.out.println(c);
+            for (TrackingMode c : TrackingMode.values())
+                System.out.println(c);
             
         
             Returns:
@@ -2137,7 +2057,7 @@ class TrackingMode(java.lang.Enum['TrackingMode']):
 
 class IdentityConverter(RangeUnitsConverter):
     """
-    public class IdentityConverter extends Object implements :class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`
+    public class IdentityConverter extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`
     
         Identity converter for Range Units.
     
@@ -2151,8 +2071,8 @@ class IdentityConverter(RangeUnitsConverter):
             Convert a range expressed in meters.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter.metersToRu`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`
+                :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter.metersToRu` in
+                interface :class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`
         
             Parameters:
                 metadata (:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata`): metadata corresponding to the observation
@@ -2170,8 +2090,8 @@ class IdentityConverter(RangeUnitsConverter):
             Convert a range expressed in :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU`.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter.ruToMeters`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`
+                :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter.ruToMeters` in
+                interface :class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`
         
             Parameters:
                 metadata (:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata`): metadata corresponding to the observation
@@ -2187,7 +2107,7 @@ class IdentityConverter(RangeUnitsConverter):
 
 class PythonRangeUnitsConverter(RangeUnitsConverter):
     """
-    public class PythonRangeUnitsConverter extends Object implements :class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`
+    public class PythonRangeUnitsConverter extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -2196,8 +2116,8 @@ class PythonRangeUnitsConverter(RangeUnitsConverter):
             Convert a range expressed in meters.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter.metersToRu`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`
+                :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter.metersToRu` in
+                interface :class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`
         
             Parameters:
                 metadata (:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata`): metadata corresponding to the observation
@@ -2234,8 +2154,8 @@ class PythonRangeUnitsConverter(RangeUnitsConverter):
             Convert a range expressed in :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU`.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter.ruToMeters`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`
+                :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter.ruToMeters` in
+                interface :class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`
         
             Parameters:
                 metadata (:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata`): metadata corresponding to the observation

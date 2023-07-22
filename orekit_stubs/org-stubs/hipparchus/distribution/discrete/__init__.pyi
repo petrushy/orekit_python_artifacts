@@ -8,7 +8,7 @@ import typing
 
 class AbstractIntegerDistribution(org.hipparchus.distribution.IntegerDistribution, java.io.Serializable):
     """
-    public abstract class AbstractIntegerDistribution extends Object implements :class:`~org.hipparchus.distribution.IntegerDistribution`, Serializable
+    public abstract class AbstractIntegerDistribution extends :class:`~org.hipparchus.distribution.discrete.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.distribution.IntegerDistribution`, :class:`~org.hipparchus.distribution.discrete.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Base class for integer-valued discrete distributions.
     
@@ -30,8 +30,8 @@ class AbstractIntegerDistribution(org.hipparchus.distribution.IntegerDistributio
             The default implementation simply computes the logarithm of :code:`probability(x)`.
         
             Specified by:
-                :meth:`~org.hipparchus.distribution.IntegerDistribution.logProbability`Â in
-                interfaceÂ :class:`~org.hipparchus.distribution.IntegerDistribution`
+                :meth:`~org.hipparchus.distribution.IntegerDistribution.logProbability` in
+                interface :class:`~org.hipparchus.distribution.IntegerDistribution`
         
             Parameters:
                 x (int): the point at which the PMF is evaluated
@@ -165,12 +165,12 @@ class BinomialDistribution(AbstractIntegerDistribution):
             The default implementation simply computes the logarithm of :code:`probability(x)`.
         
             Specified by:
-                :meth:`~org.hipparchus.distribution.IntegerDistribution.logProbability`Â in
-                interfaceÂ :class:`~org.hipparchus.distribution.IntegerDistribution`
+                :meth:`~org.hipparchus.distribution.IntegerDistribution.logProbability` in
+                interface :class:`~org.hipparchus.distribution.IntegerDistribution`
         
             Overrides:
-                :meth:`~org.hipparchus.distribution.discrete.AbstractIntegerDistribution.logProbability`Â in
-                classÂ :class:`~org.hipparchus.distribution.discrete.AbstractIntegerDistribution`
+                :meth:`~org.hipparchus.distribution.discrete.AbstractIntegerDistribution.logProbability` in
+                class :class:`~org.hipparchus.distribution.discrete.AbstractIntegerDistribution`
         
             Parameters:
                 x (int): the point at which the PMF is evaluated
@@ -419,12 +419,12 @@ class GeometricDistribution(AbstractIntegerDistribution):
             The default implementation simply computes the logarithm of :code:`probability(x)`.
         
             Specified by:
-                :meth:`~org.hipparchus.distribution.IntegerDistribution.logProbability`Â in
-                interfaceÂ :class:`~org.hipparchus.distribution.IntegerDistribution`
+                :meth:`~org.hipparchus.distribution.IntegerDistribution.logProbability` in
+                interface :class:`~org.hipparchus.distribution.IntegerDistribution`
         
             Overrides:
-                :meth:`~org.hipparchus.distribution.discrete.AbstractIntegerDistribution.logProbability`Â in
-                classÂ :class:`~org.hipparchus.distribution.discrete.AbstractIntegerDistribution`
+                :meth:`~org.hipparchus.distribution.discrete.AbstractIntegerDistribution.logProbability` in
+                class :class:`~org.hipparchus.distribution.discrete.AbstractIntegerDistribution`
         
             Parameters:
                 x (int): the point at which the PMF is evaluated
@@ -583,12 +583,12 @@ class HypergeometricDistribution(AbstractIntegerDistribution):
             The default implementation simply computes the logarithm of :code:`probability(x)`.
         
             Specified by:
-                :meth:`~org.hipparchus.distribution.IntegerDistribution.logProbability`Â in
-                interfaceÂ :class:`~org.hipparchus.distribution.IntegerDistribution`
+                :meth:`~org.hipparchus.distribution.IntegerDistribution.logProbability` in
+                interface :class:`~org.hipparchus.distribution.IntegerDistribution`
         
             Overrides:
-                :meth:`~org.hipparchus.distribution.discrete.AbstractIntegerDistribution.logProbability`Â in
-                classÂ :class:`~org.hipparchus.distribution.discrete.AbstractIntegerDistribution`
+                :meth:`~org.hipparchus.distribution.discrete.AbstractIntegerDistribution.logProbability` in
+                class :class:`~org.hipparchus.distribution.discrete.AbstractIntegerDistribution`
         
             Parameters:
                 x (int): the point at which the PMF is evaluated
@@ -784,12 +784,12 @@ class PoissonDistribution(AbstractIntegerDistribution):
             The default implementation simply computes the logarithm of :code:`probability(x)`.
         
             Specified by:
-                :meth:`~org.hipparchus.distribution.IntegerDistribution.logProbability`Â in
-                interfaceÂ :class:`~org.hipparchus.distribution.IntegerDistribution`
+                :meth:`~org.hipparchus.distribution.IntegerDistribution.logProbability` in
+                interface :class:`~org.hipparchus.distribution.IntegerDistribution`
         
             Overrides:
-                :meth:`~org.hipparchus.distribution.discrete.AbstractIntegerDistribution.logProbability`Â in
-                classÂ :class:`~org.hipparchus.distribution.discrete.AbstractIntegerDistribution`
+                :meth:`~org.hipparchus.distribution.discrete.AbstractIntegerDistribution.logProbability` in
+                class :class:`~org.hipparchus.distribution.discrete.AbstractIntegerDistribution`
         
             Parameters:
                 x (int): the point at which the PMF is evaluated
@@ -959,7 +959,9 @@ class ZipfDistribution(AbstractIntegerDistribution):
     
     
         Also see:
-            Zipf's law (Wikipedia), Generalized harmonic numbers, :meth:`~serialized`
+            :class:`~org.hipparchus.distribution.discrete.https:.en.wikipedia.org.wiki.Zipf's_law`,
+            :meth:`~org.hipparchus.distribution.discrete.https:.en.wikipedia.org.wiki.Harmonic_number#Generalized_harmonic_numbers`,
+            :meth:`~serialized`
     """
     def __init__(self, int: int, double: float): ...
     def cumulativeProbability(self, int: int) -> float:
@@ -1078,12 +1080,12 @@ class ZipfDistribution(AbstractIntegerDistribution):
             The default implementation simply computes the logarithm of :code:`probability(x)`.
         
             Specified by:
-                :meth:`~org.hipparchus.distribution.IntegerDistribution.logProbability`Â in
-                interfaceÂ :class:`~org.hipparchus.distribution.IntegerDistribution`
+                :meth:`~org.hipparchus.distribution.IntegerDistribution.logProbability` in
+                interface :class:`~org.hipparchus.distribution.IntegerDistribution`
         
             Overrides:
-                :meth:`~org.hipparchus.distribution.discrete.AbstractIntegerDistribution.logProbability`Â in
-                classÂ :class:`~org.hipparchus.distribution.discrete.AbstractIntegerDistribution`
+                :meth:`~org.hipparchus.distribution.discrete.AbstractIntegerDistribution.logProbability` in
+                class :class:`~org.hipparchus.distribution.discrete.AbstractIntegerDistribution`
         
             Parameters:
                 x (int): the point at which the PMF is evaluated

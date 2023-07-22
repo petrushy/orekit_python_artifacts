@@ -10,7 +10,7 @@ import typing
 
 class EllipsoidTessellator:
     """
-    public class EllipsoidTessellator extends Object
+    public class EllipsoidTessellator extends :class:`~org.orekit.models.earth.tessellation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Class used to tessellate an interest zone on an ellipsoid in either :class:`~org.orekit.models.earth.tessellation.Tile`
         or grids of :class:`~org.orekit.bodies.GeodeticPoint`.
@@ -34,8 +34,11 @@ class EllipsoidTessellator:
         """
             Build a simple zone (connected zone without holes).
         
-            In order to build more complex zones (not connected or with holes), the user should directly call Hipparchus null
-            constructors and null if set operations are needed (union, intersection, difference ...).
+            In order to build more complex zones (not connected or with holes), the user should directly call Hipparchus
+            :class:`~org.orekit.models.earth.tessellation.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.spherical.twod.SphericalPolygonsSet?is`
+            constructors and
+            :class:`~org.orekit.models.earth.tessellation.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.partitioning.RegionFactory?is`
+            if set operations are needed (union, intersection, difference ...).
         
             Take care that the vertices boundary points must be given *counterclockwise*. Using the wrong order defines the
             complementary of the real zone, and will often result in tessellation failure as the zone is too wide.
@@ -58,12 +61,12 @@ class EllipsoidTessellator:
 
 class Tile(java.io.Serializable):
     """
-    public class Tile extends Object implements Serializable
+    public class Tile extends :class:`~org.orekit.models.earth.tessellation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.tessellation.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Simple data structure for a quadrilateral tile shape on a body surface.
     
-        This class is devoted to simple usage only. It assumes the edges are strictly between 0 and Ã�â‚¬ radians and that the
-        angles between edges are also strictly between 0 and Ã�â‚¬ radians.
+        This class is devoted to simple usage only. It assumes the edges are strictly between 0 and π radians and that the
+        angles between edges are also strictly between 0 and π radians.
     
         Also see:
             :class:`~org.orekit.models.earth.tessellation.AlongTrackAiming`,
@@ -124,7 +127,7 @@ class TileAiming:
             Find the along tile direction for tessellation at specified point.
         
             Parameters:
-                point (Vector3D): point on the ellipsoid (Cartesian coordinates)
+                point (:class:`~org.orekit.models.earth.tessellation.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point on the ellipsoid (Cartesian coordinates)
                 gp (:class:`~org.orekit.bodies.GeodeticPoint`): point on the ellipsoid (geodetic coordinates)
         
             Returns:
@@ -137,7 +140,7 @@ class TileAiming:
 
 class AlongTrackAiming(TileAiming):
     """
-    public class AlongTrackAiming extends Object implements :class:`~org.orekit.models.earth.tessellation.TileAiming`
+    public class AlongTrackAiming extends :class:`~org.orekit.models.earth.tessellation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.tessellation.TileAiming`
     
         Class used to orient tiles along an orbit track.
     
@@ -151,11 +154,11 @@ class AlongTrackAiming(TileAiming):
             Find the along tile direction for tessellation at specified point.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.tessellation.TileAiming.alongTileDirection`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.tessellation.TileAiming`
+                :meth:`~org.orekit.models.earth.tessellation.TileAiming.alongTileDirection` in
+                interface :class:`~org.orekit.models.earth.tessellation.TileAiming`
         
             Parameters:
-                point (Vector3D): point on the ellipsoid (Cartesian coordinates)
+                point (:class:`~org.orekit.models.earth.tessellation.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point on the ellipsoid (Cartesian coordinates)
                 gp (:class:`~org.orekit.bodies.GeodeticPoint`): point on the ellipsoid (geodetic coordinates)
         
             Returns:
@@ -168,7 +171,7 @@ class AlongTrackAiming(TileAiming):
 
 class ConstantAzimuthAiming(TileAiming):
     """
-    public class ConstantAzimuthAiming extends Object implements :class:`~org.orekit.models.earth.tessellation.TileAiming`
+    public class ConstantAzimuthAiming extends :class:`~org.orekit.models.earth.tessellation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.tessellation.TileAiming`
     
         Class used to orient tiles with respect to a geographic azimuth.
     
@@ -182,11 +185,11 @@ class ConstantAzimuthAiming(TileAiming):
             Find the along tile direction for tessellation at specified point.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.tessellation.TileAiming.alongTileDirection`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.tessellation.TileAiming`
+                :meth:`~org.orekit.models.earth.tessellation.TileAiming.alongTileDirection` in
+                interface :class:`~org.orekit.models.earth.tessellation.TileAiming`
         
             Parameters:
-                point (Vector3D): point on the ellipsoid (Cartesian coordinates)
+                point (:class:`~org.orekit.models.earth.tessellation.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point on the ellipsoid (Cartesian coordinates)
                 gp (:class:`~org.orekit.bodies.GeodeticPoint`): point on the ellipsoid (geodetic coordinates)
         
             Returns:
@@ -199,7 +202,7 @@ class ConstantAzimuthAiming(TileAiming):
 
 class DivertedSingularityAiming(TileAiming):
     """
-    public class DivertedSingularityAiming extends Object implements :class:`~org.orekit.models.earth.tessellation.TileAiming`
+    public class DivertedSingularityAiming extends :class:`~org.orekit.models.earth.tessellation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.tessellation.TileAiming`
     
         Class used to orient tiles such that there are no singularities within the zone of interest.
     
@@ -218,11 +221,11 @@ class DivertedSingularityAiming(TileAiming):
             Find the along tile direction for tessellation at specified point.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.tessellation.TileAiming.alongTileDirection`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.tessellation.TileAiming`
+                :meth:`~org.orekit.models.earth.tessellation.TileAiming.alongTileDirection` in
+                interface :class:`~org.orekit.models.earth.tessellation.TileAiming`
         
             Parameters:
-                point (Vector3D): point on the ellipsoid (Cartesian coordinates)
+                point (:class:`~org.orekit.models.earth.tessellation.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point on the ellipsoid (Cartesian coordinates)
                 gp (:class:`~org.orekit.bodies.GeodeticPoint`): point on the ellipsoid (geodetic coordinates)
         
             Returns:
@@ -235,7 +238,7 @@ class DivertedSingularityAiming(TileAiming):
 
 class PythonTileAiming(TileAiming):
     """
-    public class PythonTileAiming extends Object implements :class:`~org.orekit.models.earth.tessellation.TileAiming`
+    public class PythonTileAiming extends :class:`~org.orekit.models.earth.tessellation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.tessellation.TileAiming`
     """
     def __init__(self): ...
     def alongTileDirection(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, geodeticPoint: org.orekit.bodies.GeodeticPoint) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
@@ -243,11 +246,11 @@ class PythonTileAiming(TileAiming):
             Find the along tile direction for tessellation at specified point.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.tessellation.TileAiming.alongTileDirection`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.tessellation.TileAiming`
+                :meth:`~org.orekit.models.earth.tessellation.TileAiming.alongTileDirection` in
+                interface :class:`~org.orekit.models.earth.tessellation.TileAiming`
         
             Parameters:
-                point (Vector3D): point on the ellipsoid (Cartesian coordinates)
+                point (:class:`~org.orekit.models.earth.tessellation.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point on the ellipsoid (Cartesian coordinates)
                 gp (:class:`~org.orekit.bodies.GeodeticPoint`): point on the ellipsoid (geodetic coordinates)
         
             Returns:

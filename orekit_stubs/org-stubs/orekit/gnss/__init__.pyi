@@ -21,7 +21,7 @@ import typing
 
 class AppliedDCBS:
     """
-    public class AppliedDCBS extends Object
+    public class AppliedDCBS extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Corrections of Differential Code Biases (DCBs) applied. Contains information on the programs used to correct the
         observations in RINEX or clock files for differential code biases.
@@ -60,7 +60,7 @@ class AppliedDCBS:
 
 class AppliedPCVS:
     """
-    public class AppliedPCVS extends Object
+    public class AppliedPCVS extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Corrections of antenna phase center variations (PCVs) applied. Contains information on the programs used to correct the
         observations in RINEX or clock files for antenna phase center variations.
@@ -99,7 +99,7 @@ class AppliedPCVS:
 
 class CombinedObservationData:
     """
-    public class CombinedObservationData extends Object
+    public class CombinedObservationData extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Combined observation data.
     
@@ -153,7 +153,7 @@ class CombinedObservationData:
 
 class CombinedObservationDataSet(org.orekit.time.TimeStamped):
     """
-    public class CombinedObservationDataSet extends Object implements :class:`~org.orekit.time.TimeStamped`
+    public class CombinedObservationDataSet extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`
     
         Combined observation data set.
     
@@ -221,7 +221,7 @@ class CombinedObservationDataSet(org.orekit.time.TimeStamped):
 
 class DOP:
     """
-    public class DOP extends Object
+    public class DOP extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This class is a container for the result of a single DOP computation.
     
@@ -315,7 +315,7 @@ class DOP:
 
 class DOPComputer:
     """
-    public class DOPComputer extends Object
+    public class DOPComputer extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This class aims at computing the dilution of precision.
     
@@ -329,7 +329,7 @@ class DOPComputer:
     """
     public static final double DOP_MIN_ELEVATION
     
-        Minimum elevation : 0Â°.
+        Minimum elevation : 0°.
     
         Also see:
             :meth:`~constant`
@@ -342,7 +342,7 @@ class DOPComputer:
         """
             Creates a DOP computer for one location.
         
-            A minimum elevation of 0Â° is taken into account to compute visibility between the location and the GNSS spacecrafts.
+            A minimum elevation of 0° is taken into account to compute visibility between the location and the GNSS spacecrafts.
         
             Parameters:
                 shape (:class:`~org.orekit.bodies.OneAxisEllipsoid`): the body shape on which the location is defined
@@ -413,7 +413,7 @@ class DOPComputer:
 
 class Frequency(java.lang.Enum['Frequency']):
     """
-    public enum Frequency extends Enum<:class:`~org.orekit.gnss.Frequency`>
+    public enum Frequency extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.Frequency`>
     
         Enumerate for GNSS frequencies.
     
@@ -537,14 +537,14 @@ class Frequency(java.lang.Enum['Frequency']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -557,9 +557,8 @@ class Frequency(java.lang.Enum['Frequency']):
         
             .. code-block: java
             
-            
-            for (Frequency c : Frequency.values())
-                System.out.println(c);
+            for (Frequency c : Frequency.values())
+                System.out.println(c);
             
         
             Returns:
@@ -571,7 +570,7 @@ class Frequency(java.lang.Enum['Frequency']):
 
 class HatanakaCompressFilter(org.orekit.data.DataFilter):
     """
-    public class HatanakaCompressFilter extends Object implements :class:`~org.orekit.data.DataFilter`
+    public class HatanakaCompressFilter extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataFilter`
     
         Decompression filter for Hatanaka compressed RINEX files.
     
@@ -619,7 +618,7 @@ class HatanakaCompressFilter(org.orekit.data.DataFilter):
 
 class MeasurementType(java.lang.Enum['MeasurementType']):
     """
-    public enum MeasurementType extends Enum<:class:`~org.orekit.gnss.MeasurementType`>
+    public enum MeasurementType extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.MeasurementType`>
     
         Enumerate for measurement type.
     
@@ -643,14 +642,14 @@ class MeasurementType(java.lang.Enum['MeasurementType']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -663,9 +662,8 @@ class MeasurementType(java.lang.Enum['MeasurementType']):
         
             .. code-block: java
             
-            
-            for (MeasurementType c : MeasurementType.values())
-                System.out.println(c);
+            for (MeasurementType c : MeasurementType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -677,7 +675,7 @@ class MeasurementType(java.lang.Enum['MeasurementType']):
 
 class ObservationData:
     """
-    public class ObservationData extends Object
+    public class ObservationData extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Observation Data.
     
@@ -728,7 +726,7 @@ class ObservationData:
 
 class ObservationDataSet(org.orekit.time.TimeStamped):
     """
-    public class ObservationDataSet extends Object implements :class:`~org.orekit.time.TimeStamped`
+    public class ObservationDataSet extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`
     
         Observation Data set.
     
@@ -796,7 +794,7 @@ class ObservationDataSet(org.orekit.time.TimeStamped):
 
 class ObservationType(java.lang.Enum['ObservationType']):
     """
-    public enum ObservationType extends Enum<:class:`~org.orekit.gnss.ObservationType`>
+    public enum ObservationType extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.ObservationType`>
     
         Enumerate for all the Observation Types for Rinex 2 and 3. For Rinex 2, there is an two-character enumerate composed of
         the Observation Code (C,P,L,D,S) and the Frequency code (1,2,5,6,7,8). For Rinex 3 there is a three-character enumerate
@@ -1157,14 +1155,14 @@ class ObservationType(java.lang.Enum['ObservationType']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -1177,9 +1175,8 @@ class ObservationType(java.lang.Enum['ObservationType']):
         
             .. code-block: java
             
-            
-            for (ObservationType c : ObservationType.values())
-                System.out.println(c);
+            for (ObservationType c : ObservationType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1191,7 +1188,7 @@ class ObservationType(java.lang.Enum['ObservationType']):
 
 class RinexObservationHeader:
     """
-    public class RinexObservationHeader extends Object
+    public class RinexObservationHeader extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Container for Rinex observation file header.
     
@@ -1518,7 +1515,7 @@ class RinexObservationHeader:
 
 class RinexObservationLoader:
     """
-    public class RinexObservationLoader extends Object
+    public class RinexObservationLoader extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Loader for Rinex measurements files.
     
@@ -1528,13 +1525,20 @@ class RinexObservationLoader:
             9.2
     
         Also see:
-            rinex 2.0, rinex 2.10, rinex 2.11, `unofficial rinex 2.12 <http://www.aiub.unibe.ch/download/rinex/rinex212.txt>`,
-            `unofficial rinex 2.20 <http://www.aiub.unibe.ch/download/rinex/rnx_leo.txt>`, rinex 3.00, rinex 3.01, rinex 3.02, rinex
-            3.03, rinex 3.04
+            :class:`~org.orekit.gnss.ftp:.igs.org.pub.data.format.rinex2.txt`,
+            :class:`~org.orekit.gnss.ftp:.igs.org.pub.data.format.rinex210.txt`,
+            :class:`~org.orekit.gnss.ftp:.igs.org.pub.data.format.rinex211.txt`, `unofficial rinex 2.12
+            <http://www.aiub.unibe.ch/download/rinex/rinex212.txt>`, `unofficial rinex 2.20
+            <http://www.aiub.unibe.ch/download/rinex/rnx_leo.txt>`,
+            :class:`~org.orekit.gnss.ftp:.igs.org.pub.data.format.rinex300.pdf`,
+            :class:`~org.orekit.gnss.ftp:.igs.org.pub.data.format.rinex301.pdf`,
+            :class:`~org.orekit.gnss.ftp:.igs.org.pub.data.format.rinex302.pdf`,
+            :class:`~org.orekit.gnss.ftp:.igs.org.pub.data.format.rinex303.pdf`,
+            :class:`~org.orekit.gnss.ftp:.igs.org.pub.data.format.rinex304.pdf`
     """
     DEFAULT_RINEX_2_SUPPORTED_NAMES: typing.ClassVar[str] = ...
     """
-    public static final String DEFAULT_RINEX_2_SUPPORTED_NAMES
+    public static final :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_RINEX_2_SUPPORTED_NAMES
     
         Default supported files name pattern for rinex 2 observation files.
     
@@ -1545,7 +1549,7 @@ class RinexObservationLoader:
     """
     DEFAULT_RINEX_3_SUPPORTED_NAMES: typing.ClassVar[str] = ...
     """
-    public static final String DEFAULT_RINEX_3_SUPPORTED_NAMES
+    public static final :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_RINEX_3_SUPPORTED_NAMES
     
         Default supported files name pattern for rinex 3 observation files.
     
@@ -1587,7 +1591,8 @@ class SEMParser(org.orekit.data.AbstractSelfFeedingLoader, org.orekit.data.DataL
         <http://www.navcen.uscg.gov/?pageName=gpsSem>`.
     
         The format of the files holding SEM almanacs is not precisely specified, so the parsing rules have been deduced from the
-        downloadable files at `NAVCEN <http://www.navcen.uscg.gov/?pageName=gpsAlmanacs>` and at CelesTrak.
+        downloadable files at `NAVCEN <http://www.navcen.uscg.gov/?pageName=gpsAlmanacs>` and at
+        :class:`~org.orekit.gnss.https:.celestrak.com.GPS.almanac.SEM`.
     
         Since:
             8.0
@@ -1597,24 +1602,15 @@ class SEMParser(org.orekit.data.AbstractSelfFeedingLoader, org.orekit.data.DataL
     @typing.overload
     def __init__(self, string: str, dataProvidersManager: org.orekit.data.DataProvidersManager, timeScales: org.orekit.time.TimeScales): ...
     def getAlmanacs(self) -> java.util.List[org.orekit.propagation.analytical.gnss.data.GPSAlmanac]: ...
-    def getPRNNumbers(self) -> java.util.List[int]:
-        """
-            Gets the PRN numbers of all the :class:`~org.orekit.propagation.analytical.gnss.data.GPSAlmanac` read from the file.
-        
-            Returns:
-                the PRN numbers of all the :class:`~org.orekit.propagation.analytical.gnss.data.GPSAlmanac` read from the file
-        
-        
-        """
-        ...
+    def getPRNNumbers(self) -> java.util.List[int]: ...
     def getSupportedNames(self) -> str:
         """
             Description copied from class: :meth:`~org.orekit.data.AbstractSelfFeedingLoader.getSupportedNames`
             Get the supported names regular expression.
         
             Overrides:
-                :meth:`~org.orekit.data.AbstractSelfFeedingLoader.getSupportedNames`Â in
-                classÂ :class:`~org.orekit.data.AbstractSelfFeedingLoader`
+                :meth:`~org.orekit.data.AbstractSelfFeedingLoader.getSupportedNames` in
+                class :class:`~org.orekit.data.AbstractSelfFeedingLoader`
         
             Returns:
                 the supported names.
@@ -1634,7 +1630,7 @@ class SEMParser(org.orekit.data.AbstractSelfFeedingLoader, org.orekit.data.DataL
         
             This feature is useful when the file selection is already set up by the :class:`~org.orekit.data.DataProvidersManager`
             configuration.
-        public void loadData (InputStream input, String name) throws IOException, ParseException, :class:`~org.orekit.errors.OrekitException`
+        public void loadData (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.io.InputStream?is` input, :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` name) throws :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.io.IOException?is`, :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.text.ParseException?is`, :class:`~org.orekit.errors.OrekitException`
         
             Description copied from interface: :meth:`~org.orekit.data.DataLoader.loadData`
             Load data from a stream.
@@ -1643,12 +1639,12 @@ class SEMParser(org.orekit.data.AbstractSelfFeedingLoader, org.orekit.data.DataL
                 :meth:`~org.orekit.data.DataLoader.loadData` in interface :class:`~org.orekit.data.DataLoader`
         
             Parameters:
-                input (InputStream): data input stream
-                name (String): name of the file (or zip entry)
+                input (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.io.InputStream?is`): data input stream
+                name (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the file (or zip entry)
         
             Raises:
-                : if data can't be read
-                : if data can't be parsed or if some loader specific error occurs
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.io.IOException?is`: if data can't be read
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.text.ParseException?is`: if data can't be parsed or if some loader specific error occurs
                 :class:`~org.orekit.errors.OrekitException`: 
         
         """
@@ -1677,7 +1673,7 @@ class SEMParser(org.orekit.data.AbstractSelfFeedingLoader, org.orekit.data.DataL
 
 class SatelliteSystem(java.lang.Enum['SatelliteSystem']):
     """
-    public enum SatelliteSystem extends Enum<:class:`~org.orekit.gnss.SatelliteSystem`>
+    public enum SatelliteSystem extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.SatelliteSystem`>
     
         Enumerate for satellite system.
     
@@ -1729,14 +1725,14 @@ class SatelliteSystem(java.lang.Enum['SatelliteSystem']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -1749,9 +1745,8 @@ class SatelliteSystem(java.lang.Enum['SatelliteSystem']):
         
             .. code-block: java
             
-            
-            for (SatelliteSystem c : SatelliteSystem.values())
-                System.out.println(c);
+            for (SatelliteSystem c : SatelliteSystem.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1763,7 +1758,7 @@ class SatelliteSystem(java.lang.Enum['SatelliteSystem']):
 
 class SignalCode(java.lang.Enum['SignalCode']):
     """
-    public enum SignalCode extends Enum<:class:`~org.orekit.gnss.SignalCode`>
+    public enum SignalCode extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.SignalCode`>
     
         Enumerate for satellite signal code.
     
@@ -1799,14 +1794,14 @@ class SignalCode(java.lang.Enum['SignalCode']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -1819,9 +1814,8 @@ class SignalCode(java.lang.Enum['SignalCode']):
         
             .. code-block: java
             
-            
-            for (SignalCode c : SignalCode.values())
-                System.out.println(c);
+            for (SignalCode c : SignalCode.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1833,7 +1827,7 @@ class SignalCode(java.lang.Enum['SignalCode']):
 
 class TimeSystem(java.lang.Enum['TimeSystem']):
     """
-    public enum TimeSystem extends Enum<:class:`~org.orekit.gnss.TimeSystem`>
+    public enum TimeSystem extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.TimeSystem`>
     
         Enumerate for the time systems used in navigation files.
     
@@ -1886,14 +1880,14 @@ class TimeSystem(java.lang.Enum['TimeSystem']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -1906,9 +1900,8 @@ class TimeSystem(java.lang.Enum['TimeSystem']):
         
             .. code-block: java
             
-            
-            for (TimeSystem c : TimeSystem.values())
-                System.out.println(c);
+            for (TimeSystem c : TimeSystem.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1928,7 +1921,8 @@ class YUMAParser(org.orekit.data.AbstractSelfFeedingLoader, org.orekit.data.Data
         <http://www.navcen.uscg.gov/?pageName=gpsYuma>`.
     
         The format of the files holding Yuma almanacs is not precisely specified, so the parsing rules have been deduced from
-        the downloadable files at `NAVCEN <http://www.navcen.uscg.gov/?pageName=gpsAlmanacs>` and at CelesTrak.
+        the downloadable files at `NAVCEN <http://www.navcen.uscg.gov/?pageName=gpsAlmanacs>` and at
+        :class:`~org.orekit.gnss.https:.celestrak.com.GPS.almanac.Yuma`.
     
         Since:
             8.0
@@ -1938,24 +1932,15 @@ class YUMAParser(org.orekit.data.AbstractSelfFeedingLoader, org.orekit.data.Data
     @typing.overload
     def __init__(self, string: str, dataProvidersManager: org.orekit.data.DataProvidersManager, timeScales: org.orekit.time.TimeScales): ...
     def getAlmanacs(self) -> java.util.List[org.orekit.propagation.analytical.gnss.data.GPSAlmanac]: ...
-    def getPRNNumbers(self) -> java.util.List[int]:
-        """
-            Gets the PRN numbers of all the :class:`~org.orekit.propagation.analytical.gnss.data.GPSAlmanac` read from the file.
-        
-            Returns:
-                the PRN numbers of all the :class:`~org.orekit.propagation.analytical.gnss.data.GPSAlmanac` read from the file
-        
-        
-        """
-        ...
+    def getPRNNumbers(self) -> java.util.List[int]: ...
     def getSupportedNames(self) -> str:
         """
             Description copied from class: :meth:`~org.orekit.data.AbstractSelfFeedingLoader.getSupportedNames`
             Get the supported names regular expression.
         
             Overrides:
-                :meth:`~org.orekit.data.AbstractSelfFeedingLoader.getSupportedNames`Â in
-                classÂ :class:`~org.orekit.data.AbstractSelfFeedingLoader`
+                :meth:`~org.orekit.data.AbstractSelfFeedingLoader.getSupportedNames` in
+                class :class:`~org.orekit.data.AbstractSelfFeedingLoader`
         
             Returns:
                 the supported names.
@@ -1975,7 +1960,7 @@ class YUMAParser(org.orekit.data.AbstractSelfFeedingLoader, org.orekit.data.Data
         
             This feature is useful when the file selection is already set up by the :class:`~org.orekit.data.DataProvidersManager`
             configuration.
-        public void loadData (InputStream input, String name) throws IOException, ParseException, :class:`~org.orekit.errors.OrekitException`
+        public void loadData (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.io.InputStream?is` input, :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` name) throws :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.io.IOException?is`, :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.text.ParseException?is`, :class:`~org.orekit.errors.OrekitException`
         
             Description copied from interface: :meth:`~org.orekit.data.DataLoader.loadData`
             Load data from a stream.
@@ -1984,12 +1969,12 @@ class YUMAParser(org.orekit.data.AbstractSelfFeedingLoader, org.orekit.data.Data
                 :meth:`~org.orekit.data.DataLoader.loadData` in interface :class:`~org.orekit.data.DataLoader`
         
             Parameters:
-                input (InputStream): data input stream
-                name (String): name of the file (or zip entry)
+                input (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.io.InputStream?is`): data input stream
+                name (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the file (or zip entry)
         
             Raises:
-                : if data can't be read
-                : if data can't be parsed or if some loader specific error occurs
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.io.IOException?is`: if data can't be read
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.text.ParseException?is`: if data can't be parsed or if some loader specific error occurs
                 :class:`~org.orekit.errors.OrekitException`: 
         
         """

@@ -12,7 +12,7 @@ import typing
 
 class Generator(java.lang.AutoCloseable):
     """
-    public interface Generator extends AutoCloseable
+    public interface Generator extends :class:`~org.orekit.files.ccsds.utils.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.AutoCloseable?is`
     
         Generation interface for CCSDS messages.
     
@@ -98,7 +98,7 @@ class Generator(java.lang.AutoCloseable):
             Convert a SI unit name to a CCSDS name.
         
             Parameters:
-                siName (String): si unit name
+                siName (:class:`~org.orekit.files.ccsds.utils.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): si unit name
         
             Returns:
                 CCSDS name for the unit
@@ -149,7 +149,7 @@ class MessageWriter(typing.Generic[_MessageWriter__H, _MessageWriter__S, _Messag
 
 class AbstractGenerator(Generator):
     """
-    public abstract class AbstractGenerator extends Object implements :class:`~org.orekit.files.ccsds.utils.generation.Generator`
+    public abstract class AbstractGenerator extends :class:`~org.orekit.files.ccsds.utils.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.generation.Generator`
     
         Base class for both Key-Value Notation and eXtended Markup Language generators for CCSDS messages.
     
@@ -164,8 +164,8 @@ class AbstractGenerator(Generator):
             Convert a date to string value with high precision.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.generation.Generator.dateToString`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.generation.Generator`
+                :meth:`~org.orekit.files.ccsds.utils.generation.Generator.dateToString` in
+                interface :class:`~org.orekit.files.ccsds.utils.generation.Generator`
         
             Parameters:
                 year (int): year
@@ -187,8 +187,8 @@ class AbstractGenerator(Generator):
             Convert a date to string value with high precision.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.generation.Generator.dateToString`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.generation.Generator`
+                :meth:`~org.orekit.files.ccsds.utils.generation.Generator.dateToString` in
+                interface :class:`~org.orekit.files.ccsds.utils.generation.Generator`
         
             Parameters:
                 converter (:class:`~org.orekit.files.ccsds.definitions.TimeConverter`): converter for dates
@@ -207,8 +207,8 @@ class AbstractGenerator(Generator):
             STEP = 1.25000000000000000 so we try a few simple formats first and fall back to scientific notation if it doesn't work.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.generation.Generator.doubleToString`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.generation.Generator`
+                :meth:`~org.orekit.files.ccsds.utils.generation.Generator.doubleToString` in
+                interface :class:`~org.orekit.files.ccsds.utils.generation.Generator`
         
             Parameters:
                 value (double): value to format
@@ -226,8 +226,8 @@ class AbstractGenerator(Generator):
             Get the name of the output (for error messages).
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.generation.Generator.getOutputName`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.generation.Generator`
+                :meth:`~org.orekit.files.ccsds.utils.generation.Generator.getOutputName` in
+                interface :class:`~org.orekit.files.ccsds.utils.generation.Generator`
         
             Returns:
                 name of the output
@@ -241,11 +241,11 @@ class AbstractGenerator(Generator):
             Convert a SI unit name to a CCSDS name.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.generation.Generator.siToCcsdsName`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.generation.Generator`
+                :meth:`~org.orekit.files.ccsds.utils.generation.Generator.siToCcsdsName` in
+                interface :class:`~org.orekit.files.ccsds.utils.generation.Generator`
         
             Parameters:
-                siName (String): si unit name
+                siName (:class:`~org.orekit.files.ccsds.utils.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): si unit name
         
             Returns:
                 CCSDS name for the unit
@@ -293,7 +293,7 @@ _AbstractMessageWriter__S = typing.TypeVar('_AbstractMessageWriter__S', bound=or
 _AbstractMessageWriter__F = typing.TypeVar('_AbstractMessageWriter__F', bound=org.orekit.files.ccsds.ndm.NdmConstituent)  # <F>
 class AbstractMessageWriter(MessageWriter[_AbstractMessageWriter__H, _AbstractMessageWriter__S, _AbstractMessageWriter__F], typing.Generic[_AbstractMessageWriter__H, _AbstractMessageWriter__S, _AbstractMessageWriter__F]):
     """
-    public abstract class AbstractMessageWriter<H extends :class:`~org.orekit.files.ccsds.section.Header`, S extends :class:`~org.orekit.files.ccsds.section.Segment`<?, ?>, F extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<H, S>> extends Object implements :class:`~org.orekit.files.ccsds.utils.generation.MessageWriter`<H, S, F>
+    public abstract class AbstractMessageWriter<H extends :class:`~org.orekit.files.ccsds.section.Header`, S extends :class:`~org.orekit.files.ccsds.section.Segment`<?, ?>, F extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<H, S>> extends :class:`~org.orekit.files.ccsds.utils.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.generation.MessageWriter`<H, S, F>
     
         Base class for Navigation Data Message (NDM) files.
     
@@ -302,7 +302,7 @@ class AbstractMessageWriter(MessageWriter[_AbstractMessageWriter__H, _AbstractMe
     """
     DEFAULT_ORIGINATOR: typing.ClassVar[str] = ...
     """
-    public static final String DEFAULT_ORIGINATOR
+    public static final :class:`~org.orekit.files.ccsds.utils.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_ORIGINATOR
     
         Default value for :meth:`~org.orekit.files.ccsds.section.HeaderKey.ORIGINATOR`.
     
@@ -359,7 +359,7 @@ class AbstractMessageWriter(MessageWriter[_AbstractMessageWriter__H, _AbstractMe
 
 class PythonGenerator(Generator):
     """
-    public class PythonGenerator extends Object implements :class:`~org.orekit.files.ccsds.utils.generation.Generator`
+    public class PythonGenerator extends :class:`~org.orekit.files.ccsds.utils.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.generation.Generator`
     """
     def __init__(self): ...
     def close(self) -> None: ...
@@ -369,8 +369,8 @@ class PythonGenerator(Generator):
             Convert a date to string value with high precision.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.generation.Generator.dateToString`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.generation.Generator`
+                :meth:`~org.orekit.files.ccsds.utils.generation.Generator.dateToString` in
+                interface :class:`~org.orekit.files.ccsds.utils.generation.Generator`
         
             Parameters:
                 year (int): year
@@ -392,8 +392,8 @@ class PythonGenerator(Generator):
             Convert a date to string value with high precision.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.generation.Generator.dateToString`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.generation.Generator`
+                :meth:`~org.orekit.files.ccsds.utils.generation.Generator.dateToString` in
+                interface :class:`~org.orekit.files.ccsds.utils.generation.Generator`
         
             Parameters:
                 converter (:class:`~org.orekit.files.ccsds.definitions.TimeConverter`): converter for dates
@@ -412,8 +412,8 @@ class PythonGenerator(Generator):
             STEP = 1.25000000000000000 so we try a few simple formats first and fall back to scientific notation if it doesn't work.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.generation.Generator.doubleToString`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.generation.Generator`
+                :meth:`~org.orekit.files.ccsds.utils.generation.Generator.doubleToString` in
+                interface :class:`~org.orekit.files.ccsds.utils.generation.Generator`
         
             Parameters:
                 value (double): value to format
@@ -433,8 +433,8 @@ class PythonGenerator(Generator):
             Get the generated file format.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.generation.Generator.getFormat`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.generation.Generator`
+                :meth:`~org.orekit.files.ccsds.utils.generation.Generator.getFormat` in
+                interface :class:`~org.orekit.files.ccsds.utils.generation.Generator`
         
             Returns:
                 generated file format
@@ -447,8 +447,8 @@ class PythonGenerator(Generator):
             Get the name of the output (for error messages).
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.generation.Generator.getOutputName`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.generation.Generator`
+                :meth:`~org.orekit.files.ccsds.utils.generation.Generator.getOutputName` in
+                interface :class:`~org.orekit.files.ccsds.utils.generation.Generator`
         
             Returns:
                 name of the output
@@ -481,11 +481,11 @@ class PythonGenerator(Generator):
             Convert a SI unit name to a CCSDS name.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.generation.Generator.siToCcsdsName`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.generation.Generator`
+                :meth:`~org.orekit.files.ccsds.utils.generation.Generator.siToCcsdsName` in
+                interface :class:`~org.orekit.files.ccsds.utils.generation.Generator`
         
             Parameters:
-                siName (String): si unit name
+                siName (:class:`~org.orekit.files.ccsds.utils.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): si unit name
         
             Returns:
                 CCSDS name for the unit
@@ -522,7 +522,7 @@ _PythonMessageWriter__S = typing.TypeVar('_PythonMessageWriter__S', bound=org.or
 _PythonMessageWriter__F = typing.TypeVar('_PythonMessageWriter__F', bound=org.orekit.files.ccsds.ndm.NdmConstituent)  # <F>
 class PythonMessageWriter(MessageWriter[_PythonMessageWriter__H, _PythonMessageWriter__S, _PythonMessageWriter__F], typing.Generic[_PythonMessageWriter__H, _PythonMessageWriter__S, _PythonMessageWriter__F]):
     """
-    public class PythonMessageWriter<H extends :class:`~org.orekit.files.ccsds.section.Header`, S extends :class:`~org.orekit.files.ccsds.section.Segment`<?, ?>, F extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<H, S>> extends Object implements :class:`~org.orekit.files.ccsds.utils.generation.MessageWriter`<H, S, F>
+    public class PythonMessageWriter<H extends :class:`~org.orekit.files.ccsds.section.Header`, S extends :class:`~org.orekit.files.ccsds.section.Segment`<?, ?>, F extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<H, S>> extends :class:`~org.orekit.files.ccsds.utils.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.generation.MessageWriter`<H, S, F>
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -564,7 +564,7 @@ class KvnGenerator(AbstractGenerator):
             End CCSDS message.
         
             Parameters:
-                root (String): root element for XML files
+                root (:class:`~org.orekit.files.ccsds.utils.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): root element for XML files
         
         
         """
@@ -707,7 +707,7 @@ class XmlGenerator(AbstractGenerator):
     """
     UNITS: typing.ClassVar[str] = ...
     """
-    public static final String UNITS
+    public static final :class:`~org.orekit.files.ccsds.utils.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` UNITS
     
         Name of the units attribute.
     

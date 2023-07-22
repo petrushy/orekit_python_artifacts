@@ -35,7 +35,7 @@ class Field(typing.Generic[_Field__T]):
             Get the multiplicative identity of the field.
         
             The multiplicative identity is the element e :sub:`1` of the field such that for all elements a of the field, the
-            equalities a Ã— e :sub:`1` = e :sub:`1` Ã— a = a hold.
+            equalities a × e :sub:`1` = e :sub:`1` × a = a hold.
         
             Returns:
                 multiplicative identity of the field
@@ -375,12 +375,12 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
         ...
     def getPi(self) -> _CalculusFieldElement__T:
         """
-            Get the Archimedes constant Ï€.
+            Get the Archimedes constant π.
         
             Archimedes constant is the ratio of a circle's circumference to its diameter.
         
             Returns:
-                Archimedes constant Ï€
+                Archimedes constant π
         
             Since:
                 2.0

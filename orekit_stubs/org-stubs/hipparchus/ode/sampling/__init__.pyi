@@ -9,7 +9,7 @@ import typing
 _FieldODEFixedStepHandler__T = typing.TypeVar('_FieldODEFixedStepHandler__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldODEFixedStepHandler(typing.Generic[_FieldODEFixedStepHandler__T]):
     """
-    public interface FieldODEFixedStepHandler<T extends CalculusFieldElement<T>>
+    public interface FieldODEFixedStepHandler<T extends :class:`~org.hipparchus.ode.sampling.https:.www.hipparchus.org.hipparchus`<T>>
     
         This interface represents a handler that should be called after each successful fixed step.
     
@@ -30,7 +30,7 @@ class FieldODEFixedStepHandler(typing.Generic[_FieldODEFixedStepHandler__T]):
 _FieldODEStateInterpolator__T = typing.TypeVar('_FieldODEStateInterpolator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldODEStateInterpolator(typing.Generic[_FieldODEStateInterpolator__T]):
     """
-    public interface FieldODEStateInterpolator<T extends CalculusFieldElement<T>>
+    public interface FieldODEStateInterpolator<T extends :class:`~org.hipparchus.ode.sampling.https:.www.hipparchus.org.hipparchus`<T>>
     
         This interface represents an interpolator over the last step during an ODE integration.
     
@@ -95,7 +95,7 @@ class FieldODEStateInterpolator(typing.Generic[_FieldODEStateInterpolator__T]):
 _FieldODEStepHandler__T = typing.TypeVar('_FieldODEStepHandler__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldODEStepHandler(typing.Generic[_FieldODEStepHandler__T]):
     """
-    public interface FieldODEStepHandler<T extends CalculusFieldElement<T>>
+    public interface FieldODEStepHandler<T extends :class:`~org.hipparchus.ode.sampling.https:.www.hipparchus.org.hipparchus`<T>>
     
         This interface represents a handler that should be called after each successful step.
     
@@ -221,7 +221,7 @@ class ODEStepHandler:
 
 class StepNormalizerBounds(java.lang.Enum['StepNormalizerBounds']):
     """
-    public enum StepNormalizerBounds extends Enum<:class:`~org.hipparchus.ode.sampling.StepNormalizerBounds`>
+    public enum StepNormalizerBounds extends :class:`~org.hipparchus.ode.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.hipparchus.ode.sampling.StepNormalizerBounds`>
     
         :class:`~org.hipparchus.ode.sampling.StepNormalizer` bounds settings. They influence whether the underlying fixed step
         size step handler is called for the first and last points. Note that if the last point coincides with a normalized
@@ -267,14 +267,14 @@ class StepNormalizerBounds(java.lang.Enum['StepNormalizerBounds']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.hipparchus.ode.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.hipparchus.ode.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.hipparchus.ode.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -300,7 +300,7 @@ class StepNormalizerBounds(java.lang.Enum['StepNormalizerBounds']):
 
 class StepNormalizerMode(java.lang.Enum['StepNormalizerMode']):
     """
-    public enum StepNormalizerMode extends Enum<:class:`~org.hipparchus.ode.sampling.StepNormalizerMode`>
+    public enum StepNormalizerMode extends :class:`~org.hipparchus.ode.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.hipparchus.ode.sampling.StepNormalizerMode`>
     
         :class:`~org.hipparchus.ode.sampling.StepNormalizer` modes. Determines how the step size is interpreted.
     
@@ -322,14 +322,14 @@ class StepNormalizerMode(java.lang.Enum['StepNormalizerMode']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.hipparchus.ode.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.hipparchus.ode.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.hipparchus.ode.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -356,7 +356,7 @@ class StepNormalizerMode(java.lang.Enum['StepNormalizerMode']):
 _AbstractFieldODEStateInterpolator__T = typing.TypeVar('_AbstractFieldODEStateInterpolator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class AbstractFieldODEStateInterpolator(FieldODEStateInterpolator[_AbstractFieldODEStateInterpolator__T], typing.Generic[_AbstractFieldODEStateInterpolator__T]):
     """
-    public abstract class AbstractFieldODEStateInterpolator<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.hipparchus.ode.sampling.FieldODEStateInterpolator`<T>
+    public abstract class AbstractFieldODEStateInterpolator<T extends :class:`~org.hipparchus.ode.sampling.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.ode.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.ode.sampling.FieldODEStateInterpolator`<T>
     
         This abstract class represents an interpolator over the last step during an ODE integration.
     
@@ -382,8 +382,8 @@ class AbstractFieldODEStateInterpolator(FieldODEStateInterpolator[_AbstractField
             so that events occur on step boundaries which means the current state may be computed by the interpolator.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.sampling.FieldODEStateInterpolator.isCurrentStateInterpolated`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.sampling.FieldODEStateInterpolator`
+                :meth:`~org.hipparchus.ode.sampling.FieldODEStateInterpolator.isCurrentStateInterpolated` in
+                interface :class:`~org.hipparchus.ode.sampling.FieldODEStateInterpolator`
         
             Returns:
                 :code:`true` if the current state was calculated by the interpolator and false if it was computed directly by the
@@ -401,8 +401,8 @@ class AbstractFieldODEStateInterpolator(FieldODEStateInterpolator[_AbstractField
             triggering.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.sampling.FieldODEStateInterpolator.isForward`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.sampling.FieldODEStateInterpolator`
+                :meth:`~org.hipparchus.ode.sampling.FieldODEStateInterpolator.isForward` in
+                interface :class:`~org.hipparchus.ode.sampling.FieldODEStateInterpolator`
         
             Returns:
                 true if the integration variable (time) increases during integration
@@ -420,8 +420,8 @@ class AbstractFieldODEStateInterpolator(FieldODEStateInterpolator[_AbstractField
             shortened so that events occur on step boundaries which means the previous state may be computed by the interpolator.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.sampling.FieldODEStateInterpolator.isPreviousStateInterpolated`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.sampling.FieldODEStateInterpolator`
+                :meth:`~org.hipparchus.ode.sampling.FieldODEStateInterpolator.isPreviousStateInterpolated` in
+                interface :class:`~org.hipparchus.ode.sampling.FieldODEStateInterpolator`
         
             Returns:
                 :code:`true` if the previous state was calculated by the interpolator and false if it was computed directly by the
@@ -434,7 +434,7 @@ class AbstractFieldODEStateInterpolator(FieldODEStateInterpolator[_AbstractField
 
 class AbstractODEStateInterpolator(ODEStateInterpolator):
     """
-    public abstract class AbstractODEStateInterpolator extends Object implements :class:`~org.hipparchus.ode.sampling.ODEStateInterpolator`
+    public abstract class AbstractODEStateInterpolator extends :class:`~org.hipparchus.ode.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.ode.sampling.ODEStateInterpolator`
     
         This abstract class represents an interpolator over the last step during an ODE integration.
     
@@ -450,8 +450,8 @@ class AbstractODEStateInterpolator(ODEStateInterpolator):
             Get the state at current grid point time.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.sampling.ODEStateInterpolator.getCurrentState`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.sampling.ODEStateInterpolator`
+                :meth:`~org.hipparchus.ode.sampling.ODEStateInterpolator.getCurrentState` in
+                interface :class:`~org.hipparchus.ode.sampling.ODEStateInterpolator`
         
             Returns:
                 state at current grid point time
@@ -488,8 +488,8 @@ class AbstractODEStateInterpolator(ODEStateInterpolator):
             search algorithms near the step endpoints.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.sampling.ODEStateInterpolator.getInterpolatedState`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.sampling.ODEStateInterpolator`
+                :meth:`~org.hipparchus.ode.sampling.ODEStateInterpolator.getInterpolatedState` in
+                interface :class:`~org.hipparchus.ode.sampling.ODEStateInterpolator`
         
             Parameters:
                 time (double): time of the interpolated point
@@ -505,8 +505,8 @@ class AbstractODEStateInterpolator(ODEStateInterpolator):
             Get the state at previous grid point time.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.sampling.ODEStateInterpolator.getPreviousState`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.sampling.ODEStateInterpolator`
+                :meth:`~org.hipparchus.ode.sampling.ODEStateInterpolator.getPreviousState` in
+                interface :class:`~org.hipparchus.ode.sampling.ODEStateInterpolator`
         
             Returns:
                 state at previous grid point time
@@ -523,8 +523,8 @@ class AbstractODEStateInterpolator(ODEStateInterpolator):
             so that events occur on step boundaries which means the current state may be computed by the interpolator.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.sampling.ODEStateInterpolator.isCurrentStateInterpolated`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.sampling.ODEStateInterpolator`
+                :meth:`~org.hipparchus.ode.sampling.ODEStateInterpolator.isCurrentStateInterpolated` in
+                interface :class:`~org.hipparchus.ode.sampling.ODEStateInterpolator`
         
             Returns:
                 :code:`true` if the current state was calculated by the interpolator and false if it was computed directly by the
@@ -542,8 +542,8 @@ class AbstractODEStateInterpolator(ODEStateInterpolator):
             triggering.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.sampling.ODEStateInterpolator.isForward`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.sampling.ODEStateInterpolator`
+                :meth:`~org.hipparchus.ode.sampling.ODEStateInterpolator.isForward` in
+                interface :class:`~org.hipparchus.ode.sampling.ODEStateInterpolator`
         
             Returns:
                 true if the integration variable (time) increases during integration
@@ -560,8 +560,8 @@ class AbstractODEStateInterpolator(ODEStateInterpolator):
             shortened so that events occur on step boundaries which means the previous state may be computed by the interpolator.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.sampling.ODEStateInterpolator.isPreviousStateInterpolated`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.sampling.ODEStateInterpolator`
+                :meth:`~org.hipparchus.ode.sampling.ODEStateInterpolator.isPreviousStateInterpolated` in
+                interface :class:`~org.hipparchus.ode.sampling.ODEStateInterpolator`
         
             Returns:
                 :code:`true` if the previous state was calculated by the interpolator and false if it was computed directly by the
@@ -594,7 +594,7 @@ class AbstractODEStateInterpolator(ODEStateInterpolator):
 _FieldStepNormalizer__T = typing.TypeVar('_FieldStepNormalizer__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldStepNormalizer(FieldODEStepHandler[_FieldStepNormalizer__T], typing.Generic[_FieldStepNormalizer__T]):
     """
-    public class FieldStepNormalizer<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.hipparchus.ode.sampling.FieldODEStepHandler`<T>
+    public class FieldStepNormalizer<T extends :class:`~org.hipparchus.ode.sampling.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.ode.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.ode.sampling.FieldODEStepHandler`<T>
     
         This class wraps an object implementing :class:`~org.hipparchus.ode.sampling.FieldODEFixedStepHandler` into a
         :class:`~org.hipparchus.ode.sampling.FieldODEStepHandler`.
@@ -631,7 +631,7 @@ class FieldStepNormalizer(FieldODEStepHandler[_FieldStepNormalizer__T], typing.G
 
 class StepNormalizer(ODEStepHandler):
     """
-    public class StepNormalizer extends Object implements :class:`~org.hipparchus.ode.sampling.ODEStepHandler`
+    public class StepNormalizer extends :class:`~org.hipparchus.ode.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.ode.sampling.ODEStepHandler`
     
         This class wraps an object implementing :class:`~org.hipparchus.ode.sampling.ODEFixedStepHandler` into a
         :class:`~org.hipparchus.ode.sampling.ODEStepHandler`.
@@ -666,8 +666,8 @@ class StepNormalizer(ODEStepHandler):
             Finalize integration.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.sampling.ODEStepHandler.finish`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.sampling.ODEStepHandler`
+                :meth:`~org.hipparchus.ode.sampling.ODEStepHandler.finish` in
+                interface :class:`~org.hipparchus.ode.sampling.ODEStepHandler`
         
             Parameters:
                 finalState (:class:`~org.hipparchus.ode.ODEStateAndDerivative`): state at integration end
@@ -680,8 +680,8 @@ class StepNormalizer(ODEStepHandler):
             Handle the last accepted step.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.sampling.ODEStepHandler.handleStep`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.sampling.ODEStepHandler`
+                :meth:`~org.hipparchus.ode.sampling.ODEStepHandler.handleStep` in
+                interface :class:`~org.hipparchus.ode.sampling.ODEStepHandler`
         
             Parameters:
                 interpolator (:class:`~org.hipparchus.ode.sampling.ODEStateInterpolator`): interpolator for the last accepted step
@@ -699,8 +699,8 @@ class StepNormalizer(ODEStepHandler):
             The default implementation does nothing
         
             Specified by:
-                :meth:`~org.hipparchus.ode.sampling.ODEStepHandler.init`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.sampling.ODEStepHandler`
+                :meth:`~org.hipparchus.ode.sampling.ODEStepHandler.init` in
+                interface :class:`~org.hipparchus.ode.sampling.ODEStepHandler`
         
             Parameters:
                 initialState (:class:`~org.hipparchus.ode.ODEStateAndDerivative`): initial time, state vector and derivative

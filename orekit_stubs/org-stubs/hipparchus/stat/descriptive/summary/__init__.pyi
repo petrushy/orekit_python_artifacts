@@ -7,7 +7,7 @@ import typing
 
 class Product(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, org.hipparchus.stat.descriptive.AggregatableStatistic['Product'], org.hipparchus.stat.descriptive.WeightedEvaluation, java.io.Serializable):
     """
-    public class Product extends :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic` implements :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`<:class:`~org.hipparchus.stat.descriptive.summary.Product`>, :class:`~org.hipparchus.stat.descriptive.WeightedEvaluation`, Serializable
+    public class Product extends :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic` implements :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`<:class:`~org.hipparchus.stat.descriptive.summary.Product`>, :class:`~org.hipparchus.stat.descriptive.WeightedEvaluation`, :class:`~org.hipparchus.stat.descriptive.summary.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Returns the product of the available values.
     
@@ -34,8 +34,8 @@ class Product(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatist
             after this operation should be the same as if a single statistic would have been applied over the combined dataset.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AggregatableStatistic.aggregate`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AggregatableStatistic.aggregate` in
+                interface :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`
         
             Parameters:
                 other (:class:`~org.hipparchus.stat.descriptive.summary.Product`): the instance to aggregate into this instance
@@ -52,12 +52,12 @@ class Product(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatist
             Clears the internal state of the Statistic
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.clear`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.clear` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.clear`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.clear` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
         
         """
@@ -67,16 +67,16 @@ class Product(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatist
             Returns a copy of the statistic with the same internal state.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.copy`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.copy` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.copy`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.copy` in
+                interface :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.copy`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.copy` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
             Returns:
                 a copy of the statistic
@@ -97,8 +97,8 @@ class Product(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatist
             Returns the number of values that have been added.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getN`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getN` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Returns:
                 the number of values.
@@ -111,12 +111,12 @@ class Product(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatist
             Returns the current value of the Statistic.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getResult`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getResult` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.getResult`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.getResult` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
             Returns:
                 value of the statistic, :code:`Double.NaN` if it has been cleared or just instantiated.
@@ -129,12 +129,12 @@ class Product(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatist
             Updates the internal state of the statistic to reflect the addition of the new value.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.increment`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.increment` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.increment`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.increment` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
             Parameters:
                 d (double): the new value.
@@ -145,7 +145,7 @@ class Product(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatist
 
 class Sum(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, org.hipparchus.stat.descriptive.AggregatableStatistic['Sum'], org.hipparchus.stat.descriptive.WeightedEvaluation, java.io.Serializable):
     """
-    public class Sum extends :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic` implements :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`<:class:`~org.hipparchus.stat.descriptive.summary.Sum`>, :class:`~org.hipparchus.stat.descriptive.WeightedEvaluation`, Serializable
+    public class Sum extends :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic` implements :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`<:class:`~org.hipparchus.stat.descriptive.summary.Sum`>, :class:`~org.hipparchus.stat.descriptive.WeightedEvaluation`, :class:`~org.hipparchus.stat.descriptive.summary.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Returns the sum of the available values.
     
@@ -172,8 +172,8 @@ class Sum(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
             after this operation should be the same as if a single statistic would have been applied over the combined dataset.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AggregatableStatistic.aggregate`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AggregatableStatistic.aggregate` in
+                interface :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`
         
             Parameters:
                 other (:class:`~org.hipparchus.stat.descriptive.summary.Sum`): the instance to aggregate into this instance
@@ -190,12 +190,12 @@ class Sum(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
             Clears the internal state of the Statistic
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.clear`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.clear` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.clear`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.clear` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
         
         """
@@ -205,16 +205,16 @@ class Sum(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
             Returns a copy of the statistic with the same internal state.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.copy`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.copy` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.copy`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.copy` in
+                interface :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.copy`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.copy` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
             Returns:
                 a copy of the statistic
@@ -235,8 +235,8 @@ class Sum(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
             Returns the number of values that have been added.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getN`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getN` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Returns:
                 the number of values.
@@ -249,12 +249,12 @@ class Sum(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
             Returns the current value of the Statistic.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getResult`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getResult` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.getResult`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.getResult` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
             Returns:
                 value of the statistic, :code:`Double.NaN` if it has been cleared or just instantiated.
@@ -267,12 +267,12 @@ class Sum(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
             Updates the internal state of the statistic to reflect the addition of the new value.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.increment`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.increment` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.increment`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.increment` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
             Parameters:
                 d (double): the new value.
@@ -283,11 +283,12 @@ class Sum(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
 
 class SumOfLogs(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, org.hipparchus.stat.descriptive.AggregatableStatistic['SumOfLogs'], java.io.Serializable):
     """
-    public class SumOfLogs extends :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic` implements :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`<:class:`~org.hipparchus.stat.descriptive.summary.SumOfLogs`>, Serializable
+    public class SumOfLogs extends :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic` implements :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`<:class:`~org.hipparchus.stat.descriptive.summary.SumOfLogs`>, :class:`~org.hipparchus.stat.descriptive.summary.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Returns the sum of the natural logs for this collection of values.
     
-        Uses null to compute the logs. Therefore,
+        Uses :meth:`~org.hipparchus.stat.descriptive.summary.https:.www.hipparchus.org.hipparchus` to compute the logs.
+        Therefore,
     
           - If any of values are < 0, the result is :code:`NaN.`
           - If all values are non-negative and less than :code:`Double.POSITIVE_INFINITY`, but at least one value is 0, the result
@@ -316,8 +317,8 @@ class SumOfLogs(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStati
             after this operation should be the same as if a single statistic would have been applied over the combined dataset.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AggregatableStatistic.aggregate`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AggregatableStatistic.aggregate` in
+                interface :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`
         
             Parameters:
                 other (:class:`~org.hipparchus.stat.descriptive.summary.SumOfLogs`): the instance to aggregate into this instance
@@ -334,12 +335,12 @@ class SumOfLogs(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStati
             Clears the internal state of the Statistic
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.clear`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.clear` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.clear`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.clear` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
         
         """
@@ -349,16 +350,16 @@ class SumOfLogs(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStati
             Returns a copy of the statistic with the same internal state.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.copy`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.copy` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.copy`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.copy` in
+                interface :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.copy`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.copy` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
             Returns:
                 a copy of the statistic
@@ -375,8 +376,8 @@ class SumOfLogs(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStati
             Returns the number of values that have been added.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getN`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getN` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Returns:
                 the number of values.
@@ -389,12 +390,12 @@ class SumOfLogs(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStati
             Returns the current value of the Statistic.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getResult`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getResult` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.getResult`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.getResult` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
             Returns:
                 value of the statistic, :code:`Double.NaN` if it has been cleared or just instantiated.
@@ -407,12 +408,12 @@ class SumOfLogs(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStati
             Updates the internal state of the statistic to reflect the addition of the new value.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.increment`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.increment` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.increment`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.increment` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
             Parameters:
                 d (double): the new value.
@@ -423,7 +424,7 @@ class SumOfLogs(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStati
 
 class SumOfSquares(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, org.hipparchus.stat.descriptive.AggregatableStatistic['SumOfSquares'], java.io.Serializable):
     """
-    public class SumOfSquares extends :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic` implements :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`<:class:`~org.hipparchus.stat.descriptive.summary.SumOfSquares`>, Serializable
+    public class SumOfSquares extends :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic` implements :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`<:class:`~org.hipparchus.stat.descriptive.summary.SumOfSquares`>, :class:`~org.hipparchus.stat.descriptive.summary.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Returns the sum of the squares of the available values.
     
@@ -450,8 +451,8 @@ class SumOfSquares(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateSt
             after this operation should be the same as if a single statistic would have been applied over the combined dataset.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AggregatableStatistic.aggregate`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AggregatableStatistic.aggregate` in
+                interface :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`
         
             Parameters:
                 other (:class:`~org.hipparchus.stat.descriptive.summary.SumOfSquares`): the instance to aggregate into this instance
@@ -468,12 +469,12 @@ class SumOfSquares(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateSt
             Clears the internal state of the Statistic
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.clear`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.clear` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.clear`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.clear` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
         
         """
@@ -483,16 +484,16 @@ class SumOfSquares(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateSt
             Returns a copy of the statistic with the same internal state.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.copy`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.copy` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.copy`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.copy` in
+                interface :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.copy`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.copy` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
             Returns:
                 a copy of the statistic
@@ -509,8 +510,8 @@ class SumOfSquares(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateSt
             Returns the number of values that have been added.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getN`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getN` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Returns:
                 the number of values.
@@ -523,12 +524,12 @@ class SumOfSquares(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateSt
             Returns the current value of the Statistic.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getResult`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getResult` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.getResult`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.getResult` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
             Returns:
                 value of the statistic, :code:`Double.NaN` if it has been cleared or just instantiated.
@@ -541,12 +542,12 @@ class SumOfSquares(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateSt
             Updates the internal state of the statistic to reflect the addition of the new value.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.increment`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.increment` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.increment`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.increment` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
             Parameters:
                 d (double): the new value.

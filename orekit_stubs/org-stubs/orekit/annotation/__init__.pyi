@@ -5,7 +5,7 @@ import typing
 
 class DefaultDataContext(java.lang.annotation.Annotation):
     """
-    @Documented @Target({CONSTRUCTOR,FIELD,METHOD,TYPE}) @Retention(CLASS) public @interface DefaultDataContext
+    :class:`~org.orekit.annotation.https:.docs.oracle.com.javase.8.docs.api.java.lang.annotation.Documented?is` :class:`~org.orekit.annotation.https:.docs.oracle.com.javase.8.docs.api.java.lang.annotation.Target?is`({:meth:`~org.orekit.annotation.https:.docs.oracle.com.javase.8.docs.api.java.lang.annotation.ElementType.html?is`,:meth:`~org.orekit.annotation.https:.docs.oracle.com.javase.8.docs.api.java.lang.annotation.ElementType.html?is`,:meth:`~org.orekit.annotation.https:.docs.oracle.com.javase.8.docs.api.java.lang.annotation.ElementType.html?is`,:meth:`~org.orekit.annotation.https:.docs.oracle.com.javase.8.docs.api.java.lang.annotation.ElementType.html?is`}) :class:`~org.orekit.annotation.https:.docs.oracle.com.javase.8.docs.api.java.lang.annotation.Retention?is`(:meth:`~org.orekit.annotation.https:.docs.oracle.com.javase.8.docs.api.java.lang.annotation.RetentionPolicy.html?is`) public @interface DefaultDataContext
     
         Indicates that the annotated method, field, or constructor uses the default data context. Can be used to emit warnings
         similar to :code:`@Deprecated`.

@@ -11,7 +11,7 @@ import typing
 
 class Max(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, org.hipparchus.stat.descriptive.AggregatableStatistic['Max'], java.io.Serializable):
     """
-    public class Max extends :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic` implements :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`<:class:`~org.hipparchus.stat.descriptive.rank.Max`>, Serializable
+    public class Max extends :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic` implements :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`<:class:`~org.hipparchus.stat.descriptive.rank.Max`>, :class:`~org.hipparchus.stat.descriptive.rank.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Returns the maximum of the available values.
     
@@ -41,8 +41,8 @@ class Max(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
             after this operation should be the same as if a single statistic would have been applied over the combined dataset.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AggregatableStatistic.aggregate`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AggregatableStatistic.aggregate` in
+                interface :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`
         
             Parameters:
                 other (:class:`~org.hipparchus.stat.descriptive.rank.Max`): the instance to aggregate into this instance
@@ -59,12 +59,12 @@ class Max(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
             Clears the internal state of the Statistic
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.clear`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.clear` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.clear`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.clear` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
         
         """
@@ -74,16 +74,16 @@ class Max(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
             Returns a copy of the statistic with the same internal state.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.copy`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.copy` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.copy`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.copy` in
+                interface :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.copy`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.copy` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
             Returns:
                 a copy of the statistic
@@ -100,8 +100,8 @@ class Max(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
             Returns the number of values that have been added.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getN`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getN` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Returns:
                 the number of values.
@@ -114,12 +114,12 @@ class Max(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
             Returns the current value of the Statistic.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getResult`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getResult` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.getResult`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.getResult` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
             Returns:
                 value of the statistic, :code:`Double.NaN` if it has been cleared or just instantiated.
@@ -132,12 +132,12 @@ class Max(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
             Updates the internal state of the statistic to reflect the addition of the new value.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.increment`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.increment` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.increment`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.increment` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
             Parameters:
                 d (double): the new value.
@@ -148,7 +148,7 @@ class Max(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
 
 class Median(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, java.io.Serializable):
     """
-    public class Median extends :class:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic` implements Serializable
+    public class Median extends :class:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic` implements :class:`~org.hipparchus.stat.descriptive.rank.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Returns the median of the available values. This is the same as the 50th percentile. See
         :class:`~org.hipparchus.stat.descriptive.rank.Percentile` for a description of the algorithm used.
@@ -166,12 +166,12 @@ class Median(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, java.i
             Returns a copy of the statistic with the same internal state.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.copy`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.copy` in
+                interface :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic.copy`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic.copy` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic`
         
             Returns:
                 a copy of the statistic
@@ -197,7 +197,7 @@ class Median(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, java.i
         ...
     def getKthSelector(self) -> org.hipparchus.util.KthSelector:
         """
-            Get the null used for computation.
+            Get the :class:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus` used for computation.
         
             Returns:
                 the :code:`kthSelector` set
@@ -227,23 +227,24 @@ class Median(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, java.i
                 a new instance, with changed estimation type
         
             Raises:
-                : when newEstimationType is null
+                :class:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus`: when newEstimationType is null
         
         
         """
         ...
     def withKthSelector(self, kthSelector: org.hipparchus.util.KthSelector) -> 'Median':
         """
-            Build a new instance similar to the current one except for the null instance specifically set.
+            Build a new instance similar to the current one except for the
+            :class:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus` instance specifically set.
         
             Parameters:
-                newKthSelector (KthSelector): KthSelector for the new instance
+                newKthSelector (:class:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus`): KthSelector for the new instance
         
             Returns:
                 a new instance, with changed KthSelector
         
             Raises:
-                : when newKthSelector is null
+                :class:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus`: when newKthSelector is null
         
         
         """
@@ -260,7 +261,7 @@ class Median(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, java.i
                 a new instance, with changed NaN handling strategy
         
             Raises:
-                : when newNaNStrategy is null
+                :class:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus`: when newNaNStrategy is null
         
         
         """
@@ -268,7 +269,7 @@ class Median(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, java.i
 
 class Min(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, org.hipparchus.stat.descriptive.AggregatableStatistic['Min'], java.io.Serializable):
     """
-    public class Min extends :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic` implements :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`<:class:`~org.hipparchus.stat.descriptive.rank.Min`>, Serializable
+    public class Min extends :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic` implements :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`<:class:`~org.hipparchus.stat.descriptive.rank.Min`>, :class:`~org.hipparchus.stat.descriptive.rank.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Returns the minimum of the available values.
     
@@ -298,8 +299,8 @@ class Min(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
             after this operation should be the same as if a single statistic would have been applied over the combined dataset.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AggregatableStatistic.aggregate`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AggregatableStatistic.aggregate` in
+                interface :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`
         
             Parameters:
                 other (:class:`~org.hipparchus.stat.descriptive.rank.Min`): the instance to aggregate into this instance
@@ -316,12 +317,12 @@ class Min(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
             Clears the internal state of the Statistic
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.clear`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.clear` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.clear`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.clear` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
         
         """
@@ -331,16 +332,16 @@ class Min(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
             Returns a copy of the statistic with the same internal state.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.copy`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.copy` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.copy`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.copy` in
+                interface :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.copy`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.copy` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
             Returns:
                 a copy of the statistic
@@ -357,8 +358,8 @@ class Min(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
             Returns the number of values that have been added.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getN`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getN` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Returns:
                 the number of values.
@@ -371,12 +372,12 @@ class Min(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
             Returns the current value of the Statistic.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getResult`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getResult` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.getResult`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.getResult` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
             Returns:
                 value of the statistic, :code:`Double.NaN` if it has been cleared or just instantiated.
@@ -389,12 +390,12 @@ class Min(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
             Updates the internal state of the statistic to reflect the addition of the new value.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.increment`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.increment` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.increment`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.increment` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
             Parameters:
                 d (double): the new value.
@@ -424,7 +425,7 @@ class PSquarePercentile(org.hipparchus.stat.descriptive.AbstractStorelessUnivari
 
 class Percentile(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, java.io.Serializable):
     """
-    public class Percentile extends :class:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic` implements Serializable
+    public class Percentile extends :class:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic` implements :class:`~org.hipparchus.stat.descriptive.rank.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Provides percentile computation.
     
@@ -443,7 +444,8 @@ class Percentile(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, ja
     
     
         To compute percentiles, the data must be at least partially ordered. Input arrays are copied and recursively partitioned
-        using an ordering definition. The ordering used by :code:`Arrays.sort(double[])` is the one determined by null. This
+        using an ordering definition. The ordering used by :code:`Arrays.sort(double[])` is the one determined by
+        :meth:`~org.hipparchus.stat.descriptive.rank.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`. This
         ordering makes :code:`Double.NaN` larger than any other value (including :code:`Double.POSITIVE_INFINITY`). Therefore,
         for example, the median (50th percentile) of :code:`{0, 1, 2, 3, 4, Double.NaN}` evaluates to :code:`2.5.`
     
@@ -457,7 +459,8 @@ class Percentile(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, ja
         Percentile uses only selection instead of complete sorting and caches selection algorithm state between calls to the
         various :code:`evaluate` methods. This greatly improves efficiency, both for a single percentile and multiple percentile
         computations. To maximize performance when multiple percentiles are computed based on the same data, users should set
-        the data array once using either one of the null or null methods and thereafter
+        the data array once using either one of the :meth:`~org.hipparchus.stat.descriptive.rank.Percentile.evaluate` or
+        :meth:`~org.hipparchus.stat.descriptive.rank.Percentile.setData` methods and thereafter
         :meth:`~org.hipparchus.stat.descriptive.rank.Percentile.evaluate` with just the percentile provided.
     
         **Note that this implementation is not synchronized.** If multiple threads access an instance of this class
@@ -478,12 +481,12 @@ class Percentile(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, ja
             Returns a copy of the statistic with the same internal state.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.copy`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.copy` in
+                interface :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic.copy`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic.copy` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic`
         
             Returns:
                 a copy of the statistic
@@ -515,7 +518,7 @@ class Percentile(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, ja
         ...
     def getKthSelector(self) -> org.hipparchus.util.KthSelector:
         """
-            Get the null used for computation.
+            Get the :class:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus` used for computation.
         
             Returns:
                 the :code:`kthSelector` set
@@ -535,7 +538,8 @@ class Percentile(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, ja
         ...
     def getPivotingStrategy(self) -> org.hipparchus.util.PivotingStrategy:
         """
-            Get the null used in KthSelector for computation.
+            Get the :class:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus` used in KthSelector for
+            computation.
         
             Returns:
                 the pivoting strategy set
@@ -562,7 +566,8 @@ class Percentile(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, ja
             The stored value is a copy of the parameter array, not the array itself.
         
             Overrides:
-                 in class :class:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic.setData` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic`
         
             Parameters:
                 values (double[]): data array to store (may be null to remove stored data)
@@ -570,12 +575,13 @@ class Percentile(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, ja
             Also see:
                 :meth:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic.evaluate`
         
-        public void setData(double[] values, int begin, int length) throws MathIllegalArgumentException
+        public void setData(double[] values, int begin, int length) throws :class:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus`
         
             Set the data array. The input array is copied, not referenced.
         
             Overrides:
-                 in class :class:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic.setData` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic`
         
             Parameters:
                 values (double[]): data array to store
@@ -583,7 +589,7 @@ class Percentile(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, ja
                 length (int): the number of elements to include
         
             Raises:
-                : if values is null or the indices are not valid
+                :class:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus`: if values is null or the indices are not valid
         
             Also see:
                 :meth:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic.evaluate`
@@ -620,14 +626,15 @@ class Percentile(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, ja
                 a new instance, with changed estimation type
         
             Raises:
-                : when newEstimationType is null
+                :class:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus`: when newEstimationType is null
         
         
         """
         ...
     def withKthSelector(self, kthSelector: org.hipparchus.util.KthSelector) -> 'Percentile':
         """
-            Build a new instance similar to the current one except for the null instance specifically set.
+            Build a new instance similar to the current one except for the
+            :class:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus` instance specifically set.
         
             This method is intended to be used as part of a fluent-type builder pattern. Building finely tune instances should be
             done as follows:
@@ -644,13 +651,13 @@ class Percentile(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, ja
             used.
         
             Parameters:
-                newKthSelector (KthSelector): KthSelector for the new instance
+                newKthSelector (:class:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus`): KthSelector for the new instance
         
             Returns:
                 a new instance, with changed KthSelector
         
             Raises:
-                : when newKthSelector is null
+                :class:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus`: when newKthSelector is null
         
         
         """
@@ -681,7 +688,7 @@ class Percentile(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, ja
                 a new instance, with changed NaN handling strategy
         
             Raises:
-                : when newNaNStrategy is null
+                :class:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus`: when newNaNStrategy is null
         
         
         """
@@ -710,7 +717,7 @@ class Percentile(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, ja
 
 class RandomPercentile(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, org.hipparchus.stat.descriptive.StorelessUnivariateStatistic, org.hipparchus.stat.descriptive.AggregatableStatistic['RandomPercentile'], java.io.Serializable):
     """
-    public class RandomPercentile extends :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic` implements :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`, :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`<:class:`~org.hipparchus.stat.descriptive.rank.RandomPercentile`>, Serializable
+    public class RandomPercentile extends :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic` implements :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`, :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`<:class:`~org.hipparchus.stat.descriptive.rank.RandomPercentile`>, :class:`~org.hipparchus.stat.descriptive.rank.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         A :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic` estimating percentiles using the `RANDOM
         <http:/dimacs.rutgers.edu/~graham/pubs/papers/nquantiles.pdf>` Algorithm.
@@ -747,7 +754,8 @@ class RandomPercentile(org.hipparchus.stat.descriptive.AbstractStorelessUnivaria
         merging and the sampling require random selection, which is done using a :code:`RandomGenerator`. To get repeatable
         results for large data streams, users should provide :code:`RandomGenerator` instances with fixed seeds.
         :code:`RandomPercentile` itself does not reseed or otherwise initialize the :code:`RandomGenerator` provided to it. By
-        default, it uses a null generator with the default seed.
+        default, it uses a :class:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus` generator with
+        the default seed.
     
         Note: This implementation is not thread-safe.
     
@@ -787,12 +795,12 @@ class RandomPercentile(org.hipparchus.stat.descriptive.AbstractStorelessUnivaria
             Clears the internal state of the Statistic
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.clear`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.clear` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.clear`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.clear` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
         
         """
@@ -803,16 +811,16 @@ class RandomPercentile(org.hipparchus.stat.descriptive.AbstractStorelessUnivaria
             Returns a copy of the statistic with the same internal state.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.copy`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.copy` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.copy`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.copy` in
+                interface :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.copy`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.copy` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
             Returns:
                 a copy of the statistic
@@ -833,7 +841,7 @@ class RandomPercentile(org.hipparchus.stat.descriptive.AbstractStorelessUnivaria
                 estimated percentile
         
             Raises:
-                : if percentile is out of the range [0, 100]
+                :class:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus`: if percentile is out of the range [0, 100]
         
         
         """
@@ -844,13 +852,16 @@ class RandomPercentile(org.hipparchus.stat.descriptive.AbstractStorelessUnivaria
             Returns an estimate of the median, computed using the designated array segment as input data.
         
             Specified by:
-                 in interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.evaluate` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                 in interface :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.evaluate` in
+                interface :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
         
             Specified by:
-                 in interface 
+                :meth:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus` in
+                interface :class:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus`
         
             Parameters:
                 values (double[]): source of input data
@@ -861,9 +872,10 @@ class RandomPercentile(org.hipparchus.stat.descriptive.AbstractStorelessUnivaria
                 estimated percentile
         
             Raises:
-                : if percentile is out of the range [0, 100]
+                :class:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus`: if percentile is out of the range [0, 100]
         
             Also see:
+                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.evaluate`
         
         """
         ...
@@ -880,8 +892,8 @@ class RandomPercentile(org.hipparchus.stat.descriptive.AbstractStorelessUnivaria
             Returns the number of values that have been added.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getN`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getN` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Returns:
                 the number of values.
@@ -923,12 +935,12 @@ class RandomPercentile(org.hipparchus.stat.descriptive.AbstractStorelessUnivaria
             Returns an estimate of the median.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getResult`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.getResult` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.getResult`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.getResult` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
             Returns:
                 value of the statistic, :code:`Double.NaN` if it has been cleared or just instantiated.
@@ -947,7 +959,7 @@ class RandomPercentile(org.hipparchus.stat.descriptive.AbstractStorelessUnivaria
                 estimated percentile
         
             Raises:
-                : if percentile is out of the range [0, 100]
+                :class:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus`: if percentile is out of the range [0, 100]
         
         
         """
@@ -958,12 +970,12 @@ class RandomPercentile(org.hipparchus.stat.descriptive.AbstractStorelessUnivaria
             Updates the internal state of the statistic to reflect the addition of the new value.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.increment`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.increment` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.increment`Â in
-                classÂ :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic.increment` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic`
         
             Parameters:
                 d (double): the new value.
@@ -987,7 +999,7 @@ class RandomPercentile(org.hipparchus.stat.descriptive.AbstractStorelessUnivaria
                 upper bound on the total number of primitive double values retained in memory
         
             Raises:
-                : if epsilon is not in the interval (0,1)
+                :class:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus`: if epsilon is not in the interval (0,1)
         
         
         """

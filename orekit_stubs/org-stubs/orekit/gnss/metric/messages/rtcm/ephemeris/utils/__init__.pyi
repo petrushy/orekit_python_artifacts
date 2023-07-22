@@ -24,7 +24,7 @@ class AccuracyProvider:
 
 class GlonassUserRangeAccuracy(AccuracyProvider):
     """
-    public class GlonassUserRangeAccuracy extends Object implements :class:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider`
+    public class GlonassUserRangeAccuracy extends :class:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider`
     
         Enumerate for GLONASS User Range Accuracy.
     
@@ -37,8 +37,8 @@ class GlonassUserRangeAccuracy(AccuracyProvider):
             Get the accuracy of the ephemeris data from an accuracy index.
         
             Specified by:
-                :meth:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider.getAccuracy`Â in
-                interfaceÂ :class:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider`
+                :meth:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider.getAccuracy` in
+                interface :class:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider`
         
             Returns:
                 accuracy in meters
@@ -49,7 +49,7 @@ class GlonassUserRangeAccuracy(AccuracyProvider):
 
 class PythonAccuracyProvider(AccuracyProvider):
     """
-    public class PythonAccuracyProvider extends Object implements :class:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider`
+    public class PythonAccuracyProvider extends :class:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -58,8 +58,8 @@ class PythonAccuracyProvider(AccuracyProvider):
             Get the accuracy of the ephemeris data from an accuracy index.
         
             Specified by:
-                :meth:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider.getAccuracy`Â in
-                interfaceÂ :class:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider`
+                :meth:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider.getAccuracy` in
+                interface :class:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider`
         
             Returns:
                 accuracy in meters
@@ -89,7 +89,7 @@ class PythonAccuracyProvider(AccuracyProvider):
 
 class SignalInSpaceAccuracy(AccuracyProvider):
     """
-    public class SignalInSpaceAccuracy extends Object implements :class:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider`
+    public class SignalInSpaceAccuracy extends :class:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider`
     
         Signal-In-Space Accuracy (SISA).
     
@@ -105,8 +105,8 @@ class SignalInSpaceAccuracy(AccuracyProvider):
             Get the accuracy of the ephemeris data from an accuracy index.
         
             Specified by:
-                :meth:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider.getAccuracy`Â in
-                interfaceÂ :class:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider`
+                :meth:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider.getAccuracy` in
+                interface :class:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider`
         
             Returns:
                 accuracy in meters
@@ -117,7 +117,7 @@ class SignalInSpaceAccuracy(AccuracyProvider):
 
 class UserRangeAccuracy(AccuracyProvider):
     """
-    public class UserRangeAccuracy extends Object implements :class:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider`
+    public class UserRangeAccuracy extends :class:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider`
     
         User Range Accuracy.
     
@@ -133,8 +133,8 @@ class UserRangeAccuracy(AccuracyProvider):
             Get the accuracy of the ephemeris data from an accuracy index.
         
             Specified by:
-                :meth:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider.getAccuracy`Â in
-                interfaceÂ :class:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider`
+                :meth:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider.getAccuracy` in
+                interface :class:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider`
         
             Returns:
                 accuracy in meters

@@ -76,7 +76,7 @@ class ArithmeticUtils:
 
 class BigReal(org.hipparchus.FieldElement['BigReal'], java.lang.Comparable['BigReal'], java.io.Serializable):
     """
-    public class BigReal extends Object implements :class:`~org.hipparchus.FieldElement`<:class:`~org.hipparchus.util.BigReal`>, Comparable<:class:`~org.hipparchus.util.BigReal`>, Serializable
+    public class BigReal extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.FieldElement`<:class:`~org.hipparchus.util.BigReal`>, :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`<:class:`~org.hipparchus.util.BigReal`>, :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Arbitrary precision decimal number.
     
@@ -164,7 +164,8 @@ class BigReal(org.hipparchus.FieldElement['BigReal'], java.lang.Comparable['BigR
         """
         
             Specified by:
-                 in interface 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable.html?is` in
+                interface :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`
         
         
         """
@@ -184,7 +185,8 @@ class BigReal(org.hipparchus.FieldElement['BigReal'], java.lang.Comparable['BigR
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -227,7 +229,8 @@ class BigReal(org.hipparchus.FieldElement['BigReal'], java.lang.Comparable['BigR
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -282,7 +285,7 @@ class BigReal(org.hipparchus.FieldElement['BigReal'], java.lang.Comparable['BigR
             Sets the rounding mode for decimal divisions.
         
             Parameters:
-                roundingMode (RoundingMode): rounding mode for decimal divisions
+                roundingMode (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.math.RoundingMode?is`): rounding mode for decimal divisions
         
         
         """
@@ -316,7 +319,7 @@ class BigReal(org.hipparchus.FieldElement['BigReal'], java.lang.Comparable['BigR
 
 class BigRealField(org.hipparchus.Field[BigReal], java.io.Serializable):
     """
-    public class BigRealField extends Object implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.util.BigReal`>, Serializable
+    public class BigRealField extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.util.BigReal`>, :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Representation of real numbers with arbitrary precision field.
     
@@ -329,7 +332,8 @@ class BigRealField(org.hipparchus.Field[BigReal], java.io.Serializable):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -350,7 +354,7 @@ class BigRealField(org.hipparchus.Field[BigReal], java.io.Serializable):
             Get the multiplicative identity of the field.
         
             The multiplicative identity is the element e :sub:`1` of the field such that for all elements a of the field, the
-            equalities a Ã— e :sub:`1` = e :sub:`1` Ã— a = a hold.
+            equalities a × e :sub:`1` = e :sub:`1` × a = a hold.
         
             Specified by:
                 :meth:`~org.hipparchus.Field.getOne` in interface :class:`~org.hipparchus.Field`
@@ -382,7 +386,8 @@ class BigRealField(org.hipparchus.Field[BigReal], java.io.Serializable):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -397,7 +402,7 @@ class Combinations(java.lang.Iterable[typing.List[int]]):
 
 class CombinatoricsUtils:
     """
-    public final class CombinatoricsUtils extends Object
+    public final class CombinatoricsUtils extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Combinatorial utilities.
     """
@@ -424,7 +429,7 @@ class CombinatoricsUtils:
                 n (int): number of elements of the set
         
             Returns:
-                Bell number Bâ‚™
+                Bell number Bₙ
         
             Since:
                 2.2
@@ -459,7 +464,7 @@ class CombinatoricsUtils:
                 k (int): Size of the subsets to be enumerated.
         
             Returns:
-                an null over the k-sets in n.
+                an :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.util.Iterator?is` over the k-sets in n.
         
             Raises:
                 :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if :code:`n < 0`.
@@ -476,47 +481,10 @@ class CombinatoricsUtils:
     def factorialLog(int: int) -> float: ...
     _partitions__T = typing.TypeVar('_partitions__T')  # <T>
     @staticmethod
-    def partitions(list: java.util.List[_partitions__T]) -> java.util.stream.Stream[typing.List[java.util.List[_partitions__T]]]:
-        """
-            Generate a stream of partitions of a list.
-        
-            This method implements the iterative algorithm described in Short Note: A Fast Iterative Algorithm for Generating Set
-            Partitions by B. DjokiÃ„â€¡, M. Miyakawa, S. Sekiguchi, I. Semba, and I. StojmenoviÃ„â€¡ (The Computer Journal, Volume
-            32, Issue 3, 1989, Pages 281Ã¢â‚¬â€œ282, https://doi.org/10.1093/comjnl/32.3.281
-        
-            Parameters:
-                list (List<T> list): list to partition
-        
-            Returns:
-                stream of partitions of the list, each partition is an array or parts and each part is a list of elements
-        
-            Since:
-                2.2
-        
-        
-        """
-        ...
+    def partitions(list: java.util.List[_partitions__T]) -> java.util.stream.Stream[typing.List[java.util.List[_partitions__T]]]: ...
     _permutations__T = typing.TypeVar('_permutations__T')  # <T>
     @staticmethod
-    def permutations(list: java.util.List[_permutations__T]) -> java.util.stream.Stream[java.util.List[_permutations__T]]:
-        """
-            Generate a stream of permutations of a list.
-        
-            This method implements the SteinhausÃ¢â‚¬â€œJohnsonÃ¢â‚¬â€œTrotter algorithm with Even's speedup
-            SteinhausÃ¢â‚¬â€œJohnsonÃ¢â‚¬â€œTrotter algorithm
-        
-            Parameters:
-                list (List<T> list): list to permute
-        
-            Returns:
-                stream of permutations of the list
-        
-            Since:
-                2.2
-        
-        
-        """
-        ...
+    def permutations(list: java.util.List[_permutations__T]) -> java.util.stream.Stream[java.util.List[_permutations__T]]: ...
     @staticmethod
     def stirlingS2(int: int, int2: int) -> int: ...
     class FactorialLog:
@@ -527,7 +495,7 @@ class CombinatoricsUtils:
 
 class CompositeFormat:
     """
-    public class CompositeFormat extends Object
+    public class CompositeFormat extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Base class for formatters of composite objects (complex numbers, vectors ...).
     """
@@ -544,9 +512,9 @@ class CompositeFormat:
         
             Parameters:
                 value (double): the double to format.
-                format (NumberFormat): the format used.
-                toAppendTo (StringBuffer): where the text is to be appended
-                pos (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
+                format (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is`): the format used.
+                toAppendTo (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is`): where the text is to be appended
+                pos (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition?is`): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
             Returns:
                 the value passed in as toAppendTo.
@@ -558,8 +526,9 @@ class CompositeFormat:
     @staticmethod
     def getDefaultNumberFormat() -> java.text.NumberFormat:
         """
-            Create a default number format. The default number format is based on null with the only customizing that the maximum
-            number of fraction digits is set to 10.
+            Create a default number format. The default number format is based on
+            :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.html?is` with the only
+            customizing that the maximum number of fraction digits is set to 10.
         
             Returns:
                 the default number format.
@@ -570,11 +539,12 @@ class CompositeFormat:
     @staticmethod
     def getDefaultNumberFormat(locale: java.util.Locale) -> java.text.NumberFormat:
         """
-            Create a default number format. The default number format is based on null with the only customizing that the maximum
-            number of fraction digits is set to 10.
+            Create a default number format. The default number format is based on
+            :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.html?is` with the only
+            customizing that the maximum number of fraction digits is set to 10.
         
             Parameters:
-                locale (Locale): the specific locale used by the format.
+                locale (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): the specific locale used by the format.
         
             Returns:
                 the default number format specific to the given locale.
@@ -588,8 +558,8 @@ class CompositeFormat:
             Parses :code:`source` until a non-whitespace character is found.
         
             Parameters:
-                source (String): the string to parse
-                pos (ParsePosition): input/output parsing parameter. On output, :code:`pos` holds the index of the next non-whitespace character.
+                source (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the string to parse
+                pos (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.text.ParsePosition?is`): input/output parsing parameter. On output, :code:`pos` holds the index of the next non-whitespace character.
         
         
         """
@@ -600,9 +570,9 @@ class CompositeFormat:
             Parse :code:`source` for an expected fixed string.
         
             Parameters:
-                source (String): the string to parse
-                expected (String): expected string
-                pos (ParsePosition): input/output parsing parameter.
+                source (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the string to parse
+                expected (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): expected string
+                pos (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.text.ParsePosition?is`): input/output parsing parameter.
         
             Returns:
                 true if the expected string was there
@@ -616,8 +586,8 @@ class CompositeFormat:
             Parses :code:`source` until a non-whitespace character is found.
         
             Parameters:
-                source (String): the string to parse
-                pos (ParsePosition): input/output parsing parameter.
+                source (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the string to parse
+                pos (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.text.ParsePosition?is`): input/output parsing parameter.
         
             Returns:
                 the first non-whitespace character.
@@ -632,9 +602,9 @@ class CompositeFormat:
             special values include Double.NaN, Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY.
         
             Parameters:
-                source (String): the string to parse
-                format (NumberFormat): the number format used to parse normal, numeric values.
-                pos (ParsePosition): input/output parsing parameter.
+                source (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the string to parse
+                format (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is`): the number format used to parse normal, numeric values.
+                pos (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.text.ParsePosition?is`): input/output parsing parameter.
         
             Returns:
                 the parsed number.
@@ -645,7 +615,7 @@ class CompositeFormat:
 
 class ContinuedFraction:
     """
-    public abstract class ContinuedFraction extends Object
+    public abstract class ContinuedFraction extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Provides a generic means to evaluate continued fractions. Subclasses simply provided the a and b coefficients to
         evaluate the continued fraction.
@@ -665,10 +635,11 @@ class ContinuedFraction:
 
 class Decimal64(java.lang.Number, org.hipparchus.CalculusFieldElement['Decimal64'], java.lang.Comparable['Decimal64']):
     """
-    public class Decimal64 extends Number implements :class:`~org.hipparchus.CalculusFieldElement`<:class:`~org.hipparchus.util.Decimal64`>, Comparable<:class:`~org.hipparchus.util.Decimal64`>
+    public class Decimal64 extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number?is` implements :class:`~org.hipparchus.CalculusFieldElement`<:class:`~org.hipparchus.util.Decimal64`>, :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`<:class:`~org.hipparchus.util.Decimal64`>
     
-        This class wraps a :code:`double` value in an object. It is similar to the standard class null, while also implementing
-        the :class:`~org.hipparchus.CalculusFieldElement` interface.
+        This class wraps a :code:`double` value in an object. It is similar to the standard class
+        :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double?is`, while also implementing the
+        :class:`~org.hipparchus.CalculusFieldElement` interface.
     
         Also see:
             :meth:`~serialized`
@@ -691,28 +662,31 @@ class Decimal64(java.lang.Number, org.hipparchus.CalculusFieldElement['Decimal64
     """
     public static final :class:`~org.hipparchus.util.Decimal64` PI
     
-        The constant value of Ï€ as a :code:`Decimal64`.
+        The constant value of π as a :code:`Decimal64`.
     
     """
     NEGATIVE_INFINITY: typing.ClassVar['Decimal64'] = ...
     """
     public static final :class:`~org.hipparchus.util.Decimal64` NEGATIVE_INFINITY
     
-        The constant value of null as a :code:`Decimal64`.
+        The constant value of :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is` as
+        a :code:`Decimal64`.
     
     """
     POSITIVE_INFINITY: typing.ClassVar['Decimal64'] = ...
     """
     public static final :class:`~org.hipparchus.util.Decimal64` POSITIVE_INFINITY
     
-        The constant value of null as a :code:`Decimal64`.
+        The constant value of :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is` as
+        a :code:`Decimal64`.
     
     """
     NAN: typing.ClassVar['Decimal64'] = ...
     """
     public static final :class:`~org.hipparchus.util.Decimal64` NAN
     
-        The constant value of null as a :code:`Decimal64`.
+        The constant value of :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is` as
+        a :code:`Decimal64`.
     
     """
     def __init__(self, double: float): ...
@@ -866,7 +840,8 @@ class Decimal64(java.lang.Number, org.hipparchus.CalculusFieldElement['Decimal64
             The current implementation performs casting to a :code:`byte`.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.html?is` in
+                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number?is`
         
         
         """
@@ -903,9 +878,11 @@ class Decimal64(java.lang.Number, org.hipparchus.CalculusFieldElement['Decimal64
             :code:`new Double(this.doubleValue()).compareTo(new Double(o.doubleValue()))`
         
             Specified by:
-                 in interface 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable.html?is` in
+                interface :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`
         
             Also see:
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`
         
         
         """
@@ -969,7 +946,7 @@ class Decimal64(java.lang.Number, org.hipparchus.CalculusFieldElement['Decimal64
     @typing.overload
     def divide(self, double: float) -> 'Decimal64':
         """
-            Compute this Ã· a. The current implementation strictly enforces :code:`this.divide(a).equals(new
+            Compute this ÷ a. The current implementation strictly enforces :code:`this.divide(a).equals(new
             Decimal64(this.doubleValue() / a.doubleValue()))`.
         
             Specified by:
@@ -1001,7 +978,8 @@ class Decimal64(java.lang.Number, org.hipparchus.CalculusFieldElement['Decimal64
         """
         
             Specified by:
-                 in class 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.html?is` in
+                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number?is`
         
         
         """
@@ -1010,7 +988,8 @@ class Decimal64(java.lang.Number, org.hipparchus.CalculusFieldElement['Decimal64
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -1046,7 +1025,8 @@ class Decimal64(java.lang.Number, org.hipparchus.CalculusFieldElement['Decimal64
             The current implementation performs casting to a :code:`float`.
         
             Specified by:
-                 in class 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.html?is` in
+                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number?is`
         
         
         """
@@ -1067,7 +1047,7 @@ class Decimal64(java.lang.Number, org.hipparchus.CalculusFieldElement['Decimal64
     def getField(self) -> org.hipparchus.Field['Decimal64']: ...
     def getPi(self) -> 'Decimal64':
         """
-            Get the Archimedes constant Ï€.
+            Get the Archimedes constant π.
         
             Archimedes constant is the ratio of a circle's circumference to its diameter.
         
@@ -1075,7 +1055,7 @@ class Decimal64(java.lang.Number, org.hipparchus.CalculusFieldElement['Decimal64
                 :meth:`~org.hipparchus.CalculusFieldElement.getPi` in interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Returns:
-                Archimedes constant Ï€
+                Archimedes constant π
         
         
         """
@@ -1098,16 +1078,18 @@ class Decimal64(java.lang.Number, org.hipparchus.CalculusFieldElement['Decimal64
             The current implementation returns the same value as :code:`new Double(this.doubleValue()).hashCode()`
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Also see:
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`
         
         
         """
         ...
     def hypot(self, decimal64: 'Decimal64') -> 'Decimal64':
         """
-            Returns the hypotenuse of a triangle with sides :code:`this` and :code:`y` - sqrt(*this* :sup:`2` Â +*y* :sup:`2` )
+            Returns the hypotenuse of a triangle with sides :code:`this` and :code:`y` - sqrt(*this* :sup:`2`  +*y* :sup:`2` )
             avoiding intermediate overflow or underflow.
         
               - If either argument is infinite, then the result is positive infinity.
@@ -1131,14 +1113,17 @@ class Decimal64(java.lang.Number, org.hipparchus.CalculusFieldElement['Decimal64
             The current implementation performs casting to a :code:`int`.
         
             Specified by:
-                 in class 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.html?is` in
+                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number?is`
         
         
         """
         ...
     def isInfinite(self) -> bool:
         """
-            Returns :code:`true` if :code:`this` double precision number is infinite (null or null).
+            Returns :code:`true` if :code:`this` double precision number is infinite
+            (:meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is` or
+            :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`).
         
             Specified by:
                 :meth:`~org.hipparchus.CalculusFieldElement.isInfinite` in interface :class:`~org.hipparchus.CalculusFieldElement`
@@ -1191,8 +1176,8 @@ class Decimal64(java.lang.Number, org.hipparchus.CalculusFieldElement['Decimal64
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (:class:`~org.hipparchus.util.Decimal64`): first factor of the first term
@@ -1210,8 +1195,8 @@ class Decimal64(java.lang.Number, org.hipparchus.CalculusFieldElement['Decimal64
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (double): first factor of the first term
@@ -1229,8 +1214,8 @@ class Decimal64(java.lang.Number, org.hipparchus.CalculusFieldElement['Decimal64
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (:class:`~org.hipparchus.util.Decimal64`): first factor of the first term
@@ -1250,8 +1235,8 @@ class Decimal64(java.lang.Number, org.hipparchus.CalculusFieldElement['Decimal64
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (double): first factor of the first term
@@ -1271,8 +1256,8 @@ class Decimal64(java.lang.Number, org.hipparchus.CalculusFieldElement['Decimal64
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (:class:`~org.hipparchus.util.Decimal64`): first factor of the first term
@@ -1294,8 +1279,8 @@ class Decimal64(java.lang.Number, org.hipparchus.CalculusFieldElement['Decimal64
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (double): first factor of the first term
@@ -1375,7 +1360,8 @@ class Decimal64(java.lang.Number, org.hipparchus.CalculusFieldElement['Decimal64
             The current implementation performs casting to a :code:`long`.
         
             Specified by:
-                 in class 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.html?is` in
+                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number?is`
         
         
         """
@@ -1383,7 +1369,7 @@ class Decimal64(java.lang.Number, org.hipparchus.CalculusFieldElement['Decimal64
     @typing.overload
     def multiply(self, double: float) -> 'Decimal64':
         """
-            Compute this Ã— a. The current implementation strictly enforces :code:`this.multiply(a).equals(new
+            Compute this × a. The current implementation strictly enforces :code:`this.multiply(a).equals(new
             Decimal64(this.doubleValue() * a.doubleValue()))`.
         
             Specified by:
@@ -1596,7 +1582,8 @@ class Decimal64(java.lang.Number, org.hipparchus.CalculusFieldElement['Decimal64
             The current implementation performs casting to a :code:`short`.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.html?is` in
+                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number?is`
         
         
         """
@@ -1744,9 +1731,11 @@ class Decimal64(java.lang.Number, org.hipparchus.CalculusFieldElement['Decimal64
             The returned :code:`String` is equal to :code:`Double.toString(this.doubleValue())`
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Also see:
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`
         
         
         """
@@ -1767,7 +1756,7 @@ class Decimal64(java.lang.Number, org.hipparchus.CalculusFieldElement['Decimal64
 
 class Decimal64Field(org.hipparchus.Field[Decimal64], java.io.Serializable):
     """
-    public class Decimal64Field extends Object implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.util.Decimal64`>, Serializable
+    public class Decimal64Field extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.util.Decimal64`>, :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         The field of double precision floating-point numbers.
     
@@ -1778,7 +1767,8 @@ class Decimal64Field(org.hipparchus.Field[Decimal64], java.io.Serializable):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -1799,7 +1789,7 @@ class Decimal64Field(org.hipparchus.Field[Decimal64], java.io.Serializable):
             Get the multiplicative identity of the field.
         
             The multiplicative identity is the element e :sub:`1` of the field such that for all elements a of the field, the
-            equalities a Ã— e :sub:`1` = e :sub:`1` Ã— a = a hold.
+            equalities a × e :sub:`1` = e :sub:`1` × a = a hold.
         
             Specified by:
                 :meth:`~org.hipparchus.Field.getOne` in interface :class:`~org.hipparchus.Field`
@@ -1831,7 +1821,8 @@ class Decimal64Field(org.hipparchus.Field[Decimal64], java.io.Serializable):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -2288,7 +2279,7 @@ class FastMath:
 _FieldSinCos__T = typing.TypeVar('_FieldSinCos__T')  # <T>
 class FieldSinCos(typing.Generic[_FieldSinCos__T]):
     """
-    public class FieldSinCos<T> extends Object
+    public class FieldSinCos<T> extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Holder for both sine and cosine values.
     
@@ -2363,7 +2354,7 @@ class FieldSinCos(typing.Generic[_FieldSinCos__T]):
 _FieldSinhCosh__T = typing.TypeVar('_FieldSinhCosh__T')  # <T>
 class FieldSinhCosh(typing.Generic[_FieldSinhCosh__T]):
     """
-    public class FieldSinhCosh<T> extends Object
+    public class FieldSinhCosh<T> extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Holder for both hyperbolic sine and hyperbolic cosine values.
     
@@ -2432,7 +2423,7 @@ class FieldSinhCosh(typing.Generic[_FieldSinhCosh__T]):
 _FieldTuple__T = typing.TypeVar('_FieldTuple__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldTuple(org.hipparchus.CalculusFieldElement['FieldTuple'[_FieldTuple__T]], typing.Generic[_FieldTuple__T]):
     """
-    public class FieldTuple<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object implements :class:`~org.hipparchus.CalculusFieldElement`<:class:`~org.hipparchus.util.FieldTuple`<T>>
+    public class FieldTuple<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.CalculusFieldElement`<:class:`~org.hipparchus.util.FieldTuple`<T>>
     
         This class allows to perform the same computation of all components of a Tuple at once.
     
@@ -2468,7 +2459,8 @@ class FieldTuple(org.hipparchus.CalculusFieldElement['FieldTuple'[_FieldTuple__T
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -2528,7 +2520,8 @@ class FieldTuple(org.hipparchus.CalculusFieldElement['FieldTuple'[_FieldTuple__T
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -2593,7 +2586,7 @@ class FieldTuple(org.hipparchus.CalculusFieldElement['FieldTuple'[_FieldTuple__T
 
 class Incrementor:
     """
-    public class Incrementor extends Object
+    public class Incrementor extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Utility that increments a counter until a maximum is reached, at which point, the instance will by default throw a
         :class:`~org.hipparchus.exception.MathIllegalStateException`. However, the user is able to override this behaviour by
@@ -2737,7 +2730,7 @@ class Incrementor:
 
 class IterationEvent(java.util.EventObject):
     """
-    public class IterationEvent extends EventObject
+    public class IterationEvent extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.util.EventObject?is`
     
         The root class from which all events occurring while running an :class:`~org.hipparchus.util.IterationManager` should be
         derived.
@@ -2759,7 +2752,7 @@ class IterationEvent(java.util.EventObject):
 
 class IterationListener(java.util.EventListener):
     """
-    public interface IterationListener extends EventListener
+    public interface IterationListener extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.util.EventListener?is`
     
         The listener interface for receiving events occurring in an iterative algorithm.
     """
@@ -2806,7 +2799,7 @@ class IterationListener(java.util.EventListener):
 
 class IterationManager:
     """
-    public class IterationManager extends Object
+    public class IterationManager extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This abstract class provides a general framework for managing iterative algorithms. The maximum number of iterations can
         be set, and methods are provided to monitor the current iteration count. A lightweight event framework is also provided.
@@ -2906,7 +2899,7 @@ class IterationManager:
 
 class KthSelector(java.io.Serializable):
     """
-    public class KthSelector extends Object implements Serializable
+    public class KthSelector extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         A Simple K :sup:`th` selector implementation to pick up the K :sup:`th` ordered element from a work array containing the
         input numbers.
@@ -3240,7 +3233,7 @@ class MathUtils:
 
 class MultidimensionalCounter(java.lang.Iterable[int]):
     """
-    public class MultidimensionalCounter extends Object implements Iterable<Integer>
+    public class MultidimensionalCounter extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable?is`<:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`>
     
         Converter between unidimensional storage structure and multidimensional conceptual structure. This utility will convert
         from indices in a multidimensional structure to the corresponding index in a one-dimensional array. For example,
@@ -3294,7 +3287,8 @@ class MultidimensionalCounter(java.lang.Iterable[int]):
             Create an iterator over this counter.
         
             Specified by:
-                 in interface 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable.html?is` in
+                interface :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable?is`
         
             Returns:
                 the iterator.
@@ -3306,7 +3300,8 @@ class MultidimensionalCounter(java.lang.Iterable[int]):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -3323,7 +3318,7 @@ class MultidimensionalCounter(java.lang.Iterable[int]):
 
 class OpenIntToDoubleHashMap(java.io.Serializable):
     """
-    public class OpenIntToDoubleHashMap extends Object implements Serializable
+    public class OpenIntToDoubleHashMap extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Open addressed map from int to double.
     
@@ -3432,7 +3427,7 @@ class OpenIntToDoubleHashMap(java.io.Serializable):
 _OpenIntToFieldHashMap__T = typing.TypeVar('_OpenIntToFieldHashMap__T', bound=org.hipparchus.FieldElement)  # <T>
 class OpenIntToFieldHashMap(java.io.Serializable, typing.Generic[_OpenIntToFieldHashMap__T]):
     """
-    public class OpenIntToFieldHashMap<T extends :class:`~org.hipparchus.FieldElement`<T>> extends Object implements Serializable
+    public class OpenIntToFieldHashMap<T extends :class:`~org.hipparchus.FieldElement`<T>> extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Open addressed map from int to FieldElement.
     
@@ -3542,7 +3537,7 @@ _Pair__K = typing.TypeVar('_Pair__K')  # <K>
 _Pair__V = typing.TypeVar('_Pair__V')  # <V>
 class Pair(typing.Generic[_Pair__K, _Pair__V]):
     """
-    public class Pair<K,V> extends Object
+    public class Pair<K,V> extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Generic pair.
     
@@ -3575,10 +3570,11 @@ class Pair(typing.Generic[_Pair__K, _Pair__V]):
             Compare the specified object with this entry for equality.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                o (Object): Object.
+                o (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object.
         
             Returns:
                 :code:`true` if the given object is also a map entry and the two entries represent the same mapping.
@@ -3631,7 +3627,8 @@ class Pair(typing.Generic[_Pair__K, _Pair__V]):
             Compute a hash code.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 the hash code value.
@@ -3643,7 +3640,8 @@ class Pair(typing.Generic[_Pair__K, _Pair__V]):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -3651,7 +3649,7 @@ class Pair(typing.Generic[_Pair__K, _Pair__V]):
 
 class PivotingStrategy(java.lang.Enum['PivotingStrategy']):
     """
-    public enum PivotingStrategy extends Enum<:class:`~org.hipparchus.util.PivotingStrategy`>
+    public enum PivotingStrategy extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.hipparchus.util.PivotingStrategy`>
     
         A strategy to pick a pivoting index of an array for doing partitioning.
     """
@@ -3670,14 +3668,14 @@ class PivotingStrategy(java.lang.Enum['PivotingStrategy']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -3822,14 +3820,15 @@ class ResizableDoubleArray(java.io.Serializable):
 
 class RosenNumberPartitionIterator(java.util.Iterator[typing.List[int]]):
     """
-    public class RosenNumberPartitionIterator extends Object implements Iterator<int[]>
+    public class RosenNumberPartitionIterator extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.util.Iterator?is`<int[]>
     
         An iterator that generates all partitions of :code:`n` elements, into :code:`k` parts containing the number of elements
         in each part, based on Rosen's algorithm.
     
-        This is a copy of the class (with slight edits) with the same name from the Symja Library. The original file was
-        published under the terms of the GPLV3 license, but the Hipparchus project was explicitly allowed to include it
-        relicensed to Apache V2.
+        This is a copy of the class (with slight edits) with the same name from the
+        :class:`~org.hipparchus.util.https:.github.com.axkr.symja_android_library`. The original file was published under the
+        terms of the GPLV3 license, but the Hipparchus project was :meth:`~org.hipparchus.util.https:.github.com.Hipparchus` to
+        include it relicensed to Apache V2.
     
         See Kenneth H. Rosen, Discrete Mathematics and Its Applications, 2nd edition (NY: McGraw-Hill, 1991), pp. 284-286
     """
@@ -3838,9 +3837,11 @@ class RosenNumberPartitionIterator(java.util.Iterator[typing.List[int]]):
         """
         
             Specified by:
-                 in interface 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.util.Iterator.html?is` in
+                interface :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.util.Iterator?is`
         
             Also see:
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.util.Iterator.html?is`
         
         
         """
@@ -3849,9 +3850,11 @@ class RosenNumberPartitionIterator(java.util.Iterator[typing.List[int]]):
         """
         
             Specified by:
-                 in interface 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.util.Iterator.html?is` in
+                interface :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.util.Iterator?is`
         
             Also see:
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.util.Iterator.html?is`
         
         
         """
@@ -3875,7 +3878,7 @@ class RyuDouble:
 
 class SinCos:
     """
-    public class SinCos extends Object
+    public class SinCos extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Holder for both sine and cosine values.
     
@@ -3946,7 +3949,7 @@ class SinCos:
 
 class SinhCosh:
     """
-    public class SinhCosh extends Object
+    public class SinhCosh extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Holder for both hyperbolic sine and hyperbolic cosine values.
     
@@ -4011,7 +4014,7 @@ class SinhCosh:
 
 class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
     """
-    public class Tuple extends Object implements :class:`~org.hipparchus.CalculusFieldElement`<:class:`~org.hipparchus.util.Tuple`>
+    public class Tuple extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.CalculusFieldElement`<:class:`~org.hipparchus.util.Tuple`>
     
         This class allows to perform the same computation of all components of a Tuple at once.
     
@@ -4279,7 +4282,8 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -4359,7 +4363,7 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
     def getField(self) -> org.hipparchus.Field['Tuple']: ...
     def getPi(self) -> 'Tuple':
         """
-            Get the Archimedes constant Ï€.
+            Get the Archimedes constant π.
         
             Archimedes constant is the ratio of a circle's circumference to its diameter.
         
@@ -4367,7 +4371,7 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
                 :meth:`~org.hipparchus.CalculusFieldElement.getPi` in interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Returns:
-                Archimedes constant Ï€
+                Archimedes constant π
         
         
         """
@@ -4389,14 +4393,15 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
         ...
     def hypot(self, tuple: 'Tuple') -> 'Tuple':
         """
-            Returns the hypotenuse of a triangle with sides :code:`this` and :code:`y` - sqrt(*this* :sup:`2` Â +*y* :sup:`2` )
+            Returns the hypotenuse of a triangle with sides :code:`this` and :code:`y` - sqrt(*this* :sup:`2`  +*y* :sup:`2` )
             avoiding intermediate overflow or underflow.
         
               - If either argument is infinite, then the result is positive infinity.
@@ -4421,8 +4426,8 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (:class:`~org.hipparchus.util.Tuple`): first factor of the first term
@@ -4440,8 +4445,8 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (double): first factor of the first term
@@ -4459,8 +4464,8 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (:class:`~org.hipparchus.util.Tuple`): first factor of the first term
@@ -4480,8 +4485,8 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (double): first factor of the first term
@@ -4501,8 +4506,8 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (:class:`~org.hipparchus.util.Tuple`): first factor of the first term
@@ -4524,8 +4529,8 @@ class Tuple(org.hipparchus.CalculusFieldElement['Tuple']):
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (double): first factor of the first term
@@ -5004,7 +5009,7 @@ class UnscentedTransformProvider:
 
 class AbstractUnscentedTransform(UnscentedTransformProvider):
     """
-    public abstract class AbstractUnscentedTransform extends Object implements :class:`~org.hipparchus.util.UnscentedTransformProvider`
+    public abstract class AbstractUnscentedTransform extends :class:`~org.hipparchus.util.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.util.UnscentedTransformProvider`
     
         Base class for unscented transform providers.
     
@@ -5021,8 +5026,8 @@ class AbstractUnscentedTransform(UnscentedTransformProvider):
             state + Si. Finally, elements from n + 1 to 2n contain the process state - Si
         
             Specified by:
-                :meth:`~org.hipparchus.util.UnscentedTransformProvider.unscentedTransform`Â in
-                interfaceÂ :class:`~org.hipparchus.util.UnscentedTransformProvider`
+                :meth:`~org.hipparchus.util.UnscentedTransformProvider.unscentedTransform` in
+                interface :class:`~org.hipparchus.util.UnscentedTransformProvider`
         
             Parameters:
                 state (:class:`~org.hipparchus.linear.RealVector`): process state

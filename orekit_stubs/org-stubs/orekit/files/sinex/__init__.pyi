@@ -11,7 +11,7 @@ import typing
 
 class SinexEopEntry(org.orekit.time.TimeStamped):
     """
-    public class SinexEopEntry extends Object implements :class:`~org.orekit.time.TimeStamped`
+    public class SinexEopEntry extends :class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`
     
         Container for EOP entry read in a Sinex file.
     
@@ -210,7 +210,7 @@ class SinexEopEntry(org.orekit.time.TimeStamped):
 
 class SinexLoader(org.orekit.frames.EOPHistoryLoader):
     """
-    public class SinexLoader extends Object implements :class:`~org.orekit.frames.EOPHistoryLoader`
+    public class SinexLoader extends :class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.EOPHistoryLoader`
     
         Loader for Solution INdependent EXchange (SINEX) files.
     
@@ -254,7 +254,7 @@ class SinexLoader(org.orekit.frames.EOPHistoryLoader):
             Get the station corresponding to the given site code.
         
             Parameters:
-                siteCode (String): site code
+                siteCode (:class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): site code
         
             Returns:
                 the corresponding station
@@ -279,7 +279,7 @@ class SinexLoader(org.orekit.frames.EOPHistoryLoader):
 
 class Station:
     """
-    public class Station extends Object
+    public class Station extends :class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Station model.
     
@@ -297,11 +297,11 @@ class Station:
             Add a station eccentricity vector entry valid after a limit date.
         
         
-            Using :code:`addStationEccentricitiesValidAfter(entry, t)` will make :code:`entry` valid in [t, +Ã¢Ë†Å¾[ (note the
-            closed bracket).
+            Using :code:`addStationEccentricitiesValidAfter(entry, t)` will make :code:`entry` valid in [t, +∞[ (note the closed
+            bracket).
         
             Parameters:
-                entry (Vector3D): station eccentricity vector entry
+                entry (:class:`~org.orekit.files.sinex.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): station eccentricity vector entry
                 earliestValidityDate (:class:`~org.orekit.time.AbsoluteDate`): date after which the entry is valid (must be different from **all** dates already used for transitions)
         
             Since:
@@ -315,11 +315,11 @@ class Station:
             Add a station eccentricity vector entry valid before a limit date.
         
         
-            Using :code:`addStationEccentricitiesValidBefore(entry, t)` will make :code:`entry` valid in ]-Ã¢Ë†Å¾, t[ (note the open
+            Using :code:`addStationEccentricitiesValidBefore(entry, t)` will make :code:`entry` valid in ]-∞, t[ (note the open
             bracket).
         
             Parameters:
-                entry (Vector3D): station eccentricity vector entry
+                entry (:class:`~org.orekit.files.sinex.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): station eccentricity vector entry
                 latestValidityDate (:class:`~org.orekit.time.AbsoluteDate`): date before which the entry is valid (must be different from **all** dates already used for transitions)
         
             Since:
@@ -382,19 +382,7 @@ class Station:
         
         """
         ...
-    def getEccentricitiesTimeSpanMap(self) -> org.orekit.utils.TimeSpanMap[org.hipparchus.geometry.euclidean.threed.Vector3D]:
-        """
-            Get the TimeSpanMap of site antenna eccentricities.
-        
-            Returns:
-                the TimeSpanMap of site antenna eccentricities
-        
-            Since:
-                11.1
-        
-        
-        """
-        ...
+    def getEccentricitiesTimeSpanMap(self) -> org.orekit.utils.TimeSpanMap[org.hipparchus.geometry.euclidean.threed.Vector3D]: ...
     def getEpoch(self) -> org.orekit.time.AbsoluteDate:
         """
             Get the coordinates reference epoch.
@@ -460,7 +448,7 @@ class Station:
             Set the DOMES number.
         
             Parameters:
-                domes (String): the DOMES number to set
+                domes (:class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the DOMES number to set
         
         
         """
@@ -480,7 +468,7 @@ class Station:
             Set the last known station antenna eccentricities.
         
             Parameters:
-                eccentricities (Vector3D): the eccenticities to set (m)
+                eccentricities (:class:`~org.orekit.files.sinex.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): the eccenticities to set (m)
         
         
         """
@@ -500,7 +488,7 @@ class Station:
             Set the station position.
         
             Parameters:
-                position (Vector3D): the position to set
+                position (:class:`~org.orekit.files.sinex.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): the position to set
         
         
         """
@@ -510,7 +498,7 @@ class Station:
             Set the site code (station identifier).
         
             Parameters:
-                siteCode (String): the site code to set
+                siteCode (:class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the site code to set
         
         
         """
@@ -540,7 +528,7 @@ class Station:
             Set the station velocity.
         
             Parameters:
-                velocity (Vector3D): the velocity to set
+                velocity (:class:`~org.orekit.files.sinex.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): the velocity to set
         
         
         """

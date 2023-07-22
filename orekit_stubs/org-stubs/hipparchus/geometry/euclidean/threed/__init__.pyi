@@ -14,7 +14,7 @@ import typing
 
 class Euclidean3D(java.io.Serializable, org.hipparchus.geometry.Space):
     """
-    public class Euclidean3D extends Object implements Serializable, :class:`~org.hipparchus.geometry.Space`
+    public class Euclidean3D extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.hipparchus.geometry.Space`
     
         This class implements a three-dimensional space.
     
@@ -65,7 +65,7 @@ class Euclidean3D(java.io.Serializable, org.hipparchus.geometry.Space):
 _FieldLine__T = typing.TypeVar('_FieldLine__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldLine(typing.Generic[_FieldLine__T]):
     """
-    public class FieldLine<T extends CalculusFieldElement<T>> extends Object
+    public class FieldLine<T extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         The class represent lines in a three dimensional space.
     
@@ -245,9 +245,10 @@ class FieldRotation(java.io.Serializable, typing.Generic[_FieldRotation__T]):
 _FieldVector3D__T = typing.TypeVar('_FieldVector3D__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
     """
-    public class FieldVector3D<T extends CalculusFieldElement<T>> extends Object implements Serializable
+    public class FieldVector3D<T extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
-        This class is a re-implementation of :class:`~org.hipparchus.geometry.euclidean.threed.Vector3D` using null.
+        This class is a re-implementation of :class:`~org.hipparchus.geometry.euclidean.threed.Vector3D` using
+        :class:`~org.hipparchus.geometry.euclidean.threed.https:.www.hipparchus.org.hipparchus`.
     
         Instance of this class are guaranteed to be immutable.
     
@@ -655,6 +656,7 @@ class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
                 the dot product this.v
         
             Also see:
+                :meth:`~org.hipparchus.geometry.euclidean.threed.https:.www.hipparchus.org.hipparchus`
         
         """
         ...
@@ -704,17 +706,19 @@ class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
         """
             Test for the equality of two 3D vectors.
         
-            If all coordinates of two 3D vectors are exactly the same, and none of their null are :code:`NaN`, the two 3D vectors
-            are considered to be equal.
+            If all coordinates of two 3D vectors are exactly the same, and none of their
+            :meth:`~org.hipparchus.geometry.euclidean.threed.https:.www.hipparchus.org.hipparchus` are :code:`NaN`, the two 3D
+            vectors are considered to be equal.
         
             :code:`NaN` coordinates are considered to affect globally the vector and be equals to each other - i.e, if either (or
             all) real part of the coordinates of the 3D vector are :code:`NaN`, the 3D vector is :code:`NaN`.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                other (Object): Object to test for equality to this
+                other (:class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality to this
         
             Returns:
                 true if two 3D vector objects are equal, false if object is null, not an instance of FieldVector3D, or not equal to this
@@ -756,7 +760,7 @@ class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
             Get opposite of the first canonical vector (coordinates: -1, 0, 0).
         
             Parameters:
-                field (Field<T> field): field for the components
+                field (:class:`~org.hipparchus.geometry.euclidean.threed.https:.www.hipparchus.org.hipparchus`<T> field): field for the components
         
             Returns:
                 a new vector
@@ -771,7 +775,7 @@ class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
             Get opposite of the second canonical vector (coordinates: 0, -1, 0).
         
             Parameters:
-                field (Field<T> field): field for the components
+                field (:class:`~org.hipparchus.geometry.euclidean.threed.https:.www.hipparchus.org.hipparchus`<T> field): field for the components
         
             Returns:
                 a new vector
@@ -786,7 +790,7 @@ class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
             Get opposite of the third canonical vector (coordinates: 0, 0, -1).
         
             Parameters:
-                field (Field<T> field): field for the components
+                field (:class:`~org.hipparchus.geometry.euclidean.threed.https:.www.hipparchus.org.hipparchus`<T> field): field for the components
         
             Returns:
                 a new vector
@@ -801,7 +805,7 @@ class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
             Get a vector with all coordinates set to NaN.
         
             Parameters:
-                field (Field<T> field): field for the components
+                field (:class:`~org.hipparchus.geometry.euclidean.threed.https:.www.hipparchus.org.hipparchus`<T> field): field for the components
         
             Returns:
                 a new vector
@@ -816,7 +820,7 @@ class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
             Get a vector with all coordinates set to negative infinity.
         
             Parameters:
-                field (Field<T> field): field for the components
+                field (:class:`~org.hipparchus.geometry.euclidean.threed.https:.www.hipparchus.org.hipparchus`<T> field): field for the components
         
             Returns:
                 a new vector
@@ -871,7 +875,7 @@ class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
             Get first canonical vector (coordinates: 1, 0, 0).
         
             Parameters:
-                field (Field<T> field): field for the components
+                field (:class:`~org.hipparchus.geometry.euclidean.threed.https:.www.hipparchus.org.hipparchus`<T> field): field for the components
         
             Returns:
                 a new vector
@@ -886,7 +890,7 @@ class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
             Get second canonical vector (coordinates: 0, 1, 0).
         
             Parameters:
-                field (Field<T> field): field for the components
+                field (:class:`~org.hipparchus.geometry.euclidean.threed.https:.www.hipparchus.org.hipparchus`<T> field): field for the components
         
             Returns:
                 a new vector
@@ -901,7 +905,7 @@ class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
             Get third canonical vector (coordinates: 0, 0, 1).
         
             Parameters:
-                field (Field<T> field): field for the components
+                field (:class:`~org.hipparchus.geometry.euclidean.threed.https:.www.hipparchus.org.hipparchus`<T> field): field for the components
         
             Returns:
                 a new vector
@@ -916,7 +920,7 @@ class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
             Get a vector with all coordinates set to positive infinity.
         
             Parameters:
-                field (Field<T> field): field for the components
+                field (:class:`~org.hipparchus.geometry.euclidean.threed.https:.www.hipparchus.org.hipparchus`<T> field): field for the components
         
             Returns:
                 a new vector
@@ -970,7 +974,7 @@ class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
             Get null vector (coordinates: 0, 0, 0).
         
             Parameters:
-                field (Field<T> field): field for the components
+                field (:class:`~org.hipparchus.geometry.euclidean.threed.https:.www.hipparchus.org.hipparchus`<T> field): field for the components
         
             Returns:
                 a new vector
@@ -985,7 +989,8 @@ class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
             All NaN values have the same hash code.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a hash code value for this object
@@ -1040,6 +1045,7 @@ class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
                 vector coordinates
         
             Also see:
+                :meth:`~org.hipparchus.geometry.euclidean.threed.FieldVector3D.FieldVector3D`
         
         
         """
@@ -1050,7 +1056,8 @@ class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
             Get a string representation of this vector.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a string representation of this vector
@@ -1063,7 +1070,7 @@ class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
             Get a string representation of this vector.
         
             Parameters:
-                format (NumberFormat): the custom format for components
+                format (:class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is`): the custom format for components
         
             Returns:
                 a string representation of this vector
@@ -1084,7 +1091,7 @@ class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
 
 class Line(org.hipparchus.geometry.partitioning.Embedding[Euclidean3D, org.hipparchus.geometry.euclidean.oned.Euclidean1D]):
     """
-    public class Line extends Object implements :class:`~org.hipparchus.geometry.partitioning.Embedding`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`,:class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`>
+    public class Line extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.partitioning.Embedding`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`,:class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`>
     
         The class represent lines in a three dimensional space.
     
@@ -1164,7 +1171,7 @@ class Line(org.hipparchus.geometry.partitioning.Embedding[Euclidean3D, org.hippa
                 a new Line with the given point and direction.
         
             Raises:
-                : if :code:`direction` is the zero vector.
+                :class:`~org.hipparchus.geometry.euclidean.threed.https:.www.hipparchus.org.hipparchus`: if :code:`direction` is the zero vector.
         
             Also see:
                 :meth:`~org.hipparchus.geometry.euclidean.threed.Line.Line`
@@ -1291,7 +1298,7 @@ class Line(org.hipparchus.geometry.partitioning.Embedding[Euclidean3D, org.hippa
 
 class OutlineExtractor:
     """
-    public class OutlineExtractor extends Object
+    public class OutlineExtractor extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Extractor for :class:`~org.hipparchus.geometry.euclidean.twod.PolygonsSet` outlines.
     
@@ -1315,7 +1322,7 @@ class OutlineExtractor:
 
 class Plane(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean3D], org.hipparchus.geometry.partitioning.Embedding[Euclidean3D, org.hipparchus.geometry.euclidean.twod.Euclidean2D]):
     """
-    public class Plane extends Object implements :class:`~org.hipparchus.geometry.partitioning.Hyperplane`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`>, :class:`~org.hipparchus.geometry.partitioning.Embedding`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`,:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`>
+    public class Plane extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.partitioning.Hyperplane`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`>, :class:`~org.hipparchus.geometry.partitioning.Embedding`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`,:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`>
     
         The class represent planes in a three dimensional space.
     """
@@ -1348,8 +1355,8 @@ class Plane(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean3D], org.hi
             are shared (except for immutable objects).
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.copySelf`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.copySelf` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Returns:
                 a new hyperplane, copy of the instance
@@ -1362,8 +1369,8 @@ class Plane(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean3D], org.hi
             Build a sub-hyperplane covering nothing.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.emptyHyperplane`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.emptyHyperplane` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Returns:
                 a sub-hyperplane covering nothing
@@ -1423,8 +1430,8 @@ class Plane(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean3D], org.hi
             the hyperplane, and it is negative if the point is on the other side, according to the hyperplane natural orientation.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.getOffset`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.getOffset` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Parameters:
                 point (:class:`~org.hipparchus.geometry.Point`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`> point): point to check
@@ -1470,8 +1477,8 @@ class Plane(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean3D], org.hi
             Get the tolerance below which points are considered to belong to the hyperplane.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.getTolerance`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.getTolerance` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Returns:
                 tolerance below which points are considered to belong to the hyperplane
@@ -1646,8 +1653,8 @@ class Plane(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean3D], org.hi
             Build a region covering the whole hyperplane.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.wholeHyperplane`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.wholeHyperplane` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Returns:
                 a region covering the whole hyperplane
@@ -1660,8 +1667,8 @@ class Plane(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean3D], org.hi
             Build a region covering the whole space.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.wholeSpace`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.Hyperplane.wholeSpace` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Hyperplane`
         
             Returns:
                 a region containing the instance (really a :class:`~org.hipparchus.geometry.euclidean.threed.PolyhedronsSet` instance)
@@ -1769,7 +1776,7 @@ class Rotation(java.io.Serializable):
 
 class RotationConvention(java.lang.Enum['RotationConvention']):
     """
-    public enum RotationConvention extends Enum<:class:`~org.hipparchus.geometry.euclidean.threed.RotationConvention`>
+    public enum RotationConvention extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.hipparchus.geometry.euclidean.threed.RotationConvention`>
     
         This enumerates is used to differentiate the semantics of a rotation.
     
@@ -1790,14 +1797,14 @@ class RotationConvention(java.lang.Enum['RotationConvention']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -1823,7 +1830,7 @@ class RotationConvention(java.lang.Enum['RotationConvention']):
 
 class RotationOrder(java.lang.Enum['RotationOrder']):
     """
-    public enum RotationOrder extends Enum<:class:`~org.hipparchus.geometry.euclidean.threed.RotationOrder`>
+    public enum RotationOrder extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.hipparchus.geometry.euclidean.threed.RotationOrder`>
     
         This class is a utility representing a rotation order specification for Cardan or Euler angles specification. This class
         cannot be instanciated by the user. He can only use one of the twelve predefined supported orders as an argument to
@@ -1879,7 +1886,7 @@ class RotationOrder(java.lang.Enum['RotationOrder']):
             Get the rotation order corresponding to a string representation.
         
             Parameters:
-                value (String): name
+                value (:class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name
         
             Returns:
                 a rotation order object
@@ -1895,7 +1902,8 @@ class RotationOrder(java.lang.Enum['RotationOrder']):
             Get a string representation of the instance.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum.html?is` in
+                class :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`
         
             Returns:
                 a string representation of the instance (in fact, its name)
@@ -1915,14 +1923,14 @@ class RotationOrder(java.lang.Enum['RotationOrder']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -1948,7 +1956,7 @@ class RotationOrder(java.lang.Enum['RotationOrder']):
 
 class Segment:
     """
-    public class Segment extends Object
+    public class Segment extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Simple container for a two-points segment.
     """
@@ -1986,7 +1994,7 @@ class Segment:
 
 class SphereGenerator(org.hipparchus.geometry.enclosing.SupportBallGenerator[Euclidean3D, 'Vector3D']):
     """
-    public class SphereGenerator extends Object implements :class:`~org.hipparchus.geometry.enclosing.SupportBallGenerator`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`,:class:`~org.hipparchus.geometry.euclidean.threed.Vector3D`>
+    public class SphereGenerator extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.enclosing.SupportBallGenerator`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`,:class:`~org.hipparchus.geometry.euclidean.threed.Vector3D`>
     
         Class generating an enclosing ball from its support points.
     """
@@ -1995,7 +2003,7 @@ class SphereGenerator(org.hipparchus.geometry.enclosing.SupportBallGenerator[Euc
 
 class SphericalCoordinates(java.io.Serializable):
     """
-    public class SphericalCoordinates extends Object implements Serializable
+    public class SphericalCoordinates extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         This class provides conversions related to `spherical coordinates
         <http://mathworld.wolfram.com/SphericalCoordinates.html>`.
@@ -2013,9 +2021,9 @@ class SphericalCoordinates(java.io.Serializable):
           - Φ = acos(z/r)
     
     
-        r is the radius, Î¸ is the azimuthal angle in the x-y plane and Î¦ is the polar (co-latitude) angle. These conventions
-        are *different* from the conventions used in physics (and in particular in spherical harmonics) where the meanings of Î¸
-        and Î¦ are reversed.
+        r is the radius, θ is the azimuthal angle in the x-y plane and Φ is the polar (co-latitude) angle. These conventions
+        are *different* from the conventions used in physics (and in particular in spherical harmonics) where the meanings of θ
+        and Φ are reversed.
     
         This class provides conversion of coordinates and also of gradient and Hessian between spherical and Cartesian
         coordinates.
@@ -2100,9 +2108,9 @@ class SphericalCoordinates(java.io.Serializable):
             may not be initialized. However, we still do fill up the complete array we create, with guaranteed symmetry.
         
             Parameters:
-                sHessian (double[][]): Hessian with respect to spherical coordinates {{d :sup:`2` f/dr :sup:`2` , d :sup:`2` f/drdÎ¸, d :sup:`2` f/drdÎ¦}, {d
-                    :sup:`2` f/drdÎ¸, d :sup:`2` f/dÎ¸ :sup:`2` , d :sup:`2` f/dÎ¸dÎ¦}, {d :sup:`2` f/drdÎ¦, d :sup:`2` f/dÎ¸dÎ¦, d :sup:`2`
-                    f/dÎ¦ :sup:`2` }
+                sHessian (double[][]): Hessian with respect to spherical coordinates {{d :sup:`2` f/dr :sup:`2` , d :sup:`2` f/drdθ, d :sup:`2` f/drdΦ}, {d
+                    :sup:`2` f/drdθ, d :sup:`2` f/dθ :sup:`2` , d :sup:`2` f/dθdΦ}, {d :sup:`2` f/drdΦ, d :sup:`2` f/dθdΦ, d :sup:`2`
+                    f/dΦ :sup:`2` }
                 sGradient (double[]): gradient with respect to spherical coordinates {df/dr, df/dθ, df/dΦ}
         
             Returns:
@@ -2116,7 +2124,7 @@ class SphericalCoordinates(java.io.Serializable):
 
 class SubLine:
     """
-    public class SubLine extends Object
+    public class SubLine extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This class represents a subset of a :class:`~org.hipparchus.geometry.euclidean.threed.Line`.
     """
@@ -2159,7 +2167,7 @@ class SubPlane(org.hipparchus.geometry.partitioning.AbstractSubHyperplane[Euclid
 
 class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D]):
     """
-    public class Vector3D extends Object implements Serializable, :class:`~org.hipparchus.geometry.Vector`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`>
+    public class Vector3D extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.hipparchus.geometry.Vector`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`>
     
         This class implements vectors in a three-dimensional space.
     
@@ -2390,10 +2398,11 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D]
             :meth:`~org.hipparchus.geometry.euclidean.threed.Vector3D.NaN`.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                other (Object): Object to test for equality to this
+                other (:class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality to this
         
             Returns:
                 true if two 3D vector objects are equal, false if object is null, not an instance of Vector3D, or not equal to this
@@ -2415,7 +2424,7 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D]
             returns :code:`false` despite the instance is checked against itself.
         
             Parameters:
-                other (Object): Object to test for equality to this
+                other (:class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality to this
         
             Returns:
                 true if two 3D vector objects are equal, false if object is null, not an instance of Vector3D, or not equal to this
@@ -2577,7 +2586,8 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D]
             All NaN values have the same hash code.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a hash code value for this object
@@ -2654,6 +2664,7 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D]
                 vector coordinates
         
             Also see:
+                :meth:`~org.hipparchus.geometry.euclidean.threed.Vector3D.Vector3D`
         
         
         """
@@ -2664,7 +2675,8 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D]
             Get a string representation of this vector.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a string representation of this vector
@@ -2680,7 +2692,7 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D]
                 :meth:`~org.hipparchus.geometry.Vector.toString` in interface :class:`~org.hipparchus.geometry.Vector`
         
             Parameters:
-                format (NumberFormat): the custom format for components
+                format (:class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is`): the custom format for components
         
             Returns:
                 a string representation of this vector
@@ -2703,8 +2715,11 @@ class Vector3DFormat(org.hipparchus.geometry.VectorFormat[Euclidean3D]):
         ; 1 } " will be parsed without error and the same vector will be returned. In the second case, however, the parse
         position after parsing will be just after the closing curly brace, i.e. just before the trailing space.
     
-        **Note:** using "," as a separator may interfere with the grouping separator of the default null for the current locale.
-        Thus it is advised to use a null instance with disabled grouping in such a case.
+        **Note:** using "," as a separator may interfere with the grouping separator of the default
+        :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is`
+        for the current locale. Thus it is advised to use a
+        :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is`
+        instance with disabled grouping in such a case.
     """
     @typing.overload
     def __init__(self): ...
@@ -2739,7 +2754,7 @@ class Vector3DFormat(org.hipparchus.geometry.VectorFormat[Euclidean3D]):
             Returns the default 3D vector format for the given locale.
         
             Parameters:
-                locale (Locale): the specific locale used by the format.
+                locale (:class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): the specific locale used by the format.
         
             Returns:
                 the 3D vector format specific to the given locale.
@@ -2759,8 +2774,8 @@ class Vector3DFormat(org.hipparchus.geometry.VectorFormat[Euclidean3D]):
                 :meth:`~org.hipparchus.geometry.VectorFormat.parse` in class :class:`~org.hipparchus.geometry.VectorFormat`
         
             Parameters:
-                source (String): the string to parse
-                pos (ParsePosition): input/ouput parsing parameter.
+                source (:class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the string to parse
+                pos (:class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.text.ParsePosition?is`): input/ouput parsing parameter.
         
             Returns:
                 the parsed :class:`~org.hipparchus.geometry.euclidean.threed.Vector3D` object.

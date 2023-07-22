@@ -19,7 +19,7 @@ import typing
 
 class EphemerisWriter(org.orekit.files.general.EphemerisFileWriter):
     """
-    public class EphemerisWriter extends Object implements :class:`~org.orekit.files.general.EphemerisFileWriter`
+    public class EphemerisWriter extends :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFileWriter`
     
         An :class:`~org.orekit.files.general.EphemerisFileWriter` generating :class:`~org.orekit.files.ccsds.ndm.odm.oem.Oem`
         files.
@@ -28,7 +28,8 @@ class EphemerisWriter(org.orekit.files.general.EphemerisFileWriter):
             9.0
     
         Also see:
-            CCSDS 502.0-B-2 Orbit Data Messages, CCSDS 500.0-G-4 Navigation Data Definitions and Conventions,
+            :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.public.ccsds.org.Pubs.502x0b2c1.pdf`,
+            :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.public.ccsds.org.Pubs.500x0g4.pdf`,
             :class:`~org.orekit.files.ccsds.ndm.odm.oem.StreamingOemWriter`
     """
     def __init__(self, oemWriter: 'OemWriter', header: org.orekit.files.ccsds.section.Header, oemMetadata: 'OemMetadata', fileFormat: org.orekit.files.ccsds.utils.FileFormat, string: str, int: int): ...
@@ -46,7 +47,7 @@ class EphemerisWriter(org.orekit.files.general.EphemerisFileWriter):
 
 class InterpolationMethod(java.lang.Enum['InterpolationMethod']):
     """
-    public enum InterpolationMethod extends Enum<:class:`~org.orekit.files.ccsds.ndm.odm.oem.InterpolationMethod`>
+    public enum InterpolationMethod extends :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.oem.InterpolationMethod`>
     
         OEM interpolation method.
     """
@@ -66,14 +67,14 @@ class InterpolationMethod(java.lang.Enum['InterpolationMethod']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -86,9 +87,8 @@ class InterpolationMethod(java.lang.Enum['InterpolationMethod']):
         
             .. code-block: java
             
-            
-            for (InterpolationMethod c : InterpolationMethod.values())
-                System.out.println(c);
+            for (InterpolationMethod c : InterpolationMethod.values())
+                System.out.println(c);
             
         
             Returns:
@@ -112,7 +112,7 @@ class Oem(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.secti
     """
     ROOT: typing.ClassVar[str] = ...
     """
-    public static final String ROOT
+    public static final :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ROOT
     
         Root element for XML files.
     
@@ -123,7 +123,7 @@ class Oem(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.secti
     """
     FORMAT_VERSION_KEY: typing.ClassVar[str] = ...
     """
-    public static final String FORMAT_VERSION_KEY
+    public static final :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` FORMAT_VERSION_KEY
     
         Key for format version.
     
@@ -326,8 +326,8 @@ class OemMetadata(org.orekit.files.ccsds.ndm.odm.CommonMetadata):
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.ndm.odm.CommonMetadata.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.ndm.odm.CommonMetadata`
+                :meth:`~org.orekit.files.ccsds.ndm.odm.CommonMetadata.validate` in
+                class :class:`~org.orekit.files.ccsds.ndm.odm.CommonMetadata`
         
             Parameters:
                 version (double): format version
@@ -338,7 +338,7 @@ class OemMetadata(org.orekit.files.ccsds.ndm.odm.CommonMetadata):
 
 class OemMetadataKey(java.lang.Enum['OemMetadataKey']):
     """
-    public enum OemMetadataKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.odm.oem.OemMetadataKey`>
+    public enum OemMetadataKey extends :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.oem.OemMetadataKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemMetadata` entries.
     
@@ -378,14 +378,14 @@ class OemMetadataKey(java.lang.Enum['OemMetadataKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -398,9 +398,8 @@ class OemMetadataKey(java.lang.Enum['OemMetadataKey']):
         
             .. code-block: java
             
-            
-            for (OemMetadataKey c : OemMetadataKey.values())
-                System.out.println(c);
+            for (OemMetadataKey c : OemMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -430,8 +429,8 @@ class OemParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Oem, 'OemParser'], org.
             Build the file from parsed entries.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.build`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.build` in
+                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
         
             Returns:
                 parsed file
@@ -444,8 +443,8 @@ class OemParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Oem, 'OemParser'], org.
             Finalize data after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -458,8 +457,8 @@ class OemParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Oem, 'OemParser'], org.
             Finalize header after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -472,8 +471,8 @@ class OemParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Oem, 'OemParser'], org.
             Finalize metadata after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -486,8 +485,8 @@ class OemParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Oem, 'OemParser'], org.
             Get file header to fill.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 file header to fill
@@ -500,8 +499,8 @@ class OemParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Oem, 'OemParser'], org.
             Acknowledge data parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -514,8 +513,8 @@ class OemParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Oem, 'OemParser'], org.
             Acknowledge header parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -528,8 +527,8 @@ class OemParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Oem, 'OemParser'], org.
             Acknowledge metada parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -542,8 +541,8 @@ class OemParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Oem, 'OemParser'], org.
             Parse an ephemeris file from a data source.
         
             Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFileParser.parse`Â in
-                interfaceÂ :class:`~org.orekit.files.general.EphemerisFileParser`
+                :meth:`~org.orekit.files.general.EphemerisFileParser.parse` in
+                interface :class:`~org.orekit.files.general.EphemerisFileParser`
         
             Parameters:
                 source (:class:`~org.orekit.data.DataSource`): source providing the data to parse
@@ -559,8 +558,8 @@ class OemParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Oem, 'OemParser'], org.
             Prepare data for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -573,8 +572,8 @@ class OemParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Oem, 'OemParser'], org.
             Prepare header for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -587,8 +586,8 @@ class OemParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Oem, 'OemParser'], org.
             Prepare metadata for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -601,8 +600,8 @@ class OemParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Oem, 'OemParser'], org.
             Reset parser to initial state before parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.reset`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.reset` in
+                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
         
             Parameters:
                 fileFormat (:class:`~org.orekit.files.ccsds.utils.FileFormat`): format of the file ready to be parsed
@@ -613,7 +612,7 @@ class OemParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Oem, 'OemParser'], org.
 
 class OemSatelliteEphemeris(org.orekit.files.general.EphemerisFile.SatelliteEphemeris[org.orekit.utils.TimeStampedPVCoordinates, 'OemSegment']):
     """
-    public class OemSatelliteEphemeris extends Object implements :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`, :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemSegment`>
+    public class OemSatelliteEphemeris extends :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`, :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemSegment`>
     
         OEM ephemeris blocks for a single satellite.
     
@@ -626,8 +625,8 @@ class OemSatelliteEphemeris(org.orekit.files.general.EphemerisFile.SatelliteEphe
             Get the satellite ID. The satellite ID is unique only within the same ephemeris file.
         
             Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getId`Â in
-                interfaceÂ :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
+                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getId` in
+                interface :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
         
             Returns:
                 the satellite's ID, never :code:`null`.
@@ -640,12 +639,12 @@ class OemSatelliteEphemeris(org.orekit.files.general.EphemerisFile.SatelliteEphe
             Get the standard gravitational parameter for the satellite.
         
             Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getMu`Â in
-                interfaceÂ :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
+                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getMu` in
+                interface :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
         
             Returns:
                 the gravitational parameter used in :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getPropagator`, in
-                mÃ‚Â³/sÃ‚Â².
+                m³/s².
         
         
         """
@@ -658,8 +657,8 @@ class OemSatelliteEphemeris(org.orekit.files.general.EphemerisFile.SatelliteEphe
             The date returned by this method is equivalent to :code:`getPropagator().getMinDate()`.
         
             Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getStart`Â in
-                interfaceÂ :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
+                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getStart` in
+                interface :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
         
             Returns:
                 ephemeris start date.
@@ -674,8 +673,8 @@ class OemSatelliteEphemeris(org.orekit.files.general.EphemerisFile.SatelliteEphe
             The date returned by this method is equivalent to :code:`getPropagator().getMaxDate()`.
         
             Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getStop`Â in
-                interfaceÂ :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
+                :meth:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris.getStop` in
+                interface :class:`~org.orekit.files.general.EphemerisFile.SatelliteEphemeris`
         
             Returns:
                 ephemeris end date.
@@ -702,8 +701,8 @@ class OemSegment(org.orekit.files.ccsds.section.Segment[OemMetadata, OemData], o
             valid.
         
             Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getAvailableDerivatives`Â in
-                interfaceÂ :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getAvailableDerivatives` in
+                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
         
             Returns:
                 a value indicating if the file contains velocity and/or acceleration data.
@@ -719,8 +718,8 @@ class OemSegment(org.orekit.files.ccsds.section.Segment[OemMetadata, OemData], o
             :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getCoordinates`.
         
             Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getFrame`Â in
-                interfaceÂ :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getFrame` in
+                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
         
             Returns:
                 the reference frame for this segment. Never :code:`null`.
@@ -742,8 +741,8 @@ class OemSegment(org.orekit.files.ccsds.section.Segment[OemMetadata, OemData], o
             pseudo-inertial.
         
             Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getInertialFrame`Â in
-                interfaceÂ :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getInertialFrame` in
+                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
         
             Returns:
                 an reference frame that is inertial, i.e. :meth:`~org.orekit.frames.Frame.isPseudoInertial` is :code:`true`. May be the
@@ -757,8 +756,8 @@ class OemSegment(org.orekit.files.ccsds.section.Segment[OemMetadata, OemData], o
             Get the number of samples to use in interpolation.
         
             Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getInterpolationSamples`Â in
-                interfaceÂ :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getInterpolationSamples` in
+                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
         
             Returns:
                 the number of points to use for interpolation.
@@ -771,12 +770,12 @@ class OemSegment(org.orekit.files.ccsds.section.Segment[OemMetadata, OemData], o
             Get the standard gravitational parameter for the satellite.
         
             Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getMu`Â in
-                interfaceÂ :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getMu` in
+                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
         
             Returns:
                 the gravitational parameter used in :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getPropagator`, in
-                mÃ‚Â³/sÃ‚Â².
+                m³/s².
         
         
         """
@@ -788,8 +787,8 @@ class OemSegment(org.orekit.files.ccsds.section.Segment[OemMetadata, OemData], o
             The date returned by this method is equivalent to :code:`getPropagator().getMinDate()`.
         
             Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getStart`Â in
-                interfaceÂ :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getStart` in
+                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
         
             Returns:
                 ephemeris segment start date.
@@ -804,8 +803,8 @@ class OemSegment(org.orekit.files.ccsds.section.Segment[OemMetadata, OemData], o
             The date returned by this method is equivalent to :code:`getPropagator().getMaxDate()`.
         
             Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getStop`Â in
-                interfaceÂ :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
+                :meth:`~org.orekit.files.general.EphemerisFile.EphemerisSegment.getStop` in
+                interface :class:`~org.orekit.files.general.EphemerisFile.EphemerisSegment`
         
             Returns:
                 ephemeris segment end date.
@@ -844,7 +843,8 @@ class OemWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[or
             9.0
     
         Also see:
-            CCSDS 502.0-B-2 Orbit Data Messages, CCSDS 500.0-G-4 Navigation Data Definitions and Conventions,
+            :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.public.ccsds.org.Pubs.502x0b2c1.pdf`,
+            :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.public.ccsds.org.Pubs.500x0g4.pdf`,
             :class:`~org.orekit.files.ccsds.ndm.odm.oem.StreamingOemWriter`
     """
     CCSDS_OEM_VERS: typing.ClassVar[float] = ...
@@ -860,7 +860,7 @@ class OemWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[or
     """
     DEFAULT_FILE_NAME: typing.ClassVar[str] = ...
     """
-    public static final String DEFAULT_FILE_NAME
+    public static final :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_FILE_NAME
     
         Default file name for error messages.
     
@@ -885,7 +885,7 @@ class OemWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[or
 
 class StreamingOemWriter(java.lang.AutoCloseable):
     """
-    public class StreamingOemWriter extends Object implements AutoCloseable
+    public class StreamingOemWriter extends :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.AutoCloseable?is`
     
         A writer for OEM files.
     
@@ -896,28 +896,28 @@ class StreamingOemWriter(java.lang.AutoCloseable):
     
         .. code-block: java
         
-        
-         Propagator propagator = ...; // pre-configured propagator
-         OEMWriter  aemWriter  = ...; // pre-configured writer
-           try (Generator out = ...;  // set-up output stream
-                StreamingOemWriter sw = new StreamingOemWriter(out, oemWriter)) { // set-up streaming writer
-        
-             // write segment 1
-             propagator.getMultiplexer().add(step, sw.newSegment());
-             propagator.propagate(startDate1, stopDate1);
-        
-             ...
-        
-             // write segment n
-             propagator.getMultiplexer().clear();
-             propagator.getMultiplexer().add(step, sw.newSegment());
-             propagator.propagate(startDateN, stopDateN);
-        
-           }
+         Propagator propagator = ...; // pre-configured propagator
+         OEMWriter  aemWriter  = ...; // pre-configured writer
+           try (Generator out = ...;  // set-up output stream
+                StreamingOemWriter sw = new StreamingOemWriter(out, oemWriter)) { // set-up streaming writer
+        
+             // write segment 1
+             propagator.getMultiplexer().add(step, sw.newSegment());
+             propagator.propagate(startDate1, stopDate1);
+        
+             ...
+        
+             // write segment n
+             propagator.getMultiplexer().clear();
+             propagator.getMultiplexer().add(step, sw.newSegment());
+             propagator.propagate(startDateN, stopDateN);
+        
+           }
          
     
         Also see:
-            CCSDS 502.0-B-2 Orbit Data Messages, CCSDS 500.0-G-4 Navigation Data Definitions and Conventions,
+            :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.public.ccsds.org.Pubs.502x0b2c1.pdf`,
+            :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.public.ccsds.org.Pubs.500x0g4.pdf`,
             :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemWriter`
     """
     @typing.overload

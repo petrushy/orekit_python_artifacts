@@ -20,7 +20,7 @@ import typing
 
 class BoxAndSolarArraySpacecraft(org.orekit.forces.radiation.RadiationSensitive, org.orekit.forces.drag.DragSensitive):
     """
-    public class BoxAndSolarArraySpacecraft extends Object implements :class:`~org.orekit.forces.radiation.RadiationSensitive`, :class:`~org.orekit.forces.drag.DragSensitive`
+    public class BoxAndSolarArraySpacecraft extends :class:`~org.orekit.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.radiation.RadiationSensitive`, :class:`~org.orekit.forces.drag.DragSensitive`
     
         Class representing the features of a classical satellite with a convex body shape and rotating flat solar arrays.
     
@@ -69,21 +69,21 @@ class BoxAndSolarArraySpacecraft(org.orekit.forces.radiation.RadiationSensitive,
             The computation includes all spacecraft specific characteristics like shape, area and coefficients.
         
             Specified by:
-                :meth:`~org.orekit.forces.drag.DragSensitive.dragAcceleration`Â in
-                interfaceÂ :class:`~org.orekit.forces.drag.DragSensitive`
+                :meth:`~org.orekit.forces.drag.DragSensitive.dragAcceleration` in
+                interface :class:`~org.orekit.forces.drag.DragSensitive`
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
                 frame (:class:`~org.orekit.frames.Frame`): inertial reference frame for state (both orbit and attitude)
-                position (FieldVector3D<T> position): position of spacecraft in reference frame
-                rotation (FieldRotation<T> rotation): orientation (attitude) of the spacecraft with respect to reference frame
+                position (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): position of spacecraft in reference frame
+                rotation (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldRotation?is`<T> rotation): orientation (attitude) of the spacecraft with respect to reference frame
                 mass (T): current mass
                 density (T): atmospheric density at spacecraft position
-                relativeVelocity (FieldVector3D<T> relativeVelocity): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
+                relativeVelocity (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> relativeVelocity): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
                 parameters (T[]): values of the force model parameters
         
             Returns:
-                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/sÂ²)
+                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/s²)
         
         
         """
@@ -96,21 +96,21 @@ class BoxAndSolarArraySpacecraft(org.orekit.forces.radiation.RadiationSensitive,
             The computation includes all spacecraft specific characteristics like shape, area and coefficients.
         
             Specified by:
-                :meth:`~org.orekit.forces.drag.DragSensitive.dragAcceleration`Â in
-                interfaceÂ :class:`~org.orekit.forces.drag.DragSensitive`
+                :meth:`~org.orekit.forces.drag.DragSensitive.dragAcceleration` in
+                interface :class:`~org.orekit.forces.drag.DragSensitive`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
                 frame (:class:`~org.orekit.frames.Frame`): inertial reference frame for state (both orbit and attitude)
-                position (Vector3D): position of spacecraft in reference frame
-                rotation (Rotation): orientation (attitude) of the spacecraft with respect to reference frame
+                position (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): position of spacecraft in reference frame
+                rotation (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Rotation?is`): orientation (attitude) of the spacecraft with respect to reference frame
                 mass (double): current mass
                 density (double): atmospheric density at spacecraft position
-                relativeVelocity (Vector3D): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
+                relativeVelocity (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
                 parameters (double[]): values of the force model parameters
         
             Returns:
-                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/sÂ²)
+                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/s²)
         
         """
         ...
@@ -124,8 +124,8 @@ class BoxAndSolarArraySpacecraft(org.orekit.forces.radiation.RadiationSensitive,
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
                 frame (:class:`~org.orekit.frames.Frame`): inertial reference frame for state (both orbit and attitude)
-                position (FieldVector3D<T> position): position of spacecraft in reference frame
-                rotation (FieldRotation<T> rotation): orientation (attitude) of the spacecraft with respect to reference frame
+                position (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): position of spacecraft in reference frame
+                rotation (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldRotation?is`<T> rotation): orientation (attitude) of the spacecraft with respect to reference frame
         
             Returns:
                 solar array normal in spacecraft frame
@@ -141,8 +141,8 @@ class BoxAndSolarArraySpacecraft(org.orekit.forces.radiation.RadiationSensitive,
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
                 frame (:class:`~org.orekit.frames.Frame`): inertial reference frame for state (both orbit and attitude)
-                position (Vector3D): position of spacecraft in reference frame
-                rotation (Rotation): orientation (attitude) of the spacecraft with respect to reference frame
+                position (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): position of spacecraft in reference frame
+                rotation (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Rotation?is`): orientation (attitude) of the spacecraft with respect to reference frame
         
             Returns:
                 solar array normal in spacecraft frame
@@ -157,20 +157,20 @@ class BoxAndSolarArraySpacecraft(org.orekit.forces.radiation.RadiationSensitive,
             Compute the acceleration due to radiation pressure.
         
             Specified by:
-                :meth:`~org.orekit.forces.radiation.RadiationSensitive.radiationPressureAcceleration`Â in
-                interfaceÂ :class:`~org.orekit.forces.radiation.RadiationSensitive`
+                :meth:`~org.orekit.forces.radiation.RadiationSensitive.radiationPressureAcceleration` in
+                interface :class:`~org.orekit.forces.radiation.RadiationSensitive`
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
                 frame (:class:`~org.orekit.frames.Frame`): inertial reference frame for state (both orbit and attitude)
-                position (FieldVector3D<T> position): position of spacecraft in reference frame
-                rotation (FieldRotation<T> rotation): orientation (attitude) of the spacecraft with respect to reference frame
+                position (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): position of spacecraft in reference frame
+                rotation (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldRotation?is`<T> rotation): orientation (attitude) of the spacecraft with respect to reference frame
                 mass (T): current mass
-                flux (FieldVector3D<T> flux): radiation flux in the same inertial frame as spacecraft orbit
+                flux (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> flux): radiation flux in the same inertial frame as spacecraft orbit
                 parameters (T[]): values of the force model parameters
         
             Returns:
-                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/sÂ²)
+                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/s²)
         
         
         """
@@ -181,20 +181,20 @@ class BoxAndSolarArraySpacecraft(org.orekit.forces.radiation.RadiationSensitive,
             Compute the acceleration due to radiation pressure.
         
             Specified by:
-                :meth:`~org.orekit.forces.radiation.RadiationSensitive.radiationPressureAcceleration`Â in
-                interfaceÂ :class:`~org.orekit.forces.radiation.RadiationSensitive`
+                :meth:`~org.orekit.forces.radiation.RadiationSensitive.radiationPressureAcceleration` in
+                interface :class:`~org.orekit.forces.radiation.RadiationSensitive`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
                 frame (:class:`~org.orekit.frames.Frame`): inertial reference frame for state (both orbit and attitude)
-                position (Vector3D): position of spacecraft in reference frame
-                rotation (Rotation): orientation (attitude) of the spacecraft with respect to reference frame
+                position (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): position of spacecraft in reference frame
+                rotation (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Rotation?is`): orientation (attitude) of the spacecraft with respect to reference frame
                 mass (double): current mass
-                flux (Vector3D): radiation flux in the same inertial frame as spacecraft orbit
+                flux (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): radiation flux in the same inertial frame as spacecraft orbit
                 parameters (double[]): values of the force model parameters
         
             Returns:
-                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/sÂ²)
+                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/s²)
         
         """
         ...
@@ -309,7 +309,7 @@ class ForceModel(org.orekit.utils.ParametersDriversProvider):
             Get parameter value from its name.
         
             Parameters:
-                name (String): parameter name
+                name (:class:`~org.orekit.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): parameter name
         
             Returns:
                 parameter value
@@ -340,7 +340,7 @@ class ForceModel(org.orekit.utils.ParametersDriversProvider):
             Get force model parameters.
         
             Parameters:
-                field (Field<T> field): field to which the elements belong
+                field (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
         
             Returns:
                 force model parameters
@@ -390,7 +390,7 @@ class ForceModel(org.orekit.utils.ParametersDriversProvider):
             Supported parameters are those listed by :meth:`~org.orekit.utils.ParametersDriversProvider.getParametersDrivers`.
         
             Parameters:
-                name (String): parameter name to check
+                name (:class:`~org.orekit.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): parameter name to check
         
             Returns:
                 true if the parameter is supported
@@ -404,7 +404,7 @@ class ForceModel(org.orekit.utils.ParametersDriversProvider):
 
 class AbstractForceModel(ForceModel):
     """
-    public abstract class AbstractForceModel extends Object implements :class:`~org.orekit.forces.ForceModel`
+    public abstract class AbstractForceModel extends :class:`~org.orekit.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.ForceModel`
     
         Base class for force models.
     
@@ -420,7 +420,7 @@ class AbstractForceModel(ForceModel):
                 :meth:`~org.orekit.forces.ForceModel.getParameterDriver` in interface :class:`~org.orekit.forces.ForceModel`
         
             Parameters:
-                name (String): parameter name
+                name (:class:`~org.orekit.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): parameter name
         
             Returns:
                 parameter value
@@ -438,7 +438,7 @@ class AbstractForceModel(ForceModel):
                 :meth:`~org.orekit.forces.ForceModel.isSupported` in interface :class:`~org.orekit.forces.ForceModel`
         
             Parameters:
-                name (String): parameter name to check
+                name (:class:`~org.orekit.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): parameter name to check
         
             Returns:
                 true if the parameter is supported
@@ -452,7 +452,7 @@ class AbstractForceModel(ForceModel):
 
 class PythonForceModel(ForceModel):
     """
-    public class PythonForceModel extends Object implements :class:`~org.orekit.forces.ForceModel`
+    public class PythonForceModel extends :class:`~org.orekit.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.ForceModel`
     """
     def __init__(self): ...
     _acceleration_1__T = typing.TypeVar('_acceleration_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -474,6 +474,11 @@ class PythonForceModel(ForceModel):
             Since:
                 9.0
         
+        """
+        ...
+    @typing.overload
+    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_1__T], tArray: typing.List[_acceleration_1__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_1__T]:
+        """
             Compute acceleration.
         
             Specified by:
@@ -492,8 +497,6 @@ class PythonForceModel(ForceModel):
         
         """
         ...
-    @typing.overload
-    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_1__T], tArray: typing.List[_acceleration_1__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_1__T]: ...
     _acceleration_FT__T = typing.TypeVar('_acceleration_FT__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     def acceleration_FT(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_FT__T], tArray: typing.List[_acceleration_FT__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_FT__T]:
         """
@@ -576,7 +579,7 @@ class PythonForceModel(ForceModel):
                 :meth:`~org.orekit.forces.ForceModel.getParameterDriver` in interface :class:`~org.orekit.forces.ForceModel`
         
             Parameters:
-                name (String): parameter name
+                name (:class:`~org.orekit.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): parameter name
         
             Returns:
                 parameter value
@@ -613,7 +616,7 @@ class PythonForceModel(ForceModel):
                 :meth:`~org.orekit.forces.ForceModel.getParameters` in interface :class:`~org.orekit.forces.ForceModel`
         
             Parameters:
-                field (Field<T> field): field to which the elements belong
+                field (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
         
             Returns:
                 force model parameters
@@ -631,7 +634,7 @@ class PythonForceModel(ForceModel):
             Get force model parameters.
         
             Parameters:
-                field (Field<T> field): field to which the elements belong
+                field (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
         
             Returns:
                 force model parameters
@@ -675,7 +678,7 @@ class PythonForceModel(ForceModel):
                 :meth:`~org.orekit.forces.ForceModel.isSupported` in interface :class:`~org.orekit.forces.ForceModel`
         
             Parameters:
-                name (String): parameter name to check
+                name (:class:`~org.orekit.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): parameter name to check
         
             Returns:
                 true if the parameter is supported
@@ -727,6 +730,11 @@ class PythonAbstractForceModel(AbstractForceModel):
             Since:
                 9.0
         
+        """
+        ...
+    @typing.overload
+    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_1__T], tArray: typing.List[_acceleration_1__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_1__T]:
+        """
             Compute acceleration. Automatically directs to the Python extension point acceleration_FT
         
             Parameters:
@@ -742,8 +750,6 @@ class PythonAbstractForceModel(AbstractForceModel):
         
         """
         ...
-    @typing.overload
-    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_1__T], tArray: typing.List[_acceleration_1__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_1__T]: ...
     _acceleration_FT__T = typing.TypeVar('_acceleration_FT__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     def acceleration_FT(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_FT__T], tArray: typing.List[_acceleration_FT__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_FT__T]:
         """

@@ -200,7 +200,7 @@ class CalculusFieldUnivariateFunction(typing.Generic[_CalculusFieldUnivariateFun
                 the value of the function.
         
             Raises:
-                : when the activated method itself can ascertain that a precondition, specified in the API expressed at the level of the
+                :class:`~org.hipparchus.analysis.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: when the activated method itself can ascertain that a precondition, specified in the API expressed at the level of the
                     activated method, has been violated. When Hipparchus throws an :code:`IllegalArgumentException`, it is usually the
                     consequence of checking the actual parameters passed to the method.
         
@@ -459,7 +459,7 @@ class FieldUnivariateFunction:
                 the value of the function.
         
             Raises:
-                : when the activated method itself can ascertain that a precondition, specified in the API expressed at the level of the
+                :class:`~org.hipparchus.analysis.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: when the activated method itself can ascertain that a precondition, specified in the API expressed at the level of the
                     activated method, has been violated. When Hipparchus throws an :code:`IllegalArgumentException`, it is usually the
                     consequence of checking the actual parameters passed to the method.
         
@@ -545,7 +545,7 @@ class FieldUnivariateVectorFunction:
 
 class FunctionUtils:
     """
-    public class FunctionUtils extends Object
+    public class FunctionUtils extends :class:`~org.hipparchus.analysis.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Utilities for manipulating function objects.
     """
@@ -683,7 +683,8 @@ class FunctionUtils:
                 function computing the derivative at required order
         
             Also see:
-                null, :meth:`~org.hipparchus.analysis.FunctionUtils.toDifferentiable`
+                :meth:`~org.hipparchus.analysis.FunctionUtils.derivative`,
+                :meth:`~org.hipparchus.analysis.FunctionUtils.toDifferentiable`
         
             Convert an :class:`~org.hipparchus.analysis.differentiation.MultivariateDifferentiableFunction` to an
             :class:`~org.hipparchus.analysis.MultivariateFunction` computing n :sup:`th` order derivative.
@@ -816,7 +817,8 @@ class FunctionUtils:
                 a differentiable function with value and gradient
         
             Also see:
-                :meth:`~org.hipparchus.analysis.FunctionUtils.toDifferentiable`, null
+                :meth:`~org.hipparchus.analysis.FunctionUtils.toDifferentiable`,
+                :meth:`~org.hipparchus.analysis.FunctionUtils.derivative`
         
         
         """
@@ -982,7 +984,7 @@ class UnivariateFunction:
                 the value of the function.
         
             Raises:
-                : when the activated method itself can ascertain that a precondition, specified in the API expressed at the level of the
+                :class:`~org.hipparchus.analysis.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: when the activated method itself can ascertain that a precondition, specified in the API expressed at the level of the
                     activated method, has been violated. When Hipparchus throws an :code:`IllegalArgumentException`, it is usually the
                     consequence of checking the actual parameters passed to the method.
         
@@ -1030,6 +1032,83 @@ class UnivariateVectorFunction:
         """
         ...
 
+class PythonFieldUnivariateFunction(FieldUnivariateFunction):
+    """
+    public class PythonFieldUnivariateFunction extends :class:`~org.hipparchus.analysis.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.FieldUnivariateFunction?is`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+    _value__T = typing.TypeVar('_value__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    def value(self, t: _value__T) -> _value__T:
+        """
+        
+            Specified by:
+                
+                meth:`~org.hipparchus.analysis.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.FieldUnivariateFunction.html?is` in
+                interface :class:`~org.hipparchus.analysis.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.FieldUnivariateFunction?is`
+        
+        
+        """
+        ...
+
+class PythonUnivariateFunction(UnivariateFunction):
+    """
+    public class PythonUnivariateFunction extends :class:`~org.hipparchus.analysis.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.UnivariateFunction?is`
+    
+        import org.hipparchus.analysis.UnivariateFunction;
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+    def value(self, double: float) -> float:
+        """
+        
+            Specified by:
+                
+                meth:`~org.hipparchus.analysis.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.UnivariateFunction.html?is` in
+                interface :class:`~org.hipparchus.analysis.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.UnivariateFunction?is`
+        
+        
+        """
+        ...
+
 
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.hipparchus.analysis")``.
@@ -1054,6 +1133,8 @@ class __module_protocol__(typing.Protocol):
     MultivariateMatrixFunction: typing.Type[MultivariateMatrixFunction]
     MultivariateVectorFunction: typing.Type[MultivariateVectorFunction]
     ParametricUnivariateFunction: typing.Type[ParametricUnivariateFunction]
+    PythonFieldUnivariateFunction: typing.Type[PythonFieldUnivariateFunction]
+    PythonUnivariateFunction: typing.Type[PythonUnivariateFunction]
     TrivariateFunction: typing.Type[TrivariateFunction]
     UnivariateFunction: typing.Type[UnivariateFunction]
     UnivariateMatrixFunction: typing.Type[UnivariateMatrixFunction]

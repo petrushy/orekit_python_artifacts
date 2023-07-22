@@ -5,7 +5,7 @@ import typing
 
 class AbstractEphemerisMessage:
     """
-    public abstract class AbstractEphemerisMessage extends Object
+    public abstract class AbstractEphemerisMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Base class for ephemeris-based navigation messages.
     
@@ -82,7 +82,7 @@ class AbstractEphemerisMessage:
             Getter for the satellite X acceleration.
         
             Returns:
-                the satellite X acceleration in m/sÂ²
+                the satellite X acceleration in m/s²
         
         
         """
@@ -112,7 +112,7 @@ class AbstractEphemerisMessage:
             Getter for the satellite Y acceleration.
         
             Returns:
-                the satellite Y acceleration in m/sÂ²
+                the satellite Y acceleration in m/s²
         
         
         """
@@ -142,7 +142,7 @@ class AbstractEphemerisMessage:
             Getter for the satellite Z acceleration.
         
             Returns:
-                the satellite Z acceleration in m/sÂ²
+                the satellite Z acceleration in m/s²
         
         
         """
@@ -212,7 +212,7 @@ class AbstractEphemerisMessage:
             Setter for the satellite X acceleration.
         
             Parameters:
-                ax (double): the satellite X acceleration (m/sÂ²) to set
+                ax (double): the satellite X acceleration (m/s²) to set
         
         
         """
@@ -242,7 +242,7 @@ class AbstractEphemerisMessage:
             Setter for the satellite Y acceleration.
         
             Parameters:
-                ay (double): the satellite Y acceleration (m/sÂ²) to set
+                ay (double): the satellite Y acceleration (m/s²) to set
         
         
         """
@@ -272,7 +272,7 @@ class AbstractEphemerisMessage:
             Setter for the satellite Z acceleration.
         
             Parameters:
-                az (double): the satellite Z acceleration (m/sÂ²) to set
+                az (double): the satellite Z acceleration (m/s²) to set
         
         
         """
@@ -280,7 +280,7 @@ class AbstractEphemerisMessage:
 
 class CommonGnssData:
     """
-    public class CommonGnssData extends Object
+    public class CommonGnssData extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Container for common GNSS data contained in almanac and navigation messages.
     
@@ -746,7 +746,7 @@ class GLONASSOrbitalElements(org.orekit.time.TimeStamped):
             Get the GLONASS ECEF-X component of satellite acceleration vector in PZ-90 datum.
         
             Returns:
-                the GLONASS ECEF-X component of satellite acceleration vector in PZ-90 datum (m/sÂ²)
+                the GLONASS ECEF-X component of satellite acceleration vector in PZ-90 datum (m/s²)
         
         
         """
@@ -776,7 +776,7 @@ class GLONASSOrbitalElements(org.orekit.time.TimeStamped):
             Get the GLONASS ECEF-Y component of satellite acceleration vector in PZ-90 datum.
         
             Returns:
-                the GLONASS ECEF-Y component of satellite acceleration vector in PZ-90 datum (m/sÂ²)
+                the GLONASS ECEF-Y component of satellite acceleration vector in PZ-90 datum (m/s²)
         
         
         """
@@ -806,7 +806,7 @@ class GLONASSOrbitalElements(org.orekit.time.TimeStamped):
             Get the GLONASS ECEF-Z component of satellite acceleration vector in PZ-90 datum.
         
             Returns:
-                the GLONASS ECEF-Z component of satellite acceleration vector in PZ-90 datum (m/sÂ²)
+                the GLONASS ECEF-Z component of satellite acceleration vector in PZ-90 datum (m/s²)
         
         
         """
@@ -857,7 +857,7 @@ class GNSSClockElements(org.orekit.time.TimeStamped):
             Gets the Second Order Clock Correction.
         
             Returns:
-                the Second Order Clock Correction (s/sÂ²)
+                the Second Order Clock Correction (s/s²)
         
             Also see:
                 :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getAf0`,
@@ -935,7 +935,7 @@ class GNSSConstants:
     """
     static final double BEIDOU_MU
     
-        Earth's universal gravitational parameter for Beidou user in mÂ³/sÂ².
+        Earth's universal gravitational parameter for Beidou user in m³/s².
     
         Also see:
             :meth:`~constant`
@@ -968,7 +968,7 @@ class GNSSConstants:
     """
     static final double GALILEO_MU
     
-        Earth's universal gravitational parameter for Galileo user in mÂ³/sÂ².
+        Earth's universal gravitational parameter for Galileo user in m³/s².
     
         Also see:
             :meth:`~constant`
@@ -1001,7 +1001,7 @@ class GNSSConstants:
     """
     static final double GLONASS_MU
     
-        Value of the Earth's universal gravitational parameter for GLONASS user in mÂ³/sÂ².
+        Value of the Earth's universal gravitational parameter for GLONASS user in m³/s².
     
         Also see:
             :meth:`~constant`
@@ -1023,7 +1023,7 @@ class GNSSConstants:
     """
     static final double GPS_MU
     
-        WGS 84 value of the Earth's universal gravitational parameter for GPS user in mÂ³/sÂ².
+        WGS 84 value of the Earth's universal gravitational parameter for GPS user in m³/s².
     
         Also see:
             :meth:`~constant`
@@ -1056,7 +1056,7 @@ class GNSSConstants:
     """
     static final double IRNSS_MU
     
-        WGS 84 value of the Earth's universal gravitational parameter for IRNSS user in mÂ³/sÂ².
+        WGS 84 value of the Earth's universal gravitational parameter for IRNSS user in m³/s².
     
         Also see:
             :meth:`~constant`
@@ -1089,7 +1089,7 @@ class GNSSConstants:
     """
     static final double QZSS_MU
     
-        WGS 84 value of the Earth's universal gravitational parameter for QZSS user in mÂ³/sÂ².
+        WGS 84 value of the Earth's universal gravitational parameter for QZSS user in m³/s².
     
         Also see:
             :meth:`~constant`
@@ -1122,7 +1122,7 @@ class GNSSConstants:
     """
     static final double SBAS_MU
     
-        WGS 84 value of the Earth's universal gravitational parameter for SBAS user in mÂ³/sÂ².
+        WGS 84 value of the Earth's universal gravitational parameter for SBAS user in m³/s².
     
         Also see:
             :meth:`~constant`
@@ -1453,7 +1453,7 @@ class SBASOrbitalElements(org.orekit.time.TimeStamped):
             Get the ECEF-X component of satellite acceleration vector.
         
             Returns:
-                the GLONASS ECEF-X component of satellite acceleration vector (m/sÂ²)
+                the GLONASS ECEF-X component of satellite acceleration vector (m/s²)
         
         
         """
@@ -1483,7 +1483,7 @@ class SBASOrbitalElements(org.orekit.time.TimeStamped):
             Get the ECEF-Y component of satellite acceleration vector.
         
             Returns:
-                the ECEF-Y component of satellite acceleration vector (m/sÂ²)
+                the ECEF-Y component of satellite acceleration vector (m/s²)
         
         
         """
@@ -1513,7 +1513,7 @@ class SBASOrbitalElements(org.orekit.time.TimeStamped):
             Get the ECEF-Z component of satellite acceleration vector.
         
             Returns:
-                the ECEF-Z component of satellite acceleration vector (m/sÂ²)
+                the ECEF-Z component of satellite acceleration vector (m/s²)
         
         
         """
@@ -1536,7 +1536,7 @@ class AbstractAlmanac(CommonGnssData):
             By default, not contained in a GNSS almanac
         
             Returns:
-                the Drift Rate Correction Coefficient (s/sÂ²).
+                the Drift Rate Correction Coefficient (s/s²).
         
         
         """
@@ -1658,7 +1658,7 @@ class AbstractNavigationMessage(CommonGnssData):
             Getter for the Drift Rate Correction Coefficient.
         
             Returns:
-                the Drift Rate Correction Coefficient (s/sÂ²).
+                the Drift Rate Correction Coefficient (s/s²).
         
         
         """
@@ -1755,7 +1755,7 @@ class AbstractNavigationMessage(CommonGnssData):
         ...
     def setAf2(self, double: float) -> None:
         """
-            Setter for the Drift Rate Correction Coefficient (s/sÂ²).
+            Setter for the Drift Rate Correction Coefficient (s/s²).
         
             Parameters:
                 af2 (double): the Drift Rate Correction Coefficient to set
@@ -1868,7 +1868,7 @@ class AbstractNavigationMessage(CommonGnssData):
 
 class GLONASSAlmanac(GLONASSOrbitalElements):
     """
-    public class GLONASSAlmanac extends Object implements :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
+    public class GLONASSAlmanac extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
     
         This class holds a GLONASS almanac as read from .agl files.
     
@@ -1896,12 +1896,12 @@ class GLONASSAlmanac(GLONASSOrbitalElements):
     def getDeltaI(self) -> float:
         """
             Description copied from
-            interface:Â :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getDeltaI`
+            interface: :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getDeltaI`
             Get the correction to the mean value of inclination.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getDeltaI`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getDeltaI` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
         
             Returns:
                 the correction to the mean value of inclination (rad)
@@ -1912,12 +1912,12 @@ class GLONASSAlmanac(GLONASSOrbitalElements):
     def getDeltaT(self) -> float:
         """
             Description copied from
-            interface:Â :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getDeltaT`
+            interface: :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getDeltaT`
             Get the correction to the mean value of Draconian period.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getDeltaT`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getDeltaT` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
         
             Returns:
                 the correction to the mean value of Draconian period (s)
@@ -1928,12 +1928,12 @@ class GLONASSAlmanac(GLONASSOrbitalElements):
     def getDeltaTDot(self) -> float:
         """
             Description copied from
-            interface:Â :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getDeltaTDot`
+            interface: :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getDeltaTDot`
             Get the rate of change of Draconian period.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getDeltaTDot`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getDeltaTDot` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
         
             Returns:
                 the rate of change of Draconian period
@@ -1947,8 +1947,8 @@ class GLONASSAlmanac(GLONASSOrbitalElements):
             Get the Eccentricity.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getE`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getE` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
         
             Returns:
                 the Eccentricity
@@ -2009,12 +2009,12 @@ class GLONASSAlmanac(GLONASSOrbitalElements):
     def getLambda(self) -> float:
         """
             Description copied from
-            interface:Â :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getLambda`
+            interface: :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getLambda`
             Get the longitude of ascending node of orbit.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getLambda`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getLambda` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
         
             Returns:
                 the longitude of ascending node of orbit (rad)
@@ -2028,8 +2028,8 @@ class GLONASSAlmanac(GLONASSOrbitalElements):
             Get the number of the current four year interval.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getN4`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getN4` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
         
             Returns:
                 the number of the current four year interval
@@ -2043,8 +2043,8 @@ class GLONASSAlmanac(GLONASSOrbitalElements):
             Get the number of the current day in a four year interval.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getNa`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getNa` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
         
             Returns:
                 the number of the current day in a four year interval
@@ -2058,8 +2058,8 @@ class GLONASSAlmanac(GLONASSOrbitalElements):
             Get the Argument of Perigee.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getPa`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getPa` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
         
             Returns:
                 the Argument of Perigee (rad)
@@ -2073,8 +2073,8 @@ class GLONASSAlmanac(GLONASSOrbitalElements):
             Get the Reference Time.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getTime`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getTime` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
         
             Returns:
                 the Reference Time (s)
@@ -2085,7 +2085,7 @@ class GLONASSAlmanac(GLONASSOrbitalElements):
 
 class GLONASSEphemeris(GLONASSOrbitalElements):
     """
-    public class GLONASSEphemeris extends Object implements :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
+    public class GLONASSEphemeris extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
     
         Class for GLONASS ephemeris used by the :class:`~org.orekit.propagation.numerical.GLONASSNumericalPropagator`.
     
@@ -2116,8 +2116,8 @@ class GLONASSEphemeris(GLONASSOrbitalElements):
             Get the number of the current four year interval.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getN4`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getN4` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
         
             Returns:
                 the number of the current four year interval
@@ -2131,8 +2131,8 @@ class GLONASSEphemeris(GLONASSOrbitalElements):
             Get the number of the current day in a four year interval.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getNa`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getNa` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
         
             Returns:
                 the number of the current day in a four year interval
@@ -2146,8 +2146,8 @@ class GLONASSEphemeris(GLONASSOrbitalElements):
             Get the Reference Time.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getTime`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getTime` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
         
             Returns:
                 the Reference Time (s)
@@ -2161,8 +2161,8 @@ class GLONASSEphemeris(GLONASSOrbitalElements):
             Get the ECEF-X component of satellite coordinates in PZ-90 datum.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getX`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getX` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
         
             Returns:
                 the ECEF-X component of satellite coordinates in PZ-90 datum (m)
@@ -2176,8 +2176,8 @@ class GLONASSEphemeris(GLONASSOrbitalElements):
             Get the ECEF-X component of satellite velocity vector in PZ-90 datum.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getXDot`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getXDot` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
         
             Returns:
                 the the ECEF-X component of satellite velocity vector in PZ-90 datum (m/s)
@@ -2188,15 +2188,15 @@ class GLONASSEphemeris(GLONASSOrbitalElements):
     def getXDotDot(self) -> float:
         """
             Description copied from
-            interface:Â :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getXDotDot`
+            interface: :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getXDotDot`
             Get the GLONASS ECEF-X component of satellite acceleration vector in PZ-90 datum.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getXDotDot`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getXDotDot` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
         
             Returns:
-                the GLONASS ECEF-X component of satellite acceleration vector in PZ-90 datum (m/sÂ²)
+                the GLONASS ECEF-X component of satellite acceleration vector in PZ-90 datum (m/s²)
         
         
         """
@@ -2207,8 +2207,8 @@ class GLONASSEphemeris(GLONASSOrbitalElements):
             Get the ECEF-Y component of satellite coordinates in PZ-90 datum.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getY`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getY` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
         
             Returns:
                 the ECEF-Y component of satellite coordinates in PZ-90 datum (m)
@@ -2222,8 +2222,8 @@ class GLONASSEphemeris(GLONASSOrbitalElements):
             Get the ECEF-Y component of satellite velocity vector in PZ-90 datum.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getYDot`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getYDot` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
         
             Returns:
                 the ECEF-Y component of satellite velocity vector in PZ-90 datum (m/s)
@@ -2234,15 +2234,15 @@ class GLONASSEphemeris(GLONASSOrbitalElements):
     def getYDotDot(self) -> float:
         """
             Description copied from
-            interface:Â :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getYDotDot`
+            interface: :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getYDotDot`
             Get the GLONASS ECEF-Y component of satellite acceleration vector in PZ-90 datum.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getYDotDot`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getYDotDot` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
         
             Returns:
-                the GLONASS ECEF-Y component of satellite acceleration vector in PZ-90 datum (m/sÂ²)
+                the GLONASS ECEF-Y component of satellite acceleration vector in PZ-90 datum (m/s²)
         
         
         """
@@ -2253,8 +2253,8 @@ class GLONASSEphemeris(GLONASSOrbitalElements):
             Get the ECEF-Z component of satellite coordinates in PZ-90 datum.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getZ`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getZ` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
         
             Returns:
                 the ECEF-Z component of satellite coordinates in PZ-90 datum (m)
@@ -2268,8 +2268,8 @@ class GLONASSEphemeris(GLONASSOrbitalElements):
             Get the ECEF-Z component of satellite velocity vector in PZ-90 datum.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getZDot`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getZDot` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
         
             Returns:
                 the the ECEF-Z component of satellite velocity vector in PZ-90 datum (m/s)
@@ -2280,15 +2280,15 @@ class GLONASSEphemeris(GLONASSOrbitalElements):
     def getZDotDot(self) -> float:
         """
             Description copied from
-            interface:Â :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getZDotDot`
+            interface: :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getZDotDot`
             Get the GLONASS ECEF-Z component of satellite acceleration vector in PZ-90 datum.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getZDotDot`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getZDotDot` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
         
             Returns:
-                the GLONASS ECEF-Z component of satellite acceleration vector in PZ-90 datum (m/sÂ²)
+                the GLONASS ECEF-Z component of satellite acceleration vector in PZ-90 datum (m/s²)
         
         
         """
@@ -2319,8 +2319,8 @@ class GLONASSNavigationMessage(AbstractEphemerisMessage, GLONASSOrbitalElements)
             Get the relative deviation of predicted satellite carrier frequency from nominal value.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getGammaN`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getGammaN` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
         
             Returns:
                 the relative deviation of predicted satellite carrier frequency from nominal value
@@ -2333,8 +2333,8 @@ class GLONASSNavigationMessage(AbstractEphemerisMessage, GLONASSOrbitalElements)
             Get the correction to the satellite time relative to GLONASS system time.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getTN`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getTN` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
         
             Returns:
                 the correction to the satellite time relative to GLONASS system time (s)
@@ -2347,8 +2347,8 @@ class GLONASSNavigationMessage(AbstractEphemerisMessage, GLONASSOrbitalElements)
             Get the Reference Time.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getTime`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getTime` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`
         
             Returns:
                 the Reference Time (s)
@@ -2399,7 +2399,7 @@ class GLONASSNavigationMessage(AbstractEphemerisMessage, GLONASSOrbitalElements)
 
 class PythonSBASOrbitalElements(SBASOrbitalElements):
     """
-    public class PythonSBASOrbitalElements extends Object implements :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
+    public class PythonSBASOrbitalElements extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -2408,8 +2408,8 @@ class PythonSBASOrbitalElements(SBASOrbitalElements):
             Gets the Zeroth Order Clock Correction.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getAGf0`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getAGf0` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
         
             Returns:
                 the Zeroth Order Clock Correction (s)
@@ -2422,8 +2422,8 @@ class PythonSBASOrbitalElements(SBASOrbitalElements):
             Gets the First Order Clock Correction.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getAGf1`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getAGf1` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
         
             Returns:
                 the First Order Clock Correction (s/s)
@@ -2449,8 +2449,8 @@ class PythonSBASOrbitalElements(SBASOrbitalElements):
             Gets the Issue Of Data Navigation (IODN).
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getIODN`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getIODN` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
         
             Returns:
                 the IODN
@@ -2463,8 +2463,8 @@ class PythonSBASOrbitalElements(SBASOrbitalElements):
             Gets the PRN number of the SBAS satellite.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getPRN`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getPRN` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
         
             Returns:
                 the PRN number of the SBAS satellite
@@ -2477,8 +2477,8 @@ class PythonSBASOrbitalElements(SBASOrbitalElements):
             Gets the Reference Time of the SBAS orbit in GPS seconds of the week.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getTime`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getTime` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
         
             Returns:
                 the Reference Time of the SBAS orbit (s)
@@ -2491,8 +2491,8 @@ class PythonSBASOrbitalElements(SBASOrbitalElements):
             Gets the clock correction reference time toc.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getToc`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getToc` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
         
             Returns:
                 the clock correction reference time (s)
@@ -2505,8 +2505,8 @@ class PythonSBASOrbitalElements(SBASOrbitalElements):
             Gets the Reference Week of the SBAS orbit.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getWeek`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getWeek` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
         
             Returns:
                 the Reference Week of the SBAS orbit
@@ -2519,8 +2519,8 @@ class PythonSBASOrbitalElements(SBASOrbitalElements):
             Get the ECEF-X component of satellite coordinates.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getX`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getX` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
         
             Returns:
                 the ECEF-X component of satellite coordinates (m)
@@ -2533,8 +2533,8 @@ class PythonSBASOrbitalElements(SBASOrbitalElements):
             Get the ECEF-X component of satellite velocity vector.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getXDot`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getXDot` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
         
             Returns:
                 the the ECEF-X component of satellite velocity vector (m/s)
@@ -2547,11 +2547,11 @@ class PythonSBASOrbitalElements(SBASOrbitalElements):
             Get the ECEF-X component of satellite acceleration vector.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getXDotDot`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getXDotDot` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
         
             Returns:
-                the GLONASS ECEF-X component of satellite acceleration vector (m/sÂ²)
+                the GLONASS ECEF-X component of satellite acceleration vector (m/s²)
         
         
         """
@@ -2561,8 +2561,8 @@ class PythonSBASOrbitalElements(SBASOrbitalElements):
             Get the ECEF-Y component of satellite coordinates.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getY`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getY` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
         
             Returns:
                 the ECEF-Y component of satellite coordinates (m)
@@ -2575,8 +2575,8 @@ class PythonSBASOrbitalElements(SBASOrbitalElements):
             Get the ECEF-Y component of satellite velocity vector.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getYDot`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getYDot` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
         
             Returns:
                 the ECEF-Y component of satellite velocity vector (m/s)
@@ -2589,11 +2589,11 @@ class PythonSBASOrbitalElements(SBASOrbitalElements):
             Get the ECEF-Y component of satellite acceleration vector.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getYDotDot`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getYDotDot` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
         
             Returns:
-                the ECEF-Y component of satellite acceleration vector (m/sÂ²)
+                the ECEF-Y component of satellite acceleration vector (m/s²)
         
         
         """
@@ -2603,8 +2603,8 @@ class PythonSBASOrbitalElements(SBASOrbitalElements):
             Get the ECEF-Z component of satellite coordinates.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getZ`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getZ` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
         
             Returns:
                 the ECEF-Z component of satellite coordinates (m)
@@ -2617,8 +2617,8 @@ class PythonSBASOrbitalElements(SBASOrbitalElements):
             Get the ECEF-Z component of satellite velocity vector.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getZDot`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getZDot` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
         
             Returns:
                 the the ECEF-Z component of satellite velocity vector (m/s)
@@ -2631,11 +2631,11 @@ class PythonSBASOrbitalElements(SBASOrbitalElements):
             Get the ECEF-Z component of satellite acceleration vector.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getZDotDot`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getZDotDot` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
         
             Returns:
-                the ECEF-Z component of satellite acceleration vector (m/sÂ²)
+                the ECEF-Z component of satellite acceleration vector (m/s²)
         
         
         """
@@ -2675,8 +2675,8 @@ class SBASNavigationMessage(AbstractEphemerisMessage, SBASOrbitalElements):
             Gets the Zeroth Order Clock Correction.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getAGf0`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getAGf0` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
         
             Returns:
                 the Zeroth Order Clock Correction (s)
@@ -2689,8 +2689,8 @@ class SBASNavigationMessage(AbstractEphemerisMessage, SBASOrbitalElements):
             Gets the First Order Clock Correction.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getAGf1`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getAGf1` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
         
             Returns:
                 the First Order Clock Correction (s/s)
@@ -2703,8 +2703,8 @@ class SBASNavigationMessage(AbstractEphemerisMessage, SBASOrbitalElements):
             Gets the Issue Of Data Navigation (IODN).
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getIODN`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getIODN` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
         
             Returns:
                 the IODN
@@ -2717,8 +2717,8 @@ class SBASNavigationMessage(AbstractEphemerisMessage, SBASOrbitalElements):
             Gets the Reference Time of the SBAS orbit in GPS seconds of the week.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getTime`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getTime` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
         
             Returns:
                 the Reference Time of the SBAS orbit (s)
@@ -2741,8 +2741,8 @@ class SBASNavigationMessage(AbstractEphemerisMessage, SBASOrbitalElements):
             Gets the Reference Week of the SBAS orbit.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getWeek`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements.getWeek` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
         
             Returns:
                 the Reference Week of the SBAS orbit
@@ -3032,8 +3032,8 @@ class GPSAlmanac(AbstractAlmanac, GNSSOrbitalElements, GNSSClockElements):
             Gets for the Group Delay Differential (s).
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getTGD`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getTGD` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements`
         
             Returns:
                 the Group Delay Differential in seconds
@@ -3086,7 +3086,7 @@ class GPSAlmanac(AbstractAlmanac, GNSSOrbitalElements, GNSSClockElements):
             Sets the source of this GPS almanac.
         
             Parameters:
-                source (String): the source of this GPS almanac
+                source (:class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the source of this GPS almanac
         
         
         """
@@ -3169,8 +3169,8 @@ class GPSNavigationMessage(AbstractNavigationMessage, GNSSOrbitalElements, GNSSC
             Getter for the Group Delay Differential (s).
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getTGD`Â in
-                interfaceÂ :class:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getTGD` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements`
         
             Returns:
                 the Group Delay Differential in seconds
@@ -3621,7 +3621,7 @@ class QZSSAlmanac(AbstractAlmanac, GNSSOrbitalElements):
             Sets the source of this GPS almanac.
         
             Parameters:
-                source (String): the source of this GPS almanac
+                source (:class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the source of this GPS almanac
         
         
         """

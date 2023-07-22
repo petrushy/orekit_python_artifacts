@@ -22,7 +22,7 @@ import typing
 
 class EpochDerivativesEquations(org.orekit.propagation.integration.AdditionalDerivativesProvider, org.orekit.propagation.integration.AdditionalEquations):
     """
-    public class EpochDerivativesEquations extends Object implements :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`, :class:`~org.orekit.propagation.integration.AdditionalEquations`
+    public class EpochDerivativesEquations extends :class:`~org.orekit.propagation.numerical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`, :class:`~org.orekit.propagation.integration.AdditionalEquations`
     
         This class is a copy of :class:`~org.orekit.propagation.numerical.AbsolutePartialDerivativesEquations` The computation
         of the derivatives of the acceleration due to a ThirdBodyAttraction has been added.
@@ -61,8 +61,8 @@ class EpochDerivativesEquations(org.orekit.propagation.integration.AdditionalDer
             backward compatibility only and will be removed in 12.0.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.combinedDerivatives`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.combinedDerivatives` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional states this equations depend on (according to the
@@ -84,8 +84,8 @@ class EpochDerivativesEquations(org.orekit.propagation.integration.AdditionalDer
             during the same propagation.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalEquations.computeDerivatives`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalEquations`
+                :meth:`~org.orekit.propagation.integration.AdditionalEquations.computeDerivatives` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional state
@@ -97,14 +97,32 @@ class EpochDerivativesEquations(org.orekit.propagation.integration.AdditionalDer
         
         """
         ...
-    def derivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]: ...
+    def derivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]:
+        """
+            Deprecated.
+            Compute the derivatives related to the additional state parameters.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.derivatives` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional states this equations depend on (according to the
+                    :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.yield` method)
+        
+            Returns:
+                computed derivatives
+        
+        
+        """
+        ...
     def getDimension(self) -> int:
         """
             Get the dimension of the generated derivative.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getDimension`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getDimension` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
             Returns:
                 dimension of the generated
@@ -131,12 +149,12 @@ class EpochDerivativesEquations(org.orekit.propagation.integration.AdditionalDer
             Get the name of the additional derivatives (which will become state once integrated).
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getName`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getName` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalEquations.getName`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalEquations`
+                :meth:`~org.orekit.propagation.integration.AdditionalEquations.getName` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
         
             Returns:
                 name of the additional state (names containing "orekit" with any case are reserved for the library internal use)
@@ -162,12 +180,12 @@ class EpochDerivativesEquations(org.orekit.propagation.integration.AdditionalDer
             Initialize the generator at the start of propagation.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.init` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalEquations.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalEquations`
+                :meth:`~org.orekit.propagation.integration.AdditionalEquations.init` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
         
             Parameters:
                 initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial state information at the start of propagation
@@ -217,8 +235,8 @@ class EpochDerivativesEquations(org.orekit.propagation.integration.AdditionalDer
         
             Parameters:
                 s1 (:class:`~org.orekit.propagation.SpacecraftState`): current state
-                dY1dY0 (double[][]): Jacobian of current state at time tâ‚� with respect to state at some previous time tâ‚€ (must be 6x6)
-                dY1dP (double[][]): Jacobian of current state at time tâ‚� with respect to parameters (may be null if no parameters are selected)
+                dY1dY0 (double[][]): Jacobian of current state at time t₁ with respect to state at some previous time t₀ (must be 6x6)
+                dY1dP (double[][]): Jacobian of current state at time t₁ with respect to parameters (may be null if no parameters are selected)
         
             Returns:
                 state with initial Jacobians added
@@ -233,7 +251,7 @@ class EpochDerivativesEquations(org.orekit.propagation.integration.AdditionalDer
 _FieldNumericalPropagator__T = typing.TypeVar('_FieldNumericalPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldNumericalPropagator(org.orekit.propagation.integration.FieldAbstractIntegratedPropagator[_FieldNumericalPropagator__T], typing.Generic[_FieldNumericalPropagator__T]):
     """
-    public class FieldNumericalPropagator<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`<T>
+    public class FieldNumericalPropagator<T extends :class:`~org.orekit.propagation.numerical.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`<T>
     
         This class propagates :class:`~org.orekit.orbits.FieldOrbit` using numerical integration.
     
@@ -277,11 +295,11 @@ class FieldNumericalPropagator(org.orekit.propagation.integration.FieldAbstractI
     
         The state that is seen by the integrator is a simple seven elements double array. The six first elements are either:
     
-          - the :class:`~org.orekit.orbits.FieldEquinoctialOrbit` (a, e :sub:`x` , e :sub:`y` , h :sub:`x` , h :sub:`y` , ÃŽÂ»
-            :sub:`M` or ÃŽÂ» :sub:`E` or ÃŽÂ» :sub:`v` ) in meters and radians,
-          - the :class:`~org.orekit.orbits.FieldKeplerianOrbit` (a, e, i, Ï‰, Î©, M or E or v) in meters and radians,
-          - the :class:`~org.orekit.orbits.FieldCircularOrbit` (a, e :sub:`x` , e :sub:`y` , i, ÃŽÂ©, ÃŽÂ± :sub:`M` or ÃŽÂ± :sub:`E`
-            or ÃŽÂ± :sub:`v` ) in meters and radians,
+          - the :class:`~org.orekit.orbits.FieldEquinoctialOrbit` (a, e :sub:`x` , e :sub:`y` , h :sub:`x` , h :sub:`y` , λ
+            :sub:`M` or λ :sub:`E` or λ :sub:`v` ) in meters and radians,
+          - the :class:`~org.orekit.orbits.FieldKeplerianOrbit` (a, e, i, ω, Ω, M or E or v) in meters and radians,
+          - the :class:`~org.orekit.orbits.FieldCircularOrbit` (a, e :sub:`x` , e :sub:`y` , i, Ω, α :sub:`M` or α :sub:`E` or α
+            :sub:`v` ) in meters and radians,
           - the :class:`~org.orekit.orbits.FieldCartesianOrbit` (x, y, z, v :sub:`x` , v :sub:`y` , v :sub:`z` ) in meters and
             meters per seconds.
     
@@ -292,16 +310,15 @@ class FieldNumericalPropagator(org.orekit.propagation.integration.FieldAbstractI
     
         .. code-block: java
         
-        
-         final T          zero      = field.getZero();
-         final T          dP        = zero.add(0.001);
-         final T          minStep   = zero.add(0.001);
-         final T          maxStep   = zero.add(500);
-         final T          initStep  = zero.add(60);
-         final double[][] tolerance = FieldNumericalPropagator.tolerances(dP, orbit, OrbitType.EQUINOCTIAL);
-         AdaptiveStepsizeFieldIntegrator<T> integrator = new DormandPrince853FieldIntegrator<>(field, minStep, maxStep, tolerance[0], tolerance[1]);
-         integrator.setInitialStepSize(initStep);
-         propagator = new FieldNumericalPropagator<>(field, integrator);
+         final T          zero      = field.getZero();
+         final T          dP        = zero.add(0.001);
+         final T          minStep   = zero.add(0.001);
+         final T          maxStep   = zero.add(500);
+         final T          initStep  = zero.add(60);
+         final double[][] tolerance = FieldNumericalPropagator.tolerances(dP, orbit, OrbitType.EQUINOCTIAL);
+         AdaptiveStepsizeFieldIntegrator<T> integrator = new DormandPrince853FieldIntegrator<>(field, minStep, maxStep, tolerance[0], tolerance[1]);
+         integrator.setInitialStepSize(initStep);
+         propagator = new FieldNumericalPropagator<>(field, integrator);
          
     
         By default, at the end of the propagation, the propagator resets the initial state to the final state, thus allowing a
@@ -343,8 +360,8 @@ class FieldNumericalPropagator(org.orekit.propagation.integration.FieldAbstractI
             Get propagation parameter type.
         
             Overrides:
-                :meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.getOrbitType`Â in
-                classÂ :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`
+                :meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.getOrbitType` in
+                class :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`
         
             Returns:
                 orbit type used for propagation
@@ -358,8 +375,8 @@ class FieldNumericalPropagator(org.orekit.propagation.integration.FieldAbstractI
             Get propagation parameter type.
         
             Overrides:
-                :meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.getPositionAngleType`Â in
-                classÂ :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`
+                :meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.getPositionAngleType` in
+                class :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`
         
             Returns:
                 angle type to use for propagation
@@ -394,18 +411,18 @@ class FieldNumericalPropagator(org.orekit.propagation.integration.FieldAbstractI
     def setInitialState(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldNumericalPropagator__T]) -> None: ...
     def setMu(self, t: _FieldNumericalPropagator__T) -> None:
         """
-            Set the central attraction coefficient Î¼.
+            Set the central attraction coefficient μ.
         
             Setting the central attraction coefficient is equivalent to
             :meth:`~org.orekit.propagation.numerical.FieldNumericalPropagator.addForceModel` a
             :class:`~org.orekit.forces.gravity.NewtonianAttraction` force model.
         
             Overrides:
-                :meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.setMu`Â in
-                classÂ :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`
+                :meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.setMu` in
+                class :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`
         
             Parameters:
-                mu (:class:`~org.orekit.propagation.numerical.FieldNumericalPropagator`): central attraction coefficient (mÂ³/sÂ²)
+                mu (:class:`~org.orekit.propagation.numerical.FieldNumericalPropagator`): central attraction coefficient (m³/s²)
         
             Also see:
                 :meth:`~org.orekit.propagation.numerical.FieldNumericalPropagator.addForceModel`,
@@ -419,8 +436,8 @@ class FieldNumericalPropagator(org.orekit.propagation.integration.FieldAbstractI
             Set propagation orbit type.
         
             Overrides:
-                :meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.setOrbitType`Â in
-                classÂ :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`
+                :meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.setOrbitType` in
+                class :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`
         
             Parameters:
                 orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use for propagation
@@ -437,8 +454,8 @@ class FieldNumericalPropagator(org.orekit.propagation.integration.FieldAbstractI
             meaningful for propagation in :meth:`~org.orekit.orbits.OrbitType.CARTESIAN` parameters.
         
             Overrides:
-                :meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.setPositionAngleType`Â in
-                classÂ :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`
+                :meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.setPositionAngleType` in
+                class :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`
         
             Parameters:
                 positionAngleType (:class:`~org.orekit.orbits.PositionAngle`): angle type to use for propagation
@@ -488,8 +505,7 @@ class FieldNumericalPropagator(org.orekit.propagation.integration.FieldAbstractI
         
             .. code-block: java
             
-            
-             V rÂ² |dV| = mu |dr|
+             V r² |dV| = mu |dr|
              
             So we deduce a scalar velocity error consistent with the position error. From here, we apply orbits Jacobians matrices
             to get consistent errors on orbital parameters.
@@ -512,7 +528,7 @@ class FieldNumericalPropagator(org.orekit.propagation.integration.FieldAbstractI
 _FieldTimeDerivativesEquations__T = typing.TypeVar('_FieldTimeDerivativesEquations__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldTimeDerivativesEquations(typing.Generic[_FieldTimeDerivativesEquations__T]):
     """
-    public interface FieldTimeDerivativesEquations<T extends CalculusFieldElement<T>>
+    public interface FieldTimeDerivativesEquations<T extends :class:`~org.orekit.propagation.numerical.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>>
     
         Interface summing up the contribution of several forces into orbit and mass derivatives.
     
@@ -548,7 +564,7 @@ class FieldTimeDerivativesEquations(typing.Generic[_FieldTimeDerivativesEquation
                 q (:class:`~org.orekit.propagation.numerical.FieldTimeDerivativesEquations`): the flow rate, must be negative (dm/dt)
         
             Raises:
-                : if flow-rate is positive
+                :class:`~org.orekit.propagation.numerical.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if flow-rate is positive
         
         
         """
@@ -561,7 +577,9 @@ class GLONASSNumericalPropagator(org.orekit.propagation.integration.AbstractInte
     
         This class propagates GLONASS orbits using numerical integration.
     
-        As recommended by the GLONASS Interface Control Document (ICD), a null shall be used to integrate the equations.
+        As recommended by the GLONASS Interface Control Document (ICD), a
+        :class:`~org.orekit.propagation.numerical.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.ClassicalRungeKuttaIntegrator?is`
+        shall be used to integrate the equations.
     
         Classical used of this orbit propagator is to compute GLONASS satellite coordinates from the navigation message.
     
@@ -571,6 +589,10 @@ class GLONASSNumericalPropagator(org.orekit.propagation.integration.AbstractInte
         :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getZDotDot` are available in the navigation
         message; a transformation is performed to convert these accelerations into the correct coordinate system. In the case
         where they are not available into the navigation message, these accelerations are computed.
+    
+        **Caution:** The Glonass numerical propagator can only be used with
+        :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSNavigationMessage`. Using this propagator with a
+        :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSAlmanac` is prone to error.
     
         Also see:
             ` GLONASS Interface Control Document
@@ -602,8 +624,8 @@ class GLONASSNumericalPropagator(org.orekit.propagation.integration.AbstractInte
                 :meth:`~org.orekit.propagation.Propagator.propagate` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.propagate`Â in
-                classÂ :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`
+                :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.propagate` in
+                class :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): target date towards which orbit state should be propagated
@@ -617,11 +639,15 @@ class GLONASSNumericalPropagator(org.orekit.propagation.integration.AbstractInte
 
 class GLONASSNumericalPropagatorBuilder:
     """
-    public class GLONASSNumericalPropagatorBuilder extends Object
+    public class GLONASSNumericalPropagatorBuilder extends :class:`~org.orekit.propagation.numerical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This nested class aims at building a GLONASSNumericalPropagator.
     
         It implements the classical builder pattern.
+    
+        **Caution:** The Glonass numerical propagator can only be used with
+        :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSNavigationMessage`. Using this propagator with a
+        :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSAlmanac` is prone to error.
     
         Since:
             11.0
@@ -718,8 +744,8 @@ class JacobiansMapper(org.orekit.propagation.integration.AbstractJacobiansMapper
             which can safely be null in this case.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getParametersJacobian`Â in
-                classÂ :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
+                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getParametersJacobian` in
+                class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -741,8 +767,8 @@ class JacobiansMapper(org.orekit.propagation.integration.AbstractJacobiansMapper
         
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getStateJacobian`Â in
-                classÂ :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
+                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getStateJacobian` in
+                class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -762,13 +788,13 @@ class JacobiansMapper(org.orekit.propagation.integration.AbstractJacobiansMapper
             array.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.setInitialJacobians`Â in
-                classÂ :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
+                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.setInitialJacobians` in
+                class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
-                dY1dY0 (double[][]): Jacobian of current state at time tâ‚� with respect to state at some previous time tâ‚€
-                dY1dP (double[][]): Jacobian of current state at time tâ‚� with respect to parameters (may be null if there are no parameters)
+                dY1dY0 (double[][]): Jacobian of current state at time t₁ with respect to state at some previous time t₀
+                dY1dP (double[][]): Jacobian of current state at time t₁ with respect to parameters (may be null if there are no parameters)
                 p (double[]): placeholder where to put the one-dimensional additional state
         
             Also see:
@@ -825,11 +851,11 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
     
         The state that is seen by the integrator is a simple seven elements double array. The six first elements are either:
     
-          - the :class:`~org.orekit.orbits.EquinoctialOrbit` (a, e :sub:`x` , e :sub:`y` , h :sub:`x` , h :sub:`y` , ÃŽÂ» :sub:`M`
-            or ÃŽÂ» :sub:`E` or ÃŽÂ» :sub:`v` ) in meters and radians,
-          - the :class:`~org.orekit.orbits.KeplerianOrbit` (a, e, i, Ï‰, Î©, M or E or v) in meters and radians,
-          - the :class:`~org.orekit.orbits.CircularOrbit` (a, e :sub:`x` , e :sub:`y` , i, ÃŽÂ©, ÃŽÂ± :sub:`M` or ÃŽÂ± :sub:`E` or
-            ÃŽÂ± :sub:`v` ) in meters and radians,
+          - the :class:`~org.orekit.orbits.EquinoctialOrbit` (a, e :sub:`x` , e :sub:`y` , h :sub:`x` , h :sub:`y` , λ :sub:`M` or
+            λ :sub:`E` or λ :sub:`v` ) in meters and radians,
+          - the :class:`~org.orekit.orbits.KeplerianOrbit` (a, e, i, ω, Ω, M or E or v) in meters and radians,
+          - the :class:`~org.orekit.orbits.CircularOrbit` (a, e :sub:`x` , e :sub:`y` , i, Ω, α :sub:`M` or α :sub:`E` or α
+            :sub:`v` ) in meters and radians,
           - the :class:`~org.orekit.orbits.CartesianOrbit` (x, y, z, v :sub:`x` , v :sub:`y` , v :sub:`z` ) in meters and meters per
             seconds.
     
@@ -841,15 +867,14 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
     
         .. code-block: java
         
-        
-         final double dP       = 0.001;
-         final double minStep  = 0.001;
-         final double maxStep  = 500;
-         final double initStep = 60;
-         final double[][] tolerance = NumericalPropagator.tolerances(dP, orbit, OrbitType.EQUINOCTIAL);
-         AdaptiveStepsizeIntegrator integrator = new DormandPrince853Integrator(minStep, maxStep, tolerance[0], tolerance[1]);
-         integrator.setInitialStepSize(initStep);
-         propagator = new NumericalPropagator(integrator);
+         final double dP       = 0.001;
+         final double minStep  = 0.001;
+         final double maxStep  = 500;
+         final double initStep = 60;
+         final double[][] tolerance = NumericalPropagator.tolerances(dP, orbit, OrbitType.EQUINOCTIAL);
+         AdaptiveStepsizeIntegrator integrator = new DormandPrince853Integrator(minStep, maxStep, tolerance[0], tolerance[1]);
+         integrator.setInitialStepSize(initStep);
+         propagator = new NumericalPropagator(integrator);
          
     
         By default, at the end of the propagation, the propagator resets the initial state to the final state, thus allowing a
@@ -892,8 +917,8 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
             Get propagation parameter type.
         
             Overrides:
-                :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.getOrbitType`Â in
-                classÂ :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`
+                :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.getOrbitType` in
+                class :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`
         
             Returns:
                 orbit type used for propagation, null for propagating using :class:`~org.orekit.utils.AbsolutePVCoordinates` rather than
@@ -907,12 +932,12 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
             Get the :class:`~org.orekit.utils.PVCoordinates` of the body in the selected frame.
         
             Specified by:
-                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates`Â in
-                interfaceÂ :class:`~org.orekit.utils.PVCoordinatesProvider`
+                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates` in
+                interface :class:`~org.orekit.utils.PVCoordinatesProvider`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.getPVCoordinates`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.getPVCoordinates` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
@@ -929,8 +954,8 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
             Get propagation parameter type.
         
             Overrides:
-                :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.getPositionAngleType`Â in
-                classÂ :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`
+                :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.getPositionAngleType` in
+                class :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`
         
             Returns:
                 angle type to use for propagation
@@ -959,8 +984,8 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
                 :meth:`~org.orekit.propagation.Propagator.resetInitialState` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): new initial state to consider
@@ -990,18 +1015,18 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
         ...
     def setMu(self, double: float) -> None:
         """
-            Set the central attraction coefficient Î¼.
+            Set the central attraction coefficient μ.
         
             Setting the central attraction coefficient is equivalent to
             :meth:`~org.orekit.propagation.numerical.NumericalPropagator.addForceModel` a
             :class:`~org.orekit.forces.gravity.NewtonianAttraction` force model.
         
             Overrides:
-                :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.setMu`Â in
-                classÂ :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`
+                :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.setMu` in
+                class :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`
         
             Parameters:
-                mu (double): central attraction coefficient (mÂ³/sÂ²)
+                mu (double): central attraction coefficient (m³/s²)
         
             Also see:
                 :meth:`~org.orekit.propagation.numerical.NumericalPropagator.addForceModel`,
@@ -1015,8 +1040,8 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
             Set propagation orbit type.
         
             Overrides:
-                :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.setOrbitType`Â in
-                classÂ :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`
+                :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.setOrbitType` in
+                class :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`
         
             Parameters:
                 orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use for propagation, null for propagating using :class:`~org.orekit.utils.AbsolutePVCoordinates` rather
@@ -1034,8 +1059,8 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
             meaningful for propagation in :meth:`~org.orekit.orbits.OrbitType.CARTESIAN` parameters.
         
             Overrides:
-                :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.setPositionAngleType`Â in
-                classÂ :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`
+                :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.setPositionAngleType` in
+                class :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`
         
             Parameters:
                 positionAngleType (:class:`~org.orekit.orbits.PositionAngle`): angle type to use for propagation
@@ -1083,8 +1108,7 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
         
             .. code-block: java
             
-            
-             V rÂ² |dV| = mu |dr|
+             V r² |dV| = mu |dr|
              
         
             So we deduce a scalar velocity error consistent with the position error. From here, we apply orbits Jacobians matrices
@@ -1125,7 +1149,7 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
 
 class PartialDerivativesEquations(org.orekit.propagation.integration.AdditionalDerivativesProvider, org.orekit.propagation.integration.AdditionalEquations):
     """
-    @Deprecated public class PartialDerivativesEquations extends Object implements :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`, :class:`~org.orekit.propagation.integration.AdditionalEquations`
+    :class:`~org.orekit.propagation.numerical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class PartialDerivativesEquations extends :class:`~org.orekit.propagation.numerical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`, :class:`~org.orekit.propagation.integration.AdditionalEquations`
     
         Deprecated.
         as of 11.1, replaced by :meth:`~org.orekit.propagation.Propagator.setupMatricesComputation`
@@ -1162,8 +1186,8 @@ class PartialDerivativesEquations(org.orekit.propagation.integration.AdditionalD
             backward compatibility only and will be removed in 12.0.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.combinedDerivatives`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.combinedDerivatives` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional states this equations depend on (according to the
@@ -1186,8 +1210,8 @@ class PartialDerivativesEquations(org.orekit.propagation.integration.AdditionalD
             during the same propagation.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalEquations.computeDerivatives`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalEquations`
+                :meth:`~org.orekit.propagation.integration.AdditionalEquations.computeDerivatives` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional state
@@ -1199,15 +1223,33 @@ class PartialDerivativesEquations(org.orekit.propagation.integration.AdditionalD
         
         """
         ...
-    def derivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]: ...
+    def derivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]:
+        """
+            Deprecated.
+            Compute the derivatives related to the additional state parameters.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.derivatives` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional states this equations depend on (according to the
+                    :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.yield` method)
+        
+            Returns:
+                computed derivatives
+        
+        
+        """
+        ...
     def getDimension(self) -> int:
         """
             Deprecated.
             Get the dimension of the generated derivative.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getDimension`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getDimension` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
             Returns:
                 dimension of the generated
@@ -1236,12 +1278,12 @@ class PartialDerivativesEquations(org.orekit.propagation.integration.AdditionalD
             Get the name of the additional derivatives (which will become state once integrated).
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getName`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getName` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalEquations.getName`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalEquations`
+                :meth:`~org.orekit.propagation.integration.AdditionalEquations.getName` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
         
             Returns:
                 name of the additional state (names containing "orekit" with any case are reserved for the library internal use)
@@ -1269,12 +1311,12 @@ class PartialDerivativesEquations(org.orekit.propagation.integration.AdditionalD
             Initialize the generator at the start of propagation.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.init` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalEquations.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalEquations`
+                :meth:`~org.orekit.propagation.integration.AdditionalEquations.init` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
         
             Parameters:
                 initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial state information at the start of propagation
@@ -1340,8 +1382,8 @@ class PartialDerivativesEquations(org.orekit.propagation.integration.AdditionalD
         
             Parameters:
                 s1 (:class:`~org.orekit.propagation.SpacecraftState`): current state
-                dY1dY0 (double[][]): Jacobian of current state at time tâ‚� with respect to state at some previous time tâ‚€ (must be 6x6)
-                dY1dP (double[][]): Jacobian of current state at time tâ‚� with respect to parameters (may be null if no parameters are selected)
+                dY1dY0 (double[][]): Jacobian of current state at time t₁ with respect to state at some previous time t₀ (must be 6x6)
+                dY1dP (double[][]): Jacobian of current state at time t₁ with respect to parameters (may be null if no parameters are selected)
         
             Returns:
                 state with initial Jacobians added
@@ -1391,7 +1433,7 @@ class TimeDerivativesEquations:
                 q (double): the flow rate, must be negative (dm/dt)
         
             Raises:
-                : if flow-rate is positive
+                :class:`~org.orekit.propagation.numerical.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if flow-rate is positive
         
         
         """
@@ -1401,7 +1443,7 @@ class TimeDerivativesEquations:
             Add the contribution of a non-Keplerian acceleration.
         
             Parameters:
-                gamma (Vector3D): acceleration vector in the same inertial frame the spacecraft state is defined in (m/sÂ²)
+                gamma (:class:`~org.orekit.propagation.numerical.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): acceleration vector in the same inertial frame the spacecraft state is defined in (m/s²)
         
             Since:
                 9.0
@@ -1441,7 +1483,7 @@ class AbsoluteJacobiansMapper(JacobiansMapper):
 
 class AbsolutePartialDerivativesEquations(PartialDerivativesEquations):
     """
-    @Deprecated public class AbsolutePartialDerivativesEquations extends :class:`~org.orekit.propagation.numerical.PartialDerivativesEquations`
+    :class:`~org.orekit.propagation.numerical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class AbsolutePartialDerivativesEquations extends :class:`~org.orekit.propagation.numerical.PartialDerivativesEquations`
     
         Deprecated.
         as of 11.1, this class is not used anymore
@@ -1477,8 +1519,8 @@ class AbsolutePartialDerivativesEquations(PartialDerivativesEquations):
             Get a mapper between two-dimensional Jacobians and one-dimensional additional state.
         
             Overrides:
-                :meth:`~org.orekit.propagation.numerical.PartialDerivativesEquations.getMapper`Â in
-                classÂ :class:`~org.orekit.propagation.numerical.PartialDerivativesEquations`
+                :meth:`~org.orekit.propagation.numerical.PartialDerivativesEquations.getMapper` in
+                class :class:`~org.orekit.propagation.numerical.PartialDerivativesEquations`
         
             Returns:
                 a mapper between two-dimensional Jacobians and one-dimensional additional state, with the same name as the instance
@@ -1494,7 +1536,7 @@ class AbsolutePartialDerivativesEquations(PartialDerivativesEquations):
 _PythonFieldTimeDerivativesEquations__T = typing.TypeVar('_PythonFieldTimeDerivativesEquations__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldTimeDerivativesEquations(FieldTimeDerivativesEquations[_PythonFieldTimeDerivativesEquations__T], typing.Generic[_PythonFieldTimeDerivativesEquations__T]):
     """
-    public class PythonFieldTimeDerivativesEquations<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.numerical.FieldTimeDerivativesEquations`<T>
+    public class PythonFieldTimeDerivativesEquations<T extends :class:`~org.orekit.propagation.numerical.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.numerical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.numerical.FieldTimeDerivativesEquations`<T>
     """
     def __init__(self): ...
     def addKeplerContribution(self, t: _PythonFieldTimeDerivativesEquations__T) -> None:
@@ -1505,8 +1547,8 @@ class PythonFieldTimeDerivativesEquations(FieldTimeDerivativesEquations[_PythonF
             numerical accuracy.
         
             Specified by:
-                :meth:`~org.orekit.propagation.numerical.FieldTimeDerivativesEquations.addKeplerContribution`Â in
-                interfaceÂ :class:`~org.orekit.propagation.numerical.FieldTimeDerivativesEquations`
+                :meth:`~org.orekit.propagation.numerical.FieldTimeDerivativesEquations.addKeplerContribution` in
+                interface :class:`~org.orekit.propagation.numerical.FieldTimeDerivativesEquations`
         
             Parameters:
                 mu (:class:`~org.orekit.propagation.numerical.PythonFieldTimeDerivativesEquations`): central body gravitational constant
@@ -1519,14 +1561,14 @@ class PythonFieldTimeDerivativesEquations(FieldTimeDerivativesEquations[_PythonF
             Add the contribution of the flow rate (dm/dt).
         
             Specified by:
-                :meth:`~org.orekit.propagation.numerical.FieldTimeDerivativesEquations.addMassDerivative`Â in
-                interfaceÂ :class:`~org.orekit.propagation.numerical.FieldTimeDerivativesEquations`
+                :meth:`~org.orekit.propagation.numerical.FieldTimeDerivativesEquations.addMassDerivative` in
+                interface :class:`~org.orekit.propagation.numerical.FieldTimeDerivativesEquations`
         
             Parameters:
                 q (:class:`~org.orekit.propagation.numerical.PythonFieldTimeDerivativesEquations`): the flow rate, must be negative (dm/dt)
         
             Raises:
-                : if flow-rate is positive
+                :class:`~org.orekit.propagation.numerical.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if flow-rate is positive
         
         
         """
@@ -1555,7 +1597,7 @@ class PythonFieldTimeDerivativesEquations(FieldTimeDerivativesEquations[_PythonF
 
 class PythonTimeDerivativesEquations(TimeDerivativesEquations):
     """
-    public class PythonTimeDerivativesEquations extends Object implements :class:`~org.orekit.propagation.numerical.TimeDerivativesEquations`
+    public class PythonTimeDerivativesEquations extends :class:`~org.orekit.propagation.numerical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.numerical.TimeDerivativesEquations`
     """
     def __init__(self): ...
     def addKeplerContribution(self, double: float) -> None:
@@ -1566,8 +1608,8 @@ class PythonTimeDerivativesEquations(TimeDerivativesEquations):
             numerical accuracy.
         
             Specified by:
-                :meth:`~org.orekit.propagation.numerical.TimeDerivativesEquations.addKeplerContribution`Â in
-                interfaceÂ :class:`~org.orekit.propagation.numerical.TimeDerivativesEquations`
+                :meth:`~org.orekit.propagation.numerical.TimeDerivativesEquations.addKeplerContribution` in
+                interface :class:`~org.orekit.propagation.numerical.TimeDerivativesEquations`
         
             Parameters:
                 mu (double): central body gravitational constant
@@ -1580,14 +1622,14 @@ class PythonTimeDerivativesEquations(TimeDerivativesEquations):
             Add the contribution of the flow rate (dm/dt).
         
             Specified by:
-                :meth:`~org.orekit.propagation.numerical.TimeDerivativesEquations.addMassDerivative`Â in
-                interfaceÂ :class:`~org.orekit.propagation.numerical.TimeDerivativesEquations`
+                :meth:`~org.orekit.propagation.numerical.TimeDerivativesEquations.addMassDerivative` in
+                interface :class:`~org.orekit.propagation.numerical.TimeDerivativesEquations`
         
             Parameters:
                 q (double): the flow rate, must be negative (dm/dt)
         
             Raises:
-                : if flow-rate is positive
+                :class:`~org.orekit.propagation.numerical.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if flow-rate is positive
         
         
         """
@@ -1597,11 +1639,11 @@ class PythonTimeDerivativesEquations(TimeDerivativesEquations):
             Add the contribution of a non-Keplerian acceleration.
         
             Specified by:
-                :meth:`~org.orekit.propagation.numerical.TimeDerivativesEquations.addNonKeplerianAcceleration`Â in
-                interfaceÂ :class:`~org.orekit.propagation.numerical.TimeDerivativesEquations`
+                :meth:`~org.orekit.propagation.numerical.TimeDerivativesEquations.addNonKeplerianAcceleration` in
+                interface :class:`~org.orekit.propagation.numerical.TimeDerivativesEquations`
         
             Parameters:
-                gamma (Vector3D): acceleration vector in the same inertial frame the spacecraft state is defined in (m/sÂ²)
+                gamma (:class:`~org.orekit.propagation.numerical.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): acceleration vector in the same inertial frame the spacecraft state is defined in (m/s²)
         
             Since:
                 9.0

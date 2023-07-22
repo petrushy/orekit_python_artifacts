@@ -72,7 +72,7 @@ class MultipleLinearRegression:
 
 class RegressionResults(java.io.Serializable):
     """
-    public class RegressionResults extends Object implements Serializable
+    public class RegressionResults extends :class:`~org.hipparchus.stat.regression.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.stat.regression.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Results of a Multiple Linear Regression model fit.
     
@@ -315,7 +315,7 @@ class AbstractMultipleLinearRegression(MultipleLinearRegression):
 
 class MillerUpdatingRegression(UpdatingMultipleLinearRegression):
     """
-    public class MillerUpdatingRegression extends Object implements :class:`~org.hipparchus.stat.regression.UpdatingMultipleLinearRegression`
+    public class MillerUpdatingRegression extends :class:`~org.hipparchus.stat.regression.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.stat.regression.UpdatingMultipleLinearRegression`
     
         This class is a concrete implementation of the :class:`~org.hipparchus.stat.regression.UpdatingMultipleLinearRegression`
         interface.
@@ -346,8 +346,8 @@ class MillerUpdatingRegression(UpdatingMultipleLinearRegression):
             As the name suggests, clear wipes the internals and reorders everything in the canonical order.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.regression.UpdatingMultipleLinearRegression.clear`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.regression.UpdatingMultipleLinearRegression`
+                :meth:`~org.hipparchus.stat.regression.UpdatingMultipleLinearRegression.clear` in
+                interface :class:`~org.hipparchus.stat.regression.UpdatingMultipleLinearRegression`
         
         
         """
@@ -370,8 +370,8 @@ class MillerUpdatingRegression(UpdatingMultipleLinearRegression):
             Gets the number of observations added to the regression model.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.regression.UpdatingMultipleLinearRegression.getN`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.regression.UpdatingMultipleLinearRegression`
+                :meth:`~org.hipparchus.stat.regression.UpdatingMultipleLinearRegression.getN` in
+                interface :class:`~org.hipparchus.stat.regression.UpdatingMultipleLinearRegression`
         
             Returns:
                 number of observations
@@ -434,8 +434,8 @@ class MillerUpdatingRegression(UpdatingMultipleLinearRegression):
             A getter method which determines whether a constant is included.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.regression.UpdatingMultipleLinearRegression.hasIntercept`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.regression.UpdatingMultipleLinearRegression`
+                :meth:`~org.hipparchus.stat.regression.UpdatingMultipleLinearRegression.hasIntercept` in
+                interface :class:`~org.hipparchus.stat.regression.UpdatingMultipleLinearRegression`
         
             Returns:
                 true regression has an intercept, false no intercept

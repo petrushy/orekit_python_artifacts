@@ -105,8 +105,8 @@ class CartesianCovariance(org.orekit.files.ccsds.section.CommentsContainer, org.
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
+                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
         
             Parameters:
                 version (double): format version
@@ -117,7 +117,7 @@ class CartesianCovariance(org.orekit.files.ccsds.section.CommentsContainer, org.
 
 class CartesianCovarianceKey(java.lang.Enum['CartesianCovarianceKey']):
     """
-    public enum CartesianCovarianceKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.odm.CartesianCovarianceKey`>
+    public enum CartesianCovarianceKey extends :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.CartesianCovarianceKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.odm.CartesianCovariance` entries.
     
@@ -175,14 +175,14 @@ class CartesianCovarianceKey(java.lang.Enum['CartesianCovarianceKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -195,9 +195,8 @@ class CartesianCovarianceKey(java.lang.Enum['CartesianCovarianceKey']):
         
             .. code-block: java
             
-            
-            for (CartesianCovarianceKey c : CartesianCovarianceKey.values())
-                System.out.println(c);
+            for (CartesianCovarianceKey c : CartesianCovarianceKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -220,7 +219,7 @@ class CartesianCovarianceWriter(org.orekit.files.ccsds.section.AbstractWriter):
 
 class CommonMetadataKey(java.lang.Enum['CommonMetadataKey']):
     """
-    public enum CommonMetadataKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.odm.CommonMetadataKey`>
+    public enum CommonMetadataKey extends :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.CommonMetadataKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.odm.CommonMetadata` entries.
     
@@ -258,14 +257,14 @@ class CommonMetadataKey(java.lang.Enum['CommonMetadataKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -278,9 +277,8 @@ class CommonMetadataKey(java.lang.Enum['CommonMetadataKey']):
         
             .. code-block: java
             
-            
-            for (CommonMetadataKey c : CommonMetadataKey.values())
-                System.out.println(c);
+            for (CommonMetadataKey c : CommonMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -536,8 +534,8 @@ class KeplerianElements(org.orekit.files.ccsds.section.CommentsContainer, org.or
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
+                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
         
             Parameters:
                 version (double): format version
@@ -548,7 +546,7 @@ class KeplerianElements(org.orekit.files.ccsds.section.CommentsContainer, org.or
 
 class KeplerianElementsKey(java.lang.Enum['KeplerianElementsKey']):
     """
-    public enum KeplerianElementsKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.odm.KeplerianElementsKey`>
+    public enum KeplerianElementsKey extends :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.KeplerianElementsKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.odm.KeplerianElements` entries.
     
@@ -593,14 +591,14 @@ class KeplerianElementsKey(java.lang.Enum['KeplerianElementsKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -613,9 +611,8 @@ class KeplerianElementsKey(java.lang.Enum['KeplerianElementsKey']):
         
             .. code-block: java
             
-            
-            for (KeplerianElementsKey c : KeplerianElementsKey.values())
-                System.out.println(c);
+            for (KeplerianElementsKey c : KeplerianElementsKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -649,7 +646,7 @@ class OdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Set the spacecraft name for which the orbit state is provided.
         
             Parameters:
-                objectName (String): the spacecraft name to be set
+                objectName (:class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the spacecraft name to be set
         
         
         """
@@ -657,7 +654,7 @@ class OdmMetadata(org.orekit.files.ccsds.section.Metadata):
 
 class OdmMetadataKey(java.lang.Enum['OdmMetadataKey']):
     """
-    public enum OdmMetadataKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.odm.OdmMetadataKey`>
+    public enum OdmMetadataKey extends :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.OdmMetadataKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.odm.OdmMetadata` entries.
     
@@ -692,14 +689,14 @@ class OdmMetadataKey(java.lang.Enum['OdmMetadataKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -712,9 +709,8 @@ class OdmMetadataKey(java.lang.Enum['OdmMetadataKey']):
         
             .. code-block: java
             
-            
-            for (OdmMetadataKey c : OdmMetadataKey.values())
-                System.out.println(c);
+            for (OdmMetadataKey c : OdmMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -886,8 +882,8 @@ class SpacecraftParameters(org.orekit.files.ccsds.section.CommentsContainer, org
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
+                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
         
             Parameters:
                 version (double): format version
@@ -898,7 +894,7 @@ class SpacecraftParameters(org.orekit.files.ccsds.section.CommentsContainer, org
 
 class SpacecraftParametersKey(java.lang.Enum['SpacecraftParametersKey']):
     """
-    public enum SpacecraftParametersKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.odm.SpacecraftParametersKey`>
+    public enum SpacecraftParametersKey extends :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.SpacecraftParametersKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.odm.SpacecraftParameters` entries.
     
@@ -938,14 +934,14 @@ class SpacecraftParametersKey(java.lang.Enum['SpacecraftParametersKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -958,9 +954,8 @@ class SpacecraftParametersKey(java.lang.Enum['SpacecraftParametersKey']):
         
             .. code-block: java
             
-            
-            for (SpacecraftParametersKey c : SpacecraftParametersKey.values())
-                System.out.println(c);
+            for (SpacecraftParametersKey c : SpacecraftParametersKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1074,8 +1069,8 @@ class StateVector(org.orekit.files.ccsds.section.CommentsContainer):
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
+                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
         
             Parameters:
                 version (double): format version
@@ -1086,7 +1081,7 @@ class StateVector(org.orekit.files.ccsds.section.CommentsContainer):
 
 class StateVectorKey(java.lang.Enum['StateVectorKey']):
     """
-    public enum StateVectorKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.odm.StateVectorKey`>
+    public enum StateVectorKey extends :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.StateVectorKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.odm.StateVector` entries.
     
@@ -1131,14 +1126,14 @@ class StateVectorKey(java.lang.Enum['StateVectorKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -1151,9 +1146,8 @@ class StateVectorKey(java.lang.Enum['StateVectorKey']):
         
             .. code-block: java
             
-            
-            for (StateVectorKey c : StateVectorKey.values())
-                System.out.println(c);
+            for (StateVectorKey c : StateVectorKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1185,7 +1179,7 @@ class UserDefined(org.orekit.files.ccsds.section.CommentsContainer):
     """
     USER_DEFINED_XML_TAG: typing.ClassVar[str] = ...
     """
-    public static final String USER_DEFINED_XML_TAG
+    public static final :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` USER_DEFINED_XML_TAG
     
         Tag name for user defined parameters keys.
     
@@ -1196,7 +1190,7 @@ class UserDefined(org.orekit.files.ccsds.section.CommentsContainer):
     """
     USER_DEFINED_XML_ATTRIBUTE: typing.ClassVar[str] = ...
     """
-    public static final String USER_DEFINED_XML_ATTRIBUTE
+    public static final :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` USER_DEFINED_XML_ATTRIBUTE
     
         Attribute name for user defined parameters keys.
     
@@ -1207,7 +1201,7 @@ class UserDefined(org.orekit.files.ccsds.section.CommentsContainer):
     """
     USER_DEFINED_PREFIX: typing.ClassVar[str] = ...
     """
-    public static final String USER_DEFINED_PREFIX
+    public static final :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` USER_DEFINED_PREFIX
     
         Prefix for user defined parameters keys.
     
@@ -1222,24 +1216,13 @@ class UserDefined(org.orekit.files.ccsds.section.CommentsContainer):
             Add a key/value entry.
         
             Parameters:
-                key (String): parameter key, with the :meth:`~org.orekit.files.ccsds.ndm.odm.UserDefined.USER_DEFINED_PREFIX` stripped away
-                value (String): parameter value
+                key (:class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): parameter key, with the :meth:`~org.orekit.files.ccsds.ndm.odm.UserDefined.USER_DEFINED_PREFIX` stripped away
+                value (:class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): parameter value
         
         
         """
         ...
-    def getParameters(self) -> java.util.Map[str, str]:
-        """
-            Get all user defined parameters.
-        
-            The :meth:`~org.orekit.files.ccsds.ndm.odm.UserDefined.USER_DEFINED_PREFIX` has been stripped away from the keys.
-        
-            Returns:
-                unmodifiable view of the map containing all user defined parameters
-        
-        
-        """
-        ...
+    def getParameters(self) -> java.util.Map[str, str]: ...
 
 class UserDefinedWriter(org.orekit.files.ccsds.section.AbstractWriter):
     """
@@ -1386,7 +1369,7 @@ class CommonMetadata(OdmMetadata):
             Set epoch of reference frame, if not intrinsic to the definition of the reference frame.
         
             Parameters:
-                frameEpochString (String): the epoch of reference frame to be set
+                frameEpochString (:class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the epoch of reference frame to be set
         
         
         """
@@ -1396,7 +1379,7 @@ class CommonMetadata(OdmMetadata):
             Set the spacecraft ID for which the orbit state is provided.
         
             Parameters:
-                objectID (String): the spacecraft ID to be set
+                objectID (:class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the spacecraft ID to be set
         
         
         """
@@ -1454,8 +1437,8 @@ class PythonOdmParser(OdmParser[_PythonOdmParser__T, _PythonOdmParser__P], typin
             Finalize data after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -1468,8 +1451,8 @@ class PythonOdmParser(OdmParser[_PythonOdmParser__T, _PythonOdmParser__P], typin
             Finalize header after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -1482,8 +1465,8 @@ class PythonOdmParser(OdmParser[_PythonOdmParser__T, _PythonOdmParser__P], typin
             Finalize metadata after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -1496,8 +1479,8 @@ class PythonOdmParser(OdmParser[_PythonOdmParser__T, _PythonOdmParser__P], typin
             Get the file format.
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractMessageParser.getFileFormat`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractMessageParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractMessageParser.getFileFormat` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractMessageParser`
         
             Returns:
                 file format
@@ -1510,8 +1493,8 @@ class PythonOdmParser(OdmParser[_PythonOdmParser__T, _PythonOdmParser__P], typin
             Get file header to fill.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 file header to fill
@@ -1537,8 +1520,8 @@ class PythonOdmParser(OdmParser[_PythonOdmParser__T, _PythonOdmParser__P], typin
             Acknowledge data parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -1551,8 +1534,8 @@ class PythonOdmParser(OdmParser[_PythonOdmParser__T, _PythonOdmParser__P], typin
             Acknowledge header parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -1565,8 +1548,8 @@ class PythonOdmParser(OdmParser[_PythonOdmParser__T, _PythonOdmParser__P], typin
             Acknowledge metada parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -1579,8 +1562,8 @@ class PythonOdmParser(OdmParser[_PythonOdmParser__T, _PythonOdmParser__P], typin
             Prepare data for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -1593,8 +1576,8 @@ class PythonOdmParser(OdmParser[_PythonOdmParser__T, _PythonOdmParser__P], typin
             Prepare header for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -1607,8 +1590,8 @@ class PythonOdmParser(OdmParser[_PythonOdmParser__T, _PythonOdmParser__P], typin
             Prepare metadata for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -1650,8 +1633,8 @@ class PythonOdmParser(OdmParser[_PythonOdmParser__T, _PythonOdmParser__P], typin
             Set the gravitational coefficient created from the knowledge of the central body.
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.ndm.odm.OdmParser.setMuCreated`Â in
-                classÂ :class:`~org.orekit.files.ccsds.ndm.odm.OdmParser`
+                :meth:`~org.orekit.files.ccsds.ndm.odm.OdmParser.setMuCreated` in
+                class :class:`~org.orekit.files.ccsds.ndm.odm.OdmParser`
         
             Parameters:
                 muCreated (double): the coefficient to be set
@@ -1664,8 +1647,8 @@ class PythonOdmParser(OdmParser[_PythonOdmParser__T, _PythonOdmParser__P], typin
             Set the gravitational coefficient parsed in the ODM File.
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.ndm.odm.OdmParser.setMuParsed`Â in
-                classÂ :class:`~org.orekit.files.ccsds.ndm.odm.OdmParser`
+                :meth:`~org.orekit.files.ccsds.ndm.odm.OdmParser.setMuParsed` in
+                class :class:`~org.orekit.files.ccsds.ndm.odm.OdmParser`
         
             Parameters:
                 muParsed (double): the coefficient to be set

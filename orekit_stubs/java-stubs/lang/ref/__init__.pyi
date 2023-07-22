@@ -1,6 +1,19 @@
+import java.lang
+import java.util.concurrent
 import typing
 
 
+
+class Cleaner:
+    @typing.overload
+    @staticmethod
+    def create() -> 'Cleaner': ...
+    @typing.overload
+    @staticmethod
+    def create(threadFactory: java.util.concurrent.ThreadFactory) -> 'Cleaner': ...
+    def register(self, object: typing.Any, runnable: typing.Union[java.lang.Runnable, typing.Callable]) -> 'Cleaner.Cleanable': ...
+    class Cleanable:
+        def clean(self) -> None: ...
 
 _Reference__T = typing.TypeVar('_Reference__T')  # <T>
 class Reference(typing.Generic[_Reference__T]):
@@ -8,6 +21,8 @@ class Reference(typing.Generic[_Reference__T]):
     def enqueue(self) -> bool: ...
     def get(self) -> _Reference__T: ...
     def isEnqueued(self) -> bool: ...
+    @staticmethod
+    def reachabilityFence(object: typing.Any) -> None: ...
 
 _ReferenceQueue__T = typing.TypeVar('_ReferenceQueue__T')  # <T>
 class ReferenceQueue(typing.Generic[_ReferenceQueue__T]):
@@ -42,6 +57,7 @@ class WeakReference(Reference[_WeakReference__T], typing.Generic[_WeakReference_
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("java.lang.ref")``.
 
+    Cleaner: typing.Type[Cleaner]
     PhantomReference: typing.Type[PhantomReference]
     Reference: typing.Type[Reference]
     ReferenceQueue: typing.Type[ReferenceQueue]

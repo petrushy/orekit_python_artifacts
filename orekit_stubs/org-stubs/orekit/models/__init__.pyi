@@ -6,7 +6,7 @@ import typing
 
 class AtmosphericRefractionModel(java.io.Serializable):
     """
-    public interface AtmosphericRefractionModel extends Serializable
+    public interface AtmosphericRefractionModel extends :class:`~org.orekit.models.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Defines an refraction model that can be used to correct for the apparent position of an object due to atmospheric
         effects.
@@ -30,7 +30,7 @@ class AtmosphericRefractionModel(java.io.Serializable):
 
 class PythonAtmosphericRefractionModel(AtmosphericRefractionModel):
     """
-    public class PythonAtmosphericRefractionModel extends Object implements :class:`~org.orekit.models.AtmosphericRefractionModel`
+    public class PythonAtmosphericRefractionModel extends :class:`~org.orekit.models.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.AtmosphericRefractionModel`
     
     
         Also see:
@@ -43,8 +43,8 @@ class PythonAtmosphericRefractionModel(AtmosphericRefractionModel):
             Compute the refraction angle from the true (geometrical) elevation. Extension point for Python.
         
             Specified by:
-                :meth:`~org.orekit.models.AtmosphericRefractionModel.getRefraction`Â in
-                interfaceÂ :class:`~org.orekit.models.AtmosphericRefractionModel`
+                :meth:`~org.orekit.models.AtmosphericRefractionModel.getRefraction` in
+                interface :class:`~org.orekit.models.AtmosphericRefractionModel`
         
             Parameters:
                 trueElevation (double): true elevation (rad)

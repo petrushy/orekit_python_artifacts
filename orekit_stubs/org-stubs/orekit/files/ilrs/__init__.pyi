@@ -14,7 +14,7 @@ import typing
 
 class CPF(org.orekit.files.general.EphemerisFile['CPF.CPFCoordinate', 'CPF.CPFEphemeris']):
     """
-    public class CPF extends Object implements :class:`~org.orekit.files.general.EphemerisFile`<:class:`~org.orekit.files.ilrs.CPF.CPFCoordinate`, :class:`~org.orekit.files.ilrs.CPF.CPFEphemeris`>
+    public class CPF extends :class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFile`<:class:`~org.orekit.files.ilrs.CPF.CPFCoordinate`, :class:`~org.orekit.files.ilrs.CPF.CPFEphemeris`>
     
         This class stores all the information of the Consolidated laser ranging Prediction File (CPF) parsed by CPFParser. It
         contains the header and a list of ephemeris entry.
@@ -24,7 +24,7 @@ class CPF(org.orekit.files.general.EphemerisFile['CPF.CPFCoordinate', 'CPF.CPFEp
     """
     DEFAULT_ID: typing.ClassVar[str] = ...
     """
-    public static final String DEFAULT_ID
+    public static final :class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_ID
     
         Default satellite ID, used if header is null when initializing the ephemeris.
     
@@ -40,7 +40,7 @@ class CPF(org.orekit.files.general.EphemerisFile['CPF.CPFCoordinate', 'CPF.CPFEp
             Add a new P/V coordinates to the satellite.
         
             Parameters:
-                id (String): satellite ILRS identifier
+                id (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): satellite ILRS identifier
                 coord (:class:`~org.orekit.files.ilrs.CPF.CPFCoordinate`): the P/V coordinate of the satellite
         
             Since:
@@ -50,15 +50,27 @@ class CPF(org.orekit.files.general.EphemerisFile['CPF.CPFCoordinate', 'CPF.CPFEp
         """
         ...
     @typing.overload
-    def addSatelliteCoordinate(self, cPFCoordinate: 'CPF.CPFCoordinate') -> None: ...
+    def addSatelliteCoordinate(self, cPFCoordinate: 'CPF.CPFCoordinate') -> None:
+        """
+            Deprecated.
+            as of 11.0.1, replaced by :meth:`~org.orekit.files.ilrs.CPF.addSatelliteCoordinate`
+            Adds a new P/V coordinate to the satellite.
+        
+            If the header has not been read, the :meth:`~org.orekit.files.ilrs.CPF.DEFAULT_ID` is used.
+        
+            Parameters:
+                coord (:class:`~org.orekit.files.ilrs.CPF.CPFCoordinate`): the P/V coordinate of the satellite
+        
+        """
+        ...
     def addSatelliteCoordinates(self, string: str, list: java.util.List['CPF.CPFCoordinate']) -> None: ...
     def addSatelliteVelocityToCPFCoordinate(self, string: str, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> None:
         """
             Add the velocity to the last CPF coordinate entry.
         
             Parameters:
-                id (String): satellite ILRS identifier
-                velocity (Vector3D): the velocity vector of the satellite
+                id (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): satellite ILRS identifier
+                velocity (:class:`~org.orekit.files.ilrs.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): the velocity vector of the satellite
         
             Since:
                 11.2
@@ -66,16 +78,7 @@ class CPF(org.orekit.files.general.EphemerisFile['CPF.CPFCoordinate', 'CPF.CPFEp
         
         """
         ...
-    def getComments(self) -> java.util.List[str]:
-        """
-            Get the comments contained in the file.
-        
-            Returns:
-                the comments contained in the file
-        
-        
-        """
-        ...
+    def getComments(self) -> java.util.List[str]: ...
     def getHeader(self) -> 'CPFHeader':
         """
             Get the CPF file header.
@@ -162,7 +165,7 @@ class CPF(org.orekit.files.general.EphemerisFile['CPF.CPFCoordinate', 'CPF.CPFEp
 
 class CPFParser(org.orekit.files.general.EphemerisFileParser[CPF]):
     """
-    public class CPFParser extends Object implements :class:`~org.orekit.files.general.EphemerisFileParser`<:class:`~org.orekit.files.ilrs.CPF`>
+    public class CPFParser extends :class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFileParser`<:class:`~org.orekit.files.ilrs.CPF`>
     
         A parser for the CPF orbit file format.
     
@@ -175,7 +178,8 @@ class CPFParser(org.orekit.files.general.EphemerisFileParser[CPF]):
             10.3
     
         Also see:
-            1.0 file format, 2.0 file format
+            :class:`~org.orekit.files.ilrs.https:.ilrs.gsfc.nasa.gov.docs.2006.cpf_1.01.pdf`,
+            :class:`~org.orekit.files.ilrs.https:.ilrs.gsfc.nasa.gov.docs.2018.cpf_2.00h`
     """
     @typing.overload
     def __init__(self): ...
@@ -186,8 +190,8 @@ class CPFParser(org.orekit.files.general.EphemerisFileParser[CPF]):
             Parse an ephemeris file from a data source.
         
             Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFileParser.parse`Â in
-                interfaceÂ :class:`~org.orekit.files.general.EphemerisFileParser`
+                :meth:`~org.orekit.files.general.EphemerisFileParser.parse` in
+                interface :class:`~org.orekit.files.general.EphemerisFileParser`
         
             Parameters:
                 source (:class:`~org.orekit.data.DataSource`): source providing the data to parse
@@ -201,7 +205,7 @@ class CPFParser(org.orekit.files.general.EphemerisFileParser[CPF]):
 
 class CPFWriter(org.orekit.files.general.EphemerisFileWriter):
     """
-    public class CPFWriter extends Object implements :class:`~org.orekit.files.general.EphemerisFileWriter`
+    public class CPFWriter extends :class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFileWriter`
     
         An CPF Writer class that can take in a general :class:`~org.orekit.files.general.EphemerisFile` object and export it as
         a valid CPF file.
@@ -216,7 +220,8 @@ class CPFWriter(org.orekit.files.general.EphemerisFileWriter):
             10.3
     
         Also see:
-            1.0 file format, 2.0 file format
+            :class:`~org.orekit.files.ilrs.https:.ilrs.gsfc.nasa.gov.docs.2006.cpf_1.01.pdf`,
+            :class:`~org.orekit.files.ilrs.https:.ilrs.gsfc.nasa.gov.docs.2018.cpf_2.00h`
     """
     @typing.overload
     def __init__(self, cPFHeader: 'CPFHeader', timeScale: org.orekit.time.TimeScale): ...
@@ -233,7 +238,7 @@ class CPFWriter(org.orekit.files.general.EphemerisFileWriter):
 
 class CRD:
     """
-    public class CRD extends Object
+    public class CRD extends :class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This class stores all the information of the Consolidated laser ranging Data Format (CRD) parsed by CRDParser. It
         contains the header and a list of data records.
@@ -252,16 +257,7 @@ class CRD:
         
         """
         ...
-    def getComments(self) -> java.util.List[str]:
-        """
-            Get the comments contained in the file.
-        
-            Returns:
-                the comments contained in the file
-        
-        
-        """
-        ...
+    def getComments(self) -> java.util.List[str]: ...
     def getDataBlocks(self) -> java.util.List['CRD.CRDDataBlock']: ...
     class AnglesMeasurement(org.orekit.time.TimeStamped):
         def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, int: int, int2: int, boolean: bool, double3: float, double4: float): ...
@@ -307,7 +303,7 @@ class CRD:
 
 class CRDConfiguration:
     """
-    public class CRDConfiguration extends Object
+    public class CRDConfiguration extends :class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Container for Consolidated laser ranging Data Format (CDR) configuration records.
     
@@ -582,7 +578,7 @@ class CRDConfiguration:
 
 class CRDParser:
     """
-    public class CRDParser extends Object
+    public class CRDParser extends :class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         A parser for the CRD data file format.
     
@@ -595,11 +591,12 @@ class CRDParser:
             10.3
     
         Also see:
-            1.0 file format, 2.0 file format
+            :class:`~org.orekit.files.ilrs.https:.ilrs.gsfc.nasa.gov.docs.2009.crd_v1.01.pdf`,
+            :class:`~org.orekit.files.ilrs.https:.ilrs.gsfc.nasa.gov.docs.2019.crd_v2.01.pdf`
     """
     DEFAULT_CRD_SUPPORTED_NAMES: typing.ClassVar[str] = ...
     """
-    public static final String DEFAULT_CRD_SUPPORTED_NAMES
+    public static final :class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_CRD_SUPPORTED_NAMES
     
         Default supported files name pattern for CRD files.
     
@@ -626,7 +623,7 @@ class CRDParser:
 
 class ILRSHeader:
     """
-    public abstract class ILRSHeader extends Object
+    public abstract class ILRSHeader extends :class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Container for common data contains in International Laser Ranging Service (ILRS) files header.
     
@@ -786,7 +783,7 @@ class ILRSHeader:
             Set the file format.
         
             Parameters:
-                format (String): the format to set
+                format (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the format to set
         
         
         """
@@ -796,7 +793,7 @@ class ILRSHeader:
             Set the IRLS satellite ID (based on COSPAR ID).
         
             Parameters:
-                ilrsSatelliteId (String): the IRLS satellite ID to set
+                ilrsSatelliteId (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the IRLS satellite ID to set
         
         
         """
@@ -806,7 +803,7 @@ class ILRSHeader:
             Set the satellite target name.
         
             Parameters:
-                name (String): the satellite target name to set
+                name (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the satellite target name to set
         
         
         """
@@ -816,7 +813,7 @@ class ILRSHeader:
             Set the satellite NORAD ID.
         
             Parameters:
-                noradId (String): the NORAD ID to set
+                noradId (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the NORAD ID to set
         
         
         """
@@ -856,7 +853,7 @@ class ILRSHeader:
             Set the SIC ID.
         
             Parameters:
-                sic (String): the SIC ID to set
+                sic (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the SIC ID to set
         
         
         """
@@ -908,7 +905,7 @@ class ILRSHeader:
 
 class StreamingCpfWriter:
     """
-    public class StreamingCpfWriter extends Object
+    public class StreamingCpfWriter extends :class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         A writer for CPF files.
     
@@ -1190,7 +1187,7 @@ class CPFHeader(ILRSHeader):
             Set the ephemeris source.
         
             Parameters:
-                source (String): the ephemeris source to set
+                source (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the ephemeris source to set
         
         
         """
@@ -1498,7 +1495,7 @@ class CRDHeader(ILRSHeader):
             Set the string value of date and time.
         
             Parameters:
-                dateAndTime (String): the date and time to set
+                dateAndTime (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the date and time to set
         
         
         """
@@ -1568,7 +1565,7 @@ class CRDHeader(ILRSHeader):
             Set the prediction provider.
         
             Parameters:
-                predictionProvider (String): the prediction provider to set
+                predictionProvider (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the prediction provider to set
         
         
         """
@@ -1618,7 +1615,7 @@ class CRDHeader(ILRSHeader):
             Set the station name from official list.
         
             Parameters:
-                stationName (String): the station name to set
+                stationName (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the station name to set
         
         
         """
@@ -1628,7 +1625,7 @@ class CRDHeader(ILRSHeader):
             Set the station network.
         
             Parameters:
-                stationNetword (String): the station network to set
+                stationNetword (:class:`~org.orekit.files.ilrs.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the station network to set
         
         
         """

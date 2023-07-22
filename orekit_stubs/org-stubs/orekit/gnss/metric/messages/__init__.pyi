@@ -6,7 +6,7 @@ import typing
 
 class ParsedMessage:
     """
-    public abstract class ParsedMessage extends Object
+    public abstract class ParsedMessage extends :class:`~org.orekit.gnss.metric.messages.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Abstract base class for decoded IGS messages.
     

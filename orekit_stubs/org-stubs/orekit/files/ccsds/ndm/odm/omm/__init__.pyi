@@ -27,7 +27,7 @@ class Omm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.secti
     """
     ROOT: typing.ClassVar[str] = ...
     """
-    public static final String ROOT
+    public static final :class:`~org.orekit.files.ccsds.ndm.odm.omm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ROOT
     
         Root element for XML files.
     
@@ -38,7 +38,7 @@ class Omm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.secti
     """
     FORMAT_VERSION_KEY: typing.ClassVar[str] = ...
     """
-    public static final String FORMAT_VERSION_KEY
+    public static final :class:`~org.orekit.files.ccsds.ndm.odm.omm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` FORMAT_VERSION_KEY
     
         Key for format version.
     
@@ -116,7 +116,7 @@ class Omm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.secti
 
 class OmmData(org.orekit.files.ccsds.section.Data):
     """
-    public class OmmData extends Object implements :class:`~org.orekit.files.ccsds.section.Data`
+    public class OmmData extends :class:`~org.orekit.files.ccsds.ndm.odm.omm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.section.Data`
     
         Container for Orbit Mean-elements Message data.
     
@@ -206,7 +206,7 @@ class OmmMetadata(org.orekit.files.ccsds.ndm.odm.CommonMetadata):
     """
     SGP_SGP4_THEORY: typing.ClassVar[str] = ...
     """
-    public static final String SGP_SGP4_THEORY
+    public static final :class:`~org.orekit.files.ccsds.ndm.odm.omm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` SGP_SGP4_THEORY
     
         Constant for SGP/SGP4 mean elements theory.
     
@@ -217,7 +217,7 @@ class OmmMetadata(org.orekit.files.ccsds.ndm.odm.CommonMetadata):
     """
     DSST_THEORY: typing.ClassVar[str] = ...
     """
-    public static final String DSST_THEORY
+    public static final :class:`~org.orekit.files.ccsds.ndm.odm.omm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DSST_THEORY
     
         Constant for DSST mean elements theory.
     
@@ -242,7 +242,7 @@ class OmmMetadata(org.orekit.files.ccsds.ndm.odm.CommonMetadata):
             Set the description of the Mean Element Theory.
         
             Parameters:
-                meanElementTheory (String): the mean element theory to be set
+                meanElementTheory (:class:`~org.orekit.files.ccsds.ndm.odm.omm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the mean element theory to be set
         
         
         """
@@ -260,7 +260,7 @@ class OmmMetadata(org.orekit.files.ccsds.ndm.odm.CommonMetadata):
 
 class OmmMetadataKey(java.lang.Enum['OmmMetadataKey']):
     """
-    public enum OmmMetadataKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.odm.omm.OmmMetadataKey`>
+    public enum OmmMetadataKey extends :class:`~org.orekit.files.ccsds.ndm.odm.omm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.omm.OmmMetadataKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.odm.omm.OmmMetadata` entries.
     
@@ -295,14 +295,14 @@ class OmmMetadataKey(java.lang.Enum['OmmMetadataKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.odm.omm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.odm.omm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.odm.omm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -315,9 +315,8 @@ class OmmMetadataKey(java.lang.Enum['OmmMetadataKey']):
         
             .. code-block: java
             
-            
-            for (OmmMetadataKey c : OmmMetadataKey.values())
-                System.out.println(c);
+            for (OmmMetadataKey c : OmmMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -357,8 +356,8 @@ class OmmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Omm, 'OmmParser']):
             Finalize data after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -371,8 +370,8 @@ class OmmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Omm, 'OmmParser']):
             Finalize header after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -385,8 +384,8 @@ class OmmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Omm, 'OmmParser']):
             Finalize metadata after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -399,8 +398,8 @@ class OmmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Omm, 'OmmParser']):
             Get file header to fill.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 file header to fill
@@ -414,8 +413,8 @@ class OmmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Omm, 'OmmParser']):
             Acknowledge data parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -428,8 +427,8 @@ class OmmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Omm, 'OmmParser']):
             Acknowledge header parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -442,8 +441,8 @@ class OmmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Omm, 'OmmParser']):
             Acknowledge metada parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -456,8 +455,8 @@ class OmmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Omm, 'OmmParser']):
             Prepare data for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -470,8 +469,8 @@ class OmmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Omm, 'OmmParser']):
             Prepare header for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -484,8 +483,8 @@ class OmmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Omm, 'OmmParser']):
             Prepare metadata for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -684,8 +683,8 @@ class OmmTle(org.orekit.files.ccsds.section.CommentsContainer):
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
+                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
         
             Parameters:
                 version (double): format version
@@ -696,7 +695,7 @@ class OmmTle(org.orekit.files.ccsds.section.CommentsContainer):
 
 class OmmTleKey(java.lang.Enum['OmmTleKey']):
     """
-    public enum OmmTleKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.odm.omm.OmmTleKey`>
+    public enum OmmTleKey extends :class:`~org.orekit.files.ccsds.ndm.odm.omm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.omm.OmmTleKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.odm.omm.OmmTle` entries.
     
@@ -739,14 +738,14 @@ class OmmTleKey(java.lang.Enum['OmmTleKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.odm.omm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.odm.omm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.odm.omm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -759,9 +758,8 @@ class OmmTleKey(java.lang.Enum['OmmTleKey']):
         
             .. code-block: java
             
-            
-            for (OmmTleKey c : OmmTleKey.values())
-                System.out.println(c);
+            for (OmmTleKey c : OmmTleKey.values())
+                System.out.println(c);
             
         
             Returns:

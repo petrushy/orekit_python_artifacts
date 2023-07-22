@@ -48,7 +48,7 @@ class DragSensitive:
     """
     DRAG_COEFFICIENT: typing.ClassVar[str] = ...
     """
-    static final String DRAG_COEFFICIENT
+    static final :class:`~org.orekit.forces.drag.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DRAG_COEFFICIENT
     
         Parameter name for drag coefficient enabling Jacobian processing.
     
@@ -59,7 +59,7 @@ class DragSensitive:
     """
     LIFT_RATIO: typing.ClassVar[str] = ...
     """
-    static final String LIFT_RATIO
+    static final :class:`~org.orekit.forces.drag.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` LIFT_RATIO
     
         Parameter name for lift ration enabling Jacobian processing.
     
@@ -86,15 +86,15 @@ class DragSensitive:
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
                 frame (:class:`~org.orekit.frames.Frame`): inertial reference frame for state (both orbit and attitude)
-                position (FieldVector3D<T> position): position of spacecraft in reference frame
-                rotation (FieldRotation<T> rotation): orientation (attitude) of the spacecraft with respect to reference frame
+                position (:class:`~org.orekit.forces.drag.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): position of spacecraft in reference frame
+                rotation (:class:`~org.orekit.forces.drag.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldRotation?is`<T> rotation): orientation (attitude) of the spacecraft with respect to reference frame
                 mass (T): current mass
                 density (T): atmospheric density at spacecraft position
-                relativeVelocity (FieldVector3D<T> relativeVelocity): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
+                relativeVelocity (:class:`~org.orekit.forces.drag.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> relativeVelocity): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
                 parameters (T[]): values of the force model parameters
         
             Returns:
-                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/sÂ²)
+                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/s²)
         
             Since:
                 9.0
@@ -112,15 +112,15 @@ class DragSensitive:
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
                 frame (:class:`~org.orekit.frames.Frame`): inertial reference frame for state (both orbit and attitude)
-                position (Vector3D): position of spacecraft in reference frame
-                rotation (Rotation): orientation (attitude) of the spacecraft with respect to reference frame
+                position (:class:`~org.orekit.forces.drag.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): position of spacecraft in reference frame
+                rotation (:class:`~org.orekit.forces.drag.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Rotation?is`): orientation (attitude) of the spacecraft with respect to reference frame
                 mass (double): current mass
                 density (double): atmospheric density at spacecraft position
-                relativeVelocity (Vector3D): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
+                relativeVelocity (:class:`~org.orekit.forces.drag.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
                 parameters (double[]): values of the force model parameters
         
             Returns:
-                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/sÂ²)
+                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/s²)
         
         """
         ...
@@ -130,7 +130,7 @@ class DragForce(AbstractDragForceModel):
     """
     public class DragForce extends :class:`~org.orekit.forces.drag.AbstractDragForceModel`
     
-        Atmospheric drag force model. The drag acceleration is computed as follows : ÃŽÂ³ = (1/2 * Ã�ï¿½ * VÃ‚Â² * S / Mass) *
+        Atmospheric drag force model. The drag acceleration is computed as follows : γ = (1/2 * ρ * V² * S / Mass) *
         DragCoefVector With DragCoefVector = {C :sub:`x` , C :sub:`y` , C :sub:`z` } and S given by the user through the
         interface :class:`~org.orekit.forces.drag.DragSensitive`
     """
@@ -192,7 +192,7 @@ class DragForce(AbstractDragForceModel):
 
 class IsotropicDrag(DragSensitive):
     """
-    public class IsotropicDrag extends Object implements :class:`~org.orekit.forces.drag.DragSensitive`
+    public class IsotropicDrag extends :class:`~org.orekit.forces.drag.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.drag.DragSensitive`
     
         This class models isotropic drag effects.
     
@@ -219,21 +219,21 @@ class IsotropicDrag(DragSensitive):
             The computation includes all spacecraft specific characteristics like shape, area and coefficients.
         
             Specified by:
-                :meth:`~org.orekit.forces.drag.DragSensitive.dragAcceleration`Â in
-                interfaceÂ :class:`~org.orekit.forces.drag.DragSensitive`
+                :meth:`~org.orekit.forces.drag.DragSensitive.dragAcceleration` in
+                interface :class:`~org.orekit.forces.drag.DragSensitive`
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
                 frame (:class:`~org.orekit.frames.Frame`): inertial reference frame for state (both orbit and attitude)
-                position (FieldVector3D<T> position): position of spacecraft in reference frame
-                rotation (FieldRotation<T> rotation): orientation (attitude) of the spacecraft with respect to reference frame
+                position (:class:`~org.orekit.forces.drag.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): position of spacecraft in reference frame
+                rotation (:class:`~org.orekit.forces.drag.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldRotation?is`<T> rotation): orientation (attitude) of the spacecraft with respect to reference frame
                 mass (T): current mass
                 density (T): atmospheric density at spacecraft position
-                relativeVelocity (FieldVector3D<T> relativeVelocity): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
+                relativeVelocity (:class:`~org.orekit.forces.drag.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> relativeVelocity): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
                 parameters (T[]): values of the force model parameters
         
             Returns:
-                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/sÂ²)
+                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/s²)
         
         
         """
@@ -246,21 +246,21 @@ class IsotropicDrag(DragSensitive):
             The computation includes all spacecraft specific characteristics like shape, area and coefficients.
         
             Specified by:
-                :meth:`~org.orekit.forces.drag.DragSensitive.dragAcceleration`Â in
-                interfaceÂ :class:`~org.orekit.forces.drag.DragSensitive`
+                :meth:`~org.orekit.forces.drag.DragSensitive.dragAcceleration` in
+                interface :class:`~org.orekit.forces.drag.DragSensitive`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
                 frame (:class:`~org.orekit.frames.Frame`): inertial reference frame for state (both orbit and attitude)
-                position (Vector3D): position of spacecraft in reference frame
-                rotation (Rotation): orientation (attitude) of the spacecraft with respect to reference frame
+                position (:class:`~org.orekit.forces.drag.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): position of spacecraft in reference frame
+                rotation (:class:`~org.orekit.forces.drag.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Rotation?is`): orientation (attitude) of the spacecraft with respect to reference frame
                 mass (double): current mass
                 density (double): atmospheric density at spacecraft position
-                relativeVelocity (Vector3D): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
+                relativeVelocity (:class:`~org.orekit.forces.drag.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
                 parameters (double[]): values of the force model parameters
         
             Returns:
-                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/sÂ²)
+                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/s²)
         
         """
         ...
@@ -287,6 +287,11 @@ class PythonAbstractDragForceModel(AbstractDragForceModel):
             Since:
                 9.0
         
+        """
+        ...
+    @typing.overload
+    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_1__T], tArray: typing.List[_acceleration_1__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_1__T]:
+        """
             Compute acceleration.
         
             Parameters:
@@ -302,8 +307,6 @@ class PythonAbstractDragForceModel(AbstractDragForceModel):
         
         """
         ...
-    @typing.overload
-    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_1__T], tArray: typing.List[_acceleration_1__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_1__T]: ...
     _acceleration_FT__T = typing.TypeVar('_acceleration_FT__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     def acceleration_FT(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_FT__T], tArray: typing.List[_acceleration_FT__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_FT__T]:
         """
@@ -349,7 +352,7 @@ class PythonAbstractDragForceModel(AbstractDragForceModel):
 
 class PythonDragSensitive(DragSensitive):
     """
-    public class PythonDragSensitive extends Object implements :class:`~org.orekit.forces.drag.DragSensitive`
+    public class PythonDragSensitive extends :class:`~org.orekit.forces.drag.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.drag.DragSensitive`
     """
     def __init__(self): ...
     _dragAcceleration_1__T = typing.TypeVar('_dragAcceleration_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -361,42 +364,47 @@ class PythonDragSensitive(DragSensitive):
             The computation includes all spacecraft specific characteristics like shape, area and coefficients.
         
             Specified by:
-                :meth:`~org.orekit.forces.drag.DragSensitive.dragAcceleration`Â in
-                interfaceÂ :class:`~org.orekit.forces.drag.DragSensitive`
+                :meth:`~org.orekit.forces.drag.DragSensitive.dragAcceleration` in
+                interface :class:`~org.orekit.forces.drag.DragSensitive`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
                 frame (:class:`~org.orekit.frames.Frame`): inertial reference frame for state (both orbit and attitude)
-                position (Vector3D): position of spacecraft in reference frame
-                rotation (Rotation): orientation (attitude) of the spacecraft with respect to reference frame
+                position (:class:`~org.orekit.forces.drag.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): position of spacecraft in reference frame
+                rotation (:class:`~org.orekit.forces.drag.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Rotation?is`): orientation (attitude) of the spacecraft with respect to reference frame
                 mass (double): current mass
                 density (double): atmospheric density at spacecraft position
-                relativeVelocity (Vector3D): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
+                relativeVelocity (:class:`~org.orekit.forces.drag.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
                 parameters (double[]): values of the force model parameters
         
             Returns:
-                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/sÂ²)
+                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/s²)
         
+        """
+        ...
+    @typing.overload
+    def dragAcceleration(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_dragAcceleration_1__T], frame: org.orekit.frames.Frame, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_1__T], fieldRotation: org.hipparchus.geometry.euclidean.threed.FieldRotation[_dragAcceleration_1__T], t: _dragAcceleration_1__T, t2: _dragAcceleration_1__T, fieldVector3D2: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_1__T], tArray: typing.List[_dragAcceleration_1__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_1__T]:
+        """
             Compute the acceleration due to drag. Connects to dragAcceleration_FFFFTTFT for Python extension.
         
             The computation includes all spacecraft specific characteristics like shape, area and coefficients.
         
             Specified by:
-                :meth:`~org.orekit.forces.drag.DragSensitive.dragAcceleration`Â in
-                interfaceÂ :class:`~org.orekit.forces.drag.DragSensitive`
+                :meth:`~org.orekit.forces.drag.DragSensitive.dragAcceleration` in
+                interface :class:`~org.orekit.forces.drag.DragSensitive`
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
                 frame (:class:`~org.orekit.frames.Frame`): inertial reference frame for state (both orbit and attitude)
-                position (FieldVector3D<T> position): position of spacecraft in reference frame
-                rotation (FieldRotation<T> rotation): orientation (attitude) of the spacecraft with respect to reference frame
+                position (:class:`~org.orekit.forces.drag.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): position of spacecraft in reference frame
+                rotation (:class:`~org.orekit.forces.drag.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldRotation?is`<T> rotation): orientation (attitude) of the spacecraft with respect to reference frame
                 mass (T): current mass
                 density (T): atmospheric density at spacecraft position
-                relativeVelocity (FieldVector3D<T> relativeVelocity): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
+                relativeVelocity (:class:`~org.orekit.forces.drag.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> relativeVelocity): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
                 parameters (T[]): values of the force model parameters
         
             Returns:
-                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/sÂ²)
+                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/s²)
         
             Since:
                 9.0
@@ -404,8 +412,6 @@ class PythonDragSensitive(DragSensitive):
         
         """
         ...
-    @typing.overload
-    def dragAcceleration(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_dragAcceleration_1__T], frame: org.orekit.frames.Frame, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_1__T], fieldRotation: org.hipparchus.geometry.euclidean.threed.FieldRotation[_dragAcceleration_1__T], t: _dragAcceleration_1__T, t2: _dragAcceleration_1__T, fieldVector3D2: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_1__T], tArray: typing.List[_dragAcceleration_1__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_1__T]: ...
     _dragAcceleration_FFFFTTFT__T = typing.TypeVar('_dragAcceleration_FFFFTTFT__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     def dragAcceleration_FFFFTTFT(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_dragAcceleration_FFFFTTFT__T], frame: org.orekit.frames.Frame, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_FFFFTTFT__T], fieldRotation: org.hipparchus.geometry.euclidean.threed.FieldRotation[_dragAcceleration_FFFFTTFT__T], t: _dragAcceleration_FFFFTTFT__T, t2: _dragAcceleration_FFFFTTFT__T, fieldVector3D2: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_FFFFTTFT__T], tArray: typing.List[_dragAcceleration_FFFFTTFT__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_FFFFTTFT__T]: ...
     def finalize(self) -> None: ...

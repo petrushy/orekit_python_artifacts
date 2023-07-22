@@ -154,7 +154,7 @@ class Dfp(org.hipparchus.CalculusFieldElement['Dfp']):
 
 class DfpField(org.hipparchus.Field[Dfp]):
     """
-    public class DfpField extends Object implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.dfp.Dfp`>
+    public class DfpField extends :class:`~org.hipparchus.dfp.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.dfp.Dfp`>
     
         Field for Decimal floating point instances.
     """
@@ -272,7 +272,8 @@ class DfpField(org.hipparchus.Field[Dfp]):
             Two fields are considered equals if they have the same number of radix digits and the same rounding mode.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.dfp.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.dfp.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -532,7 +533,8 @@ class DfpField(org.hipparchus.Field[Dfp]):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.dfp.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.dfp.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -593,7 +595,7 @@ class DfpField(org.hipparchus.Field[Dfp]):
             Create a :class:`~org.hipparchus.dfp.Dfp` given a String representation.
         
             Parameters:
-                s (String): string representation of the instance
+                s (:class:`~org.hipparchus.dfp.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): string representation of the instance
         
             Returns:
                 a new :class:`~org.hipparchus.dfp.Dfp` parsed from specified string
@@ -690,7 +692,7 @@ class DfpField(org.hipparchus.Field[Dfp]):
 
 class DfpMath:
     """
-    public class DfpMath extends Object
+    public class DfpMath extends :class:`~org.hipparchus.dfp.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Mathematical routines for use with :class:`~org.hipparchus.dfp.Dfp`. The constants are defined in
         :class:`~org.hipparchus.dfp.DfpField`
@@ -757,7 +759,7 @@ class DfpMath:
     def exp(dfp: Dfp) -> Dfp:
         """
             Computes e to the given power. a is broken into two parts, such that a = n+m where n is an integer. We use pow() to
-            compute e :sup:`n` and a Taylor series to compute e :sup:`m` . We return e* :sup:`n` Ã— e :sup:`m`
+            compute e :sup:`n` and a Taylor series to compute e :sup:`m` . We return e* :sup:`n` × e :sup:`m`
         
             Parameters:
                 a (:class:`~org.hipparchus.dfp.Dfp`): power at which e should be raised
@@ -986,7 +988,7 @@ class DfpDec(Dfp):
                 :meth:`~org.hipparchus.dfp.Dfp.newInstance` in class :class:`~org.hipparchus.dfp.Dfp`
         
             Parameters:
-                s (String): string representation of the instance
+                s (:class:`~org.hipparchus.dfp.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): string representation of the instance
         
             Returns:
                 a new instance parsed from specified string

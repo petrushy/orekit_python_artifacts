@@ -11,7 +11,7 @@ class AbstractCurveFitter:
 
 class WeightedObservedPoint(java.io.Serializable):
     """
-    public class WeightedObservedPoint extends Object implements Serializable
+    public class WeightedObservedPoint extends :class:`~org.hipparchus.fitting.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.fitting.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         This class is a simple container for weighted observed point in :class:`~org.hipparchus.fitting.AbstractCurveFitter`.
     
@@ -54,7 +54,7 @@ class WeightedObservedPoint(java.io.Serializable):
 
 class WeightedObservedPoints(java.io.Serializable):
     """
-    public class WeightedObservedPoints extends Object implements Serializable
+    public class WeightedObservedPoints extends :class:`~org.hipparchus.fitting.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.fitting.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Simple container for weighted observed points used in :class:`~org.hipparchus.fitting.AbstractCurveFitter` algorithms.
     
@@ -141,15 +141,16 @@ class SimpleCurveFitter(AbstractCurveFitter):
     """
     public class SimpleCurveFitter extends :class:`~org.hipparchus.fitting.AbstractCurveFitter`
     
-        Fits points to a user-defined null.
+        Fits points to a user-defined :class:`~org.hipparchus.fitting.https:.www.hipparchus.org.hipparchus`.
     """
     @staticmethod
     def create(parametricUnivariateFunction: org.hipparchus.analysis.ParametricUnivariateFunction, doubleArray: typing.List[float]) -> 'SimpleCurveFitter':
         """
-            Creates a curve fitter. The maximum number of iterations of the optimization algorithm is set to null.
+            Creates a curve fitter. The maximum number of iterations of the optimization algorithm is set to
+            :meth:`~org.hipparchus.fitting.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer.html?is`.
         
             Parameters:
-                f (ParametricUnivariateFunction): Function to fit.
+                f (:class:`~org.hipparchus.fitting.https:.www.hipparchus.org.hipparchus`): Function to fit.
                 start (double[]): Initial guess for the parameters. Cannot be :code:`null`. Its length must be consistent with the number of parameters of
                     the function to fit.
         
@@ -157,7 +158,8 @@ class SimpleCurveFitter(AbstractCurveFitter):
                 a curve fitter.
         
             Also see:
-                null, :meth:`~org.hipparchus.fitting.SimpleCurveFitter.withMaxIterations`
+                :meth:`~org.hipparchus.fitting.SimpleCurveFitter.withStartPoint`,
+                :meth:`~org.hipparchus.fitting.SimpleCurveFitter.withMaxIterations`
         
         
         """

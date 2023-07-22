@@ -6,9 +6,9 @@ import typing
 
 class CopolarC:
     """
-    public class CopolarC extends Object
+    public class CopolarC extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
-        Copolar trio with pole at point c in Glaisherâ€™s Notation.
+        Copolar trio with pole at point c in Glaisher’s Notation.
     
         This is a container for the three subsidiary Jacobi elliptic functions :code:`dc(u|m)`, :code:`nc(u|m)`, and
         :code:`sc(u|m)`.
@@ -49,9 +49,9 @@ class CopolarC:
 
 class CopolarD:
     """
-    public class CopolarD extends Object
+    public class CopolarD extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
-        Copolar trio with pole at point d in Glaisherâ€™s Notation.
+        Copolar trio with pole at point d in Glaisher’s Notation.
     
         This is a container for the three subsidiary Jacobi elliptic functions :code:`nd(u|m)`, :code:`sd(u|m)`, and
         :code:`cd(u|m)`.
@@ -92,9 +92,9 @@ class CopolarD:
 
 class CopolarN:
     """
-    public class CopolarN extends Object
+    public class CopolarN extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
-        Copolar trio with pole at point n in Glaisherâ€™s Notation.
+        Copolar trio with pole at point n in Glaisher’s Notation.
     
         This is a container for the three principal Jacobi elliptic functions :code:`sn(u|m)`, :code:`cn(u|m)`, and
         :code:`dn(u|m)`.
@@ -135,9 +135,9 @@ class CopolarN:
 
 class CopolarS:
     """
-    public class CopolarS extends Object
+    public class CopolarS extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
-        Copolar trio with pole at point s in Glaisherâ€™s Notation.
+        Copolar trio with pole at point s in Glaisher’s Notation.
     
         This is a container for the three subsidiary Jacobi elliptic functions :code:`cs(u|m)`, :code:`ds(u|m)` and
         :code:`ns(u|m)`.
@@ -179,9 +179,9 @@ class CopolarS:
 _FieldCopolarC__T = typing.TypeVar('_FieldCopolarC__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldCopolarC(typing.Generic[_FieldCopolarC__T]):
     """
-    public class FieldCopolarC<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object
+    public class FieldCopolarC<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
-        Copolar trio with pole at point c in Glaisherâ€™s Notation.
+        Copolar trio with pole at point c in Glaisher’s Notation.
     
         This is a container for the three subsidiary Jacobi elliptic functions :code:`dc(u|m)`, :code:`nc(u|m)`, and
         :code:`sc(u|m)`.
@@ -223,9 +223,9 @@ class FieldCopolarC(typing.Generic[_FieldCopolarC__T]):
 _FieldCopolarD__T = typing.TypeVar('_FieldCopolarD__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldCopolarD(typing.Generic[_FieldCopolarD__T]):
     """
-    public class FieldCopolarD<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object
+    public class FieldCopolarD<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
-        Copolar trio with pole at point d in Glaisherâ€™s Notation.
+        Copolar trio with pole at point d in Glaisher’s Notation.
     
         This is a container for the three subsidiary Jacobi elliptic functions :code:`nd(u|m)`, :code:`sd(u|m)`, and
         :code:`cd(u|m)`.
@@ -267,9 +267,9 @@ class FieldCopolarD(typing.Generic[_FieldCopolarD__T]):
 _FieldCopolarN__T = typing.TypeVar('_FieldCopolarN__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldCopolarN(typing.Generic[_FieldCopolarN__T]):
     """
-    public class FieldCopolarN<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object
+    public class FieldCopolarN<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
-        Copolar trio with pole at point n in Glaisherâ€™s Notation.
+        Copolar trio with pole at point n in Glaisher’s Notation.
     
         This is a container for the three principal Jacobi elliptic functions :code:`sn(u|m)`, :code:`cn(u|m)`, and
         :code:`dn(u|m)`.
@@ -311,9 +311,9 @@ class FieldCopolarN(typing.Generic[_FieldCopolarN__T]):
 _FieldCopolarS__T = typing.TypeVar('_FieldCopolarS__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldCopolarS(typing.Generic[_FieldCopolarS__T]):
     """
-    public class FieldCopolarS<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object
+    public class FieldCopolarS<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
-        Copolar trio with pole at point s in Glaisherâ€™s Notation.
+        Copolar trio with pole at point s in Glaisher’s Notation.
     
         This is a container for the three subsidiary Jacobi elliptic functions :code:`cs(u|m)`, :code:`ds(u|m)` and
         :code:`ns(u|m)`.
@@ -355,7 +355,7 @@ class FieldCopolarS(typing.Generic[_FieldCopolarS__T]):
 _FieldJacobiElliptic__T = typing.TypeVar('_FieldJacobiElliptic__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
     """
-    public abstract class FieldJacobiElliptic<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object
+    public abstract class FieldJacobiElliptic<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Computation of Jacobi elliptic functions. The Jacobi elliptic functions are related to elliptic integrals.
     
@@ -752,7 +752,7 @@ class FieldJacobiElliptic(typing.Generic[_FieldJacobiElliptic__T]):
 _FieldJacobiTheta__T = typing.TypeVar('_FieldJacobiTheta__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldJacobiTheta(typing.Generic[_FieldJacobiTheta__T]):
     """
-    public class FieldJacobiTheta<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object
+    public class FieldJacobiTheta<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Algorithm computing Jacobi theta functions.
     
@@ -775,11 +775,11 @@ class FieldJacobiTheta(typing.Generic[_FieldJacobiTheta__T]):
 _FieldTheta__T = typing.TypeVar('_FieldTheta__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldTheta(typing.Generic[_FieldTheta__T]):
     """
-    public class FieldTheta<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object
+    public class FieldTheta<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Values of :class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiTheta` functions.
     
-        This is a container for the four Jacobi theta functions Î¸â‚�(z|Ï„), Î¸â‚‚(z|Ï„), Î¸â‚ƒ(z|Ï„), and Î¸â‚„(z|Ï„).
+        This is a container for the four Jacobi theta functions θ₁(z|τ), θ₂(z|τ), θ₃(z|τ), and θ₄(z|τ).
     
         Since:
             2.0
@@ -789,40 +789,40 @@ class FieldTheta(typing.Generic[_FieldTheta__T]):
     """
     def theta1(self) -> _FieldTheta__T:
         """
-            Get the value of the Î¸â‚�(z|Ï„) function.
+            Get the value of the θ₁(z|τ) function.
         
             Returns:
-                Î¸â‚�(z|Ï„)
+                θ₁(z|τ)
         
         
         """
         ...
     def theta2(self) -> _FieldTheta__T:
         """
-            Get the value of the Î¸â‚‚(z|Ï„) function.
+            Get the value of the θ₂(z|τ) function.
         
             Returns:
-                Î¸â‚‚(z|Ï„)
+                θ₂(z|τ)
         
         
         """
         ...
     def theta3(self) -> _FieldTheta__T:
         """
-            Get the value of the Î¸â‚ƒ(z|Ï„) function.
+            Get the value of the θ₃(z|τ) function.
         
             Returns:
-                Î¸â‚ƒ(z|Ï„)
+                θ₃(z|τ)
         
         
         """
         ...
     def theta4(self) -> _FieldTheta__T:
         """
-            Get the value of the Î¸â‚„(z|Ï„) function.
+            Get the value of the θ₄(z|τ) function.
         
             Returns:
-                Î¸â‚„(z|Ï„)
+                θ₄(z|τ)
         
         
         """
@@ -830,7 +830,7 @@ class FieldTheta(typing.Generic[_FieldTheta__T]):
 
 class JacobiElliptic:
     """
-    public abstract class JacobiElliptic extends Object
+    public abstract class JacobiElliptic extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Algorithm computing Jacobi elliptic functions.
     
@@ -1041,7 +1041,7 @@ class JacobiElliptic:
         ...
     def valuesC(self, double: float) -> CopolarC:
         """
-            Evaluate the three subsidiary Jacobi elliptic functions with pole at point c in Glaisherâ€™s Notation.
+            Evaluate the three subsidiary Jacobi elliptic functions with pole at point c in Glaisher’s Notation.
         
             Parameters:
                 u (double): argument of the functions
@@ -1055,7 +1055,7 @@ class JacobiElliptic:
         ...
     def valuesD(self, double: float) -> CopolarD:
         """
-            Evaluate the three subsidiary Jacobi elliptic functions with pole at point d in Glaisherâ€™s Notation.
+            Evaluate the three subsidiary Jacobi elliptic functions with pole at point d in Glaisher’s Notation.
         
             Parameters:
                 u (double): argument of the functions
@@ -1069,7 +1069,7 @@ class JacobiElliptic:
         ...
     def valuesN(self, double: float) -> CopolarN:
         """
-            Evaluate the three principal Jacobi elliptic functions with pole at point n in Glaisherâ€™s Notation.
+            Evaluate the three principal Jacobi elliptic functions with pole at point n in Glaisher’s Notation.
         
             Parameters:
                 u (double): argument of the functions
@@ -1083,7 +1083,7 @@ class JacobiElliptic:
         ...
     def valuesS(self, double: float) -> CopolarS:
         """
-            Evaluate the three subsidiary Jacobi elliptic functions with pole at point s in Glaisherâ€™s Notation.
+            Evaluate the three subsidiary Jacobi elliptic functions with pole at point s in Glaisher’s Notation.
         
             Parameters:
                 u (double): argument of the functions
@@ -1098,15 +1098,15 @@ class JacobiElliptic:
 
 class JacobiEllipticBuilder:
     """
-    public class JacobiEllipticBuilder extends Object
+    public class JacobiEllipticBuilder extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Builder for algorithms compmuting Jacobi elliptic functions.
     
         The Jacobi elliptic functions are related to elliptic integrals.
     
         There are different conventions to interpret the arguments of Jacobi elliptic functions. The first argument may be the
-        amplitude Ã�â€ , but is more often the variable u (with sn(u) = sin(Ã�â€ ) and cn(u) = cos(Ã�â€ )). The second argument
-        is either the modulus k or the parameter m with m = kÃ‚Â². In Hipparchus, we adopted the convention to use u and m.
+        amplitude φ, but is more often the variable u (with sn(u) = sin(φ) and cn(u) = cos(φ)). The second argument is either
+        the modulus k or the parameter m with m = k². In Hipparchus, we adopted the convention to use u and m.
     
         Since:
             2.0
@@ -1171,7 +1171,7 @@ class JacobiEllipticBuilder:
 
 class JacobiTheta:
     """
-    public class JacobiTheta extends Object
+    public class JacobiTheta extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Algorithm computing Jacobi theta functions.
     
@@ -1197,7 +1197,7 @@ class JacobiTheta:
                 z (:class:`~org.hipparchus.complex.Complex`): argument of the functions
         
             Returns:
-                container for the four Jacobi theta functions Î¸â‚�(z|Ï„), Î¸â‚‚(z|Ï„), Î¸â‚ƒ(z|Ï„), and Î¸â‚„(z|Ï„)
+                container for the four Jacobi theta functions θ₁(z|τ), θ₂(z|τ), θ₃(z|τ), and θ₄(z|τ)
         
         
         """
@@ -1205,11 +1205,11 @@ class JacobiTheta:
 
 class Theta:
     """
-    public class Theta extends Object
+    public class Theta extends :class:`~org.hipparchus.special.elliptic.jacobi.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Values of :class:`~org.hipparchus.special.elliptic.jacobi.JacobiTheta` functions.
     
-        This is a container for the four Jacobi theta functions Î¸â‚�(z|Ï„), Î¸â‚‚(z|Ï„), Î¸â‚ƒ(z|Ï„), and Î¸â‚„(z|Ï„).
+        This is a container for the four Jacobi theta functions θ₁(z|τ), θ₂(z|τ), θ₃(z|τ), and θ₄(z|τ).
     
         Since:
             2.0
@@ -1219,40 +1219,40 @@ class Theta:
     """
     def theta1(self) -> org.hipparchus.complex.Complex:
         """
-            Get the value of the Î¸â‚�(z|Ï„) function.
+            Get the value of the θ₁(z|τ) function.
         
             Returns:
-                Î¸â‚�(z|Ï„)
+                θ₁(z|τ)
         
         
         """
         ...
     def theta2(self) -> org.hipparchus.complex.Complex:
         """
-            Get the value of the Î¸â‚‚(z|Ï„) function.
+            Get the value of the θ₂(z|τ) function.
         
             Returns:
-                Î¸â‚‚(z|Ï„)
+                θ₂(z|τ)
         
         
         """
         ...
     def theta3(self) -> org.hipparchus.complex.Complex:
         """
-            Get the value of the Î¸â‚ƒ(z|Ï„) function.
+            Get the value of the θ₃(z|τ) function.
         
             Returns:
-                Î¸â‚ƒ(z|Ï„)
+                θ₃(z|τ)
         
         
         """
         ...
     def theta4(self) -> org.hipparchus.complex.Complex:
         """
-            Get the value of the Î¸â‚„(z|Ï„) function.
+            Get the value of the θ₄(z|τ) function.
         
             Returns:
-                Î¸â‚„(z|Ï„)
+                θ₄(z|τ)
         
         
         """

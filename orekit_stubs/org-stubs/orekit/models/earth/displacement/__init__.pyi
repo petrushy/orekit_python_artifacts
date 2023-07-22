@@ -10,7 +10,7 @@ import typing
 
 class OceanLoadingCoefficients:
     """
-    public class OceanLoadingCoefficients extends Object
+    public class OceanLoadingCoefficients extends :class:`~org.orekit.models.earth.displacement.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Site specific coefficients for ocean loading.
     
@@ -195,7 +195,7 @@ class OceanLoadingCoefficientsBLQFactory(org.orekit.data.AbstractSelfFeedingLoad
     """
     DEFAULT_BLQ_SUPPORTED_NAMES: typing.ClassVar[str] = ...
     """
-    public static final String DEFAULT_BLQ_SUPPORTED_NAMES
+    public static final :class:`~org.orekit.models.earth.displacement.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_BLQ_SUPPORTED_NAMES
     
         Default supported files name pattern for Onsala Space Observatory files in BLQ format.
     
@@ -213,7 +213,7 @@ class OceanLoadingCoefficientsBLQFactory(org.orekit.data.AbstractSelfFeedingLoad
             Get the coefficients for a given site.
         
             Parameters:
-                site (String): site name (as it appears in the Onsala Space Observatory files in BLQ format), ignoring case
+                site (:class:`~org.orekit.models.earth.displacement.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): site name (as it appears in the Onsala Space Observatory files in BLQ format), ignoring case
         
             Returns:
                 coefficients for the site
@@ -221,16 +221,7 @@ class OceanLoadingCoefficientsBLQFactory(org.orekit.data.AbstractSelfFeedingLoad
         
         """
         ...
-    def getSites(self) -> java.util.List[str]:
-        """
-            Get the list of sites for which we have found coefficients, in lexicographic order ignoring case.
-        
-            Returns:
-                list of sites for which we have found coefficients, in lexicographic order ignoring case
-        
-        
-        """
-        ...
+    def getSites(self) -> java.util.List[str]: ...
 
 class StationDisplacement:
     """
@@ -248,7 +239,7 @@ class StationDisplacement:
             Parameters:
                 elements (:class:`~org.orekit.data.BodiesElements`): elements affecting Earth orientation
                 earthFrame (:class:`~org.orekit.frames.Frame`): Earth frame in which reference point is defined
-                referencePoint (Vector3D): reference point position in :code:`earthFrame`
+                referencePoint (:class:`~org.orekit.models.earth.displacement.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): reference point position in :code:`earthFrame`
         
             Returns:
                 displacement vector to be *added* to :code:`referencePoint`
@@ -259,7 +250,7 @@ class StationDisplacement:
 
 class Tide:
     """
-    public class Tide extends Object
+    public class Tide extends :class:`~org.orekit.models.earth.displacement.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Class representing a tide.
     
@@ -270,56 +261,56 @@ class Tide:
     """
     public static final :class:`~org.orekit.models.earth.displacement.Tide` M2
     
-        Mâ‚‚ tide.
+        M₂ tide.
     
     """
     S2: typing.ClassVar['Tide'] = ...
     """
     public static final :class:`~org.orekit.models.earth.displacement.Tide` S2
     
-        Sâ‚‚ tide.
+        S₂ tide.
     
     """
     N2: typing.ClassVar['Tide'] = ...
     """
     public static final :class:`~org.orekit.models.earth.displacement.Tide` N2
     
-        Nâ‚‚ tide.
+        N₂ tide.
     
     """
     K2: typing.ClassVar['Tide'] = ...
     """
     public static final :class:`~org.orekit.models.earth.displacement.Tide` K2
     
-        Kâ‚‚ tide.
+        K₂ tide.
     
     """
     K1: typing.ClassVar['Tide'] = ...
     """
     public static final :class:`~org.orekit.models.earth.displacement.Tide` K1
     
-        Kâ‚� tide.
+        K₁ tide.
     
     """
     O1: typing.ClassVar['Tide'] = ...
     """
     public static final :class:`~org.orekit.models.earth.displacement.Tide` O1
     
-        Oâ‚� tide.
+        O₁ tide.
     
     """
     P1: typing.ClassVar['Tide'] = ...
     """
     public static final :class:`~org.orekit.models.earth.displacement.Tide` P1
     
-        Pâ‚� tide.
+        P₁ tide.
     
     """
     Q1: typing.ClassVar['Tide'] = ...
     """
     public static final :class:`~org.orekit.models.earth.displacement.Tide` Q1
     
-        Qâ‚� tide.
+        Q₁ tide.
     
     """
     MF: typing.ClassVar['Tide'] = ...
@@ -351,30 +342,31 @@ class Tide:
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.models.earth.displacement.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.models.earth.displacement.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
         ...
     def getDelaunayMultipliers(self) -> typing.List[int]:
         """
-            Get the multipliers for Delaunay arguments (l, l', F, D, Î©).
+            Get the multipliers for Delaunay arguments (l, l', F, D, Ω).
         
             Beware that for tides the multipliers for Delaunay arguments have an opposite sign with respect to the convention used
             for nutation computation! Here, we obey the tides convention.
         
             Returns:
-                multipliers for Delaunay arguments (l, l', F, D, Î©)
+                multipliers for Delaunay arguments (l, l', F, D, Ω)
         
         
         """
         ...
     def getDoodsonMultipliers(self) -> typing.List[int]:
         """
-            Get the multipliers for Doodson arguments (Ï„, s, h, p, N', ps).
+            Get the multipliers for Doodson arguments (τ, s, h, p, N', ps).
         
             Returns:
-                multipliers for Doodson arguments (Ï„, s, h, p, N', ps)
+                multipliers for Doodson arguments (τ, s, h, p, N', ps)
         
         
         """
@@ -417,12 +409,12 @@ class Tide:
         ...
     def getTauMultiplier(self) -> int:
         """
-            Get the multiplier for the Ï„ Doodson argument.
+            Get the multiplier for the τ Doodson argument.
         
             This multiplier identifies semi-diurnal tides (2), diurnal tides (1) and long period tides (0)
         
             Returns:
-                multiplier for the Ï„ Doodson argument
+                multiplier for the τ Doodson argument
         
         
         """
@@ -431,7 +423,8 @@ class Tide:
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.models.earth.displacement.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.models.earth.displacement.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -439,15 +432,15 @@ class Tide:
 
 class OceanLoading(StationDisplacement):
     """
-    public class OceanLoading extends Object implements :class:`~org.orekit.models.earth.displacement.StationDisplacement`
+    public class OceanLoading extends :class:`~org.orekit.models.earth.displacement.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.displacement.StationDisplacement`
     
         Modeling of displacement of reference points due to ocean loading.
     
         This class implements the same model as IERS HARDIP.F program. For a given site, this model uses a set of amplitudes and
-        phases for the 11 main tides (MÃ¢â€šâ€š, SÃ¢â€šâ€š, NÃ¢â€šâ€š, KÃ¢â€šâ€š, KÃ¢â€šï¿½, OÃ¢â€šï¿½, PÃ¢â€šï¿½, QÃ¢â€šï¿½,
-        Mf, Mm, and Ssa) in BLQ format as provided by the `Bos-Scherneck web site <http://holt.oso.chalmers.se/loading/>` at
-        Onsala Space Observatory. From these elements, additional admittances are derived using spline interpolation based on
-        tides frequencies for a total of 342 tides, including the 11 main tides.
+        phases for the 11 main tides (M₂, S₂, N₂, K₂, K₁, O₁, P₁, Q₁, Mf, Mm, and Ssa) in BLQ format as provided
+        by the `Bos-Scherneck web site <http://holt.oso.chalmers.se/loading/>` at Onsala Space Observatory. From these elements,
+        additional admittances are derived using spline interpolation based on tides frequencies for a total of 342 tides,
+        including the 11 main tides.
     
         This implementation is a complete rewrite of the original HARDISP.F program developed by Duncan Agnew and copyright 2008
         IERS Conventions center. This derived work is not endorsed by the IERS conventions center. What remains from the
@@ -461,83 +454,82 @@ class OceanLoading(StationDisplacement):
     
         .. code-block: java
         
-        
-          Copyright (C) 2008
-          IERS Conventions Center
-        
-          ==================================
-          IERS Conventions Software License
-          ==================================
-        
-          NOTICE TO USER:
-        
-          BY USING THIS SOFTWARE YOU ACCEPT THE FOLLOWING TERMS AND CONDITIONS
-          WHICH APPLY TO ITS USE.
-        
-          1. The Software is provided by the IERS Conventions Center ("the
-             Center").
-        
-          2. Permission is granted to anyone to use the Software for any
-             purpose, including commercial applications, free of charge,
-             subject to the conditions and restrictions listed below.
-        
-          3. You (the user) may adapt the Software and its algorithms for your
-             own purposes and you may distribute the resulting "derived work"
-             to others, provided that the derived work complies with the
-             following requirements:
-        
-             a) Your work shall be clearly identified so that it cannot be
-                mistaken for IERS Conventions software and that it has been
-                neither distributed by nor endorsed by the Center.
-        
-             b) Your work (including source code) must contain descriptions of
-                how the derived work is based upon and/or differs from the
-                original Software.
-        
-             c) The name(s) of all modified routine(s) that you distribute
-                shall be changed.
-        
-             d) The origin of the IERS Conventions components of your derived
-                work must not be misrepresented; you must not claim that you
-                wrote the original Software.
-        
-             e) The source code must be included for all routine(s) that you
-                distribute.  This notice must be reproduced intact in any
-                source distribution.
-        
-          4. In any published work produced by the user and which includes
-             results achieved by using the Software, you shall acknowledge
-             that the Software was used in obtaining those results.
-        
-          5. The Software is provided to the user "as is" and the Center makes
-             no warranty as to its use or performance.   The Center does not
-             and cannot warrant the performance or results which the user may
-             obtain by using the Software.  The Center makes no warranties,
-             express or implied, as to non-infringement of third party rights,
-             merchantability, or fitness for any particular purpose.  In no
-             event will the Center be liable to the user for any consequential,
-             incidental, or special damages, including any lost profits or lost
-             savings, even if a Center representative has been advised of such
-             damages, or for any claim by any third party.
-        
-          Correspondence concerning IERS Conventions software should be
-          addressed as follows:
-        
-                             Gerard Petit
-             Internet email: gpetit[at]bipm.org
-             Postal address: IERS Conventions Center
-                             Time, frequency and gravimetry section, BIPM
-                             Pavillon de Breteuil
-                             92312 Sevres  FRANCE
-        
-             or
-        
-                             Brian Luzum
-             Internet email: brian.luzum[at]usno.navy.mil
-             Postal address: IERS Conventions Center
-                             Earth Orientation Department
-                             3450 Massachusetts Ave, NW
-                             Washington, DC 20392
+          Copyright (C) 2008
+          IERS Conventions Center
+        
+          ==================================
+          IERS Conventions Software License
+          ==================================
+        
+          NOTICE TO USER:
+        
+          BY USING THIS SOFTWARE YOU ACCEPT THE FOLLOWING TERMS AND CONDITIONS
+          WHICH APPLY TO ITS USE.
+        
+          1. The Software is provided by the IERS Conventions Center ("the
+             Center").
+        
+          2. Permission is granted to anyone to use the Software for any
+             purpose, including commercial applications, free of charge,
+             subject to the conditions and restrictions listed below.
+        
+          3. You (the user) may adapt the Software and its algorithms for your
+             own purposes and you may distribute the resulting "derived work"
+             to others, provided that the derived work complies with the
+             following requirements:
+        
+             a) Your work shall be clearly identified so that it cannot be
+                mistaken for IERS Conventions software and that it has been
+                neither distributed by nor endorsed by the Center.
+        
+             b) Your work (including source code) must contain descriptions of
+                how the derived work is based upon and/or differs from the
+                original Software.
+        
+             c) The name(s) of all modified routine(s) that you distribute
+                shall be changed.
+        
+             d) The origin of the IERS Conventions components of your derived
+                work must not be misrepresented; you must not claim that you
+                wrote the original Software.
+        
+             e) The source code must be included for all routine(s) that you
+                distribute.  This notice must be reproduced intact in any
+                source distribution.
+        
+          4. In any published work produced by the user and which includes
+             results achieved by using the Software, you shall acknowledge
+             that the Software was used in obtaining those results.
+        
+          5. The Software is provided to the user "as is" and the Center makes
+             no warranty as to its use or performance.   The Center does not
+             and cannot warrant the performance or results which the user may
+             obtain by using the Software.  The Center makes no warranties,
+             express or implied, as to non-infringement of third party rights,
+             merchantability, or fitness for any particular purpose.  In no
+             event will the Center be liable to the user for any consequential,
+             incidental, or special damages, including any lost profits or lost
+             savings, even if a Center representative has been advised of such
+             damages, or for any claim by any third party.
+        
+          Correspondence concerning IERS Conventions software should be
+          addressed as follows:
+        
+                             Gerard Petit
+             Internet email: gpetit[at]bipm.org
+             Postal address: IERS Conventions Center
+                             Time, frequency and gravimetry section, BIPM
+                             Pavillon de Breteuil
+                             92312 Sevres  FRANCE
+        
+             or
+        
+                             Brian Luzum
+             Internet email: brian.luzum[at]usno.navy.mil
+             Postal address: IERS Conventions Center
+                             Earth Orientation Department
+                             3450 Massachusetts Ave, NW
+                             Washington, DC 20392
          
     
         Since:
@@ -552,13 +544,13 @@ class OceanLoading(StationDisplacement):
             Compute displacement of a ground reference point.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.displacement.StationDisplacement.displacement`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.displacement.StationDisplacement`
+                :meth:`~org.orekit.models.earth.displacement.StationDisplacement.displacement` in
+                interface :class:`~org.orekit.models.earth.displacement.StationDisplacement`
         
             Parameters:
                 elements (:class:`~org.orekit.data.BodiesElements`): elements affecting Earth orientation
                 earthFrame (:class:`~org.orekit.frames.Frame`): Earth frame in which reference point is defined
-                referencePoint (Vector3D): reference point position in :code:`earthFrame`
+                referencePoint (:class:`~org.orekit.models.earth.displacement.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): reference point position in :code:`earthFrame`
         
             Returns:
                 displacement vector to be *added* to :code:`referencePoint`
@@ -569,7 +561,7 @@ class OceanLoading(StationDisplacement):
 
 class PythonStationDisplacement(StationDisplacement):
     """
-    public class PythonStationDisplacement extends Object implements :class:`~org.orekit.models.earth.displacement.StationDisplacement`
+    public class PythonStationDisplacement extends :class:`~org.orekit.models.earth.displacement.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.displacement.StationDisplacement`
     """
     def __init__(self): ...
     def displacement(self, bodiesElements: org.orekit.data.BodiesElements, frame: org.orekit.frames.Frame, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
@@ -577,13 +569,13 @@ class PythonStationDisplacement(StationDisplacement):
             Compute displacement of a ground reference point.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.displacement.StationDisplacement.displacement`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.displacement.StationDisplacement`
+                :meth:`~org.orekit.models.earth.displacement.StationDisplacement.displacement` in
+                interface :class:`~org.orekit.models.earth.displacement.StationDisplacement`
         
             Parameters:
                 elements (:class:`~org.orekit.data.BodiesElements`): elements affecting Earth orientation
                 earthFrame (:class:`~org.orekit.frames.Frame`): Earth frame in which reference point is defined
-                referencePoint (Vector3D): reference point position in :code:`earthFrame`
+                referencePoint (:class:`~org.orekit.models.earth.displacement.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): reference point position in :code:`earthFrame`
         
             Returns:
                 displacement vector to be *added* to :code:`referencePoint`
@@ -614,7 +606,7 @@ class PythonStationDisplacement(StationDisplacement):
 
 class TidalDisplacement(StationDisplacement):
     """
-    public class TidalDisplacement extends Object implements :class:`~org.orekit.models.earth.displacement.StationDisplacement`
+    public class TidalDisplacement extends :class:`~org.orekit.models.earth.displacement.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.displacement.StationDisplacement`
     
         Modeling of displacement of reference points due to tidal effects.
     
@@ -640,13 +632,13 @@ class TidalDisplacement(StationDisplacement):
             Compute displacement of a ground reference point.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.displacement.StationDisplacement.displacement`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.displacement.StationDisplacement`
+                :meth:`~org.orekit.models.earth.displacement.StationDisplacement.displacement` in
+                interface :class:`~org.orekit.models.earth.displacement.StationDisplacement`
         
             Parameters:
                 elements (:class:`~org.orekit.data.BodiesElements`): elements affecting Earth orientation
                 earthFrame (:class:`~org.orekit.frames.Frame`): Earth frame in which reference point is defined
-                referencePoint (Vector3D): reference point position in :code:`earthFrame`
+                referencePoint (:class:`~org.orekit.models.earth.displacement.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): reference point position in :code:`earthFrame`
         
             Returns:
                 displacement vector to be *added* to :code:`referencePoint`

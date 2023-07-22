@@ -14,7 +14,7 @@ import typing
 
 class ChronologicalComparator(java.util.Comparator['TimeStamped'], java.io.Serializable):
     """
-    public class ChronologicalComparator extends Object implements Comparator<:class:`~org.orekit.time.TimeStamped`>, Serializable
+    public class ChronologicalComparator extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.util.Comparator?is`<:class:`~org.orekit.time.TimeStamped`>, :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Comparator for :class:`~org.orekit.time.TimeStamped` instance.
     
@@ -27,7 +27,8 @@ class ChronologicalComparator(java.util.Comparator['TimeStamped'], java.io.Seria
             Compare two time-stamped instances.
         
             Specified by:
-                 in interface 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.util.Comparator.html?is` in
+                interface :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.util.Comparator?is`
         
             Parameters:
                 timeStamped1 (:class:`~org.orekit.time.TimeStamped`): first time-stamped instance
@@ -42,7 +43,7 @@ class ChronologicalComparator(java.util.Comparator['TimeStamped'], java.io.Seria
 
 class DateComponents(java.io.Serializable, java.lang.Comparable['DateComponents']):
     """
-    public class DateComponents extends Object implements Serializable, Comparable<:class:`~org.orekit.time.DateComponents`>
+    public class DateComponents extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`<:class:`~org.orekit.time.DateComponents`>
     
         Class representing a date broken up as year, month and day components.
     
@@ -190,7 +191,8 @@ class DateComponents(java.io.Serializable, java.lang.Comparable['DateComponents'
         """
         
             Specified by:
-                 in interface 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable.html?is` in
+                interface :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`
         
         
         """
@@ -201,7 +203,8 @@ class DateComponents(java.io.Serializable, java.lang.Comparable['DateComponents'
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -310,7 +313,8 @@ class DateComponents(java.io.Serializable, java.lang.Comparable['DateComponents'
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -337,13 +341,13 @@ class DateComponents(java.io.Serializable, java.lang.Comparable['DateComponents'
             date or the basic format ordinal date depending on the number of digits.
         
             Parameters:
-                string (String): string to parse
+                string (:class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): string to parse
         
             Returns:
                 a parsed date
         
             Raises:
-                : if string cannot be parsed
+                :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if string cannot be parsed
         
         
         """
@@ -353,7 +357,8 @@ class DateComponents(java.io.Serializable, java.lang.Comparable['DateComponents'
             Get a string representation (ISO-8601) of the date.
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 string representation of the date.
@@ -364,7 +369,7 @@ class DateComponents(java.io.Serializable, java.lang.Comparable['DateComponents'
 
 class DateTimeComponents(java.io.Serializable, java.lang.Comparable['DateTimeComponents']):
     """
-    public class DateTimeComponents extends Object implements Serializable, Comparable<:class:`~org.orekit.time.DateTimeComponents`>
+    public class DateTimeComponents extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`<:class:`~org.orekit.time.DateTimeComponents`>
     
         Holder for date and time components.
     
@@ -403,7 +408,8 @@ class DateTimeComponents(java.io.Serializable, java.lang.Comparable['DateTimeCom
         """
         
             Specified by:
-                 in interface 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable.html?is` in
+                interface :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`
         
         
         """
@@ -412,7 +418,8 @@ class DateTimeComponents(java.io.Serializable, java.lang.Comparable['DateTimeCom
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -441,7 +448,8 @@ class DateTimeComponents(java.io.Serializable, java.lang.Comparable['DateTimeCom
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -473,13 +481,13 @@ class DateTimeComponents(java.io.Serializable, java.lang.Comparable['DateTimeCom
             1976W186T210000.
         
             Parameters:
-                string (String): string to parse
+                string (:class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): string to parse
         
             Returns:
                 a parsed date/time
         
             Raises:
-                : if string cannot be parsed
+                :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if string cannot be parsed
         
         
         """
@@ -516,7 +524,8 @@ class DateTimeComponents(java.io.Serializable, java.lang.Comparable['DateTimeCom
             The format used is ISO8601 including the UTC offset.
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 string representation of this pair
@@ -579,7 +588,8 @@ class DateTimeComponents(java.io.Serializable, java.lang.Comparable['DateTimeCom
                 RFC 3339 format string.
         
             Also see:
-                RFC 3339, :meth:`~org.orekit.time.AbsoluteDate.toStringRfc3339`, :meth:`~org.orekit.time.DateTimeComponents.toString`,
+                :meth:`~org.orekit.time.https:.tools.ietf.org.html.rfc3339#page`, :meth:`~org.orekit.time.AbsoluteDate.toStringRfc3339`,
+                :meth:`~org.orekit.time.DateTimeComponents.toString`,
                 :meth:`~org.orekit.time.DateTimeComponents.toStringWithoutUtcOffset`
         
         
@@ -650,7 +660,7 @@ _FieldTimeInterpolable__T = typing.TypeVar('_FieldTimeInterpolable__T', bound='F
 _FieldTimeInterpolable__KK = typing.TypeVar('_FieldTimeInterpolable__KK', bound=org.hipparchus.CalculusFieldElement)  # <KK>
 class FieldTimeInterpolable(typing.Generic[_FieldTimeInterpolable__T, _FieldTimeInterpolable__KK]):
     """
-    public interface FieldTimeInterpolable<T extends FieldTimeInterpolable<T, KK>, KK extends CalculusFieldElement<KK>>
+    public interface FieldTimeInterpolable<T extends FieldTimeInterpolable<T, KK>, KK extends :class:`~org.orekit.time.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<KK>>
     
         This interface represents objects that can be interpolated in time.
     """
@@ -663,7 +673,7 @@ _FieldTimeShiftable__T = typing.TypeVar('_FieldTimeShiftable__T', bound=FieldTim
 _FieldTimeShiftable__KK = typing.TypeVar('_FieldTimeShiftable__KK', bound=org.hipparchus.CalculusFieldElement)  # <KK>
 class FieldTimeShiftable(typing.Generic[_FieldTimeShiftable__T, _FieldTimeShiftable__KK]):
     """
-    public interface FieldTimeShiftable<T extends :class:`~org.orekit.time.FieldTimeInterpolable`<T, KK>, KK extends CalculusFieldElement<KK>>
+    public interface FieldTimeShiftable<T extends :class:`~org.orekit.time.FieldTimeInterpolable`<T, KK>, KK extends :class:`~org.orekit.time.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<KK>>
     
         This interface represents objects that can be shifted in time.
     
@@ -698,7 +708,7 @@ class FieldTimeShiftable(typing.Generic[_FieldTimeShiftable__T, _FieldTimeShifta
 _FieldTimeStamped__T = typing.TypeVar('_FieldTimeStamped__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldTimeStamped(typing.Generic[_FieldTimeStamped__T]):
     """
-    public interface FieldTimeStamped<T extends CalculusFieldElement<T>>
+    public interface FieldTimeStamped<T extends :class:`~org.orekit.time.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>>
     
         This interface represents objects that have a :class:`~org.orekit.time.AbsoluteDate` date attached to them.
     
@@ -708,12 +718,11 @@ class FieldTimeStamped(typing.Generic[_FieldTimeStamped__T]):
     
         .. code-block: java
         
-        
-             SortedSet<Orbit> sortedOrbits =
-                 new TreeSet<Orbit>(new ChronologicalComparator());
-             sortedOrbits.add(orbit1);
-             sortedOrbits.add(orbit2);
-             ...
+             SortedSet<Orbit> sortedOrbits =
+                 new TreeSet<Orbit>(new ChronologicalComparator());
+             sortedOrbits.add(orbit1);
+             sortedOrbits.add(orbit2);
+             ...
          
     
         This interface is also the base interface used to :class:`~org.orekit.utils.TimeStampedCache` series of time-dependent
@@ -727,7 +736,7 @@ class FieldTimeStamped(typing.Generic[_FieldTimeStamped__T]):
 
 class Month(java.lang.Enum['Month']):
     """
-    public enum Month extends Enum<:class:`~org.orekit.time.Month`>
+    public enum Month extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.time.Month`>
     
         Enumerate representing a calendar month.
     
@@ -801,7 +810,7 @@ class Month(java.lang.Enum['Month']):
                 the month corresponding to the string
         
             Raises:
-                : if the string does not correspond to a month
+                :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if the string does not correspond to a month
         
         
         """
@@ -845,13 +854,13 @@ class Month(java.lang.Enum['Month']):
             of the specified string and trims surrounding blanks.
         
             Parameters:
-                s (String): string to parse
+                s (:class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): string to parse
         
             Returns:
                 the month corresponding to the string
         
             Raises:
-                : if the string does not correspond to a month
+                :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if the string does not correspond to a month
         
         
         """
@@ -868,14 +877,14 @@ class Month(java.lang.Enum['Month']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -888,9 +897,8 @@ class Month(java.lang.Enum['Month']):
         
             .. code-block: java
             
-            
-            for (Month c : Month.values())
-                System.out.println(c);
+            for (Month c : Month.values())
+                System.out.println(c);
             
         
             Returns:
@@ -902,7 +910,7 @@ class Month(java.lang.Enum['Month']):
 
 class OffsetModel:
     """
-    public class OffsetModel extends Object
+    public class OffsetModel extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         TAI UTC offset model.
     
@@ -959,7 +967,7 @@ class OffsetModel:
 
 class TimeComponents(java.io.Serializable, java.lang.Comparable['TimeComponents']):
     """
-    public class TimeComponents extends Object implements Serializable, Comparable<:class:`~org.orekit.time.TimeComponents`>
+    public class TimeComponents extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`<:class:`~org.orekit.time.TimeComponents`>
     
         Class representing a time within the day broken up as hour, minute and second components.
     
@@ -994,7 +1002,8 @@ class TimeComponents(java.io.Serializable, java.lang.Comparable['TimeComponents'
         """
         
             Specified by:
-                 in interface 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable.html?is` in
+                interface :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`
         
         
         """
@@ -1003,7 +1012,8 @@ class TimeComponents(java.io.Serializable, java.lang.Comparable['TimeComponents'
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -1034,11 +1044,10 @@ class TimeComponents(java.io.Serializable, java.lang.Comparable['TimeComponents'
         
             .. code-block: java
             
-            
-                 0 <= secondInDayA + secondInDayB < 86400
-                 :code:`0 <= (secondInDayA + secondInDayB) % 60 + leap <= minuteDuration`
-                 :code:`0 <= leap <= minuteDuration - 60                        if minuteDuration >= 60`
-                 :code:`0 >= leap >= minuteDuration - 60                        if minuteDuration <  60`
+                 0 <= secondInDayA + secondInDayB < 86400
+                 :code:`0 <= (secondInDayA + secondInDayB) % 60 + leap <= minuteDuration`
+                 :code:`0 <= leap <= minuteDuration - 60                        if minuteDuration >= 60`
+                 :code:`0 >= leap >= minuteDuration - 60                        if minuteDuration <  60`
              
         
             If the seconds of minute (:meth:`~org.orekit.time.TimeComponents.getSecond`) computed from :code:`secondInDayA +
@@ -1153,7 +1162,8 @@ class TimeComponents(java.io.Serializable, java.lang.Comparable['TimeComponents'
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -1176,13 +1186,13 @@ class TimeComponents(java.io.Serializable, java.lang.Comparable['TimeComponents'
             neither expended representations nor representations with reduced accuracy are supported.
         
             Parameters:
-                string (String): string to parse
+                string (:class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): string to parse
         
             Returns:
                 a parsed time
         
             Raises:
-                : if string cannot be parsed
+                :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if string cannot be parsed
         
         
         """
@@ -1192,7 +1202,8 @@ class TimeComponents(java.io.Serializable, java.lang.Comparable['TimeComponents'
             Get a string representation of the time including the offset from UTC.
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 string representation of the time in an ISO 8601 like format including the UTC offset.
@@ -1267,7 +1278,7 @@ class TimeScalarFunction:
 
 class TimeScale(java.io.Serializable):
     """
-    public interface TimeScale extends Serializable
+    public interface TimeScale extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Interface for time scales.
     
@@ -1482,8 +1493,7 @@ class TimeScales:
         
             .. code-block: java
             
-            
-             BE = 1900.0 + (JED - 2415020.31352) / 365.242198781
+             BE = 1900.0 + (JED - 2415020.31352) / 365.242198781
              
         
             This method reverts the formula above and computes an :code:`AbsoluteDate` from the Besselian Epoch.
@@ -1510,8 +1520,7 @@ class TimeScales:
         
             .. code-block: java
             
-            
-             JE = 2000.0 + (JED - 2451545.0) / 365.25
+             JE = 2000.0 + (JED - 2451545.0) / 365.25
              
         
             This method reverts the formula above and computes an :code:`AbsoluteDate` from the Julian Epoch.
@@ -1839,7 +1848,7 @@ class TimeScales:
 
 class TimeScalesFactory(java.io.Serializable):
     """
-    public class TimeScalesFactory extends Object implements Serializable
+    public class TimeScalesFactory extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Factory for predefined time scales.
     
@@ -1922,12 +1931,11 @@ class TimeStamped:
     
         .. code-block: java
         
-        
-             SortedSet<Orbit> sortedOrbits =
-                 new TreeSet<Orbit>(new ChronologicalComparator());
-             sortedOrbits.add(orbit1);
-             sortedOrbits.add(orbit2);
-             ...
+             SortedSet<Orbit> sortedOrbits =
+                 new TreeSet<Orbit>(new ChronologicalComparator());
+             sortedOrbits.add(orbit1);
+             sortedOrbits.add(orbit2);
+             ...
          
     
         This interface is also the base interface used to :class:`~org.orekit.utils.TimeStampedCache` series of time-dependent
@@ -2008,11 +2016,11 @@ class AGILeapSecondFilesLoader(org.orekit.data.AbstractSelfFeedingLoader, UTCTAI
             10.3
     
         Also see:
-            LeapSecond.dat
+            :class:`~org.orekit.time.ftp:.ftp.agi.com.pub.STKData.Astro.LeapSecond.dat`
     """
     DEFAULT_SUPPORTED_NAMES: typing.ClassVar[str] = ...
     """
-    public static final String DEFAULT_SUPPORTED_NAMES
+    public static final :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_SUPPORTED_NAMES
     
         Default supported files name pattern.
     
@@ -2032,7 +2040,7 @@ class AGILeapSecondFilesLoader(org.orekit.data.AbstractSelfFeedingLoader, UTCTAI
 
 class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Comparable['AbsoluteDate'], java.io.Serializable):
     """
-    public class AbsoluteDate extends Object implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.time.AbsoluteDate`>, Comparable<:class:`~org.orekit.time.AbsoluteDate`>, Serializable
+    public class AbsoluteDate extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.time.AbsoluteDate`>, :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`<:class:`~org.orekit.time.AbsoluteDate`>, :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         This class represents a specific instant in time.
     
@@ -2050,10 +2058,9 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
     
         .. code-block: java
         
-        
-           DateTimeComponents utcComponents = readNextDate();
-           AbsoluteDate date = new AbsoluteDate(utcComponents, TimeScalesFactory.getUTC());
-           writeNextDate(date.getComponents(TimeScalesFactory.getTAI()));
+           DateTimeComponents utcComponents = readNextDate();
+           AbsoluteDate date = new AbsoluteDate(utcComponents, TimeScalesFactory.getUTC());
+           writeNextDate(date.getComponents(TimeScalesFactory.getTAI()));
          
     
         Two complementary views are available:
@@ -2319,7 +2326,8 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
             Compare the instance with another date.
         
             Specified by:
-                 in interface 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable.html?is` in
+                interface :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): other date to compare the instance to
@@ -2383,10 +2391,11 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
             Check if the instance represents the same time as another instance.
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                date (Object): other date
+                date (:class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): other date
         
             Returns:
                 true if the instance and the other date refer to the same instant
@@ -2438,7 +2447,7 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
             This method uses the :meth:`~org.orekit.data.DataContext.getDefault`.
         
             Parameters:
-                timeZone (TimeZone): time zone
+                timeZone (:class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.util.TimeZone?is`): time zone
         
             Returns:
                 date/time components
@@ -2452,7 +2461,7 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
             Split the instance into date/time components for a time zone.
         
             Parameters:
-                timeZone (TimeZone): time zone
+                timeZone (:class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.util.TimeZone?is`): time zone
                 utc (:class:`~org.orekit.time.TimeScale`): time scale used to computed date and time components.
         
             Returns:
@@ -2490,7 +2499,8 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
             Get a hashcode for this date.
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 hashcode
@@ -2800,8 +2810,8 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
         """
             Compute the offset between two time scales at the current instant.
         
-            The offset is defined as *lÃ¢â€šï¿½-lÃ¢â€šâ€š* where *lÃ¢â€šï¿½* is the location of the instant in the :code:`scale1`
-            time scale and *lÃ¢â€šâ€š* is the location of the instant in the :code:`scale2` time scale.
+            The offset is defined as *l₁-l₂* where *l₁* is the location of the instant in the :code:`scale1` time scale and
+            *l₂* is the location of the instant in the :code:`scale2` time scale.
         
             Parameters:
                 scale1 (:class:`~org.orekit.time.TimeScale`): first time scale
@@ -2815,7 +2825,7 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
         ...
     def toDate(self, timeScale: TimeScale) -> java.util.Date:
         """
-            Convert the instance to a Java null.
+            Convert the instance to a Java :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.util.Date?is`.
         
             Conversion to the Date class induces a loss of precision because the Date class does not provide sub-millisecond
             information. Java Dates are considered to be locations in some times scales.
@@ -2824,7 +2834,8 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
                 timeScale (:class:`~org.orekit.time.TimeScale`): time scale to use
         
             Returns:
-                a null instance representing the location of the instant in the time scale
+                a :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.util.Date?is` instance representing the
+                location of the instant in the time scale
         
         
         """
@@ -2842,7 +2853,8 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
             This method uses the :meth:`~org.orekit.data.DataContext.getDefault`.
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a string representation of the instance, in ISO-8601 format if UTC is available from the default data context.
@@ -2904,7 +2916,7 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
             This method uses the :meth:`~org.orekit.data.DataContext.getDefault`.
         
             Parameters:
-                timeZone (TimeZone): time zone
+                timeZone (:class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.util.TimeZone?is`): time zone
         
             Returns:
                 string representation of the instance, in ISO-8601 format with milliseconds accuracy
@@ -2918,7 +2930,7 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
             Get a String representation of the instant location for a time zone.
         
             Parameters:
-                timeZone (TimeZone): time zone
+                timeZone (:class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.util.TimeZone?is`): time zone
                 utc (:class:`~org.orekit.time.TimeScale`): time scale used to compute date and time components.
         
             Returns:
@@ -2960,7 +2972,8 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
                 RFC 3339 format string.
         
             Also see:
-                RFC 3339, :meth:`~org.orekit.time.DateTimeComponents.toStringRfc3339`, :meth:`~org.orekit.time.AbsoluteDate.toString`,
+                :meth:`~org.orekit.time.https:.tools.ietf.org.html.rfc3339#page`,
+                :meth:`~org.orekit.time.DateTimeComponents.toStringRfc3339`, :meth:`~org.orekit.time.AbsoluteDate.toString`,
                 :meth:`~org.orekit.time.AbsoluteDate.getComponents`
         
         
@@ -2998,7 +3011,7 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
 
 class AbstractTimeScales(TimeScales):
     """
-    public abstract class AbstractTimeScales extends Object implements :class:`~org.orekit.time.TimeScales`
+    public abstract class AbstractTimeScales extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeScales`
     
         Abstract base class for :class:`~org.orekit.time.TimeScales` that implements some common functionality.
     
@@ -3018,8 +3031,7 @@ class AbstractTimeScales(TimeScales):
         
             .. code-block: java
             
-            
-             BE = 1900.0 + (JED - 2415020.31352) / 365.242198781
+             BE = 1900.0 + (JED - 2415020.31352) / 365.242198781
              
         
             This method reverts the formula above and computes an :code:`AbsoluteDate` from the Besselian Epoch.
@@ -3050,8 +3062,7 @@ class AbstractTimeScales(TimeScales):
         
             .. code-block: java
             
-            
-             JE = 2000.0 + (JED - 2451545.0) / 365.25
+             JE = 2000.0 + (JED - 2451545.0) / 365.25
              
         
             This method reverts the formula above and computes an :code:`AbsoluteDate` from the Julian Epoch.
@@ -3321,7 +3332,7 @@ class AbstractTimeScales(TimeScales):
 
 class BDTScale(TimeScale):
     """
-    public class BDTScale extends Object implements :class:`~org.orekit.time.TimeScale`
+    public class BDTScale extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeScale`
     
         Beidou system time scale.
     
@@ -3412,7 +3423,8 @@ class BDTScale(TimeScale):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -3420,7 +3432,7 @@ class BDTScale(TimeScale):
 
 class BurstSelector(DatesSelector):
     """
-    public class BurstSelector extends Object implements :class:`~org.orekit.time.DatesSelector`
+    public class BurstSelector extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.DatesSelector`
     
         Selector generating high rate bursts of dates separated by some rest period.
     
@@ -3442,7 +3454,7 @@ class BurstSelector(DatesSelector):
 _FieldAbsoluteDate__T = typing.TypeVar('_FieldAbsoluteDate__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], TimeShiftable['FieldAbsoluteDate'[_FieldAbsoluteDate__T]], java.lang.Comparable['FieldAbsoluteDate'[_FieldAbsoluteDate__T]], typing.Generic[_FieldAbsoluteDate__T]):
     """
-    public class FieldAbsoluteDate<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.time.FieldTimeStamped`<T>, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.time.FieldAbsoluteDate`<T>>, Comparable<:class:`~org.orekit.time.FieldAbsoluteDate`<T>>
+    public class FieldAbsoluteDate<T extends :class:`~org.orekit.time.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.FieldTimeStamped`<T>, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.time.FieldAbsoluteDate`<T>>, :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`<:class:`~org.orekit.time.FieldAbsoluteDate`<T>>
     
         This class represents a specific instant in time.
     
@@ -3460,10 +3472,9 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], TimeShiftable['
     
         .. code-block: java
         
-        
-           DateTimeComponents utcComponents = readNextDate();
-           FieldAbsoluteDate<T> date = new FieldAbsoluteDate<>(utcComponents, TimeScalesFactory.getUTC());
-           writeNextDate(date.getComponents(TimeScalesFactory.getTAI()));
+           DateTimeComponents utcComponents = readNextDate();
+           FieldAbsoluteDate<T> date = new FieldAbsoluteDate<>(utcComponents, TimeScalesFactory.getUTC());
+           writeNextDate(date.getComponents(TimeScalesFactory.getTAI()));
          
     
         Two complementary views are available:
@@ -3555,8 +3566,7 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], TimeShiftable['
         
             .. code-block: java
             
-            
-             BE = 1900.0 + (JED - 2415020.31352) / 365.242198781
+             BE = 1900.0 + (JED - 2415020.31352) / 365.242198781
              
         
             This method reverts the formula above and computes an :code:`FieldAbsoluteDate<T>` from the Besselian Epoch.
@@ -3712,10 +3722,11 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], TimeShiftable['
             Check if the instance represents the same time as another instance.
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                date (Object): other date
+                date (:class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): other date
         
             Returns:
                 true if the instance and the other date refer to the same instant
@@ -3730,7 +3741,7 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], TimeShiftable['
             Get an arbitrary date. Useful when a non-null date is needed but its values does not matter.
         
             Parameters:
-                field (Field<T> field): field for the components
+                field (:class:`~org.orekit.time.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field for the components
         
             Returns:
                 an arbitrary date.
@@ -3782,7 +3793,7 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], TimeShiftable['
             This method uses the :meth:`~org.orekit.data.DataContext.getDefault`.
         
             Parameters:
-                timeZone (TimeZone): time zone
+                timeZone (:class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.util.TimeZone?is`): time zone
         
             Returns:
                 date/time components
@@ -3793,7 +3804,7 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], TimeShiftable['
             Split the instance into date/time components for a time zone.
         
             Parameters:
-                timeZone (TimeZone): time zone
+                timeZone (:class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.util.TimeZone?is`): time zone
                 utc (:class:`~org.orekit.time.TimeScale`): time scale used to compute date and time components.
         
             Returns:
@@ -3825,7 +3836,7 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], TimeShiftable['
             Dummy date at infinity in the future direction.
         
             Parameters:
-                field (Field<T> field): field for the components
+                field (:class:`~org.orekit.time.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field for the components
         
             Returns:
                 a dummy date at infinity in the future direction as a FieldAbsoluteDate
@@ -3861,7 +3872,7 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], TimeShiftable['
             Dummy date at infinity in the past direction.
         
             Parameters:
-                field (Field<T> field): field for the components
+                field (:class:`~org.orekit.time.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field for the components
         
             Returns:
                 a dummy date at infinity in the past direction as a FieldAbsoluteDate
@@ -3877,7 +3888,8 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], TimeShiftable['
             Get a hashcode for this date.
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 hashcode
@@ -3910,7 +3922,7 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], TimeShiftable['
             November 2010
         
             Parameters:
-                field (Field<T> field): field for the components
+                field (:class:`~org.orekit.time.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field for the components
                 preambleField (byte): field specifying the format, often not transmitted in data interfaces, as it is constant for a given data interface
                 timeField (byte[]): byte array containing the time code
                 agencyDefinedEpoch (:class:`~org.orekit.time.DateComponents`): reference epoch, ignored if the preamble field specifies the :meth:`~org.orekit.time.FieldAbsoluteDate.getCCSDSEpoch` is
@@ -3945,7 +3957,7 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], TimeShiftable['
             parameter can be set to 0.
         
             Parameters:
-                field (Field<T> field): field for the components
+                field (:class:`~org.orekit.time.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field for the components
                 preambleField1 (byte): first byte of the field specifying the format, often not transmitted in data interfaces, as it is constant for a given
                     data interface
                 preambleField2 (byte): second byte of the field specifying the format (added in revision 4 of the CCSDS standard in 2010), often not
@@ -3976,8 +3988,8 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], TimeShiftable['
         """
             Compute the offset between two time scales at the current instant.
         
-            The offset is defined as *lÃ¢â€šï¿½-lÃ¢â€šâ€š* where *lÃ¢â€šï¿½* is the location of the instant in the :code:`scale1`
-            time scale and *lÃ¢â€šâ€š* is the location of the instant in the :code:`scale2` time scale.
+            The offset is defined as *l₁-l₂* where *l₁* is the location of the instant in the :code:`scale1` time scale and
+            *l₂* is the location of the instant in the :code:`scale2` time scale.
         
             Parameters:
                 scale1 (:class:`~org.orekit.time.TimeScale`): first time scale
@@ -4001,7 +4013,7 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], TimeShiftable['
         ...
     def toDate(self, timeScale: TimeScale) -> java.util.Date:
         """
-            Convert the instance to a Java null.
+            Convert the instance to a Java :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.util.Date?is`.
         
             Conversion to the Date class induces a loss of precision because the Date class does not provide sub-millisecond
             information. Java Dates are considered to be locations in some times scales.
@@ -4010,7 +4022,8 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], TimeShiftable['
                 timeScale (:class:`~org.orekit.time.TimeScale`): time scale to use
         
             Returns:
-                a null instance representing the location of the instant in the time scale
+                a :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.util.Date?is` instance representing the
+                location of the instant in the time scale
         
         
         """
@@ -4028,7 +4041,8 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], TimeShiftable['
             This method uses the :meth:`~org.orekit.data.DataContext.getDefault`.
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a string representation of the instance, in ISO-8601 format if UTC is available from the default data context.
@@ -4084,7 +4098,7 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], TimeShiftable['
             This method uses the :meth:`~org.orekit.data.DataContext.getDefault`.
         
             Parameters:
-                timeZone (TimeZone): time zone
+                timeZone (:class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.util.TimeZone?is`): time zone
         
             Returns:
                 string representation of the instance, in ISO-8601 format with milliseconds accuracy
@@ -4095,7 +4109,7 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], TimeShiftable['
             Get a String representation of the instant location for a time zone.
         
             Parameters:
-                timeZone (TimeZone): time zone
+                timeZone (:class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.util.TimeZone?is`): time zone
                 utc (:class:`~org.orekit.time.TimeScale`): time scale used to compute date and time components.
         
             Returns:
@@ -4118,7 +4132,7 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], TimeShiftable['
 
 class FixedStepSelector(DatesSelector):
     """
-    public class FixedStepSelector extends Object implements :class:`~org.orekit.time.DatesSelector`
+    public class FixedStepSelector extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.DatesSelector`
     
         Selector generating a continuous stream of dates separated by a constant step.
     
@@ -4138,7 +4152,7 @@ class FixedStepSelector(DatesSelector):
 
 class GLONASSDate(java.io.Serializable, TimeStamped):
     """
-    public class GLONASSDate extends Object implements Serializable, :class:`~org.orekit.time.TimeStamped`
+    public class GLONASSDate extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.orekit.time.TimeStamped`
     
         Container for date in GLONASS form.
     
@@ -4223,7 +4237,7 @@ class GLONASSDate(java.io.Serializable, TimeStamped):
 
 class GLONASSScale(TimeScale):
     """
-    public class GLONASSScale extends Object implements :class:`~org.orekit.time.TimeScale`
+    public class GLONASSScale extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeScale`
     
         GLONASS time scale.
     
@@ -4438,7 +4452,8 @@ class GLONASSScale(TimeScale):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -4446,7 +4461,7 @@ class GLONASSScale(TimeScale):
 
 class GMSTScale(TimeScale):
     """
-    public class GMSTScale extends Object implements :class:`~org.orekit.time.TimeScale`
+    public class GMSTScale extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeScale`
     
         Greenwich Mean Sidereal Time.
     
@@ -4519,7 +4534,8 @@ class GMSTScale(TimeScale):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -4527,7 +4543,7 @@ class GMSTScale(TimeScale):
 
 class GNSSDate(java.io.Serializable, TimeStamped):
     """
-    public class GNSSDate extends Object implements Serializable, :class:`~org.orekit.time.TimeStamped`
+    public class GNSSDate extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.orekit.time.TimeStamped`
     
         Container for date in GNSS form.
     
@@ -4626,7 +4642,7 @@ class GNSSDate(java.io.Serializable, TimeStamped):
 
 class GPSScale(TimeScale):
     """
-    public class GPSScale extends Object implements :class:`~org.orekit.time.TimeScale`
+    public class GPSScale extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeScale`
     
         GPS time scale.
     
@@ -4717,7 +4733,8 @@ class GPSScale(TimeScale):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -4725,7 +4742,7 @@ class GPSScale(TimeScale):
 
 class GalileoScale(TimeScale):
     """
-    public class GalileoScale extends Object implements :class:`~org.orekit.time.TimeScale`
+    public class GalileoScale extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeScale`
     
         Galileo system time scale.
     
@@ -4821,7 +4838,8 @@ class GalileoScale(TimeScale):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -4829,7 +4847,7 @@ class GalileoScale(TimeScale):
 
 class IRNSSScale(TimeScale):
     """
-    public class IRNSSScale extends Object implements :class:`~org.orekit.time.TimeScale`
+    public class IRNSSScale extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeScale`
     
         IRNSS time scale (also called IRNWT for IRNSS NetWork Time).
     
@@ -4920,7 +4938,8 @@ class IRNSSScale(TimeScale):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -4928,7 +4947,7 @@ class IRNSSScale(TimeScale):
 
 class PythonDatesSelector(DatesSelector):
     """
-    public class PythonDatesSelector extends Object implements :class:`~org.orekit.time.DatesSelector`
+    public class PythonDatesSelector extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.DatesSelector`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -4957,7 +4976,7 @@ _PythonFieldTimeInterpolable__T = typing.TypeVar('_PythonFieldTimeInterpolable__
 _PythonFieldTimeInterpolable__KK = typing.TypeVar('_PythonFieldTimeInterpolable__KK', bound=org.hipparchus.CalculusFieldElement)  # <KK>
 class PythonFieldTimeInterpolable(FieldTimeInterpolable[_PythonFieldTimeInterpolable__T, _PythonFieldTimeInterpolable__KK], typing.Generic[_PythonFieldTimeInterpolable__T, _PythonFieldTimeInterpolable__KK]):
     """
-    public class PythonFieldTimeInterpolable<T extends :class:`~org.orekit.time.FieldTimeInterpolable`<T, KK>, KK extends CalculusFieldElement<KK>> extends Object implements :class:`~org.orekit.time.FieldTimeInterpolable`<T, KK>
+    public class PythonFieldTimeInterpolable<T extends :class:`~org.orekit.time.FieldTimeInterpolable`<T, KK>, KK extends :class:`~org.orekit.time.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<KK>> extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.FieldTimeInterpolable`<T, KK>
     """
     def __init__(self): ...
     @typing.overload
@@ -4969,7 +4988,7 @@ _PythonFieldTimeShiftable__T = typing.TypeVar('_PythonFieldTimeShiftable__T', bo
 _PythonFieldTimeShiftable__KK = typing.TypeVar('_PythonFieldTimeShiftable__KK', bound=org.hipparchus.CalculusFieldElement)  # <KK>
 class PythonFieldTimeShiftable(FieldTimeShiftable[_PythonFieldTimeShiftable__T, _PythonFieldTimeShiftable__KK], typing.Generic[_PythonFieldTimeShiftable__T, _PythonFieldTimeShiftable__KK]):
     """
-    public class PythonFieldTimeShiftable<T extends :class:`~org.orekit.time.FieldTimeInterpolable`<T, KK>, KK extends CalculusFieldElement<KK>> extends Object implements :class:`~org.orekit.time.FieldTimeShiftable`<T, KK>
+    public class PythonFieldTimeShiftable<T extends :class:`~org.orekit.time.FieldTimeInterpolable`<T, KK>, KK extends :class:`~org.orekit.time.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<KK>> extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.FieldTimeShiftable`<T, KK>
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -5039,7 +5058,7 @@ class PythonFieldTimeShiftable(FieldTimeShiftable[_PythonFieldTimeShiftable__T, 
 _PythonFieldTimeStamped__T = typing.TypeVar('_PythonFieldTimeStamped__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldTimeStamped(FieldTimeStamped[_PythonFieldTimeStamped__T], typing.Generic[_PythonFieldTimeStamped__T]):
     """
-    public class PythonFieldTimeStamped<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.time.FieldTimeStamped`<T>
+    public class PythonFieldTimeStamped<T extends :class:`~org.orekit.time.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.FieldTimeStamped`<T>
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -5066,7 +5085,7 @@ class PythonFieldTimeStamped(FieldTimeStamped[_PythonFieldTimeStamped__T], typin
 
 class PythonParser(UTCTAIOffsetsLoader.Parser):
     """
-    public class PythonParser extends Object implements :class:`~org.orekit.time.UTCTAIOffsetsLoader.Parser`
+    public class PythonParser extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.UTCTAIOffsetsLoader.Parser`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -5094,7 +5113,7 @@ class PythonParser(UTCTAIOffsetsLoader.Parser):
 _PythonTimeInterpolable__T = typing.TypeVar('_PythonTimeInterpolable__T', bound=TimeInterpolable)  # <T>
 class PythonTimeInterpolable(TimeInterpolable[_PythonTimeInterpolable__T], typing.Generic[_PythonTimeInterpolable__T]):
     """
-    public class PythonTimeInterpolable<T extends :class:`~org.orekit.time.TimeInterpolable`<T>> extends Object implements :class:`~org.orekit.time.TimeInterpolable`<T>
+    public class PythonTimeInterpolable<T extends :class:`~org.orekit.time.TimeInterpolable`<T>> extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeInterpolable`<T>
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -5124,7 +5143,7 @@ class PythonTimeInterpolable(TimeInterpolable[_PythonTimeInterpolable__T], typin
 
 class PythonTimeScalarFunction(TimeScalarFunction):
     """
-    public class PythonTimeScalarFunction extends Object implements :class:`~org.orekit.time.TimeScalarFunction`
+    public class PythonTimeScalarFunction extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeScalarFunction`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -5198,7 +5217,7 @@ class PythonTimeScalarFunction(TimeScalarFunction):
 
 class PythonTimeScale(TimeScale):
     """
-    public class PythonTimeScale extends Object implements :class:`~org.orekit.time.TimeScale`
+    public class PythonTimeScale extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeScale`
     
     
         Also see:
@@ -5307,7 +5326,7 @@ class PythonTimeScale(TimeScale):
 
 class PythonTimeScales(TimeScales):
     """
-    public class PythonTimeScales extends Object implements :class:`~org.orekit.time.TimeScales`
+    public class PythonTimeScales extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeScales`
     """
     def __init__(self): ...
     def createBesselianEpoch(self, double: float) -> AbsoluteDate:
@@ -5321,8 +5340,7 @@ class PythonTimeScales(TimeScales):
         
             .. code-block: java
             
-            
-             BE = 1900.0 + (JED - 2415020.31352) / 365.242198781
+             BE = 1900.0 + (JED - 2415020.31352) / 365.242198781
              
         
             This method reverts the formula above and computes an :code:`AbsoluteDate` from the Besselian Epoch.
@@ -5352,8 +5370,7 @@ class PythonTimeScales(TimeScales):
         
             .. code-block: java
             
-            
-             JE = 2000.0 + (JED - 2451545.0) / 365.25
+             JE = 2000.0 + (JED - 2451545.0) / 365.25
              
         
             This method reverts the formula above and computes an :code:`AbsoluteDate` from the Julian Epoch.
@@ -5787,7 +5804,7 @@ class PythonTimeScales(TimeScales):
 _PythonTimeShiftable__T = typing.TypeVar('_PythonTimeShiftable__T', bound=TimeShiftable)  # <T>
 class PythonTimeShiftable(TimeShiftable[_PythonTimeShiftable__T], typing.Generic[_PythonTimeShiftable__T]):
     """
-    public class PythonTimeShiftable<T extends :class:`~org.orekit.time.TimeShiftable`<T>> extends Object implements :class:`~org.orekit.time.TimeShiftable`<T>
+    public class PythonTimeShiftable<T extends :class:`~org.orekit.time.TimeShiftable`<T>> extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeShiftable`<T>
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -5829,7 +5846,7 @@ class PythonTimeShiftable(TimeShiftable[_PythonTimeShiftable__T], typing.Generic
 
 class PythonTimeStamped(TimeStamped):
     """
-    public class PythonTimeStamped extends Object implements :class:`~org.orekit.time.TimeStamped`
+    public class PythonTimeStamped extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -5868,7 +5885,7 @@ class PythonTimeStamped(TimeStamped):
 
 class PythonTimeVectorFunction(TimeVectorFunction):
     """
-    public class PythonTimeVectorFunction extends Object implements :class:`~org.orekit.time.TimeVectorFunction`
+    public class PythonTimeVectorFunction extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeVectorFunction`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -5942,7 +5959,7 @@ class PythonTimeVectorFunction(TimeVectorFunction):
 
 class PythonUTCTAIOffsetsLoader(UTCTAIOffsetsLoader):
     """
-    public class PythonUTCTAIOffsetsLoader extends Object implements :class:`~org.orekit.time.UTCTAIOffsetsLoader`
+    public class PythonUTCTAIOffsetsLoader extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.UTCTAIOffsetsLoader`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -5969,7 +5986,7 @@ class PythonUTCTAIOffsetsLoader(UTCTAIOffsetsLoader):
 
 class QZSSScale(TimeScale):
     """
-    public class QZSSScale extends Object implements :class:`~org.orekit.time.TimeScale`
+    public class QZSSScale extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeScale`
     
         QZSS time scale.
     
@@ -6063,7 +6080,8 @@ class QZSSScale(TimeScale):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -6071,7 +6089,7 @@ class QZSSScale(TimeScale):
 
 class SatelliteClockScale(TimeScale):
     """
-    public class SatelliteClockScale extends Object implements :class:`~org.orekit.time.TimeScale`
+    public class SatelliteClockScale extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeScale`
     
         Scale for on-board clock.
     
@@ -6188,7 +6206,8 @@ class SatelliteClockScale(TimeScale):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -6196,7 +6215,7 @@ class SatelliteClockScale(TimeScale):
 
 class TAIScale(TimeScale):
     """
-    public class TAIScale extends Object implements :class:`~org.orekit.time.TimeScale`
+    public class TAIScale extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeScale`
     
         International Atomic Time.
     
@@ -6285,7 +6304,8 @@ class TAIScale(TimeScale):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -6304,7 +6324,7 @@ class TAIUTCDatFilesLoader(org.orekit.data.AbstractSelfFeedingLoader, UTCTAIOffs
     """
     DEFAULT_SUPPORTED_NAMES: typing.ClassVar[str] = ...
     """
-    public static final String DEFAULT_SUPPORTED_NAMES
+    public static final :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_SUPPORTED_NAMES
     
         Default supported files name pattern.
     
@@ -6324,7 +6344,7 @@ class TAIUTCDatFilesLoader(org.orekit.data.AbstractSelfFeedingLoader, UTCTAIOffs
 
 class TCBScale(TimeScale):
     """
-    public class TCBScale extends Object implements :class:`~org.orekit.time.TimeScale`
+    public class TCBScale extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeScale`
     
         Barycentric Coordinate Time.
     
@@ -6395,7 +6415,8 @@ class TCBScale(TimeScale):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -6403,7 +6424,7 @@ class TCBScale(TimeScale):
 
 class TCGScale(TimeScale):
     """
-    public class TCGScale extends Object implements :class:`~org.orekit.time.TimeScale`
+    public class TCGScale extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeScale`
     
         Geocentric Coordinate Time.
     
@@ -6474,7 +6495,8 @@ class TCGScale(TimeScale):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -6482,7 +6504,7 @@ class TCGScale(TimeScale):
 
 class TDBScale(TimeScale):
     """
-    public class TDBScale extends Object implements :class:`~org.orekit.time.TimeScale`
+    public class TDBScale extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeScale`
     
         Barycentric Dynamic Time.
     
@@ -6556,7 +6578,8 @@ class TDBScale(TimeScale):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -6564,7 +6587,7 @@ class TDBScale(TimeScale):
 
 class TTScale(TimeScale):
     """
-    public class TTScale extends Object implements :class:`~org.orekit.time.TimeScale`
+    public class TTScale extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeScale`
     
         Terrestrial Time as defined by IAU(1991) recommendation IV.
     
@@ -6657,7 +6680,8 @@ class TTScale(TimeScale):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -6665,7 +6689,7 @@ class TTScale(TimeScale):
 
 class UT1Scale(TimeScale):
     """
-    public class UT1Scale extends Object implements :class:`~org.orekit.time.TimeScale`
+    public class UT1Scale extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeScale`
     
         Universal Time 1.
     
@@ -6761,7 +6785,8 @@ class UT1Scale(TimeScale):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -6769,7 +6794,7 @@ class UT1Scale(TimeScale):
 
 class UTCScale(TimeScale):
     """
-    public class UTCScale extends Object implements :class:`~org.orekit.time.TimeScale`
+    public class UTCScale extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeScale`
     
         Coordinated Universal Time.
     
@@ -7009,7 +7034,8 @@ class UTCScale(TimeScale):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -7066,7 +7092,7 @@ class UTCTAIHistoryFilesLoader(org.orekit.data.AbstractSelfFeedingLoader, UTCTAI
 
 class UTCTAIOffset(TimeStamped, java.io.Serializable):
     """
-    public class UTCTAIOffset extends Object implements :class:`~org.orekit.time.TimeStamped`, Serializable
+    public class UTCTAIOffset extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Offset between :class:`~org.orekit.time.UTCScale` and :class:`~org.orekit.time.TAIScale` time scales.
     

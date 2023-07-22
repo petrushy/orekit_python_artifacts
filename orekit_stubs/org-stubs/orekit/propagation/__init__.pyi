@@ -139,7 +139,7 @@ class EphemerisGenerator:
 _FieldAdditionalStateProvider__T = typing.TypeVar('_FieldAdditionalStateProvider__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAdditionalStateProvider(typing.Generic[_FieldAdditionalStateProvider__T]):
     """
-    public interface FieldAdditionalStateProvider<T extends CalculusFieldElement<T>>
+    public interface FieldAdditionalStateProvider<T extends :class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>>
     
         This interface represents providers for additional state data beyond :class:`~org.orekit.propagation.SpacecraftState`.
     
@@ -203,7 +203,7 @@ class FieldAdditionalStateProvider(typing.Generic[_FieldAdditionalStateProvider_
 _FieldEphemerisGenerator__T = typing.TypeVar('_FieldEphemerisGenerator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldEphemerisGenerator(typing.Generic[_FieldEphemerisGenerator__T]):
     """
-    public interface FieldEphemerisGenerator<T extends CalculusFieldElement<T>>
+    public interface FieldEphemerisGenerator<T extends :class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>>
     
         Generator for ephemerides.
     
@@ -225,7 +225,7 @@ class FieldEphemerisGenerator(typing.Generic[_FieldEphemerisGenerator__T]):
 _FieldPropagator__T = typing.TypeVar('_FieldPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldPropagator(org.orekit.utils.FieldPVCoordinatesProvider[_FieldPropagator__T], typing.Generic[_FieldPropagator__T]):
     """
-    public interface FieldPropagator<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T>
+    public interface FieldPropagator<T extends :class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T>
     
         This interface provides a way to propagate an orbit at any time.
     
@@ -335,7 +335,7 @@ class FieldPropagator(org.orekit.utils.FieldPVCoordinatesProvider[_FieldPropagat
             occurrence and happens to change the unmanaged additional state.
         
             Parameters:
-                name (String): name of the additional state
+                name (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional state
         
             Returns:
                 true if the additional state is managed
@@ -366,7 +366,7 @@ class FieldPropagator(org.orekit.utils.FieldPVCoordinatesProvider[_FieldPropagat
 _FieldSpacecraftState__T = typing.TypeVar('_FieldSpacecraftState__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldSpacecraftState(org.orekit.time.FieldTimeStamped[_FieldSpacecraftState__T], org.orekit.time.FieldTimeShiftable['FieldSpacecraftState'[_FieldSpacecraftState__T], _FieldSpacecraftState__T], org.orekit.time.FieldTimeInterpolable['FieldSpacecraftState'[_FieldSpacecraftState__T], _FieldSpacecraftState__T], typing.Generic[_FieldSpacecraftState__T]):
     """
-    public class FieldSpacecraftState<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.time.FieldTimeStamped`<T>, :class:`~org.orekit.time.FieldTimeShiftable`<:class:`~org.orekit.propagation.FieldSpacecraftState`<T>, T>, :class:`~org.orekit.time.FieldTimeInterpolable`<:class:`~org.orekit.propagation.FieldSpacecraftState`<T>, T>
+    public class FieldSpacecraftState<T extends :class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.FieldTimeStamped`<T>, :class:`~org.orekit.time.FieldTimeShiftable`<:class:`~org.orekit.propagation.FieldSpacecraftState`<T>, T>, :class:`~org.orekit.time.FieldTimeInterpolable`<:class:`~org.orekit.propagation.FieldSpacecraftState`<T>, T>
     
         This class is the representation of a complete state holding orbit, attitude and mass information at a given date.
     
@@ -458,7 +458,7 @@ class FieldSpacecraftState(org.orekit.time.FieldTimeStamped[_FieldSpacecraftStat
             Get an additional state.
         
             Parameters:
-                name (String): name of the additional state
+                name (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional state
         
             Returns:
                 value of the additional state
@@ -476,7 +476,7 @@ class FieldSpacecraftState(org.orekit.time.FieldTimeStamped[_FieldSpacecraftStat
             Get an additional state derivative.
         
             Parameters:
-                name (String): name of the additional state derivative
+                name (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional state derivative
         
             Returns:
                 value of the additional state derivative
@@ -517,7 +517,7 @@ class FieldSpacecraftState(org.orekit.time.FieldTimeStamped[_FieldSpacecraftStat
             Get the first component of the eccentricity vector (as per equinoctial parameters).
         
             Returns:
-                e cos(Ã�â€° + ÃŽÂ©), first component of eccentricity vector, or {code Double.NaN} if the state is contains an absolute
+                e cos(ω + Ω), first component of eccentricity vector, or {code Double.NaN} if the state is contains an absolute
                 position-velocity-acceleration rather than an orbit
         
             Also see:
@@ -531,8 +531,8 @@ class FieldSpacecraftState(org.orekit.time.FieldTimeStamped[_FieldSpacecraftStat
             Get the second component of the eccentricity vector (as per equinoctial parameters).
         
             Returns:
-                e sin(Ã�â€° + ÃŽÂ©), second component of the eccentricity vector, or {code Double.NaN} if the state is contains an
-                absolute position-velocity-acceleration rather than an orbit
+                e sin(ω + Ω), second component of the eccentricity vector, or {code Double.NaN} if the state is contains an absolute
+                position-velocity-acceleration rather than an orbit
         
             Also see:
                 :meth:`~org.orekit.propagation.FieldSpacecraftState.getE`
@@ -555,7 +555,7 @@ class FieldSpacecraftState(org.orekit.time.FieldTimeStamped[_FieldSpacecraftStat
             Get the first component of the inclination vector (as per equinoctial parameters).
         
             Returns:
-                tan(i/2) cos(ÃŽÂ©), first component of the inclination vector, or {code Double.NaN} if the state is contains an absolute
+                tan(i/2) cos(Ω), first component of the inclination vector, or {code Double.NaN} if the state is contains an absolute
                 position-velocity-acceleration rather than an orbit
         
             Also see:
@@ -569,8 +569,8 @@ class FieldSpacecraftState(org.orekit.time.FieldTimeStamped[_FieldSpacecraftStat
             Get the second component of the inclination vector (as per equinoctial parameters).
         
             Returns:
-                tan(i/2) sin(ÃŽÂ©), second component of the inclination vector, or {code Double.NaN} if the state is contains an
-                absolute position-velocity-acceleration rather than an orbit
+                tan(i/2) sin(Ω), second component of the inclination vector, or {code Double.NaN} if the state is contains an absolute
+                position-velocity-acceleration rather than an orbit
         
             Also see:
                 :meth:`~org.orekit.propagation.FieldSpacecraftState.getI`
@@ -622,7 +622,7 @@ class FieldSpacecraftState(org.orekit.time.FieldTimeStamped[_FieldSpacecraftStat
             Get the eccentric latitude argument (as per equinoctial parameters).
         
             Returns:
-                E + Ã�â€° + ÃŽÂ© eccentric longitude argument (rad), or {code Double.NaN} if the state is contains an absolute
+                E + ω + Ω eccentric longitude argument (rad), or {code Double.NaN} if the state is contains an absolute
                 position-velocity-acceleration rather than an orbit
         
             Also see:
@@ -636,7 +636,7 @@ class FieldSpacecraftState(org.orekit.time.FieldTimeStamped[_FieldSpacecraftStat
             Get the mean longitude argument (as per equinoctial parameters).
         
             Returns:
-                M + Ã�â€° + ÃŽÂ© mean latitude argument (rad), or {code Double.NaN} if the state is contains an absolute
+                M + ω + Ω mean latitude argument (rad), or {code Double.NaN} if the state is contains an absolute
                 position-velocity-acceleration rather than an orbit
         
             Also see:
@@ -650,7 +650,7 @@ class FieldSpacecraftState(org.orekit.time.FieldTimeStamped[_FieldSpacecraftStat
             Get the true latitude argument (as per equinoctial parameters).
         
             Returns:
-                v + Ã�â€° + ÃŽÂ© true longitude argument (rad), or {code Double.NaN} if the state is contains an absolute
+                v + ω + Ω true longitude argument (rad), or {code Double.NaN} if the state is contains an absolute
                 position-velocity-acceleration rather than an orbit
         
             Also see:
@@ -690,7 +690,7 @@ class FieldSpacecraftState(org.orekit.time.FieldTimeStamped[_FieldSpacecraftStat
             Check if an additional state is available.
         
             Parameters:
-                name (String): name of the additional state
+                name (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional state
         
             Returns:
                 true if the additional state is available
@@ -708,7 +708,7 @@ class FieldSpacecraftState(org.orekit.time.FieldTimeStamped[_FieldSpacecraftStat
             Check if an additional state derivative is available.
         
             Parameters:
-                name (String): name of the additional state derivative
+                name (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional state derivative
         
             Returns:
                 true if the additional state derivative is available
@@ -758,7 +758,8 @@ class FieldSpacecraftState(org.orekit.time.FieldTimeStamped[_FieldSpacecraftStat
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -780,24 +781,7 @@ class MatricesHarvester:
         Since:
             11.1
     """
-    def getJacobiansColumnsNames(self) -> java.util.List[str]:
-        """
-            Get the names of the parameters in the matrix returned by
-            :meth:`~org.orekit.propagation.MatricesHarvester.getParametersJacobian`.
-        
-            Beware that the names of the parameters are fully known only once all force models have been set up and their parameters
-            properly selected. Applications that retrieve the matrices harvester first and select the force model parameters to
-            retrieve afterwards (but obviously before starting propagation) must take care to wait until the parameters have been
-            set up before they call this method. Calling the method too early would return wrong results.
-        
-            The names are returned in the Jacobians matrix columns order
-        
-            Returns:
-                names of the parameters (i.e. columns) of the Jacobian matrix
-        
-        
-        """
-        ...
+    def getJacobiansColumnsNames(self) -> java.util.List[str]: ...
     def getParametersJacobian(self, spacecraftState: 'SpacecraftState') -> org.hipparchus.linear.RealMatrix:
         """
             Get the Jacobian with respect to propagation parameters.
@@ -844,7 +828,7 @@ class MatricesHarvester:
 
 class PropagationType(java.lang.Enum['PropagationType']):
     """
-    public enum PropagationType extends Enum<:class:`~org.orekit.propagation.PropagationType`>
+    public enum PropagationType extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.propagation.PropagationType`>
     
         Enumerate to define the propagation type used by the propagator.
     
@@ -865,14 +849,14 @@ class PropagationType(java.lang.Enum['PropagationType']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -885,9 +869,8 @@ class PropagationType(java.lang.Enum['PropagationType']):
         
             .. code-block: java
             
-            
-            for (PropagationType c : PropagationType.values())
-                System.out.println(c);
+            for (PropagationType c : PropagationType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1024,10 +1007,9 @@ class Propagator(org.orekit.utils.PVCoordinatesProvider):
         
             .. code-block: java
             
-            
-               EphemerisGenerator generator = propagator.getEphemerisGenerator();
-               propagator.propagate(target);
-               BoundedPropagator ephemeris = generator.getGeneratedEphemeris();
+               EphemerisGenerator generator = propagator.getEphemerisGenerator();
+               propagator.propagate(target);
+               BoundedPropagator ephemeris = generator.getGeneratedEphemeris();
              
         
             Returns:
@@ -1101,7 +1083,7 @@ class Propagator(org.orekit.utils.PVCoordinatesProvider):
             and happens to change the unmanaged additional state.
         
             Parameters:
-                name (String): name of the additional state
+                name (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional state
         
             Returns:
                 true if the additional state is managed
@@ -1218,8 +1200,8 @@ class Propagator(org.orekit.utils.PVCoordinatesProvider):
             The default implementation throws an exception as the method is not supported by all propagators.
         
             Parameters:
-                stmName (String): State Transition Matrix state name
-                initialStm (RealMatrix): initial State Transition Matrix âˆ‚Y/âˆ‚Yâ‚€, if null (which is the most frequent case), assumed to be 6x6 identity
+                stmName (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): State Transition Matrix state name
+                initialStm (:class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.linear.RealMatrix?is`): initial State Transition Matrix ∂Y/∂Y₀, if null (which is the most frequent case), assumed to be 6x6 identity
                 initialJacobianColumns (:class:`~org.orekit.utils.DoubleArrayDictionary`): initial columns of the Jacobians matrix with respect to parameters, if null or if some selected parameters are missing
                     from the dictionary, the corresponding initial column is assumed to be 0
         
@@ -1235,7 +1217,7 @@ class Propagator(org.orekit.utils.PVCoordinatesProvider):
 
 class PropagatorsParallelizer:
     """
-    public class PropagatorsParallelizer extends Object
+    public class PropagatorsParallelizer extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This class provides a way to propagate simultaneously several orbits.
     
@@ -1257,16 +1239,15 @@ class PropagatorsParallelizer:
     
         .. code-block: java
         
-        
-            propagator 1   : -------------[++++current step++++]>
-                                          |
-            propagator 2   : ----[++++current step++++]--------->
-                                          |           |
-            ...                           |           |
-            propagator n   : ---------[++++current step++++]---->
-                                          |           |
-                                          V           V
-            global handler : -------------[global step]--------->
+            propagator 1   : -------------[++++current step++++]>
+                                          |
+            propagator 2   : ----[++++current step++++]--------->
+                                          |           |
+            ...                           |           |
+            propagator n   : ---------[++++current step++++]---->
+                                          |           |
+                                          V           V
+            global handler : -------------[global step]--------->
          
     
         The previous sketch shows that propagator 1 has already computed states up to the end of the propagation, but
@@ -1292,7 +1273,7 @@ class PropagatorsParallelizer:
 
 class SpacecraftState(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['SpacecraftState'], org.orekit.time.TimeInterpolable['SpacecraftState'], java.io.Serializable):
     """
-    public class SpacecraftState extends Object implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.propagation.SpacecraftState`>, :class:`~org.orekit.time.TimeInterpolable`<:class:`~org.orekit.propagation.SpacecraftState`>, Serializable
+    public class SpacecraftState extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.propagation.SpacecraftState`>, :class:`~org.orekit.time.TimeInterpolable`<:class:`~org.orekit.propagation.SpacecraftState`>, :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         This class is the representation of a complete state holding orbit, attitude and mass information at a given date.
     
@@ -1373,7 +1354,7 @@ class SpacecraftState(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable
             additional state than the original instance.
         
             Parameters:
-                name (String): name of the additional state (names containing "orekit" with any case are reserved for the library internal use)
+                name (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional state (names containing "orekit" with any case are reserved for the library internal use)
                 value (double...): value of the additional state
         
             Returns:
@@ -1398,7 +1379,7 @@ class SpacecraftState(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable
             more additional state derivative than the original instance.
         
             Parameters:
-                name (String): name of the additional state derivative (names containing "orekit" with any case are reserved for the library internal
+                name (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional state derivative (names containing "orekit" with any case are reserved for the library internal
                     use)
                 value (double...): value of the additional state derivative
         
@@ -1434,7 +1415,7 @@ class SpacecraftState(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable
             Get an additional state.
         
             Parameters:
-                name (String): name of the additional state
+                name (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional state
         
             Returns:
                 value of the additional state
@@ -1452,7 +1433,7 @@ class SpacecraftState(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable
             Get an additional state derivative.
         
             Parameters:
-                name (String): name of the additional state derivative
+                name (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional state derivative
         
             Returns:
                 value of the additional state derivative
@@ -1548,7 +1529,7 @@ class SpacecraftState(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable
             Get the first component of the eccentricity vector (as per equinoctial parameters).
         
             Returns:
-                e cos(Ã�â€° + ÃŽÂ©), first component of eccentricity vector, or {code Double.NaN} if the state is contains an absolute
+                e cos(ω + Ω), first component of eccentricity vector, or {code Double.NaN} if the state is contains an absolute
                 position-velocity-acceleration rather than an orbit
         
             Also see:
@@ -1562,8 +1543,8 @@ class SpacecraftState(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable
             Get the second component of the eccentricity vector (as per equinoctial parameters).
         
             Returns:
-                e sin(Ã�â€° + ÃŽÂ©), second component of the eccentricity vector, or {code Double.NaN} if the state is contains an
-                absolute position-velocity-acceleration rather than an orbit
+                e sin(ω + Ω), second component of the eccentricity vector, or {code Double.NaN} if the state is contains an absolute
+                position-velocity-acceleration rather than an orbit
         
             Also see:
                 :meth:`~org.orekit.propagation.SpacecraftState.getE`
@@ -1586,7 +1567,7 @@ class SpacecraftState(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable
             Get the first component of the inclination vector (as per equinoctial parameters).
         
             Returns:
-                tan(i/2) cos(ÃŽÂ©), first component of the inclination vector, or {code Double.NaN} if the state is contains an absolute
+                tan(i/2) cos(Ω), first component of the inclination vector, or {code Double.NaN} if the state is contains an absolute
                 position-velocity-acceleration rather than an orbit
         
             Also see:
@@ -1600,8 +1581,8 @@ class SpacecraftState(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable
             Get the second component of the inclination vector (as per equinoctial parameters).
         
             Returns:
-                tan(i/2) sin(ÃŽÂ©), second component of the inclination vector, or {code Double.NaN} if the state is contains an
-                absolute position-velocity-acceleration rather than an orbit
+                tan(i/2) sin(Ω), second component of the inclination vector, or {code Double.NaN} if the state is contains an absolute
+                position-velocity-acceleration rather than an orbit
         
             Also see:
                 :meth:`~org.orekit.propagation.SpacecraftState.getI`
@@ -1653,7 +1634,7 @@ class SpacecraftState(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable
             Get the eccentric latitude argument (as per equinoctial parameters).
         
             Returns:
-                E + Ã�â€° + ÃŽÂ© eccentric longitude argument (rad), or {code Double.NaN} if the state is contains an absolute
+                E + ω + Ω eccentric longitude argument (rad), or {code Double.NaN} if the state is contains an absolute
                 position-velocity-acceleration rather than an orbit
         
             Also see:
@@ -1667,7 +1648,7 @@ class SpacecraftState(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable
             Get the mean longitude argument (as per equinoctial parameters).
         
             Returns:
-                M + Ã�â€° + ÃŽÂ© mean latitude argument (rad), or {code Double.NaN} if the state is contains an absolute
+                M + ω + Ω mean latitude argument (rad), or {code Double.NaN} if the state is contains an absolute
                 position-velocity-acceleration rather than an orbit
         
             Also see:
@@ -1681,7 +1662,7 @@ class SpacecraftState(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable
             Get the true latitude argument (as per equinoctial parameters).
         
             Returns:
-                v + Ã�â€° + ÃŽÂ© true longitude argument (rad), or {code Double.NaN} if the state is contains an absolute
+                v + ω + Ω true longitude argument (rad), or {code Double.NaN} if the state is contains an absolute
                 position-velocity-acceleration rather than an orbit
         
             Also see:
@@ -1751,7 +1732,7 @@ class SpacecraftState(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable
             Check if an additional state is available.
         
             Parameters:
-                name (String): name of the additional state
+                name (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional state
         
             Returns:
                 true if the additional state is available
@@ -1769,7 +1750,7 @@ class SpacecraftState(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable
             Check if an additional state derivative is available.
         
             Parameters:
-                name (String): name of the additional state derivative
+                name (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional state derivative
         
             Returns:
                 true if the additional state derivative is available
@@ -1835,7 +1816,8 @@ class SpacecraftState(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -1856,7 +1838,7 @@ class SpacecraftState(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable
 
 class StateCovariance(org.orekit.time.TimeStamped):
     """
-    public class StateCovariance extends Object implements :class:`~org.orekit.time.TimeStamped`
+    public class StateCovariance extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`
     
         This class is the representation of a covariance matrix at a given date.
     
@@ -1882,6 +1864,12 @@ class StateCovariance(org.orekit.time.TimeStamped):
         """
             Get the covariance in a given local orbital frame.
         
+            Changing the covariance frame is a linear process, this method does not introduce approximation unless a change in
+            covariance orbit type is required.
+        
+            This is based on equation (18) to (20) "from Vallado, D. A. (2004). Covariance transformations for satellite flight
+            dynamics operations."
+        
             Parameters:
                 orbit (:class:`~org.orekit.orbits.Orbit`): orbit to which the covariance matrix should correspond
                 lofOut (:class:`~org.orekit.frames.LOFType`): output local orbital frame
@@ -1890,6 +1878,12 @@ class StateCovariance(org.orekit.time.TimeStamped):
                 a new covariance state, expressed in the output local orbital frame
         
             Get the covariance in the output frame.
+        
+            Changing the covariance frame is a linear process, this method does not introduce approximation unless a change in
+            covariance orbit type is required.
+        
+            This is based on equation (18) to (20) "from Vallado, D. A. (2004). Covariance transformations for satellite flight
+            dynamics operations."
         
             Parameters:
                 orbit (:class:`~org.orekit.orbits.Orbit`): orbit to which the covariance matrix should correspond
@@ -1909,6 +1903,13 @@ class StateCovariance(org.orekit.time.TimeStamped):
         
             The covariance orbit type **cannot** be changed if the covariance matrix is expressed in a
             :class:`~org.orekit.frames.LOFType` or a non-pseudo inertial frame.
+        
+            As this type change uses the jacobian matrix of the transformation, it introduces a linear approximation. Hence, the
+            current covariance matrix **will not exactly match** the new linearized case and the distribution will not follow a
+            generalized Gaussian distribution anymore.
+        
+            This is based on equation (1) to (6) from "Vallado, D. A. (2004). Covariance transformations for satellite flight
+            dynamics operations."
         
             Parameters:
                 orbit (:class:`~org.orekit.orbits.Orbit`): orbit to which the covariance matrix should correspond
@@ -1997,8 +1998,8 @@ class StateCovariance(org.orekit.time.TimeStamped):
         """
             Get a time-shifted covariance matrix.
         
-            The shifting model is a Keplerian one. In other words, the state transition matrix is computed supposing Keplerian
-            motion.
+            The shifting model is a linearized, Keplerian one. In other words, it is based on a state transition matrix that is
+            computed assuming Keplerian motion.
         
             Shifting is *not* intended as a replacement for proper covariance propagation, but should be sufficient for small time
             shifts or coarse accuracy.
@@ -2016,7 +2017,7 @@ class StateCovariance(org.orekit.time.TimeStamped):
 
 class AbstractMatricesHarvester(MatricesHarvester):
     """
-    public abstract class AbstractMatricesHarvester extends Object implements :class:`~org.orekit.propagation.MatricesHarvester`
+    public abstract class AbstractMatricesHarvester extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.MatricesHarvester`
     
         Base harvester between two-dimensional Jacobian matrices and one-dimensional
         :meth:`~org.orekit.propagation.SpacecraftState.getAdditionalState`.
@@ -2048,7 +2049,7 @@ class AbstractMatricesHarvester(MatricesHarvester):
             Get the initial column of Jacobian matrix with respect to named parameter.
         
             Parameters:
-                columnName (String): name of the column
+                columnName (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the column
         
             Returns:
                 initial column of the Jacobian matrix
@@ -2071,8 +2072,8 @@ class AbstractMatricesHarvester(MatricesHarvester):
             Get the Jacobian with respect to propagation parameters.
         
             Specified by:
-                :meth:`~org.orekit.propagation.MatricesHarvester.getParametersJacobian`Â in
-                interfaceÂ :class:`~org.orekit.propagation.MatricesHarvester`
+                :meth:`~org.orekit.propagation.MatricesHarvester.getParametersJacobian` in
+                interface :class:`~org.orekit.propagation.MatricesHarvester`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -2088,8 +2089,8 @@ class AbstractMatricesHarvester(MatricesHarvester):
             Extract state transition matrix from state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.MatricesHarvester.getStateTransitionMatrix`Â in
-                interfaceÂ :class:`~org.orekit.propagation.MatricesHarvester`
+                :meth:`~org.orekit.propagation.MatricesHarvester.getStateTransitionMatrix` in
+                interface :class:`~org.orekit.propagation.MatricesHarvester`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -2122,8 +2123,8 @@ class AbstractMatricesHarvester(MatricesHarvester):
             use it at all.
         
             Specified by:
-                :meth:`~org.orekit.propagation.MatricesHarvester.setReferenceState`Â in
-                interfaceÂ :class:`~org.orekit.propagation.MatricesHarvester`
+                :meth:`~org.orekit.propagation.MatricesHarvester.setReferenceState` in
+                interface :class:`~org.orekit.propagation.MatricesHarvester`
         
             Parameters:
                 reference (:class:`~org.orekit.propagation.SpacecraftState`): reference state to set
@@ -2134,7 +2135,7 @@ class AbstractMatricesHarvester(MatricesHarvester):
 
 class AbstractPropagator(Propagator):
     """
-    public abstract class AbstractPropagator extends Object implements :class:`~org.orekit.propagation.Propagator`
+    public abstract class AbstractPropagator extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.Propagator`
     
         Common handling of :class:`~org.orekit.propagation.Propagator` methods for analytical propagators.
     
@@ -2146,8 +2147,8 @@ class AbstractPropagator(Propagator):
             Add a set of user-specified state parameters to be computed along with the orbit propagation.
         
             Specified by:
-                :meth:`~org.orekit.propagation.Propagator.addAdditionalStateProvider`Â in
-                interfaceÂ :class:`~org.orekit.propagation.Propagator`
+                :meth:`~org.orekit.propagation.Propagator.addAdditionalStateProvider` in
+                interface :class:`~org.orekit.propagation.Propagator`
         
             Parameters:
                 provider (:class:`~org.orekit.propagation.AdditionalStateProvider`): provider for additional state
@@ -2206,8 +2207,8 @@ class AbstractPropagator(Propagator):
             Get all the names of all managed states.
         
             Specified by:
-                :meth:`~org.orekit.propagation.Propagator.getManagedAdditionalStates`Â in
-                interfaceÂ :class:`~org.orekit.propagation.Propagator`
+                :meth:`~org.orekit.propagation.Propagator.getManagedAdditionalStates` in
+                interface :class:`~org.orekit.propagation.Propagator`
         
             Returns:
                 names of all managed states
@@ -2233,8 +2234,8 @@ class AbstractPropagator(Propagator):
             Get the :class:`~org.orekit.utils.PVCoordinates` of the body in the selected frame.
         
             Specified by:
-                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates`Â in
-                interfaceÂ :class:`~org.orekit.utils.PVCoordinatesProvider`
+                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates` in
+                interface :class:`~org.orekit.utils.PVCoordinatesProvider`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
@@ -2261,11 +2262,11 @@ class AbstractPropagator(Propagator):
             and happens to change the unmanaged additional state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.Propagator.isAdditionalStateManaged`Â in
-                interfaceÂ :class:`~org.orekit.propagation.Propagator`
+                :meth:`~org.orekit.propagation.Propagator.isAdditionalStateManaged` in
+                interface :class:`~org.orekit.propagation.Propagator`
         
             Parameters:
-                name (String): name of the additional state
+                name (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional state
         
             Returns:
                 true if the additional state is managed
@@ -2335,12 +2336,12 @@ class AbstractPropagator(Propagator):
             The default implementation throws an exception as the method is not supported by all propagators.
         
             Specified by:
-                :meth:`~org.orekit.propagation.Propagator.setupMatricesComputation`Â in
-                interfaceÂ :class:`~org.orekit.propagation.Propagator`
+                :meth:`~org.orekit.propagation.Propagator.setupMatricesComputation` in
+                interface :class:`~org.orekit.propagation.Propagator`
         
             Parameters:
-                stmName (String): State Transition Matrix state name
-                initialStm (RealMatrix): initial State Transition Matrix âˆ‚Y/âˆ‚Yâ‚€, if null (which is the most frequent case), assumed to be 6x6 identity
+                stmName (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): State Transition Matrix state name
+                initialStm (:class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.linear.RealMatrix?is`): initial State Transition Matrix ∂Y/∂Y₀, if null (which is the most frequent case), assumed to be 6x6 identity
                 initialJacobianColumns (:class:`~org.orekit.utils.DoubleArrayDictionary`): initial columns of the Jacobians matrix with respect to parameters, if null or if some selected parameters are missing
                     from the dictionary, the corresponding initial column is assumed to be 0
         
@@ -2385,7 +2386,7 @@ class BoundedPropagator(Propagator):
 _FieldAbstractPropagator__T = typing.TypeVar('_FieldAbstractPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAbstractPropagator(FieldPropagator[_FieldAbstractPropagator__T], typing.Generic[_FieldAbstractPropagator__T]):
     """
-    public abstract class FieldAbstractPropagator<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.FieldPropagator`<T>
+    public abstract class FieldAbstractPropagator<T extends :class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.FieldPropagator`<T>
     
         Common handling of :class:`~org.orekit.propagation.Propagator` methods for analytical propagators.
     
@@ -2399,8 +2400,8 @@ class FieldAbstractPropagator(FieldPropagator[_FieldAbstractPropagator__T], typi
             Get attitude provider.
         
             Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.getAttitudeProvider`Â in
-                interfaceÂ :class:`~org.orekit.propagation.FieldPropagator`
+                :meth:`~org.orekit.propagation.FieldPropagator.getAttitudeProvider` in
+                interface :class:`~org.orekit.propagation.FieldPropagator`
         
             Returns:
                 attitude provider
@@ -2434,8 +2435,8 @@ class FieldAbstractPropagator(FieldPropagator[_FieldAbstractPropagator__T], typi
             Get all the names of all managed states.
         
             Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.getManagedAdditionalStates`Â in
-                interfaceÂ :class:`~org.orekit.propagation.FieldPropagator`
+                :meth:`~org.orekit.propagation.FieldPropagator.getManagedAdditionalStates` in
+                interface :class:`~org.orekit.propagation.FieldPropagator`
         
             Returns:
                 names of all managed states
@@ -2464,11 +2465,11 @@ class FieldAbstractPropagator(FieldPropagator[_FieldAbstractPropagator__T], typi
             occurrence and happens to change the unmanaged additional state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.isAdditionalStateManaged`Â in
-                interfaceÂ :class:`~org.orekit.propagation.FieldPropagator`
+                :meth:`~org.orekit.propagation.FieldPropagator.isAdditionalStateManaged` in
+                interface :class:`~org.orekit.propagation.FieldPropagator`
         
             Parameters:
-                name (String): name of the additional state
+                name (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional state
         
             Returns:
                 true if the additional state is managed
@@ -2486,8 +2487,8 @@ class FieldAbstractPropagator(FieldPropagator[_FieldAbstractPropagator__T], typi
             Set attitude provider.
         
             Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.setAttitudeProvider`Â in
-                interfaceÂ :class:`~org.orekit.propagation.FieldPropagator`
+                :meth:`~org.orekit.propagation.FieldPropagator.setAttitudeProvider` in
+                interface :class:`~org.orekit.propagation.FieldPropagator`
         
             Parameters:
                 attitudeProvider (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude provider
@@ -2499,7 +2500,7 @@ class FieldAbstractPropagator(FieldPropagator[_FieldAbstractPropagator__T], typi
 _FieldBoundedPropagator__T = typing.TypeVar('_FieldBoundedPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldBoundedPropagator(FieldPropagator[_FieldBoundedPropagator__T], typing.Generic[_FieldBoundedPropagator__T]):
     """
-    public interface FieldBoundedPropagator<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.FieldPropagator`<T>
+    public interface FieldBoundedPropagator<T extends :class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.FieldPropagator`<T>
     
         This interface is intended for ephemerides valid only during a time range.
     
@@ -2512,7 +2513,7 @@ class FieldBoundedPropagator(FieldPropagator[_FieldBoundedPropagator__T], typing
 
 class PythonAdditionalStateProvider(AdditionalStateProvider):
     """
-    public class PythonAdditionalStateProvider extends Object implements :class:`~org.orekit.propagation.AdditionalStateProvider`
+    public class PythonAdditionalStateProvider extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.AdditionalStateProvider`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -2521,8 +2522,8 @@ class PythonAdditionalStateProvider(AdditionalStateProvider):
             Get the additional state. Extension point for Python.
         
             Specified by:
-                :meth:`~org.orekit.propagation.AdditionalStateProvider.getAdditionalState`Â in
-                interfaceÂ :class:`~org.orekit.propagation.AdditionalStateProvider`
+                :meth:`~org.orekit.propagation.AdditionalStateProvider.getAdditionalState` in
+                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state to which additional state should correspond
@@ -2538,8 +2539,8 @@ class PythonAdditionalStateProvider(AdditionalStateProvider):
             Get the name of the additional state. Extension point for Python.
         
             Specified by:
-                :meth:`~org.orekit.propagation.AdditionalStateProvider.getName`Â in
-                interfaceÂ :class:`~org.orekit.propagation.AdditionalStateProvider`
+                :meth:`~org.orekit.propagation.AdditionalStateProvider.getName` in
+                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
         
             Returns:
                 name of the additional state
@@ -2552,8 +2553,8 @@ class PythonAdditionalStateProvider(AdditionalStateProvider):
             Initialize the additional state provider at the start of propagation.
         
             Specified by:
-                :meth:`~org.orekit.propagation.AdditionalStateProvider.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.AdditionalStateProvider`
+                :meth:`~org.orekit.propagation.AdditionalStateProvider.init` in
+                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
         
             Parameters:
                 initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial state information at the start of propagation
@@ -2584,10 +2585,43 @@ class PythonAdditionalStateProvider(AdditionalStateProvider):
             Part of JCC Python interface to object
         """
         ...
+    def yield_(self, spacecraftState: SpacecraftState) -> bool:
+        """
+            Check if this provider should yield so another provider has an opportunity to add missing parts.
+        
+            Decision to yield is often based on an additional state being
+            :meth:`~org.orekit.propagation.SpacecraftState.hasAdditionalState` in the provided :code:`state` (but it could
+            theoretically also depend on an additional state derivative being
+            :meth:`~org.orekit.propagation.SpacecraftState.hasAdditionalStateDerivative`, or any other criterion). If for example a
+            provider needs the state transition matrix, it could implement this method as:
+        
+            .. code-block: java
+            
+             public boolean yield(final SpacecraftState state) {
+                 return !state.getAdditionalStates().containsKey("STM");
+             }
+             
+        
+            The default implementation returns :code:`false`, meaning that state data can be
+            :meth:`~org.orekit.propagation.PythonAdditionalStateProvider.getAdditionalState` immediately.
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): state to handle
+        
+            Returns:
+                true if this provider should yield so another provider has an opportunity to add missing parts as the state is
+                incrementally built up
+        
+            Since:
+                11.1
+        
+        
+        """
+        ...
 
 class PythonEphemerisGenerator(EphemerisGenerator):
     """
-    public class PythonEphemerisGenerator extends Object implements :class:`~org.orekit.propagation.EphemerisGenerator`
+    public class PythonEphemerisGenerator extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.EphemerisGenerator`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -2596,8 +2630,8 @@ class PythonEphemerisGenerator(EphemerisGenerator):
             Get the ephemeris generated during the propagation.
         
             Specified by:
-                :meth:`~org.orekit.propagation.EphemerisGenerator.getGeneratedEphemeris`Â in
-                interfaceÂ :class:`~org.orekit.propagation.EphemerisGenerator`
+                :meth:`~org.orekit.propagation.EphemerisGenerator.getGeneratedEphemeris` in
+                interface :class:`~org.orekit.propagation.EphemerisGenerator`
         
             Returns:
                 generated ephemeris
@@ -2628,7 +2662,7 @@ class PythonEphemerisGenerator(EphemerisGenerator):
 _PythonFieldAdditionalStateProvider__T = typing.TypeVar('_PythonFieldAdditionalStateProvider__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldAdditionalStateProvider(FieldAdditionalStateProvider[_PythonFieldAdditionalStateProvider__T], typing.Generic[_PythonFieldAdditionalStateProvider__T]):
     """
-    public class PythonFieldAdditionalStateProvider<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.FieldAdditionalStateProvider`<T>
+    public class PythonFieldAdditionalStateProvider<T extends :class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.FieldAdditionalStateProvider`<T>
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -2638,8 +2672,8 @@ class PythonFieldAdditionalStateProvider(FieldAdditionalStateProvider[_PythonFie
             Get the name of the additional state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.FieldAdditionalStateProvider.getName`Â in
-                interfaceÂ :class:`~org.orekit.propagation.FieldAdditionalStateProvider`
+                :meth:`~org.orekit.propagation.FieldAdditionalStateProvider.getName` in
+                interface :class:`~org.orekit.propagation.FieldAdditionalStateProvider`
         
             Returns:
                 name of the additional state
@@ -2667,11 +2701,12 @@ class PythonFieldAdditionalStateProvider(FieldAdditionalStateProvider[_PythonFie
             Part of JCC Python interface to object
         """
         ...
+    def yield_(self, fieldSpacecraftState: FieldSpacecraftState[_PythonFieldAdditionalStateProvider__T]) -> bool: ...
 
 _PythonFieldEphemerisGenerator__T = typing.TypeVar('_PythonFieldEphemerisGenerator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldEphemerisGenerator(FieldEphemerisGenerator[_PythonFieldEphemerisGenerator__T], typing.Generic[_PythonFieldEphemerisGenerator__T]):
     """
-    public class PythonFieldEphemerisGenerator<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.FieldEphemerisGenerator`<T>
+    public class PythonFieldEphemerisGenerator<T extends :class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.FieldEphemerisGenerator`<T>
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -2699,7 +2734,7 @@ class PythonFieldEphemerisGenerator(FieldEphemerisGenerator[_PythonFieldEphemeri
 _PythonFieldPropagator__T = typing.TypeVar('_PythonFieldPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldPropagator(FieldPropagator[_PythonFieldPropagator__T], typing.Generic[_PythonFieldPropagator__T]):
     """
-    public class PythonFieldPropagator<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.FieldPropagator`<T>
+    public class PythonFieldPropagator<T extends :class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.FieldPropagator`<T>
     """
     def __init__(self): ...
     def addAdditionalStateProvider(self, fieldAdditionalStateProvider: FieldAdditionalStateProvider[_PythonFieldPropagator__T]) -> None: ...
@@ -2710,8 +2745,8 @@ class PythonFieldPropagator(FieldPropagator[_PythonFieldPropagator__T], typing.G
             Remove all events detectors.
         
             Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.clearEventsDetectors`Â in
-                interfaceÂ :class:`~org.orekit.propagation.FieldPropagator`
+                :meth:`~org.orekit.propagation.FieldPropagator.clearEventsDetectors` in
+                interface :class:`~org.orekit.propagation.FieldPropagator`
         
             Also see:
                 :meth:`~org.orekit.propagation.PythonFieldPropagator.addEventDetector`,
@@ -2727,8 +2762,8 @@ class PythonFieldPropagator(FieldPropagator[_PythonFieldPropagator__T], typing.G
             Get attitude provider.
         
             Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.getAttitudeProvider`Â in
-                interfaceÂ :class:`~org.orekit.propagation.FieldPropagator`
+                :meth:`~org.orekit.propagation.FieldPropagator.getAttitudeProvider` in
+                interface :class:`~org.orekit.propagation.FieldPropagator`
         
             Returns:
                 attitude provider
@@ -2763,8 +2798,8 @@ class PythonFieldPropagator(FieldPropagator[_PythonFieldPropagator__T], typing.G
             Get all the names of all managed states.
         
             Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.getManagedAdditionalStates`Â in
-                interfaceÂ :class:`~org.orekit.propagation.FieldPropagator`
+                :meth:`~org.orekit.propagation.FieldPropagator.getManagedAdditionalStates` in
+                interface :class:`~org.orekit.propagation.FieldPropagator`
         
             Returns:
                 names of all managed states
@@ -2791,11 +2826,11 @@ class PythonFieldPropagator(FieldPropagator[_PythonFieldPropagator__T], typing.G
             during propagation, though. Their value will simply be copied unchanged throughout propagation.
         
             Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.isAdditionalStateManaged`Â in
-                interfaceÂ :class:`~org.orekit.propagation.FieldPropagator`
+                :meth:`~org.orekit.propagation.FieldPropagator.isAdditionalStateManaged` in
+                interface :class:`~org.orekit.propagation.FieldPropagator`
         
             Parameters:
-                name (String): name of the additional state
+                name (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional state
         
             Returns:
                 true if the additional state is managed
@@ -2833,8 +2868,8 @@ class PythonFieldPropagator(FieldPropagator[_PythonFieldPropagator__T], typing.G
             Set attitude provider.
         
             Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.setAttitudeProvider`Â in
-                interfaceÂ :class:`~org.orekit.propagation.FieldPropagator`
+                :meth:`~org.orekit.propagation.FieldPropagator.setAttitudeProvider` in
+                interface :class:`~org.orekit.propagation.FieldPropagator`
         
             Parameters:
                 attitudeProvider (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude provider
@@ -2846,39 +2881,18 @@ class PythonFieldPropagator(FieldPropagator[_PythonFieldPropagator__T], typing.G
 
 class PythonMatricesHarvester(MatricesHarvester):
     """
-    public class PythonMatricesHarvester extends Object implements :class:`~org.orekit.propagation.MatricesHarvester`
+    public class PythonMatricesHarvester extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.MatricesHarvester`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getJacobiansColumnsNames(self) -> java.util.List[str]:
-        """
-            Get the names of the parameters in the matrix returned by
-            :meth:`~org.orekit.propagation.PythonMatricesHarvester.getParametersJacobian`.
-        
-            Beware that the names of the parameters are fully known only once all force models have been set up and their parameters
-            properly selected. Applications that retrieve the matrices harvester first and select the force model parameters to
-            retrieve afterwards (but obviously before starting propagation) must take care to wait until the parameters have been
-            set up before they call this method. Calling the method too early would return wrong results.
-        
-            The names are returned in the Jacobians matrix columns order
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.MatricesHarvester.getJacobiansColumnsNames`Â in
-                interfaceÂ :class:`~org.orekit.propagation.MatricesHarvester`
-        
-            Returns:
-                names of the parameters (i.e. columns) of the Jacobian matrix
-        
-        
-        """
-        ...
+    def getJacobiansColumnsNames(self) -> java.util.List[str]: ...
     def getParametersJacobian(self, spacecraftState: SpacecraftState) -> org.hipparchus.linear.RealMatrix:
         """
             Get the Jacobian with respect to propagation parameters.
         
             Specified by:
-                :meth:`~org.orekit.propagation.MatricesHarvester.getParametersJacobian`Â in
-                interfaceÂ :class:`~org.orekit.propagation.MatricesHarvester`
+                :meth:`~org.orekit.propagation.MatricesHarvester.getParametersJacobian` in
+                interface :class:`~org.orekit.propagation.MatricesHarvester`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -2894,8 +2908,8 @@ class PythonMatricesHarvester(MatricesHarvester):
             Extract state transition matrix from state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.MatricesHarvester.getStateTransitionMatrix`Â in
-                interfaceÂ :class:`~org.orekit.propagation.MatricesHarvester`
+                :meth:`~org.orekit.propagation.MatricesHarvester.getStateTransitionMatrix` in
+                interface :class:`~org.orekit.propagation.MatricesHarvester`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -2937,8 +2951,8 @@ class PythonMatricesHarvester(MatricesHarvester):
             use it at all.
         
             Specified by:
-                :meth:`~org.orekit.propagation.MatricesHarvester.setReferenceState`Â in
-                interfaceÂ :class:`~org.orekit.propagation.MatricesHarvester`
+                :meth:`~org.orekit.propagation.MatricesHarvester.setReferenceState` in
+                interface :class:`~org.orekit.propagation.MatricesHarvester`
         
             Parameters:
                 reference (:class:`~org.orekit.propagation.SpacecraftState`): reference state to set
@@ -2949,7 +2963,7 @@ class PythonMatricesHarvester(MatricesHarvester):
 
 class PythonPropagator(Propagator):
     """
-    public class PythonPropagator extends Object implements :class:`~org.orekit.propagation.Propagator`
+    public class PythonPropagator extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.Propagator`
     """
     def __init__(self): ...
     def addAdditionalStateProvider(self, additionalStateProvider: AdditionalStateProvider) -> None:
@@ -2957,8 +2971,8 @@ class PythonPropagator(Propagator):
             Add a set of user-specified state parameters to be computed along with the orbit propagation.
         
             Specified by:
-                :meth:`~org.orekit.propagation.Propagator.addAdditionalStateProvider`Â in
-                interfaceÂ :class:`~org.orekit.propagation.Propagator`
+                :meth:`~org.orekit.propagation.Propagator.addAdditionalStateProvider` in
+                interface :class:`~org.orekit.propagation.Propagator`
         
             Parameters:
                 additionalStateProvider (:class:`~org.orekit.propagation.AdditionalStateProvider`): provider for additional state
@@ -2989,8 +3003,8 @@ class PythonPropagator(Propagator):
             Remove all events detectors.
         
             Specified by:
-                :meth:`~org.orekit.propagation.Propagator.clearEventsDetectors`Â in
-                interfaceÂ :class:`~org.orekit.propagation.Propagator`
+                :meth:`~org.orekit.propagation.Propagator.clearEventsDetectors` in
+                interface :class:`~org.orekit.propagation.Propagator`
         
             Also see:
                 :meth:`~org.orekit.propagation.PythonPropagator.addEventDetector`,
@@ -3035,15 +3049,14 @@ class PythonPropagator(Propagator):
         
             .. code-block: java
             
-            
-               EphemerisGenerator generator = propagator.getEphemerisGenerator();
-               propagator.propagate(target);
-               BoundedPropagator ephemeris = generator.getGeneratedEphemeris();
+               EphemerisGenerator generator = propagator.getEphemerisGenerator();
+               propagator.propagate(target);
+               BoundedPropagator ephemeris = generator.getGeneratedEphemeris();
              
         
             Specified by:
-                :meth:`~org.orekit.propagation.Propagator.getEphemerisGenerator`Â in
-                interfaceÂ :class:`~org.orekit.propagation.Propagator`
+                :meth:`~org.orekit.propagation.Propagator.getEphemerisGenerator` in
+                interface :class:`~org.orekit.propagation.Propagator`
         
             Returns:
                 ephemeris generator
@@ -3089,8 +3102,8 @@ class PythonPropagator(Propagator):
             Get all the names of all managed states.
         
             Specified by:
-                :meth:`~org.orekit.propagation.Propagator.getManagedAdditionalStates`Â in
-                interfaceÂ :class:`~org.orekit.propagation.Propagator`
+                :meth:`~org.orekit.propagation.Propagator.getManagedAdditionalStates` in
+                interface :class:`~org.orekit.propagation.Propagator`
         
             Returns:
                 names of all managed states
@@ -3119,8 +3132,8 @@ class PythonPropagator(Propagator):
             Get the :class:`~org.orekit.utils.PVCoordinates` of the body in the selected frame.
         
             Specified by:
-                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates`Â in
-                interfaceÂ :class:`~org.orekit.utils.PVCoordinatesProvider`
+                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates` in
+                interface :class:`~org.orekit.utils.PVCoordinatesProvider`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
@@ -3140,7 +3153,7 @@ class PythonPropagator(Propagator):
             states for which an :class:`~org.orekit.propagation.AdditionalStateProvider` has been registered by calling the
             :meth:`~org.orekit.propagation.PythonPropagator.addAdditionalStateProvider` method. If the propagator is an
             :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`, the states for which a set of
-            :class:`~org.orekit.propagation.integration.AdditionalEquations` has been registered by calling the
+            :code:`additional equations` has been registered by calling the
             :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.addAdditionalEquations` method are also counted
             as managed additional states.
         
@@ -3149,11 +3162,11 @@ class PythonPropagator(Propagator):
             during propagation, though. Their value will simply be copied unchanged throughout propagation.
         
             Specified by:
-                :meth:`~org.orekit.propagation.Propagator.isAdditionalStateManaged`Â in
-                interfaceÂ :class:`~org.orekit.propagation.Propagator`
+                :meth:`~org.orekit.propagation.Propagator.isAdditionalStateManaged` in
+                interface :class:`~org.orekit.propagation.Propagator`
         
             Parameters:
-                name (String): name of the additional state
+                name (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional state
         
             Returns:
                 true if the additional state is managed
@@ -3301,12 +3314,12 @@ class PythonPropagator(Propagator):
             The default implementation throws an exception as the method is not supported by all propagators.
         
             Specified by:
-                :meth:`~org.orekit.propagation.Propagator.setupMatricesComputation`Â in
-                interfaceÂ :class:`~org.orekit.propagation.Propagator`
+                :meth:`~org.orekit.propagation.Propagator.setupMatricesComputation` in
+                interface :class:`~org.orekit.propagation.Propagator`
         
             Parameters:
-                stmName (String): State Transition Matrix state name
-                initialStm (RealMatrix): initial State Transition Matrix âˆ‚Y/âˆ‚Yâ‚€, if null (which is the most frequent case), assumed to be 6x6 identity
+                stmName (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): State Transition Matrix state name
+                initialStm (:class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.linear.RealMatrix?is`): initial State Transition Matrix ∂Y/∂Y₀, if null (which is the most frequent case), assumed to be 6x6 identity
                 initialJacobianColumns (:class:`~org.orekit.utils.DoubleArrayDictionary`): initial columns of the Jacobians matrix with respect to parameters, if null or if some selected parameters are missing
                     from the dictionary, the corresponding initial column is assumed to be 0
         
@@ -3322,7 +3335,7 @@ class PythonPropagator(Propagator):
 
 class StateCovarianceMatrixProvider(AdditionalStateProvider):
     """
-    public class StateCovarianceMatrixProvider extends Object implements :class:`~org.orekit.propagation.AdditionalStateProvider`
+    public class StateCovarianceMatrixProvider extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.AdditionalStateProvider`
     
         Additional state provider for state covariance matrix.
     
@@ -3350,8 +3363,8 @@ class StateCovarianceMatrixProvider(AdditionalStateProvider):
             Get the additional state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.AdditionalStateProvider.getAdditionalState`Â in
-                interfaceÂ :class:`~org.orekit.propagation.AdditionalStateProvider`
+                :meth:`~org.orekit.propagation.AdditionalStateProvider.getAdditionalState` in
+                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state to which additional state should correspond
@@ -3377,8 +3390,8 @@ class StateCovarianceMatrixProvider(AdditionalStateProvider):
             Get the name of the additional state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.AdditionalStateProvider.getName`Â in
-                interfaceÂ :class:`~org.orekit.propagation.AdditionalStateProvider`
+                :meth:`~org.orekit.propagation.AdditionalStateProvider.getName` in
+                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
         
             Returns:
                 name of the additional state (names containing "orekit" with any case are reserved for the library internal use)
@@ -3443,8 +3456,8 @@ class StateCovarianceMatrixProvider(AdditionalStateProvider):
             Initialize the additional state provider at the start of propagation.
         
             Specified by:
-                :meth:`~org.orekit.propagation.AdditionalStateProvider.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.AdditionalStateProvider`
+                :meth:`~org.orekit.propagation.AdditionalStateProvider.init` in
+                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
         
             Parameters:
                 initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial state information at the start of propagation
@@ -3466,30 +3479,13 @@ class PythonAbstractMatricesHarvester(AbstractMatricesHarvester):
             This method is called when propagation starts, i.e. when configuration is completed
         
             Specified by:
-                :meth:`~org.orekit.propagation.AbstractMatricesHarvester.freezeColumnsNames`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractMatricesHarvester`
+                :meth:`~org.orekit.propagation.AbstractMatricesHarvester.freezeColumnsNames` in
+                class :class:`~org.orekit.propagation.AbstractMatricesHarvester`
         
         
         """
         ...
-    def getJacobiansColumnsNames(self) -> java.util.List[str]:
-        """
-            Get the names of the parameters in the matrix returned by
-            :meth:`~org.orekit.propagation.AbstractMatricesHarvester.getParametersJacobian`.
-        
-            Beware that the names of the parameters are fully known only once all force models have been set up and their parameters
-            properly selected. Applications that retrieve the matrices harvester first and select the force model parameters to
-            retrieve afterwards (but obviously before starting propagation) must take care to wait until the parameters have been
-            set up before they call this method. Calling the method too early would return wrong results.
-        
-            The names are returned in the Jacobians matrix columns order
-        
-            Returns:
-                names of the parameters (i.e. columns) of the Jacobian matrix
-        
-        
-        """
-        ...
+    def getJacobiansColumnsNames(self) -> java.util.List[str]: ...
     def pythonDecRef(self) -> None:
         """
             Part of JCC Python interface to object
@@ -3562,10 +3558,9 @@ class PythonAbstractPropagator(AbstractPropagator):
         
             .. code-block: java
             
-            
-               EphemerisGenerator generator = propagator.getEphemerisGenerator();
-               propagator.propagate(target);
-               BoundedPropagator ephemeris = generator.getGeneratedEphemeris();
+               EphemerisGenerator generator = propagator.getEphemerisGenerator();
+               propagator.propagate(target);
+               BoundedPropagator ephemeris = generator.getGeneratedEphemeris();
              
         
             Returns:
@@ -3619,7 +3614,7 @@ class PythonAbstractPropagator(AbstractPropagator):
 
 class PythonBoundedPropagator(BoundedPropagator):
     """
-    public class PythonBoundedPropagator extends Object implements :class:`~org.orekit.propagation.BoundedPropagator`
+    public class PythonBoundedPropagator extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.BoundedPropagator`
     """
     def __init__(self): ...
     def addAdditionalStateProvider(self, additionalStateProvider: AdditionalStateProvider) -> None:
@@ -3627,8 +3622,8 @@ class PythonBoundedPropagator(BoundedPropagator):
             Add a set of user-specified state parameters to be computed along with the orbit propagation.
         
             Specified by:
-                :meth:`~org.orekit.propagation.Propagator.addAdditionalStateProvider`Â in
-                interfaceÂ :class:`~org.orekit.propagation.Propagator`
+                :meth:`~org.orekit.propagation.Propagator.addAdditionalStateProvider` in
+                interface :class:`~org.orekit.propagation.Propagator`
         
             Parameters:
                 additionalStateProvider (:class:`~org.orekit.propagation.AdditionalStateProvider`): provider for additional state
@@ -3648,8 +3643,8 @@ class PythonBoundedPropagator(BoundedPropagator):
                 detector (T): event detector to add
         
             Also see:
-                :meth:`~org.orekit.propagation.PythonBoundedPropagator.clearEventsDetectors`,
-                :meth:`~org.orekit.propagation.PythonBoundedPropagator.getEventsDetectors`
+                :meth:`~org.orekit.propagation.Propagator.clearEventsDetectors`,
+                :meth:`~org.orekit.propagation.Propagator.getEventsDetectors`
         
         
         """
@@ -3659,12 +3654,12 @@ class PythonBoundedPropagator(BoundedPropagator):
             Remove all events detectors.
         
             Specified by:
-                :meth:`~org.orekit.propagation.Propagator.clearEventsDetectors`Â in
-                interfaceÂ :class:`~org.orekit.propagation.Propagator`
+                :meth:`~org.orekit.propagation.Propagator.clearEventsDetectors` in
+                interface :class:`~org.orekit.propagation.Propagator`
         
             Also see:
-                :meth:`~org.orekit.propagation.PythonBoundedPropagator.addEventDetector`,
-                :meth:`~org.orekit.propagation.PythonBoundedPropagator.getEventsDetectors`
+                :meth:`~org.orekit.propagation.Propagator.addEventDetector`,
+                :meth:`~org.orekit.propagation.Propagator.getEventsDetectors`
         
         
         """
@@ -3699,21 +3694,19 @@ class PythonBoundedPropagator(BoundedPropagator):
             call it back as needed, so it is less memory intensive.
         
             The returned ephemeris generator will be initially empty, it will be filled with propagation data when a subsequent call
-            to either :meth:`~org.orekit.propagation.PythonBoundedPropagator.propagate` or
-            :meth:`~org.orekit.propagation.PythonBoundedPropagator.propagate` is called. The proper way to use this method is
-            therefore to do:
+            to either :meth:`~org.orekit.propagation.Propagator.propagate` or :meth:`~org.orekit.propagation.Propagator.propagate`
+            is called. The proper way to use this method is therefore to do:
         
             .. code-block: java
             
-            
-               EphemerisGenerator generator = propagator.getEphemerisGenerator();
-               propagator.propagate(target);
-               BoundedPropagator ephemeris = generator.getGeneratedEphemeris();
+               EphemerisGenerator generator = propagator.getEphemerisGenerator();
+               propagator.propagate(target);
+               BoundedPropagator ephemeris = generator.getGeneratedEphemeris();
              
         
             Specified by:
-                :meth:`~org.orekit.propagation.Propagator.getEphemerisGenerator`Â in
-                interfaceÂ :class:`~org.orekit.propagation.Propagator`
+                :meth:`~org.orekit.propagation.Propagator.getEphemerisGenerator` in
+                interface :class:`~org.orekit.propagation.Propagator`
         
             Returns:
                 ephemeris generator
@@ -3736,7 +3729,7 @@ class PythonBoundedPropagator(BoundedPropagator):
                 frame in which the orbit is propagated
         
             Also see:
-                :meth:`~org.orekit.propagation.PythonBoundedPropagator.resetInitialState`
+                :meth:`~org.orekit.propagation.Propagator.resetInitialState`
         
         
         """
@@ -3759,8 +3752,8 @@ class PythonBoundedPropagator(BoundedPropagator):
             Get all the names of all managed states.
         
             Specified by:
-                :meth:`~org.orekit.propagation.Propagator.getManagedAdditionalStates`Â in
-                interfaceÂ :class:`~org.orekit.propagation.Propagator`
+                :meth:`~org.orekit.propagation.Propagator.getManagedAdditionalStates` in
+                interface :class:`~org.orekit.propagation.Propagator`
         
             Returns:
                 names of all managed states
@@ -3773,8 +3766,8 @@ class PythonBoundedPropagator(BoundedPropagator):
             Get the last date of the range.
         
             Specified by:
-                :meth:`~org.orekit.propagation.BoundedPropagator.getMaxDate`Â in
-                interfaceÂ :class:`~org.orekit.propagation.BoundedPropagator`
+                :meth:`~org.orekit.propagation.BoundedPropagator.getMaxDate` in
+                interface :class:`~org.orekit.propagation.BoundedPropagator`
         
             Returns:
                 the last date of the range
@@ -3787,8 +3780,8 @@ class PythonBoundedPropagator(BoundedPropagator):
             Get the first date of the range.
         
             Specified by:
-                :meth:`~org.orekit.propagation.BoundedPropagator.getMinDate`Â in
-                interfaceÂ :class:`~org.orekit.propagation.BoundedPropagator`
+                :meth:`~org.orekit.propagation.BoundedPropagator.getMinDate` in
+                interface :class:`~org.orekit.propagation.BoundedPropagator`
         
             Returns:
                 the first date of the range
@@ -3806,19 +3799,16 @@ class PythonBoundedPropagator(BoundedPropagator):
             Returns:
                 multiplexer holding all step handlers
         
-            Since:
-                11.0
-        
         
         """
         ...
     def getPVCoordinates(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates:
         """
-            Get the :code:`PVCoordinates` of the body in the selected frame.
+            Get the :class:`~org.orekit.utils.PVCoordinates` of the body in the selected frame.
         
             Specified by:
-                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates`Â in
-                interfaceÂ :class:`~org.orekit.utils.PVCoordinatesProvider`
+                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates` in
+                interface :class:`~org.orekit.utils.PVCoordinatesProvider`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
@@ -3835,23 +3825,21 @@ class PythonBoundedPropagator(BoundedPropagator):
             Check if an additional state is managed.
         
             Managed states are states for which the propagators know how to compute its evolution. They correspond to additional
-            states for which an :class:`~org.orekit.propagation.AdditionalStateProvider` has been registered by calling the
-            :meth:`~org.orekit.propagation.PythonBoundedPropagator.addAdditionalStateProvider` method. If the propagator is an
-            :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`, the states for which a set of
-            :class:`~org.orekit.propagation.integration.AdditionalEquations` has been registered by calling the
-            :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.addAdditionalEquations` method are also counted
-            as managed additional states.
+            states for which a :class:`~org.orekit.propagation.AdditionalStateProvider` has been registered by calling the
+            :meth:`~org.orekit.propagation.Propagator.addAdditionalStateProvider` method.
         
-            Additional states that are present in the :meth:`~org.orekit.propagation.PythonBoundedPropagator.getInitialState` but
-            have no evolution method registered are *not* considered as managed states. These unmanaged additional states are not
-            lost during propagation, though. Their value will simply be copied unchanged throughout propagation.
+            Additional states that are present in the :meth:`~org.orekit.propagation.Propagator.getInitialState` but have no
+            evolution method registered are *not* considered as managed states. These unmanaged additional states are not lost
+            during propagation, though. Their value are piecewise constant between state resets that may change them if some event
+            handler :meth:`~org.orekit.propagation.events.handlers.EventHandler.resetState` method is called at an event occurrence
+            and happens to change the unmanaged additional state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.Propagator.isAdditionalStateManaged`Â in
-                interfaceÂ :class:`~org.orekit.propagation.Propagator`
+                :meth:`~org.orekit.propagation.Propagator.isAdditionalStateManaged` in
+                interface :class:`~org.orekit.propagation.Propagator`
         
             Parameters:
-                name (String): name of the additional state
+                name (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional state
         
             Returns:
                 true if the additional state is managed
@@ -3899,25 +3887,7 @@ class PythonBoundedPropagator(BoundedPropagator):
         ...
     @typing.overload
     def propagate(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> SpacecraftState: ...
-    def propagate_AA(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> SpacecraftState:
-        """
-            Propagate from a start date towards a target date.
-        
-            Those propagators use a start date and a target date to compute the propagated state. For propagators using event
-            detection mechanism, if the provided start date is different from the initial state date, a first, simple propagation is
-            performed, without processing any event computation. Then complete propagation is performed from start date to target
-            date.
-        
-            Parameters:
-                start (:class:`~org.orekit.time.AbsoluteDate`): start date from which orbit state should be propagated
-                target (:class:`~org.orekit.time.AbsoluteDate`): target date to which orbit state should be propagated
-        
-            Returns:
-                propagated state
-        
-        
-        """
-        ...
+    def propagate_AA(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> SpacecraftState: ...
     def pythonDecRef(self) -> None:
         """
             Part of JCC Python interface to object
@@ -3967,7 +3937,7 @@ class PythonBoundedPropagator(BoundedPropagator):
 _PythonFieldAbstractPropagator__T = typing.TypeVar('_PythonFieldAbstractPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldAbstractPropagator(FieldAbstractPropagator[_PythonFieldAbstractPropagator__T], typing.Generic[_PythonFieldAbstractPropagator__T]):
     """
-    public class PythonFieldAbstractPropagator<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.FieldAbstractPropagator`<T>
+    public class PythonFieldAbstractPropagator<T extends :class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.FieldAbstractPropagator`<T>
     """
     def __init__(self, field: org.hipparchus.Field[_PythonFieldAbstractPropagator__T]): ...
     _addEventDetector__D = typing.TypeVar('_addEventDetector__D', bound=org.orekit.propagation.events.FieldEventDetector)  # <D>
@@ -4013,7 +3983,7 @@ class PythonFieldAbstractPropagator(FieldAbstractPropagator[_PythonFieldAbstract
 _PythonFieldBoundedPropagator__T = typing.TypeVar('_PythonFieldBoundedPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldBoundedPropagator(FieldBoundedPropagator[_PythonFieldBoundedPropagator__T], typing.Generic[_PythonFieldBoundedPropagator__T]):
     """
-    public class PythonFieldBoundedPropagator<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.FieldBoundedPropagator`<T>
+    public class PythonFieldBoundedPropagator<T extends :class:`~org.orekit.propagation.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.FieldBoundedPropagator`<T>
     """
     def __init__(self): ...
     def addAdditionalStateProvider(self, fieldAdditionalStateProvider: FieldAdditionalStateProvider[_PythonFieldBoundedPropagator__T]) -> None: ...
@@ -4024,8 +3994,8 @@ class PythonFieldBoundedPropagator(FieldBoundedPropagator[_PythonFieldBoundedPro
             Remove all events detectors.
         
             Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.clearEventsDetectors`Â in
-                interfaceÂ :class:`~org.orekit.propagation.FieldPropagator`
+                :meth:`~org.orekit.propagation.FieldPropagator.clearEventsDetectors` in
+                interface :class:`~org.orekit.propagation.FieldPropagator`
         
             Also see:
                 :meth:`~org.orekit.propagation.PythonFieldBoundedPropagator.addEventDetector`,
@@ -4041,8 +4011,8 @@ class PythonFieldBoundedPropagator(FieldBoundedPropagator[_PythonFieldBoundedPro
             Get attitude provider.
         
             Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.getAttitudeProvider`Â in
-                interfaceÂ :class:`~org.orekit.propagation.FieldPropagator`
+                :meth:`~org.orekit.propagation.FieldPropagator.getAttitudeProvider` in
+                interface :class:`~org.orekit.propagation.FieldPropagator`
         
             Returns:
                 attitude provider
@@ -4077,8 +4047,8 @@ class PythonFieldBoundedPropagator(FieldBoundedPropagator[_PythonFieldBoundedPro
             Get all the names of all managed states.
         
             Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.getManagedAdditionalStates`Â in
-                interfaceÂ :class:`~org.orekit.propagation.FieldPropagator`
+                :meth:`~org.orekit.propagation.FieldPropagator.getManagedAdditionalStates` in
+                interface :class:`~org.orekit.propagation.FieldPropagator`
         
             Returns:
                 names of all managed states
@@ -4107,11 +4077,11 @@ class PythonFieldBoundedPropagator(FieldBoundedPropagator[_PythonFieldBoundedPro
             not lost during propagation, though. Their value will simply be copied unchanged throughout propagation.
         
             Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.isAdditionalStateManaged`Â in
-                interfaceÂ :class:`~org.orekit.propagation.FieldPropagator`
+                :meth:`~org.orekit.propagation.FieldPropagator.isAdditionalStateManaged` in
+                interface :class:`~org.orekit.propagation.FieldPropagator`
         
             Parameters:
-                name (String): name of the additional state
+                name (:class:`~org.orekit.propagation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional state
         
             Returns:
                 true if the additional state is managed
@@ -4149,8 +4119,8 @@ class PythonFieldBoundedPropagator(FieldBoundedPropagator[_PythonFieldBoundedPro
             Set attitude provider.
         
             Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.setAttitudeProvider`Â in
-                interfaceÂ :class:`~org.orekit.propagation.FieldPropagator`
+                :meth:`~org.orekit.propagation.FieldPropagator.setAttitudeProvider` in
+                interface :class:`~org.orekit.propagation.FieldPropagator`
         
             Parameters:
                 attitudeProvider (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude provider

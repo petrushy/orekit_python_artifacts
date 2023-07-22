@@ -17,7 +17,7 @@ import typing
 
 class AbstractSelfFeedingLoader:
     """
-    public abstract class AbstractSelfFeedingLoader extends Object
+    public abstract class AbstractSelfFeedingLoader extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Abstract class that combines a :class:`~org.orekit.data.DataProvidersManager` with a supported names regular expression
         for :meth:`~org.orekit.data.DataProvidersManager.feed`.
@@ -168,7 +168,7 @@ class DataProvider:
     """
     ZIP_ARCHIVE_PATTERN: typing.ClassVar[java.util.regex.Pattern] = ...
     """
-    static final Pattern ZIP_ARCHIVE_PATTERN
+    static final :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.util.regex.Pattern?is` ZIP_ARCHIVE_PATTERN
     
         Pattern for name of zip/jar archives.
     
@@ -188,7 +188,7 @@ class DataProvider:
             will try to use the next configured providers, in case another one can feed the :class:`~org.orekit.data.DataLoader`.
         
             Parameters:
-                supported (Pattern): pattern for file names supported by the visitor
+                supported (:class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.util.regex.Pattern?is`): pattern for file names supported by the visitor
                 visitor (:class:`~org.orekit.data.DataLoader`): data file visitor to use
                 manager (:class:`~org.orekit.data.DataProvidersManager`): with the filters to apply to the resources.
         
@@ -201,7 +201,7 @@ class DataProvider:
 
 class DataProvidersManager:
     """
-    public class DataProvidersManager extends Object
+    public class DataProvidersManager extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This class manages supported :class:`~org.orekit.data.DataProvider`.
     
@@ -233,7 +233,7 @@ class DataProvidersManager:
     """
     OREKIT_DATA_PATH: typing.ClassVar[str] = ...
     """
-    public static final String OREKIT_DATA_PATH
+    public static final :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` OREKIT_DATA_PATH
     
         Name of the property defining the root directories or zip/jar files path for default configuration.
     
@@ -257,8 +257,9 @@ class DataProvidersManager:
             :class:`~org.orekit.data.DirectoryCrawler` instance will be set up for each directory and one
             :class:`~org.orekit.data.ZipJarCrawler` instance (configured to look for the archive in the filesystem) will be set up
             for each zip/jar archive. The list elements in the java property are separated using the standard path separator for the
-            operating system as returned by null. This standard path separator is ":" on Linux and Unix type systems and ";" on
-            Windows types systems.
+            operating system as returned by
+            :meth:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.System.html?is`. This standard path separator
+            is ":" on Linux and Unix type systems and ";" on Windows types systems.
         
         """
         ...
@@ -312,7 +313,7 @@ class DataProvidersManager:
             loader, then the last error triggered is thrown.
         
             Parameters:
-                supportedNames (String): regular expression for file names supported by the visitor
+                supportedNames (:class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for file names supported by the visitor
                 loader (:class:`~org.orekit.data.DataLoader`): data loader to use
         
             Returns:
@@ -334,21 +335,7 @@ class DataProvidersManager:
         
         """
         ...
-    def getLoadedDataNames(self) -> java.util.Set[str]:
-        """
-            Get an unmodifiable view of the set of data file names that have been loaded.
-        
-            The names returned are exactly the ones that were given to the :meth:`~org.orekit.data.DataLoader.loadData` method.
-        
-            Returns:
-                unmodifiable view of the set of data file names that have been loaded
-        
-            Also see:
-                :meth:`~org.orekit.data.DataProvidersManager.feed`, :meth:`~org.orekit.data.DataProvidersManager.clearLoadedDataNames`
-        
-        
-        """
-        ...
+    def getLoadedDataNames(self) -> java.util.Set[str]: ...
     def getProviders(self) -> java.util.List[DataProvider]: ...
     def isSupported(self, dataProvider: DataProvider) -> bool:
         """
@@ -407,7 +394,7 @@ class DataProvidersManager:
 
 class DataSource:
     """
-    public class DataSource extends Object
+    public class DataSource extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Container associating a name with a stream or reader that can be opened *lazily*.
     
@@ -479,7 +466,7 @@ class DataSource:
 
 class DelaunayArguments(org.orekit.time.TimeStamped, java.io.Serializable):
     """
-    public class DelaunayArguments extends Object implements :class:`~org.orekit.time.TimeStamped`, Serializable
+    public class DelaunayArguments extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Delaunay arguments used for nutation or tides.
     
@@ -527,40 +514,40 @@ class DelaunayArguments(org.orekit.time.TimeStamped, java.io.Serializable):
         ...
     def getF(self) -> float:
         """
-            Get L - Î© where L is the mean longitude of the Moon.
+            Get L - Ω where L is the mean longitude of the Moon.
         
             Returns:
-                L - Î©
+                L - Ω
         
         
         """
         ...
     def getFDot(self) -> float:
         """
-            Get L - Î© where L is the mean longitude of the Moon time derivative.
+            Get L - Ω where L is the mean longitude of the Moon time derivative.
         
             Returns:
-                L - Î© time derivative
+                L - Ω time derivative
         
         
         """
         ...
     def getGamma(self) -> float:
         """
-            Get the tide parameter Î³ = GMST + Ï€.
+            Get the tide parameter γ = GMST + π.
         
             Returns:
-                tide parameter Î³ = GMST + Ï€
+                tide parameter γ = GMST + π
         
         
         """
         ...
     def getGammaDot(self) -> float:
         """
-            Get the tide parameter Î³ = GMST + Ï€ time derivative.
+            Get the tide parameter γ = GMST + π time derivative.
         
             Returns:
-                tide parameter Î³ = GMST + Ï€ time derivative
+                tide parameter γ = GMST + π time derivative
         
         
         """
@@ -639,7 +626,7 @@ class DelaunayArguments(org.orekit.time.TimeStamped, java.io.Serializable):
 _FieldDelaunayArguments__T = typing.TypeVar('_FieldDelaunayArguments__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldDelaunayArguments(org.orekit.time.FieldTimeStamped[_FieldDelaunayArguments__T], typing.Generic[_FieldDelaunayArguments__T]):
     """
-    public class FieldDelaunayArguments<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.time.FieldTimeStamped`<T>
+    public class FieldDelaunayArguments<T extends :class:`~org.orekit.data.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.FieldTimeStamped`<T>
     
         Delaunay arguments used for nutation or tides.
     
@@ -675,40 +662,40 @@ class FieldDelaunayArguments(org.orekit.time.FieldTimeStamped[_FieldDelaunayArgu
     def getDate(self) -> org.orekit.time.FieldAbsoluteDate[_FieldDelaunayArguments__T]: ...
     def getF(self) -> _FieldDelaunayArguments__T:
         """
-            Get L - Î© where L is the mean longitude of the Moon.
+            Get L - Ω where L is the mean longitude of the Moon.
         
             Returns:
-                L - Î©
+                L - Ω
         
         
         """
         ...
     def getFDot(self) -> _FieldDelaunayArguments__T:
         """
-            Get L - Î© where L is the mean longitude of the Moon time derivative.
+            Get L - Ω where L is the mean longitude of the Moon time derivative.
         
             Returns:
-                L - Î© time derivative
+                L - Ω time derivative
         
         
         """
         ...
     def getGamma(self) -> _FieldDelaunayArguments__T:
         """
-            Get the tide parameter Î³ = GMST + Ï€.
+            Get the tide parameter γ = GMST + π.
         
             Returns:
-                tide parameter Î³ = GMST + Ï€
+                tide parameter γ = GMST + π
         
         
         """
         ...
     def getGammaDot(self) -> _FieldDelaunayArguments__T:
         """
-            Get the tide parameter Î³ = GMST + Ï€ time derivative.
+            Get the tide parameter γ = GMST + π time derivative.
         
             Returns:
-                tide parameter Î³ = GMST + Ï€ time derivative
+                tide parameter γ = GMST + π time derivative
         
         
         """
@@ -786,7 +773,7 @@ class FieldDelaunayArguments(org.orekit.time.FieldTimeStamped[_FieldDelaunayArgu
 
 class FiltersManager:
     """
-    public class FiltersManager extends Object
+    public class FiltersManager extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Manager for :class:`~org.orekit.data.DataFilter`.
     
@@ -827,7 +814,7 @@ class FiltersManager:
 
 class FundamentalNutationArguments(java.io.Serializable):
     """
-    public class FundamentalNutationArguments extends Object implements Serializable
+    public class FundamentalNutationArguments extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Class computing the fundamental arguments for nutation and tides.
     
@@ -880,7 +867,7 @@ class FundamentalNutationArguments(java.io.Serializable):
 
 class PoissonSeries:
     """
-    public class PoissonSeries extends Object
+    public class PoissonSeries extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Class representing a Poisson series for nutation or ephemeris computations.
     
@@ -956,7 +943,7 @@ class PoissonSeries:
 
 class PoissonSeriesParser:
     """
-    public class PoissonSeriesParser extends Object
+    public class PoissonSeriesParser extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Parser for :class:`~org.orekit.data.PoissonSeries` files.
     
@@ -981,16 +968,15 @@ class PoissonSeriesParser:
     
         .. code-block: java
         
-        
-         âˆ†Ïˆ = Î£ (Ai+A'it) sin(ARGUMENT), âˆ†Îµ = Î£ (Bi+B'it) cos(ARGUMENT)
-        
-              MULTIPLIERS OF      PERIOD           LONGITUDE         OBLIQUITY
-          l    l'   F    D   Om     days         Ai       A'i       Bi       B'i
-        
-          0    0    0    0    1   -6798.4    -171996    -174.2    92025      8.9
-          0    0    2   -2    2     182.6     -13187      -1.6     5736     -3.1
-          0    0    2    0    2      13.7      -2274      -0.2      977     -0.5
-          0    0    0    0    2   -3399.2       2062       0.2     -895      0.5
+         ∆ψ = Σ (Ai+A'it) sin(ARGUMENT), ∆ε = Σ (Bi+B'it) cos(ARGUMENT)
+        
+              MULTIPLIERS OF      PERIOD           LONGITUDE         OBLIQUITY
+          l    l'   F    D   Om     days         Ai       A'i       Bi       B'i
+        
+          0    0    0    0    1   -6798.4    -171996    -174.2    92025      8.9
+          0    0    2   -2    2     182.6     -13187      -1.6     5736     -3.1
+          0    0    2    0    2      13.7      -2274      -0.2      977     -0.5
+          0    0    0    0    2   -3399.2       2062       0.2     -895      0.5
          
     
         In order to parse the nutation in longitude from the previous table, the following settings should be used:
@@ -1018,46 +1004,45 @@ class PoissonSeriesParser:
     
         .. code-block: java
         
-        
-         ---------------------------------------------------------------------------------------------------
-        
-         (unit microarcsecond; cut-off: 0.1 microarcsecond)
-         (ARG being for various combination of the fundamental arguments of the nutation theory)
-        
-           Sum_i[A_i * sin(ARG) + A"_i * cos(ARG)]
-        
-         + Sum_i[A'_i * sin(ARG) + A"'_i * cos(ARG)] * t           (see Chapter 5, Eq. (35))
-        
-         The Table below provides the values for A_i and A"_i (j=0) and then A'_i and A"'_i (j=1)
-        
-         The expressions for the fundamental arguments appearing in columns 4 to 8 (luni-solar part)
-         and in columns 9 to 17 (planetary part) are those of the IERS Conventions 2003
-        
-         ----------------------------------------------------------------------------------------------------------
-         j = 0  Number of terms = 1320
-         ----------------------------------------------------------------------------------------------------------
-             i        A_i             A"_i     l    l'   F    D    Om  L_Me L_Ve  L_E L_Ma  L_J L_Sa  L_U L_Ne  p_A
-         ----------------------------------------------------------------------------------------------------------
-             1   -17206424.18        3338.60    0    0    0    0    1    0    0    0    0    0    0    0    0    0
-             2    -1317091.22       -1369.60    0    0    2   -2    2    0    0    0    0    0    0    0    0    0
-             3     -227641.81         279.60    0    0    2    0    2    0    0    0    0    0    0    0    0    0
-             4      207455.40         -69.80    0    0    0    0    2    0    0    0    0    0    0    0    0    0
-             5      147587.70        1181.70    0    1    0    0    0    0    0    0    0    0    0    0    0    0
-        
-         ...
-        
-          1319          -0.10           0.00    0    0    0    0    0    1    0   -3    0    0    0    0    0   -2
-          1320          -0.10           0.00    0    0    0    0    0    0    0    1    0    1   -2    0    0    0
-        
-         --------------------------------------------------------------------------------------------------------------
-         j = 1  Number of terms = 38
-         --------------------------------------------------------------------------------------------------------------
-            i          A'_i            A"'_i    l    l'   F    D   Om L_Me L_Ve  L_E L_Ma  L_J L_Sa  L_U L_Ne  p_A
-         --------------------------------------------------------------------------------------------------------------
-          1321      -17418.82           2.89    0    0    0    0    1    0    0    0    0    0    0    0    0    0
-          1322        -363.71          -1.50    0    1    0    0    0    0    0    0    0    0    0    0    0    0
-          1323        -163.84           1.20    0    0    2   -2    2    0    0    0    0    0    0    0    0    0
-          1324         122.74           0.20    0    1    2   -2    2    0    0    0    0    0    0    0    0    0
+         ---------------------------------------------------------------------------------------------------
+        
+         (unit microarcsecond; cut-off: 0.1 microarcsecond)
+         (ARG being for various combination of the fundamental arguments of the nutation theory)
+        
+           Sum_i[A_i * sin(ARG) + A"_i * cos(ARG)]
+        
+         + Sum_i[A'_i * sin(ARG) + A"'_i * cos(ARG)] * t           (see Chapter 5, Eq. (35))
+        
+         The Table below provides the values for A_i and A"_i (j=0) and then A'_i and A"'_i (j=1)
+        
+         The expressions for the fundamental arguments appearing in columns 4 to 8 (luni-solar part)
+         and in columns 9 to 17 (planetary part) are those of the IERS Conventions 2003
+        
+         ----------------------------------------------------------------------------------------------------------
+         j = 0  Number of terms = 1320
+         ----------------------------------------------------------------------------------------------------------
+             i        A_i             A"_i     l    l'   F    D    Om  L_Me L_Ve  L_E L_Ma  L_J L_Sa  L_U L_Ne  p_A
+         ----------------------------------------------------------------------------------------------------------
+             1   -17206424.18        3338.60    0    0    0    0    1    0    0    0    0    0    0    0    0    0
+             2    -1317091.22       -1369.60    0    0    2   -2    2    0    0    0    0    0    0    0    0    0
+             3     -227641.81         279.60    0    0    2    0    2    0    0    0    0    0    0    0    0    0
+             4      207455.40         -69.80    0    0    0    0    2    0    0    0    0    0    0    0    0    0
+             5      147587.70        1181.70    0    1    0    0    0    0    0    0    0    0    0    0    0    0
+        
+         ...
+        
+          1319          -0.10           0.00    0    0    0    0    0    1    0   -3    0    0    0    0    0   -2
+          1320          -0.10           0.00    0    0    0    0    0    0    0    1    0    1   -2    0    0    0
+        
+         --------------------------------------------------------------------------------------------------------------
+         j = 1  Number of terms = 38
+         --------------------------------------------------------------------------------------------------------------
+            i          A'_i            A"'_i    l    l'   F    D   Om L_Me L_Ve  L_E L_Ma  L_J L_Sa  L_U L_Ne  p_A
+         --------------------------------------------------------------------------------------------------------------
+          1321      -17418.82           2.89    0    0    0    0    1    0    0    0    0    0    0    0    0    0
+          1322        -363.71          -1.50    0    1    0    0    0    0    0    0    0    0    0    0    0    0
+          1323        -163.84           1.20    0    0    2   -2    2    0    0    0    0    0    0    0    0    0
+          1324         122.74           0.20    0    1    2   -2    2    0    0    0    0    0    0    0    0    0
          
     
         In order to parse the nutation in longitude from the previous table, the following settings should be used:
@@ -1069,15 +1054,15 @@ class PoissonSeriesParser:
             1 we read degree 1, see :meth:`~org.orekit.data.PoissonSeriesParser.withSinCos` ...)
     
     
-        A file from a recent convention, like table 6.5a in IERS conventions 2010, contains both Doodson arguments (Ã�â€ž, s, h,
-        p, N', ps), Doodson numbers and Delaunay parameters. In this case, the coefficients for the Delaunay parameters must be
-        *subtracted* from the Ã�â€ž = GMST + Ã�â‚¬ tide parameter, so the signs in the files must be reversed in order to match
-        the Doodson arguments and Doodson numbers. This is done automatically (and consistency is checked) only when the
+        A file from a recent convention, like table 6.5a in IERS conventions 2010, contains both Doodson arguments (τ, s, h, p,
+        N', ps), Doodson numbers and Delaunay parameters. In this case, the coefficients for the Delaunay parameters must be
+        *subtracted* from the τ = GMST + π tide parameter, so the signs in the files must be reversed in order to match the
+        Doodson arguments and Doodson numbers. This is done automatically (and consistency is checked) only when the
         :meth:`~org.orekit.data.PoissonSeriesParser.withDoodson` method is called at parser configuration time. Some other files
-        use the ÃŽÂ³ = GMST + Ã�â‚¬ tide parameter rather than Doodson Ã�â€ž argument and the coefficients for the Delaunay
-        parameters must be *added* to the ÃŽÂ³ parameter, so no sign reversal is performed. In order to avoid ambiguity as the
-        two cases are incompatible with each other, trying to add a configuration for Ã�â€ž by calling
-        :meth:`~org.orekit.data.PoissonSeriesParser.withDoodson` and to also add a configuration for ÃŽÂ³ by calling
+        use the γ = GMST + π tide parameter rather than Doodson τ argument and the coefficients for the Delaunay parameters
+        must be *added* to the γ parameter, so no sign reversal is performed. In order to avoid ambiguity as the two cases are
+        incompatible with each other, trying to add a configuration for τ by calling
+        :meth:`~org.orekit.data.PoissonSeriesParser.withDoodson` and to also add a configuration for γ by calling
         :meth:`~org.orekit.data.PoissonSeriesParser.withGamma` triggers an exception.
     
         The table 6.5a file also contains a column for the waves names (the Darwin's symbol) which may be empty, so it must be
@@ -1086,21 +1071,20 @@ class PoissonSeriesParser:
     
         .. code-block: java
         
-        
-         The in-phase (ip) amplitudes (Aâ‚� Î´kfR Hf) and the out-of-phase (op) amplitudes (Aâ‚� Î´kfI Hf)
-         of the corrections for frequency dependence of kâ‚‚â‚�â�½â�°â�¾, taking the nominal value kâ‚‚â‚� for the
-         diurnal tides as (0.29830 âˆ’ i 0.00144). Units: 10â�»Â¹Â² . The entries for Î´kfR and Î´kfI are in
-         units of 10â�»â�µ. Multipliers of the Doodson arguments identifying the tidal terms are given,
-         as also those of the Delaunay variables characterizing the nutations produced by these
-         terms.
-        
-         Name   deg/hr    Doodson  Ï„  s  h  p  N' ps   l  l' F  D  Î©  Î´kfR  Î´kfI     Amp.    Amp.
-                            No.                                       /10âˆ’5 /10âˆ’5    (ip)    (op)
-           2Qâ‚� 12.85429   125,755  1 -3  0  2   0  0   2  0  2  0  2    -29     3    -0.1     0.0
-            Ïƒâ‚� 12.92714   127,555  1 -3  2  0   0  0   0  0  2  2  2    -30     3    -0.1     0.0
-               13.39645   135,645  1 -2  0  1  -1  0   1  0  2  0  1    -45     5    -0.1     0.0
-            Qâ‚� 13.39866   135,655  1 -2  0  1   0  0   1  0  2  0  2    -46     5    -0.7     0.1
-            Ï�â‚� 13.47151   137,455  1 -2  2 -1   0  0  -1  0  2  2  2    -49     5    -0.1     0.0
+         The in-phase (ip) amplitudes (A₁ δkfR Hf) and the out-of-phase (op) amplitudes (A₁ δkfI Hf)
+         of the corrections for frequency dependence of k₂₁⁽⁰⁾, taking the nominal value k₂₁ for the
+         diurnal tides as (0.29830 − i 0.00144). Units: 10⁻¹² . The entries for δkfR and δkfI are in
+         units of 10⁻⁵. Multipliers of the Doodson arguments identifying the tidal terms are given,
+         as also those of the Delaunay variables characterizing the nutations produced by these
+         terms.
+        
+         Name   deg/hr    Doodson  τ  s  h  p  N' ps   l  l' F  D  Ω  δkfR  δkfI     Amp.    Amp.
+                            No.                                       /10−5 /10−5    (ip)    (op)
+           2Q₁ 12.85429   125,755  1 -3  0  2   0  0   2  0  2  0  2    -29     3    -0.1     0.0
+            σ₁ 12.92714   127,555  1 -3  2  0   0  0   0  0  2  2  2    -30     3    -0.1     0.0
+               13.39645   135,645  1 -2  0  1  -1  0   1  0  2  0  1    -45     5    -0.1     0.0
+            Q₁ 13.39866   135,655  1 -2  0  1   0  0   1  0  2  0  2    -46     5    -0.7     0.1
+            ρ₁ 13.47151   137,455  1 -2  2 -1   0  0  -1  0  2  2  2    -49     5    -0.1     0.0
          
     
           - totalColumns = 18 (see :meth:`~org.orekit.data.PoissonSeriesParser.%3Cinit%3E`)
@@ -1128,8 +1112,8 @@ class PoissonSeriesParser:
             Parse a stream.
         
             Parameters:
-                stream (InputStream): stream containing the IERS table
-                name (String): name of the resource file (for error messages only)
+                stream (:class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.io.InputStream?is`): stream containing the IERS table
+                name (:class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the resource file (for error messages only)
         
             Returns:
                 parsed Poisson series
@@ -1142,7 +1126,7 @@ class PoissonSeriesParser:
             Set up columns for Doodson multipliers and Doodson number.
         
             Parameters:
-                firstMultiplierColumn (int): column of the first Doodson multiplier which corresponds to Ï„ (counting from 1)
+                firstMultiplierColumn (int): column of the first Doodson multiplier which corresponds to τ (counting from 1)
                 numberColumn (int): column of the Doodson number (counting from 1)
         
             Returns:
@@ -1200,8 +1184,8 @@ class PoissonSeriesParser:
         """
             Set up optional column.
         
-            Optional columns typically appears in tides-related files, as some waves have specific names (Ã�â€¡Ã¢â€šï¿½, MÃ¢â€šâ€š,
-            ...) and other waves don't have names and hence are replaced by spaces in the corresponding file line.
+            Optional columns typically appears in tides-related files, as some waves have specific names (χ₁, M₂, ...) and
+            other waves don't have names and hence are replaced by spaces in the corresponding file line.
         
             At most one column may be optional.
         
@@ -1248,7 +1232,7 @@ class PoissonSeriesParser:
 
 class PolynomialNutation(java.io.Serializable):
     """
-    public class PolynomialNutation extends Object implements Serializable
+    public class PolynomialNutation extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Polynomial nutation function.
     
@@ -1315,14 +1299,14 @@ class PolynomialNutation(java.io.Serializable):
 
 class PolynomialParser:
     """
-    public class PolynomialParser extends Object
+    public class PolynomialParser extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Parser for polynomials in IERS tables.
     
         IERS conventions tables display polynomial parts using several different formats, like the following ones:
     
-          - 125.04455501Â° âˆ’ 6962890.5431â€³t + 7.4722â€³tÂ² + 0.007702â€³tÂ³ âˆ’ 0.00005939â€³tâ�´
-          - 0.02438175 Ã— t + 0.00000538691 Ã— tÂ²
+          - 125.04455501° − 6962890.5431″t + 7.4722″t² + 0.007702″t³ − 0.00005939″t⁴
+          - 0.02438175 × t + 0.00000538691 × t²
           - 0''.014506 + 4612''.15739966t + 1''.39667721t^2 - 0''.00009344t^3 + 0''.00001882t^4
           - -16616.99 + 2004191742.88 t - 427219.05 t^2 - 198620.54 t^3 - 46.05 t^4 + 5.98 t^5
     
@@ -1338,7 +1322,7 @@ class PolynomialParser:
             Parse a polynomial expression.
         
             Parameters:
-                expression (String): polynomial expression to parse
+                expression (:class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): polynomial expression to parse
         
             Returns:
                 polynomial coefficients array in increasing degree order, or null if expression is not a recognized polynomial
@@ -1368,7 +1352,7 @@ _SimpleTimeStampedTableParser__RowConverter__S = typing.TypeVar('_SimpleTimeStam
 _SimpleTimeStampedTableParser__T = typing.TypeVar('_SimpleTimeStampedTableParser__T', bound=org.orekit.time.TimeStamped)  # <T>
 class SimpleTimeStampedTableParser(typing.Generic[_SimpleTimeStampedTableParser__T]):
     """
-    public class SimpleTimeStampedTableParser<T extends :class:`~org.orekit.time.TimeStamped`> extends Object
+    public class SimpleTimeStampedTableParser<T extends :class:`~org.orekit.time.TimeStamped`> extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Parser for simple tables containing :class:`~org.orekit.time.TimeStamped` data.
     
@@ -1385,7 +1369,7 @@ class SeriesTerm: ...
 _AbstractListCrawler__T = typing.TypeVar('_AbstractListCrawler__T')  # <T>
 class AbstractListCrawler(DataProvider, typing.Generic[_AbstractListCrawler__T]):
     """
-    public abstract class AbstractListCrawler<T> extends Object implements :class:`~org.orekit.data.DataProvider`
+    public abstract class AbstractListCrawler<T> extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataProvider`
     
         Provider for data files defined in a list.
     
@@ -1428,7 +1412,7 @@ class AbstractListCrawler(DataProvider, typing.Generic[_AbstractListCrawler__T])
                 :meth:`~org.orekit.data.DataProvider.feed` in interface :class:`~org.orekit.data.DataProvider`
         
             Parameters:
-                supported (Pattern): pattern for file names supported by the visitor
+                supported (:class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.util.regex.Pattern?is`): pattern for file names supported by the visitor
                 visitor (:class:`~org.orekit.data.DataLoader`): data file visitor to use
                 manager (:class:`~org.orekit.data.DataProvidersManager`): with the filters to apply to the resources.
         
@@ -1442,7 +1426,7 @@ class AbstractListCrawler(DataProvider, typing.Generic[_AbstractListCrawler__T])
 
 class BodiesElements(DelaunayArguments, java.io.Serializable):
     """
-    public final class BodiesElements extends :class:`~org.orekit.data.DelaunayArguments` implements Serializable
+    public final class BodiesElements extends :class:`~org.orekit.data.DelaunayArguments` implements :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Elements of the bodies having an effect on nutation.
     
@@ -1635,7 +1619,7 @@ class BodiesElements(DelaunayArguments, java.io.Serializable):
 
 class ClasspathCrawler(DataProvider):
     """
-    public class ClasspathCrawler extends Object implements :class:`~org.orekit.data.DataProvider`
+    public class ClasspathCrawler extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataProvider`
     
         Provider for data files stored as resources in the classpath.
     
@@ -1678,7 +1662,7 @@ class ClasspathCrawler(DataProvider):
                 :meth:`~org.orekit.data.DataProvider.feed` in interface :class:`~org.orekit.data.DataProvider`
         
             Parameters:
-                supported (Pattern): pattern for file names supported by the visitor
+                supported (:class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.util.regex.Pattern?is`): pattern for file names supported by the visitor
                 visitor (:class:`~org.orekit.data.DataLoader`): data file visitor to use
                 manager (:class:`~org.orekit.data.DataProvidersManager`): with the filters to apply to the resources.
         
@@ -1691,7 +1675,7 @@ class ClasspathCrawler(DataProvider):
 
 class CompositeDataContext(DataContext):
     """
-    public class CompositeDataContext extends Object implements :class:`~org.orekit.data.DataContext`
+    public class CompositeDataContext extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataContext`
     
         A simple implementation of :class:`~org.orekit.data.DataContext` that composes the constituent factories into a data
         context.
@@ -1774,7 +1758,7 @@ class CompositeDataContext(DataContext):
 
 class DirectoryCrawler(DataProvider):
     """
-    public class DirectoryCrawler extends Object implements :class:`~org.orekit.data.DataProvider`
+    public class DirectoryCrawler extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataProvider`
     
         Provider for data files stored in a directories tree on filesystem.
     
@@ -1810,7 +1794,7 @@ class DirectoryCrawler(DataProvider):
                 :meth:`~org.orekit.data.DataProvider.feed` in interface :class:`~org.orekit.data.DataProvider`
         
             Parameters:
-                supported (Pattern): pattern for file names supported by the visitor
+                supported (:class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.util.regex.Pattern?is`): pattern for file names supported by the visitor
                 visitor (:class:`~org.orekit.data.DataLoader`): data file visitor to use
                 manager (:class:`~org.orekit.data.DataProvidersManager`): with the filters to apply to the resources.
         
@@ -1845,7 +1829,7 @@ class FieldBodiesElements(FieldDelaunayArguments[_FieldBodiesElements__T], typin
 
 class GzipFilter(DataFilter):
     """
-    public class GzipFilter extends Object implements :class:`~org.orekit.data.DataFilter`
+    public class GzipFilter extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataFilter`
     
         Filter for gzip compressed data.
     
@@ -1889,7 +1873,7 @@ class GzipFilter(DataFilter):
 
 class LazyLoadedDataContext(DataContext):
     """
-    public class LazyLoadedDataContext extends Object implements :class:`~org.orekit.data.DataContext`
+    public class LazyLoadedDataContext extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataContext`
     
         A data context that aims to match the behavior of Orekit 10.0 regarding auxiliary data. This data context only loads
         auxiliary data when it is first accessed. It allows data loaders to be added before the data is loaded.
@@ -1988,7 +1972,7 @@ class PythonAbstractSelfFeedingLoader(AbstractSelfFeedingLoader):
 
 class PythonDataContext(DataContext):
     """
-    public class PythonDataContext extends Object implements :class:`~org.orekit.data.DataContext`
+    public class PythonDataContext extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataContext`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -2080,7 +2064,7 @@ class PythonDataContext(DataContext):
 
 class PythonDataFilter(DataFilter):
     """
-    public class PythonDataFilter extends Object implements :class:`~org.orekit.data.DataFilter`
+    public class PythonDataFilter extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataFilter`
     """
     def __init__(self): ...
     def filter(self, dataSource: DataSource) -> DataSource: ...
@@ -2107,7 +2091,7 @@ class PythonDataFilter(DataFilter):
 
 class PythonDataLoader(DataLoader):
     """
-    public class PythonDataLoader extends Object implements :class:`~org.orekit.data.DataLoader`
+    public class PythonDataLoader extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataLoader`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -2152,7 +2136,7 @@ class PythonDataLoader(DataLoader):
 
 class PythonDataProvider(DataProvider):
     """
-    public class PythonDataProvider extends Object implements :class:`~org.orekit.data.DataProvider`
+    public class PythonDataProvider extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataProvider`
     """
     def __init__(self): ...
     def feed(self, pattern: java.util.regex.Pattern, dataLoader: DataLoader, dataProvidersManager: DataProvidersManager) -> bool:
@@ -2175,7 +2159,7 @@ class PythonDataProvider(DataProvider):
                 :meth:`~org.orekit.data.DataProvider.feed` in interface :class:`~org.orekit.data.DataProvider`
         
             Parameters:
-                supported (Pattern): pattern for file names supported by the visitor
+                supported (:class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.util.regex.Pattern?is`): pattern for file names supported by the visitor
                 visitor (:class:`~org.orekit.data.DataLoader`): data file visitor to use
                 manager (:class:`~org.orekit.data.DataProvidersManager`): with the filters to apply to the resources.
         
@@ -2208,7 +2192,7 @@ class PythonDataProvider(DataProvider):
 
 class PythonReaderOpener(DataSource.ReaderOpener):
     """
-    public class PythonReaderOpener extends Object implements :class:`~org.orekit.data.DataSource.ReaderOpener`
+    public class PythonReaderOpener extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataSource.ReaderOpener`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -2235,7 +2219,7 @@ class PythonReaderOpener(DataSource.ReaderOpener):
 
 class PythonSeriesTerm(SeriesTerm):
     """
-    public class PythonSeriesTerm extends Object
+    public class PythonSeriesTerm extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     """
     def __init__(self): ...
     _argument_1__T = typing.TypeVar('_argument_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -2345,7 +2329,7 @@ class PythonSeriesTerm(SeriesTerm):
 
 class PythonStreamOpener(DataSource.StreamOpener):
     """
-    public class PythonStreamOpener extends Object implements :class:`~org.orekit.data.DataSource.StreamOpener`
+    public class PythonStreamOpener extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataSource.StreamOpener`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -2372,7 +2356,7 @@ class PythonStreamOpener(DataSource.StreamOpener):
 
 class UnixCompressFilter(DataFilter):
     """
-    public class UnixCompressFilter extends Object implements :class:`~org.orekit.data.DataFilter`
+    public class UnixCompressFilter extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataFilter`
     
         Filter for Unix compressed data.
     
@@ -2416,7 +2400,7 @@ class UnixCompressFilter(DataFilter):
 
 class ZipJarCrawler(DataProvider):
     """
-    public class ZipJarCrawler extends Object implements :class:`~org.orekit.data.DataProvider`
+    public class ZipJarCrawler extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataProvider`
     
         Helper class for loading data files from a zip/jar archive.
     
@@ -2460,7 +2444,7 @@ class ZipJarCrawler(DataProvider):
                 :meth:`~org.orekit.data.DataProvider.feed` in interface :class:`~org.orekit.data.DataProvider`
         
             Parameters:
-                supported (Pattern): pattern for file names supported by the visitor
+                supported (:class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.util.regex.Pattern?is`): pattern for file names supported by the visitor
                 visitor (:class:`~org.orekit.data.DataLoader`): data file visitor to use
                 manager (:class:`~org.orekit.data.DataProvidersManager`): with the filters to apply to the resources.
         
@@ -2499,8 +2483,8 @@ class ExceptionalDataContext(LazyLoadedDataContext, DataContext):
                 :meth:`~org.orekit.data.DataContext.getCelestialBodies` in interface :class:`~org.orekit.data.DataContext`
         
             Overrides:
-                :meth:`~org.orekit.data.LazyLoadedDataContext.getCelestialBodies`Â in
-                classÂ :class:`~org.orekit.data.LazyLoadedDataContext`
+                :meth:`~org.orekit.data.LazyLoadedDataContext.getCelestialBodies` in
+                class :class:`~org.orekit.data.LazyLoadedDataContext`
         
             Returns:
                 the set of common celestial bodies using this data context.
@@ -2535,8 +2519,8 @@ class ExceptionalDataContext(LazyLoadedDataContext, DataContext):
                 :meth:`~org.orekit.data.DataContext.getGeoMagneticFields` in interface :class:`~org.orekit.data.DataContext`
         
             Overrides:
-                :meth:`~org.orekit.data.LazyLoadedDataContext.getGeoMagneticFields`Â in
-                classÂ :class:`~org.orekit.data.LazyLoadedDataContext`
+                :meth:`~org.orekit.data.LazyLoadedDataContext.getGeoMagneticFields` in
+                class :class:`~org.orekit.data.LazyLoadedDataContext`
         
             Returns:
                 the geomagnetic fields using this data context.
@@ -2553,8 +2537,8 @@ class ExceptionalDataContext(LazyLoadedDataContext, DataContext):
                 :meth:`~org.orekit.data.DataContext.getGravityFields` in interface :class:`~org.orekit.data.DataContext`
         
             Overrides:
-                :meth:`~org.orekit.data.LazyLoadedDataContext.getGravityFields`Â in
-                classÂ :class:`~org.orekit.data.LazyLoadedDataContext`
+                :meth:`~org.orekit.data.LazyLoadedDataContext.getGravityFields` in
+                class :class:`~org.orekit.data.LazyLoadedDataContext`
         
             Returns:
                 the gravity fields using this data context.
@@ -2582,7 +2566,7 @@ class ExceptionalDataContext(LazyLoadedDataContext, DataContext):
 
 class FilesListCrawler(AbstractListCrawler[java.io.File]):
     """
-    public class FilesListCrawler extends :class:`~org.orekit.data.AbstractListCrawler`<File>
+    public class FilesListCrawler extends :class:`~org.orekit.data.AbstractListCrawler`<:class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.io.File?is`>
     
         Provider for data files in an explicit list.
     
@@ -2600,7 +2584,7 @@ class FilesListCrawler(AbstractListCrawler[java.io.File]):
 
 class NetworkCrawler(AbstractListCrawler[java.net.URL]):
     """
-    public class NetworkCrawler extends :class:`~org.orekit.data.AbstractListCrawler`<URL>
+    public class NetworkCrawler extends :class:`~org.orekit.data.AbstractListCrawler`<:class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.net.URL?is`>
     
         Provider for data files directly fetched from network.
     
@@ -2618,11 +2602,10 @@ class NetworkCrawler(AbstractListCrawler[java.net.URL]):
     
         .. code-block: java
         
-        
-           System.setProperty("http.proxyHost",     "proxy.your.domain.com");
-           System.setProperty("http.proxyPort",     "8080");
-           System.setProperty("http.nonProxyHosts", "localhost|*.your.domain.com");
-           Authenticator.setDefault(new AuthenticatorDialog());
+           System.setProperty("http.proxyHost",     "proxy.your.domain.com");
+           System.setProperty("http.proxyPort",     "8080");
+           System.setProperty("http.nonProxyHosts", "localhost|*.your.domain.com");
+           Authenticator.setDefault(new AuthenticatorDialog());
          
     
         All :meth:`~org.orekit.data.FiltersManager.addFilter` :class:`~org.orekit.data.DataFilter` are applied.

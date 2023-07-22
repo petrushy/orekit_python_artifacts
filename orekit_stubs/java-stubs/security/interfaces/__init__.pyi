@@ -1,6 +1,7 @@
 import java.math
 import java.security
 import java.security.spec
+import java.util
 import typing
 
 
@@ -26,6 +27,9 @@ class RSAKey:
     def getModulus(self) -> java.math.BigInteger: ...
     def getParams(self) -> java.security.spec.AlgorithmParameterSpec: ...
 
+class XECKey:
+    def getParams(self) -> java.security.spec.AlgorithmParameterSpec: ...
+
 class DSAPrivateKey(DSAKey, java.security.PrivateKey):
     serialVersionUID: typing.ClassVar[int] = ...
     def getX(self) -> java.math.BigInteger: ...
@@ -49,6 +53,12 @@ class RSAPrivateKey(java.security.PrivateKey, RSAKey):
 class RSAPublicKey(java.security.PublicKey, RSAKey):
     serialVersionUID: typing.ClassVar[int] = ...
     def getPublicExponent(self) -> java.math.BigInteger: ...
+
+class XECPrivateKey(XECKey, java.security.PrivateKey):
+    def getScalar(self) -> java.util.Optional[typing.List[int]]: ...
+
+class XECPublicKey(XECKey, java.security.PublicKey):
+    def getU(self) -> java.math.BigInteger: ...
 
 class RSAMultiPrimePrivateCrtKey(RSAPrivateKey):
     serialVersionUID: typing.ClassVar[int] = ...
@@ -86,3 +96,6 @@ class __module_protocol__(typing.Protocol):
     RSAPrivateCrtKey: typing.Type[RSAPrivateCrtKey]
     RSAPrivateKey: typing.Type[RSAPrivateKey]
     RSAPublicKey: typing.Type[RSAPublicKey]
+    XECKey: typing.Type[XECKey]
+    XECPrivateKey: typing.Type[XECPrivateKey]
+    XECPublicKey: typing.Type[XECPublicKey]

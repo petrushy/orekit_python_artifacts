@@ -4,7 +4,7 @@ import typing
 
 class BinomialProportion:
     """
-    public class BinomialProportion extends Object
+    public class BinomialProportion extends :class:`~org.hipparchus.stat.interval.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Utility methods to generate confidence intervals for a binomial proportion.
     
@@ -23,7 +23,7 @@ class BinomialProportion:
 
 class ConfidenceInterval:
     """
-    public class ConfidenceInterval extends Object
+    public class ConfidenceInterval extends :class:`~org.hipparchus.stat.interval.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Represents an interval estimate of a population parameter.
     """
@@ -59,7 +59,8 @@ class ConfidenceInterval:
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.stat.interval.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.stat.interval.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 String representation of the confidence interval

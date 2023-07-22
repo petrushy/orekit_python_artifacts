@@ -44,7 +44,7 @@ class GNSSAttitudeProvider(org.orekit.attitudes.AttitudeProvider):
 
 class PythonGNSSAttitudeProvider(GNSSAttitudeProvider):
     """
-    public class PythonGNSSAttitudeProvider extends Object implements :class:`~org.orekit.gnss.attitude.GNSSAttitudeProvider`
+    public class PythonGNSSAttitudeProvider extends :class:`~org.orekit.gnss.attitude.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.gnss.attitude.GNSSAttitudeProvider`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -132,8 +132,8 @@ class PythonGNSSAttitudeProvider(GNSSAttitudeProvider):
             Get end of validity for this provider.
         
             Specified by:
-                :meth:`~org.orekit.gnss.attitude.GNSSAttitudeProvider.validityEnd`Â in
-                interfaceÂ :class:`~org.orekit.gnss.attitude.GNSSAttitudeProvider`
+                :meth:`~org.orekit.gnss.attitude.GNSSAttitudeProvider.validityEnd` in
+                interface :class:`~org.orekit.gnss.attitude.GNSSAttitudeProvider`
         
             Returns:
                 end of validity for this provider
@@ -146,8 +146,8 @@ class PythonGNSSAttitudeProvider(GNSSAttitudeProvider):
             Get start of validity for this provider.
         
             Specified by:
-                :meth:`~org.orekit.gnss.attitude.GNSSAttitudeProvider.validityStart`Â in
-                interfaceÂ :class:`~org.orekit.gnss.attitude.GNSSAttitudeProvider`
+                :meth:`~org.orekit.gnss.attitude.GNSSAttitudeProvider.validityStart` in
+                interface :class:`~org.orekit.gnss.attitude.GNSSAttitudeProvider`
         
             Returns:
                 start of validity for this provider
@@ -158,7 +158,7 @@ class PythonGNSSAttitudeProvider(GNSSAttitudeProvider):
 
 class BeidouGeo(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
     """
-    public class BeidouGeo extends Object
+    public class BeidouGeo extends :class:`~org.orekit.gnss.attitude.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Attitude providers for Beidou geostationary orbit navigation satellites.
     
@@ -183,7 +183,7 @@ class BeidouIGSO(org.orekit.gnss.attitude.BeidouMeo):
 
 class BeidouMeo(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
     """
-    public class BeidouMeo extends Object
+    public class BeidouMeo extends :class:`~org.orekit.gnss.attitude.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Attitude providers for Beidou Medium Earth Orbit navigation satellites.
     
@@ -194,7 +194,7 @@ class BeidouMeo(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
 
 class GPSBlockIIA(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
     """
-    public class GPSBlockIIA extends Object
+    public class GPSBlockIIA extends :class:`~org.orekit.gnss.attitude.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Attitude providers for GPS block IIA navigation satellites.
     
@@ -233,7 +233,7 @@ class GPSBlockIIA(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
 
 class GPSBlockIIF(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
     """
-    public class GPSBlockIIF extends Object
+    public class GPSBlockIIF extends :class:`~org.orekit.gnss.attitude.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Attitude providers for GPS block IIF navigation satellites.
     
@@ -262,7 +262,7 @@ class GPSBlockIIF(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
 
 class GPSBlockIIR(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
     """
-    public class GPSBlockIIR extends Object
+    public class GPSBlockIIR extends :class:`~org.orekit.gnss.attitude.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Attitude providers for GPS block IIR navigation satellites.
     
@@ -284,7 +284,7 @@ class GPSBlockIIR(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
 
 class Galileo(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
     """
-    public class Galileo extends Object
+    public class Galileo extends :class:`~org.orekit.gnss.attitude.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Attitude providers for Galileo navigation satellites.
     
@@ -306,7 +306,7 @@ class Galileo(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
 
 class GenericGNSS(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
     """
-    public class GenericGNSS extends Object
+    public class GenericGNSS extends :class:`~org.orekit.gnss.attitude.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Attitude providers for navigation satellites for which no specialized model is known.
     
@@ -317,7 +317,7 @@ class GenericGNSS(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
 
 class Glonass(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
     """
-    public class Glonass extends Object
+    public class Glonass extends :class:`~org.orekit.gnss.attitude.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Attitude providers for Glonass navigation satellites.
     

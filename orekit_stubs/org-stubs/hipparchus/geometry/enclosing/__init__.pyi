@@ -23,7 +23,7 @@ _EnclosingBall__S = typing.TypeVar('_EnclosingBall__S', bound=org.hipparchus.geo
 _EnclosingBall__P = typing.TypeVar('_EnclosingBall__P', bound=org.hipparchus.geometry.Point)  # <P>
 class EnclosingBall(java.io.Serializable, typing.Generic[_EnclosingBall__S, _EnclosingBall__P]):
     """
-    public class EnclosingBall<S extends :class:`~org.hipparchus.geometry.Space`,P extends :class:`~org.hipparchus.geometry.Point`<S>> extends Object implements Serializable
+    public class EnclosingBall<S extends :class:`~org.hipparchus.geometry.Space`,P extends :class:`~org.hipparchus.geometry.Point`<S>> extends :class:`~org.hipparchus.geometry.enclosing.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.enclosing.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         This class represents a ball enclosing some points.
     
@@ -117,16 +117,16 @@ _WelzlEncloser__S = typing.TypeVar('_WelzlEncloser__S', bound=org.hipparchus.geo
 _WelzlEncloser__P = typing.TypeVar('_WelzlEncloser__P', bound=org.hipparchus.geometry.Point)  # <P>
 class WelzlEncloser(Encloser[_WelzlEncloser__S, _WelzlEncloser__P], typing.Generic[_WelzlEncloser__S, _WelzlEncloser__P]):
     """
-    public class WelzlEncloser<S extends :class:`~org.hipparchus.geometry.Space`,P extends :class:`~org.hipparchus.geometry.Point`<S>> extends Object implements :class:`~org.hipparchus.geometry.enclosing.Encloser`<S,P>
+    public class WelzlEncloser<S extends :class:`~org.hipparchus.geometry.Space`,P extends :class:`~org.hipparchus.geometry.Point`<S>> extends :class:`~org.hipparchus.geometry.enclosing.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.enclosing.Encloser`<S,P>
     
         Class implementing Emo Welzl algorithm to find the smallest enclosing ball in linear time.
     
         The class implements the algorithm described in paper `Smallest Enclosing Disks (Balls and Ellipsoids)
         <http://www.inf.ethz.ch/personal/emo/PublFiles/SmallEnclDisk_LNCS555_91.pdf>` by Emo Welzl, Lecture Notes in Computer
         Science 555 (1991) 359-370. The pivoting improvement published in the paper `Fast and Robust Smallest Enclosing Balls
-        <http://www.inf.ethz.ch/personal/gaertner/texts/own_work/esa99_final.pdf>`, by Bernd GÃƒÂ¤rtner and further modified in
+        <http://www.inf.ethz.ch/personal/gaertner/texts/own_work/esa99_final.pdf>`, by Bernd Gärtner and further modified in
         paper ` Efficient Computation of Smallest Enclosing Balls in Three Dimensions
-        <http://www.idt.mdh.se/kurser/ct3340/ht12/MINICONFERENCE/FinalPapers/ircse12_submission_30.pdf>` by Linus KÃƒÂ¤llberg to
+        <http://www.idt.mdh.se/kurser/ct3340/ht12/MINICONFERENCE/FinalPapers/ircse12_submission_30.pdf>` by Linus Källberg to
         avoid performing local copies of data have been included.
     """
     def __init__(self, double: float, supportBallGenerator: SupportBallGenerator[_WelzlEncloser__S, _WelzlEncloser__P]): ...

@@ -8,7 +8,7 @@ import typing
 
 class SsrData:
     """
-    public class SsrData extends Object
+    public class SsrData extends :class:`~org.orekit.gnss.metric.messages.ssr.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Container for common data in SSR message data.
     
@@ -19,7 +19,7 @@ class SsrData:
 
 class SsrHeader:
     """
-    public class SsrHeader extends Object
+    public class SsrHeader extends :class:`~org.orekit.gnss.metric.messages.ssr.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Container for common data in SSR messages header.
     

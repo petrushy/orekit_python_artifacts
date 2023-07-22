@@ -86,11 +86,11 @@ class InertialForces(org.orekit.forces.AbstractForceModel):
                 :meth:`~org.orekit.forces.ForceModel.getParameterDriver` in interface :class:`~org.orekit.forces.ForceModel`
         
             Overrides:
-                :meth:`~org.orekit.forces.AbstractForceModel.getParameterDriver`Â in
-                classÂ :class:`~org.orekit.forces.AbstractForceModel`
+                :meth:`~org.orekit.forces.AbstractForceModel.getParameterDriver` in
+                class :class:`~org.orekit.forces.AbstractForceModel`
         
             Parameters:
-                name (String): parameter name
+                name (:class:`~org.orekit.forces.inertia.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): parameter name
         
             Returns:
                 parameter value

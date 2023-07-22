@@ -7,7 +7,7 @@ import typing
 _FieldHansenTesseralLinear__T = typing.TypeVar('_FieldHansenTesseralLinear__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldHansenTesseralLinear(typing.Generic[_FieldHansenTesseralLinear__T]):
     """
-    public class FieldHansenTesseralLinear<T extends CalculusFieldElement<T>> extends Object
+    public class FieldHansenTesseralLinear<T extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Hansen coefficients K(t,n,s) for t!=0 and n < 0.
     
@@ -21,23 +21,23 @@ class FieldHansenTesseralLinear(typing.Generic[_FieldHansenTesseralLinear__T]):
             Compute the values for the first four coefficients and their derivatives by means of series.
         
             Parameters:
-                e2 (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.FieldHansenTesseralLinear`): eÂ²
+                e2 (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.FieldHansenTesseralLinear`): e²
                 chi (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.FieldHansenTesseralLinear`): Χ
-                chi2 (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.FieldHansenTesseralLinear`): ΧÂ²
+                chi2 (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.FieldHansenTesseralLinear`): Χ²
         
         
         """
         ...
     def getDerivative(self, int: int, t: _FieldHansenTesseralLinear__T) -> _FieldHansenTesseralLinear__T:
         """
-            Compute the value of the derivative dK :sub:`j` :sup:`-n-1, s` / deÂ².
+            Compute the value of the derivative dK :sub:`j` :sup:`-n-1, s` / de².
         
             Parameters:
                 mnm1 (int): -n-1
-                chi (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.FieldHansenTesseralLinear`): Ï‡
+                chi (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.FieldHansenTesseralLinear`): χ
         
             Returns:
-                the derivative dK :sub:`j` :sup:`-n-1, s` / deÂ²
+                the derivative dK :sub:`j` :sup:`-n-1, s` / de²
         
         
         """
@@ -48,7 +48,7 @@ class FieldHansenTesseralLinear(typing.Generic[_FieldHansenTesseralLinear__T]):
         
             Parameters:
                 mnm1 (int): -n-1
-                chi (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.FieldHansenTesseralLinear`): Ï‡
+                chi (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.FieldHansenTesseralLinear`): χ
         
             Returns:
                 the coefficient K :sub:`j` :sup:`-n-1, s`
@@ -60,7 +60,7 @@ class FieldHansenTesseralLinear(typing.Generic[_FieldHansenTesseralLinear__T]):
 _FieldHansenThirdBodyLinear__T = typing.TypeVar('_FieldHansenThirdBodyLinear__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldHansenThirdBodyLinear(typing.Generic[_FieldHansenThirdBodyLinear__T]):
     """
-    public class FieldHansenThirdBodyLinear<T extends CalculusFieldElement<T>> extends Object
+    public class FieldHansenThirdBodyLinear<T extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Hansen coefficients K(t,n,s) for t=0 and n > 0.
     
@@ -73,44 +73,44 @@ class FieldHansenThirdBodyLinear(typing.Generic[_FieldHansenThirdBodyLinear__T])
         """
             Compute the initial values (see Collins, 4-255, 4-256 and 4.259)
         
-            Kâ‚€ :sup:`s, s` = (-1) :sup:`s` * ( (2*s+1)!! / (s+1)! )
+            K₀ :sup:`s, s` = (-1) :sup:`s` * ( (2*s+1)!! / (s+1)! )
         
-            Kâ‚€ :sup:`s+1, s` = (-1) :sup:`s` * ( (2*s+1)!! / (s+2)! ) * (2*s+3 - Ï‡ :sup:`-2` )
+            K₀ :sup:`s+1, s` = (-1) :sup:`s` * ( (2*s+1)!! / (s+2)! ) * (2*s+3 - χ :sup:`-2` )
         
-            dKâ‚€ :sup:`s+1, s` / dÏ‡ = = (-1) :sup:`s` * 2 * ( (2*s+1)!! / (s+2)! ) * Ï‡ :sup:`-3`
+            dK₀ :sup:`s+1, s` / dχ = = (-1) :sup:`s` * 2 * ( (2*s+1)!! / (s+2)! ) * χ :sup:`-3`
         
             Parameters:
-                chitm1 (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.FieldHansenThirdBodyLinear`): sqrt(1 - eÂ²)
-                chitm2 (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.FieldHansenThirdBodyLinear`): sqrt(1 - eÂ²)Â²
-                chitm3 (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.FieldHansenThirdBodyLinear`): sqrt(1 - eÂ²)Â³
+                chitm1 (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.FieldHansenThirdBodyLinear`): sqrt(1 - e²)
+                chitm2 (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.FieldHansenThirdBodyLinear`): sqrt(1 - e²)²
+                chitm3 (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.FieldHansenThirdBodyLinear`): sqrt(1 - e²)³
         
         
         """
         ...
     def getDerivative(self, int: int, t: _FieldHansenThirdBodyLinear__T) -> _FieldHansenThirdBodyLinear__T:
         """
-            Compute the value of the Hansen coefficient dKâ‚€ :sup:`n, s` / dΧ.
+            Compute the value of the Hansen coefficient dK₀ :sup:`n, s` / dΧ.
         
             Parameters:
                 n (int): n value
-                chitm1 (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.FieldHansenThirdBodyLinear`): Ï‡ :sup:`-1`
+                chitm1 (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.FieldHansenThirdBodyLinear`): χ :sup:`-1`
         
             Returns:
-                the coefficient dKâ‚€ :sup:`n, s` / dΧ
+                the coefficient dK₀ :sup:`n, s` / dΧ
         
         
         """
         ...
     def getValue(self, int: int, t: _FieldHansenThirdBodyLinear__T) -> _FieldHansenThirdBodyLinear__T:
         """
-            Compute the value of the Hansen coefficient Kâ‚€ :sup:`n, s` .
+            Compute the value of the Hansen coefficient K₀ :sup:`n, s` .
         
             Parameters:
                 n (int): n value
-                chitm1 (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.FieldHansenThirdBodyLinear`): Ï‡ :sup:`-1`
+                chitm1 (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.FieldHansenThirdBodyLinear`): χ :sup:`-1`
         
             Returns:
-                the coefficient Kâ‚€ :sup:`n, s`
+                the coefficient K₀ :sup:`n, s`
         
         
         """
@@ -119,7 +119,7 @@ class FieldHansenThirdBodyLinear(typing.Generic[_FieldHansenThirdBodyLinear__T])
 _FieldHansenZonalLinear__T = typing.TypeVar('_FieldHansenZonalLinear__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldHansenZonalLinear(typing.Generic[_FieldHansenZonalLinear__T]):
     """
-    public class FieldHansenZonalLinear<T extends CalculusFieldElement<T>> extends Object
+    public class FieldHansenZonalLinear<T extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Hansen coefficients K(t,n,s) for t=0 and n < 0.
     
@@ -133,39 +133,39 @@ class FieldHansenZonalLinear(typing.Generic[_FieldHansenZonalLinear__T]):
             Compute the roots for the Hansen coefficients and their derivatives.
         
             Parameters:
-                chi (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.FieldHansenZonalLinear`): 1 / sqrt(1 - eÂ²)
+                chi (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.FieldHansenZonalLinear`): 1 / sqrt(1 - e²)
         
         
         """
         ...
     def getDerivative(self, int: int, t: _FieldHansenZonalLinear__T) -> _FieldHansenZonalLinear__T:
         """
-            Get the dKâ‚€ :sup:`-n-1,s` / dΧ coefficient derivative.
+            Get the dK₀ :sup:`-n-1,s` / dΧ coefficient derivative.
         
             The s value is given in the class constructor.
         
             Parameters:
                 mnm1 (int): (-n-1) coefficient
-                chi (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.FieldHansenZonalLinear`): The value of Ï‡
+                chi (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.FieldHansenZonalLinear`): The value of χ
         
             Returns:
-                dKâ‚€ :sup:`-n-1,s` / dΧ
+                dK₀ :sup:`-n-1,s` / dΧ
         
         
         """
         ...
     def getValue(self, int: int, t: _FieldHansenZonalLinear__T) -> _FieldHansenZonalLinear__T:
         """
-            Get the Kâ‚€ :sup:`-n-1,s` coefficient value.
+            Get the K₀ :sup:`-n-1,s` coefficient value.
         
             The s value is given in the class constructor
         
             Parameters:
                 mnm1 (int): (-n-1) coefficient
-                chi (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.FieldHansenZonalLinear`): The value of Ï‡
+                chi (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.FieldHansenZonalLinear`): The value of χ
         
             Returns:
-                Kâ‚€ :sup:`-n-1,s`
+                K₀ :sup:`-n-1,s`
         
         
         """
@@ -173,7 +173,7 @@ class FieldHansenZonalLinear(typing.Generic[_FieldHansenZonalLinear__T]):
 
 class HansenTesseralLinear:
     """
-    public class HansenTesseralLinear extends Object
+    public class HansenTesseralLinear extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Hansen coefficients K(t,n,s) for t!=0 and n < 0.
     
@@ -187,23 +187,23 @@ class HansenTesseralLinear:
             Compute the values for the first four coefficients and their derivatives by means of series.
         
             Parameters:
-                e2 (double): eÂ²
+                e2 (double): e²
                 chi (double): Χ
-                chi2 (double): ΧÂ²
+                chi2 (double): Χ²
         
         
         """
         ...
     def getDerivative(self, int: int, double: float) -> float:
         """
-            Compute the value of the derivative dK :sub:`j` :sup:`-n-1, s` / deÂ².
+            Compute the value of the derivative dK :sub:`j` :sup:`-n-1, s` / de².
         
             Parameters:
                 mnm1 (int): -n-1
-                chi (double): Ï‡
+                chi (double): χ
         
             Returns:
-                the derivative dK :sub:`j` :sup:`-n-1, s` / deÂ²
+                the derivative dK :sub:`j` :sup:`-n-1, s` / de²
         
         
         """
@@ -214,7 +214,7 @@ class HansenTesseralLinear:
         
             Parameters:
                 mnm1 (int): -n-1
-                chi (double): Ï‡
+                chi (double): χ
         
             Returns:
                 the coefficient K :sub:`j` :sup:`-n-1, s`
@@ -225,7 +225,7 @@ class HansenTesseralLinear:
 
 class HansenThirdBodyLinear:
     """
-    public class HansenThirdBodyLinear extends Object
+    public class HansenThirdBodyLinear extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Hansen coefficients K(t,n,s) for t=0 and n > 0.
     
@@ -238,44 +238,44 @@ class HansenThirdBodyLinear:
         """
             Compute the initial values (see Collins, 4-255, 4-256 and 4.259)
         
-            Kâ‚€ :sup:`s, s` = (-1) :sup:`s` * ( (2*s+1)!! / (s+1)! )
+            K₀ :sup:`s, s` = (-1) :sup:`s` * ( (2*s+1)!! / (s+1)! )
         
-            Kâ‚€ :sup:`s+1, s` = (-1) :sup:`s` * ( (2*s+1)!! / (s+2)! ) * (2*s+3 - Ï‡ :sup:`-2` )
+            K₀ :sup:`s+1, s` = (-1) :sup:`s` * ( (2*s+1)!! / (s+2)! ) * (2*s+3 - χ :sup:`-2` )
         
-            dKâ‚€ :sup:`s+1, s` / dÏ‡ = = (-1) :sup:`s` * 2 * ( (2*s+1)!! / (s+2)! ) * Ï‡ :sup:`-3`
+            dK₀ :sup:`s+1, s` / dχ = = (-1) :sup:`s` * 2 * ( (2*s+1)!! / (s+2)! ) * χ :sup:`-3`
         
             Parameters:
-                chitm1 (double): sqrt(1 - eÂ²)
-                chitm2 (double): sqrt(1 - eÂ²)Â²
-                chitm3 (double): sqrt(1 - eÂ²)Â³
+                chitm1 (double): sqrt(1 - e²)
+                chitm2 (double): sqrt(1 - e²)²
+                chitm3 (double): sqrt(1 - e²)³
         
         
         """
         ...
     def getDerivative(self, int: int, double: float) -> float:
         """
-            Compute the value of the Hansen coefficient dKâ‚€ :sup:`n, s` / dΧ.
+            Compute the value of the Hansen coefficient dK₀ :sup:`n, s` / dΧ.
         
             Parameters:
                 n (int): n value
-                chitm1 (double): Ï‡ :sup:`-1`
+                chitm1 (double): χ :sup:`-1`
         
             Returns:
-                the coefficient dKâ‚€ :sup:`n, s` / dΧ
+                the coefficient dK₀ :sup:`n, s` / dΧ
         
         
         """
         ...
     def getValue(self, int: int, double: float) -> float:
         """
-            Compute the value of the Hansen coefficient Kâ‚€ :sup:`n, s` .
+            Compute the value of the Hansen coefficient K₀ :sup:`n, s` .
         
             Parameters:
                 n (int): n value
-                chitm1 (double): Ï‡ :sup:`-1`
+                chitm1 (double): χ :sup:`-1`
         
             Returns:
-                the coefficient Kâ‚€ :sup:`n, s`
+                the coefficient K₀ :sup:`n, s`
         
         
         """
@@ -283,20 +283,20 @@ class HansenThirdBodyLinear:
 
 class HansenUtilities:
     """
-    public class HansenUtilities extends Object
+    public class HansenUtilities extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Utilities class.
     """
     ONE: typing.ClassVar[org.hipparchus.analysis.polynomials.PolynomialFunction] = ...
     """
-    public static final PolynomialFunction ONE
+    public static final :class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.polynomials.PolynomialFunction?is` ONE
     
         1 represented as a polynomial.
     
     """
     ZERO: typing.ClassVar[org.hipparchus.analysis.polynomials.PolynomialFunction] = ...
     """
-    public static final PolynomialFunction ZERO
+    public static final :class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.polynomials.PolynomialFunction?is` ZERO
     
         0 represented as a polynomial.
     
@@ -308,10 +308,9 @@ class HansenUtilities:
         
             .. code-block: java
             
-            
-                   / 1   0 \
-              Iâ‚‚ = |       |
-                   \ 0   1 /
+                   / 1   0 \
+              I₂ = |       |
+                   \ 0   1 /
              
         
             Returns:
@@ -327,14 +326,13 @@ class HansenUtilities:
         
             .. code-block: java
             
-            
-                   / 1  0  0  0 \
-                   |            |
-                   | 0  1  0  0 |
-              Iâ‚„ = |            |
-                   | 0  0  1  0 |
-                   |            |
-                   \ 0  0  0  1 /
+                   / 1  0  0  0 \
+                   |            |
+                   | 0  1  0  0 |
+              I₄ = |            |
+                   | 0  0  1  0 |
+                   |            |
+                   \ 0  0  0  1 /
              
         
             Returns:
@@ -350,10 +348,9 @@ class HansenUtilities:
         
             .. code-block: java
             
-            
-                   / 0   0 \
-              Eâ‚‚ = |       |
-                   \ 0   0 /
+                   / 0   0 \
+              E₂ = |       |
+                   \ 0   0 /
              
         
             Returns:
@@ -369,14 +366,13 @@ class HansenUtilities:
         
             .. code-block: java
             
-            
-                   / 0  0  0  0 \
-                   |            |
-                   | 0  0  0  0 |
-              Eâ‚„ = |            |
-                   | 0  0  0  0 |
-                   |            |
-                   \ 0  0  0  0 /
+                   / 0  0  0  0 \
+                   |            |
+                   | 0  0  0  0 |
+              E₄ = |            |
+                   | 0  0  0  0 |
+                   |            |
+                   \ 0  0  0  0 /
              
         
             Returns:
@@ -388,7 +384,7 @@ class HansenUtilities:
 
 class HansenZonalLinear:
     """
-    public class HansenZonalLinear extends Object
+    public class HansenZonalLinear extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Hansen coefficients K(t,n,s) for t=0 and n < 0.
     
@@ -402,39 +398,39 @@ class HansenZonalLinear:
             Compute the roots for the Hansen coefficients and their derivatives.
         
             Parameters:
-                chi (double): 1 / sqrt(1 - eÂ²)
+                chi (double): 1 / sqrt(1 - e²)
         
         
         """
         ...
     def getDerivative(self, int: int, double: float) -> float:
         """
-            Get the dKâ‚€ :sup:`-n-1,s` / dΧ coefficient derivative.
+            Get the dK₀ :sup:`-n-1,s` / dΧ coefficient derivative.
         
             The s value is given in the class constructor.
         
             Parameters:
                 mnm1 (int): (-n-1) coefficient
-                chi (double): The value of Ï‡
+                chi (double): The value of χ
         
             Returns:
-                dKâ‚€ :sup:`-n-1,s` / dΧ
+                dK₀ :sup:`-n-1,s` / dΧ
         
         
         """
         ...
     def getValue(self, int: int, double: float) -> float:
         """
-            Get the Kâ‚€ :sup:`-n-1,s` coefficient value.
+            Get the K₀ :sup:`-n-1,s` coefficient value.
         
             The s value is given in the class constructor
         
             Parameters:
                 mnm1 (int): (-n-1) coefficient
-                chi (double): The value of Ï‡
+                chi (double): The value of χ
         
             Returns:
-                Kâ‚€ :sup:`-n-1,s`
+                K₀ :sup:`-n-1,s`
         
         
         """
@@ -442,9 +438,10 @@ class HansenZonalLinear:
 
 class PolynomialFunctionMatrix:
     """
-    public class PolynomialFunctionMatrix extends Object
+    public class PolynomialFunctionMatrix extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
-        A quadratic matrix of null.
+        A quadratic matrix of
+        :class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.polynomials.PolynomialFunction?is`.
     """
     def add(self, polynomialFunctionMatrix: 'PolynomialFunctionMatrix') -> 'PolynomialFunctionMatrix':
         """
@@ -506,7 +503,7 @@ class PolynomialFunctionMatrix:
             Parameters:
                 line (int): the line
                 column (int): the column
-                value (PolynomialFunction): the value
+                value (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.polynomials.PolynomialFunction?is`): the value
         
         
         """
@@ -516,7 +513,7 @@ class PolynomialFunctionMatrix:
             Set values for all elements.
         
             Parameters:
-                polynomials (PolynomialFunction[][]): the values that will be used for the matrix
+                polynomials (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.polynomials.PolynomialFunction?is`[][]): the values that will be used for the matrix
         
         
         """
@@ -527,7 +524,7 @@ class PolynomialFunctionMatrix:
         
             Parameters:
                 line (int): the line number
-                polynomials (PolynomialFunction[]): the values to set
+                polynomials (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.hansen.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.polynomials.PolynomialFunction?is`[]): the values to set
         
         
         """

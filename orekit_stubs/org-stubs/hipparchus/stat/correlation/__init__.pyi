@@ -6,7 +6,7 @@ import typing
 
 class Covariance:
     """
-    public class Covariance extends Object
+    public class Covariance extends :class:`~org.hipparchus.stat.correlation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Computes covariances for pairs of arrays or columns of a matrix.
     
@@ -60,7 +60,7 @@ class Covariance:
 
 class KendallsCorrelation:
     """
-    public class KendallsCorrelation extends Object
+    public class KendallsCorrelation extends :class:`~org.hipparchus.stat.correlation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Implementation of Kendall's Tau-b rank correlation.
     
@@ -107,7 +107,7 @@ class KendallsCorrelation:
             Computes the Kendall's Tau rank correlation matrix for the columns of the input matrix.
         
             Parameters:
-                matrix (RealMatrix): matrix with columns representing variables to correlate
+                matrix (:class:`~org.hipparchus.stat.correlation.https:.www.hipparchus.org.hipparchus`): matrix with columns representing variables to correlate
         
             Returns:
                 correlation matrix
@@ -161,7 +161,7 @@ class PearsonsCorrelation:
 
 class SpearmansCorrelation:
     """
-    public class SpearmansCorrelation extends Object
+    public class SpearmansCorrelation extends :class:`~org.hipparchus.stat.correlation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Spearman's rank correlation. This implementation performs a rank transformation on the input data and then computes
         :class:`~org.hipparchus.stat.correlation.PearsonsCorrelation` on the ranked data.
@@ -184,7 +184,7 @@ class SpearmansCorrelation:
             Computes the Spearman's rank correlation matrix for the columns of the input matrix.
         
             Parameters:
-                matrix (RealMatrix): matrix with columns representing variables to correlate
+                matrix (:class:`~org.hipparchus.stat.correlation.https:.www.hipparchus.org.hipparchus`): matrix with columns representing variables to correlate
         
             Returns:
                 correlation matrix
@@ -215,8 +215,8 @@ class SpearmansCorrelation:
                 Returns Spearman's rank correlation coefficient for the two arrays
         
             Raises:
-                : if the arrays lengths do not match
-                : if the array length is less than 2
+                :class:`~org.hipparchus.stat.correlation.https:.www.hipparchus.org.hipparchus`: if the arrays lengths do not match
+                :class:`~org.hipparchus.stat.correlation.https:.www.hipparchus.org.hipparchus`: if the array length is less than 2
         
         
         """
@@ -229,7 +229,7 @@ class SpearmansCorrelation:
                 Spearman Rank Correlation Matrix
         
             Raises:
-                : if this instance was created with no data
+                :class:`~org.hipparchus.stat.correlation.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if this instance was created with no data
         
         
         """
@@ -258,7 +258,7 @@ class StorelessCovariance(Covariance):
         specified in the constructor. Specific elements of the matrix are incrementally updated with calls to incrementRow() or
         increment Covariance().
     
-        This class is based on a paper written by Philippe PÃ©bay: ` Formulas for Robust, One-Pass Parallel Computation of
+        This class is based on a paper written by Philippe Pébay: ` Formulas for Robust, One-Pass Parallel Computation of
         Covariances and Arbitrary-Order Statistical Moments
         <http://prod.sandia.gov/techlib/access-control.cgi/2008/086212.pdf>`, 2008, Technical Report SAND2008-6212, Sandia
         National Laboratories.

@@ -23,8 +23,7 @@ class IonosphericMappingFunction:
     
         .. code-block: java
         
-        
-         STEC = VTEC * m(e)
+         STEC = VTEC * m(e)
          
     
         With m(e) the ionospheric mapping function and e the satellite elevation.
@@ -63,7 +62,7 @@ class IonosphericMappingFunction:
 
 class IonosphericModel(org.orekit.utils.ParametersDriversProvider, java.io.Serializable):
     """
-    public interface IonosphericModel extends :class:`~org.orekit.utils.ParametersDriversProvider`, Serializable
+    public interface IonosphericModel extends :class:`~org.orekit.utils.ParametersDriversProvider`, :class:`~org.orekit.models.earth.ionosphere.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Defines a ionospheric model, used to calculate the path delay imposed to electro-magnetic signals between an orbital
         satellite and a ground station.
@@ -90,7 +89,7 @@ class IonosphericModel(org.orekit.utils.ParametersDriversProvider, java.io.Seria
             Get ionospheric model parameters.
         
             Parameters:
-                field (Field<T> field): field to which the elements belong
+                field (:class:`~org.orekit.models.earth.ionosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
         
             Returns:
                 ionospheric model parameters
@@ -104,7 +103,7 @@ class IonosphericModel(org.orekit.utils.ParametersDriversProvider, java.io.Seria
         """
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
-            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0Ã‚Â° the
+            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0° the
             path delay will be equal to zero.
         
             For individual use of the ionospheric model (i.e. not for orbit determination), another method signature can be
@@ -126,7 +125,7 @@ class IonosphericModel(org.orekit.utils.ParametersDriversProvider, java.io.Seria
         """
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
-            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0Ã‚Â° the
+            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0° the
             path delay will be equal to zero.
         
             For individual use of the ionospheric model (i.e. not for orbit determination), another method signature can be
@@ -152,8 +151,8 @@ class KlobucharIonoCoefficientsLoader(org.orekit.data.AbstractSelfFeedingLoader,
         Loads Klobuchar-Style ionospheric coefficients a given input stream. A stream contains the alphas and betas coefficient
         for a given day.
     
-        They are obtained from University of Bern Astronomical Institute ftp. Find more on the files at the `Astronomical
-        Institute site
+        They are obtained from :class:`~org.orekit.models.earth.ionosphere.ftp:.ftp.aiub.unibe.ch.CODE`. Find more on the files
+        at the `Astronomical Institute site
         <http://www.aiub.unibe.ch/research/code___analysis_center/klobuchar_style_ionospheric_coefficients/index_eng.html>`.
     
         The files are UNIX-style compressed (.Z) files. They have to be extracted to UTF-8 text files before being read by this
@@ -167,24 +166,23 @@ class KlobucharIonoCoefficientsLoader(org.orekit.data.AbstractSelfFeedingLoader,
     
         .. code-block: java
         
-        
-              2              NAVIGATION DATA     GPS                 RINEX VERSION / TYPE
-         INXFIT V5.3         AIUB                06-JAN-17 09:12     PGM / RUN BY / DATE
-         CODE'S KLOBUCHAR-STYLE IONOSPHERE MODEL FOR DAY 001, 2017   COMMENT
-         Contact address: code(at)aiub.unibe.ch                      COMMENT
-         Data archive:    ftp.unibe.ch/aiub/CODE/                    COMMENT
-                          www.aiub.unibe.ch/download/CODE/           COMMENT
-         WARNING: USE DATA AT SOUTHERN POLAR REGION WITH CARE        COMMENT
-             1.2821D-08 -9.6222D-09 -3.5982D-07 -6.0901D-07          ION ALPHA
-             1.0840D+05 -1.3197D+05 -2.6331D+05  4.0570D+05          ION BETA
-                                                                     END OF HEADER
+              2              NAVIGATION DATA     GPS                 RINEX VERSION / TYPE
+         INXFIT V5.3         AIUB                06-JAN-17 09:12     PGM / RUN BY / DATE
+         CODE'S KLOBUCHAR-STYLE IONOSPHERE MODEL FOR DAY 001, 2017   COMMENT
+         Contact address: code(at)aiub.unibe.ch                      COMMENT
+         Data archive:    ftp.unibe.ch/aiub/CODE/                    COMMENT
+                          www.aiub.unibe.ch/download/CODE/           COMMENT
+         WARNING: USE DATA AT SOUTHERN POLAR REGION WITH CARE        COMMENT
+             1.2821D-08 -9.6222D-09 -3.5982D-07 -6.0901D-07          ION ALPHA
+             1.0840D+05 -1.3197D+05 -2.6331D+05  4.0570D+05          ION BETA
+                                                                     END OF HEADER
          
     
         It is not safe for multiple threads to share a single instance of this class.
     """
     DEFAULT_SUPPORTED_NAMES: typing.ClassVar[str] = ...
     """
-    public static final String DEFAULT_SUPPORTED_NAMES
+    public static final :class:`~org.orekit.models.earth.ionosphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_SUPPORTED_NAMES
     
         Default supported files name pattern.
     
@@ -225,8 +223,8 @@ class KlobucharIonoCoefficientsLoader(org.orekit.data.AbstractSelfFeedingLoader,
             Get the supported names regular expression.
         
             Overrides:
-                :meth:`~org.orekit.data.AbstractSelfFeedingLoader.getSupportedNames`Â in
-                classÂ :class:`~org.orekit.data.AbstractSelfFeedingLoader`
+                :meth:`~org.orekit.data.AbstractSelfFeedingLoader.getSupportedNames` in
+                class :class:`~org.orekit.data.AbstractSelfFeedingLoader`
         
             Returns:
                 the supported names.
@@ -276,11 +274,11 @@ class KlobucharIonoCoefficientsLoader(org.orekit.data.AbstractSelfFeedingLoader,
 
 class EstimatedIonosphericModel(IonosphericModel):
     """
-    public class EstimatedIonosphericModel extends Object implements :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+    public class EstimatedIonosphericModel extends :class:`~org.orekit.models.earth.ionosphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
     
         An estimated ionospheric model. The ionospheric delay is computed according to the formula:
     
-        40.3 Î´ = -------- * STEC with, STEC = VTEC * F(elevation) fÂ²
+        40.3 δ = -------- * STEC with, STEC = VTEC * F(elevation) f²
         With:
     
           - f: The frequency of the signal in Hz.
@@ -298,7 +296,7 @@ class EstimatedIonosphericModel(IonosphericModel):
     """
     VERTICAL_TOTAL_ELECTRON_CONTENT: typing.ClassVar[str] = ...
     """
-    public static final String VERTICAL_TOTAL_ELECTRON_CONTENT
+    public static final :class:`~org.orekit.models.earth.ionosphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` VERTICAL_TOTAL_ELECTRON_CONTENT
     
         Name of the parameter of this model: the Vertical Total Electron Content.
     
@@ -316,15 +314,15 @@ class EstimatedIonosphericModel(IonosphericModel):
         """
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
-            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0Ã‚Â° the
+            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0° the
             path delay will be equal to zero.
         
             For individual use of the ionospheric model (i.e. not for orbit determination), another method signature can be
             implemented to compute the path delay for any elevation angle.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -356,15 +354,15 @@ class EstimatedIonosphericModel(IonosphericModel):
         """
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
-            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0Ã‚Â° the
+            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0° the
             path delay will be equal to zero.
         
             For individual use of the ionospheric model (i.e. not for orbit determination), another method signature can be
             implemented to compute the path delay for any elevation angle.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
@@ -401,10 +399,9 @@ class GlobalIonosphereMapModel(org.orekit.data.AbstractSelfFeedingLoader, Ionosp
     
         .. code-block: java
         
-        
-                   40.3
-            Î´ =  --------  *  STEC      with, STEC = VTEC * F(elevation)
-                    fÂ²
+                   40.3
+            δ =  --------  *  STEC      with, STEC = VTEC * F(elevation)
+                    f²
          
         With:
     
@@ -414,14 +411,14 @@ class GlobalIonosphereMapModel(org.orekit.data.AbstractSelfFeedingLoader, Ionosp
           - F(elevation): A mapping function which depends on satellite elevation.
     
         The VTEC is read from a IONEX file. A stream contains, for a given day, the values of the TEC for each hour of the day.
-        Values are given on a global 2.5Ã‚Â° x 5.0Ã‚Â° (latitude x longitude) grid.
+        Values are given on a global 2.5° x 5.0° (latitude x longitude) grid.
     
         A bilinear interpolation is performed the case of the user initialize the latitude and the longitude with values that
         are not contained in the stream.
     
         A temporal interpolation is also performed to compute the VTEC at the desired date.
     
-        IONEX files are obtained from The Crustal Dynamics Data Information System.
+        IONEX files are obtained from :class:`~org.orekit.models.earth.ionosphere.ftp:.cddis.nasa.gov.gnss.products.ionex`.
     
         The files have to be extracted to UTF-8 text files before being read by this loader.
     
@@ -429,39 +426,38 @@ class GlobalIonosphereMapModel(org.orekit.data.AbstractSelfFeedingLoader, Ionosp
     
         .. code-block: java
         
-        
-              1.0            IONOSPHERE MAPS     GPS                 IONEX VERSION / TYPE
-         BIMINX V5.3         AIUB                16-JAN-19 07:26     PGM / RUN BY / DATE
-         BROADCAST IONOSPHERE MODEL FOR DAY 015, 2019                COMMENT
-           2019     1    15     0     0     0                        EPOCH OF FIRST MAP
-           2019     1    16     0     0     0                        EPOCH OF LAST MAP
-           3600                                                      INTERVAL
-             25                                                      # OF MAPS IN FILE
-           NONE                                                      MAPPING FUNCTION
-              0.0                                                    ELEVATION CUTOFF
-                                                                     OBSERVABLES USED
-           6371.0                                                    BASE RADIUS
-              2                                                      MAP DIMENSION
-            350.0 350.0   0.0                                        HGT1 / HGT2 / DHGT
-             87.5 -87.5  -2.5                                        LAT1 / LAT2 / DLAT
-           -180.0 180.0   5.0                                        LON1 / LON2 / DLON
-             -1                                                      EXPONENT
-         TEC/RMS values in 0.1 TECU; 9999, if no value available     COMMENT
-                                                                     END OF HEADER
-              1                                                      START OF TEC MAP
-           2019     1    15     0     0     0                        EPOCH OF CURRENT MAP
-             87.5-180.0 180.0   5.0 350.0                            LAT/LON1/LON2/DLON/H
-            92   92   92   92   92   92   92   92   92   92   92   92   92   92   92   92
-            92   92   92   92   92   92   92   92   92   92   92   92   92   92   92   92
-            92   92   92   92   92   92   92   92   92   92   92   92   92   92   92   92
-            92   92   92   92   92   92   92   92   92   92   92   92   92   92   92   92
-            92   92   92   92   92   92   92   92   92
-            ...
+              1.0            IONOSPHERE MAPS     GPS                 IONEX VERSION / TYPE
+         BIMINX V5.3         AIUB                16-JAN-19 07:26     PGM / RUN BY / DATE
+         BROADCAST IONOSPHERE MODEL FOR DAY 015, 2019                COMMENT
+           2019     1    15     0     0     0                        EPOCH OF FIRST MAP
+           2019     1    16     0     0     0                        EPOCH OF LAST MAP
+           3600                                                      INTERVAL
+             25                                                      # OF MAPS IN FILE
+           NONE                                                      MAPPING FUNCTION
+              0.0                                                    ELEVATION CUTOFF
+                                                                     OBSERVABLES USED
+           6371.0                                                    BASE RADIUS
+              2                                                      MAP DIMENSION
+            350.0 350.0   0.0                                        HGT1 / HGT2 / DHGT
+             87.5 -87.5  -2.5                                        LAT1 / LAT2 / DLAT
+           -180.0 180.0   5.0                                        LON1 / LON2 / DLON
+             -1                                                      EXPONENT
+         TEC/RMS values in 0.1 TECU; 9999, if no value available     COMMENT
+                                                                     END OF HEADER
+              1                                                      START OF TEC MAP
+           2019     1    15     0     0     0                        EPOCH OF CURRENT MAP
+             87.5-180.0 180.0   5.0 350.0                            LAT/LON1/LON2/DLON/H
+            92   92   92   92   92   92   92   92   92   92   92   92   92   92   92   92
+            92   92   92   92   92   92   92   92   92   92   92   92   92   92   92   92
+            92   92   92   92   92   92   92   92   92   92   92   92   92   92   92   92
+            92   92   92   92   92   92   92   92   92   92   92   92   92   92   92   92
+            92   92   92   92   92   92   92   92   92
+            ...
          
     
         Also see:
             "Schaer, S., W. Gurtner, and J. Feltens, 1998, IONEX: The IONosphere Map EXchange Format Version 1, February 25, 1998,
-            Proceedings of the IGS AC Workshop Darmstadt, Germany, February 9Ã¢â‚¬â€œ11, 1998", :meth:`~serialized`
+            Proceedings of the IGS AC Workshop Darmstadt, Germany, February 9–11, 1998", :meth:`~serialized`
     """
     @typing.overload
     def __init__(self, string: str): ...
@@ -521,15 +517,15 @@ class GlobalIonosphereMapModel(org.orekit.data.AbstractSelfFeedingLoader, Ionosp
             Description copied from interface: :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
-            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0Ã‚Â° the
+            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0° the
             path delay will be equal to zero.
         
             For individual use of the ionospheric model (i.e. not for orbit determination), another method signature can be
             implemented to compute the path delay for any elevation angle.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -563,15 +559,15 @@ class GlobalIonosphereMapModel(org.orekit.data.AbstractSelfFeedingLoader, Ionosp
             Description copied from interface: :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
-            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0Ã‚Â° the
+            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0° the
             path delay will be equal to zero.
         
             For individual use of the ionospheric model (i.e. not for orbit determination), another method signature can be
             implemented to compute the path delay for any elevation angle.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
@@ -590,7 +586,7 @@ class GlobalIonosphereMapModel(org.orekit.data.AbstractSelfFeedingLoader, Ionosp
 
 class KlobucharIonoModel(IonosphericModel):
     """
-    public class KlobucharIonoModel extends Object implements :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+    public class KlobucharIonoModel extends :class:`~org.orekit.models.earth.ionosphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
     
         Klobuchar ionospheric delay model. Klobuchar ionospheric delay model is designed as a GNSS correction model. The
         parameters for the model are provided by the GPS satellites in their broadcast messsage. This model is based on the
@@ -635,15 +631,15 @@ class KlobucharIonoModel(IonosphericModel):
         
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
-            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0Ã‚Â° the
+            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0° the
             path delay will be equal to zero.
         
             For individual use of the ionospheric model (i.e. not for orbit determination), another method signature can be
             implemented to compute the path delay for any elevation angle.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -678,15 +674,15 @@ class KlobucharIonoModel(IonosphericModel):
         
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
-            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0Ã‚Â° the
+            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0° the
             path delay will be equal to zero.
         
             For individual use of the ionospheric model (i.e. not for orbit determination), another method signature can be
             implemented to compute the path delay for any elevation angle.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
@@ -705,7 +701,7 @@ class KlobucharIonoModel(IonosphericModel):
 
 class NeQuickModel(IonosphericModel):
     """
-    public class NeQuickModel extends Object implements :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+    public class NeQuickModel extends :class:`~org.orekit.models.earth.ionosphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
     
         NeQuick ionospheric delay model.
     
@@ -728,15 +724,15 @@ class NeQuickModel(IonosphericModel):
             Description copied from interface: :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
-            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0Ã‚Â° the
+            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0° the
             path delay will be equal to zero.
         
             For individual use of the ionospheric model (i.e. not for orbit determination), another method signature can be
             implemented to compute the path delay for any elevation angle.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -755,15 +751,15 @@ class NeQuickModel(IonosphericModel):
             Description copied from interface: :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
-            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0Ã‚Â° the
+            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0° the
             path delay will be equal to zero.
         
             For individual use of the ionospheric model (i.e. not for orbit determination), another method signature can be
             implemented to compute the path delay for any elevation angle.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
@@ -816,7 +812,7 @@ class NeQuickModel(IonosphericModel):
 
 class PythonIonosphericMappingFunction(IonosphericMappingFunction):
     """
-    public class PythonIonosphericMappingFunction extends Object implements :class:`~org.orekit.models.earth.ionosphere.IonosphericMappingFunction`
+    public class PythonIonosphericMappingFunction extends :class:`~org.orekit.models.earth.ionosphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.ionosphere.IonosphericMappingFunction`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -827,8 +823,8 @@ class PythonIonosphericMappingFunction(IonosphericMappingFunction):
             This method allows the computation of the ionospheric mapping factor.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.ionosphere.IonosphericMappingFunction.mappingFactor`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericMappingFunction`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericMappingFunction.mappingFactor` in
+                interface :class:`~org.orekit.models.earth.ionosphere.IonosphericMappingFunction`
         
             Parameters:
                 elevation (double): the elevation of the satellite, in radians.
@@ -844,8 +840,8 @@ class PythonIonosphericMappingFunction(IonosphericMappingFunction):
             This method allows the computation of the ionospheric mapping factor.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.ionosphere.IonosphericMappingFunction.mappingFactor`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericMappingFunction`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericMappingFunction.mappingFactor` in
+                interface :class:`~org.orekit.models.earth.ionosphere.IonosphericMappingFunction`
         
             Parameters:
                 elevation (T): the elevation of the satellite, in radians.
@@ -892,7 +888,7 @@ class PythonIonosphericMappingFunction(IonosphericMappingFunction):
 
 class PythonIonosphericModel(IonosphericModel):
     """
-    public class PythonIonosphericModel extends Object implements :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+    public class PythonIonosphericModel extends :class:`~org.orekit.models.earth.ionosphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
     
     
         Also see:
@@ -907,8 +903,8 @@ class PythonIonosphericModel(IonosphericModel):
             Get ionospheric model parameters.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.getParameters`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.getParameters` in
+                interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
         
             Returns:
                 ionospheric model parameters
@@ -921,11 +917,11 @@ class PythonIonosphericModel(IonosphericModel):
             Get ionospheric model parameters.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.getParameters`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.getParameters` in
+                interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
         
             Parameters:
-                field (Field<T> field): field to which the elements belong
+                field (:class:`~org.orekit.models.earth.ionosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
         
             Returns:
                 ionospheric model parameters
@@ -942,15 +938,15 @@ class PythonIonosphericModel(IonosphericModel):
         """
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
-            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0Ã‚Â° the
+            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0° the
             path delay will be equal to zero.
         
             For individual use of the ionospheric model (i.e. not for orbit determination), another method signature can be
             implemented to compute the path delay for any elevation angle.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -968,15 +964,15 @@ class PythonIonosphericModel(IonosphericModel):
         """
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
-            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0Ã‚Â° the
+            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0° the
             path delay will be equal to zero.
         
             For individual use of the ionospheric model (i.e. not for orbit determination), another method signature can be
             implemented to compute the path delay for any elevation angle.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
@@ -1015,7 +1011,7 @@ class PythonIonosphericModel(IonosphericModel):
 
 class SingleLayerModelMappingFunction(IonosphericMappingFunction):
     """
-    public class SingleLayerModelMappingFunction extends Object implements :class:`~org.orekit.models.earth.ionosphere.IonosphericMappingFunction`
+    public class SingleLayerModelMappingFunction extends :class:`~org.orekit.models.earth.ionosphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.ionosphere.IonosphericMappingFunction`
     
         Single Layer Model (SLM) ionospheric mapping function.
     
@@ -1026,9 +1022,9 @@ class SingleLayerModelMappingFunction(IonosphericMappingFunction):
             10.2
     
         Also see:
-            "N. YaÃ¢â‚¬â„¢acob, M. Abdullah and M. Ismail, Determination of the GPS total electron content using single layer model
-            (SLM) ionospheric mapping function, in International Journal of Computer Science and Network Security, vol. 8, no. 9,
-            pp. 154-160, 2008."
+            "N. Ya’acob, M. Abdullah and M. Ismail, Determination of the GPS total electron content using single layer model (SLM)
+            ionospheric mapping function, in International Journal of Computer Science and Network Security, vol. 8, no. 9, pp.
+            154-160, 2008."
     """
     @typing.overload
     def __init__(self): ...
@@ -1041,8 +1037,8 @@ class SingleLayerModelMappingFunction(IonosphericMappingFunction):
             This method allows the computation of the ionospheric mapping factor.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.ionosphere.IonosphericMappingFunction.mappingFactor`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericMappingFunction`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericMappingFunction.mappingFactor` in
+                interface :class:`~org.orekit.models.earth.ionosphere.IonosphericMappingFunction`
         
             Parameters:
                 elevation (double): the elevation of the satellite, in radians.
@@ -1058,8 +1054,8 @@ class SingleLayerModelMappingFunction(IonosphericMappingFunction):
             This method allows the computation of the ionospheric mapping factor.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.ionosphere.IonosphericMappingFunction.mappingFactor`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericMappingFunction`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericMappingFunction.mappingFactor` in
+                interface :class:`~org.orekit.models.earth.ionosphere.IonosphericMappingFunction`
         
             Parameters:
                 elevation (T): the elevation of the satellite, in radians.
@@ -1073,7 +1069,7 @@ class SingleLayerModelMappingFunction(IonosphericMappingFunction):
 
 class SsrVtecIonosphericModel(IonosphericModel):
     """
-    public class SsrVtecIonosphericModel extends Object implements :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+    public class SsrVtecIonosphericModel extends :class:`~org.orekit.models.earth.ionosphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
     
         Ionospheric model based on SSR IM201 message.
     
@@ -1095,15 +1091,15 @@ class SsrVtecIonosphericModel(IonosphericModel):
         """
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
-            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0Ã‚Â° the
+            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0° the
             path delay will be equal to zero.
         
             For individual use of the ionospheric model (i.e. not for orbit determination), another method signature can be
             implemented to compute the path delay for any elevation angle.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -1121,15 +1117,15 @@ class SsrVtecIonosphericModel(IonosphericModel):
         """
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
-            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0Ã‚Â° the
+            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0° the
             path delay will be equal to zero.
         
             For individual use of the ionospheric model (i.e. not for orbit determination), another method signature can be
             implemented to compute the path delay for any elevation angle.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state

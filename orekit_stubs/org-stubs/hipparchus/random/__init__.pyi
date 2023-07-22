@@ -132,7 +132,7 @@ class RandomGenerator:
                 a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
         
             Raises:
-                : if n is not positive.
+                :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if n is not positive.
         
         
         """
@@ -161,7 +161,7 @@ class RandomGenerator:
                 a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
         
             Raises:
-                : if n is not positive.
+                :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if n is not positive.
         
         
         """
@@ -217,7 +217,7 @@ class RandomVectorGenerator:
 
 class CorrelatedRandomVectorGenerator(RandomVectorGenerator):
     """
-    public class CorrelatedRandomVectorGenerator extends Object implements :class:`~org.hipparchus.random.RandomVectorGenerator`
+    public class CorrelatedRandomVectorGenerator extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.random.RandomVectorGenerator`
     
         A :class:`~org.hipparchus.random.RandomVectorGenerator` that generates vectors with with correlated components.
     
@@ -288,8 +288,8 @@ class CorrelatedRandomVectorGenerator(RandomVectorGenerator):
             Generate a correlated random vector.
         
             Specified by:
-                :meth:`~org.hipparchus.random.RandomVectorGenerator.nextVector`Â in
-                interfaceÂ :class:`~org.hipparchus.random.RandomVectorGenerator`
+                :meth:`~org.hipparchus.random.RandomVectorGenerator.nextVector` in
+                interface :class:`~org.hipparchus.random.RandomVectorGenerator`
         
             Returns:
                 a random vector as an array of double. The returned array is created at each call, the caller can do what it wants with
@@ -301,7 +301,7 @@ class CorrelatedRandomVectorGenerator(RandomVectorGenerator):
 
 class GaussianRandomGenerator(NormalizedRandomGenerator):
     """
-    public class GaussianRandomGenerator extends Object implements :class:`~org.hipparchus.random.NormalizedRandomGenerator`
+    public class GaussianRandomGenerator extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.random.NormalizedRandomGenerator`
     
         This class is a gaussian normalized random generator for scalars.
     
@@ -313,8 +313,8 @@ class GaussianRandomGenerator(NormalizedRandomGenerator):
             Generate a random scalar with null mean and unit standard deviation.
         
             Specified by:
-                :meth:`~org.hipparchus.random.NormalizedRandomGenerator.nextNormalizedDouble`Â in
-                interfaceÂ :class:`~org.hipparchus.random.NormalizedRandomGenerator`
+                :meth:`~org.hipparchus.random.NormalizedRandomGenerator.nextNormalizedDouble` in
+                interface :class:`~org.hipparchus.random.NormalizedRandomGenerator`
         
             Returns:
                 a random scalar with null mean and unit standard deviation
@@ -325,7 +325,7 @@ class GaussianRandomGenerator(NormalizedRandomGenerator):
 
 class HaltonSequenceGenerator(RandomVectorGenerator):
     """
-    public class HaltonSequenceGenerator extends Object implements :class:`~org.hipparchus.random.RandomVectorGenerator`
+    public class HaltonSequenceGenerator extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.random.RandomVectorGenerator`
     
         Implementation of a Halton sequence.
     
@@ -353,7 +353,8 @@ class HaltonSequenceGenerator(RandomVectorGenerator):
     
     
         Also see:
-            `Halton sequence (Wikipedia) <http://en.wikipedia.org/wiki/Halton_sequence>`, On the Halton sequence and its scramblings
+            `Halton sequence (Wikipedia) <http://en.wikipedia.org/wiki/Halton_sequence>`,
+            :class:`~org.hipparchus.random.https:.lirias.kuleuven.be.bitstream.123456789.131168.1.mcm2005_bartv.pdf`
     """
     @typing.overload
     def __init__(self, int: int): ...
@@ -375,8 +376,8 @@ class HaltonSequenceGenerator(RandomVectorGenerator):
             Generate a random vector.
         
             Specified by:
-                :meth:`~org.hipparchus.random.RandomVectorGenerator.nextVector`Â in
-                interfaceÂ :class:`~org.hipparchus.random.RandomVectorGenerator`
+                :meth:`~org.hipparchus.random.RandomVectorGenerator.nextVector` in
+                interface :class:`~org.hipparchus.random.RandomVectorGenerator`
         
             Returns:
                 a random vector as an array of double.
@@ -388,9 +389,10 @@ class HaltonSequenceGenerator(RandomVectorGenerator):
 
 class RandomAdaptor(java.util.Random, RandomGenerator):
     """
-    public class RandomAdaptor extends Random implements :class:`~org.hipparchus.random.RandomGenerator`
+    public class RandomAdaptor extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random?is` implements :class:`~org.hipparchus.random.RandomGenerator`
     
-        Extension of null wrapping a :class:`~org.hipparchus.random.RandomGenerator`.
+        Extension of :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random?is` wrapping a
+        :class:`~org.hipparchus.random.RandomGenerator`.
     
         Also see:
             :meth:`~serialized`
@@ -404,7 +406,8 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
                 :meth:`~org.hipparchus.random.RandomGenerator.nextBoolean` in interface :class:`~org.hipparchus.random.RandomGenerator`
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random.html?is` in
+                class :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random?is`
         
             Returns:
                 the next pseudorandom, uniformly distributed :code:`boolean` value from this random number generator's sequence
@@ -419,10 +422,11 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
             the length of the byte array.
         
             Specified by:
-                 in interface :class:`~org.hipparchus.random.RandomGenerator`
+                :meth:`~org.hipparchus.random.RandomGenerator.nextBytes` in interface :class:`~org.hipparchus.random.RandomGenerator`
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random.html?is` in
+                class :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random?is`
         
             Parameters:
                 bytes (byte[]): the non-null byte array in which to put the random bytes
@@ -435,7 +439,7 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
             Generates random bytes and places them into a user-supplied byte array.
         
             Specified by:
-                 in interface :class:`~org.hipparchus.random.RandomGenerator`
+                :meth:`~org.hipparchus.random.RandomGenerator.nextBytes` in interface :class:`~org.hipparchus.random.RandomGenerator`
         
             Parameters:
                 bytes (byte[]): the non-null byte array in which to put the random bytes
@@ -454,7 +458,8 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
                 :meth:`~org.hipparchus.random.RandomGenerator.nextDouble` in interface :class:`~org.hipparchus.random.RandomGenerator`
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random.html?is` in
+                class :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random?is`
         
             Returns:
                 the next pseudorandom, uniformly distributed :code:`double` value between :code:`0.0` and :code:`1.0` from this random
@@ -472,7 +477,8 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
                 :meth:`~org.hipparchus.random.RandomGenerator.nextFloat` in interface :class:`~org.hipparchus.random.RandomGenerator`
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random.html?is` in
+                class :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random?is`
         
             Returns:
                 the next pseudorandom, uniformly distributed :code:`float` value between :code:`0.0` and :code:`1.0` from this random
@@ -487,11 +493,12 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
             deviation :code:`1.0` from this random number generator's sequence.
         
             Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextGaussian`Â in
-                interfaceÂ :class:`~org.hipparchus.random.RandomGenerator`
+                :meth:`~org.hipparchus.random.RandomGenerator.nextGaussian` in
+                interface :class:`~org.hipparchus.random.RandomGenerator`
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random.html?is` in
+                class :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random?is`
         
             Returns:
                 the next pseudorandom, Gaussian ("normally") distributed :code:`double` value with mean :code:`0.0` and standard
@@ -510,7 +517,8 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
                 :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random.html?is` in
+                class :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random?is`
         
             Returns:
                 the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence
@@ -527,7 +535,8 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
                 :meth:`~org.hipparchus.random.RandomGenerator.nextInt` in interface :class:`~org.hipparchus.random.RandomGenerator`
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random.html?is` in
+                class :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random?is`
         
             Parameters:
                 n (int): the bound on the random number to be returned. Must be positive.
@@ -536,7 +545,7 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
                 a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
         
             Raises:
-                : if n is not positive.
+                :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if n is not positive.
         
         
         """
@@ -551,7 +560,8 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
                 :meth:`~org.hipparchus.random.RandomGenerator.nextLong` in interface :class:`~org.hipparchus.random.RandomGenerator`
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random.html?is` in
+                class :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random?is`
         
             Returns:
                 the next pseudorandom, uniformly distributed :code:`long` value from this random number generator's sequence
@@ -608,7 +618,7 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
             Sequences of values generated starting with the same seeds should be identical.
         
             Specified by:
-                 in interface :class:`~org.hipparchus.random.RandomGenerator`
+                :meth:`~org.hipparchus.random.RandomGenerator.setSeed` in interface :class:`~org.hipparchus.random.RandomGenerator`
         
             Parameters:
                 seed (int[]): the seed value
@@ -621,7 +631,8 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
                 :meth:`~org.hipparchus.random.RandomGenerator.setSeed` in interface :class:`~org.hipparchus.random.RandomGenerator`
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random.html?is` in
+                class :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random?is`
         
             Parameters:
                 seed (long): the seed value
@@ -636,7 +647,7 @@ class RandomAdaptor(java.util.Random, RandomGenerator):
 
 class SobolSequenceGenerator(RandomVectorGenerator):
     """
-    public class SobolSequenceGenerator extends Object implements :class:`~org.hipparchus.random.RandomVectorGenerator`
+    public class SobolSequenceGenerator extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.random.RandomVectorGenerator`
     
         Implementation of a Sobol sequence.
     
@@ -676,8 +687,8 @@ class SobolSequenceGenerator(RandomVectorGenerator):
             Generate a random vector.
         
             Specified by:
-                :meth:`~org.hipparchus.random.RandomVectorGenerator.nextVector`Â in
-                interfaceÂ :class:`~org.hipparchus.random.RandomVectorGenerator`
+                :meth:`~org.hipparchus.random.RandomVectorGenerator.nextVector` in
+                interface :class:`~org.hipparchus.random.RandomVectorGenerator`
         
             Returns:
                 a random vector as an array of double.
@@ -689,14 +700,14 @@ class SobolSequenceGenerator(RandomVectorGenerator):
 
 class StableRandomGenerator(NormalizedRandomGenerator):
     """
-    public class StableRandomGenerator extends Object implements :class:`~org.hipparchus.random.NormalizedRandomGenerator`
+    public class StableRandomGenerator extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.random.NormalizedRandomGenerator`
     
     
         This class provides a stable normalized random generator. It samples from a stable distribution with location parameter
         0 and scale 1.
     
         The implementation uses the Chambers-Mallows-Stuck method as described in *Handbook of computational statistics:
-        concepts and methods* by James E. Gentle, Wolfgang HÃ¤rdle, Yuichi Mori.
+        concepts and methods* by James E. Gentle, Wolfgang Härdle, Yuichi Mori.
     """
     def __init__(self, randomGenerator: RandomGenerator, double: float, double2: float): ...
     def nextNormalizedDouble(self) -> float:
@@ -704,8 +715,8 @@ class StableRandomGenerator(NormalizedRandomGenerator):
             Generate a random scalar with zero location and unit scale.
         
             Specified by:
-                :meth:`~org.hipparchus.random.NormalizedRandomGenerator.nextNormalizedDouble`Â in
-                interfaceÂ :class:`~org.hipparchus.random.NormalizedRandomGenerator`
+                :meth:`~org.hipparchus.random.NormalizedRandomGenerator.nextNormalizedDouble` in
+                interface :class:`~org.hipparchus.random.NormalizedRandomGenerator`
         
             Returns:
                 a random scalar with zero location and unit scale
@@ -716,7 +727,7 @@ class StableRandomGenerator(NormalizedRandomGenerator):
 
 class SynchronizedRandomGenerator(RandomGenerator):
     """
-    public class SynchronizedRandomGenerator extends Object implements :class:`~org.hipparchus.random.RandomGenerator`
+    public class SynchronizedRandomGenerator extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.random.RandomGenerator`
     
         Any :class:`~org.hipparchus.random.RandomGenerator` implementation can be thread-safe if it is used through an instance
         of this class. This is achieved by enclosing calls to the methods of the actual generator inside the overridden
@@ -743,7 +754,7 @@ class SynchronizedRandomGenerator(RandomGenerator):
             the length of the byte array.
         
             Specified by:
-                 in interface :class:`~org.hipparchus.random.RandomGenerator`
+                :meth:`~org.hipparchus.random.RandomGenerator.nextBytes` in interface :class:`~org.hipparchus.random.RandomGenerator`
         
             Parameters:
                 bytes (byte[]): the non-null byte array in which to put the random bytes
@@ -756,7 +767,7 @@ class SynchronizedRandomGenerator(RandomGenerator):
             Generates random bytes and places them into a user-supplied byte array.
         
             Specified by:
-                 in interface :class:`~org.hipparchus.random.RandomGenerator`
+                :meth:`~org.hipparchus.random.RandomGenerator.nextBytes` in interface :class:`~org.hipparchus.random.RandomGenerator`
         
             Parameters:
                 bytes (byte[]): the non-null byte array in which to put the random bytes
@@ -802,8 +813,8 @@ class SynchronizedRandomGenerator(RandomGenerator):
             deviation :code:`1.0` from this random number generator's sequence.
         
             Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextGaussian`Â in
-                interfaceÂ :class:`~org.hipparchus.random.RandomGenerator`
+                :meth:`~org.hipparchus.random.RandomGenerator.nextGaussian` in
+                interface :class:`~org.hipparchus.random.RandomGenerator`
         
             Returns:
                 the next pseudorandom, Gaussian ("normally") distributed :code:`double` value with mean :code:`0.0` and standard
@@ -895,7 +906,7 @@ class SynchronizedRandomGenerator(RandomGenerator):
             Sequences of values generated starting with the same seeds should be identical.
         
             Specified by:
-                 in interface :class:`~org.hipparchus.random.RandomGenerator`
+                :meth:`~org.hipparchus.random.RandomGenerator.setSeed` in interface :class:`~org.hipparchus.random.RandomGenerator`
         
             Parameters:
                 seed (int[]): the seed value
@@ -920,7 +931,7 @@ class SynchronizedRandomGenerator(RandomGenerator):
 
 class UncorrelatedRandomVectorGenerator(RandomVectorGenerator):
     """
-    public class UncorrelatedRandomVectorGenerator extends Object implements :class:`~org.hipparchus.random.RandomVectorGenerator`
+    public class UncorrelatedRandomVectorGenerator extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.random.RandomVectorGenerator`
     
         A :class:`~org.hipparchus.random.RandomVectorGenerator` that generates vectors with uncorrelated components.
     
@@ -936,8 +947,8 @@ class UncorrelatedRandomVectorGenerator(RandomVectorGenerator):
             Generate an uncorrelated random vector.
         
             Specified by:
-                :meth:`~org.hipparchus.random.RandomVectorGenerator.nextVector`Â in
-                interfaceÂ :class:`~org.hipparchus.random.RandomVectorGenerator`
+                :meth:`~org.hipparchus.random.RandomVectorGenerator.nextVector` in
+                interface :class:`~org.hipparchus.random.RandomVectorGenerator`
         
             Returns:
                 a random vector as a newly built array of double
@@ -952,7 +963,7 @@ class UniformRandomGenerator(NormalizedRandomGenerator):
 
 class UnitSphereRandomVectorGenerator(RandomVectorGenerator):
     """
-    public class UnitSphereRandomVectorGenerator extends Object implements :class:`~org.hipparchus.random.RandomVectorGenerator`
+    public class UnitSphereRandomVectorGenerator extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.random.RandomVectorGenerator`
     
         Generate random vectors isotropically located on the surface of a sphere.
     """
@@ -965,8 +976,8 @@ class UnitSphereRandomVectorGenerator(RandomVectorGenerator):
             Generate a random vector.
         
             Specified by:
-                :meth:`~org.hipparchus.random.RandomVectorGenerator.nextVector`Â in
-                interfaceÂ :class:`~org.hipparchus.random.RandomVectorGenerator`
+                :meth:`~org.hipparchus.random.RandomVectorGenerator.nextVector` in
+                interface :class:`~org.hipparchus.random.RandomVectorGenerator`
         
             Returns:
                 a random vector as an array of double.
@@ -977,12 +988,12 @@ class UnitSphereRandomVectorGenerator(RandomVectorGenerator):
 
 class AbstractWell(org.hipparchus.random.IntRandomGenerator, java.io.Serializable):
     """
-    public abstract class AbstractWell extends Object implements Serializable
+    public abstract class AbstractWell extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
-        This abstract class implements the WELL class of pseudo-random number generator from FranÃ§ois Panneton, Pierre L'Ecuyer
+        This abstract class implements the WELL class of pseudo-random number generator from François Panneton, Pierre L'Ecuyer
         and Makoto Matsumoto.
     
-        This generator is described in a paper by FranÃ§ois Panneton, Pierre L'Ecuyer and Makoto Matsumoto ` Improved
+        This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto ` Improved
         Long-Period Generators Based on Linear Recurrences Modulo 2
         <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM Transactions on Mathematical Software, 32, 1
         (2006). The errata for the paper are in ` wellrng-errata.txt
@@ -1000,7 +1011,7 @@ class AbstractWell(org.hipparchus.random.IntRandomGenerator, java.io.Serializabl
             Returns:
                 the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence
         
-        public int nextInt(int n) throws IllegalArgumentException
+        public int nextInt(int n) throws :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`
         
             Returns a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and the specified value
             (exclusive), drawn from this random number generator's sequence.
@@ -1015,7 +1026,7 @@ class AbstractWell(org.hipparchus.random.IntRandomGenerator, java.io.Serializabl
                 a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
         
             Raises:
-                : if n is not positive.
+                :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if n is not positive.
         
         
         """
@@ -1027,7 +1038,7 @@ class AbstractWell(org.hipparchus.random.IntRandomGenerator, java.io.Serializabl
             The state of the generator is exactly the same as a new generator built with the same seed.
         
             Specified by:
-                 in interface :class:`~org.hipparchus.random.RandomGenerator`
+                :meth:`~org.hipparchus.random.RandomGenerator.setSeed` in interface :class:`~org.hipparchus.random.RandomGenerator`
         
             Parameters:
                 seed (int[]): the initial seed (32 bits integers array). If null the seed of the generator will be the system time plus the system
@@ -1069,10 +1080,10 @@ class ISAACRandom(org.hipparchus.random.IntRandomGenerator, java.io.Serializable
 
 class JDKRandomGenerator(org.hipparchus.random.IntRandomGenerator, java.io.Serializable):
     """
-    public class JDKRandomGenerator extends Object implements Serializable
+    public class JDKRandomGenerator extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         A :class:`~org.hipparchus.random.RandomGenerator` adapter that delegates the random number generation to the standard
-        null class.
+        :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.util.Random?is` class.
     
         Also see:
             :meth:`~serialized`
@@ -1102,7 +1113,7 @@ class JDKRandomGenerator(org.hipparchus.random.IntRandomGenerator, java.io.Seria
             the length of the byte array.
         
             Specified by:
-                 in interface :class:`~org.hipparchus.random.RandomGenerator`
+                :meth:`~org.hipparchus.random.RandomGenerator.nextBytes` in interface :class:`~org.hipparchus.random.RandomGenerator`
         
             Parameters:
                 bytes (byte[]): the non-null byte array in which to put the random bytes
@@ -1155,8 +1166,8 @@ class JDKRandomGenerator(org.hipparchus.random.IntRandomGenerator, java.io.Seria
             deviation :code:`1.0` from this random number generator's sequence.
         
             Specified by:
-                :meth:`~org.hipparchus.random.RandomGenerator.nextGaussian`Â in
-                interfaceÂ :class:`~org.hipparchus.random.RandomGenerator`
+                :meth:`~org.hipparchus.random.RandomGenerator.nextGaussian` in
+                interface :class:`~org.hipparchus.random.RandomGenerator`
         
             Returns:
                 the next pseudorandom, Gaussian ("normally") distributed :code:`double` value with mean :code:`0.0` and standard
@@ -1254,7 +1265,7 @@ class JDKRandomGenerator(org.hipparchus.random.IntRandomGenerator, java.io.Seria
             Sequences of values generated starting with the same seeds should be identical.
         
             Specified by:
-                 in interface :class:`~org.hipparchus.random.RandomGenerator`
+                :meth:`~org.hipparchus.random.RandomGenerator.setSeed` in interface :class:`~org.hipparchus.random.RandomGenerator`
         
             Parameters:
                 seed (int[]): the seed value
@@ -1269,7 +1280,7 @@ class JDKRandomGenerator(org.hipparchus.random.IntRandomGenerator, java.io.Seria
 
 class MersenneTwister(org.hipparchus.random.IntRandomGenerator, java.io.Serializable):
     """
-    public class MersenneTwister extends Object implements Serializable
+    public class MersenneTwister extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         This class implements a powerful pseudo-random number generator developed by Makoto Matsumoto and Takuji Nishimura
         during 1996-1997.
@@ -1313,7 +1324,7 @@ class MersenneTwister(org.hipparchus.random.IntRandomGenerator, java.io.Serializ
             Returns:
                 the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence
         
-        public int nextInt(int n) throws IllegalArgumentException
+        public int nextInt(int n) throws :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`
         
             Returns a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and the specified value
             (exclusive), drawn from this random number generator's sequence.
@@ -1328,7 +1339,7 @@ class MersenneTwister(org.hipparchus.random.IntRandomGenerator, java.io.Serializ
                 a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
         
             Raises:
-                : if n is not positive.
+                :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if n is not positive.
         
         
         """
@@ -1351,7 +1362,7 @@ class MersenneTwister(org.hipparchus.random.IntRandomGenerator, java.io.Serializ
             The state of the generator is exactly the same as a new generator built with the same seed.
         
             Specified by:
-                 in interface :class:`~org.hipparchus.random.RandomGenerator`
+                :meth:`~org.hipparchus.random.RandomGenerator.setSeed` in interface :class:`~org.hipparchus.random.RandomGenerator`
         
             Parameters:
                 seed (int[]): the initial seed (32 bits integers array), if null the seed of the generator will be the current system time plus the
@@ -1375,7 +1386,7 @@ class MersenneTwister(org.hipparchus.random.IntRandomGenerator, java.io.Serializ
 
 class RandomDataGenerator(org.hipparchus.random.ForwardingRandomGenerator, RandomGenerator, java.io.Serializable):
     """
-    public class RandomDataGenerator extends Object implements :class:`~org.hipparchus.random.RandomGenerator`, Serializable
+    public class RandomDataGenerator extends :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.random.RandomGenerator`, :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         A class for generating random data.
     
@@ -1646,10 +1657,10 @@ class Well1024a(AbstractWell):
     """
     public class Well1024a extends :class:`~org.hipparchus.random.AbstractWell`
     
-        This class implements the WELL1024a pseudo-random number generator from FranÃ§ois Panneton, Pierre L'Ecuyer and Makoto
+        This class implements the WELL1024a pseudo-random number generator from François Panneton, Pierre L'Ecuyer and Makoto
         Matsumoto.
     
-        This generator is described in a paper by FranÃ§ois Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period
+        This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period
         Generators Based on Linear Recurrences Modulo 2 <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM
         Transactions on Mathematical Software, 32, 1 (2006). The errata for the paper are in ` wellrng-errata.txt
         <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
@@ -1677,7 +1688,7 @@ class Well1024a(AbstractWell):
             Returns:
                 the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence
         
-        public int nextInt(int n) throws IllegalArgumentException
+        public int nextInt(int n) throws :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`
         
             Returns a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and the specified value
             (exclusive), drawn from this random number generator's sequence.
@@ -1692,7 +1703,7 @@ class Well1024a(AbstractWell):
                 a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
         
             Raises:
-                : if n is not positive.
+                :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if n is not positive.
         
         
         """
@@ -1702,10 +1713,10 @@ class Well19937a(AbstractWell):
     """
     public class Well19937a extends :class:`~org.hipparchus.random.AbstractWell`
     
-        This class implements the WELL19937a pseudo-random number generator from FranÃ§ois Panneton, Pierre L'Ecuyer and Makoto
+        This class implements the WELL19937a pseudo-random number generator from François Panneton, Pierre L'Ecuyer and Makoto
         Matsumoto.
     
-        This generator is described in a paper by FranÃ§ois Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period
+        This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period
         Generators Based on Linear Recurrences Modulo 2 <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM
         Transactions on Mathematical Software, 32, 1 (2006). The errata for the paper are in ` wellrng-errata.txt
         <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
@@ -1733,7 +1744,7 @@ class Well19937a(AbstractWell):
             Returns:
                 the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence
         
-        public int nextInt(int n) throws IllegalArgumentException
+        public int nextInt(int n) throws :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`
         
             Returns a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and the specified value
             (exclusive), drawn from this random number generator's sequence.
@@ -1748,7 +1759,7 @@ class Well19937a(AbstractWell):
                 a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
         
             Raises:
-                : if n is not positive.
+                :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if n is not positive.
         
         
         """
@@ -1758,10 +1769,10 @@ class Well19937c(AbstractWell):
     """
     public class Well19937c extends :class:`~org.hipparchus.random.AbstractWell`
     
-        This class implements the WELL19937c pseudo-random number generator from FranÃ§ois Panneton, Pierre L'Ecuyer and Makoto
+        This class implements the WELL19937c pseudo-random number generator from François Panneton, Pierre L'Ecuyer and Makoto
         Matsumoto.
     
-        This generator is described in a paper by FranÃ§ois Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period
+        This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period
         Generators Based on Linear Recurrences Modulo 2 <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM
         Transactions on Mathematical Software, 32, 1 (2006). The errata for the paper are in ` wellrng-errata.txt
         <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
@@ -1789,7 +1800,7 @@ class Well19937c(AbstractWell):
             Returns:
                 the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence
         
-        public int nextInt(int n) throws IllegalArgumentException
+        public int nextInt(int n) throws :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`
         
             Returns a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and the specified value
             (exclusive), drawn from this random number generator's sequence.
@@ -1804,7 +1815,7 @@ class Well19937c(AbstractWell):
                 a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
         
             Raises:
-                : if n is not positive.
+                :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if n is not positive.
         
         
         """
@@ -1814,10 +1825,10 @@ class Well44497a(AbstractWell):
     """
     public class Well44497a extends :class:`~org.hipparchus.random.AbstractWell`
     
-        This class implements the WELL44497a pseudo-random number generator from FranÃ§ois Panneton, Pierre L'Ecuyer and Makoto
+        This class implements the WELL44497a pseudo-random number generator from François Panneton, Pierre L'Ecuyer and Makoto
         Matsumoto.
     
-        This generator is described in a paper by FranÃ§ois Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period
+        This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period
         Generators Based on Linear Recurrences Modulo 2 <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM
         Transactions on Mathematical Software, 32, 1 (2006). The errata for the paper are in ` wellrng-errata.txt
         <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
@@ -1845,7 +1856,7 @@ class Well44497a(AbstractWell):
             Returns:
                 the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence
         
-        public int nextInt(int n) throws IllegalArgumentException
+        public int nextInt(int n) throws :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`
         
             Returns a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and the specified value
             (exclusive), drawn from this random number generator's sequence.
@@ -1860,7 +1871,7 @@ class Well44497a(AbstractWell):
                 a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
         
             Raises:
-                : if n is not positive.
+                :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if n is not positive.
         
         
         """
@@ -1870,10 +1881,10 @@ class Well44497b(AbstractWell):
     """
     public class Well44497b extends :class:`~org.hipparchus.random.AbstractWell`
     
-        This class implements the WELL44497b pseudo-random number generator from FranÃ§ois Panneton, Pierre L'Ecuyer and Makoto
+        This class implements the WELL44497b pseudo-random number generator from François Panneton, Pierre L'Ecuyer and Makoto
         Matsumoto.
     
-        This generator is described in a paper by FranÃ§ois Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period
+        This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period
         Generators Based on Linear Recurrences Modulo 2 <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM
         Transactions on Mathematical Software, 32, 1 (2006). The errata for the paper are in ` wellrng-errata.txt
         <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
@@ -1901,7 +1912,7 @@ class Well44497b(AbstractWell):
             Returns:
                 the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence
         
-        public int nextInt(int n) throws IllegalArgumentException
+        public int nextInt(int n) throws :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`
         
             Returns a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and the specified value
             (exclusive), drawn from this random number generator's sequence.
@@ -1916,7 +1927,7 @@ class Well44497b(AbstractWell):
                 a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
         
             Raises:
-                : if n is not positive.
+                :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if n is not positive.
         
         
         """
@@ -1926,10 +1937,10 @@ class Well512a(AbstractWell):
     """
     public class Well512a extends :class:`~org.hipparchus.random.AbstractWell`
     
-        This class implements the WELL512a pseudo-random number generator from FranÃ§ois Panneton, Pierre L'Ecuyer and Makoto
+        This class implements the WELL512a pseudo-random number generator from François Panneton, Pierre L'Ecuyer and Makoto
         Matsumoto.
     
-        This generator is described in a paper by FranÃ§ois Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period
+        This generator is described in a paper by François Panneton, Pierre L'Ecuyer and Makoto Matsumoto `Improved Long-Period
         Generators Based on Linear Recurrences Modulo 2 <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng.pdf>` ACM
         Transactions on Mathematical Software, 32, 1 (2006). The errata for the paper are in ` wellrng-errata.txt
         <http://www.iro.umontreal.ca/~lecuyer/myftp/papers/wellrng-errata.txt>`.
@@ -1957,7 +1968,7 @@ class Well512a(AbstractWell):
             Returns:
                 the next pseudorandom, uniformly distributed :code:`int` value from this random number generator's sequence
         
-        public int nextInt(int n) throws IllegalArgumentException
+        public int nextInt(int n) throws :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`
         
             Returns a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and the specified value
             (exclusive), drawn from this random number generator's sequence.
@@ -1972,7 +1983,7 @@ class Well512a(AbstractWell):
                 a pseudorandom, uniformly distributed :code:`int` value between 0 (inclusive) and n (exclusive).
         
             Raises:
-                : if n is not positive.
+                :class:`~org.hipparchus.random.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if n is not positive.
         
         
         """

@@ -10,7 +10,7 @@ import typing
 
 class Action(java.lang.Enum['Action']):
     """
-    public enum Action extends Enum<:class:`~org.hipparchus.ode.events.Action`>
+    public enum Action extends :class:`~org.hipparchus.ode.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.hipparchus.ode.events.Action`>
     
         Enumerate for actions to be performed when an event occurs during ODE integration.
     """
@@ -31,14 +31,14 @@ class Action(java.lang.Enum['Action']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.hipparchus.ode.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.hipparchus.ode.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.hipparchus.ode.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -111,21 +111,12 @@ class EventHandlerConfiguration:
         
         """
         ...
-    def getSolver(self) -> org.hipparchus.analysis.solvers.BracketedUnivariateSolver[org.hipparchus.analysis.UnivariateFunction]:
-        """
-            Get the root-finding algorithm to use to detect state events.
-        
-            Returns:
-                root-finding algorithm to use to detect state events
-        
-        
-        """
-        ...
+    def getSolver(self) -> org.hipparchus.analysis.solvers.BracketedUnivariateSolver[org.hipparchus.analysis.UnivariateFunction]: ...
 
 _FieldEventHandlerConfiguration__T = typing.TypeVar('_FieldEventHandlerConfiguration__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldEventHandlerConfiguration(typing.Generic[_FieldEventHandlerConfiguration__T]):
     """
-    public interface FieldEventHandlerConfiguration<T extends CalculusFieldElement<T>>
+    public interface FieldEventHandlerConfiguration<T extends :class:`~org.hipparchus.ode.events.https:.www.hipparchus.org.hipparchus`<T>>
     
         Interface gathering all configuration parameters for setting up an event handler.
     
@@ -174,7 +165,7 @@ class FieldODEEventHandler(typing.Generic[_FieldODEEventHandler__T]):
 
 class FilterType(java.lang.Enum['FilterType']):
     """
-    public enum FilterType extends Enum<:class:`~org.hipparchus.ode.events.FilterType`>
+    public enum FilterType extends :class:`~org.hipparchus.ode.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.hipparchus.ode.events.FilterType`>
     
         Enumerate for :class:`~org.hipparchus.ode.events.EventFilter`.
     """
@@ -192,14 +183,14 @@ class FilterType(java.lang.Enum['FilterType']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.hipparchus.ode.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.hipparchus.ode.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.hipparchus.ode.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -369,7 +360,7 @@ class ODEEventHandler:
 
 class EventFilter(ODEEventHandler):
     """
-    public class EventFilter extends Object implements :class:`~org.hipparchus.ode.events.ODEEventHandler`
+    public class EventFilter extends :class:`~org.hipparchus.ode.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.ode.events.ODEEventHandler`
     
         Wrapper used to detect only increasing or decreasing events.
     
@@ -420,8 +411,8 @@ class EventFilter(ODEEventHandler):
             user code called by step handlers to get values of the independent time variable consistent with integration direction.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.events.ODEEventHandler.eventOccurred`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.events.ODEEventHandler`
+                :meth:`~org.hipparchus.ode.events.ODEEventHandler.eventOccurred` in
+                interface :class:`~org.hipparchus.ode.events.ODEEventHandler`
         
             Parameters:
                 state (:class:`~org.hipparchus.ode.ODEStateAndDerivative`): current value of the independent *time* variable, state vector and derivative
@@ -493,8 +484,8 @@ class EventFilter(ODEEventHandler):
             The default implementation does nothing
         
             Specified by:
-                :meth:`~org.hipparchus.ode.events.ODEEventHandler.init`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.events.ODEEventHandler`
+                :meth:`~org.hipparchus.ode.events.ODEEventHandler.init` in
+                interface :class:`~org.hipparchus.ode.events.ODEEventHandler`
         
             Parameters:
                 initialState (:class:`~org.hipparchus.ode.ODEStateAndDerivative`): initial time, state vector and derivative
@@ -515,8 +506,8 @@ class EventFilter(ODEEventHandler):
             The default implementation returns its argument.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.events.ODEEventHandler.resetState`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.events.ODEEventHandler`
+                :meth:`~org.hipparchus.ode.events.ODEEventHandler.resetState` in
+                interface :class:`~org.hipparchus.ode.events.ODEEventHandler`
         
             Parameters:
                 state (:class:`~org.hipparchus.ode.ODEStateAndDerivative`): current value of the independent *time* variable, state vector and derivative
@@ -531,7 +522,7 @@ class EventFilter(ODEEventHandler):
 
 class EventState(EventHandlerConfiguration):
     """
-    public class EventState extends Object implements :class:`~org.hipparchus.ode.events.EventHandlerConfiguration`
+    public class EventState extends :class:`~org.hipparchus.ode.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.ode.events.EventHandlerConfiguration`
     
         This class handles the state for one :class:`~org.hipparchus.ode.events.ODEEventHandler` during integration steps.
     
@@ -564,8 +555,8 @@ class EventState(EventHandlerConfiguration):
             Get the convergence threshold for event localization.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.events.EventHandlerConfiguration.getConvergence`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.events.EventHandlerConfiguration`
+                :meth:`~org.hipparchus.ode.events.EventHandlerConfiguration.getConvergence` in
+                interface :class:`~org.hipparchus.ode.events.EventHandlerConfiguration`
         
             Returns:
                 convergence threshold for event localization
@@ -578,8 +569,8 @@ class EventState(EventHandlerConfiguration):
             Get the underlying event handler.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.events.EventHandlerConfiguration.getEventHandler`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.events.EventHandlerConfiguration`
+                :meth:`~org.hipparchus.ode.events.EventHandlerConfiguration.getEventHandler` in
+                interface :class:`~org.hipparchus.ode.events.EventHandlerConfiguration`
         
             Returns:
                 underlying event handler
@@ -602,8 +593,8 @@ class EventState(EventHandlerConfiguration):
             Get the maximal time interval between events handler checks.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.events.EventHandlerConfiguration.getMaxCheckInterval`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.events.EventHandlerConfiguration`
+                :meth:`~org.hipparchus.ode.events.EventHandlerConfiguration.getMaxCheckInterval` in
+                interface :class:`~org.hipparchus.ode.events.EventHandlerConfiguration`
         
             Returns:
                 maximal time interval between events handler checks
@@ -616,8 +607,8 @@ class EventState(EventHandlerConfiguration):
             Get the upper limit in the iteration count for event localization.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.events.EventHandlerConfiguration.getMaxIterationCount`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.events.EventHandlerConfiguration`
+                :meth:`~org.hipparchus.ode.events.EventHandlerConfiguration.getMaxIterationCount` in
+                interface :class:`~org.hipparchus.ode.events.EventHandlerConfiguration`
         
             Returns:
                 upper limit in the iteration count for event localization
@@ -625,20 +616,7 @@ class EventState(EventHandlerConfiguration):
         
         """
         ...
-    def getSolver(self) -> org.hipparchus.analysis.solvers.BracketedUnivariateSolver[org.hipparchus.analysis.UnivariateFunction]:
-        """
-            Get the root-finding algorithm to use to detect state events.
-        
-            Specified by:
-                :meth:`~org.hipparchus.ode.events.EventHandlerConfiguration.getSolver`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.events.EventHandlerConfiguration`
-        
-            Returns:
-                root-finding algorithm to use to detect state events
-        
-        
-        """
-        ...
+    def getSolver(self) -> org.hipparchus.analysis.solvers.BracketedUnivariateSolver[org.hipparchus.analysis.UnivariateFunction]: ...
     def reinitializeBegin(self, oDEStateInterpolator: org.hipparchus.ode.sampling.ODEStateInterpolator) -> None: ...
     def tryAdvance(self, oDEStateAndDerivative: org.hipparchus.ode.ODEStateAndDerivative, oDEStateInterpolator: org.hipparchus.ode.sampling.ODEStateInterpolator) -> bool:
         """
@@ -676,7 +654,7 @@ _FieldEventState__EventOccurrence__T = typing.TypeVar('_FieldEventState__EventOc
 _FieldEventState__T = typing.TypeVar('_FieldEventState__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldEventState(FieldEventHandlerConfiguration[_FieldEventState__T], typing.Generic[_FieldEventState__T]):
     """
-    public class FieldEventState<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.hipparchus.ode.events.FieldEventHandlerConfiguration`<T>
+    public class FieldEventState<T extends :class:`~org.hipparchus.ode.events.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.ode.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.ode.events.FieldEventHandlerConfiguration`<T>
     
         This class handles the state for one :class:`~org.hipparchus.ode.events.FieldODEEventHandler` during integration steps.
     
@@ -692,8 +670,8 @@ class FieldEventState(FieldEventHandlerConfiguration[_FieldEventState__T], typin
             Get the convergence threshold for event localization.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.events.FieldEventHandlerConfiguration.getConvergence`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.events.FieldEventHandlerConfiguration`
+                :meth:`~org.hipparchus.ode.events.FieldEventHandlerConfiguration.getConvergence` in
+                interface :class:`~org.hipparchus.ode.events.FieldEventHandlerConfiguration`
         
             Returns:
                 convergence threshold for event localization
@@ -717,8 +695,8 @@ class FieldEventState(FieldEventHandlerConfiguration[_FieldEventState__T], typin
             Get the maximal time interval between events handler checks.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.events.FieldEventHandlerConfiguration.getMaxCheckInterval`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.events.FieldEventHandlerConfiguration`
+                :meth:`~org.hipparchus.ode.events.FieldEventHandlerConfiguration.getMaxCheckInterval` in
+                interface :class:`~org.hipparchus.ode.events.FieldEventHandlerConfiguration`
         
             Returns:
                 maximal time interval between events handler checks
@@ -731,8 +709,8 @@ class FieldEventState(FieldEventHandlerConfiguration[_FieldEventState__T], typin
             Get the upper limit in the iteration count for event localization.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.events.FieldEventHandlerConfiguration.getMaxIterationCount`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.events.FieldEventHandlerConfiguration`
+                :meth:`~org.hipparchus.ode.events.FieldEventHandlerConfiguration.getMaxIterationCount` in
+                interface :class:`~org.hipparchus.ode.events.FieldEventHandlerConfiguration`
         
             Returns:
                 upper limit in the iteration count for event localization

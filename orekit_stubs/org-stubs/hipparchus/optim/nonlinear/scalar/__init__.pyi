@@ -12,7 +12,7 @@ import typing
 
 class GoalType(java.lang.Enum['GoalType'], org.hipparchus.optim.OptimizationData):
     """
-    public enum GoalType extends Enum<:class:`~org.hipparchus.optim.nonlinear.scalar.GoalType`> implements :class:`~org.hipparchus.optim.OptimizationData`
+    public enum GoalType extends :class:`~org.hipparchus.optim.nonlinear.scalar.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.hipparchus.optim.nonlinear.scalar.GoalType`> implements :class:`~org.hipparchus.optim.OptimizationData`
     
         Goal type for an optimization problem (minimization or maximization of a scalar function.
     """
@@ -30,14 +30,14 @@ class GoalType(java.lang.Enum['GoalType'], org.hipparchus.optim.OptimizationData
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.hipparchus.optim.nonlinear.scalar.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.hipparchus.optim.nonlinear.scalar.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.hipparchus.optim.nonlinear.scalar.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -72,7 +72,7 @@ class LeastSquaresConverter(org.hipparchus.analysis.MultivariateFunction):
 
 class LineSearch:
     """
-    public class LineSearch extends Object
+    public class LineSearch extends :class:`~org.hipparchus.optim.nonlinear.scalar.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Class for finding the minimum of the objective function along a given direction.
     """
@@ -89,7 +89,7 @@ class LineSearch:
                 the optimum.
         
             Raises:
-                : if the number of evaluations is exceeded.
+                :class:`~org.hipparchus.optim.nonlinear.scalar.https:.www.hipparchus.org.hipparchus`: if the number of evaluations is exceeded.
         
         
         """
@@ -101,10 +101,11 @@ class MultiStartMultivariateOptimizer(org.hipparchus.optim.BaseMultiStartMultiva
 
 class MultivariateFunctionMappingAdapter(org.hipparchus.analysis.MultivariateFunction):
     """
-    public class MultivariateFunctionMappingAdapter extends Object implements MultivariateFunction
+    public class MultivariateFunctionMappingAdapter extends :class:`~org.hipparchus.optim.nonlinear.scalar.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.optim.nonlinear.scalar.https:.www.hipparchus.org.hipparchus`
     
     
-        Adapter for mapping bounded null to unbounded ones.
+        Adapter for mapping bounded :class:`~org.hipparchus.optim.nonlinear.scalar.https:.www.hipparchus.org.hipparchus` to
+        unbounded ones.
     
         This adapter can be used to wrap functions subject to simple bounds on parameters so they can be used by optimizers that
         do *not* directly support simple bounds.
@@ -113,15 +114,19 @@ class MultivariateFunctionMappingAdapter(org.hipparchus.analysis.MultivariateFun
         :code:`value` method is called with argument array :code:`point`, the elements array will fulfill requirement
         :code:`lower[i] <= point[i] <= upper[i]` for all i. Some of the components may be unbounded or bounded only on one side
         if the corresponding bound is set to an infinite value. The optimizer will not manage the user function by itself, but
-        it will handle this adapter and it is this adapter that will take care the bounds are fulfilled. The adapter null method
-        will be called by the optimizer with unbound parameters, and the adapter will map the unbounded value to the bounded
-        range using appropriate functions like null for double bounded elements for example.
+        it will handle this adapter and it is this adapter that will take care the bounds are fulfilled. The adapter
+        :meth:`~org.hipparchus.optim.nonlinear.scalar.MultivariateFunctionMappingAdapter.value` method will be called by the
+        optimizer with unbound parameters, and the adapter will map the unbounded value to the bounded range using appropriate
+        functions like :class:`~org.hipparchus.optim.nonlinear.scalar.https:.www.hipparchus.org.hipparchus` for double bounded
+        elements for example.
     
         As the optimizer sees only unbounded parameters, it should be noted that the start point or simplex expected by the
-        optimizer should be unbounded, so the user is responsible for converting his bounded point to unbounded by calling null
-        before providing them to the optimizer. For the same reason, the point returned by the
+        optimizer should be unbounded, so the user is responsible for converting his bounded point to unbounded by calling
+        :meth:`~org.hipparchus.optim.nonlinear.scalar.MultivariateFunctionMappingAdapter.boundedToUnbounded` before providing
+        them to the optimizer. For the same reason, the point returned by the
         :meth:`~org.hipparchus.optim.BaseMultivariateOptimizer.optimize` method is unbounded. So to convert this point to
-        bounded, users must call null by themselves!
+        bounded, users must call
+        :meth:`~org.hipparchus.optim.nonlinear.scalar.MultivariateFunctionMappingAdapter.unboundedToBounded` by themselves!
     
         This adapter is only a poor man solution to simple bounds optimization constraints that can be used with simple
         optimizers like :class:`~org.hipparchus.optim.nonlinear.scalar.noderiv.SimplexOptimizer`. A better solution is to use an
@@ -170,7 +175,8 @@ class MultivariateFunctionMappingAdapter(org.hipparchus.analysis.MultivariateFun
             function using the bounded point.
         
             Specified by:
-                 in interface 
+                :meth:`~org.hipparchus.optim.nonlinear.scalar.https:.www.hipparchus.org.hipparchus` in
+                interface :class:`~org.hipparchus.optim.nonlinear.scalar.https:.www.hipparchus.org.hipparchus`
         
             Parameters:
                 point (double[]): unbounded value
@@ -179,6 +185,7 @@ class MultivariateFunctionMappingAdapter(org.hipparchus.analysis.MultivariateFun
                 underlying function value
         
             Also see:
+                :meth:`~org.hipparchus.optim.nonlinear.scalar.MultivariateFunctionMappingAdapter.unboundedToBounded`
         
         
         """
@@ -186,10 +193,11 @@ class MultivariateFunctionMappingAdapter(org.hipparchus.analysis.MultivariateFun
 
 class MultivariateFunctionPenaltyAdapter(org.hipparchus.analysis.MultivariateFunction):
     """
-    public class MultivariateFunctionPenaltyAdapter extends Object implements MultivariateFunction
+    public class MultivariateFunctionPenaltyAdapter extends :class:`~org.hipparchus.optim.nonlinear.scalar.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.optim.nonlinear.scalar.https:.www.hipparchus.org.hipparchus`
     
     
-        Adapter extending bounded null to an unbouded domain using a penalty function.
+        Adapter extending bounded :class:`~org.hipparchus.optim.nonlinear.scalar.https:.www.hipparchus.org.hipparchus` to an
+        unbouded domain using a penalty function.
     
         This adapter can be used to wrap functions subject to simple bounds on parameters so they can be used by optimizers that
         do *not* directly support simple bounds.
@@ -198,10 +206,11 @@ class MultivariateFunctionPenaltyAdapter(org.hipparchus.analysis.MultivariateFun
         :code:`value` method is called with argument array :code:`point`, the elements array will fulfill requirement
         :code:`lower[i] <= point[i] <= upper[i]` for all i. Some of the components may be unbounded or bounded only on one side
         if the corresponding bound is set to an infinite value. The optimizer will not manage the user function by itself, but
-        it will handle this adapter and it is this adapter that will take care the bounds are fulfilled. The adapter null method
-        will be called by the optimizer with unbound parameters, and the adapter will check if the parameters is within range or
-        not. If it is in range, then the underlying user function will be called, and if it is not the value of a penalty
-        function will be returned instead.
+        it will handle this adapter and it is this adapter that will take care the bounds are fulfilled. The adapter
+        :meth:`~org.hipparchus.optim.nonlinear.scalar.MultivariateFunctionPenaltyAdapter.value` method will be called by the
+        optimizer with unbound parameters, and the adapter will check if the parameters is within range or not. If it is in
+        range, then the underlying user function will be called, and if it is not the value of a penalty function will be
+        returned instead.
     
         This adapter is only a poor-man's solution to simple bounds optimization constraints that can be used with simple
         optimizers like :class:`~org.hipparchus.optim.nonlinear.scalar.noderiv.SimplexOptimizer`. A better solution is to use an
@@ -223,7 +232,8 @@ class MultivariateFunctionPenaltyAdapter(org.hipparchus.analysis.MultivariateFun
             compute a replacement value using the offset and scale if bounds are violated, without calling the function at all.
         
             Specified by:
-                 in interface 
+                :meth:`~org.hipparchus.optim.nonlinear.scalar.https:.www.hipparchus.org.hipparchus` in
+                interface :class:`~org.hipparchus.optim.nonlinear.scalar.https:.www.hipparchus.org.hipparchus`
         
             Parameters:
                 point (double[]): unbounded point
@@ -253,7 +263,7 @@ class MultivariateOptimizer(org.hipparchus.optim.BaseMultivariateOptimizer[org.h
                 the objective function value at the specified point.
         
             Raises:
-                : if the maximal number of evaluations is exceeded.
+                :class:`~org.hipparchus.optim.nonlinear.scalar.https:.www.hipparchus.org.hipparchus`: if the maximal number of evaluations is exceeded.
         
         
         """
@@ -274,7 +284,7 @@ class MultivariateOptimizer(org.hipparchus.optim.BaseMultivariateOptimizer[org.h
 
 class ObjectiveFunction(org.hipparchus.optim.OptimizationData):
     """
-    public class ObjectiveFunction extends Object implements :class:`~org.hipparchus.optim.OptimizationData`
+    public class ObjectiveFunction extends :class:`~org.hipparchus.optim.nonlinear.scalar.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.optim.OptimizationData`
     
         Scalar function to be optimized.
     """
@@ -292,7 +302,7 @@ class ObjectiveFunction(org.hipparchus.optim.OptimizationData):
 
 class ObjectiveFunctionGradient(org.hipparchus.optim.OptimizationData):
     """
-    public class ObjectiveFunctionGradient extends Object implements :class:`~org.hipparchus.optim.OptimizationData`
+    public class ObjectiveFunctionGradient extends :class:`~org.hipparchus.optim.nonlinear.scalar.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.optim.OptimizationData`
     
         Gradient of the scalar function to be optimized.
     """

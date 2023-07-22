@@ -52,7 +52,10 @@ class EventDetector:
     
         This interface represents space-dynamics aware events detectors.
     
-        It mirrors the null interface from Hipparchus but provides a space-dynamics interface to the methods.
+        It mirrors the
+        :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.ODEEventHandler?is`
+        interface from :class:`~org.orekit.propagation.events.https:.hipparchus.org` but provides a space-dynamics interface to
+        the methods.
     
         Events detectors are a useful solution to meet the requirements of propagators concerning discrete conditions. The state
         of each event detector is queried by the integrator at each step. When the sign of the underlying g switching function
@@ -145,10 +148,12 @@ class EventDetector:
             Reset the state prior to continue propagation.
         
             This method is called after the step handler has returned and before the next step is started, but only when
-            :meth:`~org.orekit.propagation.events.EventDetector.eventOccurred` has itself returned the null indicator. It allows the
-            user to reset the state for the next step, without perturbing the step handler of the finishing step. If the
-            :meth:`~org.orekit.propagation.events.EventDetector.eventOccurred` never returns the null indicator, this function will
-            never be called, and it is safe to simply return null.
+            :meth:`~org.orekit.propagation.events.EventDetector.eventOccurred` has itself returned the
+            :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+            indicator. It allows the user to reset the state for the next step, without perturbing the step handler of the finishing
+            step. If the :meth:`~org.orekit.propagation.events.EventDetector.eventOccurred` never returns the
+            :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+            indicator, this function will never be called, and it is safe to simply return null.
         
             The default implementation simply returns its argument.
         
@@ -168,7 +173,7 @@ class EventDetector:
 _EventState__T = typing.TypeVar('_EventState__T', bound=EventDetector)  # <T>
 class EventState(typing.Generic[_EventState__T]):
     """
-    public class EventState<T extends :class:`~org.orekit.propagation.events.EventDetector`> extends Object
+    public class EventState<T extends :class:`~org.orekit.propagation.events.EventDetector`> extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This class handles the state for one :class:`~org.orekit.propagation.events.EventDetector` during integration steps.
     
@@ -192,9 +197,11 @@ class EventState(typing.Generic[_EventState__T]):
                     :meth:`~org.orekit.propagation.events.EventState.getEventDate`.
         
             Returns:
-                the user's requested action and the new state if the action is null. Otherwise the new state is :code:`state`. The stop
-                time indicates what time propagation should stop if the action is null. This guarantees the integration will stop on or
-                after the root, so that integration may be restarted safely.
+                the user's requested action and the new state if the action is
+                :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`.
+                Otherwise the new state is :code:`state`. The stop time indicates what time propagation should stop if the action is
+                :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`. This
+                guarantees the integration will stop on or after the root, so that integration may be restarted safely.
         
         
         """
@@ -270,7 +277,7 @@ class EventState(typing.Generic[_EventState__T]):
 
 class EventsLogger:
     """
-    public class EventsLogger extends Object
+    public class EventsLogger extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This class logs events detectors events during propagation.
     
@@ -303,11 +310,10 @@ class EventsLogger:
         
             .. code-block: java
             
-            
-             Propagator propagator = new XyzPropagator(...);
-             EventsLogger logger = new EventsLogger();
-             EventDetector detector = new UvwDetector(...);
-             propagator.addEventDetector(logger.monitorDetector(detector));
+             Propagator propagator = new XyzPropagator(...);
+             EventsLogger logger = new EventsLogger();
+             EventDetector detector = new UvwDetector(...);
+             propagator.addEventDetector(logger.monitorDetector(detector));
              
         
             Note that the event detector returned by the
@@ -334,11 +340,14 @@ class EventsLogger:
 _FieldEventDetector__T = typing.TypeVar('_FieldEventDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldEventDetector(typing.Generic[_FieldEventDetector__T]):
     """
-    public interface FieldEventDetector<T extends CalculusFieldElement<T>>
+    public interface FieldEventDetector<T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>>
     
         This interface represents space-dynamics aware events detectors.
     
-        It mirrors the null interface from Hipparchus but provides a space-dynamics interface to the methods.
+        It mirrors the
+        :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.FieldODEEventHandler?is`
+        interface from :class:`~org.orekit.propagation.events.https:.hipparchus.org` but provides a space-dynamics interface to
+        the methods.
     
         Events detectors are a useful solution to meet the requirements of propagators concerning discrete conditions. The state
         of each event detector is queried by the integrator at each step. When the sign of the underlying g switching function
@@ -389,7 +398,7 @@ _FieldEventState__D = typing.TypeVar('_FieldEventState__D', bound=FieldEventDete
 _FieldEventState__T = typing.TypeVar('_FieldEventState__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldEventState(typing.Generic[_FieldEventState__D, _FieldEventState__T]):
     """
-    public class FieldEventState<D extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends CalculusFieldElement<T>> extends Object
+    public class FieldEventState<D extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This class handles the state for one :class:`~org.orekit.propagation.events.FieldEventDetector` during integration
         steps.
@@ -439,7 +448,7 @@ _FieldEventsLogger__FieldLoggedEvent__T = typing.TypeVar('_FieldEventsLogger__Fi
 _FieldEventsLogger__T = typing.TypeVar('_FieldEventsLogger__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldEventsLogger(typing.Generic[_FieldEventsLogger__T]):
     """
-    public class FieldEventsLogger<T extends CalculusFieldElement<T>> extends Object
+    public class FieldEventsLogger<T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This class logs events detectors events during propagation.
     
@@ -472,7 +481,7 @@ class FieldEventsLogger(typing.Generic[_FieldEventsLogger__T]):
 
 class FilterType(java.lang.Enum['FilterType']):
     """
-    public enum FilterType extends Enum<:class:`~org.orekit.propagation.events.FilterType`>
+    public enum FilterType extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.propagation.events.FilterType`>
     
         Enumerate for :class:`~org.orekit.propagation.events.EventSlopeFilter`.
     
@@ -496,14 +505,14 @@ class FilterType(java.lang.Enum['FilterType']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -516,9 +525,8 @@ class FilterType(java.lang.Enum['FilterType']):
         
             .. code-block: java
             
-            
-            for (FilterType c : FilterType.values())
-                System.out.println(c);
+            for (FilterType c : FilterType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -530,7 +538,7 @@ class FilterType(java.lang.Enum['FilterType']):
 
 class VisibilityTrigger(java.lang.Enum['VisibilityTrigger']):
     """
-    public enum VisibilityTrigger extends Enum<:class:`~org.orekit.propagation.events.VisibilityTrigger`>
+    public enum VisibilityTrigger extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.propagation.events.VisibilityTrigger`>
     
         Enumerate for triggering visibility of spherical bodies.
     
@@ -570,14 +578,14 @@ class VisibilityTrigger(java.lang.Enum['VisibilityTrigger']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -590,9 +598,8 @@ class VisibilityTrigger(java.lang.Enum['VisibilityTrigger']):
         
             .. code-block: java
             
-            
-            for (VisibilityTrigger c : VisibilityTrigger.values())
-                System.out.println(c);
+            for (VisibilityTrigger c : VisibilityTrigger.values())
+                System.out.println(c);
             
         
             Returns:
@@ -605,7 +612,7 @@ class VisibilityTrigger(java.lang.Enum['VisibilityTrigger']):
 _AbstractDetector__T = typing.TypeVar('_AbstractDetector__T', bound='AbstractDetector')  # <T>
 class AbstractDetector(EventDetector, typing.Generic[_AbstractDetector__T]):
     """
-    public abstract class AbstractDetector<T extends AbstractDetector<T>> extends Object implements :class:`~org.orekit.propagation.events.EventDetector`
+    public abstract class AbstractDetector<T extends AbstractDetector<T>> extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.EventDetector`
     
         Common parts shared by several orbital events finders.
     
@@ -650,8 +657,8 @@ class AbstractDetector(EventDetector, typing.Generic[_AbstractDetector__T]):
             Handle the event.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.eventOccurred`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.eventOccurred` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): SpaceCraft state to be used in the evaluation
@@ -669,8 +676,8 @@ class AbstractDetector(EventDetector, typing.Generic[_AbstractDetector__T]):
             the integrator will need to find its roots to locate the events.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -687,8 +694,8 @@ class AbstractDetector(EventDetector, typing.Generic[_AbstractDetector__T]):
             Get maximal time interval between switching function checks.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.getMaxCheckInterval`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.getMaxCheckInterval` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Returns:
                 maximal time interval (s) between switching function checks
@@ -701,8 +708,8 @@ class AbstractDetector(EventDetector, typing.Generic[_AbstractDetector__T]):
             Get maximal number of iterations in the event time search.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.getMaxIterationCount`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.getMaxIterationCount` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Returns:
                 maximal number of iterations in the event time search
@@ -715,8 +722,8 @@ class AbstractDetector(EventDetector, typing.Generic[_AbstractDetector__T]):
             Get the convergence threshold in the event time search.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.getThreshold`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.getThreshold` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Returns:
                 convergence threshold (s)
@@ -737,8 +744,8 @@ class AbstractDetector(EventDetector, typing.Generic[_AbstractDetector__T]):
             method it should call :code:`super.init(s0, t)`.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.init` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Parameters:
                 s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
@@ -765,16 +772,18 @@ class AbstractDetector(EventDetector, typing.Generic[_AbstractDetector__T]):
             Reset the state prior to continue propagation.
         
             This method is called after the step handler has returned and before the next step is started, but only when
-            :meth:`~org.orekit.propagation.events.EventDetector.eventOccurred` has itself returned the null indicator. It allows the
-            user to reset the state for the next step, without perturbing the step handler of the finishing step. If the
-            :meth:`~org.orekit.propagation.events.EventDetector.eventOccurred` never returns the null indicator, this function will
-            never be called, and it is safe to simply return null.
+            :meth:`~org.orekit.propagation.events.EventDetector.eventOccurred` has itself returned the
+            :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+            indicator. It allows the user to reset the state for the next step, without perturbing the step handler of the finishing
+            step. If the :meth:`~org.orekit.propagation.events.EventDetector.eventOccurred` never returns the
+            :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+            indicator, this function will never be called, and it is safe to simply return null.
         
             The default implementation simply returns its argument.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.resetState`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.resetState` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Parameters:
                 oldState (:class:`~org.orekit.propagation.SpacecraftState`): old state
@@ -843,7 +852,7 @@ class AbstractDetector(EventDetector, typing.Generic[_AbstractDetector__T]):
 
 class AdapterDetector(EventDetector):
     """
-    public class AdapterDetector extends Object implements :class:`~org.orekit.propagation.events.EventDetector`
+    public class AdapterDetector extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.EventDetector`
     
         Base class for adapting an existing detector.
     
@@ -860,8 +869,8 @@ class AdapterDetector(EventDetector):
             Handle the event.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.eventOccurred`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.eventOccurred` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): SpaceCraft state to be used in the evaluation
@@ -879,8 +888,8 @@ class AdapterDetector(EventDetector):
             the integrator will need to find its roots to locate the events.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -906,8 +915,8 @@ class AdapterDetector(EventDetector):
             Get maximal time interval between switching function checks.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.getMaxCheckInterval`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.getMaxCheckInterval` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Returns:
                 maximal time interval (s) between switching function checks
@@ -920,8 +929,8 @@ class AdapterDetector(EventDetector):
             Get maximal number of iterations in the event time search.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.getMaxIterationCount`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.getMaxIterationCount` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Returns:
                 maximal number of iterations in the event time search
@@ -934,8 +943,8 @@ class AdapterDetector(EventDetector):
             Get the convergence threshold in the event time search.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.getThreshold`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.getThreshold` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Returns:
                 convergence threshold (s)
@@ -953,8 +962,8 @@ class AdapterDetector(EventDetector):
             The default implementation does nothing
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.init` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Parameters:
                 s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
@@ -968,16 +977,18 @@ class AdapterDetector(EventDetector):
             Reset the state prior to continue propagation.
         
             This method is called after the step handler has returned and before the next step is started, but only when
-            :meth:`~org.orekit.propagation.events.EventDetector.eventOccurred` has itself returned the null indicator. It allows the
-            user to reset the state for the next step, without perturbing the step handler of the finishing step. If the
-            :meth:`~org.orekit.propagation.events.EventDetector.eventOccurred` never returns the null indicator, this function will
-            never be called, and it is safe to simply return null.
+            :meth:`~org.orekit.propagation.events.EventDetector.eventOccurred` has itself returned the
+            :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+            indicator. It allows the user to reset the state for the next step, without perturbing the step handler of the finishing
+            step. If the :meth:`~org.orekit.propagation.events.EventDetector.eventOccurred` never returns the
+            :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+            indicator, this function will never be called, and it is safe to simply return null.
         
             The default implementation simply returns its argument.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.resetState`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.resetState` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Parameters:
                 oldState (:class:`~org.orekit.propagation.SpacecraftState`): old state
@@ -993,7 +1004,7 @@ _FieldAbstractDetector__D = typing.TypeVar('_FieldAbstractDetector__D', bound=Fi
 _FieldAbstractDetector__T = typing.TypeVar('_FieldAbstractDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAbstractDetector(FieldEventDetector[_FieldAbstractDetector__T], typing.Generic[_FieldAbstractDetector__D, _FieldAbstractDetector__T]):
     """
-    public abstract class FieldAbstractDetector<D extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.events.FieldEventDetector`<T>
+    public abstract class FieldAbstractDetector<D extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.FieldEventDetector`<T>
     
         Common parts shared by several orbital events finders.
     
@@ -1041,8 +1052,8 @@ class FieldAbstractDetector(FieldEventDetector[_FieldAbstractDetector__T], typin
             Get maximal time interval between switching function checks.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.FieldEventDetector.getMaxCheckInterval`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.FieldEventDetector`
+                :meth:`~org.orekit.propagation.events.FieldEventDetector.getMaxCheckInterval` in
+                interface :class:`~org.orekit.propagation.events.FieldEventDetector`
         
             Returns:
                 maximal time interval (s) between switching function checks
@@ -1055,8 +1066,8 @@ class FieldAbstractDetector(FieldEventDetector[_FieldAbstractDetector__T], typin
             Get maximal number of iterations in the event time search.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.FieldEventDetector.getMaxIterationCount`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.FieldEventDetector`
+                :meth:`~org.orekit.propagation.events.FieldEventDetector.getMaxIterationCount` in
+                interface :class:`~org.orekit.propagation.events.FieldEventDetector`
         
             Returns:
                 maximal number of iterations in the event time search
@@ -1069,8 +1080,8 @@ class FieldAbstractDetector(FieldEventDetector[_FieldAbstractDetector__T], typin
             Get the convergence threshold in the event time search.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.FieldEventDetector.getThreshold`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.FieldEventDetector`
+                :meth:`~org.orekit.propagation.events.FieldEventDetector.getThreshold` in
+                interface :class:`~org.orekit.propagation.events.FieldEventDetector`
         
             Returns:
                 convergence threshold (s)
@@ -1152,7 +1163,7 @@ class FieldAbstractDetector(FieldEventDetector[_FieldAbstractDetector__T], typin
 _PythonEnablingPredicate__S = typing.TypeVar('_PythonEnablingPredicate__S', bound=EventDetector)  # <S>
 class PythonEnablingPredicate(EnablingPredicate[_PythonEnablingPredicate__S], typing.Generic[_PythonEnablingPredicate__S]):
     """
-    public class PythonEnablingPredicate<S extends :class:`~org.orekit.propagation.events.EventDetector`> extends Object implements :class:`~org.orekit.propagation.events.EnablingPredicate`<S>
+    public class PythonEnablingPredicate<S extends :class:`~org.orekit.propagation.events.EventDetector`> extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.EnablingPredicate`<S>
     """
     def __init__(self): ...
     def eventIsEnabled(self, spacecraftState: org.orekit.propagation.SpacecraftState, s3: _PythonEnablingPredicate__S, double: float) -> bool:
@@ -1160,8 +1171,8 @@ class PythonEnablingPredicate(EnablingPredicate[_PythonEnablingPredicate__S], ty
             Compute an event enabling function of state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EnablingPredicate.eventIsEnabled`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EnablingPredicate`
+                :meth:`~org.orekit.propagation.events.EnablingPredicate.eventIsEnabled` in
+                interface :class:`~org.orekit.propagation.events.EnablingPredicate`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): current state
@@ -1197,7 +1208,7 @@ class PythonEnablingPredicate(EnablingPredicate[_PythonEnablingPredicate__S], ty
 
 class PythonEventDetector(EventDetector):
     """
-    public class PythonEventDetector extends Object implements :class:`~org.orekit.propagation.events.EventDetector`
+    public class PythonEventDetector extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.EventDetector`
     
         This interface represents space-dynamics aware events detectors.
     
@@ -1219,8 +1230,8 @@ class PythonEventDetector(EventDetector):
             Handle the event.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.eventOccurred`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.eventOccurred` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): SpaceCraft state to be used in the evaluation
@@ -1239,8 +1250,8 @@ class PythonEventDetector(EventDetector):
             the integrator will need to find its roots to locate the events.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -1256,8 +1267,8 @@ class PythonEventDetector(EventDetector):
             Get maximal time interval between switching function checks.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.getMaxCheckInterval`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.getMaxCheckInterval` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Returns:
                 maximal time interval (s) between switching function checks
@@ -1270,8 +1281,8 @@ class PythonEventDetector(EventDetector):
             Get maximal number of iterations in the event time search.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.getMaxIterationCount`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.getMaxIterationCount` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Returns:
                 maximal number of iterations in the event time search
@@ -1284,8 +1295,8 @@ class PythonEventDetector(EventDetector):
             Get the convergence threshold in the event time search.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.getThreshold`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.getThreshold` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Returns:
                 convergence threshold (s)
@@ -1303,8 +1314,8 @@ class PythonEventDetector(EventDetector):
             The default implementation does nothing
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.init` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Parameters:
                 s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
@@ -1337,16 +1348,18 @@ class PythonEventDetector(EventDetector):
             Reset the state prior to continue propagation.
         
             This method is called after the step handler has returned and before the next step is started, but only when
-            :meth:`~org.orekit.propagation.events.EventDetector.eventOccurred` has itself returned the null indicator. It allows the
-            user to reset the state for the next step, without perturbing the step handler of the finishing step. If the
-            :meth:`~org.orekit.propagation.events.EventDetector.eventOccurred` never returns the null indicator, this function will
-            never be called, and it is safe to simply return null.
+            :meth:`~org.orekit.propagation.events.EventDetector.eventOccurred` has itself returned the
+            :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+            indicator. It allows the user to reset the state for the next step, without perturbing the step handler of the finishing
+            step. If the :meth:`~org.orekit.propagation.events.EventDetector.eventOccurred` never returns the
+            :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+            indicator, this function will never be called, and it is safe to simply return null.
         
             The default implementation simply returns its argument.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.resetState`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.resetState` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Parameters:
                 oldState (:class:`~org.orekit.propagation.SpacecraftState`): old state
@@ -1361,7 +1374,7 @@ class PythonEventDetector(EventDetector):
 _PythonFieldEventDetector__T = typing.TypeVar('_PythonFieldEventDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldEventDetector(FieldEventDetector[_PythonFieldEventDetector__T], typing.Generic[_PythonFieldEventDetector__T]):
     """
-    public class PythonFieldEventDetector<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.events.FieldEventDetector`<T>
+    public class PythonFieldEventDetector<T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.FieldEventDetector`<T>
     """
     def __init__(self): ...
     def eventOccurred(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldEventDetector__T], boolean: bool) -> org.hipparchus.ode.events.Action: ...
@@ -1372,8 +1385,8 @@ class PythonFieldEventDetector(FieldEventDetector[_PythonFieldEventDetector__T],
             Get maximal time interval between switching function checks.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.FieldEventDetector.getMaxCheckInterval`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.FieldEventDetector`
+                :meth:`~org.orekit.propagation.events.FieldEventDetector.getMaxCheckInterval` in
+                interface :class:`~org.orekit.propagation.events.FieldEventDetector`
         
             Returns:
                 maximal time interval (s) between switching function checks
@@ -1386,8 +1399,8 @@ class PythonFieldEventDetector(FieldEventDetector[_PythonFieldEventDetector__T],
             Get maximal number of iterations in the event time search.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.FieldEventDetector.getMaxIterationCount`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.FieldEventDetector`
+                :meth:`~org.orekit.propagation.events.FieldEventDetector.getMaxIterationCount` in
+                interface :class:`~org.orekit.propagation.events.FieldEventDetector`
         
             Returns:
                 maximal number of iterations in the event time search
@@ -1400,8 +1413,8 @@ class PythonFieldEventDetector(FieldEventDetector[_PythonFieldEventDetector__T],
             Get the convergence threshold in the event time search.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.FieldEventDetector.getThreshold`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.FieldEventDetector`
+                :meth:`~org.orekit.propagation.events.FieldEventDetector.getThreshold` in
+                interface :class:`~org.orekit.propagation.events.FieldEventDetector`
         
             Returns:
                 convergence threshold (s)
@@ -1442,7 +1455,9 @@ class AlignmentDetector(AbstractDetector['AlignmentDetector']):
         Alignment means the conjunction, with some threshold angle, between the satellite position and the projection in the
         orbital plane of some body position.
     
-        The default handler behavior is to null propagation when alignment is reached. This can be changed by calling
+        The default handler behavior is to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation when alignment is reached. This can be changed by calling
         :meth:`~org.orekit.propagation.events.AbstractDetector.withHandler` after construction.
     
         Also see:
@@ -1460,12 +1475,12 @@ class AlignmentDetector(AbstractDetector['AlignmentDetector']):
             angle between the satellite position and the body position projection in the orbital plane.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -1505,8 +1520,12 @@ class AltitudeDetector(AbstractDetector['AltitudeDetector']):
     
         This class finds altitude events (i.e. satellite crossing a predefined altitude level above ground).
     
-        The default implementation behavior is to null propagation when ascending and to null propagation when descending. This
-        can be changed by calling :meth:`~org.orekit.propagation.events.AbstractDetector.withHandler` after construction.
+        The default implementation behavior is to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation when ascending and to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation when descending. This can be changed by calling
+        :meth:`~org.orekit.propagation.events.AbstractDetector.withHandler` after construction.
     
         Also see:
             :meth:`~org.orekit.propagation.Propagator.addEventDetector`
@@ -1523,12 +1542,12 @@ class AltitudeDetector(AbstractDetector['AltitudeDetector']):
             threshold altitude.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -1571,8 +1590,10 @@ class AngularSeparationDetector(AbstractDetector['AngularSeparationDetector']):
         :meth:`~org.orekit.bodies.CelestialBodies.getSun`, for computing interferences for the telemetry link. Another similar
         case is when the beacon is another spacecraft, for interferences computation.
     
-        The default handler behavior is to null propagation when spacecraft enters the proximity zone. This can be changed by
-        calling :meth:`~org.orekit.propagation.events.AbstractDetector.withHandler` after construction.
+        The default handler behavior is to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation when spacecraft enters the proximity zone. This can be changed by calling
+        :meth:`~org.orekit.propagation.events.AbstractDetector.withHandler` after construction.
     
         Since:
             8.0
@@ -1595,12 +1616,12 @@ class AngularSeparationDetector(AbstractDetector['AngularSeparationDetector']):
             :class:`~org.orekit.propagation.events.EnablingPredicate` is based on elevation.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -1652,8 +1673,10 @@ class AngularSeparationFromSatelliteDetector(AbstractDetector['AngularSeparation
         :class:`~org.orekit.frames.TopocentricFrame` and when the secondary is the
         :meth:`~org.orekit.bodies.CelestialBodies.getSun`, for computing optical reflections.
     
-        The default handler behavior is to null propagation when objects enter the proximity zone. This can be changed by
-        calling :meth:`~org.orekit.propagation.events.AbstractDetector.withHandler` after construction.
+        The default handler behavior is to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation when objects enter the proximity zone. This can be changed by calling
+        :meth:`~org.orekit.propagation.events.AbstractDetector.withHandler` after construction.
     
         Since:
             11.0
@@ -1676,12 +1699,12 @@ class AngularSeparationFromSatelliteDetector(AbstractDetector['AngularSeparation
             :class:`~org.orekit.propagation.events.EnablingPredicate` is based on eclipse conditions.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -1731,9 +1754,12 @@ class ApsideDetector(AbstractDetector['ApsideDetector']):
     
         This class finds apside crossing events (i.e. apogee or perigee crossing).
     
-        The default implementation behavior is to null propagation at apogee crossing and to null propagation at perigee
-        crossing. This can be changed by calling :meth:`~org.orekit.propagation.events.AbstractDetector.withHandler` after
-        construction.
+        The default implementation behavior is to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation at apogee crossing and to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation at perigee crossing. This can be changed by calling
+        :meth:`~org.orekit.propagation.events.AbstractDetector.withHandler` after construction.
     
         Beware that apside detection will fail for almost circular orbits. If for example an apside detector is used to trigger
         an :class:`~org.orekit.forces.maneuvers.ImpulseManeuver` and the maneuver change the orbit shape to circular, then the
@@ -1752,12 +1778,12 @@ class ApsideDetector(AbstractDetector['ApsideDetector']):
             position.velocity.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -1818,7 +1844,7 @@ class BooleanDetector(AbstractDetector['BooleanDetector']):
                 a new event detector that is the logical AND of the operands.
         
             Raises:
-                : if :code:`detectors` is empty.
+                :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.util.NoSuchElementException?is`: if :code:`detectors` is empty.
         
             Also see:
                 :class:`~org.orekit.propagation.events.BooleanDetector`,
@@ -1826,7 +1852,7 @@ class BooleanDetector(AbstractDetector['BooleanDetector']):
                 :meth:`~org.orekit.propagation.events.BooleanDetector.orCombine`,
                 :meth:`~org.orekit.propagation.events.BooleanDetector.notCombine`
         
-        public static :class:`~org.orekit.propagation.events.BooleanDetector` andCombine (Collection<? extends :class:`~org.orekit.propagation.events.EventDetector`> detectors)
+        public static :class:`~org.orekit.propagation.events.BooleanDetector` andCombine (:class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.util.Collection?is`<? extends :class:`~org.orekit.propagation.events.EventDetector`> detectors)
         
             Create a new event detector that is the logical AND of the given event detectors.
         
@@ -1838,13 +1864,13 @@ class BooleanDetector(AbstractDetector['BooleanDetector']):
             :class:`~org.orekit.propagation.events.handlers.ContinueOnEvent`.
         
             Parameters:
-                detectors (Collection<? extends :class:`~org.orekit.propagation.events.EventDetector`> detectors): the operands. Must contain at least one detector.
+                detectors (:class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.util.Collection?is`<? extends :class:`~org.orekit.propagation.events.EventDetector`> detectors): the operands. Must contain at least one detector.
         
             Returns:
                 a new event detector that is the logical AND of the operands.
         
             Raises:
-                : if :code:`detectors` is empty.
+                :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.util.NoSuchElementException?is`: if :code:`detectors` is empty.
         
             Also see:
                 :class:`~org.orekit.propagation.events.BooleanDetector`,
@@ -1865,12 +1891,12 @@ class BooleanDetector(AbstractDetector['BooleanDetector']):
             the integrator will need to find its roots to locate the events.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -1896,12 +1922,12 @@ class BooleanDetector(AbstractDetector['BooleanDetector']):
             method it should call :code:`super.init(s0, t)`.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.init` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Overrides:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.init`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.init` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
@@ -1956,7 +1982,7 @@ class BooleanDetector(AbstractDetector['BooleanDetector']):
                 a new event detector that is the logical OR of the operands.
         
             Raises:
-                : if :code:`detectors` is empty.
+                :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.util.NoSuchElementException?is`: if :code:`detectors` is empty.
         
             Also see:
                 :class:`~org.orekit.propagation.events.BooleanDetector`,
@@ -1964,7 +1990,7 @@ class BooleanDetector(AbstractDetector['BooleanDetector']):
                 :meth:`~org.orekit.propagation.events.BooleanDetector.andCombine`,
                 :meth:`~org.orekit.propagation.events.BooleanDetector.notCombine`
         
-        public static :class:`~org.orekit.propagation.events.BooleanDetector` orCombine (Collection<? extends :class:`~org.orekit.propagation.events.EventDetector`> detectors)
+        public static :class:`~org.orekit.propagation.events.BooleanDetector` orCombine (:class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.util.Collection?is`<? extends :class:`~org.orekit.propagation.events.EventDetector`> detectors)
         
             Create a new event detector that is the logical OR of the given event detectors.
         
@@ -1976,13 +2002,13 @@ class BooleanDetector(AbstractDetector['BooleanDetector']):
             :class:`~org.orekit.propagation.events.handlers.ContinueOnEvent`.
         
             Parameters:
-                detectors (Collection<? extends :class:`~org.orekit.propagation.events.EventDetector`> detectors): the operands. Must contain at least one detector.
+                detectors (:class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.util.Collection?is`<? extends :class:`~org.orekit.propagation.events.EventDetector`> detectors): the operands. Must contain at least one detector.
         
             Returns:
                 a new event detector that is the logical OR of the operands.
         
             Raises:
-                : if :code:`detectors` is empty.
+                :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.util.NoSuchElementException?is`: if :code:`detectors` is empty.
         
             Also see:
                 :class:`~org.orekit.propagation.events.BooleanDetector`,
@@ -2013,8 +2039,10 @@ class DateDetector(AbstractDetector['DateDetector'], org.orekit.time.TimeStamped
     
         The gap between the added dates must be more than the maxCheck.
     
-        The default implementation behavior is to null propagation at the first event date occurrence. This can be changed by
-        calling :meth:`~org.orekit.propagation.events.AbstractDetector.withHandler` after construction.
+        The default implementation behavior is to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation at the first event date occurrence. This can be changed by calling
+        :meth:`~org.orekit.propagation.events.AbstractDetector.withHandler` after construction.
     
         Also see:
             :meth:`~org.orekit.propagation.Propagator.addEventDetector`
@@ -2030,12 +2058,12 @@ class DateDetector(AbstractDetector['DateDetector'], org.orekit.time.TimeStamped
             date.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -2090,8 +2118,11 @@ class EclipseDetector(AbstractDetector['EclipseDetector']):
     
         If you want to have both, you'll need to set up two distinct detectors.
     
-        The default implementation behavior is to null propagation when entering the eclipse and to null propagation when
-        exiting the eclipse.
+        The default implementation behavior is to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation when entering the eclipse and to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation when exiting the eclipse.
     
     
         This can be changed by calling :meth:`~org.orekit.propagation.events.AbstractDetector.withHandler` after construction.
@@ -2106,12 +2137,12 @@ class EclipseDetector(AbstractDetector['EclipseDetector']):
             positive when exiting.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -2206,8 +2237,12 @@ class ElevationDetector(AbstractDetector['ElevationDetector']):
         Finder for satellite raising/setting events that allows for the setting of azimuth and/or elevation bounds or a ground
         azimuth/elevation mask input. Each calculation be configured to use atmospheric refraction as well.
     
-        The default implementation behavior is to null propagation at raising and to null propagation at setting. This can be
-        changed by calling :meth:`~org.orekit.propagation.events.AbstractDetector.withHandler` after construction.
+        The default implementation behavior is to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation at raising and to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation at setting. This can be changed by calling
+        :meth:`~org.orekit.propagation.events.AbstractDetector.withHandler` after construction.
     
         Since:
             6.1
@@ -2222,12 +2257,12 @@ class ElevationDetector(AbstractDetector['ElevationDetector']):
             azimuth if necessary) and the reference mask or minimum value.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -2380,12 +2415,12 @@ class ElevationExtremumDetector(AbstractDetector['ElevationExtremumDetector']):
             The value is the spacecraft elevation first time derivative.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -2458,12 +2493,12 @@ class EventEnablingPredicateFilter(AbstractDetector['EventEnablingPredicateFilte
             the integrator will need to find its roots to locate the events.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -2500,12 +2535,12 @@ class EventEnablingPredicateFilter(AbstractDetector['EventEnablingPredicateFilte
             method it should call :code:`super.init(s0, t)`.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.init` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Overrides:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.init`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.init` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
@@ -2540,12 +2575,12 @@ class EventShifter(AbstractDetector['EventShifter'[_EventShifter__T]], typing.Ge
             the integrator will need to find its roots to locate the events.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -2602,12 +2637,12 @@ class EventShifter(AbstractDetector['EventShifter'[_EventShifter__T]], typing.Ge
             method it should call :code:`super.init(s0, t)`.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.init` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Overrides:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.init`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.init` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
@@ -2656,12 +2691,12 @@ class EventSlopeFilter(AbstractDetector['EventSlopeFilter'[_EventSlopeFilter__T]
             the integrator will need to find its roots to locate the events.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -2698,12 +2733,12 @@ class EventSlopeFilter(AbstractDetector['EventSlopeFilter'[_EventSlopeFilter__T]
             method it should call :code:`super.init(s0, t)`.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.init` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Overrides:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.init`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.init` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
@@ -2721,9 +2756,13 @@ class ExtremumApproachDetector(AbstractDetector['ExtremumApproachDetector']):
     
         This class finds extremum approach events (i.e. closest or farthest approach).
     
-        The default implementation behavior is to null propagation at farthest approach and to null propagation at closest
-        approach. This can be changed by calling :meth:`~org.orekit.propagation.events.AbstractDetector.withHandler` after
-        construction (go to the end of the documentation to see an example).
+        The default implementation behavior is to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation at farthest approach and to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation at closest approach. This can be changed by calling
+        :meth:`~org.orekit.propagation.events.AbstractDetector.withHandler` after construction (go to the end of the
+        documentation to see an example).
     
         As this detector needs two objects (moving relative to each other), it embeds one
         :class:`~org.orekit.utils.PVCoordinatesProvider` for the secondary object and is registered as an event detector in the
@@ -2747,10 +2786,9 @@ class ExtremumApproachDetector(AbstractDetector['ExtremumApproachDetector']):
     
         .. code-block: java
         
-        
-         ExtremumApproachDetector extremumApproachDetector = new ExtremumApproachDetector(secondaryPVProvider);
-         EventDetector closeApproachDetector = new EventSlopeFilter<ExtremumApproachDetector>(extremumApproachDetector,FilterType.TRIGGER_ONLY_INCREASING_EVENTS);
-          
+         ExtremumApproachDetector extremumApproachDetector = new ExtremumApproachDetector(secondaryPVProvider);
+         EventDetector closeApproachDetector = new EventSlopeFilter<ExtremumApproachDetector>(extremumApproachDetector,FilterType.TRIGGER_ONLY_INCREASING_EVENTS);
+          
          
     
         Since:
@@ -2770,12 +2808,12 @@ class ExtremumApproachDetector(AbstractDetector['ExtremumApproachDetector']):
             it is getting closer to it.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -2790,14 +2828,18 @@ class ExtremumApproachDetector(AbstractDetector['ExtremumApproachDetector']):
 _FieldAltitudeDetector__T = typing.TypeVar('_FieldAltitudeDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAltitudeDetector(FieldAbstractDetector['FieldAltitudeDetector'[_FieldAltitudeDetector__T], _FieldAltitudeDetector__T], typing.Generic[_FieldAltitudeDetector__T]):
     """
-    public class FieldAltitudeDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldAltitudeDetector`<T>, T>
+    public class FieldAltitudeDetector<T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldAltitudeDetector`<T>, T>
     
         Finder for satellite altitude crossing events.
     
         This class finds altitude events (i.e. satellite crossing a predefined altitude level above ground).
     
-        The default implementation behavior is to null propagation when ascending and to null propagation when descending. This
-        can be changed by calling :meth:`~org.orekit.propagation.events.FieldAbstractDetector.withHandler` after construction.
+        The default implementation behavior is to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation when ascending and to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation when descending. This can be changed by calling
+        :meth:`~org.orekit.propagation.events.FieldAbstractDetector.withHandler` after construction.
     
         Since:
             9.0
@@ -2836,15 +2878,18 @@ class FieldAltitudeDetector(FieldAbstractDetector['FieldAltitudeDetector'[_Field
 _FieldApsideDetector__T = typing.TypeVar('_FieldApsideDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldApsideDetector(FieldAbstractDetector['FieldApsideDetector'[_FieldApsideDetector__T], _FieldApsideDetector__T], typing.Generic[_FieldApsideDetector__T]):
     """
-    public class FieldApsideDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldApsideDetector`<T>, T>
+    public class FieldApsideDetector<T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldApsideDetector`<T>, T>
     
         Finder for apside crossing events.
     
         This class finds apside crossing events (i.e. apogee or perigee crossing).
     
-        The default implementation behavior is to null propagation at apogee crossing and to null propagation at perigee
-        crossing. This can be changed by calling :meth:`~org.orekit.propagation.events.FieldAbstractDetector.withHandler` after
-        construction.
+        The default implementation behavior is to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation at apogee crossing and to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation at perigee crossing. This can be changed by calling
+        :meth:`~org.orekit.propagation.events.FieldAbstractDetector.withHandler` after construction.
     
         Beware that apside detection will fail for almost circular orbits. If for example an apside detector is used to trigger
         an :class:`~org.orekit.forces.maneuvers.ImpulseManeuver` and the maneuver change the orbit shape to circular, then the
@@ -2862,7 +2907,7 @@ class FieldApsideDetector(FieldAbstractDetector['FieldApsideDetector'[_FieldApsi
 _FieldDateDetector__T = typing.TypeVar('_FieldDateDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldDateDetector(FieldAbstractDetector['FieldDateDetector'[_FieldDateDetector__T], _FieldDateDetector__T], org.orekit.time.FieldTimeStamped[_FieldDateDetector__T], typing.Generic[_FieldDateDetector__T]):
     """
-    public class FieldDateDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldDateDetector`<T>, T> implements :class:`~org.orekit.time.FieldTimeStamped`<T>
+    public class FieldDateDetector<T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldDateDetector`<T>, T> implements :class:`~org.orekit.time.FieldTimeStamped`<T>
     
         Finder for date events.
     
@@ -2876,8 +2921,10 @@ class FieldDateDetector(FieldAbstractDetector['FieldDateDetector'[_FieldDateDete
     
         The gap between the added dates must be more than the maxCheck.
     
-        The default implementation behavior is to null propagation at the first event date occurrence. This can be changed by
-        calling :meth:`~org.orekit.propagation.events.FieldAbstractDetector.withHandler` after construction.
+        The default implementation behavior is to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation at the first event date occurrence. This can be changed by calling
+        :meth:`~org.orekit.propagation.events.FieldAbstractDetector.withHandler` after construction.
     
         Also see:
             :meth:`~org.orekit.propagation.FieldPropagator.addEventDetector`
@@ -2893,14 +2940,17 @@ class FieldDateDetector(FieldAbstractDetector['FieldDateDetector'[_FieldDateDete
 _FieldEclipseDetector__T = typing.TypeVar('_FieldEclipseDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldEclipseDetector(FieldAbstractDetector['FieldEclipseDetector'[_FieldEclipseDetector__T], _FieldEclipseDetector__T], typing.Generic[_FieldEclipseDetector__T]):
     """
-    public class FieldEclipseDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldEclipseDetector`<T>, T>
+    public class FieldEclipseDetector<T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldEclipseDetector`<T>, T>
     
         Finder for satellite eclipse related events.
     
         This class finds eclipse events, i.e. satellite within umbra (total eclipse) or penumbra (partial eclipse).
     
-        The default implementation behavior is to null propagation when entering the eclipse and to null propagation when
-        exiting the eclipse. This can be changed by calling
+        The default implementation behavior is to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation when entering the eclipse and to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation when exiting the eclipse. This can be changed by calling
         :meth:`~org.orekit.propagation.events.FieldAbstractDetector.withHandler` after construction.
     
         Also see:
@@ -2969,13 +3019,17 @@ class FieldEclipseDetector(FieldAbstractDetector['FieldEclipseDetector'[_FieldEc
 _FieldElevationDetector__T = typing.TypeVar('_FieldElevationDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldElevationDetector(FieldAbstractDetector['FieldElevationDetector'[_FieldElevationDetector__T], _FieldElevationDetector__T], typing.Generic[_FieldElevationDetector__T]):
     """
-    public class FieldElevationDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldElevationDetector`<T>, T>
+    public class FieldElevationDetector<T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldElevationDetector`<T>, T>
     
         Finder for satellite raising/setting events that allows for the setting of azimuth and/or elevation bounds or a ground
         azimuth/elevation mask input. Each calculation be configured to use atmospheric refraction as well.
     
-        The default implementation behavior is to null propagation at raising and to null propagation at setting. This can be
-        changed by calling :meth:`~org.orekit.propagation.events.FieldAbstractDetector.withHandler` after construction.
+        The default implementation behavior is to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation at raising and to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation at setting. This can be changed by calling
+        :meth:`~org.orekit.propagation.events.FieldAbstractDetector.withHandler` after construction.
     """
     @typing.overload
     def __init__(self, t: _FieldElevationDetector__T, t2: _FieldElevationDetector__T, topocentricFrame: org.orekit.frames.TopocentricFrame): ...
@@ -3040,7 +3094,7 @@ class FieldElevationDetector(FieldAbstractDetector['FieldElevationDetector'[_Fie
 _FieldFunctionalDetector__T = typing.TypeVar('_FieldFunctionalDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldFunctionalDetector(FieldAbstractDetector['FieldFunctionalDetector'[_FieldFunctionalDetector__T], _FieldFunctionalDetector__T], typing.Generic[_FieldFunctionalDetector__T]):
     """
-    public class FieldFunctionalDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldFunctionalDetector`<T>, T>
+    public class FieldFunctionalDetector<T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldFunctionalDetector`<T>, T>
     
         A detector that implements the :meth:`~org.orekit.propagation.events.FieldFunctionalDetector.g` function using a lambda
         that can be set using :meth:`~org.orekit.propagation.events.FieldFunctionalDetector.withFunction`.
@@ -3049,10 +3103,9 @@ class FieldFunctionalDetector(FieldAbstractDetector['FieldFunctionalDetector'[_F
     
         .. code-block: java
         
-        
-         FieldFunctionalDetector<T> d = new FieldFunctionalDetector<>(field)
-             .withGFunction((s) -> s.getDate().durationFrom(triggerDate))
-             .withMaxCheck(field.getZero().add(1e10));
+         FieldFunctionalDetector<T> d = new FieldFunctionalDetector<>(field)
+             .withGFunction((s) -> s.getDate().durationFrom(triggerDate))
+             .withMaxCheck(field.getZero().add(1e10));
          
     
         Since:
@@ -3066,7 +3119,7 @@ class FieldFunctionalDetector(FieldAbstractDetector['FieldFunctionalDetector'[_F
 _FieldLatitudeCrossingDetector__T = typing.TypeVar('_FieldLatitudeCrossingDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldLatitudeCrossingDetector(FieldAbstractDetector['FieldLatitudeCrossingDetector'[_FieldLatitudeCrossingDetector__T], _FieldLatitudeCrossingDetector__T], typing.Generic[_FieldLatitudeCrossingDetector__T]):
     """
-    public class FieldLatitudeCrossingDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldLatitudeCrossingDetector`<T>, T>
+    public class FieldLatitudeCrossingDetector<T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldLatitudeCrossingDetector`<T>, T>
     
         Detector for geographic latitude crossing.
     
@@ -3104,14 +3157,17 @@ class FieldLatitudeCrossingDetector(FieldAbstractDetector['FieldLatitudeCrossing
 _FieldNodeDetector__T = typing.TypeVar('_FieldNodeDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldNodeDetector(FieldAbstractDetector['FieldNodeDetector'[_FieldNodeDetector__T], _FieldNodeDetector__T], typing.Generic[_FieldNodeDetector__T]):
     """
-    public class FieldNodeDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldNodeDetector`<T>, T>
+    public class FieldNodeDetector<T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldNodeDetector`<T>, T>
     
         Finder for node crossing events.
     
         This class finds equator crossing events (i.e. ascending or descending node crossing).
     
-        The default implementation behavior is to null propagation at descending node crossing and to null propagation at
-        ascending node crossing. This can be changed by calling
+        The default implementation behavior is to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation at descending node crossing and to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation at ascending node crossing. This can be changed by calling
         :meth:`~org.orekit.propagation.events.FieldAbstractDetector.withHandler` after construction.
     
         Beware that node detection will fail for almost equatorial orbits. If for example a node detector is used to trigger an
@@ -3150,8 +3206,12 @@ class FieldOfViewDetector(AbstractDetector['FieldOfViewDetector']):
         :meth:`~org.orekit.propagation.events.BooleanDetector.andCombine` to calculate station visibility opportunities within
         the satellite's field of view.
     
-        The default implementation behavior is to null propagation at FOV entry and to null propagation at FOV exit. This can be
-        changed by calling :meth:`~org.orekit.propagation.events.AbstractDetector.withHandler` after construction.
+        The default implementation behavior is to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation at FOV entry and to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation at FOV exit. This can be changed by calling
+        :meth:`~org.orekit.propagation.events.AbstractDetector.withHandler` after construction.
     
         Since:
             7.1
@@ -3180,12 +3240,12 @@ class FieldOfViewDetector(AbstractDetector['FieldOfViewDetector']):
             target leaves the Field Of View, an increasing event is generated.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -3223,7 +3283,7 @@ class FieldOfViewDetector(AbstractDetector['FieldOfViewDetector']):
 _FieldParameterDrivenDateIntervalDetector__T = typing.TypeVar('_FieldParameterDrivenDateIntervalDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldParameterDrivenDateIntervalDetector(FieldAbstractDetector['FieldParameterDrivenDateIntervalDetector'[_FieldParameterDrivenDateIntervalDetector__T], _FieldParameterDrivenDateIntervalDetector__T], typing.Generic[_FieldParameterDrivenDateIntervalDetector__T]):
     """
-    public class FieldParameterDrivenDateIntervalDetector<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldParameterDrivenDateIntervalDetector`<T>, T>
+    public class FieldParameterDrivenDateIntervalDetector<T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldParameterDrivenDateIntervalDetector`<T>, T>
     
         Detector for date intervals that may be offset thanks to parameter drivers.
     
@@ -3243,7 +3303,7 @@ class FieldParameterDrivenDateIntervalDetector(FieldAbstractDetector['FieldParam
     """
     START_SUFFIX: typing.ClassVar[str] = ...
     """
-    public static final String START_SUFFIX
+    public static final :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` START_SUFFIX
     
         Default suffix for start driver.
     
@@ -3254,7 +3314,7 @@ class FieldParameterDrivenDateIntervalDetector(FieldAbstractDetector['FieldParam
     """
     STOP_SUFFIX: typing.ClassVar[str] = ...
     """
-    public static final String STOP_SUFFIX
+    public static final :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` STOP_SUFFIX
     
         Default suffix for stop driver.
     
@@ -3265,7 +3325,7 @@ class FieldParameterDrivenDateIntervalDetector(FieldAbstractDetector['FieldParam
     """
     MEDIAN_SUFFIX: typing.ClassVar[str] = ...
     """
-    public static final String MEDIAN_SUFFIX
+    public static final :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEDIAN_SUFFIX
     
         Default suffix for median driver.
     
@@ -3276,7 +3336,7 @@ class FieldParameterDrivenDateIntervalDetector(FieldAbstractDetector['FieldParam
     """
     DURATION_SUFFIX: typing.ClassVar[str] = ...
     """
-    public static final String DURATION_SUFFIX
+    public static final :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DURATION_SUFFIX
     
         Default suffix for duration driver.
     
@@ -3365,8 +3425,12 @@ class FootprintOverlapDetector(AbstractDetector['FootprintOverlapDetector']):
     
         This detector is typically used for ground observation missions with agile satellites than can look away from nadir.
     
-        The default implementation behavior is to null propagation at FOV entry and to null propagation at FOV exit. This can be
-        changed by calling :meth:`~org.orekit.propagation.events.AbstractDetector.withHandler` after construction.
+        The default implementation behavior is to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation at FOV entry and to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation at FOV exit. This can be changed by calling
+        :meth:`~org.orekit.propagation.events.AbstractDetector.withHandler` after construction.
     
         Since:
             7.1
@@ -3392,12 +3456,12 @@ class FootprintOverlapDetector(AbstractDetector['FootprintOverlapDetector']):
             region leaves the Field Of View, an increasing event is generated.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -3455,10 +3519,9 @@ class FunctionalDetector(AbstractDetector['FunctionalDetector']):
     
         .. code-block: java
         
-        
-         FunctionalDetector d = new FunctionalDetector()
-             .withGFunction((s) -> s.getDate().durationFrom(triggerDate))
-             .withMaxCheck(1e10);
+         FunctionalDetector d = new FunctionalDetector()
+             .withGFunction((s) -> s.getDate().durationFrom(triggerDate))
+             .withMaxCheck(1e10);
          
     
         Since:
@@ -3472,12 +3535,12 @@ class FunctionalDetector(AbstractDetector['FunctionalDetector']):
             the integrator will need to find its roots to locate the events.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -3521,12 +3584,12 @@ class GeographicZoneDetector(AbstractDetector['GeographicZoneDetector']):
             and negative if it is inside.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -3600,21 +3663,21 @@ class GroundAtNightDetector(AbstractDetector['GroundAtNightDetector']):
     """
     public static final double CIVIL_DAWN_DUSK_ELEVATION
     
-        Sun elevation at civil dawn/dusk (6Â° below horizon).
+        Sun elevation at civil dawn/dusk (6° below horizon).
     
     """
     NAUTICAL_DAWN_DUSK_ELEVATION: typing.ClassVar[float] = ...
     """
     public static final double NAUTICAL_DAWN_DUSK_ELEVATION
     
-        Sun elevation at nautical dawn/dusk (12Â° below horizon).
+        Sun elevation at nautical dawn/dusk (12° below horizon).
     
     """
     ASTRONOMICAL_DAWN_DUSK_ELEVATION: typing.ClassVar[float] = ...
     """
     public static final double ASTRONOMICAL_DAWN_DUSK_ELEVATION
     
-        Sun elevation at astronomical dawn/dusk (18Â° below horizon).
+        Sun elevation at astronomical dawn/dusk (18° below horizon).
     
     """
     def __init__(self, topocentricFrame: org.orekit.frames.TopocentricFrame, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, double: float, atmosphericRefractionModel: org.orekit.models.AtmosphericRefractionModel): ...
@@ -3629,12 +3692,12 @@ class GroundAtNightDetector(AbstractDetector['GroundAtNightDetector']):
             This function only depends on date, not on the actual position of the spacecraft.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -3656,8 +3719,12 @@ class GroundFieldOfViewDetector(AbstractDetector['GroundFieldOfViewDetector']):
         If you only want to compute access times then you should probably use
         :class:`~org.orekit.propagation.events.ElevationDetector`.
     
-        The default implementation behavior is to null propagation at FOV entry and to null propagation at FOV exit. This can be
-        changed by calling :meth:`~org.orekit.propagation.events.AbstractDetector.withHandler` after construction.
+        The default implementation behavior is to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation at FOV entry and to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation at FOV exit. This can be changed by calling
+        :meth:`~org.orekit.propagation.events.AbstractDetector.withHandler` after construction.
     
         Since:
             7.1
@@ -3680,12 +3747,12 @@ class GroundFieldOfViewDetector(AbstractDetector['GroundFieldOfViewDetector']):
             the satellite leaves the Field Of View, an increasing event is generated.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -3735,12 +3802,12 @@ class HaloXZPlaneCrossingDetector(AbstractDetector['HaloXZPlaneCrossingDetector'
             Compute the value of the detection function.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -3795,12 +3862,12 @@ class InterSatDirectViewDetector(AbstractDetector['InterSatDirectViewDetector'])
             central body limb is in between and blocks the direct view.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -3855,12 +3922,12 @@ class LatitudeCrossingDetector(AbstractDetector['LatitudeCrossingDetector']):
             northward and negative if it is southward with respect to the fixed latitude.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -3914,12 +3981,12 @@ class LatitudeExtremumDetector(AbstractDetector['LatitudeExtremumDetector']):
             The value is the spacecraft latitude time derivative.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -3968,12 +4035,12 @@ class LongitudeCrossingDetector(AbstractDetector['LongitudeCrossingDetector']):
             at the :code:`increasing` flag.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -4027,12 +4094,12 @@ class LongitudeExtremumDetector(AbstractDetector['LongitudeExtremumDetector']):
             The value is the spacecraft longitude time derivative.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -4080,12 +4147,12 @@ class MagneticFieldDetector(AbstractDetector['MagneticFieldDetector']):
             the zero value once per orbit, in increasing and decreasing directions on alternate orbits..
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -4109,12 +4176,12 @@ class MagneticFieldDetector(AbstractDetector['MagneticFieldDetector']):
             method it should call :code:`super.init(s0, t)`.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.init` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Overrides:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.init`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.init` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
@@ -4139,12 +4206,12 @@ class NegateDetector(AbstractDetector['NegateDetector']):
             the integrator will need to find its roots to locate the events.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -4182,12 +4249,12 @@ class NegateDetector(AbstractDetector['NegateDetector']):
             method it should call :code:`super.init(s0, t)`.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.init` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Overrides:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.init`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.init` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
@@ -4205,8 +4272,11 @@ class NodeDetector(AbstractDetector['NodeDetector']):
     
         This class finds equator crossing events (i.e. ascending or descending node crossing).
     
-        The default implementation behavior is to null propagation at descending node crossing and to null propagation at
-        ascending node crossing. This can be changed by calling
+        The default implementation behavior is to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation at descending node crossing and to
+        :meth:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`
+        propagation at ascending node crossing. This can be changed by calling
         :meth:`~org.orekit.propagation.events.AbstractDetector.withHandler` after construction.
     
         Beware that node detection will fail for almost equatorial orbits. If for example a node detector is used to trigger an
@@ -4228,12 +4298,12 @@ class NodeDetector(AbstractDetector['NodeDetector']):
             Compute the value of the switching function. This function computes the Z position in the defined frame.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -4277,7 +4347,7 @@ class ParameterDrivenDateIntervalDetector(AbstractDetector['ParameterDrivenDateI
     """
     START_SUFFIX: typing.ClassVar[str] = ...
     """
-    public static final String START_SUFFIX
+    public static final :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` START_SUFFIX
     
         Default suffix for start driver.
     
@@ -4288,7 +4358,7 @@ class ParameterDrivenDateIntervalDetector(AbstractDetector['ParameterDrivenDateI
     """
     STOP_SUFFIX: typing.ClassVar[str] = ...
     """
-    public static final String STOP_SUFFIX
+    public static final :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` STOP_SUFFIX
     
         Default suffix for stop driver.
     
@@ -4299,7 +4369,7 @@ class ParameterDrivenDateIntervalDetector(AbstractDetector['ParameterDrivenDateI
     """
     MEDIAN_SUFFIX: typing.ClassVar[str] = ...
     """
-    public static final String MEDIAN_SUFFIX
+    public static final :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEDIAN_SUFFIX
     
         Default suffix for median driver.
     
@@ -4310,7 +4380,7 @@ class ParameterDrivenDateIntervalDetector(AbstractDetector['ParameterDrivenDateI
     """
     DURATION_SUFFIX: typing.ClassVar[str] = ...
     """
-    public static final String DURATION_SUFFIX
+    public static final :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DURATION_SUFFIX
     
         Default suffix for duration driver.
     
@@ -4328,16 +4398,16 @@ class ParameterDrivenDateIntervalDetector(AbstractDetector['ParameterDrivenDateI
             Compute the value of the switching function.
         
             The function is positive for dates within the interval defined by applying the parameter drivers shifts to reference
-            dates, and negative for dates outside of this interval. Note that if ÃŽâ€�t_start - ÃŽâ€�t_stop is less than
+            dates, and negative for dates outside of this interval. Note that if Δt_start - Δt_stop is less than
             ref_stop.durationFrom(ref_start), then the interval degenerates to empty and the function never reaches positive values.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -4439,12 +4509,12 @@ class PositionAngleDetector(AbstractDetector['PositionAngleDetector']):
             the zero value once per orbit, in increasing and decreasing directions on alternate orbits..
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -4498,12 +4568,12 @@ class PositionAngleDetector(AbstractDetector['PositionAngleDetector']):
             method it should call :code:`super.init(s0, t)`.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.init` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Overrides:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.init`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.init` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
@@ -4532,12 +4602,12 @@ class PythonAbstractDetector(AbstractDetector[_PythonAbstractDetector__T], typin
             the integrator will need to find its roots to locate the events.
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.g`Â in
-                interfaceÂ :class:`~org.orekit.propagation.events.EventDetector`
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Specified by:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.g`Â in
-                classÂ :class:`~org.orekit.propagation.events.AbstractDetector`
+                :meth:`~org.orekit.propagation.events.AbstractDetector.g` in
+                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -4572,7 +4642,7 @@ _PythonFieldAbstractDetector__D = typing.TypeVar('_PythonFieldAbstractDetector__
 _PythonFieldAbstractDetector__T = typing.TypeVar('_PythonFieldAbstractDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldAbstractDetector(FieldAbstractDetector[_PythonFieldAbstractDetector__D, _PythonFieldAbstractDetector__T], typing.Generic[_PythonFieldAbstractDetector__D, _PythonFieldAbstractDetector__T]):
     """
-    public class PythonFieldAbstractDetector<D extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<D, T>
+    public class PythonFieldAbstractDetector<D extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<D, T>
     """
     def __init__(self, t: _PythonFieldAbstractDetector__T, t2: _PythonFieldAbstractDetector__T, int: int, fieldEventHandler: org.orekit.propagation.events.handlers.FieldEventHandler[_PythonFieldAbstractDetector__D, _PythonFieldAbstractDetector__T]): ...
     def create(self, t: _PythonFieldAbstractDetector__T, t2: _PythonFieldAbstractDetector__T, int: int, fieldEventHandler: org.orekit.propagation.events.handlers.FieldEventHandler[_PythonFieldAbstractDetector__D, _PythonFieldAbstractDetector__T]) -> _PythonFieldAbstractDetector__D: ...

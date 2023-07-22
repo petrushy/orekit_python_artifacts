@@ -31,7 +31,7 @@ class Aem(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.secti
     """
     ROOT: typing.ClassVar[str] = ...
     """
-    public static final String ROOT
+    public static final :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ROOT
     
         Root element for XML files.
     
@@ -42,7 +42,7 @@ class Aem(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.secti
     """
     FORMAT_VERSION_KEY: typing.ClassVar[str] = ...
     """
-    public static final String FORMAT_VERSION_KEY
+    public static final :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` FORMAT_VERSION_KEY
     
         Key for format version.
     
@@ -260,7 +260,7 @@ class AemMetadata(org.orekit.files.ccsds.ndm.adm.AdmMetadata):
             Set the rotation order for Euler angles.
         
             Parameters:
-                eulerRotSeq (RotationOrder): order to be set
+                eulerRotSeq (:class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.RotationOrder?is`): order to be set
         
         
         """
@@ -280,7 +280,7 @@ class AemMetadata(org.orekit.files.ccsds.ndm.adm.AdmMetadata):
             Set the interpolation method to be used.
         
             Parameters:
-                interpolationMethod (String): the interpolation method to be set
+                interpolationMethod (:class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the interpolation method to be set
         
         
         """
@@ -355,8 +355,8 @@ class AemMetadata(org.orekit.files.ccsds.ndm.adm.AdmMetadata):
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.ndm.adm.AdmMetadata.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.ndm.adm.AdmMetadata`
+                :meth:`~org.orekit.files.ccsds.ndm.adm.AdmMetadata.validate` in
+                class :class:`~org.orekit.files.ccsds.ndm.adm.AdmMetadata`
         
             Parameters:
                 version (double): format version
@@ -367,7 +367,7 @@ class AemMetadata(org.orekit.files.ccsds.ndm.adm.AdmMetadata):
 
 class AemMetadataKey(java.lang.Enum['AemMetadataKey']):
     """
-    public enum AemMetadataKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.adm.aem.AemMetadataKey`>
+    public enum AemMetadataKey extends :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.adm.aem.AemMetadataKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemMetadata` entries.
     
@@ -416,14 +416,14 @@ class AemMetadataKey(java.lang.Enum['AemMetadataKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -436,9 +436,8 @@ class AemMetadataKey(java.lang.Enum['AemMetadataKey']):
         
             .. code-block: java
             
-            
-            for (AemMetadataKey c : AemMetadataKey.values())
-                System.out.println(c);
+            for (AemMetadataKey c : AemMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -468,8 +467,8 @@ class AemParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Aem, 'AemParser'], org.
             Build the file from parsed entries.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.build`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.build` in
+                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
         
             Returns:
                 parsed file
@@ -482,8 +481,8 @@ class AemParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Aem, 'AemParser'], org.
             Finalize data after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -496,8 +495,8 @@ class AemParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Aem, 'AemParser'], org.
             Finalize header after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -510,8 +509,8 @@ class AemParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Aem, 'AemParser'], org.
             Finalize metadata after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -524,8 +523,8 @@ class AemParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Aem, 'AemParser'], org.
             Get file header to fill.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 file header to fill
@@ -538,8 +537,8 @@ class AemParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Aem, 'AemParser'], org.
             Acknowledge data parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -552,8 +551,8 @@ class AemParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Aem, 'AemParser'], org.
             Acknowledge header parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -566,8 +565,8 @@ class AemParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Aem, 'AemParser'], org.
             Acknowledge metada parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -580,8 +579,8 @@ class AemParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Aem, 'AemParser'], org.
             Parse an attitude ephemeris file from a data source.
         
             Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFileParser.parse`Â in
-                interfaceÂ :class:`~org.orekit.files.general.AttitudeEphemerisFileParser`
+                :meth:`~org.orekit.files.general.AttitudeEphemerisFileParser.parse` in
+                interface :class:`~org.orekit.files.general.AttitudeEphemerisFileParser`
         
             Parameters:
                 source (:class:`~org.orekit.data.DataSource`): source providing the data to parse
@@ -597,8 +596,8 @@ class AemParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Aem, 'AemParser'], org.
             Prepare data for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -611,8 +610,8 @@ class AemParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Aem, 'AemParser'], org.
             Prepare header for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -625,8 +624,8 @@ class AemParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Aem, 'AemParser'], org.
             Prepare metadata for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -639,8 +638,8 @@ class AemParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Aem, 'AemParser'], org.
             Reset parser to initial state before parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.reset`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.reset` in
+                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
         
             Parameters:
                 fileFormat (:class:`~org.orekit.files.ccsds.utils.FileFormat`): format of the file ready to be parsed
@@ -651,7 +650,7 @@ class AemParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Aem, 'AemParser'], org.
 
 class AemSatelliteEphemeris(org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris[org.orekit.utils.TimeStampedAngularCoordinates, 'AemSegment']):
     """
-    public class AemSatelliteEphemeris extends Object implements :class:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris`<:class:`~org.orekit.utils.TimeStampedAngularCoordinates`, :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemSegment`>
+    public class AemSatelliteEphemeris extends :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris`<:class:`~org.orekit.utils.TimeStampedAngularCoordinates`, :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemSegment`>
     
         AEM ephemeris blocks for a single satellite.
     """
@@ -661,8 +660,8 @@ class AemSatelliteEphemeris(org.orekit.files.general.AttitudeEphemerisFile.Satel
             Get the satellite ID. The satellite ID is unique only within the same ephemeris file.
         
             Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris.getId`Â in
-                interfaceÂ :class:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris`
+                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris.getId` in
+                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris`
         
             Returns:
                 the satellite's ID, never :code:`null`.
@@ -676,8 +675,8 @@ class AemSatelliteEphemeris(org.orekit.files.general.AttitudeEphemerisFile.Satel
             Get the start date of the ephemeris.
         
             Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris.getStart`Â in
-                interfaceÂ :class:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris`
+                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris.getStart` in
+                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris`
         
             Returns:
                 ephemeris start date.
@@ -690,8 +689,8 @@ class AemSatelliteEphemeris(org.orekit.files.general.AttitudeEphemerisFile.Satel
             Get the end date of the ephemeris.
         
             Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris.getStop`Â in
-                interfaceÂ :class:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris`
+                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris.getStop` in
+                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris`
         
             Returns:
                 ephemeris end date.
@@ -716,8 +715,8 @@ class AemSegment(org.orekit.files.ccsds.section.Segment[AemMetadata, AemData], o
             Get the attitude provider for this attitude ephemeris segment.
         
             Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getAttitudeProvider`Â in
-                interfaceÂ :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
+                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getAttitudeProvider` in
+                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
         
             Returns:
                 the attitude provider for this attitude ephemeris segment.
@@ -730,8 +729,8 @@ class AemSegment(org.orekit.files.ccsds.section.Segment[AemMetadata, AemData], o
             Get which derivatives of angular data are available in this attitude ephemeris segment.
         
             Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getAvailableDerivatives`Â in
-                interfaceÂ :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
+                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getAvailableDerivatives` in
+                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
         
             Returns:
                 a value indicating if the file contains rotation and/or rotation rate and/or acceleration data.
@@ -744,8 +743,8 @@ class AemSegment(org.orekit.files.ccsds.section.Segment[AemMetadata, AemData], o
             Get the interpolation method to be used.
         
             Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getInterpolationMethod`Â in
-                interfaceÂ :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
+                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getInterpolationMethod` in
+                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
         
             Returns:
                 the interpolation method
@@ -758,8 +757,8 @@ class AemSegment(org.orekit.files.ccsds.section.Segment[AemMetadata, AemData], o
             Get the number of samples to use in interpolation.
         
             Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getInterpolationSamples`Â in
-                interfaceÂ :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
+                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getInterpolationSamples` in
+                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
         
             Returns:
                 the number of points to use for interpolation.
@@ -772,8 +771,8 @@ class AemSegment(org.orekit.files.ccsds.section.Segment[AemMetadata, AemData], o
             Get the reference frame from which attitude is defined.
         
             Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getReferenceFrame`Â in
-                interfaceÂ :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
+                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getReferenceFrame` in
+                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
         
             Returns:
                 the reference frame from which attitude is defined
@@ -786,8 +785,8 @@ class AemSegment(org.orekit.files.ccsds.section.Segment[AemMetadata, AemData], o
             Get the start date of this ephemeris segment.
         
             Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getStart`Â in
-                interfaceÂ :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
+                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getStart` in
+                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
         
             Returns:
                 ephemeris segment start date.
@@ -800,8 +799,8 @@ class AemSegment(org.orekit.files.ccsds.section.Segment[AemMetadata, AemData], o
             Get the end date of this ephemeris segment.
         
             Specified by:
-                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getStop`Â in
-                interfaceÂ :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
+                :meth:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment.getStop` in
+                interface :class:`~org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment`
         
             Returns:
                 ephemeris segment end date.
@@ -876,7 +875,7 @@ class AemWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[or
 
 class AttitudeEntryKey(java.lang.Enum['AttitudeEntryKey']):
     """
-    public enum AttitudeEntryKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.adm.aem.AttitudeEntryKey`>
+    public enum AttitudeEntryKey extends :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.adm.aem.AttitudeEntryKey`>
     
         Keys for :code:`attitude entries` in XML messages.
     
@@ -943,14 +942,14 @@ class AttitudeEntryKey(java.lang.Enum['AttitudeEntryKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -963,9 +962,8 @@ class AttitudeEntryKey(java.lang.Enum['AttitudeEntryKey']):
         
             .. code-block: java
             
-            
-            for (AttitudeEntryKey c : AttitudeEntryKey.values())
-                System.out.println(c);
+            for (AttitudeEntryKey c : AttitudeEntryKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -977,7 +975,7 @@ class AttitudeEntryKey(java.lang.Enum['AttitudeEntryKey']):
 
 class AttitudeWriter(org.orekit.files.general.AttitudeEphemerisFileWriter):
     """
-    public class AttitudeWriter extends Object implements :class:`~org.orekit.files.general.AttitudeEphemerisFileWriter`
+    public class AttitudeWriter extends :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.AttitudeEphemerisFileWriter`
     
         An :class:`~org.orekit.files.general.AttitudeEphemerisFileWriter` generating
         :class:`~org.orekit.files.ccsds.ndm.adm.aem.Aem` files.
@@ -997,7 +995,7 @@ class AttitudeWriter(org.orekit.files.general.AttitudeEphemerisFileWriter):
 
 class StreamingAemWriter(java.lang.AutoCloseable):
     """
-    public class StreamingAemWriter extends Object implements AutoCloseable
+    public class StreamingAemWriter extends :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.docs.oracle.com.javase.8.docs.api.java.lang.AutoCloseable?is`
     
         A writer for AEM files.
     
@@ -1007,31 +1005,31 @@ class StreamingAemWriter(java.lang.AutoCloseable):
     
         .. code-block: java
         
-        
-         Propagator propagator = ...; // pre-configured propagator
-         AEMWriter  aemWriter  = ...; // pre-configured writer
-           try (Generator out = ...;  // set-up output stream
-                StreamingAemWriter sw = new StreamingAemWriter(out, aemWriter)) { // set-up streaming writer
-        
-             // write segment 1
-             propagator.getMultiplexer().add(step, sw.newSegment());
-             propagator.propagate(startDate1, stopDate1);
-        
-             ...
-        
-             // write segment n
-             propagator.getMultiplexer().clear();
-             propagator.getMultiplexer().add(step, sw.newSegment());
-             propagator.propagate(startDateN, stopDateN);
-        
-           }
+         Propagator propagator = ...; // pre-configured propagator
+         AEMWriter  aemWriter  = ...; // pre-configured writer
+           try (Generator out = ...;  // set-up output stream
+                StreamingAemWriter sw = new StreamingAemWriter(out, aemWriter)) { // set-up streaming writer
+        
+             // write segment 1
+             propagator.getMultiplexer().add(step, sw.newSegment());
+             propagator.propagate(startDate1, stopDate1);
+        
+             ...
+        
+             // write segment n
+             propagator.getMultiplexer().clear();
+             propagator.getMultiplexer().add(step, sw.newSegment());
+             propagator.propagate(startDateN, stopDateN);
+        
+           }
          
     
         Since:
             10.2
     
         Also see:
-            CCSDS 504.0-B-1 Attitude Data Messages, :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemWriter`
+            :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.public.ccsds.org.Pubs.504x0b1c1.pdf`,
+            :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemWriter`
     """
     def __init__(self, generator: org.orekit.files.ccsds.utils.generation.Generator, aemWriter: AemWriter, header: org.orekit.files.ccsds.section.Header, aemMetadata: AemMetadata): ...
     def close(self) -> None: ...

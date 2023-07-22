@@ -10,7 +10,7 @@ import typing
 
 class IodGibbs:
     """
-    public class IodGibbs extends Object
+    public class IodGibbs extends :class:`~org.orekit.estimation.iod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Gibbs initial orbit determination. An orbit is determined from three position vectors. Reference: Vallado, D.,
         Fundamentals of Astrodynamics and Applications
@@ -26,11 +26,11 @@ class IodGibbs:
         
             Parameters:
                 frame (:class:`~org.orekit.frames.Frame`): measure frame
-                r1 (Vector3D): position 1 measured in frame
+                r1 (:class:`~org.orekit.estimation.iod.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): position 1 measured in frame
                 date1 (:class:`~org.orekit.time.AbsoluteDate`): date of measure 1
-                r2 (Vector3D): position 2 measured in frame
+                r2 (:class:`~org.orekit.estimation.iod.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): position 2 measured in frame
                 date2 (:class:`~org.orekit.time.AbsoluteDate`): date of measure 2
-                r3 (Vector3D): position 3 measured in frame
+                r3 (:class:`~org.orekit.estimation.iod.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): position 3 measured in frame
                 date3 (:class:`~org.orekit.time.AbsoluteDate`): date of measure 3
         
             Returns:
@@ -74,7 +74,7 @@ class IodGibbs:
 
 class IodGooding:
     """
-    public class IodGooding extends Object
+    public class IodGooding extends :class:`~org.orekit.estimation.iod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Gooding angles only initial orbit determination, assuming Keplerian motion. An orbit is determined from three angular
         observations. Reference: Gooding, R.H., A New Procedure for Orbit Determination Based on Three Lines of Sight (Angles
@@ -91,14 +91,14 @@ class IodGooding:
         
             Parameters:
                 frame (:class:`~org.orekit.frames.Frame`): inertial frame for observer coordinates and orbit estimate
-                O1 (Vector3D): Observer position 1
-                O2 (Vector3D): Observer position 2
-                O3 (Vector3D): Observer position 3
-                lineOfSight1 (Vector3D): line of sight 1
+                O1 (:class:`~org.orekit.estimation.iod.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): Observer position 1
+                O2 (:class:`~org.orekit.estimation.iod.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): Observer position 2
+                O3 (:class:`~org.orekit.estimation.iod.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): Observer position 3
+                lineOfSight1 (:class:`~org.orekit.estimation.iod.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight 1
                 dateObs1 (:class:`~org.orekit.time.AbsoluteDate`): date of observation 1
-                lineOfSight2 (Vector3D): line of sight 2
+                lineOfSight2 (:class:`~org.orekit.estimation.iod.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight 2
                 dateObs2 (:class:`~org.orekit.time.AbsoluteDate`): date of observation 2
-                lineOfSight3 (Vector3D): line of sight 3
+                lineOfSight3 (:class:`~org.orekit.estimation.iod.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight 3
                 dateObs3 (:class:`~org.orekit.time.AbsoluteDate`): date of observation 3
                 rho1init (double): initial guess of the range problem. range 1, in meters
                 rho3init (double): initial guess of the range problem. range 3, in meters
@@ -113,14 +113,14 @@ class IodGooding:
         
             Parameters:
                 frame (:class:`~org.orekit.frames.Frame`): inertial frame for observer coordinates and orbit estimate
-                O1 (Vector3D): Observer position 1
-                O2 (Vector3D): Observer position 2
-                O3 (Vector3D): Observer position 3
-                lineOfSight1 (Vector3D): line of sight 1
+                O1 (:class:`~org.orekit.estimation.iod.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): Observer position 1
+                O2 (:class:`~org.orekit.estimation.iod.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): Observer position 2
+                O3 (:class:`~org.orekit.estimation.iod.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): Observer position 3
+                lineOfSight1 (:class:`~org.orekit.estimation.iod.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight 1
                 dateObs1 (:class:`~org.orekit.time.AbsoluteDate`): date of observation 1
-                lineOfSight2 (Vector3D): line of sight 2
+                lineOfSight2 (:class:`~org.orekit.estimation.iod.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight 2
                 dateObs2 (:class:`~org.orekit.time.AbsoluteDate`): date of observation 1
-                lineOfSight3 (Vector3D): line of sight 3
+                lineOfSight3 (:class:`~org.orekit.estimation.iod.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight 3
                 dateObs3 (:class:`~org.orekit.time.AbsoluteDate`): date of observation 1
                 rho1init (double): initial guess of the range problem. range 1, in meters
                 rho3init (double): initial guess of the range problem. range 3, in meters
@@ -243,11 +243,11 @@ class IodGooding:
 
 class IodLambert:
     """
-    public class IodLambert extends Object
+    public class IodLambert extends :class:`~org.orekit.estimation.iod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Lambert initial orbit determination, assuming Keplerian motion. An orbit is determined from two position vectors.
         References: Battin, R.H., An Introduction to the Mathematics and Methods of Astrodynamics, AIAA Education, 1999.
-        Lancaster, E.R. and Blanchard, R.C., A Unified Form of LambertÃ¢â‚¬â„¢s Theorem, Goddard Space Flight Center, 1968.
+        Lancaster, E.R. and Blanchard, R.C., A Unified Form of Lambert’s Theorem, Goddard Space Flight Center, 1968.
     
         Since:
             8.0
@@ -258,10 +258,10 @@ class IodLambert:
         """
             Estimate a Keplerian orbit given two position vectors and a duration.
         
-            The logic for setting :code:`posigrade` and :code:`nRev` is that the sweep angle ÃŽâ€�Ã�â€¦ travelled by the object
-            between :code:`t1` and :code:`t2` is 2Ã�â‚¬ :code:`nRev +1` - ÃŽÂ± if :code:`posigrade` is false and 2Ã�â‚¬ :code:`nRev`
-            + ÃŽÂ± if :code:`posigrade` is true, where ÃŽÂ± is the separation angle between :code:`p1` and :code:`p2`, which is
-            always computed between 0 and Ã�â‚¬ (because in 3D without a normal reference, vector angles cannot go past Ã�â‚¬).
+            The logic for setting :code:`posigrade` and :code:`nRev` is that the sweep angle Δυ travelled by the object between
+            :code:`t1` and :code:`t2` is 2π :code:`nRev +1` - α if :code:`posigrade` is false and 2π :code:`nRev` + α if
+            :code:`posigrade` is true, where α is the separation angle between :code:`p1` and :code:`p2`, which is always computed
+            between 0 and π (because in 3D without a normal reference, vector angles cannot go past π).
         
             This implies that :code:`posigrade` should be set to true if :code:`p2` is located in the half orbit starting at
             :code:`p1` and it should be set to false if :code:`p2` is located in the half orbit ending at :code:`p1`, regardless of
@@ -275,9 +275,9 @@ class IodLambert:
                 frame (:class:`~org.orekit.frames.Frame`): frame
                 posigrade (boolean): flag indicating the direction of motion
                 nRev (int): number of revolutions
-                p1 (Vector3D): position vector 1
+                p1 (:class:`~org.orekit.estimation.iod.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): position vector 1
                 t1 (:class:`~org.orekit.time.AbsoluteDate`): date of observation 1
-                p2 (Vector3D): position vector 2
+                p2 (:class:`~org.orekit.estimation.iod.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): position vector 2
                 t2 (:class:`~org.orekit.time.AbsoluteDate`): date of observation 2
         
             Returns:
@@ -291,10 +291,10 @@ class IodLambert:
         """
             Estimate an initial orbit from two position measurements.
         
-            The logic for setting :code:`posigrade` and :code:`nRev` is that the sweep angle ÃŽâ€�Ã�â€¦ travelled by the object
-            between :code:`t1` and :code:`t2` is 2Ã�â‚¬ :code:`nRev +1` - ÃŽÂ± if :code:`posigrade` is false and 2Ã�â‚¬ :code:`nRev`
-            + ÃŽÂ± if :code:`posigrade` is true, where ÃŽÂ± is the separation angle between :code:`p1` and :code:`p2`, which is
-            always computed between 0 and Ã�â‚¬ (because in 3D without a normal reference, vector angles cannot go past Ã�â‚¬).
+            The logic for setting :code:`posigrade` and :code:`nRev` is that the sweep angle Δυ travelled by the object between
+            :code:`t1` and :code:`t2` is 2π :code:`nRev +1` - α if :code:`posigrade` is false and 2π :code:`nRev` + α if
+            :code:`posigrade` is true, where α is the separation angle between :code:`p1` and :code:`p2`, which is always computed
+            between 0 and π (because in 3D without a normal reference, vector angles cannot go past π).
         
             This implies that :code:`posigrade` should be set to true if :code:`p2` is located in the half orbit starting at
             :code:`p1` and it should be set to false if :code:`p2` is located in the half orbit ending at :code:`p1`, regardless of
@@ -322,7 +322,7 @@ class IodLambert:
 
 class IodLaplace:
     """
-    public class IodLaplace extends Object
+    public class IodLaplace extends :class:`~org.orekit.estimation.iod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Laplace angles-only initial orbit determination, assuming Keplerian motion. An orbit is determined from three angular
         observations from the same site. Reference: Bate, R., Mueller, D. D., & White, J. E. (1971). Fundamentals of
@@ -356,11 +356,11 @@ class IodLaplace:
                 frame (:class:`~org.orekit.frames.Frame`): inertial frame for observer coordinates and orbit estimate
                 obsPva (:class:`~org.orekit.utils.PVCoordinates`): Observer coordinates at time obsDate2
                 obsDate1 (:class:`~org.orekit.time.AbsoluteDate`): date of observation 1
-                los1 (Vector3D): line of sight unit vector 1
+                los1 (:class:`~org.orekit.estimation.iod.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight unit vector 1
                 obsDate2 (:class:`~org.orekit.time.AbsoluteDate`): date of observation 2
-                los2 (Vector3D): line of sight unit vector 2
+                los2 (:class:`~org.orekit.estimation.iod.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight unit vector 2
                 obsDate3 (:class:`~org.orekit.time.AbsoluteDate`): date of observation 3
-                los3 (Vector3D): line of sight unit vector 3
+                los3 (:class:`~org.orekit.estimation.iod.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight unit vector 3
         
             Returns:
                 estimate of the orbit at the central date obsDate2 or null if no estimate is possible with the given data

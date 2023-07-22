@@ -131,7 +131,7 @@ class AdditionalCovarianceMetadata(org.orekit.files.ccsds.section.CommentsContai
             Set the source (or origin) of the specific orbital data for this object.
         
             Parameters:
-                screeningDataSource (String): the screeningDataSource to set
+                screeningDataSource (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the screeningDataSource to set
         
         
         """
@@ -176,8 +176,8 @@ class AdditionalCovarianceMetadata(org.orekit.files.ccsds.section.CommentsContai
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
+                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
         
             Parameters:
                 version (double): format version
@@ -188,7 +188,7 @@ class AdditionalCovarianceMetadata(org.orekit.files.ccsds.section.CommentsContai
 
 class AdditionalCovarianceMetadataKey(java.lang.Enum['AdditionalCovarianceMetadataKey']):
     """
-    public enum AdditionalCovarianceMetadataKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.cdm.AdditionalCovarianceMetadataKey`>
+    public enum AdditionalCovarianceMetadataKey extends :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.cdm.AdditionalCovarianceMetadataKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.cdm.AdditionalCovarianceMetadata` entries.
     """
@@ -227,14 +227,14 @@ class AdditionalCovarianceMetadataKey(java.lang.Enum['AdditionalCovarianceMetada
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -247,9 +247,8 @@ class AdditionalCovarianceMetadataKey(java.lang.Enum['AdditionalCovarianceMetada
         
             .. code-block: java
             
-            
-            for (AdditionalCovarianceMetadataKey c : AdditionalCovarianceMetadataKey.values())
-                System.out.println(c);
+            for (AdditionalCovarianceMetadataKey c : AdditionalCovarianceMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -284,7 +283,7 @@ class AdditionalParameters(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
             Get the effective area of the object exposed to atmospheric drag.
         
             Returns:
-                the object area (in mÂ²) exposed to atmospheric drag
+                the object area (in m²) exposed to atmospheric drag
         
         
         """
@@ -294,7 +293,7 @@ class AdditionalParameters(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
             Get the actual area of the object.
         
             Returns:
-                the object area (in mÂ²)
+                the object area (in m²)
         
         
         """
@@ -324,27 +323,27 @@ class AdditionalParameters(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
             Get the effective area of the object exposed to solar radiation pressure.
         
             Returns:
-                the object area (in mÂ²) exposed to solar radiation pressure
+                the object area (in m²) exposed to solar radiation pressure
         
         
         """
         ...
     def getCDAreaOverMass(self) -> float:
         """
-            Get the objectâ€™s Cd x A/m used to propagate the state vector and covariance to TCA.
+            Get the object’s Cd x A/m used to propagate the state vector and covariance to TCA.
         
             Returns:
-                the objectâ€™s Cd x A/m (in mÂ²/kg)
+                the object’s Cd x A/m (in m²/kg)
         
         
         """
         ...
     def getCRAreaOverMass(self) -> float:
         """
-            Get the objectâ€™s Cr x A/m used to propagate the state vector and covariance to TCA.
+            Get the object’s Cr x A/m used to propagate the state vector and covariance to TCA.
         
             Returns:
-                the objectâ€™s Cr x A/m (in mÂ²/kg)
+                the object’s Cr x A/m (in m²/kg)
         
         
         """
@@ -411,21 +410,21 @@ class AdditionalParameters(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
         ...
     def getSedr(self) -> float:
         """
-            Get the amount of energy being removed from the objectÃ¢â‚¬â„¢s orbit by atmospheric drag. This value is an average
+            Get the amount of energy being removed from the object’s orbit by atmospheric drag. This value is an average
             calculated during the OD. SEDR = Specific Energy Dissipation Rate.
         
             Returns:
-                the amount of energy (in W/kg) being removed from the objectâ€™s orbit by atmospheric drag
+                the amount of energy (in W/kg) being removed from the object’s orbit by atmospheric drag
         
         
         """
         ...
     def getThrustAcceleration(self) -> float:
         """
-            Get the objectâ€™s acceleration due to in-track thrust used to propagate the state vector and covariance to TCA.
+            Get the object’s acceleration due to in-track thrust used to propagate the state vector and covariance to TCA.
         
             Returns:
-                the objectâ€™s acceleration (in m/sÂ²) due to in-track thrust
+                the object’s acceleration (in m/s²) due to in-track thrust
         
         
         """
@@ -445,7 +444,7 @@ class AdditionalParameters(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
             Set the effective area of the object exposed to atmospheric drag.
         
             Parameters:
-                areaDRG (double): area (in mÂ²) value to be set
+                areaDRG (double): area (in m²) value to be set
         
         
         """
@@ -455,7 +454,7 @@ class AdditionalParameters(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
             Set the actual area of the object.
         
             Parameters:
-                areaPC (double): area (in mÂ²) value to be set
+                areaPC (double): area (in m²) value to be set
         
         
         """
@@ -485,27 +484,27 @@ class AdditionalParameters(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
             Set the effective area of the object exposed to solar radiation pressure.
         
             Parameters:
-                areaSRP (double): area (in mÂ²) to be set
+                areaSRP (double): area (in m²) to be set
         
         
         """
         ...
     def setCDAreaOverMass(self, double: float) -> None:
         """
-            Set the objectâ€™s Cd x A/m used to propagate the state vector and covariance to TCA.
+            Set the object’s Cd x A/m used to propagate the state vector and covariance to TCA.
         
             Parameters:
-                CDAreaOverMass (double): objectâ€™s Cd x A/m (in mÂ²/kg) value to be set
+                CDAreaOverMass (double): object’s Cd x A/m (in m²/kg) value to be set
         
         
         """
         ...
     def setCRAreaOverMass(self, double: float) -> None:
         """
-            Set the objectâ€™s Cr x A/m used to propagate the state vector and covariance to TCA.
+            Set the object’s Cr x A/m used to propagate the state vector and covariance to TCA.
         
             Parameters:
-                CRAreaOverMass (double): objectâ€™s Cr x A/m (in mÂ²/kg) value to be set
+                CRAreaOverMass (double): object’s Cr x A/m (in m²/kg) value to be set
         
         
         """
@@ -525,7 +524,7 @@ class AdditionalParameters(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
             Set the method used for the calculation of COV_CONFIDENCE.
         
             Parameters:
-                covConfidenceMethod (String): the covConfidenceMethod to set
+                covConfidenceMethod (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the covConfidenceMethod to set
         
         
         """
@@ -572,21 +571,21 @@ class AdditionalParameters(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
         ...
     def setSedr(self, double: float) -> None:
         """
-            Set the amount of energy being removed from the objectÃ¢â‚¬â„¢s orbit by atmospheric drag. This value is an average
+            Set the amount of energy being removed from the object’s orbit by atmospheric drag. This value is an average
             calculated during the OD. SEDR = Specific Energy Dissipation Rate.
         
             Parameters:
-                SEDR (double): amount of energy (in W/kg) being removed from the objectâ€™s orbit by atmospheric drag
+                SEDR (double): amount of energy (in W/kg) being removed from the object’s orbit by atmospheric drag
         
         
         """
         ...
     def setThrustAcceleration(self, double: float) -> None:
         """
-            Set the objectâ€™s acceleration due to in-track thrust used to propagate the state vector and covariance to TCA.
+            Set the object’s acceleration due to in-track thrust used to propagate the state vector and covariance to TCA.
         
             Parameters:
-                thrustAcceleration (double): objectâ€™s acceleration (in m/sÂ²) due to in-track thrust
+                thrustAcceleration (double): object’s acceleration (in m/s²) due to in-track thrust
         
         
         """
@@ -601,8 +600,8 @@ class AdditionalParameters(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.ndm.CommonPhysicalProperties.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.ndm.CommonPhysicalProperties`
+                :meth:`~org.orekit.files.ccsds.ndm.CommonPhysicalProperties.validate` in
+                class :class:`~org.orekit.files.ccsds.ndm.CommonPhysicalProperties`
         
             Parameters:
                 version (double): format version
@@ -613,7 +612,7 @@ class AdditionalParameters(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
 
 class AdditionalParametersKey(java.lang.Enum['AdditionalParametersKey']):
     """
-    public enum AdditionalParametersKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.cdm.AdditionalParametersKey`>
+    public enum AdditionalParametersKey extends :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.cdm.AdditionalParametersKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.cdm.AdditionalParameters` entries.
     
@@ -684,14 +683,14 @@ class AdditionalParametersKey(java.lang.Enum['AdditionalParametersKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -704,9 +703,8 @@ class AdditionalParametersKey(java.lang.Enum['AdditionalParametersKey']):
         
             .. code-block: java
             
-            
-            for (AdditionalParametersKey c : AdditionalParametersKey.values())
-                System.out.println(c);
+            for (AdditionalParametersKey c : AdditionalParametersKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -729,7 +727,7 @@ class AdditionalParametersWriter(org.orekit.files.ccsds.section.AbstractWriter):
 
 class AltCovarianceType(java.lang.Enum['AltCovarianceType']):
     """
-    public enum AltCovarianceType extends Enum<:class:`~org.orekit.files.ccsds.ndm.cdm.AltCovarianceType`>
+    public enum AltCovarianceType extends :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.cdm.AltCovarianceType`>
     
         Flag indicating the type of alternate covariance information provided.
     """
@@ -747,14 +745,14 @@ class AltCovarianceType(java.lang.Enum['AltCovarianceType']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -767,9 +765,8 @@ class AltCovarianceType(java.lang.Enum['AltCovarianceType']):
         
             .. code-block: java
             
-            
-            for (AltCovarianceType c : AltCovarianceType.values())
-                System.out.println(c);
+            for (AltCovarianceType c : AltCovarianceType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -791,7 +788,7 @@ class Cdm(org.orekit.files.ccsds.ndm.NdmConstituent['CdmHeader', 'CdmSegment']):
     """
     ROOT: typing.ClassVar[str] = ...
     """
-    public static final String ROOT
+    public static final :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ROOT
     
         Root element for XML files.
     
@@ -802,7 +799,7 @@ class Cdm(org.orekit.files.ccsds.ndm.NdmConstituent['CdmHeader', 'CdmSegment']):
     """
     FORMAT_VERSION_KEY: typing.ClassVar[str] = ...
     """
-    public static final String FORMAT_VERSION_KEY
+    public static final :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` FORMAT_VERSION_KEY
     
         Key for format version.
     
@@ -877,7 +874,7 @@ class Cdm(org.orekit.files.ccsds.ndm.NdmConstituent['CdmHeader', 'CdmSegment']):
 
 class CdmData(org.orekit.files.ccsds.section.Data):
     """
-    public class CdmData extends Object implements :class:`~org.orekit.files.ccsds.section.Data`
+    public class CdmData extends :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.section.Data`
     
         Container for Conjunction Data Message data.
     
@@ -914,16 +911,7 @@ class CdmData(org.orekit.files.ccsds.section.Data):
         
         """
         ...
-    def getComments(self) -> java.util.List[str]:
-        """
-            Get the comments.
-        
-            Returns:
-                comments
-        
-        
-        """
-        ...
+    def getComments(self) -> java.util.List[str]: ...
     def getODParametersBlock(self) -> 'ODParameters':
         """
             Get the OD parameters logical block.
@@ -938,8 +926,8 @@ class CdmData(org.orekit.files.ccsds.section.Data):
         """
             Get the covariance matrix logical block.
         
-            The RTN Covariance Matrix is provided in the 9Ãƒâ€”9 Lower Triangular Form. All parameters of the 6Ãƒâ€”6
-            position/velocity submatrix are mandatory. The remaining elements will return NaN if not provided.
+            The RTN Covariance Matrix is provided in the 9×9 Lower Triangular Form. All parameters of the 6×6 position/velocity
+            submatrix are mandatory. The remaining elements will return NaN if not provided.
         
             Returns:
                 covariance matrix block
@@ -1063,7 +1051,7 @@ class CdmHeader(org.orekit.files.ccsds.section.Header):
             Set the classification or caveats text message of this CDM.
         
             Parameters:
-                classification (String): the classification to set
+                classification (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the classification to set
         
         
         """
@@ -1073,7 +1061,7 @@ class CdmHeader(org.orekit.files.ccsds.section.Header):
             Set the spacecraft name for which the CDM is provided stored in MESSAGE_FOR key.
         
             Parameters:
-                spacecraftNames (String): the spacecraft name for which the CDM is provided.
+                spacecraftNames (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the spacecraft name for which the CDM is provided.
         
         
         """
@@ -1099,7 +1087,7 @@ class CdmHeader(org.orekit.files.ccsds.section.Header):
 
 class CdmHeaderKey(java.lang.Enum['CdmHeaderKey']):
     """
-    public enum CdmHeaderKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.cdm.CdmHeaderKey`>
+    public enum CdmHeaderKey extends :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.cdm.CdmHeaderKey`>
     
         Keywords allowed in :class:`~org.orekit.files.ccsds.ndm.cdm.CdmHeader`.
     
@@ -1135,14 +1123,14 @@ class CdmHeaderKey(java.lang.Enum['CdmHeaderKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -1155,9 +1143,8 @@ class CdmHeaderKey(java.lang.Enum['CdmHeaderKey']):
         
             .. code-block: java
             
-            
-            for (CdmHeaderKey c : CdmHeaderKey.values())
-                System.out.println(c);
+            for (CdmHeaderKey c : CdmHeaderKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1169,7 +1156,7 @@ class CdmHeaderKey(java.lang.Enum['CdmHeaderKey']):
 
 class CdmHeaderProcessingState(org.orekit.files.ccsds.utils.parsing.ProcessingState):
     """
-    public class CdmHeaderProcessingState extends Object implements :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
+    public class CdmHeaderProcessingState extends :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
     
         :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState` for :class:`~org.orekit.files.ccsds.ndm.cdm.CdmHeader`.
     
@@ -1182,8 +1169,8 @@ class CdmHeaderProcessingState(org.orekit.files.ccsds.utils.parsing.ProcessingSt
             Process one token.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.ProcessingState.processToken`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.ProcessingState.processToken` in
+                interface :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
         
             Parameters:
                 token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
@@ -1197,7 +1184,7 @@ class CdmHeaderProcessingState(org.orekit.files.ccsds.utils.parsing.ProcessingSt
 
 class CdmMessageWriter(org.orekit.files.ccsds.utils.generation.MessageWriter[CdmHeader, 'CdmSegment', Cdm]):
     """
-    public abstract class CdmMessageWriter extends Object implements :class:`~org.orekit.files.ccsds.utils.generation.MessageWriter`<:class:`~org.orekit.files.ccsds.ndm.cdm.CdmHeader`, :class:`~org.orekit.files.ccsds.ndm.cdm.CdmSegment`, :class:`~org.orekit.files.ccsds.ndm.cdm.Cdm`>
+    public abstract class CdmMessageWriter extends :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.generation.MessageWriter`<:class:`~org.orekit.files.ccsds.ndm.cdm.CdmHeader`, :class:`~org.orekit.files.ccsds.ndm.cdm.CdmSegment`, :class:`~org.orekit.files.ccsds.ndm.cdm.Cdm`>
     
         Cdm message writer.
     
@@ -1206,7 +1193,7 @@ class CdmMessageWriter(org.orekit.files.ccsds.utils.generation.MessageWriter[Cdm
     """
     DEFAULT_ORIGINATOR: typing.ClassVar[str] = ...
     """
-    public static final String DEFAULT_ORIGINATOR
+    public static final :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_ORIGINATOR
     
         Default value for :meth:`~org.orekit.files.ccsds.section.HeaderKey.ORIGINATOR`.
     
@@ -1581,7 +1568,7 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Set the unique identifier of Attitude Data Message(s) that are linked (relevant) to this Conjunction Data Message.
         
             Parameters:
-                admMsgLink (String): the admMsgLink to set
+                admMsgLink (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the admMsgLink to set
         
         
         """
@@ -1611,7 +1598,7 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Set name of atmospheric model.
         
             Parameters:
-                atmosphericModel (String): name of atmospheric model
+                atmosphericModel (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of atmospheric model
         
         
         """
@@ -1621,7 +1608,7 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Set the satellite catalog name used for object.
         
             Parameters:
-                catalogName (String): for the spacecraft to be set
+                catalogName (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): for the spacecraft to be set
         
         
         """
@@ -1641,7 +1628,7 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Set the source of the covariance data.
         
             Parameters:
-                covarianceSource (String): the covarianceSource to set
+                covarianceSource (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the covarianceSource to set
         
         
         """
@@ -1661,7 +1648,7 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Set the name of external ephemeris used for OD.
         
             Parameters:
-                ephemName (String): me of external ephemeris used
+                ephemName (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): me of external ephemeris used
         
         
         """
@@ -1671,7 +1658,7 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Set gravity model.
         
             Parameters:
-                name (String): name of the model
+                name (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the model
                 degree (int): degree of the model
                 order (int): order of the model
         
@@ -1683,7 +1670,7 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Set the international designator used for object.
         
             Parameters:
-                internationalDes (String): for the object to be set
+                internationalDes (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): for the object to be set
         
         
         """
@@ -1714,7 +1701,7 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Set the object name for which metadata are given.
         
             Parameters:
-                object (String): = object 1 or 2 to be set
+                object (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): = object 1 or 2 to be set
         
         
         """
@@ -1724,7 +1711,7 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Set the satellite designator for the object for which metadata are given.
         
             Parameters:
-                objectDesignator (String): for the spacecraft to be set
+                objectDesignator (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): for the spacecraft to be set
         
         
         """
@@ -1734,7 +1721,7 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Set the spacecraft name used for object.
         
             Parameters:
-                objectName (String): for the spacecraft to be set
+                objectName (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): for the spacecraft to be set
         
         
         """
@@ -1765,7 +1752,7 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Set the unique identifier of Orbit Data Message(s) that are linked (relevant) to this Conjunction Data Message.
         
             Parameters:
-                odmMsgLink (String): the odmMsgLink to set
+                odmMsgLink (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the odmMsgLink to set
         
         
         """
@@ -1775,7 +1762,7 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Set the contact position for the object owner / operator.
         
             Parameters:
-                opContact (String): for the object to be set
+                opContact (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): for the object to be set
         
         
         """
@@ -1785,7 +1772,7 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Set the object operator email.
         
             Parameters:
-                operatorEmail (String): operator email for the object to be set
+                operatorEmail (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): operator email for the object to be set
         
         
         """
@@ -1795,7 +1782,7 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Set the contact organisation of the object.
         
             Parameters:
-                operatorOrganization (String): contact organisation for the object to be set
+                operatorOrganization (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): contact organisation for the object to be set
         
         
         """
@@ -1805,7 +1792,7 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Set the operator phone of the object.
         
             Parameters:
-                operatorPhone (String): contact phone for the object to be set
+                operatorPhone (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): contact phone for the object to be set
         
         
         """
@@ -1871,7 +1858,7 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
 
 class CdmMetadataKey(java.lang.Enum['CdmMetadataKey']):
     """
-    public enum CdmMetadataKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.cdm.CdmMetadataKey`>
+    public enum CdmMetadataKey extends :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.cdm.CdmMetadataKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.cdm.CdmMetadata` entries.
     
@@ -1932,14 +1919,14 @@ class CdmMetadataKey(java.lang.Enum['CdmMetadataKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -1952,9 +1939,8 @@ class CdmMetadataKey(java.lang.Enum['CdmMetadataKey']):
         
             .. code-block: java
             
-            
-            for (CdmMetadataKey c : CdmMetadataKey.values())
-                System.out.println(c);
+            for (CdmMetadataKey c : CdmMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -2005,8 +1991,8 @@ class CdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[C
             Finalize data after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -2019,8 +2005,8 @@ class CdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[C
             Finalize header after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -2033,8 +2019,8 @@ class CdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[C
             Finalize metadata after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -2047,8 +2033,8 @@ class CdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[C
             Get file header to fill.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 file header to fill
@@ -2061,8 +2047,8 @@ class CdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[C
             Acknowledge data parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -2075,8 +2061,8 @@ class CdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[C
             Acknowledge header parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -2089,8 +2075,8 @@ class CdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[C
             Acknowledge metada parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -2103,8 +2089,8 @@ class CdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[C
             Prepare data for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -2117,8 +2103,8 @@ class CdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[C
             Prepare header for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -2131,8 +2117,8 @@ class CdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[C
             Prepare metadata for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -2153,7 +2139,7 @@ class CdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[C
 
 class CdmRelativeMetadata:
     """
-    public class CdmRelativeMetadata extends Object
+    public class CdmRelativeMetadata extends :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This class gathers the relative meta-data present in the Conjunction Data Message (CDM).
     
@@ -2166,7 +2152,7 @@ class CdmRelativeMetadata:
             Set comment for relative metadata.
         
             Parameters:
-                comments (String): to be set
+                comments (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): to be set
         
         
         """
@@ -2176,8 +2162,8 @@ class CdmRelativeMetadata:
             Complain if a field is null.
         
             Parameters:
-                field (Object): field to check
-                key (Enum<?> key): key associated with the field
+                field (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): field to check
+                key (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<?> key): key associated with the field
         
         
         """
@@ -2224,19 +2210,10 @@ class CdmRelativeMetadata:
         
         """
         ...
-    def getComment(self) -> java.util.List[str]:
-        """
-            Get comment for relative metadata.
-        
-            Returns:
-                the time system
-        
-        
-        """
-        ...
+    def getComment(self) -> java.util.List[str]: ...
     def getConjunctionId(self) -> str:
         """
-            Get the Originatorâ€™s ID that uniquely identifies the conjunction to which the message refers.
+            Get the Originator’s ID that uniquely identifies the conjunction to which the message refers.
         
             Returns:
                 the conjunction id
@@ -2315,7 +2292,7 @@ class CdmRelativeMetadata:
         ...
     def getRelativePosition(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Get the Object2Ã¢â‚¬â„¢s position vector relative to Object1's at TCA in RTN frame, getX for R component, getY for T
+            Get the Object2’s position vector relative to Object1's at TCA in RTN frame, getX for R component, getY for T
             component, getZ for N component.
         
             Returns:
@@ -2336,7 +2313,7 @@ class CdmRelativeMetadata:
         ...
     def getRelativeVelocity(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Get the Object2Ã¢â‚¬â„¢s velocity vector relative to Object1's at TCA in RTN frame, getX for R component, getY for T
+            Get the Object2’s velocity vector relative to Object1's at TCA in RTN frame, getX for R component, getY for T
             component, getZ for N component.
         
             Returns:
@@ -2557,10 +2534,10 @@ class CdmRelativeMetadata:
         ...
     def setConjunctionId(self, string: str) -> None:
         """
-            Set the Originatorâ€™s ID that uniquely identifies the conjunction to which the message refers.
+            Set the Originator’s ID that uniquely identifies the conjunction to which the message refers.
         
             Parameters:
-                conjunctionId (String): the conjunction id to be set
+                conjunctionId (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the conjunction id to be set
         
         
         """
@@ -2629,37 +2606,37 @@ class CdmRelativeMetadata:
             Set the ID of previous CDM issued for event identified by CONJUNCTION_ID.
         
             Parameters:
-                previousMessageId (String): the previousMessageId to set
+                previousMessageId (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the previousMessageId to set
         
         
         """
         ...
     def setRelativePositionN(self, double: float) -> None:
         """
-            Set the N component of Object2â€™s position relative to Object1â€™s in RTN frame.
+            Set the N component of Object2’s position relative to Object1’s in RTN frame.
         
             Parameters:
-                relativePositionN (double): the N component (in m) of Object2â€™s position relative to Object1â€™s
+                relativePositionN (double): the N component (in m) of Object2’s position relative to Object1’s
         
         
         """
         ...
     def setRelativePositionR(self, double: float) -> None:
         """
-            Set the R component of Object2â€™s position relative to Object1â€™s in RTN frame.
+            Set the R component of Object2’s position relative to Object1’s in RTN frame.
         
             Parameters:
-                relativePositionR (double): the R component (in m) of Object2â€™s position relative to Object1â€™s
+                relativePositionR (double): the R component (in m) of Object2’s position relative to Object1’s
         
         
         """
         ...
     def setRelativePositionT(self, double: float) -> None:
         """
-            Set the T component of Object2â€™s position relative to Object1â€™s in RTN frame.
+            Set the T component of Object2’s position relative to Object1’s in RTN frame.
         
             Parameters:
-                relativePositionT (double): the T component (in m) of Object2â€™s position relative to Object1â€™s
+                relativePositionT (double): the T component (in m) of Object2’s position relative to Object1’s
         
         
         """
@@ -2676,30 +2653,30 @@ class CdmRelativeMetadata:
         ...
     def setRelativeVelocityN(self, double: float) -> None:
         """
-            Set the N component of Object2â€™s velocity relative to Object1â€™s in RTN frame.
+            Set the N component of Object2’s velocity relative to Object1’s in RTN frame.
         
             Parameters:
-                relativeVelocityN (double): the N component (in m/s) of Object2â€™s velocity relative to Object1â€™s
+                relativeVelocityN (double): the N component (in m/s) of Object2’s velocity relative to Object1’s
         
         
         """
         ...
     def setRelativeVelocityR(self, double: float) -> None:
         """
-            Set the R component of Object2â€™s velocity relative to Object1â€™s in RTN frame.
+            Set the R component of Object2’s velocity relative to Object1’s in RTN frame.
         
             Parameters:
-                relativeVelocityR (double): the R component (in m/s) of Object2â€™s velocity relative to Object1â€™s
+                relativeVelocityR (double): the R component (in m/s) of Object2’s velocity relative to Object1’s
         
         
         """
         ...
     def setRelativeVelocityT(self, double: float) -> None:
         """
-            Set the T component of Object2â€™s velocity relative to Object1â€™s in RTN frame.
+            Set the T component of Object2’s velocity relative to Object1’s in RTN frame.
         
             Parameters:
-                relativeVelocityT (double): the T component (in m/s) of Object2â€™s velocity relative to Object1â€™s
+                relativeVelocityT (double): the T component (in m/s) of Object2’s velocity relative to Object1’s
         
         
         """
@@ -2827,7 +2804,7 @@ class CdmRelativeMetadata:
         """
         
             Parameters:
-                sefiFragmentationModel (String): the sefiFragmentationModel to set
+                sefiFragmentationModel (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the sefiFragmentationModel to set
         
         
         """
@@ -2882,7 +2859,7 @@ class CdmRelativeMetadata:
 
 class CdmRelativeMetadataKey(java.lang.Enum['CdmRelativeMetadataKey']):
     """
-    public enum CdmRelativeMetadataKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.cdm.CdmRelativeMetadataKey`>
+    public enum CdmRelativeMetadataKey extends :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.cdm.CdmRelativeMetadataKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.cdm.CdmRelativeMetadata` entries.
     
@@ -2951,14 +2928,14 @@ class CdmRelativeMetadataKey(java.lang.Enum['CdmRelativeMetadataKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -2971,9 +2948,8 @@ class CdmRelativeMetadataKey(java.lang.Enum['CdmRelativeMetadataKey']):
         
             .. code-block: java
             
-            
-            for (CdmRelativeMetadataKey c : CdmRelativeMetadataKey.values())
-                System.out.println(c);
+            for (CdmRelativeMetadataKey c : CdmRelativeMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -2996,7 +2972,7 @@ class CdmSegment(org.orekit.files.ccsds.section.Segment[CdmMetadata, CdmData]):
 
 class CovarianceMethod(java.lang.Enum['CovarianceMethod']):
     """
-    public enum CovarianceMethod extends Enum<:class:`~org.orekit.files.ccsds.ndm.cdm.CovarianceMethod`>
+    public enum CovarianceMethod extends :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.cdm.CovarianceMethod`>
     
         Maneuvrable possibilities used in CCSDS Conjunction Data Messages.
     
@@ -3017,14 +2993,14 @@ class CovarianceMethod(java.lang.Enum['CovarianceMethod']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -3037,9 +3013,8 @@ class CovarianceMethod(java.lang.Enum['CovarianceMethod']):
         
             .. code-block: java
             
-            
-            for (CovarianceMethod c : CovarianceMethod.values())
-                System.out.println(c);
+            for (CovarianceMethod c : CovarianceMethod.values())
+                System.out.println(c);
             
         
             Returns:
@@ -3051,7 +3026,7 @@ class CovarianceMethod(java.lang.Enum['CovarianceMethod']):
 
 class Maneuvrable(java.lang.Enum['Maneuvrable']):
     """
-    public enum Maneuvrable extends Enum<:class:`~org.orekit.files.ccsds.ndm.cdm.Maneuvrable`>
+    public enum Maneuvrable extends :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.cdm.Maneuvrable`>
     
         Maneuvrable possibilities used in CCSDS Conjunction Data Messages.
     
@@ -3068,7 +3043,8 @@ class Maneuvrable(java.lang.Enum['Maneuvrable']):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum.html?is` in
+                class :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`
         
         
         """
@@ -3085,14 +3061,14 @@ class Maneuvrable(java.lang.Enum['Maneuvrable']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -3105,9 +3081,8 @@ class Maneuvrable(java.lang.Enum['Maneuvrable']):
         
             .. code-block: java
             
-            
-            for (Maneuvrable c : Maneuvrable.values())
-                System.out.println(c);
+            for (Maneuvrable c : Maneuvrable.values())
+                System.out.println(c);
             
         
             Returns:
@@ -3357,8 +3332,8 @@ class ODParameters(org.orekit.files.ccsds.section.CommentsContainer):
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
+                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
         
             Parameters:
                 version (double): format version
@@ -3369,7 +3344,7 @@ class ODParameters(org.orekit.files.ccsds.section.CommentsContainer):
 
 class ODParametersKey(java.lang.Enum['ODParametersKey']):
     """
-    public enum ODParametersKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.cdm.ODParametersKey`>
+    public enum ODParametersKey extends :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.cdm.ODParametersKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.cdm.ODParameters` entries.
     
@@ -3415,14 +3390,14 @@ class ODParametersKey(java.lang.Enum['ODParametersKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -3435,9 +3410,8 @@ class ODParametersKey(java.lang.Enum['ODParametersKey']):
         
             .. code-block: java
             
-            
-            for (ODParametersKey c : ODParametersKey.values())
-                System.out.println(c);
+            for (ODParametersKey c : ODParametersKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -3466,8 +3440,8 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
         getRTNCovariaxMatrix method. Beware that there are thus 2 ways to modify the RTN covariance : setC... ( setCrr, setCtr
         ...) which should be prioritized and getRTNCovariaxMatrix.setEntry(row, col, value).
     
-        The RTN Covariance Matrix is provided in the 9Ãƒâ€”9 Lower Triangular Form. All parameters of the 6Ãƒâ€”6
-        position/velocity submatrix are mandatory. The remaining elements will return NaN if not provided.
+        The RTN Covariance Matrix is provided in the 9×9 Lower Triangular Form. All parameters of the 6×6 position/velocity
+        submatrix are mandatory. The remaining elements will return NaN if not provided.
     
         Since:
             11.2
@@ -3478,7 +3452,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [7,7] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [7,7] in covariance matrix (in mâ�´/kgÂ²)
+                the object [7,7] in covariance matrix (in m⁴/kg²)
         
         
         """
@@ -3488,7 +3462,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [7,3] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [7,3] in covariance matrix (in mÂ³/kg)
+                the object [7,3] in covariance matrix (in m³/kg)
         
         
         """
@@ -3498,7 +3472,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [7,6] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [7,6] in covariance matrix (in mÂ³/(kg.s))
+                the object [7,6] in covariance matrix (in m³/(kg.s))
         
         
         """
@@ -3508,7 +3482,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [7,1] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [7,1] in covariance matrix (in mÂ³/kg)
+                the object [7,1] in covariance matrix (in m³/kg)
         
         
         """
@@ -3518,7 +3492,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [7,4] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [7,4] in covariance matrix (in mÂ³/(kg.s))
+                the object [7,4] in covariance matrix (in m³/(kg.s))
         
         
         """
@@ -3528,7 +3502,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [7,2] in covariance matrix.
         
             Returns:
-                the object [7,2] in covariance matrix (in mÂ³/kg)
+                the object [7,2] in covariance matrix (in m³/kg)
         
         
         """
@@ -3538,7 +3512,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [7,5] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [7,5] in covariance matrix (in mÂ³/(kg.s))
+                the object [7,5] in covariance matrix (in m³/(kg.s))
         
         
         """
@@ -3548,7 +3522,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [6,3] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [6,3] in covariance matrix (in mÂ²/s)
+                the object [6,3] in covariance matrix (in m²/s)
         
         
         """
@@ -3558,7 +3532,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [6,6] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [6,6] in covariance matrix (in mÂ²/sÂ²)
+                the object [6,6] in covariance matrix (in m²/s²)
         
         
         """
@@ -3568,7 +3542,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [6,1] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [6,1] in covariance matrix (in mÂ²/s)
+                the object [6,1] in covariance matrix (in m²/s)
         
         
         """
@@ -3578,7 +3552,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [6,4] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [6,4] in covariance matrix (in mÂ²/sÂ²)
+                the object [6,4] in covariance matrix (in m²/s²)
         
         
         """
@@ -3588,7 +3562,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [6,2] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [6,2] in covariance matrix (in mÂ²/s)
+                the object [6,2] in covariance matrix (in m²/s)
         
         
         """
@@ -3598,7 +3572,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [6,5] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [6,5] in covariance matrix (in mÂ²/sÂ²)
+                the object [6,5] in covariance matrix (in m²/s²)
         
         
         """
@@ -3608,7 +3582,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [3,3] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [3,3] in covariance matrix (in mÂ²)
+                the object [3,3] in covariance matrix (in m²)
         
         
         """
@@ -3618,7 +3592,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [3,1] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [3,1] in covariance matrix (in mÂ²)
+                the object [3,1] in covariance matrix (in m²)
         
         
         """
@@ -3628,7 +3602,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [3,2] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [3,2] in covariance matrix (in mÂ²)
+                the object [3,2] in covariance matrix (in m²)
         
         
         """
@@ -3638,7 +3612,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [4, 3] in covariance matrix (with index starting at 1) .
         
             Returns:
-                the object [4, 3] in covariance matrix (in mÂ²/s)
+                the object [4, 3] in covariance matrix (in m²/s)
         
         
         """
@@ -3648,7 +3622,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [4,1] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [4,1] in covariance matrix (in mÂ²/s)
+                the object [4,1] in covariance matrix (in m²/s)
         
         
         """
@@ -3658,7 +3632,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [4, 4] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [4, 4] in covariance matrix (in mÂ²/sÂ²)
+                the object [4, 4] in covariance matrix (in m²/s²)
         
         
         """
@@ -3668,7 +3642,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [4,2] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [4,2] in covariance matrix (in mÂ²/s)
+                the object [4,2] in covariance matrix (in m²/s)
         
         
         """
@@ -3678,7 +3652,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [1,1] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [1,1] in covariance matrix (in mÂ²)
+                the object [1,1] in covariance matrix (in m²)
         
         
         """
@@ -3688,7 +3662,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [8,7] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [8,7] in covariance matrix (in mâ�´/kgÂ²)
+                the object [8,7] in covariance matrix (in m⁴/kg²)
         
         
         """
@@ -3698,7 +3672,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [8,3] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [8,3] in covariance matrix (in mÂ³/kg)
+                the object [8,3] in covariance matrix (in m³/kg)
         
         
         """
@@ -3708,7 +3682,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [8,6] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [8,6] in covariance matrix (in mÂ³/(kg.s))
+                the object [8,6] in covariance matrix (in m³/(kg.s))
         
         
         """
@@ -3718,7 +3692,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [8,1] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [8,1] in covariance matrix (in mÂ³/kg)
+                the object [8,1] in covariance matrix (in m³/kg)
         
         
         """
@@ -3728,7 +3702,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [8,4] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [8,4] in covariance matrix (in mÂ³/(kg.s))
+                the object [8,4] in covariance matrix (in m³/(kg.s))
         
         
         """
@@ -3738,7 +3712,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [8,8] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [8,8] in covariance matrix (in mâ�´/kgÂ²)
+                the object [8,8] in covariance matrix (in m⁴/kg²)
         
         
         """
@@ -3748,7 +3722,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [8,2] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [8,2] in covariance matrix (in mÂ³/kg)
+                the object [8,2] in covariance matrix (in m³/kg)
         
         
         """
@@ -3758,7 +3732,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [8,5] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [8,5] in covariance matrix (in mÂ³/(kg.s))
+                the object [8,5] in covariance matrix (in m³/(kg.s))
         
         
         """
@@ -3768,7 +3742,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [5,3] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [5,3] in covariance matrix (in mÂ²/s)
+                the object [5,3] in covariance matrix (in m²/s)
         
         
         """
@@ -3778,7 +3752,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [5, 1] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [5, 1] in covariance matrix (in mÂ²/s)
+                the object [5, 1] in covariance matrix (in m²/s)
         
         
         """
@@ -3788,7 +3762,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [5,4] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [5,4] in covariance matrix (in mÂ²/sÂ²)
+                the object [5,4] in covariance matrix (in m²/s²)
         
         
         """
@@ -3798,7 +3772,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [5,2] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [5,2] in covariance matrix (in mÂ²/s)
+                the object [5,2] in covariance matrix (in m²/s)
         
         
         """
@@ -3808,7 +3782,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [5,5] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [5,5] in covariance matrix (in mÂ²/sÂ²)
+                the object [5,5] in covariance matrix (in m²/s²)
         
         
         """
@@ -3818,7 +3792,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [9,7] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [9,7] in covariance matrix (in mÂ³/(kg.sÂ²))
+                the object [9,7] in covariance matrix (in m³/(kg.s²))
         
         
         """
@@ -3828,7 +3802,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [9,3] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [9,3] in covariance matrix (in mÂ²/sÂ²)
+                the object [9,3] in covariance matrix (in m²/s²)
         
         
         """
@@ -3838,7 +3812,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [9,6] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [9,6] in covariance matrix (in mÂ²/sÂ³)
+                the object [9,6] in covariance matrix (in m²/s³)
         
         
         """
@@ -3848,7 +3822,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [9,1] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [9,1] in covariance matrix (in mÂ²/sÂ²)
+                the object [9,1] in covariance matrix (in m²/s²)
         
         
         """
@@ -3858,7 +3832,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [9,4] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [9,4] in covariance matrix (in mÂ²/sÂ³)
+                the object [9,4] in covariance matrix (in m²/s³)
         
         
         """
@@ -3868,7 +3842,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [9,8] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [9,8] in covariance matrix (in mÂ³/(kg.sÂ²))
+                the object [9,8] in covariance matrix (in m³/(kg.s²))
         
         
         """
@@ -3878,7 +3852,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [9,2] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [9,2] in covariance matrix (in mÂ²/sÂ²)
+                the object [9,2] in covariance matrix (in m²/s²)
         
         
         """
@@ -3888,7 +3862,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [9,5] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [9,5] in covariance matrix (in mÂ²/sÂ³)
+                the object [9,5] in covariance matrix (in m²/s³)
         
         
         """
@@ -3898,7 +3872,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [9,9] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [9,9] in covariance matrix (in mÂ²/sâ�´)
+                the object [9,9] in covariance matrix (in m²/s⁴)
         
         
         """
@@ -3908,7 +3882,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [2,1] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [2,1] in covariance matrix (in mÂ²)
+                the object [2,1] in covariance matrix (in m²)
         
         
         """
@@ -3918,7 +3892,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [2,2] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [2,2] in covariance matrix (in mÂ²)
+                the object [2,2] in covariance matrix (in m²)
         
         
         """
@@ -3927,8 +3901,8 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
         """
             Get the RTN covariance matrix.
         
-            The RTN Covariance Matrix is provided in the 9Ãƒâ€”9 Lower Triangular Form. All parameters of the 6Ãƒâ€”6
-            position/velocity submatrix are mandatory. The remaining elements will return NaN if not provided.
+            The RTN Covariance Matrix is provided in the 9×9 Lower Triangular Form. All parameters of the 6×6 position/velocity
+            submatrix are mandatory. The remaining elements will return NaN if not provided.
         
             Returns:
                 the RTN covariance matrix
@@ -3941,7 +3915,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [7,7] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CDRGDRG (double): = object [7,7] in covariance matrix (in mâ�´/kgÂ²)
+                CDRGDRG (double): = object [7,7] in covariance matrix (in m⁴/kg²)
         
         
         """
@@ -3951,7 +3925,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [7,3] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CDRGN (double): = object [7,3] in covariance matrix (in mÂ³/kg)
+                CDRGN (double): = object [7,3] in covariance matrix (in m³/kg)
         
         
         """
@@ -3961,7 +3935,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [7,6] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CDRGNdot (double): = object [7,6] in covariance matrix (in mÂ³/(kg.s))
+                CDRGNdot (double): = object [7,6] in covariance matrix (in m³/(kg.s))
         
         
         """
@@ -3971,7 +3945,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [7,1] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CDRGR (double): = object [7,1] in covariance matrix (in mÂ³/kg)
+                CDRGR (double): = object [7,1] in covariance matrix (in m³/kg)
         
         
         """
@@ -3981,7 +3955,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [7,4] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CDRGRdot (double): = object [7,4] in covariance matrix (in mÂ³/(kg.s))
+                CDRGRdot (double): = object [7,4] in covariance matrix (in m³/(kg.s))
         
         
         """
@@ -3991,7 +3965,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [7,2] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CDRGT (double): = object [7,2] in covariance matrix (in mÂ³/kg)
+                CDRGT (double): = object [7,2] in covariance matrix (in m³/kg)
         
         
         """
@@ -4001,7 +3975,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [7,5] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CDRGTdot (double): = object [7,5] in covariance matrix (in mÂ³/(kg.s))
+                CDRGTdot (double): = object [7,5] in covariance matrix (in m³/(kg.s))
         
         
         """
@@ -4011,7 +3985,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [6,3] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CNdotN (double): = object [6,3] in covariance matrix (in mÂ²/s)
+                CNdotN (double): = object [6,3] in covariance matrix (in m²/s)
         
         
         """
@@ -4021,7 +3995,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [6,6] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CNdotNdot (double): = object [6,6] in covariance matrix (in mÂ²/sÂ²)
+                CNdotNdot (double): = object [6,6] in covariance matrix (in m²/s²)
         
         
         """
@@ -4031,7 +4005,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [6,1] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CNdotR (double): = object [6,1] in covariance matrix (in mÂ²/s)
+                CNdotR (double): = object [6,1] in covariance matrix (in m²/s)
         
         
         """
@@ -4041,7 +4015,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [6,4] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CNdotRdot (double): = object [6,4] in covariance matrix (in mÂ²/sÂ²)
+                CNdotRdot (double): = object [6,4] in covariance matrix (in m²/s²)
         
         
         """
@@ -4051,7 +4025,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [6,2] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CNdotT (double): = object [6,2] in covariance matrix (in mÂ²/s)
+                CNdotT (double): = object [6,2] in covariance matrix (in m²/s)
         
         
         """
@@ -4061,7 +4035,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [6,5] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CNdotTdot (double): = object [6,5] in covariance matrix (in mÂ²/sÂ²)
+                CNdotTdot (double): = object [6,5] in covariance matrix (in m²/s²)
         
         
         """
@@ -4071,7 +4045,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [3,3] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CNN (double): = object [3,3] in covariance matrix (in mÂ²)
+                CNN (double): = object [3,3] in covariance matrix (in m²)
         
         
         """
@@ -4081,7 +4055,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [3,1] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CNR (double): = object [3,1] in covariance matrix (in mÂ²)
+                CNR (double): = object [3,1] in covariance matrix (in m²)
         
         
         """
@@ -4091,7 +4065,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [3,2] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CNT (double): = object [3,2] in covariance matrix (in mÂ²)
+                CNT (double): = object [3,2] in covariance matrix (in m²)
         
         
         """
@@ -4115,7 +4089,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [4, 3] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CRdotN (double): = object [4,3] in covariance matrix (in mÂ²/s)
+                CRdotN (double): = object [4,3] in covariance matrix (in m²/s)
         
         
         """
@@ -4125,7 +4099,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [4,1] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CRdotR (double): = object [4,1] in covariance matrix (in mÂ²/s)
+                CRdotR (double): = object [4,1] in covariance matrix (in m²/s)
         
         
         """
@@ -4135,7 +4109,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [4, 4] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CRdotRdot (double): = object [4, 4] in covariance matrix (in mÂ²/sÂ²)
+                CRdotRdot (double): = object [4, 4] in covariance matrix (in m²/s²)
         
         
         """
@@ -4145,7 +4119,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [4, 2] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CRdotT (double): = object [4, 2] in covariance matrix (in mÂ²/s)
+                CRdotT (double): = object [4, 2] in covariance matrix (in m²/s)
         
         
         """
@@ -4155,7 +4129,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [1,1] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CRR (double): = object [1,1] in covariance matrix (in mÂ²)
+                CRR (double): = object [1,1] in covariance matrix (in m²)
         
         
         """
@@ -4165,7 +4139,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [8,7] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CSRPDRG (double): = object [8,7] in covariance matrix (in mâ�´/kgÂ²)
+                CSRPDRG (double): = object [8,7] in covariance matrix (in m⁴/kg²)
         
         
         """
@@ -4175,7 +4149,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [8,3] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CSRPN (double): = object [8,3] in covariance matrix (in mÂ³/kg)
+                CSRPN (double): = object [8,3] in covariance matrix (in m³/kg)
         
         
         """
@@ -4185,7 +4159,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [8,6] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CSRPNdot (double): = object [8,6] in covariance matrix (in mÂ³/(kg.s))
+                CSRPNdot (double): = object [8,6] in covariance matrix (in m³/(kg.s))
         
         
         """
@@ -4195,7 +4169,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [8,1] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CSRPR (double): = object [8,1] in covariance matrix (in mÂ³/kg)
+                CSRPR (double): = object [8,1] in covariance matrix (in m³/kg)
         
         
         """
@@ -4205,7 +4179,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [8,4] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CSRPRdot (double): = object [8,4] in covariance matrix (in mÂ³/(kg.s))
+                CSRPRdot (double): = object [8,4] in covariance matrix (in m³/(kg.s))
         
         
         """
@@ -4215,7 +4189,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [8,8] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CSRPSRP (double): = object [8,8] in covariance matrix (in mâ�´/kgÂ²)
+                CSRPSRP (double): = object [8,8] in covariance matrix (in m⁴/kg²)
         
         
         """
@@ -4225,7 +4199,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [8,2] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CSRPT (double): = object [8,2] in covariance matrix (in mÂ³/kg)
+                CSRPT (double): = object [8,2] in covariance matrix (in m³/kg)
         
         
         """
@@ -4235,7 +4209,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [8,5] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CSRPTdot (double): = object [8,5] in covariance matrix (in mÂ³/(kg.s))
+                CSRPTdot (double): = object [8,5] in covariance matrix (in m³/(kg.s))
         
         
         """
@@ -4245,7 +4219,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [5,3] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CTdotN (double): = object [5,3] in covariance matrix (in mÂ²/s)
+                CTdotN (double): = object [5,3] in covariance matrix (in m²/s)
         
         
         """
@@ -4255,7 +4229,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [5,1] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CTdotR (double): = object [5,1] in covariance matrix (in mÂ²/s)
+                CTdotR (double): = object [5,1] in covariance matrix (in m²/s)
         
         
         """
@@ -4265,7 +4239,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [5,4] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CTdotRdot (double): = object [5,4] in covariance matrix (in mÂ²/sÂ²)
+                CTdotRdot (double): = object [5,4] in covariance matrix (in m²/s²)
         
         
         """
@@ -4275,7 +4249,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [5,2] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CTdotT (double): = object [5,2] in covariance matrix (in mÂ²/s)
+                CTdotT (double): = object [5,2] in covariance matrix (in m²/s)
         
         
         """
@@ -4285,7 +4259,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [5,5] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CTdotTdot (double): = object [5,5] in covariance matrix (in mÂ²/sÂ²)
+                CTdotTdot (double): = object [5,5] in covariance matrix (in m²/s²)
         
         
         """
@@ -4295,7 +4269,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [9,7] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CTHRDRG (double): = object [9,7] in covariance matrix (in mÂ³/(kg.sÂ²))
+                CTHRDRG (double): = object [9,7] in covariance matrix (in m³/(kg.s²))
         
         
         """
@@ -4305,7 +4279,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [9,3] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CTHRN (double): = object [9,3] in covariance matrix (in mÂ²/sÂ²)
+                CTHRN (double): = object [9,3] in covariance matrix (in m²/s²)
         
         
         """
@@ -4315,7 +4289,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [9,6] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CTHRNdot (double): = object [9,6] in covariance matrix (in mÂ²/sÂ³)
+                CTHRNdot (double): = object [9,6] in covariance matrix (in m²/s³)
         
         
         """
@@ -4325,7 +4299,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [9,1] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CTHRR (double): = object [9,1] in covariance matrix (in mÂ²/sÂ²)
+                CTHRR (double): = object [9,1] in covariance matrix (in m²/s²)
         
         
         """
@@ -4335,7 +4309,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [9,4] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CTHRRdot (double): = object [9,4] in covariance matrix (in mÂ²/sÂ³)
+                CTHRRdot (double): = object [9,4] in covariance matrix (in m²/s³)
         
         
         """
@@ -4345,7 +4319,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [9,8] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CTHRSRP (double): = object [9,8] in covariance matrix (in mÂ³/(kg.sÂ²))
+                CTHRSRP (double): = object [9,8] in covariance matrix (in m³/(kg.s²))
         
         
         """
@@ -4355,7 +4329,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [9,2] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CTHRT (double): = object [9,2] in covariance matrix (in mÂ²/sÂ²)
+                CTHRT (double): = object [9,2] in covariance matrix (in m²/s²)
         
         
         """
@@ -4365,7 +4339,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [9,5] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CTHRTdot (double): = object [9,5] in covariance matrix (in mÂ²/sÂ³)
+                CTHRTdot (double): = object [9,5] in covariance matrix (in m²/s³)
         
         
         """
@@ -4375,7 +4349,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [9,9] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CTHRTHR (double): = object [9,9] in covariance matrix (in mÂ²/sâ�´)
+                CTHRTHR (double): = object [9,9] in covariance matrix (in m²/s⁴)
         
         
         """
@@ -4385,7 +4359,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [2,1] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CTR (double): = object [2,1] in covariance matrix (in mÂ²)
+                CTR (double): = object [2,1] in covariance matrix (in m²)
         
         
         """
@@ -4395,7 +4369,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [2,2] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CTT (double): = object [2,2] in covariance matrix (in mÂ²)
+                CTT (double): = object [2,2] in covariance matrix (in m²)
         
         
         """
@@ -4410,8 +4384,8 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
+                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
         
             Parameters:
                 version (double): format version
@@ -4422,7 +4396,7 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
 
 class RTNCovarianceKey(java.lang.Enum['RTNCovarianceKey']):
     """
-    public enum RTNCovarianceKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.cdm.RTNCovarianceKey`>
+    public enum RTNCovarianceKey extends :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.cdm.RTNCovarianceKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.cdm.RTNCovariance` entries.
     
@@ -4502,14 +4476,14 @@ class RTNCovarianceKey(java.lang.Enum['RTNCovarianceKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -4522,9 +4496,8 @@ class RTNCovarianceKey(java.lang.Enum['RTNCovarianceKey']):
         
             .. code-block: java
             
-            
-            for (RTNCovarianceKey c : RTNCovarianceKey.values())
-                System.out.println(c);
+            for (RTNCovarianceKey c : RTNCovarianceKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -4547,7 +4520,7 @@ class RTNCovarianceWriter(org.orekit.files.ccsds.section.AbstractWriter):
 
 class ScreenType(java.lang.Enum['ScreenType']):
     """
-    public enum ScreenType extends Enum<:class:`~org.orekit.files.ccsds.ndm.cdm.ScreenType`>
+    public enum ScreenType extends :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.cdm.ScreenType`>
     
         Screening type options allowed in CCSDS Conjunction Data Messages.
     """
@@ -4566,14 +4539,14 @@ class ScreenType(java.lang.Enum['ScreenType']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -4586,9 +4559,8 @@ class ScreenType(java.lang.Enum['ScreenType']):
         
             .. code-block: java
             
-            
-            for (ScreenType c : ScreenType.values())
-                System.out.println(c);
+            for (ScreenType c : ScreenType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -4600,7 +4572,7 @@ class ScreenType(java.lang.Enum['ScreenType']):
 
 class ScreenVolumeFrame(java.lang.Enum['ScreenVolumeFrame']):
     """
-    public enum ScreenVolumeFrame extends Enum<:class:`~org.orekit.files.ccsds.ndm.cdm.ScreenVolumeFrame`>
+    public enum ScreenVolumeFrame extends :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.cdm.ScreenVolumeFrame`>
     
         Screening volume frame possibilities used in CCSDS Conjunction Data Messages.
     
@@ -4621,14 +4593,14 @@ class ScreenVolumeFrame(java.lang.Enum['ScreenVolumeFrame']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -4641,9 +4613,8 @@ class ScreenVolumeFrame(java.lang.Enum['ScreenVolumeFrame']):
         
             .. code-block: java
             
-            
-            for (ScreenVolumeFrame c : ScreenVolumeFrame.values())
-                System.out.println(c);
+            for (ScreenVolumeFrame c : ScreenVolumeFrame.values())
+                System.out.println(c);
             
         
             Returns:
@@ -4655,7 +4626,7 @@ class ScreenVolumeFrame(java.lang.Enum['ScreenVolumeFrame']):
 
 class ScreenVolumeShape(java.lang.Enum['ScreenVolumeShape']):
     """
-    public enum ScreenVolumeShape extends Enum<:class:`~org.orekit.files.ccsds.ndm.cdm.ScreenVolumeShape`>
+    public enum ScreenVolumeShape extends :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.cdm.ScreenVolumeShape`>
     
         Screening volume shape possibilities used in CCSDS Conjunction Data Messages.
     
@@ -4677,14 +4648,14 @@ class ScreenVolumeShape(java.lang.Enum['ScreenVolumeShape']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -4697,9 +4668,8 @@ class ScreenVolumeShape(java.lang.Enum['ScreenVolumeShape']):
         
             .. code-block: java
             
-            
-            for (ScreenVolumeShape c : ScreenVolumeShape.values())
-                System.out.println(c);
+            for (ScreenVolumeShape c : ScreenVolumeShape.values())
+                System.out.println(c);
             
         
             Returns:
@@ -4763,8 +4733,8 @@ class SigmaEigenvectorsCovariance(org.orekit.files.ccsds.section.CommentsContain
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
+                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
         
             Parameters:
                 version (double): format version
@@ -4775,7 +4745,7 @@ class SigmaEigenvectorsCovariance(org.orekit.files.ccsds.section.CommentsContain
 
 class SigmaEigenvectorsCovarianceKey(java.lang.Enum['SigmaEigenvectorsCovarianceKey']):
     """
-    public enum SigmaEigenvectorsCovarianceKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.cdm.SigmaEigenvectorsCovarianceKey`>
+    public enum SigmaEigenvectorsCovarianceKey extends :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.cdm.SigmaEigenvectorsCovarianceKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.cdm.SigmaEigenvectorsCovariance` entries.
     """
@@ -4808,14 +4778,14 @@ class SigmaEigenvectorsCovarianceKey(java.lang.Enum['SigmaEigenvectorsCovariance
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -4828,9 +4798,8 @@ class SigmaEigenvectorsCovarianceKey(java.lang.Enum['SigmaEigenvectorsCovariance
         
             .. code-block: java
             
-            
-            for (SigmaEigenvectorsCovarianceKey c : SigmaEigenvectorsCovarianceKey.values())
-                System.out.println(c);
+            for (SigmaEigenvectorsCovarianceKey c : SigmaEigenvectorsCovarianceKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -4940,8 +4909,8 @@ class StateVector(org.orekit.files.ccsds.section.CommentsContainer):
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
+                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
         
             Parameters:
                 version (double): format version
@@ -4952,7 +4921,7 @@ class StateVector(org.orekit.files.ccsds.section.CommentsContainer):
 
 class StateVectorKey(java.lang.Enum['StateVectorKey']):
     """
-    public enum StateVectorKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.cdm.StateVectorKey`>
+    public enum StateVectorKey extends :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.cdm.StateVectorKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.cdm.StateVector` entries.
     
@@ -4993,14 +4962,14 @@ class StateVectorKey(java.lang.Enum['StateVectorKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -5013,9 +4982,8 @@ class StateVectorKey(java.lang.Enum['StateVectorKey']):
         
             .. code-block: java
             
-            
-            for (StateVectorKey c : StateVectorKey.values())
-                System.out.println(c);
+            for (StateVectorKey c : StateVectorKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -5047,8 +5015,8 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
         The XYZ Covariance Matrix is only provided if :meth:`~org.orekit.files.ccsds.ndm.cdm.CdmMetadataKey.ALT_COV_TYPE` is
         :meth:`~org.orekit.files.ccsds.ndm.cdm.AltCovarianceType.XYZ`, otherwise its terms will return NaN.
     
-        When available, the matrix is given in the 9Ãƒâ€”9 Lower Triangular Form. All parameters of the 6Ãƒâ€”6
-        position/velocity submatrix are mandatory. The remaining elements will return NaN if not provided.
+        When available, the matrix is given in the 9×9 Lower Triangular Form. All parameters of the 6×6 position/velocity
+        submatrix are mandatory. The remaining elements will return NaN if not provided.
     """
     def __init__(self, boolean: bool): ...
     def getCdrgdrg(self) -> float:
@@ -5056,7 +5024,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [7,7] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [7,7] in covariance matrix (in mâ�´/kgÂ²)
+                the object [7,7] in covariance matrix (in m⁴/kg²)
         
         
         """
@@ -5066,7 +5034,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [7,1] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [7,1] in covariance matrix (in mÂ³/kg)
+                the object [7,1] in covariance matrix (in m³/kg)
         
         
         """
@@ -5076,7 +5044,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [7,4] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [7,4] in covariance matrix (in mÂ³/(kg.s))
+                the object [7,4] in covariance matrix (in m³/(kg.s))
         
         
         """
@@ -5086,7 +5054,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [7,2] in covariance matrix.
         
             Returns:
-                the object [7,2] in covariance matrix (in mÂ³/kg)
+                the object [7,2] in covariance matrix (in m³/kg)
         
         
         """
@@ -5096,7 +5064,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [7,5] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [7,5] in covariance matrix (in mÂ³/(kg.s))
+                the object [7,5] in covariance matrix (in m³/(kg.s))
         
         
         """
@@ -5106,7 +5074,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [7,3] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [7,3] in covariance matrix (in mÂ³/kg)
+                the object [7,3] in covariance matrix (in m³/kg)
         
         
         """
@@ -5116,7 +5084,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [7,6] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [7,6] in covariance matrix (in mÂ³/(kg.s))
+                the object [7,6] in covariance matrix (in m³/(kg.s))
         
         
         """
@@ -5126,7 +5094,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [8,7] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [8,7] in covariance matrix (in mâ�´/kgÂ²)
+                the object [8,7] in covariance matrix (in m⁴/kg²)
         
         
         """
@@ -5136,7 +5104,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [8,8] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [8,8] in covariance matrix (in mâ�´/kgÂ²)
+                the object [8,8] in covariance matrix (in m⁴/kg²)
         
         
         """
@@ -5146,7 +5114,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [8,1] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [8,1] in covariance matrix (in mÂ³/kg)
+                the object [8,1] in covariance matrix (in m³/kg)
         
         
         """
@@ -5156,7 +5124,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [8,4] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [8,4] in covariance matrix (in mÂ³/(kg.s))
+                the object [8,4] in covariance matrix (in m³/(kg.s))
         
         
         """
@@ -5166,7 +5134,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [8,2] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [8,2] in covariance matrix (in mÂ³/kg)
+                the object [8,2] in covariance matrix (in m³/kg)
         
         
         """
@@ -5176,7 +5144,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [8,5] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [8,5] in covariance matrix (in mÂ³/(kg.s))
+                the object [8,5] in covariance matrix (in m³/(kg.s))
         
         
         """
@@ -5186,7 +5154,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [8,3] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [8,3] in covariance matrix (in mÂ³/kg)
+                the object [8,3] in covariance matrix (in m³/kg)
         
         
         """
@@ -5196,7 +5164,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [8,6] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [8,6] in covariance matrix (in mÂ³/(kg.s))
+                the object [8,6] in covariance matrix (in m³/(kg.s))
         
         
         """
@@ -5206,7 +5174,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [9,7] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [9,7] in covariance matrix (in mÂ³/(kg.sÂ²))
+                the object [9,7] in covariance matrix (in m³/(kg.s²))
         
         
         """
@@ -5216,7 +5184,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [9,8] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [9,8] in covariance matrix (in mÂ³/(kg.sÂ²))
+                the object [9,8] in covariance matrix (in m³/(kg.s²))
         
         
         """
@@ -5226,7 +5194,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [9,9] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [9,9] in covariance matrix (in mÂ²/sâ�´)
+                the object [9,9] in covariance matrix (in m²/s⁴)
         
         
         """
@@ -5236,7 +5204,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [9,1] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [9,1] in covariance matrix (in mÂ²/sÂ²)
+                the object [9,1] in covariance matrix (in m²/s²)
         
         
         """
@@ -5246,7 +5214,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [9,4] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [9,4] in covariance matrix (in mÂ²/sÂ³)
+                the object [9,4] in covariance matrix (in m²/s³)
         
         
         """
@@ -5256,7 +5224,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [9,2] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [9,2] in covariance matrix (in mÂ²/sÂ²)
+                the object [9,2] in covariance matrix (in m²/s²)
         
         
         """
@@ -5266,7 +5234,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [9,5] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [9,5] in covariance matrix (in mÂ²/sÂ³)
+                the object [9,5] in covariance matrix (in m²/s³)
         
         
         """
@@ -5276,7 +5244,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [9,3] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [9,3] in covariance matrix (in mÂ²/sÂ²)
+                the object [9,3] in covariance matrix (in m²/s²)
         
         
         """
@@ -5286,7 +5254,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [9,6] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [9,6] in covariance matrix (in mÂ²/sÂ³)
+                the object [9,6] in covariance matrix (in m²/s³)
         
         
         """
@@ -5296,7 +5264,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [4,1] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [4,1] in covariance matrix (in mÂ²/s)
+                the object [4,1] in covariance matrix (in m²/s)
         
         
         """
@@ -5306,7 +5274,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [4, 4] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [4, 4] in covariance matrix (in mÂ²/sÂ²)
+                the object [4, 4] in covariance matrix (in m²/s²)
         
         
         """
@@ -5316,7 +5284,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [4,2] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [4,2] in covariance matrix (in mÂ²/s)
+                the object [4,2] in covariance matrix (in m²/s)
         
         
         """
@@ -5326,7 +5294,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [4, 3] in covariance matrix (with index starting at 1) .
         
             Returns:
-                the object [4, 3] in covariance matrix (in mÂ²/s)
+                the object [4, 3] in covariance matrix (in m²/s)
         
         
         """
@@ -5336,7 +5304,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [1,1] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [1,1] in covariance matrix (in mÂ²)
+                the object [1,1] in covariance matrix (in m²)
         
         
         """
@@ -5346,7 +5314,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [5, 1] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [5, 1] in covariance matrix (in mÂ²/s)
+                the object [5, 1] in covariance matrix (in m²/s)
         
         
         """
@@ -5356,7 +5324,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [5,4] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [5,4] in covariance matrix (in mÂ²/sÂ²)
+                the object [5,4] in covariance matrix (in m²/s²)
         
         
         """
@@ -5366,7 +5334,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [5,2] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [5,2] in covariance matrix (in mÂ²/s)
+                the object [5,2] in covariance matrix (in m²/s)
         
         
         """
@@ -5376,7 +5344,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [5,5] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [5,5] in covariance matrix (in mÂ²/sÂ²)
+                the object [5,5] in covariance matrix (in m²/s²)
         
         
         """
@@ -5386,7 +5354,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [5,3] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [5,3] in covariance matrix (in mÂ²/s)
+                the object [5,3] in covariance matrix (in m²/s)
         
         
         """
@@ -5396,7 +5364,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [2,1] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [2,1] in covariance matrix (in mÂ²)
+                the object [2,1] in covariance matrix (in m²)
         
         
         """
@@ -5406,7 +5374,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [2,2] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [2,2] in covariance matrix (in mÂ²)
+                the object [2,2] in covariance matrix (in m²)
         
         
         """
@@ -5416,7 +5384,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [6,1] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [6,1] in covariance matrix (in mÂ²/s)
+                the object [6,1] in covariance matrix (in m²/s)
         
         
         """
@@ -5426,7 +5394,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [6,4] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [6,4] in covariance matrix (in mÂ²/sÂ²)
+                the object [6,4] in covariance matrix (in m²/s²)
         
         
         """
@@ -5436,7 +5404,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [6,2] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [6,2] in covariance matrix (in mÂ²/s)
+                the object [6,2] in covariance matrix (in m²/s)
         
         
         """
@@ -5446,7 +5414,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [6,5] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [6,5] in covariance matrix (in mÂ²/sÂ²)
+                the object [6,5] in covariance matrix (in m²/s²)
         
         
         """
@@ -5456,7 +5424,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [6,3] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [6,3] in covariance matrix (in mÂ²/s)
+                the object [6,3] in covariance matrix (in m²/s)
         
         
         """
@@ -5466,7 +5434,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [6,6] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [6,6] in covariance matrix (in mÂ²/sÂ²)
+                the object [6,6] in covariance matrix (in m²/s²)
         
         
         """
@@ -5476,7 +5444,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [3,1] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [3,1] in covariance matrix (in mÂ²)
+                the object [3,1] in covariance matrix (in m²)
         
         
         """
@@ -5486,7 +5454,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [3,2] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [3,2] in covariance matrix (in mÂ²)
+                the object [3,2] in covariance matrix (in m²)
         
         
         """
@@ -5496,7 +5464,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Get the object [3,3] in covariance matrix (with index starting at 1).
         
             Returns:
-                the object [3,3] in covariance matrix (in mÂ²)
+                the object [3,3] in covariance matrix (in m²)
         
         
         """
@@ -5508,8 +5476,8 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             The XYZ Covariance Matrix is only provided if :meth:`~org.orekit.files.ccsds.ndm.cdm.CdmMetadataKey.ALT_COV_TYPE` is
             :meth:`~org.orekit.files.ccsds.ndm.cdm.AltCovarianceType.XYZ`, otherwise its terms will return NaN.
         
-            When available, the matrix is given in the 9Ãƒâ€”9 Lower Triangular Form. All parameters of the 6Ãƒâ€”6
-            position/velocity submatrix are mandatory. The remaining elements will return NaN if not provided.
+            When available, the matrix is given in the 9×9 Lower Triangular Form. All parameters of the 6×6 position/velocity
+            submatrix are mandatory. The remaining elements will return NaN if not provided.
         
             Returns:
                 the XYZ covariance matrix
@@ -5532,7 +5500,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [7,7] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CDRGDRG (double): = object [7,7] in covariance matrix (in mâ�´/kgÂ²)
+                CDRGDRG (double): = object [7,7] in covariance matrix (in m⁴/kg²)
         
         
         """
@@ -5542,7 +5510,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [7,1] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CDRGX (double): = object [7,1] in covariance matrix (in mÂ³/kg)
+                CDRGX (double): = object [7,1] in covariance matrix (in m³/kg)
         
         
         """
@@ -5552,7 +5520,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [7,4] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CDRGXdot (double): = object [7,4] in covariance matrix (in mÂ³/(kg.s))
+                CDRGXdot (double): = object [7,4] in covariance matrix (in m³/(kg.s))
         
         
         """
@@ -5562,7 +5530,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [7,2] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CDRGY (double): = object [7,2] in covariance matrix (in mÂ³/kg)
+                CDRGY (double): = object [7,2] in covariance matrix (in m³/kg)
         
         
         """
@@ -5572,7 +5540,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [7,5] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CDRGYdot (double): = object [7,5] in covariance matrix (in mÂ³/(kg.s))
+                CDRGYdot (double): = object [7,5] in covariance matrix (in m³/(kg.s))
         
         
         """
@@ -5582,7 +5550,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [7,3] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CDRGZ (double): = object [7,3] in covariance matrix (in mÂ³/kg)
+                CDRGZ (double): = object [7,3] in covariance matrix (in m³/kg)
         
         
         """
@@ -5592,7 +5560,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [7,6] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CDRGZdot (double): = object [7,6] in covariance matrix (in mÂ³/(kg.s))
+                CDRGZdot (double): = object [7,6] in covariance matrix (in m³/(kg.s))
         
         
         """
@@ -5616,7 +5584,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [8,7] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CSRPDRG (double): = object [8,7] in covariance matrix (in mâ�´/kgÂ²)
+                CSRPDRG (double): = object [8,7] in covariance matrix (in m⁴/kg²)
         
         
         """
@@ -5626,7 +5594,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [8,8] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CSRPSRP (double): = object [8,8] in covariance matrix (in mâ�´/kgÂ²)
+                CSRPSRP (double): = object [8,8] in covariance matrix (in m⁴/kg²)
         
         
         """
@@ -5636,7 +5604,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [8,1] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CSRPX (double): = object [8,1] in covariance matrix (in mÂ³/kg)
+                CSRPX (double): = object [8,1] in covariance matrix (in m³/kg)
         
         
         """
@@ -5646,7 +5614,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [8,4] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CSRPXdot (double): = object [8,4] in covariance matrix (in mÂ³/(kg.s))
+                CSRPXdot (double): = object [8,4] in covariance matrix (in m³/(kg.s))
         
         
         """
@@ -5656,7 +5624,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [8,2] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CSRPY (double): = object [8,2] in covariance matrix (in mÂ³/kg)
+                CSRPY (double): = object [8,2] in covariance matrix (in m³/kg)
         
         
         """
@@ -5666,7 +5634,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [8,5] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CSRPYdot (double): = object [8,5] in covariance matrix (in mÂ³/(kg.s))
+                CSRPYdot (double): = object [8,5] in covariance matrix (in m³/(kg.s))
         
         
         """
@@ -5676,7 +5644,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [8,3] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CSRPZ (double): = object [8,3] in covariance matrix (in mÂ³/kg)
+                CSRPZ (double): = object [8,3] in covariance matrix (in m³/kg)
         
         
         """
@@ -5686,7 +5654,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [8,6] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CSRPZdot (double): = object [8,6] in covariance matrix (in mÂ³/(kg.s))
+                CSRPZdot (double): = object [8,6] in covariance matrix (in m³/(kg.s))
         
         
         """
@@ -5696,7 +5664,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [9,7] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CTHRDRG (double): = object [9,7] in covariance matrix (in mÂ³/(kg.sÂ²))
+                CTHRDRG (double): = object [9,7] in covariance matrix (in m³/(kg.s²))
         
         
         """
@@ -5706,7 +5674,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [9,8] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CTHRSRP (double): = object [9,8] in covariance matrix (in mÂ³/(kg.sÂ²))
+                CTHRSRP (double): = object [9,8] in covariance matrix (in m³/(kg.s²))
         
         
         """
@@ -5716,7 +5684,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [9,9] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CTHRTHR (double): = object [9,9] in covariance matrix (in mÂ²/sâ�´)
+                CTHRTHR (double): = object [9,9] in covariance matrix (in m²/s⁴)
         
         
         """
@@ -5726,7 +5694,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [9,1] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CTHRX (double): = object [9,1] in covariance matrix (in mÂ²/sÂ²)
+                CTHRX (double): = object [9,1] in covariance matrix (in m²/s²)
         
         
         """
@@ -5736,7 +5704,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [9,4] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CTHRXdot (double): = object [9,4] in covariance matrix (in mÂ²/sÂ³)
+                CTHRXdot (double): = object [9,4] in covariance matrix (in m²/s³)
         
         
         """
@@ -5746,7 +5714,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [9,2] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CTHRY (double): = object [9,2] in covariance matrix (in mÂ²/sÂ²)
+                CTHRY (double): = object [9,2] in covariance matrix (in m²/s²)
         
         
         """
@@ -5756,7 +5724,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [9,5] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CTHRYdot (double): = object [9,5] in covariance matrix (in mÂ²/sÂ³)
+                CTHRYdot (double): = object [9,5] in covariance matrix (in m²/s³)
         
         
         """
@@ -5766,7 +5734,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [9,3] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CTHRZ (double): = object [9,3] in covariance matrix (in mÂ²/sÂ²)
+                CTHRZ (double): = object [9,3] in covariance matrix (in m²/s²)
         
         
         """
@@ -5776,7 +5744,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [9,6] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CTHRZdot (double): = object [9,6] in covariance matrix (in mÂ²/sÂ³)
+                CTHRZdot (double): = object [9,6] in covariance matrix (in m²/s³)
         
         
         """
@@ -5786,7 +5754,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [4,1] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CXdotX (double): = object [4,1] in covariance matrix (in mÂ²/s)
+                CXdotX (double): = object [4,1] in covariance matrix (in m²/s)
         
         
         """
@@ -5796,7 +5764,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [4, 4] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CXdotXdot (double): = object [4, 4] in covariance matrix (in mÂ²/sÂ²)
+                CXdotXdot (double): = object [4, 4] in covariance matrix (in m²/s²)
         
         
         """
@@ -5806,7 +5774,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [4, 2] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CXdotY (double): = object [4, 2] in covariance matrix (in mÂ²/s)
+                CXdotY (double): = object [4, 2] in covariance matrix (in m²/s)
         
         
         """
@@ -5816,7 +5784,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [4, 3] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CXdotZ (double): = object [4,3] in covariance matrix (in mÂ²/s)
+                CXdotZ (double): = object [4,3] in covariance matrix (in m²/s)
         
         
         """
@@ -5826,7 +5794,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [1,1] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CXX (double): = object [1,1] in covariance matrix (in mÂ²)
+                CXX (double): = object [1,1] in covariance matrix (in m²)
         
         
         """
@@ -5836,7 +5804,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [5,1] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CYdotX (double): = object [5,1] in covariance matrix (in mÂ²/s)
+                CYdotX (double): = object [5,1] in covariance matrix (in m²/s)
         
         
         """
@@ -5846,7 +5814,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [5,4] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CYdotXdot (double): = object [5,4] in covariance matrix (in mÂ²/sÂ²)
+                CYdotXdot (double): = object [5,4] in covariance matrix (in m²/s²)
         
         
         """
@@ -5856,7 +5824,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [5,2] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CYdotY (double): = object [5,2] in covariance matrix (in mÂ²/s)
+                CYdotY (double): = object [5,2] in covariance matrix (in m²/s)
         
         
         """
@@ -5866,7 +5834,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [5,5] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CYdotYdot (double): = object [5,5] in covariance matrix (in mÂ²/sÂ²)
+                CYdotYdot (double): = object [5,5] in covariance matrix (in m²/s²)
         
         
         """
@@ -5876,7 +5844,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [5,3] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CYdotZ (double): = object [5,3] in covariance matrix (in mÂ²/s)
+                CYdotZ (double): = object [5,3] in covariance matrix (in m²/s)
         
         
         """
@@ -5886,7 +5854,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [2,1] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CYX (double): = object [2,1] in covariance matrix (in mÂ²)
+                CYX (double): = object [2,1] in covariance matrix (in m²)
         
         
         """
@@ -5896,7 +5864,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [2,2] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CYY (double): = object [2,2] in covariance matrix (in mÂ²)
+                CYY (double): = object [2,2] in covariance matrix (in m²)
         
         
         """
@@ -5906,7 +5874,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [6,1] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CZdotX (double): = object [6,1] in covariance matrix (in mÂ²/s)
+                CZdotX (double): = object [6,1] in covariance matrix (in m²/s)
         
         
         """
@@ -5916,7 +5884,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [6,4] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CZdotXdot (double): = object [6,4] in covariance matrix (in mÂ²/sÂ²)
+                CZdotXdot (double): = object [6,4] in covariance matrix (in m²/s²)
         
         
         """
@@ -5926,7 +5894,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [6,2] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CZdotY (double): = object [6,2] in covariance matrix (in mÂ²/s)
+                CZdotY (double): = object [6,2] in covariance matrix (in m²/s)
         
         
         """
@@ -5936,7 +5904,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [6,5] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CZdotYdot (double): = object [6,5] in covariance matrix (in mÂ²/sÂ²)
+                CZdotYdot (double): = object [6,5] in covariance matrix (in m²/s²)
         
         
         """
@@ -5946,7 +5914,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [6,3] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CZdotZ (double): = object [6,3] in covariance matrix (in mÂ²/s)
+                CZdotZ (double): = object [6,3] in covariance matrix (in m²/s)
         
         
         """
@@ -5956,7 +5924,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [6,6] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CZdotZdot (double): = object [6,6] in covariance matrix (in mÂ²/sÂ²)
+                CZdotZdot (double): = object [6,6] in covariance matrix (in m²/s²)
         
         
         """
@@ -5966,7 +5934,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [3,1] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CZX (double): = object [3,1] in covariance matrix (in mÂ²)
+                CZX (double): = object [3,1] in covariance matrix (in m²)
         
         
         """
@@ -5976,7 +5944,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [3,2] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CZY (double): = object [3,2] in covariance matrix (in mÂ²)
+                CZY (double): = object [3,2] in covariance matrix (in m²)
         
         
         """
@@ -5986,7 +5954,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
             Set the object [3,3] in covariance matrix (with index starting at 1).
         
             Parameters:
-                CZZ (double): = object [3,3] in covariance matrix (in mÂ²)
+                CZZ (double): = object [3,3] in covariance matrix (in m²)
         
         
         """
@@ -6001,8 +5969,8 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate`Â in
-                classÂ :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
+                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
         
             Parameters:
                 version (double): format version
@@ -6013,7 +5981,7 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
 
 class XYZCovarianceKey(java.lang.Enum['XYZCovarianceKey']):
     """
-    public enum XYZCovarianceKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.cdm.XYZCovarianceKey`>
+    public enum XYZCovarianceKey extends :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.cdm.XYZCovarianceKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.cdm.XYZCovariance` entries.
     """
@@ -6090,14 +6058,14 @@ class XYZCovarianceKey(java.lang.Enum['XYZCovarianceKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -6110,9 +6078,8 @@ class XYZCovarianceKey(java.lang.Enum['XYZCovarianceKey']):
         
             .. code-block: java
             
-            
-            for (XYZCovarianceKey c : XYZCovarianceKey.values())
-                System.out.println(c);
+            for (XYZCovarianceKey c : XYZCovarianceKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -6124,7 +6091,7 @@ class XYZCovarianceKey(java.lang.Enum['XYZCovarianceKey']):
 
 class XmlSubStructureKey(java.lang.Enum['XmlSubStructureKey']):
     """
-    public enum XmlSubStructureKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.cdm.XmlSubStructureKey`>
+    public enum XmlSubStructureKey extends :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.cdm.XmlSubStructureKey`>
     
         Keywords for CDM data sub-structure in XML files.
     
@@ -6166,14 +6133,14 @@ class XmlSubStructureKey(java.lang.Enum['XmlSubStructureKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -6186,9 +6153,8 @@ class XmlSubStructureKey(java.lang.Enum['XmlSubStructureKey']):
         
             .. code-block: java
             
-            
-            for (XmlSubStructureKey c : XmlSubStructureKey.values())
-                System.out.println(c);
+            for (XmlSubStructureKey c : XmlSubStructureKey.values())
+                System.out.println(c);
             
         
             Returns:

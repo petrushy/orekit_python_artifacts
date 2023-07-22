@@ -9,7 +9,7 @@ import typing
 
 class AlternativeHypothesis(java.lang.Enum['AlternativeHypothesis']):
     """
-    public enum AlternativeHypothesis extends Enum<:class:`~org.hipparchus.stat.inference.AlternativeHypothesis`>
+    public enum AlternativeHypothesis extends :class:`~org.hipparchus.stat.inference.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.hipparchus.stat.inference.AlternativeHypothesis`>
     
         Represents an alternative hypothesis for a hypothesis test.
     """
@@ -28,14 +28,14 @@ class AlternativeHypothesis(java.lang.Enum['AlternativeHypothesis']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.hipparchus.stat.inference.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.hipparchus.stat.inference.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.hipparchus.stat.inference.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -61,7 +61,7 @@ class AlternativeHypothesis(java.lang.Enum['AlternativeHypothesis']):
 
 class BinomialTest:
     """
-    public class BinomialTest extends Object
+    public class BinomialTest extends :class:`~org.hipparchus.stat.inference.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Implements binomial test statistics.
     
@@ -96,9 +96,9 @@ class BinomialTest:
                 true if the null hypothesis can be rejected with confidence :code:`1 - alpha`
         
             Raises:
-                : if :code:`numberOfTrials` or :code:`numberOfSuccesses` is negative
-                : if :code:`probability` is not between 0 and 1
-                : if :code:`numberOfTrials` < :code:`numberOfSuccesses` or if :code:`alternateHypothesis` is null.
+                :class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus`: if :code:`numberOfTrials` or :code:`numberOfSuccesses` is negative
+                :class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus`: if :code:`probability` is not between 0 and 1
+                :class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus`: if :code:`numberOfTrials` < :code:`numberOfSuccesses` or if :code:`alternateHypothesis` is null.
         
             Also see:
                 :class:`~org.hipparchus.stat.inference.AlternativeHypothesis`
@@ -139,9 +139,9 @@ class BinomialTest:
                 p-value
         
             Raises:
-                : if :code:`numberOfTrials` or :code:`numberOfSuccesses` is negative
-                : if :code:`probability` is not between 0 and 1
-                : if :code:`numberOfTrials` < :code:`numberOfSuccesses` or if :code:`alternateHypothesis` is null.
+                :class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus`: if :code:`numberOfTrials` or :code:`numberOfSuccesses` is negative
+                :class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus`: if :code:`probability` is not between 0 and 1
+                :class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus`: if :code:`numberOfTrials` < :code:`numberOfSuccesses` or if :code:`alternateHypothesis` is null.
         
             Also see:
                 :class:`~org.hipparchus.stat.inference.AlternativeHypothesis`
@@ -187,7 +187,7 @@ class GTest:
 
 class InferenceTestUtils:
     """
-    public class InferenceTestUtils extends Object
+    public class InferenceTestUtils extends :class:`~org.hipparchus.stat.inference.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         A collection of static methods to create inference test instances or to perform inference tests.
     """
@@ -346,7 +346,7 @@ class InferenceTestUtils:
 
 class KolmogorovSmirnovTest:
     """
-    public class KolmogorovSmirnovTest extends Object
+    public class KolmogorovSmirnovTest extends :class:`~org.hipparchus.stat.inference.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Implementation of the ` Kolmogorov-Smirnov (K-S) test <http://en.wikipedia.org/wiki/Kolmogorov-Smirnov_test>` for
         equality of continuous distributions.
@@ -361,7 +361,8 @@ class KolmogorovSmirnovTest:
         from the same underlying distribution. In this case, the test statistic is \(D_{n,m}=\sup_t | F_n(t)-F_m(t)|\) where
         \(n\) is the length of :code:`x`, \(m\) is the length of :code:`y`, \(F_n\) is the empirical distribution that puts mass
         \(1/n\) at each of the values in :code:`x` and \(F_m\) is the empirical distribution of the :code:`y` values. The
-        default 2-sample test method, null works as follows:
+        default 2-sample test method, :meth:`~org.hipparchus.stat.inference.KolmogorovSmirnovTest.kolmogorovSmirnovTest` works
+        as follows:
     
           - For small samples (where the product of the sample sizes is less than
             :meth:`~org.hipparchus.stat.inference.KolmogorovSmirnovTest.LARGE_SAMPLE_PRODUCT`), the method presented in [4] is used
@@ -374,9 +375,10 @@ class KolmogorovSmirnovTest:
     
         If the product of the sample sizes is less than
         :meth:`~org.hipparchus.stat.inference.KolmogorovSmirnovTest.LARGE_SAMPLE_PRODUCT` and the sample data contains ties,
-        random jitter is added to the sample data to break ties before applying the algorithm above. Alternatively, the null
-        method, modeled after `ks.boot <http://sekhon.berkeley.edu/matching/ks.boot.html>` in the R Matching package [3], can be
-        used if ties are known to be present in the data.
+        random jitter is added to the sample data to break ties before applying the algorithm above. Alternatively, the
+        :meth:`~org.hipparchus.stat.inference.KolmogorovSmirnovTest.bootstrap` method, modeled after `ks.boot
+        <http://sekhon.berkeley.edu/matching/ks.boot.html>` in the R Matching package [3], can be used if ties are known to be
+        present in the data.
     
         In the two-sample case, \(D_{n,m}\) has a discrete distribution. This makes the p-value associated with the null
         hypothesis \(H_0 : D_{n,m} \ge d \) differ from \(H_0 : D_{n,m} > d \) by the mass of the observed value \(d\). To
@@ -388,7 +390,8 @@ class KolmogorovSmirnovTest:
           - :meth:`~org.hipparchus.stat.inference.KolmogorovSmirnovTest.exactP` computes exact 2-sample p-values
           - :meth:`~org.hipparchus.stat.inference.KolmogorovSmirnovTest.approximateP` uses the asymptotic distribution The
             :code:`boolean` arguments in the first two methods allow the probability used to estimate the p-value to be expressed
-            using strict or non-strict inequality. See null.
+            using strict or non-strict inequality. See
+            :meth:`~org.hipparchus.stat.inference.KolmogorovSmirnovTest.kolmogorovSmirnovTest`.
     
     
         References:
@@ -401,11 +404,12 @@ class KolmogorovSmirnovTest:
             The Matching package for R <http://www.jstatsoft.org/article/view/v042i07>` Journal of Statistical Software, 42(7):
             1-52.
           - [4] Kim, P. J. and Jennrich, R. I. (1970). Tables of the Exact Sampling Distribution of the Two-Sample
-            Kolmogorov-Smirnov Criterion D_mn ,mÃ¢â€°Â¦n in Selected Tables in Mathematical Statistics, Vol. 1, H. L. Harter and D.
-            B. Owen, editors.
+            Kolmogorov-Smirnov Criterion D_mn ,m≦n in Selected Tables in Mathematical Statistics, Vol. 1, H. L. Harter and D. B.
+            Owen, editors.
     
     
-        Note that [1] contains an error in computing h, refer to MATH-437 for details.
+        Note that [1] contains an error in computing h, refer to
+        :class:`~org.hipparchus.stat.inference.https:.issues.apache.org.jira.browse.MATH` for details.
     """
     @typing.overload
     def __init__(self): ...
@@ -414,7 +418,9 @@ class KolmogorovSmirnovTest:
     def approximateP(self, double: float, int: int, int2: int) -> float:
         """
             Uses the Kolmogorov-Smirnov distribution to approximate \(P(D_{n,m} > d)\) where \(D_{n,m}\) is the 2-sample
-            Kolmogorov-Smirnov statistic. See null for the definition of \(D_{n,m}\).
+            Kolmogorov-Smirnov statistic. See
+            :meth:`~org.hipparchus.stat.inference.KolmogorovSmirnovTest.kolmogorovSmirnovStatistic` for the definition of
+            \(D_{n,m}\).
         
             Specifically, what is returned is \(1 - k(d \sqrt{mn / (m + n)})\) where \(k(t) = 1 + 2 \sum_{i=1}^\infty (-1)^i e^{-2
             i^2 t^2}\). See :meth:`~org.hipparchus.stat.inference.KolmogorovSmirnovTest.ksSum` for details on how convergence of the
@@ -482,7 +488,9 @@ class KolmogorovSmirnovTest:
     def exactP(self, double: float, int: int, int2: int, boolean: bool) -> float:
         """
             Computes \(P(D_{n,m} > d)\) if :code:`strict` is :code:`true`; otherwise \(P(D_{n,m} \ge d)\), where \(D_{n,m}\) is the
-            2-sample Kolmogorov-Smirnov statistic. See null for the definition of \(D_{n,m}\).
+            2-sample Kolmogorov-Smirnov statistic. See
+            :meth:`~org.hipparchus.stat.inference.KolmogorovSmirnovTest.kolmogorovSmirnovStatistic` for the definition of
+            \(D_{n,m}\).
         
             The returned probability is exact, implemented by unwinding the recursive function definitions presented in [4] from the
             class javadoc.
@@ -508,15 +516,15 @@ class KolmogorovSmirnovTest:
             distribution that puts mass \(1/n\) at each of the values in :code:`data`.
         
             Parameters:
-                distribution (RealDistribution): reference distribution
+                distribution (:class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus`): reference distribution
                 data (double[]): sample being evaluated
         
             Returns:
                 Kolmogorov-Smirnov statistic \(D_n\)
         
             Raises:
-                : if :code:`data` does not have length at least 2
-                : if :code:`data` is null
+                :class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus`: if :code:`data` does not have length at least 2
+                :class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus`: if :code:`data` is null
         
             Computes the two-sample Kolmogorov-Smirnov test statistic, \(D_{n,m}=\sup_x |F_n(x)-F_m(x)|\) where \(n\) is the length
             of :code:`x`, \(m\) is the length of :code:`y`, \(F_n\) is the empirical distribution that puts mass \(1/n\) at each of
@@ -531,8 +539,8 @@ class KolmogorovSmirnovTest:
                 same underlying distribution
         
             Raises:
-                : if either :code:`x` or :code:`y` does not have length at least 2
-                : if either :code:`x` or :code:`y` is null
+                :class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus`: if either :code:`x` or :code:`y` does not have length at least 2
+                :class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus`: if either :code:`x` or :code:`y` is null
         
         
         """
@@ -548,7 +556,7 @@ class KolmogorovSmirnovTest:
             precision. See :meth:`~org.hipparchus.stat.inference.KolmogorovSmirnovTest.cdfExact`.
         
             Parameters:
-                distribution (RealDistribution): reference distribution
+                distribution (:class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus`): reference distribution
                 data (double[]): sample being being evaluated
                 exact (boolean): whether or not to force exact computation of the p-value
         
@@ -556,15 +564,16 @@ class KolmogorovSmirnovTest:
                 the p-value associated with the null hypothesis that :code:`data` is a sample from :code:`distribution`
         
             Raises:
-                : if :code:`data` does not have length at least 2
-                : if :code:`data` is null
+                :class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus`: if :code:`data` does not have length at least 2
+                :class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus`: if :code:`data` is null
         
             Computes the *p-value*, or *observed significance level*, of a two-sample ` Kolmogorov-Smirnov test
             <http://en.wikipedia.org/wiki/Kolmogorov-Smirnov_test>` evaluating the null hypothesis that :code:`x` and :code:`y` are
             samples drawn from the same probability distribution. Specifically, what is returned is an estimate of the probability
-            that the null associated with a randomly selected partition of the combined sample into subsamples of sizes
-            :code:`x.length` and :code:`y.length` will strictly exceed (if :code:`strict` is :code:`true`) or be at least as large
-            as :code:`strict = false`) as :code:`kolmogorovSmirnovStatistic(x, y)`.
+            that the :meth:`~org.hipparchus.stat.inference.KolmogorovSmirnovTest.kolmogorovSmirnovStatistic` associated with a
+            randomly selected partition of the combined sample into subsamples of sizes :code:`x.length` and :code:`y.length` will
+            strictly exceed (if :code:`strict` is :code:`true`) or be at least as large as :code:`strict = false`) as
+            :code:`kolmogorovSmirnovStatistic(x, y)`.
         
               - For small samples (where the product of the sample sizes is less than
                 :meth:`~org.hipparchus.stat.inference.KolmogorovSmirnovTest.LARGE_SAMPLE_PRODUCT`), the exact p-value is computed using
@@ -580,7 +589,8 @@ class KolmogorovSmirnovTest:
             to break ties before computing \(D_{n,m}\) and the p-value. The jitter is uniformly distributed on (-minDelta / 2,
             minDelta / 2) where minDelta is the smallest pairwise difference between values in the combined sample.
         
-            If ties are known to be present in the data, null may be used as an alternative method for estimating the p-value.
+            If ties are known to be present in the data, :meth:`~org.hipparchus.stat.inference.KolmogorovSmirnovTest.bootstrap` may
+            be used as an alternative method for estimating the p-value.
         
             Parameters:
                 x (double[]): first sample dataset
@@ -591,16 +601,17 @@ class KolmogorovSmirnovTest:
                 p-value associated with the null hypothesis that :code:`x` and :code:`y` represent samples from the same distribution
         
             Raises:
-                : if either :code:`x` or :code:`y` does not have length at least 2
-                : if either :code:`x` or :code:`y` is null
+                :class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus`: if either :code:`x` or :code:`y` does not have length at least 2
+                :class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus`: if either :code:`x` or :code:`y` is null
         
             Also see:
+                :meth:`~org.hipparchus.stat.inference.KolmogorovSmirnovTest.bootstrap`
         
             Performs a ` Kolmogorov-Smirnov test <http://en.wikipedia.org/wiki/Kolmogorov-Smirnov_test>` evaluating the null
             hypothesis that :code:`data` conforms to :code:`distribution`.
         
             Parameters:
-                distribution (RealDistribution): reference distribution
+                distribution (:class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus`): reference distribution
                 data (double[]): sample being being evaluated
                 alpha (double): significance level of the test
         
@@ -609,8 +620,8 @@ class KolmogorovSmirnovTest:
                 :code:`alpha`
         
             Raises:
-                : if :code:`data` does not have length at least 2
-                : if :code:`data` is null
+                :class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus`: if :code:`data` does not have length at least 2
+                :class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus`: if :code:`data` is null
         
         
         """
@@ -621,7 +632,7 @@ class KolmogorovSmirnovTest:
             Computes the *p-value*, or *observed significance level*, of a two-sample ` Kolmogorov-Smirnov test
             <http://en.wikipedia.org/wiki/Kolmogorov-Smirnov_test>` evaluating the null hypothesis that :code:`x` and :code:`y` are
             samples drawn from the same probability distribution. Assumes the strict form of the inequality used to compute the
-            p-value. See null.
+            p-value. See :meth:`~org.hipparchus.stat.inference.KolmogorovSmirnovTest.kolmogorovSmirnovTest`.
         
             Parameters:
                 x (double[]): first sample dataset
@@ -631,23 +642,23 @@ class KolmogorovSmirnovTest:
                 p-value associated with the null hypothesis that :code:`x` and :code:`y` represent samples from the same distribution
         
             Raises:
-                : if either :code:`x` or :code:`y` does not have length at least 2
-                : if either :code:`x` or :code:`y` is null
+                :class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus`: if either :code:`x` or :code:`y` does not have length at least 2
+                :class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus`: if either :code:`x` or :code:`y` is null
         
             Computes the *p-value*, or *observed significance level*, of a one-sample ` Kolmogorov-Smirnov test
             <http://en.wikipedia.org/wiki/Kolmogorov-Smirnov_test>` evaluating the null hypothesis that :code:`data` conforms to
             :code:`distribution`.
         
             Parameters:
-                distribution (RealDistribution): reference distribution
+                distribution (:class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus`): reference distribution
                 data (double[]): sample being being evaluated
         
             Returns:
                 the p-value associated with the null hypothesis that :code:`data` is a sample from :code:`distribution`
         
             Raises:
-                : if :code:`data` does not have length at least 2
-                : if :code:`data` is null
+                :class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus`: if :code:`data` does not have length at least 2
+                :class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus`: if :code:`data` is null
         
         """
         ...
@@ -661,7 +672,8 @@ class KolmogorovSmirnovTest:
         """
             Computes \( 1 + 2 \sum_{i=1}^\infty (-1)^i e^{-2 i^2 t^2} \) stopping when successive partial sums are within
             :code:`tolerance` of one another, or when :code:`maxIterations` partial sums have been computed. If the sum does not
-            converge before :code:`maxIterations` iterations a null is thrown.
+            converge before :code:`maxIterations` iterations a
+            :class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus` is thrown.
         
             Parameters:
                 t (double): argument
@@ -672,7 +684,7 @@ class KolmogorovSmirnovTest:
                 Kolmogorov sum evaluated at t
         
             Raises:
-                : if the series does not converge
+                :class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus`: if the series does not converge
         
         
         """
@@ -694,7 +706,7 @@ class KolmogorovSmirnovTest:
 
 class MannWhitneyUTest:
     """
-    public class MannWhitneyUTest extends Object
+    public class MannWhitneyUTest extends :class:`~org.hipparchus.stat.inference.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         An implementation of the Mann-Whitney U test.
     
@@ -719,7 +731,7 @@ class MannWhitneyUTest:
 
 class OneWayAnova:
     """
-    public class OneWayAnova extends Object
+    public class OneWayAnova extends :class:`~org.hipparchus.stat.inference.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Implements one-way ANOVA (analysis of variance) statistics.
     
@@ -727,7 +739,7 @@ class OneWayAnova:
         accountants, lawyers, doctors and computer programmers). When two categories are given, this is equivalent to the
         :class:`~org.hipparchus.stat.inference.TTest`.
     
-        Uses the null to estimate exact p-values.
+        Uses the :class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus` to estimate exact p-values.
     
         This implementation is based on a description at http://faculty.vassar.edu/lowry/ch13pt1.html
     
@@ -789,7 +801,7 @@ class TTest:
 
 class WilcoxonSignedRankTest:
     """
-    public class WilcoxonSignedRankTest extends Object
+    public class WilcoxonSignedRankTest extends :class:`~org.hipparchus.stat.inference.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         An implementation of the Wilcoxon signed-rank test. This implementation currently handles only paired (equal length)
         samples and discards tied pairs from the analysis. The latter behavior differs from the R implementation of wilcox.test

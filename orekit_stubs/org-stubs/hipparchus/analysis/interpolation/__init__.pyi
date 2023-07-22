@@ -10,7 +10,7 @@ import typing
 
 class BicubicInterpolatingFunction(org.hipparchus.analysis.BivariateFunction):
     """
-    public class BicubicInterpolatingFunction extends Object implements :class:`~org.hipparchus.analysis.BivariateFunction`
+    public class BicubicInterpolatingFunction extends :class:`~org.hipparchus.analysis.interpolation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.BivariateFunction`
     
         Function that implements the ` bicubic spline interpolation <http://en.wikipedia.org/wiki/Bicubic_interpolation>`.
     """
@@ -33,7 +33,7 @@ class BicubicInterpolatingFunction(org.hipparchus.analysis.BivariateFunction):
 
 class BilinearInterpolatingFunction(org.hipparchus.analysis.BivariateFunction, org.hipparchus.analysis.FieldBivariateFunction, java.io.Serializable):
     """
-    public class BilinearInterpolatingFunction extends Object implements :class:`~org.hipparchus.analysis.BivariateFunction`, :class:`~org.hipparchus.analysis.FieldBivariateFunction`, Serializable
+    public class BilinearInterpolatingFunction extends :class:`~org.hipparchus.analysis.interpolation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.BivariateFunction`, :class:`~org.hipparchus.analysis.FieldBivariateFunction`, :class:`~org.hipparchus.analysis.interpolation.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Interpolate grid data using bi-linear interpolation.
     
@@ -93,8 +93,8 @@ class BilinearInterpolatingFunction(org.hipparchus.analysis.BivariateFunction, o
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.BivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.BivariateFunction`
+                :meth:`~org.hipparchus.analysis.BivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.BivariateFunction`
         
             Parameters:
                 x (double): Abscissa for which the function value should be computed.
@@ -111,8 +111,8 @@ class BilinearInterpolatingFunction(org.hipparchus.analysis.BivariateFunction, o
             Compute the value for the function.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.FieldBivariateFunction.value`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.FieldBivariateFunction`
+                :meth:`~org.hipparchus.analysis.FieldBivariateFunction.value` in
+                interface :class:`~org.hipparchus.analysis.FieldBivariateFunction`
         
             Parameters:
                 x (T): Abscissa for which the function value should be computed.
@@ -140,7 +140,7 @@ class BivariateGridInterpolator:
 _FieldHermiteInterpolator__T = typing.TypeVar('_FieldHermiteInterpolator__T', bound=org.hipparchus.FieldElement)  # <T>
 class FieldHermiteInterpolator(typing.Generic[_FieldHermiteInterpolator__T]):
     """
-    public class FieldHermiteInterpolator<T extends :class:`~org.hipparchus.FieldElement`<T>> extends Object
+    public class FieldHermiteInterpolator<T extends :class:`~org.hipparchus.FieldElement`<T>> extends :class:`~org.hipparchus.analysis.interpolation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Polynomial interpolator using both sample values and sample derivatives.
     
@@ -178,7 +178,7 @@ class GridAxis(java.io.Serializable):
 
 class HermiteInterpolator(org.hipparchus.analysis.differentiation.UnivariateDifferentiableVectorFunction):
     """
-    public class HermiteInterpolator extends Object implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableVectorFunction`
+    public class HermiteInterpolator extends :class:`~org.hipparchus.analysis.interpolation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableVectorFunction`
     
         Polynomial interpolator using both sample values and sample derivatives.
     
@@ -202,7 +202,7 @@ class HermiteInterpolator(org.hipparchus.analysis.differentiation.UnivariateDiff
 
 class InterpolatingMicrosphere:
     """
-    public class InterpolatingMicrosphere extends Object
+    public class InterpolatingMicrosphere extends :class:`~org.hipparchus.analysis.interpolation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Utility class for the :class:`~org.hipparchus.analysis.interpolation.MicrosphereProjectionInterpolator` algorithm.
     """
@@ -271,7 +271,7 @@ class MultivariateInterpolator:
 
 class PiecewiseBicubicSplineInterpolatingFunction(org.hipparchus.analysis.BivariateFunction, org.hipparchus.analysis.FieldBivariateFunction):
     """
-    public class PiecewiseBicubicSplineInterpolatingFunction extends Object implements :class:`~org.hipparchus.analysis.BivariateFunction`, :class:`~org.hipparchus.analysis.FieldBivariateFunction`
+    public class PiecewiseBicubicSplineInterpolatingFunction extends :class:`~org.hipparchus.analysis.interpolation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.BivariateFunction`, :class:`~org.hipparchus.analysis.FieldBivariateFunction`
     
         Function that implements the `bicubic spline <http://www.paulinternet.nl/?page=bicubic>` interpolation. This
         implementation currently uses :class:`~org.hipparchus.analysis.interpolation.AkimaSplineInterpolator` as the underlying
@@ -301,7 +301,7 @@ class PiecewiseBicubicSplineInterpolatingFunction(org.hipparchus.analysis.Bivari
 
 class TricubicInterpolatingFunction(org.hipparchus.analysis.TrivariateFunction):
     """
-    public class TricubicInterpolatingFunction extends Object implements :class:`~org.hipparchus.analysis.TrivariateFunction`
+    public class TricubicInterpolatingFunction extends :class:`~org.hipparchus.analysis.interpolation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.TrivariateFunction`
     
         Function that implements the ` tricubic spline interpolation <http://en.wikipedia.org/wiki/Tricubic_interpolation>`, as
         proposed in
@@ -350,7 +350,7 @@ class UnivariateInterpolator:
 
 class AkimaSplineInterpolator(UnivariateInterpolator, FieldUnivariateInterpolator):
     """
-    public class AkimaSplineInterpolator extends Object implements :class:`~org.hipparchus.analysis.interpolation.UnivariateInterpolator`, :class:`~org.hipparchus.analysis.interpolation.FieldUnivariateInterpolator`
+    public class AkimaSplineInterpolator extends :class:`~org.hipparchus.analysis.interpolation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.interpolation.UnivariateInterpolator`, :class:`~org.hipparchus.analysis.interpolation.FieldUnivariateInterpolator`
     
         Computes a cubic spline interpolation for the data set using the Akima algorithm, as originally formulated by Hiroshi
         Akima in his 1970 paper "A New Method of Interpolation and Smooth Curve Fitting Based on Local Procedures." J. ACM 17, 4
@@ -359,9 +359,10 @@ class AkimaSplineInterpolator(UnivariateInterpolator, FieldUnivariateInterpolato
         This implementation is based on the Akima implementation in the CubicSpline class in the Math.NET Numerics library. The
         method referenced is CubicSpline.InterpolateAkimaSorted
     
-        The null method returns a :class:`~org.hipparchus.analysis.polynomials.PolynomialSplineFunction` consisting of n cubic
-        polynomials, defined over the subintervals determined by the x values, :code:`x[0] < x[i] ... < x[n]`. The Akima
-        algorithm requires that :code:`n >= 5`.
+        The :meth:`~org.hipparchus.analysis.interpolation.AkimaSplineInterpolator.interpolate` method returns a
+        :class:`~org.hipparchus.analysis.polynomials.PolynomialSplineFunction` consisting of n cubic polynomials, defined over
+        the subintervals determined by the x values, :code:`x[0] < x[i] ... < x[n]`. The Akima algorithm requires that :code:`n
+        >= 5`.
     """
     @typing.overload
     def __init__(self): ...
@@ -375,7 +376,7 @@ class AkimaSplineInterpolator(UnivariateInterpolator, FieldUnivariateInterpolato
 
 class BicubicInterpolator(BivariateGridInterpolator):
     """
-    public class BicubicInterpolator extends Object implements :class:`~org.hipparchus.analysis.interpolation.BivariateGridInterpolator`
+    public class BicubicInterpolator extends :class:`~org.hipparchus.analysis.interpolation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.interpolation.BivariateGridInterpolator`
     
         Generates a :class:`~org.hipparchus.analysis.interpolation.BicubicInterpolatingFunction`.
     
@@ -391,7 +392,7 @@ class BicubicInterpolator(BivariateGridInterpolator):
 
 class BilinearInterpolator(BivariateGridInterpolator):
     """
-    public class BilinearInterpolator extends Object implements :class:`~org.hipparchus.analysis.interpolation.BivariateGridInterpolator`
+    public class BilinearInterpolator extends :class:`~org.hipparchus.analysis.interpolation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.interpolation.BivariateGridInterpolator`
     
         Interpolate grid data using bi-linear interpolation.
     
@@ -403,7 +404,7 @@ class BilinearInterpolator(BivariateGridInterpolator):
 
 class DividedDifferenceInterpolator(UnivariateInterpolator, java.io.Serializable):
     """
-    public class DividedDifferenceInterpolator extends Object implements :class:`~org.hipparchus.analysis.interpolation.UnivariateInterpolator`, Serializable
+    public class DividedDifferenceInterpolator extends :class:`~org.hipparchus.analysis.interpolation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.interpolation.UnivariateInterpolator`, :class:`~org.hipparchus.analysis.interpolation.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Implements the ` Divided Difference Algorithm
         <http://mathworld.wolfram.com/NewtonsDividedDifferenceInterpolationFormula.html>` for interpolation of real univariate
@@ -432,8 +433,8 @@ class InterpolatingMicrosphere2D(InterpolatingMicrosphere):
             Perform a copy.
         
             Overrides:
-                :meth:`~org.hipparchus.analysis.interpolation.InterpolatingMicrosphere.copy`Â in
-                classÂ :class:`~org.hipparchus.analysis.interpolation.InterpolatingMicrosphere`
+                :meth:`~org.hipparchus.analysis.interpolation.InterpolatingMicrosphere.copy` in
+                class :class:`~org.hipparchus.analysis.interpolation.InterpolatingMicrosphere`
         
             Returns:
                 a copy of this instance.
@@ -444,7 +445,7 @@ class InterpolatingMicrosphere2D(InterpolatingMicrosphere):
 
 class LinearInterpolator(UnivariateInterpolator, FieldUnivariateInterpolator):
     """
-    public class LinearInterpolator extends Object implements :class:`~org.hipparchus.analysis.interpolation.UnivariateInterpolator`, :class:`~org.hipparchus.analysis.interpolation.FieldUnivariateInterpolator`
+    public class LinearInterpolator extends :class:`~org.hipparchus.analysis.interpolation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.interpolation.UnivariateInterpolator`, :class:`~org.hipparchus.analysis.interpolation.FieldUnivariateInterpolator`
     
         Implements a linear function for interpolation of real univariate functions.
     """
@@ -457,7 +458,7 @@ class LinearInterpolator(UnivariateInterpolator, FieldUnivariateInterpolator):
 
 class LoessInterpolator(UnivariateInterpolator, java.io.Serializable):
     """
-    public class LoessInterpolator extends Object implements :class:`~org.hipparchus.analysis.interpolation.UnivariateInterpolator`, Serializable
+    public class LoessInterpolator extends :class:`~org.hipparchus.analysis.interpolation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.interpolation.UnivariateInterpolator`, :class:`~org.hipparchus.analysis.interpolation.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Implements the ` Local Regression Algorithm <http://en.wikipedia.org/wiki/Local_regression>` (also Loess, Lowess) for
         interpolation of real univariate functions.
@@ -518,7 +519,7 @@ class LoessInterpolator(UnivariateInterpolator, java.io.Serializable):
 
 class MicrosphereProjectionInterpolator(MultivariateInterpolator):
     """
-    public class MicrosphereProjectionInterpolator extends Object implements :class:`~org.hipparchus.analysis.interpolation.MultivariateInterpolator`
+    public class MicrosphereProjectionInterpolator extends :class:`~org.hipparchus.analysis.interpolation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.interpolation.MultivariateInterpolator`
     
         Interpolator that implements the algorithm described in *William Dudziak*'s `MS thesis
         <http://www.dudziak.com/microsphere.pdf>`.
@@ -531,7 +532,7 @@ class MicrosphereProjectionInterpolator(MultivariateInterpolator):
 
 class NevilleInterpolator(UnivariateInterpolator, java.io.Serializable):
     """
-    public class NevilleInterpolator extends Object implements :class:`~org.hipparchus.analysis.interpolation.UnivariateInterpolator`, Serializable
+    public class NevilleInterpolator extends :class:`~org.hipparchus.analysis.interpolation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.interpolation.UnivariateInterpolator`, :class:`~org.hipparchus.analysis.interpolation.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Implements the ` Neville's Algorithm <http://mathworld.wolfram.com/NevillesAlgorithm.html>` for interpolation of real
         univariate functions. For reference, see **Introduction to Numerical Analysis**, ISBN 038795452X, chapter 2.
@@ -547,7 +548,7 @@ class NevilleInterpolator(UnivariateInterpolator, java.io.Serializable):
 
 class PiecewiseBicubicSplineInterpolator(BivariateGridInterpolator):
     """
-    public class PiecewiseBicubicSplineInterpolator extends Object implements :class:`~org.hipparchus.analysis.interpolation.BivariateGridInterpolator`
+    public class PiecewiseBicubicSplineInterpolator extends :class:`~org.hipparchus.analysis.interpolation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.interpolation.BivariateGridInterpolator`
     
         Generates a piecewise-bicubic interpolating function.
     """
@@ -564,7 +565,7 @@ class SplineInterpolator(UnivariateInterpolator, FieldUnivariateInterpolator):
 
 class TricubicInterpolator(TrivariateGridInterpolator):
     """
-    public class TricubicInterpolator extends Object implements :class:`~org.hipparchus.analysis.interpolation.TrivariateGridInterpolator`
+    public class TricubicInterpolator extends :class:`~org.hipparchus.analysis.interpolation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.interpolation.TrivariateGridInterpolator`
     
         Generates a tricubic interpolating function.
     """
@@ -573,7 +574,7 @@ class TricubicInterpolator(TrivariateGridInterpolator):
 
 class UnivariatePeriodicInterpolator(UnivariateInterpolator):
     """
-    public class UnivariatePeriodicInterpolator extends Object implements :class:`~org.hipparchus.analysis.interpolation.UnivariateInterpolator`
+    public class UnivariatePeriodicInterpolator extends :class:`~org.hipparchus.analysis.interpolation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.interpolation.UnivariateInterpolator`
     
         Adapter for classes implementing the :class:`~org.hipparchus.analysis.interpolation.UnivariateInterpolator` interface.
         The data to be interpolated is assumed to be periodic. Thus values that are outside of the range can be passed to the

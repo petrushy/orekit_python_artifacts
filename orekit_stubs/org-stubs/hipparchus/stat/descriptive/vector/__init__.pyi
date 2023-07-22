@@ -7,7 +7,7 @@ import typing
 
 class VectorialCovariance(java.io.Serializable):
     """
-    public class VectorialCovariance extends Object implements Serializable
+    public class VectorialCovariance extends :class:`~org.hipparchus.stat.descriptive.vector.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.stat.descriptive.vector.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Returns the covariance matrix of the available vectors.
     
@@ -25,7 +25,8 @@ class VectorialCovariance(java.io.Serializable):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.stat.descriptive.vector.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.stat.descriptive.vector.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -54,7 +55,8 @@ class VectorialCovariance(java.io.Serializable):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.stat.descriptive.vector.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.stat.descriptive.vector.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -63,7 +65,7 @@ class VectorialCovariance(java.io.Serializable):
 
 class VectorialStorelessStatistic(org.hipparchus.stat.descriptive.StorelessMultivariateStatistic, java.io.Serializable):
     """
-    public class VectorialStorelessStatistic extends Object implements :class:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic`, Serializable
+    public class VectorialStorelessStatistic extends :class:`~org.hipparchus.stat.descriptive.vector.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic`, :class:`~org.hipparchus.stat.descriptive.vector.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Uses an independent :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic` instance for each component
         of a vector.
@@ -77,8 +79,8 @@ class VectorialStorelessStatistic(org.hipparchus.stat.descriptive.StorelessMulti
             Clears the internal state of the statistic.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic.clear`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic.clear` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic`
         
         
         """
@@ -87,7 +89,8 @@ class VectorialStorelessStatistic(org.hipparchus.stat.descriptive.StorelessMulti
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.stat.descriptive.vector.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.stat.descriptive.vector.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -97,8 +100,8 @@ class VectorialStorelessStatistic(org.hipparchus.stat.descriptive.StorelessMulti
             Returns the dimension of the statistic.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic.getDimension`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic.getDimension` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic`
         
             Returns:
                 the dimension of the statistic
@@ -111,8 +114,8 @@ class VectorialStorelessStatistic(org.hipparchus.stat.descriptive.StorelessMulti
             Returns the number of values that have been added.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic.getN`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic.getN` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic`
         
             Returns:
                 the number of values.
@@ -125,8 +128,8 @@ class VectorialStorelessStatistic(org.hipparchus.stat.descriptive.StorelessMulti
             Returns the current value of the Statistic.
         
             Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic.getResult`Â in
-                interfaceÂ :class:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic.getResult` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic`
         
             Returns:
                 value of the statistic, :code:`Double.NaN` if it has been cleared or just instantiated.
@@ -138,7 +141,8 @@ class VectorialStorelessStatistic(org.hipparchus.stat.descriptive.StorelessMulti
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.stat.descriptive.vector.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.stat.descriptive.vector.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -148,7 +152,8 @@ class VectorialStorelessStatistic(org.hipparchus.stat.descriptive.StorelessMulti
             Updates the internal state of the statistic to reflect the addition of the new value.
         
             Specified by:
-                 in interface :class:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic`
+                :meth:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic.increment` in
+                interface :class:`~org.hipparchus.stat.descriptive.StorelessMultivariateStatistic`
         
             Parameters:
                 d (double[]): the new value

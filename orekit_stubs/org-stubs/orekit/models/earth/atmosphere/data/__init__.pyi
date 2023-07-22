@@ -18,9 +18,11 @@ class CssiSpaceWeatherData(org.orekit.data.AbstractSelfFeedingLoader, org.orekit
         indexes. The :class:`~org.orekit.data.DataLoader` implementation and the parsing is handled by the class
         :class:`~org.orekit.models.earth.atmosphere.data.CssiSpaceWeatherDataLoader`.
     
-        The data are retrieved through space weather files offered by AGI/CSSI on the AGI FTP as well as on the CelesTrack
-        `website <http://celestrak.com/SpaceData/>`. These files are updated several times a day by using several sources
-        mentioned in the `Celestrak space weather data documentation <http://celestrak.com/SpaceData/SpaceWx-format.php>`.
+        The data are retrieved through space weather files offered by AGI/CSSI on the AGI
+        :class:`~org.orekit.models.earth.atmosphere.data.ftp:.ftp.agi.com.pub.DynamicEarthData.SpaceWeather` as well as on the
+        CelesTrack `website <http://celestrak.com/SpaceData/>`. These files are updated several times a day by using several
+        sources mentioned in the `Celestrak space weather data documentation
+        <http://celestrak.com/SpaceData/SpaceWx-format.php>`.
     
         Since:
             10.2
@@ -30,7 +32,7 @@ class CssiSpaceWeatherData(org.orekit.data.AbstractSelfFeedingLoader, org.orekit
     """
     DEFAULT_SUPPORTED_NAMES: typing.ClassVar[str] = ...
     """
-    public static final String DEFAULT_SUPPORTED_NAMES
+    public static final :class:`~org.orekit.models.earth.atmosphere.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_SUPPORTED_NAMES
     
         Default regular expression for supported names that works with all officially published files.
     
@@ -48,8 +50,8 @@ class CssiSpaceWeatherData(org.orekit.data.AbstractSelfFeedingLoader, org.orekit
             Get the last 24H mean geomagnetic index.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.get24HoursKp`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.get24HoursKp` in
+                interface :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -66,18 +68,18 @@ class CssiSpaceWeatherData(org.orekit.data.AbstractSelfFeedingLoader, org.orekit
         
             A :sub:`p` indices are provided as an array such as:
         
-              - 0 â†’ daily A :sub:`p`
-              - 1 â†’ 3 hr A :sub:`p` index for current time
-              - 2 â†’ 3 hr A :sub:`p` index for 3 hrs before current time
-              - 3 â†’ 3 hr A :sub:`p` index for 6 hrs before current time
-              - 4 â†’ 3 hr A :sub:`p` index for 9 hrs before current time
-              - 5 â†’ Average of eight 3 hr A :sub:`p` indices from 12 to 33 hrs prior to current time
-              - 6 â†’ Average of eight 3 hr A :sub:`p` indices from 36 to 57 hrs prior to current time
+              - 0 → daily A :sub:`p`
+              - 1 → 3 hr A :sub:`p` index for current time
+              - 2 → 3 hr A :sub:`p` index for 3 hrs before current time
+              - 3 → 3 hr A :sub:`p` index for 6 hrs before current time
+              - 4 → 3 hr A :sub:`p` index for 9 hrs before current time
+              - 5 → Average of eight 3 hr A :sub:`p` indices from 12 to 33 hrs prior to current time
+              - 6 → Average of eight 3 hr A :sub:`p` indices from 36 to 57 hrs prior to current time
         
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getAp`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getAp` in
+                interface :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -93,8 +95,8 @@ class CssiSpaceWeatherData(org.orekit.data.AbstractSelfFeedingLoader, org.orekit
             Get the value of the 81 day average of F10.7 solar flux centered on current day.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getAverageFlux`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getAverageFlux` in
+                interface :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -110,8 +112,8 @@ class CssiSpaceWeatherData(org.orekit.data.AbstractSelfFeedingLoader, org.orekit
             Get the value of the daily F10.7 solar flux for previous day.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getDailyFlux`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getDailyFlux` in
+                interface :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -127,8 +129,8 @@ class CssiSpaceWeatherData(org.orekit.data.AbstractSelfFeedingLoader, org.orekit
             Get the value of the instantaneous solar flux.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getInstantFlux`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getInstantFlux` in
+                interface :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -144,12 +146,12 @@ class CssiSpaceWeatherData(org.orekit.data.AbstractSelfFeedingLoader, org.orekit
             Gets the available data range maximum date.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getMaxDate`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getMaxDate` in
+                interface :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getMaxDate`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getMaxDate` in
+                interface :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
         
             Returns:
                 the maximum date.
@@ -162,8 +164,8 @@ class CssiSpaceWeatherData(org.orekit.data.AbstractSelfFeedingLoader, org.orekit
             Get the value of the mean solar flux.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getMeanFlux`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getMeanFlux` in
+                interface :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -179,12 +181,12 @@ class CssiSpaceWeatherData(org.orekit.data.AbstractSelfFeedingLoader, org.orekit
             Gets the available data range minimum date.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getMinDate`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getMinDate` in
+                interface :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getMinDate`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getMinDate` in
+                interface :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
         
             Returns:
                 the minimum date.
@@ -198,8 +200,8 @@ class CssiSpaceWeatherData(org.orekit.data.AbstractSelfFeedingLoader, org.orekit
             Get the supported names regular expression.
         
             Overrides:
-                :meth:`~org.orekit.data.AbstractSelfFeedingLoader.getSupportedNames`Â in
-                classÂ :class:`~org.orekit.data.AbstractSelfFeedingLoader`
+                :meth:`~org.orekit.data.AbstractSelfFeedingLoader.getSupportedNames` in
+                class :class:`~org.orekit.data.AbstractSelfFeedingLoader`
         
             Returns:
                 the supported names.
@@ -216,8 +218,8 @@ class CssiSpaceWeatherData(org.orekit.data.AbstractSelfFeedingLoader, org.orekit
             delay=6-abs(lat)*0.033 (lat in deg.)
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getThreeHourlyKP`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getThreeHourlyKP` in
+                interface :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -231,14 +233,15 @@ class CssiSpaceWeatherData(org.orekit.data.AbstractSelfFeedingLoader, org.orekit
 
 class CssiSpaceWeatherDataLoader(org.orekit.data.DataLoader):
     """
-    public class CssiSpaceWeatherDataLoader extends Object implements :class:`~org.orekit.data.DataLoader`
+    public class CssiSpaceWeatherDataLoader extends :class:`~org.orekit.models.earth.atmosphere.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataLoader`
     
         This class reads solar activity data from CSSI Space Weather files for the class
         :class:`~org.orekit.models.earth.atmosphere.data.CssiSpaceWeatherData`.
     
-        The data are retrieved through space weather files offered by CSSI/AGI. The data can be retrieved on the AGI FTP. This
-        file is updated several times a day by using several sources mentioned in the ` Celestrak space weather data
-        documentation <http://celestrak.com/SpaceData/SpaceWx-format.php>`.
+        The data are retrieved through space weather files offered by CSSI/AGI. The data can be retrieved on the AGI
+        :class:`~org.orekit.models.earth.atmosphere.data.ftp:.ftp.agi.com.pub.DynamicEarthData.SpaceWeather`. This file is
+        updated several times a day by using several sources mentioned in the ` Celestrak space weather data documentation
+        <http://celestrak.com/SpaceData/SpaceWx-format.php>`.
     
         Since:
             10.2
@@ -334,17 +337,20 @@ class CssiSpaceWeatherDataLoader(org.orekit.data.DataLoader):
 
 class DtcDataLoader(org.orekit.data.DataLoader):
     """
-    public class DtcDataLoader extends Object implements :class:`~org.orekit.data.DataLoader`
+    public class DtcDataLoader extends :class:`~org.orekit.models.earth.atmosphere.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataLoader`
     
         This class reads solar activity data from DTCFILE files for the class
         :class:`~org.orekit.models.earth.atmosphere.data.JB2008SpaceEnvironmentData`. The code in this class is based of the
         CssiSpaceWeatherDataLoader class. The DTCFILE file contain pre-computed data from Space Environment using the Dst
         indices as well as Ap indices. This computation can be realised using the Fortran code provided by Space Environment
-        Technologies. See this link for more information.
+        Technologies. See
+        :class:`~org.orekit.models.earth.atmosphere.data.https:.sol.spacenvironment.net.JB2008.indices.DTCFILE.TXT` for more
+        information.
     
-        The data is provided by Space Environment Technologies through their website Link.
-        The work done for this class is based on the CssiSpaceWeatherDataLoader class by ClÃƒÂ©ment Jonglez, the JB2008
-        interface by Pascal Parraud, and corrections for DataLoader implementation by Bryan Cazabonne and Evan Ward .
+        The data is provided by Space Environment Technologies through their website
+        :class:`~org.orekit.models.earth.atmosphere.data.https:.sol.spacenvironment.net.JB2008.indices.DTCFILE.TXT`.
+        The work done for this class is based on the CssiSpaceWeatherDataLoader class by Clément Jonglez, the JB2008 interface
+        by Pascal Parraud, and corrections for DataLoader implementation by Bryan Cazabonne and Evan Ward .
     
         Since:
             11.2
@@ -397,7 +403,7 @@ class DtcDataLoader(org.orekit.data.DataLoader):
 
 class JB2008SpaceEnvironmentData(org.orekit.models.earth.atmosphere.JB2008InputParameters):
     """
-    public class JB2008SpaceEnvironmentData extends Object implements :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
+    public class JB2008SpaceEnvironmentData extends :class:`~org.orekit.models.earth.atmosphere.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
     
         This class provides a container for the solar indices data required by the JB2008 atmospheric model. This container only
         stores information provided in the SOLFSMY and DTCFILE text file provided by Space Environment Technologies. Therefore
@@ -407,7 +413,7 @@ class JB2008SpaceEnvironmentData(org.orekit.models.earth.atmosphere.JB2008InputP
         :class:`~org.orekit.models.earth.atmosphere.data.DtcDataLoader` classes.
     
         Data are available on Space Environment Technologies' `website <http://sol.spacenvironment.net/jb2008>`. The work done
-        for this class is based on the CssiSpaceWeatherData class by ClÃƒÂ©ment Jonglez, the JB2008 interface by Pascal Parraud,
+        for this class is based on the CssiSpaceWeatherData class by Clément Jonglez, the JB2008 interface by Pascal Parraud,
         and corrections for the CssiSpaceWeatherData implementation by Bryan Cazabonne and Evan Ward.
     
         Since:
@@ -418,7 +424,7 @@ class JB2008SpaceEnvironmentData(org.orekit.models.earth.atmosphere.JB2008InputP
     """
     DEFAULT_SUPPORTED_NAMES_SOLFSMY: typing.ClassVar[str] = ...
     """
-    public static final String DEFAULT_SUPPORTED_NAMES_SOLFSMY
+    public static final :class:`~org.orekit.models.earth.atmosphere.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_SUPPORTED_NAMES_SOLFSMY
     
         Default regular expression for supported names that works with test and published files for the SOLFSMY file.
     
@@ -429,7 +435,7 @@ class JB2008SpaceEnvironmentData(org.orekit.models.earth.atmosphere.JB2008InputP
     """
     DEFAULT_SUPPORTED_NAMES_DTC: typing.ClassVar[str] = ...
     """
-    public static final String DEFAULT_SUPPORTED_NAMES_DTC
+    public static final :class:`~org.orekit.models.earth.atmosphere.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_SUPPORTED_NAMES_DTC
     
         Default regular expression for supported names that works with test and published files for the DTCFILE file.
     
@@ -447,8 +453,8 @@ class JB2008SpaceEnvironmentData(org.orekit.models.earth.atmosphere.JB2008InputP
             Get the temperature change computed from Dst index.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getDSTDTC`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getDSTDTC` in
+                interface :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -461,13 +467,13 @@ class JB2008SpaceEnvironmentData(org.orekit.models.earth.atmosphere.JB2008InputP
         ...
     def getF10(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
         """
-            Get the value of the instantaneous solar flux index (1e :sup:`-22` *Watt/(mÂ²*Hertz)).
+            Get the value of the instantaneous solar flux index (1e :sup:`-22` *Watt/(m²*Hertz)).
         
             Tabular time 1.0 day earlier.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getF10`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getF10` in
+                interface :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -485,8 +491,8 @@ class JB2008SpaceEnvironmentData(org.orekit.models.earth.atmosphere.JB2008InputP
             Tabular time 1.0 day earlier.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getF10B`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getF10B` in
+                interface :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -502,8 +508,8 @@ class JB2008SpaceEnvironmentData(org.orekit.models.earth.atmosphere.JB2008InputP
             Gets the available data range maximum date.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getMaxDate`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getMaxDate` in
+                interface :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
         
             Returns:
                 the maximum date.
@@ -516,8 +522,8 @@ class JB2008SpaceEnvironmentData(org.orekit.models.earth.atmosphere.JB2008InputP
             Gets the available data range minimum date.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getMinDate`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getMinDate` in
+                interface :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
         
             Returns:
                 the minimum date.
@@ -532,8 +538,8 @@ class JB2008SpaceEnvironmentData(org.orekit.models.earth.atmosphere.JB2008InputP
             Tabular time 1.0 day earlier.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getS10`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getS10` in
+                interface :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -551,8 +557,8 @@ class JB2008SpaceEnvironmentData(org.orekit.models.earth.atmosphere.JB2008InputP
             Tabular time 1.0 day earlier.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getS10B`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getS10B` in
+                interface :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -570,8 +576,8 @@ class JB2008SpaceEnvironmentData(org.orekit.models.earth.atmosphere.JB2008InputP
             Tabular time 2.0 days earlier.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getXM10`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getXM10` in
+                interface :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -589,8 +595,8 @@ class JB2008SpaceEnvironmentData(org.orekit.models.earth.atmosphere.JB2008InputP
             Tabular time 2.0 days earlier.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getXM10B`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getXM10B` in
+                interface :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -608,8 +614,8 @@ class JB2008SpaceEnvironmentData(org.orekit.models.earth.atmosphere.JB2008InputP
             Tabular time 5.0 days earlier.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getY10`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getY10` in
+                interface :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -627,8 +633,8 @@ class JB2008SpaceEnvironmentData(org.orekit.models.earth.atmosphere.JB2008InputP
             Tabular time 5.0 days earlier.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getY10B`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.JB2008InputParameters.getY10B` in
+                interface :class:`~org.orekit.models.earth.atmosphere.JB2008InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -684,7 +690,7 @@ class MarshallSolarActivityFutureEstimation(org.orekit.data.AbstractSelfFeedingL
     """
     DEFAULT_SUPPORTED_NAMES: typing.ClassVar[str] = ...
     """
-    public static final String DEFAULT_SUPPORTED_NAMES
+    public static final :class:`~org.orekit.models.earth.atmosphere.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_SUPPORTED_NAMES
     
         Default regular expression for the supported name that work with all officially published files.
     
@@ -710,8 +716,8 @@ class MarshallSolarActivityFutureEstimation(org.orekit.data.AbstractSelfFeedingL
             index is derived from the Kp index as follows:
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.get24HoursKp`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.get24HoursKp` in
+                interface :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): date of the Kp data
@@ -728,18 +734,18 @@ class MarshallSolarActivityFutureEstimation(org.orekit.data.AbstractSelfFeedingL
         
             A :sub:`p` indices are provided as an array such as:
         
-              - 0 â†’ daily A :sub:`p`
-              - 1 â†’ 3 hr A :sub:`p` index for current time
-              - 2 â†’ 3 hr A :sub:`p` index for 3 hrs before current time
-              - 3 â†’ 3 hr A :sub:`p` index for 6 hrs before current time
-              - 4 â†’ 3 hr A :sub:`p` index for 9 hrs before current time
-              - 5 â†’ Average of eight 3 hr A :sub:`p` indices from 12 to 33 hrs prior to current time
-              - 6 â†’ Average of eight 3 hr A :sub:`p` indices from 36 to 57 hrs prior to current time
+              - 0 → daily A :sub:`p`
+              - 1 → 3 hr A :sub:`p` index for current time
+              - 2 → 3 hr A :sub:`p` index for 3 hrs before current time
+              - 3 → 3 hr A :sub:`p` index for 6 hrs before current time
+              - 4 → 3 hr A :sub:`p` index for 9 hrs before current time
+              - 5 → Average of eight 3 hr A :sub:`p` indices from 12 to 33 hrs prior to current time
+              - 6 → Average of eight 3 hr A :sub:`p` indices from 36 to 57 hrs prior to current time
         
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getAp`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getAp` in
+                interface :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -755,8 +761,8 @@ class MarshallSolarActivityFutureEstimation(org.orekit.data.AbstractSelfFeedingL
             Get the value of the 81 day average of F10.7 solar flux centered on current day.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getAverageFlux`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getAverageFlux` in
+                interface :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -772,8 +778,8 @@ class MarshallSolarActivityFutureEstimation(org.orekit.data.AbstractSelfFeedingL
             Get the value of the daily F10.7 solar flux for previous day.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getDailyFlux`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getDailyFlux` in
+                interface :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -808,8 +814,8 @@ class MarshallSolarActivityFutureEstimation(org.orekit.data.AbstractSelfFeedingL
             Get the value of the instantaneous solar flux.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getInstantFlux`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getInstantFlux` in
+                interface :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -825,12 +831,12 @@ class MarshallSolarActivityFutureEstimation(org.orekit.data.AbstractSelfFeedingL
             Gets the available data range maximum date.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getMaxDate`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getMaxDate` in
+                interface :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getMaxDate`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getMaxDate` in
+                interface :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
         
             Returns:
                 the maximum date.
@@ -843,8 +849,8 @@ class MarshallSolarActivityFutureEstimation(org.orekit.data.AbstractSelfFeedingL
             Get the value of the mean solar flux.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getMeanFlux`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getMeanFlux` in
+                interface :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -860,12 +866,12 @@ class MarshallSolarActivityFutureEstimation(org.orekit.data.AbstractSelfFeedingL
             Gets the available data range minimum date.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getMinDate`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getMinDate` in
+                interface :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getMinDate`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getMinDate` in
+                interface :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
         
             Returns:
                 the minimum date.
@@ -889,8 +895,8 @@ class MarshallSolarActivityFutureEstimation(org.orekit.data.AbstractSelfFeedingL
             Get the supported names regular expression.
         
             Overrides:
-                :meth:`~org.orekit.data.AbstractSelfFeedingLoader.getSupportedNames`Â in
-                classÂ :class:`~org.orekit.data.AbstractSelfFeedingLoader`
+                :meth:`~org.orekit.data.AbstractSelfFeedingLoader.getSupportedNames` in
+                class :class:`~org.orekit.data.AbstractSelfFeedingLoader`
         
             Returns:
                 the supported names.
@@ -907,8 +913,8 @@ class MarshallSolarActivityFutureEstimation(org.orekit.data.AbstractSelfFeedingL
             delay=6-abs(lat)*0.033 (lat in deg.)
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getThreeHourlyKP`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getThreeHourlyKP` in
+                interface :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -954,15 +960,16 @@ class MarshallSolarActivityFutureEstimation(org.orekit.data.AbstractSelfFeedingL
 
 class SOLFSMYDataLoader(org.orekit.data.DataLoader):
     """
-    public class SOLFSMYDataLoader extends Object implements :class:`~org.orekit.data.DataLoader`
+    public class SOLFSMYDataLoader extends :class:`~org.orekit.models.earth.atmosphere.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataLoader`
     
         This class reads solar activity data from SOLFSMY files for the class
         :class:`~org.orekit.models.earth.atmosphere.data.JB2008SpaceEnvironmentData`. The code in this class is based of the
         CssiSpaceWeatherDataLoader.
     
-        The data is provided by Space Environment Technologies through their website Link.
-        The work done for this class is based on the CssiWpaceWeatherDataLoader class by ClÃƒÂ©ment Jonglez, the JB2008
-        interface by Pascal Parraud, and corrections for DataLoader implementation by Bryan Cazabonne and Evan Ward .
+        The data is provided by Space Environment Technologies through their website
+        :class:`~org.orekit.models.earth.atmosphere.data.https:.sol.spacenvironment.net.JB2008.indices.SOLFSMY.TXT`.
+        The work done for this class is based on the CssiWpaceWeatherDataLoader class by Clément Jonglez, the JB2008 interface
+        by Pascal Parraud, and corrections for DataLoader implementation by Bryan Cazabonne and Evan Ward .
     
         Since:
             11.2

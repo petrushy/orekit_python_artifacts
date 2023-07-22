@@ -6,7 +6,7 @@ import typing
 
 class NaNStrategy(java.lang.Enum['NaNStrategy']):
     """
-    public enum NaNStrategy extends Enum<:class:`~org.hipparchus.stat.ranking.NaNStrategy`>
+    public enum NaNStrategy extends :class:`~org.hipparchus.stat.ranking.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.hipparchus.stat.ranking.NaNStrategy`>
     
         Strategies for handling NaN values in rank transformations.
     
@@ -35,14 +35,14 @@ class NaNStrategy(java.lang.Enum['NaNStrategy']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.hipparchus.stat.ranking.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.hipparchus.stat.ranking.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.hipparchus.stat.ranking.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -92,7 +92,7 @@ class RankingAlgorithm:
 
 class TiesStrategy(java.lang.Enum['TiesStrategy']):
     """
-    public enum TiesStrategy extends Enum<:class:`~org.hipparchus.stat.ranking.TiesStrategy`>
+    public enum TiesStrategy extends :class:`~org.hipparchus.stat.ranking.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.hipparchus.stat.ranking.TiesStrategy`>
     
         Strategies for handling tied values in rank transformations.
     
@@ -124,14 +124,14 @@ class TiesStrategy(java.lang.Enum['TiesStrategy']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.hipparchus.stat.ranking.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.hipparchus.stat.ranking.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.hipparchus.stat.ranking.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -157,7 +157,7 @@ class TiesStrategy(java.lang.Enum['TiesStrategy']):
 
 class NaturalRanking(RankingAlgorithm):
     """
-    public class NaturalRanking extends Object implements :class:`~org.hipparchus.stat.ranking.RankingAlgorithm`
+    public class NaturalRanking extends :class:`~org.hipparchus.stat.ranking.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.stat.ranking.RankingAlgorithm`
     
     
         Ranking based on the natural ordering on doubles.
@@ -166,7 +166,8 @@ class NaturalRanking(RankingAlgorithm):
         using the selected :class:`~org.hipparchus.stat.ranking.TiesStrategy`. Configuration settings are supplied in optional
         constructor arguments. Defaults are :meth:`~org.hipparchus.stat.ranking.NaNStrategy.FAILED` and
         :meth:`~org.hipparchus.stat.ranking.TiesStrategy.AVERAGE`, respectively. When using
-        :meth:`~org.hipparchus.stat.ranking.TiesStrategy.RANDOM`, a null may be supplied as a constructor argument.
+        :meth:`~org.hipparchus.stat.ranking.TiesStrategy.RANDOM`, a
+        :class:`~org.hipparchus.stat.ranking.https:.www.hipparchus.org.hipparchus` may be supplied as a constructor argument.
     
         Examples:
     """
@@ -222,7 +223,8 @@ class NaturalRanking(RankingAlgorithm):
             ties resolved using :code:`tiesStrategy.`
         
             Specified by:
-                 in interface :class:`~org.hipparchus.stat.ranking.RankingAlgorithm`
+                :meth:`~org.hipparchus.stat.ranking.RankingAlgorithm.rank` in
+                interface :class:`~org.hipparchus.stat.ranking.RankingAlgorithm`
         
             Parameters:
                 data (double[]): array to be ranked
@@ -231,8 +233,9 @@ class NaturalRanking(RankingAlgorithm):
                 array of ranks
         
             Raises:
-                : if the selected :class:`~org.hipparchus.stat.ranking.NaNStrategy` is :code:`FAILED` and a null is encountered in the
-                    input data
+                :class:`~org.hipparchus.stat.ranking.https:.www.hipparchus.org.hipparchus`: if the selected :class:`~org.hipparchus.stat.ranking.NaNStrategy` is :code:`FAILED` and a
+                    :meth:`~org.hipparchus.stat.ranking.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is` is encountered in
+                    the input data
         
         
         """

@@ -13,7 +13,7 @@ import typing
 
 class BodyFacade:
     """
-    public class BodyFacade extends Object
+    public class BodyFacade extends :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Facade in front of several center bodies in CCSDS messages.
     
@@ -46,7 +46,7 @@ class BodyFacade:
 
 class CelestialBodyFrame(java.lang.Enum['CelestialBodyFrame']):
     """
-    public enum CelestialBodyFrame extends Enum<:class:`~org.orekit.files.ccsds.definitions.CelestialBodyFrame`>
+    public enum CelestialBodyFrame extends :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.definitions.CelestialBodyFrame`>
     
         Frames used in CCSDS Orbit Data Messages.
     
@@ -148,7 +148,7 @@ class CelestialBodyFrame(java.lang.Enum['CelestialBodyFrame']):
             Parse a CCSDS frame.
         
             Parameters:
-                frameName (String): name of the frame, as the value of a CCSDS key=value line
+                frameName (:class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the frame, as the value of a CCSDS key=value line
         
             Returns:
                 CCSDS frame corresponding to the name
@@ -168,14 +168,14 @@ class CelestialBodyFrame(java.lang.Enum['CelestialBodyFrame']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -188,9 +188,8 @@ class CelestialBodyFrame(java.lang.Enum['CelestialBodyFrame']):
         
             .. code-block: java
             
-            
-            for (CelestialBodyFrame c : CelestialBodyFrame.values())
-                System.out.println(c);
+            for (CelestialBodyFrame c : CelestialBodyFrame.values())
+                System.out.println(c);
             
         
             Returns:
@@ -202,7 +201,7 @@ class CelestialBodyFrame(java.lang.Enum['CelestialBodyFrame']):
 
 class CenterName(java.lang.Enum['CenterName']):
     """
-    public enum CenterName extends Enum<:class:`~org.orekit.files.ccsds.definitions.CenterName`>
+    public enum CenterName extends :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.definitions.CenterName`>
     
         Orbit central bodies for which a Celestial body can be created.
     
@@ -294,14 +293,14 @@ class CenterName(java.lang.Enum['CenterName']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -314,9 +313,8 @@ class CenterName(java.lang.Enum['CenterName']):
         
             .. code-block: java
             
-            
-            for (CenterName c : CenterName.values())
-                System.out.println(c);
+            for (CenterName c : CenterName.values())
+                System.out.println(c);
             
         
             Returns:
@@ -328,7 +326,7 @@ class CenterName(java.lang.Enum['CenterName']):
 
 class DutyCycleType(java.lang.Enum['DutyCycleType']):
     """
-    public enum DutyCycleType extends Enum<:class:`~org.orekit.files.ccsds.definitions.DutyCycleType`>
+    public enum DutyCycleType extends :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.definitions.DutyCycleType`>
     
         Type of duty cycle used in CCSDS :class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`.
     
@@ -350,14 +348,14 @@ class DutyCycleType(java.lang.Enum['DutyCycleType']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -370,9 +368,8 @@ class DutyCycleType(java.lang.Enum['DutyCycleType']):
         
             .. code-block: java
             
-            
-            for (DutyCycleType c : DutyCycleType.values())
-                System.out.println(c);
+            for (DutyCycleType c : DutyCycleType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -384,7 +381,7 @@ class DutyCycleType(java.lang.Enum['DutyCycleType']):
 
 class ElementsType(java.lang.Enum['ElementsType']):
     """
-    public enum ElementsType extends Enum<:class:`~org.orekit.files.ccsds.definitions.ElementsType`>
+    public enum ElementsType extends :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.definitions.ElementsType`>
     
         Orbit element set type used in CCSDS :class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`.
     
@@ -392,7 +389,7 @@ class ElementsType(java.lang.Enum['ElementsType']):
             11.0
     
         Also see:
-            SANA registry for orbital elements
+            :class:`~org.orekit.files.ccsds.definitions.https:.sanaregistry.org.r.orbital_elements`
     """
     ADBARV: typing.ClassVar['ElementsType'] = ...
     CARTP: typing.ClassVar['ElementsType'] = ...
@@ -418,7 +415,7 @@ class ElementsType(java.lang.Enum['ElementsType']):
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): elements date
                 elements (double[]): elements values
-                mu (double): gravitational parameter in mÂ³/sÂ²
+                mu (double): gravitational parameter in m³/s²
         
             Returns:
                 Cartesian coordinates
@@ -430,7 +427,8 @@ class ElementsType(java.lang.Enum['ElementsType']):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum.html?is` in
+                class :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`
         
         
         """
@@ -447,14 +445,14 @@ class ElementsType(java.lang.Enum['ElementsType']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -467,9 +465,8 @@ class ElementsType(java.lang.Enum['ElementsType']):
         
             .. code-block: java
             
-            
-            for (ElementsType c : ElementsType.values())
-                System.out.println(c);
+            for (ElementsType c : ElementsType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -481,7 +478,7 @@ class ElementsType(java.lang.Enum['ElementsType']):
 
 class FrameFacade:
     """
-    public class FrameFacade extends Object
+    public class FrameFacade extends :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Facade in front of several frames types in CCSDS messages.
     
@@ -551,7 +548,9 @@ class FrameFacade:
             Get the transform between :class:`~org.orekit.files.ccsds.definitions.FrameFacade`.
         
             In case both input and output frames are :class:`~org.orekit.files.ccsds.definitions.OrbitRelativeFrame`, the returned
-            transform will only be composed of a null. Only :class:`~org.orekit.frames.LOFType` will be recognized.
+            transform will only be composed of a
+            :class:`~org.orekit.files.ccsds.definitions.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Rotation?is`.
+            Only :class:`~org.orekit.frames.LOFType` will be recognized.
         
             Note that if the input/output :class:`~org.orekit.files.ccsds.definitions.FrameFacade` is defined using a :
         
@@ -597,7 +596,7 @@ class FrameFacade:
             Simple constructor.
         
             Parameters:
-                name (String): name of the frame
+                name (:class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the frame
                 conventions (:class:`~org.orekit.utils.IERSConventions`): IERS conventions to use
                 simpleEOP (boolean): if true, tidal effects are ignored when interpolating EOP
                 dataContext (:class:`~org.orekit.data.DataContext`): to use when creating the frame
@@ -645,7 +644,7 @@ class ModifiedFrame(org.orekit.frames.Frame):
 
 class OdMethodFacade:
     """
-    public class OdMethodFacade extends Object
+    public class OdMethodFacade extends :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Facade in front of several orbit determination methods in CCSDS messages.
     
@@ -689,7 +688,7 @@ class OdMethodFacade:
             Parse a string from OCM.
         
             Parameters:
-                s (String): string to parse
+                s (:class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): string to parse
         
             Returns:
                 OD method facade
@@ -700,7 +699,7 @@ class OdMethodFacade:
 
 class OdMethodType(java.lang.Enum['OdMethodType']):
     """
-    public enum OdMethodType extends Enum<:class:`~org.orekit.files.ccsds.definitions.OdMethodType`>
+    public enum OdMethodType extends :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.definitions.OdMethodType`>
     
         Type of orbit determination method used in CCSDS :class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`.
     
@@ -724,14 +723,14 @@ class OdMethodType(java.lang.Enum['OdMethodType']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -744,9 +743,8 @@ class OdMethodType(java.lang.Enum['OdMethodType']):
         
             .. code-block: java
             
-            
-            for (OdMethodType c : OdMethodType.values())
-                System.out.println(c);
+            for (OdMethodType c : OdMethodType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -758,7 +756,7 @@ class OdMethodType(java.lang.Enum['OdMethodType']):
 
 class OnOff(java.lang.Enum['OnOff']):
     """
-    public enum OnOff extends Enum<:class:`~org.orekit.files.ccsds.definitions.OnOff`>
+    public enum OnOff extends :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.definitions.OnOff`>
     
         On/Off status for various elements.
     
@@ -789,14 +787,14 @@ class OnOff(java.lang.Enum['OnOff']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -809,9 +807,8 @@ class OnOff(java.lang.Enum['OnOff']):
         
             .. code-block: java
             
-            
-            for (OnOff c : OnOff.values())
-                System.out.println(c);
+            for (OnOff c : OnOff.values())
+                System.out.println(c);
             
         
             Returns:
@@ -823,7 +820,7 @@ class OnOff(java.lang.Enum['OnOff']):
 
 class OrbitRelativeFrame(java.lang.Enum['OrbitRelativeFrame']):
     """
-    public enum OrbitRelativeFrame extends Enum<:class:`~org.orekit.files.ccsds.definitions.OrbitRelativeFrame`>
+    public enum OrbitRelativeFrame extends :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.definitions.OrbitRelativeFrame`>
     
         Frames used in CCSDS Orbit Data Messages.
     
@@ -886,14 +883,14 @@ class OrbitRelativeFrame(java.lang.Enum['OrbitRelativeFrame']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -906,9 +903,8 @@ class OrbitRelativeFrame(java.lang.Enum['OrbitRelativeFrame']):
         
             .. code-block: java
             
-            
-            for (OrbitRelativeFrame c : OrbitRelativeFrame.values())
-                System.out.println(c);
+            for (OrbitRelativeFrame c : OrbitRelativeFrame.values())
+                System.out.println(c);
             
         
             Returns:
@@ -920,7 +916,7 @@ class OrbitRelativeFrame(java.lang.Enum['OrbitRelativeFrame']):
 
 class PocMethodFacade:
     """
-    public class PocMethodFacade extends Object
+    public class PocMethodFacade extends :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Facade in front of several probability of collision methods in CCSDS messages.
     
@@ -954,7 +950,7 @@ class PocMethodFacade:
             Parse a string from CDM.
         
             Parameters:
-                s (String): string to parse
+                s (:class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): string to parse
         
             Returns:
                 PoC method facade
@@ -965,7 +961,7 @@ class PocMethodFacade:
 
 class PocMethodType(java.lang.Enum['PocMethodType']):
     """
-    public enum PocMethodType extends Enum<:class:`~org.orekit.files.ccsds.definitions.PocMethodType`>
+    public enum PocMethodType extends :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.definitions.PocMethodType`>
     
         Type of probability of collision method used in CCSDS :class:`~org.orekit.files.ccsds.ndm.cdm.Cdm`.
     
@@ -975,7 +971,7 @@ class PocMethodType(java.lang.Enum['PocMethodType']):
             11.2
     
         Also see:
-            SANA CDM Collision Probability Methods
+            :class:`~org.orekit.files.ccsds.definitions.https:.sanaregistry.org.r.cdm_cpm`
     """
     AKELLAALFRIEND_2000: typing.ClassVar['PocMethodType'] = ...
     ALFANO_2005: typing.ClassVar['PocMethodType'] = ...
@@ -1003,14 +999,14 @@ class PocMethodType(java.lang.Enum['PocMethodType']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -1023,9 +1019,8 @@ class PocMethodType(java.lang.Enum['PocMethodType']):
         
             .. code-block: java
             
-            
-            for (PocMethodType c : PocMethodType.values())
-                System.out.println(c);
+            for (PocMethodType c : PocMethodType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1037,7 +1032,7 @@ class PocMethodType(java.lang.Enum['PocMethodType']):
 
 class SpacecraftBodyFrame:
     """
-    public class SpacecraftBodyFrame extends Object
+    public class SpacecraftBodyFrame extends :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Frames used in CCSDS Attitude Data Messages for the spacecraft body.
     
@@ -1073,7 +1068,7 @@ class SpacecraftBodyFrame:
             Normalized strings have '_' characters replaced by spaces, and multiple spaces collapsed as one space only.
         
             Parameters:
-                descriptor (String): normalized descriptor
+                descriptor (:class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): normalized descriptor
         
             Returns:
                 parsed body frame
@@ -1088,7 +1083,8 @@ class SpacecraftBodyFrame:
             and the :meth:`~org.orekit.files.ccsds.definitions.SpacecraftBodyFrame.getLabel`
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 CCSDS composite name
@@ -1126,7 +1122,7 @@ class SpacecraftBodyFrame:
 
 class TimeConverter:
     """
-    public class TimeConverter extends Object
+    public class TimeConverter extends :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Dates reader/writer.
     
@@ -1175,7 +1171,7 @@ class TimeConverter:
             Parse a relative or absolute date.
         
             Parameters:
-                s (String): string to parse
+                s (:class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): string to parse
         
             Returns:
                 parsed date
@@ -1186,7 +1182,7 @@ class TimeConverter:
 
 class TimeSystem(java.lang.Enum['TimeSystem']):
     """
-    public enum TimeSystem extends Enum<:class:`~org.orekit.files.ccsds.definitions.TimeSystem`>
+    public enum TimeSystem extends :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.definitions.TimeSystem`>
     
         The set of time systems defined in CCSDS standards (ADM, ODM, NDM).
     """
@@ -1224,7 +1220,7 @@ class TimeSystem(java.lang.Enum['TimeSystem']):
             Parse a value from a key=value entry.
         
             Parameters:
-                value (String): value to parse
+                value (:class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): value to parse
         
             Returns:
                 CCSDS time system corresponding to the value
@@ -1244,14 +1240,14 @@ class TimeSystem(java.lang.Enum['TimeSystem']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -1264,9 +1260,8 @@ class TimeSystem(java.lang.Enum['TimeSystem']):
         
             .. code-block: java
             
-            
-            for (TimeSystem c : TimeSystem.values())
-                System.out.println(c);
+            for (TimeSystem c : TimeSystem.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1278,7 +1273,7 @@ class TimeSystem(java.lang.Enum['TimeSystem']):
 
 class Units:
     """
-    public class Units extends Object
+    public class Units extends :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Units used in CCSDS messages.
     """
@@ -1293,28 +1288,28 @@ class Units:
     """
     public static final :class:`~org.orekit.utils.units.Unit` KG_M2
     
-        kg.mÂ² unit.
+        kg.m² unit.
     
     """
     KM3_PER_S2: typing.ClassVar[org.orekit.utils.units.Unit] = ...
     """
     public static final :class:`~org.orekit.utils.units.Unit` KM3_PER_S2
     
-        kmÂ³/sÂ² unit.
+        km³/s² unit.
     
     """
     M2: typing.ClassVar[org.orekit.utils.units.Unit] = ...
     """
     public static final :class:`~org.orekit.utils.units.Unit` M2
     
-        mÂ² unit.
+        m² unit.
     
     """
     M4: typing.ClassVar[org.orekit.utils.units.Unit] = ...
     """
     public static final :class:`~org.orekit.utils.units.Unit` M4
     
-        mâ�´ unit.
+        m⁴ unit.
     
     """
     M_PER_S: typing.ClassVar[org.orekit.utils.units.Unit] = ...
@@ -1356,35 +1351,35 @@ class Units:
     """
     public static final :class:`~org.orekit.utils.units.Unit` M2_PER_S4
     
-        Square meters per sâ�´ units.
+        Square meters per s⁴ units.
     
     """
     M2_PER_KG: typing.ClassVar[org.orekit.utils.units.Unit] = ...
     """
     public static final :class:`~org.orekit.utils.units.Unit` M2_PER_KG
     
-        mÂ² per kilograms units.
+        m² per kilograms units.
     
     """
     M3_PER_KG: typing.ClassVar[org.orekit.utils.units.Unit] = ...
     """
     public static final :class:`~org.orekit.utils.units.Unit` M3_PER_KG
     
-        mÂ³ per kilograms units.
+        m³ per kilograms units.
     
     """
     M4_PER_KG: typing.ClassVar[org.orekit.utils.units.Unit] = ...
     """
     public static final :class:`~org.orekit.utils.units.Unit` M4_PER_KG
     
-        mâ�´ per kilograms units.
+        m⁴ per kilograms units.
     
     """
     M4_PER_KG2: typing.ClassVar[org.orekit.utils.units.Unit] = ...
     """
     public static final :class:`~org.orekit.utils.units.Unit` M4_PER_KG2
     
-        mâ�´ per square kilograms units.
+        m⁴ per square kilograms units.
     
     """
     M3_PER_KGS: typing.ClassVar[org.orekit.utils.units.Unit] = ...
@@ -1516,7 +1511,7 @@ class Units:
 
 class YesNoUnknown(java.lang.Enum['YesNoUnknown']):
     """
-    public enum YesNoUnknown extends Enum<:class:`~org.orekit.files.ccsds.definitions.YesNoUnknown`>
+    public enum YesNoUnknown extends :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.definitions.YesNoUnknown`>
     
         Yes, No, Unknown values for various elements.
     """
@@ -1535,14 +1530,14 @@ class YesNoUnknown(java.lang.Enum['YesNoUnknown']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -1555,9 +1550,8 @@ class YesNoUnknown(java.lang.Enum['YesNoUnknown']):
         
             .. code-block: java
             
-            
-            for (YesNoUnknown c : YesNoUnknown.values())
-                System.out.println(c);
+            for (YesNoUnknown c : YesNoUnknown.values())
+                System.out.println(c);
             
         
             Returns:

@@ -14,7 +14,7 @@ import typing
 
 class Generator:
     """
-    public class Generator extends Object
+    public class Generator extends :class:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Main generator for :class:`~org.orekit.estimation.measurements.ObservedMeasurement`.
     
@@ -129,7 +129,7 @@ class Scheduler(typing.Generic[_Scheduler__T]):
 
 class SignSemantic(java.lang.Enum['SignSemantic']):
     """
-    public enum SignSemantic extends Enum<:class:`~org.orekit.estimation.measurements.generation.SignSemantic`>
+    public enum SignSemantic extends :class:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.estimation.measurements.generation.SignSemantic`>
     
         Enumerate for the semantic of the :code:`g` function sign during measurements generation.
     
@@ -166,14 +166,14 @@ class SignSemantic(java.lang.Enum['SignSemantic']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -186,9 +186,8 @@ class SignSemantic(java.lang.Enum['SignSemantic']):
         
             .. code-block: java
             
-            
-            for (SignSemantic c : SignSemantic.values())
-                System.out.println(c);
+            for (SignSemantic c : SignSemantic.values())
+                System.out.println(c);
             
         
             Returns:
@@ -201,7 +200,7 @@ class SignSemantic(java.lang.Enum['SignSemantic']):
 _AbstractMeasurementBuilder__T = typing.TypeVar('_AbstractMeasurementBuilder__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class AbstractMeasurementBuilder(MeasurementBuilder[_AbstractMeasurementBuilder__T], typing.Generic[_AbstractMeasurementBuilder__T]):
     """
-    public abstract class AbstractMeasurementBuilder<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends Object implements :class:`~org.orekit.estimation.measurements.generation.MeasurementBuilder`<T>
+    public abstract class AbstractMeasurementBuilder<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.generation.MeasurementBuilder`<T>
     
         Base class for :class:`~org.orekit.estimation.measurements.generation.MeasurementBuilder`.
     
@@ -220,8 +219,8 @@ class AbstractMeasurementBuilder(MeasurementBuilder[_AbstractMeasurementBuilder_
             This implementation stores the time span of the measurements generation.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.generation.MeasurementBuilder.init`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.generation.MeasurementBuilder`
+                :meth:`~org.orekit.estimation.measurements.generation.MeasurementBuilder.init` in
+                interface :class:`~org.orekit.estimation.measurements.generation.MeasurementBuilder`
         
             Parameters:
                 start (:class:`~org.orekit.time.AbsoluteDate`): start of the measurements time span
@@ -234,7 +233,7 @@ class AbstractMeasurementBuilder(MeasurementBuilder[_AbstractMeasurementBuilder_
 _AbstractScheduler__T = typing.TypeVar('_AbstractScheduler__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class AbstractScheduler(Scheduler[_AbstractScheduler__T], typing.Generic[_AbstractScheduler__T]):
     """
-    public abstract class AbstractScheduler<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends Object implements :class:`~org.orekit.estimation.measurements.generation.Scheduler`<T>
+    public abstract class AbstractScheduler<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.generation.Scheduler`<T>
     
         Base implementation of :class:`~org.orekit.estimation.measurements.generation.Scheduler` managing
         :class:`~org.orekit.time.DatesSelector`.
@@ -263,8 +262,8 @@ class AbstractScheduler(Scheduler[_AbstractScheduler__T], typing.Generic[_Abstra
             This implementation initialize the measurement builder.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.generation.Scheduler.init`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.generation.Scheduler`
+                :meth:`~org.orekit.estimation.measurements.generation.Scheduler.init` in
+                interface :class:`~org.orekit.estimation.measurements.generation.Scheduler`
         
             Parameters:
                 start (:class:`~org.orekit.time.AbsoluteDate`): start of the measurements time span
@@ -277,7 +276,7 @@ class AbstractScheduler(Scheduler[_AbstractScheduler__T], typing.Generic[_Abstra
 _PythonMeasurementBuilder__T = typing.TypeVar('_PythonMeasurementBuilder__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class PythonMeasurementBuilder(MeasurementBuilder[_PythonMeasurementBuilder__T], typing.Generic[_PythonMeasurementBuilder__T]):
     """
-    public class PythonMeasurementBuilder<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends Object implements :class:`~org.orekit.estimation.measurements.generation.MeasurementBuilder`<T>
+    public class PythonMeasurementBuilder<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.generation.MeasurementBuilder`<T>
     """
     def __init__(self): ...
     def addModifier(self, estimationModifier: org.orekit.estimation.measurements.EstimationModifier[_PythonMeasurementBuilder__T]) -> None: ...
@@ -286,8 +285,8 @@ class PythonMeasurementBuilder(MeasurementBuilder[_PythonMeasurementBuilder__T],
             Generate a single measurement.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.generation.MeasurementBuilder.build`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.generation.MeasurementBuilder`
+                :meth:`~org.orekit.estimation.measurements.generation.MeasurementBuilder.build` in
+                interface :class:`~org.orekit.estimation.measurements.generation.MeasurementBuilder`
         
             Parameters:
                 states (:class:`~org.orekit.propagation.SpacecraftState`[]): all spacecraft states (i.e. including ones that may not be relevant for the current builder)
@@ -308,8 +307,8 @@ class PythonMeasurementBuilder(MeasurementBuilder[_PythonMeasurementBuilder__T],
             internal data if needed, typically setting up parameters reference dates.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.generation.MeasurementBuilder.init`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.generation.MeasurementBuilder`
+                :meth:`~org.orekit.estimation.measurements.generation.MeasurementBuilder.init` in
+                interface :class:`~org.orekit.estimation.measurements.generation.MeasurementBuilder`
         
             Parameters:
                 start (:class:`~org.orekit.time.AbsoluteDate`): start of the measurements time span
@@ -341,7 +340,7 @@ class PythonMeasurementBuilder(MeasurementBuilder[_PythonMeasurementBuilder__T],
 _PythonScheduler__T = typing.TypeVar('_PythonScheduler__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class PythonScheduler(Scheduler[_PythonScheduler__T], typing.Generic[_PythonScheduler__T]):
     """
-    public class PythonScheduler<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends Object implements :class:`~org.orekit.estimation.measurements.generation.Scheduler`<T>
+    public class PythonScheduler<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.generation.Scheduler`<T>
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -354,8 +353,8 @@ class PythonScheduler(Scheduler[_PythonScheduler__T], typing.Generic[_PythonSche
             some internal data if needed, typically :meth:`~org.orekit.estimation.measurements.generation.MeasurementBuilder.init`.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.generation.Scheduler.init`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.generation.Scheduler`
+                :meth:`~org.orekit.estimation.measurements.generation.Scheduler.init` in
+                interface :class:`~org.orekit.estimation.measurements.generation.Scheduler`
         
             Parameters:
                 start (:class:`~org.orekit.time.AbsoluteDate`): start of the measurements time span
@@ -655,8 +654,8 @@ class PythonAbstractMeasurementBuilder(AbstractMeasurementBuilder[_PythonAbstrac
             value, typically between 0 and 1 (but it can really have any non-negative value).
         
             Overrides:
-                :meth:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder.getBaseWeight`Â in
-                classÂ :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`
+                :meth:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder.getBaseWeight` in
+                class :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`
         
             Returns:
                 base weight
@@ -672,8 +671,8 @@ class PythonAbstractMeasurementBuilder(AbstractMeasurementBuilder[_PythonAbstrac
             Get the end of the measurements time span.
         
             Overrides:
-                :meth:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder.getEnd`Â in
-                classÂ :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`
+                :meth:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder.getEnd` in
+                class :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`
         
             Returns:
                 end of the measurements time span
@@ -686,8 +685,8 @@ class PythonAbstractMeasurementBuilder(AbstractMeasurementBuilder[_PythonAbstrac
             Generate a noise vector.
         
             Overrides:
-                :meth:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder.getNoise`Â in
-                classÂ :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`
+                :meth:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder.getNoise` in
+                class :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`
         
             Returns:
                 noise vector (null if we generate perfect measurements)
@@ -700,8 +699,8 @@ class PythonAbstractMeasurementBuilder(AbstractMeasurementBuilder[_PythonAbstrac
             Get the satellites related to this measurement.
         
             Overrides:
-                :meth:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder.getSatellites`Â in
-                classÂ :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`
+                :meth:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder.getSatellites` in
+                class :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`
         
             Returns:
                 satellites related to this measurement
@@ -714,8 +713,8 @@ class PythonAbstractMeasurementBuilder(AbstractMeasurementBuilder[_PythonAbstrac
             Get the start of the measurements time span.
         
             Overrides:
-                :meth:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder.getStart`Â in
-                classÂ :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`
+                :meth:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder.getStart` in
+                class :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`
         
             Returns:
                 start of the measurements time span
@@ -732,8 +731,8 @@ class PythonAbstractMeasurementBuilder(AbstractMeasurementBuilder[_PythonAbstrac
             as the measurement itself (i.e. when a residual is divided by this value, it becomes dimensionless).
         
             Overrides:
-                :meth:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder.getTheoreticalStandardDeviation`Â in
-                classÂ :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`
+                :meth:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder.getTheoreticalStandardDeviation` in
+                class :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`
         
             Returns:
                 expected standard deviation

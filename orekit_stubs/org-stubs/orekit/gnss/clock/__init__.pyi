@@ -12,7 +12,7 @@ import typing
 
 class RinexClock:
     """
-    public class RinexClock extends Object
+    public class RinexClock extends :class:`~org.orekit.gnss.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Represents a parsed clock file from the IGS.
     
@@ -30,7 +30,9 @@ class RinexClock:
             11.0
     
         Also see:
-            3.00 clock file format, 3.02 clock file format, 3.04 clock file format
+            :class:`~org.orekit.gnss.clock.ftp:.igs.org.pub.data.format.rinex_clock300.txt`,
+            :class:`~org.orekit.gnss.clock.ftp:.igs.org.pub.data.format.rinex_clock302.txt`,
+            :class:`~org.orekit.gnss.clock.ftp:.igs.org.pub.data.format.rinex_clock304.txt`
     """
     def __init__(self, function: typing.Union[java.util.function.Function[str, org.orekit.frames.Frame], typing.Callable[[str], org.orekit.frames.Frame]]): ...
     def addAppliedDCBS(self, appliedDCBS: org.orekit.gnss.AppliedDCBS) -> None:
@@ -58,7 +60,7 @@ class RinexClock:
             Add a clock data line to a specified receiver/satellite.
         
             Parameters:
-                id (String): the satellite system to add observation type
+                id (:class:`~org.orekit.gnss.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the satellite system to add observation type
                 clockDataLine (:class:`~org.orekit.gnss.clock.RinexClock.ClockDataLine`): the clock data line to add
         
         
@@ -79,7 +81,7 @@ class RinexClock:
             Add a comment line.
         
             Parameters:
-                comment (String): the comment line to add
+                comment (:class:`~org.orekit.gnss.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the comment line to add
         
         
         """
@@ -100,7 +102,7 @@ class RinexClock:
             Add a new satellite with a given identifier to the list of stored satellites.
         
             Parameters:
-                satId (String): the satellite identifier
+                satId (:class:`~org.orekit.gnss.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the satellite identifier
         
         
         """
@@ -312,16 +314,7 @@ class RinexClock:
         
         """
         ...
-    def getSatellites(self) -> java.util.List[str]:
-        """
-            Getter for the satellites.
-        
-            Returns:
-                the list of the satellites
-        
-        
-        """
-        ...
+    def getSatellites(self) -> java.util.List[str]: ...
     def getStationIdentifier(self) -> str:
         """
             Getter for the station identifier.
@@ -391,7 +384,7 @@ class RinexClock:
             Setter for the agency name.
         
             Parameters:
-                agencyName (String): the agency name to set
+                agencyName (:class:`~org.orekit.gnss.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the agency name to set
         
         
         """
@@ -401,7 +394,7 @@ class RinexClock:
             Setter for the analysis center ID.
         
             Parameters:
-                analysisCenterID (String): the analysis center ID to set
+                analysisCenterID (:class:`~org.orekit.gnss.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the analysis center ID to set
         
         
         """
@@ -411,7 +404,7 @@ class RinexClock:
             Setter for the analysis center name.
         
             Parameters:
-                analysisCenterName (String): the analysis center name to set
+                analysisCenterName (:class:`~org.orekit.gnss.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the analysis center name to set
         
         
         """
@@ -431,7 +424,7 @@ class RinexClock:
             Setter for the creation date as a string.
         
             Parameters:
-                creationDateString (String): the creation date as a string to set
+                creationDateString (:class:`~org.orekit.gnss.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the creation date as a string to set
         
         
         """
@@ -441,7 +434,7 @@ class RinexClock:
             Setter for the creation time as a string.
         
             Parameters:
-                creationTimeString (String): the creation time as a string to set
+                creationTimeString (:class:`~org.orekit.gnss.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the creation time as a string to set
         
         
         """
@@ -451,7 +444,7 @@ class RinexClock:
             Setter for the creation time zone.
         
             Parameters:
-                creationTimeZoneString (String): the creation time zone as a string to set
+                creationTimeZoneString (:class:`~org.orekit.gnss.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the creation time zone as a string to set
         
         
         """
@@ -461,7 +454,7 @@ class RinexClock:
             Setter for the external clock reference.
         
             Parameters:
-                externalClockReference (String): the external clock reference to set
+                externalClockReference (:class:`~org.orekit.gnss.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the external clock reference to set
         
         
         """
@@ -481,7 +474,7 @@ class RinexClock:
             Setter for the frame name.
         
             Parameters:
-                frameName (String): the frame name to set
+                frameName (:class:`~org.orekit.gnss.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the frame name to set
         
         
         """
@@ -511,7 +504,7 @@ class RinexClock:
             Setter for the program name.
         
             Parameters:
-                programName (String): the program name to set
+                programName (:class:`~org.orekit.gnss.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the program name to set
         
         
         """
@@ -531,7 +524,7 @@ class RinexClock:
             Setter for the station identifier.
         
             Parameters:
-                stationIdentifier (String): the station identifier to set
+                stationIdentifier (:class:`~org.orekit.gnss.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the station identifier to set
         
         
         """
@@ -541,7 +534,7 @@ class RinexClock:
             Setter for the station name.
         
             Parameters:
-                stationName (String): the station name to set
+                stationName (:class:`~org.orekit.gnss.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the station name to set
         
         
         """
@@ -616,7 +609,7 @@ class RinexClock:
 
 class RinexClockParser:
     """
-    public class RinexClockParser extends Object
+    public class RinexClockParser extends :class:`~org.orekit.gnss.clock.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         A parser for the clock file from the IGS. This parser handles versions 2.0 to 3.04 of the RINEX clock files.
     
@@ -633,7 +626,9 @@ class RinexClockParser:
             11.0
     
         Also see:
-            3.00 clock file format, 3.02 clock file format, 3.04 clock file format
+            :class:`~org.orekit.gnss.clock.https:.files.igs.org.pub.data.format.rinex_clock300.txt`,
+            :class:`~org.orekit.gnss.clock.https:.files.igs.org.pub.data.format.rinex_clock302.txt`,
+            :class:`~org.orekit.gnss.clock.https:.files.igs.org.pub.data.format.rinex_clock304.txt`
     """
     @typing.overload
     def __init__(self): ...

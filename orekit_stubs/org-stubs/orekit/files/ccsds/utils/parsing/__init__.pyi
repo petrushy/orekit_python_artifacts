@@ -12,7 +12,7 @@ import typing
 _AbstractMessageParser__T = typing.TypeVar('_AbstractMessageParser__T')  # <T>
 class AbstractMessageParser(org.orekit.files.ccsds.utils.lexical.MessageParser[_AbstractMessageParser__T], typing.Generic[_AbstractMessageParser__T]):
     """
-    public abstract class AbstractMessageParser<T> extends Object implements :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`<T>
+    public abstract class AbstractMessageParser<T> extends :class:`~org.orekit.files.ccsds.utils.parsing.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`<T>
     
         Parser for CCSDS messages.
     
@@ -49,8 +49,8 @@ class AbstractMessageParser(org.orekit.files.ccsds.utils.lexical.MessageParser[_
             Get the key for format version.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.getFormatVersionKey`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.getFormatVersionKey` in
+                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
         
             Returns:
                 format version key
@@ -64,8 +64,8 @@ class AbstractMessageParser(org.orekit.files.ccsds.utils.lexical.MessageParser[_
             Parse a data source.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.parseMessage`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.parseMessage` in
+                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
         
             Parameters:
                 source (:class:`~org.orekit.data.DataSource`): data source to parse
@@ -81,8 +81,8 @@ class AbstractMessageParser(org.orekit.files.ccsds.utils.lexical.MessageParser[_
             Process a parse token.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.process`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.process` in
+                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
         
             Parameters:
                 token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
@@ -312,7 +312,7 @@ class AbstractConstituentParser(AbstractMessageParser[_AbstractConstituentParser
 
 class ErrorState(ProcessingState):
     """
-    public class ErrorState extends Object implements :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
+    public class ErrorState extends :class:`~org.orekit.files.ccsds.utils.parsing.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
     
         Special :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState` that always generate an error message.
     
@@ -327,8 +327,8 @@ class ErrorState(ProcessingState):
             This method always generate an error, as no data is expected in this state.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.ProcessingState.processToken`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.ProcessingState.processToken` in
+                interface :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
         
             Parameters:
                 token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
@@ -408,8 +408,8 @@ class PythonAbstractConstituentParser(AbstractConstituentParser[_PythonAbstractC
             Finalize data after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -422,8 +422,8 @@ class PythonAbstractConstituentParser(AbstractConstituentParser[_PythonAbstractC
             Finalize header after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -436,8 +436,8 @@ class PythonAbstractConstituentParser(AbstractConstituentParser[_PythonAbstractC
             Finalize metadata after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -450,8 +450,8 @@ class PythonAbstractConstituentParser(AbstractConstituentParser[_PythonAbstractC
             Get file header to fill.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 file header to fill
@@ -464,8 +464,8 @@ class PythonAbstractConstituentParser(AbstractConstituentParser[_PythonAbstractC
             Acknowledge data parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -478,8 +478,8 @@ class PythonAbstractConstituentParser(AbstractConstituentParser[_PythonAbstractC
             Acknowledge header parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -492,8 +492,8 @@ class PythonAbstractConstituentParser(AbstractConstituentParser[_PythonAbstractC
             Acknowledge metada parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -506,8 +506,8 @@ class PythonAbstractConstituentParser(AbstractConstituentParser[_PythonAbstractC
             Prepare data for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -520,8 +520,8 @@ class PythonAbstractConstituentParser(AbstractConstituentParser[_PythonAbstractC
             Prepare header for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -534,8 +534,8 @@ class PythonAbstractConstituentParser(AbstractConstituentParser[_PythonAbstractC
             Prepare metadata for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action

@@ -11,7 +11,7 @@ import typing
 
 class LinearConstraint(java.io.Serializable):
     """
-    public class LinearConstraint extends Object implements Serializable
+    public class LinearConstraint extends :class:`~org.hipparchus.optim.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.optim.linear.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         A linear constraint for a linear optimization problem.
     
@@ -45,7 +45,8 @@ class LinearConstraint(java.io.Serializable):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.optim.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.optim.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -84,7 +85,8 @@ class LinearConstraint(java.io.Serializable):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.optim.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.optim.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -92,7 +94,7 @@ class LinearConstraint(java.io.Serializable):
 
 class LinearConstraintSet(org.hipparchus.optim.OptimizationData):
     """
-    public class LinearConstraintSet extends Object implements :class:`~org.hipparchus.optim.OptimizationData`
+    public class LinearConstraintSet extends :class:`~org.hipparchus.optim.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.optim.OptimizationData`
     
         Class that represents a set of :class:`~org.hipparchus.optim.linear.LinearConstraint`.
     """
@@ -104,7 +106,7 @@ class LinearConstraintSet(org.hipparchus.optim.OptimizationData):
 
 class LinearObjectiveFunction(org.hipparchus.analysis.MultivariateFunction, org.hipparchus.optim.OptimizationData, java.io.Serializable):
     """
-    public class LinearObjectiveFunction extends Object implements MultivariateFunction, :class:`~org.hipparchus.optim.OptimizationData`, Serializable
+    public class LinearObjectiveFunction extends :class:`~org.hipparchus.optim.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.optim.linear.https:.www.hipparchus.org.hipparchus`, :class:`~org.hipparchus.optim.OptimizationData`, :class:`~org.hipparchus.optim.linear.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         An objective function for a linear optimization problem.
     
@@ -127,7 +129,8 @@ class LinearObjectiveFunction(org.hipparchus.analysis.MultivariateFunction, org.
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.optim.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.optim.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -156,7 +159,8 @@ class LinearObjectiveFunction(org.hipparchus.analysis.MultivariateFunction, org.
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.optim.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.optim.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -167,7 +171,8 @@ class LinearObjectiveFunction(org.hipparchus.analysis.MultivariateFunction, org.
             Computes the value of the linear equation at the current point.
         
             Specified by:
-                 in interface 
+                :meth:`~org.hipparchus.optim.linear.https:.www.hipparchus.org.hipparchus` in
+                interface :class:`~org.hipparchus.optim.linear.https:.www.hipparchus.org.hipparchus`
         
             Parameters:
                 point (double[]): Point at which linear equation must be evaluated.
@@ -178,7 +183,7 @@ class LinearObjectiveFunction(org.hipparchus.analysis.MultivariateFunction, org.
             Computes the value of the linear equation at the current point.
         
             Parameters:
-                point (RealVector): Point at which linear equation must be evaluated.
+                point (:class:`~org.hipparchus.optim.linear.https:.www.hipparchus.org.hipparchus`): Point at which linear equation must be evaluated.
         
             Returns:
                 the value of the linear equation at the current point.
@@ -202,7 +207,7 @@ class LinearOptimizer(org.hipparchus.optim.nonlinear.scalar.MultivariateOptimize
 
 class NonNegativeConstraint(org.hipparchus.optim.OptimizationData):
     """
-    public class NonNegativeConstraint extends Object implements :class:`~org.hipparchus.optim.OptimizationData`
+    public class NonNegativeConstraint extends :class:`~org.hipparchus.optim.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.optim.OptimizationData`
     
         A constraint for a linear optimization problem indicating whether all variables must be restricted to non-negative
         values.
@@ -221,7 +226,7 @@ class NonNegativeConstraint(org.hipparchus.optim.OptimizationData):
 
 class PivotSelectionRule(java.lang.Enum['PivotSelectionRule'], org.hipparchus.optim.OptimizationData):
     """
-    public enum PivotSelectionRule extends Enum<:class:`~org.hipparchus.optim.linear.PivotSelectionRule`> implements :class:`~org.hipparchus.optim.OptimizationData`
+    public enum PivotSelectionRule extends :class:`~org.hipparchus.optim.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.hipparchus.optim.linear.PivotSelectionRule`> implements :class:`~org.hipparchus.optim.OptimizationData`
     
         Pivot selection rule to the use for a Simplex solver.
     """
@@ -239,14 +244,14 @@ class PivotSelectionRule(java.lang.Enum['PivotSelectionRule'], org.hipparchus.op
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.hipparchus.optim.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.hipparchus.optim.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.hipparchus.optim.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -272,7 +277,7 @@ class PivotSelectionRule(java.lang.Enum['PivotSelectionRule'], org.hipparchus.op
 
 class Relationship(java.lang.Enum['Relationship']):
     """
-    public enum Relationship extends Enum<:class:`~org.hipparchus.optim.linear.Relationship`>
+    public enum Relationship extends :class:`~org.hipparchus.optim.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.hipparchus.optim.linear.Relationship`>
     
         Types of relationships between two cells in a Solver :class:`~org.hipparchus.optim.linear.LinearConstraint`.
     """
@@ -293,7 +298,8 @@ class Relationship(java.lang.Enum['Relationship']):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.optim.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum.html?is` in
+                class :class:`~org.hipparchus.optim.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`
         
         
         """
@@ -310,14 +316,14 @@ class Relationship(java.lang.Enum['Relationship']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.hipparchus.optim.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.hipparchus.optim.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.hipparchus.optim.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -343,7 +349,7 @@ class Relationship(java.lang.Enum['Relationship']):
 
 class SolutionCallback(org.hipparchus.optim.OptimizationData):
     """
-    public class SolutionCallback extends Object implements :class:`~org.hipparchus.optim.OptimizationData`
+    public class SolutionCallback extends :class:`~org.hipparchus.optim.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.optim.OptimizationData`
     
         A callback object that can be provided to a linear optimizer to keep track of the best solution found.
     """
@@ -390,12 +396,14 @@ class SimplexSolver(LinearOptimizer):
           - pivot selection rule: :class:`~org.hipparchus.optim.linear.PivotSelectionRule` - optional, default
             :meth:`~org.hipparchus.optim.linear.PivotSelectionRule.DANTZIG`
           - callback for the best solution: :class:`~org.hipparchus.optim.linear.SolutionCallback` - optional
-          - maximum number of iterations: :class:`~org.hipparchus.optim.MaxIter` - optional, default: null
+          - maximum number of iterations: :class:`~org.hipparchus.optim.MaxIter` - optional, default:
+            :meth:`~org.hipparchus.optim.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer.html?is`
     
     
-        **Note:** Depending on the problem definition, the default convergence criteria may be too strict, resulting in null or
-        null. In such a case it is advised to adjust these criteria with more appropriate values, e.g. relaxing the epsilon
-        value.
+        **Note:** Depending on the problem definition, the default convergence criteria may be too strict, resulting in
+        :class:`~org.hipparchus.optim.linear.https:.www.hipparchus.org.hipparchus` or
+        :class:`~org.hipparchus.optim.linear.https:.www.hipparchus.org.hipparchus`. In such a case it is advised to adjust these
+        criteria with more appropriate values, e.g. relaxing the epsilon value.
     
         Default convergence criteria:
     

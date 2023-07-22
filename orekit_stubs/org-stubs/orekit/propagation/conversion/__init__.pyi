@@ -50,7 +50,7 @@ class ODEIntegratorBuilder:
 
 class OsculatingToMeanElementsConverter:
     """
-    public class OsculatingToMeanElementsConverter extends Object
+    public class OsculatingToMeanElementsConverter extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This class converts osculating orbital elements into mean elements.
     
@@ -212,44 +212,33 @@ class PropagatorConverter:
                 source (:class:`~org.orekit.propagation.Propagator`): propagator to convert
                 timeSpan (double): time span considered for conversion
                 nbPoints (int): number of points for sampling over the time span
-                freeParameters (List<String> freeParameters): names of the free parameters
+                freeParameters (:class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`...): names of the free parameters
         
             Returns:
                 adapted propagator
         
-            Convert a propagator into another one.
-        
-            Parameters:
-                source (:class:`~org.orekit.propagation.Propagator`): propagator to convert
-                timeSpan (double): time span considered for conversion
-                nbPoints (int): number of points for sampling over the time span
-                freeParameters (String...): names of the free parameters
-        
-            Returns:
-                adapted propagator
-        
-        :class:`~org.orekit.propagation.Propagator` convert (List<:class:`~org.orekit.propagation.SpacecraftState`> states, boolean positionOnly, List<String> freeParameters)
+        :class:`~org.orekit.propagation.Propagator` convert (:class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.util.List?is`<:class:`~org.orekit.propagation.SpacecraftState`> states, boolean positionOnly, :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.util.List?is`<:class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`> freeParameters)
         
             Find the propagator that minimize the mean square error for a sample of
             :class:`~org.orekit.propagation.SpacecraftState`.
         
             Parameters:
-                states (List<:class:`~org.orekit.propagation.SpacecraftState`> states): spacecraft states sample to fit
+                states (:class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.util.List?is`<:class:`~org.orekit.propagation.SpacecraftState`> states): spacecraft states sample to fit
                 positionOnly (boolean): if true, consider only position data otherwise both position and velocity are used
-                freeParameters (List<String> freeParameters): names of the free parameters
+                freeParameters (:class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.util.List?is`<:class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`> freeParameters): names of the free parameters
         
             Returns:
                 adapted propagator
         
-        :class:`~org.orekit.propagation.Propagator` convert (List<:class:`~org.orekit.propagation.SpacecraftState`> states, boolean positionOnly, String... freeParameters)
+        :class:`~org.orekit.propagation.Propagator` convert (:class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.util.List?is`<:class:`~org.orekit.propagation.SpacecraftState`> states, boolean positionOnly, :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`... freeParameters)
         
             Find the propagator that minimize the mean square error for a sample of
             :class:`~org.orekit.propagation.SpacecraftState`.
         
             Parameters:
-                states (List<:class:`~org.orekit.propagation.SpacecraftState`> states): spacecraft states sample to fit
+                states (:class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.util.List?is`<:class:`~org.orekit.propagation.SpacecraftState`> states): spacecraft states sample to fit
                 positionOnly (boolean): if true, consider only position data otherwise both position and velocity are used
-                freeParameters (String...): names of the free parameters
+                freeParameters (:class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`...): names of the free parameters
         
             Returns:
                 adapted propagator
@@ -266,7 +255,7 @@ class PropagatorConverter:
 
 class AbstractPropagatorBuilder(PropagatorBuilder):
     """
-    public abstract class AbstractPropagatorBuilder extends Object implements :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+    public abstract class AbstractPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
     
         Base class for propagator builders.
     
@@ -286,7 +275,22 @@ class AbstractPropagatorBuilder(PropagatorBuilder):
         
         """
         ...
-    def addAdditionalEquations(self, additionalEquations: org.orekit.propagation.integration.AdditionalEquations) -> None: ...
+    def addAdditionalEquations(self, additionalEquations: org.orekit.propagation.integration.AdditionalEquations) -> None:
+        """
+            Deprecated.
+            as of 11.1, replaced by
+            :meth:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder.addAdditionalDerivativesProvider`
+            Add a set of user-specified equations to be integrated along with the orbit propagation (author Shiva Iyer).
+        
+            Parameters:
+                additional (:class:`~org.orekit.propagation.integration.AdditionalEquations`): additional equations
+        
+            Since:
+                10.1
+        
+        
+        """
+        ...
     def deselectDynamicParameters(self) -> None:
         """
             Deselects orbital and propagation drivers.
@@ -311,8 +315,8 @@ class AbstractPropagatorBuilder(PropagatorBuilder):
             Get the frame in which the orbit is propagated.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getFrame`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getFrame` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
                 frame in which the orbit is propagated
@@ -325,8 +329,8 @@ class AbstractPropagatorBuilder(PropagatorBuilder):
             Get the date of the initial orbit.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getInitialOrbitDate`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getInitialOrbitDate` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
                 date of the initial orbit
@@ -336,10 +340,10 @@ class AbstractPropagatorBuilder(PropagatorBuilder):
         ...
     def getMu(self) -> float:
         """
-            Get the central attraction coefficient (Âµ - mÂ³/sÂ²) value.
+            Get the central attraction coefficient (µ - m³/s²) value.
         
             Returns:
-                the central attraction coefficient (Âµ - mÂ³/sÂ²) value
+                the central attraction coefficient (µ - m³/s²) value
         
             Since:
                 9.2
@@ -353,8 +357,8 @@ class AbstractPropagatorBuilder(PropagatorBuilder):
             :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitType`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitType` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
                 orbit type to use in :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`
@@ -371,8 +375,8 @@ class AbstractPropagatorBuilder(PropagatorBuilder):
             Get the drivers for the configurable orbital parameters.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitalParametersDrivers`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitalParametersDrivers` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
                 drivers for the configurable orbital parameters
@@ -386,8 +390,8 @@ class AbstractPropagatorBuilder(PropagatorBuilder):
             :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPositionAngle`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPositionAngle` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
                 position angle type to use in :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`
@@ -416,8 +420,8 @@ class AbstractPropagatorBuilder(PropagatorBuilder):
             The parameters typically correspond to force models.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPropagationParametersDrivers`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPropagationParametersDrivers` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
                 drivers for the configurable propagation parameters
@@ -430,8 +434,8 @@ class AbstractPropagatorBuilder(PropagatorBuilder):
             Get the current value of selected normalized parameters.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getSelectedNormalizedParameters`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getSelectedNormalizedParameters` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
                 current value of selected normalized parameters
@@ -465,14 +469,15 @@ class AbstractPropagatorBuilder(PropagatorBuilder):
 
 class AbstractPropagatorConverter(PropagatorConverter):
     """
-    public abstract class AbstractPropagatorConverter extends Object implements :class:`~org.orekit.propagation.conversion.PropagatorConverter`
+    public abstract class AbstractPropagatorConverter extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.PropagatorConverter`
     
         Common handling of :class:`~org.orekit.propagation.conversion.PropagatorConverter` methods for propagators conversions.
     
         This abstract class factors the common code for propagators conversion. Only one method must be implemented by derived
         classes: :meth:`~org.orekit.propagation.conversion.AbstractPropagatorConverter.getObjectiveFunction`.
     
-        The converter uses the LevenbergMarquardtOptimizer from the Hipparchus library. Different implementations correspond to
+        The converter uses the LevenbergMarquardtOptimizer from the
+        :class:`~org.orekit.propagation.conversion.https:.hipparchus.org` library. Different implementations correspond to
         different methods for computing the Jacobian.
     
         Since:
@@ -519,7 +524,7 @@ class AbstractPropagatorConverter(PropagatorConverter):
 
 class AdamsBashforthIntegratorBuilder(ODEIntegratorBuilder):
     """
-    public class AdamsBashforthIntegratorBuilder extends Object implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+    public class AdamsBashforthIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
     
         Builder for AdamsBashforthIntegrator.
     
@@ -532,8 +537,8 @@ class AdamsBashforthIntegratorBuilder(ODEIntegratorBuilder):
             Build a first order integrator.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
         
             Parameters:
                 orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
@@ -548,7 +553,7 @@ class AdamsBashforthIntegratorBuilder(ODEIntegratorBuilder):
 
 class AdamsMoultonIntegratorBuilder(ODEIntegratorBuilder):
     """
-    public class AdamsMoultonIntegratorBuilder extends Object implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+    public class AdamsMoultonIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
     
         Builder for AdamsMoultonIntegrator.
     
@@ -561,8 +566,8 @@ class AdamsMoultonIntegratorBuilder(ODEIntegratorBuilder):
             Build a first order integrator.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
         
             Parameters:
                 orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
@@ -577,7 +582,7 @@ class AdamsMoultonIntegratorBuilder(ODEIntegratorBuilder):
 
 class ClassicalRungeKuttaIntegratorBuilder(ODEIntegratorBuilder):
     """
-    public class ClassicalRungeKuttaIntegratorBuilder extends Object implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+    public class ClassicalRungeKuttaIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
     
         Builder for ClassicalRungeKuttaIntegrator.
     
@@ -590,8 +595,8 @@ class ClassicalRungeKuttaIntegratorBuilder(ODEIntegratorBuilder):
             Build a first order integrator.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
         
             Parameters:
                 orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
@@ -606,7 +611,7 @@ class ClassicalRungeKuttaIntegratorBuilder(ODEIntegratorBuilder):
 
 class DormandPrince54IntegratorBuilder(ODEIntegratorBuilder):
     """
-    public class DormandPrince54IntegratorBuilder extends Object implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+    public class DormandPrince54IntegratorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
     
         Builder for DormandPrince54Integrator.
     
@@ -619,8 +624,8 @@ class DormandPrince54IntegratorBuilder(ODEIntegratorBuilder):
             Build a first order integrator.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
         
             Parameters:
                 orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
@@ -635,7 +640,7 @@ class DormandPrince54IntegratorBuilder(ODEIntegratorBuilder):
 
 class DormandPrince853IntegratorBuilder(ODEIntegratorBuilder):
     """
-    public class DormandPrince853IntegratorBuilder extends Object implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+    public class DormandPrince853IntegratorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
     
         Builder for DormandPrince853Integrator.
     
@@ -648,8 +653,8 @@ class DormandPrince853IntegratorBuilder(ODEIntegratorBuilder):
             Build a first order integrator.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
         
             Parameters:
                 orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
@@ -664,7 +669,7 @@ class DormandPrince853IntegratorBuilder(ODEIntegratorBuilder):
 
 class EulerIntegratorBuilder(ODEIntegratorBuilder):
     """
-    public class EulerIntegratorBuilder extends Object implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+    public class EulerIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
     
         Builder for EulerIntegrator.
     
@@ -677,8 +682,8 @@ class EulerIntegratorBuilder(ODEIntegratorBuilder):
             Build a first order integrator.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
         
             Parameters:
                 orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
@@ -693,7 +698,7 @@ class EulerIntegratorBuilder(ODEIntegratorBuilder):
 
 class GillIntegratorBuilder(ODEIntegratorBuilder):
     """
-    public class GillIntegratorBuilder extends Object implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+    public class GillIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
     
         Builder for GillIntegrator.
     
@@ -706,8 +711,8 @@ class GillIntegratorBuilder(ODEIntegratorBuilder):
             Build a first order integrator.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
         
             Parameters:
                 orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
@@ -722,7 +727,7 @@ class GillIntegratorBuilder(ODEIntegratorBuilder):
 
 class GraggBulirschStoerIntegratorBuilder(ODEIntegratorBuilder):
     """
-    public class GraggBulirschStoerIntegratorBuilder extends Object implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+    public class GraggBulirschStoerIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
     
         Builder for GraggBulirschStoerIntegrator.
     
@@ -735,8 +740,8 @@ class GraggBulirschStoerIntegratorBuilder(ODEIntegratorBuilder):
             Build a first order integrator.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
         
             Parameters:
                 orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
@@ -751,7 +756,7 @@ class GraggBulirschStoerIntegratorBuilder(ODEIntegratorBuilder):
 
 class HighamHall54IntegratorBuilder(ODEIntegratorBuilder):
     """
-    public class HighamHall54IntegratorBuilder extends Object implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+    public class HighamHall54IntegratorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
     
         Builder for HighamHall54Integrator.
     
@@ -764,8 +769,8 @@ class HighamHall54IntegratorBuilder(ODEIntegratorBuilder):
             Build a first order integrator.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
         
             Parameters:
                 orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
@@ -780,7 +785,7 @@ class HighamHall54IntegratorBuilder(ODEIntegratorBuilder):
 
 class LutherIntegratorBuilder(ODEIntegratorBuilder):
     """
-    public class LutherIntegratorBuilder extends Object implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+    public class LutherIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
     
         Builder for LutherIntegrator.
     
@@ -793,8 +798,8 @@ class LutherIntegratorBuilder(ODEIntegratorBuilder):
             Build a first order integrator.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
         
             Parameters:
                 orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
@@ -809,7 +814,7 @@ class LutherIntegratorBuilder(ODEIntegratorBuilder):
 
 class MidpointIntegratorBuilder(ODEIntegratorBuilder):
     """
-    public class MidpointIntegratorBuilder extends Object implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+    public class MidpointIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
     
         Builder for MidpointIntegrator.
     
@@ -822,8 +827,8 @@ class MidpointIntegratorBuilder(ODEIntegratorBuilder):
             Build a first order integrator.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
         
             Parameters:
                 orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
@@ -860,7 +865,7 @@ class OrbitDeterminationPropagatorBuilder(PropagatorBuilder):
 
 class PythonODEIntegratorBuilder(ODEIntegratorBuilder):
     """
-    public class PythonODEIntegratorBuilder extends Object implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+    public class PythonODEIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
     """
     def __init__(self): ...
     def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractIntegrator:
@@ -868,8 +873,8 @@ class PythonODEIntegratorBuilder(ODEIntegratorBuilder):
             Build a first order integrator.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
         
             Parameters:
                 orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
@@ -904,7 +909,7 @@ class PythonODEIntegratorBuilder(ODEIntegratorBuilder):
 
 class PythonPropagatorBuilder(PropagatorBuilder):
     """
-    public class PythonPropagatorBuilder extends Object implements :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+    public class PythonPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
     """
     def __init__(self): ...
     def buildPropagator(self, doubleArray: typing.List[float]) -> org.orekit.propagation.Propagator:
@@ -912,8 +917,8 @@ class PythonPropagatorBuilder(PropagatorBuilder):
             Build a propagator.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
@@ -930,8 +935,8 @@ class PythonPropagatorBuilder(PropagatorBuilder):
             Get the frame in which the orbit is propagated.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getFrame`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getFrame` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
                 frame in which the orbit is propagated
@@ -944,8 +949,8 @@ class PythonPropagatorBuilder(PropagatorBuilder):
             Get the date of the initial orbit.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getInitialOrbitDate`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getInitialOrbitDate` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
                 date of the initial orbit
@@ -959,8 +964,8 @@ class PythonPropagatorBuilder(PropagatorBuilder):
             :meth:`~org.orekit.propagation.conversion.PythonPropagatorBuilder.buildPropagator`.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitType`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitType` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
                 orbit type to use in :meth:`~org.orekit.propagation.conversion.PythonPropagatorBuilder.buildPropagator`
@@ -980,8 +985,8 @@ class PythonPropagatorBuilder(PropagatorBuilder):
             Get the drivers for the configurable orbital parameters.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitalParametersDrivers`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitalParametersDrivers` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
                 drivers for the configurable orbital parameters
@@ -998,8 +1003,8 @@ class PythonPropagatorBuilder(PropagatorBuilder):
             :meth:`~org.orekit.propagation.conversion.PythonPropagatorBuilder.buildPropagator`.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPositionAngle`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPositionAngle` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
                 position angle type to use in :meth:`~org.orekit.propagation.conversion.PythonPropagatorBuilder.buildPropagator`
@@ -1021,8 +1026,8 @@ class PythonPropagatorBuilder(PropagatorBuilder):
             The parameters typically correspond to force models.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPropagationParametersDrivers`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPropagationParametersDrivers` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
                 drivers for the configurable propagation parameters
@@ -1038,8 +1043,8 @@ class PythonPropagatorBuilder(PropagatorBuilder):
             Get the current value of selected normalized parameters.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getSelectedNormalizedParameters`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getSelectedNormalizedParameters` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
                 current value of selected normalized parameters
@@ -1069,7 +1074,7 @@ class PythonPropagatorBuilder(PropagatorBuilder):
 
 class PythonPropagatorConverter(PropagatorConverter):
     """
-    public class PythonPropagatorConverter extends Object implements :class:`~org.orekit.propagation.conversion.PropagatorConverter`
+    public class PythonPropagatorConverter extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.PropagatorConverter`
     """
     def __init__(self): ...
     @typing.overload
@@ -1078,63 +1083,48 @@ class PythonPropagatorConverter(PropagatorConverter):
             Convert a propagator into another one.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorConverter.convert`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorConverter`
+                :meth:`~org.orekit.propagation.conversion.PropagatorConverter.convert` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorConverter`
         
             Parameters:
                 source (:class:`~org.orekit.propagation.Propagator`): propagator to convert
                 timeSpan (double): time span considered for conversion
                 nbPoints (int): number of points for sampling over the time span
-                freeParameters (List<String> freeParameters): names of the free parameters
+                freeParameters (:class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`...): names of the free parameters
         
             Returns:
                 adapted propagator
         
-            Convert a propagator into another one.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorConverter.convert`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorConverter`
-        
-            Parameters:
-                source (:class:`~org.orekit.propagation.Propagator`): propagator to convert
-                timeSpan (double): time span considered for conversion
-                nbPoints (int): number of points for sampling over the time span
-                freeParameters (String...): names of the free parameters
-        
-            Returns:
-                adapted propagator
-        
-        public :class:`~org.orekit.propagation.Propagator` convert (List<:class:`~org.orekit.propagation.SpacecraftState`> states, boolean positionOnly, List<String> freeParameters)
+        public :class:`~org.orekit.propagation.Propagator` convert (:class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.util.List?is`<:class:`~org.orekit.propagation.SpacecraftState`> states, boolean positionOnly, :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.util.List?is`<:class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`> freeParameters)
         
             Find the propagator that minimize the mean square error for a sample of
             :class:`~org.orekit.propagation.SpacecraftState`.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorConverter.convert`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorConverter`
+                :meth:`~org.orekit.propagation.conversion.PropagatorConverter.convert` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorConverter`
         
             Parameters:
-                states (List<:class:`~org.orekit.propagation.SpacecraftState`> states): spacecraft states sample to fit
+                states (:class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.util.List?is`<:class:`~org.orekit.propagation.SpacecraftState`> states): spacecraft states sample to fit
                 positionOnly (boolean): if true, consider only position data otherwise both position and velocity are used
-                freeParameters (List<String> freeParameters): names of the free parameters
+                freeParameters (:class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.util.List?is`<:class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`> freeParameters): names of the free parameters
         
             Returns:
                 adapted propagator
         
-        public :class:`~org.orekit.propagation.Propagator` convert (List<:class:`~org.orekit.propagation.SpacecraftState`> states, boolean positionOnly, String... freeParameters)
+        public :class:`~org.orekit.propagation.Propagator` convert (:class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.util.List?is`<:class:`~org.orekit.propagation.SpacecraftState`> states, boolean positionOnly, :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`... freeParameters)
         
             Find the propagator that minimize the mean square error for a sample of
             :class:`~org.orekit.propagation.SpacecraftState`.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorConverter.convert`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorConverter`
+                :meth:`~org.orekit.propagation.conversion.PropagatorConverter.convert` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorConverter`
         
             Parameters:
-                states (List<:class:`~org.orekit.propagation.SpacecraftState`> states): spacecraft states sample to fit
+                states (:class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.util.List?is`<:class:`~org.orekit.propagation.SpacecraftState`> states): spacecraft states sample to fit
                 positionOnly (boolean): if true, consider only position data otherwise both position and velocity are used
-                freeParameters (String...): names of the free parameters
+                freeParameters (:class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`...): names of the free parameters
         
             Returns:
                 adapted propagator
@@ -1174,7 +1164,7 @@ class PythonPropagatorConverter(PropagatorConverter):
 
 class ThreeEighthesIntegratorBuilder(ODEIntegratorBuilder):
     """
-    public class ThreeEighthesIntegratorBuilder extends Object implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+    public class ThreeEighthesIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
     
         Builder for ThreeEighthesIntegrator.
     
@@ -1187,8 +1177,8 @@ class ThreeEighthesIntegratorBuilder(ODEIntegratorBuilder):
             Build a first order integrator.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
         
             Parameters:
                 orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
@@ -1215,19 +1205,18 @@ class BrouwerLyddanePropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminat
         :meth:`~org.orekit.propagation.analytical.tle.TLE.getBStar` parameter for the TLE. If the value of M2 is equal to
         :meth:`~org.orekit.propagation.analytical.BrouwerLyddanePropagator.M2`, the along-track secular effects are not
         considered in the dynamical model. Typical values for M2 are not known. It depends on the orbit type. However, the value
-        of M2 must be very small (e.g. between 1.0e-14 and 1.0e-15). The unit of M2 is rad/sÃ‚Â².
+        of M2 must be very small (e.g. between 1.0e-14 and 1.0e-15). The unit of M2 is rad/s².
     
         To estimate the M2 parameter, it is necessary to call the
         :meth:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder.getPropagationParametersDrivers` method as follow:
     
         .. code-block: java
         
-        
-          for (ParameterDriver driver : builder.getPropagationParametersDrivers().getDrivers()) {
-             if (BrouwerLyddanePropagator.M2_NAME.equals(driver.getName())) {
-                driver.setSelected(true);
-             }
-          }
+          for (ParameterDriver driver : builder.getPropagationParametersDrivers().getDrivers()) {
+             if (BrouwerLyddanePropagator.M2_NAME.equals(driver.getName())) {
+                driver.setSelected(true);
+             }
+          }
          
     
         Since:
@@ -1246,8 +1235,8 @@ class BrouwerLyddanePropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminat
             Build a propagator.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
@@ -1291,8 +1280,8 @@ class DSSTPropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminationPropaga
             Build a propagator.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
@@ -1401,8 +1390,8 @@ class EcksteinHechlerPropagatorBuilder(AbstractPropagatorBuilder, OrbitDetermina
             Build a propagator.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
@@ -1431,8 +1420,8 @@ class EphemerisPropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminationPr
             Build a propagator..
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
@@ -1486,8 +1475,8 @@ class KeplerianPropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminationPr
             Build a propagator.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
@@ -1531,8 +1520,8 @@ class NumericalPropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminationPr
             Build a propagator.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
@@ -1598,7 +1587,7 @@ class PythonAbstractPropagatorBuilder(AbstractPropagatorBuilder):
     def __init__(self, orbit: org.orekit.orbits.Orbit, positionAngle: org.orekit.orbits.PositionAngle, double: float, boolean: bool): ...
     def buildPropagator(self, doubleArray: typing.List[float]) -> org.orekit.propagation.Propagator:
         """
-            Build a propagator. Extension point for Python.
+            Build a propagator.
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
@@ -1641,8 +1630,8 @@ class PythonAbstractPropagatorConverter(AbstractPropagatorConverter):
             Get the Jacobian of the function computing position/velocity at sample points. Extension point for Python.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.AbstractPropagatorConverter.getModel`Â in
-                classÂ :class:`~org.orekit.propagation.conversion.AbstractPropagatorConverter`
+                :meth:`~org.orekit.propagation.conversion.AbstractPropagatorConverter.getModel` in
+                class :class:`~org.orekit.propagation.conversion.AbstractPropagatorConverter`
         
             Returns:
                 Jacobian of the function computing position/velocity at sample points
@@ -1655,8 +1644,8 @@ class PythonAbstractPropagatorConverter(AbstractPropagatorConverter):
             Get the function computing position/velocity at sample points. Extension point for Python.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.AbstractPropagatorConverter.getObjectiveFunction`Â in
-                classÂ :class:`~org.orekit.propagation.conversion.AbstractPropagatorConverter`
+                :meth:`~org.orekit.propagation.conversion.AbstractPropagatorConverter.getObjectiveFunction` in
+                class :class:`~org.orekit.propagation.conversion.AbstractPropagatorConverter`
         
             Returns:
                 function computing position/velocity at sample points
@@ -1686,7 +1675,7 @@ class PythonAbstractPropagatorConverter(AbstractPropagatorConverter):
 
 class PythonOrbitDeterminationPropagatorBuilder(OrbitDeterminationPropagatorBuilder):
     """
-    public class PythonOrbitDeterminationPropagatorBuilder extends Object implements :class:`~org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder`
+    public class PythonOrbitDeterminationPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder`
     """
     def __init__(self): ...
     def buildKalmanModel(self, list: java.util.List[OrbitDeterminationPropagatorBuilder], list2: java.util.List[org.orekit.estimation.sequential.CovarianceMatrixProvider], parameterDriversList: org.orekit.utils.ParameterDriversList, covarianceMatrixProvider: org.orekit.estimation.sequential.CovarianceMatrixProvider) -> org.orekit.estimation.sequential.AbstractKalmanModel: ...
@@ -1696,8 +1685,8 @@ class PythonOrbitDeterminationPropagatorBuilder(OrbitDeterminationPropagatorBuil
             Build a propagator.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
@@ -1714,8 +1703,8 @@ class PythonOrbitDeterminationPropagatorBuilder(OrbitDeterminationPropagatorBuil
             Get the frame in which the orbit is propagated.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getFrame`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getFrame` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
                 frame in which the orbit is propagated
@@ -1728,8 +1717,8 @@ class PythonOrbitDeterminationPropagatorBuilder(OrbitDeterminationPropagatorBuil
             Get the date of the initial orbit.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getInitialOrbitDate`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getInitialOrbitDate` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
                 date of the initial orbit
@@ -1743,8 +1732,8 @@ class PythonOrbitDeterminationPropagatorBuilder(OrbitDeterminationPropagatorBuil
             :meth:`~org.orekit.propagation.conversion.PythonOrbitDeterminationPropagatorBuilder.buildPropagator`.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitType`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitType` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
                 orbit type to use in
@@ -1765,8 +1754,8 @@ class PythonOrbitDeterminationPropagatorBuilder(OrbitDeterminationPropagatorBuil
             Get the drivers for the configurable orbital parameters.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitalParametersDrivers`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitalParametersDrivers` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
                 drivers for the configurable orbital parameters
@@ -1783,8 +1772,8 @@ class PythonOrbitDeterminationPropagatorBuilder(OrbitDeterminationPropagatorBuil
             :meth:`~org.orekit.propagation.conversion.PythonOrbitDeterminationPropagatorBuilder.buildPropagator`.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPositionAngle`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPositionAngle` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
                 position angle type to use in
@@ -1807,8 +1796,8 @@ class PythonOrbitDeterminationPropagatorBuilder(OrbitDeterminationPropagatorBuil
             The parameters typically correspond to force models.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPropagationParametersDrivers`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPropagationParametersDrivers` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
                 drivers for the configurable propagation parameters
@@ -1824,8 +1813,8 @@ class PythonOrbitDeterminationPropagatorBuilder(OrbitDeterminationPropagatorBuil
             Get the current value of selected normalized parameters.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getSelectedNormalizedParameters`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getSelectedNormalizedParameters` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
                 current value of selected normalized parameters
@@ -1857,8 +1846,8 @@ class PythonOrbitDeterminationPropagatorBuilder(OrbitDeterminationPropagatorBuil
             Reset the orbit in the propagator builder.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder.resetOrbit`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder.resetOrbit` in
+                interface :class:`~org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder`
         
             Parameters:
                 newOrbit (:class:`~org.orekit.orbits.Orbit`): New orbit to set in the propagator builder
@@ -1891,8 +1880,8 @@ class TLEPropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminationPropagat
             Build a propagator.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`Â in
-                interfaceÂ :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters

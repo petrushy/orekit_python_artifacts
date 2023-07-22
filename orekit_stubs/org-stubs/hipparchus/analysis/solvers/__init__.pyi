@@ -10,7 +10,7 @@ import typing
 
 class AllowedSolution(java.lang.Enum['AllowedSolution']):
     """
-    public enum AllowedSolution extends Enum<:class:`~org.hipparchus.analysis.solvers.AllowedSolution`>
+    public enum AllowedSolution extends :class:`~org.hipparchus.analysis.solvers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.hipparchus.analysis.solvers.AllowedSolution`>
     
         The kinds of solutions that a :class:`~org.hipparchus.analysis.solvers.BracketedUnivariateSolver` may accept as
         solutions. This basically controls whether or not under-approximations and over-approximations are allowed.
@@ -41,14 +41,14 @@ class AllowedSolution(java.lang.Enum['AllowedSolution']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.hipparchus.analysis.solvers.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.hipparchus.analysis.solvers.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.hipparchus.analysis.solvers.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -90,8 +90,8 @@ class BaseUnivariateSolver(typing.Generic[_BaseUnivariateSolver__F]):
     def getAbsoluteAccuracy(self) -> float:
         """
             Get the absolute accuracy of the solver. Solutions returned by the solver should be accurate to this tolerance, i.e., if
-            Îµ is the absolute accuracy of the solver and :code:`v` is a value returned by one of the :code:`solve` methods, then a
-            root of the function should exist somewhere in the interval (:code:`v` - Îµ, :code:`v` + Îµ).
+            ε is the absolute accuracy of the solver and :code:`v` is a value returned by one of the :code:`solve` methods, then a
+            root of the function should exist somewhere in the interval (:code:`v` - ε, :code:`v` + ε).
         
             Returns:
                 the absolute accuracy.
@@ -135,8 +135,8 @@ class BaseUnivariateSolver(typing.Generic[_BaseUnivariateSolver__F]):
         """
             Get the relative accuracy of the solver. The contract for relative accuracy is the same as
             :meth:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver.getAbsoluteAccuracy`, but using relative, rather than
-            absolute error. If Ï� is the relative accuracy configured for a solver and :code:`v` is a value returned, then a root of
-            the function should exist somewhere in the interval (:code:`v` - Ï� :code:`v`, :code:`v` + Ï� :code:`v`).
+            absolute error. If ρ is the relative accuracy configured for a solver and :code:`v` is a value returned, then a root of
+            the function should exist somewhere in the interval (:code:`v` - ρ :code:`v`, :code:`v` + ρ :code:`v`).
         
             Returns:
                 the relative accuracy.
@@ -195,8 +195,8 @@ class BracketedRealFieldUnivariateSolver(typing.Generic[_BracketedRealFieldUniva
     def getAbsoluteAccuracy(self) -> _BracketedRealFieldUnivariateSolver__T:
         """
             Get the absolute accuracy of the solver. Solutions returned by the solver should be accurate to this tolerance, i.e., if
-            Îµ is the absolute accuracy of the solver and :code:`v` is a value returned by one of the :code:`solve` methods, then a
-            root of the function should exist somewhere in the interval (:code:`v` - Îµ, :code:`v` + Îµ).
+            ε is the absolute accuracy of the solver and :code:`v` is a value returned by one of the :code:`solve` methods, then a
+            root of the function should exist somewhere in the interval (:code:`v` - ε, :code:`v` + ε).
         
             Returns:
                 the absolute accuracy.
@@ -240,8 +240,8 @@ class BracketedRealFieldUnivariateSolver(typing.Generic[_BracketedRealFieldUniva
         """
             Get the relative accuracy of the solver. The contract for relative accuracy is the same as
             :meth:`~org.hipparchus.analysis.solvers.BracketedRealFieldUnivariateSolver.getAbsoluteAccuracy`, but using relative,
-            rather than absolute error. If Ï� is the relative accuracy configured for a solver and :code:`v` is a value returned,
-            then a root of the function should exist somewhere in the interval (:code:`v` - Ï� :code:`v`, :code:`v` + Ï� :code:`v`).
+            rather than absolute error. If ρ is the relative accuracy configured for a solver and :code:`v` is a value returned,
+            then a root of the function should exist somewhere in the interval (:code:`v` - ρ :code:`v`, :code:`v` + ρ :code:`v`).
         
             Returns:
                 the relative accuracy.
@@ -267,7 +267,7 @@ class BracketedRealFieldUnivariateSolver(typing.Generic[_BracketedRealFieldUniva
 
 class UnivariateSolverUtils:
     """
-    public class UnivariateSolverUtils extends Object
+    public class UnivariateSolverUtils extends :class:`~org.hipparchus.analysis.solvers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Utility routines for :class:`~org.hipparchus.analysis.solvers.UnivariateSolver` objects.
     """
@@ -343,7 +343,7 @@ class UnivariateSolverUtils:
 _BaseAbstractUnivariateSolver__F = typing.TypeVar('_BaseAbstractUnivariateSolver__F', bound=org.hipparchus.analysis.UnivariateFunction)  # <F>
 class BaseAbstractUnivariateSolver(BaseUnivariateSolver[_BaseAbstractUnivariateSolver__F], typing.Generic[_BaseAbstractUnivariateSolver__F]):
     """
-    public abstract class BaseAbstractUnivariateSolver<F extends :class:`~org.hipparchus.analysis.UnivariateFunction`> extends Object implements :class:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver`<F>
+    public abstract class BaseAbstractUnivariateSolver<F extends :class:`~org.hipparchus.analysis.UnivariateFunction`> extends :class:`~org.hipparchus.analysis.solvers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver`<F>
     
         Provide a default implementation for several functions useful to generic solvers. The default values for relative and
         function tolerances are 1e-14 and 1e-15, respectively. It is however highly recommended to not rely on the default, but
@@ -352,12 +352,12 @@ class BaseAbstractUnivariateSolver(BaseUnivariateSolver[_BaseAbstractUnivariateS
     def getAbsoluteAccuracy(self) -> float:
         """
             Get the absolute accuracy of the solver. Solutions returned by the solver should be accurate to this tolerance, i.e., if
-            Îµ is the absolute accuracy of the solver and :code:`v` is a value returned by one of the :code:`solve` methods, then a
-            root of the function should exist somewhere in the interval (:code:`v` - Îµ, :code:`v` + Îµ).
+            ε is the absolute accuracy of the solver and :code:`v` is a value returned by one of the :code:`solve` methods, then a
+            root of the function should exist somewhere in the interval (:code:`v` - ε, :code:`v` + ε).
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver.getAbsoluteAccuracy`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver`
+                :meth:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver.getAbsoluteAccuracy` in
+                interface :class:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver`
         
             Returns:
                 the absolute accuracy.
@@ -371,8 +371,8 @@ class BaseAbstractUnivariateSolver(BaseUnivariateSolver[_BaseAbstractUnivariateS
             :code:`optimize` method. It is 0 if the method has not been called yet.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver.getEvaluations`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver`
+                :meth:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver.getEvaluations` in
+                interface :class:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver`
         
             Returns:
                 the number of evaluations of the objective function.
@@ -386,8 +386,8 @@ class BaseAbstractUnivariateSolver(BaseUnivariateSolver[_BaseAbstractUnivariateS
             then by contract, :code:`|f(v)|` should be less than or equal to the function value accuracy configured for the solver.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver.getFunctionValueAccuracy`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver`
+                :meth:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver.getFunctionValueAccuracy` in
+                interface :class:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver`
         
             Returns:
                 the function value accuracy.
@@ -409,8 +409,8 @@ class BaseAbstractUnivariateSolver(BaseUnivariateSolver[_BaseAbstractUnivariateS
             Get the maximum number of function evaluations.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver.getMaxEvaluations`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver`
+                :meth:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver.getMaxEvaluations` in
+                interface :class:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver`
         
             Returns:
                 the maximum number of function evaluations.
@@ -431,12 +431,12 @@ class BaseAbstractUnivariateSolver(BaseUnivariateSolver[_BaseAbstractUnivariateS
         """
             Get the relative accuracy of the solver. The contract for relative accuracy is the same as
             :meth:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver.getAbsoluteAccuracy`, but using relative, rather than
-            absolute error. If Ï� is the relative accuracy configured for a solver and :code:`v` is a value returned, then a root of
-            the function should exist somewhere in the interval (:code:`v` - Ï� :code:`v`, :code:`v` + Ï� :code:`v`).
+            absolute error. If ρ is the relative accuracy configured for a solver and :code:`v` is a value returned, then a root of
+            the function should exist somewhere in the interval (:code:`v` - ρ :code:`v`, :code:`v` + ρ :code:`v`).
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver.getRelativeAccuracy`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver`
+                :meth:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver.getRelativeAccuracy` in
+                interface :class:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver`
         
             Returns:
                 the relative accuracy.
@@ -460,8 +460,8 @@ class BaseAbstractUnivariateSolver(BaseUnivariateSolver[_BaseAbstractUnivariateS
             that do require bracketing should be able to handle the case where one of the endpoints is itself a root.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver.solve`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver`
+                :meth:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver.solve` in
+                interface :class:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver`
         
             Parameters:
                 maxEval (int): Maximum number of evaluations.
@@ -477,8 +477,8 @@ class BaseAbstractUnivariateSolver(BaseUnivariateSolver[_BaseAbstractUnivariateS
             Solve for a zero in the vicinity of :code:`startValue`.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver.solve`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver`
+                :meth:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver.solve` in
+                interface :class:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver`
         
             Parameters:
                 maxEval (int): Maximum number of evaluations.
@@ -587,7 +587,7 @@ class BracketedUnivariateSolver(BaseUnivariateSolver[_BracketedUnivariateSolver_
 _FieldBracketingNthOrderBrentSolver__T = typing.TypeVar('_FieldBracketingNthOrderBrentSolver__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldBracketingNthOrderBrentSolver(BracketedRealFieldUnivariateSolver[_FieldBracketingNthOrderBrentSolver__T], typing.Generic[_FieldBracketingNthOrderBrentSolver__T]):
     """
-    public class FieldBracketingNthOrderBrentSolver<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object implements :class:`~org.hipparchus.analysis.solvers.BracketedRealFieldUnivariateSolver`<T>
+    public class FieldBracketingNthOrderBrentSolver<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.solvers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.solvers.BracketedRealFieldUnivariateSolver`<T>
     
         This class implements a modification of the ` Brent algorithm <http://mathworld.wolfram.com/BrentsMethod.html>`.
     
@@ -606,8 +606,8 @@ class FieldBracketingNthOrderBrentSolver(BracketedRealFieldUnivariateSolver[_Fie
             Get the absolute accuracy.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.solvers.BracketedRealFieldUnivariateSolver.getAbsoluteAccuracy`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.solvers.BracketedRealFieldUnivariateSolver`
+                :meth:`~org.hipparchus.analysis.solvers.BracketedRealFieldUnivariateSolver.getAbsoluteAccuracy` in
+                interface :class:`~org.hipparchus.analysis.solvers.BracketedRealFieldUnivariateSolver`
         
             Returns:
                 absolute accuracy
@@ -621,8 +621,8 @@ class FieldBracketingNthOrderBrentSolver(BracketedRealFieldUnivariateSolver[_Fie
             :code:`optimize` method. It is 0 if the method has not been called yet.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.solvers.BracketedRealFieldUnivariateSolver.getEvaluations`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.solvers.BracketedRealFieldUnivariateSolver`
+                :meth:`~org.hipparchus.analysis.solvers.BracketedRealFieldUnivariateSolver.getEvaluations` in
+                interface :class:`~org.hipparchus.analysis.solvers.BracketedRealFieldUnivariateSolver`
         
             Returns:
                 the number of evaluations of the objective function.
@@ -635,8 +635,8 @@ class FieldBracketingNthOrderBrentSolver(BracketedRealFieldUnivariateSolver[_Fie
             Get the function accuracy.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.solvers.BracketedRealFieldUnivariateSolver.getFunctionValueAccuracy`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.solvers.BracketedRealFieldUnivariateSolver`
+                :meth:`~org.hipparchus.analysis.solvers.BracketedRealFieldUnivariateSolver.getFunctionValueAccuracy` in
+                interface :class:`~org.hipparchus.analysis.solvers.BracketedRealFieldUnivariateSolver`
         
             Returns:
                 function accuracy
@@ -649,8 +649,8 @@ class FieldBracketingNthOrderBrentSolver(BracketedRealFieldUnivariateSolver[_Fie
             Get the maximal number of function evaluations.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.solvers.BracketedRealFieldUnivariateSolver.getMaxEvaluations`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.solvers.BracketedRealFieldUnivariateSolver`
+                :meth:`~org.hipparchus.analysis.solvers.BracketedRealFieldUnivariateSolver.getMaxEvaluations` in
+                interface :class:`~org.hipparchus.analysis.solvers.BracketedRealFieldUnivariateSolver`
         
             Returns:
                 the maximal number of function evaluations.
@@ -673,8 +673,8 @@ class FieldBracketingNthOrderBrentSolver(BracketedRealFieldUnivariateSolver[_Fie
             Get the relative accuracy.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.solvers.BracketedRealFieldUnivariateSolver.getRelativeAccuracy`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.solvers.BracketedRealFieldUnivariateSolver`
+                :meth:`~org.hipparchus.analysis.solvers.BracketedRealFieldUnivariateSolver.getRelativeAccuracy` in
+                interface :class:`~org.hipparchus.analysis.solvers.BracketedRealFieldUnivariateSolver`
         
             Returns:
                 relative accuracy
@@ -767,8 +767,8 @@ class BaseSecantSolver(AbstractUnivariateSolver, BracketedUnivariateSolver[org.h
             do require bracketing should be able to handle the case where one of the endpoints is itself a root.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.solvers.BracketedUnivariateSolver.solve`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.solvers.BracketedUnivariateSolver`
+                :meth:`~org.hipparchus.analysis.solvers.BracketedUnivariateSolver.solve` in
+                interface :class:`~org.hipparchus.analysis.solvers.BracketedUnivariateSolver`
         
             Parameters:
                 maxEval (int): Maximum number of evaluations.
@@ -785,8 +785,8 @@ class BaseSecantSolver(AbstractUnivariateSolver, BracketedUnivariateSolver[org.h
             itself a root.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.solvers.BracketedUnivariateSolver.solve`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.solvers.BracketedUnivariateSolver`
+                :meth:`~org.hipparchus.analysis.solvers.BracketedUnivariateSolver.solve` in
+                interface :class:`~org.hipparchus.analysis.solvers.BracketedUnivariateSolver`
         
             Parameters:
                 maxEval (int): Maximum number of evaluations.
@@ -804,12 +804,12 @@ class BaseSecantSolver(AbstractUnivariateSolver, BracketedUnivariateSolver[org.h
             itself a root.
         
             Specified by:
-                :meth:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver.solve`Â in
-                interfaceÂ :class:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver`
+                :meth:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver.solve` in
+                interface :class:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver`
         
             Overrides:
-                :meth:`~org.hipparchus.analysis.solvers.BaseAbstractUnivariateSolver.solve`Â in
-                classÂ :class:`~org.hipparchus.analysis.solvers.BaseAbstractUnivariateSolver`
+                :meth:`~org.hipparchus.analysis.solvers.BaseAbstractUnivariateSolver.solve` in
+                class :class:`~org.hipparchus.analysis.solvers.BaseAbstractUnivariateSolver`
         
             Parameters:
                 maxEval (int): Maximum number of evaluations.
@@ -1133,10 +1133,11 @@ class RegulaFalsiSolver(BaseSecantSolver):
         original *Regula Falsi* algorithm, and greatly out-performs it for most, if not all, (practical) functions.
     
         Unlike the *Secant* method, the *Regula Falsi* guarantees convergence, by maintaining a bracketed solution. Note
-        however, that due to the finite/limited precision of Java's null type, which is used in this implementation, the
-        algorithm may get stuck in a situation where it no longer makes any progress. Such cases are detected and result in a
-        :code:`MathIllegalStateException` exception being thrown. In other words, the algorithm theoretically guarantees
-        convergence, but the implementation does not.
+        however, that due to the finite/limited precision of Java's
+        :class:`~org.hipparchus.analysis.solvers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double?is` type, which is
+        used in this implementation, the algorithm may get stuck in a situation where it no longer makes any progress. Such
+        cases are detected and result in a :code:`MathIllegalStateException` exception being thrown. In other words, the
+        algorithm theoretically guarantees convergence, but the implementation does not.
     
         The *Regula Falsi* method assumes that the function is continuous, but not necessarily smooth.
     

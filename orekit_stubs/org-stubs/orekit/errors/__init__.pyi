@@ -21,7 +21,7 @@ class LocalizedException:
             Gets the message in a specified locale.
         
             Parameters:
-                locale (Locale): Locale in which the message should be translated
+                locale (:class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): Locale in which the message should be translated
         
             Returns:
                 localized message
@@ -52,7 +52,7 @@ class LocalizedException:
 
 class OrekitMessages(java.lang.Enum['OrekitMessages'], org.hipparchus.exception.Localizable):
     """
-    public enum OrekitMessages extends Enum<:class:`~org.orekit.errors.OrekitMessages`> implements Localizable
+    public enum OrekitMessages extends :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.errors.OrekitMessages`> implements :class:`~org.orekit.errors.https:.www.hipparchus.org.apidocs.org.hipparchus.exception.Localizable?is`
     
         Enumeration for localized messages formats.
     
@@ -327,7 +327,8 @@ class OrekitMessages(java.lang.Enum['OrekitMessages'], org.hipparchus.exception.
         """
         
             Specified by:
-                 in interface 
+                :meth:`~org.orekit.errors.https:.www.hipparchus.org.apidocs.org.hipparchus.exception.Localizable.html?is` in
+                interface :class:`~org.orekit.errors.https:.www.hipparchus.org.apidocs.org.hipparchus.exception.Localizable?is`
         
         
         """
@@ -336,7 +337,8 @@ class OrekitMessages(java.lang.Enum['OrekitMessages'], org.hipparchus.exception.
         """
         
             Specified by:
-                 in interface 
+                :meth:`~org.orekit.errors.https:.www.hipparchus.org.apidocs.org.hipparchus.exception.Localizable.html?is` in
+                interface :class:`~org.orekit.errors.https:.www.hipparchus.org.apidocs.org.hipparchus.exception.Localizable?is`
         
         
         """
@@ -353,14 +355,14 @@ class OrekitMessages(java.lang.Enum['OrekitMessages'], org.hipparchus.exception.
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -373,9 +375,8 @@ class OrekitMessages(java.lang.Enum['OrekitMessages'], org.hipparchus.exception.
         
             .. code-block: java
             
-            
-            for (OrekitMessages c : OrekitMessages.values())
-                System.out.println(c);
+            for (OrekitMessages c : OrekitMessages.values())
+                System.out.println(c);
             
         
             Returns:
@@ -390,7 +391,7 @@ class OrekitMessages(java.lang.Enum['OrekitMessages'], org.hipparchus.exception.
 
 class OrekitException(java.lang.RuntimeException, LocalizedException):
     """
-    public class OrekitException extends RuntimeException implements :class:`~org.orekit.errors.LocalizedException`
+    public class OrekitException extends :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.RuntimeException?is` implements :class:`~org.orekit.errors.LocalizedException`
     
         This class is the base class for all specific exceptions thrown by the Orekit classes.
     
@@ -418,7 +419,8 @@ class OrekitException(java.lang.RuntimeException, LocalizedException):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
         
         
         """
@@ -428,7 +430,8 @@ class OrekitException(java.lang.RuntimeException, LocalizedException):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
         
         
         """
@@ -442,7 +445,7 @@ class OrekitException(java.lang.RuntimeException, LocalizedException):
                 :meth:`~org.orekit.errors.LocalizedException.getMessage` in interface :class:`~org.orekit.errors.LocalizedException`
         
             Parameters:
-                locale (Locale): Locale in which the message should be translated
+                locale (:class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): Locale in which the message should be translated
         
             Returns:
                 localized message
@@ -478,12 +481,13 @@ class OrekitException(java.lang.RuntimeException, LocalizedException):
     @staticmethod
     def unwrap(mathRuntimeException: org.hipparchus.exception.MathRuntimeException) -> 'OrekitException':
         """
-            Recover a OrekitException, possibly embedded in a null.
+            Recover a OrekitException, possibly embedded in a
+            :class:`~org.orekit.errors.https:.www.hipparchus.org.apidocs.org.hipparchus.exception.MathRuntimeException?is`.
         
             If the :code:`MathRuntimeException` does not embed a OrekitException, a new one will be created.
         
             Parameters:
-                exception (MathRuntimeException): MathRuntimeException to analyze
+                exception (:class:`~org.orekit.errors.https:.www.hipparchus.org.apidocs.org.hipparchus.exception.MathRuntimeException?is`): MathRuntimeException to analyze
         
             Returns:
                 a (possibly embedded) OrekitException
@@ -494,9 +498,10 @@ class OrekitException(java.lang.RuntimeException, LocalizedException):
 
 class OrekitIOException(java.io.IOException, LocalizedException):
     """
-    public class OrekitIOException extends IOException implements :class:`~org.orekit.errors.LocalizedException`
+    public class OrekitIOException extends :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.io.IOException?is` implements :class:`~org.orekit.errors.LocalizedException`
     
-        Extension of null with localized message.
+        Extension of :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.io.IOException?is` with localized
+        message.
     
         Since:
             9.2
@@ -509,7 +514,8 @@ class OrekitIOException(java.io.IOException, LocalizedException):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
         
         
         """
@@ -519,7 +525,8 @@ class OrekitIOException(java.io.IOException, LocalizedException):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
         
         
         """
@@ -533,7 +540,7 @@ class OrekitIOException(java.io.IOException, LocalizedException):
                 :meth:`~org.orekit.errors.LocalizedException.getMessage` in interface :class:`~org.orekit.errors.LocalizedException`
         
             Parameters:
-                locale (Locale): Locale in which the message should be translated
+                locale (:class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): Locale in which the message should be translated
         
             Returns:
                 localized message
@@ -569,9 +576,10 @@ class OrekitIOException(java.io.IOException, LocalizedException):
 
 class OrekitIllegalArgumentException(java.lang.IllegalArgumentException, LocalizedException):
     """
-    public class OrekitIllegalArgumentException extends IllegalArgumentException implements :class:`~org.orekit.errors.LocalizedException`
+    public class OrekitIllegalArgumentException extends :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is` implements :class:`~org.orekit.errors.LocalizedException`
     
-        Extension of null with localized message.
+        Extension of :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`
+        with localized message.
     
         Since:
             7.1
@@ -584,7 +592,8 @@ class OrekitIllegalArgumentException(java.lang.IllegalArgumentException, Localiz
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
         
         
         """
@@ -594,7 +603,8 @@ class OrekitIllegalArgumentException(java.lang.IllegalArgumentException, Localiz
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
         
         
         """
@@ -608,7 +618,7 @@ class OrekitIllegalArgumentException(java.lang.IllegalArgumentException, Localiz
                 :meth:`~org.orekit.errors.LocalizedException.getMessage` in interface :class:`~org.orekit.errors.LocalizedException`
         
             Parameters:
-                locale (Locale): Locale in which the message should be translated
+                locale (:class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): Locale in which the message should be translated
         
             Returns:
                 localized message
@@ -644,9 +654,10 @@ class OrekitIllegalArgumentException(java.lang.IllegalArgumentException, Localiz
 
 class OrekitIllegalStateException(java.lang.IllegalStateException, LocalizedException):
     """
-    public class OrekitIllegalStateException extends IllegalStateException implements :class:`~org.orekit.errors.LocalizedException`
+    public class OrekitIllegalStateException extends :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalStateException?is` implements :class:`~org.orekit.errors.LocalizedException`
     
-        Extension of null with localized message.
+        Extension of :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalStateException?is`
+        with localized message.
     
         Since:
             7.1
@@ -659,7 +670,8 @@ class OrekitIllegalStateException(java.lang.IllegalStateException, LocalizedExce
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
         
         
         """
@@ -669,7 +681,8 @@ class OrekitIllegalStateException(java.lang.IllegalStateException, LocalizedExce
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
         
         
         """
@@ -683,7 +696,7 @@ class OrekitIllegalStateException(java.lang.IllegalStateException, LocalizedExce
                 :meth:`~org.orekit.errors.LocalizedException.getMessage` in interface :class:`~org.orekit.errors.LocalizedException`
         
             Parameters:
-                locale (Locale): Locale in which the message should be translated
+                locale (:class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): Locale in which the message should be translated
         
             Returns:
                 localized message
@@ -719,9 +732,10 @@ class OrekitIllegalStateException(java.lang.IllegalStateException, LocalizedExce
 
 class OrekitInternalError(java.lang.IllegalStateException, LocalizedException):
     """
-    public class OrekitInternalError extends IllegalStateException implements :class:`~org.orekit.errors.LocalizedException`
+    public class OrekitInternalError extends :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalStateException?is` implements :class:`~org.orekit.errors.LocalizedException`
     
-        Extension of null with localized message for internal errors only.
+        Extension of :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Runtime?is` with localized
+        message for internal errors only.
     
         Since:
             7.1
@@ -734,7 +748,8 @@ class OrekitInternalError(java.lang.IllegalStateException, LocalizedException):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
         
         
         """
@@ -744,7 +759,8 @@ class OrekitInternalError(java.lang.IllegalStateException, LocalizedException):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
         
         
         """
@@ -758,7 +774,7 @@ class OrekitInternalError(java.lang.IllegalStateException, LocalizedException):
                 :meth:`~org.orekit.errors.LocalizedException.getMessage` in interface :class:`~org.orekit.errors.LocalizedException`
         
             Parameters:
-                locale (Locale): Locale in which the message should be translated
+                locale (:class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): Locale in which the message should be translated
         
             Returns:
                 localized message
@@ -794,9 +810,10 @@ class OrekitInternalError(java.lang.IllegalStateException, LocalizedException):
 
 class OrekitParseException(java.text.ParseException, LocalizedException):
     """
-    public class OrekitParseException extends ParseException implements :class:`~org.orekit.errors.LocalizedException`
+    public class OrekitParseException extends :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.text.ParseException?is` implements :class:`~org.orekit.errors.LocalizedException`
     
-        Extension of null with localized message.
+        Extension of :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.text.ParseException?is` with
+        localized message.
     
         Since:
             7.1
@@ -809,7 +826,8 @@ class OrekitParseException(java.text.ParseException, LocalizedException):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
         
         
         """
@@ -819,7 +837,8 @@ class OrekitParseException(java.text.ParseException, LocalizedException):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
         
         
         """
@@ -833,7 +852,7 @@ class OrekitParseException(java.text.ParseException, LocalizedException):
                 :meth:`~org.orekit.errors.LocalizedException.getMessage` in interface :class:`~org.orekit.errors.LocalizedException`
         
             Parameters:
-                locale (Locale): Locale in which the message should be translated
+                locale (:class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): Locale in which the message should be translated
         
             Returns:
                 localized message
@@ -869,7 +888,7 @@ class OrekitParseException(java.text.ParseException, LocalizedException):
 
 class PythonLocalizedException(LocalizedException):
     """
-    public class PythonLocalizedException extends Object implements :class:`~org.orekit.errors.LocalizedException`
+    public class PythonLocalizedException extends :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.errors.LocalizedException`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -881,7 +900,7 @@ class PythonLocalizedException(LocalizedException):
                 :meth:`~org.orekit.errors.LocalizedException.getMessage` in interface :class:`~org.orekit.errors.LocalizedException`
         
             Parameters:
-                locale (Locale): Locale in which the message should be translated
+                locale (:class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): Locale in which the message should be translated
         
             Returns:
                 localized message
@@ -979,12 +998,13 @@ class TimeStampedCacheException(OrekitException):
             Returns:
                 a (possibly embedded) TimeStampedCacheException
         
-            Recover a TimeStampedCacheException, possibly embedded in a null.
+            Recover a TimeStampedCacheException, possibly embedded in a
+            :class:`~org.orekit.errors.https:.www.hipparchus.org.apidocs.org.hipparchus.exception.MathRuntimeException?is`.
         
             If the :code:`MathRuntimeException` does not embed a TimeStampedCacheException, a new one will be created.
         
             Parameters:
-                exception (MathRuntimeException): MathRuntimeException to analyze
+                exception (:class:`~org.orekit.errors.https:.www.hipparchus.org.apidocs.org.hipparchus.exception.MathRuntimeException?is`): MathRuntimeException to analyze
         
             Returns:
                 a (possibly embedded) TimeStampedCacheException

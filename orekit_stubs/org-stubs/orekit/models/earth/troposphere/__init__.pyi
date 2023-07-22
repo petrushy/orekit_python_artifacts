@@ -19,12 +19,12 @@ class DiscreteTroposphericModel(org.orekit.utils.ParametersDriversProvider):
     
         Models that implement this interface split the delay into hydrostatic and non-hydrostatic part:
     
-        Î´ = Î´ :sub:`h` + Î´ :sub:`nh`
+        δ = δ :sub:`h` + δ :sub:`nh`
     
         With:
     
-          - Î´ :sub:`h` = hydrostatic delay
-          - Î´ :sub:`nh` = non-hydrostatic (or wet) delay
+          - δ :sub:`h` = hydrostatic delay
+          - δ :sub:`nh` = non-hydrostatic (or wet) delay
     """
     _getParameters_1__T = typing.TypeVar('_getParameters_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
@@ -43,7 +43,7 @@ class DiscreteTroposphericModel(org.orekit.utils.ParametersDriversProvider):
             Get tropospheric model parameters.
         
             Parameters:
-                field (Field<T> field): field to which the elements belong
+                field (:class:`~org.orekit.models.earth.troposphere.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
         
             Returns:
                 tropospheric model parameters
@@ -99,8 +99,8 @@ class MappingFunction:
             This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
             having the following form:
         
-              - double[0] = m :sub:`h` (e) â†’ hydrostatic mapping function
-              - double[1] = m :sub:`w` (e) â†’ wet mapping function
+              - double[0] = m :sub:`h` (e) → hydrostatic mapping function
+              - double[1] = m :sub:`w` (e) → wet mapping function
         
         
             Parameters:
@@ -119,8 +119,8 @@ class MappingFunction:
             This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
             having the following form:
         
-              - T[0] = m :sub:`h` (e) â†’ hydrostatic mapping function
-              - T[1] = m :sub:`w` (e) â†’ wet mapping function
+              - T[0] = m :sub:`h` (e) → hydrostatic mapping function
+              - T[1] = m :sub:`w` (e) → wet mapping function
         
         
             Parameters:
@@ -137,7 +137,7 @@ class MappingFunction:
 
 class TroposphericModelUtils:
     """
-    public class TroposphericModelUtils extends Object
+    public class TroposphericModelUtils extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Utility class for tropospheric models.
     
@@ -152,8 +152,8 @@ class TroposphericModelUtils:
             This method computes the height correction for the hydrostatic component of the mapping function. The formulas are given
             by Neill's paper, 1996:
         
-            Niell A. E. (1996) "Global mapping functions for the atmosphere delay of radio wavelengths,Ã¢â‚¬ï¿½ J. Geophys. Res.,
-            101(B2), pp. 3227Ã¢â‚¬â€œ3246, doi: 10.1029/95JB03048.
+            Niell A. E. (1996) "Global mapping functions for the atmosphere delay of radio wavelengths,” J. Geophys. Res.,
+            101(B2), pp. 3227–3246, doi: 10.1029/95JB03048.
         
             Parameters:
                 elevation (double): the elevation of the satellite, in radians.
@@ -171,13 +171,13 @@ class TroposphericModelUtils:
             This method computes the height correction for the hydrostatic component of the mapping function. The formulas are given
             by Neill's paper, 1996:
         
-            Niell A. E. (1996) "Global mapping functions for the atmosphere delay of radio wavelengths,Ã¢â‚¬ï¿½ J. Geophys. Res.,
-            101(B2), pp. 3227Ã¢â‚¬â€œ3246, doi: 10.1029/95JB03048.
+            Niell A. E. (1996) "Global mapping functions for the atmosphere delay of radio wavelengths,” J. Geophys. Res.,
+            101(B2), pp. 3227–3246, doi: 10.1029/95JB03048.
         
             Parameters:
                 elevation (T): the elevation of the satellite, in radians.
                 height (T): the height of the station in m above sea level.
-                field (Field<T> field): field to which the elements belong
+                field (:class:`~org.orekit.models.earth.troposphere.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
         
             Returns:
                 the height correction, in m
@@ -250,33 +250,32 @@ class ViennaModelCoefficientsLoader(org.orekit.data.AbstractSelfFeedingLoader, o
     
         .. code-block: java
         
-        
-         ! Version:            1.0
-         ! Source:             J. Boehm, TU Vienna (created: 2018-11-20)
-         ! Data_types:         VMF1 (lat lon ah aw zhd zwd)
-         ! Epoch:              2018 11 19 18 00  0.0
-         ! Scale_factor:       1.e+00
-         ! Range/resolution:   -90 90 0 360 2 2.5
-         ! Comment:            http://vmf.geo.tuwien.ac.at/trop_products/GRID/2.5x2/VMF1/VMF1_OP/
-          90.0   0.0 0.00116059  0.00055318  2.3043  0.0096
-          90.0   2.5 0.00116059  0.00055318  2.3043  0.0096
-          90.0   5.0 0.00116059  0.00055318  2.3043  0.0096
-          90.0   7.5 0.00116059  0.00055318  2.3043  0.0096
-          90.0  10.0 0.00116059  0.00055318  2.3043  0.0096
-          90.0  12.5 0.00116059  0.00055318  2.3043  0.0096
-          90.0  15.0 0.00116059  0.00055318  2.3043  0.0096
-          90.0  17.5 0.00116059  0.00055318  2.3043  0.0096
-          90.0  20.0 0.00116059  0.00055318  2.3043  0.0096
-          90.0  22.5 0.00116059  0.00055318  2.3043  0.0096
-          90.0  25.0 0.00116059  0.00055318  2.3043  0.0096
-          90.0  27.5 0.00116059  0.00055318  2.3043  0.0096
+         ! Version:            1.0
+         ! Source:             J. Boehm, TU Vienna (created: 2018-11-20)
+         ! Data_types:         VMF1 (lat lon ah aw zhd zwd)
+         ! Epoch:              2018 11 19 18 00  0.0
+         ! Scale_factor:       1.e+00
+         ! Range/resolution:   -90 90 0 360 2 2.5
+         ! Comment:            http://vmf.geo.tuwien.ac.at/trop_products/GRID/2.5x2/VMF1/VMF1_OP/
+          90.0   0.0 0.00116059  0.00055318  2.3043  0.0096
+          90.0   2.5 0.00116059  0.00055318  2.3043  0.0096
+          90.0   5.0 0.00116059  0.00055318  2.3043  0.0096
+          90.0   7.5 0.00116059  0.00055318  2.3043  0.0096
+          90.0  10.0 0.00116059  0.00055318  2.3043  0.0096
+          90.0  12.5 0.00116059  0.00055318  2.3043  0.0096
+          90.0  15.0 0.00116059  0.00055318  2.3043  0.0096
+          90.0  17.5 0.00116059  0.00055318  2.3043  0.0096
+          90.0  20.0 0.00116059  0.00055318  2.3043  0.0096
+          90.0  22.5 0.00116059  0.00055318  2.3043  0.0096
+          90.0  25.0 0.00116059  0.00055318  2.3043  0.0096
+          90.0  27.5 0.00116059  0.00055318  2.3043  0.0096
          
     
         It is not safe for multiple threads to share a single instance of this class.
     """
     DEFAULT_SUPPORTED_NAMES: typing.ClassVar[str] = ...
     """
-    public static final String DEFAULT_SUPPORTED_NAMES
+    public static final :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_SUPPORTED_NAMES
     
         Default supported files name pattern.
     
@@ -311,8 +310,8 @@ class ViennaModelCoefficientsLoader(org.orekit.data.AbstractSelfFeedingLoader, o
             Get the supported names regular expression.
         
             Overrides:
-                :meth:`~org.orekit.data.AbstractSelfFeedingLoader.getSupportedNames`Â in
-                classÂ :class:`~org.orekit.data.AbstractSelfFeedingLoader`
+                :meth:`~org.orekit.data.AbstractSelfFeedingLoader.getSupportedNames` in
+                class :class:`~org.orekit.data.AbstractSelfFeedingLoader`
         
             Returns:
                 the supported names.
@@ -327,8 +326,8 @@ class ViennaModelCoefficientsLoader(org.orekit.data.AbstractSelfFeedingLoader, o
         """
             Returns the zenith delay array.
         
-              - double[0] = D :sub:`hz` â†’ zenith hydrostatic delay
-              - double[1] = D :sub:`wz` â†’ zenith wet delay
+              - double[0] = D :sub:`hz` → zenith hydrostatic delay
+              - double[1] = D :sub:`wz` → zenith wet delay
         
         
             Returns:
@@ -377,7 +376,7 @@ class ViennaModelCoefficientsLoader(org.orekit.data.AbstractSelfFeedingLoader, o
 
 class ViennaModelType(java.lang.Enum['ViennaModelType']):
     """
-    public enum ViennaModelType extends Enum<:class:`~org.orekit.models.earth.troposphere.ViennaModelType`>
+    public enum ViennaModelType extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.models.earth.troposphere.ViennaModelType`>
     
         Enumerate for Vienna tropospheric model 1 and 3. This enumerate is used for the coefficients loader.
     
@@ -399,14 +398,14 @@ class ViennaModelType(java.lang.Enum['ViennaModelType']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -419,9 +418,8 @@ class ViennaModelType(java.lang.Enum['ViennaModelType']):
         
             .. code-block: java
             
-            
-            for (ViennaModelType c : ViennaModelType.values())
-                System.out.println(c);
+            for (ViennaModelType c : ViennaModelType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -433,16 +431,16 @@ class ViennaModelType(java.lang.Enum['ViennaModelType']):
 
 class EstimatedTroposphericModel(DiscreteTroposphericModel):
     """
-    public class EstimatedTroposphericModel extends Object implements :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+    public class EstimatedTroposphericModel extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
     
         An estimated tropospheric model. The tropospheric delay is computed according to the formula:
     
-        Î´ = Î´ :sub:`h` * m :sub:`h` + (Î´ :sub:`t` - Î´ :sub:`h` ) * m :sub:`w`
+        δ = δ :sub:`h` * m :sub:`h` + (δ :sub:`t` - δ :sub:`h` ) * m :sub:`w`
     
         With:
     
-          - Î´ :sub:`h` : Tropospheric zenith hydro-static delay.
-          - Î´ :sub:`t` : Tropospheric total zenith delay.
+          - δ :sub:`h` : Tropospheric zenith hydro-static delay.
+          - δ :sub:`t` : Tropospheric total zenith delay.
           - m :sub:`h` : Hydro-static mapping function.
           - m :sub:`w` : Wet mapping function.
     
@@ -453,13 +451,13 @@ class EstimatedTroposphericModel(DiscreteTroposphericModel):
         :class:`~org.orekit.models.earth.troposphere.GlobalMappingFunctionModel`, or the
         :class:`~org.orekit.models.earth.troposphere.NiellMappingFunctionModel`
     
-        The tropospheric zenith delay ÃŽÂ´ :sub:`h` is computed empirically with a
-        :class:`~org.orekit.models.earth.troposphere.SaastamoinenModel` while the tropospheric total zenith delay ÃŽÂ´ :sub:`t`
-        is estimated as a :class:`~org.orekit.utils.ParameterDriver`
+        The tropospheric zenith delay δ :sub:`h` is computed empirically with a
+        :class:`~org.orekit.models.earth.troposphere.SaastamoinenModel` while the tropospheric total zenith delay δ :sub:`t` is
+        estimated as a :class:`~org.orekit.utils.ParameterDriver`
     """
     TOTAL_ZENITH_DELAY: typing.ClassVar[str] = ...
     """
-    public static final String TOTAL_ZENITH_DELAY
+    public static final :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` TOTAL_ZENITH_DELAY
     
         Name of the parameter of this model: the total zenith delay.
     
@@ -480,8 +478,8 @@ class EstimatedTroposphericModel(DiscreteTroposphericModel):
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (double): the elevation of the satellite, in radians
@@ -500,8 +498,8 @@ class EstimatedTroposphericModel(DiscreteTroposphericModel):
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (T): the elevation of the satellite, in radians
@@ -518,7 +516,7 @@ class EstimatedTroposphericModel(DiscreteTroposphericModel):
 
 class FixedTroposphericDelay(DiscreteTroposphericModel):
     """
-    public class FixedTroposphericDelay extends Object implements :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+    public class FixedTroposphericDelay extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
     
         A static tropospheric model that interpolates the actual tropospheric delay based on values read from a configuration
         file (tropospheric-delay.txt) via the :class:`~org.orekit.data.DataProvidersManager`.
@@ -539,8 +537,8 @@ class FixedTroposphericDelay(DiscreteTroposphericModel):
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (double): the elevation of the satellite, in radians
@@ -559,8 +557,8 @@ class FixedTroposphericDelay(DiscreteTroposphericModel):
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (T): the elevation of the satellite, in radians
@@ -577,7 +575,7 @@ class FixedTroposphericDelay(DiscreteTroposphericModel):
 
 class GlobalMappingFunctionModel(MappingFunction):
     """
-    public class GlobalMappingFunctionModel extends Object implements :class:`~org.orekit.models.earth.troposphere.MappingFunction`
+    public class GlobalMappingFunctionModel extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.MappingFunction`
     
         The Global Mapping Function model for radio techniques. This model is an empirical mapping function. It only needs the
         values of the station latitude, longitude, height and the date for the computations.
@@ -601,13 +599,13 @@ class GlobalMappingFunctionModel(MappingFunction):
             This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
             having the following form:
         
-              - double[0] = m :sub:`h` (e) â†’ hydrostatic mapping function
-              - double[1] = m :sub:`w` (e) â†’ wet mapping function
+              - double[0] = m :sub:`h` (e) → hydrostatic mapping function
+              - double[1] = m :sub:`w` (e) → wet mapping function
         
         
             Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.MappingFunction.mappingFactors`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.troposphere.MappingFunction`
+                :meth:`~org.orekit.models.earth.troposphere.MappingFunction.mappingFactors` in
+                interface :class:`~org.orekit.models.earth.troposphere.MappingFunction`
         
             Parameters:
                 elevation (double): the elevation of the satellite, in radians
@@ -625,13 +623,13 @@ class GlobalMappingFunctionModel(MappingFunction):
             This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
             having the following form:
         
-              - T[0] = m :sub:`h` (e) â†’ hydrostatic mapping function
-              - T[1] = m :sub:`w` (e) â†’ wet mapping function
+              - T[0] = m :sub:`h` (e) → hydrostatic mapping function
+              - T[1] = m :sub:`w` (e) → wet mapping function
         
         
             Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.MappingFunction.mappingFactors`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.troposphere.MappingFunction`
+                :meth:`~org.orekit.models.earth.troposphere.MappingFunction.mappingFactors` in
+                interface :class:`~org.orekit.models.earth.troposphere.MappingFunction`
         
             Parameters:
                 elevation (T): the elevation of the satellite, in radians
@@ -647,7 +645,7 @@ class GlobalMappingFunctionModel(MappingFunction):
 
 class MariniMurrayModel(DiscreteTroposphericModel):
     """
-    public class MariniMurrayModel extends Object implements :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+    public class MariniMurrayModel extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
     
         The Marini-Murray tropospheric delay model for laser ranging.
     
@@ -683,8 +681,8 @@ class MariniMurrayModel(DiscreteTroposphericModel):
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (double): the elevation of the satellite, in radians
@@ -703,8 +701,8 @@ class MariniMurrayModel(DiscreteTroposphericModel):
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (T): the elevation of the satellite, in radians
@@ -742,7 +740,7 @@ class MendesPavlisModel(DiscreteTroposphericModel, MappingFunction):
 
 class NiellMappingFunctionModel(MappingFunction):
     """
-    public class NiellMappingFunctionModel extends Object implements :class:`~org.orekit.models.earth.troposphere.MappingFunction`
+    public class NiellMappingFunctionModel extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.MappingFunction`
     
         The Niell Mapping Function model for radio wavelengths. This model is an empirical mapping function. It only needs the
         values of the station latitude, height and the date for the computations.
@@ -752,7 +750,7 @@ class NiellMappingFunctionModel(MappingFunction):
     
         Also see:
             "A. E. Niell(1996), Global mapping functions for the atmosphere delay of radio wavelengths, J. Geophys. Res., 101(B2),
-            pp. 3227Ã¢â‚¬â€œ3246, doi: 10.1029/95JB03048."
+            pp. 3227–3246, doi: 10.1029/95JB03048."
     """
     @typing.overload
     def __init__(self): ...
@@ -765,13 +763,13 @@ class NiellMappingFunctionModel(MappingFunction):
             This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
             having the following form:
         
-              - double[0] = m :sub:`h` (e) â†’ hydrostatic mapping function
-              - double[1] = m :sub:`w` (e) â†’ wet mapping function
+              - double[0] = m :sub:`h` (e) → hydrostatic mapping function
+              - double[1] = m :sub:`w` (e) → wet mapping function
         
         
             Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.MappingFunction.mappingFactors`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.troposphere.MappingFunction`
+                :meth:`~org.orekit.models.earth.troposphere.MappingFunction.mappingFactors` in
+                interface :class:`~org.orekit.models.earth.troposphere.MappingFunction`
         
             Parameters:
                 elevation (double): the elevation of the satellite, in radians
@@ -789,13 +787,13 @@ class NiellMappingFunctionModel(MappingFunction):
             This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
             having the following form:
         
-              - T[0] = m :sub:`h` (e) â†’ hydrostatic mapping function
-              - T[1] = m :sub:`w` (e) â†’ wet mapping function
+              - T[0] = m :sub:`h` (e) → hydrostatic mapping function
+              - T[1] = m :sub:`w` (e) → wet mapping function
         
         
             Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.MappingFunction.mappingFactors`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.troposphere.MappingFunction`
+                :meth:`~org.orekit.models.earth.troposphere.MappingFunction.mappingFactors` in
+                interface :class:`~org.orekit.models.earth.troposphere.MappingFunction`
         
             Parameters:
                 elevation (T): the elevation of the satellite, in radians
@@ -811,7 +809,7 @@ class NiellMappingFunctionModel(MappingFunction):
 
 class PythonDiscreteTroposphericModel(DiscreteTroposphericModel):
     """
-    public class PythonDiscreteTroposphericModel extends Object implements :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+    public class PythonDiscreteTroposphericModel extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -822,8 +820,8 @@ class PythonDiscreteTroposphericModel(DiscreteTroposphericModel):
             Get tropospheric model parameters. Extension point for Python.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.getParameters`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.getParameters` in
+                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Returns:
                 tropospheric model parameters
@@ -836,11 +834,11 @@ class PythonDiscreteTroposphericModel(DiscreteTroposphericModel):
             Get tropospheric model parameters. Extension point for Python.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.getParameters`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.getParameters` in
+                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
-                field (Field<T> field): field to which the elements belong
+                field (:class:`~org.orekit.models.earth.troposphere.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
         
             Returns:
                 tropospheric model parameters
@@ -855,7 +853,7 @@ class PythonDiscreteTroposphericModel(DiscreteTroposphericModel):
             Get tropospheric model parameters. Extension point for Python.
         
             Parameters:
-                field (Field<T> field): field to which the elements belong
+                field (:class:`~org.orekit.models.earth.troposphere.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
         
             Returns:
                 tropospheric model parameters
@@ -871,8 +869,8 @@ class PythonDiscreteTroposphericModel(DiscreteTroposphericModel):
             Python.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (double): the elevation of the satellite, in radians
@@ -892,8 +890,8 @@ class PythonDiscreteTroposphericModel(DiscreteTroposphericModel):
             pathDelay_TTTF(...) for Python extension
         
             Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (T): the elevation of the satellite, in radians
@@ -963,16 +961,15 @@ class PythonMappingFunction(MappingFunction):
 
 class SaastamoinenModel(DiscreteTroposphericModel):
     """
-    public class SaastamoinenModel extends Object implements :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+    public class SaastamoinenModel extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
     
         The modified Saastamoinen model. Estimates the path delay imposed to electro-magnetic signals by the troposphere
         according to the formula:
     
         .. code-block: java
         
-        
-         Î´ = 2.277e-3 / cos z * (P + (1255 / T + 0.05) * e - B * tanÂ²
-         z) + Î´R
+         δ = 2.277e-3 / cos z * (P + (1255 / T + 0.05) * e - B * tan²
+         z) + δR
          
         with the following input data provided to the model:
     
@@ -980,10 +977,10 @@ class SaastamoinenModel(DiscreteTroposphericModel):
           - P: atmospheric pressure
           - T: temperature
           - e: partial pressure of water vapour
-          - B, Î´R: correction terms
+          - B, δR: correction terms
     
     
-        The model supports custom ÃŽÂ´R correction terms to be read from a configuration file (saastamoinen-correction.txt) via
+        The model supports custom δR correction terms to be read from a configuration file (saastamoinen-correction.txt) via
         the :class:`~org.orekit.data.DataProvidersManager`.
     
         Also see:
@@ -991,9 +988,9 @@ class SaastamoinenModel(DiscreteTroposphericModel):
     """
     DELTA_R_FILE_NAME: typing.ClassVar[str] = ...
     """
-    public static final String DELTA_R_FILE_NAME
+    public static final :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DELTA_R_FILE_NAME
     
-        Default file name for Î´R correction term table.
+        Default file name for δR correction term table.
     
         Also see:
             :meth:`~constant`
@@ -1064,8 +1061,8 @@ class SaastamoinenModel(DiscreteTroposphericModel):
             threshold will use the value obtained for the threshold itself.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (double): the elevation of the satellite, in radians
@@ -1094,8 +1091,8 @@ class SaastamoinenModel(DiscreteTroposphericModel):
             threshold will use the value obtained for the threshold itself.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (T): the elevation of the satellite, in radians
@@ -1133,7 +1130,7 @@ class SaastamoinenModel(DiscreteTroposphericModel):
 
 class TimeSpanEstimatedTroposphericModel(DiscreteTroposphericModel):
     """
-    public class TimeSpanEstimatedTroposphericModel extends Object implements :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+    public class TimeSpanEstimatedTroposphericModel extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
     
         Time span estimated tropospheric model.
     
@@ -1154,7 +1151,7 @@ class TimeSpanEstimatedTroposphericModel(DiscreteTroposphericModel):
     """
     DATE_BEFORE: typing.ClassVar[str] = ...
     """
-    public static final String DATE_BEFORE
+    public static final :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DATE_BEFORE
     
         Prefix for dates before in the tropospheric parameter drivers' name.
     
@@ -1165,7 +1162,7 @@ class TimeSpanEstimatedTroposphericModel(DiscreteTroposphericModel):
     """
     DATE_AFTER: typing.ClassVar[str] = ...
     """
-    public static final String DATE_AFTER
+    public static final :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DATE_AFTER
     
         Prefix for dates after in the tropospheric parameter drivers' name.
     
@@ -1183,7 +1180,7 @@ class TimeSpanEstimatedTroposphericModel(DiscreteTroposphericModel):
             Add a EstimatedTroposphericModel entry valid after a limit date.
         
         
-            Using :code:`addTroposphericModelValidAfter(entry, t)` will make :code:`entry` valid in [t, +Ã¢Ë†Å¾[ (note the closed
+            Using :code:`addTroposphericModelValidAfter(entry, t)` will make :code:`entry` valid in [t, +∞[ (note the closed
             bracket).
         
             Parameters:
@@ -1198,7 +1195,7 @@ class TimeSpanEstimatedTroposphericModel(DiscreteTroposphericModel):
             Add an EstimatedTroposphericModel entry valid before a limit date.
         
         
-            Using :code:`addTroposphericValidBefore(entry, t)` will make :code:`entry` valid in ]-âˆž, t[ (note the open bracket).
+            Using :code:`addTroposphericValidBefore(entry, t)` will make :code:`entry` valid in ]-∞, t[ (note the open bracket).
         
             Parameters:
                 model (:class:`~org.orekit.models.earth.troposphere.EstimatedTroposphericModel`): EstimatedTroposphericModel entry
@@ -1264,8 +1261,8 @@ class TimeSpanEstimatedTroposphericModel(DiscreteTroposphericModel):
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (double): the elevation of the satellite, in radians
@@ -1284,8 +1281,8 @@ class TimeSpanEstimatedTroposphericModel(DiscreteTroposphericModel):
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (T): the elevation of the satellite, in radians
@@ -1302,11 +1299,11 @@ class TimeSpanEstimatedTroposphericModel(DiscreteTroposphericModel):
 
 class ViennaOneModel(DiscreteTroposphericModel, MappingFunction):
     """
-    public class ViennaOneModel extends Object implements :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`, :class:`~org.orekit.models.earth.troposphere.MappingFunction`
+    public class ViennaOneModel extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`, :class:`~org.orekit.models.earth.troposphere.MappingFunction`
     
         The Vienna1 tropospheric delay model for radio techniques. The Vienna model data are given with a time interval of 6
-        hours as well as on a global 2.5Ã‚Â° * 2.0Ã‚Â° grid. This version considered the height correction for the hydrostatic
-        part developed by Niell, 1996.
+        hours as well as on a global 2.5° * 2.0° grid. This version considered the height correction for the hydrostatic part
+        developed by Niell, 1996.
     
         Also see:
             "Boehm, J., Werl, B., and Schuh, H., (2006), Troposhere mapping functions for GPS and very long baseline interferometry
@@ -1324,8 +1321,8 @@ class ViennaOneModel(DiscreteTroposphericModel, MappingFunction):
             This method allows the computation of the zenith hydrostatic and zenith wet delay. The resulting element is an array
             having the following form:
         
-              - T[0] = D :sub:`hz` â†’ zenith hydrostatic delay
-              - T[1] = D :sub:`wz` â†’ zenith wet delay
+              - T[0] = D :sub:`hz` → zenith hydrostatic delay
+              - T[1] = D :sub:`wz` → zenith wet delay
         
         
             Parameters:
@@ -1344,8 +1341,8 @@ class ViennaOneModel(DiscreteTroposphericModel, MappingFunction):
             This method allows the computation of the zenith hydrostatic and zenith wet delay. The resulting element is an array
             having the following form:
         
-              - T[0] = D :sub:`hz` â†’ zenith hydrostatic delay
-              - T[1] = D :sub:`wz` â†’ zenith wet delay
+              - T[0] = D :sub:`hz` → zenith hydrostatic delay
+              - T[1] = D :sub:`wz` → zenith wet delay
         
         
             Parameters:
@@ -1367,13 +1364,13 @@ class ViennaOneModel(DiscreteTroposphericModel, MappingFunction):
             This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
             having the following form:
         
-              - double[0] = m :sub:`h` (e) â†’ hydrostatic mapping function
-              - double[1] = m :sub:`w` (e) â†’ wet mapping function
+              - double[0] = m :sub:`h` (e) → hydrostatic mapping function
+              - double[1] = m :sub:`w` (e) → wet mapping function
         
         
             Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.MappingFunction.mappingFactors`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.troposphere.MappingFunction`
+                :meth:`~org.orekit.models.earth.troposphere.MappingFunction.mappingFactors` in
+                interface :class:`~org.orekit.models.earth.troposphere.MappingFunction`
         
             Parameters:
                 elevation (double): the elevation of the satellite, in radians
@@ -1391,13 +1388,13 @@ class ViennaOneModel(DiscreteTroposphericModel, MappingFunction):
             This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
             having the following form:
         
-              - T[0] = m :sub:`h` (e) â†’ hydrostatic mapping function
-              - T[1] = m :sub:`w` (e) â†’ wet mapping function
+              - T[0] = m :sub:`h` (e) → hydrostatic mapping function
+              - T[1] = m :sub:`w` (e) → wet mapping function
         
         
             Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.MappingFunction.mappingFactors`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.troposphere.MappingFunction`
+                :meth:`~org.orekit.models.earth.troposphere.MappingFunction.mappingFactors` in
+                interface :class:`~org.orekit.models.earth.troposphere.MappingFunction`
         
             Parameters:
                 elevation (T): the elevation of the satellite, in radians
@@ -1417,8 +1414,8 @@ class ViennaOneModel(DiscreteTroposphericModel, MappingFunction):
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (double): the elevation of the satellite, in radians
@@ -1437,8 +1434,8 @@ class ViennaOneModel(DiscreteTroposphericModel, MappingFunction):
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
         
             Parameters:
                 elevation (T): the elevation of the satellite, in radians

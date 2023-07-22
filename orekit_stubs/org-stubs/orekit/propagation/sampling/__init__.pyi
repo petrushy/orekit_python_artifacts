@@ -9,7 +9,7 @@ import typing
 _FieldOrekitFixedStepHandler__T = typing.TypeVar('_FieldOrekitFixedStepHandler__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldOrekitFixedStepHandler(typing.Generic[_FieldOrekitFixedStepHandler__T]):
     """
-    public interface FieldOrekitFixedStepHandler<T extends CalculusFieldElement<T>>
+    public interface FieldOrekitFixedStepHandler<T extends :class:`~org.orekit.propagation.sampling.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>>
     
         This interface is a space-dynamics aware fixed size step handler.
     
@@ -23,7 +23,7 @@ class FieldOrekitFixedStepHandler(typing.Generic[_FieldOrekitFixedStepHandler__T
 _FieldOrekitStepHandler__T = typing.TypeVar('_FieldOrekitStepHandler__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldOrekitStepHandler(typing.Generic[_FieldOrekitStepHandler__T]):
     """
-    public interface FieldOrekitStepHandler<T extends CalculusFieldElement<T>>
+    public interface FieldOrekitStepHandler<T extends :class:`~org.orekit.propagation.sampling.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>>
     
         This interface is a space-dynamics aware step handler.
     
@@ -37,7 +37,7 @@ class FieldOrekitStepHandler(typing.Generic[_FieldOrekitStepHandler__T]):
 _FieldOrekitStepInterpolator__T = typing.TypeVar('_FieldOrekitStepInterpolator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldOrekitStepInterpolator(typing.Generic[_FieldOrekitStepInterpolator__T]):
     """
-    public interface FieldOrekitStepInterpolator<T extends CalculusFieldElement<T>>
+    public interface FieldOrekitStepInterpolator<T extends :class:`~org.orekit.propagation.sampling.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>>
     
         This interface is a space-dynamics aware step interpolator.
     
@@ -76,12 +76,12 @@ class MultiSatStepHandler:
 
 class OrekitFixedStepHandler:
     """
-    @FunctionalInterface public interface OrekitFixedStepHandler
+    :class:`~org.orekit.propagation.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.FunctionalInterface?is` public interface OrekitFixedStepHandler
     
         This interface is a space-dynamics aware fixed size step handler.
     
-        It mirrors the :code:`FixedStepHandler` interface from Hipparchus but provides a space-dynamics interface to the
-        methods.
+        It mirrors the :code:`FixedStepHandler` interface from :class:`~org.orekit.propagation.sampling.https:.hipparchus.org`
+        but provides a space-dynamics interface to the methods.
     """
     def finish(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
         """
@@ -131,7 +131,8 @@ class OrekitStepHandler:
     
         This interface is a space-dynamics aware step handler.
     
-        It mirrors the :code:`StepHandler` interface from Hipparchus but provides a space-dynamics interface to the methods.
+        It mirrors the :code:`StepHandler` interface from :class:`~org.orekit.propagation.sampling.https:.hipparchus.org` but
+        provides a space-dynamics interface to the methods.
     """
     def finish(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
         """
@@ -179,8 +180,8 @@ class OrekitStepInterpolator:
     
         This interface is a space-dynamics aware step interpolator.
     
-        It mirrors the :code:`ODEStateInterpolator` interface from Hipparchus but provides a space-dynamics interface to the
-        methods.
+        It mirrors the :code:`ODEStateInterpolator` interface from
+        :class:`~org.orekit.propagation.sampling.https:.hipparchus.org` but provides a space-dynamics interface to the methods.
     """
     def getCurrentState(self) -> org.orekit.propagation.SpacecraftState:
         """
@@ -284,7 +285,7 @@ class OrekitStepInterpolator:
 _FieldOrekitStepNormalizer__T = typing.TypeVar('_FieldOrekitStepNormalizer__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldOrekitStepNormalizer(FieldOrekitStepHandler[_FieldOrekitStepNormalizer__T], typing.Generic[_FieldOrekitStepNormalizer__T]):
     """
-    public class FieldOrekitStepNormalizer<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.sampling.FieldOrekitStepHandler`<T>
+    public class FieldOrekitStepNormalizer<T extends :class:`~org.orekit.propagation.sampling.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.sampling.FieldOrekitStepHandler`<T>
     
         This class wraps an object implementing :class:`~org.orekit.propagation.sampling.OrekitFixedStepHandler` into a
         :class:`~org.orekit.propagation.sampling.OrekitStepHandler`.
@@ -325,7 +326,7 @@ class FieldOrekitStepNormalizer(FieldOrekitStepHandler[_FieldOrekitStepNormalize
 _FieldStepHandlerMultiplexer__T = typing.TypeVar('_FieldStepHandlerMultiplexer__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldStepHandlerMultiplexer(FieldOrekitStepHandler[_FieldStepHandlerMultiplexer__T], typing.Generic[_FieldStepHandlerMultiplexer__T]):
     """
-    public class FieldStepHandlerMultiplexer<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.sampling.FieldOrekitStepHandler`<T>
+    public class FieldStepHandlerMultiplexer<T extends :class:`~org.orekit.propagation.sampling.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.sampling.FieldOrekitStepHandler`<T>
     
         This class gathers several :class:`~org.orekit.propagation.sampling.OrekitStepHandler` instances into one.
     """
@@ -361,12 +362,13 @@ class FieldStepHandlerMultiplexer(FieldOrekitStepHandler[_FieldStepHandlerMultip
 
 class OrekitStepNormalizer(OrekitStepHandler):
     """
-    public class OrekitStepNormalizer extends Object implements :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
+    public class OrekitStepNormalizer extends :class:`~org.orekit.propagation.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
     
         This class wraps an object implementing :class:`~org.orekit.propagation.sampling.OrekitFixedStepHandler` into a
         :class:`~org.orekit.propagation.sampling.OrekitStepHandler`.
     
-        It mirrors the :code:`StepNormalizer` interface from Hipparchus but provides a space-dynamics interface to the methods.
+        It mirrors the :code:`StepNormalizer` interface from :class:`~org.orekit.propagation.sampling.https:.hipparchus.org` but
+        provides a space-dynamics interface to the methods.
     """
     def __init__(self, double: float, orekitFixedStepHandler: typing.Union[OrekitFixedStepHandler, typing.Callable]): ...
     def finish(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
@@ -374,8 +376,8 @@ class OrekitStepNormalizer(OrekitStepHandler):
             Finalize propagation.
         
             Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.finish`Â in
-                interfaceÂ :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
+                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.finish` in
+                interface :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
         
             Parameters:
                 finalState (:class:`~org.orekit.propagation.SpacecraftState`): state at propagation end
@@ -414,8 +416,8 @@ class OrekitStepNormalizer(OrekitStepHandler):
             Handle the last accepted step.
         
             Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.handleStep`Â in
-                interfaceÂ :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
+                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.handleStep` in
+                interface :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
         
             Parameters:
                 interpolator (:class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`): interpolator for the last accepted step. For efficiency purposes, the various propagators reuse the same object on each
@@ -436,8 +438,8 @@ class OrekitStepNormalizer(OrekitStepHandler):
             The default method does nothing
         
             Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
+                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.init` in
+                interface :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
         
             Parameters:
                 s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
@@ -461,7 +463,7 @@ class OrekitStepNormalizer(OrekitStepHandler):
 _PythonFieldOrekitFixedStepHandler__T = typing.TypeVar('_PythonFieldOrekitFixedStepHandler__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldOrekitFixedStepHandler(FieldOrekitFixedStepHandler[_PythonFieldOrekitFixedStepHandler__T], typing.Generic[_PythonFieldOrekitFixedStepHandler__T]):
     """
-    public class PythonFieldOrekitFixedStepHandler<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.sampling.FieldOrekitFixedStepHandler`<T>
+    public class PythonFieldOrekitFixedStepHandler<T extends :class:`~org.orekit.propagation.sampling.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.sampling.FieldOrekitFixedStepHandler`<T>
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -504,7 +506,7 @@ class PythonFieldOrekitStepHandler(FieldOrekitStepHandler[_PythonFieldOrekitStep
 _PythonFieldOrekitStepInterpolator__T = typing.TypeVar('_PythonFieldOrekitStepInterpolator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldOrekitStepInterpolator(FieldOrekitStepInterpolator[_PythonFieldOrekitStepInterpolator__T], typing.Generic[_PythonFieldOrekitStepInterpolator__T]):
     """
-    public class PythonFieldOrekitStepInterpolator<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.sampling.FieldOrekitStepInterpolator`<T>
+    public class PythonFieldOrekitStepInterpolator<T extends :class:`~org.orekit.propagation.sampling.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.sampling.FieldOrekitStepInterpolator`<T>
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -516,8 +518,8 @@ class PythonFieldOrekitStepInterpolator(FieldOrekitStepInterpolator[_PythonField
             Check is integration direction is forward in date.
         
             Specified by:
-                :meth:`~org.orekit.propagation.sampling.FieldOrekitStepInterpolator.isForward`Â in
-                interfaceÂ :class:`~org.orekit.propagation.sampling.FieldOrekitStepInterpolator`
+                :meth:`~org.orekit.propagation.sampling.FieldOrekitStepInterpolator.isForward` in
+                interface :class:`~org.orekit.propagation.sampling.FieldOrekitStepInterpolator`
         
             Returns:
                 true if integration is forward in date
@@ -548,7 +550,7 @@ class PythonFieldOrekitStepInterpolator(FieldOrekitStepInterpolator[_PythonField
 
 class PythonMultiSatStepHandler(MultiSatStepHandler):
     """
-    public class PythonMultiSatStepHandler extends Object implements :class:`~org.orekit.propagation.sampling.MultiSatStepHandler`
+    public class PythonMultiSatStepHandler extends :class:`~org.orekit.propagation.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.sampling.MultiSatStepHandler`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -577,7 +579,7 @@ class PythonMultiSatStepHandler(MultiSatStepHandler):
 
 class PythonOrekitFixedStepHandler(OrekitFixedStepHandler):
     """
-    public class PythonOrekitFixedStepHandler extends Object implements :class:`~org.orekit.propagation.sampling.OrekitFixedStepHandler`
+    public class PythonOrekitFixedStepHandler extends :class:`~org.orekit.propagation.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.sampling.OrekitFixedStepHandler`
     
         This interface is a space-dynamics aware fixed size step handler.
     
@@ -591,8 +593,8 @@ class PythonOrekitFixedStepHandler(OrekitFixedStepHandler):
             Finalize propagation.
         
             Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitFixedStepHandler.finish`Â in
-                interfaceÂ :class:`~org.orekit.propagation.sampling.OrekitFixedStepHandler`
+                :meth:`~org.orekit.propagation.sampling.OrekitFixedStepHandler.finish` in
+                interface :class:`~org.orekit.propagation.sampling.OrekitFixedStepHandler`
         
             Parameters:
                 finalState (:class:`~org.orekit.propagation.SpacecraftState`): state at propagation end
@@ -608,8 +610,8 @@ class PythonOrekitFixedStepHandler(OrekitFixedStepHandler):
             Handle the current step.
         
             Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitFixedStepHandler.handleStep`Â in
-                interfaceÂ :class:`~org.orekit.propagation.sampling.OrekitFixedStepHandler`
+                :meth:`~org.orekit.propagation.sampling.OrekitFixedStepHandler.handleStep` in
+                interface :class:`~org.orekit.propagation.sampling.OrekitFixedStepHandler`
         
             Parameters:
                 currentState (:class:`~org.orekit.propagation.SpacecraftState`): current state at step time
@@ -625,8 +627,8 @@ class PythonOrekitFixedStepHandler(OrekitFixedStepHandler):
             internal data if needed.
         
             Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitFixedStepHandler.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.sampling.OrekitFixedStepHandler`
+                :meth:`~org.orekit.propagation.sampling.OrekitFixedStepHandler.init` in
+                interface :class:`~org.orekit.propagation.sampling.OrekitFixedStepHandler`
         
             Parameters:
                 s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
@@ -658,7 +660,7 @@ class PythonOrekitFixedStepHandler(OrekitFixedStepHandler):
 
 class PythonOrekitStepHandler(OrekitStepHandler):
     """
-    public class PythonOrekitStepHandler extends Object implements :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
+    public class PythonOrekitStepHandler extends :class:`~org.orekit.propagation.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -667,8 +669,8 @@ class PythonOrekitStepHandler(OrekitStepHandler):
             Finalize propagation.
         
             Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.finish`Â in
-                interfaceÂ :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
+                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.finish` in
+                interface :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
         
             Parameters:
                 finalState (:class:`~org.orekit.propagation.SpacecraftState`): state at propagation end
@@ -684,8 +686,8 @@ class PythonOrekitStepHandler(OrekitStepHandler):
             Handle the current step.
         
             Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.handleStep`Â in
-                interfaceÂ :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
+                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.handleStep` in
+                interface :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
         
             Parameters:
                 interpolator (:class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`): interpolator set up for the current step
@@ -703,8 +705,8 @@ class PythonOrekitStepHandler(OrekitStepHandler):
             The default method does nothing
         
             Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
+                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.init` in
+                interface :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
         
             Parameters:
                 s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
@@ -735,7 +737,7 @@ class PythonOrekitStepHandler(OrekitStepHandler):
 
 class PythonOrekitStepInterpolator(OrekitStepInterpolator):
     """
-    public class PythonOrekitStepInterpolator extends Object implements :class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`
+    public class PythonOrekitStepInterpolator extends :class:`~org.orekit.propagation.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -744,8 +746,8 @@ class PythonOrekitStepInterpolator(OrekitStepInterpolator):
             Get the state at current grid point date. Extension point for Python.
         
             Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepInterpolator.getCurrentState`Â in
-                interfaceÂ :class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`
+                :meth:`~org.orekit.propagation.sampling.OrekitStepInterpolator.getCurrentState` in
+                interface :class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`
         
             Returns:
                 state at current grid point date
@@ -758,8 +760,8 @@ class PythonOrekitStepInterpolator(OrekitStepInterpolator):
             Get the state at interpolated date.
         
             Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepInterpolator.getInterpolatedState`Â in
-                interfaceÂ :class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`
+                :meth:`~org.orekit.propagation.sampling.OrekitStepInterpolator.getInterpolatedState` in
+                interface :class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): date of the interpolated state
@@ -775,8 +777,8 @@ class PythonOrekitStepInterpolator(OrekitStepInterpolator):
             Get the state at previous grid point date. Extension point for Python.
         
             Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepInterpolator.getPreviousState`Â in
-                interfaceÂ :class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`
+                :meth:`~org.orekit.propagation.sampling.OrekitStepInterpolator.getPreviousState` in
+                interface :class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`
         
             Returns:
                 state at previous grid point date
@@ -794,8 +796,8 @@ class PythonOrekitStepInterpolator(OrekitStepInterpolator):
             so that events occur on step boundaries which means the current state may be computed by the interpolator.
         
             Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepInterpolator.isCurrentStateInterpolated`Â in
-                interfaceÂ :class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`
+                :meth:`~org.orekit.propagation.sampling.OrekitStepInterpolator.isCurrentStateInterpolated` in
+                interface :class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`
         
             Returns:
                 :code:`true` if the current state was calculated by the interpolator and false if it was computed directly by the
@@ -809,8 +811,8 @@ class PythonOrekitStepInterpolator(OrekitStepInterpolator):
             Check is integration direction is forward in date.
         
             Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepInterpolator.isForward`Â in
-                interfaceÂ :class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`
+                :meth:`~org.orekit.propagation.sampling.OrekitStepInterpolator.isForward` in
+                interface :class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`
         
             Returns:
                 true if integration is forward in date
@@ -828,8 +830,8 @@ class PythonOrekitStepInterpolator(OrekitStepInterpolator):
             shortened so that events occur on step boundaries which means the previous state may be computed by the interpolator.
         
             Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepInterpolator.isPreviousStateInterpolated`Â in
-                interfaceÂ :class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`
+                :meth:`~org.orekit.propagation.sampling.OrekitStepInterpolator.isPreviousStateInterpolated` in
+                interface :class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`
         
             Returns:
                 :code:`true` if the previous state was calculated by the interpolator and false if it was computed directly by the
@@ -864,8 +866,8 @@ class PythonOrekitStepInterpolator(OrekitStepInterpolator):
             The instance is not changed at all.
         
             Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepInterpolator.restrictStep`Â in
-                interfaceÂ :class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`
+                :meth:`~org.orekit.propagation.sampling.OrekitStepInterpolator.restrictStep` in
+                interface :class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`
         
             Parameters:
                 newPreviousState (:class:`~org.orekit.propagation.SpacecraftState`): start of the restricted step
@@ -887,7 +889,7 @@ class PythonOrekitStepInterpolator(OrekitStepInterpolator):
 
 class StepHandlerMultiplexer(OrekitStepHandler):
     """
-    public class StepHandlerMultiplexer extends Object implements :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
+    public class StepHandlerMultiplexer extends :class:`~org.orekit.propagation.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
     
         This class gathers several :class:`~org.orekit.propagation.sampling.OrekitStepHandler` instances into one.
     """
@@ -948,8 +950,8 @@ class StepHandlerMultiplexer(OrekitStepHandler):
             Finalize propagation.
         
             Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.finish`Â in
-                interfaceÂ :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
+                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.finish` in
+                interface :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
         
             Parameters:
                 finalState (:class:`~org.orekit.propagation.SpacecraftState`): state at propagation end
@@ -963,8 +965,8 @@ class StepHandlerMultiplexer(OrekitStepHandler):
             Handle the current step.
         
             Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.handleStep`Â in
-                interfaceÂ :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
+                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.handleStep` in
+                interface :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
         
             Parameters:
                 interpolator (:class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`): interpolator set up for the current step
@@ -982,8 +984,8 @@ class StepHandlerMultiplexer(OrekitStepHandler):
             The default method does nothing
         
             Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
+                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.init` in
+                interface :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
         
             Parameters:
                 s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state

@@ -12,18 +12,18 @@ import typing
 
 class ClockCorrectionsProvider(org.orekit.propagation.AdditionalStateProvider):
     """
-    public class ClockCorrectionsProvider extends Object implements :class:`~org.orekit.propagation.AdditionalStateProvider`
+    public class ClockCorrectionsProvider extends :class:`~org.orekit.propagation.analytical.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.AdditionalStateProvider`
     
         Provider for clock corrections as additional states.
     
         The value of this additional state is a three elements array containing
     
-          - at index 0, the polynomial satellite clock model ÃŽâ€�tÃ¢â€šâ€ºÃ¢â€šï¿½Ã¢â€šÅ“ =
+          - at index 0, the polynomial satellite clock model Δtₛₐₜ =
             :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getAf0` +
             :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getAf1` (t -
             :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getToc`) +
             :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getAf1` (t -
-            :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getToc`)Ã‚Â²
+            :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getToc`)²
           - at index 1 the relativistic clock correction due to eccentricity
           - at index 2 the estimated group delay differential
             :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getTGD` for L1-L2 correction
@@ -39,7 +39,7 @@ class ClockCorrectionsProvider(org.orekit.propagation.AdditionalStateProvider):
     """
     CLOCK_CORRECTIONS: typing.ClassVar[str] = ...
     """
-    public static final String CLOCK_CORRECTIONS
+    public static final :class:`~org.orekit.propagation.analytical.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` CLOCK_CORRECTIONS
     
         Name of the additional state for satellite clock corrections.
     
@@ -57,8 +57,8 @@ class ClockCorrectionsProvider(org.orekit.propagation.AdditionalStateProvider):
             Get the additional state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.AdditionalStateProvider.getAdditionalState`Â in
-                interfaceÂ :class:`~org.orekit.propagation.AdditionalStateProvider`
+                :meth:`~org.orekit.propagation.AdditionalStateProvider.getAdditionalState` in
+                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state to which additional state should correspond
@@ -74,8 +74,8 @@ class ClockCorrectionsProvider(org.orekit.propagation.AdditionalStateProvider):
             Get the name of the additional state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.AdditionalStateProvider.getName`Â in
-                interfaceÂ :class:`~org.orekit.propagation.AdditionalStateProvider`
+                :meth:`~org.orekit.propagation.AdditionalStateProvider.getName` in
+                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
         
             Returns:
                 name of the additional state (names containing "orekit" with any case are reserved for the library internal use)
@@ -90,6 +90,10 @@ class GLONASSAnalyticalPropagator(org.orekit.propagation.analytical.AbstractAnal
     
         This class aims at propagating a GLONASS orbit from
         :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements`.
+    
+        **Caution:** The Glonass analytical propagator can only be used with
+        :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSAlmanac`. Using this propagator with a
+        :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSNavigationMessage` is prone to error.
     
         Since:
             10.0
@@ -129,8 +133,8 @@ class GLONASSAnalyticalPropagator(org.orekit.propagation.analytical.AbstractAnal
                 :meth:`~org.orekit.propagation.Propagator.getFrame` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.getFrame`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.getFrame` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Returns:
                 frame in which the orbit is propagated
@@ -187,8 +191,8 @@ class GLONASSAnalyticalPropagator(org.orekit.propagation.analytical.AbstractAnal
                 :meth:`~org.orekit.propagation.Propagator.resetInitialState` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): new initial state to consider
@@ -199,11 +203,15 @@ class GLONASSAnalyticalPropagator(org.orekit.propagation.analytical.AbstractAnal
 
 class GLONASSAnalyticalPropagatorBuilder:
     """
-    public class GLONASSAnalyticalPropagatorBuilder extends Object
+    public class GLONASSAnalyticalPropagatorBuilder extends :class:`~org.orekit.propagation.analytical.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This nested class aims at building a GLONASSAnalyticalPropagator.
     
         It implements the classical builder pattern.
+    
+        **Caution:** The Glonass analytical propagator can only be used with
+        :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSAlmanac`. Using this propagator with a
+        :class:`~org.orekit.propagation.analytical.gnss.data.GLONASSNavigationMessage` is prone to error.
     
         Since:
             11.0
@@ -331,8 +339,8 @@ class GNSSPropagator(org.orekit.propagation.analytical.AbstractAnalyticalPropaga
                 :meth:`~org.orekit.propagation.Propagator.getFrame` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.getFrame`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.getFrame` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Returns:
                 frame in which the orbit is propagated
@@ -386,8 +394,8 @@ class GNSSPropagator(org.orekit.propagation.analytical.AbstractAnalyticalPropaga
                 :meth:`~org.orekit.propagation.Propagator.resetInitialState` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): new initial state to consider
@@ -398,7 +406,7 @@ class GNSSPropagator(org.orekit.propagation.analytical.AbstractAnalyticalPropaga
 
 class GNSSPropagatorBuilder:
     """
-    public class GNSSPropagatorBuilder extends Object
+    public class GNSSPropagatorBuilder extends :class:`~org.orekit.propagation.analytical.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This nested class aims at building a GNSSPropagator.
     
@@ -518,8 +526,8 @@ class SBASPropagator(org.orekit.propagation.analytical.AbstractAnalyticalPropaga
                 :meth:`~org.orekit.propagation.Propagator.getFrame` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.getFrame`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.getFrame` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Returns:
                 frame in which the orbit is propagated
@@ -573,8 +581,8 @@ class SBASPropagator(org.orekit.propagation.analytical.AbstractAnalyticalPropaga
                 :meth:`~org.orekit.propagation.Propagator.resetInitialState` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): new initial state to consider
@@ -585,7 +593,7 @@ class SBASPropagator(org.orekit.propagation.analytical.AbstractAnalyticalPropaga
 
 class SBASPropagatorBuilder:
     """
-    public class SBASPropagatorBuilder extends Object
+    public class SBASPropagatorBuilder extends :class:`~org.orekit.propagation.analytical.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This nested class aims at building a SBASPropagator.
     

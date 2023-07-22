@@ -10,7 +10,7 @@ import typing
 
 class Authentication(java.lang.Enum['Authentication']):
     """
-    public enum Authentication extends Enum<:class:`~org.orekit.gnss.metric.ntrip.Authentication`>
+    public enum Authentication extends :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.metric.ntrip.Authentication`>
     
         Enumerate for authentication method in :class:`~org.orekit.gnss.metric.ntrip.DataStreamRecord`.
     
@@ -26,7 +26,7 @@ class Authentication(java.lang.Enum['Authentication']):
             Get the authentication type corresponding to a keyword.
         
             Parameters:
-                keyword (String): authentication keyword
+                keyword (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): authentication keyword
         
             Returns:
                 the authentication type corresponding to the keyword
@@ -46,14 +46,14 @@ class Authentication(java.lang.Enum['Authentication']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -66,9 +66,8 @@ class Authentication(java.lang.Enum['Authentication']):
         
             .. code-block: java
             
-            
-            for (Authentication c : Authentication.values())
-                System.out.println(c);
+            for (Authentication c : Authentication.values())
+                System.out.println(c);
             
         
             Returns:
@@ -80,7 +79,7 @@ class Authentication(java.lang.Enum['Authentication']):
 
 class CarrierPhase(java.lang.Enum['CarrierPhase']):
     """
-    public enum CarrierPhase extends Enum<:class:`~org.orekit.gnss.metric.ntrip.CarrierPhase`>
+    public enum CarrierPhase extends :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.metric.ntrip.CarrierPhase`>
     
         Enumerate for carrier phase in :class:`~org.orekit.gnss.metric.ntrip.DataStreamRecord`.
     
@@ -96,7 +95,7 @@ class CarrierPhase(java.lang.Enum['CarrierPhase']):
             Get the carrier phase corresponding to a code.
         
             Parameters:
-                code (String): carrier phase code
+                code (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): carrier phase code
         
             Returns:
                 the carrier phase corresponding to the code
@@ -116,14 +115,14 @@ class CarrierPhase(java.lang.Enum['CarrierPhase']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -136,9 +135,8 @@ class CarrierPhase(java.lang.Enum['CarrierPhase']):
         
             .. code-block: java
             
-            
-            for (CarrierPhase c : CarrierPhase.values())
-                System.out.println(c);
+            for (CarrierPhase c : CarrierPhase.values())
+                System.out.println(c);
             
         
             Returns:
@@ -150,7 +148,7 @@ class CarrierPhase(java.lang.Enum['CarrierPhase']):
 
 class DataFormat(java.lang.Enum['DataFormat']):
     """
-    public enum DataFormat extends Enum<:class:`~org.orekit.gnss.metric.ntrip.DataFormat`>
+    public enum DataFormat extends :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.metric.ntrip.DataFormat`>
     
         Enumerate for data format in :class:`~org.orekit.gnss.metric.ntrip.DataStreamRecord`.
     
@@ -174,7 +172,7 @@ class DataFormat(java.lang.Enum['DataFormat']):
             Get the message type corresponding to a keyword.
         
             Parameters:
-                keyword (String): data format keyword
+                keyword (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): data format keyword
         
             Returns:
                 the message type corresponding to the keyword
@@ -194,14 +192,14 @@ class DataFormat(java.lang.Enum['DataFormat']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -214,9 +212,8 @@ class DataFormat(java.lang.Enum['DataFormat']):
         
             .. code-block: java
             
-            
-            for (DataFormat c : DataFormat.values())
-                System.out.println(c);
+            for (DataFormat c : DataFormat.values())
+                System.out.println(c);
             
         
             Returns:
@@ -228,7 +225,7 @@ class DataFormat(java.lang.Enum['DataFormat']):
 
 class GnssData:
     """
-    public class GnssData extends Object
+    public class GnssData extends :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         GNSS data retrieved from Ntrip caster.
     
@@ -240,7 +237,8 @@ class GnssData:
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -272,39 +270,40 @@ class MessageObserver:
             when notified (see example below).
         
             The recommended way to implement this method is to simply build a domain object from the message fields (for example a
-            gnss propagator) and to store it in the observer class as an instance field using a null as follows:
+            gnss propagator) and to store it in the observer class as an instance field using a
+            :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.util.concurrent.atomic.AtomicReference?is`
+            as follows:
         
             .. code-block: java
             
-            
-             public class GPSProvider implements PVCoordinatesProvider, RTCMMessageObserver {
-            
-                 private final int                                filteringId;
-                 private final AtomicReference<GPSPropagator> propagator;
-            
-                 public void messageAvailable(String mountPoint, ParsedMessage message) {
-                     MessageXXX msg = (MessageXXX) message;
-                     GPSPropagator oldPropagator = propagator.get();
-                     if (msg.getSatId() == filteringId) {
-                         GPSPropagator newPropagator = new GPSPropagator(msg.get...(),
-                                                                         msg.get...(),
-                                                                         msg.get...());
-                         // only set propagator if no other observer was notified
-                         // while we were asleep
-                         propagator.compareAndSet(oldPropagator, newPropagator);
-                     }
-                 }
-            
-                 public TimeStampedPVCoordinates getPVCoordinates(AbsoluteDate date, Frame frame) {
-                     GPSPropagator lastAvailablePropagator = propagator.get();
-                     // use the retrieved propagator to compute position-velocity
-                 }
-            
-             }
+             public class GPSProvider implements PVCoordinatesProvider, RTCMMessageObserver {
+            
+                 private final int                                filteringId;
+                 private final AtomicReference<GPSPropagator> propagator;
+            
+                 public void messageAvailable(String mountPoint, ParsedMessage message) {
+                     MessageXXX msg = (MessageXXX) message;
+                     GPSPropagator oldPropagator = propagator.get();
+                     if (msg.getSatId() == filteringId) {
+                         GPSPropagator newPropagator = new GPSPropagator(msg.get...(),
+                                                                         msg.get...(),
+                                                                         msg.get...());
+                         // only set propagator if no other observer was notified
+                         // while we were asleep
+                         propagator.compareAndSet(oldPropagator, newPropagator);
+                     }
+                 }
+            
+                 public TimeStampedPVCoordinates getPVCoordinates(AbsoluteDate date, Frame frame) {
+                     GPSPropagator lastAvailablePropagator = propagator.get();
+                     // use the retrieved propagator to compute position-velocity
+                 }
+            
+             }
              
         
             Parameters:
-                mountPoint (String): mount point from which the message comes
+                mountPoint (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): mount point from which the message comes
                 message (:class:`~org.orekit.gnss.metric.messages.ParsedMessage`): last available message
         
         
@@ -313,7 +312,7 @@ class MessageObserver:
 
 class NavigationSystem(java.lang.Enum['NavigationSystem']):
     """
-    public enum NavigationSystem extends Enum<:class:`~org.orekit.gnss.metric.ntrip.NavigationSystem`>
+    public enum NavigationSystem extends :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.metric.ntrip.NavigationSystem`>
     
         Enumerate for navigation system in :class:`~org.orekit.gnss.metric.ntrip.DataStreamRecord`.
     
@@ -333,7 +332,7 @@ class NavigationSystem(java.lang.Enum['NavigationSystem']):
             Get the navigation system corresponding to a keyword.
         
             Parameters:
-                keyword (String): navigation system keyword
+                keyword (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): navigation system keyword
         
             Returns:
                 the navigation system corresponding to the keyword
@@ -345,7 +344,8 @@ class NavigationSystem(java.lang.Enum['NavigationSystem']):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum.html?is` in
+                class :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`
         
         
         """
@@ -362,14 +362,14 @@ class NavigationSystem(java.lang.Enum['NavigationSystem']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -382,9 +382,8 @@ class NavigationSystem(java.lang.Enum['NavigationSystem']):
         
             .. code-block: java
             
-            
-            for (NavigationSystem c : NavigationSystem.values())
-                System.out.println(c);
+            for (NavigationSystem c : NavigationSystem.values())
+                System.out.println(c);
             
         
             Returns:
@@ -396,12 +395,13 @@ class NavigationSystem(java.lang.Enum['NavigationSystem']):
 
 class NtripClient:
     """
-    public class NtripClient extends Object
+    public class NtripClient extends :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Source table for ntrip streams retrieval.
     
-        Note that all authentication is performed automatically by just calling the standard null method to set up an
-        authenticator.
+        Note that all authentication is performed automatically by just calling the standard
+        :meth:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.net.Authenticator.html?is` method to
+        set up an authenticator.
     
         Since:
             11.0
@@ -471,7 +471,7 @@ class NtripClient:
         
             Parameters:
                 typeCode (int): code for the message type (if set to 0, notification will be triggered regardless of message type)
-                mountPoint (String): mountPoint from which data must come (if null, notification will be triggered regardless of mount point)
+                mountPoint (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): mountPoint from which data must come (if null, notification will be triggered regardless of mount point)
                 observer (:class:`~org.orekit.gnss.metric.ntrip.MessageObserver`): observer for this message type
         
         
@@ -546,8 +546,8 @@ class NtripClient:
             Set proxy parameters.
         
             Parameters:
-                type (Proxy.Type): proxy type
-                proxyHost (String): host name of the proxy (ignored if :code:`type` is :code:`Proxy.Type.DIRECT`)
+                type (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.net.Proxy.Type?is`): proxy type
+                proxyHost (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): host name of the proxy (ignored if :code:`type` is :code:`Proxy.Type.DIRECT`)
                 proxyPort (int): port number of the proxy (ignored if :code:`type` is :code:`Proxy.Type.DIRECT`)
         
         
@@ -587,7 +587,7 @@ class NtripClient:
             This method must be called once for each stream to monitor.
         
             Parameters:
-                mountPoint (String): mount point providing the stream
+                mountPoint (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): mount point providing the stream
                 type (:class:`~org.orekit.gnss.metric.ntrip.Type`): messages type of the mount point
                 requiresNMEA (boolean): if true, the mount point requires a NMEA GGA sentence in the request
                 ignoreUnknownMessageTypes (boolean): if true, unknown messages types are silently ignored
@@ -610,7 +610,7 @@ class NtripClient:
 
 class Record:
     """
-    public abstract class Record extends Object
+    public abstract class Record extends :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Record in source table.
     
@@ -640,7 +640,7 @@ class Record:
 
 class RecordType(java.lang.Enum['RecordType']):
     """
-    public enum RecordType extends Enum<:class:`~org.orekit.gnss.metric.ntrip.RecordType`>
+    public enum RecordType extends :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.metric.ntrip.RecordType`>
     
         Enumerate for record types in sourcetable.
     """
@@ -659,14 +659,14 @@ class RecordType(java.lang.Enum['RecordType']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -679,9 +679,8 @@ class RecordType(java.lang.Enum['RecordType']):
         
             .. code-block: java
             
-            
-            for (RecordType c : RecordType.values())
-                System.out.println(c);
+            for (RecordType c : RecordType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -693,7 +692,7 @@ class RecordType(java.lang.Enum['RecordType']):
 
 class SourceTable:
     """
-    public class SourceTable extends Object
+    public class SourceTable extends :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Source table for ntrip streams retrieval.
     
@@ -716,7 +715,7 @@ class SourceTable:
 
 class StreamMonitor(org.orekit.gnss.metric.parser.AbstractEncodedMessages, java.lang.Runnable):
     """
-    public class StreamMonitor extends :class:`~org.orekit.gnss.metric.parser.AbstractEncodedMessages` implements Runnable
+    public class StreamMonitor extends :class:`~org.orekit.gnss.metric.parser.AbstractEncodedMessages` implements :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Runnable?is`
     
         Monitor for retrieving streamed data from one mount point.
     
@@ -752,7 +751,8 @@ class StreamMonitor(org.orekit.gnss.metric.parser.AbstractEncodedMessages, java.
         """
         
             Specified by:
-                 in interface 
+                :meth:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Runnable.html?is` in
+                interface :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Runnable?is`
         
         
         """
@@ -766,7 +766,7 @@ class StreamMonitor(org.orekit.gnss.metric.parser.AbstractEncodedMessages, java.
 
 class StreamedMessage:
     """
-    public class StreamedMessage extends Object
+    public class StreamedMessage extends :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Container for streamed messages meta-data.
     
@@ -796,7 +796,7 @@ class StreamedMessage:
 
 class Type(java.lang.Enum['Type']):
     """
-    public enum Type extends Enum<:class:`~org.orekit.gnss.metric.ntrip.Type`>
+    public enum Type extends :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.metric.ntrip.Type`>
     
         Enumerate for messages type.
     
@@ -805,19 +805,7 @@ class Type(java.lang.Enum['Type']):
     """
     RTCM: typing.ClassVar['Type'] = ...
     IGS_SSR: typing.ClassVar['Type'] = ...
-    def getParser(self, list: java.util.List[int]) -> org.orekit.gnss.metric.parser.MessagesParser:
-        """
-            Get the message parser associated to the SSR type.
-        
-            Parameters:
-                messages (List<Integer> messages): list of needed messages
-        
-            Returns:
-                a configured message parser
-        
-        
-        """
-        ...
+    def getParser(self, list: java.util.List[int]) -> org.orekit.gnss.metric.parser.MessagesParser: ...
     _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
     @typing.overload
     @staticmethod
@@ -830,14 +818,14 @@ class Type(java.lang.Enum['Type']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -850,9 +838,8 @@ class Type(java.lang.Enum['Type']):
         
             .. code-block: java
             
-            
-            for (Type c : Type.values())
-                System.out.println(c);
+            for (Type c : Type.values())
+                System.out.println(c);
             
         
             Returns:
@@ -1258,7 +1245,7 @@ class NetworkRecord(Record):
 
 class PythonMessageObserver(MessageObserver):
     """
-    public class PythonMessageObserver extends Object implements :class:`~org.orekit.gnss.metric.ntrip.MessageObserver`
+    public class PythonMessageObserver extends :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.gnss.metric.ntrip.MessageObserver`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -1279,43 +1266,44 @@ class PythonMessageObserver(MessageObserver):
             when notified (see example below).
         
             The recommended way to implement this method is to simply build a domain object from the message fields (for example a
-            gnss propagator) and to store it in the observer class as an instance field using a null as follows:
+            gnss propagator) and to store it in the observer class as an instance field using a
+            :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.util.concurrent.atomic.AtomicReference?is`
+            as follows:
         
             .. code-block: java
             
-            
-             public class GPSProvider implements PVCoordinatesProvider, RTCMMessageObserver {
-            
-                 private final int                                filteringId;
-                 private final AtomicReference<GPSPropagator> propagator;
-            
-                 public void messageAvailable(String mountPoint, ParsedMessage message) {
-                     MessageXXX msg = (MessageXXX) message;
-                     GPSPropagator oldPropagator = propagator.get();
-                     if (msg.getSatId() == filteringId) {
-                         GPSPropagator newPropagator = new GPSPropagator(msg.get...(),
-                                                                         msg.get...(),
-                                                                         msg.get...());
-                         // only set propagator if no other observer was notified
-                         // while we were asleep
-                         propagator.compareAndSet(oldPropagator, newPropagator);
-                     }
-                 }
-            
-                 public TimeStampedPVCoordinates getPVCoordinates(AbsoluteDate date, Frame frame) {
-                     GPSPropagator lastAvailablePropagator = propagator.get();
-                     // use the retrieved propagator to compute position-velocity
-                 }
-            
-             }
+             public class GPSProvider implements PVCoordinatesProvider, RTCMMessageObserver {
+            
+                 private final int                                filteringId;
+                 private final AtomicReference<GPSPropagator> propagator;
+            
+                 public void messageAvailable(String mountPoint, ParsedMessage message) {
+                     MessageXXX msg = (MessageXXX) message;
+                     GPSPropagator oldPropagator = propagator.get();
+                     if (msg.getSatId() == filteringId) {
+                         GPSPropagator newPropagator = new GPSPropagator(msg.get...(),
+                                                                         msg.get...(),
+                                                                         msg.get...());
+                         // only set propagator if no other observer was notified
+                         // while we were asleep
+                         propagator.compareAndSet(oldPropagator, newPropagator);
+                     }
+                 }
+            
+                 public TimeStampedPVCoordinates getPVCoordinates(AbsoluteDate date, Frame frame) {
+                     GPSPropagator lastAvailablePropagator = propagator.get();
+                     // use the retrieved propagator to compute position-velocity
+                 }
+            
+             }
              
         
             Specified by:
-                :meth:`~org.orekit.gnss.metric.ntrip.MessageObserver.messageAvailable`Â in
-                interfaceÂ :class:`~org.orekit.gnss.metric.ntrip.MessageObserver`
+                :meth:`~org.orekit.gnss.metric.ntrip.MessageObserver.messageAvailable` in
+                interface :class:`~org.orekit.gnss.metric.ntrip.MessageObserver`
         
             Parameters:
-                mountPoint (String): mount point from which the message comes
+                mountPoint (:class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): mount point from which the message comes
                 message (:class:`~org.orekit.gnss.metric.messages.ParsedMessage`): last available message
         
         

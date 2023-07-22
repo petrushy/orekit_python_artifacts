@@ -15,7 +15,7 @@ import typing
 
 class Attitude(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Attitude'], org.orekit.time.TimeInterpolable['Attitude'], java.io.Serializable):
     """
-    public class Attitude extends Object implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.attitudes.Attitude`>, :class:`~org.orekit.time.TimeInterpolable`<:class:`~org.orekit.attitudes.Attitude`>, Serializable
+    public class Attitude extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.attitudes.Attitude`>, :class:`~org.orekit.time.TimeInterpolable`<:class:`~org.orekit.attitudes.Attitude`>, :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         This class handles attitude definition at a given date.
     
@@ -252,7 +252,7 @@ class AttitudeProvider:
 _FieldAttitude__T = typing.TypeVar('_FieldAttitude__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAttitude(org.orekit.time.FieldTimeStamped[_FieldAttitude__T], org.orekit.time.FieldTimeShiftable['FieldAttitude'[_FieldAttitude__T], _FieldAttitude__T], org.orekit.time.FieldTimeInterpolable['FieldAttitude'[_FieldAttitude__T], _FieldAttitude__T], typing.Generic[_FieldAttitude__T]):
     """
-    public class FieldAttitude<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.time.FieldTimeStamped`<T>, :class:`~org.orekit.time.FieldTimeShiftable`<:class:`~org.orekit.attitudes.FieldAttitude`<T>, T>, :class:`~org.orekit.time.FieldTimeInterpolable`<:class:`~org.orekit.attitudes.FieldAttitude`<T>, T>
+    public class FieldAttitude<T extends :class:`~org.orekit.attitudes.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.FieldTimeStamped`<T>, :class:`~org.orekit.time.FieldTimeShiftable`<:class:`~org.orekit.attitudes.FieldAttitude`<T>, T>, :class:`~org.orekit.time.FieldTimeInterpolable`<:class:`~org.orekit.attitudes.FieldAttitude`<T>, T>
     
         This class handles attitude definition at a given date.
     
@@ -335,7 +335,7 @@ class AttitudeProviderModifier(AttitudeProvider):
 
 class AttitudesSequence(AttitudeProvider):
     """
-    public class AttitudesSequence extends Object implements :class:`~org.orekit.attitudes.AttitudeProvider`
+    public class AttitudesSequence extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudeProvider`
     
         This classes manages a sequence of different attitude providers that are activated in turn according to switching
         events.
@@ -401,10 +401,10 @@ class AttitudesSequence(AttitudeProvider):
             unfortunate consequence is that the :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred` method
             may appear to be called out of sync with respect to the propagation (it will be called when propagator reaches
             transition end, despite it refers to transition start, as per :code:`transitionTime` compensation), and if the method
-            returns null, it will stop at the end of the transition instead of at the start. For these reasons, it is not
-            recommended to set up an event handler for events that are used to switch attitude. If an event handler is needed for
-            other purposes, a second handler should be registered to the propagator rather than relying on the side effects of
-            attitude switches.
+            returns :meth:`~org.orekit.attitudes.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`, it
+            will stop at the end of the transition instead of at the start. For these reasons, it is not recommended to set up an
+            event handler for events that are used to switch attitude. If an event handler is needed for other purposes, a second
+            handler should be registered to the propagator rather than relying on the side effects of attitude switches.
         
             The smoothness of the transition between past and future attitude laws can be tuned using the :code:`transitionTime` and
             :code:`transitionFilter` parameters. The :code:`transitionTime` parameter specifies how much time is spent to switch
@@ -482,7 +482,7 @@ class AttitudesSequence(AttitudeProvider):
             :meth:`~org.orekit.attitudes.AttitudesSequence.addSwitchingCondition`.
         
             Parameters:
-                field (Field<T> field): field to which the elements belong
+                field (:class:`~org.orekit.attitudes.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
                 propagator (:class:`~org.orekit.propagation.FieldPropagator`<T> propagator): propagator that will handle the events
         
         
@@ -552,7 +552,7 @@ class BoundedAttitudeProvider(AttitudeProvider):
 
 class CelestialBodyPointed(AttitudeProvider):
     """
-    public class CelestialBodyPointed extends Object implements :class:`~org.orekit.attitudes.AttitudeProvider`
+    public class CelestialBodyPointed extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudeProvider`
     
         This class handles a celestial body pointed attitude provider.
     
@@ -617,7 +617,7 @@ class CelestialBodyPointed(AttitudeProvider):
 
 class FixedFrameBuilder(AttitudeBuilder):
     """
-    public class FixedFrameBuilder extends Object implements :class:`~org.orekit.attitudes.AttitudeBuilder`
+    public class FixedFrameBuilder extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudeBuilder`
     
         Builder that assumes angular coordinates are given in a fixed frame.
     
@@ -666,7 +666,7 @@ class FixedFrameBuilder(AttitudeBuilder):
 
 class FixedRate(AttitudeProvider):
     """
-    public class FixedRate extends Object implements :class:`~org.orekit.attitudes.AttitudeProvider`
+    public class FixedRate extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudeProvider`
     
         This class handles a simple attitude provider at constant rate around a fixed axis.
     
@@ -727,7 +727,7 @@ class FixedRate(AttitudeProvider):
 
 class GroundPointing(AttitudeProvider):
     """
-    public abstract class GroundPointing extends Object implements :class:`~org.orekit.attitudes.AttitudeProvider`
+    public abstract class GroundPointing extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudeProvider`
     
         Base class for ground pointing attitude providers.
     
@@ -806,7 +806,7 @@ class GroundPointing(AttitudeProvider):
             Returns:
                 observed ground point position (element 0) and velocity (at index 1) in specified frame
         
-        public abstract <T extends CalculusFieldElement<T>> :class:`~org.orekit.utils.TimeStampedFieldPVCoordinates`<T> getTargetPV (:class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T> pvProv, :class:`~org.orekit.time.FieldAbsoluteDate`<T> date, :class:`~org.orekit.frames.Frame` frame)
+        public abstract <T extends :class:`~org.orekit.attitudes.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> :class:`~org.orekit.utils.TimeStampedFieldPVCoordinates`<T> getTargetPV (:class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T> pvProv, :class:`~org.orekit.time.FieldAbsoluteDate`<T> date, :class:`~org.orekit.frames.Frame` frame)
         
             Compute the target point position/velocity in specified frame.
         
@@ -827,7 +827,7 @@ class GroundPointing(AttitudeProvider):
 
 class InertialProvider(AttitudeProvider):
     """
-    public class InertialProvider extends Object implements :class:`~org.orekit.attitudes.AttitudeProvider`
+    public class InertialProvider extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudeProvider`
     
         This class handles an attitude provider aligned with a frame or a fixed offset to it. Contrary to the name the frame
         need not be an inertial frame.
@@ -903,7 +903,7 @@ class InertialProvider(AttitudeProvider):
 
 class LofOffset(AttitudeProvider):
     """
-    public class LofOffset extends Object implements :class:`~org.orekit.attitudes.AttitudeProvider`
+    public class LofOffset extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudeProvider`
     
         Attitude law defined by fixed Roll, Pitch and Yaw angles (in any order) with respect to a local orbital frame.
     
@@ -954,7 +954,7 @@ class LofOffset(AttitudeProvider):
 
 class PythonAttitudeBuilder(AttitudeBuilder):
     """
-    public class PythonAttitudeBuilder extends Object implements :class:`~org.orekit.attitudes.AttitudeBuilder`
+    public class PythonAttitudeBuilder extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudeBuilder`
     """
     def __init__(self): ...
     _build_1__T = typing.TypeVar('_build_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -1035,7 +1035,7 @@ class PythonAttitudeBuilder(AttitudeBuilder):
 
 class PythonAttitudeProvider(AttitudeProvider):
     """
-    public class PythonAttitudeProvider extends Object implements :class:`~org.orekit.attitudes.AttitudeProvider`
+    public class PythonAttitudeProvider extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudeProvider`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -1122,7 +1122,7 @@ class PythonAttitudeProvider(AttitudeProvider):
 
 class AggregateBoundedAttitudeProvider(BoundedAttitudeProvider):
     """
-    public class AggregateBoundedAttitudeProvider extends Object implements :class:`~org.orekit.attitudes.BoundedAttitudeProvider`
+    public class AggregateBoundedAttitudeProvider extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.BoundedAttitudeProvider`
     
         A :class:`~org.orekit.attitudes.BoundedAttitudeProvider` that covers a larger time span from several constituent
         attitude providers that cover shorter time spans.
@@ -1174,8 +1174,8 @@ class AggregateBoundedAttitudeProvider(BoundedAttitudeProvider):
             Get the last date of the range.
         
             Specified by:
-                :meth:`~org.orekit.attitudes.BoundedAttitudeProvider.getMaxDate`Â in
-                interfaceÂ :class:`~org.orekit.attitudes.BoundedAttitudeProvider`
+                :meth:`~org.orekit.attitudes.BoundedAttitudeProvider.getMaxDate` in
+                interface :class:`~org.orekit.attitudes.BoundedAttitudeProvider`
         
             Returns:
                 the last date of the range
@@ -1188,8 +1188,8 @@ class AggregateBoundedAttitudeProvider(BoundedAttitudeProvider):
             Get the first date of the range.
         
             Specified by:
-                :meth:`~org.orekit.attitudes.BoundedAttitudeProvider.getMinDate`Â in
-                interfaceÂ :class:`~org.orekit.attitudes.BoundedAttitudeProvider`
+                :meth:`~org.orekit.attitudes.BoundedAttitudeProvider.getMinDate` in
+                interface :class:`~org.orekit.attitudes.BoundedAttitudeProvider`
         
             Returns:
                 the first date of the range
@@ -1408,7 +1408,7 @@ class NadirPointing(GroundPointing):
 
 class PythonAttitudeProviderModifier(AttitudeProviderModifier):
     """
-    public class PythonAttitudeProviderModifier extends Object implements :class:`~org.orekit.attitudes.AttitudeProviderModifier`
+    public class PythonAttitudeProviderModifier extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudeProviderModifier`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -1477,8 +1477,8 @@ class PythonAttitudeProviderModifier(AttitudeProviderModifier):
             Get the underlying attitude provider. Extension point for Python.
         
             Specified by:
-                :meth:`~org.orekit.attitudes.AttitudeProviderModifier.getUnderlyingAttitudeProvider`Â in
-                interfaceÂ :class:`~org.orekit.attitudes.AttitudeProviderModifier`
+                :meth:`~org.orekit.attitudes.AttitudeProviderModifier.getUnderlyingAttitudeProvider` in
+                interface :class:`~org.orekit.attitudes.AttitudeProviderModifier`
         
             Returns:
                 underlying attitude provider
@@ -1508,7 +1508,7 @@ class PythonAttitudeProviderModifier(AttitudeProviderModifier):
 
 class PythonBoundedAttitudeProvider(BoundedAttitudeProvider):
     """
-    public class PythonBoundedAttitudeProvider extends Object implements :class:`~org.orekit.attitudes.BoundedAttitudeProvider`
+    public class PythonBoundedAttitudeProvider extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.BoundedAttitudeProvider`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -1577,8 +1577,8 @@ class PythonBoundedAttitudeProvider(BoundedAttitudeProvider):
             Get the last date of the range.
         
             Specified by:
-                :meth:`~org.orekit.attitudes.BoundedAttitudeProvider.getMaxDate`Â in
-                interfaceÂ :class:`~org.orekit.attitudes.BoundedAttitudeProvider`
+                :meth:`~org.orekit.attitudes.BoundedAttitudeProvider.getMaxDate` in
+                interface :class:`~org.orekit.attitudes.BoundedAttitudeProvider`
         
             Returns:
                 the last date of the range
@@ -1591,8 +1591,8 @@ class PythonBoundedAttitudeProvider(BoundedAttitudeProvider):
             Get the first date of the range.
         
             Specified by:
-                :meth:`~org.orekit.attitudes.BoundedAttitudeProvider.getMinDate`Â in
-                interfaceÂ :class:`~org.orekit.attitudes.BoundedAttitudeProvider`
+                :meth:`~org.orekit.attitudes.BoundedAttitudeProvider.getMinDate` in
+                interface :class:`~org.orekit.attitudes.BoundedAttitudeProvider`
         
             Returns:
                 the first date of the range
@@ -1709,7 +1709,7 @@ class PythonGroundPointing(GroundPointing):
 
 class PythonSwitchHandler(AttitudesSequence.SwitchHandler):
     """
-    public class PythonSwitchHandler extends Object implements :class:`~org.orekit.attitudes.AttitudesSequence.SwitchHandler`
+    public class PythonSwitchHandler extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudesSequence.SwitchHandler`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -1737,8 +1737,8 @@ class PythonSwitchHandler(AttitudesSequence.SwitchHandler):
             Method called when attitude is switched from one law to another law.
         
             Specified by:
-                :meth:`~org.orekit.attitudes.AttitudesSequence.SwitchHandler.switchOccurred`Â in
-                interfaceÂ :class:`~org.orekit.attitudes.AttitudesSequence.SwitchHandler`
+                :meth:`~org.orekit.attitudes.AttitudesSequence.SwitchHandler.switchOccurred` in
+                interface :class:`~org.orekit.attitudes.AttitudesSequence.SwitchHandler`
         
             Parameters:
                 preceding (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude law used preceding the switch (i.e. in the past of the switch event for a forward propagation, or in the future
@@ -1753,7 +1753,7 @@ class PythonSwitchHandler(AttitudesSequence.SwitchHandler):
 
 class SpinStabilized(AttitudeProviderModifier):
     """
-    public class SpinStabilized extends Object implements :class:`~org.orekit.attitudes.AttitudeProviderModifier`
+    public class SpinStabilized extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudeProviderModifier`
     
         This class handles a spin stabilized attitude provider.
     
@@ -1807,8 +1807,8 @@ class SpinStabilized(AttitudeProviderModifier):
             Get the underlying attitude provider.
         
             Specified by:
-                :meth:`~org.orekit.attitudes.AttitudeProviderModifier.getUnderlyingAttitudeProvider`Â in
-                interfaceÂ :class:`~org.orekit.attitudes.AttitudeProviderModifier`
+                :meth:`~org.orekit.attitudes.AttitudeProviderModifier.getUnderlyingAttitudeProvider` in
+                interface :class:`~org.orekit.attitudes.AttitudeProviderModifier`
         
             Returns:
                 underlying attitude provider
@@ -1819,7 +1819,7 @@ class SpinStabilized(AttitudeProviderModifier):
 
 class TabulatedLofOffset(BoundedAttitudeProvider):
     """
-    public class TabulatedLofOffset extends Object implements :class:`~org.orekit.attitudes.BoundedAttitudeProvider`
+    public class TabulatedLofOffset extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.BoundedAttitudeProvider`
     
         This class handles an attitude provider interpolating from a predefined table containing offsets from a Local Orbital
         Frame.
@@ -1879,8 +1879,8 @@ class TabulatedLofOffset(BoundedAttitudeProvider):
             Get the last date of the range.
         
             Specified by:
-                :meth:`~org.orekit.attitudes.BoundedAttitudeProvider.getMaxDate`Â in
-                interfaceÂ :class:`~org.orekit.attitudes.BoundedAttitudeProvider`
+                :meth:`~org.orekit.attitudes.BoundedAttitudeProvider.getMaxDate` in
+                interface :class:`~org.orekit.attitudes.BoundedAttitudeProvider`
         
             Returns:
                 the last date of the range
@@ -1893,8 +1893,8 @@ class TabulatedLofOffset(BoundedAttitudeProvider):
             Get the first date of the range.
         
             Specified by:
-                :meth:`~org.orekit.attitudes.BoundedAttitudeProvider.getMinDate`Â in
-                interfaceÂ :class:`~org.orekit.attitudes.BoundedAttitudeProvider`
+                :meth:`~org.orekit.attitudes.BoundedAttitudeProvider.getMinDate` in
+                interface :class:`~org.orekit.attitudes.BoundedAttitudeProvider`
         
             Returns:
                 the first date of the range
@@ -1906,7 +1906,7 @@ class TabulatedLofOffset(BoundedAttitudeProvider):
 
 class TabulatedProvider(BoundedAttitudeProvider):
     """
-    public class TabulatedProvider extends Object implements :class:`~org.orekit.attitudes.BoundedAttitudeProvider`
+    public class TabulatedProvider extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.BoundedAttitudeProvider`
     
         This class handles an attitude provider interpolating from a predefined table.
     
@@ -1965,8 +1965,8 @@ class TabulatedProvider(BoundedAttitudeProvider):
             Get the last date of the range.
         
             Specified by:
-                :meth:`~org.orekit.attitudes.BoundedAttitudeProvider.getMaxDate`Â in
-                interfaceÂ :class:`~org.orekit.attitudes.BoundedAttitudeProvider`
+                :meth:`~org.orekit.attitudes.BoundedAttitudeProvider.getMaxDate` in
+                interface :class:`~org.orekit.attitudes.BoundedAttitudeProvider`
         
             Returns:
                 the last date of the range
@@ -1979,8 +1979,8 @@ class TabulatedProvider(BoundedAttitudeProvider):
             Get the first date of the range.
         
             Specified by:
-                :meth:`~org.orekit.attitudes.BoundedAttitudeProvider.getMinDate`Â in
-                interfaceÂ :class:`~org.orekit.attitudes.BoundedAttitudeProvider`
+                :meth:`~org.orekit.attitudes.BoundedAttitudeProvider.getMinDate` in
+                interface :class:`~org.orekit.attitudes.BoundedAttitudeProvider`
         
             Returns:
                 the first date of the range
@@ -2198,8 +2198,8 @@ class YawCompensation(GroundPointing, AttitudeProviderModifier):
             Get the underlying (ground pointing) attitude provider.
         
             Specified by:
-                :meth:`~org.orekit.attitudes.AttitudeProviderModifier.getUnderlyingAttitudeProvider`Â in
-                interfaceÂ :class:`~org.orekit.attitudes.AttitudeProviderModifier`
+                :meth:`~org.orekit.attitudes.AttitudeProviderModifier.getUnderlyingAttitudeProvider` in
+                interface :class:`~org.orekit.attitudes.AttitudeProviderModifier`
         
             Returns:
                 underlying attitude provider, which in this case is a :class:`~org.orekit.attitudes.GroundPointing` instance
@@ -2254,9 +2254,9 @@ class YawSteering(GroundPointing, AttitudeProviderModifier):
     
         The motion in yaw is smooth when the Sun is far from the orbital plane, but gets more and more *square like* as the Sun
         gets closer to the orbital plane. The degenerate extreme case with the Sun in the orbital plane leads to a yaw angle
-        switching between two steady states, with instantaneaous Ã�â‚¬ radians rotations at each switch, two times per orbit.
-        This degenerate case is clearly not operationally sound so another pointing mode is chosen when Sun comes closer than
-        some predefined threshold to the orbital plane.
+        switching between two steady states, with instantaneaous π radians rotations at each switch, two times per orbit. This
+        degenerate case is clearly not operationally sound so another pointing mode is chosen when Sun comes closer than some
+        predefined threshold to the orbital plane.
     
         This class can handle (for now) only a theoretically perfect yaw steering (i.e. the yaw angle is exactly the optimal
         angle). Smoothed yaw steering with a few sine waves approaching the optimal angle will be added in the future if needed.
@@ -2395,8 +2395,8 @@ class YawSteering(GroundPointing, AttitudeProviderModifier):
             Get the underlying (ground pointing) attitude provider.
         
             Specified by:
-                :meth:`~org.orekit.attitudes.AttitudeProviderModifier.getUnderlyingAttitudeProvider`Â in
-                interfaceÂ :class:`~org.orekit.attitudes.AttitudeProviderModifier`
+                :meth:`~org.orekit.attitudes.AttitudeProviderModifier.getUnderlyingAttitudeProvider` in
+                interface :class:`~org.orekit.attitudes.AttitudeProviderModifier`
         
             Returns:
                 underlying attitude provider, which in this case is a :class:`~org.orekit.attitudes.GroundPointing` instance

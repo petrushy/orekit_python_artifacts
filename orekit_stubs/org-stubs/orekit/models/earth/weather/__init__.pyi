@@ -31,15 +31,15 @@ class WeatherModel:
 
 class GlobalPressureTemperature2Model(WeatherModel):
     """
-    public class GlobalPressureTemperature2Model extends Object implements :class:`~org.orekit.models.earth.weather.WeatherModel`
+    public class GlobalPressureTemperature2Model extends :class:`~org.orekit.models.earth.weather.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.weather.WeatherModel`
     
         The Global Pressure and Temperature 2 (GPT2) model. This model is an empirical model that provides the temperature, the
         pressure and the water vapor pressure of a site depending its latitude and longitude. This model also provides the a
         :sub:`h` and a :sub:`w` coefficients used for the :class:`~org.orekit.models.earth.troposphere.ViennaOneModel` model.
     
         The requisite coefficients for the computation of the weather parameters are provided by the Department of Geodesy and
-        Geoinformation of the Vienna University. They are based on an external grid file like "gpt2_1.grd" (1Ã‚Â° x 1Ã‚Â°) or
-        "gpt2_5.grd" (5Ã‚Â° x 5Ã‚Â°) available at: ` link <http://vmf.geo.tuwien.ac.at/codes/>`
+        Geoinformation of the Vienna University. They are based on an external grid file like "gpt2_1.grd" (1° x 1°) or
+        "gpt2_5.grd" (5° x 5°) available at: ` link <http://vmf.geo.tuwien.ac.at/codes/>`
     
         A bilinear interpolation is performed in order to obtained the correct values of the weather parameters.
     
@@ -49,22 +49,21 @@ class GlobalPressureTemperature2Model(WeatherModel):
     
         .. code-block: java
         
-        
-         %  lat    lon   p:a0    A1   B1   A2   B2  T:a0    A1   B1   A2   B2
-           87.5    2.5 101421    21  409 -217 -122 259.2 -13.2 -6.1  2.6  0.3
-           87.5    7.5 101416    21  411 -213 -120 259.3 -13.1 -6.1  2.6  0.3
-           87.5   12.5 101411    22  413 -209 -118 259.3 -13.1 -6.1  2.6  0.3
-           87.5   17.5 101407    23  415 -205 -116 259.4 -13.0 -6.1  2.6  0.3
-           ...
+         %  lat    lon   p:a0    A1   B1   A2   B2  T:a0    A1   B1   A2   B2
+           87.5    2.5 101421    21  409 -217 -122 259.2 -13.2 -6.1  2.6  0.3
+           87.5    7.5 101416    21  411 -213 -120 259.3 -13.1 -6.1  2.6  0.3
+           87.5   12.5 101411    22  413 -209 -118 259.3 -13.1 -6.1  2.6  0.3
+           87.5   17.5 101407    23  415 -205 -116 259.4 -13.0 -6.1  2.6  0.3
+           ...
          
     
         Also see:
-            "K. Lagler, M. Schindelegger, J. BÃƒÂ¶hm, H. Krasna, T. Nilsson (2013), GPT2: empirical slant delay model for radio
-            space geodetic techniques. Geophys Res Lett 40(6):1069Ã¢â‚¬â€œ1073. doi:10.1002/grl.50288"
+            "K. Lagler, M. Schindelegger, J. Böhm, H. Krasna, T. Nilsson (2013), GPT2: empirical slant delay model for radio space
+            geodetic techniques. Geophys Res Lett 40(6):1069–1073. doi:10.1002/grl.50288"
     """
     DEFAULT_SUPPORTED_NAMES: typing.ClassVar[str] = ...
     """
-    public static final String DEFAULT_SUPPORTED_NAMES
+    public static final :class:`~org.orekit.models.earth.weather.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_SUPPORTED_NAMES
     
         Default supported files name pattern.
     
@@ -130,8 +129,8 @@ class GlobalPressureTemperature2Model(WeatherModel):
             to be call just after the construction of the model.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.weather.WeatherModel.weatherParameters`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.weather.WeatherModel`
+                :meth:`~org.orekit.models.earth.weather.WeatherModel.weatherParameters` in
+                interface :class:`~org.orekit.models.earth.weather.WeatherModel`
         
             Parameters:
                 stationHeight (double): the height of the station in m
@@ -143,17 +142,17 @@ class GlobalPressureTemperature2Model(WeatherModel):
 
 class GlobalPressureTemperatureModel(WeatherModel):
     """
-    public class GlobalPressureTemperatureModel extends Object implements :class:`~org.orekit.models.earth.weather.WeatherModel`
+    public class GlobalPressureTemperatureModel extends :class:`~org.orekit.models.earth.weather.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.weather.WeatherModel`
     
         The Global Pressure and Temperature model. This model is an empirical model that provides the temperature and the
         pressure depending the latitude and the longitude of the station.
     
         The Global Pressure and Temperature model is based on spherical harmonics up to degree and order of 9. The residual
-        values Ã¢â‚¬â€¹Ã¢â‚¬â€¹of this model can reach 20 hPa for pressure and 10 Ã‚Â° C for temperature. They are significant
-        for higher latitudes and small near the equator (BÃƒÂ¶hm, 2007)
+        values   of this model can reach 20 hPa for pressure and 10 ° C for temperature. They are significant for higher
+        latitudes and small near the equator (Böhm, 2007)
     
         Also see:
-            "J. BÃƒÂ¶hm, R. Heinkelmann, and H. Schuh (2007), Short Note: A global model of pressure and temperature for geodetic
+            "J. Böhm, R. Heinkelmann, and H. Schuh (2007), Short Note: A global model of pressure and temperature for geodetic
             applications. J Geod, doi:10.1007/s00190-007-0135-3."
     """
     @typing.overload
@@ -187,8 +186,8 @@ class GlobalPressureTemperatureModel(WeatherModel):
             to be call just after the construction of the model.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.weather.WeatherModel.weatherParameters`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.weather.WeatherModel`
+                :meth:`~org.orekit.models.earth.weather.WeatherModel.weatherParameters` in
+                interface :class:`~org.orekit.models.earth.weather.WeatherModel`
         
             Parameters:
                 height (double): the height of the station in m
@@ -200,7 +199,7 @@ class GlobalPressureTemperatureModel(WeatherModel):
 
 class PythonWeatherModel(WeatherModel):
     """
-    public class PythonWeatherModel extends Object implements :class:`~org.orekit.models.earth.weather.WeatherModel`
+    public class PythonWeatherModel extends :class:`~org.orekit.models.earth.weather.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.weather.WeatherModel`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -229,8 +228,8 @@ class PythonWeatherModel(WeatherModel):
             to be call just after the construction of the model.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.weather.WeatherModel.weatherParameters`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.weather.WeatherModel`
+                :meth:`~org.orekit.models.earth.weather.WeatherModel.weatherParameters` in
+                interface :class:`~org.orekit.models.earth.weather.WeatherModel`
         
             Parameters:
                 stationHeight (double): the height of the station in m

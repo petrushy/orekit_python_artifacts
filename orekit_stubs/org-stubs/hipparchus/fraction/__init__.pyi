@@ -13,7 +13,7 @@ import typing
 
 class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], java.lang.Comparable['BigFraction'], java.io.Serializable):
     """
-    public class BigFraction extends Number implements :class:`~org.hipparchus.FieldElement`<:class:`~org.hipparchus.fraction.BigFraction`>, Comparable<:class:`~org.hipparchus.fraction.BigFraction`>, Serializable
+    public class BigFraction extends :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number?is` implements :class:`~org.hipparchus.FieldElement`<:class:`~org.hipparchus.fraction.BigFraction`>, :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`<:class:`~org.hipparchus.fraction.BigFraction`>, :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Representation of a rational number without any overflow. This class is immutable.
     
@@ -202,9 +202,10 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
                 the fraction as a :code:`BigDecimal`.
         
             Raises:
-                : if the exact quotient does not have a terminating decimal expansion.
+                :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.ArithmeticException?is`: if the exact quotient does not have a terminating decimal expansion.
         
             Also see:
+                :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigDecimal?is`
         
         """
         ...
@@ -216,28 +217,33 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
             numerator divided by denominator.
         
             Parameters:
-                roundingMode (int): rounding mode to apply. see null constants.
+                roundingMode (int): rounding mode to apply. see
+                    :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigDecimal?is` constants.
         
             Returns:
                 the fraction as a :code:`BigDecimal`.
         
             Raises:
-                : if :code:`roundingMode` does not represent a valid rounding mode.
+                :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if :code:`roundingMode` does not represent a valid rounding mode.
         
             Also see:
+                :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigDecimal?is`
         
         
             Gets the fraction as a :code:`BigDecimal` following the passed scale and rounding mode. This calculates the fraction as
             the numerator divided by denominator.
         
             Parameters:
-                scale (int): scale of the :code:`BigDecimal` quotient to be returned. see null for more information.
-                roundingMode (int): rounding mode to apply. see null constants.
+                scale (int): scale of the :code:`BigDecimal` quotient to be returned. see
+                    :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigDecimal?is` for more information.
+                roundingMode (int): rounding mode to apply. see
+                    :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigDecimal?is` constants.
         
             Returns:
                 the fraction as a :code:`BigDecimal`.
         
             Also see:
+                :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigDecimal?is`
         
         
         """
@@ -250,7 +256,8 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
             Compares this object to another based on size.
         
             Specified by:
-                 in interface 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable.html?is` in
+                interface :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`
         
             Parameters:
                 object (:class:`~org.hipparchus.fraction.BigFraction`): the object to compare to, must not be :code:`null`.
@@ -259,6 +266,7 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
                 -1 if this is less than :code:`object`, +1 if this is greater than :code:`object`, 0 if they are equal.
         
             Also see:
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable.html?is`
         
         
         """
@@ -275,7 +283,7 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
             reduced form.
         
             Parameters:
-                bg (BigInteger): the :code:`BigInteger` to divide by, must not be :code:`null`
+                bg (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigInteger?is`): the :code:`BigInteger` to divide by, must not be :code:`null`
         
             Returns:
                 a :class:`~org.hipparchus.fraction.BigFraction` instance with the resulting values
@@ -341,12 +349,14 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
             Gets the fraction as a :code:`double`. This calculates the fraction as the numerator divided by denominator.
         
             Specified by:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number?is`
         
             Returns:
                 the fraction as a :code:`double`
         
             Also see:
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.html?is`
         
         
         """
@@ -358,16 +368,18 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
             the two fractions are considered to be equal.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                other (Object): fraction to test for equality to this fraction, can be :code:`null`.
+                other (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): fraction to test for equality to this fraction, can be :code:`null`.
         
             Returns:
                 true if two fractions are equal, false if object is :code:`null`, not an instance of
                 :class:`~org.hipparchus.fraction.BigFraction`, or not equal to this fraction instance.
         
             Also see:
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is`
         
         
         """
@@ -378,12 +390,14 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
             Gets the fraction as a :code:`float`. This calculates the fraction as the numerator divided by denominator.
         
             Specified by:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number?is`
         
             Returns:
                 the fraction as a :code:`float`.
         
             Also see:
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.html?is`
         
         
         """
@@ -496,7 +510,7 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
                 a new fraction instance, with the numerator and denominator reduced.
         
             Raises:
-                : if the denominator is :code:`zero`.
+                :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.ArithmeticException?is`: if the denominator is :code:`zero`.
         
         
         """
@@ -507,12 +521,14 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
             Gets a hashCode for the fraction.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a hash code value for this object.
         
             Also see:
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is`
         
         
         """
@@ -523,12 +539,14 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
             Gets the fraction as an :code:`int`. This returns the whole number part of the fraction.
         
             Specified by:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number?is`
         
             Returns:
                 the whole number fraction part.
         
             Also see:
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.html?is`
         
         
         """
@@ -549,12 +567,14 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
             Gets the fraction as a :code:`long`. This returns the whole number part of the fraction.
         
             Specified by:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number?is`
         
             Returns:
                 the whole number fraction part.
         
             Also see:
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.html?is`
         
         
         """
@@ -566,7 +586,7 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
             Multiplies the value of this fraction by the passed :code:`BigInteger`, returning the result in reduced form.
         
             Parameters:
-                bg (BigInteger): the :code:`BigInteger` to multiply by.
+                bg (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigInteger?is`): the :code:`BigInteger` to multiply by.
         
             Returns:
                 a :code:`BigFraction` instance with the resulting values.
@@ -670,7 +690,7 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
             Returns a :code:`BigFraction` whose value is ``(this :sup:`exponent` )``, returning the result in reduced form.
         
             Parameters:
-                exponent (BigInteger): exponent to which this :code:`BigFraction` is to be raised.
+                exponent (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigInteger?is`): exponent to which this :code:`BigFraction` is to be raised.
         
             Returns:
                 ``this :sup:`exponent``` as a :code:`BigFraction`.
@@ -738,16 +758,20 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
     def subtract(self, int: int) -> 'BigFraction':
         """
         
-            Subtracts the value of an null from the value of this :code:`BigFraction`, returning the result in reduced form.
+            Subtracts the value of an
+            :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigInteger?is` from the value of
+            this :code:`BigFraction`, returning the result in reduced form.
         
             Parameters:
-                bg (BigInteger): the null to subtract, cannot be :code:`null`.
+                bg (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigInteger?is`): the :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigInteger?is` to subtract,
+                    cannot be :code:`null`.
         
             Returns:
                 a :code:`BigFraction` instance with the resulting values.
         
             Raises:
-                :class:`~org.hipparchus.exception.NullArgumentException`: if the null is :code:`null`.
+                :class:`~org.hipparchus.exception.NullArgumentException`: if the :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigInteger?is` is
+                    :code:`null`.
         
         
             Subtracts the value of an :code:`integer` from the value of this :code:`BigFraction`, returning the result in reduced
@@ -798,12 +822,14 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
             Returns the :code:`String` representing this fraction, ie "num / dem" or just "num" if the denominator is one.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a string representation of the fraction.
         
             Also see:
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is`
         
         
         """
@@ -813,7 +839,7 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
 
 class BigFractionField(org.hipparchus.Field[BigFraction], java.io.Serializable):
     """
-    public class BigFractionField extends Object implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.fraction.BigFraction`>, Serializable
+    public class BigFractionField extends :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.fraction.BigFraction`>, :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Representation of the fractional numbers without any overflow field.
     
@@ -826,7 +852,8 @@ class BigFractionField(org.hipparchus.Field[BigFraction], java.io.Serializable):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -847,7 +874,7 @@ class BigFractionField(org.hipparchus.Field[BigFraction], java.io.Serializable):
             Get the multiplicative identity of the field.
         
             The multiplicative identity is the element e :sub:`1` of the field such that for all elements a of the field, the
-            equalities a Ã— e :sub:`1` = e :sub:`1` Ã— a = a hold.
+            equalities a × e :sub:`1` = e :sub:`1` × a = a hold.
         
             Specified by:
                 :meth:`~org.hipparchus.Field.getOne` in interface :class:`~org.hipparchus.Field`
@@ -879,7 +906,8 @@ class BigFractionField(org.hipparchus.Field[BigFraction], java.io.Serializable):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -887,7 +915,7 @@ class BigFractionField(org.hipparchus.Field[BigFraction], java.io.Serializable):
 
 class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.lang.Comparable['Fraction'], java.io.Serializable):
     """
-    public class Fraction extends Number implements :class:`~org.hipparchus.FieldElement`<:class:`~org.hipparchus.fraction.Fraction`>, Comparable<:class:`~org.hipparchus.fraction.Fraction`>, Serializable
+    public class Fraction extends :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number?is` implements :class:`~org.hipparchus.FieldElement`<:class:`~org.hipparchus.fraction.Fraction`>, :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`<:class:`~org.hipparchus.fraction.Fraction`>, :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Representation of a rational number.
     
@@ -1048,7 +1076,8 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
             Compares this object to another based on size.
         
             Specified by:
-                 in interface 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable.html?is` in
+                interface :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`
         
             Parameters:
                 object (:class:`~org.hipparchus.fraction.Fraction`): the object to compare to
@@ -1078,7 +1107,7 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
                 a :code:`Fraction` instance with the resulting values
         
             Raises:
-                : if the fraction is :code:`null`
+                :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if the fraction is :code:`null`
                 :class:`~org.hipparchus.exception.MathRuntimeException`: if the fraction to divide by is zero
                 :class:`~org.hipparchus.exception.MathRuntimeException`: if the resulting numerator or denominator exceeds :code:`Integer.MAX_VALUE`
         
@@ -1100,7 +1129,8 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
             Gets the fraction as a :code:`double`. This calculates the fraction as the numerator divided by denominator.
         
             Specified by:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number?is`
         
             Returns:
                 the fraction as a :code:`double`
@@ -1114,10 +1144,11 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
             the two fractions are considered to be equal.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                other (Object): fraction to test for equality to this fraction
+                other (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): fraction to test for equality to this fraction
         
             Returns:
                 true if two fractions are equal, false if object is :code:`null`, not an instance of
@@ -1131,7 +1162,8 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
             Gets the fraction as a :code:`float`. This calculates the fraction as the numerator divided by denominator.
         
             Specified by:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number?is`
         
             Returns:
                 the fraction as a :code:`float`
@@ -1210,7 +1242,8 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
             Gets a hashCode for the fraction.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a hash code value for this object
@@ -1223,7 +1256,8 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
             Gets the fraction as an :code:`int`. This returns the whole number part of the fraction.
         
             Specified by:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number?is`
         
             Returns:
                 the whole number fraction part
@@ -1246,7 +1280,8 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
             Gets the fraction as a :code:`long`. This returns the whole number part of the fraction.
         
             Specified by:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number?is`
         
             Returns:
                 the whole number fraction part
@@ -1377,12 +1412,14 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
             Returns the :code:`String` representing this fraction, ie "num / dem" or just "num" if the denominator is one.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a string representation of the fraction.
         
             Also see:
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is`
         
         
         """
@@ -1392,7 +1429,7 @@ class Fraction(java.lang.Number, org.hipparchus.FieldElement['Fraction'], java.l
 
 class FractionField(org.hipparchus.Field[Fraction], java.io.Serializable):
     """
-    public class FractionField extends Object implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.fraction.Fraction`>, Serializable
+    public class FractionField extends :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.fraction.Fraction`>, :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Representation of the fractional numbers field.
     
@@ -1405,7 +1442,8 @@ class FractionField(org.hipparchus.Field[Fraction], java.io.Serializable):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -1426,7 +1464,7 @@ class FractionField(org.hipparchus.Field[Fraction], java.io.Serializable):
             Get the multiplicative identity of the field.
         
             The multiplicative identity is the element e :sub:`1` of the field such that for all elements a of the field, the
-            equalities a Ã— e :sub:`1` = e :sub:`1` Ã— a = a hold.
+            equalities a × e :sub:`1` = e :sub:`1` × a = a hold.
         
             Specified by:
                 :meth:`~org.hipparchus.Field.getOne` in interface :class:`~org.hipparchus.Field`
@@ -1458,7 +1496,8 @@ class FractionField(org.hipparchus.Field[Fraction], java.io.Serializable):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -1466,7 +1505,7 @@ class FractionField(org.hipparchus.Field[Fraction], java.io.Serializable):
 
 class BigFractionFormat(org.hipparchus.fraction.AbstractFormat, java.io.Serializable):
     """
-    public class BigFractionFormat extends NumberFormat implements Serializable
+    public class BigFractionFormat extends :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is` implements :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Formats a BigFraction number in proper format or improper format.
     
@@ -1489,23 +1528,28 @@ class BigFractionFormat(org.hipparchus.fraction.AbstractFormat, java.io.Serializ
         
             Parameters:
                 BigFraction (:class:`~org.hipparchus.fraction.BigFraction`): the object to format.
-                toAppendTo (StringBuffer): where the text is to be appended
-                pos (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
+                toAppendTo (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is`): where the text is to be appended
+                pos (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition?is`): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
             Returns:
                 the value passed in as toAppendTo.
         
             Formats an object and appends the result to a StringBuffer. :code:`obj` must be either a
-            :class:`~org.hipparchus.fraction.BigFraction` object or a null object or a null object. Any other type of object will
-            result in an null being thrown.
+            :class:`~org.hipparchus.fraction.BigFraction` object or a
+            :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigInteger?is` object or a
+            :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number?is` object. Any other type of
+            object will result in an
+            :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is` being
+            thrown.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is`
         
             Parameters:
-                obj (Object): the object to format.
-                toAppendTo (StringBuffer): where the text is to be appended
-                pos (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
+                obj (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): the object to format.
+                toAppendTo (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is`): where the text is to be appended
+                pos (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition?is`): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
             Returns:
                 the value passed in as toAppendTo.
@@ -1514,36 +1558,41 @@ class BigFractionFormat(org.hipparchus.fraction.AbstractFormat, java.io.Serializ
                 :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if :code:`obj` is not a valid type.
         
             Also see:
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.Format.html?is`
         
             Formats a double value as a fraction and appends the result to a StringBuffer.
         
             Specified by:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is`
         
             Parameters:
                 value (double): the double value to format
-                buffer (StringBuffer): StringBuffer to append to
-                position (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
+                buffer (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is`): StringBuffer to append to
+                position (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition?is`): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
             Returns:
                 a reference to the appended buffer
         
             Also see:
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.html?is`
         
             Formats a long value as a fraction and appends the result to a StringBuffer.
         
             Specified by:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is`
         
             Parameters:
                 value (long): the long value to format
-                buffer (StringBuffer): StringBuffer to append to
-                position (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
+                buffer (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is`): StringBuffer to append to
+                position (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition?is`): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
             Returns:
                 a reference to the appended buffer
         
             Also see:
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.html?is`
         
         
         """
@@ -1573,7 +1622,8 @@ class BigFractionFormat(org.hipparchus.fraction.AbstractFormat, java.io.Serializ
     @staticmethod
     def getAvailableLocales() -> typing.List[java.util.Locale]:
         """
-            Get the set of locales for which complex formats are available. This is the same set as the null set.
+            Get the set of locales for which complex formats are available. This is the same set as the
+            :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is` set.
         
             Returns:
                 available complex format locales.
@@ -1599,7 +1649,7 @@ class BigFractionFormat(org.hipparchus.fraction.AbstractFormat, java.io.Serializ
             Returns the default complex format for the given locale.
         
             Parameters:
-                locale (Locale): the specific locale used by the format.
+                locale (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): the specific locale used by the format.
         
             Returns:
                 the complex format specific to the given locale.
@@ -1625,7 +1675,7 @@ class BigFractionFormat(org.hipparchus.fraction.AbstractFormat, java.io.Serializ
             Returns the default complex format for the given locale.
         
             Parameters:
-                locale (Locale): the specific locale used by the format.
+                locale (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): the specific locale used by the format.
         
             Returns:
                 the complex format specific to the given locale.
@@ -1640,11 +1690,12 @@ class BigFractionFormat(org.hipparchus.fraction.AbstractFormat, java.io.Serializ
             formatted as an improper BigFraction.
         
             Specified by:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is`
         
             Parameters:
-                source (String): the string to parse
-                pos (ParsePosition): input/output parsing parameter.
+                source (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the string to parse
+                pos (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.ParsePosition?is`): input/output parsing parameter.
         
             Returns:
                 the parsed :class:`~org.hipparchus.fraction.BigFraction` object.
@@ -1657,7 +1708,7 @@ class BigFractionFormat(org.hipparchus.fraction.AbstractFormat, java.io.Serializ
 
 class FractionFormat(org.hipparchus.fraction.AbstractFormat):
     """
-    public class FractionFormat extends NumberFormat
+    public class FractionFormat extends :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is`
     
         Formats a Fraction number in proper format or improper format.
     
@@ -1680,25 +1731,29 @@ class FractionFormat(org.hipparchus.fraction.AbstractFormat):
         
             Parameters:
                 fraction (:class:`~org.hipparchus.fraction.Fraction`): the object to format.
-                toAppendTo (StringBuffer): where the text is to be appended
-                pos (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
+                toAppendTo (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is`): where the text is to be appended
+                pos (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition?is`): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
             Returns:
                 the value passed in as toAppendTo.
         
-        public StringBuffer format(Object obj, StringBuffer toAppendTo, FieldPosition pos) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`, :class:`~org.hipparchus.exception.MathIllegalStateException`
+        public :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is` format(:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` obj, :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is` toAppendTo, :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition?is` pos) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`, :class:`~org.hipparchus.exception.MathIllegalStateException`
         
             Formats an object and appends the result to a StringBuffer. :code:`obj` must be either a
-            :class:`~org.hipparchus.fraction.Fraction` object or a null object. Any other type of object will result in an null
-            being thrown.
+            :class:`~org.hipparchus.fraction.Fraction` object or a
+            :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number?is` object. Any other type of
+            object will result in an
+            :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is` being
+            thrown.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is`
         
             Parameters:
-                obj (Object): the object to format.
-                toAppendTo (StringBuffer): where the text is to be appended
-                pos (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
+                obj (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): the object to format.
+                toAppendTo (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is`): where the text is to be appended
+                pos (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition?is`): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
             Returns:
                 the value passed in as toAppendTo.
@@ -1708,36 +1763,41 @@ class FractionFormat(org.hipparchus.fraction.AbstractFormat):
                 :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if :code:`obj` is not a valid type.
         
             Also see:
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.Format.html?is`
         
             Formats a double value as a fraction and appends the result to a StringBuffer.
         
             Specified by:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is`
         
             Parameters:
                 value (double): the double value to format
-                buffer (StringBuffer): StringBuffer to append to
-                position (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
+                buffer (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is`): StringBuffer to append to
+                position (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition?is`): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
             Returns:
                 a reference to the appended buffer
         
             Also see:
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.html?is`
         
             Formats a long value as a fraction and appends the result to a StringBuffer.
         
             Specified by:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is`
         
             Parameters:
                 value (long): the long value to format
-                buffer (StringBuffer): StringBuffer to append to
-                position (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
+                buffer (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is`): StringBuffer to append to
+                position (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition?is`): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
             Returns:
                 a reference to the appended buffer
         
             Also see:
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.html?is`
         
         
         """
@@ -1767,7 +1827,8 @@ class FractionFormat(org.hipparchus.fraction.AbstractFormat):
     @staticmethod
     def getAvailableLocales() -> typing.List[java.util.Locale]:
         """
-            Get the set of locales for which complex formats are available. This is the same set as the null set.
+            Get the set of locales for which complex formats are available. This is the same set as the
+            :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is` set.
         
             Returns:
                 available complex format locales.
@@ -1793,7 +1854,7 @@ class FractionFormat(org.hipparchus.fraction.AbstractFormat):
             Returns the default complex format for the given locale.
         
             Parameters:
-                locale (Locale): the specific locale used by the format.
+                locale (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): the specific locale used by the format.
         
             Returns:
                 the complex format specific to the given locale.
@@ -1819,7 +1880,7 @@ class FractionFormat(org.hipparchus.fraction.AbstractFormat):
             Returns the default complex format for the given locale.
         
             Parameters:
-                locale (Locale): the specific locale used by the format.
+                locale (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): the specific locale used by the format.
         
             Returns:
                 the complex format specific to the given locale.
@@ -1834,11 +1895,12 @@ class FractionFormat(org.hipparchus.fraction.AbstractFormat):
             formatted as an improper fraction.
         
             Specified by:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is`
         
             Parameters:
-                source (String): the string to parse
-                pos (ParsePosition): input/output parsing parameter.
+                source (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the string to parse
+                pos (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.ParsePosition?is`): input/output parsing parameter.
         
             Returns:
                 the parsed :class:`~org.hipparchus.fraction.Fraction` object.
@@ -1879,8 +1941,8 @@ class ProperBigFractionFormat(BigFractionFormat):
         
             Parameters:
                 fraction (:class:`~org.hipparchus.fraction.BigFraction`): the object to format.
-                toAppendTo (StringBuffer): where the text is to be appended
-                pos (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
+                toAppendTo (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is`): where the text is to be appended
+                pos (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition?is`): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
             Returns:
                 the value passed in as toAppendTo.
@@ -1888,32 +1950,36 @@ class ProperBigFractionFormat(BigFractionFormat):
             Formats a double value as a fraction and appends the result to a StringBuffer.
         
             Specified by:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is`
         
             Parameters:
                 value (double): the double value to format
-                buffer (StringBuffer): StringBuffer to append to
-                position (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
+                buffer (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is`): StringBuffer to append to
+                position (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition?is`): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
             Returns:
                 a reference to the appended buffer
         
             Also see:
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.html?is`
         
             Formats a long value as a fraction and appends the result to a StringBuffer.
         
             Specified by:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is`
         
             Parameters:
                 value (long): the long value to format
-                buffer (StringBuffer): StringBuffer to append to
-                position (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
+                buffer (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is`): StringBuffer to append to
+                position (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition?is`): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
             Returns:
                 a reference to the appended buffer
         
             Also see:
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.html?is`
         
         
         """
@@ -1949,8 +2015,8 @@ class ProperBigFractionFormat(BigFractionFormat):
                 :meth:`~org.hipparchus.fraction.BigFractionFormat.parse` in class :class:`~org.hipparchus.fraction.BigFractionFormat`
         
             Parameters:
-                source (String): the string to parse
-                pos (ParsePosition): input/ouput parsing parameter.
+                source (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the string to parse
+                pos (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.ParsePosition?is`): input/ouput parsing parameter.
         
             Returns:
                 the parsed :class:`~org.hipparchus.fraction.BigFraction` object.
@@ -1991,8 +2057,8 @@ class ProperFractionFormat(FractionFormat):
         
             Parameters:
                 fraction (:class:`~org.hipparchus.fraction.Fraction`): the object to format.
-                toAppendTo (StringBuffer): where the text is to be appended
-                pos (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
+                toAppendTo (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is`): where the text is to be appended
+                pos (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition?is`): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
             Returns:
                 the value passed in as toAppendTo.
@@ -2000,32 +2066,36 @@ class ProperFractionFormat(FractionFormat):
             Formats a double value as a fraction and appends the result to a StringBuffer.
         
             Specified by:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is`
         
             Parameters:
                 value (double): the double value to format
-                buffer (StringBuffer): StringBuffer to append to
-                position (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
+                buffer (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is`): StringBuffer to append to
+                position (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition?is`): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
             Returns:
                 a reference to the appended buffer
         
             Also see:
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.html?is`
         
             Formats a long value as a fraction and appends the result to a StringBuffer.
         
             Specified by:
-                 in class 
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.html?is` in
+                class :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is`
         
             Parameters:
                 value (long): the long value to format
-                buffer (StringBuffer): StringBuffer to append to
-                position (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
+                buffer (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is`): StringBuffer to append to
+                position (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition?is`): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
             Returns:
                 a reference to the appended buffer
         
             Also see:
+                :meth:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat.html?is`
         
         
         """
@@ -2061,8 +2131,8 @@ class ProperFractionFormat(FractionFormat):
                 :meth:`~org.hipparchus.fraction.FractionFormat.parse` in class :class:`~org.hipparchus.fraction.FractionFormat`
         
             Parameters:
-                source (String): the string to parse
-                pos (ParsePosition): input/ouput parsing parameter.
+                source (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the string to parse
+                pos (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.ParsePosition?is`): input/ouput parsing parameter.
         
             Returns:
                 the parsed :class:`~org.hipparchus.fraction.Fraction` object.

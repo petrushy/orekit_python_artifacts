@@ -12,7 +12,7 @@ import typing
 
 class Atmosphere(java.io.Serializable):
     """
-    public interface Atmosphere extends Serializable
+    public interface Atmosphere extends :class:`~org.orekit.models.earth.atmosphere.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Interface for atmospheric models.
     """
@@ -24,11 +24,11 @@ class Atmosphere(java.io.Serializable):
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                position (Vector3D): current position in frame
+                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): current position in frame
                 frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
         
             Returns:
-                local density (kg/mÂ³)
+                local density (kg/m³)
         
         """
         ...
@@ -39,11 +39,11 @@ class Atmosphere(java.io.Serializable):
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                position (FieldVector3D<T> position): current position in frame
+                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): current position in frame
                 frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
         
             Returns:
-                local density (kg/mÂ³)
+                local density (kg/m³)
         
         
         """
@@ -69,7 +69,7 @@ class Atmosphere(java.io.Serializable):
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                position (FieldVector3D<T> position): current position in frame
+                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): current position in frame
                 frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
         
             Returns:
@@ -87,7 +87,7 @@ class Atmosphere(java.io.Serializable):
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                position (Vector3D): current position in frame
+                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): current position in frame
                 frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
         
             Returns:
@@ -98,14 +98,14 @@ class Atmosphere(java.io.Serializable):
 
 class DTM2000InputParameters(java.io.Serializable):
     """
-    public interface DTM2000InputParameters extends Serializable
+    public interface DTM2000InputParameters extends :class:`~org.orekit.models.earth.atmosphere.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Container for solar activity data, compatible with DTM2000 Atmosphere model. This model needs mean and instantaneous
         solar flux and geomagnetic incides to compute the local density. Mean solar flux is (for the moment) represented by the
         F10.7 indices. Instantaneous flux can be set to the mean value if the data is not available. Geomagnetic acivity is
         represented by the Kp indice, which goes from 1 (very low activity) to 9 (high activity).
     
-        All needed solar activity data can be found on the NOAA (National Oceanic and Atmospheric Administration) website.
+        All needed solar activity data can be found on the :class:`~org.orekit.models.earth.atmosphere.https:.www.noaa.gov`
     """
     def get24HoursKp(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
         """
@@ -183,7 +183,7 @@ class DTM2000InputParameters(java.io.Serializable):
 
 class JB2008InputParameters(java.io.Serializable):
     """
-    public interface JB2008InputParameters extends Serializable
+    public interface JB2008InputParameters extends :class:`~org.orekit.models.earth.atmosphere.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Interface for solar activity and magnetic activity data.
     
@@ -204,7 +204,7 @@ class JB2008InputParameters(java.io.Serializable):
         ...
     def getF10(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
         """
-            Get the value of the instantaneous solar flux index (1e :sup:`-22` *Watt/(mÂ²*Hertz)).
+            Get the value of the instantaneous solar flux index (1e :sup:`-22` *Watt/(m²*Hertz)).
         
             Tabular time 1.0 day earlier.
         
@@ -345,7 +345,7 @@ class JB2008InputParameters(java.io.Serializable):
 
 class NRLMSISE00InputParameters(java.io.Serializable):
     """
-    public interface NRLMSISE00InputParameters extends Serializable
+    public interface NRLMSISE00InputParameters extends :class:`~org.orekit.models.earth.atmosphere.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Container for solar activity data, compatible with NRLMSISE-00 atmosphere model.
     
@@ -357,13 +357,13 @@ class NRLMSISE00InputParameters(java.io.Serializable):
         
             A :sub:`p` indices are provided as an array such as:
         
-              - 0 â†’ daily A :sub:`p`
-              - 1 â†’ 3 hr A :sub:`p` index for current time
-              - 2 â†’ 3 hr A :sub:`p` index for 3 hrs before current time
-              - 3 â†’ 3 hr A :sub:`p` index for 6 hrs before current time
-              - 4 â†’ 3 hr A :sub:`p` index for 9 hrs before current time
-              - 5 â†’ Average of eight 3 hr A :sub:`p` indices from 12 to 33 hrs prior to current time
-              - 6 â†’ Average of eight 3 hr A :sub:`p` indices from 36 to 57 hrs prior to current time
+              - 0 → daily A :sub:`p`
+              - 1 → 3 hr A :sub:`p` index for current time
+              - 2 → 3 hr A :sub:`p` index for 3 hrs before current time
+              - 3 → 3 hr A :sub:`p` index for 6 hrs before current time
+              - 4 → 3 hr A :sub:`p` index for 9 hrs before current time
+              - 5 → Average of eight 3 hr A :sub:`p` indices from 12 to 33 hrs prior to current time
+              - 6 → Average of eight 3 hr A :sub:`p` indices from 36 to 57 hrs prior to current time
         
         
             Parameters:
@@ -424,7 +424,7 @@ class NRLMSISE00InputParameters(java.io.Serializable):
 
 class DTM2000(Atmosphere):
     """
-    public class DTM2000 extends Object implements :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+    public class DTM2000 extends :class:`~org.orekit.models.earth.atmosphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
     
         This atmosphere model is the realization of the DTM-2000 model.
     
@@ -438,7 +438,7 @@ class DTM2000(Atmosphere):
         *S. Bruinsma, G. Thuillier and F. Barlier*
     
     
-        Journal of Atmospheric and Solar-Terrestrial Physics 65 (2003) 1053â€“1070
+        Journal of Atmospheric and Solar-Terrestrial Physics 65 (2003) 1053–1070
     
     
     
@@ -451,7 +451,7 @@ class DTM2000(Atmosphere):
         the data is not available. Geomagnetic activity is represented by the Kp indice, which goes from 1 (very low activity)
         to 9 (high activity).
     
-        All these data can be found on the NOAA (National Oceanic and Atmospheric Administration) website.
+        All these data can be found on the :class:`~org.orekit.models.earth.atmosphere.https:.www.noaa.gov`
     
         Also see:
             :meth:`~serialized`
@@ -545,7 +545,7 @@ class DTM2000(Atmosphere):
                 akp24 (double): Mean of last 24 hrs geomagnetic activity index (1-9)
         
             Returns:
-                the local density (kg/mÂ³)
+                the local density (kg/m³)
         
         """
         ...
@@ -555,16 +555,16 @@ class DTM2000(Atmosphere):
             Get the local density.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity` in
+                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                position (Vector3D): current position in frame
+                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): current position in frame
                 frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
         
             Returns:
-                local density (kg/mÂ³)
+                local density (kg/m³)
         
         """
         ...
@@ -585,7 +585,7 @@ class DTM2000(Atmosphere):
                 akp24 (double): Mean of last 24 hrs geomagnetic activity index (1-9)
         
             Returns:
-                the local density (kg/mÂ³)
+                the local density (kg/m³)
         
             Since:
                 9.0
@@ -598,16 +598,16 @@ class DTM2000(Atmosphere):
             Get the local density.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity` in
+                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                position (FieldVector3D<T> position): current position in frame
+                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): current position in frame
                 frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
         
             Returns:
-                local density (kg/mÂ³)
+                local density (kg/m³)
         
         
         """
@@ -617,8 +617,8 @@ class DTM2000(Atmosphere):
             Get the frame of the central body.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getFrame`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getFrame` in
+                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
         
             Returns:
                 frame of the central body.
@@ -629,7 +629,7 @@ class DTM2000(Atmosphere):
 
 class HarrisPriester(Atmosphere):
     """
-    public class HarrisPriester extends Object implements :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+    public class HarrisPriester extends :class:`~org.orekit.models.earth.atmosphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
     
         This atmosphere model is the realization of the Modified Harris-Priester model.
     
@@ -666,25 +666,25 @@ class HarrisPriester(Atmosphere):
             Get the local density.
         
             Parameters:
-                sunInEarth (Vector3D): position of the Sun in Earth frame (m)
-                posInEarth (Vector3D): target position in Earth frame (m)
+                sunInEarth (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): position of the Sun in Earth frame (m)
+                posInEarth (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): target position in Earth frame (m)
         
             Returns:
-                the local density (kg/mÂ³)
+                the local density (kg/m³)
         
             Get the local density at some position.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity` in
+                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                position (Vector3D): current position
+                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): current position
                 frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
         
             Returns:
-                local density (kg/mÂ³) or if altitude is below the model minimal altitude
+                local density (kg/m³) or if altitude is below the model minimal altitude
         
         """
         ...
@@ -696,38 +696,41 @@ class HarrisPriester(Atmosphere):
             Get the local density.
         
             Parameters:
-                sunInEarth (Vector3D): position of the Sun in Earth frame (m)
-                posInEarth (FieldVector3D<T> posInEarth): target position in Earth frame (m)
+                sunInEarth (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): position of the Sun in Earth frame (m)
+                posInEarth (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> posInEarth): target position in Earth frame (m)
         
             Returns:
-                the local density (kg/mÂ³)
-        
-            Get the local density at some position.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                position (FieldVector3D<T> position): current position
-                frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
-        
-            Returns:
-                local density (kg/mÂ³) or if altitude is below the model minimal altitude
-        
+                the local density (kg/m³)
         
         """
         ...
     @typing.overload
-    def getDensity(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getDensity_3__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getDensity_3__T], frame: org.orekit.frames.Frame) -> _getDensity_3__T: ...
+    def getDensity(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getDensity_3__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getDensity_3__T], frame: org.orekit.frames.Frame) -> _getDensity_3__T:
+        """
+            Get the local density at some position.
+        
+            Specified by:
+                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity` in
+                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
+                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): current position
+                frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
+        
+            Returns:
+                local density (kg/m³) or if altitude is below the model minimal altitude
+        
+        
+        """
+        ...
     def getFrame(self) -> org.orekit.frames.Frame:
         """
             Get the frame of the central body.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getFrame`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getFrame` in
+                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
         
             Returns:
                 frame of the central body.
@@ -766,8 +769,8 @@ class HarrisPriester(Atmosphere):
             The density table is an array such as:
         
               - tabAltRho[][0] = altitude (m)
-              - tabAltRho[][1] = min density (kg/mÂ³)
-              - tabAltRho[][2] = max density (kg/mÂ³)
+              - tabAltRho[][1] = min density (kg/m³)
+              - tabAltRho[][2] = max density (kg/m³)
         
         
             The altitude must be increasing without limitation in range.
@@ -783,7 +786,7 @@ class HarrisPriester(Atmosphere):
 
 class JB2008(Atmosphere):
     """
-    public class JB2008 extends Object implements :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+    public class JB2008 extends :class:`~org.orekit.models.earth.atmosphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
     
         This is the realization of the Jacchia-Bowman 2008 atmospheric model.
     
@@ -812,7 +815,7 @@ class JB2008(Atmosphere):
     
           - Exospheric Temperature above Input Position (deg K)
           - Temperature at Input Position (deg K)
-          - Total Mass-Density at Input Position (kg/mÂ³)
+          - Total Mass-Density at Input Position (kg/m³)
     
     
         The model needs geographical and time information to compute general values, but also needs space weather data : mean
@@ -843,7 +846,7 @@ class JB2008(Atmosphere):
                 satLon (double): Right Ascension of position (radians)
                 satLat (double): Geocentric latitude of position (radians)
                 satAlt (double): Height of position (m)
-                f10 (double): 10.7-cm Solar flux (1e :sup:`-22` *Watt/(mÂ²*Hertz))
+                f10 (double): 10.7-cm Solar flux (1e :sup:`-22` *Watt/(m²*Hertz))
         
         
         (Tabular time 1.0 day earlier)
@@ -875,7 +878,7 @@ class JB2008(Atmosphere):
                 dstdtc (double): Temperature change computed from Dst index
         
             Returns:
-                total mass-Density at input position (kg/mÂ³)
+                total mass-Density at input position (kg/m³)
         
         """
         ...
@@ -885,16 +888,16 @@ class JB2008(Atmosphere):
             Get the local density.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity` in
+                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                position (Vector3D): current position in frame
+                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): current position in frame
                 frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
         
             Returns:
-                local density (kg/mÂ³)
+                local density (kg/m³)
         
         """
         ...
@@ -910,7 +913,7 @@ class JB2008(Atmosphere):
                 satLon (T): Right Ascension of position (radians)
                 satLat (T): Geocentric latitude of position (radians)
                 satAlt (T): Height of position (m)
-                f10 (double): 10.7-cm Solar flux (1e :sup:`-22` *Watt/(mÂ²*Hertz))
+                f10 (double): 10.7-cm Solar flux (1e :sup:`-22` *Watt/(m²*Hertz))
         
         
         (Tabular time 1.0 day earlier)
@@ -942,7 +945,7 @@ class JB2008(Atmosphere):
                 dstdtc (double): Temperature change computed from Dst index
         
             Returns:
-                total mass-Density at input position (kg/mÂ³)
+                total mass-Density at input position (kg/m³)
         
         """
         ...
@@ -952,16 +955,16 @@ class JB2008(Atmosphere):
             Get the local density.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity` in
+                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                position (FieldVector3D<T> position): current position in frame
+                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): current position in frame
                 frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
         
             Returns:
-                local density (kg/mÂ³)
+                local density (kg/m³)
         
         
         """
@@ -971,8 +974,8 @@ class JB2008(Atmosphere):
             Get the frame of the central body.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getFrame`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getFrame` in
+                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
         
             Returns:
                 frame of the central body.
@@ -984,18 +987,18 @@ class JB2008(Atmosphere):
 _NRLMSISE00__FieldOutput__T = typing.TypeVar('_NRLMSISE00__FieldOutput__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class NRLMSISE00(Atmosphere):
     """
-    public class NRLMSISE00 extends Object implements :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+    public class NRLMSISE00 extends :class:`~org.orekit.models.earth.atmosphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
     
         This class implements the mathematical representation of the 2001 Naval Research Laboratory Mass Spectrometer and
-        Incoherent Scatter Radar Exosphere (NRLMSISE-00) of the MSISÃ‚Â® class model.
+        Incoherent Scatter Radar Exosphere (NRLMSISE-00) of the MSIS® class model.
     
         NRLMSISE-00 calculates the neutral atmosphere empirical model from the surface to lower exosphere (0 to 1000 km) and
         provides:
     
           - Exospheric Temperature above Input Position (K)
           - Local Temperature at Input Position (K)
-          - Total Mass-Density at Input Position (kg/mÂ³)
-          - Partial Densities at Input Position (1/mÂ³) for:
+          - Total Mass-Density at Input Position (kg/m³)
+          - Partial Densities at Input Position (1/m³) for:
     
               - He,
               - H,
@@ -1090,16 +1093,16 @@ class NRLMSISE00(Atmosphere):
             Get the local density.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity` in
+                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                position (Vector3D): current position in frame
+                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): current position in frame
                 frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
         
             Returns:
-                local density (kg/mÂ³)
+                local density (kg/m³)
         
         """
         ...
@@ -1109,16 +1112,16 @@ class NRLMSISE00(Atmosphere):
             Get the local density.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity` in
+                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                position (FieldVector3D<T> position): current position in frame
+                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): current position in frame
                 frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
         
             Returns:
-                local density (kg/mÂ³)
+                local density (kg/m³)
         
         
         """
@@ -1128,8 +1131,8 @@ class NRLMSISE00(Atmosphere):
             Get the frame of the central body.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getFrame`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getFrame` in
+                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
         
             Returns:
                 frame of the central body.
@@ -1158,7 +1161,7 @@ class NRLMSISE00(Atmosphere):
 
 class PythonAtmosphere(Atmosphere):
     """
-    public class PythonAtmosphere extends Object implements :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+    public class PythonAtmosphere extends :class:`~org.orekit.models.earth.atmosphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
     
     
         Also see:
@@ -1173,16 +1176,16 @@ class PythonAtmosphere(Atmosphere):
             Get the local density. Extension point for Python.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity` in
+                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                position (Vector3D): current position in frame
+                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): current position in frame
                 frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
         
             Returns:
-                local density (kg/mÂ³)
+                local density (kg/m³)
         
         """
         ...
@@ -1192,16 +1195,16 @@ class PythonAtmosphere(Atmosphere):
             Get the local density. Redirects to getDensity_FFF
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity` in
+                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                position (FieldVector3D<T> position): current position in frame
+                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): current position in frame
                 frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
         
             Returns:
-                local density (kg/mÂ³)
+                local density (kg/m³)
         
         
         """
@@ -1213,11 +1216,11 @@ class PythonAtmosphere(Atmosphere):
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                position (FieldVector3D<T> position): current position in frame
+                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): current position in frame
                 frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
         
             Returns:
-                local density (kg/mÂ³)
+                local density (kg/m³)
         
         
         """
@@ -1227,8 +1230,8 @@ class PythonAtmosphere(Atmosphere):
             Get the frame of the central body.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getFrame`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getFrame` in
+                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
         
             Returns:
                 frame of the central body.
@@ -1248,26 +1251,31 @@ class PythonAtmosphere(Atmosphere):
             By default, atmosphere is supposed to have a null velocity in the central body frame.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getVelocity`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getVelocity` in
+                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                position (Vector3D): current position in frame
+                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): current position in frame
                 frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
         
             Returns:
                 velocity (m/s) (defined in the same frame as the position)
         
+        """
+        ...
+    @typing.overload
+    def getVelocity(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getVelocity_1__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getVelocity_1__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getVelocity_1__T]:
+        """
             Get the inertial velocity of atmosphere molecules. Redirects to getVelocity_FFF(...)
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getVelocity`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getVelocity` in
+                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                position (FieldVector3D<T> position): current position in frame
+                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): current position in frame
                 frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
         
             Returns:
@@ -1276,8 +1284,6 @@ class PythonAtmosphere(Atmosphere):
         
         """
         ...
-    @typing.overload
-    def getVelocity(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getVelocity_1__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getVelocity_1__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getVelocity_1__T]: ...
     _getVelocity_FFF__T = typing.TypeVar('_getVelocity_FFF__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     def getVelocity_FFF(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getVelocity_FFF__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getVelocity_FFF__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getVelocity_FFF__T]:
         """
@@ -1285,7 +1291,7 @@ class PythonAtmosphere(Atmosphere):
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                position (FieldVector3D<T> position): current position in frame
+                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): current position in frame
                 frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
         
             Returns:
@@ -1316,7 +1322,7 @@ class PythonAtmosphere(Atmosphere):
 
 class PythonDTM2000InputParameters(DTM2000InputParameters):
     """
-    public class PythonDTM2000InputParameters extends Object implements :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
+    public class PythonDTM2000InputParameters extends :class:`~org.orekit.models.earth.atmosphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
     
     
         Also see:
@@ -1329,8 +1335,8 @@ class PythonDTM2000InputParameters(DTM2000InputParameters):
             Get the last 24H mean geomagnetic index.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.get24HoursKp`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.get24HoursKp` in
+                interface :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -1346,8 +1352,8 @@ class PythonDTM2000InputParameters(DTM2000InputParameters):
             Get the value of the instantaneous solar flux.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getInstantFlux`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getInstantFlux` in
+                interface :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -1363,8 +1369,8 @@ class PythonDTM2000InputParameters(DTM2000InputParameters):
             Gets the available data range maximum date.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getMaxDate`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getMaxDate` in
+                interface :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
         
             Returns:
                 the maximum date.
@@ -1377,8 +1383,8 @@ class PythonDTM2000InputParameters(DTM2000InputParameters):
             Get the value of the mean solar flux.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getMeanFlux`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getMeanFlux` in
+                interface :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -1394,8 +1400,8 @@ class PythonDTM2000InputParameters(DTM2000InputParameters):
             Gets the available data range minimum date.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getMinDate`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getMinDate` in
+                interface :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
         
             Returns:
                 the minimum date.
@@ -1409,8 +1415,8 @@ class PythonDTM2000InputParameters(DTM2000InputParameters):
             delay=6-abs(lat)*0.033 (lat in deg.)
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getThreeHourlyKP`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters.getThreeHourlyKP` in
+                interface :class:`~org.orekit.models.earth.atmosphere.DTM2000InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -1463,7 +1469,7 @@ class PythonJB2008InputParameters(JB2008InputParameters):
 
 class PythonNRLMSISE00InputParameters(NRLMSISE00InputParameters):
     """
-    public class PythonNRLMSISE00InputParameters extends Object implements :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
+    public class PythonNRLMSISE00InputParameters extends :class:`~org.orekit.models.earth.atmosphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
     
     
         Also see:
@@ -1487,8 +1493,8 @@ class PythonNRLMSISE00InputParameters(NRLMSISE00InputParameters):
         
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getAp`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getAp` in
+                interface :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -1504,8 +1510,8 @@ class PythonNRLMSISE00InputParameters(NRLMSISE00InputParameters):
             Get the value of the 81 day average of F10.7 solar flux centered on current day.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getAverageFlux`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getAverageFlux` in
+                interface :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -1521,8 +1527,8 @@ class PythonNRLMSISE00InputParameters(NRLMSISE00InputParameters):
             Get the value of the daily F10.7 solar flux for previous day.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getDailyFlux`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getDailyFlux` in
+                interface :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): the current date
@@ -1538,8 +1544,8 @@ class PythonNRLMSISE00InputParameters(NRLMSISE00InputParameters):
             Gets the available data range maximum date.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getMaxDate`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getMaxDate` in
+                interface :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
         
             Returns:
                 the maximum date.
@@ -1552,8 +1558,8 @@ class PythonNRLMSISE00InputParameters(NRLMSISE00InputParameters):
             Gets the available data range minimum date.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getMinDate`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
+                :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getMinDate` in
+                interface :class:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters`
         
             Returns:
                 the minimum date.
@@ -1583,7 +1589,7 @@ class PythonNRLMSISE00InputParameters(NRLMSISE00InputParameters):
 
 class SimpleExponentialAtmosphere(Atmosphere):
     """
-    public class SimpleExponentialAtmosphere extends Object implements :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+    public class SimpleExponentialAtmosphere extends :class:`~org.orekit.models.earth.atmosphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
     
         Simple exponential atmospheric model.
     
@@ -1600,16 +1606,16 @@ class SimpleExponentialAtmosphere(Atmosphere):
             Get the local density.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity` in
+                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                position (Vector3D): current position in frame
+                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): current position in frame
                 frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
         
             Returns:
-                local density (kg/mÂ³)
+                local density (kg/m³)
         
         """
         ...
@@ -1620,16 +1626,16 @@ class SimpleExponentialAtmosphere(Atmosphere):
             Get the local density.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity` in
+                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                position (FieldVector3D<T> position): current position in frame
+                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): current position in frame
                 frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
         
             Returns:
-                local density (kg/mÂ³)
+                local density (kg/m³)
         
         
         """
@@ -1639,8 +1645,8 @@ class SimpleExponentialAtmosphere(Atmosphere):
             Get the frame of the central body.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getFrame`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getFrame` in
+                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
         
             Returns:
                 frame of the central body.

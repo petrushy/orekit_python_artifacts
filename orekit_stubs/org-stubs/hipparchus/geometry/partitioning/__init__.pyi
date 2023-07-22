@@ -10,7 +10,7 @@ _BSPTree__VanishingCutHandler__S = typing.TypeVar('_BSPTree__VanishingCutHandler
 _BSPTree__S = typing.TypeVar('_BSPTree__S', bound=org.hipparchus.geometry.Space)  # <S>
 class BSPTree(typing.Generic[_BSPTree__S]):
     """
-    public class BSPTree<S extends :class:`~org.hipparchus.geometry.Space`> extends Object
+    public class BSPTree<S extends :class:`~org.hipparchus.geometry.Space`> extends :class:`~org.hipparchus.geometry.partitioning.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This class represent a Binary Space Partition tree.
     
@@ -71,7 +71,7 @@ class BSPTree(typing.Generic[_BSPTree__S]):
             Associate an attribute with the instance.
         
             Parameters:
-                attribute (Object): attribute to associate with the node
+                attribute (:class:`~org.hipparchus.geometry.partitioning.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): attribute to associate with the node
         
             Also see:
                 :meth:`~org.hipparchus.geometry.partitioning.BSPTree.getAttribute`
@@ -132,7 +132,7 @@ class BSPTreeVisitor(typing.Generic[_BSPTreeVisitor__S]):
 _BoundaryAttribute__S = typing.TypeVar('_BoundaryAttribute__S', bound=org.hipparchus.geometry.Space)  # <S>
 class BoundaryAttribute(typing.Generic[_BoundaryAttribute__S]):
     """
-    public class BoundaryAttribute<S extends :class:`~org.hipparchus.geometry.Space`> extends Object
+    public class BoundaryAttribute<S extends :class:`~org.hipparchus.geometry.Space`> extends :class:`~org.hipparchus.geometry.partitioning.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Class holding boundary attributes.
     
@@ -152,7 +152,7 @@ class BoundaryAttribute(typing.Generic[_BoundaryAttribute__S]):
 _BoundaryProjection__S = typing.TypeVar('_BoundaryProjection__S', bound=org.hipparchus.geometry.Space)  # <S>
 class BoundaryProjection(typing.Generic[_BoundaryProjection__S]):
     """
-    public class BoundaryProjection<S extends :class:`~org.hipparchus.geometry.Space`> extends Object
+    public class BoundaryProjection<S extends :class:`~org.hipparchus.geometry.Space`> extends :class:`~org.hipparchus.geometry.partitioning.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Class holding the result of point projection on region boundary.
     
@@ -250,7 +250,7 @@ class Hyperplane(typing.Generic[_Hyperplane__S]):
 _NodesSet__S = typing.TypeVar('_NodesSet__S', bound=org.hipparchus.geometry.Space)  # <S>
 class NodesSet(java.lang.Iterable[BSPTree[_NodesSet__S]], typing.Generic[_NodesSet__S]):
     """
-    public class NodesSet<S extends :class:`~org.hipparchus.geometry.Space`> extends Object implements Iterable<:class:`~org.hipparchus.geometry.partitioning.BSPTree`<S>>
+    public class NodesSet<S extends :class:`~org.hipparchus.geometry.Space`> extends :class:`~org.hipparchus.geometry.partitioning.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.partitioning.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable?is`<:class:`~org.hipparchus.geometry.partitioning.BSPTree`<S>>
     
         Set of :class:`~org.hipparchus.geometry.partitioning.BSPTree` nodes.
     
@@ -377,7 +377,7 @@ class Region(typing.Generic[_Region__S]):
 _RegionFactory__S = typing.TypeVar('_RegionFactory__S', bound=org.hipparchus.geometry.Space)  # <S>
 class RegionFactory(typing.Generic[_RegionFactory__S]):
     """
-    public class RegionFactory<S extends :class:`~org.hipparchus.geometry.Space`> extends Object
+    public class RegionFactory<S extends :class:`~org.hipparchus.geometry.Space`> extends :class:`~org.hipparchus.geometry.partitioning.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This class is a factory for :class:`~org.hipparchus.geometry.partitioning.Region`.
     """
@@ -391,7 +391,7 @@ class RegionFactory(typing.Generic[_RegionFactory__S]):
 
 class Side(java.lang.Enum['Side']):
     """
-    public enum Side extends Enum<:class:`~org.hipparchus.geometry.partitioning.Side`>
+    public enum Side extends :class:`~org.hipparchus.geometry.partitioning.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.hipparchus.geometry.partitioning.Side`>
     
         Enumerate representing the location of an element with respect to an
         :class:`~org.hipparchus.geometry.partitioning.Hyperplane` of a space.
@@ -412,14 +412,14 @@ class Side(java.lang.Enum['Side']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.hipparchus.geometry.partitioning.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.hipparchus.geometry.partitioning.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.hipparchus.geometry.partitioning.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -521,7 +521,7 @@ _AbstractRegion__S = typing.TypeVar('_AbstractRegion__S', bound=org.hipparchus.g
 _AbstractRegion__T = typing.TypeVar('_AbstractRegion__T', bound=org.hipparchus.geometry.Space)  # <T>
 class AbstractRegion(Region[_AbstractRegion__S], typing.Generic[_AbstractRegion__S, _AbstractRegion__T]):
     """
-    public abstract class AbstractRegion<S extends :class:`~org.hipparchus.geometry.Space`,T extends :class:`~org.hipparchus.geometry.Space`> extends Object implements :class:`~org.hipparchus.geometry.partitioning.Region`<S>
+    public abstract class AbstractRegion<S extends :class:`~org.hipparchus.geometry.Space`,T extends :class:`~org.hipparchus.geometry.Space`> extends :class:`~org.hipparchus.geometry.partitioning.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.partitioning.Region`<S>
     
         Abstract class for all regions, independently of geometry type or dimension.
     """
@@ -540,8 +540,8 @@ class AbstractRegion(Region[_AbstractRegion__S], typing.Generic[_AbstractRegion_
             Get the size of the boundary.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Region.getBoundarySize`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Region`
+                :meth:`~org.hipparchus.geometry.partitioning.Region.getBoundarySize` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Region`
         
             Returns:
                 the size of the boundary (this is 0 in 1D, a length in 2D, an area in 3D ...)
@@ -554,8 +554,8 @@ class AbstractRegion(Region[_AbstractRegion__S], typing.Generic[_AbstractRegion_
             Get the size of the instance.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Region.getSize`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Region`
+                :meth:`~org.hipparchus.geometry.partitioning.Region.getSize` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Region`
         
             Returns:
                 the size of the instance (this is a length in 1D, an area in 2D, a volume in 3D ...)
@@ -581,8 +581,8 @@ class AbstractRegion(Region[_AbstractRegion__S], typing.Generic[_AbstractRegion_
             Check if the instance is empty.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Region.isEmpty`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Region`
+                :meth:`~org.hipparchus.geometry.partitioning.Region.isEmpty` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Region`
         
             Returns:
                 true if the instance is empty
@@ -592,8 +592,8 @@ class AbstractRegion(Region[_AbstractRegion__S], typing.Generic[_AbstractRegion_
             Check if the sub-tree starting at a given node is empty.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Region.isEmpty`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Region`
+                :meth:`~org.hipparchus.geometry.partitioning.Region.isEmpty` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Region`
         
             Parameters:
                 node (:class:`~org.hipparchus.geometry.partitioning.BSPTree`<:class:`~org.hipparchus.geometry.partitioning.AbstractRegion`> node): root node of the sub-tree (*must* have :class:`~org.hipparchus.geometry.partitioning.Region` tree semantics, i.e. the
@@ -613,8 +613,8 @@ class AbstractRegion(Region[_AbstractRegion__S], typing.Generic[_AbstractRegion_
             Check if the instance covers the full space.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Region.isFull`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Region`
+                :meth:`~org.hipparchus.geometry.partitioning.Region.isFull` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Region`
         
             Returns:
                 true if the instance covers the full space
@@ -624,8 +624,8 @@ class AbstractRegion(Region[_AbstractRegion__S], typing.Generic[_AbstractRegion_
             Check if the sub-tree starting at a given node covers the full space.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.Region.isFull`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.Region`
+                :meth:`~org.hipparchus.geometry.partitioning.Region.isFull` in
+                interface :class:`~org.hipparchus.geometry.partitioning.Region`
         
             Parameters:
                 node (:class:`~org.hipparchus.geometry.partitioning.BSPTree`<:class:`~org.hipparchus.geometry.partitioning.AbstractRegion`> node): root node of the sub-tree (*must* have :class:`~org.hipparchus.geometry.partitioning.Region` tree semantics, i.e. the
@@ -645,7 +645,7 @@ _AbstractSubHyperplane__S = typing.TypeVar('_AbstractSubHyperplane__S', bound=or
 _AbstractSubHyperplane__T = typing.TypeVar('_AbstractSubHyperplane__T', bound=org.hipparchus.geometry.Space)  # <T>
 class AbstractSubHyperplane(SubHyperplane[_AbstractSubHyperplane__S], typing.Generic[_AbstractSubHyperplane__S, _AbstractSubHyperplane__T]):
     """
-    public abstract class AbstractSubHyperplane<S extends :class:`~org.hipparchus.geometry.Space`,T extends :class:`~org.hipparchus.geometry.Space`> extends Object implements :class:`~org.hipparchus.geometry.partitioning.SubHyperplane`<S>
+    public abstract class AbstractSubHyperplane<S extends :class:`~org.hipparchus.geometry.Space`,T extends :class:`~org.hipparchus.geometry.Space`> extends :class:`~org.hipparchus.geometry.partitioning.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.partitioning.SubHyperplane`<S>
     
         This class implements the dimension-independent parts of :class:`~org.hipparchus.geometry.partitioning.SubHyperplane`.
     
@@ -663,8 +663,8 @@ class AbstractSubHyperplane(SubHyperplane[_AbstractSubHyperplane__S], typing.Gen
             Get the size of the instance.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.SubHyperplane.getSize`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.SubHyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.SubHyperplane.getSize` in
+                interface :class:`~org.hipparchus.geometry.partitioning.SubHyperplane`
         
             Returns:
                 the size of the instance (this is a length in 1D, an area in 2D, a volume in 3D ...)
@@ -677,8 +677,8 @@ class AbstractSubHyperplane(SubHyperplane[_AbstractSubHyperplane__S], typing.Gen
             Check if the instance is empty.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.partitioning.SubHyperplane.isEmpty`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.partitioning.SubHyperplane`
+                :meth:`~org.hipparchus.geometry.partitioning.SubHyperplane.isEmpty` in
+                interface :class:`~org.hipparchus.geometry.partitioning.SubHyperplane`
         
             Returns:
                 true if the instance is empty

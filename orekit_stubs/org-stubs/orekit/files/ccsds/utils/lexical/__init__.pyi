@@ -47,7 +47,7 @@ class LexicalAnalyzer:
 
 class LexicalAnalyzerSelector:
     """
-    public class LexicalAnalyzerSelector extends Object
+    public class LexicalAnalyzerSelector extends :class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Utility class for selecting either :class:`~org.orekit.files.ccsds.utils.lexical.XmlLexicalAnalyzer` or
         :class:`~org.orekit.files.ccsds.utils.lexical.KvnLexicalAnalyzer` depending on data first bytes.
@@ -127,7 +127,7 @@ _ParseToken__EnumConsumer__T = typing.TypeVar('_ParseToken__EnumConsumer__T', bo
 _ParseToken__EnumListConsumer__T = typing.TypeVar('_ParseToken__EnumListConsumer__T', bound=java.lang.Enum)  # <T>
 class ParseToken:
     """
-    public class ParseToken extends Object
+    public class ParseToken extends :class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Token occurring during CCSDS file parsing.
     
@@ -151,7 +151,7 @@ class ParseToken:
             Generate a parse exception for this entry.
         
             Parameters:
-                cause (Exception): underlying cause exception (may be null)
+                cause (:class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Exception?is`): underlying cause exception (may be null)
         
             Returns:
                 exception for this entry
@@ -185,7 +185,7 @@ class ParseToken:
             Get the content of the entry as an enum.
         
             Parameters:
-                cls (Class<T> cls): enum class
+                cls (:class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Class?is`<T> cls): enum class
         
             Returns:
                 entry content
@@ -199,7 +199,7 @@ class ParseToken:
             Get the content of the entry as a list of enum.
         
             Parameters:
-                cls (Class<T> cls): enum class
+                cls (:class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Class?is`<T> cls): enum class
         
             Returns:
                 entry content
@@ -217,19 +217,7 @@ class ParseToken:
         
         """
         ...
-    def getContentAsNormalizedList(self) -> java.util.List[str]:
-        """
-            Get the content of the entry as a list of free-text strings.
-        
-            Free-text strings are normalized by replacing all occurrences of '_' with space, and collapsing several spaces as one
-            space only.
-        
-            Returns:
-                content of the entry as a list of free-test strings
-        
-        
-        """
-        ...
+    def getContentAsNormalizedList(self) -> java.util.List[str]: ...
     def getContentAsNormalizedString(self) -> str:
         """
             Get the content of the entry.
@@ -253,16 +241,7 @@ class ParseToken:
         
         """
         ...
-    def getContentAsUppercaseList(self) -> java.util.List[str]:
-        """
-            Get the content of the entry as a list of normalized and uppercased strings.
-        
-            Returns:
-                content of the entry as a list of normalized and uppercased strings
-        
-        
-        """
-        ...
+    def getContentAsUppercaseList(self) -> java.util.List[str]: ...
     def getContentAsUppercaseString(self) -> str:
         """
             Get the content of the entry as normalized and uppercased.
@@ -449,7 +428,7 @@ class ParseToken:
             Process the content as an enum.
         
             Parameters:
-                cls (Class<T> cls): enum class
+                cls (:class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Class?is`<T> cls): enum class
                 consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.EnumConsumer`<T> consumer): consumer of the enum
         
             Returns:
@@ -464,7 +443,7 @@ class ParseToken:
             Process the content as a list of enums.
         
             Parameters:
-                cls (Class<T> cls): enum class
+                cls (:class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Class?is`<T> cls): enum class
                 consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.EnumListConsumer`<T> consumer): consumer of the enums list
         
             Returns:
@@ -772,7 +751,7 @@ class ParseToken:
 
 class TokenType(java.lang.Enum['TokenType']):
     """
-    public enum TokenType extends Enum<:class:`~org.orekit.files.ccsds.utils.lexical.TokenType`>
+    public enum TokenType extends :class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.utils.lexical.TokenType`>
     
         Enumerate for tokens occurring during CCSDS file parsing.
     
@@ -805,14 +784,14 @@ class TokenType(java.lang.Enum['TokenType']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -825,9 +804,8 @@ class TokenType(java.lang.Enum['TokenType']):
         
             .. code-block: java
             
-            
-            for (TokenType c : TokenType.values())
-                System.out.println(c);
+            for (TokenType c : TokenType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -856,7 +834,7 @@ class XmlTokenBuilder:
 
 class KvnLexicalAnalyzer(LexicalAnalyzer):
     """
-    public class KvnLexicalAnalyzer extends Object implements :class:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer`
+    public class KvnLexicalAnalyzer extends :class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer`
     
         Lexical analyzer for Key-Value Notation CCSDS messages.
     
@@ -870,8 +848,8 @@ class KvnLexicalAnalyzer(LexicalAnalyzer):
             Parse a CCSDS Message.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer.accept`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer`
+                :meth:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer.accept` in
+                interface :class:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer`
         
             Parameters:
                 messageParser (:class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`<T> messageParser): CCSDS Message parser to use
@@ -885,7 +863,7 @@ class KvnLexicalAnalyzer(LexicalAnalyzer):
 
 class MessageVersionXmlTokenBuilder(XmlTokenBuilder):
     """
-    public class MessageVersionXmlTokenBuilder extends Object implements :class:`~org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder`
+    public class MessageVersionXmlTokenBuilder extends :class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder`
     
         Builder for the root element with CCSDS message version.
     
@@ -894,8 +872,7 @@ class MessageVersionXmlTokenBuilder(XmlTokenBuilder):
     
         .. code-block: java
         
-        
-           <opm id="CCSDS_OPM_VERS" verion="3.0">
+           <opm id="CCSDS_OPM_VERS" verion="3.0">
          
     
         This :class:`~org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder` will generate two
@@ -914,7 +891,7 @@ class MessageVersionXmlTokenBuilder(XmlTokenBuilder):
 
 class PythonLexicalAnalyzer(LexicalAnalyzer):
     """
-    public class PythonLexicalAnalyzer extends Object implements :class:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer`
+    public class PythonLexicalAnalyzer extends :class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer`
     """
     def __init__(self): ...
     _accept__T = typing.TypeVar('_accept__T')  # <T>
@@ -923,8 +900,8 @@ class PythonLexicalAnalyzer(LexicalAnalyzer):
             Parse a CCSDS Message.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer.accept`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer`
+                :meth:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer.accept` in
+                interface :class:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer`
         
             Parameters:
                 messageParser (:class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`<T> messageParser): CCSDS Message parser to use
@@ -959,7 +936,7 @@ class PythonLexicalAnalyzer(LexicalAnalyzer):
 _PythonMessageParser__T = typing.TypeVar('_PythonMessageParser__T')  # <T>
 class PythonMessageParser(MessageParser[_PythonMessageParser__T], typing.Generic[_PythonMessageParser__T]):
     """
-    public class PythonMessageParser<T> extends Object implements :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`<T>
+    public class PythonMessageParser<T> extends :class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`<T>
     """
     def __init__(self): ...
     def build(self) -> _PythonMessageParser__T:
@@ -967,8 +944,8 @@ class PythonMessageParser(MessageParser[_PythonMessageParser__T], typing.Generic
             Build the file from parsed entries.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.build`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.build` in
+                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
         
             Returns:
                 parsed file
@@ -982,8 +959,8 @@ class PythonMessageParser(MessageParser[_PythonMessageParser__T], typing.Generic
             Get the key for format version.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.getFormatVersionKey`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.getFormatVersionKey` in
+                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
         
             Returns:
                 format version key
@@ -997,8 +974,8 @@ class PythonMessageParser(MessageParser[_PythonMessageParser__T], typing.Generic
             Parse a data source.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.parseMessage`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.parseMessage` in
+                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
         
             Parameters:
                 source (:class:`~org.orekit.data.DataSource`): data source to parse
@@ -1014,8 +991,8 @@ class PythonMessageParser(MessageParser[_PythonMessageParser__T], typing.Generic
             Process a parse token.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.process`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.process` in
+                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
         
             Parameters:
                 token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
@@ -1047,8 +1024,8 @@ class PythonMessageParser(MessageParser[_PythonMessageParser__T], typing.Generic
             Reset parser to initial state before parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.reset`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.reset` in
+                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
         
             Parameters:
                 fileFormat (:class:`~org.orekit.files.ccsds.utils.FileFormat`): format of the file ready to be parsed
@@ -1059,7 +1036,7 @@ class PythonMessageParser(MessageParser[_PythonMessageParser__T], typing.Generic
 
 class PythonXmlTokenBuilder(XmlTokenBuilder):
     """
-    public class PythonXmlTokenBuilder extends Object implements :class:`~org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder`
+    public class PythonXmlTokenBuilder extends :class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder`
     """
     def __init__(self): ...
     def buildTokens(self, boolean: bool, string: str, string2: str, attributes: org.xml.sax.Attributes, int: int, string3: str) -> java.util.List[ParseToken]: ...
@@ -1086,7 +1063,7 @@ class PythonXmlTokenBuilder(XmlTokenBuilder):
 
 class RegularXmlTokenBuilder(XmlTokenBuilder):
     """
-    public class RegularXmlTokenBuilder extends Object implements :class:`~org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder`
+    public class RegularXmlTokenBuilder extends :class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder`
     
         Regular builder using XML elements names and content for tokens.
     
@@ -1102,7 +1079,7 @@ class RegularXmlTokenBuilder(XmlTokenBuilder):
 
 class UserDefinedXmlTokenBuilder(XmlTokenBuilder):
     """
-    public class UserDefinedXmlTokenBuilder extends Object implements :class:`~org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder`
+    public class UserDefinedXmlTokenBuilder extends :class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder`
     
         Builder for user-defined parameters.
     
@@ -1110,8 +1087,7 @@ class UserDefinedXmlTokenBuilder(XmlTokenBuilder):
     
         .. code-block: java
         
-        
-           <USER_DEFINED parameter="SOME_PARAMETER_NAME">value</USER_DEFINED>
+           <USER_DEFINED parameter="SOME_PARAMETER_NAME">value</USER_DEFINED>
          
     
         This :class:`~org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder` will generate a single
@@ -1126,7 +1102,7 @@ class UserDefinedXmlTokenBuilder(XmlTokenBuilder):
 
 class XmlLexicalAnalyzer(LexicalAnalyzer):
     """
-    public class XmlLexicalAnalyzer extends Object implements :class:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer`
+    public class XmlLexicalAnalyzer extends :class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer`
     
         Lexical analyzer for XML CCSDS messages.
     
@@ -1140,8 +1116,8 @@ class XmlLexicalAnalyzer(LexicalAnalyzer):
             Parse a CCSDS Message.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer.accept`Â in
-                interfaceÂ :class:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer`
+                :meth:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer.accept` in
+                interface :class:`~org.orekit.files.ccsds.utils.lexical.LexicalAnalyzer`
         
             Parameters:
                 messageParser (:class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`<T> messageParser): CCSDS Message parser to use

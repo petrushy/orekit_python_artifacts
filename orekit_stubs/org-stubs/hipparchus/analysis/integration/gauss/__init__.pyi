@@ -8,7 +8,7 @@ import typing
 _FieldGaussIntegrator__T = typing.TypeVar('_FieldGaussIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldGaussIntegrator(typing.Generic[_FieldGaussIntegrator__T]):
     """
-    public class FieldGaussIntegrator<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object
+    public class FieldGaussIntegrator<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.integration.gauss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Class that implements the Gaussian rule for
         :meth:`~org.hipparchus.analysis.integration.gauss.FieldGaussIntegrator.integrate` a weighted function.
@@ -61,7 +61,7 @@ class FieldGaussIntegrator(typing.Generic[_FieldGaussIntegrator__T]):
 _FieldGaussIntegratorFactory__T = typing.TypeVar('_FieldGaussIntegratorFactory__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldGaussIntegratorFactory(typing.Generic[_FieldGaussIntegratorFactory__T]):
     """
-    public class FieldGaussIntegratorFactory<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object
+    public class FieldGaussIntegratorFactory<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.integration.gauss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Class that provides different ways to compute the nodes and weights to be used by the
         :class:`~org.hipparchus.analysis.integration.gauss.GaussIntegrator`.
@@ -91,7 +91,7 @@ class FieldRuleFactory(typing.Generic[_FieldRuleFactory__T]):
 
 class GaussIntegrator:
     """
-    public class GaussIntegrator extends Object
+    public class GaussIntegrator extends :class:`~org.hipparchus.analysis.integration.gauss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Class that implements the Gaussian rule for :meth:`~org.hipparchus.analysis.integration.gauss.GaussIntegrator.integrate`
         a weighted function.
@@ -140,7 +140,7 @@ class GaussIntegrator:
         """
             Returns an estimate of the integral of :code:`f(x) * w(x)`, where :code:`w` is a weight function that depends on the
             actual flavor of the Gauss integration scheme. The algorithm uses the points and associated weights, as passed to the
-            null.
+            :meth:`~org.hipparchus.analysis.integration.gauss.GaussIntegrator.GaussIntegrator`.
         
             Parameters:
                 f (:class:`~org.hipparchus.analysis.UnivariateFunction`): Function to integrate.
@@ -154,7 +154,7 @@ class GaussIntegrator:
 
 class GaussIntegratorFactory:
     """
-    public class GaussIntegratorFactory extends Object
+    public class GaussIntegratorFactory extends :class:`~org.hipparchus.analysis.integration.gauss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Class that provides different ways to compute the nodes and weights to be used by the
         :class:`~org.hipparchus.analysis.integration.gauss.GaussIntegrator`.
@@ -260,7 +260,7 @@ class RuleFactory:
 
 class AbstractRuleFactory(RuleFactory):
     """
-    public abstract class AbstractRuleFactory extends Object implements :class:`~org.hipparchus.analysis.integration.gauss.RuleFactory`
+    public abstract class AbstractRuleFactory extends :class:`~org.hipparchus.analysis.integration.gauss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.integration.gauss.RuleFactory`
     
         Base class for rules that determines the integration nodes and their weights. Subclasses must implement the
         :meth:`~org.hipparchus.analysis.integration.gauss.AbstractRuleFactory.computeRule` method.
@@ -274,7 +274,7 @@ class AbstractRuleFactory(RuleFactory):
 _FieldAbstractRuleFactory__T = typing.TypeVar('_FieldAbstractRuleFactory__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAbstractRuleFactory(FieldRuleFactory[_FieldAbstractRuleFactory__T], typing.Generic[_FieldAbstractRuleFactory__T]):
     """
-    public abstract class FieldAbstractRuleFactory<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object implements :class:`~org.hipparchus.analysis.integration.gauss.FieldRuleFactory`<T>
+    public abstract class FieldAbstractRuleFactory<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.integration.gauss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.integration.gauss.FieldRuleFactory`<T>
     
         Base class for rules that determines the integration nodes and their weights. Subclasses must implement the
         :meth:`~org.hipparchus.analysis.integration.gauss.FieldAbstractRuleFactory.computeRule` method.
@@ -318,11 +318,11 @@ class SymmetricGaussIntegrator(GaussIntegrator):
         """
             Returns an estimate of the integral of :code:`f(x) * w(x)`, where :code:`w` is a weight function that depends on the
             actual flavor of the Gauss integration scheme. The algorithm uses the points and associated weights, as passed to the
-            null.
+            :meth:`~org.hipparchus.analysis.integration.gauss.GaussIntegrator.GaussIntegrator`.
         
             Overrides:
-                :meth:`~org.hipparchus.analysis.integration.gauss.GaussIntegrator.integrate`Â in
-                classÂ :class:`~org.hipparchus.analysis.integration.gauss.GaussIntegrator`
+                :meth:`~org.hipparchus.analysis.integration.gauss.GaussIntegrator.integrate` in
+                class :class:`~org.hipparchus.analysis.integration.gauss.GaussIntegrator`
         
             Parameters:
                 f (:class:`~org.hipparchus.analysis.UnivariateFunction`): Function to integrate.

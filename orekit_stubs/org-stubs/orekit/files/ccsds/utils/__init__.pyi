@@ -14,7 +14,7 @@ import typing
 
 class ContextBinding:
     """
-    public class ContextBinding extends Object
+    public class ContextBinding extends :class:`~org.orekit.files.ccsds.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Context for parsing/writing Navigation Data Message.
     
@@ -110,7 +110,7 @@ class ContextBinding:
 
 class FileFormat(java.lang.Enum['FileFormat']):
     """
-    public enum FileFormat extends Enum<:class:`~org.orekit.files.ccsds.utils.FileFormat`>
+    public enum FileFormat extends :class:`~org.orekit.files.ccsds.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.utils.FileFormat`>
     
         Enumerate for file format.
     
@@ -131,14 +131,14 @@ class FileFormat(java.lang.Enum['FileFormat']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -151,9 +151,8 @@ class FileFormat(java.lang.Enum['FileFormat']):
         
             .. code-block: java
             
-            
-            for (FileFormat c : FileFormat.values())
-                System.out.println(c);
+            for (FileFormat c : FileFormat.values())
+                System.out.println(c);
             
         
             Returns:

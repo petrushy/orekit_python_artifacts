@@ -15,13 +15,13 @@ import typing
 
 class SP3(org.orekit.files.general.EphemerisFile['SP3.SP3Coordinate', 'SP3.SP3Ephemeris']):
     """
-    public class SP3 extends Object implements :class:`~org.orekit.files.general.EphemerisFile`<:class:`~org.orekit.files.sp3.SP3.SP3Coordinate`, :class:`~org.orekit.files.sp3.SP3.SP3Ephemeris`>
+    public class SP3 extends :class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFile`<:class:`~org.orekit.files.sp3.SP3.SP3Coordinate`, :class:`~org.orekit.files.sp3.SP3.SP3Ephemeris`>
     
         Represents a parsed SP3 orbit file.
     """
     SP3_FRAME_CENTER_STRING: typing.ClassVar[str] = ...
     """
-    public static final String SP3_FRAME_CENTER_STRING
+    public static final :class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` SP3_FRAME_CENTER_STRING
     
         String representation of the center of ephemeris coordinate system.
     
@@ -36,7 +36,7 @@ class SP3(org.orekit.files.general.EphemerisFile['SP3.SP3Coordinate', 'SP3.SP3Ep
             Add a new satellite with a given identifier to the list of stored satellites.
         
             Parameters:
-                satId (String): the satellite identifier
+                satId (:class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the satellite identifier
         
         
         """
@@ -46,7 +46,7 @@ class SP3(org.orekit.files.general.EphemerisFile['SP3.SP3Coordinate', 'SP3.SP3Ep
             Adds a new P/V coordinate for a given satellite.
         
             Parameters:
-                satId (String): the satellite identifier
+                satId (:class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the satellite identifier
                 coord (:class:`~org.orekit.files.sp3.SP3.SP3Coordinate`): the P/V coordinate of the satellite
         
         
@@ -57,7 +57,7 @@ class SP3(org.orekit.files.general.EphemerisFile['SP3.SP3Coordinate', 'SP3.SP3Ep
             Tests whether a satellite with the given id is contained in this orbit file.
         
             Parameters:
-                satId (String): the satellite id
+                satId (:class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the satellite id
         
             Returns:
                 :code:`true` if the satellite is contained in the file, :code:`false` otherwise
@@ -248,7 +248,7 @@ class SP3(org.orekit.files.general.EphemerisFile['SP3.SP3Coordinate', 'SP3.SP3Ep
             Set the agency string for this SP3 file.
         
             Parameters:
-                agencyStr (String): the agency string to be set
+                agencyStr (:class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the agency string to be set
         
         
         """
@@ -258,7 +258,7 @@ class SP3(org.orekit.files.general.EphemerisFile['SP3.SP3Coordinate', 'SP3.SP3Ep
             Set the coordinate system used for the orbit entries.
         
             Parameters:
-                system (String): the coordinate system to be set
+                system (:class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the coordinate system to be set
         
         
         """
@@ -268,7 +268,7 @@ class SP3(org.orekit.files.general.EphemerisFile['SP3.SP3Coordinate', 'SP3.SP3Ep
             Set the data used indicator for this SP3 file.
         
             Parameters:
-                data (String): the data used indicator to be set
+                data (:class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the data used indicator to be set
         
         
         """
@@ -348,7 +348,7 @@ class SP3(org.orekit.files.general.EphemerisFile['SP3.SP3Coordinate', 'SP3.SP3Ep
             Set the orbit type key for this SP3 file.
         
             Parameters:
-                oTypeKey (String): the orbit type key to be set
+                oTypeKey (:class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the orbit type key to be set
         
             Since:
                 9.3
@@ -447,7 +447,7 @@ class SP3(org.orekit.files.general.EphemerisFile['SP3.SP3Coordinate', 'SP3.SP3Ep
 
 class SP3Parser(org.orekit.files.general.EphemerisFileParser[SP3]):
     """
-    public class SP3Parser extends Object implements :class:`~org.orekit.files.general.EphemerisFileParser`<:class:`~org.orekit.files.sp3.SP3`>
+    public class SP3Parser extends :class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFileParser`<:class:`~org.orekit.files.sp3.SP3`>
     
         A parser for the SP3 orbit file format. It supports all formats from sp3-a to sp3-d.
     
@@ -455,7 +455,9 @@ class SP3Parser(org.orekit.files.general.EphemerisFileParser[SP3]):
         allowed.
     
         Also see:
-            SP3-a file format, SP3-c file format, SP3-d file format
+            :class:`~org.orekit.files.sp3.ftp:.igs.org.pub.data.format.sp3_docu.txt`,
+            :class:`~org.orekit.files.sp3.ftp:.igs.org.pub.data.format.sp3c.txt`,
+            :class:`~org.orekit.files.sp3.ftp:.igs.org.pub.data.format.sp3d.pdf`
     """
     DEFAULT_CLOCK_VALUE: typing.ClassVar[float] = ...
     """
@@ -480,8 +482,8 @@ class SP3Parser(org.orekit.files.general.EphemerisFileParser[SP3]):
             Parse an ephemeris file from a data source.
         
             Specified by:
-                :meth:`~org.orekit.files.general.EphemerisFileParser.parse`Â in
-                interfaceÂ :class:`~org.orekit.files.general.EphemerisFileParser`
+                :meth:`~org.orekit.files.general.EphemerisFileParser.parse` in
+                interface :class:`~org.orekit.files.general.EphemerisFileParser`
         
             Parameters:
                 source (:class:`~org.orekit.data.DataSource`): source providing the data to parse

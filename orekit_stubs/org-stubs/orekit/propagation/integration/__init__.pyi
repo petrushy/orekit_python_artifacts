@@ -19,7 +19,7 @@ import typing
 
 class AbstractGradientConverter:
     """
-    public abstract class AbstractGradientConverter extends Object
+    public abstract class AbstractGradientConverter extends :class:`~org.orekit.propagation.integration.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Converter for states and parameters arrays.
     
@@ -36,33 +36,8 @@ class AbstractGradientConverter:
         
         """
         ...
-    def getParameters(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient], parametersDriversProvider: org.orekit.utils.ParametersDriversProvider) -> typing.List[org.hipparchus.analysis.differentiation.Gradient]:
-        """
-            Get the parametric model parameters.
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<Gradient> state): state as returned by :meth:`~org.orekit.propagation.integration.AbstractGradientConverter.getState`
-                parametricModel (:class:`~org.orekit.utils.ParametersDriversProvider`): parametric model associated with the parameters
-        
-            Returns:
-                parametric model parameters
-        
-        
-        """
-        ...
-    def getState(self, parametersDriversProvider: org.orekit.utils.ParametersDriversProvider) -> org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient]:
-        """
-            Get the state with the number of parameters consistent with parametric model.
-        
-            Parameters:
-                parametricModel (:class:`~org.orekit.utils.ParametersDriversProvider`): parametric model
-        
-            Returns:
-                state with the number of parameters consistent with parametric model
-        
-        
-        """
-        ...
+    def getParameters(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient], parametersDriversProvider: org.orekit.utils.ParametersDriversProvider) -> typing.List[org.hipparchus.analysis.differentiation.Gradient]: ...
+    def getState(self, parametersDriversProvider: org.orekit.utils.ParametersDriversProvider) -> org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient]: ...
 
 class AbstractIntegratedPropagator(org.orekit.propagation.AbstractPropagator):
     """
@@ -87,7 +62,19 @@ class AbstractIntegratedPropagator(org.orekit.propagation.AbstractPropagator):
         
         """
         ...
-    def addAdditionalEquations(self, additionalEquations: 'AdditionalEquations') -> None: ...
+    def addAdditionalEquations(self, additionalEquations: 'AdditionalEquations') -> None:
+        """
+            Deprecated.
+            as of 11.1, replaced by
+            :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.addAdditionalDerivativesProvider`
+            Add a set of user-specified equations to be integrated along with the orbit propagation.
+        
+            Parameters:
+                additional (:class:`~org.orekit.propagation.integration.AdditionalEquations`): additional equations
+        
+        
+        """
+        ...
     def addEventDetector(self, eventDetector: org.orekit.propagation.events.EventDetector) -> None:
         """
             Add an event detector.
@@ -157,10 +144,9 @@ class AbstractIntegratedPropagator(org.orekit.propagation.AbstractPropagator):
         
             .. code-block: java
             
-            
-               EphemerisGenerator generator = propagator.getEphemerisGenerator();
-               propagator.propagate(target);
-               BoundedPropagator ephemeris = generator.getGeneratedEphemeris();
+               EphemerisGenerator generator = propagator.getEphemerisGenerator();
+               propagator.propagate(target);
+               BoundedPropagator ephemeris = generator.getGeneratedEphemeris();
              
         
             Returns:
@@ -175,12 +161,12 @@ class AbstractIntegratedPropagator(org.orekit.propagation.AbstractPropagator):
             Get all the names of all managed states.
         
             Specified by:
-                :meth:`~org.orekit.propagation.Propagator.getManagedAdditionalStates`Â in
-                interfaceÂ :class:`~org.orekit.propagation.Propagator`
+                :meth:`~org.orekit.propagation.Propagator.getManagedAdditionalStates` in
+                interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.getManagedAdditionalStates`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.getManagedAdditionalStates` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Returns:
                 names of all managed states
@@ -190,10 +176,10 @@ class AbstractIntegratedPropagator(org.orekit.propagation.AbstractPropagator):
         ...
     def getMu(self) -> float:
         """
-            Get the central attraction coefficient Î¼.
+            Get the central attraction coefficient μ.
         
             Returns:
-                mu central attraction coefficient (mÂ³/sÂ²)
+                mu central attraction coefficient (m³/s²)
         
             Also see:
                 :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.setMu`
@@ -229,15 +215,15 @@ class AbstractIntegratedPropagator(org.orekit.propagation.AbstractPropagator):
             and happens to change the unmanaged additional state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.Propagator.isAdditionalStateManaged`Â in
-                interfaceÂ :class:`~org.orekit.propagation.Propagator`
+                :meth:`~org.orekit.propagation.Propagator.isAdditionalStateManaged` in
+                interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.isAdditionalStateManaged`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.isAdditionalStateManaged` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Parameters:
-                name (String): name of the additional state
+                name (:class:`~org.orekit.propagation.integration.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional state
         
             Returns:
                 true if the additional state is managed
@@ -258,8 +244,8 @@ class AbstractIntegratedPropagator(org.orekit.propagation.AbstractPropagator):
                 :meth:`~org.orekit.propagation.Propagator.propagate` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.propagate`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.propagate` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Parameters:
                 target (:class:`~org.orekit.time.AbsoluteDate`): target date towards which orbit state should be propagated
@@ -294,8 +280,8 @@ class AbstractIntegratedPropagator(org.orekit.propagation.AbstractPropagator):
                 :meth:`~org.orekit.propagation.Propagator.setAttitudeProvider` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.setAttitudeProvider`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.setAttitudeProvider` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Parameters:
                 attitudeProvider (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude provider
@@ -305,10 +291,10 @@ class AbstractIntegratedPropagator(org.orekit.propagation.AbstractPropagator):
         ...
     def setMu(self, double: float) -> None:
         """
-            Set the central attraction coefficient Î¼.
+            Set the central attraction coefficient μ.
         
             Parameters:
-                mu (double): central attraction coefficient (mÂ³/sÂ²)
+                mu (double): central attraction coefficient (m³/s²)
         
         
         """
@@ -337,7 +323,7 @@ class AbstractIntegratedPropagator(org.orekit.propagation.AbstractPropagator):
 
 class AbstractJacobiansMapper(org.orekit.propagation.MatricesHarvester):
     """
-    public abstract class AbstractJacobiansMapper extends Object implements :class:`~org.orekit.propagation.MatricesHarvester`
+    public abstract class AbstractJacobiansMapper extends :class:`~org.orekit.propagation.integration.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.MatricesHarvester`
     
         Base class for jacobian mapper.
     
@@ -358,7 +344,18 @@ class AbstractJacobiansMapper(org.orekit.propagation.MatricesHarvester):
     
     
     """
-    def analyticalDerivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> None: ...
+    def analyticalDerivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
+        """
+            Deprecated.
+            as of 11.1, not used anymore
+            Not used anymore.
+        
+            Parameters:
+                s (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
+        
+        
+        """
+        ...
     def getAdditionalStateDimension(self) -> int:
         """
             Compute the length of the one-dimensional additional state array needed.
@@ -369,28 +366,7 @@ class AbstractJacobiansMapper(org.orekit.propagation.MatricesHarvester):
         
         """
         ...
-    def getJacobiansColumnsNames(self) -> java.util.List[str]:
-        """
-            Get the names of the parameters in the matrix returned by
-            :meth:`~org.orekit.propagation.MatricesHarvester.getParametersJacobian`.
-        
-            Beware that the names of the parameters are fully known only once all force models have been set up and their parameters
-            properly selected. Applications that retrieve the matrices harvester first and select the force model parameters to
-            retrieve afterwards (but obviously before starting propagation) must take care to wait until the parameters have been
-            set up before they call this method. Calling the method too early would return wrong results.
-        
-            The names are returned in the Jacobians matrix columns order
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.MatricesHarvester.getJacobiansColumnsNames`Â in
-                interfaceÂ :class:`~org.orekit.propagation.MatricesHarvester`
-        
-            Returns:
-                names of the parameters (i.e. columns) of the Jacobian matrix
-        
-        
-        """
-        ...
+    def getJacobiansColumnsNames(self) -> java.util.List[str]: ...
     def getName(self) -> str:
         """
             Get the name of the partial Jacobians.
@@ -437,8 +413,8 @@ class AbstractJacobiansMapper(org.orekit.propagation.MatricesHarvester):
             Get the Jacobian with respect to propagation parameters.
         
             Specified by:
-                :meth:`~org.orekit.propagation.MatricesHarvester.getParametersJacobian`Â in
-                interfaceÂ :class:`~org.orekit.propagation.MatricesHarvester`
+                :meth:`~org.orekit.propagation.MatricesHarvester.getParametersJacobian` in
+                interface :class:`~org.orekit.propagation.MatricesHarvester`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -470,8 +446,8 @@ class AbstractJacobiansMapper(org.orekit.propagation.MatricesHarvester):
             Extract state transition matrix from state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.MatricesHarvester.getStateTransitionMatrix`Â in
-                interfaceÂ :class:`~org.orekit.propagation.MatricesHarvester`
+                :meth:`~org.orekit.propagation.MatricesHarvester.getStateTransitionMatrix` in
+                interface :class:`~org.orekit.propagation.MatricesHarvester`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -489,8 +465,8 @@ class AbstractJacobiansMapper(org.orekit.propagation.MatricesHarvester):
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
-                dY1dY0 (double[][]): Jacobian of current state at time tâ‚� with respect to state at some previous time tâ‚€
-                dY1dP (double[][]): Jacobian of current state at time tâ‚� with respect to parameters (may be null if there are no parameters)
+                dY1dY0 (double[][]): Jacobian of current state at time t₁ with respect to state at some previous time t₀
+                dY1dP (double[][]): Jacobian of current state at time t₁ with respect to parameters (may be null if there are no parameters)
                 p (double[]): placeholder where to put the one-dimensional additional state
         
             Also see:
@@ -510,8 +486,8 @@ class AbstractJacobiansMapper(org.orekit.propagation.MatricesHarvester):
             use it at all.
         
             Specified by:
-                :meth:`~org.orekit.propagation.MatricesHarvester.setReferenceState`Â in
-                interfaceÂ :class:`~org.orekit.propagation.MatricesHarvester`
+                :meth:`~org.orekit.propagation.MatricesHarvester.setReferenceState` in
+                interface :class:`~org.orekit.propagation.MatricesHarvester`
         
             Parameters:
                 reference (:class:`~org.orekit.propagation.SpacecraftState`): reference state to set
@@ -570,7 +546,22 @@ class AdditionalDerivativesProvider:
         
         """
         ...
-    def derivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]: ...
+    def derivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]:
+        """
+            Deprecated.
+            as of 11.2, replaced by :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.combinedDerivatives`
+            Compute the derivatives related to the additional state parameters.
+        
+            Parameters:
+                s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional states this equations depend on (according to the
+                    :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.yield` method)
+        
+            Returns:
+                computed derivatives
+        
+        
+        """
+        ...
     def getDimension(self) -> int:
         """
             Get the dimension of the generated derivative.
@@ -605,7 +596,7 @@ class AdditionalDerivativesProvider:
 
 class AdditionalEquations:
     """
-    @Deprecated public interface AdditionalEquations
+    :class:`~org.orekit.propagation.integration.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public interface AdditionalEquations
     
         Deprecated.
         as of 11.1, replaced by :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
@@ -692,7 +683,7 @@ class AdditionalEquations:
 
 class CombinedDerivatives:
     """
-    public class CombinedDerivatives extends Object
+    public class CombinedDerivatives extends :class:`~org.orekit.propagation.integration.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Container for additional derivatives.
     
@@ -728,7 +719,7 @@ _FieldAbstractIntegratedPropagator__MainStateEquations__T = typing.TypeVar('_Fie
 _FieldAbstractIntegratedPropagator__T = typing.TypeVar('_FieldAbstractIntegratedPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAbstractIntegratedPropagator(org.orekit.propagation.FieldAbstractPropagator[_FieldAbstractIntegratedPropagator__T], typing.Generic[_FieldAbstractIntegratedPropagator__T]):
     """
-    public abstract class FieldAbstractIntegratedPropagator<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.FieldAbstractPropagator`<T>
+    public abstract class FieldAbstractIntegratedPropagator<T extends :class:`~org.orekit.propagation.integration.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.FieldAbstractPropagator`<T>
     
         Common handling of :class:`~org.orekit.propagation.FieldPropagator` methods for both numerical and semi-analytical
         propagators.
@@ -779,12 +770,12 @@ class FieldAbstractIntegratedPropagator(org.orekit.propagation.FieldAbstractProp
             Get all the names of all managed states.
         
             Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.getManagedAdditionalStates`Â in
-                interfaceÂ :class:`~org.orekit.propagation.FieldPropagator`
+                :meth:`~org.orekit.propagation.FieldPropagator.getManagedAdditionalStates` in
+                interface :class:`~org.orekit.propagation.FieldPropagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.FieldAbstractPropagator.getManagedAdditionalStates`Â in
-                classÂ :class:`~org.orekit.propagation.FieldAbstractPropagator`
+                :meth:`~org.orekit.propagation.FieldAbstractPropagator.getManagedAdditionalStates` in
+                class :class:`~org.orekit.propagation.FieldAbstractPropagator`
         
             Returns:
                 names of all managed states
@@ -794,13 +785,26 @@ class FieldAbstractIntegratedPropagator(org.orekit.propagation.FieldAbstractProp
         ...
     def getMu(self) -> _FieldAbstractIntegratedPropagator__T:
         """
-            Get the central attraction coefficient Î¼.
+            Get the central attraction coefficient μ.
         
             Returns:
-                mu central attraction coefficient (mÂ³/sÂ²)
+                mu central attraction coefficient (m³/s²)
         
             Also see:
                 :meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.setMu`
+        
+        
+        """
+        ...
+    def getPropagationType(self) -> org.orekit.propagation.PropagationType:
+        """
+            Get the propagation type.
+        
+            Returns:
+                propagation type.
+        
+            Since:
+                11.3.2
         
         
         """
@@ -824,15 +828,15 @@ class FieldAbstractIntegratedPropagator(org.orekit.propagation.FieldAbstractProp
             occurrence and happens to change the unmanaged additional state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.isAdditionalStateManaged`Â in
-                interfaceÂ :class:`~org.orekit.propagation.FieldPropagator`
+                :meth:`~org.orekit.propagation.FieldPropagator.isAdditionalStateManaged` in
+                interface :class:`~org.orekit.propagation.FieldPropagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.FieldAbstractPropagator.isAdditionalStateManaged`Â in
-                classÂ :class:`~org.orekit.propagation.FieldAbstractPropagator`
+                :meth:`~org.orekit.propagation.FieldAbstractPropagator.isAdditionalStateManaged` in
+                class :class:`~org.orekit.propagation.FieldAbstractPropagator`
         
             Parameters:
-                name (String): name of the additional state
+                name (:class:`~org.orekit.propagation.integration.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional state
         
             Returns:
                 true if the additional state is managed
@@ -849,12 +853,12 @@ class FieldAbstractIntegratedPropagator(org.orekit.propagation.FieldAbstractProp
             Set attitude provider.
         
             Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.setAttitudeProvider`Â in
-                interfaceÂ :class:`~org.orekit.propagation.FieldPropagator`
+                :meth:`~org.orekit.propagation.FieldPropagator.setAttitudeProvider` in
+                interface :class:`~org.orekit.propagation.FieldPropagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.FieldAbstractPropagator.setAttitudeProvider`Â in
-                classÂ :class:`~org.orekit.propagation.FieldAbstractPropagator`
+                :meth:`~org.orekit.propagation.FieldAbstractPropagator.setAttitudeProvider` in
+                class :class:`~org.orekit.propagation.FieldAbstractPropagator`
         
             Parameters:
                 attitudeProvider (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude provider
@@ -864,10 +868,10 @@ class FieldAbstractIntegratedPropagator(org.orekit.propagation.FieldAbstractProp
         ...
     def setMu(self, t: _FieldAbstractIntegratedPropagator__T) -> None:
         """
-            Set the central attraction coefficient Î¼.
+            Set the central attraction coefficient μ.
         
             Parameters:
-                mu (:class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`): central attraction coefficient (mÂ³/sÂ²)
+                mu (:class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`): central attraction coefficient (m³/s²)
         
         
         """
@@ -897,7 +901,7 @@ class FieldAbstractIntegratedPropagator(org.orekit.propagation.FieldAbstractProp
 _FieldAdditionalDerivativesProvider__T = typing.TypeVar('_FieldAdditionalDerivativesProvider__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAdditionalDerivativesProvider(typing.Generic[_FieldAdditionalDerivativesProvider__T]):
     """
-    public interface FieldAdditionalDerivativesProvider<T extends CalculusFieldElement<T>>
+    public interface FieldAdditionalDerivativesProvider<T extends :class:`~org.orekit.propagation.integration.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>>
     
         Provider for additional derivatives.
     
@@ -952,7 +956,7 @@ class FieldAdditionalDerivativesProvider(typing.Generic[_FieldAdditionalDerivati
 _FieldAdditionalEquations__T = typing.TypeVar('_FieldAdditionalEquations__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAdditionalEquations(typing.Generic[_FieldAdditionalEquations__T]):
     """
-    @Deprecated public interface FieldAdditionalEquations<T extends CalculusFieldElement<T>>
+    :class:`~org.orekit.propagation.integration.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public interface FieldAdditionalEquations<T extends :class:`~org.orekit.propagation.integration.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>>
     
         Deprecated.
         as of 11.1, replaced by :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider`
@@ -1004,7 +1008,7 @@ class FieldAdditionalEquations(typing.Generic[_FieldAdditionalEquations__T]):
 _FieldCombinedDerivatives__T = typing.TypeVar('_FieldCombinedDerivatives__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldCombinedDerivatives(typing.Generic[_FieldCombinedDerivatives__T]):
     """
-    public class FieldCombinedDerivatives<T extends CalculusFieldElement<T>> extends Object
+    public class FieldCombinedDerivatives<T extends :class:`~org.orekit.propagation.integration.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.integration.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Container for additional derivatives.
     
@@ -1039,7 +1043,7 @@ class FieldCombinedDerivatives(typing.Generic[_FieldCombinedDerivatives__T]):
 _FieldIntegratedEphemeris__T = typing.TypeVar('_FieldIntegratedEphemeris__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldIntegratedEphemeris(org.orekit.propagation.analytical.FieldAbstractAnalyticalPropagator[_FieldIntegratedEphemeris__T], org.orekit.propagation.FieldBoundedPropagator[_FieldIntegratedEphemeris__T], typing.Generic[_FieldIntegratedEphemeris__T]):
     """
-    public class FieldIntegratedEphemeris<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.analytical.FieldAbstractAnalyticalPropagator`<T> implements :class:`~org.orekit.propagation.FieldBoundedPropagator`<T>
+    public class FieldIntegratedEphemeris<T extends :class:`~org.orekit.propagation.integration.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.FieldAbstractAnalyticalPropagator`<T> implements :class:`~org.orekit.propagation.FieldBoundedPropagator`<T>
     
         This class stores sequentially generated orbital parameters for later retrieval.
     
@@ -1077,8 +1081,8 @@ class FieldIntegratedEphemeris(org.orekit.propagation.analytical.FieldAbstractAn
                 :meth:`~org.orekit.propagation.FieldPropagator.getFrame` in interface :class:`~org.orekit.propagation.FieldPropagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.FieldAbstractPropagator.getFrame`Â in
-                classÂ :class:`~org.orekit.propagation.FieldAbstractPropagator`
+                :meth:`~org.orekit.propagation.FieldAbstractPropagator.getFrame` in
+                class :class:`~org.orekit.propagation.FieldAbstractPropagator`
         
             Returns:
                 frame in which the orbit is propagated
@@ -1098,7 +1102,7 @@ class FieldIntegratedEphemeris(org.orekit.propagation.analytical.FieldAbstractAn
 _FieldStateMapper__T = typing.TypeVar('_FieldStateMapper__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldStateMapper(typing.Generic[_FieldStateMapper__T]):
     """
-    public abstract class FieldStateMapper<T extends CalculusFieldElement<T>> extends Object
+    public abstract class FieldStateMapper<T extends :class:`~org.orekit.propagation.integration.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.integration.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This class maps between raw double elements and :class:`~org.orekit.propagation.FieldSpacecraftState` instances.
     """
@@ -1124,10 +1128,10 @@ class FieldStateMapper(typing.Generic[_FieldStateMapper__T]):
         ...
     def getMu(self) -> _FieldStateMapper__T:
         """
-            Get the central attraction coefficient Î¼.
+            Get the central attraction coefficient μ.
         
             Returns:
-                mu central attraction coefficient (mÂ³/sÂ²)
+                mu central attraction coefficient (m³/s²)
         
         
         """
@@ -1210,8 +1214,8 @@ class IntegratedEphemeris(org.orekit.propagation.analytical.AbstractAnalyticalPr
                 :meth:`~org.orekit.propagation.Propagator.getFrame` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.getFrame`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.getFrame` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Returns:
                 frame in which the orbit is propagated
@@ -1230,8 +1234,8 @@ class IntegratedEphemeris(org.orekit.propagation.analytical.AbstractAnalyticalPr
                 :meth:`~org.orekit.propagation.Propagator.getInitialState` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.getInitialState`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.getInitialState` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Returns:
                 initial state
@@ -1244,8 +1248,8 @@ class IntegratedEphemeris(org.orekit.propagation.analytical.AbstractAnalyticalPr
             Get the last date of the range.
         
             Specified by:
-                :meth:`~org.orekit.propagation.BoundedPropagator.getMaxDate`Â in
-                interfaceÂ :class:`~org.orekit.propagation.BoundedPropagator`
+                :meth:`~org.orekit.propagation.BoundedPropagator.getMaxDate` in
+                interface :class:`~org.orekit.propagation.BoundedPropagator`
         
             Returns:
                 the last date of the range
@@ -1258,8 +1262,8 @@ class IntegratedEphemeris(org.orekit.propagation.analytical.AbstractAnalyticalPr
             Get the first date of the range.
         
             Specified by:
-                :meth:`~org.orekit.propagation.BoundedPropagator.getMinDate`Â in
-                interfaceÂ :class:`~org.orekit.propagation.BoundedPropagator`
+                :meth:`~org.orekit.propagation.BoundedPropagator.getMinDate` in
+                interface :class:`~org.orekit.propagation.BoundedPropagator`
         
             Returns:
                 the first date of the range
@@ -1272,12 +1276,12 @@ class IntegratedEphemeris(org.orekit.propagation.analytical.AbstractAnalyticalPr
             Get the :class:`~org.orekit.utils.PVCoordinates` of the body in the selected frame.
         
             Specified by:
-                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates`Â in
-                interfaceÂ :class:`~org.orekit.utils.PVCoordinatesProvider`
+                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates` in
+                interface :class:`~org.orekit.utils.PVCoordinatesProvider`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.getPVCoordinates`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.getPVCoordinates` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
@@ -1297,8 +1301,8 @@ class IntegratedEphemeris(org.orekit.propagation.analytical.AbstractAnalyticalPr
                 :meth:`~org.orekit.propagation.Propagator.resetInitialState` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): new initial state to consider
@@ -1314,8 +1318,8 @@ class IntegratedEphemeris(org.orekit.propagation.analytical.AbstractAnalyticalPr
                 :meth:`~org.orekit.propagation.Propagator.setAttitudeProvider` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.setAttitudeProvider`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.setAttitudeProvider` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Parameters:
                 attitudeProvider (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude provider
@@ -1326,7 +1330,7 @@ class IntegratedEphemeris(org.orekit.propagation.analytical.AbstractAnalyticalPr
 
 class StateMapper:
     """
-    public abstract class StateMapper extends Object
+    public abstract class StateMapper extends :class:`~org.orekit.propagation.integration.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This class maps between raw double elements and :class:`~org.orekit.propagation.SpacecraftState` instances.
     
@@ -1355,10 +1359,10 @@ class StateMapper:
         ...
     def getMu(self) -> float:
         """
-            Get the central attraction coefficient Î¼.
+            Get the central attraction coefficient μ.
         
             Returns:
-                mu central attraction coefficient (mÂ³/sÂ²)
+                mu central attraction coefficient (m³/s²)
         
         
         """
@@ -1487,7 +1491,7 @@ class StateMapper:
 
 class AdditionalEquationsAdapter(AdditionalDerivativesProvider):
     """
-    @Deprecated public class AdditionalEquationsAdapter extends Object implements :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+    :class:`~org.orekit.propagation.integration.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class AdditionalEquationsAdapter extends :class:`~org.orekit.propagation.integration.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
     
         Deprecated.
         must be removed in 12.0 when :class:`~org.orekit.propagation.integration.AdditionalEquations` is removed
@@ -1508,8 +1512,8 @@ class AdditionalEquationsAdapter(AdditionalDerivativesProvider):
             backward compatibility only and will be removed in 12.0.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.combinedDerivatives`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.combinedDerivatives` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional states this equations depend on (according to the
@@ -1521,15 +1525,33 @@ class AdditionalEquationsAdapter(AdditionalDerivativesProvider):
         
         """
         ...
-    def derivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]: ...
+    def derivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]:
+        """
+            Deprecated.
+            Compute the derivatives related to the additional state parameters.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.derivatives` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional states this equations depend on (according to the
+                    :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.yield` method)
+        
+            Returns:
+                computed derivatives
+        
+        
+        """
+        ...
     def getDimension(self) -> int:
         """
             Deprecated.
             Get the dimension of the generated derivative.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getDimension`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getDimension` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
             Returns:
                 dimension of the generated
@@ -1543,8 +1565,8 @@ class AdditionalEquationsAdapter(AdditionalDerivativesProvider):
             Get the name of the additional derivatives (which will become state once integrated).
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getName`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getName` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
             Returns:
                 name of the additional state (names containing "orekit" with any case are reserved for the library internal use)
@@ -1558,8 +1580,8 @@ class AdditionalEquationsAdapter(AdditionalDerivativesProvider):
             Initialize the generator at the start of propagation.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.init` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
             Parameters:
                 initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial state information at the start of propagation
@@ -1572,7 +1594,7 @@ class AdditionalEquationsAdapter(AdditionalDerivativesProvider):
 _FieldAdditionalEquationsAdapter__T = typing.TypeVar('_FieldAdditionalEquationsAdapter__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAdditionalEquationsAdapter(FieldAdditionalDerivativesProvider[_FieldAdditionalEquationsAdapter__T], typing.Generic[_FieldAdditionalEquationsAdapter__T]):
     """
-    @Deprecated public class FieldAdditionalEquationsAdapter<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider`<T>
+    :class:`~org.orekit.propagation.integration.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class FieldAdditionalEquationsAdapter<T extends :class:`~org.orekit.propagation.integration.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.integration.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider`<T>
     
         Deprecated.
         must be removed in 12.0 when :class:`~org.orekit.propagation.integration.AdditionalEquations` is removed
@@ -1591,8 +1613,8 @@ class FieldAdditionalEquationsAdapter(FieldAdditionalDerivativesProvider[_FieldA
             Get the dimension of the generated derivative.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider.getDimension`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider.getDimension` in
+                interface :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider`
         
             Returns:
                 dimension of the generated
@@ -1606,8 +1628,8 @@ class FieldAdditionalEquationsAdapter(FieldAdditionalDerivativesProvider[_FieldA
             Get the name of the additional derivatives (which will become state once integrated).
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider.getName`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider.getName` in
+                interface :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider`
         
             Returns:
                 name of the additional state (names containing "orekit" with any case are reserved for the library internal use)
@@ -1628,37 +1650,41 @@ class PythonAbstractGradientConverter(AbstractGradientConverter):
             Add zero derivatives.
         
             Overrides:
-                :meth:`~org.orekit.propagation.integration.AbstractGradientConverter.extend`Â in
-                classÂ :class:`~org.orekit.propagation.integration.AbstractGradientConverter`
+                :meth:`~org.orekit.propagation.integration.AbstractGradientConverter.extend` in
+                class :class:`~org.orekit.propagation.integration.AbstractGradientConverter`
         
             Parameters:
-                original (Gradient): original scalar
+                original (:class:`~org.orekit.propagation.integration.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.differentiation.Gradient?is`): original scalar
                 freeParameters (int): total number of free parameters in the gradient
         
             Returns:
                 extended scalar
         
+        public :class:`~org.orekit.propagation.integration.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<:class:`~org.orekit.propagation.integration.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.differentiation.Gradient?is`> extend (:class:`~org.orekit.propagation.integration.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<:class:`~org.orekit.propagation.integration.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.differentiation.Gradient?is`> original, int freeParameters)
+        
             Add zero derivatives.
         
             Overrides:
-                :meth:`~org.orekit.propagation.integration.AbstractGradientConverter.extend`Â in
-                classÂ :class:`~org.orekit.propagation.integration.AbstractGradientConverter`
+                :meth:`~org.orekit.propagation.integration.AbstractGradientConverter.extend` in
+                class :class:`~org.orekit.propagation.integration.AbstractGradientConverter`
         
             Parameters:
-                original (FieldVector3D<Gradient> original): original vector
+                original (:class:`~org.orekit.propagation.integration.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<:class:`~org.orekit.propagation.integration.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.differentiation.Gradient?is`> original): original vector
                 freeParameters (int): total number of free parameters in the gradient
         
             Returns:
                 extended vector
         
+        public :class:`~org.orekit.propagation.integration.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldRotation?is`<:class:`~org.orekit.propagation.integration.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.differentiation.Gradient?is`> extend (:class:`~org.orekit.propagation.integration.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldRotation?is`<:class:`~org.orekit.propagation.integration.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.differentiation.Gradient?is`> original, int freeParameters)
+        
             Add zero derivatives.
         
             Overrides:
-                :meth:`~org.orekit.propagation.integration.AbstractGradientConverter.extend`Â in
-                classÂ :class:`~org.orekit.propagation.integration.AbstractGradientConverter`
+                :meth:`~org.orekit.propagation.integration.AbstractGradientConverter.extend` in
+                class :class:`~org.orekit.propagation.integration.AbstractGradientConverter`
         
             Parameters:
-                original (FieldRotation<Gradient> original): original rotation
+                original (:class:`~org.orekit.propagation.integration.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldRotation?is`<:class:`~org.orekit.propagation.integration.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.differentiation.Gradient?is`> original): original rotation
                 freeParameters (int): total number of free parameters in the gradient
         
             Returns:
@@ -1671,28 +1697,15 @@ class PythonAbstractGradientConverter(AbstractGradientConverter):
     def extend(self, fieldRotation: org.hipparchus.geometry.euclidean.threed.FieldRotation[org.hipparchus.analysis.differentiation.Gradient], int: int) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[org.hipparchus.analysis.differentiation.Gradient]: ...
     @typing.overload
     def extend(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.Gradient], int: int) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.Gradient]: ...
-    def extend_FRi(self, fieldRotation: org.hipparchus.geometry.euclidean.threed.FieldRotation[org.hipparchus.analysis.differentiation.Gradient], int: int) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[org.hipparchus.analysis.differentiation.Gradient]:
-        """
-            Add zero derivatives.
-        
-            Parameters:
-                original (FieldRotation<Gradient> original): original rotation
-                freeParameters (int): total number of free parameters in the gradient
-        
-            Returns:
-                extended rotation
-        
-        
-        """
-        ...
+    def extend_FRi(self, fieldRotation: org.hipparchus.geometry.euclidean.threed.FieldRotation[org.hipparchus.analysis.differentiation.Gradient], int: int) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[org.hipparchus.analysis.differentiation.Gradient]: ...
     def extend_FVi(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.Gradient], int: int) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.Gradient]: ...
     def getFreeStateParameters(self) -> int:
         """
             Get the number of free state parameters.
         
             Overrides:
-                :meth:`~org.orekit.propagation.integration.AbstractGradientConverter.getFreeStateParameters`Â in
-                classÂ :class:`~org.orekit.propagation.integration.AbstractGradientConverter`
+                :meth:`~org.orekit.propagation.integration.AbstractGradientConverter.getFreeStateParameters` in
+                class :class:`~org.orekit.propagation.integration.AbstractGradientConverter`
         
             Returns:
                 number of free state parameters
@@ -1708,19 +1721,19 @@ class PythonAbstractIntegratedPropagator(AbstractIntegratedPropagator):
     def __init__(self, oDEIntegrator: org.hipparchus.ode.ODEIntegrator, propagationType: org.orekit.propagation.PropagationType): ...
     def createMapper(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, orbitType: org.orekit.orbits.OrbitType, positionAngle: org.orekit.orbits.PositionAngle, attitudeProvider: org.orekit.attitudes.AttitudeProvider, frame: org.orekit.frames.Frame) -> StateMapper:
         """
-            Create a mapper between raw double components and spacecraft state. /** Simple constructor. Extension point for Python.
+            Create a mapper between raw double components and spacecraft state. /** Simple constructor.
         
             The position parameter type is meaningful only if
             :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.getOrbitType` support it. As an example, it is
             not meaningful for propagation in :meth:`~org.orekit.orbits.OrbitType.CARTESIAN` parameters.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.createMapper`Â in
-                classÂ :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`
+                :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.createMapper` in
+                class :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`
         
             Parameters:
                 referenceDate (:class:`~org.orekit.time.AbsoluteDate`): reference date
-                mu (double): central attraction coefficient (mÂ³/sÂ²)
+                mu (double): central attraction coefficient (m³/s²)
                 orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use for mapping
                 positionAngleType (:class:`~org.orekit.orbits.PositionAngle`): angle type to use for propagation
                 attitudeProvider (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude provider
@@ -1735,14 +1748,14 @@ class PythonAbstractIntegratedPropagator(AbstractIntegratedPropagator):
     def finalize(self) -> None: ...
     def getMainStateEquations(self, oDEIntegrator: org.hipparchus.ode.ODEIntegrator) -> AbstractIntegratedPropagator.MainStateEquations:
         """
-            Get the differential equations to integrate (for main state only). Extension point for Python.
+            Get the differential equations to integrate (for main state only).
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.getMainStateEquations`Â in
-                classÂ :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`
+                :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.getMainStateEquations` in
+                class :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`
         
             Parameters:
-                integ (ODEIntegrator): numerical integrator to use for propagation.
+                integ (:class:`~org.orekit.propagation.integration.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.ODEIntegrator?is`): numerical integrator to use for propagation.
         
             Returns:
                 differential equations for main state
@@ -1770,9 +1783,154 @@ class PythonAbstractIntegratedPropagator(AbstractIntegratedPropagator):
         """
         ...
 
+class PythonAdditionalDerivativesProvider(AdditionalDerivativesProvider):
+    """
+    public class PythonAdditionalDerivativesProvider extends :class:`~org.orekit.propagation.integration.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+    """
+    def __init__(self): ...
+    def combinedDerivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> CombinedDerivatives:
+        """
+            Compute the derivatives related to the additional state (and optionally main state increments).
+        
+            As of 11.2, there is a default implementation that calls the deprecated
+            :meth:`~org.orekit.propagation.integration.PythonAdditionalDerivativesProvider.derivatives` method. This has been done
+            for backward compatibility only and will be removed in 12.0.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.combinedDerivatives` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+        
+            Parameters:
+                s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional states this equations depend on (according to the
+                    :meth:`~org.orekit.propagation.integration.PythonAdditionalDerivativesProvider.yield` method)
+        
+            Returns:
+                computed combined derivatives, which may include some incremental coupling effect to add to main state derivatives
+        
+            Since:
+                11.2
+        
+        
+        """
+        ...
+    def derivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]:
+        """
+            Deprecated.
+            as of 11.2, replaced by
+            :meth:`~org.orekit.propagation.integration.PythonAdditionalDerivativesProvider.combinedDerivatives`
+            Compute the derivatives related to the additional state parameters.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.derivatives` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+        
+            Parameters:
+                s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional states this equations depend on (according to the
+                    :meth:`~org.orekit.propagation.integration.PythonAdditionalDerivativesProvider.yield` method)
+        
+            Returns:
+                computed derivatives
+        
+        
+        """
+        ...
+    def finalize(self) -> None: ...
+    def getDimension(self) -> int:
+        """
+            Get the dimension of the generated derivative.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getDimension` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+        
+            Returns:
+                dimension of the generated
+        
+        
+        """
+        ...
+    def getName(self) -> str:
+        """
+            Get the name of the additional derivatives (which will become state once integrated).
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getName` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+        
+            Returns:
+                name of the additional state (names containing "orekit" with any case are reserved for the library internal use)
+        
+        
+        """
+        ...
+    def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+        """
+            Initialize the generator at the start of propagation.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.init` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+        
+            Parameters:
+                initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial state information at the start of propagation
+                target (:class:`~org.orekit.time.AbsoluteDate`): date of propagation
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+    def yield_(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> bool:
+        """
+            Check if this provider should yield so another provider has an opportunity to add missing parts.
+        
+            Decision to yield is often based on an additional state being
+            :meth:`~org.orekit.propagation.SpacecraftState.hasAdditionalState` in the provided :code:`state` (but it could
+            theoretically also depend on an additional state derivative being
+            :meth:`~org.orekit.propagation.SpacecraftState.hasAdditionalStateDerivative`, or any other criterion). If for example a
+            provider needs the state transition matrix, it could implement this method as:
+        
+            .. code-block: java
+            
+             public boolean yield(final SpacecraftState state) {
+                 return !state.getAdditionalStates().containsKey("STM");
+             }
+             
+        
+            The default implementation returns :code:`false`, meaning that derivative data can be
+            :meth:`~org.orekit.propagation.integration.PythonAdditionalDerivativesProvider.combinedDerivatives` immediately.
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): state to handle
+        
+            Returns:
+                true if this provider should yield so another provider has an opportunity to add missing parts as the state is
+                incrementally built up
+        
+        
+        """
+        ...
+
 class PythonAdditionalEquations(AdditionalEquations):
     """
-    public class PythonAdditionalEquations extends Object implements :class:`~org.orekit.propagation.integration.AdditionalEquations`
+    public class PythonAdditionalEquations extends :class:`~org.orekit.propagation.integration.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.integration.AdditionalEquations`
     
         This interface allows users to add their own differential equations to a numerical propagator.
     
@@ -1815,8 +1973,8 @@ class PythonAdditionalEquations(AdditionalEquations):
             during the same propagation.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalEquations.computeDerivatives`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalEquations`
+                :meth:`~org.orekit.propagation.integration.AdditionalEquations.computeDerivatives` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional state
@@ -1834,8 +1992,8 @@ class PythonAdditionalEquations(AdditionalEquations):
             Get the name of the additional state. Extension point for Python.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalEquations.getName`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalEquations`
+                :meth:`~org.orekit.propagation.integration.AdditionalEquations.getName` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
         
             Returns:
                 name of the additional state
@@ -1853,8 +2011,8 @@ class PythonAdditionalEquations(AdditionalEquations):
             The default implementation of this method does nothing.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalEquations.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalEquations`
+                :meth:`~org.orekit.propagation.integration.AdditionalEquations.init` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
         
             Parameters:
                 initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial state information at the start of propagation.
@@ -1886,7 +2044,7 @@ class PythonAdditionalEquations(AdditionalEquations):
 _PythonFieldAbstractIntegratedPropagator__T = typing.TypeVar('_PythonFieldAbstractIntegratedPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldAbstractIntegratedPropagator(FieldAbstractIntegratedPropagator[_PythonFieldAbstractIntegratedPropagator__T], typing.Generic[_PythonFieldAbstractIntegratedPropagator__T]):
     """
-    public class PythonFieldAbstractIntegratedPropagator<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`<T>
+    public class PythonFieldAbstractIntegratedPropagator<T extends :class:`~org.orekit.propagation.integration.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`<T>
     """
     def __init__(self, field: org.hipparchus.Field[_PythonFieldAbstractIntegratedPropagator__T], fieldODEIntegrator: org.hipparchus.ode.FieldODEIntegrator[_PythonFieldAbstractIntegratedPropagator__T], propagationType: org.orekit.propagation.PropagationType): ...
     def createMapper(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldAbstractIntegratedPropagator__T], t: _PythonFieldAbstractIntegratedPropagator__T, orbitType: org.orekit.orbits.OrbitType, positionAngle: org.orekit.orbits.PositionAngle, attitudeProvider: org.orekit.attitudes.AttitudeProvider, frame: org.orekit.frames.Frame) -> FieldStateMapper[_PythonFieldAbstractIntegratedPropagator__T]: ...
@@ -1915,9 +2073,10 @@ class PythonFieldAbstractIntegratedPropagator(FieldAbstractIntegratedPropagator[
 _PythonFieldAdditionalDerivativesProvider__T = typing.TypeVar('_PythonFieldAdditionalDerivativesProvider__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldAdditionalDerivativesProvider(FieldAdditionalDerivativesProvider[_PythonFieldAdditionalDerivativesProvider__T], typing.Generic[_PythonFieldAdditionalDerivativesProvider__T]):
     """
-    public class PythonFieldAdditionalDerivativesProvider<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider`<T>
+    public class PythonFieldAdditionalDerivativesProvider<T extends :class:`~org.orekit.propagation.integration.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.integration.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider`<T>
     """
     def __init__(self): ...
+    def combinedDerivatives(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldAdditionalDerivativesProvider__T]) -> FieldCombinedDerivatives[_PythonFieldAdditionalDerivativesProvider__T]: ...
     def derivatives(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldAdditionalDerivativesProvider__T]) -> typing.List[_PythonFieldAdditionalDerivativesProvider__T]: ...
     def finalize(self) -> None: ...
     def getDimension(self) -> int:
@@ -1925,8 +2084,8 @@ class PythonFieldAdditionalDerivativesProvider(FieldAdditionalDerivativesProvide
             Get the dimension of the generated derivative.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider.getDimension`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider.getDimension` in
+                interface :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider`
         
             Returns:
                 dimension of the generated
@@ -1939,8 +2098,8 @@ class PythonFieldAdditionalDerivativesProvider(FieldAdditionalDerivativesProvide
             Get the name of the additional derivatives (which will become state once integrated).
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider.getName`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider.getName` in
+                interface :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider`
         
             Returns:
                 name of the additional state (names containing "orekit" with any case are reserved for the library internal use)
@@ -1968,11 +2127,12 @@ class PythonFieldAdditionalDerivativesProvider(FieldAdditionalDerivativesProvide
             Part of JCC Python interface to object
         """
         ...
+    def yield_(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldAdditionalDerivativesProvider__T]) -> bool: ...
 
 _PythonFieldAdditionalEquations__T = typing.TypeVar('_PythonFieldAdditionalEquations__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldAdditionalEquations(FieldAdditionalEquations[_PythonFieldAdditionalEquations__T], typing.Generic[_PythonFieldAdditionalEquations__T]):
     """
-    public class PythonFieldAdditionalEquations<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.orekit.propagation.integration.FieldAdditionalEquations`<T>
+    public class PythonFieldAdditionalEquations<T extends :class:`~org.orekit.propagation.integration.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.integration.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.integration.FieldAdditionalEquations`<T>
     
         This interface allows users to add their own differential equations to a numerical propagator.
     
@@ -2013,8 +2173,8 @@ class PythonFieldAdditionalEquations(FieldAdditionalEquations[_PythonFieldAdditi
             Get the name of the additional state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.FieldAdditionalEquations.getName`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.FieldAdditionalEquations`
+                :meth:`~org.orekit.propagation.integration.FieldAdditionalEquations.getName` in
+                interface :class:`~org.orekit.propagation.integration.FieldAdditionalEquations`
         
             Returns:
                 name of the additional state
@@ -2023,6 +2183,103 @@ class PythonFieldAdditionalEquations(FieldAdditionalEquations[_PythonFieldAdditi
         """
         ...
     def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldAdditionalEquations__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldAdditionalEquations__T]) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
+_PythonFieldStateMapper__T = typing.TypeVar('_PythonFieldStateMapper__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class PythonFieldStateMapper(FieldStateMapper[_PythonFieldStateMapper__T], typing.Generic[_PythonFieldStateMapper__T]):
+    """
+    public class PythonFieldStateMapper<T extends :class:`~org.orekit.propagation.integration.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.integration.FieldStateMapper`<T>
+    """
+    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldStateMapper__T], t: _PythonFieldStateMapper__T, orbitType: org.orekit.orbits.OrbitType, positionAngle: org.orekit.orbits.PositionAngle, attitudeProvider: org.orekit.attitudes.AttitudeProvider, frame: org.orekit.frames.Frame): ...
+    def finalize(self) -> None: ...
+    @typing.overload
+    def mapArrayToState(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldStateMapper__T], tArray: typing.List[_PythonFieldStateMapper__T], tArray2: typing.List[_PythonFieldStateMapper__T], propagationType: org.orekit.propagation.PropagationType) -> org.orekit.propagation.FieldSpacecraftState[_PythonFieldStateMapper__T]: ...
+    @typing.overload
+    def mapArrayToState(self, t: _PythonFieldStateMapper__T, tArray: typing.List[_PythonFieldStateMapper__T], tArray2: typing.List[_PythonFieldStateMapper__T], propagationType: org.orekit.propagation.PropagationType) -> org.orekit.propagation.FieldSpacecraftState[_PythonFieldStateMapper__T]: ...
+    def mapStateToArray(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldStateMapper__T], tArray: typing.List[_PythonFieldStateMapper__T], tArray2: typing.List[_PythonFieldStateMapper__T]) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
+class PythonStateMapper(StateMapper):
+    """
+    public class PythonStateMapper extends :class:`~org.orekit.propagation.integration.StateMapper`
+    """
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, orbitType: org.orekit.orbits.OrbitType, positionAngle: org.orekit.orbits.PositionAngle, attitudeProvider: org.orekit.attitudes.AttitudeProvider, frame: org.orekit.frames.Frame): ...
+    def finalize(self) -> None: ...
+    @typing.overload
+    def mapArrayToState(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], doubleArray2: typing.List[float], propagationType: org.orekit.propagation.PropagationType) -> org.orekit.propagation.SpacecraftState:
+        """
+            Map the raw double components to a spacecraft state.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.integration.StateMapper.mapArrayToState` in
+                class :class:`~org.orekit.propagation.integration.StateMapper`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): of the state components
+                y (double[]): state components
+                yDot (double[]): time derivatives of the state components (null if unknown, in which case Keplerian motion is assumed)
+                type (:class:`~org.orekit.propagation.PropagationType`): type of the elements used to build the state (mean or osculating).
+        
+            Returns:
+                spacecraft state
+        
+        
+        """
+        ...
+    @typing.overload
+    def mapArrayToState(self, double: float, doubleArray: typing.List[float], doubleArray2: typing.List[float], propagationType: org.orekit.propagation.PropagationType) -> org.orekit.propagation.SpacecraftState: ...
+    def mapStateToArray(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[float], doubleArray2: typing.List[float]) -> None:
+        """
+            Map a spacecraft state to raw double components.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.integration.StateMapper.mapStateToArray` in
+                class :class:`~org.orekit.propagation.integration.StateMapper`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): state to map
+                y (double[]): placeholder where to put the components
+                yDot (double[]): placeholder where to put the components derivatives
+        
+        
+        """
+        ...
     def pythonDecRef(self) -> None:
         """
             Part of JCC Python interface to object
@@ -2064,8 +2321,11 @@ class __module_protocol__(typing.Protocol):
     IntegratedEphemeris: typing.Type[IntegratedEphemeris]
     PythonAbstractGradientConverter: typing.Type[PythonAbstractGradientConverter]
     PythonAbstractIntegratedPropagator: typing.Type[PythonAbstractIntegratedPropagator]
+    PythonAdditionalDerivativesProvider: typing.Type[PythonAdditionalDerivativesProvider]
     PythonAdditionalEquations: typing.Type[PythonAdditionalEquations]
     PythonFieldAbstractIntegratedPropagator: typing.Type[PythonFieldAbstractIntegratedPropagator]
     PythonFieldAdditionalDerivativesProvider: typing.Type[PythonFieldAdditionalDerivativesProvider]
     PythonFieldAdditionalEquations: typing.Type[PythonFieldAdditionalEquations]
+    PythonFieldStateMapper: typing.Type[PythonFieldStateMapper]
+    PythonStateMapper: typing.Type[PythonStateMapper]
     StateMapper: typing.Type[StateMapper]

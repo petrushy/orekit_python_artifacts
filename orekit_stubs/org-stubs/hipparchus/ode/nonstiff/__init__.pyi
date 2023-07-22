@@ -8,7 +8,7 @@ import typing
 _AdamsFieldIntegrator__T = typing.TypeVar('_AdamsFieldIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class AdamsFieldIntegrator(org.hipparchus.ode.MultistepFieldIntegrator[_AdamsFieldIntegrator__T], typing.Generic[_AdamsFieldIntegrator__T]):
     """
-    public abstract class AdamsFieldIntegrator<T extends CalculusFieldElement<T>> extends :class:`~org.hipparchus.ode.MultistepFieldIntegrator`<T>
+    public abstract class AdamsFieldIntegrator<T extends :class:`~org.hipparchus.ode.nonstiff.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.ode.MultistepFieldIntegrator`<T>
     
         Base class for :class:`~org.hipparchus.ode.nonstiff.AdamsBashforthFieldIntegrator` and
         :class:`~org.hipparchus.ode.nonstiff.AdamsMoultonFieldIntegrator` integrators.
@@ -49,12 +49,13 @@ class AdamsIntegrator(org.hipparchus.ode.MultistepIntegrator):
             this method computes the P :sup:`-1` A P r :sub:`n` part.
         
             Parameters:
-                highOrder (Array2DRowRealMatrix): high order scaled derivatives (h :sup:`2` /2 y'', ... h :sup:`k` /k! y(k))
+                highOrder (:class:`~org.hipparchus.ode.nonstiff.https:.www.hipparchus.org.hipparchus`): high order scaled derivatives (h :sup:`2` /2 y'', ... h :sup:`k` /k! y(k))
         
             Returns:
                 updated high order derivatives
         
             Also see:
+                :meth:`~org.hipparchus.ode.nonstiff.AdamsIntegrator.updateHighOrderDerivativesPhase2`
         
         
         """
@@ -76,7 +77,7 @@ class AdamsIntegrator(org.hipparchus.ode.MultistepIntegrator):
             Parameters:
                 start (double[]): first order scaled derivatives at step start
                 end (double[]): first order scaled derivatives at step end
-                highOrder (Array2DRowRealMatrix): high order scaled derivatives, will be modified (h :sup:`2` /2 y'', ... h :sup:`k` /k! y(k))
+                highOrder (:class:`~org.hipparchus.ode.nonstiff.https:.www.hipparchus.org.hipparchus`): high order scaled derivatives, will be modified (h :sup:`2` /2 y'', ... h :sup:`k` /k! y(k))
         
             Also see:
                 :meth:`~org.hipparchus.ode.nonstiff.AdamsIntegrator.updateHighOrderDerivativesPhase1`
@@ -88,7 +89,7 @@ class AdamsIntegrator(org.hipparchus.ode.MultistepIntegrator):
 _AdamsNordsieckFieldTransformer__T = typing.TypeVar('_AdamsNordsieckFieldTransformer__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class AdamsNordsieckFieldTransformer(typing.Generic[_AdamsNordsieckFieldTransformer__T]):
     """
-    public class AdamsNordsieckFieldTransformer<T extends CalculusFieldElement<T>> extends Object
+    public class AdamsNordsieckFieldTransformer<T extends :class:`~org.hipparchus.ode.nonstiff.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.ode.nonstiff.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Transformer to Nordsieck vectors for Adams integrators.
     
@@ -140,7 +141,7 @@ class AdamsNordsieckFieldTransformer(typing.Generic[_AdamsNordsieckFieldTransfor
         
          q :sub:`n`  = s :sub:`1` (n) u + P r :sub:`n` 
          
-        where u is the [ 1 1 ... 1 ] :sup:`T` vector and P is the (k-1)Ã—(k-1) matrix built with the (j+1) (-i) :sup:`j` terms
+        where u is the [ 1 1 ... 1 ] :sup:`T` vector and P is the (k-1)×(k-1) matrix built with the (j+1) (-i) :sup:`j` terms
         with i being the row number starting from 1 and j being the column number starting from 1:
     
         .. code-block: java
@@ -201,7 +202,7 @@ class AdamsNordsieckFieldTransformer(typing.Generic[_AdamsNordsieckFieldTransfor
             Get the Nordsieck transformer for a given field and number of steps.
         
             Parameters:
-                field (Field<T> field): field to which the time and state vector elements belong
+                field (:class:`~org.hipparchus.ode.nonstiff.https:.www.hipparchus.org.hipparchus`<T> field): field to which the time and state vector elements belong
                 nSteps (int): number of steps of the multistep method (excluding the one being computed)
         
             Returns:
@@ -216,7 +217,7 @@ class AdamsNordsieckFieldTransformer(typing.Generic[_AdamsNordsieckFieldTransfor
 
 class AdamsNordsieckTransformer:
     """
-    public class AdamsNordsieckTransformer extends Object
+    public class AdamsNordsieckTransformer extends :class:`~org.hipparchus.ode.nonstiff.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Transformer to Nordsieck vectors for Adams integrators.
     
@@ -268,7 +269,7 @@ class AdamsNordsieckTransformer:
         
          q :sub:`n`  = s :sub:`1` (n) u + P r :sub:`n` 
          
-        where u is the [ 1 1 ... 1 ] :sup:`T` vector and P is the (k-1)Ã—(k-1) matrix built with the (j+1) (-i) :sup:`j` terms
+        where u is the [ 1 1 ... 1 ] :sup:`T` vector and P is the (k-1)×(k-1) matrix built with the (j+1) (-i) :sup:`j` terms
         with i being the row number starting from 1 and j being the column number starting from 1:
     
         .. code-block: java
@@ -366,12 +367,13 @@ class AdamsNordsieckTransformer:
             this method computes the P :sup:`-1` A P r :sub:`n` part.
         
             Parameters:
-                highOrder (Array2DRowRealMatrix): high order scaled derivatives (h :sup:`2` /2 y'', ... h :sup:`k` /k! y(k))
+                highOrder (:class:`~org.hipparchus.ode.nonstiff.https:.www.hipparchus.org.hipparchus`): high order scaled derivatives (h :sup:`2` /2 y'', ... h :sup:`k` /k! y(k))
         
             Returns:
                 updated high order derivatives
         
             Also see:
+                :meth:`~org.hipparchus.ode.nonstiff.AdamsNordsieckTransformer.updateHighOrderDerivativesPhase2`
         
         
         """
@@ -393,7 +395,7 @@ class AdamsNordsieckTransformer:
             Parameters:
                 start (double[]): first order scaled derivatives at step start
                 end (double[]): first order scaled derivatives at step end
-                highOrder (Array2DRowRealMatrix): high order scaled derivatives, will be modified (h :sup:`2` /2 y'', ... h :sup:`k` /k! y(k))
+                highOrder (:class:`~org.hipparchus.ode.nonstiff.https:.www.hipparchus.org.hipparchus`): high order scaled derivatives, will be modified (h :sup:`2` /2 y'', ... h :sup:`k` /k! y(k))
         
             Also see:
                 :meth:`~org.hipparchus.ode.nonstiff.AdamsNordsieckTransformer.updateHighOrderDerivativesPhase1`
@@ -405,7 +407,7 @@ class AdamsNordsieckTransformer:
 _AdaptiveStepsizeFieldIntegrator__T = typing.TypeVar('_AdaptiveStepsizeFieldIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class AdaptiveStepsizeFieldIntegrator(org.hipparchus.ode.AbstractFieldIntegrator[_AdaptiveStepsizeFieldIntegrator__T], typing.Generic[_AdaptiveStepsizeFieldIntegrator__T]):
     """
-    public abstract class AdaptiveStepsizeFieldIntegrator<T extends CalculusFieldElement<T>> extends :class:`~org.hipparchus.ode.AbstractFieldIntegrator`<T>
+    public abstract class AdaptiveStepsizeFieldIntegrator<T extends :class:`~org.hipparchus.ode.nonstiff.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.ode.AbstractFieldIntegrator`<T>
     
         This abstract class holds the common part of all adaptive stepsize integrators for Ordinary Differential Equations.
     
@@ -650,7 +652,7 @@ class ButcherArrayProvider:
 _FieldButcherArrayProvider__T = typing.TypeVar('_FieldButcherArrayProvider__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldButcherArrayProvider(typing.Generic[_FieldButcherArrayProvider__T]):
     """
-    public interface FieldButcherArrayProvider<T extends CalculusFieldElement<T>>
+    public interface FieldButcherArrayProvider<T extends :class:`~org.hipparchus.ode.nonstiff.https:.www.hipparchus.org.hipparchus`<T>>
     
         This interface represents an integrator based on Butcher arrays.
     
@@ -691,7 +693,7 @@ class FieldButcherArrayProvider(typing.Generic[_FieldButcherArrayProvider__T]):
 
 class StepsizeHelper:
     """
-    public class StepsizeHelper extends Object
+    public class StepsizeHelper extends :class:`~org.hipparchus.ode.nonstiff.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Helper for adaptive stepsize control.
     
@@ -820,7 +822,7 @@ class StepsizeHelper:
 _AdamsBashforthFieldIntegrator__T = typing.TypeVar('_AdamsBashforthFieldIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class AdamsBashforthFieldIntegrator(AdamsFieldIntegrator[_AdamsBashforthFieldIntegrator__T], typing.Generic[_AdamsBashforthFieldIntegrator__T]):
     """
-    public class AdamsBashforthFieldIntegrator<T extends CalculusFieldElement<T>> extends :class:`~org.hipparchus.ode.nonstiff.AdamsFieldIntegrator`<T>
+    public class AdamsBashforthFieldIntegrator<T extends :class:`~org.hipparchus.ode.nonstiff.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.ode.nonstiff.AdamsFieldIntegrator`<T>
     
         This class implements explicit Adams-Bashforth integrators for Ordinary Differential Equations.
     
@@ -898,7 +900,7 @@ class AdamsBashforthFieldIntegrator(AdamsFieldIntegrator[_AdamsBashforthFieldInt
         
          q :sub:`n`  = s :sub:`1` (n) u + P r :sub:`n` 
          
-        where u is the [ 1 1 ... 1 ] :sup:`T` vector and P is the (k-1)Ã—(k-1) matrix built with the (j+1) (-i) :sup:`j` terms
+        where u is the [ 1 1 ... 1 ] :sup:`T` vector and P is the (k-1)×(k-1) matrix built with the (j+1) (-i) :sup:`j` terms
         with i being the row number starting from 1 and j being the column number starting from 1:
     
         .. code-block: java
@@ -1024,7 +1026,7 @@ class AdamsBashforthIntegrator(AdamsIntegrator):
         
          q :sub:`n`  = s :sub:`1` (n) u + P r :sub:`n` 
          
-        where u is the [ 1 1 ... 1 ] :sup:`T` vector and P is the (k-1)Ã—(k-1) matrix built with the (j+1) (-i) :sup:`j` terms
+        where u is the [ 1 1 ... 1 ] :sup:`T` vector and P is the (k-1)×(k-1) matrix built with the (j+1) (-i) :sup:`j` terms
         with i being the row number starting from 1 and j being the column number starting from 1:
     
         .. code-block: java
@@ -1073,7 +1075,7 @@ class AdamsBashforthIntegrator(AdamsIntegrator):
 _AdamsMoultonFieldIntegrator__T = typing.TypeVar('_AdamsMoultonFieldIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class AdamsMoultonFieldIntegrator(AdamsFieldIntegrator[_AdamsMoultonFieldIntegrator__T], typing.Generic[_AdamsMoultonFieldIntegrator__T]):
     """
-    public class AdamsMoultonFieldIntegrator<T extends CalculusFieldElement<T>> extends :class:`~org.hipparchus.ode.nonstiff.AdamsFieldIntegrator`<T>
+    public class AdamsMoultonFieldIntegrator<T extends :class:`~org.hipparchus.ode.nonstiff.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.ode.nonstiff.AdamsFieldIntegrator`<T>
     
         This class implements implicit Adams-Moulton integrators for Ordinary Differential Equations.
     
@@ -1153,7 +1155,7 @@ class AdamsMoultonFieldIntegrator(AdamsFieldIntegrator[_AdamsMoultonFieldIntegra
         
          q :sub:`n`  = s :sub:`1` (n) u + P r :sub:`n` 
          
-        where u is the [ 1 1 ... 1 ] :sup:`T` vector and P is the (k-1)Ã—(k-1) matrix built with the (j+1) (-i) :sup:`j` terms
+        where u is the [ 1 1 ... 1 ] :sup:`T` vector and P is the (k-1)×(k-1) matrix built with the (j+1) (-i) :sup:`j` terms
         with i being the row number starting from 1 and j being the column number starting from 1:
     
         .. code-block: java
@@ -1289,7 +1291,7 @@ class AdamsMoultonIntegrator(AdamsIntegrator):
         
          q :sub:`n`  = s :sub:`1` (n) u + P r :sub:`n` 
          
-        where u is the [ 1 1 ... 1 ] :sup:`T` vector and P is the (k-1)Ã—(k-1) matrix built with the (j+1) (-i) :sup:`j` terms
+        where u is the [ 1 1 ... 1 ] :sup:`T` vector and P is the (k-1)×(k-1) matrix built with the (j+1) (-i) :sup:`j` terms
         with i being the row number starting from 1 and j being the column number starting from 1:
     
         .. code-block: java
@@ -1346,7 +1348,7 @@ class AdamsMoultonIntegrator(AdamsIntegrator):
 _EmbeddedRungeKuttaFieldIntegrator__T = typing.TypeVar('_EmbeddedRungeKuttaFieldIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class EmbeddedRungeKuttaFieldIntegrator(AdaptiveStepsizeFieldIntegrator[_EmbeddedRungeKuttaFieldIntegrator__T], FieldButcherArrayProvider[_EmbeddedRungeKuttaFieldIntegrator__T], typing.Generic[_EmbeddedRungeKuttaFieldIntegrator__T]):
     """
-    public abstract class EmbeddedRungeKuttaFieldIntegrator<T extends CalculusFieldElement<T>> extends :class:`~org.hipparchus.ode.nonstiff.AdaptiveStepsizeFieldIntegrator`<T> implements :class:`~org.hipparchus.ode.nonstiff.FieldButcherArrayProvider`<T>
+    public abstract class EmbeddedRungeKuttaFieldIntegrator<T extends :class:`~org.hipparchus.ode.nonstiff.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.ode.nonstiff.AdaptiveStepsizeFieldIntegrator`<T> implements :class:`~org.hipparchus.ode.nonstiff.FieldButcherArrayProvider`<T>
     
         This class implements the common part of all embedded Runge-Kutta integrators for Ordinary Differential Equations.
     
@@ -1568,7 +1570,7 @@ class GraggBulirschStoerIntegrator(AdaptiveStepsizeIntegrator):
 _RungeKuttaFieldIntegrator__T = typing.TypeVar('_RungeKuttaFieldIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class RungeKuttaFieldIntegrator(org.hipparchus.ode.AbstractFieldIntegrator[_RungeKuttaFieldIntegrator__T], FieldButcherArrayProvider[_RungeKuttaFieldIntegrator__T], typing.Generic[_RungeKuttaFieldIntegrator__T]):
     """
-    public abstract class RungeKuttaFieldIntegrator<T extends CalculusFieldElement<T>> extends :class:`~org.hipparchus.ode.AbstractFieldIntegrator`<T> implements :class:`~org.hipparchus.ode.nonstiff.FieldButcherArrayProvider`<T>
+    public abstract class RungeKuttaFieldIntegrator<T extends :class:`~org.hipparchus.ode.nonstiff.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.ode.AbstractFieldIntegrator`<T> implements :class:`~org.hipparchus.ode.nonstiff.FieldButcherArrayProvider`<T>
     
         This class implements the common part of all fixed step Runge-Kutta integrators for Ordinary Differential Equations.
     
@@ -1653,7 +1655,7 @@ class RungeKuttaIntegrator(org.hipparchus.ode.AbstractIntegrator, ButcherArrayPr
 _ClassicalRungeKuttaFieldIntegrator__T = typing.TypeVar('_ClassicalRungeKuttaFieldIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class ClassicalRungeKuttaFieldIntegrator(RungeKuttaFieldIntegrator[_ClassicalRungeKuttaFieldIntegrator__T], typing.Generic[_ClassicalRungeKuttaFieldIntegrator__T]):
     """
-    public class ClassicalRungeKuttaFieldIntegrator<T extends CalculusFieldElement<T>> extends :class:`~org.hipparchus.ode.nonstiff.RungeKuttaFieldIntegrator`<T>
+    public class ClassicalRungeKuttaFieldIntegrator<T extends :class:`~org.hipparchus.ode.nonstiff.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.ode.nonstiff.RungeKuttaFieldIntegrator`<T>
     
         This class implements the classical fourth order Runge-Kutta integrator for Ordinary Differential Equations (it is the
         most often used Runge-Kutta method).
@@ -1767,7 +1769,7 @@ class ClassicalRungeKuttaIntegrator(RungeKuttaIntegrator):
 _DormandPrince54FieldIntegrator__T = typing.TypeVar('_DormandPrince54FieldIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class DormandPrince54FieldIntegrator(EmbeddedRungeKuttaFieldIntegrator[_DormandPrince54FieldIntegrator__T], typing.Generic[_DormandPrince54FieldIntegrator__T]):
     """
-    public class DormandPrince54FieldIntegrator<T extends CalculusFieldElement<T>> extends :class:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaFieldIntegrator`<T>
+    public class DormandPrince54FieldIntegrator<T extends :class:`~org.hipparchus.ode.nonstiff.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaFieldIntegrator`<T>
     
         This class implements the 5(4) Dormand-Prince integrator for Ordinary Differential Equations.
     
@@ -1826,8 +1828,8 @@ class DormandPrince54FieldIntegrator(EmbeddedRungeKuttaFieldIntegrator[_DormandP
             Get the order of the method.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaFieldIntegrator.getOrder`Â in
-                classÂ :class:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaFieldIntegrator`
+                :meth:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaFieldIntegrator.getOrder` in
+                class :class:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaFieldIntegrator`
         
             Returns:
                 order of the method
@@ -1897,8 +1899,8 @@ class DormandPrince54Integrator(EmbeddedRungeKuttaIntegrator):
             Get the order of the method.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaIntegrator.getOrder`Â in
-                classÂ :class:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaIntegrator`
+                :meth:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaIntegrator.getOrder` in
+                class :class:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaIntegrator`
         
             Returns:
                 order of the method
@@ -1910,7 +1912,7 @@ class DormandPrince54Integrator(EmbeddedRungeKuttaIntegrator):
 _DormandPrince853FieldIntegrator__T = typing.TypeVar('_DormandPrince853FieldIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class DormandPrince853FieldIntegrator(EmbeddedRungeKuttaFieldIntegrator[_DormandPrince853FieldIntegrator__T], typing.Generic[_DormandPrince853FieldIntegrator__T]):
     """
-    public class DormandPrince853FieldIntegrator<T extends CalculusFieldElement<T>> extends :class:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaFieldIntegrator`<T>
+    public class DormandPrince853FieldIntegrator<T extends :class:`~org.hipparchus.ode.nonstiff.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaFieldIntegrator`<T>
     
         This class implements the 8(5,3) Dormand-Prince integrator for Ordinary Differential Equations.
     
@@ -1969,8 +1971,8 @@ class DormandPrince853FieldIntegrator(EmbeddedRungeKuttaFieldIntegrator[_Dormand
             Get the order of the method.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaFieldIntegrator.getOrder`Â in
-                classÂ :class:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaFieldIntegrator`
+                :meth:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaFieldIntegrator.getOrder` in
+                class :class:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaFieldIntegrator`
         
             Returns:
                 order of the method
@@ -2040,8 +2042,8 @@ class DormandPrince853Integrator(EmbeddedRungeKuttaIntegrator):
             Get the order of the method.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaIntegrator.getOrder`Â in
-                classÂ :class:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaIntegrator`
+                :meth:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaIntegrator.getOrder` in
+                class :class:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaIntegrator`
         
             Returns:
                 order of the method
@@ -2053,7 +2055,7 @@ class DormandPrince853Integrator(EmbeddedRungeKuttaIntegrator):
 _EulerFieldIntegrator__T = typing.TypeVar('_EulerFieldIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class EulerFieldIntegrator(RungeKuttaFieldIntegrator[_EulerFieldIntegrator__T], typing.Generic[_EulerFieldIntegrator__T]):
     """
-    public class EulerFieldIntegrator<T extends CalculusFieldElement<T>> extends :class:`~org.hipparchus.ode.nonstiff.RungeKuttaFieldIntegrator`<T>
+    public class EulerFieldIntegrator<T extends :class:`~org.hipparchus.ode.nonstiff.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.ode.nonstiff.RungeKuttaFieldIntegrator`<T>
     
         This class implements a simple Euler integrator for Ordinary Differential Equations.
     
@@ -2163,7 +2165,7 @@ class EulerIntegrator(RungeKuttaIntegrator):
 _GillFieldIntegrator__T = typing.TypeVar('_GillFieldIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class GillFieldIntegrator(RungeKuttaFieldIntegrator[_GillFieldIntegrator__T], typing.Generic[_GillFieldIntegrator__T]):
     """
-    public class GillFieldIntegrator<T extends CalculusFieldElement<T>> extends :class:`~org.hipparchus.ode.nonstiff.RungeKuttaFieldIntegrator`<T>
+    public class GillFieldIntegrator<T extends :class:`~org.hipparchus.ode.nonstiff.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.ode.nonstiff.RungeKuttaFieldIntegrator`<T>
     
         This class implements the Gill fourth order Runge-Kutta integrator for Ordinary Differential Equations .
     
@@ -2279,7 +2281,7 @@ class GillIntegrator(RungeKuttaIntegrator):
 _HighamHall54FieldIntegrator__T = typing.TypeVar('_HighamHall54FieldIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class HighamHall54FieldIntegrator(EmbeddedRungeKuttaFieldIntegrator[_HighamHall54FieldIntegrator__T], typing.Generic[_HighamHall54FieldIntegrator__T]):
     """
-    public class HighamHall54FieldIntegrator<T extends CalculusFieldElement<T>> extends :class:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaFieldIntegrator`<T>
+    public class HighamHall54FieldIntegrator<T extends :class:`~org.hipparchus.ode.nonstiff.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaFieldIntegrator`<T>
     
         This class implements the 5(4) Higham and Hall integrator for Ordinary Differential Equations.
     
@@ -2326,8 +2328,8 @@ class HighamHall54FieldIntegrator(EmbeddedRungeKuttaFieldIntegrator[_HighamHall5
             Get the order of the method.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaFieldIntegrator.getOrder`Â in
-                classÂ :class:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaFieldIntegrator`
+                :meth:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaFieldIntegrator.getOrder` in
+                class :class:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaFieldIntegrator`
         
             Returns:
                 order of the method
@@ -2385,8 +2387,8 @@ class HighamHall54Integrator(EmbeddedRungeKuttaIntegrator):
             Get the order of the method.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaIntegrator.getOrder`Â in
-                classÂ :class:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaIntegrator`
+                :meth:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaIntegrator.getOrder` in
+                class :class:`~org.hipparchus.ode.nonstiff.EmbeddedRungeKuttaIntegrator`
         
             Returns:
                 order of the method
@@ -2398,7 +2400,7 @@ class HighamHall54Integrator(EmbeddedRungeKuttaIntegrator):
 _LutherFieldIntegrator__T = typing.TypeVar('_LutherFieldIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class LutherFieldIntegrator(RungeKuttaFieldIntegrator[_LutherFieldIntegrator__T], typing.Generic[_LutherFieldIntegrator__T]):
     """
-    public class LutherFieldIntegrator<T extends CalculusFieldElement<T>> extends :class:`~org.hipparchus.ode.nonstiff.RungeKuttaFieldIntegrator`<T>
+    public class LutherFieldIntegrator<T extends :class:`~org.hipparchus.ode.nonstiff.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.ode.nonstiff.RungeKuttaFieldIntegrator`<T>
     
         This class implements the Luther sixth order Runge-Kutta integrator for Ordinary Differential Equations.
     
@@ -2526,7 +2528,7 @@ class LutherIntegrator(RungeKuttaIntegrator):
 _MidpointFieldIntegrator__T = typing.TypeVar('_MidpointFieldIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class MidpointFieldIntegrator(RungeKuttaFieldIntegrator[_MidpointFieldIntegrator__T], typing.Generic[_MidpointFieldIntegrator__T]):
     """
-    public class MidpointFieldIntegrator<T extends CalculusFieldElement<T>> extends :class:`~org.hipparchus.ode.nonstiff.RungeKuttaFieldIntegrator`<T>
+    public class MidpointFieldIntegrator<T extends :class:`~org.hipparchus.ode.nonstiff.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.ode.nonstiff.RungeKuttaFieldIntegrator`<T>
     
         This class implements a second order Runge-Kutta integrator for Ordinary Differential Equations.
     
@@ -2636,7 +2638,7 @@ class MidpointIntegrator(RungeKuttaIntegrator):
 _ThreeEighthesFieldIntegrator__T = typing.TypeVar('_ThreeEighthesFieldIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class ThreeEighthesFieldIntegrator(RungeKuttaFieldIntegrator[_ThreeEighthesFieldIntegrator__T], typing.Generic[_ThreeEighthesFieldIntegrator__T]):
     """
-    public class ThreeEighthesFieldIntegrator<T extends CalculusFieldElement<T>> extends :class:`~org.hipparchus.ode.nonstiff.RungeKuttaFieldIntegrator`<T>
+    public class ThreeEighthesFieldIntegrator<T extends :class:`~org.hipparchus.ode.nonstiff.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.ode.nonstiff.RungeKuttaFieldIntegrator`<T>
     
         This class implements the 3/8 fourth order Runge-Kutta integrator for Ordinary Differential Equations.
     

@@ -115,7 +115,7 @@ class AdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Set the spacecraft ID for which the attitude data are provided.
         
             Parameters:
-                objectID (String): the spacecraft ID to be set
+                objectID (:class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the spacecraft ID to be set
         
         
         """
@@ -125,7 +125,7 @@ class AdmMetadata(org.orekit.files.ccsds.section.Metadata):
             Set the spacecraft name for which the attitude data are provided.
         
             Parameters:
-                objectName (String): the spacecraft name to be set
+                objectName (:class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the spacecraft name to be set
         
         
         """
@@ -151,7 +151,7 @@ class AdmMetadata(org.orekit.files.ccsds.section.Metadata):
 
 class AdmMetadataKey(java.lang.Enum['AdmMetadataKey']):
     """
-    public enum AdmMetadataKey extends Enum<:class:`~org.orekit.files.ccsds.ndm.adm.AdmMetadataKey`>
+    public enum AdmMetadataKey extends :class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.adm.AdmMetadataKey`>
     
         Keys for :class:`~org.orekit.files.ccsds.ndm.adm.AdmMetadata` entries.
     
@@ -188,14 +188,14 @@ class AdmMetadataKey(java.lang.Enum['AdmMetadataKey']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -208,9 +208,8 @@ class AdmMetadataKey(java.lang.Enum['AdmMetadataKey']):
         
             .. code-block: java
             
-            
-            for (AdmMetadataKey c : AdmMetadataKey.values())
-                System.out.println(c);
+            for (AdmMetadataKey c : AdmMetadataKey.values())
+                System.out.println(c);
             
         
             Returns:
@@ -261,7 +260,8 @@ class AdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[_
     @staticmethod
     def processRotationOrder(parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, rotationOrderConsumer: 'AdmParser.RotationOrderConsumer') -> bool:
         """
-            Process a CCSDS Euler angles sequence as a null.
+            Process a CCSDS Euler angles sequence as a
+            :class:`~org.orekit.files.ccsds.ndm.adm.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.RotationOrder?is`.
         
             Parameters:
                 sequence (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): Euler angles sequence token
@@ -278,7 +278,7 @@ class AdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[_
 
 class AttitudeEndoints(org.orekit.attitudes.AttitudeBuilder):
     """
-    public class AttitudeEndoints extends Object implements :class:`~org.orekit.attitudes.AttitudeBuilder`
+    public class AttitudeEndoints extends :class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudeBuilder`
     
         Endpoints for attitude definition.
     
@@ -295,9 +295,9 @@ class AttitudeEndoints(org.orekit.attitudes.AttitudeBuilder):
     """
     A2B: typing.ClassVar[str] = ...
     """
-    public static final String A2B
+    public static final :class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` A2B
     
-        Constant for A â†’ B diraction.
+        Constant for A → B diraction.
     
         Also see:
             :meth:`~constant`
@@ -306,9 +306,9 @@ class AttitudeEndoints(org.orekit.attitudes.AttitudeBuilder):
     """
     B2A: typing.ClassVar[str] = ...
     """
-    public static final String B2A
+    public static final :class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` B2A
     
-        Constant for A â†� B direction.
+        Constant for A ← B direction.
     
         Also see:
             :meth:`~constant`
@@ -359,8 +359,8 @@ class AttitudeEndoints(org.orekit.attitudes.AttitudeBuilder):
             Check external frame is properly initialized.
         
             Parameters:
-                aKey (Enum<?> aKey): key for frame A
-                bKey (Enum<?> bKey): key for frame B
+                aKey (:class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<?> aKey): key for frame A
+                bKey (:class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<?> bKey): key for frame B
         
         
         """
@@ -374,9 +374,9 @@ class AttitudeEndoints(org.orekit.attitudes.AttitudeBuilder):
             This method should throw an exception if some mandatory entry is missing
         
             Parameters:
-                aKey (Enum<?> aKey): key for frame A
-                bKey (Enum<?> bKey): key for frame B
-                dirKey (Enum<?> dirKey): key for direction
+                aKey (:class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<?> aKey): key for frame A
+                bKey (:class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<?> bKey): key for frame B
+                dirKey (:class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<?> dirKey): key for direction
         
         
         """
@@ -497,7 +497,8 @@ class AttitudeEndoints(org.orekit.attitudes.AttitudeBuilder):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -505,7 +506,7 @@ class AttitudeEndoints(org.orekit.attitudes.AttitudeBuilder):
 
 class AttitudeType(java.lang.Enum['AttitudeType']):
     """
-    public enum AttitudeType extends Enum<:class:`~org.orekit.files.ccsds.ndm.adm.AttitudeType`>
+    public enum AttitudeType extends :class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.adm.AttitudeType`>
     
         Enumerate for ADM attitude type.
     
@@ -526,7 +527,7 @@ class AttitudeType(java.lang.Enum['AttitudeType']):
             Parameters:
                 isFirst (boolean): if true the first quaternion component is the scalar component
                 isExternal2SpacecraftBody (boolean): true attitude is from external frame to spacecraft body frame
-                eulerRotSequence (RotationOrder): sequance of Euler angles
+                eulerRotSequence (:class:`~org.orekit.files.ccsds.ndm.adm.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.RotationOrder?is`): sequance of Euler angles
                 isSpacecraftBodyRate (boolean): if true Euler rates are specified in spacecraft body frame
                 date (:class:`~org.orekit.time.AbsoluteDate`): entry date
                 components (double...): entry components with CCSDS units (i.e. angles *must* still be in degrees here), semantic depends on attitude type
@@ -542,12 +543,12 @@ class AttitudeType(java.lang.Enum['AttitudeType']):
         """
             Get the attitude data fields corresponding to the attitude type.
         
-            This method returns the components in CCSDS units (i.e. degrees, degrees per secondsâ€¦).
+            This method returns the components in CCSDS units (i.e. degrees, degrees per seconds…).
         
             Parameters:
                 isFirst (boolean): if true the first quaternion component is the scalar component
                 isExternal2SpacecraftBody (boolean): true attitude is from external frame to spacecraft body frame
-                eulerRotSequence (RotationOrder): sequance of Euler angles
+                eulerRotSequence (:class:`~org.orekit.files.ccsds.ndm.adm.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.RotationOrder?is`): sequance of Euler angles
                 isSpacecraftBodyRate (boolean): if true Euler rates are specified in spacecraft body frame
                 attitude (:class:`~org.orekit.utils.TimeStampedAngularCoordinates`): angular coordinates, using :class:`~org.orekit.attitudes.Attitude` convention (i.e. from inertial frame to spacecraft
                     frame)
@@ -577,10 +578,10 @@ class AttitudeType(java.lang.Enum['AttitudeType']):
             Parameters:
                 isFirst (boolean): if true the first quaternion component is the scalar component
                 isExternal2SpacecraftBody (boolean): true attitude is from external frame to spacecraft body frame
-                eulerRotSequence (RotationOrder): sequance of Euler angles
+                eulerRotSequence (:class:`~org.orekit.files.ccsds.ndm.adm.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.RotationOrder?is`): sequance of Euler angles
                 isSpacecraftBodyRate (boolean): if true Euler rates are specified in spacecraft body frame
                 context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                fields (String[]): raw data fields
+                fields (:class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`[]): raw data fields
         
             Returns:
                 the angular coordinates, using :class:`~org.orekit.attitudes.Attitude` convention (i.e. from inertial frame to
@@ -595,7 +596,7 @@ class AttitudeType(java.lang.Enum['AttitudeType']):
             Parse an attitude type.
         
             Parameters:
-                type (String): unnormalized type name
+                type (:class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): unnormalized type name
         
             Returns:
                 parsed type
@@ -607,7 +608,8 @@ class AttitudeType(java.lang.Enum['AttitudeType']):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum.html?is` in
+                class :class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`
         
         
         """
@@ -624,14 +626,14 @@ class AttitudeType(java.lang.Enum['AttitudeType']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -644,9 +646,8 @@ class AttitudeType(java.lang.Enum['AttitudeType']):
         
             .. code-block: java
             
-            
-            for (AttitudeType c : AttitudeType.values())
-                System.out.println(c);
+            for (AttitudeType c : AttitudeType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -658,7 +659,7 @@ class AttitudeType(java.lang.Enum['AttitudeType']):
 
 class RotationXmlTokenBuilder(org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder):
     """
-    public class RotationXmlTokenBuilder extends Object implements :class:`~org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder`
+    public class RotationXmlTokenBuilder extends :class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder`
     
         Builder for rotation angles and rates.
     
@@ -692,8 +693,8 @@ class PythonAdmParser(AdmParser[_PythonAdmParser__T, _PythonAdmParser__P], typin
             Finalize data after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -706,8 +707,8 @@ class PythonAdmParser(AdmParser[_PythonAdmParser__T, _PythonAdmParser__P], typin
             Finalize header after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -720,8 +721,8 @@ class PythonAdmParser(AdmParser[_PythonAdmParser__T, _PythonAdmParser__P], typin
             Finalize metadata after parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.finalizeMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -734,8 +735,8 @@ class PythonAdmParser(AdmParser[_PythonAdmParser__T, _PythonAdmParser__P], typin
             Get file header to fill.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 file header to fill
@@ -748,8 +749,8 @@ class PythonAdmParser(AdmParser[_PythonAdmParser__T, _PythonAdmParser__P], typin
             Acknowledge data parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -762,8 +763,8 @@ class PythonAdmParser(AdmParser[_PythonAdmParser__T, _PythonAdmParser__P], typin
             Acknowledge header parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -776,8 +777,8 @@ class PythonAdmParser(AdmParser[_PythonAdmParser__T, _PythonAdmParser__P], typin
             Acknowledge metada parsing has started.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.inMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -790,8 +791,8 @@ class PythonAdmParser(AdmParser[_PythonAdmParser__T, _PythonAdmParser__P], typin
             Prepare data for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareData` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -804,8 +805,8 @@ class PythonAdmParser(AdmParser[_PythonAdmParser__T, _PythonAdmParser__P], typin
             Prepare header for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareHeader` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action
@@ -818,8 +819,8 @@ class PythonAdmParser(AdmParser[_PythonAdmParser__T, _PythonAdmParser__P], typin
             Prepare metadata for parsing.
         
             Specified by:
-                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata`Â in
-                classÂ :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
+                :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.prepareMetadata` in
+                class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`
         
             Returns:
                 true if parser was able to perform the action

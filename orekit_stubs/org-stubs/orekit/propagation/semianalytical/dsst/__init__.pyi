@@ -30,15 +30,15 @@ class DSSTHarvester(org.orekit.propagation.AbstractMatricesHarvester):
             This method is called when proagation starts, i.e. when configuration is completed
         
             Specified by:
-                :meth:`~org.orekit.propagation.AbstractMatricesHarvester.freezeColumnsNames`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractMatricesHarvester`
+                :meth:`~org.orekit.propagation.AbstractMatricesHarvester.freezeColumnsNames` in
+                class :class:`~org.orekit.propagation.AbstractMatricesHarvester`
         
         
         """
         ...
     def getB1(self) -> org.hipparchus.linear.RealMatrix:
         """
-            Get the Jacobian matrix B1 (B1 = âˆ‚ÎµÎ·/âˆ‚Y).
+            Get the Jacobian matrix B1 (B1 = ∂εη/∂Y).
         
             B1 represents the partial derivatives of the short period motion with respect to the mean equinoctial elements.
         
@@ -50,7 +50,7 @@ class DSSTHarvester(org.orekit.propagation.AbstractMatricesHarvester):
         ...
     def getB2(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.hipparchus.linear.RealMatrix:
         """
-            Get the Jacobian matrix B2 (B2 = âˆ‚Y/âˆ‚Yâ‚€).
+            Get the Jacobian matrix B2 (B2 = ∂Y/∂Y₀).
         
             B2 represents the partial derivatives of the mean equinoctial elements with respect to the initial ones.
         
@@ -65,7 +65,7 @@ class DSSTHarvester(org.orekit.propagation.AbstractMatricesHarvester):
         ...
     def getB3(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.hipparchus.linear.RealMatrix:
         """
-            Get the Jacobian matrix B3 (B3 = âˆ‚Y/âˆ‚P).
+            Get the Jacobian matrix B3 (B3 = ∂Y/∂P).
         
             B3 represents the partial derivatives of the mean equinoctial elements with respect to the estimated propagation
             parameters.
@@ -81,7 +81,7 @@ class DSSTHarvester(org.orekit.propagation.AbstractMatricesHarvester):
         ...
     def getB4(self) -> org.hipparchus.linear.RealMatrix:
         """
-            Get the Jacobian matrix B4 (B4 = âˆ‚ÎµÎ·/âˆ‚c).
+            Get the Jacobian matrix B4 (B4 = ∂εη/∂c).
         
             B4 represents the partial derivatives of the short period motion with respect to the estimated propagation parameters.
         
@@ -91,35 +91,18 @@ class DSSTHarvester(org.orekit.propagation.AbstractMatricesHarvester):
         
         """
         ...
-    def getJacobiansColumnsNames(self) -> java.util.List[str]:
-        """
-            Get the names of the parameters in the matrix returned by
-            :meth:`~org.orekit.propagation.MatricesHarvester.getParametersJacobian`.
-        
-            Beware that the names of the parameters are fully known only once all force models have been set up and their parameters
-            properly selected. Applications that retrieve the matrices harvester first and select the force model parameters to
-            retrieve afterwards (but obviously before starting propagation) must take care to wait until the parameters have been
-            set up before they call this method. Calling the method too early would return wrong results.
-        
-            The names are returned in the Jacobians matrix columns order
-        
-            Returns:
-                names of the parameters (i.e. columns) of the Jacobian matrix
-        
-        
-        """
-        ...
+    def getJacobiansColumnsNames(self) -> java.util.List[str]: ...
     def getParametersJacobian(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.hipparchus.linear.RealMatrix:
         """
             Get the Jacobian with respect to propagation parameters.
         
             Specified by:
-                :meth:`~org.orekit.propagation.MatricesHarvester.getParametersJacobian`Â in
-                interfaceÂ :class:`~org.orekit.propagation.MatricesHarvester`
+                :meth:`~org.orekit.propagation.MatricesHarvester.getParametersJacobian` in
+                interface :class:`~org.orekit.propagation.MatricesHarvester`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractMatricesHarvester.getParametersJacobian`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractMatricesHarvester`
+                :meth:`~org.orekit.propagation.AbstractMatricesHarvester.getParametersJacobian` in
+                class :class:`~org.orekit.propagation.AbstractMatricesHarvester`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -135,12 +118,12 @@ class DSSTHarvester(org.orekit.propagation.AbstractMatricesHarvester):
             Extract state transition matrix from state.
         
             Specified by:
-                :meth:`~org.orekit.propagation.MatricesHarvester.getStateTransitionMatrix`Â in
-                interfaceÂ :class:`~org.orekit.propagation.MatricesHarvester`
+                :meth:`~org.orekit.propagation.MatricesHarvester.getStateTransitionMatrix` in
+                interface :class:`~org.orekit.propagation.MatricesHarvester`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractMatricesHarvester.getStateTransitionMatrix`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractMatricesHarvester`
+                :meth:`~org.orekit.propagation.AbstractMatricesHarvester.getStateTransitionMatrix` in
+                class :class:`~org.orekit.propagation.AbstractMatricesHarvester`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -173,12 +156,12 @@ class DSSTHarvester(org.orekit.propagation.AbstractMatricesHarvester):
             use it at all.
         
             Specified by:
-                :meth:`~org.orekit.propagation.MatricesHarvester.setReferenceState`Â in
-                interfaceÂ :class:`~org.orekit.propagation.MatricesHarvester`
+                :meth:`~org.orekit.propagation.MatricesHarvester.setReferenceState` in
+                interface :class:`~org.orekit.propagation.MatricesHarvester`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractMatricesHarvester.setReferenceState`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractMatricesHarvester`
+                :meth:`~org.orekit.propagation.AbstractMatricesHarvester.setReferenceState` in
+                class :class:`~org.orekit.propagation.AbstractMatricesHarvester`
         
             Parameters:
                 reference (:class:`~org.orekit.propagation.SpacecraftState`): reference state to set
@@ -236,8 +219,8 @@ class DSSTJacobiansMapper(org.orekit.propagation.integration.AbstractJacobiansMa
             which can safely be null in this case.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getParametersJacobian`Â in
-                classÂ :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
+                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getParametersJacobian` in
+                class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -259,8 +242,8 @@ class DSSTJacobiansMapper(org.orekit.propagation.integration.AbstractJacobiansMa
         
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getStateJacobian`Â in
-                classÂ :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
+                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getStateJacobian` in
+                class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -277,13 +260,13 @@ class DSSTJacobiansMapper(org.orekit.propagation.integration.AbstractJacobiansMa
             Set the Jacobian with respect to state into a one-dimensional additional state array.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.setInitialJacobians`Â in
-                classÂ :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
+                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.setInitialJacobians` in
+                class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
-                dY1dY0 (double[][]): Jacobian of current state at time tâ‚� with respect to state at some previous time tâ‚€
-                dY1dP (double[][]): Jacobian of current state at time tâ‚� with respect to parameters (may be null if there are no parameters)
+                dY1dY0 (double[][]): Jacobian of current state at time t₁ with respect to state at some previous time t₀
+                dY1dP (double[][]): Jacobian of current state at time t₁ with respect to parameters (may be null if there are no parameters)
                 p (double[]): placeholder where to put the one-dimensional additional state
         
             Also see:
@@ -303,12 +286,12 @@ class DSSTJacobiansMapper(org.orekit.propagation.integration.AbstractJacobiansMa
             use it at all.
         
             Specified by:
-                :meth:`~org.orekit.propagation.MatricesHarvester.setReferenceState`Â in
-                interfaceÂ :class:`~org.orekit.propagation.MatricesHarvester`
+                :meth:`~org.orekit.propagation.MatricesHarvester.setReferenceState` in
+                interface :class:`~org.orekit.propagation.MatricesHarvester`
         
             Overrides:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.setReferenceState`Â in
-                classÂ :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
+                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.setReferenceState` in
+                class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
         
             Parameters:
                 reference (:class:`~org.orekit.propagation.SpacecraftState`): reference state to set
@@ -316,11 +299,22 @@ class DSSTJacobiansMapper(org.orekit.propagation.integration.AbstractJacobiansMa
         
         """
         ...
-    def setShortPeriodJacobians(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> None: ...
+    def setShortPeriodJacobians(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
+        """
+            Deprecated.
+            as of 11.1, replaced by :meth:`~org.orekit.propagation.semianalytical.dsst.DSSTJacobiansMapper.setReferenceState`
+            Compute the derivatives of the short period terms related to the additional state parameters.
+        
+            Parameters:
+                s (:class:`~org.orekit.propagation.SpacecraftState`): Current state information: date, kinematics, attitude, and additional state
+        
+        
+        """
+        ...
 
 class DSSTPartialDerivativesEquations(org.orekit.propagation.integration.AdditionalDerivativesProvider, org.orekit.propagation.integration.AdditionalEquations):
     """
-    @Deprecated public class DSSTPartialDerivativesEquations extends Object implements :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`, :class:`~org.orekit.propagation.integration.AdditionalEquations`
+    :class:`~org.orekit.propagation.semianalytical.dsst.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class DSSTPartialDerivativesEquations extends :class:`~org.orekit.propagation.semianalytical.dsst.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`, :class:`~org.orekit.propagation.integration.AdditionalEquations`
     
         Deprecated.
         as of 11.1, replaced by :meth:`~org.orekit.propagation.Propagator.setupMatricesComputation`
@@ -354,8 +348,8 @@ class DSSTPartialDerivativesEquations(org.orekit.propagation.integration.Additio
             backward compatibility only and will be removed in 12.0.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.combinedDerivatives`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.combinedDerivatives` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional states this equations depend on (according to the
@@ -378,8 +372,8 @@ class DSSTPartialDerivativesEquations(org.orekit.propagation.integration.Additio
             during the same propagation.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalEquations.computeDerivatives`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalEquations`
+                :meth:`~org.orekit.propagation.integration.AdditionalEquations.computeDerivatives` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional state
@@ -391,15 +385,33 @@ class DSSTPartialDerivativesEquations(org.orekit.propagation.integration.Additio
         
         """
         ...
-    def derivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]: ...
+    def derivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]:
+        """
+            Deprecated.
+            Compute the derivatives related to the additional state parameters.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.derivatives` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional states this equations depend on (according to the
+                    :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.yield` method)
+        
+            Returns:
+                computed derivatives
+        
+        
+        """
+        ...
     def getDimension(self) -> int:
         """
             Deprecated.
             Get the dimension of the generated derivative.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getDimension`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getDimension` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
             Returns:
                 dimension of the generated
@@ -428,12 +440,12 @@ class DSSTPartialDerivativesEquations(org.orekit.propagation.integration.Additio
             Get the name of the additional derivatives (which will become state once integrated).
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getName`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getName` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalEquations.getName`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalEquations`
+                :meth:`~org.orekit.propagation.integration.AdditionalEquations.getName` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
         
             Returns:
                 name of the additional state (names containing "orekit" with any case are reserved for the library internal use)
@@ -447,12 +459,12 @@ class DSSTPartialDerivativesEquations(org.orekit.propagation.integration.Additio
             Initialize the generator at the start of propagation.
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.init` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
             Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalEquations.init`Â in
-                interfaceÂ :class:`~org.orekit.propagation.integration.AdditionalEquations`
+                :meth:`~org.orekit.propagation.integration.AdditionalEquations.init` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
         
             Parameters:
                 initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial state information at the start of propagation
@@ -498,8 +510,8 @@ class DSSTPartialDerivativesEquations(org.orekit.propagation.integration.Additio
         
             Parameters:
                 s1 (:class:`~org.orekit.propagation.SpacecraftState`): current state
-                dY1dY0 (double[][]): Jacobian of current state at time tâ‚� with respect to state at some previous time tâ‚€ (must be 6x6)
-                dY1dP (double[][]): Jacobian of current state at time tâ‚� with respect to parameters (may be null if no parameters are selected)
+                dY1dY0 (double[][]): Jacobian of current state at time t₁ with respect to state at some previous time t₀ (must be 6x6)
+                dY1dP (double[][]): Jacobian of current state at time t₁ with respect to parameters (may be null if no parameters are selected)
         
             Returns:
                 state with initial Jacobians added
@@ -541,7 +553,7 @@ class DSSTPropagator(org.orekit.propagation.integration.AbstractIntegratedPropag
     
         The state that is seen by the integrator is a simple six elements double array. These six elements are:
     
-          - the :class:`~org.orekit.orbits.EquinoctialOrbit` (a, e :sub:`x` , e :sub:`y` , h :sub:`x` , h :sub:`y` , ÃŽÂ» :sub:`m` )
+          - the :class:`~org.orekit.orbits.EquinoctialOrbit` (a, e :sub:`x` , e :sub:`y` , h :sub:`x` , h :sub:`y` , λ :sub:`m` )
             in meters and radians,
     
     
@@ -591,8 +603,8 @@ class DSSTPropagator(org.orekit.propagation.integration.AbstractIntegratedPropag
             Get propagation parameter type.
         
             Overrides:
-                :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.getOrbitType`Â in
-                classÂ :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`
+                :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.getOrbitType` in
+                class :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`
         
             Returns:
                 orbit type used for propagation
@@ -605,8 +617,8 @@ class DSSTPropagator(org.orekit.propagation.integration.AbstractIntegratedPropag
             Get propagation parameter type.
         
             Overrides:
-                :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.getPositionAngleType`Â in
-                classÂ :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`
+                :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.getPositionAngleType` in
+                class :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`
         
             Returns:
                 angle type to use for propagation
@@ -624,17 +636,7 @@ class DSSTPropagator(org.orekit.propagation.integration.AbstractIntegratedPropag
         
         """
         ...
-    def getSelectedCoefficients(self) -> java.util.Set[str]:
-        """
-            Get the selected short periodic coefficients that must be stored as additional states.
-        
-            Returns:
-                short periodic coefficients that must be stored as additional states (null means no coefficients are selected, empty set
-                means all coefficients are selected)
-        
-        
-        """
-        ...
+    def getSelectedCoefficients(self) -> java.util.Set[str]: ...
     def getShortPeriodTerms(self) -> java.util.List[org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms]: ...
     def getShortPeriodTermsValue(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]:
         """
@@ -683,8 +685,8 @@ class DSSTPropagator(org.orekit.propagation.integration.AbstractIntegratedPropag
                 :meth:`~org.orekit.propagation.Propagator.resetInitialState` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState`Â in
-                classÂ :class:`~org.orekit.propagation.AbstractPropagator`
+                :meth:`~org.orekit.propagation.AbstractPropagator.resetInitialState` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): new initial state
@@ -700,8 +702,8 @@ class DSSTPropagator(org.orekit.propagation.integration.AbstractIntegratedPropag
                 :meth:`~org.orekit.propagation.Propagator.setAttitudeProvider` in interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.setAttitudeProvider`Â in
-                classÂ :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`
+                :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.setAttitudeProvider` in
+                class :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`
         
             Parameters:
                 attitudeProvider (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude provider
@@ -774,18 +776,18 @@ class DSSTPropagator(org.orekit.propagation.integration.AbstractIntegratedPropag
         ...
     def setMu(self, double: float) -> None:
         """
-            Set the central attraction coefficient Î¼.
+            Set the central attraction coefficient μ.
         
             Setting the central attraction coefficient is equivalent to
             :meth:`~org.orekit.propagation.semianalytical.dsst.DSSTPropagator.addForceModel` a
             :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTNewtonianAttraction` force model.
         
             Overrides:
-                :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.setMu`Â in
-                classÂ :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`
+                :meth:`~org.orekit.propagation.integration.AbstractIntegratedPropagator.setMu` in
+                class :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`
         
             Parameters:
-                mu (double): central attraction coefficient (mÂ³/sÂ²)
+                mu (double): central attraction coefficient (m³/s²)
         
             Also see:
                 :meth:`~org.orekit.propagation.semianalytical.dsst.DSSTPropagator.addForceModel`,
@@ -807,17 +809,7 @@ class DSSTPropagator(org.orekit.propagation.integration.AbstractIntegratedPropag
         
         """
         ...
-    def setSelectedCoefficients(self, set: java.util.Set[str]) -> None:
-        """
-            Set the selected short periodic coefficients that must be stored as additional states.
-        
-            Parameters:
-                selectedCoefficients (Set<String> selectedCoefficients): short periodic coefficients that must be stored as additional states (null means no coefficients are selected, empty set
-                    means all coefficients are selected)
-        
-        
-        """
-        ...
+    def setSelectedCoefficients(self, set: java.util.Set[str]) -> None: ...
     def setShortPeriodTerms(self, list: java.util.List[org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms]) -> None: ...
     @typing.overload
     @staticmethod
@@ -858,8 +850,7 @@ class DSSTPropagator(org.orekit.propagation.integration.AbstractIntegratedPropag
         
             .. code-block: java
             
-            
-              V rÂ² |dV| = mu |dr|
+              V r² |dV| = mu |dr|
               
         
             So we deduce a scalar velocity error consistent with the position error. From here, we apply orbits Jacobians matrices
@@ -882,7 +873,7 @@ class DSSTPropagator(org.orekit.propagation.integration.AbstractIntegratedPropag
 _FieldDSSTPropagator__T = typing.TypeVar('_FieldDSSTPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldDSSTPropagator(org.orekit.propagation.integration.FieldAbstractIntegratedPropagator[_FieldDSSTPropagator__T], typing.Generic[_FieldDSSTPropagator__T]):
     """
-    public class FieldDSSTPropagator<T extends CalculusFieldElement<T>> extends :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`<T>
+    public class FieldDSSTPropagator<T extends :class:`~org.orekit.propagation.semianalytical.dsst.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`<T>
     
         This class propagates :class:`~org.orekit.orbits.FieldOrbit` using the DSST theory.
     
@@ -914,7 +905,7 @@ class FieldDSSTPropagator(org.orekit.propagation.integration.FieldAbstractIntegr
     
         The state that is seen by the integrator is a simple six elements double array. These six elements are:
     
-          - the :class:`~org.orekit.orbits.FieldEquinoctialOrbit` (a, e :sub:`x` , e :sub:`y` , h :sub:`x` , h :sub:`y` , ÃŽÂ»
+          - the :class:`~org.orekit.orbits.FieldEquinoctialOrbit` (a, e :sub:`x` , e :sub:`y` , h :sub:`x` , h :sub:`y` , λ
             :sub:`m` ) in meters and radians,
     
     
@@ -972,8 +963,8 @@ class FieldDSSTPropagator(org.orekit.propagation.integration.FieldAbstractIntegr
             Get propagation parameter type.
         
             Overrides:
-                :meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.getOrbitType`Â in
-                classÂ :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`
+                :meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.getOrbitType` in
+                class :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`
         
             Returns:
                 orbit type used for propagation
@@ -986,8 +977,8 @@ class FieldDSSTPropagator(org.orekit.propagation.integration.FieldAbstractIntegr
             Get propagation parameter type.
         
             Overrides:
-                :meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.getPositionAngleType`Â in
-                classÂ :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`
+                :meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.getPositionAngleType` in
+                class :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`
         
             Returns:
                 angle type to use for propagation
@@ -1005,17 +996,7 @@ class FieldDSSTPropagator(org.orekit.propagation.integration.FieldAbstractIntegr
         
         """
         ...
-    def getSelectedCoefficients(self) -> java.util.Set[str]:
-        """
-            Get the selected short periodic coefficients that must be stored as additional states.
-        
-            Returns:
-                short periodic coefficients that must be stored as additional states (null means no coefficients are selected, empty set
-                means all coefficients are selected)
-        
-        
-        """
-        ...
+    def getSelectedCoefficients(self) -> java.util.Set[str]: ...
     def initialIsOsculating(self) -> bool:
         """
             Check if the initial state is provided in osculating elements.
@@ -1045,12 +1026,12 @@ class FieldDSSTPropagator(org.orekit.propagation.integration.FieldAbstractIntegr
             Set attitude provider.
         
             Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.setAttitudeProvider`Â in
-                interfaceÂ :class:`~org.orekit.propagation.FieldPropagator`
+                :meth:`~org.orekit.propagation.FieldPropagator.setAttitudeProvider` in
+                interface :class:`~org.orekit.propagation.FieldPropagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.setAttitudeProvider`Â in
-                classÂ :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`
+                :meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.setAttitudeProvider` in
+                class :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`
         
             Parameters:
                 attitudeProvider (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude provider
@@ -1110,18 +1091,18 @@ class FieldDSSTPropagator(org.orekit.propagation.integration.FieldAbstractIntegr
         ...
     def setMu(self, t: _FieldDSSTPropagator__T) -> None:
         """
-            Set the central attraction coefficient Î¼.
+            Set the central attraction coefficient μ.
         
             Setting the central attraction coefficient is equivalent to
             :meth:`~org.orekit.propagation.semianalytical.dsst.FieldDSSTPropagator.addForceModel` a
             :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTNewtonianAttraction` force model.
         
             Overrides:
-                :meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.setMu`Â in
-                classÂ :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`
+                :meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.setMu` in
+                class :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`
         
             Parameters:
-                mu (:class:`~org.orekit.propagation.semianalytical.dsst.FieldDSSTPropagator`): central attraction coefficient (mÂ³/sÂ²)
+                mu (:class:`~org.orekit.propagation.semianalytical.dsst.FieldDSSTPropagator`): central attraction coefficient (m³/s²)
         
             Also see:
                 :meth:`~org.orekit.propagation.semianalytical.dsst.FieldDSSTPropagator.addForceModel`,
@@ -1143,17 +1124,7 @@ class FieldDSSTPropagator(org.orekit.propagation.integration.FieldAbstractIntegr
         
         """
         ...
-    def setSelectedCoefficients(self, set: java.util.Set[str]) -> None:
-        """
-            Set the selected short periodic coefficients that must be stored as additional states.
-        
-            Parameters:
-                selectedCoefficients (Set<String> selectedCoefficients): short periodic coefficients that must be stored as additional states (null means no coefficients are selected, empty set
-                    means all coefficients are selected)
-        
-        
-        """
-        ...
+    def setSelectedCoefficients(self, set: java.util.Set[str]) -> None: ...
     _tolerances_0__T = typing.TypeVar('_tolerances_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _tolerances_1__T = typing.TypeVar('_tolerances_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
@@ -1195,8 +1166,7 @@ class FieldDSSTPropagator(org.orekit.propagation.integration.FieldAbstractIntegr
         
             .. code-block: java
             
-            
-              V rÂ² |dV| = mu |dr|
+              V r² |dV| = mu |dr|
               
         
             So we deduce a scalar velocity error consistent with the position error. From here, we apply orbits Jacobians matrices

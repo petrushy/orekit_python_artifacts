@@ -15,7 +15,7 @@ import typing
 
 class ComplexODEConverter:
     """
-    public class ComplexODEConverter extends Object
+    public class ComplexODEConverter extends :class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This class converts :class:`~org.hipparchus.ode.ComplexOrdinaryDifferentialEquation` into
         :class:`~org.hipparchus.ode.OrdinaryDifferentialEquation`.
@@ -26,12 +26,13 @@ class ComplexODEConverter:
         The transformation is done by changing the n dimension state vector to a 2n dimension vector, where the even components
         are real parts and odd components are imaginary parts.
     
-        One should be aware that the data is duplicated during the transformation process and that for each call to null, this
-        wrapper does copy 4n scalars : 2n before the call to null in order to dispatch the y state vector, and 2n after the call
-        to gather zDot. Since the underlying problem by itself perhaps also needs to copy data and dispatch the arrays into
-        domain objects, this has an impact on both memory and CPU usage. The only way to avoid this duplication is to perform
-        the transformation at the problem level, i.e. to implement the problem as a first order one and then avoid using this
-        class.
+        One should be aware that the data is duplicated during the transformation process and that for each call to
+        :meth:`~org.hipparchus.ode.OrdinaryDifferentialEquation.computeDerivatives`, this wrapper does copy 4n scalars : 2n
+        before the call to :meth:`~org.hipparchus.ode.OrdinaryDifferentialEquation.computeDerivatives` in order to dispatch the
+        y state vector, and 2n after the call to gather zDot. Since the underlying problem by itself perhaps also needs to copy
+        data and dispatch the arrays into domain objects, this has an impact on both memory and CPU usage. The only way to avoid
+        this duplication is to perform the transformation at the problem level, i.e. to implement the problem as a first order
+        one and then avoid using this class.
     
         The proper way to use the converter is as follows:
     
@@ -113,7 +114,7 @@ class ComplexODEConverter:
 
 class ComplexODEState(java.io.Serializable):
     """
-    public class ComplexODEState extends Object implements Serializable
+    public class ComplexODEState extends :class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Container for time, main and secondary state vectors.
     
@@ -248,7 +249,8 @@ class ComplexOrdinaryDifferentialEquation:
     """
     public interface ComplexOrdinaryDifferentialEquation
     
-        This interface represents a first order differential equations set for null.
+        This interface represents a first order differential equations set for
+        :class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`.
     
         Since:
             1.4
@@ -262,7 +264,7 @@ class ComplexOrdinaryDifferentialEquation:
         
             Parameters:
                 t (double): current value of the independent *time* variable
-                y (Complex[]): array containing the current value of the state vector
+                y (:class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`[]): array containing the current value of the state vector
         
             Returns:
                 time derivative of the state vector
@@ -291,7 +293,7 @@ class ComplexOrdinaryDifferentialEquation:
         
             Parameters:
                 t0 (double): value of the independent *time* variable at integration start
-                y0 (Complex[]): array containing the value of the state vector at integration start
+                y0 (:class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`[]): array containing the value of the state vector at integration start
                 finalTime (double): target time for the integration
         
         
@@ -305,7 +307,7 @@ class ComplexSecondaryODE:
 
 class DenseOutputModel(org.hipparchus.ode.sampling.ODEStepHandler, java.io.Serializable):
     """
-    public class DenseOutputModel extends Object implements :class:`~org.hipparchus.ode.sampling.ODEStepHandler`, Serializable
+    public class DenseOutputModel extends :class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.ode.sampling.ODEStepHandler`, :class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         This class stores all information provided by an ODE integrator during the integration process and build a continuous
         model of the solution from this.
@@ -349,8 +351,8 @@ class DenseOutputModel(org.hipparchus.ode.sampling.ODEStepHandler, java.io.Seria
             Finalize integration.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.sampling.ODEStepHandler.finish`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.sampling.ODEStepHandler`
+                :meth:`~org.hipparchus.ode.sampling.ODEStepHandler.finish` in
+                interface :class:`~org.hipparchus.ode.sampling.ODEStepHandler`
         
             Parameters:
                 finalState (:class:`~org.hipparchus.ode.ODEStateAndDerivative`): state at integration end
@@ -396,8 +398,8 @@ class DenseOutputModel(org.hipparchus.ode.sampling.ODEStepHandler, java.io.Seria
             Handle the last accepted step.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.sampling.ODEStepHandler.handleStep`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.sampling.ODEStepHandler`
+                :meth:`~org.hipparchus.ode.sampling.ODEStepHandler.handleStep` in
+                interface :class:`~org.hipparchus.ode.sampling.ODEStepHandler`
         
             Parameters:
                 interpolator (:class:`~org.hipparchus.ode.sampling.ODEStateInterpolator`): interpolator for the last accepted step
@@ -415,8 +417,8 @@ class DenseOutputModel(org.hipparchus.ode.sampling.ODEStepHandler, java.io.Seria
             The default implementation does nothing
         
             Specified by:
-                :meth:`~org.hipparchus.ode.sampling.ODEStepHandler.init`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.sampling.ODEStepHandler`
+                :meth:`~org.hipparchus.ode.sampling.ODEStepHandler.init` in
+                interface :class:`~org.hipparchus.ode.sampling.ODEStepHandler`
         
             Parameters:
                 initialState (:class:`~org.hipparchus.ode.ODEStateAndDerivative`): initial time, state vector and derivative
@@ -428,7 +430,7 @@ class DenseOutputModel(org.hipparchus.ode.sampling.ODEStepHandler, java.io.Seria
 
 class EquationsMapper(java.io.Serializable):
     """
-    public class EquationsMapper extends Object implements Serializable
+    public class EquationsMapper extends :class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Class mapping the part of a complete state or derivative that pertains to a specific differential equation.
     
@@ -465,7 +467,7 @@ class EquationsMapper(java.io.Serializable):
 
 class ExpandableODE:
     """
-    public class ExpandableODE extends Object
+    public class ExpandableODE extends :class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This class represents a combined set of first order differential equations, with at least a primary set of equations
         expandable by some sets of secondary equations.
@@ -528,8 +530,8 @@ class ExpandableODE:
                 finalTime (double): target time for the integration
         
             Raises:
-                : if the number of functions evaluations is exceeded
-                : if arrays dimensions do not match equations settings
+                :class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`: if the number of functions evaluations is exceeded
+                :class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`: if arrays dimensions do not match equations settings
         
         
         """
@@ -538,7 +540,7 @@ class ExpandableODE:
 _FieldDenseOutputModel__T = typing.TypeVar('_FieldDenseOutputModel__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldDenseOutputModel(org.hipparchus.ode.sampling.FieldODEStepHandler[_FieldDenseOutputModel__T], typing.Generic[_FieldDenseOutputModel__T]):
     """
-    public class FieldDenseOutputModel<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.hipparchus.ode.sampling.FieldODEStepHandler`<T>
+    public class FieldDenseOutputModel<T extends :class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.ode.sampling.FieldODEStepHandler`<T>
     
         This class stores all information provided by an ODE integrator during the integration process and build a continuous
         model of the solution from this.
@@ -600,7 +602,7 @@ class FieldDenseOutputModel(org.hipparchus.ode.sampling.FieldODEStepHandler[_Fie
 _FieldEquationsMapper__T = typing.TypeVar('_FieldEquationsMapper__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldEquationsMapper(java.io.Serializable, typing.Generic[_FieldEquationsMapper__T]):
     """
-    public class FieldEquationsMapper<T extends CalculusFieldElement<T>> extends Object implements Serializable
+    public class FieldEquationsMapper<T extends :class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Class mapping the part of a complete state or derivative that pertains to a set of differential equations.
     
@@ -638,7 +640,7 @@ class FieldEquationsMapper(java.io.Serializable, typing.Generic[_FieldEquationsM
 _FieldExpandableODE__T = typing.TypeVar('_FieldExpandableODE__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldExpandableODE(typing.Generic[_FieldExpandableODE__T]):
     """
-    public class FieldExpandableODE<T extends CalculusFieldElement<T>> extends Object
+    public class FieldExpandableODE<T extends :class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This class represents a combined set of first order differential equations, with at least a primary set of equations
         expandable by some sets of secondary equations.
@@ -664,7 +666,7 @@ class FieldExpandableODE(typing.Generic[_FieldExpandableODE__T]):
 _FieldODEIntegrator__T = typing.TypeVar('_FieldODEIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldODEIntegrator(typing.Generic[_FieldODEIntegrator__T]):
     """
-    public interface FieldODEIntegrator<T extends CalculusFieldElement<T>>
+    public interface FieldODEIntegrator<T extends :class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`<T>>
     
         This interface represents a first order integrator for differential equations.
     
@@ -775,7 +777,7 @@ class FieldODEIntegrator(typing.Generic[_FieldODEIntegrator__T]):
 _FieldODEState__T = typing.TypeVar('_FieldODEState__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldODEState(typing.Generic[_FieldODEState__T]):
     """
-    public class FieldODEState<T extends CalculusFieldElement<T>> extends Object
+    public class FieldODEState<T extends :class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Container for time, main and secondary state vectors.
     
@@ -892,7 +894,7 @@ class FieldODEState(typing.Generic[_FieldODEState__T]):
 _FieldOrdinaryDifferentialEquation__T = typing.TypeVar('_FieldOrdinaryDifferentialEquation__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldOrdinaryDifferentialEquation(typing.Generic[_FieldOrdinaryDifferentialEquation__T]):
     """
-    public interface FieldOrdinaryDifferentialEquation<T extends CalculusFieldElement<T>>
+    public interface FieldOrdinaryDifferentialEquation<T extends :class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`<T>>
     
         This interface represents a first order differential equations set.
     
@@ -960,7 +962,7 @@ class FieldSecondaryODE(typing.Generic[_FieldSecondaryODE__T]):
 
 class LocalizedODEFormats(java.lang.Enum['LocalizedODEFormats'], org.hipparchus.exception.Localizable):
     """
-    public enum LocalizedODEFormats extends Enum<:class:`~org.hipparchus.ode.LocalizedODEFormats`> implements Localizable
+    public enum LocalizedODEFormats extends :class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.hipparchus.ode.LocalizedODEFormats`> implements :class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`
     
         Enumeration for localized messages formats used in exceptions messages.
     
@@ -983,7 +985,8 @@ class LocalizedODEFormats(java.lang.Enum['LocalizedODEFormats'], org.hipparchus.
         """
         
             Specified by:
-                 in interface 
+                :meth:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus` in
+                interface :class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`
         
         
         """
@@ -992,7 +995,8 @@ class LocalizedODEFormats(java.lang.Enum['LocalizedODEFormats'], org.hipparchus.
         """
         
             Specified by:
-                 in interface 
+                :meth:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus` in
+                interface :class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`
         
         
         """
@@ -1009,14 +1013,14 @@ class LocalizedODEFormats(java.lang.Enum['LocalizedODEFormats'], org.hipparchus.
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -1043,7 +1047,7 @@ class LocalizedODEFormats(java.lang.Enum['LocalizedODEFormats'], org.hipparchus.
 _MultistepFieldIntegrator__T = typing.TypeVar('_MultistepFieldIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class MultistepFieldIntegrator(org.hipparchus.ode.nonstiff.AdaptiveStepsizeFieldIntegrator[_MultistepFieldIntegrator__T], typing.Generic[_MultistepFieldIntegrator__T]):
     """
-    public abstract class MultistepFieldIntegrator<T extends CalculusFieldElement<T>> extends :class:`~org.hipparchus.ode.nonstiff.AdaptiveStepsizeFieldIntegrator`<T>
+    public abstract class MultistepFieldIntegrator<T extends :class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.ode.nonstiff.AdaptiveStepsizeFieldIntegrator`<T>
     
         This class is the base class for multistep integrators for Ordinary Differential Equations.
     
@@ -1298,8 +1302,8 @@ class ODEIntegrator:
         """
             Add an event handler to the integrator.
         
-            Uses a default null with an absolute accuracy equal to the given convergence threshold, as root-finding algorithm to
-            detect the state events.
+            Uses a default :class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus` with an absolute accuracy equal to the
+            given convergence threshold, as root-finding algorithm to detect the state events.
         
             Parameters:
                 handler (:class:`~org.hipparchus.ode.events.ODEEventHandler`): event handler
@@ -1314,6 +1318,8 @@ class ODEIntegrator:
                 :meth:`~org.hipparchus.ode.ODEIntegrator.getEventHandlersConfigurations`,
                 :meth:`~org.hipparchus.ode.ODEIntegrator.clearEventHandlers`
         
+        void addEventHandler(:class:`~org.hipparchus.ode.events.ODEEventHandler` handler, double maxCheckInterval, double convergence, int maxIterationCount, :class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`<:class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`> solver)
+        
             Add an event handler to the integrator.
         
             Parameters:
@@ -1323,7 +1329,7 @@ class ODEIntegrator:
                 convergence (double): convergence threshold in the event time search. Must be smaller than :code:`maxCheckInterval` and should be small
                     compared to time scale of the ODE dynamics.
                 maxIterationCount (int): upper limit of the iteration count in the event time search
-                solver (BracketedUnivariateSolver<UnivariateFunction> solver): The root-finding algorithm to use to detect the state events.
+                solver (:class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`<:class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`> solver): The root-finding algorithm to use to detect the state events.
         
             Also see:
                 :meth:`~org.hipparchus.ode.ODEIntegrator.getEventHandlers`,
@@ -1461,7 +1467,7 @@ class ODEIntegrator:
 
 class ODEState(java.io.Serializable):
     """
-    public class ODEState extends Object implements Serializable
+    public class ODEState extends :class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Container for time, main and secondary state vectors.
     
@@ -1651,7 +1657,7 @@ class OrdinaryDifferentialEquation:
 
 class ParameterConfiguration:
     """
-    public class ParameterConfiguration extends Object
+    public class ParameterConfiguration extends :class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Simple container pairing a parameter name with a step in order to compute the associated Jacobian matrix by finite
         difference.
@@ -1685,19 +1691,7 @@ class Parameterizable:
     
         This interface enables to process any parameterizable object.
     """
-    def getParametersNames(self) -> java.util.List[str]:
-        """
-            Get the names of the supported parameters.
-        
-            Returns:
-                parameters names
-        
-            Also see:
-                :meth:`~org.hipparchus.ode.Parameterizable.isSupported`
-        
-        
-        """
-        ...
+    def getParametersNames(self) -> java.util.List[str]: ...
     def isSupported(self, string: str) -> bool:
         """
             Check if a parameter is supported.
@@ -1705,7 +1699,7 @@ class Parameterizable:
             Supported parameters are those listed by :meth:`~org.hipparchus.ode.Parameterizable.getParametersNames`.
         
             Parameters:
-                name (String): parameter name to check
+                name (:class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): parameter name to check
         
             Returns:
                 true if the parameter is supported
@@ -1771,7 +1765,7 @@ class SecondaryODE:
 
 class VariationalEquation:
     """
-    public class VariationalEquation extends Object
+    public class VariationalEquation extends :class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This class defines a set of :class:`~org.hipparchus.ode.SecondaryODE` to compute the global Jacobian matrices with
         respect to the initial state vector and, if any, to some parameters of the primary ODE set.
@@ -1844,7 +1838,7 @@ class VariationalEquation:
         
             Parameters:
                 state (:class:`~org.hipparchus.ode.ODEState`): state from which to extract Jacobian matrix
-                pName (String): name of the parameter for the computed Jacobian matrix
+                pName (:class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the parameter for the computed Jacobian matrix
         
             Returns:
                 Jacobian matrix dY/dP with respect to the named parameter
@@ -1861,7 +1855,8 @@ class VariationalEquation:
             This method inserts the initial Jacobian matrices data into an :class:`~org.hipparchus.ode.ODEState` by overriding the
             additional state components corresponding to the instance. It must be called prior to integrate the equations.
         
-            This method must be called *after* null and null.
+            This method must be called *after* :meth:`~org.hipparchus.ode.VariationalEquation.setInitialMainStateJacobian` and
+            :meth:`~org.hipparchus.ode.VariationalEquation.setInitialParameterJacobian`.
         
             Parameters:
                 initialState (:class:`~org.hipparchus.ode.ODEState`): initial state, without the initial Jacobians matrices
@@ -1878,7 +1873,7 @@ class VariationalEquation:
 _AbstractFieldIntegrator__T = typing.TypeVar('_AbstractFieldIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class AbstractFieldIntegrator(FieldODEIntegrator[_AbstractFieldIntegrator__T], typing.Generic[_AbstractFieldIntegrator__T]):
     """
-    public abstract class AbstractFieldIntegrator<T extends CalculusFieldElement<T>> extends Object implements :class:`~org.hipparchus.ode.FieldODEIntegrator`<T>
+    public abstract class AbstractFieldIntegrator<T extends :class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.ode.FieldODEIntegrator`<T>
     
         Base class managing common boilerplate for all integrators.
     """
@@ -1892,8 +1887,8 @@ class AbstractFieldIntegrator(FieldODEIntegrator[_AbstractFieldIntegrator__T], t
             Remove all the event handlers that have been added to the integrator.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.FieldODEIntegrator.clearEventHandlers`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.FieldODEIntegrator`
+                :meth:`~org.hipparchus.ode.FieldODEIntegrator.clearEventHandlers` in
+                interface :class:`~org.hipparchus.ode.FieldODEIntegrator`
         
             Also see:
                 :meth:`~org.hipparchus.ode.FieldODEIntegrator.addEventHandler`,
@@ -1909,8 +1904,8 @@ class AbstractFieldIntegrator(FieldODEIntegrator[_AbstractFieldIntegrator__T], t
             Remove all the step handlers that have been added to the integrator.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.FieldODEIntegrator.clearStepHandlers`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.FieldODEIntegrator`
+                :meth:`~org.hipparchus.ode.FieldODEIntegrator.clearStepHandlers` in
+                interface :class:`~org.hipparchus.ode.FieldODEIntegrator`
         
             Also see:
                 :meth:`~org.hipparchus.ode.FieldODEIntegrator.addStepHandler`,
@@ -1931,8 +1926,8 @@ class AbstractFieldIntegrator(FieldODEIntegrator[_AbstractFieldIntegrator__T], t
             The result is undefined if the method is called outside of calls to :code:`integrate`.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.FieldODEIntegrator.getCurrentSignedStepsize`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.FieldODEIntegrator`
+                :meth:`~org.hipparchus.ode.FieldODEIntegrator.getCurrentSignedStepsize` in
+                interface :class:`~org.hipparchus.ode.FieldODEIntegrator`
         
             Returns:
                 current signed value of the stepsize
@@ -1948,8 +1943,8 @@ class AbstractFieldIntegrator(FieldODEIntegrator[_AbstractFieldIntegrator__T], t
             been called yet.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.FieldODEIntegrator.getEvaluations`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.FieldODEIntegrator`
+                :meth:`~org.hipparchus.ode.FieldODEIntegrator.getEvaluations` in
+                interface :class:`~org.hipparchus.ode.FieldODEIntegrator`
         
             Returns:
                 number of evaluations of the differential equations function
@@ -1965,8 +1960,8 @@ class AbstractFieldIntegrator(FieldODEIntegrator[_AbstractFieldIntegrator__T], t
             Get the maximal number of functions evaluations.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.FieldODEIntegrator.getMaxEvaluations`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.FieldODEIntegrator`
+                :meth:`~org.hipparchus.ode.FieldODEIntegrator.getMaxEvaluations` in
+                interface :class:`~org.hipparchus.ode.FieldODEIntegrator`
         
             Returns:
                 maximal number of functions evaluations
@@ -1997,8 +1992,8 @@ class AbstractFieldIntegrator(FieldODEIntegrator[_AbstractFieldIntegrator__T], t
             set or when lots of discrete events are triggered, thus leading to many rejected steps.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.FieldODEIntegrator.setMaxEvaluations`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.FieldODEIntegrator`
+                :meth:`~org.hipparchus.ode.FieldODEIntegrator.setMaxEvaluations` in
+                interface :class:`~org.hipparchus.ode.FieldODEIntegrator`
         
             Parameters:
                 maxEvaluations (int): maximal number of function evaluations (negative values are silently converted to maximal integer value, thus
@@ -2010,7 +2005,7 @@ class AbstractFieldIntegrator(FieldODEIntegrator[_AbstractFieldIntegrator__T], t
 
 class AbstractIntegrator(ODEIntegrator):
     """
-    public abstract class AbstractIntegrator extends Object implements :class:`~org.hipparchus.ode.ODEIntegrator`
+    public abstract class AbstractIntegrator extends :class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.ode.ODEIntegrator`
     
         Base class managing common boilerplate for all integrators.
     """
@@ -2019,8 +2014,8 @@ class AbstractIntegrator(ODEIntegrator):
         """
             Add an event handler to the integrator.
         
-            Uses a default null with an absolute accuracy equal to the given convergence threshold, as root-finding algorithm to
-            detect the state events.
+            Uses a default :class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus` with an absolute accuracy equal to the
+            given convergence threshold, as root-finding algorithm to detect the state events.
         
             Specified by:
                 :meth:`~org.hipparchus.ode.ODEIntegrator.addEventHandler` in interface :class:`~org.hipparchus.ode.ODEIntegrator`
@@ -2038,6 +2033,8 @@ class AbstractIntegrator(ODEIntegrator):
                 :meth:`~org.hipparchus.ode.ODEIntegrator.getEventHandlersConfigurations`,
                 :meth:`~org.hipparchus.ode.ODEIntegrator.clearEventHandlers`
         
+        public void addEventHandler(:class:`~org.hipparchus.ode.events.ODEEventHandler` handler, double maxCheckInterval, double convergence, int maxIterationCount, :class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`<:class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`> solver)
+        
             Add an event handler to the integrator.
         
             Specified by:
@@ -2050,7 +2047,7 @@ class AbstractIntegrator(ODEIntegrator):
                 convergence (double): convergence threshold in the event time search. Must be smaller than :code:`maxCheckInterval` and should be small
                     compared to time scale of the ODE dynamics.
                 maxIterationCount (int): upper limit of the iteration count in the event time search
-                solver (BracketedUnivariateSolver<UnivariateFunction> solver): The root-finding algorithm to use to detect the state events.
+                solver (:class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`<:class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`> solver): The root-finding algorithm to use to detect the state events.
         
             Also see:
                 :meth:`~org.hipparchus.ode.ODEIntegrator.getEventHandlers`,
@@ -2120,8 +2117,8 @@ class AbstractIntegrator(ODEIntegrator):
             The result is undefined if the method is called outside of calls to :code:`integrate`.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.ODEIntegrator.getCurrentSignedStepsize`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.ODEIntegrator`
+                :meth:`~org.hipparchus.ode.ODEIntegrator.getCurrentSignedStepsize` in
+                interface :class:`~org.hipparchus.ode.ODEIntegrator`
         
             Returns:
                 current signed value of the stepsize
@@ -2213,28 +2210,12 @@ class AbstractIntegrator(ODEIntegrator):
 
 class AbstractParameterizable(Parameterizable):
     """
-    public abstract class AbstractParameterizable extends Object implements :class:`~org.hipparchus.ode.Parameterizable`
+    public abstract class AbstractParameterizable extends :class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.ode.Parameterizable`
     
         This abstract class provides boilerplate parameters list.
     """
     def complainIfNotSupported(self, string: str) -> None: ...
-    def getParametersNames(self) -> java.util.List[str]:
-        """
-            Get the names of the supported parameters.
-        
-            Specified by:
-                :meth:`~org.hipparchus.ode.Parameterizable.getParametersNames`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.Parameterizable`
-        
-            Returns:
-                parameters names
-        
-            Also see:
-                :meth:`~org.hipparchus.ode.Parameterizable.isSupported`
-        
-        
-        """
-        ...
+    def getParametersNames(self) -> java.util.List[str]: ...
     def isSupported(self, string: str) -> bool:
         """
             Check if a parameter is supported.
@@ -2245,7 +2226,7 @@ class AbstractParameterizable(Parameterizable):
                 :meth:`~org.hipparchus.ode.Parameterizable.isSupported` in interface :class:`~org.hipparchus.ode.Parameterizable`
         
             Parameters:
-                name (String): parameter name to check
+                name (:class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): parameter name to check
         
             Returns:
                 true if the parameter is supported
@@ -2323,7 +2304,7 @@ class ComplexODEStateAndDerivative(ComplexODEState):
 _FieldODEStateAndDerivative__T = typing.TypeVar('_FieldODEStateAndDerivative__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldODEStateAndDerivative(FieldODEState[_FieldODEStateAndDerivative__T], typing.Generic[_FieldODEStateAndDerivative__T]):
     """
-    public class FieldODEStateAndDerivative<T extends CalculusFieldElement<T>> extends :class:`~org.hipparchus.ode.FieldODEState`<T>
+    public class FieldODEStateAndDerivative<T extends :class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.ode.FieldODEState`<T>
     
         Container for time, main and secondary state vectors as well as their derivatives.
     
@@ -2385,7 +2366,7 @@ class FieldODEStateAndDerivative(FieldODEState[_FieldODEStateAndDerivative__T], 
 
 class FirstOrderConverter(OrdinaryDifferentialEquation):
     """
-    public class FirstOrderConverter extends Object implements :class:`~org.hipparchus.ode.OrdinaryDifferentialEquation`
+    public class FirstOrderConverter extends :class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.ode.OrdinaryDifferentialEquation`
     
         This class converts second order differential equations to first order ones.
     
@@ -2397,12 +2378,13 @@ class FirstOrderConverter(OrdinaryDifferentialEquation):
         derivative of this state vector then really contains both the first and second time derivative of the initial state
         vector, which can be handled by the underlying second order equations set.
     
-        One should be aware that the data is duplicated during the transformation process and that for each call to null, this
-        wrapper does copy 4n scalars : 2n before the call to null in order to dispatch the y state vector into z and zDot, and
-        2n after the call to gather zDot and zDDot into yDot. Since the underlying problem by itself perhaps also needs to copy
-        data and dispatch the arrays into domain objects, this has an impact on both memory and CPU usage. The only way to avoid
-        this duplication is to perform the transformation at the problem level, i.e. to implement the problem as a first order
-        one and then avoid using this class.
+        One should be aware that the data is duplicated during the transformation process and that for each call to
+        :meth:`~org.hipparchus.ode.FirstOrderConverter.computeDerivatives`, this wrapper does copy 4n scalars : 2n before the
+        call to :meth:`~org.hipparchus.ode.SecondOrderODE.computeSecondDerivatives` in order to dispatch the y state vector into
+        z and zDot, and 2n after the call to gather zDot and zDDot into yDot. Since the underlying problem by itself perhaps
+        also needs to copy data and dispatch the arrays into domain objects, this has an impact on both memory and CPU usage.
+        The only way to avoid this duplication is to perform the transformation at the problem level, i.e. to implement the
+        problem as a first order one and then avoid using this class.
     
         Also see:
             :class:`~org.hipparchus.ode.ODEIntegrator`, :class:`~org.hipparchus.ode.OrdinaryDifferentialEquation`,
@@ -2414,7 +2396,8 @@ class FirstOrderConverter(OrdinaryDifferentialEquation):
             Get the current time derivative of the state vector.
         
             Specified by:
-                 in interface :class:`~org.hipparchus.ode.OrdinaryDifferentialEquation`
+                :meth:`~org.hipparchus.ode.OrdinaryDifferentialEquation.computeDerivatives` in
+                interface :class:`~org.hipparchus.ode.OrdinaryDifferentialEquation`
         
             Parameters:
                 t (double): current value of the independent *time* variable
@@ -2433,8 +2416,8 @@ class FirstOrderConverter(OrdinaryDifferentialEquation):
             The dimension of the first order problem is twice the dimension of the underlying second order problem.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.OrdinaryDifferentialEquation.getDimension`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.OrdinaryDifferentialEquation`
+                :meth:`~org.hipparchus.ode.OrdinaryDifferentialEquation.getDimension` in
+                interface :class:`~org.hipparchus.ode.OrdinaryDifferentialEquation`
         
             Returns:
                 dimension of the problem
@@ -2533,25 +2516,7 @@ class ODEJacobiansProvider(OrdinaryDifferentialEquation, NamedParameterJacobianP
     """
     def computeMainStateJacobian(self, double: float, doubleArray: typing.List[float], doubleArray2: typing.List[float]) -> typing.List[typing.List[float]]: ...
     def computeParameterJacobian(self, double: float, doubleArray: typing.List[float], doubleArray2: typing.List[float], string: str) -> typing.List[float]: ...
-    def getParametersNames(self) -> java.util.List[str]:
-        """
-            Get the names of the supported parameters.
-        
-            The default implementation has no parameters at all.
-        
-            Specified by:
-                :meth:`~org.hipparchus.ode.Parameterizable.getParametersNames`Â in
-                interfaceÂ :class:`~org.hipparchus.ode.Parameterizable`
-        
-            Returns:
-                parameters names
-        
-            Also see:
-                :meth:`~org.hipparchus.ode.Parameterizable.isSupported`
-        
-        
-        """
-        ...
+    def getParametersNames(self) -> java.util.List[str]: ...
     def isSupported(self, string: str) -> bool:
         """
             Check if a parameter is supported.
@@ -2564,7 +2529,7 @@ class ODEJacobiansProvider(OrdinaryDifferentialEquation, NamedParameterJacobianP
                 :meth:`~org.hipparchus.ode.Parameterizable.isSupported` in interface :class:`~org.hipparchus.ode.Parameterizable`
         
             Parameters:
-                name (String): parameter name to check
+                name (:class:`~org.hipparchus.ode.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): parameter name to check
         
             Returns:
                 true if the parameter is supported

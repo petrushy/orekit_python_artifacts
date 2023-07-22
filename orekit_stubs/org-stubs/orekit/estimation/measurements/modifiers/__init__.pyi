@@ -17,7 +17,7 @@ import typing
 
 class AbstractAmbiguityModifier:
     """
-    public class AbstractAmbiguityModifier extends Object
+    public class AbstractAmbiguityModifier extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Base class for phase ambiguity modifier.
     
@@ -28,7 +28,7 @@ class AbstractAmbiguityModifier:
 
 class AbstractRelativisticClockModifier:
     """
-    public class AbstractRelativisticClockModifier extends Object
+    public class AbstractRelativisticClockModifier extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Class modifying theoretical measurements with relativistic clock correction.
     
@@ -46,7 +46,7 @@ class AbstractRelativisticClockModifier:
 
 class AbstractRelativisticJ2ClockModifier:
     """
-    public class AbstractRelativisticJ2ClockModifier extends Object
+    public class AbstractRelativisticJ2ClockModifier extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Class modifying theoretical measurements with relativistic J2 clock correction.
     
@@ -65,7 +65,7 @@ class AbstractRelativisticJ2ClockModifier:
 
 class AbstractShapiroBaseModifier:
     """
-    public class AbstractShapiroBaseModifier extends Object
+    public class AbstractShapiroBaseModifier extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Class modifying theoretical range measurement with Shapiro time delay.
     
@@ -78,7 +78,7 @@ class AbstractShapiroBaseModifier:
 
 class AngularIonosphericDelayModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.AngularAzEl]):
     """
-    public class AngularIonosphericDelayModifier extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.AngularAzEl`>
+    public class AngularIonosphericDelayModifier extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.AngularAzEl`>
     
         Class modifying theoretical angular measurement with ionospheric delay. The effect of ionospheric correction on the
         angular measurement is computed through the computation of the ionospheric delay. The spacecraft state is shifted by the
@@ -97,7 +97,7 @@ class AngularIonosphericDelayModifier(org.orekit.estimation.measurements.Estimat
 
 class AngularRadioRefractionModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.AngularAzEl]):
     """
-    public class AngularRadioRefractionModifier extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.AngularAzEl`>
+    public class AngularRadioRefractionModifier extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.AngularAzEl`>
     
         Class modifying theoretical angular measurement with ionospheric radio refractive index. A radio ray passing through the
         lower (non-ionized) layer of the atmosphere undergoes bending caused by the gradient of the relative index. Since the
@@ -114,7 +114,7 @@ class AngularRadioRefractionModifier(org.orekit.estimation.measurements.Estimati
 
 class AngularTroposphericDelayModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.AngularAzEl]):
     """
-    public class AngularTroposphericDelayModifier extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.AngularAzEl`>
+    public class AngularTroposphericDelayModifier extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.AngularAzEl`>
     
         Class modifying theoretical angular measurement with tropospheric delay. The effect of tropospheric correction on the
         angular is computed through the computation of the tropospheric delay.The spacecraft state is shifted by the computed
@@ -131,7 +131,7 @@ class AngularTroposphericDelayModifier(org.orekit.estimation.measurements.Estima
 
 class BaseRangeIonosphericDelayModifier:
     """
-    public abstract class BaseRangeIonosphericDelayModifier extends Object
+    public abstract class BaseRangeIonosphericDelayModifier extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Base class modifying theoretical range measurement with ionospheric delay. The effect of ionospheric correction on the
         range is directly computed through the computation of the ionospheric delay. The ionospheric delay depends on the
@@ -147,7 +147,7 @@ class BaseRangeIonosphericDelayModifier:
 
 class BaseRangeRateIonosphericDelayModifier:
     """
-    public abstract class BaseRangeRateIonosphericDelayModifier extends Object
+    public abstract class BaseRangeRateIonosphericDelayModifier extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Base class modifying theoretical range-rate measurement with ionospheric delay. The effect of ionospheric correction on
         the range-rate is directly computed through the computation of the ionospheric delay difference with respect to time.
@@ -163,7 +163,7 @@ class BaseRangeRateIonosphericDelayModifier:
 
 class BaseRangeRateTroposphericDelayModifier:
     """
-    public abstract class BaseRangeRateTroposphericDelayModifier extends Object
+    public abstract class BaseRangeRateTroposphericDelayModifier extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Baselass modifying theoretical range-rate measurements with tropospheric delay. The effect of tropospheric correction on
         the range-rate is directly computed through the computation of the tropospheric delay difference with respect to time.
@@ -208,7 +208,7 @@ class BaseRangeRateTroposphericDelayModifier:
 
 class BaseRangeTroposphericDelayModifier:
     """
-    public abstract class BaseRangeTroposphericDelayModifier extends Object
+    public abstract class BaseRangeTroposphericDelayModifier extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Base class modifying theoretical range measurements with tropospheric delay. The effect of tropospheric correction on
         the range is directly computed through the computation of the tropospheric delay. In general, for GNSS, VLBI, ... there
@@ -253,7 +253,7 @@ class BaseRangeTroposphericDelayModifier:
 _Bias__T = typing.TypeVar('_Bias__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class Bias(org.orekit.estimation.measurements.EstimationModifier[_Bias__T], typing.Generic[_Bias__T]):
     """
-    public class Bias<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<T>
+    public class Bias<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<T>
     
         Class modeling a measurement bias.
     
@@ -277,7 +277,7 @@ class ModifierGradientConverter(org.orekit.propagation.integration.AbstractGradi
 
 class OnBoardAntennaInterSatellitesPhaseModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.gnss.InterSatellitesPhase]):
     """
-    public class OnBoardAntennaInterSatellitesPhaseModifier extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.gnss.InterSatellitesPhase`>
+    public class OnBoardAntennaInterSatellitesPhaseModifier extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.gnss.InterSatellitesPhase`>
     
         On-board antenna offset effect on inter-satellites phase measurements.
     
@@ -290,7 +290,7 @@ class OnBoardAntennaInterSatellitesPhaseModifier(org.orekit.estimation.measureme
 
 class OnBoardAntennaInterSatellitesRangeModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.InterSatellitesRange]):
     """
-    public class OnBoardAntennaInterSatellitesRangeModifier extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.InterSatellitesRange`>
+    public class OnBoardAntennaInterSatellitesRangeModifier extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.InterSatellitesRange`>
     
         On-board antenna offset effect on inter-satellites range measurements.
     
@@ -303,7 +303,7 @@ class OnBoardAntennaInterSatellitesRangeModifier(org.orekit.estimation.measureme
 
 class OnBoardAntennaOneWayGNSSPhaseModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.gnss.OneWayGNSSPhase]):
     """
-    public class OnBoardAntennaOneWayGNSSPhaseModifier extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.gnss.OneWayGNSSPhase`>
+    public class OnBoardAntennaOneWayGNSSPhaseModifier extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.gnss.OneWayGNSSPhase`>
     
         On-board antenna offset effect on one-way GNSS phase measurements.
     
@@ -316,7 +316,7 @@ class OnBoardAntennaOneWayGNSSPhaseModifier(org.orekit.estimation.measurements.E
 
 class OnBoardAntennaOneWayGNSSRangeModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.gnss.OneWayGNSSRange]):
     """
-    public class OnBoardAntennaOneWayGNSSRangeModifier extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.gnss.OneWayGNSSRange`>
+    public class OnBoardAntennaOneWayGNSSRangeModifier extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.gnss.OneWayGNSSRange`>
     
         On-board antenna offset effect on one-way GNSS range measurements.
     
@@ -329,7 +329,7 @@ class OnBoardAntennaOneWayGNSSRangeModifier(org.orekit.estimation.measurements.E
 
 class OnBoardAntennaPhaseModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.gnss.Phase]):
     """
-    public class OnBoardAntennaPhaseModifier extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.gnss.Phase`>
+    public class OnBoardAntennaPhaseModifier extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.gnss.Phase`>
     
         On-board antenna offset effect on phase measurements.
     
@@ -342,7 +342,7 @@ class OnBoardAntennaPhaseModifier(org.orekit.estimation.measurements.EstimationM
 
 class OnBoardAntennaRangeModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.Range]):
     """
-    public class OnBoardAntennaRangeModifier extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.Range`>
+    public class OnBoardAntennaRangeModifier extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.Range`>
     
         On-board antenna offset effect on range measurements.
     
@@ -355,7 +355,7 @@ class OnBoardAntennaRangeModifier(org.orekit.estimation.measurements.EstimationM
 
 class OnBoardAntennaTurnAroundRangeModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.TurnAroundRange]):
     """
-    public class OnBoardAntennaTurnAroundRangeModifier extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.TurnAroundRange`>
+    public class OnBoardAntennaTurnAroundRangeModifier extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.TurnAroundRange`>
     
         On-board antenna offset effect on turn around range measurements.
     
@@ -369,7 +369,7 @@ class OnBoardAntennaTurnAroundRangeModifier(org.orekit.estimation.measurements.E
 _OutlierFilter__T = typing.TypeVar('_OutlierFilter__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class OutlierFilter(org.orekit.estimation.measurements.EstimationModifier[_OutlierFilter__T], typing.Generic[_OutlierFilter__T]):
     """
-    public class OutlierFilter<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<T>
+    public class OutlierFilter<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<T>
     
         Modifier that sets estimated measurement weight to 0 if residual is too far from expected domain.
     
@@ -382,7 +382,7 @@ class OutlierFilter(org.orekit.estimation.measurements.EstimationModifier[_Outli
 
 class PhaseIonosphericDelayModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.gnss.Phase]):
     """
-    public class PhaseIonosphericDelayModifier extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.gnss.Phase`>
+    public class PhaseIonosphericDelayModifier extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.gnss.Phase`>
     
         Class modifying theoretical phase measurement with ionospheric delay. The effect of ionospheric correction on the phase
         is directly computed through the computation of the ionospheric delay.
@@ -396,7 +396,7 @@ class PhaseIonosphericDelayModifier(org.orekit.estimation.measurements.Estimatio
 
 class PhaseTroposphericDelayModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.gnss.Phase]):
     """
-    public class PhaseTroposphericDelayModifier extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.gnss.Phase`>
+    public class PhaseTroposphericDelayModifier extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.gnss.Phase`>
     
         Class modifying theoretical phase measurement with tropospheric delay. The effect of tropospheric correction on the
         phase is directly computed through the computation of the tropospheric delay.
@@ -410,7 +410,7 @@ class PhaseTroposphericDelayModifier(org.orekit.estimation.measurements.Estimati
 
 class RangeModifierUtil:
     """
-    public class RangeModifierUtil extends Object
+    public class RangeModifierUtil extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Utility class modifying theoretical range measurement.
     
@@ -437,7 +437,7 @@ class RangeModifierUtil:
 
 class RangeRateModifierUtil:
     """
-    public class RangeRateModifierUtil extends Object
+    public class RangeRateModifierUtil extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Utility class modifying theoretical range-rate measurement.
     
@@ -464,7 +464,7 @@ class RangeRateModifierUtil:
 
 class TDOAIonosphericDelayModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.TDOA]):
     """
-    public class TDOAIonosphericDelayModifier extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.TDOA`>
+    public class TDOAIonosphericDelayModifier extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.TDOA`>
     
         Class modifying theoretical TDOA measurements with ionospheric delay.
     
@@ -482,7 +482,7 @@ class TDOAIonosphericDelayModifier(org.orekit.estimation.measurements.Estimation
 
 class TDOATroposphericDelayModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.TDOA]):
     """
-    public class TDOATroposphericDelayModifier extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.TDOA`>
+    public class TDOATroposphericDelayModifier extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.TDOA`>
     
         Class modifying theoretical TDOA measurements with tropospheric delay.
     
@@ -500,7 +500,7 @@ class TDOATroposphericDelayModifier(org.orekit.estimation.measurements.Estimatio
 
 class TurnAroundRangeIonosphericDelayModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.TurnAroundRange]):
     """
-    public class TurnAroundRangeIonosphericDelayModifier extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.TurnAroundRange`>
+    public class TurnAroundRangeIonosphericDelayModifier extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.TurnAroundRange`>
     
         Class modifying theoretical TurnAroundRange measurement with ionospheric delay. The effect of ionospheric correction on
         the TurnAroundRange is directly computed through the computation of the ionospheric delay. The ionospheric delay depends
@@ -518,7 +518,7 @@ class TurnAroundRangeIonosphericDelayModifier(org.orekit.estimation.measurements
 
 class TurnAroundRangeTroposphericDelayModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.TurnAroundRange]):
     """
-    public class TurnAroundRangeTroposphericDelayModifier extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.TurnAroundRange`>
+    public class TurnAroundRangeTroposphericDelayModifier extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.TurnAroundRange`>
     
         Class modifying theoretical turn-around TurnAroundRange measurement with tropospheric delay. The effect of tropospheric
         correction on the TurnAroundRange is directly computed through the computation of the tropospheric delay. In general,
@@ -654,7 +654,7 @@ class InterSatellitesPhaseAmbiguityModifier(AbstractAmbiguityModifier, org.oreki
 
 class IonosphericGradientConverter(ModifierGradientConverter):
     """
-    @Deprecated public class IonosphericGradientConverter extends :class:`~org.orekit.estimation.measurements.modifiers.ModifierGradientConverter`
+    :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class IonosphericGradientConverter extends :class:`~org.orekit.estimation.measurements.modifiers.ModifierGradientConverter`
     
         Deprecated.
         as of 11.2, replaced by :class:`~org.orekit.estimation.measurements.modifiers.ModifierGradientConverter`
@@ -693,7 +693,7 @@ class PhaseAmbiguityModifier(AbstractAmbiguityModifier, org.orekit.estimation.me
 
 class PythonParametricModelEffect(ParametricModelEffect):
     """
-    public class PythonParametricModelEffect extends Object
+    public class PythonParametricModelEffect extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     """
     def __init__(self): ...
     def evaluate(self, groundStation: org.orekit.estimation.measurements.GroundStation, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
@@ -733,24 +733,10 @@ class PythonParametricModelEffect(ParametricModelEffect):
 
 class PythonParametricModelEffectGradient(ParametricModelEffectGradient):
     """
-    public class PythonParametricModelEffectGradient extends Object
+    public class PythonParametricModelEffectGradient extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     """
     def __init__(self): ...
-    def evaluate(self, groundStation: org.orekit.estimation.measurements.GroundStation, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient], gradientArray: typing.List[org.hipparchus.analysis.differentiation.Gradient]) -> org.hipparchus.analysis.differentiation.Gradient:
-        """
-            Evaluate the parametric model effect.
-        
-            Parameters:
-                station (:class:`~org.orekit.estimation.measurements.GroundStation`): station
-                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<Gradient> state): spacecraft state
-                parameters (Gradient[]): parametric model parameters
-        
-            Returns:
-                the measurement error due to parametric model
-        
-        
-        """
-        ...
+    def evaluate(self, groundStation: org.orekit.estimation.measurements.GroundStation, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient], gradientArray: typing.List[org.hipparchus.analysis.differentiation.Gradient]) -> org.hipparchus.analysis.differentiation.Gradient: ...
     def finalize(self) -> None: ...
     def pythonDecRef(self) -> None:
         """
@@ -828,8 +814,8 @@ class RangeRateTroposphericDelayModifier(BaseRangeRateTroposphericDelayModifier,
         
             Overrides:
                 
-                meth:`~org.orekit.estimation.measurements.modifiers.BaseRangeRateTroposphericDelayModifier.rangeRateErrorTroposphericModel`Â in
-                classÂ :class:`~org.orekit.estimation.measurements.modifiers.BaseRangeRateTroposphericDelayModifier`
+                meth:`~org.orekit.estimation.measurements.modifiers.BaseRangeRateTroposphericDelayModifier.rangeRateErrorTroposphericModel` in
+                class :class:`~org.orekit.estimation.measurements.modifiers.BaseRangeRateTroposphericDelayModifier`
         
             Parameters:
                 station (:class:`~org.orekit.estimation.measurements.GroundStation`): station
@@ -847,8 +833,8 @@ class RangeRateTroposphericDelayModifier(BaseRangeRateTroposphericDelayModifier,
         
             Overrides:
                 
-                meth:`~org.orekit.estimation.measurements.modifiers.BaseRangeRateTroposphericDelayModifier.rangeRateErrorTroposphericModel`Â in
-                classÂ :class:`~org.orekit.estimation.measurements.modifiers.BaseRangeRateTroposphericDelayModifier`
+                meth:`~org.orekit.estimation.measurements.modifiers.BaseRangeRateTroposphericDelayModifier.rangeRateErrorTroposphericModel` in
+                class :class:`~org.orekit.estimation.measurements.modifiers.BaseRangeRateTroposphericDelayModifier`
         
             Parameters:
                 station (:class:`~org.orekit.estimation.measurements.GroundStation`): station
@@ -1234,7 +1220,7 @@ class ShapiroRangeModifier(AbstractShapiroBaseModifier, org.orekit.estimation.me
 
 class TroposphericGradientConverter(ModifierGradientConverter):
     """
-    @Deprecated public class TroposphericGradientConverter extends :class:`~org.orekit.estimation.measurements.modifiers.ModifierGradientConverter`
+    :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class TroposphericGradientConverter extends :class:`~org.orekit.estimation.measurements.modifiers.ModifierGradientConverter`
     
         Deprecated.
         as of 11.2, replaced by :class:`~org.orekit.estimation.measurements.modifiers.ModifierGradientConverter`

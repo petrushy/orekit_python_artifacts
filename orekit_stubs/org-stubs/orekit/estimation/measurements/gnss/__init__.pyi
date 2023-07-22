@@ -52,7 +52,7 @@ class AmbiguityAcceptance:
 
 class AmbiguitySolver:
     """
-    public class AmbiguitySolver extends Object
+    public class AmbiguitySolver extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Class for solving integer ambiguity problems.
     
@@ -78,7 +78,7 @@ class AmbiguitySolver:
 
 class CombinationType(java.lang.Enum['CombinationType']):
     """
-    public enum CombinationType extends Enum<:class:`~org.orekit.estimation.measurements.gnss.CombinationType`>
+    public enum CombinationType extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.estimation.measurements.gnss.CombinationType`>
     
         Enumerate for combination of measurements types.
     
@@ -114,14 +114,14 @@ class CombinationType(java.lang.Enum['CombinationType']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -134,9 +134,8 @@ class CombinationType(java.lang.Enum['CombinationType']):
         
             .. code-block: java
             
-            
-            for (CombinationType c : CombinationType.values())
-                System.out.println(c);
+            for (CombinationType c : CombinationType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -148,7 +147,7 @@ class CombinationType(java.lang.Enum['CombinationType']):
 
 class CycleSlipDetectorResults:
     """
-    public class CycleSlipDetectorResults extends Object
+    public class CycleSlipDetectorResults extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This class is used to contains all the data computed within cycle-slip detector. All these parameters are what user can
         get from the detectors.
@@ -210,7 +209,7 @@ class CycleSlipDetectors:
 
 class IntegerLeastSquareComparator(java.util.Comparator['IntegerLeastSquareSolution'], java.io.Serializable):
     """
-    public class IntegerLeastSquareComparator extends Object implements Comparator<:class:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolution`>, Serializable
+    public class IntegerLeastSquareComparator extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.util.Comparator?is`<:class:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolution`>, :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Comparator for :class:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolution` instance.
     
@@ -226,7 +225,9 @@ class IntegerLeastSquareComparator(java.util.Comparator['IntegerLeastSquareSolut
             The comparison is based on the squared distance to the float solution.
         
             Specified by:
-                 in interface 
+                
+                meth:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.util.Comparator.html?is` in
+                interface :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.util.Comparator?is`
         
         
         """
@@ -234,7 +235,7 @@ class IntegerLeastSquareComparator(java.util.Comparator['IntegerLeastSquareSolut
 
 class IntegerLeastSquareSolution:
     """
-    public class IntegerLeastSquareSolution extends Object
+    public class IntegerLeastSquareSolution extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Class holding a solution to an Integer Least Square problem.
     
@@ -283,7 +284,7 @@ class IntegerLeastSquareSolver:
                 nbSol (int): number of solutions to search for
                 floatAmbiguities (double[]): float estimates of ambiguities
                 indirection (int[]): indirection array to extract ambiguity covariances from global covariance matrix
-                covariance (RealMatrix): global covariance matrix (includes ambiguities among other parameters)
+                covariance (:class:`~org.orekit.estimation.measurements.gnss.https:.www.hipparchus.org.apidocs.org.hipparchus.linear.RealMatrix?is`): global covariance matrix (includes ambiguities among other parameters)
         
             Returns:
                 at most :code:`nbSol` solutions a to the Integer Least Square problem, in increasing squared distance order
@@ -307,7 +308,7 @@ class InterSatellitesPhase(org.orekit.estimation.measurements.AbstractMeasuremen
     """
     MEASUREMENT_TYPE: typing.ClassVar[str] = ...
     """
-    public static final String MEASUREMENT_TYPE
+    public static final :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEASUREMENT_TYPE
     
         Type of the measurement.
     
@@ -318,7 +319,7 @@ class InterSatellitesPhase(org.orekit.estimation.measurements.AbstractMeasuremen
     """
     AMBIGUITY_NAME: typing.ClassVar[str] = ...
     """
-    public static final String AMBIGUITY_NAME
+    public static final :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` AMBIGUITY_NAME
     
         Name for ambiguity driver.
     
@@ -384,7 +385,7 @@ class MeasurementCombination:
 
 class MeasurementCombinationFactory:
     """
-    public class MeasurementCombinationFactory extends Object
+    public class MeasurementCombinationFactory extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Factory for predefined combination of measurements.
     
@@ -438,13 +439,13 @@ class MeasurementCombinationFactory:
     @staticmethod
     def getMelbourneWubbenaCombination(satelliteSystem: org.orekit.gnss.SatelliteSystem) -> 'MelbourneWubbenaCombination':
         """
-            Get the Melbourne-WÃ¼bbena combination of measurements.
+            Get the Melbourne-Wübbena combination of measurements.
         
             Parameters:
                 system (:class:`~org.orekit.gnss.SatelliteSystem`): satellite system
         
             Returns:
-                Melbourne-WÃ¼bbena combination
+                Melbourne-Wübbena combination
         
         
         """
@@ -513,7 +514,7 @@ class OneWayGNSSPhase(org.orekit.estimation.measurements.AbstractMeasurement['On
     """
     MEASUREMENT_TYPE: typing.ClassVar[str] = ...
     """
-    public static final String MEASUREMENT_TYPE
+    public static final :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEASUREMENT_TYPE
     
         Type of the measurement.
     
@@ -524,7 +525,7 @@ class OneWayGNSSPhase(org.orekit.estimation.measurements.AbstractMeasurement['On
     """
     AMBIGUITY_NAME: typing.ClassVar[str] = ...
     """
-    public static final String AMBIGUITY_NAME
+    public static final :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` AMBIGUITY_NAME
     
         Name for ambiguity driver.
     
@@ -576,7 +577,7 @@ class OneWayGNSSRange(org.orekit.estimation.measurements.AbstractMeasurement['On
     """
     MEASUREMENT_TYPE: typing.ClassVar[str] = ...
     """
-    public static final String MEASUREMENT_TYPE
+    public static final :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEASUREMENT_TYPE
     
         Type of the measurement.
     
@@ -603,7 +604,7 @@ class Phase(org.orekit.estimation.measurements.AbstractMeasurement['Phase']):
     """
     MEASUREMENT_TYPE: typing.ClassVar[str] = ...
     """
-    public static final String MEASUREMENT_TYPE
+    public static final :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEASUREMENT_TYPE
     
         Type of the measurement.
     
@@ -614,7 +615,7 @@ class Phase(org.orekit.estimation.measurements.AbstractMeasurement['Phase']):
     """
     AMBIGUITY_NAME: typing.ClassVar[str] = ...
     """
-    public static final String AMBIGUITY_NAME
+    public static final :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` AMBIGUITY_NAME
     
         Name for ambiguity driver.
     
@@ -684,7 +685,7 @@ class PhaseBuilder(org.orekit.estimation.measurements.generation.AbstractMeasure
 
 class WindUp(org.orekit.estimation.measurements.EstimationModifier[Phase]):
     """
-    public class WindUp extends Object implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.gnss.Phase`>
+    public class WindUp extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.gnss.Phase`>
     
         Modifier for wind-up effect in GNSS :class:`~org.orekit.estimation.measurements.gnss.Phase`.
     
@@ -692,14 +693,15 @@ class WindUp(org.orekit.estimation.measurements.EstimationModifier[Phase]):
             10.1
     
         Also see:
-            Carrier Phase Wind-up Effect, :class:`~org.orekit.estimation.measurements.gnss.WindUpFactory`
+            :class:`~org.orekit.estimation.measurements.gnss.https:.gssc.esa.int.navipedia.index.php.Carrier_Phase_Wind`,
+            :class:`~org.orekit.estimation.measurements.gnss.WindUpFactory`
     """
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[Phase]) -> None: ...
 
 class WindUpFactory:
     """
-    public class WindUpFactory extends Object
+    public class WindUpFactory extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Factory for :class:`~org.orekit.estimation.measurements.gnss.WindUp` modifiers.
     
@@ -717,7 +719,7 @@ class WindUpFactory:
             Parameters:
                 system (:class:`~org.orekit.gnss.SatelliteSystem`): system the satellite belongs to
                 prnNumber (int): PRN number
-                receiverName (String): name of the receiver
+                receiverName (:class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the receiver
         
             Returns:
                 modifier for the satellite/receiver pair
@@ -728,7 +730,7 @@ class WindUpFactory:
 
 class AbstractCycleSlipDetector(CycleSlipDetectors):
     """
-    public abstract class AbstractCycleSlipDetector extends Object implements :class:`~org.orekit.estimation.measurements.gnss.CycleSlipDetectors`
+    public abstract class AbstractCycleSlipDetector extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.gnss.CycleSlipDetectors`
     
         Base class for cycle-slip detectors.
     
@@ -739,7 +741,7 @@ class AbstractCycleSlipDetector(CycleSlipDetectors):
 
 class AbstractDualFrequencyCombination(MeasurementCombination):
     """
-    public abstract class AbstractDualFrequencyCombination extends Object implements :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
+    public abstract class AbstractDualFrequencyCombination extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
     
         Base class for dual frequency combination of measurements.
     
@@ -777,8 +779,8 @@ class AbstractDualFrequencyCombination(MeasurementCombination):
             Combines observation data using a combination of measurements.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.MeasurementCombination.combine`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
+                :meth:`~org.orekit.estimation.measurements.gnss.MeasurementCombination.combine` in
+                interface :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
         
             Parameters:
                 observations (:class:`~org.orekit.gnss.ObservationDataSet`): observation data set
@@ -794,8 +796,8 @@ class AbstractDualFrequencyCombination(MeasurementCombination):
             Get the name of the combination of measurements.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.MeasurementCombination.getName`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
+                :meth:`~org.orekit.estimation.measurements.gnss.MeasurementCombination.getName` in
+                interface :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
         
             Returns:
                 name of the combination of measurements
@@ -806,12 +808,14 @@ class AbstractDualFrequencyCombination(MeasurementCombination):
 
 class AbstractLambdaMethod(IntegerLeastSquareSolver):
     """
-    public abstract class AbstractLambdaMethod extends Object implements :class:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolver`
+    public abstract class AbstractLambdaMethod extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolver`
     
         Base class for decorrelation/reduction engine for LAMBDA type methods.
     
-        This class is based on both the 1996 paper The LAMBDA method for integer ambiguity estimation: implementation aspects by
-        Paul de Jonge and Christian Tiberius and on the 2005 paper A modified LAMBDA method for integer least-squares estimation
+        This class is based on both the 1996 paper
+        :class:`~org.orekit.estimation.measurements.gnss.https:.www.researchgate.net.publication.2790708_The_LAMBDA_method_for_integer_ambiguity_estimation_implementation_aspects`
+        by Paul de Jonge and Christian Tiberius and on the 2005 paper
+        :class:`~org.orekit.estimation.measurements.gnss.https:.www.researchgate.net.publication.225518977_MLAMBDA_a_modified_LAMBDA_method_for_integer_least`
         by X.-W Chang, X. Yang and T. Zhou, Journal of Geodesy 79(9):552-565, DOI: 10.1007/s00190-005-0004-x
     
         Since:
@@ -823,14 +827,14 @@ class AbstractLambdaMethod(IntegerLeastSquareSolver):
             Find the best solutions to an Integer Least Square problem.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolver.solveILS`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolver`
+                :meth:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolver.solveILS` in
+                interface :class:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolver`
         
             Parameters:
                 nbSol (int): number of solutions to search for
                 floatAmbiguities (double[]): float estimates of ambiguities
                 indirection (int[]): indirection array to extract ambiguity covariances from global covariance matrix
-                covariance (RealMatrix): global covariance matrix (includes ambiguities among other parameters)
+                covariance (:class:`~org.orekit.estimation.measurements.gnss.https:.www.hipparchus.org.apidocs.org.hipparchus.linear.RealMatrix?is`): global covariance matrix (includes ambiguities among other parameters)
         
             Returns:
                 at most :code:`nbSol` solutions a to the Integer Least Square problem, in increasing squared distance order
@@ -841,7 +845,7 @@ class AbstractLambdaMethod(IntegerLeastSquareSolver):
 
 class AbstractSingleFrequencyCombination(MeasurementCombination):
     """
-    public abstract class AbstractSingleFrequencyCombination extends Object implements :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
+    public abstract class AbstractSingleFrequencyCombination extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
     
         Base class for single frequency combination of measurements.
     
@@ -869,8 +873,8 @@ class AbstractSingleFrequencyCombination(MeasurementCombination):
             Combines observation data using a combination of measurements.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.MeasurementCombination.combine`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
+                :meth:`~org.orekit.estimation.measurements.gnss.MeasurementCombination.combine` in
+                interface :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
         
             Parameters:
                 observations (:class:`~org.orekit.gnss.ObservationDataSet`): observation data set
@@ -885,8 +889,8 @@ class AbstractSingleFrequencyCombination(MeasurementCombination):
             Get the name of the combination of measurements.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.MeasurementCombination.getName`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
+                :meth:`~org.orekit.estimation.measurements.gnss.MeasurementCombination.getName` in
+                interface :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
         
             Returns:
                 name of the combination of measurements
@@ -897,28 +901,27 @@ class AbstractSingleFrequencyCombination(MeasurementCombination):
 
 class MelbourneWubbenaCombination(MeasurementCombination):
     """
-    public class MelbourneWubbenaCombination extends Object implements :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
+    public class MelbourneWubbenaCombination extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
     
-        Melbourne-WÃ¼bbena combination.
+        Melbourne-Wübbena combination.
     
         This combination allows, thanks to the wide-lane combination, a larger wavelength than each signal individually.
         Moreover, the measurement noise is reduced by the narrow-lane combination of code measurements.
     
         .. code-block: java
         
-        
-            mMW =  Î¦WL- RNL
-            mMW =  Î»WL * NWL+ b + Îµ
+            mMW =  ΦWL- RNL
+            mMW =  λWL * NWL+ b + ε
          
         With:
     
-          - mMW : Melbourne-WÃ¼bbena measurement.
-          - Î¦WL : Wide-Lane phase measurement.
+          - mMW : Melbourne-Wübbena measurement.
+          - ΦWL : Wide-Lane phase measurement.
           - RNL : Narrow-Lane code measurement.
-          - Î»WL : Wide-Lane wavelength.
+          - λWL : Wide-Lane wavelength.
           - NWL : Wide-Lane ambiguity (Nf1 - Nf2).
           - b : Satellite and receiver instrumental delays.
-          - Îµ : Measurement noise.
+          - ε : Measurement noise.
     
     
         :class:`~org.orekit.estimation.measurements.gnss.NarrowLaneCombination` and
@@ -929,16 +932,16 @@ class MelbourneWubbenaCombination(MeasurementCombination):
             10.1
     
         Also see:
-            "Detector based in code and carrier phase data: The Melbourne-WÃƒÂ¼bbena combination, J. Sanz Subirana, J.M. Juan
-            Zornoza and M. HernÃƒÂ¡ndez-Pajares, 2011"
+            "Detector based in code and carrier phase data: The Melbourne-Wübbena combination, J. Sanz Subirana, J.M. Juan Zornoza
+            and M. Hernández-Pajares, 2011"
     """
     def combine(self, observationDataSet: org.orekit.gnss.ObservationDataSet) -> org.orekit.gnss.CombinedObservationDataSet:
         """
             Combines observation data using a combination of measurements.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.MeasurementCombination.combine`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
+                :meth:`~org.orekit.estimation.measurements.gnss.MeasurementCombination.combine` in
+                interface :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
         
             Parameters:
                 observations (:class:`~org.orekit.gnss.ObservationDataSet`): observation data set
@@ -954,8 +957,8 @@ class MelbourneWubbenaCombination(MeasurementCombination):
             Get the name of the combination of measurements.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.MeasurementCombination.getName`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
+                :meth:`~org.orekit.estimation.measurements.gnss.MeasurementCombination.getName` in
+                interface :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
         
             Returns:
                 name of the combination of measurements
@@ -966,7 +969,7 @@ class MelbourneWubbenaCombination(MeasurementCombination):
 
 class PythonAmbiguityAcceptance(AmbiguityAcceptance):
     """
-    public class PythonAmbiguityAcceptance extends Object implements :class:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance`
+    public class PythonAmbiguityAcceptance extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance`
     """
     def __init__(self): ...
     def accept(self, integerLeastSquareSolutionArray: typing.List[IntegerLeastSquareSolution]) -> IntegerLeastSquareSolution:
@@ -974,8 +977,8 @@ class PythonAmbiguityAcceptance(AmbiguityAcceptance):
             Check if one of the candidate solutions can be accepted.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance.accept`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance`
+                :meth:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance.accept` in
+                interface :class:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance`
         
             Parameters:
                 candidates (:class:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolution`[]): candidate solutions of the Integer Least Squares problem, in increasing squared distance order (the array contains at
@@ -993,8 +996,8 @@ class PythonAmbiguityAcceptance(AmbiguityAcceptance):
             Get the number of candidate solutions to search for.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance.numberOfCandidates`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance`
+                :meth:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance.numberOfCandidates` in
+                interface :class:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance`
         
             Returns:
                 number of candidate solutions to search for
@@ -1024,7 +1027,7 @@ class PythonAmbiguityAcceptance(AmbiguityAcceptance):
 
 class PythonCycleSlipDetectors(CycleSlipDetectors):
     """
-    public class PythonCycleSlipDetectors extends Object implements :class:`~org.orekit.estimation.measurements.gnss.CycleSlipDetectors`
+    public class PythonCycleSlipDetectors extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.gnss.CycleSlipDetectors`
     """
     def __init__(self): ...
     def detect(self, list: java.util.List[org.orekit.gnss.ObservationDataSet]) -> java.util.List[CycleSlipDetectorResults]: ...
@@ -1051,7 +1054,7 @@ class PythonCycleSlipDetectors(CycleSlipDetectors):
 
 class PythonIntegerLeastSquareSolver(IntegerLeastSquareSolver):
     """
-    public class PythonIntegerLeastSquareSolver extends Object implements :class:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolver`
+    public class PythonIntegerLeastSquareSolver extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolver`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -1079,14 +1082,14 @@ class PythonIntegerLeastSquareSolver(IntegerLeastSquareSolver):
             Find the best solutions to an Integer Least Square problem.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolver.solveILS`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolver`
+                :meth:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolver.solveILS` in
+                interface :class:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolver`
         
             Parameters:
                 nbSol (int): number of solutions to search for
                 floatAmbiguities (double[]): float estimates of ambiguities
                 indirection (int[]): indirection array to extract ambiguity covariances from global covariance matrix
-                covariance (RealMatrix): global covariance matrix (includes ambiguities among other parameters)
+                covariance (:class:`~org.orekit.estimation.measurements.gnss.https:.www.hipparchus.org.apidocs.org.hipparchus.linear.RealMatrix?is`): global covariance matrix (includes ambiguities among other parameters)
         
             Returns:
                 at most :code:`nbSol` solutions a to the Integer Least Square problem, in increasing squared distance order
@@ -1097,7 +1100,7 @@ class PythonIntegerLeastSquareSolver(IntegerLeastSquareSolver):
 
 class PythonMeasurementCombination(MeasurementCombination):
     """
-    public class PythonMeasurementCombination extends Object implements :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
+    public class PythonMeasurementCombination extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
     """
     def __init__(self): ...
     def combine(self, observationDataSet: org.orekit.gnss.ObservationDataSet) -> org.orekit.gnss.CombinedObservationDataSet:
@@ -1105,8 +1108,8 @@ class PythonMeasurementCombination(MeasurementCombination):
             Combines observation data using a combination of measurements.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.MeasurementCombination.combine`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
+                :meth:`~org.orekit.estimation.measurements.gnss.MeasurementCombination.combine` in
+                interface :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
         
             Parameters:
                 observations (:class:`~org.orekit.gnss.ObservationDataSet`): observation data set
@@ -1123,8 +1126,8 @@ class PythonMeasurementCombination(MeasurementCombination):
             Get the name of the combination of measurements.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.MeasurementCombination.getName`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
+                :meth:`~org.orekit.estimation.measurements.gnss.MeasurementCombination.getName` in
+                interface :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
         
             Returns:
                 name of the combination of measurements
@@ -1154,7 +1157,7 @@ class PythonMeasurementCombination(MeasurementCombination):
 
 class SimpleRatioAmbiguityAcceptance(AmbiguityAcceptance):
     """
-    public class SimpleRatioAmbiguityAcceptance extends Object implements :class:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance`
+    public class SimpleRatioAmbiguityAcceptance extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance`
     
         Ambiguity acceptance test based on a ratio of the two best candidates.
     
@@ -1173,8 +1176,8 @@ class SimpleRatioAmbiguityAcceptance(AmbiguityAcceptance):
             :code:`candidate[0]` will be accepted
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance.accept`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance`
+                :meth:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance.accept` in
+                interface :class:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance`
         
             Parameters:
                 candidates (:class:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolution`[]): candidate solutions of the Integer Least Squares problem, in increasing squared distance order (the array contains at
@@ -1191,8 +1194,8 @@ class SimpleRatioAmbiguityAcceptance(AmbiguityAcceptance):
             Get the number of candidate solutions to search for.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance.numberOfCandidates`Â in
-                interfaceÂ :class:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance`
+                :meth:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance.numberOfCandidates` in
+                interface :class:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance`
         
             Returns:
                 number of candidate solutions to search for
@@ -1211,13 +1214,12 @@ class GRAPHICCombination(AbstractSingleFrequencyCombination):
     
         .. code-block: java
         
-        
-            mf =  0.5 * (Î¦f + Rf)
+            mf =  0.5 * (Φf + Rf)
          
         With:
     
           - mf : GRAPHIC measurement.
-          - Î¦f : Phase measurement.
+          - Φf : Phase measurement.
           - Rf : Code measurement.
           - f : Frequency.
     
@@ -1238,8 +1240,7 @@ class GeometryFreeCombination(AbstractDualFrequencyCombination):
     
         .. code-block: java
         
-        
-            mGF =  m2 - m1
+            mGF =  m2 - m1
          
         With:
     
@@ -1260,10 +1261,10 @@ class GeometryFreeCycleSlipDetector(AbstractCycleSlipDetector):
     """
     public class GeometryFreeCycleSlipDetector extends :class:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector`
     
-        Geometry free cycle slip detectors. The detector is based the algorithm given in Detector based in carrier phase data:
-        The geometry-free combination by Zornoza and M. HernÃƒÂ¡ndez-Pajares. Within this class a second order polynomial is
-        used to smooth the data. We consider a cycle-slip occurring if the current measurement is too far from the one predicted
-        with the polynomial.
+        Geometry free cycle slip detectors. The detector is based the algorithm given in
+        :class:`~org.orekit.estimation.measurements.gnss.https:.gssc.esa.int.navipedia.index.php.Detector_based_in_carrier_phase_data:_The_geometry`
+        by Zornoza and M. Hernández-Pajares. Within this class a second order polynomial is used to smooth the data. We
+        consider a cycle-slip occurring if the current measurement is too far from the one predicted with the polynomial.
     
         For building the detector, one should give a threshold and a gap time limit. After construction of the detectors, one
         can have access to a List of CycleData. Each CycleDate represents a link between the station (define by the RINEX file)
@@ -1286,10 +1287,9 @@ class IonosphereFreeCombination(AbstractDualFrequencyCombination):
     
         .. code-block: java
         
-        
-                     f1Â² * m1 - f2Â² * m2
-            mIF =  -----------------------
-                          f1Â² - f2Â²
+                     f1² * m1 - f2² * m2
+            mIF =  -----------------------
+                          f1² - f2²
          
         With:
     
@@ -1315,9 +1315,11 @@ class LambdaMethod(AbstractLambdaMethod):
         Decorrelation/reduction engine for LAMBDA method.
     
         This class implements PJG Teunissen Least Square Ambiguity Decorrelation Adjustment (LAMBDA) method, as described in
-        both the 1996 paper The LAMBDA method for integer ambiguity estimation: implementation aspects by Paul de Jonge and
-        Christian Tiberius and on the 2005 paper A modified LAMBDA method for integer least-squares estimation by X.-W Chang, X.
-        Yang and T. Zhou, Journal of Geodesy 79(9):552-565, DOI: 10.1007/s00190-005-0004-x
+        both the 1996 paper
+        :class:`~org.orekit.estimation.measurements.gnss.https:.www.researchgate.net.publication.2790708_The_LAMBDA_method_for_integer_ambiguity_estimation_implementation_aspects`
+        by Paul de Jonge and Christian Tiberius and on the 2005 paper
+        :class:`~org.orekit.estimation.measurements.gnss.https:.www.researchgate.net.publication.225518977_MLAMBDA_a_modified_LAMBDA_method_for_integer_least`
+        by X.-W Chang, X. Yang and T. Zhou, Journal of Geodesy 79(9):552-565, DOI: 10.1007/s00190-005-0004-x
     
         It slightly departs on the original LAMBDA method as it does implement the following improvements proposed in the de
         Jonge and Tiberius 1996 paper that vastly speed up the search:
@@ -1340,9 +1342,9 @@ class ModifiedLambdaMethod(AbstractLambdaMethod):
     
         Decorrelation/reduction engine for Modified LAMBDA method.
     
-        This class implements Modified Least Square Ambiguity Decorrelation Adjustment (MLAMBDA) method, as described in A
-        modified LAMBDA method for integer least-squares estimation by X.-W Chang, X. Yang and T. Zhou, Journal of Geodesy
-        79(9):552-565, DOI: 10.1007/s00190-005-0004-x
+        This class implements Modified Least Square Ambiguity Decorrelation Adjustment (MLAMBDA) method, as described in
+        :class:`~org.orekit.estimation.measurements.gnss.https:.www.researchgate.net.publication.225518977_MLAMBDA_a_modified_LAMBDA_method_for_integer_least`
+        by X.-W Chang, X. Yang and T. Zhou, Journal of Geodesy 79(9):552-565, DOI: 10.1007/s00190-005-0004-x
     
         Since:
             10.2
@@ -1363,10 +1365,9 @@ class NarrowLaneCombination(AbstractDualFrequencyCombination):
     
         .. code-block: java
         
-        
-                      f1 * m1 + f2 * m2
-            mNL =  -----------------------
-                           f1 + f2
+                      f1 * m1 + f2 * m2
+            mNL =  -----------------------
+                           f1 + f2
          
         With:
     
@@ -1395,13 +1396,12 @@ class PhaseMinusCodeCombination(AbstractSingleFrequencyCombination):
     
         .. code-block: java
         
-        
-            mf =  Î¦f - Rf
+            mf =  Φf - Rf
          
         With:
     
           - mf : Phase minus Code measurement.
-          - Î¦f : Phase measurement.
+          - Φf : Phase measurement.
           - Rf : Code measurement.
           - f : Frequency.
     
@@ -1415,10 +1415,11 @@ class PhaseMinusCodeCycleSlipDetector(AbstractCycleSlipDetector):
     """
     public class PhaseMinusCodeCycleSlipDetector extends :class:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector`
     
-        Phase minus code cycle slip detectors. The detector is based the algorithm given in Examples of single frequency
-        Cycle-Slip Detectors by Zornoza and M. HernÃƒÂ¡ndez-Pajares. Within this class a polynomial is used to smooth the data.
-        We consider a cycle_slip occurring if the current measurement is too far from the one predicted with the polynomial
-        (algorithm 1 on Navipedia).
+        Phase minus code cycle slip detectors. The detector is based the algorithm given in
+        :class:`~org.orekit.estimation.measurements.gnss.https:.gssc.esa.int.navipedia.index.php.Examples_of_single_frequency_Cycle`
+        by Zornoza and M. Hernández-Pajares. Within this class a polynomial is used to smooth the data. We consider a
+        cycle_slip occurring if the current measurement is too far from the one predicted with the polynomial (algorithm 1 on
+        Navipedia).
     
         For building the detector, one should give a threshold and a gap time limit. After construction of the detectors, one
         can have access to a List of CycleData. Each CycleDate represents a link between the station (define by the RINEX file)
@@ -1441,11 +1442,11 @@ class PythonAbstractCycleSlipDetector(AbstractCycleSlipDetector):
             attributes data and stuff.
         
             Overrides:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector.cycleSlipDataSet`Â in
-                classÂ :class:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector`
+                :meth:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector.cycleSlipDataSet` in
+                class :class:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector`
         
             Parameters:
-                nameSat (String): name of the satellite (e.g. "GPS - 7")
+                nameSat (:class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the satellite (e.g. "GPS - 7")
                 date (:class:`~org.orekit.time.AbsoluteDate`): date of the measurement
                 value (double): measurement at the current date
                 freq (:class:`~org.orekit.gnss.Frequency`): frequency used
@@ -1459,8 +1460,8 @@ class PythonAbstractCycleSlipDetector(AbstractCycleSlipDetector):
             Get the maximum time lapse between 2 measurements without considering a cycle-slip has occurring between both.
         
             Overrides:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector.getMaxTimeBeetween2Measurement`Â in
-                classÂ :class:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector`
+                :meth:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector.getMaxTimeBeetween2Measurement` in
+                class :class:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector`
         
             Returns:
                 the maximum time lapse between 2 measurements
@@ -1473,8 +1474,8 @@ class PythonAbstractCycleSlipDetector(AbstractCycleSlipDetector):
             Get the minimum number of measurement needed before being able to figure out cycle-slip occurrence.
         
             Overrides:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector.getMinMeasurementNumber`Â in
-                classÂ :class:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector`
+                :meth:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector.getMinMeasurementNumber` in
+                class :class:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector`
         
             Returns:
                 the minimum number of measurement needed before being able to figure out cycle-slip occurrence.
@@ -1489,8 +1490,8 @@ class PythonAbstractCycleSlipDetector(AbstractCycleSlipDetector):
             The method is in charge of collecting the measurements, manage them, and call the detection method.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector.manageData`Â in
-                classÂ :class:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector`
+                :meth:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector.manageData` in
+                class :class:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector`
         
             Parameters:
                 observation (:class:`~org.orekit.gnss.ObservationDataSet`): observation data set
@@ -1522,8 +1523,8 @@ class PythonAbstractCycleSlipDetector(AbstractCycleSlipDetector):
             Create the name of a satellite from its PRN number and satellite System it belongs to.
         
             Overrides:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector.setName`Â in
-                classÂ :class:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector`
+                :meth:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector.setName` in
+                class :class:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector`
         
             Parameters:
                 numSat (int): satellite PRN number
@@ -1547,8 +1548,8 @@ class PythonAbstractDualFrequencyCombination(AbstractDualFrequencyCombination):
             Get the combined frequency of two measurements.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractDualFrequencyCombination.getCombinedFrequency`Â in
-                classÂ :class:`~org.orekit.estimation.measurements.gnss.AbstractDualFrequencyCombination`
+                :meth:`~org.orekit.estimation.measurements.gnss.AbstractDualFrequencyCombination.getCombinedFrequency` in
+                class :class:`~org.orekit.estimation.measurements.gnss.AbstractDualFrequencyCombination`
         
             Parameters:
                 f1 (:class:`~org.orekit.gnss.Frequency`): frequency of the first measurement
@@ -1565,8 +1566,8 @@ class PythonAbstractDualFrequencyCombination(AbstractDualFrequencyCombination):
             Get the combined observed value of two measurements.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractDualFrequencyCombination.getCombinedValue`Â in
-                classÂ :class:`~org.orekit.estimation.measurements.gnss.AbstractDualFrequencyCombination`
+                :meth:`~org.orekit.estimation.measurements.gnss.AbstractDualFrequencyCombination.getCombinedValue` in
+                class :class:`~org.orekit.estimation.measurements.gnss.AbstractDualFrequencyCombination`
         
             Parameters:
                 obs1 (double): observed value of the first measurement
@@ -1610,8 +1611,8 @@ class PythonAbstractLambdaMethod(AbstractLambdaMethod):
             Find the best solutions to the Integer Least Square problem.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractLambdaMethod.discreteSearch`Â in
-                classÂ :class:`~org.orekit.estimation.measurements.gnss.AbstractLambdaMethod`
+                :meth:`~org.orekit.estimation.measurements.gnss.AbstractLambdaMethod.discreteSearch` in
+                class :class:`~org.orekit.estimation.measurements.gnss.AbstractLambdaMethod`
         
         
         """
@@ -1621,23 +1622,23 @@ class PythonAbstractLambdaMethod(AbstractLambdaMethod):
         """
             Inverse the decomposition.
         
-            This method transforms the LÃ¡Âµâ‚¬.D.L = Q decomposition of covariance into the
-            LÃ¢ï¿½Â»Ã‚Â¹.DÃ¢ï¿½Â»Ã‚Â¹.LÃ¢ï¿½Â»Ã¡Âµâ‚¬ = QÃ¢ï¿½Â»Ã‚Â¹ decomposition of the inverse of covariance.
+            This method transforms the Lᵀ.D.L = Q decomposition of covariance into the L⁻¹.D⁻¹.L⁻ᵀ = Q⁻¹
+            decomposition of the inverse of covariance.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractLambdaMethod.inverseDecomposition`Â in
-                classÂ :class:`~org.orekit.estimation.measurements.gnss.AbstractLambdaMethod`
+                :meth:`~org.orekit.estimation.measurements.gnss.AbstractLambdaMethod.inverseDecomposition` in
+                class :class:`~org.orekit.estimation.measurements.gnss.AbstractLambdaMethod`
         
         
         """
         ...
     def ltdlDecomposition(self) -> None:
         """
-            Perform Láµ€.D.L = Q decomposition of the covariance matrix.
+            Perform Lᵀ.D.L = Q decomposition of the covariance matrix.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractLambdaMethod.ltdlDecomposition`Â in
-                classÂ :class:`~org.orekit.estimation.measurements.gnss.AbstractLambdaMethod`
+                :meth:`~org.orekit.estimation.measurements.gnss.AbstractLambdaMethod.ltdlDecomposition` in
+                class :class:`~org.orekit.estimation.measurements.gnss.AbstractLambdaMethod`
         
         
         """
@@ -1666,8 +1667,8 @@ class PythonAbstractLambdaMethod(AbstractLambdaMethod):
             Perform LAMBDA reduction.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractLambdaMethod.reduction`Â in
-                classÂ :class:`~org.orekit.estimation.measurements.gnss.AbstractLambdaMethod`
+                :meth:`~org.orekit.estimation.measurements.gnss.AbstractLambdaMethod.reduction` in
+                class :class:`~org.orekit.estimation.measurements.gnss.AbstractLambdaMethod`
         
         
         """
@@ -1683,8 +1684,8 @@ class PythonAbstractSingleFrequencyCombination(AbstractSingleFrequencyCombinatio
             Get the combined observed value of two measurements.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractSingleFrequencyCombination.getCombinedValue`Â in
-                classÂ :class:`~org.orekit.estimation.measurements.gnss.AbstractSingleFrequencyCombination`
+                :meth:`~org.orekit.estimation.measurements.gnss.AbstractSingleFrequencyCombination.getCombinedValue` in
+                class :class:`~org.orekit.estimation.measurements.gnss.AbstractSingleFrequencyCombination`
         
             Parameters:
                 phase (double): observed value of the phase measurement
@@ -1727,10 +1728,9 @@ class WideLaneCombination(AbstractDualFrequencyCombination):
     
         .. code-block: java
         
-        
-                      f1 * m1 - f2 * m2
-            mWL =  -----------------------
-                           f1 - f2
+                      f1 * m1 - f2 * m2
+            mWL =  -----------------------
+                           f1 - f2
          
         With:
     
@@ -1753,9 +1753,11 @@ class IntegerBootstrapping(LambdaMethod):
     """
     public class IntegerBootstrapping extends :class:`~org.orekit.estimation.measurements.gnss.LambdaMethod`
     
-        Bootstrapping engine for ILS problem solving. This method is base on the following paper: Success probability of integer
-        GPs ambiguity rounding and bootstrapping by P. J. G. Teunissen 1998 and Influence of ambiguity precision on the success
-        rate of GNSS integer ambiguity bootstrapping by P. J. G. Teunissen 2006.
+        Bootstrapping engine for ILS problem solving. This method is base on the following paper:
+        :class:`~org.orekit.estimation.measurements.gnss.https:.www.researchgate.net.publication.225773077_Success_probability_of_integer_GPS_ambiguity_rounding_and_bootstrapping`
+        by P. J. G. Teunissen 1998 and
+        :class:`~org.orekit.estimation.measurements.gnss.https:.repository.tudelft.nl.islandora.object.uuid%3A1a5b8a6e` by P. J.
+        G. Teunissen 2006.
     
         This method is really faster for integer ambiguity resolution than LAMBDA or MLAMBDA method but its success rate is
         really smaller. The method extends LambdaMethod as it uses LDL' factorization and reduction methods from LAMBDA method.

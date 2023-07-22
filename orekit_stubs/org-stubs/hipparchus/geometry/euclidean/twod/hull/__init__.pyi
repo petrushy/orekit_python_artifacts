@@ -10,7 +10,7 @@ import typing
 
 class AklToussaintHeuristic:
     """
-    public final class AklToussaintHeuristic extends Object
+    public final class AklToussaintHeuristic extends :class:`~org.hipparchus.geometry.euclidean.twod.hull.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         A simple heuristic to improve the performance of convex hull algorithms.
     
@@ -29,7 +29,7 @@ class AklToussaintHeuristic:
 
 class ConvexHull2D(org.hipparchus.geometry.hull.ConvexHull[org.hipparchus.geometry.euclidean.twod.Euclidean2D, org.hipparchus.geometry.euclidean.twod.Vector2D], java.io.Serializable):
     """
-    public class ConvexHull2D extends Object implements :class:`~org.hipparchus.geometry.hull.ConvexHull`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`,:class:`~org.hipparchus.geometry.euclidean.twod.Vector2D`>, Serializable
+    public class ConvexHull2D extends :class:`~org.hipparchus.geometry.euclidean.twod.hull.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.hull.ConvexHull`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`,:class:`~org.hipparchus.geometry.euclidean.twod.Vector2D`>, :class:`~org.hipparchus.geometry.euclidean.twod.hull.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         This class represents a convex hull in an two-dimensional euclidean space.
     
@@ -53,8 +53,8 @@ class ConvexHull2D(org.hipparchus.geometry.hull.ConvexHull[org.hipparchus.geomet
             Get the vertices of the convex hull.
         
             Specified by:
-                :meth:`~org.hipparchus.geometry.hull.ConvexHull.getVertices`Â in
-                interfaceÂ :class:`~org.hipparchus.geometry.hull.ConvexHull`
+                :meth:`~org.hipparchus.geometry.hull.ConvexHull.getVertices` in
+                interface :class:`~org.hipparchus.geometry.hull.ConvexHull`
         
             Returns:
                 vertices of the convex hull
@@ -73,7 +73,7 @@ class ConvexHullGenerator2D(org.hipparchus.geometry.hull.ConvexHullGenerator[org
 
 class MonotoneChain(org.hipparchus.geometry.euclidean.twod.hull.AbstractConvexHullGenerator2D):
     """
-    public class MonotoneChain extends Object
+    public class MonotoneChain extends :class:`~org.hipparchus.geometry.euclidean.twod.hull.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Implements Andrew's monotone chain method to generate the convex hull of a finite set of points in the two-dimensional
         euclidean space.

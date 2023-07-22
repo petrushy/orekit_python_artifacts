@@ -22,7 +22,7 @@ import typing
 
 class EarthITU453AtmosphereRefraction(org.orekit.models.AtmosphericRefractionModel):
     """
-    public class EarthITU453AtmosphereRefraction extends Object implements :class:`~org.orekit.models.AtmosphericRefractionModel`
+    public class EarthITU453AtmosphereRefraction extends :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.AtmosphericRefractionModel`
     
         Implementation of refraction model for Earth exponential atmosphere based on ITU-R P.834-7 recommendation.
     
@@ -42,8 +42,8 @@ class EarthITU453AtmosphereRefraction(org.orekit.models.AtmosphericRefractionMod
             Compute the refraction angle from the true (geometrical) elevation.
         
             Specified by:
-                :meth:`~org.orekit.models.AtmosphericRefractionModel.getRefraction`Â in
-                interfaceÂ :class:`~org.orekit.models.AtmosphericRefractionModel`
+                :meth:`~org.orekit.models.AtmosphericRefractionModel.getRefraction` in
+                interface :class:`~org.orekit.models.AtmosphericRefractionModel`
         
             Parameters:
                 elevation (double): true elevation (rad)
@@ -101,11 +101,11 @@ class EarthShape(org.orekit.bodies.BodyShape):
 
 class EarthStandardAtmosphereRefraction(org.orekit.models.AtmosphericRefractionModel):
     """
-    public class EarthStandardAtmosphereRefraction extends Object implements :class:`~org.orekit.models.AtmosphericRefractionModel`
+    public class EarthStandardAtmosphereRefraction extends :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.AtmosphericRefractionModel`
     
         Implementation of refraction model for Earth standard atmosphere.
     
-        Refraction angle is 0 at zenith, about 1 arcminute at 45Â°, and 34 arcminutes at the horizon for optical wavelengths.
+        Refraction angle is 0 at zenith, about 1 arcminute at 45°, and 34 arcminutes at the horizon for optical wavelengths.
     
         Refraction angle is computed according to Saemundssen formula quoted by Meeus. For reference, see **Astronomical
         Algorithms** (1998), 2nd ed, (ISBN 0-943396-61-1), chap. 15.
@@ -196,8 +196,8 @@ class EarthStandardAtmosphereRefraction(org.orekit.models.AtmosphericRefractionM
             Compute the refraction angle from the true (geometrical) elevation.
         
             Specified by:
-                :meth:`~org.orekit.models.AtmosphericRefractionModel.getRefraction`Â in
-                interfaceÂ :class:`~org.orekit.models.AtmosphericRefractionModel`
+                :meth:`~org.orekit.models.AtmosphericRefractionModel.getRefraction` in
+                interface :class:`~org.orekit.models.AtmosphericRefractionModel`
         
             Parameters:
                 trueElevation (double): true elevation (rad)
@@ -247,7 +247,7 @@ class EarthStandardAtmosphereRefraction(org.orekit.models.AtmosphericRefractionM
 
 class GeoMagneticElements(java.io.Serializable):
     """
-    public class GeoMagneticElements extends Object implements Serializable
+    public class GeoMagneticElements extends :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Contains the elements to represent a magnetic field at a single point.
     
@@ -310,7 +310,8 @@ class GeoMagneticElements(java.io.Serializable):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -318,7 +319,7 @@ class GeoMagneticElements(java.io.Serializable):
 
 class GeoMagneticField:
     """
-    public class GeoMagneticField extends Object
+    public class GeoMagneticField extends :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Used to calculate the geomagnetic field at a given geodetic point on earth. The calculation is estimated using spherical
         harmonic expansion of the geomagnetic potential with coefficients provided by an actual geomagnetic field model (e.g.
@@ -441,7 +442,7 @@ class GeoMagneticField:
 
 class GeoMagneticFieldFactory:
     """
-    public class GeoMagneticFieldFactory extends Object
+    public class GeoMagneticFieldFactory extends :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Factory for different :class:`~org.orekit.models.earth.GeoMagneticField` models.
     
@@ -536,7 +537,7 @@ class GeoMagneticFields:
 
 class GeoMagneticModelLoader(org.orekit.data.DataLoader):
     """
-    public class GeoMagneticModelLoader extends Object implements :class:`~org.orekit.data.DataLoader`
+    public class GeoMagneticModelLoader extends :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataLoader`
     
         Loads geomagnetic field models from a given input stream. A stream may contain multiple models, the loader reads all
         available models in consecutive order.
@@ -552,37 +553,33 @@ class GeoMagneticModelLoader(org.orekit.data.DataLoader):
     
         .. code-block: java
         
-        
-             {model name} {epoch} {nMax} {nMaxSec} {nMax3} {validity start} {validity end} {minAlt} {maxAlt} {model name} {line number}
-         {n} {m} {gnm} {hnm} {dgnm} {dhnm} {model name} {line number}
+             {model name} {epoch} {nMax} {nMaxSec} {nMax3} {validity start} {validity end} {minAlt} {maxAlt} {model name} {line number}
+         {n} {m} {gnm} {hnm} {dgnm} {dhnm} {model name} {line number}
          
     
         Example:
     
         .. code-block: java
         
-        
-            WMM2010  2010.00 12 12  0 2010.00 2015.00   -1.0  600.0          WMM2010   0
-         1  0  -29496.6       0.0      11.6       0.0                        WMM2010   1
-         1  1   -1586.3    4944.4      16.5     -25.9                        WMM2010   2
+            WMM2010  2010.00 12 12  0 2010.00 2015.00   -1.0  600.0          WMM2010   0
+         1  0  -29496.6       0.0      11.6       0.0                        WMM2010   1
+         1  1   -1586.3    4944.4      16.5     -25.9                        WMM2010   2
          
     
         **Original WMM Format**
     
         .. code-block: java
         
-        
-            {epoch} {model name} {validity start}
-         {n} {m} {gnm} {hnm} {dgnm} {dhnm}
+            {epoch} {model name} {validity start}
+         {n} {m} {gnm} {hnm} {dgnm} {dhnm}
          
     
         Example:
     
         .. code-block: java
         
-        
-            2015.0            WMM-2015        12/15/2014
-          1  0  -29438.5       0.0       10.7        0.0
+            2015.0            WMM-2015        12/15/2014
+          1  0  -29438.5       0.0       10.7        0.0
           1  1   -1501.1    4796.2       17.9      -26.8
     """
     def __init__(self): ...
@@ -609,7 +606,7 @@ class GeoMagneticModelLoader(org.orekit.data.DataLoader):
 
 class Geoid(EarthShape):
     """
-    public class Geoid extends Object implements :class:`~org.orekit.models.earth.EarthShape`
+    public class Geoid extends :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.EarthShape`
     
         A geoid is a level surface of the gravity potential of a body. The gravity potential, W, is split so W = U + T, where U
         is the normal potential (defined by the ellipsoid) and T is the anomalous potential.[3](eq. 2-137)
@@ -706,8 +703,8 @@ class Geoid(EarthShape):
                 :meth:`~org.orekit.bodies.BodyShape.getIntersectionPoint` in interface :class:`~org.orekit.bodies.BodyShape`
         
             Parameters:
-                lineInFrame (FieldLine<T> lineInFrame): test line (may intersect the body or not)
-                closeInFrame (FieldVector3D<T> closeInFrame): point used for intersections selection
+                lineInFrame (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldLine?is`<T> lineInFrame): test line (may intersect the body or not)
+                closeInFrame (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> closeInFrame): point used for intersections selection
                 frame (:class:`~org.orekit.frames.Frame`): frame in which line is expressed
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the line in given frame
         
@@ -733,8 +730,8 @@ class Geoid(EarthShape):
                 :meth:`~org.orekit.bodies.BodyShape.getIntersectionPoint` in interface :class:`~org.orekit.bodies.BodyShape`
         
             Parameters:
-                lineInFrame (Line): test line (may intersect the body or not)
-                closeInFrame (Vector3D): point used for intersections selection
+                lineInFrame (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Line?is`): test line (may intersect the body or not)
+                closeInFrame (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point used for intersections selection
                 frame (:class:`~org.orekit.frames.Frame`): frame in which line is expressed
                 date (:class:`~org.orekit.time.AbsoluteDate`): date of the line in given frame
         
@@ -776,7 +773,7 @@ class Geoid(EarthShape):
                 :meth:`~org.orekit.bodies.BodyShape.projectToGround` in interface :class:`~org.orekit.bodies.BodyShape`
         
             Parameters:
-                point (Vector3D): point to project
+                point (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point to project
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
                 frame (:class:`~org.orekit.frames.Frame`): frame in which moving point is expressed
         
@@ -846,7 +843,7 @@ class Geoid(EarthShape):
                 :meth:`~org.orekit.bodies.BodyShape.transform` in interface :class:`~org.orekit.bodies.BodyShape`
         
             Parameters:
-                date (Vector3D): date of the conversion. Used for computing frame transformations and for time dependent geopotential.
+                date (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): date of the conversion. Used for computing frame transformations and for time dependent geopotential.
                 point (:class:`~org.orekit.frames.Frame`): Cartesian point
                 frame (:class:`~org.orekit.time.AbsoluteDate`): frame in which Cartesian point is expressed
         
@@ -885,7 +882,7 @@ class Geoid(EarthShape):
                 :meth:`~org.orekit.bodies.BodyShape.transform` in interface :class:`~org.orekit.bodies.BodyShape`
         
             Parameters:
-                date (FieldVector3D<T> point): date of the conversion. Used for computing frame transformations and for time dependent geopotential.
+                date (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> point): date of the conversion. Used for computing frame transformations and for time dependent geopotential.
                 point (:class:`~org.orekit.frames.Frame`): Cartesian point
                 frame (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): frame in which Cartesian point is expressed
         
@@ -904,7 +901,7 @@ class Geoid(EarthShape):
 
 class LazyLoadedGeoMagneticFields(GeoMagneticFields):
     """
-    public class LazyLoadedGeoMagneticFields extends Object implements :class:`~org.orekit.models.earth.GeoMagneticFields`
+    public class LazyLoadedGeoMagneticFields extends :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.GeoMagneticFields`
     
         Loads magnetic fields on request and can be configured after creation. Designed to match the behavior of
         :class:`~org.orekit.models.earth.GeoMagneticFieldFactory` in Orekit 10.0
@@ -919,8 +916,8 @@ class LazyLoadedGeoMagneticFields(GeoMagneticFields):
             Get the :class:`~org.orekit.models.earth.GeoMagneticField` for the given model type and year.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.GeoMagneticFields.getField`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.GeoMagneticFields`
+                :meth:`~org.orekit.models.earth.GeoMagneticFields.getField` in
+                interface :class:`~org.orekit.models.earth.GeoMagneticFields`
         
             Parameters:
                 type (:class:`~org.orekit.models.earth.GeoMagneticFieldFactory.FieldModel`): the field model type
@@ -941,8 +938,8 @@ class LazyLoadedGeoMagneticFields(GeoMagneticFields):
             Get the IGRF model for the given year.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.GeoMagneticFields.getIGRF`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.GeoMagneticFields`
+                :meth:`~org.orekit.models.earth.GeoMagneticFields.getIGRF` in
+                interface :class:`~org.orekit.models.earth.GeoMagneticFields`
         
             Parameters:
                 year (double): the decimal year
@@ -962,8 +959,8 @@ class LazyLoadedGeoMagneticFields(GeoMagneticFields):
             Get the WMM model for the given year.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.GeoMagneticFields.getWMM`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.GeoMagneticFields`
+                :meth:`~org.orekit.models.earth.GeoMagneticFields.getWMM` in
+                interface :class:`~org.orekit.models.earth.GeoMagneticFields`
         
             Parameters:
                 year (double): the decimal year
@@ -980,7 +977,7 @@ class LazyLoadedGeoMagneticFields(GeoMagneticFields):
 
 class PythonEarthShape(EarthShape):
     """
-    public class PythonEarthShape extends Object implements :class:`~org.orekit.models.earth.EarthShape`
+    public class PythonEarthShape extends :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.EarthShape`
     
     
         Also see:
@@ -1030,8 +1027,8 @@ class PythonEarthShape(EarthShape):
                 :meth:`~org.orekit.bodies.BodyShape.getIntersectionPoint` in interface :class:`~org.orekit.bodies.BodyShape`
         
             Parameters:
-                line (Line): test line (may intersect the body or not)
-                close (Vector3D): point used for intersections selection
+                line (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Line?is`): test line (may intersect the body or not)
+                close (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point used for intersections selection
                 frame (:class:`~org.orekit.frames.Frame`): frame in which line is expressed
                 date (:class:`~org.orekit.time.AbsoluteDate`): date of the line in given frame
         
@@ -1053,8 +1050,8 @@ class PythonEarthShape(EarthShape):
                 :meth:`~org.orekit.bodies.BodyShape.getIntersectionPoint` in interface :class:`~org.orekit.bodies.BodyShape`
         
             Parameters:
-                line (FieldLine<T> line): test line (may intersect the body or not)
-                close (FieldVector3D<T> close): point used for intersections selection
+                line (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldLine?is`<T> line): test line (may intersect the body or not)
+                close (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> close): point used for intersections selection
                 frame (:class:`~org.orekit.frames.Frame`): frame in which line is expressed
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the line in given frame
         
@@ -1078,7 +1075,7 @@ class PythonEarthShape(EarthShape):
                 :meth:`~org.orekit.bodies.BodyShape.projectToGround` in interface :class:`~org.orekit.bodies.BodyShape`
         
             Parameters:
-                point (Vector3D): point to project
+                point (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point to project
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
                 frame (:class:`~org.orekit.frames.Frame`): frame in which moving point is expressed
         
@@ -1148,7 +1145,7 @@ class PythonEarthShape(EarthShape):
                 :meth:`~org.orekit.bodies.BodyShape.transform` in interface :class:`~org.orekit.bodies.BodyShape`
         
             Parameters:
-                point (Vector3D): Cartesian point
+                point (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): Cartesian point
                 frame (:class:`~org.orekit.frames.Frame`): frame in which Cartesian point is expressed
                 date (:class:`~org.orekit.time.AbsoluteDate`): date of the computation (used for frames conversions)
         
@@ -1202,7 +1199,7 @@ class PythonEarthShape(EarthShape):
                 :meth:`~org.orekit.bodies.BodyShape.transform` in interface :class:`~org.orekit.bodies.BodyShape`
         
             Parameters:
-                point (FieldVector3D<T> point): Cartesian point
+                point (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> point): Cartesian point
                 frame (:class:`~org.orekit.frames.Frame`): frame in which Cartesian point is expressed
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the computation (used for frames conversions)
         
@@ -1222,7 +1219,7 @@ class PythonEarthShape(EarthShape):
             Transform a Cartesian point to a surface-relative point.
         
             Parameters:
-                point (FieldVector3D<T> point): Cartesian point
+                point (:class:`~org.orekit.models.earth.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> point): Cartesian point
                 frame (:class:`~org.orekit.frames.Frame`): frame in which Cartesian point is expressed
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the computation (used for frames conversions)
         
@@ -1251,7 +1248,7 @@ class PythonEarthShape(EarthShape):
 
 class PythonGeoMagneticFields(GeoMagneticFields):
     """
-    public class PythonGeoMagneticFields extends Object implements :class:`~org.orekit.models.earth.GeoMagneticFields`
+    public class PythonGeoMagneticFields extends :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.GeoMagneticFields`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -1260,8 +1257,8 @@ class PythonGeoMagneticFields(GeoMagneticFields):
             Get the :class:`~org.orekit.models.earth.GeoMagneticField` for the given model type and year.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.GeoMagneticFields.getField`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.GeoMagneticFields`
+                :meth:`~org.orekit.models.earth.GeoMagneticFields.getField` in
+                interface :class:`~org.orekit.models.earth.GeoMagneticFields`
         
             Parameters:
                 type (:class:`~org.orekit.models.earth.GeoMagneticFieldFactory.FieldModel`): the field model type
@@ -1281,8 +1278,8 @@ class PythonGeoMagneticFields(GeoMagneticFields):
             Get the IGRF model for the given year.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.GeoMagneticFields.getIGRF`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.GeoMagneticFields`
+                :meth:`~org.orekit.models.earth.GeoMagneticFields.getIGRF` in
+                interface :class:`~org.orekit.models.earth.GeoMagneticFields`
         
             Parameters:
                 year (double): the decimal year
@@ -1301,8 +1298,8 @@ class PythonGeoMagneticFields(GeoMagneticFields):
             Get the WMM model for the given year.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.GeoMagneticFields.getWMM`Â in
-                interfaceÂ :class:`~org.orekit.models.earth.GeoMagneticFields`
+                :meth:`~org.orekit.models.earth.GeoMagneticFields.getWMM` in
+                interface :class:`~org.orekit.models.earth.GeoMagneticFields`
         
             Parameters:
                 year (double): the decimal year
@@ -1475,7 +1472,7 @@ class ReferenceEllipsoid(org.orekit.bodies.OneAxisEllipsoid, EarthShape):
                 latitude (double): geodetic latitude, in radians. That is the angle between the local normal on the ellipsoid and the equatorial plane.
         
             Returns:
-                the normal gravity, Î³, at the given latitude in m/s :sup:`2` . This is the acceleration felt by a mass at rest on the
+                the normal gravity, γ, at the given latitude in m/s :sup:`2` . This is the acceleration felt by a mass at rest on the
                 surface of the reference ellipsoid.
         
         

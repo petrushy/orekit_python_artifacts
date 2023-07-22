@@ -10,7 +10,7 @@ _ConvexHull__S = typing.TypeVar('_ConvexHull__S', bound=org.hipparchus.geometry.
 _ConvexHull__P = typing.TypeVar('_ConvexHull__P', bound=org.hipparchus.geometry.Point)  # <P>
 class ConvexHull(java.io.Serializable, typing.Generic[_ConvexHull__S, _ConvexHull__P]):
     """
-    public interface ConvexHull<S extends :class:`~org.hipparchus.geometry.Space`,P extends :class:`~org.hipparchus.geometry.Point`<S>> extends Serializable
+    public interface ConvexHull<S extends :class:`~org.hipparchus.geometry.Space`,P extends :class:`~org.hipparchus.geometry.Point`<S>> extends :class:`~org.hipparchus.geometry.hull.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         This class represents a convex hull.
     """

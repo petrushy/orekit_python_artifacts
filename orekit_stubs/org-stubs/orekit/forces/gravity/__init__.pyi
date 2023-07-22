@@ -32,7 +32,7 @@ class DeSitterRelativity(org.orekit.forces.AbstractForceModel):
     """
     ATTRACTION_COEFFICIENT_SUFFIX: typing.ClassVar[str] = ...
     """
-    public static final String ATTRACTION_COEFFICIENT_SUFFIX
+    public static final :class:`~org.orekit.forces.gravity.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ATTRACTION_COEFFICIENT_SUFFIX
     
         Suffix for parameter name for attraction coefficient enabling Jacobian processing.
     
@@ -118,9 +118,9 @@ class HolmesFeatherstoneAttractionModel(org.orekit.forces.AbstractForceModel, or
         This class represents the gravitational field of a celestial body.
     
         The algorithm implemented in this class has been designed by S. A. Holmes and W. E. Featherstone from Department of
-        Spatial Sciences, Curtin University of Technology, Perth, Australia. It is described in their 2002 paper: A unified
-        approach to he Clenshaw summation and the recursive computation of very high degree and order normalised associated
-        Legendre functions (Journal of Geodesy (2002) 76: 279Ã¢â‚¬â€œ299).
+        Spatial Sciences, Curtin University of Technology, Perth, Australia. It is described in their 2002 paper:
+        :class:`~org.orekit.forces.gravity.https:.www.researchgate.net.publication.226460594_A_unified_approach_to_the_Clenshaw_summation_and_the_recursive_computation_of_very_high_degree_and_order_normalised_associated_Legendre_functions`
+        (Journal of Geodesy (2002) 76: 279–299).
     
         This model directly uses normalized coefficients and stable recursion algorithms so it is more suited to high degree
         gravity fields than the classical Cunningham Droziner models which use un-normalized coefficients.
@@ -190,10 +190,10 @@ class HolmesFeatherstoneAttractionModel(org.orekit.forces.AbstractForceModel, or
     def getFieldEventsDetectors(self, field: org.hipparchus.Field[_getFieldEventsDetectors__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventsDetectors__T]]: ...
     def getMu(self) -> float:
         """
-            Get the central attraction coefficient Î¼.
+            Get the central attraction coefficient μ.
         
             Returns:
-                mu central attraction coefficient (mÂ³/sÂ²)
+                mu central attraction coefficient (m³/s²)
         
         
         """
@@ -204,8 +204,8 @@ class HolmesFeatherstoneAttractionModel(org.orekit.forces.AbstractForceModel, or
             Get the :class:`~org.orekit.forces.gravity.potential.TideSystem` used in the gravity field.
         
             Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.TideSystemProvider.getTideSystem`Â in
-                interfaceÂ :class:`~org.orekit.forces.gravity.potential.TideSystemProvider`
+                :meth:`~org.orekit.forces.gravity.potential.TideSystemProvider.getTideSystem` in
+                interface :class:`~org.orekit.forces.gravity.potential.TideSystemProvider`
         
             Returns:
                 tide system used in the gravity field
@@ -221,7 +221,7 @@ class HolmesFeatherstoneAttractionModel(org.orekit.forces.AbstractForceModel, or
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                position (Vector3D): position at which gravity field is desired in body frame
+                position (:class:`~org.orekit.forces.gravity.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): position at which gravity field is desired in body frame
                 mu (double): central attraction coefficient to use
         
             Returns:
@@ -236,7 +236,7 @@ class HolmesFeatherstoneAttractionModel(org.orekit.forces.AbstractForceModel, or
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                position (FieldVector3D<T> position): position at which gravity field is desired in body frame
+                position (:class:`~org.orekit.forces.gravity.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): position at which gravity field is desired in body frame
                 mu (T): central attraction coefficient to use
         
             Returns:
@@ -251,7 +251,7 @@ class HolmesFeatherstoneAttractionModel(org.orekit.forces.AbstractForceModel, or
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                position (Vector3D): position at which gravity field is desired in body frame
+                position (:class:`~org.orekit.forces.gravity.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): position at which gravity field is desired in body frame
                 mu (double): central attraction coefficient to use
         
             Returns:
@@ -266,7 +266,7 @@ class HolmesFeatherstoneAttractionModel(org.orekit.forces.AbstractForceModel, or
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                position (Vector3D): position at which gravity field is desired in body frame
+                position (:class:`~org.orekit.forces.gravity.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): position at which gravity field is desired in body frame
                 mu (double): central attraction coefficient to use
         
             Returns:
@@ -347,7 +347,7 @@ class NewtonianAttraction(org.orekit.forces.AbstractForceModel):
     """
     CENTRAL_ATTRACTION_COEFFICIENT: typing.ClassVar[str] = ...
     """
-    public static final String CENTRAL_ATTRACTION_COEFFICIENT
+    public static final :class:`~org.orekit.forces.gravity.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` CENTRAL_ATTRACTION_COEFFICIENT
     
         Name of the single parameter of this model: the central attraction coefficient.
     
@@ -432,23 +432,23 @@ class NewtonianAttraction(org.orekit.forces.AbstractForceModel):
     @typing.overload
     def getMu(self) -> float:
         """
-            Get the central attraction coefficient Î¼.
+            Get the central attraction coefficient μ.
         
             Returns:
-                mu central attraction coefficient (mÂ³/sÂ²)
+                mu central attraction coefficient (m³/s²)
         
         """
         ...
     @typing.overload
     def getMu(self, field: org.hipparchus.Field[_getMu_1__T]) -> _getMu_1__T:
         """
-            Get the central attraction coefficient Î¼.
+            Get the central attraction coefficient μ.
         
             Parameters:
-                field (Field<T> field): field to which the state belongs
+                field (:class:`~org.orekit.forces.gravity.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the state belongs
         
             Returns:
-                mu central attraction coefficient (mÂ³/sÂ²)
+                mu central attraction coefficient (m³/s²)
         
         
         """
@@ -631,7 +631,7 @@ class SingleBodyAbsoluteAttraction(org.orekit.forces.AbstractForceModel):
     """
     ATTRACTION_COEFFICIENT_SUFFIX: typing.ClassVar[str] = ...
     """
-    public static final String ATTRACTION_COEFFICIENT_SUFFIX
+    public static final :class:`~org.orekit.forces.gravity.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ATTRACTION_COEFFICIENT_SUFFIX
     
         Suffix for parameter name for attraction coefficient enabling Jacobian processing.
     
@@ -695,7 +695,7 @@ class SingleBodyRelativeAttraction(org.orekit.forces.AbstractForceModel):
     """
     ATTRACTION_COEFFICIENT_SUFFIX: typing.ClassVar[str] = ...
     """
-    public static final String ATTRACTION_COEFFICIENT_SUFFIX
+    public static final :class:`~org.orekit.forces.gravity.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ATTRACTION_COEFFICIENT_SUFFIX
     
         Suffix for parameter name for attraction coefficient enabling Jacobian processing.
     
@@ -840,7 +840,7 @@ class ThirdBodyAttraction(org.orekit.forces.AbstractForceModel):
     """
     ATTRACTION_COEFFICIENT_SUFFIX: typing.ClassVar[str] = ...
     """
-    public static final String ATTRACTION_COEFFICIENT_SUFFIX
+    public static final :class:`~org.orekit.forces.gravity.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ATTRACTION_COEFFICIENT_SUFFIX
     
         Suffix for parameter name for attraction coefficient enabling Jacobian processing.
     

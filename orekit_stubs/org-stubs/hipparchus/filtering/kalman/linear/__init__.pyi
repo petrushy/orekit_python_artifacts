@@ -6,7 +6,7 @@ import typing
 
 class LinearEvolution:
     """
-    public class LinearEvolution extends Object
+    public class LinearEvolution extends :class:`~org.hipparchus.filtering.kalman.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Container for :class:`~org.hipparchus.filtering.kalman.linear.LinearProcess` evolution data.
     

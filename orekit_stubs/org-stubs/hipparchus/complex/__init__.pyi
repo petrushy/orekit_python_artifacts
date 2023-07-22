@@ -12,11 +12,12 @@ import typing
 
 class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializable):
     """
-    public class Complex extends Object implements :class:`~org.hipparchus.CalculusFieldElement`<:class:`~org.hipparchus.complex.Complex`>, Serializable
+    public class Complex extends :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.CalculusFieldElement`<:class:`~org.hipparchus.complex.Complex`>, :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Representation of a Complex number, i.e. a number which has both a real and imaginary part.
     
-        Implementations of arithmetic operations handle :code:`NaN` and infinite values according to the rules for null, i.e.
+        Implementations of arithmetic operations handle :code:`NaN` and infinite values according to the rules for
+        :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double?is`, i.e.
         :meth:`~org.hipparchus.complex.Complex.equals` is an equivalence relation for all instances that have a :code:`NaN` in
         either real or imaginary part, e.g. the following are considered equal:
     
@@ -94,7 +95,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
     """
     public static final :class:`~org.hipparchus.complex.Complex` PI
     
-        A complex number representing "Ï€ + 0.0i".
+        A complex number representing "π + 0.0i".
     
     """
     @typing.overload
@@ -382,7 +383,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
             
               Examples:
               
-               cos(1 ± INFINITY i) = 1 âˆ“ INFINITY i
+               cos(1 ± INFINITY i) = 1 ∓ INFINITY i
                cos(±INFINITY + i) = NaN + NaN i
                cos(±INFINITY ± INFINITY i) = NaN + NaN i
               
@@ -463,7 +464,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
         """
             Test for equality with another object. If both the real and imaginary parts of two complex numbers are exactly the same,
             and neither is :code:`Double.NaN`, the two Complex objects are considered to be equal. The behavior is the same as for
-            JDK's null:
+            JDK's :meth:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`:
         
               - All :code:`NaN` values are considered to be equal, i.e, if either (or both) real and imaginary parts of the complex
                 number are equal to :code:`Double.NaN`, the complex number is equal to :code:`NaN`.
@@ -471,10 +472,11 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
         
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                other (Object): Object to test for equality with this instance.
+                other (:class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality with this instance.
         
             Returns:
                 :code:`true` if the objects are equal, :code:`false` if object is :code:`null`, not an instance of :code:`Complex`, or
@@ -678,7 +680,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
         ...
     def getPi(self) -> 'Complex':
         """
-            Get the Archimedes constant Ï€.
+            Get the Archimedes constant π.
         
             Archimedes constant is the ratio of a circle's circumference to its diameter.
         
@@ -686,7 +688,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
                 :meth:`~org.hipparchus.CalculusFieldElement.getPi` in interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Returns:
-                Archimedes constant Ï€
+                Archimedes constant π
         
         
         """
@@ -723,7 +725,8 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
             code :code:`7`.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a hash code value for this object.
@@ -733,7 +736,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
         ...
     def hypot(self, complex: 'Complex') -> 'Complex':
         """
-            Returns the hypotenuse of a triangle with sides :code:`this` and :code:`y` - sqrt(*this* :sup:`2` Â +*y* :sup:`2` )
+            Returns the hypotenuse of a triangle with sides :code:`this` and :code:`y` - sqrt(*this* :sup:`2`  +*y* :sup:`2` )
             avoiding intermediate overflow or underflow.
         
               - If either argument is infinite, then the result is positive infinity.
@@ -837,8 +840,8 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (:class:`~org.hipparchus.complex.Complex`): first factor of the first term
@@ -859,8 +862,8 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (double): first factor of the first term
@@ -881,8 +884,8 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (:class:`~org.hipparchus.complex.Complex`): first factor of the first term
@@ -905,8 +908,8 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (double): first factor of the first term
@@ -929,8 +932,8 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (:class:`~org.hipparchus.complex.Complex`): first factor of the first term
@@ -955,8 +958,8 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
             Compute a linear combination.
         
             Specified by:
-                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination`Â in
-                interfaceÂ :class:`~org.hipparchus.CalculusFieldElement`
+                :meth:`~org.hipparchus.CalculusFieldElement.linearCombination` in
+                interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Parameters:
                 a1 (double): first factor of the first term
@@ -1184,7 +1187,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
             If :code:`x` has an integer value, returns :meth:`~org.hipparchus.complex.Complex.pow`, if :code:`this` is real and
             :meth:`~org.hipparchus.util.FastMath.pow` with the corresponding real arguments would return a finite number (neither
             NaN nor infinite), then returns the same value converted to :code:`Complex`, with the same special cases. In all other
-            cases real cases, implements y :sup:`x` = exp(xÂ·log(y)).
+            cases real cases, implements y :sup:`x` = exp(x·log(y)).
         
             Specified by:
                 :meth:`~org.hipparchus.CalculusFieldElement.pow` in interface :class:`~org.hipparchus.CalculusFieldElement`
@@ -1237,8 +1240,8 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
         """
             IEEE remainder operator.
         
-            for complex numbers, the integer n corresponding to :code:`this.subtract(remainder(a)).divide(a)` is a Wikipedia -
-            Gaussian integer.
+            for complex numbers, the integer n corresponding to :code:`this.subtract(remainder(a)).divide(a)` is a
+            :class:`~org.hipparchus.complex.https:.en.wikipedia.org.wiki.Gaussian_integer`.
         
             Specified by:
                 :meth:`~org.hipparchus.CalculusFieldElement.remainder` in interface :class:`~org.hipparchus.CalculusFieldElement`
@@ -1254,8 +1257,8 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
         
             IEEE remainder operator.
         
-            for complex numbers, the integer n corresponding to :code:`this.subtract(remainder(a)).divide(a)` is a Wikipedia -
-            Gaussian integer.
+            for complex numbers, the integer n corresponding to :code:`this.subtract(remainder(a)).divide(a)` is a
+            :class:`~org.hipparchus.complex.https:.en.wikipedia.org.wiki.Gaussian_integer`.
         
             Specified by:
                 :meth:`~org.hipparchus.CalculusFieldElement.remainder` in interface :class:`~org.hipparchus.CalculusFieldElement`
@@ -1437,7 +1440,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
               2.  
                 .. code-block: java
                 
-                if   a â‰¥ 0 return :code:`t + (b/2t)i`
+                if   a ≥ 0 return :code:`t + (b/2t)i`
                   else return :code:`|b|/2t + sign(b)t i`
         
             where
@@ -1458,11 +1461,11 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
             
               Examples:
               
-               sqrt(1 Â± âˆž i) = âˆž + NaN i
-               sqrt(âˆž + i) = âˆž + 0i
-               sqrt(-âˆž + i) = 0 + âˆž i
-               sqrt(âˆž Â± âˆž i) = âˆž + NaN i
-               sqrt(-âˆž Â± âˆž i) = NaN Â± âˆž i
+               sqrt(1 ± ∞ i) = ∞ + NaN i
+               sqrt(∞ + i) = ∞ + 0i
+               sqrt(-∞ + i) = 0 + ∞ i
+               sqrt(∞ ± ∞ i) = ∞ + NaN i
+               sqrt(-∞ ± ∞ i) = NaN ± ∞ i
               
              
         
@@ -1622,7 +1625,8 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -1670,7 +1674,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
 
 class ComplexComparator(java.util.Comparator[Complex], java.io.Serializable):
     """
-    public class ComplexComparator extends Object implements Comparator<:class:`~org.hipparchus.complex.Complex`>, Serializable
+    public class ComplexComparator extends :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.util.Comparator?is`<:class:`~org.hipparchus.complex.Complex`>, :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Comparator for Complex Numbers.
     
@@ -1684,7 +1688,8 @@ class ComplexComparator(java.util.Comparator[Complex], java.io.Serializable):
             order.
         
             Specified by:
-                 in interface 
+                :meth:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.util.Comparator.html?is` in
+                interface :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.util.Comparator?is`
         
             Parameters:
                 o1 (:class:`~org.hipparchus.complex.Complex`): first complex number
@@ -1700,7 +1705,7 @@ class ComplexComparator(java.util.Comparator[Complex], java.io.Serializable):
 
 class ComplexField(org.hipparchus.Field[Complex], java.io.Serializable):
     """
-    public class ComplexField extends Object implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.complex.Complex`>, Serializable
+    public class ComplexField extends :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.complex.Complex`>, :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Representation of the complex numbers field.
     
@@ -1713,7 +1718,8 @@ class ComplexField(org.hipparchus.Field[Complex], java.io.Serializable):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -1734,7 +1740,7 @@ class ComplexField(org.hipparchus.Field[Complex], java.io.Serializable):
             Get the multiplicative identity of the field.
         
             The multiplicative identity is the element e :sub:`1` of the field such that for all elements a of the field, the
-            equalities a Ã— e :sub:`1` = e :sub:`1` Ã— a = a hold.
+            equalities a × e :sub:`1` = e :sub:`1` × a = a hold.
         
             Specified by:
                 :meth:`~org.hipparchus.Field.getOne` in interface :class:`~org.hipparchus.Field`
@@ -1766,7 +1772,8 @@ class ComplexField(org.hipparchus.Field[Complex], java.io.Serializable):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -1774,7 +1781,7 @@ class ComplexField(org.hipparchus.Field[Complex], java.io.Serializable):
 
 class ComplexFormat:
     """
-    public class ComplexFormat extends Object
+    public class ComplexFormat extends :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Formats a Complex number in cartesian format "Re(c) + Im(c)i". 'i' can be replaced with 'j' (or anything else), and the
         number format for both real and imaginary parts can be configured.
@@ -1805,7 +1812,7 @@ class ComplexFormat:
             This method calls :meth:`~org.hipparchus.complex.ComplexFormat.format`.
         
             Parameters:
-                c (Double): Double object to format.
+                c (:class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double?is`): Double object to format.
         
             Returns:
                 A formatted number.
@@ -1814,21 +1821,24 @@ class ComplexFormat:
         
             Parameters:
                 complex (:class:`~org.hipparchus.complex.Complex`): the object to format.
-                toAppendTo (StringBuffer): where the text is to be appended
-                pos (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
+                toAppendTo (:class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is`): where the text is to be appended
+                pos (:class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition?is`): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
             Returns:
                 the value passed in as toAppendTo.
         
-        public StringBuffer format(Object obj, StringBuffer toAppendTo, FieldPosition pos) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is` format(:class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` obj, :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is` toAppendTo, :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition?is` pos) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Formats a object to produce a string. :code:`obj` must be either a :class:`~org.hipparchus.complex.Complex` object or a
-            null object. Any other type of object will result in an null being thrown.
+            :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number?is` object. Any other type of
+            object will result in an
+            :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is` being
+            thrown.
         
             Parameters:
-                obj (Object): the object to format.
-                toAppendTo (StringBuffer): where the text is to be appended
-                pos (FieldPosition): On input: an alignment field, if desired. On output: the offsets of the alignment field
+                obj (:class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): the object to format.
+                toAppendTo (:class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is`): where the text is to be appended
+                pos (:class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition?is`): On input: an alignment field, if desired. On output: the offsets of the alignment field
         
             Returns:
                 the value passed in as toAppendTo.
@@ -1837,6 +1847,7 @@ class ComplexFormat:
                 :class:`~org.hipparchus.exception.MathIllegalArgumentException`: is :code:`obj` is not a valid type.
         
             Also see:
+                :meth:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.text.Format.html?is`
         
         
         """
@@ -1852,7 +1863,8 @@ class ComplexFormat:
         """
             Get the set of locales for which complex formats are available.
         
-            This is the same set as the null set.
+            This is the same set as the
+            :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.text.NumberFormat?is` set.
         
             Returns:
                 available complex format locales.
@@ -1884,7 +1896,7 @@ class ComplexFormat:
             Returns the default complex format for the given locale.
         
             Parameters:
-                locale (Locale): the specific locale used by the format.
+                locale (:class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): the specific locale used by the format.
         
             Returns:
                 the complex format specific to the given locale.
@@ -1892,13 +1904,13 @@ class ComplexFormat:
             Since:
                 1.4
         
-        public static :class:`~org.hipparchus.complex.ComplexFormat` getComplexFormat(String imaginaryCharacter, Locale locale) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`, :class:`~org.hipparchus.exception.NullArgumentException`
+        public static :class:`~org.hipparchus.complex.ComplexFormat` getComplexFormat(:class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` imaginaryCharacter, :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is` locale) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`, :class:`~org.hipparchus.exception.NullArgumentException`
         
             Returns the default complex format for the given locale.
         
             Parameters:
-                locale (String): the specific locale used by the format.
-                imaginaryCharacter (Locale): Imaginary character.
+                locale (:class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the specific locale used by the format.
+                imaginaryCharacter (:class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): Imaginary character.
         
             Returns:
                 the complex format specific to the given locale.
@@ -1949,8 +1961,8 @@ class ComplexFormat:
             Parses a string to produce a :class:`~org.hipparchus.complex.Complex` object.
         
             Parameters:
-                source (String): the string to parse
-                pos (ParsePosition): input/ouput parsing parameter.
+                source (:class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the string to parse
+                pos (:class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.text.ParsePosition?is`): input/ouput parsing parameter.
         
             Returns:
                 the parsed :class:`~org.hipparchus.complex.Complex` object.
@@ -1963,7 +1975,7 @@ class ComplexFormat:
 
 class ComplexUnivariateIntegrator:
     """
-    public class ComplexUnivariateIntegrator extends Object
+    public class ComplexUnivariateIntegrator extends :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Wrapper to perform univariate complex integration using an underlying real integration algorithms.
     
@@ -1978,7 +1990,7 @@ class ComplexUnivariateIntegrator:
 
 class ComplexUtils:
     """
-    public class ComplexUtils extends Object
+    public class ComplexUtils extends :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Static implementations of common :class:`~org.hipparchus.complex.Complex` utilities functions.
     """
@@ -2007,11 +2019,12 @@ class ComplexUtils:
 _FieldComplex__T = typing.TypeVar('_FieldComplex__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldComplex(org.hipparchus.CalculusFieldElement['FieldComplex'[_FieldComplex__T]], typing.Generic[_FieldComplex__T]):
     """
-    public class FieldComplex<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object implements :class:`~org.hipparchus.CalculusFieldElement`<:class:`~org.hipparchus.complex.FieldComplex`<T>>
+    public class FieldComplex<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.CalculusFieldElement`<:class:`~org.hipparchus.complex.FieldComplex`<T>>
     
         Representation of a Complex number, i.e. a number which has both a real and imaginary part.
     
-        Implementations of arithmetic operations handle :code:`NaN` and infinite values according to the rules for null, i.e.
+        Implementations of arithmetic operations handle :code:`NaN` and infinite values according to the rules for
+        :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double?is`, i.e.
         :meth:`~org.hipparchus.complex.FieldComplex.equals` is an equivalence relation for all instances that have a :code:`NaN`
         in either real or imaginary part, e.g. the following are considered equal:
     
@@ -2069,7 +2082,7 @@ class FieldComplex(org.hipparchus.CalculusFieldElement['FieldComplex'[_FieldComp
         """
             Test for equality with another object. If both the real and imaginary parts of two complex numbers are exactly the same,
             and neither is :code:`Double.NaN`, the two Complex objects are considered to be equal. The behavior is the same as for
-            JDK's null:
+            JDK's :meth:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`:
         
               - All :code:`NaN` values are considered to be equal, i.e, if either (or both) real and imaginary parts of the complex
                 number are equal to :code:`Double.NaN`, the complex number is equal to :code:`NaN`.
@@ -2077,10 +2090,11 @@ class FieldComplex(org.hipparchus.CalculusFieldElement['FieldComplex'[_FieldComp
         
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                other (Object): Object to test for equality with this instance.
+                other (:class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): Object to test for equality with this instance.
         
             Returns:
                 :code:`true` if the objects are equal, :code:`false` if object is :code:`null`, not an instance of :code:`Complex`, or
@@ -2304,17 +2318,17 @@ class FieldComplex(org.hipparchus.CalculusFieldElement['FieldComplex'[_FieldComp
     @staticmethod
     def getPi(field: org.hipparchus.Field[_getPi_1__T]) -> 'FieldComplex'[_getPi_1__T]:
         """
-            Get a complex number representing "Ï€ + 0.0i".
+            Get a complex number representing "π + 0.0i".
         
             Parameters:
                 field (:class:`~org.hipparchus.Field`<T> field): field the complex components belong to
         
             Returns:
-                complex number representing "Ï€ + 0.0i
+                complex number representing "π + 0.0i
         
         public :class:`~org.hipparchus.complex.FieldComplex`<:class:`~org.hipparchus.complex.FieldComplex`> getPi()
         
-            Get the Archimedes constant Ï€.
+            Get the Archimedes constant π.
         
             Archimedes constant is the ratio of a circle's circumference to its diameter.
         
@@ -2322,7 +2336,7 @@ class FieldComplex(org.hipparchus.CalculusFieldElement['FieldComplex'[_FieldComp
                 :meth:`~org.hipparchus.CalculusFieldElement.getPi` in interface :class:`~org.hipparchus.CalculusFieldElement`
         
             Returns:
-                Archimedes constant Ï€
+                Archimedes constant π
         
         
         """
@@ -2371,7 +2385,8 @@ class FieldComplex(org.hipparchus.CalculusFieldElement['FieldComplex'[_FieldComp
             code :code:`7`.
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Returns:
                 a hash code value for this object.
@@ -2516,7 +2531,8 @@ class FieldComplex(org.hipparchus.CalculusFieldElement['FieldComplex'[_FieldComp
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -2555,7 +2571,7 @@ class FieldComplex(org.hipparchus.CalculusFieldElement['FieldComplex'[_FieldComp
 _FieldComplexField__T = typing.TypeVar('_FieldComplexField__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldComplexField(org.hipparchus.Field[FieldComplex[_FieldComplexField__T]], typing.Generic[_FieldComplexField__T]):
     """
-    public class FieldComplexField<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.complex.FieldComplex`<T>>
+    public class FieldComplexField<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.complex.FieldComplex`<T>>
     
         Representation of the complex numbers field.
     
@@ -2570,7 +2586,8 @@ class FieldComplexField(org.hipparchus.Field[FieldComplex[_FieldComplexField__T]
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -2597,7 +2614,8 @@ class FieldComplexField(org.hipparchus.Field[FieldComplex[_FieldComplexField__T]
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -2606,7 +2624,7 @@ class FieldComplexField(org.hipparchus.Field[FieldComplex[_FieldComplexField__T]
 _FieldComplexUnivariateIntegrator__T = typing.TypeVar('_FieldComplexUnivariateIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldComplexUnivariateIntegrator(typing.Generic[_FieldComplexUnivariateIntegrator__T]):
     """
-    public class FieldComplexUnivariateIntegrator<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends Object
+    public class FieldComplexUnivariateIntegrator<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Wrapper to perform univariate complex integration using an underlying real integration algorithms.
     
@@ -2621,7 +2639,7 @@ class FieldComplexUnivariateIntegrator(typing.Generic[_FieldComplexUnivariateInt
 
 class Quaternion(java.io.Serializable):
     """
-    public final class Quaternion extends Object implements Serializable
+    public final class Quaternion extends :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         This class implements ` quaternions <http://mathworld.wolfram.com/Quaternion.html>` (Hamilton's hypercomplex numbers).
     
@@ -2728,7 +2746,8 @@ class Quaternion(java.io.Serializable):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Checks whether this instance is equal to another quaternion within a given tolerance.
         
@@ -2858,7 +2877,8 @@ class Quaternion(java.io.Serializable):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -2968,7 +2988,8 @@ class Quaternion(java.io.Serializable):
         """
         
             Overrides:
-                 in class 
+                :meth:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
         
         """
@@ -2976,7 +2997,7 @@ class Quaternion(java.io.Serializable):
 
 class RootsOfUnity(java.io.Serializable):
     """
-    public class RootsOfUnity extends Object implements Serializable
+    public class RootsOfUnity extends :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         A helper class for the computation and caching of the :code:`n`-th roots of unity.
     

@@ -13,7 +13,7 @@ import typing
 
 class Antenna:
     """
-    public class Antenna extends Object
+    public class Antenna extends :class:`~org.orekit.gnss.antenna.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         GNSS antenna model.
     
@@ -21,7 +21,7 @@ class Antenna:
             9.2
     
         Also see:
-            ANTEX: The Antenna Exchange Format, Version 1.4
+            :class:`~org.orekit.gnss.antenna.ftp:.www.igs.org.pub.station.general.antex14.txt`
     """
     def getEccentricities(self, frequency: org.orekit.gnss.Frequency) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
@@ -43,7 +43,7 @@ class Antenna:
         
             Parameters:
                 frequency (:class:`~org.orekit.gnss.Frequency`): frequency of the signal to consider
-                direction (Vector3D): signal direction in antenna reference frame
+                direction (:class:`~org.orekit.gnss.antenna.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): signal direction in antenna reference frame
         
             Returns:
                 value of the phase center variation (m)
@@ -74,18 +74,19 @@ class Antenna:
 
 class AntexLoader:
     """
-    public class AntexLoader extends Object
+    public class AntexLoader extends :class:`~org.orekit.gnss.antenna.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Factory for GNSS antennas (both receiver and satellite).
     
-        The factory creates antennas by parsing an ANTEX file.
+        The factory creates antennas by parsing an
+        :class:`~org.orekit.gnss.antenna.ftp:.www.igs.org.pub.station.general.antex14.txt` file.
     
         Since:
             9.2
     """
     DEFAULT_ANTEX_SUPPORTED_NAMES: typing.ClassVar[str] = ...
     """
-    public static final String DEFAULT_ANTEX_SUPPORTED_NAMES
+    public static final :class:`~org.orekit.gnss.antenna.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_ANTEX_SUPPORTED_NAMES
     
         Default supported files name pattern for antex files.
     
@@ -104,7 +105,7 @@ class AntexLoader:
 
 class FrequencyPattern:
     """
-    public class FrequencyPattern extends Object
+    public class FrequencyPattern extends :class:`~org.orekit.gnss.antenna.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Pattern for GNSS antenna model on one frequency.
     
@@ -112,7 +113,7 @@ class FrequencyPattern:
             9.2
     
         Also see:
-            ANTEX: The Antenna Exchange Format, Version 1.4
+            :class:`~org.orekit.gnss.antenna.ftp:.www.igs.org.pub.station.general.antex14.txt`
     """
     def getEccentricities(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
@@ -129,7 +130,7 @@ class FrequencyPattern:
             Get the value of the phase center variation in a signal direction.
         
             Parameters:
-                direction (Vector3D): signal direction in antenna reference frame
+                direction (:class:`~org.orekit.gnss.antenna.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): signal direction in antenna reference frame
         
             Returns:
                 value of the phase center variation
@@ -164,7 +165,7 @@ class PhaseCenterVariationFunction:
 
 class SatelliteType(java.lang.Enum['SatelliteType']):
     """
-    public enum SatelliteType extends Enum<:class:`~org.orekit.gnss.antenna.SatelliteType`>
+    public enum SatelliteType extends :class:`~org.orekit.gnss.antenna.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.antenna.SatelliteType`>
     
         Enumerate for satellite types.
     
@@ -243,14 +244,14 @@ class SatelliteType(java.lang.Enum['SatelliteType']):
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
         
             Parameters:
-                name (String): the name of the enum constant to be returned.
+                name (:class:`~org.orekit.gnss.antenna.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
                 the enum constant with the specified name
         
             Raises:
-                : if this enum type has no constant with the specified name
-                : if the argument is null
+                :class:`~org.orekit.gnss.antenna.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.antenna.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
@@ -263,9 +264,8 @@ class SatelliteType(java.lang.Enum['SatelliteType']):
         
             .. code-block: java
             
-            
-            for (SatelliteType c : SatelliteType.values())
-                System.out.println(c);
+            for (SatelliteType c : SatelliteType.values())
+                System.out.println(c);
             
         
             Returns:
@@ -277,7 +277,7 @@ class SatelliteType(java.lang.Enum['SatelliteType']):
 
 class PythonPhaseCenterVariationFunction(PhaseCenterVariationFunction):
     """
-    public class PythonPhaseCenterVariationFunction extends Object implements :class:`~org.orekit.gnss.antenna.PhaseCenterVariationFunction`
+    public class PythonPhaseCenterVariationFunction extends :class:`~org.orekit.gnss.antenna.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.gnss.antenna.PhaseCenterVariationFunction`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -305,8 +305,8 @@ class PythonPhaseCenterVariationFunction(PhaseCenterVariationFunction):
             Evaluate phase center variation in one signal direction.
         
             Specified by:
-                :meth:`~org.orekit.gnss.antenna.PhaseCenterVariationFunction.value`Â in
-                interfaceÂ :class:`~org.orekit.gnss.antenna.PhaseCenterVariationFunction`
+                :meth:`~org.orekit.gnss.antenna.PhaseCenterVariationFunction.value` in
+                interface :class:`~org.orekit.gnss.antenna.PhaseCenterVariationFunction`
         
             Parameters:
                 polarAngle (double): angle from antenna axial direction (zenith angle for receiver antennas, nadir angle for GNSS satellites antennas)
@@ -329,7 +329,7 @@ class ReceiverAntenna(Antenna):
             9.2
     
         Also see:
-            ANTEX: The Antenna Exchange Format, Version 1.4
+            :class:`~org.orekit.gnss.antenna.ftp:.www.igs.org.pub.station.general.antex14.txt`
     """
     def __init__(self, string: str, string2: str, map: typing.Union[java.util.Map[org.orekit.gnss.Frequency, FrequencyPattern], typing.Mapping[org.orekit.gnss.Frequency, FrequencyPattern]], string3: str): ...
     def getSerialNumber(self) -> str:
@@ -353,7 +353,7 @@ class SatelliteAntenna(Antenna):
             9.2
     
         Also see:
-            ANTEX: The Antenna Exchange Format, Version 1.4
+            :class:`~org.orekit.gnss.antenna.ftp:.www.igs.org.pub.station.general.antex14.txt`
     """
     def __init__(self, string: str, string2: str, map: typing.Union[java.util.Map[org.orekit.gnss.Frequency, FrequencyPattern], typing.Mapping[org.orekit.gnss.Frequency, FrequencyPattern]], satelliteSystem: org.orekit.gnss.SatelliteSystem, int: int, satelliteType: SatelliteType, int2: int, string3: str, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate): ...
     def getCosparID(self) -> str:
