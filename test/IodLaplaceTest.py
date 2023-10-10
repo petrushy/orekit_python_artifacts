@@ -156,8 +156,8 @@ class IodLaplaceTest(unittest.TestCase):
 
         # With only 3 measurements, we can expect ~400 meters error in position and ~1 m/s in velocity
         error = self.estimateOrbit(prop, date, 30.0, 60.0).getErrorNorm()
-        self.assertAlmostEquals(0.0, error[0], delta=275.0)
-        self.assertAlmostEquals(0.0, error[1], delta=0.8)
+        self.assertAlmostEqual(0.0, error[0], delta=275.0)
+        self.assertAlmostEqual(0.0, error[1], delta=0.8)
 
 
     def testLaplaceKeplerian2(self):
@@ -171,8 +171,8 @@ class IodLaplaceTest(unittest.TestCase):
         prop = KeplerianPropagator(kep)
 
         error = self.estimateOrbit(prop, date, 60.0, 120.0).getErrorNorm()
-        self.assertAlmostEquals(0.0, error[0], delta=395.0)
-        self.assertAlmostEquals(0.0, error[1], delta=0.03)
+        self.assertAlmostEqual(0.0, error[0], delta=395.0)
+        self.assertAlmostEqual(0.0, error[1], delta=0.03)
 
 
     def testLaplaceTLE1(self):
@@ -189,8 +189,8 @@ class IodLaplaceTest(unittest.TestCase):
 
         # With only 3 measurements, an error of 5km in position and 10 m/s in velocity is acceptable
         # because the Laplace method uses only two-body dynamics
-        self.assertAlmostEquals(0.0, error[0], delta=5000.0)
-        self.assertAlmostEquals(0.0, error[1], delta=10.0)
+        self.assertAlmostEqual(0.0, error[0], delta=5000.0)
+        self.assertAlmostEqual(0.0, error[1], delta=10.0)
 
 
 

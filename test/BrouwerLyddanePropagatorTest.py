@@ -66,12 +66,12 @@ class BrouwerLyddanePropagatorTest(unittest.TestCase):
         finalOrbit = extrapolator.propagate(initDate)
 
         # positions  velocity and semi major axis match perfectly
-        self.assertAlmostEquals(0.0, Vector3D.distance(initialOrbit.getPVCoordinates().getPosition(),
+        self.assertAlmostEqual(0.0, Vector3D.distance(initialOrbit.getPVCoordinates().getPosition(),
                                                        finalOrbit.getPVCoordinates().getPosition()), delta=1.0e-8)
 
-        self.assertAlmostEquals(0.0, Vector3D.distance(initialOrbit.getPVCoordinates().getVelocity(),
+        self.assertAlmostEqual(0.0, Vector3D.distance(initialOrbit.getPVCoordinates().getVelocity(),
                                                        finalOrbit.getPVCoordinates().getVelocity()), delta= 1.0e-11)
-        self.assertAlmostEquals(0.0, finalOrbit.getA() - initialOrbit.getA(), delta=0.0)
+        self.assertAlmostEqual(0.0, finalOrbit.getA() - initialOrbit.getA(), delta=0.0)
 
     def test_compareToNumericalPropagation(self):
 
@@ -129,14 +129,14 @@ class BrouwerLyddanePropagatorTest(unittest.TestCase):
         BLFinalState = BLextrapolator.propagate(initDate.shiftedBy(timeshift))
         BLOrbit = KeplerianOrbit.cast_(OrbitType.KEPLERIAN.convertType(BLFinalState.getOrbit()))
 
-        self.assertAlmostEquals(NumOrbit.getA(), BLOrbit.getA(), delta=0.2)
-        self.assertAlmostEquals(NumOrbit.getE(), BLOrbit.getE(), delta=0.00000028)
-        self.assertAlmostEquals(NumOrbit.getI(), BLOrbit.getI(), delta=0.000004)
-        self.assertAlmostEquals(MathUtils.normalizeAngle(NumOrbit.getPerigeeArgument(), FastMath.PI),
+        self.assertAlmostEqual(NumOrbit.getA(), BLOrbit.getA(), delta=0.2)
+        self.assertAlmostEqual(NumOrbit.getE(), BLOrbit.getE(), delta=0.00000028)
+        self.assertAlmostEqual(NumOrbit.getI(), BLOrbit.getI(), delta=0.000004)
+        self.assertAlmostEqual(MathUtils.normalizeAngle(NumOrbit.getPerigeeArgument(), FastMath.PI),
                                 MathUtils.normalizeAngle(BLOrbit.getPerigeeArgument(), FastMath.PI), delta=0.119)
-        self.assertAlmostEquals(MathUtils.normalizeAngle(NumOrbit.getRightAscensionOfAscendingNode(), FastMath.PI),
+        self.assertAlmostEqual(MathUtils.normalizeAngle(NumOrbit.getRightAscensionOfAscendingNode(), FastMath.PI),
                                 MathUtils.normalizeAngle(BLOrbit.getRightAscensionOfAscendingNode(), FastMath.PI), delta=0.000072)
-        self.assertAlmostEquals(MathUtils.normalizeAngle(NumOrbit.getTrueAnomaly(), FastMath.PI),
+        self.assertAlmostEqual(MathUtils.normalizeAngle(NumOrbit.getTrueAnomaly(), FastMath.PI),
                                 MathUtils.normalizeAngle(BLOrbit.getTrueAnomaly(), FastMath.PI), delta=0.12)
 
 

@@ -89,9 +89,9 @@ class IodGibbsTest(unittest.TestCase):
         gibbs = IodGibbs(mu)
         orbit = gibbs.estimate(frame, pv1, pv2, pv3)
 
-        self.assertAlmostEquals(context.initialOrbit.getA(), orbit.getA(), delta=1.0e-9 * context.initialOrbit.getA())
-        self.assertAlmostEquals(context.initialOrbit.getE(), orbit.getE(), delta=1.0e-9 * context.initialOrbit.getA())
-        self.assertAlmostEquals(context.initialOrbit.getI(), orbit.getI(), delta=1.0e-9 * context.initialOrbit.getA())
+        self.assertAlmostEqual(context.initialOrbit.getA(), orbit.getA(), delta=1.0e-9 * context.initialOrbit.getA())
+        self.assertAlmostEqual(context.initialOrbit.getE(), orbit.getE(), delta=1.0e-9 * context.initialOrbit.getA())
+        self.assertAlmostEqual(context.initialOrbit.getI(), orbit.getI(), delta=1.0e-9 * context.initialOrbit.getA())
 
         pass
 
@@ -123,7 +123,7 @@ class IodGibbsTest(unittest.TestCase):
                                 posR1, dateRef, posR2, date2, posR3, date3)
 
         # test
-        self.assertAlmostEquals(0.0, orbit.getPVCoordinates().getVelocity().getNorm() - velR2.getNorm(), delta=1e-3)
+        self.assertAlmostEqual(0.0, orbit.getPVCoordinates().getVelocity().getNorm() - velR2.getNorm(), delta=1e-3)
 
 
 if __name__ == '__main__':
