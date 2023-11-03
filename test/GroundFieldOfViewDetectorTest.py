@@ -30,7 +30,7 @@ orekit.initVM()
 from org.orekit.frames import FramesFactory, TopocentricFrame
 from org.orekit.bodies import OneAxisEllipsoid, GeodeticPoint
 from org.orekit.time import AbsoluteDate
-from org.orekit.orbits import KeplerianOrbit, PositionAngle
+from org.orekit.orbits import KeplerianOrbit, PositionAngleType
 from org.orekit.utils import Constants
 from org.orekit.propagation.analytical import KeplerianPropagator
 from org.orekit.utils import IERSConventions
@@ -67,7 +67,7 @@ class GroundFieldOfViewDetectorTest(unittest.TestCase):
         # iss like orbit
         orbit = KeplerianOrbit(
             6378137.0 + 400e3, 0.0, radians(51.65), 0.0, 0.0, 0.0,
-            PositionAngle.TRUE, eci, date, Constants.EGM96_EARTH_MU)
+            PositionAngleType.TRUE, eci, date, Constants.EGM96_EARTH_MU)
 
         prop = KeplerianPropagator(orbit)
 

@@ -36,7 +36,7 @@ from org.orekit.propagation import FieldSpacecraftState
 from org.orekit.time import FieldAbsoluteDate
 from org.hipparchus.util import Decimal64Field
 from org.orekit.orbits import FieldKeplerianOrbit
-from org.orekit.orbits import PositionAngle
+from org.orekit.orbits import PositionAngleType
 from org.orekit.utils import Constants
 from org.orekit.propagation.events.handlers import FieldStopOnDecreasing
 from org.orekit.propagation.events.handlers import FieldEventHandler
@@ -63,7 +63,7 @@ class FieldStopOnDecreasingTest(unittest.TestCase):
                                                      zero.add(3.10686),
                                                      zero.add(1.00681),
                                                      zero.add(0.048363),
-                                                     PositionAngle.MEAN,
+                                                     PositionAngleType.MEAN,
                                                      FramesFactory.getEME2000(),
                                                      date,
                                                      zero.add(Constants.EIGEN5C_EARTH_MU)))
@@ -83,7 +83,7 @@ class FieldStopOnDecreasingTest(unittest.TestCase):
                                                      zero.add(3.10686),
                                                      zero.add(1.00681),
                                                      zero.add(0.048363),
-                                                     PositionAngle.MEAN,
+                                                     PositionAngleType.MEAN,
                                                      FramesFactory.getEME2000(),
                                                      date,
                                                      zero.add(Constants.EIGEN5C_EARTH_MU)))
@@ -107,7 +107,7 @@ class FieldStopOnDecreasingTest(unittest.TestCase):
                                                                                          zero.add(3.10686),
                                                                                          zero.add(1.00681),
                                                                                          zero.add(0.048363),
-                                                                                         PositionAngle.MEAN,
+                                                                                         PositionAngleType.MEAN,
                                                                                          FramesFactory.getEME2000(),
                                                                                          date,
                                                                                          Constants.EIGEN5C_EARTH_MU));

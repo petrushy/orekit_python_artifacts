@@ -17,7 +17,7 @@ from org.orekit.bodies import OneAxisEllipsoid
 from org.orekit.frames import TopocentricFrame
 from org.orekit.orbits import KeplerianOrbit
 from org.orekit.frames import FramesFactory
-from org.orekit.orbits import PositionAngle, EquinoctialOrbit, OrbitType
+from org.orekit.orbits import PositionAngleType, EquinoctialOrbit, OrbitType
 from org.orekit.propagation.analytical import KeplerianPropagator
 from org.orekit.propagation import SpacecraftState
 from org.orekit.propagation.numerical import NumericalPropagator
@@ -86,7 +86,7 @@ class BrouwerLyddanePropagatorTest(unittest.TestCase):
         omega = FastMath.toRadians(180.0)  # perigee argument
         raan = FastMath.toRadians(261.0)  # right ascention of ascending node
         lM = 0.0 # mean anomaly
-        initialOrbit =  KeplerianOrbit(a, e, i, omega, raan, lM, PositionAngle.TRUE,
+        initialOrbit =  KeplerianOrbit(a, e, i, omega, raan, lM, PositionAngleType.TRUE,
                                        inertialFrame, initDate, self.provider.getMu())
         # Initial state definition
         initialState =  SpacecraftState(initialOrbit)

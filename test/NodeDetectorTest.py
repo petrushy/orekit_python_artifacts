@@ -41,7 +41,7 @@ from org.hipparchus.ode.nonstiff import DormandPrince853Integrator
 from org.hipparchus.util import FastMath
 from org.orekit.frames import FramesFactory
 from org.orekit.orbits import KeplerianOrbit
-from org.orekit.orbits import PositionAngle
+from org.orekit.orbits import PositionAngleType
 from org.orekit.propagation import SpacecraftState
 from org.orekit.propagation.events.handlers import ContinueOnEvent
 from org.orekit.propagation.numerical import NumericalPropagator
@@ -64,7 +64,7 @@ class NodeDetectorTest(unittest.TestCase):
         inertialFrame = FramesFactory.getEME2000()
         initialDate = AbsoluteDate(2014, 1, 1, 0, 0, 0.0, TimeScalesFactory.getUTC())
         finalDate = initialDate.shiftedBy(70 * 24 * 60 * 60.0)
-        initialOrbit = KeplerianOrbit(a, e, i, w, raan, v, PositionAngle.TRUE, inertialFrame, initialDate,
+        initialOrbit = KeplerianOrbit(a, e, i, w, raan, v, PositionAngleType.TRUE, inertialFrame, initialDate,
                                       Constants.WGS84_EARTH_MU)
         initialState = SpacecraftState(initialOrbit, 1000.0)
 

@@ -33,7 +33,7 @@ from org.orekit.bodies import OneAxisEllipsoid
 from org.orekit.frames import TopocentricFrame
 from org.orekit.orbits import KeplerianOrbit
 from org.orekit.frames import FramesFactory
-from org.orekit.orbits import PositionAngle
+from org.orekit.orbits import PositionAngleType
 from org.orekit.propagation.analytical import KeplerianPropagator
 from org.orekit.propagation.events.handlers import EventHandler, PythonEventHandler
 from org.orekit.time import AbsoluteDate
@@ -83,7 +83,7 @@ class BackAndForthDetectorTest(unittest.TestCase):
         raan = math.radians(12.5)
         lM = math.radians(60.)
         iniOrb = KeplerianOrbit(a, e, i, w, raan, lM,
-                                          PositionAngle.MEAN, 
+                                          PositionAngleType.MEAN,
                                           FramesFactory.getEME2000(), date0,
                                           Constants.WGS84_EARTH_MU)
 

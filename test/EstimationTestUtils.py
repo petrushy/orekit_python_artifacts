@@ -74,7 +74,7 @@ from org.orekit.models.earth.displacement import StationDisplacement
 from org.orekit.models.earth.displacement import TidalDisplacement;
 from org.orekit.orbits import KeplerianOrbit
 # from org.orekit.orbits.Orbit;
-from org.orekit.orbits import PositionAngle
+from org.orekit.orbits import PositionAngleType
 # from org.orekit.propagation.Propagator;
 # from org.orekit.propagation.conversion.PropagatorBuilder;
 # from org.orekit.propagation.numerical.NumericalPropagator;
@@ -133,7 +133,7 @@ class EstimationTestUtils():
                                                                      map))
         context.gravity = GravityFieldFactory.getNormalizedProvider(20, 20)
         context.initialOrbit = KeplerianOrbit(15000000.0, 0.125, 1.25,
-                                              0.250, 1.375, 0.0625, PositionAngle.TRUE,
+                                              0.250, 1.375, 0.0625, PositionAngleType.TRUE,
                                               FramesFactory.getEME2000(),
                                               AbsoluteDate(2000, 2, 24, 11, 35, 47.0, context.utc),
                                               context.gravity.getMu())
@@ -219,7 +219,7 @@ public class EstimationTestUtils {
                                                                          map));
         context.gravity = GravityFieldFactory.getNormalizedProvider(20, 20);
         context.initialOrbit = new KeplerianOrbit(15000000.0, 0.125, 1.25,
-                                                  0.250, 1.375, 0.0625, PositionAngle.TRUE,
+                                                  0.250, 1.375, 0.0625, PositionAngleType.TRUE,
                                                   FramesFactory.getEME2000(),
                                                   new AbsoluteDate(2000, 2, 24, 11, 35, 47.0, context.utc),
                                                   context.gravity.getMu());
@@ -474,7 +474,7 @@ public class EstimationTestUtils {
      */
     public static void checkKalmanFit(final Context context, final KalmanEstimator kalman,
                                       final List<ObservedMeasurement<?>> measurements,
-                                      final Orbit refOrbit, final PositionAngle positionAngle,
+                                      final Orbit refOrbit, final PositionAngleType positionAngle,
                                       final double expectedDeltaPos, final double posEps,
                                       final double expectedDeltaVel, final double velEps,
                                       final double[] expectedSigmasPos,final double sigmaPosEps,
@@ -482,7 +482,7 @@ public class EstimationTestUtils {
         {
         checkKalmanFit(context, kalman, measurements,
                        new Orbit[] { refOrbit },
-                       new PositionAngle[] { positionAngle },
+                       new PositionAngleType[] { positionAngle },
                        new double[] { expectedDeltaPos }, new double[] { posEps },
                        new double[] { expectedDeltaVel }, new double[] { velEps },
                        new double[][] { expectedSigmasPos }, new double[] { sigmaPosEps },
@@ -506,7 +506,7 @@ public class EstimationTestUtils {
      */
     public static void checkKalmanFit(final Context context, final KalmanEstimator kalman,
                                       final List<ObservedMeasurement<?>> measurements,
-                                      final Orbit[] refOrbit, final PositionAngle[] positionAngle,
+                                      final Orbit[] refOrbit, final PositionAngleType[] positionAngle,
                                       final double[] expectedDeltaPos, final double[] posEps,
                                       final double[] expectedDeltaVel, final double []velEps,
                                       final double[][] expectedSigmasPos,final double[] sigmaPosEps,

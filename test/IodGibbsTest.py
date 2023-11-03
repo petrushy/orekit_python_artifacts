@@ -47,7 +47,7 @@ from org.hipparchus.geometry.euclidean.threed import Vector3D
 from org.orekit.frames import FramesFactory
 # import org.orekit.orbits.KeplerianOrbit;
 from org.orekit.orbits import OrbitType
-from org.orekit.orbits import PositionAngle
+from org.orekit.orbits import PositionAngleType
 # import org.orekit.propagation.Propagator;
 # import org.orekit.propagation.conversion.NumericalPropagatorBuilder;
 from org.orekit.time import AbsoluteDate, TimeScalesFactory
@@ -68,7 +68,7 @@ class IodGibbsTest(unittest.TestCase):
         mu = context.initialOrbit.getMu()
         frame = context.initialOrbit.getFrame()
 
-        propagatorBuilder = context.createBuilder(OrbitType.KEPLERIAN, PositionAngle.TRUE, True, 1.0e-6, 60.0, 0.001)
+        propagatorBuilder = context.createBuilder(OrbitType.KEPLERIAN, PositionAngleType.TRUE, True, 1.0e-6, 60.0, 0.001)
 
         # create perfect range measurements
         propagator = EstimationTestUtils().createPropagator(context.initialOrbit, propagatorBuilder)

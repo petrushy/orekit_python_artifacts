@@ -42,7 +42,7 @@ from org.orekit.bodies import CelestialBodyFactory
 
 from org.orekit.frames import FramesFactory
 from org.orekit.orbits import KeplerianOrbit
-from org.orekit.orbits import PositionAngle
+from org.orekit.orbits import PositionAngleType
 from org.orekit.propagation import FieldSpacecraftState
 from org.orekit.propagation import SpacecraftState
 from org.orekit.propagation.analytical import KeplerianPropagator
@@ -111,7 +111,7 @@ class SpinStabilizedTest(unittest.TestCase):
 
         orbit = KeplerianOrbit(7178000.0, 1.e-4, FastMath.toRadians(50.),
                               FastMath.toRadians(10.), FastMath.toRadians(20.),
-                              FastMath.toRadians(30.), PositionAngle.MEAN,
+                              FastMath.toRadians(30.), PositionAngleType.MEAN,
                               FramesFactory.getEME2000(), date, 3.986004415e14)
 
         propagator = KeplerianPropagator(orbit, law)

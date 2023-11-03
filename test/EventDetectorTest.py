@@ -90,6 +90,9 @@ class MyElevationDetector(PythonEventDetector):
     def getTopocentricFrame(self):
         return self.topo
 
+    def getHandler(self):
+        return self
+
 
 class EventDetectorTest(unittest.TestCase):
 

@@ -34,7 +34,7 @@ from org.orekit.utils import Constants
 from org.orekit.propagation.analytical import KeplerianPropagator
 from org.orekit.utils import PVCoordinates, IERSConventions
 from org.orekit.propagation.events import ElevationDetector
-from org.orekit.propagation.events.handlers import EventHandler, PythonEventHandler
+from org.orekit.propagation.events.handlers import PythonEventHandler
 from org.hipparchus.geometry.euclidean.threed import Vector3D
 from org.orekit.propagation.events import EventsLogger
 from org.hipparchus.ode.events import Action
@@ -85,7 +85,7 @@ class EventHandlerTest(unittest.TestCase):
             def init(self, initialstate, target, detector):
                 pass
 
-            def eventOccurred(self, s, T, increasing):
+            def eventOccurred(self, s, detector, increasing):
                 return Action.CONTINUE
 
             def resetState(self, detector, oldState):
@@ -93,7 +93,7 @@ class EventHandlerTest(unittest.TestCase):
 
         #%% detectors
         detector = ElevationDetector(sta1Frame).withConstantElevation(elevation)
-        detector = detector.withHandler(myContinueOnEvent().of_(ElevationDetector))
+        detector = detector.withHandler(myContinueOnEvent())
 
         logger = EventsLogger()
         kepler.addEventDetector(logger.monitorDetector(detector))

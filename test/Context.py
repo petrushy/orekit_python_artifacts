@@ -66,7 +66,7 @@ from org.orekit.bodies import CelestialBodyFactory
 
 from org.orekit.frames import FramesFactory
 from org.orekit.orbits import KeplerianOrbit
-from org.orekit.orbits import PositionAngle
+from org.orekit.orbits import PositionAngleType
 from org.orekit.propagation import FieldSpacecraftState
 from org.orekit.propagation import SpacecraftState
 from org.orekit.propagation.analytical import KeplerianPropagator
@@ -97,7 +97,7 @@ from org.orekit.frames import TopocentricFrame
 from org.orekit.orbits import CartesianOrbit
 # import org.orekit.orbits.Orbit;
 # import org.orekit.orbits.OrbitType;
-# import org.orekit.orbits.PositionAngle;
+# import org.orekit.orbits.PositionAngleType;
 from org.orekit.propagation.conversion import DormandPrince853IntegratorBuilder
 from org.orekit.propagation.conversion import NumericalPropagatorBuilder
 # import org.orekit.time.TimeScale;

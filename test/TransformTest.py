@@ -42,7 +42,7 @@ from org.hipparchus.geometry.euclidean.threed import Vector3D
 from org.hipparchus.util import FastMath
 from org.orekit.utils import CartesianDerivativesFilter
 from org.orekit.utils import PVCoordinates
-from org.orekit.utils import TimeStampedPVCoordinates;
+from org.orekit.utils import TimeStampedPVCoordinates, TimeStampedPVCoordinatesHermiteInterpolator
 from org.orekit.frames import Transform
 from org.orekit.frames import FramesFactory
 
@@ -116,9 +116,9 @@ class TransformTest(unittest.TestCase):
                 sample.add(item)
                 i = i + 1
 
-            rebuiltPV = TimeStampedPVCoordinates.interpolate(AbsoluteDate.J2000_EPOCH.shiftedBy(dt),
-                                                             CartesianDerivativesFilter.USE_PV,
-                                                             sample)
+            interpolator = TimeStampedPVCoordinatesHermiteInterpolator(sample.size(), CartesianDerivativesFilter.USE_PV)
+
+            rebuiltPV = interpolator.interpolate(AbsoluteDate.J2000_EPOCH.shiftedBy(dt), sample)
 
             self.checkVector(rebuiltPV.getPosition(), transformedPV.getPosition(), 4.0e-16)
             self.checkVector(rebuiltPV.getVelocity(), transformedPV.getVelocity(), 2.0e-16)

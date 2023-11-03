@@ -51,7 +51,7 @@ from org.orekit.frames import Frame
 from org.orekit.frames import FramesFactory
 from org.orekit.orbits import KeplerianOrbit
 from org.orekit.orbits import OrbitType
-from org.orekit.orbits import PositionAngle
+from org.orekit.orbits import PositionAngleType
 from org.orekit.propagation import Propagator
 from org.orekit.propagation import SpacecraftState
 from org.orekit.propagation.analytical import KeplerianPropagator
@@ -89,7 +89,7 @@ class OrekitStepHandlerTest(unittest.TestCase):
                                       inclination,
                                       argPerigee, raan,
                                       trueAnomaly,
-                                      PositionAngle.TRUE,
+                                      PositionAngleType.TRUE,
                                       inertialFrame,
                                       initialDate, mu)
 
@@ -133,7 +133,7 @@ class OrekitStepHandlerTest(unittest.TestCase):
         date = AbsoluteDate.J2000_EPOCH
         eci = FramesFactory.getGCRF()
         ic = SpacecraftState(KeplerianOrbit(6378137 + 500e3, 1e-3, 0.0, 0.0, 0.0, 0.0,
-                                            PositionAngle.TRUE, eci, date, Constants.EIGEN5C_EARTH_MU))
+                                            PositionAngleType.TRUE, eci, date, Constants.EIGEN5C_EARTH_MU))
         propagator.setInitialState(ic)
         propagator.setOrbitType(OrbitType.CARTESIAN)
         # detector triggers half way through second step

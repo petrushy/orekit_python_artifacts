@@ -35,7 +35,7 @@ setup_orekit_curdir("resources")
 from org.orekit.propagation.events import EventsLogger
 from org.hipparchus.util import FastMath
 from org.orekit.frames import FramesFactory
-from org.orekit.orbits import PositionAngle
+from org.orekit.orbits import PositionAngleType
 from org.orekit.time import AbsoluteDate
 from org.orekit.time import TimeScalesFactory
 from org.orekit.utils import Constants
@@ -89,6 +89,9 @@ class GrazingHandler(PythonEventHandler):
     def resetState(self, detector, oldState):
         pass
 
+    def getHandler(self):
+        pass
+
 
 class InterSatDirectViewDetectorTest(unittest.TestCase):
 
@@ -99,13 +102,13 @@ class InterSatDirectViewDetectorTest(unittest.TestCase):
         utc = TimeScalesFactory.getUTC()
         o1 = CircularOrbit(7200000.0, 1.0e-3, 2.0e-4,
                            FastMath.toRadians(98.7), FastMath.toRadians(134.0),
-                           FastMath.toRadians(21.0), PositionAngle.MEAN, FramesFactory.getGCRF(),
+                           FastMath.toRadians(21.0), PositionAngleType.MEAN, FramesFactory.getGCRF(),
                            AbsoluteDate("2003-02-14T01:02:03.000", utc),
                            Constants.EIGEN5C_EARTH_MU)
 
         o2 = CircularOrbit(o1.getA(), 2.0e-4, 1.0e-3,
                            o1.getI() + 1.0e-6, o1.getRightAscensionOfAscendingNode() - 3.5e-7,
-                           o1.getAlphaM() + 2.2e-6, PositionAngle.MEAN, o1.getFrame(),
+                           o1.getAlphaM() + 2.2e-6, PositionAngleType.MEAN, o1.getFrame(),
                            o1.getDate(),
                            Constants.EIGEN5C_EARTH_MU)
 
@@ -142,13 +145,13 @@ class InterSatDirectViewDetectorTest(unittest.TestCase):
         utc = TimeScalesFactory.getUTC()
         o1 = CircularOrbit(7200000.0, 1.0e-3, 2.0e-4,
                            FastMath.toRadians(50.0), FastMath.toRadians(134.0),
-                           FastMath.toRadians(21.0), PositionAngle.MEAN, FramesFactory.getGCRF(),
+                           FastMath.toRadians(21.0), PositionAngleType.MEAN, FramesFactory.getGCRF(),
                            AbsoluteDate("2003-02-14T01:02:03.000", utc),
                            Constants.EIGEN5C_EARTH_MU)
 
         o2 = CircularOrbit(29600000.0, 2.0e-4, 1.0e-3,
                            FastMath.toRadians(56.0), FastMath.toRadians(111.0),
-                           o1.getAlphaM() + 2.2e-6, PositionAngle.MEAN, o1.getFrame(),
+                           o1.getAlphaM() + 2.2e-6, PositionAngleType.MEAN, o1.getFrame(),
                            o1.getDate(),
                            Constants.EIGEN5C_EARTH_MU)
 
@@ -157,7 +160,7 @@ class InterSatDirectViewDetectorTest(unittest.TestCase):
         loggerA = EventsLogger()
         pA.addEventDetector(loggerA.monitorDetector(InterSatDirectViewDetector(earth, o2).
                                                     withMaxCheck(10.0).
-                                                    withHandler(GrazingHandler().of_(InterSatDirectViewDetector))))
+                                                    withHandler(GrazingHandler())))
 
         propdate = o1.getDate().shiftedBy(4 * o1.getKeplerianPeriod())
         pA.propagate(propdate)

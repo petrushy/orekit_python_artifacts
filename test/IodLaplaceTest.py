@@ -52,7 +52,7 @@ from org.hipparchus.util import FastMath
 from org.orekit.frames import FramesFactory, TopocentricFrame
 # import org.orekit.orbits.KeplerianOrbit;
 from org.orekit.orbits import OrbitType, KeplerianOrbit
-from org.orekit.orbits import PositionAngle
+from org.orekit.orbits import PositionAngleType
 # import org.orekit.propagation.Propagator;
 from org.orekit.propagation.analytical import KeplerianPropagator
 from org.orekit.propagation.analytical.tle import TLE, TLEPropagator
@@ -149,7 +149,7 @@ class IodLaplaceTest(unittest.TestCase):
         date = AbsoluteDate(2019, 9, 29, 22, 0, 2.0, TimeScalesFactory.getUTC())
         kep = KeplerianOrbit(6798938.970424857, 0.0021115522920270016, 0.9008866630545347,
     						      1.8278985811406743, -2.7656136723308524,
-    						      0.8823034512437679, PositionAngle.MEAN, self.gcrf,
+    						      0.8823034512437679, PositionAngleType.MEAN, self.gcrf,
     						      date, Constants.EGM96_EARTH_MU)
 
         prop = KeplerianPropagator(kep)
@@ -165,7 +165,7 @@ class IodLaplaceTest(unittest.TestCase):
         date = AbsoluteDate(2019, 9, 29, 22, 0, 2.0, TimeScalesFactory.getUTC())
         kep = KeplerianOrbit(42165414.60406032, 0.00021743441091199163, 0.0019139259842569903,
     						      1.8142608912728584, 1.648821262690012,
-    						      0.11710513241172144, PositionAngle.MEAN, self.gcrf,
+    						      0.11710513241172144, PositionAngleType.MEAN, self.gcrf,
     						      date, Constants.EGM96_EARTH_MU)
 
         prop = KeplerianPropagator(kep)

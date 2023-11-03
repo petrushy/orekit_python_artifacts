@@ -35,7 +35,7 @@ from org.orekit.attitudes import LofOffset
 from org.orekit.frames import FramesFactory
 from org.orekit.frames import LOFType
 from org.orekit.orbits import KeplerianOrbit
-from org.orekit.orbits import PositionAngle
+from org.orekit.orbits import PositionAngleType
 from org.orekit.propagation.analytical import KeplerianPropagator
 from org.orekit.propagation.events import NodeDetector
 from org.orekit.time import AbsoluteDate
@@ -56,7 +56,7 @@ class ImpulseManeuverTest(unittest.TestCase):
                                       FastMath.PI,
                                       0.4,
                                       2.0,
-                                   PositionAngle.MEAN,
+                                   PositionAngleType.MEAN,
                                    FramesFactory.getEME2000(),
                                    AbsoluteDate(DateComponents(2008, 6, 23),
                                                     TimeComponents(14, 18, 37.0),

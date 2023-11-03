@@ -37,7 +37,7 @@ from org.orekit.bodies import CelestialBodyFactory
 from org.orekit.bodies import OneAxisEllipsoid
 from org.orekit.frames import FramesFactory
 from org.orekit.orbits import KeplerianOrbit
-from org.orekit.orbits import PositionAngle
+from org.orekit.orbits import PositionAngleType
 from org.orekit.propagation import SpacecraftState
 from org.orekit.propagation.analytical import KeplerianPropagator
 from org.orekit.propagation.events.handlers import StopOnEvent
@@ -59,12 +59,13 @@ class AltitudeDetectorTest(unittest.TestCase):
         alt = apogee - earthRadius - 500
 
         #// initial state is at apogee
-        initialOrbit = KeplerianOrbit(a,e,0.0,0.0,0.0,FastMath.PI,PositionAngle.MEAN,EME2000,
+        initialOrbit = KeplerianOrbit(a,e,0.0,0.0,0.0,FastMath.PI,PositionAngleType.MEAN,EME2000,
                                                               initialDate,CelestialBodyFactory.getEarth().getGM())
         initialState = SpacecraftState(initialOrbit)
         kepPropagator = KeplerianPropagator(initialOrbit)
-        altDetector = AltitudeDetector(alt,
-            OneAxisEllipsoid(earthRadius, earthF, EME2000)).withHandler(StopOnEvent().of_(AltitudeDetector))
+        earth = OneAxisEllipsoid(earthRadius, earthF, EME2000)
+
+        altDetector = AltitudeDetector(alt, earth).withHandler(StopOnEvent())
 
         # altitudeDetector should stop propagation upon reaching required altitude
         kepPropagator.addEventDetector(altDetector)

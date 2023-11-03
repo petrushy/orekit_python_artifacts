@@ -52,7 +52,7 @@ class MyElevationDetector(PythonAbstractDetector):
         dthresh = float(PythonAbstractDetector.DEFAULT_THRESHOLD)
         dmaxiter = PythonAbstractDetector.DEFAULT_MAX_ITER
         if handler is None:
-            handler = StopOnEvent().of_(MyElevationDetector)
+            handler = StopOnEvent()
 
         super(MyElevationDetector, self).__init__(dmax, dthresh, dmaxiter, handler) #super(maxCheck, threshold, maxIter, handler);
 
@@ -104,7 +104,7 @@ class AbstractDetectorTest(unittest.TestCase):
 
         detector = MyElevationDetector(elevation, sta1Frame)
 
-        mycounter = PassCounter().of_(MyElevationDetector)
+        mycounter = PassCounter()
         detector = detector.withHandler(mycounter)
 
         kepler.addEventDetector(detector)

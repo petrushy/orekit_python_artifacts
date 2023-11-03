@@ -43,7 +43,7 @@ from org.orekit.frames import FramesFactory
 from org.orekit.frames import LOFType
 from org.orekit.orbits import CircularOrbit
 from org.orekit.orbits import KeplerianOrbit
-from org.orekit.orbits import PositionAngle
+from org.orekit.orbits import PositionAngleType
 from org.orekit.propagation import SpacecraftState, Propagator
 from org.orekit.propagation.numerical import NumericalPropagator
 from org.orekit.time import AbsoluteDate
@@ -64,7 +64,7 @@ class SmallManeuverAnalyticalModelTest(unittest.TestCase):
         leo = CircularOrbit(7200000.0, -1.0e-5, 2.0e-4,
                             radians(98.0),
                             radians(123.456),
-                            0.0, PositionAngle.MEAN,
+                            0.0, PositionAngleType.MEAN,
                             FramesFactory.getEME2000(),
                             AbsoluteDate(DateComponents(2004, 1, 1),
                                          TimeComponents(23, 30, 00.000),
@@ -107,7 +107,7 @@ class SmallManeuverAnalyticalModelTest(unittest.TestCase):
         leo = CircularOrbit(7200000.0, -1.0e-5, 2.0e-4,
                             radians(98.0),
                             radians(123.456),
-                            0.0, PositionAngle.MEAN,
+                            0.0, PositionAngleType.MEAN,
                             FramesFactory.getEME2000(),
                             AbsoluteDate(DateComponents(2004, 1, 1),
                                          TimeComponents(23, 30, 00.000),
@@ -149,7 +149,7 @@ class SmallManeuverAnalyticalModelTest(unittest.TestCase):
         heo = KeplerianOrbit(90000000.0, 0.92, FastMath.toRadians(98.0),
                              radians(12.3456),
                              radians(123.456),
-                             radians(1.23456), PositionAngle.MEAN,
+                             radians(1.23456), PositionAngleType.MEAN,
                              FramesFactory.getEME2000(),
                              AbsoluteDate(DateComponents(2004, 1, 1),
                                           TimeComponents(23, 30, 00.000),

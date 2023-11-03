@@ -34,7 +34,7 @@ from org.hipparchus.geometry.euclidean.threed import Vector3D
 from org.orekit.orbits import EquinoctialOrbit
 from org.orekit.orbits import Orbit
 from org.orekit.orbits import OrbitType
-from org.orekit.orbits import PositionAngle
+from org.orekit.orbits import PositionAngleType
 from org.orekit.utils import PVCoordinates
 from org.orekit.propagation.conversion import FiniteDifferencePropagatorConverter
 from org.orekit.propagation.conversion import KeplerianPropagatorBuilder
@@ -67,7 +67,7 @@ class KeplerianConverterTest(unittest.TestCase):
         
 
         builder = KeplerianPropagatorBuilder(OrbitType.KEPLERIAN.convertType(orbit),
-                                                                   PositionAngle.MEAN,
+                                                                   PositionAngleType.MEAN,
                                                                    1.0)
 
         fitter = FiniteDifferencePropagatorConverter(builder, threshold, 1000)

@@ -10,13 +10,8 @@ from org.orekit.orbits import KeplerianOrbit
 from org.orekit.time import AbsoluteDate, DateComponents, TimeComponents, TimeScalesFactory
 from org.orekit.utils import PVCoordinates, AngularCoordinates
 from org.hipparchus.util import FastMath
-from org.orekit.orbits import PositionAngle
+from org.orekit.orbits import PositionAngleType
 from org.orekit.propagation.analytical import KeplerianPropagator
-from org.hipparchus.geometry.euclidean.threed import FieldRotation, FieldVector3D
-from org.hipparchus.util import Decimal64Field
-from org.orekit.orbits import FieldKeplerianOrbit, FieldOrbit
-from org.orekit.propagation import FieldPropagator, FieldSpacecraftState
-from org.orekit.utils import FieldAngularCoordinates, FieldPVCoordinates
 
 from java.io import File
 from org.orekit.data import DataContext, DirectoryCrawler
@@ -89,7 +84,7 @@ class OrekitFixedRateTest(unittest.TestCase):
 
         orbit = KeplerianOrbit(7178000.0, 1.e-4, FastMath.toRadians(50.0),
                                FastMath.toRadians(10.0), FastMath.toRadians(20.0),
-                               FastMath.toRadians(30.0), PositionAngle.MEAN,
+                               FastMath.toRadians(30.0), PositionAngleType.MEAN,
                                FramesFactory.getEME2000(), date, 3.986004415e14)
 
         propagator = KeplerianPropagator(orbit, law)
