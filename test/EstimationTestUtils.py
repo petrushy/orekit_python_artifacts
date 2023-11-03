@@ -159,7 +159,7 @@ class EstimationTestUtils():
         # override orbital parameters
         orbitArray = JArray_double(6)
         propagatorBuilder.getOrbitType().mapOrbitToArray(initialOrbit,
-                                                         propagatorBuilder.getPositionAngle(),
+                                                         propagatorBuilder.getPositionAngleType(),
                                                          orbitArray, None);
         for i in range(0, len(orbitArray)-1):
             propagatorBuilder.getOrbitalParametersDrivers().getDrivers().get(i).setValue(orbitArray[i])

@@ -34,7 +34,7 @@ from org.orekit.orbits import KeplerianOrbit
 from org.orekit.utils import Constants
 from org.orekit.propagation.analytical import KeplerianPropagator
 from org.orekit.utils import PVCoordinates, IERSConventions
-from org.orekit.propagation.events.handlers import EventHandler, ContinueOnEvent
+from org.orekit.propagation.events.handlers import EventHandler, ContinueOnEvent, StopOnEvent
 from org.hipparchus.geometry.euclidean.threed import Vector3D
 from org.orekit.propagation.events.handlers import PythonEventHandler
 from org.orekit.propagation.events import PythonAbstractDetector, PythonEventDetector, PythonAdaptableInterval
@@ -51,7 +51,7 @@ from orekit.pyhelpers import setup_orekit_curdir
 setup_orekit_curdir("resources")
 
 class MyAdaptableInterval(PythonAdaptableInterval):
-    def currentInterval(self, state):
+    def currentInterval(self, s):
         return float(60.0)
 
 class MyElevationDetector(PythonEventDetector):
@@ -69,7 +69,7 @@ class MyElevationDetector(PythonEventDetector):
         return float(PythonAbstractDetector.DEFAULT_THRESHOLD)
 
     def getMaxCheckInterval(self):
-        return float(PythonAbstractDetector.DEFAULT_MAXCHECK)
+        return MyAdaptableInterval()
 
     def getMaxIterationCount(self):
         return PythonAbstractDetector.DEFAULT_MAX_ITER

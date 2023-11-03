@@ -35,7 +35,7 @@ from java.io import File
 
 from org.hipparchus.geometry.euclidean.threed import Rotation
 from org.hipparchus.geometry.euclidean.threed import Vector3D
-from org.hipparchus.util import Decimal64Field
+from org.hipparchus.util import Binary64Field
 from org.hipparchus.util import FastMath
 
 from org.orekit.bodies import CelestialBodyFactory
@@ -54,7 +54,7 @@ from org.orekit.time import TimeScalesFactory
 from org.orekit.utils import AngularCoordinates
 from org.orekit.utils import PVCoordinates
 from org.orekit.utils import PVCoordinatesProvider
-from org.orekit.attitudes import CelestialBodyPointed, SpinStabilized, InertialProvider
+from org.orekit.attitudes import CelestialBodyPointed, SpinStabilized, FrameAlignedProvider
 
 
 class SpinStabilizedTest(unittest.TestCase):
@@ -88,8 +88,7 @@ class SpinStabilizedTest(unittest.TestCase):
 
         attitude = bbq.getAttitude(kep, date, kep.getFrame())
 
-        # Decimal64Field is The field of double precision floating-point numbers
-        self.checkField(Decimal64Field.getInstance(), bbq, kep, kep.getDate(), kep.getFrame())
+        self.checkField(Binary64Field.getInstance(), bbq, kep, kep.getDate(), kep.getFrame())
 
         xDirection = attitude.getRotation().applyInverseTo(Vector3D.PLUS_I)
         sunpos = PVCoordinatesProvider.cast_(sun).getPVCoordinates(date, FramesFactory.getEME2000()).getPosition()
@@ -107,7 +106,7 @@ class SpinStabilizedTest(unittest.TestCase):
 
         rate = 2.0 * math.pi / (12 * 60)  # 12 minutes spin rate
 
-        law = SpinStabilized(InertialProvider(Rotation.IDENTITY), date, Vector3D.PLUS_K, rate)
+        law = SpinStabilized(FrameAlignedProvider(Rotation.IDENTITY), date, Vector3D.PLUS_K, rate)
 
         orbit = KeplerianOrbit(7178000.0, 1.e-4, FastMath.toRadians(50.),
                               FastMath.toRadians(10.), FastMath.toRadians(20.),

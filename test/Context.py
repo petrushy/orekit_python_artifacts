@@ -36,7 +36,6 @@ from org.hipparchus.geometry.euclidean.threed import Vector3D
 from org.hipparchus.ode.nonstiff import DormandPrince853Integrator
 from orekit import JArray_double
 from org.orekit.data import DataProvidersManager, ZipJarCrawler
-from org.orekit.propagation.integration import PythonAdditionalEquations
 from org.orekit.forces.gravity.potential import GravityFieldFactory
 from org.orekit.forces.gravity.potential import SHMFormatReader
 from java.io import File
@@ -59,26 +58,13 @@ from java.io import File
 
 from org.hipparchus.geometry.euclidean.threed import Rotation
 from org.hipparchus.geometry.euclidean.threed import Vector3D
-from org.hipparchus.util import Decimal64Field
 from org.hipparchus.util import FastMath
 
 from org.orekit.bodies import CelestialBodyFactory
 
 from org.orekit.frames import FramesFactory
 from org.orekit.orbits import KeplerianOrbit
-from org.orekit.orbits import PositionAngleType
-from org.orekit.propagation import FieldSpacecraftState
-from org.orekit.propagation import SpacecraftState
-from org.orekit.propagation.analytical import KeplerianPropagator
-from org.orekit.time import AbsoluteDate
-from org.orekit.time import DateComponents
-from org.orekit.time import FieldAbsoluteDate
-from org.orekit.time import TimeComponents
-from org.orekit.time import TimeScalesFactory
-from org.orekit.utils import AngularCoordinates
-from org.orekit.utils import PVCoordinates
-from org.orekit.utils import PVCoordinatesProvider
-from org.orekit.attitudes import CelestialBodyPointed, SpinStabilized, InertialProvider
+
 
 # import java.util.List;
 # import java.util.Map;
