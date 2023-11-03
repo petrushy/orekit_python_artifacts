@@ -34,7 +34,7 @@ orekit.initVM()
 from org.orekit.frames import FramesFactory
 from org.orekit.propagation import FieldSpacecraftState
 from org.orekit.time import FieldAbsoluteDate
-from org.hipparchus.util import Decimal64Field
+from org.hipparchus.util import Binary64Field
 from org.orekit.orbits import FieldKeplerianOrbit
 from org.orekit.orbits import PositionAngleType
 from org.orekit.utils import Constants
@@ -46,13 +46,11 @@ from org.hipparchus.ode.events import Action
 class FieldStopOnDecreasingTest(unittest.TestCase):
 
     def testNoReset(self):
-        self.doTestNoReset(Decimal64Field.getInstance())
+        self.doTestNoReset(Binary64Field.getInstance())
 
     def testIncreasing(self):
-        self.doTestIncreasing(Decimal64Field.getInstance())
+        self.doTestIncreasing(Binary64Field.getInstance())
 
-    # def testDecreasing(self):
-    #    self.doTestDecreasing(Decimal64Field.getInstance())
 
     def doTestNoReset(self, field):
         zero = field.getZero()

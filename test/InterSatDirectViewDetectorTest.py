@@ -172,7 +172,7 @@ class InterSatDirectViewDetectorTest(unittest.TestCase):
         loggerB = EventsLogger()
         pB.addEventDetector(loggerB.monitorDetector(InterSatDirectViewDetector(earth, o1).
                                                     withMaxCheck(10.0).
-                                                    withHandler(GrazingHandler().of_(InterSatDirectViewDetector))))
+                                                    withHandler(GrazingHandler())))
 
         pB.propagate(o1.getDate().shiftedBy(4 * o1.getKeplerianPeriod()))
         self.assertEqual(7, loggerB.getLoggedEvents().size())

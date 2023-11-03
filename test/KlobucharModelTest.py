@@ -32,29 +32,15 @@ orekit.initVM()
 
 from orekit import JArray_double
 from org.orekit.data import DataProvidersManager, ZipJarCrawler, DataContext, DirectoryCrawler
-from org.orekit.propagation.integration import PythonFieldAdditionalEquations
-from org.orekit.forces.gravity.potential import GravityFieldFactory
-from org.orekit.forces.gravity.potential import SHMFormatReader
 from java.io import File
 from java.lang import System
 
 
-from org.hipparchus.geometry.euclidean.threed import Vector3D
-
-from org.hipparchus.ode.nonstiff import DormandPrince853Integrator
-from org.hipparchus.ode.nonstiff import DormandPrince853FieldIntegrator
-
-from org.orekit.frames import FramesFactory
-from org.orekit.orbits import EquinoctialOrbit
-from org.orekit.orbits import OrbitType
-from org.orekit.propagation import SpacecraftState, FieldSpacecraftState
-from org.orekit.propagation.numerical import NumericalPropagator, FieldNumericalPropagator
-from org.orekit.propagation.semianalytical.dsst import DSSTPropagator
 from org.orekit.time import AbsoluteDate, FieldAbsoluteDate
 from org.orekit.utils import PVCoordinates
 from org.orekit.bodies import GeodeticPoint, FieldGeodeticPoint
 
-from org.hipparchus.util import MathArrays, Decimal64Field, FastMath, Precision
+from org.hipparchus.util import MathArrays, Binary64Field, FastMath, Precision
 
 from org.orekit.models.earth.ionosphere import KlobucharIonoModel, IonosphericModel
 
@@ -132,7 +118,7 @@ class KlobucharModelTest(unittest.TestCase):
         self.assertTrue(Precision.compareTo(delayMeters.getReal(), 0., self.epsilon) > 0)
 
     def testFieldDelay(self):
-        self.doTestFieldDelay(Decimal64Field.getInstance())
+        self.doTestFieldDelay(Binary64Field.getInstance())
 
 
 if __name__ == '__main__':

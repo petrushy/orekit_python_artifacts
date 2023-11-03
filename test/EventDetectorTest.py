@@ -34,10 +34,10 @@ from org.orekit.orbits import KeplerianOrbit
 from org.orekit.utils import Constants
 from org.orekit.propagation.analytical import KeplerianPropagator
 from org.orekit.utils import PVCoordinates, IERSConventions
-from org.orekit.propagation.events.handlers import EventHandler
+from org.orekit.propagation.events.handlers import EventHandler, ContinueOnEvent
 from org.hipparchus.geometry.euclidean.threed import Vector3D
 from org.orekit.propagation.events.handlers import PythonEventHandler
-from org.orekit.propagation.events import PythonAbstractDetector, PythonEventDetector
+from org.orekit.propagation.events import PythonAbstractDetector, PythonEventDetector, PythonAdaptableInterval
 from org.hipparchus.ode.events import Action
 
 
@@ -50,6 +50,9 @@ from orekit.pyhelpers import setup_orekit_curdir
 
 setup_orekit_curdir("resources")
 
+class MyAdaptableInterval(PythonAdaptableInterval):
+    def currentInterval(self, state):
+        return float(60.0)
 
 class MyElevationDetector(PythonEventDetector):
     passes = 0
@@ -91,7 +94,7 @@ class MyElevationDetector(PythonEventDetector):
         return self.topo
 
     def getHandler(self):
-        return self
+        return ContinueOnEvent()
 
 
 class EventDetectorTest(unittest.TestCase):

@@ -34,6 +34,7 @@ from orekit import JArray_double, JArray
 from org.orekit.forces.maneuvers import SmallManeuverAnalyticalModel, ConstantThrustManeuver
 
 from org.hipparchus.geometry.euclidean.threed import Vector3D
+from org.hipparchus.geometry import Vector
 from org.hipparchus.ode.nonstiff import DormandPrince853Integrator
 from org.hipparchus.util import FastMath
 from org.orekit.utils import Constants
@@ -210,7 +211,7 @@ class SmallManeuverAnalyticalModelTest(unittest.TestCase):
             # set up maneuver
             vExhaust = Constants.G0_STANDARD_GRAVITY * isp
             dt = -(mass * vExhaust / f) * FastMath.expm1(-dV.getNorm() / vExhaust)
-            maneuver = ConstantThrustManeuver(t0, dt, f, isp, dV.normalize())
+            maneuver = ConstantThrustManeuver(t0, dt, f, isp, Vector.cast_(dV).normalize())
             propagator.addForceModel(maneuver)
 
         generator = propagator.getEphemerisGenerator()

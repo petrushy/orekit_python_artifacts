@@ -81,7 +81,7 @@ class NodeDetectorTest(unittest.TestCase):
         # Define 2 instances of NodeDetector:
         rawDetector = NodeDetector(1e-6,
                                    initialState.getOrbit(),
-                                   initialState.getFrame()).withHandler(ContinueOnEvent().of_(NodeDetector))
+                                   initialState.getFrame()).withHandler(ContinueOnEvent())
 
         logger1 = EventsLogger()
         node1 = logger1.monitorDetector(rawDetector)
