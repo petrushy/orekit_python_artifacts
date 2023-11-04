@@ -36,7 +36,6 @@ from org.orekit.propagation.analytical import KeplerianPropagator
 from org.orekit.utils import PVCoordinates, IERSConventions
 from org.orekit.propagation.events.handlers import EventHandler, ContinueOnEvent, StopOnEvent
 from org.hipparchus.geometry.euclidean.threed import Vector3D
-from org.orekit.propagation.events.handlers import PythonEventHandler
 from org.orekit.propagation.events import PythonAbstractDetector, PythonEventDetector, PythonAdaptableInterval
 from org.hipparchus.ode.events import Action
 
