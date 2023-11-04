@@ -39,16 +39,8 @@ from java.io import File
 # import java.util.List;
 #
 from org.hipparchus.geometry.euclidean.threed import Vector3D
-# import org.junit.Assert;
-# import org.junit.Test;
-# import org.orekit.estimation.Context;
 from org.hipparchus.util import FastMath
 
-# from org.orekit.estimation import EstimationTestUtils
-# import org.orekit.estimation.measurements.ObservedMeasurement;
-# import org.orekit.estimation.measurements.PV;
-# import org.orekit.estimation.measurements.PVMeasurementCreator;
-# import org.orekit.frames.Frame;
 from org.orekit.frames import FramesFactory, TopocentricFrame
 # import org.orekit.orbits.KeplerianOrbit;
 from org.orekit.orbits import OrbitType, KeplerianOrbit

@@ -34,7 +34,7 @@ from org.orekit.orbits import KeplerianOrbit
 from org.orekit.utils import Constants
 from org.orekit.propagation.analytical import KeplerianPropagator
 from org.orekit.utils import PVCoordinates, IERSConventions
-from org.orekit.propagation.events.handlers import EventHandler, ContinueOnEvent, StopOnEvent
+from org.orekit.propagation.events.handlers import EventHandler, ContinueOnEvent, StopOnEvent, PythonEventHandler
 from org.hipparchus.geometry.euclidean.threed import Vector3D
 from org.orekit.propagation.events import PythonAbstractDetector, PythonEventDetector, PythonAdaptableInterval
 from org.hipparchus.ode.events import Action
@@ -49,9 +49,28 @@ from orekit.pyhelpers import setup_orekit_curdir
 
 setup_orekit_curdir("resources")
 
+
+class MyEventCounter(PythonEventHandler):
+    def __init__(self):
+        self.events = 0
+        super(MyEventCounter, self).__init__()
+
+    def init(self, initialstate, target, detector):
+        print(initialstate, target, detector)
+
+    def eventOccurred(self, s, detector, increasing):
+        if increasing:
+            self.events +=  1
+        return Action.CONTINUE
+
+    def resetState(self, detector, oldState):
+        return oldState
+
+mycounter = MyEventCounter()
+
 class MyAdaptableInterval(PythonAdaptableInterval):
     def currentInterval(self, s):
-        return float(60.0)
+        return float(PythonAbstractDetector.DEFAULT_MAXCHECK)
 
 class MyElevationDetector(PythonEventDetector):
     passes = 0
@@ -77,12 +96,6 @@ class MyElevationDetector(PythonEventDetector):
         tmp = self.topo.getElevation(s.getPVCoordinates().getPosition(), s.getFrame(), s.getDate()) - self.elevation
         return tmp
 
-    def eventOccurred(self, s, increasing):
-        if increasing:
-            self.passes = self.passes + 1
-
-        return Action.CONTINUE
-
     def resetState(self, oldState):
         return oldState
 
@@ -93,7 +106,7 @@ class MyElevationDetector(PythonEventDetector):
         return self.topo
 
     def getHandler(self):
-        return ContinueOnEvent()
+        return mycounter
 
 
 class EventDetectorTest(unittest.TestCase):
@@ -130,8 +143,8 @@ class EventDetectorTest(unittest.TestCase):
 
         finalState = kepler.propagate(initialDate.shiftedBy(60 * 60 * 24.0 * 15))
 
-        print(detector.passes)
-        self.assertEqual(52, detector.passes)
+        print(mycounter.events)
+        self.assertEqual(52, mycounter.events)
 
 
 if __name__ == '__main__':
