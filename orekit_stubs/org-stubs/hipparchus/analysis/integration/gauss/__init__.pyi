@@ -22,6 +22,7 @@ class FieldGaussIntegrator(typing.Generic[_FieldGaussIntegrator__T]):
     def __init__(self, pair: org.hipparchus.util.Pair[typing.List[_FieldGaussIntegrator__T], typing.List[_FieldGaussIntegrator__T]]): ...
     def getNumberOfPoints(self) -> int:
         """
+            Get order of the integration rule.
         
             Returns:
                 the order of the integration rule (the number of integration points).
@@ -102,6 +103,7 @@ class GaussIntegrator:
     def __init__(self, pair: org.hipparchus.util.Pair[typing.List[float], typing.List[float]]): ...
     def getNumberOfPoints(self) -> int:
         """
+            Get the order of the integration rule.
         
             Returns:
                 the order of the integration rule (the number of integration points).
@@ -140,7 +142,7 @@ class GaussIntegrator:
         """
             Returns an estimate of the integral of :code:`f(x) * w(x)`, where :code:`w` is a weight function that depends on the
             actual flavor of the Gauss integration scheme. The algorithm uses the points and associated weights, as passed to the
-            :meth:`~org.hipparchus.analysis.integration.gauss.GaussIntegrator.GaussIntegrator`.
+            :meth:`~org.hipparchus.analysis.integration.gauss.GaussIntegrator.%3Cinit%3E`.
         
             Parameters:
                 f (:class:`~org.hipparchus.analysis.UnivariateFunction`): Function to integrate.
@@ -220,7 +222,7 @@ class GaussIntegratorFactory:
             Returns:
                 a Gauss-Legendre integrator.
         
-        public :class:`~org.hipparchus.analysis.integration.gauss.GaussIntegrator` legendre(int numberOfPoints, double lowerBound, double upperBound) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public :class:`~org.hipparchus.analysis.integration.gauss.GaussIntegrator` legendre (int numberOfPoints, double lowerBound, double upperBound) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Creates a Gauss-Legendre integrator of the given order. The call to the
             :meth:`~org.hipparchus.analysis.integration.gauss.GaussIntegrator.integrate` method will perform an integration on the
@@ -318,7 +320,7 @@ class SymmetricGaussIntegrator(GaussIntegrator):
         """
             Returns an estimate of the integral of :code:`f(x) * w(x)`, where :code:`w` is a weight function that depends on the
             actual flavor of the Gauss integration scheme. The algorithm uses the points and associated weights, as passed to the
-            :meth:`~org.hipparchus.analysis.integration.gauss.GaussIntegrator.GaussIntegrator`.
+            :meth:`~org.hipparchus.analysis.integration.gauss.GaussIntegrator.%3Cinit%3E`.
         
             Overrides:
                 :meth:`~org.hipparchus.analysis.integration.gauss.GaussIntegrator.integrate` in

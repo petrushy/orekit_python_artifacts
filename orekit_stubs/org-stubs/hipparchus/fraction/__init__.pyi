@@ -210,25 +210,8 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
         """
         ...
     @typing.overload
-    def bigDecimalValue(self, int: int) -> java.math.BigDecimal:
+    def bigDecimalValue(self, int: int, roundingMode: java.math.RoundingMode) -> java.math.BigDecimal:
         """
-        
-            Gets the fraction as a :code:`BigDecimal` following the passed rounding mode. This calculates the fraction as the
-            numerator divided by denominator.
-        
-            Parameters:
-                roundingMode (int): rounding mode to apply. see
-                    :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigDecimal?is` constants.
-        
-            Returns:
-                the fraction as a :code:`BigDecimal`.
-        
-            Raises:
-                :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if :code:`roundingMode` does not represent a valid rounding mode.
-        
-            Also see:
-                :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigDecimal?is`
-        
         
             Gets the fraction as a :code:`BigDecimal` following the passed scale and rounding mode. This calculates the fraction as
             the numerator divided by denominator.
@@ -236,7 +219,7 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
             Parameters:
                 scale (int): scale of the :code:`BigDecimal` quotient to be returned. see
                     :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigDecimal?is` for more information.
-                roundingMode (int): rounding mode to apply. see
+                roundingMode (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.RoundingMode?is`): rounding mode to apply. see
                     :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigDecimal?is` constants.
         
             Returns:
@@ -249,7 +232,27 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
         """
         ...
     @typing.overload
-    def bigDecimalValue(self, int: int, int2: int) -> java.math.BigDecimal: ...
+    def bigDecimalValue(self, roundingMode: java.math.RoundingMode) -> java.math.BigDecimal:
+        """
+        
+            Gets the fraction as a :code:`BigDecimal` following the passed rounding mode. This calculates the fraction as the
+            numerator divided by denominator.
+        
+            Parameters:
+                roundingMode (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.RoundingMode?is`): rounding mode to apply. see
+                    :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigDecimal?is` constants.
+        
+            Returns:
+                the fraction as a :code:`BigDecimal`.
+        
+            Raises:
+                :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if :code:`roundingMode` does not represent a valid rounding mode.
+        
+            Also see:
+                :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigDecimal?is`
+        
+        """
+        ...
     def compareTo(self, bigFraction: 'BigFraction') -> int:
         """
         
@@ -675,34 +678,34 @@ class BigFraction(java.lang.Number, org.hipparchus.FieldElement['BigFraction'], 
                 exponent (int): exponent to which this :code:`BigFraction` is to be raised.
         
             Returns:
-                ``this :sup:`exponent```.
+                this :sup:`exponent`
         
         
-            Returns a :code:`BigFraction` whose value is ``(this :sup:`exponent` )``, returning the result in reduced form.
+            Returns a :code:`BigFraction` whose value is this :sup:`exponent` , returning the result in reduced form.
         
             Parameters:
                 exponent (long): exponent to which this :code:`BigFraction` is to be raised.
         
             Returns:
-                ``this :sup:`exponent``` as a :code:`BigFraction`.
+                this :sup:`exponent` as a :code:`BigFraction`.
         
         
-            Returns a :code:`BigFraction` whose value is ``(this :sup:`exponent` )``, returning the result in reduced form.
+            Returns a :code:`BigFraction` whose value is this :sup:`exponent` , returning the result in reduced form.
         
             Parameters:
                 exponent (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.math.BigInteger?is`): exponent to which this :code:`BigFraction` is to be raised.
         
             Returns:
-                ``this :sup:`exponent``` as a :code:`BigFraction`.
+                this :sup:`exponent` as a :code:`BigFraction`.
         
         
-            Returns a :code:`double` whose value is ``(this :sup:`exponent` )``, returning the result in reduced form.
+            Returns a :code:`double` whose value is this :sup:`exponent` , returning the result in reduced form.
         
             Parameters:
                 exponent (double): exponent to which this :code:`BigFraction` is to be raised.
         
             Returns:
-                ``this :sup:`exponent```.
+                this :sup:`exponent`
         
         
         """
@@ -1737,7 +1740,7 @@ class FractionFormat(org.hipparchus.fraction.AbstractFormat):
             Returns:
                 the value passed in as toAppendTo.
         
-        public :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is` format(:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` obj, :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is` toAppendTo, :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition?is` pos) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`, :class:`~org.hipparchus.exception.MathIllegalStateException`
+        public :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is` format (:class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` obj, :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is` toAppendTo, :class:`~org.hipparchus.fraction.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition?is` pos) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`, :class:`~org.hipparchus.exception.MathIllegalStateException`
         
             Formats an object and appends the result to a StringBuffer. :code:`obj` must be either a
             :class:`~org.hipparchus.fraction.Fraction` object or a

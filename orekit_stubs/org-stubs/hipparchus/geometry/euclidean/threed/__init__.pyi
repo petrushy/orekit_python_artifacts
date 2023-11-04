@@ -8,6 +8,7 @@ import org.hipparchus.geometry.enclosing
 import org.hipparchus.geometry.euclidean.oned
 import org.hipparchus.geometry.euclidean.twod
 import org.hipparchus.geometry.partitioning
+import org.hipparchus.util
 import typing
 
 
@@ -105,7 +106,7 @@ class FieldLine(typing.Generic[_FieldLine__T]):
             Returns:
                 distance between the instance and the point
         
-        public :class:`~org.hipparchus.geometry.euclidean.threed.FieldLine` distance(:class:`~org.hipparchus.geometry.euclidean.threed.FieldLine`<:class:`~org.hipparchus.geometry.euclidean.threed.FieldLine`> line)
+        public :class:`~org.hipparchus.geometry.euclidean.threed.FieldLine` distance (:class:`~org.hipparchus.geometry.euclidean.threed.FieldLine`<:class:`~org.hipparchus.geometry.euclidean.threed.FieldLine`> line)
         
             Compute the shortest distance between the instance and another line.
         
@@ -163,6 +164,18 @@ class FieldLine(typing.Generic[_FieldLine__T]):
 
 _FieldRotation__T = typing.TypeVar('_FieldRotation__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldRotation(java.io.Serializable, typing.Generic[_FieldRotation__T]):
+    """
+    public class FieldRotation<T extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    
+        This class is a re-implementation of :class:`~org.hipparchus.geometry.euclidean.threed.Rotation` using
+        :class:`~org.hipparchus.geometry.euclidean.threed.https:.www.hipparchus.org.hipparchus`.
+    
+        Instance of this class are guaranteed to be immutable.
+    
+        Also see:
+            :class:`~org.hipparchus.geometry.euclidean.threed.FieldVector3D`,
+            :class:`~org.hipparchus.geometry.euclidean.threed.RotationOrder`, :meth:`~serialized`
+    """
     @typing.overload
     def __init__(self, t: _FieldRotation__T, t2: _FieldRotation__T, t3: _FieldRotation__T, t4: _FieldRotation__T, boolean: bool): ...
     @typing.overload
@@ -189,12 +202,78 @@ class FieldRotation(java.io.Serializable, typing.Generic[_FieldRotation__T]):
     def applyInverseTo(self, vector3D: 'Vector3D') -> 'FieldVector3D'[_FieldRotation__T]: ...
     @typing.overload
     @staticmethod
-    def applyInverseTo(rotation: 'Rotation', fieldRotation: 'FieldRotation'[_applyInverseTo_4__T]) -> 'FieldRotation'[_applyInverseTo_4__T]: ...
+    def applyInverseTo(rotation: 'Rotation', fieldRotation: 'FieldRotation'[_applyInverseTo_4__T]) -> 'FieldRotation'[_applyInverseTo_4__T]:
+        """
+            Apply the inverse of a rotation to a vector.
+        
+            Parameters:
+                r (:class:`~org.hipparchus.geometry.euclidean.threed.Rotation`): rotation to apply
+                u (:class:`~org.hipparchus.geometry.euclidean.threed.FieldVector3D`<T> u): vector to apply the inverse of the rotation to
+        
+            Returns:
+                a new vector which such that u is its image by the rotation
+        
+        public :class:`~org.hipparchus.geometry.euclidean.threed.FieldRotation`<:class:`~org.hipparchus.geometry.euclidean.threed.FieldRotation`> applyInverseTo (:class:`~org.hipparchus.geometry.euclidean.threed.FieldRotation`<:class:`~org.hipparchus.geometry.euclidean.threed.FieldRotation`> r)
+        
+            Apply the inverse of the instance to another rotation.
+        
+            Calling this method is equivalent to call
+            :meth:`~org.hipparchus.geometry.euclidean.threed.FieldRotation.composeInverse`.
+        
+            Parameters:
+                r (:class:`~org.hipparchus.geometry.euclidean.threed.FieldRotation`<:class:`~org.hipparchus.geometry.euclidean.threed.FieldRotation`> r): rotation to apply the rotation to
+        
+            Returns:
+                a new rotation which is the composition of r by the inverse of the instance
+        
+        public :class:`~org.hipparchus.geometry.euclidean.threed.FieldRotation`<:class:`~org.hipparchus.geometry.euclidean.threed.FieldRotation`> applyInverseTo (:class:`~org.hipparchus.geometry.euclidean.threed.Rotation` r)
+        
+            Apply the inverse of the instance to another rotation.
+        
+            Calling this method is equivalent to call
+            :meth:`~org.hipparchus.geometry.euclidean.threed.FieldRotation.composeInverse`.
+        
+            Parameters:
+                r (:class:`~org.hipparchus.geometry.euclidean.threed.Rotation`): rotation to apply the rotation to
+        
+            Returns:
+                a new rotation which is the composition of r by the inverse of the instance
+        
+            Apply the inverse of a rotation to another rotation. Applying the inverse of a rotation to another rotation is computing
+            the composition in an order compliant with the following rule : let u be any vector and v its image by rInner (i.e.
+            rInner.applyTo(u) = v), let w be the inverse image of v by rOuter (i.e. rOuter.applyInverseTo(v) = w), then w =
+            comp.applyTo(u), where comp = applyInverseTo(rOuter, rInner).
+        
+            Parameters:
+                rOuter (:class:`~org.hipparchus.geometry.euclidean.threed.Rotation`): rotation to apply the rotation to
+                rInner (:class:`~org.hipparchus.geometry.euclidean.threed.FieldRotation`<T> rInner): rotation to apply the rotation to
+        
+            Returns:
+                a new rotation which is the composition of r by the inverse of the instance
+        
+        
+        """
+        ...
     @typing.overload
     @staticmethod
     def applyInverseTo(rotation: 'Rotation', fieldVector3D: 'FieldVector3D'[_applyInverseTo_5__T]) -> 'FieldVector3D'[_applyInverseTo_5__T]: ...
     @typing.overload
-    def applyInverseTo(self, doubleArray: typing.List[float], tArray: typing.List[_FieldRotation__T]) -> None: ...
+    def applyInverseTo(self, doubleArray: typing.List[float], tArray: typing.List[_FieldRotation__T]) -> None:
+        """
+            Apply the inverse of the rotation to a vector stored in an array.
+        
+            Parameters:
+                in (:class:`~org.hipparchus.geometry.euclidean.threed.FieldRotation`[]): an array with three items which stores vector to rotate
+                out (:class:`~org.hipparchus.geometry.euclidean.threed.FieldRotation`[]): an array with three items to put result to (it can be the same array as in)
+        
+            Apply the inverse of the rotation to a vector stored in an array.
+        
+            Parameters:
+                in (double[]): an array with three items which stores vector to rotate
+                out (:class:`~org.hipparchus.geometry.euclidean.threed.FieldRotation`[]): an array with three items to put result to
+        
+        """
+        ...
     @typing.overload
     def applyInverseTo(self, tArray: typing.List[_FieldRotation__T], tArray2: typing.List[_FieldRotation__T]) -> None: ...
     _applyTo_4__T = typing.TypeVar('_applyTo_4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -209,12 +288,75 @@ class FieldRotation(java.io.Serializable, typing.Generic[_FieldRotation__T]):
     def applyTo(self, vector3D: 'Vector3D') -> 'FieldVector3D'[_FieldRotation__T]: ...
     @typing.overload
     @staticmethod
-    def applyTo(rotation: 'Rotation', fieldRotation: 'FieldRotation'[_applyTo_4__T]) -> 'FieldRotation'[_applyTo_4__T]: ...
+    def applyTo(rotation: 'Rotation', fieldRotation: 'FieldRotation'[_applyTo_4__T]) -> 'FieldRotation'[_applyTo_4__T]:
+        """
+            Apply a rotation to a vector.
+        
+            Parameters:
+                r (:class:`~org.hipparchus.geometry.euclidean.threed.Rotation`): rotation to apply
+                u (:class:`~org.hipparchus.geometry.euclidean.threed.FieldVector3D`<T> u): vector to apply the rotation to
+        
+            Returns:
+                a new vector which is the image of u by the rotation
+        
+        public :class:`~org.hipparchus.geometry.euclidean.threed.FieldRotation`<:class:`~org.hipparchus.geometry.euclidean.threed.FieldRotation`> applyTo (:class:`~org.hipparchus.geometry.euclidean.threed.FieldRotation`<:class:`~org.hipparchus.geometry.euclidean.threed.FieldRotation`> r)
+        
+            Apply the instance to another rotation.
+        
+            Calling this method is equivalent to call :meth:`~org.hipparchus.geometry.euclidean.threed.FieldRotation.compose`.
+        
+            Parameters:
+                r (:class:`~org.hipparchus.geometry.euclidean.threed.FieldRotation`<:class:`~org.hipparchus.geometry.euclidean.threed.FieldRotation`> r): rotation to apply the rotation to
+        
+            Returns:
+                a new rotation which is the composition of r by the instance
+        
+        public :class:`~org.hipparchus.geometry.euclidean.threed.FieldRotation`<:class:`~org.hipparchus.geometry.euclidean.threed.FieldRotation`> applyTo (:class:`~org.hipparchus.geometry.euclidean.threed.Rotation` r)
+        
+            Apply the instance to another rotation.
+        
+            Calling this method is equivalent to call :meth:`~org.hipparchus.geometry.euclidean.threed.FieldRotation.compose`.
+        
+            Parameters:
+                r (:class:`~org.hipparchus.geometry.euclidean.threed.Rotation`): rotation to apply the rotation to
+        
+            Returns:
+                a new rotation which is the composition of r by the instance
+        
+            Apply a rotation to another rotation. Applying a rotation to another rotation is computing the composition in an order
+            compliant with the following rule : let u be any vector and v its image by rInner (i.e. rInner.applyTo(u) = v), let w be
+            the image of v by rOuter (i.e. rOuter.applyTo(v) = w), then w = comp.applyTo(u), where comp = applyTo(rOuter, rInner).
+        
+            Parameters:
+                r1 (:class:`~org.hipparchus.geometry.euclidean.threed.Rotation`): rotation to apply
+                rInner (:class:`~org.hipparchus.geometry.euclidean.threed.FieldRotation`<T> rInner): rotation to apply the rotation to
+        
+            Returns:
+                a new rotation which is the composition of r by the instance
+        
+        
+        """
+        ...
     @typing.overload
     @staticmethod
     def applyTo(rotation: 'Rotation', fieldVector3D: 'FieldVector3D'[_applyTo_5__T]) -> 'FieldVector3D'[_applyTo_5__T]: ...
     @typing.overload
-    def applyTo(self, doubleArray: typing.List[float], tArray: typing.List[_FieldRotation__T]) -> None: ...
+    def applyTo(self, doubleArray: typing.List[float], tArray: typing.List[_FieldRotation__T]) -> None:
+        """
+            Apply the rotation to a vector stored in an array.
+        
+            Parameters:
+                in (:class:`~org.hipparchus.geometry.euclidean.threed.FieldRotation`[]): an array with three items which stores vector to rotate
+                out (:class:`~org.hipparchus.geometry.euclidean.threed.FieldRotation`[]): an array with three items to put result to (it can be the same array as in)
+        
+            Apply the rotation to a vector stored in an array.
+        
+            Parameters:
+                in (double[]): an array with three items which stores vector to rotate
+                out (:class:`~org.hipparchus.geometry.euclidean.threed.FieldRotation`[]): an array with three items to put result to
+        
+        """
+        ...
     @typing.overload
     def applyTo(self, tArray: typing.List[_FieldRotation__T], tArray2: typing.List[_FieldRotation__T]) -> None: ...
     @typing.overload
@@ -227,25 +369,129 @@ class FieldRotation(java.io.Serializable, typing.Generic[_FieldRotation__T]):
     def composeInverse(self, rotation: 'Rotation', rotationConvention: 'RotationConvention') -> 'FieldRotation'[_FieldRotation__T]: ...
     _distance__T = typing.TypeVar('_distance__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @staticmethod
-    def distance(fieldRotation: 'FieldRotation'[_distance__T], fieldRotation2: 'FieldRotation'[_distance__T]) -> _distance__T: ...
-    def getAngle(self) -> _FieldRotation__T: ...
+    def distance(fieldRotation: 'FieldRotation'[_distance__T], fieldRotation2: 'FieldRotation'[_distance__T]) -> _distance__T:
+        """
+            Compute the *distance* between two rotations.
+        
+            The *distance* is intended here as a way to check if two rotations are almost similar (i.e. they transform vectors the
+            same way) or very different. It is mathematically defined as the angle of the rotation r that prepended to one of the
+            rotations gives the other one: \(r_1(r) = r_2\)
+        
+            This distance is an angle between 0 and π. Its value is the smallest possible upper bound of the angle in radians
+            between r :sub:`1` (v) and r :sub:`2` (v) for all possible vectors v. This upper bound is reached for some v. The
+            distance is equal to 0 if and only if the two rotations are identical.
+        
+            Comparing two rotations should always be done using this value rather than for example comparing the components of the
+            quaternions. It is much more stable, and has a geometric meaning. Also comparing quaternions components is error prone
+            since for example quaternions (0.36, 0.48, -0.48, -0.64) and (-0.36, -0.48, 0.48, 0.64) represent exactly the same
+            rotation despite their components are different (they are exact opposites).
+        
+            Parameters:
+                r1 (:class:`~org.hipparchus.geometry.euclidean.threed.FieldRotation`<T> r1): first rotation
+                r2 (:class:`~org.hipparchus.geometry.euclidean.threed.FieldRotation`<T> r2): second rotation
+        
+            Returns:
+                *distance* between r1 and r2
+        
+        
+        """
+        ...
+    def getAngle(self) -> _FieldRotation__T:
+        """
+            Get the angle of the rotation.
+        
+            Returns:
+                angle of the rotation (between 0 and π)
+        
+            Also see:
+                :meth:`~org.hipparchus.geometry.euclidean.threed.FieldRotation.%3Cinit%3E`
+        
+        
+        """
+        ...
     def getAngles(self, rotationOrder: 'RotationOrder', rotationConvention: 'RotationConvention') -> typing.List[_FieldRotation__T]: ...
     def getAxis(self, rotationConvention: 'RotationConvention') -> 'FieldVector3D'[_FieldRotation__T]: ...
     _getIdentity__T = typing.TypeVar('_getIdentity__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @staticmethod
-    def getIdentity(field: org.hipparchus.Field[_getIdentity__T]) -> 'FieldRotation'[_getIdentity__T]: ...
-    def getMatrix(self) -> typing.List[typing.List[_FieldRotation__T]]: ...
-    def getQ0(self) -> _FieldRotation__T: ...
-    def getQ1(self) -> _FieldRotation__T: ...
-    def getQ2(self) -> _FieldRotation__T: ...
-    def getQ3(self) -> _FieldRotation__T: ...
+    def getIdentity(field: org.hipparchus.Field[_getIdentity__T]) -> 'FieldRotation'[_getIdentity__T]:
+        """
+            Get identity rotation.
+        
+            Parameters:
+                field (:class:`~org.hipparchus.geometry.euclidean.threed.https:.www.hipparchus.org.hipparchus`<T> field): field for the components
+        
+            Returns:
+                a new rotation
+        
+        
+        """
+        ...
+    def getMatrix(self) -> typing.List[typing.List[_FieldRotation__T]]:
+        """
+            Get the 3X3 matrix corresponding to the instance
+        
+            Returns:
+                the matrix corresponding to the instance
+        
+        
+        """
+        ...
+    def getQ0(self) -> _FieldRotation__T:
+        """
+            Get the scalar coordinate of the quaternion.
+        
+            Returns:
+                scalar coordinate of the quaternion
+        
+        
+        """
+        ...
+    def getQ1(self) -> _FieldRotation__T:
+        """
+            Get the first coordinate of the vectorial part of the quaternion.
+        
+            Returns:
+                first coordinate of the vectorial part of the quaternion
+        
+        
+        """
+        ...
+    def getQ2(self) -> _FieldRotation__T:
+        """
+            Get the second coordinate of the vectorial part of the quaternion.
+        
+            Returns:
+                second coordinate of the vectorial part of the quaternion
+        
+        
+        """
+        ...
+    def getQ3(self) -> _FieldRotation__T:
+        """
+            Get the third coordinate of the vectorial part of the quaternion.
+        
+            Returns:
+                third coordinate of the vectorial part of the quaternion
+        
+        
+        """
+        ...
     def revert(self) -> 'FieldRotation'[_FieldRotation__T]: ...
-    def toRotation(self) -> 'Rotation': ...
+    def toRotation(self) -> 'Rotation':
+        """
+            Convert to a constant vector without derivatives.
+        
+            Returns:
+                a constant vector
+        
+        
+        """
+        ...
 
 _FieldVector3D__T = typing.TypeVar('_FieldVector3D__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
+class FieldVector3D(org.hipparchus.util.FieldBlendable['FieldVector3D'[_FieldVector3D__T], _FieldVector3D__T], java.io.Serializable, typing.Generic[_FieldVector3D__T]):
     """
-    public class FieldVector3D<T extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public class FieldVector3D<T extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.www.hipparchus.org.hipparchus`<T>> extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.euclidean.threed.https:.www.hipparchus.org.hipparchus`<:class:`~org.hipparchus.geometry.euclidean.threed.FieldVector3D`<T>, T>, :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         This class is a re-implementation of :class:`~org.hipparchus.geometry.euclidean.threed.Vector3D` using
         :class:`~org.hipparchus.geometry.euclidean.threed.https:.www.hipparchus.org.hipparchus`.
@@ -311,6 +557,7 @@ class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
     @typing.overload
     @staticmethod
     def angle(vector3D: 'Vector3D', fieldVector3D: 'FieldVector3D'[_angle_2__T]) -> _angle_2__T: ...
+    def blendArithmeticallyWith(self, fieldVector3D: 'FieldVector3D'[_FieldVector3D__T], t: _FieldVector3D__T) -> 'FieldVector3D'[_FieldVector3D__T]: ...
     _crossProduct_2__T = typing.TypeVar('_crossProduct_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _crossProduct_3__T = typing.TypeVar('_crossProduct_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _crossProduct_4__T = typing.TypeVar('_crossProduct_4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -735,7 +982,7 @@ class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
                 azimuth (α) of the vector, between -π and +π
         
             Also see:
-                :meth:`~org.hipparchus.geometry.euclidean.threed.FieldVector3D.FieldVector3D`
+                :meth:`~org.hipparchus.geometry.euclidean.threed.FieldVector3D.%3Cinit%3E`
         
         
         """
@@ -748,7 +995,7 @@ class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
                 elevation (δ) of the vector, between -π/2 and +π/2
         
             Also see:
-                :meth:`~org.hipparchus.geometry.euclidean.threed.FieldVector3D.FieldVector3D`
+                :meth:`~org.hipparchus.geometry.euclidean.threed.FieldVector3D.%3Cinit%3E`
         
         
         """
@@ -936,7 +1183,7 @@ class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
                 abscissa of the vector
         
             Also see:
-                :meth:`~org.hipparchus.geometry.euclidean.threed.FieldVector3D.FieldVector3D`
+                :meth:`~org.hipparchus.geometry.euclidean.threed.FieldVector3D.%3Cinit%3E`
         
         
         """
@@ -949,7 +1196,7 @@ class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
                 ordinate of the vector
         
             Also see:
-                :meth:`~org.hipparchus.geometry.euclidean.threed.FieldVector3D.FieldVector3D`
+                :meth:`~org.hipparchus.geometry.euclidean.threed.FieldVector3D.%3Cinit%3E`
         
         
         """
@@ -962,7 +1209,7 @@ class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
                 height of the vector
         
             Also see:
-                :meth:`~org.hipparchus.geometry.euclidean.threed.FieldVector3D.FieldVector3D`
+                :meth:`~org.hipparchus.geometry.euclidean.threed.FieldVector3D.%3Cinit%3E`
         
         
         """
@@ -1045,7 +1292,7 @@ class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
                 vector coordinates
         
             Also see:
-                :meth:`~org.hipparchus.geometry.euclidean.threed.FieldVector3D.FieldVector3D`
+                :meth:`~org.hipparchus.geometry.euclidean.threed.FieldVector3D.%3Cinit%3E`
         
         
         """
@@ -1091,7 +1338,7 @@ class FieldVector3D(java.io.Serializable, typing.Generic[_FieldVector3D__T]):
 
 class Line(org.hipparchus.geometry.partitioning.Embedding[Euclidean3D, org.hipparchus.geometry.euclidean.oned.Euclidean1D]):
     """
-    public class Line extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.partitioning.Embedding`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`,:class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`>
+    public class Line extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.partitioning.Embedding`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`, :class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`>
     
         The class represent lines in a three dimensional space.
     
@@ -1101,7 +1348,7 @@ class Line(org.hipparchus.geometry.partitioning.Embedding[Euclidean3D, org.hippa
     
         Also see:
             :meth:`~org.hipparchus.geometry.euclidean.threed.Line.fromDirection`,
-            :meth:`~org.hipparchus.geometry.euclidean.threed.Line.Line`
+            :meth:`~org.hipparchus.geometry.euclidean.threed.Line.%3Cinit%3E`
     """
     @typing.overload
     def __init__(self, line: 'Line'): ...
@@ -1174,7 +1421,7 @@ class Line(org.hipparchus.geometry.partitioning.Embedding[Euclidean3D, org.hippa
                 :class:`~org.hipparchus.geometry.euclidean.threed.https:.www.hipparchus.org.hipparchus`: if :code:`direction` is the zero vector.
         
             Also see:
-                :meth:`~org.hipparchus.geometry.euclidean.threed.Line.Line`
+                :meth:`~org.hipparchus.geometry.euclidean.threed.Line.%3Cinit%3E`
         
         
         """
@@ -1280,11 +1527,11 @@ class Line(org.hipparchus.geometry.partitioning.Embedding[Euclidean3D, org.hippa
     @typing.overload
     def toSpace(self, point: org.hipparchus.geometry.Point[org.hipparchus.geometry.euclidean.oned.Euclidean1D]) -> 'Vector3D': ...
     @typing.overload
-    def toSpace(self, vector: org.hipparchus.geometry.Vector[org.hipparchus.geometry.euclidean.oned.Euclidean1D]) -> 'Vector3D': ...
+    def toSpace(self, vector: org.hipparchus.geometry.Vector[org.hipparchus.geometry.euclidean.oned.Euclidean1D, org.hipparchus.geometry.euclidean.oned.Vector1D]) -> 'Vector3D': ...
     @typing.overload
     def toSubSpace(self, point: org.hipparchus.geometry.Point[Euclidean3D]) -> org.hipparchus.geometry.euclidean.oned.Vector1D: ...
     @typing.overload
-    def toSubSpace(self, vector: org.hipparchus.geometry.Vector[Euclidean3D]) -> org.hipparchus.geometry.euclidean.oned.Vector1D: ...
+    def toSubSpace(self, vector: org.hipparchus.geometry.Vector[Euclidean3D, 'Vector3D']) -> org.hipparchus.geometry.euclidean.oned.Vector1D: ...
     def wholeLine(self) -> 'SubLine':
         """
             Build a sub-line covering the whole line.
@@ -1322,7 +1569,7 @@ class OutlineExtractor:
 
 class Plane(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean3D], org.hipparchus.geometry.partitioning.Embedding[Euclidean3D, org.hipparchus.geometry.euclidean.twod.Euclidean2D]):
     """
-    public class Plane extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.partitioning.Hyperplane`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`>, :class:`~org.hipparchus.geometry.partitioning.Embedding`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`,:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`>
+    public class Plane extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.partitioning.Hyperplane`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`>, :class:`~org.hipparchus.geometry.partitioning.Embedding`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`, :class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`>
     
         The class represent planes in a three dimensional space.
     """
@@ -1412,17 +1659,17 @@ class Plane(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean3D], org.hi
             Returns:
                 offset of the plane
         
-        public double getOffset(:class:`~org.hipparchus.geometry.Vector`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`> vector)
+        public double getOffset (:class:`~org.hipparchus.geometry.Vector`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`, :class:`~org.hipparchus.geometry.euclidean.threed.Vector3D`> vector)
         
             Get the offset (oriented distance) of a vector.
         
             Parameters:
-                vector (:class:`~org.hipparchus.geometry.Vector`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`> vector): vector to check
+                vector (:class:`~org.hipparchus.geometry.Vector`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`, :class:`~org.hipparchus.geometry.euclidean.threed.Vector3D`> vector): vector to check
         
             Returns:
                 offset of the vector
         
-        public double getOffset(:class:`~org.hipparchus.geometry.Point`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`> point)
+        public double getOffset (:class:`~org.hipparchus.geometry.Point`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`> point)
         
             Get the offset (oriented distance) of a point.
         
@@ -1443,7 +1690,7 @@ class Plane(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean3D], org.hi
         """
         ...
     @typing.overload
-    def getOffset(self, vector: org.hipparchus.geometry.Vector[Euclidean3D]) -> float: ...
+    def getOffset(self, vector: org.hipparchus.geometry.Vector[Euclidean3D, 'Vector3D']) -> float: ...
     @typing.overload
     def getOffset(self, plane: 'Plane') -> float: ...
     def getOrigin(self) -> 'Vector3D':
@@ -1628,11 +1875,11 @@ class Plane(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean3D], org.hi
     @typing.overload
     def toSpace(self, point: org.hipparchus.geometry.Point[org.hipparchus.geometry.euclidean.twod.Euclidean2D]) -> 'Vector3D': ...
     @typing.overload
-    def toSpace(self, vector: org.hipparchus.geometry.Vector[org.hipparchus.geometry.euclidean.twod.Euclidean2D]) -> 'Vector3D': ...
+    def toSpace(self, vector: org.hipparchus.geometry.Vector[org.hipparchus.geometry.euclidean.twod.Euclidean2D, org.hipparchus.geometry.euclidean.twod.Vector2D]) -> 'Vector3D': ...
     @typing.overload
     def toSubSpace(self, point: org.hipparchus.geometry.Point[Euclidean3D]) -> org.hipparchus.geometry.euclidean.twod.Vector2D: ...
     @typing.overload
-    def toSubSpace(self, vector: org.hipparchus.geometry.Vector[Euclidean3D]) -> org.hipparchus.geometry.euclidean.twod.Vector2D: ...
+    def toSubSpace(self, vector: org.hipparchus.geometry.Vector[Euclidean3D, 'Vector3D']) -> org.hipparchus.geometry.euclidean.twod.Vector2D: ...
     def translate(self, vector3D: 'Vector3D') -> 'Plane':
         """
             Translate the plane by the specified amount.
@@ -1679,7 +1926,7 @@ class Plane(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean3D], org.hi
 
 class PolyhedronsSet(org.hipparchus.geometry.partitioning.AbstractRegion[Euclidean3D, org.hipparchus.geometry.euclidean.twod.Euclidean2D]):
     """
-    public class PolyhedronsSet extends :class:`~org.hipparchus.geometry.partitioning.AbstractRegion`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`,:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`>
+    public class PolyhedronsSet extends :class:`~org.hipparchus.geometry.partitioning.AbstractRegion`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`, :class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`>
     
         This class represents a 3D region: a set of polyhedrons.
     """
@@ -1735,7 +1982,74 @@ class PolyhedronsSet(org.hipparchus.geometry.partitioning.AbstractRegion[Euclide
         def getVertices(self) -> java.util.List['Vector3D']: ...
 
 class Rotation(java.io.Serializable):
+    """
+    public class Rotation extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    
+        This class implements rotations in a three-dimensional space.
+    
+        Rotations can be represented by several different mathematical entities (matrices, axe and angle, Cardan or Euler
+        angles, quaternions). This class presents an higher level abstraction, more user-oriented and hiding this implementation
+        details. Well, for the curious, we use quaternions for the internal representation. The user can build a rotation from
+        any of these representations, and any of these representations can be retrieved from a :code:`Rotation` instance (see
+        the various constructors and getters). In addition, a rotation can also be built implicitly from a set of vectors and
+        their image.
+    
+        This implies that this class can be used to convert from one representation to another one. For example, converting a
+        rotation matrix into a set of Cardan angles from can be done using the following single line of code:
+    
+        .. code-block: java
+        
+        
+         double[] angles = new Rotation(matrix, 1.0e-10).getAngles(RotationOrder.XYZ);
+         
+    
+        Focus is oriented on what a rotation *do* rather than on its underlying representation. Once it has been built, and
+        regardless of its internal representation, a rotation is an *operator* which basically transforms three dimensional
+        :class:`~org.hipparchus.geometry.euclidean.threed.Vector3D` into other three dimensional
+        :class:`~org.hipparchus.geometry.euclidean.threed.Vector3D`. Depending on the application, the meaning of these vectors
+        may vary and the semantics of the rotation also.
+    
+        For example in an spacecraft attitude simulation tool, users will often consider the vectors are fixed (say the Earth
+        direction for example) and the frames change. The rotation transforms the coordinates of the vector in inertial frame
+        into the coordinates of the same vector in satellite frame. In this case, the rotation implicitly defines the relation
+        between the two frames.
+    
+        Another example could be a telescope control application, where the rotation would transform the sighting direction at
+        rest into the desired observing direction when the telescope is pointed towards an object of interest. In this case the
+        rotation transforms the direction at rest in a topocentric frame into the sighting direction in the same topocentric
+        frame. This implies in this case the frame is fixed and the vector moves.
+    
+        In many case, both approaches will be combined. In our telescope example, we will probably also need to transform the
+        observing direction in the topocentric frame into the observing direction in inertial frame taking into account the
+        observatory location and the Earth rotation, which would essentially be an application of the first approach.
+    
+        These examples show that a rotation is what the user wants it to be. This class does not push the user towards one
+        specific definition and hence does not provide methods like :code:`projectVectorIntoDestinationFrame` or
+        :code:`computeTransformedDirection`. It provides simpler and more generic methods:
+        :meth:`~org.hipparchus.geometry.euclidean.threed.Rotation.applyTo` and
+        :meth:`~org.hipparchus.geometry.euclidean.threed.Rotation.applyInverseTo`.
+    
+        Since a rotation is basically a vectorial operator, several rotations can be composed together and the composite
+        operation :code:`r = r :sub:`1` o r :sub:`2`` (which means that for each vector :code:`u`, :code:`r(u) = r :sub:`1` (r
+        :sub:`2` (u))`) is also a rotation. Hence we can consider that in addition to vectors, a rotation can be applied to
+        other rotations as well (or to itself). With our previous notations, we would say we can apply :code:`r :sub:`1`` to
+        :code:`r :sub:`2`` and the result we get is :code:`r = r :sub:`1` o r :sub:`2``. For this purpose, the class provides
+        the methods: :meth:`~org.hipparchus.geometry.euclidean.threed.Rotation.applyTo` and
+        :meth:`~org.hipparchus.geometry.euclidean.threed.Rotation.applyInverseTo`.
+    
+        Rotations are guaranteed to be immutable objects.
+    
+        Also see:
+            :class:`~org.hipparchus.geometry.euclidean.threed.Vector3D`,
+            :class:`~org.hipparchus.geometry.euclidean.threed.RotationOrder`, :meth:`~serialized`
+    """
     IDENTITY: typing.ClassVar['Rotation'] = ...
+    """
+    public static final :class:`~org.hipparchus.geometry.euclidean.threed.Rotation` IDENTITY
+    
+        Identity rotation.
+    
+    """
     @typing.overload
     def __init__(self, double: float, double2: float, double3: float, double4: float, boolean: bool): ...
     @typing.overload
@@ -1749,30 +2063,255 @@ class Rotation(java.io.Serializable):
     @typing.overload
     def __init__(self, vector3D: 'Vector3D', vector3D2: 'Vector3D', vector3D3: 'Vector3D', vector3D4: 'Vector3D'): ...
     @typing.overload
-    def applyInverseTo(self, rotation: 'Rotation') -> 'Rotation': ...
+    def applyInverseTo(self, rotation: 'Rotation') -> 'Rotation':
+        """
+            Apply the inverse of the rotation to a vector.
+        
+            Parameters:
+                u (:class:`~org.hipparchus.geometry.euclidean.threed.Vector3D`): vector to apply the inverse of the rotation to
+        
+            Returns:
+                a new vector which such that u is its image by the rotation
+        
+            Apply the inverse of the instance to another rotation.
+        
+            Calling this method is equivalent to call :meth:`~org.hipparchus.geometry.euclidean.threed.Rotation.composeInverse`.
+        
+            Parameters:
+                r (:class:`~org.hipparchus.geometry.euclidean.threed.Rotation`): rotation to apply the rotation to
+        
+            Returns:
+                a new rotation which is the composition of r by the inverse of the instance
+        
+        
+        """
+        ...
     @typing.overload
     def applyInverseTo(self, vector3D: 'Vector3D') -> 'Vector3D': ...
     @typing.overload
-    def applyInverseTo(self, doubleArray: typing.List[float], doubleArray2: typing.List[float]) -> None: ...
+    def applyInverseTo(self, doubleArray: typing.List[float], doubleArray2: typing.List[float]) -> None:
+        """
+            Apply the inverse of the rotation to a vector stored in an array.
+        
+            Parameters:
+                in (double[]): an array with three items which stores vector to rotate
+                out (double[]): an array with three items to put result to (it can be the same array as in)
+        
+        """
+        ...
     @typing.overload
-    def applyTo(self, rotation: 'Rotation') -> 'Rotation': ...
+    def applyTo(self, rotation: 'Rotation') -> 'Rotation':
+        """
+            Apply the rotation to a vector.
+        
+            Parameters:
+                u (:class:`~org.hipparchus.geometry.euclidean.threed.Vector3D`): vector to apply the rotation to
+        
+            Returns:
+                a new vector which is the image of u by the rotation
+        
+            Apply the instance to another rotation.
+        
+            Calling this method is equivalent to call :meth:`~org.hipparchus.geometry.euclidean.threed.Rotation.compose`.
+        
+            Parameters:
+                r (:class:`~org.hipparchus.geometry.euclidean.threed.Rotation`): rotation to apply the rotation to
+        
+            Returns:
+                a new rotation which is the composition of r by the instance
+        
+        
+        """
+        ...
     @typing.overload
     def applyTo(self, vector3D: 'Vector3D') -> 'Vector3D': ...
     @typing.overload
-    def applyTo(self, doubleArray: typing.List[float], doubleArray2: typing.List[float]) -> None: ...
-    def compose(self, rotation: 'Rotation', rotationConvention: 'RotationConvention') -> 'Rotation': ...
-    def composeInverse(self, rotation: 'Rotation', rotationConvention: 'RotationConvention') -> 'Rotation': ...
+    def applyTo(self, doubleArray: typing.List[float], doubleArray2: typing.List[float]) -> None:
+        """
+            Apply the rotation to a vector stored in an array.
+        
+            Parameters:
+                in (double[]): an array with three items which stores vector to rotate
+                out (double[]): an array with three items to put result to (it can be the same array as in)
+        
+        """
+        ...
+    def compose(self, rotation: 'Rotation', rotationConvention: 'RotationConvention') -> 'Rotation':
+        """
+            Compose the instance with another rotation.
+        
+            If the semantics of the rotations composition corresponds to a
+            :meth:`~org.hipparchus.geometry.euclidean.threed.RotationConvention.VECTOR_OPERATOR` convention, applying the instance
+            to a rotation is computing the composition in an order compliant with the following rule : let :code:`u` be any vector
+            and :code:`v` its image by :code:`r1` (i.e. :code:`r1.applyTo(u) = v`). Let :code:`w` be the image of :code:`v` by
+            rotation :code:`r2` (i.e. :code:`r2.applyTo(v) = w`). Then :code:`w = comp.applyTo(u)`, where :code:`comp =
+            r2.compose(r1, RotationConvention.VECTOR_OPERATOR)`.
+        
+            If the semantics of the rotations composition corresponds to a
+            :meth:`~org.hipparchus.geometry.euclidean.threed.RotationConvention.FRAME_TRANSFORM` convention, the application order
+            will be reversed. So keeping the exact same meaning of all :code:`r1`, :code:`r2`, :code:`u`, :code:`v`, :code:`w` and
+            :code:`comp` as above, :code:`comp` could also be computed as :code:`comp = r1.compose(r2,
+            RotationConvention.FRAME_TRANSFORM)`.
+        
+            Parameters:
+                r (:class:`~org.hipparchus.geometry.euclidean.threed.Rotation`): rotation to apply the rotation to
+                convention (:class:`~org.hipparchus.geometry.euclidean.threed.RotationConvention`): convention to use for the semantics of the angle
+        
+            Returns:
+                a new rotation which is the composition of r by the instance
+        
+        
+        """
+        ...
+    def composeInverse(self, rotation: 'Rotation', rotationConvention: 'RotationConvention') -> 'Rotation':
+        """
+            Compose the inverse of the instance with another rotation.
+        
+            If the semantics of the rotations composition corresponds to a
+            :meth:`~org.hipparchus.geometry.euclidean.threed.RotationConvention.VECTOR_OPERATOR` convention, applying the inverse of
+            the instance to a rotation is computing the composition in an order compliant with the following rule : let :code:`u` be
+            any vector and :code:`v` its image by :code:`r1` (i.e. :code:`r1.applyTo(u) = v`). Let :code:`w` be the inverse image of
+            :code:`v` by :code:`r2` (i.e. :code:`r2.applyInverseTo(v) = w`). Then :code:`w = comp.applyTo(u)`, where :code:`comp =
+            r2.composeInverse(r1)`.
+        
+            If the semantics of the rotations composition corresponds to a
+            :meth:`~org.hipparchus.geometry.euclidean.threed.RotationConvention.FRAME_TRANSFORM` convention, the application order
+            will be reversed, which means it is the *innermost* rotation that will be reversed. So keeping the exact same meaning of
+            all :code:`r1`, :code:`r2`, :code:`u`, :code:`v`, :code:`w` and :code:`comp` as above, :code:`comp` could also be
+            computed as :code:`comp = r1.revert().composeInverse(r2.revert(), RotationConvention.FRAME_TRANSFORM)`.
+        
+            Parameters:
+                r (:class:`~org.hipparchus.geometry.euclidean.threed.Rotation`): rotation to apply the rotation to
+                convention (:class:`~org.hipparchus.geometry.euclidean.threed.RotationConvention`): convention to use for the semantics of the angle
+        
+            Returns:
+                a new rotation which is the composition of r by the inverse of the instance
+        
+        
+        """
+        ...
     @staticmethod
-    def distance(rotation: 'Rotation', rotation2: 'Rotation') -> float: ...
-    def getAngle(self) -> float: ...
+    def distance(rotation: 'Rotation', rotation2: 'Rotation') -> float:
+        """
+            Compute the *distance* between two rotations.
+        
+            The *distance* is intended here as a way to check if two rotations are almost similar (i.e. they transform vectors the
+            same way) or very different. It is mathematically defined as the angle of the rotation r that prepended to one of the
+            rotations gives the other one: \(r_1(r) = r_2\)
+        
+            This distance is an angle between 0 and π. Its value is the smallest possible upper bound of the angle in radians
+            between r :sub:`1` (v) and r :sub:`2` (v) for all possible vectors v. This upper bound is reached for some v. The
+            distance is equal to 0 if and only if the two rotations are identical.
+        
+            Comparing two rotations should always be done using this value rather than for example comparing the components of the
+            quaternions. It is much more stable, and has a geometric meaning. Also comparing quaternions components is error prone
+            since for example quaternions (0.36, 0.48, -0.48, -0.64) and (-0.36, -0.48, 0.48, 0.64) represent exactly the same
+            rotation despite their components are different (they are exact opposites).
+        
+            Parameters:
+                r1 (:class:`~org.hipparchus.geometry.euclidean.threed.Rotation`): first rotation
+                r2 (:class:`~org.hipparchus.geometry.euclidean.threed.Rotation`): second rotation
+        
+            Returns:
+                *distance* between r1 and r2
+        
+        
+        """
+        ...
+    def getAngle(self) -> float:
+        """
+            Get the angle of the rotation.
+        
+            Returns:
+                angle of the rotation (between 0 and π)
+        
+            Also see:
+                :meth:`~org.hipparchus.geometry.euclidean.threed.Rotation.%3Cinit%3E`
+        
+        
+        """
+        ...
     def getAngles(self, rotationOrder: 'RotationOrder', rotationConvention: 'RotationConvention') -> typing.List[float]: ...
-    def getAxis(self, rotationConvention: 'RotationConvention') -> 'Vector3D': ...
-    def getMatrix(self) -> typing.List[typing.List[float]]: ...
-    def getQ0(self) -> float: ...
-    def getQ1(self) -> float: ...
-    def getQ2(self) -> float: ...
-    def getQ3(self) -> float: ...
-    def revert(self) -> 'Rotation': ...
+    def getAxis(self, rotationConvention: 'RotationConvention') -> 'Vector3D':
+        """
+            Get the normalized axis of the rotation.
+        
+            Note that as :meth:`~org.hipparchus.geometry.euclidean.threed.Rotation.getAngle` always returns an angle between 0 and
+            π, changing the convention changes the direction of the axis, not the sign of the angle.
+        
+            Parameters:
+                convention (:class:`~org.hipparchus.geometry.euclidean.threed.RotationConvention`): convention to use for the semantics of the angle
+        
+            Returns:
+                normalized axis of the rotation
+        
+            Also see:
+                :meth:`~org.hipparchus.geometry.euclidean.threed.Rotation.%3Cinit%3E`
+        
+        
+        """
+        ...
+    def getMatrix(self) -> typing.List[typing.List[float]]:
+        """
+            Get the 3X3 matrix corresponding to the instance
+        
+            Returns:
+                the matrix corresponding to the instance
+        
+        
+        """
+        ...
+    def getQ0(self) -> float:
+        """
+            Get the scalar coordinate of the quaternion.
+        
+            Returns:
+                scalar coordinate of the quaternion
+        
+        
+        """
+        ...
+    def getQ1(self) -> float:
+        """
+            Get the first coordinate of the vectorial part of the quaternion.
+        
+            Returns:
+                first coordinate of the vectorial part of the quaternion
+        
+        
+        """
+        ...
+    def getQ2(self) -> float:
+        """
+            Get the second coordinate of the vectorial part of the quaternion.
+        
+            Returns:
+                second coordinate of the vectorial part of the quaternion
+        
+        
+        """
+        ...
+    def getQ3(self) -> float:
+        """
+            Get the third coordinate of the vectorial part of the quaternion.
+        
+            Returns:
+                third coordinate of the vectorial part of the quaternion
+        
+        
+        """
+        ...
+    def revert(self) -> 'Rotation':
+        """
+            Revert a rotation. Build a rotation which reverse the effect of another rotation. This means that if r(u) = v, then
+            r.revert(v) = u. The instance is not changed.
+        
+            Returns:
+                a new rotation whose effect is the reverse of the effect of the instance
+        
+        
+        """
+        ...
 
 class RotationConvention(java.lang.Enum['RotationConvention']):
     """
@@ -1817,6 +2356,7 @@ class RotationConvention(java.lang.Enum['RotationConvention']):
         
             .. code-block: java
             
+            
             for (RotationConvention c : RotationConvention.values())
                 System.out.println(c);
             
@@ -1834,7 +2374,7 @@ class RotationOrder(java.lang.Enum['RotationOrder']):
     
         This class is a utility representing a rotation order specification for Cardan or Euler angles specification. This class
         cannot be instanciated by the user. He can only use one of the twelve predefined supported orders as an argument to
-        either the :meth:`~org.hipparchus.geometry.euclidean.threed.Rotation.Rotation` constructor or the
+        either the :meth:`~org.hipparchus.geometry.euclidean.threed.Rotation.%3Cinit%3E` constructor or the
         :meth:`~org.hipparchus.geometry.euclidean.threed.Rotation.getAngles` method. Since Hipparchus 1.7 this class is an
         enumerate class.
     """
@@ -1943,6 +2483,7 @@ class RotationOrder(java.lang.Enum['RotationOrder']):
         
             .. code-block: java
             
+            
             for (RotationOrder c : RotationOrder.values())
                 System.out.println(c);
             
@@ -1994,7 +2535,7 @@ class Segment:
 
 class SphereGenerator(org.hipparchus.geometry.enclosing.SupportBallGenerator[Euclidean3D, 'Vector3D']):
     """
-    public class SphereGenerator extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.enclosing.SupportBallGenerator`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`,:class:`~org.hipparchus.geometry.euclidean.threed.Vector3D`>
+    public class SphereGenerator extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.enclosing.SupportBallGenerator`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`, :class:`~org.hipparchus.geometry.euclidean.threed.Vector3D`>
     
         Class generating an enclosing ball from its support points.
     """
@@ -2158,16 +2699,16 @@ class SubLine:
 
 class SubPlane(org.hipparchus.geometry.partitioning.AbstractSubHyperplane[Euclidean3D, org.hipparchus.geometry.euclidean.twod.Euclidean2D]):
     """
-    public class SubPlane extends :class:`~org.hipparchus.geometry.partitioning.AbstractSubHyperplane`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`,:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`>
+    public class SubPlane extends :class:`~org.hipparchus.geometry.partitioning.AbstractSubHyperplane`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`, :class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`>
     
         This class represents a sub-hyperplane for :class:`~org.hipparchus.geometry.euclidean.threed.Plane`.
     """
     def __init__(self, hyperplane: org.hipparchus.geometry.partitioning.Hyperplane[Euclidean3D], region: org.hipparchus.geometry.partitioning.Region[org.hipparchus.geometry.euclidean.twod.Euclidean2D]): ...
     def split(self, hyperplane: org.hipparchus.geometry.partitioning.Hyperplane[Euclidean3D]) -> org.hipparchus.geometry.partitioning.SubHyperplane.SplitSubHyperplane[Euclidean3D]: ...
 
-class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D]):
+class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D, 'Vector3D']):
     """
-    public class Vector3D extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.hipparchus.geometry.Vector`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`>
+    public class Vector3D extends :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.euclidean.threed.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.hipparchus.geometry.Vector`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`, :class:`~org.hipparchus.geometry.euclidean.threed.Vector3D`>
     
         This class implements vectors in a three-dimensional space.
     
@@ -2261,13 +2802,13 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D]
     @typing.overload
     def __init__(self, doubleArray: typing.List[float]): ...
     @typing.overload
-    def add(self, double: float, vector: org.hipparchus.geometry.Vector[Euclidean3D]) -> 'Vector3D': ...
+    def add(self, double: float, vector: org.hipparchus.geometry.Vector[Euclidean3D, 'Vector3D']) -> 'Vector3D': ...
     @typing.overload
-    def add(self, vector: org.hipparchus.geometry.Vector[Euclidean3D]) -> 'Vector3D': ...
+    def add(self, vector: org.hipparchus.geometry.Vector[Euclidean3D, 'Vector3D']) -> 'Vector3D': ...
     @staticmethod
     def angle(vector3D: 'Vector3D', vector3D2: 'Vector3D') -> float: ...
     @typing.overload
-    def crossProduct(self, vector: org.hipparchus.geometry.Vector[Euclidean3D]) -> 'Vector3D':
+    def crossProduct(self, vector: org.hipparchus.geometry.Vector[Euclidean3D, 'Vector3D']) -> 'Vector3D':
         """
             Compute the cross-product of two vectors.
         
@@ -2306,7 +2847,7 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D]
     @staticmethod
     def distance(vector3D: 'Vector3D', vector3D2: 'Vector3D') -> float: ...
     @typing.overload
-    def distance1(self, vector: org.hipparchus.geometry.Vector[Euclidean3D]) -> float:
+    def distance1(self, vector: org.hipparchus.geometry.Vector[Euclidean3D, 'Vector3D']) -> float:
         """
             Compute the distance between two vectors according to the L :sub:`1` norm.
         
@@ -2327,7 +2868,7 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D]
     @staticmethod
     def distance1(vector3D: 'Vector3D', vector3D2: 'Vector3D') -> float: ...
     @typing.overload
-    def distanceInf(self, vector: org.hipparchus.geometry.Vector[Euclidean3D]) -> float:
+    def distanceInf(self, vector: org.hipparchus.geometry.Vector[Euclidean3D, 'Vector3D']) -> float:
         """
             Compute the distance between two vectors according to the L :sub:`∞` norm.
         
@@ -2348,7 +2889,7 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D]
     @staticmethod
     def distanceInf(vector3D: 'Vector3D', vector3D2: 'Vector3D') -> float: ...
     @typing.overload
-    def distanceSq(self, vector: org.hipparchus.geometry.Vector[Euclidean3D]) -> float:
+    def distanceSq(self, vector: org.hipparchus.geometry.Vector[Euclidean3D, 'Vector3D']) -> float:
         """
             Compute the square of the distance between two vectors.
         
@@ -2369,7 +2910,7 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D]
     @staticmethod
     def distanceSq(vector3D: 'Vector3D', vector3D2: 'Vector3D') -> float: ...
     @typing.overload
-    def dotProduct(self, vector: org.hipparchus.geometry.Vector[Euclidean3D]) -> float:
+    def dotProduct(self, vector: org.hipparchus.geometry.Vector[Euclidean3D, 'Vector3D']) -> float:
         """
             Compute the dot-product of two vectors.
         
@@ -2444,7 +2985,7 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D]
                 azimuth (α) of the vector, between -π and +π
         
             Also see:
-                :meth:`~org.hipparchus.geometry.euclidean.threed.Vector3D.Vector3D`
+                :meth:`~org.hipparchus.geometry.euclidean.threed.Vector3D.%3Cinit%3E`
         
         
         """
@@ -2457,7 +2998,7 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D]
                 elevation (δ) of the vector, between -π/2 and +π/2
         
             Also see:
-                :meth:`~org.hipparchus.geometry.euclidean.threed.Vector3D.Vector3D`
+                :meth:`~org.hipparchus.geometry.euclidean.threed.Vector3D.%3Cinit%3E`
         
         
         """
@@ -2535,7 +3076,7 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D]
                 abscissa of the vector
         
             Also see:
-                :meth:`~org.hipparchus.geometry.euclidean.threed.Vector3D.Vector3D`
+                :meth:`~org.hipparchus.geometry.euclidean.threed.Vector3D.%3Cinit%3E`
         
         
         """
@@ -2548,7 +3089,7 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D]
                 ordinate of the vector
         
             Also see:
-                :meth:`~org.hipparchus.geometry.euclidean.threed.Vector3D.Vector3D`
+                :meth:`~org.hipparchus.geometry.euclidean.threed.Vector3D.%3Cinit%3E`
         
         
         """
@@ -2561,7 +3102,7 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D]
                 height of the vector
         
             Also see:
-                :meth:`~org.hipparchus.geometry.euclidean.threed.Vector3D.Vector3D`
+                :meth:`~org.hipparchus.geometry.euclidean.threed.Vector3D.%3Cinit%3E`
         
         
         """
@@ -2634,7 +3175,6 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D]
         
         """
         ...
-    def normalize(self) -> 'Vector3D': ...
     def orthogonal(self) -> 'Vector3D': ...
     def scalarMultiply(self, double: float) -> 'Vector3D':
         """
@@ -2653,9 +3193,9 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D]
         """
         ...
     @typing.overload
-    def subtract(self, double: float, vector: org.hipparchus.geometry.Vector[Euclidean3D]) -> 'Vector3D': ...
+    def subtract(self, double: float, vector: org.hipparchus.geometry.Vector[Euclidean3D, 'Vector3D']) -> 'Vector3D': ...
     @typing.overload
-    def subtract(self, vector: org.hipparchus.geometry.Vector[Euclidean3D]) -> 'Vector3D': ...
+    def subtract(self, vector: org.hipparchus.geometry.Vector[Euclidean3D, 'Vector3D']) -> 'Vector3D': ...
     def toArray(self) -> typing.List[float]:
         """
             Get the vector coordinates as a dimension 3 array.
@@ -2664,7 +3204,7 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D]
                 vector coordinates
         
             Also see:
-                :meth:`~org.hipparchus.geometry.euclidean.threed.Vector3D.Vector3D`
+                :meth:`~org.hipparchus.geometry.euclidean.threed.Vector3D.%3Cinit%3E`
         
         
         """
@@ -2701,9 +3241,9 @@ class Vector3D(java.io.Serializable, org.hipparchus.geometry.Vector[Euclidean3D]
         """
         ...
 
-class Vector3DFormat(org.hipparchus.geometry.VectorFormat[Euclidean3D]):
+class Vector3DFormat(org.hipparchus.geometry.VectorFormat[Euclidean3D, Vector3D]):
     """
-    public class Vector3DFormat extends :class:`~org.hipparchus.geometry.VectorFormat`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`>
+    public class Vector3DFormat extends :class:`~org.hipparchus.geometry.VectorFormat`<:class:`~org.hipparchus.geometry.euclidean.threed.Euclidean3D`, :class:`~org.hipparchus.geometry.euclidean.threed.Vector3D`>
     
         Formats a 3D vector in components list format "{x; y; z}".
     
@@ -2730,9 +3270,9 @@ class Vector3DFormat(org.hipparchus.geometry.VectorFormat[Euclidean3D]):
     @typing.overload
     def __init__(self, numberFormat: java.text.NumberFormat): ...
     @typing.overload
-    def format(self, vector: org.hipparchus.geometry.Vector[org.hipparchus.geometry.Space]) -> str: ...
+    def format(self, vector: org.hipparchus.geometry.Vector[org.hipparchus.geometry.Space, org.hipparchus.geometry.Vector]) -> str: ...
     @typing.overload
-    def format(self, vector: org.hipparchus.geometry.Vector[Euclidean3D], stringBuffer: java.lang.StringBuffer, fieldPosition: java.text.FieldPosition) -> java.lang.StringBuffer: ...
+    def format(self, vector: org.hipparchus.geometry.Vector[Euclidean3D, Vector3D], stringBuffer: java.lang.StringBuffer, fieldPosition: java.text.FieldPosition) -> java.lang.StringBuffer: ...
     @typing.overload
     @staticmethod
     def getVector3DFormat() -> 'Vector3DFormat':

@@ -11,7 +11,7 @@ import typing
 
 class Circle(org.hipparchus.geometry.partitioning.Hyperplane['Sphere2D'], org.hipparchus.geometry.partitioning.Embedding['Sphere2D', org.hipparchus.geometry.spherical.oned.Sphere1D]):
     """
-    public class Circle extends :class:`~org.hipparchus.geometry.spherical.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.partitioning.Hyperplane`<:class:`~org.hipparchus.geometry.spherical.twod.Sphere2D`>, :class:`~org.hipparchus.geometry.partitioning.Embedding`<:class:`~org.hipparchus.geometry.spherical.twod.Sphere2D`,:class:`~org.hipparchus.geometry.spherical.oned.Sphere1D`>
+    public class Circle extends :class:`~org.hipparchus.geometry.spherical.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.partitioning.Hyperplane`<:class:`~org.hipparchus.geometry.spherical.twod.Sphere2D`>, :class:`~org.hipparchus.geometry.partitioning.Embedding`<:class:`~org.hipparchus.geometry.spherical.twod.Sphere2D`, :class:`~org.hipparchus.geometry.spherical.oned.Sphere1D`>
     
         This class represents an oriented great circle on the 2-sphere.
     
@@ -491,7 +491,7 @@ class S2Point(org.hipparchus.geometry.Point['Sphere2D']):
                 polar angle \( \varphi \)
         
             Also see:
-                :meth:`~org.hipparchus.geometry.spherical.twod.S2Point.S2Point`
+                :meth:`~org.hipparchus.geometry.spherical.twod.S2Point.%3Cinit%3E`
         
         
         """
@@ -517,7 +517,7 @@ class S2Point(org.hipparchus.geometry.Point['Sphere2D']):
                 azimuthal angle \( \theta \) in the x-y plane
         
             Also see:
-                :meth:`~org.hipparchus.geometry.spherical.twod.S2Point.S2Point`
+                :meth:`~org.hipparchus.geometry.spherical.twod.S2Point.%3Cinit%3E`
         
         
         """
@@ -652,7 +652,7 @@ class Sphere2D(java.io.Serializable, org.hipparchus.geometry.Space):
 
 class SphericalPolygonsSet(org.hipparchus.geometry.partitioning.AbstractRegion[Sphere2D, org.hipparchus.geometry.spherical.oned.Sphere1D]):
     """
-    public class SphericalPolygonsSet extends :class:`~org.hipparchus.geometry.partitioning.AbstractRegion`<:class:`~org.hipparchus.geometry.spherical.twod.Sphere2D`,:class:`~org.hipparchus.geometry.spherical.oned.Sphere1D`>
+    public class SphericalPolygonsSet extends :class:`~org.hipparchus.geometry.partitioning.AbstractRegion`<:class:`~org.hipparchus.geometry.spherical.twod.Sphere2D`, :class:`~org.hipparchus.geometry.spherical.oned.Sphere1D`>
     
         This class represents a region on the 2-sphere: a set of spherical polygons.
     """
@@ -674,7 +674,7 @@ class SphericalPolygonsSet(org.hipparchus.geometry.partitioning.AbstractRegion[S
 
 class SubCircle(org.hipparchus.geometry.partitioning.AbstractSubHyperplane[Sphere2D, org.hipparchus.geometry.spherical.oned.Sphere1D]):
     """
-    public class SubCircle extends :class:`~org.hipparchus.geometry.partitioning.AbstractSubHyperplane`<:class:`~org.hipparchus.geometry.spherical.twod.Sphere2D`,:class:`~org.hipparchus.geometry.spherical.oned.Sphere1D`>
+    public class SubCircle extends :class:`~org.hipparchus.geometry.partitioning.AbstractSubHyperplane`<:class:`~org.hipparchus.geometry.spherical.twod.Sphere2D`, :class:`~org.hipparchus.geometry.spherical.oned.Sphere1D`>
     
         This class represents a sub-hyperplane for :class:`~org.hipparchus.geometry.spherical.twod.Circle`.
     """

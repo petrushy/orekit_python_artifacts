@@ -90,13 +90,7 @@ class LinearProcess(typing.Generic[_LinearProcess__T]):
     
         This interface must be implemented by users to represent the behavior of the process to be estimated
     
-        A linear process is governed by the equation:
-    
-    
-        x :sub:`k` = A :sub:`k-1` x :sub:`k-1` + B :sub:`k-1` u :sub:`k-1` + w :sub:`k-1`
-    
-    
-        where
+        A linear process is governed by the equation: \( x_k = A_{k-1} x_{k-1} + B_{k-1} u_{k-1} + w_{k-1} \) where
     
           - A :sub:`k-1` is the state transition matrix in the absence of control,
           - B :sub:`k-1` is the control matrix,

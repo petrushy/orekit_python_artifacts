@@ -1,5 +1,6 @@
 import java.lang
 import java.util
+import java.util.function
 import org.orekit.data
 import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.ndm.odm
@@ -17,9 +18,9 @@ import typing
 
 
 
-class EphemerisWriter(org.orekit.files.general.EphemerisFileWriter):
+class EphemerisOemWriter(org.orekit.files.general.EphemerisFileWriter):
     """
-    public class EphemerisWriter extends :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFileWriter`
+    public class EphemerisOemWriter extends :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.general.EphemerisFileWriter`
     
         An :class:`~org.orekit.files.general.EphemerisFileWriter` generating :class:`~org.orekit.files.ccsds.ndm.odm.oem.Oem`
         files.
@@ -32,7 +33,7 @@ class EphemerisWriter(org.orekit.files.general.EphemerisFileWriter):
             :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.public.ccsds.org.Pubs.500x0g4.pdf`,
             :class:`~org.orekit.files.ccsds.ndm.odm.oem.StreamingOemWriter`
     """
-    def __init__(self, oemWriter: 'OemWriter', header: org.orekit.files.ccsds.section.Header, oemMetadata: 'OemMetadata', fileFormat: org.orekit.files.ccsds.utils.FileFormat, string: str, int: int): ...
+    def __init__(self, oemWriter: 'OemWriter', odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, oemMetadata: 'OemMetadata', fileFormat: org.orekit.files.ccsds.utils.FileFormat, string: str, double: float, int: int): ...
     _write_0__C = typing.TypeVar('_write_0__C', bound=org.orekit.utils.TimeStampedPVCoordinates)  # <C>
     _write_0__S = typing.TypeVar('_write_0__S', bound=org.orekit.files.general.EphemerisFile.EphemerisSegment)  # <S>
     _write_1__C = typing.TypeVar('_write_1__C', bound=org.orekit.utils.TimeStampedPVCoordinates)  # <C>
@@ -98,9 +99,9 @@ class InterpolationMethod(java.lang.Enum['InterpolationMethod']):
         """
         ...
 
-class Oem(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.section.Header, 'OemSegment'], org.orekit.files.general.EphemerisFile[org.orekit.utils.TimeStampedPVCoordinates, 'OemSegment']):
+class Oem(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.ndm.odm.OdmHeader, 'OemSegment'], org.orekit.files.general.EphemerisFile[org.orekit.utils.TimeStampedPVCoordinates, 'OemSegment']):
     """
-    public class Oem extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.section.Header`, :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemSegment`> implements :class:`~org.orekit.files.general.EphemerisFile`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`, :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemSegment`>
+    public class Oem extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.ndm.odm.OdmHeader`, :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemSegment`> implements :class:`~org.orekit.files.general.EphemerisFile`<:class:`~org.orekit.utils.TimeStampedPVCoordinates`, :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemSegment`>
     
         This class stores all the information of the OEM File parsed by OEMParser.
     
@@ -132,7 +133,7 @@ class Oem(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.secti
     
     
     """
-    def __init__(self, header: org.orekit.files.ccsds.section.Header, list: java.util.List['OemSegment'], iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext, double: float): ...
+    def __init__(self, odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, list: java.util.List['OemSegment'], iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext, double: float): ...
     def checkTimeSystems(self) -> None:
         """
             Check that, according to the CCSDS standard, every OEMBlock has the same time system.
@@ -186,9 +187,9 @@ class OemData(org.orekit.files.ccsds.section.CommentsContainer, org.orekit.files
     def getCovarianceMatrices(self) -> java.util.List[org.orekit.files.ccsds.ndm.odm.CartesianCovariance]: ...
     def getEphemeridesDataLines(self) -> java.util.List[org.orekit.utils.TimeStampedPVCoordinates]: ...
 
-class OemMetadata(org.orekit.files.ccsds.ndm.odm.CommonMetadata):
+class OemMetadata(org.orekit.files.ccsds.ndm.odm.OdmCommonMetadata):
     """
-    public class OemMetadata extends :class:`~org.orekit.files.ccsds.ndm.odm.CommonMetadata`
+    public class OemMetadata extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmCommonMetadata`
     
         Metadata for Orbit Ephemeris Messages.
     
@@ -326,8 +327,8 @@ class OemMetadata(org.orekit.files.ccsds.ndm.odm.CommonMetadata):
                 :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
         
             Overrides:
-                :meth:`~org.orekit.files.ccsds.ndm.odm.CommonMetadata.validate` in
-                class :class:`~org.orekit.files.ccsds.ndm.odm.CommonMetadata`
+                :meth:`~org.orekit.files.ccsds.ndm.odm.OdmCommonMetadata.validate` in
+                class :class:`~org.orekit.files.ccsds.ndm.odm.OdmCommonMetadata`
         
             Parameters:
                 version (double): format version
@@ -423,7 +424,7 @@ class OemParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Oem, 'OemParser'], org.
         Since:
             6.1
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, double: float, int: int, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior): ...
+    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, double: float, int: int, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]): ...
     def build(self) -> Oem:
         """
             Build the file from parsed entries.
@@ -480,7 +481,7 @@ class OemParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Oem, 'OemParser'], org.
         
         """
         ...
-    def getHeader(self) -> org.orekit.files.ccsds.section.Header:
+    def getHeader(self) -> org.orekit.files.ccsds.ndm.odm.OdmHeader:
         """
             Get file header to fill.
         
@@ -813,9 +814,9 @@ class OemSegment(org.orekit.files.ccsds.section.Segment[OemMetadata, OemData], o
         """
         ...
 
-class OemWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[org.orekit.files.ccsds.section.Header, OemSegment, Oem]):
+class OemWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[org.orekit.files.ccsds.ndm.odm.OdmHeader, OemSegment, Oem]):
     """
-    public class OemWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.section.Header`, :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemSegment`, :class:`~org.orekit.files.ccsds.ndm.odm.oem.Oem`>
+    public class OemWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.ndm.odm.OdmHeader`, :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemSegment`, :class:`~org.orekit.files.ccsds.ndm.odm.oem.Oem`>
     
         A writer for Orbit Ephemeris Message (OEM) files.
     
@@ -881,7 +882,6 @@ class OemWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[or
     
     """
     def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate): ...
-    def writeSegmentContent(self, generator: org.orekit.files.ccsds.utils.generation.Generator, double: float, oemSegment: OemSegment) -> None: ...
 
 class StreamingOemWriter(java.lang.AutoCloseable):
     """
@@ -892,14 +892,14 @@ class StreamingOemWriter(java.lang.AutoCloseable):
         Each instance corresponds to a single OEM file. A new OEM ephemeris segment is started by calling
         :meth:`~org.orekit.files.ccsds.ndm.odm.oem.StreamingOemWriter.newSegment`.
     
-        This class can be used as a step handler for a :class:`~org.orekit.propagation.Propagator`.
+        The segments returned by this class can be used as step handlers for a :class:`~org.orekit.propagation.Propagator`.
     
         .. code-block: java
         
          Propagator propagator = ...; // pre-configured propagator
          OEMWriter  aemWriter  = ...; // pre-configured writer
            try (Generator out = ...;  // set-up output stream
-                StreamingOemWriter sw = new StreamingOemWriter(out, oemWriter)) { // set-up streaming writer
+                StreamingOemWriter sw = new StreamingOemWriter(out, oemWriter, header, metadata)) { // set-up streaming writer
         
              // write segment 1
              propagator.getMultiplexer().add(step, sw.newSegment());
@@ -921,11 +921,11 @@ class StreamingOemWriter(java.lang.AutoCloseable):
             :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemWriter`
     """
     @typing.overload
-    def __init__(self, generator: org.orekit.files.ccsds.utils.generation.Generator, oemWriter: OemWriter, header: org.orekit.files.ccsds.section.Header, oemMetadata: OemMetadata): ...
+    def __init__(self, generator: org.orekit.files.ccsds.utils.generation.Generator, oemWriter: OemWriter, odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, oemMetadata: OemMetadata): ...
     @typing.overload
-    def __init__(self, generator: org.orekit.files.ccsds.utils.generation.Generator, oemWriter: OemWriter, header: org.orekit.files.ccsds.section.Header, oemMetadata: OemMetadata, boolean: bool): ...
+    def __init__(self, generator: org.orekit.files.ccsds.utils.generation.Generator, oemWriter: OemWriter, odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, oemMetadata: OemMetadata, boolean: bool): ...
     @typing.overload
-    def __init__(self, generator: org.orekit.files.ccsds.utils.generation.Generator, oemWriter: OemWriter, header: org.orekit.files.ccsds.section.Header, oemMetadata: OemMetadata, boolean: bool, boolean2: bool): ...
+    def __init__(self, generator: org.orekit.files.ccsds.utils.generation.Generator, oemWriter: OemWriter, odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, oemMetadata: OemMetadata, boolean: bool, boolean2: bool): ...
     def close(self) -> None: ...
     def newSegment(self) -> 'StreamingOemWriter.SegmentWriter':
         """
@@ -950,7 +950,7 @@ class StreamingOemWriter(java.lang.AutoCloseable):
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.ndm.odm.oem")``.
 
-    EphemerisWriter: typing.Type[EphemerisWriter]
+    EphemerisOemWriter: typing.Type[EphemerisOemWriter]
     InterpolationMethod: typing.Type[InterpolationMethod]
     Oem: typing.Type[Oem]
     OemData: typing.Type[OemData]

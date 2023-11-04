@@ -3,6 +3,7 @@ import org.hipparchus.geometry.euclidean.threed
 import org.orekit.bodies
 import org.orekit.data
 import org.orekit.frames
+import org.orekit.time
 import org.orekit.utils
 import typing
 
@@ -604,6 +605,41 @@ class PythonStationDisplacement(StationDisplacement):
         """
         ...
 
+class TectonicsDisplacement(StationDisplacement):
+    """
+    public class TectonicsDisplacement extends :class:`~org.orekit.models.earth.displacement.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.displacement.StationDisplacement`
+    
+        Modeling of displacement of reference points due to plate tectonics.
+    
+        Instances of this class are guaranteed to be immutable
+    
+        Since:
+            12.0
+    
+        Also see:
+            :class:`~org.orekit.estimation.measurements.GroundStation`, :class:`~org.orekit.files.sinex.package`
+    """
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
+    def displacement(self, bodiesElements: org.orekit.data.BodiesElements, frame: org.orekit.frames.Frame, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Compute displacement of a ground reference point.
+        
+            Specified by:
+                :meth:`~org.orekit.models.earth.displacement.StationDisplacement.displacement` in
+                interface :class:`~org.orekit.models.earth.displacement.StationDisplacement`
+        
+            Parameters:
+                elements (:class:`~org.orekit.data.BodiesElements`): elements affecting Earth orientation
+                earthFrame (:class:`~org.orekit.frames.Frame`): Earth frame in which reference point is defined
+                referencePoint (:class:`~org.orekit.models.earth.displacement.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): reference point position in :code:`earthFrame`
+        
+            Returns:
+                displacement vector to be *added* to :code:`referencePoint`
+        
+        
+        """
+        ...
+
 class TidalDisplacement(StationDisplacement):
     """
     public class TidalDisplacement extends :class:`~org.orekit.models.earth.displacement.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.displacement.StationDisplacement`
@@ -656,5 +692,6 @@ class __module_protocol__(typing.Protocol):
     OceanLoadingCoefficientsBLQFactory: typing.Type[OceanLoadingCoefficientsBLQFactory]
     PythonStationDisplacement: typing.Type[PythonStationDisplacement]
     StationDisplacement: typing.Type[StationDisplacement]
+    TectonicsDisplacement: typing.Type[TectonicsDisplacement]
     TidalDisplacement: typing.Type[TidalDisplacement]
     Tide: typing.Type[Tide]

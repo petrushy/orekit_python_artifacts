@@ -2354,6 +2354,21 @@ class PythonStreamOpener(DataSource.StreamOpener):
         """
         ...
 
+class TruncatingFilter(DataFilter):
+    """
+    public class TruncatingFilter extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataFilter`
+    
+        Filter for truncating line-oriented files.
+    
+        This filter is mainly intended for test purposes, but may also be used to filter out unwanted trailing data in time
+        series for example
+    
+        Since:
+            12.0
+    """
+    def __init__(self, int: int): ...
+    def filter(self, dataSource: DataSource) -> DataSource: ...
+
 class UnixCompressFilter(DataFilter):
     """
     public class UnixCompressFilter extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataFilter`
@@ -2464,7 +2479,6 @@ class ExceptionalDataContext(LazyLoadedDataContext, DataContext):
         have static fields that are initialized using the default data context:
     
           - :class:`~org.orekit.time.AbsoluteDate`
-          - :class:`~org.orekit.attitudes.InertialProvider`
     
     
         Since:
@@ -2746,5 +2760,6 @@ class __module_protocol__(typing.Protocol):
     PythonStreamOpener: typing.Type[PythonStreamOpener]
     SeriesTerm: typing.Type[SeriesTerm]
     SimpleTimeStampedTableParser: typing.Type[SimpleTimeStampedTableParser]
+    TruncatingFilter: typing.Type[TruncatingFilter]
     UnixCompressFilter: typing.Type[UnixCompressFilter]
     ZipJarCrawler: typing.Type[ZipJarCrawler]

@@ -1035,7 +1035,30 @@ class Ellipsoid(java.io.Serializable):
         
         """
         ...
+    _getPlaneSection_1__T = typing.TypeVar('_getPlaneSection_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
     def getPlaneSection(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D) -> Ellipse: ...
+    @typing.overload
+    def getPlaneSection(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getPlaneSection_1__T], fieldVector3D2: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getPlaneSection_1__T]) -> 'FieldEllipse'[_getPlaneSection_1__T]: ...
+    _isInside_0__T = typing.TypeVar('_isInside_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def isInside(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_isInside_0__T]) -> bool:
+        """
+            Check if a point is inside the ellipsoid.
+        
+            Parameters:
+                point (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> point): point to check, in the ellipsoid frame
+        
+            Returns:
+                true if the point is inside the ellipsoid (or exactly on ellipsoid surface)
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
+    @typing.overload
     def isInside(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> bool:
         """
             Check if a point is inside the ellipsoid.
@@ -1049,10 +1072,73 @@ class Ellipsoid(java.io.Serializable):
             Since:
                 7.1
         
+        """
+        ...
+    _pointOnLimb_0__T = typing.TypeVar('_pointOnLimb_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def pointOnLimb(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_pointOnLimb_0__T], fieldVector3D2: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_pointOnLimb_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_pointOnLimb_0__T]: ...
+    @typing.overload
+    def pointOnLimb(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+
+_FieldEllipse__T = typing.TypeVar('_FieldEllipse__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldEllipse(typing.Generic[_FieldEllipse__T]):
+    """
+    public class FieldEllipse<T extends :class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Model of a 2D ellipse in 3D space.
+    
+        These ellipses are mainly created as plane sections of general 3D ellipsoids, but can be used for other purposes.
+    
+        Instances of this class are guaranteed to be immutable.
+    
+        Since:
+            12.0
+    
+        Also see:
+            :meth:`~org.orekit.bodies.Ellipsoid.getPlaneSection`
+    """
+    def __init__(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldEllipse__T], fieldVector3D2: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldEllipse__T], fieldVector3D3: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldEllipse__T], t: _FieldEllipse__T, t2: _FieldEllipse__T, frame: org.orekit.frames.Frame): ...
+    def getA(self) -> _FieldEllipse__T:
+        """
+            Get the semi major axis.
+        
+            Returns:
+                semi major axis
+        
         
         """
         ...
-    def pointOnLimb(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def getB(self) -> _FieldEllipse__T:
+        """
+            Get the semi minor axis.
+        
+            Returns:
+                semi minor axis
+        
+        
+        """
+        ...
+    def getCenter(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldEllipse__T]: ...
+    def getCenterOfCurvature(self, fieldVector2D: org.hipparchus.geometry.euclidean.twod.FieldVector2D[_FieldEllipse__T]) -> org.hipparchus.geometry.euclidean.twod.FieldVector2D[_FieldEllipse__T]: ...
+    def getFrame(self) -> org.orekit.frames.Frame:
+        """
+            Get the defining frame.
+        
+            Returns:
+                defining frame
+        
+        
+        """
+        ...
+    def getU(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldEllipse__T]: ...
+    def getV(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldEllipse__T]: ...
+    def pointAt(self, t: _FieldEllipse__T) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldEllipse__T]: ...
+    @typing.overload
+    def projectToEllipse(self, fieldVector2D: org.hipparchus.geometry.euclidean.twod.FieldVector2D[_FieldEllipse__T]) -> org.hipparchus.geometry.euclidean.twod.FieldVector2D[_FieldEllipse__T]: ...
+    @typing.overload
+    def projectToEllipse(self, timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldEllipse__T]) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldEllipse__T]: ...
+    def toPlane(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldEllipse__T]) -> org.hipparchus.geometry.euclidean.twod.FieldVector2D[_FieldEllipse__T]: ...
+    def toSpace(self, fieldVector2D: org.hipparchus.geometry.euclidean.twod.FieldVector2D[_FieldEllipse__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldEllipse__T]: ...
 
 _FieldGeodeticPoint__T = typing.TypeVar('_FieldGeodeticPoint__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldGeodeticPoint(typing.Generic[_FieldGeodeticPoint__T]):
@@ -1672,6 +1758,11 @@ class JPLEphemeridesLoader(org.orekit.data.AbstractSelfFeedingLoader, CelestialB
         def getRawPV(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getRawPV_0__T]) -> org.orekit.utils.FieldPVCoordinates[_getRawPV_0__T]: ...
         @typing.overload
         def getRawPV(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.utils.PVCoordinates: ...
+        _getRawPosition_0__T = typing.TypeVar('_getRawPosition_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+        @typing.overload
+        def getRawPosition(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getRawPosition_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getRawPosition_0__T]: ...
+        @typing.overload
+        def getRawPosition(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
 
 class LazyLoadedCelestialBodies(CelestialBodies):
     """
@@ -2296,6 +2387,42 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
         
         """
         ...
+    _lowestAltitudeIntermediate_0__T = typing.TypeVar('_lowestAltitudeIntermediate_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def lowestAltitudeIntermediate(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_lowestAltitudeIntermediate_0__T], fieldVector3D2: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_lowestAltitudeIntermediate_0__T]) -> FieldGeodeticPoint[_lowestAltitudeIntermediate_0__T]:
+        """
+            Find intermediate point of lowest altitude along a line between two endpoints.
+        
+            Parameters:
+                endpoint1 (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> endpoint1): first endpoint, in body frame
+                endpoint2 (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> endpoint2): second endpoint, in body frame
+        
+            Returns:
+                point with lowest altitude between :code:`endpoint1` and :code:`endpoint2`.
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
+    @typing.overload
+    def lowestAltitudeIntermediate(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D) -> GeodeticPoint:
+        """
+            Find intermediate point of lowest altitude along a line between two endpoints.
+        
+            Parameters:
+                endpoint1 (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): first endpoint, in body frame
+                endpoint2 (:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): second endpoint, in body frame
+        
+            Returns:
+                point with lowest altitude between :code:`endpoint1` and :code:`endpoint2`.
+        
+            Since:
+                12.0
+        
+        """
+        ...
     @typing.overload
     def projectToGround(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
@@ -2398,6 +2525,13 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
               - in order to handle very flat ellipsoids
         
         
+            In some rare cases (for example very flat ellipsoid, or points close to ellipsoid center), the loop may fail to
+            converge. As this seems to happen only in degenerate cases, a design choice was to return an approximate point
+            corresponding to last iteration. This point may be incorrect and fail to give the initial point back if doing roundtrip
+            by calling :meth:`~org.orekit.bodies.OneAxisEllipsoid.transform`. This design choice was made to avoid NaNs appearing
+            for example in inter-satellites visibility checks when two satellites are almost on opposite sides of Earth. The
+            intermediate points far within the Earth should not prevent the detection algorithm to find visibility start/end.
+        
             Specified by:
                 :meth:`~org.orekit.bodies.BodyShape.transform` in interface :class:`~org.orekit.bodies.BodyShape`
         
@@ -2426,6 +2560,13 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
               - in order to handle properly corner cases near the equatorial plane, even far inside the ellipsoid
               - in order to handle very flat ellipsoids
         
+        
+            In some rare cases (for example very flat ellipsoid, or points close to ellipsoid center), the loop may fail to
+            converge. As this seems to happen only in degenerate cases, a design choice was to return an approximate point
+            corresponding to last iteration. This point may be incorrect and fail to give the initial point back if doing roundtrip
+            by calling :meth:`~org.orekit.bodies.OneAxisEllipsoid.transform`. This design choice was made to avoid NaNs appearing
+            for example in inter-satellites visibility checks when two satellites are almost on opposite sides of Earth. The
+            intermediate points far within the Earth should not prevent the detection algorithm to find visibility start/end.
         
             Specified by:
                 :meth:`~org.orekit.bodies.BodyShape.transform` in interface :class:`~org.orekit.bodies.BodyShape`
@@ -3356,6 +3497,7 @@ class __module_protocol__(typing.Protocol):
     CelestialBodyLoader: typing.Type[CelestialBodyLoader]
     Ellipse: typing.Type[Ellipse]
     Ellipsoid: typing.Type[Ellipsoid]
+    FieldEllipse: typing.Type[FieldEllipse]
     FieldGeodeticPoint: typing.Type[FieldGeodeticPoint]
     GeodeticPoint: typing.Type[GeodeticPoint]
     IAUPole: typing.Type[IAUPole]

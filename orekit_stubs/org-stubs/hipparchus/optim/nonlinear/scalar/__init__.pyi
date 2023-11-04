@@ -50,6 +50,7 @@ class GoalType(java.lang.Enum['GoalType'], org.hipparchus.optim.OptimizationData
         
             .. code-block: java
             
+            
             for (GoalType c : GoalType.values())
                 System.out.println(c);
             
@@ -62,13 +63,49 @@ class GoalType(java.lang.Enum['GoalType'], org.hipparchus.optim.OptimizationData
         ...
 
 class LeastSquaresConverter(org.hipparchus.analysis.MultivariateFunction):
+    """
+    public class LeastSquaresConverter extends :class:`~org.hipparchus.optim.nonlinear.scalar.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.optim.nonlinear.scalar.https:.www.hipparchus.org.hipparchus`
+    
+        This class converts :class:`~org.hipparchus.optim.nonlinear.scalar.https:.www.hipparchus.org.hipparchus` to
+        :class:`~org.hipparchus.optim.nonlinear.scalar.https:.www.hipparchus.org.hipparchus` when the goal is to minimize them.
+    
+    
+        This class is mostly used when the vectorial objective function represents a theoretical result computed from a point
+        set applied to a model and the models point must be adjusted to fit the theoretical result to some reference
+        observations. The observations may be obtained for example from physical measurements whether the model is built from
+        theoretical considerations.
+    
+    
+        This class computes a possibly weighted squared sum of the residuals, which is a scalar value. The residuals are the
+        difference between the theoretical model (i.e. the output of the vectorial objective function) and the observations. The
+        class implements the :class:`~org.hipparchus.optim.nonlinear.scalar.https:.www.hipparchus.org.hipparchus` interface and
+        can therefore be minimized by any optimizer supporting scalar objectives functions.This is one way to perform a least
+        square estimation. There are other ways to do this without using this converter, as some optimization algorithms
+        directly support vectorial objective functions.
+    
+    
+        This class support combination of residuals with or without weights and correlations.
+    
+        Also see:
+            :class:`~org.hipparchus.optim.nonlinear.scalar.https:.www.hipparchus.org.hipparchus`,
+            :class:`~org.hipparchus.optim.nonlinear.scalar.https:.www.hipparchus.org.hipparchus`
+    """
     @typing.overload
     def __init__(self, multivariateVectorFunction: org.hipparchus.analysis.MultivariateVectorFunction, doubleArray: typing.List[float]): ...
     @typing.overload
     def __init__(self, multivariateVectorFunction: org.hipparchus.analysis.MultivariateVectorFunction, doubleArray: typing.List[float], doubleArray2: typing.List[float]): ...
     @typing.overload
     def __init__(self, multivariateVectorFunction: org.hipparchus.analysis.MultivariateVectorFunction, doubleArray: typing.List[float], realMatrix: org.hipparchus.linear.RealMatrix): ...
-    def value(self, doubleArray: typing.List[float]) -> float: ...
+    def value(self, doubleArray: typing.List[float]) -> float:
+        """
+        
+            Specified by:
+                :meth:`~org.hipparchus.optim.nonlinear.scalar.https:.www.hipparchus.org.hipparchus` in
+                interface :class:`~org.hipparchus.optim.nonlinear.scalar.https:.www.hipparchus.org.hipparchus`
+        
+        
+        """
+        ...
 
 class LineSearch:
     """
@@ -96,8 +133,40 @@ class LineSearch:
         ...
 
 class MultiStartMultivariateOptimizer(org.hipparchus.optim.BaseMultiStartMultivariateOptimizer[org.hipparchus.optim.PointValuePair]):
+    """
+    public class MultiStartMultivariateOptimizer extends :class:`~org.hipparchus.optim.BaseMultiStartMultivariateOptimizer`<:class:`~org.hipparchus.optim.PointValuePair`>
+    
+        Multi-start optimizer. This class wraps an optimizer in order to use it several times in turn with different starting
+        points (trying to avoid being trapped in a local extremum when looking for a global one).
+    """
     def __init__(self, multivariateOptimizer: 'MultivariateOptimizer', int: int, randomVectorGenerator: org.hipparchus.random.RandomVectorGenerator): ...
-    def getOptima(self) -> typing.List[org.hipparchus.optim.PointValuePair]: ...
+    def getOptima(self) -> typing.List[org.hipparchus.optim.PointValuePair]:
+        """
+            Gets all the optima found during the last call to :code:`optimize`. The optimizer stores all the optima found during a
+            set of restarts. The :code:`optimize` method returns the best point only. This method returns all the points found at
+            the end of each starts, including the best one already returned by the :code:`optimize` method.
+        
+        
+            The returned array as one element for each start as specified in the constructor. It is ordered with the results from
+            the runs that did converge first, sorted from best to worst objective value (i.e in ascending order if minimizing and in
+            descending order if maximizing), followed by :code:`null` elements corresponding to the runs that did not converge. This
+            means all elements will be :code:`null` if the :code:`optimize` method did throw an exception. This also means that if
+            the first element is not :code:`null`, it is the best point found across all starts.
+        
+        
+            The behaviour is undefined if this method is called before :code:`optimize`; it will likely throw
+            :code:`NullPointerException`.
+        
+            Specified by:
+                :meth:`~org.hipparchus.optim.BaseMultiStartMultivariateOptimizer.getOptima` in
+                class :class:`~org.hipparchus.optim.BaseMultiStartMultivariateOptimizer`
+        
+            Returns:
+                an array containing the optima sorted from best to worst.
+        
+        
+        """
+        ...
 
 class MultivariateFunctionMappingAdapter(org.hipparchus.analysis.MultivariateFunction):
     """
@@ -270,6 +339,7 @@ class MultivariateOptimizer(org.hipparchus.optim.BaseMultivariateOptimizer[org.h
         ...
     def getGoalType(self) -> GoalType:
         """
+            Get optimization type.
         
             Returns:
                 the optimization type.

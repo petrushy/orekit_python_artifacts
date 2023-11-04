@@ -40,13 +40,8 @@ class AdamsIntegrator(org.hipparchus.ode.MultistepIntegrator):
         """
             Update the high order scaled derivatives for Adams integrators (phase 1).
         
-            The complete update of high order derivatives has a form similar to:
-        
-            .. code-block: java
-            
-             r :sub:`n+1`  = (s :sub:`1` (n) - s :sub:`1` (n+1)) P :sup:`-1`  u + P :sup:`-1`  A P r :sub:`n` 
-             
-            this method computes the P :sup:`-1` A P r :sub:`n` part.
+            The complete update of high order derivatives has a form similar to: \[ r_{n+1} = (s_1(n) - s_1(n+1)) P^{-1} u + P^{-1}
+            A P r_n \] this method computes the P :sup:`-1` A P r :sub:`n` part.
         
             Parameters:
                 highOrder (:class:`~org.hipparchus.ode.nonstiff.https:.www.hipparchus.org.hipparchus`): high order scaled derivatives (h :sup:`2` /2 y'', ... h :sup:`k` /k! y(k))
@@ -64,13 +59,8 @@ class AdamsIntegrator(org.hipparchus.ode.MultistepIntegrator):
         """
             Update the high order scaled derivatives Adams integrators (phase 2).
         
-            The complete update of high order derivatives has a form similar to:
-        
-            .. code-block: java
-            
-             r :sub:`n+1`  = (s :sub:`1` (n) - s :sub:`1` (n+1)) P :sup:`-1`  u + P :sup:`-1`  A P r :sub:`n` 
-             
-            this method computes the (s :sub:`1` (n) - s :sub:`1` (n+1)) P :sup:`-1` u part.
+            The complete update of high order derivatives has a form similar to: \[ r_{n+1} = (s_1(n) - s_1(n+1)) P^{-1} u + P^{-1}
+            A P r_n \] this method computes the (s :sub:`1` (n) - s :sub:`1` (n+1)) P :sup:`-1` u part.
         
             Phase 1 of the update must already have been performed.
         
@@ -97,61 +87,27 @@ class AdamsNordsieckFieldTransformer(typing.Generic[_AdamsNordsieckFieldTransfor
         :class:`~org.hipparchus.ode.nonstiff.AdamsMoultonIntegrator` integrators to convert between classical representation
         with several previous first derivatives and Nordsieck representation with higher order scaled derivatives.
     
-        We define scaled derivatives s :sub:`i` (n) at step n as:
-    
-        .. code-block: java
-        
-         s :sub:`1` (n) = h y' :sub:`n`  for first derivative
-         s :sub:`2` (n) = h :sup:`2` /2 y'' :sub:`n`  for second derivative
-         s :sub:`3` (n) = h :sup:`3` /6 y''' :sub:`n`  for third derivative
-         ...
-         s :sub:`k` (n) = h :sup:`k` /k! y :sup:`(k)`  :sub:`n`  for k :sup:`th`  derivative
-         
+        We define scaled derivatives s :sub:`i` (n) at step n as: \[ \left\{\begin{align} s_1(n) &= h y'_n \text{ for first
+        derivative}\\ s_2(n) &= \frac{h^2}{2} y_n'' \text{ for second derivative}\\ s_3(n) &= \frac{h^3}{6} y_n''' \text{ for
+        third derivative}\\ &\cdots\\ s_k(n) &= \frac{h^k}{k!} y_n^{(k)} \text{ for } k^\mathrm{th} \text{ derivative}
+        \end{align}\right. \]
     
         With the previous definition, the classical representation of multistep methods uses first derivatives only, i.e. it
-        handles y :sub:`n` , s :sub:`1` (n) and q :sub:`n` where q :sub:`n` is defined as:
-    
-        .. code-block: java
-        
-           q :sub:`n`  = [ s :sub:`1` (n-1) s :sub:`1` (n-2) ... s :sub:`1` (n-(k-1)) ] :sup:`T` 
-         
-        (we omit the k index in the notation for clarity).
+        handles y :sub:`n` , s :sub:`1` (n) and q :sub:`n` where q :sub:`n` is defined as: \[ q_n = [ s_1(n-1) s_1(n-2) \ldots
+        s_1(n-(k-1)) ]^T \] (we omit the k index in the notation for clarity).
     
         Another possible representation uses the Nordsieck vector with higher degrees scaled derivatives all taken at the same
-        step, i.e it handles y :sub:`n` , s :sub:`1` (n) and r :sub:`n` ) where r :sub:`n` is defined as:
-    
-        .. code-block: java
-        
-         r :sub:`n`  = [ s :sub:`2` (n), s :sub:`3` (n) ... s :sub:`k` (n) ] :sup:`T` 
-         
-        (here again we omit the k index in the notation for clarity)
+        step, i.e it handles y :sub:`n` , s :sub:`1` (n) and r :sub:`n` ) where r :sub:`n` is defined as: \[ r_n = [ s_2(n),
+        s_3(n) \ldots s_k(n) ]^T \] (here again we omit the k index in the notation for clarity)
     
         Taylor series formulas show that for any index offset i, s :sub:`1` (n-i) can be computed from s :sub:`1` (n), s
-        :sub:`2` (n) ... s :sub:`k` (n), the formula being exact for degree k polynomials.
-    
-        .. code-block: java
-        
-         s :sub:`1` (n-i) = s :sub:`1` (n) + ∑ :sub:`j>0`  (j+1) (-i) :sup:`j`  s :sub:`j+1` (n)
-         
-        The previous formula can be used with several values for i to compute the transform between classical representation and
-        Nordsieck vector at step end. The transform between r :sub:`n` and q :sub:`n` resulting from the Taylor series formulas
-        above is:
-    
-        .. code-block: java
-        
-         q :sub:`n`  = s :sub:`1` (n) u + P r :sub:`n` 
-         
-        where u is the [ 1 1 ... 1 ] :sup:`T` vector and P is the (k-1)×(k-1) matrix built with the (j+1) (-i) :sup:`j` terms
-        with i being the row number starting from 1 and j being the column number starting from 1:
-    
-        .. code-block: java
-        
-                [  -2   3   -4    5  ... ]
-                [  -4  12  -32   80  ... ]
-           P =  [  -6  27 -108  405  ... ]
-                [  -8  48 -256 1280  ... ]
-                [          ...           ]
-         
+        :sub:`2` (n) ... s :sub:`k` (n), the formula being exact for degree k polynomials. \[ s_1(n-i) = s_1(n) + \sum_{j\gt 0}
+        (j+1) (-i)^j s_{j+1}(n) \] The previous formula can be used with several values for i to compute the transform between
+        classical representation and Nordsieck vector at step end. The transform between r :sub:`n` and q :sub:`n` resulting
+        from the Taylor series formulas above is: \[ q_n = s_1(n) u + P r_n \] where u is the [ 1 1 ... 1 ] :sup:`T` vector and
+        P is the (k-1)×(k-1) matrix built with the \((j+1) (-i)^j\) terms with i being the row number starting from 1 and j
+        being the column number starting from 1: \[ P=\begin{bmatrix} -2 & 3 & -4 & 5 & \ldots \\ -4 & 12 & -32 & 80 & \ldots \\
+        -6 & 27 & -108 & 405 & \ldots \\ -8 & 48 & -256 & 1280 & \ldots \\ & & \ldots\\ \end{bmatrix} \]
     
         Changing -i into +i in the formula above can be used to compute a similar transform between classical representation and
         Nordsieck vector at step start. The resulting matrix is simply the absolute value of matrix P.
@@ -163,9 +119,11 @@ class AdamsNordsieckFieldTransformer(typing.Generic[_AdamsNordsieckFieldTransfor
           - s :sub:`1` (n+1) = h f(t :sub:`n+1` , y :sub:`n+1` )
           - r :sub:`n+1` = (s :sub:`1` (n) - s :sub:`1` (n+1)) P :sup:`-1` u + P :sup:`-1` A P r :sub:`n`
     
+    
         where A is a rows shifting matrix (the lower left part is an identity matrix):
     
         .. code-block: java
+        
         
                 [ 0 0   ...  0 0 | 0 ]
                 [ ---------------+---]
@@ -188,6 +146,7 @@ class AdamsNordsieckFieldTransformer(typing.Generic[_AdamsNordsieckFieldTransfor
           - y :sub:`n+1` = y :sub:`n` + S :sub:`1` (n+1) + [ -1 +1 -1 +1 ... ±1 ] r :sub:`n+1`
           - s :sub:`1` (n+1) = h f(t :sub:`n+1` , y :sub:`n+1` )
           - r :sub:`n+1` = R :sub:`n+1` + (s :sub:`1` (n+1) - S :sub:`1` (n+1)) P :sup:`-1` u
+    
     
         where the upper case Y :sub:`n+1` , S :sub:`1` (n+1) and R :sub:`n+1` represent the predicted states whereas the lower
         case y :sub:`n+1` , s :sub:`n+1` and r :sub:`n+1` represent the corrected states.
@@ -225,61 +184,27 @@ class AdamsNordsieckTransformer:
         :class:`~org.hipparchus.ode.nonstiff.AdamsMoultonIntegrator` integrators to convert between classical representation
         with several previous first derivatives and Nordsieck representation with higher order scaled derivatives.
     
-        We define scaled derivatives s :sub:`i` (n) at step n as:
-    
-        .. code-block: java
-        
-         s :sub:`1` (n) = h y' :sub:`n`  for first derivative
-         s :sub:`2` (n) = h :sup:`2` /2 y'' :sub:`n`  for second derivative
-         s :sub:`3` (n) = h :sup:`3` /6 y''' :sub:`n`  for third derivative
-         ...
-         s :sub:`k` (n) = h :sup:`k` /k! y :sup:`(k)`  :sub:`n`  for k :sup:`th`  derivative
-         
+        We define scaled derivatives s :sub:`i` (n) at step n as: \[ \left\{\begin{align} s_1(n) &= h y'_n \text{ for first
+        derivative}\\ s_2(n) &= \frac{h^2}{2} y_n'' \text{ for second derivative}\\ s_3(n) &= \frac{h^3}{6} y_n''' \text{ for
+        third derivative}\\ &\cdots\\ s_k(n) &= \frac{h^k}{k!} y_n^{(k)} \text{ for } k^\mathrm{th} \text{ derivative}
+        \end{align}\right. \]
     
         With the previous definition, the classical representation of multistep methods uses first derivatives only, i.e. it
-        handles y :sub:`n` , s :sub:`1` (n) and q :sub:`n` where q :sub:`n` is defined as:
-    
-        .. code-block: java
-        
-           q :sub:`n`  = [ s :sub:`1` (n-1) s :sub:`1` (n-2) ... s :sub:`1` (n-(k-1)) ] :sup:`T` 
-         
-        (we omit the k index in the notation for clarity).
+        handles y :sub:`n` , s :sub:`1` (n) and q :sub:`n` where q :sub:`n` is defined as: \[ q_n = [ s_1(n-1) s_1(n-2) \ldots
+        s_1(n-(k-1)) ]^T \] (we omit the k index in the notation for clarity).
     
         Another possible representation uses the Nordsieck vector with higher degrees scaled derivatives all taken at the same
-        step, i.e it handles y :sub:`n` , s :sub:`1` (n) and r :sub:`n` ) where r :sub:`n` is defined as:
-    
-        .. code-block: java
-        
-         r :sub:`n`  = [ s :sub:`2` (n), s :sub:`3` (n) ... s :sub:`k` (n) ] :sup:`T` 
-         
-        (here again we omit the k index in the notation for clarity)
+        step, i.e it handles y :sub:`n` , s :sub:`1` (n) and r :sub:`n` ) where r :sub:`n` is defined as: \[ r_n = [ s_2(n),
+        s_3(n) \ldots s_k(n) ]^T \] (here again we omit the k index in the notation for clarity)
     
         Taylor series formulas show that for any index offset i, s :sub:`1` (n-i) can be computed from s :sub:`1` (n), s
-        :sub:`2` (n) ... s :sub:`k` (n), the formula being exact for degree k polynomials.
-    
-        .. code-block: java
-        
-         s :sub:`1` (n-i) = s :sub:`1` (n) + ∑ :sub:`j>0`  (j+1) (-i) :sup:`j`  s :sub:`j+1` (n)
-         
-        The previous formula can be used with several values for i to compute the transform between classical representation and
-        Nordsieck vector at step end. The transform between r :sub:`n` and q :sub:`n` resulting from the Taylor series formulas
-        above is:
-    
-        .. code-block: java
-        
-         q :sub:`n`  = s :sub:`1` (n) u + P r :sub:`n` 
-         
-        where u is the [ 1 1 ... 1 ] :sup:`T` vector and P is the (k-1)×(k-1) matrix built with the (j+1) (-i) :sup:`j` terms
-        with i being the row number starting from 1 and j being the column number starting from 1:
-    
-        .. code-block: java
-        
-                [  -2   3   -4    5  ... ]
-                [  -4  12  -32   80  ... ]
-           P =  [  -6  27 -108  405  ... ]
-                [  -8  48 -256 1280  ... ]
-                [          ...           ]
-         
+        :sub:`2` (n) ... s :sub:`k` (n), the formula being exact for degree k polynomials. \[ s_1(n-i) = s_1(n) + \sum_{j\gt 0}
+        (j+1) (-i)^j s_{j+1}(n) \] The previous formula can be used with several values for i to compute the transform between
+        classical representation and Nordsieck vector at step end. The transform between r :sub:`n` and q :sub:`n` resulting
+        from the Taylor series formulas above is: \[ q_n = s_1(n) u + P r_n \] where u is the [ 1 1 ... 1 ] :sup:`T` vector and
+        P is the (k-1)×(k-1) matrix built with the \((j+1) (-i)^j\) terms with i being the row number starting from 1 and j
+        being the column number starting from 1: \[ P=\begin{bmatrix} -2 & 3 & -4 & 5 & \ldots \\ -4 & 12 & -32 & 80 & \ldots \\
+        -6 & 27 & -108 & 405 & \ldots \\ -8 & 48 & -256 & 1280 & \ldots \\ & & \ldots\\ \end{bmatrix} \]
     
         Changing -i into +i in the formula above can be used to compute a similar transform between classical representation and
         Nordsieck vector at step start. The resulting matrix is simply the absolute value of matrix P.
@@ -291,9 +216,11 @@ class AdamsNordsieckTransformer:
           - s :sub:`1` (n+1) = h f(t :sub:`n+1` , y :sub:`n+1` )
           - r :sub:`n+1` = (s :sub:`1` (n) - s :sub:`1` (n+1)) P :sup:`-1` u + P :sup:`-1` A P r :sub:`n`
     
+    
         where A is a rows shifting matrix (the lower left part is an identity matrix):
     
         .. code-block: java
+        
         
                 [ 0 0   ...  0 0 | 0 ]
                 [ ---------------+---]
@@ -316,6 +243,7 @@ class AdamsNordsieckTransformer:
           - y :sub:`n+1` = y :sub:`n` + S :sub:`1` (n+1) + [ -1 +1 -1 +1 ... ±1 ] r :sub:`n+1`
           - s :sub:`1` (n+1) = h f(t :sub:`n+1` , y :sub:`n+1` )
           - r :sub:`n+1` = R :sub:`n+1` + (s :sub:`1` (n+1) - S :sub:`1` (n+1)) P :sup:`-1` u
+    
     
         where the upper case Y :sub:`n+1` , S :sub:`1` (n+1) and R :sub:`n+1` represent the predicted states whereas the lower
         case y :sub:`n+1` , s :sub:`n+1` and r :sub:`n+1` represent the corrected states.
@@ -358,13 +286,8 @@ class AdamsNordsieckTransformer:
         """
             Update the high order scaled derivatives for Adams integrators (phase 1).
         
-            The complete update of high order derivatives has a form similar to:
-        
-            .. code-block: java
-            
-             r :sub:`n+1`  = (s :sub:`1` (n) - s :sub:`1` (n+1)) P :sup:`-1`  u + P :sup:`-1`  A P r :sub:`n` 
-             
-            this method computes the P :sup:`-1` A P r :sub:`n` part.
+            The complete update of high order derivatives has a form similar to: \[ r_{n+1} = (s_1(n) - s_1(n+1)) P^{-1} u + P^{-1}
+            A P r_n \] this method computes the P :sup:`-1` A P r :sub:`n` part.
         
             Parameters:
                 highOrder (:class:`~org.hipparchus.ode.nonstiff.https:.www.hipparchus.org.hipparchus`): high order scaled derivatives (h :sup:`2` /2 y'', ... h :sup:`k` /k! y(k))
@@ -382,13 +305,8 @@ class AdamsNordsieckTransformer:
         """
             Update the high order scaled derivatives Adams integrators (phase 2).
         
-            The complete update of high order derivatives has a form similar to:
-        
-            .. code-block: java
-            
-             r :sub:`n+1`  = (s :sub:`1` (n) - s :sub:`1` (n+1)) P :sup:`-1`  u + P :sup:`-1`  A P r :sub:`n` 
-             
-            this method computes the (s :sub:`1` (n) - s :sub:`1` (n+1)) P :sup:`-1` u part.
+            The complete update of high order derivatives has a form similar to: \[ r_{n+1} = (s_1(n) - s_1(n+1)) P^{-1} u + P^{-1}
+            A P r_n \] this method computes the (s :sub:`1` (n) - s :sub:`1` (n+1)) P :sup:`-1` u part.
         
             Phase 1 of the update must already have been performed.
         
@@ -416,8 +334,10 @@ class AdaptiveStepsizeFieldIntegrator(org.hipparchus.ode.AbstractFieldIntegrator
     
         .. code-block: java
         
+        
          threshold_i = absTol_i + relTol_i * max (abs (ym), abs (ym+1))
          
+    
         where absTol_i is the absolute tolerance for component i of the state vector and relTol_i is the relative tolerance for
         the same component. The user can also use only two scalar values absTol and relTol which will be used for all
         components.
@@ -430,8 +350,10 @@ class AdaptiveStepsizeFieldIntegrator(org.hipparchus.ode.AbstractFieldIntegrator
     
         .. code-block: java
         
+        
          sqrt((sum (errEst_i / threshold_i)^2 ) / n) < 1
          
+    
         (where n is the main set dimension) then the step is accepted, otherwise the step is rejected and a new attempt is made
         with a new stepsize.
     """
@@ -517,8 +439,10 @@ class AdaptiveStepsizeIntegrator(org.hipparchus.ode.AbstractIntegrator):
     
         .. code-block: java
         
+        
          threshold_i = absTol_i + relTol_i * max (abs (ym), abs (ym+1))
          
+    
         where absTol_i is the absolute tolerance for component i of the state vector and relTol_i is the relative tolerance for
         the same component. The user can also use only two scalar values absTol and relTol which will be used for all
         components.
@@ -532,8 +456,10 @@ class AdaptiveStepsizeIntegrator(org.hipparchus.ode.AbstractIntegrator):
     
         .. code-block: java
         
+        
          sqrt((sum (errEst_i / threshold_i)^2 ) / n) < 1
          
+    
         (where n is the main set dimension) then the step is accepted, otherwise the step is rejected and a new attempt is made
         with a new stepsize.
     """
@@ -561,7 +487,7 @@ class AdaptiveStepsizeIntegrator(org.hipparchus.ode.AbstractIntegrator):
         
         """
         ...
-    def initializeStep(self, boolean: bool, int: int, doubleArray: typing.List[float], oDEStateAndDerivative: org.hipparchus.ode.ODEStateAndDerivative, equationsMapper: org.hipparchus.ode.EquationsMapper) -> float: ...
+    def initializeStep(self, boolean: bool, int: int, doubleArray: typing.List[float], oDEStateAndDerivative: org.hipparchus.ode.ODEStateAndDerivative) -> float: ...
     def setInitialStepSize(self, double: float) -> None:
         """
             Set the initial step size.
@@ -846,71 +772,33 @@ class AdamsBashforthFieldIntegrator(AdamsFieldIntegrator[_AdamsBashforthFieldInt
         integration. The user can adjust the end date of integration, or the step size of the starter integrator to ensure a
         sufficient number of steps can be completed before the end of integration.
     
-        Implementation details
-    ----------------------
+        **Implementation details**
     
+        We define scaled derivatives s :sub:`i` (n) at step n as: \[ \left\{\begin{align} s_1(n) &= h y'_n \text{ for first
+        derivative}\\ s_2(n) &= \frac{h^2}{2} y_n'' \text{ for second derivative}\\ s_3(n) &= \frac{h^3}{6} y_n''' \text{ for
+        third derivative}\\ &\cdots\\ s_k(n) &= \frac{h^k}{k!} y_n^{(k)} \text{ for } k^\mathrm{th} \text{ derivative}
+        \end{align}\right. \]
     
-        We define scaled derivatives s :sub:`i` (n) at step n as:
-    
-        .. code-block: java
-        
-         s :sub:`1` (n) = h y' :sub:`n`  for first derivative
-         s :sub:`2` (n) = h :sup:`2` /2 y'' :sub:`n`  for second derivative
-         s :sub:`3` (n) = h :sup:`3` /6 y''' :sub:`n`  for third derivative
-         ...
-         s :sub:`k` (n) = h :sup:`k` /k! y :sup:`(k)`  :sub:`n`  for k :sup:`th`  derivative
-         
-    
-        The definitions above use the classical representation with several previous first derivatives. Lets define
-    
-        .. code-block: java
-        
-           q :sub:`n`  = [ s :sub:`1` (n-1) s :sub:`1` (n-2) ... s :sub:`1` (n-(k-1)) ] :sup:`T` 
-         
-        (we omit the k index in the notation for clarity). With these definitions, Adams-Bashforth methods can be written:
-    
-          - k = 1: y :sub:`n+1` = y :sub:`n` + s :sub:`1` (n)
-          - k = 2: y :sub:`n+1` = y :sub:`n` + 3/2 s :sub:`1` (n) + [ -1/2 ] q :sub:`n`
-          - k = 3: y :sub:`n+1` = y :sub:`n` + 23/12 s :sub:`1` (n) + [ -16/12 5/12 ] q :sub:`n`
-          - k = 4: y :sub:`n+1` = y :sub:`n` + 55/24 s :sub:`1` (n) + [ -59/24 37/24 -9/24 ] q :sub:`n`
-          - ...
-    
+        The definitions above use the classical representation with several previous first derivatives. Lets define \[ q_n = [
+        s_1(n-1) s_1(n-2) \ldots s_1(n-(k-1)) ]^T \] (we omit the k index in the notation for clarity). With these definitions,
+        Adams-Bashforth methods can be written: \[ \left\{\begin{align} k = 1: & y_{n+1} = y_n + s_1(n) \\ k = 2: & y_{n+1} =
+        y_n + \frac{3}{2} s_1(n) + [ \frac{-1}{2} ] q_n \\ k = 3: & y_{n+1} = y_n + \frac{23}{12} s_1(n) + [ \frac{-16}{12}
+        \frac{5}{12} ] q_n \\ k = 4: & y_{n+1} = y_n + \frac{55}{24} s_1(n) + [ \frac{-59}{24} \frac{37}{24} \frac{-9}{24} ] q_n
+        \\ & \cdots \end{align}\right. \]
     
         Instead of using the classical representation with first derivatives only (y :sub:`n` , s :sub:`1` (n) and q :sub:`n` ),
         our implementation uses the Nordsieck vector with higher degrees scaled derivatives all taken at the same step (y
-        :sub:`n` , s :sub:`1` (n) and r :sub:`n` ) where r :sub:`n` is defined as:
-    
-        .. code-block: java
-        
-         r :sub:`n`  = [ s :sub:`2` (n), s :sub:`3` (n) ... s :sub:`k` (n) ] :sup:`T` 
-         
-        (here again we omit the k index in the notation for clarity)
+        :sub:`n` , s :sub:`1` (n) and r :sub:`n` ) where r :sub:`n` is defined as: \[ r_n = [ s_2(n), s_3(n) \ldots s_k(n) ]^T
+        \] (here again we omit the k index in the notation for clarity)
     
         Taylor series formulas show that for any index offset i, s :sub:`1` (n-i) can be computed from s :sub:`1` (n), s
-        :sub:`2` (n) ... s :sub:`k` (n), the formula being exact for degree k polynomials.
-    
-        .. code-block: java
-        
-         s :sub:`1` (n-i) = s :sub:`1` (n) + ∑ :sub:`j>0`  (j+1) (-i) :sup:`j`  s :sub:`j+1` (n)
-         
-        The previous formula can be used with several values for i to compute the transform between classical representation and
-        Nordsieck vector. The transform between r :sub:`n` and q :sub:`n` resulting from the Taylor series formulas above is:
-    
-        .. code-block: java
-        
-         q :sub:`n`  = s :sub:`1` (n) u + P r :sub:`n` 
-         
-        where u is the [ 1 1 ... 1 ] :sup:`T` vector and P is the (k-1)×(k-1) matrix built with the (j+1) (-i) :sup:`j` terms
-        with i being the row number starting from 1 and j being the column number starting from 1:
-    
-        .. code-block: java
-        
-                [  -2   3   -4    5  ... ]
-                [  -4  12  -32   80  ... ]
-           P =  [  -6  27 -108  405  ... ]
-                [  -8  48 -256 1280  ... ]
-                [          ...           ]
-         
+        :sub:`2` (n) ... s :sub:`k` (n), the formula being exact for degree k polynomials. \[ s_1(n-i) = s_1(n) + \sum_{j\gt 0}
+        (j+1) (-i)^j s_{j+1}(n) \] The previous formula can be used with several values for i to compute the transform between
+        classical representation and Nordsieck vector. The transform between r :sub:`n` and q :sub:`n` resulting from the Taylor
+        series formulas above is: \[ q_n = s_1(n) u + P r_n \] where u is the [ 1 1 ... 1 ] :sup:`T` vector and P is the
+        (k-1)×(k-1) matrix built with the \((j+1) (-i)^j\) terms with i being the row number starting from 1 and j being the
+        column number starting from 1: \[ P=\begin{bmatrix} -2 & 3 & -4 & 5 & \ldots \\ -4 & 12 & -32 & 80 & \ldots \\ -6 & 27 &
+        -108 & 405 & \ldots \\ -8 & 48 & -256 & 1280 & \ldots \\ & & \ldots\\ \end{bmatrix} \]
     
         Using the Nordsieck vector has several advantages:
     
@@ -925,9 +813,11 @@ class AdamsBashforthFieldIntegrator(AdamsFieldIntegrator[_AdamsBashforthFieldInt
           - s :sub:`1` (n+1) = h f(t :sub:`n+1` , y :sub:`n+1` )
           - r :sub:`n+1` = (s :sub:`1` (n) - s :sub:`1` (n+1)) P :sup:`-1` u + P :sup:`-1` A P r :sub:`n`
     
+    
         where A is a rows shifting matrix (the lower left part is an identity matrix):
     
         .. code-block: java
+        
         
                 [ 0 0   ...  0 0 | 0 ]
                 [ ---------------+---]
@@ -972,71 +862,33 @@ class AdamsBashforthIntegrator(AdamsIntegrator):
         integration. The user can adjust the end date of integration, or the step size of the starter integrator to ensure a
         sufficient number of steps can be completed before the end of integration.
     
-        Implementation details
-    ----------------------
+        **Implementation details**
     
+        We define scaled derivatives s :sub:`i` (n) at step n as: \[ \left\{\begin{align} s_1(n) &= h y'_n \text{ for first
+        derivative}\\ s_2(n) &= \frac{h^2}{2} y_n'' \text{ for second derivative}\\ s_3(n) &= \frac{h^3}{6} y_n''' \text{ for
+        third derivative}\\ &\cdots\\ s_k(n) &= \frac{h^k}{k!} y_n^{(k)} \text{ for } k^\mathrm{th} \text{ derivative}
+        \end{align}\right. \]
     
-        We define scaled derivatives s :sub:`i` (n) at step n as:
-    
-        .. code-block: java
-        
-         s :sub:`1` (n) = h y' :sub:`n`  for first derivative
-         s :sub:`2` (n) = h :sup:`2` /2 y'' :sub:`n`  for second derivative
-         s :sub:`3` (n) = h :sup:`3` /6 y''' :sub:`n`  for third derivative
-         ...
-         s :sub:`k` (n) = h :sup:`k` /k! y :sup:`(k)`  :sub:`n`  for k :sup:`th`  derivative
-         
-    
-        The definitions above use the classical representation with several previous first derivatives. Lets define
-    
-        .. code-block: java
-        
-           q :sub:`n`  = [ s :sub:`1` (n-1) s :sub:`1` (n-2) ... s :sub:`1` (n-(k-1)) ] :sup:`T` 
-         
-        (we omit the k index in the notation for clarity). With these definitions, Adams-Bashforth methods can be written:
-    
-          - k = 1: y :sub:`n+1` = y :sub:`n` + s :sub:`1` (n)
-          - k = 2: y :sub:`n+1` = y :sub:`n` + 3/2 s :sub:`1` (n) + [ -1/2 ] q :sub:`n`
-          - k = 3: y :sub:`n+1` = y :sub:`n` + 23/12 s :sub:`1` (n) + [ -16/12 5/12 ] q :sub:`n`
-          - k = 4: y :sub:`n+1` = y :sub:`n` + 55/24 s :sub:`1` (n) + [ -59/24 37/24 -9/24 ] q :sub:`n`
-          - ...
-    
+        The definitions above use the classical representation with several previous first derivatives. Lets define \[ q_n = [
+        s_1(n-1) s_1(n-2) \ldots s_1(n-(k-1)) ]^T \] (we omit the k index in the notation for clarity). With these definitions,
+        Adams-Bashforth methods can be written:
+        \[ \left\{\begin{align} k = 1: & y_{n+1} = y_n + s_1(n) \\ k = 2: & y_{n+1} = y_n + \frac{3}{2} s_1(n) + [ \frac{-1}{2}
+        ] q_n \\ k = 3: & y_{n+1} = y_n + \frac{23}{12} s_1(n) + [ \frac{-16}{12} \frac{5}{12} ] q_n \\ k = 4: & y_{n+1} = y_n +
+        \frac{55}{24} s_1(n) + [ \frac{-59}{24} \frac{37}{24} \frac{-9}{24} ] q_n \\ & \cdots \end{align}\right. \]
     
         Instead of using the classical representation with first derivatives only (y :sub:`n` , s :sub:`1` (n) and q :sub:`n` ),
         our implementation uses the Nordsieck vector with higher degrees scaled derivatives all taken at the same step (y
-        :sub:`n` , s :sub:`1` (n) and r :sub:`n` ) where r :sub:`n` is defined as:
-    
-        .. code-block: java
-        
-         r :sub:`n`  = [ s :sub:`2` (n), s :sub:`3` (n) ... s :sub:`k` (n) ] :sup:`T` 
-         
-        (here again we omit the k index in the notation for clarity)
+        :sub:`n` , s :sub:`1` (n) and r :sub:`n` ) where r :sub:`n` is defined as: \[ r_n = [ s_2(n), s_3(n) \ldots s_k(n) ]^T
+        \] (here again we omit the k index in the notation for clarity)
     
         Taylor series formulas show that for any index offset i, s :sub:`1` (n-i) can be computed from s :sub:`1` (n), s
-        :sub:`2` (n) ... s :sub:`k` (n), the formula being exact for degree k polynomials.
-    
-        .. code-block: java
-        
-         s :sub:`1` (n-i) = s :sub:`1` (n) + ∑ :sub:`j>0`  (j+1) (-i) :sup:`j`  s :sub:`j+1` (n)
-         
-        The previous formula can be used with several values for i to compute the transform between classical representation and
-        Nordsieck vector. The transform between r :sub:`n` and q :sub:`n` resulting from the Taylor series formulas above is:
-    
-        .. code-block: java
-        
-         q :sub:`n`  = s :sub:`1` (n) u + P r :sub:`n` 
-         
-        where u is the [ 1 1 ... 1 ] :sup:`T` vector and P is the (k-1)×(k-1) matrix built with the (j+1) (-i) :sup:`j` terms
-        with i being the row number starting from 1 and j being the column number starting from 1:
-    
-        .. code-block: java
-        
-                [  -2   3   -4    5  ... ]
-                [  -4  12  -32   80  ... ]
-           P =  [  -6  27 -108  405  ... ]
-                [  -8  48 -256 1280  ... ]
-                [          ...           ]
-         
+        :sub:`2` (n) ... s :sub:`k` (n), the formula being exact for degree k polynomials. \[ s_1(n-i) = s_1(n) + \sum_{j\gt 0}
+        (j+1) (-i)^j s_{j+1}(n) \] The previous formula can be used with several values for i to compute the transform between
+        classical representation and Nordsieck vector. The transform between r :sub:`n` and q :sub:`n` resulting from the Taylor
+        series formulas above is: \[ q_n = s_1(n) u + P r_n \] where u is the [ 1 1 ... 1 ] :sup:`T` vector and P is the
+        (k-1)×(k-1) matrix built with the \((j+1) (-i)^j\) terms with i being the row number starting from 1 and j being the
+        column number starting from 1: \[ P=\begin{bmatrix} -2 & 3 & -4 & 5 & \ldots \\ -4 & 12 & -32 & 80 & \ldots \\ -6 & 27 &
+        -108 & 405 & \ldots \\ -8 & 48 & -256 & 1280 & \ldots \\ & & \ldots\\ \end{bmatrix} \]
     
         Using the Nordsieck vector has several advantages:
     
@@ -1051,9 +903,11 @@ class AdamsBashforthIntegrator(AdamsIntegrator):
           - s :sub:`1` (n+1) = h f(t :sub:`n+1` , y :sub:`n+1` )
           - r :sub:`n+1` = (s :sub:`1` (n) - s :sub:`1` (n+1)) P :sup:`-1` u + P :sup:`-1` A P r :sub:`n`
     
+    
         where A is a rows shifting matrix (the lower left part is an identity matrix):
     
         .. code-block: java
+        
         
                 [ 0 0   ...  0 0 | 0 ]
                 [ ---------------+---]
@@ -1101,28 +955,16 @@ class AdamsMoultonFieldIntegrator(AdamsFieldIntegrator[_AdamsMoultonFieldIntegra
         integration. The user can adjust the end date of integration, or the step size of the starter integrator to ensure a
         sufficient number of steps can be completed before the end of integration.
     
-        Implementation details
-    ----------------------
+        **Implementation details**
     
+        We define scaled derivatives s :sub:`i` (n) at step n as: \[ \left\{\begin{align} s_1(n) &= h y'_n \text{ for first
+        derivative}\\ s_2(n) &= \frac{h^2}{2} y_n'' \text{ for second derivative}\\ s_3(n) &= \frac{h^3}{6} y_n''' \text{ for
+        third derivative}\\ &\cdots\\ s_k(n) &= \frac{h^k}{k!} y_n^{(k)} \text{ for } k^\mathrm{th} \text{ derivative}
+        \end{align}\right. \]
     
-        We define scaled derivatives s :sub:`i` (n) at step n as:
-    
-        .. code-block: java
-        
-         s :sub:`1` (n) = h y' :sub:`n`  for first derivative
-         s :sub:`2` (n) = h :sup:`2` /2 y'' :sub:`n`  for second derivative
-         s :sub:`3` (n) = h :sup:`3` /6 y''' :sub:`n`  for third derivative
-         ...
-         s :sub:`k` (n) = h :sup:`k` /k! y :sup:`(k)`  :sub:`n`  for k :sup:`th`  derivative
-         
-    
-        The definitions above use the classical representation with several previous first derivatives. Lets define
-    
-        .. code-block: java
-        
-           q :sub:`n`  = [ s :sub:`1` (n-1) s :sub:`1` (n-2) ... s :sub:`1` (n-(k-1)) ] :sup:`T` 
-         
-        (we omit the k index in the notation for clarity). With these definitions, Adams-Moulton methods can be written:
+        The definitions above use the classical representation with several previous first derivatives. Lets define \[ q_n = [
+        s_1(n-1) s_1(n-2) \ldots s_1(n-(k-1)) ]^T \] (we omit the k index in the notation for clarity). With these definitions,
+        Adams-Moulton methods can be written:
     
           - k = 1: y :sub:`n+1` = y :sub:`n` + s :sub:`1` (n+1)
           - k = 2: y :sub:`n+1` = y :sub:`n` + 1/2 s :sub:`1` (n+1) + [ 1/2 ] q :sub:`n+1`
@@ -1133,39 +975,17 @@ class AdamsMoultonFieldIntegrator(AdamsFieldIntegrator[_AdamsMoultonFieldIntegra
     
         Instead of using the classical representation with first derivatives only (y :sub:`n` , s :sub:`1` (n+1) and q
         :sub:`n+1` ), our implementation uses the Nordsieck vector with higher degrees scaled derivatives all taken at the same
-        step (y :sub:`n` , s :sub:`1` (n) and r :sub:`n` ) where r :sub:`n` is defined as:
-    
-        .. code-block: java
-        
-         r :sub:`n`  = [ s :sub:`2` (n), s :sub:`3` (n) ... s :sub:`k` (n) ] :sup:`T` 
-         
-        (here again we omit the k index in the notation for clarity)
+        step (y :sub:`n` , s :sub:`1` (n) and r :sub:`n` ) where r :sub:`n` is defined as: \[ r_n = [ s_2(n), s_3(n) \ldots
+        s_k(n) ]^T \] (here again we omit the k index in the notation for clarity)
     
         Taylor series formulas show that for any index offset i, s :sub:`1` (n-i) can be computed from s :sub:`1` (n), s
-        :sub:`2` (n) ... s :sub:`k` (n), the formula being exact for degree k polynomials.
-    
-        .. code-block: java
-        
-         s :sub:`1` (n-i) = s :sub:`1` (n) + ∑ :sub:`j>0`  (j+1) (-i) :sup:`j`  s :sub:`j+1` (n)
-         
-        The previous formula can be used with several values for i to compute the transform between classical representation and
-        Nordsieck vector. The transform between r :sub:`n` and q :sub:`n` resulting from the Taylor series formulas above is:
-    
-        .. code-block: java
-        
-         q :sub:`n`  = s :sub:`1` (n) u + P r :sub:`n` 
-         
-        where u is the [ 1 1 ... 1 ] :sup:`T` vector and P is the (k-1)×(k-1) matrix built with the (j+1) (-i) :sup:`j` terms
-        with i being the row number starting from 1 and j being the column number starting from 1:
-    
-        .. code-block: java
-        
-                [  -2   3   -4    5  ... ]
-                [  -4  12  -32   80  ... ]
-           P =  [  -6  27 -108  405  ... ]
-                [  -8  48 -256 1280  ... ]
-                [          ...           ]
-         
+        :sub:`2` (n) ... s :sub:`k` (n), the formula being exact for degree k polynomials. \[ s_1(n-i) = s_1(n) + \sum_{j\gt 0}
+        (j+1) (-i)^j s_{j+1}(n) \] The previous formula can be used with several values for i to compute the transform between
+        classical representation and Nordsieck vector. The transform between r :sub:`n` and q :sub:`n` resulting from the Taylor
+        series formulas above is: \[ q_n = s_1(n) u + P r_n \] where u is the [ 1 1 ... 1 ] :sup:`T` vector and P is the
+        (k-1)×(k-1) matrix built with the \((j+1) (-i)^j\) terms with i being the row number starting from 1 and j being the
+        column number starting from 1: \[ P=\begin{bmatrix} -2 & 3 & -4 & 5 & \ldots \\ -4 & 12 & -32 & 80 & \ldots \\ -6 & 27 &
+        -108 & 405 & \ldots \\ -8 & 48 & -256 & 1280 & \ldots \\ & & \ldots\\ \end{bmatrix} \]
     
         Using the Nordsieck vector has several advantages:
     
@@ -1184,6 +1004,7 @@ class AdamsMoultonFieldIntegrator(AdamsFieldIntegrator[_AdamsMoultonFieldIntegra
     
         .. code-block: java
         
+        
                 [ 0 0   ...  0 0 | 0 ]
                 [ ---------------+---]
                 [ 1 0   ...  0 0 | 0 ]
@@ -1197,6 +1018,7 @@ class AdamsMoultonFieldIntegrator(AdamsFieldIntegrator[_AdamsMoultonFieldIntegra
           - y :sub:`n+1` = y :sub:`n` + S :sub:`1` (n+1) + [ -1 +1 -1 +1 ... ±1 ] r :sub:`n+1`
           - s :sub:`1` (n+1) = h f(t :sub:`n+1` , y :sub:`n+1` )
           - r :sub:`n+1` = R :sub:`n+1` + (s :sub:`1` (n+1) - S :sub:`1` (n+1)) P :sup:`-1` u
+    
     
         where the upper case Y :sub:`n+1` , S :sub:`1` (n+1) and R :sub:`n+1` represent the predicted states whereas the lower
         case y :sub:`n+1` , s :sub:`n+1` and r :sub:`n+1` represent the corrected states.
@@ -1237,28 +1059,16 @@ class AdamsMoultonIntegrator(AdamsIntegrator):
         integration. The user can adjust the end date of integration, or the step size of the starter integrator to ensure a
         sufficient number of steps can be completed before the end of integration.
     
-        Implementation details
-    ----------------------
+        **Implementation details**
     
+        We define scaled derivatives s :sub:`i` (n) at step n as: \[ \left\{\begin{align} s_1(n) &= h y'_n \text{ for first
+        derivative}\\ s_2(n) &= \frac{h^2}{2} y_n'' \text{ for second derivative}\\ s_3(n) &= \frac{h^3}{6} y_n''' \text{ for
+        third derivative}\\ &\cdots\\ s_k(n) &= \frac{h^k}{k!} y_n^{(k)} \text{ for } k^\mathrm{th} \text{ derivative}
+        \end{align}\right. \]
     
-        We define scaled derivatives s :sub:`i` (n) at step n as:
-    
-        .. code-block: java
-        
-         s :sub:`1` (n) = h y' :sub:`n`  for first derivative
-         s :sub:`2` (n) = h :sup:`2` /2 y'' :sub:`n`  for second derivative
-         s :sub:`3` (n) = h :sup:`3` /6 y''' :sub:`n`  for third derivative
-         ...
-         s :sub:`k` (n) = h :sup:`k` /k! y :sup:`(k)`  :sub:`n`  for k :sup:`th`  derivative
-         
-    
-        The definitions above use the classical representation with several previous first derivatives. Lets define
-    
-        .. code-block: java
-        
-           q :sub:`n`  = [ s :sub:`1` (n-1) s :sub:`1` (n-2) ... s :sub:`1` (n-(k-1)) ] :sup:`T` 
-         
-        (we omit the k index in the notation for clarity). With these definitions, Adams-Moulton methods can be written:
+        The definitions above use the classical representation with several previous first derivatives. Lets define \[ q_n = [
+        s_1(n-1) s_1(n-2) \ldots s_1(n-(k-1)) ]^T \] (we omit the k index in the notation for clarity). With these definitions,
+        Adams-Moulton methods can be written:
     
           - k = 1: y :sub:`n+1` = y :sub:`n` + s :sub:`1` (n+1)
           - k = 2: y :sub:`n+1` = y :sub:`n` + 1/2 s :sub:`1` (n+1) + [ 1/2 ] q :sub:`n+1`
@@ -1269,39 +1079,17 @@ class AdamsMoultonIntegrator(AdamsIntegrator):
     
         Instead of using the classical representation with first derivatives only (y :sub:`n` , s :sub:`1` (n+1) and q
         :sub:`n+1` ), our implementation uses the Nordsieck vector with higher degrees scaled derivatives all taken at the same
-        step (y :sub:`n` , s :sub:`1` (n) and r :sub:`n` ) where r :sub:`n` is defined as:
-    
-        .. code-block: java
-        
-         r :sub:`n`  = [ s :sub:`2` (n), s :sub:`3` (n) ... s :sub:`k` (n) ] :sup:`T` 
-         
-        (here again we omit the k index in the notation for clarity)
+        step (y :sub:`n` , s :sub:`1` (n) and r :sub:`n` ) where r :sub:`n` is defined as: \[ r_n = [ s_2(n), s_3(n) \ldots
+        s_k(n) ]^T \] (here again we omit the k index in the notation for clarity)
     
         Taylor series formulas show that for any index offset i, s :sub:`1` (n-i) can be computed from s :sub:`1` (n), s
-        :sub:`2` (n) ... s :sub:`k` (n), the formula being exact for degree k polynomials.
-    
-        .. code-block: java
-        
-         s :sub:`1` (n-i) = s :sub:`1` (n) + ∑ :sub:`j>0`  (j+1) (-i) :sup:`j`  s :sub:`j+1` (n)
-         
-        The previous formula can be used with several values for i to compute the transform between classical representation and
-        Nordsieck vector. The transform between r :sub:`n` and q :sub:`n` resulting from the Taylor series formulas above is:
-    
-        .. code-block: java
-        
-         q :sub:`n`  = s :sub:`1` (n) u + P r :sub:`n` 
-         
-        where u is the [ 1 1 ... 1 ] :sup:`T` vector and P is the (k-1)×(k-1) matrix built with the (j+1) (-i) :sup:`j` terms
-        with i being the row number starting from 1 and j being the column number starting from 1:
-    
-        .. code-block: java
-        
-                [  -2   3   -4    5  ... ]
-                [  -4  12  -32   80  ... ]
-           P =  [  -6  27 -108  405  ... ]
-                [  -8  48 -256 1280  ... ]
-                [          ...           ]
-         
+        :sub:`2` (n) ... s :sub:`k` (n), the formula being exact for degree k polynomials. \[ s_1(n-i) = s_1(n) + \sum_{j\gt 0}
+        (j+1) (-i)^j s_{j+1}(n) \] The previous formula can be used with several values for i to compute the transform between
+        classical representation and Nordsieck vector. The transform between r :sub:`n` and q :sub:`n` resulting from the Taylor
+        series formulas above is: \[ q_n = s_1(n) u + P r_n \] where u is the [ 1 1 ... 1 ] :sup:`T` vector and P is the
+        (k-1)×(k-1) matrix built with the \((j+1) (-i)^j\) terms with i being the row number starting from 1 and j being the
+        column number starting from 1: \[ P=\begin{bmatrix} -2 & 3 & -4 & 5 & \ldots \\ -4 & 12 & -32 & 80 & \ldots \\ -6 & 27 &
+        -108 & 405 & \ldots \\ -8 & 48 & -256 & 1280 & \ldots \\ & & \ldots\\ \end{bmatrix} \]
     
         Using the Nordsieck vector has several advantages:
     
@@ -1320,6 +1108,7 @@ class AdamsMoultonIntegrator(AdamsIntegrator):
     
         .. code-block: java
         
+        
                 [ 0 0   ...  0 0 | 0 ]
                 [ ---------------+---]
                 [ 1 0   ...  0 0 | 0 ]
@@ -1333,6 +1122,7 @@ class AdamsMoultonIntegrator(AdamsIntegrator):
           - y :sub:`n+1` = y :sub:`n` + S :sub:`1` (n+1) + [ -1 +1 -1 +1 ... ±1 ] r :sub:`n+1`
           - s :sub:`1` (n+1) = h f(t :sub:`n+1` , y :sub:`n+1` )
           - r :sub:`n+1` = R :sub:`n+1` + (s :sub:`1` (n+1) - S :sub:`1` (n+1)) P :sup:`-1` u
+    
     
         where the upper case Y :sub:`n+1` , S :sub:`1` (n+1) and R :sub:`n+1` represent the predicted states whereas the lower
         case y :sub:`n+1` , s :sub:`n+1` and r :sub:`n+1` represent the corrected states.
@@ -1356,6 +1146,7 @@ class EmbeddedRungeKuttaFieldIntegrator(AdaptiveStepsizeFieldIntegrator[_Embedde
         their Butcher arrays are as follows :
     
         .. code-block: java
+        
         
             0  |
            c2  | a21
@@ -1459,6 +1250,7 @@ class EmbeddedRungeKuttaIntegrator(AdaptiveStepsizeIntegrator, ButcherArrayProvi
     
         .. code-block: java
         
+        
             0  |
            c2  | a21
            c3  | a31  a32
@@ -1554,6 +1346,46 @@ class EmbeddedRungeKuttaIntegrator(AdaptiveStepsizeIntegrator, ButcherArrayProvi
         ...
 
 class GraggBulirschStoerIntegrator(AdaptiveStepsizeIntegrator):
+    """
+    public class GraggBulirschStoerIntegrator extends :class:`~org.hipparchus.ode.nonstiff.AdaptiveStepsizeIntegrator`
+    
+        This class implements a Gragg-Bulirsch-Stoer integrator for Ordinary Differential Equations.
+    
+        The Gragg-Bulirsch-Stoer algorithm is one of the most efficient ones currently available for smooth problems. It uses
+        Richardson extrapolation to estimate what would be the solution if the step size could be decreased down to zero.
+    
+        This method changes both the step size and the order during integration, in order to minimize computation cost. It is
+        particularly well suited when a very high precision is needed. The limit where this method becomes more efficient than
+        high-order embedded Runge-Kutta methods like :class:`~org.hipparchus.ode.nonstiff.DormandPrince853Integrator` depends on
+        the problem. Results given in the Hairer, Norsett and Wanner book show for example that this limit occurs for accuracy
+        around 1e-6 when integrating Saltzam-Lorenz equations (the authors note this problem is *extremely sensitive to the
+        errors in the first integration steps*), and around 1e-11 for a two dimensional celestial mechanics problems with seven
+        bodies (pleiades problem, involving quasi-collisions for which *automatic step size control is essential*).
+    
+        This implementation is basically a reimplementation in Java of the `odex
+        <http://www.unige.ch/math/folks/hairer/prog/nonstiff/odex.f>` fortran code by E. Hairer and G. Wanner. The
+        redistribution policy for this code is available `here <http://www.unige.ch/~hairer/prog/licence.txt>`, for convenience,
+        it is reproduced below.
+    
+            Copyright (c) 2004, Ernst Hairer
+    
+            Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
+            following conditions are met:
+    
+              - Redistributions of source code must retain the above copyright notice, this list of conditions and the following
+                disclaimer.
+              - Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following
+                disclaimer in the documentation and/or other materials provided with the distribution.
+    
+    
+            **THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+            INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+            DISCLAIMED. IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+            EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+            USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+            STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+            IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.**
+    """
     @typing.overload
     def __init__(self, double: float, double2: float, double3: float, double4: float): ...
     @typing.overload
@@ -1562,10 +1394,102 @@ class GraggBulirschStoerIntegrator(AdaptiveStepsizeIntegrator):
     def integrate(self, ordinaryDifferentialEquation: org.hipparchus.ode.OrdinaryDifferentialEquation, oDEState: org.hipparchus.ode.ODEState, double: float) -> org.hipparchus.ode.ODEStateAndDerivative: ...
     @typing.overload
     def integrate(self, expandableODE: org.hipparchus.ode.ExpandableODE, oDEState: org.hipparchus.ode.ODEState, double: float) -> org.hipparchus.ode.ODEStateAndDerivative: ...
-    def setControlFactors(self, double: float, double2: float, double3: float, double4: float) -> None: ...
-    def setInterpolationControl(self, boolean: bool, int: int) -> None: ...
-    def setOrderControl(self, int: int, double: float, double2: float) -> None: ...
-    def setStabilityCheck(self, boolean: bool, int: int, int2: int, double: float) -> None: ...
+    def setControlFactors(self, double: float, double2: float, double3: float, double4: float) -> None:
+        """
+            Set the step size control factors.
+        
+            The new step size hNew is computed from the old one h by:
+        
+            .. code-block: java
+            
+            
+             hNew = h * stepControl2 / (err/stepControl1)^(1/(2k + 1))
+             
+        
+            where err is the scaled error and k the iteration number of the extrapolation scheme (counting from 0). The default
+            values are 0.65 for stepControl1 and 0.94 for stepControl2.
+        
+            The step size is subject to the restriction:
+        
+            .. code-block: java
+            
+            
+             stepControl3^(1/(2k + 1))/stepControl4 <= hNew/h <= 1/stepControl3^(1/(2k + 1))
+             
+        
+            The default values are 0.02 for stepControl3 and 4.0 for stepControl4.
+        
+            Parameters:
+                control1 (double): first stepsize control factor (the factor is reset to default if lower than 0.0001 or greater than 0.9999)
+                control2 (double): second stepsize control factor (the factor is reset to default if lower than 0.0001 or greater than 0.9999)
+                control3 (double): third stepsize control factor (the factor is reset to default if lower than 0.0001 or greater than 0.9999)
+                control4 (double): fourth stepsize control factor (the factor is reset to default if lower than 1.0001 or greater than 999.9)
+        
+        
+        """
+        ...
+    def setInterpolationControl(self, boolean: bool, int: int) -> None:
+        """
+            Set the interpolation order control parameter. The interpolation order for dense output is 2k - mudif + 1. The default
+            value for mudif is 4 and the interpolation error is used in stepsize control by default.
+        
+            Parameters:
+                useInterpolationErrorForControl (boolean): if true, interpolation error is used for stepsize control
+                mudifControlParameter (int): interpolation order control parameter (the parameter is reset to default if <= 0 or >= 7)
+        
+        
+        """
+        ...
+    def setOrderControl(self, int: int, double: float, double2: float) -> None:
+        """
+            Set the order control parameters.
+        
+            The Gragg-Bulirsch-Stoer method changes both the step size and the order during integration, in order to minimize
+            computation cost. Each extrapolation step increases the order by 2, so the maximal order that will be used is always
+            even, it is twice the maximal number of columns in the extrapolation table.
+        
+            .. code-block: java
+            
+            
+             order is decreased if w(k - 1) <= w(k)     * orderControl1
+             order is increased if w(k)     <= w(k - 1) * orderControl2
+             
+        
+            where w is the table of work per unit step for each order (number of function calls divided by the step length), and k
+            is the current order.
+        
+            The default maximal order after construction is 18 (i.e. the maximal number of columns is 9). The default values are 0.8
+            for orderControl1 and 0.9 for orderControl2.
+        
+            Parameters:
+                maximalOrder (int): maximal order in the extrapolation table (the maximal order is reset to default if order <= 6 or odd)
+                control1 (double): first order control factor (the factor is reset to default if lower than 0.0001 or greater than 0.9999)
+                control2 (double): second order control factor (the factor is reset to default if lower than 0.0001 or greater than 0.9999)
+        
+        
+        """
+        ...
+    def setStabilityCheck(self, boolean: bool, int: int, int2: int, double: float) -> None:
+        """
+            Set the stability check controls.
+        
+            The stability check is performed on the first few iterations of the extrapolation scheme. If this test fails, the step
+            is rejected and the stepsize is reduced.
+        
+            By default, the test is performed, at most during two iterations at each step, and at most once for each of these
+            iterations. The default stepsize reduction factor is 0.5.
+        
+            Parameters:
+                performStabilityCheck (boolean): if true, stability check will be performed, if false, the check will be skipped
+                maxNumIter (int): maximal number of iterations for which checks are performed (the number of iterations is reset to default if negative or
+                    null)
+                maxNumChecks (int): maximal number of checks for each iteration (the number of checks is reset to default if negative or null)
+                stepsizeReductionFactor (double): stepsize reduction factor in case of failure (the factor is reset to default if lower than 0.0001 or greater than
+                    0.9999)
+        
+        
+        """
+        ...
 
 _RungeKuttaFieldIntegrator__T = typing.TypeVar('_RungeKuttaFieldIntegrator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class RungeKuttaFieldIntegrator(org.hipparchus.ode.AbstractFieldIntegrator[_RungeKuttaFieldIntegrator__T], FieldButcherArrayProvider[_RungeKuttaFieldIntegrator__T], typing.Generic[_RungeKuttaFieldIntegrator__T]):
@@ -1577,6 +1501,7 @@ class RungeKuttaFieldIntegrator(org.hipparchus.ode.AbstractFieldIntegrator[_Rung
         These methods are explicit Runge-Kutta methods, their Butcher arrays are as follows :
     
         .. code-block: java
+        
         
             0  |
            c2  | a21
@@ -1592,6 +1517,16 @@ class RungeKuttaFieldIntegrator(org.hipparchus.ode.AbstractFieldIntegrator[_Rung
             :class:`~org.hipparchus.ode.nonstiff.ClassicalRungeKuttaFieldIntegrator`,
             :class:`~org.hipparchus.ode.nonstiff.GillFieldIntegrator`, :class:`~org.hipparchus.ode.nonstiff.MidpointFieldIntegrator`
     """
+    def getDefaultStep(self) -> _RungeKuttaFieldIntegrator__T:
+        """
+            Getter for the default, positive step-size assigned at constructor level.
+        
+            Returns:
+                step
+        
+        
+        """
+        ...
     def integrate(self, fieldExpandableODE: org.hipparchus.ode.FieldExpandableODE[_RungeKuttaFieldIntegrator__T], fieldODEState: org.hipparchus.ode.FieldODEState[_RungeKuttaFieldIntegrator__T], t: _RungeKuttaFieldIntegrator__T) -> org.hipparchus.ode.FieldODEStateAndDerivative[_RungeKuttaFieldIntegrator__T]: ...
     def singleStep(self, fieldOrdinaryDifferentialEquation: org.hipparchus.ode.FieldOrdinaryDifferentialEquation[_RungeKuttaFieldIntegrator__T], t: _RungeKuttaFieldIntegrator__T, tArray: typing.List[_RungeKuttaFieldIntegrator__T], t3: _RungeKuttaFieldIntegrator__T) -> typing.List[_RungeKuttaFieldIntegrator__T]: ...
 
@@ -1604,6 +1539,7 @@ class RungeKuttaIntegrator(org.hipparchus.ode.AbstractIntegrator, ButcherArrayPr
         These methods are explicit Runge-Kutta methods, their Butcher arrays are as follows :
     
         .. code-block: java
+        
         
             0  |
            c2  | a21
@@ -1619,6 +1555,16 @@ class RungeKuttaIntegrator(org.hipparchus.ode.AbstractIntegrator, ButcherArrayPr
             :class:`~org.hipparchus.ode.nonstiff.ClassicalRungeKuttaIntegrator`,
             :class:`~org.hipparchus.ode.nonstiff.GillIntegrator`, :class:`~org.hipparchus.ode.nonstiff.MidpointIntegrator`
     """
+    def getDefaultStep(self) -> float:
+        """
+            Getter for the default, positive step-size assigned at constructor level.
+        
+            Returns:
+                step
+        
+        
+        """
+        ...
     @typing.overload
     def integrate(self, ordinaryDifferentialEquation: org.hipparchus.ode.OrdinaryDifferentialEquation, oDEState: org.hipparchus.ode.ODEState, double: float) -> org.hipparchus.ode.ODEStateAndDerivative: ...
     @typing.overload
@@ -1663,6 +1609,7 @@ class ClassicalRungeKuttaFieldIntegrator(RungeKuttaFieldIntegrator[_ClassicalRun
         This method is an explicit Runge-Kutta method, its Butcher-array is the following one :
     
         .. code-block: java
+        
         
             0  |  0    0    0    0
            1/2 | 1/2   0    0    0
@@ -1720,6 +1667,7 @@ class ClassicalRungeKuttaIntegrator(RungeKuttaIntegrator):
         This method is an explicit Runge-Kutta method, its Butcher-array is the following one :
     
         .. code-block: java
+        
         
             0  |  0    0    0    0
            1/2 | 1/2   0    0    0
@@ -1783,6 +1731,7 @@ class DormandPrince54FieldIntegrator(EmbeddedRungeKuttaFieldIntegrator[_DormandP
         article :
     
         .. code-block: java
+        
         
           A family of embedded Runge-Kutta formulae
           J. R. Dormand and P. J. Prince
@@ -1854,6 +1803,7 @@ class DormandPrince54Integrator(EmbeddedRungeKuttaIntegrator):
         article :
     
         .. code-block: java
+        
         
           A family of embedded Runge-Kutta formulae
           J. R. Dormand and P. J. Prince
@@ -2173,6 +2123,7 @@ class GillFieldIntegrator(RungeKuttaFieldIntegrator[_GillFieldIntegrator__T], ty
     
         .. code-block: java
         
+        
             0  |    0        0       0      0
            1/2 |   1/2       0       0      0
            1/2 | (q-1)/2  (2-q)/2    0      0
@@ -2180,6 +2131,7 @@ class GillFieldIntegrator(RungeKuttaFieldIntegrator[_GillFieldIntegrator__T], ty
                |-------------------------------
                |   1/6    (2-q)/6 (2+q)/6  1/6
          
+    
         where q = sqrt(2)
     
         Also see:
@@ -2231,6 +2183,7 @@ class GillIntegrator(RungeKuttaIntegrator):
     
         .. code-block: java
         
+        
             0  |    0        0       0      0
            1/2 |   1/2       0       0      0
            1/2 | (q-1)/2  (2-q)/2    0      0
@@ -2238,6 +2191,7 @@ class GillIntegrator(RungeKuttaIntegrator):
                |-------------------------------
                |   1/6    (2-q)/6 (2+q)/6  1/6
          
+    
         where q = sqrt(2)
     
         Also see:
@@ -2411,6 +2365,7 @@ class LutherFieldIntegrator(RungeKuttaFieldIntegrator[_LutherFieldIntegrator__T]
     
         .. code-block: java
         
+        
                 0   |               0                     0                     0                     0                     0                     0
                 1   |               1                     0                     0                     0                     0                     0
                1/2  |              3/8                   1/8                    0                     0                     0                     0
@@ -2421,6 +2376,7 @@ class LutherFieldIntegrator(RungeKuttaFieldIntegrator[_LutherFieldIntegrator__T]
                     |--------------------------------------------------------------------------------------------------------------------------------------------------
                     |              1/20                   0                   16/45                  0                   49/180                 49/180         1/20
          
+    
         where q = √21
     
         Also see:
@@ -2475,6 +2431,7 @@ class LutherIntegrator(RungeKuttaIntegrator):
     
         .. code-block: java
         
+        
                 0   |               0                     0                     0                     0                     0                     0
                 1   |               1                     0                     0                     0                     0                     0
                1/2  |              3/8                   1/8                    0                     0                     0                     0
@@ -2485,6 +2442,7 @@ class LutherIntegrator(RungeKuttaIntegrator):
                     |--------------------------------------------------------------------------------------------------------------------------------------------------
                     |              1/20                   0                   16/45                  0                   49/180                 49/180         1/20
          
+    
         where q = √21
     
         Also see:
@@ -2535,6 +2493,7 @@ class MidpointFieldIntegrator(RungeKuttaFieldIntegrator[_MidpointFieldIntegrator
         This method is an explicit Runge-Kutta method, its Butcher-array is the following one :
     
         .. code-block: java
+        
         
             0  |  0    0
            1/2 | 1/2   0
@@ -2591,6 +2550,7 @@ class MidpointIntegrator(RungeKuttaIntegrator):
     
         .. code-block: java
         
+        
             0  |  0    0
            1/2 | 1/2   0
                |----------
@@ -2645,6 +2605,7 @@ class ThreeEighthesFieldIntegrator(RungeKuttaFieldIntegrator[_ThreeEighthesField
         This method is an explicit Runge-Kutta method, its Butcher-array is the following one :
     
         .. code-block: java
+        
         
             0  |  0    0    0    0
            1/3 | 1/3   0    0    0
@@ -2702,6 +2663,7 @@ class ThreeEighthesIntegrator(RungeKuttaIntegrator):
         This method is an explicit Runge-Kutta method, its Butcher-array is the following one :
     
         .. code-block: java
+        
         
             0  |  0    0    0    0
            1/3 | 1/3   0    0    0

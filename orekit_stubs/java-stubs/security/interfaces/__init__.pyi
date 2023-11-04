@@ -23,6 +23,9 @@ class DSAParams:
 class ECKey:
     def getParams(self) -> java.security.spec.ECParameterSpec: ...
 
+class EdECKey:
+    def getParams(self) -> java.security.spec.NamedParameterSpec: ...
+
 class RSAKey:
     def getModulus(self) -> java.math.BigInteger: ...
     def getParams(self) -> java.security.spec.AlgorithmParameterSpec: ...
@@ -45,6 +48,12 @@ class ECPrivateKey(java.security.PrivateKey, ECKey):
 class ECPublicKey(java.security.PublicKey, ECKey):
     serialVersionUID: typing.ClassVar[int] = ...
     def getW(self) -> java.security.spec.ECPoint: ...
+
+class EdECPrivateKey(EdECKey, java.security.PrivateKey):
+    def getBytes(self) -> java.util.Optional[typing.List[int]]: ...
+
+class EdECPublicKey(EdECKey, java.security.PublicKey):
+    def getPoint(self) -> java.security.spec.EdECPoint: ...
 
 class RSAPrivateKey(java.security.PrivateKey, RSAKey):
     serialVersionUID: typing.ClassVar[int] = ...
@@ -91,6 +100,9 @@ class __module_protocol__(typing.Protocol):
     ECKey: typing.Type[ECKey]
     ECPrivateKey: typing.Type[ECPrivateKey]
     ECPublicKey: typing.Type[ECPublicKey]
+    EdECKey: typing.Type[EdECKey]
+    EdECPrivateKey: typing.Type[EdECPrivateKey]
+    EdECPublicKey: typing.Type[EdECPublicKey]
     RSAKey: typing.Type[RSAKey]
     RSAMultiPrimePrivateCrtKey: typing.Type[RSAMultiPrimePrivateCrtKey]
     RSAPrivateCrtKey: typing.Type[RSAPrivateCrtKey]

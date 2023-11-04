@@ -347,6 +347,8 @@ class Unit(java.io.Serializable):
         
         """
         ...
+    @staticmethod
+    def ensureCompatible(string: str, list: java.util.List['Unit'], boolean: bool, list2: java.util.List['Unit']) -> None: ...
     def equals(self, object: typing.Any) -> bool:
         """
             Check if the instance represents the same unit as another instance.
@@ -739,6 +741,13 @@ class UnitsConverter:
     public static final :class:`~org.orekit.utils.units.UnitsConverter` MILLI_SECONDS_TO_SECONDS
     
         Milli seconds to seconds converter.
+    
+    """
+    NANO_TESLAS_TO_TESLAS: typing.ClassVar['UnitsConverter'] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.UnitsConverter` NANO_TESLAS_TO_TESLAS
+    
+        Nano Teslas to Tesla converter.
     
     """
     DAYS_TO_SECONDS: typing.ClassVar['UnitsConverter'] = ...

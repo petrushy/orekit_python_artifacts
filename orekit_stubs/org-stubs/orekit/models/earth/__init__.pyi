@@ -267,10 +267,10 @@ class GeoMagneticElements(java.io.Serializable):
         ...
     def getFieldVector(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Returns the magnetic field vector in nTesla.
+            Returns the magnetic field vector in Tesla.
         
             Returns:
-                the magnetic field vector in nTesla
+                the magnetic field vector in Tesla
         
         
         """
@@ -281,7 +281,7 @@ class GeoMagneticElements(java.io.Serializable):
             of the field vector).
         
             Returns:
-                the horizontal intensity in nTesla
+                the horizontal intensity in Tesla
         
         
         """
@@ -301,7 +301,7 @@ class GeoMagneticElements(java.io.Serializable):
             Returns the total intensity of the magnetic field (= norm of the field vector).
         
             Returns:
-                the total intensity in nTesla
+                the total intensity in Tesla
         
         
         """

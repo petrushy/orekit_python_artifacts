@@ -33,7 +33,7 @@ class AggregatableStatistic(typing.Generic[_AggregatableStatistic__T]):
             Raises:
                 :class:`~org.hipparchus.stat.descriptive.https:.www.hipparchus.org.hipparchus`: if either others or any instance is null
         
-        default void aggregate(:class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable?is`<:class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`> others)
+        default void aggregate (:class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable?is`<:class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`> others)
         
             Aggregates the results from the provided instances into this instance.
         
@@ -204,7 +204,7 @@ class StatisticalSummary:
             Raises:
                 :class:`~org.hipparchus.stat.descriptive.https:.www.hipparchus.org.hipparchus`: if the input is null
         
-        static :class:`~org.hipparchus.stat.descriptive.StatisticalSummary` aggregate(:class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable?is`<? extends :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`> statistics)
+        static :class:`~org.hipparchus.stat.descriptive.StatisticalSummary` aggregate (:class:`~org.hipparchus.stat.descriptive.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable?is`<? extends :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`> statistics)
         
             Computes aggregated statistical summaries.
         
@@ -432,7 +432,7 @@ class AbstractUnivariateStatistic(UnivariateStatistic):
             Also see:
                 :meth:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic.evaluate`
         
-        public void setData(double[] values, int begin, int length) throws :class:`~org.hipparchus.stat.descriptive.https:.www.hipparchus.org.hipparchus`
+        public void setData (double[] values, int begin, int length) throws :class:`~org.hipparchus.stat.descriptive.https:.www.hipparchus.org.hipparchus`
         
             Set the data array. The input array is copied, not referenced.
         
@@ -1275,8 +1275,6 @@ class StreamingStatistics(StatisticalSummary, AggregatableStatistic['StreamingSt
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, boolean: bool): ...
-    @typing.overload
     def __init__(self, double: float, randomGenerator: org.hipparchus.random.RandomGenerator): ...
     def accept(self, double: float) -> None:
         """
@@ -1613,9 +1611,6 @@ class StreamingStatistics(StatisticalSummary, AggregatableStatistic['StreamingSt
         def build(self) -> 'StreamingStatistics': ...
         def extrema(self, boolean: bool) -> 'StreamingStatistics.StreamingStatisticsBuilder': ...
         def moments(self, boolean: bool) -> 'StreamingStatistics.StreamingStatisticsBuilder': ...
-        @typing.overload
-        def percentiles(self, boolean: bool) -> 'StreamingStatistics.StreamingStatisticsBuilder': ...
-        @typing.overload
         def percentiles(self, double: float, randomGenerator: org.hipparchus.random.RandomGenerator) -> 'StreamingStatistics.StreamingStatisticsBuilder': ...
         def sumOfLogs(self, boolean: bool) -> 'StreamingStatistics.StreamingStatisticsBuilder': ...
         def sumOfSquares(self, boolean: bool) -> 'StreamingStatistics.StreamingStatisticsBuilder': ...

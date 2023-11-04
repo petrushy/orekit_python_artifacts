@@ -61,6 +61,7 @@ class AllowedSolution(java.lang.Enum['AllowedSolution']):
         
             .. code-block: java
             
+            
             for (AllowedSolution c : AllowedSolution.values())
                 System.out.println(c);
             
@@ -117,16 +118,6 @@ class BaseUnivariateSolver(typing.Generic[_BaseUnivariateSolver__F]):
         
             Returns:
                 the function value accuracy.
-        
-        
-        """
-        ...
-    def getMaxEvaluations(self) -> int:
-        """
-            Get the maximum number of function evaluations.
-        
-            Returns:
-                the maximum number of function evaluations.
         
         
         """
@@ -397,32 +388,20 @@ class BaseAbstractUnivariateSolver(BaseUnivariateSolver[_BaseAbstractUnivariateS
         ...
     def getMax(self) -> float:
         """
+            Get higher end of the search interval.
         
             Returns:
-                the higher end of the search interval.
-        
-        
-        """
-        ...
-    def getMaxEvaluations(self) -> int:
-        """
-            Get the maximum number of function evaluations.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver.getMaxEvaluations` in
-                interface :class:`~org.hipparchus.analysis.solvers.BaseUnivariateSolver`
-        
-            Returns:
-                the maximum number of function evaluations.
+                the higher end of the search interval
         
         
         """
         ...
     def getMin(self) -> float:
         """
+            Get lower end of the search interval.
         
             Returns:
-                the lower end of the search interval.
+                the lower end of the search interval
         
         
         """
@@ -446,9 +425,10 @@ class BaseAbstractUnivariateSolver(BaseUnivariateSolver[_BaseAbstractUnivariateS
         ...
     def getStartValue(self) -> float:
         """
+            Get initial guess.
         
             Returns:
-                the initial guess.
+                the initial guess
         
         
         """
@@ -472,7 +452,7 @@ class BaseAbstractUnivariateSolver(BaseUnivariateSolver[_BaseAbstractUnivariateS
             Returns:
                 a value where the function is zero.
         
-        public double solve(int maxEval, :class:`~org.hipparchus.analysis.solvers.BaseAbstractUnivariateSolver` f, double startValue) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`, :class:`~org.hipparchus.exception.MathIllegalStateException`
+        public double solve (int maxEval, :class:`~org.hipparchus.analysis.solvers.BaseAbstractUnivariateSolver` f, double startValue) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`, :class:`~org.hipparchus.exception.MathIllegalStateException`
         
             Solve for a zero in the vicinity of :code:`startValue`.
         

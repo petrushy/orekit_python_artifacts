@@ -70,7 +70,42 @@ class BaseOptimizer(typing.Generic[_BaseOptimizer__P]):
 
 _ConvergenceChecker__P = typing.TypeVar('_ConvergenceChecker__P')  # <P>
 class ConvergenceChecker(typing.Generic[_ConvergenceChecker__P]):
-    def converged(self, int: int, p: _ConvergenceChecker__P, p2: _ConvergenceChecker__P) -> bool: ...
+    """
+    public interface ConvergenceChecker<P>
+    
+        This interface specifies how to check if an optimization algorithm has converged.
+    
+    
+        Deciding if convergence has been reached is a problem-dependent issue. The user should provide a class implementing this
+        interface to allow the optimization algorithm to stop its search according to the problem at hand.
+    
+    
+        For convenience, three implementations that fit simple needs are already provided:
+        :class:`~org.hipparchus.optim.SimpleValueChecker`, :class:`~org.hipparchus.optim.SimpleVectorValueChecker` and
+        :class:`~org.hipparchus.optim.SimplePointChecker`. The first two consider that convergence is reached when the objective
+        function value does not change much anymore, it does not use the point set at all. The third one considers that
+        convergence is reached when the input point set does not change much anymore, it does not use objective function value
+        at all.
+    
+        Also see:
+            :class:`~org.hipparchus.optim.SimplePointChecker`, :class:`~org.hipparchus.optim.SimpleValueChecker`,
+            :class:`~org.hipparchus.optim.SimpleVectorValueChecker`
+    """
+    def converged(self, int: int, p: _ConvergenceChecker__P, p2: _ConvergenceChecker__P) -> bool:
+        """
+            Check if the optimization algorithm has converged.
+        
+            Parameters:
+                iteration (int): Current iteration.
+                previous (:class:`~org.hipparchus.optim.ConvergenceChecker`): Best point in the previous iteration.
+                current (:class:`~org.hipparchus.optim.ConvergenceChecker`): Best point in the current iteration.
+        
+            Returns:
+                :code:`true` if the algorithm is considered to have converged.
+        
+        
+        """
+        ...
 
 class LocalizedOptimFormats(java.lang.Enum['LocalizedOptimFormats'], org.hipparchus.exception.Localizable):
     """
@@ -147,6 +182,7 @@ class LocalizedOptimFormats(java.lang.Enum['LocalizedOptimFormats'], org.hipparc
         
             .. code-block: java
             
+            
             for (LocalizedOptimFormats c : LocalizedOptimFormats.values())
                 System.out.println(c);
             
@@ -199,7 +235,7 @@ class OptimizationProblem(typing.Generic[_OptimizationProblem__P]):
 
 class PointValuePair(org.hipparchus.util.Pair[typing.List[float], float], java.io.Serializable):
     """
-    public class PointValuePair extends :class:`~org.hipparchus.optim.https:.www.hipparchus.org.hipparchus`<double[],:class:`~org.hipparchus.optim.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double?is`> implements :class:`~org.hipparchus.optim.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public class PointValuePair extends :class:`~org.hipparchus.optim.https:.www.hipparchus.org.hipparchus`<double[], :class:`~org.hipparchus.optim.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double?is`> implements :class:`~org.hipparchus.optim.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         This class holds a point and the value of an objective function at that point.
     
@@ -234,7 +270,7 @@ class PointValuePair(org.hipparchus.util.Pair[typing.List[float], float], java.i
 
 class PointVectorValuePair(org.hipparchus.util.Pair[typing.List[float], typing.List[float]], java.io.Serializable):
     """
-    public class PointVectorValuePair extends :class:`~org.hipparchus.optim.https:.www.hipparchus.org.hipparchus`<double[],double[]> implements :class:`~org.hipparchus.optim.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public class PointVectorValuePair extends :class:`~org.hipparchus.optim.https:.www.hipparchus.org.hipparchus`<double[], double[]> implements :class:`~org.hipparchus.optim.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         This class holds a point and the vectorial value of an objective function at that point.
     
@@ -320,6 +356,7 @@ class AbstractConvergenceChecker(ConvergenceChecker[_AbstractConvergenceChecker_
         ...
     def getAbsoluteThreshold(self) -> float:
         """
+            Get absolute threshold.
         
             Returns:
                 the absolute threshold.
@@ -329,6 +366,7 @@ class AbstractConvergenceChecker(ConvergenceChecker[_AbstractConvergenceChecker_
         ...
     def getRelativeThreshold(self) -> float:
         """
+            Get relative threshold.
         
             Returns:
                 the relative threshold.
@@ -386,6 +424,7 @@ class BaseMultivariateOptimizer(BaseOptimizer[_BaseMultivariateOptimizer__P], ty
     """
     def getLowerBound(self) -> typing.List[float]:
         """
+            Get lower bounds.
         
             Returns:
                 the lower bounds, or :code:`null` if not set.
@@ -405,6 +444,7 @@ class BaseMultivariateOptimizer(BaseOptimizer[_BaseMultivariateOptimizer__P], ty
         ...
     def getUpperBound(self) -> typing.List[float]:
         """
+            Get upper bounds.
         
             Returns:
                 the upper bounds, or :code:`null` if not set.
@@ -516,8 +556,25 @@ class ConvergenceCheckerOrMultiplexer(ConvergenceChecker[_ConvergenceCheckerOrMu
         ...
 
 class InitialGuess(OptimizationData):
+    """
+    public class InitialGuess extends :class:`~org.hipparchus.optim.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.optim.OptimizationData`
+    
+        Starting point (first guess) of the optimization procedure.
+    
+    
+        Immutable class.
+    """
     def __init__(self, doubleArray: typing.List[float]): ...
-    def getInitialGuess(self) -> typing.List[float]: ...
+    def getInitialGuess(self) -> typing.List[float]:
+        """
+            Gets the initial guess.
+        
+            Returns:
+                the initial guess.
+        
+        
+        """
+        ...
 
 class MaxEval(OptimizationData):
     """
@@ -580,43 +637,275 @@ class MaxIter(OptimizationData):
         ...
 
 class SimpleBounds(OptimizationData):
+    """
+    public class SimpleBounds extends :class:`~org.hipparchus.optim.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.optim.OptimizationData`
+    
+        Simple optimization constraints: lower and upper bounds. The valid range of the parameters is an interval that can be
+        infinite (in one or both directions).
+    
+    
+        Immutable class.
+    """
     def __init__(self, doubleArray: typing.List[float], doubleArray2: typing.List[float]): ...
-    def getLower(self) -> typing.List[float]: ...
-    def getUpper(self) -> typing.List[float]: ...
+    def getLower(self) -> typing.List[float]:
+        """
+            Gets the lower bounds.
+        
+            Returns:
+                the lower bounds.
+        
+        
+        """
+        ...
+    def getUpper(self) -> typing.List[float]:
+        """
+            Gets the upper bounds.
+        
+            Returns:
+                the upper bounds.
+        
+        
+        """
+        ...
     @staticmethod
-    def unbounded(int: int) -> 'SimpleBounds': ...
+    def unbounded(int: int) -> 'SimpleBounds':
+        """
+            Factory method that creates instance of this class that represents unbounded ranges.
+        
+            Parameters:
+                dim (int): Number of parameters.
+        
+            Returns:
+                a new instance suitable for passing to an optimizer that requires bounds specification.
+        
+        
+        """
+        ...
 
 _BaseMultiStartMultivariateOptimizer__P = typing.TypeVar('_BaseMultiStartMultivariateOptimizer__P')  # <P>
 class BaseMultiStartMultivariateOptimizer(BaseMultivariateOptimizer[_BaseMultiStartMultivariateOptimizer__P], typing.Generic[_BaseMultiStartMultivariateOptimizer__P]):
+    """
+    public abstract class BaseMultiStartMultivariateOptimizer<P> extends :class:`~org.hipparchus.optim.BaseMultivariateOptimizer`<P>
+    
+        Base class multi-start optimizer for a multivariate function.
+    
+    
+        This class wraps an optimizer in order to use it several times in turn with different starting points (trying to avoid
+        being trapped in a local extremum when looking for a global one). *It is not a "user" class.*
+    """
     def __init__(self, baseMultivariateOptimizer: BaseMultivariateOptimizer[_BaseMultiStartMultivariateOptimizer__P], int: int, randomVectorGenerator: org.hipparchus.random.RandomVectorGenerator): ...
-    def getEvaluations(self) -> int: ...
-    def getOptima(self) -> typing.List[_BaseMultiStartMultivariateOptimizer__P]: ...
+    def getEvaluations(self) -> int:
+        """
+            Gets the number of evaluations of the objective function. The number of evaluations corresponds to the last call to the
+            :code:`optimize` method. It is 0 if the method has not been called yet.
+        
+            Overrides:
+                :meth:`~org.hipparchus.optim.BaseOptimizer.getEvaluations` in class :class:`~org.hipparchus.optim.BaseOptimizer`
+        
+            Returns:
+                the number of evaluations of the objective function.
+        
+        
+        """
+        ...
+    def getOptima(self) -> typing.List[_BaseMultiStartMultivariateOptimizer__P]:
+        """
+            Gets all the optima found during the last call to :code:`optimize`. The optimizer stores all the optima found during a
+            set of restarts. The :code:`optimize` method returns the best point only. This method returns all the points found at
+            the end of each starts, including the best one already returned by the :code:`optimize` method.
+        
+        
+            The returned array as one element for each start as specified in the constructor. It is ordered with the results from
+            the runs that did converge first, sorted from best to worst objective value (i.e in ascending order if minimizing and in
+            descending order if maximizing), followed by :code:`null` elements corresponding to the runs that did not converge. This
+            means all elements will be :code:`null` if the :code:`optimize` method did throw an exception. This also means that if
+            the first element is not :code:`null`, it is the best point found across all starts.
+        
+        
+            The behaviour is undefined if this method is called before :code:`optimize`; it will likely throw
+            :code:`NullPointerException`.
+        
+            Returns:
+                an array containing the optima sorted from best to worst.
+        
+        
+        """
+        ...
     @typing.overload
-    def optimize(self, *optimizationData: OptimizationData) -> _BaseMultiStartMultivariateOptimizer__P: ...
+    def optimize(self, *optimizationData: OptimizationData) -> _BaseMultiStartMultivariateOptimizer__P:
+        """
+            Stores data and performs the optimization.
+        
+            The list of parameters is open-ended so that sub-classes can extend it with arguments specific to their concrete
+            implementations.
+        
+            When the method is called multiple times, instance data is overwritten only when actually present in the list of
+            arguments: when not specified, data set in a previous call is retained (and thus is optional in subsequent calls).
+        
+            Important note: Subclasses *must* override :meth:`~org.hipparchus.optim.BaseOptimizer.parseOptimizationData` if they
+            need to register their own options; but then, they *must* also call :code:`super.parseOptimizationData(optData)` within
+            that method.
+        
+            Overrides:
+                :meth:`~org.hipparchus.optim.BaseMultivariateOptimizer.optimize` in
+                class :class:`~org.hipparchus.optim.BaseMultivariateOptimizer`
+        
+            Parameters:
+                optData (:class:`~org.hipparchus.optim.OptimizationData`...): Optimization data. In addition to those documented in :meth:`~org.hipparchus.optim.BaseOptimizer.parseOptimizationData`,
+                    this method will register the following data:
+        
+                      - :class:`~org.hipparchus.optim.InitialGuess`
+                      - :class:`~org.hipparchus.optim.SimpleBounds`
+        
+        
+            Returns:
+                a point/value pair that satisfies the convergence criteria.
+        
+            Raises:
+                :class:`~org.hipparchus.optim.https:.www.hipparchus.org.hipparchus`: if :code:`optData` does not contain an instance of :class:`~org.hipparchus.optim.MaxEval` or
+                    :class:`~org.hipparchus.optim.InitialGuess`.
+        
+        
+        """
+        ...
     @typing.overload
     def optimize(self) -> _BaseMultiStartMultivariateOptimizer__P: ...
 
 _SimplePointChecker__P = typing.TypeVar('_SimplePointChecker__P', bound=org.hipparchus.util.Pair)  # <P>
 class SimplePointChecker(AbstractConvergenceChecker[_SimplePointChecker__P], typing.Generic[_SimplePointChecker__P]):
+    """
+    public class SimplePointChecker<P extends :class:`~org.hipparchus.optim.https:.www.hipparchus.org.hipparchus`<double[], ? extends :class:`~org.hipparchus.optim.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`>> extends :class:`~org.hipparchus.optim.AbstractConvergenceChecker`<P>
+    
+        Simple implementation of the :class:`~org.hipparchus.optim.ConvergenceChecker` interface using only point coordinates.
+        Convergence is considered to have been reached if either the relative difference between each point coordinate are
+        smaller than a threshold or if either the absolute difference between the point coordinates are smaller than another
+        threshold.
+    
+    
+        The :meth:`~org.hipparchus.optim.SimplePointChecker.converged` method will also return :code:`true` if the number of
+        iterations has been set (see :meth:`~org.hipparchus.optim.SimplePointChecker.%3Cinit%3E`).
+    """
     @typing.overload
     def __init__(self, double: float, double2: float): ...
     @typing.overload
     def __init__(self, double: float, double2: float, int: int): ...
-    def converged(self, int: int, p: _SimplePointChecker__P, p2: _SimplePointChecker__P) -> bool: ...
+    def converged(self, int: int, p: _SimplePointChecker__P, p2: _SimplePointChecker__P) -> bool:
+        """
+            Check if the optimization algorithm has converged considering the last two points. This method may be called several
+            times from the same algorithm iteration with different points. This can be detected by checking the iteration number at
+            each call if needed. Each time this method is called, the previous and current point correspond to points with the same
+            role at each iteration, so they can be compared. As an example, simplex-based algorithms call this method for all points
+            of the simplex, not only for the best or worst ones.
+        
+            Specified by:
+                :meth:`~org.hipparchus.optim.ConvergenceChecker.converged` in
+                interface :class:`~org.hipparchus.optim.ConvergenceChecker`
+        
+            Specified by:
+                :meth:`~org.hipparchus.optim.AbstractConvergenceChecker.converged` in
+                class :class:`~org.hipparchus.optim.AbstractConvergenceChecker`
+        
+            Parameters:
+                iteration (int): Index of current iteration
+                previous (:class:`~org.hipparchus.optim.SimplePointChecker`): Best point in the previous iteration.
+                current (:class:`~org.hipparchus.optim.SimplePointChecker`): Best point in the current iteration.
+        
+            Returns:
+                :code:`true` if the arguments satify the convergence criterion.
+        
+        
+        """
+        ...
 
 class SimpleValueChecker(AbstractConvergenceChecker[PointValuePair]):
+    """
+    public class SimpleValueChecker extends :class:`~org.hipparchus.optim.AbstractConvergenceChecker`<:class:`~org.hipparchus.optim.PointValuePair`>
+    
+        Simple implementation of the :class:`~org.hipparchus.optim.ConvergenceChecker` interface using only objective function
+        values. Convergence is considered to have been reached if either the relative difference between the objective function
+        values is smaller than a threshold or if either the absolute difference between the objective function values is smaller
+        than another threshold.
+    
+    
+        The :meth:`~org.hipparchus.optim.SimpleValueChecker.converged` method will also return :code:`true` if the number of
+        iterations has been set (see :meth:`~org.hipparchus.optim.SimpleValueChecker.%3Cinit%3E`).
+    """
     @typing.overload
     def __init__(self, double: float, double2: float): ...
     @typing.overload
     def __init__(self, double: float, double2: float, int: int): ...
-    def converged(self, int: int, pointValuePair: PointValuePair, pointValuePair2: PointValuePair) -> bool: ...
+    def converged(self, int: int, pointValuePair: PointValuePair, pointValuePair2: PointValuePair) -> bool:
+        """
+            Check if the optimization algorithm has converged considering the last two points. This method may be called several
+            time from the same algorithm iteration with different points. This can be detected by checking the iteration number at
+            each call if needed. Each time this method is called, the previous and current point correspond to points with the same
+            role at each iteration, so they can be compared. As an example, simplex-based algorithms call this method for all points
+            of the simplex, not only for the best or worst ones.
+        
+            Specified by:
+                :meth:`~org.hipparchus.optim.ConvergenceChecker.converged` in
+                interface :class:`~org.hipparchus.optim.ConvergenceChecker`
+        
+            Specified by:
+                :meth:`~org.hipparchus.optim.AbstractConvergenceChecker.converged` in
+                class :class:`~org.hipparchus.optim.AbstractConvergenceChecker`
+        
+            Parameters:
+                iteration (int): Index of current iteration
+                previous (:class:`~org.hipparchus.optim.PointValuePair`): Best point in the previous iteration.
+                current (:class:`~org.hipparchus.optim.PointValuePair`): Best point in the current iteration.
+        
+            Returns:
+                :code:`true` if the algorithm has converged.
+        
+        
+        """
+        ...
 
 class SimpleVectorValueChecker(AbstractConvergenceChecker[PointVectorValuePair]):
+    """
+    public class SimpleVectorValueChecker extends :class:`~org.hipparchus.optim.AbstractConvergenceChecker`<:class:`~org.hipparchus.optim.PointVectorValuePair`>
+    
+        Simple implementation of the :class:`~org.hipparchus.optim.ConvergenceChecker` interface using only objective function
+        values. Convergence is considered to have been reached if either the relative difference between the objective function
+        values is smaller than a threshold or if either the absolute difference between the objective function values is smaller
+        than another threshold for all vectors elements.
+    
+    
+        The :meth:`~org.hipparchus.optim.SimpleVectorValueChecker.converged` method will also return :code:`true` if the number
+        of iterations has been set (see :meth:`~org.hipparchus.optim.SimpleVectorValueChecker.%3Cinit%3E`).
+    """
     @typing.overload
     def __init__(self, double: float, double2: float): ...
     @typing.overload
     def __init__(self, double: float, double2: float, int: int): ...
-    def converged(self, int: int, pointVectorValuePair: PointVectorValuePair, pointVectorValuePair2: PointVectorValuePair) -> bool: ...
+    def converged(self, int: int, pointVectorValuePair: PointVectorValuePair, pointVectorValuePair2: PointVectorValuePair) -> bool:
+        """
+            Check if the optimization algorithm has converged considering the last two points. This method may be called several
+            times from the same algorithm iteration with different points. This can be detected by checking the iteration number at
+            each call if needed. Each time this method is called, the previous and current point correspond to points with the same
+            role at each iteration, so they can be compared. As an example, simplex-based algorithms call this method for all points
+            of the simplex, not only for the best or worst ones.
+        
+            Specified by:
+                :meth:`~org.hipparchus.optim.ConvergenceChecker.converged` in
+                interface :class:`~org.hipparchus.optim.ConvergenceChecker`
+        
+            Specified by:
+                :meth:`~org.hipparchus.optim.AbstractConvergenceChecker.converged` in
+                class :class:`~org.hipparchus.optim.AbstractConvergenceChecker`
+        
+            Parameters:
+                iteration (int): Index of current iteration
+                previous (:class:`~org.hipparchus.optim.PointVectorValuePair`): Best point in the previous iteration.
+                current (:class:`~org.hipparchus.optim.PointVectorValuePair`): Best point in the current iteration.
+        
+            Returns:
+                :code:`true` if the arguments satify the convergence criterion.
+        
+        
+        """
+        ...
 
 
 class __module_protocol__(typing.Protocol):

@@ -1,3 +1,4 @@
+import java.lang
 import java.util
 import java.util.stream
 import org.hipparchus
@@ -19,10 +20,191 @@ import typing
 
 
 
-_ImpulseManeuver__T = typing.TypeVar('_ImpulseManeuver__T', bound=org.orekit.propagation.events.EventDetector)  # <T>
-class ImpulseManeuver(org.orekit.propagation.events.AbstractDetector['ImpulseManeuver'[_ImpulseManeuver__T]], typing.Generic[_ImpulseManeuver__T]):
+class Control3DVectorCostType(java.lang.Enum['Control3DVectorCostType']):
     """
-    public class ImpulseManeuver<T extends :class:`~org.orekit.propagation.events.EventDetector`> extends :class:`~org.orekit.propagation.events.AbstractDetector`<:class:`~org.orekit.forces.maneuvers.ImpulseManeuver`<T>>
+    public enum Control3DVectorCostType extends :class:`~org.orekit.forces.maneuvers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.forces.maneuvers.Control3DVectorCostType`>
+    
+        Enumerate on types of cost for 3D control vector (thrust as a force or acceleration, including an impulse) at a given
+        time. It is typically a norm (for a single, gimbaled thruster it would be the Euclidean one) and relates to the mass
+        flow rate. See ROSS, I. Michael. Space Trajectory Optimization and L1-norm Optimal Control Problems. Modern
+        astrodynamics, 2006, vol. 1, p. 155.
+    
+        It is used widely across the :class:`~org.orekit.forces.maneuvers.package` package.
+    
+        Note that norms in finite-dimensional vector spaces are all equivalent in a topological sense.
+    
+        Since:
+            12.0
+    
+        Also see:
+            :class:`~org.orekit.forces.maneuvers.ImpulseManeuver`, :class:`~org.orekit.forces.maneuvers.FieldImpulseManeuver`,
+            :class:`~org.orekit.forces.maneuvers.Maneuver`
+    """
+    NONE: typing.ClassVar['Control3DVectorCostType'] = ...
+    ONE_NORM: typing.ClassVar['Control3DVectorCostType'] = ...
+    TWO_NORM: typing.ClassVar['Control3DVectorCostType'] = ...
+    INF_NORM: typing.ClassVar['Control3DVectorCostType'] = ...
+    _evaluate_1__T = typing.TypeVar('_evaluate_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def evaluate(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> float:
+        """
+            Evaluate the cost of the input seen as a 3D control vector.
+        
+            Parameters:
+                controlVector (:class:`~org.orekit.forces.maneuvers.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): vector
+        
+            Returns:
+                cost of vector
+        
+        public abstract <T extends :class:`~org.orekit.forces.maneuvers.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> T evaluate (:class:`~org.orekit.forces.maneuvers.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> controlVector)
+        
+            Evaluate the cost of the input seen as a 3D control vector.
+        
+            Parameters:
+                controlVector (:class:`~org.orekit.forces.maneuvers.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> controlVector): vector
+        
+            Returns:
+                cost of vector
+        
+        
+        """
+        ...
+    @typing.overload
+    def evaluate(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_evaluate_1__T]) -> _evaluate_1__T: ...
+    _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
+    @typing.overload
+    @staticmethod
+    def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
+    @typing.overload
+    @staticmethod
+    def valueOf(string: str) -> 'Control3DVectorCostType':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (:class:`~org.orekit.forces.maneuvers.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                :class:`~org.orekit.forces.maneuvers.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.forces.maneuvers.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        
+        
+        """
+        ...
+    @staticmethod
+    def values() -> typing.List['Control3DVectorCostType']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            for (Control3DVectorCostType c : Control3DVectorCostType.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
+
+_FieldImpulseManeuver__D = typing.TypeVar('_FieldImpulseManeuver__D', bound=org.orekit.propagation.events.FieldEventDetector)  # <D>
+_FieldImpulseManeuver__T = typing.TypeVar('_FieldImpulseManeuver__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldImpulseManeuver(org.orekit.propagation.events.FieldAbstractDetector['FieldImpulseManeuver'[_FieldImpulseManeuver__D, _FieldImpulseManeuver__T], _FieldImpulseManeuver__T], typing.Generic[_FieldImpulseManeuver__D, _FieldImpulseManeuver__T]):
+    """
+    public class FieldImpulseManeuver<D extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends :class:`~org.orekit.forces.maneuvers.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.forces.maneuvers.FieldImpulseManeuver`<D, T>, T>
+    
+        Impulse maneuver model for propagators working with Fields.
+    
+        This class implements an impulse maneuver as a discrete event that can be provided to any
+        :class:`~org.orekit.propagation.FieldPropagator` and mirrors the standard version
+        :class:`~org.orekit.forces.maneuvers.ImpulseManeuver`.
+    
+        The maneuver is triggered when an underlying event generates a
+        :meth:`~org.orekit.forces.maneuvers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is` event,
+        in which case this class will generate a
+        :meth:`~org.orekit.forces.maneuvers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is` event
+        (the stop event from the underlying object is therefore filtered out). In the simple cases, the underlying event
+        detector may be a basic :class:`~org.orekit.propagation.events.FieldDateDetector`, but it can also be a more elaborate
+        :class:`~org.orekit.propagation.events.FieldApsideDetector` for apogee maneuvers for example.
+    
+        The maneuver is defined by a single velocity increment. If no AttitudeProvider is given, the current attitude of the
+        spacecraft, defined by the current spacecraft state, will be used as the :class:`~org.orekit.attitudes.AttitudeProvider`
+        so the velocity increment should be given in the same pseudoinertial frame as the
+        :class:`~org.orekit.propagation.FieldSpacecraftState` used to construct the propagator that will handle the maneuver. If
+        an AttitudeProvider is given, the velocity increment given should be defined appropriately in consideration of that
+        provider. So, a typical case for tangential maneuvers is to provide a :class:`~org.orekit.attitudes.LofOffset` attitude
+        provider along with a velocity increment defined in accordance with that LOF aligned attitude provider; e.g. if the LOF
+        aligned attitude provider was constructed using LOFType.VNC the velocity increment should be provided in VNC
+        coordinates.
+    
+        The norm through which the delta-V maps to the mass consumption is chosen via the enum
+        :class:`~org.orekit.forces.maneuvers.Control3DVectorCostType`. Default is Euclidean.
+    
+        Beware that the triggering event detector must behave properly both before and after maneuver. If for example a node
+        detector is used to trigger an inclination maneuver and the maneuver change the orbit to an equatorial one, the node
+        detector will fail just after the maneuver, being unable to find a node on an equatorial orbit! This is a real case that
+        has been encountered during validation ...
+    
+        Since:
+            12.0
+    
+        Also see:
+            :meth:`~org.orekit.propagation.FieldPropagator.addEventDetector`, :class:`~org.orekit.forces.maneuvers.ImpulseManeuver`
+    """
+    @typing.overload
+    def __init__(self, d: _FieldImpulseManeuver__D, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldImpulseManeuver__T], t: _FieldImpulseManeuver__T): ...
+    @typing.overload
+    def __init__(self, d: _FieldImpulseManeuver__D, attitudeProvider: org.orekit.attitudes.AttitudeProvider, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldImpulseManeuver__T], t: _FieldImpulseManeuver__T): ...
+    @typing.overload
+    def __init__(self, d: _FieldImpulseManeuver__D, attitudeProvider: org.orekit.attitudes.AttitudeProvider, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldImpulseManeuver__T], t: _FieldImpulseManeuver__T, control3DVectorCostType: Control3DVectorCostType): ...
+    def g(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldImpulseManeuver__T]) -> _FieldImpulseManeuver__T: ...
+    def getAttitudeOverride(self) -> org.orekit.attitudes.AttitudeProvider:
+        """
+            Get the Attitude Provider to use during maneuver.
+        
+            Returns:
+                the attitude provider
+        
+        
+        """
+        ...
+    def getControl3DVectorCostType(self) -> Control3DVectorCostType:
+        """
+            Get the control vector's cost type.
+        
+            Returns:
+                control cost type
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
+    def getDeltaVSat(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldImpulseManeuver__T]: ...
+    def getIsp(self) -> _FieldImpulseManeuver__T:
+        """
+            Get the specific impulse.
+        
+            Returns:
+                specific impulse
+        
+        
+        """
+        ...
+    def getTrigger(self) -> org.orekit.propagation.events.FieldEventDetector[_FieldImpulseManeuver__T]: ...
+    def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldImpulseManeuver__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldImpulseManeuver__T]) -> None: ...
+
+class ImpulseManeuver(org.orekit.propagation.events.AbstractDetector['ImpulseManeuver']):
+    """
+    public class ImpulseManeuver extends :class:`~org.orekit.propagation.events.AbstractDetector`<:class:`~org.orekit.forces.maneuvers.ImpulseManeuver`>
     
         Impulse maneuver model.
     
@@ -47,6 +229,9 @@ class ImpulseManeuver(org.orekit.propagation.events.AbstractDetector['ImpulseMan
         aligned attitude provider was constructed using LOFType.VNC the velocity increment should be provided in VNC
         coordinates.
     
+        The norm through which the delta-V maps to the mass consumption is chosen via the enum
+        :class:`~org.orekit.forces.maneuvers.Control3DVectorCostType`. Default is Euclidean.
+    
         Beware that the triggering event detector must behave properly both before and after maneuver. If for example a node
         detector is used to trigger an inclination maneuver and the maneuver change the orbit to an equatorial one, the node
         detector will fail just after the maneuver, being unable to find a node on an equatorial orbit! This is a real case that
@@ -56,9 +241,11 @@ class ImpulseManeuver(org.orekit.propagation.events.AbstractDetector['ImpulseMan
             :meth:`~org.orekit.propagation.Propagator.addEventDetector`
     """
     @typing.overload
-    def __init__(self, t: _ImpulseManeuver__T, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float): ...
+    def __init__(self, eventDetector: org.orekit.propagation.events.EventDetector, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float): ...
     @typing.overload
-    def __init__(self, t: _ImpulseManeuver__T, attitudeProvider: org.orekit.attitudes.AttitudeProvider, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float): ...
+    def __init__(self, eventDetector: org.orekit.propagation.events.EventDetector, attitudeProvider: org.orekit.attitudes.AttitudeProvider, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float): ...
+    @typing.overload
+    def __init__(self, eventDetector: org.orekit.propagation.events.EventDetector, attitudeProvider: org.orekit.attitudes.AttitudeProvider, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float, control3DVectorCostType: Control3DVectorCostType): ...
     def g(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
         """
             Compute the value of the switching function. This function must be continuous (at least in its roots neighborhood), as
@@ -91,6 +278,19 @@ class ImpulseManeuver(org.orekit.propagation.events.AbstractDetector['ImpulseMan
         
         """
         ...
+    def getControl3DVectorCostType(self) -> Control3DVectorCostType:
+        """
+            Get the control vector's cost type.
+        
+            Returns:
+                control cost type
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
     def getDeltaVSat(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Get the velocity increment in satellite frame.
@@ -111,7 +311,7 @@ class ImpulseManeuver(org.orekit.propagation.events.AbstractDetector['ImpulseMan
         
         """
         ...
-    def getTrigger(self) -> _ImpulseManeuver__T:
+    def getTrigger(self) -> org.orekit.propagation.events.EventDetector:
         """
             Get the triggering event.
         
@@ -149,16 +349,18 @@ class ImpulseManeuver(org.orekit.propagation.events.AbstractDetector['ImpulseMan
         """
         ...
 
-class Maneuver(org.orekit.forces.AbstractForceModel):
+class Maneuver(org.orekit.forces.ForceModel):
     """
-    public class Maneuver extends :class:`~org.orekit.forces.AbstractForceModel`
+    public class Maneuver extends :class:`~org.orekit.forces.maneuvers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.ForceModel`
     
-        A generic model for maneuvers. It contains: - An attitude override, this is the attitude used during the maneuver, it
-        can be different than the one used for propagation; - A maneuver triggers object from the trigger sub-package. It
-        defines the triggers used to start and stop the maneuvers (dates or events for example). - A propulsion model from
-        sub-package propulsion. It defines the thrust or ΔV, isp, flow rate etc.. Both the propulsion model and the maneuver
-        triggers can contain parameter drivers (for estimation). The convention here is that the propulsion model drivers are
-        given before the maneuver triggers when calling the method
+        A generic model for maneuvers with finite-valued acceleration magnitude, as opposed to instantaneous changes in the
+        velocity vector which are defined via detectors (in :class:`~org.orekit.forces.maneuvers.ImpulseManeuver` and
+        :class:`~org.orekit.forces.maneuvers.FieldImpulseManeuver`). It contains: - An attitude override, this is the attitude
+        used during the maneuver, it can be different from the one used for propagation; - A maneuver triggers object from the
+        trigger sub-package. It defines the triggers used to start and stop the maneuvers (dates or events for example). - A
+        propulsion model from sub-package propulsion. It defines the thrust or ΔV, isp, flow rate etc.. Both the propulsion
+        model and the maneuver triggers can contain parameter drivers (for estimation). The convention here is that the
+        propulsion model drivers are given before the maneuver triggers when calling the method
         :meth:`~org.orekit.forces.maneuvers.Maneuver.getParametersDrivers`
     
         Since:
@@ -172,9 +374,12 @@ class Maneuver(org.orekit.forces.AbstractForceModel):
             Description copied from interface: :meth:`~org.orekit.forces.ForceModel.acceleration`
             Compute acceleration.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
-                parameters (T[]): values of the force model parameters
+                parameters (T[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -188,9 +393,12 @@ class Maneuver(org.orekit.forces.AbstractForceModel):
             Description copied from interface: :meth:`~org.orekit.forces.ForceModel.acceleration`
             Compute acceleration.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
-                parameters (double[]): values of the force model parameters
+                parameters (double[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -202,6 +410,9 @@ class Maneuver(org.orekit.forces.AbstractForceModel):
     def addContribution(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_addContribution_0__T], fieldTimeDerivativesEquations: org.orekit.propagation.numerical.FieldTimeDerivativesEquations[_addContribution_0__T]) -> None:
         """
             Compute the contribution of the force model to the perturbing acceleration.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.addContribution` in interface :class:`~org.orekit.forces.ForceModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
@@ -218,6 +429,9 @@ class Maneuver(org.orekit.forces.AbstractForceModel):
             The default implementation simply adds the :meth:`~org.orekit.forces.ForceModel.acceleration` as a non-Keplerian
             acceleration.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.addContribution` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
                 adder (:class:`~org.orekit.propagation.numerical.TimeDerivativesEquations`): object where the contribution should be added
@@ -227,6 +441,9 @@ class Maneuver(org.orekit.forces.AbstractForceModel):
     def dependsOnPositionOnly(self) -> bool:
         """
             Check if force models depends on position only.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.dependsOnPositionOnly` in interface :class:`~org.orekit.forces.ForceModel`
         
             Returns:
                 true if force model depends on position only, false if it depends on velocity, either directly or due to a dependency on
@@ -245,9 +462,29 @@ class Maneuver(org.orekit.forces.AbstractForceModel):
         
         """
         ...
-    def getEventsDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
-    _getFieldEventsDetectors__T = typing.TypeVar('_getFieldEventsDetectors__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldEventsDetectors(self, field: org.hipparchus.Field[_getFieldEventsDetectors__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventsDetectors__T]]: ...
+    def getControl3DVectorCostType(self) -> Control3DVectorCostType:
+        """
+            Get the control vector's cost type.
+        
+            Returns:
+                control cost type
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
+    @typing.overload
+    def getEventDetectors(self, list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
+    @typing.overload
+    def getEventDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
+    _getFieldEventDetectors_0__T = typing.TypeVar('_getFieldEventDetectors_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getFieldEventDetectors_1__T = typing.TypeVar('_getFieldEventDetectors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_0__T], list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_0__T]]: ...
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_1__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_1__T]]: ...
     def getManeuverTriggers(self) -> org.orekit.forces.maneuvers.trigger.ManeuverTriggers:
         """
             Get the maneuver triggers.
@@ -291,6 +528,9 @@ class Maneuver(org.orekit.forces.AbstractForceModel):
         
             The default implementation of this method does nothing.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.init` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 initialState (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> initialState): spacecraft state at the start of propagation.
                 target (:class:`~org.orekit.time.FieldAbsoluteDate`<T> target): date of propagation. Not equal to :code:`initialState.getDate()`.
@@ -306,6 +546,9 @@ class Maneuver(org.orekit.forces.AbstractForceModel):
             :meth:`~org.orekit.forces.ForceModel.acceleration` or :meth:`~org.orekit.forces.ForceModel.acceleration`
         
             The default implementation of this method does nothing.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.init` in interface :class:`~org.orekit.forces.ForceModel`
         
             Parameters:
                 initialState (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state at the start of propagation.
@@ -420,7 +663,7 @@ class SmallManeuverAnalyticalModel(org.orekit.propagation.analytical.AdapterProp
         
         """
         ...
-    def getJacobian(self, orbit: org.orekit.orbits.Orbit, positionAngle: org.orekit.orbits.PositionAngle, doubleArray: typing.List[typing.List[float]]) -> None:
+    def getJacobian(self, orbit: org.orekit.orbits.Orbit, positionAngleType: org.orekit.orbits.PositionAngleType, doubleArray: typing.List[typing.List[float]]) -> None:
         """
             Compute the Jacobian of the orbit with respect to maneuver parameters.
         
@@ -433,7 +676,7 @@ class SmallManeuverAnalyticalModel(org.orekit.propagation.analytical.AdapterProp
         
             Parameters:
                 orbit1 (:class:`~org.orekit.orbits.Orbit`): original orbit at t₁, without maneuver
-                positionAngle (:class:`~org.orekit.orbits.PositionAngle`): type of the position angle to use
+                positionAngleType (:class:`~org.orekit.orbits.PositionAngleType`): type of the position angle to use
                 jacobian (double[][]): placeholder 6x4 (or larger) matrix to be filled with the Jacobian, if matrix is larger than 6x4, only the 6x4 upper left
                     corner will be modified
         
@@ -464,45 +707,70 @@ class ConfigurableLowThrustManeuver(Maneuver):
         This class implements a configurable low thrust maneuver.
     
         The maneuver is composed of succession of a burn interval. Burn intervals are defined by two detectors. See
-        :class:`~org.orekit.forces.maneuvers.trigger.EventBasedManeuverTriggers` for more details on the detectors. The attitude
-        and the thrust direction are provided by an instance of ThrustDirectionProvider See
+        :class:`~org.orekit.forces.maneuvers.trigger.StartStopEventsTrigger` for more details on the detectors. The attitude and
+        the thrust direction are provided by an instance of ThrustDirectionProvider See
         :class:`~org.orekit.forces.maneuvers.propulsion.ThrustDirectionAndAttitudeProvider` for more details on thrust direction
         and attitude.
     
         Since:
             10.2
     """
-    @typing.overload
     def __init__(self, thrustDirectionAndAttitudeProvider: org.orekit.forces.maneuvers.propulsion.ThrustDirectionAndAttitudeProvider, maneuverTriggers: org.orekit.forces.maneuvers.trigger.ManeuverTriggers, double: float, double2: float): ...
     @typing.overload
-    def __init__(self, thrustDirectionAndAttitudeProvider: org.orekit.forces.maneuvers.propulsion.ThrustDirectionAndAttitudeProvider, abstractDetector: org.orekit.propagation.events.AbstractDetector[org.orekit.propagation.events.EventDetector], abstractDetector2: org.orekit.propagation.events.AbstractDetector[org.orekit.propagation.events.EventDetector], double: float, double2: float): ...
-    def getISP(self) -> float:
+    def getIsp(self) -> float:
         """
             Get the specific impulse.
         
             Returns:
-                specific impulse (s).
+                specific impulse (s). Will throw an exception if the Thrust driver has several values driven
         
         
         """
         ...
-    def getThrust(self) -> float:
+    @typing.overload
+    def getIsp(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
         """
-            Get the thrust.
+            Get the specific impulse.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): at which the ISP wants to be known
         
             Returns:
-                thrust force (N).
-        
+                specific impulse (s).
         
         """
         ...
     def getThrustDirectionProvider(self) -> org.orekit.forces.maneuvers.propulsion.ThrustDirectionAndAttitudeProvider:
         """
-            Getter on Thrust direction and spaceraft attitude provided by an external object.
+            Getter on Thrust direction and spacecraft attitude provided by an external object.
         
             Returns:
                 internal field
         
+        
+        """
+        ...
+    @typing.overload
+    def getThrustMagnitude(self) -> float:
+        """
+            Get the thrust magnitude.
+        
+            Returns:
+                thrust force (N). Will throw an exception if the Thrust driver has several values driven
+        
+        
+        """
+        ...
+    @typing.overload
+    def getThrustMagnitude(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+        """
+            Get the thrust magnitude.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): at which the Thrust wants to be known
+        
+            Returns:
+                thrust force (N).
         
         """
         ...
@@ -529,7 +797,10 @@ class ConstantThrustManeuver(Maneuver):
     @typing.overload
     def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, attitudeProvider: org.orekit.attitudes.AttitudeProvider, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, string: str): ...
     @typing.overload
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, attitudeProvider: org.orekit.attitudes.AttitudeProvider, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, control3DVectorCostType: Control3DVectorCostType, string: str): ...
+    @typing.overload
     def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, attitudeProvider: org.orekit.attitudes.AttitudeProvider, abstractConstantThrustPropulsionModel: org.orekit.forces.maneuvers.propulsion.AbstractConstantThrustPropulsionModel): ...
+    @typing.overload
     def getDirection(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Get the direction.
@@ -540,6 +811,22 @@ class ConstantThrustManeuver(Maneuver):
             Since:
                 9.2
         
+        
+        """
+        ...
+    @typing.overload
+    def getDirection(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Get the direction.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): at which the Thrust wants to be known
+        
+            Returns:
+                the direction
+        
+            Since:
+                9.2
         
         """
         ...
@@ -569,6 +856,7 @@ class ConstantThrustManeuver(Maneuver):
         
         """
         ...
+    @typing.overload
     def getFlowRate(self) -> float:
         """
             Get the flow rate.
@@ -579,13 +867,41 @@ class ConstantThrustManeuver(Maneuver):
         
         """
         ...
-    def getISP(self) -> float:
+    @typing.overload
+    def getFlowRate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+        """
+            Get the flow rate at given date.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): at which the Thrust wants to be known
+        
+            Returns:
+                flow rate (negative, kg/s).
+        
+        """
+        ...
+    @typing.overload
+    def getIsp(self) -> float:
         """
             Get the specific impulse.
         
             Returns:
                 specific impulse (s).
         
+        
+        """
+        ...
+    @typing.overload
+    def getIsp(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+        """
+            Get the specific impulse at given date.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): date at which the thrust vector wants to be known, often the date parameter will not be important and can be whatever if
+                    the thrust parameter driver as only value estimated over the all orbit determination interval
+        
+            Returns:
+                specific impulse (s).
         
         """
         ...
@@ -602,9 +918,10 @@ class ConstantThrustManeuver(Maneuver):
         
         """
         ...
-    def getThrust(self) -> float:
+    @typing.overload
+    def getThrustMagnitude(self) -> float:
         """
-            Get the thrust.
+            Get the thrust magnitude.
         
             Returns:
                 thrust force (N).
@@ -612,6 +929,21 @@ class ConstantThrustManeuver(Maneuver):
         
         """
         ...
+    @typing.overload
+    def getThrustMagnitude(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+        """
+            Get the thrust magnitude.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): date at which the thrust vector wants to be known, often the date parameter will not be important and can be whatever if
+                    the thrust parameter driver as only value estimated over the all orbit determination interval
+        
+            Returns:
+                thrust force (N).
+        
+        """
+        ...
+    @typing.overload
     def getThrustVector(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Get the thrust vector (N) in S/C frame.
@@ -619,6 +951,20 @@ class ConstantThrustManeuver(Maneuver):
             Returns:
                 thrust vector (N) in S/C frame.
         
+        
+        """
+        ...
+    @typing.overload
+    def getThrustVector(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Get the thrust vector (N) in S/C frame.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): date at which the thrust vector wants to be known, often the date parameter will not be important and can be whatever if
+                    the thrust parameter driver as only value estimated over the all orbit determination interval
+        
+            Returns:
+                thrust vector (N) in S/C frame.
         
         """
         ...
@@ -676,6 +1022,8 @@ class __module_protocol__(typing.Protocol):
 
     ConfigurableLowThrustManeuver: typing.Type[ConfigurableLowThrustManeuver]
     ConstantThrustManeuver: typing.Type[ConstantThrustManeuver]
+    Control3DVectorCostType: typing.Type[Control3DVectorCostType]
+    FieldImpulseManeuver: typing.Type[FieldImpulseManeuver]
     ImpulseManeuver: typing.Type[ImpulseManeuver]
     Maneuver: typing.Type[Maneuver]
     SmallManeuverAnalyticalModel: typing.Type[SmallManeuverAnalyticalModel]

@@ -174,6 +174,16 @@ class AuxiliaryElements:
         
         """
         ...
+    def getOrbit(self) -> org.orekit.orbits.Orbit:
+        """
+            Get the orbit.
+        
+            Returns:
+                the orbit
+        
+        
+        """
+        ...
     def getP(self) -> float:
         """
             Get the y component of inclination vector.
@@ -437,9 +447,7 @@ class CoefficientsFactory:
         """
         ...
     @staticmethod
-    def computeVns(int: int) -> java.util.TreeMap['CoefficientsFactory.NSKey', float]: ...
-    @staticmethod
-    def computeVnsCoefficients(int: int) -> java.util.SortedMap['CoefficientsFactory.NSKey', float]: ...
+    def computeVns(int: int) -> java.util.SortedMap['CoefficientsFactory.NSKey', float]: ...
     @staticmethod
     def getVmns(int: int, int2: int, int3: int) -> float:
         """
@@ -622,6 +630,7 @@ class FieldAuxiliaryElements(typing.Generic[_FieldAuxiliaryElements__T]):
         
         """
         ...
+    def getOrbit(self) -> org.orekit.orbits.FieldOrbit[_FieldAuxiliaryElements__T]: ...
     def getP(self) -> _FieldAuxiliaryElements__T:
         """
             Get the y component of inclination vector.

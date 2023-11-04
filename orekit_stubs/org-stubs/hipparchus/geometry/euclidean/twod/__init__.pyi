@@ -14,7 +14,7 @@ import typing
 
 class DiskGenerator(org.hipparchus.geometry.enclosing.SupportBallGenerator['Euclidean2D', 'Vector2D']):
     """
-    public class DiskGenerator extends :class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.enclosing.SupportBallGenerator`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`,:class:`~org.hipparchus.geometry.euclidean.twod.Vector2D`>
+    public class DiskGenerator extends :class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.enclosing.SupportBallGenerator`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`, :class:`~org.hipparchus.geometry.euclidean.twod.Vector2D`>
     
         Class generating an enclosing ball from its support points.
     """
@@ -644,7 +644,7 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
                 abscissa of the vector
         
             Also see:
-                :meth:`~org.hipparchus.geometry.euclidean.twod.FieldVector2D.FieldVector2D`
+                :meth:`~org.hipparchus.geometry.euclidean.twod.FieldVector2D.%3Cinit%3E`
         
         
         """
@@ -657,7 +657,7 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
                 ordinate of the vector
         
             Also see:
-                :meth:`~org.hipparchus.geometry.euclidean.twod.FieldVector2D.FieldVector2D`
+                :meth:`~org.hipparchus.geometry.euclidean.twod.FieldVector2D.%3Cinit%3E`
         
         
         """
@@ -760,7 +760,7 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
                 vector coordinates
         
             Also see:
-                :meth:`~org.hipparchus.geometry.euclidean.twod.FieldVector2D.FieldVector2D`
+                :meth:`~org.hipparchus.geometry.euclidean.twod.FieldVector2D.%3Cinit%3E`
         
         
         """
@@ -806,7 +806,7 @@ class FieldVector2D(typing.Generic[_FieldVector2D__T]):
 
 class Line(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean2D], org.hipparchus.geometry.partitioning.Embedding[Euclidean2D, org.hipparchus.geometry.euclidean.oned.Euclidean1D]):
     """
-    public class Line extends :class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.partitioning.Hyperplane`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`>, :class:`~org.hipparchus.geometry.partitioning.Embedding`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`,:class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`>
+    public class Line extends :class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.partitioning.Hyperplane`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`>, :class:`~org.hipparchus.geometry.partitioning.Embedding`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`, :class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`>
     
         This class represents an oriented line in the 2D plane.
     
@@ -916,17 +916,17 @@ class Line(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean2D], org.hip
             Returns:
                 offset of the line
         
-        public double getOffset(:class:`~org.hipparchus.geometry.Vector`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`> vector)
+        public double getOffset (:class:`~org.hipparchus.geometry.Vector`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`, :class:`~org.hipparchus.geometry.euclidean.twod.Vector2D`> vector)
         
             Get the offset (oriented distance) of a vector.
         
             Parameters:
-                vector (:class:`~org.hipparchus.geometry.Vector`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`> vector): vector to check
+                vector (:class:`~org.hipparchus.geometry.Vector`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`, :class:`~org.hipparchus.geometry.euclidean.twod.Vector2D`> vector): vector to check
         
             Returns:
                 offset of the vector
         
-        public double getOffset(:class:`~org.hipparchus.geometry.Point`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`> point)
+        public double getOffset (:class:`~org.hipparchus.geometry.Point`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`> point)
         
             Get the offset (oriented distance) of a point.
         
@@ -947,7 +947,7 @@ class Line(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean2D], org.hip
         """
         ...
     @typing.overload
-    def getOffset(self, vector: org.hipparchus.geometry.Vector[Euclidean2D]) -> float: ...
+    def getOffset(self, vector: org.hipparchus.geometry.Vector[Euclidean2D, 'Vector2D']) -> float: ...
     @typing.overload
     def getOffset(self, line: 'Line') -> float: ...
     def getOriginOffset(self) -> float:
@@ -1089,11 +1089,11 @@ class Line(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean2D], org.hip
     @typing.overload
     def toSpace(self, point: org.hipparchus.geometry.Point[org.hipparchus.geometry.euclidean.oned.Euclidean1D]) -> 'Vector2D': ...
     @typing.overload
-    def toSpace(self, vector: org.hipparchus.geometry.Vector[org.hipparchus.geometry.euclidean.oned.Euclidean1D]) -> 'Vector2D': ...
+    def toSpace(self, vector: org.hipparchus.geometry.Vector[org.hipparchus.geometry.euclidean.oned.Euclidean1D, org.hipparchus.geometry.euclidean.oned.Vector1D]) -> 'Vector2D': ...
     @typing.overload
     def toSubSpace(self, point: org.hipparchus.geometry.Point[Euclidean2D]) -> org.hipparchus.geometry.euclidean.oned.Vector1D: ...
     @typing.overload
-    def toSubSpace(self, vector: org.hipparchus.geometry.Vector[Euclidean2D]) -> org.hipparchus.geometry.euclidean.oned.Vector1D: ...
+    def toSubSpace(self, vector: org.hipparchus.geometry.Vector[Euclidean2D, 'Vector2D']) -> org.hipparchus.geometry.euclidean.oned.Vector1D: ...
     def translateToPoint(self, vector2D: 'Vector2D') -> None:
         """
             Translate the line to force it passing by a point.
@@ -1135,7 +1135,7 @@ class Line(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean2D], org.hip
 
 class PolygonsSet(org.hipparchus.geometry.partitioning.AbstractRegion[Euclidean2D, org.hipparchus.geometry.euclidean.oned.Euclidean1D]):
     """
-    public class PolygonsSet extends :class:`~org.hipparchus.geometry.partitioning.AbstractRegion`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`,:class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`>
+    public class PolygonsSet extends :class:`~org.hipparchus.geometry.partitioning.AbstractRegion`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`, :class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`>
     
         This class represents a 2D region: a set of polygons.
     """
@@ -1247,7 +1247,7 @@ class Segment:
 
 class SubLine(org.hipparchus.geometry.partitioning.AbstractSubHyperplane[Euclidean2D, org.hipparchus.geometry.euclidean.oned.Euclidean1D]):
     """
-    public class SubLine extends :class:`~org.hipparchus.geometry.partitioning.AbstractSubHyperplane`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`,:class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`>
+    public class SubLine extends :class:`~org.hipparchus.geometry.partitioning.AbstractSubHyperplane`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`, :class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`>
     
         This class represents a sub-hyperplane for :class:`~org.hipparchus.geometry.euclidean.twod.Line`.
     """
@@ -1280,9 +1280,9 @@ class SubLine(org.hipparchus.geometry.partitioning.AbstractSubHyperplane[Euclide
         ...
     def split(self, hyperplane: org.hipparchus.geometry.partitioning.Hyperplane[Euclidean2D]) -> org.hipparchus.geometry.partitioning.SubHyperplane.SplitSubHyperplane[Euclidean2D]: ...
 
-class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D]):
+class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D, 'Vector2D']):
     """
-    public class Vector2D extends :class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.Vector`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`>
+    public class Vector2D extends :class:`~org.hipparchus.geometry.euclidean.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.Vector`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`, :class:`~org.hipparchus.geometry.euclidean.twod.Vector2D`>
     
         This class represents a 2D vector.
     
@@ -1376,9 +1376,9 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D]):
     @typing.overload
     def __init__(self, doubleArray: typing.List[float]): ...
     @typing.overload
-    def add(self, double: float, vector: org.hipparchus.geometry.Vector[Euclidean2D]) -> 'Vector2D': ...
+    def add(self, double: float, vector: org.hipparchus.geometry.Vector[Euclidean2D, 'Vector2D']) -> 'Vector2D': ...
     @typing.overload
-    def add(self, vector: org.hipparchus.geometry.Vector[Euclidean2D]) -> 'Vector2D': ...
+    def add(self, vector: org.hipparchus.geometry.Vector[Euclidean2D, 'Vector2D']) -> 'Vector2D': ...
     @staticmethod
     def angle(vector2D: 'Vector2D', vector2D2: 'Vector2D') -> float: ...
     def crossProduct(self, vector2D: 'Vector2D', vector2D2: 'Vector2D') -> float:
@@ -1426,7 +1426,7 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D]):
     @staticmethod
     def distance(vector2D: 'Vector2D', vector2D2: 'Vector2D') -> float: ...
     @typing.overload
-    def distance1(self, vector: org.hipparchus.geometry.Vector[Euclidean2D]) -> float:
+    def distance1(self, vector: org.hipparchus.geometry.Vector[Euclidean2D, 'Vector2D']) -> float:
         """
             Compute the distance between two vectors according to the L :sub:`1` norm.
         
@@ -1450,7 +1450,7 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D]):
     @staticmethod
     def distance1(vector2D: 'Vector2D', vector2D2: 'Vector2D') -> float: ...
     @typing.overload
-    def distanceInf(self, vector: org.hipparchus.geometry.Vector[Euclidean2D]) -> float:
+    def distanceInf(self, vector: org.hipparchus.geometry.Vector[Euclidean2D, 'Vector2D']) -> float:
         """
             Compute the distance between two vectors according to the L :sub:`∞` norm.
         
@@ -1471,7 +1471,7 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D]):
     @staticmethod
     def distanceInf(vector2D: 'Vector2D', vector2D2: 'Vector2D') -> float: ...
     @typing.overload
-    def distanceSq(self, vector: org.hipparchus.geometry.Vector[Euclidean2D]) -> float:
+    def distanceSq(self, vector: org.hipparchus.geometry.Vector[Euclidean2D, 'Vector2D']) -> float:
         """
             Compute the square of the distance between two vectors.
         
@@ -1491,7 +1491,7 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D]):
     @typing.overload
     @staticmethod
     def distanceSq(vector2D: 'Vector2D', vector2D2: 'Vector2D') -> float: ...
-    def dotProduct(self, vector: org.hipparchus.geometry.Vector[Euclidean2D]) -> float: ...
+    def dotProduct(self, vector: org.hipparchus.geometry.Vector[Euclidean2D, 'Vector2D']) -> float: ...
     def equals(self, object: typing.Any) -> bool:
         """
             Test for the equality of two 2D vectors.
@@ -1615,7 +1615,7 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D]):
                 abscissa of the vector
         
             Also see:
-                :meth:`~org.hipparchus.geometry.euclidean.twod.Vector2D.Vector2D`
+                :meth:`~org.hipparchus.geometry.euclidean.twod.Vector2D.%3Cinit%3E`
         
         
         """
@@ -1628,7 +1628,7 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D]):
                 ordinate of the vector
         
             Also see:
-                :meth:`~org.hipparchus.geometry.euclidean.twod.Vector2D.Vector2D`
+                :meth:`~org.hipparchus.geometry.euclidean.twod.Vector2D.%3Cinit%3E`
         
         
         """
@@ -1701,7 +1701,6 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D]):
         
         """
         ...
-    def normalize(self) -> 'Vector2D': ...
     @staticmethod
     def orientation(vector2D: 'Vector2D', vector2D2: 'Vector2D', vector2D3: 'Vector2D') -> float:
         """
@@ -1739,9 +1738,9 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D]):
         """
         ...
     @typing.overload
-    def subtract(self, double: float, vector: org.hipparchus.geometry.Vector[Euclidean2D]) -> 'Vector2D': ...
+    def subtract(self, double: float, vector: org.hipparchus.geometry.Vector[Euclidean2D, 'Vector2D']) -> 'Vector2D': ...
     @typing.overload
-    def subtract(self, vector: org.hipparchus.geometry.Vector[Euclidean2D]) -> 'Vector2D': ...
+    def subtract(self, vector: org.hipparchus.geometry.Vector[Euclidean2D, 'Vector2D']) -> 'Vector2D': ...
     def toArray(self) -> typing.List[float]:
         """
             Get the vector coordinates as a dimension 2 array.
@@ -1750,7 +1749,7 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D]):
                 vector coordinates
         
             Also see:
-                :meth:`~org.hipparchus.geometry.euclidean.twod.Vector2D.Vector2D`
+                :meth:`~org.hipparchus.geometry.euclidean.twod.Vector2D.%3Cinit%3E`
         
         
         """
@@ -1787,9 +1786,9 @@ class Vector2D(org.hipparchus.geometry.Vector[Euclidean2D]):
         """
         ...
 
-class Vector2DFormat(org.hipparchus.geometry.VectorFormat[Euclidean2D]):
+class Vector2DFormat(org.hipparchus.geometry.VectorFormat[Euclidean2D, Vector2D]):
     """
-    public class Vector2DFormat extends :class:`~org.hipparchus.geometry.VectorFormat`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`>
+    public class Vector2DFormat extends :class:`~org.hipparchus.geometry.VectorFormat`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`, :class:`~org.hipparchus.geometry.euclidean.twod.Vector2D`>
     
         Formats a 2D vector in components list format "{x; y}".
     
@@ -1816,9 +1815,9 @@ class Vector2DFormat(org.hipparchus.geometry.VectorFormat[Euclidean2D]):
     @typing.overload
     def __init__(self, numberFormat: java.text.NumberFormat): ...
     @typing.overload
-    def format(self, vector: org.hipparchus.geometry.Vector[org.hipparchus.geometry.Space]) -> str: ...
+    def format(self, vector: org.hipparchus.geometry.Vector[org.hipparchus.geometry.Space, org.hipparchus.geometry.Vector]) -> str: ...
     @typing.overload
-    def format(self, vector: org.hipparchus.geometry.Vector[Euclidean2D], stringBuffer: java.lang.StringBuffer, fieldPosition: java.text.FieldPosition) -> java.lang.StringBuffer: ...
+    def format(self, vector: org.hipparchus.geometry.Vector[Euclidean2D, Vector2D], stringBuffer: java.lang.StringBuffer, fieldPosition: java.text.FieldPosition) -> java.lang.StringBuffer: ...
     @typing.overload
     @staticmethod
     def getVector2DFormat() -> 'Vector2DFormat':

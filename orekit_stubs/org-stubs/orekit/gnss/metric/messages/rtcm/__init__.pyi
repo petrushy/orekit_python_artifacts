@@ -1,5 +1,6 @@
 import java.util
 import org.orekit.gnss.metric.messages
+import org.orekit.gnss.metric.messages.rtcm.correction
 import org.orekit.gnss.metric.messages.rtcm.ephemeris
 import typing
 
@@ -35,4 +36,5 @@ class __module_protocol__(typing.Protocol):
 
     RtcmData: typing.Type[RtcmData]
     RtcmMessage: typing.Type[RtcmMessage]
+    correction: org.orekit.gnss.metric.messages.rtcm.correction.__module_protocol__
     ephemeris: org.orekit.gnss.metric.messages.rtcm.ephemeris.__module_protocol__

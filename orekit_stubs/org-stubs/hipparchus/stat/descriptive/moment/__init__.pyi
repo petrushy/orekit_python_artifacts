@@ -255,7 +255,7 @@ class Kurtosis(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatis
         """
             Updates the internal state of the statistic to reflect the addition of the new value.
         
-            Note that when :meth:`~org.hipparchus.stat.descriptive.moment.Kurtosis.Kurtosis` is used to create a Variance, this
+            Note that when :meth:`~org.hipparchus.stat.descriptive.moment.Kurtosis.%3Cinit%3E` is used to create a Variance, this
             method does nothing. In that case, the FourthMoment should be incremented directly.
         
             Specified by:
@@ -419,8 +419,8 @@ class Mean(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic,
         """
             Updates the internal state of the statistic to reflect the addition of the new value.
         
-            Note that when :meth:`~org.hipparchus.stat.descriptive.moment.Mean.Mean` is used to create a Mean, this method does
-            nothing. In that case, the FirstMoment should be incremented directly.
+            Note that when :meth:`~org.hipparchus.stat.descriptive.moment.Mean.%3Cinit%3E` is used to create a Mean, this method
+            does nothing. In that case, the FirstMoment should be incremented directly.
         
             Specified by:
                 :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.increment` in
@@ -438,8 +438,51 @@ class Mean(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic,
         ...
 
 class SemiVariance(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, java.io.Serializable):
+    """
+    public class SemiVariance extends :class:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic` implements :class:`~org.hipparchus.stat.descriptive.moment.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    
+        Computes the semivariance of a set of values with respect to a given cutoff value.
+    
+        We define the *downside semivariance* of a set of values :code:`x` against the *cutoff value* :code:`cutoff` to be
+    
+    
+        :code:`Σ (x[i] - target) :sup:`2` / df`
+    
+    
+        where the sum is taken over all :code:`i` such that :code:`x[i] < cutoff` and :code:`df` is the length of :code:`x`
+        (non-bias-corrected) or one less than this number (bias corrected). The *upside semivariance* is defined similarly, with
+        the sum taken over values of :code:`x` that exceed the cutoff value.
+    
+        The cutoff value defaults to the mean, bias correction defaults to :code:`true` and the "variance direction" (upside or
+        downside) defaults to downside. The variance direction and bias correction may be set using property setters or their
+        values can provided as parameters to :meth:`~org.hipparchus.stat.descriptive.moment.SemiVariance.evaluate`.
+    
+        If the input array is null, :code:`evaluate` methods throw :code:`IllegalArgumentException.` If the array has length 1,
+        :code:`0` is returned, regardless of the value of the :code:`cutoff.`
+    
+        **Note that this class is not intended to be threadsafe.** If multiple threads access an instance of this class
+        concurrently, and one or more of these threads invoke property setters, external synchronization must be provided to
+        ensure correct results.
+    
+        Also see:
+            :meth:`~serialized`
+    """
     UPSIDE_VARIANCE: typing.ClassVar['SemiVariance.Direction'] = ...
+    """
+    public static final :class:`~org.hipparchus.stat.descriptive.moment.SemiVariance.Direction` UPSIDE_VARIANCE
+    
+        The UPSIDE Direction is used to specify that the observations above the cutoff point will be used to calculate
+        SemiVariance.
+    
+    """
     DOWNSIDE_VARIANCE: typing.ClassVar['SemiVariance.Direction'] = ...
+    """
+    public static final :class:`~org.hipparchus.stat.descriptive.moment.SemiVariance.Direction` DOWNSIDE_VARIANCE
+    
+        The DOWNSIDE Direction is used to specify that the observations below the cutoff point will be used to calculate
+        SemiVariance
+    
+    """
     @typing.overload
     def __init__(self): ...
     @typing.overload
@@ -450,7 +493,24 @@ class SemiVariance(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, 
     def __init__(self, direction: 'SemiVariance.Direction'): ...
     @typing.overload
     def __init__(self, semiVariance: 'SemiVariance'): ...
-    def copy(self) -> 'SemiVariance': ...
+    def copy(self) -> 'SemiVariance':
+        """
+            Returns a copy of the statistic with the same internal state.
+        
+            Specified by:
+                :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.copy` in
+                interface :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
+        
+            Specified by:
+                :meth:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic.copy` in
+                class :class:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic`
+        
+            Returns:
+                a copy of the statistic
+        
+        
+        """
+        ...
     @typing.overload
     def evaluate(self, doubleArray: typing.List[float]) -> float: ...
     @typing.overload
@@ -465,10 +525,52 @@ class SemiVariance(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, 
     def evaluate(self, doubleArray: typing.List[float], int: int, int2: int) -> float: ...
     @typing.overload
     def evaluate(self, doubleArray: typing.List[float], direction: 'SemiVariance.Direction') -> float: ...
-    def getVarianceDirection(self) -> 'SemiVariance.Direction': ...
-    def isBiasCorrected(self) -> bool: ...
-    def withBiasCorrected(self, boolean: bool) -> 'SemiVariance': ...
-    def withVarianceDirection(self, direction: 'SemiVariance.Direction') -> 'SemiVariance': ...
+    def getVarianceDirection(self) -> 'SemiVariance.Direction':
+        """
+            Returns the varianceDirection property.
+        
+            Returns:
+                the varianceDirection
+        
+        
+        """
+        ...
+    def isBiasCorrected(self) -> bool:
+        """
+            Returns true iff biasCorrected property is set to true.
+        
+            Returns:
+                the value of biasCorrected.
+        
+        
+        """
+        ...
+    def withBiasCorrected(self, boolean: bool) -> 'SemiVariance':
+        """
+            Returns a copy of this instance with the given biasCorrected setting.
+        
+            Parameters:
+                isBiasCorrected (boolean): new biasCorrected property value
+        
+            Returns:
+                a copy of this instance with the given bias correction setting
+        
+        
+        """
+        ...
+    def withVarianceDirection(self, direction: 'SemiVariance.Direction') -> 'SemiVariance':
+        """
+            Returns a copy of this instance with the given direction setting.
+        
+            Parameters:
+                direction (:class:`~org.hipparchus.stat.descriptive.moment.SemiVariance.Direction`): the direction of the semivariance
+        
+            Returns:
+                a copy of this instance with the given direction setting
+        
+        
+        """
+        ...
     class Direction(java.lang.Enum['SemiVariance.Direction']):
         UPSIDE: typing.ClassVar['SemiVariance.Direction'] = ...
         DOWNSIDE: typing.ClassVar['SemiVariance.Direction'] = ...
@@ -590,7 +692,7 @@ class Skewness(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatis
         """
             Updates the internal state of the statistic to reflect the addition of the new value.
         
-            Note that when :meth:`~org.hipparchus.stat.descriptive.moment.Skewness.Skewness` is used to create a Skewness, this
+            Note that when :meth:`~org.hipparchus.stat.descriptive.moment.Skewness.%3Cinit%3E` is used to create a Skewness, this
             method does nothing. In that case, the ThirdMoment should be incremented directly.
         
             Specified by:
@@ -736,6 +838,7 @@ class StandardDeviation(org.hipparchus.stat.descriptive.AbstractStorelessUnivari
         ...
     def isBiasCorrected(self) -> bool:
         """
+            Check if bias is corrected.
         
             Returns:
                 Returns the isBiasCorrected.
@@ -921,8 +1024,8 @@ class Variance(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatis
             leverages the fact that is has the full list of values together to execute a two-pass algorithm. See
             :class:`~org.hipparchus.stat.descriptive.moment.Variance`.
         
-            Note also that when :meth:`~org.hipparchus.stat.descriptive.moment.Variance.Variance` is used to create a Variance, this
-            method does nothing. In that case, the SecondMoment should be incremented directly.
+            Note also that when :meth:`~org.hipparchus.stat.descriptive.moment.Variance.%3Cinit%3E` is used to create a Variance,
+            this method does nothing. In that case, the SecondMoment should be incremented directly.
         
             Specified by:
                 :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.increment` in
@@ -940,6 +1043,7 @@ class Variance(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatis
         ...
     def isBiasCorrected(self) -> bool:
         """
+            Check if bias is corrected.
         
             Returns:
                 Returns the isBiasCorrected.

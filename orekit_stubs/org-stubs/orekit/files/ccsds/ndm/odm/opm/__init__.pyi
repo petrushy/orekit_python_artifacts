@@ -1,5 +1,6 @@
 import java.lang
 import java.util
+import java.util.function
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.data
 import org.orekit.files.ccsds.definitions
@@ -233,9 +234,9 @@ class ManeuverKey(java.lang.Enum['ManeuverKey']):
         """
         ...
 
-class Opm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.section.Header, org.orekit.files.ccsds.section.Segment[org.orekit.files.ccsds.ndm.odm.CommonMetadata, 'OpmData']], org.orekit.time.TimeStamped):
+class Opm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.ndm.odm.OdmHeader, org.orekit.files.ccsds.section.Segment[org.orekit.files.ccsds.ndm.odm.OdmCommonMetadata, 'OpmData']], org.orekit.time.TimeStamped):
     """
-    public class Opm extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.section.Header`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.odm.CommonMetadata`, :class:`~org.orekit.files.ccsds.ndm.odm.opm.OpmData`>> implements :class:`~org.orekit.time.TimeStamped`
+    public class Opm extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.ndm.odm.OdmHeader`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.odm.OdmCommonMetadata`, :class:`~org.orekit.files.ccsds.ndm.odm.opm.OpmData`>> implements :class:`~org.orekit.time.TimeStamped`
     
         This class gathers the informations present in the Orbital Parameter Message (OPM).
     
@@ -264,7 +265,7 @@ class Opm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.secti
     
     
     """
-    def __init__(self, header: org.orekit.files.ccsds.section.Header, list: java.util.List[org.orekit.files.ccsds.section.Segment[org.orekit.files.ccsds.ndm.odm.CommonMetadata, 'OpmData']], iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext, double: float): ...
+    def __init__(self, odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, list: java.util.List[org.orekit.files.ccsds.section.Segment[org.orekit.files.ccsds.ndm.odm.OdmCommonMetadata, 'OpmData']], iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext, double: float): ...
     def generateCartesianOrbit(self) -> org.orekit.orbits.CartesianOrbit:
         """
             Generate a Cartesian orbit.
@@ -332,7 +333,7 @@ class Opm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.secti
         """
         ...
     def getManeuvers(self) -> java.util.List[Maneuver]: ...
-    def getMetadata(self) -> org.orekit.files.ccsds.ndm.odm.CommonMetadata:
+    def getMetadata(self) -> org.orekit.files.ccsds.ndm.odm.OdmCommonMetadata:
         """
             Get the file metadata.
         
@@ -507,7 +508,7 @@ class OpmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Opm, 'OpmParser']):
         Since:
             6.1
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior): ...
+    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]): ...
     def build(self) -> Opm:
         """
             Build the file from parsed entries.
@@ -560,7 +561,7 @@ class OpmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Opm, 'OpmParser']):
         
         """
         ...
-    def getHeader(self) -> org.orekit.files.ccsds.section.Header:
+    def getHeader(self) -> org.orekit.files.ccsds.ndm.odm.OdmHeader:
         """
             Get file header to fill.
         
@@ -670,9 +671,9 @@ class OpmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Opm, 'OpmParser']):
         """
         ...
 
-class OpmWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[org.orekit.files.ccsds.section.Header, org.orekit.files.ccsds.section.Segment[org.orekit.files.ccsds.ndm.odm.CommonMetadata, OpmData], Opm]):
+class OpmWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[org.orekit.files.ccsds.ndm.odm.OdmHeader, org.orekit.files.ccsds.section.Segment[org.orekit.files.ccsds.ndm.odm.OdmCommonMetadata, OpmData], Opm]):
     """
-    public class OpmWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.section.Header`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.odm.CommonMetadata`, :class:`~org.orekit.files.ccsds.ndm.odm.opm.OpmData`>, :class:`~org.orekit.files.ccsds.ndm.odm.opm.Opm`>
+    public class OpmWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.ndm.odm.OdmHeader`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.odm.OdmCommonMetadata`, :class:`~org.orekit.files.ccsds.ndm.odm.opm.OpmData`>, :class:`~org.orekit.files.ccsds.ndm.odm.opm.Opm`>
     
         Writer for CCSDS Orbit Parameter Message.
     
@@ -702,7 +703,6 @@ class OpmWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[or
     
     """
     def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate): ...
-    def writeSegmentContent(self, generator: org.orekit.files.ccsds.utils.generation.Generator, double: float, segment: org.orekit.files.ccsds.section.Segment[org.orekit.files.ccsds.ndm.odm.CommonMetadata, OpmData]) -> None: ...
 
 
 class __module_protocol__(typing.Protocol):

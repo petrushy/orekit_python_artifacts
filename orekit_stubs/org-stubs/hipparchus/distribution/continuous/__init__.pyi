@@ -1454,6 +1454,7 @@ class LevyDistribution(AbstractRealDistribution):
         
             .. code-block: java
             
+            
              f(x; u, c) = erfc (√ (c / 2 (x - u )))
              
         
@@ -1475,11 +1476,7 @@ class LevyDistribution(AbstractRealDistribution):
             quotient.
         
             From Wikipedia: The probability density function of the Lévy distribution over the domain is
-        
-            .. code-block: java
-            
-             f(x; μ, c) = √(c / 2π) * e :sup:`-c / 2 (x - μ)`  / (x - μ) :sup:`3/2` 
-             
+            \[ f(x; \mu, c) = \sqrt{\frac{c}{2\pi}} \frac{e^{\frac{-c}{2 (x - \mu)}}}{(x - \mu)^\frac{3}{2}} \]
         
             For this distribution, :code:`X`, this method returns :code:`P(X < x)`. If :code:`x` is less than location parameter μ,
             :code:`Double.NaN` is returned, as in these cases the distribution is not defined.
@@ -2209,9 +2206,9 @@ class ParetoDistribution(AbstractRealDistribution):
     
         .. code-block: java
         
+        
           α * k^α / x^(α + 1)
          
-    
     
           - :code:`k` is the *scale* parameter: this is the minimum possible value of :code:`X`,
           - :code:`α` is the *shape* parameter: this is the Pareto index

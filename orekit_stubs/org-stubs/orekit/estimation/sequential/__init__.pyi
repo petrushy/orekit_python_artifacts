@@ -11,7 +11,6 @@ import org.orekit.frames
 import org.orekit.orbits
 import org.orekit.propagation
 import org.orekit.propagation.conversion
-import org.orekit.propagation.integration
 import org.orekit.propagation.sampling
 import org.orekit.propagation.semianalytical.dsst
 import org.orekit.time
@@ -181,56 +180,6 @@ class CovarianceMatrixProvider:
             Also see:
                 :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitalParametersDrivers`,
                 :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPropagationParametersDrivers`
-        
-        
-        """
-        ...
-
-class EskfMeasurementHandler(org.orekit.propagation.sampling.OrekitStepHandler):
-    """
-    :class:`~org.orekit.estimation.sequential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class EskfMeasurementHandler extends :class:`~org.orekit.estimation.sequential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
-    
-        Deprecated.
-        :class:`~org.orekit.propagation.sampling.OrekitStepHandler` picking up
-        :class:`~org.orekit.estimation.measurements.ObservedMeasurement` for the
-        :class:`~org.orekit.estimation.sequential.SemiAnalyticalKalmanEstimator`.
-    
-        Since:
-            11.1
-    """
-    def __init__(self, semiAnalyticalKalmanModel: 'SemiAnalyticalKalmanModel', extendedKalmanFilter: org.hipparchus.filtering.kalman.extended.ExtendedKalmanFilter['MeasurementDecorator'], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], absoluteDate: org.orekit.time.AbsoluteDate): ...
-    def handleStep(self, orekitStepInterpolator: org.orekit.propagation.sampling.OrekitStepInterpolator) -> None:
-        """
-            Deprecated.
-            Handle the current step.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.handleStep` in
-                interface :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
-        
-            Parameters:
-                interpolator (:class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`): interpolator set up for the current step
-        
-        
-        """
-        ...
-    def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Deprecated.
-            Initialize step handler at the start of a propagation.
-        
-            This method is called once at the start of the propagation. It may be used by the step handler to initialize some
-            internal data if needed.
-        
-            The default method does nothing
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.init` in
-                interface :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
-        
-            Parameters:
-                s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
-                t (:class:`~org.orekit.time.AbsoluteDate`): target time for the integration
         
         
         """
@@ -426,7 +375,7 @@ class KalmanEstimatorBuilder:
             9.2
     """
     def __init__(self): ...
-    def addPropagationConfiguration(self, orbitDeterminationPropagatorBuilder: org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder, covarianceMatrixProvider: CovarianceMatrixProvider) -> 'KalmanEstimatorBuilder':
+    def addPropagationConfiguration(self, propagatorBuilder: org.orekit.propagation.conversion.PropagatorBuilder, covarianceMatrixProvider: CovarianceMatrixProvider) -> 'KalmanEstimatorBuilder':
         """
             Add a propagation configuration.
         
@@ -441,7 +390,7 @@ class KalmanEstimatorBuilder:
             (but filtering out the non selected drivers).
         
             Parameters:
-                builder (:class:`~org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder`): The propagator builder to use in the Kalman filter.
+                builder (:class:`~org.orekit.propagation.conversion.PropagatorBuilder`): The propagator builder to use in the Kalman filter.
                 provider (:class:`~org.orekit.estimation.sequential.CovarianceMatrixProvider`): The process noise matrices provider to use, consistent with the builder. This parameter can be equal to :code:`null` if
                     the input builder is an :class:`~org.orekit.propagation.conversion.EphemerisPropagatorBuilder`. Indeed, for ephemeris
                     based estimation only measurement parameters are estimated. Therefore, the covariance related to dynamical parameters
@@ -640,6 +589,98 @@ class KalmanEstimatorUtil:
         
             Returns:
                 array containing only the states relevant to the measurement
+        
+        
+        """
+        ...
+    @staticmethod
+    def normalizeCovarianceMatrix(realMatrix: org.hipparchus.linear.RealMatrix, doubleArray: typing.List[float]) -> org.hipparchus.linear.RealMatrix:
+        """
+            Normalize a covariance matrix.
+        
+            Parameters:
+                physicalP (:class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.linear.RealMatrix?is`): "physical" covariance matrix in input
+                parameterScales (double[]): scale factor of estimated parameters
+        
+            Returns:
+                the normalized covariance matrix
+        
+        
+        """
+        ...
+    @staticmethod
+    def unnormalizeCovarianceMatrix(realMatrix: org.hipparchus.linear.RealMatrix, doubleArray: typing.List[float]) -> org.hipparchus.linear.RealMatrix:
+        """
+            Un-nomalized the covariance matrix.
+        
+            Parameters:
+                normalizedP (:class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.linear.RealMatrix?is`): normalized covariance matrix
+                parameterScales (double[]): scale factor of estimated parameters
+        
+            Returns:
+                the un-normalized covariance matrix
+        
+        
+        """
+        ...
+    @staticmethod
+    def unnormalizeInnovationCovarianceMatrix(realMatrix: org.hipparchus.linear.RealMatrix, doubleArray: typing.List[float]) -> org.hipparchus.linear.RealMatrix:
+        """
+            Un-normalize the innovation covariance matrix.
+        
+            Parameters:
+                normalizedS (:class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.linear.RealMatrix?is`): normalized innovation covariance matrix
+                sigmas (double[]): measurement theoretical standard deviation
+        
+            Returns:
+                the un-normalized innovation covariance matrix
+        
+        
+        """
+        ...
+    @staticmethod
+    def unnormalizeKalmanGainMatrix(realMatrix: org.hipparchus.linear.RealMatrix, doubleArray: typing.List[float], doubleArray2: typing.List[float]) -> org.hipparchus.linear.RealMatrix:
+        """
+            Un-normalize the Kalman gain matrix.
+        
+            Parameters:
+                normalizedK (:class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.linear.RealMatrix?is`): normalized Kalman gain matrix
+                parameterScales (double[]): scale factor of estimated parameters
+                sigmas (double[]): measurement theoretical standard deviation
+        
+            Returns:
+                the un-normalized Kalman gain matrix
+        
+        
+        """
+        ...
+    @staticmethod
+    def unnormalizeMeasurementJacobian(realMatrix: org.hipparchus.linear.RealMatrix, doubleArray: typing.List[float], doubleArray2: typing.List[float]) -> org.hipparchus.linear.RealMatrix:
+        """
+            Un-normalize the measurement matrix.
+        
+            Parameters:
+                normalizedH (:class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.linear.RealMatrix?is`): normalized measurement matrix
+                parameterScales (double[]): scale factor of estimated parameters
+                sigmas (double[]): measurement theoretical standard deviation
+        
+            Returns:
+                the un-normalized measurement matrix
+        
+        
+        """
+        ...
+    @staticmethod
+    def unnormalizeStateTransitionMatrix(realMatrix: org.hipparchus.linear.RealMatrix, doubleArray: typing.List[float]) -> org.hipparchus.linear.RealMatrix:
+        """
+            Un-nomalized the state transition matrix.
+        
+            Parameters:
+                normalizedSTM (:class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.linear.RealMatrix?is`): normalized state transition matrix
+                parameterScales (double[]): scale factor of estimated parameters
+        
+            Returns:
+                the un-normalized state transition matrix
         
         
         """
@@ -1008,11 +1049,16 @@ class UnscentedKalmanEstimatorBuilder:
     
         Builder for an Unscented Kalman filter estimator.
     
+        The builder is generalized to accept any :class:`~org.orekit.propagation.conversion.PropagatorBuilder`. Howerver, it is
+        absolutely not recommended to use a :class:`~org.orekit.propagation.conversion.DSSTPropagatorBuilder`. A specific
+        :class:`~org.orekit.estimation.sequential.SemiAnalyticalUnscentedKalmanEstimatorBuilder` is implemented and shall be
+        used.
+    
         Since:
             11.3
     """
     def __init__(self): ...
-    def addPropagationConfiguration(self, numericalPropagatorBuilder: org.orekit.propagation.conversion.NumericalPropagatorBuilder, covarianceMatrixProvider: CovarianceMatrixProvider) -> 'UnscentedKalmanEstimatorBuilder':
+    def addPropagationConfiguration(self, propagatorBuilder: org.orekit.propagation.conversion.PropagatorBuilder, covarianceMatrixProvider: CovarianceMatrixProvider) -> 'UnscentedKalmanEstimatorBuilder':
         """
             Add a propagation configuration.
         
@@ -1028,7 +1074,7 @@ class UnscentedKalmanEstimatorBuilder:
             (but filtering out the non selected drivers).
         
             Parameters:
-                builder (:class:`~org.orekit.propagation.conversion.NumericalPropagatorBuilder`): The propagator builder to use in the Kalman filter.
+                builder (:class:`~org.orekit.propagation.conversion.PropagatorBuilder`): The propagator builder to use in the Kalman filter.
                 provider (:class:`~org.orekit.estimation.sequential.CovarianceMatrixProvider`): The process noise matrices provider to use, consistent with the builder.
         
             Returns:
@@ -1147,16 +1193,90 @@ class AbstractCovarianceMatrixProvider(CovarianceMatrixProvider):
         """
         ...
 
-class AbstractKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.extended.NonLinearProcess[MeasurementDecorator]):
+class KalmanEstimator(AbstractKalmanEstimator):
     """
-    public abstract class AbstractKalmanModel extends :class:`~org.orekit.estimation.sequential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.sequential.KalmanEstimation`, :class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.extended.NonLinearProcess?is`<:class:`~org.orekit.estimation.sequential.MeasurementDecorator`>
+    public class KalmanEstimator extends :class:`~org.orekit.estimation.sequential.AbstractKalmanEstimator`
     
-        Abstract class defining the process model dynamics to use with a
-        :class:`~org.orekit.estimation.sequential.KalmanEstimator`.
+        Implementation of a Kalman filter to perform orbit determination.
+    
+        The filter uses a :class:`~org.orekit.propagation.conversion.PropagatorBuilder` to initialize its reference trajectory.
+        The Kalman estimator can be used with a :class:`~org.orekit.propagation.numerical.NumericalPropagator`,
+        :class:`~org.orekit.propagation.analytical.tle.TLEPropagator`,
+        :class:`~org.orekit.propagation.analytical.BrouwerLyddanePropagator`,
+        :class:`~org.orekit.propagation.analytical.EcksteinHechlerPropagator`,
+        :class:`~org.orekit.propagation.analytical.KeplerianPropagator`, or
+        :class:`~org.orekit.propagation.analytical.Ephemeris`.
+    
+        Kalman estimation using a :class:`~org.orekit.propagation.semianalytical.dsst.DSSTPropagator` must be done using the
+        :class:`~org.orekit.estimation.sequential.SemiAnalyticalKalmanEstimator`.
+    
+        The estimated parameters are driven by :class:`~org.orekit.utils.ParameterDriver` objects. They are of 3 different
+        types:
+    
+          1.  **Orbital parameters**:The position and velocity of the spacecraft, or, more generally, its orbit.
+    
+    
+    These parameters are retrieved from the reference trajectory propagator builder when the filter is initialized.
+          2.  **Propagation parameters**: Some parameters modelling physical processes (SRP or drag coefficients etc...).
+    
+    
+    They are also retrieved from the propagator builder during the initialization phase.
+          3.  **Measurements parameters**: Parameters related to measurements (station biases, positions etc...).
+    
+    
+    They are passed down to the filter in its constructor.
+    
+    
+        The total number of estimated parameters is m, the size of the state vector.
+    
+        The Kalman filter implementation used is provided by the underlying mathematical library Hipparchus. All the variables
+        seen by Hipparchus (states, covariances, measurement matrices...) are normalized using a specific scale for each
+        estimated parameters or standard deviation noise for each measurement components.
+    
+        A :class:`~org.orekit.estimation.sequential.KalmanEstimator` object is built using the
+        :meth:`~org.orekit.estimation.sequential.KalmanEstimatorBuilder.build` method of a
+        :class:`~org.orekit.estimation.sequential.KalmanEstimatorBuilder`.
     
         Since:
-            11.0
+            9.2
     """
+    def estimationStep(self, observedMeasurement: org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]) -> typing.List[org.orekit.propagation.Propagator]:
+        """
+            Process a single measurement.
+        
+            Update the filter with the new measurement by calling the estimate method.
+        
+            Parameters:
+                observedMeasurement (:class:`~org.orekit.estimation.measurements.ObservedMeasurement`<?> observedMeasurement): the measurement to process
+        
+            Returns:
+                estimated propagators
+        
+        
+        """
+        ...
+    def processMeasurements(self, iterable: typing.Union[java.lang.Iterable[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], typing.Sequence[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], typing.Set[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]]]) -> typing.List[org.orekit.propagation.Propagator]: ...
+    def setObserver(self, kalmanObserver: KalmanObserver) -> None:
+        """
+            Set the observer.
+        
+            Parameters:
+                observer (:class:`~org.orekit.estimation.sequential.KalmanObserver`): the observer
+        
+        
+        """
+        ...
+
+class KalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.extended.NonLinearProcess[MeasurementDecorator]):
+    """
+    public class KalmanModel extends :class:`~org.orekit.estimation.sequential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.sequential.KalmanEstimation`, :class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.extended.NonLinearProcess?is`<:class:`~org.orekit.estimation.sequential.MeasurementDecorator`>
+    
+        Class defining the process model dynamics to use with a :class:`~org.orekit.estimation.sequential.KalmanEstimator`.
+    
+        Since:
+            9.2
+    """
+    def __init__(self, list: java.util.List[org.orekit.propagation.conversion.PropagatorBuilder], list2: java.util.List[CovarianceMatrixProvider], parameterDriversList: org.orekit.utils.ParameterDriversList, covarianceMatrixProvider: CovarianceMatrixProvider): ...
     def finalizeEstimation(self, observedMeasurement: org.orekit.estimation.measurements.ObservedMeasurement[typing.Any], processEstimate: org.hipparchus.filtering.kalman.ProcessEstimate) -> None:
         """
             Finalize estimation.
@@ -1168,7 +1288,7 @@ class AbstractKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.exte
         
         """
         ...
-    def getBuilders(self) -> java.util.List[org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder]: ...
+    def getBuilders(self) -> java.util.List[org.orekit.propagation.conversion.PropagatorBuilder]: ...
     def getCorrectedMeasurement(self) -> org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]:
         """
             Get the estimated measurement.
@@ -1311,18 +1431,6 @@ class AbstractKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.exte
         
         """
         ...
-    def getMappers(self) -> typing.List[org.orekit.propagation.integration.AbstractJacobiansMapper]:
-        """
-            Deprecated.
-            as of 11.1, not used anymore
-            Getter for the jacobian mappers.
-        
-            Returns:
-                the jacobian mappers
-        
-        
-        """
-        ...
     def getPhysicalEstimatedCovarianceMatrix(self) -> org.hipparchus.linear.RealMatrix:
         """
             Get the "physical" estimated covariance matrix (i.e. not normalized)
@@ -1449,104 +1557,12 @@ class AbstractKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.exte
         
         """
         ...
-    def setHarvesters(self, matricesHarvesterArray: typing.List[org.orekit.propagation.MatricesHarvester]) -> None:
-        """
-            Setter for the jacobian harvesters.
-        
-            Parameters:
-                harvesters (:class:`~org.orekit.propagation.MatricesHarvester`[]): the jacobian harvesters to set
-        
-            Since:
-                11.1
-        
-        
-        """
-        ...
-    def setMappers(self, abstractJacobiansMapperArray: typing.List[org.orekit.propagation.integration.AbstractJacobiansMapper]) -> None:
-        """
-            Deprecated.
-            as of 11.1, replaced by :meth:`~org.orekit.estimation.sequential.AbstractKalmanModel.setHarvesters`
-            Setter for the jacobian mappers.
-        
-            Parameters:
-                mappers (:class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`[]): the jacobian mappers to set
-        
-        
-        """
-        ...
     def setReferenceTrajectories(self, propagatorArray: typing.List[org.orekit.propagation.Propagator]) -> None:
         """
             Setter for the reference trajectories.
         
             Parameters:
                 referenceTrajectories (:class:`~org.orekit.propagation.Propagator`[]): the reference trajectories to be setted
-        
-        
-        """
-        ...
-
-class KalmanEstimator(AbstractKalmanEstimator):
-    """
-    public class KalmanEstimator extends :class:`~org.orekit.estimation.sequential.AbstractKalmanEstimator`
-    
-        Implementation of a Kalman filter to perform orbit determination.
-    
-        The filter uses a :class:`~org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder` to initialize its
-        reference trajectory :class:`~org.orekit.propagation.numerical.NumericalPropagator` or
-        :class:`~org.orekit.propagation.semianalytical.dsst.DSSTPropagator`.
-    
-        The estimated parameters are driven by :class:`~org.orekit.utils.ParameterDriver` objects. They are of 3 different
-        types:
-    
-          1.  **Orbital parameters**:The position and velocity of the spacecraft, or, more generally, its orbit.
-    
-    
-    These parameters are retrieved from the reference trajectory propagator builder when the filter is initialized.
-          2.  **Propagation parameters**: Some parameters modelling physical processes (SRP or drag coefficients etc...).
-    
-    
-    They are also retrieved from the propagator builder during the initialization phase.
-          3.  **Measurements parameters**: Parameters related to measurements (station biases, positions etc...).
-    
-    
-    They are passed down to the filter in its constructor.
-    
-    
-        The total number of estimated parameters is m, the size of the state vector.
-    
-        The Kalman filter implementation used is provided by the underlying mathematical library Hipparchus. All the variables
-        seen by Hipparchus (states, covariances, measurement matrices...) are normalized using a specific scale for each
-        estimated parameters or standard deviation noise for each measurement components.
-    
-        A :class:`~org.orekit.estimation.sequential.KalmanEstimator` object is built using the
-        :meth:`~org.orekit.estimation.sequential.KalmanEstimatorBuilder.build` method of a
-        :class:`~org.orekit.estimation.sequential.KalmanEstimatorBuilder`.
-    
-        Since:
-            9.2
-    """
-    def estimationStep(self, observedMeasurement: org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]) -> typing.List[org.orekit.propagation.Propagator]:
-        """
-            Process a single measurement.
-        
-            Update the filter with the new measurement by calling the estimate method.
-        
-            Parameters:
-                observedMeasurement (:class:`~org.orekit.estimation.measurements.ObservedMeasurement`<?> observedMeasurement): the measurement to process
-        
-            Returns:
-                estimated propagators
-        
-        
-        """
-        ...
-    def processMeasurements(self, iterable: typing.Union[java.lang.Iterable[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], typing.Sequence[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], typing.Set[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]]]) -> typing.List[org.orekit.propagation.Propagator]: ...
-    def setObserver(self, kalmanObserver: KalmanObserver) -> None:
-        """
-            Set the observer.
-        
-            Parameters:
-                observer (:class:`~org.orekit.estimation.sequential.KalmanObserver`): the observer
         
         
         """
@@ -2905,6 +2921,17 @@ class SemiAnalyticalUnscentedKalmanModel(KalmanEstimation, org.hipparchus.filter
         
         """
         ...
+    def getPredictedMeasurements(self, realVectorArray: typing.List[org.hipparchus.linear.RealVector], measurementDecorator: MeasurementDecorator) -> typing.List[org.hipparchus.linear.RealVector]:
+        """
+        
+            Specified by:
+                
+                meth:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.unscented.UnscentedProcess.html?is` in
+                interface :class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.unscented.UnscentedProcess?is`
+        
+        
+        """
+        ...
     def getPredictedSpacecraftStates(self) -> typing.List[org.orekit.propagation.SpacecraftState]:
         """
             Get the predicted spacecraft states.
@@ -2981,8 +3008,7 @@ class UnscentedKalmanEstimator(AbstractKalmanEstimator):
     
         Implementation of an Unscented Kalman filter to perform orbit determination.
     
-        The filter uses a :class:`~org.orekit.propagation.conversion.NumericalPropagatorBuilder` to initialize its reference
-        trajectory.
+        The filter uses a :class:`~org.orekit.propagation.conversion.PropagatorBuilder` to initialize its reference trajectory.
     
         The estimated parameters are driven by :class:`~org.orekit.utils.ParameterDriver` objects. They are of 3 different
         types:
@@ -3007,7 +3033,11 @@ class UnscentedKalmanEstimator(AbstractKalmanEstimator):
     
         An :class:`~org.orekit.estimation.sequential.UnscentedKalmanEstimator` object is built using the
         :meth:`~org.orekit.estimation.sequential.UnscentedKalmanEstimatorBuilder.build` method of a
-        :class:`~org.orekit.estimation.sequential.UnscentedKalmanEstimatorBuilder`.
+        :class:`~org.orekit.estimation.sequential.UnscentedKalmanEstimatorBuilder`. The builder is generalized to accept any
+        :class:`~org.orekit.propagation.conversion.PropagatorBuilder`. Howerver, it is absolutely not recommended to use a
+        :class:`~org.orekit.propagation.conversion.DSSTPropagatorBuilder`. A specific
+        :class:`~org.orekit.estimation.sequential.SemiAnalyticalUnscentedKalmanEstimatorBuilder` is implemented and shall be
+        used.
     
         Since:
             11.3
@@ -3304,6 +3334,17 @@ class UnscentedKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalman.uns
         
         """
         ...
+    def getPredictedMeasurements(self, realVectorArray: typing.List[org.hipparchus.linear.RealVector], measurementDecorator: MeasurementDecorator) -> typing.List[org.hipparchus.linear.RealVector]:
+        """
+        
+            Specified by:
+                
+                meth:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.unscented.UnscentedProcess.html?is` in
+                interface :class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.unscented.UnscentedProcess?is`
+        
+        
+        """
+        ...
     def getPredictedSpacecraftStates(self) -> typing.List[org.orekit.propagation.SpacecraftState]:
         """
             Get the predicted spacecraft states.
@@ -3368,33 +3409,6 @@ class ConstantProcessNoise(AbstractCovarianceMatrixProvider):
         """
         ...
 
-class DSSTKalmanModel(AbstractKalmanModel):
-    """
-    :class:`~org.orekit.estimation.sequential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class DSSTKalmanModel extends :class:`~org.orekit.estimation.sequential.AbstractKalmanModel`
-    
-        Deprecated.
-        as of 11.1, replaced by :class:`~org.orekit.estimation.sequential.SemiAnalyticalKalmanModel`
-        Class defining the process model dynamics to use with a :class:`~org.orekit.estimation.sequential.KalmanEstimator`.
-    
-        This class is an adaption of the :class:`~org.orekit.estimation.sequential.KalmanModel` class but for the
-        :class:`~org.orekit.propagation.semianalytical.dsst.DSSTPropagator`.
-    
-        Since:
-            10.0
-    """
-    def __init__(self, list: java.util.List[org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder], list2: java.util.List[CovarianceMatrixProvider], parameterDriversList: org.orekit.utils.ParameterDriversList, covarianceMatrixProvider: CovarianceMatrixProvider, propagationType: org.orekit.propagation.PropagationType, propagationType2: org.orekit.propagation.PropagationType): ...
-
-class KalmanModel(AbstractKalmanModel):
-    """
-    public class KalmanModel extends :class:`~org.orekit.estimation.sequential.AbstractKalmanModel`
-    
-        Class defining the process model dynamics to use with a :class:`~org.orekit.estimation.sequential.KalmanEstimator`.
-    
-        Since:
-            9.2
-    """
-    def __init__(self, list: java.util.List[org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder], list2: java.util.List[CovarianceMatrixProvider], parameterDriversList: org.orekit.utils.ParameterDriversList, covarianceMatrixProvider: CovarianceMatrixProvider): ...
-
 class PythonAbstractCovarianceMatrixProvider(AbstractCovarianceMatrixProvider):
     """
     public class PythonAbstractCovarianceMatrixProvider extends :class:`~org.orekit.estimation.sequential.AbstractCovarianceMatrixProvider`
@@ -3453,67 +3467,6 @@ class PythonAbstractCovarianceMatrixProvider(AbstractCovarianceMatrixProvider):
         """
         ...
 
-class PythonAbstractKalmanModel(AbstractKalmanModel):
-    """
-    public class PythonAbstractKalmanModel extends :class:`~org.orekit.estimation.sequential.AbstractKalmanModel`
-    """
-    @typing.overload
-    def __init__(self, list: java.util.List[org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder], list2: java.util.List[CovarianceMatrixProvider], parameterDriversList: org.orekit.utils.ParameterDriversList, covarianceMatrixProvider: CovarianceMatrixProvider, matricesHarvesterArray: typing.List[org.orekit.propagation.MatricesHarvester]): ...
-    @typing.overload
-    def __init__(self, list: java.util.List[org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder], list2: java.util.List[CovarianceMatrixProvider], parameterDriversList: org.orekit.utils.ParameterDriversList, covarianceMatrixProvider: CovarianceMatrixProvider, matricesHarvesterArray: typing.List[org.orekit.propagation.MatricesHarvester], propagationType: org.orekit.propagation.PropagationType, propagationType2: org.orekit.propagation.PropagationType): ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def updateReferenceTrajectories(self, propagatorArray: typing.List[org.orekit.propagation.Propagator], propagationType: org.orekit.propagation.PropagationType, propagationType2: org.orekit.propagation.PropagationType) -> None:
-        """
-            Update the reference trajectories using the propagators as input.
-        
-            Specified by:
-                :meth:`~org.orekit.estimation.sequential.AbstractKalmanModel.updateReferenceTrajectories` in
-                class :class:`~org.orekit.estimation.sequential.AbstractKalmanModel`
-        
-            Parameters:
-                propagators (:class:`~org.orekit.propagation.Propagator`[]): The new propagators to use
-                pType (:class:`~org.orekit.propagation.PropagationType`): propagationType type of the orbit used for the propagation (mean or osculating)
-                sType (:class:`~org.orekit.propagation.PropagationType`): type of the elements used to define the orbital state (mean or osculating)
-        
-        
-        """
-        ...
-
-class TLEKalmanModel(AbstractKalmanModel):
-    """
-    :class:`~org.orekit.estimation.sequential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class TLEKalmanModel extends :class:`~org.orekit.estimation.sequential.AbstractKalmanModel`
-    
-        Deprecated.
-        as of 11.1, replaced by :class:`~org.orekit.estimation.sequential.KalmanModel`
-        Class defining the process model dynamics to use with a :class:`~org.orekit.estimation.sequential.KalmanEstimator`.
-    
-        This class is an adaption of the :class:`~org.orekit.estimation.sequential.KalmanModel` class but for the
-        :class:`~org.orekit.propagation.analytical.tle.TLEPropagator`.
-    
-        Since:
-            11.0
-    """
-    def __init__(self, list: java.util.List[org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder], list2: java.util.List[CovarianceMatrixProvider], parameterDriversList: org.orekit.utils.ParameterDriversList, covarianceMatrixProvider: CovarianceMatrixProvider): ...
-
 class UnivariateProcessNoise(AbstractCovarianceMatrixProvider):
     """
     public class UnivariateProcessNoise extends :class:`~org.orekit.estimation.sequential.AbstractCovarianceMatrixProvider`
@@ -3527,7 +3480,7 @@ class UnivariateProcessNoise(AbstractCovarianceMatrixProvider):
         they are consistent with a covariance matrix.
     
         The orbital parameters evolutions are provided in LOF frame and Cartesian (PV); then converted in inertial frame and
-        current :class:`~org.orekit.orbits.OrbitType` and :class:`~org.orekit.orbits.PositionAngle` when method
+        current :class:`~org.orekit.orbits.OrbitType` and :class:`~org.orekit.orbits.PositionAngleType` when method
         :meth:`~org.orekit.estimation.sequential.UnivariateProcessNoise.getProcessNoiseMatrix` is called.
     
         The time-dependent functions define a process noise matrix that is diagonal *in the Local Orbital Frame*, corresponds to
@@ -3550,9 +3503,9 @@ class UnivariateProcessNoise(AbstractCovarianceMatrixProvider):
             9.2
     """
     @typing.overload
-    def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix, lOFType: org.orekit.frames.LOFType, positionAngle: org.orekit.orbits.PositionAngle, univariateFunctionArray: typing.List[org.hipparchus.analysis.UnivariateFunction], univariateFunctionArray2: typing.List[org.hipparchus.analysis.UnivariateFunction]): ...
+    def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix, lOFType: org.orekit.frames.LOFType, positionAngleType: org.orekit.orbits.PositionAngleType, univariateFunctionArray: typing.List[org.hipparchus.analysis.UnivariateFunction], univariateFunctionArray2: typing.List[org.hipparchus.analysis.UnivariateFunction]): ...
     @typing.overload
-    def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix, lOFType: org.orekit.frames.LOFType, positionAngle: org.orekit.orbits.PositionAngle, univariateFunctionArray: typing.List[org.hipparchus.analysis.UnivariateFunction], univariateFunctionArray2: typing.List[org.hipparchus.analysis.UnivariateFunction], univariateFunctionArray3: typing.List[org.hipparchus.analysis.UnivariateFunction]): ...
+    def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix, lOFType: org.orekit.frames.LOFType, positionAngleType: org.orekit.orbits.PositionAngleType, univariateFunctionArray: typing.List[org.hipparchus.analysis.UnivariateFunction], univariateFunctionArray2: typing.List[org.hipparchus.analysis.UnivariateFunction], univariateFunctionArray3: typing.List[org.hipparchus.analysis.UnivariateFunction]): ...
     def getLofCartesianOrbitalParametersEvolution(self) -> typing.List[org.hipparchus.analysis.UnivariateFunction]:
         """
             Getter for the lofCartesianOrbitalParametersEvolution.
@@ -3583,7 +3536,7 @@ class UnivariateProcessNoise(AbstractCovarianceMatrixProvider):
         
         """
         ...
-    def getPositionAngle(self) -> org.orekit.orbits.PositionAngle:
+    def getPositionAngleType(self) -> org.orekit.orbits.PositionAngleType:
         """
             Getter for the positionAngle.
         
@@ -3642,11 +3595,8 @@ class __module_protocol__(typing.Protocol):
 
     AbstractCovarianceMatrixProvider: typing.Type[AbstractCovarianceMatrixProvider]
     AbstractKalmanEstimator: typing.Type[AbstractKalmanEstimator]
-    AbstractKalmanModel: typing.Type[AbstractKalmanModel]
     ConstantProcessNoise: typing.Type[ConstantProcessNoise]
     CovarianceMatrixProvider: typing.Type[CovarianceMatrixProvider]
-    DSSTKalmanModel: typing.Type[DSSTKalmanModel]
-    EskfMeasurementHandler: typing.Type[EskfMeasurementHandler]
     KalmanEstimation: typing.Type[KalmanEstimation]
     KalmanEstimator: typing.Type[KalmanEstimator]
     KalmanEstimatorBuilder: typing.Type[KalmanEstimatorBuilder]
@@ -3656,7 +3606,6 @@ class __module_protocol__(typing.Protocol):
     MeasurementDecorator: typing.Type[MeasurementDecorator]
     PythonAbstractCovarianceMatrixProvider: typing.Type[PythonAbstractCovarianceMatrixProvider]
     PythonAbstractKalmanEstimator: typing.Type[PythonAbstractKalmanEstimator]
-    PythonAbstractKalmanModel: typing.Type[PythonAbstractKalmanModel]
     PythonCovarianceMatrixProvider: typing.Type[PythonCovarianceMatrixProvider]
     PythonKalmanEstimation: typing.Type[PythonKalmanEstimation]
     PythonKalmanObserver: typing.Type[PythonKalmanObserver]
@@ -3669,7 +3618,6 @@ class __module_protocol__(typing.Protocol):
     SemiAnalyticalUnscentedKalmanEstimator: typing.Type[SemiAnalyticalUnscentedKalmanEstimator]
     SemiAnalyticalUnscentedKalmanEstimatorBuilder: typing.Type[SemiAnalyticalUnscentedKalmanEstimatorBuilder]
     SemiAnalyticalUnscentedKalmanModel: typing.Type[SemiAnalyticalUnscentedKalmanModel]
-    TLEKalmanModel: typing.Type[TLEKalmanModel]
     UnivariateProcessNoise: typing.Type[UnivariateProcessNoise]
     UnscentedKalmanEstimator: typing.Type[UnscentedKalmanEstimator]
     UnscentedKalmanEstimatorBuilder: typing.Type[UnscentedKalmanEstimatorBuilder]

@@ -1,4 +1,5 @@
 import java.io
+import java.lang
 import org.hipparchus
 import org.hipparchus.analysis
 import org.hipparchus.linear
@@ -51,6 +52,7 @@ class DSCompiler:
     
         .. code-block: java
         
+        
            // parameter 0 is x, parameter 1 is y, parameter 2 is z
            int parameters = 3;
            DSCompiler compiler = DSCompiler.getCompiler(parameters, order);
@@ -77,6 +79,7 @@ class DSCompiler:
         product of all variables:
     
         .. code-block: java
+        
         
            // compute the product of all elements
            double[] product = new double[size];
@@ -442,7 +445,7 @@ class DSCompiler:
     @typing.overload
     def divide(self, doubleArray: typing.List[float], int: int, doubleArray2: typing.List[float], int2: int, doubleArray3: typing.List[float], int3: int) -> None:
         """
-            Perform division of two derivative structures.
+            Perform division of two derivative structures. Based on the multiplication operator.
         
             Parameters:
                 lhs (double[]): array holding left hand side of division
@@ -457,7 +460,7 @@ class DSCompiler:
     @typing.overload
     def divide(self, tArray: typing.List[_divide_1__T], int: int, tArray2: typing.List[_divide_1__T], int2: int, tArray3: typing.List[_divide_1__T], int3: int) -> None:
         """
-            Perform division of two derivative structures.
+            Perform division of two derivative structures. Based on the multiplication operator.
         
             Parameters:
                 lhs (T[]): array holding left hand side of division
@@ -1035,6 +1038,34 @@ class DSCompiler:
         
         """
         ...
+    _reciprocal_1__T = typing.TypeVar('_reciprocal_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def reciprocal(self, doubleArray: typing.List[float], int: int, doubleArray2: typing.List[float], int2: int) -> None:
+        """
+            Compute reciprocal of derivative structure. Based on the multiplication operator.
+        
+            Parameters:
+                operand (double[]): array holding the operand
+                operandOffset (int): offset of the operand in its array
+                result (double[]): array where result must be stored
+                resultOffset (int): offset of the result in its array
+        
+        """
+        ...
+    @typing.overload
+    def reciprocal(self, tArray: typing.List[_reciprocal_1__T], int: int, tArray2: typing.List[_reciprocal_1__T], int2: int) -> None:
+        """
+            Compute reciprocal of derivative structure. Based on the multiplication operator.
+        
+            Parameters:
+                operand (T[]): array holding the operand
+                operandOffset (int): offset of the operand in its array
+                result (T[]): array where result must be stored
+                resultOffset (int): offset of the result in its array
+        
+        
+        """
+        ...
     _remainder_1__T = typing.TypeVar('_remainder_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def remainder(self, doubleArray: typing.List[float], int: int, doubleArray2: typing.List[float], int2: int, doubleArray3: typing.List[float], int3: int) -> None:
@@ -1225,6 +1256,34 @@ class DSCompiler:
         
             Since:
                 1.4
+        
+        
+        """
+        ...
+    _sqrt_1__T = typing.TypeVar('_sqrt_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def sqrt(self, doubleArray: typing.List[float], int: int, doubleArray2: typing.List[float], int2: int) -> None:
+        """
+            Compute square root of a derivative structure. Based on the multiplication operator.
+        
+            Parameters:
+                operand (double[]): array holding the operand
+                operandOffset (int): offset of the operand in its array
+                result (double[]): array where result must be stored (for square root the result array *cannot* be the input array)
+                resultOffset (int): offset of the result in its array
+        
+        """
+        ...
+    @typing.overload
+    def sqrt(self, tArray: typing.List[_sqrt_1__T], int: int, tArray2: typing.List[_sqrt_1__T], int2: int) -> None:
+        """
+            Compute square root of a derivative structure. Based on the multiplication operator.
+        
+            Parameters:
+                operand (T[]): array holding the operand
+                operandOffset (int): offset of the operand in its array
+                result (T[]): array where result must be stored (for square root the result array *cannot* be the input array)
+                resultOffset (int): offset of the result in its array
         
         
         """
@@ -1483,7 +1542,7 @@ _FieldDerivative__S = typing.TypeVar('_FieldDerivative__S', bound=org.hipparchus
 _FieldDerivative__T = typing.TypeVar('_FieldDerivative__T', bound='FieldDerivative')  # <T>
 class FieldDerivative(org.hipparchus.CalculusFieldElement[_FieldDerivative__T], typing.Generic[_FieldDerivative__S, _FieldDerivative__T]):
     """
-    public interface FieldDerivative<S extends :class:`~org.hipparchus.CalculusFieldElement`<S>,T extends FieldDerivative<S,T>> extends :class:`~org.hipparchus.CalculusFieldElement`<T>
+    public interface FieldDerivative<S extends :class:`~org.hipparchus.CalculusFieldElement`<S>, T extends FieldDerivative<S, T>> extends :class:`~org.hipparchus.CalculusFieldElement`<T>
     
         Interface representing both the value and the differentials of a function.
     
@@ -2060,7 +2119,7 @@ class SparseGradient(org.hipparchus.CalculusFieldElement['SparseGradient'], java
                 x (:class:`~org.hipparchus.analysis.differentiation.SparseGradient`): second argument of the arc tangent
         
             Returns:
-        public static :class:`~org.hipparchus.analysis.differentiation.SparseGradient` atan2(:class:`~org.hipparchus.analysis.differentiation.SparseGradient` y, :class:`~org.hipparchus.analysis.differentiation.SparseGradient` x)
+        public static :class:`~org.hipparchus.analysis.differentiation.SparseGradient` atan2 (:class:`~org.hipparchus.analysis.differentiation.SparseGradient` y, :class:`~org.hipparchus.analysis.differentiation.SparseGradient` x)
         
             Two arguments arc tangent operation.
         
@@ -2637,8 +2696,8 @@ class SparseGradient(org.hipparchus.CalculusFieldElement['SparseGradient'], java
             Returns:
                 this×a
         
-            Compute n × this. Multiplication by an integer number is defined as the following sum
-            n × this = ∑ :sub:`i=1` :sup:`n` this.
+            Compute n × this. Multiplication by an integer number is defined as the following sum \[ n \times \mathrm{this} =
+            \sum_{i=1}^n \mathrm{this} \]
         
             Specified by:
                 :meth:`~org.hipparchus.FieldElement.multiply` in interface :class:`~org.hipparchus.FieldElement`
@@ -3490,7 +3549,7 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
             Returns:
                 this+a
         
-        public :class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` add(:class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` a) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public :class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` add (:class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` a) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Compute this + a.
         
@@ -3556,7 +3615,7 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
             Raises:
                 :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if number of free parameters or orders are inconsistent
         
-        public static :class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` atan2(:class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` y, :class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` x) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public static :class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` atan2 (:class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` y, :class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` x) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Two arguments arc tangent operation.
         
@@ -3705,7 +3764,7 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
             Returns:
                 this÷a
         
-        public :class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` divide(:class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` a) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public :class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` divide (:class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` a) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Compute this ÷ a.
         
@@ -3996,8 +4055,8 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
     @typing.overload
     def multiply(self, double: float) -> 'DerivativeStructure':
         """
-            Compute n × this. Multiplication by an integer number is defined as the following sum
-            n × this = ∑ :sub:`i=1` :sup:`n` this.
+            Compute n × this. Multiplication by an integer number is defined as the following sum \[ n \times \mathrm{this} =
+            \sum_{i=1}^n \mathrm{this} \]
         
             Specified by:
                 :meth:`~org.hipparchus.FieldElement.multiply` in interface :class:`~org.hipparchus.FieldElement`
@@ -4019,7 +4078,7 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
             Returns:
                 this×a
         
-        public :class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` multiply(:class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` a) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public :class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` multiply (:class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` a) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Compute this × a.
         
@@ -4105,7 +4164,7 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
             Returns:
                 this :sup:`n`
         
-        public :class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` pow(:class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` e) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public :class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` pow (:class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` e) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Power operation.
         
@@ -4197,7 +4256,7 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
             Returns:
                 this - n × a where n is the closest integer to this/a
         
-        public :class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` remainder(:class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` a) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public :class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` remainder (:class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` a) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             IEEE remainder operator.
         
@@ -4332,7 +4391,7 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
             Returns:
                 this-a
         
-        public :class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` subtract(:class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` a) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public :class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` subtract (:class:`~org.hipparchus.analysis.differentiation.DerivativeStructure` a) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Compute this - a.
         
@@ -4428,7 +4487,7 @@ class DerivativeStructure(Derivative['DerivativeStructure'], java.io.Serializabl
 _FieldDerivativeStructure__T = typing.TypeVar('_FieldDerivativeStructure__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'FieldDerivativeStructure'[_FieldDerivativeStructure__T]], typing.Generic[_FieldDerivativeStructure__T]):
     """
-    public class FieldDerivativeStructure<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.FieldDerivative`<T,:class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`<T>>
+    public class FieldDerivativeStructure<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.FieldDerivative`<T, :class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`<T>>
     
         Class representing both the value and the differentials of a function.
     
@@ -4461,7 +4520,7 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
             Raises:
                 :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if number of free parameters or orders are inconsistent
         
-        public static <T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> :class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`<T> atan2(:class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`<T> y, :class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`<T> x) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public static <T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> :class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`<T> atan2 (:class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`<T> y, :class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`<T> x) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Two arguments arc tangent operation.
         
@@ -4659,7 +4718,7 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
             Returns:
                 a :sup:`x`
         
-        public :class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`<:class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`> pow(double p)
+        public :class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`<:class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`> pow (double p)
         
             Power operation.
         
@@ -4672,7 +4731,7 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
             Returns:
                 this :sup:`p`
         
-        public :class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`<:class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`> pow(int n)
+        public :class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`<:class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`> pow (int n)
         
             Integer power operation.
         
@@ -4685,7 +4744,7 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
             Returns:
                 this :sup:`n`
         
-        public :class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`<:class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`> pow(:class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`<:class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`> e) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public :class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`<:class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`> pow (:class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`<:class:`~org.hipparchus.analysis.differentiation.FieldDerivativeStructure`> e) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Power operation.
         
@@ -4740,7 +4799,7 @@ class FieldDerivativeStructure(FieldDerivative[_FieldDerivativeStructure__T, 'Fi
 _FieldGradient__T = typing.TypeVar('_FieldGradient__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldGradient(FieldDerivative[_FieldGradient__T, 'FieldGradient'[_FieldGradient__T]], typing.Generic[_FieldGradient__T]):
     """
-    public class FieldGradient<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.FieldDerivative`<T,:class:`~org.hipparchus.analysis.differentiation.FieldGradient`<T>>
+    public class FieldGradient<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.FieldDerivative`<T, :class:`~org.hipparchus.analysis.differentiation.FieldGradient`<T>>
     
         Class representing both the value and the differentials of a function.
     
@@ -5002,7 +5061,7 @@ class FieldGradient(FieldDerivative[_FieldGradient__T, 'FieldGradient'[_FieldGra
             Returns:
                 a :sup:`x`
         
-        public :class:`~org.hipparchus.analysis.differentiation.FieldGradient`<:class:`~org.hipparchus.analysis.differentiation.FieldGradient`> pow(double p)
+        public :class:`~org.hipparchus.analysis.differentiation.FieldGradient`<:class:`~org.hipparchus.analysis.differentiation.FieldGradient`> pow (double p)
         
             Power operation.
         
@@ -5015,7 +5074,7 @@ class FieldGradient(FieldDerivative[_FieldGradient__T, 'FieldGradient'[_FieldGra
             Returns:
                 this :sup:`p`
         
-        public :class:`~org.hipparchus.analysis.differentiation.FieldGradient`<:class:`~org.hipparchus.analysis.differentiation.FieldGradient`> pow(int n)
+        public :class:`~org.hipparchus.analysis.differentiation.FieldGradient`<:class:`~org.hipparchus.analysis.differentiation.FieldGradient`> pow (int n)
         
             Integer power operation.
         
@@ -5028,7 +5087,7 @@ class FieldGradient(FieldDerivative[_FieldGradient__T, 'FieldGradient'[_FieldGra
             Returns:
                 this :sup:`n`
         
-        public :class:`~org.hipparchus.analysis.differentiation.FieldGradient`<:class:`~org.hipparchus.analysis.differentiation.FieldGradient`> pow(:class:`~org.hipparchus.analysis.differentiation.FieldGradient`<:class:`~org.hipparchus.analysis.differentiation.FieldGradient`> e)
+        public :class:`~org.hipparchus.analysis.differentiation.FieldGradient`<:class:`~org.hipparchus.analysis.differentiation.FieldGradient`> pow (:class:`~org.hipparchus.analysis.differentiation.FieldGradient`<:class:`~org.hipparchus.analysis.differentiation.FieldGradient`> e)
         
             Power operation.
         
@@ -5122,7 +5181,7 @@ _FieldUnivariateDerivative__S = typing.TypeVar('_FieldUnivariateDerivative__S', 
 _FieldUnivariateDerivative__T = typing.TypeVar('_FieldUnivariateDerivative__T', bound='FieldUnivariateDerivative')  # <T>
 class FieldUnivariateDerivative(FieldDerivative[_FieldUnivariateDerivative__S, _FieldUnivariateDerivative__T], typing.Generic[_FieldUnivariateDerivative__S, _FieldUnivariateDerivative__T]):
     """
-    public abstract class FieldUnivariateDerivative<S extends :class:`~org.hipparchus.CalculusFieldElement`<S>,T extends FieldUnivariateDerivative<S,T>> extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.FieldDerivative`<S,T>
+    public abstract class FieldUnivariateDerivative<S extends :class:`~org.hipparchus.CalculusFieldElement`<S>, T extends FieldUnivariateDerivative<S, T>> extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.FieldDerivative`<S, T>
     
         Abstract class representing both the value and the differentials of a function.
     
@@ -6021,8 +6080,8 @@ class Gradient(Derivative['Gradient'], org.hipparchus.CalculusFieldElement['Grad
     @typing.overload
     def multiply(self, double: float) -> 'Gradient':
         """
-            Compute n × this. Multiplication by an integer number is defined as the following sum
-            n × this = ∑ :sub:`i=1` :sup:`n` this.
+            Compute n × this. Multiplication by an integer number is defined as the following sum \[ n \times \mathrm{this} =
+            \sum_{i=1}^n \mathrm{this} \]
         
             Specified by:
                 :meth:`~org.hipparchus.FieldElement.multiply` in interface :class:`~org.hipparchus.FieldElement`
@@ -6437,9 +6496,9 @@ class Gradient(Derivative['Gradient'], org.hipparchus.CalculusFieldElement['Grad
         ...
 
 _UnivariateDerivative__T = typing.TypeVar('_UnivariateDerivative__T', bound='UnivariateDerivative')  # <T>
-class UnivariateDerivative(Derivative[_UnivariateDerivative__T], org.hipparchus.CalculusFieldElement[_UnivariateDerivative__T], java.io.Serializable, typing.Generic[_UnivariateDerivative__T]):
+class UnivariateDerivative(Derivative[_UnivariateDerivative__T], java.io.Serializable, java.lang.Comparable[_UnivariateDerivative__T], typing.Generic[_UnivariateDerivative__T]):
     """
-    public abstract class UnivariateDerivative<T extends UnivariateDerivative<T>> extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.Derivative`<T>, :class:`~org.hipparchus.CalculusFieldElement`<T>, :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public abstract class UnivariateDerivative<T extends UnivariateDerivative<T>> extends :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.Derivative`<T>, :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.hipparchus.analysis.differentiation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`<T>
     
         Abstract class representing both the value and the differentials of a function.
     
@@ -6480,7 +6539,7 @@ class UnivariateDerivative(Derivative[_UnivariateDerivative__T], org.hipparchus.
 _FieldUnivariateDerivative1__T = typing.TypeVar('_FieldUnivariateDerivative1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldUnivariateDerivative1(FieldUnivariateDerivative[_FieldUnivariateDerivative1__T, 'FieldUnivariateDerivative1'[_FieldUnivariateDerivative1__T]], typing.Generic[_FieldUnivariateDerivative1__T]):
     """
-    public class FieldUnivariateDerivative1<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative`<T,:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative1`<T>>
+    public class FieldUnivariateDerivative1<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative`<T, :class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative1`<T>>
     
         Class representing both the value and the differentials of a function.
     
@@ -6715,7 +6774,7 @@ class FieldUnivariateDerivative1(FieldUnivariateDerivative[_FieldUnivariateDeriv
             Returns:
                 a :sup:`x`
         
-        public :class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative1`<:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative1`> pow(double p)
+        public :class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative1`<:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative1`> pow (double p)
         
             Power operation.
         
@@ -6725,7 +6784,7 @@ class FieldUnivariateDerivative1(FieldUnivariateDerivative[_FieldUnivariateDeriv
             Returns:
                 this :sup:`p`
         
-        public :class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative1`<:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative1`> pow(int n)
+        public :class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative1`<:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative1`> pow (int n)
         
             Integer power operation.
         
@@ -6735,7 +6794,7 @@ class FieldUnivariateDerivative1(FieldUnivariateDerivative[_FieldUnivariateDeriv
             Returns:
                 this :sup:`n`
         
-        public :class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative1`<:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative1`> pow(:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative1`<:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative1`> e)
+        public :class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative1`<:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative1`> pow (:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative1`<:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative1`> e)
         
             Power operation.
         
@@ -6804,7 +6863,7 @@ class FieldUnivariateDerivative1(FieldUnivariateDerivative[_FieldUnivariateDeriv
 _FieldUnivariateDerivative2__T = typing.TypeVar('_FieldUnivariateDerivative2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldUnivariateDerivative2(FieldUnivariateDerivative[_FieldUnivariateDerivative2__T, 'FieldUnivariateDerivative2'[_FieldUnivariateDerivative2__T]], typing.Generic[_FieldUnivariateDerivative2__T]):
     """
-    public class FieldUnivariateDerivative2<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative`<T,:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2`<T>>
+    public class FieldUnivariateDerivative2<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative`<T, :class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2`<T>>
     
         Class representing both the value and the differentials of a function.
     
@@ -7053,7 +7112,7 @@ class FieldUnivariateDerivative2(FieldUnivariateDerivative[_FieldUnivariateDeriv
             Returns:
                 a :sup:`x`
         
-        public :class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2`<:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2`> pow(double p)
+        public :class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2`<:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2`> pow (double p)
         
             Power operation.
         
@@ -7063,7 +7122,7 @@ class FieldUnivariateDerivative2(FieldUnivariateDerivative[_FieldUnivariateDeriv
             Returns:
                 this :sup:`p`
         
-        public :class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2`<:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2`> pow(int n)
+        public :class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2`<:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2`> pow (int n)
         
             Integer power operation.
         
@@ -7073,7 +7132,7 @@ class FieldUnivariateDerivative2(FieldUnivariateDerivative[_FieldUnivariateDeriv
             Returns:
                 this :sup:`n`
         
-        public :class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2`<:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2`> pow(:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2`<:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2`> e)
+        public :class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2`<:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2`> pow (:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2`<:class:`~org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2`> e)
         
             Power operation.
         
@@ -7318,6 +7377,18 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1']):
         
             Returns:
                 ceil(this)
+        
+        
+        """
+        ...
+    def compareTo(self, univariateDerivative1: 'UnivariateDerivative1') -> int:
+        """
+        
+            Comparison performed considering that derivatives are intrinsically linked to monomials in the corresponding Taylor
+            expansion and that the higher the degree, the smaller the term.
+        
+            Since:
+                3.0
         
         
         """
@@ -7758,8 +7829,8 @@ class UnivariateDerivative1(UnivariateDerivative['UnivariateDerivative1']):
     @typing.overload
     def multiply(self, double: float) -> 'UnivariateDerivative1':
         """
-            Compute n × this. Multiplication by an integer number is defined as the following sum
-            n × this = ∑ :sub:`i=1` :sup:`n` this.
+            Compute n × this. Multiplication by an integer number is defined as the following sum \[ n \times \mathrm{this} =
+            \sum_{i=1}^n \mathrm{this} \]
         
             Parameters:
                 n (int): Number of times :code:`this` must be added to itself.
@@ -8262,6 +8333,18 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
         
         """
         ...
+    def compareTo(self, univariateDerivative2: 'UnivariateDerivative2') -> int:
+        """
+        
+            Comparison performed considering that derivatives are intrinsically linked to monomials in the corresponding Taylor
+            expansion and that the higher the degree, the smaller the term.
+        
+            Since:
+                3.0
+        
+        
+        """
+        ...
     def compose(self, *double: float) -> 'UnivariateDerivative2':
         """
             Compute composition of the instance by a univariate function.
@@ -8713,8 +8796,8 @@ class UnivariateDerivative2(UnivariateDerivative['UnivariateDerivative2']):
     @typing.overload
     def multiply(self, double: float) -> 'UnivariateDerivative2':
         """
-            Compute n × this. Multiplication by an integer number is defined as the following sum
-            n × this = ∑ :sub:`i=1` :sup:`n` this.
+            Compute n × this. Multiplication by an integer number is defined as the following sum \[ n \times \mathrm{this} =
+            \sum_{i=1}^n \mathrm{this} \]
         
             Parameters:
                 n (int): Number of times :code:`this` must be added to itself.

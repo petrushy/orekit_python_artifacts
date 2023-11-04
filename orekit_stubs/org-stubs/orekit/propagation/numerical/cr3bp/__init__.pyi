@@ -1,5 +1,4 @@
 import java.util
-import java.util.stream
 import org.hipparchus
 import org.hipparchus.analysis.differentiation
 import org.hipparchus.geometry.euclidean.threed
@@ -7,7 +6,6 @@ import org.hipparchus.linear
 import org.orekit.bodies
 import org.orekit.forces
 import org.orekit.propagation
-import org.orekit.propagation.events
 import org.orekit.propagation.integration
 import org.orekit.propagation.numerical
 import org.orekit.time
@@ -67,9 +65,9 @@ class CR3BPConstants:
         """
         ...
 
-class CR3BPForceModel(org.orekit.forces.AbstractForceModel):
+class CR3BPForceModel(org.orekit.forces.ForceModel):
     """
-    public class CR3BPForceModel extends :class:`~org.orekit.forces.AbstractForceModel`
+    public class CR3BPForceModel extends :class:`~org.orekit.propagation.numerical.cr3bp.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.ForceModel`
     
         Class calculating the acceleration induced by CR3BP model.
     
@@ -97,9 +95,12 @@ class CR3BPForceModel(org.orekit.forces.AbstractForceModel):
         """
             Compute acceleration.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
-                parameters (T[]): values of the force model parameters
+                parameters (T[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -112,9 +113,12 @@ class CR3BPForceModel(org.orekit.forces.AbstractForceModel):
         """
             Compute acceleration.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
-                parameters (double[]): values of the force model parameters
+                parameters (double[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -125,6 +129,9 @@ class CR3BPForceModel(org.orekit.forces.AbstractForceModel):
         """
             Check if force models depends on position only.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.dependsOnPositionOnly` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Returns:
                 true if force model depends on position only, false if it depends on velocity, either directly or due to a dependency on
                 attitude
@@ -132,9 +139,6 @@ class CR3BPForceModel(org.orekit.forces.AbstractForceModel):
         
         """
         ...
-    def getEventsDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
-    _getFieldEventsDetectors__T = typing.TypeVar('_getFieldEventsDetectors__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldEventsDetectors(self, field: org.hipparchus.Field[_getFieldEventsDetectors__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventsDetectors__T]]: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _getPotential_1__T = typing.TypeVar('_getPotential_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
@@ -175,14 +179,64 @@ class CR3BPMultipleShooter(org.orekit.utils.AbstractMultipleShooting):
             "TRAJECTORY DESIGN AND ORBIT MAINTENANCE STRATEGIES IN MULTI-BODY DYNAMICAL REGIMES by Thomas A. Pavlak, Purdue
             University"
     """
-    @typing.overload
-    def __init__(self, list: java.util.List[org.orekit.propagation.SpacecraftState], list2: java.util.List[org.orekit.propagation.numerical.NumericalPropagator], list3: java.util.List[org.orekit.propagation.integration.AdditionalEquations], double: float, double2: float): ...
-    @typing.overload
-    def __init__(self, list: java.util.List[org.orekit.propagation.SpacecraftState], list2: java.util.List[org.orekit.propagation.numerical.NumericalPropagator], list3: java.util.List['STMEquations'], double: float, double2: float, int: int): ...
+    def __init__(self, list: java.util.List[org.orekit.propagation.SpacecraftState], list2: java.util.List[org.orekit.propagation.numerical.NumericalPropagator], list3: java.util.List['STMEquations'], double: float, int: int): ...
+    def setClosedOrbitConstraint(self, boolean: bool) -> None:
+        """
+            Set the constraint of a closed orbit or not.
+        
+            Parameters:
+                isClosed (boolean): true if orbit should be closed
+        
+        
+        """
+        ...
+    def setEpochFreedom(self, int: int, boolean: bool) -> None:
+        """
+            Set the epoch of a patch point to free or not.
+        
+            Overrides:
+                :meth:`~org.orekit.utils.AbstractMultipleShooting.setEpochFreedom` in
+                class :class:`~org.orekit.utils.AbstractMultipleShooting`
+        
+            Parameters:
+                patchIndex (int): Patch point index (zero-based)
+                isFree (boolean): constraint value
+        
+        
+        """
+        ...
+    def setScaleLength(self, double: float) -> None:
+        """
+            Set the scale length.
+        
+            Overrides:
+                :meth:`~org.orekit.utils.AbstractMultipleShooting.setScaleLength` in
+                class :class:`~org.orekit.utils.AbstractMultipleShooting`
+        
+            Parameters:
+                scaleLength (double): scale length in meters
+        
+        
+        """
+        ...
+    def setScaleTime(self, double: float) -> None:
+        """
+            Set the scale time.
+        
+            Overrides:
+                :meth:`~org.orekit.utils.AbstractMultipleShooting.setScaleTime` in
+                class :class:`~org.orekit.utils.AbstractMultipleShooting`
+        
+            Parameters:
+                scaleTime (double): scale time in seconds
+        
+        
+        """
+        ...
 
-class STMEquations(org.orekit.propagation.integration.AdditionalDerivativesProvider, org.orekit.propagation.integration.AdditionalEquations):
+class STMEquations(org.orekit.propagation.integration.AdditionalDerivativesProvider):
     """
-    public class STMEquations extends :class:`~org.orekit.propagation.numerical.cr3bp.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`, :class:`~org.orekit.propagation.integration.AdditionalEquations`
+    public class STMEquations extends :class:`~org.orekit.propagation.numerical.cr3bp.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
     
         Class calculating the state transition matrix coefficient for CR3BP Computation.
     
@@ -197,62 +251,16 @@ class STMEquations(org.orekit.propagation.integration.AdditionalDerivativesProvi
         """
             Compute the derivatives related to the additional state (and optionally main state increments).
         
-            As of 11.2, there is a default implementation that calls the deprecated
-            :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.derivatives` method. This has been done for
-            backward compatibility only and will be removed in 12.0.
-        
             Specified by:
                 :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.combinedDerivatives` in
                 interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional states this equations depend on (according to the
-                    :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.yield` method)
+                    :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.yields` method)
         
             Returns:
                 computed combined derivatives, which may include some incremental coupling effect to add to main state derivatives
-        
-        
-        """
-        ...
-    def computeDerivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[float]) -> typing.List[float]:
-        """
-            Compute the derivatives related to the additional state parameters.
-        
-            When this method is called, the spacecraft state contains the main state (orbit, attitude and mass), all the states
-            provided through the :class:`~org.orekit.propagation.AdditionalStateProvider` registered to the propagator, and the
-            additional state integrated using this equation. It does *not* contains any other states to be integrated alongside
-            during the same propagation.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalEquations.computeDerivatives` in
-                interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
-        
-            Parameters:
-                s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional state
-                pDot (double[]): placeholder where the derivatives of the additional parameters should be put
-        
-            Returns:
-                cumulative effect of the equations on the main state (may be null if equations do not change main state at all)
-        
-        
-        """
-        ...
-    def derivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]:
-        """
-            Deprecated.
-            Compute the derivatives related to the additional state parameters.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.derivatives` in
-                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional states this equations depend on (according to the
-                    :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.yield` method)
-        
-            Returns:
-                computed derivatives
         
         
         """
@@ -279,10 +287,6 @@ class STMEquations(org.orekit.propagation.integration.AdditionalDerivativesProvi
                 :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getName` in
                 interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
-            Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalEquations.getName` in
-                interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
-        
             Returns:
                 name of the additional state (names containing "orekit" with any case are reserved for the library internal use)
         
@@ -298,25 +302,6 @@ class STMEquations(org.orekit.propagation.integration.AdditionalDerivativesProvi
         
             Returns:
                 phiM State Transition Matrix
-        
-        
-        """
-        ...
-    def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Initialize the generator at the start of propagation.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.init` in
-                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalEquations.init` in
-                interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
-        
-            Parameters:
-                initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial state information at the start of propagation
-                target (:class:`~org.orekit.time.AbsoluteDate`): date of propagation
         
         
         """

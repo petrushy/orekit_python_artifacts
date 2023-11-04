@@ -10,7 +10,7 @@ _Encloser__S = typing.TypeVar('_Encloser__S', bound=org.hipparchus.geometry.Spac
 _Encloser__P = typing.TypeVar('_Encloser__P', bound=org.hipparchus.geometry.Point)  # <P>
 class Encloser(typing.Generic[_Encloser__S, _Encloser__P]):
     """
-    public interface Encloser<S extends :class:`~org.hipparchus.geometry.Space`,P extends :class:`~org.hipparchus.geometry.Point`<S>>
+    public interface Encloser<S extends :class:`~org.hipparchus.geometry.Space`, P extends :class:`~org.hipparchus.geometry.Point`<S>>
     
         Interface for algorithms computing enclosing balls.
     
@@ -23,7 +23,7 @@ _EnclosingBall__S = typing.TypeVar('_EnclosingBall__S', bound=org.hipparchus.geo
 _EnclosingBall__P = typing.TypeVar('_EnclosingBall__P', bound=org.hipparchus.geometry.Point)  # <P>
 class EnclosingBall(java.io.Serializable, typing.Generic[_EnclosingBall__S, _EnclosingBall__P]):
     """
-    public class EnclosingBall<S extends :class:`~org.hipparchus.geometry.Space`,P extends :class:`~org.hipparchus.geometry.Point`<S>> extends :class:`~org.hipparchus.geometry.enclosing.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.enclosing.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public class EnclosingBall<S extends :class:`~org.hipparchus.geometry.Space`, P extends :class:`~org.hipparchus.geometry.Point`<S>> extends :class:`~org.hipparchus.geometry.enclosing.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.enclosing.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         This class represents a ball enclosing some points.
     
@@ -102,7 +102,7 @@ _SupportBallGenerator__S = typing.TypeVar('_SupportBallGenerator__S', bound=org.
 _SupportBallGenerator__P = typing.TypeVar('_SupportBallGenerator__P', bound=org.hipparchus.geometry.Point)  # <P>
 class SupportBallGenerator(typing.Generic[_SupportBallGenerator__S, _SupportBallGenerator__P]):
     """
-    public interface SupportBallGenerator<S extends :class:`~org.hipparchus.geometry.Space`,P extends :class:`~org.hipparchus.geometry.Point`<S>>
+    public interface SupportBallGenerator<S extends :class:`~org.hipparchus.geometry.Space`, P extends :class:`~org.hipparchus.geometry.Point`<S>>
     
         Interface for generating balls based on support points.
     
@@ -117,7 +117,7 @@ _WelzlEncloser__S = typing.TypeVar('_WelzlEncloser__S', bound=org.hipparchus.geo
 _WelzlEncloser__P = typing.TypeVar('_WelzlEncloser__P', bound=org.hipparchus.geometry.Point)  # <P>
 class WelzlEncloser(Encloser[_WelzlEncloser__S, _WelzlEncloser__P], typing.Generic[_WelzlEncloser__S, _WelzlEncloser__P]):
     """
-    public class WelzlEncloser<S extends :class:`~org.hipparchus.geometry.Space`,P extends :class:`~org.hipparchus.geometry.Point`<S>> extends :class:`~org.hipparchus.geometry.enclosing.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.enclosing.Encloser`<S,P>
+    public class WelzlEncloser<S extends :class:`~org.hipparchus.geometry.Space`, P extends :class:`~org.hipparchus.geometry.Point`<S>> extends :class:`~org.hipparchus.geometry.enclosing.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.enclosing.Encloser`<S, P>
     
         Class implementing Emo Welzl algorithm to find the smallest enclosing ball in linear time.
     

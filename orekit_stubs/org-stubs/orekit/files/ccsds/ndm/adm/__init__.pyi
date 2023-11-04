@@ -1,10 +1,13 @@
 import java.lang
 import java.util
+import java.util.function
 import org.hipparchus
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.attitudes
+import org.orekit.data
 import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
+import org.orekit.files.ccsds.ndm.adm.acm
 import org.orekit.files.ccsds.ndm.adm.aem
 import org.orekit.files.ccsds.ndm.adm.apm
 import org.orekit.files.ccsds.section
@@ -14,10 +17,99 @@ import org.orekit.files.ccsds.utils.parsing
 import org.orekit.frames
 import org.orekit.time
 import org.orekit.utils
-import org.xml.sax
 import typing
 
 
+
+class AdmCommonMetadataKey(java.lang.Enum['AdmCommonMetadataKey']):
+    """
+    public enum AdmCommonMetadataKey extends :class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.adm.AdmCommonMetadataKey`>
+    
+        Keys for :class:`~org.orekit.files.ccsds.ndm.adm.AdmMetadata` entries.
+    
+        Since:
+            12.0
+    """
+    OBJECT_ID: typing.ClassVar['AdmCommonMetadataKey'] = ...
+    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, admMetadata: 'AdmMetadata') -> bool:
+        """
+            Process one token.
+        
+            Parameters:
+                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
+                context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
+                container (:class:`~org.orekit.files.ccsds.ndm.adm.AdmMetadata`): container to fill
+        
+            Returns:
+                true of token was accepted
+        
+        
+        """
+        ...
+    _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
+    @typing.overload
+    @staticmethod
+    def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
+    @typing.overload
+    @staticmethod
+    def valueOf(string: str) -> 'AdmCommonMetadataKey':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (:class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                :class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        
+        
+        """
+        ...
+    @staticmethod
+    def values() -> typing.List['AdmCommonMetadataKey']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            for (AdmCommonMetadataKey c : AdmCommonMetadataKey.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
+
+class AdmCommonMetadataWriter(org.orekit.files.ccsds.section.AbstractWriter):
+    """
+    public class AdmCommonMetadataWriter extends :class:`~org.orekit.files.ccsds.section.AbstractWriter`
+    
+        Writer for Common metadata for CCSDS Attitude Parameter/Ephemeris Messages.
+    
+        Since:
+            11.0
+    """
+    def __init__(self, admMetadata: 'AdmMetadata'): ...
+
+class AdmHeader(org.orekit.files.ccsds.section.Header):
+    """
+    public class AdmHeader extends :class:`~org.orekit.files.ccsds.section.Header`
+    
+        Header of a CCSDS Attitude Data Message.
+    
+        Since:
+            12.0
+    """
+    def __init__(self): ...
 
 class AdmMetadata(org.orekit.files.ccsds.section.Metadata):
     """
@@ -159,7 +251,6 @@ class AdmMetadataKey(java.lang.Enum['AdmMetadataKey']):
             11.0
     """
     OBJECT_NAME: typing.ClassVar['AdmMetadataKey'] = ...
-    OBJECT_ID: typing.ClassVar['AdmMetadataKey'] = ...
     CENTER_NAME: typing.ClassVar['AdmMetadataKey'] = ...
     def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, admMetadata: AdmMetadata) -> bool:
         """
@@ -219,22 +310,11 @@ class AdmMetadataKey(java.lang.Enum['AdmMetadataKey']):
         """
         ...
 
-class AdmMetadataWriter(org.orekit.files.ccsds.section.AbstractWriter):
-    """
-    public class AdmMetadataWriter extends :class:`~org.orekit.files.ccsds.section.AbstractWriter`
-    
-        Writer for Common metadata for CCSDS Attitude Parameter/Ephemeris Messages.
-    
-        Since:
-            11.0
-    """
-    def __init__(self, admMetadata: AdmMetadata): ...
-
 _AdmParser__T = typing.TypeVar('_AdmParser__T', bound=org.orekit.files.ccsds.ndm.NdmConstituent)  # <T>
 _AdmParser__P = typing.TypeVar('_AdmParser__P', bound=org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser)  # <P>
-class AdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[_AdmParser__T, _AdmParser__P], typing.Generic[_AdmParser__T, _AdmParser__P]):
+class AdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[AdmHeader, _AdmParser__T, _AdmParser__P], typing.Generic[_AdmParser__T, _AdmParser__P]):
     """
-    public abstract class AdmParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<?, ?>, P extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<T, ?>> extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<T, P>
+    public abstract class AdmParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.ndm.adm.AdmHeader`, ?>, P extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<:class:`~org.orekit.files.ccsds.ndm.adm.AdmHeader`, T, ?>> extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<:class:`~org.orekit.files.ccsds.ndm.adm.AdmHeader`, T, P>
     
         Base class for Attitude Data Message parsers.
     
@@ -257,28 +337,10 @@ class AdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[_
         """
         ...
     def getSpecialXmlElementsBuilders(self) -> java.util.Map[str, org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder]: ...
-    @staticmethod
-    def processRotationOrder(parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, rotationOrderConsumer: 'AdmParser.RotationOrderConsumer') -> bool:
-        """
-            Process a CCSDS Euler angles sequence as a
-            :class:`~org.orekit.files.ccsds.ndm.adm.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.RotationOrder?is`.
-        
-            Parameters:
-                sequence (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): Euler angles sequence token
-                consumer (:class:`~org.orekit.files.ccsds.ndm.adm.AdmParser.RotationOrderConsumer`): consumer of the rotation order
-        
-            Returns:
-                always return :code:`true`
-        
-        
-        """
-        ...
-    class RotationOrderConsumer:
-        def accept(self, rotationOrder: org.hipparchus.geometry.euclidean.threed.RotationOrder) -> None: ...
 
-class AttitudeEndoints(org.orekit.attitudes.AttitudeBuilder):
+class AttitudeEndpoints(org.orekit.attitudes.AttitudeBuilder):
     """
-    public class AttitudeEndoints extends :class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudeBuilder`
+    public class AttitudeEndpoints extends :class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudeBuilder`
     
         Endpoints for attitude definition.
     
@@ -365,7 +427,7 @@ class AttitudeEndoints(org.orekit.attitudes.AttitudeBuilder):
         
         """
         ...
-    def checkMandatoryEntriesExceptExternalFrame(self, enum: java.lang.Enum[typing.Any], enum2: java.lang.Enum[typing.Any], enum3: java.lang.Enum[typing.Any]) -> None:
+    def checkMandatoryEntriesExceptExternalFrame(self, double: float, enum: java.lang.Enum[typing.Any], enum2: java.lang.Enum[typing.Any], enum3: java.lang.Enum[typing.Any]) -> None:
         """
             Check is mandatory entries *except external frame* have been initialized.
         
@@ -374,6 +436,7 @@ class AttitudeEndoints(org.orekit.attitudes.AttitudeBuilder):
             This method should throw an exception if some mandatory entry is missing
         
             Parameters:
+                version (double): format version
                 aKey (:class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<?> aKey): key for frame A
                 bKey (:class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<?> bKey): key for frame B
                 dirKey (:class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<?> dirKey): key for direction
@@ -423,24 +486,24 @@ class AttitudeEndoints(org.orekit.attitudes.AttitudeBuilder):
         ...
     def isA2b(self) -> bool:
         """
-            Check if rotation direction is from :meth:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndoints.getFrameA` to
-            :meth:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndoints.getFrameB`.
+            Check if rotation direction is from :meth:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndpoints.getFrameA` to
+            :meth:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndpoints.getFrameB`.
         
             Returns:
-                true if rotation direction is from :meth:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndoints.getFrameA` to
-                :meth:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndoints.getFrameB`
+                true if rotation direction is from :meth:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndpoints.getFrameA` to
+                :meth:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndpoints.getFrameB`
         
         
         """
         ...
-    def isCompatibleWith(self, attitudeEndoints: 'AttitudeEndoints') -> bool:
+    def isCompatibleWith(self, attitudeEndpoints: 'AttitudeEndpoints') -> bool:
         """
             Check if a endpoint is compatible with another one.
         
             Endpoins are compatible if they refer o the same frame names, in the same order and in the same direction.
         
             Parameters:
-                other (:class:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndoints`): other endpoints to check against
+                other (:class:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndpoints`): other endpoints to check against
         
             Returns:
                 true if both endpoints are compatible with each other
@@ -452,7 +515,7 @@ class AttitudeEndoints(org.orekit.attitudes.AttitudeBuilder):
         """
             Check if attitude is from external frame to spacecraft body frame.
         
-            :meth:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndoints.checkMandatoryEntriesExceptExternalFrame` must have been
+            :meth:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndpoints.checkMandatoryEntriesExceptExternalFrame` must have been
             initialized properly to non-null values before this method is called, otherwise :code:`NullPointerException` will be
             thrown.
         
@@ -467,8 +530,8 @@ class AttitudeEndoints(org.orekit.attitudes.AttitudeBuilder):
             Set rotation direction.
         
             Parameters:
-                a2b (boolean): if true, rotation is from :meth:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndoints.getFrameA` to
-                    :meth:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndoints.getFrameB`
+                a2b (boolean): if true, rotation is from :meth:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndpoints.getFrameA` to
+                    :meth:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndpoints.getFrameB`
         
         
         """
@@ -515,11 +578,14 @@ class AttitudeType(java.lang.Enum['AttitudeType']):
     """
     QUATERNION: typing.ClassVar['AttitudeType'] = ...
     QUATERNION_DERIVATIVE: typing.ClassVar['AttitudeType'] = ...
-    QUATERNION_RATE: typing.ClassVar['AttitudeType'] = ...
+    QUATERNION_EULER_RATES: typing.ClassVar['AttitudeType'] = ...
+    QUATERNION_ANGVEL: typing.ClassVar['AttitudeType'] = ...
     EULER_ANGLE: typing.ClassVar['AttitudeType'] = ...
-    EULER_ANGLE_RATE: typing.ClassVar['AttitudeType'] = ...
+    EULER_ANGLE_DERIVATIVE: typing.ClassVar['AttitudeType'] = ...
+    EULER_ANGLE_ANGVEL: typing.ClassVar['AttitudeType'] = ...
     SPIN: typing.ClassVar['AttitudeType'] = ...
     SPIN_NUTATION: typing.ClassVar['AttitudeType'] = ...
+    SPIN_NUTATION_MOMENTUM: typing.ClassVar['AttitudeType'] = ...
     def build(self, boolean: bool, boolean2: bool, rotationOrder: org.hipparchus.geometry.euclidean.threed.RotationOrder, boolean3: bool, absoluteDate: org.orekit.time.AbsoluteDate, *double: float) -> org.orekit.utils.TimeStampedAngularCoordinates:
         """
             Get the angular coordinates corresponding to the attitude data.
@@ -530,7 +596,7 @@ class AttitudeType(java.lang.Enum['AttitudeType']):
                 eulerRotSequence (:class:`~org.orekit.files.ccsds.ndm.adm.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.RotationOrder?is`): sequance of Euler angles
                 isSpacecraftBodyRate (boolean): if true Euler rates are specified in spacecraft body frame
                 date (:class:`~org.orekit.time.AbsoluteDate`): entry date
-                components (double...): entry components with CCSDS units (i.e. angles *must* still be in degrees here), semantic depends on attitude type
+                components (double...): entry components with SI units, semantic depends on attitude type
         
             Returns:
                 the angular coordinates, using :class:`~org.orekit.attitudes.Attitude` convention (i.e. from inertial frame to
@@ -559,12 +625,51 @@ class AttitudeType(java.lang.Enum['AttitudeType']):
         
         """
         ...
+    def generateData(self, boolean: bool, boolean2: bool, rotationOrder: org.hipparchus.geometry.euclidean.threed.RotationOrder, boolean3: bool, timeStampedAngularCoordinates: org.orekit.utils.TimeStampedAngularCoordinates) -> typing.List[float]:
+        """
+            Generate the attitude data corresponding to the attitude type.
+        
+            This method returns the components in SI units.
+        
+            Parameters:
+                isFirst (boolean): if true the first quaternion component is the scalar component
+                isExternal2SpacecraftBody (boolean): true attitude is from external frame to spacecraft body frame
+                eulerRotSequence (:class:`~org.orekit.files.ccsds.ndm.adm.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.RotationOrder?is`): sequance of Euler angles
+                isSpacecraftBodyRate (boolean): if true Euler rates are specified in spacecraft body frame
+                attitude (:class:`~org.orekit.utils.TimeStampedAngularCoordinates`): angular coordinates, using :class:`~org.orekit.attitudes.Attitude` convention (i.e. from inertial frame to spacecraft
+                    frame)
+        
+            Returns:
+                the attitude data in CCSDS units
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
     def getAngularDerivativesFilter(self) -> org.orekit.utils.AngularDerivativesFilter:
         """
             Get the angular derivative filter corresponding to the attitude data.
         
             Returns:
                 the angular derivative filter corresponding to the attitude data
+        
+        
+        """
+        ...
+    def getName(self, double: float) -> str:
+        """
+            Get the type name for a given format version.
+        
+            Parameters:
+                formatVersion (double): format version
+        
+            Returns:
+                type name
+        
+            Since:
+                12.0
         
         
         """
@@ -596,7 +701,7 @@ class AttitudeType(java.lang.Enum['AttitudeType']):
             Parse an attitude type.
         
             Parameters:
-                type (:class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): unnormalized type name
+                typeSpecification (:class:`~org.orekit.files.ccsds.ndm.adm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): unnormalized type name
         
             Returns:
                 parsed type
@@ -669,16 +774,18 @@ class RotationXmlTokenBuilder(org.orekit.files.ccsds.utils.lexical.XmlTokenBuild
             11.0
     """
     def __init__(self): ...
-    def buildTokens(self, boolean: bool, string: str, string2: str, attributes: org.xml.sax.Attributes, int: int, string3: str) -> java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]: ...
+    def buildTokens(self, boolean: bool, boolean2: bool, string: str, string2: str, map: typing.Union[java.util.Map[str, str], typing.Mapping[str, str]], int: int, string3: str) -> java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]: ...
 
 _PythonAdmParser__T = typing.TypeVar('_PythonAdmParser__T', bound=org.orekit.files.ccsds.ndm.NdmConstituent)  # <T>
 _PythonAdmParser__P = typing.TypeVar('_PythonAdmParser__P', bound=org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser)  # <P>
 class PythonAdmParser(AdmParser[_PythonAdmParser__T, _PythonAdmParser__P], typing.Generic[_PythonAdmParser__T, _PythonAdmParser__P]):
     """
-    public class PythonAdmParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<?, ?>, P extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<T, ?>> extends :class:`~org.orekit.files.ccsds.ndm.adm.AdmParser`<T, P>
+    public class PythonAdmParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.ndm.adm.AdmHeader`, ?>, P extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<:class:`~org.orekit.files.ccsds.ndm.adm.AdmHeader`, T, ?>> extends :class:`~org.orekit.files.ccsds.ndm.adm.AdmParser`<T, P>
     """
+    def __init__(self, string: str, string2: str, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]): ...
     def build(self) -> _PythonAdmParser__T:
         """
+            Description copied from interface: :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.build`
             Build the file from parsed entries.
         
             Returns:
@@ -730,8 +837,9 @@ class PythonAdmParser(AdmParser[_PythonAdmParser__T, _PythonAdmParser__P], typin
         
         """
         ...
-    def getHeader(self) -> org.orekit.files.ccsds.section.Header:
+    def getHeader(self) -> AdmHeader:
         """
+            Description copied from class: :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser.getHeader`
             Get file header to fill.
         
             Specified by:
@@ -862,13 +970,16 @@ class PythonAdmParser(AdmParser[_PythonAdmParser__T, _PythonAdmParser__P], typin
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.ndm.adm")``.
 
+    AdmCommonMetadataKey: typing.Type[AdmCommonMetadataKey]
+    AdmCommonMetadataWriter: typing.Type[AdmCommonMetadataWriter]
+    AdmHeader: typing.Type[AdmHeader]
     AdmMetadata: typing.Type[AdmMetadata]
     AdmMetadataKey: typing.Type[AdmMetadataKey]
-    AdmMetadataWriter: typing.Type[AdmMetadataWriter]
     AdmParser: typing.Type[AdmParser]
-    AttitudeEndoints: typing.Type[AttitudeEndoints]
+    AttitudeEndpoints: typing.Type[AttitudeEndpoints]
     AttitudeType: typing.Type[AttitudeType]
     PythonAdmParser: typing.Type[PythonAdmParser]
     RotationXmlTokenBuilder: typing.Type[RotationXmlTokenBuilder]
+    acm: org.orekit.files.ccsds.ndm.adm.acm.__module_protocol__
     aem: org.orekit.files.ccsds.ndm.adm.aem.__module_protocol__
     apm: org.orekit.files.ccsds.ndm.adm.apm.__module_protocol__

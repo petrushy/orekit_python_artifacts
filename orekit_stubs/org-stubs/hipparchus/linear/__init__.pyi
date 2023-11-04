@@ -145,20 +145,106 @@ class CholeskyDecomposition:
         ...
 
 class ComplexEigenDecomposition:
+    """
+    public class ComplexEigenDecomposition extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Given a matrix A, it computes a complex eigen decomposition AV = VD.
+    
+        Complex Eigen Decomposition differs from the :class:`~org.hipparchus.linear.EigenDecompositionSymmetric` since it
+        computes the eigen vectors as complex eigen vectors (if applicable).
+    
+        Beware that in the complex case, you do not always have \(V \times V^{T} = I\) or even a diagonal matrix, even if the
+        eigenvectors that form the columns of the V matrix are independent. On example is the square matrix \[ A =
+        \left(\begin{matrix} 3 & -2\\ 4 & -1 \end{matrix}\right) \] which has two conjugate eigenvalues \(\lambda_1=1+2i\) and
+        \(\lambda_2=1-2i\) with associated eigenvectors \(v_1^T = (1, 1-i)\) and \(v_2^T = (1, 1+i)\). \[ V\timesV^T =
+        \left(\begin{matrix} 2 & 2\\ 2 & 0 \end{matrix}\right) \] which is not the identity matrix. Therefore, despite \(A
+        \times V = V \times D\), \(A \ne V \times D \time V^T\), which would hold for real eigendecomposition.
+    
+        Also note that for consistency with Wolfram langage
+        :class:`~org.hipparchus.linear.https:.reference.wolfram.com.language.ref.Eigenvectors`, we add zero vectors when the
+        geometric multiplicity of the eigenvalue is smaller than its algebraic multiplicity (hence the regular eigenvector
+        matrix should be non-square). With these additional null vectors, the eigenvectors matrix becomes square. This happens
+        for example with the square matrix \[ A = \left(\begin{matrix} 1 & 0 & 0\\ -2 & 1 & 0\\ 0 & 0 & 1 \end{matrix}\right) \]
+        Its characteristic polynomial is \((1-\lambda)^3\), hence is has one eigen value \(\lambda=1\) with algebraic
+        multiplicity 3. However, this eigenvalue leads to only two eigenvectors \(v_1=(0, 1, 0)\) and \(v_2=(0, 0, 1)\), hence
+        its geometric multiplicity is only 2, not 3. So we add a third zero vector \(v_3=(0, 0, 0)\), in the same way Wolfram
+        language does.
+        Compute complex eigen values from the Schur transform. Compute complex eigen vectors based on eigen values and the
+        inverse iteration method. see: https://en.wikipedia.org/wiki/Inverse_iteration
+        https://en.wikiversity.org/wiki/Shifted_inverse_iteration http://www.robots.ox.ac.uk/~sjrob/Teaching/EngComp/ecl4.pdf
+        http://www.math.ohiou.edu/courses/math3600/lecture16.pdf
+    """
     DEFAULT_EIGENVECTORS_EQUALITY: typing.ClassVar[float] = ...
+    """
+    public static final double DEFAULT_EIGENVECTORS_EQUALITY
+    
+        Default threshold below which eigenvectors are considered equal.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
     DEFAULT_EPSILON: typing.ClassVar[float] = ...
+    """
+    public static final double DEFAULT_EPSILON
+    
+        Default value to use for internal epsilon.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
     DEFAULT_EPSILON_AV_VD_CHECK: typing.ClassVar[float] = ...
+    """
+    public static final double DEFAULT_EPSILON_AV_VD_CHECK
+    
+        Internally used epsilon criteria for final AV=VD check.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
     @typing.overload
     def __init__(self, realMatrix: 'RealMatrix'): ...
     @typing.overload
     def __init__(self, realMatrix: 'RealMatrix', double: float, double2: float, double3: float): ...
     def getD(self) -> 'FieldMatrix'[org.hipparchus.complex.Complex]: ...
-    def getDeterminant(self) -> float: ...
-    def getEigenvalues(self) -> typing.List[org.hipparchus.complex.Complex]: ...
+    def getDeterminant(self) -> float:
+        """
+            Computes the determinant.
+        
+            Returns:
+                the determinant.
+        
+        
+        """
+        ...
+    def getEigenvalues(self) -> typing.List[org.hipparchus.complex.Complex]:
+        """
+            Getter of the eigen values.
+        
+            Returns:
+                eigen values.
+        
+        
+        """
+        ...
     def getEigenvector(self, int: int) -> 'FieldVector'[org.hipparchus.complex.Complex]: ...
     def getV(self) -> 'FieldMatrix'[org.hipparchus.complex.Complex]: ...
     def getVT(self) -> 'FieldMatrix'[org.hipparchus.complex.Complex]: ...
-    def hasComplexEigenvalues(self) -> bool: ...
+    def hasComplexEigenvalues(self) -> bool:
+        """
+            Confirm if there are complex eigen values.
+        
+            Returns:
+                true if there are complex eigen values.
+        
+        
+        """
+        ...
 
 class DecompositionSolver:
     """
@@ -266,6 +352,7 @@ class DependentVectorsHandler(java.lang.Enum['DependentVectorsHandler']):
         
             .. code-block: java
             
+            
             for (DependentVectorsHandler c : DependentVectorsHandler.values())
                 System.out.println(c);
             
@@ -277,56 +364,59 @@ class DependentVectorsHandler(java.lang.Enum['DependentVectorsHandler']):
         """
         ...
 
-class EigenDecomposition:
+class EigenDecompositionNonSymmetric:
     """
-    public class EigenDecomposition extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    public class EigenDecompositionNonSymmetric extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
-        Calculates the eigen decomposition of a real matrix.
+        Calculates the eigen decomposition of a non-symmetric real matrix.
     
-        The eigen decomposition of matrix A is a set of two matrices: V and D such that A = V × D × V :sup:`T` . A, V and D
-        are all m × m matrices.
+        The eigen decomposition of matrix A is a set of two matrices: \(V\) and \(D\) such that \(A V = V D\) where $\(A\),
+        \(V\) and \(D\) are all \(m \times m\) matrices.
     
         This class is similar in spirit to the :code:`EigenvalueDecomposition` class from the `JAMA
         <http://math.nist.gov/javanumerics/jama/>` library, with the following changes:
     
-          - a :meth:`~org.hipparchus.linear.EigenDecomposition.getVT` method has been added,
-          - two :meth:`~org.hipparchus.linear.EigenDecomposition.getRealEigenvalue` and
-            :meth:`~org.hipparchus.linear.EigenDecomposition.getImagEigenvalue` methods to pick up a single eigenvalue have been
-            added,
-          - a :meth:`~org.hipparchus.linear.EigenDecomposition.getEigenvector` method to pick up a single eigenvector has been
-            added,
-          - a :meth:`~org.hipparchus.linear.EigenDecomposition.getDeterminant` method has been added.
-          - a :meth:`~org.hipparchus.linear.EigenDecomposition.getSolver` method has been added.
+          - a :meth:`~org.hipparchus.linear.EigenDecompositionNonSymmetric.getVInv` method has been added,
+          - z :meth:`~org.hipparchus.linear.EigenDecompositionNonSymmetric.getEigenvalue` method to pick up a single eigenvalue has
+            been added,
+          - a :meth:`~org.hipparchus.linear.EigenDecompositionNonSymmetric.getEigenvector` method to pick up a single eigenvector
+            has been added,
+          - a :meth:`~org.hipparchus.linear.EigenDecompositionNonSymmetric.getDeterminant` method has been added.
     
     
-        As of 3.1, this class supports general real matrices (both symmetric and non-symmetric):
+        This class supports non-symmetric matrices, which have complex eigenvalues. Support for symmetric matrices is provided
+        by :class:`~org.hipparchus.linear.EigenDecompositionSymmetric`.
     
-        If A is symmetric, then A = V*D*V' where the eigenvalue matrix D is diagonal and the eigenvector matrix V is orthogonal,
-        i.e. :code:`A = V.multiply(D.multiply(V.transpose()))` and :code:`V.multiply(V.transpose())` equals the identity matrix.
+        As \(A\) is not symmetric, then the eigenvalue matrix \(D\) is block diagonal with the real eigenvalues in 1-by-1 blocks
+        and any complex eigenvalues, \(\lambda \pm i \mu\), in 2-by-2 blocks:
     
-        If A is not symmetric, then the eigenvalue matrix D is block diagonal with the real eigenvalues in 1-by-1 blocks and any
-        complex eigenvalues, lambda + i*mu, in 2-by-2 blocks:
+        \[ \begin{bmatrix} \lambda & \mu\\ -\mu & \lambda \end{bmatrix} \]
     
-        .. code-block: java
-        
-            [lambda, mu    ]
-            [   -mu, lambda]
-         
-        The columns of V represent the eigenvectors in the sense that :code:`A*V = V*D`, i.e. A.multiply(V) equals
-        V.multiply(D). The matrix V may be badly conditioned, or even singular, so the validity of the equation :code:`A =
-        V*D*inverse(V)` depends upon the condition of V.
+        The columns of \(V\) represent the eigenvectors in the sense that \(A V = V D\), i.e. :code:`A.multiply(V)` equals
+        :code:`V.multiply(D)`. The matrix \(V\) may be badly conditioned, or even singular, so the validity of the equation \(A
+        = V D V^{-1}\) depends upon the condition of \(V\).
     
         This implementation is based on the paper by A. Drubrulle, R.S. Martin and J.H. Wilkinson "The Implicit QL Algorithm" in
         Wilksinson and Reinsch (1971) Handbook for automatic computation, vol. 2, Linear algebra, Springer-Verlag, New-York.
+    
+        Since:
+            3.0
     
         Also see:
             `MathWorld <http://mathworld.wolfram.com/EigenDecomposition.html>`, `Wikipedia
             <http://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix>`
     """
-    @typing.overload
-    def __init__(self, doubleArray: typing.List[float], doubleArray2: typing.List[float]): ...
-    @typing.overload
-    def __init__(self, doubleArray: typing.List[float], doubleArray2: typing.List[float], double3: float): ...
+    DEFAULT_EPSILON: typing.ClassVar[float] = ...
+    """
+    public static final double DEFAULT_EPSILON
+    
+        Default epsilon value to use for internal epsilon
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
     @typing.overload
     def __init__(self, realMatrix: 'RealMatrix'): ...
     @typing.overload
@@ -339,9 +429,146 @@ class EigenDecomposition:
             Returns:
                 the D matrix.
         
+        
+        """
+        ...
+    def getDeterminant(self) -> org.hipparchus.complex.Complex:
+        """
+            Computes the determinant of the matrix.
+        
+            Returns:
+                the determinant of the matrix.
+        
+        
+        """
+        ...
+    def getEigenvalue(self, int: int) -> org.hipparchus.complex.Complex:
+        """
+            Returns the i :sup:`th` eigenvalue of the original matrix.
+        
+            Parameters:
+                i (int): index of the eigenvalue (counting from 0)
+        
+            Returns:
+                i :sup:`th` eigenvalue of the original matrix.
+        
             Also see:
-                :meth:`~org.hipparchus.linear.EigenDecomposition.getRealEigenvalues`,
-                :meth:`~org.hipparchus.linear.EigenDecomposition.getImagEigenvalues`
+                :meth:`~org.hipparchus.linear.EigenDecompositionNonSymmetric.getD`,
+                :meth:`~org.hipparchus.linear.EigenDecompositionNonSymmetric.getEigenvalues`
+        
+        
+        """
+        ...
+    def getEigenvalues(self) -> typing.List[org.hipparchus.complex.Complex]:
+        """
+            Gets a copy of the eigenvalues of the original matrix.
+        
+            Returns:
+                a copy of the eigenvalues of the original matrix.
+        
+            Also see:
+                :meth:`~org.hipparchus.linear.EigenDecompositionNonSymmetric.getD`,
+                :meth:`~org.hipparchus.linear.EigenDecompositionNonSymmetric.getEigenvalue`
+        
+        
+        """
+        ...
+    def getEigenvector(self, int: int) -> 'FieldVector'[org.hipparchus.complex.Complex]: ...
+    def getEpsilon(self) -> float:
+        """
+            Get's the value for epsilon which is used for internal tests (e.g. is singular, eigenvalue ratio, etc.)
+        
+            Returns:
+                the epsilon value.
+        
+        
+        """
+        ...
+    def getV(self) -> 'RealMatrix':
+        """
+            Gets the matrix V of the decomposition. V is a matrix whose columns hold either the real or the imaginary part of
+            eigenvectors.
+        
+            Returns:
+                the V matrix.
+        
+        
+        """
+        ...
+    def getVInv(self) -> 'RealMatrix':
+        """
+            Gets the inverse of the matrix V of the decomposition.
+        
+            Returns:
+                the inverse of the V matrix.
+        
+        
+        """
+        ...
+
+class EigenDecompositionSymmetric:
+    """
+    public class EigenDecompositionSymmetric extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Calculates the eigen decomposition of a symmetric real matrix.
+    
+        The eigen decomposition of matrix A is a set of two matrices: \(V\) and \(D\) such that \(A V = V D\) where $\(A\),
+        \(V\) and \(D\) are all \(m \times m\) matrices.
+    
+        This class is similar in spirit to the :code:`EigenvalueDecomposition` class from the `JAMA
+        <http://math.nist.gov/javanumerics/jama/>` library, with the following changes:
+    
+          - a :meth:`~org.hipparchus.linear.EigenDecompositionSymmetric.getVT` method has been added,
+          - a :meth:`~org.hipparchus.linear.EigenDecompositionSymmetric.getEigenvalue` method to pick up a single eigenvalue has
+            been added,
+          - a :meth:`~org.hipparchus.linear.EigenDecompositionSymmetric.getEigenvector` method to pick up a single eigenvector has
+            been added,
+          - a :meth:`~org.hipparchus.linear.EigenDecompositionSymmetric.getDeterminant` method has been added.
+          - a :meth:`~org.hipparchus.linear.EigenDecompositionSymmetric.getSolver` method has been added.
+    
+    
+        As \(A\) is symmetric, then \(A = V D V^T\) where the eigenvalue matrix \(D\) is diagonal and the eigenvector matrix
+        \(V\) is orthogonal, i.e. :code:`A = V.multiply(D.multiply(V.transpose()))` and :code:`V.multiply(V.transpose())` equals
+        the identity matrix.
+    
+        The columns of \(V\) represent the eigenvectors in the sense that \(A V = V D\), i.e. :code:`A.multiply(V)` equals
+        :code:`V.multiply(D)`. The matrix \(V\) may be badly conditioned, or even singular, so the validity of the equation \(A
+        = V D V^{-1}\) depends upon the condition of \(V\).
+        This implementation is based on the paper by A. Drubrulle, R.S. Martin and J.H. Wilkinson "The Implicit QL Algorithm" in
+        Wilksinson and Reinsch (1971) Handbook for automatic computation, vol. 2, Linear algebra, Springer-Verlag, New-York.
+    
+        Also see:
+            `MathWorld <http://mathworld.wolfram.com/EigenDecomposition.html>`, `Wikipedia
+            <http://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix>`
+    """
+    DEFAULT_EPSILON: typing.ClassVar[float] = ...
+    """
+    public static final double DEFAULT_EPSILON
+    
+        Default epsilon value to use for internal epsilon
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    @typing.overload
+    def __init__(self, doubleArray: typing.List[float], doubleArray2: typing.List[float]): ...
+    @typing.overload
+    def __init__(self, doubleArray: typing.List[float], doubleArray2: typing.List[float], double3: float, boolean: bool): ...
+    @typing.overload
+    def __init__(self, realMatrix: 'RealMatrix'): ...
+    @typing.overload
+    def __init__(self, realMatrix: 'RealMatrix', double: float, boolean: bool): ...
+    def getD(self) -> 'DiagonalMatrix':
+        """
+            Gets the diagonal matrix D of the decomposition. D is a diagonal matrix.
+        
+            Returns:
+                the D matrix.
+        
+            Also see:
+                :meth:`~org.hipparchus.linear.EigenDecompositionSymmetric.getEigenvalues`
         
         
         """
@@ -356,9 +583,42 @@ class EigenDecomposition:
         
         """
         ...
+    def getEigenvalue(self, int: int) -> float:
+        """
+            Returns the i :sup:`th` eigenvalue of the original matrix.
+        
+            Parameters:
+                i (int): index of the eigenvalue (counting from 0)
+        
+            Returns:
+                real part of the i :sup:`th` eigenvalue of the original matrix.
+        
+            Also see:
+                :meth:`~org.hipparchus.linear.EigenDecompositionSymmetric.getD`,
+                :meth:`~org.hipparchus.linear.EigenDecompositionSymmetric.getEigenvalues`
+        
+        
+        """
+        ...
+    def getEigenvalues(self) -> typing.List[float]:
+        """
+            Gets a copy of the eigenvalues of the original matrix.
+        
+            Returns:
+                a copy of the eigenvalues of the original matrix.
+        
+            Also see:
+                :meth:`~org.hipparchus.linear.EigenDecompositionSymmetric.getD`,
+                :meth:`~org.hipparchus.linear.EigenDecompositionSymmetric.getEigenvalue`
+        
+        
+        """
+        ...
     def getEigenvector(self, int: int) -> 'RealVector':
         """
             Gets a copy of the i :sup:`th` eigenvector of the original matrix.
+        
+            Note that if the the i :sup:`th` is complex this method will throw an exception.
         
             Parameters:
                 i (int): Index of the eigenvector (counting from 0).
@@ -367,7 +627,7 @@ class EigenDecomposition:
                 a copy of the i :sup:`th` eigenvector of the original matrix.
         
             Also see:
-                :meth:`~org.hipparchus.linear.EigenDecomposition.getD`
+                :meth:`~org.hipparchus.linear.EigenDecompositionSymmetric.getD`
         
         
         """
@@ -382,91 +642,19 @@ class EigenDecomposition:
         
         """
         ...
-    def getImagEigenvalue(self, int: int) -> float:
-        """
-            Gets the imaginary part of the i :sup:`th` eigenvalue of the original matrix.
-        
-            Parameters:
-                i (int): Index of the eigenvalue (counting from 0).
-        
-            Returns:
-                the imaginary part of the i :sup:`th` eigenvalue of the original matrix.
-        
-            Also see:
-                :meth:`~org.hipparchus.linear.EigenDecomposition.getD`,
-                :meth:`~org.hipparchus.linear.EigenDecomposition.getImagEigenvalues`,
-                :meth:`~org.hipparchus.linear.EigenDecomposition.getRealEigenvalue`
-        
-        
-        """
-        ...
-    def getImagEigenvalues(self) -> typing.List[float]:
-        """
-            Gets a copy of the imaginary parts of the eigenvalues of the original matrix.
-        
-            Returns:
-                a copy of the imaginary parts of the eigenvalues of the original matrix.
-        
-            Also see:
-                :meth:`~org.hipparchus.linear.EigenDecomposition.getD`,
-                :meth:`~org.hipparchus.linear.EigenDecomposition.getImagEigenvalue`,
-                :meth:`~org.hipparchus.linear.EigenDecomposition.getRealEigenvalues`
-        
-        
-        """
-        ...
-    def getRealEigenvalue(self, int: int) -> float:
-        """
-            Returns the real part of the i :sup:`th` eigenvalue of the original matrix.
-        
-            Parameters:
-                i (int): index of the eigenvalue (counting from 0)
-        
-            Returns:
-                real part of the i :sup:`th` eigenvalue of the original matrix.
-        
-            Also see:
-                :meth:`~org.hipparchus.linear.EigenDecomposition.getD`,
-                :meth:`~org.hipparchus.linear.EigenDecomposition.getRealEigenvalues`,
-                :meth:`~org.hipparchus.linear.EigenDecomposition.getImagEigenvalue`
-        
-        
-        """
-        ...
-    def getRealEigenvalues(self) -> typing.List[float]:
-        """
-            Gets a copy of the real parts of the eigenvalues of the original matrix.
-        
-            Returns:
-                a copy of the real parts of the eigenvalues of the original matrix.
-        
-            Also see:
-                :meth:`~org.hipparchus.linear.EigenDecomposition.getD`,
-                :meth:`~org.hipparchus.linear.EigenDecomposition.getRealEigenvalue`,
-                :meth:`~org.hipparchus.linear.EigenDecomposition.getImagEigenvalues`
-        
-        
-        """
-        ...
     def getSolver(self) -> DecompositionSolver:
         """
-            Gets a solver for finding the A × X = B solution in exact linear sense.
-        
-            Since 3.1, eigen decomposition of a general matrix is supported, but the
-            :class:`~org.hipparchus.linear.DecompositionSolver` only supports real eigenvalues.
+            Gets a solver for finding the \(A \times X = B\) solution in exact linear sense.
         
             Returns:
                 a solver
-        
-            Raises:
-                :class:`~org.hipparchus.exception.MathRuntimeException`: if the decomposition resulted in complex eigenvalues
         
         
         """
         ...
     def getSquareRoot(self) -> 'RealMatrix':
         """
-            Computes the square-root of the matrix. This implementation assumes that the matrix is symmetric and positive definite.
+            Computes the square-root of the matrix. This implementation assumes that the matrix is positive definite.
         
             Returns:
                 the square-root of the matrix.
@@ -497,20 +685,6 @@ class EigenDecomposition:
         
             Returns:
                 the transpose of the V matrix.
-        
-        
-        """
-        ...
-    def hasComplexEigenvalues(self) -> bool:
-        """
-            Returns whether the calculated eigen values are complex or real.
-        
-            The method performs a zero check for each element of the
-            :meth:`~org.hipparchus.linear.EigenDecomposition.getImagEigenvalues` array and returns :code:`true` if any element is
-            not equal to zero.
-        
-            Returns:
-                :code:`true` if the eigen values are complex, :code:`false` otherwise
         
         
         """
@@ -795,6 +969,7 @@ class FieldVector(typing.Generic[_FieldVector__T]):
     
         .. code-block: java
         
+        
            RealVector result = v.mapAddToSelf(3.0).mapTanToSelf().mapSquareToSelf();
          
     
@@ -960,9 +1135,9 @@ class HessenbergTransformer:
         and H a Hessenberg matrix. Both P and H are m × m matrices.
     
         Transformation to Hessenberg form is often not a goal by itself, but it is an intermediate step in more general
-        decomposition algorithms like :class:`~org.hipparchus.linear.EigenDecomposition`. This class is therefore intended for
-        internal use by the library and is not public. As a consequence of this explicitly limited scope, many methods directly
-        returns references to internal arrays, not copies.
+        decomposition algorithms like :class:`~org.hipparchus.linear.EigenDecompositionSymmetric`. This class is therefore
+        intended for internal use by the library and is not public. As a consequence of this explicitly limited scope, many
+        methods directly returns references to internal arrays, not copies.
     
         This class is based on the method orthes in class EigenvalueDecomposition from the `JAMA
         <http://math.nist.gov/javanumerics/jama/>` library.
@@ -1378,7 +1553,7 @@ class MatrixUtils:
             Also see:
                 :meth:`~org.hipparchus.linear.MatrixUtils.createFieldMatrix`
         
-        public static <T extends :class:`~org.hipparchus.FieldElement`<T>> :class:`~org.hipparchus.linear.FieldMatrix`<T> createFieldMatrix(T[][] data) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`, :class:`~org.hipparchus.exception.NullArgumentException`
+        public static <T extends :class:`~org.hipparchus.FieldElement`<T>> :class:`~org.hipparchus.linear.FieldMatrix`<T> createFieldMatrix (T[][] data) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`, :class:`~org.hipparchus.exception.NullArgumentException`
         
             Returns a :class:`~org.hipparchus.linear.FieldMatrix` whose entries are the the values in the the input array.
         
@@ -1485,7 +1660,7 @@ class MatrixUtils:
             Also see:
                 :meth:`~org.hipparchus.linear.MatrixUtils.createRealMatrix`
         
-        public static :class:`~org.hipparchus.linear.RealMatrix` createRealMatrix(double[][] data) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`, :class:`~org.hipparchus.exception.NullArgumentException`
+        public static :class:`~org.hipparchus.linear.RealMatrix` createRealMatrix (double[][] data) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`, :class:`~org.hipparchus.exception.NullArgumentException`
         
             Returns a :class:`~org.hipparchus.linear.RealMatrix` whose entries are the the values in the the input array.
         
@@ -1543,10 +1718,6 @@ class MatrixUtils:
     @staticmethod
     def createRowRealMatrix(doubleArray: typing.List[float]) -> 'RealMatrix': ...
     @staticmethod
-    def deserializeRealMatrix(object: typing.Any, string: str, objectInputStream: java.io.ObjectInputStream) -> None: ...
-    @staticmethod
-    def deserializeRealVector(object: typing.Any, string: str, objectInputStream: java.io.ObjectInputStream) -> None: ...
-    @staticmethod
     def fractionMatrixToRealMatrix(fieldMatrix: 'FieldMatrix'[org.hipparchus.fraction.Fraction]) -> 'Array2DRowRealMatrix': ...
     @typing.overload
     @staticmethod
@@ -1597,10 +1768,6 @@ class MatrixUtils:
     @typing.overload
     @staticmethod
     def orthonormalize(field: org.hipparchus.Field[_orthonormalize_1__T], list: java.util.List[FieldVector[_orthonormalize_1__T]], t: _orthonormalize_1__T, dependentVectorsHandler: DependentVectorsHandler) -> java.util.List[FieldVector[_orthonormalize_1__T]]: ...
-    @staticmethod
-    def serializeRealMatrix(realMatrix: 'RealMatrix', objectOutputStream: java.io.ObjectOutputStream) -> None: ...
-    @staticmethod
-    def serializeRealVector(realVector: 'RealVector', objectOutputStream: java.io.ObjectOutputStream) -> None: ...
     @staticmethod
     def solveLowerTriangularSystem(realMatrix: 'RealMatrix', realVector: 'RealVector') -> None: ...
     @staticmethod
@@ -1692,8 +1859,8 @@ class QRDecomposition:
         
             Least Square sense means a solver can be computed for an overdetermined system, (i.e. a system with more equations than
             unknowns, which corresponds to a tall A matrix with more rows than columns). In any case, if the matrix is singular
-            within the tolerance set at :meth:`~org.hipparchus.linear.QRDecomposition.QRDecomposition`, an error will be triggered
-            when the :meth:`~org.hipparchus.linear.DecompositionSolver.solve` method will be called.
+            within the tolerance set at :meth:`~org.hipparchus.linear.QRDecomposition.%3Cinit%3E`, an error will be triggered when
+            the :meth:`~org.hipparchus.linear.DecompositionSolver.solve` method will be called.
         
             Returns:
                 a solver
@@ -1715,8 +1882,7 @@ class RealLinearOperator:
             = A · x (and perhaps z = A :sup:`T` · x). Thus the user need only supply a subroutine for computing y (and perhaps z)
             given x, which permits full exploitation of the sparsity or other special structure of A.
     
-    
-        :class:`~org.hipparchus.linear`
+        Barret et al. (1994)
           R. Barrett, M. Berry, T. F. Chan, J. Demmel, J. M. Donato, J. Dongarra, V. Eijkhout, R. Pozo, C. Romine and H. Van der
             Vorst, *Templates for the Solution of Linear Systems: Building Blocks for Iterative Methods*, SIAM
     """
@@ -2078,6 +2244,7 @@ class RealVector:
     
         .. code-block: java
         
+        
            RealVector result = v.mapAddToSelf(3.4).mapToSelf(new Tan()).mapToSelf(new Power(2.3));
     """
     def __init__(self): ...
@@ -2255,6 +2422,7 @@ class RealVector:
         
             .. code-block: java
             
+            
               return copy().mapToSelf(function);
              
             Returns a new vector. Does not change instance data.
@@ -2378,18 +2546,19 @@ class RealVector:
         
             .. code-block: java
             
+            
               Entry e = null;
-              for(Iterator it = iterator(); it.hasNext(); e = it.next()) {
+              for(Iterator<Entry> it = iterator(); it.hasNext(); e = it.next()) {
                   e.setValue(function.value(e.getValue()));
               }
              
-             Entries of this vector are modified in-place by this method.
+            Entries of this vector are modified in-place by this method.
         
             Parameters:
-              :code:`function` - Function to apply to each entry.
+                function (:class:`~org.hipparchus.analysis.UnivariateFunction`): Function to apply to each entry.
         
             Returns:
-              a reference to this vector.
+                a reference to this vector.
         
         
         """
@@ -2445,6 +2614,7 @@ class RealVector:
         
             .. code-block: java
             
+            
                  RealVector v = new ArrayRealVector(2);
                  RealVector w = RealVector.unmodifiableRealVector(v);
                  v.setEntry(0, 1.2);
@@ -2472,7 +2642,7 @@ class RealVector:
             Returns:
                 the value returned by :meth:`~org.hipparchus.linear.RealVectorPreservingVisitor.end` at the end of the walk
         
-        public double walkInDefaultOrder(:class:`~org.hipparchus.linear.RealVectorPreservingVisitor` visitor, int start, int end) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public double walkInDefaultOrder (:class:`~org.hipparchus.linear.RealVectorPreservingVisitor` visitor, int start, int end) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visits (but does not alter) some entries of this vector in default order (increasing index).
         
@@ -2496,7 +2666,7 @@ class RealVector:
             Returns:
                 the value returned by :meth:`~org.hipparchus.linear.RealVectorChangingVisitor.end` at the end of the walk
         
-        public double walkInDefaultOrder(:class:`~org.hipparchus.linear.RealVectorChangingVisitor` visitor, int start, int end) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public double walkInDefaultOrder (:class:`~org.hipparchus.linear.RealVectorChangingVisitor` visitor, int start, int end) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visits (and possibly alters) some entries of this vector in default order (increasing index).
         
@@ -2534,7 +2704,7 @@ class RealVector:
             Returns:
                 the value returned by :meth:`~org.hipparchus.linear.RealVectorPreservingVisitor.end` at the end of the walk
         
-        public double walkInOptimizedOrder(:class:`~org.hipparchus.linear.RealVectorPreservingVisitor` visitor, int start, int end) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public double walkInOptimizedOrder (:class:`~org.hipparchus.linear.RealVectorPreservingVisitor` visitor, int start, int end) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visits (but does not alter) some entries of this vector in optimized order. The order in which the entries are visited
             is selected so as to lead to the most efficient implementation; it might depend on the concrete implementation of this
@@ -2562,7 +2732,7 @@ class RealVector:
             Returns:
                 the value returned by :meth:`~org.hipparchus.linear.RealVectorChangingVisitor.end` at the end of the walk
         
-        public double walkInOptimizedOrder(:class:`~org.hipparchus.linear.RealVectorChangingVisitor` visitor, int start, int end) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public double walkInOptimizedOrder (:class:`~org.hipparchus.linear.RealVectorChangingVisitor` visitor, int start, int end) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visits (and possibly change) some entries of this vector in optimized order. The order in which the entries are visited
             is selected so as to lead to the most efficient implementation; it might depend on the concrete implementation of this
@@ -2946,9 +3116,9 @@ class SchurTransformer:
         and T an quasi-triangular matrix. Both P and T are m × m matrices.
     
         Transformation to Schur form is often not a goal by itself, but it is an intermediate step in more general decomposition
-        algorithms like :class:`~org.hipparchus.linear.EigenDecomposition`. This class is therefore intended for internal use by
-        the library and is not public. As a consequence of this explicitly limited scope, many methods directly returns
-        references to internal arrays, not copies.
+        algorithms like :class:`~org.hipparchus.linear.EigenDecompositionSymmetric`. This class is therefore intended for expert
+        use. As a consequence of this explicitly limited scope, many methods directly returns references to internal arrays, not
+        copies.
     
         This class is based on the method hqr2 in class EigenvalueDecomposition from the `JAMA
         <http://math.nist.gov/javanumerics/jama/>` library.
@@ -2958,7 +3128,10 @@ class SchurTransformer:
             Wikipedia <http://en.wikipedia.org/wiki/Schur_decomposition>`, `Householder Transformations
             <http://en.wikipedia.org/wiki/Householder_transformation>`
     """
+    @typing.overload
     def __init__(self, realMatrix: 'RealMatrix'): ...
+    @typing.overload
+    def __init__(self, realMatrix: 'RealMatrix', double: float): ...
     def getP(self) -> 'RealMatrix':
         """
             Returns the matrix P of the transform.
@@ -3744,6 +3917,7 @@ class ArrayRealVector(RealVector, java.io.Serializable):
         
             .. code-block: java
             
+            
               return copy().mapToSelf(function);
              
             Returns a new vector. Does not change instance data.
@@ -3830,21 +4004,22 @@ class ArrayRealVector(RealVector, java.io.Serializable):
         
             .. code-block: java
             
+            
               Entry e = null;
-              for(Iterator it = iterator(); it.hasNext(); e = it.next()) {
+              for(Iterator<Entry> it = iterator(); it.hasNext(); e = it.next()) {
                   e.setValue(function.value(e.getValue()));
               }
              
-             Entries of this vector are modified in-place by this method.
+            Entries of this vector are modified in-place by this method.
         
             Overrides:
-              :meth:`~org.hipparchus.linear.RealVector.mapToSelf` in class :class:`~org.hipparchus.linear.RealVector`
+                :meth:`~org.hipparchus.linear.RealVector.mapToSelf` in class :class:`~org.hipparchus.linear.RealVector`
         
             Parameters:
-              :code:`function` - Function to apply to each entry.
+                function (:class:`~org.hipparchus.analysis.UnivariateFunction`): Function to apply to each entry.
         
             Returns:
-              a reference to this vector.
+                a reference to this vector.
         
         
         """
@@ -3922,7 +4097,7 @@ class ArrayRealVector(RealVector, java.io.Serializable):
             Returns:
                 the value returned by :meth:`~org.hipparchus.linear.RealVectorPreservingVisitor.end` at the end of the walk
         
-        public double walkInDefaultOrder(:class:`~org.hipparchus.linear.RealVectorPreservingVisitor` visitor, int start, int end) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public double walkInDefaultOrder (:class:`~org.hipparchus.linear.RealVectorPreservingVisitor` visitor, int start, int end) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visits (but does not alter) some entries of this vector in default order (increasing index).
         
@@ -3951,7 +4126,7 @@ class ArrayRealVector(RealVector, java.io.Serializable):
             Returns:
                 the value returned by :meth:`~org.hipparchus.linear.RealVectorChangingVisitor.end` at the end of the walk
         
-        public double walkInDefaultOrder(:class:`~org.hipparchus.linear.RealVectorChangingVisitor` visitor, int start, int end) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public double walkInDefaultOrder (:class:`~org.hipparchus.linear.RealVectorChangingVisitor` visitor, int start, int end) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visits (and possibly alters) some entries of this vector in default order (increasing index).
         
@@ -3994,7 +4169,7 @@ class ArrayRealVector(RealVector, java.io.Serializable):
             Returns:
                 the value returned by :meth:`~org.hipparchus.linear.RealVectorPreservingVisitor.end` at the end of the walk
         
-        public double walkInOptimizedOrder(:class:`~org.hipparchus.linear.RealVectorPreservingVisitor` visitor, int start, int end) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public double walkInOptimizedOrder (:class:`~org.hipparchus.linear.RealVectorPreservingVisitor` visitor, int start, int end) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visits (but does not alter) some entries of this vector in optimized order. The order in which the entries are visited
             is selected so as to lead to the most efficient implementation; it might depend on the concrete implementation of this
@@ -4027,7 +4202,7 @@ class ArrayRealVector(RealVector, java.io.Serializable):
             Returns:
                 the value returned by :meth:`~org.hipparchus.linear.RealVectorChangingVisitor.end` at the end of the walk
         
-        public double walkInOptimizedOrder(:class:`~org.hipparchus.linear.RealVectorChangingVisitor` visitor, int start, int end) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public double walkInOptimizedOrder (:class:`~org.hipparchus.linear.RealVectorChangingVisitor` visitor, int start, int end) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visits (and possibly change) some entries of this vector in optimized order. The order in which the entries are visited
             is selected so as to lead to the most efficient implementation; it might depend on the concrete implementation of this
@@ -4469,9 +4644,18 @@ class FieldLUDecomposer(FieldMatrixDecomposer[_FieldLUDecomposer__T], typing.Gen
     def decompose(self, fieldMatrix: 'FieldMatrix'[_FieldLUDecomposer__T]) -> FieldDecompositionSolver[_FieldLUDecomposer__T]: ...
 
 _FieldMatrix__T = typing.TypeVar('_FieldMatrix__T', bound=org.hipparchus.FieldElement)  # <T>
-class FieldMatrix(AnyMatrix, typing.Generic[_FieldMatrix__T]):
+class FieldMatrix(AnyMatrix, org.hipparchus.util.FieldBlendable['FieldMatrix'[_FieldMatrix__T], _FieldMatrix__T], typing.Generic[_FieldMatrix__T]):
+    """
+    public interface FieldMatrix<T extends :class:`~org.hipparchus.FieldElement`<T>> extends :class:`~org.hipparchus.linear.AnyMatrix`, :class:`~org.hipparchus.util.FieldBlendable`<:class:`~org.hipparchus.linear.FieldMatrix`<T>, T>
+    
+        Interface defining field-valued matrix with basic algebraic operations.
+    
+        Matrix element indexing is 0-based -- e.g., :code:`getEntry(0, 0)` returns the element in the first row, first column of
+        the matrix.
+    """
     def add(self, fieldMatrix: 'FieldMatrix'[_FieldMatrix__T]) -> 'FieldMatrix'[_FieldMatrix__T]: ...
     def addToEntry(self, int: int, int2: int, t: _FieldMatrix__T) -> None: ...
+    def blendArithmeticallyWith(self, fieldMatrix: 'FieldMatrix'[_FieldMatrix__T], t: _FieldMatrix__T) -> 'FieldMatrix'[_FieldMatrix__T]: ...
     def copy(self) -> 'FieldMatrix'[_FieldMatrix__T]: ...
     @typing.overload
     def copySubMatrix(self, int: int, int2: int, int3: int, int4: int, tArray: typing.List[typing.List[_FieldMatrix__T]]) -> None: ...
@@ -4481,7 +4665,16 @@ class FieldMatrix(AnyMatrix, typing.Generic[_FieldMatrix__T]):
     def getColumn(self, int: int) -> typing.List[_FieldMatrix__T]: ...
     def getColumnMatrix(self, int: int) -> 'FieldMatrix'[_FieldMatrix__T]: ...
     def getColumnVector(self, int: int) -> FieldVector[_FieldMatrix__T]: ...
-    def getData(self) -> typing.List[typing.List[_FieldMatrix__T]]: ...
+    def getData(self) -> typing.List[typing.List[_FieldMatrix__T]]:
+        """
+            Returns matrix entries as a two-dimensional array.
+        
+            Returns:
+                a 2-dimensional array of entries.
+        
+        
+        """
+        ...
     def getEntry(self, int: int, int2: int) -> _FieldMatrix__T: ...
     def getField(self) -> org.hipparchus.Field[_FieldMatrix__T]: ...
     def getRow(self, int: int) -> typing.List[_FieldMatrix__T]: ...
@@ -4664,31 +4857,9 @@ class OrderedComplexEigenDecomposition(ComplexEigenDecomposition):
     def __init__(self, realMatrix: 'RealMatrix'): ...
     @typing.overload
     def __init__(self, realMatrix: 'RealMatrix', double: float, double2: float, double3: float): ...
+    @typing.overload
+    def __init__(self, realMatrix: 'RealMatrix', double: float, double2: float, double3: float, comparator: typing.Union[java.util.Comparator[org.hipparchus.complex.Complex], typing.Callable[[org.hipparchus.complex.Complex, org.hipparchus.complex.Complex], int]]): ...
     def getVT(self) -> FieldMatrix[org.hipparchus.complex.Complex]: ...
-
-class OrderedEigenDecomposition(EigenDecomposition):
-    """
-    public class OrderedEigenDecomposition extends :class:`~org.hipparchus.linear.EigenDecomposition`
-    
-        Given a matrix A, it computes an eigen decomposition A = VDV^{T}. It also ensures that eigen values in the diagonal of D
-        are in ascending order.
-    """
-    def __init__(self, realMatrix: 'RealMatrix'): ...
-    def getVT(self) -> 'RealMatrix':
-        """
-            Gets the transpose of the matrix V of the decomposition. V is an orthogonal matrix, i.e. its transpose is also its
-            inverse. The columns of V are the eigenvectors of the original matrix. No assumption is made about the orientation of
-            the system axes formed by the columns of V (e.g. in a 3-dimension space, V can form a left- or right-handed system).
-        
-            Overrides:
-                :meth:`~org.hipparchus.linear.EigenDecomposition.getVT` in class :class:`~org.hipparchus.linear.EigenDecomposition`
-        
-            Returns:
-                the transpose of the V matrix.
-        
-        
-        """
-        ...
 
 class PreconditionedIterativeLinearSolver(IterativeLinearSolver):
     """
@@ -4696,12 +4867,11 @@ class PreconditionedIterativeLinearSolver(IterativeLinearSolver):
     
     
         This abstract class defines preconditioned iterative solvers. When A is ill-conditioned, instead of solving system A ·
-        x = b directly, it is preferable to solve either
-        (M · A) · x = M · b
-        (left preconditioning), or
-        (A · M) · y = b,     followed by M · y = x
-        (right preconditioning), where M approximates in some way A :sup:`-1` , while matrix-vector products of the type M · y
-        remain comparatively easy to compute. In this library, M (not M :sup:`-1` !) is called the *preconditionner*.
+        x = b directly, it is preferable to solve either \[ (M \cdot A) \cdot x = M \cdot b \] (left preconditioning), or \[ (A
+        \cdot M) \cdot y = b, \text{followed by} M \cdot y = x \]
+    
+        (right preconditioning), where M approximates in some way A :sup:`-1` , while matrix-vector products of the type \(M
+        \cdot y\) remain comparatively easy to compute. In this library, M (not M :sup:`-1` !) is called the *preconditioner*.
     
         Concrete implementations of this abstract class must be provided with the preconditioner M, as a
         :class:`~org.hipparchus.linear.RealLinearOperator`.
@@ -4806,6 +4976,7 @@ class RRQRDecomposition(QRDecomposition):
         
             .. code-block: java
             
+            
                (thisNorm/lastNorm) * rNorm < dropThreshold
              
         
@@ -4827,8 +4998,8 @@ class RRQRDecomposition(QRDecomposition):
         
             Least Square sense means a solver can be computed for an overdetermined system, (i.e. a system with more equations than
             unknowns, which corresponds to a tall A matrix with more rows than columns). In any case, if the matrix is singular
-            within the tolerance set at :meth:`~org.hipparchus.linear.RRQRDecomposition.RRQRDecomposition`, an error will be
-            triggered when the :meth:`~org.hipparchus.linear.DecompositionSolver.solve` method will be called.
+            within the tolerance set at :meth:`~org.hipparchus.linear.RRQRDecomposition.%3Cinit%3E`, an error will be triggered when
+            the :meth:`~org.hipparchus.linear.DecompositionSolver.solve` method will be called.
         
             Overrides:
                 :meth:`~org.hipparchus.linear.QRDecomposition.getSolver` in class :class:`~org.hipparchus.linear.QRDecomposition`
@@ -4840,9 +5011,9 @@ class RRQRDecomposition(QRDecomposition):
         """
         ...
 
-class RealMatrix(AnyMatrix):
+class RealMatrix(AnyMatrix, org.hipparchus.util.Blendable['RealMatrix']):
     """
-    public interface RealMatrix extends :class:`~org.hipparchus.linear.AnyMatrix`
+    public interface RealMatrix extends :class:`~org.hipparchus.linear.AnyMatrix`, :class:`~org.hipparchus.util.Blendable`<:class:`~org.hipparchus.linear.RealMatrix`>
     
         Interface defining a real-valued matrix with basic algebraic operations.
     
@@ -4851,6 +5022,23 @@ class RealMatrix(AnyMatrix):
     """
     def add(self, realMatrix: 'RealMatrix') -> 'RealMatrix': ...
     def addToEntry(self, int: int, int2: int, double: float) -> None: ...
+    def blendArithmeticallyWith(self, realMatrix: 'RealMatrix', double: float) -> 'RealMatrix':
+        """
+            Blend arithmetically this instance with another one.
+        
+            Specified by:
+                :meth:`~org.hipparchus.util.Blendable.blendArithmeticallyWith` in interface :class:`~org.hipparchus.util.Blendable`
+        
+            Parameters:
+                other (:class:`~org.hipparchus.linear.RealMatrix`): other instance to blend arithmetically with
+                blendingValue (double): value from smoothstep function B(x). It is expected to be between [0:1] and will throw an exception otherwise.
+        
+            Returns:
+                this * (1 - B(x)) + other * B(x)
+        
+        
+        """
+        ...
     def copy(self) -> 'RealMatrix':
         """
             Returns a (deep) copy of this.
@@ -4925,6 +5113,7 @@ class RealMatrix(AnyMatrix):
             Acts as if implemented as:
         
             .. code-block: java
+            
             
               return copy().mapToSelf(function);
              
@@ -5065,7 +5254,7 @@ class RealMatrix(AnyMatrix):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`,
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`
         
-        double walkInColumnOrder(:class:`~org.hipparchus.linear.RealMatrixChangingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        double walkInColumnOrder (:class:`~org.hipparchus.linear.RealMatrixChangingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visit (and possibly change) some matrix entries in column order.
         
@@ -5097,7 +5286,7 @@ class RealMatrix(AnyMatrix):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`,
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`
         
-        double walkInColumnOrder(:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        double walkInColumnOrder (:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visit (but don't change) some matrix entries in column order.
         
@@ -5183,7 +5372,7 @@ class RealMatrix(AnyMatrix):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`,
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`
         
-        double walkInOptimizedOrder(:class:`~org.hipparchus.linear.RealMatrixChangingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        double walkInOptimizedOrder (:class:`~org.hipparchus.linear.RealMatrixChangingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visit (and possibly change) some matrix entries using the fastest possible order.
         
@@ -5214,7 +5403,7 @@ class RealMatrix(AnyMatrix):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`,
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`
         
-        double walkInOptimizedOrder(:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        double walkInOptimizedOrder (:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visit (but don't change) some matrix entries using the fastest possible order.
         
@@ -5301,7 +5490,7 @@ class RealMatrix(AnyMatrix):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`,
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`
         
-        double walkInRowOrder(:class:`~org.hipparchus.linear.RealMatrixChangingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        double walkInRowOrder (:class:`~org.hipparchus.linear.RealMatrixChangingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visit (and possibly change) some matrix entries in row order.
         
@@ -5333,7 +5522,7 @@ class RealMatrix(AnyMatrix):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`,
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`
         
-        double walkInRowOrder(:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        double walkInRowOrder (:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visit (but don't change) some matrix entries in row order.
         
@@ -5598,6 +5787,14 @@ class SparseRealVector(RealVector):
 
 _AbstractFieldMatrix__T = typing.TypeVar('_AbstractFieldMatrix__T', bound=org.hipparchus.FieldElement)  # <T>
 class AbstractFieldMatrix(FieldMatrix[_AbstractFieldMatrix__T], typing.Generic[_AbstractFieldMatrix__T]):
+    """
+    public abstract class AbstractFieldMatrix<T extends :class:`~org.hipparchus.FieldElement`<T>> extends :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.linear.FieldMatrix`<T>
+    
+        Basic implementation of :class:`~org.hipparchus.linear.FieldMatrix` methods regardless of the underlying storage.
+    
+        All the methods implemented here use :meth:`~org.hipparchus.linear.AbstractFieldMatrix.getEntry` to access matrix
+        elements. Derived class can provide faster implementations.
+    """
     def add(self, fieldMatrix: FieldMatrix[_AbstractFieldMatrix__T]) -> FieldMatrix[_AbstractFieldMatrix__T]: ...
     def addToEntry(self, int: int, int2: int, t: _AbstractFieldMatrix__T) -> None: ...
     def copy(self) -> FieldMatrix[_AbstractFieldMatrix__T]: ...
@@ -5606,16 +5803,69 @@ class AbstractFieldMatrix(FieldMatrix[_AbstractFieldMatrix__T], typing.Generic[_
     @typing.overload
     def copySubMatrix(self, intArray: typing.List[int], intArray2: typing.List[int], tArray: typing.List[typing.List[_AbstractFieldMatrix__T]]) -> None: ...
     def createMatrix(self, int: int, int2: int) -> FieldMatrix[_AbstractFieldMatrix__T]: ...
-    def equals(self, object: typing.Any) -> bool: ...
+    def equals(self, object: typing.Any) -> bool:
+        """
+            Returns true iff :code:`object` is a :code:`FieldMatrix` instance with the same dimensions as this and all corresponding
+            matrix entries are equal.
+        
+            Overrides:
+                :meth:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+        
+            Parameters:
+                object (:class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): the object to test equality against.
+        
+            Returns:
+                true if object equals this
+        
+        
+        """
+        ...
     def getColumn(self, int: int) -> typing.List[_AbstractFieldMatrix__T]: ...
-    def getColumnDimension(self) -> int: ...
+    def getColumnDimension(self) -> int:
+        """
+            Returns the number of columns in the matrix.
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.AnyMatrix.getColumnDimension` in interface :class:`~org.hipparchus.linear.AnyMatrix`
+        
+            Returns:
+                columnDimension
+        
+        
+        """
+        ...
     def getColumnMatrix(self, int: int) -> FieldMatrix[_AbstractFieldMatrix__T]: ...
     def getColumnVector(self, int: int) -> FieldVector[_AbstractFieldMatrix__T]: ...
-    def getData(self) -> typing.List[typing.List[_AbstractFieldMatrix__T]]: ...
+    def getData(self) -> typing.List[typing.List[_AbstractFieldMatrix__T]]:
+        """
+            Returns matrix entries as a two-dimensional array.
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.FieldMatrix.getData` in interface :class:`~org.hipparchus.linear.FieldMatrix`
+        
+            Returns:
+                a 2-dimensional array of entries.
+        
+        
+        """
+        ...
     def getEntry(self, int: int, int2: int) -> _AbstractFieldMatrix__T: ...
     def getField(self) -> org.hipparchus.Field[_AbstractFieldMatrix__T]: ...
     def getRow(self, int: int) -> typing.List[_AbstractFieldMatrix__T]: ...
-    def getRowDimension(self) -> int: ...
+    def getRowDimension(self) -> int:
+        """
+            Returns the number of rows in the matrix.
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.AnyMatrix.getRowDimension` in interface :class:`~org.hipparchus.linear.AnyMatrix`
+        
+            Returns:
+                rowDimension
+        
+        
+        """
+        ...
     def getRowMatrix(self, int: int) -> FieldMatrix[_AbstractFieldMatrix__T]: ...
     def getRowVector(self, int: int) -> FieldVector[_AbstractFieldMatrix__T]: ...
     @typing.overload
@@ -5623,8 +5873,33 @@ class AbstractFieldMatrix(FieldMatrix[_AbstractFieldMatrix__T], typing.Generic[_
     @typing.overload
     def getSubMatrix(self, intArray: typing.List[int], intArray2: typing.List[int]) -> FieldMatrix[_AbstractFieldMatrix__T]: ...
     def getTrace(self) -> _AbstractFieldMatrix__T: ...
-    def hashCode(self) -> int: ...
-    def isSquare(self) -> bool: ...
+    def hashCode(self) -> int:
+        """
+            Computes a hashcode for the matrix.
+        
+            Overrides:
+                :meth:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+        
+            Returns:
+                hashcode for matrix
+        
+        
+        """
+        ...
+    def isSquare(self) -> bool:
+        """
+            Is this a square matrix?
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.AnyMatrix.isSquare` in interface :class:`~org.hipparchus.linear.AnyMatrix`
+        
+            Returns:
+                true if the matrix is square (rowDimension = columnDimension)
+        
+        
+        """
+        ...
     def multiply(self, fieldMatrix: FieldMatrix[_AbstractFieldMatrix__T]) -> FieldMatrix[_AbstractFieldMatrix__T]: ...
     def multiplyEntry(self, int: int, int2: int, t: _AbstractFieldMatrix__T) -> None: ...
     @typing.overload
@@ -5649,7 +5924,20 @@ class AbstractFieldMatrix(FieldMatrix[_AbstractFieldMatrix__T], typing.Generic[_
     def setRowVector(self, int: int, fieldVector: FieldVector[_AbstractFieldMatrix__T]) -> None: ...
     def setSubMatrix(self, tArray: typing.List[typing.List[_AbstractFieldMatrix__T]], int: int, int2: int) -> None: ...
     def subtract(self, fieldMatrix: FieldMatrix[_AbstractFieldMatrix__T]) -> FieldMatrix[_AbstractFieldMatrix__T]: ...
-    def toString(self) -> str: ...
+    def toString(self) -> str:
+        """
+            Get a string representation for this matrix.
+        
+            Overrides:
+                :meth:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+        
+            Returns:
+                a string representation for this matrix
+        
+        
+        """
+        ...
     def transpose(self) -> FieldMatrix[_AbstractFieldMatrix__T]: ...
     @typing.overload
     def walkInColumnOrder(self, fieldMatrixChangingVisitor: FieldMatrixChangingVisitor[_AbstractFieldMatrix__T]) -> _AbstractFieldMatrix__T: ...
@@ -5956,7 +6244,7 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`,
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`
         
-        public double walkInColumnOrder(:class:`~org.hipparchus.linear.RealMatrixChangingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public double walkInColumnOrder (:class:`~org.hipparchus.linear.RealMatrixChangingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visit (and possibly change) some matrix entries in column order.
         
@@ -5990,7 +6278,7 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`,
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`
         
-        public double walkInColumnOrder(:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public double walkInColumnOrder (:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visit (but don't change) some matrix entries in column order.
         
@@ -6084,7 +6372,7 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`,
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`
         
-        public double walkInOptimizedOrder(:class:`~org.hipparchus.linear.RealMatrixChangingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public double walkInOptimizedOrder (:class:`~org.hipparchus.linear.RealMatrixChangingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visit (and possibly change) some matrix entries using the fastest possible order.
         
@@ -6117,7 +6405,7 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`,
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`
         
-        public double walkInOptimizedOrder(:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public double walkInOptimizedOrder (:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visit (but don't change) some matrix entries using the fastest possible order.
         
@@ -6212,7 +6500,7 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`,
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`
         
-        public double walkInRowOrder(:class:`~org.hipparchus.linear.RealMatrixChangingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public double walkInRowOrder (:class:`~org.hipparchus.linear.RealMatrixChangingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visit (and possibly change) some matrix entries in row order.
         
@@ -6246,7 +6534,7 @@ class AbstractRealMatrix(RealMatrix, RealLinearOperator):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`,
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`
         
-        public double walkInRowOrder(:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public double walkInRowOrder (:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visit (but don't change) some matrix entries in row order.
         
@@ -6299,25 +6587,19 @@ class ConjugateGradient(PreconditionedIterativeLinearSolver):
         follows closely the template by :meth:`~org.hipparchus.linear.ConjugateGradient.BARR1994` (figure 2.5). The linear
         system at hand is A · x = b, and the residual is r = b - A · x.
     
-        :class:`~org.hipparchus.linear`
-    -------------------------------
-    
+        **Default stopping criterion**
     
         A default stopping criterion is implemented. The iterations stop when || r || ≤ δ || b ||, where b is the right-hand
         side vector, r the current estimate of the residual, and δ a user-specified tolerance. It should be noted that r is the
         so-called *updated* residual, which might differ from the true residual due to rounding-off errors (see e.g.
         :meth:`~org.hipparchus.linear.ConjugateGradient.STRA2002`).
     
-        Iteration count
-    ---------------
-    
+        **Iteration count**
     
         In the present context, an iteration should be understood as one evaluation of the matrix-vector product A · x. The
         initialization phase therefore counts as one iteration.
     
-        :class:`~org.hipparchus.linear`
-    -------------------------------
-    
+        **:class:`~org.hipparchus.linear`**
     
         Besides standard :class:`~org.hipparchus.exception.MathIllegalArgumentException`, this class might throw
         :class:`~org.hipparchus.exception.MathIllegalArgumentException` if the linear operator or the preconditioner are not
@@ -6327,16 +6609,17 @@ class ConjugateGradient(PreconditionedIterativeLinearSolver):
           - key :code:`"vector"` points to the offending vector, say x, such that x :sup:`T` · L · x < 0.
     
     
-        References
-    ----------
+        **References**
     
-    
-        :class:`~org.hipparchus.linear`
+        Barret et al. (1994)
           R. Barrett, M. Berry, T. F. Chan, J. Demmel, J. M. Donato, J. Dongarra, V. Eijkhout, R. Pozo, C. Romine and H. Van der
             Vorst, `*Templates for the Solution of Linear Systems: Building Blocks for Iterative Methods*
             <http://www.netlib.org/linalg/html_templates/Templates.html>`, SIAM
     
-        :class:`~org.hipparchus.linear`
+        Strakos and Tichy (2002)
+          Z. Strakos and P. Tichy, ` *On error estimation in the conjugate gradient method and why it works in finite precision
+            computations* <http://etna.mcs.kent.edu/vol.13.2002/pp56-80.dir/pp56-80.pdf>`, Electronic Transactions on Numerical
+            Analysis 13: 56-80, 2002
     """
     OPERATOR: typing.ClassVar[str] = ...
     """
@@ -6539,9 +6822,10 @@ class OpenMapRealVector(SparseRealVector, java.io.Serializable):
     def getLInfDistance(self, realVector: RealVector) -> float: ...
     def getSparsity(self) -> float:
         """
+            Get percentage of none zero elements as a decimal percent.
         
             Returns:
-                the percentage of none zero elements as a decimal percent.
+                the percentage of none zero elements as a decimal percent
         
         
         """
@@ -6685,9 +6969,7 @@ class SymmLQ(PreconditionedIterativeLinearSolver):
         inverse iteration and/or Rayleigh-quotient iteration. Again, the linear operator (A - shift · I) need not be positive
         definite (but *must* be self-adjoint). The work per iteration is very slightly less if shift = 0.
     
-        Preconditioning
-    ---------------
-    
+        **Preconditioning**
     
         Preconditioning may reduce the number of iterations required. The solver may be provided with a positive definite
         preconditioner M = P :sup:`T` · P that is known to approximate (A - shift · I) :sup:`-1` in some sense, where
@@ -6701,17 +6983,12 @@ class SymmLQ(PreconditionedIterativeLinearSolver):
         are such that :meth:`~org.hipparchus.linear.IterativeLinearSolverEvent.getNormOfResidual` returns the norm of the
         *preconditioned*, updated residual, ||P · r||, not the norm of the *true* residual ||r||.
     
-        :class:`~org.hipparchus.linear`
-    -------------------------------
-    
+        **Default stopping criterion**
     
         A default stopping criterion is implemented. The iterations stop when || rhat || ≤ δ || Ahat || || xhat ||, where
         xhat is the current estimate of the solution of the transformed system, rhat the current estimate of the corresponding
         residual, and δ a user-specified tolerance.
-    
-        Iteration count
-    ---------------
-    
+        **Iteration count**
     
         In the present context, an iteration should be understood as one evaluation of the matrix-vector product A · x. The
         initialization phase therefore counts as one iteration. If the user requires checks on the symmetry of A, this entails
@@ -6721,10 +6998,7 @@ class SymmLQ(PreconditionedIterativeLinearSolver):
     
         The present definition of the iteration count differs from that adopted in the original FOTRAN code, where the
         initialization phase was *not* taken into account.
-    
-        :class:`~org.hipparchus.linear`
-    -------------------------------
-    
+        **Initial guess of the solution**
     
         The :code:`x` parameter in
     
@@ -6734,12 +7008,11 @@ class SymmLQ(PreconditionedIterativeLinearSolver):
           - :meth:`~org.hipparchus.linear.SymmLQ.solveInPlace`,
           - :meth:`~org.hipparchus.linear.SymmLQ.solveInPlace`,
     
+    
         should not be considered as an initial guess, as it is set to zero in the initial phase. If x :sub:`0` is known to be a
         good approximation to x, one should compute r :sub:`0` = b - A · x, solve A · dx = r0, and set x = x :sub:`0` + dx.
     
-        :class:`~org.hipparchus.linear`
-    -------------------------------
-    
+        **Exception context**
     
         Besides standard :class:`~org.hipparchus.exception.MathIllegalArgumentException`, this class might throw
         :class:`~org.hipparchus.exception.MathIllegalArgumentException` if the linear operator or the preconditioner are not
@@ -6754,9 +7027,7 @@ class SymmLQ(PreconditionedIterativeLinearSolver):
         :class:`~org.hipparchus.exception.MathIllegalArgumentException` might also be thrown in case the preconditioner is not
         positive definite.
     
-        References
-    ----------
-    
+        **References**
     
         :class:`~org.hipparchus.linear`
           C. C. Paige and M. A. Saunders, `*Solution of Sparse Indefinite Systems of Linear Equations*
@@ -6801,6 +7072,18 @@ class SymmLQ(PreconditionedIterativeLinearSolver):
 
 _Array2DRowFieldMatrix__T = typing.TypeVar('_Array2DRowFieldMatrix__T', bound=org.hipparchus.FieldElement)  # <T>
 class Array2DRowFieldMatrix(AbstractFieldMatrix[_Array2DRowFieldMatrix__T], java.io.Serializable, typing.Generic[_Array2DRowFieldMatrix__T]):
+    """
+    public class Array2DRowFieldMatrix<T extends :class:`~org.hipparchus.FieldElement`<T>> extends :class:`~org.hipparchus.linear.AbstractFieldMatrix`<T> implements :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    
+        Implementation of :class:`~org.hipparchus.linear.FieldMatrix` using a :class:`~org.hipparchus.FieldElement`[][] array to
+        store entries.
+    
+        As specified in the :class:`~org.hipparchus.linear.FieldMatrix` interface, matrix element indexing is 0-based -- e.g.,
+        :code:`getEntry(0, 0)` returns the element in the first row, first column of the matrix
+    
+        Also see:
+            :meth:`~serialized`
+    """
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_Array2DRowFieldMatrix__T]): ...
     @typing.overload
@@ -6824,12 +7107,68 @@ class Array2DRowFieldMatrix(AbstractFieldMatrix[_Array2DRowFieldMatrix__T], java
     def addToEntry(self, int: int, int2: int, t: _Array2DRowFieldMatrix__T) -> None: ...
     def copy(self) -> FieldMatrix[_Array2DRowFieldMatrix__T]: ...
     def createMatrix(self, int: int, int2: int) -> FieldMatrix[_Array2DRowFieldMatrix__T]: ...
-    def getColumnDimension(self) -> int: ...
-    def getData(self) -> typing.List[typing.List[_Array2DRowFieldMatrix__T]]: ...
-    def getDataRef(self) -> typing.List[typing.List[_Array2DRowFieldMatrix__T]]: ...
+    def getColumnDimension(self) -> int:
+        """
+            Returns the number of columns in the matrix.
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.AnyMatrix.getColumnDimension` in interface :class:`~org.hipparchus.linear.AnyMatrix`
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.AbstractFieldMatrix.getColumnDimension` in
+                class :class:`~org.hipparchus.linear.AbstractFieldMatrix`
+        
+            Returns:
+                columnDimension
+        
+        
+        """
+        ...
+    def getData(self) -> typing.List[typing.List[_Array2DRowFieldMatrix__T]]:
+        """
+            Returns matrix entries as a two-dimensional array.
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.FieldMatrix.getData` in interface :class:`~org.hipparchus.linear.FieldMatrix`
+        
+            Overrides:
+                :meth:`~org.hipparchus.linear.AbstractFieldMatrix.getData` in class :class:`~org.hipparchus.linear.AbstractFieldMatrix`
+        
+            Returns:
+                a 2-dimensional array of entries.
+        
+        
+        """
+        ...
+    def getDataRef(self) -> typing.List[typing.List[_Array2DRowFieldMatrix__T]]:
+        """
+            Get a reference to the underlying data array. This methods returns internal data, **not** fresh copy of it.
+        
+            Returns:
+                the 2-dimensional array of entries.
+        
+        
+        """
+        ...
     def getEntry(self, int: int, int2: int) -> _Array2DRowFieldMatrix__T: ...
     def getRow(self, int: int) -> typing.List[_Array2DRowFieldMatrix__T]: ...
-    def getRowDimension(self) -> int: ...
+    def getRowDimension(self) -> int:
+        """
+            Returns the number of rows in the matrix.
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.AnyMatrix.getRowDimension` in interface :class:`~org.hipparchus.linear.AnyMatrix`
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.AbstractFieldMatrix.getRowDimension` in
+                class :class:`~org.hipparchus.linear.AbstractFieldMatrix`
+        
+            Returns:
+                rowDimension
+        
+        
+        """
+        ...
     @typing.overload
     def getSubMatrix(self, intArray: typing.List[int], intArray2: typing.List[int]) -> FieldMatrix[_Array2DRowFieldMatrix__T]: ...
     @typing.overload
@@ -7158,7 +7497,7 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`,
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`
         
-        public double walkInColumnOrder(:class:`~org.hipparchus.linear.RealMatrixChangingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public double walkInColumnOrder (:class:`~org.hipparchus.linear.RealMatrixChangingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visit (and possibly change) some matrix entries in column order.
         
@@ -7196,7 +7535,7 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`,
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`
         
-        public double walkInColumnOrder(:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public double walkInColumnOrder (:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visit (but don't change) some matrix entries in column order.
         
@@ -7304,7 +7643,7 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`,
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`
         
-        public double walkInRowOrder(:class:`~org.hipparchus.linear.RealMatrixChangingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public double walkInRowOrder (:class:`~org.hipparchus.linear.RealMatrixChangingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visit (and possibly change) some matrix entries in row order.
         
@@ -7342,7 +7681,7 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`,
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`
         
-        public double walkInRowOrder(:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public double walkInRowOrder (:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visit (but don't change) some matrix entries in row order.
         
@@ -7392,7 +7731,48 @@ class Array2DRowRealMatrix(AbstractRealMatrix, java.io.Serializable):
 
 _BlockFieldMatrix__T = typing.TypeVar('_BlockFieldMatrix__T', bound=org.hipparchus.FieldElement)  # <T>
 class BlockFieldMatrix(AbstractFieldMatrix[_BlockFieldMatrix__T], java.io.Serializable, typing.Generic[_BlockFieldMatrix__T]):
+    """
+    public class BlockFieldMatrix<T extends :class:`~org.hipparchus.FieldElement`<T>> extends :class:`~org.hipparchus.linear.AbstractFieldMatrix`<T> implements :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    
+        Cache-friendly implementation of FieldMatrix using a flat arrays to store square blocks of the matrix.
+    
+        This implementation is specially designed to be cache-friendly. Square blocks are stored as small arrays and allow
+        efficient traversal of data both in row major direction and columns major direction, one block at a time. This greatly
+        increases performances for algorithms that use crossed directions loops like multiplication or transposition.
+    
+        The size of square blocks is a static parameter. It may be tuned according to the cache size of the target computer
+        processor. As a rule of thumbs, it should be the largest value that allows three blocks to be simultaneously cached
+        (this is necessary for example for matrix multiplication). The default value is to use 36x36 blocks.
+    
+        The regular blocks represent :meth:`~org.hipparchus.linear.BlockFieldMatrix.BLOCK_SIZE` x
+        :meth:`~org.hipparchus.linear.BlockFieldMatrix.BLOCK_SIZE` squares. Blocks at right hand side and bottom side which may
+        be smaller to fit matrix dimensions. The square blocks are flattened in row major order in single dimension arrays which
+        are therefore :meth:`~org.hipparchus.linear.BlockFieldMatrix.BLOCK_SIZE` :sup:`2` elements long for regular blocks. The
+        blocks are themselves organized in row major order.
+    
+        As an example, for a block size of 36x36, a 100x60 matrix would be stored in 6 blocks. Block 0 would be a Field[1296]
+        array holding the upper left 36x36 square, block 1 would be a Field[1296] array holding the upper center 36x36 square,
+        block 2 would be a Field[1008] array holding the upper right 36x28 rectangle, block 3 would be a Field[864] array
+        holding the lower left 24x36 rectangle, block 4 would be a Field[864] array holding the lower center 24x36 rectangle and
+        block 5 would be a Field[672] array holding the lower right 24x28 rectangle.
+    
+        The layout complexity overhead versus simple mapping of matrices to java arrays is negligible for small matrices (about
+        1%). The gain from cache efficiency leads to up to 3-fold improvements for matrices of moderate to large size.
+    
+        Also see:
+            :meth:`~serialized`
+    """
     BLOCK_SIZE: typing.ClassVar[int] = ...
+    """
+    public static final int BLOCK_SIZE
+    
+        Block size.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
     @typing.overload
     def __init__(self, int: int, int2: int, tArray: typing.List[typing.List[_BlockFieldMatrix__T]], boolean: bool): ...
     @typing.overload
@@ -7407,16 +7787,84 @@ class BlockFieldMatrix(AbstractFieldMatrix[_BlockFieldMatrix__T], java.io.Serial
     def copy(self) -> FieldMatrix[_BlockFieldMatrix__T]: ...
     _createBlocksLayout__T = typing.TypeVar('_createBlocksLayout__T', bound=org.hipparchus.FieldElement)  # <T>
     @staticmethod
-    def createBlocksLayout(field: org.hipparchus.Field[_createBlocksLayout__T], int: int, int2: int) -> typing.List[typing.List[_createBlocksLayout__T]]: ...
+    def createBlocksLayout(field: org.hipparchus.Field[_createBlocksLayout__T], int: int, int2: int) -> typing.List[typing.List[_createBlocksLayout__T]]:
+        """
+            Create a data array in blocks layout.
+        
+            This method can be used to create the array argument of the :meth:`~org.hipparchus.linear.BlockFieldMatrix.%3Cinit%3E`
+            constructor.
+        
+            Parameters:
+                field (:class:`~org.hipparchus.Field`<T> field): Field to which the elements belong.
+                rows (int): Number of rows in the new matrix.
+                columns (int): Number of columns in the new matrix.
+        
+            Returns:
+                a new data array in blocks layout.
+        
+            Also see:
+                :meth:`~org.hipparchus.linear.BlockFieldMatrix.toBlocksLayout`,
+                :meth:`~org.hipparchus.linear.BlockFieldMatrix.%3Cinit%3E`
+        
+        
+        """
+        ...
     def createMatrix(self, int: int, int2: int) -> FieldMatrix[_BlockFieldMatrix__T]: ...
     def getColumn(self, int: int) -> typing.List[_BlockFieldMatrix__T]: ...
-    def getColumnDimension(self) -> int: ...
+    def getColumnDimension(self) -> int:
+        """
+            Returns the number of columns in the matrix.
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.AnyMatrix.getColumnDimension` in interface :class:`~org.hipparchus.linear.AnyMatrix`
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.AbstractFieldMatrix.getColumnDimension` in
+                class :class:`~org.hipparchus.linear.AbstractFieldMatrix`
+        
+            Returns:
+                columnDimension
+        
+        
+        """
+        ...
     def getColumnMatrix(self, int: int) -> FieldMatrix[_BlockFieldMatrix__T]: ...
     def getColumnVector(self, int: int) -> FieldVector[_BlockFieldMatrix__T]: ...
-    def getData(self) -> typing.List[typing.List[_BlockFieldMatrix__T]]: ...
+    def getData(self) -> typing.List[typing.List[_BlockFieldMatrix__T]]:
+        """
+            Returns matrix entries as a two-dimensional array.
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.FieldMatrix.getData` in interface :class:`~org.hipparchus.linear.FieldMatrix`
+        
+            Overrides:
+                :meth:`~org.hipparchus.linear.AbstractFieldMatrix.getData` in class :class:`~org.hipparchus.linear.AbstractFieldMatrix`
+        
+            Returns:
+                a 2-dimensional array of entries.
+        
+        
+        """
+        ...
     def getEntry(self, int: int, int2: int) -> _BlockFieldMatrix__T: ...
     def getRow(self, int: int) -> typing.List[_BlockFieldMatrix__T]: ...
-    def getRowDimension(self) -> int: ...
+    def getRowDimension(self) -> int:
+        """
+            Returns the number of rows in the matrix.
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.AnyMatrix.getRowDimension` in interface :class:`~org.hipparchus.linear.AnyMatrix`
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.AbstractFieldMatrix.getRowDimension` in
+                class :class:`~org.hipparchus.linear.AbstractFieldMatrix`
+        
+            Returns:
+                rowDimension
+        
+        
+        """
+        ...
     def getRowMatrix(self, int: int) -> FieldMatrix[_BlockFieldMatrix__T]: ...
     def getRowVector(self, int: int) -> FieldVector[_BlockFieldMatrix__T]: ...
     @typing.overload
@@ -7560,8 +8008,8 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
         """
             Create a data array in blocks layout.
         
-            This method can be used to create the array argument of the
-            :meth:`~org.hipparchus.linear.BlockRealMatrix.BlockRealMatrix` constructor.
+            This method can be used to create the array argument of the :meth:`~org.hipparchus.linear.BlockRealMatrix.%3Cinit%3E`
+            constructor.
         
             Parameters:
                 rows (int): Number of rows in the new matrix.
@@ -7571,8 +8019,7 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 a new data array in blocks layout.
         
             Also see:
-                :meth:`~org.hipparchus.linear.BlockRealMatrix.toBlocksLayout`,
-                :meth:`~org.hipparchus.linear.BlockRealMatrix.BlockRealMatrix`
+                :meth:`~org.hipparchus.linear.BlockRealMatrix.toBlocksLayout`, :meth:`~org.hipparchus.linear.BlockRealMatrix.%3Cinit%3E`
         
         
         """
@@ -7846,7 +8293,7 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`,
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`
         
-        public double walkInOptimizedOrder(:class:`~org.hipparchus.linear.RealMatrixChangingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public double walkInOptimizedOrder (:class:`~org.hipparchus.linear.RealMatrixChangingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visit (and possibly change) some matrix entries using the fastest possible order.
         
@@ -7883,7 +8330,7 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`,
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`
         
-        public double walkInOptimizedOrder(:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public double walkInOptimizedOrder (:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visit (but don't change) some matrix entries using the fastest possible order.
         
@@ -7990,7 +8437,7 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`,
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`
         
-        public double walkInRowOrder(:class:`~org.hipparchus.linear.RealMatrixChangingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public double walkInRowOrder (:class:`~org.hipparchus.linear.RealMatrixChangingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visit (and possibly change) some matrix entries in row order.
         
@@ -8028,7 +8475,7 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`,
                 :meth:`~org.hipparchus.linear.RealMatrix.walkInOptimizedOrder`
         
-        public double walkInRowOrder(:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public double walkInRowOrder (:class:`~org.hipparchus.linear.RealMatrixPreservingVisitor` visitor, int startRow, int endRow, int startColumn, int endColumn) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Visit (but don't change) some matrix entries in row order.
         
@@ -8077,6 +8524,14 @@ class BlockRealMatrix(AbstractRealMatrix, java.io.Serializable):
     def walkInRowOrder(self, realMatrixPreservingVisitor: RealMatrixPreservingVisitor, int: int, int2: int, int3: int, int4: int) -> float: ...
 
 class DiagonalMatrix(AbstractRealMatrix, java.io.Serializable):
+    """
+    public class DiagonalMatrix extends :class:`~org.hipparchus.linear.AbstractRealMatrix` implements :class:`~org.hipparchus.linear.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    
+        Implementation of a diagonal matrix.
+    
+        Also see:
+            :meth:`~serialized`
+    """
     @typing.overload
     def __init__(self, doubleArray: typing.List[float]): ...
     @typing.overload
@@ -8088,18 +8543,110 @@ class DiagonalMatrix(AbstractRealMatrix, java.io.Serializable):
     @typing.overload
     def add(self, realMatrix: RealMatrix) -> RealMatrix: ...
     def addToEntry(self, int: int, int2: int, double: float) -> None: ...
-    def copy(self) -> RealMatrix: ...
+    def copy(self) -> RealMatrix:
+        """
+            Returns a (deep) copy of this.
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.RealMatrix.copy` in interface :class:`~org.hipparchus.linear.RealMatrix`
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.copy` in class :class:`~org.hipparchus.linear.AbstractRealMatrix`
+        
+            Returns:
+                matrix copy
+        
+        
+        """
+        ...
     def createMatrix(self, int: int, int2: int) -> RealMatrix: ...
-    def getColumnDimension(self) -> int: ...
-    def getData(self) -> typing.List[typing.List[float]]: ...
-    def getDataRef(self) -> typing.List[float]: ...
+    def getColumnDimension(self) -> int:
+        """
+            Returns the number of columns of this matrix.
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.AnyMatrix.getColumnDimension` in interface :class:`~org.hipparchus.linear.AnyMatrix`
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.RealLinearOperator.getColumnDimension` in
+                interface :class:`~org.hipparchus.linear.RealLinearOperator`
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.getColumnDimension` in
+                class :class:`~org.hipparchus.linear.AbstractRealMatrix`
+        
+            Returns:
+                the number of columns.
+        
+        
+        """
+        ...
+    def getData(self) -> typing.List[typing.List[float]]:
+        """
+            Returns matrix entries as a two-dimensional array.
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.RealMatrix.getData` in interface :class:`~org.hipparchus.linear.RealMatrix`
+        
+            Overrides:
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.getData` in class :class:`~org.hipparchus.linear.AbstractRealMatrix`
+        
+            Returns:
+                2-dimensional array of entries
+        
+        
+        """
+        ...
+    def getDataRef(self) -> typing.List[float]:
+        """
+            Gets a reference to the underlying data array.
+        
+            Returns:
+                1-dimensional array of entries.
+        
+        
+        """
+        ...
     def getEntry(self, int: int, int2: int) -> float: ...
-    def getRowDimension(self) -> int: ...
+    def getRowDimension(self) -> int:
+        """
+            Returns the number of rows of this matrix.
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.AnyMatrix.getRowDimension` in interface :class:`~org.hipparchus.linear.AnyMatrix`
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.RealLinearOperator.getRowDimension` in
+                interface :class:`~org.hipparchus.linear.RealLinearOperator`
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.AbstractRealMatrix.getRowDimension` in
+                class :class:`~org.hipparchus.linear.AbstractRealMatrix`
+        
+            Returns:
+                the number of rows.
+        
+        
+        """
+        ...
     @typing.overload
     def inverse(self) -> 'DiagonalMatrix': ...
     @typing.overload
     def inverse(self, double: float) -> 'DiagonalMatrix': ...
-    def isSingular(self, double: float) -> bool: ...
+    def isSingular(self, double: float) -> bool:
+        """
+            Returns whether this diagonal matrix is singular, i.e. any diagonal entry is equal to :code:`0` within the given
+            threshold.
+        
+            Parameters:
+                threshold (double): Singularity threshold.
+        
+            Returns:
+                :code:`true` if the matrix is singular, :code:`false` otherwise
+        
+        
+        """
+        ...
     @typing.overload
     def multiply(self, diagonalMatrix: 'DiagonalMatrix') -> 'DiagonalMatrix': ...
     @typing.overload
@@ -8125,7 +8672,26 @@ class DiagonalMatrix(AbstractRealMatrix, java.io.Serializable):
     @typing.overload
     def subtract(self, realMatrix: RealMatrix) -> RealMatrix: ...
     @typing.overload
-    def transposeMultiply(self, diagonalMatrix: 'DiagonalMatrix') -> 'DiagonalMatrix': ...
+    def transposeMultiply(self, diagonalMatrix: 'DiagonalMatrix') -> 'DiagonalMatrix':
+        """
+            Returns the result of postmultiplying :code:`this^T` by :code:`m`.
+        
+            This is equivalent to call
+            :meth:`~org.hipparchus.linear.RealMatrix.transpose`.:meth:`~org.hipparchus.linear.RealMatrix.multiply`, but some
+            implementations may avoid building the intermediate transposed matrix.
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.RealMatrix.transposeMultiply` in interface :class:`~org.hipparchus.linear.RealMatrix`
+        
+            Parameters:
+                m (:class:`~org.hipparchus.linear.RealMatrix`): matrix to postmultiply by
+        
+            Returns:
+                :code:`this^T * m`
+        
+        
+        """
+        ...
     @typing.overload
     def transposeMultiply(self, realMatrix: RealMatrix) -> RealMatrix: ...
 
@@ -8226,6 +8792,15 @@ class OpenMapRealMatrix(AbstractRealMatrix, SparseRealMatrix, java.io.Serializab
 
 _SparseFieldMatrix__T = typing.TypeVar('_SparseFieldMatrix__T', bound=org.hipparchus.FieldElement)  # <T>
 class SparseFieldMatrix(AbstractFieldMatrix[_SparseFieldMatrix__T], typing.Generic[_SparseFieldMatrix__T]):
+    """
+    public class SparseFieldMatrix<T extends :class:`~org.hipparchus.FieldElement`<T>> extends :class:`~org.hipparchus.linear.AbstractFieldMatrix`<T>
+    
+        Sparse matrix implementation based on an open addressed map.
+    
+        Caveat: This implementation assumes that, for any :code:`x`, the equality :code:`x * 0d == 0d` holds. But it is is not
+        true for :code:`NaN`. Moreover, zero entries will lose their sign. Some operations (that involve :code:`NaN` and/or
+        infinities) may thus give incorrect results.
+    """
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_SparseFieldMatrix__T]): ...
     @typing.overload
@@ -8234,15 +8809,121 @@ class SparseFieldMatrix(AbstractFieldMatrix[_SparseFieldMatrix__T], typing.Gener
     def __init__(self, fieldMatrix: FieldMatrix[_SparseFieldMatrix__T]): ...
     @typing.overload
     def __init__(self, sparseFieldMatrix: 'SparseFieldMatrix'[_SparseFieldMatrix__T]): ...
-    def addToEntry(self, int: int, int2: int, t: _SparseFieldMatrix__T) -> None: ...
+    def addToEntry(self, int: int, int2: int, t: _SparseFieldMatrix__T) -> None:
+        """
+            Change an entry in the specified row and column.
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.FieldMatrix.addToEntry` in interface :class:`~org.hipparchus.linear.FieldMatrix`
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.AbstractFieldMatrix.addToEntry` in
+                class :class:`~org.hipparchus.linear.AbstractFieldMatrix`
+        
+            Parameters:
+                row (int): Row location of entry to be set.
+                column (int): Column location of entry to be set.
+                increment (:class:`~org.hipparchus.linear.SparseFieldMatrix`): Value to add to the current matrix entry in :code:`(row, column)`.
+        
+        
+        """
+        ...
     def copy(self) -> FieldMatrix[_SparseFieldMatrix__T]: ...
     def createMatrix(self, int: int, int2: int) -> FieldMatrix[_SparseFieldMatrix__T]: ...
-    def getColumnDimension(self) -> int: ...
-    def getEntry(self, int: int, int2: int) -> _SparseFieldMatrix__T: ...
-    def getRowDimension(self) -> int: ...
-    def multiplyEntry(self, int: int, int2: int, t: _SparseFieldMatrix__T) -> None: ...
+    def getColumnDimension(self) -> int:
+        """
+            Returns the number of columns in the matrix.
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.AnyMatrix.getColumnDimension` in interface :class:`~org.hipparchus.linear.AnyMatrix`
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.AbstractFieldMatrix.getColumnDimension` in
+                class :class:`~org.hipparchus.linear.AbstractFieldMatrix`
+        
+            Returns:
+                columnDimension
+        
+        
+        """
+        ...
+    def getEntry(self, int: int, int2: int) -> _SparseFieldMatrix__T:
+        """
+            Returns the entry in the specified row and column.
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.FieldMatrix.getEntry` in interface :class:`~org.hipparchus.linear.FieldMatrix`
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.AbstractFieldMatrix.getEntry` in
+                class :class:`~org.hipparchus.linear.AbstractFieldMatrix`
+        
+            Parameters:
+                row (int): row location of entry to be fetched
+                column (int): column location of entry to be fetched
+        
+            Returns:
+                matrix entry in row,column
+        
+        
+        """
+        ...
+    def getRowDimension(self) -> int:
+        """
+            Returns the number of rows in the matrix.
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.AnyMatrix.getRowDimension` in interface :class:`~org.hipparchus.linear.AnyMatrix`
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.AbstractFieldMatrix.getRowDimension` in
+                class :class:`~org.hipparchus.linear.AbstractFieldMatrix`
+        
+            Returns:
+                rowDimension
+        
+        
+        """
+        ...
+    def multiplyEntry(self, int: int, int2: int, t: _SparseFieldMatrix__T) -> None:
+        """
+            Change an entry in the specified row and column.
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.FieldMatrix.multiplyEntry` in interface :class:`~org.hipparchus.linear.FieldMatrix`
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.AbstractFieldMatrix.multiplyEntry` in
+                class :class:`~org.hipparchus.linear.AbstractFieldMatrix`
+        
+            Parameters:
+                row (int): Row location of entry to be set.
+                column (int): Column location of entry to be set.
+                factor (:class:`~org.hipparchus.linear.SparseFieldMatrix`): Multiplication factor for the current matrix entry in :code:`(row,column)`
+        
+        
+        """
+        ...
     def multiplyTransposed(self, fieldMatrix: FieldMatrix[_SparseFieldMatrix__T]) -> FieldMatrix[_SparseFieldMatrix__T]: ...
-    def setEntry(self, int: int, int2: int, t: _SparseFieldMatrix__T) -> None: ...
+    def setEntry(self, int: int, int2: int, t: _SparseFieldMatrix__T) -> None:
+        """
+            Set the entry in the specified row and column.
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.FieldMatrix.setEntry` in interface :class:`~org.hipparchus.linear.FieldMatrix`
+        
+            Specified by:
+                :meth:`~org.hipparchus.linear.AbstractFieldMatrix.setEntry` in
+                class :class:`~org.hipparchus.linear.AbstractFieldMatrix`
+        
+            Parameters:
+                row (int): row location of entry to be set
+                column (int): column location of entry to be set
+                value (:class:`~org.hipparchus.linear.SparseFieldMatrix`): matrix entry to be set in row,column
+        
+        
+        """
+        ...
     def transposeMultiply(self, fieldMatrix: FieldMatrix[_SparseFieldMatrix__T]) -> FieldMatrix[_SparseFieldMatrix__T]: ...
 
 
@@ -8270,7 +8951,8 @@ class __module_protocol__(typing.Protocol):
     DefaultRealMatrixPreservingVisitor: typing.Type[DefaultRealMatrixPreservingVisitor]
     DependentVectorsHandler: typing.Type[DependentVectorsHandler]
     DiagonalMatrix: typing.Type[DiagonalMatrix]
-    EigenDecomposition: typing.Type[EigenDecomposition]
+    EigenDecompositionNonSymmetric: typing.Type[EigenDecompositionNonSymmetric]
+    EigenDecompositionSymmetric: typing.Type[EigenDecompositionSymmetric]
     FieldDecompositionSolver: typing.Type[FieldDecompositionSolver]
     FieldLUDecomposer: typing.Type[FieldLUDecomposer]
     FieldLUDecomposition: typing.Type[FieldLUDecomposition]
@@ -8294,7 +8976,6 @@ class __module_protocol__(typing.Protocol):
     OpenMapRealMatrix: typing.Type[OpenMapRealMatrix]
     OpenMapRealVector: typing.Type[OpenMapRealVector]
     OrderedComplexEigenDecomposition: typing.Type[OrderedComplexEigenDecomposition]
-    OrderedEigenDecomposition: typing.Type[OrderedEigenDecomposition]
     PreconditionedIterativeLinearSolver: typing.Type[PreconditionedIterativeLinearSolver]
     QRDecomposer: typing.Type[QRDecomposer]
     QRDecomposition: typing.Type[QRDecomposition]

@@ -1,5 +1,6 @@
 import java.lang
 import java.util
+import java.util.function
 import org.orekit.data
 import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.ndm.odm
@@ -16,9 +17,9 @@ import typing
 
 
 
-class Omm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.section.Header, org.orekit.files.ccsds.section.Segment['OmmMetadata', 'OmmData']], org.orekit.time.TimeStamped):
+class Omm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.ndm.odm.OdmHeader, org.orekit.files.ccsds.section.Segment['OmmMetadata', 'OmmData']], org.orekit.time.TimeStamped):
     """
-    public class Omm extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.section.Header`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.odm.omm.OmmMetadata`, :class:`~org.orekit.files.ccsds.ndm.odm.omm.OmmData`>> implements :class:`~org.orekit.time.TimeStamped`
+    public class Omm extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.ndm.odm.OdmHeader`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.odm.omm.OmmMetadata`, :class:`~org.orekit.files.ccsds.ndm.odm.omm.OmmData`>> implements :class:`~org.orekit.time.TimeStamped`
     
         This class gathers the informations present in the Orbital Mean-Elements Message (OMM).
     
@@ -47,7 +48,7 @@ class Omm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.secti
     
     
     """
-    def __init__(self, header: org.orekit.files.ccsds.section.Header, list: java.util.List[org.orekit.files.ccsds.section.Segment['OmmMetadata', 'OmmData']], iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext): ...
+    def __init__(self, odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, list: java.util.List[org.orekit.files.ccsds.section.Segment['OmmMetadata', 'OmmData']], iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext): ...
     def generateKeplerianOrbit(self) -> org.orekit.orbits.KeplerianOrbit:
         """
             Generate a keplerian orbit.
@@ -200,15 +201,34 @@ class OmmData(org.orekit.files.ccsds.section.Data):
         """
         ...
 
-class OmmMetadata(org.orekit.files.ccsds.ndm.odm.CommonMetadata):
+class OmmMetadata(org.orekit.files.ccsds.ndm.odm.OdmCommonMetadata):
     """
-    public class OmmMetadata extends :class:`~org.orekit.files.ccsds.ndm.odm.CommonMetadata`
+    public class OmmMetadata extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmCommonMetadata`
+    
+        Metadata for Orbit Mean Messages.
+    
+        Since:
+            12.0
     """
     SGP_SGP4_THEORY: typing.ClassVar[str] = ...
     """
     public static final :class:`~org.orekit.files.ccsds.ndm.odm.omm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` SGP_SGP4_THEORY
     
         Constant for SGP/SGP4 mean elements theory.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    SGP4_XP_THEORY: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.files.ccsds.ndm.odm.omm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` SGP4_XP_THEORY
+    
+        Constant for SGP4-XP mean elements theory.
+    
+        Since:
+            12.0
     
         Also see:
             :meth:`~constant`
@@ -340,7 +360,7 @@ class OmmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Omm, 'OmmParser']):
         Since:
             6.1
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior): ...
+    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]): ...
     def build(self) -> Omm:
         """
             Build the file from parsed entries.
@@ -393,7 +413,7 @@ class OmmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Omm, 'OmmParser']):
         
         """
         ...
-    def getHeader(self) -> org.orekit.files.ccsds.section.Header:
+    def getHeader(self) -> org.orekit.files.ccsds.ndm.odm.OdmHeader:
         """
             Get file header to fill.
         
@@ -512,13 +532,109 @@ class OmmTle(org.orekit.files.ccsds.section.CommentsContainer):
         Since:
             6.1
     """
+    EPHEMERIS_TYPE_SGP: typing.ClassVar[int] = ...
+    """
+    public static final int EPHEMERIS_TYPE_SGP
+    
+        Constant for EPHEMERIS_TYPE SGP.
+    
+        Since:
+            12.0
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    EPHEMERIS_TYPE_SGP4: typing.ClassVar[int] = ...
+    """
+    public static final int EPHEMERIS_TYPE_SGP4
+    
+        Constant for EPHEMERIS_TYPE SGP4.
+    
+        Since:
+            12.0
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    EPHEMERIS_TYPE_PPT3: typing.ClassVar[int] = ...
+    """
+    public static final int EPHEMERIS_TYPE_PPT3
+    
+        Constant for EPHEMERIS_TYPE PPT3.
+    
+        Since:
+            12.0
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    EPHEMERIS_TYPE_SGP4_XP: typing.ClassVar[int] = ...
+    """
+    public static final int EPHEMERIS_TYPE_SGP4_XP
+    
+        Constant for EPHEMERIS_TYPE SGP4-XP.
+    
+        Since:
+            12.0
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    EPHEMERIS_TYPE_SPECIAL_PERTURBATIONS: typing.ClassVar[int] = ...
+    """
+    public static final int EPHEMERIS_TYPE_SPECIAL_PERTURBATIONS
+    
+        Constant for EPHEMERIS_TYPE Special Perturbations.
+    
+        Since:
+            12.0
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
     def __init__(self): ...
+    def getAGoM(self) -> float:
+        """
+            Get the SGP4-XP solar radiation pressure-like coefficient Aγ/m.
+        
+            Returns:
+                the SGP4-XP solar radiation pressure-like coefficient Aγ/m
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
     def getBStar(self) -> float:
         """
             Get the SGP/SGP4 drag-like coefficient.
         
             Returns:
                 the SGP/SGP4 drag-like coefficient
+        
+        
+        """
+        ...
+    def getBTerm(self) -> float:
+        """
+            Get the SGP4-XP drag-like coefficient.
+        
+            Returns:
+                the SGP4-XP drag-like coefficient
+        
+            Since:
+                12.0
         
         
         """
@@ -593,12 +709,38 @@ class OmmTle(org.orekit.files.ccsds.section.CommentsContainer):
         
         """
         ...
+    def setAGoM(self, double: float) -> None:
+        """
+            Set the SGP4-XP solar radiation pressure-like coefficient Aγ/m.
+        
+            Parameters:
+                agom (double): the SGP4-XP solar radiation pressure-like coefficient Aγ/m to be set
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
     def setBStar(self, double: float) -> None:
         """
             Set the SGP/SGP4 drag-like coefficient.
         
             Parameters:
                 bstar (double): the SGP/SGP4 drag-like coefficient to be set
+        
+        
+        """
+        ...
+    def setBTerm(self, double: float) -> None:
+        """
+            Set the SGP4-XP drag-like coefficient.
+        
+            Parameters:
+                bterm (double): the SGP4-XP drag-like coefficient to be set
+        
+            Since:
+                12.0
         
         
         """
@@ -709,8 +851,10 @@ class OmmTleKey(java.lang.Enum['OmmTleKey']):
     ELEMENT_SET_NO: typing.ClassVar['OmmTleKey'] = ...
     REV_AT_EPOCH: typing.ClassVar['OmmTleKey'] = ...
     BSTAR: typing.ClassVar['OmmTleKey'] = ...
+    BTERM: typing.ClassVar['OmmTleKey'] = ...
     MEAN_MOTION_DOT: typing.ClassVar['OmmTleKey'] = ...
     MEAN_MOTION_DDOT: typing.ClassVar['OmmTleKey'] = ...
+    AGOM: typing.ClassVar['OmmTleKey'] = ...
     def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, ommTle: OmmTle) -> bool:
         """
             Process one token.
@@ -769,9 +913,9 @@ class OmmTleKey(java.lang.Enum['OmmTleKey']):
         """
         ...
 
-class OmmWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[org.orekit.files.ccsds.section.Header, org.orekit.files.ccsds.section.Segment[OmmMetadata, OmmData], Omm]):
+class OmmWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[org.orekit.files.ccsds.ndm.odm.OdmHeader, org.orekit.files.ccsds.section.Segment[OmmMetadata, OmmData], Omm]):
     """
-    public class OmmWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.section.Header`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.odm.omm.OmmMetadata`, :class:`~org.orekit.files.ccsds.ndm.odm.omm.OmmData`>, :class:`~org.orekit.files.ccsds.ndm.odm.omm.Omm`>
+    public class OmmWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.ndm.odm.OdmHeader`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.odm.omm.OmmMetadata`, :class:`~org.orekit.files.ccsds.ndm.odm.omm.OmmData`>, :class:`~org.orekit.files.ccsds.ndm.odm.omm.Omm`>
     
         Writer for CCSDS Orbit Mean Mean-Elements Message.
     
@@ -801,7 +945,6 @@ class OmmWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[or
     
     """
     def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate): ...
-    def writeSegmentContent(self, generator: org.orekit.files.ccsds.utils.generation.Generator, double: float, segment: org.orekit.files.ccsds.section.Segment[OmmMetadata, OmmData]) -> None: ...
 
 
 class __module_protocol__(typing.Protocol):

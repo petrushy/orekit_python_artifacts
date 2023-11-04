@@ -176,7 +176,7 @@ class IntegerDistribution:
             Returns:
                 the value of the probability mass function at :code:`x`
         
-        double probability(int x0, int x1) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        double probability (int x0, int x1) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             For a random variable :code:`X` whose values are distributed according to this distribution, this method returns
             :code:`P(x0 < X <= x1)`.
@@ -252,7 +252,7 @@ class MultivariateRealDistribution:
             Returns:
                 a random value vector.
         
-        double[][] sample(int sampleSize) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        double[][] sample (int sampleSize) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Generates a list of a random value vectors from the distribution.
         

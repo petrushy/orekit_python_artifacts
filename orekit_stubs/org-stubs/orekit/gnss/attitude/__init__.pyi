@@ -337,7 +337,65 @@ class Glonass(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
     """
     def __init__(self, double: float, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, extendedPVCoordinatesProvider: org.orekit.utils.ExtendedPVCoordinatesProvider, frame: org.orekit.frames.Frame): ...
 
+class PythonAbstractGNSSAttitudeProvider(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
+    """
+    public class PythonAbstractGNSSAttitudeProvider extends :class:`~org.orekit.gnss.attitude.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    """
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, extendedPVCoordinatesProvider: org.orekit.utils.ExtendedPVCoordinatesProvider, frame: org.orekit.frames.Frame): ...
+    _correctedYaw_1__T = typing.TypeVar('_correctedYaw_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def correctedYaw(self, gNSSAttitudeContext: 'GNSSAttitudeContext') -> org.orekit.utils.TimeStampedAngularCoordinates:
+        """
+            Select the /** Compute GNSS attitude with midnight/noon yaw turn correction.
+        
+            Parameters:
+                context (org.orekit.gnss.attitude.GNSSAttitudeContext): context data for attitude computation
+        
+            Returns:
+                corrected yaw, using inertial frame as the reference
+        
+        """
+        ...
+    @typing.overload
+    def correctedYaw(self, gNSSFieldAttitudeContext: 'GNSSFieldAttitudeContext'[_correctedYaw_1__T]) -> org.orekit.utils.TimeStampedFieldAngularCoordinates[_correctedYaw_1__T]:
+        """
+            Compute GNSS attitude with midnight/noon yaw turn correction.
+        
+            Parameters:
+                context (org.orekit.gnss.attitude.GNSSFieldAttitudeContext<T> context): context data for attitude computation
+        
+            Returns:
+                corrected yaw, using inertial frame as the reference
+        
+        
+        """
+        ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
 class AbstractGNSSAttitudeProvider: ...
+
+class GNSSAttitudeContext: ...
+
+class GNSSFieldAttitudeContext: ...
 
 
 class __module_protocol__(typing.Protocol):
@@ -347,11 +405,14 @@ class __module_protocol__(typing.Protocol):
     BeidouGeo: typing.Type[BeidouGeo]
     BeidouIGSO: typing.Type[BeidouIGSO]
     BeidouMeo: typing.Type[BeidouMeo]
+    GNSSAttitudeContext: typing.Type[GNSSAttitudeContext]
     GNSSAttitudeProvider: typing.Type[GNSSAttitudeProvider]
+    GNSSFieldAttitudeContext: typing.Type[GNSSFieldAttitudeContext]
     GPSBlockIIA: typing.Type[GPSBlockIIA]
     GPSBlockIIF: typing.Type[GPSBlockIIF]
     GPSBlockIIR: typing.Type[GPSBlockIIR]
     Galileo: typing.Type[Galileo]
     GenericGNSS: typing.Type[GenericGNSS]
     Glonass: typing.Type[Glonass]
+    PythonAbstractGNSSAttitudeProvider: typing.Type[PythonAbstractGNSSAttitudeProvider]
     PythonGNSSAttitudeProvider: typing.Type[PythonGNSSAttitudeProvider]

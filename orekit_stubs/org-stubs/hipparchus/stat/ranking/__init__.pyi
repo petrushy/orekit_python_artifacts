@@ -55,6 +55,7 @@ class NaNStrategy(java.lang.Enum['NaNStrategy']):
         
             .. code-block: java
             
+            
             for (NaNStrategy c : NaNStrategy.values())
                 System.out.println(c);
             
@@ -144,6 +145,7 @@ class TiesStrategy(java.lang.Enum['TiesStrategy']):
         
             .. code-block: java
             
+            
             for (TiesStrategy c : TiesStrategy.values())
                 System.out.println(c);
             
@@ -168,8 +170,6 @@ class NaturalRanking(RankingAlgorithm):
         :meth:`~org.hipparchus.stat.ranking.TiesStrategy.AVERAGE`, respectively. When using
         :meth:`~org.hipparchus.stat.ranking.TiesStrategy.RANDOM`, a
         :class:`~org.hipparchus.stat.ranking.https:.www.hipparchus.org.hipparchus` may be supplied as a constructor argument.
-    
-        Examples:
     """
     DEFAULT_NAN_STRATEGY: typing.ClassVar[NaNStrategy] = ...
     """

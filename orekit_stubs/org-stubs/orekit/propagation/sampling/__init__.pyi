@@ -1,7 +1,9 @@
 import java.util
 import org.hipparchus
+import org.orekit.frames
 import org.orekit.propagation
 import org.orekit.time
+import org.orekit.utils
 import typing
 
 
@@ -35,9 +37,9 @@ class FieldOrekitStepHandler(typing.Generic[_FieldOrekitStepHandler__T]):
     def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldOrekitStepHandler__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldOrekitStepHandler__T]) -> None: ...
 
 _FieldOrekitStepInterpolator__T = typing.TypeVar('_FieldOrekitStepInterpolator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class FieldOrekitStepInterpolator(typing.Generic[_FieldOrekitStepInterpolator__T]):
+class FieldOrekitStepInterpolator(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrekitStepInterpolator__T], typing.Generic[_FieldOrekitStepInterpolator__T]):
     """
-    public interface FieldOrekitStepInterpolator<T extends :class:`~org.orekit.propagation.sampling.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>>
+    public interface FieldOrekitStepInterpolator<T extends :class:`~org.orekit.propagation.sampling.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T>
     
         This interface is a space-dynamics aware step interpolator.
     
@@ -46,6 +48,7 @@ class FieldOrekitStepInterpolator(typing.Generic[_FieldOrekitStepInterpolator__T
     """
     def getCurrentState(self) -> org.orekit.propagation.FieldSpacecraftState[_FieldOrekitStepInterpolator__T]: ...
     def getInterpolatedState(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldOrekitStepInterpolator__T]) -> org.orekit.propagation.FieldSpacecraftState[_FieldOrekitStepInterpolator__T]: ...
+    def getPVCoordinates(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldOrekitStepInterpolator__T], frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldOrekitStepInterpolator__T]: ...
     def getPreviousState(self) -> org.orekit.propagation.FieldSpacecraftState[_FieldOrekitStepInterpolator__T]: ...
     def isForward(self) -> bool:
         """
@@ -58,6 +61,22 @@ class FieldOrekitStepInterpolator(typing.Generic[_FieldOrekitStepInterpolator__T
         """
         ...
     def restrictStep(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldOrekitStepInterpolator__T], fieldSpacecraftState2: org.orekit.propagation.FieldSpacecraftState[_FieldOrekitStepInterpolator__T]) -> 'FieldOrekitStepInterpolator'[_FieldOrekitStepInterpolator__T]: ...
+
+class MultiSatFixedStepHandler:
+    """
+    public interface MultiSatFixedStepHandler
+    
+        This interface is a space-dynamics aware fixed step handler for
+        :class:`~org.orekit.propagation.PropagatorsParallelizer`.
+    
+        It is a multi-satellite version of the :class:`~org.orekit.propagation.sampling.OrekitFixedStepHandler`.
+    
+        Since:
+            12.0
+    """
+    def finish(self, list: java.util.List[org.orekit.propagation.SpacecraftState]) -> None: ...
+    def handleStep(self, list: java.util.List[org.orekit.propagation.SpacecraftState]) -> None: ...
+    def init(self, list: java.util.List[org.orekit.propagation.SpacecraftState], absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> None: ...
 
 class MultiSatStepHandler:
     """
@@ -174,9 +193,9 @@ class OrekitStepHandler:
         """
         ...
 
-class OrekitStepInterpolator:
+class OrekitStepInterpolator(org.orekit.utils.PVCoordinatesProvider):
     """
-    public interface OrekitStepInterpolator
+    public interface OrekitStepInterpolator extends :class:`~org.orekit.utils.PVCoordinatesProvider`
     
         This interface is a space-dynamics aware step interpolator.
     
@@ -202,6 +221,27 @@ class OrekitStepInterpolator:
         
             Returns:
                 state at interpolated date
+        
+        
+        """
+        ...
+    def getPVCoordinates(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates:
+        """
+            Get the :class:`~org.orekit.utils.PVCoordinates` of the body in the selected frame.
+        
+            Specified by:
+                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates` in
+                interface :class:`~org.orekit.utils.PVCoordinatesProvider`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                frame (:class:`~org.orekit.frames.Frame`): the frame where to define the position
+        
+            Returns:
+                time-stamped position/velocity of the body (m and m/s)
+        
+            Since:
+                12.0
         
         
         """
@@ -360,6 +400,44 @@ class FieldStepHandlerMultiplexer(FieldOrekitStepHandler[_FieldStepHandlerMultip
     @typing.overload
     def remove(self, fieldOrekitStepHandler: FieldOrekitStepHandler[_FieldStepHandlerMultiplexer__T]) -> None: ...
 
+class MultisatStepNormalizer(MultiSatStepHandler):
+    """
+    public class MultisatStepNormalizer extends :class:`~org.orekit.propagation.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.sampling.MultiSatStepHandler`
+    
+        This class wraps an object implementing :class:`~org.orekit.propagation.sampling.MultiSatFixedStepHandler` into a
+        :class:`~org.orekit.propagation.sampling.MultiSatStepHandler`.
+    
+        It mirrors the :code:`StepNormalizer` interface from :class:`~org.orekit.propagation.sampling.https:.hipparchus.org` but
+        provides a space-dynamics interface to the methods.
+    
+        Since:
+            12.0
+    """
+    def __init__(self, double: float, multiSatFixedStepHandler: MultiSatFixedStepHandler): ...
+    def finish(self, list: java.util.List[org.orekit.propagation.SpacecraftState]) -> None: ...
+    def getFixedStepHandler(self) -> MultiSatFixedStepHandler:
+        """
+            Get the underlying fixed step handler.
+        
+            Returns:
+                underlying fixed step handler
+        
+        
+        """
+        ...
+    def getFixedTimeStep(self) -> float:
+        """
+            Get the fixed time step.
+        
+            Returns:
+                fixed time step
+        
+        
+        """
+        ...
+    def handleStep(self, list: java.util.List[OrekitStepInterpolator]) -> None: ...
+    def init(self, list: java.util.List[org.orekit.propagation.SpacecraftState], absoluteDate: org.orekit.time.AbsoluteDate) -> None: ...
+
 class OrekitStepNormalizer(OrekitStepHandler):
     """
     public class OrekitStepNormalizer extends :class:`~org.orekit.propagation.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
@@ -444,17 +522,6 @@ class OrekitStepNormalizer(OrekitStepHandler):
             Parameters:
                 s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
                 t (:class:`~org.orekit.time.AbsoluteDate`): target time for the integration
-        
-        
-        """
-        ...
-    def requiresDenseOutput(self) -> bool:
-        """
-            Determines whether this handler needs dense output. This handler needs dense output in order to provide data at
-            regularly spaced steps regardless of the steps the propagator uses, so this method always returns true.
-        
-            Returns:
-                always true
         
         
         """
@@ -599,9 +666,6 @@ class PythonOrekitFixedStepHandler(OrekitFixedStepHandler):
             Parameters:
                 finalState (:class:`~org.orekit.propagation.SpacecraftState`): state at propagation end
         
-            Since:
-                11.0
-        
         
         """
         ...
@@ -638,23 +702,15 @@ class PythonOrekitFixedStepHandler(OrekitFixedStepHandler):
         
         """
         ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
     def pythonExtension(self, long: int) -> None:
         """
-            Part of JCC Python interface to object
+        public long pythonExtension()
+        
+        
         """
         ...
 
@@ -1038,7 +1094,9 @@ class __module_protocol__(typing.Protocol):
     FieldOrekitStepInterpolator: typing.Type[FieldOrekitStepInterpolator]
     FieldOrekitStepNormalizer: typing.Type[FieldOrekitStepNormalizer]
     FieldStepHandlerMultiplexer: typing.Type[FieldStepHandlerMultiplexer]
+    MultiSatFixedStepHandler: typing.Type[MultiSatFixedStepHandler]
     MultiSatStepHandler: typing.Type[MultiSatStepHandler]
+    MultisatStepNormalizer: typing.Type[MultisatStepNormalizer]
     OrekitFixedStepHandler: typing.Type[OrekitFixedStepHandler]
     OrekitStepHandler: typing.Type[OrekitStepHandler]
     OrekitStepInterpolator: typing.Type[OrekitStepInterpolator]

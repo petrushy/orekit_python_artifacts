@@ -10,9 +10,9 @@ import typing
 
 
 
-class DiscreteTroposphericModel(org.orekit.utils.ParametersDriversProvider):
+class DiscreteTroposphericModel(org.orekit.utils.ParameterDriversProvider):
     """
-    public interface DiscreteTroposphericModel extends :class:`~org.orekit.utils.ParametersDriversProvider`
+    public interface DiscreteTroposphericModel extends :class:`~org.orekit.utils.ParameterDriversProvider`
     
         Defines a tropospheric model, used to calculate the path delay imposed to electro-magnetic signals between an orbital
         satellite and a ground station.
@@ -26,31 +26,6 @@ class DiscreteTroposphericModel(org.orekit.utils.ParametersDriversProvider):
           - δ :sub:`h` = hydrostatic delay
           - δ :sub:`nh` = non-hydrostatic (or wet) delay
     """
-    _getParameters_1__T = typing.TypeVar('_getParameters_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def getParameters(self) -> typing.List[float]:
-        """
-            Get tropospheric model parameters.
-        
-            Returns:
-                tropospheric model parameters
-        
-        """
-        ...
-    @typing.overload
-    def getParameters(self, field: org.hipparchus.Field[_getParameters_1__T]) -> typing.List[_getParameters_1__T]:
-        """
-            Get tropospheric model parameters.
-        
-            Parameters:
-                field (:class:`~org.orekit.models.earth.troposphere.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
-        
-            Returns:
-                tropospheric model parameters
-        
-        
-        """
-        ...
     _pathDelay_1__T = typing.TypeVar('_pathDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def pathDelay(self, double: float, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> float:
@@ -76,7 +51,7 @@ class DiscreteTroposphericModel(org.orekit.utils.ParametersDriversProvider):
             Parameters:
                 elevation (T): the elevation of the satellite, in radians
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                parameters (T[]): tropospheric model parameters
+                parameters (T[]): tropospheric model parameters at current date
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
             Returns:
@@ -504,7 +479,7 @@ class EstimatedTroposphericModel(DiscreteTroposphericModel):
             Parameters:
                 elevation (T): the elevation of the satellite, in radians
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                parameters (T[]): tropospheric model parameters
+                parameters (T[]): tropospheric model parameters at current date
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
             Returns:
@@ -563,7 +538,7 @@ class FixedTroposphericDelay(DiscreteTroposphericModel):
             Parameters:
                 elevation (T): the elevation of the satellite, in radians
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                parameters (T[]): tropospheric model parameters
+                parameters (T[]): tropospheric model parameters at current date
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
             Returns:
@@ -707,7 +682,7 @@ class MariniMurrayModel(DiscreteTroposphericModel):
             Parameters:
                 elevation (T): the elevation of the satellite, in radians
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                parameters (T[]): tropospheric model parameters
+                parameters (T[]): tropospheric model parameters at current date
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
             Returns:
@@ -814,14 +789,19 @@ class PythonDiscreteTroposphericModel(DiscreteTroposphericModel):
     def __init__(self): ...
     def finalize(self) -> None: ...
     _getParameters_1__T = typing.TypeVar('_getParameters_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getParameters_3__T = typing.TypeVar('_getParameters_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getParameters(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]: ...
+    @typing.overload
+    def getParameters(self, field: org.hipparchus.Field[_getParameters_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getParameters_1__T]) -> typing.List[_getParameters_1__T]: ...
     @typing.overload
     def getParameters(self) -> typing.List[float]:
         """
             Get tropospheric model parameters. Extension point for Python.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.getParameters` in
-                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.utils.ParameterDriversProvider.getParameters` in
+                interface :class:`~org.orekit.utils.ParameterDriversProvider`
         
             Returns:
                 tropospheric model parameters
@@ -829,13 +809,13 @@ class PythonDiscreteTroposphericModel(DiscreteTroposphericModel):
         """
         ...
     @typing.overload
-    def getParameters(self, field: org.hipparchus.Field[_getParameters_1__T]) -> typing.List[_getParameters_1__T]:
+    def getParameters(self, field: org.hipparchus.Field[_getParameters_3__T]) -> typing.List[_getParameters_3__T]:
         """
             Get tropospheric model parameters. Extension point for Python.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.getParameters` in
-                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+                :meth:`~org.orekit.utils.ParameterDriversProvider.getParameters` in
+                interface :class:`~org.orekit.utils.ParameterDriversProvider`
         
             Parameters:
                 field (:class:`~org.orekit.models.earth.troposphere.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
@@ -1097,7 +1077,7 @@ class SaastamoinenModel(DiscreteTroposphericModel):
             Parameters:
                 elevation (T): the elevation of the satellite, in radians
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                parameters (T[]): tropospheric model parameters
+                parameters (T[]): tropospheric model parameters at current date
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
             Returns:
@@ -1240,7 +1220,6 @@ class TimeSpanEstimatedTroposphericModel(DiscreteTroposphericModel):
         ...
     def getFirstSpan(self) -> org.orekit.utils.TimeSpanMap.Span[EstimatedTroposphericModel]: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    def getTransitions(self) -> java.util.NavigableSet[org.orekit.utils.TimeSpanMap.Transition[EstimatedTroposphericModel]]: ...
     def getTroposphericModel(self, absoluteDate: org.orekit.time.AbsoluteDate) -> EstimatedTroposphericModel:
         """
             Get the :class:`~org.orekit.models.earth.troposphere.EstimatedTroposphericModel` model valid at a date.
@@ -1287,7 +1266,7 @@ class TimeSpanEstimatedTroposphericModel(DiscreteTroposphericModel):
             Parameters:
                 elevation (T): the elevation of the satellite, in radians
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                parameters (T[]): tropospheric model parameters
+                parameters (T[]): tropospheric model parameters at current date
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
             Returns:
@@ -1440,7 +1419,7 @@ class ViennaOneModel(DiscreteTroposphericModel, MappingFunction):
             Parameters:
                 elevation (T): the elevation of the satellite, in radians
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                parameters (T[]): tropospheric model parameters
+                parameters (T[]): tropospheric model parameters at current date
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
             Returns:

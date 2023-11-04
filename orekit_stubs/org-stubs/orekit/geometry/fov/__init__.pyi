@@ -639,14 +639,31 @@ class PythonSmoothFieldOfView(SmoothFieldOfView):
     """
     public class PythonSmoothFieldOfView extends :class:`~org.orekit.geometry.fov.SmoothFieldOfView`
     """
+    def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float): ...
+    def directionAt(self, double: float) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Get boundary direction at angle.
+        
+            Specified by:
+                :meth:`~org.orekit.geometry.fov.SmoothFieldOfView.directionAt` in
+                class :class:`~org.orekit.geometry.fov.SmoothFieldOfView`
+        
+            Parameters:
+                angle (double): phase angle of the boundary direction
+        
+            Returns:
+                boundary direction at phase angle in spacecraft frame
+        
+        
+        """
+        ...
     def finalize(self) -> None: ...
     def offsetFromBoundary(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float, visibilityTrigger: org.orekit.propagation.events.VisibilityTrigger) -> float:
         """
             Get the offset of target body with respect to the Field Of View Boundary.
         
             The offset is the signed angular distance between target body and closest boundary point, taking into account
-            :class:`~org.orekit.propagation.events.VisibilityTrigger` and
-            :meth:`~org.orekit.geometry.fov.AbstractFieldOfView.getMargin`.
+            :class:`~org.orekit.propagation.events.VisibilityTrigger` and :meth:`~org.orekit.geometry.fov.FieldOfView.getMargin`.
         
             As Field Of View can have complex shapes that may require long computation, when the target point can be proven to be
             outside of the Field Of View, a faster but approximate computation can be used. This approximation is only performed
@@ -655,8 +672,7 @@ class PythonSmoothFieldOfView(SmoothFieldOfView):
             positive value. When target point is close to the zone (and furthermore when it is inside the zone), the full accurate
             computation is performed. This design allows this offset to be used as a reliable way to detect Field Of View boundary
             crossings (taking :class:`~org.orekit.propagation.events.VisibilityTrigger` and
-            :meth:`~org.orekit.geometry.fov.AbstractFieldOfView.getMargin` into account), which correspond to sign changes of the
-            offset.
+            :meth:`~org.orekit.geometry.fov.FieldOfView.getMargin` into account), which correspond to sign changes of the offset.
         
             Parameters:
                 lineOfSight (:class:`~org.orekit.geometry.fov.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): line of sight from the center of the Field Of View support unit sphere to the target in spacecraft frame
@@ -668,7 +684,7 @@ class PythonSmoothFieldOfView(SmoothFieldOfView):
                 (note that this cannot take into account interposing bodies)
         
             Also see:
-                :meth:`~org.orekit.geometry.fov.PythonSmoothFieldOfView.offsetFromBoundary`
+                :meth:`~org.orekit.geometry.fov.FieldOfView.offsetFromBoundary`
         
         
         """

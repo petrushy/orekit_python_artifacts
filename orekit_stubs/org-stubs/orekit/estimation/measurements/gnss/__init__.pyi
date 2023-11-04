@@ -1,17 +1,35 @@
 import java.io
 import java.lang
 import java.util
+import org.hipparchus.geometry.euclidean.threed
 import org.hipparchus.linear
 import org.hipparchus.random
 import org.orekit.estimation.measurements
 import org.orekit.estimation.measurements.generation
+import org.orekit.files.rinex.observation
 import org.orekit.gnss
-import org.orekit.propagation
+import org.orekit.propagation.sampling
 import org.orekit.time
 import org.orekit.utils
 import typing
 
 
+
+_AbstractWindUp__T = typing.TypeVar('_AbstractWindUp__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
+class AbstractWindUp(org.orekit.estimation.measurements.EstimationModifier[_AbstractWindUp__T], typing.Generic[_AbstractWindUp__T]):
+    """
+    public abstract class AbstractWindUp<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<T>
+    
+        Base class for wind-up effect computation.
+    
+        Since:
+            12.0
+    
+        Also see:
+            :class:`~org.orekit.estimation.measurements.gnss.https:.gssc.esa.int.navipedia.index.php.Carrier_Phase_Wind`
+    """
+    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
+    def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[_AbstractWindUp__T]) -> None: ...
 
 class AmbiguityAcceptance:
     """
@@ -145,6 +163,115 @@ class CombinationType(java.lang.Enum['CombinationType']):
         """
         ...
 
+class CombinedObservationData:
+    """
+    public class CombinedObservationData extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Combined observation data.
+    
+        Since:
+            10.1
+    """
+    def __init__(self, combinationType: CombinationType, measurementType: org.orekit.gnss.MeasurementType, double: float, double2: float, list: java.util.List[org.orekit.files.rinex.observation.ObservationData]): ...
+    def getCombinationType(self) -> CombinationType:
+        """
+            Get the type of the combination of measurements used to build the instance.
+        
+            Returns:
+                the combination of measurements type
+        
+        
+        """
+        ...
+    def getCombinedMHzFrequency(self) -> float:
+        """
+            Get the value of the combined frequency in MHz.
+        
+            For the single frequency combinations, this method returns the common frequency of both measurements.
+        
+            Returns:
+                value of the combined frequency in MHz
+        
+        
+        """
+        ...
+    def getMeasurementType(self) -> org.orekit.gnss.MeasurementType:
+        """
+            Get the measurement type.
+        
+            Returns:
+                measurement type
+        
+        
+        """
+        ...
+    def getUsedObservationData(self) -> java.util.List[org.orekit.files.rinex.observation.ObservationData]: ...
+    def getValue(self) -> float:
+        """
+            Get the combined observed value.
+        
+            Returns:
+                observed value (may be :code:`Double.NaN` if observation not available)
+        
+        
+        """
+        ...
+
+class CombinedObservationDataSet(org.orekit.time.TimeStamped):
+    """
+    public class CombinedObservationDataSet extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`
+    
+        Combined observation data set.
+    
+        Since:
+            10.1
+    """
+    def __init__(self, satelliteSystem: org.orekit.gnss.SatelliteSystem, int: int, absoluteDate: org.orekit.time.AbsoluteDate, double: float, list: java.util.List[CombinedObservationData]): ...
+    def getDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Get the date.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeStamped.getDate` in interface :class:`~org.orekit.time.TimeStamped`
+        
+            Returns:
+                date attached to the object
+        
+        
+        """
+        ...
+    def getObservationData(self) -> java.util.List[CombinedObservationData]: ...
+    def getPrnNumber(self) -> int:
+        """
+            Get PRN number.
+        
+            Returns:
+                PRN number of the observed satellite
+        
+        
+        """
+        ...
+    def getRcvrClkOffset(self) -> float:
+        """
+            Get receiver clock offset.
+        
+            Returns:
+                receiver clock offset (it is optional, may be 0)
+        
+        
+        """
+        ...
+    def getSatelliteSystem(self) -> org.orekit.gnss.SatelliteSystem:
+        """
+            Get Satellite System.
+        
+            Returns:
+                satellite system of observed satellite
+        
+        
+        """
+        ...
+
 class CycleSlipDetectorResults:
     """
     public class CycleSlipDetectorResults extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
@@ -205,7 +332,53 @@ class CycleSlipDetectors:
         Since:
             10.2
     """
-    def detect(self, list: java.util.List[org.orekit.gnss.ObservationDataSet]) -> java.util.List[CycleSlipDetectorResults]: ...
+    def detect(self, list: java.util.List[org.orekit.files.rinex.observation.ObservationDataSet]) -> java.util.List[CycleSlipDetectorResults]: ...
+
+class Dipole:
+    """
+    public class Dipole extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Dipole configuration for satellite-to-ground and inter-satellites wind-up effects.
+    
+        The dipole configuration is given by two vectors.
+    
+        Since:
+            12.0
+    
+        Also see:
+            :class:`~org.orekit.estimation.measurements.gnss.WindUp`,
+            :class:`~org.orekit.estimation.measurements.gnss.InterSatellitesWindUp`
+    """
+    CANONICAL_I_J: typing.ClassVar['Dipole'] = ...
+    """
+    public static final :class:`~org.orekit.estimation.measurements.gnss.Dipole` CANONICAL_I_J
+    
+        Canonical dipole, with primary vector set to
+        :meth:`~org.orekit.estimation.measurements.gnss.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D.html?is`
+        and secondary vector set to
+        :meth:`~org.orekit.estimation.measurements.gnss.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D.html?is`.
+    
+    """
+    def getPrimary(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Get the primary dipole vector.
+        
+            Returns:
+                primary dipole vector
+        
+        
+        """
+        ...
+    def getSecondary(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Get the secondary dipole vector.
+        
+            Returns:
+                secondary dipole vector
+        
+        
+        """
+        ...
 
 class IntegerLeastSquareComparator(java.util.Comparator['IntegerLeastSquareSolution'], java.io.Serializable):
     """
@@ -350,6 +523,38 @@ class InterSatellitesPhase(org.orekit.estimation.measurements.AbstractMeasuremen
         """
         ...
 
+class InterSatellitesWindUpFactory:
+    """
+    public class InterSatellitesWindUpFactory extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Factory for :class:`~org.orekit.estimation.measurements.gnss.InterSatellitesWindUp` modifiers.
+    
+        The factory ensures the same instance is returned for all emitter/receiver pair, thus preserving phase continuity for
+        successive measurements involving the same pair.
+    
+        Since:
+            12.0
+    """
+    def __init__(self): ...
+    def getWindUp(self, satelliteSystem: org.orekit.gnss.SatelliteSystem, int: int, dipole: Dipole, satelliteSystem2: org.orekit.gnss.SatelliteSystem, int2: int, dipole2: Dipole) -> 'InterSatellitesWindUp':
+        """
+            Get a modifier for an emitter/receiver pair.
+        
+            Parameters:
+                emitterSystem (:class:`~org.orekit.gnss.SatelliteSystem`): system the emitter satellite belongs to
+                emitterPrnNumber (int): emitter satellite PRN number
+                emitterDipole (:class:`~org.orekit.estimation.measurements.gnss.Dipole`): emitter dipole
+                receiverSystem (:class:`~org.orekit.gnss.SatelliteSystem`): system the receiver satellite belongs to
+                receiverPrnNumber (int): receiver satellite PRN number
+                receiverDipole (:class:`~org.orekit.estimation.measurements.gnss.Dipole`): receiver dipole
+        
+            Returns:
+                modifier for the emitter/receiver pair
+        
+        
+        """
+        ...
+
 class MeasurementCombination:
     """
     public interface MeasurementCombination
@@ -359,12 +564,12 @@ class MeasurementCombination:
         Since:
             10.1
     """
-    def combine(self, observationDataSet: org.orekit.gnss.ObservationDataSet) -> org.orekit.gnss.CombinedObservationDataSet:
+    def combine(self, observationDataSet: org.orekit.files.rinex.observation.ObservationDataSet) -> CombinedObservationDataSet:
         """
             Combines observation data using a combination of measurements.
         
             Parameters:
-                observations (:class:`~org.orekit.gnss.ObservationDataSet`): observation data set
+                observations (:class:`~org.orekit.files.rinex.observation.ObservationDataSet`): observation data set
         
             Returns:
                 a combined observation data set
@@ -588,9 +793,9 @@ class OneWayGNSSRange(org.orekit.estimation.measurements.AbstractMeasurement['On
     """
     def __init__(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, double: float, absoluteDate: org.orekit.time.AbsoluteDate, double2: float, double3: float, double4: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
 
-class Phase(org.orekit.estimation.measurements.AbstractMeasurement['Phase']):
+class Phase(org.orekit.estimation.measurements.GroundReceiverMeasurement['Phase']):
     """
-    public class Phase extends :class:`~org.orekit.estimation.measurements.AbstractMeasurement`<:class:`~org.orekit.estimation.measurements.gnss.Phase`>
+    public class Phase extends :class:`~org.orekit.estimation.measurements.GroundReceiverMeasurement`<:class:`~org.orekit.estimation.measurements.gnss.Phase`>
     
         Class modeling a phase measurement from a ground station.
     
@@ -638,16 +843,6 @@ class Phase(org.orekit.estimation.measurements.AbstractMeasurement['Phase']):
         
         """
         ...
-    def getStation(self) -> org.orekit.estimation.measurements.GroundStation:
-        """
-            Get the ground station from which measurement is performed.
-        
-            Returns:
-                ground station from which measurement is performed
-        
-        
-        """
-        ...
     def getWavelength(self) -> float:
         """
             Get the wavelength.
@@ -669,35 +864,7 @@ class PhaseBuilder(org.orekit.estimation.measurements.generation.AbstractMeasure
             10.1
     """
     def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, groundStation: org.orekit.estimation.measurements.GroundStation, double: float, double2: float, double3: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
-    def build(self, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> Phase:
-        """
-            Generate a single measurement.
-        
-            Parameters:
-                states (:class:`~org.orekit.propagation.SpacecraftState`[]): all spacecraft states (i.e. including ones that may not be relevant for the current builder)
-        
-            Returns:
-                generated measurement
-        
-        
-        """
-        ...
-
-class WindUp(org.orekit.estimation.measurements.EstimationModifier[Phase]):
-    """
-    public class WindUp extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.gnss.Phase`>
-    
-        Modifier for wind-up effect in GNSS :class:`~org.orekit.estimation.measurements.gnss.Phase`.
-    
-        Since:
-            10.1
-    
-        Also see:
-            :class:`~org.orekit.estimation.measurements.gnss.https:.gssc.esa.int.navipedia.index.php.Carrier_Phase_Wind`,
-            :class:`~org.orekit.estimation.measurements.gnss.WindUpFactory`
-    """
-    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[Phase]) -> None: ...
+    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> Phase: ...
 
 class WindUpFactory:
     """
@@ -712,13 +879,14 @@ class WindUpFactory:
             10.1
     """
     def __init__(self): ...
-    def getWindUp(self, satelliteSystem: org.orekit.gnss.SatelliteSystem, int: int, string: str) -> WindUp:
+    def getWindUp(self, satelliteSystem: org.orekit.gnss.SatelliteSystem, int: int, dipole: Dipole, string: str) -> 'WindUp':
         """
             Get a modifier for a satellite/receiver pair.
         
             Parameters:
                 system (:class:`~org.orekit.gnss.SatelliteSystem`): system the satellite belongs to
                 prnNumber (int): PRN number
+                emitterDipole (:class:`~org.orekit.estimation.measurements.gnss.Dipole`): emitter dipole
                 receiverName (:class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the receiver
         
             Returns:
@@ -737,7 +905,7 @@ class AbstractCycleSlipDetector(CycleSlipDetectors):
         Since:
             10.2
     """
-    def detect(self, list: java.util.List[org.orekit.gnss.ObservationDataSet]) -> java.util.List[CycleSlipDetectorResults]: ...
+    def detect(self, list: java.util.List[org.orekit.files.rinex.observation.ObservationDataSet]) -> java.util.List[CycleSlipDetectorResults]: ...
 
 class AbstractDualFrequencyCombination(MeasurementCombination):
     """
@@ -760,13 +928,13 @@ class AbstractDualFrequencyCombination(MeasurementCombination):
     
     """
     @typing.overload
-    def combine(self, observationData: org.orekit.gnss.ObservationData, observationData2: org.orekit.gnss.ObservationData) -> org.orekit.gnss.CombinedObservationData:
+    def combine(self, observationData: org.orekit.files.rinex.observation.ObservationData, observationData2: org.orekit.files.rinex.observation.ObservationData) -> CombinedObservationData:
         """
             Combines observation data using a dual frequency combination of measurements.
         
             Parameters:
-                od1 (:class:`~org.orekit.gnss.ObservationData`): first observation data to combined
-                od2 (:class:`~org.orekit.gnss.ObservationData`): second observation data to combined
+                od1 (:class:`~org.orekit.files.rinex.observation.ObservationData`): first observation data to combined
+                od2 (:class:`~org.orekit.files.rinex.observation.ObservationData`): second observation data to combined
         
             Returns:
                 a combined observation data
@@ -774,7 +942,7 @@ class AbstractDualFrequencyCombination(MeasurementCombination):
         """
         ...
     @typing.overload
-    def combine(self, observationDataSet: org.orekit.gnss.ObservationDataSet) -> org.orekit.gnss.CombinedObservationDataSet:
+    def combine(self, observationDataSet: org.orekit.files.rinex.observation.ObservationDataSet) -> CombinedObservationDataSet:
         """
             Combines observation data using a combination of measurements.
         
@@ -783,7 +951,7 @@ class AbstractDualFrequencyCombination(MeasurementCombination):
                 interface :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
         
             Parameters:
-                observations (:class:`~org.orekit.gnss.ObservationDataSet`): observation data set
+                observations (:class:`~org.orekit.files.rinex.observation.ObservationDataSet`): observation data set
         
             Returns:
                 a combined observation data set
@@ -853,13 +1021,13 @@ class AbstractSingleFrequencyCombination(MeasurementCombination):
             10.1
     """
     @typing.overload
-    def combine(self, observationData: org.orekit.gnss.ObservationData, observationData2: org.orekit.gnss.ObservationData) -> org.orekit.gnss.CombinedObservationData:
+    def combine(self, observationData: org.orekit.files.rinex.observation.ObservationData, observationData2: org.orekit.files.rinex.observation.ObservationData) -> CombinedObservationData:
         """
             Combines observation data using a single frequency combination of measurements.
         
             Parameters:
-                phase (:class:`~org.orekit.gnss.ObservationData`): phase measurement
-                pseudoRange (:class:`~org.orekit.gnss.ObservationData`): pseudoRange measurement
+                phase (:class:`~org.orekit.files.rinex.observation.ObservationData`): phase measurement
+                pseudoRange (:class:`~org.orekit.files.rinex.observation.ObservationData`): pseudoRange measurement
         
             Returns:
                 a combined observation data
@@ -868,7 +1036,7 @@ class AbstractSingleFrequencyCombination(MeasurementCombination):
         """
         ...
     @typing.overload
-    def combine(self, observationDataSet: org.orekit.gnss.ObservationDataSet) -> org.orekit.gnss.CombinedObservationDataSet:
+    def combine(self, observationDataSet: org.orekit.files.rinex.observation.ObservationDataSet) -> CombinedObservationDataSet:
         """
             Combines observation data using a combination of measurements.
         
@@ -877,7 +1045,7 @@ class AbstractSingleFrequencyCombination(MeasurementCombination):
                 interface :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
         
             Parameters:
-                observations (:class:`~org.orekit.gnss.ObservationDataSet`): observation data set
+                observations (:class:`~org.orekit.files.rinex.observation.ObservationDataSet`): observation data set
         
             Returns:
                 a combined observation data set
@@ -898,6 +1066,20 @@ class AbstractSingleFrequencyCombination(MeasurementCombination):
         
         """
         ...
+
+class InterSatellitesWindUp(AbstractWindUp[InterSatellitesPhase]):
+    """
+    public class InterSatellitesWindUp extends :class:`~org.orekit.estimation.measurements.gnss.AbstractWindUp`<:class:`~org.orekit.estimation.measurements.gnss.InterSatellitesPhase`>
+    
+        Modifier for wind-up effect in GNSS :class:`~org.orekit.estimation.measurements.gnss.InterSatellitesPhase`.
+    
+        Since:
+            12.0
+    
+        Also see:
+            :class:`~org.orekit.estimation.measurements.gnss.InterSatellitesWindUpFactory`
+    """
+    ...
 
 class MelbourneWubbenaCombination(MeasurementCombination):
     """
@@ -935,7 +1117,7 @@ class MelbourneWubbenaCombination(MeasurementCombination):
             "Detector based in code and carrier phase data: The Melbourne-Wübbena combination, J. Sanz Subirana, J.M. Juan Zornoza
             and M. Hernández-Pajares, 2011"
     """
-    def combine(self, observationDataSet: org.orekit.gnss.ObservationDataSet) -> org.orekit.gnss.CombinedObservationDataSet:
+    def combine(self, observationDataSet: org.orekit.files.rinex.observation.ObservationDataSet) -> CombinedObservationDataSet:
         """
             Combines observation data using a combination of measurements.
         
@@ -944,7 +1126,7 @@ class MelbourneWubbenaCombination(MeasurementCombination):
                 interface :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
         
             Parameters:
-                observations (:class:`~org.orekit.gnss.ObservationDataSet`): observation data set
+                observations (:class:`~org.orekit.files.rinex.observation.ObservationDataSet`): observation data set
         
             Returns:
                 a combined observation data set
@@ -966,6 +1148,35 @@ class MelbourneWubbenaCombination(MeasurementCombination):
         
         """
         ...
+
+_PythonAbstractWindUp__T = typing.TypeVar('_PythonAbstractWindUp__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
+class PythonAbstractWindUp(AbstractWindUp[_PythonAbstractWindUp__T], typing.Generic[_PythonAbstractWindUp__T]):
+    """
+    public class PythonAbstractWindUp<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.gnss.AbstractWindUp`<T>
+    """
+    def __init__(self, dipole: Dipole, dipole2: Dipole): ...
+    def emitterToInert(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[_PythonAbstractWindUp__T]) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+    def receiverToInert(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[_PythonAbstractWindUp__T]) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
 
 class PythonAmbiguityAcceptance(AmbiguityAcceptance):
     """
@@ -1030,7 +1241,7 @@ class PythonCycleSlipDetectors(CycleSlipDetectors):
     public class PythonCycleSlipDetectors extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.gnss.CycleSlipDetectors`
     """
     def __init__(self): ...
-    def detect(self, list: java.util.List[org.orekit.gnss.ObservationDataSet]) -> java.util.List[CycleSlipDetectorResults]: ...
+    def detect(self, list: java.util.List[org.orekit.files.rinex.observation.ObservationDataSet]) -> java.util.List[CycleSlipDetectorResults]: ...
     def finalize(self) -> None: ...
     def pythonDecRef(self) -> None:
         """
@@ -1103,7 +1314,7 @@ class PythonMeasurementCombination(MeasurementCombination):
     public class PythonMeasurementCombination extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
     """
     def __init__(self): ...
-    def combine(self, observationDataSet: org.orekit.gnss.ObservationDataSet) -> org.orekit.gnss.CombinedObservationDataSet:
+    def combine(self, observationDataSet: org.orekit.files.rinex.observation.ObservationDataSet) -> CombinedObservationDataSet:
         """
             Combines observation data using a combination of measurements.
         
@@ -1112,7 +1323,7 @@ class PythonMeasurementCombination(MeasurementCombination):
                 interface :class:`~org.orekit.estimation.measurements.gnss.MeasurementCombination`
         
             Parameters:
-                observations (:class:`~org.orekit.gnss.ObservationDataSet`): observation data set
+                observations (:class:`~org.orekit.files.rinex.observation.ObservationDataSet`): observation data set
         
             Returns:
                 a combined observation data set
@@ -1204,6 +1415,20 @@ class SimpleRatioAmbiguityAcceptance(AmbiguityAcceptance):
         """
         ...
 
+class WindUp(AbstractWindUp[Phase]):
+    """
+    public class WindUp extends :class:`~org.orekit.estimation.measurements.gnss.AbstractWindUp`<:class:`~org.orekit.estimation.measurements.gnss.Phase`>
+    
+        Modifier for wind-up effect in GNSS :class:`~org.orekit.estimation.measurements.gnss.Phase`.
+    
+        Since:
+            10.1
+    
+        Also see:
+            :class:`~org.orekit.estimation.measurements.gnss.WindUpFactory`
+    """
+    ...
+
 class GRAPHICCombination(AbstractSingleFrequencyCombination):
     """
     public class GRAPHICCombination extends :class:`~org.orekit.estimation.measurements.gnss.AbstractSingleFrequencyCombination`
@@ -1270,7 +1495,6 @@ class GeometryFreeCycleSlipDetector(AbstractCycleSlipDetector):
         can have access to a List of CycleData. Each CycleDate represents a link between the station (define by the RINEX file)
         and a satellite at a specific frequency. For each cycle data, one has access to the begin and end of availability, and a
         sorted set which contains all the date at which cycle-slip have been detected
-    
     
         Since:
             10.2
@@ -1426,7 +1650,6 @@ class PhaseMinusCodeCycleSlipDetector(AbstractCycleSlipDetector):
         and a satellite at a specific frequency. For each cycle data, one has access to the begin and end of availability, and a
         sorted set which contains all the date at which cycle-slip have been detected
     
-    
         Since:
             10.2
     """
@@ -1485,7 +1708,7 @@ class PythonAbstractCycleSlipDetector(AbstractCycleSlipDetector):
         ...
     def getResults(self) -> java.util.List[CycleSlipDetectorResults]: ...
     def getStuffReference(self) -> java.util.List[java.util.Map[org.orekit.gnss.Frequency, 'AbstractCycleSlipDetector.DataForDetection']]: ...
-    def manageData(self, observationDataSet: org.orekit.gnss.ObservationDataSet) -> None:
+    def manageData(self, observationDataSet: org.orekit.files.rinex.observation.ObservationDataSet) -> None:
         """
             The method is in charge of collecting the measurements, manage them, and call the detection method.
         
@@ -1494,7 +1717,7 @@ class PythonAbstractCycleSlipDetector(AbstractCycleSlipDetector):
                 class :class:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector`
         
             Parameters:
-                observation (:class:`~org.orekit.gnss.ObservationDataSet`): observation data set
+                observation (:class:`~org.orekit.files.rinex.observation.ObservationDataSet`): observation data set
         
         
         """
@@ -1678,6 +1901,7 @@ class PythonAbstractSingleFrequencyCombination(AbstractSingleFrequencyCombinatio
     """
     public class PythonAbstractSingleFrequencyCombination extends :class:`~org.orekit.estimation.measurements.gnss.AbstractSingleFrequencyCombination`
     """
+    def __init__(self, combinationType: CombinationType, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
     def finalize(self) -> None: ...
     def getCombinedValue(self, double: float, double2: float) -> float:
         """
@@ -1781,11 +2005,15 @@ class __module_protocol__(typing.Protocol):
     AbstractDualFrequencyCombination: typing.Type[AbstractDualFrequencyCombination]
     AbstractLambdaMethod: typing.Type[AbstractLambdaMethod]
     AbstractSingleFrequencyCombination: typing.Type[AbstractSingleFrequencyCombination]
+    AbstractWindUp: typing.Type[AbstractWindUp]
     AmbiguityAcceptance: typing.Type[AmbiguityAcceptance]
     AmbiguitySolver: typing.Type[AmbiguitySolver]
     CombinationType: typing.Type[CombinationType]
+    CombinedObservationData: typing.Type[CombinedObservationData]
+    CombinedObservationDataSet: typing.Type[CombinedObservationDataSet]
     CycleSlipDetectorResults: typing.Type[CycleSlipDetectorResults]
     CycleSlipDetectors: typing.Type[CycleSlipDetectors]
+    Dipole: typing.Type[Dipole]
     GRAPHICCombination: typing.Type[GRAPHICCombination]
     GeometryFreeCombination: typing.Type[GeometryFreeCombination]
     GeometryFreeCycleSlipDetector: typing.Type[GeometryFreeCycleSlipDetector]
@@ -1794,6 +2022,8 @@ class __module_protocol__(typing.Protocol):
     IntegerLeastSquareSolution: typing.Type[IntegerLeastSquareSolution]
     IntegerLeastSquareSolver: typing.Type[IntegerLeastSquareSolver]
     InterSatellitesPhase: typing.Type[InterSatellitesPhase]
+    InterSatellitesWindUp: typing.Type[InterSatellitesWindUp]
+    InterSatellitesWindUpFactory: typing.Type[InterSatellitesWindUpFactory]
     IonosphereFreeCombination: typing.Type[IonosphereFreeCombination]
     LambdaMethod: typing.Type[LambdaMethod]
     MeasurementCombination: typing.Type[MeasurementCombination]
@@ -1811,6 +2041,7 @@ class __module_protocol__(typing.Protocol):
     PythonAbstractDualFrequencyCombination: typing.Type[PythonAbstractDualFrequencyCombination]
     PythonAbstractLambdaMethod: typing.Type[PythonAbstractLambdaMethod]
     PythonAbstractSingleFrequencyCombination: typing.Type[PythonAbstractSingleFrequencyCombination]
+    PythonAbstractWindUp: typing.Type[PythonAbstractWindUp]
     PythonAmbiguityAcceptance: typing.Type[PythonAmbiguityAcceptance]
     PythonCycleSlipDetectors: typing.Type[PythonCycleSlipDetectors]
     PythonIntegerLeastSquareSolver: typing.Type[PythonIntegerLeastSquareSolver]

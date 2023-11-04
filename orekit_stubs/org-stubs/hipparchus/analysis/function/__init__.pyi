@@ -770,7 +770,7 @@ class Gaussian(org.hipparchus.analysis.differentiation.UnivariateDifferentiableF
             Returns:
                 the value of the function.
         
-        public <T extends :class:`~org.hipparchus.analysis.differentiation.Derivative`<T>> T value(T t) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public <T extends :class:`~org.hipparchus.analysis.differentiation.Derivative`<T>> T value (T t) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Compute the value for the function.
         
@@ -821,7 +821,7 @@ class HarmonicOscillator(org.hipparchus.analysis.differentiation.UnivariateDiffe
             Returns:
                 the value of the function.
         
-        public <T extends :class:`~org.hipparchus.analysis.differentiation.Derivative`<T>> T value(T t) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public <T extends :class:`~org.hipparchus.analysis.differentiation.Derivative`<T>> T value (T t) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Compute the value for the function.
         
@@ -1402,7 +1402,7 @@ class Sigmoid(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFu
             Returns:
                 the value of the function.
         
-        public <T extends :class:`~org.hipparchus.analysis.differentiation.Derivative`<T>> T value(T t) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public <T extends :class:`~org.hipparchus.analysis.differentiation.Derivative`<T>> T value (T t) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Compute the value for the function.
         
@@ -1482,6 +1482,7 @@ class Sinc(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
     
         .. code-block: java
         
+        
            sinc(x) = 1            if x = 0,
                      sin(x) / x   otherwise.
     """
@@ -1505,7 +1506,7 @@ class Sinc(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunct
             Returns:
                 the value of the function.
         
-        public <T extends :class:`~org.hipparchus.analysis.differentiation.Derivative`<T>> T value(T t) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public <T extends :class:`~org.hipparchus.analysis.differentiation.Derivative`<T>> T value (T t) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Compute the value for the function.
         

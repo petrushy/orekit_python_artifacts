@@ -1,5 +1,6 @@
 import java.lang
 import java.util
+import java.util.function
 import org.orekit.data
 import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
@@ -631,9 +632,9 @@ class RangeUnitsConverter:
         """
         ...
 
-class Tdm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.section.Header, org.orekit.files.ccsds.section.Segment['TdmMetadata', ObservationsBlock]]):
+class Tdm(org.orekit.files.ccsds.ndm.NdmConstituent['TdmHeader', org.orekit.files.ccsds.section.Segment['TdmMetadata', ObservationsBlock]]):
     """
-    public class Tdm extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.section.Header`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata`, :class:`~org.orekit.files.ccsds.ndm.tdm.ObservationsBlock`>>
+    public class Tdm extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.ndm.tdm.TdmHeader`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata`, :class:`~org.orekit.files.ccsds.ndm.tdm.ObservationsBlock`>>
     
         This class stores all the information of the CCSDS Tracking Data Message parsed by TDMParser or TDMXMLParser.
     
@@ -675,7 +676,7 @@ class Tdm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.secti
     
     
     """
-    def __init__(self, header: org.orekit.files.ccsds.section.Header, list: java.util.List[org.orekit.files.ccsds.section.Segment['TdmMetadata', ObservationsBlock]], iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext): ...
+    def __init__(self, tdmHeader: 'TdmHeader', list: java.util.List[org.orekit.files.ccsds.section.Segment['TdmMetadata', ObservationsBlock]], iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext): ...
 
 class TdmDataKey(java.lang.Enum['TdmDataKey']):
     """
@@ -746,6 +747,17 @@ class TdmDataKey(java.lang.Enum['TdmDataKey']):
         
         """
         ...
+
+class TdmHeader(org.orekit.files.ccsds.section.Header):
+    """
+    public class TdmHeader extends :class:`~org.orekit.files.ccsds.section.Header`
+    
+        Header of a CCSDS Tracking Data Message.
+    
+        Since:
+            12.0
+    """
+    def __init__(self): ...
 
 class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
     """
@@ -1728,9 +1740,9 @@ class TdmMetadataKey(java.lang.Enum['TdmMetadataKey']):
         """
         ...
 
-class TdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[Tdm, 'TdmParser']):
+class TdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[TdmHeader, Tdm, 'TdmParser']):
     """
-    public class TdmParser extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<:class:`~org.orekit.files.ccsds.ndm.tdm.Tdm`, :class:`~org.orekit.files.ccsds.ndm.tdm.TdmParser`>
+    public class TdmParser extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<:class:`~org.orekit.files.ccsds.ndm.tdm.TdmHeader`, :class:`~org.orekit.files.ccsds.ndm.tdm.Tdm`, :class:`~org.orekit.files.ccsds.ndm.tdm.TdmParser`>
     
         Class for CCSDS Tracking Data Message parsers.
     
@@ -1741,17 +1753,16 @@ class TdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[T
     
         References:
     
-        - :class:`~org.orekit.files.ccsds.ndm.tdm.https:.public.ccsds.org.Pubs.503x0b1c1.pdf` ("Tracking Data Message", Blue
-        Book, Issue 1, November 2007).
-    
-        - :class:`~org.orekit.files.ccsds.ndm.tdm.https:.public.ccsds.org.Pubs.505x0b1.pdf` ("XML Specification for Navigation
-        Data Message", Blue Book, Issue 1, December 2010).
+          - :class:`~org.orekit.files.ccsds.ndm.tdm.https:.public.ccsds.org.Pubs.503x0b1c1.pdf` ("Tracking Data Message", Blue Book,
+            Issue 1, November 2007)
+          - :class:`~org.orekit.files.ccsds.ndm.tdm.https:.public.ccsds.org.Pubs.505x0b1.pdf` ("XML Specification for Navigation
+            Data Message", Blue Book, Issue 1, December 2010)
     
     
         Since:
             9.0
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, rangeUnitsConverter: RangeUnitsConverter): ...
+    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, rangeUnitsConverter: RangeUnitsConverter, functionArray: typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]): ...
     def build(self) -> Tdm:
         """
             Build the file from parsed entries.
@@ -1804,7 +1815,7 @@ class TdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[T
         
         """
         ...
-    def getHeader(self) -> org.orekit.files.ccsds.section.Header:
+    def getHeader(self) -> TdmHeader:
         """
             Get file header to fill.
         
@@ -1913,9 +1924,9 @@ class TdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[T
         """
         ...
 
-class TdmWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[org.orekit.files.ccsds.section.Header, org.orekit.files.ccsds.section.Segment[TdmMetadata, ObservationsBlock], Tdm]):
+class TdmWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[TdmHeader, org.orekit.files.ccsds.section.Segment[TdmMetadata, ObservationsBlock], Tdm]):
     """
-    public class TdmWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.section.Header`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata`, :class:`~org.orekit.files.ccsds.ndm.tdm.ObservationsBlock`>, :class:`~org.orekit.files.ccsds.ndm.tdm.Tdm`>
+    public class TdmWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.ndm.tdm.TdmHeader`, :class:`~org.orekit.files.ccsds.section.Segment`<:class:`~org.orekit.files.ccsds.ndm.tdm.TdmMetadata`, :class:`~org.orekit.files.ccsds.ndm.tdm.ObservationsBlock`>, :class:`~org.orekit.files.ccsds.ndm.tdm.Tdm`>
     
         Writer for CCSDS Tracking Data Message.
     
@@ -1945,7 +1956,6 @@ class TdmWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[or
     
     """
     def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext, rangeUnitsConverter: RangeUnitsConverter): ...
-    def writeSegmentContent(self, generator: org.orekit.files.ccsds.utils.generation.Generator, double: float, segment: org.orekit.files.ccsds.section.Segment[TdmMetadata, ObservationsBlock]) -> None: ...
 
 class TimetagReference(java.lang.Enum['TimetagReference']):
     """
@@ -2060,7 +2070,6 @@ class IdentityConverter(RangeUnitsConverter):
     public class IdentityConverter extends :class:`~org.orekit.files.ccsds.ndm.tdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`
     
         Identity converter for Range Units.
-    
     
         Since:
             11.0
@@ -2187,6 +2196,7 @@ class __module_protocol__(typing.Protocol):
     RangeUnitsConverter: typing.Type[RangeUnitsConverter]
     Tdm: typing.Type[Tdm]
     TdmDataKey: typing.Type[TdmDataKey]
+    TdmHeader: typing.Type[TdmHeader]
     TdmMetadata: typing.Type[TdmMetadata]
     TdmMetadataKey: typing.Type[TdmMetadataKey]
     TdmParser: typing.Type[TdmParser]

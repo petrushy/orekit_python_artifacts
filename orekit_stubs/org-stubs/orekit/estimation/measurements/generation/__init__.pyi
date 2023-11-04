@@ -1,5 +1,6 @@
 import java.lang
 import java.util
+import java.util.function
 import org.hipparchus.random
 import org.orekit.estimation.measurements
 import org.orekit.estimation.measurements.gnss
@@ -11,6 +12,40 @@ import org.orekit.time
 import typing
 
 
+
+class GeneratedMeasurementSubscriber:
+    """
+    public interface GeneratedMeasurementSubscriber
+    
+        Interface for subscribing to generated :class:`~org.orekit.estimation.measurements.ObservedMeasurement` events.
+    
+        Since:
+            12.0
+    """
+    def handleGeneratedMeasurement(self, observedMeasurement: org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]) -> None:
+        """
+            Handle a generated measurement.
+        
+            Parameters:
+                measurement (:class:`~org.orekit.estimation.measurements.ObservedMeasurement`<?> measurement): measurements that has just been generated
+        
+        
+        """
+        ...
+    def init(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> None:
+        """
+            Initialize subscriber at the start of a measurements generation.
+        
+            This method is called once at the start of the measurements generation. It may be used by the subscriber to initialize
+            some internal data if needed.
+        
+            Parameters:
+                start (:class:`~org.orekit.time.AbsoluteDate`): start of the measurements time span
+                end (:class:`~org.orekit.time.AbsoluteDate`): end of the measurements time span
+        
+        
+        """
+        ...
 
 class Generator:
     """
@@ -46,7 +81,33 @@ class Generator:
         
         """
         ...
-    def generate(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> java.util.SortedSet[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]]: ...
+    def addSubscriber(self, generatedMeasurementSubscriber: GeneratedMeasurementSubscriber) -> None:
+        """
+            Add a subscriber.
+        
+            Parameters:
+                subscriber (:class:`~org.orekit.estimation.measurements.generation.GeneratedMeasurementSubscriber`): to add
+        
+            Since:
+                12.0
+        
+            Also see:
+                :class:`~org.orekit.estimation.measurements.generation.GatheringSubscriber`
+        
+        
+        """
+        ...
+    def generate(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> None:
+        """
+            Generate measurements.
+        
+            Parameters:
+                start (:class:`~org.orekit.time.AbsoluteDate`): start of the measurements time span
+                end (:class:`~org.orekit.time.AbsoluteDate`): end of the measurements time span
+        
+        
+        """
+        ...
     def getPropagator(self, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite) -> org.orekit.propagation.Propagator:
         """
             Get a registered propagator.
@@ -72,20 +133,21 @@ class MeasurementBuilder(typing.Generic[_MeasurementBuilder__T]):
             9.3
     """
     def addModifier(self, estimationModifier: org.orekit.estimation.measurements.EstimationModifier[_MeasurementBuilder__T]) -> None: ...
-    def build(self, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> _MeasurementBuilder__T:
+    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> _MeasurementBuilder__T: ...
+    def getModifiers(self) -> java.util.List[org.orekit.estimation.measurements.EstimationModifier[_MeasurementBuilder__T]]: ...
+    def getSatellites(self) -> typing.List[org.orekit.estimation.measurements.ObservableSatellite]:
         """
-            Generate a single measurement.
-        
-            Parameters:
-                states (:class:`~org.orekit.propagation.SpacecraftState`[]): all spacecraft states (i.e. including ones that may not be relevant for the current builder)
+            Get the satellites related to this measurement.
         
             Returns:
-                generated measurement
+                satellites related to this measurement
+        
+            Since:
+                12.0
         
         
         """
         ...
-    def getModifiers(self) -> java.util.List[org.orekit.estimation.measurements.EstimationModifier[_MeasurementBuilder__T]]: ...
     def init(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> None:
         """
             Initialize builder at the start of a measurements generation.
@@ -111,7 +173,8 @@ class Scheduler(typing.Generic[_Scheduler__T]):
         Since:
             9.3
     """
-    def generate(self, list: java.util.List[org.orekit.propagation.sampling.OrekitStepInterpolator]) -> java.util.SortedSet[_Scheduler__T]: ...
+    def generate(self, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> java.util.SortedSet[_Scheduler__T]: ...
+    def getBuilder(self) -> MeasurementBuilder[_Scheduler__T]: ...
     def init(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> None:
         """
             Initialize scheduler at the start of a measurements generation.
@@ -209,6 +272,20 @@ class AbstractMeasurementBuilder(MeasurementBuilder[_AbstractMeasurementBuilder_
     """
     def addModifier(self, estimationModifier: org.orekit.estimation.measurements.EstimationModifier[_AbstractMeasurementBuilder__T]) -> None: ...
     def getModifiers(self) -> java.util.List[org.orekit.estimation.measurements.EstimationModifier[_AbstractMeasurementBuilder__T]]: ...
+    def getSatellites(self) -> typing.List[org.orekit.estimation.measurements.ObservableSatellite]:
+        """
+            Get the satellites related to this measurement.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.generation.MeasurementBuilder.getSatellites` in
+                interface :class:`~org.orekit.estimation.measurements.generation.MeasurementBuilder`
+        
+            Returns:
+                satellites related to this measurement
+        
+        
+        """
+        ...
     def init(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> None:
         """
             Initialize builder at the start of a measurements generation.
@@ -241,6 +318,7 @@ class AbstractScheduler(Scheduler[_AbstractScheduler__T], typing.Generic[_Abstra
         Since:
             9.3
     """
+    def generate(self, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> java.util.SortedSet[_AbstractScheduler__T]: ...
     def getBuilder(self) -> MeasurementBuilder[_AbstractScheduler__T]: ...
     def getSelector(self) -> org.orekit.time.DatesSelector:
         """
@@ -273,6 +351,152 @@ class AbstractScheduler(Scheduler[_AbstractScheduler__T], typing.Generic[_Abstra
         """
         ...
 
+class GatheringSubscriber(GeneratedMeasurementSubscriber):
+    """
+    public class GatheringSubscriber extends :class:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.generation.GeneratedMeasurementSubscriber`
+    
+        Subscriber that gather all generated measurements in a sorted set.
+    
+        Since:
+            12.0
+    """
+    def __init__(self): ...
+    def getGeneratedMeasurements(self) -> java.util.SortedSet[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]]: ...
+    def handleGeneratedMeasurement(self, observedMeasurement: org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]) -> None:
+        """
+            Handle a generated measurement.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.generation.GeneratedMeasurementSubscriber.handleGeneratedMeasurement` in
+                interface :class:`~org.orekit.estimation.measurements.generation.GeneratedMeasurementSubscriber`
+        
+            Parameters:
+                measurement (:class:`~org.orekit.estimation.measurements.ObservedMeasurement`<?> measurement): measurements that has just been generated
+        
+        
+        """
+        ...
+    def init(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> None:
+        """
+            Initialize subscriber at the start of a measurements generation.
+        
+            This method is called once at the start of the measurements generation. It may be used by the subscriber to initialize
+            some internal data if needed.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.generation.GeneratedMeasurementSubscriber.init` in
+                interface :class:`~org.orekit.estimation.measurements.generation.GeneratedMeasurementSubscriber`
+        
+            Parameters:
+                start (:class:`~org.orekit.time.AbsoluteDate`): start of the measurements time span
+                end (:class:`~org.orekit.time.AbsoluteDate`): end of the measurements time span
+        
+        
+        """
+        ...
+
+class MultiplexedMeasurementBuilder(MeasurementBuilder[org.orekit.estimation.measurements.MultiplexedMeasurement]):
+    """
+    public class MultiplexedMeasurementBuilder extends :class:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.generation.MeasurementBuilder`<:class:`~org.orekit.estimation.measurements.MultiplexedMeasurement`>
+    
+        Builder for :class:`~org.orekit.estimation.measurements.MultiplexedMeasurement` measurements.
+    
+        Since:
+            12.0
+    """
+    def __init__(self, list: java.util.List[MeasurementBuilder[typing.Any]]): ...
+    def addModifier(self, estimationModifier: org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.MultiplexedMeasurement]) -> None: ...
+    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> org.orekit.estimation.measurements.MultiplexedMeasurement: ...
+    def getModifiers(self) -> java.util.List[org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.MultiplexedMeasurement]]: ...
+    def getSatellites(self) -> typing.List[org.orekit.estimation.measurements.ObservableSatellite]:
+        """
+            Get the satellites related to this measurement.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.generation.MeasurementBuilder.getSatellites` in
+                interface :class:`~org.orekit.estimation.measurements.generation.MeasurementBuilder`
+        
+            Returns:
+                satellites related to this measurement
+        
+        
+        """
+        ...
+    def init(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> None:
+        """
+            Initialize builder at the start of a measurements generation.
+        
+            This method is called once at the start of the measurements generation. It may be used by the builder to initialize some
+            internal data if needed, typically setting up parameters reference dates.
+        
+            This implementation stores the time span of the measurements generation.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.generation.MeasurementBuilder.init` in
+                interface :class:`~org.orekit.estimation.measurements.generation.MeasurementBuilder`
+        
+            Parameters:
+                start (:class:`~org.orekit.time.AbsoluteDate`): start of the measurements time span
+                end (:class:`~org.orekit.time.AbsoluteDate`): end of the measurements time span
+        
+        
+        """
+        ...
+
+class PythonGeneratedMeasurementSubscriber(GeneratedMeasurementSubscriber):
+    """
+    public class PythonGeneratedMeasurementSubscriber extends :class:`~org.orekit.estimation.measurements.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.generation.GeneratedMeasurementSubscriber`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def handleGeneratedMeasurement(self, observedMeasurement: org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]) -> None:
+        """
+            Description copied from
+            interface: :meth:`~org.orekit.estimation.measurements.generation.GeneratedMeasurementSubscriber.handleGeneratedMeasurement`
+            Handle a generated measurement.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.generation.GeneratedMeasurementSubscriber.handleGeneratedMeasurement` in
+                interface :class:`~org.orekit.estimation.measurements.generation.GeneratedMeasurementSubscriber`
+        
+            Parameters:
+                measurement (:class:`~org.orekit.estimation.measurements.ObservedMeasurement`<?> measurement): measurements that has just been generated
+        
+        
+        """
+        ...
+    def init(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> None:
+        """
+            Description copied from
+            interface: :meth:`~org.orekit.estimation.measurements.generation.GeneratedMeasurementSubscriber.init`
+            Initialize subscriber at the start of a measurements generation.
+        
+            This method is called once at the start of the measurements generation. It may be used by the subscriber to initialize
+            some internal data if needed.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.generation.GeneratedMeasurementSubscriber.init` in
+                interface :class:`~org.orekit.estimation.measurements.generation.GeneratedMeasurementSubscriber`
+        
+            Parameters:
+                start (:class:`~org.orekit.time.AbsoluteDate`): start of the measurements time span
+                end (:class:`~org.orekit.time.AbsoluteDate`): end of the measurements time span
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+        public long pythonExtension()
+        
+        
+        """
+        ...
+
 _PythonMeasurementBuilder__T = typing.TypeVar('_PythonMeasurementBuilder__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class PythonMeasurementBuilder(MeasurementBuilder[_PythonMeasurementBuilder__T], typing.Generic[_PythonMeasurementBuilder__T]):
     """
@@ -280,25 +504,25 @@ class PythonMeasurementBuilder(MeasurementBuilder[_PythonMeasurementBuilder__T],
     """
     def __init__(self): ...
     def addModifier(self, estimationModifier: org.orekit.estimation.measurements.EstimationModifier[_PythonMeasurementBuilder__T]) -> None: ...
-    def build(self, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> _PythonMeasurementBuilder__T:
+    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> _PythonMeasurementBuilder__T: ...
+    def finalize(self) -> None: ...
+    def getModifiers(self) -> java.util.List[org.orekit.estimation.measurements.EstimationModifier[_PythonMeasurementBuilder__T]]: ...
+    def getSatellites(self) -> typing.List[org.orekit.estimation.measurements.ObservableSatellite]:
         """
-            Generate a single measurement.
+            Description copied from
+            interface: :meth:`~org.orekit.estimation.measurements.generation.MeasurementBuilder.getSatellites`
+            Get the satellites related to this measurement.
         
             Specified by:
-                :meth:`~org.orekit.estimation.measurements.generation.MeasurementBuilder.build` in
+                :meth:`~org.orekit.estimation.measurements.generation.MeasurementBuilder.getSatellites` in
                 interface :class:`~org.orekit.estimation.measurements.generation.MeasurementBuilder`
         
-            Parameters:
-                states (:class:`~org.orekit.propagation.SpacecraftState`[]): all spacecraft states (i.e. including ones that may not be relevant for the current builder)
-        
             Returns:
-                generated measurement
+                satellites related to this measurement
         
         
         """
         ...
-    def finalize(self) -> None: ...
-    def getModifiers(self) -> java.util.List[org.orekit.estimation.measurements.EstimationModifier[_PythonMeasurementBuilder__T]]: ...
     def init(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> None:
         """
             Initialize builder at the start of a measurements generation.
@@ -344,7 +568,8 @@ class PythonScheduler(Scheduler[_PythonScheduler__T], typing.Generic[_PythonSche
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def generate(self, list: java.util.List[org.orekit.propagation.sampling.OrekitStepInterpolator]) -> java.util.SortedSet[_PythonScheduler__T]: ...
+    def generate(self, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> java.util.SortedSet[_PythonScheduler__T]: ...
+    def getBuilder(self) -> MeasurementBuilder[_PythonScheduler__T]: ...
     def init(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> None:
         """
             Initialize scheduler at the start of a measurements generation.
@@ -363,23 +588,15 @@ class PythonScheduler(Scheduler[_PythonScheduler__T], typing.Generic[_PythonSche
         
         """
         ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
     def pythonExtension(self, long: int) -> None:
         """
-            Part of JCC Python interface to object
+        public long pythonExtension()
+        
+        
         """
         ...
 
@@ -393,19 +610,7 @@ class AngularAzElBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measur
             9.3
     """
     def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, groundStation: org.orekit.estimation.measurements.GroundStation, doubleArray: typing.List[float], doubleArray2: typing.List[float], observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
-    def build(self, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> org.orekit.estimation.measurements.AngularAzEl:
-        """
-            Generate a single measurement.
-        
-            Parameters:
-                states (:class:`~org.orekit.propagation.SpacecraftState`[]): all spacecraft states (i.e. including ones that may not be relevant for the current builder)
-        
-            Returns:
-                generated measurement
-        
-        
-        """
-        ...
+    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> org.orekit.estimation.measurements.AngularAzEl: ...
 
 class AngularRaDecBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.AngularRaDec]):
     """
@@ -417,19 +622,7 @@ class AngularRaDecBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measu
             9.3
     """
     def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, groundStation: org.orekit.estimation.measurements.GroundStation, frame: org.orekit.frames.Frame, doubleArray: typing.List[float], doubleArray2: typing.List[float], observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
-    def build(self, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> org.orekit.estimation.measurements.AngularRaDec:
-        """
-            Generate a single measurement.
-        
-            Parameters:
-                states (:class:`~org.orekit.propagation.SpacecraftState`[]): all spacecraft states (i.e. including ones that may not be relevant for the current builder)
-        
-            Returns:
-                generated measurement
-        
-        
-        """
-        ...
+    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> org.orekit.estimation.measurements.AngularRaDec: ...
 
 class BistaticRangeBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.BistaticRange]):
     """
@@ -441,19 +634,7 @@ class BistaticRangeBuilder(AbstractMeasurementBuilder[org.orekit.estimation.meas
             11.2
     """
     def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, groundStation: org.orekit.estimation.measurements.GroundStation, groundStation2: org.orekit.estimation.measurements.GroundStation, double: float, double2: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
-    def build(self, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> org.orekit.estimation.measurements.BistaticRange:
-        """
-            Generate a single measurement.
-        
-            Parameters:
-                states (:class:`~org.orekit.propagation.SpacecraftState`[]): all spacecraft states (i.e. including ones that may not be relevant for the current builder)
-        
-            Returns:
-                generated measurement
-        
-        
-        """
-        ...
+    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> org.orekit.estimation.measurements.BistaticRange: ...
 
 class BistaticRangeRateBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.BistaticRangeRate]):
     """
@@ -465,19 +646,7 @@ class BistaticRangeRateBuilder(AbstractMeasurementBuilder[org.orekit.estimation.
             11.2
     """
     def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, groundStation: org.orekit.estimation.measurements.GroundStation, groundStation2: org.orekit.estimation.measurements.GroundStation, double: float, double2: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
-    def build(self, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> org.orekit.estimation.measurements.BistaticRangeRate:
-        """
-            Generate a single measurement.
-        
-            Parameters:
-                states (:class:`~org.orekit.propagation.SpacecraftState`[]): all spacecraft states (i.e. including ones that may not be relevant for the current builder)
-        
-            Returns:
-                generated measurement
-        
-        
-        """
-        ...
+    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> org.orekit.estimation.measurements.BistaticRangeRate: ...
 
 _ContinuousScheduler__T = typing.TypeVar('_ContinuousScheduler__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class ContinuousScheduler(AbstractScheduler[_ContinuousScheduler__T], typing.Generic[_ContinuousScheduler__T]):
@@ -495,7 +664,23 @@ class ContinuousScheduler(AbstractScheduler[_ContinuousScheduler__T], typing.Gen
             9.3
     """
     def __init__(self, measurementBuilder: MeasurementBuilder[_ContinuousScheduler__T], datesSelector: org.orekit.time.DatesSelector): ...
-    def generate(self, list: java.util.List[org.orekit.propagation.sampling.OrekitStepInterpolator]) -> java.util.SortedSet[_ContinuousScheduler__T]: ...
+    def measurementIsFeasible(self, absoluteDate: org.orekit.time.AbsoluteDate) -> bool:
+        """
+            Check if a measurement is feasible at some date.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.generation.AbstractScheduler.measurementIsFeasible` in
+                class :class:`~org.orekit.estimation.measurements.generation.AbstractScheduler`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): date to check
+        
+            Returns:
+                true if measurement if feasible
+        
+        
+        """
+        ...
 
 _EventBasedScheduler__T = typing.TypeVar('_EventBasedScheduler__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class EventBasedScheduler(AbstractScheduler[_EventBasedScheduler__T], typing.Generic[_EventBasedScheduler__T]):
@@ -523,7 +708,35 @@ class EventBasedScheduler(AbstractScheduler[_EventBasedScheduler__T], typing.Gen
             9.3
     """
     def __init__(self, measurementBuilder: MeasurementBuilder[_EventBasedScheduler__T], datesSelector: org.orekit.time.DatesSelector, propagator: org.orekit.propagation.Propagator, eventDetector: org.orekit.propagation.events.EventDetector, signSemantic: SignSemantic): ...
-    def generate(self, list: java.util.List[org.orekit.propagation.sampling.OrekitStepInterpolator]) -> java.util.SortedSet[_EventBasedScheduler__T]: ...
+    def measurementIsFeasible(self, absoluteDate: org.orekit.time.AbsoluteDate) -> bool:
+        """
+            Check if a measurement is feasible at some date.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.generation.AbstractScheduler.measurementIsFeasible` in
+                class :class:`~org.orekit.estimation.measurements.generation.AbstractScheduler`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): date to check
+        
+            Returns:
+                true if measurement if feasible
+        
+        
+        """
+        ...
+
+class FDOABuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.FDOA]):
+    """
+    public class FDOABuilder extends :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`<:class:`~org.orekit.estimation.measurements.FDOA`>
+    
+        Builder for :class:`~org.orekit.estimation.measurements.FDOA` measurements.
+    
+        Since:
+            12.0
+    """
+    def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, groundStation: org.orekit.estimation.measurements.GroundStation, groundStation2: org.orekit.estimation.measurements.GroundStation, double: float, double2: float, double3: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
+    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> org.orekit.estimation.measurements.FDOA: ...
 
 class InterSatellitesPhaseBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.gnss.InterSatellitesPhase]):
     """
@@ -535,19 +748,7 @@ class InterSatellitesPhaseBuilder(AbstractMeasurementBuilder[org.orekit.estimati
             10.3
     """
     def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite, observableSatellite2: org.orekit.estimation.measurements.ObservableSatellite, double: float, double2: float, double3: float): ...
-    def build(self, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> org.orekit.estimation.measurements.gnss.InterSatellitesPhase:
-        """
-            Generate a single measurement.
-        
-            Parameters:
-                states (:class:`~org.orekit.propagation.SpacecraftState`[]): all spacecraft states (i.e. including ones that may not be relevant for the current builder)
-        
-            Returns:
-                generated measurement
-        
-        
-        """
-        ...
+    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> org.orekit.estimation.measurements.gnss.InterSatellitesPhase: ...
 
 class InterSatellitesRangeBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.InterSatellitesRange]):
     """
@@ -559,19 +760,31 @@ class InterSatellitesRangeBuilder(AbstractMeasurementBuilder[org.orekit.estimati
             9.3
     """
     def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite, observableSatellite2: org.orekit.estimation.measurements.ObservableSatellite, boolean: bool, double: float, double2: float): ...
-    def build(self, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> org.orekit.estimation.measurements.InterSatellitesRange:
-        """
-            Generate a single measurement.
-        
-            Parameters:
-                states (:class:`~org.orekit.propagation.SpacecraftState`[]): all spacecraft states (i.e. including ones that may not be relevant for the current builder)
-        
-            Returns:
-                generated measurement
-        
-        
-        """
-        ...
+    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> org.orekit.estimation.measurements.InterSatellitesRange: ...
+
+class OneWayGNSSPhaseBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.gnss.OneWayGNSSPhase]):
+    """
+    public class OneWayGNSSPhaseBuilder extends :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`<:class:`~org.orekit.estimation.measurements.gnss.OneWayGNSSPhase`>
+    
+        Builder for :class:`~org.orekit.estimation.measurements.gnss.OneWayGNSSPhase` measurements.
+    
+        Since:
+            12.0
+    """
+    def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite, observableSatellite2: org.orekit.estimation.measurements.ObservableSatellite, toDoubleFunction: typing.Union[java.util.function.ToDoubleFunction[org.orekit.time.AbsoluteDate], typing.Callable[[org.orekit.time.AbsoluteDate], float]], double: float, double2: float, double3: float): ...
+    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> org.orekit.estimation.measurements.gnss.OneWayGNSSPhase: ...
+
+class OneWayGNSSRangeBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.gnss.OneWayGNSSRange]):
+    """
+    public class OneWayGNSSRangeBuilder extends :class:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder`<:class:`~org.orekit.estimation.measurements.gnss.OneWayGNSSRange`>
+    
+        Builder for :class:`~org.orekit.estimation.measurements.gnss.OneWayGNSSRange` measurements.
+    
+        Since:
+            12.0
+    """
+    def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite, observableSatellite2: org.orekit.estimation.measurements.ObservableSatellite, toDoubleFunction: typing.Union[java.util.function.ToDoubleFunction[org.orekit.time.AbsoluteDate], typing.Callable[[org.orekit.time.AbsoluteDate], float]], double: float, double2: float): ...
+    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> org.orekit.estimation.measurements.gnss.OneWayGNSSRange: ...
 
 class PVBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.PV]):
     """
@@ -583,19 +796,7 @@ class PVBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.PV
             9.3
     """
     def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, double: float, double2: float, double3: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
-    def build(self, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> org.orekit.estimation.measurements.PV:
-        """
-            Generate a single measurement.
-        
-            Parameters:
-                states (:class:`~org.orekit.propagation.SpacecraftState`[]): all spacecraft states (i.e. including ones that may not be relevant for the current builder)
-        
-            Returns:
-                generated measurement
-        
-        
-        """
-        ...
+    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> org.orekit.estimation.measurements.PV: ...
 
 class PositionBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.Position]):
     """
@@ -607,19 +808,7 @@ class PositionBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measureme
             9.3
     """
     def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, double: float, double2: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
-    def build(self, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> org.orekit.estimation.measurements.Position:
-        """
-            Generate a single measurement.
-        
-            Parameters:
-                states (:class:`~org.orekit.propagation.SpacecraftState`[]): all spacecraft states (i.e. including ones that may not be relevant for the current builder)
-        
-            Returns:
-                generated measurement
-        
-        
-        """
-        ...
+    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> org.orekit.estimation.measurements.Position: ...
 
 _PythonAbstractMeasurementBuilder__T = typing.TypeVar('_PythonAbstractMeasurementBuilder__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class PythonAbstractMeasurementBuilder(AbstractMeasurementBuilder[_PythonAbstractMeasurementBuilder__T], typing.Generic[_PythonAbstractMeasurementBuilder__T]):
@@ -630,19 +819,7 @@ class PythonAbstractMeasurementBuilder(AbstractMeasurementBuilder[_PythonAbstrac
     def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, double: float, double2: float, *observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
     @typing.overload
     def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, doubleArray: typing.List[float], doubleArray2: typing.List[float], *observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
-    def build(self, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> _PythonAbstractMeasurementBuilder__T:
-        """
-            Generate a single measurement. Extension point for Python.
-        
-            Parameters:
-                states (:class:`~org.orekit.propagation.SpacecraftState`[]): spacecraft states
-        
-            Returns:
-                generated measurement
-        
-        
-        """
-        ...
+    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> _PythonAbstractMeasurementBuilder__T: ...
     def finalize(self) -> None: ...
     def getBaseWeight(self) -> typing.List[float]:
         """
@@ -697,6 +874,10 @@ class PythonAbstractMeasurementBuilder(AbstractMeasurementBuilder[_PythonAbstrac
     def getSatellites(self) -> typing.List[org.orekit.estimation.measurements.ObservableSatellite]:
         """
             Get the satellites related to this measurement.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.generation.MeasurementBuilder.getSatellites` in
+                interface :class:`~org.orekit.estimation.measurements.generation.MeasurementBuilder`
         
             Overrides:
                 :meth:`~org.orekit.estimation.measurements.generation.AbstractMeasurementBuilder.getSatellites` in
@@ -770,7 +951,25 @@ class PythonAbstractScheduler(AbstractScheduler[_PythonAbstractScheduler__T], ty
     """
     def __init__(self, measurementBuilder: MeasurementBuilder[_PythonAbstractScheduler__T], datesSelector: org.orekit.time.DatesSelector): ...
     def finalize(self) -> None: ...
-    def generate(self, list: java.util.List[org.orekit.propagation.sampling.OrekitStepInterpolator]) -> java.util.SortedSet[_PythonAbstractScheduler__T]: ...
+    def measurementIsFeasible(self, absoluteDate: org.orekit.time.AbsoluteDate) -> bool:
+        """
+            Description copied from
+            class: :meth:`~org.orekit.estimation.measurements.generation.AbstractScheduler.measurementIsFeasible`
+            Check if a measurement is feasible at some date.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.generation.AbstractScheduler.measurementIsFeasible` in
+                class :class:`~org.orekit.estimation.measurements.generation.AbstractScheduler`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): date to check
+        
+            Returns:
+                true if measurement if feasible
+        
+        
+        """
+        ...
     def pythonDecRef(self) -> None:
         """
             Part of JCC Python interface to object
@@ -801,19 +1000,7 @@ class RangeBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements
             9.3
     """
     def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, groundStation: org.orekit.estimation.measurements.GroundStation, boolean: bool, double: float, double2: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
-    def build(self, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> org.orekit.estimation.measurements.Range:
-        """
-            Generate a single measurement.
-        
-            Parameters:
-                states (:class:`~org.orekit.propagation.SpacecraftState`[]): all spacecraft states (i.e. including ones that may not be relevant for the current builder)
-        
-            Returns:
-                generated measurement
-        
-        
-        """
-        ...
+    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> org.orekit.estimation.measurements.Range: ...
 
 class RangeRateBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.RangeRate]):
     """
@@ -825,19 +1012,7 @@ class RangeRateBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurem
             9.3
     """
     def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, groundStation: org.orekit.estimation.measurements.GroundStation, boolean: bool, double: float, double2: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
-    def build(self, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> org.orekit.estimation.measurements.RangeRate:
-        """
-            Generate a single measurement.
-        
-            Parameters:
-                states (:class:`~org.orekit.propagation.SpacecraftState`[]): all spacecraft states (i.e. including ones that may not be relevant for the current builder)
-        
-            Returns:
-                generated measurement
-        
-        
-        """
-        ...
+    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> org.orekit.estimation.measurements.RangeRate: ...
 
 class TDOABuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.TDOA]):
     """
@@ -849,19 +1024,7 @@ class TDOABuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.
             11.2
     """
     def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, groundStation: org.orekit.estimation.measurements.GroundStation, groundStation2: org.orekit.estimation.measurements.GroundStation, double: float, double2: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
-    def build(self, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> org.orekit.estimation.measurements.TDOA:
-        """
-            Generate a single measurement.
-        
-            Parameters:
-                states (:class:`~org.orekit.propagation.SpacecraftState`[]): all spacecraft states (i.e. including ones that may not be relevant for the current builder)
-        
-            Returns:
-                generated measurement
-        
-        
-        """
-        ...
+    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> org.orekit.estimation.measurements.TDOA: ...
 
 class TurnAroundRangeBuilder(AbstractMeasurementBuilder[org.orekit.estimation.measurements.TurnAroundRange]):
     """
@@ -873,19 +1036,7 @@ class TurnAroundRangeBuilder(AbstractMeasurementBuilder[org.orekit.estimation.me
             9.3
     """
     def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, groundStation: org.orekit.estimation.measurements.GroundStation, groundStation2: org.orekit.estimation.measurements.GroundStation, double: float, double2: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
-    def build(self, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> org.orekit.estimation.measurements.TurnAroundRange:
-        """
-            Generate a single measurement.
-        
-            Parameters:
-                states (:class:`~org.orekit.propagation.SpacecraftState`[]): all spacecraft states (i.e. including ones that may not be relevant for the current builder)
-        
-            Returns:
-                generated measurement
-        
-        
-        """
-        ...
+    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> org.orekit.estimation.measurements.TurnAroundRange: ...
 
 
 class __module_protocol__(typing.Protocol):
@@ -899,14 +1050,21 @@ class __module_protocol__(typing.Protocol):
     BistaticRangeRateBuilder: typing.Type[BistaticRangeRateBuilder]
     ContinuousScheduler: typing.Type[ContinuousScheduler]
     EventBasedScheduler: typing.Type[EventBasedScheduler]
+    FDOABuilder: typing.Type[FDOABuilder]
+    GatheringSubscriber: typing.Type[GatheringSubscriber]
+    GeneratedMeasurementSubscriber: typing.Type[GeneratedMeasurementSubscriber]
     Generator: typing.Type[Generator]
     InterSatellitesPhaseBuilder: typing.Type[InterSatellitesPhaseBuilder]
     InterSatellitesRangeBuilder: typing.Type[InterSatellitesRangeBuilder]
     MeasurementBuilder: typing.Type[MeasurementBuilder]
+    MultiplexedMeasurementBuilder: typing.Type[MultiplexedMeasurementBuilder]
+    OneWayGNSSPhaseBuilder: typing.Type[OneWayGNSSPhaseBuilder]
+    OneWayGNSSRangeBuilder: typing.Type[OneWayGNSSRangeBuilder]
     PVBuilder: typing.Type[PVBuilder]
     PositionBuilder: typing.Type[PositionBuilder]
     PythonAbstractMeasurementBuilder: typing.Type[PythonAbstractMeasurementBuilder]
     PythonAbstractScheduler: typing.Type[PythonAbstractScheduler]
+    PythonGeneratedMeasurementSubscriber: typing.Type[PythonGeneratedMeasurementSubscriber]
     PythonMeasurementBuilder: typing.Type[PythonMeasurementBuilder]
     PythonScheduler: typing.Type[PythonScheduler]
     RangeBuilder: typing.Type[RangeBuilder]

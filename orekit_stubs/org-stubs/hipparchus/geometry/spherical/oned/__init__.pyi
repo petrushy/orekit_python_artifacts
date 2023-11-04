@@ -120,7 +120,7 @@ class Arc:
 
 class ArcsSet(org.hipparchus.geometry.partitioning.AbstractRegion['Sphere1D', 'Sphere1D'], java.lang.Iterable[typing.List[float]]):
     """
-    public class ArcsSet extends :class:`~org.hipparchus.geometry.partitioning.AbstractRegion`<:class:`~org.hipparchus.geometry.spherical.oned.Sphere1D`,:class:`~org.hipparchus.geometry.spherical.oned.Sphere1D`> implements :class:`~org.hipparchus.geometry.spherical.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable?is`<double[]>
+    public class ArcsSet extends :class:`~org.hipparchus.geometry.partitioning.AbstractRegion`<:class:`~org.hipparchus.geometry.spherical.oned.Sphere1D`, :class:`~org.hipparchus.geometry.spherical.oned.Sphere1D`> implements :class:`~org.hipparchus.geometry.spherical.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable?is`<double[]>
     
         This class represents a region of a circle: a set of arcs.
     
@@ -398,7 +398,7 @@ class S1Point(org.hipparchus.geometry.Point['Sphere1D']):
                 azimuthal angle \( \alpha \)
         
             Also see:
-                :meth:`~org.hipparchus.geometry.spherical.oned.S1Point.S1Point`
+                :meth:`~org.hipparchus.geometry.spherical.oned.S1Point.%3Cinit%3E`
         
         
         """
@@ -513,7 +513,7 @@ class Sphere1D(java.io.Serializable, org.hipparchus.geometry.Space):
 
 class SubLimitAngle(org.hipparchus.geometry.partitioning.AbstractSubHyperplane[Sphere1D, Sphere1D]):
     """
-    public class SubLimitAngle extends :class:`~org.hipparchus.geometry.partitioning.AbstractSubHyperplane`<:class:`~org.hipparchus.geometry.spherical.oned.Sphere1D`,:class:`~org.hipparchus.geometry.spherical.oned.Sphere1D`>
+    public class SubLimitAngle extends :class:`~org.hipparchus.geometry.partitioning.AbstractSubHyperplane`<:class:`~org.hipparchus.geometry.spherical.oned.Sphere1D`, :class:`~org.hipparchus.geometry.spherical.oned.Sphere1D`>
     
         This class represents sub-hyperplane for :class:`~org.hipparchus.geometry.spherical.oned.LimitAngle`.
     

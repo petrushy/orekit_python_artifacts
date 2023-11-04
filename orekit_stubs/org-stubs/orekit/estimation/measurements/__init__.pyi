@@ -186,6 +186,29 @@ class EstimatedEarthFrameProvider(org.orekit.frames.TransformProvider):
         
         """
         ...
+    _getStaticTransform_0__T = typing.TypeVar('_getStaticTransform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getStaticTransform(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getStaticTransform_0__T]) -> org.orekit.frames.FieldStaticTransform[_getStaticTransform_0__T]:
+        """
+            Get a transform for only rotations and translations on the specified date.
+        
+            The default implementation returns :meth:`~org.orekit.frames.TransformProvider.getTransform` but implementations may
+            override it for better performance.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.TransformProvider.getStaticTransform` in
+                interface :class:`~org.orekit.frames.TransformProvider`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date.
+        
+            Returns:
+                the static transform.
+        
+        
+        """
+        ...
+    @typing.overload
     def getStaticTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.frames.StaticTransform:
         """
             Get a transform for only rotations and translations on the specified date.
@@ -202,7 +225,6 @@ class EstimatedEarthFrameProvider(org.orekit.frames.TransformProvider):
         
             Returns:
                 the static transform.
-        
         
         """
         ...
@@ -259,9 +281,9 @@ class EstimatedEarthFrameProvider(org.orekit.frames.TransformProvider):
         ...
 
 _EstimationModifier__T = typing.TypeVar('_EstimationModifier__T', bound='ObservedMeasurement')  # <T>
-class EstimationModifier(typing.Generic[_EstimationModifier__T]):
+class EstimationModifier(org.orekit.utils.ParameterDriversProvider, typing.Generic[_EstimationModifier__T]):
     """
-    public interface EstimationModifier<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>>
+    public interface EstimationModifier<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.utils.ParameterDriversProvider`
     
         Interface for estimated measurements modifiers used for orbit determination.
     
@@ -280,8 +302,8 @@ class EstimationModifier(typing.Generic[_EstimationModifier__T]):
         Since:
             8.0
     """
-    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def modify(self, estimatedMeasurement: 'EstimatedMeasurement'[_EstimationModifier__T]) -> None: ...
+    def modifyWithoutDerivatives(self, estimatedMeasurementBase: 'EstimatedMeasurementBase'[_EstimationModifier__T]) -> None: ...
 
 class EstimationsProvider:
     """
@@ -318,6 +340,122 @@ class EstimationsProvider:
         
             Returns:
                 number of evaluations available
+        
+        
+        """
+        ...
+
+class GroundReceiverCommonParametersWithDerivatives:
+    """
+    public class GroundReceiverCommonParametersWithDerivatives extends :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Common intermediate parameters used to estimate measurements where receiver is a ground station.
+    
+        Since:
+            12.0
+    """
+    def __init__(self, spacecraftState: org.orekit.propagation.SpacecraftState, map: typing.Union[java.util.Map[str, int], typing.Mapping[str, int]], fieldTransform: org.orekit.frames.FieldTransform[org.hipparchus.analysis.differentiation.Gradient], timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.analysis.differentiation.Gradient], gradient: org.hipparchus.analysis.differentiation.Gradient, spacecraftState2: org.orekit.propagation.SpacecraftState, timeStampedFieldPVCoordinates2: org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.analysis.differentiation.Gradient]): ...
+    def getIndices(self) -> java.util.Map[str, int]: ...
+    def getOffsetToInertialDownlink(self) -> org.orekit.frames.FieldTransform[org.hipparchus.analysis.differentiation.Gradient]: ...
+    def getState(self) -> org.orekit.propagation.SpacecraftState:
+        """
+            Get spacecraft state.
+        
+            Returns:
+                spacecraft state
+        
+        
+        """
+        ...
+    def getStationDownlink(self) -> org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.analysis.differentiation.Gradient]: ...
+    def getTauD(self) -> org.hipparchus.analysis.differentiation.Gradient:
+        """
+            Get downlink delay.
+        
+            Returns:
+                ownlink delay
+        
+        
+        """
+        ...
+    def getTransitPV(self) -> org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.analysis.differentiation.Gradient]: ...
+    def getTransitState(self) -> org.orekit.propagation.SpacecraftState:
+        """
+            Get transit state.
+        
+            Returns:
+                transit state
+        
+        
+        """
+        ...
+
+class GroundReceiverCommonParametersWithoutDerivatives:
+    """
+    public class GroundReceiverCommonParametersWithoutDerivatives extends :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Common intermediate parameters used to estimate measurements where receiver is a ground station.
+    
+        Since:
+            12.0
+    """
+    def __init__(self, spacecraftState: org.orekit.propagation.SpacecraftState, transform: org.orekit.frames.Transform, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, double: float, spacecraftState2: org.orekit.propagation.SpacecraftState, timeStampedPVCoordinates2: org.orekit.utils.TimeStampedPVCoordinates): ...
+    def getOffsetToInertialDownlink(self) -> org.orekit.frames.Transform:
+        """
+            Get transform between station and inertial frame.
+        
+            Returns:
+                transform between station and inertial frame
+        
+        
+        """
+        ...
+    def getState(self) -> org.orekit.propagation.SpacecraftState:
+        """
+            Get spacecraft state.
+        
+            Returns:
+                spacecraft state
+        
+        
+        """
+        ...
+    def getStationDownlink(self) -> org.orekit.utils.TimeStampedPVCoordinates:
+        """
+            Get station position in inertial frame at end of the downlink leg.
+        
+            Returns:
+                station position in inertial frame at end of the downlink leg
+        
+        
+        """
+        ...
+    def getTauD(self) -> float:
+        """
+            Get downlink delay.
+        
+            Returns:
+                ownlink delay
+        
+        
+        """
+        ...
+    def getTransitPV(self) -> org.orekit.utils.TimeStampedPVCoordinates:
+        """
+            Get transit position/velocity.
+        
+            Returns:
+                transit position/velocity
+        
+        
+        """
+        ...
+    def getTransitState(self) -> org.orekit.propagation.SpacecraftState:
+        """
+            Get transit state.
+        
+            Returns:
+                transit state
         
         
         """
@@ -530,7 +668,7 @@ class GroundStation:
     @typing.overload
     def getOffsetToInertial(self, frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[org.hipparchus.analysis.differentiation.Gradient], int: int, map: typing.Union[java.util.Map[str, int], typing.Mapping[str, int]]) -> org.orekit.frames.FieldTransform[org.hipparchus.analysis.differentiation.Gradient]: ...
     @typing.overload
-    def getOffsetToInertial(self, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.frames.Transform:
+    def getOffsetToInertial(self, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, boolean: bool) -> org.orekit.frames.Transform:
         """
             Get the transform between offset frame and inertial frame.
         
@@ -540,7 +678,9 @@ class GroundStation:
         
             Parameters:
                 inertial (:class:`~org.orekit.frames.Frame`): inertial frame to transform to
-                clockDate (:class:`~org.orekit.time.AbsoluteDate`): date of the transform as read by the ground station clock (i.e. clock offset *not* compensated)
+                date (:class:`~org.orekit.time.AbsoluteDate`): date of the transform
+                clockOffsetAlreadyApplied (boolean): if true, the specified :code:`date` is as read by the ground station clock (i.e. clock offset *not* compensated), if
+                    false, the specified :code:`date` was already compensated and is a physical absolute date
         
             Returns:
                 transform between offset frame and inertial frame, at *real* measurement date (i.e. with clock, Earth and station
@@ -557,7 +697,8 @@ class GroundStation:
                 inertial (:class:`~org.orekit.frames.Frame`): inertial frame to transform to
                 clockDate (:class:`~org.orekit.time.AbsoluteDate`): date of the transform as read by the ground station clock (i.e. clock offset *not* compensated)
                 freeParameters (int): total number of free parameters in the gradient
-                indices (:class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.util.Map?is`<:class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`, :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`> indices): indices of the estimated parameters in derivatives computations
+                indices (:class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.util.Map?is`<:class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`, :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`> indices): indices of the estimated parameters in derivatives computations, must be driver span name in map, not driver name or
+                    will not give right results (see :meth:`~org.orekit.utils.ParameterDriver.getValue`)
         
             Returns:
                 transform between offset frame and inertial frame, at *real* measurement date (i.e. with clock, Earth and station
@@ -580,7 +721,8 @@ class GroundStation:
                 inertial (:class:`~org.orekit.frames.Frame`): inertial frame to transform to
                 offsetCompensatedDate (:class:`~org.orekit.time.FieldAbsoluteDate`<:class:`~org.orekit.estimation.measurements.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.differentiation.Gradient?is`> offsetCompensatedDate): date of the transform, clock offset and its derivatives already compensated
                 freeParameters (int): total number of free parameters in the gradient
-                indices (:class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.util.Map?is`<:class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`, :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`> indices): indices of the estimated parameters in derivatives computations
+                indices (:class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.util.Map?is`<:class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`, :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`> indices): indices of the estimated parameters in derivatives computations, must be driver span name in map, not driver name or
+                    will not give right results (see :meth:`~org.orekit.utils.ParameterDriver.getValue`)
         
             Returns:
                 transform between offset frame and inertial frame, at specified date
@@ -709,6 +851,19 @@ class ObservableSatellite:
     
     """
     def __init__(self, int: int): ...
+    def equals(self, object: typing.Any) -> bool:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
     def getClockDriftDriver(self) -> org.orekit.utils.ParameterDriver:
         """
             Get the clock drift parameter driver.
@@ -748,11 +903,24 @@ class ObservableSatellite:
         
         """
         ...
+    def hashCode(self) -> int:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
 
-_EstimatedMeasurement__T = typing.TypeVar('_EstimatedMeasurement__T', bound='ObservedMeasurement')  # <T>
-class EstimatedMeasurement(ComparableMeasurement, typing.Generic[_EstimatedMeasurement__T]):
+_EstimatedMeasurementBase__T = typing.TypeVar('_EstimatedMeasurementBase__T', bound='ObservedMeasurement')  # <T>
+class EstimatedMeasurementBase(ComparableMeasurement, typing.Generic[_EstimatedMeasurementBase__T]):
     """
-    public class EstimatedMeasurement<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
+    public class EstimatedMeasurementBase<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
     
         Class holding an estimated theoretical value associated to an
         :class:`~org.orekit.estimation.measurements.ObservedMeasurement`.
@@ -760,7 +928,7 @@ class EstimatedMeasurement(ComparableMeasurement, typing.Generic[_EstimatedMeasu
         Since:
             8.0
     """
-    def __init__(self, t: _EstimatedMeasurement__T, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState], timeStampedPVCoordinatesArray: typing.List[org.orekit.utils.TimeStampedPVCoordinates]): ...
+    def __init__(self, t: _EstimatedMeasurementBase__T, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState], timeStampedPVCoordinatesArray: typing.List[org.orekit.utils.TimeStampedPVCoordinates]): ...
     def getCount(self) -> int:
         """
             Get the evaluations counter.
@@ -784,7 +952,6 @@ class EstimatedMeasurement(ComparableMeasurement, typing.Generic[_EstimatedMeasu
         
         """
         ...
-    def getDerivativesDrivers(self) -> java.util.stream.Stream[org.orekit.utils.ParameterDriver]: ...
     def getEstimatedValue(self) -> typing.List[float]:
         """
             Get the estimated value.
@@ -805,7 +972,7 @@ class EstimatedMeasurement(ComparableMeasurement, typing.Generic[_EstimatedMeasu
         
         """
         ...
-    def getObservedMeasurement(self) -> _EstimatedMeasurement__T:
+    def getObservedMeasurement(self) -> _EstimatedMeasurementBase__T:
         """
             Get the associated observed measurement.
         
@@ -831,7 +998,6 @@ class EstimatedMeasurement(ComparableMeasurement, typing.Generic[_EstimatedMeasu
         
         """
         ...
-    def getParameterDerivatives(self, parameterDriver: org.orekit.utils.ParameterDriver) -> typing.List[float]: ...
     def getParticipants(self) -> typing.List[org.orekit.utils.TimeStampedPVCoordinates]:
         """
             Get the coordinates of the measurements participants in signal travel order.
@@ -846,37 +1012,6 @@ class EstimatedMeasurement(ComparableMeasurement, typing.Generic[_EstimatedMeasu
         
         """
         ...
-    def getStateDerivatives(self, int: int) -> typing.List[typing.List[float]]:
-        """
-            Get the partial derivatives of the :meth:`~org.orekit.estimation.measurements.EstimatedMeasurement.getEstimatedValue`
-            with respect to state Cartesian coordinates.
-        
-            Parameters:
-                index (int): index of the state, according to the :code:`states` passed at construction
-        
-            Returns:
-                partial derivatives of the simulated value (array of size
-                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.getDimension` x 6)
-        
-        
-        """
-        ...
-    def getStateSize(self) -> int:
-        """
-            Get state size.
-        
-            Warning, the :meth:`~org.orekit.estimation.measurements.EstimatedMeasurement.setStateDerivatives` method must have been
-            called before this method is called.
-        
-            Returns:
-                state size
-        
-            Since:
-                10.1
-        
-        
-        """
-        ...
     def getStates(self) -> typing.List[org.orekit.propagation.SpacecraftState]:
         """
             Get the states of the spacecrafts.
@@ -887,13 +1022,13 @@ class EstimatedMeasurement(ComparableMeasurement, typing.Generic[_EstimatedMeasu
         
         """
         ...
-    def getStatus(self) -> 'EstimatedMeasurement.Status':
+    def getStatus(self) -> 'EstimatedMeasurementBase.Status':
         """
             Get the status.
         
-            The status is set to :meth:`~org.orekit.estimation.measurements.EstimatedMeasurement.Status.PROCESSED` at construction,
-            and can be reset to :meth:`~org.orekit.estimation.measurements.EstimatedMeasurement.Status.REJECTED` later on, typically
-            by :class:`~org.orekit.estimation.measurements.modifiers.OutlierFilter` or
+            The status is set to :meth:`~org.orekit.estimation.measurements.EstimatedMeasurementBase.Status.PROCESSED` at
+            construction, and can be reset to :meth:`~org.orekit.estimation.measurements.EstimatedMeasurementBase.Status.REJECTED`
+            later on, typically by :class:`~org.orekit.estimation.measurements.modifiers.OutlierFilter` or
             :class:`~org.orekit.estimation.measurements.modifiers.DynamicOutlierFilter`
         
             Returns:
@@ -922,46 +1057,33 @@ class EstimatedMeasurement(ComparableMeasurement, typing.Generic[_EstimatedMeasu
         
         """
         ...
-    def setParameterDerivatives(self, parameterDriver: org.orekit.utils.ParameterDriver, *double: float) -> None:
-        """
-            Set the partial derivatives of the :meth:`~org.orekit.estimation.measurements.EstimatedMeasurement.getEstimatedValue`
-            with respect to parameter.
-        
-            Parameters:
-                driver (:class:`~org.orekit.utils.ParameterDriver`): driver for the parameter
-                parameterDerivatives (double...): partial derivatives with respect to parameter
-        
-        
-        """
-        ...
-    def setStateDerivatives(self, int: int, *doubleArray: typing.List[float]) -> None: ...
-    def setStatus(self, status: 'EstimatedMeasurement.Status') -> None:
+    def setStatus(self, status: 'EstimatedMeasurementBase.Status') -> None:
         """
             Set the status.
         
             Parameters:
-                status (:class:`~org.orekit.estimation.measurements.EstimatedMeasurement.Status`): status to set
+                status (:class:`~org.orekit.estimation.measurements.EstimatedMeasurementBase.Status`): status to set
         
         
         """
         ...
-    class Status(java.lang.Enum['EstimatedMeasurement.Status']):
-        PROCESSED: typing.ClassVar['EstimatedMeasurement.Status'] = ...
-        REJECTED: typing.ClassVar['EstimatedMeasurement.Status'] = ...
+    class Status(java.lang.Enum['EstimatedMeasurementBase.Status']):
+        PROCESSED: typing.ClassVar['EstimatedMeasurementBase.Status'] = ...
+        REJECTED: typing.ClassVar['EstimatedMeasurementBase.Status'] = ...
         _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
         @typing.overload
         @staticmethod
         def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
         @typing.overload
         @staticmethod
-        def valueOf(string: str) -> 'EstimatedMeasurement.Status': ...
+        def valueOf(string: str) -> 'EstimatedMeasurementBase.Status': ...
         @staticmethod
-        def values() -> typing.List['EstimatedMeasurement.Status']: ...
+        def values() -> typing.List['EstimatedMeasurementBase.Status']: ...
 
 _ObservedMeasurement__T = typing.TypeVar('_ObservedMeasurement__T', bound='ObservedMeasurement')  # <T>
-class ObservedMeasurement(ComparableMeasurement, typing.Generic[_ObservedMeasurement__T]):
+class ObservedMeasurement(ComparableMeasurement, org.orekit.utils.ParameterDriversProvider, typing.Generic[_ObservedMeasurement__T]):
     """
-    public interface ObservedMeasurement<T extends ObservedMeasurement<T>> extends :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
+    public interface ObservedMeasurement<T extends ObservedMeasurement<T>> extends :class:`~org.orekit.estimation.measurements.ComparableMeasurement`, :class:`~org.orekit.utils.ParameterDriversProvider`
     
         Interface for measurements used for orbit determination.
     
@@ -980,7 +1102,8 @@ class ObservedMeasurement(ComparableMeasurement, typing.Generic[_ObservedMeasure
             8.0
     """
     def addModifier(self, estimationModifier: EstimationModifier[_ObservedMeasurement__T]) -> None: ...
-    def estimate(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> EstimatedMeasurement[_ObservedMeasurement__T]: ...
+    def estimate(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> 'EstimatedMeasurement'[_ObservedMeasurement__T]: ...
+    def estimateWithoutDerivatives(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> EstimatedMeasurementBase[_ObservedMeasurement__T]: ...
     def getBaseWeight(self) -> typing.List[float]:
         """
             Get the base weight associated with the measurement
@@ -1025,7 +1148,6 @@ class ObservedMeasurement(ComparableMeasurement, typing.Generic[_ObservedMeasure
         """
         ...
     def getModifiers(self) -> java.util.List[EstimationModifier[_ObservedMeasurement__T]]: ...
-    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def getSatellites(self) -> java.util.List[ObservableSatellite]: ...
     def getTheoreticalStandardDeviation(self) -> typing.List[float]:
         """
@@ -1160,7 +1282,8 @@ class PythonEstimationModifier(EstimationModifier[_PythonEstimationModifier__T],
     def __init__(self): ...
     def finalize(self) -> None: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    def modify(self, estimatedMeasurement: EstimatedMeasurement[_PythonEstimationModifier__T]) -> None: ...
+    def modify(self, estimatedMeasurement: 'EstimatedMeasurement'[_PythonEstimationModifier__T]) -> None: ...
+    def modifyWithoutDerivatives(self, estimatedMeasurementBase: EstimatedMeasurementBase[_PythonEstimationModifier__T]) -> None: ...
     def pythonDecRef(self) -> None:
         """
             Part of JCC Python interface to object
@@ -1187,7 +1310,7 @@ class PythonEstimationsProvider(EstimationsProvider):
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getEstimatedMeasurement(self, int: int) -> EstimatedMeasurement[typing.Any]:
+    def getEstimatedMeasurement(self, int: int) -> 'EstimatedMeasurement'[typing.Any]:
         """
             Get one estimated measurement.
         
@@ -1250,7 +1373,8 @@ class AbstractMeasurement(ObservedMeasurement[_AbstractMeasurement__T], typing.G
             8.0
     """
     def addModifier(self, estimationModifier: EstimationModifier[_AbstractMeasurement__T]) -> None: ...
-    def estimate(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> EstimatedMeasurement[_AbstractMeasurement__T]: ...
+    def estimate(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> 'EstimatedMeasurement'[_AbstractMeasurement__T]: ...
+    def estimateWithoutDerivatives(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> EstimatedMeasurementBase[_AbstractMeasurement__T]: ...
     def getBaseWeight(self) -> typing.List[float]:
         """
             Get the base weight associated with the measurement
@@ -1411,6 +1535,83 @@ class AbstractMeasurement(ObservedMeasurement[_AbstractMeasurement__T], typing.G
         """
         ...
 
+_EstimatedMeasurement__T = typing.TypeVar('_EstimatedMeasurement__T', bound=ObservedMeasurement)  # <T>
+class EstimatedMeasurement(EstimatedMeasurementBase[_EstimatedMeasurement__T], typing.Generic[_EstimatedMeasurement__T]):
+    """
+    public class EstimatedMeasurement<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.EstimatedMeasurementBase`<T>
+    
+        Class holding an estimated theoretical value associated to an
+        :class:`~org.orekit.estimation.measurements.ObservedMeasurement`.
+    
+        Since:
+            8.0
+    """
+    def __init__(self, t: _EstimatedMeasurement__T, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState], timeStampedPVCoordinatesArray: typing.List[org.orekit.utils.TimeStampedPVCoordinates]): ...
+    def getDerivativesDrivers(self) -> java.util.stream.Stream[org.orekit.utils.ParameterDriver]: ...
+    @typing.overload
+    def getParameterDerivatives(self, parameterDriver: org.orekit.utils.ParameterDriver) -> typing.List[float]: ...
+    @typing.overload
+    def getParameterDerivatives(self, parameterDriver: org.orekit.utils.ParameterDriver, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]: ...
+    def getStateDerivatives(self, int: int) -> typing.List[typing.List[float]]:
+        """
+            Get the partial derivatives of the
+            :meth:`~org.orekit.estimation.measurements.EstimatedMeasurementBase.getEstimatedValue` with respect to state Cartesian
+            coordinates.
+        
+            Parameters:
+                index (int): index of the state, according to the :code:`states` passed at construction
+        
+            Returns:
+                partial derivatives of the simulated value (array of size
+                :meth:`~org.orekit.estimation.measurements.ObservedMeasurement.getDimension` x 6)
+        
+        
+        """
+        ...
+    def getStateSize(self) -> int:
+        """
+            Get state size.
+        
+            Warning, the :meth:`~org.orekit.estimation.measurements.EstimatedMeasurement.setStateDerivatives` method must have been
+            called before this method is called.
+        
+            Returns:
+                state size
+        
+            Since:
+                10.1
+        
+        
+        """
+        ...
+    @typing.overload
+    def setParameterDerivatives(self, parameterDriver: org.orekit.utils.ParameterDriver, absoluteDate: org.orekit.time.AbsoluteDate, *double: float) -> None:
+        """
+            Set the partial derivatives of the
+            :meth:`~org.orekit.estimation.measurements.EstimatedMeasurementBase.getEstimatedValue` with respect to parameter.
+        
+            Parameters:
+                driver (:class:`~org.orekit.utils.ParameterDriver`): name of the span of the driver for the parameter for which the derivative wants to be known.
+                date (:class:`~org.orekit.time.AbsoluteDate`): date at which the parameterDerivative wants to be set
+                parameterDerivatives (double...): partial derivatives with respect to parameter
+        
+        """
+        ...
+    @typing.overload
+    def setParameterDerivatives(self, parameterDriver: org.orekit.utils.ParameterDriver, timeSpanMap: org.orekit.utils.TimeSpanMap[typing.List[float]]) -> None:
+        """
+            Set the partial derivatives of the
+            :meth:`~org.orekit.estimation.measurements.EstimatedMeasurementBase.getEstimatedValue` with respect to parameter.
+        
+            Parameters:
+                driver (:class:`~org.orekit.utils.ParameterDriver`): driver for the parameter
+                parameterDerivativesMap (:class:`~org.orekit.utils.TimeSpanMap`<double[]> parameterDerivativesMap): partial derivatives with respect to parameter
+        
+        
+        """
+        ...
+    def setStateDerivatives(self, int: int, *doubleArray: typing.List[float]) -> None: ...
+
 _PythonObservedMeasurement__T = typing.TypeVar('_PythonObservedMeasurement__T', bound=ObservedMeasurement)  # <T>
 class PythonObservedMeasurement(ObservedMeasurement[_PythonObservedMeasurement__T], typing.Generic[_PythonObservedMeasurement__T]):
     """
@@ -1447,6 +1648,7 @@ class PythonObservedMeasurement(ObservedMeasurement[_PythonObservedMeasurement__
         """
         ...
     def estimate(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> EstimatedMeasurement[_PythonObservedMeasurement__T]: ...
+    def estimateWithoutDerivatives(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> EstimatedMeasurementBase[_PythonObservedMeasurement__T]: ...
     def finalize(self) -> None: ...
     def getBaseWeight(self) -> typing.List[float]:
         """
@@ -1569,23 +1771,15 @@ class PythonObservedMeasurement(ObservedMeasurement[_PythonObservedMeasurement__
         
         """
         ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
     def pythonExtension(self, long: int) -> None:
         """
-            Part of JCC Python interface to object
+        public long pythonExtension()
+        
+        
         """
         ...
     def setEnabled(self, boolean: bool) -> None:
@@ -1606,69 +1800,48 @@ class PythonObservedMeasurement(ObservedMeasurement[_PythonObservedMeasurement__
         """
         ...
 
-class AngularAzEl(AbstractMeasurement['AngularAzEl']):
+_GroundReceiverMeasurement__T = typing.TypeVar('_GroundReceiverMeasurement__T', bound='GroundReceiverMeasurement')  # <T>
+class GroundReceiverMeasurement(AbstractMeasurement[_GroundReceiverMeasurement__T], typing.Generic[_GroundReceiverMeasurement__T]):
     """
-    public class AngularAzEl extends :class:`~org.orekit.estimation.measurements.AbstractMeasurement`<:class:`~org.orekit.estimation.measurements.AngularAzEl`>
+    public abstract class GroundReceiverMeasurement<T extends GroundReceiverMeasurement<T>> extends :class:`~org.orekit.estimation.measurements.AbstractMeasurement`<T>
     
-        Class modeling an Azimuth-Elevation measurement from a ground station. The motion of the spacecraft during the signal
-        flight time is taken into account. The date of the measurement corresponds to the reception on ground of the reflected
-        signal.
+        Base class modeling a measurement where receiver is a ground station.
     
         Since:
-            8.0
+            12.0
     """
-    MEASUREMENT_TYPE: typing.ClassVar[str] = ...
-    """
-    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEASUREMENT_TYPE
-    
-        Type of the measurement.
-    
-        Also see:
-            :meth:`~constant`
-    
-    
-    """
-    def __init__(self, groundStation: GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], doubleArray2: typing.List[float], doubleArray3: typing.List[float], observableSatellite: ObservableSatellite): ...
-    def getStation(self) -> GroundStation:
+    @typing.overload
+    def __init__(self, groundStation: GroundStation, boolean: bool, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, observableSatellite: ObservableSatellite): ...
+    @typing.overload
+    def __init__(self, groundStation: GroundStation, boolean: bool, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], doubleArray2: typing.List[float], doubleArray3: typing.List[float], observableSatellite: ObservableSatellite): ...
+    def getGroundStationCoordinates(self, frame: org.orekit.frames.Frame) -> org.orekit.utils.PVCoordinates:
         """
-            Get the ground station from which measurement is performed.
+            Get the station coordinates for a given frame.
+        
+            Parameters:
+                frame (:class:`~org.orekit.frames.Frame`): inertial frame for station position
         
             Returns:
-                ground station from which measurement is performed
+                the station coordinates in the given inertial frame
+        
+            Since:
+                12.0
         
         
         """
         ...
-
-class AngularRaDec(AbstractMeasurement['AngularRaDec']):
-    """
-    public class AngularRaDec extends :class:`~org.orekit.estimation.measurements.AbstractMeasurement`<:class:`~org.orekit.estimation.measurements.AngularRaDec`>
-    
-        Class modeling an Right Ascension - Declination measurement from a ground point (station, telescope). The angles are
-        given in an inertial reference frame. The motion of the spacecraft during the signal flight time is taken into account.
-        The date of the measurement corresponds to the reception on ground of the reflected signal.
-    
-        Since:
-            9.0
-    """
-    MEASUREMENT_TYPE: typing.ClassVar[str] = ...
-    """
-    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEASUREMENT_TYPE
-    
-        Type of the measurement.
-    
-        Also see:
-            :meth:`~constant`
-    
-    
-    """
-    def __init__(self, groundStation: GroundStation, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], doubleArray2: typing.List[float], doubleArray3: typing.List[float], observableSatellite: ObservableSatellite): ...
-    def getReferenceFrame(self) -> org.orekit.frames.Frame:
+    def getGroundStationPosition(self, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Get the reference frame in which the right ascension - declination angles are given.
+            Get the station position for a given frame.
+        
+            Parameters:
+                frame (:class:`~org.orekit.frames.Frame`): inertial frame for station position
         
             Returns:
-                reference frame in which the right ascension - declination angles are given
+                the station position in the given inertial frame
+        
+            Since:
+                12.0
         
         
         """
@@ -1683,91 +1856,12 @@ class AngularRaDec(AbstractMeasurement['AngularRaDec']):
         
         """
         ...
-
-class BistaticRange(AbstractMeasurement['BistaticRange']):
-    """
-    public class BistaticRange extends :class:`~org.orekit.estimation.measurements.AbstractMeasurement`<:class:`~org.orekit.estimation.measurements.BistaticRange`>
-    
-        Class modeling a bistatic range measurement using an emitter ground station and a receiver ground station.
-    
-        The measurement is considered to be a signal:
-    
-          - Emitted from the emitter ground station
-          - Reflected on the spacecraft
-          - Received on the receiver ground station
-    
-        The date of the measurement corresponds to the reception on ground of the reflected signal.
-    
-        The motion of the stations and the spacecraft during the signal flight time are taken into account.
-    
-        Since:
-            11.2
-    """
-    MEASUREMENT_TYPE: typing.ClassVar[str] = ...
-    """
-    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEASUREMENT_TYPE
-    
-        Type of the measurement.
-    
-        Also see:
-            :meth:`~constant`
-    
-    
-    """
-    def __init__(self, groundStation: GroundStation, groundStation2: GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, observableSatellite: ObservableSatellite): ...
-    def getEmitterStation(self) -> GroundStation: ...
-    def getReceiverStation(self) -> GroundStation: ...
-
-class BistaticRangeRate(AbstractMeasurement['BistaticRangeRate']):
-    """
-    public class BistaticRangeRate extends :class:`~org.orekit.estimation.measurements.AbstractMeasurement`<:class:`~org.orekit.estimation.measurements.BistaticRangeRate`>
-    
-        Class modeling a bistatic range rate measurement using an emitter ground station and a receiver ground station.
-    
-        The measurement is considered to be a signal:
-    
-          - Emitted from the emitter ground station
-          - Reflected on the spacecraft
-          - Received on the receiver ground station
-    
-        The date of the measurement corresponds to the reception on ground of the reflected signal. The quantity measured at the
-        receiver is the bistatic radial velocity as the sum of the radial velocities with respect to the two stations.
-    
-        The motion of the stations and the spacecraft during the signal flight time are taken into account.
-    
-        The Doppler measurement can be obtained by multiplying the velocity by (fe/c), where fe is the emission frequency.
-    
-        Since:
-            11.2
-    """
-    MEASUREMENT_TYPE: typing.ClassVar[str] = ...
-    """
-    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEASUREMENT_TYPE
-    
-        Type of the measurement.
-    
-        Also see:
-            :meth:`~constant`
-    
-    
-    """
-    def __init__(self, groundStation: GroundStation, groundStation2: GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, observableSatellite: ObservableSatellite): ...
-    def getEmitterStation(self) -> GroundStation:
+    def isTwoWay(self) -> bool:
         """
-            Get the emitter ground station.
+            Check if the instance represents a two-way measurement.
         
             Returns:
-                emitter ground station
-        
-        
-        """
-        ...
-    def getReceiverStation(self) -> GroundStation:
-        """
-            Get the receiver ground station.
-        
-            Returns:
-                receiver ground station
+                true if the instance represents a two-way measurement
         
         
         """
@@ -1852,6 +1946,7 @@ class MultiplexedMeasurement(AbstractMeasurement['MultiplexedMeasurement']):
     """
     def __init__(self, list: java.util.List[ObservedMeasurement[typing.Any]]): ...
     def getEstimatedMeasurements(self) -> java.util.List[EstimatedMeasurement[typing.Any]]: ...
+    def getEstimatedMeasurementsWithoutDerivatives(self) -> java.util.List[EstimatedMeasurementBase[typing.Any]]: ...
     def getMeasurements(self) -> java.util.List[ObservedMeasurement[typing.Any]]: ...
 
 class PV(AbstractMeasurement['PV']):
@@ -2029,9 +2124,6 @@ class PythonAbstractMeasurement(AbstractMeasurement[_PythonAbstractMeasurement__
             Parameters:
                 driver (:class:`~org.orekit.utils.ParameterDriver`): parameter driver to add
         
-            Since:
-                9.3
-        
         
         """
         ...
@@ -2056,10 +2148,286 @@ class PythonAbstractMeasurement(AbstractMeasurement[_PythonAbstractMeasurement__
         """
         ...
     def theoreticalEvaluation(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> EstimatedMeasurement[_PythonAbstractMeasurement__T]: ...
+    def theoreticalEvaluationWithoutDerivatives(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> EstimatedMeasurementBase[_PythonAbstractMeasurement__T]: ...
 
-class Range(AbstractMeasurement['Range']):
+class AngularAzEl(GroundReceiverMeasurement['AngularAzEl']):
     """
-    public class Range extends :class:`~org.orekit.estimation.measurements.AbstractMeasurement`<:class:`~org.orekit.estimation.measurements.Range`>
+    public class AngularAzEl extends :class:`~org.orekit.estimation.measurements.GroundReceiverMeasurement`<:class:`~org.orekit.estimation.measurements.AngularAzEl`>
+    
+        Class modeling an Azimuth-Elevation measurement from a ground station. The motion of the spacecraft during the signal
+        flight time is taken into account. The date of the measurement corresponds to the reception on ground of the reflected
+        signal.
+    
+        Since:
+            8.0
+    """
+    MEASUREMENT_TYPE: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEASUREMENT_TYPE
+    
+        Type of the measurement.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    def __init__(self, groundStation: GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], doubleArray2: typing.List[float], doubleArray3: typing.List[float], observableSatellite: ObservableSatellite): ...
+    def getObservedLineOfSight(self, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Calculate the Line Of Sight of the given measurement.
+        
+            Parameters:
+                outputFrame (:class:`~org.orekit.frames.Frame`): output frame of the line of sight vector
+        
+            Returns:
+                Vector3D the line of Sight of the measurement
+        
+        
+        """
+        ...
+
+class AngularRaDec(GroundReceiverMeasurement['AngularRaDec']):
+    """
+    public class AngularRaDec extends :class:`~org.orekit.estimation.measurements.GroundReceiverMeasurement`<:class:`~org.orekit.estimation.measurements.AngularRaDec`>
+    
+        Class modeling a Right Ascension - Declination measurement from a ground point (station, telescope). The angles are
+        given in an inertial reference frame. The motion of the spacecraft during the signal flight time is taken into account.
+        The date of the measurement corresponds to the reception on ground of the reflected signal.
+    
+        Since:
+            9.0
+    """
+    MEASUREMENT_TYPE: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEASUREMENT_TYPE
+    
+        Type of the measurement.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    def __init__(self, groundStation: GroundStation, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], doubleArray2: typing.List[float], doubleArray3: typing.List[float], observableSatellite: ObservableSatellite): ...
+    def getObservedLineOfSight(self, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Calculate the Line Of Sight of the given measurement.
+        
+            Parameters:
+                outputFrame (:class:`~org.orekit.frames.Frame`): output frame of the line of sight vector
+        
+            Returns:
+                Vector3D the line of Sight of the measurement
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
+    def getReferenceFrame(self) -> org.orekit.frames.Frame:
+        """
+            Get the reference frame in which the right ascension - declination angles are given.
+        
+            Returns:
+                reference frame in which the right ascension - declination angles are given
+        
+        
+        """
+        ...
+
+class BistaticRange(GroundReceiverMeasurement['BistaticRange']):
+    """
+    public class BistaticRange extends :class:`~org.orekit.estimation.measurements.GroundReceiverMeasurement`<:class:`~org.orekit.estimation.measurements.BistaticRange`>
+    
+        Class modeling a bistatic range measurement using an emitter ground station and a receiver ground station.
+    
+        The measurement is considered to be a signal:
+    
+          - Emitted from the emitter ground station
+          - Reflected on the spacecraft
+          - Received on the receiver ground station
+    
+        The date of the measurement corresponds to the reception on ground of the reflected signal.
+    
+        The motion of the stations and the spacecraft during the signal flight time are taken into account.
+    
+        Since:
+            11.2
+    """
+    MEASUREMENT_TYPE: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEASUREMENT_TYPE
+    
+        Type of the measurement.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    def __init__(self, groundStation: GroundStation, groundStation2: GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, observableSatellite: ObservableSatellite): ...
+    def getEmitterStation(self) -> GroundStation:
+        """
+            Get the emitter ground station.
+        
+            Returns:
+                emitter ground station
+        
+        
+        """
+        ...
+    def getReceiverStation(self) -> GroundStation:
+        """
+            Get the receiver ground station.
+        
+            Returns:
+                receiver ground station
+        
+        
+        """
+        ...
+
+class BistaticRangeRate(GroundReceiverMeasurement['BistaticRangeRate']):
+    """
+    public class BistaticRangeRate extends :class:`~org.orekit.estimation.measurements.GroundReceiverMeasurement`<:class:`~org.orekit.estimation.measurements.BistaticRangeRate`>
+    
+        Class modeling a bistatic range rate measurement using an emitter ground station and a receiver ground station.
+    
+        The measurement is considered to be a signal:
+    
+          - Emitted from the emitter ground station
+          - Reflected on the spacecraft
+          - Received on the receiver ground station
+    
+        The date of the measurement corresponds to the reception on ground of the reflected signal. The quantity measured at the
+        receiver is the bistatic radial velocity as the sum of the radial velocities with respect to the two stations.
+    
+        The motion of the stations and the spacecraft during the signal flight time are taken into account.
+    
+        The Doppler measurement can be obtained by multiplying the velocity by (fe/c), where fe is the emission frequency.
+    
+        Since:
+            11.2
+    """
+    MEASUREMENT_TYPE: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEASUREMENT_TYPE
+    
+        Type of the measurement.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    def __init__(self, groundStation: GroundStation, groundStation2: GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, observableSatellite: ObservableSatellite): ...
+    def getEmitterStation(self) -> GroundStation:
+        """
+            Get the emitter ground station.
+        
+            Returns:
+                emitter ground station
+        
+        
+        """
+        ...
+    def getReceiverStation(self) -> GroundStation:
+        """
+            Get the receiver ground station.
+        
+            Returns:
+                receiver ground station
+        
+        
+        """
+        ...
+
+class FDOA(GroundReceiverMeasurement['FDOA']):
+    """
+    public class FDOA extends :class:`~org.orekit.estimation.measurements.GroundReceiverMeasurement`<:class:`~org.orekit.estimation.measurements.FDOA`>
+    
+        Class modeling a Frequency Difference of Arrival measurement with a satellite as emitter and two ground stations as
+        receivers.
+    
+        FDOA measures the difference in signal arrival frequency between the emitter and receivers, corresponding to a
+        difference in range-rate from the two receivers to the emitter.
+    
+        The date of the measurement corresponds to the reception of the signal by the prime station. The measurement corresponds
+        to the frequency of the signal received at the prime station at the date of the measurement minus the frequency of the
+        signal received at the second station: :code:`fdoa = f :sub:`1` - f :sub:`2``
+    
+        The motion of the stations and the satellite during the signal flight time are taken into account.
+    
+        Since:
+            12.0
+    """
+    MEASUREMENT_TYPE: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEASUREMENT_TYPE
+    
+        Type of the measurement.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    def __init__(self, groundStation: GroundStation, groundStation2: GroundStation, double: float, absoluteDate: org.orekit.time.AbsoluteDate, double2: float, double3: float, double4: float, observableSatellite: ObservableSatellite): ...
+    def getPrimeStation(self) -> GroundStation:
+        """
+            Get the prime ground station, the one that gives the date of the measurement.
+        
+            Returns:
+                prime ground station
+        
+        
+        """
+        ...
+    def getSecondStation(self) -> GroundStation:
+        """
+            Get the second ground station, the one that gives the measurement.
+        
+            Returns:
+                second ground station
+        
+        
+        """
+        ...
+
+_PythonGroundReceiverMeasurement__T = typing.TypeVar('_PythonGroundReceiverMeasurement__T', bound=GroundReceiverMeasurement)  # <T>
+class PythonGroundReceiverMeasurement(GroundReceiverMeasurement[_PythonGroundReceiverMeasurement__T], typing.Generic[_PythonGroundReceiverMeasurement__T]):
+    """
+    public class PythonGroundReceiverMeasurement<T extends :class:`~org.orekit.estimation.measurements.GroundReceiverMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.GroundReceiverMeasurement`<T>
+    """
+    def __init__(self, groundStation: GroundStation, boolean: bool, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, observableSatellite: ObservableSatellite): ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+    def theoreticalEvaluation(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> EstimatedMeasurement[_PythonGroundReceiverMeasurement__T]: ...
+    def theoreticalEvaluationWithoutDerivatives(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> EstimatedMeasurementBase[_PythonGroundReceiverMeasurement__T]: ...
+
+class Range(GroundReceiverMeasurement['Range']):
+    """
+    public class Range extends :class:`~org.orekit.estimation.measurements.GroundReceiverMeasurement`<:class:`~org.orekit.estimation.measurements.Range`>
     
         Class modeling a range measurement from a ground station.
     
@@ -2086,7 +2454,6 @@ class Range(AbstractMeasurement['Range']):
             and therefore it evaluates to zero.
     
     
-    
         Since:
             8.0
     """
@@ -2102,30 +2469,10 @@ class Range(AbstractMeasurement['Range']):
     
     """
     def __init__(self, groundStation: GroundStation, boolean: bool, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, observableSatellite: ObservableSatellite): ...
-    def getStation(self) -> GroundStation:
-        """
-            Get the ground station from which measurement is performed.
-        
-            Returns:
-                ground station from which measurement is performed
-        
-        
-        """
-        ...
-    def isTwoWay(self) -> bool:
-        """
-            Check if the instance represents a two-way measurement.
-        
-            Returns:
-                true if the instance represents a two-way measurement
-        
-        
-        """
-        ...
 
-class RangeRate(AbstractMeasurement['RangeRate']):
+class RangeRate(GroundReceiverMeasurement['RangeRate']):
     """
-    public class RangeRate extends :class:`~org.orekit.estimation.measurements.AbstractMeasurement`<:class:`~org.orekit.estimation.measurements.RangeRate`>
+    public class RangeRate extends :class:`~org.orekit.estimation.measurements.GroundReceiverMeasurement`<:class:`~org.orekit.estimation.measurements.RangeRate`>
     
         Class modeling one-way or two-way range rate measurement between two vehicles. One-way range rate (or Doppler)
         measurements generally apply to specific satellites (e.g. GNSS, DORIS), where a signal is transmitted from a satellite
@@ -2148,30 +2495,10 @@ class RangeRate(AbstractMeasurement['RangeRate']):
     
     """
     def __init__(self, groundStation: GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, boolean: bool, observableSatellite: ObservableSatellite): ...
-    def getStation(self) -> GroundStation:
-        """
-            Get the ground station from which measurement is performed.
-        
-            Returns:
-                ground station from which measurement is performed
-        
-        
-        """
-        ...
-    def isTwoWay(self) -> bool:
-        """
-            Check if the instance represents a two-way measurement.
-        
-            Returns:
-                true if the instance represents a two-way measurement
-        
-        
-        """
-        ...
 
-class TDOA(AbstractMeasurement['TDOA']):
+class TDOA(GroundReceiverMeasurement['TDOA']):
     """
-    public class TDOA extends :class:`~org.orekit.estimation.measurements.AbstractMeasurement`<:class:`~org.orekit.estimation.measurements.TDOA`>
+    public class TDOA extends :class:`~org.orekit.estimation.measurements.GroundReceiverMeasurement`<:class:`~org.orekit.estimation.measurements.TDOA`>
     
         Class modeling a Time Difference of Arrival measurement with a satellite as emitter and two ground stations as
         receivers.
@@ -2221,9 +2548,9 @@ class TDOA(AbstractMeasurement['TDOA']):
         """
         ...
 
-class TurnAroundRange(AbstractMeasurement['TurnAroundRange']):
+class TurnAroundRange(GroundReceiverMeasurement['TurnAroundRange']):
     """
-    public class TurnAroundRange extends :class:`~org.orekit.estimation.measurements.AbstractMeasurement`<:class:`~org.orekit.estimation.measurements.TurnAroundRange`>
+    public class TurnAroundRange extends :class:`~org.orekit.estimation.measurements.GroundReceiverMeasurement`<:class:`~org.orekit.estimation.measurements.TurnAroundRange`>
     
         Class modeling a turn-around range measurement using a primary ground station and a secondary ground station.
     
@@ -2281,8 +2608,13 @@ class __module_protocol__(typing.Protocol):
     ComparableMeasurement: typing.Type[ComparableMeasurement]
     EstimatedEarthFrameProvider: typing.Type[EstimatedEarthFrameProvider]
     EstimatedMeasurement: typing.Type[EstimatedMeasurement]
+    EstimatedMeasurementBase: typing.Type[EstimatedMeasurementBase]
     EstimationModifier: typing.Type[EstimationModifier]
     EstimationsProvider: typing.Type[EstimationsProvider]
+    FDOA: typing.Type[FDOA]
+    GroundReceiverCommonParametersWithDerivatives: typing.Type[GroundReceiverCommonParametersWithDerivatives]
+    GroundReceiverCommonParametersWithoutDerivatives: typing.Type[GroundReceiverCommonParametersWithoutDerivatives]
+    GroundReceiverMeasurement: typing.Type[GroundReceiverMeasurement]
     GroundStation: typing.Type[GroundStation]
     InterSatellitesRange: typing.Type[InterSatellitesRange]
     MultiplexedMeasurement: typing.Type[MultiplexedMeasurement]
@@ -2294,6 +2626,7 @@ class __module_protocol__(typing.Protocol):
     PythonComparableMeasurement: typing.Type[PythonComparableMeasurement]
     PythonEstimationModifier: typing.Type[PythonEstimationModifier]
     PythonEstimationsProvider: typing.Type[PythonEstimationsProvider]
+    PythonGroundReceiverMeasurement: typing.Type[PythonGroundReceiverMeasurement]
     PythonObservedMeasurement: typing.Type[PythonObservedMeasurement]
     Range: typing.Type[Range]
     RangeRate: typing.Type[RangeRate]

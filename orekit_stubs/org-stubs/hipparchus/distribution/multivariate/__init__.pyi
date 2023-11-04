@@ -147,6 +147,15 @@ class MixtureMultivariateRealDistribution(AbstractMultivariateRealDistribution, 
     def sample(self, int: int) -> typing.List[typing.List[float]]: ...
 
 class MultivariateNormalDistribution(AbstractMultivariateRealDistribution):
+    """
+    public class MultivariateNormalDistribution extends :class:`~org.hipparchus.distribution.multivariate.AbstractMultivariateRealDistribution`
+    
+        Implementation of the multivariate normal (Gaussian) distribution.
+    
+        Also see:
+            ` Multivariate normal distribution (Wikipedia) <http://en.wikipedia.org/wiki/Multivariate_normal_distribution>`, `
+            Multivariate normal distribution (MathWorld) <http://mathworld.wolfram.com/MultivariateNormalDistribution.html>`
+    """
     @typing.overload
     def __init__(self, doubleArray: typing.List[float], doubleArray2: typing.List[typing.List[float]]): ...
     @typing.overload
@@ -156,12 +165,65 @@ class MultivariateNormalDistribution(AbstractMultivariateRealDistribution):
     @typing.overload
     def __init__(self, randomGenerator: org.hipparchus.random.RandomGenerator, doubleArray: typing.List[float], doubleArray2: typing.List[typing.List[float]], double3: float): ...
     def density(self, doubleArray: typing.List[float]) -> float: ...
-    def getCovariances(self) -> org.hipparchus.linear.RealMatrix: ...
-    def getMeans(self) -> typing.List[float]: ...
-    def getSingularMatrixCheckTolerance(self) -> float: ...
-    def getStandardDeviations(self) -> typing.List[float]: ...
+    def getCovariances(self) -> org.hipparchus.linear.RealMatrix:
+        """
+            Gets the covariance matrix.
+        
+            Returns:
+                the covariance matrix.
+        
+        
+        """
+        ...
+    def getMeans(self) -> typing.List[float]:
+        """
+            Gets the mean vector.
+        
+            Returns:
+                the mean vector.
+        
+        
+        """
+        ...
+    def getSingularMatrixCheckTolerance(self) -> float:
+        """
+            Gets the current setting for the tolerance check used during singular checks before inversion
+        
+            Returns:
+                tolerance
+        
+        
+        """
+        ...
+    def getStandardDeviations(self) -> typing.List[float]:
+        """
+            Gets the square root of each element on the diagonal of the covariance matrix.
+        
+            Returns:
+                the standard deviations.
+        
+        
+        """
+        ...
     @typing.overload
-    def sample(self) -> typing.List[float]: ...
+    def sample(self) -> typing.List[float]:
+        """
+            Generates a random value vector sampled from this distribution.
+        
+            Specified by:
+                :meth:`~org.hipparchus.distribution.MultivariateRealDistribution.sample` in
+                interface :class:`~org.hipparchus.distribution.MultivariateRealDistribution`
+        
+            Specified by:
+                :meth:`~org.hipparchus.distribution.multivariate.AbstractMultivariateRealDistribution.sample` in
+                class :class:`~org.hipparchus.distribution.multivariate.AbstractMultivariateRealDistribution`
+        
+            Returns:
+                a random value vector.
+        
+        
+        """
+        ...
     @typing.overload
     def sample(self, int: int) -> typing.List[typing.List[float]]: ...
 

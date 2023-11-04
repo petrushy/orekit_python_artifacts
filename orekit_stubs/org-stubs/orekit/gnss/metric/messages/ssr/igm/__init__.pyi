@@ -1,239 +1,10 @@
 import java.util
 import org.orekit.gnss
+import org.orekit.gnss.metric.messages.common
 import org.orekit.gnss.metric.messages.ssr
 import typing
 
 
-
-class ClockCorrection:
-    """
-    public class ClockCorrection extends :class:`~org.orekit.gnss.metric.messages.ssr.igm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
-    
-        Container for SSR clock correction data.
-    
-        Since:
-            11.0
-    """
-    def __init__(self, double: float, double2: float, double3: float): ...
-    def getDeltaClockC0(self) -> float:
-        """
-            Get the delta clock C0.
-        
-            The reference time t0 is SSR Epoch Time (IDF003) plus ½ SSR Update Interval.
-        
-            Returns:
-                the delta clock C0 in seconds
-        
-        
-        """
-        ...
-    def getDeltaClockC1(self) -> float:
-        """
-            Get the delta clock C1.
-        
-            The reference time t0 is SSR Epoch Time (IDF003) plus ½ SSR Update Interval.
-        
-            Returns:
-                the delta clock C1 in seconds
-        
-        
-        """
-        ...
-    def getDeltaClockC2(self) -> float:
-        """
-            Get the delta clock C2.
-        
-            The reference time t0 is SSR Epoch Time (IDF003) plus ½ SSR Update Interval.
-        
-            Returns:
-                the delta clock C2 in seconds
-        
-        
-        """
-        ...
-
-class CodeBias:
-    """
-    public class CodeBias extends :class:`~org.orekit.gnss.metric.messages.ssr.igm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
-    
-        Container for code bias data.
-    
-        Since:
-            11.0
-    """
-    def __init__(self, int: int, double: float): ...
-    def getCodeBias(self) -> float:
-        """
-            Get the code bias associated to the signal ID.
-        
-            Returns:
-                the code bias in meters
-        
-        
-        """
-        ...
-    def getSignalID(self) -> int:
-        """
-            Get the GNSS signal and tracking mode identifier.
-        
-            Returns:
-                the GNSS signal and tracking mode identifier
-        
-        
-        """
-        ...
-
-class OrbitCorrection:
-    """
-    public class OrbitCorrection extends :class:`~org.orekit.gnss.metric.messages.ssr.igm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
-    
-        Container for SSR orbit correction data.
-    
-        Since:
-            11.0
-    """
-    def __init__(self, double: float, double2: float, double3: float, double4: float, double5: float, double6: float): ...
-    def getDeltaOrbitAlongTrack(self) -> float:
-        """
-            Get the along-track orbit correction for broadcast ephemeris.
-        
-            The reference time t0 is SSR Epoch Time (IDF003) plus ½ SSR Update Interval.
-        
-            Returns:
-                the along-track orbit correction for broadcast ephemeris in meters
-        
-        
-        """
-        ...
-    def getDeltaOrbitCrossTrack(self) -> float:
-        """
-            Get the cross-track orbit correction for broadcast ephemeris.
-        
-            The reference time t0 is SSR Epoch Time (IDF003) plus ½ SSR Update Interval.
-        
-            Returns:
-                the cross-track orbit correction for broadcast ephemeris
-        
-        
-        """
-        ...
-    def getDeltaOrbitRadial(self) -> float:
-        """
-            Get the radial orbit correction for broadcast ephemeris.
-        
-            The reference time t0 is SSR Epoch Time (IDF003) plus ½ SSR Update Interval.
-        
-            Returns:
-                the radial orbit correction for broadcast ephemeris in meters
-        
-        
-        """
-        ...
-    def getDotOrbitDeltaAlongTrack(self) -> float:
-        """
-            Get the velocity of along-track orbit correction for broadcast ephemeris.
-        
-            The reference time t0 is SSR Epoch Time (IDF003) plus ½ SSR Update Interval.
-        
-            Returns:
-                the velocity of along-track orbit correction for broadcast ephemeris in m/s
-        
-        
-        """
-        ...
-    def getDotOrbitDeltaCrossTrack(self) -> float:
-        """
-            Get the velocity of cross-track orbit correction for broadcast ephemeris.
-        
-            The reference time t0 is SSR Epoch Time (IDF003) plus ½ SSR Update Interval.
-        
-            Returns:
-                the velocity of cross-track orbit correction for broadcast ephemeris in m/s
-        
-        
-        """
-        ...
-    def getDotOrbitDeltaRadial(self) -> float:
-        """
-            Get the velocity of radial orbit correction for broadcast ephemeris.
-        
-            The reference time t0 is SSR Epoch Time (IDF003) plus ½ SSR Update Interval.
-        
-            Returns:
-                the velocity of Radial orbit correction for broadcast ephemeris in m/s
-        
-        
-        """
-        ...
-
-class PhaseBias:
-    """
-    public class PhaseBias extends :class:`~org.orekit.gnss.metric.messages.ssr.igm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
-    
-        Container for phase bias data.
-    
-        Since:
-            11.0
-    """
-    def __init__(self, int: int, boolean: bool, int2: int, int3: int, double: float): ...
-    def getDiscontinuityCounter(self) -> int:
-        """
-            Get the signal phase discontinuity counter.
-        
-            Increased for every discontinuity in phase
-        
-            Returns:
-                the signal phase discontinuity counter
-        
-        
-        """
-        ...
-    def getPhaseBias(self) -> float:
-        """
-            Get the phase bias associated to the signal ID.
-        
-            Returns:
-                the phase bias in meters
-        
-        
-        """
-        ...
-    def getSignalID(self) -> int:
-        """
-            Get the GNSS signal and tracking mode identifier.
-        
-            Returns:
-                the GNSS signal and tracking mode identifier
-        
-        
-        """
-        ...
-    def getSignalWideLaneIntegerIndicator(self) -> int:
-        """
-            Get the signal Wide-Lane integer indicator.
-        
-              - 0: No wide-lane with integer property for this signal or satellite
-              - 1: Signal belongs to group two of wide-lanes with integer property
-              - 2: Signal belongs to group one of wide-lanes with integer property
-              - 3: Signal belongs to group one of wide-lanes with integer property
-        
-        
-            Returns:
-                the signal Wide-Lane indicator
-        
-        
-        """
-        ...
-    def isSignalInteger(self) -> bool:
-        """
-            Get the flag indicating is signal has integer property.
-        
-            Returns:
-                true is signal has integer property
-        
-        
-        """
-        ...
 
 class SsrIgmData(org.orekit.gnss.metric.messages.ssr.SsrData):
     """
@@ -355,7 +126,7 @@ class SsrIgm01Data(SsrIgmData):
         
         """
         ...
-    def getOrbitCorrection(self) -> OrbitCorrection:
+    def getOrbitCorrection(self) -> org.orekit.gnss.metric.messages.common.OrbitCorrection:
         """
             Get the orbit correction data.
         
@@ -375,12 +146,12 @@ class SsrIgm01Data(SsrIgmData):
         
         """
         ...
-    def setOrbitCorrection(self, orbitCorrection: OrbitCorrection) -> None:
+    def setOrbitCorrection(self, orbitCorrection: org.orekit.gnss.metric.messages.common.OrbitCorrection) -> None:
         """
             Set the orbit correction data.
         
             Parameters:
-                orbitCorrection (:class:`~org.orekit.gnss.metric.messages.ssr.igm.OrbitCorrection`): the data to set
+                orbitCorrection (:class:`~org.orekit.gnss.metric.messages.common.OrbitCorrection`): the data to set
         
         
         """
@@ -439,7 +210,7 @@ class SsrIgm02Data(SsrIgmData):
             11.0
     """
     def __init__(self): ...
-    def getClockCorrection(self) -> ClockCorrection:
+    def getClockCorrection(self) -> org.orekit.gnss.metric.messages.common.ClockCorrection:
         """
             Get the clock correction data.
         
@@ -449,12 +220,12 @@ class SsrIgm02Data(SsrIgmData):
         
         """
         ...
-    def setClockCorrection(self, clockCorrection: ClockCorrection) -> None:
+    def setClockCorrection(self, clockCorrection: org.orekit.gnss.metric.messages.common.ClockCorrection) -> None:
         """
             Set the clock correction data.
         
             Parameters:
-                clockCorrection (:class:`~org.orekit.gnss.metric.messages.ssr.igm.ClockCorrection`): the data to set
+                clockCorrection (:class:`~org.orekit.gnss.metric.messages.common.ClockCorrection`): the data to set
         
         
         """
@@ -493,7 +264,7 @@ class SsrIgm03Data(SsrIgmData):
             11.0
     """
     def __init__(self): ...
-    def getClockCorrection(self) -> ClockCorrection:
+    def getClockCorrection(self) -> org.orekit.gnss.metric.messages.common.ClockCorrection:
         """
             Get the clock correction data.
         
@@ -515,7 +286,7 @@ class SsrIgm03Data(SsrIgmData):
         
         """
         ...
-    def getOrbitCorrection(self) -> OrbitCorrection:
+    def getOrbitCorrection(self) -> org.orekit.gnss.metric.messages.common.OrbitCorrection:
         """
             Get the orbit correction data.
         
@@ -525,12 +296,12 @@ class SsrIgm03Data(SsrIgmData):
         
         """
         ...
-    def setClockCorrection(self, clockCorrection: ClockCorrection) -> None:
+    def setClockCorrection(self, clockCorrection: org.orekit.gnss.metric.messages.common.ClockCorrection) -> None:
         """
             Set the clock correction data.
         
             Parameters:
-                clockCorrection (:class:`~org.orekit.gnss.metric.messages.ssr.igm.ClockCorrection`): the data to set
+                clockCorrection (:class:`~org.orekit.gnss.metric.messages.common.ClockCorrection`): the data to set
         
         
         """
@@ -545,12 +316,12 @@ class SsrIgm03Data(SsrIgmData):
         
         """
         ...
-    def setOrbitCorrection(self, orbitCorrection: OrbitCorrection) -> None:
+    def setOrbitCorrection(self, orbitCorrection: org.orekit.gnss.metric.messages.common.OrbitCorrection) -> None:
         """
             Set the orbit correction data.
         
             Parameters:
-                orbitCorrection (:class:`~org.orekit.gnss.metric.messages.ssr.igm.OrbitCorrection`): the data to set
+                orbitCorrection (:class:`~org.orekit.gnss.metric.messages.common.OrbitCorrection`): the data to set
         
         
         """
@@ -663,17 +434,17 @@ class SsrIgm05Data(SsrIgmData):
             11.0
     """
     def __init__(self): ...
-    def addCodeBias(self, codeBias: CodeBias) -> None:
+    def addCodeBias(self, codeBias: org.orekit.gnss.metric.messages.common.CodeBias) -> None:
         """
             Add a code bias value for the current satellite.
         
             Parameters:
-                bias (:class:`~org.orekit.gnss.metric.messages.ssr.igm.CodeBias`): the code bias to add
+                bias (:class:`~org.orekit.gnss.metric.messages.common.CodeBias`): the code bias to add
         
         
         """
         ...
-    def getCodeBias(self, int: int) -> CodeBias:
+    def getCodeBias(self, int: int) -> org.orekit.gnss.metric.messages.common.CodeBias:
         """
             Get the code bias for a given signal ID.
         
@@ -686,7 +457,7 @@ class SsrIgm05Data(SsrIgmData):
         
         """
         ...
-    def getCodeBiases(self) -> java.util.Map[int, CodeBias]: ...
+    def getCodeBiases(self) -> java.util.Map[int, org.orekit.gnss.metric.messages.common.CodeBias]: ...
     def getNumberOfBiasesProcessed(self) -> int:
         """
             Get the number of biases processed for the current satellite.
@@ -741,12 +512,12 @@ class SsrIgm06Data(SsrIgmData):
             11.0
     """
     def __init__(self): ...
-    def addPhaseBias(self, phaseBias: PhaseBias) -> None:
+    def addPhaseBias(self, phaseBias: org.orekit.gnss.metric.messages.common.PhaseBias) -> None:
         """
             Add a phase bias value for the current satellite.
         
             Parameters:
-                bias (:class:`~org.orekit.gnss.metric.messages.ssr.igm.PhaseBias`): the phase bias to add
+                bias (:class:`~org.orekit.gnss.metric.messages.common.PhaseBias`): the phase bias to add
         
         
         """
@@ -761,7 +532,7 @@ class SsrIgm06Data(SsrIgmData):
         
         """
         ...
-    def getPhaseBias(self, int: int) -> PhaseBias:
+    def getPhaseBias(self, int: int) -> org.orekit.gnss.metric.messages.common.PhaseBias:
         """
             Get the phase bias for a given signal ID.
         
@@ -774,7 +545,7 @@ class SsrIgm06Data(SsrIgmData):
         
         """
         ...
-    def getPhaseBiases(self) -> java.util.Map[int, PhaseBias]: ...
+    def getPhaseBiases(self) -> java.util.Map[int, org.orekit.gnss.metric.messages.common.PhaseBias]: ...
     def getYawAngle(self) -> float:
         """
             Get the yaw angle used for computation of phase wind-up correction.
@@ -937,10 +708,6 @@ class SsrIgm07Header(SsrIgmHeader):
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.gnss.metric.messages.ssr.igm")``.
 
-    ClockCorrection: typing.Type[ClockCorrection]
-    CodeBias: typing.Type[CodeBias]
-    OrbitCorrection: typing.Type[OrbitCorrection]
-    PhaseBias: typing.Type[PhaseBias]
     SsrIgm01: typing.Type[SsrIgm01]
     SsrIgm01Data: typing.Type[SsrIgm01Data]
     SsrIgm01Header: typing.Type[SsrIgm01Header]

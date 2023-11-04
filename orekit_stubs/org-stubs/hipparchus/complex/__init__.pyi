@@ -10,9 +10,9 @@ import typing
 
 
 
-class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializable):
+class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.lang.Comparable['Complex'], java.io.Serializable):
     """
-    public class Complex extends :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.CalculusFieldElement`<:class:`~org.hipparchus.complex.Complex`>, :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public class Complex extends :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.CalculusFieldElement`<:class:`~org.hipparchus.complex.Complex`>, :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`<:class:`~org.hipparchus.complex.Complex`>, :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Representation of a Complex number, i.e. a number which has both a real and imaginary part.
     
@@ -309,6 +309,22 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
         
         """
         ...
+    def compareTo(self, complex: 'Complex') -> int:
+        """
+        
+            Comparison us performed using real ordering as the primary sort order and imaginary ordering as the secondary sort
+            order.
+        
+            Specified by:
+                :meth:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable.html?is` in
+                interface :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`
+        
+            Since:
+                3.0
+        
+        
+        """
+        ...
     def conjugate(self) -> 'Complex':
         """
             Returns the conjugate of this complex number. The conjugate of :code:`a + bi` is :code:`a - bi`.
@@ -381,6 +397,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
         
             .. code-block: java
             
+            
               Examples:
               
                cos(1 ± INFINITY i) = 1 ∓ INFINITY i
@@ -405,6 +422,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
         
             .. code-block: java
             
+            
               
                cosh(a + bi) = cosh(a)cos(b) + sinh(a)sin(b)i
               
@@ -419,6 +437,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
             result.
         
             .. code-block: java
+            
             
               Examples:
               
@@ -562,6 +581,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
         
             .. code-block: java
             
+            
               
                exp(a + bi) = exp(a)cos(b) + exp(a)sin(b)i
               
@@ -575,6 +595,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
             result.
         
             .. code-block: java
+            
             
               Examples:
               
@@ -1005,6 +1026,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
         
             .. code-block: java
             
+            
               
                log(a + bi) = ln(|a + bi|) + arg(a + bi)i
               
@@ -1018,6 +1040,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
             parts of the result.
         
             .. code-block: java
+            
             
               Examples:
               
@@ -1356,6 +1379,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
         
             .. code-block: java
             
+            
               
                sin(a + bi) = sin(a)cosh(b) + cos(a)sinh(b)i
               
@@ -1371,6 +1395,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
             of the result.
         
             .. code-block: java
+            
             
               Examples:
               
@@ -1397,6 +1422,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
         
             .. code-block: java
             
+            
               
                sinh(a + bi) = sinh(a)cos(b)) + cosh(a)sin(b)i
               
@@ -1412,6 +1438,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
             result.
         
             .. code-block: java
+            
             
               Examples:
               
@@ -1440,7 +1467,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
               2.  
                 .. code-block: java
                 
-                if   a ≥ 0 return :code:`t + (b/2t)i`
+                if  a ≥ 0 return :code:`t + (b/2t)i`
                   else return :code:`|b|/2t + sign(b)t i`
         
             where
@@ -1458,6 +1485,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
             result.
         
             .. code-block: java
+            
             
               Examples:
               
@@ -1522,6 +1550,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
         
             .. code-block: java
             
+            
               
                tan(a + bi) = sin(2a)/(cos(2a)+cosh(2b)) + [sinh(2b)/(cos(2a)+cosh(2b))]i
               
@@ -1536,6 +1565,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
             parts of the result.
         
             .. code-block: java
+            
             
               Examples:
               
@@ -1562,6 +1592,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
         
             .. code-block: java
             
+            
               
                tan(a + bi) = sinh(2a)/(cosh(2a)+cos(2b)) + [sin(2b)/(cosh(2a)+cos(2b))]i
               
@@ -1576,6 +1607,7 @@ class Complex(org.hipparchus.CalculusFieldElement['Complex'], java.io.Serializab
             result.
         
             .. code-block: java
+            
             
               Examples:
               
@@ -1827,7 +1859,7 @@ class ComplexFormat:
             Returns:
                 the value passed in as toAppendTo.
         
-        public :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is` format(:class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` obj, :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is` toAppendTo, :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition?is` pos) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        public :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is` format (:class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` obj, :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.StringBuffer?is` toAppendTo, :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.text.FieldPosition?is` pos) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Formats a object to produce a string. :code:`obj` must be either a :class:`~org.hipparchus.complex.Complex` object or a
             :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Number?is` object. Any other type of
@@ -1904,7 +1936,7 @@ class ComplexFormat:
             Since:
                 1.4
         
-        public static :class:`~org.hipparchus.complex.ComplexFormat` getComplexFormat(:class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` imaginaryCharacter, :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is` locale) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`, :class:`~org.hipparchus.exception.NullArgumentException`
+        public static :class:`~org.hipparchus.complex.ComplexFormat` getComplexFormat (:class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` imaginaryCharacter, :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is` locale) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`, :class:`~org.hipparchus.exception.NullArgumentException`
         
             Returns the default complex format for the given locale.
         
@@ -2574,7 +2606,6 @@ class FieldComplexField(org.hipparchus.Field[FieldComplex[_FieldComplexField__T]
     public class FieldComplexField<T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> extends :class:`~org.hipparchus.complex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.Field`<:class:`~org.hipparchus.complex.FieldComplex`<T>>
     
         Representation of the complex numbers field.
-    
     
         Since:
             2.0

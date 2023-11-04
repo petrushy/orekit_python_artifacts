@@ -15,7 +15,6 @@ class Max(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
     
         Returns the maximum of the available values.
     
-    
           - The result is :code:`NaN` iff all values are :code:`NaN` (i.e. :code:`NaN` values have no impact on the value of the
             statistic).
           - If any of the values equals :code:`Double.POSITIVE_INFINITY`, the result is :code:`Double.POSITIVE_INFINITY.`
@@ -272,7 +271,6 @@ class Min(org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic, 
     public class Min extends :class:`~org.hipparchus.stat.descriptive.AbstractStorelessUnivariateStatistic` implements :class:`~org.hipparchus.stat.descriptive.AggregatableStatistic`<:class:`~org.hipparchus.stat.descriptive.rank.Min`>, :class:`~org.hipparchus.stat.descriptive.rank.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         Returns the minimum of the available values.
-    
     
           - The result is :code:`NaN` iff all values are :code:`NaN` (i.e. :code:`NaN` values have no impact on the value of the
             statistic).
@@ -575,7 +573,7 @@ class Percentile(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, ja
             Also see:
                 :meth:`~org.hipparchus.stat.descriptive.AbstractUnivariateStatistic.evaluate`
         
-        public void setData(double[] values, int begin, int length) throws :class:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus`
+        public void setData (double[] values, int begin, int length) throws :class:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus`
         
             Set the data array. The input array is copied, not referenced.
         
@@ -610,6 +608,7 @@ class Percentile(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, ja
         
             .. code-block: java
             
+            
                Percentile customized = new Percentile(quantile).
                                        withEstimationType(estimationType).
                                        withNaNStrategy(nanStrategy).
@@ -641,6 +640,7 @@ class Percentile(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, ja
         
             .. code-block: java
             
+            
                Percentile customized = new Percentile(quantile).
                                        withEstimationType(estimationType).
                                        withNaNStrategy(nanStrategy).
@@ -671,6 +671,7 @@ class Percentile(org.hipparchus.stat.descriptive.AbstractUnivariateStatistic, ja
             done as follows:
         
             .. code-block: java
+            
             
                Percentile customized = new Percentile(quantile).
                                        withEstimationType(estimationType).
@@ -852,16 +853,16 @@ class RandomPercentile(org.hipparchus.stat.descriptive.AbstractStorelessUnivaria
             Returns an estimate of the median, computed using the designated array segment as input data.
         
             Specified by:
+                :meth:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus` in
+                interface :class:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus`
+        
+            Specified by:
                 :meth:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic.evaluate` in
                 interface :class:`~org.hipparchus.stat.descriptive.StorelessUnivariateStatistic`
         
             Specified by:
                 :meth:`~org.hipparchus.stat.descriptive.UnivariateStatistic.evaluate` in
                 interface :class:`~org.hipparchus.stat.descriptive.UnivariateStatistic`
-        
-            Specified by:
-                :meth:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus` in
-                interface :class:`~org.hipparchus.stat.descriptive.rank.https:.www.hipparchus.org.hipparchus`
         
             Parameters:
                 values (double[]): source of input data

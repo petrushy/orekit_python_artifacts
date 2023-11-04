@@ -15,6 +15,7 @@ import org.orekit.orbits
 import org.orekit.propagation
 import org.orekit.python
 import org.orekit.rugged
+import org.orekit.ssa
 import org.orekit.time
 import org.orekit.utils
 import typing
@@ -40,5 +41,6 @@ class __module_protocol__(typing.Protocol):
     propagation: org.orekit.propagation.__module_protocol__
     python: org.orekit.python.__module_protocol__
     rugged: org.orekit.rugged.__module_protocol__
+    ssa: org.orekit.ssa.__module_protocol__
     time: org.orekit.time.__module_protocol__
     utils: org.orekit.utils.__module_protocol__

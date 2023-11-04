@@ -8,6 +8,7 @@ import org.hipparchus.geometry.euclidean
 import org.hipparchus.geometry.hull
 import org.hipparchus.geometry.partitioning
 import org.hipparchus.geometry.spherical
+import org.hipparchus.util
 import typing
 
 
@@ -25,12 +26,10 @@ class LocalizedGeometryFormats(java.lang.Enum['LocalizedGeometryFormats'], org.h
         a default format if some translation is missing.
     """
     CANNOT_NORMALIZE_A_ZERO_NORM_VECTOR: typing.ClassVar['LocalizedGeometryFormats'] = ...
-    CARDAN_ANGLES_SINGULARITY: typing.ClassVar['LocalizedGeometryFormats'] = ...
     CLOSE_VERTICES: typing.ClassVar['LocalizedGeometryFormats'] = ...
     CLOSEST_ORTHOGONAL_MATRIX_HAS_NEGATIVE_DETERMINANT: typing.ClassVar['LocalizedGeometryFormats'] = ...
     CROSSING_BOUNDARY_LOOPS: typing.ClassVar['LocalizedGeometryFormats'] = ...
     EDGE_CONNECTED_TO_ONE_FACET: typing.ClassVar['LocalizedGeometryFormats'] = ...
-    EULER_ANGLES_SINGULARITY: typing.ClassVar['LocalizedGeometryFormats'] = ...
     FACET_ORIENTATION_MISMATCH: typing.ClassVar['LocalizedGeometryFormats'] = ...
     INCONSISTENT_STATE_AT_2_PI_WRAPPING: typing.ClassVar['LocalizedGeometryFormats'] = ...
     NON_INVERTIBLE_TRANSFORM: typing.ClassVar['LocalizedGeometryFormats'] = ...
@@ -98,6 +97,7 @@ class LocalizedGeometryFormats(java.lang.Enum['LocalizedGeometryFormats'], org.h
         
             .. code-block: java
             
+            
             for (LocalizedGeometryFormats c : LocalizedGeometryFormats.values())
                 System.out.println(c);
             
@@ -163,9 +163,10 @@ class Space(java.io.Serializable):
     def getSubSpace(self) -> 'Space': ...
 
 _VectorFormat__S = typing.TypeVar('_VectorFormat__S', bound=Space)  # <S>
-class VectorFormat(typing.Generic[_VectorFormat__S]):
+_VectorFormat__V = typing.TypeVar('_VectorFormat__V', bound='Vector')  # <V>
+class VectorFormat(typing.Generic[_VectorFormat__S, _VectorFormat__V]):
     """
-    public abstract class VectorFormat<S extends :class:`~org.hipparchus.geometry.Space`> extends :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    public abstract class VectorFormat<S extends :class:`~org.hipparchus.geometry.Space`, V extends :class:`~org.hipparchus.geometry.Vector`<S, V>> extends :class:`~org.hipparchus.geometry.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Formats a vector in components list format "{x; y; ...}".
     
@@ -217,7 +218,7 @@ class VectorFormat(typing.Generic[_VectorFormat__S]):
     
     """
     @typing.overload
-    def format(self, vector: 'Vector'[_VectorFormat__S], stringBuffer: java.lang.StringBuffer, fieldPosition: java.text.FieldPosition) -> java.lang.StringBuffer:
+    def format(self, vector: 'Vector'[_VectorFormat__S, _VectorFormat__V], stringBuffer: java.lang.StringBuffer, fieldPosition: java.text.FieldPosition) -> java.lang.StringBuffer:
         """
             Formats the coordinates of a :class:`~org.hipparchus.geometry.Vector` to produce a string.
         
@@ -233,7 +234,7 @@ class VectorFormat(typing.Generic[_VectorFormat__S]):
         """
         ...
     @typing.overload
-    def format(self, vector: 'Vector'[_VectorFormat__S]) -> str: ...
+    def format(self, vector: 'Vector'[_VectorFormat__S, _VectorFormat__V]) -> str: ...
     @staticmethod
     def getAvailableLocales() -> typing.List[java.util.Locale]:
         """
@@ -289,14 +290,15 @@ class VectorFormat(typing.Generic[_VectorFormat__S]):
         """
         ...
     @typing.overload
-    def parse(self, string: str) -> 'Vector'[_VectorFormat__S]: ...
+    def parse(self, string: str) -> 'Vector'[_VectorFormat__S, _VectorFormat__V]: ...
     @typing.overload
-    def parse(self, string: str, parsePosition: java.text.ParsePosition) -> 'Vector'[_VectorFormat__S]: ...
+    def parse(self, string: str, parsePosition: java.text.ParsePosition) -> 'Vector'[_VectorFormat__S, _VectorFormat__V]: ...
 
 _Vector__S = typing.TypeVar('_Vector__S', bound=Space)  # <S>
-class Vector(Point[_Vector__S], typing.Generic[_Vector__S]):
+_Vector__V = typing.TypeVar('_Vector__V', bound='Vector')  # <V>
+class Vector(Point[_Vector__S], org.hipparchus.util.Blendable['Vector'[_Vector__S, _Vector__V]], typing.Generic[_Vector__S, _Vector__V]):
     """
-    public interface Vector<S extends :class:`~org.hipparchus.geometry.Space`> extends :class:`~org.hipparchus.geometry.Point`<S>
+    public interface Vector<S extends :class:`~org.hipparchus.geometry.Space`, V extends Vector<S, V>> extends :class:`~org.hipparchus.geometry.Point`<S>, :class:`~org.hipparchus.geometry.https:.www.hipparchus.org.hipparchus`<:class:`~org.hipparchus.geometry.Vector`<S, V>>
     
         This interface represents a generic vector in a vectorial space or a point in an affine space.
     
@@ -304,13 +306,14 @@ class Vector(Point[_Vector__S], typing.Generic[_Vector__S]):
             :class:`~org.hipparchus.geometry.Space`, :class:`~org.hipparchus.geometry.Point`
     """
     @typing.overload
-    def add(self, double: float, vector: 'Vector'[_Vector__S]) -> 'Vector'[_Vector__S]: ...
+    def add(self, double: float, vector: 'Vector'[_Vector__S, _Vector__V]) -> _Vector__V: ...
     @typing.overload
-    def add(self, vector: 'Vector'[_Vector__S]) -> 'Vector'[_Vector__S]: ...
-    def distance1(self, vector: 'Vector'[_Vector__S]) -> float: ...
-    def distanceInf(self, vector: 'Vector'[_Vector__S]) -> float: ...
-    def distanceSq(self, vector: 'Vector'[_Vector__S]) -> float: ...
-    def dotProduct(self, vector: 'Vector'[_Vector__S]) -> float: ...
+    def add(self, vector: 'Vector'[_Vector__S, _Vector__V]) -> _Vector__V: ...
+    def blendArithmeticallyWith(self, vector: 'Vector'[_Vector__S, _Vector__V], double: float) -> _Vector__V: ...
+    def distance1(self, vector: 'Vector'[_Vector__S, _Vector__V]) -> float: ...
+    def distanceInf(self, vector: 'Vector'[_Vector__S, _Vector__V]) -> float: ...
+    def distanceSq(self, vector: 'Vector'[_Vector__S, _Vector__V]) -> float: ...
+    def dotProduct(self, vector: 'Vector'[_Vector__S, _Vector__V]) -> float: ...
     def getNorm(self) -> float:
         """
             Get the L :sub:`2` norm for the vector.
@@ -351,7 +354,16 @@ class Vector(Point[_Vector__S], typing.Generic[_Vector__S]):
         
         """
         ...
-    def getZero(self) -> 'Vector'[_Vector__S]: ...
+    def getZero(self) -> _Vector__V:
+        """
+            Get the null vector of the vectorial space or origin point of the affine space.
+        
+            Returns:
+                null vector of the vectorial space or origin point of the affine space
+        
+        
+        """
+        ...
     def isInfinite(self) -> bool:
         """
             Returns true if any coordinate of this vector is infinite and none are NaN; false otherwise
@@ -362,13 +374,34 @@ class Vector(Point[_Vector__S], typing.Generic[_Vector__S]):
         
         """
         ...
-    def negate(self) -> 'Vector'[_Vector__S]: ...
-    def normalize(self) -> 'Vector'[_Vector__S]: ...
-    def scalarMultiply(self, double: float) -> 'Vector'[_Vector__S]: ...
+    def negate(self) -> _Vector__V:
+        """
+            Get the opposite of the instance.
+        
+            Returns:
+                a new vector which is opposite to the instance
+        
+        
+        """
+        ...
+    def normalize(self) -> _Vector__V: ...
+    def scalarMultiply(self, double: float) -> _Vector__V:
+        """
+            Multiply the instance by a scalar.
+        
+            Parameters:
+                a (double): scalar
+        
+            Returns:
+                a new vector
+        
+        
+        """
+        ...
     @typing.overload
-    def subtract(self, double: float, vector: 'Vector'[_Vector__S]) -> 'Vector'[_Vector__S]: ...
+    def subtract(self, double: float, vector: 'Vector'[_Vector__S, _Vector__V]) -> _Vector__V: ...
     @typing.overload
-    def subtract(self, vector: 'Vector'[_Vector__S]) -> 'Vector'[_Vector__S]: ...
+    def subtract(self, vector: 'Vector'[_Vector__S, _Vector__V]) -> _Vector__V: ...
     def toString(self, numberFormat: java.text.NumberFormat) -> str:
         """
             Get a string representation of this vector.

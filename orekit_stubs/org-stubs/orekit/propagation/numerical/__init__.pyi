@@ -2,7 +2,6 @@ import java.util
 import org
 import org.hipparchus
 import org.hipparchus.geometry.euclidean.threed
-import org.hipparchus.linear
 import org.hipparchus.ode
 import org.hipparchus.ode.nonstiff
 import org.orekit.attitudes
@@ -20,12 +19,11 @@ import typing
 
 
 
-class EpochDerivativesEquations(org.orekit.propagation.integration.AdditionalDerivativesProvider, org.orekit.propagation.integration.AdditionalEquations):
+class EpochDerivativesEquations(org.orekit.propagation.integration.AdditionalDerivativesProvider):
     """
-    public class EpochDerivativesEquations extends :class:`~org.orekit.propagation.numerical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`, :class:`~org.orekit.propagation.integration.AdditionalEquations`
+    public class EpochDerivativesEquations extends :class:`~org.orekit.propagation.numerical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
     
-        This class is a copy of :class:`~org.orekit.propagation.numerical.AbsolutePartialDerivativesEquations` The computation
-        of the derivatives of the acceleration due to a ThirdBodyAttraction has been added.
+        Computes derivatives of the acceleration, including ThirdBodyAttraction.
         :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider` computing the partial derivatives of the
         state (orbit) with respect to initial state and force models parameters.
     
@@ -37,8 +35,8 @@ class EpochDerivativesEquations(org.orekit.propagation.integration.AdditionalDer
     
         The partial derivatives with respect to force models parameters has a dimension equal to the number of selected
         parameters. Parameters selection is implemented at :class:`~org.orekit.forces.ForceModel` level. Users must retrieve a
-        :class:`~org.orekit.utils.ParameterDriver` using :meth:`~org.orekit.forces.ForceModel.getParameterDriver` and then
-        select it by calling :meth:`~org.orekit.utils.ParameterDriver.setSelected`.
+        :class:`~org.orekit.utils.ParameterDriver` using :meth:`~org.orekit.utils.ParameterDriversProvider.getParameterDriver`
+        and then select it by calling :meth:`~org.orekit.utils.ParameterDriver.setSelected`.
     
         If several force models provide different :class:`~org.orekit.utils.ParameterDriver` for the same parameter name,
         selecting any of these drivers has the side effect of selecting all the drivers for this shared parameter. In this case,
@@ -51,14 +49,21 @@ class EpochDerivativesEquations(org.orekit.propagation.integration.AdditionalDer
         Since:
             10.2
     """
+    STATE_DIMENSION: typing.ClassVar[int] = ...
+    """
+    public static final int STATE_DIMENSION
+    
+        State dimension, fixed to 6.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
     def __init__(self, string: str, numericalPropagator: 'NumericalPropagator'): ...
     def combinedDerivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.orekit.propagation.integration.CombinedDerivatives:
         """
             Compute the derivatives related to the additional state (and optionally main state increments).
-        
-            As of 11.2, there is a default implementation that calls the deprecated
-            :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.derivatives` method. This has been done for
-            backward compatibility only and will be removed in 12.0.
         
             Specified by:
                 :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.combinedDerivatives` in
@@ -66,52 +71,10 @@ class EpochDerivativesEquations(org.orekit.propagation.integration.AdditionalDer
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional states this equations depend on (according to the
-                    :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.yield` method)
+                    :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.yields` method)
         
             Returns:
                 computed combined derivatives, which may include some incremental coupling effect to add to main state derivatives
-        
-        
-        """
-        ...
-    def computeDerivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[float]) -> typing.List[float]:
-        """
-            Compute the derivatives related to the additional state parameters.
-        
-            When this method is called, the spacecraft state contains the main state (orbit, attitude and mass), all the states
-            provided through the :class:`~org.orekit.propagation.AdditionalStateProvider` registered to the propagator, and the
-            additional state integrated using this equation. It does *not* contains any other states to be integrated alongside
-            during the same propagation.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalEquations.computeDerivatives` in
-                interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
-        
-            Parameters:
-                s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional state
-                pDot (double[]): placeholder where the derivatives of the additional parameters should be put
-        
-            Returns:
-                cumulative effect of the equations on the main state (may be null if equations do not change main state at all)
-        
-        
-        """
-        ...
-    def derivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]:
-        """
-            Deprecated.
-            Compute the derivatives related to the additional state parameters.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.derivatives` in
-                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional states this equations depend on (according to the
-                    :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.yield` method)
-        
-            Returns:
-                computed derivatives
         
         
         """
@@ -130,20 +93,6 @@ class EpochDerivativesEquations(org.orekit.propagation.integration.AdditionalDer
         
         """
         ...
-    def getMapper(self) -> 'AbsoluteJacobiansMapper':
-        """
-            Get a mapper between two-dimensional Jacobians and one-dimensional additional state.
-        
-            Returns:
-                a mapper between two-dimensional Jacobians and one-dimensional additional state, with the same name as the instance
-        
-            Also see:
-                :meth:`~org.orekit.propagation.numerical.EpochDerivativesEquations.setInitialJacobians`,
-                :meth:`~org.orekit.propagation.numerical.EpochDerivativesEquations.setInitialJacobians`
-        
-        
-        """
-        ...
     def getName(self) -> str:
         """
             Get the name of the additional derivatives (which will become state once integrated).
@@ -152,44 +101,8 @@ class EpochDerivativesEquations(org.orekit.propagation.integration.AdditionalDer
                 :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getName` in
                 interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
-            Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalEquations.getName` in
-                interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
-        
             Returns:
                 name of the additional state (names containing "orekit" with any case are reserved for the library internal use)
-        
-        
-        """
-        ...
-    def getSelectedParameters(self) -> org.orekit.utils.ParameterDriversList:
-        """
-            Get the selected parameters, in Jacobian matrix column order.
-        
-            The force models parameters for which partial derivatives are desired, *must* have been
-            :meth:`~org.orekit.utils.ParameterDriver.setSelected` before this method is called, so the proper list is returned.
-        
-            Returns:
-                selected parameters, in Jacobian matrix column order which is lexicographic order
-        
-        
-        """
-        ...
-    def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Initialize the generator at the start of propagation.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.init` in
-                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalEquations.init` in
-                interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
-        
-            Parameters:
-                initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial state information at the start of propagation
-                target (:class:`~org.orekit.time.AbsoluteDate`): date of propagation
         
         
         """
@@ -213,12 +126,6 @@ class EpochDerivativesEquations(org.orekit.propagation.integration.AdditionalDer
             Returns:
                 state with initial Jacobians added
         
-            Since:
-                9.0
-        
-            Also see:
-                :meth:`~org.orekit.propagation.numerical.EpochDerivativesEquations.getSelectedParameters`
-        
         """
         ...
     @typing.overload
@@ -241,12 +148,22 @@ class EpochDerivativesEquations(org.orekit.propagation.integration.AdditionalDer
             Returns:
                 state with initial Jacobians added
         
-            Also see:
-                :meth:`~org.orekit.propagation.numerical.EpochDerivativesEquations.getSelectedParameters`
+            Set the Jacobian with respect to state into a one-dimensional additional state array.
+        
+            This method converts the Jacobians to Cartesian parameters and put the converted data in the one-dimensional :code:`p`
+            array.
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
+                dY1dY0 (double[][]): Jacobian of current state at time t₁ with respect to state at some previous time t₀
+                dY1dP (double[][]): Jacobian of current state at time t₁ with respect to parameters (may be null if there are no parameters)
+                p (double[]): placeholder where to put the one-dimensional additional state
         
         
         """
         ...
+    @typing.overload
+    def setInitialJacobians(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[typing.List[float]], doubleArray2: typing.List[typing.List[float]], doubleArray3: typing.List[float]) -> None: ...
 
 _FieldNumericalPropagator__T = typing.TypeVar('_FieldNumericalPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldNumericalPropagator(org.orekit.propagation.integration.FieldAbstractIntegratedPropagator[_FieldNumericalPropagator__T], typing.Generic[_FieldNumericalPropagator__T]):
@@ -270,11 +187,12 @@ class FieldNumericalPropagator(org.orekit.propagation.integration.FieldAbstractI
             :meth:`~org.orekit.propagation.numerical.FieldNumericalPropagator.removeForceModels`)
           - the :class:`~org.orekit.orbits.OrbitType` of orbital parameters to be used for propagation
             (:meth:`~org.orekit.propagation.numerical.FieldNumericalPropagator.setOrbitType`),
-          - the :class:`~org.orekit.orbits.PositionAngle` of position angle to be used in orbital parameters to be used for
+          - the :class:`~org.orekit.orbits.PositionAngleType` of position angle to be used in orbital parameters to be used for
             propagation where it is relevant
             (:meth:`~org.orekit.propagation.numerical.FieldNumericalPropagator.setPositionAngleType`),
-          - whether :class:`~org.orekit.propagation.integration.FieldAdditionalEquations` should be propagated along with orbital
-            state (:meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.addAdditionalEquations`),
+          - whether :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider` should be propagated along with
+            orbital state
+            (:meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.addAdditionalDerivativesProvider`),
           - the discrete events that should be triggered during propagation
             (:meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.addEventDetector`,
             :meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.clearEventsDetectors`)
@@ -283,10 +201,10 @@ class FieldNumericalPropagator(org.orekit.propagation.integration.FieldAbstractI
     
     
         From these configuration parameters, only the initial state is mandatory. The default propagation settings are in
-        :meth:`~org.orekit.orbits.OrbitType.EQUINOCTIAL` parameters with :meth:`~org.orekit.orbits.PositionAngle.TRUE` longitude
-        argument. If the central attraction coefficient is not explicitly specified, the one used to define the initial orbit
-        will be used. However, specifying only the initial state and perhaps the central attraction coefficient would mean the
-        propagator would use only Keplerian forces. In this case, the simpler
+        :meth:`~org.orekit.orbits.OrbitType.EQUINOCTIAL` parameters with :meth:`~org.orekit.orbits.PositionAngleType.TRUE`
+        longitude argument. If the central attraction coefficient is not explicitly specified, the one used to define the
+        initial orbit will be used. However, specifying only the initial state and perhaps the central attraction coefficient
+        would mean the propagator would use only Keplerian forces. In this case, the simpler
         :class:`~org.orekit.propagation.analytical.KeplerianPropagator` class would perhaps be more effective.
     
         The underlying numerical integrator set up in the constructor may also have its own configuration parameters. Typical
@@ -370,7 +288,7 @@ class FieldNumericalPropagator(org.orekit.propagation.integration.FieldAbstractI
         """
         ...
     def getPVCoordinates(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldNumericalPropagator__T], frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldNumericalPropagator__T]: ...
-    def getPositionAngleType(self) -> org.orekit.orbits.PositionAngle:
+    def getPositionAngleType(self) -> org.orekit.orbits.PositionAngleType:
         """
             Get propagation parameter type.
         
@@ -445,7 +363,7 @@ class FieldNumericalPropagator(org.orekit.propagation.integration.FieldAbstractI
         
         """
         ...
-    def setPositionAngleType(self, positionAngle: org.orekit.orbits.PositionAngle) -> None:
+    def setPositionAngleType(self, positionAngleType: org.orekit.orbits.PositionAngleType) -> None:
         """
             Set position angle type.
         
@@ -458,7 +376,7 @@ class FieldNumericalPropagator(org.orekit.propagation.integration.FieldAbstractI
                 class :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`
         
             Parameters:
-                positionAngleType (:class:`~org.orekit.orbits.PositionAngle`): angle type to use for propagation
+                positionAngleType (:class:`~org.orekit.orbits.PositionAngleType`): angle type to use for propagation
         
         
         """
@@ -706,104 +624,6 @@ class GLONASSNumericalPropagatorBuilder:
         """
         ...
 
-class JacobiansMapper(org.orekit.propagation.integration.AbstractJacobiansMapper):
-    """
-    public class JacobiansMapper extends :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
-    
-        Mapper between two-dimensional Jacobian matrices and one-dimensional
-        :meth:`~org.orekit.propagation.SpacecraftState.getAdditionalState`.
-    
-        This class does not hold the states by itself. Instances of this class are guaranteed to be immutable.
-    
-        Also see:
-            :class:`~org.orekit.propagation.numerical.NumericalPropagator`,
-            :meth:`~org.orekit.propagation.SpacecraftState.getAdditionalState`, :class:`~org.orekit.propagation.AbstractPropagator`
-    """
-    STATE_DIMENSION: typing.ClassVar[int] = ...
-    """
-    public static final int STATE_DIMENSION
-    
-        State dimension, fixed to 6.
-    
-        Since:
-            9.0
-    
-        Also see:
-            :meth:`~constant`
-    
-    
-    """
-    @typing.overload
-    def getParametersJacobian(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.hipparchus.linear.RealMatrix:
-        """
-            Get the Jacobian with respect to parameters from a one-dimensional additional state array.
-        
-            This method extract the data from the :code:`state` and put it in the :code:`dYdP` array.
-        
-            If no parameters have been set in the constructor, the method returns immediately and does not reference :code:`dYdP`
-            which can safely be null in this case.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getParametersJacobian` in
-                class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
-                dYdP (double[][]): placeholder where to put the Jacobian with respect to parameters
-        
-            Also see:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getStateJacobian`
-        
-        
-        """
-        ...
-    @typing.overload
-    def getParametersJacobian(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[typing.List[float]]) -> None: ...
-    def getStateJacobian(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[typing.List[float]]) -> None:
-        """
-            Get the Jacobian with respect to state from a one-dimensional additional state array.
-        
-            This method extract the data from the :code:`state` and put it in the :code:`dYdY0` array.
-        
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getStateJacobian` in
-                class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
-                dYdY0 (double[][]): placeholder where to put the Jacobian with respect to state
-        
-            Also see:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getParametersJacobian`
-        
-        
-        """
-        ...
-    def setInitialJacobians(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[typing.List[float]], doubleArray2: typing.List[typing.List[float]], doubleArray3: typing.List[float]) -> None:
-        """
-            Set the Jacobian with respect to state into a one-dimensional additional state array.
-        
-            This method converts the Jacobians to Cartesian parameters and put the converted data in the one-dimensional :code:`p`
-            array.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.setInitialJacobians` in
-                class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
-                dY1dY0 (double[][]): Jacobian of current state at time t₁ with respect to state at some previous time t₀
-                dY1dP (double[][]): Jacobian of current state at time t₁ with respect to parameters (may be null if there are no parameters)
-                p (double[]): placeholder where to put the one-dimensional additional state
-        
-            Also see:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getStateJacobian`
-        
-        
-        """
-        ...
-
 class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedPropagator):
     """
     public class NumericalPropagator extends :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`
@@ -825,7 +645,7 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
             :meth:`~org.orekit.propagation.numerical.NumericalPropagator.removeForceModels`)
           - the :class:`~org.orekit.orbits.OrbitType` of orbital parameters to be used for propagation
             (:meth:`~org.orekit.propagation.numerical.NumericalPropagator.setOrbitType`),
-          - the :class:`~org.orekit.orbits.PositionAngle` of position angle to be used in orbital parameters to be used for
+          - the :class:`~org.orekit.orbits.PositionAngleType` of position angle to be used in orbital parameters to be used for
             propagation where it is relevant (:meth:`~org.orekit.propagation.numerical.NumericalPropagator.setPositionAngleType`),
           - whether :class:`~org.orekit.propagation.MatricesHarvester` should be propagated along with orbital state
             (:meth:`~org.orekit.propagation.AbstractPropagator.setupMatricesComputation`),
@@ -839,10 +659,10 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
     
     
         From these configuration parameters, only the initial state is mandatory. The default propagation settings are in
-        :meth:`~org.orekit.orbits.OrbitType.EQUINOCTIAL` parameters with :meth:`~org.orekit.orbits.PositionAngle.TRUE` longitude
-        argument. If the central attraction coefficient is not explicitly specified, the one used to define the initial orbit
-        will be used. However, specifying only the initial state and perhaps the central attraction coefficient would mean the
-        propagator would use only Keplerian forces. In this case, the simpler
+        :meth:`~org.orekit.orbits.OrbitType.EQUINOCTIAL` parameters with :meth:`~org.orekit.orbits.PositionAngleType.TRUE`
+        longitude argument. If the central attraction coefficient is not explicitly specified, the one used to define the
+        initial orbit will be used. However, specifying only the initial state and perhaps the central attraction coefficient
+        would mean the propagator would use only Keplerian forces. In this case, the simpler
         :class:`~org.orekit.propagation.analytical.KeplerianPropagator` class would perhaps be more effective.
     
         The underlying numerical integrator set up in the constructor may also have its own configuration parameters. Typical
@@ -949,7 +769,7 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
         
         """
         ...
-    def getPositionAngleType(self) -> org.orekit.orbits.PositionAngle:
+    def getPositionAngleType(self) -> org.orekit.orbits.PositionAngleType:
         """
             Get propagation parameter type.
         
@@ -1050,7 +870,7 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
         
         """
         ...
-    def setPositionAngleType(self, positionAngle: org.orekit.orbits.PositionAngle) -> None:
+    def setPositionAngleType(self, positionAngleType: org.orekit.orbits.PositionAngleType) -> None:
         """
             Set position angle type.
         
@@ -1063,7 +883,7 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
                 class :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`
         
             Parameters:
-                positionAngleType (:class:`~org.orekit.orbits.PositionAngle`): angle type to use for propagation
+                positionAngleType (:class:`~org.orekit.orbits.PositionAngleType`): angle type to use for propagation
         
         
         """
@@ -1147,254 +967,6 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
         """
         ...
 
-class PartialDerivativesEquations(org.orekit.propagation.integration.AdditionalDerivativesProvider, org.orekit.propagation.integration.AdditionalEquations):
-    """
-    :class:`~org.orekit.propagation.numerical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class PartialDerivativesEquations extends :class:`~org.orekit.propagation.numerical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`, :class:`~org.orekit.propagation.integration.AdditionalEquations`
-    
-        Deprecated.
-        as of 11.1, replaced by :meth:`~org.orekit.propagation.Propagator.setupMatricesComputation`
-        :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider` computing the partial derivatives of the
-        state (orbit) with respect to initial state and force models parameters.
-    
-        This set of equations are automatically added to a :class:`~org.orekit.propagation.numerical.NumericalPropagator` in
-        order to compute partial derivatives of the orbit along with the orbit itself. This is useful for example in orbit
-        determination applications.
-    
-        The partial derivatives with respect to initial state can be either dimension 6 (orbit only) or 7 (orbit and mass).
-    
-        The partial derivatives with respect to force models parameters has a dimension equal to the number of selected
-        parameters. Parameters selection is implemented at :class:`~org.orekit.forces.ForceModel` level. Users must retrieve a
-        :class:`~org.orekit.utils.ParameterDriver` using :meth:`~org.orekit.forces.ForceModel.getParameterDriver` and then
-        select it by calling :meth:`~org.orekit.utils.ParameterDriver.setSelected`.
-    
-        If several force models provide different :class:`~org.orekit.utils.ParameterDriver` for the same parameter name,
-        selecting any of these drivers has the side effect of selecting all the drivers for this shared parameter. In this case,
-        the partial derivatives will be the sum of the partial derivatives contributed by the corresponding force models. This
-        case typically arises for central attraction coefficient, which has an influence on
-        :class:`~org.orekit.forces.gravity.NewtonianAttraction`,
-        :class:`~org.orekit.forces.gravity.HolmesFeatherstoneAttractionModel`, and
-        :class:`~org.orekit.forces.gravity.Relativity`.
-    """
-    def __init__(self, string: str, numericalPropagator: NumericalPropagator): ...
-    def combinedDerivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.orekit.propagation.integration.CombinedDerivatives:
-        """
-            Deprecated.
-            Compute the derivatives related to the additional state (and optionally main state increments).
-        
-            As of 11.2, there is a default implementation that calls the deprecated
-            :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.derivatives` method. This has been done for
-            backward compatibility only and will be removed in 12.0.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.combinedDerivatives` in
-                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
-        
-            Parameters:
-                s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional states this equations depend on (according to the
-                    :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.yield` method)
-        
-            Returns:
-                computed combined derivatives, which may include some incremental coupling effect to add to main state derivatives
-        
-        
-        """
-        ...
-    def computeDerivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[float]) -> typing.List[float]:
-        """
-            Deprecated.
-            Compute the derivatives related to the additional state parameters.
-        
-            When this method is called, the spacecraft state contains the main state (orbit, attitude and mass), all the states
-            provided through the :class:`~org.orekit.propagation.AdditionalStateProvider` registered to the propagator, and the
-            additional state integrated using this equation. It does *not* contains any other states to be integrated alongside
-            during the same propagation.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalEquations.computeDerivatives` in
-                interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
-        
-            Parameters:
-                s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional state
-                pDot (double[]): placeholder where the derivatives of the additional parameters should be put
-        
-            Returns:
-                cumulative effect of the equations on the main state (may be null if equations do not change main state at all)
-        
-        
-        """
-        ...
-    def derivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]:
-        """
-            Deprecated.
-            Compute the derivatives related to the additional state parameters.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.derivatives` in
-                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional states this equations depend on (according to the
-                    :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.yield` method)
-        
-            Returns:
-                computed derivatives
-        
-        
-        """
-        ...
-    def getDimension(self) -> int:
-        """
-            Deprecated.
-            Get the dimension of the generated derivative.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getDimension` in
-                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
-        
-            Returns:
-                dimension of the generated
-        
-        
-        """
-        ...
-    def getMapper(self) -> JacobiansMapper:
-        """
-            Deprecated.
-            Get a mapper between two-dimensional Jacobians and one-dimensional additional state.
-        
-            Returns:
-                a mapper between two-dimensional Jacobians and one-dimensional additional state, with the same name as the instance
-        
-            Also see:
-                :meth:`~org.orekit.propagation.numerical.PartialDerivativesEquations.setInitialJacobians`,
-                :meth:`~org.orekit.propagation.numerical.PartialDerivativesEquations.setInitialJacobians`
-        
-        
-        """
-        ...
-    def getName(self) -> str:
-        """
-            Deprecated.
-            Get the name of the additional derivatives (which will become state once integrated).
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getName` in
-                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalEquations.getName` in
-                interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
-        
-            Returns:
-                name of the additional state (names containing "orekit" with any case are reserved for the library internal use)
-        
-        
-        """
-        ...
-    def getSelectedParameters(self) -> org.orekit.utils.ParameterDriversList:
-        """
-            Deprecated.
-            Get the selected parameters, in Jacobian matrix column order.
-        
-            The force models parameters for which partial derivatives are desired, *must* have been
-            :meth:`~org.orekit.utils.ParameterDriver.setSelected` before this method is called, so the proper list is returned.
-        
-            Returns:
-                selected parameters, in Jacobian matrix column order which is lexicographic order
-        
-        
-        """
-        ...
-    def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Deprecated.
-            Initialize the generator at the start of propagation.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.init` in
-                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalEquations.init` in
-                interface :class:`~org.orekit.propagation.integration.AdditionalEquations`
-        
-            Parameters:
-                initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial state information at the start of propagation
-                target (:class:`~org.orekit.time.AbsoluteDate`): date of propagation
-        
-        
-        """
-        ...
-    def isInitialize(self) -> bool:
-        """
-            Deprecated.
-            Get the flag for the initialization of the state jacobian.
-        
-            Returns:
-                true if the state jacobian is initialized
-        
-            Since:
-                10.2
-        
-        
-        """
-        ...
-    @typing.overload
-    def setInitialJacobians(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.orekit.propagation.SpacecraftState:
-        """
-            Deprecated.
-            Set the initial value of the Jacobian with respect to state and parameter.
-        
-            This method is equivalent to call
-            :meth:`~org.orekit.propagation.numerical.PartialDerivativesEquations.setInitialJacobians` with dYdY0 set to the identity
-            matrix and dYdP set to a zero matrix.
-        
-            The force models parameters for which partial derivatives are desired, *must* have been
-            :meth:`~org.orekit.utils.ParameterDriver.setSelected` before this method is called, so proper matrices dimensions are
-            used.
-        
-            Parameters:
-                s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
-        
-            Returns:
-                state with initial Jacobians added
-        
-            Since:
-                9.0
-        
-            Also see:
-                :meth:`~org.orekit.propagation.numerical.PartialDerivativesEquations.getSelectedParameters`
-        
-        """
-        ...
-    @typing.overload
-    def setInitialJacobians(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[typing.List[float]], doubleArray2: typing.List[typing.List[float]]) -> org.orekit.propagation.SpacecraftState:
-        """
-            Deprecated.
-            Set the initial value of the Jacobian with respect to state and parameter.
-        
-            The returned state must be added to the propagator (it is not done automatically, as the user may need to add more
-            states to it).
-        
-            The force models parameters for which partial derivatives are desired, *must* have been
-            :meth:`~org.orekit.utils.ParameterDriver.setSelected` before this method is called, and the :code:`dY1dP` matrix
-            dimension *must* be consistent with the selection.
-        
-            Parameters:
-                s1 (:class:`~org.orekit.propagation.SpacecraftState`): current state
-                dY1dY0 (double[][]): Jacobian of current state at time t₁ with respect to state at some previous time t₀ (must be 6x6)
-                dY1dP (double[][]): Jacobian of current state at time t₁ with respect to parameters (may be null if no parameters are selected)
-        
-            Returns:
-                state with initial Jacobians added
-        
-            Also see:
-                :meth:`~org.orekit.propagation.numerical.PartialDerivativesEquations.getSelectedParameters`
-        
-        
-        """
-        ...
-
 class TimeDerivativesEquations:
     """
     public interface TimeDerivativesEquations
@@ -1447,87 +1019,6 @@ class TimeDerivativesEquations:
         
             Since:
                 9.0
-        
-        
-        """
-        ...
-
-class AbsoluteJacobiansMapper(JacobiansMapper):
-    """
-    public class AbsoluteJacobiansMapper extends :class:`~org.orekit.propagation.numerical.JacobiansMapper`
-    
-        Mapper between two-dimensional Jacobian matrices and one-dimensional
-        :meth:`~org.orekit.propagation.SpacecraftState.getAdditionalState`.
-    
-        This class does not hold the states by itself. Instances of this class are guaranteed to be immutable.
-    
-        Since:
-            10.2
-    
-        Also see:
-            :class:`~org.orekit.propagation.numerical.NumericalPropagator`,
-            :meth:`~org.orekit.propagation.SpacecraftState.getAdditionalState`, :class:`~org.orekit.propagation.AbstractPropagator`
-    """
-    STATE_DIMENSION: typing.ClassVar[int] = ...
-    """
-    public static final int STATE_DIMENSION
-    
-        State dimension, fixed to 6.
-    
-        Also see:
-            :meth:`~constant`
-    
-    
-    """
-    def __init__(self, string: str, parameterDriversList: org.orekit.utils.ParameterDriversList): ...
-
-class AbsolutePartialDerivativesEquations(PartialDerivativesEquations):
-    """
-    :class:`~org.orekit.propagation.numerical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class AbsolutePartialDerivativesEquations extends :class:`~org.orekit.propagation.numerical.PartialDerivativesEquations`
-    
-        Deprecated.
-        as of 11.1, this class is not used anymore
-        :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider` computing the partial derivatives of the
-        state (orbit) with respect to initial state and force models parameters.
-    
-        This set of equations are automatically added to a :class:`~org.orekit.propagation.numerical.NumericalPropagator` in
-        order to compute partial derivatives of the orbit along with the orbit itself. This is useful for example in orbit
-        determination applications.
-    
-        The partial derivatives with respect to initial state can be either dimension 6 (orbit only) or 7 (orbit and mass).
-    
-        The partial derivatives with respect to force models parameters has a dimension equal to the number of selected
-        parameters. Parameters selection is implemented at :class:`~org.orekit.forces.ForceModel` level. Users must retrieve a
-        :class:`~org.orekit.utils.ParameterDriver` using :meth:`~org.orekit.forces.ForceModel.getParameterDriver` and then
-        select it by calling :meth:`~org.orekit.utils.ParameterDriver.setSelected`.
-    
-        If several force models provide different :class:`~org.orekit.utils.ParameterDriver` for the same parameter name,
-        selecting any of these drivers has the side effect of selecting all the drivers for this shared parameter. In this case,
-        the partial derivatives will be the sum of the partial derivatives contributed by the corresponding force models. This
-        case typically arises for central attraction coefficient, which has an influence on
-        :class:`~org.orekit.forces.gravity.NewtonianAttraction`,
-        :class:`~org.orekit.forces.gravity.HolmesFeatherstoneAttractionModel`, and
-        :class:`~org.orekit.forces.gravity.Relativity`.
-    
-        Since:
-            10.2
-    """
-    def __init__(self, string: str, numericalPropagator: NumericalPropagator): ...
-    def getMapper(self) -> AbsoluteJacobiansMapper:
-        """
-            Deprecated.
-            Get a mapper between two-dimensional Jacobians and one-dimensional additional state.
-        
-            Overrides:
-                :meth:`~org.orekit.propagation.numerical.PartialDerivativesEquations.getMapper` in
-                class :class:`~org.orekit.propagation.numerical.PartialDerivativesEquations`
-        
-            Returns:
-                a mapper between two-dimensional Jacobians and one-dimensional additional state, with the same name as the instance
-        
-            Also see:
-                :meth:`~org.orekit.propagation.numerical.PartialDerivativesEquations.setInitialJacobians`,
-                :meth:`~org.orekit.propagation.numerical.PartialDerivativesEquations.setInitialJacobians`
         
         
         """
@@ -1686,16 +1177,12 @@ class PythonPartialsObserver(org.orekit.propagation.numerical.StateTransitionMat
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.propagation.numerical")``.
 
-    AbsoluteJacobiansMapper: typing.Type[AbsoluteJacobiansMapper]
-    AbsolutePartialDerivativesEquations: typing.Type[AbsolutePartialDerivativesEquations]
     EpochDerivativesEquations: typing.Type[EpochDerivativesEquations]
     FieldNumericalPropagator: typing.Type[FieldNumericalPropagator]
     FieldTimeDerivativesEquations: typing.Type[FieldTimeDerivativesEquations]
     GLONASSNumericalPropagator: typing.Type[GLONASSNumericalPropagator]
     GLONASSNumericalPropagatorBuilder: typing.Type[GLONASSNumericalPropagatorBuilder]
-    JacobiansMapper: typing.Type[JacobiansMapper]
     NumericalPropagator: typing.Type[NumericalPropagator]
-    PartialDerivativesEquations: typing.Type[PartialDerivativesEquations]
     PythonFieldTimeDerivativesEquations: typing.Type[PythonFieldTimeDerivativesEquations]
     PythonPartialsObserver: typing.Type[PythonPartialsObserver]
     PythonTimeDerivativesEquations: typing.Type[PythonTimeDerivativesEquations]

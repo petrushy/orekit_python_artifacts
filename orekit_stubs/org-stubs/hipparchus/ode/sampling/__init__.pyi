@@ -157,12 +157,100 @@ class ODEFixedStepHandler:
         ...
 
 class ODEStateInterpolator(java.io.Serializable):
-    def getCurrentState(self) -> org.hipparchus.ode.ODEStateAndDerivative: ...
-    def getInterpolatedState(self, double: float) -> org.hipparchus.ode.ODEStateAndDerivative: ...
-    def getPreviousState(self) -> org.hipparchus.ode.ODEStateAndDerivative: ...
-    def isCurrentStateInterpolated(self) -> bool: ...
-    def isForward(self) -> bool: ...
-    def isPreviousStateInterpolated(self) -> bool: ...
+    """
+    public interface ODEStateInterpolator extends :class:`~org.hipparchus.ode.sampling.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    
+        This interface represents an interpolator over the last step during an ODE integration.
+    
+        The various ODE integrators provide objects implementing this interface to the step handlers. These objects are often
+        custom objects tightly bound to the integrator internal algorithms. The handlers can use these objects to retrieve the
+        state vector at intermediate times between the previous and the current grid points (this feature is often called dense
+        output).
+    
+        Also see:
+            :class:`~org.hipparchus.ode.ODEIntegrator`, :class:`~org.hipparchus.ode.sampling.ODEStepHandler`
+    """
+    def getCurrentState(self) -> org.hipparchus.ode.ODEStateAndDerivative:
+        """
+            Get the state at current grid point time.
+        
+            Returns:
+                state at current grid point time
+        
+        
+        """
+        ...
+    def getInterpolatedState(self, double: float) -> org.hipparchus.ode.ODEStateAndDerivative:
+        """
+            Get the state at interpolated time.
+        
+            Setting the time outside of the current step is allowed, but should be used with care since the accuracy of the
+            interpolator will probably be very poor far from this step. This allowance has been added to simplify implementation of
+            search algorithms near the step endpoints.
+        
+            Parameters:
+                time (double): time of the interpolated point
+        
+            Returns:
+                state at interpolated time
+        
+        
+        """
+        ...
+    def getPreviousState(self) -> org.hipparchus.ode.ODEStateAndDerivative:
+        """
+            Get the state at previous grid point time.
+        
+            Returns:
+                state at previous grid point time
+        
+        
+        """
+        ...
+    def isCurrentStateInterpolated(self) -> bool:
+        """
+            Determines if the :meth:`~org.hipparchus.ode.sampling.ODEStateInterpolator.getCurrentState` is computed directly by the
+            integrator, or if it is calculated using :meth:`~org.hipparchus.ode.sampling.ODEStateInterpolator.getInterpolatedState`.
+        
+            Typically the current state is directly computed by the integrator, but when events are detected the steps are shortened
+            so that events occur on step boundaries which means the current state may be computed by the interpolator.
+        
+            Returns:
+                :code:`true` if the current state was calculated by the interpolator and false if it was computed directly by the
+                integrator.
+        
+        
+        """
+        ...
+    def isForward(self) -> bool:
+        """
+            Check if the natural integration direction is forward.
+        
+            This method provides the integration direction as specified by the integrator itself, it avoid some nasty problems in
+            degenerated cases like null steps due to cancellation at step initialization, step control or discrete events
+            triggering.
+        
+            Returns:
+                true if the integration variable (time) increases during integration
+        
+        
+        """
+        ...
+    def isPreviousStateInterpolated(self) -> bool:
+        """
+            Determines if the :meth:`~org.hipparchus.ode.sampling.ODEStateInterpolator.getPreviousState` is computed directly by the
+            integrator, or if it is calculated using :meth:`~org.hipparchus.ode.sampling.ODEStateInterpolator.getInterpolatedState`.
+        
+            Typically the previous state is directly computed by the integrator, but when events are detected the steps are
+            shortened so that events occur on step boundaries which means the previous state may be computed by the interpolator.
+        
+            Returns:
+                :code:`true` if the previous state was calculated by the interpolator and false if it was computed directly by the
+                integrator.
+        
+        
+        """
+        ...
 
 class ODEStepHandler:
     """
@@ -287,6 +375,7 @@ class StepNormalizerBounds(java.lang.Enum['StepNormalizerBounds']):
         
             .. code-block: java
             
+            
             for (StepNormalizerBounds c : StepNormalizerBounds.values())
                 System.out.println(c);
             
@@ -341,6 +430,7 @@ class StepNormalizerMode(java.lang.Enum['StepNormalizerMode']):
             iterate over the constants as follows:
         
             .. code-block: java
+            
             
             for (StepNormalizerMode c : StepNormalizerMode.values())
                 System.out.println(c);
@@ -611,7 +701,6 @@ class FieldStepNormalizer(FieldODEStepHandler[_FieldStepNormalizer__T], typing.G
         There is no constraint on the integrator, it can use any time step it needs (time steps longer or shorter than the fixed
         time step and non-integer ratios are all allowed).
     
-    
         Also see:
             :class:`~org.hipparchus.ode.sampling.FieldODEStepHandler`,
             :class:`~org.hipparchus.ode.sampling.FieldODEFixedStepHandler`,
@@ -647,7 +736,6 @@ class StepNormalizer(ODEStepHandler):
     
         There is no constraint on the integrator, it can use any time step it needs (time steps longer or shorter than the fixed
         time step and non-integer ratios are all allowed).
-    
     
         Also see:
             :class:`~org.hipparchus.ode.sampling.ODEStepHandler`, :class:`~org.hipparchus.ode.sampling.ODEFixedStepHandler`,

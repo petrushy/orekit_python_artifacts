@@ -34,6 +34,21 @@ class Preconditioner:
         ...
 
 class NonLinearConjugateGradientOptimizer(org.hipparchus.optim.nonlinear.scalar.GradientMultivariateOptimizer):
+    """
+    public class NonLinearConjugateGradientOptimizer extends :class:`~org.hipparchus.optim.nonlinear.scalar.GradientMultivariateOptimizer`
+    
+        Non-linear conjugate gradient optimizer.
+    
+    
+        This class supports both the Fletcher-Reeves and the Polak-Ribière update formulas for the conjugate search directions.
+        It also supports optional preconditioning.
+    
+    
+        Constraints are not supported: the call to
+        :meth:`~org.hipparchus.optim.nonlinear.scalar.gradient.NonLinearConjugateGradientOptimizer.optimize` will throw
+        :class:`~org.hipparchus.optim.nonlinear.scalar.gradient.https:.www.hipparchus.org.hipparchus` if bounds are passed to
+        it.
+    """
     @typing.overload
     def __init__(self, formula: 'NonLinearConjugateGradientOptimizer.Formula', convergenceChecker: org.hipparchus.optim.ConvergenceChecker[org.hipparchus.optim.PointValuePair]): ...
     @typing.overload

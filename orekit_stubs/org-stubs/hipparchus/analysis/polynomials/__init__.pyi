@@ -1,4 +1,5 @@
 import java.io
+import org
 import org.hipparchus
 import org.hipparchus.analysis
 import org.hipparchus.analysis.differentiation
@@ -420,7 +421,7 @@ class PolynomialFunction(org.hipparchus.analysis.differentiation.UnivariateDiffe
             Also see:
                 :meth:`~org.hipparchus.analysis.UnivariateFunction.value`
         
-        public <T extends :class:`~org.hipparchus.analysis.differentiation.Derivative`<T>> T value(T t) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`, :class:`~org.hipparchus.exception.NullArgumentException`
+        public <T extends :class:`~org.hipparchus.analysis.differentiation.Derivative`<T>> T value (T t) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`, :class:`~org.hipparchus.exception.NullArgumentException`
         
             Compute the value for the function.
         
@@ -438,7 +439,7 @@ class PolynomialFunction(org.hipparchus.analysis.differentiation.UnivariateDiffe
                 :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if :code:`coefficients` is empty.
                 :class:`~org.hipparchus.exception.NullArgumentException`: if :code:`coefficients` is :code:`null`.
         
-        public <T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> T value(T t) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`, :class:`~org.hipparchus.exception.NullArgumentException`
+        public <T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> T value (T t) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`, :class:`~org.hipparchus.exception.NullArgumentException`
         
             Compute the value of the function.
         
@@ -932,6 +933,194 @@ class PolynomialsUtils:
         """
         ...
 
+_SmoothStepFactory__FieldSmoothStepFunction__T = typing.TypeVar('_SmoothStepFactory__FieldSmoothStepFunction__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class SmoothStepFactory:
+    """
+    public class SmoothStepFactory extends :class:`~org.hipparchus.analysis.polynomials.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Smoothstep function factory.
+    
+        It allows for quick creation of common and generic smoothstep functions as defined
+        :class:`~org.hipparchus.analysis.polynomials.https:.en.wikipedia.org.wiki.Smoothstep`.
+    """
+    @staticmethod
+    def checkBetweenZeroAndOneIncluded(double: float) -> None: ...
+    _getClamp_0__T = typing.TypeVar('_getClamp_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    @staticmethod
+    def getClamp(field: org.hipparchus.Field[_getClamp_0__T]) -> 'SmoothStepFactory.FieldSmoothStepFunction'[_getClamp_0__T]:
+        """
+            Get the :class:`~org.hipparchus.analysis.polynomials.SmoothStepFactory.SmoothStepFunction`.
+        
+            Parameters:
+                field (:class:`~org.hipparchus.Field`<T> field): field of the element
+        
+            Returns:
+                clamping smoothstep function
+        
+        
+        """
+        ...
+    @typing.overload
+    @staticmethod
+    def getClamp() -> 'SmoothStepFactory.SmoothStepFunction':
+        """
+            Get the :class:`~org.hipparchus.analysis.polynomials.SmoothStepFactory.SmoothStepFunction`.
+        
+            Returns:
+                clamping smoothstep function
+        
+        """
+        ...
+    _getCubic_0__T = typing.TypeVar('_getCubic_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    @staticmethod
+    def getCubic(field: org.hipparchus.Field[_getCubic_0__T]) -> 'SmoothStepFactory.FieldSmoothStepFunction'[_getCubic_0__T]:
+        """
+            Get the :class:`~org.hipparchus.analysis.polynomials.SmoothStepFactory.SmoothStepFunction`.
+        
+            Parameters:
+                field (:class:`~org.hipparchus.Field`<T> field): field of the element
+        
+            Returns:
+                cubic smoothstep function
+        
+        
+        """
+        ...
+    @typing.overload
+    @staticmethod
+    def getCubic() -> 'SmoothStepFactory.SmoothStepFunction':
+        """
+            Get the :class:`~org.hipparchus.analysis.polynomials.SmoothStepFactory.SmoothStepFunction`.
+        
+            Returns:
+                cubic smoothstep function
+        
+        """
+        ...
+    _getFieldGeneralOrder__T = typing.TypeVar('_getFieldGeneralOrder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @staticmethod
+    def getFieldGeneralOrder(field: org.hipparchus.Field[_getFieldGeneralOrder__T], int: int) -> 'SmoothStepFactory.FieldSmoothStepFunction'[_getFieldGeneralOrder__T]:
+        """
+            Create a :class:`~org.hipparchus.analysis.polynomials.SmoothStepFactory.SmoothStepFunction` of order **2N + 1**.
+        
+            It uses the general smoothstep equation presented
+            :class:`~org.hipparchus.analysis.polynomials.https:.en.wikipedia.org.wiki.Smoothstep` : $S_{N}(x) = \sum_{n=0}^{N}
+            \begin{pmatrix} -N-1 \\ n \end{pmatrix} \begin{pmatrix} 2N+1 \\ N-n \end{pmatrix} x^{N+n+1}$
+        
+            Parameters:
+                field (:class:`~org.hipparchus.Field`<T> field): field of the element
+                N (int): determines the order of the output smoothstep function (=2N + 1)
+        
+            Returns:
+                smoothstep function of order **2N + 1**
+        
+        
+        """
+        ...
+    @staticmethod
+    def getGeneralOrder(int: int) -> 'SmoothStepFactory.SmoothStepFunction':
+        """
+            Create a :class:`~org.hipparchus.analysis.polynomials.SmoothStepFactory.SmoothStepFunction` of order **2N + 1**.
+        
+            It uses the general smoothstep equation presented
+            :class:`~org.hipparchus.analysis.polynomials.https:.en.wikipedia.org.wiki.Smoothstep` : $S_{N}(x) = \sum_{n=0}^{N}
+            \begin{pmatrix} -N-1 \\ n \end{pmatrix} \begin{pmatrix} 2N+1 \\ N-n \end{pmatrix} x^{N+n+1}$
+        
+            Parameters:
+                N (int): determines the order of the output smoothstep function (=2N + 1)
+        
+            Returns:
+                smoothstep function of order **2N + 1**
+        
+        
+        """
+        ...
+    _getQuadratic_0__T = typing.TypeVar('_getQuadratic_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    @staticmethod
+    def getQuadratic(field: org.hipparchus.Field[_getQuadratic_0__T]) -> 'SmoothStepFactory.FieldSmoothStepFunction'[_getQuadratic_0__T]:
+        """
+            Get the :class:`~org.hipparchus.analysis.polynomials.SmoothStepFactory.SmoothStepFunction`.
+        
+            Parameters:
+                field (:class:`~org.hipparchus.Field`<T> field): field of the element
+        
+            Returns:
+                clamping smoothstep function
+        
+        
+        """
+        ...
+    @typing.overload
+    @staticmethod
+    def getQuadratic() -> 'SmoothStepFactory.SmoothStepFunction':
+        """
+            Get the :class:`~org.hipparchus.analysis.polynomials.SmoothStepFactory.SmoothStepFunction`.
+        
+            Returns:
+                clamping smoothstep function
+        
+        """
+        ...
+    _getQuintic_0__T = typing.TypeVar('_getQuintic_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    @staticmethod
+    def getQuintic(field: org.hipparchus.Field[_getQuintic_0__T]) -> 'SmoothStepFactory.FieldSmoothStepFunction'[_getQuintic_0__T]:
+        """
+            Get the :class:`~org.hipparchus.analysis.polynomials.SmoothStepFactory.SmoothStepFunction`.
+        
+            Parameters:
+                field (:class:`~org.hipparchus.Field`<T> field): field of the element
+        
+            Returns:
+                quintic smoothstep function
+        
+        
+        """
+        ...
+    @typing.overload
+    @staticmethod
+    def getQuintic() -> 'SmoothStepFactory.SmoothStepFunction':
+        """
+            Get the :class:`~org.hipparchus.analysis.polynomials.SmoothStepFactory.SmoothStepFunction`.
+        
+            Returns:
+                quintic smoothstep function
+        
+        """
+        ...
+    class FieldSmoothStepFunction(FieldPolynomialFunction[_SmoothStepFactory__FieldSmoothStepFunction__T], typing.Generic[_SmoothStepFactory__FieldSmoothStepFunction__T]):
+        @typing.overload
+        def value(self, double: float) -> _SmoothStepFactory__FieldSmoothStepFunction__T: ...
+        @typing.overload
+        def value(self, double: float, double2: float, t: _SmoothStepFactory__FieldSmoothStepFunction__T) -> _SmoothStepFactory__FieldSmoothStepFunction__T: ...
+        @typing.overload
+        def value(self, t: _SmoothStepFactory__FieldSmoothStepFunction__T) -> _SmoothStepFactory__FieldSmoothStepFunction__T: ...
+    class QuadraticSmoothStepFunction(org.hipparchus.analysis.polynomials.SmoothStepFactory.SmoothStepFunction):
+        _value_2__T = typing.TypeVar('_value_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+        _value_3__T = typing.TypeVar('_value_3__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
+        @typing.overload
+        def value(self, double: float) -> float: ...
+        @typing.overload
+        def value(self, double: float, double2: float, double3: float) -> float: ...
+        @typing.overload
+        def value(self, t: _value_2__T) -> _value_2__T: ...
+        @typing.overload
+        def value(self, t: _value_3__T) -> _value_3__T: ...
+    class SmoothStepFunction(PolynomialFunction):
+        _value_2__T = typing.TypeVar('_value_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+        _value_3__T = typing.TypeVar('_value_3__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
+        @typing.overload
+        def value(self, double: float) -> float: ...
+        @typing.overload
+        def value(self, double: float, double2: float, double3: float) -> float: ...
+        @typing.overload
+        def value(self, t: _value_2__T) -> _value_2__T: ...
+        @typing.overload
+        def value(self, t: _value_3__T) -> _value_3__T: ...
+
 
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.hipparchus.analysis.polynomials")``.
@@ -943,3 +1132,4 @@ class __module_protocol__(typing.Protocol):
     PolynomialFunctionNewtonForm: typing.Type[PolynomialFunctionNewtonForm]
     PolynomialSplineFunction: typing.Type[PolynomialSplineFunction]
     PolynomialsUtils: typing.Type[PolynomialsUtils]
+    SmoothStepFactory: typing.Type[SmoothStepFactory]

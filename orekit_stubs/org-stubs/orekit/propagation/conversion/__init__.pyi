@@ -1,4 +1,5 @@
 import java.util
+import org.hipparchus
 import org.hipparchus.analysis
 import org.hipparchus.ode
 import org.hipparchus.optim.nonlinear.vector.leastsquares
@@ -6,7 +7,6 @@ import org.orekit.attitudes
 import org.orekit.data
 import org.orekit.estimation.leastsquares
 import org.orekit.estimation.measurements
-import org.orekit.estimation.sequential
 import org.orekit.forces
 import org.orekit.forces.gravity.potential
 import org.orekit.frames
@@ -14,6 +14,7 @@ import org.orekit.orbits
 import org.orekit.propagation
 import org.orekit.propagation.analytical
 import org.orekit.propagation.analytical.tle
+import org.orekit.propagation.analytical.tle.generation
 import org.orekit.propagation.integration
 import org.orekit.propagation.numerical
 import org.orekit.propagation.semianalytical.dsst
@@ -23,6 +24,21 @@ import org.orekit.utils
 import typing
 
 
+
+_FieldODEIntegratorBuilder__T = typing.TypeVar('_FieldODEIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldODEIntegratorBuilder(typing.Generic[_FieldODEIntegratorBuilder__T]):
+    """
+    public interface FieldODEIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>>
+    
+        This interface is the top-level abstraction to build first order integrators for propagators conversion.
+    
+        Since:
+            12.0
+    """
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_FieldODEIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_FieldODEIntegratorBuilder__T]: ...
+    @typing.overload
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_FieldODEIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_FieldODEIntegratorBuilder__T]: ...
 
 class ODEIntegratorBuilder:
     """
@@ -83,6 +99,7 @@ class PropagatorBuilder:
         Since:
             6.0
     """
+    def buildLeastSquaresModel(self, propagatorBuilderArray: typing.List['PropagatorBuilder'], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.AbstractBatchLSModel: ...
     def buildPropagator(self, doubleArray: typing.List[float]) -> org.orekit.propagation.Propagator:
         """
             Build a propagator.
@@ -92,6 +109,16 @@ class PropagatorBuilder:
         
             Returns:
                 an initialized propagator
+        
+        
+        """
+        ...
+    def copy(self) -> 'PropagatorBuilder':
+        """
+            Create a new instance identical to this one.
+        
+            Returns:
+                new instance identical to this one
         
         
         """
@@ -116,6 +143,19 @@ class PropagatorBuilder:
         
         """
         ...
+    def getMu(self) -> float:
+        """
+            Get the central attraction coefficient (µ - m³/s²) value.
+        
+            Returns:
+                the central attraction coefficient (µ - m³/s²) value
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
     def getOrbitType(self) -> org.orekit.orbits.OrbitType:
         """
             Get the orbit type expected for the 6 first parameters in
@@ -129,14 +169,14 @@ class PropagatorBuilder:
         
             Also see:
                 :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`,
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPositionAngle`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPositionAngleType`
         
         
         """
         ...
     def getOrbitalParametersDrivers(self) -> org.orekit.utils.ParameterDriversList:
         """
-            Get the drivers for the configurable orbital parameters.
+            Get the drivers for the configurable orbital parameters. Orbital drivers should have only 1 value estimated (1 span)
         
             Returns:
                 drivers for the configurable orbital parameters
@@ -147,7 +187,7 @@ class PropagatorBuilder:
         
         """
         ...
-    def getPositionAngle(self) -> org.orekit.orbits.PositionAngle:
+    def getPositionAngleType(self) -> org.orekit.orbits.PositionAngleType:
         """
             Get the position angle type expected for the 6 first parameters in
             :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`.
@@ -186,6 +226,19 @@ class PropagatorBuilder:
         
             Returns:
                 current value of selected normalized parameters
+        
+        
+        """
+        ...
+    def resetOrbit(self, orbit: org.orekit.orbits.Orbit) -> None:
+        """
+            Reset the orbit in the propagator builder.
+        
+            Parameters:
+                newOrbit (:class:`~org.orekit.orbits.Orbit`): New orbit to set in the propagator builder
+        
+            Since:
+                12.0
         
         
         """
@@ -253,6 +306,19 @@ class PropagatorConverter:
     @typing.overload
     def convert(self, propagator: org.orekit.propagation.Propagator, double: float, int: int, list: java.util.List[str]) -> org.orekit.propagation.Propagator: ...
 
+_AbstractFieldIntegratorBuilder__T = typing.TypeVar('_AbstractFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class AbstractFieldIntegratorBuilder(FieldODEIntegratorBuilder[_AbstractFieldIntegratorBuilder__T], typing.Generic[_AbstractFieldIntegratorBuilder__T]):
+    """
+    public abstract class AbstractFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder`<T>
+    
+        Abstract class for :class:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder`.
+    """
+    def __init__(self): ...
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_AbstractFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_AbstractFieldIntegratorBuilder__T]: ...
+    @typing.overload
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_AbstractFieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_AbstractFieldIntegratorBuilder__T]: ...
+
 class AbstractPropagatorBuilder(PropagatorBuilder):
     """
     public abstract class AbstractPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
@@ -271,22 +337,6 @@ class AbstractPropagatorBuilder(PropagatorBuilder):
         
             Since:
                 11.1
-        
-        
-        """
-        ...
-    def addAdditionalEquations(self, additionalEquations: org.orekit.propagation.integration.AdditionalEquations) -> None:
-        """
-            Deprecated.
-            as of 11.1, replaced by
-            :meth:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder.addAdditionalDerivativesProvider`
-            Add a set of user-specified equations to be integrated along with the orbit propagation (author Shiva Iyer).
-        
-            Parameters:
-                additional (:class:`~org.orekit.propagation.integration.AdditionalEquations`): additional equations
-        
-            Since:
-                10.1
         
         
         """
@@ -342,11 +392,12 @@ class AbstractPropagatorBuilder(PropagatorBuilder):
         """
             Get the central attraction coefficient (µ - m³/s²) value.
         
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getMu` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+        
             Returns:
                 the central attraction coefficient (µ - m³/s²) value
-        
-            Since:
-                9.2
         
         
         """
@@ -365,14 +416,14 @@ class AbstractPropagatorBuilder(PropagatorBuilder):
         
             Also see:
                 :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`,
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPositionAngle`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPositionAngleType`
         
         
         """
         ...
     def getOrbitalParametersDrivers(self) -> org.orekit.utils.ParameterDriversList:
         """
-            Get the drivers for the configurable orbital parameters.
+            Get the drivers for the configurable orbital parameters. Orbital drivers should have only 1 value estimated (1 span)
         
             Specified by:
                 :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitalParametersDrivers` in
@@ -384,13 +435,13 @@ class AbstractPropagatorBuilder(PropagatorBuilder):
         
         """
         ...
-    def getPositionAngle(self) -> org.orekit.orbits.PositionAngle:
+    def getPositionAngleType(self) -> org.orekit.orbits.PositionAngleType:
         """
             Get the position angle type expected for the 6 first parameters in
             :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPositionAngle` in
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPositionAngleType` in
                 interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
@@ -446,6 +497,10 @@ class AbstractPropagatorBuilder(PropagatorBuilder):
     def resetOrbit(self, orbit: org.orekit.orbits.Orbit) -> None:
         """
             Reset the orbit in the propagator builder.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.resetOrbit` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Parameters:
                 newOrbit (:class:`~org.orekit.orbits.Orbit`): New orbit to set in the propagator builder
@@ -841,23 +896,24 @@ class MidpointIntegratorBuilder(ODEIntegratorBuilder):
         """
         ...
 
-class OrbitDeterminationPropagatorBuilder(PropagatorBuilder):
+_PythonFieldODEIntegratorBuilder__T = typing.TypeVar('_PythonFieldODEIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class PythonFieldODEIntegratorBuilder(FieldODEIntegratorBuilder[_PythonFieldODEIntegratorBuilder__T], typing.Generic[_PythonFieldODEIntegratorBuilder__T]):
     """
-    public interface OrbitDeterminationPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
-    
-        Base class for orbit determination model builders.
-    
-        Since:
-            11.0
+    public class PythonFieldODEIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder`<T>
     """
-    def buildKalmanModel(self, list: java.util.List['OrbitDeterminationPropagatorBuilder'], list2: java.util.List[org.orekit.estimation.sequential.CovarianceMatrixProvider], parameterDriversList: org.orekit.utils.ParameterDriversList, covarianceMatrixProvider: org.orekit.estimation.sequential.CovarianceMatrixProvider) -> org.orekit.estimation.sequential.AbstractKalmanModel: ...
-    def buildLSModel(self, orbitDeterminationPropagatorBuilderArray: typing.List['OrbitDeterminationPropagatorBuilder'], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.AbstractBatchLSModel: ...
-    def resetOrbit(self, orbit: org.orekit.orbits.Orbit) -> None:
+    def __init__(self): ...
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_PythonFieldODEIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_PythonFieldODEIntegratorBuilder__T]: ...
+    @typing.overload
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_PythonFieldODEIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_PythonFieldODEIntegratorBuilder__T]: ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
         """
-            Reset the orbit in the propagator builder.
-        
-            Parameters:
-                newOrbit (:class:`~org.orekit.orbits.Orbit`): New orbit to set in the propagator builder
+        public long pythonExtension()
         
         
         """
@@ -912,6 +968,7 @@ class PythonPropagatorBuilder(PropagatorBuilder):
     public class PythonPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
     """
     def __init__(self): ...
+    def buildLeastSquaresModel(self, propagatorBuilderArray: typing.List[PropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.AbstractBatchLSModel: ...
     def buildPropagator(self, doubleArray: typing.List[float]) -> org.orekit.propagation.Propagator:
         """
             Build a propagator.
@@ -925,6 +982,20 @@ class PythonPropagatorBuilder(PropagatorBuilder):
         
             Returns:
                 an initialized propagator
+        
+        
+        """
+        ...
+    def copy(self) -> PropagatorBuilder:
+        """
+            Create a new instance identical to this one.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.copy` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+        
+            Returns:
+                new instance identical to this one
         
         
         """
@@ -958,31 +1029,42 @@ class PythonPropagatorBuilder(PropagatorBuilder):
         
         """
         ...
+    def getMu(self) -> float:
+        """
+            Get the central attraction coefficient (µ - m³/s²) value.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getMu` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+        
+            Returns:
+                the central attraction coefficient (µ - m³/s²) value
+        
+        
+        """
+        ...
     def getOrbitType(self) -> org.orekit.orbits.OrbitType:
         """
             Get the orbit type expected for the 6 first parameters in
-            :meth:`~org.orekit.propagation.conversion.PythonPropagatorBuilder.buildPropagator`.
+            :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`.
         
             Specified by:
                 :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitType` in
                 interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
-                orbit type to use in :meth:`~org.orekit.propagation.conversion.PythonPropagatorBuilder.buildPropagator`
-        
-            Since:
-                7.1
+                orbit type to use in :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`
         
             Also see:
-                :meth:`~org.orekit.propagation.conversion.PythonPropagatorBuilder.buildPropagator`,
-                :meth:`~org.orekit.propagation.conversion.PythonPropagatorBuilder.getPositionAngle`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`,
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPositionAngleType`
         
         
         """
         ...
     def getOrbitalParametersDrivers(self) -> org.orekit.utils.ParameterDriversList:
         """
-            Get the drivers for the configurable orbital parameters.
+            Get the drivers for the configurable orbital parameters. Orbital drivers should have only 1 value estimated (1 span)
         
             Specified by:
                 :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitalParametersDrivers` in
@@ -991,30 +1073,24 @@ class PythonPropagatorBuilder(PropagatorBuilder):
             Returns:
                 drivers for the configurable orbital parameters
         
-            Since:
-                8.0
-        
         
         """
         ...
-    def getPositionAngle(self) -> org.orekit.orbits.PositionAngle:
+    def getPositionAngleType(self) -> org.orekit.orbits.PositionAngleType:
         """
             Get the position angle type expected for the 6 first parameters in
-            :meth:`~org.orekit.propagation.conversion.PythonPropagatorBuilder.buildPropagator`.
+            :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPositionAngle` in
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPositionAngleType` in
                 interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
-                position angle type to use in :meth:`~org.orekit.propagation.conversion.PythonPropagatorBuilder.buildPropagator`
-        
-            Since:
-                7.1
+                position angle type to use in :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`
         
             Also see:
-                :meth:`~org.orekit.propagation.conversion.PythonPropagatorBuilder.buildPropagator`,
-                :meth:`~org.orekit.propagation.conversion.PythonPropagatorBuilder.getOrbitType`
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator`,
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitType`
         
         
         """
@@ -1031,9 +1107,6 @@ class PythonPropagatorBuilder(PropagatorBuilder):
         
             Returns:
                 drivers for the configurable propagation parameters
-        
-            Since:
-                8.0
         
         
         """
@@ -1052,23 +1125,29 @@ class PythonPropagatorBuilder(PropagatorBuilder):
         
         """
         ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
     def pythonExtension(self, long: int) -> None:
         """
-            Part of JCC Python interface to object
+        public long pythonExtension()
+        
+        
+        """
+        ...
+    def resetOrbit(self, orbit: org.orekit.orbits.Orbit) -> None:
+        """
+            Reset the orbit in the propagator builder.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.resetOrbit` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+        
+            Parameters:
+                newOrbit (:class:`~org.orekit.orbits.Orbit`): New orbit to set in the propagator builder
+        
+        
         """
         ...
 
@@ -1191,9 +1270,30 @@ class ThreeEighthesIntegratorBuilder(ODEIntegratorBuilder):
         """
         ...
 
-class BrouwerLyddanePropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminationPropagatorBuilder):
+_AbstractFixedStepFieldIntegratorBuilder__T = typing.TypeVar('_AbstractFixedStepFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class AbstractFixedStepFieldIntegratorBuilder(AbstractFieldIntegratorBuilder[_AbstractFixedStepFieldIntegratorBuilder__T], typing.Generic[_AbstractFixedStepFieldIntegratorBuilder__T]):
     """
-    public class BrouwerLyddanePropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder` implements :class:`~org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder`
+    public abstract class AbstractFixedStepFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractFieldIntegratorBuilder`<T>
+    
+        Abstract class for integrator builder using fixed step size.
+    """
+    ...
+
+_AbstractVariableStepFieldIntegratorBuilder__T = typing.TypeVar('_AbstractVariableStepFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class AbstractVariableStepFieldIntegratorBuilder(AbstractFieldIntegratorBuilder[_AbstractVariableStepFieldIntegratorBuilder__T], typing.Generic[_AbstractVariableStepFieldIntegratorBuilder__T]):
+    """
+    public abstract class AbstractVariableStepFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractFieldIntegratorBuilder`<T>
+    
+        Abstract class for integrator builder using variable step size.
+    """
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_AbstractVariableStepFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_AbstractVariableStepFieldIntegratorBuilder__T]: ...
+    @typing.overload
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_AbstractVariableStepFieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_AbstractVariableStepFieldIntegratorBuilder__T]: ...
+
+class BrouwerLyddanePropagatorBuilder(AbstractPropagatorBuilder):
+    """
+    public class BrouwerLyddanePropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder`
     
         Builder for Brouwer-Lyddane propagator.
     
@@ -1223,20 +1323,15 @@ class BrouwerLyddanePropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminat
             11.1
     """
     @typing.overload
-    def __init__(self, orbit: org.orekit.orbits.Orbit, double: float, double2: float, tideSystem: org.orekit.forces.gravity.potential.TideSystem, double3: float, double4: float, double5: float, double6: float, orbitType: org.orekit.orbits.OrbitType, positionAngle: org.orekit.orbits.PositionAngle, double7: float, double8: float): ...
+    def __init__(self, orbit: org.orekit.orbits.Orbit, double: float, double2: float, tideSystem: org.orekit.forces.gravity.potential.TideSystem, double3: float, double4: float, double5: float, double6: float, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType, double7: float, double8: float): ...
     @typing.overload
-    def __init__(self, orbit: org.orekit.orbits.Orbit, unnormalizedSphericalHarmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider, positionAngle: org.orekit.orbits.PositionAngle, double: float, double2: float): ...
+    def __init__(self, orbit: org.orekit.orbits.Orbit, unnormalizedSphericalHarmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider, positionAngleType: org.orekit.orbits.PositionAngleType, double: float, double2: float): ...
     @typing.overload
-    def __init__(self, orbit: org.orekit.orbits.Orbit, unnormalizedSphericalHarmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider, positionAngle: org.orekit.orbits.PositionAngle, double: float, attitudeProvider: org.orekit.attitudes.AttitudeProvider, double2: float): ...
-    def buildKalmanModel(self, list: java.util.List[OrbitDeterminationPropagatorBuilder], list2: java.util.List[org.orekit.estimation.sequential.CovarianceMatrixProvider], parameterDriversList: org.orekit.utils.ParameterDriversList, covarianceMatrixProvider: org.orekit.estimation.sequential.CovarianceMatrixProvider) -> org.orekit.estimation.sequential.AbstractKalmanModel: ...
-    def buildLSModel(self, orbitDeterminationPropagatorBuilderArray: typing.List[OrbitDeterminationPropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.AbstractBatchLSModel: ...
+    def __init__(self, orbit: org.orekit.orbits.Orbit, unnormalizedSphericalHarmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider, positionAngleType: org.orekit.orbits.PositionAngleType, double: float, attitudeProvider: org.orekit.attitudes.AttitudeProvider, double2: float): ...
+    def buildLeastSquaresModel(self, propagatorBuilderArray: typing.List[PropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.AbstractBatchLSModel: ...
     def buildPropagator(self, doubleArray: typing.List[float]) -> org.orekit.propagation.analytical.BrouwerLyddanePropagator:
         """
             Build a propagator.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
-                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
@@ -1247,10 +1342,20 @@ class BrouwerLyddanePropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminat
         
         """
         ...
+    def copy(self) -> 'BrouwerLyddanePropagatorBuilder':
+        """
+            Create a new instance identical to this one.
+        
+            Returns:
+                new instance identical to this one
+        
+        
+        """
+        ...
 
-class DSSTPropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminationPropagatorBuilder):
+class DSSTPropagatorBuilder(AbstractPropagatorBuilder):
     """
-    public class DSSTPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder` implements :class:`~org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder`
+    public class DSSTPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder`
     
         Builder for DSST propagator.
     
@@ -1273,15 +1378,10 @@ class DSSTPropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminationPropaga
         
         """
         ...
-    def buildKalmanModel(self, list: java.util.List[OrbitDeterminationPropagatorBuilder], list2: java.util.List[org.orekit.estimation.sequential.CovarianceMatrixProvider], parameterDriversList: org.orekit.utils.ParameterDriversList, covarianceMatrixProvider: org.orekit.estimation.sequential.CovarianceMatrixProvider) -> org.orekit.estimation.sequential.AbstractKalmanModel: ...
-    def buildLSModel(self, orbitDeterminationPropagatorBuilderArray: typing.List[OrbitDeterminationPropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.DSSTBatchLSModel: ...
+    def buildLeastSquaresModel(self, propagatorBuilderArray: typing.List[PropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.DSSTBatchLSModel: ...
     def buildPropagator(self, doubleArray: typing.List[float]) -> org.orekit.propagation.semianalytical.dsst.DSSTPropagator:
         """
             Build a propagator.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
-                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
@@ -1368,9 +1468,9 @@ class DSSTPropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminationPropaga
         """
         ...
 
-class EcksteinHechlerPropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminationPropagatorBuilder):
+class EcksteinHechlerPropagatorBuilder(AbstractPropagatorBuilder):
     """
-    public class EcksteinHechlerPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder` implements :class:`~org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder`
+    public class EcksteinHechlerPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder`
     
         Builder for Eckstein-Hechler propagator.
     
@@ -1378,20 +1478,15 @@ class EcksteinHechlerPropagatorBuilder(AbstractPropagatorBuilder, OrbitDetermina
             6.0
     """
     @typing.overload
-    def __init__(self, orbit: org.orekit.orbits.Orbit, double: float, double2: float, tideSystem: org.orekit.forces.gravity.potential.TideSystem, double3: float, double4: float, double5: float, double6: float, double7: float, orbitType: org.orekit.orbits.OrbitType, positionAngle: org.orekit.orbits.PositionAngle, double8: float): ...
+    def __init__(self, orbit: org.orekit.orbits.Orbit, double: float, double2: float, tideSystem: org.orekit.forces.gravity.potential.TideSystem, double3: float, double4: float, double5: float, double6: float, double7: float, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType, double8: float): ...
     @typing.overload
-    def __init__(self, orbit: org.orekit.orbits.Orbit, unnormalizedSphericalHarmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider, positionAngle: org.orekit.orbits.PositionAngle, double: float): ...
+    def __init__(self, orbit: org.orekit.orbits.Orbit, unnormalizedSphericalHarmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider, positionAngleType: org.orekit.orbits.PositionAngleType, double: float): ...
     @typing.overload
-    def __init__(self, orbit: org.orekit.orbits.Orbit, unnormalizedSphericalHarmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider, positionAngle: org.orekit.orbits.PositionAngle, double: float, attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
-    def buildKalmanModel(self, list: java.util.List[OrbitDeterminationPropagatorBuilder], list2: java.util.List[org.orekit.estimation.sequential.CovarianceMatrixProvider], parameterDriversList: org.orekit.utils.ParameterDriversList, covarianceMatrixProvider: org.orekit.estimation.sequential.CovarianceMatrixProvider) -> org.orekit.estimation.sequential.AbstractKalmanModel: ...
-    def buildLSModel(self, orbitDeterminationPropagatorBuilderArray: typing.List[OrbitDeterminationPropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.AbstractBatchLSModel: ...
+    def __init__(self, orbit: org.orekit.orbits.Orbit, unnormalizedSphericalHarmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider, positionAngleType: org.orekit.orbits.PositionAngleType, double: float, attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
+    def buildLeastSquaresModel(self, propagatorBuilderArray: typing.List[PropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.AbstractBatchLSModel: ...
     def buildPropagator(self, doubleArray: typing.List[float]) -> org.orekit.propagation.Propagator:
         """
             Build a propagator.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
-                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
@@ -1402,32 +1497,54 @@ class EcksteinHechlerPropagatorBuilder(AbstractPropagatorBuilder, OrbitDetermina
         
         """
         ...
+    def copy(self) -> 'EcksteinHechlerPropagatorBuilder':
+        """
+            Create a new instance identical to this one.
+        
+            Returns:
+                new instance identical to this one
+        
+        
+        """
+        ...
 
-class EphemerisPropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminationPropagatorBuilder):
+class EphemerisPropagatorBuilder(AbstractPropagatorBuilder):
     """
-    public class EphemerisPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder` implements :class:`~org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder`
+    public class EphemerisPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder`
     
         Builder for Ephemeris propagator.
     
         Since:
             11.3
     """
-    def __init__(self, list: java.util.List[org.orekit.propagation.SpacecraftState], int: int, double: float, attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
-    def buildKalmanModel(self, list: java.util.List[OrbitDeterminationPropagatorBuilder], list2: java.util.List[org.orekit.estimation.sequential.CovarianceMatrixProvider], parameterDriversList: org.orekit.utils.ParameterDriversList, covarianceMatrixProvider: org.orekit.estimation.sequential.CovarianceMatrixProvider) -> org.orekit.estimation.sequential.AbstractKalmanModel: ...
-    def buildLSModel(self, orbitDeterminationPropagatorBuilderArray: typing.List[OrbitDeterminationPropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.AbstractBatchLSModel: ...
+    @typing.overload
+    def __init__(self, list: java.util.List[org.orekit.propagation.SpacecraftState], timeInterpolator: org.orekit.time.TimeInterpolator[org.orekit.propagation.SpacecraftState]): ...
+    @typing.overload
+    def __init__(self, list: java.util.List[org.orekit.propagation.SpacecraftState], timeInterpolator: org.orekit.time.TimeInterpolator[org.orekit.propagation.SpacecraftState], list2: java.util.List[org.orekit.propagation.StateCovariance], timeInterpolator2: org.orekit.time.TimeInterpolator[org.orekit.time.TimeStampedPair[org.orekit.orbits.Orbit, org.orekit.propagation.StateCovariance]]): ...
+    @typing.overload
+    def __init__(self, list: java.util.List[org.orekit.propagation.SpacecraftState], timeInterpolator: org.orekit.time.TimeInterpolator[org.orekit.propagation.SpacecraftState], list2: java.util.List[org.orekit.propagation.StateCovariance], timeInterpolator2: org.orekit.time.TimeInterpolator[org.orekit.time.TimeStampedPair[org.orekit.orbits.Orbit, org.orekit.propagation.StateCovariance]], attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
+    @typing.overload
+    def __init__(self, list: java.util.List[org.orekit.propagation.SpacecraftState], timeInterpolator: org.orekit.time.TimeInterpolator[org.orekit.propagation.SpacecraftState], attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
+    def buildLeastSquaresModel(self, propagatorBuilderArray: typing.List[PropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.AbstractBatchLSModel: ...
     def buildPropagator(self, doubleArray: typing.List[float]) -> org.orekit.propagation.Propagator:
         """
             Build a propagator..
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
-                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
         
             Returns:
                 an initialized propagator
+        
+        
+        """
+        ...
+    def copy(self) -> 'EphemerisPropagatorBuilder':
+        """
+            Create a new instance identical to this one.
+        
+            Returns:
+                new instance identical to this one
         
         
         """
@@ -1455,9 +1572,9 @@ class JacobianPropagatorConverter(AbstractPropagatorConverter):
     """
     def __init__(self, numericalPropagatorBuilder: 'NumericalPropagatorBuilder', double: float, int: int): ...
 
-class KeplerianPropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminationPropagatorBuilder):
+class KeplerianPropagatorBuilder(AbstractPropagatorBuilder):
     """
-    public class KeplerianPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder` implements :class:`~org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder`
+    public class KeplerianPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder`
     
         Builder for Keplerian propagator.
     
@@ -1465,18 +1582,13 @@ class KeplerianPropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminationPr
             6.0
     """
     @typing.overload
-    def __init__(self, orbit: org.orekit.orbits.Orbit, positionAngle: org.orekit.orbits.PositionAngle, double: float): ...
+    def __init__(self, orbit: org.orekit.orbits.Orbit, positionAngleType: org.orekit.orbits.PositionAngleType, double: float): ...
     @typing.overload
-    def __init__(self, orbit: org.orekit.orbits.Orbit, positionAngle: org.orekit.orbits.PositionAngle, double: float, attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
-    def buildKalmanModel(self, list: java.util.List[OrbitDeterminationPropagatorBuilder], list2: java.util.List[org.orekit.estimation.sequential.CovarianceMatrixProvider], parameterDriversList: org.orekit.utils.ParameterDriversList, covarianceMatrixProvider: org.orekit.estimation.sequential.CovarianceMatrixProvider) -> org.orekit.estimation.sequential.AbstractKalmanModel: ...
-    def buildLSModel(self, orbitDeterminationPropagatorBuilderArray: typing.List[OrbitDeterminationPropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.AbstractBatchLSModel: ...
+    def __init__(self, orbit: org.orekit.orbits.Orbit, positionAngleType: org.orekit.orbits.PositionAngleType, double: float, attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
+    def buildLeastSquaresModel(self, propagatorBuilderArray: typing.List[PropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.AbstractBatchLSModel: ...
     def buildPropagator(self, doubleArray: typing.List[float]) -> org.orekit.propagation.Propagator:
         """
             Build a propagator.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
-                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
@@ -1487,10 +1599,20 @@ class KeplerianPropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminationPr
         
         """
         ...
+    def copy(self) -> 'KeplerianPropagatorBuilder':
+        """
+            Create a new instance identical to this one.
+        
+            Returns:
+                new instance identical to this one
+        
+        
+        """
+        ...
 
-class NumericalPropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminationPropagatorBuilder):
+class NumericalPropagatorBuilder(AbstractPropagatorBuilder):
     """
-    public class NumericalPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder` implements :class:`~org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder`
+    public class NumericalPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder`
     
         Builder for numerical propagator.
     
@@ -1498,9 +1620,9 @@ class NumericalPropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminationPr
             6.0
     """
     @typing.overload
-    def __init__(self, orbit: org.orekit.orbits.Orbit, oDEIntegratorBuilder: ODEIntegratorBuilder, positionAngle: org.orekit.orbits.PositionAngle, double: float): ...
+    def __init__(self, orbit: org.orekit.orbits.Orbit, oDEIntegratorBuilder: ODEIntegratorBuilder, positionAngleType: org.orekit.orbits.PositionAngleType, double: float): ...
     @typing.overload
-    def __init__(self, orbit: org.orekit.orbits.Orbit, oDEIntegratorBuilder: ODEIntegratorBuilder, positionAngle: org.orekit.orbits.PositionAngle, double: float, attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
+    def __init__(self, orbit: org.orekit.orbits.Orbit, oDEIntegratorBuilder: ODEIntegratorBuilder, positionAngleType: org.orekit.orbits.PositionAngleType, double: float, attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
     def addForceModel(self, forceModel: org.orekit.forces.ForceModel) -> None:
         """
             Add a force model to the global perturbation model.
@@ -1513,15 +1635,10 @@ class NumericalPropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminationPr
         
         """
         ...
-    def buildKalmanModel(self, list: java.util.List[OrbitDeterminationPropagatorBuilder], list2: java.util.List[org.orekit.estimation.sequential.CovarianceMatrixProvider], parameterDriversList: org.orekit.utils.ParameterDriversList, covarianceMatrixProvider: org.orekit.estimation.sequential.CovarianceMatrixProvider) -> org.orekit.estimation.sequential.KalmanModel: ...
-    def buildLSModel(self, orbitDeterminationPropagatorBuilderArray: typing.List[OrbitDeterminationPropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.BatchLSModel: ...
+    def buildLeastSquaresModel(self, propagatorBuilderArray: typing.List[PropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.BatchLSModel: ...
     def buildPropagator(self, doubleArray: typing.List[float]) -> org.orekit.propagation.numerical.NumericalPropagator:
         """
             Build a propagator.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
-                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
@@ -1584,7 +1701,8 @@ class PythonAbstractPropagatorBuilder(AbstractPropagatorBuilder):
     """
     public class PythonAbstractPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder`
     """
-    def __init__(self, orbit: org.orekit.orbits.Orbit, positionAngle: org.orekit.orbits.PositionAngle, double: float, boolean: bool): ...
+    def __init__(self, orbit: org.orekit.orbits.Orbit, positionAngleType: org.orekit.orbits.PositionAngleType, double: float, boolean: bool): ...
+    def buildLeastSquaresModel(self, propagatorBuilderArray: typing.List[PropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.AbstractBatchLSModel: ...
     def buildPropagator(self, doubleArray: typing.List[float]) -> org.orekit.propagation.Propagator:
         """
             Build a propagator.
@@ -1594,6 +1712,16 @@ class PythonAbstractPropagatorBuilder(AbstractPropagatorBuilder):
         
             Returns:
                 an initialized propagator
+        
+        
+        """
+        ...
+    def copy(self) -> PropagatorBuilder:
+        """
+            Create a new instance identical to this one.
+        
+            Returns:
+                new instance identical to this one
         
         
         """
@@ -1673,192 +1801,9 @@ class PythonAbstractPropagatorConverter(AbstractPropagatorConverter):
         """
         ...
 
-class PythonOrbitDeterminationPropagatorBuilder(OrbitDeterminationPropagatorBuilder):
+class TLEPropagatorBuilder(AbstractPropagatorBuilder):
     """
-    public class PythonOrbitDeterminationPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder`
-    """
-    def __init__(self): ...
-    def buildKalmanModel(self, list: java.util.List[OrbitDeterminationPropagatorBuilder], list2: java.util.List[org.orekit.estimation.sequential.CovarianceMatrixProvider], parameterDriversList: org.orekit.utils.ParameterDriversList, covarianceMatrixProvider: org.orekit.estimation.sequential.CovarianceMatrixProvider) -> org.orekit.estimation.sequential.AbstractKalmanModel: ...
-    def buildLSModel(self, orbitDeterminationPropagatorBuilderArray: typing.List[OrbitDeterminationPropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.AbstractBatchLSModel: ...
-    def buildPropagator(self, doubleArray: typing.List[float]) -> org.orekit.propagation.Propagator:
-        """
-            Build a propagator.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
-                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
-        
-            Parameters:
-                normalizedParameters (double[]): normalized values for the selected parameters
-        
-            Returns:
-                an initialized propagator
-        
-        
-        """
-        ...
-    def finalize(self) -> None: ...
-    def getFrame(self) -> org.orekit.frames.Frame:
-        """
-            Get the frame in which the orbit is propagated.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getFrame` in
-                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
-        
-            Returns:
-                frame in which the orbit is propagated
-        
-        
-        """
-        ...
-    def getInitialOrbitDate(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Get the date of the initial orbit.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getInitialOrbitDate` in
-                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
-        
-            Returns:
-                date of the initial orbit
-        
-        
-        """
-        ...
-    def getOrbitType(self) -> org.orekit.orbits.OrbitType:
-        """
-            Get the orbit type expected for the 6 first parameters in
-            :meth:`~org.orekit.propagation.conversion.PythonOrbitDeterminationPropagatorBuilder.buildPropagator`.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitType` in
-                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
-        
-            Returns:
-                orbit type to use in
-                :meth:`~org.orekit.propagation.conversion.PythonOrbitDeterminationPropagatorBuilder.buildPropagator`
-        
-            Since:
-                7.1
-        
-            Also see:
-                :meth:`~org.orekit.propagation.conversion.PythonOrbitDeterminationPropagatorBuilder.buildPropagator`,
-                :meth:`~org.orekit.propagation.conversion.PythonOrbitDeterminationPropagatorBuilder.getPositionAngle`
-        
-        
-        """
-        ...
-    def getOrbitalParametersDrivers(self) -> org.orekit.utils.ParameterDriversList:
-        """
-            Get the drivers for the configurable orbital parameters.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getOrbitalParametersDrivers` in
-                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
-        
-            Returns:
-                drivers for the configurable orbital parameters
-        
-            Since:
-                8.0
-        
-        
-        """
-        ...
-    def getPositionAngle(self) -> org.orekit.orbits.PositionAngle:
-        """
-            Get the position angle type expected for the 6 first parameters in
-            :meth:`~org.orekit.propagation.conversion.PythonOrbitDeterminationPropagatorBuilder.buildPropagator`.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPositionAngle` in
-                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
-        
-            Returns:
-                position angle type to use in
-                :meth:`~org.orekit.propagation.conversion.PythonOrbitDeterminationPropagatorBuilder.buildPropagator`
-        
-            Since:
-                7.1
-        
-            Also see:
-                :meth:`~org.orekit.propagation.conversion.PythonOrbitDeterminationPropagatorBuilder.buildPropagator`,
-                :meth:`~org.orekit.propagation.conversion.PythonOrbitDeterminationPropagatorBuilder.getOrbitType`
-        
-        
-        """
-        ...
-    def getPropagationParametersDrivers(self) -> org.orekit.utils.ParameterDriversList:
-        """
-            Get the drivers for the configurable propagation parameters.
-        
-            The parameters typically correspond to force models.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getPropagationParametersDrivers` in
-                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
-        
-            Returns:
-                drivers for the configurable propagation parameters
-        
-            Since:
-                8.0
-        
-        
-        """
-        ...
-    def getSelectedNormalizedParameters(self) -> typing.List[float]:
-        """
-            Get the current value of selected normalized parameters.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getSelectedNormalizedParameters` in
-                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
-        
-            Returns:
-                current value of selected normalized parameters
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def resetOrbit(self, orbit: org.orekit.orbits.Orbit) -> None:
-        """
-            Reset the orbit in the propagator builder.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder.resetOrbit` in
-                interface :class:`~org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder`
-        
-            Parameters:
-                newOrbit (:class:`~org.orekit.orbits.Orbit`): New orbit to set in the propagator builder
-        
-        
-        """
-        ...
-
-class TLEPropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminationPropagatorBuilder):
-    """
-    public class TLEPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder` implements :class:`~org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder`
+    public class TLEPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder`
     
         Builder for TLEPropagator.
     
@@ -1866,28 +1811,29 @@ class TLEPropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminationPropagat
             6.0
     """
     @typing.overload
-    def __init__(self, tLE: org.orekit.propagation.analytical.tle.TLE, positionAngle: org.orekit.orbits.PositionAngle, double: float): ...
+    def __init__(self, tLE: org.orekit.propagation.analytical.tle.TLE, positionAngleType: org.orekit.orbits.PositionAngleType, double: float, dataContext: org.orekit.data.DataContext, tleGenerationAlgorithm: org.orekit.propagation.analytical.tle.generation.TleGenerationAlgorithm): ...
     @typing.overload
-    def __init__(self, tLE: org.orekit.propagation.analytical.tle.TLE, positionAngle: org.orekit.orbits.PositionAngle, double: float, double2: float, int: int): ...
-    @typing.overload
-    def __init__(self, tLE: org.orekit.propagation.analytical.tle.TLE, positionAngle: org.orekit.orbits.PositionAngle, double: float, dataContext: org.orekit.data.DataContext): ...
-    @typing.overload
-    def __init__(self, tLE: org.orekit.propagation.analytical.tle.TLE, positionAngle: org.orekit.orbits.PositionAngle, double: float, dataContext: org.orekit.data.DataContext, double2: float, int: int): ...
-    def buildKalmanModel(self, list: java.util.List[OrbitDeterminationPropagatorBuilder], list2: java.util.List[org.orekit.estimation.sequential.CovarianceMatrixProvider], parameterDriversList: org.orekit.utils.ParameterDriversList, covarianceMatrixProvider: org.orekit.estimation.sequential.CovarianceMatrixProvider) -> org.orekit.estimation.sequential.AbstractKalmanModel: ...
-    def buildLSModel(self, orbitDeterminationPropagatorBuilderArray: typing.List[OrbitDeterminationPropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.AbstractBatchLSModel: ...
+    def __init__(self, tLE: org.orekit.propagation.analytical.tle.TLE, positionAngleType: org.orekit.orbits.PositionAngleType, double: float, tleGenerationAlgorithm: org.orekit.propagation.analytical.tle.generation.TleGenerationAlgorithm): ...
+    def buildLeastSquaresModel(self, propagatorBuilderArray: typing.List[PropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.AbstractBatchLSModel: ...
     def buildPropagator(self, doubleArray: typing.List[float]) -> org.orekit.propagation.analytical.tle.TLEPropagator:
         """
             Build a propagator.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
-                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
         
             Returns:
                 an initialized propagator
+        
+        
+        """
+        ...
+    def copy(self) -> 'TLEPropagatorBuilder':
+        """
+            Create a new instance identical to this one.
+        
+            Returns:
+                new instance identical to this one
         
         
         """
@@ -1903,41 +1849,259 @@ class TLEPropagatorBuilder(AbstractPropagatorBuilder, OrbitDeterminationPropagat
         """
         ...
 
+_AbstractLimitedVariableStepFieldIntegratorBuilder__T = typing.TypeVar('_AbstractLimitedVariableStepFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class AbstractLimitedVariableStepFieldIntegratorBuilder(AbstractVariableStepFieldIntegratorBuilder[_AbstractLimitedVariableStepFieldIntegratorBuilder__T], typing.Generic[_AbstractLimitedVariableStepFieldIntegratorBuilder__T]):
+    """
+    public abstract class AbstractLimitedVariableStepFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractVariableStepFieldIntegratorBuilder`<T>
+    
+        Abstract class for integrator using a limited number of variable steps.
+    """
+    ...
+
+_ClassicalRungeKuttaFieldIntegratorBuilder__T = typing.TypeVar('_ClassicalRungeKuttaFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class ClassicalRungeKuttaFieldIntegratorBuilder(AbstractFixedStepFieldIntegratorBuilder[_ClassicalRungeKuttaFieldIntegratorBuilder__T], typing.Generic[_ClassicalRungeKuttaFieldIntegratorBuilder__T]):
+    """
+    public class ClassicalRungeKuttaFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractFixedStepFieldIntegratorBuilder`<T>
+    
+        Builder for ClassicalRungeKuttaFieldIntegrator.
+    
+        Since:
+            12.0
+    """
+    @typing.overload
+    def __init__(self, double: float): ...
+    @typing.overload
+    def __init__(self, t: _ClassicalRungeKuttaFieldIntegratorBuilder__T): ...
+    @typing.overload
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_ClassicalRungeKuttaFieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_ClassicalRungeKuttaFieldIntegratorBuilder__T]: ...
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_ClassicalRungeKuttaFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_ClassicalRungeKuttaFieldIntegratorBuilder__T]: ...
+
+_DormandPrince54FieldIntegratorBuilder__T = typing.TypeVar('_DormandPrince54FieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class DormandPrince54FieldIntegratorBuilder(AbstractVariableStepFieldIntegratorBuilder[_DormandPrince54FieldIntegratorBuilder__T], typing.Generic[_DormandPrince54FieldIntegratorBuilder__T]):
+    """
+    public class DormandPrince54FieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractVariableStepFieldIntegratorBuilder`<T>
+    
+        Builder for DormandPrince54FieldIntegrator.
+    
+        Since:
+            12.0
+    """
+    def __init__(self, double: float, double2: float, double3: float): ...
+    @typing.overload
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_DormandPrince54FieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_DormandPrince54FieldIntegratorBuilder__T]: ...
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_DormandPrince54FieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_DormandPrince54FieldIntegratorBuilder__T]: ...
+
+_DormandPrince853FieldIntegratorBuilder__T = typing.TypeVar('_DormandPrince853FieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class DormandPrince853FieldIntegratorBuilder(AbstractVariableStepFieldIntegratorBuilder[_DormandPrince853FieldIntegratorBuilder__T], typing.Generic[_DormandPrince853FieldIntegratorBuilder__T]):
+    """
+    public class DormandPrince853FieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractVariableStepFieldIntegratorBuilder`<T>
+    
+        Builder for DormandPrince853FieldIntegrator.
+    
+        Since:
+            12.0
+    """
+    def __init__(self, double: float, double2: float, double3: float): ...
+    @typing.overload
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_DormandPrince853FieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_DormandPrince853FieldIntegratorBuilder__T]: ...
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_DormandPrince853FieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_DormandPrince853FieldIntegratorBuilder__T]: ...
+
+_EulerFieldIntegratorBuilder__T = typing.TypeVar('_EulerFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class EulerFieldIntegratorBuilder(AbstractFixedStepFieldIntegratorBuilder[_EulerFieldIntegratorBuilder__T], typing.Generic[_EulerFieldIntegratorBuilder__T]):
+    """
+    public class EulerFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractFixedStepFieldIntegratorBuilder`<T>
+    
+        Builder for EulerFieldIntegrator.
+    
+        Since:
+            12.0
+    """
+    @typing.overload
+    def __init__(self, double: float): ...
+    @typing.overload
+    def __init__(self, t: _EulerFieldIntegratorBuilder__T): ...
+    @typing.overload
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_EulerFieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_EulerFieldIntegratorBuilder__T]: ...
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_EulerFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_EulerFieldIntegratorBuilder__T]: ...
+
+_GillFieldIntegratorBuilder__T = typing.TypeVar('_GillFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class GillFieldIntegratorBuilder(AbstractFixedStepFieldIntegratorBuilder[_GillFieldIntegratorBuilder__T], typing.Generic[_GillFieldIntegratorBuilder__T]):
+    """
+    public class GillFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractFixedStepFieldIntegratorBuilder`<T>
+    
+        Builder for GillFieldIntegrator.
+    
+        Since:
+            12.0
+    """
+    @typing.overload
+    def __init__(self, double: float): ...
+    @typing.overload
+    def __init__(self, t: _GillFieldIntegratorBuilder__T): ...
+    @typing.overload
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_GillFieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_GillFieldIntegratorBuilder__T]: ...
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_GillFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_GillFieldIntegratorBuilder__T]: ...
+
+_HighamHall54FieldIntegratorBuilder__T = typing.TypeVar('_HighamHall54FieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class HighamHall54FieldIntegratorBuilder(AbstractVariableStepFieldIntegratorBuilder[_HighamHall54FieldIntegratorBuilder__T], typing.Generic[_HighamHall54FieldIntegratorBuilder__T]):
+    """
+    public class HighamHall54FieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractVariableStepFieldIntegratorBuilder`<T>
+    
+        Builder for HighamHall54Integrator.
+    
+        Since:
+            12.0
+    """
+    def __init__(self, double: float, double2: float, double3: float): ...
+    @typing.overload
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_HighamHall54FieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_HighamHall54FieldIntegratorBuilder__T]: ...
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_HighamHall54FieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_HighamHall54FieldIntegratorBuilder__T]: ...
+
+_LutherFieldIntegratorBuilder__T = typing.TypeVar('_LutherFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class LutherFieldIntegratorBuilder(AbstractFixedStepFieldIntegratorBuilder[_LutherFieldIntegratorBuilder__T], typing.Generic[_LutherFieldIntegratorBuilder__T]):
+    """
+    public class LutherFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractFixedStepFieldIntegratorBuilder`<T>
+    
+        Builder for LutherFieldIntegrator.
+    
+        Since:
+            12.0
+    """
+    @typing.overload
+    def __init__(self, double: float): ...
+    @typing.overload
+    def __init__(self, t: _LutherFieldIntegratorBuilder__T): ...
+    @typing.overload
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_LutherFieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_LutherFieldIntegratorBuilder__T]: ...
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_LutherFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_LutherFieldIntegratorBuilder__T]: ...
+
+_MidpointFieldIntegratorBuilder__T = typing.TypeVar('_MidpointFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class MidpointFieldIntegratorBuilder(AbstractFixedStepFieldIntegratorBuilder[_MidpointFieldIntegratorBuilder__T], typing.Generic[_MidpointFieldIntegratorBuilder__T]):
+    """
+    public class MidpointFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractFixedStepFieldIntegratorBuilder`<T>
+    
+        Builder for MidpointFieldIntegrator.
+    
+        Since:
+            12.0
+    """
+    @typing.overload
+    def __init__(self, double: float): ...
+    @typing.overload
+    def __init__(self, t: _MidpointFieldIntegratorBuilder__T): ...
+    @typing.overload
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_MidpointFieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_MidpointFieldIntegratorBuilder__T]: ...
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_MidpointFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_MidpointFieldIntegratorBuilder__T]: ...
+
+_ThreeEighthesFieldIntegratorBuilder__T = typing.TypeVar('_ThreeEighthesFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class ThreeEighthesFieldIntegratorBuilder(AbstractFixedStepFieldIntegratorBuilder[_ThreeEighthesFieldIntegratorBuilder__T], typing.Generic[_ThreeEighthesFieldIntegratorBuilder__T]):
+    """
+    public class ThreeEighthesFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractFixedStepFieldIntegratorBuilder`<T>
+    
+        Builder for ThreeEighthesFieldIntegrator.
+    
+        Since:
+            12.0
+    """
+    @typing.overload
+    def __init__(self, double: float): ...
+    @typing.overload
+    def __init__(self, t: _ThreeEighthesFieldIntegratorBuilder__T): ...
+    @typing.overload
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_ThreeEighthesFieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_ThreeEighthesFieldIntegratorBuilder__T]: ...
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_ThreeEighthesFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_ThreeEighthesFieldIntegratorBuilder__T]: ...
+
+_AdamsBashforthFieldIntegratorBuilder__T = typing.TypeVar('_AdamsBashforthFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class AdamsBashforthFieldIntegratorBuilder(AbstractLimitedVariableStepFieldIntegratorBuilder[_AdamsBashforthFieldIntegratorBuilder__T], typing.Generic[_AdamsBashforthFieldIntegratorBuilder__T]):
+    """
+    public class AdamsBashforthFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractLimitedVariableStepFieldIntegratorBuilder`<T>
+    
+        Builder for AdamsBashforthFieldIntegrator.
+    
+        Since:
+            12.0
+    """
+    def __init__(self, int: int, double: float, double2: float, double3: float): ...
+    @typing.overload
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_AdamsBashforthFieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_AdamsBashforthFieldIntegratorBuilder__T]: ...
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_AdamsBashforthFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_AdamsBashforthFieldIntegratorBuilder__T]: ...
+
+_AdamsMoultonFieldIntegratorBuilder__T = typing.TypeVar('_AdamsMoultonFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class AdamsMoultonFieldIntegratorBuilder(AbstractLimitedVariableStepFieldIntegratorBuilder[_AdamsMoultonFieldIntegratorBuilder__T], typing.Generic[_AdamsMoultonFieldIntegratorBuilder__T]):
+    """
+    public class AdamsMoultonFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractLimitedVariableStepFieldIntegratorBuilder`<T>
+    
+        Builder for AdamsMoultonFieldIntegrator.
+    
+        Since:
+            12.0
+    """
+    def __init__(self, int: int, double: float, double2: float, double3: float): ...
+    @typing.overload
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_AdamsMoultonFieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_AdamsMoultonFieldIntegratorBuilder__T]: ...
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_AdamsMoultonFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_AdamsMoultonFieldIntegratorBuilder__T]: ...
+
 
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.propagation.conversion")``.
 
+    AbstractFieldIntegratorBuilder: typing.Type[AbstractFieldIntegratorBuilder]
+    AbstractFixedStepFieldIntegratorBuilder: typing.Type[AbstractFixedStepFieldIntegratorBuilder]
+    AbstractLimitedVariableStepFieldIntegratorBuilder: typing.Type[AbstractLimitedVariableStepFieldIntegratorBuilder]
     AbstractPropagatorBuilder: typing.Type[AbstractPropagatorBuilder]
     AbstractPropagatorConverter: typing.Type[AbstractPropagatorConverter]
+    AbstractVariableStepFieldIntegratorBuilder: typing.Type[AbstractVariableStepFieldIntegratorBuilder]
+    AdamsBashforthFieldIntegratorBuilder: typing.Type[AdamsBashforthFieldIntegratorBuilder]
     AdamsBashforthIntegratorBuilder: typing.Type[AdamsBashforthIntegratorBuilder]
+    AdamsMoultonFieldIntegratorBuilder: typing.Type[AdamsMoultonFieldIntegratorBuilder]
     AdamsMoultonIntegratorBuilder: typing.Type[AdamsMoultonIntegratorBuilder]
     BrouwerLyddanePropagatorBuilder: typing.Type[BrouwerLyddanePropagatorBuilder]
+    ClassicalRungeKuttaFieldIntegratorBuilder: typing.Type[ClassicalRungeKuttaFieldIntegratorBuilder]
     ClassicalRungeKuttaIntegratorBuilder: typing.Type[ClassicalRungeKuttaIntegratorBuilder]
     DSSTPropagatorBuilder: typing.Type[DSSTPropagatorBuilder]
+    DormandPrince54FieldIntegratorBuilder: typing.Type[DormandPrince54FieldIntegratorBuilder]
     DormandPrince54IntegratorBuilder: typing.Type[DormandPrince54IntegratorBuilder]
+    DormandPrince853FieldIntegratorBuilder: typing.Type[DormandPrince853FieldIntegratorBuilder]
     DormandPrince853IntegratorBuilder: typing.Type[DormandPrince853IntegratorBuilder]
     EcksteinHechlerPropagatorBuilder: typing.Type[EcksteinHechlerPropagatorBuilder]
     EphemerisPropagatorBuilder: typing.Type[EphemerisPropagatorBuilder]
+    EulerFieldIntegratorBuilder: typing.Type[EulerFieldIntegratorBuilder]
     EulerIntegratorBuilder: typing.Type[EulerIntegratorBuilder]
+    FieldODEIntegratorBuilder: typing.Type[FieldODEIntegratorBuilder]
     FiniteDifferencePropagatorConverter: typing.Type[FiniteDifferencePropagatorConverter]
+    GillFieldIntegratorBuilder: typing.Type[GillFieldIntegratorBuilder]
     GillIntegratorBuilder: typing.Type[GillIntegratorBuilder]
     GraggBulirschStoerIntegratorBuilder: typing.Type[GraggBulirschStoerIntegratorBuilder]
+    HighamHall54FieldIntegratorBuilder: typing.Type[HighamHall54FieldIntegratorBuilder]
     HighamHall54IntegratorBuilder: typing.Type[HighamHall54IntegratorBuilder]
     JacobianPropagatorConverter: typing.Type[JacobianPropagatorConverter]
     KeplerianPropagatorBuilder: typing.Type[KeplerianPropagatorBuilder]
+    LutherFieldIntegratorBuilder: typing.Type[LutherFieldIntegratorBuilder]
     LutherIntegratorBuilder: typing.Type[LutherIntegratorBuilder]
+    MidpointFieldIntegratorBuilder: typing.Type[MidpointFieldIntegratorBuilder]
     MidpointIntegratorBuilder: typing.Type[MidpointIntegratorBuilder]
     NumericalPropagatorBuilder: typing.Type[NumericalPropagatorBuilder]
     ODEIntegratorBuilder: typing.Type[ODEIntegratorBuilder]
-    OrbitDeterminationPropagatorBuilder: typing.Type[OrbitDeterminationPropagatorBuilder]
     OsculatingToMeanElementsConverter: typing.Type[OsculatingToMeanElementsConverter]
     PropagatorBuilder: typing.Type[PropagatorBuilder]
     PropagatorConverter: typing.Type[PropagatorConverter]
     PythonAbstractPropagatorBuilder: typing.Type[PythonAbstractPropagatorBuilder]
     PythonAbstractPropagatorConverter: typing.Type[PythonAbstractPropagatorConverter]
+    PythonFieldODEIntegratorBuilder: typing.Type[PythonFieldODEIntegratorBuilder]
     PythonODEIntegratorBuilder: typing.Type[PythonODEIntegratorBuilder]
-    PythonOrbitDeterminationPropagatorBuilder: typing.Type[PythonOrbitDeterminationPropagatorBuilder]
     PythonPropagatorBuilder: typing.Type[PythonPropagatorBuilder]
     PythonPropagatorConverter: typing.Type[PythonPropagatorConverter]
     TLEPropagatorBuilder: typing.Type[TLEPropagatorBuilder]
+    ThreeEighthesFieldIntegratorBuilder: typing.Type[ThreeEighthesFieldIntegratorBuilder]
     ThreeEighthesIntegratorBuilder: typing.Type[ThreeEighthesIntegratorBuilder]

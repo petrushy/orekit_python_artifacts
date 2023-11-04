@@ -19,6 +19,8 @@ class AbstractWriter:
         Since:
             11.0
     """
+    def enterSection(self, generator: org.orekit.files.ccsds.utils.generation.Generator) -> None: ...
+    def exitSection(self, generator: org.orekit.files.ccsds.utils.generation.Generator) -> None: ...
     def write(self, generator: org.orekit.files.ccsds.utils.generation.Generator) -> None: ...
 
 class HeaderKey(java.lang.Enum['HeaderKey']):
@@ -31,6 +33,7 @@ class HeaderKey(java.lang.Enum['HeaderKey']):
             11.0
     """
     COMMENT: typing.ClassVar['HeaderKey'] = ...
+    CLASSIFICATION: typing.ClassVar['HeaderKey'] = ...
     CREATION_DATE: typing.ClassVar['HeaderKey'] = ...
     ORIGINATOR: typing.ClassVar['HeaderKey'] = ...
     MESSAGE_ID: typing.ClassVar['HeaderKey'] = ...
@@ -101,7 +104,7 @@ class HeaderProcessingState(org.orekit.files.ccsds.utils.parsing.ProcessingState
         Since:
             11.0
     """
-    def __init__(self, abstractConstituentParser: org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[typing.Any, typing.Any]): ...
+    def __init__(self, abstractConstituentParser: org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[typing.Any, typing.Any, typing.Any]): ...
     def processToken(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken) -> bool:
         """
             Process one token.
@@ -131,13 +134,13 @@ class KvnStructureKey(java.lang.Enum['KvnStructureKey']):
     """
     META: typing.ClassVar['KvnStructureKey'] = ...
     DATA: typing.ClassVar['KvnStructureKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, abstractConstituentParser: org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[typing.Any, typing.Any]) -> bool:
+    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, abstractConstituentParser: org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[typing.Any, typing.Any, typing.Any]) -> bool:
         """
             Process an token.
         
             Parameters:
                 token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                parser (:class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<?, ?> parser): file parser
+                parser (:class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<?, ?, ?> parser): file parser
         
             Returns:
                 true of token was accepted
@@ -198,7 +201,7 @@ class KvnStructureProcessingState(org.orekit.files.ccsds.utils.parsing.Processin
         Since:
             11.0
     """
-    def __init__(self, abstractConstituentParser: org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[typing.Any, typing.Any]): ...
+    def __init__(self, abstractConstituentParser: org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[typing.Any, typing.Any, typing.Any]): ...
     def processToken(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken) -> bool:
         """
             Process one token.
@@ -341,6 +344,16 @@ class Segment(typing.Generic[_Segment__M, _Segment__D]):
         
         """
         ...
+    def setMetadata(self, m: _Segment__M) -> None:
+        """
+            Set the segment metadata.
+        
+            Parameters:
+                metadata (:class:`~org.orekit.files.ccsds.section.Segment`): the segment metadata
+        
+        
+        """
+        ...
 
 class XmlStructureKey(java.lang.Enum['XmlStructureKey']):
     """
@@ -356,13 +369,13 @@ class XmlStructureKey(java.lang.Enum['XmlStructureKey']):
     header: typing.ClassVar['XmlStructureKey'] = ...
     metadata: typing.ClassVar['XmlStructureKey'] = ...
     data: typing.ClassVar['XmlStructureKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, abstractConstituentParser: org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[typing.Any, typing.Any]) -> bool:
+    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, abstractConstituentParser: org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[typing.Any, typing.Any, typing.Any]) -> bool:
         """
             Process an token.
         
             Parameters:
                 token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
-                parser (:class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<?, ?> parser): file parser
+                parser (:class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<?, ?, ?> parser): file parser
         
             Returns:
                 true of token was accepted
@@ -423,7 +436,7 @@ class XmlStructureProcessingState(org.orekit.files.ccsds.utils.parsing.Processin
         Since:
             11.0
     """
-    def __init__(self, string: str, abstractConstituentParser: org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[typing.Any, typing.Any]): ...
+    def __init__(self, string: str, abstractConstituentParser: org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[typing.Any, typing.Any, typing.Any]): ...
     def processToken(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken) -> bool:
         """
             Process one token.
@@ -482,49 +495,49 @@ class CommentsContainer(Section):
         
         """
         ...
-    def checkAllowed(self, double: float, object: typing.Any, enum: java.lang.Enum[typing.Any], double2: float, double3: float) -> None:
+    def checkAllowed(self, double: float, object: typing.Any, string: str, double2: float, double3: float) -> None:
         """
             Complain if a key is not allowed.
         
             Parameters:
                 version (double): format version
                 field (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): field to check
-                key (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<?> key): key associated with the field
+                key (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): key associated with the field
                 minVersion (double): version at which key started to be allowed
                 maxVersion (double): version at which key started to be forbidden
         
         
         """
         ...
-    def checkNotNaN(self, double: float, enum: java.lang.Enum[typing.Any]) -> None:
+    def checkNotNaN(self, double: float, string: str) -> None:
         """
             Complain if a field is NaN.
         
             Parameters:
                 field (double): field to check
-                key (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<?> key): key associated with the field
+                key (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): key associated with the field
         
         
         """
         ...
-    def checkNotNegative(self, int: int, enum: java.lang.Enum[typing.Any]) -> None:
+    def checkNotNegative(self, int: int, string: str) -> None:
         """
             Complain if a field is negative.
         
             Parameters:
                 field (int): field to check
-                key (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<?> key): key associated with the field
+                key (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): key associated with the field
         
         
         """
         ...
-    def checkNotNull(self, object: typing.Any, enum: java.lang.Enum[typing.Any]) -> None:
+    def checkNotNull(self, object: typing.Any, string: str) -> None:
         """
             Complain if a field is null.
         
             Parameters:
                 field (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): field to check
-                key (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<?> key): key associated with the field
+                key (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): key associated with the field
         
         
         """
@@ -657,13 +670,23 @@ class Header(CommentsContainer):
         Since:
             10.2
     """
-    def __init__(self, double: float): ...
-    def getCreationDate(self) -> org.orekit.time.AbsoluteDate:
+    def __init__(self, double: float, double2: float): ...
+    def getClassification(self) -> str:
         """
-            Get the file creation date and time in UTC.
+            Get the classification/caveats.
         
             Returns:
-                the file creation date and time in UTC.
+                classification/caveats.
+        
+        
+        """
+        ...
+    def getCreationDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Get the message creation date and time in UTC.
+        
+            Returns:
+                the message creation date and time in UTC.
         
         
         """
@@ -690,17 +713,27 @@ class Header(CommentsContainer):
         ...
     def getOriginator(self) -> str:
         """
-            Get the file originator.
+            Get the message originator.
         
             Returns:
-                originator the file originator.
+                originator the message originator.
+        
+        
+        """
+        ...
+    def setClassification(self, string: str) -> None:
+        """
+            Set the classification/caveats.
+        
+            Parameters:
+                classification (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): classification/caveats to be set
         
         
         """
         ...
     def setCreationDate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
-            Set the file creation date and time in UTC.
+            Set the message creation date and time in UTC.
         
             Parameters:
                 creationDate (:class:`~org.orekit.time.AbsoluteDate`): the creation date to be set
@@ -730,7 +763,7 @@ class Header(CommentsContainer):
         ...
     def setOriginator(self, string: str) -> None:
         """
-            Set the file originator.
+            Set the message originator.
         
             Parameters:
                 originator (:class:`~org.orekit.files.ccsds.section.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the originator to be set

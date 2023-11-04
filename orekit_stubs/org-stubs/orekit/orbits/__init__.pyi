@@ -3,15 +3,68 @@ import java.lang
 import java.util
 import java.util.stream
 import org.hipparchus
-import org.orekit.attitudes
+import org.hipparchus.analysis.polynomials
+import org.hipparchus.geometry.euclidean.threed
 import org.orekit.bodies
 import org.orekit.frames
 import org.orekit.propagation
+import org.orekit.propagation.analytical
 import org.orekit.time
 import org.orekit.utils
 import typing
 
 
+
+_AbstractFieldOrbitInterpolator__KK = typing.TypeVar('_AbstractFieldOrbitInterpolator__KK', bound=org.hipparchus.CalculusFieldElement)  # <KK>
+class AbstractFieldOrbitInterpolator(org.orekit.time.AbstractFieldTimeInterpolator['FieldOrbit'[_AbstractFieldOrbitInterpolator__KK], _AbstractFieldOrbitInterpolator__KK], typing.Generic[_AbstractFieldOrbitInterpolator__KK]):
+    """
+    public abstract class AbstractFieldOrbitInterpolator<KK extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<KK>> extends :class:`~org.orekit.time.AbstractFieldTimeInterpolator`<:class:`~org.orekit.orbits.FieldOrbit`<KK>, KK>
+    
+        Abstract class for orbit interpolator.
+    """
+    def __init__(self, int: int, double: float, frame: org.orekit.frames.Frame): ...
+    def getOutputInertialFrame(self) -> org.orekit.frames.Frame:
+        """
+            Get output inertial frame.
+        
+            Returns:
+                output inertial frame
+        
+        
+        """
+        ...
+    @typing.overload
+    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, collection: typing.Union[java.util.Collection[org.orekit.time.FieldTimeStamped], typing.Sequence[org.orekit.time.FieldTimeStamped], typing.Set[org.orekit.time.FieldTimeStamped]]) -> org.orekit.time.FieldTimeStamped: ...
+    @typing.overload
+    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, stream: java.util.stream.Stream[org.orekit.time.FieldTimeStamped]) -> org.orekit.time.FieldTimeStamped: ...
+    @typing.overload
+    def interpolate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_AbstractFieldOrbitInterpolator__KK], collection: typing.Union[java.util.Collection['FieldOrbit'[_AbstractFieldOrbitInterpolator__KK]], typing.Sequence['FieldOrbit'[_AbstractFieldOrbitInterpolator__KK]], typing.Set['FieldOrbit'[_AbstractFieldOrbitInterpolator__KK]]]) -> 'FieldOrbit'[_AbstractFieldOrbitInterpolator__KK]: ...
+    @typing.overload
+    def interpolate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_AbstractFieldOrbitInterpolator__KK], stream: java.util.stream.Stream[org.orekit.time.FieldTimeStamped]) -> org.orekit.time.FieldTimeStamped: ...
+
+class AbstractOrbitInterpolator(org.orekit.time.AbstractTimeInterpolator['Orbit']):
+    """
+    public abstract class AbstractOrbitInterpolator extends :class:`~org.orekit.time.AbstractTimeInterpolator`<:class:`~org.orekit.orbits.Orbit`>
+    
+        Abstract class for orbit interpolator.
+    """
+    def __init__(self, int: int, double: float, frame: org.orekit.frames.Frame): ...
+    @staticmethod
+    def checkOrbitsConsistency(collection: typing.Union[java.util.Collection['Orbit'], typing.Sequence['Orbit'], typing.Set['Orbit']]) -> None: ...
+    def getOutputInertialFrame(self) -> org.orekit.frames.Frame:
+        """
+            Get output inertial frame.
+        
+            Returns:
+                output inertial frame
+        
+        
+        """
+        ...
+    @typing.overload
+    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, collection: typing.Union[java.util.Collection['Orbit'], typing.Sequence['Orbit'], typing.Set['Orbit']]) -> 'Orbit': ...
+    @typing.overload
+    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, stream: java.util.stream.Stream[org.orekit.time.TimeStamped]) -> org.orekit.time.TimeStamped: ...
 
 class CR3BPDifferentialCorrection:
     """
@@ -26,10 +79,7 @@ class CR3BPDifferentialCorrection:
         Also see:
             "Three-dimensional, periodic, Halo Orbits by Kathleen Connor Howell, Stanford University"
     """
-    @typing.overload
     def __init__(self, pVCoordinates: org.orekit.utils.PVCoordinates, cR3BPSystem: org.orekit.bodies.CR3BPSystem, double: float): ...
-    @typing.overload
-    def __init__(self, pVCoordinates: org.orekit.utils.PVCoordinates, cR3BPSystem: org.orekit.bodies.CR3BPSystem, double: float, attitudeProvider: org.orekit.attitudes.AttitudeProvider, timeScale: org.orekit.time.TimeScale): ...
     def compute(self, librationOrbitType: 'LibrationOrbitType') -> org.orekit.utils.PVCoordinates:
         """
             Return the real starting PVCoordinates on the Libration orbit type after differential correction from a first guess.
@@ -271,9 +321,9 @@ class FieldKeplerianAnomalyUtility:
         ...
 
 _FieldOrbit__T = typing.TypeVar('_FieldOrbit__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], org.orekit.time.FieldTimeStamped[_FieldOrbit__T], org.orekit.time.FieldTimeShiftable['FieldOrbit'[_FieldOrbit__T], _FieldOrbit__T], org.orekit.time.FieldTimeInterpolable['FieldOrbit'[_FieldOrbit__T], _FieldOrbit__T], typing.Generic[_FieldOrbit__T]):
+class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], org.orekit.time.FieldTimeStamped[_FieldOrbit__T], org.orekit.time.FieldTimeShiftable['FieldOrbit'[_FieldOrbit__T], _FieldOrbit__T], typing.Generic[_FieldOrbit__T]):
     """
-    public abstract class FieldOrbit<T extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T>, :class:`~org.orekit.time.FieldTimeStamped`<T>, :class:`~org.orekit.time.FieldTimeShiftable`<:class:`~org.orekit.orbits.FieldOrbit`<T>, T>, :class:`~org.orekit.time.FieldTimeInterpolable`<:class:`~org.orekit.orbits.FieldOrbit`<T>, T>
+    public abstract class FieldOrbit<T extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T>, :class:`~org.orekit.time.FieldTimeStamped`<T>, :class:`~org.orekit.time.FieldTimeShiftable`<:class:`~org.orekit.orbits.FieldOrbit`<T>, T>
     
         This class handles orbital parameters.
     
@@ -288,7 +338,7 @@ class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], or
         Since:
             9.0
     """
-    def addKeplerContribution(self, positionAngle: 'PositionAngle', t: _FieldOrbit__T, tArray: typing.List[_FieldOrbit__T]) -> None:
+    def addKeplerContribution(self, positionAngleType: 'PositionAngleType', t: _FieldOrbit__T, tArray: typing.List[_FieldOrbit__T]) -> None:
         """
             Add the contribution of the Keplerian motion to parameters derivatives
         
@@ -296,7 +346,7 @@ class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], or
             orbital state.
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the position angle in the state
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the position angle in the state
                 gm (:class:`~org.orekit.orbits.FieldOrbit`): attraction coefficient to use
                 pDot (:class:`~org.orekit.orbits.FieldOrbit`[]): array containing orbital state derivatives to update (the Keplerian part must be *added* to the array components, as the
                     array may already contain some non-zero elements corresponding to non-Keplerian parts)
@@ -471,7 +521,7 @@ class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], or
         
         """
         ...
-    def getJacobianWrtCartesian(self, positionAngle: 'PositionAngle', tArray: typing.List[typing.List[_FieldOrbit__T]]) -> None:
+    def getJacobianWrtCartesian(self, positionAngleType: 'PositionAngleType', tArray: typing.List[typing.List[_FieldOrbit__T]]) -> None:
         """
             Compute the Jacobian of the orbital parameters with respect to the Cartesian parameters.
         
@@ -480,14 +530,14 @@ class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], or
             x, y, z, xDot, yDot and zDot.
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the position angle to use
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the position angle to use
                 jacobian (:class:`~org.orekit.orbits.FieldOrbit`[][]): placeholder 6x6 (or larger) matrix to be filled with the Jacobian, if matrix is larger than 6x6, only the 6x6 upper left
                     corner will be modified
         
         
         """
         ...
-    def getJacobianWrtParameters(self, positionAngle: 'PositionAngle', tArray: typing.List[typing.List[_FieldOrbit__T]]) -> None:
+    def getJacobianWrtParameters(self, positionAngleType: 'PositionAngleType', tArray: typing.List[typing.List[_FieldOrbit__T]]) -> None:
         """
             Compute the Jacobian of the Cartesian parameters with respect to the orbital parameters.
         
@@ -496,7 +546,7 @@ class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], or
             5 correspond to the orbital parameters.
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the position angle to use
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the position angle to use
                 jacobian (:class:`~org.orekit.orbits.FieldOrbit`[][]): placeholder 6x6 (or larger) matrix to be filled with the Jacobian, if matrix is larger than 6x6, only the 6x6 upper left
                     corner will be modified
         
@@ -593,6 +643,16 @@ class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], or
         
         """
         ...
+    def getMeanAnomalyDotWrtA(self) -> _FieldOrbit__T:
+        """
+            Get the derivative of the mean anomaly with respect to the semi major axis.
+        
+            Returns:
+                derivative of the mean anomaly with respect to the semi major axis
+        
+        
+        """
+        ...
     def getMu(self) -> _FieldOrbit__T:
         """
             Get the central attraction coefficient used for position and velocity conversions (m³/s²).
@@ -609,6 +669,12 @@ class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], or
     def getPVCoordinates(self, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldOrbit__T]: ...
     @typing.overload
     def getPVCoordinates(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldOrbit__T], frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldOrbit__T]: ...
+    @typing.overload
+    def getPosition(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldOrbit__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldOrbit__T]: ...
+    @typing.overload
+    def getPosition(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldOrbit__T]: ...
+    @typing.overload
+    def getPosition(self, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldOrbit__T]: ...
     def getType(self) -> 'OrbitType':
         """
             Get the orbit type.
@@ -635,6 +701,19 @@ class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], or
                 :meth:`~org.orekit.orbits.FieldOrbit.getHyDot`, :meth:`~org.orekit.orbits.FieldOrbit.getLEDot`,
                 :meth:`~org.orekit.orbits.FieldOrbit.getLvDot`, :meth:`~org.orekit.orbits.FieldOrbit.getLMDot`,
                 :meth:`~org.orekit.orbits.FieldOrbit.getEDot`, :meth:`~org.orekit.orbits.FieldOrbit.getIDot`
+        
+        
+        """
+        ...
+    def isElliptical(self) -> bool:
+        """
+            Returns true if and only if the orbit is elliptical i.e. has a non-negative semi-major axis.
+        
+            Returns:
+                true if getA() is strictly greater than 0
+        
+            Since:
+                12.0
         
         
         """
@@ -860,29 +939,12 @@ class LibrationOrbit:
         Also see:
             :class:`~org.orekit.orbits.HaloOrbit`, :class:`~org.orekit.orbits.LyapunovOrbit`
     """
-    @typing.overload
     def applyDifferentialCorrection(self) -> None:
         """
             Apply differential correction.
         
             This will update :meth:`~org.orekit.orbits.LibrationOrbit.initialPV` and
             :meth:`~org.orekit.orbits.LibrationOrbit.orbitalPeriod` parameters.
-        """
-        ...
-    @typing.overload
-    def applyDifferentialCorrection(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider, timeScale: org.orekit.time.TimeScale) -> None:
-        """
-            Deprecated.
-            as of 11.1, replaced by :meth:`~org.orekit.orbits.LibrationOrbit.applyDifferentialCorrection`
-            Apply differential correction.
-        
-            This will update :meth:`~org.orekit.orbits.LibrationOrbit.initialPV` and
-            :meth:`~org.orekit.orbits.LibrationOrbit.orbitalPeriod` parameters.
-        
-            Parameters:
-                attitudeProvider (:class:`~org.orekit.attitudes.AttitudeProvider`): the attitude law for the numerocal propagator
-                utc (:class:`~org.orekit.time.TimeScale`): UTC time scale
-        
         
         """
         ...
@@ -1034,9 +1096,9 @@ class LibrationOrbitType(java.lang.Enum['LibrationOrbitType']):
         """
         ...
 
-class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'], org.orekit.time.TimeInterpolable['Orbit'], java.io.Serializable, org.orekit.utils.PVCoordinatesProvider):
+class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'], java.io.Serializable, org.orekit.utils.PVCoordinatesProvider):
     """
-    public abstract class Orbit extends :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.orbits.Orbit`>, :class:`~org.orekit.time.TimeInterpolable`<:class:`~org.orekit.orbits.Orbit`>, :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.orekit.utils.PVCoordinatesProvider`
+    public abstract class Orbit extends :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.orbits.Orbit`>, :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.orekit.utils.PVCoordinatesProvider`
     
         This class handles orbital parameters.
     
@@ -1051,7 +1113,7 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
         Also see:
             :meth:`~serialized`
     """
-    def addKeplerContribution(self, positionAngle: 'PositionAngle', double: float, doubleArray: typing.List[float]) -> None:
+    def addKeplerContribution(self, positionAngleType: 'PositionAngleType', double: float, doubleArray: typing.List[float]) -> None:
         """
             Add the contribution of the Keplerian motion to parameters derivatives
         
@@ -1059,7 +1121,7 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
             orbital state.
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the position angle in the state
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the position angle in the state
                 gm (double): attraction coefficient to use
                 pDot (double[]): array containing orbital state derivatives to update (the Keplerian part must be *added* to the array components, as the
                     array may already contain some non-zero elements corresponding to non-Keplerian parts)
@@ -1297,7 +1359,7 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
         
         """
         ...
-    def getJacobianWrtCartesian(self, positionAngle: 'PositionAngle', doubleArray: typing.List[typing.List[float]]) -> None:
+    def getJacobianWrtCartesian(self, positionAngleType: 'PositionAngleType', doubleArray: typing.List[typing.List[float]]) -> None:
         """
             Compute the Jacobian of the orbital parameters with respect to the Cartesian parameters.
         
@@ -1306,14 +1368,14 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
             x, y, z, xDot, yDot and zDot.
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the position angle to use
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the position angle to use
                 jacobian (double[][]): placeholder 6x6 (or larger) matrix to be filled with the Jacobian, if matrix is larger than 6x6, only the 6x6 upper left
                     corner will be modified
         
         
         """
         ...
-    def getJacobianWrtParameters(self, positionAngle: 'PositionAngle', doubleArray: typing.List[typing.List[float]]) -> None:
+    def getJacobianWrtParameters(self, positionAngleType: 'PositionAngleType', doubleArray: typing.List[typing.List[float]]) -> None:
         """
             Compute the Jacobian of the Cartesian parameters with respect to the orbital parameters.
         
@@ -1322,7 +1384,7 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
             5 correspond to the orbital parameters.
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the position angle to use
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the position angle to use
                 jacobian (double[][]): placeholder 6x6 (or larger) matrix to be filled with the Jacobian, if matrix is larger than 6x6, only the 6x6 upper left
                     corner will be modified
         
@@ -1440,6 +1502,16 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
         
         """
         ...
+    def getMeanAnomalyDotWrtA(self) -> float:
+        """
+            Get the derivative of the mean anomaly with respect to the semi major axis.
+        
+            Returns:
+                derivative of the mean anomaly with respect to the semi major axis
+        
+        
+        """
+        ...
     def getMu(self) -> float:
         """
             Get the central acceleration constant.
@@ -1495,6 +1567,44 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
         ...
     @typing.overload
     def getPVCoordinates(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates: ...
+    @typing.overload
+    def getPosition(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    @typing.overload
+    def getPosition(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Get the position in definition frame.
+        
+            Returns:
+                position in the definition frame
+        
+            Since:
+                12.0
+        
+            Also see:
+                :meth:`~org.orekit.orbits.Orbit.getPVCoordinates`
+        
+        
+        """
+        ...
+    @typing.overload
+    def getPosition(self, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Get the position in a specified frame.
+        
+            Parameters:
+                outputFrame (:class:`~org.orekit.frames.Frame`): frame in which the position coordinates shall be computed
+        
+            Returns:
+                position in the specified output frame
+        
+            Since:
+                12.0
+        
+            Also see:
+                :meth:`~org.orekit.orbits.Orbit.getPosition`
+        
+        """
+        ...
     def getType(self) -> 'OrbitType':
         """
             Get the orbit type.
@@ -1525,6 +1635,19 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
         
         """
         ...
+    def isElliptical(self) -> bool:
+        """
+            Returns true if and only if the orbit is elliptical i.e. has a non-negative semi-major axis.
+        
+            Returns:
+                true if getA() is strictly greater than 0
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
     def shiftedBy(self, double: float) -> 'Orbit':
         """
             Get a time-shifted orbit.
@@ -1551,7 +1674,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
     """
     public enum OrbitType extends :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.orbits.OrbitType`>
     
-        Enumerate for :class:`~org.orekit.orbits.Orbit` parameters types.
+        Enumerate for :class:`~org.orekit.orbits.Orbit` and :class:`~org.orekit.orbits.FieldOrbit` parameters types.
     """
     CARTESIAN: typing.ClassVar['OrbitType'] = ...
     CIRCULAR: typing.ClassVar['OrbitType'] = ...
@@ -1821,6 +1944,8 @@ class OrbitType(java.lang.Enum['OrbitType']):
     
     
     """
+    _convertToFieldOrbit__T = typing.TypeVar('_convertToFieldOrbit__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    def convertToFieldOrbit(self, field: org.hipparchus.Field[_convertToFieldOrbit__T], orbit: Orbit) -> FieldOrbit[_convertToFieldOrbit__T]: ...
     _convertType_0__T = typing.TypeVar('_convertType_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def convertType(self, fieldOrbit: FieldOrbit[_convertType_0__T]) -> FieldOrbit[_convertType_0__T]: ...
@@ -1854,14 +1979,14 @@ class OrbitType(java.lang.Enum['OrbitType']):
         
         """
         ...
-    def getDrivers(self, double: float, orbit: Orbit, positionAngle: 'PositionAngle') -> org.orekit.utils.ParameterDriversList:
+    def getDrivers(self, double: float, orbit: Orbit, positionAngleType: 'PositionAngleType') -> org.orekit.utils.ParameterDriversList:
         """
             Get parameters drivers initialized from a reference orbit.
         
             Parameters:
                 dP (double): user specified position error
                 orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the angle
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the angle
         
             Returns:
                 parameters drivers initialized from reference orbit
@@ -1869,11 +1994,24 @@ class OrbitType(java.lang.Enum['OrbitType']):
         
         """
         ...
+    def isPositionAngleBased(self) -> bool:
+        """
+            Tells if the orbit type is based on position angles or not.
+        
+            Returns:
+                true if based on :class:`~org.orekit.orbits.PositionAngleType`
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
     _mapArrayToOrbit_0__T = typing.TypeVar('_mapArrayToOrbit_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def mapArrayToOrbit(self, tArray: typing.List[_mapArrayToOrbit_0__T], tArray2: typing.List[_mapArrayToOrbit_0__T], positionAngle: 'PositionAngle', fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mapArrayToOrbit_0__T], t3: _mapArrayToOrbit_0__T, frame: org.orekit.frames.Frame) -> FieldOrbit[_mapArrayToOrbit_0__T]: ...
+    def mapArrayToOrbit(self, tArray: typing.List[_mapArrayToOrbit_0__T], tArray2: typing.List[_mapArrayToOrbit_0__T], positionAngleType: 'PositionAngleType', fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mapArrayToOrbit_0__T], t3: _mapArrayToOrbit_0__T, frame: org.orekit.frames.Frame) -> FieldOrbit[_mapArrayToOrbit_0__T]: ...
     @typing.overload
-    def mapArrayToOrbit(self, doubleArray: typing.List[float], doubleArray2: typing.List[float], positionAngle: 'PositionAngle', absoluteDate: org.orekit.time.AbsoluteDate, double3: float, frame: org.orekit.frames.Frame) -> Orbit:
+    def mapArrayToOrbit(self, doubleArray: typing.List[float], doubleArray2: typing.List[float], positionAngleType: 'PositionAngleType', absoluteDate: org.orekit.time.AbsoluteDate, double3: float, frame: org.orekit.frames.Frame) -> Orbit:
         """
             Convert state array to orbital parameters.
         
@@ -1885,7 +2023,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
                 array (double[]): state as a flat array (it can have more than 6 elements, extra elements are ignored)
                 arrayDot (double[]): state derivative as a flat array (it can be null, in which case Keplerian motion is assumed, and it can have more than 6
                     elements, extra elements are ignored)
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the angle
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the angle
                 date (:class:`~org.orekit.time.AbsoluteDate`): integration date
                 mu (double): central attraction coefficient used for propagation (m³/s²)
                 frame (:class:`~org.orekit.frames.Frame`): frame in which integration is performed
@@ -1893,7 +2031,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
             Returns:
                 orbit corresponding to the flat array as a space dynamics object
         
-        public abstract <T extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> :class:`~org.orekit.orbits.FieldOrbit`<T> mapArrayToOrbit (T[] array, T[] arrayDot, :class:`~org.orekit.orbits.PositionAngle` type, :class:`~org.orekit.time.FieldAbsoluteDate`<T> date, T mu, :class:`~org.orekit.frames.Frame` frame)
+        public abstract <T extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> :class:`~org.orekit.orbits.FieldOrbit`<T> mapArrayToOrbit (T[] array, T[] arrayDot, :class:`~org.orekit.orbits.PositionAngleType` type, :class:`~org.orekit.time.FieldAbsoluteDate`<T> date, T mu, :class:`~org.orekit.frames.Frame` frame)
         
             Convert state array to orbital parameters.
         
@@ -1904,7 +2042,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
             Parameters:
                 array (T[]): state as a flat array (it can have more than 6 elements, extra elements are ignored)
                 arrayDot (T[]): state derivative as a flat array (it can be null, in which case Keplerian motion is assumed,
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the angle
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the angle
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): integration date
                 mu (T): central attraction coefficient used for propagation (m³/s²)
                 frame (:class:`~org.orekit.frames.Frame`): frame in which integration is performed
@@ -1917,9 +2055,9 @@ class OrbitType(java.lang.Enum['OrbitType']):
         ...
     _mapOrbitToArray_0__T = typing.TypeVar('_mapOrbitToArray_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def mapOrbitToArray(self, fieldOrbit: FieldOrbit[_mapOrbitToArray_0__T], positionAngle: 'PositionAngle', tArray: typing.List[_mapOrbitToArray_0__T], tArray2: typing.List[_mapOrbitToArray_0__T]) -> None: ...
+    def mapOrbitToArray(self, fieldOrbit: FieldOrbit[_mapOrbitToArray_0__T], positionAngleType: 'PositionAngleType', tArray: typing.List[_mapOrbitToArray_0__T], tArray2: typing.List[_mapOrbitToArray_0__T]) -> None: ...
     @typing.overload
-    def mapOrbitToArray(self, orbit: Orbit, positionAngle: 'PositionAngle', doubleArray: typing.List[float], doubleArray2: typing.List[float]) -> None:
+    def mapOrbitToArray(self, orbit: Orbit, positionAngleType: 'PositionAngleType', doubleArray: typing.List[float], doubleArray2: typing.List[float]) -> None:
         """
             Convert orbit to state array.
         
@@ -1929,12 +2067,12 @@ class OrbitType(java.lang.Enum['OrbitType']):
         
             Parameters:
                 orbit (:class:`~org.orekit.orbits.Orbit`): orbit to map
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the angle
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the angle
                 stateVector (double[]):             flat array into which the state vector should be mapped (it can have more than 6 elements, extra elements are untouched)
                 stateVectorDot (double[]): flat array into which the state vector derivative should be mapped (it can be null if derivatives are not desired, and
                     it can have more than 6 elements, extra elements are untouched)
         
-        public abstract <T extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> void mapOrbitToArray (:class:`~org.orekit.orbits.FieldOrbit`<T> orbit, :class:`~org.orekit.orbits.PositionAngle` type, T[] stateVector, T[] stateVectorDot)
+        public abstract <T extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> void mapOrbitToArray (:class:`~org.orekit.orbits.FieldOrbit`<T> orbit, :class:`~org.orekit.orbits.PositionAngleType` type, T[] stateVector, T[] stateVectorDot)
         
             Convert orbit to state array.
         
@@ -1944,7 +2082,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
         
             Parameters:
                 orbit (:class:`~org.orekit.orbits.FieldOrbit`<T> orbit): orbit to map
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the angle
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the angle
                 stateVector (T[]):             flat array into which the state vector should be mapped (it can have more than 6 elements, extra elements are untouched)
                 stateVectorDot (T[]): flat array into which the state vector derivative should be mapped (it can be null if derivatives are not desired, and
                     it can have more than 6 elements, extra elements are untouched)
@@ -2021,26 +2159,73 @@ class OrbitType(java.lang.Enum['OrbitType']):
         """
         ...
 
-class PositionAngle(java.lang.Enum['PositionAngle']):
+class PositionAngleBased:
     """
-    public enum PositionAngle extends :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.orbits.PositionAngle`>
+    public interface PositionAngleBased
+    
+        This interface represent orbit-like trajectory whose definition is based on a so-called position angle.
+    
+        Since:
+            12.0
+    
+        Also see:
+            :class:`~org.orekit.orbits.PositionAngleType`, :class:`~org.orekit.orbits.KeplerianOrbit`,
+            :class:`~org.orekit.orbits.CircularOrbit`, :class:`~org.orekit.orbits.EquinoctialOrbit`,
+            :class:`~org.orekit.orbits.FieldKeplerianOrbit`, :class:`~org.orekit.orbits.FieldCircularOrbit`,
+            :class:`~org.orekit.orbits.FieldEquinoctialOrbit`
+    """
+    def getCachedPositionAngleType(self) -> 'PositionAngleType':
+        """
+            Get the cached :class:`~org.orekit.orbits.PositionAngleType`.
+        
+            Returns:
+                cached type of position angle
+        
+        
+        """
+        ...
+    def hasRates(self) -> bool:
+        """
+            Tells whether the instance holds rates (first-order time derivatives) for dependent variables.
+        
+            Returns:
+                true if and only if holding rates
+        
+        
+        """
+        ...
+    def removeRates(self) -> 'PositionAngleBased':
+        """
+            Create a new instance such that :meth:`~org.orekit.orbits.PositionAngleBased.hasRates` is false.
+        
+            Returns:
+                new object without rates
+        
+        
+        """
+        ...
+
+class PositionAngleType(java.lang.Enum['PositionAngleType']):
+    """
+    public enum PositionAngleType extends :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.orbits.PositionAngleType`>
     
         Enumerate for true, eccentric and mean position angles.
     
         Also see:
             :class:`~org.orekit.orbits.KeplerianOrbit`, :class:`~org.orekit.orbits.CircularOrbit`,
-            :class:`~org.orekit.orbits.EquinoctialOrbit`
+            :class:`~org.orekit.orbits.EquinoctialOrbit`, :class:`~org.orekit.orbits.FieldKeplerianOrbit`,
+            :class:`~org.orekit.orbits.FieldCircularOrbit`, :class:`~org.orekit.orbits.FieldEquinoctialOrbit`
     """
-    MEAN: typing.ClassVar['PositionAngle'] = ...
-    ECCENTRIC: typing.ClassVar['PositionAngle'] = ...
-    TRUE: typing.ClassVar['PositionAngle'] = ...
+    MEAN: typing.ClassVar['PositionAngleType'] = ...
+    ECCENTRIC: typing.ClassVar['PositionAngleType'] = ...
+    TRUE: typing.ClassVar['PositionAngleType'] = ...
     _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
     @typing.overload
     @staticmethod
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'PositionAngle':
+    def valueOf(string: str) -> 'PositionAngleType':
         """
             Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
             declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
@@ -2059,14 +2244,14 @@ class PositionAngle(java.lang.Enum['PositionAngle']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['PositionAngle']:
+    def values() -> typing.List['PositionAngleType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
         
             .. code-block: java
             
-            for (PositionAngle c : PositionAngle.values())
+            for (PositionAngleType c : PositionAngleType.values())
                 System.out.println(c);
             
         
@@ -2203,7 +2388,7 @@ class CartesianOrbit(Orbit):
     def __init__(self, pVCoordinates: org.orekit.utils.PVCoordinates, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, double: float): ...
     @typing.overload
     def __init__(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame, double: float): ...
-    def addKeplerContribution(self, positionAngle: PositionAngle, double: float, doubleArray: typing.List[float]) -> None:
+    def addKeplerContribution(self, positionAngleType: PositionAngleType, double: float, doubleArray: typing.List[float]) -> None:
         """
             Add the contribution of the Keplerian motion to parameters derivatives
         
@@ -2214,7 +2399,7 @@ class CartesianOrbit(Orbit):
                 :meth:`~org.orekit.orbits.Orbit.addKeplerContribution` in class :class:`~org.orekit.orbits.Orbit`
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the position angle in the state
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the position angle in the state
                 gm (double): attraction coefficient to use
                 pDot (double[]): array containing orbital state derivatives to update (the Keplerian part must be *added* to the array components, as the
                     array may already contain some non-zero elements corresponding to non-Keplerian parts)
@@ -2579,10 +2764,6 @@ class CartesianOrbit(Orbit):
         
         """
         ...
-    @typing.overload
-    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, collection: typing.Union[java.util.Collection[org.orekit.time.TimeInterpolable], typing.Sequence[org.orekit.time.TimeInterpolable], typing.Set[org.orekit.time.TimeInterpolable]]) -> org.orekit.time.TimeInterpolable: ...
-    @typing.overload
-    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, stream: java.util.stream.Stream[Orbit]) -> 'CartesianOrbit': ...
     def shiftedBy(self, double: float) -> 'CartesianOrbit':
         """
             Get a time-shifted orbit.
@@ -2622,9 +2803,9 @@ class CartesianOrbit(Orbit):
         """
         ...
 
-class CircularOrbit(Orbit):
+class CircularOrbit(Orbit, PositionAngleBased):
     """
-    public class CircularOrbit extends :class:`~org.orekit.orbits.Orbit`
+    public class CircularOrbit extends :class:`~org.orekit.orbits.Orbit` implements :class:`~org.orekit.orbits.PositionAngleBased`
     
         This class handles circular orbital parameters.
     
@@ -2652,16 +2833,16 @@ class CircularOrbit(Orbit):
             :class:`~org.orekit.orbits.CartesianOrbit`, :class:`~org.orekit.orbits.EquinoctialOrbit`, :meth:`~serialized`
     """
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, double9: float, double10: float, double11: float, double12: float, positionAngle: PositionAngle, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, double13: float): ...
+    def __init__(self, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, double9: float, double10: float, double11: float, double12: float, positionAngleType: PositionAngleType, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, double13: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, positionAngle: PositionAngle, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, double7: float): ...
+    def __init__(self, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, positionAngleType: PositionAngleType, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, double7: float): ...
     @typing.overload
     def __init__(self, orbit: Orbit): ...
     @typing.overload
     def __init__(self, pVCoordinates: org.orekit.utils.PVCoordinates, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, double: float): ...
     @typing.overload
     def __init__(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame, double: float): ...
-    def addKeplerContribution(self, positionAngle: PositionAngle, double: float, doubleArray: typing.List[float]) -> None:
+    def addKeplerContribution(self, positionAngleType: PositionAngleType, double: float, doubleArray: typing.List[float]) -> None:
         """
             Add the contribution of the Keplerian motion to parameters derivatives
         
@@ -2672,7 +2853,7 @@ class CircularOrbit(Orbit):
                 :meth:`~org.orekit.orbits.Orbit.addKeplerContribution` in class :class:`~org.orekit.orbits.Orbit`
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the position angle in the state
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the position angle in the state
                 gm (double): attraction coefficient to use
                 pDot (double[]): array containing orbital state derivatives to update (the Keplerian part must be *added* to the array components, as the
                     array may already contain some non-zero elements corresponding to non-Keplerian parts)
@@ -2748,12 +2929,12 @@ class CircularOrbit(Orbit):
         
         """
         ...
-    def getAlpha(self, positionAngle: PositionAngle) -> float:
+    def getAlpha(self, positionAngleType: PositionAngleType) -> float:
         """
             Get the latitude argument.
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the angle
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the angle
         
             Returns:
                 latitude argument (rad)
@@ -2761,7 +2942,7 @@ class CircularOrbit(Orbit):
         
         """
         ...
-    def getAlphaDot(self, positionAngle: PositionAngle) -> float:
+    def getAlphaDot(self, positionAngleType: PositionAngleType) -> float:
         """
             Get the latitude argument derivative.
         
@@ -2769,7 +2950,7 @@ class CircularOrbit(Orbit):
             :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the angle
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the angle
         
             Returns:
                 latitude argument derivative (rad/s)
@@ -2854,6 +3035,20 @@ class CircularOrbit(Orbit):
         
             Since:
                 9.0
+        
+        
+        """
+        ...
+    def getCachedPositionAngleType(self) -> PositionAngleType:
+        """
+            Get the cached :class:`~org.orekit.orbits.PositionAngleType`.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.PositionAngleBased.getCachedPositionAngleType` in
+                interface :class:`~org.orekit.orbits.PositionAngleBased`
+        
+            Returns:
+                cached type of position angle
         
         
         """
@@ -3228,10 +3423,19 @@ class CircularOrbit(Orbit):
         
         """
         ...
-    @typing.overload
-    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, collection: typing.Union[java.util.Collection[org.orekit.time.TimeInterpolable], typing.Sequence[org.orekit.time.TimeInterpolable], typing.Set[org.orekit.time.TimeInterpolable]]) -> org.orekit.time.TimeInterpolable: ...
-    @typing.overload
-    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, stream: java.util.stream.Stream[Orbit]) -> 'CircularOrbit': ...
+    def hasRates(self) -> bool:
+        """
+            Tells whether the instance holds rates (first-order time derivatives) for dependent variables.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.PositionAngleBased.hasRates` in interface :class:`~org.orekit.orbits.PositionAngleBased`
+        
+            Returns:
+                true if and only if holding rates
+        
+        
+        """
+        ...
     @staticmethod
     def meanToEccentric(double: float, double2: float, double3: float) -> float:
         """
@@ -3244,6 +3448,19 @@ class CircularOrbit(Orbit):
         
             Returns:
                 the eccentric latitude argument.
+        
+        
+        """
+        ...
+    def removeRates(self) -> 'CircularOrbit':
+        """
+            Create a new instance such that :meth:`~org.orekit.orbits.PositionAngleBased.hasRates` is false.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.PositionAngleBased.removeRates` in interface :class:`~org.orekit.orbits.PositionAngleBased`
+        
+            Returns:
+                new object without rates
         
         
         """
@@ -3303,9 +3520,9 @@ class CircularOrbit(Orbit):
         """
         ...
 
-class EquinoctialOrbit(Orbit):
+class EquinoctialOrbit(Orbit, PositionAngleBased):
     """
-    public class EquinoctialOrbit extends :class:`~org.orekit.orbits.Orbit`
+    public class EquinoctialOrbit extends :class:`~org.orekit.orbits.Orbit` implements :class:`~org.orekit.orbits.PositionAngleBased`
     
         This class handles equinoctial orbital parameters, which can support both circular and equatorial orbits.
     
@@ -3325,7 +3542,8 @@ class EquinoctialOrbit(Orbit):
         The conversion equations from and to Keplerian elements given above hold only when both sides are unambiguously defined,
         i.e. when orbit is neither equatorial nor circular. When orbit is either equatorial or circular, the equinoctial
         parameters are still unambiguously defined whereas some Keplerian elements (more precisely ω and Ω) become ambiguous.
-        For this reason, equinoctial parameters are the recommended way to represent orbits.
+        For this reason, equinoctial parameters are the recommended way to represent orbits. Note however than * the present
+        implementation does not handle non-elliptical cases.
     
         The instance :code:`EquinoctialOrbit` is guaranteed to be immutable.
     
@@ -3334,16 +3552,16 @@ class EquinoctialOrbit(Orbit):
             :class:`~org.orekit.orbits.CircularOrbit`, :class:`~org.orekit.orbits.CartesianOrbit`, :meth:`~serialized`
     """
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, double9: float, double10: float, double11: float, double12: float, positionAngle: PositionAngle, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, double13: float): ...
+    def __init__(self, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, double9: float, double10: float, double11: float, double12: float, positionAngleType: PositionAngleType, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, double13: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, positionAngle: PositionAngle, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, double7: float): ...
+    def __init__(self, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, positionAngleType: PositionAngleType, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, double7: float): ...
     @typing.overload
     def __init__(self, orbit: Orbit): ...
     @typing.overload
     def __init__(self, pVCoordinates: org.orekit.utils.PVCoordinates, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, double: float): ...
     @typing.overload
     def __init__(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame, double: float): ...
-    def addKeplerContribution(self, positionAngle: PositionAngle, double: float, doubleArray: typing.List[float]) -> None:
+    def addKeplerContribution(self, positionAngleType: PositionAngleType, double: float, doubleArray: typing.List[float]) -> None:
         """
             Add the contribution of the Keplerian motion to parameters derivatives
         
@@ -3354,7 +3572,7 @@ class EquinoctialOrbit(Orbit):
                 :meth:`~org.orekit.orbits.Orbit.addKeplerContribution` in class :class:`~org.orekit.orbits.Orbit`
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the position angle in the state
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the position angle in the state
                 gm (double): attraction coefficient to use
                 pDot (double[]): array containing orbital state derivatives to update (the Keplerian part must be *added* to the array components, as the
                     array may already contain some non-zero elements corresponding to non-Keplerian parts)
@@ -3426,6 +3644,20 @@ class EquinoctialOrbit(Orbit):
         
             Also see:
                 :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
+        
+        
+        """
+        ...
+    def getCachedPositionAngleType(self) -> PositionAngleType:
+        """
+            Get the cached :class:`~org.orekit.orbits.PositionAngleType`.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.PositionAngleBased.getCachedPositionAngleType` in
+                interface :class:`~org.orekit.orbits.PositionAngleBased`
+        
+            Returns:
+                cached type of position angle
         
         
         """
@@ -3622,12 +3854,12 @@ class EquinoctialOrbit(Orbit):
         
         """
         ...
-    def getL(self, positionAngle: PositionAngle) -> float:
+    def getL(self, positionAngleType: PositionAngleType) -> float:
         """
             Get the longitude argument.
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the angle
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the angle
         
             Returns:
                 longitude argument (rad)
@@ -3635,12 +3867,12 @@ class EquinoctialOrbit(Orbit):
         
         """
         ...
-    def getLDot(self, positionAngle: PositionAngle) -> float:
+    def getLDot(self, positionAngleType: PositionAngleType) -> float:
         """
             Get the longitude argument derivative.
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the angle
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the angle
         
             Returns:
                 longitude argument derivative (rad/s)
@@ -3757,10 +3989,19 @@ class EquinoctialOrbit(Orbit):
         
         """
         ...
-    @typing.overload
-    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, collection: typing.Union[java.util.Collection[org.orekit.time.TimeInterpolable], typing.Sequence[org.orekit.time.TimeInterpolable], typing.Set[org.orekit.time.TimeInterpolable]]) -> org.orekit.time.TimeInterpolable: ...
-    @typing.overload
-    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, stream: java.util.stream.Stream[Orbit]) -> 'EquinoctialOrbit': ...
+    def hasRates(self) -> bool:
+        """
+            Tells whether the instance holds rates (first-order time derivatives) for dependent variables.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.PositionAngleBased.hasRates` in interface :class:`~org.orekit.orbits.PositionAngleBased`
+        
+            Returns:
+                true if and only if holding rates
+        
+        
+        """
+        ...
     @staticmethod
     def meanToEccentric(double: float, double2: float, double3: float) -> float:
         """
@@ -3773,6 +4014,19 @@ class EquinoctialOrbit(Orbit):
         
             Returns:
                 the eccentric longitude argument
+        
+        
+        """
+        ...
+    def removeRates(self) -> 'EquinoctialOrbit':
+        """
+            Create a new instance such that :meth:`~org.orekit.orbits.PositionAngleBased.hasRates` is false.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.PositionAngleBased.removeRates` in interface :class:`~org.orekit.orbits.PositionAngleBased`
+        
+            Returns:
+                new object without rates
         
         
         """
@@ -3866,12 +4120,16 @@ class FieldCartesianOrbit(FieldOrbit[_FieldCartesianOrbit__T], typing.Generic[_F
             :class:`~org.orekit.orbits.CircularOrbit`, :class:`~org.orekit.orbits.EquinoctialOrbit`
     """
     @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldCartesianOrbit__T], cartesianOrbit: CartesianOrbit): ...
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldCartesianOrbit__T], orbit: Orbit): ...
+    @typing.overload
     def __init__(self, fieldOrbit: FieldOrbit[_FieldCartesianOrbit__T]): ...
     @typing.overload
     def __init__(self, fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_FieldCartesianOrbit__T], frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldCartesianOrbit__T], t: _FieldCartesianOrbit__T): ...
     @typing.overload
     def __init__(self, timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldCartesianOrbit__T], frame: org.orekit.frames.Frame, t2: _FieldCartesianOrbit__T): ...
-    def addKeplerContribution(self, positionAngle: PositionAngle, t: _FieldCartesianOrbit__T, tArray: typing.List[_FieldCartesianOrbit__T]) -> None:
+    def addKeplerContribution(self, positionAngleType: PositionAngleType, t: _FieldCartesianOrbit__T, tArray: typing.List[_FieldCartesianOrbit__T]) -> None:
         """
             Add the contribution of the Keplerian motion to parameters derivatives
         
@@ -3882,7 +4140,7 @@ class FieldCartesianOrbit(FieldOrbit[_FieldCartesianOrbit__T], typing.Generic[_F
                 :meth:`~org.orekit.orbits.FieldOrbit.addKeplerContribution` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the position angle in the state
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the position angle in the state
                 gm (:class:`~org.orekit.orbits.FieldCartesianOrbit`): attraction coefficient to use
                 pDot (:class:`~org.orekit.orbits.FieldCartesianOrbit`[]): array containing orbital state derivatives to update (the Keplerian part must be *added* to the array components, as the
                     array may already contain some non-zero elements corresponding to non-Keplerian parts)
@@ -4206,10 +4464,6 @@ class FieldCartesianOrbit(FieldOrbit[_FieldCartesianOrbit__T], typing.Generic[_F
         """
         ...
     @typing.overload
-    def interpolate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], collection: typing.Union[java.util.Collection[_FieldCartesianOrbit__T], typing.Sequence[_FieldCartesianOrbit__T], typing.Set[_FieldCartesianOrbit__T]]) -> _FieldCartesianOrbit__T: ...
-    @typing.overload
-    def interpolate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldCartesianOrbit__T], stream: java.util.stream.Stream[FieldOrbit[_FieldCartesianOrbit__T]]) -> 'FieldCartesianOrbit'[_FieldCartesianOrbit__T]: ...
-    @typing.overload
     def shiftedBy(self, double: float) -> 'FieldCartesianOrbit'[_FieldCartesianOrbit__T]: ...
     @typing.overload
     def shiftedBy(self, t: _FieldCartesianOrbit__T) -> 'FieldCartesianOrbit'[_FieldCartesianOrbit__T]: ...
@@ -4243,9 +4497,9 @@ class FieldCartesianOrbit(FieldOrbit[_FieldCartesianOrbit__T], typing.Generic[_F
         ...
 
 _FieldCircularOrbit__T = typing.TypeVar('_FieldCircularOrbit__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_FieldCircularOrbit__T]):
+class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], PositionAngleBased, typing.Generic[_FieldCircularOrbit__T]):
     """
-    public class FieldCircularOrbit<T extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.orbits.FieldOrbit`<T>
+    public class FieldCircularOrbit<T extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.orbits.FieldOrbit`<T> implements :class:`~org.orekit.orbits.PositionAngleBased`
     
         This class handles circular orbital parameters.
     
@@ -4276,16 +4530,20 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
             :class:`~org.orekit.orbits.CartesianOrbit`, :class:`~org.orekit.orbits.EquinoctialOrbit`
     """
     @typing.overload
-    def __init__(self, t: _FieldCircularOrbit__T, t2: _FieldCircularOrbit__T, t3: _FieldCircularOrbit__T, t4: _FieldCircularOrbit__T, t5: _FieldCircularOrbit__T, t6: _FieldCircularOrbit__T, t7: _FieldCircularOrbit__T, t8: _FieldCircularOrbit__T, t9: _FieldCircularOrbit__T, t10: _FieldCircularOrbit__T, t11: _FieldCircularOrbit__T, t12: _FieldCircularOrbit__T, positionAngle: PositionAngle, frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldCircularOrbit__T], t13: _FieldCircularOrbit__T): ...
+    def __init__(self, t: _FieldCircularOrbit__T, t2: _FieldCircularOrbit__T, t3: _FieldCircularOrbit__T, t4: _FieldCircularOrbit__T, t5: _FieldCircularOrbit__T, t6: _FieldCircularOrbit__T, t7: _FieldCircularOrbit__T, t8: _FieldCircularOrbit__T, t9: _FieldCircularOrbit__T, t10: _FieldCircularOrbit__T, t11: _FieldCircularOrbit__T, t12: _FieldCircularOrbit__T, positionAngleType: PositionAngleType, frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldCircularOrbit__T], t13: _FieldCircularOrbit__T): ...
     @typing.overload
-    def __init__(self, t: _FieldCircularOrbit__T, t2: _FieldCircularOrbit__T, t3: _FieldCircularOrbit__T, t4: _FieldCircularOrbit__T, t5: _FieldCircularOrbit__T, t6: _FieldCircularOrbit__T, positionAngle: PositionAngle, frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldCircularOrbit__T], t7: _FieldCircularOrbit__T): ...
+    def __init__(self, t: _FieldCircularOrbit__T, t2: _FieldCircularOrbit__T, t3: _FieldCircularOrbit__T, t4: _FieldCircularOrbit__T, t5: _FieldCircularOrbit__T, t6: _FieldCircularOrbit__T, positionAngleType: PositionAngleType, frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldCircularOrbit__T], t7: _FieldCircularOrbit__T): ...
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldCircularOrbit__T], circularOrbit: CircularOrbit): ...
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldCircularOrbit__T], orbit: Orbit): ...
     @typing.overload
     def __init__(self, fieldOrbit: FieldOrbit[_FieldCircularOrbit__T]): ...
     @typing.overload
     def __init__(self, fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_FieldCircularOrbit__T], frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldCircularOrbit__T], t: _FieldCircularOrbit__T): ...
     @typing.overload
     def __init__(self, timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldCircularOrbit__T], frame: org.orekit.frames.Frame, t2: _FieldCircularOrbit__T): ...
-    def addKeplerContribution(self, positionAngle: PositionAngle, t: _FieldCircularOrbit__T, tArray: typing.List[_FieldCircularOrbit__T]) -> None:
+    def addKeplerContribution(self, positionAngleType: PositionAngleType, t: _FieldCircularOrbit__T, tArray: typing.List[_FieldCircularOrbit__T]) -> None:
         """
             Add the contribution of the Keplerian motion to parameters derivatives
         
@@ -4296,7 +4554,7 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
                 :meth:`~org.orekit.orbits.FieldOrbit.addKeplerContribution` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the position angle in the state
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the position angle in the state
                 gm (:class:`~org.orekit.orbits.FieldCircularOrbit`): attraction coefficient to use
                 pDot (:class:`~org.orekit.orbits.FieldCircularOrbit`[]): array containing orbital state derivatives to update (the Keplerian part must be *added* to the array components, as the
                     array may already contain some non-zero elements corresponding to non-Keplerian parts)
@@ -4370,12 +4628,12 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
         
         """
         ...
-    def getAlpha(self, positionAngle: PositionAngle) -> _FieldCircularOrbit__T:
+    def getAlpha(self, positionAngleType: PositionAngleType) -> _FieldCircularOrbit__T:
         """
             Get the latitude argument.
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the angle
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the angle
         
             Returns:
                 latitude argument (rad)
@@ -4383,12 +4641,12 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
         
         """
         ...
-    def getAlphaDot(self, positionAngle: PositionAngle) -> _FieldCircularOrbit__T:
+    def getAlphaDot(self, positionAngleType: PositionAngleType) -> _FieldCircularOrbit__T:
         """
             Get the latitude argument derivative.
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the angle
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the angle
         
             Returns:
                 latitude argument derivative (rad/s)
@@ -4452,6 +4710,20 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
         
             Returns:
                 d(v + ω)/dt true latitude argument derivative (rad/s)
+        
+        
+        """
+        ...
+    def getCachedPositionAngleType(self) -> PositionAngleType:
+        """
+            Get the cached :class:`~org.orekit.orbits.PositionAngleType`.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.PositionAngleBased.getCachedPositionAngleType` in
+                interface :class:`~org.orekit.orbits.PositionAngleBased`
+        
+            Returns:
+                cached type of position angle
         
         
         """
@@ -4799,10 +5071,19 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
         
         """
         ...
-    @typing.overload
-    def interpolate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], collection: typing.Union[java.util.Collection[_FieldCircularOrbit__T], typing.Sequence[_FieldCircularOrbit__T], typing.Set[_FieldCircularOrbit__T]]) -> _FieldCircularOrbit__T: ...
-    @typing.overload
-    def interpolate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldCircularOrbit__T], stream: java.util.stream.Stream[FieldOrbit[_FieldCircularOrbit__T]]) -> 'FieldCircularOrbit'[_FieldCircularOrbit__T]: ...
+    def hasRates(self) -> bool:
+        """
+            Tells whether the instance holds rates (first-order time derivatives) for dependent variables.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.PositionAngleBased.hasRates` in interface :class:`~org.orekit.orbits.PositionAngleBased`
+        
+            Returns:
+                true if and only if holding rates
+        
+        
+        """
+        ...
     _meanToEccentric__T = typing.TypeVar('_meanToEccentric__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @staticmethod
     def meanToEccentric(t: _meanToEccentric__T, t2: _meanToEccentric__T, t3: _meanToEccentric__T) -> _meanToEccentric__T:
@@ -4820,6 +5101,7 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
         
         """
         ...
+    def removeRates(self) -> 'FieldCircularOrbit'[_FieldCircularOrbit__T]: ...
     @typing.overload
     def shiftedBy(self, double: float) -> 'FieldCircularOrbit'[_FieldCircularOrbit__T]: ...
     @typing.overload
@@ -4870,9 +5152,9 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], typing.Generic[_Fie
         ...
 
 _FieldEquinoctialOrbit__T = typing.TypeVar('_FieldEquinoctialOrbit__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], typing.Generic[_FieldEquinoctialOrbit__T]):
+class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], PositionAngleBased, typing.Generic[_FieldEquinoctialOrbit__T]):
     """
-    public class FieldEquinoctialOrbit<T extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.orbits.FieldOrbit`<T>
+    public class FieldEquinoctialOrbit<T extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.orbits.FieldOrbit`<T> implements :class:`~org.orekit.orbits.PositionAngleBased`
     
         This class handles equinoctial orbital parameters, which can support both circular and equatorial orbits.
     
@@ -4892,7 +5174,8 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], typing.Generi
         The conversion equations from and to Keplerian elements given above hold only when both sides are unambiguously defined,
         i.e. when orbit is neither equatorial nor circular. When orbit is either equatorial or circular, the equinoctial
         parameters are still unambiguously defined whereas some Keplerian elements (more precisely ω and Ω) become ambiguous.
-        For this reason, equinoctial parameters are the recommended way to represent orbits.
+        For this reason, equinoctial parameters are the recommended way to represent orbits. Note however than the present
+        implementation does not handle non-elliptical cases.
     
         The instance :code:`EquinoctialOrbit` is guaranteed to be immutable.
     
@@ -4904,16 +5187,20 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], typing.Generi
             :class:`~org.orekit.orbits.CircularOrbit`, :class:`~org.orekit.orbits.CartesianOrbit`
     """
     @typing.overload
-    def __init__(self, t: _FieldEquinoctialOrbit__T, t2: _FieldEquinoctialOrbit__T, t3: _FieldEquinoctialOrbit__T, t4: _FieldEquinoctialOrbit__T, t5: _FieldEquinoctialOrbit__T, t6: _FieldEquinoctialOrbit__T, t7: _FieldEquinoctialOrbit__T, t8: _FieldEquinoctialOrbit__T, t9: _FieldEquinoctialOrbit__T, t10: _FieldEquinoctialOrbit__T, t11: _FieldEquinoctialOrbit__T, t12: _FieldEquinoctialOrbit__T, positionAngle: PositionAngle, frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldEquinoctialOrbit__T], t13: _FieldEquinoctialOrbit__T): ...
+    def __init__(self, t: _FieldEquinoctialOrbit__T, t2: _FieldEquinoctialOrbit__T, t3: _FieldEquinoctialOrbit__T, t4: _FieldEquinoctialOrbit__T, t5: _FieldEquinoctialOrbit__T, t6: _FieldEquinoctialOrbit__T, t7: _FieldEquinoctialOrbit__T, t8: _FieldEquinoctialOrbit__T, t9: _FieldEquinoctialOrbit__T, t10: _FieldEquinoctialOrbit__T, t11: _FieldEquinoctialOrbit__T, t12: _FieldEquinoctialOrbit__T, positionAngleType: PositionAngleType, frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldEquinoctialOrbit__T], t13: _FieldEquinoctialOrbit__T): ...
     @typing.overload
-    def __init__(self, t: _FieldEquinoctialOrbit__T, t2: _FieldEquinoctialOrbit__T, t3: _FieldEquinoctialOrbit__T, t4: _FieldEquinoctialOrbit__T, t5: _FieldEquinoctialOrbit__T, t6: _FieldEquinoctialOrbit__T, positionAngle: PositionAngle, frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldEquinoctialOrbit__T], t7: _FieldEquinoctialOrbit__T): ...
+    def __init__(self, t: _FieldEquinoctialOrbit__T, t2: _FieldEquinoctialOrbit__T, t3: _FieldEquinoctialOrbit__T, t4: _FieldEquinoctialOrbit__T, t5: _FieldEquinoctialOrbit__T, t6: _FieldEquinoctialOrbit__T, positionAngleType: PositionAngleType, frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldEquinoctialOrbit__T], t7: _FieldEquinoctialOrbit__T): ...
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldEquinoctialOrbit__T], equinoctialOrbit: EquinoctialOrbit): ...
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldEquinoctialOrbit__T], orbit: Orbit): ...
     @typing.overload
     def __init__(self, fieldOrbit: FieldOrbit[_FieldEquinoctialOrbit__T]): ...
     @typing.overload
     def __init__(self, fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_FieldEquinoctialOrbit__T], frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldEquinoctialOrbit__T], t: _FieldEquinoctialOrbit__T): ...
     @typing.overload
     def __init__(self, timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldEquinoctialOrbit__T], frame: org.orekit.frames.Frame, t2: _FieldEquinoctialOrbit__T): ...
-    def addKeplerContribution(self, positionAngle: PositionAngle, t: _FieldEquinoctialOrbit__T, tArray: typing.List[_FieldEquinoctialOrbit__T]) -> None:
+    def addKeplerContribution(self, positionAngleType: PositionAngleType, t: _FieldEquinoctialOrbit__T, tArray: typing.List[_FieldEquinoctialOrbit__T]) -> None:
         """
             Add the contribution of the Keplerian motion to parameters derivatives
         
@@ -4924,7 +5211,7 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], typing.Generi
                 :meth:`~org.orekit.orbits.FieldOrbit.addKeplerContribution` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the position angle in the state
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the position angle in the state
                 gm (:class:`~org.orekit.orbits.FieldEquinoctialOrbit`): attraction coefficient to use
                 pDot (:class:`~org.orekit.orbits.FieldEquinoctialOrbit`[]): array containing orbital state derivatives to update (the Keplerian part must be *added* to the array components, as the
                     array may already contain some non-zero elements corresponding to non-Keplerian parts)
@@ -4994,6 +5281,20 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], typing.Generi
         
             Returns:
                 semi-major axis derivative (m/s)
+        
+        
+        """
+        ...
+    def getCachedPositionAngleType(self) -> PositionAngleType:
+        """
+            Get the cached :class:`~org.orekit.orbits.PositionAngleType`.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.PositionAngleBased.getCachedPositionAngleType` in
+                interface :class:`~org.orekit.orbits.PositionAngleBased`
+        
+            Returns:
+                cached type of position angle
         
         
         """
@@ -5164,12 +5465,12 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], typing.Generi
         
         """
         ...
-    def getL(self, positionAngle: PositionAngle) -> _FieldEquinoctialOrbit__T:
+    def getL(self, positionAngleType: PositionAngleType) -> _FieldEquinoctialOrbit__T:
         """
             Get the longitude argument.
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the angle
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the angle
         
             Returns:
                 longitude argument (rad)
@@ -5177,12 +5478,12 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], typing.Generi
         
         """
         ...
-    def getLDot(self, positionAngle: PositionAngle) -> _FieldEquinoctialOrbit__T:
+    def getLDot(self, positionAngleType: PositionAngleType) -> _FieldEquinoctialOrbit__T:
         """
             Get the longitude argument derivative.
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the angle
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the angle
         
             Returns:
                 longitude argument derivative (rad/s)
@@ -5307,10 +5608,19 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], typing.Generi
         
         """
         ...
-    @typing.overload
-    def interpolate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], collection: typing.Union[java.util.Collection[_FieldEquinoctialOrbit__T], typing.Sequence[_FieldEquinoctialOrbit__T], typing.Set[_FieldEquinoctialOrbit__T]]) -> _FieldEquinoctialOrbit__T: ...
-    @typing.overload
-    def interpolate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldEquinoctialOrbit__T], stream: java.util.stream.Stream[FieldOrbit[_FieldEquinoctialOrbit__T]]) -> 'FieldEquinoctialOrbit'[_FieldEquinoctialOrbit__T]: ...
+    def hasRates(self) -> bool:
+        """
+            Tells whether the instance holds rates (first-order time derivatives) for dependent variables.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.PositionAngleBased.hasRates` in interface :class:`~org.orekit.orbits.PositionAngleBased`
+        
+            Returns:
+                true if and only if holding rates
+        
+        
+        """
+        ...
     _meanToEccentric__T = typing.TypeVar('_meanToEccentric__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @staticmethod
     def meanToEccentric(t: _meanToEccentric__T, t2: _meanToEccentric__T, t3: _meanToEccentric__T) -> _meanToEccentric__T:
@@ -5328,6 +5638,7 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], typing.Generi
         
         """
         ...
+    def removeRates(self) -> 'FieldEquinoctialOrbit'[_FieldEquinoctialOrbit__T]: ...
     @typing.overload
     def shiftedBy(self, double: float) -> 'FieldEquinoctialOrbit'[_FieldEquinoctialOrbit__T]: ...
     @typing.overload
@@ -5378,9 +5689,9 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], typing.Generi
         ...
 
 _FieldKeplerianOrbit__T = typing.TypeVar('_FieldKeplerianOrbit__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], typing.Generic[_FieldKeplerianOrbit__T]):
+class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], PositionAngleBased, typing.Generic[_FieldKeplerianOrbit__T]):
     """
-    public class FieldKeplerianOrbit<T extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.orbits.FieldOrbit`<T>
+    public class FieldKeplerianOrbit<T extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.orbits.FieldOrbit`<T> implements :class:`~org.orekit.orbits.PositionAngleBased`
     
         This class handles traditional Keplerian orbital parameters.
     
@@ -5415,16 +5726,20 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], typing.Generic[_F
             :class:`~org.orekit.orbits.CartesianOrbit`, :class:`~org.orekit.orbits.EquinoctialOrbit`
     """
     @typing.overload
-    def __init__(self, t: _FieldKeplerianOrbit__T, t2: _FieldKeplerianOrbit__T, t3: _FieldKeplerianOrbit__T, t4: _FieldKeplerianOrbit__T, t5: _FieldKeplerianOrbit__T, t6: _FieldKeplerianOrbit__T, t7: _FieldKeplerianOrbit__T, t8: _FieldKeplerianOrbit__T, t9: _FieldKeplerianOrbit__T, t10: _FieldKeplerianOrbit__T, t11: _FieldKeplerianOrbit__T, t12: _FieldKeplerianOrbit__T, positionAngle: PositionAngle, frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldKeplerianOrbit__T], t13: _FieldKeplerianOrbit__T): ...
+    def __init__(self, t: _FieldKeplerianOrbit__T, t2: _FieldKeplerianOrbit__T, t3: _FieldKeplerianOrbit__T, t4: _FieldKeplerianOrbit__T, t5: _FieldKeplerianOrbit__T, t6: _FieldKeplerianOrbit__T, t7: _FieldKeplerianOrbit__T, t8: _FieldKeplerianOrbit__T, t9: _FieldKeplerianOrbit__T, t10: _FieldKeplerianOrbit__T, t11: _FieldKeplerianOrbit__T, t12: _FieldKeplerianOrbit__T, positionAngleType: PositionAngleType, frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldKeplerianOrbit__T], t13: _FieldKeplerianOrbit__T): ...
     @typing.overload
-    def __init__(self, t: _FieldKeplerianOrbit__T, t2: _FieldKeplerianOrbit__T, t3: _FieldKeplerianOrbit__T, t4: _FieldKeplerianOrbit__T, t5: _FieldKeplerianOrbit__T, t6: _FieldKeplerianOrbit__T, positionAngle: PositionAngle, frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldKeplerianOrbit__T], t7: _FieldKeplerianOrbit__T): ...
+    def __init__(self, t: _FieldKeplerianOrbit__T, t2: _FieldKeplerianOrbit__T, t3: _FieldKeplerianOrbit__T, t4: _FieldKeplerianOrbit__T, t5: _FieldKeplerianOrbit__T, t6: _FieldKeplerianOrbit__T, positionAngleType: PositionAngleType, frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldKeplerianOrbit__T], t7: _FieldKeplerianOrbit__T): ...
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldKeplerianOrbit__T], keplerianOrbit: 'KeplerianOrbit'): ...
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldKeplerianOrbit__T], orbit: Orbit): ...
     @typing.overload
     def __init__(self, fieldOrbit: FieldOrbit[_FieldKeplerianOrbit__T]): ...
     @typing.overload
     def __init__(self, fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_FieldKeplerianOrbit__T], frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldKeplerianOrbit__T], t: _FieldKeplerianOrbit__T): ...
     @typing.overload
     def __init__(self, timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldKeplerianOrbit__T], frame: org.orekit.frames.Frame, t2: _FieldKeplerianOrbit__T): ...
-    def addKeplerContribution(self, positionAngle: PositionAngle, t: _FieldKeplerianOrbit__T, tArray: typing.List[_FieldKeplerianOrbit__T]) -> None:
+    def addKeplerContribution(self, positionAngleType: PositionAngleType, t: _FieldKeplerianOrbit__T, tArray: typing.List[_FieldKeplerianOrbit__T]) -> None:
         """
             Add the contribution of the Keplerian motion to parameters derivatives
         
@@ -5435,46 +5750,10 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], typing.Generic[_F
                 :meth:`~org.orekit.orbits.FieldOrbit.addKeplerContribution` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the position angle in the state
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the position angle in the state
                 gm (:class:`~org.orekit.orbits.FieldKeplerianOrbit`): attraction coefficient to use
                 pDot (:class:`~org.orekit.orbits.FieldKeplerianOrbit`[]): array containing orbital state derivatives to update (the Keplerian part must be *added* to the array components, as the
                     array may already contain some non-zero elements corresponding to non-Keplerian parts)
-        
-        
-        """
-        ...
-    _ellipticEccentricToMean__T = typing.TypeVar('_ellipticEccentricToMean__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @staticmethod
-    def ellipticEccentricToMean(t: _ellipticEccentricToMean__T, t2: _ellipticEccentricToMean__T) -> _ellipticEccentricToMean__T:
-        """
-            Deprecated.
-            As of 11.3, replaced by :meth:`~org.orekit.orbits.FieldKeplerianAnomalyUtility.ellipticEccentricToMean`.
-            Computes the mean anomaly from the elliptic eccentric anomaly.
-        
-            Parameters:
-                E (T): eccentric anomaly (rad)
-                e (T): eccentricity
-        
-            Returns:
-                M the mean anomaly
-        
-        
-        """
-        ...
-    _ellipticEccentricToTrue__T = typing.TypeVar('_ellipticEccentricToTrue__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @staticmethod
-    def ellipticEccentricToTrue(t: _ellipticEccentricToTrue__T, t2: _ellipticEccentricToTrue__T) -> _ellipticEccentricToTrue__T:
-        """
-            Deprecated.
-            As of 11.3, replaced by :meth:`~org.orekit.orbits.FieldKeplerianAnomalyUtility.ellipticEccentricToTrue`.
-            Computes the true anomaly from the elliptic eccentric anomaly.
-        
-            Parameters:
-                E (T): eccentric anomaly (rad)
-                e (T): eccentricity
-        
-            Returns:
-                v the true anomaly
         
         
         """
@@ -5511,12 +5790,12 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], typing.Generic[_F
         
         """
         ...
-    def getAnomaly(self, positionAngle: PositionAngle) -> _FieldKeplerianOrbit__T:
+    def getAnomaly(self, positionAngleType: PositionAngleType) -> _FieldKeplerianOrbit__T:
         """
             Get the anomaly.
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the angle
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the angle
         
             Returns:
                 anomaly (rad)
@@ -5524,17 +5803,31 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], typing.Generic[_F
         
         """
         ...
-    def getAnomalyDot(self, positionAngle: PositionAngle) -> _FieldKeplerianOrbit__T:
+    def getAnomalyDot(self, positionAngleType: PositionAngleType) -> _FieldKeplerianOrbit__T:
         """
             Get the anomaly derivative.
         
             If the orbit was created without derivatives, the value returned is null.
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the angle
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the angle
         
             Returns:
                 anomaly derivative (rad/s)
+        
+        
+        """
+        ...
+    def getCachedPositionAngleType(self) -> PositionAngleType:
+        """
+            Get the cached :class:`~org.orekit.orbits.PositionAngleType`.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.PositionAngleBased.getCachedPositionAngleType` in
+                interface :class:`~org.orekit.orbits.PositionAngleBased`
+        
+            Returns:
+                cached type of position angle
         
         
         """
@@ -5932,82 +6225,20 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], typing.Generic[_F
         
         """
         ...
-    _hyperbolicEccentricToMean__T = typing.TypeVar('_hyperbolicEccentricToMean__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @staticmethod
-    def hyperbolicEccentricToMean(t: _hyperbolicEccentricToMean__T, t2: _hyperbolicEccentricToMean__T) -> _hyperbolicEccentricToMean__T:
+    def hasRates(self) -> bool:
         """
-            Deprecated.
-            As of 11.3, replaced by :meth:`~org.orekit.orbits.FieldKeplerianAnomalyUtility.hyperbolicEccentricToMean`.
-            Computes the mean anomaly from the hyperbolic eccentric anomaly.
+            Tells whether the instance holds rates (first-order time derivatives) for dependent variables.
         
-            Parameters:
-                H (T): hyperbolic eccentric anomaly (rad)
-                e (T): eccentricity
+            Specified by:
+                :meth:`~org.orekit.orbits.PositionAngleBased.hasRates` in interface :class:`~org.orekit.orbits.PositionAngleBased`
         
             Returns:
-                M the mean anomaly
+                true if and only if holding rates
         
         
         """
         ...
-    _hyperbolicEccentricToTrue__T = typing.TypeVar('_hyperbolicEccentricToTrue__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @staticmethod
-    def hyperbolicEccentricToTrue(t: _hyperbolicEccentricToTrue__T, t2: _hyperbolicEccentricToTrue__T) -> _hyperbolicEccentricToTrue__T:
-        """
-            Deprecated.
-            As of 11.3, replaced by :meth:`~org.orekit.orbits.FieldKeplerianAnomalyUtility.hyperbolicEccentricToTrue`.
-            Computes the true anomaly from the hyperbolic eccentric anomaly.
-        
-            Parameters:
-                H (T): hyperbolic eccentric anomaly (rad)
-                e (T): eccentricity
-        
-            Returns:
-                v the true anomaly
-        
-        
-        """
-        ...
-    @typing.overload
-    def interpolate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], collection: typing.Union[java.util.Collection[_FieldKeplerianOrbit__T], typing.Sequence[_FieldKeplerianOrbit__T], typing.Set[_FieldKeplerianOrbit__T]]) -> _FieldKeplerianOrbit__T: ...
-    @typing.overload
-    def interpolate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldKeplerianOrbit__T], stream: java.util.stream.Stream[FieldOrbit[_FieldKeplerianOrbit__T]]) -> 'FieldKeplerianOrbit'[_FieldKeplerianOrbit__T]: ...
-    _meanToEllipticEccentric__T = typing.TypeVar('_meanToEllipticEccentric__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @staticmethod
-    def meanToEllipticEccentric(t: _meanToEllipticEccentric__T, t2: _meanToEllipticEccentric__T) -> _meanToEllipticEccentric__T:
-        """
-            Deprecated.
-            As of 11.3, replaced by :meth:`~org.orekit.orbits.FieldKeplerianAnomalyUtility.ellipticMeanToEccentric`.
-            Computes the elliptic eccentric anomaly from the mean anomaly.
-        
-            Parameters:
-                M (T): mean anomaly (rad)
-                e (T): eccentricity
-        
-            Returns:
-                E the eccentric anomaly
-        
-        
-        """
-        ...
-    _meanToHyperbolicEccentric__T = typing.TypeVar('_meanToHyperbolicEccentric__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @staticmethod
-    def meanToHyperbolicEccentric(t: _meanToHyperbolicEccentric__T, t2: _meanToHyperbolicEccentric__T) -> _meanToHyperbolicEccentric__T:
-        """
-            Deprecated.
-            As of 11.3, replaced by :meth:`~org.orekit.orbits.FieldKeplerianAnomalyUtility.hyperbolicMeanToEccentric`.
-            Computes the hyperbolic eccentric anomaly from the mean anomaly.
-        
-            Parameters:
-                M (T): mean anomaly (rad)
-                e (T): eccentricity
-        
-            Returns:
-                H the hyperbolic eccentric anomaly
-        
-        
-        """
-        ...
+    def removeRates(self) -> 'FieldKeplerianOrbit'[_FieldKeplerianOrbit__T]: ...
     @typing.overload
     def shiftedBy(self, double: float) -> 'FieldKeplerianOrbit'[_FieldKeplerianOrbit__T]: ...
     @typing.overload
@@ -6039,38 +6270,77 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], typing.Generic[_F
         
         """
         ...
-    _trueToEllipticEccentric__T = typing.TypeVar('_trueToEllipticEccentric__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @staticmethod
-    def trueToEllipticEccentric(t: _trueToEllipticEccentric__T, t2: _trueToEllipticEccentric__T) -> _trueToEllipticEccentric__T:
+
+_FieldOrbitBlender__KK = typing.TypeVar('_FieldOrbitBlender__KK', bound=org.hipparchus.CalculusFieldElement)  # <KK>
+class FieldOrbitBlender(AbstractFieldOrbitInterpolator[_FieldOrbitBlender__KK], typing.Generic[_FieldOrbitBlender__KK]):
+    """
+    public class FieldOrbitBlender<KK extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<KK>> extends :class:`~org.orekit.orbits.AbstractFieldOrbitInterpolator`<KK>
+    
+        Orbit blender.
+    
+        Its purpose is to interpolate orbit state between tabulated orbit states using the concept of blending, exposed in :
+        "Efficient Covariance Interpolation using Blending of Approximate State Error Transitions" by Sergei Tanygin, and
+        applying it to orbit states instead of covariances.
+    
+        It propagates tabulated values to the interpolating time using given analytical propagator and then blend each
+        propagated states using a smoothstep function. It gives especially good results as explained
+        :class:`~org.orekit.orbits.https:.orekit.org.doc.technical` compared to Hermite interpolation when time steps between
+        tabulated values get significant (In LEO, > 10 mn for example).
+    
+        Also see:
+            :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.polynomials.SmoothStepFactory?is`,
+            :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.polynomials.SmoothStepFactory.FieldSmoothStepFunction?is`
+    """
+    def __init__(self, fieldSmoothStepFunction: org.hipparchus.analysis.polynomials.SmoothStepFactory.FieldSmoothStepFunction[_FieldOrbitBlender__KK], fieldAbstractAnalyticalPropagator: org.orekit.propagation.analytical.FieldAbstractAnalyticalPropagator[_FieldOrbitBlender__KK], frame: org.orekit.frames.Frame): ...
+    @typing.overload
+    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, collection: typing.Union[java.util.Collection[org.orekit.time.FieldTimeStamped], typing.Sequence[org.orekit.time.FieldTimeStamped], typing.Set[org.orekit.time.FieldTimeStamped]]) -> org.orekit.time.FieldTimeStamped: ...
+    @typing.overload
+    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, stream: java.util.stream.Stream[org.orekit.time.FieldTimeStamped]) -> org.orekit.time.FieldTimeStamped: ...
+    @typing.overload
+    def interpolate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldOrbitBlender__KK], collection: typing.Union[java.util.Collection[FieldOrbit[_FieldOrbitBlender__KK]], typing.Sequence[FieldOrbit[_FieldOrbitBlender__KK]], typing.Set[FieldOrbit[_FieldOrbitBlender__KK]]]) -> FieldOrbit[_FieldOrbitBlender__KK]: ...
+    @typing.overload
+    def interpolate(self, abstractFieldTimeInterpolator: org.orekit.time.AbstractFieldTimeInterpolator.InterpolationData) -> FieldOrbit[_FieldOrbitBlender__KK]: ...
+    @typing.overload
+    def interpolate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldOrbitBlender__KK], stream: java.util.stream.Stream[org.orekit.time.FieldTimeStamped]) -> org.orekit.time.FieldTimeStamped: ...
+
+_FieldOrbitHermiteInterpolator__KK = typing.TypeVar('_FieldOrbitHermiteInterpolator__KK', bound=org.hipparchus.CalculusFieldElement)  # <KK>
+class FieldOrbitHermiteInterpolator(AbstractFieldOrbitInterpolator[_FieldOrbitHermiteInterpolator__KK], typing.Generic[_FieldOrbitHermiteInterpolator__KK]):
+    """
+    public class FieldOrbitHermiteInterpolator<KK extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<KK>> extends :class:`~org.orekit.orbits.AbstractFieldOrbitInterpolator`<KK>
+    
+        Class using a Hermite interpolator to interpolate orbits.
+    
+        Depending on given sample orbit type, the interpolation may differ :
+    
+          - For Keplerian, Circular and Equinoctial orbits, the interpolated instance is created by polynomial Hermite
+            interpolation, using derivatives when available.
+          - For Cartesian orbits, the interpolated instance is created using the cartesian derivatives filter given at instance
+            construction. Hence, it will fall back to Lagrange interpolation if this instance has been designed to not use
+            derivatives.
+    
+    
+        In any case, it should be used only with small number of interpolation points (about 10-20 points) in order to avoid
+        `Runge's phenomenon <http://en.wikipedia.org/wiki/Runge%27s_phenomenon>` and numerical problems (including NaN
+        appearing).
+    
+        Also see:
+            :class:`~org.orekit.orbits.FieldOrbit`,
+            :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.interpolation.FieldHermiteInterpolator?is`
+    """
+    @typing.overload
+    def __init__(self, int: int, double: float, frame: org.orekit.frames.Frame, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter): ...
+    @typing.overload
+    def __init__(self, int: int, frame: org.orekit.frames.Frame): ...
+    @typing.overload
+    def __init__(self, int: int, frame: org.orekit.frames.Frame, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter): ...
+    @typing.overload
+    def __init__(self, frame: org.orekit.frames.Frame): ...
+    def getPVAFilter(self) -> org.orekit.utils.CartesianDerivativesFilter:
         """
-            Deprecated.
-            As of 11.3, replaced by :meth:`~org.orekit.orbits.FieldKeplerianAnomalyUtility.ellipticTrueToEccentric`.
-            Computes the elliptic eccentric anomaly from the true anomaly.
-        
-            Parameters:
-                v (T): true anomaly (rad)
-                e (T): eccentricity
+            Get filter for derivatives from the sample to use in position-velocity-acceleration interpolation.
         
             Returns:
-                E the elliptic eccentric anomaly
-        
-        
-        """
-        ...
-    _trueToHyperbolicEccentric__T = typing.TypeVar('_trueToHyperbolicEccentric__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @staticmethod
-    def trueToHyperbolicEccentric(t: _trueToHyperbolicEccentric__T, t2: _trueToHyperbolicEccentric__T) -> _trueToHyperbolicEccentric__T:
-        """
-            Deprecated.
-            As of 11.3, replaced by :meth:`~org.orekit.orbits.FieldKeplerianAnomalyUtility.hyperbolicTrueToEccentric`.
-            Computes the hyperbolic eccentric anomaly from the true anomaly.
-        
-            Parameters:
-                v (T): true anomaly (rad)
-                e (T): eccentricity
-        
-            Returns:
-                H the hyperbolic eccentric anomaly
+                filter for derivatives from the sample to use in position-velocity-acceleration interpolation
         
         
         """
@@ -6090,9 +6360,9 @@ class HaloOrbit(LibrationOrbit):
     @typing.overload
     def __init__(self, richardsonExpansion: RichardsonExpansion, double: float, librationOrbitFamily: LibrationOrbitFamily): ...
 
-class KeplerianOrbit(Orbit):
+class KeplerianOrbit(Orbit, PositionAngleBased):
     """
-    public class KeplerianOrbit extends :class:`~org.orekit.orbits.Orbit`
+    public class KeplerianOrbit extends :class:`~org.orekit.orbits.Orbit` implements :class:`~org.orekit.orbits.PositionAngleBased`
     
         This class handles traditional Keplerian orbital parameters.
     
@@ -6124,16 +6394,16 @@ class KeplerianOrbit(Orbit):
             :class:`~org.orekit.orbits.CartesianOrbit`, :class:`~org.orekit.orbits.EquinoctialOrbit`, :meth:`~serialized`
     """
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, double9: float, double10: float, double11: float, double12: float, positionAngle: PositionAngle, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, double13: float): ...
+    def __init__(self, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, double9: float, double10: float, double11: float, double12: float, positionAngleType: PositionAngleType, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, double13: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, positionAngle: PositionAngle, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, double7: float): ...
+    def __init__(self, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, positionAngleType: PositionAngleType, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, double7: float): ...
     @typing.overload
     def __init__(self, orbit: Orbit): ...
     @typing.overload
     def __init__(self, pVCoordinates: org.orekit.utils.PVCoordinates, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, double: float): ...
     @typing.overload
     def __init__(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame, double: float): ...
-    def addKeplerContribution(self, positionAngle: PositionAngle, double: float, doubleArray: typing.List[float]) -> None:
+    def addKeplerContribution(self, positionAngleType: PositionAngleType, double: float, doubleArray: typing.List[float]) -> None:
         """
             Add the contribution of the Keplerian motion to parameters derivatives
         
@@ -6144,44 +6414,10 @@ class KeplerianOrbit(Orbit):
                 :meth:`~org.orekit.orbits.Orbit.addKeplerContribution` in class :class:`~org.orekit.orbits.Orbit`
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the position angle in the state
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the position angle in the state
                 gm (double): attraction coefficient to use
                 pDot (double[]): array containing orbital state derivatives to update (the Keplerian part must be *added* to the array components, as the
                     array may already contain some non-zero elements corresponding to non-Keplerian parts)
-        
-        
-        """
-        ...
-    @staticmethod
-    def ellipticEccentricToMean(double: float, double2: float) -> float:
-        """
-            Deprecated.
-            As of 11.3, replaced by :meth:`~org.orekit.orbits.KeplerianAnomalyUtility.ellipticEccentricToMean`.
-            Computes the mean anomaly from the elliptic eccentric anomaly.
-        
-            Parameters:
-                E (double): eccentric anomaly (rad)
-                e (double): eccentricity
-        
-            Returns:
-                M the mean anomaly
-        
-        
-        """
-        ...
-    @staticmethod
-    def ellipticEccentricToTrue(double: float, double2: float) -> float:
-        """
-            Deprecated.
-            As of 11.3, replaced by :meth:`~org.orekit.orbits.KeplerianAnomalyUtility.ellipticEccentricToTrue`.
-            Computes the true anomaly from the elliptic eccentric anomaly.
-        
-            Parameters:
-                E (double): eccentric anomaly (rad)
-                e (double): eccentricity
-        
-            Returns:
-                v the true anomaly
         
         
         """
@@ -6222,12 +6458,12 @@ class KeplerianOrbit(Orbit):
         
         """
         ...
-    def getAnomaly(self, positionAngle: PositionAngle) -> float:
+    def getAnomaly(self, positionAngleType: PositionAngleType) -> float:
         """
             Get the anomaly.
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the angle
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the angle
         
             Returns:
                 anomaly (rad)
@@ -6235,18 +6471,32 @@ class KeplerianOrbit(Orbit):
         
         """
         ...
-    def getAnomalyDot(self, positionAngle: PositionAngle) -> float:
+    def getAnomalyDot(self, positionAngleType: PositionAngleType) -> float:
         """
             Get the anomaly derivative.
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the angle
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the angle
         
             Returns:
                 anomaly derivative (rad/s)
         
             Since:
                 9.0
+        
+        
+        """
+        ...
+    def getCachedPositionAngleType(self) -> PositionAngleType:
+        """
+            Get the cached :class:`~org.orekit.orbits.PositionAngleType`.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.PositionAngleBased.getCachedPositionAngleType` in
+                interface :class:`~org.orekit.orbits.PositionAngleBased`
+        
+            Returns:
+                cached type of position angle
         
         
         """
@@ -6670,57 +6920,28 @@ class KeplerianOrbit(Orbit):
         
         """
         ...
-    @staticmethod
-    def hyperbolicEccentricToMean(double: float, double2: float) -> float:
+    def hasRates(self) -> bool:
         """
-            Deprecated.
-            As of 11.3, replaced by :meth:`~org.orekit.orbits.KeplerianAnomalyUtility.hyperbolicEccentricToMean`.
-            Computes the mean anomaly from the hyperbolic eccentric anomaly.
+            Tells whether the instance holds rates (first-order time derivatives) for dependent variables.
         
-            Parameters:
-                H (double): hyperbolic eccentric anomaly (rad)
-                e (double): eccentricity
+            Specified by:
+                :meth:`~org.orekit.orbits.PositionAngleBased.hasRates` in interface :class:`~org.orekit.orbits.PositionAngleBased`
         
             Returns:
-                M the mean anomaly
+                true if and only if holding rates
         
         
         """
         ...
-    @staticmethod
-    def hyperbolicEccentricToTrue(double: float, double2: float) -> float:
+    def removeRates(self) -> 'KeplerianOrbit':
         """
-            Deprecated.
-            As of 11.3, replaced by :meth:`~org.orekit.orbits.KeplerianAnomalyUtility.hyperbolicEccentricToTrue`.
-            Computes the true anomaly from the hyperbolic eccentric anomaly.
+            Create a new instance such that :meth:`~org.orekit.orbits.PositionAngleBased.hasRates` is false.
         
-            Parameters:
-                H (double): hyperbolic eccentric anomaly (rad)
-                e (double): eccentricity
+            Specified by:
+                :meth:`~org.orekit.orbits.PositionAngleBased.removeRates` in interface :class:`~org.orekit.orbits.PositionAngleBased`
         
             Returns:
-                v the true anomaly
-        
-        
-        """
-        ...
-    @typing.overload
-    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, collection: typing.Union[java.util.Collection[org.orekit.time.TimeInterpolable], typing.Sequence[org.orekit.time.TimeInterpolable], typing.Set[org.orekit.time.TimeInterpolable]]) -> org.orekit.time.TimeInterpolable: ...
-    @typing.overload
-    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, stream: java.util.stream.Stream[Orbit]) -> 'KeplerianOrbit': ...
-    @staticmethod
-    def meanToEllipticEccentric(double: float, double2: float) -> float:
-        """
-            Deprecated.
-            As of 11.3, replaced by :meth:`~org.orekit.orbits.KeplerianAnomalyUtility.ellipticMeanToEccentric`.
-            Computes the elliptic eccentric anomaly from the mean anomaly.
-        
-            Parameters:
-                M (double): mean anomaly (rad)
-                e (double): eccentricity
-        
-            Returns:
-                E the eccentric anomaly
+                new object without rates
         
         
         """
@@ -6763,40 +6984,6 @@ class KeplerianOrbit(Orbit):
         
         """
         ...
-    @staticmethod
-    def trueToEllipticEccentric(double: float, double2: float) -> float:
-        """
-            Deprecated.
-            As of 11.3, replaced by :meth:`~org.orekit.orbits.KeplerianAnomalyUtility.ellipticTrueToEccentric`.
-            Computes the elliptic eccentric anomaly from the true anomaly.
-        
-            Parameters:
-                v (double): true anomaly (rad)
-                e (double): eccentricity
-        
-            Returns:
-                E the elliptic eccentric anomaly
-        
-        
-        """
-        ...
-    @staticmethod
-    def trueToHyperbolicEccentric(double: float, double2: float) -> float:
-        """
-            Deprecated.
-            As of 11.3, replaced by :meth:`~org.orekit.orbits.KeplerianAnomalyUtility.hyperbolicTrueToEccentric`.
-            Computes the hyperbolic eccentric anomaly from the true anomaly.
-        
-            Parameters:
-                v (double): true anomaly (rad)
-                e (double): eccentricity
-        
-            Returns:
-                H the hyperbolic eccentric anomaly
-        
-        
-        """
-        ...
 
 class LyapunovOrbit(LibrationOrbit):
     """
@@ -6811,6 +6998,81 @@ class LyapunovOrbit(LibrationOrbit):
     def __init__(self, cR3BPSystem: org.orekit.bodies.CR3BPSystem, pVCoordinates: org.orekit.utils.PVCoordinates, double: float): ...
     @typing.overload
     def __init__(self, richardsonExpansion: RichardsonExpansion, double: float): ...
+
+class OrbitBlender(AbstractOrbitInterpolator):
+    """
+    public class OrbitBlender extends :class:`~org.orekit.orbits.AbstractOrbitInterpolator`
+    
+        Orbit blender.
+    
+        Its purpose is to interpolate orbit state between tabulated orbit states using the concept of blending, exposed in :
+        "Efficient Covariance Interpolation using Blending of Approximate State Error Transitions" by Sergei Tanygin, and
+        applying it to orbit states instead of covariances.
+    
+        It propagates tabulated values to the interpolating time using given propagator and then blend each propagated states
+        using a smoothstep function. It gives especially good results as explained
+        :class:`~org.orekit.orbits.https:.orekit.org.doc.technical` compared to Hermite interpolation when time steps between
+        tabulated values get significant (In LEO, > 10 mn for example).
+    
+        **In most cases, an analytical propagator would be used to quickly fill the gap between tabulated values and recreate a
+        dense ephemeris**.
+    
+        However, a fully configured and accurate numerical propagator can be used to recreate an even more precise ephemeris in
+        case the initial tabulated values were obtained from an external source.
+    
+        Note that in the current implementation, the returned blended orbit is necessarily Cartesian.
+    
+        Since:
+            12.0
+    
+        Also see:
+            :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.polynomials.SmoothStepFactory?is`,
+            :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.polynomials.SmoothStepFactory.SmoothStepFunction?is`,
+            :class:`~org.orekit.propagation.Propagator`, :class:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator`
+    """
+    def __init__(self, smoothStepFunction: org.hipparchus.analysis.polynomials.SmoothStepFactory.SmoothStepFunction, propagator: org.orekit.propagation.Propagator, frame: org.orekit.frames.Frame): ...
+
+class OrbitHermiteInterpolator(AbstractOrbitInterpolator):
+    """
+    public class OrbitHermiteInterpolator extends :class:`~org.orekit.orbits.AbstractOrbitInterpolator`
+    
+        Class using a Hermite interpolator to interpolate orbits.
+    
+        Depending on given sample orbit type, the interpolation may differ :
+    
+          - For Keplerian, Circular and Equinoctial orbits, the interpolated instance is created by polynomial Hermite
+            interpolation, using derivatives when available.
+          - For Cartesian orbits, the interpolated instance is created using the cartesian derivatives filter given at instance
+            construction. Hence, it will fall back to Lagrange interpolation if this instance has been designed to not use
+            derivatives.
+    
+    
+        In any case, it should be used only with small number of interpolation points (about 10-20 points) in order to avoid
+        `Runge's phenomenon <http://en.wikipedia.org/wiki/Runge%27s_phenomenon>` and numerical problems (including NaN
+        appearing).
+    
+        Also see:
+            :class:`~org.orekit.orbits.Orbit`,
+            :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.interpolation.HermiteInterpolator?is`
+    """
+    @typing.overload
+    def __init__(self, int: int, double: float, frame: org.orekit.frames.Frame, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter): ...
+    @typing.overload
+    def __init__(self, int: int, frame: org.orekit.frames.Frame): ...
+    @typing.overload
+    def __init__(self, int: int, frame: org.orekit.frames.Frame, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter): ...
+    @typing.overload
+    def __init__(self, frame: org.orekit.frames.Frame): ...
+    def getPVAFilter(self) -> org.orekit.utils.CartesianDerivativesFilter:
+        """
+            Get filter for derivatives from the sample to use in position-velocity-acceleration interpolation.
+        
+            Returns:
+                filter for derivatives from the sample to use in position-velocity-acceleration interpolation
+        
+        
+        """
+        ...
 
 class PythonLibrationOrbit(LibrationOrbit):
     """
@@ -6866,8 +7128,9 @@ class PythonOrbit(Orbit):
     def __init__(self, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, double: float): ...
     @typing.overload
     def __init__(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame, double: float): ...
-    def addKeplerContribution(self, positionAngle: PositionAngle, double: float, doubleArray: typing.List[float]) -> None:
+    def addKeplerContribution(self, positionAngleType: PositionAngleType, double: float, doubleArray: typing.List[float]) -> None:
         """
+            Description copied from class: :meth:`~org.orekit.orbits.Orbit.addKeplerContribution`
             Add the contribution of the Keplerian motion to parameters derivatives
         
             This method is used by integration-based propagators to evaluate the part of Keplerian motion to evolution of the
@@ -6877,10 +7140,73 @@ class PythonOrbit(Orbit):
                 :meth:`~org.orekit.orbits.Orbit.addKeplerContribution` in class :class:`~org.orekit.orbits.Orbit`
         
             Parameters:
-                type (:class:`~org.orekit.orbits.PositionAngle`): type of the position angle in the state
+                type (:class:`~org.orekit.orbits.PositionAngleType`): type of the position angle in the state
                 gm (double): attraction coefficient to use
                 pDot (double[]): array containing orbital state derivatives to update (the Keplerian part must be *added* to the array components, as the
-                    array may already
+                    array may already contain some non-zero elements corresponding to non-Keplerian parts)
+        
+        
+        """
+        ...
+    def computeJacobianEccentricWrtCartesian(self) -> typing.List[typing.List[float]]:
+        """
+            Compute the Jacobian of the orbital parameters with eccentric angle with respect to the Cartesian parameters.
+        
+            Element :code:`jacobian[i][j]` is the derivative of parameter i of the orbit with respect to Cartesian coordinate j.
+            This means each row correspond to one orbital parameter whereas columns 0 to 5 correspond to the Cartesian coordinates
+            x, y, z, xDot, yDot and zDot.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.Orbit.computeJacobianEccentricWrtCartesian` in class :class:`~org.orekit.orbits.Orbit`
+        
+            Returns:
+                6x6 Jacobian matrix
+        
+            Also see:
+                :meth:`~org.orekit.orbits.PythonOrbit.computeJacobianMeanWrtCartesian`,
+                :meth:`~org.orekit.orbits.PythonOrbit.computeJacobianTrueWrtCartesian`
+        
+        
+        """
+        ...
+    def computeJacobianMeanWrtCartesian(self) -> typing.List[typing.List[float]]:
+        """
+            Compute the Jacobian of the orbital parameters with mean angle with respect to the Cartesian parameters.
+        
+            Element :code:`jacobian[i][j]` is the derivative of parameter i of the orbit with respect to Cartesian coordinate j.
+            This means each row correspond to one orbital parameter whereas columns 0 to 5 correspond to the Cartesian coordinates
+            x, y, z, xDot, yDot and zDot.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.Orbit.computeJacobianMeanWrtCartesian` in class :class:`~org.orekit.orbits.Orbit`
+        
+            Returns:
+                6x6 Jacobian matrix
+        
+            Also see:
+                :meth:`~org.orekit.orbits.PythonOrbit.computeJacobianEccentricWrtCartesian`,
+                :meth:`~org.orekit.orbits.PythonOrbit.computeJacobianTrueWrtCartesian`
+        
+        
+        """
+        ...
+    def computeJacobianTrueWrtCartesian(self) -> typing.List[typing.List[float]]:
+        """
+            Compute the Jacobian of the orbital parameters with true angle with respect to the Cartesian parameters.
+        
+            Element :code:`jacobian[i][j]` is the derivative of parameter i of the orbit with respect to Cartesian coordinate j.
+            This means each row correspond to one orbital parameter whereas columns 0 to 5 correspond to the Cartesian coordinates
+            x, y, z, xDot, yDot and zDot.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.Orbit.computeJacobianTrueWrtCartesian` in class :class:`~org.orekit.orbits.Orbit`
+        
+            Returns:
+                6x6 Jacobian matrix
+        
+            Also see:
+                :meth:`~org.orekit.orbits.PythonOrbit.computeJacobianMeanWrtCartesian`,
+                :meth:`~org.orekit.orbits.PythonOrbit.computeJacobianEccentricWrtCartesian`
         
         
         """
@@ -7266,10 +7592,20 @@ class PythonOrbit(Orbit):
         
         """
         ...
-    @typing.overload
-    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, collection: typing.Union[java.util.Collection[org.orekit.time.TimeInterpolable], typing.Sequence[org.orekit.time.TimeInterpolable], typing.Set[org.orekit.time.TimeInterpolable]]) -> org.orekit.time.TimeInterpolable: ...
-    @typing.overload
-    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, stream: java.util.stream.Stream[Orbit]) -> Orbit: ...
+    def initPosition(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Description copied from class: :meth:`~org.orekit.orbits.Orbit.initPosition`
+            Compute the position coordinates from the canonical parameters.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.Orbit.initPosition` in class :class:`~org.orekit.orbits.Orbit`
+        
+            Returns:
+                computed position coordinates
+        
+        
+        """
+        ...
     def pythonDecRef(self) -> None:
         """
             Part of JCC Python interface to object
@@ -7318,6 +7654,8 @@ class PythonOrbit(Orbit):
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.orbits")``.
 
+    AbstractFieldOrbitInterpolator: typing.Type[AbstractFieldOrbitInterpolator]
+    AbstractOrbitInterpolator: typing.Type[AbstractOrbitInterpolator]
     CR3BPDifferentialCorrection: typing.Type[CR3BPDifferentialCorrection]
     CartesianOrbit: typing.Type[CartesianOrbit]
     CircularOrbit: typing.Type[CircularOrbit]
@@ -7328,6 +7666,8 @@ class __module_protocol__(typing.Protocol):
     FieldKeplerianAnomalyUtility: typing.Type[FieldKeplerianAnomalyUtility]
     FieldKeplerianOrbit: typing.Type[FieldKeplerianOrbit]
     FieldOrbit: typing.Type[FieldOrbit]
+    FieldOrbitBlender: typing.Type[FieldOrbitBlender]
+    FieldOrbitHermiteInterpolator: typing.Type[FieldOrbitHermiteInterpolator]
     HaloOrbit: typing.Type[HaloOrbit]
     KeplerianAnomalyUtility: typing.Type[KeplerianAnomalyUtility]
     KeplerianOrbit: typing.Type[KeplerianOrbit]
@@ -7336,8 +7676,11 @@ class __module_protocol__(typing.Protocol):
     LibrationOrbitType: typing.Type[LibrationOrbitType]
     LyapunovOrbit: typing.Type[LyapunovOrbit]
     Orbit: typing.Type[Orbit]
+    OrbitBlender: typing.Type[OrbitBlender]
+    OrbitHermiteInterpolator: typing.Type[OrbitHermiteInterpolator]
     OrbitType: typing.Type[OrbitType]
-    PositionAngle: typing.Type[PositionAngle]
+    PositionAngleBased: typing.Type[PositionAngleBased]
+    PositionAngleType: typing.Type[PositionAngleType]
     PythonLibrationOrbit: typing.Type[PythonLibrationOrbit]
     PythonOrbit: typing.Type[PythonOrbit]
     RichardsonExpansion: typing.Type[RichardsonExpansion]

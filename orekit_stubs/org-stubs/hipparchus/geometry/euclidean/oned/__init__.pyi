@@ -115,7 +115,7 @@ class Interval:
 
 class IntervalsSet(org.hipparchus.geometry.partitioning.AbstractRegion[Euclidean1D, Euclidean1D], java.lang.Iterable[typing.List[float]]):
     """
-    public class IntervalsSet extends :class:`~org.hipparchus.geometry.partitioning.AbstractRegion`<:class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`,:class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`> implements :class:`~org.hipparchus.geometry.euclidean.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable?is`<double[]>
+    public class IntervalsSet extends :class:`~org.hipparchus.geometry.partitioning.AbstractRegion`<:class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`, :class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`> implements :class:`~org.hipparchus.geometry.euclidean.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Iterable?is`<double[]>
     
         This class represents a 1D region: a set of intervals.
     """
@@ -226,7 +226,7 @@ class OrientedPoint(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean1D]
     @typing.overload
     def getOffset(self, point: org.hipparchus.geometry.Point[Euclidean1D]) -> float: ...
     @typing.overload
-    def getOffset(self, vector: org.hipparchus.geometry.Vector[Euclidean1D]) -> float: ...
+    def getOffset(self, vector: org.hipparchus.geometry.Vector[Euclidean1D, 'Vector1D']) -> float: ...
     def getTolerance(self) -> float:
         """
             Get the tolerance below which points are considered to belong to the hyperplane.
@@ -295,7 +295,7 @@ class OrientedPoint(org.hipparchus.geometry.partitioning.Hyperplane[Euclidean1D]
 
 class SubOrientedPoint(org.hipparchus.geometry.partitioning.AbstractSubHyperplane[Euclidean1D, Euclidean1D]):
     """
-    public class SubOrientedPoint extends :class:`~org.hipparchus.geometry.partitioning.AbstractSubHyperplane`<:class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`,:class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`>
+    public class SubOrientedPoint extends :class:`~org.hipparchus.geometry.partitioning.AbstractSubHyperplane`<:class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`, :class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`>
     
         This class represents sub-hyperplane for :class:`~org.hipparchus.geometry.euclidean.oned.OrientedPoint`.
     
@@ -342,9 +342,9 @@ class SubOrientedPoint(org.hipparchus.geometry.partitioning.AbstractSubHyperplan
         ...
     def split(self, hyperplane: org.hipparchus.geometry.partitioning.Hyperplane[Euclidean1D]) -> org.hipparchus.geometry.partitioning.SubHyperplane.SplitSubHyperplane[Euclidean1D]: ...
 
-class Vector1D(org.hipparchus.geometry.Vector[Euclidean1D]):
+class Vector1D(org.hipparchus.geometry.Vector[Euclidean1D, 'Vector1D']):
     """
-    public class Vector1D extends :class:`~org.hipparchus.geometry.euclidean.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.Vector`<:class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`>
+    public class Vector1D extends :class:`~org.hipparchus.geometry.euclidean.oned.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.Vector`<:class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`, :class:`~org.hipparchus.geometry.euclidean.oned.Vector1D`>
     
         This class represents a 1D vector.
     
@@ -399,9 +399,9 @@ class Vector1D(org.hipparchus.geometry.Vector[Euclidean1D]):
     @typing.overload
     def __init__(self, double: float, vector1D: 'Vector1D', double2: float, vector1D2: 'Vector1D', double3: float, vector1D3: 'Vector1D', double4: float, vector1D4: 'Vector1D'): ...
     @typing.overload
-    def add(self, double: float, vector: org.hipparchus.geometry.Vector[Euclidean1D]) -> 'Vector1D': ...
+    def add(self, double: float, vector: org.hipparchus.geometry.Vector[Euclidean1D, 'Vector1D']) -> 'Vector1D': ...
     @typing.overload
-    def add(self, vector: org.hipparchus.geometry.Vector[Euclidean1D]) -> 'Vector1D': ...
+    def add(self, vector: org.hipparchus.geometry.Vector[Euclidean1D, 'Vector1D']) -> 'Vector1D': ...
     @typing.overload
     def distance(self, point: org.hipparchus.geometry.Point[Euclidean1D]) -> float:
         """
@@ -423,9 +423,9 @@ class Vector1D(org.hipparchus.geometry.Vector[Euclidean1D]):
     @typing.overload
     @staticmethod
     def distance(vector1D: 'Vector1D', vector1D2: 'Vector1D') -> float: ...
-    def distance1(self, vector: org.hipparchus.geometry.Vector[Euclidean1D]) -> float: ...
+    def distance1(self, vector: org.hipparchus.geometry.Vector[Euclidean1D, 'Vector1D']) -> float: ...
     @typing.overload
-    def distanceInf(self, vector: org.hipparchus.geometry.Vector[Euclidean1D]) -> float:
+    def distanceInf(self, vector: org.hipparchus.geometry.Vector[Euclidean1D, 'Vector1D']) -> float:
         """
             Compute the distance between two vectors according to the L :sub:`∞` norm.
         
@@ -446,7 +446,7 @@ class Vector1D(org.hipparchus.geometry.Vector[Euclidean1D]):
     @staticmethod
     def distanceInf(vector1D: 'Vector1D', vector1D2: 'Vector1D') -> float: ...
     @typing.overload
-    def distanceSq(self, vector: org.hipparchus.geometry.Vector[Euclidean1D]) -> float:
+    def distanceSq(self, vector: org.hipparchus.geometry.Vector[Euclidean1D, 'Vector1D']) -> float:
         """
             Compute the square of the distance between two vectors.
         
@@ -466,7 +466,7 @@ class Vector1D(org.hipparchus.geometry.Vector[Euclidean1D]):
     @typing.overload
     @staticmethod
     def distanceSq(vector1D: 'Vector1D', vector1D2: 'Vector1D') -> float: ...
-    def dotProduct(self, vector: org.hipparchus.geometry.Vector[Euclidean1D]) -> float: ...
+    def dotProduct(self, vector: org.hipparchus.geometry.Vector[Euclidean1D, 'Vector1D']) -> float: ...
     def equals(self, object: typing.Any) -> bool:
         """
             Test for the equality of two 1D vectors.
@@ -590,7 +590,7 @@ class Vector1D(org.hipparchus.geometry.Vector[Euclidean1D]):
                 abscissa of the vector
         
             Also see:
-                :meth:`~org.hipparchus.geometry.euclidean.oned.Vector1D.Vector1D`
+                :meth:`~org.hipparchus.geometry.euclidean.oned.Vector1D.%3Cinit%3E`
         
         
         """
@@ -663,7 +663,6 @@ class Vector1D(org.hipparchus.geometry.Vector[Euclidean1D]):
         
         """
         ...
-    def normalize(self) -> 'Vector1D': ...
     def scalarMultiply(self, double: float) -> 'Vector1D':
         """
             Multiply the instance by a scalar.
@@ -681,9 +680,9 @@ class Vector1D(org.hipparchus.geometry.Vector[Euclidean1D]):
         """
         ...
     @typing.overload
-    def subtract(self, double: float, vector: org.hipparchus.geometry.Vector[Euclidean1D]) -> 'Vector1D': ...
+    def subtract(self, double: float, vector: org.hipparchus.geometry.Vector[Euclidean1D, 'Vector1D']) -> 'Vector1D': ...
     @typing.overload
-    def subtract(self, vector: org.hipparchus.geometry.Vector[Euclidean1D]) -> 'Vector1D': ...
+    def subtract(self, vector: org.hipparchus.geometry.Vector[Euclidean1D, 'Vector1D']) -> 'Vector1D': ...
     @typing.overload
     def toString(self) -> str:
         """
@@ -716,9 +715,9 @@ class Vector1D(org.hipparchus.geometry.Vector[Euclidean1D]):
         """
         ...
 
-class Vector1DFormat(org.hipparchus.geometry.VectorFormat[Euclidean1D]):
+class Vector1DFormat(org.hipparchus.geometry.VectorFormat[Euclidean1D, Vector1D]):
     """
-    public class Vector1DFormat extends :class:`~org.hipparchus.geometry.VectorFormat`<:class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`>
+    public class Vector1DFormat extends :class:`~org.hipparchus.geometry.VectorFormat`<:class:`~org.hipparchus.geometry.euclidean.oned.Euclidean1D`, :class:`~org.hipparchus.geometry.euclidean.oned.Vector1D`>
     
         Formats a 1D vector in components list format "{x}".
     
@@ -745,9 +744,9 @@ class Vector1DFormat(org.hipparchus.geometry.VectorFormat[Euclidean1D]):
     @typing.overload
     def __init__(self, numberFormat: java.text.NumberFormat): ...
     @typing.overload
-    def format(self, vector: org.hipparchus.geometry.Vector[org.hipparchus.geometry.Space]) -> str: ...
+    def format(self, vector: org.hipparchus.geometry.Vector[org.hipparchus.geometry.Space, org.hipparchus.geometry.Vector]) -> str: ...
     @typing.overload
-    def format(self, vector: org.hipparchus.geometry.Vector[Euclidean1D], stringBuffer: java.lang.StringBuffer, fieldPosition: java.text.FieldPosition) -> java.lang.StringBuffer: ...
+    def format(self, vector: org.hipparchus.geometry.Vector[Euclidean1D, Vector1D], stringBuffer: java.lang.StringBuffer, fieldPosition: java.text.FieldPosition) -> java.lang.StringBuffer: ...
     @typing.overload
     @staticmethod
     def getVector1DFormat() -> 'Vector1DFormat':

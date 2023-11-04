@@ -10,7 +10,6 @@ import org.orekit.files.ccsds.ndm.cdm
 import org.orekit.files.ccsds.utils
 import org.orekit.time
 import org.orekit.utils.units
-import org.xml.sax
 import typing
 
 
@@ -74,6 +73,19 @@ class MessageParser(typing.Generic[_MessageParser__T]):
         
             Returns:
                 parsed file
+        
+        
+        """
+        ...
+    def getFileFormat(self) -> org.orekit.files.ccsds.utils.FileFormat:
+        """
+            Get the file format of the last message parsed.
+        
+            Returns:
+                file format of the last message parsed
+        
+            Since:
+                12.0
         
         
         """
@@ -207,6 +219,7 @@ class ParseToken:
         
         """
         ...
+    def getContentAsFreeTextList(self) -> java.util.List[str]: ...
     def getContentAsInt(self) -> int:
         """
             Get the content of the entry as an integer.
@@ -392,15 +405,20 @@ class ParseToken:
         
         """
         ...
-    def processAsDoubleArray(self, doubleArrayConsumer: 'ParseToken.DoubleArrayConsumer') -> bool:
+    def processAsDoubleArray(self, unit: org.orekit.utils.units.Unit, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, doubleArrayConsumer: 'ParseToken.DoubleArrayConsumer') -> bool:
         """
             Process the content as an array of doubles.
         
             Parameters:
+                standard (:class:`~org.orekit.utils.units.Unit`): units of parsed content as specified by CCSDS standard
+                behavior (:class:`~org.orekit.files.ccsds.ndm.ParsedUnitsBehavior`): behavior to adopt for parsed unit
                 consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.DoubleArrayConsumer`): consumer of the array
         
             Returns:
                 always returns :code:`true`
+        
+            Since:
+                12.0
         
         
         """
@@ -469,6 +487,22 @@ class ParseToken:
         
         """
         ...
+    def processAsFreeTextList(self, stringListConsumer: 'ParseToken.StringListConsumer') -> bool:
+        """
+            Process the content as a list of free-text strings.
+        
+            Parameters:
+                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.StringListConsumer`): consumer of the free-text strings list
+        
+            Returns:
+                always returns :code:`true`
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
     def processAsFreeTextString(self, stringConsumer: 'ParseToken.StringConsumer') -> bool:
         """
             Process the content as free text string.
@@ -494,6 +528,42 @@ class ParseToken:
         
             Returns:
                 always returns :code:`true`
+        
+        
+        """
+        ...
+    def processAsIndexedDoubleArray(self, int: int, unit: org.orekit.utils.units.Unit, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, indexedDoubleArrayConsumer: 'ParseToken.IndexedDoubleArrayConsumer') -> bool:
+        """
+            Process the content as an indexed double array.
+        
+            Parameters:
+                index (int): index
+                standard (:class:`~org.orekit.utils.units.Unit`): units of parsed content as specified by CCSDS standard
+                behavior (:class:`~org.orekit.files.ccsds.ndm.ParsedUnitsBehavior`): behavior to adopt for parsed unit
+                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.IndexedDoubleArrayConsumer`): consumer of the indexed double array
+        
+            Returns:
+                always returns :code:`true`
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
+    def processAsIndexedInteger(self, int: int, indexedIntConsumer: 'ParseToken.IndexedIntConsumer') -> bool:
+        """
+            Process the content as an indexed integer.
+        
+            Parameters:
+                index (int): index
+                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.IndexedIntConsumer`): consumer of the integer
+        
+            Returns:
+                always returns :code:`true`
+        
+            Since:
+                12.0
         
         
         """
@@ -567,7 +637,7 @@ class ParseToken:
         ...
     def processAsLabeledDouble(self, char: str, unit: org.orekit.utils.units.Unit, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, labeledDoubleConsumer: 'ParseToken.LabeledDoubleConsumer') -> bool:
         """
-            Process the content as an labeled double.
+            Process the content as a labeled double.
         
             Parameters:
                 label (char): label
@@ -636,6 +706,22 @@ class ParseToken:
         
         """
         ...
+    def processAsRotationOrder(self, rotationOrderConsumer: 'ParseToken.RotationOrderConsumer') -> bool:
+        """
+            Process the content as a rotation sequence.
+        
+            Parameters:
+                consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.RotationOrderConsumer`): consumer of the rotation sequence
+        
+            Returns:
+                always returns :code:`true`
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
     def processAsTimeSystem(self, timeSystemConsumer: 'ParseToken.TimeSystemConsumer') -> bool:
         """
             Process the content as a time system.
@@ -691,11 +777,13 @@ class ParseToken:
         
         """
         ...
-    def processAsVector(self, vectorConsumer: 'ParseToken.VectorConsumer') -> bool:
+    def processAsVector(self, unit: org.orekit.utils.units.Unit, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, vectorConsumer: 'ParseToken.VectorConsumer') -> bool:
         """
             Process the content as a vector.
         
             Parameters:
+                standard (:class:`~org.orekit.utils.units.Unit`): units of parsed content as specified by CCSDS standard
+                behavior (:class:`~org.orekit.files.ccsds.ndm.ParsedUnitsBehavior`): behavior to adopt for parsed unit
                 consumer (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken.VectorConsumer`): consumer of the vector
         
             Returns:
@@ -726,8 +814,12 @@ class ParseToken:
         def accept(self, list: java.util.List[_ParseToken__EnumListConsumer__T]) -> None: ...
     class FrameConsumer:
         def accept(self, frameFacade: org.orekit.files.ccsds.definitions.FrameFacade) -> None: ...
+    class IndexedDoubleArrayConsumer:
+        def accept(self, int: int, doubleArray: typing.List[float]) -> None: ...
     class IndexedDoubleConsumer:
         def accept(self, int: int, double: float) -> None: ...
+    class IndexedIntConsumer:
+        def accept(self, int: int, int2: int) -> None: ...
     class IndexedStringConsumer:
         def accept(self, int: int, string: str) -> None: ...
     class IntConsumer:
@@ -738,6 +830,8 @@ class ParseToken:
         def accept(self, char: str, double: float) -> None: ...
     class ManeuvrableConsumer:
         def accept(self, maneuvrable: org.orekit.files.ccsds.ndm.cdm.Maneuvrable) -> None: ...
+    class RotationOrderConsumer:
+        def accept(self, rotationOrder: org.hipparchus.geometry.euclidean.threed.RotationOrder) -> None: ...
     class StringConsumer:
         def accept(self, string: str) -> None: ...
     class StringListConsumer:
@@ -830,7 +924,7 @@ class XmlTokenBuilder:
         Since:
             11.0
     """
-    def buildTokens(self, boolean: bool, string: str, string2: str, attributes: org.xml.sax.Attributes, int: int, string3: str) -> java.util.List[ParseToken]: ...
+    def buildTokens(self, boolean: bool, boolean2: bool, string: str, string2: str, map: typing.Union[java.util.Map[str, str], typing.Mapping[str, str]], int: int, string3: str) -> java.util.List[ParseToken]: ...
 
 class KvnLexicalAnalyzer(LexicalAnalyzer):
     """
@@ -887,7 +981,7 @@ class MessageVersionXmlTokenBuilder(XmlTokenBuilder):
             11.0
     """
     def __init__(self): ...
-    def buildTokens(self, boolean: bool, string: str, string2: str, attributes: org.xml.sax.Attributes, int: int, string3: str) -> java.util.List[ParseToken]: ...
+    def buildTokens(self, boolean: bool, boolean2: bool, string: str, string2: str, map: typing.Union[java.util.Map[str, str], typing.Mapping[str, str]], int: int, string3: str) -> java.util.List[ParseToken]: ...
 
 class PythonLexicalAnalyzer(LexicalAnalyzer):
     """
@@ -941,6 +1035,7 @@ class PythonMessageParser(MessageParser[_PythonMessageParser__T], typing.Generic
     def __init__(self): ...
     def build(self) -> _PythonMessageParser__T:
         """
+            Description copied from interface: :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.build`
             Build the file from parsed entries.
         
             Specified by:
@@ -954,6 +1049,21 @@ class PythonMessageParser(MessageParser[_PythonMessageParser__T], typing.Generic
         """
         ...
     def finalize(self) -> None: ...
+    def getFileFormat(self) -> org.orekit.files.ccsds.utils.FileFormat:
+        """
+            Description copied from interface: :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.getFileFormat`
+            Get the file format of the last message parsed.
+        
+            Specified by:
+                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.getFileFormat` in
+                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+        
+            Returns:
+                file format of the last message parsed
+        
+        
+        """
+        ...
     def getFormatVersionKey(self) -> str:
         """
             Get the key for format version.
@@ -1039,25 +1149,17 @@ class PythonXmlTokenBuilder(XmlTokenBuilder):
     public class PythonXmlTokenBuilder extends :class:`~org.orekit.files.ccsds.utils.lexical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder`
     """
     def __init__(self): ...
-    def buildTokens(self, boolean: bool, string: str, string2: str, attributes: org.xml.sax.Attributes, int: int, string3: str) -> java.util.List[ParseToken]: ...
+    def buildTokens(self, boolean: bool, boolean2: bool, string: str, string2: str, map: typing.Union[java.util.Map[str, str], typing.Mapping[str, str]], int: int, string3: str) -> java.util.List[ParseToken]: ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
     def pythonExtension(self, long: int) -> None:
         """
-            Part of JCC Python interface to object
+        public long pythonExtension()
+        
+        
         """
         ...
 
@@ -1075,7 +1177,7 @@ class RegularXmlTokenBuilder(XmlTokenBuilder):
             11.0
     """
     def __init__(self): ...
-    def buildTokens(self, boolean: bool, string: str, string2: str, attributes: org.xml.sax.Attributes, int: int, string3: str) -> java.util.List[ParseToken]: ...
+    def buildTokens(self, boolean: bool, boolean2: bool, string: str, string2: str, map: typing.Union[java.util.Map[str, str], typing.Mapping[str, str]], int: int, string3: str) -> java.util.List[ParseToken]: ...
 
 class UserDefinedXmlTokenBuilder(XmlTokenBuilder):
     """
@@ -1098,7 +1200,7 @@ class UserDefinedXmlTokenBuilder(XmlTokenBuilder):
             11.0
     """
     def __init__(self): ...
-    def buildTokens(self, boolean: bool, string: str, string2: str, attributes: org.xml.sax.Attributes, int: int, string3: str) -> java.util.List[ParseToken]: ...
+    def buildTokens(self, boolean: bool, boolean2: bool, string: str, string2: str, map: typing.Union[java.util.Map[str, str], typing.Mapping[str, str]], int: int, string3: str) -> java.util.List[ParseToken]: ...
 
 class XmlLexicalAnalyzer(LexicalAnalyzer):
     """

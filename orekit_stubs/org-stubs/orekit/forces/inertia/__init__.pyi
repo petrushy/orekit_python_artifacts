@@ -1,19 +1,17 @@
 import java.util
-import java.util.stream
 import org.hipparchus
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.forces
 import org.orekit.frames
 import org.orekit.propagation
-import org.orekit.propagation.events
 import org.orekit.utils
 import typing
 
 
 
-class InertialForces(org.orekit.forces.AbstractForceModel):
+class InertialForces(org.orekit.forces.ForceModel):
     """
-    public class InertialForces extends :class:`~org.orekit.forces.AbstractForceModel`
+    public class InertialForces extends :class:`~org.orekit.forces.inertia.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.ForceModel`
     
         Inertial force model.
     
@@ -40,9 +38,12 @@ class InertialForces(org.orekit.forces.AbstractForceModel):
         """
             Compute acceleration.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
-                parameters (T[]): values of the force model parameters
+                parameters (T[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -55,9 +56,12 @@ class InertialForces(org.orekit.forces.AbstractForceModel):
         """
             Compute acceleration.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
-                parameters (double[]): values of the force model parameters
+                parameters (double[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -68,32 +72,12 @@ class InertialForces(org.orekit.forces.AbstractForceModel):
         """
             Check if force models depends on position only.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.dependsOnPositionOnly` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Returns:
                 true if force model depends on position only, false if it depends on velocity, either directly or due to a dependency on
                 attitude
-        
-        
-        """
-        ...
-    def getEventsDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
-    _getFieldEventsDetectors__T = typing.TypeVar('_getFieldEventsDetectors__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldEventsDetectors(self, field: org.hipparchus.Field[_getFieldEventsDetectors__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventsDetectors__T]]: ...
-    def getParameterDriver(self, string: str) -> org.orekit.utils.ParameterDriver:
-        """
-            Get parameter value from its name.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.ForceModel.getParameterDriver` in interface :class:`~org.orekit.forces.ForceModel`
-        
-            Overrides:
-                :meth:`~org.orekit.forces.AbstractForceModel.getParameterDriver` in
-                class :class:`~org.orekit.forces.AbstractForceModel`
-        
-            Parameters:
-                name (:class:`~org.orekit.forces.inertia.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): parameter name
-        
-            Returns:
-                parameter value
         
         
         """

@@ -1,6 +1,7 @@
 import java.util
 import org
 import org.orekit.estimation.measurements
+import org.orekit.files.rinex.observation
 import org.orekit.gnss
 import org.orekit.propagation
 import typing
@@ -17,12 +18,12 @@ class DualFrequencySmoother:
             11.2
     """
     def __init__(self, double: float, int: int): ...
-    def copyObservationData(self, observationData: org.orekit.gnss.ObservationData) -> org.orekit.gnss.ObservationData:
+    def copyObservationData(self, observationData: org.orekit.files.rinex.observation.ObservationData) -> org.orekit.files.rinex.observation.ObservationData:
         """
             Copy an ObservationData object.
         
             Parameters:
-                obsData (:class:`~org.orekit.gnss.ObservationData`): observation data to copy
+                obsData (:class:`~org.orekit.files.rinex.observation.ObservationData`): observation data to copy
         
             Returns:
                 a copy of the input observation data
@@ -30,14 +31,14 @@ class DualFrequencySmoother:
         
         """
         ...
-    def createFilter(self, observationData: org.orekit.gnss.ObservationData, observationData2: org.orekit.gnss.ObservationData, observationData3: org.orekit.gnss.ObservationData, satelliteSystem: org.orekit.gnss.SatelliteSystem) -> 'DualFrequencyHatchFilter':
+    def createFilter(self, observationData: org.orekit.files.rinex.observation.ObservationData, observationData2: org.orekit.files.rinex.observation.ObservationData, observationData3: org.orekit.files.rinex.observation.ObservationData, satelliteSystem: org.orekit.gnss.SatelliteSystem) -> 'DualFrequencyHatchFilter':
         """
             Creates an Hatch filter given initial data.
         
             Parameters:
-                codeData (:class:`~org.orekit.gnss.ObservationData`): input code observation data
-                phaseDataF1 (:class:`~org.orekit.gnss.ObservationData`): input phase observation data for the first frequency
-                phaseDataF2 (:class:`~org.orekit.gnss.ObservationData`): input phase observation data for the second frequency
+                codeData (:class:`~org.orekit.files.rinex.observation.ObservationData`): input code observation data
+                phaseDataF1 (:class:`~org.orekit.files.rinex.observation.ObservationData`): input phase observation data for the first frequency
+                phaseDataF2 (:class:`~org.orekit.files.rinex.observation.ObservationData`): input phase observation data for the second frequency
                 satSystem (:class:`~org.orekit.gnss.SatelliteSystem`): satellite system corresponding to the observations
         
             Returns:
@@ -46,7 +47,7 @@ class DualFrequencySmoother:
         
         """
         ...
-    def filterDataSet(self, list: java.util.List[org.orekit.gnss.ObservationDataSet], satelliteSystem: org.orekit.gnss.SatelliteSystem, int: int, observationType: org.orekit.gnss.ObservationType, observationType2: org.orekit.gnss.ObservationType) -> None: ...
+    def filterDataSet(self, list: java.util.List[org.orekit.files.rinex.observation.ObservationDataSet], satelliteSystem: org.orekit.gnss.SatelliteSystem, int: int, observationType: org.orekit.gnss.ObservationType, observationType2: org.orekit.gnss.ObservationType) -> None: ...
     def getFilteredDataMap(self) -> java.util.HashMap[org.orekit.gnss.ObservationType, java.util.List['SmoothedObservationDataSet']]: ...
     def getMapFilters(self) -> java.util.HashMap[org.orekit.gnss.ObservationType, 'DualFrequencyHatchFilter']: ...
 
@@ -80,12 +81,12 @@ class SingleFrequencySmoother:
             11.2
     """
     def __init__(self, measurementType: org.orekit.gnss.MeasurementType, double: float, int: int, double2: float): ...
-    def copyObservationData(self, observationData: org.orekit.gnss.ObservationData) -> org.orekit.gnss.ObservationData:
+    def copyObservationData(self, observationData: org.orekit.files.rinex.observation.ObservationData) -> org.orekit.files.rinex.observation.ObservationData:
         """
             Copy an ObservationData object.
         
             Parameters:
-                obsData (:class:`~org.orekit.gnss.ObservationData`): observation data to copy
+                obsData (:class:`~org.orekit.files.rinex.observation.ObservationData`): observation data to copy
         
             Returns:
                 a copy of the input observation data
@@ -93,13 +94,13 @@ class SingleFrequencySmoother:
         
         """
         ...
-    def createFilter(self, observationData: org.orekit.gnss.ObservationData, observationData2: org.orekit.gnss.ObservationData, satelliteSystem: org.orekit.gnss.SatelliteSystem) -> 'SingleFrequencyHatchFilter':
+    def createFilter(self, observationData: org.orekit.files.rinex.observation.ObservationData, observationData2: org.orekit.files.rinex.observation.ObservationData, satelliteSystem: org.orekit.gnss.SatelliteSystem) -> 'SingleFrequencyHatchFilter':
         """
             Creates an Hatch filter given initial data.
         
             Parameters:
-                codeData (:class:`~org.orekit.gnss.ObservationData`): input code observation data
-                smoothingData (:class:`~org.orekit.gnss.ObservationData`): input smoothing observation data
+                codeData (:class:`~org.orekit.files.rinex.observation.ObservationData`): input code observation data
+                smoothingData (:class:`~org.orekit.files.rinex.observation.ObservationData`): input smoothing observation data
                 system (:class:`~org.orekit.gnss.SatelliteSystem`): satellite system corresponding to the observations
         
             Returns:
@@ -108,7 +109,7 @@ class SingleFrequencySmoother:
         
         """
         ...
-    def filterDataSet(self, list: java.util.List[org.orekit.gnss.ObservationDataSet], satelliteSystem: org.orekit.gnss.SatelliteSystem, int: int, observationType: org.orekit.gnss.ObservationType) -> None: ...
+    def filterDataSet(self, list: java.util.List[org.orekit.files.rinex.observation.ObservationDataSet], satelliteSystem: org.orekit.gnss.SatelliteSystem, int: int, observationType: org.orekit.gnss.ObservationType) -> None: ...
     def getFilteredDataMap(self) -> java.util.HashMap[org.orekit.gnss.ObservationType, java.util.List['SmoothedObservationDataSet']]: ...
     def getMapFilters(self) -> java.util.HashMap[org.orekit.gnss.ObservationType, 'SingleFrequencyHatchFilter']: ...
 
@@ -121,8 +122,8 @@ class SmoothedObservationDataSet:
         Since:
             11.2
     """
-    def __init__(self, observationData: org.orekit.gnss.ObservationData, observationDataSet: org.orekit.gnss.ObservationDataSet): ...
-    def getDataSet(self) -> org.orekit.gnss.ObservationDataSet:
+    def __init__(self, observationData: org.orekit.files.rinex.observation.ObservationData, observationDataSet: org.orekit.files.rinex.observation.ObservationDataSet): ...
+    def getDataSet(self) -> org.orekit.files.rinex.observation.ObservationDataSet:
         """
             Get the original observation data set used to compute the smoothed observation data.
         
@@ -132,7 +133,7 @@ class SmoothedObservationDataSet:
         
         """
         ...
-    def getSmoothedData(self) -> org.orekit.gnss.ObservationData:
+    def getSmoothedData(self) -> org.orekit.files.rinex.observation.ObservationData:
         """
             Get the smoothed observation data.
         
@@ -230,15 +231,15 @@ class DualFrequencyHatchFilter(org.orekit.estimation.measurements.filtering.Hatc
             "Subirana, J. S., Hernandez-Pajares, M., and José Miguel Juan Zornoza. (2013). GNSS Data Processing: Fundamentals and
             Algorithms. European Space Agency. Section 4.2.3.1.1"
     """
-    def __init__(self, observationData: org.orekit.gnss.ObservationData, observationData2: org.orekit.gnss.ObservationData, observationData3: org.orekit.gnss.ObservationData, double: float, double2: float, double3: float, int: int): ...
-    def filterData(self, observationData: org.orekit.gnss.ObservationData, observationData2: org.orekit.gnss.ObservationData, observationData3: org.orekit.gnss.ObservationData) -> org.orekit.gnss.ObservationData:
+    def __init__(self, observationData: org.orekit.files.rinex.observation.ObservationData, observationData2: org.orekit.files.rinex.observation.ObservationData, observationData3: org.orekit.files.rinex.observation.ObservationData, double: float, double2: float, double3: float, int: int): ...
+    def filterData(self, observationData: org.orekit.files.rinex.observation.ObservationData, observationData2: org.orekit.files.rinex.observation.ObservationData, observationData3: org.orekit.files.rinex.observation.ObservationData) -> org.orekit.files.rinex.observation.ObservationData:
         """
             This method filters the provided data given the state of the filter.
         
             Parameters:
-                codeData (:class:`~org.orekit.gnss.ObservationData`): input code observation data
-                phaseDataFreq1 (:class:`~org.orekit.gnss.ObservationData`): input phase observation data for the first frequency
-                phaseDataFreq2 (:class:`~org.orekit.gnss.ObservationData`): input phase observation data for the second frequency
+                codeData (:class:`~org.orekit.files.rinex.observation.ObservationData`): input code observation data
+                phaseDataFreq1 (:class:`~org.orekit.files.rinex.observation.ObservationData`): input phase observation data for the first frequency
+                phaseDataFreq2 (:class:`~org.orekit.files.rinex.observation.ObservationData`): input phase observation data for the second frequency
         
             Returns:
                 the smoothed observation data
@@ -272,14 +273,14 @@ class SingleFrequencyHatchFilter(org.orekit.estimation.measurements.filtering.Ha
             Algorithms. European Space Agency.", "Zhou, Z., and Li, B. (2017). Optimal Doppler-aided smoothing strategy for GNSS
             navigation. GPS solutions, 21(1), 197-210."
     """
-    def __init__(self, observationData: org.orekit.gnss.ObservationData, observationData2: org.orekit.gnss.ObservationData, measurementType: org.orekit.gnss.MeasurementType, double: float, double2: float, int: int, double3: float): ...
-    def filterData(self, observationData: org.orekit.gnss.ObservationData, observationData2: org.orekit.gnss.ObservationData) -> org.orekit.gnss.ObservationData:
+    def __init__(self, observationData: org.orekit.files.rinex.observation.ObservationData, observationData2: org.orekit.files.rinex.observation.ObservationData, measurementType: org.orekit.gnss.MeasurementType, double: float, double2: float, int: int, double3: float): ...
+    def filterData(self, observationData: org.orekit.files.rinex.observation.ObservationData, observationData2: org.orekit.files.rinex.observation.ObservationData) -> org.orekit.files.rinex.observation.ObservationData:
         """
             This method filters the provided data given the state of the filter.
         
             Parameters:
-                codeData (:class:`~org.orekit.gnss.ObservationData`): input code observation data
-                smoothingData (:class:`~org.orekit.gnss.ObservationData`): input smoothing observation data
+                codeData (:class:`~org.orekit.files.rinex.observation.ObservationData`): input code observation data
+                smoothingData (:class:`~org.orekit.files.rinex.observation.ObservationData`): input smoothing observation data
         
             Returns:
                 the smoothed observation data

@@ -1125,7 +1125,7 @@ class JacobiEllipticBuilder:
             Returns:
                 selected algorithm
         
-        public static :class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`<:class:`~org.hipparchus.complex.Complex`> build(:class:`~org.hipparchus.complex.Complex` m)
+        public static :class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`<:class:`~org.hipparchus.complex.Complex`> build (:class:`~org.hipparchus.complex.Complex` m)
         
             Build an algorithm for computing Jacobi elliptic functions.
         
@@ -1135,7 +1135,7 @@ class JacobiEllipticBuilder:
             Returns:
                 selected algorithm
         
-        public static <T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> :class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`<:class:`~org.hipparchus.complex.FieldComplex`<T>> build(:class:`~org.hipparchus.complex.FieldComplex`<T> m)
+        public static <T extends :class:`~org.hipparchus.CalculusFieldElement`<T>> :class:`~org.hipparchus.special.elliptic.jacobi.FieldJacobiElliptic`<:class:`~org.hipparchus.complex.FieldComplex`<T>> build (:class:`~org.hipparchus.complex.FieldComplex`<T> m)
         
             Build an algorithm for computing Jacobi elliptic functions.
         

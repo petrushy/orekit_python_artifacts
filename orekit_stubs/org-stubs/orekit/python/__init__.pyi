@@ -11,23 +11,15 @@ class PythonFieldUnivariateFunction(org.hipparchus.analysis.FieldUnivariateFunct
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
     def pythonExtension(self, long: int) -> None:
         """
-            Part of JCC Python interface to object
+        public long pythonExtension()
+        
+        
         """
         ...
     _value__T = typing.TypeVar('_value__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -37,6 +29,36 @@ class PythonFieldUnivariateFunction(org.hipparchus.analysis.FieldUnivariateFunct
             Specified by:
                 :meth:`~org.orekit.python.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.FieldUnivariateFunction.html?is` in
                 interface :class:`~org.orekit.python.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.FieldUnivariateFunction?is`
+        
+        
+        """
+        ...
+
+_PythonFunction__T = typing.TypeVar('_PythonFunction__T')  # <T>
+_PythonFunction__R = typing.TypeVar('_PythonFunction__R')  # <R>
+class PythonFunction(java.util.function.Function[_PythonFunction__T, _PythonFunction__R], typing.Generic[_PythonFunction__T, _PythonFunction__R]):
+    """
+    public class PythonFunction<T, R> extends :class:`~org.orekit.python.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.python.https:.docs.oracle.com.javase.8.docs.api.java.util.function.Function?is`<T, R>
+    """
+    def __init__(self): ...
+    def apply(self, t: _PythonFunction__T) -> _PythonFunction__R:
+        """
+        
+            Specified by:
+                :meth:`~org.orekit.python.https:.docs.oracle.com.javase.8.docs.api.java.util.function.Function.html?is` in
+                interface :class:`~org.orekit.python.https:.docs.oracle.com.javase.8.docs.api.java.util.function.Function?is`
+        
+        
+        """
+        ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+        public long pythonExtension()
         
         
         """
@@ -53,35 +75,23 @@ class PythonSupplier(java.util.function.Supplier[_PythonSupplier__T], typing.Gen
     def finalize(self) -> None: ...
     def get(self) -> _PythonSupplier__T:
         """
-            Gets a result.
         
             Specified by:
                 :meth:`~org.orekit.python.https:.docs.oracle.com.javase.8.docs.api.java.util.function.Supplier.html?is` in
                 interface :class:`~org.orekit.python.https:.docs.oracle.com.javase.8.docs.api.java.util.function.Supplier?is`
         
-            Returns:
-                a result
-        
         
         """
         ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
     def pythonExtension(self, long: int) -> None:
         """
-            Part of JCC Python interface to object
+        public long pythonExtension()
+        
+        
         """
         ...
 
@@ -93,23 +103,15 @@ class PythonUnivariateFunction(org.hipparchus.analysis.UnivariateFunction):
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
     def pythonExtension(self, long: int) -> None:
         """
-            Part of JCC Python interface to object
+        public long pythonExtension()
+        
+        
         """
         ...
     def value(self, double: float) -> float:
@@ -128,5 +130,6 @@ class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.python")``.
 
     PythonFieldUnivariateFunction: typing.Type[PythonFieldUnivariateFunction]
+    PythonFunction: typing.Type[PythonFunction]
     PythonSupplier: typing.Type[PythonSupplier]
     PythonUnivariateFunction: typing.Type[PythonUnivariateFunction]

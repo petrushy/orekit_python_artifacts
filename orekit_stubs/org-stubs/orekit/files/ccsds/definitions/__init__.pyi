@@ -1,15 +1,73 @@
 import java.lang
-import java.util
 import org.orekit.bodies
 import org.orekit.data
 import org.orekit.files.ccsds.utils
 import org.orekit.frames
+import org.orekit.ssa.collision.shorttermencounter.probability.twod
 import org.orekit.time
 import org.orekit.utils
 import org.orekit.utils.units
 import typing
 
 
+
+class AdMethodType(java.lang.Enum['AdMethodType']):
+    """
+    public enum AdMethodType extends :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.definitions.AdMethodType`>
+    
+        Type of attitude determination method used in CCSDS :class:`~org.orekit.files.ccsds.ndm.adm.acm.Acm`.
+    
+        Since:
+            12.0
+    """
+    EKF: typing.ClassVar['AdMethodType'] = ...
+    TRIAD: typing.ClassVar['AdMethodType'] = ...
+    QUEST: typing.ClassVar['AdMethodType'] = ...
+    BATCH: typing.ClassVar['AdMethodType'] = ...
+    Q_METHOD: typing.ClassVar['AdMethodType'] = ...
+    FILTER_SMOOTHER: typing.ClassVar['AdMethodType'] = ...
+    _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
+    @typing.overload
+    @staticmethod
+    def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
+    @typing.overload
+    @staticmethod
+    def valueOf(string: str) -> 'AdMethodType':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (:class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        
+        
+        """
+        ...
+    @staticmethod
+    def values() -> typing.List['AdMethodType']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            for (AdMethodType c : AdMethodType.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
 
 class BodyFacade:
     """
@@ -21,8 +79,43 @@ class BodyFacade:
             11.0
     """
     def __init__(self, string: str, celestialBody: org.orekit.bodies.CelestialBody): ...
+    @typing.overload
     @staticmethod
-    def create(centerName: 'CenterName') -> 'BodyFacade': ...
+    def create(centerName: 'CenterName') -> 'BodyFacade':
+        """
+            Create a body facade from an input center name.
+        
+            Parameters:
+                centerName (:class:`~org.orekit.files.ccsds.definitions.CenterName`): input center name
+                context (:class:`~org.orekit.data.DataContext`): data context
+        
+            Returns:
+                a body facade corresponding to the input center name
+        
+            Since:
+                12.0
+        
+            Create a body facade from an input center name.
+        
+            Parameters:
+                centerName (:class:`~org.orekit.files.ccsds.definitions.CenterName`): input center name
+                bodies (:class:`~org.orekit.bodies.CelestialBodies`): celestial bodies
+        
+            Returns:
+                a body facade corresponding to the input center name
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
+    @typing.overload
+    @staticmethod
+    def create(centerName: 'CenterName', celestialBodies: org.orekit.bodies.CelestialBodies) -> 'BodyFacade': ...
+    @typing.overload
+    @staticmethod
+    def create(centerName: 'CenterName', dataContext: org.orekit.data.DataContext) -> 'BodyFacade': ...
     def getBody(self) -> org.orekit.bodies.CelestialBody:
         """
             Get the celestial body.
@@ -59,6 +152,7 @@ class CelestialBodyFrame(java.lang.Enum['CelestialBodyFrame']):
     GRC: typing.ClassVar['CelestialBodyFrame'] = ...
     GTOD: typing.ClassVar['CelestialBodyFrame'] = ...
     ICRF: typing.ClassVar['CelestialBodyFrame'] = ...
+    ITRF: typing.ClassVar['CelestialBodyFrame'] = ...
     ITRF2020: typing.ClassVar['CelestialBodyFrame'] = ...
     ITRF2014: typing.ClassVar['CelestialBodyFrame'] = ...
     ITRF2008: typing.ClassVar['CelestialBodyFrame'] = ...
@@ -369,103 +463,6 @@ class DutyCycleType(java.lang.Enum['DutyCycleType']):
             .. code-block: java
             
             for (DutyCycleType c : DutyCycleType.values())
-                System.out.println(c);
-            
-        
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
-        
-        
-        """
-        ...
-
-class ElementsType(java.lang.Enum['ElementsType']):
-    """
-    public enum ElementsType extends :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.definitions.ElementsType`>
-    
-        Orbit element set type used in CCSDS :class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`.
-    
-        Since:
-            11.0
-    
-        Also see:
-            :class:`~org.orekit.files.ccsds.definitions.https:.sanaregistry.org.r.orbital_elements`
-    """
-    ADBARV: typing.ClassVar['ElementsType'] = ...
-    CARTP: typing.ClassVar['ElementsType'] = ...
-    CARTPV: typing.ClassVar['ElementsType'] = ...
-    CARTPVA: typing.ClassVar['ElementsType'] = ...
-    DELAUNAY: typing.ClassVar['ElementsType'] = ...
-    DELAUNAYMOD: typing.ClassVar['ElementsType'] = ...
-    EIGVAL3EIGVEC3: typing.ClassVar['ElementsType'] = ...
-    EQUINOCTIAL: typing.ClassVar['ElementsType'] = ...
-    EQUINOCTIALMOD: typing.ClassVar['ElementsType'] = ...
-    GEODETIC: typing.ClassVar['ElementsType'] = ...
-    KEPLERIAN: typing.ClassVar['ElementsType'] = ...
-    KEPLERIANMEAN: typing.ClassVar['ElementsType'] = ...
-    LDBARV: typing.ClassVar['ElementsType'] = ...
-    ONSTATION: typing.ClassVar['ElementsType'] = ...
-    POINCARE: typing.ClassVar['ElementsType'] = ...
-    def checkUnits(self, list: java.util.List[org.orekit.utils.units.Unit]) -> None: ...
-    def getUnits(self) -> java.util.List[org.orekit.utils.units.Unit]: ...
-    def toCartesian(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], double2: float) -> org.orekit.utils.TimeStampedPVCoordinates:
-        """
-            Convert to Cartesian coordinates.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): elements date
-                elements (double[]): elements values
-                mu (double): gravitational parameter in m³/s²
-        
-            Returns:
-                Cartesian coordinates
-        
-        
-        """
-        ...
-    def toString(self) -> str:
-        """
-        
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum.html?is` in
-                class :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`
-        
-        
-        """
-        ...
-    _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
-    @typing.overload
-    @staticmethod
-    def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
-    @typing.overload
-    @staticmethod
-    def valueOf(string: str) -> 'ElementsType':
-        """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
-        
-            Parameters:
-                name (:class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
-        
-            Returns:
-                the enum constant with the specified name
-        
-            Raises:
-                :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.files.ccsds.definitions.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
-        
-        
-        """
-        ...
-    @staticmethod
-    def values() -> typing.List['ElementsType']:
-        """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
-        
-            .. code-block: java
-            
-            for (ElementsType c : ElementsType.values())
                 System.out.println(c);
             
         
@@ -987,6 +984,26 @@ class PocMethodType(java.lang.Enum['PocMethodType']):
     PATERA_2001: typing.ClassVar['PocMethodType'] = ...
     PATERA_2003: typing.ClassVar['PocMethodType'] = ...
     PATERA_2005: typing.ClassVar['PocMethodType'] = ...
+    def getCCSDSName(self) -> str:
+        """
+            Get CCSDS compatible name.
+        
+            Returns:
+                CCSDS compatible name
+        
+        
+        """
+        ...
+    def getMethodType(self) -> org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethodType:
+        """
+            Get a probability of collision computing method type based on the short term encounter model.
+        
+            Returns:
+                probability of collision computing method type based on the short term encounter model
+        
+        
+        """
+        ...
     _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
     @typing.overload
     @staticmethod
@@ -1099,8 +1116,8 @@ class SpacecraftBodyFrame:
         CSS: typing.ClassVar['SpacecraftBodyFrame.BaseEquipment'] = ...
         DSS: typing.ClassVar['SpacecraftBodyFrame.BaseEquipment'] = ...
         ESA: typing.ClassVar['SpacecraftBodyFrame.BaseEquipment'] = ...
-        GYRO: typing.ClassVar['SpacecraftBodyFrame.BaseEquipment'] = ...
         GYRO_FRAME: typing.ClassVar['SpacecraftBodyFrame.BaseEquipment'] = ...
+        GYRO: typing.ClassVar['SpacecraftBodyFrame.BaseEquipment'] = ...
         IMU_FRAME: typing.ClassVar['SpacecraftBodyFrame.BaseEquipment'] = ...
         INSTRUMENT: typing.ClassVar['SpacecraftBodyFrame.BaseEquipment'] = ...
         MTA: typing.ClassVar['SpacecraftBodyFrame.BaseEquipment'] = ...
@@ -1139,6 +1156,19 @@ class TimeConverter:
         
             Returns:
                 date components
+        
+        
+        """
+        ...
+    def getReferenceDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Get the reference date for relative dates (may be null if no relative dates are used).
+        
+            Returns:
+                reference date for relative dates (may be null if no relative dates are used)
+        
+            Since:
+                12.0
         
         
         """
@@ -1466,11 +1496,36 @@ class Units:
         Degree per second unit.
     
     """
+    DEG_PER_S_3_2: typing.ClassVar[org.orekit.utils.units.Unit] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.Unit` DEG_PER_S_3_2
+    
+        Degree per second^3/2 unit.
+    
+    """
+    DEG_PER_S_1_2: typing.ClassVar[org.orekit.utils.units.Unit] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.Unit` DEG_PER_S_1_2
+    
+        Degree per second^1/2 unit.
+    
+    """
     N_M: typing.ClassVar[org.orekit.utils.units.Unit] = ...
     """
     public static final :class:`~org.orekit.utils.units.Unit` N_M
     
         Newton metre unit.
+    
+    """
+    N_M_S: typing.ClassVar[org.orekit.utils.units.Unit] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.Unit` N_M_S
+    
+        Newton metre second unit.
+    
+        Since:
+            12.0
+    
     
     """
     NANO_TESLA: typing.ClassVar[org.orekit.utils.units.Unit] = ...
@@ -1565,11 +1620,11 @@ class YesNoUnknown(java.lang.Enum['YesNoUnknown']):
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.definitions")``.
 
+    AdMethodType: typing.Type[AdMethodType]
     BodyFacade: typing.Type[BodyFacade]
     CelestialBodyFrame: typing.Type[CelestialBodyFrame]
     CenterName: typing.Type[CenterName]
     DutyCycleType: typing.Type[DutyCycleType]
-    ElementsType: typing.Type[ElementsType]
     FrameFacade: typing.Type[FrameFacade]
     ModifiedFrame: typing.Type[ModifiedFrame]
     OdMethodFacade: typing.Type[OdMethodFacade]

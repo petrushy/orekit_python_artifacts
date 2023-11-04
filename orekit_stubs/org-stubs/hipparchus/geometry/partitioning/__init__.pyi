@@ -189,7 +189,7 @@ _Embedding__S = typing.TypeVar('_Embedding__S', bound=org.hipparchus.geometry.Sp
 _Embedding__T = typing.TypeVar('_Embedding__T', bound=org.hipparchus.geometry.Space)  # <T>
 class Embedding(typing.Generic[_Embedding__S, _Embedding__T]):
     """
-    public interface Embedding<S extends :class:`~org.hipparchus.geometry.Space`,T extends :class:`~org.hipparchus.geometry.Space`>
+    public interface Embedding<S extends :class:`~org.hipparchus.geometry.Space`, T extends :class:`~org.hipparchus.geometry.Space`>
     
         This interface defines mappers between a space and one of its sub-spaces.
     
@@ -319,7 +319,7 @@ class Region(typing.Generic[_Region__S]):
             Returns:
                 true if the instance is empty
         
-        boolean isEmpty(:class:`~org.hipparchus.geometry.partitioning.BSPTree`<:class:`~org.hipparchus.geometry.partitioning.Region`> node)
+        boolean isEmpty (:class:`~org.hipparchus.geometry.partitioning.BSPTree`<:class:`~org.hipparchus.geometry.partitioning.Region`> node)
         
             Check if the sub-tree starting at a given node is empty.
         
@@ -343,7 +343,7 @@ class Region(typing.Generic[_Region__S]):
             Returns:
                 true if the instance covers the full space
         
-        boolean isFull(:class:`~org.hipparchus.geometry.partitioning.BSPTree`<:class:`~org.hipparchus.geometry.partitioning.Region`> node)
+        boolean isFull (:class:`~org.hipparchus.geometry.partitioning.BSPTree`<:class:`~org.hipparchus.geometry.partitioning.Region`> node)
         
             Check if the sub-tree starting at a given node covers the full space.
         
@@ -432,6 +432,7 @@ class Side(java.lang.Enum['Side']):
         
             .. code-block: java
             
+            
             for (Side c : Side.values())
                 System.out.println(c);
             
@@ -494,7 +495,7 @@ _Transform__S = typing.TypeVar('_Transform__S', bound=org.hipparchus.geometry.Sp
 _Transform__T = typing.TypeVar('_Transform__T', bound=org.hipparchus.geometry.Space)  # <T>
 class Transform(typing.Generic[_Transform__S, _Transform__T]):
     """
-    public interface Transform<S extends :class:`~org.hipparchus.geometry.Space`,T extends :class:`~org.hipparchus.geometry.Space`>
+    public interface Transform<S extends :class:`~org.hipparchus.geometry.Space`, T extends :class:`~org.hipparchus.geometry.Space`>
     
         This interface represents an inversible affine transform in a space.
     
@@ -521,17 +522,18 @@ _AbstractRegion__S = typing.TypeVar('_AbstractRegion__S', bound=org.hipparchus.g
 _AbstractRegion__T = typing.TypeVar('_AbstractRegion__T', bound=org.hipparchus.geometry.Space)  # <T>
 class AbstractRegion(Region[_AbstractRegion__S], typing.Generic[_AbstractRegion__S, _AbstractRegion__T]):
     """
-    public abstract class AbstractRegion<S extends :class:`~org.hipparchus.geometry.Space`,T extends :class:`~org.hipparchus.geometry.Space`> extends :class:`~org.hipparchus.geometry.partitioning.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.partitioning.Region`<S>
+    public abstract class AbstractRegion<S extends :class:`~org.hipparchus.geometry.Space`, T extends :class:`~org.hipparchus.geometry.Space`> extends :class:`~org.hipparchus.geometry.partitioning.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.partitioning.Region`<S>
     
         Abstract class for all regions, independently of geometry type or dimension.
     """
     def __init__(self, hyperplaneArray: typing.List[Hyperplane[_AbstractRegion__S]], double: float): ...
     def applyTransform(self, transform: Transform[_AbstractRegion__S, _AbstractRegion__T]) -> 'AbstractRegion'[_AbstractRegion__S, _AbstractRegion__T]: ...
     def buildNew(self, bSPTree: BSPTree[_AbstractRegion__S]) -> 'AbstractRegion'[_AbstractRegion__S, _AbstractRegion__T]: ...
+    _checkPoint_1__V = typing.TypeVar('_checkPoint_1__V', bound=org.hipparchus.geometry.Vector)  # <V>
     @typing.overload
     def checkPoint(self, point: org.hipparchus.geometry.Point[_AbstractRegion__S]) -> Region.Location: ...
     @typing.overload
-    def checkPoint(self, vector: org.hipparchus.geometry.Vector[_AbstractRegion__S]) -> Region.Location: ...
+    def checkPoint(self, vector: org.hipparchus.geometry.Vector[_AbstractRegion__S, _checkPoint_1__V]) -> Region.Location: ...
     def contains(self, region: Region[_AbstractRegion__S]) -> bool: ...
     def copySelf(self) -> 'AbstractRegion'[_AbstractRegion__S, _AbstractRegion__T]: ...
     def getBarycenter(self) -> org.hipparchus.geometry.Point[_AbstractRegion__S]: ...
@@ -587,7 +589,7 @@ class AbstractRegion(Region[_AbstractRegion__S], typing.Generic[_AbstractRegion_
             Returns:
                 true if the instance is empty
         
-        public boolean isEmpty(:class:`~org.hipparchus.geometry.partitioning.BSPTree`<:class:`~org.hipparchus.geometry.partitioning.AbstractRegion`> node)
+        public boolean isEmpty (:class:`~org.hipparchus.geometry.partitioning.BSPTree`<:class:`~org.hipparchus.geometry.partitioning.AbstractRegion`> node)
         
             Check if the sub-tree starting at a given node is empty.
         
@@ -619,7 +621,7 @@ class AbstractRegion(Region[_AbstractRegion__S], typing.Generic[_AbstractRegion_
             Returns:
                 true if the instance covers the full space
         
-        public boolean isFull(:class:`~org.hipparchus.geometry.partitioning.BSPTree`<:class:`~org.hipparchus.geometry.partitioning.AbstractRegion`> node)
+        public boolean isFull (:class:`~org.hipparchus.geometry.partitioning.BSPTree`<:class:`~org.hipparchus.geometry.partitioning.AbstractRegion`> node)
         
             Check if the sub-tree starting at a given node covers the full space.
         
@@ -645,7 +647,7 @@ _AbstractSubHyperplane__S = typing.TypeVar('_AbstractSubHyperplane__S', bound=or
 _AbstractSubHyperplane__T = typing.TypeVar('_AbstractSubHyperplane__T', bound=org.hipparchus.geometry.Space)  # <T>
 class AbstractSubHyperplane(SubHyperplane[_AbstractSubHyperplane__S], typing.Generic[_AbstractSubHyperplane__S, _AbstractSubHyperplane__T]):
     """
-    public abstract class AbstractSubHyperplane<S extends :class:`~org.hipparchus.geometry.Space`,T extends :class:`~org.hipparchus.geometry.Space`> extends :class:`~org.hipparchus.geometry.partitioning.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.partitioning.SubHyperplane`<S>
+    public abstract class AbstractSubHyperplane<S extends :class:`~org.hipparchus.geometry.Space`, T extends :class:`~org.hipparchus.geometry.Space`> extends :class:`~org.hipparchus.geometry.partitioning.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.partitioning.SubHyperplane`<S>
     
         This class implements the dimension-independent parts of :class:`~org.hipparchus.geometry.partitioning.SubHyperplane`.
     

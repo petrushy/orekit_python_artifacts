@@ -17,17 +17,7 @@ class UnscentedEvolution:
         Also see:
             :class:`~org.hipparchus.filtering.kalman.unscented.UnscentedProcess`
     """
-    def __init__(self, double: float, realVectorArray: typing.List[org.hipparchus.linear.RealVector], realVectorArray2: typing.List[org.hipparchus.linear.RealVector], realMatrix: org.hipparchus.linear.RealMatrix): ...
-    def getCurrentMeasurements(self) -> typing.List[org.hipparchus.linear.RealVector]:
-        """
-            Get current measurements.
-        
-            Returns:
-                current measurements
-        
-        
-        """
-        ...
+    def __init__(self, double: float, realVectorArray: typing.List[org.hipparchus.linear.RealVector], realMatrix: org.hipparchus.linear.RealMatrix): ...
     def getCurrentStates(self) -> typing.List[org.hipparchus.linear.RealVector]:
         """
             Get current states.
@@ -111,6 +101,20 @@ class UnscentedProcess(typing.Generic[_UnscentedProcess__T]):
         
             Returns:
                 innovation brought by a measurement, may be null if measurement should be rejected
+        
+        
+        """
+        ...
+    def getPredictedMeasurements(self, realVectorArray: typing.List[org.hipparchus.linear.RealVector], t: _UnscentedProcess__T) -> typing.List[org.hipparchus.linear.RealVector]:
+        """
+            Get the state evolution between two times.
+        
+            Parameters:
+                predictedSigmaPoints (:class:`~org.hipparchus.filtering.kalman.unscented.https:.www.hipparchus.org.hipparchus`[]): predicted state sigma points
+                measurement (:class:`~org.hipparchus.filtering.kalman.unscented.UnscentedProcess`): measurement to process
+        
+            Returns:
+                predicted measurement sigma points
         
         
         """

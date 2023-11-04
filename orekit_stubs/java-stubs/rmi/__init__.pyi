@@ -1,6 +1,5 @@
 import java.io
 import java.lang
-import java.rmi.activation
 import java.rmi.dgc
 import java.rmi.registry
 import java.rmi.server
@@ -148,7 +147,6 @@ class __module_protocol__(typing.Protocol):
     UnexpectedException: typing.Type[UnexpectedException]
     UnknownHostException: typing.Type[UnknownHostException]
     UnmarshalException: typing.Type[UnmarshalException]
-    activation: java.rmi.activation.__module_protocol__
     dgc: java.rmi.dgc.__module_protocol__
     registry: java.rmi.registry.__module_protocol__
     server: java.rmi.server.__module_protocol__

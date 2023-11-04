@@ -60,9 +60,9 @@ class IonosphericMappingFunction:
         """
         ...
 
-class IonosphericModel(org.orekit.utils.ParametersDriversProvider, java.io.Serializable):
+class IonosphericModel(org.orekit.utils.ParameterDriversProvider):
     """
-    public interface IonosphericModel extends :class:`~org.orekit.utils.ParametersDriversProvider`, :class:`~org.orekit.models.earth.ionosphere.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public interface IonosphericModel extends :class:`~org.orekit.utils.ParameterDriversProvider`
     
         Defines a ionospheric model, used to calculate the path delay imposed to electro-magnetic signals between an orbital
         satellite and a ground station.
@@ -72,31 +72,6 @@ class IonosphericModel(org.orekit.utils.ParametersDriversProvider, java.io.Seria
         Since:
             7.1
     """
-    _getParameters_1__T = typing.TypeVar('_getParameters_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def getParameters(self) -> typing.List[float]:
-        """
-            Get ionospheric model parameters.
-        
-            Returns:
-                ionospheric model parameters
-        
-        """
-        ...
-    @typing.overload
-    def getParameters(self, field: org.hipparchus.Field[_getParameters_1__T]) -> typing.List[_getParameters_1__T]:
-        """
-            Get ionospheric model parameters.
-        
-            Parameters:
-                field (:class:`~org.orekit.models.earth.ionosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
-        
-            Returns:
-                ionospheric model parameters
-        
-        
-        """
-        ...
     _pathDelay_1__T = typing.TypeVar('_pathDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def pathDelay(self, spacecraftState: org.orekit.propagation.SpacecraftState, topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, doubleArray: typing.List[float]) -> float:
@@ -113,7 +88,7 @@ class IonosphericModel(org.orekit.utils.ParametersDriversProvider, java.io.Seria
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
                 baseFrame (:class:`~org.orekit.frames.TopocentricFrame`): base frame associated with the station
                 frequency (double): frequency of the signal in Hz
-                parameters (double[]): ionospheric model parameters
+                parameters (double[]): ionospheric model parameters at state date
         
             Returns:
                 the path delay due to the ionosphere in m
@@ -135,7 +110,7 @@ class IonosphericModel(org.orekit.utils.ParametersDriversProvider, java.io.Seria
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
                 baseFrame (:class:`~org.orekit.frames.TopocentricFrame`): base frame associated with the station
                 frequency (double): frequency of the signal in Hz
-                parameters (T[]): ionospheric model parameters
+                parameters (T[]): ionospheric model parameters at state date
         
             Returns:
                 the path delay due to the ionosphere in m
@@ -290,9 +265,6 @@ class EstimatedIonosphericModel(IonosphericModel):
     
         Since:
             10.2
-    
-        Also see:
-            :meth:`~serialized`
     """
     VERTICAL_TOTAL_ELECTRON_CONTENT: typing.ClassVar[str] = ...
     """
@@ -328,7 +300,7 @@ class EstimatedIonosphericModel(IonosphericModel):
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
                 baseFrame (:class:`~org.orekit.frames.TopocentricFrame`): base frame associated with the station
                 frequency (double): frequency of the signal in Hz
-                parameters (double[]): ionospheric model parameters
+                parameters (double[]): ionospheric model parameters at state date
         
             Returns:
                 the path delay due to the ionosphere in m
@@ -368,7 +340,7 @@ class EstimatedIonosphericModel(IonosphericModel):
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
                 baseFrame (:class:`~org.orekit.frames.TopocentricFrame`): base frame associated with the station
                 frequency (double): frequency of the signal in Hz
-                parameters (T[]): ionospheric model parameters
+                parameters (T[]): ionospheric model parameters at state date
         
             Returns:
                 the path delay due to the ionosphere in m
@@ -380,7 +352,7 @@ class EstimatedIonosphericModel(IonosphericModel):
             Parameters:
                 elevation (T): elevation of the satellite in radians
                 frequency (double): frequency of the signal in Hz
-                parameters (T[]): ionospheric model parameters
+                parameters (T[]): ionospheric model parameters at state date
         
             Returns:
                 the path delay due to the ionosphere in m
@@ -391,9 +363,9 @@ class EstimatedIonosphericModel(IonosphericModel):
     @typing.overload
     def pathDelay(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_pathDelay_3__T], topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, tArray: typing.List[_pathDelay_3__T]) -> _pathDelay_3__T: ...
 
-class GlobalIonosphereMapModel(org.orekit.data.AbstractSelfFeedingLoader, IonosphericModel):
+class GlobalIonosphereMapModel(IonosphericModel):
     """
-    public class GlobalIonosphereMapModel extends :class:`~org.orekit.data.AbstractSelfFeedingLoader` implements :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+    public class GlobalIonosphereMapModel extends :class:`~org.orekit.models.earth.ionosphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
     
         Global Ionosphere Map (GIM) model. The ionospheric delay is computed according to the formulas:
     
@@ -457,63 +429,19 @@ class GlobalIonosphereMapModel(org.orekit.data.AbstractSelfFeedingLoader, Ionosp
     
         Also see:
             "Schaer, S., W. Gurtner, and J. Feltens, 1998, IONEX: The IONosphere Map EXchange Format Version 1, February 25, 1998,
-            Proceedings of the IGS AC Workshop Darmstadt, Germany, February 9–11, 1998", :meth:`~serialized`
+            Proceedings of the IGS AC Workshop Darmstadt, Germany, February 9–11, 1998"
     """
     @typing.overload
     def __init__(self, string: str): ...
     @typing.overload
     def __init__(self, string: str, dataProvidersManager: org.orekit.data.DataProvidersManager, timeScale: org.orekit.time.TimeScale): ...
+    @typing.overload
+    def __init__(self, timeScale: org.orekit.time.TimeScale, *dataSource: org.orekit.data.DataSource): ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    _getTEC_1__T = typing.TypeVar('_getTEC_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def getTEC(self, absoluteDate: org.orekit.time.AbsoluteDate, geodeticPoint: org.orekit.bodies.GeodeticPoint) -> float:
-        """
-            Computes the Total Electron Content (TEC) at a given date by performing a temporal interpolation with the two closest
-            date in the IONEX file.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                recPoint (:class:`~org.orekit.bodies.GeodeticPoint`): geodetic point of receiver/station
-        
-            Returns:
-                the TEC after a temporal interpolation, in TECUnits
-        
-        """
-        ...
-    @typing.overload
-    def getTEC(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTEC_1__T], geodeticPoint: org.orekit.bodies.GeodeticPoint) -> _getTEC_1__T:
-        """
-            Computes the Total Electron Content (TEC) at a given date by performing a temporal interpolation with the two closest
-            date in the IONEX file.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                recPoint (:class:`~org.orekit.bodies.GeodeticPoint`): geodetic point of receiver/station
-        
-            Returns:
-                the TEC after a temporal interpolation, in TECUnits
-        
-        
-        """
-        ...
-    _pathDelay_2__T = typing.TypeVar('_pathDelay_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    _pathDelay_3__T = typing.TypeVar('_pathDelay_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _pathDelay_1__T = typing.TypeVar('_pathDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def pathDelay(self, spacecraftState: org.orekit.propagation.SpacecraftState, topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, doubleArray: typing.List[float]) -> float:
         """
-            Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
-        
-            The path delay can be computed for any elevation angle.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                geo (:class:`~org.orekit.bodies.GeodeticPoint`): geodetic point of receiver/station
-                elevation (double): elevation of the satellite in radians
-                frequency (double): frequency of the signal in Hz
-        
-            Returns:
-                the path delay due to the ionosphere in m
-        
             Description copied from interface: :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
@@ -531,7 +459,7 @@ class GlobalIonosphereMapModel(org.orekit.data.AbstractSelfFeedingLoader, Ionosp
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
                 baseFrame (:class:`~org.orekit.frames.TopocentricFrame`): base frame associated with the station
                 frequency (double): frequency of the signal in Hz
-                parameters (double[]): ionospheric model parameters
+                parameters (double[]): ionospheric model parameters at state date
         
             Returns:
                 the path delay due to the ionosphere in m
@@ -539,23 +467,8 @@ class GlobalIonosphereMapModel(org.orekit.data.AbstractSelfFeedingLoader, Ionosp
         """
         ...
     @typing.overload
-    def pathDelay(self, absoluteDate: org.orekit.time.AbsoluteDate, geodeticPoint: org.orekit.bodies.GeodeticPoint, double: float, double2: float) -> float: ...
-    @typing.overload
-    def pathDelay(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_pathDelay_2__T], topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, tArray: typing.List[_pathDelay_2__T]) -> _pathDelay_2__T:
+    def pathDelay(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_pathDelay_1__T], topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, tArray: typing.List[_pathDelay_1__T]) -> _pathDelay_1__T:
         """
-            Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
-        
-            The path delay can be computed for any elevation angle.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                geo (:class:`~org.orekit.bodies.GeodeticPoint`): geodetic point of receiver/station
-                elevation (T): elevation of the satellite in radians
-                frequency (double): frequency of the signal in Hz
-        
-            Returns:
-                the path delay due to the ionosphere in m
-        
             Description copied from interface: :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
@@ -573,7 +486,7 @@ class GlobalIonosphereMapModel(org.orekit.data.AbstractSelfFeedingLoader, Ionosp
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
                 baseFrame (:class:`~org.orekit.frames.TopocentricFrame`): base frame associated with the station
                 frequency (double): frequency of the signal in Hz
-                parameters (T[]): ionospheric model parameters
+                parameters (T[]): ionospheric model parameters at state date
         
             Returns:
                 the path delay due to the ionosphere in m
@@ -581,8 +494,6 @@ class GlobalIonosphereMapModel(org.orekit.data.AbstractSelfFeedingLoader, Ionosp
         
         """
         ...
-    @typing.overload
-    def pathDelay(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_3__T], geodeticPoint: org.orekit.bodies.GeodeticPoint, t: _pathDelay_3__T, double: float) -> _pathDelay_3__T: ...
 
 class KlobucharIonoModel(IonosphericModel):
     """
@@ -600,9 +511,6 @@ class KlobucharIonoModel(IonosphericModel):
     
         Since:
             7.1
-    
-        Also see:
-            :meth:`~serialized`
     """
     @typing.overload
     def __init__(self, doubleArray: typing.List[float], doubleArray2: typing.List[float]): ...
@@ -645,7 +553,7 @@ class KlobucharIonoModel(IonosphericModel):
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
                 baseFrame (:class:`~org.orekit.frames.TopocentricFrame`): base frame associated with the station
                 frequency (double): frequency of the signal in Hz
-                parameters (double[]): ionospheric model parameters
+                parameters (double[]): ionospheric model parameters at state date
         
             Returns:
                 the path delay due to the ionosphere in m
@@ -688,7 +596,7 @@ class KlobucharIonoModel(IonosphericModel):
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
                 baseFrame (:class:`~org.orekit.frames.TopocentricFrame`): base frame associated with the station
                 frequency (double): frequency of the signal in Hz
-                parameters (T[]): ionospheric model parameters
+                parameters (T[]): ionospheric model parameters at state date
         
             Returns:
                 the path delay due to the ionosphere in m
@@ -710,7 +618,7 @@ class NeQuickModel(IonosphericModel):
     
         Also see:
             "European Union (2016). European GNSS (Galileo) Open Service-Ionospheric Correction Algorithm for Galileo Single
-            Frequency Users. 1.2.", :meth:`~serialized`
+            Frequency Users. 1.2."
     """
     @typing.overload
     def __init__(self, doubleArray: typing.List[float]): ...
@@ -738,7 +646,7 @@ class NeQuickModel(IonosphericModel):
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
                 baseFrame (:class:`~org.orekit.frames.TopocentricFrame`): base frame associated with the station
                 frequency (double): frequency of the signal in Hz
-                parameters (double[]): ionospheric model parameters
+                parameters (double[]): ionospheric model parameters at state date
         
             Returns:
                 the path delay due to the ionosphere in m
@@ -765,7 +673,7 @@ class NeQuickModel(IonosphericModel):
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
                 baseFrame (:class:`~org.orekit.frames.TopocentricFrame`): base frame associated with the station
                 frequency (double): frequency of the signal in Hz
-                parameters (T[]): ionospheric model parameters
+                parameters (T[]): ionospheric model parameters at state date
         
             Returns:
                 the path delay due to the ionosphere in m
@@ -889,22 +797,23 @@ class PythonIonosphericMappingFunction(IonosphericMappingFunction):
 class PythonIonosphericModel(IonosphericModel):
     """
     public class PythonIonosphericModel extends :class:`~org.orekit.models.earth.ionosphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
-    
-    
-        Also see:
-            :meth:`~serialized`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
     _getParameters_1__T = typing.TypeVar('_getParameters_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getParameters_3__T = typing.TypeVar('_getParameters_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getParameters(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]: ...
+    @typing.overload
+    def getParameters(self, field: org.hipparchus.Field[_getParameters_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getParameters_1__T]) -> typing.List[_getParameters_1__T]: ...
     @typing.overload
     def getParameters(self) -> typing.List[float]:
         """
             Get ionospheric model parameters.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.getParameters` in
-                interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.utils.ParameterDriversProvider.getParameters` in
+                interface :class:`~org.orekit.utils.ParameterDriversProvider`
         
             Returns:
                 ionospheric model parameters
@@ -912,13 +821,13 @@ class PythonIonosphericModel(IonosphericModel):
         """
         ...
     @typing.overload
-    def getParameters(self, field: org.hipparchus.Field[_getParameters_1__T]) -> typing.List[_getParameters_1__T]:
+    def getParameters(self, field: org.hipparchus.Field[_getParameters_3__T]) -> typing.List[_getParameters_3__T]:
         """
             Get ionospheric model parameters.
         
             Specified by:
-                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.getParameters` in
-                interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
+                :meth:`~org.orekit.utils.ParameterDriversProvider.getParameters` in
+                interface :class:`~org.orekit.utils.ParameterDriversProvider`
         
             Parameters:
                 field (:class:`~org.orekit.models.earth.ionosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
@@ -1081,7 +990,7 @@ class SsrVtecIonosphericModel(IonosphericModel):
             11.0
     
         Also see:
-            "IGS State Space Representation (SSR) Format, Version 1.00, October 2020.", :meth:`~serialized`
+            "IGS State Space Representation (SSR) Format, Version 1.00, October 2020."
     """
     def __init__(self, ssrIm201: org.orekit.gnss.metric.messages.ssr.subtype.SsrIm201): ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
@@ -1105,7 +1014,7 @@ class SsrVtecIonosphericModel(IonosphericModel):
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
                 baseFrame (:class:`~org.orekit.frames.TopocentricFrame`): base frame associated with the station
                 frequency (double): frequency of the signal in Hz
-                parameters (double[]): ionospheric model parameters
+                parameters (double[]): ionospheric model parameters at state date
         
             Returns:
                 the path delay due to the ionosphere in m
@@ -1131,7 +1040,7 @@ class SsrVtecIonosphericModel(IonosphericModel):
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
                 baseFrame (:class:`~org.orekit.frames.TopocentricFrame`): base frame associated with the station
                 frequency (double): frequency of the signal in Hz
-                parameters (T[]): ionospheric model parameters
+                parameters (T[]): ionospheric model parameters at state date
         
             Returns:
                 the path delay due to the ionosphere in m

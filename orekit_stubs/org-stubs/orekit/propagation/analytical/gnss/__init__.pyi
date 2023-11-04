@@ -33,7 +33,6 @@ class ClockCorrectionsProvider(org.orekit.propagation.AdditionalStateProvider):
         :class:`~org.orekit.estimation.measurements.EstimationModifier` in orbit determination applications to take into
         consideration this effect in measurement modeling.
     
-    
         Since:
             9.3
     """
@@ -602,6 +601,9 @@ class SBASPropagatorBuilder:
         Since:
             11.0
     """
+    @typing.overload
+    def __init__(self, sBASOrbitalElements: org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements): ...
+    @typing.overload
     def __init__(self, sBASOrbitalElements: org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements, frames: org.orekit.frames.Frames): ...
     def attitudeProvider(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider) -> 'SBASPropagatorBuilder':
         """

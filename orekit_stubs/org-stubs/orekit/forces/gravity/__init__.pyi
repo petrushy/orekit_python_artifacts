@@ -15,9 +15,9 @@ import typing
 
 
 
-class DeSitterRelativity(org.orekit.forces.AbstractForceModel):
+class DeSitterRelativity(org.orekit.forces.ForceModel):
     """
-    public class DeSitterRelativity extends :class:`~org.orekit.forces.AbstractForceModel`
+    public class DeSitterRelativity extends :class:`~org.orekit.forces.gravity.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.ForceModel`
     
         De Sitter post-Newtonian correction force due to general relativity.
     
@@ -51,102 +51,12 @@ class DeSitterRelativity(org.orekit.forces.AbstractForceModel):
         """
             Compute acceleration.
         
-            Parameters:
-                s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
-                parameters (T[]): values of the force model parameters
-        
-            Returns:
-                acceleration in same frame as state
-        
-        
-        """
-        ...
-    @typing.overload
-    def acceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Compute acceleration.
-        
-            Parameters:
-                s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
-                parameters (double[]): values of the force model parameters
-        
-            Returns:
-                acceleration in same frame as state
-        
-        """
-        ...
-    def dependsOnPositionOnly(self) -> bool:
-        """
-            Check if force models depends on position only.
-        
-            Returns:
-                true if force model depends on position only, false if it depends on velocity, either directly or due to a dependency on
-                attitude
-        
-        
-        """
-        ...
-    def getEarth(self) -> org.orekit.bodies.CelestialBody:
-        """
-            Get the Earth model used to compute De Sitter effect.
-        
-            Returns:
-                the earth model
-        
-        
-        """
-        ...
-    def getEventsDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
-    _getFieldEventsDetectors__T = typing.TypeVar('_getFieldEventsDetectors__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldEventsDetectors(self, field: org.hipparchus.Field[_getFieldEventsDetectors__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventsDetectors__T]]: ...
-    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    def getSun(self) -> org.orekit.bodies.CelestialBody:
-        """
-            Get the sun model used to compute De Sitter effect.
-        
-            Returns:
-                the sun model
-        
-        
-        """
-        ...
-
-class HolmesFeatherstoneAttractionModel(org.orekit.forces.AbstractForceModel, org.orekit.forces.gravity.potential.TideSystemProvider):
-    """
-    public class HolmesFeatherstoneAttractionModel extends :class:`~org.orekit.forces.AbstractForceModel` implements :class:`~org.orekit.forces.gravity.potential.TideSystemProvider`
-    
-        This class represents the gravitational field of a celestial body.
-    
-        The algorithm implemented in this class has been designed by S. A. Holmes and W. E. Featherstone from Department of
-        Spatial Sciences, Curtin University of Technology, Perth, Australia. It is described in their 2002 paper:
-        :class:`~org.orekit.forces.gravity.https:.www.researchgate.net.publication.226460594_A_unified_approach_to_the_Clenshaw_summation_and_the_recursive_computation_of_very_high_degree_and_order_normalised_associated_Legendre_functions`
-        (Journal of Geodesy (2002) 76: 279–299).
-    
-        This model directly uses normalized coefficients and stable recursion algorithms so it is more suited to high degree
-        gravity fields than the classical Cunningham Droziner models which use un-normalized coefficients.
-    
-        Among the different algorithms presented in Holmes and Featherstone paper, this class implements the *modified forward
-        row method*. All recursion coefficients are precomputed and stored for greater performance. This caching was suggested
-        in the paper but not used due to the large memory requirements. Since 2002, even low end computers and mobile devices do
-        have sufficient memory so this caching has become feasible nowadays.
-    
-    
-        Since:
-            6.0
-    """
-    def __init__(self, frame: org.orekit.frames.Frame, normalizedSphericalHarmonicsProvider: org.orekit.forces.gravity.potential.NormalizedSphericalHarmonicsProvider): ...
-    _acceleration_0__T = typing.TypeVar('_acceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], tArray: typing.List[_acceleration_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
-        """
-            Compute acceleration.
-        
             Specified by:
                 :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
-                parameters (T[]): values of the force model parameters
+                parameters (T[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -164,7 +74,7 @@ class HolmesFeatherstoneAttractionModel(org.orekit.forces.AbstractForceModel, or
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
-                parameters (double[]): values of the force model parameters
+                parameters (double[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -185,12 +95,119 @@ class HolmesFeatherstoneAttractionModel(org.orekit.forces.AbstractForceModel, or
         
         """
         ...
-    def getEventsDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
-    _getFieldEventsDetectors__T = typing.TypeVar('_getFieldEventsDetectors__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldEventsDetectors(self, field: org.hipparchus.Field[_getFieldEventsDetectors__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventsDetectors__T]]: ...
+    def getEarth(self) -> org.orekit.bodies.CelestialBody:
+        """
+            Get the Earth model used to compute De Sitter effect.
+        
+            Returns:
+                the earth model
+        
+        
+        """
+        ...
+    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
+    def getSun(self) -> org.orekit.bodies.CelestialBody:
+        """
+            Get the sun model used to compute De Sitter effect.
+        
+            Returns:
+                the sun model
+        
+        
+        """
+        ...
+
+class HolmesFeatherstoneAttractionModel(org.orekit.forces.ForceModel, org.orekit.forces.gravity.potential.TideSystemProvider):
+    """
+    public class HolmesFeatherstoneAttractionModel extends :class:`~org.orekit.forces.gravity.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.ForceModel`, :class:`~org.orekit.forces.gravity.potential.TideSystemProvider`
+    
+        This class represents the gravitational field of a celestial body.
+    
+        The algorithm implemented in this class has been designed by S. A. Holmes and W. E. Featherstone from Department of
+        Spatial Sciences, Curtin University of Technology, Perth, Australia. It is described in their 2002 paper:
+        :class:`~org.orekit.forces.gravity.https:.www.researchgate.net.publication.226460594_A_unified_approach_to_the_Clenshaw_summation_and_the_recursive_computation_of_very_high_degree_and_order_normalised_associated_Legendre_functions`
+        (Journal of Geodesy (2002) 76: 279–299).
+    
+        This model directly uses normalized coefficients and stable recursion algorithms so it is more suited to high degree
+        gravity fields than the classical Cunningham Droziner models which use un-normalized coefficients.
+    
+        Among the different algorithms presented in Holmes and Featherstone paper, this class implements the *modified forward
+        row method*. All recursion coefficients are precomputed and stored for greater performance. This caching was suggested
+        in the paper but not used due to the large memory requirements. Since 2002, even low end computers and mobile devices do
+        have sufficient memory so this caching has become feasible nowadays.
+    
+        Since:
+            6.0
+    """
+    def __init__(self, frame: org.orekit.frames.Frame, normalizedSphericalHarmonicsProvider: org.orekit.forces.gravity.potential.NormalizedSphericalHarmonicsProvider): ...
+    _acceleration_0__T = typing.TypeVar('_acceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], tArray: typing.List[_acceleration_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
+        """
+            Compute acceleration.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
+            Parameters:
+                s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
+                parameters (T[]): values of the force model parameters at state date, only 1 value for each parameterDriver
+        
+            Returns:
+                acceleration in same frame as state
+        
+        
+        """
+        ...
+    @typing.overload
+    def acceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Compute acceleration.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
+            Parameters:
+                s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
+                parameters (double[]): values of the force model parameters at state date, only 1 value for each parameterDriver
+        
+            Returns:
+                acceleration in same frame as state
+        
+        """
+        ...
+    def dependsOnPositionOnly(self) -> bool:
+        """
+            Check if force models depends on position only.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.dependsOnPositionOnly` in interface :class:`~org.orekit.forces.ForceModel`
+        
+            Returns:
+                true if force model depends on position only, false if it depends on velocity, either directly or due to a dependency on
+                attitude
+        
+        
+        """
+        ...
+    @typing.overload
     def getMu(self) -> float:
         """
             Get the central attraction coefficient μ.
+        
+            Returns:
+                mu central attraction coefficient (m³/s²), will throw an exception if gm PDriver has several values driven (in this
+                case the method :meth:`~org.orekit.forces.gravity.HolmesFeatherstoneAttractionModel.getMu` must be used.
+        
+        """
+        ...
+    @typing.overload
+    def getMu(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+        """
+            Get the central attraction coefficient μ.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): date at which mu wants to be known
         
             Returns:
                 mu central attraction coefficient (m³/s²)
@@ -276,9 +293,9 @@ class HolmesFeatherstoneAttractionModel(org.orekit.forces.AbstractForceModel, or
         """
         ...
 
-class LenseThirringRelativity(org.orekit.forces.AbstractForceModel):
+class LenseThirringRelativity(org.orekit.forces.ForceModel):
     """
-    public class LenseThirringRelativity extends :class:`~org.orekit.forces.AbstractForceModel`
+    public class LenseThirringRelativity extends :class:`~org.orekit.forces.gravity.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.ForceModel`
     
         Lense-Thirring post-Newtonian correction force due to general relativity.
     
@@ -299,9 +316,12 @@ class LenseThirringRelativity(org.orekit.forces.AbstractForceModel):
         """
             Compute acceleration.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
-                parameters (T[]): values of the force model parameters
+                parameters (T[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -314,9 +334,12 @@ class LenseThirringRelativity(org.orekit.forces.AbstractForceModel):
         """
             Compute acceleration.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
-                parameters (double[]): values of the force model parameters
+                parameters (double[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -327,6 +350,9 @@ class LenseThirringRelativity(org.orekit.forces.AbstractForceModel):
         """
             Check if force models depends on position only.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.dependsOnPositionOnly` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Returns:
                 true if force model depends on position only, false if it depends on velocity, either directly or due to a dependency on
                 attitude
@@ -334,14 +360,11 @@ class LenseThirringRelativity(org.orekit.forces.AbstractForceModel):
         
         """
         ...
-    def getEventsDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
-    _getFieldEventsDetectors__T = typing.TypeVar('_getFieldEventsDetectors__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldEventsDetectors(self, field: org.hipparchus.Field[_getFieldEventsDetectors__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventsDetectors__T]]: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
 
-class NewtonianAttraction(org.orekit.forces.AbstractForceModel):
+class NewtonianAttraction(org.orekit.forces.ForceModel):
     """
-    public class NewtonianAttraction extends :class:`~org.orekit.forces.AbstractForceModel`
+    public class NewtonianAttraction extends :class:`~org.orekit.forces.gravity.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.ForceModel`
     
         Force model for Newtonian central body attraction.
     """
@@ -363,9 +386,12 @@ class NewtonianAttraction(org.orekit.forces.AbstractForceModel):
         """
             Compute acceleration.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
-                parameters (T[]): values of the force model parameters
+                parameters (T[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -378,9 +404,12 @@ class NewtonianAttraction(org.orekit.forces.AbstractForceModel):
         """
             Compute acceleration.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
-                parameters (double[]): values of the force model parameters
+                parameters (double[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -392,6 +421,9 @@ class NewtonianAttraction(org.orekit.forces.AbstractForceModel):
     def addContribution(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_addContribution_0__T], fieldTimeDerivativesEquations: org.orekit.propagation.numerical.FieldTimeDerivativesEquations[_addContribution_0__T]) -> None:
         """
             Compute the contribution of the force model to the perturbing acceleration.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.addContribution` in interface :class:`~org.orekit.forces.ForceModel`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
@@ -408,6 +440,9 @@ class NewtonianAttraction(org.orekit.forces.AbstractForceModel):
             The default implementation simply adds the :meth:`~org.orekit.forces.ForceModel.acceleration` as a non-Keplerian
             acceleration.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.addContribution` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
                 adder (:class:`~org.orekit.propagation.numerical.TimeDerivativesEquations`): object where the contribution should be added
@@ -418,6 +453,9 @@ class NewtonianAttraction(org.orekit.forces.AbstractForceModel):
         """
             Check if force models depends on position only.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.dependsOnPositionOnly` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Returns:
                 true if force model depends on position only, false if it depends on velocity, either directly or due to a dependency on
                 attitude
@@ -425,14 +463,14 @@ class NewtonianAttraction(org.orekit.forces.AbstractForceModel):
         
         """
         ...
-    def getEventsDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
-    _getFieldEventsDetectors__T = typing.TypeVar('_getFieldEventsDetectors__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldEventsDetectors(self, field: org.hipparchus.Field[_getFieldEventsDetectors__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventsDetectors__T]]: ...
     _getMu_1__T = typing.TypeVar('_getMu_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getMu(self) -> float:
+    def getMu(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
         """
             Get the central attraction coefficient μ.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): date at which the mu value wants to be known
         
             Returns:
                 mu central attraction coefficient (m³/s²)
@@ -440,12 +478,13 @@ class NewtonianAttraction(org.orekit.forces.AbstractForceModel):
         """
         ...
     @typing.overload
-    def getMu(self, field: org.hipparchus.Field[_getMu_1__T]) -> _getMu_1__T:
+    def getMu(self, field: org.hipparchus.Field[_getMu_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getMu_1__T]) -> _getMu_1__T:
         """
             Get the central attraction coefficient μ.
         
             Parameters:
                 field (:class:`~org.orekit.forces.gravity.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the state belongs
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date at which the mu value wants to be known
         
             Returns:
                 mu central attraction coefficient (m³/s²)
@@ -455,9 +494,9 @@ class NewtonianAttraction(org.orekit.forces.AbstractForceModel):
         ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
 
-class OceanTides(org.orekit.forces.AbstractForceModel):
+class OceanTides(org.orekit.forces.ForceModel):
     """
-    public class OceanTides extends :class:`~org.orekit.forces.AbstractForceModel`
+    public class OceanTides extends :class:`~org.orekit.forces.gravity.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.ForceModel`
     
         Ocean tides force model.
     
@@ -498,9 +537,12 @@ class OceanTides(org.orekit.forces.AbstractForceModel):
         """
             Compute acceleration.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
-                parameters (T[]): values of the force model parameters
+                parameters (T[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -513,9 +555,12 @@ class OceanTides(org.orekit.forces.AbstractForceModel):
         """
             Compute acceleration.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
-                parameters (double[]): values of the force model parameters
+                parameters (double[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -526,6 +571,9 @@ class OceanTides(org.orekit.forces.AbstractForceModel):
         """
             Check if force models depends on position only.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.dependsOnPositionOnly` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Returns:
                 true if force model depends on position only, false if it depends on velocity, either directly or due to a dependency on
                 attitude
@@ -533,14 +581,21 @@ class OceanTides(org.orekit.forces.AbstractForceModel):
         
         """
         ...
-    def getEventsDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
-    _getFieldEventsDetectors__T = typing.TypeVar('_getFieldEventsDetectors__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldEventsDetectors(self, field: org.hipparchus.Field[_getFieldEventsDetectors__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventsDetectors__T]]: ...
+    @typing.overload
+    def getEventDetectors(self, list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
+    @typing.overload
+    def getEventDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
+    _getFieldEventDetectors_0__T = typing.TypeVar('_getFieldEventDetectors_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getFieldEventDetectors_1__T = typing.TypeVar('_getFieldEventDetectors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_0__T], list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_0__T]]: ...
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_1__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_1__T]]: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
 
-class Relativity(org.orekit.forces.AbstractForceModel):
+class Relativity(org.orekit.forces.ForceModel):
     """
-    public class Relativity extends :class:`~org.orekit.forces.AbstractForceModel`
+    public class Relativity extends :class:`~org.orekit.forces.gravity.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.ForceModel`
     
         Post-Newtonian correction force due to general relativity. The main effect is the precession of perigee by a few
         arcseconds per year.
@@ -558,9 +613,12 @@ class Relativity(org.orekit.forces.AbstractForceModel):
         """
             Compute acceleration.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
-                parameters (T[]): values of the force model parameters
+                parameters (T[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -573,9 +631,12 @@ class Relativity(org.orekit.forces.AbstractForceModel):
         """
             Compute acceleration.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
-                parameters (double[]): values of the force model parameters
+                parameters (double[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -586,6 +647,9 @@ class Relativity(org.orekit.forces.AbstractForceModel):
         """
             Check if force models depends on position only.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.dependsOnPositionOnly` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Returns:
                 true if force model depends on position only, false if it depends on velocity, either directly or due to a dependency on
                 attitude
@@ -593,14 +657,11 @@ class Relativity(org.orekit.forces.AbstractForceModel):
         
         """
         ...
-    def getEventsDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
-    _getFieldEventsDetectors__T = typing.TypeVar('_getFieldEventsDetectors__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldEventsDetectors(self, field: org.hipparchus.Field[_getFieldEventsDetectors__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventsDetectors__T]]: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
 
-class SingleBodyAbsoluteAttraction(org.orekit.forces.AbstractForceModel):
+class SingleBodyAbsoluteAttraction(org.orekit.forces.ForceModel):
     """
-    public class SingleBodyAbsoluteAttraction extends :class:`~org.orekit.forces.AbstractForceModel`
+    public class SingleBodyAbsoluteAttraction extends :class:`~org.orekit.forces.gravity.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.ForceModel`
     
         Body attraction force model computed as absolute acceleration towards a body.
     
@@ -647,9 +708,12 @@ class SingleBodyAbsoluteAttraction(org.orekit.forces.AbstractForceModel):
         """
             Compute acceleration.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
-                parameters (T[]): values of the force model parameters
+                parameters (T[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -662,9 +726,12 @@ class SingleBodyAbsoluteAttraction(org.orekit.forces.AbstractForceModel):
         """
             Compute acceleration.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
-                parameters (double[]): values of the force model parameters
+                parameters (double[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -675,6 +742,9 @@ class SingleBodyAbsoluteAttraction(org.orekit.forces.AbstractForceModel):
         """
             Check if force models depends on position only.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.dependsOnPositionOnly` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Returns:
                 true if force model depends on position only, false if it depends on velocity, either directly or due to a dependency on
                 attitude
@@ -682,14 +752,11 @@ class SingleBodyAbsoluteAttraction(org.orekit.forces.AbstractForceModel):
         
         """
         ...
-    def getEventsDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
-    _getFieldEventsDetectors__T = typing.TypeVar('_getFieldEventsDetectors__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldEventsDetectors(self, field: org.hipparchus.Field[_getFieldEventsDetectors__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventsDetectors__T]]: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
 
-class SingleBodyRelativeAttraction(org.orekit.forces.AbstractForceModel):
+class SingleBodyRelativeAttraction(org.orekit.forces.ForceModel):
     """
-    public class SingleBodyRelativeAttraction extends :class:`~org.orekit.forces.AbstractForceModel`
+    public class SingleBodyRelativeAttraction extends :class:`~org.orekit.forces.gravity.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.ForceModel`
     
         Body attraction force model computed as relative acceleration towards frame center.
     """
@@ -711,9 +778,12 @@ class SingleBodyRelativeAttraction(org.orekit.forces.AbstractForceModel):
         """
             Compute acceleration.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
-                parameters (T[]): values of the force model parameters
+                parameters (T[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -726,9 +796,12 @@ class SingleBodyRelativeAttraction(org.orekit.forces.AbstractForceModel):
         """
             Compute acceleration.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
-                parameters (double[]): values of the force model parameters
+                parameters (double[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -739,6 +812,9 @@ class SingleBodyRelativeAttraction(org.orekit.forces.AbstractForceModel):
         """
             Check if force models depends on position only.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.dependsOnPositionOnly` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Returns:
                 true if force model depends on position only, false if it depends on velocity, either directly or due to a dependency on
                 attitude
@@ -746,14 +822,11 @@ class SingleBodyRelativeAttraction(org.orekit.forces.AbstractForceModel):
         
         """
         ...
-    def getEventsDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
-    _getFieldEventsDetectors__T = typing.TypeVar('_getFieldEventsDetectors__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldEventsDetectors(self, field: org.hipparchus.Field[_getFieldEventsDetectors__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventsDetectors__T]]: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
 
-class SolidTides(org.orekit.forces.AbstractForceModel):
+class SolidTides(org.orekit.forces.ForceModel):
     """
-    public class SolidTides extends :class:`~org.orekit.forces.AbstractForceModel`
+    public class SolidTides extends :class:`~org.orekit.forces.gravity.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.ForceModel`
     
         Solid tides force model.
     
@@ -792,9 +865,12 @@ class SolidTides(org.orekit.forces.AbstractForceModel):
         """
             Compute acceleration.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
-                parameters (T[]): values of the force model parameters
+                parameters (T[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -807,9 +883,12 @@ class SolidTides(org.orekit.forces.AbstractForceModel):
         """
             Compute acceleration.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
-                parameters (double[]): values of the force model parameters
+                parameters (double[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -820,6 +899,9 @@ class SolidTides(org.orekit.forces.AbstractForceModel):
         """
             Check if force models depends on position only.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.dependsOnPositionOnly` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Returns:
                 true if force model depends on position only, false if it depends on velocity, either directly or due to a dependency on
                 attitude
@@ -827,14 +909,21 @@ class SolidTides(org.orekit.forces.AbstractForceModel):
         
         """
         ...
-    def getEventsDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
-    _getFieldEventsDetectors__T = typing.TypeVar('_getFieldEventsDetectors__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldEventsDetectors(self, field: org.hipparchus.Field[_getFieldEventsDetectors__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventsDetectors__T]]: ...
+    @typing.overload
+    def getEventDetectors(self, list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
+    @typing.overload
+    def getEventDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
+    _getFieldEventDetectors_0__T = typing.TypeVar('_getFieldEventDetectors_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getFieldEventDetectors_1__T = typing.TypeVar('_getFieldEventDetectors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_0__T], list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_0__T]]: ...
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_1__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_1__T]]: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
 
-class ThirdBodyAttraction(org.orekit.forces.AbstractForceModel):
+class ThirdBodyAttraction(org.orekit.forces.ForceModel):
     """
-    public class ThirdBodyAttraction extends :class:`~org.orekit.forces.AbstractForceModel`
+    public class ThirdBodyAttraction extends :class:`~org.orekit.forces.gravity.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.ForceModel`
     
         Third body attraction force model.
     """
@@ -856,9 +945,12 @@ class ThirdBodyAttraction(org.orekit.forces.AbstractForceModel):
         """
             Compute acceleration.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
-                parameters (T[]): values of the force model parameters
+                parameters (T[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -871,9 +963,12 @@ class ThirdBodyAttraction(org.orekit.forces.AbstractForceModel):
         """
             Compute acceleration.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
-                parameters (double[]): values of the force model parameters
+                parameters (double[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -884,6 +979,9 @@ class ThirdBodyAttraction(org.orekit.forces.AbstractForceModel):
         """
             Check if force models depends on position only.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.dependsOnPositionOnly` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Returns:
                 true if force model depends on position only, false if it depends on velocity, either directly or due to a dependency on
                 attitude
@@ -891,9 +989,6 @@ class ThirdBodyAttraction(org.orekit.forces.AbstractForceModel):
         
         """
         ...
-    def getEventsDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
-    _getFieldEventsDetectors__T = typing.TypeVar('_getFieldEventsDetectors__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldEventsDetectors(self, field: org.hipparchus.Field[_getFieldEventsDetectors__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventsDetectors__T]]: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
 
 class ThirdBodyAttractionEpoch(ThirdBodyAttraction):

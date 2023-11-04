@@ -1,8 +1,10 @@
 import java.lang
 import java.util
+import java.util.function
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.attitudes
 import org.orekit.data
+import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.ndm.adm
 import org.orekit.files.ccsds.section
@@ -19,9 +21,9 @@ import typing
 
 
 
-class Aem(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.section.Header, 'AemSegment'], org.orekit.files.general.AttitudeEphemerisFile[org.orekit.utils.TimeStampedAngularCoordinates, 'AemSegment']):
+class Aem(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.ndm.adm.AdmHeader, 'AemSegment'], org.orekit.files.general.AttitudeEphemerisFile[org.orekit.utils.TimeStampedAngularCoordinates, 'AemSegment']):
     """
-    public class Aem extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.section.Header`, :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemSegment`> implements :class:`~org.orekit.files.general.AttitudeEphemerisFile`<:class:`~org.orekit.utils.TimeStampedAngularCoordinates`, :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemSegment`>
+    public class Aem extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.ndm.adm.AdmHeader`, :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemSegment`> implements :class:`~org.orekit.files.general.AttitudeEphemerisFile`<:class:`~org.orekit.utils.TimeStampedAngularCoordinates`, :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemSegment`>
     
         This class stores all the information of the Attitude Ephemeris Message (AEM) File parsed by AEMParser. It contains the
         header and a list of Attitude Ephemerides Blocks each containing metadata and a list of attitude ephemerides data lines.
@@ -51,13 +53,7 @@ class Aem(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.secti
     
     
     """
-    def __init__(self, header: org.orekit.files.ccsds.section.Header, list: java.util.List['AemSegment'], iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext): ...
-    def checkTimeSystems(self) -> None:
-        """
-            Check that, according to the CCSDS standard, every AEMBlock has the same time system.
-        
-        """
-        ...
+    def __init__(self, admHeader: org.orekit.files.ccsds.ndm.adm.AdmHeader, list: java.util.List['AemSegment'], iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext): ...
     def getSatellites(self) -> java.util.Map[str, 'AemSatelliteEphemeris']: ...
 
 class AemData(org.orekit.files.ccsds.section.CommentsContainer, org.orekit.files.ccsds.section.Data):
@@ -102,7 +98,7 @@ class AemMetadata(org.orekit.files.ccsds.ndm.adm.AdmMetadata):
         
         """
         ...
-    def getEndpoints(self) -> org.orekit.files.ccsds.ndm.adm.AttitudeEndoints:
+    def getEndpoints(self) -> org.orekit.files.ccsds.ndm.adm.AttitudeEndpoints:
         """
             Get the endpoints (i.e. frames A, B and their relationship).
         
@@ -118,6 +114,19 @@ class AemMetadata(org.orekit.files.ccsds.ndm.adm.AdmMetadata):
         
             Returns:
                 rotation order
+        
+        
+        """
+        ...
+    def getFrameAngvelFrame(self) -> org.orekit.files.ccsds.definitions.FrameFacade:
+        """
+            Get frame in which angular velocities are specified.
+        
+            Returns:
+                frame in which angular velocities are specified
+        
+            Since:
+                12.0
         
         
         """
@@ -217,7 +226,7 @@ class AemMetadata(org.orekit.files.ccsds.ndm.adm.AdmMetadata):
             Get the flag for the placement of the quaternion QC in the attitude data.
         
             Returns:
-                true if QC is the first element in the attitude data, null if not initialized
+                true if QC is the first element in the attitude data, false if not initialized
         
         
         """
@@ -237,10 +246,23 @@ class AemMetadata(org.orekit.files.ccsds.ndm.adm.AdmMetadata):
         ...
     def rateFrameIsA(self) -> bool:
         """
-            Check if rates are specified in :meth:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndoints.getFrameA`.
+            Check if rates are specified in :meth:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndpoints.getFrameA`.
         
             Returns:
-                true if rates are specified in :meth:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndoints.getFrameA`
+                true if rates are specified in :meth:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndpoints.getFrameA`
+        
+        
+        """
+        ...
+    def setAngvelFrame(self, frameFacade: org.orekit.files.ccsds.definitions.FrameFacade) -> None:
+        """
+            Set frame in which angular velocities are specified.
+        
+            Parameters:
+                angvelFrame (:class:`~org.orekit.files.ccsds.definitions.FrameFacade`): frame in which angular velocities are specified
+        
+            Since:
+                12.0
         
         
         """
@@ -300,7 +322,7 @@ class AemMetadata(org.orekit.files.ccsds.ndm.adm.AdmMetadata):
             Set the frame in which rates are specified.
         
             Parameters:
-                rateFrameIsA (boolean): if true, rates are specified in :meth:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndoints.getFrameA`
+                rateFrameIsA (boolean): if true, rates are specified in :meth:`~org.orekit.files.ccsds.ndm.adm.AttitudeEndpoints.getFrameA`
         
         
         """
@@ -387,6 +409,7 @@ class AemMetadataKey(java.lang.Enum['AemMetadataKey']):
     QUATERNION_TYPE: typing.ClassVar['AemMetadataKey'] = ...
     EULER_ROT_SEQ: typing.ClassVar['AemMetadataKey'] = ...
     RATE_FRAME: typing.ClassVar['AemMetadataKey'] = ...
+    ANGVEL_FRAME: typing.ClassVar['AemMetadataKey'] = ...
     INTERPOLATION_METHOD: typing.ClassVar['AemMetadataKey'] = ...
     INTERPOLATION_DEGREE: typing.ClassVar['AemMetadataKey'] = ...
     def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, aemMetadata: AemMetadata) -> bool:
@@ -461,7 +484,7 @@ class AemParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Aem, 'AemParser'], org.
         Since:
             10.2
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, int: int, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior): ...
+    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, int: int, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]): ...
     def build(self) -> Aem:
         """
             Build the file from parsed entries.
@@ -518,7 +541,7 @@ class AemParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Aem, 'AemParser'], org.
         
         """
         ...
-    def getHeader(self) -> org.orekit.files.ccsds.section.Header:
+    def getHeader(self) -> org.orekit.files.ccsds.ndm.adm.AdmHeader:
         """
             Get file header to fill.
         
@@ -809,9 +832,9 @@ class AemSegment(org.orekit.files.ccsds.section.Segment[AemMetadata, AemData], o
         """
         ...
 
-class AemWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[org.orekit.files.ccsds.section.Header, AemSegment, Aem]):
+class AemWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[org.orekit.files.ccsds.ndm.adm.AdmHeader, AemSegment, Aem]):
     """
-    public class AemWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.section.Header`, :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemSegment`, :class:`~org.orekit.files.ccsds.ndm.adm.aem.Aem`>
+    public class AemWriter extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractMessageWriter`<:class:`~org.orekit.files.ccsds.ndm.adm.AdmHeader`, :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemSegment`, :class:`~org.orekit.files.ccsds.ndm.adm.aem.Aem`>
     
         A writer for Attitude Ephemeris Messsage (AEM) files.
     
@@ -822,7 +845,7 @@ class AemWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[or
         The AEM header and metadata used by this writer are described in the following tables. Many metadata items are optional
         or have default values so they do not need to be specified. At a minimum the user must supply those values that are
         required and for which no default exits: :meth:`~org.orekit.files.ccsds.ndm.adm.AdmMetadataKey.OBJECT_NAME`,
-        :meth:`~org.orekit.files.ccsds.ndm.adm.AdmMetadataKey.OBJECT_ID`,
+        :meth:`~org.orekit.files.ccsds.ndm.adm.AdmCommonMetadataKey.OBJECT_ID`,
         :meth:`~org.orekit.files.ccsds.ndm.adm.aem.AemMetadataKey.START_TIME` and
         :meth:`~org.orekit.files.ccsds.ndm.adm.aem.AemMetadataKey.STOP_TIME`. The usage column in the table indicates where the
         metadata item is used, either in the AEM header or in the metadata section at the start of an AEM attitude segment.
@@ -871,7 +894,6 @@ class AemWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[or
     
     """
     def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate): ...
-    def writeSegmentContent(self, generator: org.orekit.files.ccsds.utils.generation.Generator, double: float, aemSegment: AemSegment) -> None: ...
 
 class AttitudeEntryKey(java.lang.Enum['AttitudeEntryKey']):
     """
@@ -883,16 +905,23 @@ class AttitudeEntryKey(java.lang.Enum['AttitudeEntryKey']):
             11.0
     """
     quaternionState: typing.ClassVar['AttitudeEntryKey'] = ...
+    quaternionEphemeris: typing.ClassVar['AttitudeEntryKey'] = ...
     quaternionDerivative: typing.ClassVar['AttitudeEntryKey'] = ...
     quaternionEulerRate: typing.ClassVar['AttitudeEntryKey'] = ...
+    quaternionAngVel: typing.ClassVar['AttitudeEntryKey'] = ...
     eulerAngle: typing.ClassVar['AttitudeEntryKey'] = ...
     eulerAngleRate: typing.ClassVar['AttitudeEntryKey'] = ...
+    eulerAngleDerivative: typing.ClassVar['AttitudeEntryKey'] = ...
+    eulerAngleAngVel: typing.ClassVar['AttitudeEntryKey'] = ...
     spin: typing.ClassVar['AttitudeEntryKey'] = ...
     spinNutation: typing.ClassVar['AttitudeEntryKey'] = ...
+    spinNutationMom: typing.ClassVar['AttitudeEntryKey'] = ...
     quaternion: typing.ClassVar['AttitudeEntryKey'] = ...
     quaternionRate: typing.ClassVar['AttitudeEntryKey'] = ...
+    quaternionDot: typing.ClassVar['AttitudeEntryKey'] = ...
     rotationAngles: typing.ClassVar['AttitudeEntryKey'] = ...
     rotationRates: typing.ClassVar['AttitudeEntryKey'] = ...
+    angVel: typing.ClassVar['AttitudeEntryKey'] = ...
     EPOCH: typing.ClassVar['AttitudeEntryKey'] = ...
     Q1: typing.ClassVar['AttitudeEntryKey'] = ...
     Q2: typing.ClassVar['AttitudeEntryKey'] = ...
@@ -902,6 +931,15 @@ class AttitudeEntryKey(java.lang.Enum['AttitudeEntryKey']):
     Q2_DOT: typing.ClassVar['AttitudeEntryKey'] = ...
     Q3_DOT: typing.ClassVar['AttitudeEntryKey'] = ...
     QC_DOT: typing.ClassVar['AttitudeEntryKey'] = ...
+    ANGVEL_X: typing.ClassVar['AttitudeEntryKey'] = ...
+    ANGVEL_Y: typing.ClassVar['AttitudeEntryKey'] = ...
+    ANGVEL_Z: typing.ClassVar['AttitudeEntryKey'] = ...
+    ANGLE_1: typing.ClassVar['AttitudeEntryKey'] = ...
+    ANGLE_2: typing.ClassVar['AttitudeEntryKey'] = ...
+    ANGLE_3: typing.ClassVar['AttitudeEntryKey'] = ...
+    ANGLE_1_DOT: typing.ClassVar['AttitudeEntryKey'] = ...
+    ANGLE_2_DOT: typing.ClassVar['AttitudeEntryKey'] = ...
+    ANGLE_3_DOT: typing.ClassVar['AttitudeEntryKey'] = ...
     X_ANGLE: typing.ClassVar['AttitudeEntryKey'] = ...
     Y_ANGLE: typing.ClassVar['AttitudeEntryKey'] = ...
     Z_ANGLE: typing.ClassVar['AttitudeEntryKey'] = ...
@@ -915,6 +953,9 @@ class AttitudeEntryKey(java.lang.Enum['AttitudeEntryKey']):
     NUTATION: typing.ClassVar['AttitudeEntryKey'] = ...
     NUTATION_PER: typing.ClassVar['AttitudeEntryKey'] = ...
     NUTATION_PHASE: typing.ClassVar['AttitudeEntryKey'] = ...
+    MOMENTUM_ALPHA: typing.ClassVar['AttitudeEntryKey'] = ...
+    MOMENTUM_DELTA: typing.ClassVar['AttitudeEntryKey'] = ...
+    NUTATION_VEL: typing.ClassVar['AttitudeEntryKey'] = ...
     def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, attitudeEntry: 'AttitudeEntry') -> bool:
         """
             Process an token.
@@ -983,7 +1024,7 @@ class AttitudeWriter(org.orekit.files.general.AttitudeEphemerisFileWriter):
         Since:
             11.0
     """
-    def __init__(self, aemWriter: AemWriter, header: org.orekit.files.ccsds.section.Header, aemMetadata: AemMetadata, fileFormat: org.orekit.files.ccsds.utils.FileFormat, string: str, int: int): ...
+    def __init__(self, aemWriter: AemWriter, admHeader: org.orekit.files.ccsds.ndm.adm.AdmHeader, aemMetadata: AemMetadata, fileFormat: org.orekit.files.ccsds.utils.FileFormat, string: str, double: float, int: int): ...
     _write_0__C = typing.TypeVar('_write_0__C', bound=org.orekit.utils.TimeStampedAngularCoordinates)  # <C>
     _write_0__S = typing.TypeVar('_write_0__S', bound=org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment)  # <S>
     _write_1__C = typing.TypeVar('_write_1__C', bound=org.orekit.utils.TimeStampedAngularCoordinates)  # <C>
@@ -1031,7 +1072,7 @@ class StreamingAemWriter(java.lang.AutoCloseable):
             :class:`~org.orekit.files.ccsds.ndm.adm.aem.https:.public.ccsds.org.Pubs.504x0b1c1.pdf`,
             :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemWriter`
     """
-    def __init__(self, generator: org.orekit.files.ccsds.utils.generation.Generator, aemWriter: AemWriter, header: org.orekit.files.ccsds.section.Header, aemMetadata: AemMetadata): ...
+    def __init__(self, generator: org.orekit.files.ccsds.utils.generation.Generator, aemWriter: AemWriter, admHeader: org.orekit.files.ccsds.ndm.adm.AdmHeader, aemMetadata: AemMetadata): ...
     def close(self) -> None: ...
     def newSegment(self) -> 'StreamingAemWriter.SegmentWriter':
         """

@@ -29,7 +29,7 @@ class AklToussaintHeuristic:
 
 class ConvexHull2D(org.hipparchus.geometry.hull.ConvexHull[org.hipparchus.geometry.euclidean.twod.Euclidean2D, org.hipparchus.geometry.euclidean.twod.Vector2D], java.io.Serializable):
     """
-    public class ConvexHull2D extends :class:`~org.hipparchus.geometry.euclidean.twod.hull.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.hull.ConvexHull`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`,:class:`~org.hipparchus.geometry.euclidean.twod.Vector2D`>, :class:`~org.hipparchus.geometry.euclidean.twod.hull.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public class ConvexHull2D extends :class:`~org.hipparchus.geometry.euclidean.twod.hull.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.geometry.hull.ConvexHull`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`, :class:`~org.hipparchus.geometry.euclidean.twod.Vector2D`>, :class:`~org.hipparchus.geometry.euclidean.twod.hull.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         This class represents a convex hull in an two-dimensional euclidean space.
     
@@ -65,7 +65,7 @@ class ConvexHull2D(org.hipparchus.geometry.hull.ConvexHull[org.hipparchus.geomet
 
 class ConvexHullGenerator2D(org.hipparchus.geometry.hull.ConvexHullGenerator[org.hipparchus.geometry.euclidean.twod.Euclidean2D, org.hipparchus.geometry.euclidean.twod.Vector2D]):
     """
-    public interface ConvexHullGenerator2D extends :class:`~org.hipparchus.geometry.hull.ConvexHullGenerator`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`,:class:`~org.hipparchus.geometry.euclidean.twod.Vector2D`>
+    public interface ConvexHullGenerator2D extends :class:`~org.hipparchus.geometry.hull.ConvexHullGenerator`<:class:`~org.hipparchus.geometry.euclidean.twod.Euclidean2D`, :class:`~org.hipparchus.geometry.euclidean.twod.Vector2D`>
     
         Interface for convex hull generators in the two-dimensional euclidean space.
     """

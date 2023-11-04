@@ -30,6 +30,7 @@ class ConfidenceInterval:
     def __init__(self, double: float, double2: float, double3: float): ...
     def getConfidenceLevel(self) -> float:
         """
+            Get asserted probability that the interval contains the population parameter.
         
             Returns:
                 the asserted probability that the interval contains the population parameter
@@ -39,6 +40,7 @@ class ConfidenceInterval:
         ...
     def getLowerBound(self) -> float:
         """
+            Get lower endpoint of the interval.
         
             Returns:
                 the lower endpoint of the interval
@@ -48,6 +50,7 @@ class ConfidenceInterval:
         ...
     def getUpperBound(self) -> float:
         """
+            Get upper endpoint of the interval.
         
             Returns:
                 the upper endpoint of the interval
@@ -57,6 +60,7 @@ class ConfidenceInterval:
         ...
     def toString(self) -> str:
         """
+            Get String representation of the confidence interval.
         
             Overrides:
                 :meth:`~org.hipparchus.stat.interval.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in

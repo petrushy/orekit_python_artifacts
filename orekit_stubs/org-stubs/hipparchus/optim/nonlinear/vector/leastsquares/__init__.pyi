@@ -393,13 +393,124 @@ class ParameterValidator:
         ...
 
 class AbstractEvaluation(LeastSquaresProblem.Evaluation):
+    """
+    public abstract class AbstractEvaluation extends :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation`
+    
+        An implementation of :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation` that is
+        designed for extension. All of the methods implemented here use the methods that are left unimplemented.
+    """
     def __init__(self, int: int): ...
-    def getChiSquare(self) -> float: ...
-    def getCost(self) -> float: ...
-    def getCovariances(self, double: float) -> org.hipparchus.linear.RealMatrix: ...
-    def getRMS(self) -> float: ...
-    def getReducedChiSquare(self, int: int) -> float: ...
-    def getSigma(self, double: float) -> org.hipparchus.linear.RealVector: ...
+    def getChiSquare(self) -> float:
+        """
+            Get the sum of the squares of the residuals.
+        
+            Specified by:
+                :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation.getChiSquare` in
+                interface :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation`
+        
+            Returns:
+                the cost.
+        
+            Also see:
+                :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation.getResiduals`,
+                :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation.getCost`
+        
+        
+        """
+        ...
+    def getCost(self) -> float:
+        """
+            Get the cost. It is the square-root of the
+            :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation.getChiSquare`.
+        
+            Specified by:
+                :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation.getCost` in
+                interface :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation`
+        
+            Returns:
+                the cost.
+        
+            Also see:
+                :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation.getResiduals`,
+                :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation.getChiSquare`
+        
+        
+        """
+        ...
+    def getCovariances(self, double: float) -> org.hipparchus.linear.RealMatrix:
+        """
+            Get the covariance matrix of the optimized parameters.
+        
+        
+            Note that this operation involves the inversion of the :code:`J :sup:`T` J` matrix, where :code:`J` is the Jacobian
+            matrix. The :code:`threshold` parameter is a way for the caller to specify that the result of this computation should be
+            considered meaningless, and thus trigger an exception.
+        
+            Specified by:
+                :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation.getCovariances` in
+                interface :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation`
+        
+            Parameters:
+                threshold (double): Singularity threshold.
+        
+            Returns:
+                the covariance matrix.
+        
+        
+        """
+        ...
+    def getRMS(self) -> float:
+        """
+            Get the normalized cost. It is the square-root of the sum of squared of the residuals, divided by the number of
+            measurements.
+        
+            Specified by:
+                :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation.getRMS` in
+                interface :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation`
+        
+            Returns:
+                the cost.
+        
+        
+        """
+        ...
+    def getReducedChiSquare(self, int: int) -> float:
+        """
+            Get the reduced chi-square.
+        
+            Specified by:
+                :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation.getReducedChiSquare` in
+                interface :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation`
+        
+            Parameters:
+                numberOfFittedParameters (int): Number of fitted parameters.
+        
+            Returns:
+                the sum of the squares of the residuals divided by the number of degrees of freedom.
+        
+        
+        """
+        ...
+    def getSigma(self, double: float) -> org.hipparchus.linear.RealVector:
+        """
+            Get an estimate of the standard deviation of the parameters. The returned values are the square root of the diagonal
+            coefficients of the covariance matrix, :code:`sd(a[i]) ~= sqrt(C[i][i])`, where :code:`a[i]` is the optimized value of
+            the :code:`i`-th parameter, and :code:`C` is the covariance matrix.
+        
+            Specified by:
+                :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation.getSigma` in
+                interface :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation`
+        
+            Parameters:
+                covarianceSingularityThreshold (double): Singularity threshold (see
+                    :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation.getCovariances`).
+        
+            Returns:
+                an estimate of the standard deviation of the optimized parameters
+        
+        
+        """
+        ...
 
 class LeastSquaresAdapter(LeastSquaresProblem):
     """
@@ -418,7 +529,8 @@ class LeastSquaresAdapter(LeastSquaresProblem):
                 interface :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem`
         
             Parameters:
-                point (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.www.hipparchus.org.hipparchus`): 
+                point (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.www.hipparchus.org.hipparchus`): the parameter values.
+        
             Returns:
                 the model's value and derivative at the given point.
         
@@ -556,16 +668,97 @@ class ValueAndJacobianFunction(MultivariateJacobianFunction):
         ...
 
 class GaussNewtonOptimizer(LeastSquaresOptimizer):
+    """
+    public class GaussNewtonOptimizer extends :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer`
+    
+        Gauss-Newton least-squares solver.
+    
+        This class solve a least-square problem by solving the normal equations of the linearized problem at each iteration.
+        Either LU decomposition or Cholesky decomposition can be used to solve the normal equations, or QR decomposition or SVD
+        decomposition can be used to solve the linear system. Cholesky/LU decomposition is faster but QR decomposition is more
+        robust for difficult problems, and SVD can compute a solution for rank-deficient problems.
+    """
     @typing.overload
     def __init__(self): ...
     @typing.overload
     def __init__(self, matrixDecomposer: org.hipparchus.linear.MatrixDecomposer, boolean: bool): ...
-    def getDecomposer(self) -> org.hipparchus.linear.MatrixDecomposer: ...
-    def isFormNormalEquations(self) -> bool: ...
-    def optimize(self, leastSquaresProblem: LeastSquaresProblem) -> LeastSquaresOptimizer.Optimum: ...
-    def toString(self) -> str: ...
-    def withDecomposer(self, matrixDecomposer: org.hipparchus.linear.MatrixDecomposer) -> 'GaussNewtonOptimizer': ...
-    def withFormNormalEquations(self, boolean: bool) -> 'GaussNewtonOptimizer': ...
+    def getDecomposer(self) -> org.hipparchus.linear.MatrixDecomposer:
+        """
+            Get the matrix decomposition algorithm.
+        
+            Returns:
+                the decomposition algorithm.
+        
+        
+        """
+        ...
+    def isFormNormalEquations(self) -> bool:
+        """
+            Get if the normal equations are explicitly formed.
+        
+            Returns:
+                if the normal equations should be explicitly formed. If :code:`true` then :code:`decomposer` is used to solve J :sup:`T`
+                Jx=J :sup:`T` r, otherwise :code:`decomposer` is used to solve Jx=r.
+        
+        
+        """
+        ...
+    def optimize(self, leastSquaresProblem: LeastSquaresProblem) -> LeastSquaresOptimizer.Optimum:
+        """
+            Solve the non-linear least squares problem.
+        
+            Specified by:
+                :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer.optimize` in
+                interface :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer`
+        
+            Parameters:
+                lsp (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem`): the problem definition, including model function and convergence criteria.
+        
+            Returns:
+                The optimum.
+        
+        
+        """
+        ...
+    def toString(self) -> str:
+        """
+        
+            Overrides:
+                
+                meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+        
+        
+        """
+        ...
+    def withDecomposer(self, matrixDecomposer: org.hipparchus.linear.MatrixDecomposer) -> 'GaussNewtonOptimizer':
+        """
+            Configure the matrix decomposition algorithm.
+        
+            Parameters:
+                newDecomposer (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.www.hipparchus.org.hipparchus`): the decomposition algorithm to use.
+        
+            Returns:
+                a new instance.
+        
+        
+        """
+        ...
+    def withFormNormalEquations(self, boolean: bool) -> 'GaussNewtonOptimizer':
+        """
+            Configure if the normal equations should be explicitly formed.
+        
+            Parameters:
+                newFormNormalEquations (boolean): whether the normal equations should be explicitly formed. If :code:`true` then :code:`decomposer` is used to solve J
+                    :sup:`T` Jx=J :sup:`T` r, otherwise :code:`decomposer` is used to solve Jx=r. If :code:`decomposer` can only solve
+                    square systems then this parameter should be :code:`true`.
+        
+            Returns:
+                a new instance.
+        
+        
+        """
+        ...
 
 class LevenbergMarquardtOptimizer(LeastSquaresOptimizer):
     """
@@ -589,8 +782,34 @@ class LevenbergMarquardtOptimizer(LeastSquaresOptimizer):
           - Kenneth E. Hillstrom
           - Jorge J. More
     
+    
         The redistribution policy for MINPACK is available `here <http://www.netlib.org/minpack/disclaimer>`, for convenience,
         it is reproduced below.
+    
+            Minpack Copyright Notice (1999) University of Chicago. All rights reserved
+    
+            Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
+            following conditions are met:
+    
+              1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following
+                disclaimer.
+              2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following
+                disclaimer in the documentation and/or other materials provided with the distribution.
+              3.  The end-user documentation included with the redistribution, if any, must include the following acknowledgment:
+                :code:`This product includes software developed by the University of Chicago, as Operator of Argonne National
+                Laboratory.` Alternately, this acknowledgment may appear in the software itself, if and wherever such third-party
+                acknowledgments normally appear.
+              4.  **WARRANTY DISCLAIMER. THE SOFTWARE IS SUPPLIED "AS IS" WITHOUT WARRANTY OF ANY KIND. THE COPYRIGHT HOLDER, THE UNITED
+                STATES, THE UNITED STATES DEPARTMENT OF ENERGY, AND THEIR EMPLOYEES: (1) DISCLAIM ANY WARRANTIES, EXPRESS OR IMPLIED,
+                INCLUDING BUT NOT LIMITED TO ANY IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE OR
+                NON-INFRINGEMENT, (2) DO NOT ASSUME ANY LEGAL LIABILITY OR RESPONSIBILITY FOR THE ACCURACY, COMPLETENESS, OR USEFULNESS
+                OF THE SOFTWARE, (3) DO NOT REPRESENT THAT USE OF THE SOFTWARE WOULD NOT INFRINGE PRIVATELY OWNED RIGHTS, (4) DO NOT
+                WARRANT THAT THE SOFTWARE WILL FUNCTION UNINTERRUPTED, THAT IT IS ERROR-FREE OR THAT ANY ERRORS WILL BE CORRECTED.**
+              5.  **LIMITATION OF LIABILITY. IN NO EVENT WILL THE COPYRIGHT HOLDER, THE UNITED STATES, THE UNITED STATES DEPARTMENT OF
+                ENERGY, OR THEIR EMPLOYEES: BE LIABLE FOR ANY INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL OR PUNITIVE DAMAGES OF ANY
+                KIND OR NATURE, INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS OR LOSS OF DATA, FOR ANY REASON WHATSOEVER, WHETHER SUCH
+                LIABILITY IS ASSERTED ON THE BASIS OF CONTRACT, TORT (INCLUDING NEGLIGENCE OR STRICT LIABILITY), OR OTHERWISE, EVEN IF
+                ANY OF SAID PARTIES HAS BEEN WARNED OF THE POSSIBILITY OF SUCH LOSS OR DAMAGES.**
     """
     @typing.overload
     def __init__(self): ...
@@ -680,6 +899,7 @@ class LevenbergMarquardtOptimizer(LeastSquaresOptimizer):
         ...
     def withCostRelativeTolerance(self, double: float) -> 'LevenbergMarquardtOptimizer':
         """
+            Build new instance with cost relative tolerance.
         
             Parameters:
                 newCostRelativeTolerance (double): Desired relative error in the sum of squares.
@@ -692,6 +912,7 @@ class LevenbergMarquardtOptimizer(LeastSquaresOptimizer):
         ...
     def withInitialStepBoundFactor(self, double: float) -> 'LevenbergMarquardtOptimizer':
         """
+            Build new instance with initial step bound factor.
         
             Parameters:
                 newInitialStepBoundFactor (double): Positive input variable used in determining the initial step bound. This bound is set to the product of
@@ -707,7 +928,7 @@ class LevenbergMarquardtOptimizer(LeastSquaresOptimizer):
         ...
     def withOrthoTolerance(self, double: float) -> 'LevenbergMarquardtOptimizer':
         """
-            Modifies the given parameter.
+            Build new instance with ortho tolerance.
         
             Parameters:
                 newOrthoTolerance (double): Desired max cosine on the orthogonality between the function vector and the columns of the Jacobian.
@@ -720,6 +941,7 @@ class LevenbergMarquardtOptimizer(LeastSquaresOptimizer):
         ...
     def withParameterRelativeTolerance(self, double: float) -> 'LevenbergMarquardtOptimizer':
         """
+            Build new instance with parameter relative tolerance.
         
             Parameters:
                 newParRelativeTolerance (double): Desired relative error in the approximate solution parameters.
@@ -732,6 +954,7 @@ class LevenbergMarquardtOptimizer(LeastSquaresOptimizer):
         ...
     def withRankingThreshold(self, double: float) -> 'LevenbergMarquardtOptimizer':
         """
+            Build new instance with ranking threshold.
         
             Parameters:
                 newQRRankingThreshold (double): Desired threshold for QR ranking. If the squared norm of a column vector is smaller or equal to this threshold during QR
@@ -745,22 +968,175 @@ class LevenbergMarquardtOptimizer(LeastSquaresOptimizer):
         ...
 
 class SequentialGaussNewtonOptimizer(LeastSquaresOptimizer):
+    """
+    public class SequentialGaussNewtonOptimizer extends :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer`
+    
+        Sequential Gauss-Newton least-squares solver.
+    
+        This class solve a least-square problem by solving the normal equations of the linearized problem at each iteration.
+    """
     @typing.overload
     def __init__(self): ...
     @typing.overload
     def __init__(self, matrixDecomposer: org.hipparchus.linear.MatrixDecomposer, boolean: bool, evaluation: LeastSquaresProblem.Evaluation): ...
-    def getDecomposer(self) -> org.hipparchus.linear.MatrixDecomposer: ...
-    def getOldEvaluation(self) -> LeastSquaresProblem.Evaluation: ...
-    def isFormNormalEquations(self) -> bool: ...
-    def optimize(self, leastSquaresProblem: LeastSquaresProblem) -> LeastSquaresOptimizer.Optimum: ...
-    def toString(self) -> str: ...
+    def getDecomposer(self) -> org.hipparchus.linear.MatrixDecomposer:
+        """
+            Get the matrix decomposition algorithm.
+        
+            Returns:
+                the decomposition algorithm.
+        
+        
+        """
+        ...
+    def getOldEvaluation(self) -> LeastSquaresProblem.Evaluation:
+        """
+            Get the previous evaluation used by the optimizer.
+        
+            Returns:
+                the previous evaluation.
+        
+        
+        """
+        ...
+    def isFormNormalEquations(self) -> bool:
+        """
+            Get if the normal equations are explicitly formed.
+        
+            Returns:
+                if the normal equations should be explicitly formed. If :code:`true` then :code:`decomposer` is used to solve J :sup:`T`
+                Jx=J :sup:`T` r, otherwise :code:`decomposer` is used to solve Jx=r.
+        
+        
+        """
+        ...
+    def optimize(self, leastSquaresProblem: LeastSquaresProblem) -> LeastSquaresOptimizer.Optimum:
+        """
+            Solve the non-linear least squares problem.
+        
+            Specified by:
+                :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer.optimize` in
+                interface :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer`
+        
+            Parameters:
+                lsp (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem`): the problem definition, including model function and convergence criteria.
+        
+            Returns:
+                The optimum.
+        
+        
+        """
+        ...
+    def toString(self) -> str:
+        """
+        
+            Overrides:
+                
+                meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+        
+        
+        """
+        ...
     @typing.overload
-    def withAPrioriData(self, realVector: org.hipparchus.linear.RealVector, realMatrix: org.hipparchus.linear.RealMatrix) -> 'SequentialGaussNewtonOptimizer': ...
+    def withAPrioriData(self, realVector: org.hipparchus.linear.RealVector, realMatrix: org.hipparchus.linear.RealMatrix) -> 'SequentialGaussNewtonOptimizer':
+        """
+            Configure from a priori state and covariance.
+        
+            This building method generates a fake evaluation and calls
+            :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer.withEvaluation`, so either
+            :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer.withAPrioriData` or
+            :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer.withEvaluation` should be
+            called, but not both as the last one called will override the previous one.
+        
+            A Cholesky decomposition is used to compute the weighted jacobian from the a priori covariance. This method uses the
+            default thresholds of the decomposition.
+        
+            Parameters:
+                aPrioriState (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.www.hipparchus.org.hipparchus`): a priori state to use
+                aPrioriCovariance (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.www.hipparchus.org.hipparchus`): a priori covariance to use
+        
+            Returns:
+                a new instance.
+        
+            Also see:
+                :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer.withAPrioriData`
+        
+            Configure from a priori state and covariance.
+        
+            This building method generates a fake evaluation and calls
+            :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer.withEvaluation`, so either
+            :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer.withAPrioriData` or
+            :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer.withEvaluation` should be
+            called, but not both as the last one called will override the previous one.
+        
+            A Cholesky decomposition is used to compute the weighted jacobian from the a priori covariance.
+        
+            Parameters:
+                aPrioriState (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.www.hipparchus.org.hipparchus`): a priori state to use
+                aPrioriCovariance (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.www.hipparchus.org.hipparchus`): a priori covariance to use
+                relativeSymmetryThreshold (double):             Cholesky decomposition threshold above which off-diagonal elements are considered too different and matrix not symmetric
+                absolutePositivityThreshold (double): Cholesky decomposition threshold below which diagonal elements are considered null and matrix not positive definite
+        
+            Returns:
+                a new instance.
+        
+            Since:
+                2.3
+        
+        
+        """
+        ...
     @typing.overload
     def withAPrioriData(self, realVector: org.hipparchus.linear.RealVector, realMatrix: org.hipparchus.linear.RealMatrix, double: float, double2: float) -> 'SequentialGaussNewtonOptimizer': ...
-    def withDecomposer(self, matrixDecomposer: org.hipparchus.linear.MatrixDecomposer) -> 'SequentialGaussNewtonOptimizer': ...
-    def withEvaluation(self, evaluation: LeastSquaresProblem.Evaluation) -> 'SequentialGaussNewtonOptimizer': ...
-    def withFormNormalEquations(self, boolean: bool) -> 'SequentialGaussNewtonOptimizer': ...
+    def withDecomposer(self, matrixDecomposer: org.hipparchus.linear.MatrixDecomposer) -> 'SequentialGaussNewtonOptimizer':
+        """
+            Configure the matrix decomposition algorithm.
+        
+            Parameters:
+                newDecomposer (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.https:.www.hipparchus.org.hipparchus`): the decomposition algorithm to use.
+        
+            Returns:
+                a new instance.
+        
+        
+        """
+        ...
+    def withEvaluation(self, evaluation: LeastSquaresProblem.Evaluation) -> 'SequentialGaussNewtonOptimizer':
+        """
+            Configure the previous evaluation used by the optimizer.
+        
+            This building method uses a complete evaluation to retrieve a priori data. Note that as
+            :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer.withAPrioriData` generates a
+            fake evaluation and calls this method, either
+            :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer.withAPrioriData` or
+            :meth:`~org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer.withEvaluation` should be
+            called, but not both as the last one called will override the previous one.
+        
+            Parameters:
+                previousEvaluation (:class:`~org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation`): the previous evaluation used by the optimizer.
+        
+            Returns:
+                a new instance.
+        
+        
+        """
+        ...
+    def withFormNormalEquations(self, boolean: bool) -> 'SequentialGaussNewtonOptimizer':
+        """
+            Configure if the normal equations should be explicitly formed.
+        
+            Parameters:
+                newFormNormalEquations (boolean): whether the normal equations should be explicitly formed. If :code:`true` then :code:`decomposer` is used to solve J
+                    :sup:`T` Jx=J :sup:`T` r, otherwise :code:`decomposer` is used to solve Jx=r. If :code:`decomposer` can only solve
+                    square systems then this parameter should be :code:`true`.
+        
+            Returns:
+                a new instance.
+        
+        
+        """
+        ...
 
 
 class __module_protocol__(typing.Protocol):

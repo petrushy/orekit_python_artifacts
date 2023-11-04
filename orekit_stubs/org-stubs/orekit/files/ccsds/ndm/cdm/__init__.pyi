@@ -1,5 +1,6 @@
 import java.lang
 import java.util
+import java.util.function
 import org.hipparchus.geometry.euclidean.threed
 import org.hipparchus.linear
 import org.orekit.data
@@ -398,7 +399,7 @@ class AdditionalParameters(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
         
         """
         ...
-    def getPeriapsissAltitude(self) -> float:
+    def getPeriapsisAltitude(self) -> float:
         """
             Get the distance of the closest point in the objects orbit above the equatorial radius of the central body.
         
@@ -559,12 +560,12 @@ class AdditionalParameters(org.orekit.files.ccsds.ndm.CommonPhysicalProperties):
         
         """
         ...
-    def setPeriapsissAltitude(self, double: float) -> None:
+    def setPeriapsisAltitude(self, double: float) -> None:
         """
             Set the distance of the closest point in the objects orbit above the equatorial radius of the central body.
         
             Parameters:
-                periapsissAltitude (double): the periapsissHeight to set
+                periapsisAltitude (double): the periapsissHeight to set
         
         
         """
@@ -935,7 +936,7 @@ class CdmData(org.orekit.files.ccsds.section.Data):
         
         """
         ...
-    def getSig3Eigvec3CovarianceBlock(self) -> 'SigmaEigenvectorsCovariance':
+    def getSig3EigVec3CovarianceBlock(self) -> 'SigmaEigenvectorsCovariance':
         """
             Get the Sigma / Eigenvector covariance logical block.
         
@@ -988,6 +989,36 @@ class CdmData(org.orekit.files.ccsds.section.Data):
         
         """
         ...
+    def setAdditionalParametersBlock(self, additionalParameters: AdditionalParameters) -> None:
+        """
+            Set the additional parameters logical block.
+        
+            Parameters:
+                additionalParametersBlock (:class:`~org.orekit.files.ccsds.ndm.cdm.AdditionalParameters`): the additional parameters logical block
+        
+        
+        """
+        ...
+    def setCovarianceMatrixBlock(self, rTNCovariance: 'RTNCovariance') -> None:
+        """
+            Set the additional covariance metadata logical block.
+        
+            Parameters:
+                covarianceMatrixBlock (:class:`~org.orekit.files.ccsds.ndm.cdm.RTNCovariance`): the additional covariance metadata logical block
+        
+        
+        """
+        ...
+    def setODParametersBlock(self, oDParameters: 'ODParameters') -> None:
+        """
+            Set the OD parameters logical block.
+        
+            Parameters:
+                ODParametersBlock (:class:`~org.orekit.files.ccsds.ndm.cdm.ODParameters`): the OD Parameters logical block
+        
+        
+        """
+        ...
     def setUserDefinedBlock(self, userDefined: org.orekit.files.ccsds.ndm.odm.UserDefined) -> None:
         """
             Set the user defined logical block.
@@ -1025,33 +1056,13 @@ class CdmHeader(org.orekit.files.ccsds.section.Header):
         Since:
             11.2
     """
-    def __init__(self, double: float): ...
-    def getClassification(self) -> str:
-        """
-            Get the classification or caveats text message of this CDM.
-        
-            Returns:
-                the classification
-        
-        
-        """
-        ...
+    def __init__(self): ...
     def getMessageFor(self) -> str:
         """
             Get the spacecraft name for which the CDM is provided stored in MESSAGE_FOR key.
         
             Returns:
                 messageFor the spacecraft name for which the CDM is provided.
-        
-        
-        """
-        ...
-    def setClassification(self, string: str) -> None:
-        """
-            Set the classification or caveats text message of this CDM.
-        
-            Parameters:
-                classification (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the classification to set
         
         
         """
@@ -1223,12 +1234,54 @@ class CdmMessageWriter(org.orekit.files.ccsds.utils.generation.MessageWriter[Cdm
         
         """
         ...
+    def getFormatVersionKey(self) -> str:
+        """
+            Get key for format version.
+        
+            Specified by:
+                :meth:`~org.orekit.files.ccsds.utils.generation.MessageWriter.getFormatVersionKey` in
+                interface :class:`~org.orekit.files.ccsds.utils.generation.MessageWriter`
+        
+            Returns:
+                key for format version
+        
+        
+        """
+        ...
+    def getRoot(self) -> str:
+        """
+            Get root element for XML files.
+        
+            Specified by:
+                :meth:`~org.orekit.files.ccsds.utils.generation.MessageWriter.getRoot` in
+                interface :class:`~org.orekit.files.ccsds.utils.generation.MessageWriter`
+        
+            Returns:
+                root element for XML files
+        
+        
+        """
+        ...
     def getTimeConverter(self) -> org.orekit.files.ccsds.definitions.TimeConverter:
         """
             Get the current time converter.
         
             Returns:
                 current time converter
+        
+        
+        """
+        ...
+    def getVersion(self) -> float:
+        """
+            Get current format version.
+        
+            Specified by:
+                :meth:`~org.orekit.files.ccsds.utils.generation.MessageWriter.getVersion` in
+                interface :class:`~org.orekit.files.ccsds.utils.generation.MessageWriter`
+        
+            Returns:
+                current format version
         
         
         """
@@ -1258,7 +1311,10 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
         Since:
             11.2
     """
+    @typing.overload
     def __init__(self): ...
+    @typing.overload
+    def __init__(self, dataContext: org.orekit.data.DataContext): ...
     def getAdmMsgLink(self) -> str:
         """
             Get the unique identifier of Attitude Data Message(s) that are linked (relevant) to this Conjunction Data Message.
@@ -1329,12 +1385,12 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
         
         """
         ...
-    def getEarthTides(self) -> bool:
+    def getEarthTides(self) -> org.orekit.files.ccsds.definitions.YesNoUnknown:
         """
-            Get boolean that indicates if Earth and ocean tides are taken into account or not.
+            Get Enum YesNoUnknown that indicates if Earth and ocean tides are taken into account or not.
         
             Returns:
-                isEarthTides boolean
+                isEarthTides YesNoUnknown
         
         
         """
@@ -1400,12 +1456,12 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
         
         """
         ...
-    def getIntrackThrust(self) -> bool:
+    def getIntrackThrust(self) -> org.orekit.files.ccsds.definitions.YesNoUnknown:
         """
-            Get boolean that indicates if intrack thrust modeling was into account or not.
+            Get Enum YesNoUnknown that indicates if intrack thrust modeling was into account or not.
         
             Returns:
-                isEarthTides boolean
+                isEarthTides YesNoUnknown
         
         
         """
@@ -1553,12 +1609,12 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
         
         """
         ...
-    def getSolarRadiationPressure(self) -> bool:
+    def getSolarRadiationPressure(self) -> org.orekit.files.ccsds.definitions.YesNoUnknown:
         """
-            Get boolean that indicates if Solar Radiation Pressure is taken into account or not.
+            Get Enum YesNoUnknown that indicates if Solar Radiation Pressure is taken into account or not.
         
             Returns:
-                isSolarRadPressure boolean
+                isSolarRadPressure YesNoUnknown
         
         
         """
@@ -1633,12 +1689,12 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
         
         """
         ...
-    def setEarthTides(self, boolean: bool) -> None:
+    def setEarthTides(self, yesNoUnknown: org.orekit.files.ccsds.definitions.YesNoUnknown) -> None:
         """
-            Set boolean that indicates if Earth and ocean tides are taken into account or not.
+            Set Enum YesNoUnknown that indicates if Earth and ocean tides are taken into account or not.
         
             Parameters:
-                EarthTides (boolean): boolean
+                EarthTides (:class:`~org.orekit.files.ccsds.definitions.YesNoUnknown`): YesNoUnknown
         
         
         """
@@ -1675,12 +1731,12 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
         
         """
         ...
-    def setIntrackThrust(self, boolean: bool) -> None:
+    def setIntrackThrust(self, yesNoUnknown: org.orekit.files.ccsds.definitions.YesNoUnknown) -> None:
         """
             Set boolean that indicates if intrack thrust modeling was into account or not.
         
             Parameters:
-                IntrackThrustModeled (boolean): boolean
+                IntrackThrustModeled (:class:`~org.orekit.files.ccsds.definitions.YesNoUnknown`): YesNoUnknown
         
         
         """
@@ -1827,12 +1883,12 @@ class CdmMetadata(org.orekit.files.ccsds.section.Metadata):
         
         """
         ...
-    def setSolarRadiationPressure(self, boolean: bool) -> None:
+    def setSolarRadiationPressure(self, yesNoUnknown: org.orekit.files.ccsds.definitions.YesNoUnknown) -> None:
         """
-            Set boolean that indicates if Solar Radiation Pressure is taken into account or not.
+            Set Enum that indicates if Solar Radiation Pressure is taken into account or not.
         
             Parameters:
-                isSolRadPressure (boolean): boolean
+                isSolRadPressure (:class:`~org.orekit.files.ccsds.definitions.YesNoUnknown`): YesNoUnknown
         
         
         """
@@ -1961,9 +2017,9 @@ class CdmMetadataWriter(org.orekit.files.ccsds.section.AbstractWriter):
     """
     def __init__(self, cdmMetadata: CdmMetadata): ...
 
-class CdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[Cdm, 'CdmParser']):
+class CdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[CdmHeader, Cdm, 'CdmParser']):
     """
-    public class CdmParser extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<:class:`~org.orekit.files.ccsds.ndm.cdm.Cdm`, :class:`~org.orekit.files.ccsds.ndm.cdm.CdmParser`>
+    public class CdmParser extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<:class:`~org.orekit.files.ccsds.ndm.cdm.CdmHeader`, :class:`~org.orekit.files.ccsds.ndm.cdm.Cdm`, :class:`~org.orekit.files.ccsds.ndm.cdm.CdmParser`>
     
         Base class for Conjunction Data Message parsers.
     
@@ -1975,7 +2031,7 @@ class CdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[C
         Since:
             11.2
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior): ...
+    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]): ...
     def build(self) -> Cdm:
         """
             Build the file from parsed entries.
@@ -2168,7 +2224,14 @@ class CdmRelativeMetadata:
         
         """
         ...
-    def checkScreenVolumeConditions(self) -> None: ...
+    def checkScreenVolumeConditions(self) -> None:
+        """
+            Check screen volume conditions.
+        
+            The method verifies that all keys are present. Otherwise, an exception is thrown.
+        
+        """
+        ...
     def getApproachAngle(self) -> float:
         """
             Get the approach angle computed between Objects 1 and 2 in the RTN coordinate frame relative to object 1.
@@ -2234,18 +2297,20 @@ class CdmRelativeMetadata:
         ...
     def getMaxCollisionProbability(self) -> float:
         """
+            Get max collision probability.
         
             Returns:
-                the maxCollisionProbability
+                the max collision probability
         
         
         """
         ...
     def getMaxCollisionProbabilityMethod(self) -> org.orekit.files.ccsds.definitions.PocMethodFacade:
         """
+            Get max collision probability method.
         
             Returns:
-                the maxCollisionProbabilityMethod
+                the max collision probability method
         
         
         """
@@ -2374,9 +2439,10 @@ class CdmRelativeMetadata:
         ...
     def getScreenVolumeRadius(self) -> float:
         """
+            Get the screen volume radius.
         
             Returns:
-                the screenVolumeRadius
+                the screen volume radius
         
         
         """
@@ -2425,27 +2491,30 @@ class CdmRelativeMetadata:
         ...
     def getSefiCollisionProbability(self) -> float:
         """
+            Get the Space Environment Fragmentation Impact probability.
         
             Returns:
-                the sefiCollisionProbability
+                the Space Environment Fragmentation Impact probability
         
         
         """
         ...
     def getSefiCollisionProbabilityMethod(self) -> org.orekit.files.ccsds.definitions.PocMethodFacade:
         """
+            Get the Space Environment Fragmentation Impact probability method.
         
             Returns:
-                the sefiCollisionProbabilityMethod
+                the Space Environment Fragmentation Impact probability method
         
         
         """
         ...
     def getSefiFragmentationModel(self) -> str:
         """
+            Get the Space Environment Fragmentation Impact fragmentation model.
         
             Returns:
-                the sefiFragmentationModel
+                the Space Environment Fragmentation Impact fragmentation model
         
         
         """
@@ -2555,18 +2624,20 @@ class CdmRelativeMetadata:
         ...
     def setMaxCollisionProbability(self, double: float) -> None:
         """
+            Set max collision probability.
         
             Parameters:
-                maxCollisionProbability (double): the maxCollisionProbability to set
+                maxCollisionProbability (double): the max collision probability to set
         
         
         """
         ...
     def setMaxCollisionProbabilityMethod(self, pocMethodFacade: org.orekit.files.ccsds.definitions.PocMethodFacade) -> None:
         """
+            Set max collision probability method.
         
             Parameters:
-                pocMethodFacade (:class:`~org.orekit.files.ccsds.definitions.PocMethodFacade`): the maxCollisionProbabilityMethod to set
+                pocMethodFacade (:class:`~org.orekit.files.ccsds.definitions.PocMethodFacade`): the max collision probability method to set
         
         
         """
@@ -2733,9 +2804,10 @@ class CdmRelativeMetadata:
         ...
     def setScreenVolumeRadius(self, double: float) -> None:
         """
+            set the screen volume radius.
         
             Parameters:
-                screenVolumeRadius (double): the screenVolumeRadius to set
+                screenVolumeRadius (double): the screen volume radius to set
         
         
         """
@@ -2784,27 +2856,30 @@ class CdmRelativeMetadata:
         ...
     def setSefiCollisionProbability(self, double: float) -> None:
         """
+            Set the Space Environment Fragmentation Impact probability.
         
             Parameters:
-                sefiCollisionProbability (double): the sefiCollisionProbability to set
+                sefiCollisionProbability (double): the Space Environment Fragmentation Impact probability to set
         
         
         """
         ...
     def setSefiCollisionProbabilityMethod(self, pocMethodFacade: org.orekit.files.ccsds.definitions.PocMethodFacade) -> None:
         """
+            Set the Space Environment Fragmentation Impact probability method.
         
             Parameters:
-                pocMethodFacade (:class:`~org.orekit.files.ccsds.definitions.PocMethodFacade`): the sefiCollisionProbabilityMethod to set
+                pocMethodFacade (:class:`~org.orekit.files.ccsds.definitions.PocMethodFacade`): the Space Environment Fragmentation Impact probability method to set
         
         
         """
         ...
     def setSefiFragmentationModel(self, string: str) -> None:
         """
+            Set the Space Environment Fragmentation Impact fragmentation model.
         
             Parameters:
-                sefiFragmentationModel (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the sefiFragmentationModel to set
+                sefiFragmentationModel (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the Space Environment Fragmentation Impact fragmentation model to set
         
         
         """
@@ -3037,10 +3112,35 @@ class Maneuvrable(java.lang.Enum['Maneuvrable']):
     NO: typing.ClassVar['Maneuvrable'] = ...
     N_A: typing.ClassVar['Maneuvrable'] = ...
     @staticmethod
-    def getEnum(string: str) -> 'Maneuvrable': ...
-    def getValue(self) -> str: ...
+    def getEnum(string: str) -> 'Maneuvrable':
+        """
+            Get the enum entry corresponding to the given String.
+        
+            Parameters:
+                keyValue (:class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): input Sring value
+        
+            Returns:
+                the corresponding enum entry
+        
+            Raises:
+                :class:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if there is no enum entry corresponding to the given String value
+        
+        
+        """
+        ...
+    def getValue(self) -> str:
+        """
+            Get the String representation of the enum.
+        
+            Returns:
+                the String representation of the enum
+        
+        
+        """
+        ...
     def toString(self) -> str:
         """
+            .
         
             Overrides:
                 :meth:`~org.orekit.files.ccsds.ndm.cdm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum.html?is` in

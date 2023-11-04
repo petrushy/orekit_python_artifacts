@@ -1,5 +1,5 @@
+import org.orekit.gnss.metric.messages.common
 import org.orekit.gnss.metric.messages.rtcm
-import org.orekit.gnss.metric.messages.rtcm.ephemeris.utils
 import org.orekit.propagation.analytical.gnss.data
 import org.orekit.time
 import typing
@@ -16,7 +16,7 @@ class RtcmEphemerisData(org.orekit.gnss.metric.messages.rtcm.RtcmData):
             11.0
     """
     def __init__(self): ...
-    def getAccuracyProvider(self) -> org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider:
+    def getAccuracyProvider(self) -> org.orekit.gnss.metric.messages.common.AccuracyProvider:
         """
             Get the accuracy provider of the ephemeris message.
         
@@ -36,12 +36,12 @@ class RtcmEphemerisData(org.orekit.gnss.metric.messages.rtcm.RtcmData):
         
         """
         ...
-    def setAccuracyProvider(self, accuracyProvider: org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider) -> None:
+    def setAccuracyProvider(self, accuracyProvider: org.orekit.gnss.metric.messages.common.AccuracyProvider) -> None:
         """
             Set the accuracy provider of the ephemeris message.
         
             Parameters:
-                provider (:class:`~org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.AccuracyProvider`): the provider to set
+                provider (:class:`~org.orekit.gnss.metric.messages.common.AccuracyProvider`): the provider to set
         
         
         """
@@ -137,7 +137,7 @@ class Rtcm1019Data(RtcmEphemerisData):
         """
         ...
     @typing.overload
-    def getGpsNavigationMessage(self) -> org.orekit.propagation.analytical.gnss.data.GPSNavigationMessage:
+    def getGpsNavigationMessage(self) -> org.orekit.propagation.analytical.gnss.data.GPSLegacyNavigationMessage:
         """
             Get the GPS navigation message corresponding to the current RTCM data.
         
@@ -152,7 +152,7 @@ class Rtcm1019Data(RtcmEphemerisData):
         """
         ...
     @typing.overload
-    def getGpsNavigationMessage(self, timeScales: org.orekit.time.TimeScales) -> org.orekit.propagation.analytical.gnss.data.GPSNavigationMessage:
+    def getGpsNavigationMessage(self, timeScales: org.orekit.time.TimeScales) -> org.orekit.propagation.analytical.gnss.data.GPSLegacyNavigationMessage:
         """
             Get the GPS navigation message corresponding to the current RTCM data.
         
@@ -212,12 +212,12 @@ class Rtcm1019Data(RtcmEphemerisData):
         
         """
         ...
-    def setGpsNavigationMessage(self, gPSNavigationMessage: org.orekit.propagation.analytical.gnss.data.GPSNavigationMessage) -> None:
+    def setGpsNavigationMessage(self, gPSLegacyNavigationMessage: org.orekit.propagation.analytical.gnss.data.GPSLegacyNavigationMessage) -> None:
         """
             Set the GPS navigation message.
         
             Parameters:
-                gpsNavigationMessage (:class:`~org.orekit.propagation.analytical.gnss.data.GPSNavigationMessage`): the GPS navigation message to set
+                gpsNavigationMessage (:class:`~org.orekit.propagation.analytical.gnss.data.GPSLegacyNavigationMessage`): the GPS navigation message to set
         
         
         """
@@ -754,7 +754,7 @@ class Rtcm1042Data(RtcmEphemerisData):
     """
     def __init__(self): ...
     @typing.overload
-    def getBeidouNavigationMessage(self) -> org.orekit.propagation.analytical.gnss.data.BeidouNavigationMessage:
+    def getBeidouNavigationMessage(self) -> org.orekit.propagation.analytical.gnss.data.BeidouLegacyNavigationMessage:
         """
             Get the Beidou navigation message corresponding to the current RTCM data.
         
@@ -769,7 +769,7 @@ class Rtcm1042Data(RtcmEphemerisData):
         """
         ...
     @typing.overload
-    def getBeidouNavigationMessage(self, timeScales: org.orekit.time.TimeScales) -> org.orekit.propagation.analytical.gnss.data.BeidouNavigationMessage:
+    def getBeidouNavigationMessage(self, timeScales: org.orekit.time.TimeScales) -> org.orekit.propagation.analytical.gnss.data.BeidouLegacyNavigationMessage:
         """
             Get the Beidou navigation message corresponding to the current RTCM data.
         
@@ -809,12 +809,12 @@ class Rtcm1042Data(RtcmEphemerisData):
         
         """
         ...
-    def setBeidouNavigationMessage(self, beidouNavigationMessage: org.orekit.propagation.analytical.gnss.data.BeidouNavigationMessage) -> None:
+    def setBeidouNavigationMessage(self, beidouLegacyNavigationMessage: org.orekit.propagation.analytical.gnss.data.BeidouLegacyNavigationMessage) -> None:
         """
             Set the Beidou navigation message.
         
             Parameters:
-                beidouNavigationMessage (:class:`~org.orekit.propagation.analytical.gnss.data.BeidouNavigationMessage`): the Beidou navigation message to set
+                beidouNavigationMessage (:class:`~org.orekit.propagation.analytical.gnss.data.BeidouLegacyNavigationMessage`): the Beidou navigation message to set
         
         
         """
@@ -882,7 +882,7 @@ class Rtcm1044Data(RtcmEphemerisData):
         """
         ...
     @typing.overload
-    def getQzssNavigationMessage(self) -> org.orekit.propagation.analytical.gnss.data.QZSSNavigationMessage:
+    def getQzssNavigationMessage(self) -> org.orekit.propagation.analytical.gnss.data.QZSSLegacyNavigationMessage:
         """
             Get the QZSS navigation message corresponding to the current RTCM data.
         
@@ -897,7 +897,7 @@ class Rtcm1044Data(RtcmEphemerisData):
         """
         ...
     @typing.overload
-    def getQzssNavigationMessage(self, timeScales: org.orekit.time.TimeScales) -> org.orekit.propagation.analytical.gnss.data.QZSSNavigationMessage:
+    def getQzssNavigationMessage(self, timeScales: org.orekit.time.TimeScales) -> org.orekit.propagation.analytical.gnss.data.QZSSLegacyNavigationMessage:
         """
             Get the QZSS navigation message corresponding to the current RTCM data.
         
@@ -947,12 +947,12 @@ class Rtcm1044Data(RtcmEphemerisData):
         
         """
         ...
-    def setQzssNavigationMessage(self, qZSSNavigationMessage: org.orekit.propagation.analytical.gnss.data.QZSSNavigationMessage) -> None:
+    def setQzssNavigationMessage(self, qZSSLegacyNavigationMessage: org.orekit.propagation.analytical.gnss.data.QZSSLegacyNavigationMessage) -> None:
         """
             Set the QZSS navigation message.
         
             Parameters:
-                qzssNavigationMessage (:class:`~org.orekit.propagation.analytical.gnss.data.QZSSNavigationMessage`): the QZSS navigation message to set
+                qzssNavigationMessage (:class:`~org.orekit.propagation.analytical.gnss.data.QZSSLegacyNavigationMessage`): the QZSS navigation message to set
         
         
         """
@@ -1092,4 +1092,3 @@ class __module_protocol__(typing.Protocol):
     Rtcm1045Data: typing.Type[Rtcm1045Data]
     RtcmEphemerisData: typing.Type[RtcmEphemerisData]
     RtcmEphemerisMessage: typing.Type[RtcmEphemerisMessage]
-    utils: org.orekit.gnss.metric.messages.rtcm.ephemeris.utils.__module_protocol__

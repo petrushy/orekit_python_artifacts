@@ -15,7 +15,7 @@ class LinearConstraint(java.io.Serializable):
     
         A linear constraint for a linear optimization problem.
     
-        A linear constraint has one of the forms:
+        * A linear constraint has one of the forms:
     
           - c :sub:`1` x :sub:`1` + ... c :sub:`n` x :sub:`n` = v
           - c :sub:`1` x :sub:`1` + ... c :sub:`n` x :sub:`n` <= v
@@ -26,6 +26,7 @@ class LinearConstraint(java.io.Serializable):
             r :sub:`cst`
           - l :sub:`1` x :sub:`1` + ... l :sub:`n` x :sub:`n` + l :sub:`cst` >= r :sub:`1` x :sub:`1` + ... r :sub:`n` x :sub:`n` +
             r :sub:`cst`
+    
     
         The c :sub:`i` , l :sub:`i` or r :sub:`i` are the coefficients of the constraints, the x :sub:`i` are the coordinates of
         the current point and v is the value of the constraint.
@@ -110,13 +111,8 @@ class LinearObjectiveFunction(org.hipparchus.analysis.MultivariateFunction, org.
     
         An objective function for a linear optimization problem.
     
-        A linear objective function has one the form:
-    
-        .. code-block: java
-        
-         c :sub:`1` x :sub:`1`  + ... c :sub:`n` x :sub:`n`  + d
-         
-        The c :sub:`i` and d are the coefficients of the equation, the x :sub:`i` are the coordinates of the current point.
+        A linear objective function has one the form: \[ c_1 x_1 + \ldots c_n x_n + d \] The c :sub:`i` and d are the
+        coefficients of the equation, the x :sub:`i` are the coordinates of the current point.
     
         Also see:
             :meth:`~serialized`
@@ -264,6 +260,7 @@ class PivotSelectionRule(java.lang.Enum['PivotSelectionRule'], org.hipparchus.op
         
             .. code-block: java
             
+            
             for (PivotSelectionRule c : PivotSelectionRule.values())
                 System.out.println(c);
             
@@ -335,6 +332,7 @@ class Relationship(java.lang.Enum['Relationship']):
             iterate over the constants as follows:
         
             .. code-block: java
+            
             
             for (Relationship c : Relationship.values())
                 System.out.println(c);

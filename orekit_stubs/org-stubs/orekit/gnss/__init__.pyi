@@ -1,16 +1,12 @@
 import java.io
 import java.lang
 import java.util
-import org.hipparchus.geometry.euclidean.threed
-import org.hipparchus.geometry.euclidean.twod
 import org.orekit.bodies
 import org.orekit.data
-import org.orekit.estimation.measurements.gnss
 import org.orekit.gnss.antenna
 import org.orekit.gnss.attitude
-import org.orekit.gnss.clock
 import org.orekit.gnss.metric
-import org.orekit.gnss.navigation
+import org.orekit.gnss.rflink
 import org.orekit.propagation
 import org.orekit.propagation.analytical.gnss.data
 import org.orekit.time
@@ -18,206 +14,6 @@ import org.orekit.utils
 import typing
 
 
-
-class AppliedDCBS:
-    """
-    public class AppliedDCBS extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
-    
-        Corrections of Differential Code Biases (DCBs) applied. Contains information on the programs used to correct the
-        observations in RINEX or clock files for differential code biases.
-    """
-    def __init__(self, satelliteSystem: 'SatelliteSystem', string: str, string2: str): ...
-    def getProgDCBS(self) -> str:
-        """
-            Get the program name used to apply DCBs.
-        
-            Returns:
-                Program name used to apply DCBs
-        
-        
-        """
-        ...
-    def getSatelliteSystem(self) -> 'SatelliteSystem':
-        """
-            Get the satellite system.
-        
-            Returns:
-                satellite system
-        
-        
-        """
-        ...
-    def getSourceDCBS(self) -> str:
-        """
-            Get the source of corrections.
-        
-            Returns:
-                Source of corrections (URL)
-        
-        
-        """
-        ...
-
-class AppliedPCVS:
-    """
-    public class AppliedPCVS extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
-    
-        Corrections of antenna phase center variations (PCVs) applied. Contains information on the programs used to correct the
-        observations in RINEX or clock files for antenna phase center variations.
-    """
-    def __init__(self, satelliteSystem: 'SatelliteSystem', string: str, string2: str): ...
-    def getProgPCVS(self) -> str:
-        """
-            Get the program name used to apply PCVs.
-        
-            Returns:
-                Program name used to apply PCVs
-        
-        
-        """
-        ...
-    def getSatelliteSystem(self) -> 'SatelliteSystem':
-        """
-            Get the satellite system.
-        
-            Returns:
-                satellite system
-        
-        
-        """
-        ...
-    def getSourcePCVS(self) -> str:
-        """
-            Get the source of corrections.
-        
-            Returns:
-                Source of corrections (URL)
-        
-        
-        """
-        ...
-
-class CombinedObservationData:
-    """
-    public class CombinedObservationData extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
-    
-        Combined observation data.
-    
-        Since:
-            10.1
-    """
-    def __init__(self, combinationType: org.orekit.estimation.measurements.gnss.CombinationType, measurementType: 'MeasurementType', double: float, double2: float, list: java.util.List['ObservationData']): ...
-    def getCombinationType(self) -> org.orekit.estimation.measurements.gnss.CombinationType:
-        """
-            Get the type of the combination of measurements used to build the instance.
-        
-            Returns:
-                the combination of measurements type
-        
-        
-        """
-        ...
-    def getCombinedMHzFrequency(self) -> float:
-        """
-            Get the value of the combined frequency in MHz.
-        
-            For the single frequency combinations, this method returns the common frequency of both measurements.
-        
-            Returns:
-                value of the combined frequency in MHz
-        
-        
-        """
-        ...
-    def getMeasurementType(self) -> 'MeasurementType':
-        """
-            Get the measurement type.
-        
-            Returns:
-                measurement type
-        
-        
-        """
-        ...
-    def getUsedObservationData(self) -> java.util.List['ObservationData']: ...
-    def getValue(self) -> float:
-        """
-            Get the combined observed value.
-        
-            Returns:
-                observed value (may be :code:`Double.NaN` if observation not available)
-        
-        
-        """
-        ...
-
-class CombinedObservationDataSet(org.orekit.time.TimeStamped):
-    """
-    public class CombinedObservationDataSet extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`
-    
-        Combined observation data set.
-    
-        Since:
-            10.1
-    """
-    def __init__(self, rinexObservationHeader: 'RinexObservationHeader', satelliteSystem: 'SatelliteSystem', int: int, absoluteDate: org.orekit.time.AbsoluteDate, double: float, list: java.util.List[CombinedObservationData]): ...
-    def getDate(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Get the date.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeStamped.getDate` in interface :class:`~org.orekit.time.TimeStamped`
-        
-            Returns:
-                date attached to the object
-        
-        
-        """
-        ...
-    def getHeader(self) -> 'RinexObservationHeader':
-        """
-            Get the Rinex header associated with this data set.
-        
-            Returns:
-                Rinex header associated with this data set
-        
-            Since:
-                9.3
-        
-        
-        """
-        ...
-    def getObservationData(self) -> java.util.List[CombinedObservationData]: ...
-    def getPrnNumber(self) -> int:
-        """
-            Get PRN number.
-        
-            Returns:
-                PRN number of the observed satellite
-        
-        
-        """
-        ...
-    def getRcvrClkOffset(self) -> float:
-        """
-            Get receiver clock offset.
-        
-            Returns:
-                receiver clock offset (it is optional, may be 0)
-        
-        
-        """
-        ...
-    def getSatelliteSystem(self) -> 'SatelliteSystem':
-        """
-            Get Satellite System.
-        
-            Returns:
-                satellite system of observed satellite
-        
-        
-        """
-        ...
 
 class DOP:
     """
@@ -435,14 +231,19 @@ class Frequency(java.lang.Enum['Frequency']):
     E06: typing.ClassVar['Frequency'] = ...
     C01: typing.ClassVar['Frequency'] = ...
     C02: typing.ClassVar['Frequency'] = ...
+    C05: typing.ClassVar['Frequency'] = ...
     C06: typing.ClassVar['Frequency'] = ...
     C07: typing.ClassVar['Frequency'] = ...
+    C08: typing.ClassVar['Frequency'] = ...
     B01: typing.ClassVar['Frequency'] = ...
     B02: typing.ClassVar['Frequency'] = ...
     B03: typing.ClassVar['Frequency'] = ...
-    B04: typing.ClassVar['Frequency'] = ...
-    B05: typing.ClassVar['Frequency'] = ...
+    B1C: typing.ClassVar['Frequency'] = ...
+    B1A: typing.ClassVar['Frequency'] = ...
+    B2A: typing.ClassVar['Frequency'] = ...
+    B2B: typing.ClassVar['Frequency'] = ...
     B08: typing.ClassVar['Frequency'] = ...
+    B3A: typing.ClassVar['Frequency'] = ...
     J01: typing.ClassVar['Frequency'] = ...
     J02: typing.ClassVar['Frequency'] = ...
     J05: typing.ClassVar['Frequency'] = ...
@@ -568,54 +369,6 @@ class Frequency(java.lang.Enum['Frequency']):
         """
         ...
 
-class HatanakaCompressFilter(org.orekit.data.DataFilter):
-    """
-    public class HatanakaCompressFilter extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.DataFilter`
-    
-        Decompression filter for Hatanaka compressed RINEX files.
-    
-        Since:
-            10.1
-    
-        Also see:
-            `A Compression Format and Tools for GNSS Observation Data
-            <http://cedadocs.ceda.ac.uk/1254/1/Hatanaka%5C_compressed%5C_format%5C_help.pdf>`
-    """
-    def __init__(self): ...
-    def filter(self, dataSource: org.orekit.data.DataSource) -> org.orekit.data.DataSource:
-        """
-            Filter the data source.
-        
-            Filtering is often based on suffix. For example a gzip compressed file will have an original name of the form
-            base.ext.gz when the corresponding uncompressed file will have a filtered name base.ext.
-        
-            A filter must *never* :meth:`~org.orekit.data.DataSource.Opener.openStreamOnce` the :class:`~org.orekit.data.DataSource`
-            by itself, regardless of the fact it will return the original instance or a filtered instance. The rationale is that it
-            is the upper layer that will decide to open (or not) the returned value and that a :class:`~org.orekit.data.DataSource`
-            can be opened only once; this is the core principle of lazy-opening provided by :class:`~org.orekit.data.DataSource`.
-        
-            Beware that as the :class:`~org.orekit.data.DataProvidersManager` will attempt to pile all filters in a stack as long as
-            their implementation of this method returns a value different from the :code:`original` parameter. This implies that the
-            filter, *must* perform some checks to see if it must be applied or not. If for example there is a need for a deciphering
-            filter to be applied once to all data, then the filter should for example check for a suffix in the
-            :meth:`~org.orekit.data.DataSource.getName` and create a new filtered :class:`~org.orekit.data.DataSource` instance
-            *only* if the suffix is present, removing the suffix from the filtered instance. Failing to do so and simply creating a
-            filtered instance with one deciphering layer without changing the name would result in an infinite stack of deciphering
-            filters being built, until a stack overflow or memory exhaustion exception occurs.
-        
-            Specified by:
-                :meth:`~org.orekit.data.DataFilter.filter` in interface :class:`~org.orekit.data.DataFilter`
-        
-            Parameters:
-                original (:class:`~org.orekit.data.DataSource`): original data source
-        
-            Returns:
-                filtered data source, or :code:`original` if this filter does not apply to this data source
-        
-        
-        """
-        ...
-
 class MeasurementType(java.lang.Enum['MeasurementType']):
     """
     public enum MeasurementType extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.MeasurementType`>
@@ -673,120 +426,72 @@ class MeasurementType(java.lang.Enum['MeasurementType']):
         """
         ...
 
-class ObservationData:
+class ObservationTimeScale(java.lang.Enum['ObservationTimeScale']):
     """
-    public class ObservationData extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    public enum ObservationTimeScale extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.ObservationTimeScale`>
     
-        Observation Data.
-    
-        Since:
-            9.2
-    """
-    def __init__(self, observationType: 'ObservationType', double: float, int: int, int2: int): ...
-    def getLossOfLockIndicator(self) -> int:
-        """
-            Get the Loss of Lock Indicator.
-        
-            Returns:
-                Loss of Lock Indicator
-        
-        
-        """
-        ...
-    def getObservationType(self) -> 'ObservationType':
-        """
-            Get the observation type.
-        
-            Returns:
-                observation type
-        
-        
-        """
-        ...
-    def getSignalStrength(self) -> int:
-        """
-            Get the signal strength.
-        
-            Returns:
-                signal strength
-        
-        
-        """
-        ...
-    def getValue(self) -> float:
-        """
-            Get the observed value.
-        
-            Returns:
-                observed value (may be :code:`Double.NaN` if observation not available)
-        
-        
-        """
-        ...
-
-class ObservationDataSet(org.orekit.time.TimeStamped):
-    """
-    public class ObservationDataSet extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`
-    
-        Observation Data set.
+        Observation time scales.
     
         Since:
-            9.2
+            12.0
     """
-    def __init__(self, rinexObservationHeader: 'RinexObservationHeader', satelliteSystem: 'SatelliteSystem', int: int, absoluteDate: org.orekit.time.AbsoluteDate, double: float, list: java.util.List[ObservationData]): ...
-    def getDate(self) -> org.orekit.time.AbsoluteDate:
+    GPS: typing.ClassVar['ObservationTimeScale'] = ...
+    GAL: typing.ClassVar['ObservationTimeScale'] = ...
+    GLO: typing.ClassVar['ObservationTimeScale'] = ...
+    QZS: typing.ClassVar['ObservationTimeScale'] = ...
+    BDT: typing.ClassVar['ObservationTimeScale'] = ...
+    IRN: typing.ClassVar['ObservationTimeScale'] = ...
+    def getTimeScale(self, timeScales: org.orekit.time.TimeScales) -> org.orekit.time.TimeScale:
         """
-            Get the date.
+            Get time scale.
         
-            Specified by:
-                :meth:`~org.orekit.time.TimeStamped.getDate` in interface :class:`~org.orekit.time.TimeStamped`
+            Parameters:
+                timeScales (:class:`~org.orekit.time.TimeScales`): time scales factory
         
             Returns:
-                date attached to the object
+                time scale
         
         
         """
         ...
-    def getHeader(self) -> 'RinexObservationHeader':
+    _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
+    @typing.overload
+    @staticmethod
+    def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
+    @typing.overload
+    @staticmethod
+    def valueOf(string: str) -> 'ObservationTimeScale':
         """
-            Get the Rinex header associated with this data set.
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
         
             Returns:
-                Rinex header associated with this data set
+                the enum constant with the specified name
         
-            Since:
-                9.3
+            Raises:
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
         
         
         """
         ...
-    def getObservationData(self) -> java.util.List[ObservationData]: ...
-    def getPrnNumber(self) -> int:
+    @staticmethod
+    def values() -> typing.List['ObservationTimeScale']:
         """
-            Get PRN number.
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            for (ObservationTimeScale c : ObservationTimeScale.values())
+                System.out.println(c);
+            
         
             Returns:
-                PRN number of the observed satellite
-        
-        
-        """
-        ...
-    def getRcvrClkOffset(self) -> float:
-        """
-            Get receiver clock offset.
-        
-            Returns:
-                receiver clock offset (it is optional, may be 0)
-        
-        
-        """
-        ...
-    def getSatelliteSystem(self) -> 'SatelliteSystem':
-        """
-            Get Satellite System.
-        
-            Returns:
-                satellite system of observed satellite
+                an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -835,6 +540,7 @@ class ObservationType(java.lang.Enum['ObservationType']):
     C1B: typing.ClassVar['ObservationType'] = ...
     C1C: typing.ClassVar['ObservationType'] = ...
     C1D: typing.ClassVar['ObservationType'] = ...
+    C1E: typing.ClassVar['ObservationType'] = ...
     C1I: typing.ClassVar['ObservationType'] = ...
     C1L: typing.ClassVar['ObservationType'] = ...
     C1M: typing.ClassVar['ObservationType'] = ...
@@ -874,9 +580,11 @@ class ObservationType(java.lang.Enum['ObservationType']):
     C6A: typing.ClassVar['ObservationType'] = ...
     C6B: typing.ClassVar['ObservationType'] = ...
     C6C: typing.ClassVar['ObservationType'] = ...
+    C6D: typing.ClassVar['ObservationType'] = ...
     C6E: typing.ClassVar['ObservationType'] = ...
     C6I: typing.ClassVar['ObservationType'] = ...
     C6L: typing.ClassVar['ObservationType'] = ...
+    C6P: typing.ClassVar['ObservationType'] = ...
     C6Q: typing.ClassVar['ObservationType'] = ...
     C6S: typing.ClassVar['ObservationType'] = ...
     C6X: typing.ClassVar['ObservationType'] = ...
@@ -905,6 +613,7 @@ class ObservationType(java.lang.Enum['ObservationType']):
     D1B: typing.ClassVar['ObservationType'] = ...
     D1C: typing.ClassVar['ObservationType'] = ...
     D1D: typing.ClassVar['ObservationType'] = ...
+    D1E: typing.ClassVar['ObservationType'] = ...
     D1I: typing.ClassVar['ObservationType'] = ...
     D1L: typing.ClassVar['ObservationType'] = ...
     D1M: typing.ClassVar['ObservationType'] = ...
@@ -945,10 +654,12 @@ class ObservationType(java.lang.Enum['ObservationType']):
     D6A: typing.ClassVar['ObservationType'] = ...
     D6B: typing.ClassVar['ObservationType'] = ...
     D6C: typing.ClassVar['ObservationType'] = ...
+    D6D: typing.ClassVar['ObservationType'] = ...
     D6E: typing.ClassVar['ObservationType'] = ...
     D6I: typing.ClassVar['ObservationType'] = ...
-    D6Q: typing.ClassVar['ObservationType'] = ...
     D6L: typing.ClassVar['ObservationType'] = ...
+    D6P: typing.ClassVar['ObservationType'] = ...
+    D6Q: typing.ClassVar['ObservationType'] = ...
     D6S: typing.ClassVar['ObservationType'] = ...
     D6X: typing.ClassVar['ObservationType'] = ...
     D6Z: typing.ClassVar['ObservationType'] = ...
@@ -976,6 +687,7 @@ class ObservationType(java.lang.Enum['ObservationType']):
     L1B: typing.ClassVar['ObservationType'] = ...
     L1C: typing.ClassVar['ObservationType'] = ...
     L1D: typing.ClassVar['ObservationType'] = ...
+    L1E: typing.ClassVar['ObservationType'] = ...
     L1I: typing.ClassVar['ObservationType'] = ...
     L1L: typing.ClassVar['ObservationType'] = ...
     L1M: typing.ClassVar['ObservationType'] = ...
@@ -1016,10 +728,12 @@ class ObservationType(java.lang.Enum['ObservationType']):
     L6A: typing.ClassVar['ObservationType'] = ...
     L6B: typing.ClassVar['ObservationType'] = ...
     L6C: typing.ClassVar['ObservationType'] = ...
+    L6D: typing.ClassVar['ObservationType'] = ...
     L6E: typing.ClassVar['ObservationType'] = ...
     L6I: typing.ClassVar['ObservationType'] = ...
-    L6Q: typing.ClassVar['ObservationType'] = ...
     L6L: typing.ClassVar['ObservationType'] = ...
+    L6P: typing.ClassVar['ObservationType'] = ...
+    L6Q: typing.ClassVar['ObservationType'] = ...
     L6S: typing.ClassVar['ObservationType'] = ...
     L6X: typing.ClassVar['ObservationType'] = ...
     L6Z: typing.ClassVar['ObservationType'] = ...
@@ -1043,6 +757,7 @@ class ObservationType(java.lang.Enum['ObservationType']):
     S1B: typing.ClassVar['ObservationType'] = ...
     S1C: typing.ClassVar['ObservationType'] = ...
     S1D: typing.ClassVar['ObservationType'] = ...
+    S1E: typing.ClassVar['ObservationType'] = ...
     S1I: typing.ClassVar['ObservationType'] = ...
     S1L: typing.ClassVar['ObservationType'] = ...
     S1M: typing.ClassVar['ObservationType'] = ...
@@ -1083,10 +798,12 @@ class ObservationType(java.lang.Enum['ObservationType']):
     S6A: typing.ClassVar['ObservationType'] = ...
     S6B: typing.ClassVar['ObservationType'] = ...
     S6C: typing.ClassVar['ObservationType'] = ...
+    S6D: typing.ClassVar['ObservationType'] = ...
     S6E: typing.ClassVar['ObservationType'] = ...
     S6I: typing.ClassVar['ObservationType'] = ...
-    S6Q: typing.ClassVar['ObservationType'] = ...
     S6L: typing.ClassVar['ObservationType'] = ...
+    S6P: typing.ClassVar['ObservationType'] = ...
+    S6Q: typing.ClassVar['ObservationType'] = ...
     S6S: typing.ClassVar['ObservationType'] = ...
     S6X: typing.ClassVar['ObservationType'] = ...
     S6Z: typing.ClassVar['ObservationType'] = ...
@@ -1186,401 +903,6 @@ class ObservationType(java.lang.Enum['ObservationType']):
         """
         ...
 
-class RinexObservationHeader:
-    """
-    public class RinexObservationHeader extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
-    
-        Container for Rinex observation file header.
-    
-        Since:
-            9.2
-    """
-    @typing.overload
-    def __init__(self, double: float, satelliteSystem: 'SatelliteSystem', string: str, string2: str, string3: str, string4: str, string5: str, string6: str, string7: str, string8: str, string9: str, string10: str, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double2: float, vector2D: org.hipparchus.geometry.euclidean.twod.Vector2D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, string11: str, vector3D3: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D4: org.hipparchus.geometry.euclidean.threed.Vector3D, double3: float, vector3D5: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D6: org.hipparchus.geometry.euclidean.threed.Vector3D, string12: str, double4: float, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, int: int, list: java.util.List[AppliedDCBS], list2: java.util.List[AppliedPCVS], list3: java.util.List['RinexObservationLoader.Parser.PhaseShiftCorrection'], int2: int, int3: int, int4: int, int5: int): ...
-    @typing.overload
-    def __init__(self, double: float, satelliteSystem: 'SatelliteSystem', string: str, string2: str, string3: str, string4: str, string5: str, string6: str, string7: str, string8: str, string9: str, string10: str, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double2: float, vector2D: org.hipparchus.geometry.euclidean.twod.Vector2D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D3: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D4: org.hipparchus.geometry.euclidean.threed.Vector3D, double3: float, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, int: int, int2: int): ...
-    def getAgencyName(self) -> str:
-        """
-            Get name of the agency.
-        
-            Returns:
-                name of the agency
-        
-        
-        """
-        ...
-    def getAntennaAzimuth(self) -> float:
-        """
-            Get the azimuth of the zero direction of a fixed antenna.
-        
-            Returns:
-                Azimuth of the zero direction of a fixed antenna
-        
-        
-        """
-        ...
-    def getAntennaBSight(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Get the antenna B.Sight.
-        
-            Returns:
-                Antenna B.Sight
-        
-        
-        """
-        ...
-    def getAntennaHeight(self) -> float:
-        """
-            Get the antenna height.
-        
-            Returns:
-                height of the antenna
-        
-        
-        """
-        ...
-    def getAntennaNumber(self) -> str:
-        """
-            Get the number of the antenna.
-        
-            Returns:
-                number of the antenna
-        
-        
-        """
-        ...
-    def getAntennaPhaseCenter(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Get the antenna phasecenter.
-        
-            Returns:
-                Antenna phasecenter
-        
-        
-        """
-        ...
-    def getAntennaReferencePoint(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Get the position of antenna reference point for antenna on vehicle.
-        
-            Returns:
-                Position of antenna reference point for antenna on vehicle
-        
-        
-        """
-        ...
-    def getAntennaType(self) -> str:
-        """
-            Get the type of the antenna.
-        
-            Returns:
-                type of the antenna
-        
-        
-        """
-        ...
-    def getAntennaZeroDirection(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Get the zero direction of antenna.
-        
-            Returns:
-                Zero direction of antenna
-        
-        
-        """
-        ...
-    def getApproxPos(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Get the Approximate Marker Position.
-        
-            Returns:
-                Approximate Marker Position
-        
-        
-        """
-        ...
-    def getCenterMass(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Get the current center of mass of vehicle in body fixed coordinate system.
-        
-            Returns:
-                Current center of mass of vehicle in body fixed coordinate system
-        
-        
-        """
-        ...
-    def getClkOffset(self) -> int:
-        """
-            Get the realtime-derived receiver clock offset.
-        
-            Returns:
-                realtime-derived receiver clock offset
-        
-        
-        """
-        ...
-    def getEccentricities(self) -> org.hipparchus.geometry.euclidean.twod.Vector2D:
-        """
-            Get the eccentricities of antenna center.
-        
-            Returns:
-                Eccentricities of antenna center
-        
-        
-        """
-        ...
-    def getInterval(self) -> float:
-        """
-            Get the observation interval in seconds.
-        
-            Returns:
-                Observation interval in seconds
-        
-        
-        """
-        ...
-    def getLeapSeconds(self) -> int:
-        """
-            Get the Number of leap seconds since 6-Jan-1980.
-        
-            Returns:
-                Number of leap seconds since 6-Jan-1980
-        
-        
-        """
-        ...
-    def getLeapSecondsDayNum(self) -> int:
-        """
-            Get the respective leap second day number.
-        
-            Returns:
-                Respective leap second day number
-        
-        
-        """
-        ...
-    def getLeapSecondsFuture(self) -> int:
-        """
-            Get the future or past leap seconds.
-        
-            Returns:
-                Future or past leap seconds
-        
-        
-        """
-        ...
-    def getLeapSecondsWeekNum(self) -> int:
-        """
-            Get the respective leap second week number.
-        
-            Returns:
-                Respective leap second week number
-        
-        
-        """
-        ...
-    def getListAppliedDCBS(self) -> java.util.List[AppliedDCBS]: ...
-    def getListAppliedPCVS(self) -> java.util.List[AppliedPCVS]: ...
-    def getMarkerName(self) -> str:
-        """
-            Get name of the antenna marker.
-        
-            Returns:
-                name of the antenna marker
-        
-        
-        """
-        ...
-    def getMarkerNumber(self) -> str:
-        """
-            Get number of the antenna marker.
-        
-            Returns:
-                number of the antenna marker
-        
-        
-        """
-        ...
-    def getMarkerType(self) -> str:
-        """
-            Get type of the antenna marker.
-        
-            Returns:
-                type of the antenna marker
-        
-        
-        """
-        ...
-    def getObservationCode(self) -> str:
-        """
-            Get the observation code of the average phasecenter position w/r to antenna reference point.
-        
-            Returns:
-                Observation code of the average phasecenter position w/r to antenna reference point
-        
-        
-        """
-        ...
-    def getObserverName(self) -> str:
-        """
-            Get name of the observer.
-        
-            Returns:
-                name of the observer
-        
-        
-        """
-        ...
-    def getPhaseShiftCorrections(self) -> java.util.List['RinexObservationLoader.Parser.PhaseShiftCorrection']: ...
-    def getReceiverNumber(self) -> str:
-        """
-            Get the number of the receiver.
-        
-            Returns:
-                number of the receiver
-        
-        
-        """
-        ...
-    def getReceiverType(self) -> str:
-        """
-            Get the type of the receiver.
-        
-            Returns:
-                type of the receiver
-        
-        
-        """
-        ...
-    def getReceiverVersion(self) -> str:
-        """
-            Get the version of the receiver.
-        
-            Returns:
-                version of the receiver
-        
-        
-        """
-        ...
-    def getRinexVersion(self) -> float:
-        """
-            Get Rinex Version.
-        
-            Returns:
-                rinex version of the file
-        
-        
-        """
-        ...
-    def getSatelliteSystem(self) -> 'SatelliteSystem':
-        """
-            Get Satellite System.
-        
-            Returns:
-                satellite system of the observation file
-        
-        
-        """
-        ...
-    def getSignalStrengthUnit(self) -> str:
-        """
-            Get the unit of the carrier to noise ratio observables.
-        
-            Returns:
-                Unit of the carrier to noise ratio observables
-        
-        
-        """
-        ...
-    def getTFirstObs(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Get the time of First observation record.
-        
-            Returns:
-                Time of First observation record
-        
-        
-        """
-        ...
-    def getTLastObs(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Get the time of last observation record.
-        
-            Returns:
-                Time of last observation record
-        
-        
-        """
-        ...
-
-class RinexObservationLoader:
-    """
-    public class RinexObservationLoader extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
-    
-        Loader for Rinex measurements files.
-    
-        Supported versions are: 2.00, 2.10, 2.11, 2.12 (unofficial), 2.20 (unofficial), 3.00, 3.01, 3.02, 3.03, and 3.04.
-    
-        Since:
-            9.2
-    
-        Also see:
-            :class:`~org.orekit.gnss.ftp:.igs.org.pub.data.format.rinex2.txt`,
-            :class:`~org.orekit.gnss.ftp:.igs.org.pub.data.format.rinex210.txt`,
-            :class:`~org.orekit.gnss.ftp:.igs.org.pub.data.format.rinex211.txt`, `unofficial rinex 2.12
-            <http://www.aiub.unibe.ch/download/rinex/rinex212.txt>`, `unofficial rinex 2.20
-            <http://www.aiub.unibe.ch/download/rinex/rnx_leo.txt>`,
-            :class:`~org.orekit.gnss.ftp:.igs.org.pub.data.format.rinex300.pdf`,
-            :class:`~org.orekit.gnss.ftp:.igs.org.pub.data.format.rinex301.pdf`,
-            :class:`~org.orekit.gnss.ftp:.igs.org.pub.data.format.rinex302.pdf`,
-            :class:`~org.orekit.gnss.ftp:.igs.org.pub.data.format.rinex303.pdf`,
-            :class:`~org.orekit.gnss.ftp:.igs.org.pub.data.format.rinex304.pdf`
-    """
-    DEFAULT_RINEX_2_SUPPORTED_NAMES: typing.ClassVar[str] = ...
-    """
-    public static final :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_RINEX_2_SUPPORTED_NAMES
-    
-        Default supported files name pattern for rinex 2 observation files.
-    
-        Also see:
-            :meth:`~constant`
-    
-    
-    """
-    DEFAULT_RINEX_3_SUPPORTED_NAMES: typing.ClassVar[str] = ...
-    """
-    public static final :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DEFAULT_RINEX_3_SUPPORTED_NAMES
-    
-        Default supported files name pattern for rinex 3 observation files.
-    
-        Also see:
-            :meth:`~constant`
-    
-    
-    """
-    @typing.overload
-    def __init__(self, string: str): ...
-    @typing.overload
-    def __init__(self, string: str, dataProvidersManager: org.orekit.data.DataProvidersManager, timeScales: org.orekit.time.TimeScales): ...
-    @typing.overload
-    def __init__(self, dataSource: org.orekit.data.DataSource): ...
-    @typing.overload
-    def __init__(self, dataSource: org.orekit.data.DataSource, timeScales: org.orekit.time.TimeScales): ...
-    def getObservationDataSets(self) -> java.util.List[ObservationDataSet]: ...
-    class Parser(org.orekit.data.DataLoader):
-        def __init__(self, rinexObservationLoader: 'RinexObservationLoader'): ...
-        def loadData(self, inputStream: java.io.InputStream, string: str) -> None: ...
-        def stillAcceptsData(self) -> bool: ...
-        class PhaseShiftCorrection:
-            def getCorrection(self) -> float: ...
-            def getSatelliteSystem(self) -> 'SatelliteSystem': ...
-            def getSatsCorrected(self) -> typing.List[str]: ...
-            def getTypeObs(self) -> ObservationType: ...
-        class ScaleFactorCorrection:
-            def getCorrection(self) -> float: ...
-            def getSatelliteSystem(self) -> 'SatelliteSystem': ...
-            def getTypesObsScaled(self) -> java.util.List[ObservationType]: ...
-
 class SEMParser(org.orekit.data.AbstractSelfFeedingLoader, org.orekit.data.DataLoader):
     """
     public class SEMParser extends :class:`~org.orekit.data.AbstractSelfFeedingLoader` implements :class:`~org.orekit.data.DataLoader`
@@ -1671,6 +993,67 @@ class SEMParser(org.orekit.data.AbstractSelfFeedingLoader, org.orekit.data.DataL
         """
         ...
 
+class SatInSystem:
+    """
+    public class SatInSystem extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Container for satellite system and PRN.
+    
+        Since:
+            12.0
+    """
+    def __init__(self, satelliteSystem: 'SatelliteSystem', int: int): ...
+    def equals(self, object: typing.Any) -> bool:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+        
+        
+        """
+        ...
+    def getPRN(self) -> int:
+        """
+            Get the Pseudo Random Number of the satellite.
+        
+            Returns:
+                Pseudo Random Number of the satellite
+        
+        
+        """
+        ...
+    def getSystem(self) -> 'SatelliteSystem':
+        """
+            Get the system this satellite belongs to.
+        
+            Returns:
+                system this satellite belongs to
+        
+        
+        """
+        ...
+    def getTwoDigitsRinexPRN(self) -> int:
+        """
+            Get a 2-digits Pseudo Random Number for RINEX files.
+        
+            Returns:
+                2-digits Pseudo Random Number for RINEX files
+        
+        
+        """
+        ...
+    def hashCode(self) -> int:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+        
+        
+        """
+        ...
+
 class SatelliteSystem(java.lang.Enum['SatelliteSystem']):
     """
     public enum SatelliteSystem extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.SatelliteSystem`>
@@ -1680,27 +1063,32 @@ class SatelliteSystem(java.lang.Enum['SatelliteSystem']):
         Since:
             9.2
     """
-    GPS: typing.ClassVar['SatelliteSystem'] = ...
-    GLONASS: typing.ClassVar['SatelliteSystem'] = ...
-    GALILEO: typing.ClassVar['SatelliteSystem'] = ...
+    USER_DEFINED_A: typing.ClassVar['SatelliteSystem'] = ...
+    USER_DEFINED_B: typing.ClassVar['SatelliteSystem'] = ...
     BEIDOU: typing.ClassVar['SatelliteSystem'] = ...
-    QZSS: typing.ClassVar['SatelliteSystem'] = ...
+    USER_DEFINED_D: typing.ClassVar['SatelliteSystem'] = ...
+    GALILEO: typing.ClassVar['SatelliteSystem'] = ...
+    USER_DEFINED_F: typing.ClassVar['SatelliteSystem'] = ...
+    GPS: typing.ClassVar['SatelliteSystem'] = ...
+    USER_DEFINED_H: typing.ClassVar['SatelliteSystem'] = ...
     IRNSS: typing.ClassVar['SatelliteSystem'] = ...
-    SBAS: typing.ClassVar['SatelliteSystem'] = ...
+    QZSS: typing.ClassVar['SatelliteSystem'] = ...
+    USER_DEFINED_K: typing.ClassVar['SatelliteSystem'] = ...
+    USER_DEFINED_L: typing.ClassVar['SatelliteSystem'] = ...
     MIXED: typing.ClassVar['SatelliteSystem'] = ...
-    def getDefaultTimeSystem(self, timeScales: org.orekit.time.TimeScales) -> org.orekit.time.TimeScale:
-        """
-            Get default time scale for satellite system.
-        
-            Parameters:
-                timeScales (:class:`~org.orekit.time.TimeScales`): the set of timeScales to use
-        
-            Returns:
-                the default time scale among the given set matching to satellite system, null if there are not
-        
-        
-        """
-        ...
+    USER_DEFINED_N: typing.ClassVar['SatelliteSystem'] = ...
+    USER_DEFINED_O: typing.ClassVar['SatelliteSystem'] = ...
+    USER_DEFINED_P: typing.ClassVar['SatelliteSystem'] = ...
+    USER_DEFINED_Q: typing.ClassVar['SatelliteSystem'] = ...
+    GLONASS: typing.ClassVar['SatelliteSystem'] = ...
+    SBAS: typing.ClassVar['SatelliteSystem'] = ...
+    USER_DEFINED_T: typing.ClassVar['SatelliteSystem'] = ...
+    USER_DEFINED_U: typing.ClassVar['SatelliteSystem'] = ...
+    USER_DEFINED_V: typing.ClassVar['SatelliteSystem'] = ...
+    USER_DEFINED_W: typing.ClassVar['SatelliteSystem'] = ...
+    USER_DEFINED_X: typing.ClassVar['SatelliteSystem'] = ...
+    USER_DEFINED_Y: typing.ClassVar['SatelliteSystem'] = ...
+    USER_DEFINED_Z: typing.ClassVar['SatelliteSystem'] = ...
     def getKey(self) -> str:
         """
             Get the key for the system.
@@ -1711,8 +1099,40 @@ class SatelliteSystem(java.lang.Enum['SatelliteSystem']):
         
         """
         ...
+    def getObservationTimeScale(self) -> ObservationTimeScale:
+        """
+            Get observation time scale for satellite system.
+        
+            Returns:
+                observation time scale, null if there are not
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
     @staticmethod
     def parseSatelliteSystem(string: str) -> 'SatelliteSystem': ...
+    @staticmethod
+    def parseSatelliteSystemWithGPSDefault(string: str) -> 'SatelliteSystem':
+        """
+            Parse a string to get the satellite system.
+        
+            The string first character must be the satellite system, or empty to get GPS as default
+        
+            Parameters:
+                s (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): string to parse
+        
+            Returns:
+                the satellite system
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
     _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
     @typing.overload
     @staticmethod
@@ -1842,13 +1262,18 @@ class TimeSystem(java.lang.Enum['TimeSystem']):
     QZSS: typing.ClassVar['TimeSystem'] = ...
     BEIDOU: typing.ClassVar['TimeSystem'] = ...
     IRNSS: typing.ClassVar['TimeSystem'] = ...
+    SBAS: typing.ClassVar['TimeSystem'] = ...
+    GMT: typing.ClassVar['TimeSystem'] = ...
     UNKNOWN: typing.ClassVar['TimeSystem'] = ...
     def getKey(self) -> str:
         """
-            Get the key for the system.
+            Get the 3 letters key of the time system.
         
             Returns:
-                key for the system
+                3 letters key
+        
+            Since:
+                12.0
         
         
         """
@@ -1867,7 +1292,11 @@ class TimeSystem(java.lang.Enum['TimeSystem']):
         """
         ...
     @staticmethod
+    def parseOneLetterCode(string: str) -> 'TimeSystem': ...
+    @staticmethod
     def parseTimeSystem(string: str) -> 'TimeSystem': ...
+    @staticmethod
+    def parseTwoLettersCode(string: str) -> 'TimeSystem': ...
     _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
     @typing.overload
     @staticmethod
@@ -2005,27 +1434,19 @@ class YUMAParser(org.orekit.data.AbstractSelfFeedingLoader, org.orekit.data.Data
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.gnss")``.
 
-    AppliedDCBS: typing.Type[AppliedDCBS]
-    AppliedPCVS: typing.Type[AppliedPCVS]
-    CombinedObservationData: typing.Type[CombinedObservationData]
-    CombinedObservationDataSet: typing.Type[CombinedObservationDataSet]
     DOP: typing.Type[DOP]
     DOPComputer: typing.Type[DOPComputer]
     Frequency: typing.Type[Frequency]
-    HatanakaCompressFilter: typing.Type[HatanakaCompressFilter]
     MeasurementType: typing.Type[MeasurementType]
-    ObservationData: typing.Type[ObservationData]
-    ObservationDataSet: typing.Type[ObservationDataSet]
+    ObservationTimeScale: typing.Type[ObservationTimeScale]
     ObservationType: typing.Type[ObservationType]
-    RinexObservationHeader: typing.Type[RinexObservationHeader]
-    RinexObservationLoader: typing.Type[RinexObservationLoader]
     SEMParser: typing.Type[SEMParser]
+    SatInSystem: typing.Type[SatInSystem]
     SatelliteSystem: typing.Type[SatelliteSystem]
     SignalCode: typing.Type[SignalCode]
     TimeSystem: typing.Type[TimeSystem]
     YUMAParser: typing.Type[YUMAParser]
     antenna: org.orekit.gnss.antenna.__module_protocol__
     attitude: org.orekit.gnss.attitude.__module_protocol__
-    clock: org.orekit.gnss.clock.__module_protocol__
     metric: org.orekit.gnss.metric.__module_protocol__
-    navigation: org.orekit.gnss.navigation.__module_protocol__
+    rflink: org.orekit.gnss.rflink.__module_protocol__

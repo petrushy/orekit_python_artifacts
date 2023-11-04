@@ -8,7 +8,6 @@ import org.orekit.forces.gravity
 import org.orekit.forces.inertia
 import org.orekit.forces.maneuvers
 import org.orekit.forces.radiation
-import org.orekit.frames
 import org.orekit.propagation
 import org.orekit.propagation.events
 import org.orekit.propagation.numerical
@@ -22,47 +21,43 @@ class BoxAndSolarArraySpacecraft(org.orekit.forces.radiation.RadiationSensitive,
     """
     public class BoxAndSolarArraySpacecraft extends :class:`~org.orekit.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.radiation.RadiationSensitive`, :class:`~org.orekit.forces.drag.DragSensitive`
     
-        Class representing the features of a classical satellite with a convex body shape and rotating flat solar arrays.
+        Class representing the features of a classical satellite with a convex body shape.
     
-        The body can be either a simple parallelepipedic box aligned with spacecraft axes or a set of facets defined by their
-        area and normal vector. This should handle accurately most spacecraft shapes.
-    
-        The solar array rotation with respect to satellite body can be either the best lighting orientation (i.e. Sun exactly in
-        solar array meridian plane defined by solar array rotation axis and solar array normal vector) or a rotation evolving
-        linearly according to a start position and an angular rate (which can be set to 0 for non-rotating panels, which may
-        occur in special modes or during contingencies).
+        The body can be either a simple parallelepipedic box aligned with spacecraft axes or a set of panels defined by their
+        area and normal vector. Some panels may be moving to model solar arrays (or antennas that could point anywhere). This
+        should handle accurately most spacecraft shapes. This model does not take cast shadows into account.
     
         The lift component of the drag force can be optionally considered. It should probably only be used for reentry
         computation, with much denser atmosphere than in regular orbit propagation. The lift component is computed using a ratio
         of molecules that experience specular reflection instead of diffuse reflection (absorption followed by outgassing at
         negligible velocity). Without lift (i.e. when the lift ratio is set to 0), drag force is along atmosphere relative
         velocity. With lift (i.e. when the lift ratio is set to any value between 0 and 1), the drag force depends on both
-        relative velocity direction and facets normal orientation. For a single panel, if the relative velocity is head-on (i.e.
+        relative velocity direction and panels normal orientation. For a single panel, if the relative velocity is head-on (i.e.
         aligned with the panel normal), the force will be in the same direction with and without lift, but the magnitude with
         lift ratio set to 1.0 will be twice the magnitude with lift ratio set to 0.0 (because atmosphere molecules bounces
         backward at same velocity in case of specular reflection).
     
-        This model does not take cast shadow between body and solar array into account.
+        Each :class:`~org.orekit.forces.Panel` has its own set of radiation and drag coefficients. In orbit determination
+        context, it would not be possible to estimate each panel individually, therefore
+        :meth:`~org.orekit.forces.BoxAndSolarArraySpacecraft.getDragParametersDrivers` returns a single
+        :class:`~org.orekit.utils.ParameterDriver` representing a
+        :meth:`~org.orekit.forces.drag.DragSensitive.GLOBAL_DRAG_FACTOR` that applies to all panels drag coefficients and the
+        :meth:`~org.orekit.forces.BoxAndSolarArraySpacecraft.getRadiationParametersDrivers` returns a single
+        :class:`~org.orekit.utils.ParameterDriver` representing a
+        :meth:`~org.orekit.forces.radiation.RadiationSensitive.GLOBAL_RADIATION_FACTOR` that applies to all panels radiation
+        coefficients.
     """
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, double4: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double5: float, double6: float, double7: float): ...
+    def __init__(self, double: float, double2: float, double3: float, extendedPVCoordinatesProvider: org.orekit.utils.ExtendedPVCoordinatesProvider, double4: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double5: float, double6: float, double7: float, double8: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, double4: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double5: float, double6: float, double7: float, double8: float): ...
-    @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, double4: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, double5: float, double6: float, double7: float, double8: float): ...
-    @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, double4: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, double5: float, double6: float, double7: float, double8: float, double9: float): ...
-    @typing.overload
-    def __init__(self, facetArray: typing.List['BoxAndSolarArraySpacecraft.Facet'], pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, double: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double2: float, double3: float, double4: float): ...
-    @typing.overload
-    def __init__(self, facetArray: typing.List['BoxAndSolarArraySpacecraft.Facet'], pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, double: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double2: float, double3: float, double4: float, double5: float): ...
-    @typing.overload
-    def __init__(self, facetArray: typing.List['BoxAndSolarArraySpacecraft.Facet'], pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, double: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, double2: float, double3: float, double4: float, double5: float): ...
-    @typing.overload
-    def __init__(self, facetArray: typing.List['BoxAndSolarArraySpacecraft.Facet'], pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, double: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, double2: float, double3: float, double4: float, double5: float, double6: float): ...
+    def __init__(self, list: java.util.List['Panel']): ...
+    @staticmethod
+    def buildBox(double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float) -> java.util.List['Panel']: ...
+    @staticmethod
+    def buildPanels(double: float, double2: float, double3: float, extendedPVCoordinatesProvider: org.orekit.utils.ExtendedPVCoordinatesProvider, double4: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double5: float, double6: float, double7: float, double8: float) -> java.util.List['Panel']: ...
     _dragAcceleration_0__T = typing.TypeVar('_dragAcceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def dragAcceleration(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_dragAcceleration_0__T], frame: org.orekit.frames.Frame, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T], fieldRotation: org.hipparchus.geometry.euclidean.threed.FieldRotation[_dragAcceleration_0__T], t: _dragAcceleration_0__T, t2: _dragAcceleration_0__T, fieldVector3D2: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T], tArray: typing.List[_dragAcceleration_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T]:
+    def dragAcceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_dragAcceleration_0__T], t: _dragAcceleration_0__T, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T], tArray: typing.List[_dragAcceleration_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T]:
         """
             Compute the acceleration due to drag.
         
@@ -73,11 +68,7 @@ class BoxAndSolarArraySpacecraft(org.orekit.forces.radiation.RadiationSensitive,
                 interface :class:`~org.orekit.forces.drag.DragSensitive`
         
             Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                frame (:class:`~org.orekit.frames.Frame`): inertial reference frame for state (both orbit and attitude)
-                position (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): position of spacecraft in reference frame
-                rotation (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldRotation?is`<T> rotation): orientation (attitude) of the spacecraft with respect to reference frame
-                mass (T): current mass
+                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): current state
                 density (T): atmospheric density at spacecraft position
                 relativeVelocity (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> relativeVelocity): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
                 parameters (T[]): values of the force model parameters
@@ -89,7 +80,7 @@ class BoxAndSolarArraySpacecraft(org.orekit.forces.radiation.RadiationSensitive,
         """
         ...
     @typing.overload
-    def dragAcceleration(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, rotation: org.hipparchus.geometry.euclidean.threed.Rotation, double: float, double2: float, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def dragAcceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, double: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Compute the acceleration due to drag.
         
@@ -100,11 +91,7 @@ class BoxAndSolarArraySpacecraft(org.orekit.forces.radiation.RadiationSensitive,
                 interface :class:`~org.orekit.forces.drag.DragSensitive`
         
             Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                frame (:class:`~org.orekit.frames.Frame`): inertial reference frame for state (both orbit and attitude)
-                position (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): position of spacecraft in reference frame
-                rotation (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Rotation?is`): orientation (attitude) of the spacecraft with respect to reference frame
-                mass (double): current mass
+                state (:class:`~org.orekit.propagation.SpacecraftState`): current state
                 density (double): atmospheric density at spacecraft position
                 relativeVelocity (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
                 parameters (double[]): values of the force model parameters
@@ -115,57 +102,23 @@ class BoxAndSolarArraySpacecraft(org.orekit.forces.radiation.RadiationSensitive,
         """
         ...
     def getDragParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    _getNormal_0__T = typing.TypeVar('_getNormal_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def getNormal(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getNormal_0__T], frame: org.orekit.frames.Frame, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getNormal_0__T], fieldRotation: org.hipparchus.geometry.euclidean.threed.FieldRotation[_getNormal_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getNormal_0__T]:
-        """
-            Get solar array normal in spacecraft frame.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                frame (:class:`~org.orekit.frames.Frame`): inertial reference frame for state (both orbit and attitude)
-                position (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): position of spacecraft in reference frame
-                rotation (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldRotation?is`<T> rotation): orientation (attitude) of the spacecraft with respect to reference frame
-        
-            Returns:
-                solar array normal in spacecraft frame
-        
-        
-        """
-        ...
-    @typing.overload
-    def getNormal(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, rotation: org.hipparchus.geometry.euclidean.threed.Rotation) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Get solar array normal in spacecraft frame.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                frame (:class:`~org.orekit.frames.Frame`): inertial reference frame for state (both orbit and attitude)
-                position (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): position of spacecraft in reference frame
-                rotation (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Rotation?is`): orientation (attitude) of the spacecraft with respect to reference frame
-        
-            Returns:
-                solar array normal in spacecraft frame
-        
-        """
-        ...
+    def getPanels(self) -> java.util.List['Panel']: ...
     def getRadiationParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _radiationPressureAcceleration_0__T = typing.TypeVar('_radiationPressureAcceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def radiationPressureAcceleration(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_radiationPressureAcceleration_0__T], frame: org.orekit.frames.Frame, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_radiationPressureAcceleration_0__T], fieldRotation: org.hipparchus.geometry.euclidean.threed.FieldRotation[_radiationPressureAcceleration_0__T], t: _radiationPressureAcceleration_0__T, fieldVector3D2: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_radiationPressureAcceleration_0__T], tArray: typing.List[_radiationPressureAcceleration_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_radiationPressureAcceleration_0__T]:
+    def radiationPressureAcceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_radiationPressureAcceleration_0__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_radiationPressureAcceleration_0__T], tArray: typing.List[_radiationPressureAcceleration_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_radiationPressureAcceleration_0__T]:
         """
             Compute the acceleration due to radiation pressure.
+        
+            This method implements equation 8-44 from David A. Vallado's Fundamentals of Astrodynamics and Applications, third
+            edition, 2007, Microcosm Press.
         
             Specified by:
                 :meth:`~org.orekit.forces.radiation.RadiationSensitive.radiationPressureAcceleration` in
                 interface :class:`~org.orekit.forces.radiation.RadiationSensitive`
         
             Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                frame (:class:`~org.orekit.frames.Frame`): inertial reference frame for state (both orbit and attitude)
-                position (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): position of spacecraft in reference frame
-                rotation (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldRotation?is`<T> rotation): orientation (attitude) of the spacecraft with respect to reference frame
-                mass (T): current mass
+                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): current state
                 flux (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> flux): radiation flux in the same inertial frame as spacecraft orbit
                 parameters (T[]): values of the force model parameters
         
@@ -176,7 +129,7 @@ class BoxAndSolarArraySpacecraft(org.orekit.forces.radiation.RadiationSensitive,
         """
         ...
     @typing.overload
-    def radiationPressureAcceleration(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, rotation: org.hipparchus.geometry.euclidean.threed.Rotation, double: float, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def radiationPressureAcceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Compute the acceleration due to radiation pressure.
         
@@ -185,11 +138,7 @@ class BoxAndSolarArraySpacecraft(org.orekit.forces.radiation.RadiationSensitive,
                 interface :class:`~org.orekit.forces.radiation.RadiationSensitive`
         
             Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                frame (:class:`~org.orekit.frames.Frame`): inertial reference frame for state (both orbit and attitude)
-                position (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): position of spacecraft in reference frame
-                rotation (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Rotation?is`): orientation (attitude) of the spacecraft with respect to reference frame
-                mass (double): current mass
+                state (:class:`~org.orekit.propagation.SpacecraftState`): current state
                 flux (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): radiation flux in the same inertial frame as spacecraft orbit
                 parameters (double[]): values of the force model parameters
         
@@ -198,14 +147,10 @@ class BoxAndSolarArraySpacecraft(org.orekit.forces.radiation.RadiationSensitive,
         
         """
         ...
-    class Facet:
-        def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float): ...
-        def getArea(self) -> float: ...
-        def getNormal(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
 
-class ForceModel(org.orekit.utils.ParametersDriversProvider):
+class ForceModel(org.orekit.utils.ParameterDriversProvider, org.orekit.propagation.events.EventDetectorsProvider):
     """
-    public interface ForceModel extends :class:`~org.orekit.utils.ParametersDriversProvider`
+    public interface ForceModel extends :class:`~org.orekit.utils.ParameterDriversProvider`, :class:`~org.orekit.propagation.events.EventDetectorsProvider`
     
         This interface represents a force modifying spacecraft motion.
     
@@ -220,9 +165,8 @@ class ForceModel(org.orekit.utils.ParametersDriversProvider):
     
         Force models which create discontinuous acceleration patterns (typically for maneuvers start/stop or solar eclipses
         entry/exit) must provide one or more :class:`~org.orekit.propagation.events.EventDetector` to the propagator thanks to
-        their :meth:`~org.orekit.forces.ForceModel.getEventsDetectors` method. This method is called once just before
-        propagation starts. The events states will be checked by the propagator to ensure accurate propagation and proper events
-        handling.
+        their :meth:`~org.orekit.forces.ForceModel.getEventDetectors` method. This method is called once just before propagation
+        starts. The events states will be checked by the propagator to ensure accurate propagation and proper events handling.
     """
     _acceleration_0__T = typing.TypeVar('_acceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
@@ -232,7 +176,7 @@ class ForceModel(org.orekit.utils.ParametersDriversProvider):
         
             Parameters:
                 s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
-                parameters (T[]): values of the force model parameters
+                parameters (T[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -250,7 +194,7 @@ class ForceModel(org.orekit.utils.ParametersDriversProvider):
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
-                parameters (double[]): values of the force model parameters
+                parameters (double[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -301,56 +245,16 @@ class ForceModel(org.orekit.utils.ParametersDriversProvider):
         
         """
         ...
-    def getEventsDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
-    _getFieldEventsDetectors__T = typing.TypeVar('_getFieldEventsDetectors__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldEventsDetectors(self, field: org.hipparchus.Field[_getFieldEventsDetectors__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventsDetectors__T]]: ...
-    def getParameterDriver(self, string: str) -> org.orekit.utils.ParameterDriver:
-        """
-            Get parameter value from its name.
-        
-            Parameters:
-                name (:class:`~org.orekit.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): parameter name
-        
-            Returns:
-                parameter value
-        
-            Since:
-                8.0
-        
-        
-        """
-        ...
-    _getParameters_1__T = typing.TypeVar('_getParameters_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getParameters(self) -> typing.List[float]:
-        """
-            Get force model parameters.
-        
-            Returns:
-                force model parameters
-        
-            Since:
-                9.0
-        
-        """
-        ...
+    def getEventDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
     @typing.overload
-    def getParameters(self, field: org.hipparchus.Field[_getParameters_1__T]) -> typing.List[_getParameters_1__T]:
-        """
-            Get force model parameters.
-        
-            Parameters:
-                field (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
-        
-            Returns:
-                force model parameters
-        
-            Since:
-                9.0
-        
-        
-        """
-        ...
+    def getEventDetectors(self, list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
+    _getFieldEventDetectors_0__T = typing.TypeVar('_getFieldEventDetectors_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getFieldEventDetectors_1__T = typing.TypeVar('_getFieldEventDetectors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_0__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_0__T]]: ...
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_1__T], list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_1__T]]: ...
     _init_0__T = typing.TypeVar('_init_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_init_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_init_0__T]) -> None:
@@ -383,69 +287,204 @@ class ForceModel(org.orekit.utils.ParametersDriversProvider):
         
         """
         ...
-    def isSupported(self, string: str) -> bool:
+
+class Panel:
+    """
+    public abstract class Panel extends :class:`~org.orekit.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Base class representing one panel of a satellite.
+    
+        Since:
+            3.0
+    
+        Also see:
+            :class:`~org.orekit.forces.FixedPanel`, :class:`~org.orekit.forces.PointingPanel`,
+            :class:`~org.orekit.forces.SlewingPanel`
+    """
+    def getAbsorption(self) -> float:
         """
-            Check if a parameter is supported.
-        
-            Supported parameters are those listed by :meth:`~org.orekit.utils.ParametersDriversProvider.getParametersDrivers`.
-        
-            Parameters:
-                name (:class:`~org.orekit.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): parameter name to check
+            Get radiation pressure absorption coefficient.
         
             Returns:
-                true if the parameter is supported
+                radiation pressure absorption coefficient
         
-            Also see:
-                :meth:`~org.orekit.utils.ParametersDriversProvider.getParametersDrivers`
+        
+        """
+        ...
+    def getArea(self) -> float:
+        """
+            Get panel area.
+        
+            Returns:
+                panel area
+        
+        
+        """
+        ...
+    def getDrag(self) -> float:
+        """
+            Get drag coefficient.
+        
+            Returns:
+                drag coefficient
+        
+        
+        """
+        ...
+    def getLiftRatio(self) -> float:
+        """
+            Get drag lift ratio.
+        
+            Returns:
+                drag lift ratio
+        
+        
+        """
+        ...
+    _getNormal_0__T = typing.TypeVar('_getNormal_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getNormal(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getNormal_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getNormal_0__T]: ...
+    @typing.overload
+    def getNormal(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Get panel normal in spacecraft frame.
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): current spacecraft state
+        
+            Returns:
+                panel normal in spacecraft frame
+        
+        public abstract <T extends :class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> :class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> getNormal (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state)
+        
+            Get panel normal in spacecraft frame.
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): current spacecraft state
+        
+            Returns:
+                panel normal in spacecraft frame
+        
+        
+        """
+        ...
+    def getReflection(self) -> float:
+        """
+            Get radiation pressure specular reflection coefficient.
+        
+            Returns:
+                radiation pressure specular reflection coefficient
+        
+        
+        """
+        ...
+    def isDoubleSided(self) -> bool:
+        """
+            Check if the panel is double-sided (typically solar arrays).
+        
+            Returns:
+                true if panel is double-sided
         
         
         """
         ...
 
-class AbstractForceModel(ForceModel):
+class FixedPanel(Panel):
     """
-    public abstract class AbstractForceModel extends :class:`~org.orekit.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.ForceModel`
+    public class FixedPanel extends :class:`~org.orekit.forces.Panel`
     
-        Base class for force models.
+        Class representing one panel of a satellite, fixed with respect to satellite body.
+    
+        It is mainly used to represent one facet of the body of the satellite.
     
         Since:
-            8.0
+            3.0
     """
-    def __init__(self): ...
-    def getParameterDriver(self, string: str) -> org.orekit.utils.ParameterDriver:
+    def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float, boolean: bool, double2: float, double3: float, double4: float, double5: float): ...
+    _getNormal_0__T = typing.TypeVar('_getNormal_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getNormal(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getNormal_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getNormal_0__T]:
         """
-            Get parameter value from its name.
+            Get panel normal in spacecraft frame.
         
             Specified by:
-                :meth:`~org.orekit.forces.ForceModel.getParameterDriver` in interface :class:`~org.orekit.forces.ForceModel`
+                :meth:`~org.orekit.forces.Panel.getNormal` in class :class:`~org.orekit.forces.Panel`
         
             Parameters:
-                name (:class:`~org.orekit.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): parameter name
+                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): current spacecraft state
         
             Returns:
-                parameter value
+                panel normal in spacecraft frame
         
         
         """
         ...
-    def isSupported(self, string: str) -> bool:
+    @typing.overload
+    def getNormal(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Check if a parameter is supported.
-        
-            Supported parameters are those listed by :meth:`~org.orekit.utils.ParametersDriversProvider.getParametersDrivers`.
+            Get panel normal in spacecraft frame.
         
             Specified by:
-                :meth:`~org.orekit.forces.ForceModel.isSupported` in interface :class:`~org.orekit.forces.ForceModel`
+                :meth:`~org.orekit.forces.Panel.getNormal` in class :class:`~org.orekit.forces.Panel`
         
             Parameters:
-                name (:class:`~org.orekit.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): parameter name to check
+                state (:class:`~org.orekit.propagation.SpacecraftState`): current spacecraft state
         
             Returns:
-                true if the parameter is supported
+                panel normal in spacecraft frame
         
-            Also see:
-                :meth:`~org.orekit.utils.ParametersDriversProvider.getParametersDrivers`
+        """
+        ...
+
+class PointingPanel(Panel):
+    """
+    public class PointingPanel extends :class:`~org.orekit.forces.Panel`
+    
+        Class representing one panel of a satellite, roughly pointing towards some target.
+    
+        It is mainly used to represent a rotating solar array that points towards the Sun.
+    
+        The panel rotation with respect to satellite body is the best pointing orientation achievable when the rotation axix is
+        fixed by body attitude. Target is therefore always exactly in meridian plane defined by rotation axis and panel normal
+        vector.
+    
+        These panels are considered to be always :meth:`~org.orekit.forces.Panel.isDoubleSided`.
+    
+        Since:
+            3.0
+    """
+    def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, extendedPVCoordinatesProvider: org.orekit.utils.ExtendedPVCoordinatesProvider, double: float, double2: float, double3: float, double4: float, double5: float): ...
+    _getNormal_0__T = typing.TypeVar('_getNormal_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getNormal(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getNormal_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getNormal_0__T]:
+        """
+            Get panel normal in spacecraft frame.
         
+            Specified by:
+                :meth:`~org.orekit.forces.Panel.getNormal` in class :class:`~org.orekit.forces.Panel`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): current spacecraft state
+        
+            Returns:
+                panel normal in spacecraft frame
+        
+        
+        """
+        ...
+    @typing.overload
+    def getNormal(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Get panel normal in spacecraft frame.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.Panel.getNormal` in class :class:`~org.orekit.forces.Panel`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): current spacecraft state
+        
+            Returns:
+                panel normal in spacecraft frame
         
         """
         ...
@@ -568,15 +607,13 @@ class PythonForceModel(ForceModel):
         """
         ...
     def finalize(self) -> None: ...
-    def getEventsDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
-    _getFieldEventsDetectors__T = typing.TypeVar('_getFieldEventsDetectors__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldEventsDetectors(self, field: org.hipparchus.Field[_getFieldEventsDetectors__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventsDetectors__T]]: ...
     def getParameterDriver(self, string: str) -> org.orekit.utils.ParameterDriver:
         """
             Get parameter value from its name.
         
             Specified by:
-                :meth:`~org.orekit.forces.ForceModel.getParameterDriver` in interface :class:`~org.orekit.forces.ForceModel`
+                :meth:`~org.orekit.utils.ParameterDriversProvider.getParameterDriver` in
+                interface :class:`~org.orekit.utils.ParameterDriversProvider`
         
             Parameters:
                 name (:class:`~org.orekit.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): parameter name
@@ -591,13 +628,19 @@ class PythonForceModel(ForceModel):
         """
         ...
     _getParameters_1__T = typing.TypeVar('_getParameters_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getParameters_3__T = typing.TypeVar('_getParameters_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getParameters(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]: ...
+    @typing.overload
+    def getParameters(self, field: org.hipparchus.Field[_getParameters_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getParameters_1__T]) -> typing.List[_getParameters_1__T]: ...
     @typing.overload
     def getParameters(self) -> typing.List[float]:
         """
             Get force model parameters.
         
             Specified by:
-                :meth:`~org.orekit.forces.ForceModel.getParameters` in interface :class:`~org.orekit.forces.ForceModel`
+                :meth:`~org.orekit.utils.ParameterDriversProvider.getParameters` in
+                interface :class:`~org.orekit.utils.ParameterDriversProvider`
         
             Returns:
                 force model parameters
@@ -608,12 +651,13 @@ class PythonForceModel(ForceModel):
         """
         ...
     @typing.overload
-    def getParameters(self, field: org.hipparchus.Field[_getParameters_1__T]) -> typing.List[_getParameters_1__T]:
+    def getParameters(self, field: org.hipparchus.Field[_getParameters_3__T]) -> typing.List[_getParameters_3__T]:
         """
             Get force model parameters.
         
             Specified by:
-                :meth:`~org.orekit.forces.ForceModel.getParameters` in interface :class:`~org.orekit.forces.ForceModel`
+                :meth:`~org.orekit.utils.ParameterDriversProvider.getParameters` in
+                interface :class:`~org.orekit.utils.ParameterDriversProvider`
         
             Parameters:
                 field (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
@@ -675,7 +719,8 @@ class PythonForceModel(ForceModel):
             Supported parameters are those listed by :meth:`~org.orekit.forces.PythonForceModel.getParametersDrivers`.
         
             Specified by:
-                :meth:`~org.orekit.forces.ForceModel.isSupported` in interface :class:`~org.orekit.forces.ForceModel`
+                :meth:`~org.orekit.utils.ParameterDriversProvider.isSupported` in
+                interface :class:`~org.orekit.utils.ParameterDriversProvider`
         
             Parameters:
                 name (:class:`~org.orekit.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): parameter name to check
@@ -709,101 +754,55 @@ class PythonForceModel(ForceModel):
         """
         ...
 
-class PythonAbstractForceModel(AbstractForceModel):
+class SlewingPanel(Panel):
     """
-    public class PythonAbstractForceModel extends :class:`~org.orekit.forces.AbstractForceModel`
+    public class SlewingPanel extends :class:`~org.orekit.forces.Panel`
+    
+        Class representing one panel of a satellite, slewing about an axis at constant rate.
+    
+        It is mainly used to represent a solar array with fixed rate rotation.
+    
+        The panel rotation evolves linearly according to a start position and an angular rate (which can be set to 0 for
+        non-rotating panels, which may occur in special modes or during contingencies).
+    
+        These panels are considered to be always :meth:`~org.orekit.forces.Panel.isDoubleSided`.
+    
+        Since:
+            3.0
     """
-    def __init__(self): ...
-    _acceleration_1__T = typing.TypeVar('_acceleration_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float, absoluteDate: org.orekit.time.AbsoluteDate, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, double2: float, double3: float, double4: float, double5: float, double6: float): ...
+    _getNormal_0__T = typing.TypeVar('_getNormal_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def acceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def getNormal(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getNormal_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getNormal_0__T]:
         """
-            Compute acceleration. Extension point for Python.
+            Get panel normal in spacecraft frame.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.Panel.getNormal` in class :class:`~org.orekit.forces.Panel`
         
             Parameters:
-                s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
-                parameters (double[]): values of the force model parameters
+                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): current spacecraft state
         
             Returns:
-                acceleration in same frame as state
+                panel normal in spacecraft frame
         
-            Since:
-                9.0
         
         """
         ...
     @typing.overload
-    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_1__T], tArray: typing.List[_acceleration_1__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_1__T]:
+    def getNormal(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Compute acceleration. Automatically directs to the Python extension point acceleration_FT
+            Get panel normal in spacecraft frame.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.Panel.getNormal` in class :class:`~org.orekit.forces.Panel`
         
             Parameters:
-                s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
-                parameters (T[]): values of the force model parameters
+                state (:class:`~org.orekit.propagation.SpacecraftState`): current spacecraft state
         
             Returns:
-                acceleration in same frame as state
+                panel normal in spacecraft frame
         
-            Since:
-                9.0
-        
-        
-        """
-        ...
-    _acceleration_FT__T = typing.TypeVar('_acceleration_FT__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def acceleration_FT(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_FT__T], tArray: typing.List[_acceleration_FT__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_FT__T]:
-        """
-            Compute acceleration, Alternative python interface point for the acceleration method. Extension point for Python.
-        
-            Parameters:
-                s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
-                parameters (T[]): values of the force model parameters
-        
-            Returns:
-                acceleration in same frame as state
-        
-            Since:
-                9.0
-        
-        
-        """
-        ...
-    def dependsOnPositionOnly(self) -> bool:
-        """
-            Check if force models depends on position only. Extension point for Python.
-        
-            Returns:
-                true if force model depends on position only, false if it depends on velocity, either directly or due to a dependency on
-                attitude
-        
-            Since:
-                9.0
-        
-        
-        """
-        ...
-    def finalize(self) -> None: ...
-    def getEventsDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
-    _getFieldEventsDetectors__T = typing.TypeVar('_getFieldEventsDetectors__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldEventsDetectors(self, field: org.hipparchus.Field[_getFieldEventsDetectors__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventsDetectors__T]]: ...
-    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
         """
         ...
 
@@ -811,11 +810,13 @@ class PythonAbstractForceModel(AbstractForceModel):
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.forces")``.
 
-    AbstractForceModel: typing.Type[AbstractForceModel]
     BoxAndSolarArraySpacecraft: typing.Type[BoxAndSolarArraySpacecraft]
+    FixedPanel: typing.Type[FixedPanel]
     ForceModel: typing.Type[ForceModel]
-    PythonAbstractForceModel: typing.Type[PythonAbstractForceModel]
+    Panel: typing.Type[Panel]
+    PointingPanel: typing.Type[PointingPanel]
     PythonForceModel: typing.Type[PythonForceModel]
+    SlewingPanel: typing.Type[SlewingPanel]
     drag: org.orekit.forces.drag.__module_protocol__
     empirical: org.orekit.forces.empirical.__module_protocol__
     gravity: org.orekit.forces.gravity.__module_protocol__

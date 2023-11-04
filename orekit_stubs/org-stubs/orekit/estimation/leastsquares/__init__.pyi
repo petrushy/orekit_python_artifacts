@@ -23,10 +23,7 @@ class AbstractBatchLSModel(org.hipparchus.optim.nonlinear.vector.leastsquares.Mu
         Since:
             11.0
     """
-    @typing.overload
-    def __init__(self, orbitDeterminationPropagatorBuilderArray: typing.List[org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: 'ModelObserver'): ...
-    @typing.overload
-    def __init__(self, orbitDeterminationPropagatorBuilderArray: typing.List[org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, matricesHarvesterArray: typing.List[org.orekit.propagation.MatricesHarvester], modelObserver: 'ModelObserver'): ...
+    def __init__(self, propagatorBuilderArray: typing.List[org.orekit.propagation.conversion.PropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: 'ModelObserver'): ...
     def createPropagators(self, realVector: org.hipparchus.linear.RealVector) -> typing.List[org.orekit.propagation.Propagator]:
         """
             Create the propagators and parameters corresponding to an evaluation point.
@@ -138,14 +135,19 @@ class BatchLSEstimator:
     
         Least squares estimator for orbit determination.
     
-        Since 10.0, the least squares estimator can be used with both
-        :class:`~org.orekit.propagation.numerical.NumericalPropagator` and
-        :class:`~org.orekit.propagation.semianalytical.dsst.DSSTPropagator` orbit propagators.
+        The least squares estimator can be used with different orbit propagators in Orekit. Current propagators list of usable
+        propagators are :class:`~org.orekit.propagation.numerical.NumericalPropagator`,
+        :class:`~org.orekit.propagation.semianalytical.dsst.DSSTPropagator`,
+        :class:`~org.orekit.propagation.analytical.BrouwerLyddanePropagator`,
+        :class:`~org.orekit.propagation.analytical.EcksteinHechlerPropagator`,
+        :class:`~org.orekit.propagation.analytical.tle.TLEPropagator`,
+        :class:`~org.orekit.propagation.analytical.KeplerianPropagator`, and
+        :class:`~org.orekit.propagation.analytical.Ephemeris`.
     
         Since:
             8.0
     """
-    def __init__(self, leastSquaresOptimizer: org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer, *orbitDeterminationPropagatorBuilder: org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder): ...
+    def __init__(self, leastSquaresOptimizer: org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer, *propagatorBuilder: org.orekit.propagation.conversion.PropagatorBuilder): ...
     def addMeasurement(self, observedMeasurement: org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]) -> None:
         """
             Add a measurement.
@@ -441,7 +443,7 @@ class BatchLSModel(AbstractBatchLSModel):
         Since:
             8.0
     """
-    def __init__(self, orbitDeterminationPropagatorBuilderArray: typing.List[org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: ModelObserver): ...
+    def __init__(self, propagatorBuilderArray: typing.List[org.orekit.propagation.conversion.PropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: ModelObserver): ...
 
 class DSSTBatchLSModel(AbstractBatchLSModel):
     """
@@ -450,32 +452,32 @@ class DSSTBatchLSModel(AbstractBatchLSModel):
         Bridge between :class:`~org.orekit.estimation.measurements.ObservedMeasurement` and
         :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem?is`.
     
-        This class is an adaption of the :class:`~org.orekit.estimation.leastsquares.BatchLSModel` class but for the
+        This class is an adaption of the :class:`~org.orekit.estimation.leastsquares.BatchLSModel` class for the
         :class:`~org.orekit.propagation.semianalytical.dsst.DSSTPropagator`.
     
         Since:
             10.0
     """
-    def __init__(self, orbitDeterminationPropagatorBuilderArray: typing.List[org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: ModelObserver, propagationType: org.orekit.propagation.PropagationType, propagationType2: org.orekit.propagation.PropagationType): ...
+    def __init__(self, propagatorBuilderArray: typing.List[org.orekit.propagation.conversion.PropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: ModelObserver, propagationType: org.orekit.propagation.PropagationType): ...
 
 class PythonAbstractBatchLSModel(AbstractBatchLSModel):
     """
     public class PythonAbstractBatchLSModel extends :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
     """
-    def __init__(self, orbitDeterminationPropagatorBuilderArray: typing.List[org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, abstractJacobiansMapperArray: typing.List[org.orekit.propagation.integration.AbstractJacobiansMapper], modelObserver: ModelObserver): ...
-    def configureDerivatives(self, propagator: org.orekit.propagation.Propagator) -> org.orekit.propagation.integration.AbstractJacobiansMapper:
+    def __init__(self, propagatorBuilderArray: typing.List[org.orekit.propagation.conversion.PropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: ModelObserver): ...
+    def configureHarvester(self, propagator: org.orekit.propagation.Propagator) -> org.orekit.propagation.MatricesHarvester:
         """
             Configure the propagator to compute derivatives.
         
             Specified by:
-                :meth:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel.configureDerivatives` in
+                :meth:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel.configureHarvester` in
                 class :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
         
             Parameters:
-                propagators (:class:`~org.orekit.propagation.Propagator`): :class:`~org.orekit.propagation.Propagator` to configure
+                propagator (:class:`~org.orekit.propagation.Propagator`): :class:`~org.orekit.propagation.Propagator` to configure
         
             Returns:
-                mapper for this propagator
+                harvester harvester to retrive the State Transition Matrix and Jacobian Matrix
         
         
         """
@@ -788,21 +790,7 @@ class SequentialBatchLSEstimator(BatchLSEstimator):
         Since:
             11.0
     """
-    def __init__(self, sequentialGaussNewtonOptimizer: org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer, *orbitDeterminationPropagatorBuilder: org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder): ...
-
-class TLEBatchLSModel(AbstractBatchLSModel):
-    """
-    :class:`~org.orekit.estimation.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class TLEBatchLSModel extends :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
-    
-        Deprecated.
-        as of 11.1, replaced by :class:`~org.orekit.estimation.leastsquares.BatchLSModel`
-        Bridge between :class:`~org.orekit.estimation.measurements.ObservedMeasurement` and
-        :class:`~org.orekit.estimation.leastsquares.https:.www.hipparchus.org.apidocs.org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem?is`.
-    
-        Since:
-            11.0
-    """
-    def __init__(self, orbitDeterminationPropagatorBuilderArray: typing.List[org.orekit.propagation.conversion.OrbitDeterminationPropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: ModelObserver): ...
+    def __init__(self, sequentialGaussNewtonOptimizer: org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer, *propagatorBuilder: org.orekit.propagation.conversion.PropagatorBuilder): ...
 
 
 class __module_protocol__(typing.Protocol):
@@ -818,4 +806,3 @@ class __module_protocol__(typing.Protocol):
     PythonBatchLSObserver: typing.Type[PythonBatchLSObserver]
     PythonModelObserver: typing.Type[PythonModelObserver]
     SequentialBatchLSEstimator: typing.Type[SequentialBatchLSEstimator]
-    TLEBatchLSModel: typing.Type[TLEBatchLSModel]

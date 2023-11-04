@@ -69,12 +69,7 @@ class KendallsCorrelation:
         *discordant* if x :sub:`1` < x :sub:`2` and y :sub:`2` < y :sub:`1` or x :sub:`2` < x :sub:`1` and y :sub:`1` < y
         :sub:`2` . If either x :sub:`1` = x :sub:`2` or y :sub:`1` = y :sub:`2` , the pair is neither concordant nor discordant.
     
-        Kendall's Tau-b is defined as:
-    
-        .. code-block: java
-        
-         tau :sub:`b`  = (n :sub:`c`  - n :sub:`d` ) / sqrt((n :sub:`0`  - n :sub:`1` ) * (n :sub:`0`  - n :sub:`2` ))
-         
+        Kendall's Tau-b is defined as: \[ \tau_b = \frac{n_c - n_d}{\sqrt{(n_0 - n_1) (n_0 - n_2)}} \]
     
         where:
     
@@ -139,6 +134,29 @@ class KendallsCorrelation:
         ...
 
 class PearsonsCorrelation:
+    """
+    public class PearsonsCorrelation extends :class:`~org.hipparchus.stat.correlation.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Computes Pearson's product-moment correlation coefficients for pairs of arrays or columns of a matrix.
+    
+        The constructors that take :code:`RealMatrix` or :code:`double[][]` arguments generate correlation matrices. The columns
+        of the input matrices are assumed to represent variable values. Correlations are given by the formula:
+    
+        :code:`cor(X, Y) = Σ[(x :sub:`i` - E(X))(y :sub:`i` - E(Y))] / [(n - 1)s(X)s(Y)]`
+    
+        where :code:`E(X)` is the mean of :code:`X`, :code:`E(Y)` is the mean of the :code:`Y` values and s(X), s(Y) are
+        standard deviations.
+    
+        To compute the correlation coefficient for a single pair of arrays, use
+        :meth:`~org.hipparchus.stat.correlation.PearsonsCorrelation.%3Cinit%3E` to construct an instance with no data and then
+        :meth:`~org.hipparchus.stat.correlation.PearsonsCorrelation.correlation`. Correlation matrices can also be computed
+        directly from an instance with no data using
+        :meth:`~org.hipparchus.stat.correlation.PearsonsCorrelation.computeCorrelationMatrix`. In order to use
+        :meth:`~org.hipparchus.stat.correlation.PearsonsCorrelation.getCorrelationMatrix`,
+        :meth:`~org.hipparchus.stat.correlation.PearsonsCorrelation.getCorrelationPValues`, or
+        :meth:`~org.hipparchus.stat.correlation.PearsonsCorrelation.getCorrelationStandardErrors`; however, one of the
+        constructors supplying data or a covariance matrix must be used to create the instance.
+    """
     @typing.overload
     def __init__(self): ...
     @typing.overload
@@ -150,14 +168,152 @@ class PearsonsCorrelation:
     @typing.overload
     def __init__(self, covariance: Covariance): ...
     @typing.overload
-    def computeCorrelationMatrix(self, doubleArray: typing.List[typing.List[float]]) -> org.hipparchus.linear.RealMatrix: ...
+    def computeCorrelationMatrix(self, doubleArray: typing.List[typing.List[float]]) -> org.hipparchus.linear.RealMatrix:
+        """
+            Computes the correlation matrix for the columns of the input matrix, using
+            :meth:`~org.hipparchus.stat.correlation.PearsonsCorrelation.correlation`. Throws MathIllegalArgumentException if the
+            matrix does not have at least two columns and two rows. Pairwise correlations are set to NaN if one of the correlates
+            has zero variance.
+        
+            Parameters:
+                matrix (:class:`~org.hipparchus.stat.correlation.https:.www.hipparchus.org.hipparchus`): matrix with columns representing variables to correlate
+        
+            Returns:
+                correlation matrix
+        
+            Raises:
+                :class:`~org.hipparchus.stat.correlation.https:.www.hipparchus.org.hipparchus`: if the matrix does not contain sufficient data
+        
+            Also see:
+                :meth:`~org.hipparchus.stat.correlation.PearsonsCorrelation.correlation`
+        
+            Computes the correlation matrix for the columns of the input rectangular array. The columns of the array represent
+            values of variables to be correlated. Throws MathIllegalArgumentException if the matrix does not have at least two
+            columns and two rows or if the array is not rectangular. Pairwise correlations are set to NaN if one of the correlates
+            has zero variance.
+        
+            Parameters:
+                data (double[][]): matrix with columns representing variables to correlate
+        
+            Returns:
+                correlation matrix
+        
+            Raises:
+                :class:`~org.hipparchus.stat.correlation.https:.www.hipparchus.org.hipparchus`: if the array does not contain sufficient data
+        
+            Also see:
+                :meth:`~org.hipparchus.stat.correlation.PearsonsCorrelation.correlation`
+        
+        
+        """
+        ...
     @typing.overload
     def computeCorrelationMatrix(self, realMatrix: org.hipparchus.linear.RealMatrix) -> org.hipparchus.linear.RealMatrix: ...
-    def correlation(self, doubleArray: typing.List[float], doubleArray2: typing.List[float]) -> float: ...
-    def covarianceToCorrelation(self, realMatrix: org.hipparchus.linear.RealMatrix) -> org.hipparchus.linear.RealMatrix: ...
-    def getCorrelationMatrix(self) -> org.hipparchus.linear.RealMatrix: ...
-    def getCorrelationPValues(self) -> org.hipparchus.linear.RealMatrix: ...
-    def getCorrelationStandardErrors(self) -> org.hipparchus.linear.RealMatrix: ...
+    def correlation(self, doubleArray: typing.List[float], doubleArray2: typing.List[float]) -> float:
+        """
+            Computes the Pearson's product-moment correlation coefficient between two arrays.
+        
+            Throws MathIllegalArgumentException if the arrays do not have the same length or their common length is less than 2.
+            Returns :code:`NaN` if either of the arrays has zero variance (i.e., if one of the arrays does not contain at least two
+            distinct values).
+        
+            Parameters:
+                xArray (double[]): first data array
+                yArray (double[]): second data array
+        
+            Returns:
+                Returns Pearson's correlation coefficient for the two arrays
+        
+            Raises:
+                :class:`~org.hipparchus.stat.correlation.https:.www.hipparchus.org.hipparchus`: if the arrays lengths do not match
+                :class:`~org.hipparchus.stat.correlation.https:.www.hipparchus.org.hipparchus`: if there is insufficient data
+        
+        
+        """
+        ...
+    def covarianceToCorrelation(self, realMatrix: org.hipparchus.linear.RealMatrix) -> org.hipparchus.linear.RealMatrix:
+        """
+            Derives a correlation matrix from a covariance matrix.
+        
+            Uses the formula
+        
+        
+            :code:`r(X,Y) = cov(X,Y)/s(X)s(Y)` where :code:`r(·,·)` is the correlation coefficient and :code:`s(·)` means
+            standard deviation.
+        
+            Parameters:
+                covarianceMatrix (:class:`~org.hipparchus.stat.correlation.https:.www.hipparchus.org.hipparchus`): the covariance matrix
+        
+            Returns:
+                correlation matrix
+        
+        
+        """
+        ...
+    def getCorrelationMatrix(self) -> org.hipparchus.linear.RealMatrix:
+        """
+            Returns the correlation matrix.
+        
+            This method will return null if the argumentless constructor was used to create this instance, even if
+            :meth:`~org.hipparchus.stat.correlation.PearsonsCorrelation.computeCorrelationMatrix` has been called before it is
+            activated.
+        
+            Returns:
+                correlation matrix
+        
+        
+        """
+        ...
+    def getCorrelationPValues(self) -> org.hipparchus.linear.RealMatrix:
+        """
+            Returns a matrix of p-values associated with the (two-sided) null hypothesis that the corresponding correlation
+            coefficient is zero.
+        
+            :code:`getCorrelationPValues().getEntry(i,j)` is the probability that a random variable distributed as :code:`t
+            :sub:`n-2`` takes a value with absolute value greater than or equal to
+        
+        
+            :code:`|r|((n - 2) / (1 - r :sup:`2` )) :sup:`1/2``
+        
+            The values in the matrix are sometimes referred to as the *significance* of the corresponding correlation coefficients.
+        
+            To use this method, one of the constructors that supply an input matrix must have been used to create this instance.
+        
+            Returns:
+                matrix of p-values
+        
+            Raises:
+                :class:`~org.hipparchus.stat.correlation.https:.www.hipparchus.org.hipparchus`: if an error occurs estimating probabilities
+                :class:`~org.hipparchus.stat.correlation.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if this instance was created with no data
+        
+        
+        """
+        ...
+    def getCorrelationStandardErrors(self) -> org.hipparchus.linear.RealMatrix:
+        """
+            Returns a matrix of standard errors associated with the estimates in the correlation matrix.
+        
+        
+            :code:`getCorrelationStandardErrors().getEntry(i,j)` is the standard error associated with
+            :code:`getCorrelationMatrix.getEntry(i,j)`
+        
+            The formula used to compute the standard error is
+        
+        
+            :code:`SE :sub:`r` = ((1 - r :sup:`2` ) / (n - 2)) :sup:`1/2`` where :code:`r` is the estimated correlation coefficient
+            and :code:`n` is the number of observations in the source dataset.
+        
+            To use this method, one of the constructors that supply an input matrix must have been used to create this instance.
+        
+            Returns:
+                matrix of correlation standard errors
+        
+            Raises:
+                :class:`~org.hipparchus.stat.correlation.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if this instance was created with no data
+        
+        
+        """
+        ...
 
 class SpearmansCorrelation:
     """

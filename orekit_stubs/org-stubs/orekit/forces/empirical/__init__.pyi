@@ -12,16 +12,15 @@ import typing
 
 
 
-class AccelerationModel:
+class AccelerationModel(org.orekit.utils.ParameterDriversProvider):
     """
-    public interface AccelerationModel
+    public interface AccelerationModel extends :class:`~org.orekit.utils.ParameterDriversProvider`
     
         Acceleration model used by empirical force.
     
         Since:
             10.3
     """
-    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
             Initialize the acceleration model at the start of the propagation.
@@ -72,9 +71,9 @@ class AccelerationModel:
         """
         ...
 
-class ParametricAcceleration(org.orekit.forces.AbstractForceModel):
+class ParametricAcceleration(org.orekit.forces.ForceModel):
     """
-    public class ParametricAcceleration extends :class:`~org.orekit.forces.AbstractForceModel`
+    public class ParametricAcceleration extends :class:`~org.orekit.forces.empirical.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.ForceModel`
     
         This class implements a parametric acceleration.
     
@@ -110,9 +109,12 @@ class ParametricAcceleration(org.orekit.forces.AbstractForceModel):
         """
             Compute acceleration.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): current state information: date, kinematics, attitude
-                parameters (T[]): values of the force model parameters
+                parameters (T[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -125,9 +127,12 @@ class ParametricAcceleration(org.orekit.forces.AbstractForceModel):
         """
             Compute acceleration.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
-                parameters (double[]): values of the force model parameters
+                parameters (double[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
@@ -138,6 +143,9 @@ class ParametricAcceleration(org.orekit.forces.AbstractForceModel):
         """
             Check if force models depends on position only.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.dependsOnPositionOnly` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Returns:
                 true if force model depends on position only, false if it depends on velocity, either directly or due to a dependency on
                 attitude
@@ -145,9 +153,16 @@ class ParametricAcceleration(org.orekit.forces.AbstractForceModel):
         
         """
         ...
-    def getEventsDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
-    _getFieldEventsDetectors__T = typing.TypeVar('_getFieldEventsDetectors__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldEventsDetectors(self, field: org.hipparchus.Field[_getFieldEventsDetectors__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventsDetectors__T]]: ...
+    @typing.overload
+    def getEventDetectors(self, list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
+    @typing.overload
+    def getEventDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
+    _getFieldEventDetectors_0__T = typing.TypeVar('_getFieldEventDetectors_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getFieldEventDetectors_1__T = typing.TypeVar('_getFieldEventDetectors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_0__T], list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_0__T]]: ...
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_1__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_1__T]]: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _init_0__T = typing.TypeVar('_init_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
@@ -161,6 +176,9 @@ class ParametricAcceleration(org.orekit.forces.AbstractForceModel):
         
             The default implementation of this method does nothing.
         
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.init` in interface :class:`~org.orekit.forces.ForceModel`
+        
             Parameters:
                 initialState (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state at the start of propagation.
                 target (:class:`~org.orekit.time.AbsoluteDate`): date of propagation. Not equal to :code:`initialState.getDate()`.
@@ -169,7 +187,7 @@ class ParametricAcceleration(org.orekit.forces.AbstractForceModel):
         """
         ...
 
-class TimeSpanParametricAcceleration(org.orekit.forces.AbstractForceModel):
+class TimeSpanParametricAcceleration(org.orekit.forces.ForceModel):
     DATE_BEFORE: typing.ClassVar[str] = ...
     DATE_AFTER: typing.ClassVar[str] = ...
     @typing.overload
@@ -192,12 +210,18 @@ class TimeSpanParametricAcceleration(org.orekit.forces.AbstractForceModel):
     def extractParameters(self, tArray: typing.List[_extractParameters_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_extractParameters_1__T]) -> typing.List[_extractParameters_1__T]: ...
     def getAccelerationModel(self, absoluteDate: org.orekit.time.AbsoluteDate) -> AccelerationModel: ...
     def getAccelerationModelSpan(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.utils.TimeSpanMap.Span[AccelerationModel]: ...
-    def getEventsDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
-    _getFieldEventsDetectors__T = typing.TypeVar('_getFieldEventsDetectors__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldEventsDetectors(self, field: org.hipparchus.Field[_getFieldEventsDetectors__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventsDetectors__T]]: ...
+    @typing.overload
+    def getEventDetectors(self, list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
+    @typing.overload
+    def getEventDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
+    _getFieldEventDetectors_0__T = typing.TypeVar('_getFieldEventDetectors_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getFieldEventDetectors_1__T = typing.TypeVar('_getFieldEventDetectors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_0__T], list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_0__T]]: ...
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_1__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_1__T]]: ...
     def getFirstSpan(self) -> org.orekit.utils.TimeSpanMap.Span[AccelerationModel]: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    def getTransitions(self) -> java.util.NavigableSet[org.orekit.utils.TimeSpanMap.Transition[AccelerationModel]]: ...
     _init_0__T = typing.TypeVar('_init_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_init_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_init_0__T]) -> None: ...

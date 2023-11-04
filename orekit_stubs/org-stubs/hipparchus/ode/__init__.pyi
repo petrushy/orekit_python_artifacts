@@ -2,8 +2,6 @@ import java.io
 import java.lang
 import java.util
 import org.hipparchus
-import org.hipparchus.analysis
-import org.hipparchus.analysis.solvers
 import org.hipparchus.complex
 import org.hipparchus.exception
 import org.hipparchus.ode.events
@@ -37,6 +35,7 @@ class ComplexODEConverter:
         The proper way to use the converter is as follows:
     
         .. code-block: java
+        
         
            ODEIntegrator                       integrator       = ...build some integrator...;
            ComplexOrdinaryDifferentialEquation complexEquations = ...set up the complex problem...;
@@ -301,9 +300,55 @@ class ComplexOrdinaryDifferentialEquation:
         ...
 
 class ComplexSecondaryODE:
+    """
+    public interface ComplexSecondaryODE
+    
+        This interface allows users to add secondary differential equations to a primary set of differential equations.
+    
+        In some cases users may need to integrate some problem-specific equations along with a primary set of differential
+        equations. One example is optimal control where adjoined parameters linked to the minimized hamiltonian must be
+        integrated.
+    
+        This interface allows users to add such equations to a primary set of
+        :class:`~org.hipparchus.ode.OrdinaryDifferentialEquation` thanks to the
+        :meth:`~org.hipparchus.ode.ExpandableODE.addSecondaryEquations` method, after having converted the instance to
+        :class:`~org.hipparchus.ode.SecondaryODE`
+    
+        Since:
+            1.4
+    
+        Also see:
+            :class:`~org.hipparchus.ode.ExpandableODE`, :class:`~org.hipparchus.ode.ComplexODEConverter`
+    """
     def computeDerivatives(self, double: float, complexArray: typing.List[org.hipparchus.complex.Complex], complexArray2: typing.List[org.hipparchus.complex.Complex], complexArray3: typing.List[org.hipparchus.complex.Complex]) -> typing.List[org.hipparchus.complex.Complex]: ...
-    def getDimension(self) -> int: ...
-    def init(self, double: float, complexArray: typing.List[org.hipparchus.complex.Complex], complexArray2: typing.List[org.hipparchus.complex.Complex], double2: float) -> None: ...
+    def getDimension(self) -> int:
+        """
+            Get the dimension of the secondary state parameters.
+        
+            Returns:
+                dimension of the secondary state parameters
+        
+        
+        """
+        ...
+    def init(self, double: float, complexArray: typing.List[org.hipparchus.complex.Complex], complexArray2: typing.List[org.hipparchus.complex.Complex], double2: float) -> None:
+        """
+            Initialize equations at the start of an ODE integration.
+        
+            This method is called once at the start of the integration. It may be used by the equations to initialize some internal
+            data if needed.
+        
+            The default implementation does nothing.
+        
+            Parameters:
+                t0 (double): value of the independent *time* variable at integration start
+                primary0 (:class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`[]): array containing the value of the primary state vector at integration start
+                secondary0 (:class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`[]): array containing the value of the secondary state vector at integration start
+                finalTime (double): target time for the integration
+        
+        
+        """
+        ...
 
 class DenseOutputModel(org.hipparchus.ode.sampling.ODEStepHandler, java.io.Serializable):
     """
@@ -676,20 +721,33 @@ class FieldODEIntegrator(typing.Generic[_FieldODEIntegrator__T]):
         Also see:
             :class:`~org.hipparchus.ode.FieldOrdinaryDifferentialEquation`
     """
-    @typing.overload
-    def addEventHandler(self, fieldODEEventHandler: org.hipparchus.ode.events.FieldODEEventHandler[_FieldODEIntegrator__T], double: float, double2: float, int: int) -> None: ...
-    @typing.overload
-    def addEventHandler(self, fieldODEEventHandler: org.hipparchus.ode.events.FieldODEEventHandler[_FieldODEIntegrator__T], double: float, double2: float, int: int, bracketedRealFieldUnivariateSolver: org.hipparchus.analysis.solvers.BracketedRealFieldUnivariateSolver[_FieldODEIntegrator__T]) -> None: ...
+    def addEventDetector(self, fieldODEEventDetector: org.hipparchus.ode.events.FieldODEEventDetector[_FieldODEIntegrator__T]) -> None: ...
+    def addStepEndHandler(self, fieldODEStepEndHandler: org.hipparchus.ode.events.FieldODEStepEndHandler[_FieldODEIntegrator__T]) -> None: ...
     def addStepHandler(self, fieldODEStepHandler: org.hipparchus.ode.sampling.FieldODEStepHandler[_FieldODEIntegrator__T]) -> None: ...
-    def clearEventHandlers(self) -> None:
+    def clearEventDetectors(self) -> None:
         """
             Remove all the event handlers that have been added to the integrator.
         
+            Since:
+                3.0
+        
             Also see:
-                :meth:`~org.hipparchus.ode.FieldODEIntegrator.addEventHandler`,
-                :meth:`~org.hipparchus.ode.FieldODEIntegrator.addEventHandler`,
-                :meth:`~org.hipparchus.ode.FieldODEIntegrator.getEventHandlers`,
-                :meth:`~org.hipparchus.ode.FieldODEIntegrator.getEventHandlersConfigurations`
+                :meth:`~org.hipparchus.ode.FieldODEIntegrator.addEventDetector`,
+                :meth:`~org.hipparchus.ode.FieldODEIntegrator.getEventDetectors`
+        
+        
+        """
+        ...
+    def clearStepEndHandlers(self) -> None:
+        """
+            Remove all the handlers for step ends that have been added to the integrator.
+        
+            Since:
+                3.0
+        
+            Also see:
+                :meth:`~org.hipparchus.ode.FieldODEIntegrator.addStepEndHandler`,
+                :meth:`~org.hipparchus.ode.FieldODEIntegrator.getStepEndHandlers`
         
         
         """
@@ -734,8 +792,7 @@ class FieldODEIntegrator(typing.Generic[_FieldODEIntegrator__T]):
         
         """
         ...
-    def getEventHandlers(self) -> java.util.Collection[org.hipparchus.ode.events.FieldODEEventHandler[_FieldODEIntegrator__T]]: ...
-    def getEventHandlersConfigurations(self) -> java.util.Collection[org.hipparchus.ode.events.FieldEventHandlerConfiguration[_FieldODEIntegrator__T]]: ...
+    def getEventDetectors(self) -> java.util.List[org.hipparchus.ode.events.FieldODEEventDetector[_FieldODEIntegrator__T]]: ...
     def getMaxEvaluations(self) -> int:
         """
             Get the maximal number of functions evaluations.
@@ -756,7 +813,8 @@ class FieldODEIntegrator(typing.Generic[_FieldODEIntegrator__T]):
         
         """
         ...
-    def getStepHandlers(self) -> java.util.Collection[org.hipparchus.ode.sampling.FieldODEStepHandler[_FieldODEIntegrator__T]]: ...
+    def getStepEndHandlers(self) -> java.util.List[org.hipparchus.ode.events.FieldODEStepEndHandler[_FieldODEIntegrator__T]]: ...
+    def getStepHandlers(self) -> java.util.List[org.hipparchus.ode.sampling.FieldODEStepHandler[_FieldODEIntegrator__T]]: ...
     def getStepStart(self) -> 'FieldODEStateAndDerivative'[_FieldODEIntegrator__T]: ...
     def integrate(self, fieldExpandableODE: FieldExpandableODE[_FieldODEIntegrator__T], fieldODEState: 'FieldODEState'[_FieldODEIntegrator__T], t: _FieldODEIntegrator__T) -> 'FieldODEStateAndDerivative'[_FieldODEIntegrator__T]: ...
     def setMaxEvaluations(self, int: int) -> None:
@@ -956,9 +1014,51 @@ class FieldOrdinaryDifferentialEquation(typing.Generic[_FieldOrdinaryDifferentia
 
 _FieldSecondaryODE__T = typing.TypeVar('_FieldSecondaryODE__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldSecondaryODE(typing.Generic[_FieldSecondaryODE__T]):
+    """
+    public interface FieldSecondaryODE<T extends :class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`<T>>
+    
+        This interface allows users to add secondary differential equations to a primary set of differential equations.
+    
+        In some cases users may need to integrate some problem-specific equations along with a primary set of differential
+        equations. One example is optimal control where adjoined parameters linked to the minimized Hamiltonian must be
+        integrated.
+    
+        This interface allows users to add such equations to a primary set of
+        :class:`~org.hipparchus.ode.FieldOrdinaryDifferentialEquation` thanks to the
+        :meth:`~org.hipparchus.ode.FieldExpandableODE.addSecondaryEquations` method.
+    
+        Also see:
+            :class:`~org.hipparchus.ode.FieldOrdinaryDifferentialEquation`, :class:`~org.hipparchus.ode.FieldExpandableODE`
+    """
     def computeDerivatives(self, t: _FieldSecondaryODE__T, tArray: typing.List[_FieldSecondaryODE__T], tArray2: typing.List[_FieldSecondaryODE__T], tArray3: typing.List[_FieldSecondaryODE__T]) -> typing.List[_FieldSecondaryODE__T]: ...
-    def getDimension(self) -> int: ...
-    def init(self, t: _FieldSecondaryODE__T, tArray: typing.List[_FieldSecondaryODE__T], tArray2: typing.List[_FieldSecondaryODE__T], t4: _FieldSecondaryODE__T) -> None: ...
+    def getDimension(self) -> int:
+        """
+            Get the dimension of the secondary state parameters.
+        
+            Returns:
+                dimension of the secondary state parameters
+        
+        
+        """
+        ...
+    def init(self, t: _FieldSecondaryODE__T, tArray: typing.List[_FieldSecondaryODE__T], tArray2: typing.List[_FieldSecondaryODE__T], t4: _FieldSecondaryODE__T) -> None:
+        """
+            Initialize equations at the start of an ODE integration.
+        
+            This method is called once at the start of the integration. It may be used by the equations to initialize some internal
+            data if needed.
+        
+            The default implementation does nothing.
+        
+            Parameters:
+                t0 (:class:`~org.hipparchus.ode.FieldSecondaryODE`): value of the independent *time* variable at integration start
+                primary0 (:class:`~org.hipparchus.ode.FieldSecondaryODE`[]): array containing the value of the primary state vector at integration start
+                secondary0 (:class:`~org.hipparchus.ode.FieldSecondaryODE`[]): array containing the value of the secondary state vector at integration start
+                finalTime (:class:`~org.hipparchus.ode.FieldSecondaryODE`): target time for the integration
+        
+        
+        """
+        ...
 
 class LocalizedODEFormats(java.lang.Enum['LocalizedODEFormats'], org.hipparchus.exception.Localizable):
     """
@@ -981,6 +1081,7 @@ class LocalizedODEFormats(java.lang.Enum['LocalizedODEFormats'], org.hipparchus.
     UNKNOWN_PARAMETER: typing.ClassVar['LocalizedODEFormats'] = ...
     UNMATCHED_ODE_IN_EXPANDED_SET: typing.ClassVar['LocalizedODEFormats'] = ...
     NAN_APPEARING_DURING_INTEGRATION: typing.ClassVar['LocalizedODEFormats'] = ...
+    FIND_ROOT: typing.ClassVar['LocalizedODEFormats'] = ...
     def getLocalizedString(self, locale: java.util.Locale) -> str:
         """
         
@@ -1033,6 +1134,7 @@ class LocalizedODEFormats(java.lang.Enum['LocalizedODEFormats'], org.hipparchus.
         
             .. code-block: java
             
+            
             for (LocalizedODEFormats c : LocalizedODEFormats.values())
                 System.out.println(c);
             
@@ -1051,26 +1153,14 @@ class MultistepFieldIntegrator(org.hipparchus.ode.nonstiff.AdaptiveStepsizeField
     
         This class is the base class for multistep integrators for Ordinary Differential Equations.
     
-        We define scaled derivatives s :sub:`i` (n) at step n as:
-    
-        .. code-block: java
-        
-         s :sub:`1` (n) = h y' :sub:`n`  for first derivative
-         s :sub:`2` (n) = h :sup:`2` /2 y'' :sub:`n`  for second derivative
-         s :sub:`3` (n) = h :sup:`3` /6 y''' :sub:`n`  for third derivative
-         ...
-         s :sub:`k` (n) = h :sup:`k` /k! y :sup:`(k)`  :sub:`n`  for k :sup:`th`  derivative
-         
+        We define scaled derivatives s :sub:`i` (n) at step n as: \[ \left\{\begin{align} s_1(n) &= h y'_n \text{ for first
+        derivative}\\ s_2(n) &= \frac{h^2}{2} y_n'' \text{ for second derivative}\\ s_3(n) &= \frac{h^3}{6} y_n''' \text{ for
+        third derivative}\\ &\cdots\\ s_k(n) &= \frac{h^k}{k!} y_n^{(k)} \text{ for } k^\mathrm{th} \text{ derivative}
+        \end{align}\right. \]
     
         Rather than storing several previous steps separately, this implementation uses the Nordsieck vector with higher degrees
         scaled derivatives all taken at the same step (y :sub:`n` , s :sub:`1` (n) and r :sub:`n` ) where r :sub:`n` is defined
-        as:
-    
-        .. code-block: java
-        
-         r :sub:`n`  = [ s :sub:`2` (n), s :sub:`3` (n) ... s :sub:`k` (n) ] :sup:`T` 
-         
-        (we omit the k index in the notation for clarity)
+        as: \[ r_n = [ s_2(n), s_3(n) \ldots s_k(n) ]^T \] (we omit the k index in the notation for clarity)
     
         Multistep integrators with Nordsieck representation are highly sensitive to large step changes because when the step is
         multiplied by factor a, the k :sup:`th` component of the Nordsieck vector is multiplied by a :sup:`k` and the last
@@ -1160,26 +1250,14 @@ class MultistepIntegrator(org.hipparchus.ode.nonstiff.AdaptiveStepsizeIntegrator
     
         This class is the base class for multistep integrators for Ordinary Differential Equations.
     
-        We define scaled derivatives s :sub:`i` (n) at step n as:
-    
-        .. code-block: java
-        
-         s :sub:`1` (n) = h y' :sub:`n`  for first derivative
-         s :sub:`2` (n) = h :sup:`2` /2 y'' :sub:`n`  for second derivative
-         s :sub:`3` (n) = h :sup:`3` /6 y''' :sub:`n`  for third derivative
-         ...
-         s :sub:`k` (n) = h :sup:`k` /k! y :sup:`(k)`  :sub:`n`  for k :sup:`th`  derivative
-         
+        We define scaled derivatives s :sub:`i` (n) at step n as: \[ \left\{\begin{align} s_1(n) &= h y'_n \text{ for first
+        derivative}\\ s_2(n) &= \frac{h^2}{2} y_n'' \text{ for second derivative}\\ s_3(n) &= \frac{h^3}{6} y_n''' \text{ for
+        third derivative}\\ &\cdots\\ s_k(n) &= \frac{h^k}{k!} y_n^{(k)} \text{ for } k^\mathrm{th} \text{ derivative}
+        \end{align}\right. \]
     
         Rather than storing several previous steps separately, this implementation uses the Nordsieck vector with higher degrees
         scaled derivatives all taken at the same step (y :sub:`n` , s :sub:`1` (n) and r :sub:`n` ) where r :sub:`n` is defined
-        as:
-    
-        .. code-block: java
-        
-         r :sub:`n`  = [ s :sub:`2` (n), s :sub:`3` (n) ... s :sub:`k` (n) ] :sup:`T` 
-         
-        (we omit the k index in the notation for clarity)
+        as: \[ r_n = [ s_2(n), s_3(n) \ldots s_k(n) ]^T \] (we omit the k index in the notation for clarity)
     
         Multistep integrators with Nordsieck representation are highly sensitive to large step changes because when the step is
         multiplied by factor a, the k :sup:`th` component of the Nordsieck vector is multiplied by a :sup:`k` and the last
@@ -1297,50 +1375,43 @@ class ODEIntegrator:
             :class:`~org.hipparchus.ode.OrdinaryDifferentialEquation`, :class:`~org.hipparchus.ode.sampling.ODEStepHandler`,
             :class:`~org.hipparchus.ode.events.ODEEventHandler`
     """
-    @typing.overload
-    def addEventHandler(self, oDEEventHandler: org.hipparchus.ode.events.ODEEventHandler, double: float, double2: float, int: int) -> None:
+    def addEventDetector(self, oDEEventDetector: org.hipparchus.ode.events.ODEEventDetector) -> None:
         """
-            Add an event handler to the integrator.
-        
-            Uses a default :class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus` with an absolute accuracy equal to the
-            given convergence threshold, as root-finding algorithm to detect the state events.
+            Add an event detector to the integrator.
         
             Parameters:
-                handler (:class:`~org.hipparchus.ode.events.ODEEventHandler`): event handler
-                maxCheckInterval (double): maximal time interval between switching function checks (this interval prevents missing sign changes in case the
-                    integration steps becomes very large)
-                convergence (double): convergence threshold in the event time search. Must be smaller than :code:`maxCheckInterval` and should be small
-                    compared to time scale of the ODE dynamics.
-                maxIterationCount (int): upper limit of the iteration count in the event time search
+                detector (:class:`~org.hipparchus.ode.events.ODEEventDetector`): event detector
+        
+            Since:
+                3.0
         
             Also see:
-                :meth:`~org.hipparchus.ode.ODEIntegrator.getEventHandlers`,
-                :meth:`~org.hipparchus.ode.ODEIntegrator.getEventHandlersConfigurations`,
-                :meth:`~org.hipparchus.ode.ODEIntegrator.clearEventHandlers`
-        
-        void addEventHandler(:class:`~org.hipparchus.ode.events.ODEEventHandler` handler, double maxCheckInterval, double convergence, int maxIterationCount, :class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`<:class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`> solver)
-        
-            Add an event handler to the integrator.
-        
-            Parameters:
-                handler (:class:`~org.hipparchus.ode.events.ODEEventHandler`): event handler
-                maxCheckInterval (double): maximal time interval between switching function checks (this interval prevents missing sign changes in case the
-                    integration steps becomes very large)
-                convergence (double): convergence threshold in the event time search. Must be smaller than :code:`maxCheckInterval` and should be small
-                    compared to time scale of the ODE dynamics.
-                maxIterationCount (int): upper limit of the iteration count in the event time search
-                solver (:class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`<:class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`> solver): The root-finding algorithm to use to detect the state events.
-        
-            Also see:
-                :meth:`~org.hipparchus.ode.ODEIntegrator.getEventHandlers`,
-                :meth:`~org.hipparchus.ode.ODEIntegrator.getEventHandlersConfigurations`,
-                :meth:`~org.hipparchus.ode.ODEIntegrator.clearEventHandlers`
+                :meth:`~org.hipparchus.ode.ODEIntegrator.getEventDetectors`,
+                :meth:`~org.hipparchus.ode.ODEIntegrator.clearEventDetectors`
         
         
         """
         ...
-    @typing.overload
-    def addEventHandler(self, oDEEventHandler: org.hipparchus.ode.events.ODEEventHandler, double: float, double2: float, int: int, bracketedUnivariateSolver: org.hipparchus.analysis.solvers.BracketedUnivariateSolver[org.hipparchus.analysis.UnivariateFunction]) -> None: ...
+    def addStepEndHandler(self, oDEStepEndHandler: org.hipparchus.ode.events.ODEStepEndHandler) -> None:
+        """
+            Add a handler for step ends to the integrator.
+        
+            The :meth:`~org.hipparchus.ode.events.ODEStepEndHandler.stepEndOccurred` method of the :code:`handler` will be called at
+            each step end.
+        
+            Parameters:
+                handler (:class:`~org.hipparchus.ode.events.ODEStepEndHandler`): handler for step ends
+        
+            Since:
+                3.0
+        
+            Also see:
+                :meth:`~org.hipparchus.ode.ODEIntegrator.getStepEndHandlers`,
+                :meth:`~org.hipparchus.ode.ODEIntegrator.clearStepEndHandlers`
+        
+        
+        """
+        ...
     def addStepHandler(self, oDEStepHandler: org.hipparchus.ode.sampling.ODEStepHandler) -> None:
         """
             Add a step handler to this integrator.
@@ -1356,14 +1427,29 @@ class ODEIntegrator:
         
         """
         ...
-    def clearEventHandlers(self) -> None:
+    def clearEventDetectors(self) -> None:
         """
             Remove all the event handlers that have been added to the integrator.
         
+            Since:
+                3.0
+        
             Also see:
-                :meth:`~org.hipparchus.ode.ODEIntegrator.addEventHandler`, :meth:`~org.hipparchus.ode.ODEIntegrator.addEventHandler`,
-                :meth:`~org.hipparchus.ode.ODEIntegrator.getEventHandlers`,
-                :meth:`~org.hipparchus.ode.ODEIntegrator.getEventHandlersConfigurations`
+                :meth:`~org.hipparchus.ode.ODEIntegrator.addEventDetector`, :meth:`~org.hipparchus.ode.ODEIntegrator.getEventDetectors`
+        
+        
+        """
+        ...
+    def clearStepEndHandlers(self) -> None:
+        """
+            Remove all the handlers for step ends that have been added to the integrator.
+        
+            Since:
+                3.0
+        
+            Also see:
+                :meth:`~org.hipparchus.ode.ODEIntegrator.addStepEndHandler`,
+                :meth:`~org.hipparchus.ode.ODEIntegrator.getStepEndHandlers`
         
         
         """
@@ -1407,8 +1493,7 @@ class ODEIntegrator:
         
         """
         ...
-    def getEventHandlers(self) -> java.util.Collection[org.hipparchus.ode.events.ODEEventHandler]: ...
-    def getEventHandlersConfigurations(self) -> java.util.Collection[org.hipparchus.ode.events.EventHandlerConfiguration]: ...
+    def getEventDetectors(self) -> java.util.List[org.hipparchus.ode.events.ODEEventDetector]: ...
     def getMaxEvaluations(self) -> int:
         """
             Get the maximal number of functions evaluations.
@@ -1429,7 +1514,8 @@ class ODEIntegrator:
         
         """
         ...
-    def getStepHandlers(self) -> java.util.Collection[org.hipparchus.ode.sampling.ODEStepHandler]: ...
+    def getStepEndHandlers(self) -> java.util.List[org.hipparchus.ode.events.ODEStepEndHandler]: ...
+    def getStepHandlers(self) -> java.util.List[org.hipparchus.ode.sampling.ODEStepHandler]: ...
     def getStepStart(self) -> 'ODEStateAndDerivative':
         """
             Get the state at step start time t :sub:`i` .
@@ -1759,9 +1845,51 @@ class SecondOrderODE:
         ...
 
 class SecondaryODE:
+    """
+    public interface SecondaryODE
+    
+        This interface allows users to add secondary differential equations to a primary set of differential equations.
+    
+        In some cases users may need to integrate some problem-specific equations along with a primary set of differential
+        equations. One example is optimal control where adjoined parameters linked to the minimized hamiltonian must be
+        integrated.
+    
+        This interface allows users to add such equations to a primary set of
+        :class:`~org.hipparchus.ode.OrdinaryDifferentialEquation` thanks to the
+        :meth:`~org.hipparchus.ode.ExpandableODE.addSecondaryEquations` method.
+    
+        Also see:
+            :class:`~org.hipparchus.ode.ExpandableODE`
+    """
     def computeDerivatives(self, double: float, doubleArray: typing.List[float], doubleArray2: typing.List[float], doubleArray3: typing.List[float]) -> typing.List[float]: ...
-    def getDimension(self) -> int: ...
-    def init(self, double: float, doubleArray: typing.List[float], doubleArray2: typing.List[float], double4: float) -> None: ...
+    def getDimension(self) -> int:
+        """
+            Get the dimension of the secondary state parameters.
+        
+            Returns:
+                dimension of the secondary state parameters
+        
+        
+        """
+        ...
+    def init(self, double: float, doubleArray: typing.List[float], doubleArray2: typing.List[float], double4: float) -> None:
+        """
+            Initialize equations at the start of an ODE integration.
+        
+            This method is called once at the start of the integration. It may be used by the equations to initialize some internal
+            data if needed.
+        
+            The default implementation does nothing.
+        
+            Parameters:
+                t0 (double): value of the independent *time* variable at integration start
+                primary0 (double[]): array containing the value of the primary state vector at integration start
+                secondary0 (double[]): array containing the value of the secondary state vector at integration start
+                finalTime (double): target time for the integration
+        
+        
+        """
+        ...
 
 class VariationalEquation:
     """
@@ -1784,6 +1912,7 @@ class VariationalEquation:
         methods of this class. The proper scheduling is the following one:
     
         .. code-block: java
+        
         
            // set up equations
            ODEJacobiansProvider jode       = new MyODE(...);
@@ -1877,24 +2006,35 @@ class AbstractFieldIntegrator(FieldODEIntegrator[_AbstractFieldIntegrator__T], t
     
         Base class managing common boilerplate for all integrators.
     """
-    @typing.overload
-    def addEventHandler(self, fieldODEEventHandler: org.hipparchus.ode.events.FieldODEEventHandler[_AbstractFieldIntegrator__T], double: float, double2: float, int: int) -> None: ...
-    @typing.overload
-    def addEventHandler(self, fieldODEEventHandler: org.hipparchus.ode.events.FieldODEEventHandler[_AbstractFieldIntegrator__T], double: float, double2: float, int: int, bracketedRealFieldUnivariateSolver: org.hipparchus.analysis.solvers.BracketedRealFieldUnivariateSolver[_AbstractFieldIntegrator__T]) -> None: ...
+    def addEventDetector(self, fieldODEEventDetector: org.hipparchus.ode.events.FieldODEEventDetector[_AbstractFieldIntegrator__T]) -> None: ...
+    def addStepEndHandler(self, fieldODEStepEndHandler: org.hipparchus.ode.events.FieldODEStepEndHandler[_AbstractFieldIntegrator__T]) -> None: ...
     def addStepHandler(self, fieldODEStepHandler: org.hipparchus.ode.sampling.FieldODEStepHandler[_AbstractFieldIntegrator__T]) -> None: ...
-    def clearEventHandlers(self) -> None:
+    def clearEventDetectors(self) -> None:
         """
             Remove all the event handlers that have been added to the integrator.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.FieldODEIntegrator.clearEventHandlers` in
+                :meth:`~org.hipparchus.ode.FieldODEIntegrator.clearEventDetectors` in
                 interface :class:`~org.hipparchus.ode.FieldODEIntegrator`
         
             Also see:
-                :meth:`~org.hipparchus.ode.FieldODEIntegrator.addEventHandler`,
-                :meth:`~org.hipparchus.ode.FieldODEIntegrator.addEventHandler`,
-                :meth:`~org.hipparchus.ode.FieldODEIntegrator.getEventHandlers`,
-                :meth:`~org.hipparchus.ode.FieldODEIntegrator.getEventHandlersConfigurations`
+                :meth:`~org.hipparchus.ode.FieldODEIntegrator.addEventDetector`,
+                :meth:`~org.hipparchus.ode.FieldODEIntegrator.getEventDetectors`
+        
+        
+        """
+        ...
+    def clearStepEndHandlers(self) -> None:
+        """
+            Remove all the handlers for step ends that have been added to the integrator.
+        
+            Specified by:
+                :meth:`~org.hipparchus.ode.FieldODEIntegrator.clearStepEndHandlers` in
+                interface :class:`~org.hipparchus.ode.FieldODEIntegrator`
+        
+            Also see:
+                :meth:`~org.hipparchus.ode.FieldODEIntegrator.addStepEndHandler`,
+                :meth:`~org.hipparchus.ode.FieldODEIntegrator.getStepEndHandlers`
         
         
         """
@@ -1952,8 +2092,7 @@ class AbstractFieldIntegrator(FieldODEIntegrator[_AbstractFieldIntegrator__T], t
         
         """
         ...
-    def getEventHandlers(self) -> java.util.Collection[org.hipparchus.ode.events.FieldODEEventHandler[_AbstractFieldIntegrator__T]]: ...
-    def getEventHandlersConfigurations(self) -> java.util.Collection[org.hipparchus.ode.events.FieldEventHandlerConfiguration[_AbstractFieldIntegrator__T]]: ...
+    def getEventDetectors(self) -> java.util.List[org.hipparchus.ode.events.FieldODEEventDetector[_AbstractFieldIntegrator__T]]: ...
     def getField(self) -> org.hipparchus.Field[_AbstractFieldIntegrator__T]: ...
     def getMaxEvaluations(self) -> int:
         """
@@ -1982,7 +2121,8 @@ class AbstractFieldIntegrator(FieldODEIntegrator[_AbstractFieldIntegrator__T], t
         
         """
         ...
-    def getStepHandlers(self) -> java.util.Collection[org.hipparchus.ode.sampling.FieldODEStepHandler[_AbstractFieldIntegrator__T]]: ...
+    def getStepEndHandlers(self) -> java.util.List[org.hipparchus.ode.events.FieldODEStepEndHandler[_AbstractFieldIntegrator__T]]: ...
+    def getStepHandlers(self) -> java.util.List[org.hipparchus.ode.sampling.FieldODEStepHandler[_AbstractFieldIntegrator__T]]: ...
     def getStepStart(self) -> 'FieldODEStateAndDerivative'[_AbstractFieldIntegrator__T]: ...
     def setMaxEvaluations(self, int: int) -> None:
         """
@@ -2009,56 +2149,43 @@ class AbstractIntegrator(ODEIntegrator):
     
         Base class managing common boilerplate for all integrators.
     """
-    @typing.overload
-    def addEventHandler(self, oDEEventHandler: org.hipparchus.ode.events.ODEEventHandler, double: float, double2: float, int: int) -> None:
+    def addEventDetector(self, oDEEventDetector: org.hipparchus.ode.events.ODEEventDetector) -> None:
         """
-            Add an event handler to the integrator.
-        
-            Uses a default :class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus` with an absolute accuracy equal to the
-            given convergence threshold, as root-finding algorithm to detect the state events.
+            Add an event detector to the integrator.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.ODEIntegrator.addEventHandler` in interface :class:`~org.hipparchus.ode.ODEIntegrator`
+                :meth:`~org.hipparchus.ode.ODEIntegrator.addEventDetector` in interface :class:`~org.hipparchus.ode.ODEIntegrator`
         
             Parameters:
-                handler (:class:`~org.hipparchus.ode.events.ODEEventHandler`): event handler
-                maxCheckInterval (double): maximal time interval between switching function checks (this interval prevents missing sign changes in case the
-                    integration steps becomes very large)
-                convergence (double): convergence threshold in the event time search. Must be smaller than :code:`maxCheckInterval` and should be small
-                    compared to time scale of the ODE dynamics.
-                maxIterationCount (int): upper limit of the iteration count in the event time search
+                detector (:class:`~org.hipparchus.ode.events.ODEEventDetector`): event detector
         
             Also see:
-                :meth:`~org.hipparchus.ode.ODEIntegrator.getEventHandlers`,
-                :meth:`~org.hipparchus.ode.ODEIntegrator.getEventHandlersConfigurations`,
-                :meth:`~org.hipparchus.ode.ODEIntegrator.clearEventHandlers`
-        
-        public void addEventHandler(:class:`~org.hipparchus.ode.events.ODEEventHandler` handler, double maxCheckInterval, double convergence, int maxIterationCount, :class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`<:class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`> solver)
-        
-            Add an event handler to the integrator.
-        
-            Specified by:
-                :meth:`~org.hipparchus.ode.ODEIntegrator.addEventHandler` in interface :class:`~org.hipparchus.ode.ODEIntegrator`
-        
-            Parameters:
-                handler (:class:`~org.hipparchus.ode.events.ODEEventHandler`): event handler
-                maxCheckInterval (double): maximal time interval between switching function checks (this interval prevents missing sign changes in case the
-                    integration steps becomes very large)
-                convergence (double): convergence threshold in the event time search. Must be smaller than :code:`maxCheckInterval` and should be small
-                    compared to time scale of the ODE dynamics.
-                maxIterationCount (int): upper limit of the iteration count in the event time search
-                solver (:class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`<:class:`~org.hipparchus.ode.https:.www.hipparchus.org.hipparchus`> solver): The root-finding algorithm to use to detect the state events.
-        
-            Also see:
-                :meth:`~org.hipparchus.ode.ODEIntegrator.getEventHandlers`,
-                :meth:`~org.hipparchus.ode.ODEIntegrator.getEventHandlersConfigurations`,
-                :meth:`~org.hipparchus.ode.ODEIntegrator.clearEventHandlers`
+                :meth:`~org.hipparchus.ode.ODEIntegrator.getEventDetectors`,
+                :meth:`~org.hipparchus.ode.ODEIntegrator.clearEventDetectors`
         
         
         """
         ...
-    @typing.overload
-    def addEventHandler(self, oDEEventHandler: org.hipparchus.ode.events.ODEEventHandler, double: float, double2: float, int: int, bracketedUnivariateSolver: org.hipparchus.analysis.solvers.BracketedUnivariateSolver[org.hipparchus.analysis.UnivariateFunction]) -> None: ...
+    def addStepEndHandler(self, oDEStepEndHandler: org.hipparchus.ode.events.ODEStepEndHandler) -> None:
+        """
+            Add a handler for step ends to the integrator.
+        
+            The :meth:`~org.hipparchus.ode.events.ODEStepEndHandler.stepEndOccurred` method of the :code:`handler` will be called at
+            each step end.
+        
+            Specified by:
+                :meth:`~org.hipparchus.ode.ODEIntegrator.addStepEndHandler` in interface :class:`~org.hipparchus.ode.ODEIntegrator`
+        
+            Parameters:
+                handler (:class:`~org.hipparchus.ode.events.ODEStepEndHandler`): handler for step ends
+        
+            Also see:
+                :meth:`~org.hipparchus.ode.ODEIntegrator.getStepEndHandlers`,
+                :meth:`~org.hipparchus.ode.ODEIntegrator.clearStepEndHandlers`
+        
+        
+        """
+        ...
     def addStepHandler(self, oDEStepHandler: org.hipparchus.ode.sampling.ODEStepHandler) -> None:
         """
             Add a step handler to this integrator.
@@ -2077,17 +2204,29 @@ class AbstractIntegrator(ODEIntegrator):
         
         """
         ...
-    def clearEventHandlers(self) -> None:
+    def clearEventDetectors(self) -> None:
         """
             Remove all the event handlers that have been added to the integrator.
         
             Specified by:
-                :meth:`~org.hipparchus.ode.ODEIntegrator.clearEventHandlers` in interface :class:`~org.hipparchus.ode.ODEIntegrator`
+                :meth:`~org.hipparchus.ode.ODEIntegrator.clearEventDetectors` in interface :class:`~org.hipparchus.ode.ODEIntegrator`
         
             Also see:
-                :meth:`~org.hipparchus.ode.ODEIntegrator.addEventHandler`, :meth:`~org.hipparchus.ode.ODEIntegrator.addEventHandler`,
-                :meth:`~org.hipparchus.ode.ODEIntegrator.getEventHandlers`,
-                :meth:`~org.hipparchus.ode.ODEIntegrator.getEventHandlersConfigurations`
+                :meth:`~org.hipparchus.ode.ODEIntegrator.addEventDetector`, :meth:`~org.hipparchus.ode.ODEIntegrator.getEventDetectors`
+        
+        
+        """
+        ...
+    def clearStepEndHandlers(self) -> None:
+        """
+            Remove all the handlers for step ends that have been added to the integrator.
+        
+            Specified by:
+                :meth:`~org.hipparchus.ode.ODEIntegrator.clearStepEndHandlers` in interface :class:`~org.hipparchus.ode.ODEIntegrator`
+        
+            Also see:
+                :meth:`~org.hipparchus.ode.ODEIntegrator.addStepEndHandler`,
+                :meth:`~org.hipparchus.ode.ODEIntegrator.getStepEndHandlers`
         
         
         """
@@ -2142,8 +2281,7 @@ class AbstractIntegrator(ODEIntegrator):
         
         """
         ...
-    def getEventHandlers(self) -> java.util.Collection[org.hipparchus.ode.events.ODEEventHandler]: ...
-    def getEventHandlersConfigurations(self) -> java.util.Collection[org.hipparchus.ode.events.EventHandlerConfiguration]: ...
+    def getEventDetectors(self) -> java.util.List[org.hipparchus.ode.events.ODEEventDetector]: ...
     def getMaxEvaluations(self) -> int:
         """
             Get the maximal number of functions evaluations.
@@ -2170,7 +2308,8 @@ class AbstractIntegrator(ODEIntegrator):
         
         """
         ...
-    def getStepHandlers(self) -> java.util.Collection[org.hipparchus.ode.sampling.ODEStepHandler]: ...
+    def getStepEndHandlers(self) -> java.util.List[org.hipparchus.ode.events.ODEStepEndHandler]: ...
+    def getStepHandlers(self) -> java.util.List[org.hipparchus.ode.sampling.ODEStepHandler]: ...
     def getStepStart(self) -> 'ODEStateAndDerivative':
         """
             Get the state at step start time t :sub:`i` .

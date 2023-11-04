@@ -7,6 +7,7 @@ import org.hipparchus.stat.descriptive
 import org.hipparchus.stat.fitting
 import org.hipparchus.stat.inference
 import org.hipparchus.stat.interval
+import org.hipparchus.stat.projection
 import org.hipparchus.stat.ranking
 import org.hipparchus.stat.regression
 import typing
@@ -204,6 +205,7 @@ class LocalizedStatFormats(java.lang.Enum['LocalizedStatFormats'], org.hipparchu
     TOO_MANY_REGRESSORS: typing.ClassVar['LocalizedStatFormats'] = ...
     TWO_OR_MORE_CATEGORIES_REQUIRED: typing.ClassVar['LocalizedStatFormats'] = ...
     TWO_OR_MORE_VALUES_IN_CATEGORY_REQUIRED: typing.ClassVar['LocalizedStatFormats'] = ...
+    ILLEGAL_STATE_PCA: typing.ClassVar['LocalizedStatFormats'] = ...
     def getLocalizedString(self, locale: java.util.Locale) -> str:
         """
         
@@ -255,6 +257,7 @@ class LocalizedStatFormats(java.lang.Enum['LocalizedStatFormats'], org.hipparchu
             iterate over the constants as follows:
         
             .. code-block: java
+            
             
             for (LocalizedStatFormats c : LocalizedStatFormats.values())
                 System.out.println(c);
@@ -538,5 +541,6 @@ class __module_protocol__(typing.Protocol):
     fitting: org.hipparchus.stat.fitting.__module_protocol__
     inference: org.hipparchus.stat.inference.__module_protocol__
     interval: org.hipparchus.stat.interval.__module_protocol__
+    projection: org.hipparchus.stat.projection.__module_protocol__
     ranking: org.hipparchus.stat.ranking.__module_protocol__
     regression: org.hipparchus.stat.regression.__module_protocol__

@@ -713,9 +713,9 @@ class SourceTable:
         """
         ...
 
-class StreamMonitor(org.orekit.gnss.metric.parser.AbstractEncodedMessages, java.lang.Runnable):
+class StreamMonitor(org.orekit.gnss.metric.parser.AbstractEncodedMessage, java.lang.Runnable):
     """
-    public class StreamMonitor extends :class:`~org.orekit.gnss.metric.parser.AbstractEncodedMessages` implements :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Runnable?is`
+    public class StreamMonitor extends :class:`~org.orekit.gnss.metric.parser.AbstractEncodedMessage` implements :class:`~org.orekit.gnss.metric.ntrip.https:.docs.oracle.com.javase.8.docs.api.java.lang.Runnable?is`
     
         Monitor for retrieving streamed data from one mount point.
     

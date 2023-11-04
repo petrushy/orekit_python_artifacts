@@ -1,4 +1,5 @@
 import java.util
+import java.util.function
 import org.orekit.data
 import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.section
@@ -40,6 +41,20 @@ class AbstractMessageParser(org.orekit.files.ccsds.utils.lexical.MessageParser[_
         
             Returns:
                 current processing state
+        
+        
+        """
+        ...
+    def getFileFormat(self) -> org.orekit.files.ccsds.utils.FileFormat:
+        """
+            Get the file format of the last message parsed.
+        
+            Specified by:
+                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.getFileFormat` in
+                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+        
+            Returns:
+                file format of the last message parsed
         
         
         """
@@ -153,11 +168,12 @@ class ProcessingState:
         """
         ...
 
+_AbstractConstituentParser__H = typing.TypeVar('_AbstractConstituentParser__H', bound=org.orekit.files.ccsds.section.Header)  # <H>
 _AbstractConstituentParser__T = typing.TypeVar('_AbstractConstituentParser__T', bound=org.orekit.files.ccsds.ndm.NdmConstituent)  # <T>
 _AbstractConstituentParser__P = typing.TypeVar('_AbstractConstituentParser__P', bound='AbstractConstituentParser')  # <P>
-class AbstractConstituentParser(AbstractMessageParser[_AbstractConstituentParser__T], typing.Generic[_AbstractConstituentParser__T, _AbstractConstituentParser__P]):
+class AbstractConstituentParser(AbstractMessageParser[_AbstractConstituentParser__T], typing.Generic[_AbstractConstituentParser__H, _AbstractConstituentParser__T, _AbstractConstituentParser__P]):
     """
-    public abstract class AbstractConstituentParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<?, ?>, P extends AbstractConstituentParser<T, ?>> extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractMessageParser`<T>
+    public abstract class AbstractConstituentParser<H extends :class:`~org.orekit.files.ccsds.section.Header`, T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<H, ?>, P extends AbstractConstituentParser<H, T, ?>> extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractMessageParser`<T>
     
         Parser for CCSDS messages.
     
@@ -219,7 +235,7 @@ class AbstractConstituentParser(AbstractMessageParser[_AbstractConstituentParser
         
         """
         ...
-    def getHeader(self) -> org.orekit.files.ccsds.section.Header:
+    def getHeader(self) -> _AbstractConstituentParser__H:
         """
             Get file header to fill.
         
@@ -345,6 +361,7 @@ class PythonAbstractMessageParser(AbstractMessageParser[_PythonAbstractMessagePa
     """
     public class PythonAbstractMessageParser<T> extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractMessageParser`<T>
     """
+    def __init__(self, string: str, string2: str, functionArray: typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]): ...
     def build(self) -> _PythonAbstractMessageParser__T:
         """
             Build the file from parsed entries.
@@ -386,12 +403,50 @@ class PythonAbstractMessageParser(AbstractMessageParser[_PythonAbstractMessagePa
         """
         ...
 
+class PythonProcessingState(ProcessingState):
+    """
+    public class PythonProcessingState extends :class:`~org.orekit.files.ccsds.utils.parsing.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def processToken(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken) -> bool:
+        """
+            Description copied from interface: :meth:`~org.orekit.files.ccsds.utils.parsing.ProcessingState.processToken`
+            Process one token.
+        
+            Specified by:
+                :meth:`~org.orekit.files.ccsds.utils.parsing.ProcessingState.processToken` in
+                interface :class:`~org.orekit.files.ccsds.utils.parsing.ProcessingState`
+        
+            Parameters:
+                token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
+        
+            Returns:
+                true if token was processed, false otherwise
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+        public long pythonExtension()
+        
+        
+        """
+        ...
+
+_PythonAbstractConstituentParser__H = typing.TypeVar('_PythonAbstractConstituentParser__H', bound=org.orekit.files.ccsds.section.Header)  # <H>
 _PythonAbstractConstituentParser__T = typing.TypeVar('_PythonAbstractConstituentParser__T', bound=org.orekit.files.ccsds.ndm.NdmConstituent)  # <T>
 _PythonAbstractConstituentParser__P = typing.TypeVar('_PythonAbstractConstituentParser__P', bound=AbstractConstituentParser)  # <P>
-class PythonAbstractConstituentParser(AbstractConstituentParser[_PythonAbstractConstituentParser__T, _PythonAbstractConstituentParser__P], typing.Generic[_PythonAbstractConstituentParser__T, _PythonAbstractConstituentParser__P]):
+class PythonAbstractConstituentParser(AbstractConstituentParser[_PythonAbstractConstituentParser__H, _PythonAbstractConstituentParser__T, _PythonAbstractConstituentParser__P], typing.Generic[_PythonAbstractConstituentParser__H, _PythonAbstractConstituentParser__T, _PythonAbstractConstituentParser__P]):
     """
-    public class PythonAbstractConstituentParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<?, ?>, P extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<T, ?>> extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<T, P>
+    public class PythonAbstractConstituentParser<H extends :class:`~org.orekit.files.ccsds.section.Header`, T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<H, ?>, P extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<H, T, ?>> extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<H, T, P>
     """
+    def __init__(self, string: str, string2: str, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]): ...
     def build(self) -> _PythonAbstractConstituentParser__T:
         """
             Build the file from parsed entries.
@@ -445,7 +500,7 @@ class PythonAbstractConstituentParser(AbstractConstituentParser[_PythonAbstractC
         
         """
         ...
-    def getHeader(self) -> org.orekit.files.ccsds.section.Header:
+    def getHeader(self) -> _PythonAbstractConstituentParser__H:
         """
             Get file header to fill.
         
@@ -583,3 +638,4 @@ class __module_protocol__(typing.Protocol):
     ProcessingState: typing.Type[ProcessingState]
     PythonAbstractConstituentParser: typing.Type[PythonAbstractConstituentParser]
     PythonAbstractMessageParser: typing.Type[PythonAbstractMessageParser]
+    PythonProcessingState: typing.Type[PythonProcessingState]

@@ -146,9 +146,9 @@ class GravityFieldFactory:
     @staticmethod
     def configureOceanLoadDeformationCoefficients(oceanLoadDeformationCoefficients: 'OceanLoadDeformationCoefficients') -> None: ...
     @staticmethod
-    def getConstantNormalizedProvider(int: int, int2: int) -> 'NormalizedSphericalHarmonicsProvider': ...
+    def getConstantNormalizedProvider(int: int, int2: int, absoluteDate: org.orekit.time.AbsoluteDate) -> 'NormalizedSphericalHarmonicsProvider': ...
     @staticmethod
-    def getConstantUnnormalizedProvider(int: int, int2: int) -> 'UnnormalizedSphericalHarmonicsProvider': ...
+    def getConstantUnnormalizedProvider(int: int, int2: int, absoluteDate: org.orekit.time.AbsoluteDate) -> 'UnnormalizedSphericalHarmonicsProvider': ...
     @staticmethod
     def getGravityFields() -> 'LazyLoadedGravityFields': ...
     @typing.overload
@@ -286,19 +286,20 @@ class GravityFields:
         Also see:
             :class:`~org.orekit.forces.gravity.potential.GravityFieldFactory`
     """
-    def getConstantNormalizedProvider(self, int: int, int2: int) -> 'NormalizedSphericalHarmonicsProvider':
+    def getConstantNormalizedProvider(self, int: int, int2: int, absoluteDate: org.orekit.time.AbsoluteDate) -> 'NormalizedSphericalHarmonicsProvider':
         """
-            Get a constant gravity field normalized coefficients provider.
+            Get a constant gravity field normalized coefficients provider frozen at a given epoch.
         
             Parameters:
                 degree (int): maximal degree
                 order (int): maximal order
+                freezingDate (:class:`~org.orekit.time.AbsoluteDate`): freezing epoch
         
             Returns:
                 a gravity field coefficients provider containing already loaded data
         
             Since:
-                6.0
+                12.0
         
             Also see:
                 :meth:`~org.orekit.forces.gravity.potential.GravityFields.getNormalizedProvider`
@@ -306,19 +307,20 @@ class GravityFields:
         
         """
         ...
-    def getConstantUnnormalizedProvider(self, int: int, int2: int) -> 'UnnormalizedSphericalHarmonicsProvider':
+    def getConstantUnnormalizedProvider(self, int: int, int2: int, absoluteDate: org.orekit.time.AbsoluteDate) -> 'UnnormalizedSphericalHarmonicsProvider':
         """
-            Get a constant gravity field unnormalized coefficients provider.
+            Get a constant gravity field unnormalized coefficients provider frozen at a given epoch.
         
             Parameters:
                 degree (int): maximal degree
                 order (int): maximal order
+                freezingDate (:class:`~org.orekit.time.AbsoluteDate`): freezing epoch
         
             Returns:
                 a gravity field coefficients provider containing already loaded data
         
             Since:
-                6.0
+                12.0
         
             Also see:
                 :meth:`~org.orekit.forces.gravity.potential.GravityFields.getUnnormalizedProvider`
@@ -605,7 +607,6 @@ class PotentialCoefficientsReader(org.orekit.data.DataLoader):
         :class:`~org.orekit.forces.gravity.potential.GravityFieldFactory` which will determine which reader to use with the
         selected potential coefficients file.
     
-    
         Also see:
             :class:`~org.orekit.forces.gravity.potential.GravityFields`
     """
@@ -675,9 +676,6 @@ class PotentialCoefficientsReader(org.orekit.data.DataLoader):
         
             Since:
                 6.0
-        
-            Also see:
-                :meth:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader.getConstantProvider`
         
         
         """
@@ -870,9 +868,6 @@ class EGMFormatReader(PotentialCoefficientsReader):
             Since:
                 6.0
         
-            Also see:
-                :meth:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader.getConstantProvider`
-        
         
         """
         ...
@@ -938,9 +933,6 @@ class GRGSFormatReader(PotentialCoefficientsReader):
             Returns:
                 a new provider
         
-            Also see:
-                :meth:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader.getConstantProvider`
-        
         
         """
         ...
@@ -990,9 +982,6 @@ class ICGEMFormatReader(PotentialCoefficientsReader):
         
             Returns:
                 a new provider
-        
-            Also see:
-                :meth:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader.getConstantProvider`
         
         
         """
@@ -1118,9 +1107,9 @@ class LazyLoadedGravityFields(GravityFields):
         
         """
         ...
-    def getConstantNormalizedProvider(self, int: int, int2: int) -> 'NormalizedSphericalHarmonicsProvider':
+    def getConstantNormalizedProvider(self, int: int, int2: int, absoluteDate: org.orekit.time.AbsoluteDate) -> 'NormalizedSphericalHarmonicsProvider':
         """
-            Get a constant gravity field normalized coefficients provider.
+            Get a constant gravity field normalized coefficients provider frozen at a given epoch.
         
             If no :class:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader` has been added by calling
             :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.addPotentialCoefficientsReader` or if
@@ -1136,6 +1125,7 @@ class LazyLoadedGravityFields(GravityFields):
             Parameters:
                 degree (int): maximal degree
                 order (int): maximal order
+                freezingDate (:class:`~org.orekit.time.AbsoluteDate`): freezing epoch
         
             Returns:
                 a gravity field coefficients provider containing already loaded data
@@ -1146,9 +1136,9 @@ class LazyLoadedGravityFields(GravityFields):
         
         """
         ...
-    def getConstantUnnormalizedProvider(self, int: int, int2: int) -> 'UnnormalizedSphericalHarmonicsProvider':
+    def getConstantUnnormalizedProvider(self, int: int, int2: int, absoluteDate: org.orekit.time.AbsoluteDate) -> 'UnnormalizedSphericalHarmonicsProvider':
         """
-            Get a constant gravity field unnormalized coefficients provider.
+            Get a constant gravity field unnormalized coefficients provider frozen at a given epoch.
         
             If no :class:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader` has been added by calling
             :meth:`~org.orekit.forces.gravity.potential.LazyLoadedGravityFields.addPotentialCoefficientsReader` or if
@@ -1164,6 +1154,7 @@ class LazyLoadedGravityFields(GravityFields):
             Parameters:
                 degree (int): maximal degree
                 order (int): maximal order
+                freezingDate (:class:`~org.orekit.time.AbsoluteDate`): freezing epoch
         
             Returns:
                 a gravity field coefficients provider containing already loaded data
@@ -1279,9 +1270,11 @@ class PythonGravityFields(GravityFields):
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getConstantNormalizedProvider(self, int: int, int2: int) -> 'NormalizedSphericalHarmonicsProvider':
+    def getConstantNormalizedProvider(self, int: int, int2: int, absoluteDate: org.orekit.time.AbsoluteDate) -> 'NormalizedSphericalHarmonicsProvider':
         """
-            Get a constant gravity field normalized coefficients provider.
+            Description copied from
+            interface: :meth:`~org.orekit.forces.gravity.potential.GravityFields.getConstantNormalizedProvider`
+            Get a constant gravity field normalized coefficients provider frozen at a given epoch.
         
             Specified by:
                 :meth:`~org.orekit.forces.gravity.potential.GravityFields.getConstantNormalizedProvider` in
@@ -1290,22 +1283,22 @@ class PythonGravityFields(GravityFields):
             Parameters:
                 degree (int): maximal degree
                 order (int): maximal order
+                freezingDate (:class:`~org.orekit.time.AbsoluteDate`): freezing epoch
         
             Returns:
                 a gravity field coefficients provider containing already loaded data
         
-            Since:
-                6.0
-        
             Also see:
-                :meth:`~org.orekit.forces.gravity.potential.PythonGravityFields.getNormalizedProvider`
+                :meth:`~org.orekit.forces.gravity.potential.GravityFields.getNormalizedProvider`
         
         
         """
         ...
-    def getConstantUnnormalizedProvider(self, int: int, int2: int) -> 'UnnormalizedSphericalHarmonicsProvider':
+    def getConstantUnnormalizedProvider(self, int: int, int2: int, absoluteDate: org.orekit.time.AbsoluteDate) -> 'UnnormalizedSphericalHarmonicsProvider':
         """
-            Get a constant gravity field unnormalized coefficients provider.
+            Description copied from
+            interface: :meth:`~org.orekit.forces.gravity.potential.GravityFields.getConstantUnnormalizedProvider`
+            Get a constant gravity field unnormalized coefficients provider frozen at a given epoch.
         
             Specified by:
                 :meth:`~org.orekit.forces.gravity.potential.GravityFields.getConstantUnnormalizedProvider` in
@@ -1314,21 +1307,20 @@ class PythonGravityFields(GravityFields):
             Parameters:
                 degree (int): maximal degree
                 order (int): maximal order
+                freezingDate (:class:`~org.orekit.time.AbsoluteDate`): freezing epoch
         
             Returns:
                 a gravity field coefficients provider containing already loaded data
         
-            Since:
-                6.0
-        
             Also see:
-                :meth:`~org.orekit.forces.gravity.potential.PythonGravityFields.getUnnormalizedProvider`
+                :meth:`~org.orekit.forces.gravity.potential.GravityFields.getUnnormalizedProvider`
         
         
         """
         ...
     def getNormalizedProvider(self, int: int, int2: int) -> 'NormalizedSphericalHarmonicsProvider':
         """
+            Description copied from interface: :meth:`~org.orekit.forces.gravity.potential.GravityFields.getNormalizedProvider`
             Get a gravity field normalized coefficients provider.
         
             Specified by:
@@ -1342,11 +1334,8 @@ class PythonGravityFields(GravityFields):
             Returns:
                 a gravity field coefficients provider containing already loaded data
         
-            Since:
-                6.0
-        
             Also see:
-                :meth:`~org.orekit.forces.gravity.potential.PythonGravityFields.getConstantNormalizedProvider`
+                :meth:`~org.orekit.forces.gravity.potential.GravityFields.getConstantNormalizedProvider`
         
         
         """
@@ -1354,6 +1343,7 @@ class PythonGravityFields(GravityFields):
     def getOceanTidesWaves(self, int: int, int2: int) -> java.util.List[OceanTidesWave]: ...
     def getUnnormalizedProvider(self, int: int, int2: int) -> 'UnnormalizedSphericalHarmonicsProvider':
         """
+            Description copied from interface: :meth:`~org.orekit.forces.gravity.potential.GravityFields.getUnnormalizedProvider`
             Get a gravity field unnormalized coefficients provider.
         
             Specified by:
@@ -1367,32 +1357,21 @@ class PythonGravityFields(GravityFields):
             Returns:
                 a gravity field coefficients provider containing already loaded data
         
-            Since:
-                6.0
-        
             Also see:
-                :meth:`~org.orekit.forces.gravity.potential.PythonGravityFields.getConstantUnnormalizedProvider`
+                :meth:`~org.orekit.forces.gravity.potential.GravityFields.getConstantUnnormalizedProvider`
         
         
         """
         ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
     def pythonExtension(self, long: int) -> None:
         """
-            Part of JCC Python interface to object
+        public long pythonExtension()
+        
+        
         """
         ...
 
@@ -1400,6 +1379,10 @@ class PythonPotentialCoefficientsReader(PotentialCoefficientsReader):
     """
     public class PythonPotentialCoefficientsReader extends :class:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader`
     """
+    @typing.overload
+    def __init__(self, string: str, boolean: bool): ...
+    @typing.overload
+    def __init__(self, string: str, boolean: bool, timeScale: org.orekit.time.TimeScale): ...
     def finalize(self) -> None: ...
     def getProvider(self, boolean: bool, int: int, int2: int) -> 'RawSphericalHarmonicsProvider':
         """
@@ -1421,7 +1404,7 @@ class PythonPotentialCoefficientsReader(PotentialCoefficientsReader):
                 6.0
         
             Also see:
-                :meth:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader.getConstantProvider`
+                :code:`#getConstantProvider(boolean, int, int)`
         
         
         """
@@ -1528,9 +1511,6 @@ class SHMFormatReader(PotentialCoefficientsReader):
             Since:
                 6.0
         
-            Also see:
-                :meth:`~org.orekit.forces.gravity.potential.PotentialCoefficientsReader.getConstantProvider`
-        
         
         """
         ...
@@ -1603,23 +1583,6 @@ class SphericalHarmonicsProvider(TideSystemProvider):
         
         """
         ...
-    def getOffset(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Deprecated.
-            as of 11.1, this method is only called by deprecated methods
-            Get the offset from :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getReferenceDate` for the
-            harmonics.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                offset between current date and reference date if there is a reference date, or 0.0 if there are no reference dates
-                (i.e. if :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getReferenceDate` returns null)
-        
-        
-        """
-        ...
     def getReferenceDate(self) -> org.orekit.time.AbsoluteDate:
         """
             Get the reference date for the harmonics.
@@ -1687,6 +1650,7 @@ class PythonSphericalHarmonicsProvider(SphericalHarmonicsProvider):
         ...
     def getMaxDegree(self) -> int:
         """
+            Description copied from interface: :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getMaxDegree`
             Get the maximal supported degree.
         
             Specified by:
@@ -1727,35 +1691,18 @@ class PythonSphericalHarmonicsProvider(SphericalHarmonicsProvider):
         
         """
         ...
-    def getOffset(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Get the offset from :meth:`~org.orekit.forces.gravity.potential.PythonSphericalHarmonicsProvider.getReferenceDate` for
-            the harmonics.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getOffset` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                offset between current date and reference date if there is a reference date, or 0.0 if there are no reference dates
-                (i.e. if :meth:`~org.orekit.forces.gravity.potential.PythonSphericalHarmonicsProvider.getReferenceDate` returns null)
-        
-        
-        """
-        ...
     def getReferenceDate(self) -> org.orekit.time.AbsoluteDate:
         """
             Get the reference date for the harmonics.
+        
+            For piecewise models, the latest reference date is returned.
         
             Specified by:
                 :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getReferenceDate` in
                 interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
         
             Returns:
-                reference date for the harmonics
+                reference date for the harmonics (may be null if no reference date is defined)
         
         
         """
@@ -1774,23 +1721,15 @@ class PythonSphericalHarmonicsProvider(SphericalHarmonicsProvider):
         
         """
         ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
     def pythonExtension(self, long: int) -> None:
         """
-            Part of JCC Python interface to object
+        public long pythonExtension()
+        
+        
         """
         ...
 
@@ -1938,26 +1877,6 @@ class CachedNormalizedSphericalHarmonicsProvider(NormalizedSphericalHarmonicsPro
         
         """
         ...
-    def getOffset(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Deprecated.
-            Get the offset from :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getReferenceDate` for the
-            harmonics.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getOffset` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                offset between current date and reference date if there is a reference date, or 0.0 if there are no reference dates
-                (i.e. if :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getReferenceDate` returns null)
-        
-        
-        """
-        ...
     def getReferenceDate(self) -> org.orekit.time.AbsoluteDate:
         """
             Get the reference date for the harmonics.
@@ -2064,27 +1983,6 @@ class PythonNormalizedSphericalHarmonicsProvider(NormalizedSphericalHarmonicsPro
         
             Returns:
                 mu (m³/s²)
-        
-        
-        """
-        ...
-    def getOffset(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Get the offset from
-            :meth:`~org.orekit.forces.gravity.potential.PythonNormalizedSphericalHarmonicsProvider.getReferenceDate` for the
-            harmonics.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getOffset` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                offset between current date and reference date if there is a reference date, or 0.0 if there are no reference dates
-                (i.e. if :meth:`~org.orekit.forces.gravity.potential.PythonNormalizedSphericalHarmonicsProvider.getReferenceDate`
-                returns null)
         
         
         """
@@ -2219,35 +2117,18 @@ class PythonRawSphericalHarmonicsProvider(RawSphericalHarmonicsProvider):
         
         """
         ...
-    def getOffset(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Get the offset from :meth:`~org.orekit.forces.gravity.potential.PythonRawSphericalHarmonicsProvider.getReferenceDate`
-            for the harmonics.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getOffset` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                offset between current date and reference date if there is a reference date, or 0.0 if there are no reference dates
-                (i.e. if :meth:`~org.orekit.forces.gravity.potential.PythonRawSphericalHarmonicsProvider.getReferenceDate` returns null)
-        
-        
-        """
-        ...
     def getReferenceDate(self) -> org.orekit.time.AbsoluteDate:
         """
             Get the reference date for the harmonics.
+        
+            For piecewise models, the latest reference date is returned.
         
             Specified by:
                 :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getReferenceDate` in
                 interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
         
             Returns:
-                reference date for the harmonics
+                reference date for the harmonics (may be null if no reference date is defined)
         
         
         """
@@ -2283,23 +2164,15 @@ class PythonRawSphericalHarmonicsProvider(RawSphericalHarmonicsProvider):
         
         """
         ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
     def pythonExtension(self, long: int) -> None:
         """
-            Part of JCC Python interface to object
+        public long pythonExtension()
+        
+        
         """
         ...
 
@@ -2442,27 +2315,6 @@ class PythonUnnormalizedSphericalHarmonicsProvider(UnnormalizedSphericalHarmonic
         
         """
         ...
-    def getOffset(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Get the offset from
-            :meth:`~org.orekit.forces.gravity.potential.PythonUnnormalizedSphericalHarmonicsProvider.getReferenceDate` for the
-            harmonics.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider.getOffset` in
-                interface :class:`~org.orekit.forces.gravity.potential.SphericalHarmonicsProvider`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                offset between current date and reference date if there is a reference date, or 0.0 if there are no reference dates
-                (i.e. if :meth:`~org.orekit.forces.gravity.potential.PythonUnnormalizedSphericalHarmonicsProvider.getReferenceDate`
-                returns null)
-        
-        
-        """
-        ...
     def getReferenceDate(self) -> org.orekit.time.AbsoluteDate:
         """
             Get the reference date for the harmonics.
@@ -2511,23 +2363,15 @@ class PythonUnnormalizedSphericalHarmonicsProvider(UnnormalizedSphericalHarmonic
         
         """
         ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
     def pythonExtension(self, long: int) -> None:
         """
-            Part of JCC Python interface to object
+        public long pythonExtension()
+        
+        
         """
         ...
 

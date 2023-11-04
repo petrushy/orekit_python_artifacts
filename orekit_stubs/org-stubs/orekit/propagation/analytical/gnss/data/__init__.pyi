@@ -1,3 +1,10 @@
+import java.lang
+import org.orekit.attitudes
+import org.orekit.data
+import org.orekit.frames
+import org.orekit.gnss
+import org.orekit.propagation.analytical.gnss
+import org.orekit.propagation.numerical
 import org.orekit.time
 import typing
 
@@ -273,6 +280,62 @@ class AbstractEphemerisMessage:
         
             Parameters:
                 az (double): the satellite Z acceleration (m/s²) to set
+        
+        
+        """
+        ...
+
+class BeidouSatelliteType(java.lang.Enum['BeidouSatelliteType']):
+    """
+    public enum BeidouSatelliteType extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.propagation.analytical.gnss.data.BeidouSatelliteType`>
+    
+        Enumerate for Beidou satellite type.
+    
+        Since:
+            12.0
+    """
+    RESERVED: typing.ClassVar['BeidouSatelliteType'] = ...
+    GEO: typing.ClassVar['BeidouSatelliteType'] = ...
+    IGSO: typing.ClassVar['BeidouSatelliteType'] = ...
+    MEO: typing.ClassVar['BeidouSatelliteType'] = ...
+    _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
+    @typing.overload
+    @staticmethod
+    def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
+    @typing.overload
+    @staticmethod
+    def valueOf(string: str) -> 'BeidouSatelliteType':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (:class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        
+        
+        """
+        ...
+    @staticmethod
+    def values() -> typing.List['BeidouSatelliteType']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            for (BeidouSatelliteType c : BeidouSatelliteType.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -563,7 +626,7 @@ class CommonGnssData:
             Setter for the reference time of the orbit as a duration from week start.
         
             Parameters:
-                time (double): the time to set
+                time (double): the time to set in seconds
         
         
         """
@@ -1317,6 +1380,91 @@ class GNSSOrbitalElements(org.orekit.time.TimeStamped):
         
         """
         ...
+    @typing.overload
+    def getPropagator(self) -> org.orekit.propagation.analytical.gnss.GNSSPropagator:
+        """
+            Get the propagator corresponding to the navigation message.
+        
+            The attitude provider is set by default to be aligned with the EME2000 frame.
+        
+        
+            The mass is set by default to the :meth:`~org.orekit.propagation.Propagator.DEFAULT_MASS`.
+        
+        
+            The ECI frame is set by default to the :meth:`~org.orekit.frames.Predefined.EME2000` in the default data context.
+        
+        
+            The ECEF frame is set by default to the :meth:`~org.orekit.frames.Predefined.ITRF_CIO_CONV_2010_SIMPLE_EOP` in the
+            default data context.
+        
+            This constructor uses the :meth:`~org.orekit.data.DataContext.getDefault`
+        
+            Returns:
+                the propagator corresponding to the navigation message
+        
+            Since:
+                12.0
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getPropagator`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getPropagator`
+        
+        """
+        ...
+    @typing.overload
+    def getPropagator(self, frames: org.orekit.frames.Frames) -> org.orekit.propagation.analytical.gnss.GNSSPropagator:
+        """
+            Get the propagator corresponding to the navigation message.
+        
+            The attitude provider is set by default to be aligned with the EME2000 frame.
+        
+        
+            The mass is set by default to the :meth:`~org.orekit.propagation.Propagator.DEFAULT_MASS`.
+        
+        
+            The ECI frame is set by default to the :meth:`~org.orekit.frames.Predefined.EME2000` in the default data context.
+        
+        
+            The ECEF frame is set by default to the :meth:`~org.orekit.frames.Predefined.ITRF_CIO_CONV_2010_SIMPLE_EOP` in the
+            default data context.
+        
+            Parameters:
+                frames (:class:`~org.orekit.frames.Frames`): set of frames to use
+        
+            Returns:
+                the propagator corresponding to the navigation message
+        
+            Since:
+                12.0
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getPropagator`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getPropagator`
+        
+            Get the propagator corresponding to the navigation message.
+        
+            Parameters:
+                frames (:class:`~org.orekit.frames.Frames`): set of frames to use
+                provider (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude provider
+                inertial (:class:`~org.orekit.frames.Frame`): inertial frame, use to provide the propagated orbit
+                bodyFixed (:class:`~org.orekit.frames.Frame`): body fixed frame, corresponding to the navigation message
+                mass (double): spacecraft mass in kg
+        
+            Returns:
+                the propagator corresponding to the navigation message
+        
+            Since:
+                12.0
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getPropagator`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getPropagator`
+        
+        
+        """
+        ...
+    @typing.overload
+    def getPropagator(self, frames: org.orekit.frames.Frames, attitudeProvider: org.orekit.attitudes.AttitudeProvider, frame2: org.orekit.frames.Frame, frame3: org.orekit.frames.Frame, double: float) -> org.orekit.propagation.analytical.gnss.GNSSPropagator: ...
     def getSma(self) -> float:
         """
             Gets the Semi-Major Axis.
@@ -1519,9 +1667,9 @@ class SBASOrbitalElements(org.orekit.time.TimeStamped):
         """
         ...
 
-class AbstractAlmanac(CommonGnssData):
+class AbstractAlmanac(CommonGnssData, GNSSOrbitalElements):
     """
-    public abstract class AbstractAlmanac extends :class:`~org.orekit.propagation.analytical.gnss.data.CommonGnssData`
+    public abstract class AbstractAlmanac extends :class:`~org.orekit.propagation.analytical.gnss.data.CommonGnssData` implements :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
     
         Base class for GNSS almanacs.
     
@@ -1547,6 +1695,10 @@ class AbstractAlmanac(CommonGnssData):
         
             By default, not contained in a GNSS almanac
         
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getCic` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
+        
             Returns:
                 the Cic parameter
         
@@ -1558,6 +1710,10 @@ class AbstractAlmanac(CommonGnssData):
             Getter for the Cis parameter.
         
             By default, not contained in a GNSS almanac
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getCis` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
         
             Returns:
                 the Cis parameter
@@ -1571,6 +1727,10 @@ class AbstractAlmanac(CommonGnssData):
         
             By default, not contained in a GNSS almanac
         
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getCrc` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
+        
             Returns:
                 the Crc parameter
         
@@ -1582,6 +1742,10 @@ class AbstractAlmanac(CommonGnssData):
             Getter for the Crs parameter.
         
             By default, not contained in a GNSS almanac
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getCrs` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
         
             Returns:
                 the Crs parameter
@@ -1595,6 +1759,10 @@ class AbstractAlmanac(CommonGnssData):
         
             By default, not contained in a GNSS almanac
         
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getCuc` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
+        
             Returns:
                 the Cuc parameter
         
@@ -1606,6 +1774,10 @@ class AbstractAlmanac(CommonGnssData):
             Getter for the Cus parameter.
         
             By default, not contained in a GNSS almanac
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getCus` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
         
             Returns:
                 the Cus parameter
@@ -1619,6 +1791,10 @@ class AbstractAlmanac(CommonGnssData):
         
             By default, not contained in a GNSS almanac
         
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getIDot` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
+        
             Returns:
                 the rate of inclination angle in rad/s
         
@@ -1629,6 +1805,10 @@ class AbstractAlmanac(CommonGnssData):
         """
             Getter for the mean motion.
         
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getMeanMotion` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
+        
             Returns:
                 the mean motion
         
@@ -1636,9 +1816,9 @@ class AbstractAlmanac(CommonGnssData):
         """
         ...
 
-class AbstractNavigationMessage(CommonGnssData):
+class AbstractNavigationMessage(CommonGnssData, GNSSOrbitalElements):
     """
-    public abstract class AbstractNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.CommonGnssData`
+    public abstract class AbstractNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.CommonGnssData` implements :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
     
         Base class for GNSS navigation messages.
     
@@ -1646,10 +1826,10 @@ class AbstractNavigationMessage(CommonGnssData):
             11.0
     
         Also see:
-            :class:`~org.orekit.propagation.analytical.gnss.data.GPSNavigationMessage`,
+            :class:`~org.orekit.propagation.analytical.gnss.data.GPSLegacyNavigationMessage`,
             :class:`~org.orekit.propagation.analytical.gnss.data.GalileoNavigationMessage`,
-            :class:`~org.orekit.propagation.analytical.gnss.data.BeidouNavigationMessage`,
-            :class:`~org.orekit.propagation.analytical.gnss.data.QZSSNavigationMessage`,
+            :class:`~org.orekit.propagation.analytical.gnss.data.BeidouLegacyNavigationMessage`,
+            :class:`~org.orekit.propagation.analytical.gnss.data.QZSSLegacyNavigationMessage`,
             :class:`~org.orekit.propagation.analytical.gnss.data.IRNSSNavigationMessage`
     """
     def __init__(self, double: float, double2: float, int: int): ...
@@ -1667,6 +1847,10 @@ class AbstractNavigationMessage(CommonGnssData):
         """
             Getter for the Cic parameter.
         
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getCic` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
+        
             Returns:
                 the Cic parameter
         
@@ -1676,6 +1860,10 @@ class AbstractNavigationMessage(CommonGnssData):
     def getCis(self) -> float:
         """
             Getter for the Cis parameter.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getCis` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
         
             Returns:
                 the Cis parameter
@@ -1687,6 +1875,10 @@ class AbstractNavigationMessage(CommonGnssData):
         """
             Getter for the Crc parameter.
         
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getCrc` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
+        
             Returns:
                 the Crc parameter
         
@@ -1696,6 +1888,10 @@ class AbstractNavigationMessage(CommonGnssData):
     def getCrs(self) -> float:
         """
             Getter for the Crs parameter.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getCrs` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
         
             Returns:
                 the Crs parameter
@@ -1707,6 +1903,10 @@ class AbstractNavigationMessage(CommonGnssData):
         """
             Getter for the Cuc parameter.
         
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getCuc` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
+        
             Returns:
                 the Cuc parameter
         
@@ -1717,8 +1917,22 @@ class AbstractNavigationMessage(CommonGnssData):
         """
             Getter for the Cus parameter.
         
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getCus` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
+        
             Returns:
                 the Cus parameter
+        
+        
+        """
+        ...
+    def getDeltaN(self) -> float:
+        """
+            Getter for the delta of satellite mean motion.
+        
+            Returns:
+                delta of satellite mean motion
         
         
         """
@@ -1737,6 +1951,10 @@ class AbstractNavigationMessage(CommonGnssData):
         """
             Getter for the rate of inclination angle.
         
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getIDot` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
+        
             Returns:
                 the rate of inclination angle in rad/s
         
@@ -1747,8 +1965,35 @@ class AbstractNavigationMessage(CommonGnssData):
         """
             Getter for the mean motion.
         
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getMeanMotion` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
+        
             Returns:
                 the mean motion
+        
+        
+        """
+        ...
+    def getSqrtA(self) -> float:
+        """
+            Getter for Square Root of Semi-Major Axis (√m).
+        
+            Returns:
+                Square Root of Semi-Major Axis (√m)
+        
+        
+        """
+        ...
+    def getTransmissionTime(self) -> float:
+        """
+            Getter for transmission time.
+        
+            Returns:
+                transmission time
+        
+            Since:
+                12.0
         
         
         """
@@ -1855,12 +2100,25 @@ class AbstractNavigationMessage(CommonGnssData):
         ...
     def setSqrtA(self, double: float) -> None:
         """
-            Setter for the Square Root of Semi-Major Axis (m^1/2).
+            Setter for the Square Root of Semi-Major Axis (√m).
         
             In addition, this method set the value of the Semi-Major Axis.
         
             Parameters:
-                sqrtA (double): the Square Root of Semi-Major Axis (m^1/2)
+                sqrtA (double): the Square Root of Semi-Major Axis (√m)
+        
+        
+        """
+        ...
+    def setTransmissionTime(self, double: float) -> None:
+        """
+            Setter for transmission time.
+        
+            Parameters:
+                transmissionTime (double): transmission time
+        
+            Since:
+                12.0
         
         
         """
@@ -2067,6 +2325,91 @@ class GLONASSAlmanac(GLONASSOrbitalElements):
         
         """
         ...
+    @typing.overload
+    def getPropagator(self) -> org.orekit.propagation.analytical.gnss.GLONASSAnalyticalPropagator:
+        """
+            Get the propagator corresponding to the navigation message.
+        
+            The attitude provider is set by default to be aligned with the EME2000 frame.
+        
+        
+            The mass is set by default to the :meth:`~org.orekit.propagation.Propagator.DEFAULT_MASS`.
+        
+        
+            The data context is by default to the :meth:`~org.orekit.data.DataContext.getDefault`.
+        
+        
+            The ECI frame is set by default to the :meth:`~org.orekit.frames.Predefined.EME2000` in the default data context.
+        
+        
+            The ECEF frame is set by default to the :meth:`~org.orekit.frames.Predefined.ITRF_CIO_CONV_2010_SIMPLE_EOP` in the
+            default data context.
+        
+            Returns:
+                the propagator corresponding to the navigation message
+        
+            Since:
+                12.0
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSAlmanac.getPropagator`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSAlmanac.getPropagator`
+        
+        """
+        ...
+    @typing.overload
+    def getPropagator(self, dataContext: org.orekit.data.DataContext) -> org.orekit.propagation.analytical.gnss.GLONASSAnalyticalPropagator:
+        """
+            Get the propagator corresponding to the navigation message.
+        
+            The attitude provider is set by default to be aligned with the EME2000 frame.
+        
+        
+            The mass is set by default to the :meth:`~org.orekit.propagation.Propagator.DEFAULT_MASS`.
+        
+        
+            The ECI frame is set by default to the :meth:`~org.orekit.frames.Frames.getEME2000`.
+        
+        
+            The ECEF frame is set by default to the :meth:`~org.orekit.frames.Frames.getITRF`.
+        
+            Parameters:
+                context (:class:`~org.orekit.data.DataContext`): the data context to use for frames and time scales.
+        
+            Returns:
+                the propagator corresponding to the navigation message
+        
+            Since:
+                12.0
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSAlmanac.getPropagator`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSAlmanac.getPropagator`
+        
+            Get the propagator corresponding to the navigation message.
+        
+            Parameters:
+                context (:class:`~org.orekit.data.DataContext`): the data context to use for frames and time scales.
+                provider (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude provider
+                inertial (:class:`~org.orekit.frames.Frame`): inertial frame, use to provide the propagated orbit
+                bodyFixed (:class:`~org.orekit.frames.Frame`): body fixed frame, corresponding to the navigation message
+                mass (double): spacecraft mass in kg
+        
+            Returns:
+                the propagator corresponding to the navigation message
+        
+            Since:
+                12.0
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSAlmanac.getPropagator`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSAlmanac.getPropagator`
+        
+        
+        """
+        ...
+    @typing.overload
+    def getPropagator(self, dataContext: org.orekit.data.DataContext, attitudeProvider: org.orekit.attitudes.AttitudeProvider, frame: org.orekit.frames.Frame, frame2: org.orekit.frames.Frame, double: float) -> org.orekit.propagation.analytical.gnss.GLONASSAnalyticalPropagator: ...
     def getTime(self) -> float:
         """
             Description copied from interface: :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements.getTime`
@@ -2328,6 +2671,131 @@ class GLONASSNavigationMessage(AbstractEphemerisMessage, GLONASSOrbitalElements)
         
         """
         ...
+    def getGroupDelayDifference(self) -> float:
+        """
+            Get group delay difference.
+        
+            Returns:
+                group delay difference
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
+    def getHealthFlags(self) -> int:
+        """
+            Get health flags.
+        
+            Returns:
+                health flags
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
+    @typing.overload
+    def getPropagator(self, double: float) -> org.orekit.propagation.numerical.GLONASSNumericalPropagator:
+        """
+            Get the propagator corresponding to the navigation message.
+        
+            The attitude provider is set by default to EME2000 aligned in the default data context.
+        
+        
+            The mass is set by default to the :meth:`~org.orekit.propagation.Propagator.DEFAULT_MASS`.
+        
+        
+            The data context is by default to the :meth:`~org.orekit.data.DataContext.getDefault`.
+        
+        
+            The ECI frame is set by default to the :meth:`~org.orekit.frames.Predefined.EME2000` in the default data context.
+        
+        
+        
+            Parameters:
+                step (double): integration step in seconds
+        
+            Returns:
+                the propagator corresponding to the navigation message
+        
+            Since:
+                12.0
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSNavigationMessage.getPropagator`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSNavigationMessage.getPropagator`
+        
+            Get the propagator corresponding to the navigation message.
+        
+            The attitude provider is set by default to EME2000 aligned in the default data context.
+        
+        
+            The mass is set by default to the :meth:`~org.orekit.propagation.Propagator.DEFAULT_MASS`.
+        
+        
+            The data context is by default to the :meth:`~org.orekit.data.DataContext.getDefault`.
+        
+        
+            The ECI frame is set by default to the :meth:`~org.orekit.frames.Predefined.EME2000` in the default data context.
+        
+        
+        
+            Parameters:
+                step (double): integration step in seconds
+                context (:class:`~org.orekit.data.DataContext`): data context
+        
+            Returns:
+                the propagator corresponding to the navigation message
+        
+            Since:
+                12.0
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSNavigationMessage.getPropagator`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSNavigationMessage.getPropagator`
+        
+            Get the propagator corresponding to the navigation message.
+        
+            Parameters:
+                step (double): integration step in seconds
+                context (:class:`~org.orekit.data.DataContext`): data context
+                provider (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude provider
+                inertial (:class:`~org.orekit.frames.Frame`): inertial frame, use to provide the propagated orbit
+                mass (double): spacecraft mass in kg
+        
+            Returns:
+                the propagator corresponding to the navigation message
+        
+            Since:
+                12.0
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSNavigationMessage.getPropagator`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GLONASSNavigationMessage.getPropagator`
+        
+        
+        """
+        ...
+    @typing.overload
+    def getPropagator(self, double: float, dataContext: org.orekit.data.DataContext) -> org.orekit.propagation.numerical.GLONASSNumericalPropagator: ...
+    @typing.overload
+    def getPropagator(self, double: float, dataContext: org.orekit.data.DataContext, attitudeProvider: org.orekit.attitudes.AttitudeProvider, frame: org.orekit.frames.Frame, double2: float) -> org.orekit.propagation.numerical.GLONASSNumericalPropagator: ...
+    def getStatusFlags(self) -> int:
+        """
+            Get status flags.
+        
+            Returns:
+                status flags
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
     def getTN(self) -> float:
         """
             Get the correction to the satellite time relative to GLONASS system time.
@@ -2356,6 +2824,19 @@ class GLONASSNavigationMessage(AbstractEphemerisMessage, GLONASSOrbitalElements)
         
         """
         ...
+    def getURA(self) -> float:
+        """
+            Getter for the user range accuray (meters).
+        
+            Returns:
+                the user range accuracy
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
     def setFrequencyNumber(self, double: float) -> None:
         """
             Setter for the frequency number.
@@ -2376,6 +2857,45 @@ class GLONASSNavigationMessage(AbstractEphemerisMessage, GLONASSOrbitalElements)
         
         """
         ...
+    def setGroupDelayDifference(self, double: float) -> None:
+        """
+            Set group delay difference.
+        
+            Parameters:
+                groupDelayDifference (double): group delay difference
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
+    def setHealthFlags(self, double: float) -> None:
+        """
+            Set health flag.
+        
+            Parameters:
+                healthFlags (double): health flag (parsed as a double)
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
+    def setStatusFlags(self, double: float) -> None:
+        """
+            Set status flag.
+        
+            Parameters:
+                statusFlags (double): status flag (parsed as a double)
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
     def setTauN(self, double: float) -> None:
         """
             Setter for the SV clock bias.
@@ -2392,6 +2912,19 @@ class GLONASSNavigationMessage(AbstractEphemerisMessage, GLONASSOrbitalElements)
         
             Parameters:
                 time (double): the time to set
+        
+        
+        """
+        ...
+    def setURA(self, double: float) -> None:
+        """
+            Setter for the user range accuracy.
+        
+            Parameters:
+                accuracy (double): the value to set
+        
+            Since:
+                12.0
         
         
         """
@@ -2712,6 +3245,98 @@ class SBASNavigationMessage(AbstractEphemerisMessage, SBASOrbitalElements):
         
         """
         ...
+    @typing.overload
+    def getPropagator(self) -> org.orekit.propagation.analytical.gnss.SBASPropagator:
+        """
+            Get the propagator corresponding to the navigation message.
+        
+            The attitude provider is set by default be aligned with the EME2000 frame.
+        
+        
+            The Earth gravity coefficient is set by default to the
+            :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSConstants.SBAS_MU`.
+        
+        
+            The mass is set by default to the :meth:`~org.orekit.propagation.Propagator.DEFAULT_MASS`.
+        
+        
+            The ECI frame is set by default to the :meth:`~org.orekit.frames.Predefined.EME2000`.
+        
+        
+            The ECEF frame is set by default to the :meth:`~org.orekit.frames.Predefined.ITRF_CIO_CONV_2010_SIMPLE_EOP`.
+        
+            This constructor uses the :meth:`~org.orekit.data.DataContext.getDefault`
+        
+            Returns:
+                the propagator corresponding to the navigation message
+        
+            Since:
+                12.0
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASNavigationMessage.getPropagator`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASNavigationMessage.getPropagator`
+        
+        """
+        ...
+    @typing.overload
+    def getPropagator(self, frames: org.orekit.frames.Frames) -> org.orekit.propagation.analytical.gnss.SBASPropagator:
+        """
+            Get the propagator corresponding to the navigation message.
+        
+            The attitude provider is set by default be aligned with the EME2000 frame.
+        
+        
+            The Earth gravity coefficient is set by default to the
+            :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSConstants.SBAS_MU`.
+        
+        
+            The mass is set by default to the :meth:`~org.orekit.propagation.Propagator.DEFAULT_MASS`.
+        
+        
+            The ECI frame is set by default to the :meth:`~org.orekit.frames.Predefined.EME2000`.
+        
+        
+            The ECEF frame is set by default to the :meth:`~org.orekit.frames.Predefined.ITRF_CIO_CONV_2010_SIMPLE_EOP`.
+        
+            Parameters:
+                frames (:class:`~org.orekit.frames.Frames`): set of frames to use
+        
+            Returns:
+                the propagator corresponding to the navigation message
+        
+            Since:
+                12.0
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASNavigationMessage.getPropagator`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASNavigationMessage.getPropagator`
+        
+            Get the propagator corresponding to the navigation message.
+        
+            Parameters:
+                frames (:class:`~org.orekit.frames.Frames`): set of frames to use
+                provider (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude provider
+                inertial (:class:`~org.orekit.frames.Frame`): inertial frame, use to provide the propagated orbit
+                bodyFixed (:class:`~org.orekit.frames.Frame`): body fixed frame, corresponding to the navigation message
+                mass (double): spacecraft mass in kg
+                mu (double): central attraction coefficient
+        
+            Returns:
+                the propagator corresponding to the navigation message
+        
+            Since:
+                12.0
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASNavigationMessage.getPropagator`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.SBASNavigationMessage.getPropagator`
+        
+        
+        """
+        ...
+    @typing.overload
+    def getPropagator(self, frames: org.orekit.frames.Frames, attitudeProvider: org.orekit.attitudes.AttitudeProvider, frame2: org.orekit.frames.Frame, frame3: org.orekit.frames.Frame, double: float, double2: float) -> org.orekit.propagation.analytical.gnss.SBASPropagator: ...
     def getTime(self) -> float:
         """
             Gets the Reference Time of the SBAS orbit in GPS seconds of the week.
@@ -2801,9 +3426,9 @@ class SBASNavigationMessage(AbstractEphemerisMessage, SBASOrbitalElements):
         """
         ...
 
-class BeidouAlmanac(AbstractAlmanac, GNSSOrbitalElements):
+class BeidouAlmanac(AbstractAlmanac):
     """
-    public class BeidouAlmanac extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac` implements :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
+    public class BeidouAlmanac extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac`
     
         Class for BeiDou almanac.
     
@@ -2861,14 +3486,450 @@ class BeidouAlmanac(AbstractAlmanac, GNSSOrbitalElements):
         """
         ...
 
-class BeidouNavigationMessage(AbstractNavigationMessage, GNSSOrbitalElements):
+class BeidouCivilianNavigationMessage(AbstractNavigationMessage):
     """
-    public class BeidouNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractNavigationMessage` implements :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
+    public class BeidouCivilianNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractNavigationMessage`
+    
+        Container for data contained in a Beidou civilian navigation message.
+    
+        Since:
+            12.0
+    """
+    CNV1: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` CNV1
+    
+        Identifier for Beidou-3 B1C message type.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    CNV2: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` CNV2
+    
+        Identifier for Beidou-3 B2A message type.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    CNV3: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` CNV3
+    
+        Identifier for Beidou-3 B2B message type.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    def __init__(self, frequency: org.orekit.gnss.Frequency): ...
+    def getADot(self) -> float:
+        """
+            Getter for the change rate in semi-major axis.
+        
+            Returns:
+                the change rate in semi-major axis
+        
+        
+        """
+        ...
+    def getDeltaN0Dot(self) -> float:
+        """
+            Getter for change rate in Δn₀.
+        
+            Returns:
+                change rate in Δn₀
+        
+        
+        """
+        ...
+    def getHealth(self) -> int:
+        """
+            Getter for health.
+        
+            Returns:
+                health
+        
+        
+        """
+        ...
+    def getIODC(self) -> int:
+        """
+            Getter for the Issue Of Data Clock (IODC).
+        
+            Returns:
+                the Issue Of Data Clock (IODC)
+        
+        
+        """
+        ...
+    def getIODE(self) -> int:
+        """
+            Getter for the Issue Of Data Ephemeris (IODE).
+        
+            Returns:
+                the Issue Of Data Ephemeris (IODE)
+        
+        
+        """
+        ...
+    def getIntegrityFlags(self) -> int:
+        """
+            Getter for B1C integrity flags.
+        
+            Returns:
+                B1C integrity flags
+        
+        
+        """
+        ...
+    def getIscB1CD(self) -> float:
+        """
+            Getter for inter Signal Delay for B1 CD.
+        
+            Returns:
+                inter signal delay
+        
+        
+        """
+        ...
+    def getIscB1CP(self) -> float:
+        """
+            Getter for inter Signal Delay for B1 CP.
+        
+            Returns:
+                inter signal delay
+        
+        
+        """
+        ...
+    def getIscB2AD(self) -> float:
+        """
+            Getter for inter Signal Delay for B2 AD.
+        
+            Returns:
+                inter signal delay
+        
+        
+        """
+        ...
+    def getSatelliteType(self) -> BeidouSatelliteType:
+        """
+            Getter for satellite type.
+        
+            Returns:
+                satellite type
+        
+        
+        """
+        ...
+    def getSignal(self) -> org.orekit.gnss.Frequency:
+        """
+            Getter for signal.
+        
+            Returns:
+                signal on which navigation signal is sent
+        
+        
+        """
+        ...
+    def getSisaiOc1(self) -> int:
+        """
+            Getter for Signal In Space Accuracy Index (clock drift accuracy).
+        
+            Returns:
+                Signal In Space Accuracy Index (clock drift accuracy)
+        
+        
+        """
+        ...
+    def getSisaiOc2(self) -> int:
+        """
+            Getter for Signal In Space Accuracy Index (clock drift rate accuracy).
+        
+            Returns:
+                Signal In Space Accuracy Index (clock drift rate accuracy)
+        
+        
+        """
+        ...
+    def getSisaiOcb(self) -> int:
+        """
+            Getter for Signal In Space Accuracy Index (radial and clock).
+        
+            Returns:
+                Signal In Space Accuracy Index (radial and clock)
+        
+        
+        """
+        ...
+    def getSisaiOe(self) -> int:
+        """
+            Getter for Signal In Space Accuracy Index (along track and across track).
+        
+            Returns:
+                Signal In Space Accuracy Index (along track and across track)
+        
+        
+        """
+        ...
+    def getSismai(self) -> int:
+        """
+            Getter for Signal In Space Monitoring Accuracy Index.
+        
+            Returns:
+                Signal In Space Monitoring Accuracy Index
+        
+        
+        """
+        ...
+    def getTgdB1Cp(self) -> float:
+        """
+            Getter for B1/B3 Group Delay Differential (s).
+        
+            Returns:
+                B1/B3 Group Delay Differential (s)
+        
+        
+        """
+        ...
+    def getTgdB2ap(self) -> float:
+        """
+            Getter for B2 AP Group Delay Differential (s).
+        
+            Returns:
+                B2 AP Group Delay Differential (s)
+        
+        
+        """
+        ...
+    def getTgdB2bI(self) -> float:
+        """
+            Getter for B2B_i / B3I Group Delay Differential (s).
+        
+            Returns:
+                B2B_i / B3I Group Delay Differential (s)
+        
+        
+        """
+        ...
+    def setADot(self, double: float) -> None:
+        """
+            Setter for the change rate in semi-major axis.
+        
+            Parameters:
+                value (double): the change rate in semi-major axis
+        
+        
+        """
+        ...
+    def setDeltaN0Dot(self, double: float) -> None:
+        """
+            Setter for change rate in Δn₀.
+        
+            Parameters:
+                deltaN0Dot (double): change rate in Δn₀
+        
+        
+        """
+        ...
+    def setHealth(self, int: int) -> None:
+        """
+            Setter for health.
+        
+            Parameters:
+                health (int): health
+        
+        
+        """
+        ...
+    def setIODC(self, int: int) -> None:
+        """
+            Setter for the Issue of Data Clock.
+        
+            Parameters:
+                value (int): the IODC to set
+        
+        
+        """
+        ...
+    def setIODE(self, int: int) -> None:
+        """
+            Setter for the Issue of Data Ephemeris.
+        
+            Parameters:
+                value (int): the IODE to set
+        
+        
+        """
+        ...
+    def setIntegrityFlags(self, int: int) -> None:
+        """
+            Setter for B1C integrity flags.
+        
+            Parameters:
+                integrityFlags (int): integrity flags
+        
+        
+        """
+        ...
+    def setIscB1CD(self, double: float) -> None:
+        """
+            Setter for inter Signal Delay for B1 CD.
+        
+            Parameters:
+                delay (double): delay to set
+        
+        
+        """
+        ...
+    def setIscB1CP(self, double: float) -> None:
+        """
+            Setter for inter Signal Delay for B1 CP.
+        
+            Parameters:
+                delay (double): delay to set
+        
+        
+        """
+        ...
+    def setIscB2AD(self, double: float) -> None:
+        """
+            Setter for inter Signal Delay for B2 AD.
+        
+            Parameters:
+                delay (double): delay to set
+        
+        
+        """
+        ...
+    def setSatelliteType(self, beidouSatelliteType: BeidouSatelliteType) -> None:
+        """
+            Setter for satellite type.
+        
+            Parameters:
+                satelliteType (:class:`~org.orekit.propagation.analytical.gnss.data.BeidouSatelliteType`): satellite type
+        
+        
+        """
+        ...
+    def setSisaiOc1(self, int: int) -> None:
+        """
+            Setter for Signal In Space Accuracy Index (clock drift accuracy).
+        
+            Parameters:
+                sisaiOc1 (int): Signal In Space Accuracy Index (clock drift accuracy)
+        
+        
+        """
+        ...
+    def setSisaiOc2(self, int: int) -> None:
+        """
+            Setter for Signal In Space Accuracy Index (clock drift rate accuracy).
+        
+            Parameters:
+                sisaiOc2 (int): Signal In Space Accuracy Index (clock drift rate accuracy)
+        
+        
+        """
+        ...
+    def setSisaiOcb(self, int: int) -> None:
+        """
+            Setter for Signal In Space Accuracy Index (radial and clock).
+        
+            Parameters:
+                sisaiOcb (int): Signal In Space Accuracy Index (radial and clock)
+        
+        
+        """
+        ...
+    def setSisaiOe(self, int: int) -> None:
+        """
+            Setter for Signal In Space Accuracy Index (along track and across track).
+        
+            Parameters:
+                sisaiOe (int): Signal In Space Accuracy Index (along track and across track)
+        
+        
+        """
+        ...
+    def setSismai(self, int: int) -> None:
+        """
+            Setter for Signal In Space Monitoring Accuracy Index.
+        
+            Parameters:
+                sismai (int): Signal In Space Monitoring Accuracy Index
+        
+        
+        """
+        ...
+    def setTgdB1Cp(self, double: float) -> None:
+        """
+            Setter for B1/B3 Group Delay Differential (s).
+        
+            Parameters:
+                tgdB1Cp (double): B1/B3 Group Delay Differential (s)
+        
+        
+        """
+        ...
+    def setTgdB2ap(self, double: float) -> None:
+        """
+            Setter for B2 AP Group Delay Differential (s).
+        
+            Parameters:
+                tgdB2ap (double): B2 AP Group Delay Differential (s)
+        
+        
+        """
+        ...
+    def setTgdB2bI(self, double: float) -> None:
+        """
+            Setter for B2B_i / B3I Group Delay Differential (s).
+        
+            Parameters:
+                tgdB2bI (double): B2B_i / B3I Group Delay Differential (s)
+        
+        
+        """
+        ...
+
+class BeidouLegacyNavigationMessage(AbstractNavigationMessage):
+    """
+    public class BeidouLegacyNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractNavigationMessage`
     
         Container for data contained in a BeiDou navigation message.
     
         Since:
             11.0
+    """
+    D1: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` D1
+    
+        Identifier for message type.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    D2: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` D2
+    
+        Identifier for message type.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
     """
     def __init__(self): ...
     def getAODC(self) -> int:
@@ -2933,7 +3994,7 @@ class BeidouNavigationMessage(AbstractNavigationMessage, GNSSOrbitalElements):
         ...
     def setAODE(self, double: float) -> None:
         """
-            Setter for the age of data ephemeric.
+            Setter for the age of data ephemeris.
         
             Parameters:
                 aod (double): the age of data to set
@@ -2972,9 +4033,355 @@ class BeidouNavigationMessage(AbstractNavigationMessage, GNSSOrbitalElements):
         """
         ...
 
-class GPSAlmanac(AbstractAlmanac, GNSSOrbitalElements, GNSSClockElements):
+class CivilianNavigationMessage(AbstractNavigationMessage, GNSSClockElements):
     """
-    public class GPSAlmanac extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac` implements :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`, :class:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements`
+    public class CivilianNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractNavigationMessage` implements :class:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements`
+    
+        Container for data contained in a GPS/QZNSS civilian navigation message.
+    
+        Since:
+            12.0
+    """
+    CNAV: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` CNAV
+    
+        Identifier for message type.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    CNV2: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` CNV2
+    
+        Identifier for message type.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    def getADot(self) -> float:
+        """
+            Getter for the change rate in semi-major axis.
+        
+            Returns:
+                the change rate in semi-major axis
+        
+        
+        """
+        ...
+    def getDeltaN0Dot(self) -> float:
+        """
+            Getter for change rate in Δn₀.
+        
+            Returns:
+                change rate in Δn₀
+        
+        
+        """
+        ...
+    def getIscL1CA(self) -> float:
+        """
+            Getter for inter Signal Delay for L1 C/A.
+        
+            Returns:
+                inter signal delay
+        
+        
+        """
+        ...
+    def getIscL1CD(self) -> float:
+        """
+            Getter for inter Signal Delay for L1 CD.
+        
+            Returns:
+                inter signal delay
+        
+        
+        """
+        ...
+    def getIscL1CP(self) -> float:
+        """
+            Getter for inter Signal Delay for L1 CP.
+        
+            Returns:
+                inter signal delay
+        
+        
+        """
+        ...
+    def getIscL2C(self) -> float:
+        """
+            Getter for inter Signal Delay for L2 C.
+        
+            Returns:
+                inter signal delay
+        
+        
+        """
+        ...
+    def getIscL5I5(self) -> float:
+        """
+            Getter for inter Signal Delay for L5I.
+        
+            Returns:
+                inter signal delay
+        
+        
+        """
+        ...
+    def getIscL5Q5(self) -> float:
+        """
+            Getter for inter Signal Delay for L5Q.
+        
+            Returns:
+                inter signal delay
+        
+        
+        """
+        ...
+    def getSvAccuracy(self) -> float:
+        """
+            Getter for the user SV accuray (meters).
+        
+            Returns:
+                the user SV accuracy
+        
+        
+        """
+        ...
+    def getSvHealth(self) -> int:
+        """
+            Getter for the satellite health status.
+        
+            Returns:
+                the satellite health status
+        
+        
+        """
+        ...
+    def getTGD(self) -> float:
+        """
+            Getter for the Group Delay Differential (s).
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getTGD` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements`
+        
+            Returns:
+                the Group Delay Differential in seconds
+        
+        
+        """
+        ...
+    def getUraiEd(self) -> int:
+        """
+            Getter for Elevation-Dependent User Range Accuracy.
+        
+            Returns:
+                Elevation-Dependent User Range Accuracy
+        
+        
+        """
+        ...
+    def getUraiNed0(self) -> int:
+        """
+            Getter for term 0 of Non-Elevation-Dependent User Range Accuracy.
+        
+            Returns:
+                term 0 of Non-Elevation-Dependent User Range Accuracy
+        
+        
+        """
+        ...
+    def getUraiNed1(self) -> int:
+        """
+            Getter for term 1 of Non-Elevation-Dependent User Range Accuracy.
+        
+            Returns:
+                term 1 of Non-Elevation-Dependent User Range Accuracy
+        
+        
+        """
+        ...
+    def getUraiNed2(self) -> int:
+        """
+            Getter for term 2 of Non-Elevation-Dependent User Range Accuracy.
+        
+            Returns:
+                term 2 of Non-Elevation-Dependent User Range Accuracy
+        
+        
+        """
+        ...
+    def isCnv2(self) -> bool:
+        """
+            Check it message is a CNV2 message.
+        
+            Returns:
+                true if message is a CNV2 message
+        
+        
+        """
+        ...
+    def setADot(self, double: float) -> None:
+        """
+            Setter for the change rate in semi-major axis.
+        
+            Parameters:
+                value (double): the change rate in semi-major axis
+        
+        
+        """
+        ...
+    def setDeltaN0Dot(self, double: float) -> None:
+        """
+            Setter for change rate in Δn₀.
+        
+            Parameters:
+                deltaN0Dot (double): change rate in Δn₀
+        
+        
+        """
+        ...
+    def setIscL1CA(self, double: float) -> None:
+        """
+            Setter for inter Signal Delay for L1 C/A.
+        
+            Parameters:
+                delay (double): delay to set
+        
+        
+        """
+        ...
+    def setIscL1CD(self, double: float) -> None:
+        """
+            Setter for inter Signal Delay for L1 CD.
+        
+            Parameters:
+                delay (double): delay to set
+        
+        
+        """
+        ...
+    def setIscL1CP(self, double: float) -> None:
+        """
+            Setter for inter Signal Delay for L1 CP.
+        
+            Parameters:
+                delay (double): delay to set
+        
+        
+        """
+        ...
+    def setIscL2C(self, double: float) -> None:
+        """
+            Setter for inter Signal Delay for L2 C.
+        
+            Parameters:
+                delay (double): delay to set
+        
+        
+        """
+        ...
+    def setIscL5I5(self, double: float) -> None:
+        """
+            Setter for inter Signal Delay for L5I.
+        
+            Parameters:
+                delay (double): delay to set
+        
+        
+        """
+        ...
+    def setIscL5Q5(self, double: float) -> None:
+        """
+            Setter for inter Signal Delay for L5Q.
+        
+            Parameters:
+                delay (double): delay to set
+        
+        
+        """
+        ...
+    def setSvAccuracy(self, double: float) -> None:
+        """
+            Setter for the user SV accuracy.
+        
+            Parameters:
+                svAccuracy (double): the value to set
+        
+        
+        """
+        ...
+    def setSvHealth(self, int: int) -> None:
+        """
+            Setter for the satellite health status.
+        
+            Parameters:
+                svHealth (int): the value to set
+        
+        
+        """
+        ...
+    def setTGD(self, double: float) -> None:
+        """
+            Setter for the Group Delay Differential (s).
+        
+            Parameters:
+                time (double): the group delay differential to set
+        
+        
+        """
+        ...
+    def setUraiEd(self, int: int) -> None:
+        """
+            Setter for Elevation-Dependent User Range Accuracy.
+        
+            Parameters:
+                uraiEd (int): Elevation-Dependent User Range Accuracy
+        
+        
+        """
+        ...
+    def setUraiNed0(self, int: int) -> None:
+        """
+            Setter for term 0 of Non-Elevation-Dependent User Range Accuracy.
+        
+            Parameters:
+                uraiNed0 (int): term 0 of Non-Elevation-Dependent User Range Accuracy
+        
+        
+        """
+        ...
+    def setUraiNed1(self, int: int) -> None:
+        """
+            Setter for term 1 of Non-Elevation-Dependent User Range Accuracy.
+        
+            Parameters:
+                uraiNed1 (int): term 1 of Non-Elevation-Dependent User Range Accuracy
+        
+        
+        """
+        ...
+    def setUraiNed2(self, int: int) -> None:
+        """
+            Setter for term 2 of Non-Elevation-Dependent User Range Accuracy.
+        
+            Parameters:
+                uraiNed2 (int): term 2 of Non-Elevation-Dependent User Range Accuracy
+        
+        
+        """
+        ...
+
+class GPSAlmanac(AbstractAlmanac, GNSSClockElements):
+    """
+    public class GPSAlmanac extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac` implements :class:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements`
     
         This class holds a GPS almanac as read from SEM or YUMA files.
     
@@ -3114,124 +4521,9 @@ class GPSAlmanac(AbstractAlmanac, GNSSOrbitalElements, GNSSClockElements):
         """
         ...
 
-class GPSNavigationMessage(AbstractNavigationMessage, GNSSOrbitalElements, GNSSClockElements):
+class GalileoAlmanac(AbstractAlmanac):
     """
-    public class GPSNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractNavigationMessage` implements :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`, :class:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements`
-    
-        Container for data contained in a GPS navigation message.
-    
-        Since:
-            11.0
-    """
-    def __init__(self): ...
-    def getIODC(self) -> int:
-        """
-            Getter for the Issue Of Data Clock (IODC).
-        
-            Returns:
-                the Issue Of Data Clock (IODC)
-        
-        
-        """
-        ...
-    def getIODE(self) -> int:
-        """
-            Getter for the Issue Of Data Ephemeris (IODE).
-        
-            Returns:
-                the Issue Of Data Ephemeris (IODE)
-        
-        
-        """
-        ...
-    def getSvAccuracy(self) -> float:
-        """
-            Getter for the user SV accuray (meters).
-        
-            Returns:
-                the user SV accuracy
-        
-        
-        """
-        ...
-    def getSvHealth(self) -> float:
-        """
-            Getter for the satellite health status.
-        
-            Returns:
-                the satellite health status
-        
-        
-        """
-        ...
-    def getTGD(self) -> float:
-        """
-            Getter for the Group Delay Differential (s).
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getTGD` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements`
-        
-            Returns:
-                the Group Delay Differential in seconds
-        
-        
-        """
-        ...
-    def setIODC(self, double: float) -> None:
-        """
-            Setter for the Issue of Data Clock.
-        
-            Parameters:
-                value (double): the IODC to set
-        
-        
-        """
-        ...
-    def setIODE(self, double: float) -> None:
-        """
-            Setter for the Issue of Data Ephemeris.
-        
-            Parameters:
-                value (double): the IODE to set
-        
-        
-        """
-        ...
-    def setSvAccuracy(self, double: float) -> None:
-        """
-            Setter for the user SV accuracy.
-        
-            Parameters:
-                svAccuracy (double): the value to set
-        
-        
-        """
-        ...
-    def setSvHealth(self, double: float) -> None:
-        """
-            Setter for the satellite health status.
-        
-            Parameters:
-                svHealth (double): the value to set
-        
-        
-        """
-        ...
-    def setTGD(self, double: float) -> None:
-        """
-            Setter for the Group Delay Differential (s).
-        
-            Parameters:
-                time (double): the group delay differential to set
-        
-        
-        """
-        ...
-
-class GalileoAlmanac(AbstractAlmanac, GNSSOrbitalElements):
-    """
-    public class GalileoAlmanac extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac` implements :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
+    public class GalileoAlmanac extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac`
     
         Class for Galileo almanac.
     
@@ -3347,9 +4639,9 @@ class GalileoAlmanac(AbstractAlmanac, GNSSOrbitalElements):
         """
         ...
 
-class GalileoNavigationMessage(AbstractNavigationMessage, GNSSOrbitalElements):
+class GalileoNavigationMessage(AbstractNavigationMessage):
     """
-    public class GalileoNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractNavigationMessage` implements :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
+    public class GalileoNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractNavigationMessage`
     
         Container for data contained in a Galileo navigation message.
     
@@ -3373,6 +4665,19 @@ class GalileoNavigationMessage(AbstractNavigationMessage, GNSSOrbitalElements):
         
             Returns:
                 the Broadcast Group Delay E5b/E1 (s)
+        
+        
+        """
+        ...
+    def getDataSource(self) -> int:
+        """
+            Getter for the the data source.
+        
+            Returns:
+                the data source
+        
+            Since:
+                12.0
         
         
         """
@@ -3427,12 +4732,25 @@ class GalileoNavigationMessage(AbstractNavigationMessage, GNSSOrbitalElements):
         
         """
         ...
-    def setIODNav(self, double: float) -> None:
+    def setDataSource(self, int: int) -> None:
+        """
+            Setter for the data source.
+        
+            Parameters:
+                dataSource (int): data source
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
+    def setIODNav(self, int: int) -> None:
         """
             Setter for the Issue of Data of the navigation batch.
         
             Parameters:
-                iod (double): the IOD to set
+                iod (int): the IOD to set
         
         
         """
@@ -3458,9 +4776,9 @@ class GalileoNavigationMessage(AbstractNavigationMessage, GNSSOrbitalElements):
         """
         ...
 
-class IRNSSAlmanac(AbstractAlmanac, GNSSOrbitalElements):
+class IRNSSAlmanac(AbstractAlmanac):
     """
-    public class IRNSSAlmanac extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac` implements :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
+    public class IRNSSAlmanac extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac`
     
         Class for IRNSS almanac.
     
@@ -3485,9 +4803,9 @@ class IRNSSAlmanac(AbstractAlmanac, GNSSOrbitalElements):
         """
         ...
 
-class IRNSSNavigationMessage(AbstractNavigationMessage, GNSSOrbitalElements):
+class IRNSSNavigationMessage(AbstractNavigationMessage):
     """
-    public class IRNSSNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractNavigationMessage` implements :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
+    public class IRNSSNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractNavigationMessage`
     
         Container for data contained in an IRNSS navigation message.
     
@@ -3576,9 +4894,160 @@ class IRNSSNavigationMessage(AbstractNavigationMessage, GNSSOrbitalElements):
         """
         ...
 
-class QZSSAlmanac(AbstractAlmanac, GNSSOrbitalElements):
+class LegacyNavigationMessage(AbstractNavigationMessage, GNSSClockElements):
     """
-    public class QZSSAlmanac extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac` implements :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
+    public class LegacyNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractNavigationMessage` implements :class:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements`
+    
+        Container for data contained in a GPS/QZNSS legacy navigation message.
+    
+        Since:
+            11.0
+    """
+    LNAV: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` LNAV
+    
+        Identifier for message type.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    def getFitInterval(self) -> int:
+        """
+            Getter for the fit interval.
+        
+            Returns:
+                the fit interval
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
+    def getIODC(self) -> int:
+        """
+            Getter for the Issue Of Data Clock (IODC).
+        
+            Returns:
+                the Issue Of Data Clock (IODC)
+        
+        
+        """
+        ...
+    def getIODE(self) -> int:
+        """
+            Getter for the Issue Of Data Ephemeris (IODE).
+        
+            Returns:
+                the Issue Of Data Ephemeris (IODE)
+        
+        
+        """
+        ...
+    def getSvAccuracy(self) -> float:
+        """
+            Getter for the user SV accuray (meters).
+        
+            Returns:
+                the user SV accuracy
+        
+        
+        """
+        ...
+    def getSvHealth(self) -> int:
+        """
+            Getter for the satellite health status.
+        
+            Returns:
+                the satellite health status
+        
+        
+        """
+        ...
+    def getTGD(self) -> float:
+        """
+            Getter for the Group Delay Differential (s).
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getTGD` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements`
+        
+            Returns:
+                the Group Delay Differential in seconds
+        
+        
+        """
+        ...
+    def setFitInterval(self, int: int) -> None:
+        """
+            Setter for the fit interval.
+        
+            Parameters:
+                fitInterval (int): fit interval
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
+    def setIODC(self, int: int) -> None:
+        """
+            Setter for the Issue of Data Clock.
+        
+            Parameters:
+                value (int): the IODC to set
+        
+        
+        """
+        ...
+    def setIODE(self, double: float) -> None:
+        """
+            Setter for the Issue of Data Ephemeris.
+        
+            Parameters:
+                value (double): the IODE to set
+        
+        
+        """
+        ...
+    def setSvAccuracy(self, double: float) -> None:
+        """
+            Setter for the user SV accuracy.
+        
+            Parameters:
+                svAccuracy (double): the value to set
+        
+        
+        """
+        ...
+    def setSvHealth(self, int: int) -> None:
+        """
+            Setter for the satellite health status.
+        
+            Parameters:
+                svHealth (int): the value to set
+        
+        
+        """
+        ...
+    def setTGD(self, double: float) -> None:
+        """
+            Setter for the Group Delay Differential (s).
+        
+            Parameters:
+                time (double): the group delay differential to set
+        
+        
+        """
+        ...
+
+class QZSSAlmanac(AbstractAlmanac):
+    """
+    public class QZSSAlmanac extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac`
     
         This class holds a QZSS almanac as read from YUMA files.
     
@@ -3639,9 +5108,42 @@ class QZSSAlmanac(AbstractAlmanac, GNSSOrbitalElements):
         """
         ...
 
-class QZSSNavigationMessage(AbstractNavigationMessage, GNSSOrbitalElements):
+class GPSCivilianNavigationMessage(CivilianNavigationMessage):
     """
-    public class QZSSNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractNavigationMessage` implements :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
+    public class GPSCivilianNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.CivilianNavigationMessage`
+    
+        Container for data contained in a GPS navigation message.
+    
+        Since:
+            12.0
+    """
+    def __init__(self, boolean: bool): ...
+
+class GPSLegacyNavigationMessage(LegacyNavigationMessage):
+    """
+    public class GPSLegacyNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.LegacyNavigationMessage`
+    
+        Container for data contained in a GPS navigation message.
+    
+        Since:
+            11.0
+    """
+    def __init__(self): ...
+
+class QZSSCivilianNavigationMessage(CivilianNavigationMessage):
+    """
+    public class QZSSCivilianNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.CivilianNavigationMessage`
+    
+        Container for data contained in a QZSS navigation message.
+    
+        Since:
+            12.0
+    """
+    def __init__(self, boolean: bool): ...
+
+class QZSSLegacyNavigationMessage(LegacyNavigationMessage):
+    """
+    public class QZSSLegacyNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.LegacyNavigationMessage`
     
         Container for data contained in a QZSS navigation message.
     
@@ -3649,106 +5151,6 @@ class QZSSNavigationMessage(AbstractNavigationMessage, GNSSOrbitalElements):
             11.0
     """
     def __init__(self): ...
-    def getIODC(self) -> int:
-        """
-            Getter for the Issue Of Data Clock (IODC).
-        
-            Returns:
-                the Issue Of Data Clock (IODC)
-        
-        
-        """
-        ...
-    def getIODE(self) -> int:
-        """
-            Getter for the Issue Of Data Ephemeris (IODE).
-        
-            Returns:
-                the Issue Of Data Ephemeris (IODE)
-        
-        
-        """
-        ...
-    def getSvAccuracy(self) -> float:
-        """
-            Getter for the user SV accuray (meters).
-        
-            Returns:
-                the user SV accuracy
-        
-        
-        """
-        ...
-    def getSvHealth(self) -> float:
-        """
-            Getter for the satellite health status.
-        
-            Returns:
-                the satellite health status
-        
-        
-        """
-        ...
-    def getTGD(self) -> float:
-        """
-            Getter for the Group Delay Differential (s).
-        
-            Returns:
-                the Group Delay Differential in seconds
-        
-        
-        """
-        ...
-    def setIODC(self, double: float) -> None:
-        """
-            Setter for the Issue of Data, Clock.
-        
-            Parameters:
-                value (double): the IODC to set
-        
-        
-        """
-        ...
-    def setIODE(self, double: float) -> None:
-        """
-            Setter for the Issue of Data, Ephemeris.
-        
-            Parameters:
-                value (double): the IODE to set
-        
-        
-        """
-        ...
-    def setSvAccuracy(self, double: float) -> None:
-        """
-            Setter for the user SV accuracy.
-        
-            Parameters:
-                svAccuracy (double): the value to set
-        
-        
-        """
-        ...
-    def setSvHealth(self, double: float) -> None:
-        """
-            Setter for the satellite health status.
-        
-            Parameters:
-                svHealth (double): the value to set
-        
-        
-        """
-        ...
-    def setTGD(self, double: float) -> None:
-        """
-            Setter for the Group Delay Differential (s).
-        
-            Parameters:
-                time (double): the group delay differential to set
-        
-        
-        """
-        ...
 
 
 class __module_protocol__(typing.Protocol):
@@ -3758,7 +5160,10 @@ class __module_protocol__(typing.Protocol):
     AbstractEphemerisMessage: typing.Type[AbstractEphemerisMessage]
     AbstractNavigationMessage: typing.Type[AbstractNavigationMessage]
     BeidouAlmanac: typing.Type[BeidouAlmanac]
-    BeidouNavigationMessage: typing.Type[BeidouNavigationMessage]
+    BeidouCivilianNavigationMessage: typing.Type[BeidouCivilianNavigationMessage]
+    BeidouLegacyNavigationMessage: typing.Type[BeidouLegacyNavigationMessage]
+    BeidouSatelliteType: typing.Type[BeidouSatelliteType]
+    CivilianNavigationMessage: typing.Type[CivilianNavigationMessage]
     CommonGnssData: typing.Type[CommonGnssData]
     GLONASSAlmanac: typing.Type[GLONASSAlmanac]
     GLONASSEphemeris: typing.Type[GLONASSEphemeris]
@@ -3768,13 +5173,16 @@ class __module_protocol__(typing.Protocol):
     GNSSConstants: typing.Type[GNSSConstants]
     GNSSOrbitalElements: typing.Type[GNSSOrbitalElements]
     GPSAlmanac: typing.Type[GPSAlmanac]
-    GPSNavigationMessage: typing.Type[GPSNavigationMessage]
+    GPSCivilianNavigationMessage: typing.Type[GPSCivilianNavigationMessage]
+    GPSLegacyNavigationMessage: typing.Type[GPSLegacyNavigationMessage]
     GalileoAlmanac: typing.Type[GalileoAlmanac]
     GalileoNavigationMessage: typing.Type[GalileoNavigationMessage]
     IRNSSAlmanac: typing.Type[IRNSSAlmanac]
     IRNSSNavigationMessage: typing.Type[IRNSSNavigationMessage]
+    LegacyNavigationMessage: typing.Type[LegacyNavigationMessage]
     PythonSBASOrbitalElements: typing.Type[PythonSBASOrbitalElements]
     QZSSAlmanac: typing.Type[QZSSAlmanac]
-    QZSSNavigationMessage: typing.Type[QZSSNavigationMessage]
+    QZSSCivilianNavigationMessage: typing.Type[QZSSCivilianNavigationMessage]
+    QZSSLegacyNavigationMessage: typing.Type[QZSSLegacyNavigationMessage]
     SBASNavigationMessage: typing.Type[SBASNavigationMessage]
     SBASOrbitalElements: typing.Type[SBASOrbitalElements]

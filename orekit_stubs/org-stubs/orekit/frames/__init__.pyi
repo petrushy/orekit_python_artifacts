@@ -8,6 +8,9 @@ import org.hipparchus
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.bodies
 import org.orekit.data
+import org.orekit.files.ccsds.definitions
+import org.orekit.frames.encounter
+import org.orekit.models.earth
 import org.orekit.time
 import org.orekit.utils
 import typing
@@ -31,7 +34,7 @@ class EOPEntry(org.orekit.time.TimeStamped, java.io.Serializable):
         Also see:
             :meth:`~serialized`
     """
-    def __init__(self, int: int, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, iTRFVersion: 'ITRFVersion', absoluteDate: org.orekit.time.AbsoluteDate): ...
+    def __init__(self, int: int, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, double9: float, double10: float, iTRFVersion: 'ITRFVersion', absoluteDate: org.orekit.time.AbsoluteDate): ...
     def getDate(self) -> org.orekit.time.AbsoluteDate:
         """
             Get the date.
@@ -141,12 +144,131 @@ class EOPEntry(org.orekit.time.TimeStamped, java.io.Serializable):
         
         """
         ...
+    def getXRate(self) -> float:
+        """
+            Get the X component of the pole motion rate.
+        
+            Returns:
+                X component of pole motion rate
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
     def getY(self) -> float:
         """
             Get the Y component of the pole motion.
         
             Returns:
                 Y component of pole motion
+        
+        
+        """
+        ...
+    def getYRate(self) -> float:
+        """
+            Get the Y component of the pole motion rate.
+        
+            Returns:
+                Y component of pole motion rate
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
+
+class EOPFittedModel:
+    """
+    public class EOPFittedModel extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Container for fitted model for Earth Orientation Parameters.
+    
+        Since:
+            12.0
+    
+        Also see:
+            :class:`~org.orekit.frames.PredictedEOPHistory`, :class:`~org.orekit.frames.EOPFitter`
+    """
+    def __init__(self, secularAndHarmonic: org.orekit.utils.SecularAndHarmonic, secularAndHarmonic2: org.orekit.utils.SecularAndHarmonic, secularAndHarmonic3: org.orekit.utils.SecularAndHarmonic, secularAndHarmonic4: org.orekit.utils.SecularAndHarmonic, secularAndHarmonic5: org.orekit.utils.SecularAndHarmonic): ...
+    def getDUT1(self) -> org.orekit.utils.SecularAndHarmonic:
+        """
+            Get the fitted secular and harmonics model for DUT1/LOD.
+        
+            LOD can be computed from DUT1 as :code:`-Constants.JULIAN_DAY * getDUT1().osculatingDerivative(date)`
+        
+            Returns:
+                fitted secular and harmonics model for DUT1/LOD
+        
+        
+        """
+        ...
+    def getDx(self) -> org.orekit.utils.SecularAndHarmonic:
+        """
+            Get the fitted secular and harmonics model for nutation x component.
+        
+            Returns:
+                fitted secular and harmonics model for nutation x component
+        
+        
+        """
+        ...
+    def getDy(self) -> org.orekit.utils.SecularAndHarmonic:
+        """
+            Get the fitted secular and harmonics model for nutation y component.
+        
+            Returns:
+                fitted secular and harmonics model for nutation y component
+        
+        
+        """
+        ...
+    def getXp(self) -> org.orekit.utils.SecularAndHarmonic:
+        """
+            Get the fitted secular and harmonics model for pole x component.
+        
+            Returns:
+                fitted secular and harmonics model for pole x component
+        
+        
+        """
+        ...
+    def getYp(self) -> org.orekit.utils.SecularAndHarmonic:
+        """
+            Get the fitted secular and harmonics model for pole y component.
+        
+            Returns:
+                fitted secular and harmonics model for pole y component
+        
+        
+        """
+        ...
+
+class EOPFitter(java.io.Serializable):
+    """
+    public class EOPFitter extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    
+        Earth Orientation Parameters fitter for :class:`~org.orekit.frames.PredictedEOPHistory`.
+    
+        Since:
+            12.0
+    
+        Also see:
+            :class:`~org.orekit.frames.PredictedEOPHistory`, :class:`~org.orekit.frames.SingleParameterFitter`, :meth:`~serialized`
+    """
+    def __init__(self, singleParameterFitter: 'SingleParameterFitter', singleParameterFitter2: 'SingleParameterFitter', singleParameterFitter3: 'SingleParameterFitter', singleParameterFitter4: 'SingleParameterFitter', singleParameterFitter5: 'SingleParameterFitter'): ...
+    def fit(self, eOPHistory: 'EOPHistory') -> EOPFittedModel:
+        """
+            Fit raw history.
+        
+            Parameters:
+                rawHistory (:class:`~org.orekit.frames.EOPHistory`): raw EOP history to fit.
+        
+            Returns:
+                fitted model
         
         
         """
@@ -161,7 +283,34 @@ class EOPHistory(java.io.Serializable):
         Also see:
             :meth:`~serialized`
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, collection: typing.Union[java.util.Collection[EOPEntry], typing.Sequence[EOPEntry], typing.Set[EOPEntry]], boolean: bool, timeScales: org.orekit.time.TimeScales): ...
+    DEFAULT_INTERPOLATION_DEGREE: typing.ClassVar[int] = ...
+    """
+    public static final int DEFAULT_INTERPOLATION_DEGREE
+    
+        Default interpolation degree.
+    
+        Since:
+            12.0
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, int: int, collection: typing.Union[java.util.Collection[EOPEntry], typing.Sequence[EOPEntry], typing.Set[EOPEntry]], boolean: bool, timeScales: org.orekit.time.TimeScales): ...
+    def cachesTidalCorrection(self) -> bool:
+        """
+            Check if the instance caches tidal corrections.
+        
+            Returns:
+                true if the instance caches tidal corrections
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
     def checkEOPContinuity(self, double: float) -> None:
         """
             Check Earth orientation parameters continuity.
@@ -178,6 +327,19 @@ class EOPHistory(java.io.Serializable):
         
             Returns:
                 IERS conventions to which these EOP apply
+        
+        
+        """
+        ...
+    def getEOPHistoryWithoutCachedTidalCorrection(self) -> 'EOPHistory':
+        """
+            Get version of the instance that does not cache tidal correction.
+        
+            Returns:
+                version of the instance that does not cache tidal correction
+        
+            Since:
+                12.0
         
         
         """
@@ -241,6 +403,19 @@ class EOPHistory(java.io.Serializable):
         
         """
         ...
+    def getInterpolationDegree(self) -> int:
+        """
+            Get interpolation degree.
+        
+            Returns:
+                interpolation degree
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
     _getLOD_1__T = typing.TypeVar('_getLOD_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def getLOD(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
@@ -276,16 +451,6 @@ class EOPHistory(java.io.Serializable):
         
         """
         ...
-    def getNonInterpolatingEOPHistory(self) -> 'EOPHistory':
-        """
-            Get non-interpolating version of the instance.
-        
-            Returns:
-                non-interpolatig version of the instance
-        
-        
-        """
-        ...
     _getNonRotatinOriginNutationCorrection_1__T = typing.TypeVar('_getNonRotatinOriginNutationCorrection_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def getNonRotatinOriginNutationCorrection(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]:
@@ -298,7 +463,7 @@ class EOPHistory(java.io.Serializable):
                 date (:class:`~org.orekit.time.AbsoluteDate`): date at which the correction is desired
         
             Returns:
-                nutation correction in Celestial Intermediat Pole coordinates δX and δY (zero if date is outside covered range)
+                nutation correction in Celestial Intermediate Pole coordinates δX and δY (zero if date is outside covered range)
         
         """
         ...
@@ -313,7 +478,7 @@ class EOPHistory(java.io.Serializable):
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date at which the correction is desired
         
             Returns:
-                nutation correction in Celestial Intermediat Pole coordinates δX and δY (zero if date is outside covered range)
+                nutation correction in Celestial Intermediate Pole coordinates δX and δY (zero if date is outside covered range)
         
         
         """
@@ -418,20 +583,10 @@ class EOPHistory(java.io.Serializable):
         
         """
         ...
-    def usesInterpolation(self) -> bool:
-        """
-            Check if the instance uses interpolation on tidal corrections.
-        
-            Returns:
-                true if the instance uses interpolation on tidal corrections
-        
-        
-        """
-        ...
 
-class EOPHistoryLoader:
+class EopHistoryLoader:
     """
-    public interface EOPHistoryLoader
+    public interface EopHistoryLoader
     
         Interface for loading Earth Orientation Parameters history.
     
@@ -441,13 +596,13 @@ class EOPHistoryLoader:
     def fillHistory(self, nutationCorrectionConverter: org.orekit.utils.IERSConventions.NutationCorrectionConverter, sortedSet: java.util.SortedSet[EOPEntry]) -> None: ...
     class Parser:
         @staticmethod
-        def newBulletinBParser(iERSConventions: org.orekit.utils.IERSConventions, itrfVersionProvider: 'ItrfVersionProvider', timeScales: org.orekit.time.TimeScales) -> 'EOPHistoryLoader.Parser': ...
+        def newBulletinBParser(iERSConventions: org.orekit.utils.IERSConventions, itrfVersionProvider: 'ItrfVersionProvider', timeScales: org.orekit.time.TimeScales) -> 'EopHistoryLoader.Parser': ...
         @staticmethod
-        def newEopC04Parser(iERSConventions: org.orekit.utils.IERSConventions, itrfVersionProvider: 'ItrfVersionProvider', timeScales: org.orekit.time.TimeScales) -> 'EOPHistoryLoader.Parser': ...
+        def newEopC04Parser(iERSConventions: org.orekit.utils.IERSConventions, itrfVersionProvider: 'ItrfVersionProvider', timeScales: org.orekit.time.TimeScales) -> 'EopHistoryLoader.Parser': ...
         @staticmethod
-        def newFinalsColumnsParser(iERSConventions: org.orekit.utils.IERSConventions, itrfVersionProvider: 'ItrfVersionProvider', timeScales: org.orekit.time.TimeScales, boolean: bool) -> 'EOPHistoryLoader.Parser': ...
+        def newFinalsColumnsParser(iERSConventions: org.orekit.utils.IERSConventions, itrfVersionProvider: 'ItrfVersionProvider', timeScales: org.orekit.time.TimeScales, boolean: bool) -> 'EopHistoryLoader.Parser': ...
         @staticmethod
-        def newFinalsXmlParser(iERSConventions: org.orekit.utils.IERSConventions, itrfVersionProvider: 'ItrfVersionProvider', timeScales: org.orekit.time.TimeScales) -> 'EOPHistoryLoader.Parser': ...
+        def newFinalsXmlParser(iERSConventions: org.orekit.utils.IERSConventions, itrfVersionProvider: 'ItrfVersionProvider', timeScales: org.orekit.time.TimeScales) -> 'EopHistoryLoader.Parser': ...
         def parse(self, inputStream: java.io.InputStream, string: str) -> java.util.Collection[EOPEntry]: ...
 
 _FieldPoleCorrection__T = typing.TypeVar('_FieldPoleCorrection__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -484,195 +639,184 @@ class FieldPoleCorrection(typing.Generic[_FieldPoleCorrection__T]):
         """
         ...
 
-_FieldTransform__T = typing.TypeVar('_FieldTransform__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class FieldTransform(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['FieldTransform'[_FieldTransform__T]], typing.Generic[_FieldTransform__T]):
+_FieldStaticTransform__T = typing.TypeVar('_FieldStaticTransform__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldStaticTransform(org.orekit.time.TimeStamped, typing.Generic[_FieldStaticTransform__T]):
     """
-    public class FieldTransform<T extends :class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.frames.FieldTransform`<T>>
+    public interface FieldStaticTransform<T extends :class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.time.TimeStamped`
     
-        Transformation class in three dimensional space.
-    
-        This class represents the transformation engine between :class:`~org.orekit.frames.Frame`. It is used both to define the
-        relationship between each frame and its parent frame and to gather all individual transforms into one operation when
-        converting between frames far away from each other.
-    
-        The convention used in OREKIT is vectorial transformation. It means that a transformation is defined as a transform to
-        apply to the coordinates of a vector expressed in the old frame to obtain the same vector expressed in the new frame.
-    
-        Instances of this class are guaranteed to be immutable.
-    
-        Examples
-    ----------
-    
-    
-        Example of translation from R :sub:`A` to R :sub:`B`
-    ------------------------------------------------------
-    
-    
-        We want to transform the :class:`~org.orekit.utils.FieldPVCoordinates` PV :sub:`A` to PV :sub:`B` with :
-    
-        PV :sub:`A` = ({1, 0, 0}, {2, 0, 0}, {3, 0, 0});
-    
-    
-        PV :sub:`B` = ({0, 0, 0}, {0, 0, 0}, {0, 0, 0});
-    
-        The transform to apply then is defined as follows :
-    
-        .. code-block: java
-        
-         Vector3D translation  = new Vector3D(-1, 0, 0);
-         Vector3D velocity     = new Vector3D(-2, 0, 0);
-         Vector3D acceleration = new Vector3D(-3, 0, 0);
-        
-         Transform R1toR2 = new Transform(date, translation, velocity, acceleration);
-        
-         PVB = R1toR2.transformPVCoordinate(PVA);
-         
-    
-        Example of rotation from R :sub:`A` to R :sub:`B`
-    ---------------------------------------------------
-    
-    
-        We want to transform the :class:`~org.orekit.utils.FieldPVCoordinates` PV :sub:`A` to PV :sub:`B` with
-    
-        PV :sub:`A` = ({1, 0, 0}, { 1, 0, 0});
-    
-    
-        PV :sub:`B` = ({0, 1, 0}, {-2, 1, 0});
-    
-        The transform to apply then is defined as follows :
-    
-        .. code-block: java
-        
-         Rotation rotation = new Rotation(Vector3D.PLUS_K, FastMath.PI / 2);
-         Vector3D rotationRate = new Vector3D(0, 0, -2);
-        
-         Transform R1toR2 = new Transform(rotation, rotationRate);
-        
-         PVB = R1toR2.transformPVCoordinates(PVA);
-         
+        A transform that only includes translation and rotation. It is static in the sense that no rates thereof are included.
     
         Since:
-            9.0
+            12.0
+    
+        Also see:
+            :class:`~org.orekit.frames.FieldTransform`
     """
-    @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldTransform__T], transform: 'Transform'): ...
-    @typing.overload
-    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTransform__T], fieldRotation: org.hipparchus.geometry.euclidean.threed.FieldRotation[_FieldTransform__T]): ...
-    @typing.overload
-    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTransform__T], fieldRotation: org.hipparchus.geometry.euclidean.threed.FieldRotation[_FieldTransform__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T]): ...
-    @typing.overload
-    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTransform__T], fieldRotation: org.hipparchus.geometry.euclidean.threed.FieldRotation[_FieldTransform__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T], fieldVector3D2: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T]): ...
-    @typing.overload
-    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTransform__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T]): ...
-    @typing.overload
-    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTransform__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T], fieldVector3D2: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T]): ...
-    @typing.overload
-    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTransform__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T], fieldVector3D2: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T], fieldVector3D3: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T]): ...
-    @typing.overload
-    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTransform__T], fieldTransform: 'FieldTransform'[_FieldTransform__T], fieldTransform2: 'FieldTransform'[_FieldTransform__T]): ...
-    @typing.overload
-    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTransform__T], fieldAngularCoordinates: org.orekit.utils.FieldAngularCoordinates[_FieldTransform__T]): ...
-    @typing.overload
-    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTransform__T], fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_FieldTransform__T]): ...
-    def freeze(self) -> 'FieldTransform'[_FieldTransform__T]: ...
-    def getAcceleration(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T]: ...
-    def getAngular(self) -> org.orekit.utils.FieldAngularCoordinates[_FieldTransform__T]: ...
-    def getCartesian(self) -> org.orekit.utils.FieldPVCoordinates[_FieldTransform__T]: ...
-    def getDate(self) -> org.orekit.time.AbsoluteDate:
+    _compose__T = typing.TypeVar('_compose__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @staticmethod
+    def compose(fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_compose__T], fieldStaticTransform: 'FieldStaticTransform'[_compose__T], fieldStaticTransform2: 'FieldStaticTransform'[_compose__T]) -> 'FieldStaticTransform'[_compose__T]:
         """
-            Get the date.
+            Build a transform by combining two existing ones.
         
-            Specified by:
-                :meth:`~org.orekit.time.TimeStamped.getDate` in interface :class:`~org.orekit.time.TimeStamped`
+            Note that the dates of the two existing transformed are *ignored*, and the combined transform date is set to the date
+            supplied in this constructor without any attempt to shift the raw transforms. This is a design choice allowing user full
+            control of the combination.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the transform
+                first (:class:`~org.orekit.frames.FieldStaticTransform`<T> first): first transform applied
+                second (:class:`~org.orekit.frames.FieldStaticTransform`<T> second): second transform applied
         
             Returns:
-                date attached to the object
+                the newly created static transform that has the same effect as applying :code:`first`, then :code:`second`.
+        
+            Also see:
+                :meth:`~org.orekit.frames.FieldStaticTransform.of`
         
         
         """
         ...
-    def getFieldDate(self) -> org.orekit.time.FieldAbsoluteDate[_FieldTransform__T]: ...
+    _compositeRotation__T = typing.TypeVar('_compositeRotation__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @staticmethod
+    def compositeRotation(fieldStaticTransform: 'FieldStaticTransform'[_compositeRotation__T], fieldStaticTransform2: 'FieldStaticTransform'[_compositeRotation__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_compositeRotation__T]:
+        """
+            Compute a composite rotation.
+        
+            Parameters:
+                first (:class:`~org.orekit.frames.FieldStaticTransform`<T> first): first applied transform
+                second (:class:`~org.orekit.frames.FieldStaticTransform`<T> second): second applied transform
+        
+            Returns:
+                rotation part of the composite transform
+        
+        
+        """
+        ...
+    _compositeTranslation__T = typing.TypeVar('_compositeTranslation__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @staticmethod
+    def compositeTranslation(fieldStaticTransform: 'FieldStaticTransform'[_compositeTranslation__T], fieldStaticTransform2: 'FieldStaticTransform'[_compositeTranslation__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_compositeTranslation__T]:
+        """
+            Compute a composite translation.
+        
+            Parameters:
+                first (:class:`~org.orekit.frames.FieldStaticTransform`<T> first): first applied transform
+                second (:class:`~org.orekit.frames.FieldStaticTransform`<T> second): second applied transform
+        
+            Returns:
+                translation part of the composite transform
+        
+        
+        """
+        ...
     _getIdentity__T = typing.TypeVar('_getIdentity__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @staticmethod
-    def getIdentity(field: org.hipparchus.Field[_getIdentity__T]) -> 'FieldTransform'[_getIdentity__T]:
+    def getIdentity(field: org.hipparchus.Field[_getIdentity__T]) -> 'FieldStaticTransform'[_getIdentity__T]:
         """
-            Get the identity transform.
+            Get the identity static transform.
         
             Parameters:
-                field (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field for the components
+                field (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field used by default
         
             Returns:
-                identity transform
+                identity transform.
         
         
         """
         ...
-    def getInverse(self) -> 'FieldTransform'[_FieldTransform__T]: ...
-    def getJacobian(self, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, tArray: typing.List[typing.List[_FieldTransform__T]]) -> None:
+    def getInverse(self) -> 'FieldStaticTransform'[_FieldStaticTransform__T]: ...
+    def getRotation(self) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_FieldStaticTransform__T]: ...
+    def getTranslation(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldStaticTransform__T]: ...
+    _of_0__T = typing.TypeVar('_of_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _of_1__T = typing.TypeVar('_of_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _of_2__T = typing.TypeVar('_of_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _of_3__T = typing.TypeVar('_of_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    @staticmethod
+    def of(fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_of_0__T], fieldRotation: org.hipparchus.geometry.euclidean.threed.FieldRotation[_of_0__T]) -> 'FieldStaticTransform'[_of_0__T]:
         """
-            Compute the Jacobian of the :meth:`~org.orekit.frames.FieldTransform.transformPVCoordinates` method of the transform.
-        
-            Element :code:`jacobian[i][j]` is the derivative of Cartesian coordinate i of the transformed
-            :class:`~org.orekit.utils.FieldPVCoordinates` with respect to Cartesian coordinate j of the input
-            :class:`~org.orekit.utils.FieldPVCoordinates` in method
-            :meth:`~org.orekit.frames.FieldTransform.transformPVCoordinates`.
-        
-            This definition implies that if we define position-velocity coordinates :code:`PV₁ =
-            transform.transformPVCoordinates(PV₀)` then their differentials dPV₁ and dPV₀ will obey the following relation
-            where J is the matrix computed by this method: :code:`dPV₁ = J × dPV₀`
+            Create a new static transform from a rotation and zero translation.
         
             Parameters:
-                selector (:class:`~org.orekit.utils.CartesianDerivativesFilter`): selector specifying the size of the upper left corner that must be filled (either 3x3 for positions only, 6x6 for
-                    positions and velocities, 9x9 for positions, velocities and accelerations)
-                jacobian (:class:`~org.orekit.frames.FieldTransform`[][]):             placeholder matrix whose upper-left corner is to be filled with the Jacobian, the rest of the matrix remaining untouched
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): of translation.
+                rotation (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldRotation?is`<T> rotation): to apply after the translation. That is after translating applying this rotation produces positions expressed in the new
+                    frame.
+        
+            Returns:
+                the newly created static transform.
+        
+            Also see:
+                :meth:`~org.orekit.frames.FieldStaticTransform.of`
+        
+            Create a new static transform from a translation and rotation.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): of translation.
+                translation (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> translation): to apply, expressed in the old frame. That is, the opposite of the coordinates of the new origin in the old frame.
+        
+            Returns:
+                the newly created static transform.
+        
+            Also see:
+                :meth:`~org.orekit.frames.FieldStaticTransform.of`
+        
+            Create a new static transform from an :class:`~org.orekit.time.FieldAbsoluteDate` and a
+            :class:`~org.orekit.frames.StaticTransform`.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): of translation.
+                staticTransform (:class:`~org.orekit.frames.StaticTransform`): to apply
+        
+            Returns:
+                the newly created static transform.
+        
+            Also see:
+                :meth:`~org.orekit.frames.FieldStaticTransform.of`
+        
+        """
+        ...
+    @typing.overload
+    @staticmethod
+    def of(fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_of_1__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_of_1__T]) -> 'FieldStaticTransform'[_of_1__T]: ...
+    @typing.overload
+    @staticmethod
+    def of(fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_of_2__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_of_2__T], fieldRotation: org.hipparchus.geometry.euclidean.threed.FieldRotation[_of_2__T]) -> 'FieldStaticTransform'[_of_2__T]:
+        """
+            Create a new static transform from a translation and rotation.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): of translation.
+                translation (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> translation): to apply, expressed in the old frame. That is, the opposite of the coordinates of the new origin in the old frame.
+                rotation (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldRotation?is`<T> rotation): to apply after the translation. That is after translating applying this rotation produces positions expressed in the new
+                    frame.
+        
+            Returns:
+                the newly created static transform.
+        
+            Also see:
+                :meth:`~org.orekit.frames.FieldStaticTransform.compose`, :meth:`~org.orekit.frames.FieldStaticTransform.of`,
+                :meth:`~org.orekit.frames.FieldStaticTransform.of`
         
         
         """
         ...
-    def getRotation(self) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_FieldTransform__T]: ...
-    def getRotationAcceleration(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T]: ...
-    def getRotationRate(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T]: ...
-    def getTranslation(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T]: ...
-    def getVelocity(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T]: ...
-    _interpolate_0__T = typing.TypeVar('_interpolate_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    _interpolate_1__T = typing.TypeVar('_interpolate_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    _interpolate_2__T = typing.TypeVar('_interpolate_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def interpolate(fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_interpolate_0__T], collection: typing.Union[java.util.Collection['FieldTransform'[_interpolate_0__T]], typing.Sequence['FieldTransform'[_interpolate_0__T]], typing.Set['FieldTransform'[_interpolate_0__T]]]) -> 'FieldTransform'[_interpolate_0__T]: ...
+    def of(fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_of_3__T], staticTransform: 'StaticTransform') -> 'FieldStaticTransform'[_of_3__T]: ...
     @typing.overload
-    @staticmethod
-    def interpolate(fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_interpolate_1__T], cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, collection: typing.Union[java.util.Collection['FieldTransform'[_interpolate_1__T]], typing.Sequence['FieldTransform'[_interpolate_1__T]], typing.Set['FieldTransform'[_interpolate_1__T]]]) -> 'FieldTransform'[_interpolate_1__T]: ...
+    def transformLine(self, fieldLine: org.hipparchus.geometry.euclidean.threed.FieldLine[_FieldStaticTransform__T]) -> org.hipparchus.geometry.euclidean.threed.FieldLine[_FieldStaticTransform__T]: ...
     @typing.overload
-    @staticmethod
-    def interpolate(fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_interpolate_2__T], cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, stream: java.util.stream.Stream['FieldTransform'[_interpolate_2__T]]) -> 'FieldTransform'[_interpolate_2__T]: ...
+    def transformLine(self, line: org.hipparchus.geometry.euclidean.threed.Line) -> org.hipparchus.geometry.euclidean.threed.FieldLine[_FieldStaticTransform__T]: ...
     @typing.overload
-    def shiftedBy(self, double: float) -> 'FieldTransform'[_FieldTransform__T]: ...
+    def transformPosition(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldStaticTransform__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldStaticTransform__T]: ...
     @typing.overload
-    def shiftedBy(self, t: _FieldTransform__T) -> 'FieldTransform'[_FieldTransform__T]: ...
+    def transformPosition(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldStaticTransform__T]: ...
     @typing.overload
-    def transformLine(self, fieldLine: org.hipparchus.geometry.euclidean.threed.FieldLine[_FieldTransform__T]) -> org.hipparchus.geometry.euclidean.threed.FieldLine[_FieldTransform__T]: ...
+    def transformVector(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldStaticTransform__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldStaticTransform__T]: ...
     @typing.overload
-    def transformLine(self, line: org.hipparchus.geometry.euclidean.threed.Line) -> org.hipparchus.geometry.euclidean.threed.FieldLine[_FieldTransform__T]: ...
-    @typing.overload
-    def transformPVCoordinates(self, fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_FieldTransform__T]) -> org.orekit.utils.FieldPVCoordinates[_FieldTransform__T]: ...
-    @typing.overload
-    def transformPVCoordinates(self, pVCoordinates: org.orekit.utils.PVCoordinates) -> org.orekit.utils.FieldPVCoordinates[_FieldTransform__T]: ...
-    @typing.overload
-    def transformPVCoordinates(self, timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldTransform__T]) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldTransform__T]: ...
-    @typing.overload
-    def transformPVCoordinates(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldTransform__T]: ...
-    @typing.overload
-    def transformPosition(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T]: ...
-    @typing.overload
-    def transformPosition(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T]: ...
-    @typing.overload
-    def transformVector(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T]: ...
-    @typing.overload
-    def transformVector(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T]: ...
+    def transformVector(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldStaticTransform__T]: ...
 
 _FieldTransformGenerator__T = typing.TypeVar('_FieldTransformGenerator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class FieldTransformGenerator(org.orekit.utils.TimeStampedGenerator[FieldTransform[_FieldTransformGenerator__T]], typing.Generic[_FieldTransformGenerator__T]):
+class FieldTransformGenerator(org.orekit.utils.TimeStampedGenerator['FieldTransform'[_FieldTransformGenerator__T]], typing.Generic[_FieldTransformGenerator__T]):
     """
     public class FieldTransformGenerator<T extends :class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.utils.TimeStampedGenerator`<:class:`~org.orekit.frames.FieldTransform`<T>>
     
@@ -685,7 +829,7 @@ class FieldTransformGenerator(org.orekit.utils.TimeStampedGenerator[FieldTransfo
             :class:`~org.orekit.utils.GenericTimeStampedCache`
     """
     def __init__(self, field: org.hipparchus.Field[_FieldTransformGenerator__T], int: int, transformProvider: 'TransformProvider', double: float): ...
-    def generate(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> java.util.List[FieldTransform[_FieldTransformGenerator__T]]: ...
+    def generate(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> java.util.List['FieldTransform'[_FieldTransformGenerator__T]]: ...
 
 class Frame(java.io.Serializable):
     """
@@ -794,6 +938,38 @@ class Frame(java.io.Serializable):
         
         """
         ...
+    _getStaticTransformTo_0__T = typing.TypeVar('_getStaticTransformTo_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getStaticTransformTo(self, frame: 'Frame', fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getStaticTransformTo_0__T]) -> FieldStaticTransform[_getStaticTransformTo_0__T]:
+        """
+            Get the static portion of the transform from the instance to another frame. The returned transform is static in the
+            sense that it includes translations and rotations, but not rates.
+        
+            This method is often more performant than :meth:`~org.orekit.frames.Frame.getTransformTo` when rates are not needed.
+        
+            A first check is made on the FieldAbsoluteDate because "fielded" transforms have low-performance.
+        
+        
+            The date field is checked with
+            :meth:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.FieldElement.html?is`.
+        
+        
+            If true, the un-fielded version of the transform computation is used.
+        
+            Parameters:
+                destination (:class:`~org.orekit.frames.Frame`): destination frame to which we want to transform vectors
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): the date (can be null if it is sure than no date dependent frame is used)
+        
+            Returns:
+                static transform from the instance to the destination frame
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
+    @typing.overload
     def getStaticTransformTo(self, frame: 'Frame', absoluteDate: org.orekit.time.AbsoluteDate) -> 'StaticTransform':
         """
             Get the static portion of the transform from the instance to another frame. The returned transform is static in the
@@ -811,7 +987,6 @@ class Frame(java.io.Serializable):
             Since:
                 11.2
         
-        
         """
         ...
     def getTransformProvider(self) -> 'TransformProvider':
@@ -826,7 +1001,7 @@ class Frame(java.io.Serializable):
         ...
     _getTransformTo_0__T = typing.TypeVar('_getTransformTo_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getTransformTo(self, frame: 'Frame', fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTransformTo_0__T]) -> FieldTransform[_getTransformTo_0__T]:
+    def getTransformTo(self, frame: 'Frame', fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTransformTo_0__T]) -> 'FieldTransform'[_getTransformTo_0__T]:
         """
             Get the transform from the instance to another frame.
         
@@ -897,6 +1072,7 @@ class Frame(java.io.Serializable):
         ...
 
 class Frames:
+    def buildUncachedITRF(self, uT1Scale: org.orekit.time.UT1Scale) -> Frame: ...
     def getCIRF(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool) -> 'FactoryManagedFrame': ...
     def getEME2000(self) -> 'FactoryManagedFrame': ...
     def getEOPHistory(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool) -> EOPHistory: ...
@@ -937,20 +1113,23 @@ class Frames:
 
 class FramesFactory:
     RAPID_DATA_PREDICTION_COLUMNS_1980_FILENAME: typing.ClassVar[str] = ...
-    RAPID_DATA_PREDICTION_XML_1980_FILENAME: typing.ClassVar[str] = ...
+    XML_1980_FILENAME: typing.ClassVar[str] = ...
     EOPC04_1980_FILENAME: typing.ClassVar[str] = ...
     BULLETINB_1980_FILENAME: typing.ClassVar[str] = ...
-    RAPID_DATA_PREDICITON_COLUMNS_2000_FILENAME: typing.ClassVar[str] = ...
-    RAPID_DATA_PREDICITON_XML_2000_FILENAME: typing.ClassVar[str] = ...
+    RAPID_DATA_PREDICTION_COLUMNS_2000_FILENAME: typing.ClassVar[str] = ...
+    XML_2000_FILENAME: typing.ClassVar[str] = ...
     EOPC04_2000_FILENAME: typing.ClassVar[str] = ...
     BULLETINB_2000_FILENAME: typing.ClassVar[str] = ...
     BULLETINA_FILENAME: typing.ClassVar[str] = ...
+    CSV_FILENAME: typing.ClassVar[str] = ...
     @staticmethod
-    def addDefaultEOP1980HistoryLoaders(string: str, string2: str, string3: str, string4: str, string5: str) -> None: ...
+    def addDefaultEOP1980HistoryLoaders(string: str, string2: str, string3: str, string4: str, string5: str, string6: str) -> None: ...
     @staticmethod
-    def addDefaultEOP2000HistoryLoaders(string: str, string2: str, string3: str, string4: str, string5: str) -> None: ...
+    def addDefaultEOP2000HistoryLoaders(string: str, string2: str, string3: str, string4: str, string5: str, string6: str) -> None: ...
     @staticmethod
-    def addEOPHistoryLoader(iERSConventions: org.orekit.utils.IERSConventions, eOPHistoryLoader: EOPHistoryLoader) -> None: ...
+    def addEOPHistoryLoader(iERSConventions: org.orekit.utils.IERSConventions, eopHistoryLoader: EopHistoryLoader) -> None: ...
+    @staticmethod
+    def buildUncachedITRF(eOPHistory: EOPHistory, uTCScale: org.orekit.time.UTCScale) -> Frame: ...
     @staticmethod
     def clearEOPHistoryLoaders() -> None: ...
     @staticmethod
@@ -994,7 +1173,7 @@ class FramesFactory:
     _getNonInterpolatingTransform_0__T = typing.TypeVar('_getNonInterpolatingTransform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def getNonInterpolatingTransform(frame: Frame, frame2: Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getNonInterpolatingTransform_0__T]) -> FieldTransform[_getNonInterpolatingTransform_0__T]: ...
+    def getNonInterpolatingTransform(frame: Frame, frame2: Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getNonInterpolatingTransform_0__T]) -> 'FieldTransform'[_getNonInterpolatingTransform_0__T]: ...
     @typing.overload
     @staticmethod
     def getNonInterpolatingTransform(frame: Frame, frame2: Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> 'Transform': ...
@@ -1046,48 +1225,45 @@ class ItrfVersionProvider:
         """
         ...
 
-class LOFType(java.lang.Enum['LOFType']):
+class LOF:
     """
-    public enum LOFType extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.frames.LOFType`>
+    public interface LOF
     
-        Enumerate for different types of Local Orbital Frames.
+        Interface for local orbital frame.
     """
-    TNW: typing.ClassVar['LOFType'] = ...
-    QSW: typing.ClassVar['LOFType'] = ...
-    LVLH: typing.ClassVar['LOFType'] = ...
-    LVLH_CCSDS: typing.ClassVar['LOFType'] = ...
-    VVLH: typing.ClassVar['LOFType'] = ...
-    VNC: typing.ClassVar['LOFType'] = ...
-    EQW: typing.ClassVar['LOFType'] = ...
-    NTW: typing.ClassVar['LOFType'] = ...
+    def getName(self) -> str:
+        """
+            Get name of the local orbital frame.
+        
+            Returns:
+                name of the local orbital frame
+        
+        
+        """
+        ...
+    def isQuasiInertial(self) -> bool:
+        """
+            Get flag that indicates if current local orbital frame shall be treated as pseudo-inertial.
+        
+            Returns:
+                flag that indicates if current local orbital frame shall be treated as pseudo-inertial
+        
+        
+        """
+        ...
     _rotationFromInertial_0__T = typing.TypeVar('_rotationFromInertial_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def rotationFromInertial(self, field: org.hipparchus.Field[_rotationFromInertial_0__T], fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_rotationFromInertial_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_rotationFromInertial_0__T]: ...
-    @typing.overload
-    def rotationFromInertial(self, pVCoordinates: org.orekit.utils.PVCoordinates) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+    def rotationFromInertial(self, field: org.hipparchus.Field[_rotationFromInertial_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_rotationFromInertial_0__T], fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_rotationFromInertial_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_rotationFromInertial_0__T]:
         """
             Get the rotation from inertial frame to local orbital frame.
         
             This rotation does not include any time derivatives. If first time derivatives (i.e. rotation rate) is needed as well,
-            the full :meth:`~org.orekit.frames.LOFType.transformFromInertial` method must be called and the complete rotation
-            transform must be extracted from it.
-        
-            Parameters:
-                pv (:class:`~org.orekit.utils.PVCoordinates`): position-velocity of the spacecraft in some inertial frame
-        
-            Returns:
-                rotation from inertial frame to local orbital frame
-        
-        public abstract <T extends :class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> :class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldRotation?is`<T> rotationFromInertial (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field, :class:`~org.orekit.utils.FieldPVCoordinates`<T> pv)
-        
-            Get the rotation from inertial frame to local orbital frame.
-        
-            This rotation does not include any time derivatives. If first time derivatives (i.e. rotation rate) is needed as well,
-            the full :meth:`~org.orekit.frames.LOFType.transformFromInertial` method must be called and the complete rotation
-            transform must be extracted from it.
+            the full :meth:`~org.orekit.frames.LOF.transformFromInertial` method must be called and the complete rotation transform
+            must be extracted from it.
         
             Parameters:
                 field (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the rotation
                 pv (:class:`~org.orekit.utils.FieldPVCoordinates`<T> pv): position-velocity of the spacecraft in some inertial frame
         
             Returns:
@@ -1096,94 +1272,128 @@ class LOFType(java.lang.Enum['LOFType']):
             Since:
                 9.0
         
+        """
+        ...
+    @typing.overload
+    def rotationFromInertial(self, absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinates: org.orekit.utils.PVCoordinates) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+        """
+            Get the rotation from inertial frame to local orbital frame.
+        
+            This rotation does not include any time derivatives. If first time derivatives (i.e. rotation rate) is needed as well,
+            the full :meth:`~org.orekit.frames.LOF.transformFromInertial` method must be called and the complete rotation transform
+            must be extracted from it.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): date of the rotation
+                pv (:class:`~org.orekit.utils.PVCoordinates`): position-velocity of the spacecraft in some inertial frame
+        
+            Returns:
+                rotation from inertial frame to local orbital frame
+        
+        
+        """
+        ...
+    _rotationFromLOF_0__T = typing.TypeVar('_rotationFromLOF_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def rotationFromLOF(self, field: org.hipparchus.Field[_rotationFromLOF_0__T], lOF: 'LOF', fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_rotationFromLOF_0__T], fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_rotationFromLOF_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_rotationFromLOF_0__T]:
+        """
+            Get the rotation from input :class:`~org.orekit.frames.LOF` to the instance.
+        
+            This rotation does not include any time derivatives. If first time derivatives (i.e. rotation rate) is needed as well,
+            the full :meth:`~org.orekit.frames.LOF.transformFromLOF` method must be called and the complete rotation transform must
+            be extracted from it.
+        
+            Parameters:
+                field (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
+                fromLOF (:class:`~org.orekit.frames.LOF`): input local orbital frame
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the rotation
+                pv (:class:`~org.orekit.utils.FieldPVCoordinates`<T> pv): position-velocity of the spacecraft in some inertial frame
+        
+            Returns:
+                rotation from input local orbital frame to the instance
+        
+            Since:
+                11.3
+        
+        """
+        ...
+    @typing.overload
+    def rotationFromLOF(self, lOF: 'LOF', absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinates: org.orekit.utils.PVCoordinates) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+        """
+            Get the rotation from input :class:`~org.orekit.frames.LOF` to the instance.
+        
+            This rotation does not include any time derivatives. If first time derivatives (i.e. rotation rate) is needed as well,
+            the full :meth:`~org.orekit.frames.LOF.transformFromLOF` method must be called and the complete rotation transform must
+            be extracted from it.
+        
+            Parameters:
+                fromLOF (:class:`~org.orekit.frames.LOF`): input local orbital frame
+                date (:class:`~org.orekit.time.AbsoluteDate`): date of the rotation
+                pv (:class:`~org.orekit.utils.PVCoordinates`): position-velocity of the spacecraft in some inertial frame
+        
+            Returns:
+                rotation from input local orbital frame to the instance
+        
+            Since:
+                11.3
+        
         
         """
         ...
     _rotationFromLOFInToLOFOut_0__T = typing.TypeVar('_rotationFromLOFInToLOFOut_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def rotationFromLOFInToLOFOut(field: org.hipparchus.Field[_rotationFromLOFInToLOFOut_0__T], lOFType: 'LOFType', lOFType2: 'LOFType', fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_rotationFromLOFInToLOFOut_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_rotationFromLOFInToLOFOut_0__T]:
+    def rotationFromLOFInToLOFOut(field: org.hipparchus.Field[_rotationFromLOFInToLOFOut_0__T], lOF: 'LOF', lOF2: 'LOF', fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_rotationFromLOFInToLOFOut_0__T], fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_rotationFromLOFInToLOFOut_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_rotationFromLOFInToLOFOut_0__T]:
         """
-            Get the rotation from input to output :class:`~org.orekit.frames.LOFType`.
+            Get the rotation from input to output :class:`~org.orekit.frames.LOF`.
         
-            This rotation does not include any time derivatives.
+            This rotation does not include any time derivatives. If first time derivatives (i.e. rotation rate) is needed as well,
+            the full :meth:`~org.orekit.frames.LOF.transformFromLOFInToLOFOut` method must be called and the complete rotation
+            transform must be extracted from it.
         
             Parameters:
                 field (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
-                in (:class:`~org.orekit.frames.LOFType`): input commonly used local orbital frame
-                out (:class:`~org.orekit.frames.LOFType`): output commonly used local orbital frame
+                in (:class:`~org.orekit.frames.LOF`): input commonly used local orbital frame
+                out (:class:`~org.orekit.frames.LOF`): output commonly used local orbital frame
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the rotation
                 pv (:class:`~org.orekit.utils.FieldPVCoordinates`<T> pv): position-velocity of the spacecraft in some inertial frame
         
             Returns:
-                rotation from input to output :class:`~org.orekit.frames.LOFType`.
+                rotation from input to output local orbital frame
         
             Since:
                 11.3
-        
         
         """
         ...
     @typing.overload
     @staticmethod
-    def rotationFromLOFInToLOFOut(lOFType: 'LOFType', lOFType2: 'LOFType', pVCoordinates: org.orekit.utils.PVCoordinates) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+    def rotationFromLOFInToLOFOut(lOF: 'LOF', lOF2: 'LOF', absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinates: org.orekit.utils.PVCoordinates) -> org.hipparchus.geometry.euclidean.threed.Rotation:
         """
-            Get the rotation from input to output :class:`~org.orekit.frames.LOFType`.
+            Get the rotation from input to output :class:`~org.orekit.frames.LOF`.
         
-            This rotation does not include any time derivatives.
+            This rotation does not include any time derivatives. If first time derivatives (i.e. rotation rate) is needed as well,
+            the full :meth:`~org.orekit.frames.LOF.transformFromLOFInToLOFOut` method must be called and the complete rotation
+            transform must be extracted from it.
         
             Parameters:
-                in (:class:`~org.orekit.frames.LOFType`): input commonly used local orbital frame
-                out (:class:`~org.orekit.frames.LOFType`): output commonly used local orbital frame
+                in (:class:`~org.orekit.frames.LOF`): input commonly used local orbital frame
+                out (:class:`~org.orekit.frames.LOF`): output commonly used local orbital frame
+                date (:class:`~org.orekit.time.AbsoluteDate`): date of the rotation
                 pv (:class:`~org.orekit.utils.PVCoordinates`): position-velocity of the spacecraft in some inertial frame
         
             Returns:
-                rotation from input to output :class:`~org.orekit.frames.LOFType`.
+                rotation from input to output local orbital frame.
         
             Since:
                 11.3
         
-        """
-        ...
-    _rotationFromLOFType_0__T = typing.TypeVar('_rotationFromLOFType_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def rotationFromLOFType(self, field: org.hipparchus.Field[_rotationFromLOFType_0__T], lOFType: 'LOFType', fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_rotationFromLOFType_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_rotationFromLOFType_0__T]:
-        """
-            Get the rotation from input :class:`~org.orekit.frames.LOFType` to the instance.
-        
-            Parameters:
-                field (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
-                fromLOF (:class:`~org.orekit.frames.LOFType`): input local orbital frame
-                pv (:class:`~org.orekit.utils.FieldPVCoordinates`<T> pv): position-velocity of the spacecraft in some inertial frame
-        
-            Returns:
-                rotation from input local orbital frame to the instance
-        
-            Since:
-                11.3
-        
-        
-        """
-        ...
-    @typing.overload
-    def rotationFromLOFType(self, lOFType: 'LOFType', pVCoordinates: org.orekit.utils.PVCoordinates) -> org.hipparchus.geometry.euclidean.threed.Rotation:
-        """
-            Get the rotation from input :class:`~org.orekit.frames.LOFType` to the instance.
-        
-            Parameters:
-                fromLOF (:class:`~org.orekit.frames.LOFType`): input local orbital frame
-                pv (:class:`~org.orekit.utils.PVCoordinates`): position-velocity of the spacecraft in some inertial frame
-        
-            Returns:
-                rotation from input local orbital frame to the instance
-        
-            Since:
-                11.3
         
         """
         ...
     _transformFromInertial_0__T = typing.TypeVar('_transformFromInertial_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def transformFromInertial(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_transformFromInertial_0__T], fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_transformFromInertial_0__T]) -> FieldTransform[_transformFromInertial_0__T]:
+    def transformFromInertial(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_transformFromInertial_0__T], fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_transformFromInertial_0__T]) -> 'FieldTransform'[_transformFromInertial_0__T]:
         """
             Get the transform from an inertial frame defining position-velocity and the local orbital frame.
         
@@ -1196,7 +1406,6 @@ class LOFType(java.lang.Enum['LOFType']):
         
             Since:
                 9.0
-        
         
         """
         ...
@@ -1212,95 +1421,85 @@ class LOFType(java.lang.Enum['LOFType']):
             Returns:
                 transform from the frame where position-velocity are defined to local orbital frame
         
+        
+        """
+        ...
+    _transformFromLOF_0__T = typing.TypeVar('_transformFromLOF_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def transformFromLOF(self, lOF: 'LOF', fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_transformFromLOF_0__T], fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_transformFromLOF_0__T]) -> 'FieldTransform'[_transformFromLOF_0__T]:
+        """
+            Get the rotation from input :class:`~org.orekit.frames.LOF` to the instance.
+        
+            Parameters:
+                fromLOF (:class:`~org.orekit.frames.LOF`): input local orbital frame
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the transform
+                pv (:class:`~org.orekit.utils.FieldPVCoordinates`<T> pv): position-velocity of the spacecraft in some inertial frame
+        
+            Returns:
+                rotation from input local orbital frame to the instance
+        
+            Since:
+                11.3
+        
+        """
+        ...
+    @typing.overload
+    def transformFromLOF(self, lOF: 'LOF', absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinates: org.orekit.utils.PVCoordinates) -> 'Transform':
+        """
+            Get the rotation from input :class:`~org.orekit.frames.LOF` to the instance.
+        
+            Parameters:
+                fromLOF (:class:`~org.orekit.frames.LOF`): input local orbital frame
+                date (:class:`~org.orekit.time.AbsoluteDate`): date of the transform
+                pv (:class:`~org.orekit.utils.PVCoordinates`): position-velocity of the spacecraft in some inertial frame
+        
+            Returns:
+                rotation from input local orbital frame to the instance
+        
+            Since:
+                11.3
+        
+        
         """
         ...
     _transformFromLOFInToLOFOut_0__T = typing.TypeVar('_transformFromLOFInToLOFOut_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def transformFromLOFInToLOFOut(field: org.hipparchus.Field[_transformFromLOFInToLOFOut_0__T], lOFType: 'LOFType', lOFType2: 'LOFType', fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_transformFromLOFInToLOFOut_0__T], fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_transformFromLOFInToLOFOut_0__T]) -> FieldTransform[_transformFromLOFInToLOFOut_0__T]:
+    def transformFromLOFInToLOFOut(lOF: 'LOF', lOF2: 'LOF', fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_transformFromLOFInToLOFOut_0__T], fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_transformFromLOFInToLOFOut_0__T]) -> 'FieldTransform'[_transformFromLOFInToLOFOut_0__T]:
         """
-            Get the transform from input to output :class:`~org.orekit.frames.LOFType`.
-        
-            This method simply builds the transform using the rotation obtained from
-            :meth:`~org.orekit.frames.LOFType.rotationFromLOFInToLOFOut`
+            Get the transform from input to output :class:`~org.orekit.frames.LOF`.
         
             Parameters:
-                field (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
-                in (:class:`~org.orekit.frames.LOFType`): input commonly used local orbital frame
-                out (:class:`~org.orekit.frames.LOFType`): output commonly used local orbital frame
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
+                in (:class:`~org.orekit.frames.LOF`): input commonly used local orbital frame
+                out (:class:`~org.orekit.frames.LOF`): output commonly used local orbital frame
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the transform
                 pv (:class:`~org.orekit.utils.FieldPVCoordinates`<T> pv): position-velocity of the spacecraft in some inertial frame
         
             Returns:
-                rotation from input to output :class:`~org.orekit.frames.LOFType`.
+                rotation from input to output local orbital frame.
         
             Since:
                 11.3
-        
         
         """
         ...
     @typing.overload
     @staticmethod
-    def transformFromLOFInToLOFOut(lOFType: 'LOFType', lOFType2: 'LOFType', absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinates: org.orekit.utils.PVCoordinates) -> 'Transform':
+    def transformFromLOFInToLOFOut(lOF: 'LOF', lOF2: 'LOF', absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinates: org.orekit.utils.PVCoordinates) -> 'Transform':
         """
-            Get the transform from input to output :class:`~org.orekit.frames.LOFType`.
-        
-            This method simply builds the transform using the rotation obtained from
-            :meth:`~org.orekit.frames.LOFType.rotationFromLOFInToLOFOut`
+            Get the transform from input to output :class:`~org.orekit.frames.LOF`.
         
             Parameters:
-                in (:class:`~org.orekit.frames.LOFType`): input commonly used local orbital frame
-                out (:class:`~org.orekit.frames.LOFType`): output commonly used local orbital frame
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                in (:class:`~org.orekit.frames.LOF`): input commonly used local orbital frame
+                out (:class:`~org.orekit.frames.LOF`): output commonly used local orbital frame
+                date (:class:`~org.orekit.time.AbsoluteDate`): date of the transform
                 pv (:class:`~org.orekit.utils.PVCoordinates`): position-velocity of the spacecraft in some inertial frame
         
             Returns:
-                rotation from input to output :class:`~org.orekit.frames.LOFType`.
+                rotation from input to output local orbital frame
         
             Since:
                 11.3
-        
-        """
-        ...
-    _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
-    @typing.overload
-    @staticmethod
-    def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
-    @typing.overload
-    @staticmethod
-    def valueOf(string: str) -> 'LOFType':
-        """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
-        
-            Parameters:
-                name (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
-        
-            Returns:
-                the enum constant with the specified name
-        
-            Raises:
-                :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
-        
-        
-        """
-        ...
-    @staticmethod
-    def values() -> typing.List['LOFType']:
-        """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
-        
-            .. code-block: java
-            
-            for (LOFType c : LOFType.values())
-                System.out.println(c);
-            
-        
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
         
         
         """
@@ -1310,7 +1509,7 @@ class LazyLoadedEop:
     """
     public class LazyLoadedEop extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
-        Loads Earth Orientation Parameters (EOP) from a configured set of :class:`~org.orekit.frames.EOPHistoryLoader`s on
+        Loads Earth Orientation Parameters (EOP) from a configured set of :class:`~org.orekit.frames.EopHistoryLoader`s on
         demand. Methods are synchronized so it is safe for access from multiple threads.
     
         Since:
@@ -1320,15 +1519,15 @@ class LazyLoadedEop:
             :class:`~org.orekit.frames.LazyLoadedFrames`, :class:`~org.orekit.frames.FramesFactory`
     """
     def __init__(self, dataProvidersManager: org.orekit.data.DataProvidersManager): ...
-    def addDefaultEOP1980HistoryLoaders(self, string: str, string2: str, string3: str, string4: str, string5: str, supplier: typing.Union[java.util.function.Supplier[org.orekit.time.TimeScale], typing.Callable[[], org.orekit.time.TimeScale]]) -> None: ...
-    def addDefaultEOP2000HistoryLoaders(self, string: str, string2: str, string3: str, string4: str, string5: str, supplier: typing.Union[java.util.function.Supplier[org.orekit.time.TimeScale], typing.Callable[[], org.orekit.time.TimeScale]]) -> None: ...
-    def addEOPHistoryLoader(self, iERSConventions: org.orekit.utils.IERSConventions, eOPHistoryLoader: EOPHistoryLoader) -> None:
+    def addDefaultEOP1980HistoryLoaders(self, string: str, string2: str, string3: str, string4: str, string5: str, string6: str, supplier: typing.Union[java.util.function.Supplier[org.orekit.time.TimeScale], typing.Callable[[], org.orekit.time.TimeScale]]) -> None: ...
+    def addDefaultEOP2000HistoryLoaders(self, string: str, string2: str, string3: str, string4: str, string5: str, string6: str, supplier: typing.Union[java.util.function.Supplier[org.orekit.time.TimeScale], typing.Callable[[], org.orekit.time.TimeScale]]) -> None: ...
+    def addEOPHistoryLoader(self, iERSConventions: org.orekit.utils.IERSConventions, eopHistoryLoader: EopHistoryLoader) -> None:
         """
             Add a loader for Earth Orientation Parameters history.
         
             Parameters:
                 conventions (:class:`~org.orekit.utils.IERSConventions`): IERS conventions to which EOP history applies
-                loader (:class:`~org.orekit.frames.EOPHistoryLoader`): custom loader to add for the EOP history
+                loader (:class:`~org.orekit.frames.EopHistoryLoader`): custom loader to add for the EOP history
         
             Also see:
                 :meth:`~org.orekit.frames.LazyLoadedEop.addDefaultEOP1980HistoryLoaders`,
@@ -1362,7 +1561,7 @@ class LazyLoadedEop:
         """
             Get Earth Orientation Parameters history.
         
-            If no :class:`~org.orekit.frames.EOPHistoryLoader` has been added by calling
+            If no :class:`~org.orekit.frames.EopHistoryLoader` has been added by calling
             :meth:`~org.orekit.frames.LazyLoadedEop.addEOPHistoryLoader` or if
             :meth:`~org.orekit.frames.LazyLoadedEop.clearEOPHistoryLoaders` has been called afterwards, the
             :meth:`~org.orekit.frames.LazyLoadedEop.addDefaultEOP1980HistoryLoaders` and
@@ -1393,6 +1592,22 @@ class LazyLoadedEop:
         
             Parameters:
                 threshold (double): threshold to use for checking EOP continuity (in seconds)
+        
+        
+        """
+        ...
+    def setInterpolationDegree(self, int: int) -> None:
+        """
+            Set the degree for interpolation degree.
+        
+            The default threshold (used if this method is never called) is
+            :meth:`~org.orekit.frames.EOPHistory.DEFAULT_INTERPOLATION_DEGREE`.
+        
+            Parameters:
+                interpolationDegree (int): interpolation degree, must be of the form 4k-1
+        
+            Since:
+                12.0
         
         
         """
@@ -1639,6 +1854,227 @@ class Predefined(java.lang.Enum['Predefined']):
         
         """
         ...
+
+class SingleParameterFitter(java.io.Serializable):
+    """
+    public class SingleParameterFitter extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    
+        Fitter for one Earth Orientation Parameter.
+    
+        Since:
+            12.0
+    
+        Also see:
+            :class:`~org.orekit.frames.PredictedEOPHistory`, :class:`~org.orekit.frames.EOPFitter`,
+            :class:`~org.orekit.utils.SecularAndHarmonic`, :meth:`~serialized`
+    """
+    SUN_PULSATION: typing.ClassVar[float] = ...
+    """
+    public static final double SUN_PULSATION
+    
+        Sun pulsation, one year period.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    MOON_DRACONIC_PULSATION: typing.ClassVar[float] = ...
+    """
+    public static final double MOON_DRACONIC_PULSATION
+    
+        Moon pulsation (one Moon draconic period).
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    def __init__(self, double: float, double2: float, double3: float, int: int, *double4: float): ...
+    @staticmethod
+    def createDefaultDut1FitterLongTermPrediction() -> 'SingleParameterFitter':
+        """
+            Create fitter with default parameters adapted for fitting orientation parameters dUT1 and LOD for long term prediction.
+        
+            The main difference between these settings and
+            :meth:`~org.orekit.frames.SingleParameterFitter.createDefaultDut1FitterShortTermPrediction` is the much larger \(\tau\).
+            This means weight is spread throughout history, hence forcing the fitted prediction model to be remain very stable on
+            the long term. On the other hand, this implies that the model will start with already a much larger error just after raw
+            history end. These settings are intended when prediction is used for 5 days after raw EOP end or more.
+        
+              - fitting duration set to three :meth:`~org.orekit.utils.Constants.JULIAN_YEAR`
+              - time constant \(\tau\) of the exponential decay set to 60 :meth:`~org.orekit.utils.Constants.JULIAN_DAY`
+              - convergence set to 10⁻¹² s
+              - polynomial part set to degree 3
+              - one harmonic term at :meth:`~org.orekit.frames.SingleParameterFitter.SUN_PULSATION`}
+              - one harmonic term at 2 times :meth:`~org.orekit.frames.SingleParameterFitter.SUN_PULSATION`}
+              - one harmonic term at 3 times :meth:`~org.orekit.frames.SingleParameterFitter.SUN_PULSATION`}
+              - one harmonic term at :meth:`~org.orekit.frames.SingleParameterFitter.MOON_DRACONIC_PULSATION`}
+              - one harmonic term at 2 times :meth:`~org.orekit.frames.SingleParameterFitter.MOON_DRACONIC_PULSATION`}
+              - one harmonic term at 3 times :meth:`~org.orekit.frames.SingleParameterFitter.MOON_DRACONIC_PULSATION`}
+        
+        
+            Returns:
+                fitter with default configuration for orientation parameters dUT1 and LOD
+        
+            Also see:
+                :meth:`~org.orekit.frames.SingleParameterFitter.createDefaultDut1FitterShortTermPrediction`
+        
+        
+        """
+        ...
+    @staticmethod
+    def createDefaultDut1FitterShortTermPrediction() -> 'SingleParameterFitter':
+        """
+            Create fitter with default parameters adapted for fitting orientation parameters dUT1 and LOD for short term prediction.
+        
+            The main difference between these settings and
+            :meth:`~org.orekit.frames.SingleParameterFitter.createDefaultDut1FitterLongTermPrediction` is the much smaller \(\tau\).
+            This means more weight is set to the points at the end of the history, hence forcing the fitted prediction model to be
+            closer to these points, hence the prediction error to be smaller just after raw history end. On the other hand, this
+            implies that the model will diverge on long term. These settings are intended when prediction is used for at most 5 days
+            after raw EOP end.
+        
+              - fitting duration set to one :meth:`~org.orekit.utils.Constants.JULIAN_YEAR`
+              - time constant \(\tau\) of the exponential decay set to 6 :meth:`~org.orekit.utils.Constants.JULIAN_DAY`
+              - convergence set to 10⁻¹² s
+              - polynomial part set to degree 3
+              - one harmonic term at :meth:`~org.orekit.frames.SingleParameterFitter.SUN_PULSATION`}
+              - one harmonic term at 2 times :meth:`~org.orekit.frames.SingleParameterFitter.SUN_PULSATION`}
+              - one harmonic term at 3 times :meth:`~org.orekit.frames.SingleParameterFitter.SUN_PULSATION`}
+              - one harmonic term at :meth:`~org.orekit.frames.SingleParameterFitter.MOON_DRACONIC_PULSATION`}
+              - one harmonic term at 2 times :meth:`~org.orekit.frames.SingleParameterFitter.MOON_DRACONIC_PULSATION`}
+              - one harmonic term at 3 times :meth:`~org.orekit.frames.SingleParameterFitter.MOON_DRACONIC_PULSATION`}
+        
+        
+            Returns:
+                fitter with default configuration for orientation parameters dUT1 and LOD
+        
+            Also see:
+                :meth:`~org.orekit.frames.SingleParameterFitter.createDefaultDut1FitterShortTermPrediction`
+        
+        
+        """
+        ...
+    @staticmethod
+    def createDefaultNutationFitterLongTermPrediction() -> 'SingleParameterFitter':
+        """
+            Create fitter with default parameters adapted for fitting nutation parameters dx and dy for long term prediction.
+        
+            The main difference between these settings and
+            :meth:`~org.orekit.frames.SingleParameterFitter.createDefaultNutationFitterShortTermPrediction` is the much larger
+            \(\tau\). This means weight is spread throughout history, hence forcing the fitted prediction model to be remain very
+            stable on the long term. On the other hand, this implies that the model will start with already a much larger error just
+            after raw history end. These settings are intended when prediction is used for 5 days after raw EOP end or more.
+        
+              - fitting duration set to three :meth:`~org.orekit.utils.Constants.JULIAN_YEAR`
+              - time constant \(\tau\) of the exponential decay set to 60 :meth:`~org.orekit.utils.Constants.JULIAN_DAY`
+              - convergence set to 10⁻¹² s
+              - polynomial part set to degree 3
+              - one harmonic term at :meth:`~org.orekit.frames.SingleParameterFitter.SUN_PULSATION`}
+              - one harmonic term at 2 times :meth:`~org.orekit.frames.SingleParameterFitter.SUN_PULSATION`}
+              - one harmonic term at 3 times :meth:`~org.orekit.frames.SingleParameterFitter.SUN_PULSATION`}
+              - one harmonic term at :meth:`~org.orekit.frames.SingleParameterFitter.MOON_DRACONIC_PULSATION`}
+              - one harmonic term at 2 times :meth:`~org.orekit.frames.SingleParameterFitter.MOON_DRACONIC_PULSATION`}
+              - one harmonic term at 3 times :meth:`~org.orekit.frames.SingleParameterFitter.MOON_DRACONIC_PULSATION`}
+        
+        
+            Returns:
+                fitter with default configuration for pole nutation parameters dx and dy
+        
+        
+        """
+        ...
+    @staticmethod
+    def createDefaultNutationFitterShortTermPrediction() -> 'SingleParameterFitter':
+        """
+            Create fitter with default parameters adapted for fitting nutation parameters dx and dy for long term prediction.
+        
+            The main difference between these settings and
+            :meth:`~org.orekit.frames.SingleParameterFitter.createDefaultNutationFitterLongTermPrediction` is the much smaller
+            \(\tau\). This means more weight is set to the points at the end of the history, hence forcing the fitted prediction
+            model to be closer to these points, hence the prediction error to be smaller just after raw history end. On the other
+            hand, this implies that the model will diverge on long term. These settings are intended when prediction is used for at
+            most 5 days after raw EOP end.
+        
+              - fitting duration set to one :meth:`~org.orekit.utils.Constants.JULIAN_YEAR`
+              - time constant \(\tau\) of the exponential decay set to 12 :meth:`~org.orekit.utils.Constants.JULIAN_DAY`
+              - convergence set to 10⁻¹² s
+              - polynomial part set to degree 3
+              - one harmonic term at :meth:`~org.orekit.frames.SingleParameterFitter.SUN_PULSATION`}
+              - one harmonic term at 2 times :meth:`~org.orekit.frames.SingleParameterFitter.SUN_PULSATION`}
+              - one harmonic term at 3 times :meth:`~org.orekit.frames.SingleParameterFitter.SUN_PULSATION`}
+              - one harmonic term at :meth:`~org.orekit.frames.SingleParameterFitter.MOON_DRACONIC_PULSATION`}
+              - one harmonic term at 2 times :meth:`~org.orekit.frames.SingleParameterFitter.MOON_DRACONIC_PULSATION`}
+              - one harmonic term at 3 times :meth:`~org.orekit.frames.SingleParameterFitter.MOON_DRACONIC_PULSATION`}
+        
+        
+            Returns:
+                fitter with default configuration for pole nutation parameters dx and dy
+        
+        
+        """
+        ...
+    @staticmethod
+    def createDefaultPoleFitterLongTermPrediction() -> 'SingleParameterFitter':
+        """
+            Create fitter with default parameters adapted for fitting pole parameters Xp and Yp for long term prediction.
+        
+            The main difference between these settings and
+            :meth:`~org.orekit.frames.SingleParameterFitter.createDefaultPoleFitterShortTermPrediction` is the much larger \(\tau\).
+            This means weight is spread throughout history, hence forcing the fitted prediction model to be remain very stable on
+            the long term. On the other hand, this implies that the model will start with already a much larger error just after raw
+            history end. These settings are intended when prediction is used for 5 days after raw EOP end or more.
+        
+              - fitting duration set to three :meth:`~org.orekit.utils.Constants.JULIAN_YEAR`
+              - time constant \(\tau\) of the exponential decay set to 60 :meth:`~org.orekit.utils.Constants.JULIAN_DAY`
+              - convergence set to 10⁻¹² rad
+              - polynomial part set to degree 3
+              - one harmonic term at :meth:`~org.orekit.frames.SingleParameterFitter.SUN_PULSATION`}
+              - one harmonic term at 2 times :meth:`~org.orekit.frames.SingleParameterFitter.SUN_PULSATION`}
+              - one harmonic term at 3 times :meth:`~org.orekit.frames.SingleParameterFitter.SUN_PULSATION`}
+              - one harmonic term at :meth:`~org.orekit.frames.SingleParameterFitter.MOON_DRACONIC_PULSATION`}
+              - one harmonic term at 2 times :meth:`~org.orekit.frames.SingleParameterFitter.MOON_DRACONIC_PULSATION`}
+              - one harmonic term at 3 times :meth:`~org.orekit.frames.SingleParameterFitter.MOON_DRACONIC_PULSATION`}
+        
+        
+            Returns:
+                fitter with default configuration for pole parameters Xp and Yp
+        
+        
+        """
+        ...
+    @staticmethod
+    def createDefaultPoleFitterShortTermPrediction() -> 'SingleParameterFitter':
+        """
+            Create fitter with default parameters adapted for fitting pole parameters Xp and Yp for long term prediction.
+        
+            The main difference between these settings and
+            :meth:`~org.orekit.frames.SingleParameterFitter.createDefaultPoleFitterLongTermPrediction` is the much smaller \(\tau\).
+            This means more weight is set to the points at the end of the history, hence forcing the fitted prediction model to be
+            closer to these points, hence the prediction error to be smaller just after raw history end. On the other hand, this
+            implies that the model will diverge on long term. These settings are intended when prediction is used for at most 5 days
+            after raw EOP end.
+        
+              - fitting duration set to one :meth:`~org.orekit.utils.Constants.JULIAN_YEAR`
+              - time constant \(\tau\) of the exponential decay set to 12 :meth:`~org.orekit.utils.Constants.JULIAN_DAY`
+              - convergence set to 10⁻¹² rad
+              - polynomial part set to degree 3
+              - one harmonic term at :meth:`~org.orekit.frames.SingleParameterFitter.SUN_PULSATION`}
+              - one harmonic term at 2 times :meth:`~org.orekit.frames.SingleParameterFitter.SUN_PULSATION`}
+              - one harmonic term at 3 times :meth:`~org.orekit.frames.SingleParameterFitter.SUN_PULSATION`}
+              - one harmonic term at :meth:`~org.orekit.frames.SingleParameterFitter.MOON_DRACONIC_PULSATION`}
+              - one harmonic term at 2 times :meth:`~org.orekit.frames.SingleParameterFitter.MOON_DRACONIC_PULSATION`}
+              - one harmonic term at 3 times :meth:`~org.orekit.frames.SingleParameterFitter.MOON_DRACONIC_PULSATION`}
+        
+        
+            Returns:
+                fitter with default configuration for pole parameters Xp and Yp
+        
+        
+        """
+        ...
+    def fit(self, eOPHistory: EOPHistory, toDoubleFunction: typing.Union[java.util.function.ToDoubleFunction[EOPEntry], typing.Callable[[EOPEntry], float]]) -> org.orekit.utils.SecularAndHarmonic: ...
 
 class StaticTransform(org.orekit.time.TimeStamped):
     """
@@ -1898,6 +2334,28 @@ class TransformProvider(java.io.Serializable):
     
         The transform provider interface is mainly used to define the transform between a frame and its parent frame.
     """
+    _getStaticTransform_0__T = typing.TypeVar('_getStaticTransform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getStaticTransform(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getStaticTransform_0__T]) -> FieldStaticTransform[_getStaticTransform_0__T]:
+        """
+            Get a transform for only rotations and translations on the specified date.
+        
+            The default implementation returns :meth:`~org.orekit.frames.TransformProvider.getTransform` but implementations may
+            override it for better performance.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date.
+        
+            Returns:
+                the static transform.
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
+    @typing.overload
     def getStaticTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> StaticTransform:
         """
             Get a transform for only rotations and translations on the specified date.
@@ -1911,12 +2369,11 @@ class TransformProvider(java.io.Serializable):
             Returns:
                 the static transform.
         
-        
         """
         ...
     _getTransform_0__T = typing.TypeVar('_getTransform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getTransform(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTransform_0__T]) -> FieldTransform[_getTransform_0__T]:
+    def getTransform(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTransform_0__T]) -> 'FieldTransform'[_getTransform_0__T]:
         """
             Get the :class:`~org.orekit.frames.FieldTransform` corresponding to specified date.
         
@@ -1997,6 +2454,7 @@ class TransformProviderUtils:
 
 class AbstractFrames(Frames):
     def __init__(self, timeScales: org.orekit.time.TimeScales, supplier: typing.Union[java.util.function.Supplier[Frame], typing.Callable[[], Frame]]): ...
+    def buildUncachedITRF(self, uT1Scale: org.orekit.time.UT1Scale) -> Frame: ...
     def getCIRF(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool) -> 'FactoryManagedFrame': ...
     def getEME2000(self) -> 'FactoryManagedFrame': ...
     def getEcliptic(self, iERSConventions: org.orekit.utils.IERSConventions) -> Frame: ...
@@ -2105,7 +2563,7 @@ class EclipticProvider(TransformProvider):
     def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, timeScales: org.orekit.time.TimeScales): ...
     _getTransform_0__T = typing.TypeVar('_getTransform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getTransform(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTransform_0__T]) -> FieldTransform[_getTransform_0__T]:
+    def getTransform(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTransform_0__T]) -> 'FieldTransform'[_getTransform_0__T]:
         """
             Description copied from interface: :meth:`~org.orekit.frames.TransformProvider.getTransform`
             Get the :class:`~org.orekit.frames.FieldTransform` corresponding to specified date.
@@ -2160,6 +2618,183 @@ class FactoryManagedFrame(Frame):
         
         """
         ...
+
+_FieldTransform__T = typing.TypeVar('_FieldTransform__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldTransform(org.orekit.time.FieldTimeShiftable['FieldTransform'[_FieldTransform__T], _FieldTransform__T], FieldStaticTransform[_FieldTransform__T], typing.Generic[_FieldTransform__T]):
+    """
+    public class FieldTransform<T extends :class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.FieldTimeShiftable`<:class:`~org.orekit.frames.FieldTransform`<T>, T>, :class:`~org.orekit.frames.FieldStaticTransform`<T>
+    
+        Transformation class in three-dimensional space.
+    
+        This class represents the transformation engine between :class:`~org.orekit.frames.Frame`. It is used both to define the
+        relationship between each frame and its parent frame and to gather all individual transforms into one operation when
+        converting between frames far away from each other.
+    
+        The convention used in OREKIT is vectorial transformation. It means that a transformation is defined as a transform to
+        apply to the coordinates of a vector expressed in the old frame to obtain the same vector expressed in the new frame.
+    
+        Instances of this class are guaranteed to be immutable.
+    
+        Examples
+    ----------
+    
+    
+        Example of translation from R :sub:`A` to R :sub:`B`
+    ------------------------------------------------------
+    
+    
+        We want to transform the :class:`~org.orekit.utils.FieldPVCoordinates` PV :sub:`A` to PV :sub:`B` with :
+    
+        PV :sub:`A` = ({1, 0, 0}, {2, 0, 0}, {3, 0, 0});
+    
+    
+        PV :sub:`B` = ({0, 0, 0}, {0, 0, 0}, {0, 0, 0});
+    
+        The transform to apply then is defined as follows :
+    
+        .. code-block: java
+        
+         Vector3D translation  = new Vector3D(-1, 0, 0);
+         Vector3D velocity     = new Vector3D(-2, 0, 0);
+         Vector3D acceleration = new Vector3D(-3, 0, 0);
+        
+         Transform R1toR2 = new Transform(date, translation, velocity, acceleration);
+        
+         PVB = R1toR2.transformPVCoordinate(PVA);
+         
+    
+        Example of rotation from R :sub:`A` to R :sub:`B`
+    ---------------------------------------------------
+    
+    
+        We want to transform the :class:`~org.orekit.utils.FieldPVCoordinates` PV :sub:`A` to PV :sub:`B` with
+    
+        PV :sub:`A` = ({1, 0, 0}, { 1, 0, 0});
+    
+    
+        PV :sub:`B` = ({0, 1, 0}, {-2, 1, 0});
+    
+        The transform to apply then is defined as follows :
+    
+        .. code-block: java
+        
+         Rotation rotation = new Rotation(Vector3D.PLUS_K, FastMath.PI / 2);
+         Vector3D rotationRate = new Vector3D(0, 0, -2);
+        
+         Transform R1toR2 = new Transform(rotation, rotationRate);
+        
+         PVB = R1toR2.transformPVCoordinates(PVA);
+         
+    
+        Since:
+            9.0
+    """
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldTransform__T], transform: 'Transform'): ...
+    @typing.overload
+    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTransform__T], fieldRotation: org.hipparchus.geometry.euclidean.threed.FieldRotation[_FieldTransform__T]): ...
+    @typing.overload
+    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTransform__T], fieldRotation: org.hipparchus.geometry.euclidean.threed.FieldRotation[_FieldTransform__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T]): ...
+    @typing.overload
+    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTransform__T], fieldRotation: org.hipparchus.geometry.euclidean.threed.FieldRotation[_FieldTransform__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T], fieldVector3D2: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T]): ...
+    @typing.overload
+    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTransform__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T]): ...
+    @typing.overload
+    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTransform__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T], fieldVector3D2: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T]): ...
+    @typing.overload
+    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTransform__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T], fieldVector3D2: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T], fieldVector3D3: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T]): ...
+    @typing.overload
+    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTransform__T], fieldTransform: 'FieldTransform'[_FieldTransform__T], fieldTransform2: 'FieldTransform'[_FieldTransform__T]): ...
+    @typing.overload
+    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTransform__T], fieldAngularCoordinates: org.orekit.utils.FieldAngularCoordinates[_FieldTransform__T]): ...
+    @typing.overload
+    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTransform__T], fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_FieldTransform__T]): ...
+    def freeze(self) -> 'FieldTransform'[_FieldTransform__T]: ...
+    def getAcceleration(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T]: ...
+    def getAngular(self) -> org.orekit.utils.FieldAngularCoordinates[_FieldTransform__T]: ...
+    def getCartesian(self) -> org.orekit.utils.FieldPVCoordinates[_FieldTransform__T]: ...
+    def getDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Get the date.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeStamped.getDate` in interface :class:`~org.orekit.time.TimeStamped`
+        
+            Returns:
+                date attached to the object
+        
+        
+        """
+        ...
+    def getFieldDate(self) -> org.orekit.time.FieldAbsoluteDate[_FieldTransform__T]: ...
+    _getIdentity__T = typing.TypeVar('_getIdentity__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @staticmethod
+    def getIdentity(field: org.hipparchus.Field[_getIdentity__T]) -> 'FieldTransform'[_getIdentity__T]:
+        """
+            Get the identity transform.
+        
+            Parameters:
+                field (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field for the components
+        
+            Returns:
+                identity transform
+        
+        
+        """
+        ...
+    def getInverse(self) -> 'FieldTransform'[_FieldTransform__T]: ...
+    def getJacobian(self, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, tArray: typing.List[typing.List[_FieldTransform__T]]) -> None:
+        """
+            Compute the Jacobian of the :meth:`~org.orekit.frames.FieldTransform.transformPVCoordinates` method of the transform.
+        
+            Element :code:`jacobian[i][j]` is the derivative of Cartesian coordinate i of the transformed
+            :class:`~org.orekit.utils.FieldPVCoordinates` with respect to Cartesian coordinate j of the input
+            :class:`~org.orekit.utils.FieldPVCoordinates` in method
+            :meth:`~org.orekit.frames.FieldTransform.transformPVCoordinates`.
+        
+            This definition implies that if we define position-velocity coordinates :code:`PV₁ =
+            transform.transformPVCoordinates(PV₀)` then their differentials dPV₁ and dPV₀ will obey the following relation
+            where J is the matrix computed by this method: :code:`dPV₁ = J × dPV₀`
+        
+            Parameters:
+                selector (:class:`~org.orekit.utils.CartesianDerivativesFilter`): selector specifying the size of the upper left corner that must be filled (either 3x3 for positions only, 6x6 for
+                    positions and velocities, 9x9 for positions, velocities and accelerations)
+                jacobian (:class:`~org.orekit.frames.FieldTransform`[][]):             placeholder matrix whose upper-left corner is to be filled with the Jacobian, the rest of the matrix remaining untouched
+        
+        
+        """
+        ...
+    def getRotation(self) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_FieldTransform__T]: ...
+    def getRotationAcceleration(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T]: ...
+    def getRotationRate(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T]: ...
+    def getTranslation(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T]: ...
+    def getVelocity(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldTransform__T]: ...
+    _interpolate_0__T = typing.TypeVar('_interpolate_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _interpolate_1__T = typing.TypeVar('_interpolate_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _interpolate_2__T = typing.TypeVar('_interpolate_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    @staticmethod
+    def interpolate(fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_interpolate_0__T], collection: typing.Union[java.util.Collection['FieldTransform'[_interpolate_0__T]], typing.Sequence['FieldTransform'[_interpolate_0__T]], typing.Set['FieldTransform'[_interpolate_0__T]]]) -> 'FieldTransform'[_interpolate_0__T]: ...
+    @typing.overload
+    @staticmethod
+    def interpolate(fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_interpolate_1__T], cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, collection: typing.Union[java.util.Collection['FieldTransform'[_interpolate_1__T]], typing.Sequence['FieldTransform'[_interpolate_1__T]], typing.Set['FieldTransform'[_interpolate_1__T]]]) -> 'FieldTransform'[_interpolate_1__T]: ...
+    @typing.overload
+    @staticmethod
+    def interpolate(fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_interpolate_2__T], cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, stream: java.util.stream.Stream['FieldTransform'[_interpolate_2__T]]) -> 'FieldTransform'[_interpolate_2__T]: ...
+    @typing.overload
+    def shiftedBy(self, double: float) -> 'FieldTransform'[_FieldTransform__T]: ...
+    @typing.overload
+    def shiftedBy(self, t: _FieldTransform__T) -> 'FieldTransform'[_FieldTransform__T]: ...
+    def staticShiftedBy(self, t: _FieldTransform__T) -> FieldStaticTransform[_FieldTransform__T]: ...
+    def toStaticTransform(self) -> FieldStaticTransform[_FieldTransform__T]: ...
+    @typing.overload
+    def transformPVCoordinates(self, fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_FieldTransform__T]) -> org.orekit.utils.FieldPVCoordinates[_FieldTransform__T]: ...
+    @typing.overload
+    def transformPVCoordinates(self, pVCoordinates: org.orekit.utils.PVCoordinates) -> org.orekit.utils.FieldPVCoordinates[_FieldTransform__T]: ...
+    @typing.overload
+    def transformPVCoordinates(self, timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldTransform__T]) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldTransform__T]: ...
+    @typing.overload
+    def transformPVCoordinates(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldTransform__T]: ...
 
 class FixedTransformProvider(TransformProvider):
     """
@@ -2238,6 +2873,29 @@ class HelmertTransformation(TransformProvider):
         
         """
         ...
+    _getStaticTransform_0__T = typing.TypeVar('_getStaticTransform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getStaticTransform(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getStaticTransform_0__T]) -> FieldStaticTransform[_getStaticTransform_0__T]:
+        """
+            Get a transform for only rotations and translations on the specified date.
+        
+            The default implementation returns :meth:`~org.orekit.frames.TransformProvider.getTransform` but implementations may
+            override it for better performance.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.TransformProvider.getStaticTransform` in
+                interface :class:`~org.orekit.frames.TransformProvider`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date.
+        
+            Returns:
+                the static transform.
+        
+        
+        """
+        ...
+    @typing.overload
     def getStaticTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> StaticTransform:
         """
             Get a transform for only rotations and translations on the specified date.
@@ -2254,7 +2912,6 @@ class HelmertTransformation(TransformProvider):
         
             Returns:
                 the static transform.
-        
         
         """
         ...
@@ -2505,6 +3162,10 @@ class ITRFVersion(java.lang.Enum['ITRFVersion']):
     class Converter(TransformProvider):
         def getDestination(self) -> 'ITRFVersion': ...
         def getOrigin(self) -> 'ITRFVersion': ...
+        _getStaticTransform_0__T = typing.TypeVar('_getStaticTransform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+        @typing.overload
+        def getStaticTransform(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getStaticTransform_0__T]) -> FieldStaticTransform[_getStaticTransform_0__T]: ...
+        @typing.overload
         def getStaticTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> StaticTransform: ...
         _getTransform_0__T = typing.TypeVar('_getTransform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
         @typing.overload
@@ -2531,8 +3192,8 @@ class ITRFVersionLoader(ItrfVersionProvider):
             9.2
     
         Also see:
-            :code:`EOPC04FilesLoader`, :code:`BulletinAFilesLoader`, :code:`BulletinBFilesLoader`,
-            :code:`RapidDataAndPredictionColumnsLoader`, :code:`RapidDataAndPredictionXMLLoader`
+            :code:`EopC04FilesLoader`, :code:`BulletinAFilesLoader`, :code:`BulletinBFilesLoader`,
+            :code:`RapidDataAndPredictionColumnsLoader`, :code:`EopXmlLoader`
     """
     SUPPORTED_NAMES: typing.ClassVar[str] = ...
     """
@@ -2678,6 +3339,29 @@ class L1TransformProvider(TransformProvider):
             :meth:`~serialized`
     """
     def __init__(self, celestialBody: org.orekit.bodies.CelestialBody, celestialBody2: org.orekit.bodies.CelestialBody): ...
+    _getStaticTransform_0__T = typing.TypeVar('_getStaticTransform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getStaticTransform(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getStaticTransform_0__T]) -> FieldStaticTransform[_getStaticTransform_0__T]:
+        """
+            Get a transform for only rotations and translations on the specified date.
+        
+            The default implementation returns :meth:`~org.orekit.frames.TransformProvider.getTransform` but implementations may
+            override it for better performance.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.TransformProvider.getStaticTransform` in
+                interface :class:`~org.orekit.frames.TransformProvider`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date.
+        
+            Returns:
+                the static transform.
+        
+        
+        """
+        ...
+    @typing.overload
     def getStaticTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> StaticTransform:
         """
             Get a transform for only rotations and translations on the specified date.
@@ -2694,7 +3378,6 @@ class L1TransformProvider(TransformProvider):
         
             Returns:
                 the static transform.
-        
         
         """
         ...
@@ -2745,6 +3428,338 @@ class L2Frame(Frame):
     """
     def __init__(self, celestialBody: org.orekit.bodies.CelestialBody, celestialBody2: org.orekit.bodies.CelestialBody): ...
 
+class LOFType(java.lang.Enum['LOFType'], LOF):
+    """
+    public enum LOFType extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.frames.LOFType`> implements :class:`~org.orekit.frames.LOF`
+    
+        Enumerate for different types of Local Orbital Frames.
+    """
+    TNW: typing.ClassVar['LOFType'] = ...
+    TNW_INERTIAL: typing.ClassVar['LOFType'] = ...
+    QSW: typing.ClassVar['LOFType'] = ...
+    QSW_INERTIAL: typing.ClassVar['LOFType'] = ...
+    LVLH: typing.ClassVar['LOFType'] = ...
+    LVLH_INERTIAL: typing.ClassVar['LOFType'] = ...
+    LVLH_CCSDS: typing.ClassVar['LOFType'] = ...
+    LVLH_CCSDS_INERTIAL: typing.ClassVar['LOFType'] = ...
+    VVLH: typing.ClassVar['LOFType'] = ...
+    VVLH_INERTIAL: typing.ClassVar['LOFType'] = ...
+    VNC: typing.ClassVar['LOFType'] = ...
+    VNC_INERTIAL: typing.ClassVar['LOFType'] = ...
+    EQW: typing.ClassVar['LOFType'] = ...
+    NTW: typing.ClassVar['LOFType'] = ...
+    NTW_INERTIAL: typing.ClassVar['LOFType'] = ...
+    def getName(self) -> str:
+        """
+            Get name of the local orbital frame.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.LOF.getName` in interface :class:`~org.orekit.frames.LOF`
+        
+            Returns:
+                name of the local orbital frame
+        
+        
+        """
+        ...
+    _rotationFromInertial_0__T = typing.TypeVar('_rotationFromInertial_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _rotationFromInertial_2__T = typing.TypeVar('_rotationFromInertial_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def rotationFromInertial(self, field: org.hipparchus.Field[_rotationFromInertial_0__T], fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_rotationFromInertial_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_rotationFromInertial_0__T]: ...
+    @typing.overload
+    def rotationFromInertial(self, pVCoordinates: org.orekit.utils.PVCoordinates) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+        """
+            Get the rotation from inertial frame to local orbital frame.
+        
+            This rotation does not include any time derivatives. If first time derivatives (i.e. rotation rate) is needed as well,
+            the full :meth:`~org.orekit.frames.LOF.transformFromInertial` method must be called and the complete rotation transform
+            must be extracted from it. It is unnecessary to use this method when dealing with :class:`~org.orekit.frames.LOFType`,
+            use :meth:`~org.orekit.frames.LOFType.rotationFromInertial` instead.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.LOF.rotationFromInertial` in interface :class:`~org.orekit.frames.LOF`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): date of the rotation
+                pv (:class:`~org.orekit.utils.PVCoordinates`): position-velocity of the spacecraft in some inertial frame
+        
+            Returns:
+                rotation from inertial frame to local orbital frame
+        
+            Get the rotation from inertial frame to local orbital frame.
+        
+            This rotation does not include any time derivatives. If first time derivatives (i.e. rotation rate) is needed as well,
+            the full :meth:`~org.orekit.frames.LOF.transformFromInertial` method must be called and the complete rotation transform
+            must be extracted from it.
+        
+            Parameters:
+                pv (:class:`~org.orekit.utils.PVCoordinates`): position-velocity of the spacecraft in some inertial frame
+        
+            Returns:
+                rotation from inertial frame to local orbital frame
+        
+        """
+        ...
+    @typing.overload
+    def rotationFromInertial(self, field: org.hipparchus.Field[_rotationFromInertial_2__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_rotationFromInertial_2__T], fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_rotationFromInertial_2__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_rotationFromInertial_2__T]:
+        """
+            Get the rotation from inertial frame to local orbital frame.
+        
+            This rotation does not include any time derivatives. If first time derivatives (i.e. rotation rate) is needed as well,
+            the full :meth:`~org.orekit.frames.LOF.transformFromInertial` method must be called and the complete rotation transform
+            must be extracted from it.
+            It is unnecessary to use this method when dealing with :class:`~org.orekit.frames.LOFType`, use
+            :meth:`~org.orekit.frames.LOFType.rotationFromInertial` instead.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.LOF.rotationFromInertial` in interface :class:`~org.orekit.frames.LOF`
+        
+            Parameters:
+                field (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the rotation
+                pv (:class:`~org.orekit.utils.FieldPVCoordinates`<T> pv): position-velocity of the spacecraft in some inertial frame
+        
+            Returns:
+                rotation from inertial frame to local orbital frame
+        
+        public abstract <T extends :class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> :class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldRotation?is`<T> rotationFromInertial (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field, :class:`~org.orekit.utils.FieldPVCoordinates`<T> pv)
+        
+            Get the rotation from inertial frame to local orbital frame.
+        
+            This rotation does not include any time derivatives. If first time derivatives (i.e. rotation rate) is needed as well,
+            the full :meth:`~org.orekit.frames.LOF.transformFromInertial` method must be called and the complete rotation transform
+            must be extracted from it.
+        
+            Parameters:
+                field (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
+                pv (:class:`~org.orekit.utils.FieldPVCoordinates`<T> pv): position-velocity of the spacecraft in some inertial frame
+        
+            Returns:
+                rotation from inertial frame to local orbital frame
+        
+        
+        """
+        ...
+    @typing.overload
+    def rotationFromInertial(self, absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinates: org.orekit.utils.PVCoordinates) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
+    _rotationFromLOF_0__T = typing.TypeVar('_rotationFromLOF_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _rotationFromLOF_2__T = typing.TypeVar('_rotationFromLOF_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def rotationFromLOF(self, field: org.hipparchus.Field[_rotationFromLOF_0__T], lOF: LOF, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_rotationFromLOF_0__T], fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_rotationFromLOF_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_rotationFromLOF_0__T]: ...
+    @typing.overload
+    def rotationFromLOF(self, lOF: LOF, absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinates: org.orekit.utils.PVCoordinates) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
+    @typing.overload
+    def rotationFromLOF(self, field: org.hipparchus.Field[_rotationFromLOF_2__T], lOFType: 'LOFType', fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_rotationFromLOF_2__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_rotationFromLOF_2__T]:
+        """
+            Get the rotation from input :class:`~org.orekit.frames.LOFType` to the instance.
+        
+            This rotation does not include any time derivatives. If first time derivatives (i.e. rotation rate) is needed as well,
+            the full :meth:`~org.orekit.frames.LOF.transformFromLOF` method must be called and the complete rotation transform must
+            be extracted from it.
+        
+            Parameters:
+                field (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
+                fromLOF (:class:`~org.orekit.frames.LOFType`): input local orbital frame
+                pv (:class:`~org.orekit.utils.FieldPVCoordinates`<T> pv): position-velocity of the spacecraft in some inertial frame
+        
+            Returns:
+                rotation from input local orbital frame to the instance
+        
+        
+        """
+        ...
+    @typing.overload
+    def rotationFromLOF(self, lOFType: 'LOFType', pVCoordinates: org.orekit.utils.PVCoordinates) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+        """
+            Get the rotation from input :class:`~org.orekit.frames.LOF` to the instance.
+        
+            This rotation does not include any time derivatives. If first time derivatives (i.e. rotation rate) is needed as well,
+            the full :meth:`~org.orekit.frames.LOF.transformFromLOF` method must be called and the complete rotation transform must
+            be extracted from it.
+        
+            Parameters:
+                fromLOF (:class:`~org.orekit.frames.LOFType`): input local orbital frame
+                pv (:class:`~org.orekit.utils.PVCoordinates`): position-velocity of the spacecraft in some inertial frame
+        
+            Returns:
+                rotation from input local orbital frame to the instance
+        
+        """
+        ...
+    def toOrbitRelativeFrame(self) -> org.orekit.files.ccsds.definitions.OrbitRelativeFrame:
+        """
+            Convert current local orbital frame to CCSDS equivalent orbit relative frame when possible, null otherwise.
+        
+            Returns:
+                CCSDS equivalent orbit relative frame when possible, null otherwise
+        
+            Also see:
+                :class:`~org.orekit.files.ccsds.definitions.OrbitRelativeFrame`
+        
+        
+        """
+        ...
+    _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
+    @typing.overload
+    @staticmethod
+    def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
+    @typing.overload
+    @staticmethod
+    def valueOf(string: str) -> 'LOFType':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        
+        
+        """
+        ...
+    @staticmethod
+    def values() -> typing.List['LOFType']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            for (LOFType c : LOFType.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
+
+class LocalMagneticFieldFrame(LOF):
+    """
+    public class LocalMagneticFieldFrame extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.LOF`
+    
+        This class handles a magnetic field variation attitude provider.
+    
+        It was designed to be used as a Bdot attitude pointing law which align a specific body axis with Earth magnetic field
+        vector.
+    
+        Attitude control thought the magnetic field is called Bdot as it follows the sinusoidal variation of the Earth magnetic
+        field vector, along the orbit. Magnetorquers are used on board to align the instrument, as so the satellite, with the
+        planet magnetic field, producing a sinusoidal torque along the orbit.
+    """
+    @typing.overload
+    def __init__(self, frame: Frame, geoMagneticField: org.orekit.models.earth.GeoMagneticField, frame2: Frame): ...
+    @typing.overload
+    def __init__(self, frame: Frame, geoMagneticField: org.orekit.models.earth.GeoMagneticField, lOFBuilderVector: 'LocalMagneticFieldFrame.LOFBuilderVector', frame2: Frame): ...
+    def getInertialFrame(self) -> Frame:
+        """
+            Get interlai frame.
+        
+            Returns:
+                inertial frame
+        
+        
+        """
+        ...
+    def getMagneticField(self) -> org.orekit.models.earth.GeoMagneticField:
+        """
+            Get geomagnetid field.
+        
+            Returns:
+                geo magnetic field
+        
+        
+        """
+        ...
+    def getName(self) -> str:
+        """
+            Get name of the local orbital frame.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.LOF.getName` in interface :class:`~org.orekit.frames.LOF`
+        
+            Returns:
+                name of the local orbital frame
+        
+        
+        """
+        ...
+    _rotationFromInertial_0__T = typing.TypeVar('_rotationFromInertial_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def rotationFromInertial(self, field: org.hipparchus.Field[_rotationFromInertial_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_rotationFromInertial_0__T], fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_rotationFromInertial_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_rotationFromInertial_0__T]:
+        """
+            Get the rotation from inertial frame to local orbital frame.
+        
+            This rotation does not include any time derivatives. If first time derivatives (i.e. rotation rate) is needed as well,
+            the full :meth:`~org.orekit.frames.LOF.transformFromInertial` method must be called and the complete rotation transform
+            must be extracted from it.
+            Direction as X axis aligned with magnetic field vector, Y axis aligned with the cross product of the magnetic field
+            vector with chosen :class:`~org.orekit.frames.LocalMagneticFieldFrame.LOFBuilderVector`.
+        
+            **BEWARE: In this implementation, the method simply fieldify the normal rotation with given field. Hence all derivatives
+            are lost.**
+        
+            Specified by:
+                :meth:`~org.orekit.frames.LOF.rotationFromInertial` in interface :class:`~org.orekit.frames.LOF`
+        
+            Parameters:
+                field (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the rotation
+                pv (:class:`~org.orekit.utils.FieldPVCoordinates`<T> pv): position-velocity of the spacecraft in some inertial frame
+        
+            Returns:
+                rotation from inertial frame to local orbital frame
+        
+        """
+        ...
+    @typing.overload
+    def rotationFromInertial(self, absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinates: org.orekit.utils.PVCoordinates) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+        """
+            Get the rotation from inertial frame to local orbital frame.
+        
+            This rotation does not include any time derivatives. If first time derivatives (i.e. rotation rate) is needed as well,
+            the full :meth:`~org.orekit.frames.LOF.transformFromInertial` method must be called and the complete rotation transform
+            must be extracted from it. Direction as X axis aligned with magnetic field vector, Z axis aligned with the cross product
+            of the magnetic field vector with chosen :class:`~org.orekit.frames.LocalMagneticFieldFrame.LOFBuilderVector`.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.LOF.rotationFromInertial` in interface :class:`~org.orekit.frames.LOF`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): date of the rotation
+                pv (:class:`~org.orekit.utils.PVCoordinates`): position-velocity of the spacecraft in some inertial frame
+        
+            Returns:
+                rotation from inertial frame to local orbital frame
+        
+        
+        """
+        ...
+    class LOFBuilderVector(java.lang.Enum['LocalMagneticFieldFrame.LOFBuilderVector']):
+        PLUS_POSITION: typing.ClassVar['LocalMagneticFieldFrame.LOFBuilderVector'] = ...
+        PLUS_VELOCITY: typing.ClassVar['LocalMagneticFieldFrame.LOFBuilderVector'] = ...
+        PLUS_MOMENTUM: typing.ClassVar['LocalMagneticFieldFrame.LOFBuilderVector'] = ...
+        MINUS_POSITION: typing.ClassVar['LocalMagneticFieldFrame.LOFBuilderVector'] = ...
+        MINUS_VELOCITY: typing.ClassVar['LocalMagneticFieldFrame.LOFBuilderVector'] = ...
+        MINUS_MOMENTUM: typing.ClassVar['LocalMagneticFieldFrame.LOFBuilderVector'] = ...
+        _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
+        @typing.overload
+        @staticmethod
+        def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
+        @typing.overload
+        @staticmethod
+        def valueOf(string: str) -> 'LocalMagneticFieldFrame.LOFBuilderVector': ...
+        @staticmethod
+        def values() -> typing.List['LocalMagneticFieldFrame.LOFBuilderVector']: ...
+
 class LocalOrbitalFrame(Frame):
     """
     public class LocalOrbitalFrame extends :class:`~org.orekit.frames.Frame`
@@ -2759,11 +3774,34 @@ class LocalOrbitalFrame(Frame):
         Also see:
             :meth:`~org.orekit.propagation.SpacecraftState.toTransform`, :meth:`~serialized`
     """
-    def __init__(self, frame: Frame, lOFType: LOFType, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, string: str): ...
+    def __init__(self, frame: Frame, lOF: LOF, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, string: str): ...
 
-class PythonEOPHistoryLoader(EOPHistoryLoader):
+class PredictedEOPHistory(EOPHistory, java.io.Serializable):
     """
-    public class PythonEOPHistoryLoader extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.EOPHistoryLoader`
+    public class PredictedEOPHistory extends :class:`~org.orekit.frames.EOPHistory` implements :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    
+        This class extends an :class:`~org.orekit.frames.EOPHistory` for some weeks using fitting.
+    
+        The goal of this class is to provide a reasonable prediction of Earth Orientation Parameters past the last date
+        available in regular :class:`~org.orekit.frames.EOPHistory`, which just generated corrections set to 0 when they have no
+        data.
+    
+        The prediction is based on fitting of last data, with both :class:`~org.orekit.utils.SecularAndHarmonic` terms. The
+        extended entries are generated at one point per day and are continuous (i.e. no leap seconds are introduced)
+    
+        After construction, the history contains both the initial raw history and an extension part appended after it.
+    
+        Since:
+            12.0
+    
+        Also see:
+            :class:`~org.orekit.frames.EOPFitter`, :class:`~org.orekit.utils.SecularAndHarmonic`, :meth:`~serialized`
+    """
+    def __init__(self, eOPHistory: EOPHistory, double: float, eOPFitter: EOPFitter): ...
+
+class PythonEOPHistoryLoader(EopHistoryLoader):
+    """
+    public class PythonEOPHistoryLoader extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.EopHistoryLoader`
     """
     def __init__(self): ...
     def fillHistory(self, nutationCorrectionConverter: org.orekit.utils.IERSConventions.NutationCorrectionConverter, sortedSet: java.util.SortedSet[EOPEntry]) -> None: ...
@@ -2787,6 +3825,83 @@ class PythonEOPHistoryLoader(EOPHistoryLoader):
             Part of JCC Python interface to object
         """
         ...
+
+_PythonFieldStaticTransform__T = typing.TypeVar('_PythonFieldStaticTransform__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class PythonFieldStaticTransform(FieldStaticTransform[_PythonFieldStaticTransform__T], typing.Generic[_PythonFieldStaticTransform__T]):
+    """
+    public class PythonFieldStaticTransform<T extends :class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.FieldStaticTransform`<T>
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def getDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Description copied from interface: :meth:`~org.orekit.time.TimeStamped.getDate`
+            Get the date.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeStamped.getDate` in interface :class:`~org.orekit.time.TimeStamped`
+        
+            Returns:
+                date attached to the object
+        
+        
+        """
+        ...
+    def getInverse(self) -> FieldStaticTransform[_PythonFieldStaticTransform__T]: ...
+    def getRotation(self) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_PythonFieldStaticTransform__T]: ...
+    def getTranslation(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_PythonFieldStaticTransform__T]: ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+        public long pythonExtension()
+        
+        
+        """
+        ...
+
+class PythonFrames(Frames):
+    def __init__(self): ...
+    def buildUncachedITRF(self, uT1Scale: org.orekit.time.UT1Scale) -> Frame: ...
+    def finalize(self) -> None: ...
+    def getCIRF(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool) -> FactoryManagedFrame: ...
+    def getEME2000(self) -> FactoryManagedFrame: ...
+    def getEOPHistory(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool) -> EOPHistory: ...
+    def getEcliptic(self, iERSConventions: org.orekit.utils.IERSConventions) -> Frame: ...
+    def getFrame(self, predefined: Predefined) -> Frame: ...
+    def getGCRF(self) -> Frame: ...
+    @typing.overload
+    def getGTOD(self, boolean: bool) -> FactoryManagedFrame: ...
+    @typing.overload
+    def getGTOD(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool) -> FactoryManagedFrame: ...
+    def getICRF(self) -> Frame: ...
+    @typing.overload
+    def getITRF(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool) -> FactoryManagedFrame: ...
+    @typing.overload
+    def getITRF(self, iTRFVersion: ITRFVersion, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool) -> 'VersionedITRF': ...
+    def getITRFEquinox(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool) -> FactoryManagedFrame: ...
+    @typing.overload
+    def getMOD(self, boolean: bool) -> FactoryManagedFrame: ...
+    @typing.overload
+    def getMOD(self, iERSConventions: org.orekit.utils.IERSConventions) -> FactoryManagedFrame: ...
+    def getPZ9011(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool) -> FactoryManagedFrame: ...
+    def getTEME(self) -> FactoryManagedFrame: ...
+    @typing.overload
+    def getTIRF(self, iERSConventions: org.orekit.utils.IERSConventions) -> FactoryManagedFrame: ...
+    @typing.overload
+    def getTIRF(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool) -> FactoryManagedFrame: ...
+    @typing.overload
+    def getTOD(self, boolean: bool) -> FactoryManagedFrame: ...
+    @typing.overload
+    def getTOD(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool) -> FactoryManagedFrame: ...
+    def getVeis1950(self) -> FactoryManagedFrame: ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None: ...
 
 class PythonItrfVersionProvider(ItrfVersionProvider):
     """
@@ -2829,6 +3944,85 @@ class PythonItrfVersionProvider(ItrfVersionProvider):
     def pythonExtension(self, long: int) -> None:
         """
             Part of JCC Python interface to object
+        """
+        ...
+
+class PythonLOF(LOF):
+    """
+    public class PythonLOF extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.LOF`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def getName(self) -> str:
+        """
+            Description copied from interface: :meth:`~org.orekit.frames.LOF.getName`
+            Get name of the local orbital frame.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.LOF.getName` in interface :class:`~org.orekit.frames.LOF`
+        
+            Returns:
+                name of the local orbital frame
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+        public long pythonExtension()
+        
+        
+        """
+        ...
+    _rotationFromInertial_0__T = typing.TypeVar('_rotationFromInertial_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def rotationFromInertial(self, field: org.hipparchus.Field[_rotationFromInertial_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_rotationFromInertial_0__T], fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_rotationFromInertial_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_rotationFromInertial_0__T]:
+        """
+            Description copied from interface: :meth:`~org.orekit.frames.LOF.rotationFromInertial`
+            Get the rotation from inertial frame to local orbital frame.
+        
+            This rotation does not include any time derivatives. If first time derivatives (i.e. rotation rate) is needed as well,
+            the full :meth:`~org.orekit.frames.LOF.transformFromInertial` method must be called and the complete rotation transform
+            must be extracted from it.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.LOF.rotationFromInertial` in interface :class:`~org.orekit.frames.LOF`
+        
+            Parameters:
+                field (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date of the rotation
+                pv (:class:`~org.orekit.utils.FieldPVCoordinates`<T> pv): position-velocity of the spacecraft in some inertial frame
+        
+            Returns:
+                rotation from inertial frame to local orbital frame
+        
+        """
+        ...
+    @typing.overload
+    def rotationFromInertial(self, absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinates: org.orekit.utils.PVCoordinates) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+        """
+            Description copied from interface: :meth:`~org.orekit.frames.LOF.rotationFromInertial`
+            Get the rotation from inertial frame to local orbital frame.
+        
+            This rotation does not include any time derivatives. If first time derivatives (i.e. rotation rate) is needed as well,
+            the full :meth:`~org.orekit.frames.LOF.transformFromInertial` method must be called and the complete rotation transform
+            must be extracted from it.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.LOF.rotationFromInertial` in interface :class:`~org.orekit.frames.LOF`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): date of the rotation
+                pv (:class:`~org.orekit.utils.PVCoordinates`): position-velocity of the spacecraft in some inertial frame
+        
+            Returns:
+                rotation from inertial frame to local orbital frame
+        
+        
         """
         ...
 
@@ -3036,6 +4230,29 @@ class ShiftingTransformProvider(TransformProvider):
         
         """
         ...
+    _getStaticTransform_0__T = typing.TypeVar('_getStaticTransform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getStaticTransform(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getStaticTransform_0__T]) -> FieldStaticTransform[_getStaticTransform_0__T]:
+        """
+            Get a transform for only rotations and translations on the specified date.
+        
+            The default implementation returns :meth:`~org.orekit.frames.TransformProvider.getTransform` but implementations may
+            override it for better performance.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.TransformProvider.getStaticTransform` in
+                interface :class:`~org.orekit.frames.TransformProvider`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date.
+        
+            Returns:
+                the static transform.
+        
+        
+        """
+        ...
+    @typing.overload
     def getStaticTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> StaticTransform:
         """
             Get a transform for only rotations and translations on the specified date.
@@ -3052,7 +4269,6 @@ class ShiftingTransformProvider(TransformProvider):
         
             Returns:
                 the static transform.
-        
         
         """
         ...
@@ -3176,6 +4392,19 @@ class TopocentricFrame(Frame, org.orekit.utils.PVCoordinatesProvider):
         
             Since:
                 9.3
+        
+        
+        """
+        ...
+    def getCartesianPoint(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Get the surface point defining the origin of the frame.
+        
+            Returns:
+                surface point defining the origin of the frame in body frame
+        
+            Since:
+                12.0
         
         
         """
@@ -3320,6 +4549,24 @@ class TopocentricFrame(Frame, org.orekit.utils.PVCoordinatesProvider):
         
         """
         ...
+    def getPosition(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Get the position of the body in the selected frame.
+        
+            Specified by:
+                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPosition` in
+                interface :class:`~org.orekit.utils.PVCoordinatesProvider`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                frame (:class:`~org.orekit.frames.Frame`): the frame where to define the position
+        
+            Returns:
+                position of the body (m and)
+        
+        
+        """
+        ...
     _getRange_1__T = typing.TypeVar('_getRange_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def getRange(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
@@ -3405,6 +4652,44 @@ class TopocentricFrame(Frame, org.orekit.utils.PVCoordinatesProvider):
         
         """
         ...
+    _getTrackingCoordinates_0__T = typing.TypeVar('_getTrackingCoordinates_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getTrackingCoordinates(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getTrackingCoordinates_0__T], frame: Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTrackingCoordinates_0__T]) -> org.orekit.utils.FieldTrackingCoordinates[_getTrackingCoordinates_0__T]:
+        """
+            Get the tracking coordinates of a point with regards to the local point.
+        
+            Parameters:
+                extPoint (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> extPoint): point for which elevation shall be computed
+                frame (:class:`~org.orekit.frames.Frame`): frame in which the point is defined
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): computation date
+        
+            Returns:
+                tracking coordinates of the point
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
+    @typing.overload
+    def getTrackingCoordinates(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.utils.TrackingCoordinates:
+        """
+            Get the tracking coordinates of a point with regards to the local point.
+        
+            Parameters:
+                extPoint (:class:`~org.orekit.frames.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): point for which elevation shall be computed
+                frame (:class:`~org.orekit.frames.Frame`): frame in which the point is defined
+                date (:class:`~org.orekit.time.AbsoluteDate`): computation date
+        
+            Returns:
+                tracking coordinates of the point
+        
+            Since:
+                12.0
+        
+        """
+        ...
     def getWest(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Get the west direction of topocentric frame, expressed in parent shape frame.
@@ -3451,9 +4736,9 @@ class TopocentricFrame(Frame, org.orekit.utils.PVCoordinatesProvider):
         """
         ...
 
-class Transform(org.orekit.time.TimeInterpolable['Transform'], org.orekit.time.TimeShiftable['Transform'], java.io.Serializable, StaticTransform):
+class Transform(org.orekit.time.TimeShiftable['Transform'], java.io.Serializable, StaticTransform):
     """
-    public class Transform extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeInterpolable`<:class:`~org.orekit.frames.Transform`>, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.frames.Transform`>, :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.orekit.frames.StaticTransform`
+    public class Transform extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.frames.Transform`>, :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.orekit.frames.StaticTransform`
     
         Transformation class in three dimensional space.
     
@@ -3545,6 +4830,8 @@ class Transform(org.orekit.time.TimeInterpolable['Transform'], org.orekit.time.T
     def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, angularCoordinates: org.orekit.utils.AngularCoordinates): ...
     @typing.overload
     def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinates: org.orekit.utils.PVCoordinates): ...
+    @typing.overload
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinates: org.orekit.utils.PVCoordinates, angularCoordinates: org.orekit.utils.AngularCoordinates): ...
     def freeze(self) -> 'Transform':
         """
             Get a frozen transform.
@@ -3746,8 +5033,6 @@ class Transform(org.orekit.time.TimeInterpolable['Transform'], org.orekit.time.T
         """
         ...
     @typing.overload
-    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, collection: typing.Union[java.util.Collection[org.orekit.time.TimeInterpolable], typing.Sequence[org.orekit.time.TimeInterpolable], typing.Set[org.orekit.time.TimeInterpolable]]) -> org.orekit.time.TimeInterpolable: ...
-    @typing.overload
     def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, stream: java.util.stream.Stream['Transform']) -> 'Transform': ...
     @typing.overload
     @staticmethod
@@ -3782,6 +5067,20 @@ class Transform(org.orekit.time.TimeInterpolable['Transform'], org.orekit.time.T
         
             Also see:
                 :meth:`~org.orekit.frames.Transform.shiftedBy`
+        
+        
+        """
+        ...
+    def toStaticTransform(self) -> StaticTransform:
+        """
+            Create a so-called static transform from the instance.
+        
+            Returns:
+                static part of the transform. It is static in the sense that it can only be used to transform directions and positions,
+                but not velocities or accelerations.
+        
+            Also see:
+                :class:`~org.orekit.frames.StaticTransform`
         
         
         """
@@ -4034,6 +5333,29 @@ class GTODProvider(EOPBasedTransformProvider):
         
         """
         ...
+    _getStaticTransform_0__T = typing.TypeVar('_getStaticTransform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getStaticTransform(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getStaticTransform_0__T]) -> FieldStaticTransform[_getStaticTransform_0__T]:
+        """
+            Get a transform for only rotations and translations on the specified date.
+        
+            The default implementation returns :meth:`~org.orekit.frames.TransformProvider.getTransform` but implementations may
+            override it for better performance.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.TransformProvider.getStaticTransform` in
+                interface :class:`~org.orekit.frames.TransformProvider`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date.
+        
+            Returns:
+                the static transform.
+        
+        
+        """
+        ...
+    @typing.overload
     def getStaticTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> StaticTransform:
         """
             Get a transform for only rotations and translations on the specified date.
@@ -4050,7 +5372,6 @@ class GTODProvider(EOPBasedTransformProvider):
         
             Returns:
                 the static transform.
-        
         
         """
         ...
@@ -4103,7 +5424,7 @@ class LazyLoadedFrames(AbstractFrames):
             :class:`~org.orekit.frames.LazyLoadedEop`
     """
     def __init__(self, lazyLoadedEop: LazyLoadedEop, timeScales: org.orekit.time.TimeScales, celestialBodies: org.orekit.bodies.CelestialBodies): ...
-    def addDefaultEOP1980HistoryLoaders(self, string: str, string2: str, string3: str, string4: str, string5: str) -> None:
+    def addDefaultEOP1980HistoryLoaders(self, string: str, string2: str, string3: str, string4: str, string5: str, string6: str) -> None:
         """
             Add the default loaders EOP history (IAU 1980 precession/nutation).
         
@@ -4113,13 +5434,17 @@ class LazyLoadedFrames(AbstractFrames):
             Parameters:
                 rapidDataColumnsSupportedNames (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for supported rapid data columns EOP files names (may be null if the default IERS file names are
                     used)
-                rapidDataXMLSupportedNames (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for supported rapid data XML EOP files names (may be null if the default IERS file names are used)
+                xmlSupportedNames (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for supported XML EOP files names (may be null if the default IERS file names are used)
                 eopC04SupportedNames (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for supported EOP C04 files names (may be null if the default IERS file names are used)
                 bulletinBSupportedNames (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for supported bulletin B files names (may be null if the default IERS file names are used)
                 bulletinASupportedNames (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for supported bulletin A files names (may be null if the default IERS file names are used)
+                csvSupportedNames (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for supported csv files names (may be null if the default IERS file names are used)
+        
+            Since:
+                12.0
         
             Also see:
-                `IERS EOP C04 files <http://hpiers.obspm.fr/eoppc/eop/eopc04/>`,
+                :class:`~org.orekit.frames.https:.datacenter.iers.org.products.eop`,
                 :meth:`~org.orekit.frames.LazyLoadedFrames.addEOPHistoryLoader`,
                 :meth:`~org.orekit.frames.LazyLoadedFrames.clearEOPHistoryLoaders`,
                 :meth:`~org.orekit.frames.LazyLoadedFrames.addDefaultEOP2000HistoryLoaders`
@@ -4127,7 +5452,7 @@ class LazyLoadedFrames(AbstractFrames):
         
         """
         ...
-    def addDefaultEOP2000HistoryLoaders(self, string: str, string2: str, string3: str, string4: str, string5: str) -> None:
+    def addDefaultEOP2000HistoryLoaders(self, string: str, string2: str, string3: str, string4: str, string5: str, string6: str) -> None:
         """
             Add the default loaders for EOP history (IAU 2000/2006 precession/nutation).
         
@@ -4137,13 +5462,17 @@ class LazyLoadedFrames(AbstractFrames):
             Parameters:
                 rapidDataColumnsSupportedNames (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for supported rapid data columns EOP files names (may be null if the default IERS file names are
                     used)
-                rapidDataXMLSupportedNames (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for supported rapid data XML EOP files names (may be null if the default IERS file names are used)
+                xmlSupportedNames (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for supported XML EOP files names (may be null if the default IERS file names are used)
                 eopC04SupportedNames (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for supported EOP C04 files names (may be null if the default IERS file names are used)
                 bulletinBSupportedNames (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for supported bulletin B files names (may be null if the default IERS file names are used)
                 bulletinASupportedNames (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for supported bulletin A files names (may be null if the default IERS file names are used)
+                csvSupportedNames (:class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): regular expression for supported csv files names (may be null if the default IERS file names are used)
+        
+            Since:
+                12.0
         
             Also see:
-                `IERS EOP C04 files <http://hpiers.obspm.fr/eoppc/eop/eopc04/>`,
+                :class:`~org.orekit.frames.https:.datacenter.iers.org.products.eop`,
                 :meth:`~org.orekit.frames.LazyLoadedFrames.addEOPHistoryLoader`,
                 :meth:`~org.orekit.frames.LazyLoadedFrames.clearEOPHistoryLoaders`,
                 :meth:`~org.orekit.frames.LazyLoadedFrames.addDefaultEOP1980HistoryLoaders`
@@ -4151,13 +5480,13 @@ class LazyLoadedFrames(AbstractFrames):
         
         """
         ...
-    def addEOPHistoryLoader(self, iERSConventions: org.orekit.utils.IERSConventions, eOPHistoryLoader: EOPHistoryLoader) -> None:
+    def addEOPHistoryLoader(self, iERSConventions: org.orekit.utils.IERSConventions, eopHistoryLoader: EopHistoryLoader) -> None:
         """
             Add a loader for Earth Orientation Parameters history.
         
             Parameters:
                 conventions (:class:`~org.orekit.utils.IERSConventions`): IERS conventions to which EOP history applies
-                loader (:class:`~org.orekit.frames.EOPHistoryLoader`): custom loader to add for the EOP history
+                loader (:class:`~org.orekit.frames.EopHistoryLoader`): custom loader to add for the EOP history
         
             Also see:
                 :meth:`~org.orekit.frames.LazyLoadedFrames.addDefaultEOP1980HistoryLoaders`,
@@ -4181,7 +5510,7 @@ class LazyLoadedFrames(AbstractFrames):
         """
             Get Earth Orientation Parameters history.
         
-            If no :class:`~org.orekit.frames.EOPHistoryLoader` has been added by calling
+            If no :class:`~org.orekit.frames.EopHistoryLoader` has been added by calling
             :meth:`~org.orekit.frames.LazyLoadedFrames.addEOPHistoryLoader` or if
             :meth:`~org.orekit.frames.LazyLoadedFrames.clearEOPHistoryLoaders` has been called afterwards, the
             :meth:`~org.orekit.frames.LazyLoadedFrames.addDefaultEOP1980HistoryLoaders` and
@@ -4416,11 +5745,14 @@ class __module_protocol__(typing.Protocol):
     CR3BPRotatingFrame: typing.Type[CR3BPRotatingFrame]
     EOPBasedTransformProvider: typing.Type[EOPBasedTransformProvider]
     EOPEntry: typing.Type[EOPEntry]
+    EOPFittedModel: typing.Type[EOPFittedModel]
+    EOPFitter: typing.Type[EOPFitter]
     EOPHistory: typing.Type[EOPHistory]
-    EOPHistoryLoader: typing.Type[EOPHistoryLoader]
     EclipticProvider: typing.Type[EclipticProvider]
+    EopHistoryLoader: typing.Type[EopHistoryLoader]
     FactoryManagedFrame: typing.Type[FactoryManagedFrame]
     FieldPoleCorrection: typing.Type[FieldPoleCorrection]
+    FieldStaticTransform: typing.Type[FieldStaticTransform]
     FieldTransform: typing.Type[FieldTransform]
     FieldTransformGenerator: typing.Type[FieldTransformGenerator]
     FixedTransformProvider: typing.Type[FixedTransformProvider]
@@ -4436,21 +5768,28 @@ class __module_protocol__(typing.Protocol):
     L1Frame: typing.Type[L1Frame]
     L1TransformProvider: typing.Type[L1TransformProvider]
     L2Frame: typing.Type[L2Frame]
+    LOF: typing.Type[LOF]
     LOFType: typing.Type[LOFType]
     LazyLoadedEop: typing.Type[LazyLoadedEop]
     LazyLoadedFrames: typing.Type[LazyLoadedFrames]
+    LocalMagneticFieldFrame: typing.Type[LocalMagneticFieldFrame]
     LocalOrbitalFrame: typing.Type[LocalOrbitalFrame]
     OrphanFrame: typing.Type[OrphanFrame]
     PoleCorrection: typing.Type[PoleCorrection]
     Predefined: typing.Type[Predefined]
+    PredictedEOPHistory: typing.Type[PredictedEOPHistory]
     PythonAbstractEopParser: typing.Type[PythonAbstractEopParser]
     PythonAbstractFrames: typing.Type[PythonAbstractFrames]
     PythonEOPBasedTransformProvider: typing.Type[PythonEOPBasedTransformProvider]
     PythonEOPHistoryLoader: typing.Type[PythonEOPHistoryLoader]
+    PythonFieldStaticTransform: typing.Type[PythonFieldStaticTransform]
+    PythonFrames: typing.Type[PythonFrames]
     PythonItrfVersionProvider: typing.Type[PythonItrfVersionProvider]
+    PythonLOF: typing.Type[PythonLOF]
     PythonStaticTransform: typing.Type[PythonStaticTransform]
     PythonTransformProvider: typing.Type[PythonTransformProvider]
     ShiftingTransformProvider: typing.Type[ShiftingTransformProvider]
+    SingleParameterFitter: typing.Type[SingleParameterFitter]
     StaticTransform: typing.Type[StaticTransform]
     TopocentricFrame: typing.Type[TopocentricFrame]
     Transform: typing.Type[Transform]
@@ -4460,3 +5799,4 @@ class __module_protocol__(typing.Protocol):
     TwoBodiesBaryFrame: typing.Type[TwoBodiesBaryFrame]
     UpdatableFrame: typing.Type[UpdatableFrame]
     VersionedITRF: typing.Type[VersionedITRF]
+    encounter: org.orekit.frames.encounter.__module_protocol__

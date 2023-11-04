@@ -20,6 +20,23 @@ class Generator(java.lang.AutoCloseable):
             11.0
     """
     def close(self) -> None: ...
+    def dateToCalendarString(self, timeConverter: org.orekit.files.ccsds.definitions.TimeConverter, absoluteDate: org.orekit.time.AbsoluteDate) -> str:
+        """
+            Convert a date to calendar string value with high precision.
+        
+            Parameters:
+                converter (:class:`~org.orekit.files.ccsds.definitions.TimeConverter`): converter for dates
+                date (:class:`~org.orekit.time.AbsoluteDate`): date to write
+        
+            Returns:
+                date as a calendar string
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
     @typing.overload
     def dateToString(self, int: int, int2: int, int3: int, int4: int, int5: int, double: float) -> str:
         """
@@ -49,7 +66,7 @@ class Generator(java.lang.AutoCloseable):
                 date (:class:`~org.orekit.time.AbsoluteDate`): date to write
         
             Returns:
-                date as a string
+                date as a string (may be either a relative date or a calendar date)
         
         """
         ...
@@ -124,7 +141,7 @@ class Generator(java.lang.AutoCloseable):
     @typing.overload
     def writeEntry(self, string: str, list: java.util.List[str], boolean: bool) -> None: ...
     @typing.overload
-    def writeEntry(self, string: str, timeConverter: org.orekit.files.ccsds.definitions.TimeConverter, absoluteDate: org.orekit.time.AbsoluteDate, boolean: bool) -> None: ...
+    def writeEntry(self, string: str, timeConverter: org.orekit.files.ccsds.definitions.TimeConverter, absoluteDate: org.orekit.time.AbsoluteDate, boolean: bool, boolean2: bool) -> None: ...
     @typing.overload
     def writeRawData(self, char: str) -> None: ...
     @typing.overload
@@ -142,6 +159,45 @@ class MessageWriter(typing.Generic[_MessageWriter__H, _MessageWriter__S, _Messag
         Since:
             11.0
     """
+    def getFormatVersionKey(self) -> str:
+        """
+            Get key for format version.
+        
+            Returns:
+                key for format version
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
+    def getRoot(self) -> str:
+        """
+            Get root element for XML files.
+        
+            Returns:
+                root element for XML files
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
+    def getVersion(self) -> float:
+        """
+            Get current format version.
+        
+            Returns:
+                current format version
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
     def writeFooter(self, generator: Generator) -> None: ...
     def writeHeader(self, generator: Generator, h: _MessageWriter__H) -> None: ...
     def writeMessage(self, generator: Generator, f: _MessageWriter__F) -> None: ...
@@ -156,8 +212,26 @@ class AbstractGenerator(Generator):
         Since:
             11.0
     """
-    def __init__(self, appendable: java.lang.Appendable, string: str, boolean: bool): ...
+    def __init__(self, appendable: java.lang.Appendable, string: str, double: float, boolean: bool): ...
     def close(self) -> None: ...
+    def dateToCalendarString(self, timeConverter: org.orekit.files.ccsds.definitions.TimeConverter, absoluteDate: org.orekit.time.AbsoluteDate) -> str:
+        """
+            Convert a date to calendar string value with high precision.
+        
+            Specified by:
+                :meth:`~org.orekit.files.ccsds.utils.generation.Generator.dateToCalendarString` in
+                interface :class:`~org.orekit.files.ccsds.utils.generation.Generator`
+        
+            Parameters:
+                converter (:class:`~org.orekit.files.ccsds.definitions.TimeConverter`): converter for dates
+                date (:class:`~org.orekit.time.AbsoluteDate`): date to write
+        
+            Returns:
+                date as a calendar string
+        
+        
+        """
+        ...
     @typing.overload
     def dateToString(self, int: int, int2: int, int3: int, int4: int, int5: int, double: float) -> str:
         """
@@ -195,7 +269,7 @@ class AbstractGenerator(Generator):
                 date (:class:`~org.orekit.time.AbsoluteDate`): date to write
         
             Returns:
-                date as a string
+                date as a string (may be either a relative date or a calendar date)
         
         """
         ...
@@ -269,7 +343,7 @@ class AbstractGenerator(Generator):
     @typing.overload
     def writeEntry(self, string: str, list: java.util.List[str], boolean: bool) -> None: ...
     @typing.overload
-    def writeEntry(self, string: str, timeConverter: org.orekit.files.ccsds.definitions.TimeConverter, absoluteDate: org.orekit.time.AbsoluteDate, boolean: bool) -> None: ...
+    def writeEntry(self, string: str, timeConverter: org.orekit.files.ccsds.definitions.TimeConverter, absoluteDate: org.orekit.time.AbsoluteDate, boolean: bool, boolean2: bool) -> None: ...
     @typing.overload
     def writeRawData(self, char: str) -> None: ...
     @typing.overload
@@ -332,12 +406,54 @@ class AbstractMessageWriter(MessageWriter[_AbstractMessageWriter__H, _AbstractMe
         
         """
         ...
+    def getFormatVersionKey(self) -> str:
+        """
+            Get key for format version.
+        
+            Specified by:
+                :meth:`~org.orekit.files.ccsds.utils.generation.MessageWriter.getFormatVersionKey` in
+                interface :class:`~org.orekit.files.ccsds.utils.generation.MessageWriter`
+        
+            Returns:
+                key for format version
+        
+        
+        """
+        ...
+    def getRoot(self) -> str:
+        """
+            Get root element for XML files.
+        
+            Specified by:
+                :meth:`~org.orekit.files.ccsds.utils.generation.MessageWriter.getRoot` in
+                interface :class:`~org.orekit.files.ccsds.utils.generation.MessageWriter`
+        
+            Returns:
+                root element for XML files
+        
+        
+        """
+        ...
     def getTimeConverter(self) -> org.orekit.files.ccsds.definitions.TimeConverter:
         """
             Get the current time converter.
         
             Returns:
                 current time converter
+        
+        
+        """
+        ...
+    def getVersion(self) -> float:
+        """
+            Get current format version.
+        
+            Specified by:
+                :meth:`~org.orekit.files.ccsds.utils.generation.MessageWriter.getVersion` in
+                interface :class:`~org.orekit.files.ccsds.utils.generation.MessageWriter`
+        
+            Returns:
+                current format version
         
         
         """
@@ -355,7 +471,6 @@ class AbstractMessageWriter(MessageWriter[_AbstractMessageWriter__H, _AbstractMe
     def writeFooter(self, generator: Generator) -> None: ...
     def writeHeader(self, generator: Generator, h: _AbstractMessageWriter__H) -> None: ...
     def writeSegment(self, generator: Generator, s2: _AbstractMessageWriter__S) -> None: ...
-    def writeSegmentContent(self, generator: Generator, double: float, s2: _AbstractMessageWriter__S) -> None: ...
 
 class PythonGenerator(Generator):
     """
@@ -363,6 +478,25 @@ class PythonGenerator(Generator):
     """
     def __init__(self): ...
     def close(self) -> None: ...
+    def dateToCalendarString(self, timeConverter: org.orekit.files.ccsds.definitions.TimeConverter, absoluteDate: org.orekit.time.AbsoluteDate) -> str:
+        """
+            Description copied from interface: :meth:`~org.orekit.files.ccsds.utils.generation.Generator.dateToCalendarString`
+            Convert a date to calendar string value with high precision.
+        
+            Specified by:
+                :meth:`~org.orekit.files.ccsds.utils.generation.Generator.dateToCalendarString` in
+                interface :class:`~org.orekit.files.ccsds.utils.generation.Generator`
+        
+            Parameters:
+                converter (:class:`~org.orekit.files.ccsds.definitions.TimeConverter`): converter for dates
+                date (:class:`~org.orekit.time.AbsoluteDate`): date to write
+        
+            Returns:
+                date as a calendar string
+        
+        
+        """
+        ...
     @typing.overload
     def dateToString(self, int: int, int2: int, int3: int, int4: int, int5: int, double: float) -> str:
         """
@@ -457,23 +591,15 @@ class PythonGenerator(Generator):
         """
         ...
     def newLine(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
     def pythonExtension(self, long: int) -> None:
         """
-            Part of JCC Python interface to object
+        public long pythonExtension()
+        
+        
         """
         ...
     def siToCcsdsName(self, string: str) -> str:
@@ -511,7 +637,7 @@ class PythonGenerator(Generator):
     @typing.overload
     def writeEntry(self, string: str, list: java.util.List[str], boolean: bool) -> None: ...
     @typing.overload
-    def writeEntry(self, string: str, timeConverter: org.orekit.files.ccsds.definitions.TimeConverter, absoluteDate: org.orekit.time.AbsoluteDate, boolean: bool) -> None: ...
+    def writeEntry(self, string: str, timeConverter: org.orekit.files.ccsds.definitions.TimeConverter, absoluteDate: org.orekit.time.AbsoluteDate, boolean: bool, boolean2: bool) -> None: ...
     @typing.overload
     def writeRawData(self, char: str) -> None: ...
     @typing.overload
@@ -526,23 +652,60 @@ class PythonMessageWriter(MessageWriter[_PythonMessageWriter__H, _PythonMessageW
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
+    def getFormatVersionKey(self) -> str:
         """
-            Part of JCC Python interface to object
+            Description copied from interface: :meth:`~org.orekit.files.ccsds.utils.generation.MessageWriter.getFormatVersionKey`
+            Get key for format version.
+        
+            Specified by:
+                :meth:`~org.orekit.files.ccsds.utils.generation.MessageWriter.getFormatVersionKey` in
+                interface :class:`~org.orekit.files.ccsds.utils.generation.MessageWriter`
+        
+            Returns:
+                key for format version
+        
         
         """
         ...
+    def getRoot(self) -> str:
+        """
+            Description copied from interface: :meth:`~org.orekit.files.ccsds.utils.generation.MessageWriter.getRoot`
+            Get root element for XML files.
+        
+            Specified by:
+                :meth:`~org.orekit.files.ccsds.utils.generation.MessageWriter.getRoot` in
+                interface :class:`~org.orekit.files.ccsds.utils.generation.MessageWriter`
+        
+            Returns:
+                root element for XML files
+        
+        
+        """
+        ...
+    def getVersion(self) -> float:
+        """
+            Description copied from interface: :meth:`~org.orekit.files.ccsds.utils.generation.MessageWriter.getVersion`
+            Get current format version.
+        
+            Specified by:
+                :meth:`~org.orekit.files.ccsds.utils.generation.MessageWriter.getVersion` in
+                interface :class:`~org.orekit.files.ccsds.utils.generation.MessageWriter`
+        
+            Returns:
+                current format version
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None: ...
     @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
+    def pythonExtension(self) -> int: ...
     @typing.overload
     def pythonExtension(self, long: int) -> None:
         """
-            Part of JCC Python interface to object
+        public long pythonExtension()
+        
+        
         """
         ...
     def writeFooter(self, generator: Generator) -> None: ...
@@ -558,7 +721,7 @@ class KvnGenerator(AbstractGenerator):
         Since:
             11.0
     """
-    def __init__(self, appendable: java.lang.Appendable, int: int, string: str, int2: int): ...
+    def __init__(self, appendable: java.lang.Appendable, int: int, string: str, double: float, int2: int): ...
     def endMessage(self, string: str) -> None:
         """
             End CCSDS message.
@@ -596,7 +759,7 @@ class KvnGenerator(AbstractGenerator):
     @typing.overload
     def writeEntry(self, string: str, list: java.util.List[str], boolean: bool) -> None: ...
     @typing.overload
-    def writeEntry(self, string: str, timeConverter: org.orekit.files.ccsds.definitions.TimeConverter, absoluteDate: org.orekit.time.AbsoluteDate, boolean: bool) -> None: ...
+    def writeEntry(self, string: str, timeConverter: org.orekit.files.ccsds.definitions.TimeConverter, absoluteDate: org.orekit.time.AbsoluteDate, boolean: bool, boolean2: bool) -> None: ...
     @typing.overload
     def writeEntry(self, string: str, string2: str, unit: org.orekit.utils.units.Unit, boolean: bool) -> None: ...
 
@@ -604,7 +767,7 @@ class PythonAbstractGenerator(AbstractGenerator):
     """
     public class PythonAbstractGenerator extends :class:`~org.orekit.files.ccsds.utils.generation.AbstractGenerator`
     """
-    def __init__(self, appendable: java.lang.Appendable, string: str, boolean: bool): ...
+    def __init__(self, appendable: java.lang.Appendable, string: str, double: float, boolean: bool): ...
     def endMessage(self, string: str) -> None: ...
     def finalize(self) -> None: ...
     def getFormat(self) -> org.orekit.files.ccsds.utils.FileFormat:
@@ -653,7 +816,7 @@ class PythonAbstractGenerator(AbstractGenerator):
     @typing.overload
     def writeEntry(self, string: str, list: java.util.List[str], boolean: bool) -> None: ...
     @typing.overload
-    def writeEntry(self, string: str, timeConverter: org.orekit.files.ccsds.definitions.TimeConverter, absoluteDate: org.orekit.time.AbsoluteDate, boolean: bool) -> None: ...
+    def writeEntry(self, string: str, timeConverter: org.orekit.files.ccsds.definitions.TimeConverter, absoluteDate: org.orekit.time.AbsoluteDate, boolean: bool, boolean2: bool) -> None: ...
 
 _PythonAbstractMessageWriter__H = typing.TypeVar('_PythonAbstractMessageWriter__H', bound=org.orekit.files.ccsds.section.Header)  # <H>
 _PythonAbstractMessageWriter__S = typing.TypeVar('_PythonAbstractMessageWriter__S', bound=org.orekit.files.ccsds.section.Segment)  # <S>
@@ -716,7 +879,21 @@ class XmlGenerator(AbstractGenerator):
     
     
     """
-    def __init__(self, appendable: java.lang.Appendable, int: int, string: str, boolean: bool): ...
+    NDM_XML_V3_SCHEMA_LOCATION: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.files.ccsds.utils.generation.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` NDM_XML_V3_SCHEMA_LOCATION
+    
+        NDM/XML version 3 location.
+    
+        Since:
+            12.0
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    def __init__(self, appendable: java.lang.Appendable, int: int, string: str, double: float, boolean: bool, string2: str): ...
     def endMessage(self, string: str) -> None: ...
     def enterSection(self, string: str) -> None: ...
     def exitSection(self) -> str: ...
@@ -745,7 +922,7 @@ class XmlGenerator(AbstractGenerator):
     @typing.overload
     def writeEntry(self, string: str, list: java.util.List[str], boolean: bool) -> None: ...
     @typing.overload
-    def writeEntry(self, string: str, timeConverter: org.orekit.files.ccsds.definitions.TimeConverter, absoluteDate: org.orekit.time.AbsoluteDate, boolean: bool) -> None: ...
+    def writeEntry(self, string: str, timeConverter: org.orekit.files.ccsds.definitions.TimeConverter, absoluteDate: org.orekit.time.AbsoluteDate, boolean: bool, boolean2: bool) -> None: ...
     @typing.overload
     def writeEntry(self, string: str, string2: str, unit: org.orekit.utils.units.Unit, boolean: bool) -> None: ...
     def writeOneAttributeElement(self, string: str, string2: str, string3: str, string4: str) -> None: ...

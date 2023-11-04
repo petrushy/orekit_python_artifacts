@@ -54,6 +54,42 @@ class Duration(org.orekit.propagation.AdditionalStateProvider):
         
         """
         ...
+    def yields(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> bool:
+        """
+            Check if this provider should yield so another provider has an opportunity to add missing parts.
+        
+            Decision to yield is often based on an additional state being
+            :meth:`~org.orekit.propagation.SpacecraftState.hasAdditionalState` in the provided :code:`state` (but it could
+            theoretically also depend on an additional state derivative being
+            :meth:`~org.orekit.propagation.SpacecraftState.hasAdditionalStateDerivative`, or any other criterion). If for example a
+            provider needs the state transition matrix, it could implement this method as:
+        
+            .. code-block: java
+            
+             public boolean yield(final SpacecraftState state) {
+                 return !state.getAdditionalStates().containsKey("STM");
+             }
+             
+        
+            The default implementation returns :code:`false`, meaning that state data can be
+            :meth:`~org.orekit.propagation.AdditionalStateProvider.getAdditionalState` immediately.
+        
+            The column state can be computed only if the start and stop dates columns are available.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.AdditionalStateProvider.yields` in
+                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): state to handle
+        
+            Returns:
+                true if this provider should yield so another provider has an opportunity to add missing parts as the state is
+                incrementally built up
+        
+        
+        """
+        ...
 
 class MassDepletionDelay(org.orekit.propagation.integration.AdditionalDerivativesProvider):
     """
@@ -80,39 +116,16 @@ class MassDepletionDelay(org.orekit.propagation.integration.AdditionalDerivative
         """
             Compute the derivatives related to the additional state (and optionally main state increments).
         
-            As of 11.2, there is a default implementation that calls the deprecated
-            :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.derivatives` method. This has been done for
-            backward compatibility only and will be removed in 12.0.
-        
             Specified by:
                 :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.combinedDerivatives` in
                 interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional states this equations depend on (according to the
-                    :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.yield` method)
+                    :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.yields` method)
         
             Returns:
                 computed combined derivatives, which may include some incremental coupling effect to add to main state derivatives
-        
-        
-        """
-        ...
-    def derivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]:
-        """
-            Deprecated.
-            Compute the derivatives related to the additional state parameters.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.derivatives` in
-                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude, and additional states this equations depend on (according to the
-                    :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.yield` method)
-        
-            Returns:
-                computed derivatives
         
         
         """
@@ -204,6 +217,42 @@ class MedianDate(org.orekit.propagation.AdditionalStateProvider):
         
             Returns:
                 name of the additional state (names containing "orekit" with any case are reserved for the library internal use)
+        
+        
+        """
+        ...
+    def yields(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> bool:
+        """
+            Check if this provider should yield so another provider has an opportunity to add missing parts.
+        
+            Decision to yield is often based on an additional state being
+            :meth:`~org.orekit.propagation.SpacecraftState.hasAdditionalState` in the provided :code:`state` (but it could
+            theoretically also depend on an additional state derivative being
+            :meth:`~org.orekit.propagation.SpacecraftState.hasAdditionalStateDerivative`, or any other criterion). If for example a
+            provider needs the state transition matrix, it could implement this method as:
+        
+            .. code-block: java
+            
+             public boolean yield(final SpacecraftState state) {
+                 return !state.getAdditionalStates().containsKey("STM");
+             }
+             
+        
+            The default implementation returns :code:`false`, meaning that state data can be
+            :meth:`~org.orekit.propagation.AdditionalStateProvider.getAdditionalState` immediately.
+        
+            The column state can be computed only if the start and stop dates columns are available.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.AdditionalStateProvider.yields` in
+                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): state to handle
+        
+            Returns:
+                true if this provider should yield so another provider has an opportunity to add missing parts as the state is
+                incrementally built up
         
         
         """
@@ -370,6 +419,42 @@ class TriggerDate(org.orekit.propagation.AdditionalStateProvider, org.orekit.for
         
             Returns:
                 reset state taking into account maneuver start/stop
+        
+        
+        """
+        ...
+    def yields(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> bool:
+        """
+            Check if this provider should yield so another provider has an opportunity to add missing parts.
+        
+            Decision to yield is often based on an additional state being
+            :meth:`~org.orekit.propagation.SpacecraftState.hasAdditionalState` in the provided :code:`state` (but it could
+            theoretically also depend on an additional state derivative being
+            :meth:`~org.orekit.propagation.SpacecraftState.hasAdditionalStateDerivative`, or any other criterion). If for example a
+            provider needs the state transition matrix, it could implement this method as:
+        
+            .. code-block: java
+            
+             public boolean yield(final SpacecraftState state) {
+                 return !state.getAdditionalStates().containsKey("STM");
+             }
+             
+        
+            The default implementation returns :code:`false`, meaning that state data can be
+            :meth:`~org.orekit.propagation.AdditionalStateProvider.getAdditionalState` immediately.
+        
+            The column state can be computed only if the State Transition Matrix state is available.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.AdditionalStateProvider.yields` in
+                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): state to handle
+        
+            Returns:
+                true if this provider should yield so another provider has an opportunity to add missing parts as the state is
+                incrementally built up
         
         
         """

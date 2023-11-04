@@ -221,7 +221,7 @@ class CommonMetadataKey(java.lang.Enum['CommonMetadataKey']):
     """
     public enum CommonMetadataKey extends :class:`~org.orekit.files.ccsds.ndm.odm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.odm.CommonMetadataKey`>
     
-        Keys for :class:`~org.orekit.files.ccsds.ndm.odm.CommonMetadata` entries.
+        Keys for :class:`~org.orekit.files.ccsds.ndm.odm.OdmCommonMetadata` entries.
     
         Since:
             11.0
@@ -230,14 +230,14 @@ class CommonMetadataKey(java.lang.Enum['CommonMetadataKey']):
     CENTER_NAME: typing.ClassVar['CommonMetadataKey'] = ...
     REF_FRAME: typing.ClassVar['CommonMetadataKey'] = ...
     REF_FRAME_EPOCH: typing.ClassVar['CommonMetadataKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, commonMetadata: 'CommonMetadata') -> bool:
+    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, odmCommonMetadata: 'OdmCommonMetadata') -> bool:
         """
             Process one token.
         
             Parameters:
                 token (:class:`~org.orekit.files.ccsds.utils.lexical.ParseToken`): token to process
                 context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
-                container (:class:`~org.orekit.files.ccsds.ndm.odm.CommonMetadata`): container to fill
+                container (:class:`~org.orekit.files.ccsds.ndm.odm.OdmCommonMetadata`): container to fill
         
             Returns:
                 true of token was accepted
@@ -297,7 +297,7 @@ class CommonMetadataWriter(org.orekit.files.ccsds.section.AbstractWriter):
         Since:
             11.0
     """
-    def __init__(self, commonMetadata: 'CommonMetadata', timeConverter: org.orekit.files.ccsds.definitions.TimeConverter): ...
+    def __init__(self, odmCommonMetadata: 'OdmCommonMetadata', timeConverter: org.orekit.files.ccsds.definitions.TimeConverter): ...
 
 class KeplerianElements(org.orekit.files.ccsds.section.CommentsContainer, org.orekit.files.ccsds.section.Data):
     """
@@ -342,7 +342,7 @@ class KeplerianElements(org.orekit.files.ccsds.section.CommentsContainer, org.or
         
         """
         ...
-    def getAnomalyType(self) -> org.orekit.orbits.PositionAngle:
+    def getAnomalyType(self) -> org.orekit.orbits.PositionAngleType:
         """
             Get the type of anomaly (true or mean).
         
@@ -442,12 +442,12 @@ class KeplerianElements(org.orekit.files.ccsds.section.CommentsContainer, org.or
         
         """
         ...
-    def setAnomalyType(self, positionAngle: org.orekit.orbits.PositionAngle) -> None:
+    def setAnomalyType(self, positionAngleType: org.orekit.orbits.PositionAngleType) -> None:
         """
             Set the type of anomaly.
         
             Parameters:
-                anomalyType (:class:`~org.orekit.orbits.PositionAngle`): the type of anomaly to be set
+                anomalyType (:class:`~org.orekit.orbits.PositionAngleType`): the type of anomaly to be set
         
         
         """
@@ -622,6 +622,17 @@ class KeplerianElementsKey(java.lang.Enum['KeplerianElementsKey']):
         """
         ...
 
+class OdmHeader(org.orekit.files.ccsds.section.Header):
+    """
+    public class OdmHeader extends :class:`~org.orekit.files.ccsds.section.Header`
+    
+        Header of a CCSDS Orbit Data Message.
+    
+        Since:
+            12.0
+    """
+    def __init__(self): ...
+
 class OdmMetadata(org.orekit.files.ccsds.section.Metadata):
     """
     public class OdmMetadata extends :class:`~org.orekit.files.ccsds.section.Metadata`
@@ -722,9 +733,9 @@ class OdmMetadataKey(java.lang.Enum['OdmMetadataKey']):
 
 _OdmParser__T = typing.TypeVar('_OdmParser__T', bound=org.orekit.files.ccsds.ndm.NdmConstituent)  # <T>
 _OdmParser__P = typing.TypeVar('_OdmParser__P', bound='OdmParser')  # <P>
-class OdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[_OdmParser__T, _OdmParser__P], typing.Generic[_OdmParser__T, _OdmParser__P]):
+class OdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[OdmHeader, _OdmParser__T, _OdmParser__P], typing.Generic[_OdmParser__T, _OdmParser__P]):
     """
-    public abstract class OdmParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<?, ?>, P extends OdmParser<T, ?>> extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<T, P>
+    public abstract class OdmParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.ndm.odm.OdmHeader`, ?>, P extends OdmParser<T, ?>> extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<:class:`~org.orekit.files.ccsds.ndm.odm.OdmHeader`, T, P>
     
         Common parser for Orbit Parameter/Ephemeris/Mean/Comprehensive Messages.
     
@@ -1235,9 +1246,9 @@ class UserDefinedWriter(org.orekit.files.ccsds.section.AbstractWriter):
     """
     def __init__(self, string: str, string2: str, userDefined: UserDefined): ...
 
-class CommonMetadata(OdmMetadata):
+class OdmCommonMetadata(OdmMetadata):
     """
-    public class CommonMetadata extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmMetadata`
+    public class OdmCommonMetadata extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmMetadata`
     
         Common metadata for Orbit Parameter/Ephemeris/Mean Messages.
     
@@ -1251,7 +1262,6 @@ class CommonMetadata(OdmMetadata):
         
             ODM standard enforces :code:`TIME_SYSTEM` to appear *after* :code:`REF_FRAME_EPOCH`, despite it is needed to interpret
             it. We have to wait until parsing end to finalize this date.
-        
         
             Parameters:
                 context (:class:`~org.orekit.files.ccsds.utils.ContextBinding`): context binding
@@ -1339,7 +1349,7 @@ class CommonMetadata(OdmMetadata):
                 The reference frame specified by the :code:`REF_FRAME` keyword.
         
             Also see:
-                :meth:`~org.orekit.files.ccsds.ndm.odm.CommonMetadata.getFrame`
+                :meth:`~org.orekit.files.ccsds.ndm.odm.OdmCommonMetadata.getFrame`
         
         
         """
@@ -1418,9 +1428,9 @@ _PythonOdmParser__T = typing.TypeVar('_PythonOdmParser__T', bound=org.orekit.fil
 _PythonOdmParser__P = typing.TypeVar('_PythonOdmParser__P', bound=OdmParser)  # <P>
 class PythonOdmParser(OdmParser[_PythonOdmParser__T, _PythonOdmParser__P], typing.Generic[_PythonOdmParser__T, _PythonOdmParser__P]):
     """
-    public class PythonOdmParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<?, ?>, P extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmParser`<T, ?>> extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmParser`<T, P>
+    public class PythonOdmParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.ndm.odm.OdmHeader`, ?>, P extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmParser`<T, ?>> extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmParser`<T, P>
     """
-    def __init__(self, string: str, string2: str, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, double: float, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior): ...
+    def __init__(self, string: str, string2: str, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, double: float, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]): ...
     def build(self) -> _PythonOdmParser__T:
         """
             Build the file from parsed entries.
@@ -1478,6 +1488,10 @@ class PythonOdmParser(OdmParser[_PythonOdmParser__T, _PythonOdmParser__P], typin
         """
             Get the file format.
         
+            Specified by:
+                :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.getFileFormat` in
+                interface :class:`~org.orekit.files.ccsds.utils.lexical.MessageParser`
+        
             Overrides:
                 :meth:`~org.orekit.files.ccsds.utils.parsing.AbstractMessageParser.getFileFormat` in
                 class :class:`~org.orekit.files.ccsds.utils.parsing.AbstractMessageParser`
@@ -1488,7 +1502,7 @@ class PythonOdmParser(OdmParser[_PythonOdmParser__T, _PythonOdmParser__P], typin
         
         """
         ...
-    def getHeader(self) -> org.orekit.files.ccsds.section.Header:
+    def getHeader(self) -> OdmHeader:
         """
             Get file header to fill.
         
@@ -1664,11 +1678,12 @@ class __module_protocol__(typing.Protocol):
     CartesianCovariance: typing.Type[CartesianCovariance]
     CartesianCovarianceKey: typing.Type[CartesianCovarianceKey]
     CartesianCovarianceWriter: typing.Type[CartesianCovarianceWriter]
-    CommonMetadata: typing.Type[CommonMetadata]
     CommonMetadataKey: typing.Type[CommonMetadataKey]
     CommonMetadataWriter: typing.Type[CommonMetadataWriter]
     KeplerianElements: typing.Type[KeplerianElements]
     KeplerianElementsKey: typing.Type[KeplerianElementsKey]
+    OdmCommonMetadata: typing.Type[OdmCommonMetadata]
+    OdmHeader: typing.Type[OdmHeader]
     OdmMetadata: typing.Type[OdmMetadata]
     OdmMetadataKey: typing.Type[OdmMetadataKey]
     OdmParser: typing.Type[OdmParser]

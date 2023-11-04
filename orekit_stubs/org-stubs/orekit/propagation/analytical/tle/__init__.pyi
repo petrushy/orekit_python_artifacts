@@ -2,13 +2,12 @@ import java.io
 import java.util
 import org
 import org.hipparchus
-import org.hipparchus.linear
 import org.orekit.attitudes
 import org.orekit.frames
 import org.orekit.orbits
 import org.orekit.propagation
 import org.orekit.propagation.analytical
-import org.orekit.propagation.integration
+import org.orekit.propagation.analytical.tle.generation
 import org.orekit.time
 import org.orekit.utils
 import typing
@@ -16,9 +15,9 @@ import typing
 
 
 _FieldTLE__T = typing.TypeVar('_FieldTLE__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class FieldTLE(org.orekit.time.FieldTimeStamped[_FieldTLE__T], java.io.Serializable, typing.Generic[_FieldTLE__T]):
+class FieldTLE(org.orekit.time.FieldTimeStamped[_FieldTLE__T], java.io.Serializable, org.orekit.utils.ParameterDriversProvider, typing.Generic[_FieldTLE__T]):
     """
-    public class FieldTLE<T extends :class:`~org.orekit.propagation.analytical.tle.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.FieldTimeStamped`<T>, :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public class FieldTLE<T extends :class:`~org.orekit.propagation.analytical.tle.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.FieldTimeStamped`<T>, :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.orekit.utils.ParameterDriversProvider`
     
         This class is a container for a single set of TLE data.
     
@@ -303,7 +302,6 @@ class FieldTLE(org.orekit.time.FieldTimeStamped[_FieldTLE__T], java.io.Serializa
         
         """
         ...
-    def getParameters(self, field: org.hipparchus.Field[_FieldTLE__T]) -> typing.List[_FieldTLE__T]: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def getPerigeeArgument(self) -> _FieldTLE__T:
         """
@@ -374,60 +372,26 @@ class FieldTLE(org.orekit.time.FieldTimeStamped[_FieldTLE__T], java.io.Serializa
         
         """
         ...
-    _stateToTLE_0__T = typing.TypeVar('_stateToTLE_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    _stateToTLE_1__T = typing.TypeVar('_stateToTLE_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    _stateToTLE_2__T = typing.TypeVar('_stateToTLE_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
+    _stateToTLE__T = typing.TypeVar('_stateToTLE__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @staticmethod
-    def stateToTLE(fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_stateToTLE_0__T], fieldTLE: 'FieldTLE'[_stateToTLE_0__T]) -> 'FieldTLE'[_stateToTLE_0__T]: ...
-    @typing.overload
-    @staticmethod
-    def stateToTLE(fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_stateToTLE_1__T], fieldTLE: 'FieldTLE'[_stateToTLE_1__T], timeScale: org.orekit.time.TimeScale, frame: org.orekit.frames.Frame) -> 'FieldTLE'[_stateToTLE_1__T]:
+    def stateToTLE(fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_stateToTLE__T], fieldTLE: 'FieldTLE'[_stateToTLE__T], tleGenerationAlgorithm: org.orekit.propagation.analytical.tle.generation.TleGenerationAlgorithm) -> 'FieldTLE'[_stateToTLE__T]:
         """
-            Convert Spacecraft State into TLE. This converter uses Newton method to reverse SGP4 and SDP4 propagation algorithm and
-            generates a usable TLE version of a state. New TLE epoch is state epoch.
-        
-            This method uses :meth:`~org.orekit.propagation.analytical.tle.FieldTLE.EPSILON_DEFAULT` and
-            :meth:`~org.orekit.propagation.analytical.tle.FieldTLE.MAX_ITERATIONS_DEFAULT` for method convergence.
+            Convert Spacecraft State into TLE.
         
             Parameters:
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): Spacecraft State to convert into TLE
                 templateTLE (:class:`~org.orekit.propagation.analytical.tle.FieldTLE`<T> templateTLE): first guess used to get identification and estimate new TLE
-                utc (:class:`~org.orekit.time.TimeScale`): the UTC time scale
-                teme (:class:`~org.orekit.frames.Frame`): the TEME frame to use for propagation
+                generationAlgorithm (:class:`~org.orekit.propagation.analytical.tle.generation.TleGenerationAlgorithm`): TLE generation algorithm
         
             Returns:
-                TLE matching with Spacecraft State and template identification
+                a generated TLE
         
             Since:
-                11.0
-        
-            Also see:
-                :meth:`~org.orekit.propagation.analytical.tle.FieldTLE.stateToTLE`
-        
-            Convert Spacecraft State into TLE. This converter uses Newton method to reverse SGP4 and SDP4 propagation algorithm and
-            generates a usable TLE version of a state. New TLE epoch is state epoch.
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): Spacecraft State to convert into TLE
-                templateTLE (:class:`~org.orekit.propagation.analytical.tle.FieldTLE`<T> templateTLE): first guess used to get identification and estimate new TLE
-                utc (:class:`~org.orekit.time.TimeScale`): the UTC time scale
-                teme (:class:`~org.orekit.frames.Frame`): the TEME frame to use for propagation
-                epsilon (double): used to compute threshold for convergence check
-                maxIterations (int): maximum number of iterations for convergence
-        
-            Returns:
-                TLE matching with Spacecraft State and template identification
-        
-            Since:
-                11.0
+                12.0
         
         
         """
         ...
-    @typing.overload
-    @staticmethod
-    def stateToTLE(fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_stateToTLE_2__T], fieldTLE: 'FieldTLE'[_stateToTLE_2__T], timeScale: org.orekit.time.TimeScale, frame: org.orekit.frames.Frame, double: float, int: int) -> 'FieldTLE'[_stateToTLE_2__T]: ...
     def toString(self) -> str:
         """
             Get a string representation of this TLE set.
@@ -540,7 +504,7 @@ class FieldTLEPropagator(org.orekit.propagation.analytical.FieldAbstractAnalytic
         
             Parameters:
                 tle (:class:`~org.orekit.propagation.analytical.tle.FieldTLE`<T> tle): the TLE to propagate.
-                frames (:class:`~org.orekit.frames.Frames`): set of Frames to use in the propagator.
+                teme (:class:`~org.orekit.frames.Frame`): TEME frame.
                 parameters (T[]): SGP4 and SDP4 model parameters
         
             Returns:
@@ -587,11 +551,11 @@ class FieldTLEPropagator(org.orekit.propagation.analytical.FieldAbstractAnalytic
     def selectExtrapolator(fieldTLE: FieldTLE[_selectExtrapolator_2__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, t: _selectExtrapolator_2__T, frame: org.orekit.frames.Frame, tArray: typing.List[_selectExtrapolator_2__T]) -> 'FieldTLEPropagator'[_selectExtrapolator_2__T]: ...
     @typing.overload
     @staticmethod
-    def selectExtrapolator(fieldTLE: FieldTLE[_selectExtrapolator_3__T], frames: org.orekit.frames.Frames, tArray: typing.List[_selectExtrapolator_3__T]) -> 'FieldTLEPropagator'[_selectExtrapolator_3__T]: ...
+    def selectExtrapolator(fieldTLE: FieldTLE[_selectExtrapolator_3__T], frame: org.orekit.frames.Frame, tArray: typing.List[_selectExtrapolator_3__T]) -> 'FieldTLEPropagator'[_selectExtrapolator_3__T]: ...
 
-class TLE(org.orekit.time.TimeStamped, java.io.Serializable):
+class TLE(org.orekit.time.TimeStamped, java.io.Serializable, org.orekit.utils.ParameterDriversProvider):
     """
-    public class TLE extends :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public class TLE extends :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.orekit.utils.ParameterDriversProvider`
     
         This class is a container for a single set of TLE data.
     
@@ -716,9 +680,23 @@ class TLE(org.orekit.time.TimeStamped, java.io.Serializable):
         
         """
         ...
+    @typing.overload
     def getBStar(self) -> float:
         """
-            Get the ballistic coefficient.
+            Get the ballistic coefficient at tle date.
+        
+            Returns:
+                bStar
+        
+        """
+        ...
+    @typing.overload
+    def getBStar(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+        """
+            Get the ballistic coefficient at a specific date.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): at which the ballistic coefficient wants to be known.
         
             Returns:
                 bStar
@@ -882,22 +860,6 @@ class TLE(org.orekit.time.TimeStamped, java.io.Serializable):
         
         """
         ...
-    def getParameterDriver(self, string: str) -> org.orekit.utils.ParameterDriver:
-        """
-            Get parameter driver from its name.
-        
-            Parameters:
-                name (:class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): parameter name
-        
-            Returns:
-                parameter driver
-        
-            Since:
-                11.1
-        
-        
-        """
-        ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def getPerigeeArgument(self) -> float:
         """
@@ -978,58 +940,25 @@ class TLE(org.orekit.time.TimeStamped, java.io.Serializable):
         
         """
         ...
-    @typing.overload
     @staticmethod
-    def stateToTLE(spacecraftState: org.orekit.propagation.SpacecraftState, tLE: 'TLE') -> 'TLE':
+    def stateToTLE(spacecraftState: org.orekit.propagation.SpacecraftState, tLE: 'TLE', tleGenerationAlgorithm: org.orekit.propagation.analytical.tle.generation.TleGenerationAlgorithm) -> 'TLE':
         """
-            Convert Spacecraft State into TLE. This converter uses Fixed Point method to reverse SGP4 and SDP4 propagation algorithm
-            and generates a usable TLE version of a state. Equinocital orbital parameters are used in order to get a stiff method.
-            New TLE epoch is state epoch.
-        
-            This method uses :meth:`~org.orekit.propagation.analytical.tle.TLE.EPSILON_DEFAULT` and
-            :meth:`~org.orekit.propagation.analytical.tle.TLE.MAX_ITERATIONS_DEFAULT` for method convergence.
+            Convert Spacecraft State into TLE.
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): Spacecraft State to convert into TLE
                 templateTLE (:class:`~org.orekit.propagation.analytical.tle.TLE`): first guess used to get identification and estimate new TLE
-                utc (:class:`~org.orekit.time.TimeScale`): the UTC time scale
-                teme (:class:`~org.orekit.frames.Frame`): the TEME frame to use for propagation
+                generationAlgorithm (:class:`~org.orekit.propagation.analytical.tle.generation.TleGenerationAlgorithm`): TLE generation algorithm
         
             Returns:
-                TLE matching with Spacecraft State and template identification
+                a generated TLE
         
             Since:
-                11.0
-        
-            Also see:
-                :meth:`~org.orekit.propagation.analytical.tle.TLE.stateToTLE`
-        
-            Convert Spacecraft State into TLE. This converter uses Newton method to reverse SGP4 and SDP4 propagation algorithm and
-            generates a usable TLE version of a state. New TLE epoch is state epoch.
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): Spacecraft State to convert into TLE
-                templateTLE (:class:`~org.orekit.propagation.analytical.tle.TLE`): first guess used to get identification and estimate new TLE
-                utc (:class:`~org.orekit.time.TimeScale`): the UTC time scale
-                teme (:class:`~org.orekit.frames.Frame`): the TEME frame to use for propagation
-                epsilon (double): used to compute threshold for convergence check
-                maxIterations (int): maximum number of iterations for convergence
-        
-            Returns:
-                TLE matching with Spacecraft State and template identification
-        
-            Since:
-                11.0
+                12.0
         
         
         """
         ...
-    @typing.overload
-    @staticmethod
-    def stateToTLE(spacecraftState: org.orekit.propagation.SpacecraftState, tLE: 'TLE', timeScale: org.orekit.time.TimeScale, frame: org.orekit.frames.Frame) -> 'TLE': ...
-    @typing.overload
-    @staticmethod
-    def stateToTLE(spacecraftState: org.orekit.propagation.SpacecraftState, tLE: 'TLE', timeScale: org.orekit.time.TimeScale, frame: org.orekit.frames.Frame, double: float, int: int) -> 'TLE': ...
     def toString(self) -> str:
         """
             Get a string representation of this TLE set.
@@ -1113,6 +1042,7 @@ class TLEConstants:
     """
     public static final double XKE
     
+        XKE.
     
         Also see:
             :meth:`~constant`
@@ -1123,6 +1053,7 @@ class TLEConstants:
     """
     public static final double XJ3
     
+        XJ3.
     
         Also see:
             :meth:`~constant`
@@ -1133,6 +1064,7 @@ class TLEConstants:
     """
     public static final double XJ2
     
+        XJ2.
     
         Also see:
             :meth:`~constant`
@@ -1143,6 +1075,7 @@ class TLEConstants:
     """
     public static final double XJ4
     
+        XJ4.
     
         Also see:
             :meth:`~constant`
@@ -1153,6 +1086,7 @@ class TLEConstants:
     """
     public static final double CK2
     
+        CK2.
     
         Also see:
             :meth:`~constant`
@@ -1163,6 +1097,7 @@ class TLEConstants:
     """
     public static final double CK4
     
+        CK4.
     
         Also see:
             :meth:`~constant`
@@ -1173,6 +1108,7 @@ class TLEConstants:
     """
     public static final double S
     
+        S.
     
         Also see:
             :meth:`~constant`
@@ -1183,6 +1119,7 @@ class TLEConstants:
     """
     public static final double QOMS2T
     
+        QOMS2T.
     
         Also see:
             :meth:`~constant`
@@ -1193,6 +1130,7 @@ class TLEConstants:
     """
     public static final double A3OVK2
     
+        A3OVK2.
     
         Also see:
             :meth:`~constant`
@@ -1203,6 +1141,7 @@ class TLEConstants:
     """
     public static final double ZNS
     
+        ZNS.
     
         Also see:
             :meth:`~constant`
@@ -1213,6 +1152,7 @@ class TLEConstants:
     """
     public static final double ZES
     
+        ZES.
     
         Also see:
             :meth:`~constant`
@@ -1223,6 +1163,7 @@ class TLEConstants:
     """
     public static final double ZNL
     
+        ZNL.
     
         Also see:
             :meth:`~constant`
@@ -1233,6 +1174,7 @@ class TLEConstants:
     """
     public static final double ZEL
     
+        ZEL.
     
         Also see:
             :meth:`~constant`
@@ -1243,6 +1185,7 @@ class TLEConstants:
     """
     public static final double THDT
     
+        THDT.
     
         Also see:
             :meth:`~constant`
@@ -1253,6 +1196,7 @@ class TLEConstants:
     """
     public static final double C1SS
     
+        C1SS.
     
         Also see:
             :meth:`~constant`
@@ -1263,6 +1207,7 @@ class TLEConstants:
     """
     public static final double C1L
     
+        C1L.
     
         Also see:
             :meth:`~constant`
@@ -1273,6 +1218,7 @@ class TLEConstants:
     """
     public static final double ROOT22
     
+        ROOT22.
     
         Also see:
             :meth:`~constant`
@@ -1283,6 +1229,7 @@ class TLEConstants:
     """
     public static final double ROOT32
     
+        ROOT32.
     
         Also see:
             :meth:`~constant`
@@ -1293,6 +1240,7 @@ class TLEConstants:
     """
     public static final double ROOT44
     
+        ROOT44.
     
         Also see:
             :meth:`~constant`
@@ -1303,6 +1251,7 @@ class TLEConstants:
     """
     public static final double ROOT52
     
+        ROOT52.
     
         Also see:
             :meth:`~constant`
@@ -1313,6 +1262,7 @@ class TLEConstants:
     """
     public static final double ROOT54
     
+        ROOT54.
     
         Also see:
             :meth:`~constant`
@@ -1323,6 +1273,7 @@ class TLEConstants:
     """
     public static final double Q22
     
+        Q22.
     
         Also see:
             :meth:`~constant`
@@ -1333,6 +1284,7 @@ class TLEConstants:
     """
     public static final double Q31
     
+        Q31.
     
         Also see:
             :meth:`~constant`
@@ -1343,6 +1295,7 @@ class TLEConstants:
     """
     public static final double Q33
     
+        Q33.
     
         Also see:
             :meth:`~constant`
@@ -1353,6 +1306,7 @@ class TLEConstants:
     """
     public static final double C_FASX2
     
+        C_FASX2.
     
         Also see:
             :meth:`~constant`
@@ -1363,6 +1317,7 @@ class TLEConstants:
     """
     public static final double S_FASX2
     
+        S_FASX2.
     
         Also see:
             :meth:`~constant`
@@ -1373,6 +1328,7 @@ class TLEConstants:
     """
     public static final double C_2FASX4
     
+        C_2FASX4.
     
         Also see:
             :meth:`~constant`
@@ -1383,6 +1339,7 @@ class TLEConstants:
     """
     public static final double S_2FASX4
     
+        S_2FASX4.
     
         Also see:
             :meth:`~constant`
@@ -1393,6 +1350,7 @@ class TLEConstants:
     """
     public static final double C_3FASX6
     
+        C_3FASX6.
     
         Also see:
             :meth:`~constant`
@@ -1403,6 +1361,7 @@ class TLEConstants:
     """
     public static final double S_3FASX6
     
+        S_3FASX6.
     
         Also see:
             :meth:`~constant`
@@ -1413,6 +1372,7 @@ class TLEConstants:
     """
     public static final double C_G22
     
+        C_G22.
     
         Also see:
             :meth:`~constant`
@@ -1423,6 +1383,7 @@ class TLEConstants:
     """
     public static final double S_G22
     
+        S_G22.
     
         Also see:
             :meth:`~constant`
@@ -1433,6 +1394,7 @@ class TLEConstants:
     """
     public static final double C_G32
     
+        C_G32.
     
         Also see:
             :meth:`~constant`
@@ -1443,6 +1405,7 @@ class TLEConstants:
     """
     public static final double S_G32
     
+        S_G32.
     
         Also see:
             :meth:`~constant`
@@ -1453,6 +1416,7 @@ class TLEConstants:
     """
     public static final double C_G44
     
+        C_G44.
     
         Also see:
             :meth:`~constant`
@@ -1463,6 +1427,7 @@ class TLEConstants:
     """
     public static final double S_G44
     
+        S_G44.
     
         Also see:
             :meth:`~constant`
@@ -1473,6 +1438,7 @@ class TLEConstants:
     """
     public static final double C_G52
     
+        C_G52.
     
         Also see:
             :meth:`~constant`
@@ -1483,6 +1449,7 @@ class TLEConstants:
     """
     public static final double S_G52
     
+        S_G52.
     
         Also see:
             :meth:`~constant`
@@ -1493,6 +1460,7 @@ class TLEConstants:
     """
     public static final double C_G54
     
+        C_G54.
     
         Also see:
             :meth:`~constant`
@@ -1503,6 +1471,7 @@ class TLEConstants:
     """
     public static final double S_G54
     
+        S_G54.
     
         Also see:
             :meth:`~constant`
@@ -1520,205 +1489,6 @@ class TLEConstants:
     
     
     """
-
-class TLEJacobiansMapper(org.orekit.propagation.integration.AbstractJacobiansMapper):
-    """
-    public class TLEJacobiansMapper extends :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
-    
-        Mapper between two-dimensional Jacobian matrices and one-dimensional
-        :meth:`~org.orekit.propagation.SpacecraftState.getAdditionalState`.
-    
-        This class does not hold the states by itself. Instances of this class are guaranteed to be immutable.
-    
-        Since:
-            11.0
-    
-        Also see:
-            :class:`~org.orekit.propagation.analytical.tle.TLEPartialDerivativesEquations`,
-            :class:`~org.orekit.propagation.analytical.tle.TLEPropagator`,
-            :meth:`~org.orekit.propagation.SpacecraftState.getAdditionalState`, :class:`~org.orekit.propagation.AbstractPropagator`
-    """
-    STATE_DIMENSION: typing.ClassVar[int] = ...
-    """
-    public static final int STATE_DIMENSION
-    
-        State dimension, fixed to 6.
-    
-        Also see:
-            :meth:`~constant`
-    
-    
-    """
-    def __init__(self, string: str, parameterDriversList: org.orekit.utils.ParameterDriversList, tLEPropagator: 'TLEPropagator'): ...
-    def analyticalDerivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
-        """
-            Deprecated.
-            as of 11.1, not used anymore
-            Not used anymore.
-        
-            Overrides:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.analyticalDerivatives` in
-                class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
-        
-            Parameters:
-                s (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
-        
-        
-        """
-        ...
-    @typing.overload
-    def getParametersJacobian(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.hipparchus.linear.RealMatrix:
-        """
-            Get the Jacobian with respect to parameters from a one-dimensional additional state array.
-        
-            This method extract the data from the :code:`state` and put it in the :code:`dYdP` array.
-        
-            If no parameters have been set in the constructor, the method returns immediately and does not reference :code:`dYdP`
-            which can safely be null in this case.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getParametersJacobian` in
-                class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
-                dYdP (double[][]): placeholder where to put the Jacobian with respect to parameters
-        
-            Also see:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getStateJacobian`
-        
-        
-        """
-        ...
-    @typing.overload
-    def getParametersJacobian(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[typing.List[float]]) -> None: ...
-    def getStateJacobian(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[typing.List[float]]) -> None:
-        """
-            Get the Jacobian with respect to state from a one-dimensional additional state array.
-        
-            This method extract the data from the :code:`state` and put it in the :code:`dYdY0` array.
-        
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getStateJacobian` in
-                class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
-                dYdY0 (double[][]): placeholder where to put the Jacobian with respect to state
-        
-            Also see:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getParametersJacobian`
-        
-        
-        """
-        ...
-    def setInitialJacobians(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[typing.List[float]], doubleArray2: typing.List[typing.List[float]], doubleArray3: typing.List[float]) -> None:
-        """
-            Set the Jacobian with respect to state into a one-dimensional additional state array.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.setInitialJacobians` in
-                class :class:`~org.orekit.propagation.integration.AbstractJacobiansMapper`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
-                dY1dY0 (double[][]): Jacobian of current state at time t₁ with respect to state at some previous time t₀
-                dY1dP (double[][]): Jacobian of current state at time t₁ with respect to parameters (may be null if there are no parameters)
-                p (double[]): placeholder where to put the one-dimensional additional state
-        
-            Also see:
-                :meth:`~org.orekit.propagation.integration.AbstractJacobiansMapper.getStateJacobian`
-        
-        
-        """
-        ...
-
-class TLEPartialDerivativesEquations:
-    """
-    :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class TLEPartialDerivativesEquations extends :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
-    
-        Deprecated.
-        Set of additional equations computing the partial derivatives of the state (orbit) with respect to initial state.
-    
-        This set of equations are automatically added to an
-        :class:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator` in order to compute partial derivatives of the
-        orbit along with the orbit itself. This is useful for example in orbit determination applications.
-    
-        The partial derivatives with respect to initial state are dimension 6 (orbit only).
-    
-        Since:
-            11.0
-    """
-    def __init__(self, string: str, tLEPropagator: 'TLEPropagator'): ...
-    def getMapper(self) -> TLEJacobiansMapper:
-        """
-            Deprecated.
-            Get a mapper between two-dimensional Jacobians and one-dimensional additional state.
-        
-            Returns:
-                a mapper between two-dimensional Jacobians and one-dimensional additional state, with the same name as the instance
-        
-            Also see:
-                :meth:`~org.orekit.propagation.analytical.tle.TLEPartialDerivativesEquations.setInitialJacobians`,
-                :meth:`~org.orekit.propagation.analytical.tle.TLEPartialDerivativesEquations.setInitialJacobians`
-        
-        
-        """
-        ...
-    def getName(self) -> str:
-        """
-            Deprecated.
-            Get the name of the additional state.
-        
-            Returns:
-                name of the additional state
-        
-        
-        """
-        ...
-    @typing.overload
-    def setInitialJacobians(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.orekit.propagation.SpacecraftState:
-        """
-            Deprecated.
-            Set the initial value of the Jacobian with respect to state and parameter.
-        
-            This method is equivalent to call
-            :meth:`~org.orekit.propagation.analytical.tle.TLEPartialDerivativesEquations.setInitialJacobians` with dYdY0 set to the
-            identity matrix and dYdP set to a zero matrix.
-        
-            The force models parameters for which partial derivatives are desired, *must* have been
-            :meth:`~org.orekit.utils.ParameterDriver.setSelected` before this method is called, so proper matrices dimensions are
-            used.
-        
-            Parameters:
-                s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
-        
-            Returns:
-                state with initial Jacobians added
-        
-        """
-        ...
-    @typing.overload
-    def setInitialJacobians(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[typing.List[float]], doubleArray2: typing.List[typing.List[float]]) -> org.orekit.propagation.SpacecraftState:
-        """
-            Deprecated.
-            Set the initial value of the Jacobian with respect to state and parameter.
-        
-            The returned state must be added to the propagator (it is not done automatically, as the user may need to add more
-            states to it).
-        
-            Parameters:
-                s1 (:class:`~org.orekit.propagation.SpacecraftState`): current state
-                dY1dY0 (double[][]): Jacobian of current state at time t₁ with respect to state at some previous time t₀ (must be 6x6)
-                dY1dP (double[][]): Jacobian of current state at time t₁ with respect to parameters (may be null if no parameters are selected)
-        
-            Returns:
-                state with initial Jacobians added
-        
-        
-        """
-        ...
 
 class TLEPropagator(org.orekit.propagation.analytical.AbstractAnalyticalPropagator):
     """
@@ -1745,6 +1515,24 @@ class TLEPropagator(org.orekit.propagation.analytical.AbstractAnalyticalPropagat
         Also see:
             :class:`~org.orekit.propagation.analytical.tle.TLE`
     """
+    @staticmethod
+    def getDefaultTleGenerationAlgorithm(timeScale: org.orekit.time.TimeScale, frame: org.orekit.frames.Frame) -> org.orekit.propagation.analytical.tle.generation.TleGenerationAlgorithm:
+        """
+            Get the default TLE generation algorithm.
+        
+            Parameters:
+                utc (:class:`~org.orekit.time.TimeScale`): UTC time scale
+                teme (:class:`~org.orekit.frames.Frame`): TEME frame
+        
+            Returns:
+                a TLE generation algorithm
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
     def getFrame(self) -> org.orekit.frames.Frame:
         """
             Get the frame in which the orbit is propagated.
@@ -1833,7 +1621,7 @@ class TLEPropagator(org.orekit.propagation.analytical.AbstractAnalyticalPropagat
         
             Parameters:
                 tle (:class:`~org.orekit.propagation.analytical.tle.TLE`): the TLE to propagate.
-                frames (:class:`~org.orekit.frames.Frames`): set of Frames to use in the propagator.
+                teme (:class:`~org.orekit.frames.Frame`): TEME frame.
         
             Returns:
                 the correct propagator.
@@ -1883,7 +1671,7 @@ class TLEPropagator(org.orekit.propagation.analytical.AbstractAnalyticalPropagat
     def selectExtrapolator(tLE: TLE, attitudeProvider: org.orekit.attitudes.AttitudeProvider, double: float, frame: org.orekit.frames.Frame) -> 'TLEPropagator': ...
     @typing.overload
     @staticmethod
-    def selectExtrapolator(tLE: TLE, frames: org.orekit.frames.Frames) -> 'TLEPropagator': ...
+    def selectExtrapolator(tLE: TLE, frame: org.orekit.frames.Frame) -> 'TLEPropagator': ...
 
 _FieldSGP4__T = typing.TypeVar('_FieldSGP4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldSGP4(FieldTLEPropagator[_FieldSGP4__T], typing.Generic[_FieldSGP4__T]):
@@ -2024,6 +1812,7 @@ class PythonFieldSDP4(org.orekit.propagation.analytical.tle.FieldSDP4[_PythonFie
     """
     public class PythonFieldSDP4<T extends :class:`~org.orekit.propagation.analytical.tle.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.tle.FieldTLEPropagator`<T>
     """
+    def __init__(self, fieldTLE: FieldTLE[_PythonFieldSDP4__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, t: _PythonFieldSDP4__T, frame: org.orekit.frames.Frame, tArray: typing.List[_PythonFieldSDP4__T]): ...
     def deepPeriodicEffects(self, t: _PythonFieldSDP4__T) -> None:
         """
             Computes periodic terms from current coordinates and epoch.
@@ -2091,6 +1880,5 @@ class __module_protocol__(typing.Protocol):
     SGP4: typing.Type[SGP4]
     TLE: typing.Type[TLE]
     TLEConstants: typing.Type[TLEConstants]
-    TLEJacobiansMapper: typing.Type[TLEJacobiansMapper]
-    TLEPartialDerivativesEquations: typing.Type[TLEPartialDerivativesEquations]
     TLEPropagator: typing.Type[TLEPropagator]
+    generation: org.orekit.propagation.analytical.tle.generation.__module_protocol__

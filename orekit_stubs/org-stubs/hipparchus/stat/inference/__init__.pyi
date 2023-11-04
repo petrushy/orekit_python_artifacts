@@ -48,6 +48,7 @@ class AlternativeHypothesis(java.lang.Enum['AlternativeHypothesis']):
         
             .. code-block: java
             
+            
             for (AlternativeHypothesis c : AlternativeHypothesis.values())
                 System.out.println(c);
             
@@ -121,7 +122,7 @@ class BinomialTest:
             The lower value is added to the p-Value (if both values are equal, both are added). Then we continue with the next
             extreme value, until we added the value for the actual observed sample.
         
-            **Preconditions**:
+            * **Preconditions**:
         
               - Number of trials must be ≥ 0.
               - Number of successes must be ≥ 0.
@@ -151,6 +152,16 @@ class BinomialTest:
         ...
 
 class ChiSquareTest:
+    """
+    public class ChiSquareTest extends :class:`~org.hipparchus.stat.inference.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Implements Chi-Square test statistics.
+    
+        This implementation handles both known and unknown distributions.
+    
+        Two samples tests can be used when the distribution is unknown *a priori* but provided by one sample, or when the
+        hypothesis under test is that the two samples come from the same underlying distribution.
+    """
     def __init__(self): ...
     @typing.overload
     def chiSquare(self, doubleArray: typing.List[float], longArray: typing.List[int]) -> float: ...
@@ -171,6 +182,17 @@ class ChiSquareTest:
     def chiSquareTestDataSetsComparison(self, longArray: typing.List[int], longArray2: typing.List[int]) -> float: ...
 
 class GTest:
+    """
+    public class GTest extends :class:`~org.hipparchus.stat.inference.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Implements `G Test <http://en.wikipedia.org/wiki/G-test>` statistics.
+    
+        This is known in statistical genetics as the McDonald-Kreitman test. The implementation handles both known and unknown
+        distributions.
+    
+        Two samples tests can be used when the distribution is unknown *a priori* but provided by one sample, or when the
+        hypothesis under test is that the two samples come from the same underlying distribution.
+    """
     def __init__(self): ...
     def g(self, doubleArray: typing.List[float], longArray: typing.List[int]) -> float: ...
     def gDataSetsComparison(self, longArray: typing.List[int], longArray2: typing.List[int]) -> float: ...
@@ -183,7 +205,37 @@ class GTest:
     @typing.overload
     def gTestDataSetsComparison(self, longArray: typing.List[int], longArray2: typing.List[int]) -> float: ...
     def gTestIntrinsic(self, doubleArray: typing.List[float], longArray: typing.List[int]) -> float: ...
-    def rootLogLikelihoodRatio(self, long: int, long2: int, long3: int, long4: int) -> float: ...
+    def rootLogLikelihoodRatio(self, long: int, long2: int, long3: int, long4: int) -> float:
+        """
+            Calculates the root log-likelihood ratio for 2 state Datasets. See
+            :meth:`~org.hipparchus.stat.inference.GTest.gDataSetsComparison`.
+        
+            Given two events A and B, let k11 be the number of times both events occur, k12 the incidence of B without A, k21 the
+            count of A without B, and k22 the number of times neither A nor B occurs. What is returned by this method is
+        
+            :code:`(sgn) sqrt(gValueDataSetsComparison({k11, k12}, {k21, k22})`
+        
+            where :code:`sgn` is -1 if :code:`k11 / (k11 + k12) < k21 / (k21 + k22))`;
+        
+        
+            1 otherwise.
+        
+            Signed root LLR has two advantages over the basic LLR: a) it is positive where k11 is bigger than expected, negative
+            where it is lower b) if there is no difference it is asymptotically normally distributed. This allows one to talk about
+            "number of standard deviations" which is a more common frame of reference than the chi^2 distribution.
+        
+            Parameters:
+                k11 (long): number of times the two events occurred together (AB)
+                k12 (long): number of times the second event occurred WITHOUT the first event (notA,B)
+                k21 (long): number of times the first event occurred WITHOUT the second event (A, notB)
+                k22 (long): number of times something else occurred (i.e. was neither of these events (notA, notB)
+        
+            Returns:
+                root log-likelihood ratio
+        
+        
+        """
+        ...
 
 class InferenceTestUtils:
     """
@@ -194,9 +246,24 @@ class InferenceTestUtils:
     @staticmethod
     def approximateP(double: float, int: int, int2: int) -> float:
         """
+            Uses the Kolmogorov-Smirnov distribution to approximate \(P(D_{n,m} > d)\) where \(D_{n,m}\) is the 2-sample
+            Kolmogorov-Smirnov statistic. See
+            :meth:`~org.hipparchus.stat.inference.KolmogorovSmirnovTest.kolmogorovSmirnovStatistic` for the definition of
+            \(D_{n,m}\).
         
-            Also see:
-                :meth:`~org.hipparchus.stat.inference.KolmogorovSmirnovTest.approximateP`
+            Specifically, what is returned is \(1 - k(d \sqrt{mn / (m + n)})\) where \(k(t) = 1 + 2 \sum_{i=1}^\infty (-1)^i e^{-2
+            i^2 t^2}\). See :meth:`~org.hipparchus.stat.inference.KolmogorovSmirnovTest.ksSum` for details on how convergence of the
+            sum is determined. This implementation passes :code:`ksSum`
+            :meth:`~org.hipparchus.stat.inference.KolmogorovSmirnovTest.KS_SUM_CAUCHY_CRITERION` as :code:`tolerance` and
+            :meth:`~org.hipparchus.stat.inference.KolmogorovSmirnovTest.MAXIMUM_PARTIAL_SUM_COUNT` as :code:`maxIterations`.
+        
+            Parameters:
+                d (double): D-statistic value
+                n (int): first sample size
+                m (int): second sample size
+        
+            Returns:
+                approximate probability that a randomly selected m-n partition of m + n generates \(D_{n,m}\) greater than :code:`d`
         
         
         """
@@ -230,9 +297,23 @@ class InferenceTestUtils:
     @staticmethod
     def exactP(double: float, int: int, int2: int, boolean: bool) -> float:
         """
+            Computes \(P(D_{n,m} > d)\) if :code:`strict` is :code:`true`; otherwise \(P(D_{n,m} \ge d)\), where \(D_{n,m}\) is the
+            2-sample Kolmogorov-Smirnov statistic. See
+            :meth:`~org.hipparchus.stat.inference.KolmogorovSmirnovTest.kolmogorovSmirnovStatistic` for the definition of
+            \(D_{n,m}\).
         
-            Also see:
-                :meth:`~org.hipparchus.stat.inference.KolmogorovSmirnovTest.exactP`
+            The returned probability is exact, implemented by unwinding the recursive function definitions presented in [4] from the
+            class javadoc.
+        
+            Parameters:
+                d (double): D-statistic value
+                n (int): first sample size
+                m (int): second sample size
+                strict (boolean): whether or not the probability to compute is expressed as a strict inequality
+        
+            Returns:
+                probability that a randomly selected m-n partition of m + n generates \(D_{n,m}\) greater than (resp. greater than or
+                equal to) :code:`d`
         
         
         """
@@ -449,6 +530,7 @@ class KolmogorovSmirnovTest:
             is true, this is equivalent to the algorithm implemented in the R function :code:`ks.boot`, described in
         
             .. code-block: java
+            
             
              Jasjeet S. Sekhon. 2011. 'Multivariate and Propensity Score Matching
              Software with Automated Balance Optimization: The Matching package for R.'
@@ -745,6 +827,7 @@ class OneWayAnova:
     
         .. code-block: java
         
+        
          Abbreviations: bg = between groups,
                         wg = within groups,
                         ss = sum squared deviations
@@ -758,9 +841,51 @@ class OneWayAnova:
     def anovaTest(self, collection: typing.Union[java.util.Collection[typing.List[float]], typing.Sequence[typing.List[float]], typing.Set[typing.List[float]]], double: float) -> bool: ...
 
 class TTest:
+    """
+    public class TTest extends :class:`~org.hipparchus.stat.inference.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        An implementation for Student's t-tests.
+    
+        Tests can be:
+    
+          - One-sample or two-sample
+          - One-sided or two-sided
+          - Paired or unpaired (for two-sample tests)
+          - Homoscedastic (equal variance assumption) or heteroscedastic (for two sample tests)
+          - Fixed significance level (boolean-valued) or returning p-values.
+    
+    
+        Test statistics are available for all tests. Methods including "Test" in in their names perform tests, all other methods
+        return t-statistics. Among the "Test" methods, :code:`double-`valued methods return p-values; :code:`boolean-`valued
+        methods perform fixed significance level tests. Significance levels are always specified as numbers between 0 and 0.5
+        (e.g. tests at the 95% level use :code:`alpha=0.05`).
+    
+        Input to tests can be either :code:`double[]` arrays or :class:`~org.hipparchus.stat.descriptive.StatisticalSummary`
+        instances.
+    
+        Uses Hipparchus :class:`~org.hipparchus.stat.inference.https:.www.hipparchus.org.hipparchus` implementation to estimate
+        exact p-values.
+    """
     def __init__(self): ...
     @typing.overload
-    def homoscedasticT(self, doubleArray: typing.List[float], doubleArray2: typing.List[float]) -> float: ...
+    def homoscedasticT(self, doubleArray: typing.List[float], doubleArray2: typing.List[float]) -> float:
+        """
+            Computes t test statistic for 2-sample t-test under the hypothesis of equal subpopulation variances.
+        
+            Parameters:
+                m1 (double): first sample mean
+                m2 (double): second sample mean
+                v1 (double): first sample variance
+                v2 (double): second sample variance
+                n1 (double): first sample n
+                n2 (double): second sample n
+        
+            Returns:
+                t test statistic
+        
+        
+        """
+        ...
     @typing.overload
     def homoscedasticT(self, statisticalSummary: org.hipparchus.stat.descriptive.StatisticalSummary, statisticalSummary2: org.hipparchus.stat.descriptive.StatisticalSummary) -> float: ...
     @typing.overload
@@ -775,7 +900,37 @@ class TTest:
     @typing.overload
     def pairedTTest(self, doubleArray: typing.List[float], doubleArray2: typing.List[float]) -> float: ...
     @typing.overload
-    def t(self, double: float, doubleArray: typing.List[float]) -> float: ...
+    def t(self, double: float, doubleArray: typing.List[float]) -> float:
+        """
+            Computes t test statistic for 1-sample t-test.
+        
+            Parameters:
+                m (double): sample mean
+                mu (double): constant to test against
+                v (double): sample variance
+                n (double): sample n
+        
+            Returns:
+                t test statistic
+        
+            Computes t test statistic for 2-sample t-test.
+        
+            Does not assume that subpopulation variances are equal.
+        
+            Parameters:
+                m1 (double): first sample mean
+                m2 (double): second sample mean
+                v1 (double): first sample variance
+                v2 (double): second sample variance
+                n1 (double): first sample n
+                n2 (double): second sample n
+        
+            Returns:
+                t test statistic
+        
+        
+        """
+        ...
     @typing.overload
     def t(self, double: float, statisticalSummary: org.hipparchus.stat.descriptive.StatisticalSummary) -> float: ...
     @typing.overload

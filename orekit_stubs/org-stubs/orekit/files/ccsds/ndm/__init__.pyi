@@ -1,9 +1,11 @@
 import java.lang
 import java.util
+import java.util.function
 import org.hipparchus.complex
 import org.orekit.data
 import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm.adm
+import org.orekit.files.ccsds.ndm.adm.acm
 import org.orekit.files.ccsds.ndm.adm.aem
 import org.orekit.files.ccsds.ndm.adm.apm
 import org.orekit.files.ccsds.ndm.cdm
@@ -55,6 +57,26 @@ class AbstractBuilder(typing.Generic[_AbstractBuilder__T]):
         
         """
         ...
+    def getEquatorialRadius(self) -> float:
+        """
+            Get the central body equatorial radius.
+        
+            Returns:
+                central body equatorial radius
+        
+        
+        """
+        ...
+    def getFlattening(self) -> float:
+        """
+            Get the central body flattening.
+        
+            Returns:
+                central body flattening
+        
+        
+        """
+        ...
     def getMissionReferenceDate(self) -> org.orekit.time.AbsoluteDate:
         """
             Get the mission reference date or Mission Elapsed Time or Mission Relative Time time systems.
@@ -101,6 +123,32 @@ class AbstractBuilder(typing.Generic[_AbstractBuilder__T]):
         
         """
         ...
+    def withEquatorialRadius(self, double: float) -> _AbstractBuilder__T:
+        """
+            Set up the central body equatorial radius.
+        
+            Parameters:
+                newEquatorialRadius (double): central body equatorial radius
+        
+            Returns:
+                a new builder with updated configuration (the instance is not changed)
+        
+        
+        """
+        ...
+    def withFlattening(self, double: float) -> _AbstractBuilder__T:
+        """
+            Set up the central body flattening.
+        
+            Parameters:
+                newFlattening (double): central body flattening
+        
+            Returns:
+                a new builder with updated configuration (the instance is not changed)
+        
+        
+        """
+        ...
     def withMissionReferenceDate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> _AbstractBuilder__T:
         """
             Set up mission reference date or Mission Elapsed Time or Mission Relative Time time systems.
@@ -138,8 +186,8 @@ class CommonPhysicalProperties(org.orekit.files.ccsds.section.CommentsContainer)
     """
     public class CommonPhysicalProperties extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
     
-        Container for common physical properties for both :class:`~org.orekit.files.ccsds.ndm.odm.ocm.PhysicalProperties` and
-        :class:`~org.orekit.files.ccsds.ndm.cdm.AdditionalParameters`.
+        Container for common physical properties for both :class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitPhysicalProperties`
+        and :class:`~org.orekit.files.ccsds.ndm.cdm.AdditionalParameters`.
     
         Since:
             11.3
@@ -566,6 +614,17 @@ class NdmConstituent(typing.Generic[_NdmConstituent__H, _NdmConstituent__S]):
         """
         ...
     def getSegments(self) -> java.util.List[_NdmConstituent__S]: ...
+    def setHeader(self, h: _NdmConstituent__H) -> None:
+        """
+            Set the header.
+        
+            Parameters:
+                header (:class:`~org.orekit.files.ccsds.ndm.NdmConstituent`): the header
+        
+        
+        """
+        ...
+    def setSegments(self, list: java.util.List[_NdmConstituent__S]) -> None: ...
     def validate(self) -> None:
         """
             Validate the file message for required and forbidden entries.
@@ -585,7 +644,7 @@ class NdmParser(org.orekit.files.ccsds.utils.parsing.AbstractMessageParser[Ndm])
         Since:
             11.0
     """
-    def __init__(self, parserBuilder: 'ParserBuilder'): ...
+    def __init__(self, parserBuilder: 'ParserBuilder', functionArray: typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]): ...
     def addComment(self, string: str) -> bool:
         """
             Add comment.
@@ -725,6 +784,19 @@ class ParserBuilder(AbstractBuilder['ParserBuilder']):
     def __init__(self): ...
     @typing.overload
     def __init__(self, dataContext: org.orekit.data.DataContext): ...
+    def buildAcmParser(self) -> org.orekit.files.ccsds.ndm.adm.acm.AcmParser:
+        """
+            Build a parser for :class:`~org.orekit.files.ccsds.ndm.adm.acm.Acm`.
+        
+            Returns:
+                a new parser
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
     def buildAemParser(self) -> org.orekit.files.ccsds.ndm.adm.aem.AemParser:
         """
             Build a parser for :class:`~org.orekit.files.ccsds.ndm.adm.aem.Aem`.
@@ -835,6 +907,7 @@ class ParserBuilder(AbstractBuilder['ParserBuilder']):
         
         """
         ...
+    def getFilters(self) -> typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]: ...
     def getMu(self) -> float:
         """
             Get the gravitational coefficient.
@@ -896,6 +969,7 @@ class ParserBuilder(AbstractBuilder['ParserBuilder']):
         
         """
         ...
+    def withFilter(self, function: typing.Union[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]], typing.Callable[[org.orekit.files.ccsds.utils.lexical.ParseToken], java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]) -> 'ParserBuilder': ...
     def withMu(self, double: float) -> 'ParserBuilder':
         """
             Set up the gravitational coefficient.
@@ -941,7 +1015,8 @@ class PythonAbstractBuilder(AbstractBuilder[_PythonAbstractBuilder__T], typing.G
     """
     public class PythonAbstractBuilder<T extends :class:`~org.orekit.files.ccsds.ndm.AbstractBuilder`<T>> extends :class:`~org.orekit.files.ccsds.ndm.AbstractBuilder`<T>
     """
-    def create(self, iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, rangeUnitsConverter: org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter) -> _PythonAbstractBuilder__T:
+    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, double: float, double2: float, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, rangeUnitsConverter: org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter): ...
+    def create(self, iERSConventions: org.orekit.utils.IERSConventions, double: float, double2: float, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, rangeUnitsConverter: org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter) -> _PythonAbstractBuilder__T:
         """
             Build an instance.
         
@@ -951,6 +1026,8 @@ class PythonAbstractBuilder(AbstractBuilder[_PythonAbstractBuilder__T], typing.G
         
             Parameters:
                 newConventions (:class:`~org.orekit.utils.IERSConventions`): IERS Conventions
+                newEquatorialRadius (double): central body equatorial radius
+                newFlattening (double): central body flattening
                 newDataContext (:class:`~org.orekit.data.DataContext`): used to retrieve frames, time scales, etc.
                 newMissionReferenceDate (:class:`~org.orekit.time.AbsoluteDate`): reference date for Mission Elapsed Time or Mission Relative Time time systems
                 newRangeUnitsConverter (:class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`): converter for :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU`
@@ -988,6 +1065,7 @@ class PythonNdmConstituent(NdmConstituent[_PythonNdmConstituent__H, _PythonNdmCo
     """
     public class PythonNdmConstituent<H extends :class:`~org.orekit.files.ccsds.section.Header`, S extends :class:`~org.orekit.files.ccsds.section.Segment`<?, ?>> extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<H, S>
     """
+    def __init__(self, h: _PythonNdmConstituent__H, list: java.util.List[_PythonNdmConstituent__S], iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext): ...
     def finalize(self) -> None: ...
     def getConventions(self) -> org.orekit.utils.IERSConventions:
         """
@@ -1085,6 +1163,19 @@ class WriterBuilder(AbstractBuilder['WriterBuilder']):
     def __init__(self): ...
     @typing.overload
     def __init__(self, dataContext: org.orekit.data.DataContext): ...
+    def buildAcmWriter(self) -> org.orekit.files.ccsds.ndm.adm.acm.AcmWriter:
+        """
+            Build a writer for :class:`~org.orekit.files.ccsds.ndm.adm.acm.Acm`.
+        
+            Returns:
+                a new writer
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
     def buildAemWriter(self) -> org.orekit.files.ccsds.ndm.adm.aem.AemWriter:
         """
             Build a writer for :class:`~org.orekit.files.ccsds.ndm.adm.aem.Aem`.

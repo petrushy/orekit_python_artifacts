@@ -102,8 +102,8 @@ class FieldElement(typing.Generic[_FieldElement__T]):
     @typing.overload
     def multiply(self, int: int) -> _FieldElement__T:
         """
-            Compute n × this. Multiplication by an integer number is defined as the following sum
-            n × this = ∑ :sub:`i=1` :sup:`n` this.
+            Compute n × this. Multiplication by an integer number is defined as the following sum \[ n \times \mathrm{this} =
+            \sum_{i=1}^n \mathrm{this} \]
         
             Parameters:
                 n (int): Number of times :code:`this` must be added to itself.
@@ -111,7 +111,7 @@ class FieldElement(typing.Generic[_FieldElement__T]):
             Returns:
                 A new element representing n × this.
         
-        :class:`~org.hipparchus.FieldElement` multiply(:class:`~org.hipparchus.FieldElement` a) throws :class:`~org.hipparchus.exception.NullArgumentException`
+        :class:`~org.hipparchus.FieldElement` multiply (:class:`~org.hipparchus.FieldElement` a) throws :class:`~org.hipparchus.exception.NullArgumentException`
         
             Compute this × a.
         
@@ -637,7 +637,7 @@ class CalculusFieldElement(FieldElement[_CalculusFieldElement__T], typing.Generi
             Returns:
                 this :sup:`n`
         
-        :class:`~org.hipparchus.CalculusFieldElement` pow(:class:`~org.hipparchus.CalculusFieldElement` e) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
+        :class:`~org.hipparchus.CalculusFieldElement` pow (:class:`~org.hipparchus.CalculusFieldElement` e) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
         
             Power operation.
         
