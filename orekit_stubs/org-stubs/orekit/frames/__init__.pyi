@@ -4120,7 +4120,24 @@ class PythonTransformProvider(TransformProvider):
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    _getTransform_1__T = typing.TypeVar('_getTransform_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getTransform_0__T = typing.TypeVar('_getTransform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getTransform(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTransform_0__T]) -> FieldTransform[_getTransform_0__T]:
+        """
+            Get the :class:`~org.orekit.frames.FieldTransform` corresponding to specified date.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.TransformProvider.getTransform` in interface :class:`~org.orekit.frames.TransformProvider`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
+        
+            Returns:
+                transform at specified date
+        
+        
+        """
+        ...
     @typing.overload
     def getTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> 'Transform':
         """
@@ -4134,43 +4151,6 @@ class PythonTransformProvider(TransformProvider):
         
             Returns:
                 transform at specified date
-        
-        """
-        ...
-    @typing.overload
-    def getTransform(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTransform_1__T]) -> FieldTransform[_getTransform_1__T]:
-        """
-            Get the :class:`~org.orekit.frames.FieldTransform` corresponding to specified date.
-        
-            Specified by:
-                :meth:`~org.orekit.frames.TransformProvider.getTransform` in interface :class:`~org.orekit.frames.TransformProvider`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-        
-            Returns:
-                transform at specified date
-        
-            Since:
-                9.0
-        
-        
-        """
-        ...
-    _getTransform_F__T = typing.TypeVar('_getTransform_F__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getTransform_F(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTransform_F__T]) -> FieldTransform[_getTransform_F__T]:
-        """
-            Get the :class:`~org.orekit.frames.FieldTransform` corresponding to specified date.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-        
-            Returns:
-                transform at specified date
-        
-            Since:
-                9.0
-        
         
         """
         ...
@@ -5632,7 +5612,24 @@ class PythonEOPBasedTransformProvider(EOPBasedTransformProvider):
         
         """
         ...
-    _getTransform_1__T = typing.TypeVar('_getTransform_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getTransform_0__T = typing.TypeVar('_getTransform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getTransform(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTransform_0__T]) -> FieldTransform[_getTransform_0__T]:
+        """
+            Get the :class:`~org.orekit.frames.FieldTransform` corresponding to specified date.
+        
+            Specified by:
+                :meth:`~org.orekit.frames.TransformProvider.getTransform` in interface :class:`~org.orekit.frames.TransformProvider`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
+        
+            Returns:
+                transform at specified date
+        
+        
+        """
+        ...
     @typing.overload
     def getTransform(self, absoluteDate: org.orekit.time.AbsoluteDate) -> Transform:
         """
@@ -5646,43 +5643,6 @@ class PythonEOPBasedTransformProvider(EOPBasedTransformProvider):
         
             Returns:
                 transform at specified date
-        
-        """
-        ...
-    @typing.overload
-    def getTransform(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTransform_1__T]) -> FieldTransform[_getTransform_1__T]:
-        """
-            Get the :class:`~org.orekit.frames.FieldTransform` corresponding to specified date.
-        
-            Specified by:
-                :meth:`~org.orekit.frames.TransformProvider.getTransform` in interface :class:`~org.orekit.frames.TransformProvider`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-        
-            Returns:
-                transform at specified date
-        
-            Since:
-                9.0
-        
-        
-        """
-        ...
-    _getTransform_F__T = typing.TypeVar('_getTransform_F__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getTransform_F(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTransform_F__T]) -> FieldTransform[_getTransform_F__T]:
-        """
-            Get the :class:`~org.orekit.frames.FieldTransform` corresponding to specified date.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-        
-            Returns:
-                transform at specified date
-        
-            Since:
-                9.0
-        
         
         """
         ...

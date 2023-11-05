@@ -615,6 +615,27 @@ class PythonFieldOrekitStepInterpolator(FieldOrekitStepInterpolator[_PythonField
         ...
     def restrictStep(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldOrekitStepInterpolator__T], fieldSpacecraftState2: org.orekit.propagation.FieldSpacecraftState[_PythonFieldOrekitStepInterpolator__T]) -> FieldOrekitStepInterpolator[_PythonFieldOrekitStepInterpolator__T]: ...
 
+class PythonMultiSatFixedStepHandler(MultiSatFixedStepHandler):
+    """
+    public class PythonMultiSatFixedStepHandler extends :class:`~org.orekit.propagation.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.sampling.MultiSatFixedStepHandler`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def finish(self, list: java.util.List[org.orekit.propagation.SpacecraftState]) -> None: ...
+    def handleStep(self, list: java.util.List[org.orekit.propagation.SpacecraftState]) -> None: ...
+    def init(self, list: java.util.List[org.orekit.propagation.SpacecraftState], absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> None: ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+        public long pythonExtension()
+        
+        
+        """
+        ...
+
 class PythonMultiSatStepHandler(MultiSatStepHandler):
     """
     public class PythonMultiSatStepHandler extends :class:`~org.orekit.propagation.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.sampling.MultiSatStepHandler`
@@ -1104,6 +1125,7 @@ class __module_protocol__(typing.Protocol):
     PythonFieldOrekitFixedStepHandler: typing.Type[PythonFieldOrekitFixedStepHandler]
     PythonFieldOrekitStepHandler: typing.Type[PythonFieldOrekitStepHandler]
     PythonFieldOrekitStepInterpolator: typing.Type[PythonFieldOrekitStepInterpolator]
+    PythonMultiSatFixedStepHandler: typing.Type[PythonMultiSatFixedStepHandler]
     PythonMultiSatStepHandler: typing.Type[PythonMultiSatStepHandler]
     PythonOrekitFixedStepHandler: typing.Type[PythonOrekitFixedStepHandler]
     PythonOrekitStepHandler: typing.Type[PythonOrekitStepHandler]

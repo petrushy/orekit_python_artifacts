@@ -63,7 +63,7 @@ class PythonGNSSAttitudeProvider(GNSSAttitudeProvider):
                 frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
         
             Returns:
-                attitude attitude on the specified date and position-velocity state
+                attitude on the specified date and position-velocity state
         
         """
         ...
@@ -81,29 +81,7 @@ class PythonGNSSAttitudeProvider(GNSSAttitudeProvider):
                 frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
         
             Returns:
-                attitude attitude on the specified date and position-velocity state
-        
-            Since:
-                9.0
-        
-        
-        """
-        ...
-    _getAttitude_FFF__T = typing.TypeVar('_getAttitude_FFF__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getAttitude_FFF(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_FFF__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_FFF__T], frame: org.orekit.frames.Frame) -> org.orekit.attitudes.FieldAttitude[_getAttitude_FFF__T]:
-        """
-            Compute the attitude corresponding to an orbital state.
-        
-            Parameters:
-                pvProv (:class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T> pvProv): local position-velocity provider around current date
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
-        
-            Returns:
-                attitude attitude on the specified date and position-velocity state
-        
-            Since:
-                9.0
+                attitude on the specified date and position-velocity state
         
         
         """

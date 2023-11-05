@@ -1255,6 +1255,41 @@ class FieldAdapterDetector(FieldEventDetector[_FieldAdapterDetector__T], typing.
         ...
     def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldAdapterDetector__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldAdapterDetector__T]) -> None: ...
 
+class PythonAdaptableInterval(AdaptableInterval):
+    """
+    public class PythonAdaptableInterval extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.AdaptableInterval`
+    """
+    def __init__(self): ...
+    def currentInterval(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
+        """
+            Get the current value of maximal time interval between events handler checks.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.AdaptableInterval.currentInterval` in
+                interface :class:`~org.orekit.propagation.events.AdaptableInterval`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): current state
+        
+            Returns:
+                current value of maximal time interval between events handler checks
+        
+        
+        """
+        ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+        public long pythonExtension()
+        
+        
+        """
+        ...
+
 class PythonEnablingPredicate(EnablingPredicate):
     """
     public class PythonEnablingPredicate extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.EnablingPredicate`
@@ -1400,6 +1435,74 @@ class PythonEventDetector(EventDetector):
         
         """
         ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+        public long pythonExtension()
+        
+        
+        """
+        ...
+
+class PythonEventDetectorsProvider(EventDetectorsProvider):
+    """
+    public class PythonEventDetectorsProvider extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.EventDetectorsProvider`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    @typing.overload
+    def getEventDetectors(self, list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[EventDetector]: ...
+    @typing.overload
+    def getEventDetectors(self) -> java.util.stream.Stream[EventDetector]: ...
+    _getFieldEventDetectors_0__T = typing.TypeVar('_getFieldEventDetectors_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getFieldEventDetectors_1__T = typing.TypeVar('_getFieldEventDetectors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_0__T], list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[FieldEventDetector[_getFieldEventDetectors_0__T]]: ...
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_1__T]) -> java.util.stream.Stream[FieldEventDetector[_getFieldEventDetectors_1__T]]: ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+        public long pythonExtension()
+        
+        
+        """
+        ...
+
+_PythonFieldAdaptableInterval__T = typing.TypeVar('_PythonFieldAdaptableInterval__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class PythonFieldAdaptableInterval(FieldAdaptableInterval[_PythonFieldAdaptableInterval__T], typing.Generic[_PythonFieldAdaptableInterval__T]):
+    """
+    public class PythonFieldAdaptableInterval<T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.FieldAdaptableInterval`<T>
+    """
+    def __init__(self): ...
+    def currentInterval(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldAdaptableInterval__T]) -> float: ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+        public long pythonExtension()
+        
+        
+        """
+        ...
+
+_PythonFieldEnablingPredicate__T = typing.TypeVar('_PythonFieldEnablingPredicate__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class PythonFieldEnablingPredicate(FieldEnablingPredicate[_PythonFieldEnablingPredicate__T], typing.Generic[_PythonFieldEnablingPredicate__T]):
+    """
+    public class PythonFieldEnablingPredicate<T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.FieldEnablingPredicate`<T>
+    """
+    def __init__(self): ...
+    def eventIsEnabled(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldEnablingPredicate__T], fieldEventDetector: FieldEventDetector[_PythonFieldEnablingPredicate__T], t: _PythonFieldEnablingPredicate__T) -> bool: ...
+    def finalize(self) -> None: ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
@@ -5226,9 +5329,13 @@ class __module_protocol__(typing.Protocol):
     ParameterDrivenDateIntervalDetector: typing.Type[ParameterDrivenDateIntervalDetector]
     PositionAngleDetector: typing.Type[PositionAngleDetector]
     PythonAbstractDetector: typing.Type[PythonAbstractDetector]
+    PythonAdaptableInterval: typing.Type[PythonAdaptableInterval]
     PythonEnablingPredicate: typing.Type[PythonEnablingPredicate]
     PythonEventDetector: typing.Type[PythonEventDetector]
+    PythonEventDetectorsProvider: typing.Type[PythonEventDetectorsProvider]
     PythonFieldAbstractDetector: typing.Type[PythonFieldAbstractDetector]
+    PythonFieldAdaptableInterval: typing.Type[PythonFieldAdaptableInterval]
+    PythonFieldEnablingPredicate: typing.Type[PythonFieldEnablingPredicate]
     PythonFieldEventDetector: typing.Type[PythonFieldEventDetector]
     VisibilityTrigger: typing.Type[VisibilityTrigger]
     handlers: org.orekit.propagation.events.handlers.__module_protocol__

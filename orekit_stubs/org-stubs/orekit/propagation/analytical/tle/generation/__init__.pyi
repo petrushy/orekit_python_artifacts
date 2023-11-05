@@ -283,35 +283,10 @@ class PythonTleGenerationAlgorithm(TleGenerationAlgorithm):
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    _generate_1__T = typing.TypeVar('_generate_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _generate_0__T = typing.TypeVar('_generate_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def generate(self, spacecraftState: org.orekit.propagation.SpacecraftState, tLE: org.orekit.propagation.analytical.tle.TLE) -> org.orekit.propagation.analytical.tle.TLE:
+    def generate(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_generate_0__T], fieldTLE: org.orekit.propagation.analytical.tle.FieldTLE[_generate_0__T]) -> org.orekit.propagation.analytical.tle.FieldTLE[_generate_0__T]:
         """
-            Description copied from
-            interface: :meth:`~org.orekit.propagation.analytical.tle.generation.TleGenerationAlgorithm.generate`
-            Generate a TLE from a given spacecraft state and a template TLE.
-        
-            The template TLE is only used to get identifiers like satellite number, launch year, etc. In other words, the keplerian
-            elements contained in the generate TLE a based on the provided state and not the template TLE.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.tle.generation.TleGenerationAlgorithm.generate` in
-                interface :class:`~org.orekit.propagation.analytical.tle.generation.TleGenerationAlgorithm`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
-                templateTLE (:class:`~org.orekit.propagation.analytical.tle.TLE`): template TLE
-        
-            Returns:
-                a TLE corresponding to the given state
-        
-        """
-        ...
-    @typing.overload
-    def generate(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_generate_1__T], fieldTLE: org.orekit.propagation.analytical.tle.FieldTLE[_generate_1__T]) -> org.orekit.propagation.analytical.tle.FieldTLE[_generate_1__T]:
-        """
-            Description copied from
-            interface: :meth:`~org.orekit.propagation.analytical.tle.generation.TleGenerationAlgorithm.generate`
             Generate a TLE from a given spacecraft state and a template TLE.
         
             The template TLE is only used to get identifiers like satellite number, launch year, etc. In other words, the keplerian
@@ -331,8 +306,27 @@ class PythonTleGenerationAlgorithm(TleGenerationAlgorithm):
         
         """
         ...
-    _generate_FF__T = typing.TypeVar('_generate_FF__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def generate_FF(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_generate_FF__T], fieldTLE: org.orekit.propagation.analytical.tle.FieldTLE[_generate_FF__T]) -> org.orekit.propagation.analytical.tle.FieldTLE[_generate_FF__T]: ...
+    @typing.overload
+    def generate(self, spacecraftState: org.orekit.propagation.SpacecraftState, tLE: org.orekit.propagation.analytical.tle.TLE) -> org.orekit.propagation.analytical.tle.TLE:
+        """
+            Generate a TLE from a given spacecraft state and a template TLE.
+        
+            The template TLE is only used to get identifiers like satellite number, launch year, etc. In other words, the keplerian
+            elements contained in the generate TLE a based on the provided state and not the template TLE.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.tle.generation.TleGenerationAlgorithm.generate` in
+                interface :class:`~org.orekit.propagation.analytical.tle.generation.TleGenerationAlgorithm`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
+                templateTLE (:class:`~org.orekit.propagation.analytical.tle.TLE`): template TLE
+        
+            Returns:
+                a TLE corresponding to the given state
+        
+        """
+        ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...

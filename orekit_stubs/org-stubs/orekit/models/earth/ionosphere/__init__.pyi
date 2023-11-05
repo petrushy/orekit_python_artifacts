@@ -809,21 +809,23 @@ class PythonIonosphericModel(IonosphericModel):
     @typing.overload
     def getParameters(self) -> typing.List[float]:
         """
-            Get ionospheric model parameters.
+            Get model parameters.
         
             Specified by:
                 :meth:`~org.orekit.utils.ParameterDriversProvider.getParameters` in
                 interface :class:`~org.orekit.utils.ParameterDriversProvider`
         
             Returns:
-                ionospheric model parameters
+                model parameters, will throw an exception if one PDriver has several values driven. If it's the case (if at least 1
+                PDriver of the model has several values driven) the method
+                :meth:`~org.orekit.utils.ParameterDriversProvider.getParameters` must be used.
         
         """
         ...
     @typing.overload
     def getParameters(self, field: org.hipparchus.Field[_getParameters_3__T]) -> typing.List[_getParameters_3__T]:
         """
-            Get ionospheric model parameters.
+            Get model parameters.
         
             Specified by:
                 :meth:`~org.orekit.utils.ParameterDriversProvider.getParameters` in
@@ -833,14 +835,14 @@ class PythonIonosphericModel(IonosphericModel):
                 field (:class:`~org.orekit.models.earth.ionosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
         
             Returns:
-                ionospheric model parameters
+                model parameters, will throw an exception if one PDriver of the has several values driven. If it's the case (if at least
+                1 PDriver of the model has several values driven) the method
+                :meth:`~org.orekit.utils.ParameterDriversProvider.getParameters` must be used.
         
         
         """
         ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    _getParameters_F__T = typing.TypeVar('_getParameters_F__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getParameters_F(self, field: org.hipparchus.Field[_getParameters_F__T]) -> typing.List[_getParameters_F__T]: ...
     _pathDelay_1__T = typing.TypeVar('_pathDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def pathDelay(self, spacecraftState: org.orekit.propagation.SpacecraftState, topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, doubleArray: typing.List[float]) -> float:
@@ -861,7 +863,7 @@ class PythonIonosphericModel(IonosphericModel):
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
                 baseFrame (:class:`~org.orekit.frames.TopocentricFrame`): base frame associated with the station
                 frequency (double): frequency of the signal in Hz
-                parameters (double[]): ionospheric model parameters
+                parameters (double[]): ionospheric model parameters at state date
         
             Returns:
                 the path delay due to the ionosphere in m
@@ -887,7 +889,7 @@ class PythonIonosphericModel(IonosphericModel):
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
                 baseFrame (:class:`~org.orekit.frames.TopocentricFrame`): base frame associated with the station
                 frequency (double): frequency of the signal in Hz
-                parameters (T[]): ionospheric model parameters
+                parameters (T[]): ionospheric model parameters at state date
         
             Returns:
                 the path delay due to the ionosphere in m
@@ -895,9 +897,6 @@ class PythonIonosphericModel(IonosphericModel):
         
         """
         ...
-    _pathDelay_FTdT__T = typing.TypeVar('_pathDelay_FTdT__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def pathDelay_FTdT(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_pathDelay_FTdT__T], topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, tArray: typing.List[_pathDelay_FTdT__T]) -> _pathDelay_FTdT__T: ...
-    def pathDelay_STdd(self, spacecraftState: org.orekit.propagation.SpacecraftState, topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, doubleArray: typing.List[float]) -> float: ...
     def pythonDecRef(self) -> None:
         """
             Part of JCC Python interface to object

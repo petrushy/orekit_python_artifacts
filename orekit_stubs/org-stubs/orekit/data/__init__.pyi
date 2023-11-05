@@ -2278,34 +2278,6 @@ class PythonSeriesTerm(SeriesTerm):
         
         """
         ...
-    _argumentDerivative_F__T = typing.TypeVar('_argumentDerivative_F__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def argumentDerivative_F(self, fieldBodiesElements: FieldBodiesElements[_argumentDerivative_F__T]) -> _argumentDerivative_F__T:
-        """
-            Compute the time derivative of the argument for the current date. Extension point for Python.
-        
-            Parameters:
-                elements (:class:`~org.orekit.data.FieldBodiesElements`<T> elements): luni-solar and planetary elements for the current date
-        
-            Returns:
-                current time derivative of the argument
-        
-        
-        """
-        ...
-    _argument_F__T = typing.TypeVar('_argument_F__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def argument_F(self, fieldBodiesElements: FieldBodiesElements[_argument_F__T]) -> _argument_F__T:
-        """
-            Compute the argument for the current date. Extension point for Python
-        
-            Parameters:
-                elements (:class:`~org.orekit.data.FieldBodiesElements`<T> elements): luni-solar and planetary elements for the current date
-        
-            Returns:
-                current value of the argument
-        
-        
-        """
-        ...
     def finalize(self) -> None: ...
     def pythonDecRef(self) -> None:
         """

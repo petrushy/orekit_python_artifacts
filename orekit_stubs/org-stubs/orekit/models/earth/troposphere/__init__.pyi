@@ -797,21 +797,23 @@ class PythonDiscreteTroposphericModel(DiscreteTroposphericModel):
     @typing.overload
     def getParameters(self) -> typing.List[float]:
         """
-            Get tropospheric model parameters. Extension point for Python.
+            Get model parameters.
         
             Specified by:
                 :meth:`~org.orekit.utils.ParameterDriversProvider.getParameters` in
                 interface :class:`~org.orekit.utils.ParameterDriversProvider`
         
             Returns:
-                tropospheric model parameters
+                model parameters, will throw an exception if one PDriver has several values driven. If it's the case (if at least 1
+                PDriver of the model has several values driven) the method
+                :meth:`~org.orekit.utils.ParameterDriversProvider.getParameters` must be used.
         
         """
         ...
     @typing.overload
     def getParameters(self, field: org.hipparchus.Field[_getParameters_3__T]) -> typing.List[_getParameters_3__T]:
         """
-            Get tropospheric model parameters. Extension point for Python.
+            Get model parameters.
         
             Specified by:
                 :meth:`~org.orekit.utils.ParameterDriversProvider.getParameters` in
@@ -821,32 +823,19 @@ class PythonDiscreteTroposphericModel(DiscreteTroposphericModel):
                 field (:class:`~org.orekit.models.earth.troposphere.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
         
             Returns:
-                tropospheric model parameters
+                model parameters, will throw an exception if one PDriver of the has several values driven. If it's the case (if at least
+                1 PDriver of the model has several values driven) the method
+                :meth:`~org.orekit.utils.ParameterDriversProvider.getParameters` must be used.
         
         
         """
         ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    _getParameters_F__T = typing.TypeVar('_getParameters_F__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getParameters_F(self, field: org.hipparchus.Field[_getParameters_F__T]) -> typing.List[_getParameters_F__T]:
-        """
-            Get tropospheric model parameters. Extension point for Python.
-        
-            Parameters:
-                field (:class:`~org.orekit.models.earth.troposphere.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
-        
-            Returns:
-                tropospheric model parameters
-        
-        
-        """
-        ...
     _pathDelay_1__T = typing.TypeVar('_pathDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def pathDelay(self, double: float, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> float:
         """
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite. Extension point for
-            Python.
+            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
             Specified by:
                 :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
@@ -854,8 +843,8 @@ class PythonDiscreteTroposphericModel(DiscreteTroposphericModel):
         
             Parameters:
                 elevation (double): the elevation of the satellite, in radians
-                height (:class:`~org.orekit.bodies.GeodeticPoint`): the height of the station in m above sea level
-                parameters (double[]): tropospheric model parameters.
+                point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
+                parameters (double[]): tropospheric model parameters
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
         
             Returns:
@@ -866,8 +855,7 @@ class PythonDiscreteTroposphericModel(DiscreteTroposphericModel):
     @typing.overload
     def pathDelay(self, t: _pathDelay_1__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_1__T], tArray: typing.List[_pathDelay_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_1__T]) -> _pathDelay_1__T:
         """
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite. Redirects to
-            pathDelay_TTTF(...) for Python extension
+            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
             Specified by:
                 :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
@@ -875,26 +863,8 @@ class PythonDiscreteTroposphericModel(DiscreteTroposphericModel):
         
             Parameters:
                 elevation (T): the elevation of the satellite, in radians
-                height (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): the height of the station in m above sea level
-                parameters (T[]): tropospheric model parameters.
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-        
-            Returns:
-                the path delay due to the troposphere in m
-        
-        
-        """
-        ...
-    _pathDelay_TTTF__T = typing.TypeVar('_pathDelay_TTTF__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def pathDelay_TTTF(self, t: _pathDelay_TTTF__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_TTTF__T], tArray: typing.List[_pathDelay_TTTF__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_TTTF__T]) -> _pathDelay_TTTF__T:
-        """
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite. Extension point for
-            Python. Called by pathDelay for this parameter set.
-        
-            Parameters:
-                elevation (T): the elevation of the satellite, in radians
-                height (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): the height of the station in m above sea level
-                parameters (T[]): tropospheric model parameters.
+                point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
+                parameters (T[]): tropospheric model parameters at current date
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
             Returns:
@@ -924,20 +894,80 @@ class PythonDiscreteTroposphericModel(DiscreteTroposphericModel):
         ...
 
 class PythonMappingFunction(MappingFunction):
+    """
+    public class PythonMappingFunction extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.MappingFunction`
+    """
     def __init__(self): ...
     def finalize(self) -> None: ...
     _mappingFactors_1__T = typing.TypeVar('_mappingFactors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def mappingFactors(self, double: float, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]: ...
+    def mappingFactors(self, double: float, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]:
+        """
+            This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
+            having the following form:
+        
+              - double[0] = m :sub:`h` (e) → hydrostatic mapping function
+              - double[1] = m :sub:`w` (e) → wet mapping function
+        
+        
+            Specified by:
+                :meth:`~org.orekit.models.earth.troposphere.MappingFunction.mappingFactors` in
+                interface :class:`~org.orekit.models.earth.troposphere.MappingFunction`
+        
+            Parameters:
+                elevation (double): the elevation of the satellite, in radians
+                point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+        
+            Returns:
+                a two components array containing the hydrostatic and wet mapping functions.
+        
+        """
+        ...
     @typing.overload
-    def mappingFactors(self, t: _mappingFactors_1__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_1__T]) -> typing.List[_mappingFactors_1__T]: ...
-    _mappingFactors_TTTF__T = typing.TypeVar('_mappingFactors_TTTF__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def mappingFactors_TTTF(self, t: _mappingFactors_TTTF__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_TTTF__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_TTTF__T]) -> typing.List[_mappingFactors_TTTF__T]: ...
-    def pythonDecRef(self) -> None: ...
+    def mappingFactors(self, t: _mappingFactors_1__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_1__T]) -> typing.List[_mappingFactors_1__T]:
+        """
+            This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
+            having the following form:
+        
+              - T[0] = m :sub:`h` (e) → hydrostatic mapping function
+              - T[1] = m :sub:`w` (e) → wet mapping function
+        
+        
+            Specified by:
+                :meth:`~org.orekit.models.earth.troposphere.MappingFunction.mappingFactors` in
+                interface :class:`~org.orekit.models.earth.troposphere.MappingFunction`
+        
+            Parameters:
+                elevation (T): the elevation of the satellite, in radians
+                point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
+        
+            Returns:
+                a two components array containing the hydrostatic and wet mapping functions.
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
 
 class SaastamoinenModel(DiscreteTroposphericModel):
     """

@@ -444,8 +444,6 @@ class PythonAccelerationModel(AccelerationModel):
         
         """
         ...
-    _signedAmplitude_FT__T = typing.TypeVar('_signedAmplitude_FT__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def signedAmplitude_FT(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_signedAmplitude_FT__T], tArray: typing.List[_signedAmplitude_FT__T]) -> _signedAmplitude_FT__T: ...
 
 
 class __module_protocol__(typing.Protocol):

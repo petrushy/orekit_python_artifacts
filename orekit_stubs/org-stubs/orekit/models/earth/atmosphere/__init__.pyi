@@ -1107,7 +1107,7 @@ class PythonAtmosphere(Atmosphere):
     @typing.overload
     def getDensity(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame) -> float:
         """
-            Get the local density. Extension point for Python.
+            Get the local density.
         
             Specified by:
                 :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity` in
@@ -1126,27 +1126,11 @@ class PythonAtmosphere(Atmosphere):
     @typing.overload
     def getDensity(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getDensity_1__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getDensity_1__T], frame: org.orekit.frames.Frame) -> _getDensity_1__T:
         """
-            Get the local density. Redirects to getDensity_FFF
+            Get the local density.
         
             Specified by:
                 :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getDensity` in
                 interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): current position in frame
-                frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
-        
-            Returns:
-                local density (kg/m³)
-        
-        
-        """
-        ...
-    _getDensity_FFF__T = typing.TypeVar('_getDensity_FFF__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getDensity_FFF(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getDensity_FFF__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getDensity_FFF__T], frame: org.orekit.frames.Frame) -> _getDensity_FFF__T:
-        """
-            Get the local density. Extension point for Python.
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
@@ -1170,17 +1154,34 @@ class PythonAtmosphere(Atmosphere):
             Returns:
                 frame of the central body.
         
-            Since:
-                6.0
+        
+        """
+        ...
+    _getVelocity_0__T = typing.TypeVar('_getVelocity_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getVelocity(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getVelocity_0__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getVelocity_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getVelocity_0__T]:
+        """
+            Get the inertial velocity of atmosphere molecules.
+        
+            Specified by:
+                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getVelocity` in
+                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
+                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): current position in frame
+                frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
+        
+            Returns:
+                velocity (m/s) (defined in the same frame as the position)
         
         
         """
         ...
-    _getVelocity_1__T = typing.TypeVar('_getVelocity_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def getVelocity(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Get the inertial velocity of atmosphere molecules. Extension point for Python.
+            Get the inertial velocity of atmosphere molecules.
         
             By default, atmosphere is supposed to have a null velocity in the central body frame.
         
@@ -1195,42 +1196,6 @@ class PythonAtmosphere(Atmosphere):
         
             Returns:
                 velocity (m/s) (defined in the same frame as the position)
-        
-        """
-        ...
-    @typing.overload
-    def getVelocity(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getVelocity_1__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getVelocity_1__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getVelocity_1__T]:
-        """
-            Get the inertial velocity of atmosphere molecules. Redirects to getVelocity_FFF(...)
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.atmosphere.Atmosphere.getVelocity` in
-                interface :class:`~org.orekit.models.earth.atmosphere.Atmosphere`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): current position in frame
-                frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
-        
-            Returns:
-                velocity (m/s) (defined in the same frame as the position)
-        
-        
-        """
-        ...
-    _getVelocity_FFF__T = typing.TypeVar('_getVelocity_FFF__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getVelocity_FFF(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getVelocity_FFF__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getVelocity_FFF__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getVelocity_FFF__T]:
-        """
-            Get the inertial velocity of atmosphere molecules. Extension point for Python.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                position (:class:`~org.orekit.models.earth.atmosphere.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> position): current position in frame
-                frame (:class:`~org.orekit.frames.Frame`): the frame in which is defined the position
-        
-            Returns:
-                velocity (m/s) (defined in the same frame as the position)
-        
         
         """
         ...

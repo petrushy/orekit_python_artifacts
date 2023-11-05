@@ -531,7 +531,22 @@ class PythonAbstractRadiationForceModel(AbstractRadiationForceModel):
     public class PythonAbstractRadiationForceModel extends :class:`~org.orekit.forces.radiation.AbstractRadiationForceModel`
     """
     def __init__(self, extendedPVCoordinatesProvider: org.orekit.utils.ExtendedPVCoordinatesProvider, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid): ...
-    _acceleration_1__T = typing.TypeVar('_acceleration_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _acceleration_0__T = typing.TypeVar('_acceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], tArray: typing.List[_acceleration_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
+        """
+            Compute acceleration.
+        
+            Parameters:
+                s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
+                parameters (T[]): values of the force model parameters at state date, only 1 value for each parameterDriver
+        
+            Returns:
+                acceleration in same frame as state
+        
+        
+        """
+        ...
     @typing.overload
     def acceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
@@ -546,23 +561,6 @@ class PythonAbstractRadiationForceModel(AbstractRadiationForceModel):
         
         """
         ...
-    @typing.overload
-    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_1__T], tArray: typing.List[_acceleration_1__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_1__T]:
-        """
-            Compute acceleration.
-        
-            Parameters:
-                s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
-                parameters (T[]): values of the force model parameters at state date, only 1 value for each parameterDriver
-        
-            Returns:
-                acceleration in same frame as state
-        
-        
-        """
-        ...
-    _acceleration_FT__T = typing.TypeVar('_acceleration_FT__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def acceleration_FT(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_FT__T], tArray: typing.List[_acceleration_FT__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_FT__T]: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _init_0__T = typing.TypeVar('_init_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
@@ -602,33 +600,10 @@ class PythonRadiationSensitive(RadiationSensitive):
         
         """
         ...
-    _radiationPressureAcceleration_1__T = typing.TypeVar('_radiationPressureAcceleration_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _radiationPressureAcceleration_0__T = typing.TypeVar('_radiationPressureAcceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def radiationPressureAcceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def radiationPressureAcceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_radiationPressureAcceleration_0__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_radiationPressureAcceleration_0__T], tArray: typing.List[_radiationPressureAcceleration_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_radiationPressureAcceleration_0__T]:
         """
-            Description copied from
-            interface: :meth:`~org.orekit.forces.radiation.RadiationSensitive.radiationPressureAcceleration`
-            Compute the acceleration due to radiation pressure.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.radiation.RadiationSensitive.radiationPressureAcceleration` in
-                interface :class:`~org.orekit.forces.radiation.RadiationSensitive`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): current state
-                flux (:class:`~org.orekit.forces.radiation.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): radiation flux in the same inertial frame as spacecraft orbit
-                parameters (double[]): values of the force model parameters
-        
-            Returns:
-                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/s²)
-        
-        """
-        ...
-    @typing.overload
-    def radiationPressureAcceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_radiationPressureAcceleration_1__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_radiationPressureAcceleration_1__T], tArray: typing.List[_radiationPressureAcceleration_1__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_radiationPressureAcceleration_1__T]:
-        """
-            Description copied from
-            interface: :meth:`~org.orekit.forces.radiation.RadiationSensitive.radiationPressureAcceleration`
             Compute the acceleration due to radiation pressure.
         
             Specified by:
@@ -646,8 +621,25 @@ class PythonRadiationSensitive(RadiationSensitive):
         
         """
         ...
-    _radiationPressureAcceleration_FFT__T = typing.TypeVar('_radiationPressureAcceleration_FFT__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def radiationPressureAcceleration_FFT(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_radiationPressureAcceleration_FFT__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_radiationPressureAcceleration_FFT__T], tArray: typing.List[_radiationPressureAcceleration_FFT__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_radiationPressureAcceleration_FFT__T]: ...
+    @typing.overload
+    def radiationPressureAcceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Compute the acceleration due to radiation pressure.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.radiation.RadiationSensitive.radiationPressureAcceleration` in
+                interface :class:`~org.orekit.forces.radiation.RadiationSensitive`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): current state
+                flux (:class:`~org.orekit.forces.radiation.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): radiation flux in the same inertial frame as spacecraft orbit
+                parameters (double[]): values of the force model parameters
+        
+            Returns:
+                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/s²)
+        
+        """
+        ...
 
 class SolarRadiationPressure(AbstractRadiationForceModel):
     """

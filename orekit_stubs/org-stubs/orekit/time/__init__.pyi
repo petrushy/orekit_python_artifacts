@@ -4823,20 +4823,6 @@ class PythonTimeScalarFunction(TimeScalarFunction):
         
         """
         ...
-    _value_F__T = typing.TypeVar('_value_F__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def value_F(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_value_F__T]) -> _value_F__T:
-        """
-            Compute a function of time.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date
-        
-            Returns:
-                value of the function
-        
-        
-        """
-        ...
 
 class PythonTimeScale(TimeScale):
     """
@@ -4896,30 +4882,6 @@ class PythonTimeScale(TimeScale):
             Returns:
                 offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
                 time scale*
-        
-            Since:
-                9.0
-        
-            Also see:
-                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
-        
-        
-        """
-        ...
-    _offsetFromTAI_F__T = typing.TypeVar('_offsetFromTAI_F__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def offsetFromTAI_F(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_F__T]) -> _offsetFromTAI_F__T:
-        """
-            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): conversion date
-        
-            Returns:
-                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
-                time scale*
-        
-            Since:
-                9.0
         
             Also see:
                 :meth:`~org.orekit.time.TimeScale.offsetToTAI`
@@ -5555,20 +5517,6 @@ class PythonTimeVectorFunction(TimeVectorFunction):
         
             Specified by:
                 :meth:`~org.orekit.time.TimeVectorFunction.value` in interface :class:`~org.orekit.time.TimeVectorFunction`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date
-        
-            Returns:
-                value of the function
-        
-        
-        """
-        ...
-    _value_F__T = typing.TypeVar('_value_F__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def value_F(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_value_F__T]) -> typing.List[_value_F__T]:
-        """
-            Compute a function of time.
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date

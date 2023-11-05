@@ -6341,6 +6341,24 @@ class ParameterDriversList:
     class DelegatingDriver(ParameterDriver):
         def getRawDrivers(self) -> java.util.List[ParameterDriver]: ...
 
+class PythonConstants(Constants):
+    """
+    public class PythonConstants extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.utils.Constants`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+        public long pythonExtension()
+        
+        
+        """
+        ...
+
 _PythonFieldPVCoordinatesProvider__T = typing.TypeVar('_PythonFieldPVCoordinatesProvider__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldPVCoordinatesProvider(FieldPVCoordinatesProvider[_PythonFieldPVCoordinatesProvider__T], typing.Generic[_PythonFieldPVCoordinatesProvider__T]):
     """
@@ -6366,6 +6384,43 @@ class PythonFieldPVCoordinatesProvider(FieldPVCoordinatesProvider[_PythonFieldPV
     def pythonExtension(self, long: int) -> None:
         """
             Part of JCC Python interface to object
+        """
+        ...
+
+_PythonFieldTimeStampedCache__T = typing.TypeVar('_PythonFieldTimeStampedCache__T', bound=org.orekit.time.FieldTimeStamped)  # <T>
+_PythonFieldTimeStampedCache__KK = typing.TypeVar('_PythonFieldTimeStampedCache__KK', bound=org.hipparchus.CalculusFieldElement)  # <KK>
+class PythonFieldTimeStampedCache(FieldTimeStampedCache[_PythonFieldTimeStampedCache__T, _PythonFieldTimeStampedCache__KK], typing.Generic[_PythonFieldTimeStampedCache__T, _PythonFieldTimeStampedCache__KK]):
+    """
+    public class PythonFieldTimeStampedCache<T extends :class:`~org.orekit.time.FieldTimeStamped`<KK>, KK extends :class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<KK>> extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.utils.FieldTimeStampedCache`<T, KK>
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def getEarliest(self) -> _PythonFieldTimeStampedCache__T: ...
+    def getLatest(self) -> _PythonFieldTimeStampedCache__T: ...
+    def getNeighbors(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldTimeStampedCache__KK]) -> java.util.stream.Stream[_PythonFieldTimeStampedCache__T]: ...
+    def getNeighborsSize(self) -> int:
+        """
+            Get the fixed size of the lists returned by :meth:`~org.orekit.utils.FieldTimeStampedCache.getNeighbors`.
+        
+            Specified by:
+                :meth:`~org.orekit.utils.FieldTimeStampedCache.getNeighborsSize` in
+                interface :class:`~org.orekit.utils.FieldTimeStampedCache`
+        
+            Returns:
+                size of the list
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+        public long pythonExtension()
+        
+        
         """
         ...
 
@@ -7425,28 +7480,9 @@ class PythonExtendedPVCoordinatesProvider(ExtendedPVCoordinatesProvider):
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    _getPVCoordinates_1__T = typing.TypeVar('_getPVCoordinates_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getPVCoordinates_0__T = typing.TypeVar('_getPVCoordinates_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getPVCoordinates(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> TimeStampedPVCoordinates:
-        """
-            Get the :class:`~org.orekit.utils.PVCoordinates` of the body in the selected frame.
-        
-            Specified by:
-                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates` in
-                interface :class:`~org.orekit.utils.PVCoordinatesProvider`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                frame (:class:`~org.orekit.frames.Frame`): the frame where to define the position
-        
-            Returns:
-                time-stamped position/velocity of the body (m and m/s)
-        
-        
-        """
-        ...
-    @typing.overload
-    def getPVCoordinates(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPVCoordinates_1__T], frame: org.orekit.frames.Frame) -> TimeStampedFieldPVCoordinates[_getPVCoordinates_1__T]:
+    def getPVCoordinates(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPVCoordinates_0__T], frame: org.orekit.frames.Frame) -> TimeStampedFieldPVCoordinates[_getPVCoordinates_0__T]:
         """
             Get the :class:`~org.orekit.utils.FieldPVCoordinates` of the body in the selected frame.
         
@@ -7463,13 +7499,17 @@ class PythonExtendedPVCoordinatesProvider(ExtendedPVCoordinatesProvider):
         
         """
         ...
-    _getPVCoordinates_FF__T = typing.TypeVar('_getPVCoordinates_FF__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getPVCoordinates_FF(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPVCoordinates_FF__T], frame: org.orekit.frames.Frame) -> TimeStampedFieldPVCoordinates[_getPVCoordinates_FF__T]:
+    @typing.overload
+    def getPVCoordinates(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> TimeStampedPVCoordinates:
         """
-            Get the :class:`~org.orekit.utils.FieldPVCoordinates` of the body in the selected frame.
+            Get the :class:`~org.orekit.utils.PVCoordinates` of the body in the selected frame.
+        
+            Specified by:
+                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates` in
+                interface :class:`~org.orekit.utils.PVCoordinatesProvider`
         
             Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
                 frame (:class:`~org.orekit.frames.Frame`): the frame where to define the position
         
             Returns:
@@ -7550,8 +7590,10 @@ class __module_protocol__(typing.Protocol):
     ParameterFunction: typing.Type[ParameterFunction]
     ParameterObserver: typing.Type[ParameterObserver]
     PythonAbstractMultipleShooting: typing.Type[PythonAbstractMultipleShooting]
+    PythonConstants: typing.Type[PythonConstants]
     PythonExtendedPVCoordinatesProvider: typing.Type[PythonExtendedPVCoordinatesProvider]
     PythonFieldPVCoordinatesProvider: typing.Type[PythonFieldPVCoordinatesProvider]
+    PythonFieldTimeStampedCache: typing.Type[PythonFieldTimeStampedCache]
     PythonMultipleShooting: typing.Type[PythonMultipleShooting]
     PythonPVCoordinatesProvider: typing.Type[PythonPVCoordinatesProvider]
     PythonParameterDriversProvider: typing.Type[PythonParameterDriversProvider]

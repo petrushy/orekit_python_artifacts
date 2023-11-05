@@ -3206,8 +3206,8 @@ class PythonFieldPropagator(FieldPropagator[_PythonFieldPropagator__T], typing.G
                 interface :class:`~org.orekit.propagation.FieldPropagator`
         
             Also see:
-                :meth:`~org.orekit.propagation.PythonFieldPropagator.addEventDetector`,
-                :meth:`~org.orekit.propagation.PythonFieldPropagator.getEventsDetectors`
+                :meth:`~org.orekit.propagation.FieldPropagator.addEventDetector`,
+                :meth:`~org.orekit.propagation.FieldPropagator.getEventsDetectors`
         
         
         """
@@ -3244,7 +3244,7 @@ class PythonFieldPropagator(FieldPropagator[_PythonFieldPropagator__T], typing.G
                 frame in which the orbit is propagated
         
             Also see:
-                :meth:`~org.orekit.propagation.PythonFieldPropagator.resetInitialState`
+                :meth:`~org.orekit.propagation.FieldPropagator.resetInitialState`
         
         
         """
@@ -3272,14 +3272,17 @@ class PythonFieldPropagator(FieldPropagator[_PythonFieldPropagator__T], typing.G
         
             Managed states are states for which the propagators know how to compute its evolution. They correspond to additional
             states for which an :class:`~org.orekit.propagation.FieldAdditionalStateProvider` has been registered by calling the
-            :meth:`~org.orekit.propagation.PythonFieldPropagator.addAdditionalStateProvider` method. If the propagator is an
+            :meth:`~org.orekit.propagation.FieldPropagator.addAdditionalStateProvider` method. If the propagator is an
             :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`, the states for which a set of
-            :code:`additional equations` has been registered by calling the :code:`addAdditionalEquations` method are also counted
-            as managed additional states.
+            :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider` has been registered by calling the
+            :meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.addAdditionalDerivativesProvider` method
+            are also counted as managed additional states.
         
-            Additional states that are present in the :meth:`~org.orekit.propagation.PythonFieldPropagator.getInitialState` but have
-            no evolution method registered are *not* considered as managed states. These unmanaged additional states are not lost
-            during propagation, though. Their value will simply be copied unchanged throughout propagation.
+            Additional states that are present in the :meth:`~org.orekit.propagation.FieldPropagator.getInitialState` but have no
+            evolution method registered are *not* considered as managed states. These unmanaged additional states are not lost
+            during propagation, though. Their value are piecewise constant between state resets that may change them if some event
+            handler :meth:`~org.orekit.propagation.events.handlers.FieldEventHandler.resetState` method is called at an event
+            occurrence and happens to change the unmanaged additional state.
         
             Specified by:
                 :meth:`~org.orekit.propagation.FieldPropagator.isAdditionalStateManaged` in
@@ -3298,7 +3301,6 @@ class PythonFieldPropagator(FieldPropagator[_PythonFieldPropagator__T], typing.G
     def propagate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldPropagator__T]) -> FieldSpacecraftState[_PythonFieldPropagator__T]: ...
     @typing.overload
     def propagate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldPropagator__T], fieldAbsoluteDate2: org.orekit.time.FieldAbsoluteDate[_PythonFieldPropagator__T]) -> FieldSpacecraftState[_PythonFieldPropagator__T]: ...
-    def propagate_FF(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldPropagator__T], fieldAbsoluteDate2: org.orekit.time.FieldAbsoluteDate[_PythonFieldPropagator__T]) -> FieldSpacecraftState[_PythonFieldPropagator__T]: ...
     def pythonDecRef(self) -> None:
         """
             Part of JCC Python interface to object
@@ -3333,7 +3335,6 @@ class PythonFieldPropagator(FieldPropagator[_PythonFieldPropagator__T], typing.G
         
         """
         ...
-    def setMasterMode_TF(self, t: _PythonFieldPropagator__T, fieldOrekitFixedStepHandler: org.orekit.propagation.sampling.FieldOrekitFixedStepHandler[_PythonFieldPropagator__T]) -> None: ...
 
 class PythonMatricesHarvester(MatricesHarvester):
     """
@@ -3697,7 +3698,6 @@ class PythonPropagator(Propagator):
         ...
     @typing.overload
     def propagate(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> SpacecraftState: ...
-    def propagate_AA(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> SpacecraftState: ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
@@ -4461,7 +4461,6 @@ class PythonBoundedPropagator(BoundedPropagator):
         ...
     @typing.overload
     def propagate(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> SpacecraftState: ...
-    def propagate_AA(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> SpacecraftState: ...
     def pythonDecRef(self) -> None:
         """
             Part of JCC Python interface to object
@@ -4572,8 +4571,8 @@ class PythonFieldBoundedPropagator(FieldBoundedPropagator[_PythonFieldBoundedPro
                 interface :class:`~org.orekit.propagation.FieldPropagator`
         
             Also see:
-                :meth:`~org.orekit.propagation.PythonFieldBoundedPropagator.addEventDetector`,
-                :meth:`~org.orekit.propagation.PythonFieldBoundedPropagator.getEventsDetectors`
+                :meth:`~org.orekit.propagation.FieldPropagator.addEventDetector`,
+                :meth:`~org.orekit.propagation.FieldPropagator.getEventsDetectors`
         
         
         """
@@ -4610,7 +4609,7 @@ class PythonFieldBoundedPropagator(FieldBoundedPropagator[_PythonFieldBoundedPro
                 frame in which the orbit is propagated
         
             Also see:
-                :meth:`~org.orekit.propagation.PythonFieldBoundedPropagator.resetInitialState`
+                :meth:`~org.orekit.propagation.FieldPropagator.resetInitialState`
         
         
         """
@@ -4640,14 +4639,17 @@ class PythonFieldBoundedPropagator(FieldBoundedPropagator[_PythonFieldBoundedPro
         
             Managed states are states for which the propagators know how to compute its evolution. They correspond to additional
             states for which an :class:`~org.orekit.propagation.FieldAdditionalStateProvider` has been registered by calling the
-            :meth:`~org.orekit.propagation.PythonFieldBoundedPropagator.addAdditionalStateProvider` method. If the propagator is an
+            :meth:`~org.orekit.propagation.FieldPropagator.addAdditionalStateProvider` method. If the propagator is an
             :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`, the states for which a set of
-            :code:`additional equations` has been registered by calling the :code:`addAdditionalEquations` method are also counted
-            as managed additional states.
+            :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider` has been registered by calling the
+            :meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.addAdditionalDerivativesProvider` method
+            are also counted as managed additional states.
         
-            Additional states that are present in the :meth:`~org.orekit.propagation.PythonFieldBoundedPropagator.getInitialState`
-            but have no evolution method registered are *not* considered as managed states. These unmanaged additional states are
-            not lost during propagation, though. Their value will simply be copied unchanged throughout propagation.
+            Additional states that are present in the :meth:`~org.orekit.propagation.FieldPropagator.getInitialState` but have no
+            evolution method registered are *not* considered as managed states. These unmanaged additional states are not lost
+            during propagation, though. Their value are piecewise constant between state resets that may change them if some event
+            handler :meth:`~org.orekit.propagation.events.handlers.FieldEventHandler.resetState` method is called at an event
+            occurrence and happens to change the unmanaged additional state.
         
             Specified by:
                 :meth:`~org.orekit.propagation.FieldPropagator.isAdditionalStateManaged` in
@@ -4666,7 +4668,6 @@ class PythonFieldBoundedPropagator(FieldBoundedPropagator[_PythonFieldBoundedPro
     def propagate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldBoundedPropagator__T]) -> FieldSpacecraftState[_PythonFieldBoundedPropagator__T]: ...
     @typing.overload
     def propagate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldBoundedPropagator__T], fieldAbsoluteDate2: org.orekit.time.FieldAbsoluteDate[_PythonFieldBoundedPropagator__T]) -> FieldSpacecraftState[_PythonFieldBoundedPropagator__T]: ...
-    def propagate_FF(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldBoundedPropagator__T], fieldAbsoluteDate2: org.orekit.time.FieldAbsoluteDate[_PythonFieldBoundedPropagator__T]) -> FieldSpacecraftState[_PythonFieldBoundedPropagator__T]: ...
     def pythonDecRef(self) -> None:
         """
             Part of JCC Python interface to object

@@ -2340,6 +2340,87 @@ class MaxGapInterpolationGrid(InterpolationGrid):
         """
         ...
 
+_PythonFieldInterpolationGrid__T = typing.TypeVar('_PythonFieldInterpolationGrid__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class PythonFieldInterpolationGrid(FieldInterpolationGrid[_PythonFieldInterpolationGrid__T], typing.Generic[_PythonFieldInterpolationGrid__T]):
+    """
+    public class PythonFieldInterpolationGrid<T extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldInterpolationGrid`<T>
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def getGridPoints(self, t: _PythonFieldInterpolationGrid__T, t2: _PythonFieldInterpolationGrid__T) -> typing.List[_PythonFieldInterpolationGrid__T]:
+        """
+            Description copied from
+            interface: :meth:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldInterpolationGrid.getGridPoints`
+            Get grid points that are within the current step.
+        
+            The step is defined by its start and its end time.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldInterpolationGrid.getGridPoints` in
+                interface :class:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldInterpolationGrid`
+        
+            Parameters:
+                stepStart (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.PythonFieldInterpolationGrid`): start of the step
+                stepEnd (:class:`~org.orekit.propagation.semianalytical.dsst.utilities.PythonFieldInterpolationGrid`): end of the step
+        
+            Returns:
+                time points between start and end
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+        public long pythonExtension()
+        
+        
+        """
+        ...
+
+class PythonInterpolationGrid(InterpolationGrid):
+    """
+    public class PythonInterpolationGrid extends :class:`~org.orekit.propagation.semianalytical.dsst.utilities.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.semianalytical.dsst.utilities.InterpolationGrid`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def getGridPoints(self, double: float, double2: float) -> typing.List[float]:
+        """
+            Description copied from
+            interface: :meth:`~org.orekit.propagation.semianalytical.dsst.utilities.InterpolationGrid.getGridPoints`
+            Get grid points that are within the current step.
+        
+            The step is defined by its start and its end time.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.semianalytical.dsst.utilities.InterpolationGrid.getGridPoints` in
+                interface :class:`~org.orekit.propagation.semianalytical.dsst.utilities.InterpolationGrid`
+        
+            Parameters:
+                stepStart (double): start of the step
+                stepEnd (double): end of the step
+        
+            Returns:
+                time points between start and end
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+        public long pythonExtension()
+        
+        
+        """
+        ...
+
 
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.propagation.semianalytical.dsst.utilities")``.
@@ -2366,6 +2447,8 @@ class __module_protocol__(typing.Protocol):
     LnsCoefficients: typing.Type[LnsCoefficients]
     MaxGapInterpolationGrid: typing.Type[MaxGapInterpolationGrid]
     NewcombOperators: typing.Type[NewcombOperators]
+    PythonFieldInterpolationGrid: typing.Type[PythonFieldInterpolationGrid]
+    PythonInterpolationGrid: typing.Type[PythonInterpolationGrid]
     ShortPeriodicsInterpolatedCoefficient: typing.Type[ShortPeriodicsInterpolatedCoefficient]
     UpperBounds: typing.Type[UpperBounds]
     hansen: org.orekit.propagation.semianalytical.dsst.utilities.hansen.__module_protocol__

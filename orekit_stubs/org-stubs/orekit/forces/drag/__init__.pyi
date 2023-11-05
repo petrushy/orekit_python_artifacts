@@ -271,23 +271,9 @@ class PythonAbstractDragForceModel(AbstractDragForceModel):
     public class PythonAbstractDragForceModel extends :class:`~org.orekit.forces.drag.AbstractDragForceModel`
     """
     def __init__(self, atmosphere: org.orekit.models.earth.atmosphere.Atmosphere): ...
-    _acceleration_1__T = typing.TypeVar('_acceleration_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _acceleration_0__T = typing.TypeVar('_acceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def acceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Compute acceleration.
-        
-            Parameters:
-                s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
-                parameters (double[]): values of the force model parameters at state date, only 1 value for each parameterDriver
-        
-            Returns:
-                acceleration in same frame as state
-        
-        """
-        ...
-    @typing.overload
-    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_1__T], tArray: typing.List[_acceleration_1__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_1__T]:
+    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], tArray: typing.List[_acceleration_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
         """
             Compute acceleration.
         
@@ -301,21 +287,17 @@ class PythonAbstractDragForceModel(AbstractDragForceModel):
         
         """
         ...
-    _acceleration_FT__T = typing.TypeVar('_acceleration_FT__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def acceleration_FT(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_FT__T], tArray: typing.List[_acceleration_FT__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_FT__T]:
+    @typing.overload
+    def acceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Compute acceleration.
         
             Parameters:
-                s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
-                parameters (T[]): values of the force model parameters
+                s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
+                parameters (double[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
-        
-            Since:
-                9.0
-        
         
         """
         ...
@@ -346,34 +328,10 @@ class PythonDragSensitive(DragSensitive):
     public class PythonDragSensitive extends :class:`~org.orekit.forces.drag.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.drag.DragSensitive`
     """
     def __init__(self): ...
-    _dragAcceleration_1__T = typing.TypeVar('_dragAcceleration_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _dragAcceleration_0__T = typing.TypeVar('_dragAcceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def dragAcceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, double: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def dragAcceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_dragAcceleration_0__T], t: _dragAcceleration_0__T, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T], tArray: typing.List[_dragAcceleration_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T]:
         """
-            Description copied from interface: :meth:`~org.orekit.forces.drag.DragSensitive.dragAcceleration`
-            Compute the acceleration due to drag.
-        
-            The computation includes all spacecraft specific characteristics like shape, area and coefficients.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.drag.DragSensitive.dragAcceleration` in
-                interface :class:`~org.orekit.forces.drag.DragSensitive`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): current state
-                density (double): atmospheric density at spacecraft position
-                relativeVelocity (:class:`~org.orekit.forces.drag.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
-                parameters (double[]): values of the force model parameters
-        
-            Returns:
-                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/s²)
-        
-        """
-        ...
-    @typing.overload
-    def dragAcceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_dragAcceleration_1__T], t: _dragAcceleration_1__T, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_1__T], tArray: typing.List[_dragAcceleration_1__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_1__T]:
-        """
-            Description copied from interface: :meth:`~org.orekit.forces.drag.DragSensitive.dragAcceleration`
             Compute the acceleration due to drag.
         
             The computation includes all spacecraft specific characteristics like shape, area and coefficients.
@@ -394,8 +352,28 @@ class PythonDragSensitive(DragSensitive):
         
         """
         ...
-    _dragAcceleration_FTFT__T = typing.TypeVar('_dragAcceleration_FTFT__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def dragAcceleration_FTFT(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_dragAcceleration_FTFT__T], t: _dragAcceleration_FTFT__T, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_FTFT__T], tArray: typing.List[_dragAcceleration_FTFT__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_FTFT__T]: ...
+    @typing.overload
+    def dragAcceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, double: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Compute the acceleration due to drag.
+        
+            The computation includes all spacecraft specific characteristics like shape, area and coefficients.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.drag.DragSensitive.dragAcceleration` in
+                interface :class:`~org.orekit.forces.drag.DragSensitive`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): current state
+                density (double): atmospheric density at spacecraft position
+                relativeVelocity (:class:`~org.orekit.forces.drag.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): relative velocity of atmosphere with respect to spacecraft, in the same inertial frame as spacecraft orbit (m/s)
+                parameters (double[]): values of the force model parameters
+        
+            Returns:
+                spacecraft acceleration in the same inertial frame as spacecraft orbit (m/s²)
+        
+        """
+        ...
     def finalize(self) -> None: ...
     def getDragParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def pythonDecRef(self) -> None:

@@ -339,7 +339,6 @@ class PythonManeuverTriggers(ManeuverTriggers):
     @typing.overload
     def addResetter(self, field: org.hipparchus.Field[_addResetter_0__T], fieldManeuverTriggersResetter: FieldManeuverTriggersResetter[_addResetter_0__T]) -> None:
         """
-            Description copied from interface: :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.addResetter`
             Add a resetter.
         
             Specified by:
@@ -356,7 +355,6 @@ class PythonManeuverTriggers(ManeuverTriggers):
     @typing.overload
     def addResetter(self, maneuverTriggersResetter: ManeuverTriggersResetter) -> None:
         """
-            Description copied from interface: :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.addResetter`
             Add a resetter.
         
             Specified by:
@@ -386,7 +384,9 @@ class PythonManeuverTriggers(ManeuverTriggers):
     @typing.overload
     def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
-            Initialization method. Called in when Maneuver.init(...) is called (from ForceModel.init(...)).
+            Initialization method called at propagation start.
+        
+            The default implementation does nothing.
         
             Specified by:
                 :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.init` in
@@ -399,26 +399,7 @@ class PythonManeuverTriggers(ManeuverTriggers):
         
         """
         ...
-    _isFiring_0__T = typing.TypeVar('_isFiring_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def isFiring(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_isFiring_0__T], tArray: typing.List[_isFiring_0__T]) -> bool:
-        """
-            Find out if the maneuver is firing or not.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.isFiring` in
-                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                parameters (T[]): maneuver triggers parameters
-        
-            Returns:
-                true if the maneuver is firing, false otherwise
-        
-        
-        """
-        ...
+    _isFiring_1__T = typing.TypeVar('_isFiring_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def isFiring(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float]) -> bool:
         """
@@ -437,8 +418,25 @@ class PythonManeuverTriggers(ManeuverTriggers):
         
         """
         ...
-    _isFiring_FT__T = typing.TypeVar('_isFiring_FT__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def isFiring_FT(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_isFiring_FT__T], tArray: typing.List[_isFiring_FT__T]) -> bool: ...
+    @typing.overload
+    def isFiring(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_isFiring_1__T], tArray: typing.List[_isFiring_1__T]) -> bool:
+        """
+            Find out if the maneuver is firing or not.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.isFiring` in
+                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
+                parameters (T[]): maneuver triggers parameters
+        
+            Returns:
+                true if the maneuver is firing, false otherwise
+        
+        
+        """
+        ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...

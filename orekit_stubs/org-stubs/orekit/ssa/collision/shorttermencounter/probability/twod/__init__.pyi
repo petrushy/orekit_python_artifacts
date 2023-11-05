@@ -795,6 +795,278 @@ class AbstractShortTermEncounter2DPOCMethod(ShortTermEncounter2DPOCMethod):
     def getName(self) -> str: ...
     def isAMaximumProbabilityOfCollisionMethod(self) -> bool: ...
 
+class PythonShortTermEncounter2DPOCMethod(ShortTermEncounter2DPOCMethod):
+    """
+    public class PythonShortTermEncounter2DPOCMethod extends :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod`
+    """
+    def __init__(self): ...
+    _compute_0__T = typing.TypeVar('_compute_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_1__T = typing.TypeVar('_compute_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_2__T = typing.TypeVar('_compute_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_3__T = typing.TypeVar('_compute_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_4__T = typing.TypeVar('_compute_4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_9__T = typing.TypeVar('_compute_9__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_10__T = typing.TypeVar('_compute_10__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_11__T = typing.TypeVar('_compute_11__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_12__T = typing.TypeVar('_compute_12__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def compute(self, cdm: org.orekit.files.ccsds.ndm.cdm.Cdm, t: _compute_0__T) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_0__T]:
+        """
+            Description copied from
+            interface: :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.compute`
+            Compute the probability of collision using a Conjunction Data Message (CDM).
+        
+            Specified by:
+                :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.compute` in
+                interface :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod`
+        
+            Parameters:
+                cdm (:class:`~org.orekit.files.ccsds.ndm.cdm.Cdm`): conjunction data message input
+                combinedRadius (T): combined radius (m)
+                zeroThreshold (double): threshold below which values are considered equal to zero
+        
+            Returns:
+                probability of collision
+        
+            Description copied from
+            interface: :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.compute`
+            Compute the probability of collision using given collision definition.
+        
+            Specified by:
+                :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.compute` in
+                interface :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod`
+        
+            Parameters:
+                encounter (:class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.FieldShortTermEncounter2DDefinition`<T> encounter): encounter definition between a primary and a secondary collision object
+                zeroThreshold (double): threshold below which values are considered equal to zero
+        
+            Returns:
+                probability of collision
+        
+            Description copied from
+            interface: :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.compute`
+            Compute the probability of collision using arguments specific to the rotated encounter frame.
+        
+            The rotated encounter frame is define by the initial encounter frame (defined in
+            :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DDefinition`) rotated by the
+            rotation matrix which is used to diagonalize the combined covariance matrix.
+        
+            Specified by:
+                :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.compute` in
+                interface :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod`
+        
+            Parameters:
+                xm (T): other collision object projected position onto the collision plane in the rotated encounter frame x-axis (m)
+                ym (T): other collision object projected position onto the collision plane in the rotated encounter frame y-axis (m)
+                sigmaX (T): square root of the x-axis eigen value of the diagonalized combined covariance matrix projected onto the collision plane
+                    (m)
+                sigmaY (T): square root of the y-axis eigen value of the diagonalized combined covariance matrix projected onto the collision plane
+                    (m)
+                radius (T): sum of primary and secondary collision object equivalent sphere radii (m)
+        
+            Returns:
+                probability of collision
+        
+        
+        """
+        ...
+    @typing.overload
+    def compute(self, cdm: org.orekit.files.ccsds.ndm.cdm.Cdm, t: _compute_1__T, t2: _compute_1__T) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_1__T]: ...
+    @typing.overload
+    def compute(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_compute_2__T], fieldStateCovariance: org.orekit.propagation.FieldStateCovariance[_compute_2__T], t: _compute_2__T, fieldOrbit2: org.orekit.orbits.FieldOrbit[_compute_2__T], fieldStateCovariance2: org.orekit.propagation.FieldStateCovariance[_compute_2__T], t2: _compute_2__T) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_2__T]:
+        """
+            Description copied from
+            interface: :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.compute`
+            Compute the probability of collision using parameters necessary for creating a
+            :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DDefinition` instance.
+        
+            Specified by:
+                :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.compute` in
+                interface :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod`
+        
+            Parameters:
+                primaryAtTCA (:class:`~org.orekit.orbits.FieldOrbit`<T> primaryAtTCA): primary collision object spacecraft state at time of closest approach
+                primaryCovariance (:class:`~org.orekit.propagation.FieldStateCovariance`<T> primaryCovariance): primary collision object covariance
+                secondaryAtTCA (:class:`~org.orekit.orbits.FieldOrbit`<T> secondaryAtTCA): secondary collision object spacecraft state at time of closest approach
+                secondaryCovariance (:class:`~org.orekit.propagation.FieldStateCovariance`<T> secondaryCovariance): secondary collision object covariance
+                combinedRadius (T): combined radius (m)
+                zeroThreshold (double): threshold below which values are considered equal to zero
+        
+            Returns:
+                probability of collision
+        
+        """
+        ...
+    @typing.overload
+    def compute(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_compute_3__T], fieldStateCovariance: org.orekit.propagation.FieldStateCovariance[_compute_3__T], fieldOrbit2: org.orekit.orbits.FieldOrbit[_compute_3__T], fieldStateCovariance2: org.orekit.propagation.FieldStateCovariance[_compute_3__T], t: _compute_3__T) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_3__T]: ...
+    @typing.overload
+    def compute(self, fieldShortTermEncounter2DDefinition: FieldShortTermEncounter2DDefinition[_compute_4__T]) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_4__T]: ...
+    @typing.overload
+    def compute(self, cdm: org.orekit.files.ccsds.ndm.cdm.Cdm, double: float, double2: float) -> org.orekit.ssa.metrics.ProbabilityOfCollision:
+        """
+            Description copied from
+            interface: :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.compute`
+            Compute the probability of collision using parameters necessary for creating a
+            :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DDefinition` instance.
+        
+            Specified by:
+                :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.compute` in
+                interface :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod`
+        
+            Parameters:
+                primaryAtTCA (:class:`~org.orekit.orbits.Orbit`): primary collision object spacecraft state at time of closest approach
+                primaryCovariance (:class:`~org.orekit.propagation.StateCovariance`): primary collision object covariance
+                secondaryAtTCA (:class:`~org.orekit.orbits.Orbit`): secondary collision object spacecraft state at time of closest approach
+                secondaryCovariance (:class:`~org.orekit.propagation.StateCovariance`): secondary collision object covariance
+                combinedRadius (double): combined radius (m)
+                zeroThreshold (double): threshold below which values are considered equal to zero
+        
+            Returns:
+                probability of collision
+        
+            Description copied from
+            interface: :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.compute`
+            Compute the probability of collision using arguments specific to the rotated encounter frame.
+        
+            The rotated encounter frame is define by the initial encounter frame (defined in
+            :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DDefinition`) rotated by the
+            rotation matrix which is used to diagonalize the combined covariance matrix.
+        
+            Specified by:
+                :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.compute` in
+                interface :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod`
+        
+            Parameters:
+                xm (double): other collision object projected position onto the collision plane in the rotated encounter frame x-axis (m)
+                ym (double): other collision object projected position onto the collision plane in the rotated encounter frame y-axis (m)
+                sigmaX (double): square root of the x-axis eigen value of the diagonalized combined covariance matrix projected onto the collision plane
+                    (m)
+                sigmaY (double): square root of the y-axis eigen value of the diagonalized combined covariance matrix projected onto the collision plane
+                    (m)
+                radius (double): sum of primary and secondary collision object equivalent sphere radii (m)
+        
+            Returns:
+                probability of collision
+        
+        """
+        ...
+    @typing.overload
+    def compute(self, orbit: org.orekit.orbits.Orbit, stateCovariance: org.orekit.propagation.StateCovariance, double: float, orbit2: org.orekit.orbits.Orbit, stateCovariance2: org.orekit.propagation.StateCovariance, double2: float) -> org.orekit.ssa.metrics.ProbabilityOfCollision: ...
+    @typing.overload
+    def compute(self, orbit: org.orekit.orbits.Orbit, stateCovariance: org.orekit.propagation.StateCovariance, orbit2: org.orekit.orbits.Orbit, stateCovariance2: org.orekit.propagation.StateCovariance, double: float) -> org.orekit.ssa.metrics.ProbabilityOfCollision: ...
+    @typing.overload
+    def compute(self, shortTermEncounter2DDefinition: ShortTermEncounter2DDefinition) -> org.orekit.ssa.metrics.ProbabilityOfCollision:
+        """
+            Description copied from
+            interface: :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.compute`
+            Compute the probability of collision using a Conjunction Data Message (CDM).
+        
+            Specified by:
+                :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.compute` in
+                interface :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod`
+        
+            Parameters:
+                cdm (:class:`~org.orekit.files.ccsds.ndm.cdm.Cdm`): conjunction data message input
+                combinedRadius (double): combined radius (m)
+        
+            Returns:
+                probability of collision
+        
+            Description copied from
+            interface: :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.compute`
+            Compute the probability of collision using given collision definition.
+        
+            Specified by:
+                :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.compute` in
+                interface :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod`
+        
+            Parameters:
+                encounter (:class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DDefinition`): encounter definition between a primary and a secondary collision object
+                zeroThreshold (double): threshold below which values are considered equal to zero
+        
+            Returns:
+                probability of collision
+        
+        """
+        ...
+    @typing.overload
+    def compute(self, t: _compute_9__T, t2: _compute_9__T, t3: _compute_9__T, t4: _compute_9__T, t5: _compute_9__T) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_9__T]: ...
+    @typing.overload
+    def compute(self, cdm: org.orekit.files.ccsds.ndm.cdm.Cdm, t: _compute_10__T, double: float) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_10__T]: ...
+    @typing.overload
+    def compute(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_compute_11__T], fieldStateCovariance: org.orekit.propagation.FieldStateCovariance[_compute_11__T], fieldOrbit2: org.orekit.orbits.FieldOrbit[_compute_11__T], fieldStateCovariance2: org.orekit.propagation.FieldStateCovariance[_compute_11__T], t: _compute_11__T, double: float) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_11__T]: ...
+    @typing.overload
+    def compute(self, fieldShortTermEncounter2DDefinition: FieldShortTermEncounter2DDefinition[_compute_12__T], double: float) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_12__T]: ...
+    @typing.overload
+    def compute(self, double: float, double2: float, double3: float, double4: float, double5: float) -> org.orekit.ssa.metrics.ProbabilityOfCollision: ...
+    @typing.overload
+    def compute(self, cdm: org.orekit.files.ccsds.ndm.cdm.Cdm, double: float) -> org.orekit.ssa.metrics.ProbabilityOfCollision: ...
+    @typing.overload
+    def compute(self, orbit: org.orekit.orbits.Orbit, stateCovariance: org.orekit.propagation.StateCovariance, orbit2: org.orekit.orbits.Orbit, stateCovariance2: org.orekit.propagation.StateCovariance, double: float, double2: float) -> org.orekit.ssa.metrics.ProbabilityOfCollision: ...
+    @typing.overload
+    def compute(self, shortTermEncounter2DDefinition: ShortTermEncounter2DDefinition, double: float) -> org.orekit.ssa.metrics.ProbabilityOfCollision: ...
+    def finalize(self) -> None: ...
+    def getName(self) -> str:
+        """
+            Description copied from
+            interface: :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.getName`
+            Get name of the method.
+        
+            Specified by:
+                :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.getName` in
+                interface :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod`
+        
+            Returns:
+                name of the method
+        
+        
+        """
+        ...
+    def getType(self) -> ShortTermEncounter2DPOCMethodType:
+        """
+            Description copied from
+            interface: :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.getType`
+            Get type of the method.
+        
+            Specified by:
+                :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.getType` in
+                interface :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod`
+        
+            Returns:
+                type of the method
+        
+        
+        """
+        ...
+    def isAMaximumProbabilityOfCollisionMethod(self) -> bool:
+        """
+            Description copied from
+            interface: :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.isAMaximumProbabilityOfCollisionMethod`
+            Get flag that defines if the method is a maximum probability of collision computing method.
+        
+            Specified by:
+                
+                meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.isAMaximumProbabilityOfCollisionMethod` in
+                interface :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod`
+        
+            Returns:
+                flag that defines if the method is a maximum probability of collision computing method
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+        public long pythonExtension()
+        
+        
+        """
+        ...
+
 class AbstractAlfriend1999(AbstractShortTermEncounter2DPOCMethod):
     """
     public abstract class AbstractAlfriend1999 extends :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.AbstractShortTermEncounter2DPOCMethod`
@@ -1611,6 +1883,142 @@ class Laas2015(AbstractShortTermEncounter2DPOCMethod):
         """
         ...
 
+class PythonAbstractShortTermEncounter2DPOCMethod(AbstractShortTermEncounter2DPOCMethod):
+    """
+    public class PythonAbstractShortTermEncounter2DPOCMethod extends :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.AbstractShortTermEncounter2DPOCMethod`
+    """
+    def __init__(self, string: str): ...
+    _compute_0__T = typing.TypeVar('_compute_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_1__T = typing.TypeVar('_compute_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_2__T = typing.TypeVar('_compute_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_3__T = typing.TypeVar('_compute_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_4__T = typing.TypeVar('_compute_4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_9__T = typing.TypeVar('_compute_9__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_11__T = typing.TypeVar('_compute_11__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_12__T = typing.TypeVar('_compute_12__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_13__T = typing.TypeVar('_compute_13__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def compute(self, cdm: org.orekit.files.ccsds.ndm.cdm.Cdm, t: _compute_0__T) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_0__T]:
+        """
+            Description copied from
+            class: :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.AbstractShortTermEncounter2DPOCMethod.compute`
+            Compute the probability of collision using arguments specific to the rotated encounter frame.
+        
+            The rotated encounter frame is define by the initial encounter frame (defined in
+            :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DDefinition`) rotated by the
+            rotation matrix which is used to diagonalize the combined covariance matrix.
+        
+            Specified by:
+                :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.compute` in
+                interface :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod`
+        
+            Specified by:
+                :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.AbstractShortTermEncounter2DPOCMethod.compute` in
+                class :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.AbstractShortTermEncounter2DPOCMethod`
+        
+            Parameters:
+                xm (T): other collision object projected position onto the collision plane in the rotated encounter frame x-axis (m)
+                ym (T): other collision object projected position onto the collision plane in the rotated encounter frame y-axis (m)
+                sigmaX (T): square root of the x-axis eigen value of the diagonalized combined covariance matrix projected onto the collision plane
+                    (m)
+                sigmaY (T): square root of the y-axis eigen value of the diagonalized combined covariance matrix projected onto the collision plane
+                    (m)
+                radius (T): sum of primary and secondary collision object equivalent sphere radii (m)
+        
+            Returns:
+                probability of collision
+        
+        
+        """
+        ...
+    @typing.overload
+    def compute(self, cdm: org.orekit.files.ccsds.ndm.cdm.Cdm, t: _compute_1__T, t2: _compute_1__T) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_1__T]: ...
+    @typing.overload
+    def compute(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_compute_2__T], fieldStateCovariance: org.orekit.propagation.FieldStateCovariance[_compute_2__T], t: _compute_2__T, fieldOrbit2: org.orekit.orbits.FieldOrbit[_compute_2__T], fieldStateCovariance2: org.orekit.propagation.FieldStateCovariance[_compute_2__T], t2: _compute_2__T) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_2__T]: ...
+    @typing.overload
+    def compute(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_compute_3__T], fieldStateCovariance: org.orekit.propagation.FieldStateCovariance[_compute_3__T], fieldOrbit2: org.orekit.orbits.FieldOrbit[_compute_3__T], fieldStateCovariance2: org.orekit.propagation.FieldStateCovariance[_compute_3__T], t: _compute_3__T) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_3__T]: ...
+    @typing.overload
+    def compute(self, fieldShortTermEncounter2DDefinition: FieldShortTermEncounter2DDefinition[_compute_4__T]) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_4__T]: ...
+    @typing.overload
+    def compute(self, cdm: org.orekit.files.ccsds.ndm.cdm.Cdm, double: float, double2: float) -> org.orekit.ssa.metrics.ProbabilityOfCollision:
+        """
+            Description copied from
+            class: :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.AbstractShortTermEncounter2DPOCMethod.compute`
+            Compute the probability of collision using arguments specific to the rotated encounter frame.
+        
+            The rotated encounter frame is define by the initial encounter frame (defined in
+            :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DDefinition`) rotated by the
+            rotation matrix which is used to diagonalize the combined covariance matrix.
+        
+            Specified by:
+                :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.compute` in
+                interface :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod`
+        
+            Specified by:
+                :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.AbstractShortTermEncounter2DPOCMethod.compute` in
+                class :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.AbstractShortTermEncounter2DPOCMethod`
+        
+            Parameters:
+                xm (double): other collision object projected position onto the collision plane in the rotated encounter frame x-axis (m)
+                ym (double): other collision object projected position onto the collision plane in the rotated encounter frame y-axis (m)
+                sigmaX (double): square root of the x-axis eigen value of the diagonalized combined covariance matrix projected onto the collision plane
+                    (m)
+                sigmaY (double): square root of the y-axis eigen value of the diagonalized combined covariance matrix projected onto the collision plane
+                    (m)
+                radius (double): sum of primary and secondary collision object equivalent sphere radii (m)
+        
+            Returns:
+                probability of collision
+        
+        """
+        ...
+    @typing.overload
+    def compute(self, orbit: org.orekit.orbits.Orbit, stateCovariance: org.orekit.propagation.StateCovariance, double: float, orbit2: org.orekit.orbits.Orbit, stateCovariance2: org.orekit.propagation.StateCovariance, double2: float) -> org.orekit.ssa.metrics.ProbabilityOfCollision: ...
+    @typing.overload
+    def compute(self, orbit: org.orekit.orbits.Orbit, stateCovariance: org.orekit.propagation.StateCovariance, orbit2: org.orekit.orbits.Orbit, stateCovariance2: org.orekit.propagation.StateCovariance, double: float) -> org.orekit.ssa.metrics.ProbabilityOfCollision: ...
+    @typing.overload
+    def compute(self, shortTermEncounter2DDefinition: ShortTermEncounter2DDefinition) -> org.orekit.ssa.metrics.ProbabilityOfCollision: ...
+    @typing.overload
+    def compute(self, t: _compute_9__T, t2: _compute_9__T, t3: _compute_9__T, t4: _compute_9__T, t5: _compute_9__T) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_9__T]: ...
+    @typing.overload
+    def compute(self, double: float, double2: float, double3: float, double4: float, double5: float) -> org.orekit.ssa.metrics.ProbabilityOfCollision: ...
+    @typing.overload
+    def compute(self, cdm: org.orekit.files.ccsds.ndm.cdm.Cdm, t: _compute_11__T, double: float) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_11__T]: ...
+    @typing.overload
+    def compute(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_compute_12__T], fieldStateCovariance: org.orekit.propagation.FieldStateCovariance[_compute_12__T], fieldOrbit2: org.orekit.orbits.FieldOrbit[_compute_12__T], fieldStateCovariance2: org.orekit.propagation.FieldStateCovariance[_compute_12__T], t: _compute_12__T, double: float) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_12__T]: ...
+    @typing.overload
+    def compute(self, fieldShortTermEncounter2DDefinition: FieldShortTermEncounter2DDefinition[_compute_13__T], double: float) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_13__T]: ...
+    @typing.overload
+    def compute(self, cdm: org.orekit.files.ccsds.ndm.cdm.Cdm, double: float) -> org.orekit.ssa.metrics.ProbabilityOfCollision: ...
+    @typing.overload
+    def compute(self, orbit: org.orekit.orbits.Orbit, stateCovariance: org.orekit.propagation.StateCovariance, orbit2: org.orekit.orbits.Orbit, stateCovariance2: org.orekit.propagation.StateCovariance, double: float, double2: float) -> org.orekit.ssa.metrics.ProbabilityOfCollision: ...
+    @typing.overload
+    def compute(self, shortTermEncounter2DDefinition: ShortTermEncounter2DDefinition, double: float) -> org.orekit.ssa.metrics.ProbabilityOfCollision: ...
+    def finalize(self) -> None: ...
+    def getType(self) -> ShortTermEncounter2DPOCMethodType:
+        """
+            Description copied from
+            interface: :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.getType`
+            Get type of the method.
+        
+            Returns:
+                type of the method
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+        public long pythonExtension()
+        
+        
+        """
+        ...
+
 class Alfriend1999(AbstractAlfriend1999):
     """
     public class Alfriend1999 extends :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.AbstractAlfriend1999`
@@ -1923,6 +2331,203 @@ class Patera2005(AbstractShortTermEncounter1DNumerical2DPOCMethod):
         """
         ...
 
+class PythonAbstractAlfriend1999(AbstractAlfriend1999):
+    """
+    public class PythonAbstractAlfriend1999 extends :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.AbstractAlfriend1999`
+    """
+    def __init__(self, string: str): ...
+    _computeValue_1__T = typing.TypeVar('_computeValue_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def computeValue(self, double: float, double2: float, double3: float) -> float:
+        """
+        public <T extends :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> T computeValue (T radius, T squaredMahalanobisDistance, T covarianceMatrixDeterminant)
+        
+        
+        """
+        ...
+    @typing.overload
+    def computeValue(self, t: _computeValue_1__T, t2: _computeValue_1__T, t3: _computeValue_1__T) -> _computeValue_1__T: ...
+    def finalize(self) -> None: ...
+    def getType(self) -> ShortTermEncounter2DPOCMethodType:
+        """
+            Description copied from
+            interface: :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.getType`
+            Get type of the method.
+        
+            Returns:
+                type of the method
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+        public long pythonExtension()
+        
+        
+        """
+        ...
+
+class PythonAbstractShortTermEncounter1DNumerical2DPOCMethod(AbstractShortTermEncounter1DNumerical2DPOCMethod):
+    """
+    public class PythonAbstractShortTermEncounter1DNumerical2DPOCMethod extends :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.AbstractShortTermEncounter1DNumerical2DPOCMethod`
+    """
+    def __init__(self, string: str, univariateIntegrator: org.hipparchus.analysis.integration.UnivariateIntegrator, int: int): ...
+    _compute_0__T = typing.TypeVar('_compute_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_1__T = typing.TypeVar('_compute_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_2__T = typing.TypeVar('_compute_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_3__T = typing.TypeVar('_compute_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_4__T = typing.TypeVar('_compute_4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_9__T = typing.TypeVar('_compute_9__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_11__T = typing.TypeVar('_compute_11__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_12__T = typing.TypeVar('_compute_12__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_13__T = typing.TypeVar('_compute_13__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_14__T = typing.TypeVar('_compute_14__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_15__T = typing.TypeVar('_compute_15__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_16__T = typing.TypeVar('_compute_16__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _compute_17__T = typing.TypeVar('_compute_17__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def compute(self, cdm: org.orekit.files.ccsds.ndm.cdm.Cdm, t: _compute_0__T) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_0__T]:
+        """
+            Description copied from
+            class: :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.AbstractShortTermEncounter1DNumerical2DPOCMethod.compute`
+            Compute the probability of collision using arguments specific to the rotated encounter frame and custom numerical
+            configuration.
+        
+            The rotated encounter frame is define by the initial encounter frame (defined in
+            :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DDefinition`) rotated by the
+            rotation matrix which is used to diagonalize the combined covariance matrix.
+        
+            Specified by:
+                
+                meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.AbstractShortTermEncounter1DNumerical2DPOCMethod.compute` in
+                class :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.AbstractShortTermEncounter1DNumerical2DPOCMethod`
+        
+            Parameters:
+                xm (T): other collision object projected position onto the collision plane in the rotated encounter frame x-axis (m)
+                ym (T): other collision object projected position onto the collision plane in the rotated encounter frame y-axis (m)
+                sigmaX (T): square root of the x-axis eigen value of the diagonalized combined covariance matrix projected onto the collision plane
+                    (m)
+                sigmaY (T): square root of the y-axis eigen value of the diagonalized combined covariance matrix projected onto the collision plane
+                    (m)
+                radius (T): sum of primary and secondary collision object equivalent sphere radii (m)
+                customIntegrator (:class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.integration.FieldUnivariateIntegrator?is`<T> customIntegrator): custom integrator to use in place of the integrator from the constructor
+                customMaxNbOfEval (int): custom maximum number of evaluations to use in place of the custom maximum number from the constructor
+        
+            Returns:
+                probability of collision
+        
+        
+        """
+        ...
+    @typing.overload
+    def compute(self, cdm: org.orekit.files.ccsds.ndm.cdm.Cdm, t: _compute_1__T, t2: _compute_1__T) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_1__T]: ...
+    @typing.overload
+    def compute(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_compute_2__T], fieldStateCovariance: org.orekit.propagation.FieldStateCovariance[_compute_2__T], t: _compute_2__T, fieldOrbit2: org.orekit.orbits.FieldOrbit[_compute_2__T], fieldStateCovariance2: org.orekit.propagation.FieldStateCovariance[_compute_2__T], t2: _compute_2__T) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_2__T]: ...
+    @typing.overload
+    def compute(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_compute_3__T], fieldStateCovariance: org.orekit.propagation.FieldStateCovariance[_compute_3__T], fieldOrbit2: org.orekit.orbits.FieldOrbit[_compute_3__T], fieldStateCovariance2: org.orekit.propagation.FieldStateCovariance[_compute_3__T], t: _compute_3__T) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_3__T]: ...
+    @typing.overload
+    def compute(self, fieldShortTermEncounter2DDefinition: FieldShortTermEncounter2DDefinition[_compute_4__T]) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_4__T]: ...
+    @typing.overload
+    def compute(self, cdm: org.orekit.files.ccsds.ndm.cdm.Cdm, double: float, double2: float) -> org.orekit.ssa.metrics.ProbabilityOfCollision:
+        """
+            Description copied from
+            class: :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.AbstractShortTermEncounter1DNumerical2DPOCMethod.compute`
+            Compute the probability of collision using arguments specific to the rotated encounter frame and custom numerical
+            configuration.
+        
+            The rotated encounter frame is define by the initial encounter frame (defined in
+            :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DDefinition`) rotated by the
+            rotation matrix which is used to diagonalize the combined covariance matrix.
+        
+            Specified by:
+                
+                meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.AbstractShortTermEncounter1DNumerical2DPOCMethod.compute` in
+                class :class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.AbstractShortTermEncounter1DNumerical2DPOCMethod`
+        
+            Parameters:
+                xm (double): other collision object projected position onto the collision plane in the rotated encounter frame x-axis (m)
+                ym (double): other collision object projected position onto the collision plane in the rotated encounter frame y-axis (m)
+                sigmaX (double): square root of the x-axis eigen value of the diagonalized combined covariance matrix projected onto the collision plane
+                    (m)
+                sigmaY (double): square root of the y-axis eigen value of the diagonalized combined covariance matrix projected onto the collision plane
+                    (m)
+                radius (double): sum of primary and secondary collision object equivalent sphere radii (m)
+                customIntegrator (:class:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.integration.UnivariateIntegrator?is`): custom integrator to use in place of the integrator from the constructor
+                customMaxNbOfEval (int): custom maximum number of evaluations to use in place of the custom maximum number from the constructor
+        
+            Returns:
+                probability of collision
+        
+        """
+        ...
+    @typing.overload
+    def compute(self, orbit: org.orekit.orbits.Orbit, stateCovariance: org.orekit.propagation.StateCovariance, double: float, orbit2: org.orekit.orbits.Orbit, stateCovariance2: org.orekit.propagation.StateCovariance, double2: float) -> org.orekit.ssa.metrics.ProbabilityOfCollision: ...
+    @typing.overload
+    def compute(self, orbit: org.orekit.orbits.Orbit, stateCovariance: org.orekit.propagation.StateCovariance, orbit2: org.orekit.orbits.Orbit, stateCovariance2: org.orekit.propagation.StateCovariance, double: float) -> org.orekit.ssa.metrics.ProbabilityOfCollision: ...
+    @typing.overload
+    def compute(self, shortTermEncounter2DDefinition: ShortTermEncounter2DDefinition) -> org.orekit.ssa.metrics.ProbabilityOfCollision: ...
+    @typing.overload
+    def compute(self, t: _compute_9__T, t2: _compute_9__T, t3: _compute_9__T, t4: _compute_9__T, t5: _compute_9__T, fieldUnivariateIntegrator: org.hipparchus.analysis.integration.FieldUnivariateIntegrator[_compute_9__T], int: int) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_9__T]: ...
+    @typing.overload
+    def compute(self, double: float, double2: float, double3: float, double4: float, double5: float, univariateIntegrator: org.hipparchus.analysis.integration.UnivariateIntegrator, int: int) -> org.orekit.ssa.metrics.ProbabilityOfCollision: ...
+    @typing.overload
+    def compute(self, t: _compute_11__T, t2: _compute_11__T, t3: _compute_11__T, t4: _compute_11__T, t5: _compute_11__T) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_11__T]: ...
+    @typing.overload
+    def compute(self, cdm: org.orekit.files.ccsds.ndm.cdm.Cdm, t: _compute_12__T, t2: _compute_12__T, fieldUnivariateIntegrator: org.hipparchus.analysis.integration.FieldUnivariateIntegrator[_compute_12__T], int: int, double: float) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_12__T]: ...
+    @typing.overload
+    def compute(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_compute_13__T], fieldStateCovariance: org.orekit.propagation.FieldStateCovariance[_compute_13__T], t: _compute_13__T, fieldOrbit2: org.orekit.orbits.FieldOrbit[_compute_13__T], fieldStateCovariance2: org.orekit.propagation.FieldStateCovariance[_compute_13__T], t2: _compute_13__T, fieldUnivariateIntegrator: org.hipparchus.analysis.integration.FieldUnivariateIntegrator[_compute_13__T], int: int, double: float) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_13__T]: ...
+    @typing.overload
+    def compute(self, fieldShortTermEncounter2DDefinition: FieldShortTermEncounter2DDefinition[_compute_14__T], fieldUnivariateIntegrator: org.hipparchus.analysis.integration.FieldUnivariateIntegrator[_compute_14__T], int: int, double: float) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_14__T]: ...
+    @typing.overload
+    def compute(self, cdm: org.orekit.files.ccsds.ndm.cdm.Cdm, t: _compute_15__T, double: float) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_15__T]: ...
+    @typing.overload
+    def compute(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_compute_16__T], fieldStateCovariance: org.orekit.propagation.FieldStateCovariance[_compute_16__T], fieldOrbit2: org.orekit.orbits.FieldOrbit[_compute_16__T], fieldStateCovariance2: org.orekit.propagation.FieldStateCovariance[_compute_16__T], t: _compute_16__T, double: float) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_16__T]: ...
+    @typing.overload
+    def compute(self, fieldShortTermEncounter2DDefinition: FieldShortTermEncounter2DDefinition[_compute_17__T], double: float) -> org.orekit.ssa.metrics.FieldProbabilityOfCollision[_compute_17__T]: ...
+    @typing.overload
+    def compute(self, double: float, double2: float, double3: float, double4: float, double5: float) -> org.orekit.ssa.metrics.ProbabilityOfCollision: ...
+    @typing.overload
+    def compute(self, cdm: org.orekit.files.ccsds.ndm.cdm.Cdm, double: float, double2: float, univariateIntegrator: org.hipparchus.analysis.integration.UnivariateIntegrator, int: int, double3: float) -> org.orekit.ssa.metrics.ProbabilityOfCollision: ...
+    @typing.overload
+    def compute(self, orbit: org.orekit.orbits.Orbit, stateCovariance: org.orekit.propagation.StateCovariance, double: float, orbit2: org.orekit.orbits.Orbit, stateCovariance2: org.orekit.propagation.StateCovariance, double2: float, univariateIntegrator: org.hipparchus.analysis.integration.UnivariateIntegrator, int: int, double3: float) -> org.orekit.ssa.metrics.ProbabilityOfCollision: ...
+    @typing.overload
+    def compute(self, shortTermEncounter2DDefinition: ShortTermEncounter2DDefinition, univariateIntegrator: org.hipparchus.analysis.integration.UnivariateIntegrator, int: int, double: float) -> org.orekit.ssa.metrics.ProbabilityOfCollision: ...
+    @typing.overload
+    def compute(self, cdm: org.orekit.files.ccsds.ndm.cdm.Cdm, double: float) -> org.orekit.ssa.metrics.ProbabilityOfCollision: ...
+    @typing.overload
+    def compute(self, orbit: org.orekit.orbits.Orbit, stateCovariance: org.orekit.propagation.StateCovariance, orbit2: org.orekit.orbits.Orbit, stateCovariance2: org.orekit.propagation.StateCovariance, double: float, double2: float) -> org.orekit.ssa.metrics.ProbabilityOfCollision: ...
+    @typing.overload
+    def compute(self, shortTermEncounter2DDefinition: ShortTermEncounter2DDefinition, double: float) -> org.orekit.ssa.metrics.ProbabilityOfCollision: ...
+    def finalize(self) -> None: ...
+    def getType(self) -> ShortTermEncounter2DPOCMethodType:
+        """
+            Description copied from
+            interface: :meth:`~org.orekit.ssa.collision.shorttermencounter.probability.twod.ShortTermEncounter2DPOCMethod.getType`
+            Get type of the method.
+        
+            Returns:
+                type of the method
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None: ...
+    @typing.overload
+    def pythonExtension(self) -> int: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+        public long pythonExtension()
+        
+        
+        """
+        ...
+
 
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.ssa.collision.shorttermencounter.probability.twod")``.
@@ -1937,6 +2542,10 @@ class __module_protocol__(typing.Protocol):
     FieldShortTermEncounter2DDefinition: typing.Type[FieldShortTermEncounter2DDefinition]
     Laas2015: typing.Type[Laas2015]
     Patera2005: typing.Type[Patera2005]
+    PythonAbstractAlfriend1999: typing.Type[PythonAbstractAlfriend1999]
+    PythonAbstractShortTermEncounter1DNumerical2DPOCMethod: typing.Type[PythonAbstractShortTermEncounter1DNumerical2DPOCMethod]
+    PythonAbstractShortTermEncounter2DPOCMethod: typing.Type[PythonAbstractShortTermEncounter2DPOCMethod]
+    PythonShortTermEncounter2DPOCMethod: typing.Type[PythonShortTermEncounter2DPOCMethod]
     ShortTermEncounter2DDefinition: typing.Type[ShortTermEncounter2DDefinition]
     ShortTermEncounter2DPOCMethod: typing.Type[ShortTermEncounter2DPOCMethod]
     ShortTermEncounter2DPOCMethodType: typing.Type[ShortTermEncounter2DPOCMethodType]

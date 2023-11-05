@@ -494,7 +494,25 @@ class PythonForceModel(ForceModel):
     public class PythonForceModel extends :class:`~org.orekit.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.ForceModel`
     """
     def __init__(self): ...
-    _acceleration_1__T = typing.TypeVar('_acceleration_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _acceleration_0__T = typing.TypeVar('_acceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], tArray: typing.List[_acceleration_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
+        """
+            Compute acceleration.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
+            Parameters:
+                s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
+                parameters (T[]): values of the force model parameters at state date, only 1 value for each parameterDriver
+        
+            Returns:
+                acceleration in same frame as state
+        
+        
+        """
+        ...
     @typing.overload
     def acceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
@@ -505,75 +523,16 @@ class PythonForceModel(ForceModel):
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
-                parameters (double[]): values of the force model parameters
+                parameters (double[]): values of the force model parameters at state date, only 1 value for each parameterDriver
         
             Returns:
                 acceleration in same frame as state
         
-            Since:
-                9.0
-        
         """
         ...
+    _addContribution_0__T = typing.TypeVar('_addContribution_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_1__T], tArray: typing.List[_acceleration_1__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_1__T]:
-        """
-            Compute acceleration.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
-        
-            Parameters:
-                s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
-                parameters (T[]): values of the force model parameters
-        
-            Returns:
-                acceleration in same frame as state
-        
-            Since:
-                9.0
-        
-        
-        """
-        ...
-    _acceleration_FT__T = typing.TypeVar('_acceleration_FT__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def acceleration_FT(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_FT__T], tArray: typing.List[_acceleration_FT__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_FT__T]:
-        """
-            Compute acceleration.
-        
-            Parameters:
-                s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
-                parameters (T[]): values of the force model parameters
-        
-            Returns:
-                acceleration in same frame as state
-        
-            Since:
-                9.0
-        
-        
-        """
-        ...
-    _addContribution_1__T = typing.TypeVar('_addContribution_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def addContribution(self, spacecraftState: org.orekit.propagation.SpacecraftState, timeDerivativesEquations: org.orekit.propagation.numerical.TimeDerivativesEquations) -> None:
-        """
-            Compute the contribution of the force model to the perturbing acceleration.
-        
-            The default implementation simply adds the :meth:`~org.orekit.forces.PythonForceModel.acceleration` as a non-Keplerian
-            acceleration.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.ForceModel.addContribution` in interface :class:`~org.orekit.forces.ForceModel`
-        
-            Parameters:
-                s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
-                adder (:class:`~org.orekit.propagation.numerical.TimeDerivativesEquations`): object where the contribution should be added
-        
-        """
-        ...
-    @typing.overload
-    def addContribution(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_addContribution_1__T], fieldTimeDerivativesEquations: org.orekit.propagation.numerical.FieldTimeDerivativesEquations[_addContribution_1__T]) -> None:
+    def addContribution(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_addContribution_0__T], fieldTimeDerivativesEquations: org.orekit.propagation.numerical.FieldTimeDerivativesEquations[_addContribution_0__T]) -> None:
         """
             Compute the contribution of the force model to the perturbing acceleration.
         
@@ -587,8 +546,23 @@ class PythonForceModel(ForceModel):
         
         """
         ...
-    _addContribution_FF__T = typing.TypeVar('_addContribution_FF__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def addContribution_FF(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_addContribution_FF__T], fieldTimeDerivativesEquations: org.orekit.propagation.numerical.FieldTimeDerivativesEquations[_addContribution_FF__T]) -> None: ...
+    @typing.overload
+    def addContribution(self, spacecraftState: org.orekit.propagation.SpacecraftState, timeDerivativesEquations: org.orekit.propagation.numerical.TimeDerivativesEquations) -> None:
+        """
+            Compute the contribution of the force model to the perturbing acceleration.
+        
+            The default implementation simply adds the :meth:`~org.orekit.forces.ForceModel.acceleration` as a non-Keplerian
+            acceleration.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.addContribution` in interface :class:`~org.orekit.forces.ForceModel`
+        
+            Parameters:
+                s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
+                adder (:class:`~org.orekit.propagation.numerical.TimeDerivativesEquations`): object where the contribution should be added
+        
+        """
+        ...
     def dependsOnPositionOnly(self) -> bool:
         """
             Check if force models depends on position only.
@@ -599,9 +573,6 @@ class PythonForceModel(ForceModel):
             Returns:
                 true if force model depends on position only, false if it depends on velocity, either directly or due to a dependency on
                 attitude
-        
-            Since:
-                9.0
         
         
         """
@@ -621,9 +592,6 @@ class PythonForceModel(ForceModel):
             Returns:
                 parameter value
         
-            Since:
-                8.0
-        
         
         """
         ...
@@ -636,24 +604,23 @@ class PythonForceModel(ForceModel):
     @typing.overload
     def getParameters(self) -> typing.List[float]:
         """
-            Get force model parameters.
+            Get model parameters.
         
             Specified by:
                 :meth:`~org.orekit.utils.ParameterDriversProvider.getParameters` in
                 interface :class:`~org.orekit.utils.ParameterDriversProvider`
         
             Returns:
-                force model parameters
-        
-            Since:
-                9.0
+                model parameters, will throw an exception if one PDriver has several values driven. If it's the case (if at least 1
+                PDriver of the model has several values driven) the method
+                :meth:`~org.orekit.utils.ParameterDriversProvider.getParameters` must be used.
         
         """
         ...
     @typing.overload
     def getParameters(self, field: org.hipparchus.Field[_getParameters_3__T]) -> typing.List[_getParameters_3__T]:
         """
-            Get force model parameters.
+            Get model parameters.
         
             Specified by:
                 :meth:`~org.orekit.utils.ParameterDriversProvider.getParameters` in
@@ -663,32 +630,14 @@ class PythonForceModel(ForceModel):
                 field (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
         
             Returns:
-                force model parameters
-        
-            Since:
-                9.0
+                model parameters, will throw an exception if one PDriver of the has several values driven. If it's the case (if at least
+                1 PDriver of the model has several values driven) the method
+                :meth:`~org.orekit.utils.ParameterDriversProvider.getParameters` must be used.
         
         
         """
         ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    _getParameters_F__T = typing.TypeVar('_getParameters_F__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getParameters_F(self, field: org.hipparchus.Field[_getParameters_F__T]) -> typing.List[_getParameters_F__T]:
-        """
-            Get force model parameters.
-        
-            Parameters:
-                field (:class:`~org.orekit.forces.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
-        
-            Returns:
-                force model parameters
-        
-            Since:
-                9.0
-        
-        
-        """
-        ...
     _init_0__T = typing.TypeVar('_init_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_init_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_init_0__T]) -> None: ...
@@ -696,9 +645,8 @@ class PythonForceModel(ForceModel):
     def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
             Initialize the force model at the start of propagation. This method will be called before any calls to
-            :meth:`~org.orekit.forces.PythonForceModel.addContribution`,
-            :meth:`~org.orekit.forces.PythonForceModel.addContribution`, :meth:`~org.orekit.forces.PythonForceModel.acceleration` or
-            :meth:`~org.orekit.forces.PythonForceModel.acceleration`
+            :meth:`~org.orekit.forces.ForceModel.addContribution`, :meth:`~org.orekit.forces.ForceModel.addContribution`,
+            :meth:`~org.orekit.forces.ForceModel.acceleration` or :meth:`~org.orekit.forces.ForceModel.acceleration`
         
             The default implementation of this method does nothing.
         
@@ -716,7 +664,7 @@ class PythonForceModel(ForceModel):
         """
             Check if a parameter is supported.
         
-            Supported parameters are those listed by :meth:`~org.orekit.forces.PythonForceModel.getParametersDrivers`.
+            Supported parameters are those listed by :meth:`~org.orekit.utils.ParameterDriversProvider.getParametersDrivers`.
         
             Specified by:
                 :meth:`~org.orekit.utils.ParameterDriversProvider.isSupported` in
@@ -729,7 +677,7 @@ class PythonForceModel(ForceModel):
                 true if the parameter is supported
         
             Also see:
-                :meth:`~org.orekit.forces.PythonForceModel.getParametersDrivers`
+                :meth:`~org.orekit.utils.ParameterDriversProvider.getParametersDrivers`
         
         
         """
