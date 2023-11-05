@@ -23,6 +23,7 @@
  """
 
 import orekit
+from org.orekit.propagation import SpacecraftState
 
 orekit.initVM()
 # orekit.initVM(vmargs='-Xcheck:jni,-verbose:jni,-verbose:class,-XX:+UnlockDiagnosticVMOptions')
@@ -77,7 +78,7 @@ class MyElevationDetector(PythonEventDetector):
 
     def __init__(self, elevation, topo):
         self.elevation = elevation
-        self.topo = topo
+        self.topo: TopocentricFrame = topo
         super(MyElevationDetector, self).__init__()
 
     def init(self, s, T):
@@ -92,7 +93,7 @@ class MyElevationDetector(PythonEventDetector):
     def getMaxIterationCount(self):
         return PythonAbstractDetector.DEFAULT_MAX_ITER
 
-    def g(self, s):
+    def g(self, s: SpacecraftState):
         tmp = self.topo.getElevation(s.getPVCoordinates().getPosition(), s.getFrame(), s.getDate()) - self.elevation
         return tmp
 

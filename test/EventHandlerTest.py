@@ -24,6 +24,8 @@ Python version translated from Java by Petrus Hyvönen, SSC 2014
  """
 
 import orekit
+from org.orekit.propagation import SpacecraftState
+
 orekit.initVM()
 
 from org.orekit.frames import FramesFactory, TopocentricFrame
@@ -85,7 +87,7 @@ class EventHandlerTest(unittest.TestCase):
             def init(self, initialstate, target, detector):
                 pass
 
-            def eventOccurred(self, s, detector, increasing):
+            def eventOccurred(self, s: SpacecraftState, detector, increasing):
                 return Action.CONTINUE
 
             def resetState(self, detector, oldState):

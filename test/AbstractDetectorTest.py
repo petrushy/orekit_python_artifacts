@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import orekit
+from org.orekit.propagation import SpacecraftState
+
 orekit.initVM()
 
 from org.orekit.frames import FramesFactory, TopocentricFrame
@@ -46,7 +48,7 @@ class MyElevationDetector(PythonAbstractDetector):
 
     def __init__(self, elevation, topo, handler=None):
         self.elevation = elevation
-        self.topo = topo
+        self.topo: TopocentricFrame = topo
 
         dmax = float(PythonAbstractDetector.DEFAULT_MAXCHECK)
         dthresh = float(PythonAbstractDetector.DEFAULT_THRESHOLD)
@@ -62,10 +64,10 @@ class MyElevationDetector(PythonAbstractDetector):
     def getElevation(self):
         return self.elevation
 
-    def getTopocentricFrame(self):
+    def getTopocentricFrame(self) -> TopocentricFrame:
         return self.topo
 
-    def g(self, s):
+    def g(self, s: SpacecraftState):
         tmp = self.topo.getElevation(s.getPVCoordinates().getPosition(), s.getFrame(), s.getDate())-self.elevation
         return tmp
 
