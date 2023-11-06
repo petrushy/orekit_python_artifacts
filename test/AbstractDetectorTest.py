@@ -12,7 +12,7 @@ from org.orekit.orbits import KeplerianOrbit
 from org.orekit.utils import Constants
 from org.orekit.propagation.analytical import KeplerianPropagator
 from org.orekit.utils import PVCoordinates, IERSConventions
-from org.orekit.propagation.events.handlers import PythonEventHandler
+from org.orekit.propagation.events.handlers import PythonEventHandler, EventHandler
 from org.hipparchus.geometry.euclidean.threed import Vector3D
 from org.orekit.propagation.events import PythonAbstractDetector
 from org.orekit.propagation.events.handlers import StopOnEvent
@@ -46,7 +46,7 @@ class PassCounter(PythonEventHandler):
 
 class MyElevationDetector(PythonAbstractDetector):
 
-    def __init__(self, elevation, topo, handler=None):
+    def __init__(self, elevation: float, topo: TopocentricFrame, handler: EventHandler = None):
         self.elevation = elevation
         self.topo: TopocentricFrame = topo
 
@@ -67,7 +67,7 @@ class MyElevationDetector(PythonAbstractDetector):
     def getTopocentricFrame(self) -> TopocentricFrame:
         return self.topo
 
-    def g(self, s: SpacecraftState):
+    def g(self, s: SpacecraftState) -> float:
         tmp = self.topo.getElevation(s.getPVCoordinates().getPosition(), s.getFrame(), s.getDate())-self.elevation
         return tmp
 

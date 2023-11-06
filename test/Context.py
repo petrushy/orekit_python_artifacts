@@ -45,7 +45,7 @@ from org.hipparchus.geometry.euclidean.threed import Vector3D
 from org.hipparchus.ode.nonstiff import DormandPrince853Integrator
 
 from org.orekit.frames import FramesFactory
-from org.orekit.orbits import EquinoctialOrbit
+from org.orekit.orbits import EquinoctialOrbit, PositionAngleType
 from org.orekit.orbits import OrbitType
 from org.orekit.propagation import SpacecraftState
 from org.orekit.propagation.numerical import NumericalPropagator
@@ -112,7 +112,7 @@ class Context():
     # // Map value = slave station associated
     # public Map<GroundStation, GroundStation>     TARstations;
 
-    def createBuilder(self, orbitType, positionAngle, perfectStart, minStep, maxStep, dP, *forces):
+    def createBuilder(self, orbitType, positionAngle: PositionAngleType, perfectStart, minStep, maxStep, dP, *forces):
 
         if perfectStart:
             # orbit estimation will start from a perfect orbit

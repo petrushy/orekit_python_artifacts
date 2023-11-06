@@ -59,7 +59,7 @@ class MyEventCounter(PythonEventHandler):
     def init(self, initialstate, target, detector):
         print(initialstate, target, detector)
 
-    def eventOccurred(self, s, detector, increasing):
+    def eventOccurred(self, s, detector, increasing: bool):
         if increasing:
             self.events +=  1
         return Action.CONTINUE

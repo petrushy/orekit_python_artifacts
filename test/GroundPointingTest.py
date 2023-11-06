@@ -6,6 +6,7 @@ orekit.initVM()
 
 
 import unittest
+from typing import Union
 from org.orekit.data import DataProvidersManager, ZipJarCrawler, DataContext, DirectoryCrawler
 from java.io import File
 
@@ -26,7 +27,7 @@ from org.hipparchus.analysis.differentiation import GradientField, UnivariateDer
 
 
 class TestGroundPointing(PythonGroundPointing):
-    def getTargetPV(self, pvProv, date, frame) -> TimeStampedPVCoordinates|TimeStampedFieldPVCoordinates:
+    def getTargetPV(self, pvProv, date, frame) -> Union[TimeStampedPVCoordinates|TimeStampedFieldPVCoordinates]:
         if isinstance(pvProv, FieldPVCoordinatesProvider):
             return TimeStampedFieldPVCoordinates(date, FieldPVCoordinates.getZero(date.getField()))
 
@@ -71,7 +72,7 @@ class GroundPointingTest(unittest.TestCase):
         # verify
         attitude = groundPointing.getAttitude(orbit, orbit.getDate(), frame)
         expectedRotation = attitude.getRotation()
-        self.assertEquals(0., Rotation.distance(expectedRotation, actualRotation))
+        self.assertEqual(0., Rotation.distance(expectedRotation, actualRotation))
 
     def testtemplateTestGetRotationRateSameFrame(self):
         self.templateTestGetRotation(self.INERTIAL_FRAME)
