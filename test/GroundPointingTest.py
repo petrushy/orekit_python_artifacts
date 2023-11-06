@@ -27,7 +27,7 @@ from org.hipparchus.analysis.differentiation import GradientField, UnivariateDer
 
 
 class TestGroundPointing(PythonGroundPointing):
-    def getTargetPV(self, pvProv, date, frame) -> Union[TimeStampedPVCoordinates|TimeStampedFieldPVCoordinates]:
+    def getTargetPV(self, pvProv, date, frame) -> Union[TimeStampedPVCoordinates,TimeStampedFieldPVCoordinates]:
         if isinstance(pvProv, FieldPVCoordinatesProvider):
             return TimeStampedFieldPVCoordinates(date, FieldPVCoordinates.getZero(date.getField()))
 
