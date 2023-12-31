@@ -3,8 +3,8 @@ Primary jar's for python orekit
 
 
 # To update:
-- Update branch name to version-X.Y
-- Copy new python orekit jar to repository, add to git
+- Update branch name of this repository to version-X.Y. Only major and minor versions.
+- Copy new python orekit jar from https://github.com/petrushy/Orekit to repository, add jar to this repo.
 - Remove old python jar from repository
 - Check if updated hipparcus libraries exist, in that case update the ones in repo
 - Generate stub files:
