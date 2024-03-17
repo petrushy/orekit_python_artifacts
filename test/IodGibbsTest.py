@@ -56,7 +56,9 @@ from EstimationTestUtils import EstimationTestUtils
 class IodGibbsTest(unittest.TestCase):
 
     def testGibbs1(self):
-        context = EstimationTestUtils().eccentricContext(os.path.join(curdir, "resources"))
+        context = EstimationTestUtils().eccentricContext([os.path.join(curdir, "resources/regular-data"),
+                                                          os.path.join(curdir, "resources/potential"),
+                                                          os.path.join(curdir, "resources/tides")])
         mu = context.initialOrbit.getMu()
         frame = context.initialOrbit.getFrame()
 
@@ -91,7 +93,9 @@ class IodGibbsTest(unittest.TestCase):
     def testGibbs2(self):
 
         # test extracted from "Fundamentals of astrodynamics & applications", D. Vallado, 3rd ed, chap Initial Orbit Determination, Exple 7-3, p457
-        context = EstimationTestUtils().eccentricContext(os.path.join(curdir, "resources"))
+        context = EstimationTestUtils().eccentricContext([os.path.join(curdir, "resources/regular-data"),
+                                                          os.path.join(curdir, "resources/potential"),
+                                                          os.path.join(curdir, "resources/tides")])
         mu = context.initialOrbit.getMu()
 
         # Initialization

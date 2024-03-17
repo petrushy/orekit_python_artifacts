@@ -22,6 +22,7 @@ Python version translated from Java by Petrus Hyvönen, SSC 2018
 
 import unittest
 import sys
+import pathlib
 
 # Python orekit specifics
 import orekit
@@ -89,17 +90,23 @@ from org.orekit.propagation import Propagator
 
 from Context import Context
 
+curdir = pathlib.Path(__file__).parent.resolve()
+
+
 
 class EstimationTestUtils():
-    def eccentricContext(self, dataRoot):
+    def eccentricContext(self, dataRoot: list):
         DM = DataContext.getDefault().getDataProvidersManager()
-        datafile = File(dataRoot)
-        if not datafile.exists():
-            print('File :', datafile.absolutePath, ' not found')
+        GravityFieldFactory.clearPotentialCoefficientsReaders()
+        GravityFieldFactory.clearOceanTidesReaders()
+        for i in dataRoot:
+            datafile = File(i)
+            if not datafile.exists():
+                print('File :', datafile.absolutePath, ' not found')
 
-        crawler = DirectoryCrawler(datafile)
-        #DM.clearProviders()
-        DM.addProvider(crawler)
+            crawler = DirectoryCrawler(datafile)
+            DM.addProvider(crawler)
+
         #DataProvidersManager.OREKIT_DATA_PATH = dataRoot
         context = Context()
 
@@ -122,6 +129,7 @@ class EstimationTestUtils():
                                                    context.sun, context.moon,
                                                    context.conventions, False)]
 
+        GravityFieldFactory.clearPotentialCoefficientsReaders()
         GravityFieldFactory.addPotentialCoefficientsReader(GRGSFormatReader("grim4s4_gr", True))
         aaReader = AstronomicalAmplitudeReader("hf-fes2004.dat", 5, 2, 3, 1.0)
 
