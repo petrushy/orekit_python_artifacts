@@ -50,18 +50,21 @@ def download_orekit_data_curdir(filename='orekit-data.zip'):
     url = "https://gitlab.orekit.org/orekit/orekit-data/-/archive/master/orekit-data-master.zip"
     # Download the orekit-data file and store it locally
 
-    with urlrequest.urlopen(url) as response, open("orekit-data.zip", 'wb') as out_file:
+    with urlrequest.urlopen(url) as response, open(filename, 'wb') as out_file:
         print('Downloading file from:', url)
         shutil.copyfileobj(response, out_file)
 
 
-def setup_orekit_curdir(filename='orekit-data.zip'):
+def setup_orekit_curdir(filename='orekit-data.zip', from_pip_library=False):
     """Setup the java engine with orekit.
 
     This function loads the Orekit data from either:
         - A zip in the current directory (by default orekit-data.zip),
         - A folder,
-    depending on whether `filename` is the path to a file or to a folder.
+        - From the `orekitdata` Python library, installable via pip (see below)
+    depending on whether `filename` is the path to a file or to a folder, and whether from_pip_library is True or False
+
+    The `orekitdata` library is installable with `pip install git+https://gitlab.orekit.org/orekit/orekit-data.git`
 
     Then the function sets up the Orekit DataProviders to access it.
 
@@ -71,30 +74,48 @@ def setup_orekit_curdir(filename='orekit-data.zip'):
 
     Args:
         filename (str): Name of zip or folder with orekit data. Default filename is 'orekit-data.zip'
-
+        from_pip_library (bool), default False: if True, will first try to load the data from the `orekitdata` python library
 
     """
 
     DM = DataContext.getDefault().getDataProvidersManager()
-    datafile = File(filename)
-    if not datafile.exists():
-        print('File or folder:', datafile.getAbsolutePath(), ' not found')
-        print("""
 
-        The Orekit library relies on some external data for physical models. 
-        Typical data are the Earth Orientation Parameters and the leap seconds history, 
-        both being provided by the IERS or the planetary ephemerides provided by JPL. 
-        Such data is stored in text or binary files with specific formats that Orekit knows 
-        how to read, and needs to be provided for the library to work.
+    data_load_from_library_sucessful = False
+    if from_pip_library:
+        try:
+            import orekitdata
+            datafile = File(orekitdata.__path__[0])
+            if not datafile.exists():
+                print(f"""Unable to find orekitdata library folder,
+                      will try to load Orekit data using the folder or filename {filename}""")
+            else:
+                filename = orekitdata.__path__[0]
+                data_load_from_library_sucessful = True
+        except ImportError:
+            print(f"""Failed to load orekitdata library.
+                  Install with `pip install git+https://gitlab.orekit.org/orekit/orekit-data.git`
+                  Will try to load Orekit data using the folder or filename {filename}""")
 
-        You can download a starting file with this data from the orekit gitlab at:
-        https://gitlab.orekit.org/orekit/orekit-data
+    if not data_load_from_library_sucessful:
+        datafile = File(filename)
+        if not datafile.exists():
+            print('File or folder:', datafile.getAbsolutePath(), ' not found')
+            print("""
 
-        or by the function:
-        orekit.pyhelpers.download_orekit_data_curdir()
+            The Orekit library relies on some external data for physical models.
+            Typical data are the Earth Orientation Parameters and the leap seconds history,
+            both being provided by the IERS or the planetary ephemerides provided by JPL.
+            Such data is stored in text or binary files with specific formats that Orekit knows
+            how to read, and needs to be provided for the library to work.
 
-        """)
-        return
+            You can download a starting file with this data from the orekit gitlab at:
+            https://gitlab.orekit.org/orekit/orekit-data
+
+            or by the function:
+            orekit.pyhelpers.download_orekit_data_curdir()
+
+            """)
+            return
 
     if os.path.isdir(filename):
         crawler = DirectoryCrawler(datafile)
