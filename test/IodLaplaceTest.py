@@ -57,6 +57,8 @@ from PVMeasurementCreator import PVMeasurementCreator
 from org.orekit.estimation.iod import IodLaplace
 from org.orekit.utils import IERSConventions, Constants, AbsolutePVCoordinates
 from org.orekit.bodies import OneAxisEllipsoid, GeodeticPoint
+from org.orekit.propagation import Propagator
+
 from orekit import JArray_double
 
 #from .EstimationTestUtils import EstimationTestUtils
@@ -100,7 +102,7 @@ class IodLaplaceTest(unittest.TestCase):
         # Helper function to generate a Line of Sight angles measurement for the given
         # observer and date using the TLE propagator.
 
-        satPvc = prop.getPVCoordinates(date, self.gcrf)
+        satPvc = Propagator.cast_(prop).getPVCoordinates(date, self.gcrf)
         raDec = AngularRaDec(observer, self.gcrf, date, JArray_double([0.0, 0.0]),
     						    JArray_double([1.0, 1.0]),
     						    JArray_double([1.0, 1.0]),
@@ -130,7 +132,7 @@ class IodLaplaceTest(unittest.TestCase):
         obsPva = self.observer.getBaseFrame().getPVCoordinates(obsDate2, self.gcrf)
 
         # Estimate the orbit using the classical Laplace method
-        truth = prop.getPVCoordinates(obsDate2, self.gcrf)
+        truth = Propagator.cast_(prop).getPVCoordinates(obsDate2, self.gcrf)
         estOrbit = IodLaplace(Constants.EGM96_EARTH_MU).estimate(self.gcrf, obsPva, obsDate1, los1, obsDate2, los2, obsDate3,
                                                                  los3)
         return Result(truth, estOrbit)

@@ -119,11 +119,11 @@ class GroundPointingTest(unittest.TestCase):
 
     def convertToField(self, field, orbit) -> FieldEquinoctialOrbit:
         zero = field.getZero()
-        fieldSemiMajorAxis = zero.add(orbit.getA())
+        fieldSemiMajorAxis = CalculusFieldElement.cast_(zero).add(orbit.getA())
         fieldDate = FieldAbsoluteDate(field, orbit.getDate())
         positionAngleType = PositionAngleType.MEAN
-        fieldAngle = zero.add(orbit.getL(positionAngleType))
-        return FieldEquinoctialOrbit(fieldSemiMajorAxis, zero, zero, zero, zero, fieldAngle, positionAngleType, orbit.getFrame(), fieldDate, zero.add(orbit.getMu()))
+        fieldAngle = CalculusFieldElement.cast_(zero).add(orbit.getL(positionAngleType))
+        return FieldEquinoctialOrbit(fieldSemiMajorAxis, zero, zero, zero, zero, fieldAngle, positionAngleType, orbit.getFrame(), fieldDate, CalculusFieldElement.cast_(zero).add(orbit.getMu()))
 
 
 if __name__ == '__main__':
