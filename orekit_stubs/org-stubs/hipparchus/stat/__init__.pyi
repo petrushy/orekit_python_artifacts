@@ -16,180 +16,31 @@ import typing
 
 _Frequency__T = typing.TypeVar('_Frequency__T', bound=java.lang.Comparable)  # <T>
 class Frequency(java.io.Serializable, typing.Generic[_Frequency__T]):
-    """
-    public class Frequency<T extends :class:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`<T>> extends :class:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
-    
-        Maintains a frequency distribution of Comparable values.
-    
-        The values are ordered using the default (natural order), unless a :code:`Comparator` is supplied in the constructor.
-    
-        Also see:
-            :class:`~org.hipparchus.stat.LongFrequency`, :meth:`~serialized`
-    """
     @typing.overload
     def __init__(self): ...
     @typing.overload
     def __init__(self, comparator: typing.Union[java.util.Comparator[_Frequency__T], typing.Callable[[_Frequency__T, _Frequency__T], int]]): ...
-    def addValue(self, t: _Frequency__T) -> None:
-        """
-            Adds 1 to the frequency count for v.
-        
-            Parameters:
-                v (:class:`~org.hipparchus.stat.Frequency`): the value to add.
-        
-        
-        """
-        ...
-    def clear(self) -> None:
-        """
-            Clears the frequency table
-        
-        """
-        ...
+    def addValue(self, t: _Frequency__T) -> None: ...
+    def clear(self) -> None: ...
     def entrySetIterator(self) -> java.util.Iterator[java.util.Map.Entry[_Frequency__T, int]]: ...
-    def equals(self, object: typing.Any) -> bool:
-        """
-        
-            Overrides:
-                :meth:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
-                class :class:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
-        
-        
-        """
-        ...
-    def getCount(self, t: _Frequency__T) -> int:
-        """
-            Returns the number of values equal to v. Returns 0 if the value is not comparable.
-        
-            Parameters:
-                v (:class:`~org.hipparchus.stat.Frequency`): the value to lookup.
-        
-            Returns:
-                the frequency of v.
-        
-        
-        """
-        ...
-    def getCumFreq(self, t: _Frequency__T) -> int:
-        """
-            Returns the cumulative frequency of values less than or equal to v.
-        
-            Parameters:
-                v (:class:`~org.hipparchus.stat.Frequency`): the value to lookup.
-        
-            Returns:
-                the proportion of values equal to v
-        
-        
-        """
-        ...
-    def getCumPct(self, t: _Frequency__T) -> float:
-        """
-            Returns the cumulative percentage of values less than or equal to v (as a proportion between 0 and 1).
-        
-            Returns :code:`Double.NaN` if no values have been added.
-        
-            Parameters:
-                v (:class:`~org.hipparchus.stat.Frequency`): the value to lookup
-        
-            Returns:
-                the proportion of values less than or equal to v
-        
-        
-        """
-        ...
+    def equals(self, object: typing.Any) -> bool: ...
+    def getCount(self, t: _Frequency__T) -> int: ...
+    def getCumFreq(self, t: _Frequency__T) -> int: ...
+    def getCumPct(self, t: _Frequency__T) -> float: ...
     def getMode(self) -> java.util.List[_Frequency__T]: ...
-    def getPct(self, t: _Frequency__T) -> float:
-        """
-            Returns the percentage of values that are equal to v (as a proportion between 0 and 1).
-        
-            Returns :code:`Double.NaN` if no values have been added.
-        
-            Parameters:
-                v (:class:`~org.hipparchus.stat.Frequency`): the value to lookup
-        
-            Returns:
-                the proportion of values equal to v
-        
-        
-        """
-        ...
-    def getSumFreq(self) -> int:
-        """
-            Returns the sum of all frequencies.
-        
-            Returns:
-                the total frequency count.
-        
-        
-        """
-        ...
-    def getUniqueCount(self) -> int:
-        """
-            Returns the number of values in the frequency table.
-        
-            Returns:
-                the number of unique values that have been added to the frequency table.
-        
-            Also see:
-                :meth:`~org.hipparchus.stat.Frequency.valuesIterator`
-        
-        
-        """
-        ...
-    def hashCode(self) -> int:
-        """
-        
-            Overrides:
-                :meth:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
-                class :class:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
-        
-        
-        """
-        ...
-    def incrementValue(self, t: _Frequency__T, long: int) -> None:
-        """
-            Increments the frequency count for v.
-        
-            Parameters:
-                v (:class:`~org.hipparchus.stat.Frequency`): the value to add.
-                increment (long): the amount by which the value should be incremented
-        
-        
-        """
-        ...
+    def getPct(self, t: _Frequency__T) -> float: ...
+    def getSumFreq(self) -> int: ...
+    def getUniqueCount(self) -> int: ...
+    def hashCode(self) -> int: ...
+    def incrementValue(self, t: _Frequency__T, long: int) -> None: ...
     @typing.overload
     def merge(self, collection: typing.Union[java.util.Collection['Frequency'[_Frequency__T]], typing.Sequence['Frequency'[_Frequency__T]], typing.Set['Frequency'[_Frequency__T]]]) -> None: ...
     @typing.overload
     def merge(self, frequency: 'Frequency'[_Frequency__T]) -> None: ...
-    def toString(self) -> str:
-        """
-            Return a string representation of this frequency distribution.
-        
-            Overrides:
-                :meth:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
-                class :class:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
-        
-            Returns:
-                a string representation.
-        
-        
-        """
-        ...
+    def toString(self) -> str: ...
     def valuesIterator(self) -> java.util.Iterator[_Frequency__T]: ...
 
 class LocalizedStatFormats(java.lang.Enum['LocalizedStatFormats'], org.hipparchus.exception.Localizable):
-    """
-    public enum LocalizedStatFormats extends :class:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.hipparchus.stat.LocalizedStatFormats`> implements :class:`~org.hipparchus.stat.https:.www.hipparchus.org.hipparchus`
-    
-        Enumeration for localized messages formats used in exceptions messages.
-    
-        The constants in this enumeration represent the available formats as localized strings. These formats are intended to be
-        localized using simple properties files, using the constant name as the key and the property value as the message
-        format. The source English format is provided in the constants themselves to serve both as a reminder for developers to
-        understand the parameters needed by each format, as a basis for translators to create localized properties files, and as
-        a default format if some translation is missing.
-    """
     TIES_ARE_NOT_ALLOWED: typing.ClassVar['LocalizedStatFormats'] = ...
     INSUFFICIENT_DATA_FOR_T_STATISTIC: typing.ClassVar['LocalizedStatFormats'] = ...
     NOT_ENOUGH_DATA_REGRESSION: typing.ClassVar['LocalizedStatFormats'] = ...
@@ -206,76 +57,19 @@ class LocalizedStatFormats(java.lang.Enum['LocalizedStatFormats'], org.hipparchu
     TWO_OR_MORE_CATEGORIES_REQUIRED: typing.ClassVar['LocalizedStatFormats'] = ...
     TWO_OR_MORE_VALUES_IN_CATEGORY_REQUIRED: typing.ClassVar['LocalizedStatFormats'] = ...
     ILLEGAL_STATE_PCA: typing.ClassVar['LocalizedStatFormats'] = ...
-    def getLocalizedString(self, locale: java.util.Locale) -> str:
-        """
-        
-            Specified by:
-                :meth:`~org.hipparchus.stat.https:.www.hipparchus.org.hipparchus` in
-                interface :class:`~org.hipparchus.stat.https:.www.hipparchus.org.hipparchus`
-        
-        
-        """
-        ...
-    def getSourceString(self) -> str:
-        """
-        
-            Specified by:
-                :meth:`~org.hipparchus.stat.https:.www.hipparchus.org.hipparchus` in
-                interface :class:`~org.hipparchus.stat.https:.www.hipparchus.org.hipparchus`
-        
-        
-        """
-        ...
+    def getLocalizedString(self, locale: java.util.Locale) -> str: ...
+    def getSourceString(self) -> str: ...
     _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
     @typing.overload
     @staticmethod
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'LocalizedStatFormats':
-        """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
-        
-            Parameters:
-                name (:class:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
-        
-            Returns:
-                the enum constant with the specified name
-        
-            Raises:
-                :class:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
-        
-        
-        """
-        ...
+    def valueOf(string: str) -> 'LocalizedStatFormats': ...
     @staticmethod
-    def values() -> typing.List['LocalizedStatFormats']:
-        """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
-        
-            .. code-block: java
-            
-            
-            for (LocalizedStatFormats c : LocalizedStatFormats.values())
-                System.out.println(c);
-            
-        
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
-        
-        
-        """
-        ...
+    def values() -> typing.List['LocalizedStatFormats']: ...
 
 class StatUtils:
-    """
-    public final class StatUtils extends :class:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
-    
-        StatUtils provides static methods for computing statistics based on data stored in double[] arrays.
-    """
     @typing.overload
     @staticmethod
     def geometricMean(*double: float) -> float: ...
@@ -307,48 +101,9 @@ class StatUtils:
     def mode(*double: float) -> typing.List[float]: ...
     @typing.overload
     @staticmethod
-    def mode(doubleArray: typing.List[float], int: int, int2: int) -> typing.List[float]:
-        """
-            Returns the sample mode(s).
-        
-            The mode is the most frequently occurring value in the sample. If there is a unique value with maximum frequency, this
-            value is returned as the only element of the output array. Otherwise, the returned array contains the maximum frequency
-            elements in increasing order.
-        
-            For example, if :code:`sample` is {0, 12, 5, 6, 0, 13, 5, 17}, the returned array will have length two, with 0 in the
-            first element and 5 in the second.
-        
-            NaN values are ignored when computing the mode - i.e., NaNs will never appear in the output array. If the sample
-            includes only NaNs or has length 0, an empty array is returned.
-        
-            Parameters:
-                sample (double[]): input data
-                begin (int): index (0-based) of the first array element to include
-                length (int): the number of elements to include
-        
-            Returns:
-                array of array of the most frequently occurring element(s) sorted in ascending order.
-        
-            Raises:
-                :class:`~org.hipparchus.stat.https:.www.hipparchus.org.hipparchus`: if the indices are invalid or the array is null
-        
-        
-        """
-        ...
+    def mode(doubleArray: typing.List[float], int: int, int2: int) -> typing.List[float]: ...
     @staticmethod
-    def normalize(*double: float) -> typing.List[float]:
-        """
-            Normalize (standardize) the sample, so it is has a mean of 0 and a standard deviation of 1.
-        
-            Parameters:
-                sample (double...): Sample to normalize.
-        
-            Returns:
-                normalized (standardized) sample.
-        
-        
-        """
-        ...
+    def normalize(*double: float) -> typing.List[float]: ...
     @typing.overload
     @staticmethod
     def percentile(doubleArray: typing.List[float], double2: float) -> float: ...
@@ -409,122 +164,32 @@ class StatUtils:
     def varianceDifference(doubleArray: typing.List[float], doubleArray2: typing.List[float], double3: float) -> float: ...
 
 class LongFrequency(Frequency[int]):
-    """
-    public class LongFrequency extends :class:`~org.hipparchus.stat.Frequency`<:class:`~org.hipparchus.stat.https:.docs.oracle.com.javase.8.docs.api.java.lang.Long?is`>
-    
-        Maintains a frequency distribution of Long values.
-    
-        Accepts byte, short, int, long primitive or Integer and Long values.
-    
-        Integer values (byte, short, int, long, Integer, Long) are not distinguished by type, i.e.
-        :code:`addValue(Long.valueOf(2)), addValue(2), addValue(2L)` all have the same effect (similarly for arguments to
-        :code:`getCount()` etc.).
-    
-        NOTE: byte and short values will be implicitly converted to int values by the compiler, thus there are no explicit
-        overloaded methods for these primitive types.
-    
-        The values are ordered using the default (natural order), unless a :code:`Comparator` is supplied in the constructor.
-    
-        Also see:
-            :meth:`~serialized`
-    """
     @typing.overload
     def __init__(self): ...
     @typing.overload
     def __init__(self, comparator: typing.Union[java.util.Comparator[int], typing.Callable[[int, int], int]]): ...
     @typing.overload
-    def addValue(self, t: java.lang.Comparable) -> None:
-        """
-            Adds 1 to the frequency count for v.
-        
-            Parameters:
-                v (int): the value to add.
-        
-        
-        """
-        ...
+    def addValue(self, t: java.lang.Comparable) -> None: ...
     @typing.overload
     def addValue(self, int: int) -> None: ...
     @typing.overload
-    def getCount(self, t: java.lang.Comparable) -> int:
-        """
-            Returns the number of values equal to v.
-        
-            Parameters:
-                v (int): the value to lookup.
-        
-            Returns:
-                the frequency of v.
-        
-        
-        """
-        ...
+    def getCount(self, t: java.lang.Comparable) -> int: ...
     @typing.overload
     def getCount(self, int: int) -> int: ...
     @typing.overload
-    def getCumFreq(self, t: java.lang.Comparable) -> int:
-        """
-            Returns the cumulative frequency of values less than or equal to v.
-        
-            Parameters:
-                v (int): the value to lookup.
-        
-            Returns:
-                the proportion of values equal to v
-        
-        
-        """
-        ...
+    def getCumFreq(self, t: java.lang.Comparable) -> int: ...
     @typing.overload
     def getCumFreq(self, int: int) -> int: ...
     @typing.overload
-    def getCumPct(self, t: java.lang.Comparable) -> float:
-        """
-            Returns the cumulative percentage of values less than or equal to v (as a proportion between 0 and 1).
-        
-            Returns :code:`Double.NaN` if no values have been added.
-        
-            Parameters:
-                v (int): the value to lookup
-        
-            Returns:
-                the proportion of values less than or equal to v
-        
-        
-        """
-        ...
+    def getCumPct(self, t: java.lang.Comparable) -> float: ...
     @typing.overload
     def getCumPct(self, int: int) -> float: ...
     @typing.overload
-    def getPct(self, t: java.lang.Comparable) -> float:
-        """
-            Returns the percentage of values that are equal to v (as a proportion between 0 and 1).
-        
-            Returns :code:`Double.NaN` if no values have been added.
-        
-            Parameters:
-                v (int): the value to lookup
-        
-            Returns:
-                the proportion of values equal to v
-        
-        
-        """
-        ...
+    def getPct(self, t: java.lang.Comparable) -> float: ...
     @typing.overload
     def getPct(self, int: int) -> float: ...
     @typing.overload
-    def incrementValue(self, t: java.lang.Comparable, long: int) -> None:
-        """
-            Increments the frequency count for v.
-        
-            Parameters:
-                v (int): the value to add.
-                increment (long): the amount by which the value should be incremented
-        
-        
-        """
-        ...
+    def incrementValue(self, t: java.lang.Comparable, long: int) -> None: ...
     @typing.overload
     def incrementValue(self, int: int, long: int) -> None: ...
 

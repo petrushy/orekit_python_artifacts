@@ -5,749 +5,138 @@ import typing
 
 
 class Abs(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Abs extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        Absolute value function.
-    """
     def __init__(self): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                x (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Acos(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Acos extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        Arc-cosine function.
-    """
     def __init__(self): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                x (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Acosh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Acosh extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        Hyperbolic arc-cosine function.
-    """
     def __init__(self): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                x (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Add(org.hipparchus.analysis.BivariateFunction):
-    """
-    public class Add extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.BivariateFunction`
-    
-        Add the two operands.
-    """
     def __init__(self): ...
-    def value(self, double: float, double2: float) -> float:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.BivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.BivariateFunction`
-        
-            Parameters:
-                x (double): Abscissa for which the function value should be computed.
-                y (double): Ordinate for which the function value should be computed.
-        
-            Returns:
-                the value.
-        
-        
-        """
-        ...
+    def value(self, double: float, double2: float) -> float: ...
 
 class Asin(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Asin extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        Arc-sine function.
-    """
     def __init__(self): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                x (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Asinh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Asinh extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        Hyperbolic arc-sine function.
-    """
     def __init__(self): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                x (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Atan(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Atan extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        Arc-tangent function.
-    """
     def __init__(self): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                x (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Atan2(org.hipparchus.analysis.BivariateFunction):
-    """
-    public class Atan2 extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.BivariateFunction`
-    
-        Arc-tangent function.
-    """
     def __init__(self): ...
-    def value(self, double: float, double2: float) -> float:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.BivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.BivariateFunction`
-        
-            Parameters:
-                x (double): Abscissa for which the function value should be computed.
-                y (double): Ordinate for which the function value should be computed.
-        
-            Returns:
-                the value.
-        
-        
-        """
-        ...
+    def value(self, double: float, double2: float) -> float: ...
 
 class Atanh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Atanh extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        Hyperbolic arc-tangent function.
-    """
     def __init__(self): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                x (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Cbrt(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Cbrt extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        Cube root function.
-    """
     def __init__(self): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                x (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Ceil(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Ceil extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        :code:`ceil` function.
-    """
     def __init__(self): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                x (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Constant(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Constant extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        Constant function.
-    """
     def __init__(self, double: float): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                t (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Cos(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Cos extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        Cosine function.
-    """
     def __init__(self): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                x (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Cosh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Cosh extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        Hyperbolic cosine function.
-    """
     def __init__(self): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                x (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Divide(org.hipparchus.analysis.BivariateFunction):
-    """
-    public class Divide extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.BivariateFunction`
-    
-        Divide the first operand by the second.
-    """
     def __init__(self): ...
-    def value(self, double: float, double2: float) -> float:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.BivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.BivariateFunction`
-        
-            Parameters:
-                x (double): Abscissa for which the function value should be computed.
-                y (double): Ordinate for which the function value should be computed.
-        
-            Returns:
-                the value.
-        
-        
-        """
-        ...
+    def value(self, double: float, double2: float) -> float: ...
 
 class Exp(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Exp extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        Exponential function.
-    """
     def __init__(self): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                x (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Expm1(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Expm1 extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        :code:`e :sup:`x` -1` function.
-    """
     def __init__(self): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                x (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Floor(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Floor extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        :code:`floor` function.
-    """
     def __init__(self): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                x (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Gaussian(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Gaussian extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        ` Gaussian <http://en.wikipedia.org/wiki/Gaussian_function>` function.
-    """
     @typing.overload
     def __init__(self): ...
     @typing.overload
@@ -756,41 +145,7 @@ class Gaussian(org.hipparchus.analysis.differentiation.UnivariateDifferentiableF
     def __init__(self, double: float, double2: float, double3: float): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        public <T extends :class:`~org.hipparchus.analysis.differentiation.Derivative`<T>> T value (T t) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
-        
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                t (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if :code:`x` does not satisfy the function's constraints (argument out of bound, or unsupported derivative order for
-                    example)
-        
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
     def value(self, t: _value_1__T) -> _value_1__T: ...
     class Parametric(org.hipparchus.analysis.ParametricUnivariateFunction):
@@ -799,49 +154,10 @@ class Gaussian(org.hipparchus.analysis.differentiation.UnivariateDifferentiableF
         def value(self, double: float, *double2: float) -> float: ...
 
 class HarmonicOscillator(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class HarmonicOscillator extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        ` simple harmonic oscillator <http://en.wikipedia.org/wiki/Harmonic_oscillator>` function.
-    """
     def __init__(self, double: float, double2: float, double3: float): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        public <T extends :class:`~org.hipparchus.analysis.differentiation.Derivative`<T>> T value (T t) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
-        
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                t (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if :code:`x` does not satisfy the function's constraints (argument out of bound, or unsupported derivative order for
-                    example)
-        
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
     def value(self, t: _value_1__T) -> _value_1__T: ...
     class Parametric(org.hipparchus.analysis.ParametricUnivariateFunction):
@@ -850,280 +166,58 @@ class HarmonicOscillator(org.hipparchus.analysis.differentiation.UnivariateDiffe
         def value(self, double: float, *double2: float) -> float: ...
 
 class Identity(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Identity extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        Identity function.
-    """
     def __init__(self): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                t (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Inverse(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Inverse extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        Inverse function.
-    """
     def __init__(self): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                t (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Log(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Log extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        Natural logarithm function.
-    """
     def __init__(self): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                x (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Log10(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Log10 extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        Base 10 logarithm function.
-    """
     def __init__(self): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                x (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Log1p(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Log1p extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        :code:`log(1 + p)` function.
-    """
     def __init__(self): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                x (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Logistic(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Logistic extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        ` Generalised logistic <http://en.wikipedia.org/wiki/Generalised_logistic_function>` function.
-    """
     def __init__(self, double: float, double2: float, double3: float, double4: float, double5: float, double6: float): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                t (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
     class Parametric(org.hipparchus.analysis.ParametricUnivariateFunction):
         def __init__(self): ...
         def gradient(self, double: float, *double2: float) -> typing.List[float]: ...
         def value(self, double: float, *double2: float) -> float: ...
 
 class Logit(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Logit extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        ` Logit <http://en.wikipedia.org/wiki/Logit>` function. It is the inverse of the
-        :class:`~org.hipparchus.analysis.function.Sigmoid` function.
-    """
     @typing.overload
     def __init__(self): ...
     @typing.overload
@@ -1139,290 +233,53 @@ class Logit(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunc
         def value(self, double: float, *double2: float) -> float: ...
 
 class Max(org.hipparchus.analysis.BivariateFunction):
-    """
-    public class Max extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.BivariateFunction`
-    
-        Maximum function.
-    """
     def __init__(self): ...
-    def value(self, double: float, double2: float) -> float:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.BivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.BivariateFunction`
-        
-            Parameters:
-                x (double): Abscissa for which the function value should be computed.
-                y (double): Ordinate for which the function value should be computed.
-        
-            Returns:
-                the value.
-        
-        
-        """
-        ...
+    def value(self, double: float, double2: float) -> float: ...
 
 class Min(org.hipparchus.analysis.BivariateFunction):
-    """
-    public class Min extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.BivariateFunction`
-    
-        Minimum function.
-    """
     def __init__(self): ...
-    def value(self, double: float, double2: float) -> float:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.BivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.BivariateFunction`
-        
-            Parameters:
-                x (double): Abscissa for which the function value should be computed.
-                y (double): Ordinate for which the function value should be computed.
-        
-            Returns:
-                the value.
-        
-        
-        """
-        ...
+    def value(self, double: float, double2: float) -> float: ...
 
 class Minus(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Minus extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        Minus function.
-    """
     def __init__(self): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                t (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Multiply(org.hipparchus.analysis.BivariateFunction):
-    """
-    public class Multiply extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.BivariateFunction`
-    
-        Multiply the two operands.
-    """
     def __init__(self): ...
-    def value(self, double: float, double2: float) -> float:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.BivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.BivariateFunction`
-        
-            Parameters:
-                x (double): Abscissa for which the function value should be computed.
-                y (double): Ordinate for which the function value should be computed.
-        
-            Returns:
-                the value.
-        
-        
-        """
-        ...
+    def value(self, double: float, double2: float) -> float: ...
 
 class Pow(org.hipparchus.analysis.BivariateFunction):
-    """
-    public class Pow extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.BivariateFunction`
-    
-        Power function.
-    """
     def __init__(self): ...
-    def value(self, double: float, double2: float) -> float:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.BivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.BivariateFunction`
-        
-            Parameters:
-                x (double): Abscissa for which the function value should be computed.
-                y (double): Ordinate for which the function value should be computed.
-        
-            Returns:
-                the value.
-        
-        
-        """
-        ...
+    def value(self, double: float, double2: float) -> float: ...
 
 class Power(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Power extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        Power function.
-    """
     def __init__(self, double: float): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                t (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Rint(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Rint extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        :code:`rint` function.
-    """
     def __init__(self): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                x (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Sigmoid(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Sigmoid extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        ` Sigmoid <http://en.wikipedia.org/wiki/Sigmoid_function>` function. It is the inverse of the
-        :class:`~org.hipparchus.analysis.function.Logit` function. A more flexible version, the generalised logistic, is
-        implemented by the :class:`~org.hipparchus.analysis.function.Logistic` class.
-    """
     @typing.overload
     def __init__(self): ...
     @typing.overload
     def __init__(self, double: float, double2: float): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        public <T extends :class:`~org.hipparchus.analysis.differentiation.Derivative`<T>> T value (T t) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
-        
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                t (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if :code:`x` does not satisfy the function's constraints (argument out of bound, or unsupported derivative order for
-                    example)
-        
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
     def value(self, t: _value_1__T) -> _value_1__T: ...
     class Parametric(org.hipparchus.analysis.ParametricUnivariateFunction):
@@ -1431,356 +288,67 @@ class Sigmoid(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFu
         def value(self, double: float, *double2: float) -> float: ...
 
 class Sin(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Sin extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        Sine function.
-    """
     def __init__(self): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                x (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Sinc(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Sinc extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        `Sinc <http://en.wikipedia.org/wiki/Sinc_function>` function, defined by
-    
-        .. code-block: java
-        
-        
-           sinc(x) = 1            if x = 0,
-                     sin(x) / x   otherwise.
-    """
     @typing.overload
     def __init__(self): ...
     @typing.overload
     def __init__(self, boolean: bool): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        public <T extends :class:`~org.hipparchus.analysis.differentiation.Derivative`<T>> T value (T t) throws :class:`~org.hipparchus.exception.MathIllegalArgumentException`
-        
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                t (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-            Raises:
-                :class:`~org.hipparchus.exception.MathIllegalArgumentException`: if :code:`x` does not satisfy the function's constraints (argument out of bound, or unsupported derivative order for
-                    example)
-        
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
     def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Sinh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Sinh extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        Hyperbolic sine function.
-    """
     def __init__(self): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                x (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Sqrt(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Sqrt extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        Square-root function.
-    """
     def __init__(self): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                x (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class StepFunction(org.hipparchus.analysis.UnivariateFunction):
-    """
-    public class StepFunction extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.UnivariateFunction`
-    
-        ` Step function <http://en.wikipedia.org/wiki/Step_function>`.
-    """
     def __init__(self, doubleArray: typing.List[float], doubleArray2: typing.List[float]): ...
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
 
 class Subtract(org.hipparchus.analysis.BivariateFunction):
-    """
-    public class Subtract extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.BivariateFunction`
-    
-        Subtract the second operand from the first.
-    """
     def __init__(self): ...
-    def value(self, double: float, double2: float) -> float:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.BivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.BivariateFunction`
-        
-            Parameters:
-                x (double): Abscissa for which the function value should be computed.
-                y (double): Ordinate for which the function value should be computed.
-        
-            Returns:
-                the value.
-        
-        
-        """
-        ...
+    def value(self, double: float, double2: float) -> float: ...
 
 class Tan(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Tan extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        Tangent function.
-    """
     def __init__(self): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                x (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Tanh(org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction):
-    """
-    public class Tanh extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-    
-        Hyperbolic tangent function.
-    """
     def __init__(self): ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.analysis.differentiation.Derivative)  # <T>
     @typing.overload
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
     @typing.overload
-    def value(self, t: _value_1__T) -> _value_1__T:
-        """
-            Compute the value for the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction.value` in
-                interface :class:`~org.hipparchus.analysis.differentiation.UnivariateDifferentiableFunction`
-        
-            Parameters:
-                x (T): the point for which the function value should be computed
-        
-            Returns:
-                the value
-        
-        
-        """
-        ...
+    def value(self, t: _value_1__T) -> _value_1__T: ...
 
 class Ulp(org.hipparchus.analysis.UnivariateFunction):
-    """
-    public class Ulp extends :class:`~org.hipparchus.analysis.function.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.analysis.UnivariateFunction`
-    
-        :code:`ulp` function.
-    """
     def __init__(self): ...
-    def value(self, double: float) -> float:
-        """
-            Compute the value of the function.
-        
-            Specified by:
-                :meth:`~org.hipparchus.analysis.UnivariateFunction.value` in
-                interface :class:`~org.hipparchus.analysis.UnivariateFunction`
-        
-            Parameters:
-                x (double): Point at which the function value should be computed.
-        
-            Returns:
-                the value of the function.
-        
-        
-        """
-        ...
+    def value(self, double: float) -> float: ...
 
 
 class __module_protocol__(typing.Protocol):

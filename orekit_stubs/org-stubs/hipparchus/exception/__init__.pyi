@@ -6,154 +6,25 @@ import typing
 
 
 class Localizable(java.io.Serializable):
-    """
-    public interface Localizable extends :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
-    
-        Interface for localizable strings.
-    """
-    def getLocalizedString(self, locale: java.util.Locale) -> str:
-        """
-            Gets the localized string.
-        
-            Parameters:
-                locale (:class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): locale into which to get the string.
-        
-            Returns:
-                the localized string or the source string if no localized version is available.
-        
-        
-        """
-        ...
-    def getSourceString(self) -> str:
-        """
-            Gets the source (non-localized) string.
-        
-            Returns:
-                the source string.
-        
-        
-        """
-        ...
+    def getLocalizedString(self, locale: java.util.Locale) -> str: ...
+    def getSourceString(self) -> str: ...
 
 class LocalizedException:
-    """
-    public interface LocalizedException
-    
-        This interface specified methods implemented by localized exception classes.
-    
-        This interface has been copied from the interface with the same name from Orekit.
-    """
-    def getMessage(self, locale: java.util.Locale) -> str:
-        """
-            Gets the message in a specified locale.
-        
-            Parameters:
-                locale (:class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): Locale in which the message should be translated
-        
-            Returns:
-                localized message
-        
-        
-        """
-        ...
-    def getParts(self) -> typing.List[typing.Any]:
-        """
-            Get the variable parts of the error message.
-        
-            Returns:
-                a copy of the variable parts of the error message
-        
-        
-        """
-        ...
-    def getSpecifier(self) -> Localizable:
-        """
-            Get the localizable specifier of the error message.
-        
-            Returns:
-                localizable specifier of the error message
-        
-        
-        """
-        ...
+    def getMessage(self, locale: java.util.Locale) -> str: ...
+    def getParts(self) -> typing.List[typing.Any]: ...
+    def getSpecifier(self) -> Localizable: ...
 
 class UTF8Control(java.util.ResourceBundle.Control):
-    """
-    public class UTF8Control extends :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.util.ResourceBundle.Control?is`
-    
-        Control class loading properties in UTF-8 encoding.
-    
-        This class has been very slightly adapted from BalusC answer to question: ` How to use UTF-8 in resource properties with
-        ResourceBundle
-        <http://stackoverflow.com/questions/4659929/how-to-use-utf-8-in-resource-properties-with-resourcebundle>`.
-    """
     def __init__(self): ...
     def newBundle(self, string: str, locale: java.util.Locale, string2: str, classLoader: java.lang.ClassLoader, boolean: bool) -> java.util.ResourceBundle: ...
 
 class DummyLocalizable(Localizable):
-    """
-    public class DummyLocalizable extends :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.hipparchus.exception.Localizable`
-    
-        Dummy implementation of the :class:`~org.hipparchus.exception.Localizable` interface, without localization.
-    
-        Also see:
-            :meth:`~serialized`
-    """
     def __init__(self, string: str): ...
-    def getLocalizedString(self, locale: java.util.Locale) -> str:
-        """
-            Gets the localized string.
-        
-            Specified by:
-                :meth:`~org.hipparchus.exception.Localizable.getLocalizedString` in
-                interface :class:`~org.hipparchus.exception.Localizable`
-        
-            Parameters:
-                locale (:class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): locale into which to get the string.
-        
-            Returns:
-                the localized string or the source string if no localized version is available.
-        
-        
-        """
-        ...
-    def getSourceString(self) -> str:
-        """
-            Gets the source (non-localized) string.
-        
-            Specified by:
-                :meth:`~org.hipparchus.exception.Localizable.getSourceString` in
-                interface :class:`~org.hipparchus.exception.Localizable`
-        
-            Returns:
-                the source string.
-        
-        
-        """
-        ...
-    def toString(self) -> str:
-        """
-        
-            Overrides:
-                :meth:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
-                class :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
-        
-        
-        """
-        ...
+    def getLocalizedString(self, locale: java.util.Locale) -> str: ...
+    def getSourceString(self) -> str: ...
+    def toString(self) -> str: ...
 
 class LocalizedCoreFormats(java.lang.Enum['LocalizedCoreFormats'], Localizable):
-    """
-    public enum LocalizedCoreFormats extends :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.hipparchus.exception.LocalizedCoreFormats`> implements :class:`~org.hipparchus.exception.Localizable`
-    
-        Enumeration for localized messages formats used in exceptions messages.
-    
-        The constants in this enumeration represent the available formats as localized strings. These formats are intended to be
-        localized using simple properties files, using the constant name as the key and the property value as the message
-        format. The source English format is provided in the constants themselves to serve both as a reminder for developers to
-        understand the parameters needed by each format, as a basis for translators to create localized properties files, and as
-        a default format if some translation is missing.
-    """
     ARRAY_SIZE_EXCEEDS_MAX_VARIABLES: typing.ClassVar['LocalizedCoreFormats'] = ...
     ARRAY_SIZES_SHOULD_HAVE_DIFFERENCE_1: typing.ClassVar['LocalizedCoreFormats'] = ...
     ARRAY_SUMS_TO_ZERO: typing.ClassVar['LocalizedCoreFormats'] = ...
@@ -338,300 +209,57 @@ class LocalizedCoreFormats(java.lang.Enum['LocalizedCoreFormats'], Localizable):
     ZERO_STATE_SIZE: typing.ClassVar['LocalizedCoreFormats'] = ...
     RIGHT_EDGE_GREATER_THAN_LEFT_EDGE: typing.ClassVar['LocalizedCoreFormats'] = ...
     INPUT_EXPECTED_BETWEEN_ZERO_AND_ONE_INCLUDED: typing.ClassVar['LocalizedCoreFormats'] = ...
-    def getLocalizedString(self, locale: java.util.Locale) -> str:
-        """
-            Gets the localized string.
-        
-            Specified by:
-                :meth:`~org.hipparchus.exception.Localizable.getLocalizedString` in
-                interface :class:`~org.hipparchus.exception.Localizable`
-        
-            Parameters:
-                locale (:class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): locale into which to get the string.
-        
-            Returns:
-                the localized string or the source string if no localized version is available.
-        
-        
-        """
-        ...
-    def getSourceString(self) -> str:
-        """
-            Gets the source (non-localized) string.
-        
-            Specified by:
-                :meth:`~org.hipparchus.exception.Localizable.getSourceString` in
-                interface :class:`~org.hipparchus.exception.Localizable`
-        
-            Returns:
-                the source string.
-        
-        
-        """
-        ...
+    def getLocalizedString(self, locale: java.util.Locale) -> str: ...
+    def getSourceString(self) -> str: ...
     _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
     @typing.overload
     @staticmethod
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'LocalizedCoreFormats':
-        """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
-        
-            Parameters:
-                name (:class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
-        
-            Returns:
-                the enum constant with the specified name
-        
-            Raises:
-                :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
-        
-        
-        """
-        ...
+    def valueOf(string: str) -> 'LocalizedCoreFormats': ...
     @staticmethod
-    def values() -> typing.List['LocalizedCoreFormats']:
-        """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
-        
-            .. code-block: java
-            
-            
-            for (LocalizedCoreFormats c : LocalizedCoreFormats.values())
-                System.out.println(c);
-            
-        
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
-        
-        
-        """
-        ...
+    def values() -> typing.List['LocalizedCoreFormats']: ...
 
 class MathRuntimeException(java.lang.RuntimeException, LocalizedException):
-    """
-    public class MathRuntimeException extends :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.RuntimeException?is` implements :class:`~org.hipparchus.exception.LocalizedException`
-    
-        All exceptions thrown by the Hipparchus code inherit from this class.
-    
-        Also see:
-            :meth:`~serialized`
-    """
     @typing.overload
     def __init__(self, throwable: java.lang.Throwable, localizable: Localizable, *object: typing.Any): ...
     @typing.overload
     def __init__(self, localizable: Localizable, *object: typing.Any): ...
     @typing.overload
     @staticmethod
-    def createInternalError() -> 'MathRuntimeException':
-        """
-            Create an exception for an internal error.
-        
-            Returns:
-                a new runtime exception indicating an internal error
-        
-        """
-        ...
+    def createInternalError() -> 'MathRuntimeException': ...
     @typing.overload
     @staticmethod
-    def createInternalError(throwable: java.lang.Throwable) -> 'MathRuntimeException':
-        """
-            Create an exception for an internal error.
-        
-            Parameters:
-                cause (:class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`): root cause
-        
-            Returns:
-                a new runtime exception, indicating an internal error and wrapping the given throwable
-        
-        
-        """
-        ...
-    def getLocalizedMessage(self) -> str:
-        """
-        
-            Overrides:
-                :meth:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
-                class :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
-        
-        
-        """
-        ...
+    def createInternalError(throwable: java.lang.Throwable) -> 'MathRuntimeException': ...
+    def getLocalizedMessage(self) -> str: ...
     @typing.overload
-    def getMessage(self) -> str:
-        """
-        
-            Overrides:
-                :meth:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
-                class :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
-        
-        
-        """
-        ...
+    def getMessage(self) -> str: ...
     @typing.overload
-    def getMessage(self, locale: java.util.Locale) -> str:
-        """
-            Gets the message in a specified locale.
-        
-            Specified by:
-                :meth:`~org.hipparchus.exception.LocalizedException.getMessage` in
-                interface :class:`~org.hipparchus.exception.LocalizedException`
-        
-            Parameters:
-                locale (:class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): Locale in which the message should be translated
-        
-            Returns:
-                localized message
-        
-        """
-        ...
-    def getParts(self) -> typing.List[typing.Any]:
-        """
-            Get the variable parts of the error message.
-        
-            Specified by:
-                :meth:`~org.hipparchus.exception.LocalizedException.getParts` in
-                interface :class:`~org.hipparchus.exception.LocalizedException`
-        
-            Returns:
-                a copy of the variable parts of the error message
-        
-        
-        """
-        ...
-    def getSpecifier(self) -> Localizable:
-        """
-            Get the localizable specifier of the error message.
-        
-            Specified by:
-                :meth:`~org.hipparchus.exception.LocalizedException.getSpecifier` in
-                interface :class:`~org.hipparchus.exception.LocalizedException`
-        
-            Returns:
-                localizable specifier of the error message
-        
-        
-        """
-        ...
+    def getMessage(self, locale: java.util.Locale) -> str: ...
+    def getParts(self) -> typing.List[typing.Any]: ...
+    def getSpecifier(self) -> Localizable: ...
 
 class NullArgumentException(java.lang.NullPointerException, LocalizedException):
-    """
-    public class NullArgumentException extends :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is` implements :class:`~org.hipparchus.exception.LocalizedException`
-    
-        All conditions checks that fail due to a :code:`null` argument must throw this exception. This class is meant to signal
-        a precondition violation ("null is an illegal argument") and so does not extend the standard
-        :code:`NullPointerException`. Propagation of :code:`NullPointerException` from within Hipparchus is construed to be a
-        bug.
-    
-        Note: from 1.0 onwards, this class extends
-        :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is` instead of
-        :class:`~org.hipparchus.exception.MathIllegalArgumentException`.
-    
-        Also see:
-            :meth:`~serialized`
-    """
     @typing.overload
     def __init__(self): ...
     @typing.overload
     def __init__(self, localizable: Localizable, *object: typing.Any): ...
-    def getLocalizedMessage(self) -> str:
-        """
-        
-            Overrides:
-                :meth:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
-                class :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
-        
-        
-        """
-        ...
+    def getLocalizedMessage(self) -> str: ...
     @typing.overload
-    def getMessage(self) -> str:
-        """
-        
-            Overrides:
-                :meth:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
-                class :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
-        
-        
-        """
-        ...
+    def getMessage(self) -> str: ...
     @typing.overload
-    def getMessage(self, locale: java.util.Locale) -> str:
-        """
-            Gets the message in a specified locale.
-        
-            Specified by:
-                :meth:`~org.hipparchus.exception.LocalizedException.getMessage` in
-                interface :class:`~org.hipparchus.exception.LocalizedException`
-        
-            Parameters:
-                locale (:class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): Locale in which the message should be translated
-        
-            Returns:
-                localized message
-        
-        """
-        ...
-    def getParts(self) -> typing.List[typing.Any]:
-        """
-            Get the variable parts of the error message.
-        
-            Specified by:
-                :meth:`~org.hipparchus.exception.LocalizedException.getParts` in
-                interface :class:`~org.hipparchus.exception.LocalizedException`
-        
-            Returns:
-                a copy of the variable parts of the error message
-        
-        
-        """
-        ...
-    def getSpecifier(self) -> Localizable:
-        """
-            Get the localizable specifier of the error message.
-        
-            Specified by:
-                :meth:`~org.hipparchus.exception.LocalizedException.getSpecifier` in
-                interface :class:`~org.hipparchus.exception.LocalizedException`
-        
-            Returns:
-                localizable specifier of the error message
-        
-        
-        """
-        ...
+    def getMessage(self, locale: java.util.Locale) -> str: ...
+    def getParts(self) -> typing.List[typing.Any]: ...
+    def getSpecifier(self) -> Localizable: ...
 
 class MathIllegalArgumentException(MathRuntimeException):
-    """
-    public class MathIllegalArgumentException extends :class:`~org.hipparchus.exception.MathRuntimeException`
-    
-        Base class for all preconditions violation exceptions. In most cases, this class should not be instantiated directly: it
-        should serve as a base class to create all the exceptions that have the semantics of the standard
-        :class:`~org.hipparchus.exception.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`.
-    
-        Also see:
-            :meth:`~serialized`
-    """
     @typing.overload
     def __init__(self, throwable: java.lang.Throwable, localizable: Localizable, *object: typing.Any): ...
     @typing.overload
     def __init__(self, localizable: Localizable, *object: typing.Any): ...
 
 class MathIllegalStateException(MathRuntimeException):
-    """
-    public class MathIllegalStateException extends :class:`~org.hipparchus.exception.MathRuntimeException`
-    
-        Base class for all exceptions that signal that the process throwing the exception is in a state that does not comply
-        with the set of states that it is designed to be in.
-    
-        Also see:
-            :meth:`~serialized`
-    """
     @typing.overload
     def __init__(self, throwable: java.lang.Throwable, localizable: Localizable, *object: typing.Any): ...
     @typing.overload
