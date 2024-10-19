@@ -112,6 +112,9 @@ class MyElevationDetector(PythonEventDetector):
     def getHandler(self):
         return mycounter
 
+    def finish(self, state):
+        pass
+
 
 class EventDetectorTest(unittest.TestCase):
 
