@@ -92,6 +92,9 @@ class GrazingHandler(PythonEventHandler):
     def getHandler(self):
         pass
 
+    def finish(self, finalState, detector):
+        pass
+
 
 class InterSatDirectViewDetectorTest(unittest.TestCase):
 

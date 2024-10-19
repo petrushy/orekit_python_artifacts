@@ -93,6 +93,9 @@ class EventHandlerTest(unittest.TestCase):
             def resetState(self, detector, oldState):
                 return oldState
 
+            def finish(self, finalState, detector):
+                pass
+
         #%% detectors
         detector = ElevationDetector(sta1Frame).withConstantElevation(elevation)
         detector = detector.withHandler(myContinueOnEvent())

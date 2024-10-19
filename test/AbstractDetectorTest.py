@@ -43,6 +43,9 @@ class PassCounter(PythonEventHandler):
     def resetState(self, detector, oldState):
         return oldState
 
+    def finish(self, finalState, detector):
+        pass
+
 
 class MyElevationDetector(PythonAbstractDetector):
 

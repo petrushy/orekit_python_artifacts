@@ -67,6 +67,9 @@ class MyEventCounter(PythonEventHandler):
     def resetState(self, detector, oldState):
         return oldState
 
+    def finish(self, finalState, detector):
+        pass
+
 mycounter = MyEventCounter()
 
 class MyAdaptableInterval(PythonAdaptableInterval):

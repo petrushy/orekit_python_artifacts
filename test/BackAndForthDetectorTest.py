@@ -66,6 +66,9 @@ class Visibility(PythonEventHandler): # implements EventHandler<ElevationDetecto
 #     
         def resetState(self, detector,  oldState):
             return oldState
+
+        def finish(self, finalState, detector):
+            pass
         
 class BackAndForthDetectorTest(unittest.TestCase):
 
