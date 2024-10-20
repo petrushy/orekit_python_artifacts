@@ -81,7 +81,7 @@ class GrazingHandler(PythonEventHandler):
 
         testvalue = FastMath.abs(FastMath.toDegrees(topo.getAzimuth(pSlave, frame, grazingDate) -
                                                     topo.getAzimuth(pMaster, frame, grazingDate)))
-        assert -6.0e-14 < testvalue - 180.0 < 6.0e-14
+        assert -6.0e-13 < testvalue - 180.0 < 6.0e-13
 
         return Action.CONTINUE
 

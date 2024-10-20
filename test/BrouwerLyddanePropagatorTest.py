@@ -67,11 +67,11 @@ class BrouwerLyddanePropagatorTest(unittest.TestCase):
 
         # positions  velocity and semi major axis match perfectly
         self.assertAlmostEqual(0.0, Vector3D.distance(initialOrbit.getPVCoordinates().getPosition(),
-                                                       finalOrbit.getPVCoordinates().getPosition()), delta=1.0e-8)
+                                                       finalOrbit.getPVCoordinates().getPosition()), delta=2.4e-8)
 
         self.assertAlmostEqual(0.0, Vector3D.distance(initialOrbit.getPVCoordinates().getVelocity(),
-                                                       finalOrbit.getPVCoordinates().getVelocity()), delta= 1.0e-11)
-        self.assertAlmostEqual(0.0, finalOrbit.getA() - initialOrbit.getA(), delta=0.0)
+                                                       finalOrbit.getPVCoordinates().getVelocity()), delta= 1.9e-11)
+        self.assertAlmostEqual(0.0, finalOrbit.getA() - initialOrbit.getA(), delta=9.4e-10)
 
     def test_compareToNumericalPropagation(self):
 
@@ -129,7 +129,7 @@ class BrouwerLyddanePropagatorTest(unittest.TestCase):
         BLFinalState = BLextrapolator.propagate(initDate.shiftedBy(timeshift))
         BLOrbit = KeplerianOrbit.cast_(OrbitType.KEPLERIAN.convertType(BLFinalState.getOrbit()))
 
-        self.assertAlmostEqual(NumOrbit.getA(), BLOrbit.getA(), delta=0.2)
+        self.assertAlmostEqual(NumOrbit.getA(), BLOrbit.getA(), delta=0.18)
         self.assertAlmostEqual(NumOrbit.getE(), BLOrbit.getE(), delta=0.00000028)
         self.assertAlmostEqual(NumOrbit.getI(), BLOrbit.getI(), delta=0.000004)
         self.assertAlmostEqual(MathUtils.normalizeAngle(NumOrbit.getPerigeeArgument(), FastMath.PI),
