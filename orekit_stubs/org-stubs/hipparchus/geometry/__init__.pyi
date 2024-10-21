@@ -3,6 +3,7 @@ import java.lang
 import java.text
 import java.util
 import org.hipparchus.exception
+import org.hipparchus.geometry.class-use
 import org.hipparchus.geometry.enclosing
 import org.hipparchus.geometry.euclidean
 import org.hipparchus.geometry.hull
@@ -113,6 +114,7 @@ class __module_protocol__(typing.Protocol):
     Space: typing.Type[Space]
     Vector: typing.Type[Vector]
     VectorFormat: typing.Type[VectorFormat]
+    class-use: org.hipparchus.geometry.class-use.__module_protocol__
     enclosing: org.hipparchus.geometry.enclosing.__module_protocol__
     euclidean: org.hipparchus.geometry.euclidean.__module_protocol__
     hull: org.hipparchus.geometry.hull.__module_protocol__

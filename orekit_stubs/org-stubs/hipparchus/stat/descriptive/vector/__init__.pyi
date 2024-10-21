@@ -1,6 +1,7 @@
 import java.io
 import org.hipparchus.linear
 import org.hipparchus.stat.descriptive
+import org.hipparchus.stat.descriptive.vector.class-use
 import typing
 
 
@@ -30,3 +31,4 @@ class __module_protocol__(typing.Protocol):
 
     VectorialCovariance: typing.Type[VectorialCovariance]
     VectorialStorelessStatistic: typing.Type[VectorialStorelessStatistic]
+    class-use: org.hipparchus.stat.descriptive.vector.class-use.__module_protocol__

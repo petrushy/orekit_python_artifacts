@@ -1,5 +1,6 @@
 import java.io
 import java.util
+import org.hipparchus.distribution.class-use
 import org.hipparchus.distribution.continuous
 import org.hipparchus.distribution.discrete
 import org.hipparchus.distribution.multivariate
@@ -59,6 +60,7 @@ class __module_protocol__(typing.Protocol):
     IntegerDistribution: typing.Type[IntegerDistribution]
     MultivariateRealDistribution: typing.Type[MultivariateRealDistribution]
     RealDistribution: typing.Type[RealDistribution]
+    class-use: org.hipparchus.distribution.class-use.__module_protocol__
     continuous: org.hipparchus.distribution.continuous.__module_protocol__
     discrete: org.hipparchus.distribution.discrete.__module_protocol__
     multivariate: org.hipparchus.distribution.multivariate.__module_protocol__

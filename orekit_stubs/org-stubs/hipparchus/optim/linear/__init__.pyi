@@ -4,6 +4,7 @@ import java.util
 import org.hipparchus.analysis
 import org.hipparchus.linear
 import org.hipparchus.optim
+import org.hipparchus.optim.linear.class-use
 import org.hipparchus.optim.nonlinear.scalar
 import typing
 
@@ -26,9 +27,9 @@ class LinearConstraint(java.io.Serializable):
 
 class LinearConstraintSet(org.hipparchus.optim.OptimizationData):
     @typing.overload
-    def __init__(self, collection: typing.Union[java.util.Collection[LinearConstraint], typing.Sequence[LinearConstraint], typing.Set[LinearConstraint]]): ...
+    def __init__(self, collection: typing.Union[java.util.Collection[LinearConstraint], typing.Sequence[LinearConstraint]]): ...
     @typing.overload
-    def __init__(self, *linearConstraint: LinearConstraint): ...
+    def __init__(self, linearConstraintArray: typing.List[LinearConstraint]): ...
     def getConstraints(self) -> java.util.Collection[LinearConstraint]: ...
 
 class LinearObjectiveFunction(org.hipparchus.analysis.MultivariateFunction, org.hipparchus.optim.OptimizationData, java.io.Serializable):
@@ -49,7 +50,7 @@ class LinearOptimizer(org.hipparchus.optim.nonlinear.scalar.MultivariateOptimize
     @typing.overload
     def optimize(self) -> typing.Any: ...
     @typing.overload
-    def optimize(self, *optimizationData: org.hipparchus.optim.OptimizationData) -> org.hipparchus.optim.PointValuePair: ...
+    def optimize(self, optimizationDataArray: typing.List[org.hipparchus.optim.OptimizationData]) -> org.hipparchus.optim.PointValuePair: ...
 
 class NonNegativeConstraint(org.hipparchus.optim.OptimizationData):
     def __init__(self, boolean: bool): ...
@@ -102,7 +103,7 @@ class SimplexSolver(LinearOptimizer):
     @typing.overload
     def optimize(self) -> typing.Any: ...
     @typing.overload
-    def optimize(self, *optimizationData: org.hipparchus.optim.OptimizationData) -> org.hipparchus.optim.PointValuePair: ...
+    def optimize(self, optimizationDataArray: typing.List[org.hipparchus.optim.OptimizationData]) -> org.hipparchus.optim.PointValuePair: ...
 
 
 class __module_protocol__(typing.Protocol):
@@ -117,3 +118,4 @@ class __module_protocol__(typing.Protocol):
     Relationship: typing.Type[Relationship]
     SimplexSolver: typing.Type[SimplexSolver]
     SolutionCallback: typing.Type[SolutionCallback]
+    class-use: org.hipparchus.optim.linear.class-use.__module_protocol__

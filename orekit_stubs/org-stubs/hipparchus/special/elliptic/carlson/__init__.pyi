@@ -1,5 +1,6 @@
 import org.hipparchus
 import org.hipparchus.complex
+import org.hipparchus.special.elliptic.carlson.class-use
 import typing
 
 
@@ -95,3 +96,4 @@ class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.hipparchus.special.elliptic.carlson")``.
 
     CarlsonEllipticIntegral: typing.Type[CarlsonEllipticIntegral]
+    class-use: org.hipparchus.special.elliptic.carlson.class-use.__module_protocol__

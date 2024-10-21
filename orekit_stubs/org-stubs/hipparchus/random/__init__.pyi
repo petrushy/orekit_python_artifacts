@@ -3,6 +3,7 @@ import java.util
 import org
 import org.hipparchus.distribution
 import org.hipparchus.linear
+import org.hipparchus.random.class-use
 import typing
 
 
@@ -245,7 +246,7 @@ class RandomDataGenerator(org.hipparchus.random.ForwardingRandomGenerator, Rando
     @typing.overload
     def nextSample(self, doubleArray: typing.List[float], int: int) -> typing.List[float]: ...
     @typing.overload
-    def nextSample(self, collection: typing.Union[java.util.Collection[typing.Any], typing.Sequence[typing.Any], typing.Set[typing.Any]], int: int) -> typing.List[typing.Any]: ...
+    def nextSample(self, collection: typing.Union[java.util.Collection[typing.Any], typing.Sequence[typing.Any]], int: int) -> typing.List[typing.Any]: ...
     def nextSampleWithReplacement(self, int: int, doubleArray: typing.List[float]) -> typing.List[int]: ...
     def nextUniform(self, double: float, double2: float) -> float: ...
     def nextZipf(self, int: int, double: float) -> int: ...
@@ -353,3 +354,4 @@ class __module_protocol__(typing.Protocol):
     Well44497a: typing.Type[Well44497a]
     Well44497b: typing.Type[Well44497b]
     Well512a: typing.Type[Well512a]
+    class-use: org.hipparchus.random.class-use.__module_protocol__

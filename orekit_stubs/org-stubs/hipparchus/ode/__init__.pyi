@@ -4,6 +4,7 @@ import java.util
 import org.hipparchus
 import org.hipparchus.complex
 import org.hipparchus.exception
+import org.hipparchus.ode.class-use
 import org.hipparchus.ode.events
 import org.hipparchus.ode.nonstiff
 import org.hipparchus.ode.sampling
@@ -250,7 +251,7 @@ class VariationalEquation:
     @typing.overload
     def __init__(self, expandableODE: ExpandableODE, oDEJacobiansProvider: 'ODEJacobiansProvider'): ...
     @typing.overload
-    def __init__(self, expandableODE: ExpandableODE, ordinaryDifferentialEquation: OrdinaryDifferentialEquation, doubleArray: typing.List[float], parametersController: 'ParametersController', *parameterConfiguration: ParameterConfiguration): ...
+    def __init__(self, expandableODE: ExpandableODE, ordinaryDifferentialEquation: OrdinaryDifferentialEquation, doubleArray: typing.List[float], parametersController: 'ParametersController', parameterConfigurationArray: typing.List[ParameterConfiguration]): ...
     def extractMainSetJacobian(self, oDEState: ODEState) -> typing.List[typing.List[float]]: ...
     def extractParameterJacobian(self, oDEState: ODEState, string: str) -> typing.List[float]: ...
     def setInitialMainStateJacobian(self, doubleArray: typing.List[typing.List[float]]) -> None: ...
@@ -387,6 +388,7 @@ class __module_protocol__(typing.Protocol):
     SecondOrderODE: typing.Type[SecondOrderODE]
     SecondaryODE: typing.Type[SecondaryODE]
     VariationalEquation: typing.Type[VariationalEquation]
+    class-use: org.hipparchus.ode.class-use.__module_protocol__
     events: org.hipparchus.ode.events.__module_protocol__
     nonstiff: org.hipparchus.ode.nonstiff.__module_protocol__
     sampling: org.hipparchus.ode.sampling.__module_protocol__

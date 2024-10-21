@@ -1,5 +1,6 @@
 import org.hipparchus
 import org.hipparchus.analysis
+import org.hipparchus.analysis.integration.class-use
 import org.hipparchus.analysis.integration.gauss
 import typing
 
@@ -163,4 +164,5 @@ class __module_protocol__(typing.Protocol):
     SimpsonIntegrator: typing.Type[SimpsonIntegrator]
     TrapezoidIntegrator: typing.Type[TrapezoidIntegrator]
     UnivariateIntegrator: typing.Type[UnivariateIntegrator]
+    class-use: org.hipparchus.analysis.integration.class-use.__module_protocol__
     gauss: org.hipparchus.analysis.integration.gauss.__module_protocol__

@@ -2,6 +2,7 @@ import java.io
 import org.hipparchus.analysis
 import org.hipparchus.optim
 import org.hipparchus.optim.nonlinear.scalar
+import org.hipparchus.optim.univariate.class-use
 import org.hipparchus.random
 import typing
 
@@ -50,7 +51,7 @@ class UnivariateOptimizer(org.hipparchus.optim.BaseOptimizer['UnivariatePointVal
     @typing.overload
     def optimize(self) -> typing.Any: ...
     @typing.overload
-    def optimize(self, *optimizationData: org.hipparchus.optim.OptimizationData) -> 'UnivariatePointValuePair': ...
+    def optimize(self, optimizationDataArray: typing.List[org.hipparchus.optim.OptimizationData]) -> 'UnivariatePointValuePair': ...
 
 class UnivariatePointValuePair(java.io.Serializable):
     def __init__(self, double: float, double2: float): ...
@@ -70,7 +71,7 @@ class MultiStartUnivariateOptimizer(UnivariateOptimizer):
     @typing.overload
     def optimize(self) -> typing.Any: ...
     @typing.overload
-    def optimize(self, *optimizationData: org.hipparchus.optim.OptimizationData) -> UnivariatePointValuePair: ...
+    def optimize(self, optimizationDataArray: typing.List[org.hipparchus.optim.OptimizationData]) -> UnivariatePointValuePair: ...
 
 
 class __module_protocol__(typing.Protocol):
@@ -84,3 +85,4 @@ class __module_protocol__(typing.Protocol):
     UnivariateObjectiveFunction: typing.Type[UnivariateObjectiveFunction]
     UnivariateOptimizer: typing.Type[UnivariateOptimizer]
     UnivariatePointValuePair: typing.Type[UnivariatePointValuePair]
+    class-use: org.hipparchus.optim.univariate.class-use.__module_protocol__

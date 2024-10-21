@@ -1,3 +1,4 @@
+import org.hipparchus.stat.projection.class-use
 import typing
 
 
@@ -22,3 +23,4 @@ class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.hipparchus.stat.projection")``.
 
     PCA: typing.Type[PCA]
+    class-use: org.hipparchus.stat.projection.class-use.__module_protocol__

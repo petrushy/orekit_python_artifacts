@@ -3,6 +3,7 @@ import org.hipparchus
 import org.hipparchus.analysis
 import org.hipparchus.analysis.solvers
 import org.hipparchus.ode
+import org.hipparchus.ode.events.class-use
 import org.hipparchus.ode.sampling
 import typing
 
@@ -233,3 +234,4 @@ class __module_protocol__(typing.Protocol):
     ODEEventHandler: typing.Type[ODEEventHandler]
     ODEStepEndHandler: typing.Type[ODEStepEndHandler]
     StepEndEventState: typing.Type[StepEndEventState]
+    class-use: org.hipparchus.ode.events.class-use.__module_protocol__

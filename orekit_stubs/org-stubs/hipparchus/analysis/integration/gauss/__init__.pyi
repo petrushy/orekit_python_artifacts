@@ -1,5 +1,6 @@
 import org.hipparchus
 import org.hipparchus.analysis
+import org.hipparchus.analysis.integration.gauss.class-use
 import org.hipparchus.util
 import typing
 
@@ -133,3 +134,4 @@ class __module_protocol__(typing.Protocol):
     RuleFactory: typing.Type[RuleFactory]
     SymmetricFieldGaussIntegrator: typing.Type[SymmetricFieldGaussIntegrator]
     SymmetricGaussIntegrator: typing.Type[SymmetricGaussIntegrator]
+    class-use: org.hipparchus.analysis.integration.gauss.class-use.__module_protocol__

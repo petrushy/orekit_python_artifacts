@@ -1,6 +1,7 @@
 import java.io
 import java.util
 import org.hipparchus.distribution
+import org.hipparchus.distribution.discrete.class-use
 import org.hipparchus.util
 import typing
 
@@ -165,3 +166,4 @@ class __module_protocol__(typing.Protocol):
     PoissonDistribution: typing.Type[PoissonDistribution]
     UniformIntegerDistribution: typing.Type[UniformIntegerDistribution]
     ZipfDistribution: typing.Type[ZipfDistribution]
+    class-use: org.hipparchus.distribution.discrete.class-use.__module_protocol__

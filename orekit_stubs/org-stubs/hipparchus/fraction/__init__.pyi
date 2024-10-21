@@ -6,6 +6,7 @@ import java.util
 import java.util.stream
 import org
 import org.hipparchus
+import org.hipparchus.fraction.class-use
 import org.hipparchus.util
 import typing
 
@@ -349,3 +350,4 @@ class __module_protocol__(typing.Protocol):
     FractionFormat: typing.Type[FractionFormat]
     ProperBigFractionFormat: typing.Type[ProperBigFractionFormat]
     ProperFractionFormat: typing.Type[ProperFractionFormat]
+    class-use: org.hipparchus.fraction.class-use.__module_protocol__

@@ -1,6 +1,7 @@
 import java.io
 import java.util
 import org.hipparchus.geometry
+import org.hipparchus.geometry.hull.class-use
 import org.hipparchus.geometry.partitioning
 import typing
 
@@ -15,7 +16,7 @@ class ConvexHull(java.io.Serializable, typing.Generic[_ConvexHull__S, _ConvexHul
 _ConvexHullGenerator__S = typing.TypeVar('_ConvexHullGenerator__S', bound=org.hipparchus.geometry.Space)  # <S>
 _ConvexHullGenerator__P = typing.TypeVar('_ConvexHullGenerator__P', bound=org.hipparchus.geometry.Point)  # <P>
 class ConvexHullGenerator(typing.Generic[_ConvexHullGenerator__S, _ConvexHullGenerator__P]):
-    def generate(self, collection: typing.Union[java.util.Collection[_ConvexHullGenerator__P], typing.Sequence[_ConvexHullGenerator__P], typing.Set[_ConvexHullGenerator__P]]) -> ConvexHull[_ConvexHullGenerator__S, _ConvexHullGenerator__P]: ...
+    def generate(self, collection: typing.Union[java.util.Collection[_ConvexHullGenerator__P], typing.Sequence[_ConvexHullGenerator__P]]) -> ConvexHull[_ConvexHullGenerator__S, _ConvexHullGenerator__P]: ...
 
 
 class __module_protocol__(typing.Protocol):
@@ -23,3 +24,4 @@ class __module_protocol__(typing.Protocol):
 
     ConvexHull: typing.Type[ConvexHull]
     ConvexHullGenerator: typing.Type[ConvexHullGenerator]
+    class-use: org.hipparchus.geometry.hull.class-use.__module_protocol__

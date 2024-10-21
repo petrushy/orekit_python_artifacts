@@ -1,4 +1,5 @@
 import org.hipparchus.filtering.kalman
+import org.hipparchus.filtering.kalman.unscented.class-use
 import org.hipparchus.linear
 import org.hipparchus.util
 import typing
@@ -33,3 +34,4 @@ class __module_protocol__(typing.Protocol):
     UnscentedEvolution: typing.Type[UnscentedEvolution]
     UnscentedKalmanFilter: typing.Type[UnscentedKalmanFilter]
     UnscentedProcess: typing.Type[UnscentedProcess]
+    class-use: org.hipparchus.filtering.kalman.unscented.class-use.__module_protocol__

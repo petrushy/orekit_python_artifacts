@@ -1,6 +1,7 @@
 import java.lang
 import org.hipparchus.optim
 import org.hipparchus.optim.nonlinear.scalar
+import org.hipparchus.optim.nonlinear.scalar.gradient.class-use
 import typing
 
 
@@ -18,7 +19,7 @@ class NonLinearConjugateGradientOptimizer(org.hipparchus.optim.nonlinear.scalar.
     @typing.overload
     def optimize(self) -> typing.Any: ...
     @typing.overload
-    def optimize(self, *optimizationData: org.hipparchus.optim.OptimizationData) -> org.hipparchus.optim.PointValuePair: ...
+    def optimize(self, optimizationDataArray: typing.List[org.hipparchus.optim.OptimizationData]) -> org.hipparchus.optim.PointValuePair: ...
     class Formula(java.lang.Enum['NonLinearConjugateGradientOptimizer.Formula']):
         FLETCHER_REEVES: typing.ClassVar['NonLinearConjugateGradientOptimizer.Formula'] = ...
         POLAK_RIBIERE: typing.ClassVar['NonLinearConjugateGradientOptimizer.Formula'] = ...
@@ -41,3 +42,4 @@ class __module_protocol__(typing.Protocol):
 
     NonLinearConjugateGradientOptimizer: typing.Type[NonLinearConjugateGradientOptimizer]
     Preconditioner: typing.Type[Preconditioner]
+    class-use: org.hipparchus.optim.nonlinear.scalar.gradient.class-use.__module_protocol__

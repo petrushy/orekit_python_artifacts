@@ -1,4 +1,5 @@
 import org.hipparchus.analysis
+import org.hipparchus.class-use
 import org.hipparchus.complex
 import org.hipparchus.dfp
 import org.hipparchus.distribution
@@ -140,6 +141,7 @@ class __module_protocol__(typing.Protocol):
     Field: typing.Type[Field]
     FieldElement: typing.Type[FieldElement]
     analysis: org.hipparchus.analysis.__module_protocol__
+    class-use: org.hipparchus.class-use.__module_protocol__
     complex: org.hipparchus.complex.__module_protocol__
     dfp: org.hipparchus.dfp.__module_protocol__
     distribution: org.hipparchus.distribution.__module_protocol__

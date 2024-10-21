@@ -4,18 +4,84 @@ import java.util
 import java.util.regex
 import org.orekit.gnss
 import org.orekit.gnss.metric.messages
+import org.orekit.gnss.metric.parser.class-use
 import org.orekit.utils.units
 import typing
 
 
 
 class DataField:
-    def booleanValue(self, encodedMessage: 'EncodedMessage') -> bool: ...
-    def doubleValue(self, encodedMessage: 'EncodedMessage') -> float: ...
-    def intValue(self, encodedMessage: 'EncodedMessage') -> int: ...
-    def stringValue(self, encodedMessage: 'EncodedMessage', int: int) -> str: ...
+    """
+    public interface DataField
+    
+        Interface for data fields used to parsed encoded messages.
+    
+        Since:
+            11.0
+    """
+    def booleanValue(self, encodedMessage: 'EncodedMessage') -> bool:
+        """
+            Get the value of the field as a boolean.
+        
+            Parameters:
+                message (:class:`~org.orekit.gnss.metric.parser.EncodedMessage`): message containing the data
+        
+            Returns:
+                boolean value of the field
+        
+        
+        """
+        ...
+    def doubleValue(self, encodedMessage: 'EncodedMessage') -> float:
+        """
+            Get the value of the field as a double.
+        
+            Parameters:
+                message (:class:`~org.orekit.gnss.metric.parser.EncodedMessage`): message containing the data
+        
+            Returns:
+                double value of the field
+        
+        
+        """
+        ...
+    def intValue(self, encodedMessage: 'EncodedMessage') -> int:
+        """
+            Get the value of the field as an integer.
+        
+            Parameters:
+                message (:class:`~org.orekit.gnss.metric.parser.EncodedMessage`): message containing the data
+        
+            Returns:
+                integer value of the field
+        
+        
+        """
+        ...
+    def stringValue(self, encodedMessage: 'EncodedMessage', int: int) -> str:
+        """
+            Get the value of the field as a String.
+        
+            Parameters:
+                message (:class:`~org.orekit.gnss.metric.parser.EncodedMessage`): message containing the data
+                n (int): number of UTF8 characters
+        
+            Returns:
+                String value of the field
+        
+        
+        """
+        ...
 
 class DataType(java.lang.Enum['DataType']):
+    """
+    public enum DataType extends :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.metric.parser.DataType`>
+    
+        Enum containing all low level data types that can be parsed to build a message.
+    
+        Since:
+            11.0
+    """
     BIT_1: typing.ClassVar['DataType'] = ...
     BIT_2: typing.ClassVar['DataType'] = ...
     BIT_3: typing.ClassVar['DataType'] = ...
@@ -84,43 +150,253 @@ class DataType(java.lang.Enum['DataType']):
     INT_S_24: typing.ClassVar['DataType'] = ...
     INT_S_27: typing.ClassVar['DataType'] = ...
     INT_S_32: typing.ClassVar['DataType'] = ...
-    def decode(self, encodedMessage: 'EncodedMessage') -> int: ...
+    def decode(self, encodedMessage: 'EncodedMessage') -> int:
+        """
+            Decode a piece of data extracted from an encoded message.
+        
+            Parameters:
+                message (:class:`~org.orekit.gnss.metric.parser.EncodedMessage`): encoded message providing the bits to decode
+        
+            Returns:
+                data decoded as a Long object, or null if data not available
+        
+        
+        """
+        ...
     _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
     @typing.overload
     @staticmethod
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'DataType': ...
+    def valueOf(string: str) -> 'DataType':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (:class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        
+        
+        """
+        ...
     @staticmethod
-    def values() -> typing.List['DataType']: ...
+    def values() -> typing.List['DataType']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            for (DataType c : DataType.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
 
 class EncodedMessage:
-    def extractBits(self, int: int) -> int: ...
-    def start(self) -> None: ...
+    """
+    public interface EncodedMessage
+    
+        Interface for getting bits forming encoded messages.
+    
+        Classes implementing this interface must contain exactly one complete message.
+    
+        Since:
+            11.0
+    """
+    def extractBits(self, int: int) -> int:
+        """
+            Extract the next n bits from the encoded message.
+        
+            Parameters:
+                n (int): number of bits to extract (cannot exceed 32 bits)
+        
+            Returns:
+                bits packed as the LSB of a 64 bits primitive long
+        
+        
+        """
+        ...
+    def start(self) -> None:
+        """
+            Start message extraction.
+        
+        """
+        ...
 
 class MessageType:
-    def parse(self, encodedMessage: EncodedMessage, int: int) -> org.orekit.gnss.metric.messages.ParsedMessage: ...
+    """
+    public interface MessageType
+    
+        Interface for encoded message types.
+    
+        Since:
+            11.0
+    """
+    def parse(self, encodedMessage: EncodedMessage, int: int) -> org.orekit.gnss.metric.messages.ParsedMessage:
+        """
+            Parse an encoded message.
+        
+            Parameters:
+                encodedMessage (:class:`~org.orekit.gnss.metric.parser.EncodedMessage`): encoded message to parse
+                messageNumber (int): message number
+        
+            Returns:
+                parsed message
+        
+        
+        """
+        ...
 
 class MessagesParser:
+    """
+    public abstract class MessagesParser extends :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Parser for IGS encoded messages.
+    
+        Since:
+            11.0
+    """
     def __init__(self, list: java.util.List[int]): ...
-    def parse(self, encodedMessage: EncodedMessage, boolean: bool) -> org.orekit.gnss.metric.messages.ParsedMessage: ...
+    def parse(self, encodedMessage: EncodedMessage, boolean: bool) -> org.orekit.gnss.metric.messages.ParsedMessage:
+        """
+            Parse one message.
+        
+            Parameters:
+                message (:class:`~org.orekit.gnss.metric.parser.EncodedMessage`): encoded message to parse
+                ignoreUnknownMessageTypes (boolean): if true, unknown messages types are silently ignored
+        
+            Returns:
+                parsed message, or null if parse not possible and :code:`ignoreUnknownMessageTypes` is true
+        
+        
+        """
+        ...
 
 class Units:
+    """
+    public class Units extends :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Units used in RTCM and IGS SSR messages.
+    
+        Since:
+            11.0
+    """
     SEMI_CIRCLE: typing.ClassVar[org.orekit.utils.units.Unit] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.Unit` SEMI_CIRCLE
+    
+        Semi-circles units.
+    
+    """
     NS: typing.ClassVar[org.orekit.utils.units.Unit] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.Unit` NS
+    
+        Nanoseconds units.
+    
+    """
     MM: typing.ClassVar[org.orekit.utils.units.Unit] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.Unit` MM
+    
+        Millimetres units.
+    
+    """
     MM_PER_S: typing.ClassVar[org.orekit.utils.units.Unit] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.Unit` MM_PER_S
+    
+        Millimetres per second units.
+    
+    """
     MM_PER_S2: typing.ClassVar[org.orekit.utils.units.Unit] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.Unit` MM_PER_S2
+    
+        Millimetres per square second units.
+    
+    """
     KM_PER_S: typing.ClassVar[org.orekit.utils.units.Unit] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.Unit` KM_PER_S
+    
+        Kilometers par second units.
+    
+    """
     KM_PER_S2: typing.ClassVar[org.orekit.utils.units.Unit] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.Unit` KM_PER_S2
+    
+        Kilometers par square second units.
+    
+    """
 
 class AbstractEncodedMessage(EncodedMessage):
+    """
+    public abstract class AbstractEncodedMessage extends :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.gnss.metric.parser.EncodedMessage`
+    
+        Encoded messages as a sequence of bytes.
+    
+        Note that only full bytes are supported. This means that for example the 300 bits message from GPS sub-frames must be
+        completed with 4 zero bits to reach 304 bits = 38 bytes, even if only the first 300 bits will be decoded and the 4 extra
+        bits in the last byte will be ignored.
+    
+        Since:
+            11.0
+    """
     def __init__(self): ...
-    def extractBits(self, int: int) -> int: ...
-    def start(self) -> None: ...
+    def extractBits(self, int: int) -> int:
+        """
+            Extract the next n bits from the encoded message.
+        
+            Specified by:
+                :meth:`~org.orekit.gnss.metric.parser.EncodedMessage.extractBits` in
+                interface :class:`~org.orekit.gnss.metric.parser.EncodedMessage`
+        
+            Parameters:
+                n (int): number of bits to extract (cannot exceed 32 bits)
+        
+            Returns:
+                bits packed as the LSB of a 64 bits primitive long
+        
+        
+        """
+        ...
+    def start(self) -> None:
+        """
+            Start message extraction.
+        
+            Specified by:
+                :meth:`~org.orekit.gnss.metric.parser.EncodedMessage.start` in
+                interface :class:`~org.orekit.gnss.metric.parser.EncodedMessage`
+        
+        
+        """
+        ...
 
 class IgsSsrDataField(java.lang.Enum['IgsSsrDataField'], DataField):
+    """
+    public enum IgsSsrDataField extends :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.metric.parser.IgsSsrDataField`> implements :class:`~org.orekit.gnss.metric.parser.DataField`
+    
+        Enum containing all intermediate level data fields that can be parsed to build an IGS SSR message.
+    
+        Since:
+            11.0
+    """
     IDF001: typing.ClassVar['IgsSsrDataField'] = ...
     IDF002: typing.ClassVar['IgsSsrDataField'] = ...
     IDF003: typing.ClassVar['IgsSsrDataField'] = ...
@@ -168,11 +444,55 @@ class IgsSsrDataField(java.lang.Enum['IgsSsrDataField'], DataField):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'IgsSsrDataField': ...
+    def valueOf(string: str) -> 'IgsSsrDataField':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (:class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        
+        
+        """
+        ...
     @staticmethod
-    def values() -> typing.List['IgsSsrDataField']: ...
+    def values() -> typing.List['IgsSsrDataField']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            for (IgsSsrDataField c : IgsSsrDataField.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
 
 class IgsSsrMessageType(java.lang.Enum['IgsSsrMessageType'], MessageType):
+    """
+    public enum IgsSsrMessageType extends :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.metric.parser.IgsSsrMessageType`> implements :class:`~org.orekit.gnss.metric.parser.MessageType`
+    
+        Enum containing the supported IGS SSR messages types.
+    
+        Since:
+            11.0
+    
+        Also see:
+            "IGS State Space Representation (SSR) Format, Version 1.00, October 2020."
+    """
     IGM_01: typing.ClassVar['IgsSsrMessageType'] = ...
     IGM_02: typing.ClassVar['IgsSsrMessageType'] = ...
     IGM_03: typing.ClassVar['IgsSsrMessageType'] = ...
@@ -182,56 +502,232 @@ class IgsSsrMessageType(java.lang.Enum['IgsSsrMessageType'], MessageType):
     IGM_07: typing.ClassVar['IgsSsrMessageType'] = ...
     IM_201: typing.ClassVar['IgsSsrMessageType'] = ...
     @staticmethod
-    def getMessageType(string: str) -> 'IgsSsrMessageType': ...
-    def getPattern(self) -> java.util.regex.Pattern: ...
+    def getMessageType(string: str) -> 'IgsSsrMessageType':
+        """
+            Get the message type corresponding to a message number.
+        
+            Parameters:
+                number (:class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): message number
+        
+            Returns:
+                the message type corresponding to the message number
+        
+        
+        """
+        ...
+    def getPattern(self) -> java.util.regex.Pattern:
+        """
+            Get the message number.
+        
+            Returns:
+                message number
+        
+        
+        """
+        ...
     @staticmethod
-    def getSatelliteId(satelliteSystem: org.orekit.gnss.SatelliteSystem, int: int) -> int: ...
+    def getSatelliteId(satelliteSystem: org.orekit.gnss.SatelliteSystem, int: int) -> int:
+        """
+            Transform the satellite ID parsed from the IGS SSR message to the real ID.
+        
+            Parameters:
+                system (:class:`~org.orekit.gnss.SatelliteSystem`): the satellite system of the parsed message
+                id (int): the parsed satellite ID
+        
+            Returns:
+                the real satellite ID
+        
+        
+        """
+        ...
     @staticmethod
-    def messageNumberToSatelliteSystem(int: int) -> org.orekit.gnss.SatelliteSystem: ...
+    def messageNumberToSatelliteSystem(int: int) -> org.orekit.gnss.SatelliteSystem:
+        """
+            Find the satellite system corresponding to the sub-type message number.
+        
+            See Table 5 of reference
+        
+            Parameters:
+                subTypeMessage (int): message umber
+        
+            Returns:
+                the corresponding satellite system
+        
+        
+        """
+        ...
     _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
     @typing.overload
     @staticmethod
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'IgsSsrMessageType': ...
+    def valueOf(string: str) -> 'IgsSsrMessageType':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (:class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        
+        
+        """
+        ...
     @staticmethod
-    def values() -> typing.List['IgsSsrMessageType']: ...
+    def values() -> typing.List['IgsSsrMessageType']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            for (IgsSsrMessageType c : IgsSsrMessageType.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
 
 class IgsSsrMessagesParser(MessagesParser):
+    """
+    public class IgsSsrMessagesParser extends :class:`~org.orekit.gnss.metric.parser.MessagesParser`
+    
+        Parser for SSR encoded messages.
+    
+        Since:
+            11.0
+    """
     def __init__(self, list: java.util.List[int]): ...
 
 class PythonDataField(DataField):
+    """
+    public class PythonDataField extends :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.gnss.metric.parser.DataField`
+    """
     def __init__(self): ...
-    def booleanValue(self, encodedMessage: EncodedMessage) -> bool: ...
+    def booleanValue(self, encodedMessage: EncodedMessage) -> bool:
+        """
+            Description copied from interface: :meth:`~org.orekit.gnss.metric.parser.DataField.booleanValue`
+            Get the value of the field as a boolean.
+        
+            Specified by:
+                :meth:`~org.orekit.gnss.metric.parser.DataField.booleanValue` in
+                interface :class:`~org.orekit.gnss.metric.parser.DataField`
+        
+            Parameters:
+                message (:class:`~org.orekit.gnss.metric.parser.EncodedMessage`): message containing the data
+        
+            Returns:
+                boolean value of the field
+        
+        
+        """
+        ...
     def finalize(self) -> None: ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        public long pythonExtension()
+        
+        
+        """
+        ...
 
 class PythonEncodedMessage(EncodedMessage):
+    """
+    public class PythonEncodedMessage extends :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.gnss.metric.parser.EncodedMessage`
+    """
     def __init__(self): ...
-    def extractBits(self, int: int) -> int: ...
+    def extractBits(self, int: int) -> int:
+        """
+            Description copied from interface: :meth:`~org.orekit.gnss.metric.parser.EncodedMessage.extractBits`
+            Extract the next n bits from the encoded message.
+        
+            Specified by:
+                :meth:`~org.orekit.gnss.metric.parser.EncodedMessage.extractBits` in
+                interface :class:`~org.orekit.gnss.metric.parser.EncodedMessage`
+        
+            Parameters:
+                n (int): number of bits to extract (cannot exceed 32 bits)
+        
+            Returns:
+                bits packed as the LSB of a 64 bits primitive long
+        
+        
+        """
+        ...
     def finalize(self) -> None: ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        public long pythonExtension()
+        
+        
+        """
+        ...
 
 class PythonMessageType(MessageType):
+    """
+    public class PythonMessageType extends :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.gnss.metric.parser.MessageType`
+    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def parse(self, encodedMessage: EncodedMessage, int: int) -> org.orekit.gnss.metric.messages.ParsedMessage: ...
+    def parse(self, encodedMessage: EncodedMessage, int: int) -> org.orekit.gnss.metric.messages.ParsedMessage:
+        """
+            Description copied from interface: :meth:`~org.orekit.gnss.metric.parser.MessageType.parse`
+            Parse an encoded message.
+        
+            Specified by:
+                :meth:`~org.orekit.gnss.metric.parser.MessageType.parse` in
+                interface :class:`~org.orekit.gnss.metric.parser.MessageType`
+        
+            Parameters:
+                encodedMessage (:class:`~org.orekit.gnss.metric.parser.EncodedMessage`): encoded message to parse
+                messageNumber (int): message number
+        
+            Returns:
+                parsed message
+        
+        
+        """
+        ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+        public long pythonExtension()
+        
+        
+        """
+        ...
 
 class RtcmDataField(java.lang.Enum['RtcmDataField'], DataField):
+    """
+    public enum RtcmDataField extends :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.metric.parser.RtcmDataField`> implements :class:`~org.orekit.gnss.metric.parser.DataField`
+    
+        Enum containing all intermediate level data fields that can be parsed to build a RTCM message.
+    
+        Since:
+            11.0
+    """
     DF002: typing.ClassVar['RtcmDataField'] = ...
     DF009: typing.ClassVar['RtcmDataField'] = ...
     DF038: typing.ClassVar['RtcmDataField'] = ...
@@ -413,11 +909,55 @@ class RtcmDataField(java.lang.Enum['RtcmDataField'], DataField):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'RtcmDataField': ...
+    def valueOf(string: str) -> 'RtcmDataField':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (:class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        
+        
+        """
+        ...
     @staticmethod
-    def values() -> typing.List['RtcmDataField']: ...
+    def values() -> typing.List['RtcmDataField']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            for (RtcmDataField c : RtcmDataField.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
 
 class RtcmMessageType(java.lang.Enum['RtcmMessageType'], MessageType):
+    """
+    public enum RtcmMessageType extends :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.metric.parser.RtcmMessageType`> implements :class:`~org.orekit.gnss.metric.parser.MessageType`
+    
+        Enum containing the supported RTCM messages types.
+    
+        Since:
+            11.0
+    
+        Also see:
+            "RTCM STANDARD 10403.3, DIFFERENTIAL GNSS (GLOBAL NAVIGATION SATELLITE SYSTEMS) SERVICES – VERSION 3, October 2016."
+    """
     RTCM_1019: typing.ClassVar['RtcmMessageType'] = ...
     RTCM_1020: typing.ClassVar['RtcmMessageType'] = ...
     RTCM_1042: typing.ClassVar['RtcmMessageType'] = ...
@@ -433,41 +973,185 @@ class RtcmMessageType(java.lang.Enum['RtcmMessageType'], MessageType):
     RTCM_1241: typing.ClassVar['RtcmMessageType'] = ...
     RTCM_1243: typing.ClassVar['RtcmMessageType'] = ...
     @staticmethod
-    def getMessageType(string: str) -> 'RtcmMessageType': ...
-    def getPattern(self) -> java.util.regex.Pattern: ...
+    def getMessageType(string: str) -> 'RtcmMessageType':
+        """
+            Get the message type corresponding to a message number.
+        
+            Parameters:
+                rtcmNumber (:class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): message number
+        
+            Returns:
+                the message type corresponding to the message number
+        
+        
+        """
+        ...
+    def getPattern(self) -> java.util.regex.Pattern:
+        """
+            Get the message number.
+        
+            Returns:
+                message number
+        
+        
+        """
+        ...
     _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
     @typing.overload
     @staticmethod
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'RtcmMessageType': ...
+    def valueOf(string: str) -> 'RtcmMessageType':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (:class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        
+        
+        """
+        ...
     @staticmethod
-    def values() -> typing.List['RtcmMessageType']: ...
+    def values() -> typing.List['RtcmMessageType']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            for (RtcmMessageType c : RtcmMessageType.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
 
 class RtcmMessagesParser(MessagesParser):
+    """
+    public class RtcmMessagesParser extends :class:`~org.orekit.gnss.metric.parser.MessagesParser`
+    
+        Parser for RTCM encoded messages.
+    
+        Since:
+            11.0
+    """
     def __init__(self, list: java.util.List[int]): ...
 
 class ByteArrayEncodedMessage(AbstractEncodedMessage):
+    """
+    public class ByteArrayEncodedMessage extends :class:`~org.orekit.gnss.metric.parser.AbstractEncodedMessage`
+    
+        Encoded message as a byte array.
+    
+        Since:
+            11.0
+    """
     def __init__(self, byteArray: typing.List[int]): ...
-    def start(self) -> None: ...
+    def start(self) -> None:
+        """
+            Start message extraction.
+        
+            Specified by:
+                :meth:`~org.orekit.gnss.metric.parser.EncodedMessage.start` in
+                interface :class:`~org.orekit.gnss.metric.parser.EncodedMessage`
+        
+            Overrides:
+                :meth:`~org.orekit.gnss.metric.parser.AbstractEncodedMessage.start` in
+                class :class:`~org.orekit.gnss.metric.parser.AbstractEncodedMessage`
+        
+        
+        """
+        ...
 
 class HexadecimalSequenceEncodedMessage(AbstractEncodedMessage):
+    """
+    public class HexadecimalSequenceEncodedMessage extends :class:`~org.orekit.gnss.metric.parser.AbstractEncodedMessage`
+    
+        Encoded message as an hexadecimal characters sequence.
+    
+        Since:
+            11.0
+    """
     def __init__(self, charSequence: typing.Union[java.lang.CharSequence, str]): ...
-    def start(self) -> None: ...
+    def start(self) -> None:
+        """
+            Start message extraction.
+        
+            Specified by:
+                :meth:`~org.orekit.gnss.metric.parser.EncodedMessage.start` in
+                interface :class:`~org.orekit.gnss.metric.parser.EncodedMessage`
+        
+            Overrides:
+                :meth:`~org.orekit.gnss.metric.parser.AbstractEncodedMessage.start` in
+                class :class:`~org.orekit.gnss.metric.parser.AbstractEncodedMessage`
+        
+        
+        """
+        ...
 
 class InputStreamEncodedMessage(AbstractEncodedMessage):
+    """
+    public class InputStreamEncodedMessage extends :class:`~org.orekit.gnss.metric.parser.AbstractEncodedMessage`
+    
+        Encoded message from an input stream.
+    
+        Since:
+            11.0
+    """
     def __init__(self, inputStream: java.io.InputStream): ...
 
 class PythonAbstractEncodedMessage(AbstractEncodedMessage):
+    """
+    public class PythonAbstractEncodedMessage extends :class:`~org.orekit.gnss.metric.parser.AbstractEncodedMessage`
+    """
     def __init__(self): ...
-    def fetchByte(self) -> int: ...
+    def fetchByte(self) -> int:
+        """
+            Fetch the next byte from the message.
+        
+            Specified by:
+                :meth:`~org.orekit.gnss.metric.parser.AbstractEncodedMessage.fetchByte` in
+                class :class:`~org.orekit.gnss.metric.parser.AbstractEncodedMessage`
+        
+            Returns:
+                next byte from the message, as a primitive integer, or -1 if end of data has been reached
+        
+        
+        """
+        ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
 
 
 class __module_protocol__(typing.Protocol):
@@ -493,3 +1177,4 @@ class __module_protocol__(typing.Protocol):
     RtcmMessageType: typing.Type[RtcmMessageType]
     RtcmMessagesParser: typing.Type[RtcmMessagesParser]
     Units: typing.Type[Units]
+    class-use: org.orekit.gnss.metric.parser.class-use.__module_protocol__

@@ -5,6 +5,7 @@ import java.util
 import org.hipparchus
 import org.hipparchus.analysis
 import org.hipparchus.analysis.integration
+import org.hipparchus.complex.class-use
 import org.hipparchus.util
 import typing
 
@@ -207,7 +208,7 @@ class ComplexUnivariateIntegrator:
     @typing.overload
     def integrate(self, int: int, calculusFieldUnivariateFunction: org.hipparchus.analysis.CalculusFieldUnivariateFunction[Complex], complex: Complex, complex2: Complex) -> Complex: ...
     @typing.overload
-    def integrate(self, int: int, calculusFieldUnivariateFunction: org.hipparchus.analysis.CalculusFieldUnivariateFunction[Complex], complex: Complex, *complex2: Complex) -> Complex: ...
+    def integrate(self, int: int, calculusFieldUnivariateFunction: org.hipparchus.analysis.CalculusFieldUnivariateFunction[Complex], complex: Complex, complexArray: typing.List[Complex]) -> Complex: ...
 
 class ComplexUtils:
     @staticmethod
@@ -410,7 +411,7 @@ class FieldComplexUnivariateIntegrator(typing.Generic[_FieldComplexUnivariateInt
     @typing.overload
     def integrate(self, int: int, calculusFieldUnivariateFunction: org.hipparchus.analysis.CalculusFieldUnivariateFunction[FieldComplex[_FieldComplexUnivariateIntegrator__T]], fieldComplex: FieldComplex[_FieldComplexUnivariateIntegrator__T], fieldComplex2: FieldComplex[_FieldComplexUnivariateIntegrator__T]) -> FieldComplex[_FieldComplexUnivariateIntegrator__T]: ...
     @typing.overload
-    def integrate(self, int: int, calculusFieldUnivariateFunction: org.hipparchus.analysis.CalculusFieldUnivariateFunction[FieldComplex[_FieldComplexUnivariateIntegrator__T]], fieldComplex: FieldComplex[_FieldComplexUnivariateIntegrator__T], *fieldComplex2: FieldComplex[_FieldComplexUnivariateIntegrator__T]) -> FieldComplex[_FieldComplexUnivariateIntegrator__T]: ...
+    def integrate(self, int: int, calculusFieldUnivariateFunction: org.hipparchus.analysis.CalculusFieldUnivariateFunction[FieldComplex[_FieldComplexUnivariateIntegrator__T]], fieldComplex: FieldComplex[_FieldComplexUnivariateIntegrator__T], fieldComplexArray: typing.List[FieldComplex[_FieldComplexUnivariateIntegrator__T]]) -> FieldComplex[_FieldComplexUnivariateIntegrator__T]: ...
 
 class Quaternion(java.io.Serializable):
     IDENTITY: typing.ClassVar['Quaternion'] = ...
@@ -489,3 +490,4 @@ class __module_protocol__(typing.Protocol):
     FieldComplexUnivariateIntegrator: typing.Type[FieldComplexUnivariateIntegrator]
     Quaternion: typing.Type[Quaternion]
     RootsOfUnity: typing.Type[RootsOfUnity]
+    class-use: org.hipparchus.complex.class-use.__module_protocol__

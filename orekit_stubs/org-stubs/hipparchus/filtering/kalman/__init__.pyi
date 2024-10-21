@@ -1,3 +1,4 @@
+import org.hipparchus.filtering.kalman.class-use
 import org.hipparchus.filtering.kalman.extended
 import org.hipparchus.filtering.kalman.linear
 import org.hipparchus.filtering.kalman.unscented
@@ -43,6 +44,7 @@ class __module_protocol__(typing.Protocol):
     KalmanFilter: typing.Type[KalmanFilter]
     Measurement: typing.Type[Measurement]
     ProcessEstimate: typing.Type[ProcessEstimate]
+    class-use: org.hipparchus.filtering.kalman.class-use.__module_protocol__
     extended: org.hipparchus.filtering.kalman.extended.__module_protocol__
     linear: org.hipparchus.filtering.kalman.linear.__module_protocol__
     unscented: org.hipparchus.filtering.kalman.unscented.__module_protocol__

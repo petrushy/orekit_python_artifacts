@@ -3,17 +3,70 @@ import java.lang
 import java.text
 import java.util
 import org.hipparchus.exception
+import org.orekit.errors.class-use
 import org.orekit.utils
 import typing
 
 
 
 class LocalizedException:
-    def getMessage(self, locale: java.util.Locale) -> str: ...
-    def getParts(self) -> typing.List[typing.Any]: ...
-    def getSpecifier(self) -> org.hipparchus.exception.Localizable: ...
+    """
+    public interface LocalizedException
+    
+        This interface specified methods implemented by localized exception classes.
+    
+        Since:
+            7.1
+    """
+    def getMessage(self, locale: java.util.Locale) -> str:
+        """
+            Gets the message in a specified locale.
+        
+            Parameters:
+                locale (:class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): Locale in which the message should be translated
+        
+            Returns:
+                localized message
+        
+        
+        """
+        ...
+    def getParts(self) -> typing.List[typing.Any]:
+        """
+            Get the variable parts of the error message.
+        
+            Returns:
+                a copy of the variable parts of the error message
+        
+        
+        """
+        ...
+    def getSpecifier(self) -> org.hipparchus.exception.Localizable:
+        """
+            Get the localizable specifier of the error message.
+        
+            Returns:
+                localizable specifier of the error message
+        
+        
+        """
+        ...
 
 class OrekitMessages(java.lang.Enum['OrekitMessages'], org.hipparchus.exception.Localizable):
+    """
+    public enum OrekitMessages extends :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.errors.OrekitMessages`> implements :class:`~org.orekit.errors.https:.www.hipparchus.org.apidocs.org.hipparchus.exception.Localizable?is`
+    
+        Enumeration for localized messages formats.
+    
+        The constants in this enumeration represent the available formats as localized strings. These formats are intended to be
+        localized using simple properties files, using the constant name as the key and the property value as the message
+        format. The source English format is provided in the constants themselves to serve both as a reminder for developers to
+        understand the parameters needed by each format, as a basis for translators to create localized properties files, and as
+        a default format if some translation is missing.
+    
+        Since:
+            2.1
+    """
     INTERNAL_ERROR: typing.ClassVar['OrekitMessages'] = ...
     ALTITUDE_BELOW_ALLOWED_THRESHOLD: typing.ClassVar['OrekitMessages'] = ...
     POINT_INSIDE_ELLIPSOID: typing.ClassVar['OrekitMessages'] = ...
@@ -95,6 +148,7 @@ class OrekitMessages(java.lang.Enum['OrekitMessages'], org.hipparchus.exception.
     FRAMES_MISMATCH: typing.ClassVar['OrekitMessages'] = ...
     INITIAL_STATE_NOT_SPECIFIED_FOR_ORBIT_PROPAGATION: typing.ClassVar['OrekitMessages'] = ...
     EVENT_DATE_TOO_CLOSE: typing.ClassVar['OrekitMessages'] = ...
+    WRONG_COORDINATES_FOR_ADJOINT_EQUATION: typing.ClassVar['OrekitMessages'] = ...
     UNABLE_TO_READ_JPL_HEADER: typing.ClassVar['OrekitMessages'] = ...
     INCONSISTENT_ASTRONOMICAL_UNIT_IN_FILES: typing.ClassVar['OrekitMessages'] = ...
     INCONSISTENT_EARTH_MOON_RATIO_IN_FILES: typing.ClassVar['OrekitMessages'] = ...
@@ -310,116 +364,694 @@ class OrekitMessages(java.lang.Enum['OrekitMessages'], org.hipparchus.exception.
     WRONG_EOP_INTERPOLATION_DEGREE: typing.ClassVar['OrekitMessages'] = ...
     WALKER_INCONSISTENT_PLANES: typing.ClassVar['OrekitMessages'] = ...
     INFINITE_NRLMSISE00_DENSITY: typing.ClassVar['OrekitMessages'] = ...
-    def getLocalizedString(self, locale: java.util.Locale) -> str: ...
-    def getSourceString(self) -> str: ...
+    FIELD_TOO_LONG: typing.ClassVar['OrekitMessages'] = ...
+    PROPAGATOR_BUILDER_NOT_CLONEABLE: typing.ClassVar['OrekitMessages'] = ...
+    def getLocalizedString(self, locale: java.util.Locale) -> str:
+        """
+        
+            Specified by:
+                :meth:`~org.orekit.errors.https:.www.hipparchus.org.apidocs.org.hipparchus.exception.Localizable.html?is` in
+                interface :class:`~org.orekit.errors.https:.www.hipparchus.org.apidocs.org.hipparchus.exception.Localizable?is`
+        
+        
+        """
+        ...
+    def getSourceString(self) -> str:
+        """
+        
+            Specified by:
+                :meth:`~org.orekit.errors.https:.www.hipparchus.org.apidocs.org.hipparchus.exception.Localizable.html?is` in
+                interface :class:`~org.orekit.errors.https:.www.hipparchus.org.apidocs.org.hipparchus.exception.Localizable?is`
+        
+        
+        """
+        ...
     _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
     @typing.overload
     @staticmethod
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'OrekitMessages': ...
+    def valueOf(string: str) -> 'OrekitMessages':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (:class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        
+        
+        """
+        ...
     @staticmethod
-    def values() -> typing.List['OrekitMessages']: ...
+    def values() -> typing.List['OrekitMessages']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            for (OrekitMessages c : OrekitMessages.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
 
 class OrekitException(java.lang.RuntimeException, LocalizedException):
+    """
+    public class OrekitException extends :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.RuntimeException?is` implements :class:`~org.orekit.errors.LocalizedException`
+    
+        This class is the base class for all specific exceptions thrown by the Orekit classes.
+    
+        When the Orekit classes throw exceptions that are specific to the package, these exceptions are always subclasses of
+        OrekitException. When exceptions that are already covered by the standard java API should be thrown, like
+        ArrayIndexOutOfBoundsException or InvalidParameterException, these standard exceptions are thrown rather than the
+        Hipparchus specific ones.
+    
+        This class also provides utility methods to throw some standard java exceptions with localized messages.
+    
+        Also see:
+            :meth:`~serialized`
+    """
     @typing.overload
-    def __init__(self, throwable: java.lang.Throwable, localizable: org.hipparchus.exception.Localizable, *object: typing.Any): ...
+    def __init__(self, throwable: java.lang.Throwable, localizable: org.hipparchus.exception.Localizable, objectArray: typing.List[typing.Any]): ...
     @typing.overload
-    def __init__(self, localizable: org.hipparchus.exception.Localizable, *object: typing.Any): ...
+    def __init__(self, localizable: org.hipparchus.exception.Localizable, objectArray: typing.List[typing.Any]): ...
     @typing.overload
     def __init__(self, localizable: org.hipparchus.exception.Localizable, throwable: java.lang.Throwable): ...
     @typing.overload
     def __init__(self, mathRuntimeException: org.hipparchus.exception.MathRuntimeException): ...
     @typing.overload
     def __init__(self, orekitException: 'OrekitException'): ...
-    def getLocalizedMessage(self) -> str: ...
+    def getLocalizedMessage(self) -> str:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
+        
+        
+        """
+        ...
     @typing.overload
-    def getMessage(self) -> str: ...
+    def getMessage(self) -> str:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
+        
+        
+        """
+        ...
     @typing.overload
-    def getMessage(self, locale: java.util.Locale) -> str: ...
-    def getParts(self) -> typing.List[typing.Any]: ...
-    def getSpecifier(self) -> org.hipparchus.exception.Localizable: ...
+    def getMessage(self, locale: java.util.Locale) -> str:
+        """
+            Gets the message in a specified locale.
+        
+            Specified by:
+                :meth:`~org.orekit.errors.LocalizedException.getMessage` in interface :class:`~org.orekit.errors.LocalizedException`
+        
+            Parameters:
+                locale (:class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): Locale in which the message should be translated
+        
+            Returns:
+                localized message
+        
+        """
+        ...
+    def getParts(self) -> typing.List[typing.Any]:
+        """
+            Get the variable parts of the error message.
+        
+            Specified by:
+                :meth:`~org.orekit.errors.LocalizedException.getParts` in interface :class:`~org.orekit.errors.LocalizedException`
+        
+            Returns:
+                a copy of the variable parts of the error message
+        
+        
+        """
+        ...
+    def getSpecifier(self) -> org.hipparchus.exception.Localizable:
+        """
+            Get the localizable specifier of the error message.
+        
+            Specified by:
+                :meth:`~org.orekit.errors.LocalizedException.getSpecifier` in interface :class:`~org.orekit.errors.LocalizedException`
+        
+            Returns:
+                localizable specifier of the error message
+        
+        
+        """
+        ...
     @staticmethod
-    def unwrap(mathRuntimeException: org.hipparchus.exception.MathRuntimeException) -> 'OrekitException': ...
+    def unwrap(mathRuntimeException: org.hipparchus.exception.MathRuntimeException) -> 'OrekitException':
+        """
+            Recover a OrekitException, possibly embedded in a
+            :class:`~org.orekit.errors.https:.www.hipparchus.org.apidocs.org.hipparchus.exception.MathRuntimeException?is`.
+        
+            If the :code:`MathRuntimeException` does not embed a OrekitException, a new one will be created.
+        
+            Parameters:
+                exception (:class:`~org.orekit.errors.https:.www.hipparchus.org.apidocs.org.hipparchus.exception.MathRuntimeException?is`): MathRuntimeException to analyze
+        
+            Returns:
+                a (possibly embedded) OrekitException
+        
+        
+        """
+        ...
 
 class OrekitIOException(java.io.IOException, LocalizedException):
-    def __init__(self, localizable: org.hipparchus.exception.Localizable, *object: typing.Any): ...
-    def getLocalizedMessage(self) -> str: ...
+    """
+    public class OrekitIOException extends :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.io.IOException?is` implements :class:`~org.orekit.errors.LocalizedException`
+    
+        Extension of :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.io.IOException?is` with localized
+        message.
+    
+        Since:
+            9.2
+    
+        Also see:
+            :meth:`~serialized`
+    """
+    def __init__(self, localizable: org.hipparchus.exception.Localizable, objectArray: typing.List[typing.Any]): ...
+    def getLocalizedMessage(self) -> str:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
+        
+        
+        """
+        ...
     @typing.overload
-    def getMessage(self) -> str: ...
+    def getMessage(self) -> str:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
+        
+        
+        """
+        ...
     @typing.overload
-    def getMessage(self, locale: java.util.Locale) -> str: ...
-    def getParts(self) -> typing.List[typing.Any]: ...
-    def getSpecifier(self) -> org.hipparchus.exception.Localizable: ...
+    def getMessage(self, locale: java.util.Locale) -> str:
+        """
+            Gets the message in a specified locale.
+        
+            Specified by:
+                :meth:`~org.orekit.errors.LocalizedException.getMessage` in interface :class:`~org.orekit.errors.LocalizedException`
+        
+            Parameters:
+                locale (:class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): Locale in which the message should be translated
+        
+            Returns:
+                localized message
+        
+        """
+        ...
+    def getParts(self) -> typing.List[typing.Any]:
+        """
+            Get the variable parts of the error message.
+        
+            Specified by:
+                :meth:`~org.orekit.errors.LocalizedException.getParts` in interface :class:`~org.orekit.errors.LocalizedException`
+        
+            Returns:
+                a copy of the variable parts of the error message
+        
+        
+        """
+        ...
+    def getSpecifier(self) -> org.hipparchus.exception.Localizable:
+        """
+            Get the localizable specifier of the error message.
+        
+            Specified by:
+                :meth:`~org.orekit.errors.LocalizedException.getSpecifier` in interface :class:`~org.orekit.errors.LocalizedException`
+        
+            Returns:
+                localizable specifier of the error message
+        
+        
+        """
+        ...
 
 class OrekitIllegalArgumentException(java.lang.IllegalArgumentException, LocalizedException):
-    def __init__(self, localizable: org.hipparchus.exception.Localizable, *object: typing.Any): ...
-    def getLocalizedMessage(self) -> str: ...
+    """
+    public class OrekitIllegalArgumentException extends :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is` implements :class:`~org.orekit.errors.LocalizedException`
+    
+        Extension of :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`
+        with localized message.
+    
+        Since:
+            7.1
+    
+        Also see:
+            :meth:`~serialized`
+    """
+    def __init__(self, localizable: org.hipparchus.exception.Localizable, objectArray: typing.List[typing.Any]): ...
+    def getLocalizedMessage(self) -> str:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
+        
+        
+        """
+        ...
     @typing.overload
-    def getMessage(self) -> str: ...
+    def getMessage(self) -> str:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
+        
+        
+        """
+        ...
     @typing.overload
-    def getMessage(self, locale: java.util.Locale) -> str: ...
-    def getParts(self) -> typing.List[typing.Any]: ...
-    def getSpecifier(self) -> org.hipparchus.exception.Localizable: ...
+    def getMessage(self, locale: java.util.Locale) -> str:
+        """
+            Gets the message in a specified locale.
+        
+            Specified by:
+                :meth:`~org.orekit.errors.LocalizedException.getMessage` in interface :class:`~org.orekit.errors.LocalizedException`
+        
+            Parameters:
+                locale (:class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): Locale in which the message should be translated
+        
+            Returns:
+                localized message
+        
+        """
+        ...
+    def getParts(self) -> typing.List[typing.Any]:
+        """
+            Get the variable parts of the error message.
+        
+            Specified by:
+                :meth:`~org.orekit.errors.LocalizedException.getParts` in interface :class:`~org.orekit.errors.LocalizedException`
+        
+            Returns:
+                a copy of the variable parts of the error message
+        
+        
+        """
+        ...
+    def getSpecifier(self) -> org.hipparchus.exception.Localizable:
+        """
+            Get the localizable specifier of the error message.
+        
+            Specified by:
+                :meth:`~org.orekit.errors.LocalizedException.getSpecifier` in interface :class:`~org.orekit.errors.LocalizedException`
+        
+            Returns:
+                localizable specifier of the error message
+        
+        
+        """
+        ...
 
 class OrekitIllegalStateException(java.lang.IllegalStateException, LocalizedException):
-    def __init__(self, localizable: org.hipparchus.exception.Localizable, *object: typing.Any): ...
-    def getLocalizedMessage(self) -> str: ...
+    """
+    public class OrekitIllegalStateException extends :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalStateException?is` implements :class:`~org.orekit.errors.LocalizedException`
+    
+        Extension of :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalStateException?is`
+        with localized message.
+    
+        Since:
+            7.1
+    
+        Also see:
+            :meth:`~serialized`
+    """
+    def __init__(self, localizable: org.hipparchus.exception.Localizable, objectArray: typing.List[typing.Any]): ...
+    def getLocalizedMessage(self) -> str:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
+        
+        
+        """
+        ...
     @typing.overload
-    def getMessage(self) -> str: ...
+    def getMessage(self) -> str:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
+        
+        
+        """
+        ...
     @typing.overload
-    def getMessage(self, locale: java.util.Locale) -> str: ...
-    def getParts(self) -> typing.List[typing.Any]: ...
-    def getSpecifier(self) -> org.hipparchus.exception.Localizable: ...
+    def getMessage(self, locale: java.util.Locale) -> str:
+        """
+            Gets the message in a specified locale.
+        
+            Specified by:
+                :meth:`~org.orekit.errors.LocalizedException.getMessage` in interface :class:`~org.orekit.errors.LocalizedException`
+        
+            Parameters:
+                locale (:class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): Locale in which the message should be translated
+        
+            Returns:
+                localized message
+        
+        """
+        ...
+    def getParts(self) -> typing.List[typing.Any]:
+        """
+            Get the variable parts of the error message.
+        
+            Specified by:
+                :meth:`~org.orekit.errors.LocalizedException.getParts` in interface :class:`~org.orekit.errors.LocalizedException`
+        
+            Returns:
+                a copy of the variable parts of the error message
+        
+        
+        """
+        ...
+    def getSpecifier(self) -> org.hipparchus.exception.Localizable:
+        """
+            Get the localizable specifier of the error message.
+        
+            Specified by:
+                :meth:`~org.orekit.errors.LocalizedException.getSpecifier` in interface :class:`~org.orekit.errors.LocalizedException`
+        
+            Returns:
+                localizable specifier of the error message
+        
+        
+        """
+        ...
 
 class OrekitInternalError(java.lang.IllegalStateException, LocalizedException):
+    """
+    public class OrekitInternalError extends :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalStateException?is` implements :class:`~org.orekit.errors.LocalizedException`
+    
+        Extension of :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Runtime?is` with localized
+        message for internal errors only.
+    
+        Since:
+            7.1
+    
+        Also see:
+            :meth:`~serialized`
+    """
     def __init__(self, throwable: java.lang.Throwable): ...
-    def getLocalizedMessage(self) -> str: ...
+    def getLocalizedMessage(self) -> str:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
+        
+        
+        """
+        ...
     @typing.overload
-    def getMessage(self) -> str: ...
+    def getMessage(self) -> str:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
+        
+        
+        """
+        ...
     @typing.overload
-    def getMessage(self, locale: java.util.Locale) -> str: ...
-    def getParts(self) -> typing.List[typing.Any]: ...
-    def getSpecifier(self) -> org.hipparchus.exception.Localizable: ...
+    def getMessage(self, locale: java.util.Locale) -> str:
+        """
+            Gets the message in a specified locale.
+        
+            Specified by:
+                :meth:`~org.orekit.errors.LocalizedException.getMessage` in interface :class:`~org.orekit.errors.LocalizedException`
+        
+            Parameters:
+                locale (:class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): Locale in which the message should be translated
+        
+            Returns:
+                localized message
+        
+        """
+        ...
+    def getParts(self) -> typing.List[typing.Any]:
+        """
+            Get the variable parts of the error message.
+        
+            Specified by:
+                :meth:`~org.orekit.errors.LocalizedException.getParts` in interface :class:`~org.orekit.errors.LocalizedException`
+        
+            Returns:
+                a copy of the variable parts of the error message
+        
+        
+        """
+        ...
+    def getSpecifier(self) -> org.hipparchus.exception.Localizable:
+        """
+            Get the localizable specifier of the error message.
+        
+            Specified by:
+                :meth:`~org.orekit.errors.LocalizedException.getSpecifier` in interface :class:`~org.orekit.errors.LocalizedException`
+        
+            Returns:
+                localizable specifier of the error message
+        
+        
+        """
+        ...
 
 class OrekitParseException(java.text.ParseException, LocalizedException):
-    def __init__(self, localizable: org.hipparchus.exception.Localizable, *object: typing.Any): ...
-    def getLocalizedMessage(self) -> str: ...
+    """
+    public class OrekitParseException extends :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.text.ParseException?is` implements :class:`~org.orekit.errors.LocalizedException`
+    
+        Extension of :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.text.ParseException?is` with
+        localized message.
+    
+        Since:
+            7.1
+    
+        Also see:
+            :meth:`~serialized`
+    """
+    def __init__(self, localizable: org.hipparchus.exception.Localizable, objectArray: typing.List[typing.Any]): ...
+    def getLocalizedMessage(self) -> str:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
+        
+        
+        """
+        ...
     @typing.overload
-    def getMessage(self) -> str: ...
+    def getMessage(self) -> str:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable.html?is` in
+                class :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Throwable?is`
+        
+        
+        """
+        ...
     @typing.overload
-    def getMessage(self, locale: java.util.Locale) -> str: ...
-    def getParts(self) -> typing.List[typing.Any]: ...
-    def getSpecifier(self) -> org.hipparchus.exception.Localizable: ...
+    def getMessage(self, locale: java.util.Locale) -> str:
+        """
+            Gets the message in a specified locale.
+        
+            Specified by:
+                :meth:`~org.orekit.errors.LocalizedException.getMessage` in interface :class:`~org.orekit.errors.LocalizedException`
+        
+            Parameters:
+                locale (:class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): Locale in which the message should be translated
+        
+            Returns:
+                localized message
+        
+        """
+        ...
+    def getParts(self) -> typing.List[typing.Any]:
+        """
+            Get the variable parts of the error message.
+        
+            Specified by:
+                :meth:`~org.orekit.errors.LocalizedException.getParts` in interface :class:`~org.orekit.errors.LocalizedException`
+        
+            Returns:
+                a copy of the variable parts of the error message
+        
+        
+        """
+        ...
+    def getSpecifier(self) -> org.hipparchus.exception.Localizable:
+        """
+            Get the localizable specifier of the error message.
+        
+            Specified by:
+                :meth:`~org.orekit.errors.LocalizedException.getSpecifier` in interface :class:`~org.orekit.errors.LocalizedException`
+        
+            Returns:
+                localizable specifier of the error message
+        
+        
+        """
+        ...
 
 class PythonLocalizedException(LocalizedException):
+    """
+    public class PythonLocalizedException extends :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.errors.LocalizedException`
+    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getMessage(self, locale: java.util.Locale) -> str: ...
-    def getParts(self) -> typing.List[typing.Any]: ...
-    def getSpecifier(self) -> org.hipparchus.exception.Localizable: ...
-    def pythonDecRef(self) -> None: ...
+    def getMessage(self, locale: java.util.Locale) -> str:
+        """
+            Gets the message in a specified locale.
+        
+            Specified by:
+                :meth:`~org.orekit.errors.LocalizedException.getMessage` in interface :class:`~org.orekit.errors.LocalizedException`
+        
+            Parameters:
+                locale (:class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is`): Locale in which the message should be translated
+        
+            Returns:
+                localized message
+        
+        
+        """
+        ...
+    def getParts(self) -> typing.List[typing.Any]:
+        """
+            Get the variable parts of the error message.
+        
+            Specified by:
+                :meth:`~org.orekit.errors.LocalizedException.getParts` in interface :class:`~org.orekit.errors.LocalizedException`
+        
+            Returns:
+                a copy of the variable parts of the error message
+        
+        
+        """
+        ...
+    def getSpecifier(self) -> org.hipparchus.exception.Localizable:
+        """
+            Get the localizable specifier of the error message.
+        
+            Specified by:
+                :meth:`~org.orekit.errors.LocalizedException.getSpecifier` in interface :class:`~org.orekit.errors.LocalizedException`
+        
+            Returns:
+                localizable specifier of the error message
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
 
 class FrameAncestorException(OrekitException):
-    def __init__(self, localizable: org.hipparchus.exception.Localizable, *object: typing.Any): ...
+    """
+    public class FrameAncestorException extends :class:`~org.orekit.errors.OrekitException`
+    
+        This class is the base class for exception thrown by the :meth:`~org.orekit.frames.UpdatableFrame.updateTransform`
+        method.
+    
+        Also see:
+            :meth:`~serialized`
+    """
+    def __init__(self, localizable: org.hipparchus.exception.Localizable, objectArray: typing.List[typing.Any]): ...
 
 class TimeStampedCacheException(OrekitException):
+    """
+    public class TimeStampedCacheException extends :class:`~org.orekit.errors.OrekitException`
+    
+        This class is the base class for all specific exceptions thrown by during the
+        :class:`~org.orekit.utils.GenericTimeStampedCache`.
+    
+        Also see:
+            :meth:`~serialized`
+    """
     @typing.overload
-    def __init__(self, throwable: java.lang.Throwable, localizable: org.hipparchus.exception.Localizable, *object: typing.Any): ...
+    def __init__(self, throwable: java.lang.Throwable, localizable: org.hipparchus.exception.Localizable, objectArray: typing.List[typing.Any]): ...
     @typing.overload
-    def __init__(self, localizable: org.hipparchus.exception.Localizable, *object: typing.Any): ...
+    def __init__(self, localizable: org.hipparchus.exception.Localizable, objectArray: typing.List[typing.Any]): ...
     @typing.overload
     def __init__(self, mathRuntimeException: org.hipparchus.exception.MathRuntimeException): ...
     @typing.overload
     def __init__(self, orekitException: OrekitException): ...
     @typing.overload
     @staticmethod
-    def unwrap(mathRuntimeException: org.hipparchus.exception.MathRuntimeException) -> OrekitException: ...
+    def unwrap(mathRuntimeException: org.hipparchus.exception.MathRuntimeException) -> OrekitException:
+        """
+            Recover a TimeStampedCacheException, possibly embedded in a :class:`~org.orekit.errors.OrekitException`.
+        
+            If the :code:`OrekitException` does not embed a TimeStampedCacheException, a new one will be created.
+        
+            Parameters:
+                oe (:class:`~org.orekit.errors.OrekitException`): OrekitException to analyze
+        
+            Returns:
+                a (possibly embedded) TimeStampedCacheException
+        
+            Recover a TimeStampedCacheException, possibly embedded in a
+            :class:`~org.orekit.errors.https:.www.hipparchus.org.apidocs.org.hipparchus.exception.MathRuntimeException?is`.
+        
+            If the :code:`MathRuntimeException` does not embed a TimeStampedCacheException, a new one will be created.
+        
+            Parameters:
+                exception (:class:`~org.orekit.errors.https:.www.hipparchus.org.apidocs.org.hipparchus.exception.MathRuntimeException?is`): MathRuntimeException to analyze
+        
+            Returns:
+                a (possibly embedded) TimeStampedCacheException
+        
+        
+        """
+        ...
     @typing.overload
     @staticmethod
     def unwrap(mathRuntimeException: org.hipparchus.exception.MathRuntimeException) -> 'TimeStampedCacheException': ...
@@ -428,8 +1060,40 @@ class TimeStampedCacheException(OrekitException):
     def unwrap(orekitException: OrekitException) -> 'TimeStampedCacheException': ...
 
 class UnsupportedParameterException(OrekitException):
+    """
+    public class UnsupportedParameterException extends :class:`~org.orekit.errors.OrekitException`
+    
+        Exception for unsupported :class:`~org.orekit.utils.ParameterDriver` in a model implementing
+        :class:`~org.orekit.utils.ParameterDriversProvider`.
+    
+        Since:
+            12.0
+    
+        Also see:
+            :meth:`~serialized`
+    """
     NO_PARAMETER: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` NO_PARAMETER
+    
+        String for empty parameter drivers' list.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
     COMMA_SEP: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.errors.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` COMMA_SEP
+    
+        Comma separator for printing list of supported parameter drivers.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
     def __init__(self, string: str, list: java.util.List[org.orekit.utils.ParameterDriver]): ...
 
 
@@ -448,3 +1112,4 @@ class __module_protocol__(typing.Protocol):
     PythonLocalizedException: typing.Type[PythonLocalizedException]
     TimeStampedCacheException: typing.Type[TimeStampedCacheException]
     UnsupportedParameterException: typing.Type[UnsupportedParameterException]
+    class-use: org.orekit.errors.class-use.__module_protocol__

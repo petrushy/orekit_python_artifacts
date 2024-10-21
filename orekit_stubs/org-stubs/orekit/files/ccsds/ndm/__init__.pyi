@@ -9,6 +9,7 @@ import org.orekit.files.ccsds.ndm.adm.acm
 import org.orekit.files.ccsds.ndm.adm.aem
 import org.orekit.files.ccsds.ndm.adm.apm
 import org.orekit.files.ccsds.ndm.cdm
+import org.orekit.files.ccsds.ndm.class-use
 import org.orekit.files.ccsds.ndm.odm
 import org.orekit.files.ccsds.ndm.odm.ocm
 import org.orekit.files.ccsds.ndm.odm.oem
@@ -29,58 +30,541 @@ import typing
 
 _AbstractBuilder__T = typing.TypeVar('_AbstractBuilder__T', bound='AbstractBuilder')  # <T>
 class AbstractBuilder(typing.Generic[_AbstractBuilder__T]):
-    def getConventions(self) -> org.orekit.utils.IERSConventions: ...
-    def getDataContext(self) -> org.orekit.data.DataContext: ...
-    def getEquatorialRadius(self) -> float: ...
-    def getFlattening(self) -> float: ...
-    def getMissionReferenceDate(self) -> org.orekit.time.AbsoluteDate: ...
-    def getRangeUnitsConverter(self) -> org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter: ...
-    def withConventions(self, iERSConventions: org.orekit.utils.IERSConventions) -> _AbstractBuilder__T: ...
-    def withDataContext(self, dataContext: org.orekit.data.DataContext) -> _AbstractBuilder__T: ...
-    def withEquatorialRadius(self, double: float) -> _AbstractBuilder__T: ...
-    def withFlattening(self, double: float) -> _AbstractBuilder__T: ...
-    def withMissionReferenceDate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> _AbstractBuilder__T: ...
-    def withRangeUnitsConverter(self, rangeUnitsConverter: org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter) -> _AbstractBuilder__T: ...
+    """
+    public abstract class AbstractBuilder<T extends AbstractBuilder<T>> extends :class:`~org.orekit.files.ccsds.ndm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Abstract builder for all :class:`~org.orekit.files.ccsds.ndm.NdmConstituent` files parsers/writers.
+    
+        Since:
+            11.0
+    """
+    def getConventions(self) -> org.orekit.utils.IERSConventions:
+        """
+            Get the IERS conventions.
+        
+            Returns:
+                IERS conventions
+        
+        
+        """
+        ...
+    def getDataContext(self) -> org.orekit.data.DataContext:
+        """
+            Get the data context.
+        
+            Returns:
+                data context used to retrieve frames, time scales, etc.
+        
+        
+        """
+        ...
+    def getEquatorialRadius(self) -> float:
+        """
+            Get the central body equatorial radius.
+        
+            Returns:
+                central body equatorial radius
+        
+        
+        """
+        ...
+    def getFlattening(self) -> float:
+        """
+            Get the central body flattening.
+        
+            Returns:
+                central body flattening
+        
+        
+        """
+        ...
+    def getMissionReferenceDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Get the mission reference date or Mission Elapsed Time or Mission Relative Time time systems.
+        
+            Returns:
+                mission reference date
+        
+        
+        """
+        ...
+    def getRangeUnitsConverter(self) -> org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter:
+        """
+            Get the converter for :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU`.
+        
+            Returns:
+                converter for :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU`
+        
+        
+        """
+        ...
+    def withConventions(self, iERSConventions: org.orekit.utils.IERSConventions) -> _AbstractBuilder__T:
+        """
+            Set up IERS conventions.
+        
+            Parameters:
+                newConventions (:class:`~org.orekit.utils.IERSConventions`): IERS Conventions
+        
+            Returns:
+                a new builder with updated configuration (the instance is not changed)
+        
+        
+        """
+        ...
+    def withDataContext(self, dataContext: org.orekit.data.DataContext) -> _AbstractBuilder__T:
+        """
+            Set up data context used to retrieve frames, time scales, etc..
+        
+            Parameters:
+                newDataContext (:class:`~org.orekit.data.DataContext`): data context used to retrieve frames, time scales, etc.
+        
+            Returns:
+                a new builder with updated configuration (the instance is not changed)
+        
+        
+        """
+        ...
+    def withEquatorialRadius(self, double: float) -> _AbstractBuilder__T:
+        """
+            Set up the central body equatorial radius.
+        
+            Parameters:
+                newEquatorialRadius (double): central body equatorial radius
+        
+            Returns:
+                a new builder with updated configuration (the instance is not changed)
+        
+        
+        """
+        ...
+    def withFlattening(self, double: float) -> _AbstractBuilder__T:
+        """
+            Set up the central body flattening.
+        
+            Parameters:
+                newFlattening (double): central body flattening
+        
+            Returns:
+                a new builder with updated configuration (the instance is not changed)
+        
+        
+        """
+        ...
+    def withMissionReferenceDate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> _AbstractBuilder__T:
+        """
+            Set up mission reference date or Mission Elapsed Time or Mission Relative Time time systems.
+        
+            The mission reference date is used only by :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemParser` and
+            :class:`~org.orekit.files.ccsds.ndm.adm.apm.ApmParser`, and by :class:`~org.orekit.files.ccsds.ndm.odm.opm.OpmParser`,
+            :class:`~org.orekit.files.ccsds.ndm.odm.omm.OmmParser` and :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemParser` up to
+            version 2.0 of ODM (starting with version 3.0 of ODM, both MET and MRT time system have been withdrawn from the
+            standard).
+        
+            Parameters:
+                newMissionReferenceDate (:class:`~org.orekit.time.AbsoluteDate`): mission reference date or Mission Elapsed Time or Mission Relative Time time systems
+        
+            Returns:
+                a new builder with updated configuration (the instance is not changed)
+        
+        
+        """
+        ...
+    def withRangeUnitsConverter(self, rangeUnitsConverter: org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter) -> _AbstractBuilder__T:
+        """
+            Set up the converter for :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU`.
+        
+            Parameters:
+                newRangeUnitsConverter (:class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`): converter for :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU`
+        
+            Returns:
+                a new builder with updated configuration (the instance is not changed)
+        
+        
+        """
+        ...
 
 class CommonPhysicalProperties(org.orekit.files.ccsds.section.CommentsContainer):
+    """
+    public class CommonPhysicalProperties extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+    
+        Container for common physical properties for both :class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitPhysicalProperties`
+        and :class:`~org.orekit.files.ccsds.ndm.cdm.AdditionalParameters`.
+    
+        Since:
+            11.3
+    """
     def __init__(self): ...
-    def getMaxRcs(self) -> float: ...
-    def getMinRcs(self) -> float: ...
-    def getOebAreaAlongIntermediate(self) -> float: ...
-    def getOebAreaAlongMax(self) -> float: ...
-    def getOebAreaAlongMin(self) -> float: ...
-    def getOebIntermediate(self) -> float: ...
-    def getOebMax(self) -> float: ...
-    def getOebMin(self) -> float: ...
-    def getOebParentFrame(self) -> org.orekit.files.ccsds.definitions.FrameFacade: ...
-    def getOebParentFrameEpoch(self) -> org.orekit.time.AbsoluteDate: ...
-    def getOebQ(self) -> org.hipparchus.complex.Quaternion: ...
-    def getRcs(self) -> float: ...
-    def getReflectance(self) -> float: ...
-    def getVmAbsolute(self) -> float: ...
-    def getVmApparent(self) -> float: ...
-    def getVmApparentMax(self) -> float: ...
-    def getVmApparentMin(self) -> float: ...
-    def setMaxRcs(self, double: float) -> None: ...
-    def setMinRcs(self, double: float) -> None: ...
-    def setOebAreaAlongIntermediate(self, double: float) -> None: ...
-    def setOebAreaAlongMax(self, double: float) -> None: ...
-    def setOebAreaAlongMin(self, double: float) -> None: ...
-    def setOebIntermediate(self, double: float) -> None: ...
-    def setOebMax(self, double: float) -> None: ...
-    def setOebMin(self, double: float) -> None: ...
-    def setOebParentFrame(self, frameFacade: org.orekit.files.ccsds.definitions.FrameFacade) -> None: ...
-    def setOebParentFrameEpoch(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None: ...
-    def setOebQ(self, int: int, double: float) -> None: ...
-    def setRcs(self, double: float) -> None: ...
-    def setReflectance(self, double: float) -> None: ...
-    def setVmAbsolute(self, double: float) -> None: ...
-    def setVmApparent(self, double: float) -> None: ...
-    def setVmApparentMax(self, double: float) -> None: ...
-    def setVmApparentMin(self, double: float) -> None: ...
-    def validate(self, double: float) -> None: ...
+    def getMaxRcs(self) -> float:
+        """
+            Get the maximum radar cross-section.
+        
+            Returns:
+                maximum radar cross-section
+        
+        
+        """
+        ...
+    def getMinRcs(self) -> float:
+        """
+            Get the minimum radar cross-section.
+        
+            Returns:
+                minimum radar cross-section
+        
+        
+        """
+        ...
+    def getOebAreaAlongIntermediate(self) -> float:
+        """
+            Get the cross-sectional area of Optimally Enclosing Box when viewed along the intermediate OEB direction.
+        
+            Returns:
+                cross-sectional area of Optimally Enclosing Box when viewed along the intermediate OEB direction.
+        
+        
+        """
+        ...
+    def getOebAreaAlongMax(self) -> float:
+        """
+            Get the cross-sectional area of Optimally Enclosing Box when viewed along the maximum OEB direction.
+        
+            Returns:
+                cross-sectional area of Optimally Enclosing Box when viewed along the maximum OEB direction.
+        
+        
+        """
+        ...
+    def getOebAreaAlongMin(self) -> float:
+        """
+            Get the cross-sectional area of Optimally Enclosing Box when viewed along the minimum OEB direction.
+        
+            Returns:
+                cross-sectional area of Optimally Enclosing Box when viewed along the minimum OEB direction.
+        
+        
+        """
+        ...
+    def getOebIntermediate(self) -> float:
+        """
+            Get the intermediate physical dimension of the OEB.
+        
+            Returns:
+                intermediate physical dimension of the OEB.
+        
+        
+        """
+        ...
+    def getOebMax(self) -> float:
+        """
+            Get the maximum physical dimension of the OEB.
+        
+            Returns:
+                maximum physical dimension of the OEB.
+        
+        
+        """
+        ...
+    def getOebMin(self) -> float:
+        """
+            Get the minimum physical dimension of the OEB.
+        
+            Returns:
+                dimensions the minimum physical dimension of the OEB.
+        
+        
+        """
+        ...
+    def getOebParentFrame(self) -> org.orekit.files.ccsds.definitions.FrameFacade:
+        """
+            Get the Optimally Enclosing Box parent reference frame.
+        
+            Returns:
+                Optimally Enclosing Box parent reference frame
+        
+        
+        """
+        ...
+    def getOebParentFrameEpoch(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Get the Optimally Enclosing Box parent reference frame epoch.
+        
+            Returns:
+                Optimally Enclosing Box parent reference frame epoch
+        
+        
+        """
+        ...
+    def getOebQ(self) -> org.hipparchus.complex.Quaternion:
+        """
+            Get the quaternion defining Optimally Enclosing Box.
+        
+            Returns:
+                quaternion defining Optimally Enclosing Box
+        
+        
+        """
+        ...
+    def getRcs(self) -> float:
+        """
+            Get the typical (50th percentile) radar cross-section.
+        
+            Returns:
+                typical (50th percentile) radar cross-section
+        
+        
+        """
+        ...
+    def getReflectance(self) -> float:
+        """
+            Get the typical (50th percentile) coefficient of reflectance.
+        
+            Returns:
+                typical (50th percentile) coefficient of reflectance
+        
+        
+        """
+        ...
+    def getVmAbsolute(self) -> float:
+        """
+            Get the typical (50th percentile) visual magnitude.
+        
+            Returns:
+                typical (50th percentile) visual magnitude
+        
+        
+        """
+        ...
+    def getVmApparent(self) -> float:
+        """
+            Get the typical (50th percentile) apparent visual magnitude.
+        
+            Returns:
+                typical (50th percentile) apparent visual magnitude
+        
+        
+        """
+        ...
+    def getVmApparentMax(self) -> float:
+        """
+            Get the maximum apparent visual magnitude.
+        
+            Returns:
+                maximum apparent visual magnitude
+        
+        
+        """
+        ...
+    def getVmApparentMin(self) -> float:
+        """
+            Get the minimum apparent visual magnitude.
+        
+            Returns:
+                minimum apparent visual magnitude
+        
+        
+        """
+        ...
+    def setMaxRcs(self, double: float) -> None:
+        """
+            Set the maximum radar cross-section.
+        
+            Parameters:
+                maxRcs (double): maximum radar cross-section
+        
+        
+        """
+        ...
+    def setMinRcs(self, double: float) -> None:
+        """
+            Set the minimum radar cross-section.
+        
+            Parameters:
+                minRcs (double): minimum radar cross-section
+        
+        
+        """
+        ...
+    def setOebAreaAlongIntermediate(self, double: float) -> None:
+        """
+            Set the cross-sectional area of Optimally Enclosing Box when viewed along the intermediate OEB direction.
+        
+            Parameters:
+                oebAreaAlongIntermediate (double): cross-sectional area of Optimally Enclosing Box when viewed along the intermediate OEB direction.
+        
+        
+        """
+        ...
+    def setOebAreaAlongMax(self, double: float) -> None:
+        """
+            Set the cross-sectional area of Optimally Enclosing Box when viewed along the maximum OEB direction.
+        
+            Parameters:
+                oebAreaAlongMax (double): cross-sectional area of Optimally Enclosing Box when viewed along the maximum OEB direction.
+        
+        
+        """
+        ...
+    def setOebAreaAlongMin(self, double: float) -> None:
+        """
+            Set the cross-sectional area of Optimally Enclosing Box when viewed along the minimum OEB direction.
+        
+            Parameters:
+                oebAreaAlongMin (double): cross-sectional area of Optimally Enclosing Box when viewed along the minimum OEB direction.
+        
+        
+        """
+        ...
+    def setOebIntermediate(self, double: float) -> None:
+        """
+            Set the intermediate physical dimension of the OEB.
+        
+            Parameters:
+                oebIntermediate (double): intermediate physical dimension of the OEB.
+        
+        
+        """
+        ...
+    def setOebMax(self, double: float) -> None:
+        """
+            Set the maximum physical dimension of the OEB.
+        
+            Parameters:
+                oebMax (double): maximum physical dimension of the OEB.
+        
+        
+        """
+        ...
+    def setOebMin(self, double: float) -> None:
+        """
+            Set the minimum physical dimension of the OEB.
+        
+            Parameters:
+                oebMin (double): the minimum physical dimension of the OEB.
+        
+        
+        """
+        ...
+    def setOebParentFrame(self, frameFacade: org.orekit.files.ccsds.definitions.FrameFacade) -> None:
+        """
+            Set the Optimally Enclosing Box parent reference frame.
+        
+            Parameters:
+                oebParentFrame (:class:`~org.orekit.files.ccsds.definitions.FrameFacade`): Optimally Enclosing Box parent reference frame
+        
+        
+        """
+        ...
+    def setOebParentFrameEpoch(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+        """
+            Set the Optimally Enclosing Box parent reference frame epoch.
+        
+            Parameters:
+                oebParentFrameEpoch (:class:`~org.orekit.time.AbsoluteDate`): Optimally Enclosing Box parent reference frame epoch
+        
+        
+        """
+        ...
+    def setOebQ(self, int: int, double: float) -> None:
+        """
+            set the component of quaternion defining Optimally Enclosing Box.
+        
+            Parameters:
+                i (int): index of the component
+                qI (double): component of quaternion defining Optimally Enclosing Box
+        
+        
+        """
+        ...
+    def setRcs(self, double: float) -> None:
+        """
+            Set the typical (50th percentile) radar cross-section.
+        
+            Parameters:
+                rcs (double): typical (50th percentile) radar cross-section
+        
+        
+        """
+        ...
+    def setReflectance(self, double: float) -> None:
+        """
+            Set the typical (50th percentile) coefficient of reflectance.
+        
+            Parameters:
+                reflectance (double): typical (50th percentile) coefficient of reflectance
+        
+        
+        """
+        ...
+    def setVmAbsolute(self, double: float) -> None:
+        """
+            Set the typical (50th percentile) visual magnitude.
+        
+            Parameters:
+                vmAbsolute (double): typical (50th percentile) visual magnitude
+        
+        
+        """
+        ...
+    def setVmApparent(self, double: float) -> None:
+        """
+            Set the typical (50th percentile) apparent visual magnitude.
+        
+            Parameters:
+                vmApparent (double): typical (50th percentile) apparent visual magnitude
+        
+        
+        """
+        ...
+    def setVmApparentMax(self, double: float) -> None:
+        """
+            Set the maximum apparent visual magnitude.
+        
+            Parameters:
+                vmApparentMax (double): maximum apparent visual magnitude
+        
+        
+        """
+        ...
+    def setVmApparentMin(self, double: float) -> None:
+        """
+            Set the minimum apparent visual magnitude.
+        
+            Parameters:
+                vmApparentMin (double): minimum apparent visual magnitude
+        
+        
+        """
+        ...
+    def validate(self, double: float) -> None:
+        """
+            Check is all mandatory entries have been initialized.
+        
+            This method should throw an exception if some mandatory entries are missing or not compatible with version number.
+        
+            Specified by:
+                :meth:`~org.orekit.files.ccsds.section.Section.validate` in interface :class:`~org.orekit.files.ccsds.section.Section`
+        
+            Overrides:
+                :meth:`~org.orekit.files.ccsds.section.CommentsContainer.validate` in
+                class :class:`~org.orekit.files.ccsds.section.CommentsContainer`
+        
+            Parameters:
+                version (double): format version
+        
+        
+        """
+        ...
 
 class Ndm:
+    """
+    public class Ndm extends :class:`~org.orekit.files.ccsds.ndm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        CCSDS Navigation Data Message. This class is a container for comments and
+        :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`.
+    
+        Since:
+            11.0
+    """
     def __init__(self, list: java.util.List[str], list2: java.util.List['NdmConstituent'[typing.Any, typing.Any]]): ...
     def getComments(self) -> java.util.List[str]: ...
     def getConstituents(self) -> java.util.List['NdmConstituent'[typing.Any, typing.Any]]: ...
@@ -88,22 +572,126 @@ class Ndm:
 _NdmConstituent__H = typing.TypeVar('_NdmConstituent__H', bound=org.orekit.files.ccsds.section.Header)  # <H>
 _NdmConstituent__S = typing.TypeVar('_NdmConstituent__S', bound=org.orekit.files.ccsds.section.Segment)  # <S>
 class NdmConstituent(typing.Generic[_NdmConstituent__H, _NdmConstituent__S]):
-    def getConventions(self) -> org.orekit.utils.IERSConventions: ...
-    def getDataContext(self) -> org.orekit.data.DataContext: ...
-    def getHeader(self) -> _NdmConstituent__H: ...
+    """
+    public abstract class NdmConstituent<H extends :class:`~org.orekit.files.ccsds.section.Header`, S extends :class:`~org.orekit.files.ccsds.section.Segment`<?, ?>> extends :class:`~org.orekit.files.ccsds.ndm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Constituents of a CCSDS Navigation Data Message. Constituents may be Attitude Data Message (ADM), Orbit Data Message
+        (ODM), Tracking Data Message (TDM)… Each constituent has its own header and a list of segments.
+    
+        Since:
+            10.2
+    """
+    def getConventions(self) -> org.orekit.utils.IERSConventions:
+        """
+            Get IERS conventions.
+        
+            Returns:
+                IERS conventions
+        
+        
+        """
+        ...
+    def getDataContext(self) -> org.orekit.data.DataContext:
+        """
+            Get the data context.
+        
+            Returns:
+                the data context used for creating frames, time scales, etc.
+        
+        
+        """
+        ...
+    def getHeader(self) -> _NdmConstituent__H:
+        """
+            Get the header.
+        
+            Returns:
+                header
+        
+            Since:
+                11.0
+        
+        
+        """
+        ...
     def getSegments(self) -> java.util.List[_NdmConstituent__S]: ...
-    def setHeader(self, h: _NdmConstituent__H) -> None: ...
+    def setHeader(self, h: _NdmConstituent__H) -> None:
+        """
+            Set the header.
+        
+            Parameters:
+                header (:class:`~org.orekit.files.ccsds.ndm.NdmConstituent`): the header
+        
+        
+        """
+        ...
     def setSegments(self, list: java.util.List[_NdmConstituent__S]) -> None: ...
-    def validate(self) -> None: ...
+    def validate(self) -> None:
+        """
+            Validate the file message for required and forbidden entries.
+        
+            This method throws an exception if file does not meet format requirements. The requirements may depend on format
+            version, which is found in header.
+        
+        """
+        ...
 
 class NdmParser(org.orekit.files.ccsds.utils.parsing.AbstractMessageParser[Ndm]):
+    """
+    public class NdmParser extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractMessageParser`<:class:`~org.orekit.files.ccsds.ndm.Ndm`>
+    
+        A parser for the CCSDS NDM (Navigation Data Message).
+    
+        Since:
+            11.0
+    """
     def __init__(self, parserBuilder: 'ParserBuilder', functionArray: typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]): ...
-    def addComment(self, string: str) -> bool: ...
-    def build(self) -> Ndm: ...
+    def addComment(self, string: str) -> bool:
+        """
+            Add comment.
+        
+            Comments are accepted only at start. Once other content is stored in the same section, comments are refused.
+        
+            Parameters:
+                comment (:class:`~org.orekit.files.ccsds.ndm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): comment line
+        
+            Returns:
+                true if comment was accepted
+        
+        
+        """
+        ...
+    def build(self) -> Ndm:
+        """
+            Build the file from parsed entries.
+        
+            Returns:
+                parsed file
+        
+        
+        """
+        ...
     def getSpecialXmlElementsBuilders(self) -> java.util.Map[str, org.orekit.files.ccsds.utils.lexical.XmlTokenBuilder]: ...
-    def reset(self, fileFormat: org.orekit.files.ccsds.utils.FileFormat) -> None: ...
+    def reset(self, fileFormat: org.orekit.files.ccsds.utils.FileFormat) -> None:
+        """
+            Reset parser to initial state before parsing.
+        
+            Parameters:
+                fileFormat (:class:`~org.orekit.files.ccsds.utils.FileFormat`): format of the file ready to be parsed
+        
+        
+        """
+        ...
 
 class NdmWriter:
+    """
+    public class NdmWriter extends :class:`~org.orekit.files.ccsds.ndm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Writer for CCSDS Navigation Data Message.
+    
+        Since:
+            11.0
+    """
     def __init__(self, writerBuilder: 'WriterBuilder'): ...
     def writeComment(self, generator: org.orekit.files.ccsds.utils.generation.Generator, string: str) -> None: ...
     _writeConstituent__H = typing.TypeVar('_writeConstituent__H', bound=org.orekit.files.ccsds.section.Header)  # <H>
@@ -113,90 +701,572 @@ class NdmWriter:
     def writeMessage(self, generator: org.orekit.files.ccsds.utils.generation.Generator, ndm: Ndm) -> None: ...
 
 class ParsedUnitsBehavior(java.lang.Enum['ParsedUnitsBehavior']):
+    """
+    public enum ParsedUnitsBehavior extends :class:`~org.orekit.files.ccsds.ndm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.files.ccsds.ndm.ParsedUnitsBehavior`>
+    
+        Behavior adopted for units that have been parsed from a CCSDS message.
+    
+        Since:
+            11.0
+    """
     IGNORE_PARSED: typing.ClassVar['ParsedUnitsBehavior'] = ...
     CONVERT_COMPATIBLE: typing.ClassVar['ParsedUnitsBehavior'] = ...
     STRICT_COMPLIANCE: typing.ClassVar['ParsedUnitsBehavior'] = ...
-    def select(self, unit: org.orekit.utils.units.Unit, unit2: org.orekit.utils.units.Unit) -> org.orekit.utils.units.Unit: ...
+    def select(self, unit: org.orekit.utils.units.Unit, unit2: org.orekit.utils.units.Unit) -> org.orekit.utils.units.Unit:
+        """
+            Select the unit to use for interpreting parsed value.
+        
+            Parameters:
+                message (:class:`~org.orekit.utils.units.Unit`): unit parsed in the CCSDS message
+                standard (:class:`~org.orekit.utils.units.Unit`): unit mandated by the standard
+        
+            Returns:
+                selected unit
+        
+        
+        """
+        ...
     _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
     @typing.overload
     @staticmethod
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'ParsedUnitsBehavior': ...
+    def valueOf(string: str) -> 'ParsedUnitsBehavior':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (:class:`~org.orekit.files.ccsds.ndm.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                :class:`~org.orekit.files.ccsds.ndm.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.files.ccsds.ndm.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        
+        
+        """
+        ...
     @staticmethod
-    def values() -> typing.List['ParsedUnitsBehavior']: ...
+    def values() -> typing.List['ParsedUnitsBehavior']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            for (ParsedUnitsBehavior c : ParsedUnitsBehavior.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
 
 class ParserBuilder(AbstractBuilder['ParserBuilder']):
+    """
+    public class ParserBuilder extends :class:`~org.orekit.files.ccsds.ndm.AbstractBuilder`<:class:`~org.orekit.files.ccsds.ndm.ParserBuilder`>
+    
+        Builder for all :class:`~org.orekit.files.ccsds.ndm.NdmConstituent` files parsers.
+    
+        This builder can be used for building all CCSDS Messages parsers types. It is particularly useful in multi-threaded
+        context as parsers cannot be shared between threads and thus several independent parsers must be built in this case.
+    
+        Since:
+            11.0
+    """
     @typing.overload
     def __init__(self): ...
     @typing.overload
     def __init__(self, dataContext: org.orekit.data.DataContext): ...
-    def buildAcmParser(self) -> org.orekit.files.ccsds.ndm.adm.acm.AcmParser: ...
-    def buildAemParser(self) -> org.orekit.files.ccsds.ndm.adm.aem.AemParser: ...
-    def buildApmParser(self) -> org.orekit.files.ccsds.ndm.adm.apm.ApmParser: ...
-    def buildCdmParser(self) -> org.orekit.files.ccsds.ndm.cdm.CdmParser: ...
-    def buildNdmParser(self) -> NdmParser: ...
-    def buildOcmParser(self) -> org.orekit.files.ccsds.ndm.odm.ocm.OcmParser: ...
-    def buildOemParser(self) -> org.orekit.files.ccsds.ndm.odm.oem.OemParser: ...
-    def buildOmmParser(self) -> org.orekit.files.ccsds.ndm.odm.omm.OmmParser: ...
-    def buildOpmParser(self) -> org.orekit.files.ccsds.ndm.odm.opm.OpmParser: ...
-    def buildTdmParser(self) -> org.orekit.files.ccsds.ndm.tdm.TdmParser: ...
-    def getDefaultInterpolationDegree(self) -> int: ...
-    def getDefaultMass(self) -> float: ...
+    def buildAcmParser(self) -> org.orekit.files.ccsds.ndm.adm.acm.AcmParser:
+        """
+            Build a parser for :class:`~org.orekit.files.ccsds.ndm.adm.acm.Acm`.
+        
+            Returns:
+                a new parser
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
+    def buildAemParser(self) -> org.orekit.files.ccsds.ndm.adm.aem.AemParser:
+        """
+            Build a parser for :class:`~org.orekit.files.ccsds.ndm.adm.aem.Aem`.
+        
+            Returns:
+                a new parser
+        
+        
+        """
+        ...
+    def buildApmParser(self) -> org.orekit.files.ccsds.ndm.adm.apm.ApmParser:
+        """
+            Build a parser for :class:`~org.orekit.files.ccsds.ndm.adm.apm.Apm`.
+        
+            Returns:
+                a new parser
+        
+        
+        """
+        ...
+    def buildCdmParser(self) -> org.orekit.files.ccsds.ndm.cdm.CdmParser:
+        """
+            Build a parser for :class:`~org.orekit.files.ccsds.ndm.cdm.Cdm`.
+        
+            Returns:
+                a new parser
+        
+        
+        """
+        ...
+    def buildNdmParser(self) -> NdmParser:
+        """
+            Build a parser for :class:`~org.orekit.files.ccsds.ndm.Ndm`.
+        
+            Returns:
+                a new parser
+        
+        
+        """
+        ...
+    def buildOcmParser(self) -> org.orekit.files.ccsds.ndm.odm.ocm.OcmParser:
+        """
+            Build a parser for :class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`.
+        
+            Returns:
+                a new parser
+        
+        
+        """
+        ...
+    def buildOemParser(self) -> org.orekit.files.ccsds.ndm.odm.oem.OemParser:
+        """
+            Build a parser for :class:`~org.orekit.files.ccsds.ndm.odm.oem.Oem`.
+        
+            Returns:
+                a new parser
+        
+        
+        """
+        ...
+    def buildOmmParser(self) -> org.orekit.files.ccsds.ndm.odm.omm.OmmParser:
+        """
+            Build a parser for :class:`~org.orekit.files.ccsds.ndm.odm.omm.Omm`.
+        
+            Returns:
+                a new parser
+        
+        
+        """
+        ...
+    def buildOpmParser(self) -> org.orekit.files.ccsds.ndm.odm.opm.OpmParser:
+        """
+            Build a parser for :class:`~org.orekit.files.ccsds.ndm.odm.opm.Opm`.
+        
+            Returns:
+                a new parser
+        
+        
+        """
+        ...
+    def buildTdmParser(self) -> org.orekit.files.ccsds.ndm.tdm.TdmParser:
+        """
+            Build a parser for :class:`~org.orekit.files.ccsds.ndm.tdm.Tdm`.
+        
+            Returns:
+                a new parser
+        
+        
+        """
+        ...
+    def getDefaultInterpolationDegree(self) -> int:
+        """
+            Get the default interpolation degree.
+        
+            Returns:
+                default interpolation degree
+        
+        
+        """
+        ...
+    def getDefaultMass(self) -> float:
+        """
+            Get the default mass.
+        
+            Returns:
+                default mass
+        
+        
+        """
+        ...
     def getFilters(self) -> typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]: ...
-    def getMu(self) -> float: ...
-    def getParsedUnitsBehavior(self) -> ParsedUnitsBehavior: ...
-    def isSimpleEOP(self) -> bool: ...
-    def withDefaultInterpolationDegree(self, int: int) -> 'ParserBuilder': ...
-    def withDefaultMass(self, double: float) -> 'ParserBuilder': ...
+    def getMu(self) -> float:
+        """
+            Get the gravitational coefficient.
+        
+            Returns:
+                gravitational coefficient
+        
+        
+        """
+        ...
+    def getParsedUnitsBehavior(self) -> ParsedUnitsBehavior:
+        """
+            Get the behavior to adopt for handling parsed units.
+        
+            Returns:
+                behavior to adopt for handling parsed units
+        
+        
+        """
+        ...
+    def isSimpleEOP(self) -> bool:
+        """
+            Check if tidal effects are ignored when interpolating EOP.
+        
+            Returns:
+                true if tidal effects are ignored when interpolating EOP
+        
+        
+        """
+        ...
+    def withDefaultInterpolationDegree(self, int: int) -> 'ParserBuilder':
+        """
+            Set up the default interpolation degree.
+        
+            The default interpolation degree is used only by :class:`~org.orekit.files.ccsds.ndm.adm.aem.AemParser` and
+            :class:`~org.orekit.files.ccsds.ndm.odm.oem.OemParser`.
+        
+            Parameters:
+                newDefaultInterpolationDegree (int): default interpolation degree
+        
+            Returns:
+                a new builder with updated configuration (the instance is not changed)
+        
+        
+        """
+        ...
+    def withDefaultMass(self, double: float) -> 'ParserBuilder':
+        """
+            Set up the default mass.
+        
+            The default mass is used only by :class:`~org.orekit.files.ccsds.ndm.odm.opm.OpmParser`.
+        
+            Parameters:
+                newDefaultMass (double): default mass
+        
+            Returns:
+                a new builder with updated configuration (the instance is not changed)
+        
+        
+        """
+        ...
     def withFilter(self, function: typing.Union[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]], typing.Callable[[org.orekit.files.ccsds.utils.lexical.ParseToken], java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]) -> 'ParserBuilder': ...
-    def withMu(self, double: float) -> 'ParserBuilder': ...
-    def withParsedUnitsBehavior(self, parsedUnitsBehavior: ParsedUnitsBehavior) -> 'ParserBuilder': ...
-    def withSimpleEOP(self, boolean: bool) -> 'ParserBuilder': ...
+    def withMu(self, double: float) -> 'ParserBuilder':
+        """
+            Set up the gravitational coefficient.
+        
+            Parameters:
+                newMu (double): gravitational coefficient
+        
+            Returns:
+                a new builder with updated configuration (the instance is not changed)
+        
+        
+        """
+        ...
+    def withParsedUnitsBehavior(self, parsedUnitsBehavior: ParsedUnitsBehavior) -> 'ParserBuilder':
+        """
+            Set up the behavior to adopt for handling parsed units.
+        
+            Parameters:
+                newParsedUnitsBehavior (:class:`~org.orekit.files.ccsds.ndm.ParsedUnitsBehavior`): behavior to adopt for handling parsed units
+        
+            Returns:
+                a new builder with updated configuration (the instance is not changed)
+        
+        
+        """
+        ...
+    def withSimpleEOP(self, boolean: bool) -> 'ParserBuilder':
+        """
+            Set up flag for ignoring tidal effects when interpolating EOP.
+        
+            Parameters:
+                newSimpleEOP (boolean): true if tidal effects are ignored when interpolating EOP
+        
+            Returns:
+                a new builder with updated configuration (the instance is not changed)
+        
+        
+        """
+        ...
 
 _PythonAbstractBuilder__T = typing.TypeVar('_PythonAbstractBuilder__T', bound=AbstractBuilder)  # <T>
 class PythonAbstractBuilder(AbstractBuilder[_PythonAbstractBuilder__T], typing.Generic[_PythonAbstractBuilder__T]):
+    """
+    public class PythonAbstractBuilder<T extends :class:`~org.orekit.files.ccsds.ndm.AbstractBuilder`<T>> extends :class:`~org.orekit.files.ccsds.ndm.AbstractBuilder`<T>
+    """
     def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, double: float, double2: float, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, rangeUnitsConverter: org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter): ...
-    def create(self, iERSConventions: org.orekit.utils.IERSConventions, double: float, double2: float, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, rangeUnitsConverter: org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter) -> _PythonAbstractBuilder__T: ...
+    def create(self, iERSConventions: org.orekit.utils.IERSConventions, double: float, double2: float, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, rangeUnitsConverter: org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter) -> _PythonAbstractBuilder__T:
+        """
+            Build an instance.
+        
+            Specified by:
+                :meth:`~org.orekit.files.ccsds.ndm.AbstractBuilder.create` in
+                class :class:`~org.orekit.files.ccsds.ndm.AbstractBuilder`
+        
+            Parameters:
+                newConventions (:class:`~org.orekit.utils.IERSConventions`): IERS Conventions
+                newEquatorialRadius (double): central body equatorial radius
+                newFlattening (double): central body flattening
+                newDataContext (:class:`~org.orekit.data.DataContext`): used to retrieve frames, time scales, etc.
+                newMissionReferenceDate (:class:`~org.orekit.time.AbsoluteDate`): reference date for Mission Elapsed Time or Mission Relative Time time systems
+                newRangeUnitsConverter (:class:`~org.orekit.files.ccsds.ndm.tdm.RangeUnitsConverter`): converter for :meth:`~org.orekit.files.ccsds.ndm.tdm.RangeUnits.RU`
+        
+            Returns:
+                new instance
+        
+        
+        """
+        ...
     def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
 
 _PythonNdmConstituent__H = typing.TypeVar('_PythonNdmConstituent__H', bound=org.orekit.files.ccsds.section.Header)  # <H>
 _PythonNdmConstituent__S = typing.TypeVar('_PythonNdmConstituent__S', bound=org.orekit.files.ccsds.section.Segment)  # <S>
 class PythonNdmConstituent(NdmConstituent[_PythonNdmConstituent__H, _PythonNdmConstituent__S], typing.Generic[_PythonNdmConstituent__H, _PythonNdmConstituent__S]):
+    """
+    public class PythonNdmConstituent<H extends :class:`~org.orekit.files.ccsds.section.Header`, S extends :class:`~org.orekit.files.ccsds.section.Segment`<?, ?>> extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<H, S>
+    """
     def __init__(self, h: _PythonNdmConstituent__H, list: java.util.List[_PythonNdmConstituent__S], iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext): ...
     def finalize(self) -> None: ...
-    def getConventions(self) -> org.orekit.utils.IERSConventions: ...
-    def getDataContext(self) -> org.orekit.data.DataContext: ...
-    def getHeader(self) -> _PythonNdmConstituent__H: ...
+    def getConventions(self) -> org.orekit.utils.IERSConventions:
+        """
+            Get IERS conventions.
+        
+            Overrides:
+                :meth:`~org.orekit.files.ccsds.ndm.NdmConstituent.getConventions` in
+                class :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`
+        
+            Returns:
+                IERS conventions
+        
+        
+        """
+        ...
+    def getDataContext(self) -> org.orekit.data.DataContext:
+        """
+            Get the data context.
+        
+            Overrides:
+                :meth:`~org.orekit.files.ccsds.ndm.NdmConstituent.getDataContext` in
+                class :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`
+        
+            Returns:
+                the data context used for creating frames, time scales, etc.
+        
+        
+        """
+        ...
+    def getHeader(self) -> _PythonNdmConstituent__H:
+        """
+            Get the header.
+        
+            Overrides:
+                :meth:`~org.orekit.files.ccsds.ndm.NdmConstituent.getHeader` in
+                class :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`
+        
+            Returns:
+                header
+        
+            Since:
+                11.0
+        
+        
+        """
+        ...
     def getSegments(self) -> java.util.List[_PythonNdmConstituent__S]: ...
-    def pythonDecRef(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
-    def validate(self) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+    def validate(self) -> None:
+        """
+            Validate the file message for required and forbidden entries.
+        
+            This method throws an exception if file does not meet format requirements. The requirements may depend on format
+            version, which is found in header.
+        
+            Overrides:
+                :meth:`~org.orekit.files.ccsds.ndm.NdmConstituent.validate` in
+                class :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`
+        
+        
+        """
+        ...
 
 class WriterBuilder(AbstractBuilder['WriterBuilder']):
+    """
+    public class WriterBuilder extends :class:`~org.orekit.files.ccsds.ndm.AbstractBuilder`<:class:`~org.orekit.files.ccsds.ndm.WriterBuilder`>
+    
+        Builder for all :class:`~org.orekit.files.ccsds.ndm.NdmConstituent` files writers.
+    
+        This builder can be used for building all CCSDS Messages writers types. It is particularly useful in multi-threaded
+        context as writers cannot be shared between threads and thus several independent writers must be built in this case.
+    
+        Since:
+            11.0
+    """
     @typing.overload
     def __init__(self): ...
     @typing.overload
     def __init__(self, dataContext: org.orekit.data.DataContext): ...
-    def buildAcmWriter(self) -> org.orekit.files.ccsds.ndm.adm.acm.AcmWriter: ...
-    def buildAemWriter(self) -> org.orekit.files.ccsds.ndm.adm.aem.AemWriter: ...
-    def buildApmWriter(self) -> org.orekit.files.ccsds.ndm.adm.apm.ApmWriter: ...
-    def buildCdmWriter(self) -> org.orekit.files.ccsds.ndm.cdm.CdmWriter: ...
-    def buildNdmWriter(self) -> NdmWriter: ...
-    def buildOcmWriter(self) -> org.orekit.files.ccsds.ndm.odm.ocm.OcmWriter: ...
-    def buildOemWriter(self) -> org.orekit.files.ccsds.ndm.odm.oem.OemWriter: ...
-    def buildOmmWriter(self) -> org.orekit.files.ccsds.ndm.odm.omm.OmmWriter: ...
-    def buildOpmWriter(self) -> org.orekit.files.ccsds.ndm.odm.opm.OpmWriter: ...
-    def buildTdmWriter(self) -> org.orekit.files.ccsds.ndm.tdm.TdmWriter: ...
+    def buildAcmWriter(self) -> org.orekit.files.ccsds.ndm.adm.acm.AcmWriter:
+        """
+            Build a writer for :class:`~org.orekit.files.ccsds.ndm.adm.acm.Acm`.
+        
+            Returns:
+                a new writer
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
+    def buildAemWriter(self) -> org.orekit.files.ccsds.ndm.adm.aem.AemWriter:
+        """
+            Build a writer for :class:`~org.orekit.files.ccsds.ndm.adm.aem.Aem`.
+        
+            Returns:
+                a new writer
+        
+        
+        """
+        ...
+    def buildApmWriter(self) -> org.orekit.files.ccsds.ndm.adm.apm.ApmWriter:
+        """
+            Build a writer for :class:`~org.orekit.files.ccsds.ndm.adm.apm.Apm`.
+        
+            Returns:
+                a new writer
+        
+        
+        """
+        ...
+    def buildCdmWriter(self) -> org.orekit.files.ccsds.ndm.cdm.CdmWriter:
+        """
+            Build a writer for :class:`~org.orekit.files.ccsds.ndm.cdm.Cdm`.
+        
+            Returns:
+                a new writer
+        
+        
+        """
+        ...
+    def buildNdmWriter(self) -> NdmWriter:
+        """
+            Build a writer for :class:`~org.orekit.files.ccsds.ndm.Ndm`.
+        
+            Returns:
+                a new writer
+        
+        
+        """
+        ...
+    def buildOcmWriter(self) -> org.orekit.files.ccsds.ndm.odm.ocm.OcmWriter:
+        """
+            Build a writer for :class:`~org.orekit.files.ccsds.ndm.odm.ocm.Ocm`.
+        
+            Returns:
+                a new writer
+        
+        
+        """
+        ...
+    def buildOemWriter(self) -> org.orekit.files.ccsds.ndm.odm.oem.OemWriter:
+        """
+            Build a writer for :class:`~org.orekit.files.ccsds.ndm.odm.oem.Oem`.
+        
+            Returns:
+                a new writer
+        
+        
+        """
+        ...
+    def buildOmmWriter(self) -> org.orekit.files.ccsds.ndm.odm.omm.OmmWriter:
+        """
+            Build a writer for :class:`~org.orekit.files.ccsds.ndm.odm.omm.Omm`.
+        
+            Returns:
+                a new writer
+        
+        
+        """
+        ...
+    def buildOpmWriter(self) -> org.orekit.files.ccsds.ndm.odm.opm.OpmWriter:
+        """
+            Build a writer for :class:`~org.orekit.files.ccsds.ndm.odm.opm.Opm`.
+        
+            Returns:
+                a new writer
+        
+        
+        """
+        ...
+    def buildTdmWriter(self) -> org.orekit.files.ccsds.ndm.tdm.TdmWriter:
+        """
+            Build a writer for :class:`~org.orekit.files.ccsds.ndm.tdm.Tdm`.
+        
+            Returns:
+                a new writer
+        
+        
+        """
+        ...
 
 
 class __module_protocol__(typing.Protocol):
@@ -215,5 +1285,6 @@ class __module_protocol__(typing.Protocol):
     WriterBuilder: typing.Type[WriterBuilder]
     adm: org.orekit.files.ccsds.ndm.adm.__module_protocol__
     cdm: org.orekit.files.ccsds.ndm.cdm.__module_protocol__
+    class-use: org.orekit.files.ccsds.ndm.class-use.__module_protocol__
     odm: org.orekit.files.ccsds.ndm.odm.__module_protocol__
     tdm: org.orekit.files.ccsds.ndm.tdm.__module_protocol__

@@ -6,6 +6,7 @@ import org.orekit.data
 import org.orekit.frames
 import org.orekit.gnss.antenna
 import org.orekit.gnss.attitude
+import org.orekit.gnss.class-use
 import org.orekit.gnss.metric
 import org.orekit.gnss.rflink
 import org.orekit.propagation
@@ -17,37 +18,271 @@ import typing
 
 
 class DOP:
+    """
+    public class DOP extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        This class is a container for the result of a single DOP computation.
+    
+        Since:
+            8.0
+    
+        Also see:
+            `Dilution of precision <http://en.wikipedia.org/wiki/Dilution_of_precision_%28GPS%29>`
+    """
     def __init__(self, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate, int: int, double: float, double2: float, double3: float, double4: float, double5: float): ...
-    def getDate(self) -> org.orekit.time.AbsoluteDate: ...
-    def getGdop(self) -> float: ...
-    def getGnssNb(self) -> int: ...
-    def getHdop(self) -> float: ...
-    def getLocation(self) -> org.orekit.bodies.GeodeticPoint: ...
-    def getPdop(self) -> float: ...
-    def getTdop(self) -> float: ...
-    def getVdop(self) -> float: ...
+    def getDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Gets the calculation date of the DOP.
+        
+            Returns:
+                the calculation date of the DOP
+        
+        
+        """
+        ...
+    def getGdop(self) -> float:
+        """
+            Gets the geometric dilution of precision.
+        
+            Returns:
+                the GDOP
+        
+        
+        """
+        ...
+    def getGnssNb(self) -> int:
+        """
+            Gets the number of GNSS satellites taken into account for DOP computation.
+        
+            Returns:
+                the number of GNSS satellites taken into account for DOP computation
+        
+        
+        """
+        ...
+    def getHdop(self) -> float:
+        """
+            Gets the horizontal dilution of precision.
+        
+            Returns:
+                the HDOP
+        
+        
+        """
+        ...
+    def getLocation(self) -> org.orekit.bodies.GeodeticPoint:
+        """
+            Gets the location with respect to the Earth where DOP was calculated.
+        
+            Returns:
+                the location with respect to the Earth where DOP was calculated
+        
+        
+        """
+        ...
+    def getPdop(self) -> float:
+        """
+            Gets the position dilution of precision.
+        
+            Returns:
+                the PDOP
+        
+        
+        """
+        ...
+    def getTdop(self) -> float:
+        """
+            Gets the time dilution of precision.
+        
+            Returns:
+                the TDOP
+        
+        
+        """
+        ...
+    def getVdop(self) -> float:
+        """
+            Gets the vertical dilution of precision.
+        
+            Returns:
+                the VDOP
+        
+        
+        """
+        ...
 
 class DOPComputer:
+    """
+    public class DOPComputer extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        This class aims at computing the dilution of precision.
+    
+        Since:
+            8.0
+    
+        Also see:
+            `Dilution of precision <http://en.wikipedia.org/wiki/Dilution_of_precision_%28GPS%29>`
+    """
     DOP_MIN_ELEVATION: typing.ClassVar[float] = ...
+    """
+    public static final double DOP_MIN_ELEVATION
+    
+        Minimum elevation : 0°.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
     def compute(self, absoluteDate: org.orekit.time.AbsoluteDate, list: java.util.List[org.orekit.propagation.Propagator]) -> DOP: ...
     @staticmethod
-    def create(oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, geodeticPoint: org.orekit.bodies.GeodeticPoint) -> 'DOPComputer': ...
-    def getElevationMask(self) -> org.orekit.utils.ElevationMask: ...
-    def getMinElevation(self) -> float: ...
-    def withElevationMask(self, elevationMask: org.orekit.utils.ElevationMask) -> 'DOPComputer': ...
-    def withMinElevation(self, double: float) -> 'DOPComputer': ...
+    def create(oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, geodeticPoint: org.orekit.bodies.GeodeticPoint) -> 'DOPComputer':
+        """
+            Creates a DOP computer for one location.
+        
+            A minimum elevation of 0° is taken into account to compute visibility between the location and the GNSS spacecrafts.
+        
+            Parameters:
+                shape (:class:`~org.orekit.bodies.OneAxisEllipsoid`): the body shape on which the location is defined
+                location (:class:`~org.orekit.bodies.GeodeticPoint`): the point of interest
+        
+            Returns:
+                a configured DOP computer
+        
+        
+        """
+        ...
+    def getElevationMask(self) -> org.orekit.utils.ElevationMask:
+        """
+            Get the elevation mask.
+        
+            Returns:
+                the elevation mask
+        
+        
+        """
+        ...
+    def getMinElevation(self) -> float:
+        """
+            Get the minimum elevation.
+        
+            Returns:
+                the minimum elevation (rad)
+        
+        
+        """
+        ...
+    def withElevationMask(self, elevationMask: org.orekit.utils.ElevationMask) -> 'DOPComputer':
+        """
+            Set the elevation mask.
+        
+            This will override the min elevation if it has been configured as such previously.
+        
+            Parameters:
+                newElevationMask (:class:`~org.orekit.utils.ElevationMask`): elevation mask to use for the computation
+        
+            Returns:
+                a new detector with updated configuration (the instance is not changed)
+        
+            Also see:
+                :meth:`~org.orekit.gnss.DOPComputer.getElevationMask`
+        
+        
+        """
+        ...
+    def withMinElevation(self, double: float) -> 'DOPComputer':
+        """
+            Set the minimum elevation.
+        
+            This will override an elevation mask if it has been configured as such previously.
+        
+            Parameters:
+                newMinElevation (double): minimum elevation for visibility (rad)
+        
+            Returns:
+                a new DOP computer with updated configuration (the instance is not changed)
+        
+            Also see:
+                :meth:`~org.orekit.gnss.DOPComputer.getMinElevation`
+        
+        
+        """
+        ...
 
 class IGSUtils:
+    """
+    public class IGSUtils extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Utility for IGS files.
+    
+        Since:
+            12.1
+    """
     @staticmethod
-    def frameName(frame: org.orekit.frames.Frame) -> str: ...
+    def frameName(frame: org.orekit.frames.Frame) -> str:
+        """
+            Guess a frame name.
+        
+            If the frame is not compatible with :meth:`~org.orekit.gnss.IGSUtils.guessFrame`, an exception will be triggered
+        
+            Parameters:
+                frame (:class:`~org.orekit.frames.Frame`): frame from which we want the name
+        
+            Returns:
+                name compatible with :meth:`~org.orekit.gnss.IGSUtils.guessFrame`
+        
+            Since:
+                12.1
+        
+        
+        """
+        ...
     @typing.overload
     @staticmethod
-    def guessFrame(string: str) -> org.orekit.frames.Frame: ...
+    def guessFrame(string: str) -> org.orekit.frames.Frame:
+        """
+            Default string to :class:`~org.orekit.frames.Frame` conversion for :class:`~org.orekit.files.sp3.SP3Parser` or
+            :class:`~org.orekit.files.rinex.clock.RinexClockParser`.
+        
+            Various frame names are supported:
+        
+              - IGS##, or ITR##, or ITRF##, or SLR##, where ## is a two digits number, then this number will be used to build the
+                appropriate :class:`~org.orekit.frames.ITRFVersion`
+              - GCRF (left or right justified) for GCRF inertial frame
+              - EME00 or EME2K for EME2000 inertial frame
+              - for all other names (for example if name is UNDEF or WGS84), then a default :meth:`~org.orekit.frames.Frames.getITRF`
+                frame will be selected
+        
+        
+            Note that using inertial frames in classical products like SP3 files is non-standard, it is supported by Orekit, but may
+            not be supported by other programs, so they should be used with caution when writing files.
+        
+            Parameters:
+                frames (:class:`~org.orekit.frames.Frames`): frames factory
+                name (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): of the frame.
+        
+            Returns:
+                guessed frame
+        
+            Since:
+                12.1
+        
+        
+        """
+        ...
     @typing.overload
     @staticmethod
     def guessFrame(frames: org.orekit.frames.Frames, string: str) -> org.orekit.frames.Frame: ...
 
 class MeasurementType(java.lang.Enum['MeasurementType']):
+    """
+    public enum MeasurementType extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.MeasurementType`>
+    
+        Enumerate for measurement type.
+    
+        Since:
+            9.2
+    """
     PSEUDO_RANGE: typing.ClassVar['MeasurementType'] = ...
     CARRIER_PHASE: typing.ClassVar['MeasurementType'] = ...
     DOPPLER: typing.ClassVar['MeasurementType'] = ...
@@ -59,29 +294,123 @@ class MeasurementType(java.lang.Enum['MeasurementType']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'MeasurementType': ...
+    def valueOf(string: str) -> 'MeasurementType':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        
+        
+        """
+        ...
     @staticmethod
-    def values() -> typing.List['MeasurementType']: ...
+    def values() -> typing.List['MeasurementType']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            for (MeasurementType c : MeasurementType.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
 
 class ObservationTimeScale(java.lang.Enum['ObservationTimeScale']):
+    """
+    public enum ObservationTimeScale extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.ObservationTimeScale`>
+    
+        Observation time scales.
+    
+        Since:
+            12.0
+    """
     GPS: typing.ClassVar['ObservationTimeScale'] = ...
     GAL: typing.ClassVar['ObservationTimeScale'] = ...
     GLO: typing.ClassVar['ObservationTimeScale'] = ...
     QZS: typing.ClassVar['ObservationTimeScale'] = ...
     BDT: typing.ClassVar['ObservationTimeScale'] = ...
     IRN: typing.ClassVar['ObservationTimeScale'] = ...
-    def getTimeScale(self, timeScales: org.orekit.time.TimeScales) -> org.orekit.time.TimeScale: ...
+    def getTimeScale(self, timeScales: org.orekit.time.TimeScales) -> org.orekit.time.TimeScale:
+        """
+            Get time scale.
+        
+            Parameters:
+                timeScales (:class:`~org.orekit.time.TimeScales`): time scales factory
+        
+            Returns:
+                time scale
+        
+        
+        """
+        ...
     _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
     @typing.overload
     @staticmethod
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'ObservationTimeScale': ...
+    def valueOf(string: str) -> 'ObservationTimeScale':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        
+        
+        """
+        ...
     @staticmethod
-    def values() -> typing.List['ObservationTimeScale']: ...
+    def values() -> typing.List['ObservationTimeScale']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            for (ObservationTimeScale c : ObservationTimeScale.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
 
 class ObservationType(java.lang.Enum['ObservationType']):
+    """
+    public enum ObservationType extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.ObservationType`>
+    
+        Enumerate for all the Observation Types for Rinex 2 and 3. For Rinex 2, there is an two-character enumerate composed of
+        the Observation Code (C,P,L,D,S) and the Frequency code (1,2,5,6,7,8). For Rinex 3 there is a three-character enumerate
+        composed of the Observation Code (C,L,D,S), the frequency code (1,2,5,6,7,8) and a final attribute depending on the
+        tracking mode or channel.
+    """
     C1: typing.ClassVar['ObservationType'] = ...
     C2: typing.ClassVar['ObservationType'] = ...
     C5: typing.ClassVar['ObservationType'] = ...
@@ -403,46 +732,278 @@ class ObservationType(java.lang.Enum['ObservationType']):
     SB: typing.ClassVar['ObservationType'] = ...
     SC: typing.ClassVar['ObservationType'] = ...
     SD: typing.ClassVar['ObservationType'] = ...
-    def getFrequency(self, satelliteSystem: 'SatelliteSystem') -> 'Frequency': ...
-    def getMeasurementType(self) -> MeasurementType: ...
-    def getSignalCode(self) -> 'SignalCode': ...
+    def getFrequency(self, satelliteSystem: 'SatelliteSystem') -> 'Frequency':
+        """
+            Get the frequency for a specified satellite system.
+        
+            Parameters:
+                system (:class:`~org.orekit.gnss.SatelliteSystem`): satellite system
+        
+            Returns:
+                frequency for the satellite system, or null if satellite system not compatible
+        
+        
+        """
+        ...
+    def getMeasurementType(self) -> MeasurementType:
+        """
+            Get the measurement type.
+        
+            Returns:
+                measurement type
+        
+        
+        """
+        ...
+    def getSignalCode(self) -> 'SignalCode':
+        """
+            Get the signal code.
+        
+            Returns:
+                signal code
+        
+        
+        """
+        ...
     _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
     @typing.overload
     @staticmethod
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'ObservationType': ...
+    def valueOf(string: str) -> 'ObservationType':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        
+        
+        """
+        ...
     @staticmethod
-    def values() -> typing.List['ObservationType']: ...
+    def values() -> typing.List['ObservationType']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            for (ObservationType c : ObservationType.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
 
 class RadioWave:
-    def getFrequency(self) -> float: ...
-    def getWavelength(self) -> float: ...
+    """
+    public interface RadioWave
+    
+        Top level interface for radio waves.
+    
+        Since:
+            12.1
+    """
+    def getFrequency(self) -> float:
+        """
+            Get the value of the frequency in Hz.
+        
+            Returns:
+                value of the frequency in Hz
+        
+            Also see:
+                :meth:`~org.orekit.gnss.RadioWave.getWavelength`
+        
+        
+        """
+        ...
+    def getWavelength(self) -> float:
+        """
+            Get the wavelength in meters.
+        
+            Returns:
+                wavelength in meters
+        
+            Also see:
+                :meth:`~org.orekit.gnss.RadioWave.getFrequency`
+        
+        
+        """
+        ...
 
 class SEMParser(org.orekit.data.AbstractSelfFeedingLoader, org.orekit.data.DataLoader):
+    """
+    public class SEMParser extends :class:`~org.orekit.data.AbstractSelfFeedingLoader` implements :class:`~org.orekit.data.DataLoader`
+    
+        This class reads SEM almanac files and provides :class:`~org.orekit.propagation.analytical.gnss.data.GPSAlmanac`.
+    
+        The definition of a SEM almanac comes from the `U.S. COAST GUARD NAVIGATION CENTER
+        <http://www.navcen.uscg.gov/?pageName=gpsSem>`.
+    
+        The format of the files holding SEM almanacs is not precisely specified, so the parsing rules have been deduced from the
+        downloadable files at `NAVCEN <http://www.navcen.uscg.gov/?pageName=gpsAlmanacs>` and at
+        :class:`~org.orekit.gnss.https:.celestrak.com.GPS.almanac.SEM`.
+    
+        Since:
+            8.0
+    """
     @typing.overload
     def __init__(self, string: str): ...
     @typing.overload
     def __init__(self, string: str, dataProvidersManager: org.orekit.data.DataProvidersManager, timeScales: org.orekit.time.TimeScales): ...
     def getAlmanacs(self) -> java.util.List[org.orekit.propagation.analytical.gnss.data.GPSAlmanac]: ...
     def getPRNNumbers(self) -> java.util.List[int]: ...
-    def getSupportedNames(self) -> str: ...
+    def getSupportedNames(self) -> str:
+        """
+            Description copied from class: :meth:`~org.orekit.data.AbstractSelfFeedingLoader.getSupportedNames`
+            Get the supported names regular expression.
+        
+            Overrides:
+                :meth:`~org.orekit.data.AbstractSelfFeedingLoader.getSupportedNames` in
+                class :class:`~org.orekit.data.AbstractSelfFeedingLoader`
+        
+            Returns:
+                the supported names.
+        
+            Also see:
+                :meth:`~org.orekit.data.DataProvidersManager.feed`
+        
+        
+        """
+        ...
     @typing.overload
-    def loadData(self) -> None: ...
+    def loadData(self) -> None:
+        """
+            Loads almanacs.
+        
+            The almanacs already loaded in the instance will be discarded and replaced by the newly loaded data.
+        
+            This feature is useful when the file selection is already set up by the :class:`~org.orekit.data.DataProvidersManager`
+            configuration.
+        public void loadData (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.io.InputStream?is` input, :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` name) throws :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.io.IOException?is`, :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.text.ParseException?is`, :class:`~org.orekit.errors.OrekitException`
+        
+            Description copied from interface: :meth:`~org.orekit.data.DataLoader.loadData`
+            Load data from a stream.
+        
+            Specified by:
+                :meth:`~org.orekit.data.DataLoader.loadData` in interface :class:`~org.orekit.data.DataLoader`
+        
+            Parameters:
+                input (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.io.InputStream?is`): data input stream
+                name (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the file (or zip entry)
+        
+            Raises:
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.io.IOException?is`: if data can't be read
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.text.ParseException?is`: if data can't be parsed or if some loader specific error occurs
+                :class:`~org.orekit.errors.OrekitException`: 
+        
+        """
+        ...
     @typing.overload
     def loadData(self, inputStream: java.io.InputStream, string: str) -> None: ...
-    def stillAcceptsData(self) -> bool: ...
+    def stillAcceptsData(self) -> bool:
+        """
+            Description copied from interface: :meth:`~org.orekit.data.DataLoader.stillAcceptsData`
+            Check if the loader still accepts new data.
+        
+            This method is used to speed up data loading by interrupting crawling the data sets as soon as a loader has found the
+            data it was waiting for. For loaders that can merge data from any number of sources (for example JPL ephemerides or
+            Earth Orientation Parameters that are split among several files), this method should always return true to make sure no
+            data is left over.
+        
+            Specified by:
+                :meth:`~org.orekit.data.DataLoader.stillAcceptsData` in interface :class:`~org.orekit.data.DataLoader`
+        
+            Returns:
+                true while the loader still accepts new data
+        
+        
+        """
+        ...
 
 class SatInSystem:
+    """
+    public class SatInSystem extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Container for satellite system and PRN.
+    
+        Since:
+            12.0
+    """
     def __init__(self, satelliteSystem: 'SatelliteSystem', int: int): ...
-    def equals(self, object: typing.Any) -> bool: ...
-    def getPRN(self) -> int: ...
-    def getSystem(self) -> 'SatelliteSystem': ...
-    def getTwoDigitsRinexPRN(self) -> int: ...
-    def hashCode(self) -> int: ...
+    def equals(self, object: typing.Any) -> bool:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+        
+        
+        """
+        ...
+    def getPRN(self) -> int:
+        """
+            Get the Pseudo Random Number of the satellite.
+        
+            Returns:
+                Pseudo Random Number of the satellite
+        
+        
+        """
+        ...
+    def getSystem(self) -> 'SatelliteSystem':
+        """
+            Get the system this satellite belongs to.
+        
+            Returns:
+                system this satellite belongs to
+        
+        
+        """
+        ...
+    def getTwoDigitsRinexPRN(self) -> int:
+        """
+            Get a 2-digits Pseudo Random Number for RINEX files.
+        
+            Returns:
+                2-digits Pseudo Random Number for RINEX files
+        
+        
+        """
+        ...
+    def hashCode(self) -> int:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+        
+        
+        """
+        ...
 
 class SatelliteSystem(java.lang.Enum['SatelliteSystem']):
+    """
+    public enum SatelliteSystem extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.SatelliteSystem`>
+    
+        Enumerate for satellite system.
+    
+        Since:
+            9.2
+    """
     USER_DEFINED_A: typing.ClassVar['SatelliteSystem'] = ...
     USER_DEFINED_B: typing.ClassVar['SatelliteSystem'] = ...
     BEIDOU: typing.ClassVar['SatelliteSystem'] = ...
@@ -469,23 +1030,102 @@ class SatelliteSystem(java.lang.Enum['SatelliteSystem']):
     USER_DEFINED_X: typing.ClassVar['SatelliteSystem'] = ...
     USER_DEFINED_Y: typing.ClassVar['SatelliteSystem'] = ...
     USER_DEFINED_Z: typing.ClassVar['SatelliteSystem'] = ...
-    def getKey(self) -> str: ...
-    def getObservationTimeScale(self) -> ObservationTimeScale: ...
+    def getKey(self) -> str:
+        """
+            Get the key for the system.
+        
+            Returns:
+                key for the system
+        
+        
+        """
+        ...
+    def getObservationTimeScale(self) -> ObservationTimeScale:
+        """
+            Get observation time scale for satellite system.
+        
+            Returns:
+                observation time scale, null if there are not
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
     @staticmethod
     def parseSatelliteSystem(string: str) -> 'SatelliteSystem': ...
     @staticmethod
-    def parseSatelliteSystemWithGPSDefault(string: str) -> 'SatelliteSystem': ...
+    def parseSatelliteSystemWithGPSDefault(string: str) -> 'SatelliteSystem':
+        """
+            Parse a string to get the satellite system.
+        
+            The string first character must be the satellite system, or empty to get GPS as default
+        
+            Parameters:
+                s (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): string to parse
+        
+            Returns:
+                the satellite system
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
     _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
     @typing.overload
     @staticmethod
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'SatelliteSystem': ...
+    def valueOf(string: str) -> 'SatelliteSystem':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        
+        
+        """
+        ...
     @staticmethod
-    def values() -> typing.List['SatelliteSystem']: ...
+    def values() -> typing.List['SatelliteSystem']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            for (SatelliteSystem c : SatelliteSystem.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
 
 class SignalCode(java.lang.Enum['SignalCode']):
+    """
+    public enum SignalCode extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.SignalCode`>
+    
+        Enumerate for satellite signal code.
+    
+        Since:
+            10.1
+    """
     A: typing.ClassVar['SignalCode'] = ...
     B: typing.ClassVar['SignalCode'] = ...
     C: typing.ClassVar['SignalCode'] = ...
@@ -509,11 +1149,52 @@ class SignalCode(java.lang.Enum['SignalCode']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'SignalCode': ...
+    def valueOf(string: str) -> 'SignalCode':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        
+        
+        """
+        ...
     @staticmethod
-    def values() -> typing.List['SignalCode']: ...
+    def values() -> typing.List['SignalCode']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            for (SignalCode c : SignalCode.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
 
 class TimeSystem(java.lang.Enum['TimeSystem']):
+    """
+    public enum TimeSystem extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.TimeSystem`>
+    
+        Enumerate for the time systems used in navigation files.
+    
+        Since:
+            11.0
+    """
     GPS: typing.ClassVar['TimeSystem'] = ...
     GLONASS: typing.ClassVar['TimeSystem'] = ...
     GALILEO: typing.ClassVar['TimeSystem'] = ...
@@ -525,8 +1206,58 @@ class TimeSystem(java.lang.Enum['TimeSystem']):
     SBAS: typing.ClassVar['TimeSystem'] = ...
     GMT: typing.ClassVar['TimeSystem'] = ...
     UNKNOWN: typing.ClassVar['TimeSystem'] = ...
-    def getKey(self) -> str: ...
-    def getTimeScale(self, timeScales: org.orekit.time.TimeScales) -> org.orekit.time.TimeScale: ...
+    def getKey(self) -> str:
+        """
+            Get the 3 letters key of the time system.
+        
+            Returns:
+                3 letters key
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
+    def getOneLetterCode(self) -> str:
+        """
+            Get the one letter code.
+        
+            Returns:
+                one letter code (may be null for non-GNSS time systems)
+        
+            Since:
+                12.2
+        
+        
+        """
+        ...
+    def getTimeScale(self, timeScales: org.orekit.time.TimeScales) -> org.orekit.time.TimeScale:
+        """
+            Get the time scale corresponding to time system.
+        
+            Parameters:
+                timeScales (:class:`~org.orekit.time.TimeScales`): the set of time scales to use
+        
+            Returns:
+                the time scale corresponding to time system in the set of time scales
+        
+        
+        """
+        ...
+    def getTwoLettersCode(self) -> str:
+        """
+            Get the two letters code.
+        
+            Returns:
+                two letters code (may be null for non-GNSS time systems)
+        
+            Since:
+                12.2
+        
+        
+        """
+        ...
     @staticmethod
     def parseOneLetterCode(string: str) -> 'TimeSystem': ...
     @staticmethod
@@ -539,39 +1270,219 @@ class TimeSystem(java.lang.Enum['TimeSystem']):
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'TimeSystem': ...
+    def valueOf(string: str) -> 'TimeSystem':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        
+        
+        """
+        ...
     @staticmethod
-    def values() -> typing.List['TimeSystem']: ...
+    def values() -> typing.List['TimeSystem']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            for (TimeSystem c : TimeSystem.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
 
 class YUMAParser(org.orekit.data.AbstractSelfFeedingLoader, org.orekit.data.DataLoader):
+    """
+    public class YUMAParser extends :class:`~org.orekit.data.AbstractSelfFeedingLoader` implements :class:`~org.orekit.data.DataLoader`
+    
+        This class reads Yuma almanac files and provides :class:`~org.orekit.propagation.analytical.gnss.data.GPSAlmanac`.
+    
+        The definition of a Yuma almanac comes from the `U.S. COAST GUARD NAVIGATION CENTER
+        <http://www.navcen.uscg.gov/?pageName=gpsYuma>`.
+    
+        The format of the files holding Yuma almanacs is not precisely specified, so the parsing rules have been deduced from
+        the downloadable files at `NAVCEN <http://www.navcen.uscg.gov/?pageName=gpsAlmanacs>` and at
+        :class:`~org.orekit.gnss.https:.celestrak.com.GPS.almanac.Yuma`.
+    
+        Since:
+            8.0
+    """
     @typing.overload
     def __init__(self, string: str): ...
     @typing.overload
     def __init__(self, string: str, dataProvidersManager: org.orekit.data.DataProvidersManager, timeScales: org.orekit.time.TimeScales): ...
     def getAlmanacs(self) -> java.util.List[org.orekit.propagation.analytical.gnss.data.GPSAlmanac]: ...
     def getPRNNumbers(self) -> java.util.List[int]: ...
-    def getSupportedNames(self) -> str: ...
+    def getSupportedNames(self) -> str:
+        """
+            Description copied from class: :meth:`~org.orekit.data.AbstractSelfFeedingLoader.getSupportedNames`
+            Get the supported names regular expression.
+        
+            Overrides:
+                :meth:`~org.orekit.data.AbstractSelfFeedingLoader.getSupportedNames` in
+                class :class:`~org.orekit.data.AbstractSelfFeedingLoader`
+        
+            Returns:
+                the supported names.
+        
+            Also see:
+                :meth:`~org.orekit.data.DataProvidersManager.feed`
+        
+        
+        """
+        ...
     @typing.overload
-    def loadData(self) -> None: ...
+    def loadData(self) -> None:
+        """
+            Loads almanacs.
+        
+            The almanacs already loaded in the instance will be discarded and replaced by the newly loaded data.
+        
+            This feature is useful when the file selection is already set up by the :class:`~org.orekit.data.DataProvidersManager`
+            configuration.
+        public void loadData (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.io.InputStream?is` input, :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` name) throws :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.io.IOException?is`, :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.text.ParseException?is`, :class:`~org.orekit.errors.OrekitException`
+        
+            Description copied from interface: :meth:`~org.orekit.data.DataLoader.loadData`
+            Load data from a stream.
+        
+            Specified by:
+                :meth:`~org.orekit.data.DataLoader.loadData` in interface :class:`~org.orekit.data.DataLoader`
+        
+            Parameters:
+                input (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.io.InputStream?is`): data input stream
+                name (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the file (or zip entry)
+        
+            Raises:
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.io.IOException?is`: if data can't be read
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.text.ParseException?is`: if data can't be parsed or if some loader specific error occurs
+                :class:`~org.orekit.errors.OrekitException`: 
+        
+        """
+        ...
     @typing.overload
     def loadData(self, inputStream: java.io.InputStream, string: str) -> None: ...
-    def stillAcceptsData(self) -> bool: ...
+    def stillAcceptsData(self) -> bool:
+        """
+            Description copied from interface: :meth:`~org.orekit.data.DataLoader.stillAcceptsData`
+            Check if the loader still accepts new data.
+        
+            This method is used to speed up data loading by interrupting crawling the data sets as soon as a loader has found the
+            data it was waiting for. For loaders that can merge data from any number of sources (for example JPL ephemerides or
+            Earth Orientation Parameters that are split among several files), this method should always return true to make sure no
+            data is left over.
+        
+            Specified by:
+                :meth:`~org.orekit.data.DataLoader.stillAcceptsData` in interface :class:`~org.orekit.data.DataLoader`
+        
+            Returns:
+                true while the loader still accepts new data
+        
+        
+        """
+        ...
 
 class GnssSignal(RadioWave):
+    """
+    public interface GnssSignal extends :class:`~org.orekit.gnss.RadioWave`
+    
+        Intermediate level interface for radio waves related to GNSS common frequency.
+    
+        Since:
+            12.1
+    """
     F0: typing.ClassVar[float] = ...
-    def getRatio(self) -> float: ...
+    """
+    static final double F0
+    
+        Common frequency F0 in Hz (10.23 MHz).
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    def getRatio(self) -> float:
+        """
+            Get the ratio f/f0, where :meth:`~org.orekit.gnss.GnssSignal.F0` is the common frequency.
+        
+            Returns:
+                ratio f/f0, where :meth:`~org.orekit.gnss.GnssSignal.F0` is the common frequency
+        
+            Also see:
+                :meth:`~org.orekit.gnss.GnssSignal.F0`, :meth:`~org.orekit.gnss.RadioWave.getFrequency`
+        
+        
+        """
+        ...
 
 class PythonRadioWave(RadioWave):
+    """
+    public class PythonRadioWave extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.gnss.RadioWave`
+    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getFrequency(self) -> float: ...
-    def pythonDecRef(self) -> None: ...
+    def getFrequency(self) -> float:
+        """
+            Description copied from interface: :meth:`~org.orekit.gnss.RadioWave.getFrequency`
+            Get the value of the frequency in Hz.
+        
+            Specified by:
+                :meth:`~org.orekit.gnss.RadioWave.getFrequency` in interface :class:`~org.orekit.gnss.RadioWave`
+        
+            Returns:
+                value of the frequency in Hz
+        
+            Also see:
+                :meth:`~org.orekit.gnss.RadioWave.getWavelength`
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
 
 class Frequency(java.lang.Enum['Frequency'], GnssSignal):
+    """
+    public enum Frequency extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.gnss.Frequency`> implements :class:`~org.orekit.gnss.GnssSignal`
+    
+        Enumerate for GNSS frequencies.
+    
+        Since:
+            9.2
+    """
     G01: typing.ClassVar['Frequency'] = ...
     G02: typing.ClassVar['Frequency'] = ...
     G05: typing.ClassVar['Frequency'] = ...
@@ -609,31 +1520,182 @@ class Frequency(java.lang.Enum['Frequency'], GnssSignal):
     S01: typing.ClassVar['Frequency'] = ...
     S05: typing.ClassVar['Frequency'] = ...
     F0: typing.ClassVar[float] = ...
-    def getFrequency(self) -> float: ...
-    def getMHzFrequency(self) -> float: ...
-    def getName(self) -> str: ...
-    def getRatio(self) -> float: ...
-    def getSatelliteSystem(self) -> SatelliteSystem: ...
+    """
+    :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public static final double F0
+    
+        Deprecated.
+        as of 12.1, replaced by :meth:`~org.orekit.gnss.GnssSignal.F0`
+        Common frequency F0 in MHz (10.23 MHz).
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    def getFrequency(self) -> float:
+        """
+            Get the value of the frequency in Hz.
+        
+            Specified by:
+                :meth:`~org.orekit.gnss.RadioWave.getFrequency` in interface :class:`~org.orekit.gnss.RadioWave`
+        
+            Returns:
+                value of the frequency in Hz
+        
+            Also see:
+                :meth:`~org.orekit.gnss.RadioWave.getWavelength`
+        
+        
+        """
+        ...
+    def getMHzFrequency(self) -> float:
+        """
+            Deprecated.
+            as of 12.1 replaced by :meth:`~org.orekit.gnss.Frequency.getFrequency`
+            Get the value of the frequency in MHz.
+        
+            Returns:
+                value of the frequency in MHz
+        
+        
+        """
+        ...
+    def getName(self) -> str:
+        """
+            Get the RINEX name for the frequency.
+        
+            Returns:
+                RINEX name for the frequency
+        
+        
+        """
+        ...
+    def getRatio(self) -> float:
+        """
+            Get the ratio f/f0, where :meth:`~org.orekit.gnss.GnssSignal.F0` is the common frequency.
+        
+            Specified by:
+                :meth:`~org.orekit.gnss.GnssSignal.getRatio` in interface :class:`~org.orekit.gnss.GnssSignal`
+        
+            Returns:
+                ratio f/f0, where :meth:`~org.orekit.gnss.GnssSignal.F0` is the common frequency
+        
+            Also see:
+                :meth:`~org.orekit.gnss.GnssSignal.F0`, :meth:`~org.orekit.gnss.RadioWave.getFrequency`
+        
+        
+        """
+        ...
+    def getSatelliteSystem(self) -> SatelliteSystem:
+        """
+            Get the satellite system for which this frequency is defined.
+        
+            Returns:
+                satellite system for which this frequency is defined
+        
+        
+        """
+        ...
     _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
     @typing.overload
     @staticmethod
     def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
     @typing.overload
     @staticmethod
-    def valueOf(string: str) -> 'Frequency': ...
+    def valueOf(string: str) -> 'Frequency':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (:class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        
+        
+        """
+        ...
     @staticmethod
-    def values() -> typing.List['Frequency']: ...
+    def values() -> typing.List['Frequency']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            for (Frequency c : Frequency.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
 
 class PythonGnssSignal(GnssSignal):
+    """
+    public class PythonGnssSignal extends :class:`~org.orekit.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.gnss.GnssSignal`
+    """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getFrequency(self) -> float: ...
-    def getRatio(self) -> float: ...
-    def pythonDecRef(self) -> None: ...
+    def getFrequency(self) -> float:
+        """
+            Get the value of the frequency in Hz.
+        
+            Specified by:
+                :meth:`~org.orekit.gnss.RadioWave.getFrequency` in interface :class:`~org.orekit.gnss.RadioWave`
+        
+            Returns:
+                value of the frequency in Hz
+        
+            Also see:
+                :meth:`~org.orekit.gnss.RadioWave.getWavelength`
+        
+        
+        """
+        ...
+    def getRatio(self) -> float:
+        """
+            Get the ratio f/f0, where :meth:`~org.orekit.gnss.GnssSignal.F0` is the common frequency.
+        
+            Specified by:
+                :meth:`~org.orekit.gnss.GnssSignal.getRatio` in interface :class:`~org.orekit.gnss.GnssSignal`
+        
+            Returns:
+                ratio f/f0, where :meth:`~org.orekit.gnss.GnssSignal.F0` is the common frequency
+        
+            Also see:
+                :meth:`~org.orekit.gnss.GnssSignal.F0`, :meth:`~org.orekit.gnss.RadioWave.getFrequency`
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
     @typing.overload
-    def pythonExtension(self) -> int: ...
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
     @typing.overload
-    def pythonExtension(self, long: int) -> None: ...
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
 
 
 class __module_protocol__(typing.Protocol):
@@ -658,5 +1720,6 @@ class __module_protocol__(typing.Protocol):
     YUMAParser: typing.Type[YUMAParser]
     antenna: org.orekit.gnss.antenna.__module_protocol__
     attitude: org.orekit.gnss.attitude.__module_protocol__
+    class-use: org.orekit.gnss.class-use.__module_protocol__
     metric: org.orekit.gnss.metric.__module_protocol__
     rflink: org.orekit.gnss.rflink.__module_protocol__

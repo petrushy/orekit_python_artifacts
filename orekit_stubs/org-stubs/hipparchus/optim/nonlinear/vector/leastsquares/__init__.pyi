@@ -1,6 +1,7 @@
 import org.hipparchus.analysis
 import org.hipparchus.linear
 import org.hipparchus.optim
+import org.hipparchus.optim.nonlinear.vector.leastsquares.class-use
 import org.hipparchus.util
 import typing
 
@@ -177,3 +178,4 @@ class __module_protocol__(typing.Protocol):
     ParameterValidator: typing.Type[ParameterValidator]
     SequentialGaussNewtonOptimizer: typing.Type[SequentialGaussNewtonOptimizer]
     ValueAndJacobianFunction: typing.Type[ValueAndJacobianFunction]
+    class-use: org.hipparchus.optim.nonlinear.vector.leastsquares.class-use.__module_protocol__

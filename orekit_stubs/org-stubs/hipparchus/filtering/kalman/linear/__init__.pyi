@@ -1,4 +1,5 @@
 import org.hipparchus.filtering.kalman
+import org.hipparchus.filtering.kalman.linear.class-use
 import org.hipparchus.linear
 import typing
 
@@ -28,3 +29,4 @@ class __module_protocol__(typing.Protocol):
     LinearEvolution: typing.Type[LinearEvolution]
     LinearKalmanFilter: typing.Type[LinearKalmanFilter]
     LinearProcess: typing.Type[LinearProcess]
+    class-use: org.hipparchus.filtering.kalman.linear.class-use.__module_protocol__

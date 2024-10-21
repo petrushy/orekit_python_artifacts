@@ -2,6 +2,7 @@ import java.lang
 import org.hipparchus.analysis
 import org.hipparchus.linear
 import org.hipparchus.optim
+import org.hipparchus.optim.nonlinear.scalar.class-use
 import org.hipparchus.optim.nonlinear.scalar.gradient
 import org.hipparchus.optim.nonlinear.scalar.noderiv
 import org.hipparchus.optim.univariate
@@ -56,7 +57,7 @@ class MultivariateOptimizer(org.hipparchus.optim.BaseMultivariateOptimizer[org.h
     @typing.overload
     def optimize(self) -> typing.Any: ...
     @typing.overload
-    def optimize(self, *optimizationData: org.hipparchus.optim.OptimizationData) -> org.hipparchus.optim.PointValuePair: ...
+    def optimize(self, optimizationDataArray: typing.List[org.hipparchus.optim.OptimizationData]) -> org.hipparchus.optim.PointValuePair: ...
 
 class ObjectiveFunction(org.hipparchus.optim.OptimizationData):
     def __init__(self, multivariateFunction: org.hipparchus.analysis.MultivariateFunction): ...
@@ -70,7 +71,7 @@ class GradientMultivariateOptimizer(MultivariateOptimizer):
     @typing.overload
     def optimize(self) -> typing.Any: ...
     @typing.overload
-    def optimize(self, *optimizationData: org.hipparchus.optim.OptimizationData) -> org.hipparchus.optim.PointValuePair: ...
+    def optimize(self, optimizationDataArray: typing.List[org.hipparchus.optim.OptimizationData]) -> org.hipparchus.optim.PointValuePair: ...
 
 
 class __module_protocol__(typing.Protocol):
@@ -86,5 +87,6 @@ class __module_protocol__(typing.Protocol):
     MultivariateOptimizer: typing.Type[MultivariateOptimizer]
     ObjectiveFunction: typing.Type[ObjectiveFunction]
     ObjectiveFunctionGradient: typing.Type[ObjectiveFunctionGradient]
+    class-use: org.hipparchus.optim.nonlinear.scalar.class-use.__module_protocol__
     gradient: org.hipparchus.optim.nonlinear.scalar.gradient.__module_protocol__
     noderiv: org.hipparchus.optim.nonlinear.scalar.noderiv.__module_protocol__

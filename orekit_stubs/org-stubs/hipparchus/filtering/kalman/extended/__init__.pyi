@@ -1,4 +1,5 @@
 import org.hipparchus.filtering.kalman
+import org.hipparchus.filtering.kalman.extended.class-use
 import org.hipparchus.linear
 import typing
 
@@ -29,3 +30,4 @@ class __module_protocol__(typing.Protocol):
     ExtendedKalmanFilter: typing.Type[ExtendedKalmanFilter]
     NonLinearEvolution: typing.Type[NonLinearEvolution]
     NonLinearProcess: typing.Type[NonLinearProcess]
+    class-use: org.hipparchus.filtering.kalman.extended.class-use.__module_protocol__

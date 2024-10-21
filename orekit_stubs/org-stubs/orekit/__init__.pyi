@@ -2,6 +2,7 @@ import org.orekit.annotation
 import org.orekit.attitudes
 import org.orekit.bodies
 import org.orekit.compiler
+import org.orekit.control
 import org.orekit.data
 import org.orekit.errors
 import org.orekit.estimation
@@ -28,6 +29,7 @@ class __module_protocol__(typing.Protocol):
     attitudes: org.orekit.attitudes.__module_protocol__
     bodies: org.orekit.bodies.__module_protocol__
     compiler: org.orekit.compiler.__module_protocol__
+    control: org.orekit.control.__module_protocol__
     data: org.orekit.data.__module_protocol__
     errors: org.orekit.errors.__module_protocol__
     estimation: org.orekit.estimation.__module_protocol__

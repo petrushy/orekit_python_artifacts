@@ -3,6 +3,7 @@ import org.hipparchus.analysis
 import org.hipparchus.linear
 import org.hipparchus.optim
 import org.hipparchus.optim.nonlinear.scalar
+import org.hipparchus.optim.nonlinear.scalar.noderiv.class-use
 import org.hipparchus.random
 import typing
 
@@ -35,7 +36,7 @@ class CMAESOptimizer(org.hipparchus.optim.nonlinear.scalar.MultivariateOptimizer
     @typing.overload
     def optimize(self) -> typing.Any: ...
     @typing.overload
-    def optimize(self, *optimizationData: org.hipparchus.optim.OptimizationData) -> org.hipparchus.optim.PointValuePair: ...
+    def optimize(self, optimizationDataArray: typing.List[org.hipparchus.optim.OptimizationData]) -> org.hipparchus.optim.PointValuePair: ...
     class PopulationSize(org.hipparchus.optim.OptimizationData):
         def __init__(self, int: int): ...
         def getPopulationSize(self) -> int: ...
@@ -61,7 +62,7 @@ class SimplexOptimizer(org.hipparchus.optim.nonlinear.scalar.MultivariateOptimiz
     @typing.overload
     def optimize(self) -> typing.Any: ...
     @typing.overload
-    def optimize(self, *optimizationData: org.hipparchus.optim.OptimizationData) -> org.hipparchus.optim.PointValuePair: ...
+    def optimize(self, optimizationDataArray: typing.List[org.hipparchus.optim.OptimizationData]) -> org.hipparchus.optim.PointValuePair: ...
 
 class MultiDirectionalSimplex(AbstractSimplex):
     @typing.overload
@@ -112,3 +113,4 @@ class __module_protocol__(typing.Protocol):
     NelderMeadSimplex: typing.Type[NelderMeadSimplex]
     PowellOptimizer: typing.Type[PowellOptimizer]
     SimplexOptimizer: typing.Type[SimplexOptimizer]
+    class-use: org.hipparchus.optim.nonlinear.scalar.noderiv.class-use.__module_protocol__

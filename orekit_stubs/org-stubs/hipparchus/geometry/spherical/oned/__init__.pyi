@@ -5,6 +5,7 @@ import org.hipparchus.exception
 import org.hipparchus.geometry
 import org.hipparchus.geometry.euclidean.twod
 import org.hipparchus.geometry.partitioning
+import org.hipparchus.geometry.spherical.oned.class-use
 import typing
 
 
@@ -28,7 +29,7 @@ class ArcsSet(org.hipparchus.geometry.partitioning.AbstractRegion['Sphere1D', 'S
     @typing.overload
     def __init__(self, double: float, double2: float, double3: float): ...
     @typing.overload
-    def __init__(self, collection: typing.Union[java.util.Collection[org.hipparchus.geometry.partitioning.SubHyperplane['Sphere1D']], typing.Sequence[org.hipparchus.geometry.partitioning.SubHyperplane['Sphere1D']], typing.Set[org.hipparchus.geometry.partitioning.SubHyperplane['Sphere1D']]], double: float): ...
+    def __init__(self, collection: typing.Union[java.util.Collection[org.hipparchus.geometry.partitioning.SubHyperplane['Sphere1D']], typing.Sequence[org.hipparchus.geometry.partitioning.SubHyperplane['Sphere1D']]], double: float): ...
     @typing.overload
     def __init__(self, bSPTree: org.hipparchus.geometry.partitioning.BSPTree['Sphere1D'], double: float): ...
     def asList(self) -> java.util.List[Arc]: ...
@@ -100,3 +101,4 @@ class __module_protocol__(typing.Protocol):
     S1Point: typing.Type[S1Point]
     Sphere1D: typing.Type[Sphere1D]
     SubLimitAngle: typing.Type[SubLimitAngle]
+    class-use: org.hipparchus.geometry.spherical.oned.class-use.__module_protocol__
