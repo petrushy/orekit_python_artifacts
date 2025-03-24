@@ -47,7 +47,7 @@ def download_orekit_data_curdir(filename='orekit-data.zip'):
     Args:
         filename (str): Store the downloaded data as this filename/path. Default is "orekit-data.zip"
     """
-    url = "https://gitlab.orekit.org/orekit/orekit-data/-/archive/master/orekit-data-master.zip"
+    url = "https://gitlab.orekit.org/orekit/orekit-data/-/archive/main/orekit-data-main.zip"
     # Download the orekit-data file and store it locally
 
     with urlrequest.urlopen(url) as response, open(filename, 'wb') as out_file:
