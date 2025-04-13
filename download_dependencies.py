@@ -6,7 +6,7 @@ import subprocess, os
 
 import shutil
 
-VERSION = "3.0"
+VERSION = "4.0.1"
 TARGET_DIRECTORY_JAVADOC = "./javadoc"
 TARGET_DIRECTORY = "."
 
