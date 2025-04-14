@@ -20,3 +20,6 @@ in the orekit-feedstock repo:
 source:
   path: ../../orekit_python_artifacts
 
+The build is now separating between python and original jars, to build only python extension:
+
+mvn -B package -Ppython-jar --file pom.xml
