@@ -71,7 +71,7 @@ class BrouwerLyddanePropagatorTest(unittest.TestCase):
 
         self.assertAlmostEqual(0.0, Vector3D.distance(initialOrbit.getPVCoordinates().getVelocity(),
                                                        finalOrbit.getPVCoordinates().getVelocity()), delta=  3e-10) # adjusted from 1.9e-11
-        self.assertAlmostEqual(0.0, finalOrbit.getA() - initialOrbit.getA(), delta=1.3e-8) # adjusted from 9.4e-10
+        self.assertAlmostEqual(0.0, finalOrbit.getA() - initialOrbit.getOrbit().getA(), delta=1.3e-8) # adjusted from 9.4e-10
 
     def test_compareToNumericalPropagation(self):
 

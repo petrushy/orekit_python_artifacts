@@ -53,7 +53,7 @@ class MyElevationDetector(PythonAbstractDetector):
         self.elevation = elevation
         self.topo: TopocentricFrame = topo
 
-        dmax = float(PythonAbstractDetector.DEFAULT_MAXCHECK)
+        dmax = float(PythonAbstractDetector.DEFAULT_MAX_CHECK)
         dthresh = float(PythonAbstractDetector.DEFAULT_THRESHOLD)
         dmaxiter = PythonAbstractDetector.DEFAULT_MAX_ITER
         if handler is None:
