@@ -23,7 +23,6 @@
  """
 
 import orekit
-from org.orekit.propagation import SpacecraftState
 
 orekit.initVM()
 # orekit.initVM(vmargs='-Xcheck:jni,-verbose:jni,-verbose:class,-XX:+UnlockDiagnosticVMOptions')
@@ -37,7 +36,10 @@ from org.orekit.propagation.analytical import KeplerianPropagator
 from org.orekit.utils import PVCoordinates, IERSConventions
 from org.orekit.propagation.events.handlers import EventHandler, ContinueOnEvent, StopOnEvent, PythonEventHandler
 from org.hipparchus.geometry.euclidean.threed import Vector3D
-from org.orekit.propagation.events import PythonAbstractDetector, PythonEventDetector, PythonAdaptableInterval
+from org.orekit.propagation.events import PythonAbstractDetector, PythonEventDetector
+from org.orekit.propagation.events.intervals import PythonAdaptableInterval
+from org.orekit.propagation import SpacecraftState
+
 from org.hipparchus.ode.events import Action
 
 
@@ -73,8 +75,8 @@ class MyEventCounter(PythonEventHandler):
 mycounter = MyEventCounter()
 
 class MyAdaptableInterval(PythonAdaptableInterval):
-    def currentInterval(self, s):
-        return float(PythonAbstractDetector.DEFAULT_MAXCHECK)
+    def currentInterval(self, s, isForward: bool):
+        return float(PythonAbstractDetector.DEFAULT_MAX_CHECK)
 
 class MyElevationDetector(PythonEventDetector):
     passes = 0

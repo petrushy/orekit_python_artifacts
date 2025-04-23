@@ -82,7 +82,7 @@ class ImpulseManeuverTest(unittest.TestCase):
                                         
         propagated = propagator.propagate(initialOrbit.getDate().shiftedBy(8000.0))
 
-        self.assertAlmostEqual(0.0028257, propagated.getI(), delta=1.0e-6)
+        self.assertAlmostEqual(0.0028257, propagated.getOrbit().getI(), delta=1.0e-6)
         
 if __name__ == '__main__':
     #unittest.main()

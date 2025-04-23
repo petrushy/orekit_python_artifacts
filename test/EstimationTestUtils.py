@@ -176,7 +176,7 @@ class EstimationTestUtils():
 
     def createMeasurements(propagator, creator, startPeriod,  endPeriod, step):
         Propagator.cast_(propagator).setStepHandler(step, creator)
-        period = propagator.getInitialState().getKeplerianPeriod()
+        period = propagator.getInitialState().getOrbit().getKeplerianPeriod()
         start  = propagator.getInitialState().getDate().shiftedBy(startPeriod * period)
         end    = propagator.getInitialState().getDate().shiftedBy(endPeriod   * period)
         propagator.propagate(start, end)

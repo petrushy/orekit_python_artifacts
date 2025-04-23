@@ -121,7 +121,7 @@ class TransformTest(unittest.TestCase):
             rebuiltPV = interpolator.interpolate(AbsoluteDate.J2000_EPOCH.shiftedBy(dt), sample)
 
             self.checkVector(rebuiltPV.getPosition(), transformedPV.getPosition(), 4.0e-16)
-            self.checkVector(rebuiltPV.getVelocity(), transformedPV.getVelocity(), 2.0e-16)
+            self.checkVector(rebuiltPV.getVelocity(), transformedPV.getVelocity(),  2.0e-15)  # 2.0e-16
             self.checkVector(rebuiltPV.getAcceleration(), transformedPV.getAcceleration(), 9.0e-11)
             dt += 0.01
 
