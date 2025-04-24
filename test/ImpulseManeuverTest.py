@@ -76,7 +76,7 @@ class ImpulseManeuverTest(unittest.TestCase):
         det = ImpulseManeuver(NodeDetector(initialOrbit, 
                                           FramesFactory.getEME2000() ),
                                             Vector3D(dv, Vector3D.PLUS_J), 400.0)
-        det = det.of_(NodeDetector)
+        # det = det.of_(NodeDetector)
         
         propagator.addEventDetector(det)
                                         
