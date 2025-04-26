@@ -1,8 +1,7 @@
 # This stubgenj seems to work best under java v11
 # pip index versions stubgenj
 # or by pixi:
-# pixi exec -s openjdk=11 stubgenj=0.2.4 python download_dependencies.py
-# uv run --with stubgenj=0.2.4 download_dependencies.py
+# pixi exec -s openjdk=11 -s stubgenj python download_dependencies.py
 
 import subprocess, os
 
