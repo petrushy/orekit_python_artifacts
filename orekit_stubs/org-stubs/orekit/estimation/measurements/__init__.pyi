@@ -1,18 +1,24 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
 import java.util.stream
+import jpype
 import org.hipparchus
 import org.hipparchus.analysis.differentiation
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.bodies
-import org.orekit.estimation.measurements.class-use
 import org.orekit.estimation.measurements.filtering
 import org.orekit.estimation.measurements.generation
 import org.orekit.estimation.measurements.gnss
 import org.orekit.estimation.measurements.modifiers
 import org.orekit.frames
 import org.orekit.models.earth.displacement
-import org.orekit.models.earth.weather
 import org.orekit.propagation
 import org.orekit.time
 import org.orekit.utils
@@ -127,19 +133,24 @@ class ComparableMeasurement(org.orekit.time.TimeStamped, java.lang.Comparable['C
         """
         
             Measurements comparison is primarily chronological, but measurements with the same date are sorted based on the observed
-            value. Even if they have the same value too, they will *not* be considered equal if they correspond to different
-            instances. This allows to store measurements in
-            :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.util.SortedSet?is` without
-            losing any measurements, even redundant ones.
+            value. Even if they have the same value too, they will *likely* not be considered equal if they correspond to different
+            instances.
+        
+            Care should be taken before storing measurements in a
+            :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.util.SortedSet?is` as it may
+            lose redundant measurements if they, by chance, have the same identity hash code.
         
             Specified by:
                 :meth:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable.html?is` in
                 interface :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`
         
+            Also see:
+                :meth:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.System.html?is`
+        
         
         """
         ...
-    def getObservedValue(self) -> typing.List[float]:
+    def getObservedValue(self) -> typing.MutableSequence[float]:
         """
             Get the observed value.
         
@@ -147,6 +158,21 @@ class ComparableMeasurement(org.orekit.time.TimeStamped, java.lang.Comparable['C
         
             Returns:
                 observed value
+        
+        
+        """
+        ...
+    def setObservedValue(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
+        """
+            Set the observed value.
+        
+            The observed value is the value that was measured by the instrument.
+        
+            Parameters:
+                newObserved (double[]): observed value
+        
+            Since:
+                13.0
         
         
         """
@@ -179,9 +205,6 @@ class EstimatedEarthFrameProvider(org.orekit.frames.TransformProvider):
     
         Since:
             9.1
-    
-        Also see:
-            :meth:`~serialized`
     """
     EARTH_ANGULAR_VELOCITY: typing.ClassVar[float] = ...
     """
@@ -398,6 +421,19 @@ class EstimationModifier(org.orekit.utils.ParameterDriversProvider, typing.Gener
         Since:
             8.0
     """
+    def getEffectName(self) -> str:
+        """
+            Get the name of the effect modifying the measurement.
+        
+            Returns:
+                name of the effect modifying the measurement
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
     def modify(self, estimatedMeasurement: 'EstimatedMeasurement'[_EstimationModifier__T]) -> None: ...
     def modifyWithoutDerivatives(self, estimatedMeasurementBase: 'EstimatedMeasurementBase'[_EstimationModifier__T]) -> None: ...
 
@@ -517,25 +553,10 @@ class GroundStation:
     
     
     """
-    INTERMEDIATE_SUFFIX: typing.ClassVar[str] = ...
-    """
-    public static final :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` INTERMEDIATE_SUFFIX
-    
-        Suffix for ground station intermediate frame name.
-    
-        Also see:
-            :meth:`~constant`
-    
-    
-    """
     @typing.overload
     def __init__(self, topocentricFrame: org.orekit.frames.TopocentricFrame): ...
     @typing.overload
-    def __init__(self, topocentricFrame: org.orekit.frames.TopocentricFrame, eOPHistory: org.orekit.frames.EOPHistory, stationDisplacementArray: typing.List[org.orekit.models.earth.displacement.StationDisplacement]): ...
-    @typing.overload
-    def __init__(self, topocentricFrame: org.orekit.frames.TopocentricFrame, pressureTemperatureHumidityProvider: org.orekit.models.earth.weather.PressureTemperatureHumidityProvider): ...
-    @typing.overload
-    def __init__(self, topocentricFrame: org.orekit.frames.TopocentricFrame, pressureTemperatureHumidityProvider: org.orekit.models.earth.weather.PressureTemperatureHumidityProvider, eOPHistory: org.orekit.frames.EOPHistory, stationDisplacementArray: typing.List[org.orekit.models.earth.displacement.StationDisplacement]): ...
+    def __init__(self, topocentricFrame: org.orekit.frames.TopocentricFrame, eOPHistory: org.orekit.frames.EOPHistory, *stationDisplacement: typing.Union[org.orekit.models.earth.displacement.StationDisplacement, typing.Callable]): ...
     def getBaseFrame(self) -> org.orekit.frames.TopocentricFrame:
         """
             Get the base frame associated with the station.
@@ -587,7 +608,7 @@ class GroundStation:
         
         """
         ...
-    def getDisplacements(self) -> typing.List[org.orekit.models.earth.displacement.StationDisplacement]:
+    def getDisplacements(self) -> typing.MutableSequence[org.orekit.models.earth.displacement.StationDisplacement]:
         """
             Get the displacement models.
         
@@ -811,40 +832,6 @@ class GroundStation:
         
         """
         ...
-    _getPressureTemperatureHumidity_0__T = typing.TypeVar('_getPressureTemperatureHumidity_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def getPressureTemperatureHumidity(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPressureTemperatureHumidity_0__T]) -> org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_getPressureTemperatureHumidity_0__T]:
-        """
-            Get the weather parameters.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date at which weather parameters are requested
-        
-            Returns:
-                weather parameters
-        
-            Since:
-                12.1
-        
-        
-        """
-        ...
-    @typing.overload
-    def getPressureTemperatureHumidity(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.models.earth.weather.PressureTemperatureHumidity:
-        """
-            Get the weather parameters.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): date at which weather parameters are requested
-        
-            Returns:
-                weather parameters
-        
-            Since:
-                12.1
-        
-        """
-        ...
     def getPrimeMeridianDriftDriver(self) -> org.orekit.utils.ParameterDriver:
         """
             Get a driver allowing to add a prime meridian rotation rate.
@@ -928,7 +915,10 @@ class ObservableSatellite:
     
     
     """
+    @typing.overload
     def __init__(self, int: int): ...
+    @typing.overload
+    def __init__(self, int: int, string: str): ...
     def equals(self, object: typing.Any) -> bool:
         """
         
@@ -992,7 +982,7 @@ class ObservableSatellite:
             :meth:`~org.orekit.estimation.measurements.gnss.AmbiguityCache.getAmbiguity`
         
             Returns:
-                name for the satellite (built from the propagator index)
+                name for the satellite
         
             Since:
                 12.1
@@ -1136,8 +1126,8 @@ class EstimatedMeasurementBase(ComparableMeasurement, typing.Generic[_EstimatedM
         Since:
             8.0
     """
-    def __init__(self, t: _EstimatedMeasurementBase__T, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState], timeStampedPVCoordinatesArray: typing.List[org.orekit.utils.TimeStampedPVCoordinates]): ...
-    def getAppliedEffects(self) -> java.util.IdentityHashMap[EstimationModifier[_EstimatedMeasurementBase__T], typing.List[float]]: ...
+    def __init__(self, t: _EstimatedMeasurementBase__T, int: int, int2: int, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray], timeStampedPVCoordinatesArray: typing.Union[typing.List[org.orekit.utils.TimeStampedPVCoordinates], jpype.JArray]): ...
+    def getAppliedEffects(self) -> java.util.Map[EstimationModifier[_EstimatedMeasurementBase__T], typing.MutableSequence[float]]: ...
     def getCount(self) -> int:
         """
             Get the evaluations counter.
@@ -1161,7 +1151,7 @@ class EstimatedMeasurementBase(ComparableMeasurement, typing.Generic[_EstimatedM
         
         """
         ...
-    def getEstimatedValue(self) -> typing.List[float]:
+    def getEstimatedValue(self) -> typing.MutableSequence[float]:
         """
             Get the estimated value.
         
@@ -1191,7 +1181,7 @@ class EstimatedMeasurementBase(ComparableMeasurement, typing.Generic[_EstimatedM
         
         """
         ...
-    def getObservedValue(self) -> typing.List[float]:
+    def getObservedValue(self) -> typing.MutableSequence[float]:
         """
             Get the observed value.
         
@@ -1207,7 +1197,7 @@ class EstimatedMeasurementBase(ComparableMeasurement, typing.Generic[_EstimatedM
         
         """
         ...
-    def getOriginalEstimatedValue(self) -> typing.List[float]:
+    def getOriginalEstimatedValue(self) -> typing.MutableSequence[float]:
         """
             Get the original estimated value prior to any modification.
         
@@ -1220,7 +1210,7 @@ class EstimatedMeasurementBase(ComparableMeasurement, typing.Generic[_EstimatedM
         
         """
         ...
-    def getParticipants(self) -> typing.List[org.orekit.utils.TimeStampedPVCoordinates]:
+    def getParticipants(self) -> typing.MutableSequence[org.orekit.utils.TimeStampedPVCoordinates]:
         """
             Get the coordinates of the measurements participants in signal travel order.
         
@@ -1234,7 +1224,7 @@ class EstimatedMeasurementBase(ComparableMeasurement, typing.Generic[_EstimatedM
         
         """
         ...
-    def getStates(self) -> typing.List[org.orekit.propagation.SpacecraftState]:
+    def getStates(self) -> typing.MutableSequence[org.orekit.propagation.SpacecraftState]:
         """
             Get the states of the spacecrafts.
         
@@ -1269,8 +1259,8 @@ class EstimatedMeasurementBase(ComparableMeasurement, typing.Generic[_EstimatedM
         
         """
         ...
-    def modifyEstimatedValue(self, estimationModifier: EstimationModifier[_EstimatedMeasurementBase__T], doubleArray: typing.List[float]) -> None: ...
-    def setEstimatedValue(self, doubleArray: typing.List[float]) -> None:
+    def modifyEstimatedValue(self, estimationModifier: EstimationModifier[_EstimatedMeasurementBase__T], *double: float) -> None: ...
+    def setEstimatedValue(self, *double: float) -> None:
         """
             Set the estimated value.
         
@@ -1279,6 +1269,22 @@ class EstimatedMeasurementBase(ComparableMeasurement, typing.Generic[_EstimatedM
         
             Also see:
                 :meth:`~org.orekit.estimation.measurements.EstimatedMeasurementBase.modifyEstimatedValue`
+        
+        
+        """
+        ...
+    def setObservedValue(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
+        """
+            Set the observed value.
+        
+            The observed value is the value that was measured by the instrument.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.ComparableMeasurement.setObservedValue` in
+                interface :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
+        
+            Parameters:
+                observed (double[]): observed value
         
         
         """
@@ -1304,7 +1310,7 @@ class EstimatedMeasurementBase(ComparableMeasurement, typing.Generic[_EstimatedM
         @staticmethod
         def valueOf(string: str) -> 'EstimatedMeasurementBase.Status': ...
         @staticmethod
-        def values() -> typing.List['EstimatedMeasurementBase.Status']: ...
+        def values() -> typing.MutableSequence['EstimatedMeasurementBase.Status']: ...
 
 class GroundReceiverCommonParametersWithDerivatives(CommonParametersWithDerivatives):
     """
@@ -1372,12 +1378,12 @@ class ObservedMeasurement(ComparableMeasurement, org.orekit.utils.ParameterDrive
             8.0
     """
     def addModifier(self, estimationModifier: EstimationModifier[_ObservedMeasurement__T]) -> None: ...
-    def estimate(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> 'EstimatedMeasurement'[_ObservedMeasurement__T]: ...
+    def estimate(self, int: int, int2: int, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> 'EstimatedMeasurement'[_ObservedMeasurement__T]: ...
     @typing.overload
-    def estimateWithoutDerivatives(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> EstimatedMeasurementBase[_ObservedMeasurement__T]: ...
+    def estimateWithoutDerivatives(self, int: int, int2: int, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> EstimatedMeasurementBase[_ObservedMeasurement__T]: ...
     @typing.overload
-    def estimateWithoutDerivatives(self, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> EstimatedMeasurementBase[_ObservedMeasurement__T]: ...
-    def getBaseWeight(self) -> typing.List[float]:
+    def estimateWithoutDerivatives(self, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> EstimatedMeasurementBase[_ObservedMeasurement__T]: ...
+    def getBaseWeight(self) -> typing.MutableSequence[float]:
         """
             Get the base weight associated with the measurement
         
@@ -1422,7 +1428,7 @@ class ObservedMeasurement(ComparableMeasurement, org.orekit.utils.ParameterDrive
         ...
     def getModifiers(self) -> java.util.List[EstimationModifier[_ObservedMeasurement__T]]: ...
     def getSatellites(self) -> java.util.List[ObservableSatellite]: ...
-    def getTheoreticalStandardDeviation(self) -> typing.List[float]:
+    def getTheoreticalStandardDeviation(self) -> typing.MutableSequence[float]:
         """
             Get the theoretical standard deviation.
         
@@ -1472,17 +1478,12 @@ class PythonComparableMeasurement(ComparableMeasurement):
         """
         
             Measurements comparison is primarily chronological, but measurements with the same date are sorted based on the observed
-            value. Even if they have the same value too, they will *not* be considered equal if they correspond to different
-            instances. This allows to store measurements in
-            :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.util.SortedSet?is` without
-            losing any measurements, even redundant ones.
-            Extension point for Python.
+            value. Even if they have the same value too, they will *likely* not be considered equal if they correspond to different
+            instances.
         
-            Measurements comparison is primarily chronological, but measurements with the same date are sorted based on the observed
-            value. Even if they have the same value too, they will *not* be considered equal if they correspond to different
-            instances. This allows to store measurements in
-            :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.util.SortedSet?is` without
-            losing any measurements, even redundant ones.
+            Care should be taken before storing measurements in a
+            :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.util.SortedSet?is` as it may
+            lose redundant measurements if they, by chance, have the same identity hash code.
         
             Specified by:
                 :meth:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable.html?is` in
@@ -1492,15 +1493,16 @@ class PythonComparableMeasurement(ComparableMeasurement):
                 :meth:`~org.orekit.estimation.measurements.ComparableMeasurement.compareTo` in
                 interface :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
         
-            Parameters:
-                other (:class:`~org.orekit.estimation.measurements.ComparableMeasurement`): 
+            Also see:
+                :meth:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.System.html?is`
+        
         
         """
         ...
     def finalize(self) -> None: ...
     def getDate(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the date. Extension point for Python.
+            Get the date.
         
             Specified by:
                 :meth:`~org.orekit.time.TimeStamped.getDate` in interface :class:`~org.orekit.time.TimeStamped`
@@ -1511,7 +1513,7 @@ class PythonComparableMeasurement(ComparableMeasurement):
         
         """
         ...
-    def getObservedValue(self) -> typing.List[float]:
+    def getObservedValue(self) -> typing.MutableSequence[float]:
         """
             Get the observed value.
         
@@ -1522,7 +1524,7 @@ class PythonComparableMeasurement(ComparableMeasurement):
                 interface :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
         
             Returns:
-                observed value (array of size :code:`#getDimension()`
+                observed value
         
         
         """
@@ -1546,6 +1548,22 @@ class PythonComparableMeasurement(ComparableMeasurement):
             Part of JCC Python interface to object
         """
         ...
+    def setObservedValue(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
+        """
+            Set the observed value.
+        
+            The observed value is the value that was measured by the instrument.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.ComparableMeasurement.setObservedValue` in
+                interface :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
+        
+            Parameters:
+                newObserved (double[]): observed value
+        
+        
+        """
+        ...
 
 _PythonEstimationModifier__T = typing.TypeVar('_PythonEstimationModifier__T', bound=ObservedMeasurement)  # <T>
 class PythonEstimationModifier(EstimationModifier[_PythonEstimationModifier__T], typing.Generic[_PythonEstimationModifier__T]):
@@ -1554,6 +1572,20 @@ class PythonEstimationModifier(EstimationModifier[_PythonEstimationModifier__T],
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
+    def getEffectName(self) -> str:
+        """
+            Get the name of the effect modifying the measurement.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.EstimationModifier.getEffectName` in
+                interface :class:`~org.orekit.estimation.measurements.EstimationModifier`
+        
+            Returns:
+                name of the effect modifying the measurement
+        
+        
+        """
+        ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def modify(self, estimatedMeasurement: 'EstimatedMeasurement'[_PythonEstimationModifier__T]) -> None: ...
     def modifyWithoutDerivatives(self, estimatedMeasurementBase: EstimatedMeasurementBase[_PythonEstimationModifier__T]) -> None: ...
@@ -1646,12 +1678,12 @@ class AbstractMeasurement(ObservedMeasurement[_AbstractMeasurement__T], typing.G
             8.0
     """
     def addModifier(self, estimationModifier: EstimationModifier[_AbstractMeasurement__T]) -> None: ...
-    def estimate(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> 'EstimatedMeasurement'[_AbstractMeasurement__T]: ...
+    def estimate(self, int: int, int2: int, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> 'EstimatedMeasurement'[_AbstractMeasurement__T]: ...
     @typing.overload
-    def estimateWithoutDerivatives(self, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> EstimatedMeasurementBase[_AbstractMeasurement__T]: ...
+    def estimateWithoutDerivatives(self, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> EstimatedMeasurementBase[_AbstractMeasurement__T]: ...
     @typing.overload
-    def estimateWithoutDerivatives(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> EstimatedMeasurementBase[_AbstractMeasurement__T]: ...
-    def getBaseWeight(self) -> typing.List[float]:
+    def estimateWithoutDerivatives(self, int: int, int2: int, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> EstimatedMeasurementBase[_AbstractMeasurement__T]: ...
+    def getBaseWeight(self) -> typing.MutableSequence[float]:
         """
             Get the base weight associated with the measurement
         
@@ -1706,7 +1738,7 @@ class AbstractMeasurement(ObservedMeasurement[_AbstractMeasurement__T], typing.G
         """
         ...
     def getModifiers(self) -> java.util.List[EstimationModifier[_AbstractMeasurement__T]]: ...
-    def getObservedValue(self) -> typing.List[float]:
+    def getObservedValue(self) -> typing.MutableSequence[float]:
         """
             Get the observed value.
         
@@ -1724,7 +1756,7 @@ class AbstractMeasurement(ObservedMeasurement[_AbstractMeasurement__T], typing.G
         ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def getSatellites(self) -> java.util.List[ObservableSatellite]: ...
-    def getTheoreticalStandardDeviation(self) -> typing.List[float]:
+    def getTheoreticalStandardDeviation(self) -> typing.MutableSequence[float]:
         """
             Get the theoretical standard deviation.
         
@@ -1776,12 +1808,27 @@ class AbstractMeasurement(ObservedMeasurement[_AbstractMeasurement__T], typing.G
         
         """
         ...
-    _signalTimeOfFlight_3__T = typing.TypeVar('_signalTimeOfFlight_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    _signalTimeOfFlight_4__T = typing.TypeVar('_signalTimeOfFlight_4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    _signalTimeOfFlight_5__T = typing.TypeVar('_signalTimeOfFlight_5__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    def setObservedValue(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
+        """
+            Set the observed value.
+        
+            The observed value is the value that was measured by the instrument.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.ComparableMeasurement.setObservedValue` in
+                interface :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
+        
+            Parameters:
+                newObserved (double[]): observed value
+        
+        
+        """
+        ...
+    _signalTimeOfFlightAdjustableEmitter_2__T = typing.TypeVar('_signalTimeOfFlightAdjustableEmitter_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _signalTimeOfFlightAdjustableEmitter_3__T = typing.TypeVar('_signalTimeOfFlightAdjustableEmitter_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def signalTimeOfFlight(pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate2: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> float:
+    def signalTimeOfFlightAdjustableEmitter(pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate2: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> float:
         """
             Compute propagation delay on a link leg (typically downlink or uplink).
         
@@ -1790,57 +1837,39 @@ class AbstractMeasurement(ObservedMeasurement[_AbstractMeasurement__T], typing.G
                 approxEmissionDate (:class:`~org.orekit.time.AbsoluteDate`): approximate emission date
                 receiverPosition (:class:`~org.orekit.estimation.measurements.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): fixed position of receiver at :code:`signalArrivalDate`
                 signalArrivalDate (:class:`~org.orekit.time.AbsoluteDate`): date at which the signal arrives to receiver
-                receiverFrame (:class:`~org.orekit.frames.Frame`): frame in which receiver is defined
+                frame (:class:`~org.orekit.frames.Frame`): inertial frame in which receiver is defined
         
             Returns:
                 *positive* delay between signal emission and signal reception dates
         
             Since:
-                12.1
-        
-        :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` :class:`~org.orekit.annotation.DefaultDataContext` public static <T extends :class:`~org.orekit.estimation.measurements.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> T signalTimeOfFlight (:class:`~org.orekit.utils.TimeStampedFieldPVCoordinates`<T> adjustableEmitterPV, :class:`~org.orekit.estimation.measurements.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> receiverPosition, :class:`~org.orekit.time.FieldAbsoluteDate`<T> signalArrivalDate)
-        
-            Deprecated.
-            as of 12.1, replaced by either :meth:`~org.orekit.estimation.measurements.AbstractMeasurement.signalTimeOfFlight` or
-            :meth:`~org.orekit.estimation.measurements.AbstractMeasurement.signalTimeOfFlight`
-            Compute propagation delay on a link leg (typically downlink or uplink).
-        
-            Parameters:
-                adjustableEmitterPV (:class:`~org.orekit.utils.TimeStampedFieldPVCoordinates`<T> adjustableEmitterPV): position/velocity of emitter that may be adjusted
-                receiverPosition (:class:`~org.orekit.estimation.measurements.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> receiverPosition): fixed position of receiver at :code:`signalArrivalDate`, in the same frame as :code:`adjustableEmitterPV`
-                signalArrivalDate (:class:`~org.orekit.time.FieldAbsoluteDate`<T> signalArrivalDate): date at which the signal arrives to receiver
-        
-            Returns:
-                *positive* delay between signal emission and signal reception dates
+                13.0
         
         """
         ...
     @typing.overload
     @staticmethod
-    def signalTimeOfFlight(timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+    def signalTimeOfFlightAdjustableEmitter(timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> float:
         """
             Compute propagation delay on a link leg (typically downlink or uplink).
         
             Parameters:
                 adjustableEmitterPV (:class:`~org.orekit.utils.TimeStampedPVCoordinates`): position/velocity of emitter that may be adjusted
                 receiverPosition (:class:`~org.orekit.estimation.measurements.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): fixed position of receiver at :code:`signalArrivalDate`
-                receiverFrame (:class:`~org.orekit.time.AbsoluteDate`): frame in which both :code:`adjustableEmitterPV` and :code:`receiver receiverPosition` are defined
+                frame (:class:`~org.orekit.time.AbsoluteDate`): inertial frame in which both :code:`adjustableEmitterPV` and :code:`receiverPosition` are defined
                 signalArrivalDate (:class:`~org.orekit.frames.Frame`): date at which the signal arrives to receiver
         
             Returns:
                 *positive* delay between signal emission and signal reception dates
         
             Since:
-                12.1
+                13.0
         
         """
         ...
     @typing.overload
     @staticmethod
-    def signalTimeOfFlight(timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> float: ...
-    @typing.overload
-    @staticmethod
-    def signalTimeOfFlight(fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_signalTimeOfFlight_3__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_signalTimeOfFlight_3__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_signalTimeOfFlight_3__T], fieldAbsoluteDate2: org.orekit.time.FieldAbsoluteDate[_signalTimeOfFlight_3__T], frame: org.orekit.frames.Frame) -> _signalTimeOfFlight_3__T:
+    def signalTimeOfFlightAdjustableEmitter(fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_signalTimeOfFlightAdjustableEmitter_2__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_signalTimeOfFlightAdjustableEmitter_2__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_signalTimeOfFlightAdjustableEmitter_2__T], fieldAbsoluteDate2: org.orekit.time.FieldAbsoluteDate[_signalTimeOfFlightAdjustableEmitter_2__T], frame: org.orekit.frames.Frame) -> _signalTimeOfFlightAdjustableEmitter_2__T:
         """
             Compute propagation delay on a link leg (typically downlink or uplink).
         
@@ -1849,23 +1878,20 @@ class AbstractMeasurement(ObservedMeasurement[_AbstractMeasurement__T], typing.G
                 approxEmissionDate (:class:`~org.orekit.time.FieldAbsoluteDate`<T> approxEmissionDate): approximate emission date
                 receiverPosition (:class:`~org.orekit.estimation.measurements.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> receiverPosition): fixed position of receiver at :code:`signalArrivalDate`, in the same frame as :code:`adjustableEmitterPV`
                 signalArrivalDate (:class:`~org.orekit.time.FieldAbsoluteDate`<T> signalArrivalDate): date at which the signal arrives to receiver
-                receiverFrame (:class:`~org.orekit.frames.Frame`): frame in which receiver is defined
+                frame (:class:`~org.orekit.frames.Frame`): inertial frame in which receiver is defined
         
             Returns:
                 *positive* delay between signal emission and signal reception dates
         
             Since:
-                12.1
+                13.0
         
         
         """
         ...
     @typing.overload
     @staticmethod
-    def signalTimeOfFlight(timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_signalTimeOfFlight_4__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_signalTimeOfFlight_4__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_signalTimeOfFlight_4__T]) -> _signalTimeOfFlight_4__T: ...
-    @typing.overload
-    @staticmethod
-    def signalTimeOfFlight(timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_signalTimeOfFlight_5__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_signalTimeOfFlight_5__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_signalTimeOfFlight_5__T], frame: org.orekit.frames.Frame) -> _signalTimeOfFlight_5__T:
+    def signalTimeOfFlightAdjustableEmitter(timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_signalTimeOfFlightAdjustableEmitter_3__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_signalTimeOfFlightAdjustableEmitter_3__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_signalTimeOfFlightAdjustableEmitter_3__T], frame: org.orekit.frames.Frame) -> _signalTimeOfFlightAdjustableEmitter_3__T:
         """
             Compute propagation delay on a link leg (typically downlink or uplink).
         
@@ -1873,16 +1899,97 @@ class AbstractMeasurement(ObservedMeasurement[_AbstractMeasurement__T], typing.G
                 adjustableEmitterPV (:class:`~org.orekit.utils.TimeStampedFieldPVCoordinates`<T> adjustableEmitterPV): position/velocity of emitter that may be adjusted
                 receiverPosition (:class:`~org.orekit.estimation.measurements.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> receiverPosition): fixed position of receiver at :code:`signalArrivalDate`, in the same frame as :code:`adjustableEmitterPV`
                 signalArrivalDate (:class:`~org.orekit.time.FieldAbsoluteDate`<T> signalArrivalDate): date at which the signal arrives to receiver
-                receiverFrame (:class:`~org.orekit.frames.Frame`): frame in which receiver is defined
+                frame (:class:`~org.orekit.frames.Frame`): inertial frame in which both :code:`adjustableEmitterPV` and :code:`receiverPosition` are defined
         
             Returns:
                 *positive* delay between signal emission and signal reception dates
         
             Since:
-                12.1
+                13.0
         
         """
         ...
+    _signalTimeOfFlightAdjustableReceiver_2__T = typing.TypeVar('_signalTimeOfFlightAdjustableReceiver_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _signalTimeOfFlightAdjustableReceiver_3__T = typing.TypeVar('_signalTimeOfFlightAdjustableReceiver_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    @staticmethod
+    def signalTimeOfFlightAdjustableReceiver(vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate2: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> float:
+        """
+            Compute propagation delay on a link leg (typically downlink or uplink).
+        
+            Parameters:
+                emitterPosition (:class:`~org.orekit.estimation.measurements.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): fixed position of emitter
+                emissionDate (:class:`~org.orekit.time.AbsoluteDate`): emission date
+                adjustableReceiverPV (:class:`~org.orekit.utils.TimeStampedPVCoordinates`): position/velocity of receiver that may be adjusted
+                approxReceptionDate (:class:`~org.orekit.time.AbsoluteDate`): approximate reception date
+                frame (:class:`~org.orekit.frames.Frame`): inertial frame in which both :code:`emitterPosition` and :code:`adjustableReceiverPV` are defined
+        
+            Returns:
+                *positive* delay between signal emission and signal reception dates
+        
+            Since:
+                13.0
+        
+            Compute propagation delay on a link leg (typically downlink or uplink).
+        
+            Parameters:
+                emitterPosition (:class:`~org.orekit.estimation.measurements.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): fixed position of emitter
+                emissionDate (:class:`~org.orekit.time.AbsoluteDate`): emission date
+                adjustableReceiver (:class:`~org.orekit.utils.PVCoordinatesProvider`): provider for adjusting receiver position
+                approxReceptionDate (:class:`~org.orekit.time.AbsoluteDate`): approximate reception date
+                frame (:class:`~org.orekit.frames.Frame`): inertial frame in which emitter is defined
+        
+            Returns:
+                *positive* delay between signal emission and signal reception dates
+        
+            Since:
+                13.0
+        
+        """
+        ...
+    @typing.overload
+    @staticmethod
+    def signalTimeOfFlightAdjustableReceiver(vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, absoluteDate2: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> float: ...
+    @typing.overload
+    @staticmethod
+    def signalTimeOfFlightAdjustableReceiver(fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_signalTimeOfFlightAdjustableReceiver_2__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_signalTimeOfFlightAdjustableReceiver_2__T], fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_signalTimeOfFlightAdjustableReceiver_2__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate2: org.orekit.time.FieldAbsoluteDate[_signalTimeOfFlightAdjustableReceiver_2__T], frame: org.orekit.frames.Frame) -> _signalTimeOfFlightAdjustableReceiver_2__T:
+        """
+            Compute propagation delay on a link leg (typically downlink or uplink).
+        
+            Parameters:
+                emitterPosition (:class:`~org.orekit.estimation.measurements.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> emitterPosition): fixed position of emitter
+                emissionDate (:class:`~org.orekit.time.FieldAbsoluteDate`<T> emissionDate): emission date
+                adjustableReceiverPV (:class:`~org.orekit.utils.TimeStampedFieldPVCoordinates`<T> adjustableReceiverPV): position/velocity of emitter that may be adjusted
+                approxReceptionDate (:class:`~org.orekit.time.FieldAbsoluteDate`<T> approxReceptionDate): approximate reception date
+                frame (:class:`~org.orekit.frames.Frame`): inertial frame in which both :code:`emitterPosition` and :code:`adjustableReceiverPV` are defined
+        
+            Returns:
+                *positive* delay between signal emission and signal reception dates
+        
+            Since:
+                13.0
+        
+            Compute propagation delay on a link leg (typically downlink or uplink).
+        
+            Parameters:
+                emitterPosition (:class:`~org.orekit.estimation.measurements.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldVector3D?is`<T> emitterPosition): fixed position of emitter
+                emissionDate (:class:`~org.orekit.time.FieldAbsoluteDate`<T> emissionDate): emission date
+                adjustableReceiver (:class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T> adjustableReceiver): provider for adjusting receiver position
+                approxReceptionDate (:class:`~org.orekit.time.FieldAbsoluteDate`<T> approxReceptionDate): approximate reception date
+                frame (:class:`~org.orekit.frames.Frame`): inertial frame in which emitter is defined
+        
+            Returns:
+                *positive* delay between signal emission and signal reception dates
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
+    @typing.overload
+    @staticmethod
+    def signalTimeOfFlightAdjustableReceiver(fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_signalTimeOfFlightAdjustableReceiver_3__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_signalTimeOfFlightAdjustableReceiver_3__T], timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_signalTimeOfFlightAdjustableReceiver_3__T], fieldAbsoluteDate2: org.orekit.time.FieldAbsoluteDate[_signalTimeOfFlightAdjustableReceiver_3__T], frame: org.orekit.frames.Frame) -> _signalTimeOfFlightAdjustableReceiver_3__T: ...
 
 _EstimatedMeasurement__T = typing.TypeVar('_EstimatedMeasurement__T', bound=ObservedMeasurement)  # <T>
 class EstimatedMeasurement(EstimatedMeasurementBase[_EstimatedMeasurement__T], typing.Generic[_EstimatedMeasurement__T]):
@@ -1898,13 +2005,13 @@ class EstimatedMeasurement(EstimatedMeasurementBase[_EstimatedMeasurement__T], t
     @typing.overload
     def __init__(self, estimatedMeasurementBase: EstimatedMeasurementBase[_EstimatedMeasurement__T]): ...
     @typing.overload
-    def __init__(self, t: _EstimatedMeasurement__T, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState], timeStampedPVCoordinatesArray: typing.List[org.orekit.utils.TimeStampedPVCoordinates]): ...
+    def __init__(self, t: _EstimatedMeasurement__T, int: int, int2: int, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray], timeStampedPVCoordinatesArray: typing.Union[typing.List[org.orekit.utils.TimeStampedPVCoordinates], jpype.JArray]): ...
     def getDerivativesDrivers(self) -> java.util.stream.Stream[org.orekit.utils.ParameterDriver]: ...
     @typing.overload
-    def getParameterDerivatives(self, parameterDriver: org.orekit.utils.ParameterDriver) -> typing.List[float]: ...
+    def getParameterDerivatives(self, parameterDriver: org.orekit.utils.ParameterDriver) -> typing.MutableSequence[float]: ...
     @typing.overload
-    def getParameterDerivatives(self, parameterDriver: org.orekit.utils.ParameterDriver, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]: ...
-    def getStateDerivatives(self, int: int) -> typing.List[typing.List[float]]:
+    def getParameterDerivatives(self, parameterDriver: org.orekit.utils.ParameterDriver, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]: ...
+    def getStateDerivatives(self, int: int) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
             Get the partial derivatives of the
             :meth:`~org.orekit.estimation.measurements.EstimatedMeasurementBase.getEstimatedValue` with respect to state Cartesian
@@ -1937,7 +2044,7 @@ class EstimatedMeasurement(EstimatedMeasurementBase[_EstimatedMeasurement__T], t
         """
         ...
     @typing.overload
-    def setParameterDerivatives(self, parameterDriver: org.orekit.utils.ParameterDriver, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float]) -> None:
+    def setParameterDerivatives(self, parameterDriver: org.orekit.utils.ParameterDriver, absoluteDate: org.orekit.time.AbsoluteDate, *double: float) -> None:
         """
             Set the partial derivatives of the
             :meth:`~org.orekit.estimation.measurements.EstimatedMeasurementBase.getEstimatedValue` with respect to parameter.
@@ -1950,7 +2057,7 @@ class EstimatedMeasurement(EstimatedMeasurementBase[_EstimatedMeasurement__T], t
         """
         ...
     @typing.overload
-    def setParameterDerivatives(self, parameterDriver: org.orekit.utils.ParameterDriver, timeSpanMap: org.orekit.utils.TimeSpanMap[typing.List[float]]) -> None:
+    def setParameterDerivatives(self, parameterDriver: org.orekit.utils.ParameterDriver, timeSpanMap: org.orekit.utils.TimeSpanMap[typing.Union[typing.List[float], jpype.JArray]]) -> None:
         """
             Set the partial derivatives of the
             :meth:`~org.orekit.estimation.measurements.EstimatedMeasurementBase.getEstimatedValue` with respect to parameter.
@@ -1962,7 +2069,7 @@ class EstimatedMeasurement(EstimatedMeasurementBase[_EstimatedMeasurement__T], t
         
         """
         ...
-    def setStateDerivatives(self, int: int, doubleArray: typing.List[typing.List[float]]) -> None: ...
+    def setStateDerivatives(self, int: int, *doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
 
 _PythonObservedMeasurement__T = typing.TypeVar('_PythonObservedMeasurement__T', bound=ObservedMeasurement)  # <T>
 class PythonObservedMeasurement(ObservedMeasurement[_PythonObservedMeasurement__T], typing.Generic[_PythonObservedMeasurement__T]):
@@ -1975,10 +2082,12 @@ class PythonObservedMeasurement(ObservedMeasurement[_PythonObservedMeasurement__
         """
         
             Measurements comparison is primarily chronological, but measurements with the same date are sorted based on the observed
-            value. Even if they have the same value too, they will *not* be considered equal if they correspond to different
-            instances. This allows to store measurements in
-            :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.util.SortedSet?is` without
-            losing any measurements, even redundant ones.
+            value. Even if they have the same value too, they will *likely* not be considered equal if they correspond to different
+            instances.
+        
+            Care should be taken before storing measurements in a
+            :class:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.util.SortedSet?is` as it may
+            lose redundant measurements if they, by chance, have the same identity hash code.
         
             Measurements comparison is primarily chronological, but measurements with the same date are sorted based on the observed
             value. Even if they have the same value too, they will *not* be considered equal if they correspond to different
@@ -1996,16 +2105,19 @@ class PythonObservedMeasurement(ObservedMeasurement[_PythonObservedMeasurement__
         
             Parameters:
                 other (:class:`~org.orekit.estimation.measurements.ComparableMeasurement`): 
+            Also see:
+                :meth:`~org.orekit.estimation.measurements.https:.docs.oracle.com.javase.8.docs.api.java.lang.System.html?is`
+        
         
         """
         ...
-    def estimate(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> EstimatedMeasurement[_PythonObservedMeasurement__T]: ...
+    def estimate(self, int: int, int2: int, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> EstimatedMeasurement[_PythonObservedMeasurement__T]: ...
     @typing.overload
-    def estimateWithoutDerivatives(self, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> EstimatedMeasurementBase[_PythonObservedMeasurement__T]: ...
+    def estimateWithoutDerivatives(self, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> EstimatedMeasurementBase[_PythonObservedMeasurement__T]: ...
     @typing.overload
-    def estimateWithoutDerivatives(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> EstimatedMeasurementBase[_PythonObservedMeasurement__T]: ...
+    def estimateWithoutDerivatives(self, int: int, int2: int, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> EstimatedMeasurementBase[_PythonObservedMeasurement__T]: ...
     def finalize(self) -> None: ...
-    def getBaseWeight(self) -> typing.List[float]:
+    def getBaseWeight(self) -> typing.MutableSequence[float]:
         """
             Get the base weight associated with the measurement
         
@@ -2073,7 +2185,7 @@ class PythonObservedMeasurement(ObservedMeasurement[_PythonObservedMeasurement__
         """
         ...
     def getModifiers(self) -> java.util.List[EstimationModifier[_PythonObservedMeasurement__T]]: ...
-    def getObservedValue(self) -> typing.List[float]:
+    def getObservedValue(self) -> typing.MutableSequence[float]:
         """
             Get the observed value.
         
@@ -2091,7 +2203,7 @@ class PythonObservedMeasurement(ObservedMeasurement[_PythonObservedMeasurement__
         ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def getSatellites(self) -> java.util.List[ObservableSatellite]: ...
-    def getTheoreticalStandardDeviation(self) -> typing.List[float]:
+    def getTheoreticalStandardDeviation(self) -> typing.MutableSequence[float]:
         """
             Get the theoretical standard deviation.
         
@@ -2154,6 +2266,22 @@ class PythonObservedMeasurement(ObservedMeasurement[_PythonObservedMeasurement__
         
         """
         ...
+    def setObservedValue(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
+        """
+            Set the observed value.
+        
+            This method allows setting the value that was measured by the instrument.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.ComparableMeasurement.setObservedValue` in
+                interface :class:`~org.orekit.estimation.measurements.ComparableMeasurement`
+        
+            Parameters:
+                observedValue (double[]): the observed value (array of size :meth:`~org.orekit.estimation.measurements.PythonObservedMeasurement.getDimension`)
+        
+        
+        """
+        ...
 
 _GroundReceiverMeasurement__T = typing.TypeVar('_GroundReceiverMeasurement__T', bound='GroundReceiverMeasurement')  # <T>
 class GroundReceiverMeasurement(AbstractMeasurement[_GroundReceiverMeasurement__T], typing.Generic[_GroundReceiverMeasurement__T]):
@@ -2168,7 +2296,7 @@ class GroundReceiverMeasurement(AbstractMeasurement[_GroundReceiverMeasurement__
     @typing.overload
     def __init__(self, groundStation: GroundStation, boolean: bool, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, observableSatellite: ObservableSatellite): ...
     @typing.overload
-    def __init__(self, groundStation: GroundStation, boolean: bool, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], doubleArray2: typing.List[float], doubleArray3: typing.List[float], observableSatellite: ObservableSatellite): ...
+    def __init__(self, groundStation: GroundStation, boolean: bool, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], doubleArray3: typing.Union[typing.List[float], jpype.JArray], observableSatellite: ObservableSatellite): ...
     def getGroundStationCoordinates(self, frame: org.orekit.frames.Frame) -> org.orekit.utils.PVCoordinates:
         """
             Get the station coordinates for a given frame.
@@ -2303,6 +2431,40 @@ class MultiplexedMeasurement(AbstractMeasurement['MultiplexedMeasurement']):
     def getEstimatedMeasurements(self) -> java.util.List[EstimatedMeasurement[typing.Any]]: ...
     def getEstimatedMeasurementsWithoutDerivatives(self) -> java.util.List[EstimatedMeasurementBase[typing.Any]]: ...
     def getMeasurements(self) -> java.util.List[ObservedMeasurement[typing.Any]]: ...
+    def getMultiplexedStateIndex(self, int: int, int2: int) -> int:
+        """
+            Get the spacecraft state index in the multiplexed measurement.
+        
+            Parameters:
+                measurementIndex (int): index of the underlying measurement
+                underlyingStateIndex (int): index of the spacecraft state in the underlying array
+        
+            Returns:
+                spacecraft state index in the multiplexed measurement
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
+    def getUnderlyingStateIndex(self, int: int, int2: int) -> int:
+        """
+            Get the spacecraft state index in the underlying measurement.
+        
+            Parameters:
+                measurementIndex (int): index of the underlying measurement
+                multiplexedStateIndex (int): index of the spacecraft state in the multiplexed array
+        
+            Returns:
+                spacecraft state index in the underlying measurement
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
 
 class PV(AbstractMeasurement['PV']):
     """
@@ -2332,14 +2494,14 @@ class PV(AbstractMeasurement['PV']):
     @typing.overload
     def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float, double2: float, double3: float, observableSatellite: ObservableSatellite): ...
     @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.List[float], double2: float, observableSatellite: ObservableSatellite): ...
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float, observableSatellite: ObservableSatellite): ...
     @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.List[float], doubleArray2: typing.List[float], double3: float, observableSatellite: ObservableSatellite): ...
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], double3: float, observableSatellite: ObservableSatellite): ...
     @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.List[typing.List[float]], double2: float, observableSatellite: ObservableSatellite): ...
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], double2: float, observableSatellite: ObservableSatellite): ...
     @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.List[typing.List[float]], doubleArray2: typing.List[typing.List[float]], double3: float, observableSatellite: ObservableSatellite): ...
-    def getCorrelationCoefficientsMatrix(self) -> typing.List[typing.List[float]]:
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray2: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], double3: float, observableSatellite: ObservableSatellite): ...
+    def getCorrelationCoefficientsMatrix(self) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
             Get the correlation coefficients matrix.
         
@@ -2359,7 +2521,7 @@ class PV(AbstractMeasurement['PV']):
         
         """
         ...
-    def getCovarianceMatrix(self) -> typing.List[typing.List[float]]:
+    def getCovarianceMatrix(self) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
             Get the covariance matrix.
         
@@ -2418,10 +2580,10 @@ class Position(AbstractMeasurement['Position']):
     @typing.overload
     def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float, double2: float, observableSatellite: ObservableSatellite): ...
     @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.List[float], double2: float, observableSatellite: ObservableSatellite): ...
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float, observableSatellite: ObservableSatellite): ...
     @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.List[typing.List[float]], double2: float, observableSatellite: ObservableSatellite): ...
-    def getCorrelationCoefficientsMatrix(self) -> typing.List[typing.List[float]]:
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], double2: float, observableSatellite: ObservableSatellite): ...
+    def getCorrelationCoefficientsMatrix(self) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
             Get the correlation coefficients matrix.
         
@@ -2441,7 +2603,7 @@ class Position(AbstractMeasurement['Position']):
         
         """
         ...
-    def getCovarianceMatrix(self) -> typing.List[typing.List[float]]:
+    def getCovarianceMatrix(self) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
             Get the covariance matrix.
         
@@ -2470,7 +2632,7 @@ class PythonAbstractMeasurement(AbstractMeasurement[_PythonAbstractMeasurement__
     @typing.overload
     def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, list: java.util.List[ObservableSatellite]): ...
     @typing.overload
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], doubleArray2: typing.List[float], doubleArray3: typing.List[float], list: java.util.List[ObservableSatellite]): ...
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], doubleArray3: typing.Union[typing.List[float], jpype.JArray], list: java.util.List[ObservableSatellite]): ...
     def addParameterDriver(self, parameterDriver: org.orekit.utils.ParameterDriver) -> None:
         """
             Add a parameter driver.
@@ -2505,8 +2667,8 @@ class PythonAbstractMeasurement(AbstractMeasurement[_PythonAbstractMeasurement__
             Part of JCC Python interface to object
         """
         ...
-    def theoreticalEvaluation(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> EstimatedMeasurement[_PythonAbstractMeasurement__T]: ...
-    def theoreticalEvaluationWithoutDerivatives(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> EstimatedMeasurementBase[_PythonAbstractMeasurement__T]: ...
+    def theoreticalEvaluation(self, int: int, int2: int, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> EstimatedMeasurement[_PythonAbstractMeasurement__T]: ...
+    def theoreticalEvaluationWithoutDerivatives(self, int: int, int2: int, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> EstimatedMeasurementBase[_PythonAbstractMeasurement__T]: ...
 
 class AngularAzEl(GroundReceiverMeasurement['AngularAzEl']):
     """
@@ -2530,7 +2692,7 @@ class AngularAzEl(GroundReceiverMeasurement['AngularAzEl']):
     
     
     """
-    def __init__(self, groundStation: GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], doubleArray2: typing.List[float], doubleArray3: typing.List[float], observableSatellite: ObservableSatellite): ...
+    def __init__(self, groundStation: GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], doubleArray3: typing.Union[typing.List[float], jpype.JArray], observableSatellite: ObservableSatellite): ...
     def getObservedLineOfSight(self, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Calculate the Line Of Sight of the given measurement.
@@ -2567,7 +2729,7 @@ class AngularRaDec(GroundReceiverMeasurement['AngularRaDec']):
     
     
     """
-    def __init__(self, groundStation: GroundStation, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], doubleArray2: typing.List[float], doubleArray3: typing.List[float], observableSatellite: ObservableSatellite): ...
+    def __init__(self, groundStation: GroundStation, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], doubleArray3: typing.Union[typing.List[float], jpype.JArray], observableSatellite: ObservableSatellite): ...
     def getObservedLineOfSight(self, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Calculate the Line Of Sight of the given measurement.
@@ -2780,8 +2942,8 @@ class PythonGroundReceiverMeasurement(GroundReceiverMeasurement[_PythonGroundRec
             Part of JCC Python interface to object
         """
         ...
-    def theoreticalEvaluation(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> EstimatedMeasurement[_PythonGroundReceiverMeasurement__T]: ...
-    def theoreticalEvaluationWithoutDerivatives(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> EstimatedMeasurementBase[_PythonGroundReceiverMeasurement__T]: ...
+    def theoreticalEvaluation(self, int: int, int2: int, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> EstimatedMeasurement[_PythonGroundReceiverMeasurement__T]: ...
+    def theoreticalEvaluationWithoutDerivatives(self, int: int, int2: int, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> EstimatedMeasurementBase[_PythonGroundReceiverMeasurement__T]: ...
 
 class Range(GroundReceiverMeasurement['Range']):
     """
@@ -2991,7 +3153,7 @@ class TurnAroundRange(GroundReceiverMeasurement['TurnAroundRange']):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.estimation.measurements")``.
 
     AbstractMeasurement: typing.Type[AbstractMeasurement]
@@ -3030,7 +3192,6 @@ class __module_protocol__(typing.Protocol):
     RangeRate: typing.Type[RangeRate]
     TDOA: typing.Type[TDOA]
     TurnAroundRange: typing.Type[TurnAroundRange]
-    class-use: org.orekit.estimation.measurements.class-use.__module_protocol__
     filtering: org.orekit.estimation.measurements.filtering.__module_protocol__
     generation: org.orekit.estimation.measurements.generation.__module_protocol__
     gnss: org.orekit.estimation.measurements.gnss.__module_protocol__

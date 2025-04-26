@@ -1,12 +1,19 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
 import java.util.function
+import jpype
 import org.hipparchus.geometry.euclidean.threed
 import org.hipparchus.linear
 import org.orekit.data
 import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
-import org.orekit.files.ccsds.ndm.cdm.class-use
 import org.orekit.files.ccsds.ndm.odm
 import org.orekit.files.ccsds.ndm.odm.ocm
 import org.orekit.files.ccsds.section
@@ -26,9 +33,18 @@ class AdditionalCovarianceMetadata(org.orekit.files.ccsds.section.CommentsContai
     public class AdditionalCovarianceMetadata extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
     
         Container for the additional covariance metadata (optional).
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
     """
     def __init__(self): ...
-    def getDcpSensitivityVectorPosition(self) -> typing.List[float]:
+    def getDcpSensitivityVectorPosition(self) -> typing.MutableSequence[float]:
         """
             Get the DCP sensitivity vector (position errors at TCA).
         
@@ -38,7 +54,7 @@ class AdditionalCovarianceMetadata(org.orekit.files.ccsds.section.CommentsContai
         
         """
         ...
-    def getDcpSensitivityVectorVelocity(self) -> typing.List[float]:
+    def getDcpSensitivityVectorVelocity(self) -> typing.MutableSequence[float]:
         """
             Get the DCP sensitivity vector (velocity errors at TCA).
         
@@ -98,7 +114,7 @@ class AdditionalCovarianceMetadata(org.orekit.files.ccsds.section.CommentsContai
         
         """
         ...
-    def setDcpSensitivityVectorPosition(self, doubleArray: typing.List[float]) -> None:
+    def setDcpSensitivityVectorPosition(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
             Set the DCP sensitivity vector (position errors at TCA).
         
@@ -108,7 +124,7 @@ class AdditionalCovarianceMetadata(org.orekit.files.ccsds.section.CommentsContai
         
         """
         ...
-    def setDcpSensitivityVectorVelocity(self, doubleArray: typing.List[float]) -> None:
+    def setDcpSensitivityVectorVelocity(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
             Set the DCP sensitivity vector (velocity errors at TCA).
         
@@ -242,7 +258,7 @@ class AdditionalCovarianceMetadataKey(java.lang.Enum['AdditionalCovarianceMetada
         """
         ...
     @staticmethod
-    def values() -> typing.List['AdditionalCovarianceMetadataKey']:
+    def values() -> typing.MutableSequence['AdditionalCovarianceMetadataKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -698,7 +714,7 @@ class AdditionalParametersKey(java.lang.Enum['AdditionalParametersKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['AdditionalParametersKey']:
+    def values() -> typing.MutableSequence['AdditionalParametersKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -760,7 +776,7 @@ class AltCovarianceType(java.lang.Enum['AltCovarianceType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['AltCovarianceType']:
+    def values() -> typing.MutableSequence['AltCovarianceType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1148,7 +1164,7 @@ class CdmHeaderKey(java.lang.Enum['CdmHeaderKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['CdmHeaderKey']:
+    def values() -> typing.MutableSequence['CdmHeaderKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1989,7 +2005,7 @@ class CdmMetadataKey(java.lang.Enum['CdmMetadataKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['CdmMetadataKey']:
+    def values() -> typing.MutableSequence['CdmMetadataKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -2032,7 +2048,7 @@ class CdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[C
         Since:
             11.2
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]): ...
+    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
     def build(self) -> Cdm:
         """
             Build the file from parsed entries.
@@ -2243,7 +2259,7 @@ class CdmRelativeMetadata:
         
         """
         ...
-    def getCollisionPercentile(self) -> typing.List[int]:
+    def getCollisionPercentile(self) -> typing.MutableSequence[int]:
         """
             Get the array of 1 to n elements indicating the percentile(s) for which estimates of the collision probability are
             provided in the COLLISION_PROBABILITY variable.
@@ -2571,7 +2587,7 @@ class CdmRelativeMetadata:
         
         """
         ...
-    def setCollisionPercentile(self, intArray: typing.List[int]) -> None:
+    def setCollisionPercentile(self, intArray: typing.Union[typing.List[int], jpype.JArray]) -> None:
         """
             Set the array of 1 to n elements indicating the percentile(s) for which estimates of the collision probability are
             provided in the COLLISION_PROBABILITY variable.
@@ -3017,7 +3033,7 @@ class CdmRelativeMetadataKey(java.lang.Enum['CdmRelativeMetadataKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['CdmRelativeMetadataKey']:
+    def values() -> typing.MutableSequence['CdmRelativeMetadataKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -3082,7 +3098,7 @@ class CovarianceMethod(java.lang.Enum['CovarianceMethod']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['CovarianceMethod']:
+    def values() -> typing.MutableSequence['CovarianceMethod']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -3175,7 +3191,7 @@ class Maneuvrable(java.lang.Enum['Maneuvrable']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['Maneuvrable']:
+    def values() -> typing.MutableSequence['Maneuvrable']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -3198,6 +3214,15 @@ class ODParameters(org.orekit.files.ccsds.section.CommentsContainer):
     public class ODParameters extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
     
         Container for OD parameters data block.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
     
         Since:
             11.2
@@ -3504,7 +3529,7 @@ class ODParametersKey(java.lang.Enum['ODParametersKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['ODParametersKey']:
+    def values() -> typing.MutableSequence['ODParametersKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -3537,12 +3562,23 @@ class RTNCovariance(org.orekit.files.ccsds.section.CommentsContainer):
     """
     public class RTNCovariance extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
     
-        Container for RTN covariance matrix data. This class as a RealMatrix as attribute which can be acces with
-        getRTNCovariaxMatrix method. Beware that there are thus 2 ways to modify the RTN covariance : setC... ( setCrr, setCtr
-        ...) which should be prioritized and getRTNCovariaxMatrix.setEntry(row, col, value).
+        Container for RTN covariance matrix data.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
+    
+        This class has a RealMatrix as attribute which can be access with :code:`getRTNCovariaxMatrix` method. Beware that there
+        are thus two ways to modify the RTN covariance : :code:`setC…` (:code:`setCrr`, :code:`setCtr`…) which should be
+        prioritized and :code:`getRTNCovariaxMatrix.setEntry(row, col, value)`.
     
         The RTN Covariance Matrix is provided in the 9×9 Lower Triangular Form. All parameters of the 6×6 position/velocity
-        submatrix are mandatory. The remaining elements will return NaN if not provided.
+        submatrix are mandatory. The remaining elements will return {code NaN} if not provided.
     
         Since:
             11.2
@@ -4590,7 +4626,7 @@ class RTNCovarianceKey(java.lang.Enum['RTNCovarianceKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['RTNCovarianceKey']:
+    def values() -> typing.MutableSequence['RTNCovarianceKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -4653,7 +4689,7 @@ class ScreenType(java.lang.Enum['ScreenType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['ScreenType']:
+    def values() -> typing.MutableSequence['ScreenType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -4707,7 +4743,7 @@ class ScreenVolumeFrame(java.lang.Enum['ScreenVolumeFrame']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['ScreenVolumeFrame']:
+    def values() -> typing.MutableSequence['ScreenVolumeFrame']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -4762,7 +4798,7 @@ class ScreenVolumeShape(java.lang.Enum['ScreenVolumeShape']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['ScreenVolumeShape']:
+    def values() -> typing.MutableSequence['ScreenVolumeShape']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -4784,12 +4820,23 @@ class SigmaEigenvectorsCovariance(org.orekit.files.ccsds.section.CommentsContain
     """
     public class SigmaEigenvectorsCovariance extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
     
-        Container for Sigma/Eigenvectors Covariance data. The positional covariance one-sigma dispersions corresponding to the
-        major, intermediate and minor eigenvalues, followed by the associated eigenvectors. The data is presented on a single
-        line (12 values separated by spaces). (Condition: Mandatory if ALT_COV_TYPE = CSIG3EIGVEC3)
+        Container for Sigma/Eigenvectors Covariance data.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
+    
+        The positional covariance one-sigma dispersions corresponding to the major, intermediate and minor eigenvalues, followed
+        by the associated eigenvectors. The data is presented on a single line (12 values separated by spaces). (Condition:
+        Mandatory if :code:`ALT_COV_TYPE = CSIG3EIGVEC3`)
     """
     def __init__(self, boolean: bool): ...
-    def getCsig3eigvec3(self) -> typing.List[float]:
+    def getCsig3eigvec3(self) -> typing.MutableSequence[float]:
         """
             Get the Sigma/Eigenvectors Covariance data.
         
@@ -4814,7 +4861,7 @@ class SigmaEigenvectorsCovariance(org.orekit.files.ccsds.section.CommentsContain
         
         """
         ...
-    def setCsig3eigvec3(self, doubleArray: typing.List[float]) -> None:
+    def setCsig3eigvec3(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
             Set the Sigma/Eigenvectors Covariance data.
         
@@ -4892,7 +4939,7 @@ class SigmaEigenvectorsCovarianceKey(java.lang.Enum['SigmaEigenvectorsCovariance
         """
         ...
     @staticmethod
-    def values() -> typing.List['SigmaEigenvectorsCovarianceKey']:
+    def values() -> typing.MutableSequence['SigmaEigenvectorsCovarianceKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -4915,6 +4962,15 @@ class StateVector(org.orekit.files.ccsds.section.CommentsContainer):
     public class StateVector extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
     
         Container for state vector data.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
     
         Since:
             11.2
@@ -5076,7 +5132,7 @@ class StateVectorKey(java.lang.Enum['StateVectorKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['StateVectorKey']:
+    def values() -> typing.MutableSequence['StateVectorKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -5109,15 +5165,26 @@ class XYZCovariance(org.orekit.files.ccsds.section.CommentsContainer):
     """
     public class XYZCovariance extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
     
-        Container for XYZ covariance matrix data. This class as a RealMatrix as attribute which can be acces with
-        getXYZCovariaxMatrix method. Beware that there are thus 2 ways to modify the XYZ covariance : setC... ( setCxx, setCyx
-        ...) which should be prioritized and getXYZCovariaxMatrix.setEntry(row, col, value).
+        Container for XYZ covariance matrix data.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
+    
+        This class as a RealMatrix as attribute which can be access with :code:`getXYZCovariaxMatrix` method. Beware that there
+        are thus two ways to modify the XYZ covariance : :code:`setC…` (:code:`setCxx`, :code:`setCyx`…) which should be
+        prioritized and :code:`getXYZCovariaxMatrix.setEntry(row, col, value)`.
     
         The XYZ Covariance Matrix is only provided if :meth:`~org.orekit.files.ccsds.ndm.cdm.CdmMetadataKey.ALT_COV_TYPE` is
-        :meth:`~org.orekit.files.ccsds.ndm.cdm.AltCovarianceType.XYZ`, otherwise its terms will return NaN.
+        :meth:`~org.orekit.files.ccsds.ndm.cdm.AltCovarianceType.XYZ`, otherwise its terms will return :code:`NaN`.
     
         When available, the matrix is given in the 9×9 Lower Triangular Form. All parameters of the 6×6 position/velocity
-        submatrix are mandatory. The remaining elements will return NaN if not provided.
+        submatrix are mandatory. The remaining elements will return :code:`NaN` if not provided.
     """
     def __init__(self, boolean: bool): ...
     def getCdrgdrg(self) -> float:
@@ -6172,7 +6239,7 @@ class XYZCovarianceKey(java.lang.Enum['XYZCovarianceKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['XYZCovarianceKey']:
+    def values() -> typing.MutableSequence['XYZCovarianceKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -6247,7 +6314,7 @@ class XmlSubStructureKey(java.lang.Enum['XmlSubStructureKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['XmlSubStructureKey']:
+    def values() -> typing.MutableSequence['XmlSubStructureKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -6301,7 +6368,7 @@ class CdmWriter(CdmMessageWriter):
     def writeSegmentContent(self, generator: org.orekit.files.ccsds.utils.generation.Generator, double: float, segment: org.orekit.files.ccsds.section.Segment[CdmMetadata, CdmData]) -> None: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.ndm.cdm")``.
 
     AdditionalCovarianceMetadata: typing.Type[AdditionalCovarianceMetadata]
@@ -6343,4 +6410,3 @@ class __module_protocol__(typing.Protocol):
     XYZCovariance: typing.Type[XYZCovariance]
     XYZCovarianceKey: typing.Type[XYZCovarianceKey]
     XmlSubStructureKey: typing.Type[XmlSubStructureKey]
-    class-use: org.orekit.files.ccsds.ndm.cdm.class-use.__module_protocol__

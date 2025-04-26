@@ -1,14 +1,22 @@
-import java.io
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.util
+import jpype
 import org
 import org.hipparchus
 import org.orekit.attitudes
+import org.orekit.data
 import org.orekit.frames
 import org.orekit.orbits
 import org.orekit.propagation
 import org.orekit.propagation.analytical
-import org.orekit.propagation.analytical.tle.class-use
 import org.orekit.propagation.analytical.tle.generation
+import org.orekit.propagation.conversion.osc2mean
 import org.orekit.time
 import org.orekit.utils
 import typing
@@ -16,9 +24,9 @@ import typing
 
 
 _FieldTLE__T = typing.TypeVar('_FieldTLE__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class FieldTLE(org.orekit.time.FieldTimeStamped[_FieldTLE__T], java.io.Serializable, org.orekit.utils.ParameterDriversProvider, typing.Generic[_FieldTLE__T]):
+class FieldTLE(org.orekit.time.FieldTimeStamped[_FieldTLE__T], org.orekit.utils.ParameterDriversProvider, typing.Generic[_FieldTLE__T]):
     """
-    public class FieldTLE<T extends :class:`~org.orekit.propagation.analytical.tle.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.FieldTimeStamped`<T>, :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.orekit.utils.ParameterDriversProvider`
+    public class FieldTLE<T extends :class:`~org.orekit.propagation.analytical.tle.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.FieldTimeStamped`<T>, :class:`~org.orekit.utils.ParameterDriversProvider`
     
         This class is a container for a single set of TLE data.
     
@@ -37,9 +45,6 @@ class FieldTLE(org.orekit.time.FieldTimeStamped[_FieldTLE__T], java.io.Serializa
     
         Since:
             11.0
-    
-        Also see:
-            :meth:`~serialized`
     """
     DEFAULT: typing.ClassVar[int] = ...
     """
@@ -126,6 +131,16 @@ class FieldTLE(org.orekit.time.FieldTimeStamped[_FieldTLE__T], java.io.Serializa
     def __init__(self, field: org.hipparchus.Field[_FieldTLE__T], string: str, string2: str): ...
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_FieldTLE__T], string: str, string2: str, timeScale: org.orekit.time.TimeScale): ...
+    def computeSemiMajorAxis(self) -> _FieldTLE__T:
+        """
+            Compute the semi-major axis from the mean motion of the TLE and the gravitational parameter from TLEConstants.
+        
+            Returns:
+                the semi-major axis computed.
+        
+        
+        """
+        ...
     def equals(self, object: typing.Any) -> bool:
         """
             Check if this tle equals the provided tle.
@@ -373,26 +388,39 @@ class FieldTLE(org.orekit.time.FieldTimeStamped[_FieldTLE__T], java.io.Serializa
         
         """
         ...
-    _stateToTLE__T = typing.TypeVar('_stateToTLE__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _stateToTLE_0__T = typing.TypeVar('_stateToTLE_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _stateToTLE_1__T = typing.TypeVar('_stateToTLE_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _stateToTLE_2__T = typing.TypeVar('_stateToTLE_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
     @staticmethod
-    def stateToTLE(fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_stateToTLE__T], fieldTLE: 'FieldTLE'[_stateToTLE__T], tleGenerationAlgorithm: org.orekit.propagation.analytical.tle.generation.TleGenerationAlgorithm) -> 'FieldTLE'[_stateToTLE__T]:
+    def stateToTLE(fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_stateToTLE_0__T], fieldTLE: 'FieldTLE'[_stateToTLE_0__T], tleGenerationAlgorithm: org.orekit.propagation.analytical.tle.generation.TleGenerationAlgorithm) -> 'FieldTLE'[_stateToTLE_0__T]:
         """
             Convert Spacecraft State into TLE.
         
+            The B* is not calculated. Its value is simply copied from the template to the generated TLE.
+        
             Parameters:
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): Spacecraft State to convert into TLE
-                templateTLE (:class:`~org.orekit.propagation.analytical.tle.FieldTLE`<T> templateTLE): first guess used to get identification and estimate new TLE
-                generationAlgorithm (:class:`~org.orekit.propagation.analytical.tle.generation.TleGenerationAlgorithm`): TLE generation algorithm
+                templateTLE (:class:`~org.orekit.propagation.analytical.tle.FieldTLE`<T> templateTLE): only used to get identifiers like satellite number, launch year, etc. In other words, the keplerian elements contained
+                    in the generated TLE are based on the provided state and not the template TLE.
+                converter (:class:`~org.orekit.propagation.conversion.osc2mean.OsculatingToMeanConverter`): osculating to mean orbit converter
+                dataContext (:class:`~org.orekit.data.DataContext`): data context
         
             Returns:
                 a generated TLE
         
             Since:
-                12.0
+                13.0
         
         
         """
         ...
+    @typing.overload
+    @staticmethod
+    def stateToTLE(fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_stateToTLE_1__T], fieldTLE: 'FieldTLE'[_stateToTLE_1__T], osculatingToMeanConverter: org.orekit.propagation.conversion.osc2mean.OsculatingToMeanConverter) -> 'FieldTLE'[_stateToTLE_1__T]: ...
+    @typing.overload
+    @staticmethod
+    def stateToTLE(fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_stateToTLE_2__T], fieldTLE: 'FieldTLE'[_stateToTLE_2__T], osculatingToMeanConverter: org.orekit.propagation.conversion.osc2mean.OsculatingToMeanConverter, dataContext: org.orekit.data.DataContext) -> 'FieldTLE'[_stateToTLE_2__T]: ...
     def toString(self) -> str:
         """
             Get a string representation of this TLE set.
@@ -486,10 +514,10 @@ class FieldTLEPropagator(org.orekit.propagation.analytical.FieldAbstractAnalytic
     @typing.overload
     def getPVCoordinates(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTLEPropagator__T], frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldTLEPropagator__T]: ...
     @typing.overload
-    def getPVCoordinates(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTLEPropagator__T], tArray: typing.List[_FieldTLEPropagator__T]) -> org.orekit.utils.FieldPVCoordinates[_FieldTLEPropagator__T]: ...
+    def getPVCoordinates(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTLEPropagator__T], tArray: typing.Union[typing.List[_FieldTLEPropagator__T], jpype.JArray]) -> org.orekit.utils.FieldPVCoordinates[_FieldTLEPropagator__T]: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def getTLE(self) -> FieldTLE[_FieldTLEPropagator__T]: ...
-    def propagateOrbit(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTLEPropagator__T], tArray: typing.List[_FieldTLEPropagator__T]) -> org.orekit.orbits.FieldOrbit[_FieldTLEPropagator__T]: ...
+    def propagateOrbit(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldTLEPropagator__T], tArray: typing.Union[typing.List[_FieldTLEPropagator__T], jpype.JArray]) -> org.orekit.orbits.FieldOrbit[_FieldTLEPropagator__T]: ...
     def resetInitialState(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldTLEPropagator__T]) -> None: ...
     _selectExtrapolator_0__T = typing.TypeVar('_selectExtrapolator_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _selectExtrapolator_1__T = typing.TypeVar('_selectExtrapolator_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -497,7 +525,7 @@ class FieldTLEPropagator(org.orekit.propagation.analytical.FieldAbstractAnalytic
     _selectExtrapolator_3__T = typing.TypeVar('_selectExtrapolator_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def selectExtrapolator(fieldTLE: FieldTLE[_selectExtrapolator_0__T], tArray: typing.List[_selectExtrapolator_0__T]) -> 'FieldTLEPropagator'[_selectExtrapolator_0__T]:
+    def selectExtrapolator(fieldTLE: FieldTLE[_selectExtrapolator_0__T], tArray: typing.Union[typing.List[_selectExtrapolator_0__T], jpype.JArray]) -> 'FieldTLEPropagator'[_selectExtrapolator_0__T]:
         """
             Selects the extrapolator to use with the selected TLE.
         
@@ -546,17 +574,17 @@ class FieldTLEPropagator(org.orekit.propagation.analytical.FieldAbstractAnalytic
         ...
     @typing.overload
     @staticmethod
-    def selectExtrapolator(fieldTLE: FieldTLE[_selectExtrapolator_1__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, t: _selectExtrapolator_1__T, tArray: typing.List[_selectExtrapolator_1__T]) -> 'FieldTLEPropagator'[_selectExtrapolator_1__T]: ...
+    def selectExtrapolator(fieldTLE: FieldTLE[_selectExtrapolator_1__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, t: _selectExtrapolator_1__T, tArray: typing.Union[typing.List[_selectExtrapolator_1__T], jpype.JArray]) -> 'FieldTLEPropagator'[_selectExtrapolator_1__T]: ...
     @typing.overload
     @staticmethod
-    def selectExtrapolator(fieldTLE: FieldTLE[_selectExtrapolator_2__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, t: _selectExtrapolator_2__T, frame: org.orekit.frames.Frame, tArray: typing.List[_selectExtrapolator_2__T]) -> 'FieldTLEPropagator'[_selectExtrapolator_2__T]: ...
+    def selectExtrapolator(fieldTLE: FieldTLE[_selectExtrapolator_2__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, t: _selectExtrapolator_2__T, frame: org.orekit.frames.Frame, tArray: typing.Union[typing.List[_selectExtrapolator_2__T], jpype.JArray]) -> 'FieldTLEPropagator'[_selectExtrapolator_2__T]: ...
     @typing.overload
     @staticmethod
-    def selectExtrapolator(fieldTLE: FieldTLE[_selectExtrapolator_3__T], frame: org.orekit.frames.Frame, tArray: typing.List[_selectExtrapolator_3__T]) -> 'FieldTLEPropagator'[_selectExtrapolator_3__T]: ...
+    def selectExtrapolator(fieldTLE: FieldTLE[_selectExtrapolator_3__T], frame: org.orekit.frames.Frame, tArray: typing.Union[typing.List[_selectExtrapolator_3__T], jpype.JArray]) -> 'FieldTLEPropagator'[_selectExtrapolator_3__T]: ...
 
-class TLE(org.orekit.time.TimeStamped, java.io.Serializable, org.orekit.utils.ParameterDriversProvider):
+class TLE(org.orekit.time.TimeStamped, org.orekit.utils.ParameterDriversProvider):
     """
-    public class TLE extends :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.orekit.utils.ParameterDriversProvider`
+    public class TLE extends :class:`~org.orekit.propagation.analytical.tle.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.utils.ParameterDriversProvider`
     
         This class is a container for a single set of TLE data.
     
@@ -571,9 +599,6 @@ class TLE(org.orekit.time.TimeStamped, java.io.Serializable, org.orekit.utils.Pa
     
         More information on the TLE format can be found on the
         :class:`~org.orekit.propagation.analytical.tle.https:.www.celestrak.com`
-    
-        Also see:
-            :meth:`~serialized`
     """
     SGP: typing.ClassVar[int] = ...
     """
@@ -660,6 +685,16 @@ class TLE(org.orekit.time.TimeStamped, java.io.Serializable, org.orekit.utils.Pa
     def __init__(self, string: str, string2: str): ...
     @typing.overload
     def __init__(self, string: str, string2: str, timeScale: org.orekit.time.TimeScale): ...
+    def computeSemiMajorAxis(self) -> float:
+        """
+            Compute the semi-major axis from the mean motion of the TLE and the gravitational parameter from TLEConstants.
+        
+            Returns:
+                the semi-major axis computed.
+        
+        
+        """
+        ...
     def equals(self, object: typing.Any) -> bool:
         """
             Check if this tle equals the provided tle.
@@ -941,25 +976,36 @@ class TLE(org.orekit.time.TimeStamped, java.io.Serializable, org.orekit.utils.Pa
         
         """
         ...
+    @typing.overload
     @staticmethod
     def stateToTLE(spacecraftState: org.orekit.propagation.SpacecraftState, tLE: 'TLE', tleGenerationAlgorithm: org.orekit.propagation.analytical.tle.generation.TleGenerationAlgorithm) -> 'TLE':
         """
             Convert Spacecraft State into TLE.
         
+            The B* is not calculated. Its value is simply copied from the model to the generated TLE.
+        
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): Spacecraft State to convert into TLE
-                templateTLE (:class:`~org.orekit.propagation.analytical.tle.TLE`): first guess used to get identification and estimate new TLE
-                generationAlgorithm (:class:`~org.orekit.propagation.analytical.tle.generation.TleGenerationAlgorithm`): TLE generation algorithm
+                templateTLE (:class:`~org.orekit.propagation.analytical.tle.TLE`): only used to get identifiers like satellite number, launch year, etc. In other words, the keplerian elements contained
+                    in the generated TLE are based on the provided state and not the template TLE.
+                converter (:class:`~org.orekit.propagation.conversion.osc2mean.OsculatingToMeanConverter`): osculating to mean orbit converter
+                dataContext (:class:`~org.orekit.data.DataContext`): data context
         
             Returns:
                 a generated TLE
         
             Since:
-                12.0
+                13.0
         
         
         """
         ...
+    @typing.overload
+    @staticmethod
+    def stateToTLE(spacecraftState: org.orekit.propagation.SpacecraftState, tLE: 'TLE', osculatingToMeanConverter: org.orekit.propagation.conversion.osc2mean.OsculatingToMeanConverter) -> 'TLE': ...
+    @typing.overload
+    @staticmethod
+    def stateToTLE(spacecraftState: org.orekit.propagation.SpacecraftState, tLE: 'TLE', osculatingToMeanConverter: org.orekit.propagation.conversion.osc2mean.OsculatingToMeanConverter, dataContext: org.orekit.data.DataContext) -> 'TLE': ...
     def toString(self) -> str:
         """
             Get a string representation of this TLE set.
@@ -1595,6 +1641,23 @@ class TLEPropagator(org.orekit.propagation.analytical.AbstractAnalyticalPropagat
         
         """
         ...
+    def propagateOrbit(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.orbits.Orbit:
+        """
+            Extrapolate an orbit up to a specific target date.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator.propagateOrbit` in
+                class :class:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): target date for the orbit
+        
+            Returns:
+                extrapolated parameters
+        
+        
+        """
+        ...
     def resetInitialState(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
         """
             Reset the propagator initial state.
@@ -1712,9 +1775,9 @@ class FieldSGP4(FieldTLEPropagator[_FieldSGP4__T], typing.Generic[_FieldSGP4__T]
             11.0
     """
     @typing.overload
-    def __init__(self, fieldTLE: FieldTLE[_FieldSGP4__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, t: _FieldSGP4__T, tArray: typing.List[_FieldSGP4__T]): ...
+    def __init__(self, fieldTLE: FieldTLE[_FieldSGP4__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, t: _FieldSGP4__T, tArray: typing.Union[typing.List[_FieldSGP4__T], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, fieldTLE: FieldTLE[_FieldSGP4__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, t: _FieldSGP4__T, frame: org.orekit.frames.Frame, tArray: typing.List[_FieldSGP4__T]): ...
+    def __init__(self, fieldTLE: FieldTLE[_FieldSGP4__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, t: _FieldSGP4__T, frame: org.orekit.frames.Frame, tArray: typing.Union[typing.List[_FieldSGP4__T], jpype.JArray]): ...
 
 class PythonTLEPropagator(TLEPropagator):
     """
@@ -1824,16 +1887,16 @@ class FieldDeepSDP4(org.orekit.propagation.analytical.tle.FieldSDP4[_FieldDeepSD
             11.0
     """
     @typing.overload
-    def __init__(self, fieldTLE: FieldTLE[_FieldDeepSDP4__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, t: _FieldDeepSDP4__T, tArray: typing.List[_FieldDeepSDP4__T]): ...
+    def __init__(self, fieldTLE: FieldTLE[_FieldDeepSDP4__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, t: _FieldDeepSDP4__T, tArray: typing.Union[typing.List[_FieldDeepSDP4__T], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, fieldTLE: FieldTLE[_FieldDeepSDP4__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, t: _FieldDeepSDP4__T, frame: org.orekit.frames.Frame, tArray: typing.List[_FieldDeepSDP4__T]): ...
+    def __init__(self, fieldTLE: FieldTLE[_FieldDeepSDP4__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, t: _FieldDeepSDP4__T, frame: org.orekit.frames.Frame, tArray: typing.Union[typing.List[_FieldDeepSDP4__T], jpype.JArray]): ...
 
 _PythonFieldSDP4__T = typing.TypeVar('_PythonFieldSDP4__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldSDP4(org.orekit.propagation.analytical.tle.FieldSDP4[_PythonFieldSDP4__T], typing.Generic[_PythonFieldSDP4__T]):
     """
     public class PythonFieldSDP4<T extends :class:`~org.orekit.propagation.analytical.tle.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.tle.FieldTLEPropagator`<T>
     """
-    def __init__(self, fieldTLE: FieldTLE[_PythonFieldSDP4__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, t: _PythonFieldSDP4__T, frame: org.orekit.frames.Frame, tArray: typing.List[_PythonFieldSDP4__T]): ...
+    def __init__(self, fieldTLE: FieldTLE[_PythonFieldSDP4__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, t: _PythonFieldSDP4__T, frame: org.orekit.frames.Frame, tArray: typing.Union[typing.List[_PythonFieldSDP4__T], jpype.JArray]): ...
     def deepPeriodicEffects(self, t: _PythonFieldSDP4__T) -> None:
         """
             Computes periodic terms from current coordinates and epoch.
@@ -1886,7 +1949,7 @@ class FieldSDP4: ...
 class SDP4: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.propagation.analytical.tle")``.
 
     DeepSDP4: typing.Type[DeepSDP4]
@@ -1902,5 +1965,4 @@ class __module_protocol__(typing.Protocol):
     TLE: typing.Type[TLE]
     TLEConstants: typing.Type[TLEConstants]
     TLEPropagator: typing.Type[TLEPropagator]
-    class-use: org.orekit.propagation.analytical.tle.class-use.__module_protocol__
     generation: org.orekit.propagation.analytical.tle.generation.__module_protocol__

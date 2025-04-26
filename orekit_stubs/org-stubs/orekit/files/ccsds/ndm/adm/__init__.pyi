@@ -1,6 +1,14 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
 import java.util.function
+import jpype
 import org.hipparchus
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.attitudes
@@ -10,7 +18,6 @@ import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.ndm.adm.acm
 import org.orekit.files.ccsds.ndm.adm.aem
 import org.orekit.files.ccsds.ndm.adm.apm
-import org.orekit.files.ccsds.ndm.adm.class-use
 import org.orekit.files.ccsds.section
 import org.orekit.files.ccsds.utils
 import org.orekit.files.ccsds.utils.lexical
@@ -72,7 +79,7 @@ class AdmCommonMetadataKey(java.lang.Enum['AdmCommonMetadataKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['AdmCommonMetadataKey']:
+    def values() -> typing.MutableSequence['AdmCommonMetadataKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -293,7 +300,7 @@ class AdmMetadataKey(java.lang.Enum['AdmMetadataKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['AdmMetadataKey']:
+    def values() -> typing.MutableSequence['AdmMetadataKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -381,7 +388,7 @@ class AttitudeEndpoints(org.orekit.attitudes.AttitudeBuilder):
     def __init__(self): ...
     _build_1__T = typing.TypeVar('_build_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def build(self, frame: org.orekit.frames.Frame, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, timeStampedAngularCoordinates: org.orekit.utils.TimeStampedAngularCoordinates) -> org.orekit.attitudes.Attitude:
+    def build(self, frame: org.orekit.frames.Frame, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], timeStampedAngularCoordinates: org.orekit.utils.TimeStampedAngularCoordinates) -> org.orekit.attitudes.Attitude:
         """
             Build a filtered attitude.
         
@@ -399,7 +406,7 @@ class AttitudeEndpoints(org.orekit.attitudes.AttitudeBuilder):
         """
         ...
     @typing.overload
-    def build(self, frame: org.orekit.frames.Frame, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_build_1__T], timeStampedFieldAngularCoordinates: org.orekit.utils.TimeStampedFieldAngularCoordinates[_build_1__T]) -> org.orekit.attitudes.FieldAttitude[_build_1__T]:
+    def build(self, frame: org.orekit.frames.Frame, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_build_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], timeStampedFieldAngularCoordinates: org.orekit.utils.TimeStampedFieldAngularCoordinates[_build_1__T]) -> org.orekit.attitudes.FieldAttitude[_build_1__T]:
         """
             Build a filtered attitude.
         
@@ -587,7 +594,7 @@ class AttitudeType(java.lang.Enum['AttitudeType']):
     SPIN: typing.ClassVar['AttitudeType'] = ...
     SPIN_NUTATION: typing.ClassVar['AttitudeType'] = ...
     SPIN_NUTATION_MOMENTUM: typing.ClassVar['AttitudeType'] = ...
-    def build(self, boolean: bool, boolean2: bool, rotationOrder: org.hipparchus.geometry.euclidean.threed.RotationOrder, boolean3: bool, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float]) -> org.orekit.utils.TimeStampedAngularCoordinates:
+    def build(self, boolean: bool, boolean2: bool, rotationOrder: org.hipparchus.geometry.euclidean.threed.RotationOrder, boolean3: bool, absoluteDate: org.orekit.time.AbsoluteDate, *double: float) -> org.orekit.utils.TimeStampedAngularCoordinates:
         """
             Get the angular coordinates corresponding to the attitude data.
         
@@ -606,8 +613,24 @@ class AttitudeType(java.lang.Enum['AttitudeType']):
         
         """
         ...
-    def createDataFields(self, boolean: bool, boolean2: bool, rotationOrder: org.hipparchus.geometry.euclidean.threed.RotationOrder, boolean3: bool, timeStampedAngularCoordinates: org.orekit.utils.TimeStampedAngularCoordinates) -> typing.List[str]:
+    @typing.overload
+    def createDataFields(self, boolean: bool, boolean2: bool, rotationOrder: org.hipparchus.geometry.euclidean.threed.RotationOrder, boolean3: bool, timeStampedAngularCoordinates: org.orekit.utils.TimeStampedAngularCoordinates) -> typing.MutableSequence[str]:
         """
+            Get the attitude data fields corresponding to the attitude type.
+        
+            This method returns the components in CCSDS units (i.e. degrees, degrees per seconds…).
+        
+            Parameters:
+                isFirst (boolean): if true the first quaternion component is the scalar component
+                isExternal2SpacecraftBody (boolean): true attitude is from external frame to spacecraft body frame
+                eulerRotSequence (:class:`~org.orekit.files.ccsds.ndm.adm.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.RotationOrder?is`): sequance of Euler angles
+                isSpacecraftBodyRate (boolean): if true Euler rates are specified in spacecraft body frame
+                attitude (:class:`~org.orekit.utils.TimeStampedAngularCoordinates`): angular coordinates, using :class:`~org.orekit.attitudes.Attitude` convention
+                formatter (:class:`~org.orekit.utils.Formatter`): used to format doubles and dates (i.e. from inertial frame to spacecraft frame)
+        
+            Returns:
+                the attitude data in CCSDS units
+        
             Get the attitude data fields corresponding to the attitude type.
         
             This method returns the components in CCSDS units (i.e. degrees, degrees per seconds…).
@@ -626,7 +649,9 @@ class AttitudeType(java.lang.Enum['AttitudeType']):
         
         """
         ...
-    def generateData(self, boolean: bool, boolean2: bool, rotationOrder: org.hipparchus.geometry.euclidean.threed.RotationOrder, boolean3: bool, timeStampedAngularCoordinates: org.orekit.utils.TimeStampedAngularCoordinates) -> typing.List[float]:
+    @typing.overload
+    def createDataFields(self, boolean: bool, boolean2: bool, rotationOrder: org.hipparchus.geometry.euclidean.threed.RotationOrder, boolean3: bool, timeStampedAngularCoordinates: org.orekit.utils.TimeStampedAngularCoordinates, formatter: org.orekit.utils.Formatter) -> typing.MutableSequence[str]: ...
+    def generateData(self, boolean: bool, boolean2: bool, rotationOrder: org.hipparchus.geometry.euclidean.threed.RotationOrder, boolean3: bool, timeStampedAngularCoordinates: org.orekit.utils.TimeStampedAngularCoordinates) -> typing.MutableSequence[float]:
         """
             Generate the attitude data corresponding to the attitude type.
         
@@ -675,7 +700,7 @@ class AttitudeType(java.lang.Enum['AttitudeType']):
         
         """
         ...
-    def parse(self, boolean: bool, boolean2: bool, rotationOrder: org.hipparchus.geometry.euclidean.threed.RotationOrder, boolean3: bool, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, stringArray: typing.List[str]) -> org.orekit.utils.TimeStampedAngularCoordinates:
+    def parse(self, boolean: bool, boolean2: bool, rotationOrder: org.hipparchus.geometry.euclidean.threed.RotationOrder, boolean3: bool, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, stringArray: typing.Union[typing.List[str], jpype.JArray]) -> org.orekit.utils.TimeStampedAngularCoordinates:
         """
             Get the angular coordinates corresponding to the attitude data.
         
@@ -745,7 +770,7 @@ class AttitudeType(java.lang.Enum['AttitudeType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['AttitudeType']:
+    def values() -> typing.MutableSequence['AttitudeType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -783,7 +808,7 @@ class PythonAdmParser(AdmParser[_PythonAdmParser__T, _PythonAdmParser__P], typin
     """
     public class PythonAdmParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.ndm.adm.AdmHeader`, ?>, P extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<:class:`~org.orekit.files.ccsds.ndm.adm.AdmHeader`, T, ?>> extends :class:`~org.orekit.files.ccsds.ndm.adm.AdmParser`<T, P>
     """
-    def __init__(self, string: str, string2: str, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]): ...
+    def __init__(self, string: str, string2: str, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
     def build(self) -> _PythonAdmParser__T:
         """
             Description copied from interface: :meth:`~org.orekit.files.ccsds.utils.lexical.MessageParser.build`
@@ -968,7 +993,7 @@ class PythonAdmParser(AdmParser[_PythonAdmParser__T, _PythonAdmParser__P], typin
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.ndm.adm")``.
 
     AdmCommonMetadataKey: typing.Type[AdmCommonMetadataKey]
@@ -984,4 +1009,3 @@ class __module_protocol__(typing.Protocol):
     acm: org.orekit.files.ccsds.ndm.adm.acm.__module_protocol__
     aem: org.orekit.files.ccsds.ndm.adm.aem.__module_protocol__
     apm: org.orekit.files.ccsds.ndm.adm.apm.__module_protocol__
-    class-use: org.orekit.files.ccsds.ndm.adm.class-use.__module_protocol__

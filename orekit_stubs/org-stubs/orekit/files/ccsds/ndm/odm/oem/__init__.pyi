@@ -1,10 +1,17 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
 import java.util.function
+import jpype
 import org.orekit.data
 import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.ndm.odm
-import org.orekit.files.ccsds.ndm.odm.oem.class-use
 import org.orekit.files.ccsds.section
 import org.orekit.files.ccsds.utils
 import org.orekit.files.ccsds.utils.generation
@@ -34,15 +41,18 @@ class EphemerisOemWriter(org.orekit.files.general.EphemerisFileWriter):
             :class:`~org.orekit.files.ccsds.ndm.odm.oem.https:.public.ccsds.org.Pubs.500x0g4.pdf`,
             :class:`~org.orekit.files.ccsds.ndm.odm.oem.StreamingOemWriter`
     """
+    @typing.overload
     def __init__(self, oemWriter: 'OemWriter', odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, oemMetadata: 'OemMetadata', fileFormat: org.orekit.files.ccsds.utils.FileFormat, string: str, double: float, int: int): ...
+    @typing.overload
+    def __init__(self, oemWriter: 'OemWriter', odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, oemMetadata: 'OemMetadata', fileFormat: org.orekit.files.ccsds.utils.FileFormat, string: str, double: float, int: int, formatter: org.orekit.utils.Formatter): ...
     _write_0__C = typing.TypeVar('_write_0__C', bound=org.orekit.utils.TimeStampedPVCoordinates)  # <C>
     _write_0__S = typing.TypeVar('_write_0__S', bound=org.orekit.files.general.EphemerisFile.EphemerisSegment)  # <S>
     _write_1__C = typing.TypeVar('_write_1__C', bound=org.orekit.utils.TimeStampedPVCoordinates)  # <C>
     _write_1__S = typing.TypeVar('_write_1__S', bound=org.orekit.files.general.EphemerisFile.EphemerisSegment)  # <S>
     @typing.overload
-    def write(self, string: str, ephemerisFile: org.orekit.files.general.EphemerisFile[_write_0__C, _write_0__S]) -> None: ...
+    def write(self, string: str, ephemerisFile: typing.Union[org.orekit.files.general.EphemerisFile[_write_0__C, _write_0__S], typing.Callable[[], java.util.Map[str, org.orekit.files.general.EphemerisFile.SatelliteEphemeris[org.orekit.utils.TimeStampedPVCoordinates, org.orekit.files.general.EphemerisFile.EphemerisSegment]]]]) -> None: ...
     @typing.overload
-    def write(self, appendable: java.lang.Appendable, ephemerisFile: org.orekit.files.general.EphemerisFile[_write_1__C, _write_1__S]) -> None: ...
+    def write(self, appendable: java.lang.Appendable, ephemerisFile: typing.Union[org.orekit.files.general.EphemerisFile[_write_1__C, _write_1__S], typing.Callable[[], java.util.Map[str, org.orekit.files.general.EphemerisFile.SatelliteEphemeris[org.orekit.utils.TimeStampedPVCoordinates, org.orekit.files.general.EphemerisFile.EphemerisSegment]]]]) -> None: ...
     _writeSegment__C = typing.TypeVar('_writeSegment__C', bound=org.orekit.utils.TimeStampedPVCoordinates)  # <C>
     _writeSegment__S = typing.TypeVar('_writeSegment__S', bound=org.orekit.files.general.EphemerisFile.EphemerisSegment)  # <S>
     def writeSegment(self, generator: org.orekit.files.ccsds.utils.generation.Generator, s2: _writeSegment__S) -> None: ...
@@ -82,7 +92,7 @@ class InterpolationMethod(java.lang.Enum['InterpolationMethod']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['InterpolationMethod']:
+    def values() -> typing.MutableSequence['InterpolationMethod']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -148,6 +158,15 @@ class OemData(org.orekit.files.ccsds.section.CommentsContainer, org.orekit.files
     public class OemData extends :class:`~org.orekit.files.ccsds.section.CommentsContainer` implements :class:`~org.orekit.files.ccsds.section.Data`
     
         The Ephemerides data blocks class contain list of orbital data points.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
     """
     def __init__(self): ...
     def addCovarianceMatrix(self, cartesianCovariance: org.orekit.files.ccsds.ndm.odm.CartesianCovariance) -> None:
@@ -393,7 +412,7 @@ class OemMetadataKey(java.lang.Enum['OemMetadataKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['OemMetadataKey']:
+    def values() -> typing.MutableSequence['OemMetadataKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -425,7 +444,7 @@ class OemParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Oem, 'OemParser'], org.
         Since:
             6.1
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, double: float, int: int, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]): ...
+    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, double: float, int: int, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
     def build(self) -> Oem:
         """
             Build the file from parsed entries.
@@ -948,7 +967,7 @@ class StreamingOemWriter(java.lang.AutoCloseable):
         def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> None: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.ndm.odm.oem")``.
 
     EphemerisOemWriter: typing.Type[EphemerisOemWriter]
@@ -962,4 +981,3 @@ class __module_protocol__(typing.Protocol):
     OemSegment: typing.Type[OemSegment]
     OemWriter: typing.Type[OemWriter]
     StreamingOemWriter: typing.Type[StreamingOemWriter]
-    class-use: org.orekit.files.ccsds.ndm.odm.oem.class-use.__module_protocol__

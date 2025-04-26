@@ -1,3 +1,10 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.io
 import java.lang
 import java.time
@@ -219,7 +226,7 @@ class ChronoField(java.lang.Enum['ChronoField'], TemporalField):
     @staticmethod
     def valueOf(string: str) -> 'ChronoField': ...
     @staticmethod
-    def values() -> typing.List['ChronoField']: ...
+    def values() -> typing.MutableSequence['ChronoField']: ...
 
 class ChronoUnit(java.lang.Enum['ChronoUnit'], TemporalUnit):
     NANOS: typing.ClassVar['ChronoUnit'] = ...
@@ -255,7 +262,7 @@ class ChronoUnit(java.lang.Enum['ChronoUnit'], TemporalUnit):
     @staticmethod
     def valueOf(string: str) -> 'ChronoUnit': ...
     @staticmethod
-    def values() -> typing.List['ChronoUnit']: ...
+    def values() -> typing.MutableSequence['ChronoUnit']: ...
 
 class Temporal(TemporalAccessor):
     @typing.overload
@@ -271,9 +278,13 @@ class Temporal(TemporalAccessor):
     @typing.overload
     def plus(self, temporalAmount: TemporalAmount) -> 'Temporal': ...
     def until(self, temporal: 'Temporal', temporalUnit: TemporalUnit) -> int: ...
+    @typing.overload
+    def with_(self, temporalField: TemporalField, long: int) -> 'Temporal': ...
+    @typing.overload
+    def with_(self, temporalAdjuster: typing.Union[TemporalAdjuster, typing.Callable]) -> 'Temporal': ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("java.time.temporal")``.
 
     ChronoField: typing.Type[ChronoField]

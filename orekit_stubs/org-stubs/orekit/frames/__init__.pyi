@@ -1,15 +1,22 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.io
 import java.lang
 import java.util
 import java.util.function
 import java.util.stream
+import jpype
 import org
 import org.hipparchus
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.bodies
 import org.orekit.data
 import org.orekit.files.ccsds.definitions
-import org.orekit.frames.class-use
 import org.orekit.frames.encounter
 import org.orekit.models.earth
 import org.orekit.time
@@ -275,14 +282,11 @@ class EOPFitter(java.io.Serializable):
         """
         ...
 
-class EOPHistory(java.io.Serializable):
+class EOPHistory:
     """
-    public class EOPHistory extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public class EOPHistory extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         This class loads any kind of Earth Orientation Parameter data throughout a large time range.
-    
-        Also see:
-            :meth:`~serialized`
     """
     DEFAULT_INTERPOLATION_DEGREE: typing.ClassVar[int] = ...
     """
@@ -298,7 +302,7 @@ class EOPHistory(java.io.Serializable):
     
     
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, int: int, collection: typing.Union[java.util.Collection[EOPEntry], typing.Sequence[EOPEntry]], boolean: bool, timeScales: org.orekit.time.TimeScales): ...
+    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, int: int, collection: typing.Union[java.util.Collection[EOPEntry], typing.Sequence[EOPEntry], typing.Set[EOPEntry]], boolean: bool, timeScales: org.orekit.time.TimeScales): ...
     def cachesTidalCorrection(self) -> bool:
         """
             Check if the instance caches tidal corrections.
@@ -358,7 +362,7 @@ class EOPHistory(java.io.Serializable):
     def getEntries(self) -> java.util.List[EOPEntry]: ...
     _getEquinoxNutationCorrection_1__T = typing.TypeVar('_getEquinoxNutationCorrection_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getEquinoxNutationCorrection(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]:
+    def getEquinoxNutationCorrection(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]:
         """
             Get the correction to the nutation parameters for equinox-based paradigm.
         
@@ -373,7 +377,7 @@ class EOPHistory(java.io.Serializable):
         """
         ...
     @typing.overload
-    def getEquinoxNutationCorrection(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getEquinoxNutationCorrection_1__T]) -> typing.List[_getEquinoxNutationCorrection_1__T]:
+    def getEquinoxNutationCorrection(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getEquinoxNutationCorrection_1__T]) -> typing.MutableSequence[_getEquinoxNutationCorrection_1__T]:
         """
             Get the correction to the nutation parameters for equinox-based paradigm.
         
@@ -454,7 +458,7 @@ class EOPHistory(java.io.Serializable):
         ...
     _getNonRotatinOriginNutationCorrection_1__T = typing.TypeVar('_getNonRotatinOriginNutationCorrection_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getNonRotatinOriginNutationCorrection(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]:
+    def getNonRotatinOriginNutationCorrection(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]:
         """
             Get the correction to the nutation parameters for Non-Rotating Origin paradigm.
         
@@ -469,7 +473,7 @@ class EOPHistory(java.io.Serializable):
         """
         ...
     @typing.overload
-    def getNonRotatinOriginNutationCorrection(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getNonRotatinOriginNutationCorrection_1__T]) -> typing.List[_getNonRotatinOriginNutationCorrection_1__T]:
+    def getNonRotatinOriginNutationCorrection(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getNonRotatinOriginNutationCorrection_1__T]) -> typing.MutableSequence[_getNonRotatinOriginNutationCorrection_1__T]:
         """
             Get the correction to the nutation parameters for Non-Rotating Origin paradigm.
         
@@ -597,13 +601,13 @@ class EopHistoryLoader:
     def fillHistory(self, nutationCorrectionConverter: org.orekit.utils.IERSConventions.NutationCorrectionConverter, sortedSet: java.util.SortedSet[EOPEntry]) -> None: ...
     class Parser:
         @staticmethod
-        def newBulletinBParser(iERSConventions: org.orekit.utils.IERSConventions, itrfVersionProvider: 'ItrfVersionProvider', timeScales: org.orekit.time.TimeScales) -> 'EopHistoryLoader.Parser': ...
+        def newBulletinBParser(iERSConventions: org.orekit.utils.IERSConventions, itrfVersionProvider: typing.Union['ItrfVersionProvider', typing.Callable], timeScales: org.orekit.time.TimeScales) -> 'EopHistoryLoader.Parser': ...
         @staticmethod
-        def newEopC04Parser(iERSConventions: org.orekit.utils.IERSConventions, itrfVersionProvider: 'ItrfVersionProvider', timeScales: org.orekit.time.TimeScales) -> 'EopHistoryLoader.Parser': ...
+        def newEopC04Parser(iERSConventions: org.orekit.utils.IERSConventions, itrfVersionProvider: typing.Union['ItrfVersionProvider', typing.Callable], timeScales: org.orekit.time.TimeScales) -> 'EopHistoryLoader.Parser': ...
         @staticmethod
-        def newFinalsColumnsParser(iERSConventions: org.orekit.utils.IERSConventions, itrfVersionProvider: 'ItrfVersionProvider', timeScales: org.orekit.time.TimeScales, boolean: bool) -> 'EopHistoryLoader.Parser': ...
+        def newFinalsColumnsParser(iERSConventions: org.orekit.utils.IERSConventions, itrfVersionProvider: typing.Union['ItrfVersionProvider', typing.Callable], timeScales: org.orekit.time.TimeScales, boolean: bool) -> 'EopHistoryLoader.Parser': ...
         @staticmethod
-        def newFinalsXmlParser(iERSConventions: org.orekit.utils.IERSConventions, itrfVersionProvider: 'ItrfVersionProvider', timeScales: org.orekit.time.TimeScales) -> 'EopHistoryLoader.Parser': ...
+        def newFinalsXmlParser(iERSConventions: org.orekit.utils.IERSConventions, itrfVersionProvider: typing.Union['ItrfVersionProvider', typing.Callable], timeScales: org.orekit.time.TimeScales) -> 'EopHistoryLoader.Parser': ...
         def parse(self, inputStream: java.io.InputStream, string: str) -> java.util.Collection[EOPEntry]: ...
 
 _FieldPoleCorrection__T = typing.TypeVar('_FieldPoleCorrection__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -834,9 +838,9 @@ class FieldTransformGenerator(org.orekit.utils.TimeStampedGenerator['FieldTransf
     def __init__(self, field: org.hipparchus.Field[_FieldTransformGenerator__T], int: int, transformProvider: 'TransformProvider', double: float): ...
     def generate(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> java.util.List['FieldTransform'[_FieldTransformGenerator__T]]: ...
 
-class Frame(java.io.Serializable):
+class Frame:
     """
-    public class Frame extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public class Frame extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Tridimensional references frames class.
     
@@ -858,9 +862,6 @@ class Frame(java.io.Serializable):
         :class:`~org.orekit.frames.FixedTransformProvider` is sufficient. For varying transforms (time-dependent or
         telemetry-based for example), it may be useful to define specific implementations of
         :class:`~org.orekit.frames.TransformProvider`.
-    
-        Also see:
-            :meth:`~serialized`
     """
     @typing.overload
     def __init__(self, frame: 'Frame', transform: 'Transform', string: str): ...
@@ -1177,7 +1178,7 @@ class FramesFactory:
     @staticmethod
     def addDefaultEOP2000HistoryLoaders(string: str, string2: str, string3: str, string4: str, string5: str, string6: str) -> None: ...
     @staticmethod
-    def addEOPHistoryLoader(iERSConventions: org.orekit.utils.IERSConventions, eopHistoryLoader: EopHistoryLoader) -> None: ...
+    def addEOPHistoryLoader(iERSConventions: org.orekit.utils.IERSConventions, eopHistoryLoader: typing.Union[EopHistoryLoader, typing.Callable]) -> None: ...
     @staticmethod
     def buildUncachedITRF(eOPHistory: EOPHistory, uTCScale: org.orekit.time.UTCScale) -> Frame: ...
     @staticmethod
@@ -1571,7 +1572,7 @@ class LazyLoadedEop:
     def __init__(self, dataProvidersManager: org.orekit.data.DataProvidersManager): ...
     def addDefaultEOP1980HistoryLoaders(self, string: str, string2: str, string3: str, string4: str, string5: str, string6: str, supplier: typing.Union[java.util.function.Supplier[org.orekit.time.TimeScale], typing.Callable[[], org.orekit.time.TimeScale]]) -> None: ...
     def addDefaultEOP2000HistoryLoaders(self, string: str, string2: str, string3: str, string4: str, string5: str, string6: str, supplier: typing.Union[java.util.function.Supplier[org.orekit.time.TimeScale], typing.Callable[[], org.orekit.time.TimeScale]]) -> None: ...
-    def addEOPHistoryLoader(self, iERSConventions: org.orekit.utils.IERSConventions, eopHistoryLoader: EopHistoryLoader) -> None:
+    def addEOPHistoryLoader(self, iERSConventions: org.orekit.utils.IERSConventions, eopHistoryLoader: typing.Union[EopHistoryLoader, typing.Callable]) -> None:
         """
             Add a loader for Earth Orientation Parameters history.
         
@@ -1663,9 +1664,9 @@ class LazyLoadedEop:
         """
         ...
 
-class OrphanFrame(java.io.Serializable):
+class OrphanFrame:
     """
-    public class OrphanFrame extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public class OrphanFrame extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Prototype frame that can be built from leaf to roots and later attached to a tree.
     
@@ -1680,9 +1681,6 @@ class OrphanFrame(java.io.Serializable):
     
         Since:
             6.0
-    
-        Also see:
-            :meth:`~serialized`
     """
     def __init__(self, string: str): ...
     @typing.overload
@@ -1887,7 +1885,7 @@ class Predefined(java.lang.Enum['Predefined']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['Predefined']:
+    def values() -> typing.MutableSequence['Predefined']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1940,10 +1938,7 @@ class SingleParameterFitter(java.io.Serializable):
     
     
     """
-    @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, int: int, doubleArray: typing.List[float]): ...
-    @typing.overload
-    def __init__(self, double: float, double2: float, int: int, doubleArray: typing.List[float]): ...
+    def __init__(self, double: float, double2: float, int: int, *double3: float): ...
     @staticmethod
     def createDefaultDut1FitterLongTermPrediction() -> 'SingleParameterFitter':
         """
@@ -2388,9 +2383,9 @@ class TransformGenerator(org.orekit.utils.TimeStampedGenerator['Transform']):
     def __init__(self, int: int, transformProvider: 'TransformProvider', double: float): ...
     def generate(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> java.util.List['Transform']: ...
 
-class TransformProvider(java.io.Serializable):
+class TransformProvider:
     """
-    public interface TransformProvider extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public interface TransformProvider
     
         Interface for Transform providers.
     
@@ -2596,9 +2591,6 @@ class CR3BPRotatingFrame(Frame):
     
         Since:
             10.2
-    
-        Also see:
-            :meth:`~serialized`
     """
     def __init__(self, double: float, celestialBody: org.orekit.bodies.CelestialBody, celestialBody2: org.orekit.bodies.CelestialBody): ...
 
@@ -2655,9 +2647,6 @@ class EclipticProvider(TransformProvider):
     
         Since:
             7.0
-    
-        Also see:
-            :meth:`~serialized`
     """
     @typing.overload
     def __init__(self, iERSConventions: org.orekit.utils.IERSConventions): ...
@@ -2705,9 +2694,6 @@ class FactoryManagedFrame(Frame):
     public class FactoryManagedFrame extends :class:`~org.orekit.frames.Frame`
     
         Base class for the predefined frames that are managed by :class:`~org.orekit.frames.Frames`.
-    
-        Also see:
-            :meth:`~serialized`
     """
     def __init__(self, frame: Frame, transformProvider: TransformProvider, boolean: bool, predefined: Predefined): ...
     def getFactoryKey(self) -> Predefined:
@@ -2808,7 +2794,7 @@ class FieldKinematicTransform(FieldStaticTransform[_FieldKinematicTransform__T],
         """
         ...
     def getInverse(self) -> 'FieldKinematicTransform'[_FieldKinematicTransform__T]: ...
-    def getPVJacobian(self) -> typing.List[typing.List[_FieldKinematicTransform__T]]:
+    def getPVJacobian(self) -> typing.MutableSequence[typing.MutableSequence[_FieldKinematicTransform__T]]:
         """
             Compute the Jacobian of the :meth:`~org.orekit.frames.FieldKinematicTransform.transformOnlyPV` (FieldPVCoordinates)}
             method of the transform.
@@ -2932,9 +2918,6 @@ class FixedTransformProvider(TransformProvider):
     public class FixedTransformProvider extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.TransformProvider`
     
         Transform provider using fixed transform.
-    
-        Also see:
-            :meth:`~serialized`
     """
     def __init__(self, transform: 'Transform'): ...
     _getTransform_0__T = typing.TypeVar('_getTransform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -2989,9 +2972,6 @@ class HelmertTransformation(TransformProvider):
     
         Since:
             5.1
-    
-        Also see:
-            :meth:`~serialized`
     """
     def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, double9: float, double10: float, double11: float, double12: float): ...
     def getEpoch(self) -> org.orekit.time.AbsoluteDate:
@@ -3137,7 +3117,7 @@ class HelmertTransformation(TransformProvider):
         @staticmethod
         def valueOf(string: str) -> 'HelmertTransformation.Predefined': ...
         @staticmethod
-        def values() -> typing.List['HelmertTransformation.Predefined']: ...
+        def values() -> typing.MutableSequence['HelmertTransformation.Predefined']: ...
 
 class ITRFVersion(java.lang.Enum['ITRFVersion']):
     """
@@ -3273,7 +3253,7 @@ class ITRFVersion(java.lang.Enum['ITRFVersion']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['ITRFVersion']:
+    def values() -> typing.MutableSequence['ITRFVersion']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -3384,8 +3364,7 @@ class InterpolatingTransformProvider(TransformProvider):
         added appropriately by the interpolation process.
     
         Also see:
-            :class:`~org.orekit.utils.GenericTimeStampedCache`, :class:`~org.orekit.frames.ShiftingTransformProvider`,
-            :meth:`~serialized`
+            :class:`~org.orekit.utils.GenericTimeStampedCache`, :class:`~org.orekit.frames.ShiftingTransformProvider`
     """
     def __init__(self, transformProvider: TransformProvider, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, int: int, double: float, int2: int, double2: float, double3: float): ...
     def getGridPoints(self) -> int:
@@ -3543,7 +3522,7 @@ class KinematicTransform(StaticTransform):
         
         """
         ...
-    def getPVJacobian(self) -> typing.List[typing.List[float]]:
+    def getPVJacobian(self) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
             Compute the Jacobian of the :meth:`~org.orekit.frames.KinematicTransform.transformOnlyPV` (PVCoordinates)} method of the
             transform.
@@ -3697,9 +3676,6 @@ class L1Frame(Frame):
     
         Class to create a L1 centered frame with :class:`~org.orekit.frames.L1TransformProvider`. Parent frame is always set as
         primaryBody.getInertiallyOrientedFrame()
-    
-        Also see:
-            :meth:`~serialized`
     """
     def __init__(self, celestialBody: org.orekit.bodies.CelestialBody, celestialBody2: org.orekit.bodies.CelestialBody): ...
 
@@ -3708,9 +3684,6 @@ class L1TransformProvider(TransformProvider):
     public class L1TransformProvider extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.TransformProvider`
     
         L1 Transform provider for a frame on the L1 Lagrange point of two celestial bodies.
-    
-        Also see:
-            :meth:`~serialized`
     """
     def __init__(self, celestialBody: org.orekit.bodies.CelestialBody, celestialBody2: org.orekit.bodies.CelestialBody): ...
     _getStaticTransform_0__T = typing.TypeVar('_getStaticTransform_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -3796,9 +3769,6 @@ class L2Frame(Frame):
     
         Class to create a L2 centered frame with :code:`L2TransformProvider`. Parent frame is always set as
         primaryBody.getInertiallyOrientedFrame()
-    
-        Also see:
-            :meth:`~serialized`
     """
     def __init__(self, celestialBody: org.orekit.bodies.CelestialBody, celestialBody2: org.orekit.bodies.CelestialBody): ...
 
@@ -3823,6 +3793,8 @@ class LOFType(java.lang.Enum['LOFType'], LOF):
     EQW: typing.ClassVar['LOFType'] = ...
     NTW: typing.ClassVar['LOFType'] = ...
     NTW_INERTIAL: typing.ClassVar['LOFType'] = ...
+    ENU: typing.ClassVar['LOFType'] = ...
+    NED: typing.ClassVar['LOFType'] = ...
     def getName(self) -> str:
         """
             Get name of the local orbital frame.
@@ -3998,7 +3970,7 @@ class LOFType(java.lang.Enum['LOFType'], LOF):
         """
         ...
     @staticmethod
-    def values() -> typing.List['LOFType']:
+    def values() -> typing.MutableSequence['LOFType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -4132,7 +4104,7 @@ class LocalMagneticFieldFrame(LOF):
         @staticmethod
         def valueOf(string: str) -> 'LocalMagneticFieldFrame.LOFBuilderVector': ...
         @staticmethod
-        def values() -> typing.List['LocalMagneticFieldFrame.LOFBuilderVector']: ...
+        def values() -> typing.MutableSequence['LocalMagneticFieldFrame.LOFBuilderVector']: ...
 
 class LocalOrbitalFrame(Frame):
     """
@@ -4146,13 +4118,13 @@ class LocalOrbitalFrame(Frame):
         Do not use the :meth:`~org.orekit.frames.Frame.getTransformTo` method as it is not implemented.
     
         Also see:
-            :meth:`~org.orekit.propagation.SpacecraftState.toTransform`, :meth:`~serialized`
+            :meth:`~org.orekit.propagation.SpacecraftState.toTransform`
     """
-    def __init__(self, frame: Frame, lOF: LOF, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, string: str): ...
+    def __init__(self, frame: Frame, lOF: LOF, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], string: str): ...
 
-class PredictedEOPHistory(EOPHistory, java.io.Serializable):
+class PredictedEOPHistory(EOPHistory):
     """
-    public class PredictedEOPHistory extends :class:`~org.orekit.frames.EOPHistory` implements :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public class PredictedEOPHistory extends :class:`~org.orekit.frames.EOPHistory`
     
         This class extends an :class:`~org.orekit.frames.EOPHistory` for some weeks using fitting.
     
@@ -4169,7 +4141,7 @@ class PredictedEOPHistory(EOPHistory, java.io.Serializable):
             12.0
     
         Also see:
-            :class:`~org.orekit.frames.EOPFitter`, :class:`~org.orekit.utils.SecularAndHarmonic`, :meth:`~serialized`
+            :class:`~org.orekit.frames.EOPFitter`, :class:`~org.orekit.utils.SecularAndHarmonic`
     """
     def __init__(self, eOPHistory: EOPHistory, double: float, eOPFitter: EOPFitter): ...
 
@@ -4487,10 +4459,6 @@ class PythonStaticTransform(StaticTransform):
 class PythonTransformProvider(TransformProvider):
     """
     public class PythonTransformProvider extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.TransformProvider`
-    
-    
-        Also see:
-            :meth:`~serialized`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -4560,8 +4528,7 @@ class ShiftingTransformProvider(TransformProvider):
             7.1
     
         Also see:
-            :class:`~org.orekit.utils.GenericTimeStampedCache`, :class:`~org.orekit.frames.InterpolatingTransformProvider`,
-            :meth:`~serialized`
+            :class:`~org.orekit.utils.GenericTimeStampedCache`, :class:`~org.orekit.frames.InterpolatingTransformProvider`
     """
     def __init__(self, transformProvider: TransformProvider, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, int: int, double: float, int2: int, double2: float, double3: float): ...
     def getGridPoints(self) -> int:
@@ -4685,10 +4652,6 @@ class TopocentricFrame(Frame, org.orekit.utils.PVCoordinatesProvider):
           - X axis in the local horizontal plane (normal to zenith direction) and following the local parallel towards East
           - Y axis in the horizontal plane (normal to zenith direction) and following the local meridian towards North
           - Z axis towards Zenith direction
-    
-    
-        Also see:
-            :meth:`~serialized`
     """
     def __init__(self, bodyShape: org.orekit.bodies.BodyShape, geodeticPoint: org.orekit.bodies.GeodeticPoint, string: str): ...
     def computeLimitVisibilityPoint(self, double: float, double2: float, double3: float) -> org.orekit.bodies.GeodeticPoint:
@@ -5134,9 +5097,6 @@ class TwoBodiesBaryFrame(Frame):
     
         Since:
             10.2
-    
-        Also see:
-            :meth:`~serialized`
     """
     def __init__(self, celestialBody: org.orekit.bodies.CelestialBody, celestialBody2: org.orekit.bodies.CelestialBody): ...
 
@@ -5170,9 +5130,6 @@ class UpdatableFrame(Frame):
         In order to implement the above case, the satellite frame is defined as an instance of this class and its
         :meth:`~org.orekit.frames.UpdatableFrame.updateTransform` would be called each time we want to adjust the frame, i.e.
         each time we get a new measurement between the two antennas.
-    
-        Also see:
-            :meth:`~serialized`
     """
     @typing.overload
     def __init__(self, frame: Frame, transform: 'Transform', string: str): ...
@@ -5238,9 +5195,6 @@ class VersionedITRF(Frame):
     
         Since:
             9.2
-    
-        Also see:
-            :meth:`~serialized`
     """
     def getITRFVersion(self) -> ITRFVersion:
         """
@@ -5379,7 +5333,7 @@ class FieldTransform(org.orekit.time.FieldTimeShiftable['FieldTransform'[_FieldT
         """
         ...
     def getInverse(self) -> 'FieldTransform'[_FieldTransform__T]: ...
-    def getJacobian(self, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, tArray: typing.List[typing.List[_FieldTransform__T]]) -> None:
+    def getJacobian(self, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, tArray: typing.Union[typing.List[typing.MutableSequence[_FieldTransform__T]], jpype.JArray]) -> None:
         """
             Compute the Jacobian of the :meth:`~org.orekit.frames.FieldTransform.transformPVCoordinates` method of the transform.
         
@@ -5410,13 +5364,15 @@ class FieldTransform(org.orekit.time.FieldTimeShiftable['FieldTransform'[_FieldT
     _interpolate_2__T = typing.TypeVar('_interpolate_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def interpolate(fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_interpolate_0__T], collection: typing.Union[java.util.Collection['FieldTransform'[_interpolate_0__T]], typing.Sequence['FieldTransform'[_interpolate_0__T]]]) -> 'FieldTransform'[_interpolate_0__T]: ...
+    def interpolate(fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_interpolate_0__T], collection: typing.Union[java.util.Collection['FieldTransform'[_interpolate_0__T]], typing.Sequence['FieldTransform'[_interpolate_0__T]], typing.Set['FieldTransform'[_interpolate_0__T]]]) -> 'FieldTransform'[_interpolate_0__T]: ...
     @typing.overload
     @staticmethod
-    def interpolate(fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_interpolate_1__T], cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, collection: typing.Union[java.util.Collection['FieldTransform'[_interpolate_1__T]], typing.Sequence['FieldTransform'[_interpolate_1__T]]]) -> 'FieldTransform'[_interpolate_1__T]: ...
+    def interpolate(fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_interpolate_1__T], cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, collection: typing.Union[java.util.Collection['FieldTransform'[_interpolate_1__T]], typing.Sequence['FieldTransform'[_interpolate_1__T]], typing.Set['FieldTransform'[_interpolate_1__T]]]) -> 'FieldTransform'[_interpolate_1__T]: ...
     @typing.overload
     @staticmethod
     def interpolate(fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_interpolate_2__T], cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, stream: java.util.stream.Stream['FieldTransform'[_interpolate_2__T]]) -> 'FieldTransform'[_interpolate_2__T]: ...
+    @typing.overload
+    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> _FieldTransform__T: ...
     @typing.overload
     def shiftedBy(self, double: float) -> 'FieldTransform'[_FieldTransform__T]: ...
     @typing.overload
@@ -5444,9 +5400,6 @@ class GTODProvider(EOPBasedTransformProvider):
         Its parent frame is the :code:`TODProvider`.
     
         The pole motion is not applied here.
-    
-        Also see:
-            :meth:`~serialized`
     """
     def getEOPHistory(self) -> EOPHistory:
         """
@@ -5674,7 +5627,7 @@ class LazyLoadedFrames(AbstractFrames):
         
         """
         ...
-    def addEOPHistoryLoader(self, iERSConventions: org.orekit.utils.IERSConventions, eopHistoryLoader: EopHistoryLoader) -> None:
+    def addEOPHistoryLoader(self, iERSConventions: org.orekit.utils.IERSConventions, eopHistoryLoader: typing.Union[EopHistoryLoader, typing.Callable]) -> None:
         """
             Add a loader for Earth Orientation Parameters history.
         
@@ -5782,10 +5735,6 @@ class PythonAbstractFrames(AbstractFrames):
 class PythonEOPBasedTransformProvider(EOPBasedTransformProvider):
     """
     public class PythonEOPBasedTransformProvider extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.EOPBasedTransformProvider`
-    
-    
-        Also see:
-            :meth:`~serialized`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -6047,9 +5996,9 @@ class PythonKinematicTransform(KinematicTransform):
         """
         ...
 
-class Transform(org.orekit.time.TimeShiftable['Transform'], java.io.Serializable, KinematicTransform):
+class Transform(org.orekit.time.TimeShiftable['Transform'], KinematicTransform):
     """
-    public class Transform extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.frames.Transform`>, :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.orekit.frames.KinematicTransform`
+    public class Transform extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.frames.Transform`>, :class:`~org.orekit.frames.KinematicTransform`
     
         Transformation class in three dimensional space.
     
@@ -6111,10 +6060,6 @@ class Transform(org.orekit.time.TimeShiftable['Transform'], java.io.Serializable
          Transform R1toR2 = new Transform(rotation, rotationRate);
         
          PVB = R1toR2.transformPVCoordinates(PVA);
-         
-    
-        Also see:
-            :meth:`~serialized`
     """
     IDENTITY: typing.ClassVar['Transform'] = ...
     """
@@ -6234,7 +6179,7 @@ class Transform(org.orekit.time.TimeShiftable['Transform'], java.io.Serializable
         
         """
         ...
-    def getJacobian(self, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, doubleArray: typing.List[typing.List[float]]) -> None:
+    def getJacobian(self, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> None:
         """
             Compute the Jacobian of the :meth:`~org.orekit.frames.Transform.transformPVCoordinates` method of the transform.
         
@@ -6359,7 +6304,8 @@ class Transform(org.orekit.time.TimeShiftable['Transform'], java.io.Serializable
     def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, stream: java.util.stream.Stream['Transform']) -> 'Transform': ...
     @typing.overload
     @staticmethod
-    def interpolate(absoluteDate: org.orekit.time.AbsoluteDate, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, collection: typing.Union[java.util.Collection['Transform'], typing.Sequence['Transform']]) -> 'Transform': ...
+    def interpolate(absoluteDate: org.orekit.time.AbsoluteDate, cartesianDerivativesFilter: org.orekit.utils.CartesianDerivativesFilter, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, collection: typing.Union[java.util.Collection['Transform'], typing.Sequence['Transform'], typing.Set['Transform']]) -> 'Transform': ...
+    @typing.overload
     def shiftedBy(self, double: float) -> 'Transform':
         """
             Get a time-shifted instance.
@@ -6373,9 +6319,22 @@ class Transform(org.orekit.time.TimeShiftable['Transform'], java.io.Serializable
             Returns:
                 a new instance, shifted with respect to instance (which is not changed)
         
+            Get a time-shifted instance.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeShiftable.shiftedBy` in interface :class:`~org.orekit.time.TimeShiftable`
+        
+            Parameters:
+                dt (:class:`~org.orekit.time.TimeOffset`): time shift
+        
+            Returns:
+                a new instance, shifted with respect to instance (which is not changed)
+        
         
         """
         ...
+    @typing.overload
+    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> 'Transform': ...
     def staticShiftedBy(self, double: float) -> StaticTransform:
         """
             Shift the transform in time considering all rates, then return only the translation and rotation portion of the
@@ -6480,7 +6439,7 @@ class PythonAbstractEopParser(org.orekit.frames.AbstractEopParser):
     """
     public class PythonAbstractEopParser extends :class:`~org.orekit.frames.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     """
-    def __init__(self, nutationCorrectionConverter: org.orekit.utils.IERSConventions.NutationCorrectionConverter, itrfVersionProvider: ItrfVersionProvider, timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, nutationCorrectionConverter: org.orekit.utils.IERSConventions.NutationCorrectionConverter, itrfVersionProvider: typing.Union[ItrfVersionProvider, typing.Callable], timeScale: org.orekit.time.TimeScale): ...
     def finalize(self) -> None: ...
     def parse(self, inputStream: java.io.InputStream, string: str) -> java.util.Collection[EOPEntry]: ...
     def pythonDecRef(self) -> None:
@@ -6506,7 +6465,7 @@ class PythonAbstractEopParser(org.orekit.frames.AbstractEopParser):
 class AbstractEopParser: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.frames")``.
 
     AbstractEopLoader: typing.Type[AbstractEopLoader]
@@ -6573,5 +6532,4 @@ class __module_protocol__(typing.Protocol):
     TwoBodiesBaryFrame: typing.Type[TwoBodiesBaryFrame]
     UpdatableFrame: typing.Type[UpdatableFrame]
     VersionedITRF: typing.Type[VersionedITRF]
-    class-use: org.orekit.frames.class-use.__module_protocol__
     encounter: org.orekit.frames.encounter.__module_protocol__

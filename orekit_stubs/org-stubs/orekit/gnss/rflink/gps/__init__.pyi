@@ -1,5 +1,11 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import org.orekit.gnss.metric.parser
-import org.orekit.gnss.rflink.gps.class-use
 import typing
 
 
@@ -122,7 +128,7 @@ class SubFrame:
         """
         ...
     @staticmethod
-    def parse(encodedMessage: org.orekit.gnss.metric.parser.EncodedMessage) -> 'SubFrame':
+    def parse(encodedMessage: typing.Union[org.orekit.gnss.metric.parser.EncodedMessage, typing.Callable]) -> 'SubFrame':
         """
             Builder for sub-frames.
         
@@ -1312,7 +1318,7 @@ class SubFrame4A1(SubFrame4A):
     ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.gnss.rflink.gps")``.
 
     SubFrame: typing.Type[SubFrame]
@@ -1330,4 +1336,3 @@ class __module_protocol__(typing.Protocol):
     SubFrame5B: typing.Type[SubFrame5B]
     SubFrameAlmanac: typing.Type[SubFrameAlmanac]
     SubFrameDummyAlmanac: typing.Type[SubFrameDummyAlmanac]
-    class-use: org.orekit.gnss.rflink.gps.class-use.__module_protocol__

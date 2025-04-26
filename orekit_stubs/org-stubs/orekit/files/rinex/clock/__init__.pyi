@@ -1,10 +1,16 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.io
 import java.lang
 import java.util
 import java.util.function
 import org.orekit.data
 import org.orekit.files.rinex
-import org.orekit.files.rinex.clock.class-use
 import org.orekit.frames
 import org.orekit.gnss
 import org.orekit.time
@@ -25,7 +31,7 @@ class RinexClock:
         Some fields might be null after parsing. It is expected because of the numerous kind of data that can be stored in clock
         data file.
     
-        Caution, files with missing information in header can lead to wrong data dates and station positions. It is adviced to
+        Caution, files with missing information in header can lead to wrong data dates and station positions. It is advised to
         check the correctness and format compliance of the clock file to be parsed. Some values such as file time scale still
         can be set by user.
     
@@ -33,9 +39,9 @@ class RinexClock:
             11.0
     
         Also see:
-            :class:`~org.orekit.files.rinex.clock.ftp:.igs.org.pub.data.format.rinex_clock300.txt`,
-            :class:`~org.orekit.files.rinex.clock.ftp:.igs.org.pub.data.format.rinex_clock302.txt`,
-            :class:`~org.orekit.files.rinex.clock.ftp:.igs.org.pub.data.format.rinex_clock304.txt`
+            :class:`~org.orekit.files.rinex.clock.https:.files.igs.org.pub.data.format.rinex_clock300.txt`,
+            :class:`~org.orekit.files.rinex.clock.https:.files.igs.org.pub.data.format.rinex_clock302.txt`,
+            :class:`~org.orekit.files.rinex.clock.https:.files.igs.org.pub.data.format.rinex_clock304.txt`
     """
     def __init__(self, function: typing.Union[java.util.function.Function[str, org.orekit.frames.Frame], typing.Callable[[str], org.orekit.frames.Frame]]): ...
     def addAppliedDCBS(self, appliedDCBS: org.orekit.files.rinex.AppliedDCBS) -> None:
@@ -608,7 +614,7 @@ class RinexClock:
         """
         ...
     @staticmethod
-    def splice(collection: typing.Union[java.util.Collection['RinexClock'], typing.Sequence['RinexClock']], double: float) -> 'RinexClock': ...
+    def splice(collection: typing.Union[java.util.Collection['RinexClock'], typing.Sequence['RinexClock'], typing.Set['RinexClock']], double: float) -> 'RinexClock': ...
     class ClockDataLine:
         def __init__(self, rinexClock: 'RinexClock', clockDataType: 'RinexClock.ClockDataType', string: str, dateComponents: org.orekit.time.DateComponents, timeComponents: org.orekit.time.TimeComponents, int: int, double: float, double2: float, double3: float, double4: float, double5: float, double6: float): ...
         def getClockAcceleration(self) -> float: ...
@@ -641,7 +647,7 @@ class RinexClock:
         @staticmethod
         def valueOf(string: str) -> 'RinexClock.ClockDataType': ...
         @staticmethod
-        def values() -> typing.List['RinexClock.ClockDataType']: ...
+        def values() -> typing.MutableSequence['RinexClock.ClockDataType']: ...
     class Receiver:
         def __init__(self, string: str, string2: str, double: float, double2: float, double3: float): ...
         def getDesignator(self) -> str: ...
@@ -685,7 +691,7 @@ class RinexClockParser:
     @typing.overload
     def __init__(self, function: typing.Union[java.util.function.Function[str, org.orekit.frames.Frame], typing.Callable[[str], org.orekit.frames.Frame]]): ...
     @typing.overload
-    def __init__(self, function: typing.Union[java.util.function.Function[str, org.orekit.frames.Frame], typing.Callable[[str], org.orekit.frames.Frame]], timeScales: org.orekit.time.TimeScales): ...
+    def __init__(self, function: typing.Union[java.util.function.Function[str, org.orekit.frames.Frame], typing.Callable[[str], org.orekit.frames.Frame]], function2: typing.Union[java.util.function.Function[str, org.orekit.gnss.ObservationType], typing.Callable[[str], org.orekit.gnss.ObservationType]], timeScales: org.orekit.time.TimeScales): ...
     @typing.overload
     def parse(self, bufferedReader: java.io.BufferedReader, string: str) -> RinexClock:
         """
@@ -764,9 +770,8 @@ class RinexClockParser:
     def parse(self, dataSource: org.orekit.data.DataSource) -> RinexClock: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.rinex.clock")``.
 
     RinexClock: typing.Type[RinexClock]
     RinexClockParser: typing.Type[RinexClockParser]
-    class-use: org.orekit.files.rinex.clock.class-use.__module_protocol__

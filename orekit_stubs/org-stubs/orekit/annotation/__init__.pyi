@@ -1,5 +1,11 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang.annotation
-import org.orekit.annotation.class-use
 import typing
 
 
@@ -19,8 +25,7 @@ class DefaultDataContext(java.lang.annotation.Annotation):
     def toString(self) -> str: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.annotation")``.
 
     DefaultDataContext: typing.Type[DefaultDataContext]
-    class-use: org.orekit.annotation.class-use.__module_protocol__

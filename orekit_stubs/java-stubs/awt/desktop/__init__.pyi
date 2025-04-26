@@ -1,3 +1,10 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.io
 import java.lang
 import java.net
@@ -42,7 +49,7 @@ class QuitStrategy(java.lang.Enum['QuitStrategy']):
     @staticmethod
     def valueOf(class_: typing.Type[_valueOf_1__T], string: str) -> _valueOf_1__T: ...
     @staticmethod
-    def values() -> typing.List['QuitStrategy']: ...
+    def values() -> typing.MutableSequence['QuitStrategy']: ...
 
 class SystemEventListener(java.util.EventListener): ...
 
@@ -112,7 +119,7 @@ class UserSessionEvent(AppEvent):
         @staticmethod
         def valueOf(class_: typing.Type[_valueOf_1__T], string: str) -> _valueOf_1__T: ...
         @staticmethod
-        def values() -> typing.List['UserSessionEvent.Reason']: ...
+        def values() -> typing.MutableSequence['UserSessionEvent.Reason']: ...
 
 class UserSessionListener(SystemEventListener):
     def userSessionActivated(self, userSessionEvent: UserSessionEvent) -> None: ...
@@ -126,7 +133,7 @@ class PrintFilesEvent(FilesEvent):
     def __init__(self, list: java.util.List[typing.Union[java.io.File, jpype.protocol.SupportsPath]]): ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("java.awt.desktop")``.
 
     AboutEvent: typing.Type[AboutEvent]

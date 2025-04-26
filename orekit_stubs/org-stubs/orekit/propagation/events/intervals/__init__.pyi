@@ -1,24 +1,92 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
+import org.hipparchus
 import org.orekit.frames
-import org.orekit.propagation.events
-import org.orekit.propagation.events.intervals.class-use
+import org.orekit.propagation
+import org.orekit.time
 import typing
 
 
+
+class AdaptableInterval:
+    """
+    :class:`~org.orekit.propagation.events.intervals.https:.docs.oracle.com.javase.8.docs.api.java.lang.FunctionalInterface?is` public interface AdaptableInterval
+    
+        This interface represents an event checking interval that depends on state.
+    
+        Since:
+            12.0
+    
+        Also see:
+            :class:`~org.orekit.propagation.events.EventDetector`
+    """
+    def currentInterval(self, spacecraftState: org.orekit.propagation.SpacecraftState, boolean: bool) -> float:
+        """
+            Get the current value of maximal time interval between events handler checks.
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): current state
+                isForward (boolean): direction of propagation
+        
+            Returns:
+                current value of maximal time interval between events handler checks
+        
+        
+        """
+        ...
+    @typing.overload
+    @staticmethod
+    def of(double: float) -> 'AdaptableInterval':
+        """
+            Method creating a constant interval provider.
+        
+            Parameters:
+                constantInterval (double): value of constant interval
+        
+            Returns:
+                adaptable interval ready to be added to an event detector
+        
+            Since:
+                12.1
+        
+            Method creating an interval taking the minimum value of all candidates.
+        
+            Parameters:
+                defaultMaxCheck (double): default value if no intervals is given as input
+                adaptableIntervals (:class:`~org.orekit.propagation.events.intervals.AdaptableInterval`...): intervals
+        
+            Returns:
+                adaptable interval ready to be added to an event detector
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
+    @typing.overload
+    @staticmethod
+    def of(double: float, *adaptableInterval: typing.Union['AdaptableInterval', typing.Callable]) -> 'AdaptableInterval': ...
 
 class ApsideDetectionAdaptableIntervalFactory:
     """
     public class ApsideDetectionAdaptableIntervalFactory extends :class:`~org.orekit.propagation.events.intervals.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
-        Factory class for :class:`~org.orekit.propagation.events.AdaptableInterval` suitable for apside detection on eccentric
-        orbits. It requires :class:`~org.orekit.propagation.SpacecraftState` to be based on :class:`~org.orekit.orbits.Orbit` in
-        order to work.
+        Factory class for :class:`~org.orekit.propagation.events.intervals.AdaptableInterval` suitable for apside detection on
+        eccentric orbits. It requires :class:`~org.orekit.propagation.SpacecraftState` to be based on
+        :class:`~org.orekit.orbits.Orbit` in order to work.
     
         Since:
             12.1
     
         Also see:
-            :class:`~org.orekit.propagation.events.AdaptableInterval`, :class:`~org.orekit.propagation.events.ApsideDetector`,
-            :class:`~org.orekit.propagation.events.EventSlopeFilter`
+            :class:`~org.orekit.propagation.events.intervals.AdaptableInterval`,
+            :class:`~org.orekit.propagation.events.ApsideDetector`, :class:`~org.orekit.propagation.events.EventSlopeFilter`
     """
     @staticmethod
     def computeKeplerianDurationFromPreviousApoapsis(double: float, double2: float) -> float:
@@ -51,73 +119,133 @@ class ApsideDetectionAdaptableIntervalFactory:
         """
         ...
     @staticmethod
-    def getBackwardApoapsisDetectionAdaptableInterval() -> org.orekit.propagation.events.AdaptableInterval:
+    def getApoapsisDetectionAdaptableInterval() -> AdaptableInterval:
         """
-            Method providing a candidate :class:`~org.orekit.propagation.events.AdaptableInterval` for apoapsis detection with
-            backward propagation. It uses a Keplerian, eccentric approximation.
+            Method providing a candidate :class:`~org.orekit.propagation.events.intervals.AdaptableInterval` for apoapsis detection.
+            It uses a Keplerian, eccentric approximation.
         
             Returns:
-                adaptable interval for backward apoapsis detection
+                adaptable interval for apoapsis detection
         
         
         """
         ...
     @staticmethod
-    def getBackwardApsideDetectionAdaptableInterval() -> org.orekit.propagation.events.AdaptableInterval:
+    def getApsideDetectionAdaptableInterval() -> AdaptableInterval:
         """
-            Method providing a candidate :class:`~org.orekit.propagation.events.AdaptableInterval` for arbitrary apside detection
-            with backward propagation. It uses a Keplerian, eccentric approximation.
+            Method providing a candidate :class:`~org.orekit.propagation.events.intervals.AdaptableInterval` for arbitrary apside
+            detection. It uses a Keplerian, eccentric approximation.
         
             Returns:
-                adaptable interval for backward apside detection
+                adaptable interval for apside detection
         
         
         """
         ...
     @staticmethod
-    def getBackwardPeriapsisDetectionAdaptableInterval() -> org.orekit.propagation.events.AdaptableInterval:
+    def getPeriapsisDetectionAdaptableInterval() -> AdaptableInterval:
         """
-            Method providing a candidate :class:`~org.orekit.propagation.events.AdaptableInterval` for periapsis detection with
-            backward propagation. It uses a Keplerian, eccentric approximation.
+            Method providing a candidate :class:`~org.orekit.propagation.events.intervals.AdaptableInterval` for periapsis
+            detection. It uses a Keplerian, eccentric approximation.
         
             Returns:
-                adaptable interval for backward periaspsis detection
+                adaptable interval for periaspsis detection
+        
+        
+        """
+        ...
+
+class DateDetectionAdaptableIntervalFactory:
+    """
+    public class DateDetectionAdaptableIntervalFactory extends :class:`~org.orekit.propagation.events.intervals.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Factory for adaptable interval tuned for date(s) detection.
+    
+        Since:
+            13.0
+    
+        Also see:
+            :class:`~org.orekit.propagation.events.DateDetector`, :class:`~org.orekit.propagation.events.FieldDateDetector`
+    """
+    DEFAULT_MAX_CHECK: typing.ClassVar[float] = ...
+    """
+    public static final double DEFAULT_MAX_CHECK
+    
+        Default value for max check.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    @staticmethod
+    def getDatesDetectionConstantInterval(*timeStamped: typing.Union[org.orekit.time.TimeStamped, typing.Callable]) -> AdaptableInterval:
+        """
+            Return a candidate :class:`~org.orekit.propagation.events.intervals.AdaptableInterval` for multiple dates detection with
+            a constant max. check.
+        
+            Parameters:
+                timeStampeds (:class:`~org.orekit.time.TimeStamped`...): event dates
+        
+            Returns:
+                adaptable interval
+        
+        
+        """
+        ...
+    _getDatesDetectionFieldConstantInterval__T = typing.TypeVar('_getDatesDetectionFieldConstantInterval__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @staticmethod
+    def getDatesDetectionFieldConstantInterval(*fieldTimeStamped: typing.Union[org.orekit.time.FieldTimeStamped[_getDatesDetectionFieldConstantInterval__T], typing.Callable[[], org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement]]]) -> 'FieldAdaptableInterval'[_getDatesDetectionFieldConstantInterval__T]: ...
+    _getDatesDetectionFieldInterval__T = typing.TypeVar('_getDatesDetectionFieldInterval__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @staticmethod
+    def getDatesDetectionFieldInterval(*fieldTimeStamped: typing.Union[org.orekit.time.FieldTimeStamped[_getDatesDetectionFieldInterval__T], typing.Callable[[], org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement]]]) -> 'FieldAdaptableInterval'[_getDatesDetectionFieldInterval__T]: ...
+    @staticmethod
+    def getDatesDetectionInterval(*timeStamped: typing.Union[org.orekit.time.TimeStamped, typing.Callable]) -> AdaptableInterval:
+        """
+            Return a candidate :class:`~org.orekit.propagation.events.intervals.AdaptableInterval` for multiple dates detection.
+        
+            Parameters:
+                timeStampeds (:class:`~org.orekit.time.TimeStamped`...): event dates
+        
+            Returns:
+                adaptable interval
         
         
         """
         ...
     @staticmethod
-    def getForwardApoapsisDetectionAdaptableInterval() -> org.orekit.propagation.events.AdaptableInterval:
+    def getMinGap(*timeStamped: typing.Union[org.orekit.time.TimeStamped, typing.Callable]) -> float:
         """
-            Method providing a candidate :class:`~org.orekit.propagation.events.AdaptableInterval` for apoapsis detection with
-            forward propagation. It uses a Keplerian, eccentric approximation.
+            Compute min. gap between dated objects if applicable. It ignores duplicates.
+        
+            Parameters:
+                timeStampeds (:class:`~org.orekit.time.TimeStamped`...): time stamped objects
         
             Returns:
-                adaptable interval for forward apoapsis detection
+                minimum gap
         
         
         """
         ...
     @staticmethod
-    def getForwardApsideDetectionAdaptableInterval() -> org.orekit.propagation.events.AdaptableInterval:
+    def getSingleDateDetectionAdaptableInterval() -> AdaptableInterval:
         """
-            Method providing a candidate :class:`~org.orekit.propagation.events.AdaptableInterval` for arbitrary apside detection
-            with forward propagation. It uses a Keplerian, eccentric approximation.
+            Return a candidate :class:`~org.orekit.propagation.events.intervals.AdaptableInterval` for single date detection.
         
             Returns:
-                adaptable interval for forward apside detection
+                adaptable interval
         
         
         """
         ...
+    _getSingleDateDetectionFieldAdaptableInterval__T = typing.TypeVar('_getSingleDateDetectionFieldAdaptableInterval__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @staticmethod
-    def getForwardPeriapsisDetectionAdaptableInterval() -> org.orekit.propagation.events.AdaptableInterval:
+    def getSingleDateDetectionFieldAdaptableInterval() -> 'FieldAdaptableInterval'[_getSingleDateDetectionFieldAdaptableInterval__T]:
         """
-            Method providing a candidate :class:`~org.orekit.propagation.events.AdaptableInterval` for periapsis detection with
-            forward propagation. It uses a Keplerian, eccentric approximation.
+            Return a candidate :class:`~org.orekit.propagation.events.intervals.FieldAdaptableInterval` for single date detection.
         
             Returns:
-                adaptable interval for forward periaspsis detection
+                adaptable interval
         
         
         """
@@ -127,48 +255,212 @@ class ElevationDetectionAdaptableIntervalFactory:
     """
     public class ElevationDetectionAdaptableIntervalFactory extends :class:`~org.orekit.propagation.events.intervals.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
-        Factory class for :class:`~org.orekit.propagation.events.AdaptableInterval` suitable for elevation detection on
-        eccentric orbits. It requires :class:`~org.orekit.propagation.SpacecraftState` to be based on
+        Factory class for :class:`~org.orekit.propagation.events.intervals.AdaptableInterval` suitable for elevation detection
+        on eccentric orbits. It requires :class:`~org.orekit.propagation.SpacecraftState` to be based on
         :class:`~org.orekit.orbits.Orbit` in order to work.
     
         Since:
             12.1
     
         Also see:
-            :class:`~org.orekit.propagation.events.AdaptableInterval`, :class:`~org.orekit.propagation.events.ApsideDetector`,
-            :class:`~org.orekit.propagation.events.EventSlopeFilter`
+            :class:`~org.orekit.propagation.events.intervals.AdaptableInterval`,
+            :class:`~org.orekit.propagation.events.ApsideDetector`, :class:`~org.orekit.propagation.events.EventSlopeFilter`
     """
-    DEFAULT_ELEVATION_SWITCH: typing.ClassVar[float] = ...
+    DEFAULT_ELEVATION_SWITCH_INF: typing.ClassVar[float] = ...
     """
-    public static final double DEFAULT_ELEVATION_SWITCH
+    public static final double DEFAULT_ELEVATION_SWITCH_INF
     
-        Default elevation abovde which interval should be switched to fine interval (-5°).
+        Default elevation above which interval should be switched to fine interval (-5°).
+    
+        Since:
+            13.0
+    
+    
+    """
+    DEFAULT_ELEVATION_SWITCH_SUP: typing.ClassVar[float] = ...
+    """
+    public static final double DEFAULT_ELEVATION_SWITCH_SUP
+    
+        Default elevation below which interval should be switched to fine interval (+15°).
+    
+        Since:
+            13.0
+    
     
     """
     @staticmethod
-    def getAdaptableInterval(topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, double2: float) -> org.orekit.propagation.events.AdaptableInterval:
+    def getAdaptableInterval(topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, double2: float, double3: float) -> AdaptableInterval:
         """
-            Method providing a candidate :class:`~org.orekit.propagation.events.AdaptableInterval` for arbitrary elevation detection
-            with forward propagation. It uses a Keplerian, eccentric approximation.
+            Method providing a candidate :class:`~org.orekit.propagation.events.intervals.AdaptableInterval` for arbitrary elevation
+            detection with forward propagation. It uses a Keplerian, eccentric approximation.
         
             Parameters:
                 topo (:class:`~org.orekit.frames.TopocentricFrame`): topocentric frame centered at ground interest point
-                elevationSwitch (double): elevation above which interval will switch to :code:`fineCheckInterval` (typically
-                    :meth:`~org.orekit.propagation.events.intervals.ElevationDetectionAdaptableIntervalFactory.DEFAULT_ELEVATION_SWITCH`
+                elevationSwitchInf (double): elevation above which interval will switch to :code:`fineCheckInterval` (typically
+                    :meth:`~org.orekit.propagation.events.intervals.ElevationDetectionAdaptableIntervalFactory.DEFAULT_ELEVATION_SWITCH_INF`
                     which is -5°)
-                fineCheckInterval (double): check interval to use when elevation is above :code:`elevationSwitch`
+                elevationSwitchSup (double): elevation below which interval will switch to :code:`fineCheckInterval` (typically
+                    :meth:`~org.orekit.propagation.events.intervals.ElevationDetectionAdaptableIntervalFactory.DEFAULT_ELEVATION_SWITCH_SUP`
+                    which is +15°)
+                fineCheckInterval (double): check interval to use when elevation is between :code:`elevationSwitchInf` and :code:`elevationSwitchSup`
         
             Returns:
                 adaptable interval for detection of elevation with respect to :code:`topo`
+        
+            Since:
+                13.0
         
         
         """
         ...
 
+_FieldAdaptableInterval__T = typing.TypeVar('_FieldAdaptableInterval__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldAdaptableInterval(typing.Generic[_FieldAdaptableInterval__T]):
+    """
+    :class:`~org.orekit.propagation.events.intervals.https:.docs.oracle.com.javase.8.docs.api.java.lang.FunctionalInterface?is` public interface FieldAdaptableInterval<T extends :class:`~org.orekit.propagation.events.intervals.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>>
+    
+        This interface represents an event checking interval that depends on state.
+    
+        Since:
+            12.0
+    
+        Also see:
+            :class:`~org.orekit.propagation.events.FieldEventDetector`
+    """
+    def currentInterval(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldAdaptableInterval__T], boolean: bool) -> float: ...
+    _of_0__T = typing.TypeVar('_of_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _of_1__T = typing.TypeVar('_of_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _of_2__T = typing.TypeVar('_of_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    @staticmethod
+    def of(double: float) -> 'FieldAdaptableInterval'[_of_0__T]:
+        """
+            Method creating a constant interval provider.
+        
+            Parameters:
+                constantInterval (double): value of constant interval
+        
+            Returns:
+                adaptable interval ready to be added to an event detector
+        
+            Since:
+                12.1
+        
+            Method creating an interval provider from a non-Field one.
+        
+            Parameters:
+                adaptableInterval (:class:`~org.orekit.propagation.events.intervals.AdaptableInterval`): non-Field interval
+        
+            Returns:
+                adaptable interval ready to be added to an event detector
+        
+            Since:
+                13.0
+        
+        :class:`~org.orekit.propagation.events.intervals.https:.docs.oracle.com.javase.8.docs.api.java.lang.SafeVarargs?is` static <T extends :class:`~org.orekit.propagation.events.intervals.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> :class:`~org.orekit.propagation.events.intervals.FieldAdaptableInterval`<T> of (double defaultMaxCheck, :class:`~org.orekit.propagation.events.intervals.FieldAdaptableInterval`<T>... adaptableIntervals)
+        
+            Method creating an interval taking the minimum value of all candidates.
+        
+            Parameters:
+                defaultMaxCheck (double): default value if no intervals is given as inputv
+                adaptableIntervals (:class:`~org.orekit.propagation.events.intervals.FieldAdaptableInterval`<T>...): intervals
+        
+            Returns:
+                adaptable interval ready to be added to an event detector
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
+    @typing.overload
+    @staticmethod
+    def of(double: float, *fieldAdaptableInterval: typing.Union['FieldAdaptableInterval'[_of_1__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], bool], float]]) -> 'FieldAdaptableInterval'[_of_1__T]: ...
+    @typing.overload
+    @staticmethod
+    def of(adaptableInterval: typing.Union[AdaptableInterval, typing.Callable]) -> 'FieldAdaptableInterval'[_of_2__T]: ...
 
-class __module_protocol__(typing.Protocol):
+class PythonAdaptableInterval(AdaptableInterval):
+    """
+    public class PythonAdaptableInterval extends :class:`~org.orekit.propagation.events.intervals.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.intervals.AdaptableInterval`
+    """
+    def __init__(self): ...
+    def currentInterval(self, spacecraftState: org.orekit.propagation.SpacecraftState, boolean: bool) -> float:
+        """
+            Get the current value of maximal time interval between events handler checks.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.intervals.AdaptableInterval.currentInterval` in
+                interface :class:`~org.orekit.propagation.events.intervals.AdaptableInterval`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): current state
+                isForward (boolean): direction of propagation
+        
+            Returns:
+                current value of maximal time interval between events handler checks
+        
+        
+        """
+        ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
+_PythonFieldAdaptableInterval__T = typing.TypeVar('_PythonFieldAdaptableInterval__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class PythonFieldAdaptableInterval(FieldAdaptableInterval[_PythonFieldAdaptableInterval__T], typing.Generic[_PythonFieldAdaptableInterval__T]):
+    """
+    public class PythonFieldAdaptableInterval<T extends :class:`~org.orekit.propagation.events.intervals.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.intervals.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.intervals.FieldAdaptableInterval`<T>
+    """
+    def __init__(self): ...
+    def currentInterval(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldAdaptableInterval__T], boolean: bool) -> float: ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
+
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.propagation.events.intervals")``.
 
+    AdaptableInterval: typing.Type[AdaptableInterval]
     ApsideDetectionAdaptableIntervalFactory: typing.Type[ApsideDetectionAdaptableIntervalFactory]
+    DateDetectionAdaptableIntervalFactory: typing.Type[DateDetectionAdaptableIntervalFactory]
     ElevationDetectionAdaptableIntervalFactory: typing.Type[ElevationDetectionAdaptableIntervalFactory]
-    class-use: org.orekit.propagation.events.intervals.class-use.__module_protocol__
+    FieldAdaptableInterval: typing.Type[FieldAdaptableInterval]
+    PythonAdaptableInterval: typing.Type[PythonAdaptableInterval]
+    PythonFieldAdaptableInterval: typing.Type[PythonFieldAdaptableInterval]

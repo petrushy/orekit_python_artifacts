@@ -1,4 +1,12 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.util
+import jpype
 import org
 import org.hipparchus
 import org.hipparchus.geometry.euclidean.threed
@@ -12,7 +20,6 @@ import org.orekit.orbits
 import org.orekit.propagation
 import org.orekit.propagation.analytical.gnss.data
 import org.orekit.propagation.integration
-import org.orekit.propagation.numerical.class-use
 import org.orekit.propagation.numerical.cr3bp
 import org.orekit.time
 import org.orekit.utils
@@ -130,7 +137,7 @@ class EpochDerivativesEquations(org.orekit.propagation.integration.AdditionalDer
         """
         ...
     @typing.overload
-    def setInitialJacobians(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[typing.List[float]], doubleArray2: typing.List[typing.List[float]]) -> org.orekit.propagation.SpacecraftState:
+    def setInitialJacobians(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray2: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> org.orekit.propagation.SpacecraftState:
         """
             Set the initial value of the Jacobian with respect to state and parameter.
         
@@ -164,7 +171,7 @@ class EpochDerivativesEquations(org.orekit.propagation.integration.AdditionalDer
         """
         ...
     @typing.overload
-    def setInitialJacobians(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[typing.List[float]], doubleArray2: typing.List[typing.List[float]], doubleArray3: typing.List[float]) -> None: ...
+    def setInitialJacobians(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray2: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray3: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
 
 _FieldNumericalPropagator__T = typing.TypeVar('_FieldNumericalPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldNumericalPropagator(org.orekit.propagation.integration.FieldAbstractIntegratedPropagator[_FieldNumericalPropagator__T], typing.Generic[_FieldNumericalPropagator__T]):
@@ -202,7 +209,7 @@ class FieldNumericalPropagator(org.orekit.propagation.integration.FieldAbstractI
     
     
         From these configuration parameters, only the initial state is mandatory. The default propagation settings are in
-        :meth:`~org.orekit.orbits.OrbitType.EQUINOCTIAL` parameters with :meth:`~org.orekit.orbits.PositionAngleType.TRUE`
+        :meth:`~org.orekit.orbits.OrbitType.EQUINOCTIAL` parameters with :meth:`~org.orekit.orbits.PositionAngleType.ECCENTRIC`
         longitude argument. If the central attraction coefficient is not explicitly specified, the one used to define the
         initial orbit will be used. However, specifying only the initial state and perhaps the central attraction coefficient
         would mean the propagator would use only Keplerian forces. In this case, the simpler
@@ -234,7 +241,7 @@ class FieldNumericalPropagator(org.orekit.propagation.integration.FieldAbstractI
          final T          minStep   = zero.add(0.001);
          final T          maxStep   = zero.add(500);
          final T          initStep  = zero.add(60);
-         final double[][] tolerance = FieldNumericalPropagator.tolerances(dP, orbit, OrbitType.EQUINOCTIAL);
+         final double[][] tolerance = ToleranceProvider.getDefaultToleranceProvider(dP).getTolerances(orbit, OrbitType.EQUINOCTIAL);
          AdaptiveStepsizeFieldIntegrator<T> integrator = new DormandPrince853FieldIntegrator<>(field, minStep, maxStep, tolerance[0], tolerance[1]);
          integrator.setInitialStepSize(initStep);
          propagator = new FieldNumericalPropagator<>(field, integrator);
@@ -388,63 +395,10 @@ class FieldNumericalPropagator(org.orekit.propagation.integration.FieldAbstractI
     _tolerances_1__T = typing.TypeVar('_tolerances_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def tolerances(t: _tolerances_0__T, t2: _tolerances_0__T, fieldOrbit: org.orekit.orbits.FieldOrbit[_tolerances_0__T], orbitType: org.orekit.orbits.OrbitType) -> typing.List[typing.List[float]]:
-        """
-            Estimate tolerance vectors for integrators when propagating in orbits.
-        
-            The errors are estimated from partial derivatives properties of orbits, starting from scalar position and velocity
-            errors specified by the user.
-        
-            The tolerances are only *orders of magnitude*, and integrator tolerances are only local estimates, not global ones. So
-            some care must be taken when using these tolerances. Setting 1mm as a position error does NOT mean the tolerances will
-            guarantee a 1mm error position after several orbits integration.
-        
-            Parameters:
-                dP (T): user specified position error
-                dV (T): user specified velocity error
-                orbit (:class:`~org.orekit.orbits.FieldOrbit`<T> orbit): reference orbit
-                type (:class:`~org.orekit.orbits.OrbitType`): propagation type for the meaning of the tolerance vectors elements (it may be different from :code:`orbit.getType()`)
-        
-            Returns:
-                a two rows array, row 0 being the absolute tolerance error and row 1 being the relative tolerance error
-        
-            Since:
-                10.3
-        
-        
-        """
-        ...
+    def tolerances(t: _tolerances_0__T, t2: _tolerances_0__T, fieldOrbit: org.orekit.orbits.FieldOrbit[_tolerances_0__T], orbitType: org.orekit.orbits.OrbitType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
     @staticmethod
-    def tolerances(t: _tolerances_1__T, fieldOrbit: org.orekit.orbits.FieldOrbit[_tolerances_1__T], orbitType: org.orekit.orbits.OrbitType) -> typing.List[typing.List[float]]:
-        """
-            Estimate tolerance vectors for integrators.
-        
-            The errors are estimated from partial derivatives properties of orbits, starting from a scalar position error specified
-            by the user. Considering the energy conservation equation V = sqrt(mu (2/r - 1/a)), we get at constant energy (i.e. on a
-            Keplerian trajectory):
-        
-            .. code-block: java
-            
-             V r² |dV| = mu |dr|
-             
-            So we deduce a scalar velocity error consistent with the position error. From here, we apply orbits Jacobians matrices
-            to get consistent errors on orbital parameters.
-        
-            The tolerances are only *orders of magnitude*, and integrator tolerances are only local estimates, not global ones. So
-            some care must be taken when using these tolerances. Setting 1mm as a position error does NOT mean the tolerances will
-            guarantee a 1mm error position after several orbits integration.
-        
-            Parameters:
-                dP (T): user specified position error
-                orbit (:class:`~org.orekit.orbits.FieldOrbit`<T> orbit): reference orbit
-                type (:class:`~org.orekit.orbits.OrbitType`): propagation type for the meaning of the tolerance vectors elements (it may be different from :code:`orbit.getType()`)
-        
-            Returns:
-                a two rows array, row 0 being the absolute tolerance error and row 1 being the relative tolerance error
-        
-        """
-        ...
+    def tolerances(t: _tolerances_1__T, fieldOrbit: org.orekit.orbits.FieldOrbit[_tolerances_1__T], orbitType: org.orekit.orbits.OrbitType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
 
 _FieldTimeDerivativesEquations__T = typing.TypeVar('_FieldTimeDerivativesEquations__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldTimeDerivativesEquations(typing.Generic[_FieldTimeDerivativesEquations__T]):
@@ -519,7 +473,7 @@ class GLONASSNumericalPropagator(org.orekit.propagation.integration.AbstractInte
             ` GLONASS Interface Control Document
             <http://russianspacesystems.ru/wp-content/uploads/2016/08/ICD-GLONASS-CDMA-General.-Edition-1.0-2016.pdf>`
     """
-    def __init__(self, classicalRungeKuttaIntegrator: org.hipparchus.ode.nonstiff.ClassicalRungeKuttaIntegrator, gLONASSOrbitalElements: org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements, frame: org.orekit.frames.Frame, attitudeProvider: org.orekit.attitudes.AttitudeProvider, double: float, dataContext: org.orekit.data.DataContext, boolean: bool): ...
+    def __init__(self, classicalRungeKuttaIntegrator: org.hipparchus.ode.nonstiff.ClassicalRungeKuttaIntegrator, gLONASSOrbitalElements: typing.Union[org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements, typing.Callable], frame: org.orekit.frames.Frame, attitudeProvider: org.orekit.attitudes.AttitudeProvider, double: float, dataContext: org.orekit.data.DataContext, boolean: bool): ...
     def getGLONASSOrbitalElements(self) -> org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements:
         """
             Gets the underlying GLONASS orbital elements.
@@ -574,9 +528,9 @@ class GLONASSNumericalPropagatorBuilder:
             11.0
     """
     @typing.overload
-    def __init__(self, classicalRungeKuttaIntegrator: org.hipparchus.ode.nonstiff.ClassicalRungeKuttaIntegrator, gLONASSOrbitalElements: org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements, boolean: bool): ...
+    def __init__(self, classicalRungeKuttaIntegrator: org.hipparchus.ode.nonstiff.ClassicalRungeKuttaIntegrator, gLONASSOrbitalElements: typing.Union[org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements, typing.Callable], boolean: bool): ...
     @typing.overload
-    def __init__(self, classicalRungeKuttaIntegrator: org.hipparchus.ode.nonstiff.ClassicalRungeKuttaIntegrator, gLONASSOrbitalElements: org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements, boolean: bool, dataContext: org.orekit.data.DataContext): ...
+    def __init__(self, classicalRungeKuttaIntegrator: org.hipparchus.ode.nonstiff.ClassicalRungeKuttaIntegrator, gLONASSOrbitalElements: typing.Union[org.orekit.propagation.analytical.gnss.data.GLONASSOrbitalElements, typing.Callable], boolean: bool, dataContext: org.orekit.data.DataContext): ...
     def attitudeProvider(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider) -> 'GLONASSNumericalPropagatorBuilder':
         """
             Sets the attitude provider.
@@ -662,7 +616,7 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
     
     
         From these configuration parameters, only the initial state is mandatory. The default propagation settings are in
-        :meth:`~org.orekit.orbits.OrbitType.EQUINOCTIAL` parameters with :meth:`~org.orekit.orbits.PositionAngleType.TRUE`
+        :meth:`~org.orekit.orbits.OrbitType.EQUINOCTIAL` parameters with :meth:`~org.orekit.orbits.PositionAngleType.ECCENTRIC`
         longitude argument. If the central attraction coefficient is not explicitly specified, the one used to define the
         initial orbit will be used. However, specifying only the initial state and perhaps the central attraction coefficient
         would mean the propagator would use only Keplerian forces. In this case, the simpler
@@ -694,7 +648,7 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
          final double minStep  = 0.001;
          final double maxStep  = 500;
          final double initStep = 60;
-         final double[][] tolerance = NumericalPropagator.tolerances(dP, orbit, OrbitType.EQUINOCTIAL);
+         final double[][] tolerance = ToleranceProvider.getDefaultToleranceProvider(dP).getTolerances(orbit, OrbitType.EQUINOCTIAL);
          AdaptiveStepsizeIntegrator integrator = new DormandPrince853Integrator(minStep, maxStep, tolerance[0], tolerance[1]);
          integrator.setInitialStepSize(initStep);
          propagator = new NumericalPropagator(integrator);
@@ -712,6 +666,20 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
             :class:`~org.orekit.propagation.sampling.OrekitFixedStepHandler`,
             :class:`~org.orekit.propagation.integration.IntegratedEphemeris`,
             :class:`~org.orekit.propagation.numerical.TimeDerivativesEquations`
+    """
+    DEFAULT_ORBIT_TYPE: typing.ClassVar[org.orekit.orbits.OrbitType] = ...
+    """
+    public static final :class:`~org.orekit.orbits.OrbitType` DEFAULT_ORBIT_TYPE
+    
+        Default orbit type.
+    
+    """
+    DEFAULT_POSITION_ANGLE_TYPE: typing.ClassVar[org.orekit.orbits.PositionAngleType] = ...
+    """
+    public static final :class:`~org.orekit.orbits.PositionAngleType` DEFAULT_POSITION_ANGLE_TYPE
+    
+        Default position angle type.
+    
     """
     @typing.overload
     def __init__(self, oDEIntegrator: org.hipparchus.ode.ODEIntegrator): ...
@@ -874,82 +842,13 @@ class NumericalPropagator(org.orekit.propagation.integration.AbstractIntegratedP
         ...
     @typing.overload
     @staticmethod
-    def tolerances(double: float, double2: float, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> typing.List[typing.List[float]]:
-        """
-            Estimate tolerance vectors for integrators when propagating in orbits.
-        
-            The errors are estimated from partial derivatives properties of orbits, starting from scalar position and velocity
-            errors specified by the user.
-        
-            The tolerances are only *orders of magnitude*, and integrator tolerances are only local estimates, not global ones. So
-            some care must be taken when using these tolerances. Setting 1mm as a position error does NOT mean the tolerances will
-            guarantee a 1mm error position after several orbits integration.
-        
-            Parameters:
-                dP (double): user specified position error
-                dV (double): user specified velocity error
-                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
-                type (:class:`~org.orekit.orbits.OrbitType`): propagation type for the meaning of the tolerance vectors elements (it may be different from :code:`orbit.getType()`)
-        
-            Returns:
-                a two rows array, row 0 being the absolute tolerance error and row 1 being the relative tolerance error
-        
-            Since:
-                10.3
-        
-        
-        """
-        ...
+    def tolerances(double: float, double2: float, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
     @staticmethod
-    def tolerances(double: float, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> typing.List[typing.List[float]]:
-        """
-            Estimate tolerance vectors for integrators when propagating in orbits.
-        
-            The errors are estimated from partial derivatives properties of orbits, starting from a scalar position error specified
-            by the user. Considering the energy conservation equation V = sqrt(mu (2/r - 1/a)), we get at constant energy (i.e. on a
-            Keplerian trajectory):
-        
-            .. code-block: java
-            
-             V r² |dV| = mu |dr|
-             
-        
-            So we deduce a scalar velocity error consistent with the position error. From here, we apply orbits Jacobians matrices
-            to get consistent errors on orbital parameters.
-        
-            The tolerances are only *orders of magnitude*, and integrator tolerances are only local estimates, not global ones. So
-            some care must be taken when using these tolerances. Setting 1mm as a position error does NOT mean the tolerances will
-            guarantee a 1mm error position after several orbits integration.
-        
-            Parameters:
-                dP (double): user specified position error
-                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
-                type (:class:`~org.orekit.orbits.OrbitType`): propagation type for the meaning of the tolerance vectors elements (it may be different from :code:`orbit.getType()`)
-        
-            Returns:
-                a two rows array, row 0 being the absolute tolerance error and row 1 being the relative tolerance error
-        
-        """
-        ...
+    def tolerances(double: float, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
     @staticmethod
-    def tolerances(double: float, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> typing.List[typing.List[float]]:
-        """
-            Estimate tolerance vectors for integrators when propagating in absolute position-velocity-acceleration.
-        
-            Parameters:
-                dP (double): user specified position error
-                absPva (:class:`~org.orekit.utils.AbsolutePVCoordinates`): reference absolute position-velocity-acceleration
-        
-            Returns:
-                a two rows array, row 0 being the absolute tolerance error and row 1 being the relative tolerance error
-        
-            Also see:
-                :meth:`~org.orekit.propagation.numerical.NumericalPropagator.tolerances`
-        
-        """
-        ...
+    def tolerances(double: float, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
 
 class TimeDerivativesEquations:
     """
@@ -1150,7 +1049,7 @@ class PythonTimeDerivativesEquations(TimeDerivativesEquations):
 class PythonPartialsObserver(org.orekit.propagation.numerical.StateTransitionMatrixGenerator.PartialsObserver):
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def partialsComputed(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[float], doubleArray2: typing.List[float]) -> None: ...
+    def partialsComputed(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
@@ -1158,7 +1057,7 @@ class PythonPartialsObserver(org.orekit.propagation.numerical.StateTransitionMat
     def pythonExtension(self, long: int) -> None: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.propagation.numerical")``.
 
     EpochDerivativesEquations: typing.Type[EpochDerivativesEquations]
@@ -1171,5 +1070,4 @@ class __module_protocol__(typing.Protocol):
     PythonPartialsObserver: typing.Type[PythonPartialsObserver]
     PythonTimeDerivativesEquations: typing.Type[PythonTimeDerivativesEquations]
     TimeDerivativesEquations: typing.Type[TimeDerivativesEquations]
-    class-use: org.orekit.propagation.numerical.class-use.__module_protocol__
     cr3bp: org.orekit.propagation.numerical.cr3bp.__module_protocol__

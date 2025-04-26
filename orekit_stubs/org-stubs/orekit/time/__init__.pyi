@@ -1,3 +1,10 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import datetime
 import java.io
 import java.lang
@@ -6,12 +13,12 @@ import java.util
 import java.util.concurrent
 import java.util.function
 import java.util.stream
+import jpype
 import org.hipparchus
 import org.hipparchus.analysis.differentiation
 import org.orekit.data
 import org.orekit.frames
 import org.orekit.gnss
-import org.orekit.time.class-use
 import org.orekit.utils
 import typing
 
@@ -27,7 +34,7 @@ class ChronologicalComparator(java.util.Comparator['TimeStamped'], java.io.Seria
             :class:`~org.orekit.time.AbsoluteDate`, :class:`~org.orekit.time.TimeStamped`, :meth:`~serialized`
     """
     def __init__(self): ...
-    def compare(self, timeStamped: 'TimeStamped', timeStamped2: 'TimeStamped') -> int:
+    def compare(self, timeStamped: typing.Union['TimeStamped', typing.Callable], timeStamped2: typing.Union['TimeStamped', typing.Callable]) -> int:
         """
             Compare two time-stamped instances.
         
@@ -177,11 +184,11 @@ class DateComponents(java.io.Serializable, java.lang.Comparable['DateComponents'
         Reference epoch for QZSS weeks: 1980-01-06.
     
     """
-    IRNSS_EPOCH: typing.ClassVar['DateComponents'] = ...
+    NAVIC_EPOCH: typing.ClassVar['DateComponents'] = ...
     """
-    public static final :class:`~org.orekit.time.DateComponents` IRNSS_EPOCH
+    public static final :class:`~org.orekit.time.DateComponents` NAVIC_EPOCH
     
-        Reference epoch for IRNSS weeks: 1999-08-22.
+        Reference epoch for NavIC weeks: 1999-08-22.
     
     """
     BEIDOU_EPOCH: typing.ClassVar['DateComponents'] = ...
@@ -471,15 +478,21 @@ class DateTimeComponents(java.io.Serializable, java.lang.Comparable['DateTimeCom
     @typing.overload
     def __init__(self, int: int, int2: int, int3: int, int4: int, int5: int, double: float): ...
     @typing.overload
+    def __init__(self, int: int, int2: int, int3: int, int4: int, int5: int, timeOffset: 'TimeOffset'): ...
+    @typing.overload
     def __init__(self, int: int, month: 'Month', int2: int): ...
     @typing.overload
     def __init__(self, int: int, month: 'Month', int2: int, int3: int, int4: int, double: float): ...
+    @typing.overload
+    def __init__(self, int: int, month: 'Month', int2: int, int3: int, int4: int, timeOffset: 'TimeOffset'): ...
     @typing.overload
     def __init__(self, dateComponents: DateComponents, timeComponents: 'TimeComponents'): ...
     @typing.overload
     def __init__(self, dateTimeComponents: 'DateTimeComponents', double: float): ...
     @typing.overload
     def __init__(self, dateTimeComponents: 'DateTimeComponents', long: int, timeUnit: java.util.concurrent.TimeUnit): ...
+    @typing.overload
+    def __init__(self, dateTimeComponents: 'DateTimeComponents', timeOffset: 'TimeOffset'): ...
     def compareTo(self, dateTimeComponents: 'DateTimeComponents') -> int:
         """
         
@@ -763,7 +776,7 @@ class FieldChronologicalComparator(java.util.Comparator['FieldTimeStamped'[_Fiel
             :class:`~org.orekit.time.FieldAbsoluteDate`, :class:`~org.orekit.time.FieldTimeStamped`, :meth:`~serialized`
     """
     def __init__(self): ...
-    def compare(self, fieldTimeStamped: 'FieldTimeStamped'[_FieldChronologicalComparator__KK], fieldTimeStamped2: 'FieldTimeStamped'[_FieldChronologicalComparator__KK]) -> int: ...
+    def compare(self, fieldTimeStamped: typing.Union['FieldTimeStamped'[_FieldChronologicalComparator__KK], typing.Callable[[], 'FieldAbsoluteDate'[org.hipparchus.CalculusFieldElement]]], fieldTimeStamped2: typing.Union['FieldTimeStamped'[_FieldChronologicalComparator__KK], typing.Callable[[], 'FieldAbsoluteDate'[org.hipparchus.CalculusFieldElement]]]) -> int: ...
 
 _FieldTimeInterpolator__T = typing.TypeVar('_FieldTimeInterpolator__T', bound='FieldTimeStamped')  # <T>
 _FieldTimeInterpolator__KK = typing.TypeVar('_FieldTimeInterpolator__KK', bound=org.hipparchus.CalculusFieldElement)  # <KK>
@@ -804,11 +817,11 @@ class FieldTimeInterpolator(typing.Generic[_FieldTimeInterpolator__T, _FieldTime
         ...
     def getSubInterpolators(self) -> java.util.List['FieldTimeInterpolator'['FieldTimeStamped'[_FieldTimeInterpolator__KK], _FieldTimeInterpolator__KK]]: ...
     @typing.overload
-    def interpolate(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_FieldTimeInterpolator__KK], collection: typing.Union[java.util.Collection[_FieldTimeInterpolator__T], typing.Sequence[_FieldTimeInterpolator__T]]) -> _FieldTimeInterpolator__T: ...
+    def interpolate(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_FieldTimeInterpolator__KK], collection: typing.Union[java.util.Collection[_FieldTimeInterpolator__T], typing.Sequence[_FieldTimeInterpolator__T], typing.Set[_FieldTimeInterpolator__T]]) -> _FieldTimeInterpolator__T: ...
     @typing.overload
     def interpolate(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_FieldTimeInterpolator__KK], stream: java.util.stream.Stream[_FieldTimeInterpolator__T]) -> _FieldTimeInterpolator__T: ...
     @typing.overload
-    def interpolate(self, absoluteDate: 'AbsoluteDate', collection: typing.Union[java.util.Collection[_FieldTimeInterpolator__T], typing.Sequence[_FieldTimeInterpolator__T]]) -> _FieldTimeInterpolator__T: ...
+    def interpolate(self, absoluteDate: 'AbsoluteDate', collection: typing.Union[java.util.Collection[_FieldTimeInterpolator__T], typing.Sequence[_FieldTimeInterpolator__T], typing.Set[_FieldTimeInterpolator__T]]) -> _FieldTimeInterpolator__T: ...
     @typing.overload
     def interpolate(self, absoluteDate: 'AbsoluteDate', stream: java.util.stream.Stream[_FieldTimeInterpolator__T]) -> _FieldTimeInterpolator__T: ...
 
@@ -839,7 +852,7 @@ class FieldTimeStamped(typing.Generic[_FieldTimeStamped__T]):
             :class:`~org.orekit.time.AbsoluteDate`, :class:`~org.orekit.time.ChronologicalComparator`,
             :class:`~org.orekit.utils.TimeStampedCache`
     """
-    def durationFrom(self, fieldTimeStamped: 'FieldTimeStamped'[_FieldTimeStamped__T]) -> _FieldTimeStamped__T: ...
+    def durationFrom(self, fieldTimeStamped: typing.Union['FieldTimeStamped'[_FieldTimeStamped__T], typing.Callable[[], 'FieldAbsoluteDate'[org.hipparchus.CalculusFieldElement]]]) -> _FieldTimeStamped__T: ...
     def getDate(self) -> 'FieldAbsoluteDate'[_FieldTimeStamped__T]: ...
 
 class Month(java.lang.Enum['Month']):
@@ -998,7 +1011,7 @@ class Month(java.lang.Enum['Month']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['Month']:
+    def values() -> typing.MutableSequence['Month']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1031,7 +1044,7 @@ class OffsetModel(java.io.Serializable):
     @typing.overload
     def __init__(self, dateComponents: DateComponents, int: int): ...
     @typing.overload
-    def __init__(self, dateComponents: DateComponents, int: int, double: float, double2: float): ...
+    def __init__(self, dateComponents: DateComponents, int: int, timeOffset: 'TimeOffset', int2: int): ...
     def getMJDRef(self) -> int:
         """
             Get the reference date of the linear model as a modified julian day.
@@ -1042,7 +1055,7 @@ class OffsetModel(java.io.Serializable):
         
         """
         ...
-    def getOffset(self) -> float:
+    def getOffset(self) -> 'TimeOffset':
         """
             Offset at reference date in seconds (TAI minus UTC).
         
@@ -1052,12 +1065,12 @@ class OffsetModel(java.io.Serializable):
         
         """
         ...
-    def getSlope(self) -> float:
+    def getSlope(self) -> int:
         """
-            Offset slope in seconds per UTC day (TAI minus UTC / dUTC).
+            Offset slope in nanoseconds per UTC second (TAI minus UTC / dUTC).
         
             Returns:
-                offset slope in seconds per UTC day (TAI minus UTC / dUTC)
+                offset slope in nanoseconds per UTC second (TAI minus UTC / dUTC)
         
         
         """
@@ -1098,6 +1111,17 @@ class TimeComponents(java.io.Serializable, java.lang.Comparable['TimeComponents'
         Constant for commonly used hour 12:00:00.
     
     """
+    NaN: typing.ClassVar['TimeComponents'] = ...
+    """
+    public static final :class:`~org.orekit.time.TimeComponents` NaN
+    
+        Constant for NaN time.
+    
+        Since:
+            13.0
+    
+    
+    """
     @typing.overload
     def __init__(self, double: float): ...
     @typing.overload
@@ -1106,6 +1130,14 @@ class TimeComponents(java.io.Serializable, java.lang.Comparable['TimeComponents'
     def __init__(self, int: int, int2: int, double: float): ...
     @typing.overload
     def __init__(self, int: int, int2: int, double: float, int3: int): ...
+    @typing.overload
+    def __init__(self, int: int, int2: int, timeOffset: 'TimeOffset'): ...
+    @typing.overload
+    def __init__(self, int: int, int2: int, timeOffset: 'TimeOffset', int3: int): ...
+    @typing.overload
+    def __init__(self, timeOffset: 'TimeOffset'): ...
+    @typing.overload
+    def __init__(self, timeOffset: 'TimeOffset', timeOffset2: 'TimeOffset', int: int): ...
     def compareTo(self, timeComponents: 'TimeComponents') -> int:
         """
         
@@ -1135,54 +1167,6 @@ class TimeComponents(java.io.Serializable, java.lang.Comparable['TimeComponents'
         
             Also see:
                 :meth:`~org.orekit.time.TimeComponents.toStringWithoutUtcOffset`, :meth:`~org.orekit.time.TimeComponents.toString`
-        
-        
-        """
-        ...
-    @staticmethod
-    def fromSeconds(int: int, double: float, double2: float, int2: int) -> 'TimeComponents':
-        """
-            Build a time from the second number within the day.
-        
-            The seconds past midnight is the sum :code:`secondInDayA + secondInDayB + leap`. The two parameters are used for
-            increased accuracy. Only the first part of the sum (:code:`secondInDayA + secondInDayB`) is used to compute the hours
-            and minutes. The third parameter (:code:`leap`) is added directly to the second value
-            (:meth:`~org.orekit.time.TimeComponents.getSecond`) to implement leap seconds. These three quantities must satisfy the
-            following constraints. This first guarantees the hour and minute are valid, the second guarantees the second is valid.
-        
-            .. code-block: java
-            
-                 0 <= secondInDayA + secondInDayB < 86400
-                 :code:`0 <= (secondInDayA + secondInDayB) % 60 + leap <= minuteDuration`
-                 :code:`0 <= leap <= minuteDuration - 60                        if minuteDuration >= 60`
-                 :code:`0 >= leap >= minuteDuration - 60                        if minuteDuration <  60`
-             
-        
-            If the seconds of minute (:meth:`~org.orekit.time.TimeComponents.getSecond`) computed from :code:`secondInDayA +
-            secondInDayB + leap` is greater than or equal to :code:`60 + leap` then the second of minute will be set to
-            :code:`FastMath.nextDown(60 + leap)`. This prevents rounding to an invalid seconds of minute number when the input
-            values have greater precision than a :code:`double`.
-        
-            This constructor is always in UTC (i.e. :meth:`~org.orekit.time.TimeComponents.getMinutesFromUTC`).
-        
-            If :code:`secondsInDayB` or :code:`leap` is NaN then the hour and minute will be determined from :code:`secondInDayA`
-            and the second of minute will be NaN.
-        
-            Parameters:
-                secondInDayA (int): first part of the second number.
-                secondInDayB (double): last part of the second number.
-                leap (double): magnitude of the leap second if this point in time is during a leap second, otherwise :code:`0.0`. This value is not
-                    used to compute hours and minutes, but it is added to the computed second of minute.
-                minuteDuration (int): number of seconds in the current minute, normally :code:`60`.
-        
-            Returns:
-                new time components for the specified time.
-        
-            Raises:
-                :class:`~org.orekit.errors.OrekitIllegalArgumentException`: if the inequalities above do not hold.
-        
-            Since:
-                10.2
         
         
         """
@@ -1244,6 +1228,7 @@ class TimeComponents(java.io.Serializable, java.lang.Comparable['TimeComponents'
                 7.2
         
             Also see:
+                :meth:`~org.orekit.time.TimeComponents.getSplitSecondsInLocalDay`,
                 :meth:`~org.orekit.time.TimeComponents.getSecondsInUTCDay`
         
         
@@ -1261,7 +1246,54 @@ class TimeComponents(java.io.Serializable, java.lang.Comparable['TimeComponents'
                 7.2
         
             Also see:
+                :meth:`~org.orekit.time.TimeComponents.getSplitSecondsInUTCDay`,
                 :meth:`~org.orekit.time.TimeComponents.getSecondsInLocalDay`
+        
+        
+        """
+        ...
+    def getSplitSecond(self) -> 'TimeOffset':
+        """
+            Get the seconds number.
+        
+            Returns:
+                second second number from 0.0 to 61.0 (excluded). Note that 60 ≤ second < 61 only occurs during a leap second.
+        
+        
+        """
+        ...
+    def getSplitSecondsInLocalDay(self) -> 'TimeOffset':
+        """
+            Get the second number within the local day, *without* applying the
+            :meth:`~org.orekit.time.TimeComponents.getMinutesFromUTC`.
+        
+            Returns:
+                second number from 0.0 to Constants.JULIAN_DAY
+        
+            Since:
+                13.0
+        
+            Also see:
+                :meth:`~org.orekit.time.TimeComponents.getSecondsInLocalDay`,
+                :meth:`~org.orekit.time.TimeComponents.getSplitSecondsInUTCDay`
+        
+        
+        """
+        ...
+    def getSplitSecondsInUTCDay(self) -> 'TimeOffset':
+        """
+            Get the second number within the UTC day, applying the :meth:`~org.orekit.time.TimeComponents.getMinutesFromUTC`.
+        
+            Returns:
+                second number from :meth:`~org.orekit.time.TimeComponents.getMinutesFromUTC` to Constants.JULIAN_DAY
+                :meth:`~org.orekit.time.TimeComponents.getMinutesFromUTC`
+        
+            Since:
+                13.0
+        
+            Also see:
+                :meth:`~org.orekit.time.TimeComponents.getSecondsInUTCDay`,
+                :meth:`~org.orekit.time.TimeComponents.getSplitSecondsInLocalDay`
         
         
         """
@@ -1336,6 +1368,31 @@ class TimeComponents(java.io.Serializable, java.lang.Comparable['TimeComponents'
         
         """
         ...
+    def wrapIfNeeded(self, int: int, int2: int) -> 'TimeComponents':
+        """
+            Round this time to the given precision if needed to prevent rounding up to an invalid seconds number. This is useful,
+            for example, when writing custom date-time formatting methods so one does not, e.g., end up with "60.0" seconds during a
+            normal minute when the value of seconds is :code:`59.999`. This method will instead round up the minute, hour, day,
+            month, and year as needed.
+        
+            Parameters:
+                minuteDuration (int): 59, 60, 61, or 62 seconds depending on the date being close to a leap second introduction and the magnitude of the leap
+                    second.
+                fractionDigits (int): the number of decimal digits after the decimal point in the seconds number that will be printed. This date-time is
+                    rounded to :code:`fractionDigits` after the decimal point if necessary to prevent rounding up to :code:`minuteDuration`.
+                    :code:`fractionDigits` must be greater than or equal to :code:`0`.
+        
+            Returns:
+                the instance itself if no rounding was needed, or a time within :code:`0.5 * 10**-fractionDigits` seconds of this, and
+                with a seconds number that will not round up to :code:`minuteDuration` when rounded to :code:`fractionDigits` after the
+                decimal point
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
 
 _TimeInterpolator__T = typing.TypeVar('_TimeInterpolator__T', bound='TimeStamped')  # <T>
 class TimeInterpolator(typing.Generic[_TimeInterpolator__T]):
@@ -1374,9 +1431,414 @@ class TimeInterpolator(typing.Generic[_TimeInterpolator__T]):
         ...
     def getSubInterpolators(self) -> java.util.List['TimeInterpolator'['TimeStamped']]: ...
     @typing.overload
-    def interpolate(self, absoluteDate: 'AbsoluteDate', collection: typing.Union[java.util.Collection[_TimeInterpolator__T], typing.Sequence[_TimeInterpolator__T]]) -> _TimeInterpolator__T: ...
+    def interpolate(self, absoluteDate: 'AbsoluteDate', collection: typing.Union[java.util.Collection[_TimeInterpolator__T], typing.Sequence[_TimeInterpolator__T], typing.Set[_TimeInterpolator__T]]) -> _TimeInterpolator__T: ...
     @typing.overload
     def interpolate(self, absoluteDate: 'AbsoluteDate', stream: java.util.stream.Stream[_TimeInterpolator__T]) -> _TimeInterpolator__T: ...
+
+class TimeOffset(java.lang.Comparable['TimeOffset'], java.io.Serializable):
+    """
+    public class TimeOffset extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`<:class:`~org.orekit.time.TimeOffset`>, :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    
+        This class represents a time range split into seconds and attoseconds.
+    
+        Instances of this class may either be interpreted as offsets from a reference date, or they may be interpreted as
+        durations. Negative values represent dates earlier than the reference date in the first interpretation, and negative
+        durations in the second interpretation.
+    
+        The whole number of seconds is stored as signed primitive long, so the range of dates that can be represented is ±292
+        billion years. The fractional part within the second is stored as non-negative primitive long with fixed precision at a
+        resolution of one attosecond (10⁻¹⁸s). The choice of attoseconds allows to represent exactly all important offsets
+        (between TT and TAI, or between UTC and TAI during the linear eras), as well as all times converted from standard Java
+        Instant, Date or TimeUnit classes. It also allows simple computation as adding or subtracting a few values in
+        attoseconds that are less than one second does not overflow (a primitive long could hold any values between ±9.22s in
+        attoseconds so simple additions and subtractions followed by handling a carry to bring the value back between 0 and
+        10¹⁸ is straightforward). There are also special encodings (internally using negative longs in the fractional part)
+        to represent :meth:`~org.orekit.time.TimeOffset.NaN`, :meth:`~org.orekit.time.TimeOffset.POSITIVE_INFINITY` and
+        :meth:`~org.orekit.time.TimeOffset.NEGATIVE_INFINITY`.
+    
+        Since:
+            13.0
+    
+        Also see:
+            :class:`~org.orekit.time.AbsoluteDate`, :class:`~org.orekit.time.FieldAbsoluteDate`, :meth:`~serialized`
+    """
+    ZERO: typing.ClassVar['TimeOffset'] = ...
+    """
+    public static final :class:`~org.orekit.time.TimeOffset` ZERO
+    
+        Split time representing 0.
+    
+    """
+    ATTOSECOND: typing.ClassVar['TimeOffset'] = ...
+    """
+    public static final :class:`~org.orekit.time.TimeOffset` ATTOSECOND
+    
+        Split time representing 1 attosecond.
+    
+    """
+    FEMTOSECOND: typing.ClassVar['TimeOffset'] = ...
+    """
+    public static final :class:`~org.orekit.time.TimeOffset` FEMTOSECOND
+    
+        Split time representing 1 femtosecond.
+    
+    """
+    PICOSECOND: typing.ClassVar['TimeOffset'] = ...
+    """
+    public static final :class:`~org.orekit.time.TimeOffset` PICOSECOND
+    
+        Split time representing 1 picosecond.
+    
+    """
+    NANOSECOND: typing.ClassVar['TimeOffset'] = ...
+    """
+    public static final :class:`~org.orekit.time.TimeOffset` NANOSECOND
+    
+        Split time representing 1 nanosecond.
+    
+    """
+    MICROSECOND: typing.ClassVar['TimeOffset'] = ...
+    """
+    public static final :class:`~org.orekit.time.TimeOffset` MICROSECOND
+    
+        Split time representing 1 microsecond.
+    
+    """
+    MILLISECOND: typing.ClassVar['TimeOffset'] = ...
+    """
+    public static final :class:`~org.orekit.time.TimeOffset` MILLISECOND
+    
+        Split time representing 1 millisecond.
+    
+    """
+    SECOND: typing.ClassVar['TimeOffset'] = ...
+    """
+    public static final :class:`~org.orekit.time.TimeOffset` SECOND
+    
+        Split time representing 1 second.
+    
+    """
+    MINUTE: typing.ClassVar['TimeOffset'] = ...
+    """
+    public static final :class:`~org.orekit.time.TimeOffset` MINUTE
+    
+        Split time representing 1 minute.
+    
+    """
+    HOUR: typing.ClassVar['TimeOffset'] = ...
+    """
+    public static final :class:`~org.orekit.time.TimeOffset` HOUR
+    
+        Split time representing 1 hour.
+    
+    """
+    DAY: typing.ClassVar['TimeOffset'] = ...
+    """
+    public static final :class:`~org.orekit.time.TimeOffset` DAY
+    
+        Split time representing 1 day.
+    
+    """
+    DAY_WITH_POSITIVE_LEAP: typing.ClassVar['TimeOffset'] = ...
+    """
+    public static final :class:`~org.orekit.time.TimeOffset` DAY_WITH_POSITIVE_LEAP
+    
+        Split time representing 1 day that includes an additional leap second.
+    
+    """
+    NaN: typing.ClassVar['TimeOffset'] = ...
+    """
+    public static final :class:`~org.orekit.time.TimeOffset` NaN
+    
+        Split time representing a NaN.
+    
+    """
+    NEGATIVE_INFINITY: typing.ClassVar['TimeOffset'] = ...
+    """
+    public static final :class:`~org.orekit.time.TimeOffset` NEGATIVE_INFINITY
+    
+        Split time representing negative infinity.
+    
+    """
+    POSITIVE_INFINITY: typing.ClassVar['TimeOffset'] = ...
+    """
+    public static final :class:`~org.orekit.time.TimeOffset` POSITIVE_INFINITY
+    
+        Split time representing positive infinity.
+    
+    """
+    @typing.overload
+    def __init__(self, double: float): ...
+    @typing.overload
+    def __init__(self, long: int, timeUnit: java.util.concurrent.TimeUnit): ...
+    @typing.overload
+    def __init__(self, long: int, long2: int): ...
+    @typing.overload
+    def __init__(self, long: int, timeOffset: 'TimeOffset'): ...
+    @typing.overload
+    def __init__(self, long: int, timeOffset: 'TimeOffset', long2: int, timeOffset2: 'TimeOffset'): ...
+    @typing.overload
+    def __init__(self, long: int, timeOffset: 'TimeOffset', long2: int, timeOffset2: 'TimeOffset', long3: int, timeOffset3: 'TimeOffset'): ...
+    @typing.overload
+    def __init__(self, long: int, timeOffset: 'TimeOffset', long2: int, timeOffset2: 'TimeOffset', long3: int, timeOffset3: 'TimeOffset', long4: int, timeOffset4: 'TimeOffset'): ...
+    @typing.overload
+    def __init__(self, long: int, timeOffset: 'TimeOffset', long2: int, timeOffset2: 'TimeOffset', long3: int, timeOffset3: 'TimeOffset', long4: int, timeOffset4: 'TimeOffset', long5: int, timeOffset5: 'TimeOffset'): ...
+    @typing.overload
+    def __init__(self, *timeOffset: 'TimeOffset'): ...
+    def add(self, timeOffset: 'TimeOffset') -> 'TimeOffset':
+        """
+            Build a time by adding two times.
+        
+            Parameters:
+                t (:class:`~org.orekit.time.TimeOffset`): time to add
+        
+            Returns:
+                this+t
+        
+        
+        """
+        ...
+    def compareTo(self, timeOffset: 'TimeOffset') -> int:
+        """
+            Compare the instance with another one.
+        
+            Not that in order to be consistent with :code:`Double#compareTo(Double)`, NaN is considered equal to itself and greater
+            than positive infinity.
+        
+            Specified by:
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable.html?is` in
+                interface :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`
+        
+            Parameters:
+                other (:class:`~org.orekit.time.TimeOffset`): other time to compare the instance to
+        
+            Returns:
+                a negative integer, zero, or a positive integer if applying this time to reference date would result in a date being
+                before, simultaneous, or after the date obtained by applying the other time to the same reference date.
+        
+        
+        """
+        ...
+    def divide(self, int: int) -> 'TimeOffset':
+        """
+            Divide the instance by a positive constant.
+        
+            Parameters:
+                q (int): division factor (must be strictly positive)
+        
+            Returns:
+                this ÷ q
+        
+        
+        """
+        ...
+    def equals(self, object: typing.Any) -> bool:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+        
+        
+        """
+        ...
+    def getAttoSeconds(self) -> int:
+        """
+            Get the normalized attoseconds part of the time.
+        
+            The normalized attoseconds is always between :code:`0L` and :code:`1000000000000000000L` for *finite* ranges. Note that
+            it may reach :code:`1000000000000000000L` if for example the time is less than 1 attosecond *before* a whole second. It
+            is negative for :meth:`~org.orekit.time.TimeOffset.isNaN` or :meth:`~org.orekit.time.TimeOffset.isInfinite` times.
+        
+            Returns:
+                normalized attoseconds part of the time
+        
+        
+        """
+        ...
+    def getRoundedTime(self, timeUnit: java.util.concurrent.TimeUnit) -> int:
+        """
+            Get the time in some unit.
+        
+            Parameters:
+                unit (:class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.util.concurrent.TimeUnit?is`): time unit
+        
+            Returns:
+                time in this unit, rounded to the closest long, returns arbitrarily
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Long.html?is` for
+                :meth:`~org.orekit.time.TimeOffset.isNaN`
+        
+        
+        """
+        ...
+    def getSeconds(self) -> int:
+        """
+            Get the normalized seconds part of the time.
+        
+            Returns:
+                normalized seconds part of the time (may be negative)
+        
+        
+        """
+        ...
+    def hashCode(self) -> int:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+        
+        
+        """
+        ...
+    def isFinite(self) -> bool:
+        """
+            Check if time is finite (i.e. neither :meth:`~org.orekit.time.TimeOffset.isNaN` nor
+            :meth:`~org.orekit.time.TimeOffset.isInfinite`.
+        
+            Returns:
+                true if time is finite
+        
+            Also see:
+                :meth:`~org.orekit.time.TimeOffset.isNaN`, :meth:`~org.orekit.time.TimeOffset.isInfinite`,
+                :meth:`~org.orekit.time.TimeOffset.isNegativeInfinity`, :meth:`~org.orekit.time.TimeOffset.isPositiveInfinity`
+        
+        
+        """
+        ...
+    def isInfinite(self) -> bool:
+        """
+            Check if time is infinity.
+        
+            Returns:
+                true if time is infinity
+        
+            Also see:
+                :meth:`~org.orekit.time.TimeOffset.isFinite`, :meth:`~org.orekit.time.TimeOffset.isNaN`,
+                :meth:`~org.orekit.time.TimeOffset.isNegativeInfinity`, :meth:`~org.orekit.time.TimeOffset.isPositiveInfinity`
+        
+        
+        """
+        ...
+    def isNaN(self) -> bool:
+        """
+            Check if time is NaN.
+        
+            Returns:
+                true if time is NaN
+        
+            Also see:
+                :meth:`~org.orekit.time.TimeOffset.isFinite`, :meth:`~org.orekit.time.TimeOffset.isInfinite`,
+                :meth:`~org.orekit.time.TimeOffset.isNegativeInfinity`, :meth:`~org.orekit.time.TimeOffset.isPositiveInfinity`
+        
+        
+        """
+        ...
+    def isNegativeInfinity(self) -> bool:
+        """
+            Check if time is negative infinity.
+        
+            Returns:
+                true if time is negative infinity
+        
+            Also see:
+                :meth:`~org.orekit.time.TimeOffset.isFinite`, :meth:`~org.orekit.time.TimeOffset.isNaN`,
+                :meth:`~org.orekit.time.TimeOffset.isInfinite`, :meth:`~org.orekit.time.TimeOffset.isPositiveInfinity`
+        
+        
+        """
+        ...
+    def isPositiveInfinity(self) -> bool:
+        """
+            Check if time is positive infinity.
+        
+            Returns:
+                true if time is positive infinity
+        
+            Also see:
+                :meth:`~org.orekit.time.TimeOffset.isFinite`, :meth:`~org.orekit.time.TimeOffset.isNaN`,
+                :meth:`~org.orekit.time.TimeOffset.isInfinite`, :meth:`~org.orekit.time.TimeOffset.isNegativeInfinity`
+        
+        
+        """
+        ...
+    def isZero(self) -> bool:
+        """
+            check if the time is zero.
+        
+            Returns:
+                true if the time is zero
+        
+        
+        """
+        ...
+    def multiply(self, long: int) -> 'TimeOffset':
+        """
+            Multiply the instance by a positive or zero constant.
+        
+            Parameters:
+                p (long): multiplication factor (must be positive)
+        
+            Returns:
+                this ⨉ p
+        
+        
+        """
+        ...
+    def negate(self) -> 'TimeOffset':
+        """
+            Negate the instance.
+        
+            Returns:
+                new instance corresponding to opposite time
+        
+        
+        """
+        ...
+    @staticmethod
+    def parse(string: str) -> 'TimeOffset':
+        """
+            Parse a string to produce an accurate split time.
+        
+            This method is more accurate than parsing the string as a double and then calling
+            :meth:`~org.orekit.time.TimeOffset.%3Cinit%3E` because it reads the before separator and after separator parts in
+            decimal, hence avoiding problems like for example 0.1 not being an exact IEEE754 number.
+        
+            Parameters:
+                s (:class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): string to parse
+        
+            Returns:
+                parsed split time
+        
+        
+        """
+        ...
+    def subtract(self, timeOffset: 'TimeOffset') -> 'TimeOffset':
+        """
+            Build a time by subtracting one time from the instance.
+        
+            Parameters:
+                t (:class:`~org.orekit.time.TimeOffset`): time to subtract
+        
+            Returns:
+                this-t
+        
+        
+        """
+        ...
+    def toDouble(self) -> float:
+        """
+            Get the time collapsed into a single double.
+        
+            Beware that lots of accuracy is lost when combining :meth:`~org.orekit.time.TimeOffset.getSeconds` and
+            :meth:`~org.orekit.time.TimeOffset.getAttoSeconds` into a single double.
+        
+            Returns:
+                time as a single double
+        
+        
+        """
+        ...
 
 class TimeScalarFunction:
     """
@@ -1413,9 +1875,9 @@ class TimeScalarFunction:
         """
         ...
 
-class TimeScale(java.io.Serializable):
+class TimeScale:
     """
-    public interface TimeScale extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public interface TimeScale
     
         Interface for time scales.
     
@@ -1426,24 +1888,9 @@ class TimeScale(java.io.Serializable):
         Also see:
             :class:`~org.orekit.time.AbsoluteDate`
     """
-    _getLeap_1__T = typing.TypeVar('_getLeap_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getLeap_0__T = typing.TypeVar('_getLeap_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getLeap(self, absoluteDate: 'AbsoluteDate') -> float:
-        """
-            Get the value of the previous leap.
-        
-            This method will return 0.0 for all time scales that do *not* implement leap seconds.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): date to check
-        
-            Returns:
-                value of the previous leap
-        
-        """
-        ...
-    @typing.overload
-    def getLeap(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_getLeap_1__T]) -> _getLeap_1__T:
+    def getLeap(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_getLeap_0__T]) -> _getLeap_0__T:
         """
             Get the value of the previous leap.
         
@@ -1458,6 +1905,21 @@ class TimeScale(java.io.Serializable):
             Since:
                 9.0
         
+        
+        """
+        ...
+    @typing.overload
+    def getLeap(self, absoluteDate: 'AbsoluteDate') -> TimeOffset:
+        """
+            Get the value of the previous leap.
+        
+            This method will return 0 for all time scales that do *not* implement leap seconds.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): date to check
+        
+            Returns:
+                value of the previous leap
         
         """
         ...
@@ -1547,26 +2009,9 @@ class TimeScale(java.io.Serializable):
         
         """
         ...
-    _offsetFromTAI_1__T = typing.TypeVar('_offsetFromTAI_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _offsetFromTAI_0__T = typing.TypeVar('_offsetFromTAI_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def offsetFromTAI(self, absoluteDate: 'AbsoluteDate') -> float:
-        """
-            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): conversion date
-        
-            Returns:
-                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
-                time scale*
-        
-            Also see:
-                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
-        
-        """
-        ...
-    @typing.overload
-    def offsetFromTAI(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_1__T]) -> _offsetFromTAI_1__T:
+    def offsetFromTAI(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_0__T]) -> _offsetFromTAI_0__T:
         """
             Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
         
@@ -1586,7 +2031,24 @@ class TimeScale(java.io.Serializable):
         
         """
         ...
-    def offsetToTAI(self, dateComponents: DateComponents, timeComponents: TimeComponents) -> float:
+    @typing.overload
+    def offsetFromTAI(self, absoluteDate: 'AbsoluteDate') -> TimeOffset:
+        """
+            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): conversion date
+        
+            Returns:
+                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
+                time scale*
+        
+            Also see:
+                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
+        
+        """
+        ...
+    def offsetToTAI(self, dateComponents: DateComponents, timeComponents: TimeComponents) -> TimeOffset:
         """
             Get the offset to convert locations from instance to :class:`~org.orekit.time.TAIScale`.
         
@@ -1803,26 +2265,6 @@ class TimeScales:
         
         """
         ...
-    def getIRNSS(self) -> 'IRNSSScale':
-        """
-            Get the Indian Regional Navigation Satellite System time scale.
-        
-            Returns:
-                Indian Regional Navigation Satellite System time scale
-        
-        
-        """
-        ...
-    def getIrnssEpoch(self) -> 'AbsoluteDate':
-        """
-            Reference epoch for IRNSS weeks: 1999-08-22T00:00:00 IRNSS time.
-        
-            Returns:
-                IRNSS Epoch
-        
-        
-        """
-        ...
     def getJ2000Epoch(self) -> 'AbsoluteDate':
         """
             J2000.0 Reference epoch: 2000-01-01T12:00:00 Terrestrial Time (*not* UTC).
@@ -1869,6 +2311,26 @@ class TimeScales:
         
             Returns:
                 Modified Julian Epoch
+        
+        
+        """
+        ...
+    def getNavIC(self) -> 'NavicScale':
+        """
+            Get the Navigation with Indian Constellation time scale.
+        
+            Returns:
+                Navigation with Indian Constellation time scale
+        
+        
+        """
+        ...
+    def getNavicEpoch(self) -> 'AbsoluteDate':
+        """
+            Reference epoch for NavIC weeks: 1999-08-22T00:00:00 NavIC time.
+        
+            Returns:
+                NavIC Epoch
         
         
         """
@@ -1981,7 +2443,7 @@ class TimeScales:
         """
         ...
     @staticmethod
-    def of(collection: typing.Union[java.util.Collection[OffsetModel], typing.Sequence[OffsetModel]], biFunction: typing.Union[java.util.function.BiFunction[org.orekit.utils.IERSConventions, 'TimeScales', java.util.Collection[org.orekit.frames.EOPEntry]], typing.Callable[[org.orekit.utils.IERSConventions, 'TimeScales'], java.util.Collection[org.orekit.frames.EOPEntry]]]) -> 'TimeScales': ...
+    def of(collection: typing.Union[java.util.Collection[OffsetModel], typing.Sequence[OffsetModel], typing.Set[OffsetModel]], biFunction: typing.Union[java.util.function.BiFunction[org.orekit.utils.IERSConventions, 'TimeScales', java.util.Collection[org.orekit.frames.EOPEntry]], typing.Callable[[org.orekit.utils.IERSConventions, 'TimeScales'], java.util.Collection[org.orekit.frames.EOPEntry]]]) -> 'TimeScales': ...
 
 class TimeScalesFactory(java.io.Serializable):
     """
@@ -1997,7 +2459,7 @@ class TimeScalesFactory(java.io.Serializable):
     @staticmethod
     def addDefaultUTCTAIOffsetsLoaders() -> None: ...
     @staticmethod
-    def addUTCTAIOffsetsLoader(uTCTAIOffsetsLoader: 'UTCTAIOffsetsLoader') -> None: ...
+    def addUTCTAIOffsetsLoader(uTCTAIOffsetsLoader: typing.Union['UTCTAIOffsetsLoader', typing.Callable]) -> None: ...
     @staticmethod
     def clearUTCTAIOffsetsLoaders() -> None: ...
     @staticmethod
@@ -2011,7 +2473,7 @@ class TimeScalesFactory(java.io.Serializable):
     @staticmethod
     def getGST() -> 'GalileoScale': ...
     @staticmethod
-    def getIRNSS() -> 'IRNSSScale': ...
+    def getNavIC() -> 'NavicScale': ...
     @staticmethod
     def getQZSS() -> 'QZSSScale': ...
     @staticmethod
@@ -2042,6 +2504,7 @@ class TimeShiftable(typing.Generic[_TimeShiftable__T]):
     
         This interface represents objects that can be shifted in time.
     """
+    @typing.overload
     def shiftedBy(self, double: float) -> _TimeShiftable__T:
         """
             Get a time-shifted instance.
@@ -2052,9 +2515,22 @@ class TimeShiftable(typing.Generic[_TimeShiftable__T]):
             Returns:
                 a new instance, shifted with respect to instance (which is not changed)
         
+            Get a time-shifted instance.
+        
+            Parameters:
+                dt (:class:`~org.orekit.time.TimeOffset`): time shift
+        
+            Returns:
+                a new instance, shifted with respect to instance (which is not changed)
+        
+            Since:
+                13.0
+        
         
         """
         ...
+    @typing.overload
+    def shiftedBy(self, timeOffset: TimeOffset) -> _TimeShiftable__T: ...
 
 class TimeStamped:
     """
@@ -2082,7 +2558,7 @@ class TimeStamped:
             :class:`~org.orekit.time.AbsoluteDate`, :class:`~org.orekit.time.ChronologicalComparator`,
             :class:`~org.orekit.utils.TimeStampedCache`
     """
-    def durationFrom(self, timeStamped: 'TimeStamped') -> float:
+    def durationFrom(self, timeStamped: typing.Union['TimeStamped', typing.Callable]) -> float:
         """
             Compute the physically elapsed duration between two instants.
         
@@ -2125,7 +2601,7 @@ class TimeVectorFunction:
     """
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def value(self, absoluteDate: 'AbsoluteDate') -> typing.List[float]:
+    def value(self, absoluteDate: 'AbsoluteDate') -> typing.MutableSequence[float]:
         """
             Compute a function of time.
         
@@ -2138,7 +2614,7 @@ class TimeVectorFunction:
         """
         ...
     @typing.overload
-    def value(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_value_1__T]) -> typing.List[_value_1__T]:
+    def value(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_value_1__T]) -> typing.MutableSequence[_value_1__T]:
         """
             Compute a function of time.
         
@@ -2199,9 +2675,9 @@ class AGILeapSecondFilesLoader(org.orekit.data.AbstractSelfFeedingLoader, UTCTAI
         def __init__(self): ...
         def parse(self, inputStream: java.io.InputStream, string: str) -> java.util.List[OffsetModel]: ...
 
-class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Comparable['AbsoluteDate'], java.io.Serializable):
+class AbsoluteDate(TimeOffset, TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Comparable[TimeOffset], java.io.Serializable):
     """
-    public class AbsoluteDate extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.time.AbsoluteDate`>, :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`<:class:`~org.orekit.time.AbsoluteDate`>, :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public class AbsoluteDate extends :class:`~org.orekit.time.TimeOffset` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.time.AbsoluteDate`>, :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`<:class:`~org.orekit.time.TimeOffset`>, :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
     
         This class represents a specific instant in time.
     
@@ -2242,8 +2718,8 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
             in seconds, are continuous and could be measured using only a virtually perfect stopwatch. The related methods are
             :meth:`~org.orekit.time.AbsoluteDate.%3Cinit%3E`, :meth:`~org.orekit.time.AbsoluteDate.parseCCSDSUnsegmentedTimeCode`,
             :meth:`~org.orekit.time.AbsoluteDate.parseCCSDSDaySegmentedTimeCode`,
-            :meth:`~org.orekit.time.AbsoluteDate.durationFrom`, :meth:`~org.orekit.time.AbsoluteDate.compareTo`,
-            :meth:`~org.orekit.time.AbsoluteDate.equals` and :meth:`~org.orekit.time.AbsoluteDate.hashCode`.
+            :meth:`~org.orekit.time.AbsoluteDate.durationFrom`, :meth:`~org.orekit.time.TimeOffset.compareTo`,
+            :meth:`~org.orekit.time.TimeOffset.equals` and :meth:`~org.orekit.time.TimeOffset.hashCode`.
     
     
         A few reference epochs which are commonly used in space systems have been defined. These epochs can be used as the basis
@@ -2360,16 +2836,16 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
     
     
     """
-    IRNSS_EPOCH: typing.ClassVar['AbsoluteDate'] = ...
+    NAVIC_EPOCH: typing.ClassVar['AbsoluteDate'] = ...
     """
-    :class:`~org.orekit.annotation.DefaultDataContext` public static final :class:`~org.orekit.time.AbsoluteDate` IRNSS_EPOCH
+    :class:`~org.orekit.annotation.DefaultDataContext` public static final :class:`~org.orekit.time.AbsoluteDate` NAVIC_EPOCH
     
-        Reference epoch for IRNSS weeks: 1999-08-22T00:00:00 IRNSS time.
+        Reference epoch for NavIC weeks: 1999-08-22T00:00:00 NavIC time.
     
         This constant uses the :meth:`~org.orekit.data.DataContext.getDefault`.
     
         Also see:
-            :meth:`~org.orekit.time.TimeScales.getIrnssEpoch`
+            :meth:`~org.orekit.time.TimeScales.getNavicEpoch`
     
     
     """
@@ -2465,9 +2941,13 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
     @typing.overload
     def __init__(self, int: int, int2: int, int3: int, int4: int, int5: int, double: float, timeScale: TimeScale): ...
     @typing.overload
+    def __init__(self, int: int, int2: int, int3: int, int4: int, int5: int, timeOffset: TimeOffset, timeScale: TimeScale): ...
+    @typing.overload
     def __init__(self, int: int, int2: int, int3: int, timeScale: TimeScale): ...
     @typing.overload
     def __init__(self, int: int, month: Month, int2: int, int3: int, int4: int, double: float, timeScale: TimeScale): ...
+    @typing.overload
+    def __init__(self, int: int, month: Month, int2: int, int3: int, int4: int, timeOffset: TimeOffset, timeScale: TimeScale): ...
     @typing.overload
     def __init__(self, int: int, month: Month, int2: int, timeScale: TimeScale): ...
     @typing.overload
@@ -2487,24 +2967,74 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
     @typing.overload
     def __init__(self, absoluteDate: 'AbsoluteDate', long: int, timeUnit: java.util.concurrent.TimeUnit): ...
     @typing.overload
+    def __init__(self, absoluteDate: 'AbsoluteDate', timeOffset: TimeOffset): ...
+    @typing.overload
+    def __init__(self, absoluteDate: 'AbsoluteDate', timeOffset: TimeOffset, timeScale: TimeScale): ...
+    @typing.overload
     def __init__(self, dateComponents: DateComponents, timeComponents: TimeComponents, timeScale: TimeScale): ...
     @typing.overload
     def __init__(self, dateComponents: DateComponents, timeScale: TimeScale): ...
     @typing.overload
     def __init__(self, dateTimeComponents: DateTimeComponents, timeScale: TimeScale): ...
-    def compareTo(self, absoluteDate: 'AbsoluteDate') -> int:
+    @typing.overload
+    def __init__(self, timeOffset: TimeOffset): ...
+    def accurateDurationFrom(self, absoluteDate: 'AbsoluteDate') -> TimeOffset:
         """
-            Compare the instance with another date.
+            Compute the physically elapsed duration between two instants.
         
-            Specified by:
-                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable.html?is` in
-                interface :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Comparable?is`
+            The returned duration is the number of seconds physically elapsed between the two instants, measured in a regular time
+            scale with respect to surface of the Earth (i.e either the :class:`~org.orekit.time.TAIScale`, the
+            :class:`~org.orekit.time.TTScale` or the :class:`~org.orekit.time.GPSScale`). It is the only method that gives a
+            duration with a physical meaning.
+        
+            This method gives the same result (with less computation) as calling :meth:`~org.orekit.time.AbsoluteDate.offsetFrom`
+            with a second argument set to one of the regular scales cited above.
+        
+            This method is the reverse of the :meth:`~org.orekit.time.AbsoluteDate.%3Cinit%3E` constructor.
         
             Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): other date to compare the instance to
+                instant (:class:`~org.orekit.time.AbsoluteDate`): instant to subtract from the instance
         
             Returns:
-                a negative integer, zero, or a positive integer as this date is before, simultaneous, or after the specified date.
+                offset in seconds between the two instants (positive if the instance is posterior to the argument)
+        
+            Since:
+                13.0
+        
+            Also see:
+                :meth:`~org.orekit.time.AbsoluteDate.durationFrom`, :meth:`~org.orekit.time.AbsoluteDate.offsetFrom`,
+                :meth:`~org.orekit.time.AbsoluteDate.%3Cinit%3E`
+        
+        
+        """
+        ...
+    def accurateOffsetFrom(self, absoluteDate: 'AbsoluteDate', timeScale: TimeScale) -> TimeOffset:
+        """
+            Compute the apparent *clock* offset between two instant *in the perspective of a specific
+            :class:`~org.orekit.time.TimeScale`*.
+        
+            The offset is the number of seconds counted in the given time scale between the locations of the two instants, with all
+            time scale irregularities removed (i.e. considering all days are exactly 86400 seconds long). This method will give a
+            result that may not have a physical meaning if the time scale is irregular. For example since a leap second was
+            introduced at the end of 2005, the apparent clock offset between 2005-12-31T23:59:59 and 2006-01-01T00:00:00 is 1 second
+            and is the value this method will return. On the other hand, the physical duration of the corresponding time interval as
+            returned by the :meth:`~org.orekit.time.AbsoluteDate.durationFrom` method is 2 seconds.
+        
+            This method is the reverse of the :meth:`~org.orekit.time.AbsoluteDate.%3Cinit%3E` constructor.
+        
+            Parameters:
+                instant (:class:`~org.orekit.time.AbsoluteDate`): instant to subtract from the instance
+                timeScale (:class:`~org.orekit.time.TimeScale`): time scale with respect to which the offset should be computed
+        
+            Returns:
+                apparent clock offset in seconds between the two instants (positive if the instance is posterior to the argument)
+        
+            Since:
+                13.0
+        
+            Also see:
+                :meth:`~org.orekit.time.AbsoluteDate.durationFrom`, :meth:`~org.orekit.time.AbsoluteDate.offsetFrom`,
+                :meth:`~org.orekit.time.AbsoluteDate.%3Cinit%3E`
         
         
         """
@@ -2552,10 +3082,32 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
     def createJDDate(int: int, double: float, timeScale: TimeScale, timeScale2: TimeScale) -> 'AbsoluteDate': ...
     @staticmethod
     def createJulianEpoch(double: float) -> 'AbsoluteDate': ...
+    @typing.overload
     @staticmethod
     def createMJDDate(int: int, double: float, timeScale: TimeScale) -> 'AbsoluteDate': ...
     @typing.overload
-    def durationFrom(self, timeStamped: TimeStamped) -> float:
+    @staticmethod
+    def createMJDDate(int: int, timeOffset: TimeOffset, timeScale: TimeScale) -> 'AbsoluteDate': ...
+    @staticmethod
+    def createMedian(absoluteDate: 'AbsoluteDate', absoluteDate2: 'AbsoluteDate') -> 'AbsoluteDate':
+        """
+            Create an instance as the median data between two existing instances.
+        
+            Parameters:
+                date1 (:class:`~org.orekit.time.AbsoluteDate`): first instance
+                date2 (:class:`~org.orekit.time.AbsoluteDate`): second instance
+        
+            Returns:
+                median date between first and second instance
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
+    @typing.overload
+    def durationFrom(self, timeStamped: typing.Union[TimeStamped, typing.Callable]) -> float:
         """
             Compute the physically elapsed duration between two instants.
         
@@ -2576,7 +3128,8 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
                 offset in seconds between the two instants (positive if the instance is posterior to the argument)
         
             Also see:
-                :meth:`~org.orekit.time.AbsoluteDate.offsetFrom`, :meth:`~org.orekit.time.AbsoluteDate.%3Cinit%3E`
+                :meth:`~org.orekit.time.AbsoluteDate.accurateDurationFrom`, :meth:`~org.orekit.time.AbsoluteDate.offsetFrom`,
+                :meth:`~org.orekit.time.AbsoluteDate.%3Cinit%3E`
         
             Compute the physically elapsed duration between two instants.
         
@@ -2610,23 +3163,6 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
     def durationFrom(self, absoluteDate: 'AbsoluteDate') -> float: ...
     @typing.overload
     def durationFrom(self, absoluteDate: 'AbsoluteDate', timeUnit: java.util.concurrent.TimeUnit) -> int: ...
-    def equals(self, object: typing.Any) -> bool:
-        """
-            Check if the instance represents the same time as another instance.
-        
-            Overrides:
-                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
-                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): other date
-        
-            Returns:
-                true if the instance and the other date refer to the same instant
-        
-        
-        """
-        ...
     @typing.overload
     def getComponents(self, int: int) -> DateTimeComponents:
         """
@@ -2718,6 +3254,30 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
         
         """
         ...
+    def getDayOfYear(self, timeScale: TimeScale) -> float:
+        """
+            Get day of year, preserving continuity as much as possible.
+        
+            This is a continuous extension of the integer value returned by
+            :meth:`~org.orekit.time.AbsoluteDate.getComponents`:meth:`~org.orekit.time.DateTimeComponents.getDate`:meth:`~org.orekit.time.DateComponents.getDayOfYear`.
+            In order to have it remain as close as possible to its integer counterpart, day 1.0 is considered to occur on January
+            1st at noon.
+        
+            Continuity is preserved from day to day within a year, but of course there is a discontinuity at year change, where it
+            switches from 365.49999… (or 366.49999… on leap years) to 0.5
+        
+            Parameters:
+                utc (:class:`~org.orekit.time.TimeScale`): time scale to compute date components
+        
+            Returns:
+                day of year, with day 1.0 occurring on January first at noon
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
     @typing.overload
     def getJD(self) -> float:
         """
@@ -2778,21 +3338,7 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
         
         """
         ...
-    def hashCode(self) -> int:
-        """
-            Get a hashcode for this date.
-        
-            Overrides:
-                :meth:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
-                class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
-        
-            Returns:
-                hashcode
-        
-        
-        """
-        ...
-    def isAfter(self, timeStamped: TimeStamped) -> bool:
+    def isAfter(self, timeStamped: typing.Union[TimeStamped, typing.Callable]) -> bool:
         """
             Check if the instance represents a time that is strictly after another.
         
@@ -2811,7 +3357,7 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
         
         """
         ...
-    def isAfterOrEqualTo(self, timeStamped: TimeStamped) -> bool:
+    def isAfterOrEqualTo(self, timeStamped: typing.Union[TimeStamped, typing.Callable]) -> bool:
         """
             Check if the instance represents a time that is after or equal to another.
         
@@ -2830,7 +3376,7 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
         
         """
         ...
-    def isBefore(self, timeStamped: TimeStamped) -> bool:
+    def isBefore(self, timeStamped: typing.Union[TimeStamped, typing.Callable]) -> bool:
         """
             Check if the instance represents a time that is strictly before another.
         
@@ -2849,7 +3395,7 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
         
         """
         ...
-    def isBeforeOrEqualTo(self, timeStamped: TimeStamped) -> bool:
+    def isBeforeOrEqualTo(self, timeStamped: typing.Union[TimeStamped, typing.Callable]) -> bool:
         """
             Check if the instance represents a time that is before or equal to another.
         
@@ -2868,7 +3414,7 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
         
         """
         ...
-    def isBetween(self, timeStamped: TimeStamped, timeStamped2: TimeStamped) -> bool:
+    def isBetween(self, timeStamped: typing.Union[TimeStamped, typing.Callable], timeStamped2: typing.Union[TimeStamped, typing.Callable]) -> bool:
         """
             Check if the instance represents a time that is strictly between two others representing the boundaries of a time span.
             The two boundaries can be provided in any order: in other words, whether :code:`boundary` represents a time that is
@@ -2890,7 +3436,7 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
         
         """
         ...
-    def isBetweenOrEqualTo(self, timeStamped: TimeStamped, timeStamped2: TimeStamped) -> bool:
+    def isBetweenOrEqualTo(self, timeStamped: typing.Union[TimeStamped, typing.Callable], timeStamped2: typing.Union[TimeStamped, typing.Callable]) -> bool:
         """
             Check if the instance represents a time that is between two others representing the boundaries of a time span, or equal
             to one of them. The two boundaries can be provided in any order: in other words, whether :code:`boundary` represents a
@@ -2912,7 +3458,7 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
         
         """
         ...
-    def isCloseTo(self, timeStamped: TimeStamped, double: float) -> bool:
+    def isCloseTo(self, timeStamped: typing.Union[TimeStamped, typing.Callable], double: float) -> bool:
         """
             Check if the instance time is close to another.
         
@@ -2932,7 +3478,7 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
         
         """
         ...
-    def isEqualTo(self, timeStamped: TimeStamped) -> bool:
+    def isEqualTo(self, timeStamped: typing.Union[TimeStamped, typing.Callable]) -> bool:
         """
             Check if the instance represents the same time as another.
         
@@ -2953,15 +3499,15 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
         ...
     def offsetFrom(self, absoluteDate: 'AbsoluteDate', timeScale: TimeScale) -> float:
         """
-            Compute the apparent clock offset between two instant *in the perspective of a specific
+            Compute the apparent *clock* offset between two instant *in the perspective of a specific
             :class:`~org.orekit.time.TimeScale`*.
         
             The offset is the number of seconds counted in the given time scale between the locations of the two instants, with all
             time scale irregularities removed (i.e. considering all days are exactly 86400 seconds long). This method will give a
             result that may not have a physical meaning if the time scale is irregular. For example since a leap second was
-            introduced at the end of 2005, the apparent offset between 2005-12-31T23:59:59 and 2006-01-01T00:00:00 is 1 second, but
-            the physical duration of the corresponding time interval as returned by the
-            :meth:`~org.orekit.time.AbsoluteDate.durationFrom` method is 2 seconds.
+            introduced at the end of 2005, the apparent clock offset between 2005-12-31T23:59:59 and 2006-01-01T00:00:00 is 1 second
+            and is the value this method will return. On the other hand, the physical duration of the corresponding time interval as
+            returned by the :meth:`~org.orekit.time.AbsoluteDate.durationFrom` method is 2 seconds.
         
             This method is the reverse of the :meth:`~org.orekit.time.AbsoluteDate.%3Cinit%3E` constructor.
         
@@ -2973,14 +3519,15 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
                 apparent clock offset in seconds between the two instants (positive if the instance is posterior to the argument)
         
             Also see:
-                :meth:`~org.orekit.time.AbsoluteDate.durationFrom`, :meth:`~org.orekit.time.AbsoluteDate.%3Cinit%3E`
+                :meth:`~org.orekit.time.AbsoluteDate.durationFrom`, :meth:`~org.orekit.time.AbsoluteDate.accurateOffsetFrom`,
+                :meth:`~org.orekit.time.AbsoluteDate.%3Cinit%3E`
         
         
         """
         ...
     @typing.overload
     @staticmethod
-    def parseCCSDSCalendarSegmentedTimeCode(byte: int, byteArray: typing.List[int]) -> 'AbsoluteDate':
+    def parseCCSDSCalendarSegmentedTimeCode(byte: int, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes]) -> 'AbsoluteDate':
         """
             Build an instance from a CCSDS Calendar Segmented Time Code (CCS).
         
@@ -3003,10 +3550,10 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
         ...
     @typing.overload
     @staticmethod
-    def parseCCSDSCalendarSegmentedTimeCode(byte: int, byteArray: typing.List[int], timeScale: TimeScale) -> 'AbsoluteDate': ...
+    def parseCCSDSCalendarSegmentedTimeCode(byte: int, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes], timeScale: TimeScale) -> 'AbsoluteDate': ...
     @typing.overload
     @staticmethod
-    def parseCCSDSDaySegmentedTimeCode(byte: int, byteArray: typing.List[int], dateComponents: DateComponents) -> 'AbsoluteDate':
+    def parseCCSDSDaySegmentedTimeCode(byte: int, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes], dateComponents: DateComponents) -> 'AbsoluteDate':
         """
             Build an instance from a CCSDS Day Segmented Time Code (CDS).
         
@@ -3031,10 +3578,10 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
         ...
     @typing.overload
     @staticmethod
-    def parseCCSDSDaySegmentedTimeCode(byte: int, byteArray: typing.List[int], dateComponents: DateComponents, timeScale: TimeScale) -> 'AbsoluteDate': ...
+    def parseCCSDSDaySegmentedTimeCode(byte: int, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes], dateComponents: DateComponents, timeScale: TimeScale) -> 'AbsoluteDate': ...
     @typing.overload
     @staticmethod
-    def parseCCSDSUnsegmentedTimeCode(byte: int, byte2: int, byteArray: typing.List[int], absoluteDate: 'AbsoluteDate') -> 'AbsoluteDate':
+    def parseCCSDSUnsegmentedTimeCode(byte: int, byte2: int, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes], absoluteDate: 'AbsoluteDate') -> 'AbsoluteDate':
         """
             Build an instance from a CCSDS Unsegmented Time Code (CUC).
         
@@ -3052,9 +3599,10 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
                     transmitted in data interfaces, as it is constant for a given data interface (value ignored if presence not signaled in
                     :code:`preambleField1`)
                 timeField (byte[]): byte array containing the time code
-                agencyDefinedEpoch (:class:`~org.orekit.time.AbsoluteDate`): reference epoch, ignored if the preamble field specifies the :meth:`~org.orekit.time.AbsoluteDate.CCSDS_EPOCH` is used
-                    (and hence may be null in this case)
-                ccsdsEpoch (:class:`~org.orekit.time.AbsoluteDate`): reference epoch, ignored if the preamble field specifies the agency epoch is used.
+                agencyDefinedEpoch (:class:`~org.orekit.time.AbsoluteDate`): reference epoch, ignored if the preamble field specifies the :meth:`~org.orekit.time.DateComponents.CCSDS_EPOCH` is used
+                    (and hence may be null in this case, but then :code:`ccsdsEpoch` must be non-null)
+                ccsdsEpoch (:class:`~org.orekit.time.AbsoluteDate`): reference epoch, ignored if the preamble field specifies the agency epoch is used (and hence may be null in this case,
+                    but then :code:`agencyDefinedEpoch` must be non-null).
         
             Returns:
                 an instance corresponding to the specified date
@@ -3067,13 +3615,11 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
         ...
     @typing.overload
     @staticmethod
-    def parseCCSDSUnsegmentedTimeCode(byte: int, byte2: int, byteArray: typing.List[int], absoluteDate: 'AbsoluteDate', absoluteDate2: 'AbsoluteDate') -> 'AbsoluteDate': ...
+    def parseCCSDSUnsegmentedTimeCode(byte: int, byte2: int, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes], absoluteDate: 'AbsoluteDate', absoluteDate2: 'AbsoluteDate') -> 'AbsoluteDate': ...
     @typing.overload
     def shiftedBy(self, double: float) -> 'AbsoluteDate':
         """
-            Get a time-shifted date.
-        
-            Calling this method is equivalent to call :code:`new AbsoluteDate(this, dt)`.
+            Get a time-shifted instance.
         
             Specified by:
                 :meth:`~org.orekit.time.TimeShiftable.shiftedBy` in interface :class:`~org.orekit.time.TimeShiftable`
@@ -3082,11 +3628,18 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
                 dt (double): time shift in seconds
         
             Returns:
-                a new date, shifted with respect to instance (which is immutable)
+                a new instance, shifted with respect to instance (which is not changed)
         
-            Also see:
-                :meth:`~org.orekit.utils.PVCoordinates.shiftedBy`, :meth:`~org.orekit.attitudes.Attitude.shiftedBy`,
-                :meth:`~org.orekit.orbits.Orbit.shiftedBy`, :meth:`~org.orekit.propagation.SpacecraftState.shiftedBy`
+            Get a time-shifted instance.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeShiftable.shiftedBy` in interface :class:`~org.orekit.time.TimeShiftable`
+        
+            Parameters:
+                dt (:class:`~org.orekit.time.TimeOffset`): time shift
+        
+            Returns:
+                a new instance, shifted with respect to instance (which is not changed)
         
             Get a time-shifted date.
         
@@ -3107,6 +3660,8 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
         ...
     @typing.overload
     def shiftedBy(self, long: int, timeUnit: java.util.concurrent.TimeUnit) -> 'AbsoluteDate': ...
+    @typing.overload
+    def shiftedBy(self, timeOffset: TimeOffset) -> 'AbsoluteDate': ...
     def timeScalesOffset(self, timeScale: TimeScale, timeScale2: TimeScale) -> float:
         """
             Compute the offset between two time scales at the current instant.
@@ -3178,7 +3733,7 @@ class AbsoluteDate(TimeStamped, TimeShiftable['AbsoluteDate'], java.lang.Compara
     @typing.overload
     def toString(self) -> str:
         """
-            Get a String representation of the instant location with up to 16 digits of precision for the seconds value.
+            Get a String representation of the instant location with up to 18 digits of precision for the seconds value.
         
             Since this method is used in exception messages and error handling every effort is made to return some representation of
             the instant. If UTC is available from the default data context then it is used to format the string in UTC. If not then
@@ -3453,15 +4008,14 @@ class AbstractFieldTimeInterpolator(FieldTimeInterpolator[_AbstractFieldTimeInte
         ...
     def getSubInterpolators(self) -> java.util.List[FieldTimeInterpolator[FieldTimeStamped[_AbstractFieldTimeInterpolator__KK], _AbstractFieldTimeInterpolator__KK]]: ...
     @typing.overload
-    def interpolate(self, absoluteDate: AbsoluteDate, collection: typing.Union[java.util.Collection[_AbstractFieldTimeInterpolator__T], typing.Sequence[_AbstractFieldTimeInterpolator__T]]) -> _AbstractFieldTimeInterpolator__T: ...
+    def interpolate(self, absoluteDate: AbsoluteDate, collection: typing.Union[java.util.Collection[_AbstractFieldTimeInterpolator__T], typing.Sequence[_AbstractFieldTimeInterpolator__T], typing.Set[_AbstractFieldTimeInterpolator__T]]) -> _AbstractFieldTimeInterpolator__T: ...
     @typing.overload
     def interpolate(self, absoluteDate: AbsoluteDate, stream: java.util.stream.Stream[_AbstractFieldTimeInterpolator__T]) -> _AbstractFieldTimeInterpolator__T: ...
     @typing.overload
-    def interpolate(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_AbstractFieldTimeInterpolator__KK], collection: typing.Union[java.util.Collection[_AbstractFieldTimeInterpolator__T], typing.Sequence[_AbstractFieldTimeInterpolator__T]]) -> _AbstractFieldTimeInterpolator__T: ...
+    def interpolate(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_AbstractFieldTimeInterpolator__KK], collection: typing.Union[java.util.Collection[_AbstractFieldTimeInterpolator__T], typing.Sequence[_AbstractFieldTimeInterpolator__T], typing.Set[_AbstractFieldTimeInterpolator__T]]) -> _AbstractFieldTimeInterpolator__T: ...
     @typing.overload
     def interpolate(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_AbstractFieldTimeInterpolator__KK], stream: java.util.stream.Stream[_AbstractFieldTimeInterpolator__T]) -> _AbstractFieldTimeInterpolator__T: ...
     class InterpolationData:
-        def getCachedSamples(self) -> org.orekit.utils.ImmutableFieldTimeStampedCache[_AbstractFieldTimeInterpolator__T, _AbstractFieldTimeInterpolator__KK]: ...
         def getField(self) -> org.hipparchus.Field[_AbstractFieldTimeInterpolator__KK]: ...
         def getInterpolationDate(self) -> 'FieldAbsoluteDate'[_AbstractFieldTimeInterpolator__KK]: ...
         def getNeighborList(self) -> java.util.List[_AbstractFieldTimeInterpolator__T]: ...
@@ -3500,7 +4054,6 @@ class AbstractTimeInterpolator(TimeInterpolator[_AbstractTimeInterpolator__T], t
     def __init__(self, int: int, double: float): ...
     @staticmethod
     def checkInterpolatorCompatibilityWithSampleSize(timeInterpolator: TimeInterpolator[TimeStamped], int: int) -> None: ...
-    _getCentralDate_0__T = typing.TypeVar('_getCentralDate_0__T', bound=TimeStamped)  # <T>
     _getCentralDate_1__T = typing.TypeVar('_getCentralDate_1__T', bound=TimeStamped)  # <T>
     @typing.overload
     @staticmethod
@@ -3574,11 +4127,10 @@ class AbstractTimeInterpolator(TimeInterpolator[_AbstractTimeInterpolator__T], t
         ...
     def getSubInterpolators(self) -> java.util.List[TimeInterpolator[TimeStamped]]: ...
     @typing.overload
-    def interpolate(self, absoluteDate: AbsoluteDate, collection: typing.Union[java.util.Collection[_AbstractTimeInterpolator__T], typing.Sequence[_AbstractTimeInterpolator__T]]) -> _AbstractTimeInterpolator__T: ...
+    def interpolate(self, absoluteDate: AbsoluteDate, collection: typing.Union[java.util.Collection[_AbstractTimeInterpolator__T], typing.Sequence[_AbstractTimeInterpolator__T], typing.Set[_AbstractTimeInterpolator__T]]) -> _AbstractTimeInterpolator__T: ...
     @typing.overload
     def interpolate(self, absoluteDate: AbsoluteDate, stream: java.util.stream.Stream[_AbstractTimeInterpolator__T]) -> _AbstractTimeInterpolator__T: ...
     class InterpolationData:
-        def getCachedSamples(self) -> org.orekit.utils.ImmutableTimeStampedCache[_AbstractTimeInterpolator__T]: ...
         def getInterpolationDate(self) -> AbsoluteDate: ...
         def getNeighborList(self) -> java.util.List[_AbstractTimeInterpolator__T]: ...
 
@@ -3773,20 +4325,6 @@ class AbstractTimeScales(TimeScales):
         
         """
         ...
-    def getIrnssEpoch(self) -> AbsoluteDate:
-        """
-            Description copied from interface: :meth:`~org.orekit.time.TimeScales.getIrnssEpoch`
-            Reference epoch for IRNSS weeks: 1999-08-22T00:00:00 IRNSS time.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getIrnssEpoch` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                IRNSS Epoch
-        
-        
-        """
-        ...
     def getJ2000Epoch(self) -> AbsoluteDate:
         """
             Description copied from interface: :meth:`~org.orekit.time.TimeScales.getJ2000Epoch`
@@ -3849,6 +4387,20 @@ class AbstractTimeScales(TimeScales):
         
             Returns:
                 Modified Julian Epoch
+        
+        
+        """
+        ...
+    def getNavicEpoch(self) -> AbsoluteDate:
+        """
+            Description copied from interface: :meth:`~org.orekit.time.TimeScales.getNavicEpoch`
+            Reference epoch for NavIC weeks: 1999-08-22T00:00:00 NavIC time.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeScales.getNavicEpoch` in interface :class:`~org.orekit.time.TimeScales`
+        
+            Returns:
+                NavIC Epoch
         
         
         """
@@ -4058,9 +4610,6 @@ class ClockTimeScale(TimeScale):
     
         Since:
             12.1
-    
-        Also see:
-            :meth:`~serialized`
     """
     def __init__(self, string: str, timeScale: TimeScale, clockModel: ClockModel): ...
     def getName(self) -> str:
@@ -4076,29 +4625,9 @@ class ClockTimeScale(TimeScale):
         
         """
         ...
-    _offsetFromTAI_1__T = typing.TypeVar('_offsetFromTAI_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _offsetFromTAI_0__T = typing.TypeVar('_offsetFromTAI_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def offsetFromTAI(self, absoluteDate: AbsoluteDate) -> float:
-        """
-            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScale.offsetFromTAI` in interface :class:`~org.orekit.time.TimeScale`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): conversion date
-        
-            Returns:
-                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
-                time scale*
-        
-            Also see:
-                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
-        
-        """
-        ...
-    @typing.overload
-    def offsetFromTAI(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_1__T]) -> _offsetFromTAI_1__T:
+    def offsetFromTAI(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_0__T]) -> _offsetFromTAI_0__T:
         """
             Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
         
@@ -4118,19 +4647,37 @@ class ClockTimeScale(TimeScale):
         
         """
         ...
+    @typing.overload
+    def offsetFromTAI(self, absoluteDate: AbsoluteDate) -> TimeOffset:
+        """
+            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeScale.offsetFromTAI` in interface :class:`~org.orekit.time.TimeScale`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): conversion date
+        
+            Returns:
+                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
+                time scale*
+        
+            Also see:
+                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
+        
+        """
+        ...
 
 class ConstantOffsetTimeScale(TimeScale):
     """
     public class ConstantOffsetTimeScale extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeScale`
     
-        Base class for time scales with constant offset with respecto to TAI.
+        Base class for time scales with constant offset with respect to to TAI.
     
         Since:
             12.1
-    
-        Also see:
-            :meth:`~serialized`
     """
+    def __init__(self, string: str, timeOffset: TimeOffset): ...
     def getName(self) -> str:
         """
             Get the name time scale.
@@ -4144,29 +4691,9 @@ class ConstantOffsetTimeScale(TimeScale):
         
         """
         ...
-    _offsetFromTAI_1__T = typing.TypeVar('_offsetFromTAI_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _offsetFromTAI_0__T = typing.TypeVar('_offsetFromTAI_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def offsetFromTAI(self, absoluteDate: AbsoluteDate) -> float:
-        """
-            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScale.offsetFromTAI` in interface :class:`~org.orekit.time.TimeScale`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): conversion date
-        
-            Returns:
-                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
-                time scale*
-        
-            Also see:
-                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
-        
-        """
-        ...
-    @typing.overload
-    def offsetFromTAI(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_1__T]) -> _offsetFromTAI_1__T:
+    def offsetFromTAI(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_0__T]) -> _offsetFromTAI_0__T:
         """
             Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
         
@@ -4186,7 +4713,27 @@ class ConstantOffsetTimeScale(TimeScale):
         
         """
         ...
-    def offsetToTAI(self, dateComponents: DateComponents, timeComponents: TimeComponents) -> float:
+    @typing.overload
+    def offsetFromTAI(self, absoluteDate: AbsoluteDate) -> TimeOffset:
+        """
+            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeScale.offsetFromTAI` in interface :class:`~org.orekit.time.TimeScale`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): conversion date
+        
+            Returns:
+                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
+                time scale*
+        
+            Also see:
+                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
+        
+        """
+        ...
+    def offsetToTAI(self, dateComponents: DateComponents, timeComponents: TimeComponents) -> TimeOffset:
         """
             Get the offset to convert locations from instance to :class:`~org.orekit.time.TAIScale`.
         
@@ -4288,6 +4835,8 @@ class FieldTimeShiftable(TimeShiftable[_FieldTimeShiftable__T], typing.Generic[_
         ...
     @typing.overload
     def shiftedBy(self, double: float) -> _FieldTimeShiftable__T: ...
+    @typing.overload
+    def shiftedBy(self, timeOffset: TimeOffset) -> _FieldTimeShiftable__T: ...
 
 _FieldTimeStampedPair__F = typing.TypeVar('_FieldTimeStampedPair__F', bound=FieldTimeStamped)  # <F>
 _FieldTimeStampedPair__S = typing.TypeVar('_FieldTimeStampedPair__S', bound=FieldTimeStamped)  # <S>
@@ -4358,9 +4907,9 @@ class FixedStepSelector(DatesSelector):
     def __init__(self, double: float, timeScale: TimeScale): ...
     def selectDates(self, absoluteDate: AbsoluteDate, absoluteDate2: AbsoluteDate) -> java.util.List[AbsoluteDate]: ...
 
-class GLONASSDate(java.io.Serializable, TimeStamped):
+class GLONASSDate(TimeStamped):
     """
-    public class GLONASSDate extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.orekit.time.TimeStamped`
+    public class GLONASSDate extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`
     
         Container for date in GLONASS form.
     
@@ -4368,7 +4917,7 @@ class GLONASSDate(java.io.Serializable, TimeStamped):
             10.0
     
         Also see:
-            :class:`~org.orekit.time.AbsoluteDate`, "GLONASS Interface Control Document v1.0, 2016", :meth:`~serialized`
+            :class:`~org.orekit.time.AbsoluteDate`, "GLONASS Interface Control Document v1.0, 2016"
     """
     @typing.overload
     def __init__(self, int: int, int2: int, double: float): ...
@@ -4458,29 +5007,11 @@ class GLONASSScale(TimeScale):
         This is intended to be accessed thanks to :class:`~org.orekit.time.TimeScales`, so there is no public constructor.
     
         Also see:
-            :class:`~org.orekit.time.AbsoluteDate`, :meth:`~serialized`
+            :class:`~org.orekit.time.AbsoluteDate`
     """
-    _getLeap_1__T = typing.TypeVar('_getLeap_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getLeap_0__T = typing.TypeVar('_getLeap_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getLeap(self, absoluteDate: AbsoluteDate) -> float:
-        """
-            Get the value of the previous leap.
-        
-            This method will return 0.0 for all time scales that do *not* implement leap seconds.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScale.getLeap` in interface :class:`~org.orekit.time.TimeScale`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): date to check
-        
-            Returns:
-                value of the previous leap
-        
-        """
-        ...
-    @typing.overload
-    def getLeap(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_getLeap_1__T]) -> _getLeap_1__T:
+    def getLeap(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_getLeap_0__T]) -> _getLeap_0__T:
         """
             Get the value of the previous leap.
         
@@ -4495,6 +5026,24 @@ class GLONASSScale(TimeScale):
             Returns:
                 value of the previous leap
         
+        
+        """
+        ...
+    @typing.overload
+    def getLeap(self, absoluteDate: AbsoluteDate) -> TimeOffset:
+        """
+            Get the value of the previous leap.
+        
+            This method will return 0 for all time scales that do *not* implement leap seconds.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeScale.getLeap` in interface :class:`~org.orekit.time.TimeScale`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): date to check
+        
+            Returns:
+                value of the previous leap
         
         """
         ...
@@ -4593,29 +5142,9 @@ class GLONASSScale(TimeScale):
         
         """
         ...
-    _offsetFromTAI_1__T = typing.TypeVar('_offsetFromTAI_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _offsetFromTAI_0__T = typing.TypeVar('_offsetFromTAI_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def offsetFromTAI(self, absoluteDate: AbsoluteDate) -> float:
-        """
-            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScale.offsetFromTAI` in interface :class:`~org.orekit.time.TimeScale`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): conversion date
-        
-            Returns:
-                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
-                time scale*
-        
-            Also see:
-                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
-        
-        """
-        ...
-    @typing.overload
-    def offsetFromTAI(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_1__T]) -> _offsetFromTAI_1__T:
+    def offsetFromTAI(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_0__T]) -> _offsetFromTAI_0__T:
         """
             Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
         
@@ -4635,7 +5164,27 @@ class GLONASSScale(TimeScale):
         
         """
         ...
-    def offsetToTAI(self, dateComponents: DateComponents, timeComponents: TimeComponents) -> float:
+    @typing.overload
+    def offsetFromTAI(self, absoluteDate: AbsoluteDate) -> TimeOffset:
+        """
+            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeScale.offsetFromTAI` in interface :class:`~org.orekit.time.TimeScale`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): conversion date
+        
+            Returns:
+                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
+                time scale*
+        
+            Also see:
+                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
+        
+        """
+        ...
+    def offsetToTAI(self, dateComponents: DateComponents, timeComponents: TimeComponents) -> TimeOffset:
         """
             Get the offset to convert locations from instance to :class:`~org.orekit.time.TAIScale`.
         
@@ -4681,7 +5230,7 @@ class GMSTScale(TimeScale):
             5.1
     
         Also see:
-            :class:`~org.orekit.time.AbsoluteDate`, :meth:`~serialized`
+            :class:`~org.orekit.time.AbsoluteDate`
     """
     def getName(self) -> str:
         """
@@ -4696,29 +5245,9 @@ class GMSTScale(TimeScale):
         
         """
         ...
-    _offsetFromTAI_1__T = typing.TypeVar('_offsetFromTAI_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _offsetFromTAI_0__T = typing.TypeVar('_offsetFromTAI_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def offsetFromTAI(self, absoluteDate: AbsoluteDate) -> float:
-        """
-            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScale.offsetFromTAI` in interface :class:`~org.orekit.time.TimeScale`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): conversion date
-        
-            Returns:
-                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
-                time scale*
-        
-            Also see:
-                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
-        
-        """
-        ...
-    @typing.overload
-    def offsetFromTAI(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_1__T]) -> _offsetFromTAI_1__T:
+    def offsetFromTAI(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_0__T]) -> _offsetFromTAI_0__T:
         """
             Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
         
@@ -4735,6 +5264,26 @@ class GMSTScale(TimeScale):
             Also see:
                 :meth:`~org.orekit.time.TimeScale.offsetToTAI`
         
+        
+        """
+        ...
+    @typing.overload
+    def offsetFromTAI(self, absoluteDate: AbsoluteDate) -> TimeOffset:
+        """
+            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeScale.offsetFromTAI` in interface :class:`~org.orekit.time.TimeScale`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): conversion date
+        
+            Returns:
+                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
+                time scale*
+        
+            Also see:
+                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
         
         """
         ...
@@ -4768,6 +5317,12 @@ class GNSSDate(java.io.Serializable, TimeStamped):
     def __init__(self, int: int, double: float, satelliteSystem: org.orekit.gnss.SatelliteSystem, dateComponents: DateComponents, timeScales: TimeScales): ...
     @typing.overload
     def __init__(self, int: int, double: float, satelliteSystem: org.orekit.gnss.SatelliteSystem, timeScales: TimeScales): ...
+    @typing.overload
+    def __init__(self, int: int, timeOffset: TimeOffset, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    @typing.overload
+    def __init__(self, int: int, timeOffset: TimeOffset, satelliteSystem: org.orekit.gnss.SatelliteSystem, dateComponents: DateComponents, timeScales: TimeScales): ...
+    @typing.overload
+    def __init__(self, int: int, timeOffset: TimeOffset, satelliteSystem: org.orekit.gnss.SatelliteSystem, timeScales: TimeScales): ...
     @typing.overload
     def __init__(self, absoluteDate: AbsoluteDate, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
     @typing.overload
@@ -4825,6 +5380,19 @@ class GNSSDate(java.io.Serializable, TimeStamped):
         
         """
         ...
+    def getSplitSecondsInWeek(self) -> TimeOffset:
+        """
+            Get the number of seconds since week start.
+        
+            Returns:
+                number of seconds since week start
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
     def getWeekNumber(self) -> int:
         """
             Get the week number since the GNSS reference epoch.
@@ -4833,7 +5401,7 @@ class GNSSDate(java.io.Serializable, TimeStamped):
             cycle of the constellation.
         
             Returns:
-                week number since since the GNSS reference epoch
+                week number since the GNSS reference epoch
         
         
         """
@@ -4862,6 +5430,26 @@ class GNSSDate(java.io.Serializable, TimeStamped):
         
         """
         ...
+    class GNSSDateType(java.lang.Enum['GNSSDate.GNSSDateType']):
+        GPS: typing.ClassVar['GNSSDate.GNSSDateType'] = ...
+        GALILEO: typing.ClassVar['GNSSDate.GNSSDateType'] = ...
+        QZSS: typing.ClassVar['GNSSDate.GNSSDateType'] = ...
+        BEIDOU: typing.ClassVar['GNSSDate.GNSSDateType'] = ...
+        NAVIC: typing.ClassVar['GNSSDate.GNSSDateType'] = ...
+        SBAS: typing.ClassVar['GNSSDate.GNSSDateType'] = ...
+        def getRollOverCycle(self) -> int: ...
+        @staticmethod
+        def getRollOverWeek(satelliteSystem: org.orekit.gnss.SatelliteSystem) -> int: ...
+        def getSatelliteSystem(self) -> org.orekit.gnss.SatelliteSystem: ...
+        _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
+        @typing.overload
+        @staticmethod
+        def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
+        @typing.overload
+        @staticmethod
+        def valueOf(string: str) -> 'GNSSDate.GNSSDateType': ...
+        @staticmethod
+        def values() -> typing.MutableSequence['GNSSDate.GNSSDateType']: ...
 
 class PerfectClockModel(ClockModel):
     """
@@ -5089,11 +5677,11 @@ class PythonFieldTimeInterpolator(FieldTimeInterpolator[_PythonFieldTimeInterpol
         ...
     def getSubInterpolators(self) -> java.util.List[FieldTimeInterpolator[FieldTimeStamped[_PythonFieldTimeInterpolator__KK], _PythonFieldTimeInterpolator__KK]]: ...
     @typing.overload
-    def interpolate(self, absoluteDate: AbsoluteDate, collection: typing.Union[java.util.Collection[_PythonFieldTimeInterpolator__T], typing.Sequence[_PythonFieldTimeInterpolator__T]]) -> _PythonFieldTimeInterpolator__T: ...
+    def interpolate(self, absoluteDate: AbsoluteDate, collection: typing.Union[java.util.Collection[_PythonFieldTimeInterpolator__T], typing.Sequence[_PythonFieldTimeInterpolator__T], typing.Set[_PythonFieldTimeInterpolator__T]]) -> _PythonFieldTimeInterpolator__T: ...
     @typing.overload
     def interpolate(self, absoluteDate: AbsoluteDate, stream: java.util.stream.Stream[_PythonFieldTimeInterpolator__T]) -> _PythonFieldTimeInterpolator__T: ...
     @typing.overload
-    def interpolate(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_PythonFieldTimeInterpolator__KK], collection: typing.Union[java.util.Collection[_PythonFieldTimeInterpolator__T], typing.Sequence[_PythonFieldTimeInterpolator__T]]) -> _PythonFieldTimeInterpolator__T: ...
+    def interpolate(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_PythonFieldTimeInterpolator__KK], collection: typing.Union[java.util.Collection[_PythonFieldTimeInterpolator__T], typing.Sequence[_PythonFieldTimeInterpolator__T], typing.Set[_PythonFieldTimeInterpolator__T]]) -> _PythonFieldTimeInterpolator__T: ...
     @typing.overload
     def interpolate(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_PythonFieldTimeInterpolator__KK], stream: java.util.stream.Stream[_PythonFieldTimeInterpolator__T]) -> _PythonFieldTimeInterpolator__T: ...
     def pythonDecRef(self) -> None: ...
@@ -5202,7 +5790,7 @@ class PythonTimeInterpolator(TimeInterpolator[_PythonTimeInterpolator__T], typin
         ...
     def getSubInterpolators(self) -> java.util.List[TimeInterpolator[TimeStamped]]: ...
     @typing.overload
-    def interpolate(self, absoluteDate: AbsoluteDate, collection: typing.Union[java.util.Collection[_PythonTimeInterpolator__T], typing.Sequence[_PythonTimeInterpolator__T]]) -> _PythonTimeInterpolator__T: ...
+    def interpolate(self, absoluteDate: AbsoluteDate, collection: typing.Union[java.util.Collection[_PythonTimeInterpolator__T], typing.Sequence[_PythonTimeInterpolator__T], typing.Set[_PythonTimeInterpolator__T]]) -> _PythonTimeInterpolator__T: ...
     @typing.overload
     def interpolate(self, absoluteDate: AbsoluteDate, stream: java.util.stream.Stream[_PythonTimeInterpolator__T]) -> _PythonTimeInterpolator__T: ...
     def pythonDecRef(self) -> None: ...
@@ -5280,10 +5868,6 @@ class PythonTimeScalarFunction(TimeScalarFunction):
 class PythonTimeScale(TimeScale):
     """
     public class PythonTimeScale extends :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeScale`
-    
-    
-        Also see:
-            :meth:`~serialized`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -5300,29 +5884,9 @@ class PythonTimeScale(TimeScale):
         
         """
         ...
-    _offsetFromTAI_1__T = typing.TypeVar('_offsetFromTAI_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _offsetFromTAI_0__T = typing.TypeVar('_offsetFromTAI_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def offsetFromTAI(self, absoluteDate: AbsoluteDate) -> float:
-        """
-            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScale.offsetFromTAI` in interface :class:`~org.orekit.time.TimeScale`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): conversion date
-        
-            Returns:
-                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
-                time scale*
-        
-            Also see:
-                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
-        
-        """
-        ...
-    @typing.overload
-    def offsetFromTAI(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_1__T]) -> _offsetFromTAI_1__T:
+    def offsetFromTAI(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_0__T]) -> _offsetFromTAI_0__T:
         """
             Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
         
@@ -5339,6 +5903,26 @@ class PythonTimeScale(TimeScale):
             Also see:
                 :meth:`~org.orekit.time.TimeScale.offsetToTAI`
         
+        
+        """
+        ...
+    @typing.overload
+    def offsetFromTAI(self, absoluteDate: AbsoluteDate) -> TimeOffset:
+        """
+            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeScale.offsetFromTAI` in interface :class:`~org.orekit.time.TimeScale`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): conversion date
+        
+            Returns:
+                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
+                time scale*
+        
+            Also see:
+                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
         
         """
         ...
@@ -5393,7 +5977,7 @@ class PythonTimeScales(TimeScales):
                 a new instant
         
             Also see:
-                :meth:`~org.orekit.time.PythonTimeScales.createJulianEpoch`
+                :meth:`~org.orekit.time.TimeScales.createJulianEpoch`
         
         
         """
@@ -5423,7 +6007,7 @@ class PythonTimeScales(TimeScales):
                 a new instant
         
             Also see:
-                :meth:`~org.orekit.time.PythonTimeScales.getJ2000Epoch`, :meth:`~org.orekit.time.PythonTimeScales.createBesselianEpoch`
+                :meth:`~org.orekit.time.TimeScales.getJ2000Epoch`, :meth:`~org.orekit.time.TimeScales.createBesselianEpoch`
         
         
         """
@@ -5521,9 +6105,6 @@ class PythonTimeScales(TimeScales):
             Returns:
                 Greenwich Mean Sidereal Time scale
         
-            Since:
-                7.0
-        
         
         """
         ...
@@ -5594,32 +6175,6 @@ class PythonTimeScales(TimeScales):
         
         """
         ...
-    def getIRNSS(self) -> 'IRNSSScale':
-        """
-            Get the Indian Regional Navigation Satellite System time scale.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getIRNSS` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                Indian Regional Navigation Satellite System time scale
-        
-        
-        """
-        ...
-    def getIrnssEpoch(self) -> AbsoluteDate:
-        """
-            Reference epoch for IRNSS weeks: 1999-08-22T00:00:00 IRNSS time.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScales.getIrnssEpoch` in interface :class:`~org.orekit.time.TimeScales`
-        
-            Returns:
-                IRNSS Epoch
-        
-        
-        """
-        ...
     def getJ2000Epoch(self) -> AbsoluteDate:
         """
             J2000.0 Reference epoch: 2000-01-01T12:00:00 Terrestrial Time (*not* UTC).
@@ -5678,6 +6233,32 @@ class PythonTimeScales(TimeScales):
         
             Returns:
                 Modified Julian Epoch
+        
+        
+        """
+        ...
+    def getNavIC(self) -> 'NavicScale':
+        """
+            Get the Navigation with Indian Constellation time scale.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeScales.getNavIC` in interface :class:`~org.orekit.time.TimeScales`
+        
+            Returns:
+                Navigation with Indian Constellation time scale
+        
+        
+        """
+        ...
+    def getNavicEpoch(self) -> AbsoluteDate:
+        """
+            Reference epoch for NavIC weeks: 1999-08-22T00:00:00 NavIC time.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeScales.getNavicEpoch` in interface :class:`~org.orekit.time.TimeScales`
+        
+            Returns:
+                NavIC Epoch
         
         
         """
@@ -5801,7 +6382,7 @@ class PythonTimeScales(TimeScales):
                 Universal Time 1 scale
         
             Also see:
-                :meth:`~org.orekit.time.PythonTimeScales.getUTC`
+                :meth:`~org.orekit.time.TimeScales.getUTC`, :meth:`~org.orekit.frames.Frames.getEOPHistory`
         
         
         """
@@ -5865,7 +6446,8 @@ class PythonTimeShiftable(TimeShiftable[_PythonTimeShiftable__T], typing.Generic
             Part of JCC Python interface to object
         """
         ...
-    def shiftedBy(self, double: float) -> _PythonTimeShiftable__T:
+    @typing.overload
+    def shiftedBy(self, timeOffset: TimeOffset) -> _PythonTimeShiftable__T:
         """
             Get a time-shifted instance.
         
@@ -5881,6 +6463,8 @@ class PythonTimeShiftable(TimeShiftable[_PythonTimeShiftable__T], typing.Generic
         
         """
         ...
+    @typing.overload
+    def shiftedBy(self, double: float) -> _PythonTimeShiftable__T: ...
 
 class PythonTimeStamped(TimeStamped):
     """
@@ -5948,7 +6532,7 @@ class PythonTimeVectorFunction(TimeVectorFunction):
         ...
     _value_1__T = typing.TypeVar('_value_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def value(self, absoluteDate: AbsoluteDate) -> typing.List[float]:
+    def value(self, absoluteDate: AbsoluteDate) -> typing.MutableSequence[float]:
         """
             Compute a function of time.
         
@@ -5964,7 +6548,7 @@ class PythonTimeVectorFunction(TimeVectorFunction):
         """
         ...
     @typing.overload
-    def value(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_value_1__T]) -> typing.List[_value_1__T]:
+    def value(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_value_1__T]) -> typing.MutableSequence[_value_1__T]:
         """
             Compute a function of time.
         
@@ -6088,9 +6672,6 @@ class SatelliteClockScale(TimeScale):
     
         Since:
             11.0
-    
-        Also see:
-            :meth:`~serialized`
     """
     def __init__(self, string: str, absoluteDate: AbsoluteDate, timeScale: TimeScale, double: float, double2: float): ...
     def countAtDate(self, absoluteDate: AbsoluteDate) -> float:
@@ -6132,29 +6713,9 @@ class SatelliteClockScale(TimeScale):
         
         """
         ...
-    _offsetFromTAI_1__T = typing.TypeVar('_offsetFromTAI_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _offsetFromTAI_0__T = typing.TypeVar('_offsetFromTAI_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def offsetFromTAI(self, absoluteDate: AbsoluteDate) -> float:
-        """
-            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScale.offsetFromTAI` in interface :class:`~org.orekit.time.TimeScale`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): conversion date
-        
-            Returns:
-                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
-                time scale*
-        
-            Also see:
-                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
-        
-        """
-        ...
-    @typing.overload
-    def offsetFromTAI(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_1__T]) -> _offsetFromTAI_1__T:
+    def offsetFromTAI(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_0__T]) -> _offsetFromTAI_0__T:
         """
             Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
         
@@ -6174,7 +6735,27 @@ class SatelliteClockScale(TimeScale):
         
         """
         ...
-    def offsetToTAI(self, dateComponents: DateComponents, timeComponents: TimeComponents) -> float:
+    @typing.overload
+    def offsetFromTAI(self, absoluteDate: AbsoluteDate) -> TimeOffset:
+        """
+            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeScale.offsetFromTAI` in interface :class:`~org.orekit.time.TimeScale`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): conversion date
+        
+            Returns:
+                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
+                time scale*
+        
+            Also see:
+                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
+        
+        """
+        ...
+    def offsetToTAI(self, dateComponents: DateComponents, timeComponents: TimeComponents) -> TimeOffset:
         """
             Get the offset to convert locations from instance to :class:`~org.orekit.time.TAIScale`.
         
@@ -6249,7 +6830,7 @@ class TCBScale(TimeScale):
         This is intended to be accessed thanks to :class:`~org.orekit.time.TimeScales`, so there is no public constructor.
     
         Also see:
-            :class:`~org.orekit.time.AbsoluteDate`, :meth:`~serialized`
+            :class:`~org.orekit.time.AbsoluteDate`
     """
     def getName(self) -> str:
         """
@@ -6264,29 +6845,9 @@ class TCBScale(TimeScale):
         
         """
         ...
-    _offsetFromTAI_1__T = typing.TypeVar('_offsetFromTAI_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _offsetFromTAI_0__T = typing.TypeVar('_offsetFromTAI_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def offsetFromTAI(self, absoluteDate: AbsoluteDate) -> float:
-        """
-            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScale.offsetFromTAI` in interface :class:`~org.orekit.time.TimeScale`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): conversion date
-        
-            Returns:
-                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
-                time scale*
-        
-            Also see:
-                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
-        
-        """
-        ...
-    @typing.overload
-    def offsetFromTAI(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_1__T]) -> _offsetFromTAI_1__T:
+    def offsetFromTAI(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_0__T]) -> _offsetFromTAI_0__T:
         """
             Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
         
@@ -6303,6 +6864,26 @@ class TCBScale(TimeScale):
             Also see:
                 :meth:`~org.orekit.time.TimeScale.offsetToTAI`
         
+        
+        """
+        ...
+    @typing.overload
+    def offsetFromTAI(self, absoluteDate: AbsoluteDate) -> TimeOffset:
+        """
+            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeScale.offsetFromTAI` in interface :class:`~org.orekit.time.TimeScale`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): conversion date
+        
+            Returns:
+                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
+                time scale*
+        
+            Also see:
+                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
         
         """
         ...
@@ -6329,7 +6910,7 @@ class TCGScale(TimeScale):
         This is intended to be accessed thanks to :class:`~org.orekit.time.TimeScales`, so there is no public constructor.
     
         Also see:
-            :class:`~org.orekit.time.AbsoluteDate`, :meth:`~serialized`
+            :class:`~org.orekit.time.AbsoluteDate`
     """
     def getName(self) -> str:
         """
@@ -6344,29 +6925,9 @@ class TCGScale(TimeScale):
         
         """
         ...
-    _offsetFromTAI_1__T = typing.TypeVar('_offsetFromTAI_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _offsetFromTAI_0__T = typing.TypeVar('_offsetFromTAI_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def offsetFromTAI(self, absoluteDate: AbsoluteDate) -> float:
-        """
-            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScale.offsetFromTAI` in interface :class:`~org.orekit.time.TimeScale`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): conversion date
-        
-            Returns:
-                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
-                time scale*
-        
-            Also see:
-                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
-        
-        """
-        ...
-    @typing.overload
-    def offsetFromTAI(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_1__T]) -> _offsetFromTAI_1__T:
+    def offsetFromTAI(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_0__T]) -> _offsetFromTAI_0__T:
         """
             Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
         
@@ -6383,6 +6944,26 @@ class TCGScale(TimeScale):
             Also see:
                 :meth:`~org.orekit.time.TimeScale.offsetToTAI`
         
+        
+        """
+        ...
+    @typing.overload
+    def offsetFromTAI(self, absoluteDate: AbsoluteDate) -> TimeOffset:
+        """
+            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeScale.offsetFromTAI` in interface :class:`~org.orekit.time.TimeScale`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): conversion date
+        
+            Returns:
+                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
+                time scale*
+        
+            Also see:
+                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
         
         """
         ...
@@ -6410,9 +6991,6 @@ class TDBScale(TimeScale):
         linear transformation of TCB.
     
         By convention, TDB = TT + 0.001658 sin(g) + 0.000014 sin(2g)seconds where g = 357.53 + 0.9856003 (JD - 2451545) degrees.
-    
-        Also see:
-            :meth:`~serialized`
     """
     def getName(self) -> str:
         """
@@ -6427,29 +7005,9 @@ class TDBScale(TimeScale):
         
         """
         ...
-    _offsetFromTAI_1__T = typing.TypeVar('_offsetFromTAI_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _offsetFromTAI_0__T = typing.TypeVar('_offsetFromTAI_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def offsetFromTAI(self, absoluteDate: AbsoluteDate) -> float:
-        """
-            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScale.offsetFromTAI` in interface :class:`~org.orekit.time.TimeScale`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): conversion date
-        
-            Returns:
-                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
-                time scale*
-        
-            Also see:
-                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
-        
-        """
-        ...
-    @typing.overload
-    def offsetFromTAI(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_1__T]) -> _offsetFromTAI_1__T:
+    def offsetFromTAI(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_0__T]) -> _offsetFromTAI_0__T:
         """
             Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
         
@@ -6466,6 +7024,26 @@ class TDBScale(TimeScale):
             Also see:
                 :meth:`~org.orekit.time.TimeScale.offsetToTAI`
         
+        
+        """
+        ...
+    @typing.overload
+    def offsetFromTAI(self, absoluteDate: AbsoluteDate) -> TimeOffset:
+        """
+            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeScale.offsetFromTAI` in interface :class:`~org.orekit.time.TimeScale`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): conversion date
+        
+            Returns:
+                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
+                time scale*
+        
+            Also see:
+                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
         
         """
         ...
@@ -6628,7 +7206,7 @@ class UT1Scale(TimeScale):
             5.1
     
         Also see:
-            :class:`~org.orekit.time.AbsoluteDate`, :meth:`~serialized`
+            :class:`~org.orekit.time.AbsoluteDate`
     """
     def getEOPHistory(self) -> org.orekit.frames.EOPHistory:
         """
@@ -6666,29 +7244,9 @@ class UT1Scale(TimeScale):
         
         """
         ...
-    _offsetFromTAI_1__T = typing.TypeVar('_offsetFromTAI_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _offsetFromTAI_0__T = typing.TypeVar('_offsetFromTAI_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def offsetFromTAI(self, absoluteDate: AbsoluteDate) -> float:
-        """
-            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScale.offsetFromTAI` in interface :class:`~org.orekit.time.TimeScale`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): conversion date
-        
-            Returns:
-                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
-                time scale*
-        
-            Also see:
-                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
-        
-        """
-        ...
-    @typing.overload
-    def offsetFromTAI(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_1__T]) -> _offsetFromTAI_1__T:
+    def offsetFromTAI(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_0__T]) -> _offsetFromTAI_0__T:
         """
             Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
         
@@ -6705,6 +7263,26 @@ class UT1Scale(TimeScale):
             Also see:
                 :meth:`~org.orekit.time.TimeScale.offsetToTAI`
         
+        
+        """
+        ...
+    @typing.overload
+    def offsetFromTAI(self, absoluteDate: AbsoluteDate) -> TimeOffset:
+        """
+            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeScale.offsetFromTAI` in interface :class:`~org.orekit.time.TimeScale`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): conversion date
+        
+            Returns:
+                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
+                time scale*
+        
+            Also see:
+                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
         
         """
         ...
@@ -6738,7 +7316,7 @@ class UTCScale(TimeScale):
         This is intended to be accessed thanks to :class:`~org.orekit.time.TimeScales`, so there is no public constructor.
     
         Also see:
-            :class:`~org.orekit.time.AbsoluteDate`, :meth:`~serialized`
+            :class:`~org.orekit.time.AbsoluteDate`
     """
     def getBaseOffsets(self) -> java.util.Collection[OffsetModel]: ...
     def getFirstKnownLeapSecond(self) -> AbsoluteDate:
@@ -6761,27 +7339,9 @@ class UTCScale(TimeScale):
         
         """
         ...
-    _getLeap_1__T = typing.TypeVar('_getLeap_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getLeap_0__T = typing.TypeVar('_getLeap_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getLeap(self, absoluteDate: AbsoluteDate) -> float:
-        """
-            Get the value of the previous leap.
-        
-            This method will return 0.0 for all time scales that do *not* implement leap seconds.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScale.getLeap` in interface :class:`~org.orekit.time.TimeScale`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): date to check
-        
-            Returns:
-                value of the previous leap
-        
-        """
-        ...
-    @typing.overload
-    def getLeap(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_getLeap_1__T]) -> _getLeap_1__T:
+    def getLeap(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_getLeap_0__T]) -> _getLeap_0__T:
         """
             Get the value of the previous leap.
         
@@ -6796,6 +7356,24 @@ class UTCScale(TimeScale):
             Returns:
                 value of the previous leap
         
+        
+        """
+        ...
+    @typing.overload
+    def getLeap(self, absoluteDate: AbsoluteDate) -> TimeOffset:
+        """
+            Get the value of the previous leap.
+        
+            This method will return 0 for all time scales that do *not* implement leap seconds.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeScale.getLeap` in interface :class:`~org.orekit.time.TimeScale`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): date to check
+        
+            Returns:
+                value of the previous leap
         
         """
         ...
@@ -6895,29 +7473,9 @@ class UTCScale(TimeScale):
         
         """
         ...
-    _offsetFromTAI_1__T = typing.TypeVar('_offsetFromTAI_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _offsetFromTAI_0__T = typing.TypeVar('_offsetFromTAI_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def offsetFromTAI(self, absoluteDate: AbsoluteDate) -> float:
-        """
-            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
-        
-            Specified by:
-                :meth:`~org.orekit.time.TimeScale.offsetFromTAI` in interface :class:`~org.orekit.time.TimeScale`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): conversion date
-        
-            Returns:
-                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
-                time scale*
-        
-            Also see:
-                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
-        
-        """
-        ...
-    @typing.overload
-    def offsetFromTAI(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_1__T]) -> _offsetFromTAI_1__T:
+    def offsetFromTAI(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_offsetFromTAI_0__T]) -> _offsetFromTAI_0__T:
         """
             Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
         
@@ -6937,7 +7495,27 @@ class UTCScale(TimeScale):
         
         """
         ...
-    def offsetToTAI(self, dateComponents: DateComponents, timeComponents: TimeComponents) -> float:
+    @typing.overload
+    def offsetFromTAI(self, absoluteDate: AbsoluteDate) -> TimeOffset:
+        """
+            Get the offset to convert locations from :class:`~org.orekit.time.TAIScale` to instance.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeScale.offsetFromTAI` in interface :class:`~org.orekit.time.TimeScale`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): conversion date
+        
+            Returns:
+                offset in seconds to add to a location in *:class:`~org.orekit.time.TAIScale` time scale* to get a location in *instance
+                time scale*
+        
+            Also see:
+                :meth:`~org.orekit.time.TimeScale.offsetToTAI`
+        
+        """
+        ...
+    def offsetToTAI(self, dateComponents: DateComponents, timeComponents: TimeComponents) -> TimeOffset:
         """
             Get the offset to convert locations from instance to :class:`~org.orekit.time.TAIScale`.
         
@@ -7051,12 +7629,12 @@ class UTCTAIOffset(TimeStamped, java.io.Serializable):
         
         """
         ...
-    def getLeap(self) -> float:
+    def getLeap(self) -> TimeOffset:
         """
-            Get the value of the leap at offset validity start (in seconds).
+            Get the value of the leap at offset validity start.
         
             Returns:
-                value of the leap at offset validity start (in seconds)
+                value of the leap at offset validity start
         
         
         """
@@ -7071,9 +7649,25 @@ class UTCTAIOffset(TimeStamped, java.io.Serializable):
         
         """
         ...
-    _getOffset_2__T = typing.TypeVar('_getOffset_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getOffset_0__T = typing.TypeVar('_getOffset_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getOffset(self, absoluteDate: AbsoluteDate) -> float:
+    def getOffset(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_getOffset_0__T]) -> _getOffset_0__T:
+        """
+            Get the TAI - UTC offset in seconds.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date at which the offset is requested
+        
+            Returns:
+                TAI - UTC offset in seconds.
+        
+            Since:
+                9.0
+        
+        """
+        ...
+    @typing.overload
+    def getOffset(self, absoluteDate: AbsoluteDate) -> TimeOffset:
         """
             Get the TAI - UTC offset in seconds.
         
@@ -7096,23 +7690,7 @@ class UTCTAIOffset(TimeStamped, java.io.Serializable):
         """
         ...
     @typing.overload
-    def getOffset(self, dateComponents: DateComponents, timeComponents: TimeComponents) -> float: ...
-    @typing.overload
-    def getOffset(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_getOffset_2__T]) -> _getOffset_2__T:
-        """
-            Get the TAI - UTC offset in seconds.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date at which the offset is requested
-        
-            Returns:
-                TAI - UTC offset in seconds.
-        
-            Since:
-                9.0
-        
-        """
-        ...
+    def getOffset(self, dateComponents: DateComponents, timeComponents: TimeComponents) -> TimeOffset: ...
     def getValidityStart(self) -> AbsoluteDate:
         """
             Get the start time of validity for this offset.
@@ -7141,7 +7719,7 @@ class BDTScale(ConstantOffsetTimeScale):
         This is intended to be accessed thanks to :class:`~org.orekit.time.TimeScales`, so there is no public constructor.
     
         Also see:
-            :class:`~org.orekit.time.AbsoluteDate`, :meth:`~serialized`
+            :class:`~org.orekit.time.AbsoluteDate`
     """
     ...
 
@@ -7238,9 +7816,13 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], FieldTimeShifta
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_FieldAbsoluteDate__T], int: int, int2: int, int3: int, int4: int, int5: int, double: float, timeScale: TimeScale): ...
     @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldAbsoluteDate__T], int: int, int2: int, int3: int, int4: int, int5: int, timeOffset: TimeOffset, timeScale: TimeScale): ...
+    @typing.overload
     def __init__(self, field: org.hipparchus.Field[_FieldAbsoluteDate__T], int: int, int2: int, int3: int, timeScale: TimeScale): ...
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_FieldAbsoluteDate__T], int: int, month: Month, int2: int, int3: int, int4: int, double: float, timeScale: TimeScale): ...
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldAbsoluteDate__T], int: int, month: Month, int2: int, int3: int, int4: int, timeOffset: TimeOffset, timeScale: TimeScale): ...
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_FieldAbsoluteDate__T], int: int, month: Month, int2: int, timeScale: TimeScale): ...
     @typing.overload
@@ -7273,6 +7855,8 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], FieldTimeShifta
     def __init__(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_FieldAbsoluteDate__T], long: int, timeUnit: java.util.concurrent.TimeUnit): ...
     @typing.overload
     def __init__(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_FieldAbsoluteDate__T], t: _FieldAbsoluteDate__T): ...
+    @typing.overload
+    def __init__(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_FieldAbsoluteDate__T], timeOffset: TimeOffset): ...
     def compareTo(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_FieldAbsoluteDate__T]) -> int: ...
     _createBesselianEpoch_0__T = typing.TypeVar('_createBesselianEpoch_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _createBesselianEpoch_1__T = typing.TypeVar('_createBesselianEpoch_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -7434,8 +8018,27 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], FieldTimeShifta
         
         """
         ...
+    _createMedian__T = typing.TypeVar('_createMedian__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @staticmethod
+    def createMedian(fieldAbsoluteDate: 'FieldAbsoluteDate'[_createMedian__T], fieldAbsoluteDate2: 'FieldAbsoluteDate'[_createMedian__T]) -> 'FieldAbsoluteDate'[_createMedian__T]:
+        """
+            Create an instance as the median data between two existing instances.
+        
+            Parameters:
+                date1 (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date1): first instance
+                date2 (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date2): second instance
+        
+            Returns:
+                median date between first and second instance
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
     @typing.overload
-    def durationFrom(self, fieldTimeStamped: FieldTimeStamped[_FieldAbsoluteDate__T]) -> _FieldAbsoluteDate__T:
+    def durationFrom(self, fieldTimeStamped: typing.Union[FieldTimeStamped[_FieldAbsoluteDate__T], typing.Callable[[], 'FieldAbsoluteDate'[org.hipparchus.CalculusFieldElement]]]) -> _FieldAbsoluteDate__T:
         """
             Compute the physically elapsed duration between two instants.
         
@@ -7508,7 +8111,7 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], FieldTimeShifta
                 class :class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
         
             Parameters:
-                date (:class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): other date
+                other (:class:`~org.orekit.time.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): other date
         
             Returns:
                 true if the instance and the other date refer to the same instant
@@ -7607,6 +8210,30 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], FieldTimeShifta
     @typing.overload
     def getComponents(self, timeScale: TimeScale) -> DateTimeComponents: ...
     def getDate(self) -> 'FieldAbsoluteDate'[_FieldAbsoluteDate__T]: ...
+    def getDayOfYear(self, timeScale: TimeScale) -> _FieldAbsoluteDate__T:
+        """
+            Get day of year, preserving continuity as much as possible.
+        
+            This is a continuous extension of the integer value returned by
+            :meth:`~org.orekit.time.FieldAbsoluteDate.getComponents`:meth:`~org.orekit.time.DateTimeComponents.getDate`:meth:`~org.orekit.time.DateComponents.getDayOfYear`.
+            In order to have it remain as close as possible to its integer counterpart, day 1.0 is considered to occur on January
+            1st at noon.
+        
+            Continuity is preserved from day to day within a year, but of course there is a discontinuity at year change, where it
+            switches from 365.49999… (or 366.49999… on leap years) to 0.5
+        
+            Parameters:
+                utc (:class:`~org.orekit.time.TimeScale`): time scale to compute date components
+        
+            Returns:
+                day of year, with day 1.0 occurring on January first at noon
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
     def getField(self) -> org.hipparchus.Field[_FieldAbsoluteDate__T]: ...
     _getFiftiesEpoch__T = typing.TypeVar('_getFiftiesEpoch__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @staticmethod
@@ -7754,24 +8381,24 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], FieldTimeShifta
         
         """
         ...
-    def isAfter(self, fieldTimeStamped: FieldTimeStamped[_FieldAbsoluteDate__T]) -> bool: ...
-    def isAfterOrEqualTo(self, fieldTimeStamped: FieldTimeStamped[_FieldAbsoluteDate__T]) -> bool: ...
-    def isBefore(self, fieldTimeStamped: FieldTimeStamped[_FieldAbsoluteDate__T]) -> bool: ...
-    def isBeforeOrEqualTo(self, fieldTimeStamped: FieldTimeStamped[_FieldAbsoluteDate__T]) -> bool: ...
-    def isBetween(self, fieldTimeStamped: FieldTimeStamped[_FieldAbsoluteDate__T], fieldTimeStamped2: FieldTimeStamped[_FieldAbsoluteDate__T]) -> bool: ...
-    def isBetweenOrEqualTo(self, fieldTimeStamped: FieldTimeStamped[_FieldAbsoluteDate__T], fieldTimeStamped2: FieldTimeStamped[_FieldAbsoluteDate__T]) -> bool: ...
-    def isCloseTo(self, fieldTimeStamped: FieldTimeStamped[_FieldAbsoluteDate__T], double: float) -> bool: ...
-    def isEqualTo(self, fieldTimeStamped: FieldTimeStamped[_FieldAbsoluteDate__T]) -> bool: ...
+    def isAfter(self, fieldTimeStamped: typing.Union[FieldTimeStamped[_FieldAbsoluteDate__T], typing.Callable[[], 'FieldAbsoluteDate'[org.hipparchus.CalculusFieldElement]]]) -> bool: ...
+    def isAfterOrEqualTo(self, fieldTimeStamped: typing.Union[FieldTimeStamped[_FieldAbsoluteDate__T], typing.Callable[[], 'FieldAbsoluteDate'[org.hipparchus.CalculusFieldElement]]]) -> bool: ...
+    def isBefore(self, fieldTimeStamped: typing.Union[FieldTimeStamped[_FieldAbsoluteDate__T], typing.Callable[[], 'FieldAbsoluteDate'[org.hipparchus.CalculusFieldElement]]]) -> bool: ...
+    def isBeforeOrEqualTo(self, fieldTimeStamped: typing.Union[FieldTimeStamped[_FieldAbsoluteDate__T], typing.Callable[[], 'FieldAbsoluteDate'[org.hipparchus.CalculusFieldElement]]]) -> bool: ...
+    def isBetween(self, fieldTimeStamped: typing.Union[FieldTimeStamped[_FieldAbsoluteDate__T], typing.Callable[[], 'FieldAbsoluteDate'[org.hipparchus.CalculusFieldElement]]], fieldTimeStamped2: typing.Union[FieldTimeStamped[_FieldAbsoluteDate__T], typing.Callable[[], 'FieldAbsoluteDate'[org.hipparchus.CalculusFieldElement]]]) -> bool: ...
+    def isBetweenOrEqualTo(self, fieldTimeStamped: typing.Union[FieldTimeStamped[_FieldAbsoluteDate__T], typing.Callable[[], 'FieldAbsoluteDate'[org.hipparchus.CalculusFieldElement]]], fieldTimeStamped2: typing.Union[FieldTimeStamped[_FieldAbsoluteDate__T], typing.Callable[[], 'FieldAbsoluteDate'[org.hipparchus.CalculusFieldElement]]]) -> bool: ...
+    def isCloseTo(self, fieldTimeStamped: typing.Union[FieldTimeStamped[_FieldAbsoluteDate__T], typing.Callable[[], 'FieldAbsoluteDate'[org.hipparchus.CalculusFieldElement]]], double: float) -> bool: ...
+    def isEqualTo(self, fieldTimeStamped: typing.Union[FieldTimeStamped[_FieldAbsoluteDate__T], typing.Callable[[], 'FieldAbsoluteDate'[org.hipparchus.CalculusFieldElement]]]) -> bool: ...
     def offsetFrom(self, fieldAbsoluteDate: 'FieldAbsoluteDate'[_FieldAbsoluteDate__T], timeScale: TimeScale) -> _FieldAbsoluteDate__T: ...
     @typing.overload
-    def parseCCSDSCalendarSegmentedTimeCode(self, byte: int, byteArray: typing.List[int]) -> 'FieldAbsoluteDate'[_FieldAbsoluteDate__T]: ...
+    def parseCCSDSCalendarSegmentedTimeCode(self, byte: int, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes]) -> 'FieldAbsoluteDate'[_FieldAbsoluteDate__T]: ...
     @typing.overload
-    def parseCCSDSCalendarSegmentedTimeCode(self, byte: int, byteArray: typing.List[int], timeScale: TimeScale) -> 'FieldAbsoluteDate'[_FieldAbsoluteDate__T]: ...
+    def parseCCSDSCalendarSegmentedTimeCode(self, byte: int, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes], timeScale: TimeScale) -> 'FieldAbsoluteDate'[_FieldAbsoluteDate__T]: ...
     _parseCCSDSDaySegmentedTimeCode_0__T = typing.TypeVar('_parseCCSDSDaySegmentedTimeCode_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _parseCCSDSDaySegmentedTimeCode_1__T = typing.TypeVar('_parseCCSDSDaySegmentedTimeCode_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def parseCCSDSDaySegmentedTimeCode(field: org.hipparchus.Field[_parseCCSDSDaySegmentedTimeCode_0__T], byte: int, byteArray: typing.List[int], dateComponents: DateComponents) -> 'FieldAbsoluteDate'[_parseCCSDSDaySegmentedTimeCode_0__T]:
+    def parseCCSDSDaySegmentedTimeCode(field: org.hipparchus.Field[_parseCCSDSDaySegmentedTimeCode_0__T], byte: int, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes], dateComponents: DateComponents) -> 'FieldAbsoluteDate'[_parseCCSDSDaySegmentedTimeCode_0__T]:
         """
             Build an instance from a CCSDS Day Segmented Time Code (CDS).
         
@@ -7797,12 +8424,12 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], FieldTimeShifta
         ...
     @typing.overload
     @staticmethod
-    def parseCCSDSDaySegmentedTimeCode(field: org.hipparchus.Field[_parseCCSDSDaySegmentedTimeCode_1__T], byte: int, byteArray: typing.List[int], dateComponents: DateComponents, timeScale: TimeScale) -> 'FieldAbsoluteDate'[_parseCCSDSDaySegmentedTimeCode_1__T]: ...
+    def parseCCSDSDaySegmentedTimeCode(field: org.hipparchus.Field[_parseCCSDSDaySegmentedTimeCode_1__T], byte: int, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes], dateComponents: DateComponents, timeScale: TimeScale) -> 'FieldAbsoluteDate'[_parseCCSDSDaySegmentedTimeCode_1__T]: ...
     _parseCCSDSUnsegmentedTimeCode_0__T = typing.TypeVar('_parseCCSDSUnsegmentedTimeCode_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _parseCCSDSUnsegmentedTimeCode_1__T = typing.TypeVar('_parseCCSDSUnsegmentedTimeCode_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def parseCCSDSUnsegmentedTimeCode(field: org.hipparchus.Field[_parseCCSDSUnsegmentedTimeCode_0__T], byte: int, byte2: int, byteArray: typing.List[int], fieldAbsoluteDate: 'FieldAbsoluteDate'[_parseCCSDSUnsegmentedTimeCode_0__T]) -> 'FieldAbsoluteDate'[_parseCCSDSUnsegmentedTimeCode_0__T]:
+    def parseCCSDSUnsegmentedTimeCode(byte: int, byte2: int, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes], fieldAbsoluteDate: 'FieldAbsoluteDate'[_parseCCSDSUnsegmentedTimeCode_0__T], fieldAbsoluteDate2: 'FieldAbsoluteDate'[_parseCCSDSUnsegmentedTimeCode_0__T]) -> 'FieldAbsoluteDate'[_parseCCSDSUnsegmentedTimeCode_0__T]:
         """
             Build an instance from a CCSDS Unsegmented Time Code (CUC).
         
@@ -7814,16 +8441,16 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], FieldTimeShifta
             parameter can be set to 0.
         
             Parameters:
-                field (:class:`~org.orekit.time.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field for the components
                 preambleField1 (byte): first byte of the field specifying the format, often not transmitted in data interfaces, as it is constant for a given
                     data interface
                 preambleField2 (byte): second byte of the field specifying the format (added in revision 4 of the CCSDS standard in 2010), often not
                     transmitted in data interfaces, as it is constant for a given data interface (value ignored if presence not signaled in
                     :code:`preambleField1`)
                 timeField (byte[]): byte array containing the time code
-                agencyDefinedEpoch (:class:`~org.orekit.time.FieldAbsoluteDate`<T> agencyDefinedEpoch): reference epoch, ignored if the preamble field specifies the CCSDS reference epoch is used (and hence may be null in
-                    this case)
-                ccsdsEpoch (:class:`~org.orekit.time.FieldAbsoluteDate`<T> ccsdsEpoch): reference epoch, ignored if the preamble field specifies the agency epoch is used.
+                agencyDefinedEpoch (:class:`~org.orekit.time.FieldAbsoluteDate`<T> agencyDefinedEpoch): reference epoch, ignored if the preamble field specifies the :meth:`~org.orekit.time.DateComponents.CCSDS_EPOCH` is used
+                    (and hence may be null in this case, but then :code:`ccsdsEpoch` must be non-null)
+                ccsdsEpoch (:class:`~org.orekit.time.FieldAbsoluteDate`<T> ccsdsEpoch): reference epoch, ignored if the preamble field specifies the agency epoch is used (and hence may be null in this case,
+                    but then :code:`agencyDefinedEpoch` must be non-null).
         
             Returns:
                 an instance corresponding to the specified date
@@ -7836,13 +8463,15 @@ class FieldAbsoluteDate(FieldTimeStamped[_FieldAbsoluteDate__T], FieldTimeShifta
         ...
     @typing.overload
     @staticmethod
-    def parseCCSDSUnsegmentedTimeCode(field: org.hipparchus.Field[_parseCCSDSUnsegmentedTimeCode_1__T], byte: int, byte2: int, byteArray: typing.List[int], fieldAbsoluteDate: 'FieldAbsoluteDate'[_parseCCSDSUnsegmentedTimeCode_1__T], fieldAbsoluteDate2: 'FieldAbsoluteDate'[_parseCCSDSUnsegmentedTimeCode_1__T]) -> 'FieldAbsoluteDate'[_parseCCSDSUnsegmentedTimeCode_1__T]: ...
+    def parseCCSDSUnsegmentedTimeCode(field: org.hipparchus.Field[_parseCCSDSUnsegmentedTimeCode_1__T], byte: int, byte2: int, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes], fieldAbsoluteDate: 'FieldAbsoluteDate'[_parseCCSDSUnsegmentedTimeCode_1__T]) -> 'FieldAbsoluteDate'[_parseCCSDSUnsegmentedTimeCode_1__T]: ...
     @typing.overload
     def shiftedBy(self, double: float) -> 'FieldAbsoluteDate'[_FieldAbsoluteDate__T]: ...
     @typing.overload
     def shiftedBy(self, long: int, timeUnit: java.util.concurrent.TimeUnit) -> 'FieldAbsoluteDate'[_FieldAbsoluteDate__T]: ...
     @typing.overload
     def shiftedBy(self, t: _FieldAbsoluteDate__T) -> 'FieldAbsoluteDate'[_FieldAbsoluteDate__T]: ...
+    @typing.overload
+    def shiftedBy(self, timeOffset: TimeOffset) -> 'FieldAbsoluteDate'[_FieldAbsoluteDate__T]: ...
     def timeScalesOffset(self, timeScale: TimeScale, timeScale2: TimeScale) -> _FieldAbsoluteDate__T:
         """
             Compute the offset between two time scales at the current instant.
@@ -8079,7 +8708,7 @@ class GPSScale(ConstantOffsetTimeScale):
         This is intended to be accessed thanks to :class:`~org.orekit.time.TimeScales`, so there is no public constructor.
     
         Also see:
-            :class:`~org.orekit.time.AbsoluteDate`, :meth:`~serialized`
+            :class:`~org.orekit.time.AbsoluteDate`
     """
     ...
 
@@ -8099,22 +8728,7 @@ class GalileoScale(ConstantOffsetTimeScale):
         :class:`~org.orekit.time.GPSScale`.
     
         Also see:
-            :class:`~org.orekit.time.AbsoluteDate`, :meth:`~serialized`
-    """
-    ...
-
-class IRNSSScale(ConstantOffsetTimeScale):
-    """
-    public class IRNSSScale extends :class:`~org.orekit.time.ConstantOffsetTimeScale`
-    
-        IRNSS time scale (also called IRNWT for IRNSS NetWork Time).
-    
-        By convention, TIRNSS = TAI - 19 s.
-    
-        This is intended to be accessed thanks to :class:`~org.orekit.time.TimeScales`, so there is no public constructor.
-    
-        Also see:
-            :class:`~org.orekit.time.AbsoluteDate`, :meth:`~serialized`
+            :class:`~org.orekit.time.AbsoluteDate`
     """
     ...
 
@@ -8157,7 +8771,7 @@ class LazyLoadedTimeScales(AbstractTimeScales):
         
         """
         ...
-    def addUTCTAIOffsetsLoader(self, uTCTAIOffsetsLoader: UTCTAIOffsetsLoader) -> None:
+    def addUTCTAIOffsetsLoader(self, uTCTAIOffsetsLoader: typing.Union[UTCTAIOffsetsLoader, typing.Callable]) -> None:
         """
             Add a loader for UTC-TAI offsets history files.
         
@@ -8255,13 +8869,13 @@ class LazyLoadedTimeScales(AbstractTimeScales):
         
         """
         ...
-    def getIRNSS(self) -> IRNSSScale:
+    def getNavIC(self) -> 'NavicScale':
         """
-            Description copied from interface: :meth:`~org.orekit.time.TimeScales.getIRNSS`
-            Get the Indian Regional Navigation Satellite System time scale.
+            Description copied from interface: :meth:`~org.orekit.time.TimeScales.getNavIC`
+            Get the Navigation with Indian Constellation time scale.
         
             Returns:
-                Indian Regional Navigation Satellite System time scale
+                Navigation with Indian Constellation time scale
         
         
         """
@@ -8390,6 +9004,21 @@ class LazyLoadedTimeScales(AbstractTimeScales):
         """
         ...
 
+class NavicScale(ConstantOffsetTimeScale):
+    """
+    public class NavicScale extends :class:`~org.orekit.time.ConstantOffsetTimeScale`
+    
+        NavIC time scale (also called IRNWT for IRNSS NetWork Time).
+    
+        By convention, TNAVIC = TAI - 19 s.
+    
+        This is intended to be accessed thanks to :class:`~org.orekit.time.TimeScales`, so there is no public constructor.
+    
+        Also see:
+            :class:`~org.orekit.time.AbsoluteDate`
+    """
+    ...
+
 class PythonAbstractTimeScales(AbstractTimeScales):
     """
     public class PythonAbstractTimeScales extends :class:`~org.orekit.time.AbstractTimeScales`
@@ -8453,12 +9082,12 @@ class PythonAbstractTimeScales(AbstractTimeScales):
         
         """
         ...
-    def getIRNSS(self) -> IRNSSScale:
+    def getNavIC(self) -> NavicScale:
         """
-            Get the Indian Regional Navigation Satellite System time scale.
+            Get the Navigation with Indian Constellation time scale.
         
             Returns:
-                Indian Regional Navigation Satellite System time scale
+                Navigation with Indian Constellation time scale
         
         
         """
@@ -8524,8 +9153,6 @@ class PythonAbstractTimeScales(AbstractTimeScales):
         """
         ...
     @typing.overload
-    def getUT1(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool) -> UT1Scale: ...
-    @typing.overload
     def getUT1(self, eOPHistory: org.orekit.frames.EOPHistory) -> UT1Scale:
         """
             Get the Universal Time 1 scale.
@@ -8550,6 +9177,8 @@ class PythonAbstractTimeScales(AbstractTimeScales):
         
         """
         ...
+    @typing.overload
+    def getUT1(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool) -> UT1Scale: ...
     def getUTC(self) -> UTCScale:
         """
             Get the Universal Time Coordinate scale.
@@ -8608,7 +9237,7 @@ class PythonFieldTimeShiftable(FieldTimeShiftable[_PythonFieldTimeShiftable__T, 
         """
         ...
     @typing.overload
-    def shiftedBy(self, double: float) -> _PythonFieldTimeShiftable__T:
+    def shiftedBy(self, timeOffset: TimeOffset) -> _PythonFieldTimeShiftable__T:
         """
             Get a time-shifted instance.
         
@@ -8636,20 +9265,9 @@ class PythonFieldTimeShiftable(FieldTimeShiftable[_PythonFieldTimeShiftable__T, 
         """
         ...
     @typing.overload
+    def shiftedBy(self, double: float) -> _PythonFieldTimeShiftable__T: ...
+    @typing.overload
     def shiftedBy(self, kK: _PythonFieldTimeShiftable__KK) -> _PythonFieldTimeShiftable__T: ...
-    def shiftedBy_KK(self, kK: _PythonFieldTimeShiftable__KK) -> _PythonFieldTimeShiftable__T:
-        """
-            Get a time-shifted instance. The Python extension method.
-        
-            Parameters:
-                dt (:class:`~org.orekit.time.PythonFieldTimeShiftable`): time shift in seconds
-        
-            Returns:
-                a new instance, shifted with respect to instance (which is not changed)
-        
-        
-        """
-        ...
 
 class QZSSScale(ConstantOffsetTimeScale):
     """
@@ -8665,7 +9283,7 @@ class QZSSScale(ConstantOffsetTimeScale):
         This is intended to be accessed thanks to :class:`~org.orekit.time.TimeScales`, so there is no public constructor.
     
         Also see:
-            :class:`~org.orekit.time.AbsoluteDate`, :meth:`~serialized`
+            :class:`~org.orekit.time.AbsoluteDate`
     """
     ...
 
@@ -8678,7 +9296,7 @@ class TAIScale(ConstantOffsetTimeScale):
         This is intended to be accessed thanks to :class:`~org.orekit.time.TimeScales`, so there is no public constructor.
     
         Also see:
-            :class:`~org.orekit.time.AbsoluteDate`, :meth:`~serialized`
+            :class:`~org.orekit.time.AbsoluteDate`
     """
     ...
 
@@ -8695,7 +9313,7 @@ class TTScale(ConstantOffsetTimeScale):
         This is intended to be accessed thanks to :class:`~org.orekit.time.TimeScales`, so there is no public constructor.
     
         Also see:
-            :class:`~org.orekit.time.AbsoluteDate`, :meth:`~serialized`
+            :class:`~org.orekit.time.AbsoluteDate`
     """
     ...
 
@@ -8780,7 +9398,7 @@ class TimeStampedFieldHermiteInterpolator(AbstractFieldTimeInterpolator[TimeStam
     def __init__(self, int: int, double: float): ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.time")``.
 
     AGILeapSecondFilesLoader: typing.Type[AGILeapSecondFilesLoader]
@@ -8815,9 +9433,9 @@ class __module_protocol__(typing.Protocol):
     GNSSDate: typing.Type[GNSSDate]
     GPSScale: typing.Type[GPSScale]
     GalileoScale: typing.Type[GalileoScale]
-    IRNSSScale: typing.Type[IRNSSScale]
     LazyLoadedTimeScales: typing.Type[LazyLoadedTimeScales]
     Month: typing.Type[Month]
+    NavicScale: typing.Type[NavicScale]
     OffsetModel: typing.Type[OffsetModel]
     PerfectClockModel: typing.Type[PerfectClockModel]
     PythonAbstractTimeScales: typing.Type[PythonAbstractTimeScales]
@@ -8846,6 +9464,7 @@ class __module_protocol__(typing.Protocol):
     TTScale: typing.Type[TTScale]
     TimeComponents: typing.Type[TimeComponents]
     TimeInterpolator: typing.Type[TimeInterpolator]
+    TimeOffset: typing.Type[TimeOffset]
     TimeScalarFunction: typing.Type[TimeScalarFunction]
     TimeScale: typing.Type[TimeScale]
     TimeScales: typing.Type[TimeScales]
@@ -8866,4 +9485,3 @@ class __module_protocol__(typing.Protocol):
     UTCTAIHistoryFilesLoader: typing.Type[UTCTAIHistoryFilesLoader]
     UTCTAIOffset: typing.Type[UTCTAIOffset]
     UTCTAIOffsetsLoader: typing.Type[UTCTAIOffsetsLoader]
-    class-use: org.orekit.time.class-use.__module_protocol__

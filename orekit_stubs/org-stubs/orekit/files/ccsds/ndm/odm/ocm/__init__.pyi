@@ -1,6 +1,14 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
 import java.util.function
+import jpype
 import org.hipparchus.geometry.euclidean.threed
 import org.hipparchus.linear
 import org.orekit.bodies
@@ -8,7 +16,6 @@ import org.orekit.data
 import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.ndm.odm
-import org.orekit.files.ccsds.ndm.odm.ocm.class-use
 import org.orekit.files.ccsds.ndm.odm.oem
 import org.orekit.files.ccsds.section
 import org.orekit.files.ccsds.utils
@@ -48,15 +55,18 @@ class EphemerisOcmWriter(org.orekit.files.general.EphemerisFileWriter):
         Also see:
             :class:`~org.orekit.files.ccsds.ndm.odm.ocm.OcmWriter`, :class:`~org.orekit.files.ccsds.ndm.odm.ocm.StreamingOcmWriter`
     """
+    @typing.overload
     def __init__(self, ocmWriter: 'OcmWriter', odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, ocmMetadata: 'OcmMetadata', trajectoryStateHistoryMetadata: 'TrajectoryStateHistoryMetadata', fileFormat: org.orekit.files.ccsds.utils.FileFormat, string: str, double: float, int: int): ...
+    @typing.overload
+    def __init__(self, ocmWriter: 'OcmWriter', odmHeader: org.orekit.files.ccsds.ndm.odm.OdmHeader, ocmMetadata: 'OcmMetadata', trajectoryStateHistoryMetadata: 'TrajectoryStateHistoryMetadata', fileFormat: org.orekit.files.ccsds.utils.FileFormat, string: str, double: float, int: int, formatter: org.orekit.utils.Formatter): ...
     _write_0__C = typing.TypeVar('_write_0__C', bound=org.orekit.utils.TimeStampedPVCoordinates)  # <C>
     _write_0__S = typing.TypeVar('_write_0__S', bound=org.orekit.files.general.EphemerisFile.EphemerisSegment)  # <S>
     _write_1__C = typing.TypeVar('_write_1__C', bound=org.orekit.utils.TimeStampedPVCoordinates)  # <C>
     _write_1__S = typing.TypeVar('_write_1__S', bound=org.orekit.files.general.EphemerisFile.EphemerisSegment)  # <S>
     @typing.overload
-    def write(self, string: str, ephemerisFile: org.orekit.files.general.EphemerisFile[_write_0__C, _write_0__S]) -> None: ...
+    def write(self, string: str, ephemerisFile: typing.Union[org.orekit.files.general.EphemerisFile[_write_0__C, _write_0__S], typing.Callable[[], java.util.Map[str, org.orekit.files.general.EphemerisFile.SatelliteEphemeris[org.orekit.utils.TimeStampedPVCoordinates, org.orekit.files.general.EphemerisFile.EphemerisSegment]]]]) -> None: ...
     @typing.overload
-    def write(self, appendable: java.lang.Appendable, ephemerisFile: org.orekit.files.general.EphemerisFile[_write_1__C, _write_1__S]) -> None: ...
+    def write(self, appendable: java.lang.Appendable, ephemerisFile: typing.Union[org.orekit.files.general.EphemerisFile[_write_1__C, _write_1__S], typing.Callable[[], java.util.Map[str, org.orekit.files.general.EphemerisFile.SatelliteEphemeris[org.orekit.utils.TimeStampedPVCoordinates, org.orekit.files.general.EphemerisFile.EphemerisSegment]]]]) -> None: ...
 
 class ManBasis(java.lang.Enum['ManBasis']):
     """
@@ -99,7 +109,7 @@ class ManBasis(java.lang.Enum['ManBasis']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['ManBasis']:
+    def values() -> typing.MutableSequence['ManBasis']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -188,8 +198,22 @@ class ManeuverFieldType(java.lang.Enum['ManeuverFieldType']):
         
         """
         ...
+    @typing.overload
     def outputField(self, timeConverter: org.orekit.files.ccsds.definitions.TimeConverter, orbitManeuver: 'OrbitManeuver') -> str:
         """
+            Output one maneuver field.
+        
+            Parameters:
+                converter (:class:`~org.orekit.files.ccsds.definitions.TimeConverter`): converter for dates
+                maneuver (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitManeuver`): maneuver containing the field to output
+                formatter (:class:`~org.orekit.utils.Formatter`): used format doubles and dates to strings
+        
+            Returns:
+                output field
+        
+            Deprecated.
+            since 13.0, because formatter should be specified. Use
+            :meth:`~org.orekit.files.ccsds.ndm.odm.ocm.ManeuverFieldType.outputField` instead.
             Output one maneuver field.
         
             Parameters:
@@ -202,6 +226,8 @@ class ManeuverFieldType(java.lang.Enum['ManeuverFieldType']):
         
         """
         ...
+    @typing.overload
+    def outputField(self, timeConverter: org.orekit.files.ccsds.definitions.TimeConverter, orbitManeuver: 'OrbitManeuver', formatter: org.orekit.utils.Formatter) -> str: ...
     def process(self, string: str, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, orbitManeuver: 'OrbitManeuver', int: int, string2: str) -> None:
         """
             Process one field.
@@ -241,7 +267,7 @@ class ManeuverFieldType(java.lang.Enum['ManeuverFieldType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['ManeuverFieldType']:
+    def values() -> typing.MutableSequence['ManeuverFieldType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -298,7 +324,7 @@ class ObjectType(java.lang.Enum['ObjectType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['ObjectType']:
+    def values() -> typing.MutableSequence['ObjectType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -545,7 +571,7 @@ class OcmDataSubStructureKey(java.lang.Enum['OcmDataSubStructureKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['OcmDataSubStructureKey']:
+    def values() -> typing.MutableSequence['OcmDataSubStructureKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -604,7 +630,7 @@ class OcmElements(java.lang.Enum['OcmElements']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['OcmElements']:
+    def values() -> typing.MutableSequence['OcmElements']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1683,7 +1709,7 @@ class OcmMetadataKey(java.lang.Enum['OcmMetadataKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['OcmMetadataKey']:
+    def values() -> typing.MutableSequence['OcmMetadataKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1715,7 +1741,7 @@ class OcmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Ocm, 'OcmParser'], org.
         Since:
             11.0
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, double: float, double2: float, boolean: bool, dataContext: org.orekit.data.DataContext, double3: float, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]): ...
+    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, double: float, double2: float, boolean: bool, dataContext: org.orekit.data.DataContext, double3: float, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
     def build(self) -> Ocm:
         """
             Build the file from parsed entries.
@@ -2092,7 +2118,7 @@ class OpsStatus(java.lang.Enum['OpsStatus']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['OpsStatus']:
+    def values() -> typing.MutableSequence['OpsStatus']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -2169,7 +2195,7 @@ class OrbitCategory(java.lang.Enum['OrbitCategory']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['OrbitCategory']:
+    def values() -> typing.MutableSequence['OrbitCategory']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -2196,7 +2222,7 @@ class OrbitCovariance(org.orekit.time.TimeStamped):
         Since:
             11.0
     """
-    def __init__(self, orbitElementsType: 'OrbitElementsType', ordering: 'Ordering', absoluteDate: org.orekit.time.AbsoluteDate, stringArray: typing.List[str], int: int): ...
+    def __init__(self, orbitElementsType: 'OrbitElementsType', ordering: 'Ordering', absoluteDate: org.orekit.time.AbsoluteDate, stringArray: typing.Union[typing.List[str], jpype.JArray], int: int): ...
     def getDate(self) -> org.orekit.time.AbsoluteDate:
         """
             Get the date.
@@ -2258,6 +2284,15 @@ class OrbitCovarianceHistoryMetadata(org.orekit.files.ccsds.section.CommentsCont
     public class OrbitCovarianceHistoryMetadata extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
     
         Metadata for covariance history.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
     
         Since:
             11.0
@@ -2588,7 +2623,7 @@ class OrbitCovarianceHistoryMetadataKey(java.lang.Enum['OrbitCovarianceHistoryMe
         """
         ...
     @staticmethod
-    def values() -> typing.List['OrbitCovarianceHistoryMetadataKey']:
+    def values() -> typing.MutableSequence['OrbitCovarianceHistoryMetadataKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -2611,6 +2646,15 @@ class OrbitDetermination(org.orekit.files.ccsds.section.CommentsContainer):
     public class OrbitDetermination extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
     
         Orbit determination data.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
     
         Since:
             11.0
@@ -2893,12 +2937,12 @@ class OrbitDetermination(org.orekit.files.ccsds.section.CommentsContainer):
         
         """
         ...
-    def setConsiderN(self, int: int) -> None:
+    def setConsiderN(self, integer: int) -> None:
         """
             Set number of consider parameters.
         
             Parameters:
-                considerN (int): number of consider parameters
+                considerN (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`): number of consider parameters
         
         
         """
@@ -3005,22 +3049,22 @@ class OrbitDetermination(org.orekit.files.ccsds.section.CommentsContainer):
         
         """
         ...
-    def setObsAvailable(self, int: int) -> None:
+    def setObsAvailable(self, integer: int) -> None:
         """
             Set number of observations available within the actual OD span.
         
             Parameters:
-                obsAvailable (int): number of observations available within the actual OD span
+                obsAvailable (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`): number of observations available within the actual OD span
         
         
         """
         ...
-    def setObsUsed(self, int: int) -> None:
+    def setObsUsed(self, integer: int) -> None:
         """
             Set number of observations accepted within the actual OD span.
         
             Parameters:
-                obsUsed (int): number of observations accepted within the actual OD span
+                obsUsed (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`): number of observations accepted within the actual OD span
         
         
         """
@@ -3059,22 +3103,22 @@ class OrbitDetermination(org.orekit.files.ccsds.section.CommentsContainer):
         """
         ...
     def setSensors(self, list: java.util.List[str]) -> None: ...
-    def setSensorsN(self, int: int) -> None:
+    def setSensorsN(self, integer: int) -> None:
         """
             Set number of sensors used.
         
             Parameters:
-                sensorsN (int): number of sensors used
+                sensorsN (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`): number of sensors used
         
         
         """
         ...
-    def setSolveN(self, int: int) -> None:
+    def setSolveN(self, integer: int) -> None:
         """
             Set number of solved-for states.
         
             Parameters:
-                solveN (int): number of solved-for states
+                solveN (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`): number of solved-for states
         
         
         """
@@ -3100,22 +3144,22 @@ class OrbitDetermination(org.orekit.files.ccsds.section.CommentsContainer):
         
         """
         ...
-    def setTracksAvailable(self, int: int) -> None:
+    def setTracksAvailable(self, integer: int) -> None:
         """
             Set number of sensors tracks available for the OD within the actual OD span.
         
             Parameters:
-                tracksAvailable (int): number of sensors tracks available for the OD within the actual OD span
+                tracksAvailable (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`): number of sensors tracks available for the OD within the actual OD span
         
         
         """
         ...
-    def setTracksUsed(self, int: int) -> None:
+    def setTracksUsed(self, integer: int) -> None:
         """
             Set number of sensors tracks accepted for the OD within the actual OD span.
         
             Parameters:
-                tracksUsed (int): number of sensors tracks accepted for the OD within the actual OD span
+                tracksUsed (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`): number of sensors tracks accepted for the OD within the actual OD span
         
         
         """
@@ -3229,7 +3273,7 @@ class OrbitDeterminationKey(java.lang.Enum['OrbitDeterminationKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['OrbitDeterminationKey']:
+    def values() -> typing.MutableSequence['OrbitDeterminationKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -3275,7 +3319,7 @@ class OrbitElementsType(java.lang.Enum['OrbitElementsType']):
     ONSTATION: typing.ClassVar['OrbitElementsType'] = ...
     POINCARE: typing.ClassVar['OrbitElementsType'] = ...
     def getUnits(self) -> java.util.List[org.orekit.utils.units.Unit]: ...
-    def toCartesian(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double2: float) -> org.orekit.utils.TimeStampedPVCoordinates:
+    def toCartesian(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double2: float) -> org.orekit.utils.TimeStampedPVCoordinates:
         """
             Convert to Cartesian coordinates.
         
@@ -3291,7 +3335,7 @@ class OrbitElementsType(java.lang.Enum['OrbitElementsType']):
         
         """
         ...
-    def toRawElements(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double: float) -> typing.List[float]:
+    def toRawElements(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, double: float) -> typing.MutableSequence[float]:
         """
             Convert to raw elements array.
         
@@ -3345,7 +3389,7 @@ class OrbitElementsType(java.lang.Enum['OrbitElementsType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['OrbitElementsType']:
+    def values() -> typing.MutableSequence['OrbitElementsType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -3868,6 +3912,15 @@ class OrbitManeuverHistoryMetadata(org.orekit.files.ccsds.section.CommentsContai
     public class OrbitManeuverHistoryMetadata extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
     
         Metadata for maneuver history.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
     
         Since:
             11.0
@@ -4538,7 +4591,7 @@ class OrbitManeuverHistoryMetadataKey(java.lang.Enum['OrbitManeuverHistoryMetada
         """
         ...
     @staticmethod
-    def values() -> typing.List['OrbitManeuverHistoryMetadataKey']:
+    def values() -> typing.MutableSequence['OrbitManeuverHistoryMetadataKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -5163,7 +5216,7 @@ class OrbitPhysicalPropertiesKey(java.lang.Enum['OrbitPhysicalPropertiesKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['OrbitPhysicalPropertiesKey']:
+    def values() -> typing.MutableSequence['OrbitPhysicalPropertiesKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -5220,7 +5273,7 @@ class Ordering(java.lang.Enum['Ordering']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['Ordering']:
+    def values() -> typing.MutableSequence['Ordering']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -5243,6 +5296,15 @@ class Perturbations(org.orekit.files.ccsds.section.CommentsContainer):
     public class Perturbations extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
     
         Perturbation parameters.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
     
         Since:
             11.0
@@ -5540,12 +5602,12 @@ class Perturbations(org.orekit.files.ccsds.section.CommentsContainer):
         
         """
         ...
-    def setAlbedoGridSize(self, int: int) -> None:
+    def setAlbedoGridSize(self, integer: int) -> None:
         """
             Set albedo grid size.
         
             Parameters:
-                albedoGridSize (int): albedo grid size
+                albedoGridSize (:class:`~org.orekit.files.ccsds.ndm.odm.ocm.https:.docs.oracle.com.javase.8.docs.api.java.lang.Integer?is`): albedo grid size
         
         
         """
@@ -5894,7 +5956,7 @@ class PerturbationsKey(java.lang.Enum['PerturbationsKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['PerturbationsKey']:
+    def values() -> typing.MutableSequence['PerturbationsKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -5950,7 +6012,7 @@ class ShadowModel(java.lang.Enum['ShadowModel']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['ShadowModel']:
+    def values() -> typing.MutableSequence['ShadowModel']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -6050,9 +6112,9 @@ class TrajectoryState(org.orekit.time.TimeStamped):
             11.0
     """
     @typing.overload
-    def __init__(self, orbitElementsType: OrbitElementsType, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float]): ...
+    def __init__(self, orbitElementsType: OrbitElementsType, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, orbitElementsType: OrbitElementsType, absoluteDate: org.orekit.time.AbsoluteDate, stringArray: typing.List[str], int: int, list: java.util.List[org.orekit.utils.units.Unit]): ...
+    def __init__(self, orbitElementsType: OrbitElementsType, absoluteDate: org.orekit.time.AbsoluteDate, stringArray: typing.Union[typing.List[str], jpype.JArray], int: int, list: java.util.List[org.orekit.utils.units.Unit]): ...
     def getAvailableDerivatives(self) -> org.orekit.utils.CartesianDerivativesFilter:
         """
             Get which derivatives of position are available in this state.
@@ -6076,7 +6138,7 @@ class TrajectoryState(org.orekit.time.TimeStamped):
         
         """
         ...
-    def getElements(self) -> typing.List[float]:
+    def getElements(self) -> typing.MutableSequence[float]:
         """
             Get trajectory elements.
         
@@ -6247,6 +6309,15 @@ class TrajectoryStateHistoryMetadata(org.orekit.files.ccsds.section.CommentsCont
     public class TrajectoryStateHistoryMetadata extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
     
         Metadata for trajectory state history.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
     
         Since:
             11.0
@@ -6764,7 +6835,7 @@ class TrajectoryStateHistoryMetadataKey(java.lang.Enum['TrajectoryStateHistoryMe
         """
         ...
     @staticmethod
-    def values() -> typing.List['TrajectoryStateHistoryMetadataKey']:
+    def values() -> typing.MutableSequence['TrajectoryStateHistoryMetadataKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -6783,7 +6854,7 @@ class TrajectoryStateHistoryMetadataKey(java.lang.Enum['TrajectoryStateHistoryMe
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.ndm.odm.ocm")``.
 
     EphemerisOcmWriter: typing.Type[EphemerisOcmWriter]
@@ -6823,4 +6894,3 @@ class __module_protocol__(typing.Protocol):
     TrajectoryStateHistory: typing.Type[TrajectoryStateHistory]
     TrajectoryStateHistoryMetadata: typing.Type[TrajectoryStateHistoryMetadata]
     TrajectoryStateHistoryMetadataKey: typing.Type[TrajectoryStateHistoryMetadataKey]
-    class-use: org.orekit.files.ccsds.ndm.odm.ocm.class-use.__module_protocol__

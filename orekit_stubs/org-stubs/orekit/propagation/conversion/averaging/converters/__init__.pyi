@@ -1,8 +1,14 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import org.orekit.data
 import org.orekit.forces.gravity.potential
 import org.orekit.orbits
 import org.orekit.propagation.conversion.averaging
-import org.orekit.propagation.conversion.averaging.converters.class-use
 import typing
 
 
@@ -278,7 +284,7 @@ class PythonFixedPointOsculatingToAveragedConverter(FixedPointOsculatingToAverag
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.propagation.conversion.averaging.converters")``.
 
     FixedPointOsculatingToAveragedConverter: typing.Type[FixedPointOsculatingToAveragedConverter]
@@ -288,4 +294,3 @@ class __module_protocol__(typing.Protocol):
     OsculatingToEcksteinHechlerConverter: typing.Type[OsculatingToEcksteinHechlerConverter]
     OsculatingToSGP4Converter: typing.Type[OsculatingToSGP4Converter]
     PythonFixedPointOsculatingToAveragedConverter: typing.Type[PythonFixedPointOsculatingToAveragedConverter]
-    class-use: org.orekit.propagation.conversion.averaging.converters.class-use.__module_protocol__

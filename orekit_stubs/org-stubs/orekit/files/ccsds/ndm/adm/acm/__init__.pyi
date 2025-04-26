@@ -1,6 +1,14 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
 import java.util.function
+import jpype
 import org.hipparchus.geometry.euclidean.threed
 import org.hipparchus.linear
 import org.orekit.attitudes
@@ -8,7 +16,6 @@ import org.orekit.data
 import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.ndm.adm
-import org.orekit.files.ccsds.ndm.adm.acm.class-use
 import org.orekit.files.ccsds.ndm.odm
 import org.orekit.files.ccsds.section
 import org.orekit.files.ccsds.utils
@@ -229,7 +236,7 @@ class AcmDataSubStructureKey(java.lang.Enum['AcmDataSubStructureKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['AcmDataSubStructureKey']:
+    def values() -> typing.MutableSequence['AcmDataSubStructureKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -287,7 +294,7 @@ class AcmElements(java.lang.Enum['AcmElements']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['AcmElements']:
+    def values() -> typing.MutableSequence['AcmElements']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -706,7 +713,7 @@ class AcmMetadataKey(java.lang.Enum['AcmMetadataKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['AcmMetadataKey']:
+    def values() -> typing.MutableSequence['AcmMetadataKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -733,7 +740,7 @@ class AcmParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Acm, 'AcmParser'], org.
         Since:
             12.0
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]): ...
+    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
     def build(self) -> Acm:
         """
             Build the file from parsed entries.
@@ -1017,7 +1024,7 @@ class AttitudeCovariance(org.orekit.time.TimeStamped):
         Since:
             12.0
     """
-    def __init__(self, attitudeCovarianceType: 'AttitudeCovarianceType', absoluteDate: org.orekit.time.AbsoluteDate, stringArray: typing.List[str], int: int): ...
+    def __init__(self, attitudeCovarianceType: 'AttitudeCovarianceType', absoluteDate: org.orekit.time.AbsoluteDate, stringArray: typing.Union[typing.List[str], jpype.JArray], int: int): ...
     def getDate(self) -> org.orekit.time.AbsoluteDate:
         """
             Get the date.
@@ -1079,6 +1086,15 @@ class AttitudeCovarianceHistoryMetadata(org.orekit.files.ccsds.section.CommentsC
     public class AttitudeCovarianceHistoryMetadata extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
     
         Metadata for covariance history.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
     
         Since:
             12.0
@@ -1280,7 +1296,7 @@ class AttitudeCovarianceHistoryMetadataKey(java.lang.Enum['AttitudeCovarianceHis
         """
         ...
     @staticmethod
-    def values() -> typing.List['AttitudeCovarianceHistoryMetadataKey']:
+    def values() -> typing.MutableSequence['AttitudeCovarianceHistoryMetadataKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1339,7 +1355,7 @@ class AttitudeCovarianceType(java.lang.Enum['AttitudeCovarianceType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['AttitudeCovarianceType']:
+    def values() -> typing.MutableSequence['AttitudeCovarianceType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1362,6 +1378,15 @@ class AttitudeDetermination(org.orekit.files.ccsds.section.CommentsContainer):
     public class AttitudeDetermination extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
     
         Attitude determination data.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
     
         Since:
             12.0
@@ -1722,7 +1747,7 @@ class AttitudeDeterminationKey(java.lang.Enum['AttitudeDeterminationKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['AttitudeDeterminationKey']:
+    def values() -> typing.MutableSequence['AttitudeDeterminationKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1745,6 +1770,15 @@ class AttitudeDeterminationSensor(org.orekit.files.ccsds.section.CommentsContain
     public class AttitudeDeterminationSensor extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
     
         Attitude determination sensor data.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
     
         Since:
             12.0
@@ -1770,7 +1804,7 @@ class AttitudeDeterminationSensor(org.orekit.files.ccsds.section.CommentsContain
         
         """
         ...
-    def getSensorNoiseCovariance(self) -> typing.List[float]:
+    def getSensorNoiseCovariance(self) -> typing.MutableSequence[float]:
         """
             Get standard deviation of sensor noise for sensor.
         
@@ -1820,7 +1854,7 @@ class AttitudeDeterminationSensor(org.orekit.files.ccsds.section.CommentsContain
         
         """
         ...
-    def setSensorNoiseCovariance(self, doubleArray: typing.List[float]) -> None:
+    def setSensorNoiseCovariance(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
             Set standard deviation of sensor noise for sensor.
         
@@ -1924,7 +1958,7 @@ class AttitudeDeterminationSensorKey(java.lang.Enum['AttitudeDeterminationSensor
         """
         ...
     @staticmethod
-    def values() -> typing.List['AttitudeDeterminationSensorKey']:
+    def values() -> typing.MutableSequence['AttitudeDeterminationSensorKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1955,7 +1989,7 @@ class AttitudeElementsType(java.lang.Enum['AttitudeElementsType']):
     EULER_ANGLES: typing.ClassVar['AttitudeElementsType'] = ...
     DCM: typing.ClassVar['AttitudeElementsType'] = ...
     def getUnits(self) -> java.util.List[org.orekit.utils.units.Unit]: ...
-    def toRotation(self, rotationOrder: org.hipparchus.geometry.euclidean.threed.RotationOrder, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+    def toRotation(self, rotationOrder: org.hipparchus.geometry.euclidean.threed.RotationOrder, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Rotation:
         """
             Convert to rotation.
         
@@ -2004,7 +2038,7 @@ class AttitudeElementsType(java.lang.Enum['AttitudeElementsType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['AttitudeElementsType']:
+    def values() -> typing.MutableSequence['AttitudeElementsType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -2027,6 +2061,15 @@ class AttitudeManeuver(org.orekit.files.ccsds.section.CommentsContainer):
     public class AttitudeManeuver extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
     
         Maneuver entry.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
     
         Since:
             12.0
@@ -2333,7 +2376,7 @@ class AttitudeManeuverKey(java.lang.Enum['AttitudeManeuverKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['AttitudeManeuverKey']:
+    def values() -> typing.MutableSequence['AttitudeManeuverKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -2357,10 +2400,19 @@ class AttitudePhysicalProperties(org.orekit.files.ccsds.section.CommentsContaine
     
         Spacecraft physical properties.
     
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
+    
         Since:
             12.0
     """
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate): ...
+    def __init__(self): ...
     def getCenterOfPressure(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Get the location of center of pressure.
@@ -2587,7 +2639,7 @@ class AttitudePhysicalPropertiesKey(java.lang.Enum['AttitudePhysicalPropertiesKe
         """
         ...
     @staticmethod
-    def values() -> typing.List['AttitudePhysicalPropertiesKey']:
+    def values() -> typing.MutableSequence['AttitudePhysicalPropertiesKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -2614,7 +2666,7 @@ class AttitudeState(org.orekit.time.TimeStamped):
         Since:
             12.0
     """
-    def __init__(self, attitudeElementsType: AttitudeElementsType, rateElementsType: 'RateElementsType', absoluteDate: org.orekit.time.AbsoluteDate, stringArray: typing.List[str], int: int): ...
+    def __init__(self, attitudeElementsType: AttitudeElementsType, rateElementsType: 'RateElementsType', absoluteDate: org.orekit.time.AbsoluteDate, stringArray: typing.Union[typing.List[str], jpype.JArray], int: int): ...
     def getAttitudeType(self) -> AttitudeElementsType:
         """
             Get the type of the elements.
@@ -2648,7 +2700,7 @@ class AttitudeState(org.orekit.time.TimeStamped):
         
         """
         ...
-    def getElements(self) -> typing.List[float]:
+    def getElements(self) -> typing.MutableSequence[float]:
         """
             Get attitude elements.
         
@@ -2808,6 +2860,15 @@ class AttitudeStateHistoryMetadata(org.orekit.files.ccsds.section.CommentsContai
     public class AttitudeStateHistoryMetadata extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
     
         Metadata for attitude state history.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
     
         Since:
             12.0
@@ -3063,7 +3124,7 @@ class AttitudeStateHistoryMetadataKey(java.lang.Enum['AttitudeStateHistoryMetada
         """
         ...
     @staticmethod
-    def values() -> typing.List['AttitudeStateHistoryMetadataKey']:
+    def values() -> typing.MutableSequence['AttitudeStateHistoryMetadataKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -3096,7 +3157,7 @@ class RateElementsType(java.lang.Enum['RateElementsType']):
     GYRO_BIAS: typing.ClassVar['RateElementsType'] = ...
     NONE: typing.ClassVar['RateElementsType'] = ...
     def getUnits(self) -> java.util.List[org.orekit.utils.units.Unit]: ...
-    def toAngular(self, absoluteDate: org.orekit.time.AbsoluteDate, rotationOrder: org.hipparchus.geometry.euclidean.threed.RotationOrder, rotation2: org.hipparchus.geometry.euclidean.threed.Rotation, int: int, doubleArray: typing.List[float]) -> org.orekit.utils.TimeStampedAngularCoordinates:
+    def toAngular(self, absoluteDate: org.orekit.time.AbsoluteDate, rotationOrder: org.hipparchus.geometry.euclidean.threed.RotationOrder, rotation2: org.hipparchus.geometry.euclidean.threed.Rotation, int: int, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.orekit.utils.TimeStampedAngularCoordinates:
         """
             Convert to angyla coordinates.
         
@@ -3148,7 +3209,7 @@ class RateElementsType(java.lang.Enum['RateElementsType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['RateElementsType']:
+    def values() -> typing.MutableSequence['RateElementsType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -3167,7 +3228,7 @@ class RateElementsType(java.lang.Enum['RateElementsType']):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.ndm.adm.acm")``.
 
     Acm: typing.Type[Acm]
@@ -3198,4 +3259,3 @@ class __module_protocol__(typing.Protocol):
     AttitudeStateHistoryMetadata: typing.Type[AttitudeStateHistoryMetadata]
     AttitudeStateHistoryMetadataKey: typing.Type[AttitudeStateHistoryMetadataKey]
     RateElementsType: typing.Type[RateElementsType]
-    class-use: org.orekit.files.ccsds.ndm.adm.acm.class-use.__module_protocol__

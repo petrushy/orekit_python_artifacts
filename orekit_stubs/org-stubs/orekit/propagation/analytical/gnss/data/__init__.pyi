@@ -1,12 +1,22 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
+import java.util
+import java.util.function
+import org.hipparchus
 import org.orekit.attitudes
 import org.orekit.data
 import org.orekit.frames
 import org.orekit.gnss
 import org.orekit.propagation.analytical.gnss
-import org.orekit.propagation.analytical.gnss.data.class-use
 import org.orekit.propagation.numerical
 import org.orekit.time
+import org.orekit.utils
 import typing
 
 
@@ -324,7 +334,7 @@ class BeidouSatelliteType(java.lang.Enum['BeidouSatelliteType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['BeidouSatelliteType']:
+    def values() -> typing.MutableSequence['BeidouSatelliteType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -342,302 +352,80 @@ class BeidouSatelliteType(java.lang.Enum['BeidouSatelliteType']):
         """
         ...
 
-class CommonGnssData:
+_FieldGNSSClockElements__T = typing.TypeVar('_FieldGNSSClockElements__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldGNSSClockElements(org.orekit.time.FieldTimeStamped[_FieldGNSSClockElements__T], typing.Generic[_FieldGNSSClockElements__T]):
     """
-    public class CommonGnssData extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    public interface FieldGNSSClockElements<T extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.time.FieldTimeStamped`<T>
     
-        Container for common GNSS data contained in almanac and navigation messages.
+        This interface provides the minimal set of clock elements needed by the
+        :class:`~org.orekit.propagation.analytical.gnss.FieldClockCorrectionsProvider`.
     
         Since:
-            11.0
+            13.0
     """
-    def __init__(self, double: float, double2: float, int: int): ...
-    def getAf0(self) -> float:
+    def getAf0(self) -> _FieldGNSSClockElements__T:
         """
-            Getter for the the SV Clock Bias Correction Coefficient.
+            Gets the Zeroth Order Clock Correction.
         
             Returns:
-                the SV Clock Bias Correction Coefficient (s).
+                the Zeroth Order Clock Correction (s)
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf1`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf2`
         
         
         """
         ...
-    def getAf1(self) -> float:
+    def getAf1(self) -> _FieldGNSSClockElements__T:
         """
-            Getter for the SV Clock Drift Correction Coefficient.
+            Gets the First Order Clock Correction.
         
             Returns:
-                the SV Clock Drift Correction Coefficient (s/s).
+                the First Order Clock Correction (s/s)
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf0`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf2`
         
         
         """
         ...
-    def getAngularVelocity(self) -> float:
+    def getAf2(self) -> _FieldGNSSClockElements__T:
         """
-            Getter for the mean angular velocity of the Earth for the GNSS model.
+            Gets the Second Order Clock Correction.
         
             Returns:
-                the mean angular velocity of the Earth for the GNSS model
+                the Second Order Clock Correction (s/s²)
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf0`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf1`
         
         
         """
         ...
-    def getCycleDuration(self) -> float:
+    def getTGD(self) -> _FieldGNSSClockElements__T:
         """
-            Getter for the duration of the GNSS cycle in seconds.
+            Get the estimated group delay differential TGD for L1-L2 correction.
         
             Returns:
-                the duration of the GNSS cycle in seconds
+                the estimated group delay differential TGD for L1-L2 correction (s)
         
         
         """
         ...
-    def getDate(self) -> org.orekit.time.AbsoluteDate:
+    def getToc(self) -> _FieldGNSSClockElements__T:
         """
-            Getter for the ephemeris reference date.
+            Get the time of clock.
         
             Returns:
-                the ephemeris reference date
-        
-        
-        """
-        ...
-    def getE(self) -> float:
-        """
-            Getter for the eccentricity.
-        
-            Returns:
-                the eccentricity
-        
-        
-        """
-        ...
-    def getI0(self) -> float:
-        """
-            Getter for the inclination angle at reference time.
-        
-            Returns:
-                the inclination angle at reference time in radians
-        
-        
-        """
-        ...
-    def getM0(self) -> float:
-        """
-            Getter for the mean anomaly at reference time.
-        
-            Returns:
-                the mean anomaly at reference time in radians
-        
-        
-        """
-        ...
-    def getMu(self) -> float:
-        """
-            Getter for the Earth's universal gravitational parameter.
-        
-            Returns:
-                the Earth's universal gravitational parameter
-        
-        
-        """
-        ...
-    def getOmega0(self) -> float:
-        """
-            Getter for the longitude of ascending node of orbit plane at weekly epoch.
-        
-            Returns:
-                the longitude of ascending node of orbit plane at weekly epoch in radians
-        
-        
-        """
-        ...
-    def getOmegaDot(self) -> float:
-        """
-            Getter for the rate of right ascension.
-        
-            Returns:
-                the rate of right ascension in rad/s
-        
-        
-        """
-        ...
-    def getPRN(self) -> int:
-        """
-            Getter for the PRN number of the satellite.
-        
-            Returns:
-                the PRN number of the satellite
-        
-        
-        """
-        ...
-    def getPa(self) -> float:
-        """
-            Getter for the argument of perigee.
-        
-            Returns:
-                the argument of perigee in radians
-        
-        
-        """
-        ...
-    def getSma(self) -> float:
-        """
-            Getter for the semi-major axis.
-        
-            Returns:
-                the semi-major axis in meters
-        
-        
-        """
-        ...
-    def getTime(self) -> float:
-        """
-            Getter for the reference time of the GNSS orbit as a duration from week start.
-        
-            Returns:
-                the reference time in seconds
-        
-        
-        """
-        ...
-    def getWeek(self) -> int:
-        """
-            Getter for the reference week of the GNSS orbit.
-        
-            Returns:
-                the reference week of the GNSS orbit
-        
-        
-        """
-        ...
-    def setAf0(self, double: float) -> None:
-        """
-            Setter for the SV Clock Bias Correction Coefficient (s).
-        
-            Parameters:
-                af0 (double): the SV Clock Bias Correction Coefficient to set
-        
-        
-        """
-        ...
-    def setAf1(self, double: float) -> None:
-        """
-            Setter for the SV Clock Drift Correction Coefficient (s/s).
-        
-            Parameters:
-                af1 (double): the SV Clock Drift Correction Coefficient to set
-        
-        
-        """
-        ...
-    def setDate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Setter for the reference epoch.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): the epoch to set
-        
-        
-        """
-        ...
-    def setE(self, double: float) -> None:
-        """
-            Setter the eccentricity.
-        
-            Parameters:
-                e (double): the eccentricity to set
-        
-        
-        """
-        ...
-    def setI0(self, double: float) -> None:
-        """
-            Setter for the Inclination Angle at Reference Time (rad).
-        
-            Parameters:
-                i0 (double): the inclination to set
-        
-        
-        """
-        ...
-    def setM0(self, double: float) -> None:
-        """
-            Setter for the Mean Anomaly at Reference Time (rad).
-        
-            Parameters:
-                m0 (double): the mean anomaly to set
-        
-        
-        """
-        ...
-    def setOmega0(self, double: float) -> None:
-        """
-            Setter for the Longitude of Ascending Node of Orbit Plane at Weekly Epoch (rad).
-        
-            Parameters:
-                omega0 (double): the longitude of ascending node to set
-        
-        
-        """
-        ...
-    def setOmegaDot(self, double: float) -> None:
-        """
-            Setter for the rate of Rate of Right Ascension (rad/s).
-        
-            Parameters:
-                omegaDot (double): the rate of right ascension to set
-        
-        
-        """
-        ...
-    def setPRN(self, int: int) -> None:
-        """
-            Setter for the PRN number of the satellite.
-        
-            Parameters:
-                number (int): the prn number ot set
-        
-        
-        """
-        ...
-    def setPa(self, double: float) -> None:
-        """
-            Setter fir the Argument of Perigee (rad).
-        
-            Parameters:
-                omega (double): the argumet of perigee to set
-        
-        
-        """
-        ...
-    def setSma(self, double: float) -> None:
-        """
-            Setter for the semi-major axis.
-        
-            Parameters:
-                sma (double): the semi-major axis (m)
-        
-        
-        """
-        ...
-    def setTime(self, double: float) -> None:
-        """
-            Setter for the reference time of the orbit as a duration from week start.
-        
-            Parameters:
-                time (double): the time to set in seconds
-        
-        
-        """
-        ...
-    def setWeek(self, int: int) -> None:
-        """
-            Setter for the reference week of the orbit.
-        
-            Parameters:
-                week (int): the week to set
+                the time of clock (s)
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf0`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf1`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf2`
         
         
         """
@@ -880,7 +668,7 @@ class GNSSClockElements(org.orekit.time.TimeStamped):
     """
     public interface GNSSClockElements extends :class:`~org.orekit.time.TimeStamped`
     
-        This interface provides the minimal set of orbital elements needed by the
+        This interface provides the minimal set of clock elements needed by the
         :class:`~org.orekit.propagation.analytical.gnss.ClockCorrectionsProvider`.
     
         Since:
@@ -895,8 +683,7 @@ class GNSSClockElements(org.orekit.time.TimeStamped):
         
             Also see:
                 :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getAf1`,
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getAf2`,
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getToc`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getAf2`
         
         
         """
@@ -910,8 +697,7 @@ class GNSSClockElements(org.orekit.time.TimeStamped):
         
             Also see:
                 :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getAf0`,
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getAf2`,
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getToc`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getAf2`
         
         
         """
@@ -925,25 +711,14 @@ class GNSSClockElements(org.orekit.time.TimeStamped):
         
             Also see:
                 :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getAf0`,
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getAf1`,
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getToc`
-        
-        
-        """
-        ...
-    def getCycleDuration(self) -> float:
-        """
-            Gets the duration of the GNSS cycle in seconds.
-        
-            Returns:
-                the duration of the GNSS cycle in seconds
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getAf1`
         
         
         """
         ...
     def getTGD(self) -> float:
         """
-            Gets the estimated group delay differential TGD for L1-L2 correction.
+            Get the estimated group delay differential TGD for L1-L2 correction.
         
             Returns:
                 the estimated group delay differential TGD for L1-L2 correction (s)
@@ -953,10 +728,10 @@ class GNSSClockElements(org.orekit.time.TimeStamped):
         ...
     def getToc(self) -> float:
         """
-            Gets the clock correction reference time toc.
+            Get the time of clock.
         
             Returns:
-                the clock correction reference time (s)
+                the time of clock (s)
         
             Also see:
                 :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getAf0`,
@@ -1116,33 +891,33 @@ class GNSSConstants:
     
     
     """
-    IRNSS_MU: typing.ClassVar[float] = ...
+    NAVIC_MU: typing.ClassVar[float] = ...
     """
-    static final double IRNSS_MU
+    static final double NAVIC_MU
     
-        WGS 84 value of the Earth's universal gravitational parameter for IRNSS user in m³/s².
+        WGS 84 value of the Earth's universal gravitational parameter for NavIC user in m³/s².
     
         Also see:
             :meth:`~constant`
     
     
     """
-    IRNSS_WEEK_NB: typing.ClassVar[int] = ...
+    NAVIC_WEEK_NB: typing.ClassVar[int] = ...
     """
-    static final int IRNSS_WEEK_NB
+    static final int NAVIC_WEEK_NB
     
-        Number of weeks in the IRNSS cycle.
+        Number of weeks in the NavIC cycle.
     
         Also see:
             :meth:`~constant`
     
     
     """
-    IRNSS_AV: typing.ClassVar[float] = ...
+    NAVIC_AV: typing.ClassVar[float] = ...
     """
-    static final double IRNSS_AV
+    static final double NAVIC_AV
     
-        Value of the earth's rotation rate in rad/s for IRNSS user.
+        Value of the earth's rotation rate in rad/s for NavIC user.
     
         Also see:
             :meth:`~constant`
@@ -1194,86 +969,374 @@ class GNSSConstants:
     
     """
 
-class GNSSOrbitalElements(org.orekit.time.TimeStamped):
+class GNSSOrbitalElementsDriversProvider(org.orekit.utils.ParameterDriversProvider):
     """
-    public interface GNSSOrbitalElements extends :class:`~org.orekit.time.TimeStamped`
+    public abstract class GNSSOrbitalElementsDriversProvider extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.utils.ParameterDriversProvider`
     
-        This interface provides the minimal set of orbital elements needed by the
-        :class:`~org.orekit.propagation.analytical.gnss.GNSSPropagator`.
+        This class manages the non-keplerian parameter drivers for
+        :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements` and
+        :class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`.
+    
+        In both primitive double and field classes, only the non-Keplerian parameters are returned in the
+        :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElementsDriversProvider.getParametersDrivers` method, the
+        Keplerian orbital parameters must be accessed independently. These groups ensure proper separate computation of state
+        transition matrix and Jacobian matrix by :class:`~org.orekit.propagation.analytical.gnss.GNSSPropagator` and
+        :class:`~org.orekit.propagation.analytical.gnss.FieldGnssPropagator`.
+    
+        Since:
+            13.0
+    """
+    TIME: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` TIME
+    
+        Name for time parameter.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    INCLINATION_RATE: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` INCLINATION_RATE
+    
+        Name for inclination rate parameter.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    LONGITUDE_RATE: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` LONGITUDE_RATE
+    
+        Name for longitude rate parameter.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    LATITUDE_COSINE: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` LATITUDE_COSINE
+    
+        Name for cosine of latitude argument harmonic parameter.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    LATITUDE_SINE: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` LATITUDE_SINE
+    
+        Name for sine of latitude argument harmonic parameter.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    RADIUS_COSINE: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` RADIUS_COSINE
+    
+        Name for cosine of orbit radius harmonic parameter.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    RADIUS_SINE: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` RADIUS_SINE
+    
+        Name for sine of orbit radius harmonic parameter.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    INCLINATION_COSINE: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` INCLINATION_COSINE
+    
+        Name for cosine of inclination harmonic parameter.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    INCLINATION_SINE: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` INCLINATION_SINE
+    
+        Name for sine of inclination harmonic parameter.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    TIME_INDEX: typing.ClassVar[int] = ...
+    """
+    public static final int TIME_INDEX
+    
+        Index of time in the list returned by
+        :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElementsDriversProvider.getParametersDrivers`.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    I_DOT_INDEX: typing.ClassVar[int] = ...
+    """
+    public static final int I_DOT_INDEX
+    
+        Index of inclination rate in the list returned by
+        :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElementsDriversProvider.getParametersDrivers`.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    OMEGA_DOT_INDEX: typing.ClassVar[int] = ...
+    """
+    public static final int OMEGA_DOT_INDEX
+    
+        Index of longitude rate in the list returned by
+        :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElementsDriversProvider.getParametersDrivers`.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    CUC_INDEX: typing.ClassVar[int] = ...
+    """
+    public static final int CUC_INDEX
+    
+        Index of cosine on latitude argument in the list returned by
+        :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElementsDriversProvider.getParametersDrivers`.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    CUS_INDEX: typing.ClassVar[int] = ...
+    """
+    public static final int CUS_INDEX
+    
+        Index of sine on latitude argument in the list returned by
+        :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElementsDriversProvider.getParametersDrivers`.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    CRC_INDEX: typing.ClassVar[int] = ...
+    """
+    public static final int CRC_INDEX
+    
+        Index of cosine on radius in the list returned by
+        :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElementsDriversProvider.getParametersDrivers`.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    CRS_INDEX: typing.ClassVar[int] = ...
+    """
+    public static final int CRS_INDEX
+    
+        Index of sine on radius in the list returned by
+        :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElementsDriversProvider.getParametersDrivers`.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    CIC_INDEX: typing.ClassVar[int] = ...
+    """
+    public static final int CIC_INDEX
+    
+        Index of cosine on inclination in the list returned by
+        :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElementsDriversProvider.getParametersDrivers`.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    CIS_INDEX: typing.ClassVar[int] = ...
+    """
+    public static final int CIS_INDEX
+    
+        Index of sine on inclination in the list returned by
+        :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElementsDriversProvider.getParametersDrivers`.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    SIZE: typing.ClassVar[int] = ...
+    """
+    public static final int SIZE
+    
+        Size of parameters array.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
     """
     def getAngularVelocity(self) -> float:
         """
-            Gets the mean angular velocity of the Earth of the GNSS model.
+            Get the mean angular velocity of the Earth of the GNSS model.
         
             Returns:
-                the mean angular velocity of the Earth of the GNSS model
+                mean angular velocity of the Earth of the GNSS model
         
         
         """
         ...
     def getCic(self) -> float:
         """
-            Gets the Amplitude of the Cosine Harmonic Correction Term to the Angle of Inclination.
+            Get amplitude of the cosine harmonic correction term to the angle of inclination.
         
             Returns:
-                the Amplitude of the Cosine Harmonic Correction Term to the Angle of Inclination (rad)
+                amplitude of the cosine harmonic correction term to the angle of inclination (rad)
+        
+        
+        """
+        ...
+    def getCicDriver(self) -> org.orekit.utils.ParameterDriver:
+        """
+            Get the driver for the amplitude of the cosine harmonic correction term to the angle of inclination.
+        
+            Returns:
+                driver for the amplitude of the cosine harmonic correction term to the angle of inclination (rad)
         
         
         """
         ...
     def getCis(self) -> float:
         """
-            Gets the Amplitude of the Sine Harmonic Correction Term to the Angle of Inclination.
+            Get amplitude of the sine harmonic correction term to the angle of inclination.
         
             Returns:
-                the Amplitude of the Sine Harmonic Correction Term to the Angle of Inclination (rad)
+                amplitude of the sine harmonic correction term to the angle of inclination (rad)
+        
+        
+        """
+        ...
+    def getCisDriver(self) -> org.orekit.utils.ParameterDriver:
+        """
+            Get the driver for the amplitude of the sine harmonic correction term to the angle of inclination.
+        
+            Returns:
+                driver for the amplitude of the sine harmonic correction term to the angle of inclination (rad)
         
         
         """
         ...
     def getCrc(self) -> float:
         """
-            Gets the Amplitude of the Cosine Harmonic Correction Term to the Orbit Radius.
+            Get amplitude of the cosine harmonic correction term to the orbit radius.
         
             Returns:
-                the Amplitude of the Cosine Harmonic Correction Term to the Orbit Radius (m)
+                amplitude of the cosine harmonic correction term to the orbit radius (m)
+        
+        
+        """
+        ...
+    def getCrcDriver(self) -> org.orekit.utils.ParameterDriver:
+        """
+            Get the driver for the amplitude of the cosine harmonic correction term to the orbit radius.
+        
+            Returns:
+                driver for the amplitude of the cosine harmonic correction term to the orbit radius (m)
         
         
         """
         ...
     def getCrs(self) -> float:
         """
-            Gets the Amplitude of the Sine Harmonic Correction Term to the Orbit Radius.
+            Get amplitude of the sine harmonic correction term to the orbit radius.
         
             Returns:
-                the Amplitude of the Sine Harmonic Correction Term to the Orbit Radius (m)
+                amplitude of the sine harmonic correction term to the orbit radius (m)
+        
+        
+        """
+        ...
+    def getCrsDriver(self) -> org.orekit.utils.ParameterDriver:
+        """
+            Get the driver for the amplitude of the sine harmonic correction term to the orbit radius.
+        
+            Returns:
+                driver for the amplitude of the sine harmonic correction term to the orbit radius (m)
         
         
         """
         ...
     def getCuc(self) -> float:
         """
-            Gets the Amplitude of the Cosine Harmonic Correction Term to the Argument of Latitude.
+            Get amplitude of the cosine harmonic correction term to the argument of latitude.
         
             Returns:
-                the Amplitude of the Cosine Harmonic Correction Term to the Argument of Latitude (rad)
+                amplitude of the cosine harmonic correction term to the argument of latitude (rad)
+        
+        
+        """
+        ...
+    def getCucDriver(self) -> org.orekit.utils.ParameterDriver:
+        """
+            Get the driver for the amplitude of the cosine harmonic correction term to the argument of latitude.
+        
+            Returns:
+                driver for the amplitude of the cosine harmonic correction term to the argument of latitude (rad)
         
         
         """
         ...
     def getCus(self) -> float:
         """
-            Gets the Amplitude of the Sine Harmonic Correction Term to the Argument of Latitude.
+            Get amplitude of the sine harmonic correction term to the argument of latitude.
         
             Returns:
-                the Amplitude of the Sine Harmonic Correction Term to the Argument of Latitude (rad)
+                amplitude of the sine harmonic correction term to the argument of latitude (rad)
+        
+        
+        """
+        ...
+    def getCusDriver(self) -> org.orekit.utils.ParameterDriver:
+        """
+            Get the driver for the amplitude of the sine harmonic correction term to the argument of latitude.
+        
+            Returns:
+                driver for the amplitude of the sine harmonic correction term to the argument of latitude (rad)
         
         
         """
         ...
     def getCycleDuration(self) -> float:
         """
-            Gets the duration of the GNSS cycle in seconds.
+            Get for the duration of the GNSS cycle in seconds.
         
             Returns:
                 the duration of the GNSS cycle in seconds
@@ -1281,217 +1344,223 @@ class GNSSOrbitalElements(org.orekit.time.TimeStamped):
         
         """
         ...
-    def getE(self) -> float:
-        """
-            Gets the Eccentricity.
-        
-            Returns:
-                the Eccentricity
-        
-        
-        """
-        ...
-    def getI0(self) -> float:
-        """
-            Gets the Inclination Angle at Reference Time.
-        
-            Returns:
-                the Inclination Angle at Reference Time (rad)
-        
-        
-        """
-        ...
     def getIDot(self) -> float:
         """
-            Gets the Rate of Inclination Angle.
+            Get rate of inclination angle.
         
             Returns:
-                the Rate of Inclination Angle (rad/s)
+                rate of inclination angle (rad/s)
         
         
         """
         ...
-    def getM0(self) -> float:
+    def getIDotDriver(self) -> org.orekit.utils.ParameterDriver:
         """
-            Gets the Mean Anomaly at Reference Time.
+            Get the driver for the rate of inclination angle.
         
             Returns:
-                the Mean Anomaly at Reference Time (rad)
-        
-        
-        """
-        ...
-    def getMeanMotion(self) -> float:
-        """
-            Gets the Mean Motion.
-        
-            Returns:
-                the Mean Motion (rad/s)
-        
-        
-        """
-        ...
-    def getMu(self) -> float:
-        """
-            Gets the Earth's universal gravitational parameter.
-        
-            Returns:
-                the Earth's universal gravitational parameter
-        
-        
-        """
-        ...
-    def getOmega0(self) -> float:
-        """
-            Gets the Longitude of Ascending Node of Orbit Plane at Weekly Epoch.
-        
-            Returns:
-                the Longitude of Ascending Node of Orbit Plane at Weekly Epoch (rad)
+                driver for the rate of inclination angle (rad/s)
         
         
         """
         ...
     def getOmegaDot(self) -> float:
         """
-            Gets the Rate of Right Ascension.
+            Get rate of right ascension.
         
             Returns:
-                the Rate of Right Ascension (rad/s)
+                rate of right ascension (rad/s)
+        
+        
+        """
+        ...
+    def getOmegaDotDriver(self) -> org.orekit.utils.ParameterDriver:
+        """
+            Get the driver for the rate of right ascension.
+        
+            Returns:
+                driver for the rate of right ascension (rad/s)
         
         
         """
         ...
     def getPRN(self) -> int:
         """
-            Gets the PRN number of the GNSS satellite.
+            Get the PRN number of the satellite.
         
             Returns:
-                the PRN number of the GNSS satellite
+                PRN number of the satellite
         
         
         """
         ...
-    def getPa(self) -> float:
+    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
+    def getSystem(self) -> org.orekit.gnss.SatelliteSystem:
         """
-            Gets the Argument of Perigee.
+            Get satellite system.
         
             Returns:
-                the Argument of Perigee (rad)
-        
-        
-        """
-        ...
-    @typing.overload
-    def getPropagator(self) -> org.orekit.propagation.analytical.gnss.GNSSPropagator:
-        """
-            Get the propagator corresponding to the navigation message.
-        
-            The attitude provider is set by default to be aligned with the EME2000 frame.
-        
-        
-            The mass is set by default to the :meth:`~org.orekit.propagation.Propagator.DEFAULT_MASS`.
-        
-        
-            The ECI frame is set by default to the :meth:`~org.orekit.frames.Predefined.EME2000` in the default data context.
-        
-        
-            The ECEF frame is set by default to the :meth:`~org.orekit.frames.Predefined.ITRF_CIO_CONV_2010_SIMPLE_EOP` in the
-            default data context.
-        
-            This constructor uses the :meth:`~org.orekit.data.DataContext.getDefault`
-        
-            Returns:
-                the propagator corresponding to the navigation message
-        
-            Since:
-                12.0
-        
-            Also see:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getPropagator`,
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getPropagator`
-        
-        """
-        ...
-    @typing.overload
-    def getPropagator(self, frames: org.orekit.frames.Frames) -> org.orekit.propagation.analytical.gnss.GNSSPropagator:
-        """
-            Get the propagator corresponding to the navigation message.
-        
-            The attitude provider is set by default to be aligned with the EME2000 frame.
-        
-        
-            The mass is set by default to the :meth:`~org.orekit.propagation.Propagator.DEFAULT_MASS`.
-        
-        
-            The ECI frame is set by default to the :meth:`~org.orekit.frames.Predefined.EME2000` in the default data context.
-        
-        
-            The ECEF frame is set by default to the :meth:`~org.orekit.frames.Predefined.ITRF_CIO_CONV_2010_SIMPLE_EOP` in the
-            default data context.
-        
-            Parameters:
-                frames (:class:`~org.orekit.frames.Frames`): set of frames to use
-        
-            Returns:
-                the propagator corresponding to the navigation message
-        
-            Since:
-                12.0
-        
-            Also see:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getPropagator`,
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getPropagator`
-        
-            Get the propagator corresponding to the navigation message.
-        
-            Parameters:
-                frames (:class:`~org.orekit.frames.Frames`): set of frames to use
-                provider (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude provider
-                inertial (:class:`~org.orekit.frames.Frame`): inertial frame, use to provide the propagated orbit
-                bodyFixed (:class:`~org.orekit.frames.Frame`): body fixed frame, corresponding to the navigation message
-                mass (double): spacecraft mass in kg
-        
-            Returns:
-                the propagator corresponding to the navigation message
-        
-            Since:
-                12.0
-        
-            Also see:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getPropagator`,
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getPropagator`
-        
-        
-        """
-        ...
-    @typing.overload
-    def getPropagator(self, frames: org.orekit.frames.Frames, attitudeProvider: org.orekit.attitudes.AttitudeProvider, frame2: org.orekit.frames.Frame, frame3: org.orekit.frames.Frame, double: float) -> org.orekit.propagation.analytical.gnss.GNSSPropagator: ...
-    def getSma(self) -> float:
-        """
-            Gets the Semi-Major Axis.
-        
-            Returns:
-                the Semi-Major Axis (m)
+                satellite system
         
         
         """
         ...
     def getTime(self) -> float:
         """
-            Gets the Reference Time of the GNSS orbit as a duration from week start.
+            Get reference time of the GNSS orbit as a duration from week start.
         
             Returns:
-                the Reference Time of the GNSS orbit (s)
+                reference time of the GNSS orbit (s)
+        
+        
+        """
+        ...
+    def getTimeDriver(self) -> org.orekit.utils.ParameterDriver:
+        """
+            Get the driver for reference time of the GNSS orbit as a duration from week start.
+        
+            Returns:
+                driver for the reference time of the GNSS orbit (s)
+        
+        
+        """
+        ...
+    def getTimeScales(self) -> org.orekit.time.TimeScales:
+        """
+            Get known time scales.
+        
+            Returns:
+                known time scales
         
         
         """
         ...
     def getWeek(self) -> int:
         """
-            Gets the Reference Week of the GNSS orbit.
+            Get the reference week of the orbit.
         
             Returns:
-                the Reference Week of the GNSS orbit within [0, 1024[
+                reference week of the orbit
+        
+        
+        """
+        ...
+    def getWeeksInCycle(self) -> int:
+        """
+            Get for the duration of the GNSS cycle in weeks.
+        
+            Returns:
+                the duration of the GNSS cycle in weeks
+        
+        
+        """
+        ...
+    def setCic(self, double: float) -> None:
+        """
+            Set amplitude of the cosine harmonic correction term to the angle of inclination.
+        
+            Parameters:
+                cic (double): amplitude of the cosine harmonic correction term to the angle of inclination (rad)
+        
+        
+        """
+        ...
+    def setCis(self, double: float) -> None:
+        """
+            Set amplitude of the sine harmonic correction term to the angle of inclination.
+        
+            Parameters:
+                cis (double): amplitude of the sine harmonic correction term to the angle of inclination (rad)
+        
+        
+        """
+        ...
+    def setCrc(self, double: float) -> None:
+        """
+            Set amplitude of the cosine harmonic correction term to the orbit radius.
+        
+            Parameters:
+                crc (double): amplitude of the cosine harmonic correction term to the orbit radius (m)
+        
+        
+        """
+        ...
+    def setCrs(self, double: float) -> None:
+        """
+            Set amplitude of the sine harmonic correction term to the orbit radius.
+        
+            Parameters:
+                crs (double): amplitude of the sine harmonic correction term to the orbit radius (m)
+        
+        
+        """
+        ...
+    def setCuc(self, double: float) -> None:
+        """
+            Set amplitude of the cosine harmonic correction term to the argument of latitude.
+        
+            Parameters:
+                cuc (double): amplitude of the cosine harmonic correction term to the argument of latitude (rad)
+        
+        
+        """
+        ...
+    def setCus(self, double: float) -> None:
+        """
+            Set amplitude of the sine harmonic correction term to the argument of latitude.
+        
+            Parameters:
+                cus (double): amplitude of the sine harmonic correction term to the argument of latitude (rad)
+        
+        
+        """
+        ...
+    def setIDot(self, double: float) -> None:
+        """
+            Set the driver for the rate of inclination angle.
+        
+            Parameters:
+                iDot (double): rate of inclination angle (rad/s)
+        
+        
+        """
+        ...
+    def setOmegaDot(self, double: float) -> None:
+        """
+            Set rate of right ascension.
+        
+            Parameters:
+                dom (double): rate of right ascension (rad/s)
+        
+        
+        """
+        ...
+    def setPRN(self, int: int) -> None:
+        """
+            Set the PRN number of the satellite.
+        
+            Parameters:
+                number (int): the prn number ot set
+        
+        
+        """
+        ...
+    def setTime(self, double: float) -> None:
+        """
+            Set reference time of the GNSS orbit as a duration from week start.
+        
+            Parameters:
+                time (double): reference time of the GNSS orbit (s)
+        
+        
+        """
+        ...
+    def setWeek(self, int: int) -> None:
+        """
+            Set the reference week of the orbit.
+        
+            Parameters:
+                week (int): the week to set
         
         
         """
@@ -1668,458 +1737,216 @@ class SBASOrbitalElements(org.orekit.time.TimeStamped):
         """
         ...
 
-class AbstractAlmanac(CommonGnssData, GNSSOrbitalElements):
+_FieldGnssOrbitalElements__T = typing.TypeVar('_FieldGnssOrbitalElements__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+_FieldGnssOrbitalElements__O = typing.TypeVar('_FieldGnssOrbitalElements__O', bound='GNSSOrbitalElements')  # <O>
+class FieldGnssOrbitalElements(GNSSOrbitalElementsDriversProvider, org.orekit.time.FieldTimeStamped[_FieldGnssOrbitalElements__T], typing.Generic[_FieldGnssOrbitalElements__T, _FieldGnssOrbitalElements__O]):
     """
-    public abstract class AbstractAlmanac extends :class:`~org.orekit.propagation.analytical.gnss.data.CommonGnssData` implements :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
+    public abstract class FieldGnssOrbitalElements<T extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>, O extends :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`<O>> extends :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElementsDriversProvider` implements :class:`~org.orekit.time.FieldTimeStamped`<T>
     
-        Base class for GNSS almanacs.
+        This class provides the minimal set of orbital elements needed by the
+        :class:`~org.orekit.propagation.analytical.gnss.FieldGnssPropagator`.
     
         Since:
-            11.0
+            13.0
     """
-    def __init__(self, double: float, double2: float, int: int): ...
-    def getAf2(self) -> float:
+    _changeField__U = typing.TypeVar('_changeField__U', bound=org.hipparchus.CalculusFieldElement)  # <U>
+    _changeField__G = typing.TypeVar('_changeField__G', bound='FieldGnssOrbitalElements')  # <G>
+    def changeField(self, function: typing.Union[java.util.function.Function[_FieldGnssOrbitalElements__T, _changeField__U], typing.Callable[[_FieldGnssOrbitalElements__T], _changeField__U]]) -> _changeField__G: ...
+    def getADot(self) -> _FieldGnssOrbitalElements__T:
         """
-            Getter for the Drift Rate Correction Coefficient.
+            Getter for the change rate in semi-major axis.
         
-            By default, not contained in a GNSS almanac
+            This value is non-zero only in civilian navigation messages
         
             Returns:
-                the Drift Rate Correction Coefficient (s/s²).
+                the change rate in semi-major axis
+        
+            Since:
+                13.0
         
         
         """
         ...
-    def getCic(self) -> float:
-        """
-            Getter for the Cic parameter.
-        
-            By default, not contained in a GNSS almanac
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getCic` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
-        
-            Returns:
-                the Cic parameter
-        
-        
-        """
-        ...
-    def getCis(self) -> float:
-        """
-            Getter for the Cis parameter.
-        
-            By default, not contained in a GNSS almanac
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getCis` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
-        
-            Returns:
-                the Cis parameter
-        
-        
-        """
-        ...
-    def getCrc(self) -> float:
-        """
-            Getter for the Crc parameter.
-        
-            By default, not contained in a GNSS almanac
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getCrc` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
-        
-            Returns:
-                the Crc parameter
-        
-        
-        """
-        ...
-    def getCrs(self) -> float:
-        """
-            Getter for the Crs parameter.
-        
-            By default, not contained in a GNSS almanac
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getCrs` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
-        
-            Returns:
-                the Crs parameter
-        
-        
-        """
-        ...
-    def getCuc(self) -> float:
-        """
-            Getter for the Cuc parameter.
-        
-            By default, not contained in a GNSS almanac
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getCuc` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
-        
-            Returns:
-                the Cuc parameter
-        
-        
-        """
-        ...
-    def getCus(self) -> float:
-        """
-            Getter for the Cus parameter.
-        
-            By default, not contained in a GNSS almanac
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getCus` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
-        
-            Returns:
-                the Cus parameter
-        
-        
-        """
-        ...
-    def getIDot(self) -> float:
-        """
-            Getter for the rate of inclination angle.
-        
-            By default, not contained in a GNSS almanac
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getIDot` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
-        
-            Returns:
-                the rate of inclination angle in rad/s
-        
-        
-        """
-        ...
-    def getMeanMotion(self) -> float:
-        """
-            Getter for the mean motion.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getMeanMotion` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
-        
-            Returns:
-                the mean motion
-        
-        
-        """
-        ...
-
-class AbstractNavigationMessage(CommonGnssData, GNSSOrbitalElements):
-    """
-    public abstract class AbstractNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.CommonGnssData` implements :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
-    
-        Base class for GNSS navigation messages.
-    
-        Since:
-            11.0
-    
-        Also see:
-            :class:`~org.orekit.propagation.analytical.gnss.data.GPSLegacyNavigationMessage`,
-            :class:`~org.orekit.propagation.analytical.gnss.data.GalileoNavigationMessage`,
-            :class:`~org.orekit.propagation.analytical.gnss.data.BeidouLegacyNavigationMessage`,
-            :class:`~org.orekit.propagation.analytical.gnss.data.QZSSLegacyNavigationMessage`,
-            :class:`~org.orekit.propagation.analytical.gnss.data.IRNSSNavigationMessage`
-    """
-    def __init__(self, double: float, double2: float, int: int): ...
-    def getAf2(self) -> float:
-        """
-            Getter for the Drift Rate Correction Coefficient.
-        
-            Returns:
-                the Drift Rate Correction Coefficient (s/s²).
-        
-        
-        """
-        ...
-    def getCic(self) -> float:
-        """
-            Getter for the Cic parameter.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getCic` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
-        
-            Returns:
-                the Cic parameter
-        
-        
-        """
-        ...
-    def getCis(self) -> float:
-        """
-            Getter for the Cis parameter.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getCis` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
-        
-            Returns:
-                the Cis parameter
-        
-        
-        """
-        ...
-    def getCrc(self) -> float:
-        """
-            Getter for the Crc parameter.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getCrc` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
-        
-            Returns:
-                the Crc parameter
-        
-        
-        """
-        ...
-    def getCrs(self) -> float:
-        """
-            Getter for the Crs parameter.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getCrs` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
-        
-            Returns:
-                the Crs parameter
-        
-        
-        """
-        ...
-    def getCuc(self) -> float:
-        """
-            Getter for the Cuc parameter.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getCuc` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
-        
-            Returns:
-                the Cuc parameter
-        
-        
-        """
-        ...
-    def getCus(self) -> float:
-        """
-            Getter for the Cus parameter.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getCus` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
-        
-            Returns:
-                the Cus parameter
-        
-        
-        """
-        ...
-    def getDeltaN(self) -> float:
+    def getDate(self) -> org.orekit.time.FieldAbsoluteDate[_FieldGnssOrbitalElements__T]: ...
+    def getDeltaN0(self) -> _FieldGnssOrbitalElements__T:
         """
             Getter for the delta of satellite mean motion.
+        
+            This value is non-zero only in navigation messages
         
             Returns:
                 delta of satellite mean motion
         
-        
-        """
-        ...
-    def getEpochToc(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Getter for the time of clock epoch.
-        
-            Returns:
-                the time of clock epoch
+            Since:
+                13.0
         
         
         """
         ...
-    def getIDot(self) -> float:
+    def getDeltaN0Dot(self) -> _FieldGnssOrbitalElements__T:
         """
-            Getter for the rate of inclination angle.
+            Getter for change rate in Δn₀.
         
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getIDot` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
+            This value is non-zero only in civilian navigation messages
         
             Returns:
-                the rate of inclination angle in rad/s
-        
-        
-        """
-        ...
-    def getMeanMotion(self) -> float:
-        """
-            Getter for the mean motion.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getMeanMotion` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
-        
-            Returns:
-                the mean motion
-        
-        
-        """
-        ...
-    def getSqrtA(self) -> float:
-        """
-            Getter for Square Root of Semi-Major Axis (√m).
-        
-            Returns:
-                Square Root of Semi-Major Axis (√m)
-        
-        
-        """
-        ...
-    def getTransmissionTime(self) -> float:
-        """
-            Getter for transmission time.
-        
-            Returns:
-                transmission time
+                change rate in Δn₀
         
             Since:
-                12.0
+                13.0
         
         
         """
         ...
-    def setAf2(self, double: float) -> None:
+    def getE(self) -> _FieldGnssOrbitalElements__T:
         """
-            Setter for the Drift Rate Correction Coefficient (s/s²).
+            Get eccentricity.
         
-            Parameters:
-                af2 (double): the Drift Rate Correction Coefficient to set
-        
-        
-        """
-        ...
-    def setCic(self, double: float) -> None:
-        """
-            Setter for te Cic parameter.
-        
-            Parameters:
-                cic (double): the value to set
+            Returns:
+                eccentricity
         
         
         """
         ...
-    def setCis(self, double: float) -> None:
+    def getI0(self) -> _FieldGnssOrbitalElements__T:
         """
-            Setter for the Cis parameter.
+            Get the inclination angle at reference time.
         
-            Parameters:
-                cis (double): the value to sets
-        
-        
-        """
-        ...
-    def setCrc(self, double: float) -> None:
-        """
-            Setter for the Crc parameter.
-        
-            Parameters:
-                crc (double): the value to set
+            Returns:
+                inclination angle at reference time (rad)
         
         
         """
         ...
-    def setCrs(self, double: float) -> None:
+    def getM0(self) -> _FieldGnssOrbitalElements__T:
         """
-            Setter for the Crs parameter.
+            Get mean anomaly at reference time.
         
-            Parameters:
-                crs (double): the value to set
-        
-        
-        """
-        ...
-    def setCuc(self, double: float) -> None:
-        """
-            Setter for the Cuc parameter.
-        
-            Parameters:
-                cuc (double): the value to set
+            Returns:
+                mean anomaly at reference time (rad)
         
         
         """
         ...
-    def setCus(self, double: float) -> None:
+    def getMeanMotion0(self) -> _FieldGnssOrbitalElements__T:
         """
-            Setter for the Cus parameter.
+            Get the computed mean motion n₀.
         
-            Parameters:
-                cus (double): the value to set
-        
-        
-        """
-        ...
-    def setDeltaN(self, double: float) -> None:
-        """
-            Setter for the delta of satellite mean motion.
-        
-            Parameters:
-                deltaN (double): the value to set
-        
-        
-        """
-        ...
-    def setEpochToc(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Setter for the time of clock epoch.
-        
-            Parameters:
-                epochToc (:class:`~org.orekit.time.AbsoluteDate`): the epoch to set
-        
-        
-        """
-        ...
-    def setIDot(self, double: float) -> None:
-        """
-            Setter for the Rate of Inclination Angle (rad/s).
-        
-            Parameters:
-                iRate (double): the rate of inclination angle to set
-        
-        
-        """
-        ...
-    def setSqrtA(self, double: float) -> None:
-        """
-            Setter for the Square Root of Semi-Major Axis (√m).
-        
-            In addition, this method set the value of the Semi-Major Axis.
-        
-            Parameters:
-                sqrtA (double): the Square Root of Semi-Major Axis (√m)
-        
-        
-        """
-        ...
-    def setTransmissionTime(self, double: float) -> None:
-        """
-            Setter for transmission time.
-        
-            Parameters:
-                transmissionTime (double): transmission time
+            Returns:
+                the computed mean motion n₀ (rad/s)
         
             Since:
-                12.0
+                13.0
+        
+        
+        """
+        ...
+    def getMu(self) -> _FieldGnssOrbitalElements__T:
+        """
+            Get the Earth's universal gravitational parameter.
+        
+            Returns:
+                the Earth's universal gravitational parameter
+        
+        
+        """
+        ...
+    def getOmega0(self) -> _FieldGnssOrbitalElements__T:
+        """
+            Get longitude of ascending node of orbit plane at weekly epoch.
+        
+            Returns:
+                longitude of ascending node of orbit plane at weekly epoch (rad)
+        
+        
+        """
+        ...
+    def getPa(self) -> _FieldGnssOrbitalElements__T:
+        """
+            Get argument of perigee.
+        
+            Returns:
+                argument of perigee (rad)
+        
+        
+        """
+        ...
+    def getSma(self) -> _FieldGnssOrbitalElements__T:
+        """
+            Get semi-major axis.
+        
+            Returns:
+                semi-major axis (m)
+        
+        
+        """
+        ...
+    def setE(self, t: _FieldGnssOrbitalElements__T) -> None:
+        """
+            Set eccentricity.
+        
+            Parameters:
+                e (:class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`): eccentricity
+        
+        
+        """
+        ...
+    def setI0(self, t: _FieldGnssOrbitalElements__T) -> None:
+        """
+            Set inclination angle at reference time.
+        
+            Parameters:
+                i0 (:class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`): inclination angle at reference time (rad)
+        
+        
+        """
+        ...
+    def setM0(self, t: _FieldGnssOrbitalElements__T) -> None:
+        """
+            Set mean anomaly at reference time.
+        
+            Parameters:
+                m0 (:class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`): mean anomaly at reference time (rad)
+        
+        
+        """
+        ...
+    def setOmega0(self, t: _FieldGnssOrbitalElements__T) -> None:
+        """
+            Set longitude of ascending node of orbit plane at weekly epoch.
+        
+            Parameters:
+                omega0 (:class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`): longitude of ascending node of orbit plane at weekly epoch (rad)
+        
+        
+        """
+        ...
+    def setPa(self, t: _FieldGnssOrbitalElements__T) -> None:
+        """
+            Set argument of perigee.
+        
+            Parameters:
+                pa (:class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`): argument of perigee (rad)
+        
+        
+        """
+        ...
+    def setSma(self, t: _FieldGnssOrbitalElements__T) -> None:
+        """
+            Set semi-major axis.
+        
+            Parameters:
+                sma (:class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`): demi-major axis (m)
+        
+        
+        """
+        ...
+    def toNonField(self) -> _FieldGnssOrbitalElements__O:
+        """
+            Create a non-field version of the instance.
+        
+            Returns:
+                non-field version of the instance
         
         
         """
@@ -2931,6 +2758,470 @@ class GLONASSNavigationMessage(AbstractEphemerisMessage, GLONASSOrbitalElements)
         """
         ...
 
+_GNSSOrbitalElements__O = typing.TypeVar('_GNSSOrbitalElements__O', bound='GNSSOrbitalElements')  # <O>
+class GNSSOrbitalElements(GNSSOrbitalElementsDriversProvider, org.orekit.time.TimeStamped, typing.Generic[_GNSSOrbitalElements__O]):
+    """
+    public abstract class GNSSOrbitalElements<O extends GNSSOrbitalElements<O>> extends :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElementsDriversProvider` implements :class:`~org.orekit.time.TimeStamped`
+    
+        This class provides the minimal set of orbital elements needed by the
+        :class:`~org.orekit.propagation.analytical.gnss.GNSSPropagator`.
+    
+        The parameters are split in two groups: Keplerian orbital parameters and non-Keplerian evolution parameters. All
+        parameters can be updated as they are all instances of :class:`~org.orekit.utils.ParameterDriver`. Only the
+        non-Keplerian parameters are returned in the
+        :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElementsDriversProvider.getParametersDrivers` method, the
+        Keplerian orbital parameters must be accessed independently. These groups ensure proper separate computation of state
+        transition matrix and Jacobian matrix by :class:`~org.orekit.propagation.analytical.gnss.GNSSPropagator`.
+    
+        Since:
+            13.0
+    """
+    SEMI_MAJOR_AXIS: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` SEMI_MAJOR_AXIS
+    
+        Name for semi major axis parameter.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    ECCENTRICITY: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ECCENTRICITY
+    
+        Name for eccentricity parameter.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    INCLINATION: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` INCLINATION
+    
+        Name for inclination at reference time parameter.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    ARGUMENT_OF_PERIGEE: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ARGUMENT_OF_PERIGEE
+    
+        Name for argument of perigee parameter.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    NODE_LONGITUDE: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` NODE_LONGITUDE
+    
+        Name for longitude of ascending node at weekly epoch parameter.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    MEAN_ANOMALY: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` MEAN_ANOMALY
+    
+        Name for mean anomaly at reference time parameter.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    def getADot(self) -> float:
+        """
+            Getter for the change rate in semi-major axis.
+        
+            This value is non-zero only in civilian navigation messages
+        
+            Returns:
+                the change rate in semi-major axis
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
+    def getDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Get the date.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeStamped.getDate` in interface :class:`~org.orekit.time.TimeStamped`
+        
+            Returns:
+                date attached to the object
+        
+        
+        """
+        ...
+    def getDeltaN0(self) -> float:
+        """
+            Getter for the delta of satellite mean motion.
+        
+            This value is non-zero only in navigation messages
+        
+            Returns:
+                delta of satellite mean motion
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
+    def getDeltaN0Dot(self) -> float:
+        """
+            Getter for change rate in Δn₀.
+        
+            This value is non-zero only in civilian navigation messages
+        
+            Returns:
+                change rate in Δn₀
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
+    def getE(self) -> float:
+        """
+            Get eccentricity.
+        
+            Returns:
+                eccentricity
+        
+        
+        """
+        ...
+    def getEDriver(self) -> org.orekit.utils.ParameterDriver:
+        """
+            Get the driver for the eccentricity.
+        
+            Returns:
+                driver for the eccentricity
+        
+        
+        """
+        ...
+    def getI0(self) -> float:
+        """
+            Get the inclination angle at reference time.
+        
+            Returns:
+                inclination angle at reference time (rad)
+        
+        
+        """
+        ...
+    def getI0Driver(self) -> org.orekit.utils.ParameterDriver:
+        """
+            Get the driver for the inclination angle at reference time.
+        
+            Returns:
+                driver for the inclination angle at reference time (rad)
+        
+        
+        """
+        ...
+    def getM0(self) -> float:
+        """
+            Get mean anomaly at reference time.
+        
+            Returns:
+                mean anomaly at reference time (rad)
+        
+        
+        """
+        ...
+    def getM0Driver(self) -> org.orekit.utils.ParameterDriver:
+        """
+            Get the driver for the mean anomaly at reference time.
+        
+            Returns:
+                driver for the mean anomaly at reference time (rad)
+        
+        
+        """
+        ...
+    def getMeanMotion0(self) -> float:
+        """
+            Get the computed mean motion n₀.
+        
+            Returns:
+                the computed mean motion n₀ (rad/s)
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
+    def getMu(self) -> float:
+        """
+            Get the Earth's universal gravitational parameter.
+        
+            Returns:
+                the Earth's universal gravitational parameter
+        
+        
+        """
+        ...
+    def getOmega0(self) -> float:
+        """
+            Get longitude of ascending node of orbit plane at weekly epoch.
+        
+            Returns:
+                longitude of ascending node of orbit plane at weekly epoch (rad)
+        
+        
+        """
+        ...
+    def getOmega0Driver(self) -> org.orekit.utils.ParameterDriver:
+        """
+            Get the driver for the longitude of ascending node of orbit plane at weekly epoch.
+        
+            Returns:
+                driver for the longitude of ascending node of orbit plane at weekly epoch (rad)
+        
+        
+        """
+        ...
+    def getPa(self) -> float:
+        """
+            Get argument of perigee.
+        
+            Returns:
+                argument of perigee (rad)
+        
+        
+        """
+        ...
+    def getPaDriver(self) -> org.orekit.utils.ParameterDriver:
+        """
+            Get the driver for the argument of perigee.
+        
+            Returns:
+                driver for the argument of perigee (rad)
+        
+        
+        """
+        ...
+    def getSma(self) -> float:
+        """
+            Get semi-major axis.
+        
+            Returns:
+                semi-major axis (m)
+        
+        
+        """
+        ...
+    def getSmaDriver(self) -> org.orekit.utils.ParameterDriver:
+        """
+            Get semi-major axis.
+        
+            Returns:
+                driver for the semi-major axis (m)
+        
+        
+        """
+        ...
+    def setE(self, double: float) -> None:
+        """
+            Set eccentricity.
+        
+            Parameters:
+                e (double): eccentricity
+        
+        
+        """
+        ...
+    def setI0(self, double: float) -> None:
+        """
+            Set inclination angle at reference time.
+        
+            Parameters:
+                i0 (double): inclination angle at reference time (rad)
+        
+        
+        """
+        ...
+    def setM0(self, double: float) -> None:
+        """
+            Set mean anomaly at reference time.
+        
+            Parameters:
+                anom (double): mean anomaly at reference time (rad)
+        
+        
+        """
+        ...
+    def setOmega0(self, double: float) -> None:
+        """
+            Set longitude of ascending node of orbit plane at weekly epoch.
+        
+            Parameters:
+                om0 (double): longitude of ascending node of orbit plane at weekly epoch (rad)
+        
+        
+        """
+        ...
+    def setPa(self, double: float) -> None:
+        """
+            Set argument of perigee.
+        
+            Parameters:
+                aop (double): argument of perigee (rad)
+        
+        
+        """
+        ...
+    def setSma(self, double: float) -> None:
+        """
+            Set semi-major axis.
+        
+            Parameters:
+                sma (double): demi-major axis (m)
+        
+        
+        """
+        ...
+    _toField__T = typing.TypeVar('_toField__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _toField__F = typing.TypeVar('_toField__F', bound=FieldGnssOrbitalElements)  # <F>
+    def toField(self, field: org.hipparchus.Field[_toField__T]) -> _toField__F: ...
+
+_PythonFieldGNSSClockElements__T = typing.TypeVar('_PythonFieldGNSSClockElements__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class PythonFieldGNSSClockElements(FieldGNSSClockElements[_PythonFieldGNSSClockElements__T], typing.Generic[_PythonFieldGNSSClockElements__T]):
+    """
+    public class PythonFieldGNSSClockElements<T extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements`<T>
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def getAf0(self) -> _PythonFieldGNSSClockElements__T:
+        """
+            Gets the Zeroth Order Clock Correction.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf0` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements`
+        
+            Returns:
+                the Zeroth Order Clock Correction (s)
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf1`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf2`
+        
+        
+        """
+        ...
+    def getAf1(self) -> _PythonFieldGNSSClockElements__T:
+        """
+            Gets the First Order Clock Correction.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf1` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements`
+        
+            Returns:
+                the First Order Clock Correction (s/s)
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf0`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf2`
+        
+        
+        """
+        ...
+    def getAf2(self) -> _PythonFieldGNSSClockElements__T:
+        """
+            Gets the Second Order Clock Correction.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf2` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements`
+        
+            Returns:
+                the Second Order Clock Correction (s/s²)
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf0`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf1`
+        
+        
+        """
+        ...
+    def getDate(self) -> org.orekit.time.FieldAbsoluteDate[_PythonFieldGNSSClockElements__T]: ...
+    def getTGD(self) -> _PythonFieldGNSSClockElements__T:
+        """
+            Get the estimated group delay differential TGD for L1-L2 correction.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getTGD` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements`
+        
+            Returns:
+                the estimated group delay differential TGD for L1-L2 correction (s)
+        
+        
+        """
+        ...
+    def getToc(self) -> _PythonFieldGNSSClockElements__T:
+        """
+            Get the time of clock.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getToc` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements`
+        
+            Returns:
+                the time of clock (s)
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf0`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf1`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf2`
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
 class PythonSBASOrbitalElements(SBASOrbitalElements):
     """
     public class PythonSBASOrbitalElements extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.analytical.gnss.data.SBASOrbitalElements`
@@ -3427,9 +3718,585 @@ class SBASNavigationMessage(AbstractEphemerisMessage, SBASOrbitalElements):
         """
         ...
 
-class BeidouAlmanac(AbstractAlmanac):
+_CommonGnssData__O = typing.TypeVar('_CommonGnssData__O', bound='CommonGnssData')  # <O>
+class CommonGnssData(GNSSOrbitalElements[_CommonGnssData__O], GNSSClockElements, typing.Generic[_CommonGnssData__O]):
     """
-    public class BeidouAlmanac extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac`
+    public abstract class CommonGnssData<O extends CommonGnssData<O>> extends :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`<O> implements :class:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements`
+    
+        Container for common GNSS data contained in almanac and navigation messages.
+    
+        Since:
+            11.0
+    """
+    AF0: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` AF0
+    
+        Name for zero-th order clock correction parameter.
+    
+        Since:
+            13.0
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    AF1: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` AF1
+    
+        Name for first order clock correction parameter.
+    
+        Since:
+            13.0
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    AF2: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` AF2
+    
+        Name for second order clock correction parameter.
+    
+        Since:
+            13.0
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    def getAf0(self) -> float:
+        """
+            Gets the Zeroth Order Clock Correction.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getAf0` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements`
+        
+            Returns:
+                the Zeroth Order Clock Correction (s)
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getAf1`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getAf2`
+        
+        
+        """
+        ...
+    def getAf1(self) -> float:
+        """
+            Gets the First Order Clock Correction.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getAf1` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements`
+        
+            Returns:
+                the First Order Clock Correction (s/s)
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getAf0`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getAf2`
+        
+        
+        """
+        ...
+    def getAf2(self) -> float:
+        """
+            Gets the Second Order Clock Correction.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getAf2` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements`
+        
+            Returns:
+                the Second Order Clock Correction (s/s²)
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getAf0`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getAf1`
+        
+        
+        """
+        ...
+    def getTGD(self) -> float:
+        """
+            Get the estimated group delay differential TGD for L1-L2 correction.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getTGD` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements`
+        
+            Returns:
+                the estimated group delay differential TGD for L1-L2 correction (s)
+        
+        
+        """
+        ...
+    def getToc(self) -> float:
+        """
+            Get the time of clock.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getToc` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements`
+        
+            Returns:
+                the time of clock (s)
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getAf0`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getAf1`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getAf2`
+        
+        
+        """
+        ...
+    def setAf0(self, double: float) -> None:
+        """
+            Setter for the SV Clock Bias Correction Coefficient (s).
+        
+            Parameters:
+                af0 (double): the SV Clock Bias Correction Coefficient to set
+        
+        
+        """
+        ...
+    def setAf1(self, double: float) -> None:
+        """
+            Setter for the SV Clock Drift Correction Coefficient (s/s).
+        
+            Parameters:
+                af1 (double): the SV Clock Drift Correction Coefficient to set
+        
+        
+        """
+        ...
+    def setAf2(self, double: float) -> None:
+        """
+            Setter for the Drift Rate Correction Coefficient (s/s²).
+        
+            Parameters:
+                af2 (double): the Drift Rate Correction Coefficient to set
+        
+        
+        """
+        ...
+    def setTGD(self, double: float) -> None:
+        """
+            Set the estimated group delay differential TGD for L1-L2 correction.
+        
+            Parameters:
+                groupDelayDifferential (double): the estimated group delay differential TGD for L1-L2 correction (s)
+        
+        
+        """
+        ...
+    def setToc(self, double: float) -> None:
+        """
+            Set the time of clock.
+        
+            Parameters:
+                toc (double): the time of clock (s)
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.CommonGnssData.getAf0`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.CommonGnssData.getAf1`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.CommonGnssData.getAf2`
+        
+        
+        """
+        ...
+
+_FieldCommonGnssData__T = typing.TypeVar('_FieldCommonGnssData__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+_FieldCommonGnssData__O = typing.TypeVar('_FieldCommonGnssData__O', bound=CommonGnssData)  # <O>
+class FieldCommonGnssData(FieldGnssOrbitalElements[_FieldCommonGnssData__T, _FieldCommonGnssData__O], FieldGNSSClockElements[_FieldCommonGnssData__T], typing.Generic[_FieldCommonGnssData__T, _FieldCommonGnssData__O]):
+    """
+    public abstract class FieldCommonGnssData<T extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>, O extends :class:`~org.orekit.propagation.analytical.gnss.data.CommonGnssData`<O>> extends :class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`<T, O> implements :class:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements`<T>
+    
+        Container for common GNSS data contained in almanac and navigation messages.
+    
+        Since:
+            13.0
+    """
+    def getAf0(self) -> _FieldCommonGnssData__T:
+        """
+            Gets the Zeroth Order Clock Correction.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf0` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements`
+        
+            Returns:
+                the Zeroth Order Clock Correction (s)
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf1`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf2`
+        
+        
+        """
+        ...
+    def getAf1(self) -> _FieldCommonGnssData__T:
+        """
+            Gets the First Order Clock Correction.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf1` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements`
+        
+            Returns:
+                the First Order Clock Correction (s/s)
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf0`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf2`
+        
+        
+        """
+        ...
+    def getAf2(self) -> _FieldCommonGnssData__T:
+        """
+            Gets the Second Order Clock Correction.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf2` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements`
+        
+            Returns:
+                the Second Order Clock Correction (s/s²)
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf0`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf1`
+        
+        
+        """
+        ...
+    def getTGD(self) -> _FieldCommonGnssData__T:
+        """
+            Get the estimated group delay differential TGD for L1-L2 correction.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getTGD` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements`
+        
+            Returns:
+                the estimated group delay differential TGD for L1-L2 correction (s)
+        
+        
+        """
+        ...
+    def getToc(self) -> _FieldCommonGnssData__T:
+        """
+            Get the time of clock.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getToc` in
+                interface :class:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements`
+        
+            Returns:
+                the time of clock (s)
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf0`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf1`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements.getAf2`
+        
+        
+        """
+        ...
+    def setAf0(self, t: _FieldCommonGnssData__T) -> None:
+        """
+            Setter for the SV Clock Bias Correction Coefficient (s).
+        
+            Parameters:
+                af0 (:class:`~org.orekit.propagation.analytical.gnss.data.FieldCommonGnssData`): the SV Clock Bias Correction Coefficient to set
+        
+        
+        """
+        ...
+    def setAf1(self, t: _FieldCommonGnssData__T) -> None:
+        """
+            Setter for the SV Clock Drift Correction Coefficient (s/s).
+        
+            Parameters:
+                af1 (:class:`~org.orekit.propagation.analytical.gnss.data.FieldCommonGnssData`): the SV Clock Drift Correction Coefficient to set
+        
+        
+        """
+        ...
+    def setAf2(self, t: _FieldCommonGnssData__T) -> None:
+        """
+            Setter for the Drift Rate Correction Coefficient (s/s²).
+        
+            Parameters:
+                af2 (:class:`~org.orekit.propagation.analytical.gnss.data.FieldCommonGnssData`): the Drift Rate Correction Coefficient to set
+        
+        
+        """
+        ...
+    def setTGD(self, t: _FieldCommonGnssData__T) -> None:
+        """
+            Set the estimated group delay differential TGD for L1-L2 correction.
+        
+            Parameters:
+                groupDelayDifferential (:class:`~org.orekit.propagation.analytical.gnss.data.FieldCommonGnssData`): the estimated group delay differential TGD for L1-L2 correction (s)
+        
+        
+        """
+        ...
+    def setToc(self, t: _FieldCommonGnssData__T) -> None:
+        """
+            Set the time of clock.
+        
+            Parameters:
+                toc (:class:`~org.orekit.propagation.analytical.gnss.data.FieldCommonGnssData`): the time of clock (s)
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldCommonGnssData.getAf0`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldCommonGnssData.getAf1`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldCommonGnssData.getAf2`
+        
+        
+        """
+        ...
+
+_AbstractAlmanac__O = typing.TypeVar('_AbstractAlmanac__O', bound='AbstractAlmanac')  # <O>
+class AbstractAlmanac(CommonGnssData[_AbstractAlmanac__O], typing.Generic[_AbstractAlmanac__O]):
+    """
+    public abstract class AbstractAlmanac<O extends AbstractAlmanac<O>> extends :class:`~org.orekit.propagation.analytical.gnss.data.CommonGnssData`<O>
+    
+        Base class for GNSS almanacs.
+    
+        Since:
+            11.0
+    """
+    def __init__(self, double: float, double2: float, int: int, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    @typing.overload
+    def getPropagator(self) -> org.orekit.propagation.analytical.gnss.GNSSPropagator:
+        """
+            Get the propagator corresponding to the navigation message.
+        
+            The attitude provider is set by default to be aligned with the EME2000 frame.
+        
+        
+            The mass is set by default to the :meth:`~org.orekit.propagation.Propagator.DEFAULT_MASS`.
+        
+        
+            The ECI frame is set by default to the :meth:`~org.orekit.frames.Predefined.EME2000` in the default data context.
+        
+        
+            The ECEF frame is set by default to the :meth:`~org.orekit.frames.Predefined.ITRF_CIO_CONV_2010_SIMPLE_EOP` in the
+            default data context.
+        
+            This constructor uses the :meth:`~org.orekit.data.DataContext.getDefault`
+        
+            Returns:
+                the propagator corresponding to the navigation message
+        
+            Since:
+                12.0
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac.getPropagator`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac.getPropagator`
+        
+        """
+        ...
+    @typing.overload
+    def getPropagator(self, frames: org.orekit.frames.Frames) -> org.orekit.propagation.analytical.gnss.GNSSPropagator:
+        """
+            Get the propagator corresponding to the navigation message.
+        
+            The attitude provider is set by default to be aligned with the EME2000 frame.
+        
+        
+            The mass is set by default to the :meth:`~org.orekit.propagation.Propagator.DEFAULT_MASS`.
+        
+        
+            The ECI frame is set by default to the :meth:`~org.orekit.frames.Predefined.EME2000` in the default data context.
+        
+        
+            The ECEF frame is set by default to the :meth:`~org.orekit.frames.Predefined.ITRF_CIO_CONV_2010_SIMPLE_EOP` in the
+            default data context.
+        
+            Parameters:
+                frames (:class:`~org.orekit.frames.Frames`): set of frames to use
+        
+            Returns:
+                the propagator corresponding to the navigation message
+        
+            Since:
+                13.0
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac.getPropagator`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac.getPropagator`
+        
+            Get the propagator corresponding to the navigation message.
+        
+            Parameters:
+                frames (:class:`~org.orekit.frames.Frames`): set of frames to use
+                provider (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude provider
+                inertial (:class:`~org.orekit.frames.Frame`): inertial frame, use to provide the propagated orbit
+                bodyFixed (:class:`~org.orekit.frames.Frame`): body fixed frame, corresponding to the navigation message
+                mass (double): spacecraft mass in kg
+        
+            Returns:
+                the propagator corresponding to the navigation message
+        
+            Since:
+                13.0
+        
+            Also see:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac.getPropagator`,
+                :meth:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac.getPropagator`
+        
+        
+        """
+        ...
+    @typing.overload
+    def getPropagator(self, frames: org.orekit.frames.Frames, attitudeProvider: org.orekit.attitudes.AttitudeProvider, frame2: org.orekit.frames.Frame, frame3: org.orekit.frames.Frame, double: float) -> org.orekit.propagation.analytical.gnss.GNSSPropagator: ...
+
+_FieldAbstractAlmanac__T = typing.TypeVar('_FieldAbstractAlmanac__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+_FieldAbstractAlmanac__O = typing.TypeVar('_FieldAbstractAlmanac__O', bound=AbstractAlmanac)  # <O>
+class FieldAbstractAlmanac(FieldCommonGnssData[_FieldAbstractAlmanac__T, _FieldAbstractAlmanac__O], typing.Generic[_FieldAbstractAlmanac__T, _FieldAbstractAlmanac__O]):
+    """
+    public abstract class FieldAbstractAlmanac<T extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>, O extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac`<O>> extends :class:`~org.orekit.propagation.analytical.gnss.data.FieldCommonGnssData`<T, O>
+    
+        Base class for GNSS almanacs.
+    
+        Since:
+            13.0
+    """
+    @typing.overload
+    def getPropagator(self) -> org.orekit.propagation.analytical.gnss.FieldGnssPropagator[_FieldAbstractAlmanac__T]: ...
+    @typing.overload
+    def getPropagator(self, frames: org.orekit.frames.Frames) -> org.orekit.propagation.analytical.gnss.FieldGnssPropagator[_FieldAbstractAlmanac__T]: ...
+    @typing.overload
+    def getPropagator(self, frames: org.orekit.frames.Frames, attitudeProvider: org.orekit.attitudes.AttitudeProvider, frame2: org.orekit.frames.Frame, frame3: org.orekit.frames.Frame, t: _FieldAbstractAlmanac__T) -> org.orekit.propagation.analytical.gnss.FieldGnssPropagator[_FieldAbstractAlmanac__T]: ...
+
+_AbstractNavigationMessage__O = typing.TypeVar('_AbstractNavigationMessage__O', bound='AbstractNavigationMessage')  # <O>
+class AbstractNavigationMessage(AbstractAlmanac[_AbstractNavigationMessage__O], typing.Generic[_AbstractNavigationMessage__O]):
+    """
+    public abstract class AbstractNavigationMessage<O extends AbstractNavigationMessage<O>> extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac`<O>
+    
+        Base class for GNSS navigation messages.
+    
+        Since:
+            11.0
+    
+        Also see:
+            :class:`~org.orekit.propagation.analytical.gnss.data.GPSLegacyNavigationMessage`,
+            :class:`~org.orekit.propagation.analytical.gnss.data.GalileoNavigationMessage`,
+            :class:`~org.orekit.propagation.analytical.gnss.data.BeidouLegacyNavigationMessage`,
+            :class:`~org.orekit.propagation.analytical.gnss.data.QZSSLegacyNavigationMessage`,
+            :class:`~org.orekit.propagation.analytical.gnss.data.NavICLegacyNavigationMessage`
+    """
+    def getDeltaN0(self) -> float:
+        """
+            Getter for the delta of satellite mean motion.
+        
+            This value is non-zero only in navigation messages
+        
+            Overrides:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getDeltaN0` in
+                class :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
+        
+            Returns:
+                delta of satellite mean motion
+        
+        
+        """
+        ...
+    def getEpochToc(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Getter for the time of clock epoch.
+        
+            Returns:
+                the time of clock epoch
+        
+        
+        """
+        ...
+    def getSqrtA(self) -> float:
+        """
+            Getter for Square Root of Semi-Major Axis (√m).
+        
+            Returns:
+                Square Root of Semi-Major Axis (√m)
+        
+        
+        """
+        ...
+    def getTransmissionTime(self) -> float:
+        """
+            Getter for transmission time.
+        
+            Returns:
+                transmission time
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
+    def setDeltaN0(self, double: float) -> None:
+        """
+            Setter for the delta of satellite mean motion.
+        
+            Parameters:
+                deltaN0 (double): the value to set
+        
+        
+        """
+        ...
+    def setEpochToc(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+        """
+            Setter for the time of clock epoch.
+        
+            Parameters:
+                epochToc (:class:`~org.orekit.time.AbsoluteDate`): the epoch to set
+        
+        
+        """
+        ...
+    def setSqrtA(self, double: float) -> None:
+        """
+            Setter for the Square Root of Semi-Major Axis (√m).
+        
+            In addition, this method set the value of the Semi-Major Axis.
+        
+            Parameters:
+                sqrtA (double): the Square Root of Semi-Major Axis (√m)
+        
+        
+        """
+        ...
+    def setTransmissionTime(self, double: float) -> None:
+        """
+            Setter for transmission time.
+        
+            Parameters:
+                transmissionTime (double): transmission time
+        
+            Since:
+                12.0
+        
+        
+        """
+        ...
+
+class BeidouAlmanac(AbstractAlmanac['BeidouAlmanac']):
+    """
+    public class BeidouAlmanac extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac`<:class:`~org.orekit.propagation.analytical.gnss.data.BeidouAlmanac`>
     
         Class for BeiDou almanac.
     
@@ -3439,7 +4306,11 @@ class BeidouAlmanac(AbstractAlmanac):
         Also see:
             "BeiDou Navigation Satellite System, Signal In Space, Interface Control Document, Version 2.1, Table 5-12"
     """
-    def __init__(self): ...
+    ___init___0__T = typing.TypeVar('___init___0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def __init__(self, fieldBeidouAlmanac: 'FieldBeidouAlmanac'[___init___0__T]): ...
+    @typing.overload
+    def __init__(self, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
     def getHealth(self) -> int:
         """
             Gets the Health status.
@@ -3476,7 +4347,727 @@ class BeidouAlmanac(AbstractAlmanac):
     def setI0(self, double: float) -> None: ...
     def setSqrtA(self, double: float) -> None:
         """
+            Sets the Square Root of Semi-Major Axis (√m).
+        
+            In addition, this method set the value of the Semi-Major Axis.
+        
+            Parameters:
+                sqrtA (double): the Square Root of Semi-Major Axis (√m)
+        
+        
+        """
+        ...
+    _toField__T = typing.TypeVar('_toField__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _toField__F = typing.TypeVar('_toField__F', bound=FieldGnssOrbitalElements)  # <F>
+    def toField(self, field: org.hipparchus.Field[_toField__T]) -> _toField__F: ...
+
+_FieldAbstractNavigationMessage__T = typing.TypeVar('_FieldAbstractNavigationMessage__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+_FieldAbstractNavigationMessage__O = typing.TypeVar('_FieldAbstractNavigationMessage__O', bound=AbstractNavigationMessage)  # <O>
+class FieldAbstractNavigationMessage(FieldAbstractAlmanac[_FieldAbstractNavigationMessage__T, _FieldAbstractNavigationMessage__O], typing.Generic[_FieldAbstractNavigationMessage__T, _FieldAbstractNavigationMessage__O]):
+    """
+    public abstract class FieldAbstractNavigationMessage<T extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>, O extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractNavigationMessage`<O>> extends :class:`~org.orekit.propagation.analytical.gnss.data.FieldAbstractAlmanac`<T, O>
+    
+        Base class for GNSS navigation messages.
+    
+        Since:
+            13.0
+    
+        Also see:
+            :class:`~org.orekit.propagation.analytical.gnss.data.FieldGPSLegacyNavigationMessage`,
+            :class:`~org.orekit.propagation.analytical.gnss.data.FieldGalileoNavigationMessage`,
+            :class:`~org.orekit.propagation.analytical.gnss.data.FieldBeidouLegacyNavigationMessage`,
+            :class:`~org.orekit.propagation.analytical.gnss.data.FieldQZSSLegacyNavigationMessage`,
+            :class:`~org.orekit.propagation.analytical.gnss.data.FieldNavicLegacyNavigationMessage`
+    """
+    def getDeltaN0(self) -> _FieldAbstractNavigationMessage__T:
+        """
+            Getter for the delta of satellite mean motion.
+        
+            This value is non-zero only in navigation messages
+        
+            Overrides:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements.getDeltaN0` in
+                class :class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`
+        
+            Returns:
+                delta of satellite mean motion
+        
+        
+        """
+        ...
+    def getEpochToc(self) -> org.orekit.time.FieldAbsoluteDate[_FieldAbstractNavigationMessage__T]: ...
+    def getSqrtA(self) -> _FieldAbstractNavigationMessage__T:
+        """
+            Getter for Square Root of Semi-Major Axis (√m).
+        
+            Returns:
+                Square Root of Semi-Major Axis (√m)
+        
+        
+        """
+        ...
+    def getTransmissionTime(self) -> _FieldAbstractNavigationMessage__T:
+        """
+            Getter for transmission time.
+        
+            Returns:
+                transmission time
+        
+        
+        """
+        ...
+    def setDeltaN0(self, t: _FieldAbstractNavigationMessage__T) -> None:
+        """
+            Setter for the delta of satellite mean motion.
+        
+            Parameters:
+                deltaN0 (:class:`~org.orekit.propagation.analytical.gnss.data.FieldAbstractNavigationMessage`): the value to set
+        
+        
+        """
+        ...
+    def setEpochToc(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldAbstractNavigationMessage__T]) -> None: ...
+    def setSqrtA(self, t: _FieldAbstractNavigationMessage__T) -> None:
+        """
+            Setter for the Square Root of Semi-Major Axis (√m).
+        
+            In addition, this method set the value of the Semi-Major Axis.
+        
+            Parameters:
+                sqrtA (:class:`~org.orekit.propagation.analytical.gnss.data.FieldAbstractNavigationMessage`): the Square Root of Semi-Major Axis (√m)
+        
+        
+        """
+        ...
+    def setTransmissionTime(self, t: _FieldAbstractNavigationMessage__T) -> None:
+        """
+            Setter for transmission time.
+        
+            Parameters:
+                transmissionTime (:class:`~org.orekit.propagation.analytical.gnss.data.FieldAbstractNavigationMessage`): transmission time
+        
+        
+        """
+        ...
+
+_FieldBeidouAlmanac__T = typing.TypeVar('_FieldBeidouAlmanac__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldBeidouAlmanac(FieldAbstractAlmanac[_FieldBeidouAlmanac__T, BeidouAlmanac], typing.Generic[_FieldBeidouAlmanac__T]):
+    """
+    public class FieldBeidouAlmanac<T extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.gnss.data.FieldAbstractAlmanac`<T, :class:`~org.orekit.propagation.analytical.gnss.data.BeidouAlmanac`>
+    
+        Class for BeiDou almanac.
+    
+        Since:
+            13.0
+    
+        Also see:
+            "BeiDou Navigation Satellite System, Signal In Space, Interface Control Document, Version 2.1, Table 5-12"
+    """
+    ___init___0__V = typing.TypeVar('___init___0__V', bound=org.hipparchus.CalculusFieldElement)  # <V>
+    @typing.overload
+    def __init__(self, function: typing.Union[java.util.function.Function[___init___0__V, _FieldBeidouAlmanac__T], typing.Callable[[___init___0__V], _FieldBeidouAlmanac__T]], fieldBeidouAlmanac: 'FieldBeidouAlmanac'[___init___0__V]): ...
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldBeidouAlmanac__T], beidouAlmanac: BeidouAlmanac): ...
+    _changeField__U = typing.TypeVar('_changeField__U', bound=org.hipparchus.CalculusFieldElement)  # <U>
+    _changeField__G = typing.TypeVar('_changeField__G', bound=FieldGnssOrbitalElements)  # <G>
+    def changeField(self, function: typing.Union[java.util.function.Function[_FieldBeidouAlmanac__T, _changeField__U], typing.Callable[[_FieldBeidouAlmanac__T], _changeField__U]]) -> _changeField__G: ...
+    def getHealth(self) -> int:
+        """
+            Gets the Health status.
+        
+            Returns:
+                the Health status
+        
+        
+        """
+        ...
+    def setHealth(self, int: int) -> None:
+        """
+            Sets the health status.
+        
+            Parameters:
+                health (int): the health status to set
+        
+        
+        """
+        ...
+    @typing.overload
+    def setI0(self, t: _FieldBeidouAlmanac__T, t2: _FieldBeidouAlmanac__T) -> None:
+        """
+            Sets the Inclination Angle at Reference Time (rad).
+        
+            Parameters:
+                inc (:class:`~org.orekit.propagation.analytical.gnss.data.FieldBeidouAlmanac`): the orbit reference inclination
+                dinc (:class:`~org.orekit.propagation.analytical.gnss.data.FieldBeidouAlmanac`): the correction of orbit reference inclination at reference time
+        
+        
+        """
+        ...
+    @typing.overload
+    def setI0(self, t: _FieldBeidouAlmanac__T) -> None: ...
+    def setSqrtA(self, t: _FieldBeidouAlmanac__T) -> None:
+        """
             Sets the Square Root of Semi-Major Axis (m^1/2).
+        
+            In addition, this method set the value of the Semi-Major Axis.
+        
+            Parameters:
+                sqrtA (:class:`~org.orekit.propagation.analytical.gnss.data.FieldBeidouAlmanac`): the Square Root of Semi-Major Axis (m^1/2)
+        
+        
+        """
+        ...
+    def toNonField(self) -> BeidouAlmanac:
+        """
+            Create a non-field version of the instance.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements.toNonField` in
+                class :class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`
+        
+            Returns:
+                non-field version of the instance
+        
+        
+        """
+        ...
+
+_FieldGPSAlmanac__T = typing.TypeVar('_FieldGPSAlmanac__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldGPSAlmanac(FieldAbstractAlmanac[_FieldGPSAlmanac__T, 'GPSAlmanac'], typing.Generic[_FieldGPSAlmanac__T]):
+    """
+    public class FieldGPSAlmanac<T extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.gnss.data.FieldAbstractAlmanac`<T, :class:`~org.orekit.propagation.analytical.gnss.data.GPSAlmanac`>
+    
+        This class holds a GPS almanac as read from SEM or YUMA files.
+    
+        Depending on the source (SEM or YUMA), some fields may be filled in or not. An almanac read from a YUMA file doesn't
+        hold SVN number, average URA and satellite configuration.
+    
+        Since:
+            13.0
+    """
+    ___init___0__V = typing.TypeVar('___init___0__V', bound=org.hipparchus.CalculusFieldElement)  # <V>
+    @typing.overload
+    def __init__(self, function: typing.Union[java.util.function.Function[___init___0__V, _FieldGPSAlmanac__T], typing.Callable[[___init___0__V], _FieldGPSAlmanac__T]], fieldGPSAlmanac: 'FieldGPSAlmanac'[___init___0__V]): ...
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldGPSAlmanac__T], gPSAlmanac: 'GPSAlmanac'): ...
+    _changeField__U = typing.TypeVar('_changeField__U', bound=org.hipparchus.CalculusFieldElement)  # <U>
+    _changeField__G = typing.TypeVar('_changeField__G', bound=FieldGnssOrbitalElements)  # <G>
+    def changeField(self, function: typing.Union[java.util.function.Function[_FieldGPSAlmanac__T, _changeField__U], typing.Callable[[_FieldGPSAlmanac__T], _changeField__U]]) -> _changeField__G: ...
+    def getHealth(self) -> int:
+        """
+            Gets the Health status.
+        
+            Returns:
+                the Health status
+        
+        
+        """
+        ...
+    def getSVN(self) -> int:
+        """
+            Gets the satellite "SVN" reference number.
+        
+            Returns:
+                the satellite "SVN" reference number
+        
+        
+        """
+        ...
+    def getSatConfiguration(self) -> int:
+        """
+            Gets the satellite configuration.
+        
+            Returns:
+                the satellite configuration
+        
+        
+        """
+        ...
+    def getSource(self) -> str:
+        """
+            Gets the source of this GPS almanac.
+        
+            Sources can be SEM or YUMA, when the almanac is read from a file.
+        
+            Returns:
+                the source of this GPS almanac
+        
+        
+        """
+        ...
+    def getURA(self) -> int:
+        """
+            Gets the average URA number.
+        
+            Returns:
+                the average URA number
+        
+        
+        """
+        ...
+    def setHealth(self, int: int) -> None:
+        """
+            Sets the health status.
+        
+            Parameters:
+                health (int): the health status to set
+        
+        
+        """
+        ...
+    def setSVN(self, int: int) -> None:
+        """
+            Sets the "SVN" reference number.
+        
+            Parameters:
+                svnNumber (int): the number to set
+        
+        
+        """
+        ...
+    def setSatConfiguration(self, int: int) -> None:
+        """
+            Sets the satellite configuration.
+        
+            Parameters:
+                satConfiguration (int): the satellite configuration to set
+        
+        
+        """
+        ...
+    def setSource(self, string: str) -> None:
+        """
+            Sets the source of this GPS almanac.
+        
+            Parameters:
+                source (:class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the source of this GPS almanac
+        
+        
+        """
+        ...
+    def setSqrtA(self, t: _FieldGPSAlmanac__T) -> None:
+        """
+            Setter for the Square Root of Semi-Major Axis (m^1/2).
+        
+            In addition, this method set the value of the Semi-Major Axis.
+        
+            Parameters:
+                sqrtA (:class:`~org.orekit.propagation.analytical.gnss.data.FieldGPSAlmanac`): the Square Root of Semi-Major Axis (m^1/2)
+        
+        
+        """
+        ...
+    def setURA(self, int: int) -> None:
+        """
+            Sets the average URA number.
+        
+            Parameters:
+                uraNumber (int): the URA number to set
+        
+        
+        """
+        ...
+    def toNonField(self) -> 'GPSAlmanac':
+        """
+            Create a non-field version of the instance.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements.toNonField` in
+                class :class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`
+        
+            Returns:
+                non-field version of the instance
+        
+        
+        """
+        ...
+
+_FieldGalileoAlmanac__T = typing.TypeVar('_FieldGalileoAlmanac__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldGalileoAlmanac(FieldAbstractAlmanac[_FieldGalileoAlmanac__T, 'GalileoAlmanac'], typing.Generic[_FieldGalileoAlmanac__T]):
+    """
+    public class FieldGalileoAlmanac<T extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.gnss.data.FieldAbstractAlmanac`<T, :class:`~org.orekit.propagation.analytical.gnss.data.GalileoAlmanac`>
+    
+        Class for Galileo almanac.
+    
+        Since:
+            13.0
+    
+        Also see:
+            "European GNSS (Galileo) Open Service, Signal In Space, Interface Control Document, Table 75"
+    """
+    ___init___0__V = typing.TypeVar('___init___0__V', bound=org.hipparchus.CalculusFieldElement)  # <V>
+    @typing.overload
+    def __init__(self, function: typing.Union[java.util.function.Function[___init___0__V, _FieldGalileoAlmanac__T], typing.Callable[[___init___0__V], _FieldGalileoAlmanac__T]], fieldGalileoAlmanac: 'FieldGalileoAlmanac'[___init___0__V]): ...
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldGalileoAlmanac__T], galileoAlmanac: 'GalileoAlmanac'): ...
+    _changeField__U = typing.TypeVar('_changeField__U', bound=org.hipparchus.CalculusFieldElement)  # <U>
+    _changeField__G = typing.TypeVar('_changeField__G', bound=FieldGnssOrbitalElements)  # <G>
+    def changeField(self, function: typing.Union[java.util.function.Function[_FieldGalileoAlmanac__T, _changeField__U], typing.Callable[[_FieldGalileoAlmanac__T], _changeField__U]]) -> _changeField__G: ...
+    def getHealthE1(self) -> int:
+        """
+            Gets the E1-B/C signal health status.
+        
+            Returns:
+                the E1-B/C signal health status
+        
+        
+        """
+        ...
+    def getHealthE5a(self) -> int:
+        """
+            Gets the E5a signal health status.
+        
+            Returns:
+                the E5a signal health status
+        
+        
+        """
+        ...
+    def getHealthE5b(self) -> int:
+        """
+            Gets the E5b signal health status.
+        
+            Returns:
+                the E5b signal health status
+        
+        
+        """
+        ...
+    def getIOD(self) -> int:
+        """
+            Gets the Issue of Data (IOD).
+        
+            Returns:
+                the Issue Of Data
+        
+        
+        """
+        ...
+    def setDeltaInc(self, t: _FieldGalileoAlmanac__T) -> None:
+        """
+            Sets the the correction of orbit reference inclination at reference time.
+        
+            In addition, this method set the value of the reference inclination.
+        
+            Parameters:
+                dinc (:class:`~org.orekit.propagation.analytical.gnss.data.FieldGalileoAlmanac`): correction of orbit reference inclination at reference time in radians
+        
+        
+        """
+        ...
+    def setDeltaSqrtA(self, t: _FieldGalileoAlmanac__T) -> None:
+        """
+            Sets the difference between the square root of the semi-major axis and the square root of the nominal semi-major axis.
+        
+            In addition, this method set the value of the Semi-Major Axis.
+        
+            Parameters:
+                dsqa (:class:`~org.orekit.propagation.analytical.gnss.data.FieldGalileoAlmanac`): the value to set
+        
+        
+        """
+        ...
+    def setHealthE1(self, int: int) -> None:
+        """
+            Sets the E1-B/C signal health status.
+        
+            Parameters:
+                healthE1 (int): health status to set
+        
+        
+        """
+        ...
+    def setHealthE5a(self, int: int) -> None:
+        """
+            Sets the E5a signal health status.
+        
+            Parameters:
+                healthE5a (int): health status to set
+        
+        
+        """
+        ...
+    def setHealthE5b(self, int: int) -> None:
+        """
+            Sets the E5b signal health status.
+        
+            Parameters:
+                healthE5b (int): health status to set
+        
+        
+        """
+        ...
+    def setIOD(self, int: int) -> None:
+        """
+            Sets the Issue of Data (IOD).
+        
+            Parameters:
+                iodValue (int): the value to set
+        
+        
+        """
+        ...
+    def toNonField(self) -> 'GalileoAlmanac':
+        """
+            Create a non-field version of the instance.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements.toNonField` in
+                class :class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`
+        
+            Returns:
+                non-field version of the instance
+        
+        
+        """
+        ...
+
+_FieldNavICAlmanac__T = typing.TypeVar('_FieldNavICAlmanac__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldNavICAlmanac(FieldAbstractAlmanac[_FieldNavICAlmanac__T, 'NavICAlmanac'], typing.Generic[_FieldNavICAlmanac__T]):
+    """
+    public class FieldNavICAlmanac<T extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.gnss.data.FieldAbstractAlmanac`<T, :class:`~org.orekit.propagation.analytical.gnss.data.NavICAlmanac`>
+    
+        Class for NavIC almanac.
+    
+        Since:
+            13.0
+    
+        Also see:
+            "Indian Regional Navigation Satellite System, Signal In Space ICD for standard positioning service, version 1.1 - Table
+            28"
+    """
+    ___init___0__V = typing.TypeVar('___init___0__V', bound=org.hipparchus.CalculusFieldElement)  # <V>
+    @typing.overload
+    def __init__(self, function: typing.Union[java.util.function.Function[___init___0__V, _FieldNavICAlmanac__T], typing.Callable[[___init___0__V], _FieldNavICAlmanac__T]], fieldNavICAlmanac: 'FieldNavICAlmanac'[___init___0__V]): ...
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldNavICAlmanac__T], navICAlmanac: 'NavICAlmanac'): ...
+    _changeField__U = typing.TypeVar('_changeField__U', bound=org.hipparchus.CalculusFieldElement)  # <U>
+    _changeField__G = typing.TypeVar('_changeField__G', bound=FieldGnssOrbitalElements)  # <G>
+    def changeField(self, function: typing.Union[java.util.function.Function[_FieldNavICAlmanac__T, _changeField__U], typing.Callable[[_FieldNavICAlmanac__T], _changeField__U]]) -> _changeField__G: ...
+    def setSqrtA(self, t: _FieldNavICAlmanac__T) -> None:
+        """
+            Setter for the Square Root of Semi-Major Axis (m^1/2).
+        
+            In addition, this method set the value of the Semi-Major Axis.
+        
+            Parameters:
+                sqrtA (:class:`~org.orekit.propagation.analytical.gnss.data.FieldNavICAlmanac`): the Square Root of Semi-Major Axis (m^1/2)
+        
+        
+        """
+        ...
+    def toNonField(self) -> 'NavICAlmanac':
+        """
+            Create a non-field version of the instance.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements.toNonField` in
+                class :class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`
+        
+            Returns:
+                non-field version of the instance
+        
+        
+        """
+        ...
+
+_FieldQZSSAlmanac__T = typing.TypeVar('_FieldQZSSAlmanac__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldQZSSAlmanac(FieldAbstractAlmanac[_FieldQZSSAlmanac__T, 'QZSSAlmanac'], typing.Generic[_FieldQZSSAlmanac__T]):
+    """
+    public class FieldQZSSAlmanac<T extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.gnss.data.FieldAbstractAlmanac`<T, :class:`~org.orekit.propagation.analytical.gnss.data.QZSSAlmanac`>
+    
+        This class holds a QZSS almanac as read from YUMA files.
+    
+        Since:
+            13.0
+    """
+    ___init___0__V = typing.TypeVar('___init___0__V', bound=org.hipparchus.CalculusFieldElement)  # <V>
+    @typing.overload
+    def __init__(self, function: typing.Union[java.util.function.Function[___init___0__V, _FieldQZSSAlmanac__T], typing.Callable[[___init___0__V], _FieldQZSSAlmanac__T]], fieldQZSSAlmanac: 'FieldQZSSAlmanac'[___init___0__V]): ...
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldQZSSAlmanac__T], qZSSAlmanac: 'QZSSAlmanac'): ...
+    _changeField__U = typing.TypeVar('_changeField__U', bound=org.hipparchus.CalculusFieldElement)  # <U>
+    _changeField__G = typing.TypeVar('_changeField__G', bound=FieldGnssOrbitalElements)  # <G>
+    def changeField(self, function: typing.Union[java.util.function.Function[_FieldQZSSAlmanac__T, _changeField__U], typing.Callable[[_FieldQZSSAlmanac__T], _changeField__U]]) -> _changeField__G: ...
+    def getHealth(self) -> int:
+        """
+            Gets the Health status.
+        
+            Returns:
+                the Health status
+        
+        
+        """
+        ...
+    def getSource(self) -> str:
+        """
+            Gets the source of this QZSS almanac.
+        
+            Returns:
+                the source of this QZSS almanac
+        
+        
+        """
+        ...
+    def setHealth(self, int: int) -> None:
+        """
+            Sets the health status.
+        
+            Parameters:
+                health (int): the health status to set
+        
+        
+        """
+        ...
+    def setSource(self, string: str) -> None:
+        """
+            Sets the source of this GPS almanac.
+        
+            Parameters:
+                source (:class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the source of this GPS almanac
+        
+        
+        """
+        ...
+    def setSqrtA(self, t: _FieldQZSSAlmanac__T) -> None:
+        """
+            Setter for the Square Root of Semi-Major Axis (m^1/2).
+        
+            In addition, this method set the value of the Semi-Major Axis.
+        
+            Parameters:
+                sqrtA (:class:`~org.orekit.propagation.analytical.gnss.data.FieldQZSSAlmanac`): the Square Root of Semi-Major Axis (m^1/2)
+        
+        
+        """
+        ...
+    def toNonField(self) -> 'QZSSAlmanac':
+        """
+            Create a non-field version of the instance.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements.toNonField` in
+                class :class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`
+        
+            Returns:
+                non-field version of the instance
+        
+        
+        """
+        ...
+
+class GPSAlmanac(AbstractAlmanac['GPSAlmanac']):
+    """
+    public class GPSAlmanac extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac`<:class:`~org.orekit.propagation.analytical.gnss.data.GPSAlmanac`>
+    
+        This class holds a GPS almanac as read from SEM or YUMA files.
+    
+        Depending on the source (SEM or YUMA), some fields may be filled in or not. An almanac read from a YUMA file doesn't
+        hold SVN number, average URA and satellite configuration.
+    
+        Since:
+            8.0
+    """
+    ___init___0__T = typing.TypeVar('___init___0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def __init__(self, fieldGPSAlmanac: FieldGPSAlmanac[___init___0__T]): ...
+    @typing.overload
+    def __init__(self, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    def getHealth(self) -> int:
+        """
+            Gets the Health status.
+        
+            Returns:
+                the Health status
+        
+        
+        """
+        ...
+    def getSVN(self) -> int:
+        """
+            Gets the satellite "SVN" reference number.
+        
+            Returns:
+                the satellite "SVN" reference number
+        
+        
+        """
+        ...
+    def getSatConfiguration(self) -> int:
+        """
+            Gets the satellite configuration.
+        
+            Returns:
+                the satellite configuration
+        
+        
+        """
+        ...
+    def getSource(self) -> str:
+        """
+            Gets the source of this GPS almanac.
+        
+            Sources can be SEM or YUMA, when the almanac is read from a file.
+        
+            Returns:
+                the source of this GPS almanac
+        
+        
+        """
+        ...
+    def getURA(self) -> int:
+        """
+            Gets the average URA number.
+        
+            Returns:
+                the average URA number
+        
+        
+        """
+        ...
+    def setHealth(self, int: int) -> None:
+        """
+            Sets the health status.
+        
+            Parameters:
+                health (int): the health status to set
+        
+        
+        """
+        ...
+    def setSVN(self, int: int) -> None:
+        """
+            Sets the "SVN" reference number.
+        
+            Parameters:
+                svnNumber (int): the number to set
+        
+        
+        """
+        ...
+    def setSatConfiguration(self, int: int) -> None:
+        """
+            Sets the satellite configuration.
+        
+            Parameters:
+                satConfiguration (int): the satellite configuration to set
+        
+        
+        """
+        ...
+    def setSource(self, string: str) -> None:
+        """
+            Sets the source of this GPS almanac.
+        
+            Parameters:
+                source (:class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the source of this GPS almanac
+        
+        
+        """
+        ...
+    def setSqrtA(self, double: float) -> None:
+        """
+            Setter for the Square Root of Semi-Major Axis (m^1/2).
         
             In addition, this method set the value of the Semi-Major Axis.
         
@@ -3486,10 +5077,252 @@ class BeidouAlmanac(AbstractAlmanac):
         
         """
         ...
+    def setURA(self, int: int) -> None:
+        """
+            Sets the average URA number.
+        
+            Parameters:
+                uraNumber (int): the URA number to set
+        
+        
+        """
+        ...
+    _toField__T = typing.TypeVar('_toField__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _toField__F = typing.TypeVar('_toField__F', bound=FieldGnssOrbitalElements)  # <F>
+    def toField(self, field: org.hipparchus.Field[_toField__T]) -> _toField__F: ...
 
-class BeidouCivilianNavigationMessage(AbstractNavigationMessage):
+class GalileoAlmanac(AbstractAlmanac['GalileoAlmanac']):
     """
-    public class BeidouCivilianNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractNavigationMessage`
+    public class GalileoAlmanac extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac`<:class:`~org.orekit.propagation.analytical.gnss.data.GalileoAlmanac`>
+    
+        Class for Galileo almanac.
+    
+        Since:
+            10.0
+    
+        Also see:
+            "European GNSS (Galileo) Open Service, Signal In Space, Interface Control Document, Table 75"
+    """
+    ___init___0__T = typing.TypeVar('___init___0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def __init__(self, fieldGalileoAlmanac: FieldGalileoAlmanac[___init___0__T]): ...
+    @typing.overload
+    def __init__(self, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    def getHealthE1(self) -> int:
+        """
+            Gets the E1-B/C signal health status.
+        
+            Returns:
+                the E1-B/C signal health status
+        
+        
+        """
+        ...
+    def getHealthE5a(self) -> int:
+        """
+            Gets the E5a signal health status.
+        
+            Returns:
+                the E5a signal health status
+        
+        
+        """
+        ...
+    def getHealthE5b(self) -> int:
+        """
+            Gets the E5b signal health status.
+        
+            Returns:
+                the E5b signal health status
+        
+        
+        """
+        ...
+    def getIOD(self) -> int:
+        """
+            Gets the Issue of Data (IOD).
+        
+            Returns:
+                the Issue Of Data
+        
+        
+        """
+        ...
+    def setDeltaInc(self, double: float) -> None:
+        """
+            Sets the the correction of orbit reference inclination at reference time.
+        
+            In addition, this method set the value of the reference inclination.
+        
+            Parameters:
+                dinc (double): correction of orbit reference inclination at reference time in radians
+        
+        
+        """
+        ...
+    def setDeltaSqrtA(self, double: float) -> None:
+        """
+            Sets the difference between the square root of the semi-major axis and the square root of the nominal semi-major axis.
+        
+            In addition, this method set the value of the Semi-Major Axis.
+        
+            Parameters:
+                dsqa (double): the value to set
+        
+        
+        """
+        ...
+    def setHealthE1(self, int: int) -> None:
+        """
+            Sets the E1-B/C signal health status.
+        
+            Parameters:
+                healthE1 (int): health status to set
+        
+        
+        """
+        ...
+    def setHealthE5a(self, int: int) -> None:
+        """
+            Sets the E5a signal health status.
+        
+            Parameters:
+                healthE5a (int): health status to set
+        
+        
+        """
+        ...
+    def setHealthE5b(self, int: int) -> None:
+        """
+            Sets the E5b signal health status.
+        
+            Parameters:
+                healthE5b (int): health status to set
+        
+        
+        """
+        ...
+    def setIOD(self, int: int) -> None:
+        """
+            Sets the Issue of Data (IOD).
+        
+            Parameters:
+                iodValue (int): the value to set
+        
+        
+        """
+        ...
+    _toField__T = typing.TypeVar('_toField__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _toField__F = typing.TypeVar('_toField__F', bound=FieldGnssOrbitalElements)  # <F>
+    def toField(self, field: org.hipparchus.Field[_toField__T]) -> _toField__F: ...
+
+class NavICAlmanac(AbstractAlmanac['NavICAlmanac']):
+    """
+    public class NavICAlmanac extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac`<:class:`~org.orekit.propagation.analytical.gnss.data.NavICAlmanac`>
+    
+        Class for NavIC almanac.
+    
+        Since:
+            10.1
+    
+        Also see:
+            "Indian Regional Navigation Satellite System, Signal In Space ICD for standard positioning service, version 1.1 - Table
+            28"
+    """
+    ___init___0__T = typing.TypeVar('___init___0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def __init__(self, fieldNavICAlmanac: FieldNavICAlmanac[___init___0__T]): ...
+    @typing.overload
+    def __init__(self, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    def setSqrtA(self, double: float) -> None:
+        """
+            Setter for the Square Root of Semi-Major Axis (m^1/2).
+        
+            In addition, this method set the value of the Semi-Major Axis.
+        
+            Parameters:
+                sqrtA (double): the Square Root of Semi-Major Axis (m^1/2)
+        
+        
+        """
+        ...
+    _toField__T = typing.TypeVar('_toField__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _toField__F = typing.TypeVar('_toField__F', bound=FieldGnssOrbitalElements)  # <F>
+    def toField(self, field: org.hipparchus.Field[_toField__T]) -> _toField__F: ...
+
+class QZSSAlmanac(AbstractAlmanac['QZSSAlmanac']):
+    """
+    public class QZSSAlmanac extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac`<:class:`~org.orekit.propagation.analytical.gnss.data.QZSSAlmanac`>
+    
+        This class holds a QZSS almanac as read from YUMA files.
+    
+        Since:
+            10.0
+    """
+    ___init___0__T = typing.TypeVar('___init___0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def __init__(self, fieldQZSSAlmanac: FieldQZSSAlmanac[___init___0__T]): ...
+    @typing.overload
+    def __init__(self, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    def getHealth(self) -> int:
+        """
+            Gets the Health status.
+        
+            Returns:
+                the Health status
+        
+        
+        """
+        ...
+    def getSource(self) -> str:
+        """
+            Gets the source of this QZSS almanac.
+        
+            Returns:
+                the source of this QZSS almanac
+        
+        
+        """
+        ...
+    def setHealth(self, int: int) -> None:
+        """
+            Sets the health status.
+        
+            Parameters:
+                health (int): the health status to set
+        
+        
+        """
+        ...
+    def setSource(self, string: str) -> None:
+        """
+            Sets the source of this GPS almanac.
+        
+            Parameters:
+                source (:class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the source of this GPS almanac
+        
+        
+        """
+        ...
+    def setSqrtA(self, double: float) -> None:
+        """
+            Setter for the Square Root of Semi-Major Axis (m^1/2).
+        
+            In addition, this method set the value of the Semi-Major Axis.
+        
+            Parameters:
+                sqrtA (double): the Square Root of Semi-Major Axis (m^1/2)
+        
+        
+        """
+        ...
+    _toField__T = typing.TypeVar('_toField__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _toField__F = typing.TypeVar('_toField__F', bound=FieldGnssOrbitalElements)  # <F>
+    def toField(self, field: org.hipparchus.Field[_toField__T]) -> _toField__F: ...
+
+class BeidouCivilianNavigationMessage(AbstractNavigationMessage['BeidouCivilianNavigationMessage']):
+    """
+    public class BeidouCivilianNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractNavigationMessage`<:class:`~org.orekit.propagation.analytical.gnss.data.BeidouCivilianNavigationMessage`>
     
         Container for data contained in a Beidou civilian navigation message.
     
@@ -3529,10 +5362,18 @@ class BeidouCivilianNavigationMessage(AbstractNavigationMessage):
     
     
     """
-    def __init__(self, frequency: org.orekit.gnss.Frequency): ...
+    ___init___1__T = typing.TypeVar('___init___1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def __init__(self, radioWave: typing.Union[org.orekit.gnss.RadioWave, typing.Callable], timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    @typing.overload
+    def __init__(self, fieldBeidouCivilianNavigationMessage: 'FieldBeidouCivilianNavigationMessage'[___init___1__T]): ...
     def getADot(self) -> float:
         """
             Getter for the change rate in semi-major axis.
+        
+            Overrides:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getADot` in
+                class :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
         
             Returns:
                 the change rate in semi-major axis
@@ -3543,6 +5384,10 @@ class BeidouCivilianNavigationMessage(AbstractNavigationMessage):
     def getDeltaN0Dot(self) -> float:
         """
             Getter for change rate in Δn₀.
+        
+            Overrides:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getDeltaN0Dot` in
+                class :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
         
             Returns:
                 change rate in Δn₀
@@ -3620,22 +5465,22 @@ class BeidouCivilianNavigationMessage(AbstractNavigationMessage):
         
         """
         ...
+    def getRadioWave(self) -> org.orekit.gnss.RadioWave:
+        """
+            Getter for radio wave.
+        
+            Returns:
+                radio wave on which navigation signal is sent
+        
+        
+        """
+        ...
     def getSatelliteType(self) -> BeidouSatelliteType:
         """
             Getter for satellite type.
         
             Returns:
                 satellite type
-        
-        
-        """
-        ...
-    def getSignal(self) -> org.orekit.gnss.Frequency:
-        """
-            Getter for signal.
-        
-            Returns:
-                signal on which navigation signal is sent
         
         
         """
@@ -3900,10 +5745,13 @@ class BeidouCivilianNavigationMessage(AbstractNavigationMessage):
         
         """
         ...
+    _toField__T = typing.TypeVar('_toField__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _toField__F = typing.TypeVar('_toField__F', bound=FieldGnssOrbitalElements)  # <F>
+    def toField(self, field: org.hipparchus.Field[_toField__T]) -> _toField__F: ...
 
-class BeidouLegacyNavigationMessage(AbstractNavigationMessage):
+class BeidouLegacyNavigationMessage(AbstractNavigationMessage['BeidouLegacyNavigationMessage']):
     """
-    public class BeidouLegacyNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractNavigationMessage`
+    public class BeidouLegacyNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractNavigationMessage`<:class:`~org.orekit.propagation.analytical.gnss.data.BeidouLegacyNavigationMessage`>
     
         Container for data contained in a BeiDou navigation message.
     
@@ -3932,7 +5780,11 @@ class BeidouLegacyNavigationMessage(AbstractNavigationMessage):
     
     
     """
-    def __init__(self): ...
+    ___init___0__T = typing.TypeVar('___init___0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def __init__(self, fieldBeidouLegacyNavigationMessage: 'FieldBeidouLegacyNavigationMessage'[___init___0__T]): ...
+    @typing.overload
+    def __init__(self, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
     def getAODC(self) -> int:
         """
             Getter for the Age Of Data Clock (AODC).
@@ -4033,10 +5885,14 @@ class BeidouLegacyNavigationMessage(AbstractNavigationMessage):
         
         """
         ...
+    _toField__T = typing.TypeVar('_toField__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _toField__F = typing.TypeVar('_toField__F', bound=FieldGnssOrbitalElements)  # <F>
+    def toField(self, field: org.hipparchus.Field[_toField__T]) -> _toField__F: ...
 
-class CivilianNavigationMessage(AbstractNavigationMessage, GNSSClockElements):
+_CivilianNavigationMessage__O = typing.TypeVar('_CivilianNavigationMessage__O', bound='CivilianNavigationMessage')  # <O>
+class CivilianNavigationMessage(AbstractNavigationMessage[_CivilianNavigationMessage__O], GNSSClockElements, typing.Generic[_CivilianNavigationMessage__O]):
     """
-    public class CivilianNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractNavigationMessage` implements :class:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements`
+    public abstract class CivilianNavigationMessage<O extends CivilianNavigationMessage<O>> extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractNavigationMessage`<O> implements :class:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements`
     
         Container for data contained in a GPS/QZNSS civilian navigation message.
     
@@ -4065,9 +5921,29 @@ class CivilianNavigationMessage(AbstractNavigationMessage, GNSSClockElements):
     
     
     """
+    L1NV: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` L1NV
+    
+        Identifier for message type.
+    
+        Since:
+            13.0
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
     def getADot(self) -> float:
         """
             Getter for the change rate in semi-major axis.
+        
+            This value is non-zero only in civilian navigation messages
+        
+            Overrides:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getADot` in
+                class :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
         
             Returns:
                 the change rate in semi-major axis
@@ -4078,6 +5954,12 @@ class CivilianNavigationMessage(AbstractNavigationMessage, GNSSClockElements):
     def getDeltaN0Dot(self) -> float:
         """
             Getter for change rate in Δn₀.
+        
+            This value is non-zero only in civilian navigation messages
+        
+            Overrides:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements.getDeltaN0Dot` in
+                class :class:`~org.orekit.propagation.analytical.gnss.data.GNSSOrbitalElements`
         
             Returns:
                 change rate in Δn₀
@@ -4161,20 +6043,6 @@ class CivilianNavigationMessage(AbstractNavigationMessage, GNSSClockElements):
         
             Returns:
                 the satellite health status
-        
-        
-        """
-        ...
-    def getTGD(self) -> float:
-        """
-            Getter for the Group Delay Differential (s).
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getTGD` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements`
-        
-            Returns:
-                the Group Delay Differential in seconds
         
         
         """
@@ -4329,12 +6197,860 @@ class CivilianNavigationMessage(AbstractNavigationMessage, GNSSClockElements):
         
         """
         ...
-    def setTGD(self, double: float) -> None:
+    def setUraiEd(self, int: int) -> None:
         """
-            Setter for the Group Delay Differential (s).
+            Setter for Elevation-Dependent User Range Accuracy.
         
             Parameters:
-                time (double): the group delay differential to set
+                uraiEd (int): Elevation-Dependent User Range Accuracy
+        
+        
+        """
+        ...
+    def setUraiNed0(self, int: int) -> None:
+        """
+            Setter for term 0 of Non-Elevation-Dependent User Range Accuracy.
+        
+            Parameters:
+                uraiNed0 (int): term 0 of Non-Elevation-Dependent User Range Accuracy
+        
+        
+        """
+        ...
+    def setUraiNed1(self, int: int) -> None:
+        """
+            Setter for term 1 of Non-Elevation-Dependent User Range Accuracy.
+        
+            Parameters:
+                uraiNed1 (int): term 1 of Non-Elevation-Dependent User Range Accuracy
+        
+        
+        """
+        ...
+    def setUraiNed2(self, int: int) -> None:
+        """
+            Setter for term 2 of Non-Elevation-Dependent User Range Accuracy.
+        
+            Parameters:
+                uraiNed2 (int): term 2 of Non-Elevation-Dependent User Range Accuracy
+        
+        
+        """
+        ...
+
+_FieldBeidouCivilianNavigationMessage__T = typing.TypeVar('_FieldBeidouCivilianNavigationMessage__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldBeidouCivilianNavigationMessage(FieldAbstractNavigationMessage[_FieldBeidouCivilianNavigationMessage__T, BeidouCivilianNavigationMessage], typing.Generic[_FieldBeidouCivilianNavigationMessage__T]):
+    """
+    public class FieldBeidouCivilianNavigationMessage<T extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.gnss.data.FieldAbstractNavigationMessage`<T, :class:`~org.orekit.propagation.analytical.gnss.data.BeidouCivilianNavigationMessage`>
+    
+        Container for data contained in a Beidou civilian navigation message.
+    
+        Since:
+            13.0
+    """
+    ___init___0__V = typing.TypeVar('___init___0__V', bound=org.hipparchus.CalculusFieldElement)  # <V>
+    @typing.overload
+    def __init__(self, function: typing.Union[java.util.function.Function[___init___0__V, _FieldBeidouCivilianNavigationMessage__T], typing.Callable[[___init___0__V], _FieldBeidouCivilianNavigationMessage__T]], fieldBeidouCivilianNavigationMessage: 'FieldBeidouCivilianNavigationMessage'[___init___0__V]): ...
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldBeidouCivilianNavigationMessage__T], beidouCivilianNavigationMessage: BeidouCivilianNavigationMessage): ...
+    _changeField__U = typing.TypeVar('_changeField__U', bound=org.hipparchus.CalculusFieldElement)  # <U>
+    _changeField__G = typing.TypeVar('_changeField__G', bound=FieldGnssOrbitalElements)  # <G>
+    def changeField(self, function: typing.Union[java.util.function.Function[_FieldBeidouCivilianNavigationMessage__T, _changeField__U], typing.Callable[[_FieldBeidouCivilianNavigationMessage__T], _changeField__U]]) -> _changeField__G: ...
+    def getADot(self) -> _FieldBeidouCivilianNavigationMessage__T:
+        """
+            Getter for the change rate in semi-major axis.
+        
+            Overrides:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements.getADot` in
+                class :class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`
+        
+            Returns:
+                the change rate in semi-major axis
+        
+        
+        """
+        ...
+    def getDeltaN0Dot(self) -> _FieldBeidouCivilianNavigationMessage__T:
+        """
+            Getter for change rate in Δn₀.
+        
+            Overrides:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements.getDeltaN0Dot` in
+                class :class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`
+        
+            Returns:
+                change rate in Δn₀
+        
+        
+        """
+        ...
+    def getHealth(self) -> int:
+        """
+            Getter for health.
+        
+            Returns:
+                health
+        
+        
+        """
+        ...
+    def getIODC(self) -> int:
+        """
+            Getter for the Issue Of Data Clock (IODC).
+        
+            Returns:
+                the Issue Of Data Clock (IODC)
+        
+        
+        """
+        ...
+    def getIODE(self) -> int:
+        """
+            Getter for the Issue Of Data Ephemeris (IODE).
+        
+            Returns:
+                the Issue Of Data Ephemeris (IODE)
+        
+        
+        """
+        ...
+    def getIntegrityFlags(self) -> int:
+        """
+            Getter for B1C integrity flags.
+        
+            Returns:
+                B1C integrity flags
+        
+        
+        """
+        ...
+    def getIscB1CD(self) -> _FieldBeidouCivilianNavigationMessage__T:
+        """
+            Getter for inter Signal Delay for B1 CD.
+        
+            Returns:
+                inter signal delay
+        
+        
+        """
+        ...
+    def getIscB1CP(self) -> _FieldBeidouCivilianNavigationMessage__T:
+        """
+            Getter for inter Signal Delay for B1 CP.
+        
+            Returns:
+                inter signal delay
+        
+        
+        """
+        ...
+    def getIscB2AD(self) -> _FieldBeidouCivilianNavigationMessage__T:
+        """
+            Getter for inter Signal Delay for B2 AD.
+        
+            Returns:
+                inter signal delay
+        
+        
+        """
+        ...
+    def getRadioWave(self) -> org.orekit.gnss.RadioWave:
+        """
+            Getter for radio wave.
+        
+            Returns:
+                radio wave on which navigation signal is sent
+        
+        
+        """
+        ...
+    def getSatelliteType(self) -> BeidouSatelliteType:
+        """
+            Getter for satellite type.
+        
+            Returns:
+                satellite type
+        
+        
+        """
+        ...
+    def getSisaiOc1(self) -> int:
+        """
+            Getter for Signal In Space Accuracy Index (clock drift accuracy).
+        
+            Returns:
+                Signal In Space Accuracy Index (clock drift accuracy)
+        
+        
+        """
+        ...
+    def getSisaiOc2(self) -> int:
+        """
+            Getter for Signal In Space Accuracy Index (clock drift rate accuracy).
+        
+            Returns:
+                Signal In Space Accuracy Index (clock drift rate accuracy)
+        
+        
+        """
+        ...
+    def getSisaiOcb(self) -> int:
+        """
+            Getter for Signal In Space Accuracy Index (radial and clock).
+        
+            Returns:
+                Signal In Space Accuracy Index (radial and clock)
+        
+        
+        """
+        ...
+    def getSisaiOe(self) -> int:
+        """
+            Getter for Signal In Space Accuracy Index (along track and across track).
+        
+            Returns:
+                Signal In Space Accuracy Index (along track and across track)
+        
+        
+        """
+        ...
+    def getSismai(self) -> int:
+        """
+            Getter for Signal In Space Monitoring Accuracy Index.
+        
+            Returns:
+                Signal In Space Monitoring Accuracy Index
+        
+        
+        """
+        ...
+    def getTgdB1Cp(self) -> _FieldBeidouCivilianNavigationMessage__T:
+        """
+            Getter for B1/B3 Group Delay Differential (s).
+        
+            Returns:
+                B1/B3 Group Delay Differential (s)
+        
+        
+        """
+        ...
+    def getTgdB2ap(self) -> _FieldBeidouCivilianNavigationMessage__T:
+        """
+            Getter for B2 AP Group Delay Differential (s).
+        
+            Returns:
+                B2 AP Group Delay Differential (s)
+        
+        
+        """
+        ...
+    def getTgdB2bI(self) -> _FieldBeidouCivilianNavigationMessage__T:
+        """
+            Getter for B2B_i / B3I Group Delay Differential (s).
+        
+            Returns:
+                B2B_i / B3I Group Delay Differential (s)
+        
+        
+        """
+        ...
+    def setADot(self, t: _FieldBeidouCivilianNavigationMessage__T) -> None:
+        """
+            Setter for the change rate in semi-major axis.
+        
+            Parameters:
+                value (:class:`~org.orekit.propagation.analytical.gnss.data.FieldBeidouCivilianNavigationMessage`): the change rate in semi-major axis
+        
+        
+        """
+        ...
+    def setDeltaN0Dot(self, t: _FieldBeidouCivilianNavigationMessage__T) -> None:
+        """
+            Setter for change rate in Δn₀.
+        
+            Parameters:
+                deltaN0Dot (:class:`~org.orekit.propagation.analytical.gnss.data.FieldBeidouCivilianNavigationMessage`): change rate in Δn₀
+        
+        
+        """
+        ...
+    def setHealth(self, int: int) -> None:
+        """
+            Setter for health.
+        
+            Parameters:
+                health (int): health
+        
+        
+        """
+        ...
+    def setIODC(self, int: int) -> None:
+        """
+            Setter for the Issue of Data Clock.
+        
+            Parameters:
+                value (int): the IODC to set
+        
+        
+        """
+        ...
+    def setIODE(self, int: int) -> None:
+        """
+            Setter for the Issue of Data Ephemeris.
+        
+            Parameters:
+                value (int): the IODE to set
+        
+        
+        """
+        ...
+    def setIntegrityFlags(self, int: int) -> None:
+        """
+            Setter for B1C integrity flags.
+        
+            Parameters:
+                integrityFlags (int): integrity flags
+        
+        
+        """
+        ...
+    def setIscB1CD(self, t: _FieldBeidouCivilianNavigationMessage__T) -> None:
+        """
+            Setter for inter Signal Delay for B1 CD.
+        
+            Parameters:
+                delay (:class:`~org.orekit.propagation.analytical.gnss.data.FieldBeidouCivilianNavigationMessage`): delay to set
+        
+        
+        """
+        ...
+    def setIscB1CP(self, t: _FieldBeidouCivilianNavigationMessage__T) -> None:
+        """
+            Setter for inter Signal Delay for B1 CP.
+        
+            Parameters:
+                delay (:class:`~org.orekit.propagation.analytical.gnss.data.FieldBeidouCivilianNavigationMessage`): delay to set
+        
+        
+        """
+        ...
+    def setIscB2AD(self, t: _FieldBeidouCivilianNavigationMessage__T) -> None:
+        """
+            Setter for inter Signal Delay for B2 AD.
+        
+            Parameters:
+                delay (:class:`~org.orekit.propagation.analytical.gnss.data.FieldBeidouCivilianNavigationMessage`): delay to set
+        
+        
+        """
+        ...
+    def setSatelliteType(self, beidouSatelliteType: BeidouSatelliteType) -> None:
+        """
+            Setter for satellite type.
+        
+            Parameters:
+                satelliteType (:class:`~org.orekit.propagation.analytical.gnss.data.BeidouSatelliteType`): satellite type
+        
+        
+        """
+        ...
+    def setSisaiOc1(self, int: int) -> None:
+        """
+            Setter for Signal In Space Accuracy Index (clock drift accuracy).
+        
+            Parameters:
+                sisaiOc1 (int): Signal In Space Accuracy Index (clock drift accuracy)
+        
+        
+        """
+        ...
+    def setSisaiOc2(self, int: int) -> None:
+        """
+            Setter for Signal In Space Accuracy Index (clock drift rate accuracy).
+        
+            Parameters:
+                sisaiOc2 (int): Signal In Space Accuracy Index (clock drift rate accuracy)
+        
+        
+        """
+        ...
+    def setSisaiOcb(self, int: int) -> None:
+        """
+            Setter for Signal In Space Accuracy Index (radial and clock).
+        
+            Parameters:
+                sisaiOcb (int): Signal In Space Accuracy Index (radial and clock)
+        
+        
+        """
+        ...
+    def setSisaiOe(self, int: int) -> None:
+        """
+            Setter for Signal In Space Accuracy Index (along track and across track).
+        
+            Parameters:
+                sisaiOe (int): Signal In Space Accuracy Index (along track and across track)
+        
+        
+        """
+        ...
+    def setSismai(self, int: int) -> None:
+        """
+            Setter for Signal In Space Monitoring Accuracy Index.
+        
+            Parameters:
+                sismai (int): Signal In Space Monitoring Accuracy Index
+        
+        
+        """
+        ...
+    def setTgdB1Cp(self, t: _FieldBeidouCivilianNavigationMessage__T) -> None:
+        """
+            Setter for B1/B3 Group Delay Differential (s).
+        
+            Parameters:
+                tgdB1Cp (:class:`~org.orekit.propagation.analytical.gnss.data.FieldBeidouCivilianNavigationMessage`): B1/B3 Group Delay Differential (s)
+        
+        
+        """
+        ...
+    def setTgdB2ap(self, t: _FieldBeidouCivilianNavigationMessage__T) -> None:
+        """
+            Setter for B2 AP Group Delay Differential (s).
+        
+            Parameters:
+                tgdB2ap (:class:`~org.orekit.propagation.analytical.gnss.data.FieldBeidouCivilianNavigationMessage`): B2 AP Group Delay Differential (s)
+        
+        
+        """
+        ...
+    def setTgdB2bI(self, t: _FieldBeidouCivilianNavigationMessage__T) -> None:
+        """
+            Setter for B2B_i / B3I Group Delay Differential (s).
+        
+            Parameters:
+                tgdB2bI (:class:`~org.orekit.propagation.analytical.gnss.data.FieldBeidouCivilianNavigationMessage`): B2B_i / B3I Group Delay Differential (s)
+        
+        
+        """
+        ...
+    def toNonField(self) -> BeidouCivilianNavigationMessage:
+        """
+            Create a non-field version of the instance.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements.toNonField` in
+                class :class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`
+        
+            Returns:
+                non-field version of the instance
+        
+        
+        """
+        ...
+
+_FieldBeidouLegacyNavigationMessage__T = typing.TypeVar('_FieldBeidouLegacyNavigationMessage__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldBeidouLegacyNavigationMessage(FieldAbstractNavigationMessage[_FieldBeidouLegacyNavigationMessage__T, BeidouLegacyNavigationMessage], typing.Generic[_FieldBeidouLegacyNavigationMessage__T]):
+    """
+    public class FieldBeidouLegacyNavigationMessage<T extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.gnss.data.FieldAbstractNavigationMessage`<T, :class:`~org.orekit.propagation.analytical.gnss.data.BeidouLegacyNavigationMessage`>
+    
+        Container for data contained in a BeiDou navigation message.
+    
+        Since:
+            13.0
+    """
+    ___init___0__V = typing.TypeVar('___init___0__V', bound=org.hipparchus.CalculusFieldElement)  # <V>
+    @typing.overload
+    def __init__(self, function: typing.Union[java.util.function.Function[___init___0__V, _FieldBeidouLegacyNavigationMessage__T], typing.Callable[[___init___0__V], _FieldBeidouLegacyNavigationMessage__T]], fieldBeidouLegacyNavigationMessage: 'FieldBeidouLegacyNavigationMessage'[___init___0__V]): ...
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldBeidouLegacyNavigationMessage__T], beidouLegacyNavigationMessage: BeidouLegacyNavigationMessage): ...
+    _changeField__U = typing.TypeVar('_changeField__U', bound=org.hipparchus.CalculusFieldElement)  # <U>
+    _changeField__G = typing.TypeVar('_changeField__G', bound=FieldGnssOrbitalElements)  # <G>
+    def changeField(self, function: typing.Union[java.util.function.Function[_FieldBeidouLegacyNavigationMessage__T, _changeField__U], typing.Callable[[_FieldBeidouLegacyNavigationMessage__T], _changeField__U]]) -> _changeField__G: ...
+    def getAODC(self) -> int:
+        """
+            Getter for the Age Of Data Clock (AODC).
+        
+            Returns:
+                the Age Of Data Clock (AODC)
+        
+        
+        """
+        ...
+    def getAODE(self) -> int:
+        """
+            Getter for the Age Of Data Ephemeris (AODE).
+        
+            Returns:
+                the Age Of Data Ephemeris (AODE)
+        
+        
+        """
+        ...
+    def getSvAccuracy(self) -> _FieldBeidouLegacyNavigationMessage__T:
+        """
+            Getter for the user SV accuray (meters).
+        
+            Returns:
+                the user SV accuracy
+        
+        
+        """
+        ...
+    def getTGD1(self) -> _FieldBeidouLegacyNavigationMessage__T:
+        """
+            Getter for the estimated group delay differential TGD1 for B1I signal.
+        
+            Returns:
+                the estimated group delay differential TGD1 for B1I signal (s)
+        
+        
+        """
+        ...
+    def getTGD2(self) -> _FieldBeidouLegacyNavigationMessage__T:
+        """
+            Getter for the estimated group delay differential TGD for B2I signal.
+        
+            Returns:
+                the estimated group delay differential TGD2 for B2I signal (s)
+        
+        
+        """
+        ...
+    def setAODC(self, t: _FieldBeidouLegacyNavigationMessage__T) -> None:
+        """
+            Setter for the age of data clock.
+        
+            Parameters:
+                aod (:class:`~org.orekit.propagation.analytical.gnss.data.FieldBeidouLegacyNavigationMessage`): the age of data to set
+        
+        
+        """
+        ...
+    def setAODE(self, t: _FieldBeidouLegacyNavigationMessage__T) -> None:
+        """
+            Setter for the age of data ephemeris.
+        
+            Parameters:
+                aod (:class:`~org.orekit.propagation.analytical.gnss.data.FieldBeidouLegacyNavigationMessage`): the age of data to set
+        
+        
+        """
+        ...
+    def setSvAccuracy(self, t: _FieldBeidouLegacyNavigationMessage__T) -> None:
+        """
+            Setter for the user SV accuracy.
+        
+            Parameters:
+                svAccuracy (:class:`~org.orekit.propagation.analytical.gnss.data.FieldBeidouLegacyNavigationMessage`): the value to set
+        
+        
+        """
+        ...
+    def setTGD1(self, t: _FieldBeidouLegacyNavigationMessage__T) -> None:
+        """
+            Setter for the B1/B3 Group Delay Differential (s).
+        
+            Parameters:
+                tgd (:class:`~org.orekit.propagation.analytical.gnss.data.FieldBeidouLegacyNavigationMessage`): the group delay differential to set
+        
+        
+        """
+        ...
+    def setTGD2(self, t: _FieldBeidouLegacyNavigationMessage__T) -> None:
+        """
+            Setter for the B2/B3 Group Delay Differential (s).
+        
+            Parameters:
+                tgd (:class:`~org.orekit.propagation.analytical.gnss.data.FieldBeidouLegacyNavigationMessage`): the group delay differential to set
+        
+        
+        """
+        ...
+    def toNonField(self) -> BeidouLegacyNavigationMessage:
+        """
+            Create a non-field version of the instance.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements.toNonField` in
+                class :class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`
+        
+            Returns:
+                non-field version of the instance
+        
+        
+        """
+        ...
+
+_FieldCivilianNavigationMessage__T = typing.TypeVar('_FieldCivilianNavigationMessage__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+_FieldCivilianNavigationMessage__O = typing.TypeVar('_FieldCivilianNavigationMessage__O', bound=CivilianNavigationMessage)  # <O>
+class FieldCivilianNavigationMessage(FieldAbstractNavigationMessage[_FieldCivilianNavigationMessage__T, _FieldCivilianNavigationMessage__O], FieldGNSSClockElements[_FieldCivilianNavigationMessage__T], typing.Generic[_FieldCivilianNavigationMessage__T, _FieldCivilianNavigationMessage__O]):
+    """
+    public abstract class FieldCivilianNavigationMessage<T extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>, O extends :class:`~org.orekit.propagation.analytical.gnss.data.CivilianNavigationMessage`<O>> extends :class:`~org.orekit.propagation.analytical.gnss.data.FieldAbstractNavigationMessage`<T, O> implements :class:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements`<T>
+    
+        Container for data contained in a GPS/QZNSS civilian navigation message.
+    
+        Since:
+            13.0
+    """
+    def getADot(self) -> _FieldCivilianNavigationMessage__T:
+        """
+            Getter for the change rate in semi-major axis.
+        
+            This value is non-zero only in civilian navigation messages
+        
+            Overrides:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements.getADot` in
+                class :class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`
+        
+            Returns:
+                the change rate in semi-major axis
+        
+        
+        """
+        ...
+    def getDeltaN0Dot(self) -> _FieldCivilianNavigationMessage__T:
+        """
+            Getter for change rate in Δn₀.
+        
+            This value is non-zero only in civilian navigation messages
+        
+            Overrides:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements.getDeltaN0Dot` in
+                class :class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`
+        
+            Returns:
+                change rate in Δn₀
+        
+        
+        """
+        ...
+    def getIscL1CA(self) -> _FieldCivilianNavigationMessage__T:
+        """
+            Getter for inter Signal Delay for L1 C/A.
+        
+            Returns:
+                inter signal delay
+        
+        
+        """
+        ...
+    def getIscL1CD(self) -> _FieldCivilianNavigationMessage__T:
+        """
+            Getter for inter Signal Delay for L1 CD.
+        
+            Returns:
+                inter signal delay
+        
+        
+        """
+        ...
+    def getIscL1CP(self) -> _FieldCivilianNavigationMessage__T:
+        """
+            Getter for inter Signal Delay for L1 CP.
+        
+            Returns:
+                inter signal delay
+        
+        
+        """
+        ...
+    def getIscL2C(self) -> _FieldCivilianNavigationMessage__T:
+        """
+            Getter for inter Signal Delay for L2 C.
+        
+            Returns:
+                inter signal delay
+        
+        
+        """
+        ...
+    def getIscL5I5(self) -> _FieldCivilianNavigationMessage__T:
+        """
+            Getter for inter Signal Delay for L5I.
+        
+            Returns:
+                inter signal delay
+        
+        
+        """
+        ...
+    def getIscL5Q5(self) -> _FieldCivilianNavigationMessage__T:
+        """
+            Getter for inter Signal Delay for L5Q.
+        
+            Returns:
+                inter signal delay
+        
+        
+        """
+        ...
+    def getSvAccuracy(self) -> _FieldCivilianNavigationMessage__T:
+        """
+            Getter for the user SV accuray (meters).
+        
+            Returns:
+                the user SV accuracy
+        
+        
+        """
+        ...
+    def getSvHealth(self) -> int:
+        """
+            Getter for the satellite health status.
+        
+            Returns:
+                the satellite health status
+        
+        
+        """
+        ...
+    def getUraiEd(self) -> int:
+        """
+            Getter for Elevation-Dependent User Range Accuracy.
+        
+            Returns:
+                Elevation-Dependent User Range Accuracy
+        
+        
+        """
+        ...
+    def getUraiNed0(self) -> int:
+        """
+            Getter for term 0 of Non-Elevation-Dependent User Range Accuracy.
+        
+            Returns:
+                term 0 of Non-Elevation-Dependent User Range Accuracy
+        
+        
+        """
+        ...
+    def getUraiNed1(self) -> int:
+        """
+            Getter for term 1 of Non-Elevation-Dependent User Range Accuracy.
+        
+            Returns:
+                term 1 of Non-Elevation-Dependent User Range Accuracy
+        
+        
+        """
+        ...
+    def getUraiNed2(self) -> int:
+        """
+            Getter for term 2 of Non-Elevation-Dependent User Range Accuracy.
+        
+            Returns:
+                term 2 of Non-Elevation-Dependent User Range Accuracy
+        
+        
+        """
+        ...
+    def isCnv2(self) -> bool:
+        """
+            Check it message is a CNV2 message.
+        
+            Returns:
+                true if message is a CNV2 message
+        
+        
+        """
+        ...
+    def setADot(self, t: _FieldCivilianNavigationMessage__T) -> None:
+        """
+            Setter for the change rate in semi-major axis.
+        
+            Parameters:
+                value (:class:`~org.orekit.propagation.analytical.gnss.data.FieldCivilianNavigationMessage`): the change rate in semi-major axis
+        
+        
+        """
+        ...
+    def setDeltaN0Dot(self, t: _FieldCivilianNavigationMessage__T) -> None:
+        """
+            Setter for change rate in Δn₀.
+        
+            Parameters:
+                deltaN0Dot (:class:`~org.orekit.propagation.analytical.gnss.data.FieldCivilianNavigationMessage`): change rate in Δn₀
+        
+        
+        """
+        ...
+    def setIscL1CA(self, t: _FieldCivilianNavigationMessage__T) -> None:
+        """
+            Setter for inter Signal Delay for L1 C/A.
+        
+            Parameters:
+                delay (:class:`~org.orekit.propagation.analytical.gnss.data.FieldCivilianNavigationMessage`): delay to set
+        
+        
+        """
+        ...
+    def setIscL1CD(self, t: _FieldCivilianNavigationMessage__T) -> None:
+        """
+            Setter for inter Signal Delay for L1 CD.
+        
+            Parameters:
+                delay (:class:`~org.orekit.propagation.analytical.gnss.data.FieldCivilianNavigationMessage`): delay to set
+        
+        
+        """
+        ...
+    def setIscL1CP(self, t: _FieldCivilianNavigationMessage__T) -> None:
+        """
+            Setter for inter Signal Delay for L1 CP.
+        
+            Parameters:
+                delay (:class:`~org.orekit.propagation.analytical.gnss.data.FieldCivilianNavigationMessage`): delay to set
+        
+        
+        """
+        ...
+    def setIscL2C(self, t: _FieldCivilianNavigationMessage__T) -> None:
+        """
+            Setter for inter Signal Delay for L2 C.
+        
+            Parameters:
+                delay (:class:`~org.orekit.propagation.analytical.gnss.data.FieldCivilianNavigationMessage`): delay to set
+        
+        
+        """
+        ...
+    def setIscL5I5(self, t: _FieldCivilianNavigationMessage__T) -> None:
+        """
+            Setter for inter Signal Delay for L5I.
+        
+            Parameters:
+                delay (:class:`~org.orekit.propagation.analytical.gnss.data.FieldCivilianNavigationMessage`): delay to set
+        
+        
+        """
+        ...
+    def setIscL5Q5(self, t: _FieldCivilianNavigationMessage__T) -> None:
+        """
+            Setter for inter Signal Delay for L5Q.
+        
+            Parameters:
+                delay (:class:`~org.orekit.propagation.analytical.gnss.data.FieldCivilianNavigationMessage`): delay to set
+        
+        
+        """
+        ...
+    def setSvAccuracy(self, t: _FieldCivilianNavigationMessage__T) -> None:
+        """
+            Setter for the user SV accuracy.
+        
+            Parameters:
+                svAccuracy (:class:`~org.orekit.propagation.analytical.gnss.data.FieldCivilianNavigationMessage`): the value to set
+        
+        
+        """
+        ...
+    def setSvHealth(self, int: int) -> None:
+        """
+            Setter for the satellite health status.
+        
+            Parameters:
+                svHealth (int): the value to set
         
         
         """
@@ -4380,276 +7096,285 @@ class CivilianNavigationMessage(AbstractNavigationMessage, GNSSClockElements):
         """
         ...
 
-class GPSAlmanac(AbstractAlmanac, GNSSClockElements):
+_FieldGalileoNavigationMessage__T = typing.TypeVar('_FieldGalileoNavigationMessage__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldGalileoNavigationMessage(FieldAbstractNavigationMessage[_FieldGalileoNavigationMessage__T, 'GalileoNavigationMessage'], typing.Generic[_FieldGalileoNavigationMessage__T]):
     """
-    public class GPSAlmanac extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac` implements :class:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements`
+    public class FieldGalileoNavigationMessage<T extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.gnss.data.FieldAbstractNavigationMessage`<T, :class:`~org.orekit.propagation.analytical.gnss.data.GalileoNavigationMessage`>
     
-        This class holds a GPS almanac as read from SEM or YUMA files.
-    
-        Depending on the source (SEM or YUMA), some fields may be filled in or not. An almanac read from a YUMA file doesn't
-        hold SVN number, average URA and satellite configuration.
+        Container for data contained in a Galileo navigation message.
     
         Since:
-            8.0
+            13.0
     """
-    def __init__(self): ...
-    def getHealth(self) -> int:
+    ___init___0__V = typing.TypeVar('___init___0__V', bound=org.hipparchus.CalculusFieldElement)  # <V>
+    @typing.overload
+    def __init__(self, function: typing.Union[java.util.function.Function[___init___0__V, _FieldGalileoNavigationMessage__T], typing.Callable[[___init___0__V], _FieldGalileoNavigationMessage__T]], fieldGalileoNavigationMessage: 'FieldGalileoNavigationMessage'[___init___0__V]): ...
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldGalileoNavigationMessage__T], galileoNavigationMessage: 'GalileoNavigationMessage'): ...
+    _changeField__U = typing.TypeVar('_changeField__U', bound=org.hipparchus.CalculusFieldElement)  # <U>
+    _changeField__G = typing.TypeVar('_changeField__G', bound=FieldGnssOrbitalElements)  # <G>
+    def changeField(self, function: typing.Union[java.util.function.Function[_FieldGalileoNavigationMessage__T, _changeField__U], typing.Callable[[_FieldGalileoNavigationMessage__T], _changeField__U]]) -> _changeField__G: ...
+    def getBGDE1E5a(self) -> _FieldGalileoNavigationMessage__T:
         """
-            Gets the Health status.
+            Getter for the E1/E5a broadcast group delay.
         
             Returns:
-                the Health status
+                the E1/E5a broadcast group delay (s)
         
         
         """
         ...
-    def getSVN(self) -> int:
+    def getBGDE5bE1(self) -> _FieldGalileoNavigationMessage__T:
         """
-            Gets the satellite "SVN" reference number.
+            Getter for the the Broadcast Group Delay E5b/E1.
         
             Returns:
-                the satellite "SVN" reference number
+                the Broadcast Group Delay E5b/E1 (s)
         
         
         """
         ...
-    def getSatConfiguration(self) -> int:
+    def getDataSource(self) -> int:
         """
-            Gets the satellite configuration.
+            Getter for the the data source.
         
             Returns:
-                the satellite configuration
+                the data source
         
         
         """
         ...
-    def getSource(self) -> str:
+    def getIODNav(self) -> int:
         """
-            Gets the source of this GPS almanac.
-        
-            Sources can be SEM or YUMA, when the almanac is read from a file.
+            Getter for the the Issue Of Data (IOD).
         
             Returns:
-                the source of this GPS almanac
+                the Issue Of Data (IOD)
         
         
         """
         ...
-    def getTGD(self) -> float:
+    def getSisa(self) -> _FieldGalileoNavigationMessage__T:
         """
-            Gets for the Group Delay Differential (s).
+            Getter for the signal in space accuracy (m).
+        
+            Returns:
+                the signal in space accuracy
+        
+        
+        """
+        ...
+    def getSvHealth(self) -> _FieldGalileoNavigationMessage__T:
+        """
+            Getter for the SV health status.
+        
+            Returns:
+                the SV health status
+        
+        
+        """
+        ...
+    def setBGDE1E5a(self, t: _FieldGalileoNavigationMessage__T) -> None:
+        """
+            Setter for the E1/E5a broadcast group delay (s).
+        
+            Parameters:
+                bgd (:class:`~org.orekit.propagation.analytical.gnss.data.FieldGalileoNavigationMessage`): the E1/E5a broadcast group delay to set
+        
+        
+        """
+        ...
+    def setBGDE5bE1(self, t: _FieldGalileoNavigationMessage__T) -> None:
+        """
+            Setter for the E5b/E1 broadcast group delay (s).
+        
+            Parameters:
+                bgd (:class:`~org.orekit.propagation.analytical.gnss.data.FieldGalileoNavigationMessage`): the E5b/E1 broadcast group delay to set
+        
+        
+        """
+        ...
+    def setDataSource(self, int: int) -> None:
+        """
+            Setter for the data source.
+        
+            Parameters:
+                dataSource (int): data source
+        
+        
+        """
+        ...
+    def setIODNav(self, int: int) -> None:
+        """
+            Setter for the Issue of Data of the navigation batch.
+        
+            Parameters:
+                iod (int): the IOD to set
+        
+        
+        """
+        ...
+    def setSisa(self, t: _FieldGalileoNavigationMessage__T) -> None:
+        """
+            Setter for the signal in space accuracy.
+        
+            Parameters:
+                sisa (:class:`~org.orekit.propagation.analytical.gnss.data.FieldGalileoNavigationMessage`): the sisa to set
+        
+        
+        """
+        ...
+    def setSvHealth(self, t: _FieldGalileoNavigationMessage__T) -> None:
+        """
+            Setter for the SV health status.
+        
+            Parameters:
+                svHealth (:class:`~org.orekit.propagation.analytical.gnss.data.FieldGalileoNavigationMessage`): the SV health status to set
+        
+        
+        """
+        ...
+    def toNonField(self) -> 'GalileoNavigationMessage':
+        """
+            Create a non-field version of the instance.
         
             Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getTGD` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements`
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements.toNonField` in
+                class :class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`
         
             Returns:
-                the Group Delay Differential in seconds
-        
-        
-        """
-        ...
-    def getURA(self) -> int:
-        """
-            Gets the average URA number.
-        
-            Returns:
-                the average URA number
-        
-        
-        """
-        ...
-    def setHealth(self, int: int) -> None:
-        """
-            Sets the health status.
-        
-            Parameters:
-                health (int): the health status to set
-        
-        
-        """
-        ...
-    def setSVN(self, int: int) -> None:
-        """
-            Sets the "SVN" reference number.
-        
-            Parameters:
-                svnNumber (int): the number to set
-        
-        
-        """
-        ...
-    def setSatConfiguration(self, int: int) -> None:
-        """
-            Sets the satellite configuration.
-        
-            Parameters:
-                satConfiguration (int): the satellite configuration to set
-        
-        
-        """
-        ...
-    def setSource(self, string: str) -> None:
-        """
-            Sets the source of this GPS almanac.
-        
-            Parameters:
-                source (:class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the source of this GPS almanac
-        
-        
-        """
-        ...
-    def setSqrtA(self, double: float) -> None:
-        """
-            Setter for the Square Root of Semi-Major Axis (m^1/2).
-        
-            In addition, this method set the value of the Semi-Major Axis.
-        
-            Parameters:
-                sqrtA (double): the Square Root of Semi-Major Axis (m^1/2)
-        
-        
-        """
-        ...
-    def setURA(self, int: int) -> None:
-        """
-            Sets the average URA number.
-        
-            Parameters:
-                uraNumber (int): the URA number to set
+                non-field version of the instance
         
         
         """
         ...
 
-class GalileoAlmanac(AbstractAlmanac):
+_FieldLegacyNavigationMessage__T = typing.TypeVar('_FieldLegacyNavigationMessage__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+_FieldLegacyNavigationMessage__O = typing.TypeVar('_FieldLegacyNavigationMessage__O', bound='LegacyNavigationMessage')  # <O>
+class FieldLegacyNavigationMessage(FieldAbstractNavigationMessage[_FieldLegacyNavigationMessage__T, _FieldLegacyNavigationMessage__O], FieldGNSSClockElements[_FieldLegacyNavigationMessage__T], typing.Generic[_FieldLegacyNavigationMessage__T, _FieldLegacyNavigationMessage__O]):
     """
-    public class GalileoAlmanac extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac`
+    public abstract class FieldLegacyNavigationMessage<T extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>, O extends :class:`~org.orekit.propagation.analytical.gnss.data.LegacyNavigationMessage`<O>> extends :class:`~org.orekit.propagation.analytical.gnss.data.FieldAbstractNavigationMessage`<T, O> implements :class:`~org.orekit.propagation.analytical.gnss.data.FieldGNSSClockElements`<T>
     
-        Class for Galileo almanac.
+        Container for data contained in a GPS/QZNSS legacy navigation message.
     
         Since:
-            10.0
-    
-        Also see:
-            "European GNSS (Galileo) Open Service, Signal In Space, Interface Control Document, Table 75"
+            13.0
     """
-    def __init__(self): ...
-    def getHealthE1(self) -> int:
+    def getFitInterval(self) -> int:
         """
-            Gets the E1-B/C signal health status.
+            Getter for the fit interval.
         
             Returns:
-                the E1-B/C signal health status
+                the fit interval
         
         
         """
         ...
-    def getHealthE5a(self) -> int:
+    def getIODC(self) -> int:
         """
-            Gets the E5a signal health status.
+            Getter for the Issue Of Data Clock (IODC).
         
             Returns:
-                the E5a signal health status
+                the Issue Of Data Clock (IODC)
         
         
         """
         ...
-    def getHealthE5b(self) -> int:
+    def getIODE(self) -> int:
         """
-            Gets the E5b signal health status.
+            Getter for the Issue Of Data Ephemeris (IODE).
         
             Returns:
-                the E5b signal health status
+                the Issue Of Data Ephemeris (IODE)
         
         
         """
         ...
-    def getIOD(self) -> int:
+    def getSvAccuracy(self) -> _FieldLegacyNavigationMessage__T:
         """
-            Gets the Issue of Data (IOD).
+            Getter for the user SV accuray (meters).
         
             Returns:
-                the Issue Of Data
+                the user SV accuracy
         
         
         """
         ...
-    def setDeltaInc(self, double: float) -> None:
+    def getSvHealth(self) -> int:
         """
-            Sets the the correction of orbit reference inclination at reference time.
+            Getter for the satellite health status.
         
-            In addition, this method set the value of the reference inclination.
-        
-            Parameters:
-                dinc (double): correction of orbit reference inclination at reference time in radians
+            Returns:
+                the satellite health status
         
         
         """
         ...
-    def setDeltaSqrtA(self, double: float) -> None:
+    def setFitInterval(self, int: int) -> None:
         """
-            Sets the difference between the square root of the semi-major axis and the square root of the nominal semi-major axis.
-        
-            In addition, this method set the value of the Semi-Major Axis.
+            Setter for the fit interval.
         
             Parameters:
-                dsqa (double): the value to set
+                fitInterval (int): fit interval
         
         
         """
         ...
-    def setHealthE1(self, int: int) -> None:
+    def setIODC(self, int: int) -> None:
         """
-            Sets the E1-B/C signal health status.
+            Setter for the Issue of Data Clock.
         
             Parameters:
-                healthE1 (int): health status to set
+                value (int): the IODC to set
         
         
         """
         ...
-    def setHealthE5a(self, int: int) -> None:
+    def setIODE(self, t: _FieldLegacyNavigationMessage__T) -> None:
         """
-            Sets the E5a signal health status.
+            Setter for the Issue of Data Ephemeris.
         
             Parameters:
-                healthE5a (int): health status to set
+                value (:class:`~org.orekit.propagation.analytical.gnss.data.FieldLegacyNavigationMessage`): the IODE to set
         
         
         """
         ...
-    def setHealthE5b(self, int: int) -> None:
+    def setSvAccuracy(self, t: _FieldLegacyNavigationMessage__T) -> None:
         """
-            Sets the E5b signal health status.
+            Setter for the user SV accuracy.
         
             Parameters:
-                healthE5b (int): health status to set
+                svAccuracy (:class:`~org.orekit.propagation.analytical.gnss.data.FieldLegacyNavigationMessage`): the value to set
         
         
         """
         ...
-    def setIOD(self, int: int) -> None:
+    def setSvHealth(self, int: int) -> None:
         """
-            Sets the Issue of Data (IOD).
+            Setter for the satellite health status.
         
             Parameters:
-                iodValue (int): the value to set
+                svHealth (int): the value to set
         
         
         """
         ...
 
-class GalileoNavigationMessage(AbstractNavigationMessage):
+class GalileoNavigationMessage(AbstractNavigationMessage['GalileoNavigationMessage']):
     """
-    public class GalileoNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractNavigationMessage`
+    public class GalileoNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractNavigationMessage`<:class:`~org.orekit.propagation.analytical.gnss.data.GalileoNavigationMessage`>
     
         Container for data contained in a Galileo navigation message.
     
         Since:
             11.0
     """
-    def __init__(self): ...
+    ___init___0__T = typing.TypeVar('___init___0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def __init__(self, fieldGalileoNavigationMessage: FieldGalileoNavigationMessage[___init___0__T]): ...
+    @typing.overload
+    def __init__(self, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
     def getBGDE1E5a(self) -> float:
         """
             Getter for the E1/E5a broadcast group delay.
@@ -4776,128 +7501,14 @@ class GalileoNavigationMessage(AbstractNavigationMessage):
         
         """
         ...
+    _toField__T = typing.TypeVar('_toField__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _toField__F = typing.TypeVar('_toField__F', bound=FieldGnssOrbitalElements)  # <F>
+    def toField(self, field: org.hipparchus.Field[_toField__T]) -> _toField__F: ...
 
-class IRNSSAlmanac(AbstractAlmanac):
+_LegacyNavigationMessage__O = typing.TypeVar('_LegacyNavigationMessage__O', bound='LegacyNavigationMessage')  # <O>
+class LegacyNavigationMessage(AbstractNavigationMessage[_LegacyNavigationMessage__O], GNSSClockElements, typing.Generic[_LegacyNavigationMessage__O]):
     """
-    public class IRNSSAlmanac extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac`
-    
-        Class for IRNSS almanac.
-    
-        Since:
-            10.1
-    
-        Also see:
-            "Indian Regiona Navigation Satellite System, Signal In Space ICD for standard positioning service, version 1.1 - Table
-            28"
-    """
-    def __init__(self): ...
-    def setSqrtA(self, double: float) -> None:
-        """
-            Setter for the Square Root of Semi-Major Axis (m^1/2).
-        
-            In addition, this method set the value of the Semi-Major Axis.
-        
-            Parameters:
-                sqrtA (double): the Square Root of Semi-Major Axis (m^1/2)
-        
-        
-        """
-        ...
-
-class IRNSSNavigationMessage(AbstractNavigationMessage):
-    """
-    public class IRNSSNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractNavigationMessage`
-    
-        Container for data contained in an IRNSS navigation message.
-    
-        Since:
-            11.0
-    """
-    def __init__(self): ...
-    def getIODEC(self) -> int:
-        """
-            Getter for the Issue Of Data Ephemeris and Clock (IODEC).
-        
-            Returns:
-                the Issue Of Data Ephemeris and Clock (IODEC)
-        
-        
-        """
-        ...
-    def getSvHealth(self) -> float:
-        """
-            Getter for the satellite health status.
-        
-            Returns:
-                the satellite health status
-        
-        
-        """
-        ...
-    def getTGD(self) -> float:
-        """
-            Getter for the estimated group delay differential TGD for L5-S correction.
-        
-            Returns:
-                the estimated group delay differential TGD for L5-S correction (s)
-        
-        
-        """
-        ...
-    def getURA(self) -> float:
-        """
-            Getter for the user range accuray (meters).
-        
-            Returns:
-                the user range accuracy
-        
-        
-        """
-        ...
-    def setIODEC(self, double: float) -> None:
-        """
-            Setter for the Issue of Data, Ephemeris and Clock.
-        
-            Parameters:
-                value (double): the IODEC to set
-        
-        
-        """
-        ...
-    def setSvHealth(self, double: float) -> None:
-        """
-            Setter for the satellite health status.
-        
-            Parameters:
-                svHealth (double): the value to set
-        
-        
-        """
-        ...
-    def setTGD(self, double: float) -> None:
-        """
-            Setter for the Group Delay Differential (s).
-        
-            Parameters:
-                time (double): the group delay differential to set
-        
-        
-        """
-        ...
-    def setURA(self, double: float) -> None:
-        """
-            Setter for the user range accuracy.
-        
-            Parameters:
-                accuracy (double): the value to set
-        
-        
-        """
-        ...
-
-class LegacyNavigationMessage(AbstractNavigationMessage, GNSSClockElements):
-    """
-    public class LegacyNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractNavigationMessage` implements :class:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements`
+    public abstract class LegacyNavigationMessage<O extends LegacyNavigationMessage<O>> extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractNavigationMessage`<O> implements :class:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements`
     
         Container for data contained in a GPS/QZNSS legacy navigation message.
     
@@ -4968,20 +7579,6 @@ class LegacyNavigationMessage(AbstractNavigationMessage, GNSSClockElements):
         
         """
         ...
-    def getTGD(self) -> float:
-        """
-            Getter for the Group Delay Differential (s).
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements.getTGD` in
-                interface :class:`~org.orekit.propagation.analytical.gnss.data.GNSSClockElements`
-        
-            Returns:
-                the Group Delay Differential in seconds
-        
-        
-        """
-        ...
     def setFitInterval(self, int: int) -> None:
         """
             Setter for the fit interval.
@@ -5035,126 +7632,555 @@ class LegacyNavigationMessage(AbstractNavigationMessage, GNSSClockElements):
         
         """
         ...
-    def setTGD(self, double: float) -> None:
-        """
-            Setter for the Group Delay Differential (s).
-        
-            Parameters:
-                time (double): the group delay differential to set
-        
-        
-        """
-        ...
 
-class QZSSAlmanac(AbstractAlmanac):
+_FieldGPSCivilianNavigationMessage__T = typing.TypeVar('_FieldGPSCivilianNavigationMessage__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldGPSCivilianNavigationMessage(FieldCivilianNavigationMessage[_FieldGPSCivilianNavigationMessage__T, 'GPSCivilianNavigationMessage'], typing.Generic[_FieldGPSCivilianNavigationMessage__T]):
     """
-    public class QZSSAlmanac extends :class:`~org.orekit.propagation.analytical.gnss.data.AbstractAlmanac`
+    public class FieldGPSCivilianNavigationMessage<T extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.gnss.data.FieldCivilianNavigationMessage`<T, :class:`~org.orekit.propagation.analytical.gnss.data.GPSCivilianNavigationMessage`>
     
-        This class holds a QZSS almanac as read from YUMA files.
+        Container for data contained in a GPS navigation message.
     
         Since:
-            10.0
+            13.0
     """
-    def __init__(self): ...
-    def getHealth(self) -> int:
+    ___init___0__V = typing.TypeVar('___init___0__V', bound=org.hipparchus.CalculusFieldElement)  # <V>
+    @typing.overload
+    def __init__(self, function: typing.Union[java.util.function.Function[___init___0__V, _FieldGPSCivilianNavigationMessage__T], typing.Callable[[___init___0__V], _FieldGPSCivilianNavigationMessage__T]], fieldGPSCivilianNavigationMessage: 'FieldGPSCivilianNavigationMessage'[___init___0__V]): ...
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldGPSCivilianNavigationMessage__T], gPSCivilianNavigationMessage: 'GPSCivilianNavigationMessage'): ...
+    _changeField__U = typing.TypeVar('_changeField__U', bound=org.hipparchus.CalculusFieldElement)  # <U>
+    _changeField__G = typing.TypeVar('_changeField__G', bound=FieldGnssOrbitalElements)  # <G>
+    def changeField(self, function: typing.Union[java.util.function.Function[_FieldGPSCivilianNavigationMessage__T, _changeField__U], typing.Callable[[_FieldGPSCivilianNavigationMessage__T], _changeField__U]]) -> _changeField__G: ...
+    def toNonField(self) -> 'GPSCivilianNavigationMessage':
         """
-            Gets the Health status.
+            Create a non-field version of the instance.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements.toNonField` in
+                class :class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`
         
             Returns:
-                the Health status
-        
-        
-        """
-        ...
-    def getSource(self) -> str:
-        """
-            Gets the source of this QZSS almanac.
-        
-            Returns:
-                the source of this QZSS almanac
-        
-        
-        """
-        ...
-    def setHealth(self, int: int) -> None:
-        """
-            Sets the health status.
-        
-            Parameters:
-                health (int): the health status to set
-        
-        
-        """
-        ...
-    def setSource(self, string: str) -> None:
-        """
-            Sets the source of this GPS almanac.
-        
-            Parameters:
-                source (:class:`~org.orekit.propagation.analytical.gnss.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the source of this GPS almanac
-        
-        
-        """
-        ...
-    def setSqrtA(self, double: float) -> None:
-        """
-            Setter for the Square Root of Semi-Major Axis (m^1/2).
-        
-            In addition, this method set the value of the Semi-Major Axis.
-        
-            Parameters:
-                sqrtA (double): the Square Root of Semi-Major Axis (m^1/2)
+                non-field version of the instance
         
         
         """
         ...
 
-class GPSCivilianNavigationMessage(CivilianNavigationMessage):
+_FieldGPSLegacyNavigationMessage__T = typing.TypeVar('_FieldGPSLegacyNavigationMessage__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldGPSLegacyNavigationMessage(FieldLegacyNavigationMessage[_FieldGPSLegacyNavigationMessage__T, 'GPSLegacyNavigationMessage'], typing.Generic[_FieldGPSLegacyNavigationMessage__T]):
     """
-    public class GPSCivilianNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.CivilianNavigationMessage`
+    public class FieldGPSLegacyNavigationMessage<T extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.gnss.data.FieldLegacyNavigationMessage`<T, :class:`~org.orekit.propagation.analytical.gnss.data.GPSLegacyNavigationMessage`>
+    
+        Container for data contained in a GPS navigation message.
+    
+        Since:
+            13.0
+    """
+    ___init___0__V = typing.TypeVar('___init___0__V', bound=org.hipparchus.CalculusFieldElement)  # <V>
+    @typing.overload
+    def __init__(self, function: typing.Union[java.util.function.Function[___init___0__V, _FieldGPSLegacyNavigationMessage__T], typing.Callable[[___init___0__V], _FieldGPSLegacyNavigationMessage__T]], fieldGPSLegacyNavigationMessage: 'FieldGPSLegacyNavigationMessage'[___init___0__V]): ...
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldGPSLegacyNavigationMessage__T], gPSLegacyNavigationMessage: 'GPSLegacyNavigationMessage'): ...
+    _changeField__U = typing.TypeVar('_changeField__U', bound=org.hipparchus.CalculusFieldElement)  # <U>
+    _changeField__G = typing.TypeVar('_changeField__G', bound=FieldGnssOrbitalElements)  # <G>
+    def changeField(self, function: typing.Union[java.util.function.Function[_FieldGPSLegacyNavigationMessage__T, _changeField__U], typing.Callable[[_FieldGPSLegacyNavigationMessage__T], _changeField__U]]) -> _changeField__G: ...
+    def toNonField(self) -> 'GPSLegacyNavigationMessage':
+        """
+            Create a non-field version of the instance.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements.toNonField` in
+                class :class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`
+        
+            Returns:
+                non-field version of the instance
+        
+        
+        """
+        ...
+
+_FieldNavicL1NVNavigationMessage__T = typing.TypeVar('_FieldNavicL1NVNavigationMessage__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldNavicL1NVNavigationMessage(FieldCivilianNavigationMessage[_FieldNavicL1NVNavigationMessage__T, 'NavICL1NVNavigationMessage'], typing.Generic[_FieldNavicL1NVNavigationMessage__T]):
+    """
+    public class FieldNavicL1NVNavigationMessage<T extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.gnss.data.FieldCivilianNavigationMessage`<T, :class:`~org.orekit.propagation.analytical.gnss.data.NavICL1NVNavigationMessage`>
+    
+        Container for data contained in a NavIC navigation message.
+    
+        Since:
+            13.0
+    """
+    ___init___0__V = typing.TypeVar('___init___0__V', bound=org.hipparchus.CalculusFieldElement)  # <V>
+    @typing.overload
+    def __init__(self, function: typing.Union[java.util.function.Function[___init___0__V, _FieldNavicL1NVNavigationMessage__T], typing.Callable[[___init___0__V], _FieldNavicL1NVNavigationMessage__T]], fieldNavicL1NVNavigationMessage: 'FieldNavicL1NVNavigationMessage'[___init___0__V]): ...
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldNavicL1NVNavigationMessage__T], navICL1NVNavigationMessage: 'NavICL1NVNavigationMessage'): ...
+    _changeField__U = typing.TypeVar('_changeField__U', bound=org.hipparchus.CalculusFieldElement)  # <U>
+    _changeField__G = typing.TypeVar('_changeField__G', bound=FieldGnssOrbitalElements)  # <G>
+    def changeField(self, function: typing.Union[java.util.function.Function[_FieldNavicL1NVNavigationMessage__T, _changeField__U], typing.Callable[[_FieldNavicL1NVNavigationMessage__T], _changeField__U]]) -> _changeField__G: ...
+    def getIscL1DL1P(self) -> _FieldNavicL1NVNavigationMessage__T:
+        """
+            Getter for inter Signal Delay for L1D L1P.
+        
+            Returns:
+                inter signal delay
+        
+        
+        """
+        ...
+    def getIscL1DS(self) -> _FieldNavicL1NVNavigationMessage__T:
+        """
+            Getter for inter Signal Delay for L1D S.
+        
+            Returns:
+                inter signal delay
+        
+        
+        """
+        ...
+    def getIscL1PS(self) -> _FieldNavicL1NVNavigationMessage__T:
+        """
+            Getter for inter Signal Delay for L1P S.
+        
+            Returns:
+                inter signal delay
+        
+        
+        """
+        ...
+    def getIscSL1P(self) -> _FieldNavicL1NVNavigationMessage__T:
+        """
+            Getter for inter Signal Delay for S L1P.
+        
+            Returns:
+                inter signal delay
+        
+        
+        """
+        ...
+    def getReferenceSignalFlag(self) -> int:
+        """
+            Get reference signal flag.
+        
+            Returns:
+                reference signal flag
+        
+        
+        """
+        ...
+    def getTGDSL5(self) -> _FieldNavicL1NVNavigationMessage__T:
+        """
+            Set the estimated group delay differential TGD for S-L5 correction.
+        
+            Returns:
+                estimated group delay differential TGD for S-L3 correction (s)
+        
+        
+        """
+        ...
+    def setIscL1DL1P(self, t: _FieldNavicL1NVNavigationMessage__T) -> None:
+        """
+            Setter for inter Signal Delay for L1D L1P.
+        
+            Parameters:
+                delay (:class:`~org.orekit.propagation.analytical.gnss.data.FieldNavicL1NVNavigationMessage`): delay to set
+        
+        
+        """
+        ...
+    def setIscL1DS(self, t: _FieldNavicL1NVNavigationMessage__T) -> None:
+        """
+            Setter for inter Signal Delay for L1D S.
+        
+            Parameters:
+                delay (:class:`~org.orekit.propagation.analytical.gnss.data.FieldNavicL1NVNavigationMessage`): delay to set
+        
+        
+        """
+        ...
+    def setIscL1PS(self, t: _FieldNavicL1NVNavigationMessage__T) -> None:
+        """
+            Setter for inter Signal Delay for L1P S.
+        
+            Parameters:
+                delay (:class:`~org.orekit.propagation.analytical.gnss.data.FieldNavicL1NVNavigationMessage`): delay to set
+        
+        
+        """
+        ...
+    def setIscSL1P(self, t: _FieldNavicL1NVNavigationMessage__T) -> None:
+        """
+            Setter for inter Signal Delay for S L1P.
+        
+            Parameters:
+                delay (:class:`~org.orekit.propagation.analytical.gnss.data.FieldNavicL1NVNavigationMessage`): delay to set
+        
+        
+        """
+        ...
+    def setReferenceSignalFlag(self, int: int) -> None:
+        """
+            Set reference signal flag.
+        
+            Parameters:
+                referenceSignalFlag (int): reference signal flag
+        
+        
+        """
+        ...
+    def setTGDSL5(self, t: _FieldNavicL1NVNavigationMessage__T) -> None:
+        """
+            Set the estimated group delay differential TGD for S-L5 correction.
+        
+            Parameters:
+                groupDelayDifferential (:class:`~org.orekit.propagation.analytical.gnss.data.FieldNavicL1NVNavigationMessage`): the estimated group delay differential TGD for S-L3 correction (s)
+        
+        
+        """
+        ...
+    def toNonField(self) -> 'NavICL1NVNavigationMessage':
+        """
+            Create a non-field version of the instance.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements.toNonField` in
+                class :class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`
+        
+            Returns:
+                non-field version of the instance
+        
+        
+        """
+        ...
+
+_FieldNavicLegacyNavigationMessage__T = typing.TypeVar('_FieldNavicLegacyNavigationMessage__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldNavicLegacyNavigationMessage(FieldLegacyNavigationMessage[_FieldNavicLegacyNavigationMessage__T, 'NavICLegacyNavigationMessage'], typing.Generic[_FieldNavicLegacyNavigationMessage__T]):
+    """
+    public class FieldNavicLegacyNavigationMessage<T extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.gnss.data.FieldLegacyNavigationMessage`<T, :class:`~org.orekit.propagation.analytical.gnss.data.NavICLegacyNavigationMessage`>
+    
+        Container for data contained in an NavIC navigation message.
+    
+        Since:
+            13.0
+    """
+    ___init___0__V = typing.TypeVar('___init___0__V', bound=org.hipparchus.CalculusFieldElement)  # <V>
+    @typing.overload
+    def __init__(self, function: typing.Union[java.util.function.Function[___init___0__V, _FieldNavicLegacyNavigationMessage__T], typing.Callable[[___init___0__V], _FieldNavicLegacyNavigationMessage__T]], fieldNavicLegacyNavigationMessage: 'FieldNavicLegacyNavigationMessage'[___init___0__V]): ...
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldNavicLegacyNavigationMessage__T], navICLegacyNavigationMessage: 'NavICLegacyNavigationMessage'): ...
+    _changeField__U = typing.TypeVar('_changeField__U', bound=org.hipparchus.CalculusFieldElement)  # <U>
+    _changeField__G = typing.TypeVar('_changeField__G', bound=FieldGnssOrbitalElements)  # <G>
+    def changeField(self, function: typing.Union[java.util.function.Function[_FieldNavicLegacyNavigationMessage__T, _changeField__U], typing.Callable[[_FieldNavicLegacyNavigationMessage__T], _changeField__U]]) -> _changeField__G: ...
+    def toNonField(self) -> 'NavICLegacyNavigationMessage':
+        """
+            Create a non-field version of the instance.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements.toNonField` in
+                class :class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`
+        
+            Returns:
+                non-field version of the instance
+        
+        
+        """
+        ...
+
+_FieldQZSSCivilianNavigationMessage__T = typing.TypeVar('_FieldQZSSCivilianNavigationMessage__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldQZSSCivilianNavigationMessage(FieldCivilianNavigationMessage[_FieldQZSSCivilianNavigationMessage__T, 'QZSSCivilianNavigationMessage'], typing.Generic[_FieldQZSSCivilianNavigationMessage__T]):
+    """
+    public class FieldQZSSCivilianNavigationMessage<T extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.gnss.data.FieldCivilianNavigationMessage`<T, :class:`~org.orekit.propagation.analytical.gnss.data.QZSSCivilianNavigationMessage`>
+    
+        Container for data contained in a QZSS navigation message.
+    
+        Since:
+            13.0
+    """
+    ___init___0__V = typing.TypeVar('___init___0__V', bound=org.hipparchus.CalculusFieldElement)  # <V>
+    @typing.overload
+    def __init__(self, function: typing.Union[java.util.function.Function[___init___0__V, _FieldQZSSCivilianNavigationMessage__T], typing.Callable[[___init___0__V], _FieldQZSSCivilianNavigationMessage__T]], fieldQZSSCivilianNavigationMessage: 'FieldQZSSCivilianNavigationMessage'[___init___0__V]): ...
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldQZSSCivilianNavigationMessage__T], qZSSCivilianNavigationMessage: 'QZSSCivilianNavigationMessage'): ...
+    _changeField__U = typing.TypeVar('_changeField__U', bound=org.hipparchus.CalculusFieldElement)  # <U>
+    _changeField__G = typing.TypeVar('_changeField__G', bound=FieldGnssOrbitalElements)  # <G>
+    def changeField(self, function: typing.Union[java.util.function.Function[_FieldQZSSCivilianNavigationMessage__T, _changeField__U], typing.Callable[[_FieldQZSSCivilianNavigationMessage__T], _changeField__U]]) -> _changeField__G: ...
+    def toNonField(self) -> 'QZSSCivilianNavigationMessage':
+        """
+            Create a non-field version of the instance.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements.toNonField` in
+                class :class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`
+        
+            Returns:
+                non-field version of the instance
+        
+        
+        """
+        ...
+
+_FieldQZSSLegacyNavigationMessage__T = typing.TypeVar('_FieldQZSSLegacyNavigationMessage__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldQZSSLegacyNavigationMessage(FieldLegacyNavigationMessage[_FieldQZSSLegacyNavigationMessage__T, 'QZSSLegacyNavigationMessage'], typing.Generic[_FieldQZSSLegacyNavigationMessage__T]):
+    """
+    public class FieldQZSSLegacyNavigationMessage<T extends :class:`~org.orekit.propagation.analytical.gnss.data.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.analytical.gnss.data.FieldLegacyNavigationMessage`<T, :class:`~org.orekit.propagation.analytical.gnss.data.QZSSLegacyNavigationMessage`>
+    
+        Container for data contained in a QZSS navigation message.
+    
+        Since:
+            13.0
+    """
+    ___init___0__V = typing.TypeVar('___init___0__V', bound=org.hipparchus.CalculusFieldElement)  # <V>
+    @typing.overload
+    def __init__(self, function: typing.Union[java.util.function.Function[___init___0__V, _FieldQZSSLegacyNavigationMessage__T], typing.Callable[[___init___0__V], _FieldQZSSLegacyNavigationMessage__T]], fieldQZSSLegacyNavigationMessage: 'FieldQZSSLegacyNavigationMessage'[___init___0__V]): ...
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldQZSSLegacyNavigationMessage__T], qZSSLegacyNavigationMessage: 'QZSSLegacyNavigationMessage'): ...
+    _changeField__U = typing.TypeVar('_changeField__U', bound=org.hipparchus.CalculusFieldElement)  # <U>
+    _changeField__G = typing.TypeVar('_changeField__G', bound=FieldGnssOrbitalElements)  # <G>
+    def changeField(self, function: typing.Union[java.util.function.Function[_FieldQZSSLegacyNavigationMessage__T, _changeField__U], typing.Callable[[_FieldQZSSLegacyNavigationMessage__T], _changeField__U]]) -> _changeField__G: ...
+    def toNonField(self) -> 'QZSSLegacyNavigationMessage':
+        """
+            Create a non-field version of the instance.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements.toNonField` in
+                class :class:`~org.orekit.propagation.analytical.gnss.data.FieldGnssOrbitalElements`
+        
+            Returns:
+                non-field version of the instance
+        
+        
+        """
+        ...
+
+class GPSCivilianNavigationMessage(CivilianNavigationMessage['GPSCivilianNavigationMessage']):
+    """
+    public class GPSCivilianNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.CivilianNavigationMessage`<:class:`~org.orekit.propagation.analytical.gnss.data.GPSCivilianNavigationMessage`>
     
         Container for data contained in a GPS navigation message.
     
         Since:
             12.0
     """
-    def __init__(self, boolean: bool): ...
+    ___init___1__T = typing.TypeVar('___init___1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def __init__(self, boolean: bool, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    @typing.overload
+    def __init__(self, fieldGPSCivilianNavigationMessage: FieldGPSCivilianNavigationMessage[___init___1__T]): ...
+    _toField__T = typing.TypeVar('_toField__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _toField__F = typing.TypeVar('_toField__F', bound=FieldGnssOrbitalElements)  # <F>
+    def toField(self, field: org.hipparchus.Field[_toField__T]) -> _toField__F: ...
 
-class GPSLegacyNavigationMessage(LegacyNavigationMessage):
+class GPSLegacyNavigationMessage(LegacyNavigationMessage['GPSLegacyNavigationMessage']):
     """
-    public class GPSLegacyNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.LegacyNavigationMessage`
+    public class GPSLegacyNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.LegacyNavigationMessage`<:class:`~org.orekit.propagation.analytical.gnss.data.GPSLegacyNavigationMessage`>
     
         Container for data contained in a GPS navigation message.
     
         Since:
             11.0
     """
-    def __init__(self): ...
+    ___init___0__T = typing.TypeVar('___init___0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def __init__(self, fieldGPSLegacyNavigationMessage: FieldGPSLegacyNavigationMessage[___init___0__T]): ...
+    @typing.overload
+    def __init__(self, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    _toField__T = typing.TypeVar('_toField__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _toField__F = typing.TypeVar('_toField__F', bound=FieldGnssOrbitalElements)  # <F>
+    def toField(self, field: org.hipparchus.Field[_toField__T]) -> _toField__F: ...
 
-class QZSSCivilianNavigationMessage(CivilianNavigationMessage):
+class NavICL1NVNavigationMessage(CivilianNavigationMessage['NavICL1NVNavigationMessage']):
     """
-    public class QZSSCivilianNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.CivilianNavigationMessage`
+    public class NavICL1NVNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.CivilianNavigationMessage`<:class:`~org.orekit.propagation.analytical.gnss.data.NavICL1NVNavigationMessage`>
+    
+        Container for data contained in a NavIC navigation message.
+    
+        Since:
+            13.0
+    """
+    ___init___0__T = typing.TypeVar('___init___0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def __init__(self, fieldNavicL1NVNavigationMessage: FieldNavicL1NVNavigationMessage[___init___0__T]): ...
+    @typing.overload
+    def __init__(self, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    def getIscL1DL1P(self) -> float:
+        """
+            Getter for inter Signal Delay for L1D L1P.
+        
+            Returns:
+                inter signal delay
+        
+        
+        """
+        ...
+    def getIscL1DS(self) -> float:
+        """
+            Getter for inter Signal Delay for L1D S.
+        
+            Returns:
+                inter signal delay
+        
+        
+        """
+        ...
+    def getIscL1PS(self) -> float:
+        """
+            Getter for inter Signal Delay for L1P S.
+        
+            Returns:
+                inter signal delay
+        
+        
+        """
+        ...
+    def getIscSL1P(self) -> float:
+        """
+            Getter for inter Signal Delay for S L1P.
+        
+            Returns:
+                inter signal delay
+        
+        
+        """
+        ...
+    def getReferenceSignalFlag(self) -> int:
+        """
+            Get reference signal flag.
+        
+            Returns:
+                reference signal flag
+        
+        
+        """
+        ...
+    def getTGDSL5(self) -> float:
+        """
+            Set the estimated group delay differential TGD for S-L5 correction.
+        
+            Returns:
+                estimated group delay differential TGD for S-L3 correction (s)
+        
+        
+        """
+        ...
+    def setIscL1DL1P(self, double: float) -> None:
+        """
+            Setter for inter Signal Delay for L1D L1P.
+        
+            Parameters:
+                delay (double): delay to set
+        
+        
+        """
+        ...
+    def setIscL1DS(self, double: float) -> None:
+        """
+            Setter for inter Signal Delay for L1D S.
+        
+            Parameters:
+                delay (double): delay to set
+        
+        
+        """
+        ...
+    def setIscL1PS(self, double: float) -> None:
+        """
+            Setter for inter Signal Delay for L1P S.
+        
+            Parameters:
+                delay (double): delay to set
+        
+        
+        """
+        ...
+    def setIscSL1P(self, double: float) -> None:
+        """
+            Setter for inter Signal Delay for S L1P.
+        
+            Parameters:
+                delay (double): delay to set
+        
+        
+        """
+        ...
+    def setReferenceSignalFlag(self, int: int) -> None:
+        """
+            Set reference signal flag.
+        
+            Parameters:
+                referenceSignalFlag (int): reference signal flag
+        
+        
+        """
+        ...
+    def setTGDSL5(self, double: float) -> None:
+        """
+            Set the estimated group delay differential TGD for S-L5 correction.
+        
+            Parameters:
+                groupDelayDifferential (double): the estimated group delay differential TGD for S-L3 correction (s)
+        
+        
+        """
+        ...
+    _toField__T = typing.TypeVar('_toField__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _toField__F = typing.TypeVar('_toField__F', bound=FieldGnssOrbitalElements)  # <F>
+    def toField(self, field: org.hipparchus.Field[_toField__T]) -> _toField__F: ...
+
+class NavICLegacyNavigationMessage(LegacyNavigationMessage['NavICLegacyNavigationMessage']):
+    """
+    public class NavICLegacyNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.LegacyNavigationMessage`<:class:`~org.orekit.propagation.analytical.gnss.data.NavICLegacyNavigationMessage`>
+    
+        Container for data contained in an NavIC navigation message.
+    
+        Since:
+            11.0
+    """
+    ___init___0__T = typing.TypeVar('___init___0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def __init__(self, fieldNavicLegacyNavigationMessage: FieldNavicLegacyNavigationMessage[___init___0__T]): ...
+    @typing.overload
+    def __init__(self, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    _toField__T = typing.TypeVar('_toField__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _toField__F = typing.TypeVar('_toField__F', bound=FieldGnssOrbitalElements)  # <F>
+    def toField(self, field: org.hipparchus.Field[_toField__T]) -> _toField__F: ...
+
+class QZSSCivilianNavigationMessage(CivilianNavigationMessage['QZSSCivilianNavigationMessage']):
+    """
+    public class QZSSCivilianNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.CivilianNavigationMessage`<:class:`~org.orekit.propagation.analytical.gnss.data.QZSSCivilianNavigationMessage`>
     
         Container for data contained in a QZSS navigation message.
     
         Since:
             12.0
     """
-    def __init__(self, boolean: bool): ...
+    ___init___1__T = typing.TypeVar('___init___1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def __init__(self, boolean: bool, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    @typing.overload
+    def __init__(self, fieldQZSSCivilianNavigationMessage: FieldQZSSCivilianNavigationMessage[___init___1__T]): ...
+    _toField__T = typing.TypeVar('_toField__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _toField__F = typing.TypeVar('_toField__F', bound=FieldGnssOrbitalElements)  # <F>
+    def toField(self, field: org.hipparchus.Field[_toField__T]) -> _toField__F: ...
 
-class QZSSLegacyNavigationMessage(LegacyNavigationMessage):
+class QZSSLegacyNavigationMessage(LegacyNavigationMessage['QZSSLegacyNavigationMessage']):
     """
-    public class QZSSLegacyNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.LegacyNavigationMessage`
+    public class QZSSLegacyNavigationMessage extends :class:`~org.orekit.propagation.analytical.gnss.data.LegacyNavigationMessage`<:class:`~org.orekit.propagation.analytical.gnss.data.QZSSLegacyNavigationMessage`>
     
         Container for data contained in a QZSS navigation message.
     
         Since:
             11.0
     """
-    def __init__(self): ...
+    ___init___0__T = typing.TypeVar('___init___0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def __init__(self, fieldQZSSLegacyNavigationMessage: FieldQZSSLegacyNavigationMessage[___init___0__T]): ...
+    @typing.overload
+    def __init__(self, timeScales: org.orekit.time.TimeScales, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
+    _toField__T = typing.TypeVar('_toField__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _toField__F = typing.TypeVar('_toField__F', bound=FieldGnssOrbitalElements)  # <F>
+    def toField(self, field: org.hipparchus.Field[_toField__T]) -> _toField__F: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.propagation.analytical.gnss.data")``.
 
     AbstractAlmanac: typing.Type[AbstractAlmanac]
@@ -5166,6 +8192,27 @@ class __module_protocol__(typing.Protocol):
     BeidouSatelliteType: typing.Type[BeidouSatelliteType]
     CivilianNavigationMessage: typing.Type[CivilianNavigationMessage]
     CommonGnssData: typing.Type[CommonGnssData]
+    FieldAbstractAlmanac: typing.Type[FieldAbstractAlmanac]
+    FieldAbstractNavigationMessage: typing.Type[FieldAbstractNavigationMessage]
+    FieldBeidouAlmanac: typing.Type[FieldBeidouAlmanac]
+    FieldBeidouCivilianNavigationMessage: typing.Type[FieldBeidouCivilianNavigationMessage]
+    FieldBeidouLegacyNavigationMessage: typing.Type[FieldBeidouLegacyNavigationMessage]
+    FieldCivilianNavigationMessage: typing.Type[FieldCivilianNavigationMessage]
+    FieldCommonGnssData: typing.Type[FieldCommonGnssData]
+    FieldGNSSClockElements: typing.Type[FieldGNSSClockElements]
+    FieldGPSAlmanac: typing.Type[FieldGPSAlmanac]
+    FieldGPSCivilianNavigationMessage: typing.Type[FieldGPSCivilianNavigationMessage]
+    FieldGPSLegacyNavigationMessage: typing.Type[FieldGPSLegacyNavigationMessage]
+    FieldGalileoAlmanac: typing.Type[FieldGalileoAlmanac]
+    FieldGalileoNavigationMessage: typing.Type[FieldGalileoNavigationMessage]
+    FieldGnssOrbitalElements: typing.Type[FieldGnssOrbitalElements]
+    FieldLegacyNavigationMessage: typing.Type[FieldLegacyNavigationMessage]
+    FieldNavICAlmanac: typing.Type[FieldNavICAlmanac]
+    FieldNavicL1NVNavigationMessage: typing.Type[FieldNavicL1NVNavigationMessage]
+    FieldNavicLegacyNavigationMessage: typing.Type[FieldNavicLegacyNavigationMessage]
+    FieldQZSSAlmanac: typing.Type[FieldQZSSAlmanac]
+    FieldQZSSCivilianNavigationMessage: typing.Type[FieldQZSSCivilianNavigationMessage]
+    FieldQZSSLegacyNavigationMessage: typing.Type[FieldQZSSLegacyNavigationMessage]
     GLONASSAlmanac: typing.Type[GLONASSAlmanac]
     GLONASSEphemeris: typing.Type[GLONASSEphemeris]
     GLONASSNavigationMessage: typing.Type[GLONASSNavigationMessage]
@@ -5173,18 +8220,20 @@ class __module_protocol__(typing.Protocol):
     GNSSClockElements: typing.Type[GNSSClockElements]
     GNSSConstants: typing.Type[GNSSConstants]
     GNSSOrbitalElements: typing.Type[GNSSOrbitalElements]
+    GNSSOrbitalElementsDriversProvider: typing.Type[GNSSOrbitalElementsDriversProvider]
     GPSAlmanac: typing.Type[GPSAlmanac]
     GPSCivilianNavigationMessage: typing.Type[GPSCivilianNavigationMessage]
     GPSLegacyNavigationMessage: typing.Type[GPSLegacyNavigationMessage]
     GalileoAlmanac: typing.Type[GalileoAlmanac]
     GalileoNavigationMessage: typing.Type[GalileoNavigationMessage]
-    IRNSSAlmanac: typing.Type[IRNSSAlmanac]
-    IRNSSNavigationMessage: typing.Type[IRNSSNavigationMessage]
     LegacyNavigationMessage: typing.Type[LegacyNavigationMessage]
+    NavICAlmanac: typing.Type[NavICAlmanac]
+    NavICL1NVNavigationMessage: typing.Type[NavICL1NVNavigationMessage]
+    NavICLegacyNavigationMessage: typing.Type[NavICLegacyNavigationMessage]
+    PythonFieldGNSSClockElements: typing.Type[PythonFieldGNSSClockElements]
     PythonSBASOrbitalElements: typing.Type[PythonSBASOrbitalElements]
     QZSSAlmanac: typing.Type[QZSSAlmanac]
     QZSSCivilianNavigationMessage: typing.Type[QZSSCivilianNavigationMessage]
     QZSSLegacyNavigationMessage: typing.Type[QZSSLegacyNavigationMessage]
     SBASNavigationMessage: typing.Type[SBASNavigationMessage]
     SBASOrbitalElements: typing.Type[SBASOrbitalElements]
-    class-use: org.orekit.propagation.analytical.gnss.data.class-use.__module_protocol__

@@ -1,4 +1,10 @@
-import org.orekit.gnss.metric.messages.common.class-use
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import typing
 
 
@@ -398,7 +404,7 @@ class UserRangeAccuracy(AccuracyProvider):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.gnss.metric.messages.common")``.
 
     AccuracyProvider: typing.Type[AccuracyProvider]
@@ -411,4 +417,3 @@ class __module_protocol__(typing.Protocol):
     SignalInSpaceAccuracy: typing.Type[SignalInSpaceAccuracy]
     SsrUpdateInterval: typing.Type[SsrUpdateInterval]
     UserRangeAccuracy: typing.Type[UserRangeAccuracy]
-    class-use: org.orekit.gnss.metric.messages.common.class-use.__module_protocol__

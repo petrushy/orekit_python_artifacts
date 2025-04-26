@@ -1,8 +1,16 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.io
 import java.lang
 import java.util
 import java.util.function
 import java.util.stream
+import jpype
 import org.hipparchus
 import org.hipparchus.analysis.differentiation
 import org.hipparchus.geometry.euclidean.threed
@@ -16,7 +24,6 @@ import org.orekit.orbits
 import org.orekit.propagation
 import org.orekit.propagation.numerical
 import org.orekit.time
-import org.orekit.utils.class-use
 import org.orekit.utils.units
 import typing
 
@@ -65,61 +72,6 @@ class AbsolutePVCoordinatesHermiteInterpolator(org.orekit.time.AbstractTimeInter
         
         """
         ...
-
-class AccurateFormatter:
-    """
-    public class AccurateFormatter extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
-    
-        Formatter used to produce strings from data with high accuracy.
-    
-        When producing test output from computed data, we want the shortest decimal representation of a floating point number
-        that maintains round-trip safety. That is, a correct parser can recover the exact original number.
-    
-        For efficiency, this class uses the
-        :class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.util.RyuDouble?is` algorithm for producing
-        shortest string representation with round-trip safety.
-    
-        Since:
-            11.0
-    """
-    STANDARDIZED_LOCALE: typing.ClassVar[java.util.Locale] = ...
-    """
-    public static final :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is` STANDARDIZED_LOCALE
-    
-        Standardized locale to use, to ensure files can be exchanged without internationalization issues.
-    
-    """
-    @typing.overload
-    @staticmethod
-    def format(double: float) -> str:
-        """
-            Format a double number.
-        
-            Parameters:
-                value (double): number to format
-        
-            Returns:
-                number formatted to full accuracy
-        
-            Format a date.
-        
-            Parameters:
-                year (int): year
-                month (int): month
-                day (int): day
-                hour (int): hour
-                minute (int): minute
-                seconds (double): seconds
-        
-            Returns:
-                date formatted to full accuracy
-        
-        
-        """
-        ...
-    @typing.overload
-    @staticmethod
-    def format(int: int, int2: int, int3: int, int4: int, int5: int, double: float) -> str: ...
 
 class AngularCoordinates(org.orekit.time.TimeShiftable['AngularCoordinates'], java.io.Serializable):
     """
@@ -241,7 +193,7 @@ class AngularCoordinates(org.orekit.time.TimeShiftable['AngularCoordinates'], ja
     @typing.overload
     def applyTo(self, timeStampedPVCoordinates: 'TimeStampedPVCoordinates') -> 'TimeStampedPVCoordinates': ...
     @staticmethod
-    def createFromModifiedRodrigues(doubleArray: typing.List[typing.List[float]]) -> 'AngularCoordinates':
+    def createFromModifiedRodrigues(doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> 'AngularCoordinates':
         """
             Convert a modified Rodrigues vector and derivatives to angular coordinates.
         
@@ -275,7 +227,7 @@ class AngularCoordinates(org.orekit.time.TimeShiftable['AngularCoordinates'], ja
         
         """
         ...
-    def getModifiedRodrigues(self, double: float) -> typing.List[typing.List[float]]:
+    def getModifiedRodrigues(self, double: float) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
             Convert rotation, rate and acceleration to modified Rodrigues vector and derivatives.
         
@@ -355,7 +307,8 @@ class AngularCoordinates(org.orekit.time.TimeShiftable['AngularCoordinates'], ja
         
         """
         ...
-    def shiftedBy(self, double: float) -> 'AngularCoordinates':
+    @typing.overload
+    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> org.orekit.time.TimeShiftable:
         """
             Get a time-shifted state.
         
@@ -375,6 +328,8 @@ class AngularCoordinates(org.orekit.time.TimeShiftable['AngularCoordinates'], ja
         
         """
         ...
+    @typing.overload
+    def shiftedBy(self, double: float) -> 'AngularCoordinates': ...
     def subtractOffset(self, angularCoordinates: 'AngularCoordinates') -> 'AngularCoordinates':
         """
             Subtract an offset from the instance.
@@ -459,7 +414,7 @@ class AngularDerivativesFilter(java.lang.Enum['AngularDerivativesFilter']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['AngularDerivativesFilter']:
+    def values() -> typing.MutableSequence['AngularDerivativesFilter']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -592,7 +547,7 @@ class CartesianDerivativesFilter(java.lang.Enum['CartesianDerivativesFilter']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['CartesianDerivativesFilter']:
+    def values() -> typing.MutableSequence['CartesianDerivativesFilter']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1607,6 +1562,150 @@ class Constants:
     
     """
 
+class DataDictionary(java.io.Serializable):
+    """
+    public class DataDictionary extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    
+        String → Object mapping, for small number of keys.
+    
+        This class is a low overhead for a very small number of keys. It is based on simple array and string comparison. It
+        plays the same role a :code:`Map<String, Object>` but with reduced features and not intended for large number of keys.
+        For such needs the regular :code:`Map<String, Object>` should be preferred.
+    
+        Since:
+            13.0
+    
+        Also see:
+            :class:`~org.orekit.utils.DoubleArrayDictionary`, :meth:`~serialized`
+    """
+    @typing.overload
+    def __init__(self): ...
+    @typing.overload
+    def __init__(self, int: int): ...
+    @typing.overload
+    def __init__(self, dataDictionary: 'DataDictionary'): ...
+    def clear(self) -> None:
+        """
+            Remove all entries.
+        
+        """
+        ...
+    def get(self, string: str) -> typing.Any:
+        """
+            Get the value corresponding to a key.
+        
+            Parameters:
+                key (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): entry key
+        
+            Returns:
+                copy of the value corresponding to the key or null if key not present
+        
+        
+        """
+        ...
+    def getData(self) -> java.util.List['DataDictionary.Entry']: ...
+    def getEntry(self, string: str) -> 'DataDictionary.Entry':
+        """
+            Get a complete entry.
+        
+            Parameters:
+                key (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): entry key
+        
+            Returns:
+                entry with key if it exists, null otherwise
+        
+        
+        """
+        ...
+    def put(self, string: str, object: typing.Any) -> None:
+        """
+            Add an entry.
+        
+            If an entry with the same key already exists, it will be removed first.
+        
+            The new entry is always put at the end.
+        
+            Parameters:
+                key (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): entry key
+                value (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): entry value
+        
+        
+        """
+        ...
+    def putAll(self, dataDictionary: 'DataDictionary') -> None:
+        """
+            Put all the entries from another dictionary.
+        
+            Parameters:
+                dictionary (:class:`~org.orekit.utils.DataDictionary`): dictionary to copy into the instance
+        
+        
+        """
+        ...
+    def putAllDoubles(self, map: typing.Union[java.util.Map[str, typing.Union[typing.List[float], jpype.JArray]], typing.Mapping[str, typing.Union[typing.List[float], jpype.JArray]]]) -> None: ...
+    def remove(self, string: str) -> bool:
+        """
+            Remove an entry.
+        
+            Parameters:
+                key (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): key of the entry to remove
+        
+            Returns:
+                true if an entry has been removed, false if the key was not present
+        
+        
+        """
+        ...
+    def size(self) -> int:
+        """
+            Get the number of dictionary entries.
+        
+            Returns:
+                number of dictionary entries
+        
+        
+        """
+        ...
+    def toDoubleDictionary(self) -> 'DoubleArrayDictionary':
+        """
+            Creates a double values dictionary.
+        
+            Creates a DoubleArrayDictionary with all double[] values contained in the instance.
+        
+            Returns:
+                a double values dictionary
+        
+        
+        """
+        ...
+    def toMap(self) -> java.util.Map[str, typing.Any]: ...
+    @typing.overload
+    def toString(self) -> str:
+        """
+            Get a string representation of the dictionary.
+        
+            This string representation is intended for improving displays in debuggers only.
+        
+            Overrides:
+                :meth:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+        
+            Returns:
+                string representation of the dictionary
+        
+        
+        """
+        ...
+    @typing.overload
+    @staticmethod
+    def toString(map: typing.Union[java.util.Map[str, typing.Any], typing.Mapping[str, typing.Any]]) -> str: ...
+    class Entry(java.io.Serializable):
+        def getKey(self) -> str: ...
+        def getValue(self) -> typing.Any: ...
+        def increment(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
+        def scaledIncrement(self, double: float, entry: 'DoubleArrayDictionary.Entry') -> None: ...
+        def zero(self) -> None: ...
+
 class Differentiation:
     """
     public class Differentiation extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
@@ -1618,7 +1717,7 @@ class Differentiation:
     """
     @typing.overload
     @staticmethod
-    def differentiate(parameterFunction: 'ParameterFunction', int: int, double: float) -> 'ParameterFunction':
+    def differentiate(parameterFunction: typing.Union['ParameterFunction', typing.Callable], int: int, double: float) -> 'ParameterFunction':
         """
             Differentiate a scalar function using finite differences.
         
@@ -1652,7 +1751,7 @@ class Differentiation:
         ...
     @typing.overload
     @staticmethod
-    def differentiate(stateFunction: 'StateFunction', int: int, attitudeProvider: org.orekit.attitudes.AttitudeProvider, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType, double: float, int2: int) -> 'StateJacobian': ...
+    def differentiate(stateFunction: typing.Union['StateFunction', typing.Callable], int: int, attitudeProvider: org.orekit.attitudes.AttitudeProvider, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType, double: float, int2: int) -> 'StateJacobian': ...
 
 class DoubleArrayDictionary(java.io.Serializable):
     """
@@ -1668,14 +1767,14 @@ class DoubleArrayDictionary(java.io.Serializable):
             11.1
     
         Also see:
-            :meth:`~serialized`
+            :class:`~org.orekit.utils.DataDictionary`, :meth:`~serialized`
     """
     @typing.overload
     def __init__(self): ...
     @typing.overload
     def __init__(self, int: int): ...
     @typing.overload
-    def __init__(self, map: typing.Union[java.util.Map[str, typing.List[float]], typing.Mapping[str, typing.List[float]]]): ...
+    def __init__(self, map: typing.Union[java.util.Map[str, typing.Union[typing.List[float], jpype.JArray]], typing.Mapping[str, typing.Union[typing.List[float], jpype.JArray]]]): ...
     @typing.overload
     def __init__(self, doubleArrayDictionary: 'DoubleArrayDictionary'): ...
     def clear(self) -> None:
@@ -1684,7 +1783,7 @@ class DoubleArrayDictionary(java.io.Serializable):
         
         """
         ...
-    def get(self, string: str) -> typing.List[float]:
+    def get(self, string: str) -> typing.MutableSequence[float]:
         """
             Get the value corresponding to a key.
         
@@ -1711,7 +1810,7 @@ class DoubleArrayDictionary(java.io.Serializable):
         
         """
         ...
-    def put(self, string: str, doubleArray: typing.List[float]) -> None:
+    def put(self, string: str, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
             Add an entry.
         
@@ -1727,7 +1826,7 @@ class DoubleArrayDictionary(java.io.Serializable):
         """
         ...
     @typing.overload
-    def putAll(self, map: typing.Union[java.util.Map[str, typing.List[float]], typing.Mapping[str, typing.List[float]]]) -> None:
+    def putAll(self, map: typing.Union[java.util.Map[str, typing.Union[typing.List[float], jpype.JArray]], typing.Mapping[str, typing.Union[typing.List[float], jpype.JArray]]]) -> None:
         """
             Put all the entries from another dictionary.
         
@@ -1762,7 +1861,7 @@ class DoubleArrayDictionary(java.io.Serializable):
         
         """
         ...
-    def toMap(self) -> java.util.Map[str, typing.List[float]]: ...
+    def toMap(self) -> java.util.Map[str, typing.MutableSequence[float]]: ...
     def toString(self) -> str:
         """
             Get a string representation of the dictionary.
@@ -1779,24 +1878,10 @@ class DoubleArrayDictionary(java.io.Serializable):
         
         """
         ...
-    def unmodifiableView(self) -> 'DoubleArrayDictionary':
-        """
-            Get an unmodifiable view of the dictionary.
-        
-            The return dictionary is backed by the original instance and offers :code:`read-only` access to it, but all operations
-            that modify it throw an
-            :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.UnsupportedOperationException?is`.
-        
-            Returns:
-                unmodifiable view of the dictionary
-        
-        
-        """
-        ...
     class Entry(java.io.Serializable):
         def getKey(self) -> str: ...
-        def getValue(self) -> typing.List[float]: ...
-        def increment(self, doubleArray: typing.List[float]) -> None: ...
+        def getValue(self) -> typing.MutableSequence[float]: ...
+        def increment(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
         def scaledIncrement(self, double: float, entry: 'DoubleArrayDictionary.Entry') -> None: ...
         def size(self) -> int: ...
         def zero(self) -> None: ...
@@ -1815,7 +1900,7 @@ class ElevationMask(java.io.Serializable):
         Also see:
             :meth:`~serialized`
     """
-    def __init__(self, doubleArray: typing.List[typing.List[float]]): ...
+    def __init__(self, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]): ...
     def getElevation(self, double: float) -> float:
         """
             Get the interpolated elevation for a given azimuth according to the mask.
@@ -1830,11 +1915,11 @@ class ElevationMask(java.io.Serializable):
         """
         ...
 
-class ExtendedPVCoordinatesProviderAdapter(org.orekit.frames.Frame):
+class ExtendedPositionProviderAdapter(org.orekit.frames.Frame):
     """
-    public class ExtendedPVCoordinatesProviderAdapter extends :class:`~org.orekit.frames.Frame`
+    public class ExtendedPositionProviderAdapter extends :class:`~org.orekit.frames.Frame`
     
-        Adapter from :class:`~org.orekit.utils.ExtendedPVCoordinatesProvider` to :class:`~org.orekit.frames.TransformProvider`.
+        Adapter from :class:`~org.orekit.utils.ExtendedPositionProvider` to :class:`~org.orekit.frames.TransformProvider`.
     
         The transform provider is a simple translation from a defining frame such that the origin of the transformed frame
         corresponds to the moving point.
@@ -1845,9 +1930,9 @@ class ExtendedPVCoordinatesProviderAdapter(org.orekit.frames.Frame):
             12.0
     
         Also see:
-            :class:`~org.orekit.utils.FrameAdapter`, :meth:`~serialized`
+            :class:`~org.orekit.utils.FrameAdapter`
     """
-    def __init__(self, frame: org.orekit.frames.Frame, extendedPVCoordinatesProvider: 'ExtendedPVCoordinatesProvider', string: str): ...
+    def __init__(self, frame: org.orekit.frames.Frame, extendedPositionProvider: typing.Union['ExtendedPositionProvider', typing.Callable], string: str): ...
 
 _FieldAbsolutePVCoordinatesHermiteInterpolator__KK = typing.TypeVar('_FieldAbsolutePVCoordinatesHermiteInterpolator__KK', bound=org.hipparchus.CalculusFieldElement)  # <KK>
 class FieldAbsolutePVCoordinatesHermiteInterpolator(org.orekit.time.AbstractFieldTimeInterpolator['FieldAbsolutePVCoordinates'[_FieldAbsolutePVCoordinatesHermiteInterpolator__KK], _FieldAbsolutePVCoordinatesHermiteInterpolator__KK], typing.Generic[_FieldAbsolutePVCoordinatesHermiteInterpolator__KK]):
@@ -1938,7 +2023,7 @@ class FieldAngularCoordinates(org.orekit.time.FieldTimeShiftable['FieldAngularCo
     def applyTo(self, timeStampedPVCoordinates: 'TimeStampedPVCoordinates') -> 'TimeStampedFieldPVCoordinates'[_FieldAngularCoordinates__T]: ...
     _createFromModifiedRodrigues__T = typing.TypeVar('_createFromModifiedRodrigues__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @staticmethod
-    def createFromModifiedRodrigues(tArray: typing.List[typing.List[_createFromModifiedRodrigues__T]]) -> 'FieldAngularCoordinates'[_createFromModifiedRodrigues__T]:
+    def createFromModifiedRodrigues(tArray: typing.Union[typing.List[typing.MutableSequence[_createFromModifiedRodrigues__T]], jpype.JArray]) -> 'FieldAngularCoordinates'[_createFromModifiedRodrigues__T]:
         """
             Convert a modified Rodrigues vector and derivatives to angular coordinates.
         
@@ -2008,7 +2093,7 @@ class FieldAngularCoordinates(org.orekit.time.FieldTimeShiftable['FieldAngularCo
         
         """
         ...
-    def getModifiedRodrigues(self, double: float) -> typing.List[typing.List[_FieldAngularCoordinates__T]]:
+    def getModifiedRodrigues(self, double: float) -> typing.MutableSequence[typing.MutableSequence[_FieldAngularCoordinates__T]]:
         """
             Convert rotation, rate and acceleration to modified Rodrigues vector and derivatives.
         
@@ -2034,6 +2119,8 @@ class FieldAngularCoordinates(org.orekit.time.FieldTimeShiftable['FieldAngularCo
     def getRotationRate(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldAngularCoordinates__T]: ...
     def revert(self) -> 'FieldAngularCoordinates'[_FieldAngularCoordinates__T]: ...
     def rotationShiftedBy(self, t: _FieldAngularCoordinates__T) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_FieldAngularCoordinates__T]: ...
+    @typing.overload
+    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> _FieldAngularCoordinates__T: ...
     @typing.overload
     def shiftedBy(self, double: float) -> 'FieldAngularCoordinates'[_FieldAngularCoordinates__T]: ...
     @typing.overload
@@ -2072,7 +2159,7 @@ class FieldArrayDictionary(typing.Generic[_FieldArrayDictionary__T]):
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_FieldArrayDictionary__T], int: int): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldArrayDictionary__T], map: typing.Union[java.util.Map[str, typing.List[_FieldArrayDictionary__T]], typing.Mapping[str, typing.List[_FieldArrayDictionary__T]]]): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldArrayDictionary__T], map: typing.Union[java.util.Map[str, typing.Union[typing.List[_FieldArrayDictionary__T], jpype.JArray]], typing.Mapping[str, typing.Union[typing.List[_FieldArrayDictionary__T], jpype.JArray]]]): ...
     @typing.overload
     def __init__(self, fieldArrayDictionary: 'FieldArrayDictionary'[_FieldArrayDictionary__T]): ...
     def clear(self) -> None:
@@ -2081,7 +2168,7 @@ class FieldArrayDictionary(typing.Generic[_FieldArrayDictionary__T]):
         
         """
         ...
-    def get(self, string: str) -> typing.List[_FieldArrayDictionary__T]:
+    def get(self, string: str) -> typing.MutableSequence[_FieldArrayDictionary__T]:
         """
             Get the value corresponding to a key.
         
@@ -2110,7 +2197,7 @@ class FieldArrayDictionary(typing.Generic[_FieldArrayDictionary__T]):
         ...
     def getField(self) -> org.hipparchus.Field[_FieldArrayDictionary__T]: ...
     @typing.overload
-    def put(self, string: str, doubleArray: typing.List[float]) -> None:
+    def put(self, string: str, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
             Add an entry.
         
@@ -2136,9 +2223,9 @@ class FieldArrayDictionary(typing.Generic[_FieldArrayDictionary__T]):
         """
         ...
     @typing.overload
-    def put(self, string: str, tArray: typing.List[_FieldArrayDictionary__T]) -> None: ...
+    def put(self, string: str, tArray: typing.Union[typing.List[_FieldArrayDictionary__T], jpype.JArray]) -> None: ...
     @typing.overload
-    def putAll(self, map: typing.Union[java.util.Map[str, typing.List[_FieldArrayDictionary__T]], typing.Mapping[str, typing.List[_FieldArrayDictionary__T]]]) -> None: ...
+    def putAll(self, map: typing.Union[java.util.Map[str, typing.Union[typing.List[_FieldArrayDictionary__T], jpype.JArray]], typing.Mapping[str, typing.Union[typing.List[_FieldArrayDictionary__T], jpype.JArray]]]) -> None: ...
     @typing.overload
     def putAll(self, fieldArrayDictionary: 'FieldArrayDictionary'[_FieldArrayDictionary__T]) -> None: ...
     def remove(self, string: str) -> bool:
@@ -2164,7 +2251,7 @@ class FieldArrayDictionary(typing.Generic[_FieldArrayDictionary__T]):
         
         """
         ...
-    def toMap(self) -> java.util.Map[str, typing.List[_FieldArrayDictionary__T]]: ...
+    def toMap(self) -> java.util.Map[str, typing.MutableSequence[_FieldArrayDictionary__T]]: ...
     def toString(self) -> str:
         """
             Get a string representation of the dictionary.
@@ -2184,17 +2271,145 @@ class FieldArrayDictionary(typing.Generic[_FieldArrayDictionary__T]):
     def unmodifiableView(self) -> 'FieldArrayDictionary'[_FieldArrayDictionary__T]: ...
     class Entry:
         def getKey(self) -> str: ...
-        def getValue(self) -> typing.List[_FieldArrayDictionary__T]: ...
+        def getValue(self) -> typing.MutableSequence[_FieldArrayDictionary__T]: ...
         @typing.overload
-        def increment(self, doubleArray: typing.List[float]) -> None: ...
+        def increment(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
         @typing.overload
-        def increment(self, tArray: typing.List[_FieldArrayDictionary__T]) -> None: ...
+        def increment(self, tArray: typing.Union[typing.List[_FieldArrayDictionary__T], jpype.JArray]) -> None: ...
         @typing.overload
         def scaledIncrement(self, double: float, fieldArrayDictionary: 'FieldArrayDictionary.Entry') -> None: ...
         @typing.overload
         def scaledIncrement(self, t: _FieldArrayDictionary__T, fieldArrayDictionary: 'FieldArrayDictionary.Entry') -> None: ...
         def size(self) -> int: ...
         def zero(self) -> None: ...
+
+_FieldDataDictionary__T = typing.TypeVar('_FieldDataDictionary__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldDataDictionary(typing.Generic[_FieldDataDictionary__T]):
+    """
+    public class FieldDataDictionary<T extends :class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        String → Object mapping, for small number of keys.
+    
+        This class is a low overhead for a very small number of keys. It is based on simple array and string comparison. It
+        plays the same role a :code:`Map<String, Object>` but with reduced features and not intended for large number of keys.
+        For such needs the regular :code:`Map<String, Object>` should be preferred.
+    
+        Since:
+            13.0
+    
+        Also see:
+            :class:`~org.orekit.utils.FieldArrayDictionary`
+    """
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldDataDictionary__T]): ...
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldDataDictionary__T], int: int): ...
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldDataDictionary__T], map: typing.Union[java.util.Map[str, typing.Any], typing.Mapping[str, typing.Any]]): ...
+    @typing.overload
+    def __init__(self, fieldDataDictionary: 'FieldDataDictionary'[_FieldDataDictionary__T]): ...
+    def clear(self) -> None:
+        """
+            Remove all entries.
+        
+        """
+        ...
+    def get(self, string: str) -> typing.Any:
+        """
+            Get the value corresponding to a key.
+        
+            Parameters:
+                key (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): entry key
+        
+            Returns:
+                copy of the value corresponding to the key or null if key not present
+        
+        
+        """
+        ...
+    def getData(self) -> java.util.List['FieldDataDictionary.Entry']: ...
+    def getEntry(self, string: str) -> 'FieldDataDictionary.Entry':
+        """
+            Get a complete entry.
+        
+            Parameters:
+                key (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): entry key
+        
+            Returns:
+                entry with key if it exists, null otherwise
+        
+        
+        """
+        ...
+    def getField(self) -> org.hipparchus.Field[_FieldDataDictionary__T]: ...
+    def put(self, string: str, object: typing.Any) -> None:
+        """
+            Add an entry.
+        
+            If an entry with the same key already exists, it will be removed first.
+        
+            The new entry is always put at the end.
+        
+            Parameters:
+                key (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): entry key
+                value (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`): entry value
+        
+        
+        """
+        ...
+    @typing.overload
+    def putAll(self, map: typing.Union[java.util.Map[str, typing.Any], typing.Mapping[str, typing.Any]]) -> None: ...
+    @typing.overload
+    def putAll(self, fieldDataDictionary: 'FieldDataDictionary'[_FieldDataDictionary__T]) -> None: ...
+    def putAllFields(self, map: typing.Union[java.util.Map[str, typing.Union[typing.List[_FieldDataDictionary__T], jpype.JArray]], typing.Mapping[str, typing.Union[typing.List[_FieldDataDictionary__T], jpype.JArray]]]) -> None: ...
+    def remove(self, string: str) -> bool:
+        """
+            Remove an entry.
+        
+            Parameters:
+                key (:class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): key of the entry to remove
+        
+            Returns:
+                true if an entry has been removed, false if the key was not present
+        
+        
+        """
+        ...
+    def size(self) -> int:
+        """
+            Get the number of dictionary entries.
+        
+            Returns:
+                number of dictionary entries
+        
+        
+        """
+        ...
+    def toFieldArrayDictionary(self) -> FieldArrayDictionary[_FieldDataDictionary__T]: ...
+    def toMap(self) -> java.util.Map[str, typing.Any]: ...
+    def toString(self) -> str:
+        """
+            Get a string representation of the dictionary.
+        
+            This string representation is intended for improving displays in debuggers only.
+        
+            Overrides:
+                :meth:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+        
+            Returns:
+                string representation of the dictionary
+        
+        
+        """
+        ...
+    class Entry:
+        def getKey(self) -> str: ...
+        def getValue(self) -> typing.Any: ...
+        @typing.overload
+        def scaledIncrement(self, double: float, fieldArrayDictionary: FieldArrayDictionary.Entry) -> None: ...
+        @typing.overload
+        def scaledIncrement(self, t: _FieldDataDictionary__T, fieldArrayDictionary: FieldArrayDictionary.Entry) -> None: ...
 
 _FieldLegendrePolynomials__T = typing.TypeVar('_FieldLegendrePolynomials__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldLegendrePolynomials(typing.Generic[_FieldLegendrePolynomials__T]):
@@ -2326,6 +2541,8 @@ class FieldPVCoordinates(org.orekit.time.FieldTimeShiftable['FieldPVCoordinates'
     def negate(self) -> 'FieldPVCoordinates'[_FieldPVCoordinates__T]: ...
     def normalize(self) -> 'FieldPVCoordinates'[_FieldPVCoordinates__T]: ...
     def positionShiftedBy(self, t: _FieldPVCoordinates__T) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldPVCoordinates__T]: ...
+    @typing.overload
+    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> _FieldPVCoordinates__T: ...
     @typing.overload
     def shiftedBy(self, double: float) -> 'FieldPVCoordinates'[_FieldPVCoordinates__T]: ...
     @typing.overload
@@ -2527,7 +2744,6 @@ class Fieldifier:
     """
     _fieldify_0__T = typing.TypeVar('_fieldify_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _fieldify_1__T = typing.TypeVar('_fieldify_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    _fieldify_2__T = typing.TypeVar('_fieldify_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
     def fieldify(field: org.hipparchus.Field[_fieldify_0__T], realMatrix: org.hipparchus.linear.RealMatrix) -> org.hipparchus.linear.FieldMatrix[_fieldify_0__T]:
@@ -2558,10 +2774,66 @@ class Fieldifier:
         ...
     @typing.overload
     @staticmethod
-    def fieldify(field: org.hipparchus.Field[_fieldify_1__T], orbit: org.orekit.orbits.Orbit) -> org.orekit.orbits.FieldOrbit[_fieldify_1__T]: ...
+    def fieldify(field: org.hipparchus.Field[_fieldify_1__T], stateCovariance: org.orekit.propagation.StateCovariance) -> org.orekit.propagation.FieldStateCovariance[_fieldify_1__T]: ...
+
+class Formatter:
+    """
+    public interface Formatter
+    
+        Formatter used to produce strings from data.
+    
+        Interface for formatters to be passed to generators, dictating how to write doubles and datetime.
+    
+        Since:
+            13.0
+    """
+    STANDARDIZED_LOCALE: typing.ClassVar[java.util.Locale] = ...
+    """
+    static final :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.util.Locale?is` STANDARDIZED_LOCALE
+    
+        Standardized locale to use, to ensure files can be exchanged without internationalization issues.
+    
+    """
+    DATE_FORMAT: typing.ClassVar[str] = ...
+    """
+    static final :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DATE_FORMAT
+    
+        String format used for dates.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
     @typing.overload
-    @staticmethod
-    def fieldify(field: org.hipparchus.Field[_fieldify_2__T], stateCovariance: org.orekit.propagation.StateCovariance) -> org.orekit.propagation.FieldStateCovariance[_fieldify_2__T]: ...
+    def toString(self, double: float) -> str:
+        """
+            Format a double number.
+        
+            Parameters:
+                value (double): number to format
+        
+            Returns:
+                number formatted.
+        
+            Format a date. Does not check if date time is real or if it will meet formating requirements.
+        
+            Parameters:
+                year (int): of date to be formatted
+                month (int): of date to be formatted
+                day (int): of month to be formatted
+                hour (int): to be formatted
+                minute (int): to be formatted
+                seconds (double): and sub-seconds to be formatted
+        
+            Returns:
+                date formatted to match the following format [yyyy-MM-ddTHH:mm:ss.S#]
+        
+        
+        """
+        ...
+    @typing.overload
+    def toString(self, int: int, int2: int, int3: int, int4: int, int5: int, double: float) -> str: ...
 
 class IERSConventions(java.lang.Enum['IERSConventions']):
     """
@@ -2900,7 +3172,7 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
         
         """
         ...
-    def getNominalTidalDisplacement(self) -> typing.List[float]:
+    def getNominalTidalDisplacement(self) -> typing.MutableSequence[float]:
         """
             Get the nominal values of the displacement numbers.
         
@@ -3360,7 +3632,7 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['IERSConventions']:
+    def values() -> typing.MutableSequence['IERSConventions']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -3378,8 +3650,8 @@ class IERSConventions(java.lang.Enum['IERSConventions']):
         """
         ...
     class NutationCorrectionConverter:
-        def toEquinox(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float) -> typing.List[float]: ...
-        def toNonRotating(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float) -> typing.List[float]: ...
+        def toEquinox(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float) -> typing.MutableSequence[float]: ...
+        def toNonRotating(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float) -> typing.MutableSequence[float]: ...
 
 class InterpolationTableLoader(org.orekit.data.DataLoader):
     """
@@ -3388,7 +3660,7 @@ class InterpolationTableLoader(org.orekit.data.DataLoader):
         Used to read an interpolation table from a data file.
     """
     def __init__(self): ...
-    def getAbscissaGrid(self) -> typing.List[float]:
+    def getAbscissaGrid(self) -> typing.MutableSequence[float]:
         """
             Returns a copy of the abscissa grid for the interpolation function.
         
@@ -3398,7 +3670,7 @@ class InterpolationTableLoader(org.orekit.data.DataLoader):
         
         """
         ...
-    def getOrdinateGrid(self) -> typing.List[float]:
+    def getOrdinateGrid(self) -> typing.MutableSequence[float]:
         """
             Returns a copy of the ordinate grid for the interpolation function.
         
@@ -3408,7 +3680,7 @@ class InterpolationTableLoader(org.orekit.data.DataLoader):
         
         """
         ...
-    def getValuesSamples(self) -> typing.List[typing.List[float]]:
+    def getValuesSamples(self) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
             Returns a copy of the values samples for the interpolation function.
         
@@ -3477,7 +3749,7 @@ class LagrangianPoints(java.lang.Enum['LagrangianPoints']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['LagrangianPoints']:
+    def values() -> typing.MutableSequence['LagrangianPoints']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -3535,7 +3807,7 @@ class LoveNumbers(java.io.Serializable):
         Also see:
             :meth:`~serialized`
     """
-    def __init__(self, doubleArray: typing.List[typing.List[float]], doubleArray2: typing.List[typing.List[float]], doubleArray3: typing.List[typing.List[float]]): ...
+    def __init__(self, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray2: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray3: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]): ...
     def getImaginary(self, int: int, int2: int) -> float:
         """
             Get the imaginary part of a nominal Love numbers.
@@ -3610,7 +3882,7 @@ class OccultationEngine:
         Since:
             12.0
     """
-    def __init__(self, extendedPVCoordinatesProvider: 'ExtendedPVCoordinatesProvider', double: float, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid): ...
+    def __init__(self, extendedPositionProvider: typing.Union['ExtendedPositionProvider', typing.Callable], double: float, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid): ...
     _angles_0__T = typing.TypeVar('_angles_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def angles(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_angles_0__T]) -> 'OccultationEngine.FieldOccultationAngles'[_angles_0__T]:
@@ -3639,7 +3911,7 @@ class OccultationEngine:
         
         """
         ...
-    def getOcculted(self) -> 'ExtendedPVCoordinatesProvider':
+    def getOcculted(self) -> 'ExtendedPositionProvider':
         """
             Getter for the occulted body.
         
@@ -3696,6 +3968,23 @@ class OrekitConfiguration:
         """
         ...
     @staticmethod
+    def getOrekitVersion() -> str:
+        """
+            Get Orekit version.
+        
+            The version is automatically retrieved from a properties file generated at maven compilation time. When using an IDE not
+            configured to use maven, then a default value :code:`"unknown"` will be returned.
+        
+            Returns:
+                Orekit version
+        
+            Since:
+                4.0
+        
+        
+        """
+        ...
+    @staticmethod
     def setCacheSlotsNumber(int: int) -> None:
         """
             Set the number of slots to use in caches.
@@ -3707,9 +3996,9 @@ class OrekitConfiguration:
         """
         ...
 
-class PVCoordinates(org.orekit.time.TimeShiftable['PVCoordinates'], org.hipparchus.util.Blendable['PVCoordinates'], java.io.Serializable):
+class PVCoordinates(org.orekit.time.TimeShiftable['PVCoordinates'], org.hipparchus.util.Blendable['PVCoordinates']):
     """
-    public class PVCoordinates extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.utils.PVCoordinates`>, :class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.util.Blendable?is`<:class:`~org.orekit.utils.PVCoordinates`>, :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public class PVCoordinates extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.utils.PVCoordinates`>, :class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.util.Blendable?is`<:class:`~org.orekit.utils.PVCoordinates`>
     
         Simple container for Position/Velocity/Acceleration triplets.
     
@@ -3720,9 +4009,6 @@ class PVCoordinates(org.orekit.time.TimeShiftable['PVCoordinates'], org.hipparch
         This class is the angular counterpart to :class:`~org.orekit.utils.AngularCoordinates`.
     
         Instances of this class are guaranteed to be immutable.
-    
-        Also see:
-            :meth:`~serialized`
     """
     ZERO: typing.ClassVar['PVCoordinates'] = ...
     """
@@ -3889,7 +4175,8 @@ class PVCoordinates(org.orekit.time.TimeShiftable['PVCoordinates'], org.hipparch
         
         """
         ...
-    def shiftedBy(self, double: float) -> 'PVCoordinates':
+    @typing.overload
+    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> org.orekit.time.TimeShiftable:
         """
             Get a time-shifted state.
         
@@ -3909,6 +4196,8 @@ class PVCoordinates(org.orekit.time.TimeShiftable['PVCoordinates'], org.hipparch
         
         """
         ...
+    @typing.overload
+    def shiftedBy(self, double: float) -> 'PVCoordinates': ...
     def toDerivativeStructurePV(self, int: int) -> FieldPVCoordinates[org.hipparchus.analysis.differentiation.DerivativeStructure]: ...
     def toDerivativeStructureVector(self, int: int) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.DerivativeStructure]: ...
     def toString(self) -> str:
@@ -3989,22 +4278,22 @@ class ParameterDriver:
             and a validity period (in sec) for the driver, the :meth:`~org.orekit.utils.ParameterDriver.addSpans` method will cut
             the interval of name and value time span map from start date to date end in several interval of validity period
             duration. This method should not be called on orbital drivers and must be called only once at beginning of the process
-            (for example beginning of orbit determination). **WARNING : In order to ensure converge for orbit determination, the
-            start, end date and driver periodicity must be wisely choosen**. There must be enough measurements on each interval or
-            convergence won't reach or singular matrixes will appear.
+            (for example beginning of orbit determination). **WARNING : In order to ensure convergence for orbit determination, the
+            start, end date and driver periodicity must be wisely chosen**. There must be enough measurements on each interval or
+            convergence won't reach or singular matrices will appear.
           - Active cut calling the :meth:`~org.orekit.utils.ParameterDriver.addSpanAtDate` method. Given a date, the method will cut
             the value and name time span name, in order to have a new span starting at the given date. Can be called several time to
-            cut the time map as wished. **WARNING : In order to ensure converge for orbit determination, if the method is called
-            several time, the start date must be wisely choosen**. There must be enough measurements on each interval or convergence
-            won't reach or singular matrixes will appear.
+            cut the time map as wished. **WARNING : In order to ensure convergence for orbit determination, if the method is called
+            several time, the start date must be wisely chosen**. There must be enough measurements on each interval or convergence
+            won't reach or singular matrices will appear.
     
     
         Several ways exist in order to get a ParameterDriver value at a certain date for parameters having several values on
         several intervals.
     
           - First of all, the step estimation, that is to say, if a value wants to be known at a certain date, the value returned is
-            the one of span beginning corresponding to the date. With this definition a value will be kept all along the span
-            duration and will be the value of the span start.
+            the one of span beginning corresponding to the date. With this definition a value will be kept constant all along the
+            span duration and will be the value at span start.
           - The continuous estimation, that is to say, when a value wants be to known at a date t, the value returned would be a
             linear interpolation between the value at the beginning of the span corresponding to date t and end this span (which is
             also the beginning of next span). NOT IMPLEMENTED FOR NOW
@@ -4012,10 +4301,10 @@ class ParameterDriver:
         Each time the value is set, the physical model will be notified as it will register a
         :class:`~org.orekit.utils.ParameterObserver` for this purpose.
     
-        This design has two major goals. First, it allows an external algorithm to drive internal parameters almost anonymously,
-        as it only needs to get a list of instances of this class, without knowing what they really drive. Second, it allows the
-        physical model to not expose directly setters methods for its parameters. In order to be able to modify the parameter
-        value, the algorithm *must* retrieve a parameter driver.
+        This design has two major goals. First, it allows an external algorithm to drive internal parameters blindly, as it only
+        needs to get a list of instances of this class, without knowing what they really drive. Second, it allows the physical
+        model to not expose directly setters methods for its parameters. In order to be able to modify the parameter value, the
+        algorithm *must* retrieve a parameter driver.
     
         Since:
             8.0
@@ -4220,12 +4509,12 @@ class ParameterDriver:
         
         """
         ...
-    def getTransitionDates(self) -> typing.List[org.orekit.time.AbsoluteDate]:
+    def getTransitionDates(self) -> typing.MutableSequence[org.orekit.time.AbsoluteDate]:
         """
-            Get the dates of the transitions for the drag sensitive models :class:`~org.orekit.utils.TimeSpanMap`.
+            Get the dates of the transitions :class:`~org.orekit.utils.TimeSpanMap`.
         
             Returns:
-                dates of the transitions for the drag sensitive models :class:`~org.orekit.utils.TimeSpanMap`
+                dates of the transitions :class:`~org.orekit.utils.TimeSpanMap`
         
             Since:
                 12.0
@@ -4336,7 +4625,7 @@ class ParameterDriver:
         
         """
         ...
-    def getValues(self) -> typing.List[float]:
+    def getValues(self) -> typing.MutableSequence[float]:
         """
             Get all values of the valueSpanMap in the chronological order.
         
@@ -4601,6 +4890,8 @@ class ParameterDriversProvider:
         Since:
             11.2
     """
+    @staticmethod
+    def findByName(list: java.util.List[ParameterDriver], string: str) -> bool: ...
     def getNbParametersDriversValue(self) -> int:
         """
             Get total number of spans for all the parameters driver.
@@ -4633,7 +4924,7 @@ class ParameterDriversProvider:
     _getParameters_2__T = typing.TypeVar('_getParameters_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _getParameters_3__T = typing.TypeVar('_getParameters_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getParameters(self) -> typing.List[float]:
+    def getParameters(self) -> typing.MutableSequence[float]:
         """
             Get model parameters.
         
@@ -4648,7 +4939,7 @@ class ParameterDriversProvider:
         """
         ...
     @typing.overload
-    def getParameters(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]:
+    def getParameters(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]:
         """
             Get model parameters.
         
@@ -4665,7 +4956,7 @@ class ParameterDriversProvider:
         """
         ...
     @typing.overload
-    def getParameters(self, field: org.hipparchus.Field[_getParameters_2__T]) -> typing.List[_getParameters_2__T]:
+    def getParameters(self, field: org.hipparchus.Field[_getParameters_2__T]) -> typing.MutableSequence[_getParameters_2__T]:
         """
             Get model parameters.
         
@@ -4683,7 +4974,7 @@ class ParameterDriversProvider:
         """
         ...
     @typing.overload
-    def getParameters(self, field: org.hipparchus.Field[_getParameters_3__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getParameters_3__T]) -> typing.List[_getParameters_3__T]:
+    def getParameters(self, field: org.hipparchus.Field[_getParameters_3__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getParameters_3__T]) -> typing.MutableSequence[_getParameters_3__T]:
         """
             Get model parameters.
         
@@ -4703,7 +4994,7 @@ class ParameterDriversProvider:
         ...
     _getParametersAllValues_1__T = typing.TypeVar('_getParametersAllValues_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getParametersAllValues(self) -> typing.List[float]:
+    def getParametersAllValues(self) -> typing.MutableSequence[float]:
         """
             Get model parameters, return a list a all span values of all parameters.
         
@@ -4716,7 +5007,7 @@ class ParameterDriversProvider:
         """
         ...
     @typing.overload
-    def getParametersAllValues(self, field: org.hipparchus.Field[_getParametersAllValues_1__T]) -> typing.List[_getParametersAllValues_1__T]:
+    def getParametersAllValues(self, field: org.hipparchus.Field[_getParametersAllValues_1__T]) -> typing.MutableSequence[_getParametersAllValues_1__T]:
         """
             Get model parameters.
         
@@ -4757,7 +5048,7 @@ class ParameterDriversProvider:
 
 class ParameterFunction:
     """
-    public interface ParameterFunction
+    :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.FunctionalInterface?is` public interface ParameterFunction
     
         Interface representing a scalar function depending on a :class:`~org.orekit.utils.ParameterDriver`.
     
@@ -4944,7 +5235,7 @@ class SecularAndHarmonic:
     
         This class allows conversion from osculating parameters to mean parameters.
     """
-    def __init__(self, int: int, doubleArray: typing.List[float]): ...
+    def __init__(self, int: int, *double: float): ...
     def addPoint(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float) -> None:
         """
             Add a fitting point.
@@ -4976,7 +5267,7 @@ class SecularAndHarmonic:
         
         """
         ...
-    def approximateAsPolynomialOnly(self, int: int, absoluteDate: org.orekit.time.AbsoluteDate, int2: int, int3: int, absoluteDate2: org.orekit.time.AbsoluteDate, absoluteDate3: org.orekit.time.AbsoluteDate, double: float) -> typing.List[float]:
+    def approximateAsPolynomialOnly(self, int: int, absoluteDate: org.orekit.time.AbsoluteDate, int2: int, int3: int, absoluteDate2: org.orekit.time.AbsoluteDate, absoluteDate3: org.orekit.time.AbsoluteDate, double: float) -> typing.MutableSequence[float]:
         """
             Approximate an already fitted model to polynomial only terms.
         
@@ -5011,7 +5302,7 @@ class SecularAndHarmonic:
         
         """
         ...
-    def getFittedParameters(self) -> typing.List[float]:
+    def getFittedParameters(self) -> typing.MutableSequence[float]:
         """
             Get a copy of the last fitted parameters.
         
@@ -5034,7 +5325,7 @@ class SecularAndHarmonic:
         
         """
         ...
-    def getPulsations(self) -> typing.List[float]:
+    def getPulsations(self) -> typing.MutableSequence[float]:
         """
             Get the pulsations of harmonic part.
         
@@ -5157,7 +5448,7 @@ class SecularAndHarmonic:
         
         """
         ...
-    def resetFitting(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float]) -> None:
+    def resetFitting(self, absoluteDate: org.orekit.time.AbsoluteDate, *double: float) -> None:
         """
             Reset fitting.
         
@@ -5243,7 +5534,7 @@ class SortedListTrimmer:
 
 class StateFunction:
     """
-    public interface StateFunction
+    :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.FunctionalInterface?is` public interface StateFunction
     
         Interface representing a vector function depending on :class:`~org.orekit.propagation.SpacecraftState`.
     
@@ -5253,7 +5544,7 @@ class StateFunction:
         Also see:
             :meth:`~org.orekit.utils.Differentiation.differentiate`, :class:`~org.orekit.utils.StateJacobian`
     """
-    def value(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]:
+    def value(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.MutableSequence[float]:
         """
             Evaluate the function.
         
@@ -5269,7 +5560,7 @@ class StateFunction:
 
 class StateJacobian:
     """
-    public interface StateJacobian
+    :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.FunctionalInterface?is` public interface StateJacobian
     
         Interface representing the Jacobian of a vector function depending on :class:`~org.orekit.propagation.SpacecraftState`.
     
@@ -5279,7 +5570,7 @@ class StateJacobian:
         Also see:
             :meth:`~org.orekit.utils.Differentiation.differentiate`, :class:`~org.orekit.utils.StateFunction`
     """
-    def value(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[typing.List[float]]:
+    def value(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
             Evaluate the Jacobian of the function.
         
@@ -5392,6 +5683,7 @@ class TimeSpanMap(typing.Generic[_TimeSpanMap__T]):
         def getSpanBefore(self) -> 'TimeSpanMap.Span'[_TimeSpanMap__Transition__S]: ...
         def next(self) -> 'TimeSpanMap.Transition'[_TimeSpanMap__Transition__S]: ...
         def previous(self) -> 'TimeSpanMap.Transition'[_TimeSpanMap__Transition__S]: ...
+        def resetDate(self, absoluteDate: org.orekit.time.AbsoluteDate, boolean: bool) -> None: ...
 
 class TimeStampedAngularCoordinatesHermiteInterpolator(org.orekit.time.AbstractTimeInterpolator['TimeStampedAngularCoordinates']):
     """
@@ -5642,14 +5934,18 @@ class WaypointPVBuilder:
     public class WaypointPVBuilder extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Builder class, enabling incremental building of an :class:`~org.orekit.utils.PVCoordinatesProvider` instance using
-        waypoints defined on an ellipsoid. Given a series of waypoints (:code:`(date, point)` tuples), build a
-        :class:`~org.orekit.utils.PVCoordinatesProvider` representing the path. The static methods provide implementations for
-        the most common path definitions (cartesian, great-circle, loxodrome). If these methods are insufficient, the public
-        constructor provides a way to customize the path definition. This class connects the path segments using the
-        :class:`~org.orekit.utils.AggregatedPVCoordinatesProvider`. As such, no effort is made to smooth the velocity between
-        segments. While position is unaffected, the velocity may be discontinuous between adjacent time points. Thus, care
-        should be taken when modeling paths with abrupt direction changes (e.g. fast-moving aircraft); understand how the
-        :class:`~org.orekit.utils.PVCoordinatesProvider` will be used in the particular application.
+        waypoints defined on an ellipsoid.
+    
+        Given a series of waypoints (:code:`(date, point)` tuples), build a :class:`~org.orekit.utils.PVCoordinatesProvider`
+        representing the path. The static methods provide implementations for the most common path definitions (cartesian,
+        great-circle, loxodrome). If these methods are insufficient, the public constructor provides a way to customize the path
+        definition.
+    
+        This class connects the path segments using the :class:`~org.orekit.utils.AggregatedPVCoordinatesProvider`. As such, no
+        effort is made to smooth the velocity between segments. While position is unaffected, the velocity may be discontinuous
+        between adjacent time points. Thus, care should be taken when modeling paths with abrupt direction changes (e.g.
+        fast-moving aircraft); understand how the :class:`~org.orekit.utils.PVCoordinatesProvider` will be used in the
+        particular application.
     
         Since:
             11.3
@@ -5718,9 +6014,10 @@ class WaypointPVBuilder:
     @staticmethod
     def greatCircleBuilder(oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid) -> 'WaypointPVBuilder':
         """
-            Construct a waypoint builder interpolating points using a great-circle. The altitude of the intermediate points is
-            linearly interpolated from the bounding waypoints. Extrapolating before the first waypoint or after the last waypoint
-            may result in undefined altitudes.
+            Construct a waypoint builder interpolating points using a great-circle.
+        
+            The altitude of the intermediate points is linearly interpolated from the bounding waypoints. Extrapolating before the
+            first waypoint or after the last waypoint may result in undefined altitudes.
         
             Parameters:
                 body (:class:`~org.orekit.bodies.OneAxisEllipsoid`): the reference ellipsoid on which the waypoints are defined.
@@ -5839,20 +6136,83 @@ class AbstractMultipleShooting(MultipleShooting):
         """
         ...
 
+class AccurateFormatter(Formatter):
+    """
+    public class AccurateFormatter extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.utils.Formatter`
+    
+        Formatter used to produce strings from data with high accuracy.
+    
+        When producing test output from computed data, we want the shortest decimal representation of a floating point number
+        that maintains round-trip safety. That is, a correct parser can recover the exact original number.
+    
+        For efficiency, this class uses the
+        :class:`~org.orekit.utils.https:.www.hipparchus.org.apidocs.org.hipparchus.util.RyuDouble?is` algorithm for producing
+        shortest string representation with round-trip safety.
+    
+        Since:
+            11.0
+    """
+    def __init__(self): ...
+    @typing.overload
+    @staticmethod
+    def format(double: float) -> str: ...
+    @typing.overload
+    @staticmethod
+    def format(int: int, int2: int, int3: int, int4: int, int5: int, double: float) -> str: ...
+    @typing.overload
+    def toString(self) -> str: ...
+    @typing.overload
+    def toString(self, double: float) -> str:
+        """
+            Formats to full accuracy. Format a double number.
+        
+            Specified by:
+                :meth:`~org.orekit.utils.Formatter.toString` in interface :class:`~org.orekit.utils.Formatter`
+        
+            Parameters:
+                value (double): number to format
+        
+            Returns:
+                number formatted.
+        
+            Formats the seconds variable with maximum precision needed. Format a date. Does not check if date time is real or if it
+            will meet formating requirements.
+        
+            Specified by:
+                :meth:`~org.orekit.utils.Formatter.toString` in interface :class:`~org.orekit.utils.Formatter`
+        
+            Parameters:
+                year (int): of date to be formatted
+                month (int): of date to be formatted
+                day (int): of month to be formatted
+                hour (int): to be formatted
+                minute (int): to be formatted
+                seconds (double): and sub-seconds to be formatted
+        
+            Returns:
+                date formatted to match the following format [yyyy-MM-ddTHH:mm:ss.S#]
+        
+        
+        """
+        ...
+    @typing.overload
+    def toString(self, int: int, int2: int, int3: int, int4: int, int5: int, double: float) -> str: ...
+
 class AggregatedPVCoordinatesProvider(PVCoordinatesProvider):
     """
     public class AggregatedPVCoordinatesProvider extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.utils.PVCoordinatesProvider`
     
-        Aggreate multiple :class:`~org.orekit.utils.PVCoordinatesProvider` instances together This can be used to describe an
-        aircraft or surface vehicle.
+        Aggregate multiple :class:`~org.orekit.utils.PVCoordinatesProvider` instances together.
+    
+        This can be used to describe an aircraft or surface vehicle.
     
         Since:
             11.3
     """
     @typing.overload
-    def __init__(self, timeSpanMap: TimeSpanMap[PVCoordinatesProvider]): ...
+    def __init__(self, timeSpanMap: TimeSpanMap[typing.Union[PVCoordinatesProvider, typing.Callable]]): ...
     @typing.overload
-    def __init__(self, timeSpanMap: TimeSpanMap[PVCoordinatesProvider], absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate): ...
+    def __init__(self, timeSpanMap: TimeSpanMap[typing.Union[PVCoordinatesProvider, typing.Callable]], absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate): ...
     def getMaxDate(self) -> org.orekit.time.AbsoluteDate:
         """
             Get the last date of the range.
@@ -5915,9 +6275,9 @@ class AggregatedPVCoordinatesProvider(PVCoordinatesProvider):
         @typing.overload
         def __init__(self): ...
         @typing.overload
-        def __init__(self, pVCoordinatesProvider: PVCoordinatesProvider): ...
-        def addPVProviderAfter(self, absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinatesProvider: PVCoordinatesProvider, boolean: bool) -> 'AggregatedPVCoordinatesProvider.Builder': ...
-        def addPVProviderBefore(self, absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinatesProvider: PVCoordinatesProvider, boolean: bool) -> 'AggregatedPVCoordinatesProvider.Builder': ...
+        def __init__(self, pVCoordinatesProvider: typing.Union[PVCoordinatesProvider, typing.Callable]): ...
+        def addPVProviderAfter(self, absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinatesProvider: typing.Union[PVCoordinatesProvider, typing.Callable], boolean: bool) -> 'AggregatedPVCoordinatesProvider.Builder': ...
+        def addPVProviderBefore(self, absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinatesProvider: typing.Union[PVCoordinatesProvider, typing.Callable], boolean: bool) -> 'AggregatedPVCoordinatesProvider.Builder': ...
         def build(self) -> 'AggregatedPVCoordinatesProvider': ...
         def invalidAfter(self, absoluteDate: org.orekit.time.AbsoluteDate) -> 'AggregatedPVCoordinatesProvider.Builder': ...
         def invalidBefore(self, absoluteDate: org.orekit.time.AbsoluteDate) -> 'AggregatedPVCoordinatesProvider.Builder': ...
@@ -6089,6 +6449,21 @@ class ExtendedPositionProvider(PVCoordinatesProvider):
         ...
     @typing.overload
     def getPosition(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def toExtendedPVCoordinatesProvider(self) -> 'ExtendedPVCoordinatesProvider':
+        """
+            Deprecated.
+            since 13.0. Only there to help transition out.
+            Method to convert as :class:`~org.orekit.utils.ExtendedPVCoordinatesProvider`.
+        
+            Returns:
+                converted object
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
     _toFieldPVCoordinatesProvider__T = typing.TypeVar('_toFieldPVCoordinatesProvider__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     def toFieldPVCoordinatesProvider(self, field: org.hipparchus.Field[_toFieldPVCoordinatesProvider__T]) -> FieldPVCoordinatesProvider[_toFieldPVCoordinatesProvider__T]:
         """
@@ -6137,9 +6512,9 @@ class GenericTimeStampedCache(TimeStampedCache[_GenericTimeStampedCache__T], typ
     
     """
     @typing.overload
-    def __init__(self, int: int, int2: int, double: float, double2: float, timeStampedGenerator: TimeStampedGenerator[_GenericTimeStampedCache__T]): ...
+    def __init__(self, int: int, int2: int, double: float, double2: float, timeStampedGenerator: typing.Union[TimeStampedGenerator[_GenericTimeStampedCache__T], typing.Callable[[org.orekit.time.AbsoluteDate, org.orekit.time.AbsoluteDate], java.util.List[org.orekit.time.TimeStamped]]]): ...
     @typing.overload
-    def __init__(self, int: int, int2: int, double: float, double2: float, timeStampedGenerator: TimeStampedGenerator[_GenericTimeStampedCache__T], double3: float): ...
+    def __init__(self, int: int, int2: int, double: float, double2: float, timeStampedGenerator: typing.Union[TimeStampedGenerator[_GenericTimeStampedCache__T], typing.Callable[[org.orekit.time.AbsoluteDate, org.orekit.time.AbsoluteDate], java.util.List[org.orekit.time.TimeStamped]]], double3: float): ...
     def getEarliest(self) -> _GenericTimeStampedCache__T: ...
     def getEntries(self) -> int:
         """
@@ -6272,14 +6647,11 @@ class ImmutableFieldTimeStampedCache(FieldTimeStampedCache[_ImmutableFieldTimeSt
         suitable when all the cached data is stored in memory. (For example, :class:`~org.orekit.time.UTCScale`) This class then
         provides convenient methods for accessing the data.
     """
-    def __init__(self, int: int, collection: typing.Union[java.util.Collection[_ImmutableFieldTimeStampedCache__T], typing.Sequence[_ImmutableFieldTimeStampedCache__T]]): ...
-    _emptyCache_0__TS = typing.TypeVar('_emptyCache_0__TS', bound=org.orekit.time.FieldTimeStamped)  # <TS>
-    _emptyCache_0__CFE = typing.TypeVar('_emptyCache_0__CFE', bound=org.hipparchus.CalculusFieldElement)  # <CFE>
-    _emptyCache_1__TS = typing.TypeVar('_emptyCache_1__TS', bound=org.orekit.time.FieldTimeStamped)  # <TS>
-    _emptyCache_1__CFE = typing.TypeVar('_emptyCache_1__CFE', bound=org.hipparchus.CalculusFieldElement)  # <CFE>
-    @typing.overload
+    def __init__(self, int: int, collection: typing.Union[java.util.Collection[_ImmutableFieldTimeStampedCache__T], typing.Sequence[_ImmutableFieldTimeStampedCache__T], typing.Set[_ImmutableFieldTimeStampedCache__T]]): ...
+    _emptyCache__TS = typing.TypeVar('_emptyCache__TS', bound=org.orekit.time.FieldTimeStamped)  # <TS>
+    _emptyCache__CFE = typing.TypeVar('_emptyCache__CFE', bound=org.hipparchus.CalculusFieldElement)  # <CFE>
     @staticmethod
-    def emptyCache() -> 'ImmutableFieldTimeStampedCache'[_emptyCache_0__TS, _emptyCache_0__CFE]:
+    def emptyCache() -> 'ImmutableFieldTimeStampedCache'[_emptyCache__TS, _emptyCache__CFE]:
         """
             Get an empty immutable cache.
         
@@ -6292,9 +6664,6 @@ class ImmutableFieldTimeStampedCache(FieldTimeStampedCache[_ImmutableFieldTimeSt
         
         """
         ...
-    @typing.overload
-    @staticmethod
-    def emptyCache(field: org.hipparchus.Field[_emptyCache_1__CFE]) -> 'ImmutableFieldTimeStampedCache'[_emptyCache_1__TS, _emptyCache_1__CFE]: ...
     def getAll(self) -> java.util.List[_ImmutableFieldTimeStampedCache__T]: ...
     def getEarliest(self) -> _ImmutableFieldTimeStampedCache__T:
         """
@@ -6361,7 +6730,7 @@ class ImmutableTimeStampedCache(TimeStampedCache[_ImmutableTimeStampedCache__T],
         suitable when all of the cached data is stored in memory. (For example, :class:`~org.orekit.time.UTCScale`) This class
         then provides convenient methods for accessing the data.
     """
-    def __init__(self, int: int, collection: typing.Union[java.util.Collection[_ImmutableTimeStampedCache__T], typing.Sequence[_ImmutableTimeStampedCache__T]]): ...
+    def __init__(self, int: int, collection: typing.Union[java.util.Collection[_ImmutableTimeStampedCache__T], typing.Sequence[_ImmutableTimeStampedCache__T], typing.Set[_ImmutableTimeStampedCache__T]]): ...
     _emptyCache__TS = typing.TypeVar('_emptyCache__TS', bound=org.orekit.time.TimeStamped)  # <TS>
     @staticmethod
     def emptyCache() -> 'ImmutableTimeStampedCache'[_emptyCache__TS]:
@@ -6457,7 +6826,7 @@ class ParameterDriversList:
             overrides the parameter value).
         
             Warning if a driver is added and a driver with the same name was already added before, they should have the same
-            validity Period to avoid surprises. Whatever, all driver having same name will have their valueSpanMap, nameSpanMap and
+            validity periods to avoid surprises. Whatever, all driver having same name will have their valueSpanMap, nameSpanMap and
             validity period overwritten with the last driver added attributes.
         
             Parameters:
@@ -6624,6 +6993,69 @@ class PythonFieldTimeStampedCache(FieldTimeStampedCache[_PythonFieldTimeStampedC
         
         """
         ...
+
+class PythonFormatter(Formatter):
+    """
+    public class PythonFormatter extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.utils.Formatter`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+    @typing.overload
+    def toString(self) -> str: ...
+    @typing.overload
+    def toString(self, double: float) -> str:
+        """
+            Format a double number.
+        
+            Specified by:
+                :meth:`~org.orekit.utils.Formatter.toString` in interface :class:`~org.orekit.utils.Formatter`
+        
+            Parameters:
+                value (double): number to format
+        
+            Returns:
+                number formatted.
+        
+            Format a date. Does not check if date time is real or if it will meet formating requirements.
+        
+            Specified by:
+                :meth:`~org.orekit.utils.Formatter.toString` in interface :class:`~org.orekit.utils.Formatter`
+        
+            Parameters:
+                year (int): of date to be formatted
+                month (int): of date to be formatted
+                day (int): of month to be formatted
+                hour (int): to be formatted
+                minute (int): to be formatted
+                seconds (double): and sub-seconds to be formatted
+        
+            Returns:
+                date formatted to match the following format [yyyy-MM-ddTHH:mm:ss.S#]
+        
+        
+        """
+        ...
+    @typing.overload
+    def toString(self, int: int, int2: int, int3: int, int4: int, int5: int, double: float) -> str: ...
 
 class PythonMultipleShooting(MultipleShooting):
     """
@@ -6810,7 +7242,7 @@ class PythonStateFunction(StateFunction):
             Part of JCC Python interface to object
         """
         ...
-    def value(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]:
+    def value(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.MutableSequence[float]:
         """
             Evaluate the function.
         
@@ -6852,7 +7284,7 @@ class PythonStateJacobian(StateJacobian):
             Part of JCC Python interface to object
         """
         ...
-    def value(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[typing.List[float]]:
+    def value(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
             Evaluate the Jacobian of the function.
         
@@ -7041,6 +7473,7 @@ class TimeStampedAngularCoordinates(AngularCoordinates, org.orekit.time.TimeStam
         
         """
         ...
+    @typing.overload
     def shiftedBy(self, double: float) -> 'TimeStampedAngularCoordinates':
         """
             Get a time-shifted state.
@@ -7060,9 +7493,28 @@ class TimeStampedAngularCoordinates(AngularCoordinates, org.orekit.time.TimeStam
             Returns:
                 a new state, shifted with respect to the instance (which is immutable)
         
+            Get a time-shifted state.
+        
+            The state can be slightly shifted to close dates. This shift is based on a simple linear model. It is *not* intended as
+            a replacement for proper attitude propagation but should be sufficient for either small time shifts or coarse accuracy.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeShiftable.shiftedBy` in interface :class:`~org.orekit.time.TimeShiftable`
+        
+            Parameters:
+                dt (:class:`~org.orekit.time.TimeOffset`): time shift in seconds
+        
+            Returns:
+                a new state, shifted with respect to the instance (which is immutable)
+        
+            Since:
+                13.0
+        
         
         """
         ...
+    @typing.overload
+    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> 'TimeStampedAngularCoordinates': ...
     def subtractOffset(self, angularCoordinates: AngularCoordinates) -> 'TimeStampedAngularCoordinates':
         """
             Subtract an offset from the instance.
@@ -7120,6 +7572,8 @@ class TimeStampedFieldAngularCoordinates(FieldAngularCoordinates[_TimeStampedFie
     def addOffset(self, fieldAngularCoordinates: FieldAngularCoordinates[_TimeStampedFieldAngularCoordinates__T]) -> 'TimeStampedFieldAngularCoordinates'[_TimeStampedFieldAngularCoordinates__T]: ...
     def getDate(self) -> org.orekit.time.FieldAbsoluteDate[_TimeStampedFieldAngularCoordinates__T]: ...
     def revert(self) -> 'TimeStampedFieldAngularCoordinates'[_TimeStampedFieldAngularCoordinates__T]: ...
+    @typing.overload
+    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> _TimeStampedFieldAngularCoordinates__T: ...
     @typing.overload
     def shiftedBy(self, double: float) -> 'TimeStampedFieldAngularCoordinates'[_TimeStampedFieldAngularCoordinates__T]: ...
     @typing.overload
@@ -7205,6 +7659,8 @@ class TimeStampedFieldPVCoordinates(FieldPVCoordinates[_TimeStampedFieldPVCoordi
     def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_TimeStampedFieldPVCoordinates__T], fieldPVCoordinates: FieldPVCoordinates[_TimeStampedFieldPVCoordinates__T], fieldPVCoordinates2: FieldPVCoordinates[_TimeStampedFieldPVCoordinates__T]): ...
     def getDate(self) -> org.orekit.time.FieldAbsoluteDate[_TimeStampedFieldPVCoordinates__T]: ...
     @typing.overload
+    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> _TimeStampedFieldPVCoordinates__T: ...
+    @typing.overload
     def shiftedBy(self, double: float) -> 'TimeStampedFieldPVCoordinates'[_TimeStampedFieldPVCoordinates__T]: ...
     @typing.overload
     def shiftedBy(self, t: _TimeStampedFieldPVCoordinates__T) -> 'TimeStampedFieldPVCoordinates'[_TimeStampedFieldPVCoordinates__T]: ...
@@ -7261,9 +7717,6 @@ class TimeStampedPVCoordinates(PVCoordinates, org.orekit.time.TimeStamped):
     
         Since:
             7.0
-    
-        Also see:
-            :meth:`~serialized`
     """
     ___init___4__U = typing.TypeVar('___init___4__U', bound=org.hipparchus.analysis.differentiation.Derivative)  # <U>
     @typing.overload
@@ -7297,6 +7750,7 @@ class TimeStampedPVCoordinates(PVCoordinates, org.orekit.time.TimeStamped):
         
         """
         ...
+    @typing.overload
     def shiftedBy(self, double: float) -> 'TimeStampedPVCoordinates':
         """
             Get a time-shifted state.
@@ -7317,9 +7771,29 @@ class TimeStampedPVCoordinates(PVCoordinates, org.orekit.time.TimeStamped):
             Returns:
                 a new state, shifted with respect to the instance (which is immutable)
         
+            Get a time-shifted state.
+        
+            The state can be slightly shifted to close dates. This shift is based on a simple Taylor expansion. It is *not* intended
+            as a replacement for proper orbit propagation (it is not even Keplerian!) but should be sufficient for either small time
+            shifts or coarse accuracy.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeShiftable.shiftedBy` in interface :class:`~org.orekit.time.TimeShiftable`
+        
+            Parameters:
+                dt (:class:`~org.orekit.time.TimeOffset`): time shift
+        
+            Returns:
+                a new state, shifted with respect to the instance (which is immutable)
+        
+            Since:
+                13.0
+        
         
         """
         ...
+    @typing.overload
+    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> 'TimeStampedPVCoordinates': ...
     @typing.overload
     def toString(self) -> str:
         """
@@ -7367,14 +7841,67 @@ class TimeStampedPVCoordinates(PVCoordinates, org.orekit.time.TimeStamped):
         """
         ...
 
-class AbsolutePVCoordinates(TimeStampedPVCoordinates, org.orekit.time.TimeStamped, java.io.Serializable, PVCoordinatesProvider):
+class TruncatedCcsdsFormatter(Formatter):
     """
-    public class AbsolutePVCoordinates extends :class:`~org.orekit.utils.TimeStampedPVCoordinates` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.orekit.utils.PVCoordinatesProvider`
+    public class TruncatedCcsdsFormatter extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.utils.Formatter`
+    
+        Formatter used to produce strings from data that are compliant with CCSDS standards.
+    
+        Formats a double number to achieve CCSDS formatting standards for: OPM, OMM, OEM, or OCM (502.0-B-3 7.5.6), CDM
+        (508.0-B-1 6.3.2.2), TDM (503.0-B-2 4.3.4), and ADM (504.0-B-2 6.8.4.1). This states that the mantissa shall not exceed
+        16 digits.
+    
+        This does NOT ensure round-trip safety. See :class:`~org.orekit.utils.AccurateFormatter` for a formatter that ensures
+        round trip safety.
+    
+        Since:
+            13.0
+    """
+    def __init__(self): ...
+    @typing.overload
+    def toString(self) -> str: ...
+    @typing.overload
+    def toString(self, double: float) -> str:
+        """
+            Format a double number. Formats to CCSDS compliant standards.
+        
+            Specified by:
+                :meth:`~org.orekit.utils.Formatter.toString` in interface :class:`~org.orekit.utils.Formatter`
+        
+            Parameters:
+                value (double): number to format
+        
+            Returns:
+                number formatted to full accuracy or CCSDS standards
+        
+            Formats to CCSDS 16 digit standard for the seconds variable. Format a date. Does not check if date time is real or if it
+            will meet formating requirements.
+        
+            Specified by:
+                :meth:`~org.orekit.utils.Formatter.toString` in interface :class:`~org.orekit.utils.Formatter`
+        
+            Parameters:
+                year (int): of date to be formatted
+                month (int): of date to be formatted
+                day (int): of month to be formatted
+                hour (int): to be formatted
+                minute (int): to be formatted
+                seconds (double): and sub-seconds to be formatted
+        
+            Returns:
+                date formatted to match the following format [yyyy-MM-ddTHH:mm:ss.S#]
+        
+        
+        """
+        ...
+    @typing.overload
+    def toString(self, int: int, int2: int, int3: int, int4: int, int5: int, double: float) -> str: ...
+
+class AbsolutePVCoordinates(TimeStampedPVCoordinates, org.orekit.time.TimeStamped, PVCoordinatesProvider):
+    """
+    public class AbsolutePVCoordinates extends :class:`~org.orekit.utils.TimeStampedPVCoordinates` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.utils.PVCoordinatesProvider`
     
         Position - Velocity - Acceleration linked to a date and a frame.
-    
-        Also see:
-            :meth:`~serialized`
     """
     ___init___0__U = typing.TypeVar('___init___0__U', bound=org.hipparchus.analysis.differentiation.Derivative)  # <U>
     @typing.overload
@@ -7477,6 +8004,7 @@ class AbsolutePVCoordinates(TimeStampedPVCoordinates, org.orekit.time.TimeStampe
         ...
     @typing.overload
     def getPosition(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    @typing.overload
     def shiftedBy(self, double: float) -> 'AbsolutePVCoordinates':
         """
             Get a time-shifted state.
@@ -7498,9 +8026,33 @@ class AbsolutePVCoordinates(TimeStampedPVCoordinates, org.orekit.time.TimeStampe
             Returns:
                 a new state, shifted with respect to the instance (which is immutable)
         
+            Get a time-shifted state.
+        
+            The state can be slightly shifted to close dates. This shift is based on a simple Taylor expansion. It is *not* intended
+            as a replacement for proper orbit propagation (it is not even Keplerian!) but should be sufficient for either small time
+            shifts or coarse accuracy.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeShiftable.shiftedBy` in interface :class:`~org.orekit.time.TimeShiftable`
+        
+            Overrides:
+                :meth:`~org.orekit.utils.TimeStampedPVCoordinates.shiftedBy` in
+                class :class:`~org.orekit.utils.TimeStampedPVCoordinates`
+        
+            Parameters:
+                dt (:class:`~org.orekit.time.TimeOffset`): time shift in seconds
+        
+            Returns:
+                a new state, shifted with respect to the instance (which is immutable)
+        
+            Since:
+                13.0
+        
         
         """
         ...
+    @typing.overload
+    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> 'AbsolutePVCoordinates': ...
     @typing.overload
     def toTaylorProvider(self) -> PVCoordinatesProvider:
         """
@@ -7520,8 +8072,10 @@ class AbsolutePVCoordinates(TimeStampedPVCoordinates, org.orekit.time.TimeStampe
 
 class ExtendedPVCoordinatesProvider(ExtendedPositionProvider):
     """
-    public interface ExtendedPVCoordinatesProvider extends :class:`~org.orekit.utils.ExtendedPositionProvider`
+    :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public interface ExtendedPVCoordinatesProvider extends :class:`~org.orekit.utils.ExtendedPositionProvider`
     
+        Deprecated.
+        since 13.0. Use :class:`~org.orekit.utils.ExtendedPositionProvider` instead.
         Interface for PV coordinates providers that also support fields.
     
         Since:
@@ -7531,6 +8085,7 @@ class ExtendedPVCoordinatesProvider(ExtendedPositionProvider):
     @typing.overload
     def getPVCoordinates(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPVCoordinates_0__T], frame: org.orekit.frames.Frame) -> TimeStampedFieldPVCoordinates[_getPVCoordinates_0__T]:
         """
+            Deprecated.
             Get the :class:`~org.orekit.utils.FieldPVCoordinates` of the body in the selected frame.
         
             Specified by:
@@ -7553,6 +8108,7 @@ class ExtendedPVCoordinatesProvider(ExtendedPositionProvider):
     @typing.overload
     def getPosition(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPosition_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getPosition_0__T]:
         """
+            Deprecated.
             Get the position of the body in the selected frame.
         
             Specified by:
@@ -7631,6 +8187,8 @@ class FieldAbsolutePVCoordinates(TimeStampedFieldPVCoordinates[_FieldAbsolutePVC
     @typing.overload
     def getPosition(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldAbsolutePVCoordinates__T]: ...
     @typing.overload
+    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> _FieldAbsolutePVCoordinates__T: ...
+    @typing.overload
     def shiftedBy(self, double: float) -> 'FieldAbsolutePVCoordinates'[_FieldAbsolutePVCoordinates__T]: ...
     @typing.overload
     def shiftedBy(self, t: _FieldAbsolutePVCoordinates__T) -> 'FieldAbsolutePVCoordinates'[_FieldAbsolutePVCoordinates__T]: ...
@@ -7645,6 +8203,104 @@ class FieldAbsolutePVCoordinates(TimeStampedFieldPVCoordinates[_FieldAbsolutePVC
         """
         ...
     def toTaylorProvider(self) -> FieldPVCoordinatesProvider[_FieldAbsolutePVCoordinates__T]: ...
+
+class FrameAdapter(ExtendedPositionProvider):
+    """
+    public class FrameAdapter extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.utils.ExtendedPositionProvider`
+    
+        Adapter from :class:`~org.orekit.frames.Frame` to :class:`~org.orekit.utils.ExtendedPositionProvider`.
+    
+        The moving point is the origin of the adapted frame.
+    
+        This class is roughly the inverse of :class:`~org.orekit.utils.ExtendedPositionProviderAdapter`
+    
+        Since:
+            12.0
+    
+        Also see:
+            :class:`~org.orekit.utils.ExtendedPositionProviderAdapter`
+    """
+    def __init__(self, frame: org.orekit.frames.Frame): ...
+    _getPVCoordinates_0__T = typing.TypeVar('_getPVCoordinates_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getPVCoordinates(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPVCoordinates_0__T], frame: org.orekit.frames.Frame) -> TimeStampedFieldPVCoordinates[_getPVCoordinates_0__T]:
+        """
+            Get the position-velocity-acceleration in the selected frame.
+        
+            Specified by:
+                :meth:`~org.orekit.utils.ExtendedPositionProvider.getPVCoordinates` in
+                interface :class:`~org.orekit.utils.ExtendedPositionProvider`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
+                frame (:class:`~org.orekit.frames.Frame`): the frame where to define the position
+        
+            Returns:
+                position-velocity-acceleration vector
+        
+        
+        """
+        ...
+    @typing.overload
+    def getPVCoordinates(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> TimeStampedPVCoordinates:
+        """
+            Get the :class:`~org.orekit.utils.PVCoordinates` of the body in the selected frame.
+        
+            Specified by:
+                :meth:`~org.orekit.utils.ExtendedPositionProvider.getPVCoordinates` in
+                interface :class:`~org.orekit.utils.ExtendedPositionProvider`
+        
+            Specified by:
+                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates` in
+                interface :class:`~org.orekit.utils.PVCoordinatesProvider`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                frame (:class:`~org.orekit.frames.Frame`): the frame where to define the position
+        
+            Returns:
+                time-stamped position/velocity of the body (m and m/s)
+        
+        """
+        ...
+    _getPosition_0__T = typing.TypeVar('_getPosition_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getPosition(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPosition_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getPosition_0__T]:
+        """
+            Get the position in the selected frame.
+        
+            Specified by:
+                :meth:`~org.orekit.utils.ExtendedPositionProvider.getPosition` in
+                interface :class:`~org.orekit.utils.ExtendedPositionProvider`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
+                frame (:class:`~org.orekit.frames.Frame`): the frame where to define the position
+        
+            Returns:
+                position
+        
+        
+        """
+        ...
+    @typing.overload
+    def getPosition(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Get the position of the body in the selected frame.
+        
+            Specified by:
+                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPosition` in
+                interface :class:`~org.orekit.utils.PVCoordinatesProvider`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                frame (:class:`~org.orekit.frames.Frame`): the frame where to define the position
+        
+            Returns:
+                position of the body (m and)
+        
+        """
+        ...
 
 class MultipleShooter(AbstractMultipleShooting):
     """
@@ -7666,8 +8322,8 @@ class PythonAbstractMultipleShooting(AbstractMultipleShooting):
     public class PythonAbstractMultipleShooting extends :class:`~org.orekit.utils.AbstractMultipleShooting`
     """
     def __init__(self, list: java.util.List[org.orekit.propagation.SpacecraftState], list2: java.util.List[org.orekit.propagation.numerical.NumericalPropagator], double: float, int: int, boolean: bool, string: str): ...
-    def computeAdditionalConstraints(self, list: java.util.List[org.orekit.propagation.SpacecraftState]) -> typing.List[float]: ...
-    def computeAdditionalJacobianMatrix(self, list: java.util.List[org.orekit.propagation.SpacecraftState]) -> typing.List[typing.List[float]]: ...
+    def computeAdditionalConstraints(self, list: java.util.List[org.orekit.propagation.SpacecraftState]) -> typing.MutableSequence[float]: ...
+    def computeAdditionalJacobianMatrix(self, list: java.util.List[org.orekit.propagation.SpacecraftState]) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     def finalize(self) -> None: ...
     def getAugmentedInitialState(self, int: int) -> org.orekit.propagation.SpacecraftState:
         """
@@ -7755,70 +8411,6 @@ class PythonExtendedPositionProvider(ExtendedPositionProvider):
         """
         ...
 
-class FrameAdapter(ExtendedPVCoordinatesProvider):
-    """
-    public class FrameAdapter extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.utils.ExtendedPVCoordinatesProvider`
-    
-        Adapter from :class:`~org.orekit.frames.Frame` to :class:`~org.orekit.utils.ExtendedPVCoordinatesProvider`.
-    
-        The moving point is the origin of the adapted frame.
-    
-        This class is roughly the inverse of :class:`~org.orekit.utils.ExtendedPVCoordinatesProviderAdapter`
-    
-        Since:
-            12.0
-    
-        Also see:
-            :class:`~org.orekit.utils.ExtendedPVCoordinatesProviderAdapter`
-    """
-    def __init__(self, frame: org.orekit.frames.Frame): ...
-    _getPVCoordinates_0__T = typing.TypeVar('_getPVCoordinates_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def getPVCoordinates(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPVCoordinates_0__T], frame: org.orekit.frames.Frame) -> TimeStampedFieldPVCoordinates[_getPVCoordinates_0__T]:
-        """
-            Get the :class:`~org.orekit.utils.FieldPVCoordinates` of the body in the selected frame.
-        
-            Specified by:
-                :meth:`~org.orekit.utils.ExtendedPositionProvider.getPVCoordinates` in
-                interface :class:`~org.orekit.utils.ExtendedPositionProvider`
-        
-            Specified by:
-                :meth:`~org.orekit.utils.ExtendedPVCoordinatesProvider.getPVCoordinates` in
-                interface :class:`~org.orekit.utils.ExtendedPVCoordinatesProvider`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                frame (:class:`~org.orekit.frames.Frame`): the frame where to define the position
-        
-            Returns:
-                time-stamped position/velocity of the body (m and m/s)
-        
-        
-        """
-        ...
-    @typing.overload
-    def getPVCoordinates(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> TimeStampedPVCoordinates:
-        """
-            Get the :class:`~org.orekit.utils.PVCoordinates` of the body in the selected frame.
-        
-            Specified by:
-                :meth:`~org.orekit.utils.ExtendedPositionProvider.getPVCoordinates` in
-                interface :class:`~org.orekit.utils.ExtendedPositionProvider`
-        
-            Specified by:
-                :meth:`~org.orekit.utils.PVCoordinatesProvider.getPVCoordinates` in
-                interface :class:`~org.orekit.utils.PVCoordinatesProvider`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                frame (:class:`~org.orekit.frames.Frame`): the frame where to define the position
-        
-            Returns:
-                time-stamped position/velocity of the body (m and m/s)
-        
-        """
-        ...
-
 class PythonExtendedPVCoordinatesProvider(ExtendedPVCoordinatesProvider):
     """
     public class PythonExtendedPVCoordinatesProvider extends :class:`~org.orekit.utils.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.utils.ExtendedPVCoordinatesProvider`
@@ -7892,7 +8484,7 @@ class PythonExtendedPVCoordinatesProvider(ExtendedPVCoordinatesProvider):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.utils")``.
 
     AbsolutePVCoordinates: typing.Type[AbsolutePVCoordinates]
@@ -7906,17 +8498,19 @@ class __module_protocol__(typing.Protocol):
     CartesianDerivativesFilter: typing.Type[CartesianDerivativesFilter]
     ConstantPVCoordinatesProvider: typing.Type[ConstantPVCoordinatesProvider]
     Constants: typing.Type[Constants]
+    DataDictionary: typing.Type[DataDictionary]
     DateDriver: typing.Type[DateDriver]
     Differentiation: typing.Type[Differentiation]
     DoubleArrayDictionary: typing.Type[DoubleArrayDictionary]
     ElevationMask: typing.Type[ElevationMask]
     ExtendedPVCoordinatesProvider: typing.Type[ExtendedPVCoordinatesProvider]
-    ExtendedPVCoordinatesProviderAdapter: typing.Type[ExtendedPVCoordinatesProviderAdapter]
     ExtendedPositionProvider: typing.Type[ExtendedPositionProvider]
+    ExtendedPositionProviderAdapter: typing.Type[ExtendedPositionProviderAdapter]
     FieldAbsolutePVCoordinates: typing.Type[FieldAbsolutePVCoordinates]
     FieldAbsolutePVCoordinatesHermiteInterpolator: typing.Type[FieldAbsolutePVCoordinatesHermiteInterpolator]
     FieldAngularCoordinates: typing.Type[FieldAngularCoordinates]
     FieldArrayDictionary: typing.Type[FieldArrayDictionary]
+    FieldDataDictionary: typing.Type[FieldDataDictionary]
     FieldLegendrePolynomials: typing.Type[FieldLegendrePolynomials]
     FieldPVCoordinates: typing.Type[FieldPVCoordinates]
     FieldPVCoordinatesProvider: typing.Type[FieldPVCoordinatesProvider]
@@ -7926,6 +8520,7 @@ class __module_protocol__(typing.Protocol):
     FieldTimeStampedCache: typing.Type[FieldTimeStampedCache]
     FieldTrackingCoordinates: typing.Type[FieldTrackingCoordinates]
     Fieldifier: typing.Type[Fieldifier]
+    Formatter: typing.Type[Formatter]
     FrameAdapter: typing.Type[FrameAdapter]
     GenericTimeStampedCache: typing.Type[GenericTimeStampedCache]
     IERSConventions: typing.Type[IERSConventions]
@@ -7952,6 +8547,7 @@ class __module_protocol__(typing.Protocol):
     PythonExtendedPositionProvider: typing.Type[PythonExtendedPositionProvider]
     PythonFieldPVCoordinatesProvider: typing.Type[PythonFieldPVCoordinatesProvider]
     PythonFieldTimeStampedCache: typing.Type[PythonFieldTimeStampedCache]
+    PythonFormatter: typing.Type[PythonFormatter]
     PythonMultipleShooting: typing.Type[PythonMultipleShooting]
     PythonPVCoordinatesProvider: typing.Type[PythonPVCoordinatesProvider]
     PythonParameterDriversProvider: typing.Type[PythonParameterDriversProvider]
@@ -7978,6 +8574,6 @@ class __module_protocol__(typing.Protocol):
     TimeStampedPVCoordinates: typing.Type[TimeStampedPVCoordinates]
     TimeStampedPVCoordinatesHermiteInterpolator: typing.Type[TimeStampedPVCoordinatesHermiteInterpolator]
     TrackingCoordinates: typing.Type[TrackingCoordinates]
+    TruncatedCcsdsFormatter: typing.Type[TruncatedCcsdsFormatter]
     WaypointPVBuilder: typing.Type[WaypointPVBuilder]
-    class-use: org.orekit.utils.class-use.__module_protocol__
     units: org.orekit.utils.units.__module_protocol__

@@ -1,5 +1,13 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
+import jpype
 import org
 import org.hipparchus.analysis
 import org.hipparchus.filtering.kalman
@@ -8,7 +16,6 @@ import org.hipparchus.filtering.kalman.unscented
 import org.hipparchus.linear
 import org.hipparchus.util
 import org.orekit.estimation.measurements
-import org.orekit.estimation.sequential.class-use
 import org.orekit.frames
 import org.orekit.orbits
 import org.orekit.propagation
@@ -56,6 +63,16 @@ class AbstractKalmanEstimator:
         
             Returns:
                 the list of estimated measurements parameters
+        
+        
+        """
+        ...
+    def getObserver(self) -> 'KalmanObserver':
+        """
+            Get the observer.
+        
+            Returns:
+                the observer
         
         
         """
@@ -110,6 +127,16 @@ class AbstractKalmanEstimator:
         
             Returns:
                 propagator parameters supported by this estimator
+        
+        
+        """
+        ...
+    def setObserver(self, kalmanObserver: typing.Union['KalmanObserver', typing.Callable]) -> None:
+        """
+            Set the observer.
+        
+            Parameters:
+                observer (:class:`~org.orekit.estimation.sequential.KalmanObserver`): the observer
         
         
         """
@@ -210,7 +237,7 @@ class KalmanEstimation:
         
         """
         ...
-    def getCorrectedSpacecraftStates(self) -> typing.List[org.orekit.propagation.SpacecraftState]:
+    def getCorrectedSpacecraftStates(self) -> typing.MutableSequence[org.orekit.propagation.SpacecraftState]:
         """
             Get the corrected spacecraft states.
         
@@ -356,7 +383,7 @@ class KalmanEstimation:
         
         """
         ...
-    def getPredictedSpacecraftStates(self) -> typing.List[org.orekit.propagation.SpacecraftState]:
+    def getPredictedSpacecraftStates(self) -> typing.MutableSequence[org.orekit.propagation.SpacecraftState]:
         """
             Get the predicted spacecraft states.
         
@@ -421,7 +448,7 @@ class KalmanEstimatorBuilder:
         
         """
         ...
-    def decomposer(self, matrixDecomposer: org.hipparchus.linear.MatrixDecomposer) -> 'KalmanEstimatorBuilder':
+    def decomposer(self, matrixDecomposer: typing.Union[org.hipparchus.linear.MatrixDecomposer, typing.Callable]) -> 'KalmanEstimatorBuilder':
         """
             Configure the matrix decomposer.
         
@@ -527,7 +554,7 @@ class KalmanEstimatorUtil:
         ...
     @typing.overload
     @staticmethod
-    def computeInnovationVector(estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any], doubleArray: typing.List[float]) -> org.hipparchus.linear.RealVector:
+    def computeInnovationVector(estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any], doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.linear.RealVector:
         """
             Compute the normalized innovation vector from the given predicted measurement.
         
@@ -581,7 +608,7 @@ class KalmanEstimatorUtil:
         """
         ...
     @staticmethod
-    def filterRelevant(observedMeasurement: org.orekit.estimation.measurements.ObservedMeasurement[typing.Any], spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> typing.List[org.orekit.propagation.SpacecraftState]:
+    def filterRelevant(observedMeasurement: org.orekit.estimation.measurements.ObservedMeasurement[typing.Any], spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> typing.MutableSequence[org.orekit.propagation.SpacecraftState]:
         """
             Filter relevant states for a measurement.
         
@@ -596,7 +623,7 @@ class KalmanEstimatorUtil:
         """
         ...
     @staticmethod
-    def normalizeCovarianceMatrix(realMatrix: org.hipparchus.linear.RealMatrix, doubleArray: typing.List[float]) -> org.hipparchus.linear.RealMatrix:
+    def normalizeCovarianceMatrix(realMatrix: org.hipparchus.linear.RealMatrix, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.linear.RealMatrix:
         """
             Normalize a covariance matrix.
         
@@ -611,7 +638,7 @@ class KalmanEstimatorUtil:
         """
         ...
     @staticmethod
-    def unnormalizeCovarianceMatrix(realMatrix: org.hipparchus.linear.RealMatrix, doubleArray: typing.List[float]) -> org.hipparchus.linear.RealMatrix:
+    def unnormalizeCovarianceMatrix(realMatrix: org.hipparchus.linear.RealMatrix, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.linear.RealMatrix:
         """
             Un-nomalized the covariance matrix.
         
@@ -626,7 +653,7 @@ class KalmanEstimatorUtil:
         """
         ...
     @staticmethod
-    def unnormalizeInnovationCovarianceMatrix(realMatrix: org.hipparchus.linear.RealMatrix, doubleArray: typing.List[float]) -> org.hipparchus.linear.RealMatrix:
+    def unnormalizeInnovationCovarianceMatrix(realMatrix: org.hipparchus.linear.RealMatrix, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.linear.RealMatrix:
         """
             Un-normalize the innovation covariance matrix.
         
@@ -641,7 +668,7 @@ class KalmanEstimatorUtil:
         """
         ...
     @staticmethod
-    def unnormalizeKalmanGainMatrix(realMatrix: org.hipparchus.linear.RealMatrix, doubleArray: typing.List[float], doubleArray2: typing.List[float]) -> org.hipparchus.linear.RealMatrix:
+    def unnormalizeKalmanGainMatrix(realMatrix: org.hipparchus.linear.RealMatrix, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.linear.RealMatrix:
         """
             Un-normalize the Kalman gain matrix.
         
@@ -657,7 +684,7 @@ class KalmanEstimatorUtil:
         """
         ...
     @staticmethod
-    def unnormalizeMeasurementJacobian(realMatrix: org.hipparchus.linear.RealMatrix, doubleArray: typing.List[float], doubleArray2: typing.List[float]) -> org.hipparchus.linear.RealMatrix:
+    def unnormalizeMeasurementJacobian(realMatrix: org.hipparchus.linear.RealMatrix, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.linear.RealMatrix:
         """
             Un-normalize the measurement matrix.
         
@@ -673,7 +700,7 @@ class KalmanEstimatorUtil:
         """
         ...
     @staticmethod
-    def unnormalizeStateTransitionMatrix(realMatrix: org.hipparchus.linear.RealMatrix, doubleArray: typing.List[float]) -> org.hipparchus.linear.RealMatrix:
+    def unnormalizeStateTransitionMatrix(realMatrix: org.hipparchus.linear.RealMatrix, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.linear.RealMatrix:
         """
             Un-nomalized the state transition matrix.
         
@@ -690,7 +717,7 @@ class KalmanEstimatorUtil:
 
 class KalmanObserver:
     """
-    public interface KalmanObserver
+    :class:`~org.orekit.estimation.sequential.https:.docs.oracle.com.javase.8.docs.api.java.lang.FunctionalInterface?is` public interface KalmanObserver
     
         Observer for :class:`~org.orekit.estimation.sequential.KalmanEstimator` estimations.
     
@@ -703,6 +730,16 @@ class KalmanObserver:
     def evaluationPerformed(self, kalmanEstimation: KalmanEstimation) -> None:
         """
             Notification callback after each one of a Kalman filter estimation.
+        
+            Parameters:
+                estimation (:class:`~org.orekit.estimation.sequential.KalmanEstimation`): estimation performed by Kalman estimator
+        
+        
+        """
+        ...
+    def init(self, kalmanEstimation: KalmanEstimation) -> None:
+        """
+            Initialise the observer on the initial state of the filter, before processing the first measurement.
         
             Parameters:
                 estimation (:class:`~org.orekit.estimation.sequential.KalmanEstimation`): estimation performed by Kalman estimator
@@ -767,6 +804,57 @@ class MeasurementDecorator(org.hipparchus.filtering.kalman.Measurement):
         """
         ...
 
+class PhysicalEstimatedState(org.orekit.time.TimeStamped):
+    """
+    public class PhysicalEstimatedState extends :class:`~org.orekit.estimation.sequential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`
+    
+        Container for smoothed states (time, mean and covariance) generated by an
+        :class:`~org.orekit.estimation.sequential.RtsSmoother`.
+    
+        The order of the parameters in the state and covariance are the same as produced by the underlying sequential (Kalman or
+        unscented) estimator.
+    
+        Since:
+            13.0
+    
+        Also see:
+            :class:`~org.orekit.estimation.sequential.RtsSmoother`
+    """
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, realVector: org.hipparchus.linear.RealVector, realMatrix: org.hipparchus.linear.RealMatrix): ...
+    def getCovarianceMatrix(self) -> org.hipparchus.linear.RealMatrix:
+        """
+            Get the covariance matrix in "physical" (not normalised) units.
+        
+            Returns:
+                the state covariance matrix
+        
+        
+        """
+        ...
+    def getDate(self) -> org.orekit.time.AbsoluteDate:
+        """
+            Get the date.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeStamped.getDate` in interface :class:`~org.orekit.time.TimeStamped`
+        
+            Returns:
+                date attached to the object
+        
+        
+        """
+        ...
+    def getState(self) -> org.hipparchus.linear.RealVector:
+        """
+            Get the state in "physical" (not normalised) units.
+        
+            Returns:
+                the state mean
+        
+        
+        """
+        ...
+
 class SemiAnalyticalKalmanEstimatorBuilder:
     """
     public class SemiAnalyticalKalmanEstimatorBuilder extends :class:`~org.orekit.estimation.sequential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
@@ -807,7 +895,7 @@ class SemiAnalyticalKalmanEstimatorBuilder:
         
         """
         ...
-    def decomposer(self, matrixDecomposer: org.hipparchus.linear.MatrixDecomposer) -> 'SemiAnalyticalKalmanEstimatorBuilder':
+    def decomposer(self, matrixDecomposer: typing.Union[org.hipparchus.linear.MatrixDecomposer, typing.Callable]) -> 'SemiAnalyticalKalmanEstimatorBuilder':
         """
             Configure the matrix decomposer.
         
@@ -1002,7 +1090,7 @@ class SemiAnalyticalUnscentedKalmanEstimatorBuilder:
         
         """
         ...
-    def decomposer(self, matrixDecomposer: org.hipparchus.linear.MatrixDecomposer) -> 'SemiAnalyticalUnscentedKalmanEstimatorBuilder':
+    def decomposer(self, matrixDecomposer: typing.Union[org.hipparchus.linear.MatrixDecomposer, typing.Callable]) -> 'SemiAnalyticalUnscentedKalmanEstimatorBuilder':
         """
             Configure the matrix decomposer.
         
@@ -1106,7 +1194,7 @@ class UnscentedKalmanEstimatorBuilder:
         
         """
         ...
-    def decomposer(self, matrixDecomposer: org.hipparchus.linear.MatrixDecomposer) -> 'UnscentedKalmanEstimatorBuilder':
+    def decomposer(self, matrixDecomposer: typing.Union[org.hipparchus.linear.MatrixDecomposer, typing.Callable]) -> 'UnscentedKalmanEstimatorBuilder':
         """
             Configure the matrix decomposer.
         
@@ -1242,7 +1330,7 @@ class KalmanEstimator(AbstractKalmanEstimator):
         Since:
             9.2
     """
-    def estimationStep(self, observedMeasurement: org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]) -> typing.List[org.orekit.propagation.Propagator]:
+    def estimationStep(self, observedMeasurement: org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]) -> typing.MutableSequence[org.orekit.propagation.Propagator]:
         """
             Process a single measurement.
         
@@ -1257,23 +1345,13 @@ class KalmanEstimator(AbstractKalmanEstimator):
         
         """
         ...
-    def processMeasurements(self, iterable: java.lang.Iterable[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]]) -> typing.List[org.orekit.propagation.Propagator]: ...
-    def setObserver(self, kalmanObserver: KalmanObserver) -> None:
-        """
-            Set the observer.
-        
-            Parameters:
-                observer (:class:`~org.orekit.estimation.sequential.KalmanObserver`): the observer
-        
-        
-        """
-        ...
+    def processMeasurements(self, iterable: typing.Union[java.lang.Iterable[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], typing.Sequence[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], typing.Set[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], typing.Callable[[], java.util.Iterator[typing.Any]]]) -> typing.MutableSequence[org.orekit.propagation.Propagator]: ...
 
 class PythonAbstractKalmanEstimator(AbstractKalmanEstimator):
     """
     public class PythonAbstractKalmanEstimator extends :class:`~org.orekit.estimation.sequential.AbstractKalmanEstimator`
     """
-    def __init__(self, list: java.util.List[org.orekit.propagation.conversion.PropagatorBuilder]): ...
+    def __init__(self, matrixDecomposer: typing.Union[org.hipparchus.linear.MatrixDecomposer, typing.Callable], list: java.util.List[org.orekit.propagation.conversion.PropagatorBuilder]): ...
     def finalize(self) -> None: ...
     def getKalmanEstimation(self) -> KalmanEstimation:
         """
@@ -1286,6 +1364,21 @@ class PythonAbstractKalmanEstimator(AbstractKalmanEstimator):
         
             Returns:
                 the provider for Kalman filter estimations
+        
+        
+        """
+        ...
+    def getKalmanFilter(self) -> org.hipparchus.filtering.kalman.KalmanFilter[MeasurementDecorator]: ...
+    def getScale(self) -> typing.MutableSequence[float]:
+        """
+            Get the parameter scaling factors.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.sequential.AbstractKalmanEstimator.getScale` in
+                class :class:`~org.orekit.estimation.sequential.AbstractKalmanEstimator`
+        
+            Returns:
+                the parameters scale
         
         
         """
@@ -1428,7 +1521,7 @@ class PythonKalmanEstimation(KalmanEstimation):
         
         """
         ...
-    def getCorrectedSpacecraftStates(self) -> typing.List[org.orekit.propagation.SpacecraftState]:
+    def getCorrectedSpacecraftStates(self) -> typing.MutableSequence[org.orekit.propagation.SpacecraftState]:
         """
             Get the corrected spacecraft states.
         
@@ -1626,7 +1719,7 @@ class PythonKalmanEstimation(KalmanEstimation):
         
         """
         ...
-    def getPredictedSpacecraftStates(self) -> typing.List[org.orekit.propagation.SpacecraftState]:
+    def getPredictedSpacecraftStates(self) -> typing.MutableSequence[org.orekit.propagation.SpacecraftState]:
         """
             Get the predicted spacecraft states.
         
@@ -1817,6 +1910,95 @@ class PythonSemiAnalyticalProcess(SemiAnalyticalProcess):
         """
         ...
 
+class RtsSmoother(KalmanObserver):
+    """
+    public class RtsSmoother extends :class:`~org.orekit.estimation.sequential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.sequential.KalmanObserver`
+    
+        Perform an RTS (Rauch-Tung-Striebel) smoothing step over results from a sequential estimator.
+    
+        The Kalman and Unscented sequential estimators produce a state (mean and covariance) after processing each measurement.
+        This state is a statistical summary of all the information provided to the filter, from the measurements and model of
+        the spacecraft motion, up until the latest measurement. A smoother produces estimates that are summaries of information
+        over *all* measurements, both past and future.
+    
+        For example, if a filter processes measurements from time 1 to 10, then the filter state at time 5 uses measurement
+        information up to time 5, while the smoother state at time 5 uses measurement information from the entire interval,
+        times 1 to 10. This typically results in more accurate estimates, with more information reducing the uncertainty.
+    
+        This smoother is implemented using the :class:`~org.orekit.estimation.sequential.KalmanObserver` mechanism. The smoother
+        collects data from the forward estimation over the measurements, then applies a backward pass to calculate the smoothed
+        estimates. Smoothed estimates are collected into a list of
+        :class:`~org.orekit.estimation.sequential.PhysicalEstimatedState`, containing a timestamp, mean and covariance over all
+        estimated parameters (orbital, propagation and measurement). The order of the parameters in these states is the same as
+        the underlying sequential estimator, for example from a call to
+        :meth:`~org.orekit.estimation.sequential.AbstractKalmanEstimator.getPhysicalEstimatedState`.
+    
+        The smoother is compatible with the Kalman and Unscented sequential estimators, but does not support the semi-analytical
+        equivalents.
+    
+        The following code snippet demonstrates how to attach the smoother to a filter and retrieve smoothed states:
+    
+        .. code-block: java
+        
+             // Build the Kalman filter
+             final KalmanEstimator kalmanEstimator = new KalmanEstimatorBuilder().
+                 addPropagationConfiguration(propagatorBuilder, new ConstantProcessNoise(initialP, Q)).
+                 build();
+        
+             // Add smoother observer to filter
+             final RtsSmoother rtsSmoother = new RtsSmoother(kalmanEstimator);
+             kalmanEstimator.setObserver(rtsSmoother);
+        
+             // Perform forward filtering over the measurements
+             Propagator[] estimated = kalmanEstimator.processMeasurements(measurements);
+        
+             // Perform backwards smoothing and collect the results
+             rtsSmoother.backwardsSmooth();
+         
+    
+        Note that the smoother stores data from every filter step, leading to high memory usage for long-duration runs with
+        numerous measurements.
+    
+        Since:
+            13.0
+    
+        Also see:
+            :class:`~org.orekit.estimation.sequential.KalmanEstimatorBuilder`,
+            :class:`~org.orekit.estimation.sequential.UnscentedKalmanEstimatorBuilder`, "Särkkä S. Bayesian Filtering and
+            Smoothing. Cambridge University Press, 2013."
+    """
+    def __init__(self, abstractKalmanEstimator: AbstractKalmanEstimator): ...
+    def backwardsSmooth(self) -> java.util.List[PhysicalEstimatedState]: ...
+    def evaluationPerformed(self, kalmanEstimation: KalmanEstimation) -> None:
+        """
+            Notification callback after each one of a Kalman filter estimation. This accumulates the filter states as the sequential
+            estimator processes measurements.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.sequential.KalmanObserver.evaluationPerformed` in
+                interface :class:`~org.orekit.estimation.sequential.KalmanObserver`
+        
+            Parameters:
+                estimation (:class:`~org.orekit.estimation.sequential.KalmanEstimation`): estimation performed by Kalman estimator
+        
+        
+        """
+        ...
+    def init(self, kalmanEstimation: KalmanEstimation) -> None:
+        """
+            Initialise the observer on the initial state of the filter, before processing the first measurement.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.sequential.KalmanObserver.init` in
+                interface :class:`~org.orekit.estimation.sequential.KalmanObserver`
+        
+            Parameters:
+                estimation (:class:`~org.orekit.estimation.sequential.KalmanEstimation`): estimation performed by Kalman estimator
+        
+        
+        """
+        ...
+
 class SemiAnalyticalKalmanEstimator(AbstractKalmanEstimator):
     """
     public class SemiAnalyticalKalmanEstimator extends :class:`~org.orekit.estimation.sequential.AbstractKalmanEstimator`
@@ -1855,11 +2037,29 @@ class SemiAnalyticalKalmanEstimator(AbstractKalmanEstimator):
             Semi-analytical Approach for Orbit Determination based on Extended Kalman Filter, AAS Paper 21-614, AAS/AIAA
             Astrodynamics Specialist Conference, Big Sky, August 2021."
     """
-    def __init__(self, matrixDecomposer: org.hipparchus.linear.MatrixDecomposer, dSSTPropagatorBuilder: org.orekit.propagation.conversion.DSSTPropagatorBuilder, covarianceMatrixProvider: CovarianceMatrixProvider, parameterDriversList: org.orekit.utils.ParameterDriversList, covarianceMatrixProvider2: CovarianceMatrixProvider): ...
-    def processMeasurements(self, list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]]) -> org.orekit.propagation.semianalytical.dsst.DSSTPropagator: ...
-    def setObserver(self, kalmanObserver: KalmanObserver) -> None:
+    def __init__(self, matrixDecomposer: typing.Union[org.hipparchus.linear.MatrixDecomposer, typing.Callable], dSSTPropagatorBuilder: org.orekit.propagation.conversion.DSSTPropagatorBuilder, covarianceMatrixProvider: CovarianceMatrixProvider, parameterDriversList: org.orekit.utils.ParameterDriversList, covarianceMatrixProvider2: CovarianceMatrixProvider): ...
+    def getObserver(self) -> KalmanObserver:
         """
-            Set the observer.
+            Get the observer..
+        
+            Overrides:
+                :meth:`~org.orekit.estimation.sequential.AbstractKalmanEstimator.getObserver` in
+                class :class:`~org.orekit.estimation.sequential.AbstractKalmanEstimator`
+        
+            Returns:
+                the observer
+        
+        
+        """
+        ...
+    def processMeasurements(self, list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]]) -> org.orekit.propagation.semianalytical.dsst.DSSTPropagator: ...
+    def setObserver(self, kalmanObserver: typing.Union[KalmanObserver, typing.Callable]) -> None:
+        """
+            Set the observer..
+        
+            Overrides:
+                :meth:`~org.orekit.estimation.sequential.AbstractKalmanEstimator.setObserver` in
+                class :class:`~org.orekit.estimation.sequential.AbstractKalmanEstimator`
         
             Parameters:
                 observer (:class:`~org.orekit.estimation.sequential.KalmanObserver`): the observer
@@ -1925,7 +2125,7 @@ class SemiAnalyticalKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalma
         
         """
         ...
-    def getCorrectedSpacecraftStates(self) -> typing.List[org.orekit.propagation.SpacecraftState]:
+    def getCorrectedSpacecraftStates(self) -> typing.MutableSequence[org.orekit.propagation.SpacecraftState]:
         """
             Get the corrected spacecraft states.
         
@@ -2167,7 +2367,7 @@ class SemiAnalyticalKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalma
         
         """
         ...
-    def getPredictedSpacecraftStates(self) -> typing.List[org.orekit.propagation.SpacecraftState]:
+    def getPredictedSpacecraftStates(self) -> typing.MutableSequence[org.orekit.propagation.SpacecraftState]:
         """
             Get the predicted spacecraft states.
         
@@ -2196,7 +2396,7 @@ class SemiAnalyticalKalmanModel(KalmanEstimation, org.hipparchus.filtering.kalma
         """
         ...
     def processMeasurements(self, list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], extendedKalmanFilter: org.hipparchus.filtering.kalman.extended.ExtendedKalmanFilter[MeasurementDecorator]) -> org.orekit.propagation.semianalytical.dsst.DSSTPropagator: ...
-    def setObserver(self, kalmanObserver: KalmanObserver) -> None:
+    def setObserver(self, kalmanObserver: typing.Union[KalmanObserver, typing.Callable]) -> None:
         """
             Set the observer.
         
@@ -2281,10 +2481,28 @@ class SemiAnalyticalUnscentedKalmanEstimator(AbstractKalmanEstimator):
         Since:
             11.3
     """
-    def processMeasurements(self, list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]]) -> org.orekit.propagation.semianalytical.dsst.DSSTPropagator: ...
-    def setObserver(self, kalmanObserver: KalmanObserver) -> None:
+    def getObserver(self) -> KalmanObserver:
         """
-            Set the observer.
+            Get the observer..
+        
+            Overrides:
+                :meth:`~org.orekit.estimation.sequential.AbstractKalmanEstimator.getObserver` in
+                class :class:`~org.orekit.estimation.sequential.AbstractKalmanEstimator`
+        
+            Returns:
+                the observer
+        
+        
+        """
+        ...
+    def processMeasurements(self, list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]]) -> org.orekit.propagation.semianalytical.dsst.DSSTPropagator: ...
+    def setObserver(self, kalmanObserver: typing.Union[KalmanObserver, typing.Callable]) -> None:
+        """
+            Set the observer..
+        
+            Overrides:
+                :meth:`~org.orekit.estimation.sequential.AbstractKalmanEstimator.setObserver` in
+                class :class:`~org.orekit.estimation.sequential.AbstractKalmanEstimator`
         
             Parameters:
                 observer (:class:`~org.orekit.estimation.sequential.KalmanObserver`): the observer
@@ -2345,7 +2563,7 @@ class SemiAnalyticalUnscentedKalmanModel(KalmanEstimation, org.hipparchus.filter
         
         """
         ...
-    def getCorrectedSpacecraftStates(self) -> typing.List[org.orekit.propagation.SpacecraftState]:
+    def getCorrectedSpacecraftStates(self) -> typing.MutableSequence[org.orekit.propagation.SpacecraftState]:
         """
             Get the corrected spacecraft states.
         
@@ -2454,7 +2672,7 @@ class SemiAnalyticalUnscentedKalmanModel(KalmanEstimation, org.hipparchus.filter
         
         """
         ...
-    def getEvolution(self, double: float, realVectorArray: typing.List[org.hipparchus.linear.RealVector], measurementDecorator: MeasurementDecorator) -> org.hipparchus.filtering.kalman.unscented.UnscentedEvolution:
+    def getEvolution(self, double: float, realVectorArray: typing.Union[typing.List[org.hipparchus.linear.RealVector], jpype.JArray], measurementDecorator: MeasurementDecorator) -> org.hipparchus.filtering.kalman.unscented.UnscentedEvolution:
         """
         
             Specified by:
@@ -2622,7 +2840,7 @@ class SemiAnalyticalUnscentedKalmanModel(KalmanEstimation, org.hipparchus.filter
         
         """
         ...
-    def getPredictedMeasurements(self, realVectorArray: typing.List[org.hipparchus.linear.RealVector], measurementDecorator: MeasurementDecorator) -> typing.List[org.hipparchus.linear.RealVector]:
+    def getPredictedMeasurements(self, realVectorArray: typing.Union[typing.List[org.hipparchus.linear.RealVector], jpype.JArray], measurementDecorator: MeasurementDecorator) -> typing.MutableSequence[org.hipparchus.linear.RealVector]:
         """
         
             Specified by:
@@ -2633,7 +2851,7 @@ class SemiAnalyticalUnscentedKalmanModel(KalmanEstimation, org.hipparchus.filter
         
         """
         ...
-    def getPredictedSpacecraftStates(self) -> typing.List[org.orekit.propagation.SpacecraftState]:
+    def getPredictedSpacecraftStates(self) -> typing.MutableSequence[org.orekit.propagation.SpacecraftState]:
         """
             Get the predicted spacecraft states.
         
@@ -2645,6 +2863,17 @@ class SemiAnalyticalUnscentedKalmanModel(KalmanEstimation, org.hipparchus.filter
         
             Returns:
                 predicted spacecraft states
+        
+        
+        """
+        ...
+    def getProcessNoiseMatrix(self, double: float, realVector: org.hipparchus.linear.RealVector, measurementDecorator: MeasurementDecorator) -> org.hipparchus.linear.RealMatrix:
+        """
+        
+            Specified by:
+                
+                meth:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.unscented.UnscentedProcess.html?is` in
+                interface :class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.unscented.UnscentedProcess?is`
         
         
         """
@@ -2664,7 +2893,7 @@ class SemiAnalyticalUnscentedKalmanModel(KalmanEstimation, org.hipparchus.filter
         """
         ...
     def processMeasurements(self, list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], unscentedKalmanFilter: org.hipparchus.filtering.kalman.unscented.UnscentedKalmanFilter[MeasurementDecorator]) -> org.orekit.propagation.semianalytical.dsst.DSSTPropagator: ...
-    def setObserver(self, kalmanObserver: KalmanObserver) -> None:
+    def setObserver(self, kalmanObserver: typing.Union[KalmanObserver, typing.Callable]) -> None:
         """
             Set the observer.
         
@@ -2743,7 +2972,7 @@ class UnscentedKalmanEstimator(AbstractKalmanEstimator):
         Since:
             11.3
     """
-    def estimationStep(self, observedMeasurement: org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]) -> typing.List[org.orekit.propagation.Propagator]:
+    def estimationStep(self, observedMeasurement: org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]) -> typing.MutableSequence[org.orekit.propagation.Propagator]:
         """
             Process a single measurement.
         
@@ -2758,17 +2987,7 @@ class UnscentedKalmanEstimator(AbstractKalmanEstimator):
         
         """
         ...
-    def processMeasurements(self, iterable: java.lang.Iterable[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]]) -> typing.List[org.orekit.propagation.Propagator]: ...
-    def setObserver(self, kalmanObserver: KalmanObserver) -> None:
-        """
-            Set the observer.
-        
-            Parameters:
-                observer (:class:`~org.orekit.estimation.sequential.KalmanObserver`): the observer
-        
-        
-        """
-        ...
+    def processMeasurements(self, iterable: typing.Union[java.lang.Iterable[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], typing.Sequence[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], typing.Set[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], typing.Callable[[], java.util.Iterator[typing.Any]]]) -> typing.MutableSequence[org.orekit.propagation.Propagator]: ...
 
 class ConstantProcessNoise(AbstractCovarianceMatrixProvider):
     """
@@ -2913,10 +3132,10 @@ class UnivariateProcessNoise(AbstractCovarianceMatrixProvider):
             9.2
     """
     @typing.overload
-    def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix, lOFType: org.orekit.frames.LOFType, positionAngleType: org.orekit.orbits.PositionAngleType, univariateFunctionArray: typing.List[org.hipparchus.analysis.UnivariateFunction], univariateFunctionArray2: typing.List[org.hipparchus.analysis.UnivariateFunction]): ...
+    def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix, lOFType: org.orekit.frames.LOFType, positionAngleType: org.orekit.orbits.PositionAngleType, univariateFunctionArray: typing.Union[typing.List[org.hipparchus.analysis.UnivariateFunction], jpype.JArray], univariateFunctionArray2: typing.Union[typing.List[org.hipparchus.analysis.UnivariateFunction], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix, lOFType: org.orekit.frames.LOFType, positionAngleType: org.orekit.orbits.PositionAngleType, univariateFunctionArray: typing.List[org.hipparchus.analysis.UnivariateFunction], univariateFunctionArray2: typing.List[org.hipparchus.analysis.UnivariateFunction], univariateFunctionArray3: typing.List[org.hipparchus.analysis.UnivariateFunction]): ...
-    def getLofCartesianOrbitalParametersEvolution(self) -> typing.List[org.hipparchus.analysis.UnivariateFunction]:
+    def __init__(self, realMatrix: org.hipparchus.linear.RealMatrix, lOFType: org.orekit.frames.LOFType, positionAngleType: org.orekit.orbits.PositionAngleType, univariateFunctionArray: typing.Union[typing.List[org.hipparchus.analysis.UnivariateFunction], jpype.JArray], univariateFunctionArray2: typing.Union[typing.List[org.hipparchus.analysis.UnivariateFunction], jpype.JArray], univariateFunctionArray3: typing.Union[typing.List[org.hipparchus.analysis.UnivariateFunction], jpype.JArray]): ...
+    def getLofCartesianOrbitalParametersEvolution(self) -> typing.MutableSequence[org.hipparchus.analysis.UnivariateFunction]:
         """
             Getter for the lofCartesianOrbitalParametersEvolution.
         
@@ -2936,7 +3155,7 @@ class UnivariateProcessNoise(AbstractCovarianceMatrixProvider):
         
         """
         ...
-    def getMeasurementsParametersEvolution(self) -> typing.List[org.hipparchus.analysis.UnivariateFunction]:
+    def getMeasurementsParametersEvolution(self) -> typing.MutableSequence[org.hipparchus.analysis.UnivariateFunction]:
         """
             Getter for the measurementsParametersEvolution.
         
@@ -2988,7 +3207,7 @@ class UnivariateProcessNoise(AbstractCovarianceMatrixProvider):
         
         """
         ...
-    def getPropagationParametersEvolution(self) -> typing.List[org.hipparchus.analysis.UnivariateFunction]:
+    def getPropagationParametersEvolution(self) -> typing.MutableSequence[org.hipparchus.analysis.UnivariateFunction]:
         """
             Getter for the propagationParametersEvolution.
         
@@ -2999,7 +3218,7 @@ class UnivariateProcessNoise(AbstractCovarianceMatrixProvider):
         """
         ...
 
-class KalmanModel(org.orekit.estimation.sequential.KalmanEstimationCommon, org.hipparchus.filtering.kalman.extended.NonLinearProcess[MeasurementDecorator]):
+class KalmanModel(org.orekit.estimation.sequential.AbstractKalmanEstimationCommon, org.hipparchus.filtering.kalman.extended.NonLinearProcess[MeasurementDecorator]):
     """
     public class KalmanModel extends :class:`~org.orekit.estimation.sequential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.extended.NonLinearProcess?is`<:class:`~org.orekit.estimation.sequential.MeasurementDecorator`>
     
@@ -3042,7 +3261,7 @@ class KalmanModel(org.orekit.estimation.sequential.KalmanEstimationCommon, org.h
         
         """
         ...
-    def getReferenceTrajectories(self) -> typing.List[org.orekit.propagation.Propagator]:
+    def getReferenceTrajectories(self) -> typing.MutableSequence[org.orekit.propagation.Propagator]:
         """
             Getter for the reference trajectories.
         
@@ -3052,7 +3271,7 @@ class KalmanModel(org.orekit.estimation.sequential.KalmanEstimationCommon, org.h
         
         """
         ...
-    def setReferenceTrajectories(self, propagatorArray: typing.List[org.orekit.propagation.Propagator]) -> None:
+    def setReferenceTrajectories(self, propagatorArray: typing.Union[typing.List[org.orekit.propagation.Propagator], jpype.JArray]) -> None:
         """
             Setter for the reference trajectories.
         
@@ -3063,7 +3282,7 @@ class KalmanModel(org.orekit.estimation.sequential.KalmanEstimationCommon, org.h
         """
         ...
 
-class UnscentedKalmanModel(org.orekit.estimation.sequential.KalmanEstimationCommon, org.hipparchus.filtering.kalman.unscented.UnscentedProcess[MeasurementDecorator]):
+class UnscentedKalmanModel(org.orekit.estimation.sequential.AbstractKalmanEstimationCommon, org.hipparchus.filtering.kalman.unscented.UnscentedProcess[MeasurementDecorator]):
     """
     public class UnscentedKalmanModel extends :class:`~org.orekit.estimation.sequential.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.unscented.UnscentedProcess?is`<:class:`~org.orekit.estimation.sequential.MeasurementDecorator`>
     
@@ -3084,7 +3303,7 @@ class UnscentedKalmanModel(org.orekit.estimation.sequential.KalmanEstimationComm
         
         """
         ...
-    def getEvolution(self, double: float, realVectorArray: typing.List[org.hipparchus.linear.RealVector], measurementDecorator: MeasurementDecorator) -> org.hipparchus.filtering.kalman.unscented.UnscentedEvolution:
+    def getEvolution(self, double: float, realVectorArray: typing.Union[typing.List[org.hipparchus.linear.RealVector], jpype.JArray], measurementDecorator: MeasurementDecorator) -> org.hipparchus.filtering.kalman.unscented.UnscentedEvolution:
         """
         
             Specified by:
@@ -3106,7 +3325,18 @@ class UnscentedKalmanModel(org.orekit.estimation.sequential.KalmanEstimationComm
         
         """
         ...
-    def getPredictedMeasurements(self, realVectorArray: typing.List[org.hipparchus.linear.RealVector], measurementDecorator: MeasurementDecorator) -> typing.List[org.hipparchus.linear.RealVector]:
+    def getPredictedMeasurements(self, realVectorArray: typing.Union[typing.List[org.hipparchus.linear.RealVector], jpype.JArray], measurementDecorator: MeasurementDecorator) -> typing.MutableSequence[org.hipparchus.linear.RealVector]:
+        """
+        
+            Specified by:
+                
+                meth:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.unscented.UnscentedProcess.html?is` in
+                interface :class:`~org.orekit.estimation.sequential.https:.www.hipparchus.org.apidocs.org.hipparchus.filtering.kalman.unscented.UnscentedProcess?is`
+        
+        
+        """
+        ...
+    def getProcessNoiseMatrix(self, double: float, realVector: org.hipparchus.linear.RealVector, measurementDecorator: MeasurementDecorator) -> org.hipparchus.linear.RealMatrix:
         """
         
             Specified by:
@@ -3118,30 +3348,32 @@ class UnscentedKalmanModel(org.orekit.estimation.sequential.KalmanEstimationComm
         """
         ...
 
-class KalmanEstimationCommon: ...
+class AbstractKalmanEstimationCommon: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.estimation.sequential")``.
 
     AbstractCovarianceMatrixProvider: typing.Type[AbstractCovarianceMatrixProvider]
+    AbstractKalmanEstimationCommon: typing.Type[AbstractKalmanEstimationCommon]
     AbstractKalmanEstimator: typing.Type[AbstractKalmanEstimator]
     ConstantProcessNoise: typing.Type[ConstantProcessNoise]
     CovarianceMatrixProvider: typing.Type[CovarianceMatrixProvider]
     KalmanEstimation: typing.Type[KalmanEstimation]
-    KalmanEstimationCommon: typing.Type[KalmanEstimationCommon]
     KalmanEstimator: typing.Type[KalmanEstimator]
     KalmanEstimatorBuilder: typing.Type[KalmanEstimatorBuilder]
     KalmanEstimatorUtil: typing.Type[KalmanEstimatorUtil]
     KalmanModel: typing.Type[KalmanModel]
     KalmanObserver: typing.Type[KalmanObserver]
     MeasurementDecorator: typing.Type[MeasurementDecorator]
+    PhysicalEstimatedState: typing.Type[PhysicalEstimatedState]
     PythonAbstractCovarianceMatrixProvider: typing.Type[PythonAbstractCovarianceMatrixProvider]
     PythonAbstractKalmanEstimator: typing.Type[PythonAbstractKalmanEstimator]
     PythonCovarianceMatrixProvider: typing.Type[PythonCovarianceMatrixProvider]
     PythonKalmanEstimation: typing.Type[PythonKalmanEstimation]
     PythonKalmanObserver: typing.Type[PythonKalmanObserver]
     PythonSemiAnalyticalProcess: typing.Type[PythonSemiAnalyticalProcess]
+    RtsSmoother: typing.Type[RtsSmoother]
     SemiAnalyticalKalmanEstimator: typing.Type[SemiAnalyticalKalmanEstimator]
     SemiAnalyticalKalmanEstimatorBuilder: typing.Type[SemiAnalyticalKalmanEstimatorBuilder]
     SemiAnalyticalKalmanModel: typing.Type[SemiAnalyticalKalmanModel]
@@ -3154,4 +3386,3 @@ class __module_protocol__(typing.Protocol):
     UnscentedKalmanEstimator: typing.Type[UnscentedKalmanEstimator]
     UnscentedKalmanEstimatorBuilder: typing.Type[UnscentedKalmanEstimatorBuilder]
     UnscentedKalmanModel: typing.Type[UnscentedKalmanModel]
-    class-use: org.orekit.estimation.sequential.class-use.__module_protocol__

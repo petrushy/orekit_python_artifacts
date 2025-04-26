@@ -1,10 +1,17 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
+import java.util.function
 import org.hipparchus.geometry.euclidean.threed
 import org.hipparchus.geometry.euclidean.twod
 import org.orekit.data
 import org.orekit.files.rinex
-import org.orekit.files.rinex.observation.class-use
 import org.orekit.files.rinex.section
 import org.orekit.gnss
 import org.orekit.time
@@ -224,6 +231,7 @@ class RinexObservation(org.orekit.files.rinex.RinexFile['RinexObservationHeader'
         
         """
         ...
+    def bundleByDates(self) -> java.lang.Iterable[java.util.List[ObservationDataSet]]: ...
     def extractClockModel(self, int: int) -> org.orekit.time.SampledClockModel:
         """
             Extract the receiver clock model.
@@ -409,10 +417,10 @@ class RinexObservationHeader(org.orekit.files.rinex.section.RinexBaseHeader):
         ...
     def getC1cCodePhaseBias(self) -> float:
         """
-            Get the code phase bias correction for GLONASS :meth:`~org.orekit.gnss.ObservationType.C1C` signal.
+            Get the code phase bias correction for GLONASS :meth:`~org.orekit.gnss.PredefinedObservationType.C1C` signal.
         
             Returns:
-                code phase bias correction for GLONASS :meth:`~org.orekit.gnss.ObservationType.C1C` signal
+                code phase bias correction for GLONASS :meth:`~org.orekit.gnss.PredefinedObservationType.C1C` signal
         
             Since:
                 12.0
@@ -422,10 +430,10 @@ class RinexObservationHeader(org.orekit.files.rinex.section.RinexBaseHeader):
         ...
     def getC1pCodePhaseBias(self) -> float:
         """
-            Get the code phase bias correction for GLONASS :meth:`~org.orekit.gnss.ObservationType.C1P` signal.
+            Get the code phase bias correction for GLONASS :meth:`~org.orekit.gnss.PredefinedObservationType.C1P` signal.
         
             Returns:
-                code phase bias correction for GLONASS :meth:`~org.orekit.gnss.ObservationType.C1P` signal
+                code phase bias correction for GLONASS :meth:`~org.orekit.gnss.PredefinedObservationType.C1P` signal
         
             Since:
                 12.0
@@ -435,10 +443,10 @@ class RinexObservationHeader(org.orekit.files.rinex.section.RinexBaseHeader):
         ...
     def getC2cCodePhaseBias(self) -> float:
         """
-            Get the code phase bias correction for GLONASS :meth:`~org.orekit.gnss.ObservationType.C2C` signal.
+            Get the code phase bias correction for GLONASS :meth:`~org.orekit.gnss.PredefinedObservationType.C2C` signal.
         
             Returns:
-                code phase bias correction for GLONASS :meth:`~org.orekit.gnss.ObservationType.C2C` signal
+                code phase bias correction for GLONASS :meth:`~org.orekit.gnss.PredefinedObservationType.C2C` signal
         
             Since:
                 12.0
@@ -448,10 +456,10 @@ class RinexObservationHeader(org.orekit.files.rinex.section.RinexBaseHeader):
         ...
     def getC2pCodePhaseBias(self) -> float:
         """
-            Get the code phase bias correction for GLONASS :meth:`~org.orekit.gnss.ObservationType.C2P` signal.
+            Get the code phase bias correction for GLONASS :meth:`~org.orekit.gnss.PredefinedObservationType.C2P` signal.
         
             Returns:
-                code phase bias correction for GLONASS :meth:`~org.orekit.gnss.ObservationType.C2P` signal
+                code phase bias correction for GLONASS :meth:`~org.orekit.gnss.PredefinedObservationType.C2P` signal
         
             Since:
                 12.0
@@ -465,18 +473,6 @@ class RinexObservationHeader(org.orekit.files.rinex.section.RinexBaseHeader):
         
             Returns:
                 Current center of mass of vehicle in body fixed coordinate system
-        
-        
-        """
-        ...
-    def getClkOffset(self) -> int:
-        """
-            Deprecated.
-            as of 12.1, replaced by #@link :meth:`~org.orekit.files.rinex.observation.RinexObservationHeader.getClockOffsetApplied`
-            Get the realtime-derived receiver clock offset.
-        
-            Returns:
-                realtime-derived receiver clock offset
         
         
         """
@@ -799,10 +795,10 @@ class RinexObservationHeader(org.orekit.files.rinex.section.RinexBaseHeader):
         ...
     def setC1cCodePhaseBias(self, double: float) -> None:
         """
-            Set the code phase bias correction for GLONASS :meth:`~org.orekit.gnss.ObservationType.C1C` signal.
+            Set the code phase bias correction for GLONASS :meth:`~org.orekit.gnss.PredefinedObservationType.C1C` signal.
         
             Parameters:
-                c1cCodePhaseBias (double): code phase bias correction for GLONASS :meth:`~org.orekit.gnss.ObservationType.C1C` signal
+                c1cCodePhaseBias (double): code phase bias correction for GLONASS :meth:`~org.orekit.gnss.PredefinedObservationType.C1C` signal
         
             Since:
                 12.0
@@ -812,10 +808,10 @@ class RinexObservationHeader(org.orekit.files.rinex.section.RinexBaseHeader):
         ...
     def setC1pCodePhaseBias(self, double: float) -> None:
         """
-            Set the code phase bias correction for GLONASS :meth:`~org.orekit.gnss.ObservationType.C1P` signal.
+            Set the code phase bias correction for GLONASS :meth:`~org.orekit.gnss.PredefinedObservationType.C1P` signal.
         
             Parameters:
-                c1pCodePhaseBias (double): code phase bias correction for GLONASS :meth:`~org.orekit.gnss.ObservationType.C1P` signal
+                c1pCodePhaseBias (double): code phase bias correction for GLONASS :meth:`~org.orekit.gnss.PredefinedObservationType.C1P` signal
         
             Since:
                 12.0
@@ -825,10 +821,10 @@ class RinexObservationHeader(org.orekit.files.rinex.section.RinexBaseHeader):
         ...
     def setC2cCodePhaseBias(self, double: float) -> None:
         """
-            Set the code phase bias correction for GLONASS :meth:`~org.orekit.gnss.ObservationType.C2C` signal.
+            Set the code phase bias correction for GLONASS :meth:`~org.orekit.gnss.PredefinedObservationType.C2C` signal.
         
             Parameters:
-                c2cCodePhaseBias (double): code phase bias correction for GLONASS :meth:`~org.orekit.gnss.ObservationType.C2C` signal
+                c2cCodePhaseBias (double): code phase bias correction for GLONASS :meth:`~org.orekit.gnss.PredefinedObservationType.C2C` signal
         
             Since:
                 12.0
@@ -838,10 +834,10 @@ class RinexObservationHeader(org.orekit.files.rinex.section.RinexBaseHeader):
         ...
     def setC2pCodePhaseBias(self, double: float) -> None:
         """
-            Set the code phase bias correction for GLONASS :meth:`~org.orekit.gnss.ObservationType.C2P` signal.
+            Set the code phase bias correction for GLONASS :meth:`~org.orekit.gnss.PredefinedObservationType.C2P` signal.
         
             Parameters:
-                c2pCodePhaseBias (double): code phase bias correction for GLONASS :meth:`~org.orekit.gnss.ObservationType.C2P` signal
+                c2pCodePhaseBias (double): code phase bias correction for GLONASS :meth:`~org.orekit.gnss.PredefinedObservationType.C2P` signal
         
             Since:
                 12.0
@@ -855,18 +851,6 @@ class RinexObservationHeader(org.orekit.files.rinex.section.RinexBaseHeader):
         
             Parameters:
                 centerMass (:class:`~org.orekit.files.rinex.observation.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): Current center of mass of vehicle in body fixed coordinate system
-        
-        
-        """
-        ...
-    def setClkOffset(self, int: int) -> None:
-        """
-            Deprecated.
-            as of 12.1, replaced by :meth:`~org.orekit.files.rinex.observation.RinexObservationHeader.setClockOffsetApplied`
-            Set the realtime-derived receiver clock offset.
-        
-            Parameters:
-                clkOffset (int): realtime-derived receiver clock offset
         
         
         """
@@ -1103,8 +1087,8 @@ class RinexObservationParser:
     
         Parser for Rinex measurements files.
     
-        Supported versions are: 2.00, 2.10, 2.11, 2.12 (unofficial), 2.20 (unofficial), 3.00, 3.01, 3.02, 3.03, 3.04, 3.05, and
-        4.00.
+        Supported versions are: 2.00, 2.10, 2.11, 2.12 (unofficial), 2.20 (unofficial), 3.00, 3.01, 3.02, 3.03, 3.04, 3.05,
+        4.00, 4.01, and 4.02.
     
         Since:
             12.0
@@ -1121,7 +1105,9 @@ class RinexObservationParser:
             :class:`~org.orekit.files.rinex.observation.https:.files.igs.org.pub.data.format.rinex303.pdf`,
             :class:`~org.orekit.files.rinex.observation.https:.files.igs.org.pub.data.format.rinex304.pdf`,
             :class:`~org.orekit.files.rinex.observation.https:.files.igs.org.pub.data.format.rinex305.pdf`,
-            :class:`~org.orekit.files.rinex.observation.https:.files.igs.org.pub.data.format.rinex_4.00.pdf`
+            :class:`~org.orekit.files.rinex.observation.https:.files.igs.org.pub.data.format.rinex_4.00.pdf`,
+            :class:`~org.orekit.files.rinex.observation.https:.files.igs.org.pub.data.format.rinex_4.01.pdf`,
+            :class:`~org.orekit.files.rinex.observation.https:.files.igs.org.pub.data.format.rinex_4.02.pdf`
     """
     DEFAULT_RINEX_2_NAMES: typing.ClassVar[str] = ...
     """
@@ -1148,7 +1134,7 @@ class RinexObservationParser:
     @typing.overload
     def __init__(self): ...
     @typing.overload
-    def __init__(self, timeScales: org.orekit.time.TimeScales): ...
+    def __init__(self, function: typing.Union[java.util.function.Function[str, org.orekit.gnss.ObservationType], typing.Callable[[str], org.orekit.gnss.ObservationType]], biFunction: typing.Union[java.util.function.BiFunction[org.orekit.gnss.SatelliteSystem, org.orekit.time.TimeScales, org.orekit.time.TimeScale], typing.Callable[[org.orekit.gnss.SatelliteSystem, org.orekit.time.TimeScales], org.orekit.time.TimeScale]], timeScales: org.orekit.time.TimeScales): ...
     def parse(self, dataSource: org.orekit.data.DataSource) -> RinexObservation:
         """
             Parse RINEX observations messages.
@@ -1182,7 +1168,10 @@ class RinexObservationWriter(java.lang.AutoCloseable):
         Since:
             12.0
     """
+    @typing.overload
     def __init__(self, appendable: java.lang.Appendable, string: str): ...
+    @typing.overload
+    def __init__(self, appendable: java.lang.Appendable, string: str, biFunction: typing.Union[java.util.function.BiFunction[org.orekit.gnss.SatelliteSystem, org.orekit.time.TimeScales, org.orekit.time.TimeScale], typing.Callable[[org.orekit.gnss.SatelliteSystem, org.orekit.time.TimeScales], org.orekit.time.TimeScale]], timeScales: org.orekit.time.TimeScales): ...
     def close(self) -> None: ...
     def prepareComments(self, list: java.util.List[org.orekit.files.rinex.section.RinexComment]) -> None: ...
     def setReceiverClockModel(self, clockModel: org.orekit.time.ClockModel) -> None:
@@ -1228,7 +1217,7 @@ class ScaleFactorCorrection:
     def getTypesObsScaled(self) -> java.util.List[org.orekit.gnss.ObservationType]: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.rinex.observation")``.
 
     GlonassSatelliteChannel: typing.Type[GlonassSatelliteChannel]
@@ -1240,4 +1229,3 @@ class __module_protocol__(typing.Protocol):
     RinexObservationParser: typing.Type[RinexObservationParser]
     RinexObservationWriter: typing.Type[RinexObservationWriter]
     ScaleFactorCorrection: typing.Type[ScaleFactorCorrection]
-    class-use: org.orekit.files.rinex.observation.class-use.__module_protocol__

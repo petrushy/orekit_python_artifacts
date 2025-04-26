@@ -1,6 +1,13 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
+import jpype
 import org.hipparchus
 import org.hipparchus.analysis.polynomials
-import org.orekit.propagation.semianalytical.dsst.utilities.hansen.class-use
 import typing
 
 
@@ -383,7 +390,7 @@ class HansenUtilities:
         """
         ...
     @staticmethod
-    def generateTesseralPolynomials(int: int, int2: int, int3: int, int4: int, int5: int, int6: int, polynomialFunctionArray: typing.List[typing.List[org.hipparchus.analysis.polynomials.PolynomialFunction]], polynomialFunctionArray2: typing.List[typing.List[org.hipparchus.analysis.polynomials.PolynomialFunction]]) -> None:
+    def generateTesseralPolynomials(int: int, int2: int, int3: int, int4: int, int5: int, int6: int, polynomialFunctionArray: typing.Union[typing.List[typing.MutableSequence[org.hipparchus.analysis.polynomials.PolynomialFunction]], jpype.JArray], polynomialFunctionArray2: typing.Union[typing.List[typing.MutableSequence[org.hipparchus.analysis.polynomials.PolynomialFunction]], jpype.JArray]) -> None:
         """
             Generate the polynomials needed in the linear transformation.
         
@@ -401,7 +408,7 @@ class HansenUtilities:
         """
         ...
     @staticmethod
-    def generateThirdBodyPolynomials(int: int, int2: int, int3: int, int4: int, polynomialFunctionArray: typing.List[typing.List[org.hipparchus.analysis.polynomials.PolynomialFunction]], polynomialFunctionArray2: typing.List[typing.List[org.hipparchus.analysis.polynomials.PolynomialFunction]]) -> None:
+    def generateThirdBodyPolynomials(int: int, int2: int, int3: int, int4: int, polynomialFunctionArray: typing.Union[typing.List[typing.MutableSequence[org.hipparchus.analysis.polynomials.PolynomialFunction]], jpype.JArray], polynomialFunctionArray2: typing.Union[typing.List[typing.MutableSequence[org.hipparchus.analysis.polynomials.PolynomialFunction]], jpype.JArray]) -> None:
         """
             Generate the polynomials needed in the linear transformation.
         
@@ -419,7 +426,7 @@ class HansenUtilities:
         """
         ...
     @staticmethod
-    def generateZonalPolynomials(int: int, int2: int, int3: int, int4: int, int5: int, polynomialFunctionArray: typing.List[typing.List[org.hipparchus.analysis.polynomials.PolynomialFunction]], polynomialFunctionArray2: typing.List[typing.List[org.hipparchus.analysis.polynomials.PolynomialFunction]]) -> None:
+    def generateZonalPolynomials(int: int, int2: int, int3: int, int4: int, int5: int, polynomialFunctionArray: typing.Union[typing.List[typing.MutableSequence[org.hipparchus.analysis.polynomials.PolynomialFunction]], jpype.JArray], polynomialFunctionArray2: typing.Union[typing.List[typing.MutableSequence[org.hipparchus.analysis.polynomials.PolynomialFunction]], jpype.JArray]) -> None:
         """
             Generate the polynomials needed in the linear transformation.
         
@@ -526,7 +533,7 @@ class PolynomialFunctionMatrix:
         
         """
         ...
-    def getMatrixLine(self, int: int) -> typing.List[org.hipparchus.analysis.polynomials.PolynomialFunction]:
+    def getMatrixLine(self, int: int) -> typing.MutableSequence[org.hipparchus.analysis.polynomials.PolynomialFunction]:
         """
             Get a line of the matrix.
         
@@ -564,7 +571,7 @@ class PolynomialFunctionMatrix:
         
         """
         ...
-    def setMatrix(self, polynomialFunctionArray: typing.List[typing.List[org.hipparchus.analysis.polynomials.PolynomialFunction]]) -> None:
+    def setMatrix(self, polynomialFunctionArray: typing.Union[typing.List[typing.MutableSequence[org.hipparchus.analysis.polynomials.PolynomialFunction]], jpype.JArray]) -> None:
         """
             Set values for all elements.
         
@@ -574,7 +581,7 @@ class PolynomialFunctionMatrix:
         
         """
         ...
-    def setMatrixLine(self, int: int, polynomialFunctionArray: typing.List[org.hipparchus.analysis.polynomials.PolynomialFunction]) -> None:
+    def setMatrixLine(self, int: int, polynomialFunctionArray: typing.Union[typing.List[org.hipparchus.analysis.polynomials.PolynomialFunction], jpype.JArray]) -> None:
         """
             Set the value of a line of the matrix.
         
@@ -587,7 +594,7 @@ class PolynomialFunctionMatrix:
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.propagation.semianalytical.dsst.utilities.hansen")``.
 
     FieldHansenTesseralLinear: typing.Type[FieldHansenTesseralLinear]
@@ -598,4 +605,3 @@ class __module_protocol__(typing.Protocol):
     HansenUtilities: typing.Type[HansenUtilities]
     HansenZonalLinear: typing.Type[HansenZonalLinear]
     PolynomialFunctionMatrix: typing.Type[PolynomialFunctionMatrix]
-    class-use: org.orekit.propagation.semianalytical.dsst.utilities.hansen.class-use.__module_protocol__

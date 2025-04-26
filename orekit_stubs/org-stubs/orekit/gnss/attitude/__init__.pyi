@@ -1,8 +1,14 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import org
 import org.hipparchus
 import org.orekit.attitudes
 import org.orekit.frames
-import org.orekit.gnss.attitude.class-use
 import org.orekit.time
 import org.orekit.utils
 import typing
@@ -51,7 +57,7 @@ class PythonGNSSAttitudeProvider(GNSSAttitudeProvider):
     def finalize(self) -> None: ...
     _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitude(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.attitudes.Attitude:
+    def getAttitude(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.attitudes.Attitude:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -69,7 +75,7 @@ class PythonGNSSAttitudeProvider(GNSSAttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitude(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> org.orekit.attitudes.FieldAttitude[_getAttitude_1__T]:
+    def getAttitude(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> org.orekit.attitudes.FieldAttitude[_getAttitude_1__T]:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -144,7 +150,7 @@ class BeidouGeo(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
         Since:
             9.2
     """
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, extendedPVCoordinatesProvider: org.orekit.utils.ExtendedPVCoordinatesProvider, frame: org.orekit.frames.Frame): ...
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], frame: org.orekit.frames.Frame): ...
 
 class BeidouIGSO(org.orekit.gnss.attitude.BeidouMeo):
     """
@@ -158,7 +164,7 @@ class BeidouIGSO(org.orekit.gnss.attitude.BeidouMeo):
         Since:
             9.2
     """
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, extendedPVCoordinatesProvider: org.orekit.utils.ExtendedPVCoordinatesProvider, frame: org.orekit.frames.Frame): ...
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], frame: org.orekit.frames.Frame): ...
 
 class BeidouMeo(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
     """
@@ -169,7 +175,7 @@ class BeidouMeo(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
         Since:
             9.2
     """
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, extendedPVCoordinatesProvider: org.orekit.utils.ExtendedPVCoordinatesProvider, frame: org.orekit.frames.Frame): ...
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], frame: org.orekit.frames.Frame): ...
 
 class GPSBlockIIA(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
     """
@@ -191,7 +197,7 @@ class GPSBlockIIA(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
         Default yaw bias (rad).
     
     """
-    def __init__(self, double: float, double2: float, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, extendedPVCoordinatesProvider: org.orekit.utils.ExtendedPVCoordinatesProvider, frame: org.orekit.frames.Frame): ...
+    def __init__(self, double: float, double2: float, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], frame: org.orekit.frames.Frame): ...
     @staticmethod
     def getDefaultYawRate(int: int) -> float:
         """
@@ -237,7 +243,7 @@ class GPSBlockIIF(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
         Default yaw bias (rad).
     
     """
-    def __init__(self, double: float, double2: float, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, extendedPVCoordinatesProvider: org.orekit.utils.ExtendedPVCoordinatesProvider, frame: org.orekit.frames.Frame): ...
+    def __init__(self, double: float, double2: float, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], frame: org.orekit.frames.Frame): ...
 
 class GPSBlockIIR(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
     """
@@ -259,7 +265,7 @@ class GPSBlockIIR(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
         Default yaw rates for all spacecrafts in radians per seconds.
     
     """
-    def __init__(self, double: float, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, extendedPVCoordinatesProvider: org.orekit.utils.ExtendedPVCoordinatesProvider, frame: org.orekit.frames.Frame): ...
+    def __init__(self, double: float, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], frame: org.orekit.frames.Frame): ...
 
 class Galileo(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
     """
@@ -281,7 +287,7 @@ class Galileo(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
         Default yaw rates for all spacecrafts in radians per seconds.
     
     """
-    def __init__(self, double: float, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, extendedPVCoordinatesProvider: org.orekit.utils.ExtendedPVCoordinatesProvider, frame: org.orekit.frames.Frame): ...
+    def __init__(self, double: float, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], frame: org.orekit.frames.Frame): ...
 
 class GenericGNSS(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
     """
@@ -292,7 +298,7 @@ class GenericGNSS(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
         Since:
             9.2
     """
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, extendedPVCoordinatesProvider: org.orekit.utils.ExtendedPVCoordinatesProvider, frame: org.orekit.frames.Frame): ...
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], frame: org.orekit.frames.Frame): ...
 
 class Glonass(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
     """
@@ -314,13 +320,13 @@ class Glonass(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
         Default yaw rates for all spacecrafts in radians per seconds.
     
     """
-    def __init__(self, double: float, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, extendedPVCoordinatesProvider: org.orekit.utils.ExtendedPVCoordinatesProvider, frame: org.orekit.frames.Frame): ...
+    def __init__(self, double: float, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], frame: org.orekit.frames.Frame): ...
 
 class PythonAbstractGNSSAttitudeProvider(org.orekit.gnss.attitude.AbstractGNSSAttitudeProvider):
     """
     public class PythonAbstractGNSSAttitudeProvider extends :class:`~org.orekit.gnss.attitude.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     """
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, extendedPVCoordinatesProvider: org.orekit.utils.ExtendedPVCoordinatesProvider, frame: org.orekit.frames.Frame): ...
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, extendedPVCoordinatesProvider: typing.Union[org.orekit.utils.ExtendedPVCoordinatesProvider, typing.Callable], frame: org.orekit.frames.Frame): ...
     _correctedYaw_1__T = typing.TypeVar('_correctedYaw_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def correctedYaw(self, gNSSAttitudeContext: 'GNSSAttitudeContext') -> org.orekit.utils.TimeStampedAngularCoordinates:
@@ -377,7 +383,7 @@ class GNSSAttitudeContext: ...
 class GNSSFieldAttitudeContext: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.gnss.attitude")``.
 
     AbstractGNSSAttitudeProvider: typing.Type[AbstractGNSSAttitudeProvider]
@@ -395,4 +401,3 @@ class __module_protocol__(typing.Protocol):
     Glonass: typing.Type[Glonass]
     PythonAbstractGNSSAttitudeProvider: typing.Type[PythonAbstractGNSSAttitudeProvider]
     PythonGNSSAttitudeProvider: typing.Type[PythonGNSSAttitudeProvider]
-    class-use: org.orekit.gnss.attitude.class-use.__module_protocol__

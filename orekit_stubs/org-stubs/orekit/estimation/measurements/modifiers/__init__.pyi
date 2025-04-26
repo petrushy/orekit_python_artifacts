@@ -1,4 +1,12 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.util
+import jpype
 import org.hipparchus
 import org.hipparchus.analysis.differentiation
 import org.hipparchus.geometry.euclidean.threed
@@ -6,7 +14,6 @@ import org.orekit.attitudes
 import org.orekit.data
 import org.orekit.estimation.measurements
 import org.orekit.estimation.measurements.gnss
-import org.orekit.estimation.measurements.modifiers.class-use
 import org.orekit.frames
 import org.orekit.gnss.antenna
 import org.orekit.models
@@ -34,22 +41,36 @@ class AberrationModifier(org.orekit.estimation.measurements.EstimationModifier[o
     def __init__(self, dataContext: org.orekit.data.DataContext): ...
     @typing.overload
     @staticmethod
-    def fieldNaturalToProper(gradientArray: typing.List[org.hipparchus.analysis.differentiation.Gradient], fieldTransform: org.orekit.frames.FieldTransform[org.hipparchus.analysis.differentiation.Gradient], frame: org.orekit.frames.Frame) -> typing.List[org.hipparchus.analysis.differentiation.Gradient]: ...
+    def fieldNaturalToProper(gradientArray: typing.Union[typing.List[org.hipparchus.analysis.differentiation.Gradient], jpype.JArray], fieldTransform: org.orekit.frames.FieldTransform[org.hipparchus.analysis.differentiation.Gradient], frame: org.orekit.frames.Frame) -> typing.MutableSequence[org.hipparchus.analysis.differentiation.Gradient]: ...
     @typing.overload
     @staticmethod
-    def fieldNaturalToProper(gradientArray: typing.List[org.hipparchus.analysis.differentiation.Gradient], fieldTransform: org.orekit.frames.FieldTransform[org.hipparchus.analysis.differentiation.Gradient], frame: org.orekit.frames.Frame, dataContext: org.orekit.data.DataContext) -> typing.List[org.hipparchus.analysis.differentiation.Gradient]: ...
+    def fieldNaturalToProper(gradientArray: typing.Union[typing.List[org.hipparchus.analysis.differentiation.Gradient], jpype.JArray], fieldTransform: org.orekit.frames.FieldTransform[org.hipparchus.analysis.differentiation.Gradient], frame: org.orekit.frames.Frame, dataContext: org.orekit.data.DataContext) -> typing.MutableSequence[org.hipparchus.analysis.differentiation.Gradient]: ...
     @typing.overload
     @staticmethod
-    def fieldProperToNatural(gradientArray: typing.List[org.hipparchus.analysis.differentiation.Gradient], fieldTransform: org.orekit.frames.FieldTransform[org.hipparchus.analysis.differentiation.Gradient], frame: org.orekit.frames.Frame) -> typing.List[org.hipparchus.analysis.differentiation.Gradient]: ...
+    def fieldProperToNatural(gradientArray: typing.Union[typing.List[org.hipparchus.analysis.differentiation.Gradient], jpype.JArray], fieldTransform: org.orekit.frames.FieldTransform[org.hipparchus.analysis.differentiation.Gradient], frame: org.orekit.frames.Frame) -> typing.MutableSequence[org.hipparchus.analysis.differentiation.Gradient]: ...
     @typing.overload
     @staticmethod
-    def fieldProperToNatural(gradientArray: typing.List[org.hipparchus.analysis.differentiation.Gradient], fieldTransform: org.orekit.frames.FieldTransform[org.hipparchus.analysis.differentiation.Gradient], frame: org.orekit.frames.Frame, dataContext: org.orekit.data.DataContext) -> typing.List[org.hipparchus.analysis.differentiation.Gradient]: ...
+    def fieldProperToNatural(gradientArray: typing.Union[typing.List[org.hipparchus.analysis.differentiation.Gradient], jpype.JArray], fieldTransform: org.orekit.frames.FieldTransform[org.hipparchus.analysis.differentiation.Gradient], frame: org.orekit.frames.Frame, dataContext: org.orekit.data.DataContext) -> typing.MutableSequence[org.hipparchus.analysis.differentiation.Gradient]: ...
+    def getEffectName(self) -> str:
+        """
+            Get the name of the effect modifying the measurement.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.EstimationModifier.getEffectName` in
+                interface :class:`~org.orekit.estimation.measurements.EstimationModifier`
+        
+            Returns:
+                name of the effect modifying the measurement
+        
+        
+        """
+        ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.AngularRaDec]) -> None: ...
     def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.AngularRaDec]) -> None: ...
     @typing.overload
     @staticmethod
-    def naturalToProper(doubleArray: typing.List[float], groundStation: org.orekit.estimation.measurements.GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> typing.List[float]:
+    def naturalToProper(doubleArray: typing.Union[typing.List[float], jpype.JArray], groundStation: org.orekit.estimation.measurements.GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> typing.MutableSequence[float]:
         """
             Natural to proper correction for aberration of light.
         
@@ -71,10 +92,10 @@ class AberrationModifier(org.orekit.estimation.measurements.EstimationModifier[o
         ...
     @typing.overload
     @staticmethod
-    def naturalToProper(doubleArray: typing.List[float], groundStation: org.orekit.estimation.measurements.GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame, dataContext: org.orekit.data.DataContext) -> typing.List[float]: ...
+    def naturalToProper(doubleArray: typing.Union[typing.List[float], jpype.JArray], groundStation: org.orekit.estimation.measurements.GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame, dataContext: org.orekit.data.DataContext) -> typing.MutableSequence[float]: ...
     @typing.overload
     @staticmethod
-    def properToNatural(doubleArray: typing.List[float], groundStation: org.orekit.estimation.measurements.GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> typing.List[float]:
+    def properToNatural(doubleArray: typing.Union[typing.List[float], jpype.JArray], groundStation: org.orekit.estimation.measurements.GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> typing.MutableSequence[float]:
         """
             Proper to natural correction for aberration of light.
         
@@ -96,22 +117,7 @@ class AberrationModifier(org.orekit.estimation.measurements.EstimationModifier[o
         ...
     @typing.overload
     @staticmethod
-    def properToNatural(doubleArray: typing.List[float], groundStation: org.orekit.estimation.measurements.GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame, dataContext: org.orekit.data.DataContext) -> typing.List[float]: ...
-
-class AbstractAmbiguityModifier:
-    """
-    :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class AbstractAmbiguityModifier extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
-    
-        Deprecated.
-        as of 12.1 ambiguity is managed directly by raw measurements :class:`~org.orekit.estimation.measurements.gnss.Phase`,
-        :class:`~org.orekit.estimation.measurements.gnss.OneWayGNSSPhase` and
-        :class:`~org.orekit.estimation.measurements.gnss.InterSatellitesPhase`
-        Base class for phase ambiguity modifier.
-    
-        Since:
-            10.3
-    """
-    def __init__(self, int: int, double: float): ...
+    def properToNatural(doubleArray: typing.Union[typing.List[float], jpype.JArray], groundStation: org.orekit.estimation.measurements.GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame, dataContext: org.orekit.data.DataContext) -> typing.MutableSequence[float]: ...
 
 class AbstractRelativisticClockModifier:
     """
@@ -130,6 +136,19 @@ class AbstractRelativisticClockModifier:
             Springer, 2017."
     """
     def __init__(self): ...
+    def getEffectName(self) -> str:
+        """
+            Get the name of the effect modifying the measurement.
+        
+            Returns:
+                name of the effect modifying the measurement
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
 
 class AbstractRelativisticJ2ClockModifier:
     """
@@ -149,6 +168,19 @@ class AbstractRelativisticJ2ClockModifier:
             Equation 19.18 Springer, 2017."
     """
     def __init__(self, double: float, double2: float, double3: float): ...
+    def getEffectName(self) -> str:
+        """
+            Get the name of the effect modifying the measurement.
+        
+            Returns:
+                name of the effect modifying the measurement
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
 
 class AbstractShapiroBaseModifier:
     """
@@ -162,6 +194,19 @@ class AbstractShapiroBaseModifier:
             10.0
     """
     def __init__(self, double: float): ...
+    def getEffectName(self) -> str:
+        """
+            Get the name of the effect modifying the measurement.
+        
+            Returns:
+                name of the effect modifying the measurement
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
 
 class AngularIonosphericDelayModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.AngularAzEl]):
     """
@@ -182,6 +227,20 @@ class AngularIonosphericDelayModifier(org.orekit.estimation.measurements.Estimat
             8.0
     """
     def __init__(self, ionosphericModel: org.orekit.models.earth.ionosphere.IonosphericModel, double: float): ...
+    def getEffectName(self) -> str:
+        """
+            Get the name of the effect modifying the measurement.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.EstimationModifier.getEffectName` in
+                interface :class:`~org.orekit.estimation.measurements.EstimationModifier`
+        
+            Returns:
+                name of the effect modifying the measurement
+        
+        
+        """
+        ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.AngularAzEl]) -> None: ...
 
@@ -198,33 +257,21 @@ class AngularRadioRefractionModifier(org.orekit.estimation.measurements.Estimati
         Since:
             8.0
     """
-    def __init__(self, atmosphericRefractionModel: org.orekit.models.AtmosphericRefractionModel): ...
-    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.AngularAzEl]) -> None: ...
-
-class AngularTroposphericDelayModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.AngularAzEl]):
-    """
-    :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class AngularTroposphericDelayModifier extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.AngularAzEl`>
-    
-        Deprecated.
-        as of 12.1, :class:`~org.orekit.estimation.measurements.modifiers.AngularRadioRefractionModifier` shall be used to
-        handle tropospheric effect on angular measurements
-        Class modifying theoretical angular measurement with tropospheric delay.
-    
-        The effect of tropospheric correction on the angular is computed through the computation of the tropospheric delay.The
-        spacecraft state is shifted by the computed delay time and elevation and azimuth are computed again with the new
-        spacecraft state.
-    
-        In general, for GNSS, VLBI, ... there is hardly any frequency dependence in the delay. For SLR techniques however, the
-        frequency dependence is sensitive.
-    
-        Since:
-            8.0
-    """
-    @typing.overload
-    def __init__(self, discreteTroposphericModel: org.orekit.models.earth.troposphere.DiscreteTroposphericModel): ...
-    @typing.overload
-    def __init__(self, troposphericModel: org.orekit.models.earth.troposphere.TroposphericModel): ...
+    def __init__(self, atmosphericRefractionModel: typing.Union[org.orekit.models.AtmosphericRefractionModel, typing.Callable]): ...
+    def getEffectName(self) -> str:
+        """
+            Get the name of the effect modifying the measurement.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.EstimationModifier.getEffectName` in
+                interface :class:`~org.orekit.estimation.measurements.EstimationModifier`
+        
+            Returns:
+                name of the effect modifying the measurement
+        
+        
+        """
+        ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.AngularAzEl]) -> None: ...
 
@@ -242,6 +289,19 @@ class BaseRangeIonosphericDelayModifier:
         Since:
             11.2
     """
+    def getEffectName(self) -> str:
+        """
+            Get the name of the effect modifying the measurement.
+        
+            Returns:
+                name of the effect modifying the measurement
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
 
 class BaseRangeRateIonosphericDelayModifier:
@@ -258,6 +318,19 @@ class BaseRangeRateIonosphericDelayModifier:
         Since:
             11.2
     """
+    def getEffectName(self) -> str:
+        """
+            Get the name of the effect modifying the measurement.
+        
+            Returns:
+                name of the effect modifying the measurement
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
 
 class BaseRangeRateTroposphericDelayModifier:
@@ -272,6 +345,19 @@ class BaseRangeRateTroposphericDelayModifier:
         Since:
             11.2
     """
+    def getEffectName(self) -> str:
+        """
+            Get the name of the effect modifying the measurement.
+        
+            Returns:
+                name of the effect modifying the measurement
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _rangeRateErrorTroposphericModel_1__T = typing.TypeVar('_rangeRateErrorTroposphericModel_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
@@ -289,7 +375,7 @@ class BaseRangeRateTroposphericDelayModifier:
         """
         ...
     @typing.overload
-    def rangeRateErrorTroposphericModel(self, groundStation: org.orekit.estimation.measurements.GroundStation, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_rangeRateErrorTroposphericModel_1__T], tArray: typing.List[_rangeRateErrorTroposphericModel_1__T]) -> _rangeRateErrorTroposphericModel_1__T:
+    def rangeRateErrorTroposphericModel(self, groundStation: org.orekit.estimation.measurements.GroundStation, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_rangeRateErrorTroposphericModel_1__T], tArray: typing.Union[typing.List[_rangeRateErrorTroposphericModel_1__T], jpype.JArray]) -> _rangeRateErrorTroposphericModel_1__T:
         """
             Compute the measurement error due to Troposphere.
         
@@ -316,6 +402,19 @@ class BaseRangeTroposphericDelayModifier:
         Since:
             11.2
     """
+    def getEffectName(self) -> str:
+        """
+            Get the name of the effect modifying the measurement.
+        
+            Returns:
+                name of the effect modifying the measurement
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _rangeErrorTroposphericModel_1__T = typing.TypeVar('_rangeErrorTroposphericModel_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
@@ -333,7 +432,7 @@ class BaseRangeTroposphericDelayModifier:
         """
         ...
     @typing.overload
-    def rangeErrorTroposphericModel(self, groundStation: org.orekit.estimation.measurements.GroundStation, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_rangeErrorTroposphericModel_1__T], tArray: typing.List[_rangeErrorTroposphericModel_1__T]) -> _rangeErrorTroposphericModel_1__T:
+    def rangeErrorTroposphericModel(self, groundStation: org.orekit.estimation.measurements.GroundStation, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_rangeErrorTroposphericModel_1__T], tArray: typing.Union[typing.List[_rangeErrorTroposphericModel_1__T], jpype.JArray]) -> _rangeErrorTroposphericModel_1__T:
         """
             Compute the measurement error due to Troposphere.
         
@@ -359,7 +458,21 @@ class Bias(org.orekit.estimation.measurements.EstimationModifier[_Bias__T], typi
         Since:
             8.0
     """
-    def __init__(self, stringArray: typing.List[str], doubleArray: typing.List[float], doubleArray2: typing.List[float], doubleArray3: typing.List[float], doubleArray4: typing.List[float]): ...
+    def __init__(self, stringArray: typing.Union[typing.List[str], jpype.JArray], doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], doubleArray3: typing.Union[typing.List[float], jpype.JArray], doubleArray4: typing.Union[typing.List[float], jpype.JArray]): ...
+    def getEffectName(self) -> str:
+        """
+            Get the name of the effect modifying the measurement.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.EstimationModifier.getEffectName` in
+                interface :class:`~org.orekit.estimation.measurements.EstimationModifier`
+        
+            Returns:
+                name of the effect modifying the measurement
+        
+        
+        """
+        ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[_Bias__T]) -> None: ...
     def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[_Bias__T]) -> None: ...
@@ -385,6 +498,20 @@ class OnBoardAntennaTurnAroundRangeModifier(org.orekit.estimation.measurements.E
             9.0
     """
     def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
+    def getEffectName(self) -> str:
+        """
+            Get the name of the effect modifying the measurement.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.EstimationModifier.getEffectName` in
+                interface :class:`~org.orekit.estimation.measurements.EstimationModifier`
+        
+            Returns:
+                name of the effect modifying the measurement
+        
+        
+        """
+        ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.TurnAroundRange]) -> None: ...
 
@@ -399,6 +526,20 @@ class OutlierFilter(org.orekit.estimation.measurements.EstimationModifier[_Outli
             8.0
     """
     def __init__(self, int: int, double: float): ...
+    def getEffectName(self) -> str:
+        """
+            Get the name of the effect modifying the measurement.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.EstimationModifier.getEffectName` in
+                interface :class:`~org.orekit.estimation.measurements.EstimationModifier`
+        
+            Returns:
+                name of the effect modifying the measurement
+        
+        
+        """
+        ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[_OutlierFilter__T]) -> None: ...
 
@@ -435,7 +576,7 @@ class ParametricModelEffectGradient:
         Since:
             11.2
     """
-    def evaluate(self, groundStation: org.orekit.estimation.measurements.GroundStation, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient], gradientArray: typing.List[org.hipparchus.analysis.differentiation.Gradient]) -> org.hipparchus.analysis.differentiation.Gradient: ...
+    def evaluate(self, groundStation: org.orekit.estimation.measurements.GroundStation, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient], gradientArray: typing.Union[typing.List[org.hipparchus.analysis.differentiation.Gradient], jpype.JArray]) -> org.hipparchus.analysis.differentiation.Gradient: ...
 
 _PhaseCentersGroundReceiverBaseModifier__T = typing.TypeVar('_PhaseCentersGroundReceiverBaseModifier__T', bound=org.orekit.estimation.measurements.GroundReceiverMeasurement)  # <T>
 class PhaseCentersGroundReceiverBaseModifier(typing.Generic[_PhaseCentersGroundReceiverBaseModifier__T]):
@@ -448,6 +589,19 @@ class PhaseCentersGroundReceiverBaseModifier(typing.Generic[_PhaseCentersGroundR
             12.0
     """
     def __init__(self, frequencyPattern: org.orekit.gnss.antenna.FrequencyPattern, frequencyPattern2: org.orekit.gnss.antenna.FrequencyPattern): ...
+    def getEffectName(self) -> str:
+        """
+            Get the name of the effect modifying the measurement.
+        
+            Returns:
+                name of the effect modifying the measurement
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
     def oneWayDistanceModification(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[_PhaseCentersGroundReceiverBaseModifier__T]) -> float: ...
     def twoWayDistanceModification(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[_PhaseCentersGroundReceiverBaseModifier__T]) -> float: ...
 
@@ -462,6 +616,19 @@ class PhaseCentersInterSatellitesBaseModifier(typing.Generic[_PhaseCentersInterS
             12.1
     """
     def __init__(self, frequencyPattern: org.orekit.gnss.antenna.FrequencyPattern, frequencyPattern2: org.orekit.gnss.antenna.FrequencyPattern): ...
+    def getEffectName(self) -> str:
+        """
+            Get the name of the effect modifying the measurement.
+        
+            Returns:
+                name of the effect modifying the measurement
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
     def oneWayDistanceModification(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[_PhaseCentersInterSatellitesBaseModifier__T]) -> float: ...
     def twoWayDistanceModification(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.InterSatellitesRange]) -> float: ...
 
@@ -501,6 +668,19 @@ class PhaseCentersOneWayGNSSBaseModifier(typing.Generic[_PhaseCentersOneWayGNSSB
             12.1
     """
     def __init__(self, frequencyPattern: org.orekit.gnss.antenna.FrequencyPattern, frequencyPattern2: org.orekit.gnss.antenna.FrequencyPattern, attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
+    def getEffectName(self) -> str:
+        """
+            Get the name of the effect modifying the measurement.
+        
+            Returns:
+                name of the effect modifying the measurement
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
     def oneWayDistanceModification(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[_PhaseCentersOneWayGNSSBaseModifier__T]) -> float: ...
 
 class PhaseIonosphericDelayModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.gnss.Phase]):
@@ -514,6 +694,20 @@ class PhaseIonosphericDelayModifier(org.orekit.estimation.measurements.Estimatio
             10.2
     """
     def __init__(self, ionosphericModel: org.orekit.models.earth.ionosphere.IonosphericModel, double: float): ...
+    def getEffectName(self) -> str:
+        """
+            Get the name of the effect modifying the measurement.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.EstimationModifier.getEffectName` in
+                interface :class:`~org.orekit.estimation.measurements.EstimationModifier`
+        
+            Returns:
+                name of the effect modifying the measurement
+        
+        
+        """
+        ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.gnss.Phase]) -> None: ...
     def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.gnss.Phase]) -> None: ...
@@ -528,10 +722,21 @@ class PhaseTroposphericDelayModifier(org.orekit.estimation.measurements.Estimati
         Since:
             10.2
     """
-    @typing.overload
-    def __init__(self, discreteTroposphericModel: org.orekit.models.earth.troposphere.DiscreteTroposphericModel): ...
-    @typing.overload
     def __init__(self, troposphericModel: org.orekit.models.earth.troposphere.TroposphericModel): ...
+    def getEffectName(self) -> str:
+        """
+            Get the name of the effect modifying the measurement.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.EstimationModifier.getEffectName` in
+                interface :class:`~org.orekit.estimation.measurements.EstimationModifier`
+        
+            Returns:
+                name of the effect modifying the measurement
+        
+        
+        """
+        ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.gnss.Phase]) -> None: ...
     def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.gnss.Phase]) -> None: ...
@@ -545,11 +750,9 @@ class RangeModifierUtil:
         Since:
             11.2
     """
-    _modify_0__T = typing.TypeVar('_modify_0__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
-    _modify_1__T = typing.TypeVar('_modify_1__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
-    @typing.overload
+    _modify__T = typing.TypeVar('_modify__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
     @staticmethod
-    def modify(estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[_modify_0__T], parameterDriversProvider: org.orekit.utils.ParameterDriversProvider, abstractGradientConverter: org.orekit.propagation.integration.AbstractGradientConverter, groundStation: org.orekit.estimation.measurements.GroundStation, parametricModelEffect: typing.Union[ParametricModelEffect, typing.Callable], parametricModelEffectGradient: typing.Union[ParametricModelEffectGradient, typing.Callable]) -> None:
+    def modify(estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[_modify__T], parameterDriversProvider: typing.Union[org.orekit.utils.ParameterDriversProvider, typing.Callable], abstractGradientConverter: org.orekit.propagation.integration.AbstractGradientConverter, groundStation: org.orekit.estimation.measurements.GroundStation, parametricModelEffect: typing.Union[ParametricModelEffect, typing.Callable], parametricModelEffectGradient: typing.Union[ParametricModelEffectGradient, typing.Callable], estimationModifier: org.orekit.estimation.measurements.EstimationModifier[_modify__T]) -> None:
         """
             Apply a modifier to an estimated measurement.
         
@@ -565,14 +768,9 @@ class RangeModifierUtil:
         
         """
         ...
-    @typing.overload
+    _modifyWithoutDerivatives__T = typing.TypeVar('_modifyWithoutDerivatives__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
     @staticmethod
-    def modify(estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[_modify_1__T], parameterDriversProvider: org.orekit.utils.ParameterDriversProvider, abstractGradientConverter: org.orekit.propagation.integration.AbstractGradientConverter, groundStation: org.orekit.estimation.measurements.GroundStation, parametricModelEffect: typing.Union[ParametricModelEffect, typing.Callable], parametricModelEffectGradient: typing.Union[ParametricModelEffectGradient, typing.Callable], estimationModifier: org.orekit.estimation.measurements.EstimationModifier[_modify_1__T]) -> None: ...
-    _modifyWithoutDerivatives_0__T = typing.TypeVar('_modifyWithoutDerivatives_0__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
-    _modifyWithoutDerivatives_1__T = typing.TypeVar('_modifyWithoutDerivatives_1__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
-    @typing.overload
-    @staticmethod
-    def modifyWithoutDerivatives(estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[_modifyWithoutDerivatives_0__T], groundStation: org.orekit.estimation.measurements.GroundStation, parametricModelEffect: typing.Union[ParametricModelEffect, typing.Callable]) -> None:
+    def modifyWithoutDerivatives(estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[_modifyWithoutDerivatives__T], groundStation: org.orekit.estimation.measurements.GroundStation, parametricModelEffect: typing.Union[ParametricModelEffect, typing.Callable], estimationModifier: org.orekit.estimation.measurements.EstimationModifier[_modifyWithoutDerivatives__T]) -> None:
         """
             Apply a modifier to an estimated measurement.
         
@@ -588,9 +786,6 @@ class RangeModifierUtil:
         
         """
         ...
-    @typing.overload
-    @staticmethod
-    def modifyWithoutDerivatives(estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[_modifyWithoutDerivatives_1__T], groundStation: org.orekit.estimation.measurements.GroundStation, parametricModelEffect: typing.Union[ParametricModelEffect, typing.Callable], estimationModifier: org.orekit.estimation.measurements.EstimationModifier[_modifyWithoutDerivatives_1__T]) -> None: ...
 
 class RangeRateModifierUtil:
     """
@@ -601,11 +796,9 @@ class RangeRateModifierUtil:
         Since:
             11.2
     """
-    _modify_0__T = typing.TypeVar('_modify_0__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
-    _modify_1__T = typing.TypeVar('_modify_1__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
-    @typing.overload
+    _modify__T = typing.TypeVar('_modify__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
     @staticmethod
-    def modify(estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[_modify_0__T], parameterDriversProvider: org.orekit.utils.ParameterDriversProvider, abstractGradientConverter: org.orekit.propagation.integration.AbstractGradientConverter, groundStation: org.orekit.estimation.measurements.GroundStation, parametricModelEffect: typing.Union[ParametricModelEffect, typing.Callable], parametricModelEffectGradient: typing.Union[ParametricModelEffectGradient, typing.Callable]) -> None:
+    def modify(estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[_modify__T], parameterDriversProvider: typing.Union[org.orekit.utils.ParameterDriversProvider, typing.Callable], abstractGradientConverter: org.orekit.propagation.integration.AbstractGradientConverter, groundStation: org.orekit.estimation.measurements.GroundStation, parametricModelEffect: typing.Union[ParametricModelEffect, typing.Callable], parametricModelEffectGradient: typing.Union[ParametricModelEffectGradient, typing.Callable], estimationModifier: org.orekit.estimation.measurements.EstimationModifier[_modify__T]) -> None:
         """
             Apply a modifier to an estimated measurement.
         
@@ -624,14 +817,9 @@ class RangeRateModifierUtil:
         
         """
         ...
-    @typing.overload
+    _modifyWithoutDerivatives__T = typing.TypeVar('_modifyWithoutDerivatives__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
     @staticmethod
-    def modify(estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[_modify_1__T], parameterDriversProvider: org.orekit.utils.ParameterDriversProvider, abstractGradientConverter: org.orekit.propagation.integration.AbstractGradientConverter, groundStation: org.orekit.estimation.measurements.GroundStation, parametricModelEffect: typing.Union[ParametricModelEffect, typing.Callable], parametricModelEffectGradient: typing.Union[ParametricModelEffectGradient, typing.Callable], estimationModifier: org.orekit.estimation.measurements.EstimationModifier[_modify_1__T]) -> None: ...
-    _modifyWithoutDerivatives_0__T = typing.TypeVar('_modifyWithoutDerivatives_0__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
-    _modifyWithoutDerivatives_1__T = typing.TypeVar('_modifyWithoutDerivatives_1__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
-    @typing.overload
-    @staticmethod
-    def modifyWithoutDerivatives(estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[_modifyWithoutDerivatives_0__T], groundStation: org.orekit.estimation.measurements.GroundStation, parametricModelEffect: typing.Union[ParametricModelEffect, typing.Callable]) -> None:
+    def modifyWithoutDerivatives(estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[_modifyWithoutDerivatives__T], groundStation: org.orekit.estimation.measurements.GroundStation, parametricModelEffect: typing.Union[ParametricModelEffect, typing.Callable], estimationModifier: org.orekit.estimation.measurements.EstimationModifier[_modifyWithoutDerivatives__T]) -> None:
         """
             Apply a modifier to an estimated measurement.
         
@@ -647,9 +835,6 @@ class RangeRateModifierUtil:
         
         """
         ...
-    @typing.overload
-    @staticmethod
-    def modifyWithoutDerivatives(estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[_modifyWithoutDerivatives_1__T], groundStation: org.orekit.estimation.measurements.GroundStation, parametricModelEffect: typing.Union[ParametricModelEffect, typing.Callable], estimationModifier: org.orekit.estimation.measurements.EstimationModifier[_modifyWithoutDerivatives_1__T]) -> None: ...
 
 class TDOAIonosphericDelayModifier(org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.TDOA]):
     """
@@ -666,6 +851,20 @@ class TDOAIonosphericDelayModifier(org.orekit.estimation.measurements.Estimation
             11.2
     """
     def __init__(self, ionosphericModel: org.orekit.models.earth.ionosphere.IonosphericModel, double: float): ...
+    def getEffectName(self) -> str:
+        """
+            Get the name of the effect modifying the measurement.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.EstimationModifier.getEffectName` in
+                interface :class:`~org.orekit.estimation.measurements.EstimationModifier`
+        
+            Returns:
+                name of the effect modifying the measurement
+        
+        
+        """
+        ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.TDOA]) -> None: ...
     def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.TDOA]) -> None: ...
@@ -684,10 +883,21 @@ class TDOATroposphericDelayModifier(org.orekit.estimation.measurements.Estimatio
         Since:
             11.2
     """
-    @typing.overload
-    def __init__(self, discreteTroposphericModel: org.orekit.models.earth.troposphere.DiscreteTroposphericModel): ...
-    @typing.overload
     def __init__(self, troposphericModel: org.orekit.models.earth.troposphere.TroposphericModel): ...
+    def getEffectName(self) -> str:
+        """
+            Get the name of the effect modifying the measurement.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.EstimationModifier.getEffectName` in
+                interface :class:`~org.orekit.estimation.measurements.EstimationModifier`
+        
+            Returns:
+                name of the effect modifying the measurement
+        
+        
+        """
+        ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.TDOA]) -> None: ...
     def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.TDOA]) -> None: ...
@@ -710,6 +920,20 @@ class TurnAroundRangeIonosphericDelayModifier(org.orekit.estimation.measurements
             9.0
     """
     def __init__(self, ionosphericModel: org.orekit.models.earth.ionosphere.IonosphericModel, double: float): ...
+    def getEffectName(self) -> str:
+        """
+            Get the name of the effect modifying the measurement.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.EstimationModifier.getEffectName` in
+                interface :class:`~org.orekit.estimation.measurements.EstimationModifier`
+        
+            Returns:
+                name of the effect modifying the measurement
+        
+        
+        """
+        ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.TurnAroundRange]) -> None: ...
     def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.TurnAroundRange]) -> None: ...
@@ -729,10 +953,21 @@ class TurnAroundRangeTroposphericDelayModifier(org.orekit.estimation.measurement
         Since:
             9.0
     """
-    @typing.overload
-    def __init__(self, discreteTroposphericModel: org.orekit.models.earth.troposphere.DiscreteTroposphericModel): ...
-    @typing.overload
     def __init__(self, troposphericModel: org.orekit.models.earth.troposphere.TroposphericModel): ...
+    def getEffectName(self) -> str:
+        """
+            Get the name of the effect modifying the measurement.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.EstimationModifier.getEffectName` in
+                interface :class:`~org.orekit.estimation.measurements.EstimationModifier`
+        
+            Returns:
+                name of the effect modifying the measurement
+        
+        
+        """
+        ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.TurnAroundRange]) -> None: ...
     def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.TurnAroundRange]) -> None: ...
@@ -755,6 +990,24 @@ class AbstractRelativisticClockOnBoardRangeRateModifier(AbstractRelativisticCloc
             Springer, 2017."
     """
     def __init__(self, double: float): ...
+    def getEffectName(self) -> str:
+        """
+            Get the name of the effect modifying the measurement.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.EstimationModifier.getEffectName` in
+                interface :class:`~org.orekit.estimation.measurements.EstimationModifier`
+        
+            Overrides:
+                :meth:`~org.orekit.estimation.measurements.modifiers.AbstractRelativisticClockModifier.getEffectName` in
+                class :class:`~org.orekit.estimation.measurements.modifiers.AbstractRelativisticClockModifier`
+        
+            Returns:
+                name of the effect modifying the measurement
+        
+        
+        """
+        ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
 
 class BistaticRangeIonosphericDelayModifier(BaseRangeIonosphericDelayModifier, org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.BistaticRange]):
@@ -808,9 +1061,6 @@ class BistaticRangeRateTroposphericDelayModifier(BaseRangeRateTroposphericDelayM
         Since:
             11.2
     """
-    @typing.overload
-    def __init__(self, discreteTroposphericModel: org.orekit.models.earth.troposphere.DiscreteTroposphericModel): ...
-    @typing.overload
     def __init__(self, troposphericModel: org.orekit.models.earth.troposphere.TroposphericModel): ...
     def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.BistaticRangeRate]) -> None: ...
     def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.BistaticRangeRate]) -> None: ...
@@ -830,9 +1080,6 @@ class BistaticRangeTroposphericDelayModifier(BaseRangeTroposphericDelayModifier,
         Since:
             11.2
     """
-    @typing.overload
-    def __init__(self, discreteTroposphericModel: org.orekit.models.earth.troposphere.DiscreteTroposphericModel): ...
-    @typing.overload
     def __init__(self, troposphericModel: org.orekit.models.earth.troposphere.TroposphericModel): ...
     def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.BistaticRange]) -> None: ...
     def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.BistaticRange]) -> None: ...
@@ -852,7 +1099,7 @@ class DynamicOutlierFilter(OutlierFilter[_DynamicOutlierFilter__T], typing.Gener
             9.2
     """
     def __init__(self, int: int, double: float): ...
-    def getSigma(self) -> typing.List[float]:
+    def getSigma(self) -> typing.MutableSequence[float]:
         """
             Get the current value of sigma.
         
@@ -863,7 +1110,8 @@ class DynamicOutlierFilter(OutlierFilter[_DynamicOutlierFilter__T], typing.Gener
         """
         ...
     def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[_DynamicOutlierFilter__T]) -> None: ...
-    def setSigma(self, doubleArray: typing.List[float]) -> None:
+    def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[_DynamicOutlierFilter__T]) -> None: ...
+    def setSigma(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
             Set the current value of sigma.
         
@@ -873,23 +1121,6 @@ class DynamicOutlierFilter(OutlierFilter[_DynamicOutlierFilter__T], typing.Gener
         
         """
         ...
-
-class InterSatellitesPhaseAmbiguityModifier(AbstractAmbiguityModifier, org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.gnss.InterSatellitesPhase]):
-    """
-    :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class InterSatellitesPhaseAmbiguityModifier extends :class:`~org.orekit.estimation.measurements.modifiers.AbstractAmbiguityModifier` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.gnss.InterSatellitesPhase`>
-    
-        Deprecated.
-        as of 12.1 ambiguity is managed directly by raw measurements
-        :class:`~org.orekit.estimation.measurements.gnss.InterSatellitesPhase`
-        Class modifying theoretical inter-satellites phase measurement with ambiguity.
-    
-        Since:
-            10.3
-    """
-    def __init__(self, int: int, double: float): ...
-    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.gnss.InterSatellitesPhase]) -> None: ...
-    def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.gnss.InterSatellitesPhase]) -> None: ...
 
 class OnBoardAntennaInterSatellitesPhaseModifier(PhaseCentersInterSatellitesBaseModifier[org.orekit.estimation.measurements.gnss.InterSatellitesPhase], org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.gnss.InterSatellitesPhase]):
     """
@@ -954,39 +1185,6 @@ class OnBoardAntennaOneWayGNSSRangeModifier(PhaseCentersOneWayGNSSBaseModifier[o
     def __init__(self, frequencyPattern: org.orekit.gnss.antenna.FrequencyPattern, frequencyPattern2: org.orekit.gnss.antenna.FrequencyPattern, attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.gnss.OneWayGNSSRange]) -> None: ...
-
-class OneWayGNSSPhaseAmbiguityModifier(AbstractAmbiguityModifier, org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.gnss.OneWayGNSSPhase]):
-    """
-    :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class OneWayGNSSPhaseAmbiguityModifier extends :class:`~org.orekit.estimation.measurements.modifiers.AbstractAmbiguityModifier` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.gnss.OneWayGNSSPhase`>
-    
-        Deprecated.
-        as of 12.1 ambiguity is managed directly by raw measurements
-        :class:`~org.orekit.estimation.measurements.gnss.OneWayGNSSPhase`
-        Class modifying theoretical one-way GNSS phase measurement with ambiguity.
-    
-        Since:
-            10.3
-    """
-    def __init__(self, int: int, double: float): ...
-    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.gnss.OneWayGNSSPhase]) -> None: ...
-    def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.gnss.OneWayGNSSPhase]) -> None: ...
-
-class PhaseAmbiguityModifier(AbstractAmbiguityModifier, org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.gnss.Phase]):
-    """
-    :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class PhaseAmbiguityModifier extends :class:`~org.orekit.estimation.measurements.modifiers.AbstractAmbiguityModifier` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.gnss.Phase`>
-    
-        Deprecated.
-        as of 12.1 ambiguity is managed directly by raw measurements :class:`~org.orekit.estimation.measurements.gnss.Phase`
-        Class modifying theoretical phase measurement with ambiguity.
-    
-        Since:
-            9.2
-    """
-    def __init__(self, int: int, double: float): ...
-    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.gnss.Phase]) -> None: ...
-    def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.gnss.Phase]) -> None: ...
 
 class PhaseCentersPhaseModifier(PhaseCentersGroundReceiverBaseModifier[org.orekit.estimation.measurements.gnss.Phase], org.orekit.estimation.measurements.EstimationModifier[org.orekit.estimation.measurements.gnss.Phase]):
     """
@@ -1063,7 +1261,7 @@ class PythonParametricModelEffectGradient(ParametricModelEffectGradient):
     public class PythonParametricModelEffectGradient extends :class:`~org.orekit.estimation.measurements.modifiers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.modifiers.ParametricModelEffectGradient`
     """
     def __init__(self): ...
-    def evaluate(self, groundStation: org.orekit.estimation.measurements.GroundStation, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient], gradientArray: typing.List[org.hipparchus.analysis.differentiation.Gradient]) -> org.hipparchus.analysis.differentiation.Gradient: ...
+    def evaluate(self, groundStation: org.orekit.estimation.measurements.GroundStation, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient], gradientArray: typing.Union[typing.List[org.hipparchus.analysis.differentiation.Gradient], jpype.JArray]) -> org.hipparchus.analysis.differentiation.Gradient: ...
     def finalize(self) -> None: ...
     def pythonDecRef(self) -> None:
         """
@@ -1141,9 +1339,6 @@ class RangeRateTroposphericDelayModifier(BaseRangeRateTroposphericDelayModifier,
         Since:
             8.0
     """
-    @typing.overload
-    def __init__(self, discreteTroposphericModel: org.orekit.models.earth.troposphere.DiscreteTroposphericModel, boolean: bool): ...
-    @typing.overload
     def __init__(self, troposphericModel: org.orekit.models.earth.troposphere.TroposphericModel, boolean: bool): ...
     def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.RangeRate]) -> None: ...
     def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.RangeRate]) -> None: ...
@@ -1168,7 +1363,7 @@ class RangeRateTroposphericDelayModifier(BaseRangeRateTroposphericDelayModifier,
         """
         ...
     @typing.overload
-    def rangeRateErrorTroposphericModel(self, groundStation: org.orekit.estimation.measurements.GroundStation, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_rangeRateErrorTroposphericModel_1__T], tArray: typing.List[_rangeRateErrorTroposphericModel_1__T]) -> _rangeRateErrorTroposphericModel_1__T:
+    def rangeRateErrorTroposphericModel(self, groundStation: org.orekit.estimation.measurements.GroundStation, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_rangeRateErrorTroposphericModel_1__T], tArray: typing.Union[typing.List[_rangeRateErrorTroposphericModel_1__T], jpype.JArray]) -> _rangeRateErrorTroposphericModel_1__T:
         """
             Compute the measurement error due to Troposphere.
         
@@ -1204,9 +1399,6 @@ class RangeTroposphericDelayModifier(BaseRangeTroposphericDelayModifier, org.ore
         Since:
             8.0
     """
-    @typing.overload
-    def __init__(self, discreteTroposphericModel: org.orekit.models.earth.troposphere.DiscreteTroposphericModel): ...
-    @typing.overload
     def __init__(self, troposphericModel: org.orekit.models.earth.troposphere.TroposphericModel): ...
     def modify(self, estimatedMeasurement: org.orekit.estimation.measurements.EstimatedMeasurement[org.orekit.estimation.measurements.Range]) -> None: ...
     def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.Range]) -> None: ...
@@ -1335,7 +1527,8 @@ class RelativisticClockRangeRateModifier(AbstractRelativisticClockModifier, org.
     """
     public class RelativisticClockRangeRateModifier extends :class:`~org.orekit.estimation.measurements.modifiers.AbstractRelativisticClockModifier` implements :class:`~org.orekit.estimation.measurements.EstimationModifier`<:class:`~org.orekit.estimation.measurements.RangeRate`>
     
-        Class modifying theoretical range-rate measurement with relativistic frequency deviation.
+        Class modifying theoretical range-rate measurement with relativistic frequency deviation. It works only with orbit-based
+        states.
     
         Relativistic clock correction is caused by the motion of the satellite as well as the change in the gravitational
         potential
@@ -1618,7 +1811,8 @@ class RelativisticClockOneWayGNSSRangeRateModifier(AbstractRelativisticClockOnBo
     """
     public class RelativisticClockOneWayGNSSRangeRateModifier extends :class:`~org.orekit.estimation.measurements.modifiers.AbstractRelativisticClockOnBoardRangeRateModifier`<:class:`~org.orekit.estimation.measurements.gnss.OneWayGNSSRangeRate`>
     
-        Class modifying theoretical range-rate measurement with relativistic frequency deviation.
+        Class modifying theoretical range-rate measurement with relativistic frequency deviation. It works only with orbit-based
+        states.
     
         Relativistic clock correction is caused by the motion of the satellite as well as the change in the gravitational
         potential
@@ -1634,18 +1828,16 @@ class RelativisticClockOneWayGNSSRangeRateModifier(AbstractRelativisticClockOnBo
     def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[org.orekit.estimation.measurements.gnss.OneWayGNSSRangeRate]) -> None: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.estimation.measurements.modifiers")``.
 
     AberrationModifier: typing.Type[AberrationModifier]
-    AbstractAmbiguityModifier: typing.Type[AbstractAmbiguityModifier]
     AbstractRelativisticClockModifier: typing.Type[AbstractRelativisticClockModifier]
     AbstractRelativisticClockOnBoardRangeRateModifier: typing.Type[AbstractRelativisticClockOnBoardRangeRateModifier]
     AbstractRelativisticJ2ClockModifier: typing.Type[AbstractRelativisticJ2ClockModifier]
     AbstractShapiroBaseModifier: typing.Type[AbstractShapiroBaseModifier]
     AngularIonosphericDelayModifier: typing.Type[AngularIonosphericDelayModifier]
     AngularRadioRefractionModifier: typing.Type[AngularRadioRefractionModifier]
-    AngularTroposphericDelayModifier: typing.Type[AngularTroposphericDelayModifier]
     BaseRangeIonosphericDelayModifier: typing.Type[BaseRangeIonosphericDelayModifier]
     BaseRangeRateIonosphericDelayModifier: typing.Type[BaseRangeRateIonosphericDelayModifier]
     BaseRangeRateTroposphericDelayModifier: typing.Type[BaseRangeRateTroposphericDelayModifier]
@@ -1656,18 +1848,15 @@ class __module_protocol__(typing.Protocol):
     BistaticRangeRateTroposphericDelayModifier: typing.Type[BistaticRangeRateTroposphericDelayModifier]
     BistaticRangeTroposphericDelayModifier: typing.Type[BistaticRangeTroposphericDelayModifier]
     DynamicOutlierFilter: typing.Type[DynamicOutlierFilter]
-    InterSatellitesPhaseAmbiguityModifier: typing.Type[InterSatellitesPhaseAmbiguityModifier]
     ModifierGradientConverter: typing.Type[ModifierGradientConverter]
     OnBoardAntennaInterSatellitesPhaseModifier: typing.Type[OnBoardAntennaInterSatellitesPhaseModifier]
     OnBoardAntennaInterSatellitesRangeModifier: typing.Type[OnBoardAntennaInterSatellitesRangeModifier]
     OnBoardAntennaOneWayGNSSPhaseModifier: typing.Type[OnBoardAntennaOneWayGNSSPhaseModifier]
     OnBoardAntennaOneWayGNSSRangeModifier: typing.Type[OnBoardAntennaOneWayGNSSRangeModifier]
     OnBoardAntennaTurnAroundRangeModifier: typing.Type[OnBoardAntennaTurnAroundRangeModifier]
-    OneWayGNSSPhaseAmbiguityModifier: typing.Type[OneWayGNSSPhaseAmbiguityModifier]
     OutlierFilter: typing.Type[OutlierFilter]
     ParametricModelEffect: typing.Type[ParametricModelEffect]
     ParametricModelEffectGradient: typing.Type[ParametricModelEffectGradient]
-    PhaseAmbiguityModifier: typing.Type[PhaseAmbiguityModifier]
     PhaseCentersGroundReceiverBaseModifier: typing.Type[PhaseCentersGroundReceiverBaseModifier]
     PhaseCentersInterSatellitesBaseModifier: typing.Type[PhaseCentersInterSatellitesBaseModifier]
     PhaseCentersOffsetComputer: typing.Type[PhaseCentersOffsetComputer]
@@ -1710,4 +1899,3 @@ class __module_protocol__(typing.Protocol):
     TDOATroposphericDelayModifier: typing.Type[TDOATroposphericDelayModifier]
     TurnAroundRangeIonosphericDelayModifier: typing.Type[TurnAroundRangeIonosphericDelayModifier]
     TurnAroundRangeTroposphericDelayModifier: typing.Type[TurnAroundRangeTroposphericDelayModifier]
-    class-use: org.orekit.estimation.measurements.modifiers.class-use.__module_protocol__

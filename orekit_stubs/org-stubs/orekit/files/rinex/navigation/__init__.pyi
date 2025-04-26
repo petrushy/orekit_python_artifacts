@@ -1,8 +1,15 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
+import jpype
 import org.orekit.data
 import org.orekit.files.rinex
-import org.orekit.files.rinex.navigation.class-use
 import org.orekit.files.rinex.section
 import org.orekit.gnss
 import org.orekit.propagation.analytical.gnss.data
@@ -51,7 +58,7 @@ class IonosphericCorrectionType(java.lang.Enum['IonosphericCorrectionType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['IonosphericCorrectionType']:
+    def values() -> typing.MutableSequence['IonosphericCorrectionType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -108,7 +115,7 @@ class RegionCode(java.lang.Enum['RegionCode']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['RegionCode']:
+    def values() -> typing.MutableSequence['RegionCode']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -188,8 +195,20 @@ class RinexNavigation(org.orekit.files.rinex.RinexFile['RinexNavigationHeader'])
         
         """
         ...
-    @typing.overload
-    def addGPSLegacyNavigationMessage(self, gPSCivilianNavigationMessage: org.orekit.propagation.analytical.gnss.data.GPSCivilianNavigationMessage) -> None:
+    def addGPSCivilianNavigationMessage(self, gPSCivilianNavigationMessage: org.orekit.propagation.analytical.gnss.data.GPSCivilianNavigationMessage) -> None:
+        """
+            Add a GPS civilian navigation message to the list.
+        
+            Parameters:
+                message (:class:`~org.orekit.propagation.analytical.gnss.data.GPSCivilianNavigationMessage`): message to add
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
+    def addGPSLegacyNavigationMessage(self, gPSLegacyNavigationMessage: org.orekit.propagation.analytical.gnss.data.GPSLegacyNavigationMessage) -> None:
         """
             Add a GPS legacy navigation message to the list.
         
@@ -199,19 +218,9 @@ class RinexNavigation(org.orekit.files.rinex.RinexFile['RinexNavigationHeader'])
             Since:
                 12.0
         
-            Add a GPS civilian navigation message to the list.
-        
-            Parameters:
-                message (:class:`~org.orekit.propagation.analytical.gnss.data.GPSCivilianNavigationMessage`): message to add
-        
-            Since:
-                12.0
-        
         
         """
         ...
-    @typing.overload
-    def addGPSLegacyNavigationMessage(self, gPSLegacyNavigationMessage: org.orekit.propagation.analytical.gnss.data.GPSLegacyNavigationMessage) -> None: ...
     def addGalileoNavigationMessage(self, galileoNavigationMessage: org.orekit.propagation.analytical.gnss.data.GalileoNavigationMessage) -> None:
         """
             Add a Galileo navigation message to the list.
@@ -232,16 +241,6 @@ class RinexNavigation(org.orekit.files.rinex.RinexFile['RinexNavigationHeader'])
         
         """
         ...
-    def addIRNSSNavigationMessage(self, iRNSSNavigationMessage: org.orekit.propagation.analytical.gnss.data.IRNSSNavigationMessage) -> None:
-        """
-            Add a IRNSS navigation message to the list.
-        
-            Parameters:
-                message (:class:`~org.orekit.propagation.analytical.gnss.data.IRNSSNavigationMessage`): message to add
-        
-        
-        """
-        ...
     def addKlobucharMessage(self, ionosphereKlobucharMessage: 'IonosphereKlobucharMessage') -> None:
         """
             Add an ionosphere Klobuchar message.
@@ -251,6 +250,26 @@ class RinexNavigation(org.orekit.files.rinex.RinexFile['RinexNavigationHeader'])
         
             Since:
                 12.0
+        
+        
+        """
+        ...
+    def addNavICL1NVNavigationMessage(self, navICL1NVNavigationMessage: org.orekit.propagation.analytical.gnss.data.NavICL1NVNavigationMessage) -> None:
+        """
+            Add a NavIC navigation message to the list.
+        
+            Parameters:
+                message (:class:`~org.orekit.propagation.analytical.gnss.data.NavICL1NVNavigationMessage`): message to add
+        
+        
+        """
+        ...
+    def addNavICLegacyNavigationMessage(self, navICLegacyNavigationMessage: org.orekit.propagation.analytical.gnss.data.NavICLegacyNavigationMessage) -> None:
+        """
+            Add a NavIC navigation message to the list.
+        
+            Parameters:
+                message (:class:`~org.orekit.propagation.analytical.gnss.data.NavICLegacyNavigationMessage`): message to add
         
         
         """
@@ -343,11 +362,7 @@ class RinexNavigation(org.orekit.files.rinex.RinexFile['RinexNavigationHeader'])
     def getGlonassNavigationMessages(self, string: str) -> java.util.List[org.orekit.propagation.analytical.gnss.data.GLONASSNavigationMessage]: ...
     @typing.overload
     def getGlonassNavigationMessages(self) -> java.util.Map[str, java.util.List[org.orekit.propagation.analytical.gnss.data.GLONASSNavigationMessage]]: ...
-    @typing.overload
-    def getIRNSSNavigationMessages(self, string: str) -> java.util.List[org.orekit.propagation.analytical.gnss.data.IRNSSNavigationMessage]: ...
-    @typing.overload
-    def getIRNSSNavigationMessages(self) -> java.util.Map[str, java.util.List[org.orekit.propagation.analytical.gnss.data.IRNSSNavigationMessage]]: ...
-    def getKlobucharAlpha(self) -> typing.List[float]:
+    def getKlobucharAlpha(self) -> typing.MutableSequence[float]:
         """
             Get the "alpha" ionospheric parameters.
         
@@ -359,7 +374,7 @@ class RinexNavigation(org.orekit.files.rinex.RinexFile['RinexNavigationHeader'])
         
         """
         ...
-    def getKlobucharBeta(self) -> typing.List[float]:
+    def getKlobucharBeta(self) -> typing.MutableSequence[float]:
         """
             Get the "beta" ionospheric parameters.
         
@@ -372,11 +387,19 @@ class RinexNavigation(org.orekit.files.rinex.RinexFile['RinexNavigationHeader'])
         """
         ...
     def getKlobucharMessages(self) -> java.util.List['IonosphereKlobucharMessage']: ...
-    def getNeQuickAlpha(self) -> typing.List[float]:
+    @typing.overload
+    def getNavICL1NVNavigationMessages(self, string: str) -> java.util.List[org.orekit.propagation.analytical.gnss.data.NavICL1NVNavigationMessage]: ...
+    @typing.overload
+    def getNavICL1NVNavigationMessages(self) -> java.util.Map[str, java.util.List[org.orekit.propagation.analytical.gnss.data.NavICL1NVNavigationMessage]]: ...
+    @typing.overload
+    def getNavICLegacyNavigationMessages(self, string: str) -> java.util.List[org.orekit.propagation.analytical.gnss.data.NavICLegacyNavigationMessage]: ...
+    @typing.overload
+    def getNavICLegacyNavigationMessages(self) -> java.util.Map[str, java.util.List[org.orekit.propagation.analytical.gnss.data.NavICLegacyNavigationMessage]]: ...
+    def getNeQuickAlpha(self) -> typing.MutableSequence[float]:
         """
             Get the "alpha" ionospheric parameters.
         
-            They are used to initialize the :class:`~org.orekit.models.earth.ionosphere.NeQuickModel`.
+            They are used to initialize the :class:`~org.orekit.models.earth.ionosphere.nequick.NeQuickModel`.
         
             Returns:
                 the "alpha" ionospheric parameters
@@ -398,7 +421,7 @@ class RinexNavigation(org.orekit.files.rinex.RinexFile['RinexNavigationHeader'])
     @typing.overload
     def getSBASNavigationMessages(self) -> java.util.Map[str, java.util.List[org.orekit.propagation.analytical.gnss.data.SBASNavigationMessage]]: ...
     def getSystemTimeOffsets(self) -> java.util.List['SystemTimeOffsetMessage']: ...
-    def setKlobucharAlpha(self, doubleArray: typing.List[float]) -> None:
+    def setKlobucharAlpha(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
             Set the "alpha" ionspheric parameters.
         
@@ -408,7 +431,7 @@ class RinexNavigation(org.orekit.files.rinex.RinexFile['RinexNavigationHeader'])
         
         """
         ...
-    def setKlobucharBeta(self, doubleArray: typing.List[float]) -> None:
+    def setKlobucharBeta(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
             Set the "beta" ionospheric parameters.
         
@@ -418,7 +441,7 @@ class RinexNavigation(org.orekit.files.rinex.RinexFile['RinexNavigationHeader'])
         
         """
         ...
-    def setNeQuickAlpha(self, doubleArray: typing.List[float]) -> None:
+    def setNeQuickAlpha(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
             Set the "alpha" ionospheric parameters.
         
@@ -517,7 +540,7 @@ class RinexNavigationParser:
     
         Parser for RINEX navigation messages files.
     
-        This parser handles RINEX version from 2 to 4.00.
+        This parser handles RINEX version from 2 to 4.02.
     
         Since:
             11.0
@@ -531,7 +554,9 @@ class RinexNavigationParser:
             :class:`~org.orekit.files.rinex.navigation.https:.files.igs.org.pub.data.format.rinex303.pdf`,
             :class:`~org.orekit.files.rinex.navigation.https:.files.igs.org.pub.data.format.rinex304.pdf`,
             :class:`~org.orekit.files.rinex.navigation.https:.files.igs.org.pub.data.format.rinex305.pdf`,
-            :class:`~org.orekit.files.rinex.navigation.https:.files.igs.org.pub.data.format.rinex_4.00.pdf`
+            :class:`~org.orekit.files.rinex.navigation.https:.files.igs.org.pub.data.format.rinex_4.00.pdf`,
+            :class:`~org.orekit.files.rinex.navigation.https:.files.igs.org.pub.data.format.rinex_4.01.pdf`,
+            :class:`~org.orekit.files.rinex.navigation.https:.files.igs.org.pub.data.format.rinex_4.02.pdf`
     """
     @typing.overload
     def __init__(self): ...
@@ -583,7 +608,7 @@ class SbasId(java.lang.Enum['SbasId']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['SbasId']:
+    def values() -> typing.MutableSequence['SbasId']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -704,6 +729,12 @@ class UtcId(java.lang.Enum['UtcId']):
     
         Enumerate for the UTC ids.
     
+        In addition to the ids listed here, Rinex 4.01 table 23 allowed UTC(BIPM) as a possible UTC id for SBAS. This was added
+        in June 2023 and Rinex 4.01 was officially published in July 2023. However, this was quickly removed, in July 2023, i.e.
+        just after publication of Rinex 4.01, as directed by BIPM. It does not appear anymore in Rinex 4.02 which was officially
+        published in October 2024. Due to its transient appearance in the standard, we decided to not include UTC(BIPM) in this
+        enumerate.
+    
         Since:
             12.0
     """
@@ -712,9 +743,10 @@ class UtcId(java.lang.Enum['UtcId']):
     GAL: typing.ClassVar['UtcId'] = ...
     NTSC: typing.ClassVar['UtcId'] = ...
     NICT: typing.ClassVar['UtcId'] = ...
+    CRL: typing.ClassVar['UtcId'] = ...
+    NIST: typing.ClassVar['UtcId'] = ...
     IRN: typing.ClassVar['UtcId'] = ...
     OP: typing.ClassVar['UtcId'] = ...
-    NIST: typing.ClassVar['UtcId'] = ...
     @staticmethod
     def parseUtcId(string: str) -> 'UtcId': ...
     _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
@@ -742,7 +774,7 @@ class UtcId(java.lang.Enum['UtcId']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['UtcId']:
+    def values() -> typing.MutableSequence['UtcId']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1223,7 +1255,7 @@ class IonosphereBDGIMMessage(IonosphereBaseMessage):
             12.0
     """
     def __init__(self, satelliteSystem: org.orekit.gnss.SatelliteSystem, int: int, string: str): ...
-    def getAlpha(self) -> typing.List[float]:
+    def getAlpha(self) -> typing.MutableSequence[float]:
         """
             Get the α coefficients.
         
@@ -1267,7 +1299,7 @@ class IonosphereKlobucharMessage(IonosphereBaseMessage):
             12.0
     """
     def __init__(self, satelliteSystem: org.orekit.gnss.SatelliteSystem, int: int, string: str): ...
-    def getAlpha(self) -> typing.List[float]:
+    def getAlpha(self) -> typing.MutableSequence[float]:
         """
             Get the α coefficients.
         
@@ -1283,7 +1315,7 @@ class IonosphereKlobucharMessage(IonosphereBaseMessage):
         
         """
         ...
-    def getBeta(self) -> typing.List[float]:
+    def getBeta(self) -> typing.MutableSequence[float]:
         """
             Get the β coefficients.
         
@@ -1503,7 +1535,7 @@ class IonosphereNequickGMessage(IonosphereBaseMessage):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.rinex.navigation")``.
 
     EarthOrientationParameterMessage: typing.Type[EarthOrientationParameterMessage]
@@ -1521,4 +1553,3 @@ class __module_protocol__(typing.Protocol):
     TimeSystemCorrection: typing.Type[TimeSystemCorrection]
     TypeSvMessage: typing.Type[TypeSvMessage]
     UtcId: typing.Type[UtcId]
-    class-use: org.orekit.files.rinex.navigation.class-use.__module_protocol__

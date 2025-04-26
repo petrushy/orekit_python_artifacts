@@ -1,10 +1,16 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
 import org.hipparchus.geometry.euclidean.threed
 import org.hipparchus.geometry.spherical.twod
 import org.orekit.bodies
 import org.orekit.frames
-import org.orekit.geometry.fov.class-use
 import org.orekit.propagation.events
 import typing
 
@@ -292,7 +298,7 @@ class PolygonalFieldOfView(AbstractFieldOfView):
         @staticmethod
         def valueOf(string: str) -> 'PolygonalFieldOfView.DefiningConeType': ...
         @staticmethod
-        def values() -> typing.List['PolygonalFieldOfView.DefiningConeType']: ...
+        def values() -> typing.MutableSequence['PolygonalFieldOfView.DefiningConeType']: ...
 
 class PythonAbstractFieldOfView(AbstractFieldOfView):
     """
@@ -724,7 +730,7 @@ class PythonSmoothFieldOfView(SmoothFieldOfView):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.geometry.fov")``.
 
     AbstractFieldOfView: typing.Type[AbstractFieldOfView]
@@ -737,4 +743,3 @@ class __module_protocol__(typing.Protocol):
     PythonFieldOfView: typing.Type[PythonFieldOfView]
     PythonSmoothFieldOfView: typing.Type[PythonSmoothFieldOfView]
     SmoothFieldOfView: typing.Type[SmoothFieldOfView]
-    class-use: org.orekit.geometry.fov.class-use.__module_protocol__

@@ -1,9 +1,16 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.io
 import java.lang
 import java.util
+import jpype
 import org.orekit.data
 import org.orekit.models.earth.atmosphere
-import org.orekit.models.earth.atmosphere.data.class-use
 import org.orekit.time
 import org.orekit.utils
 import typing
@@ -612,7 +619,7 @@ class CssiSpaceWeatherData(AbstractSolarActivityData['CssiSpaceWeatherDataLoader
         
         """
         ...
-    def getAp(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]:
+    def getAp(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]:
         """
             Get the A :sub:`p` geomagnetic indices.
         
@@ -742,7 +749,7 @@ class CssiSpaceWeatherDataLoader(AbstractSolarActivityDataLoader['CssiSpaceWeath
         ...
     def loadData(self, inputStream: java.io.InputStream, string: str) -> None: ...
     class LineParameters(AbstractSolarActivityDataLoader.LineParameters):
-        def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], double2: float, doubleArray2: typing.List[float], double4: float, double5: float, int: int, double6: float, double7: float, double8: float, double9: float, double10: float): ...
+        def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray], double2: float, doubleArray2: typing.Union[typing.List[float], jpype.JArray], double4: float, double5: float, int: int, double6: float, double7: float, double8: float, double9: float, double10: float): ...
         def compareTo(self, lineParameters: AbstractSolarActivityDataLoader.LineParameters) -> int: ...
         def equals(self, object: typing.Any) -> bool: ...
         def getApAvg(self) -> float: ...
@@ -757,11 +764,11 @@ class CssiSpaceWeatherDataLoader(AbstractSolarActivityDataLoader['CssiSpaceWeath
         @typing.overload
         def getThreeHourlyAp(self, int: int) -> float: ...
         @typing.overload
-        def getThreeHourlyAp(self) -> typing.List[float]: ...
+        def getThreeHourlyAp(self) -> typing.MutableSequence[float]: ...
         @typing.overload
         def getThreeHourlyKp(self, int: int) -> float: ...
         @typing.overload
-        def getThreeHourlyKp(self) -> typing.List[float]: ...
+        def getThreeHourlyKp(self) -> typing.MutableSequence[float]: ...
         def hashCode(self) -> int: ...
 
 class MarshallSolarActivityFutureEstimation(AbstractSolarActivityData['MarshallSolarActivityFutureEstimationLoader.LineParameters', 'MarshallSolarActivityFutureEstimationLoader']):
@@ -851,7 +858,7 @@ class MarshallSolarActivityFutureEstimation(AbstractSolarActivityData['MarshallS
         
         """
         ...
-    def getAp(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]:
+    def getAp(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]:
         """
             Get the A :sub:`p` geomagnetic indices.
         
@@ -983,7 +990,7 @@ class MarshallSolarActivityFutureEstimation(AbstractSolarActivityData['MarshallS
         @staticmethod
         def valueOf(string: str) -> 'MarshallSolarActivityFutureEstimation.StrengthLevel': ...
         @staticmethod
-        def values() -> typing.List['MarshallSolarActivityFutureEstimation.StrengthLevel']: ...
+        def values() -> typing.MutableSequence['MarshallSolarActivityFutureEstimation.StrengthLevel']: ...
 
 class MarshallSolarActivityFutureEstimationLoader(AbstractSolarActivityDataLoader['MarshallSolarActivityFutureEstimationLoader.LineParameters']):
     """
@@ -1049,7 +1056,7 @@ class PythonAbstractSolarActivityData(AbstractSolarActivityData[_PythonAbstractS
         
         """
         ...
-    def getAp(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]:
+    def getAp(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]:
         """
             Description copied from interface: :meth:`~org.orekit.models.earth.atmosphere.NRLMSISE00InputParameters.getAp`
             Get the A :sub:`p` geomagnetic indices.
@@ -1166,7 +1173,7 @@ class PythonAbstractSolarActivityData(AbstractSolarActivityData[_PythonAbstractS
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.models.earth.atmosphere.data")``.
 
     AbstractSolarActivityData: typing.Type[AbstractSolarActivityData]
@@ -1179,4 +1186,3 @@ class __module_protocol__(typing.Protocol):
     MarshallSolarActivityFutureEstimationLoader: typing.Type[MarshallSolarActivityFutureEstimationLoader]
     PythonAbstractSolarActivityData: typing.Type[PythonAbstractSolarActivityData]
     SOLFSMYDataLoader: typing.Type[SOLFSMYDataLoader]
-    class-use: org.orekit.models.earth.atmosphere.data.class-use.__module_protocol__

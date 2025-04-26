@@ -1,9 +1,16 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.util
+import org
 import org.hipparchus
 import org.hipparchus.ode.events
 import org.orekit.propagation
 import org.orekit.propagation.events
-import org.orekit.propagation.events.handlers.class-use
 import org.orekit.time
 import typing
 
@@ -162,7 +169,7 @@ class EventMultipleHandler(EventHandler):
             10.3
     """
     def __init__(self): ...
-    def addHandler(self, eventHandler: EventHandler) -> 'EventMultipleHandler':
+    def addHandler(self, eventHandler: typing.Union[EventHandler, typing.Callable]) -> 'EventMultipleHandler':
         """
             Add one handler to the managed handlers list.
         
@@ -175,7 +182,7 @@ class EventMultipleHandler(EventHandler):
         
         """
         ...
-    def addHandlers(self, eventHandlerArray: typing.List[EventHandler]) -> 'EventMultipleHandler':
+    def addHandlers(self, *eventHandler: typing.Union[EventHandler, typing.Callable]) -> 'EventMultipleHandler':
         """
             Add several handlers to the managed handlers list.
         
@@ -279,7 +286,7 @@ class EventMultipleHandler(EventHandler):
         
         """
         ...
-    def setHandlers(self, list: java.util.List[EventHandler]) -> None: ...
+    def setHandlers(self, list: java.util.List[typing.Union[EventHandler, typing.Callable]]) -> None: ...
 
 _FieldContinueOnEvent__T = typing.TypeVar('_FieldContinueOnEvent__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldContinueOnEvent(FieldEventHandler[_FieldContinueOnEvent__T], typing.Generic[_FieldContinueOnEvent__T]):
@@ -308,7 +315,7 @@ class FieldRecallLastOccurrence(FieldEventHandler[_FieldRecallLastOccurrence__T]
         Also see:
             :class:`~org.orekit.propagation.events.handlers.RecallLastOccurrence`
     """
-    def __init__(self, fieldEventHandler: FieldEventHandler[_FieldRecallLastOccurrence__T]): ...
+    def __init__(self, fieldEventHandler: typing.Union[FieldEventHandler[_FieldRecallLastOccurrence__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], org.orekit.propagation.events.FieldEventDetector[org.hipparchus.CalculusFieldElement], bool], org.hipparchus.ode.events.Action]]): ...
     def eventOccurred(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldRecallLastOccurrence__T], fieldEventDetector: org.orekit.propagation.events.FieldEventDetector[_FieldRecallLastOccurrence__T], boolean: bool) -> org.hipparchus.ode.events.Action: ...
     def finish(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldRecallLastOccurrence__T], fieldEventDetector: org.orekit.propagation.events.FieldEventDetector[_FieldRecallLastOccurrence__T]) -> None: ...
     def getLastOccurrence(self) -> org.orekit.time.FieldAbsoluteDate[_FieldRecallLastOccurrence__T]: ...
@@ -571,7 +578,7 @@ class RecallLastOccurrence(EventHandler):
         Also see:
             :class:`~org.orekit.propagation.events.handlers.RecordAndContinue`
     """
-    def __init__(self, eventHandler: EventHandler): ...
+    def __init__(self, eventHandler: typing.Union[EventHandler, typing.Callable]): ...
     def eventOccurred(self, spacecraftState: org.orekit.propagation.SpacecraftState, eventDetector: org.orekit.propagation.events.EventDetector, boolean: bool) -> org.hipparchus.ode.events.Action:
         """
             Handle an event.
@@ -873,14 +880,255 @@ class StopOnIncreasing(EventHandler):
         """
         ...
 
+class CountAndContinue(org.orekit.propagation.events.handlers.CountingHandler):
+    """
+    public class CountAndContinue extends :class:`~org.orekit.propagation.events.handlers.CountingHandler`
+    
+        Event handler counting event occurrences and always returning
+        :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`.
+    
+        Since:
+            13.0
+    
+        Also see:
+            :class:`~org.orekit.propagation.events.handlers.CountingHandler`
+    """
+    @typing.overload
+    def __init__(self): ...
+    @typing.overload
+    def __init__(self, int: int): ...
 
-class __module_protocol__(typing.Protocol):
+class CountingHandler(org.orekit.propagation.events.handlers.AbstractGenericCountingHandler, EventHandler):
+    """
+    public abstract class CountingHandler extends :class:`~org.orekit.propagation.events.handlers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.handlers.EventHandler`
+    
+        Abstract class for handlers counting event occurrences. The
+        :class:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action?is`
+        can be modified according to the count.
+    
+        Since:
+            13.0
+    """
+    def eventOccurred(self, spacecraftState: org.orekit.propagation.SpacecraftState, eventDetector: org.orekit.propagation.events.EventDetector, boolean: bool) -> org.hipparchus.ode.events.Action:
+        """
+            Handle an event.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred` in
+                interface :class:`~org.orekit.propagation.events.handlers.EventHandler`
+        
+            Parameters:
+                s (:class:`~org.orekit.propagation.SpacecraftState`): SpaceCraft state to be used in the evaluation
+                detector (:class:`~org.orekit.propagation.events.EventDetector`): object with appropriate type that can be used in determining correct return state
+                increasing (boolean): with the event occurred in an "increasing" or "decreasing" slope direction
+        
+            Returns:
+                the Action that the calling detector should pass back to the evaluation system
+        
+        
+        """
+        ...
+
+_FieldCountAndContinue__T = typing.TypeVar('_FieldCountAndContinue__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldCountAndContinue(org.orekit.propagation.events.handlers.FieldCountingHandler[_FieldCountAndContinue__T], typing.Generic[_FieldCountAndContinue__T]):
+    """
+    public class FieldCountAndContinue<T extends :class:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.handlers.FieldCountingHandler`<T>
+    
+        Event handler counting event occurrences and always returning
+        :meth:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`.
+    
+        Since:
+            13.0
+    """
+    def __init__(self, int: int): ...
+
+_FieldCountingHandler__T = typing.TypeVar('_FieldCountingHandler__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldCountingHandler(org.orekit.propagation.events.handlers.AbstractGenericCountingHandler, FieldEventHandler[_FieldCountingHandler__T], typing.Generic[_FieldCountingHandler__T]):
+    """
+    public abstract class FieldCountingHandler<T extends :class:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.handlers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.handlers.FieldEventHandler`<T>
+    
+        Abstract class for handlers counting event occurrences. The
+        :class:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action?is`
+        can be modified according to the count.
+    
+        Since:
+            13.0
+    """
+    def eventOccurred(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldCountingHandler__T], fieldEventDetector: org.orekit.propagation.events.FieldEventDetector[_FieldCountingHandler__T], boolean: bool) -> org.hipparchus.ode.events.Action: ...
+
+class PythonAbstractGenericCountingHandler(org.orekit.propagation.events.handlers.AbstractGenericCountingHandler):
+    """
+    public class PythonAbstractGenericCountingHandler extends :class:`~org.orekit.propagation.events.handlers.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    """
+    def __init__(self, int: int, action: org.hipparchus.ode.events.Action): ...
+    def finalize(self) -> None: ...
+    def getAction(self) -> org.hipparchus.ode.events.Action:
+        """
+            Getter for action.
+        
+            Returns:
+                action
+        
+        
+        """
+        ...
+    def getCount(self) -> int:
+        """
+            Getter for count.
+        
+            Returns:
+                count
+        
+        
+        """
+        ...
+    def increment(self) -> None:
+        """
+            Increment count.
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+    def reset(self) -> None:
+        """
+            Reset count.
+        
+        """
+        ...
+    def setAction(self, action: org.hipparchus.ode.events.Action) -> None:
+        """
+            Setter for action.
+        
+            Parameters:
+                action (:class:`~org.orekit.propagation.events.handlers.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action?is`): new action
+        
+        
+        """
+        ...
+
+class PythonCountingHandler(CountingHandler):
+    """
+    public class PythonCountingHandler extends :class:`~org.orekit.propagation.events.handlers.CountingHandler`
+    """
+    def __init__(self, int: int, action: org.hipparchus.ode.events.Action): ...
+    def doesCount(self, spacecraftState: org.orekit.propagation.SpacecraftState, eventDetector: org.orekit.propagation.events.EventDetector, boolean: bool) -> bool:
+        """
+            Abstract method to implement in Python.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.handlers.CountingHandler.doesCount` in
+                class :class:`~org.orekit.propagation.events.handlers.CountingHandler`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): state at detection
+                detector (:class:`~org.orekit.propagation.events.EventDetector`): detector
+                increasing (boolean): flag on direction of event function
+        
+            Returns:
+                flag on counting
+        
+        
+        """
+        ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
+class PythonFieldCountingHandler(FieldCountingHandler):
+    """
+    public class PythonFieldCountingHandler extends :class:`~org.orekit.propagation.events.handlers.FieldCountingHandler`
+    """
+    def __init__(self, int: int, action: org.hipparchus.ode.events.Action): ...
+    def doesCount(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState, fieldEventDetector: org.orekit.propagation.events.FieldEventDetector, boolean: bool) -> bool:
+        """
+            Method returning true if and only if the count needs to be incremented.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.handlers.FieldCountingHandler.doesCount` in
+                class :class:`~org.orekit.propagation.events.handlers.FieldCountingHandler`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.FieldSpacecraftState`): state at detection
+                detector (:class:`~org.orekit.propagation.events.FieldEventDetector`): detector
+                increasing (boolean): flag on direction of event function
+        
+            Returns:
+                flag on counting
+        
+        
+        """
+        ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
+class AbstractGenericCountingHandler: ...
+
+
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.propagation.events.handlers")``.
 
+    AbstractGenericCountingHandler: typing.Type[AbstractGenericCountingHandler]
     ContinueOnEvent: typing.Type[ContinueOnEvent]
+    CountAndContinue: typing.Type[CountAndContinue]
+    CountingHandler: typing.Type[CountingHandler]
     EventHandler: typing.Type[EventHandler]
     EventMultipleHandler: typing.Type[EventMultipleHandler]
     FieldContinueOnEvent: typing.Type[FieldContinueOnEvent]
+    FieldCountAndContinue: typing.Type[FieldCountAndContinue]
+    FieldCountingHandler: typing.Type[FieldCountingHandler]
     FieldEventHandler: typing.Type[FieldEventHandler]
     FieldRecallLastOccurrence: typing.Type[FieldRecallLastOccurrence]
     FieldRecordAndContinue: typing.Type[FieldRecordAndContinue]
@@ -888,7 +1136,10 @@ class __module_protocol__(typing.Protocol):
     FieldStopOnDecreasing: typing.Type[FieldStopOnDecreasing]
     FieldStopOnEvent: typing.Type[FieldStopOnEvent]
     FieldStopOnIncreasing: typing.Type[FieldStopOnIncreasing]
+    PythonAbstractGenericCountingHandler: typing.Type[PythonAbstractGenericCountingHandler]
+    PythonCountingHandler: typing.Type[PythonCountingHandler]
     PythonEventHandler: typing.Type[PythonEventHandler]
+    PythonFieldCountingHandler: typing.Type[PythonFieldCountingHandler]
     PythonFieldEventHandler: typing.Type[PythonFieldEventHandler]
     RecallLastOccurrence: typing.Type[RecallLastOccurrence]
     RecordAndContinue: typing.Type[RecordAndContinue]
@@ -896,4 +1147,3 @@ class __module_protocol__(typing.Protocol):
     StopOnDecreasing: typing.Type[StopOnDecreasing]
     StopOnEvent: typing.Type[StopOnEvent]
     StopOnIncreasing: typing.Type[StopOnIncreasing]
-    class-use: org.orekit.propagation.events.handlers.class-use.__module_protocol__

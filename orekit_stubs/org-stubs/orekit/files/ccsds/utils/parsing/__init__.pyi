@@ -1,11 +1,18 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.util
 import java.util.function
+import jpype
 import org.orekit.data
 import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.section
 import org.orekit.files.ccsds.utils
 import org.orekit.files.ccsds.utils.lexical
-import org.orekit.files.ccsds.utils.parsing.class-use
 import org.orekit.utils
 import typing
 
@@ -26,7 +33,7 @@ class AbstractMessageParser(org.orekit.files.ccsds.utils.lexical.MessageParser[_
         Since:
             11.0
     """
-    def anticipateNext(self, processingState: 'ProcessingState') -> None:
+    def anticipateNext(self, processingState: typing.Union['ProcessingState', typing.Callable]) -> None:
         """
             Anticipate what next processing state should be.
         
@@ -116,7 +123,7 @@ class AbstractMessageParser(org.orekit.files.ccsds.utils.lexical.MessageParser[_
         
         """
         ...
-    def setFallback(self, processingState: 'ProcessingState') -> None:
+    def setFallback(self, processingState: typing.Union['ProcessingState', typing.Callable]) -> None:
         """
             Set fallback processing state.
         
@@ -362,7 +369,7 @@ class PythonAbstractMessageParser(AbstractMessageParser[_PythonAbstractMessagePa
     """
     public class PythonAbstractMessageParser<T> extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractMessageParser`<T>
     """
-    def __init__(self, string: str, string2: str, functionArray: typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]): ...
+    def __init__(self, string: str, string2: str, functionArray: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
     def build(self) -> _PythonAbstractMessageParser__T:
         """
             Build the file from parsed entries.
@@ -447,7 +454,7 @@ class PythonAbstractConstituentParser(AbstractConstituentParser[_PythonAbstractC
     """
     public class PythonAbstractConstituentParser<H extends :class:`~org.orekit.files.ccsds.section.Header`, T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<H, ?>, P extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<H, T, ?>> extends :class:`~org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser`<H, T, P>
     """
-    def __init__(self, string: str, string2: str, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]): ...
+    def __init__(self, string: str, string2: str, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
     def build(self) -> _PythonAbstractConstituentParser__T:
         """
             Build the file from parsed entries.
@@ -630,7 +637,7 @@ class PythonAbstractConstituentParser(AbstractConstituentParser[_PythonAbstractC
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.utils.parsing")``.
 
     AbstractConstituentParser: typing.Type[AbstractConstituentParser]
@@ -640,4 +647,3 @@ class __module_protocol__(typing.Protocol):
     PythonAbstractConstituentParser: typing.Type[PythonAbstractConstituentParser]
     PythonAbstractMessageParser: typing.Type[PythonAbstractMessageParser]
     PythonProcessingState: typing.Type[PythonProcessingState]
-    class-use: org.orekit.files.ccsds.utils.parsing.class-use.__module_protocol__

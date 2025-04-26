@@ -1,5 +1,11 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
-import org.orekit.files.rinex.section.class-use
 import org.orekit.files.rinex.utils
 import org.orekit.gnss
 import org.orekit.time
@@ -374,7 +380,7 @@ class RinexLabels(java.lang.Enum['RinexLabels']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['RinexLabels']:
+    def values() -> typing.MutableSequence['RinexLabels']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -393,10 +399,9 @@ class RinexLabels(java.lang.Enum['RinexLabels']):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.rinex.section")``.
 
     RinexBaseHeader: typing.Type[RinexBaseHeader]
     RinexComment: typing.Type[RinexComment]
     RinexLabels: typing.Type[RinexLabels]
-    class-use: org.orekit.files.rinex.section.class-use.__module_protocol__

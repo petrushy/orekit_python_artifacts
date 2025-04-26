@@ -1,13 +1,20 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
 import java.util.function
+import jpype
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.attitudes
 import org.orekit.data
 import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.ndm.adm
-import org.orekit.files.ccsds.ndm.adm.aem.class-use
 import org.orekit.files.ccsds.section
 import org.orekit.files.ccsds.utils
 import org.orekit.files.ccsds.utils.generation
@@ -62,6 +69,15 @@ class AemData(org.orekit.files.ccsds.section.CommentsContainer, org.orekit.files
     public class AemData extends :class:`~org.orekit.files.ccsds.section.CommentsContainer` implements :class:`~org.orekit.files.ccsds.section.Data`
     
         The Attitude Ephemerides data blocks class contain list of attitude data points.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
     """
     def __init__(self): ...
     def addData(self, timeStampedAngularCoordinates: org.orekit.utils.TimeStampedAngularCoordinates) -> bool:
@@ -453,7 +469,7 @@ class AemMetadataKey(java.lang.Enum['AemMetadataKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['AemMetadataKey']:
+    def values() -> typing.MutableSequence['AemMetadataKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -485,7 +501,7 @@ class AemParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Aem, 'AemParser'], org.
         Since:
             10.2
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, int: int, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]): ...
+    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, int: int, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
     def build(self) -> Aem:
         """
             Build the file from parsed entries.
@@ -997,7 +1013,7 @@ class AttitudeEntryKey(java.lang.Enum['AttitudeEntryKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['AttitudeEntryKey']:
+    def values() -> typing.MutableSequence['AttitudeEntryKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1025,15 +1041,18 @@ class AttitudeWriter(org.orekit.files.general.AttitudeEphemerisFileWriter):
         Since:
             11.0
     """
+    @typing.overload
     def __init__(self, aemWriter: AemWriter, admHeader: org.orekit.files.ccsds.ndm.adm.AdmHeader, aemMetadata: AemMetadata, fileFormat: org.orekit.files.ccsds.utils.FileFormat, string: str, double: float, int: int): ...
+    @typing.overload
+    def __init__(self, aemWriter: AemWriter, admHeader: org.orekit.files.ccsds.ndm.adm.AdmHeader, aemMetadata: AemMetadata, fileFormat: org.orekit.files.ccsds.utils.FileFormat, string: str, double: float, int: int, formatter: org.orekit.utils.Formatter): ...
     _write_0__C = typing.TypeVar('_write_0__C', bound=org.orekit.utils.TimeStampedAngularCoordinates)  # <C>
     _write_0__S = typing.TypeVar('_write_0__S', bound=org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment)  # <S>
     _write_1__C = typing.TypeVar('_write_1__C', bound=org.orekit.utils.TimeStampedAngularCoordinates)  # <C>
     _write_1__S = typing.TypeVar('_write_1__S', bound=org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment)  # <S>
     @typing.overload
-    def write(self, string: str, attitudeEphemerisFile: org.orekit.files.general.AttitudeEphemerisFile[_write_0__C, _write_0__S]) -> None: ...
+    def write(self, string: str, attitudeEphemerisFile: typing.Union[org.orekit.files.general.AttitudeEphemerisFile[_write_0__C, _write_0__S], typing.Callable[[], java.util.Map[str, org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris[org.orekit.utils.TimeStampedAngularCoordinates, org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment]]]]) -> None: ...
     @typing.overload
-    def write(self, appendable: java.lang.Appendable, attitudeEphemerisFile: org.orekit.files.general.AttitudeEphemerisFile[_write_1__C, _write_1__S]) -> None: ...
+    def write(self, appendable: java.lang.Appendable, attitudeEphemerisFile: typing.Union[org.orekit.files.general.AttitudeEphemerisFile[_write_1__C, _write_1__S], typing.Callable[[], java.util.Map[str, org.orekit.files.general.AttitudeEphemerisFile.SatelliteAttitudeEphemeris[org.orekit.utils.TimeStampedAngularCoordinates, org.orekit.files.general.AttitudeEphemerisFile.AttitudeEphemerisSegment]]]]) -> None: ...
 
 class StreamingAemWriter(java.lang.AutoCloseable):
     """
@@ -1097,7 +1116,7 @@ class StreamingAemWriter(java.lang.AutoCloseable):
 class AttitudeEntry: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.ndm.adm.aem")``.
 
     Aem: typing.Type[Aem]
@@ -1112,4 +1131,3 @@ class __module_protocol__(typing.Protocol):
     AttitudeEntryKey: typing.Type[AttitudeEntryKey]
     AttitudeWriter: typing.Type[AttitudeWriter]
     StreamingAemWriter: typing.Type[StreamingAemWriter]
-    class-use: org.orekit.files.ccsds.ndm.adm.aem.class-use.__module_protocol__

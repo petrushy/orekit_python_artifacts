@@ -1,9 +1,15 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.io
 import java.lang
 import java.util
 import org.hipparchus
 import org.hipparchus.fraction
-import org.orekit.utils.units.class-use
 import typing
 
 
@@ -112,6 +118,17 @@ class Unit(java.io.Serializable):
     public static final :class:`~org.orekit.utils.units.Unit` ONE
     
         Dimensionless unit.
+    
+    """
+    CYCLE: typing.ClassVar['Unit'] = ...
+    """
+    public static final :class:`~org.orekit.utils.units.Unit` CYCLE
+    
+        Cycle unit.
+    
+        Since:
+            13.0
+    
     
     """
     PERCENT: typing.ClassVar['Unit'] = ...
@@ -857,7 +874,7 @@ class UnitsConverter:
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.utils.units")``.
 
     Parser: typing.Type[Parser]
@@ -865,4 +882,3 @@ class __module_protocol__(typing.Protocol):
     Unit: typing.Type[Unit]
     UnitsCache: typing.Type[UnitsCache]
     UnitsConverter: typing.Type[UnitsConverter]
-    class-use: org.orekit.utils.units.class-use.__module_protocol__

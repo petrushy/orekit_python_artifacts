@@ -1,6 +1,14 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
 import java.util.function
+import jpype
 import org.hipparchus.complex
 import org.hipparchus.geometry.euclidean.threed
 import org.hipparchus.linear
@@ -9,7 +17,6 @@ import org.orekit.data
 import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.ndm.adm
-import org.orekit.files.ccsds.ndm.adm.apm.class-use
 import org.orekit.files.ccsds.section
 import org.orekit.files.ccsds.utils
 import org.orekit.files.ccsds.utils.generation
@@ -26,6 +33,15 @@ class AngularVelocity(org.orekit.files.ccsds.section.CommentsContainer):
     public class AngularVelocity extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
     
         Container for Attitude Parameter Message data lines.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
     
         Since:
             12.0
@@ -197,7 +213,7 @@ class AngularVelocityKey(java.lang.Enum['AngularVelocityKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['AngularVelocityKey']:
+    def values() -> typing.MutableSequence['AngularVelocityKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -248,7 +264,7 @@ class Apm(org.orekit.files.ccsds.ndm.NdmConstituent[org.orekit.files.ccsds.ndm.a
     
     """
     def __init__(self, admHeader: org.orekit.files.ccsds.ndm.adm.AdmHeader, list: java.util.List[org.orekit.files.ccsds.section.Segment[org.orekit.files.ccsds.ndm.adm.AdmMetadata, 'ApmData']], iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext): ...
-    def getAttitude(self, frame: org.orekit.frames.Frame, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider) -> org.orekit.attitudes.Attitude:
+    def getAttitude(self, frame: org.orekit.frames.Frame, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable]) -> org.orekit.attitudes.Attitude:
         """
             Get the attitude.
         
@@ -317,7 +333,7 @@ class ApmData(org.orekit.files.ccsds.section.Data):
         
         """
         ...
-    def getAttitude(self, frame: org.orekit.frames.Frame, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider) -> org.orekit.attitudes.Attitude:
+    def getAttitude(self, frame: org.orekit.frames.Frame, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable]) -> org.orekit.attitudes.Attitude:
         """
             Get the attitude.
         
@@ -448,7 +464,7 @@ class ApmParser(org.orekit.files.ccsds.ndm.adm.AdmParser[Apm, 'ApmParser']):
         Since:
             10.2
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]): ...
+    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
     def build(self) -> Apm:
         """
             Build the file from parsed entries.
@@ -616,6 +632,15 @@ class ApmQuaternion(org.orekit.files.ccsds.section.CommentsContainer):
     
         Container for Attitude Parameter Message quaternion logical block.
     
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
+    
         Since:
             10.2
     """
@@ -729,7 +754,7 @@ class ApmQuaternionKey(java.lang.Enum['ApmQuaternionKey']):
     Q1_DOT: typing.ClassVar['ApmQuaternionKey'] = ...
     Q2_DOT: typing.ClassVar['ApmQuaternionKey'] = ...
     Q3_DOT: typing.ClassVar['ApmQuaternionKey'] = ...
-    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, apmQuaternion: ApmQuaternion, dateConsumer: org.orekit.files.ccsds.utils.lexical.ParseToken.DateConsumer) -> bool:
+    def process(self, parseToken: org.orekit.files.ccsds.utils.lexical.ParseToken, contextBinding: org.orekit.files.ccsds.utils.ContextBinding, apmQuaternion: ApmQuaternion, dateConsumer: typing.Union[org.orekit.files.ccsds.utils.lexical.ParseToken.DateConsumer, typing.Callable]) -> bool:
         """
             Process one token.
         
@@ -770,7 +795,7 @@ class ApmQuaternionKey(java.lang.Enum['ApmQuaternionKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['ApmQuaternionKey']:
+    def values() -> typing.MutableSequence['ApmQuaternionKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -827,6 +852,15 @@ class Euler(org.orekit.files.ccsds.section.CommentsContainer):
     
         Container for :class:`~org.orekit.files.ccsds.ndm.adm.apm.Euler` entries.
     
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
+    
         Since:
             10.2
     """
@@ -851,7 +885,7 @@ class Euler(org.orekit.files.ccsds.section.CommentsContainer):
         
         """
         ...
-    def getRotationAngles(self) -> typing.List[float]:
+    def getRotationAngles(self) -> typing.MutableSequence[float]:
         """
             Get the coordinates of the Euler angles.
         
@@ -861,7 +895,7 @@ class Euler(org.orekit.files.ccsds.section.CommentsContainer):
         
         """
         ...
-    def getRotationRates(self) -> typing.List[float]:
+    def getRotationRates(self) -> typing.MutableSequence[float]:
         """
             Get the rates of the Euler angles.
         
@@ -1090,7 +1124,7 @@ class EulerKey(java.lang.Enum['EulerKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['EulerKey']:
+    def values() -> typing.MutableSequence['EulerKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1245,7 +1279,7 @@ class InertiaKey(java.lang.Enum['InertiaKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['InertiaKey']:
+    def values() -> typing.MutableSequence['InertiaKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1268,6 +1302,15 @@ class Maneuver(org.orekit.files.ccsds.section.CommentsContainer):
     public class Maneuver extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
     
         Maneuver in an APM file.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
     
         Since:
             10.2
@@ -1460,7 +1503,7 @@ class ManeuverKey(java.lang.Enum['ManeuverKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['ManeuverKey']:
+    def values() -> typing.MutableSequence['ManeuverKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1483,6 +1526,15 @@ class SpinStabilized(org.orekit.files.ccsds.section.CommentsContainer):
     public class SpinStabilized extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
     
         Container for Attitude Parameter Message data lines.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
     
         Since:
             10.2
@@ -1827,7 +1879,7 @@ class SpinStabilizedKey(java.lang.Enum['SpinStabilizedKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['SpinStabilizedKey']:
+    def values() -> typing.MutableSequence['SpinStabilizedKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1846,7 +1898,7 @@ class SpinStabilizedKey(java.lang.Enum['SpinStabilizedKey']):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.ndm.adm.apm")``.
 
     AngularVelocity: typing.Type[AngularVelocity]
@@ -1865,4 +1917,3 @@ class __module_protocol__(typing.Protocol):
     ManeuverKey: typing.Type[ManeuverKey]
     SpinStabilized: typing.Type[SpinStabilized]
     SpinStabilizedKey: typing.Type[SpinStabilizedKey]
-    class-use: org.orekit.files.ccsds.ndm.adm.apm.class-use.__module_protocol__

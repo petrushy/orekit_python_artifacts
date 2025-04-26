@@ -1,11 +1,19 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.util
+import jpype
 import org.hipparchus
 import org.hipparchus.analysis.differentiation
 import org.orekit.attitudes
 import org.orekit.frames
+import org.orekit.orbits
 import org.orekit.propagation
 import org.orekit.propagation.analytical
-import org.orekit.propagation.analytical.intelsat.class-use
 import org.orekit.time
 import org.orekit.utils
 import typing
@@ -185,6 +193,7 @@ class FieldIntelsatElevenElementsPropagator(org.orekit.propagation.analytical.Fi
     def getOrbitRadius(self) -> org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2[_FieldIntelsatElevenElementsPropagator__T]: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def propagateInEcef(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldIntelsatElevenElementsPropagator__T]) -> org.orekit.utils.FieldPVCoordinates[_FieldIntelsatElevenElementsPropagator__T]: ...
+    def propagateOrbit(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldIntelsatElevenElementsPropagator__T], tArray: typing.Union[typing.List[_FieldIntelsatElevenElementsPropagator__T], jpype.JArray]) -> org.orekit.orbits.FieldOrbit[_FieldIntelsatElevenElementsPropagator__T]: ...
     def resetInitialState(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldIntelsatElevenElementsPropagator__T]) -> None: ...
 
 class IntelsatElevenElements:
@@ -447,6 +456,23 @@ class IntelsatElevenElementsPropagator(org.orekit.propagation.analytical.Abstrac
         
         """
         ...
+    def propagateOrbit(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.orbits.Orbit:
+        """
+            Extrapolate an orbit up to a specific target date..
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator.propagateOrbit` in
+                class :class:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): target date for the orbit
+        
+            Returns:
+                extrapolated parameters
+        
+        
+        """
+        ...
     def resetInitialState(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
         """
             Reset the propagator initial state..
@@ -466,11 +492,10 @@ class IntelsatElevenElementsPropagator(org.orekit.propagation.analytical.Abstrac
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.propagation.analytical.intelsat")``.
 
     FieldIntelsatElevenElements: typing.Type[FieldIntelsatElevenElements]
     FieldIntelsatElevenElementsPropagator: typing.Type[FieldIntelsatElevenElementsPropagator]
     IntelsatElevenElements: typing.Type[IntelsatElevenElements]
     IntelsatElevenElementsPropagator: typing.Type[IntelsatElevenElementsPropagator]
-    class-use: org.orekit.propagation.analytical.intelsat.class-use.__module_protocol__

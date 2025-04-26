@@ -1,10 +1,17 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
+import jpype
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.bodies
 import org.orekit.data
 import org.orekit.frames
-import org.orekit.models.earth.displacement.class-use
 import org.orekit.time
 import org.orekit.utils
 import typing
@@ -31,7 +38,7 @@ class OceanLoadingCoefficients:
             :class:`~org.orekit.models.earth.displacement.OceanLoadingCoefficientsBLQFactory`,
             :class:`~org.orekit.models.earth.displacement.OceanLoading`
     """
-    def __init__(self, string: str, geodeticPoint: org.orekit.bodies.GeodeticPoint, tideArray: typing.List[typing.List['Tide']], doubleArray: typing.List[typing.List[float]], doubleArray2: typing.List[typing.List[float]], doubleArray3: typing.List[typing.List[float]], doubleArray4: typing.List[typing.List[float]], doubleArray5: typing.List[typing.List[float]], doubleArray6: typing.List[typing.List[float]]): ...
+    def __init__(self, string: str, geodeticPoint: org.orekit.bodies.GeodeticPoint, tideArray: typing.Union[typing.List[typing.MutableSequence['Tide']], jpype.JArray], doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray2: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray3: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray4: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray5: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray6: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]): ...
     def getNbSpecies(self) -> int:
         """
             Get the number of species.
@@ -337,7 +344,7 @@ class PsdCorrection:
         @staticmethod
         def valueOf(string: str) -> 'PsdCorrection.Axis': ...
         @staticmethod
-        def values() -> typing.List['PsdCorrection.Axis']: ...
+        def values() -> typing.MutableSequence['PsdCorrection.Axis']: ...
         def vector(self, geodeticPoint: org.orekit.bodies.GeodeticPoint) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
     class TimeEvolution(java.lang.Enum['PsdCorrection.TimeEvolution']):
         EXP: typing.ClassVar['PsdCorrection.TimeEvolution'] = ...
@@ -351,7 +358,7 @@ class PsdCorrection:
         @staticmethod
         def valueOf(string: str) -> 'PsdCorrection.TimeEvolution': ...
         @staticmethod
-        def values() -> typing.List['PsdCorrection.TimeEvolution']: ...
+        def values() -> typing.MutableSequence['PsdCorrection.TimeEvolution']: ...
 
 class StationDisplacement:
     """
@@ -478,7 +485,7 @@ class Tide:
         
         """
         ...
-    def getDelaunayMultipliers(self) -> typing.List[int]:
+    def getDelaunayMultipliers(self) -> typing.MutableSequence[int]:
         """
             Get the multipliers for Delaunay arguments (l, l', F, D, Ω).
         
@@ -491,7 +498,7 @@ class Tide:
         
         """
         ...
-    def getDoodsonMultipliers(self) -> typing.List[int]:
+    def getDoodsonMultipliers(self) -> typing.MutableSequence[int]:
         """
             Get the multipliers for Doodson arguments (τ, s, h, p, N', ps).
         
@@ -824,7 +831,7 @@ class TidalDisplacement(StationDisplacement):
         Also see:
             :class:`~org.orekit.estimation.measurements.GroundStation`
     """
-    def __init__(self, double: float, double2: float, double3: float, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, pVCoordinatesProvider2: org.orekit.utils.PVCoordinatesProvider, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool): ...
+    def __init__(self, double: float, double2: float, double3: float, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], pVCoordinatesProvider2: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], iERSConventions: org.orekit.utils.IERSConventions, boolean: bool): ...
     def displacement(self, bodiesElements: org.orekit.data.BodiesElements, frame: org.orekit.frames.Frame, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Compute displacement of a ground reference point.
@@ -846,7 +853,7 @@ class TidalDisplacement(StationDisplacement):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.models.earth.displacement")``.
 
     OceanLoading: typing.Type[OceanLoading]
@@ -860,4 +867,3 @@ class __module_protocol__(typing.Protocol):
     TectonicsDisplacement: typing.Type[TectonicsDisplacement]
     TidalDisplacement: typing.Type[TidalDisplacement]
     Tide: typing.Type[Tide]
-    class-use: org.orekit.models.earth.displacement.class-use.__module_protocol__

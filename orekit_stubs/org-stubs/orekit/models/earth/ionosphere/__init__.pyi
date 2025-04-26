@@ -1,11 +1,19 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.io
 import java.util
+import jpype
 import org.hipparchus
 import org.orekit.bodies
 import org.orekit.data
 import org.orekit.frames
 import org.orekit.gnss.metric.messages.ssr.subtype
-import org.orekit.models.earth.ionosphere.class-use
+import org.orekit.models.earth.ionosphere.nequick
 import org.orekit.propagation
 import org.orekit.time
 import org.orekit.utils
@@ -75,7 +83,7 @@ class IonosphericModel(org.orekit.utils.ParameterDriversProvider):
     """
     _pathDelay_1__T = typing.TypeVar('_pathDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def pathDelay(self, spacecraftState: org.orekit.propagation.SpacecraftState, topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, doubleArray: typing.List[float]) -> float:
+    def pathDelay(self, spacecraftState: org.orekit.propagation.SpacecraftState, topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float:
         """
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
@@ -97,7 +105,7 @@ class IonosphericModel(org.orekit.utils.ParameterDriversProvider):
         """
         ...
     @typing.overload
-    def pathDelay(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_pathDelay_1__T], topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, tArray: typing.List[_pathDelay_1__T]) -> _pathDelay_1__T:
+    def pathDelay(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_pathDelay_1__T], topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, tArray: typing.Union[typing.List[_pathDelay_1__T], jpype.JArray]) -> _pathDelay_1__T:
         """
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
@@ -173,7 +181,7 @@ class KlobucharIonoCoefficientsLoader(org.orekit.data.AbstractSelfFeedingLoader,
     def __init__(self, string: str): ...
     @typing.overload
     def __init__(self, string: str, dataProvidersManager: org.orekit.data.DataProvidersManager): ...
-    def getAlpha(self) -> typing.List[float]:
+    def getAlpha(self) -> typing.MutableSequence[float]:
         """
             Returns the alpha coefficients array.
         
@@ -183,7 +191,7 @@ class KlobucharIonoCoefficientsLoader(org.orekit.data.AbstractSelfFeedingLoader,
         
         """
         ...
-    def getBeta(self) -> typing.List[float]:
+    def getBeta(self) -> typing.MutableSequence[float]:
         """
             Returns the beta coefficients array.
         
@@ -283,7 +291,7 @@ class EstimatedIonosphericModel(IonosphericModel):
     _pathDelay_2__T = typing.TypeVar('_pathDelay_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _pathDelay_3__T = typing.TypeVar('_pathDelay_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def pathDelay(self, double: float, double2: float, doubleArray: typing.List[float]) -> float:
+    def pathDelay(self, double: float, double2: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float:
         """
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
@@ -321,9 +329,9 @@ class EstimatedIonosphericModel(IonosphericModel):
         """
         ...
     @typing.overload
-    def pathDelay(self, spacecraftState: org.orekit.propagation.SpacecraftState, topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, doubleArray: typing.List[float]) -> float: ...
+    def pathDelay(self, spacecraftState: org.orekit.propagation.SpacecraftState, topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
-    def pathDelay(self, t: _pathDelay_2__T, double: float, tArray: typing.List[_pathDelay_2__T]) -> _pathDelay_2__T:
+    def pathDelay(self, t: _pathDelay_2__T, double: float, tArray: typing.Union[typing.List[_pathDelay_2__T], jpype.JArray]) -> _pathDelay_2__T:
         """
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
@@ -362,7 +370,7 @@ class EstimatedIonosphericModel(IonosphericModel):
         """
         ...
     @typing.overload
-    def pathDelay(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_pathDelay_3__T], topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, tArray: typing.List[_pathDelay_3__T]) -> _pathDelay_3__T: ...
+    def pathDelay(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_pathDelay_3__T], topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, tArray: typing.Union[typing.List[_pathDelay_3__T], jpype.JArray]) -> _pathDelay_3__T: ...
 
 class GlobalIonosphereMapModel(IonosphericModel):
     """
@@ -437,11 +445,11 @@ class GlobalIonosphereMapModel(IonosphericModel):
     @typing.overload
     def __init__(self, string: str, dataProvidersManager: org.orekit.data.DataProvidersManager, timeScale: org.orekit.time.TimeScale): ...
     @typing.overload
-    def __init__(self, timeScale: org.orekit.time.TimeScale, dataSourceArray: typing.List[org.orekit.data.DataSource]): ...
+    def __init__(self, timeScale: org.orekit.time.TimeScale, *dataSource: org.orekit.data.DataSource): ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _pathDelay_1__T = typing.TypeVar('_pathDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def pathDelay(self, spacecraftState: org.orekit.propagation.SpacecraftState, topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, doubleArray: typing.List[float]) -> float:
+    def pathDelay(self, spacecraftState: org.orekit.propagation.SpacecraftState, topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float:
         """
             Description copied from interface: :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
@@ -468,7 +476,7 @@ class GlobalIonosphereMapModel(IonosphericModel):
         """
         ...
     @typing.overload
-    def pathDelay(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_pathDelay_1__T], topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, tArray: typing.List[_pathDelay_1__T]) -> _pathDelay_1__T:
+    def pathDelay(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_pathDelay_1__T], topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, tArray: typing.Union[typing.List[_pathDelay_1__T], jpype.JArray]) -> _pathDelay_1__T:
         """
             Description copied from interface: :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
@@ -514,14 +522,14 @@ class KlobucharIonoModel(IonosphericModel):
             7.1
     """
     @typing.overload
-    def __init__(self, doubleArray: typing.List[float], doubleArray2: typing.List[float]): ...
+    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]): ...
     @typing.overload
-    def __init__(self, doubleArray: typing.List[float], doubleArray2: typing.List[float], timeScale: org.orekit.time.TimeScale): ...
+    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], timeScale: org.orekit.time.TimeScale): ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _pathDelay_2__T = typing.TypeVar('_pathDelay_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _pathDelay_3__T = typing.TypeVar('_pathDelay_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def pathDelay(self, spacecraftState: org.orekit.propagation.SpacecraftState, topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, doubleArray: typing.List[float]) -> float:
+    def pathDelay(self, spacecraftState: org.orekit.propagation.SpacecraftState, topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float:
         """
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
@@ -562,9 +570,9 @@ class KlobucharIonoModel(IonosphericModel):
         """
         ...
     @typing.overload
-    def pathDelay(self, absoluteDate: org.orekit.time.AbsoluteDate, geodeticPoint: org.orekit.bodies.GeodeticPoint, double: float, double2: float, double3: float, doubleArray: typing.List[float]) -> float: ...
+    def pathDelay(self, absoluteDate: org.orekit.time.AbsoluteDate, geodeticPoint: org.orekit.bodies.GeodeticPoint, double: float, double2: float, double3: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float: ...
     @typing.overload
-    def pathDelay(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_pathDelay_2__T], topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, tArray: typing.List[_pathDelay_2__T]) -> _pathDelay_2__T:
+    def pathDelay(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_pathDelay_2__T], topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, tArray: typing.Union[typing.List[_pathDelay_2__T], jpype.JArray]) -> _pathDelay_2__T:
         """
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
@@ -606,118 +614,7 @@ class KlobucharIonoModel(IonosphericModel):
         """
         ...
     @typing.overload
-    def pathDelay(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_3__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_3__T], t: _pathDelay_3__T, t2: _pathDelay_3__T, double: float, tArray: typing.List[_pathDelay_3__T]) -> _pathDelay_3__T: ...
-
-class NeQuickModel(IonosphericModel):
-    """
-    public class NeQuickModel extends :class:`~org.orekit.models.earth.ionosphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
-    
-        NeQuick ionospheric delay model.
-    
-        Since:
-            10.1
-    
-        Also see:
-            "European Union (2016). European GNSS (Galileo) Open Service-Ionospheric Correction Algorithm for Galileo Single
-            Frequency Users. 1.2."
-    """
-    @typing.overload
-    def __init__(self, doubleArray: typing.List[float]): ...
-    @typing.overload
-    def __init__(self, doubleArray: typing.List[float], timeScale: org.orekit.time.TimeScale): ...
-    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    _pathDelay_1__T = typing.TypeVar('_pathDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def pathDelay(self, spacecraftState: org.orekit.propagation.SpacecraftState, topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, doubleArray: typing.List[float]) -> float:
-        """
-            Description copied from interface: :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`
-            Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
-        
-            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0° the
-            path delay will be equal to zero.
-        
-            For individual use of the ionospheric model (i.e. not for orbit determination), another method signature can be
-            implemented to compute the path delay for any elevation angle.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay` in
-                interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
-                baseFrame (:class:`~org.orekit.frames.TopocentricFrame`): base frame associated with the station
-                frequency (double): frequency of the signal in Hz
-                parameters (double[]): ionospheric model parameters at state date
-        
-            Returns:
-                the path delay due to the ionosphere in m
-        
-        """
-        ...
-    @typing.overload
-    def pathDelay(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_pathDelay_1__T], topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, tArray: typing.List[_pathDelay_1__T]) -> _pathDelay_1__T:
-        """
-            Description copied from interface: :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay`
-            Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
-        
-            This method is intended to be used for orbit determination issues. In that respect, if the elevation is below 0° the
-            path delay will be equal to zero.
-        
-            For individual use of the ionospheric model (i.e. not for orbit determination), another method signature can be
-            implemented to compute the path delay for any elevation angle.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.ionosphere.IonosphericModel.pathDelay` in
-                interface :class:`~org.orekit.models.earth.ionosphere.IonosphericModel`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
-                baseFrame (:class:`~org.orekit.frames.TopocentricFrame`): base frame associated with the station
-                frequency (double): frequency of the signal in Hz
-                parameters (T[]): ionospheric model parameters at state date
-        
-            Returns:
-                the path delay due to the ionosphere in m
-        
-        
-        """
-        ...
-    _stec_1__T = typing.TypeVar('_stec_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def stec(self, absoluteDate: org.orekit.time.AbsoluteDate, geodeticPoint: org.orekit.bodies.GeodeticPoint, geodeticPoint2: org.orekit.bodies.GeodeticPoint) -> float:
-        """
-            This method allows the computation of the Stant Total Electron Content (STEC).
-        
-            This method follows the Gauss algorithm exposed in section 2.5.8.2.8 of the reference document.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                recP (:class:`~org.orekit.bodies.GeodeticPoint`): receiver position
-                satP (:class:`~org.orekit.bodies.GeodeticPoint`): satellite position
-        
-            Returns:
-                the STEC in TECUnits
-        
-        """
-        ...
-    @typing.overload
-    def stec(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_stec_1__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_stec_1__T], fieldGeodeticPoint2: org.orekit.bodies.FieldGeodeticPoint[_stec_1__T]) -> _stec_1__T:
-        """
-            This method allows the computation of the Stant Total Electron Content (STEC).
-        
-            This method follows the Gauss algorithm exposed in section 2.5.8.2.8 of the reference document.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                recP (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> recP): receiver position
-                satP (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> satP): satellite position
-        
-            Returns:
-                the STEC in TECUnits
-        
-        
-        """
-        ...
+    def pathDelay(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_3__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_3__T], t: _pathDelay_3__T, t2: _pathDelay_3__T, double: float, tArray: typing.Union[typing.List[_pathDelay_3__T], jpype.JArray]) -> _pathDelay_3__T: ...
 
 class PythonIonosphericMappingFunction(IonosphericMappingFunction):
     """
@@ -804,11 +701,11 @@ class PythonIonosphericModel(IonosphericModel):
     _getParameters_1__T = typing.TypeVar('_getParameters_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _getParameters_3__T = typing.TypeVar('_getParameters_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getParameters(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]: ...
+    def getParameters(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]: ...
     @typing.overload
-    def getParameters(self, field: org.hipparchus.Field[_getParameters_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getParameters_1__T]) -> typing.List[_getParameters_1__T]: ...
+    def getParameters(self, field: org.hipparchus.Field[_getParameters_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getParameters_1__T]) -> typing.MutableSequence[_getParameters_1__T]: ...
     @typing.overload
-    def getParameters(self) -> typing.List[float]:
+    def getParameters(self) -> typing.MutableSequence[float]:
         """
             Get model parameters.
         
@@ -824,7 +721,7 @@ class PythonIonosphericModel(IonosphericModel):
         """
         ...
     @typing.overload
-    def getParameters(self, field: org.hipparchus.Field[_getParameters_3__T]) -> typing.List[_getParameters_3__T]:
+    def getParameters(self, field: org.hipparchus.Field[_getParameters_3__T]) -> typing.MutableSequence[_getParameters_3__T]:
         """
             Get model parameters.
         
@@ -846,7 +743,7 @@ class PythonIonosphericModel(IonosphericModel):
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _pathDelay_1__T = typing.TypeVar('_pathDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def pathDelay(self, spacecraftState: org.orekit.propagation.SpacecraftState, topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, doubleArray: typing.List[float]) -> float:
+    def pathDelay(self, spacecraftState: org.orekit.propagation.SpacecraftState, topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float:
         """
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
@@ -872,7 +769,7 @@ class PythonIonosphericModel(IonosphericModel):
         """
         ...
     @typing.overload
-    def pathDelay(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_pathDelay_1__T], topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, tArray: typing.List[_pathDelay_1__T]) -> _pathDelay_1__T:
+    def pathDelay(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_pathDelay_1__T], topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, tArray: typing.Union[typing.List[_pathDelay_1__T], jpype.JArray]) -> _pathDelay_1__T:
         """
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
@@ -996,7 +893,7 @@ class SsrVtecIonosphericModel(IonosphericModel):
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _pathDelay_1__T = typing.TypeVar('_pathDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def pathDelay(self, spacecraftState: org.orekit.propagation.SpacecraftState, topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, doubleArray: typing.List[float]) -> float:
+    def pathDelay(self, spacecraftState: org.orekit.propagation.SpacecraftState, topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> float:
         """
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
@@ -1022,7 +919,7 @@ class SsrVtecIonosphericModel(IonosphericModel):
         """
         ...
     @typing.overload
-    def pathDelay(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_pathDelay_1__T], topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, tArray: typing.List[_pathDelay_1__T]) -> _pathDelay_1__T:
+    def pathDelay(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_pathDelay_1__T], topocentricFrame: org.orekit.frames.TopocentricFrame, double: float, tArray: typing.Union[typing.List[_pathDelay_1__T], jpype.JArray]) -> _pathDelay_1__T:
         """
             Calculates the ionospheric path delay for the signal path from a ground station to a satellite.
         
@@ -1050,7 +947,7 @@ class SsrVtecIonosphericModel(IonosphericModel):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.models.earth.ionosphere")``.
 
     EstimatedIonosphericModel: typing.Type[EstimatedIonosphericModel]
@@ -1059,9 +956,8 @@ class __module_protocol__(typing.Protocol):
     IonosphericModel: typing.Type[IonosphericModel]
     KlobucharIonoCoefficientsLoader: typing.Type[KlobucharIonoCoefficientsLoader]
     KlobucharIonoModel: typing.Type[KlobucharIonoModel]
-    NeQuickModel: typing.Type[NeQuickModel]
     PythonIonosphericMappingFunction: typing.Type[PythonIonosphericMappingFunction]
     PythonIonosphericModel: typing.Type[PythonIonosphericModel]
     SingleLayerModelMappingFunction: typing.Type[SingleLayerModelMappingFunction]
     SsrVtecIonosphericModel: typing.Type[SsrVtecIonosphericModel]
-    class-use: org.orekit.models.earth.ionosphere.class-use.__module_protocol__
+    nequick: org.orekit.models.earth.ionosphere.nequick.__module_protocol__

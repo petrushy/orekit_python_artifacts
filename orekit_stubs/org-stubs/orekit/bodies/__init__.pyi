@@ -1,10 +1,16 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.io
 import java.lang
 import org.hipparchus
 import org.hipparchus.analysis.differentiation
 import org.hipparchus.geometry.euclidean.threed
 import org.hipparchus.geometry.euclidean.twod
-import org.orekit.bodies.class-use
 import org.orekit.data
 import org.orekit.frames
 import org.orekit.time
@@ -69,9 +75,9 @@ class AnalyticalSolarPositionProvider(org.orekit.utils.ExtendedPositionProvider)
         """
         ...
 
-class BodyShape(java.io.Serializable):
+class BodyShape:
     """
-    public interface BodyShape extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public interface BodyShape
     
         Interface representing the rigid surface shape of a natural body.
     
@@ -580,9 +586,9 @@ class CelestialBodies:
         """
         ...
 
-class CelestialBody(java.io.Serializable, org.orekit.utils.ExtendedPVCoordinatesProvider):
+class CelestialBody(org.orekit.utils.ExtendedPositionProvider):
     """
-    public interface CelestialBody extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.orekit.utils.ExtendedPVCoordinatesProvider`
+    public interface CelestialBody extends :class:`~org.orekit.utils.ExtendedPositionProvider`
     
         Interface for celestial bodies like Sun, Moon or solar system planets.
     
@@ -806,7 +812,7 @@ class CelestialBodyFactory:
     
     """
     @staticmethod
-    def addCelestialBodyLoader(string: str, celestialBodyLoader: 'CelestialBodyLoader') -> None: ...
+    def addCelestialBodyLoader(string: str, celestialBodyLoader: typing.Union['CelestialBodyLoader', typing.Callable]) -> None: ...
     @typing.overload
     @staticmethod
     def addDefaultCelestialBodyLoader(string: str) -> None: ...
@@ -876,9 +882,9 @@ class CelestialBodyLoader:
         """
         ...
 
-class Ellipse(java.io.Serializable):
+class Ellipse:
     """
-    public class Ellipse extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public class Ellipse extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Model of a 2D ellipse in 3D space.
     
@@ -890,7 +896,7 @@ class Ellipse(java.io.Serializable):
             7.0
     
         Also see:
-            :meth:`~org.orekit.bodies.Ellipsoid.getPlaneSection`, :meth:`~serialized`
+            :meth:`~org.orekit.bodies.Ellipsoid.getPlaneSection`
     """
     def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D3: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float, double2: float, frame: org.orekit.frames.Frame): ...
     def getA(self) -> float:
@@ -1039,17 +1045,14 @@ class Ellipse(java.io.Serializable):
         """
         ...
 
-class Ellipsoid(java.io.Serializable):
+class Ellipsoid:
     """
-    public class Ellipsoid extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public class Ellipsoid extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Modeling of a general three-axes ellipsoid.
     
         Since:
             7.0
-    
-        Also see:
-            :meth:`~serialized`
     """
     def __init__(self, frame: org.orekit.frames.Frame, double: float, double2: float, double3: float): ...
     def getA(self) -> float:
@@ -1659,7 +1662,7 @@ class Loxodrome:
     def pointAtDistance(self, double: float) -> GeodeticPoint:
         """
             Calculate the point at the specified distance from the origin point along the loxodrome. A positive distance follows the
-            line in the azumuth direction (i.e. northward for arcs with azimuth angles :code:`[3pi/2, 2pi]` or :code:`[0, pi/2]`).
+            line in the azimuth direction (i.e. northward for arcs with azimuth angles :code:`[3π/2, 2π]` or :code:`[0, π/2]`).
             Negative distances travel in the opposite direction along the rhumb line. Distance is computed at the altitude of the
             origin point.
         
@@ -1668,6 +1671,75 @@ class Loxodrome:
         
             Returns:
                 the point at the specified distance from the origin
+        
+        
+        """
+        ...
+
+class SexagesimalAngle:
+    """
+    public class SexagesimalAngle extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Container for sexagesimal angle.
+    
+        Instance of this class are guaranteed to be immutable.
+    
+        Since:
+            13.0
+    
+        Also see:
+            :class:`~org.orekit.bodies.GeodeticPoint`
+    """
+    @typing.overload
+    def __init__(self, double: float): ...
+    @typing.overload
+    def __init__(self, int: int, int2: int, int3: int, double: float): ...
+    def getAngle(self) -> float:
+        """
+            Get the corresponding angle in radians.
+        
+            Returns:
+                angle in radians
+        
+        
+        """
+        ...
+    def getArcMinute(self) -> int:
+        """
+            Get arc-minute part of the angle.
+        
+            Returns:
+                arc-minute part of the angle
+        
+        
+        """
+        ...
+    def getArcSecond(self) -> float:
+        """
+            Get arc-second part of the angle.
+        
+            Returns:
+                arc-second part of the angle
+        
+        
+        """
+        ...
+    def getDegree(self) -> int:
+        """
+            Get degree part of the angle.
+        
+            Returns:
+                degree part of the angle
+        
+        
+        """
+        ...
+    def getSign(self) -> int:
+        """
+            Get sign.
+        
+            Returns:
+                sign
         
         
         """
@@ -1732,7 +1804,7 @@ class JPLEphemeridesLoader(org.orekit.data.AbstractSelfFeedingLoader, CelestialB
         
         """
         ...
-    def getLoadedConstant(self, stringArray: typing.List[str]) -> float:
+    def getLoadedConstant(self, *string: str) -> float:
         """
             Get a constant defined in the ephemerides headers.
         
@@ -1824,7 +1896,7 @@ class JPLEphemeridesLoader(org.orekit.data.AbstractSelfFeedingLoader, CelestialB
         @staticmethod
         def valueOf(string: str) -> 'JPLEphemeridesLoader.EphemerisType': ...
         @staticmethod
-        def values() -> typing.List['JPLEphemeridesLoader.EphemerisType']: ...
+        def values() -> typing.MutableSequence['JPLEphemeridesLoader.EphemerisType']: ...
     class RawPVProvider:
         _getRawPV_0__T = typing.TypeVar('_getRawPV_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
         @typing.overload
@@ -1851,7 +1923,7 @@ class LazyLoadedCelestialBodies(CelestialBodies):
             :class:`~org.orekit.bodies.CelestialBodyFactory`
     """
     def __init__(self, dataProvidersManager: org.orekit.data.DataProvidersManager, timeScales: org.orekit.time.TimeScales, frame: org.orekit.frames.Frame): ...
-    def addCelestialBodyLoader(self, string: str, celestialBodyLoader: CelestialBodyLoader) -> None:
+    def addCelestialBodyLoader(self, string: str, celestialBodyLoader: typing.Union[CelestialBodyLoader, typing.Callable]) -> None:
         """
             Add a loader for celestial bodies.
         
@@ -2232,9 +2304,6 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
         One-axis ellipsoids is a good approximate model for most planet-size and larger natural bodies. It is the equilibrium
         shape reached by a fluid body under its own gravity field when it rotates. The symmetry axis is the rotation or polar
         axis.
-    
-        Also see:
-            :meth:`~serialized`
     """
     def __init__(self, double: float, double2: float, frame: org.orekit.frames.Frame): ...
     _azimuthBetweenPoints_1__T = typing.TypeVar('_azimuthBetweenPoints_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -2314,6 +2383,8 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
     def getBodyFrame(self) -> org.orekit.frames.Frame:
         """
             Get body frame related to body shape.
+        
+            Be mindful that the OneAxisEllipsoid.getBodyFrame() and the OneAxisEllipsoid.getFrame() methods return the same object.
         
             Specified by:
                 :meth:`~org.orekit.bodies.BodyShape.getBodyFrame` in interface :class:`~org.orekit.bodies.BodyShape`
@@ -2652,7 +2723,7 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
             Returns:
                 point at the same location but as a surface-relative point
         
-        public :class:`~org.orekit.bodies.FieldGeodeticPoint`<:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.differentiation.DerivativeStructure?is`> transform (:class:`~org.orekit.utils.PVCoordinates` point, :class:`~org.orekit.frames.Frame` frame, :class:`~org.orekit.time.AbsoluteDate` date)
+        public :class:`~org.orekit.bodies.FieldGeodeticPoint`<:class:`~org.orekit.bodies.https:.www.hipparchus.org.apidocs.org.hipparchus.analysis.differentiation.UnivariateDerivative2?is`> transform (:class:`~org.orekit.utils.PVCoordinates` point, :class:`~org.orekit.frames.Frame` frame, :class:`~org.orekit.time.AbsoluteDate` date)
         
             Transform a Cartesian point to a surface-relative point.
         
@@ -2668,17 +2739,13 @@ class OneAxisEllipsoid(Ellipsoid, BodyShape):
         """
         ...
     @typing.overload
-    def transform(self, pVCoordinates: org.orekit.utils.PVCoordinates, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> FieldGeodeticPoint[org.hipparchus.analysis.differentiation.DerivativeStructure]: ...
+    def transform(self, pVCoordinates: org.orekit.utils.PVCoordinates, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> FieldGeodeticPoint[org.hipparchus.analysis.differentiation.UnivariateDerivative2]: ...
     @typing.overload
     def transform(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate) -> GeodeticPoint: ...
 
 class PythonBodyShape(BodyShape):
     """
     public class PythonBodyShape extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.bodies.BodyShape`
-    
-    
-        Also see:
-            :meth:`~serialized`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -3098,10 +3165,6 @@ class PythonCelestialBodies(CelestialBodies):
 class PythonCelestialBody(CelestialBody):
     """
     public class PythonCelestialBody extends :class:`~org.orekit.bodies.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.bodies.CelestialBody`
-    
-    
-        Also see:
-            :meth:`~serialized`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -3173,22 +3236,18 @@ class PythonCelestialBody(CelestialBody):
     @typing.overload
     def getPVCoordinates(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPVCoordinates_0__T], frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_getPVCoordinates_0__T]:
         """
-            Get the :class:`~org.orekit.utils.FieldPVCoordinates` of the body in the selected frame.
+            Get the position-velocity-acceleration in the selected frame.
         
             Specified by:
                 :meth:`~org.orekit.utils.ExtendedPositionProvider.getPVCoordinates` in
                 interface :class:`~org.orekit.utils.ExtendedPositionProvider`
-        
-            Specified by:
-                :meth:`~org.orekit.utils.ExtendedPVCoordinatesProvider.getPVCoordinates` in
-                interface :class:`~org.orekit.utils.ExtendedPVCoordinatesProvider`
         
             Parameters:
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
                 frame (:class:`~org.orekit.frames.Frame`): the frame where to define the position
         
             Returns:
-                time-stamped position/velocity of the body (m and m/s)
+                position-velocity-acceleration vector
         
         """
         ...
@@ -3211,6 +3270,28 @@ class PythonCelestialBody(CelestialBody):
         
             Returns:
                 time-stamped position/velocity of the body (m and m/s)
+        
+        
+        """
+        ...
+    _getPosition_1__T = typing.TypeVar('_getPosition_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getPosition(self, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    @typing.overload
+    def getPosition(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPosition_1__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getPosition_1__T]:
+        """
+            Get the position in the selected frame.
+        
+            Specified by:
+                :meth:`~org.orekit.utils.ExtendedPositionProvider.getPosition` in
+                interface :class:`~org.orekit.utils.ExtendedPositionProvider`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
+                frame (:class:`~org.orekit.frames.Frame`): the frame where to define the position
+        
+            Returns:
+                position
         
         
         """
@@ -3433,7 +3514,7 @@ class PythonIAUPole(IAUPole):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.bodies")``.
 
     AnalyticalSolarPositionProvider: typing.Type[AnalyticalSolarPositionProvider]
@@ -3460,4 +3541,4 @@ class __module_protocol__(typing.Protocol):
     PythonCelestialBody: typing.Type[PythonCelestialBody]
     PythonCelestialBodyLoader: typing.Type[PythonCelestialBodyLoader]
     PythonIAUPole: typing.Type[PythonIAUPole]
-    class-use: org.orekit.bodies.class-use.__module_protocol__
+    SexagesimalAngle: typing.Type[SexagesimalAngle]

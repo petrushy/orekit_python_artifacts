@@ -1,12 +1,19 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
 import java.util.function
+import jpype
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.data
 import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.ndm.odm
-import org.orekit.files.ccsds.ndm.odm.opm.class-use
 import org.orekit.files.ccsds.section
 import org.orekit.files.ccsds.utils
 import org.orekit.files.ccsds.utils.generation
@@ -24,6 +31,15 @@ class Maneuver(org.orekit.files.ccsds.section.CommentsContainer):
     public class Maneuver extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
     
         Maneuver in an OPM file.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
     
         Since:
             6.1
@@ -217,7 +233,7 @@ class ManeuverKey(java.lang.Enum['ManeuverKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['ManeuverKey']:
+    def values() -> typing.MutableSequence['ManeuverKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -509,7 +525,7 @@ class OpmParser(org.orekit.files.ccsds.ndm.odm.OdmParser[Opm, 'OpmParser']):
         Since:
             6.1
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]): ...
+    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
     def build(self) -> Opm:
         """
             Build the file from parsed entries.
@@ -706,7 +722,7 @@ class OpmWriter(org.orekit.files.ccsds.utils.generation.AbstractMessageWriter[or
     def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate): ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.ndm.odm.opm")``.
 
     Maneuver: typing.Type[Maneuver]
@@ -715,4 +731,3 @@ class __module_protocol__(typing.Protocol):
     OpmData: typing.Type[OpmData]
     OpmParser: typing.Type[OpmParser]
     OpmWriter: typing.Type[OpmWriter]
-    class-use: org.orekit.files.ccsds.ndm.odm.opm.class-use.__module_protocol__

@@ -1,6 +1,13 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.util
+import jpype
 import org.orekit.gnss.metric.messages.ssr
-import org.orekit.gnss.metric.messages.ssr.subtype.class-use
 import org.orekit.models.earth.ionosphere
 import typing
 
@@ -39,7 +46,7 @@ class SsrIm201Data(org.orekit.gnss.metric.messages.ssr.SsrData):
             11.0
     """
     def __init__(self): ...
-    def getCnm(self) -> typing.List[typing.List[float]]:
+    def getCnm(self) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
             Get the cosine parameters of spherical harmonics expansion of degree N and order M.
         
@@ -61,7 +68,7 @@ class SsrIm201Data(org.orekit.gnss.metric.messages.ssr.SsrData):
         
         """
         ...
-    def getSnm(self) -> typing.List[typing.List[float]]:
+    def getSnm(self) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
             Get the sine parameters of spherical harmonics expansion of degree N and order M.
         
@@ -93,7 +100,7 @@ class SsrIm201Data(org.orekit.gnss.metric.messages.ssr.SsrData):
         
         """
         ...
-    def setCnm(self, doubleArray: typing.List[typing.List[float]]) -> None:
+    def setCnm(self, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> None:
         """
             Set the cosine parameters of spherical harmonics expansion of degree N and order M.
         
@@ -113,7 +120,7 @@ class SsrIm201Data(org.orekit.gnss.metric.messages.ssr.SsrData):
         
         """
         ...
-    def setSnm(self, doubleArray: typing.List[typing.List[float]]) -> None:
+    def setSnm(self, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> None:
         """
             Set the sine parameters of spherical harmonics expansion of degree N and order M.
         
@@ -196,10 +203,9 @@ class SsrIm201Header(org.orekit.gnss.metric.messages.ssr.SsrHeader):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.gnss.metric.messages.ssr.subtype")``.
 
     SsrIm201: typing.Type[SsrIm201]
     SsrIm201Data: typing.Type[SsrIm201Data]
     SsrIm201Header: typing.Type[SsrIm201Header]
-    class-use: org.orekit.gnss.metric.messages.ssr.subtype.class-use.__module_protocol__

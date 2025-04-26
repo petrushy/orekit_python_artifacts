@@ -1,10 +1,16 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import org.hipparchus
 import org.hipparchus.geometry.euclidean.threed
 import org.hipparchus.geometry.euclidean.twod
 import org.hipparchus.linear
 import org.orekit.frames
-import org.orekit.frames.encounter.class-use
 import org.orekit.time
 import org.orekit.utils
 import typing
@@ -346,7 +352,7 @@ class EncounterLOFType(java.lang.Enum['EncounterLOFType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['EncounterLOFType']:
+    def values() -> typing.MutableSequence['EncounterLOFType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -944,7 +950,7 @@ class ValsecchiEncounterFrame(AbstractEncounterLOF):
     def rotationFromInertial(self, pVCoordinates: org.orekit.utils.PVCoordinates, pVCoordinates2: org.orekit.utils.PVCoordinates) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.frames.encounter")``.
 
     AbstractEncounterLOF: typing.Type[AbstractEncounterLOF]
@@ -954,4 +960,3 @@ class __module_protocol__(typing.Protocol):
     PythonAbstractEncounterLOF: typing.Type[PythonAbstractEncounterLOF]
     PythonEncounterLOF: typing.Type[PythonEncounterLOF]
     ValsecchiEncounterFrame: typing.Type[ValsecchiEncounterFrame]
-    class-use: org.orekit.frames.encounter.class-use.__module_protocol__

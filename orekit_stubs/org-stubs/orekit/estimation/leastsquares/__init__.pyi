@@ -1,9 +1,16 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.util
+import jpype
 import org.hipparchus.linear
 import org.hipparchus.optim
 import org.hipparchus.optim.nonlinear.vector.leastsquares
 import org.hipparchus.util
-import org.orekit.estimation.leastsquares.class-use
 import org.orekit.estimation.measurements
 import org.orekit.orbits
 import org.orekit.propagation
@@ -24,8 +31,8 @@ class AbstractBatchLSModel(org.hipparchus.optim.nonlinear.vector.leastsquares.Mu
         Since:
             11.0
     """
-    def __init__(self, propagatorBuilderArray: typing.List[org.orekit.propagation.conversion.PropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: 'ModelObserver'): ...
-    def createPropagators(self, realVector: org.hipparchus.linear.RealVector) -> typing.List[org.orekit.propagation.Propagator]:
+    def __init__(self, propagatorBuilderArray: typing.Union[typing.List[org.orekit.propagation.conversion.PropagatorBuilder], jpype.JArray], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: typing.Union['ModelObserver', typing.Callable]): ...
+    def createPropagators(self, realVector: org.hipparchus.linear.RealVector) -> typing.MutableSequence[org.orekit.propagation.Propagator]:
         """
             Create the propagators and parameters corresponding to an evaluation point.
         
@@ -148,7 +155,7 @@ class BatchLSEstimator:
         Since:
             8.0
     """
-    def __init__(self, leastSquaresOptimizer: org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer, propagatorBuilderArray: typing.List[org.orekit.propagation.conversion.PropagatorBuilder]): ...
+    def __init__(self, leastSquaresOptimizer: typing.Union[org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer, typing.Callable], *propagatorBuilder: org.orekit.propagation.conversion.PropagatorBuilder): ...
     def addMeasurement(self, observedMeasurement: org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]) -> None:
         """
             Add a measurement.
@@ -159,7 +166,7 @@ class BatchLSEstimator:
         
         """
         ...
-    def estimate(self) -> typing.List[org.orekit.propagation.Propagator]:
+    def estimate(self) -> typing.MutableSequence[org.orekit.propagation.Propagator]:
         """
             Estimate the orbital, propagation and measurements parameters.
         
@@ -306,7 +313,7 @@ class BatchLSEstimator:
         
         """
         ...
-    def setConvergenceChecker(self, convergenceChecker: org.hipparchus.optim.ConvergenceChecker[org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation]) -> None: ...
+    def setConvergenceChecker(self, convergenceChecker: typing.Union[org.hipparchus.optim.ConvergenceChecker[org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation], typing.Callable[[int, org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation, org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation], bool]]) -> None: ...
     def setMaxEvaluations(self, int: int) -> None:
         """
             Set the maximum number of model evaluations.
@@ -348,7 +355,7 @@ class BatchLSEstimator:
         
         """
         ...
-    def setObserver(self, batchLSObserver: 'BatchLSObserver') -> None:
+    def setObserver(self, batchLSObserver: typing.Union['BatchLSObserver', typing.Callable]) -> None:
         """
             Set an observer for iterations.
         
@@ -390,7 +397,7 @@ class BatchLSEstimator:
 
 class BatchLSObserver:
     """
-    public interface BatchLSObserver
+    :class:`~org.orekit.estimation.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.FunctionalInterface?is` public interface BatchLSObserver
     
         Observer for :class:`~org.orekit.estimation.leastsquares.BatchLSEstimator` iterations.
     
@@ -399,7 +406,7 @@ class BatchLSObserver:
         Since:
             8.0
     """
-    def evaluationPerformed(self, int: int, int2: int, orbitArray: typing.List[org.orekit.orbits.Orbit], parameterDriversList: org.orekit.utils.ParameterDriversList, parameterDriversList2: org.orekit.utils.ParameterDriversList, parameterDriversList3: org.orekit.utils.ParameterDriversList, estimationsProvider: org.orekit.estimation.measurements.EstimationsProvider, evaluation: org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation) -> None:
+    def evaluationPerformed(self, int: int, int2: int, orbitArray: typing.Union[typing.List[org.orekit.orbits.Orbit], jpype.JArray], parameterDriversList: org.orekit.utils.ParameterDriversList, parameterDriversList2: org.orekit.utils.ParameterDriversList, parameterDriversList3: org.orekit.utils.ParameterDriversList, estimationsProvider: org.orekit.estimation.measurements.EstimationsProvider, evaluation: org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation) -> None:
         """
             Notification callback for the end of each evaluation.
         
@@ -421,7 +428,7 @@ class BatchLSObserver:
 
 class ModelObserver:
     """
-    public interface ModelObserver
+    :class:`~org.orekit.estimation.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.FunctionalInterface?is` public interface ModelObserver
     
         Observer for :class:`~org.orekit.estimation.leastsquares.BatchLSModel` calls.
     
@@ -432,7 +439,7 @@ class ModelObserver:
         Since:
             8.0
     """
-    def modelCalled(self, orbitArray: typing.List[org.orekit.orbits.Orbit], map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any], org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]], typing.Mapping[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any], org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]]]) -> None: ...
+    def modelCalled(self, orbitArray: typing.Union[typing.List[org.orekit.orbits.Orbit], jpype.JArray], map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any], org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]], typing.Mapping[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any], org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]]]) -> None: ...
 
 class BatchLSModel(AbstractBatchLSModel):
     """
@@ -444,7 +451,7 @@ class BatchLSModel(AbstractBatchLSModel):
         Since:
             8.0
     """
-    def __init__(self, propagatorBuilderArray: typing.List[org.orekit.propagation.conversion.PropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: ModelObserver): ...
+    def __init__(self, propagatorBuilderArray: typing.Union[typing.List[org.orekit.propagation.conversion.PropagatorBuilder], jpype.JArray], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: typing.Union[ModelObserver, typing.Callable]): ...
 
 class DSSTBatchLSModel(AbstractBatchLSModel):
     """
@@ -459,13 +466,13 @@ class DSSTBatchLSModel(AbstractBatchLSModel):
         Since:
             10.0
     """
-    def __init__(self, propagatorBuilderArray: typing.List[org.orekit.propagation.conversion.PropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: ModelObserver, propagationType: org.orekit.propagation.PropagationType): ...
+    def __init__(self, propagatorBuilderArray: typing.Union[typing.List[org.orekit.propagation.conversion.PropagatorBuilder], jpype.JArray], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: typing.Union[ModelObserver, typing.Callable], propagationType: org.orekit.propagation.PropagationType): ...
 
 class PythonAbstractBatchLSModel(AbstractBatchLSModel):
     """
     public class PythonAbstractBatchLSModel extends :class:`~org.orekit.estimation.leastsquares.AbstractBatchLSModel`
     """
-    def __init__(self, propagatorBuilderArray: typing.List[org.orekit.propagation.conversion.PropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: ModelObserver): ...
+    def __init__(self, propagatorBuilderArray: typing.Union[typing.List[org.orekit.propagation.conversion.PropagatorBuilder], jpype.JArray], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: typing.Union[ModelObserver, typing.Callable]): ...
     def configureHarvester(self, propagator: org.orekit.propagation.Propagator) -> org.orekit.propagation.MatricesHarvester:
         """
             Configure the propagator to compute derivatives.
@@ -503,7 +510,7 @@ class PythonAbstractBatchLSModel(AbstractBatchLSModel):
         
         """
         ...
-    def createPropagators(self, realVector: org.hipparchus.linear.RealVector) -> typing.List[org.orekit.propagation.integration.AbstractIntegratedPropagator]:
+    def createPropagators(self, realVector: org.hipparchus.linear.RealVector) -> typing.MutableSequence[org.orekit.propagation.integration.AbstractIntegratedPropagator]:
         """
             Create the propagators and parameters corresponding to an evaluation point.
         
@@ -649,7 +656,7 @@ class PythonBatchLSObserver(BatchLSObserver):
     public class PythonBatchLSObserver extends :class:`~org.orekit.estimation.leastsquares.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.leastsquares.BatchLSObserver`
     """
     def __init__(self): ...
-    def evaluationPerformed(self, int: int, int2: int, orbitArray: typing.List[org.orekit.orbits.Orbit], parameterDriversList: org.orekit.utils.ParameterDriversList, parameterDriversList2: org.orekit.utils.ParameterDriversList, parameterDriversList3: org.orekit.utils.ParameterDriversList, estimationsProvider: org.orekit.estimation.measurements.EstimationsProvider, evaluation: org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation) -> None:
+    def evaluationPerformed(self, int: int, int2: int, orbitArray: typing.Union[typing.List[org.orekit.orbits.Orbit], jpype.JArray], parameterDriversList: org.orekit.utils.ParameterDriversList, parameterDriversList2: org.orekit.utils.ParameterDriversList, parameterDriversList3: org.orekit.utils.ParameterDriversList, estimationsProvider: org.orekit.estimation.measurements.EstimationsProvider, evaluation: org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem.Evaluation) -> None:
         """
             Notification callback for the end of each evaluation. Extension point for Python.
         
@@ -699,7 +706,7 @@ class PythonModelObserver(ModelObserver):
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def modelCalled(self, orbitArray: typing.List[org.orekit.orbits.Orbit], map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any], org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]], typing.Mapping[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any], org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]]]) -> None: ...
+    def modelCalled(self, orbitArray: typing.Union[typing.List[org.orekit.orbits.Orbit], jpype.JArray], map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any], org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]], typing.Mapping[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any], org.orekit.estimation.measurements.EstimatedMeasurement[typing.Any]]]) -> None: ...
     def pythonDecRef(self) -> None:
         """
             Part of JCC Python interface to object
@@ -791,10 +798,10 @@ class SequentialBatchLSEstimator(BatchLSEstimator):
         Since:
             11.0
     """
-    def __init__(self, sequentialGaussNewtonOptimizer: org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer, propagatorBuilderArray: typing.List[org.orekit.propagation.conversion.PropagatorBuilder]): ...
+    def __init__(self, sequentialGaussNewtonOptimizer: org.hipparchus.optim.nonlinear.vector.leastsquares.SequentialGaussNewtonOptimizer, *propagatorBuilder: org.orekit.propagation.conversion.PropagatorBuilder): ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.estimation.leastsquares")``.
 
     AbstractBatchLSModel: typing.Type[AbstractBatchLSModel]
@@ -807,4 +814,3 @@ class __module_protocol__(typing.Protocol):
     PythonBatchLSObserver: typing.Type[PythonBatchLSObserver]
     PythonModelObserver: typing.Type[PythonModelObserver]
     SequentialBatchLSEstimator: typing.Type[SequentialBatchLSEstimator]
-    class-use: org.orekit.estimation.leastsquares.class-use.__module_protocol__

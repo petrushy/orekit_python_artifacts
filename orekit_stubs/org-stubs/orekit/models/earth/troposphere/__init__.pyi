@@ -1,10 +1,18 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.io
 import java.lang
 import java.util
+import jpype
 import org.hipparchus
 import org.orekit.bodies
 import org.orekit.data
-import org.orekit.models.earth.troposphere.class-use
+import org.orekit.models.earth.troposphere.iturp834
 import org.orekit.models.earth.weather
 import org.orekit.models.earth.weather.water
 import org.orekit.time
@@ -101,61 +109,6 @@ class AzimuthalGradientProvider:
         
             Returns:
                 azimuthal asymmetry gradients or null if no gradients are available
-        
-        
-        """
-        ...
-
-class DiscreteTroposphericModel(org.orekit.utils.ParameterDriversProvider):
-    """
-    :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public interface DiscreteTroposphericModel extends :class:`~org.orekit.utils.ParameterDriversProvider`
-    
-        Deprecated.
-        as of 12.1, replaced by :class:`~org.orekit.models.earth.troposphere.TroposphericModel`
-        Defines a tropospheric model, used to calculate the path delay imposed to electro-magnetic signals between an orbital
-        satellite and a ground station.
-    
-        Models that implement this interface split the delay into hydrostatic and non-hydrostatic part:
-    
-        δ = δ :sub:`h` + δ :sub:`nh`
-    
-        With:
-    
-          - δ :sub:`h` = hydrostatic delay
-          - δ :sub:`nh` = non-hydrostatic (or wet) delay
-    """
-    _pathDelay_1__T = typing.TypeVar('_pathDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def pathDelay(self, double: float, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Deprecated.
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
-        
-            Parameters:
-                elevation (double): the elevation of the satellite, in radians
-                point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                parameters (double[]): tropospheric model parameters
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                the path delay due to the troposphere in m
-        
-        """
-        ...
-    @typing.overload
-    def pathDelay(self, t: _pathDelay_1__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_1__T], tArray: typing.List[_pathDelay_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_1__T]) -> _pathDelay_1__T:
-        """
-            Deprecated.
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
-        
-            Parameters:
-                elevation (T): the elevation of the satellite, in radians
-                point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                parameters (T[]): tropospheric model parameters at current date
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-        
-            Returns:
-                the path delay due to the troposphere in m
         
         
         """
@@ -308,59 +261,6 @@ class FieldViennaACoefficients(typing.Generic[_FieldViennaACoefficients__T]):
         """
         ...
 
-class MappingFunction:
-    """
-    :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public interface MappingFunction
-    
-        Deprecated.
-        as of 12.1, replaced by :class:`~org.orekit.models.earth.troposphere.TroposphereMappingFunction`
-        Interface for mapping functions used in the tropospheric delay computation.
-    """
-    _mappingFactors_1__T = typing.TypeVar('_mappingFactors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def mappingFactors(self, double: float, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]:
-        """
-            Deprecated.
-            This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
-            having the following form:
-        
-              - double[0] = m :sub:`h` (e) → hydrostatic mapping function
-              - double[1] = m :sub:`w` (e) → wet mapping function
-        
-        
-            Parameters:
-                elevation (double): the elevation of the satellite, in radians
-                point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                a two components array containing the hydrostatic and wet mapping functions.
-        
-        """
-        ...
-    @typing.overload
-    def mappingFactors(self, t: _mappingFactors_1__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_1__T]) -> typing.List[_mappingFactors_1__T]:
-        """
-            Deprecated.
-            This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
-            having the following form:
-        
-              - T[0] = m :sub:`h` (e) → hydrostatic mapping function
-              - T[1] = m :sub:`w` (e) → wet mapping function
-        
-        
-            Parameters:
-                elevation (T): the elevation of the satellite, in radians
-                point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-        
-            Returns:
-                a two components array containing the hydrostatic and wet mapping functions.
-        
-        
-        """
-        ...
-
 class TroposphereMappingFunction:
     """
     public interface TroposphereMappingFunction
@@ -369,7 +269,7 @@ class TroposphereMappingFunction:
     """
     _mappingFactors_1__T = typing.TypeVar('_mappingFactors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]:
+    def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]:
         """
             This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
             having the following form:
@@ -381,16 +281,18 @@ class TroposphereMappingFunction:
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                weather (:class:`~org.orekit.models.earth.weather.PressureTemperatureHumidity`): weather parameters
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
         
             Returns:
                 a two components array containing the hydrostatic and wet mapping functions.
         
+            Since:
+                13.0
+        
         """
         ...
     @typing.overload
-    def mappingFactors(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_mappingFactors_1__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_1__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_mappingFactors_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_1__T]) -> typing.List[_mappingFactors_1__T]:
+    def mappingFactors(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_mappingFactors_1__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_1__T]) -> typing.MutableSequence[_mappingFactors_1__T]:
         """
             This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
             having the following form:
@@ -402,11 +304,13 @@ class TroposphereMappingFunction:
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.FieldTrackingCoordinates`<T> trackingCoordinates): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                weather (:class:`~org.orekit.models.earth.weather.FieldPressureTemperatureHumidity`<T> weather): weather parameters
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
             Returns:
                 a two components array containing the hydrostatic and wet mapping functions.
+        
+            Since:
+                13.0
         
         
         """
@@ -485,37 +389,41 @@ class TroposphericModel(org.orekit.utils.ParameterDriversProvider):
     """
     _pathDelay_0__T = typing.TypeVar('_pathDelay_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_0__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_0__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_pathDelay_0__T], tArray: typing.List[_pathDelay_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_0__T]) -> FieldTroposphericDelay[_pathDelay_0__T]:
+    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_0__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_0__T], tArray: typing.Union[typing.List[_pathDelay_0__T], jpype.JArray], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_0__T]) -> FieldTroposphericDelay[_pathDelay_0__T]:
         """
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.FieldTrackingCoordinates`<T> trackingCoordinates): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                weather (:class:`~org.orekit.models.earth.weather.FieldPressureTemperatureHumidity`<T> weather): weather parameters for constant default values)
                 parameters (T[]): tropospheric model parameters at current date
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
             Returns:
                 the path delay due to the troposphere
         
+            Since:
+                13.0
+        
         
         """
         ...
     @typing.overload
-    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay:
+    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.Union[typing.List[float], jpype.JArray], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay:
         """
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                weather (:class:`~org.orekit.models.earth.weather.PressureTemperatureHumidity`): weather parameters for constant default values)
                 parameters (double[]): tropospheric model parameters
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
         
             Returns:
                 the path delay due to the troposphere
+        
+            Since:
+                13.0
         
         """
         ...
@@ -770,9 +678,9 @@ class ViennaModelCoefficientsLoader(org.orekit.data.AbstractSelfFeedingLoader, o
         The files have to be extracted to UTF-8 text files before being read by this loader.
     
         After extraction, it is assumed they are named VMFG_YYYYMMDD.Hhh for
-        :class:`~org.orekit.models.earth.troposphere.ViennaOneModel` and VMF3_YYYYMMDD.Hhh
-        :class:`~org.orekit.models.earth.troposphere.ViennaThreeModel`. Where YYYY is the 4-digits year, MM the month, DD the
-        day and hh the 2-digits hour.
+        :class:`~org.orekit.models.earth.troposphere.ViennaOne` and VMF3_YYYYMMDD.Hhh
+        :class:`~org.orekit.models.earth.troposphere.ViennaThree`. Where YYYY is the 4-digits year, MM the month, DD the day and
+        hh the 2-digits hour.
     
         The format is always the same, with and example shown below for VMF1 model.
     
@@ -820,7 +728,7 @@ class ViennaModelCoefficientsLoader(org.orekit.data.AbstractSelfFeedingLoader, o
     def __init__(self, string: str, double: float, double2: float, viennaModelType: 'ViennaModelType'): ...
     @typing.overload
     def __init__(self, string: str, double: float, double2: float, viennaModelType: 'ViennaModelType', dataProvidersManager: org.orekit.data.DataProvidersManager): ...
-    def getA(self) -> typing.List[float]:
+    def getA(self) -> typing.MutableSequence[float]:
         """
             Returns the a coefficients array.
         
@@ -852,7 +760,7 @@ class ViennaModelCoefficientsLoader(org.orekit.data.AbstractSelfFeedingLoader, o
         
         """
         ...
-    def getZenithDelay(self) -> typing.List[float]:
+    def getZenithDelay(self) -> typing.MutableSequence[float]:
         """
             Returns the zenith delay array.
         
@@ -911,8 +819,7 @@ class ViennaModelType(java.lang.Enum['ViennaModelType']):
         Enumerate for Vienna tropospheric model 1 and 3. This enumerate is used for the coefficients loader.
     
         Also see:
-            :class:`~org.orekit.models.earth.troposphere.ViennaOneModel`,
-            :class:`~org.orekit.models.earth.troposphere.ViennaThreeModel`
+            :class:`~org.orekit.models.earth.troposphere.ViennaOne`, :class:`~org.orekit.models.earth.troposphere.ViennaThree`
     """
     VIENNA_ONE: typing.ClassVar['ViennaModelType'] = ...
     VIENNA_THREE: typing.ClassVar['ViennaModelType'] = ...
@@ -941,7 +848,7 @@ class ViennaModelType(java.lang.Enum['ViennaModelType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['ViennaModelType']:
+    def values() -> typing.MutableSequence['ViennaModelType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -973,7 +880,7 @@ class AbstractChaoMappingFunction(TroposphereMappingFunction):
     """
     _mappingFactors_1__T = typing.TypeVar('_mappingFactors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]:
+    def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]:
         """
             This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
             having the following form:
@@ -989,7 +896,6 @@ class AbstractChaoMappingFunction(TroposphereMappingFunction):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                weather (:class:`~org.orekit.models.earth.weather.PressureTemperatureHumidity`): weather parameters
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
         
             Returns:
@@ -998,7 +904,7 @@ class AbstractChaoMappingFunction(TroposphereMappingFunction):
         """
         ...
     @typing.overload
-    def mappingFactors(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_mappingFactors_1__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_1__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_mappingFactors_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_1__T]) -> typing.List[_mappingFactors_1__T]:
+    def mappingFactors(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_mappingFactors_1__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_1__T]) -> typing.MutableSequence[_mappingFactors_1__T]:
         """
             This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
             having the following form:
@@ -1014,7 +920,6 @@ class AbstractChaoMappingFunction(TroposphereMappingFunction):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.FieldTrackingCoordinates`<T> trackingCoordinates): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                weather (:class:`~org.orekit.models.earth.weather.FieldPressureTemperatureHumidity`<T> weather): weather parameters
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
             Returns:
@@ -1036,7 +941,7 @@ class AbstractVienna(TroposphericModel, TroposphereMappingFunction):
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _pathDelay_0__T = typing.TypeVar('_pathDelay_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_0__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_0__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_pathDelay_0__T], tArray: typing.List[_pathDelay_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_0__T]) -> FieldTroposphericDelay[_pathDelay_0__T]:
+    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_0__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_0__T], tArray: typing.Union[typing.List[_pathDelay_0__T], jpype.JArray], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_0__T]) -> FieldTroposphericDelay[_pathDelay_0__T]:
         """
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
@@ -1047,7 +952,6 @@ class AbstractVienna(TroposphericModel, TroposphereMappingFunction):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.FieldTrackingCoordinates`<T> trackingCoordinates): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                weather (:class:`~org.orekit.models.earth.weather.FieldPressureTemperatureHumidity`<T> weather): weather parameters for constant default values)
                 parameters (T[]): tropospheric model parameters at current date
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
@@ -1058,7 +962,7 @@ class AbstractVienna(TroposphericModel, TroposphereMappingFunction):
         """
         ...
     @typing.overload
-    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay:
+    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.Union[typing.List[float], jpype.JArray], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay:
         """
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
@@ -1069,7 +973,6 @@ class AbstractVienna(TroposphericModel, TroposphereMappingFunction):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                weather (:class:`~org.orekit.models.earth.weather.PressureTemperatureHumidity`): weather parameters for constant default values)
                 parameters (double[]): tropospheric model parameters
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
         
@@ -1109,11 +1012,11 @@ class AskneNordiusModel(TroposphericModel):
     
     
     """
-    def __init__(self, troposphereMappingFunction: TroposphereMappingFunction): ...
+    def __init__(self, troposphereMappingFunction: TroposphereMappingFunction, pressureTemperatureHumidityProvider: org.orekit.models.earth.weather.PressureTemperatureHumidityProvider): ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _pathDelay_0__T = typing.TypeVar('_pathDelay_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_0__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_0__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_pathDelay_0__T], tArray: typing.List[_pathDelay_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_0__T]) -> FieldTroposphericDelay[_pathDelay_0__T]:
+    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_0__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_0__T], tArray: typing.Union[typing.List[_pathDelay_0__T], jpype.JArray], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_0__T]) -> FieldTroposphericDelay[_pathDelay_0__T]:
         """
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
@@ -1124,7 +1027,6 @@ class AskneNordiusModel(TroposphericModel):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.FieldTrackingCoordinates`<T> trackingCoordinates): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                weather (:class:`~org.orekit.models.earth.weather.FieldPressureTemperatureHumidity`<T> weather): weather parameters for constant default values)
                 parameters (T[]): tropospheric model parameters at current date
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
@@ -1135,7 +1037,7 @@ class AskneNordiusModel(TroposphericModel):
         """
         ...
     @typing.overload
-    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay:
+    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.Union[typing.List[float], jpype.JArray], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay:
         """
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
@@ -1146,7 +1048,6 @@ class AskneNordiusModel(TroposphericModel):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                weather (:class:`~org.orekit.models.earth.weather.PressureTemperatureHumidity`): weather parameters for constant default values)
                 parameters (double[]): tropospheric model parameters
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
         
@@ -1163,8 +1064,8 @@ class CanonicalSaastamoinenModel(TroposphericModel):
         The canonical Saastamoinen model.
     
         Estimates the path delay imposed to electro-magnetic signals by the troposphere according to the formula: \[ \delta =
-        \frac{0.002277}{\cos z (1 - 0.00266\cos 2\varphi - 0.00028 h})} \left[P+(\frac{1255}{T}+0.005)e - B(h) \tan^2 z\right]
-        \] with the following input data provided to the model:
+        \frac{0.002277}{\cos z} \left[P+(\frac{1255}{T}+0.005)e - B(h) \tan^2 z\right] \] with the following input data provided
+        to the model:
     
           - z: zenith angle
           - P: atmospheric pressure
@@ -1189,7 +1090,10 @@ class CanonicalSaastamoinenModel(TroposphericModel):
     
     
     """
+    @typing.overload
     def __init__(self): ...
+    @typing.overload
+    def __init__(self, pressureTemperatureHumidityProvider: org.orekit.models.earth.weather.PressureTemperatureHumidityProvider): ...
     def getLowElevationThreshold(self) -> float:
         """
             Get the low elevation threshold value for path delay computation.
@@ -1207,7 +1111,7 @@ class CanonicalSaastamoinenModel(TroposphericModel):
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _pathDelay_0__T = typing.TypeVar('_pathDelay_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_0__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_0__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_pathDelay_0__T], tArray: typing.List[_pathDelay_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_0__T]) -> FieldTroposphericDelay[_pathDelay_0__T]:
+    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_0__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_0__T], tArray: typing.Union[typing.List[_pathDelay_0__T], jpype.JArray], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_0__T]) -> FieldTroposphericDelay[_pathDelay_0__T]:
         """
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
@@ -1224,7 +1128,6 @@ class CanonicalSaastamoinenModel(TroposphericModel):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.FieldTrackingCoordinates`<T> trackingCoordinates): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                weather (:class:`~org.orekit.models.earth.weather.FieldPressureTemperatureHumidity`<T> weather): weather parameters for constant default values)
                 parameters (T[]): tropospheric model parameters at current date
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
@@ -1239,7 +1142,7 @@ class CanonicalSaastamoinenModel(TroposphericModel):
         """
         ...
     @typing.overload
-    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay:
+    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.Union[typing.List[float], jpype.JArray], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay:
         """
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
@@ -1256,7 +1159,6 @@ class CanonicalSaastamoinenModel(TroposphericModel):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                weather (:class:`~org.orekit.models.earth.weather.PressureTemperatureHumidity`): weather parameters for constant default values)
                 parameters (double[]): tropospheric model parameters
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
         
@@ -1347,7 +1249,7 @@ class ConstantTroposphericModel(TroposphericModel):
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _pathDelay_0__T = typing.TypeVar('_pathDelay_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_0__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_0__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_pathDelay_0__T], tArray: typing.List[_pathDelay_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_0__T]) -> FieldTroposphericDelay[_pathDelay_0__T]:
+    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_0__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_0__T], tArray: typing.Union[typing.List[_pathDelay_0__T], jpype.JArray], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_0__T]) -> FieldTroposphericDelay[_pathDelay_0__T]:
         """
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
@@ -1358,7 +1260,6 @@ class ConstantTroposphericModel(TroposphericModel):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.FieldTrackingCoordinates`<T> trackingCoordinates): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                weather (:class:`~org.orekit.models.earth.weather.FieldPressureTemperatureHumidity`<T> weather): weather parameters for constant default values)
                 parameters (T[]): tropospheric model parameters at current date
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
@@ -1369,7 +1270,7 @@ class ConstantTroposphericModel(TroposphericModel):
         """
         ...
     @typing.overload
-    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay:
+    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.Union[typing.List[float], jpype.JArray], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay:
         """
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
@@ -1380,7 +1281,6 @@ class ConstantTroposphericModel(TroposphericModel):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                weather (:class:`~org.orekit.models.earth.weather.PressureTemperatureHumidity`): weather parameters for constant default values)
                 parameters (double[]): tropospheric model parameters
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
         
@@ -1461,7 +1361,7 @@ class DummyMappingFunction(TroposphereMappingFunction):
     """
     _mappingFactors_1__T = typing.TypeVar('_mappingFactors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]:
+    def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]:
         """
             This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
             having the following form:
@@ -1477,7 +1377,6 @@ class DummyMappingFunction(TroposphereMappingFunction):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                weather (:class:`~org.orekit.models.earth.weather.PressureTemperatureHumidity`): weather parameters
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
         
             Returns:
@@ -1486,7 +1385,7 @@ class DummyMappingFunction(TroposphereMappingFunction):
         """
         ...
     @typing.overload
-    def mappingFactors(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_mappingFactors_1__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_1__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_mappingFactors_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_1__T]) -> typing.List[_mappingFactors_1__T]:
+    def mappingFactors(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_mappingFactors_1__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_1__T]) -> typing.MutableSequence[_mappingFactors_1__T]:
         """
             This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
             having the following form:
@@ -1502,7 +1401,6 @@ class DummyMappingFunction(TroposphereMappingFunction):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.FieldTrackingCoordinates`<T> trackingCoordinates): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                weather (:class:`~org.orekit.models.earth.weather.FieldPressureTemperatureHumidity`<T> weather): weather parameters
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
             Returns:
@@ -1560,7 +1458,7 @@ class EstimatedModel(TroposphericModel):
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _pathDelay_0__T = typing.TypeVar('_pathDelay_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_0__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_0__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_pathDelay_0__T], tArray: typing.List[_pathDelay_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_0__T]) -> FieldTroposphericDelay[_pathDelay_0__T]:
+    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_0__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_0__T], tArray: typing.Union[typing.List[_pathDelay_0__T], jpype.JArray], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_0__T]) -> FieldTroposphericDelay[_pathDelay_0__T]:
         """
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
@@ -1571,7 +1469,6 @@ class EstimatedModel(TroposphericModel):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.FieldTrackingCoordinates`<T> trackingCoordinates): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                weather (:class:`~org.orekit.models.earth.weather.FieldPressureTemperatureHumidity`<T> weather): weather parameters for constant default values)
                 parameters (T[]): tropospheric model parameters at current date
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
@@ -1582,7 +1479,7 @@ class EstimatedModel(TroposphericModel):
         """
         ...
     @typing.overload
-    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay:
+    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.Union[typing.List[float], jpype.JArray], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay:
         """
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
@@ -1593,7 +1490,6 @@ class EstimatedModel(TroposphericModel):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                weather (:class:`~org.orekit.models.earth.weather.PressureTemperatureHumidity`): weather parameters for constant default values)
                 parameters (double[]): tropospheric model parameters
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
         
@@ -1603,15 +1499,15 @@ class EstimatedModel(TroposphericModel):
         """
         ...
 
-class FixedTroposphericDelay(DiscreteTroposphericModel, TroposphericModel):
+class FixedTroposphericDelay(TroposphericModel):
     """
-    public class FixedTroposphericDelay extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`, :class:`~org.orekit.models.earth.troposphere.TroposphericModel`
+    public class FixedTroposphericDelay extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.TroposphericModel`
     
         A static tropospheric model that interpolates the actual tropospheric delay based on values read from a configuration
         file (tropospheric-delay.txt) via the :class:`~org.orekit.data.DataProvidersManager`.
     """
     @typing.overload
-    def __init__(self, doubleArray: typing.List[float], doubleArray2: typing.List[float], doubleArray3: typing.List[typing.List[float]]): ...
+    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], doubleArray3: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]): ...
     @typing.overload
     def __init__(self, string: str): ...
     @typing.overload
@@ -1619,70 +1515,9 @@ class FixedTroposphericDelay(DiscreteTroposphericModel, TroposphericModel):
     @staticmethod
     def getDefaultModel() -> 'FixedTroposphericDelay': ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    _pathDelay_1__T = typing.TypeVar('_pathDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    _pathDelay_2__T = typing.TypeVar('_pathDelay_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _pathDelay_0__T = typing.TypeVar('_pathDelay_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def pathDelay(self, double: float, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Deprecated.
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
-                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
-        
-            Parameters:
-                elevation (double): the elevation of the satellite, in radians
-                point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                parameters (double[]): tropospheric model parameters
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                the path delay due to the troposphere in m
-        
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
-        
-            All delays are affected to :meth:`~org.orekit.models.earth.troposphere.TroposphericDelay.getZh` and
-            :meth:`~org.orekit.models.earth.troposphere.TroposphericDelay.getSh` delays, the wet delays are arbitrarily set to 0.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.TroposphericModel.pathDelay` in
-                interface :class:`~org.orekit.models.earth.troposphere.TroposphericModel`
-        
-            Parameters:
-                trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
-                point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                weather (:class:`~org.orekit.models.earth.weather.PressureTemperatureHumidity`): weather parameters for constant default values)
-                parameters (double[]): tropospheric model parameters
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                the path delay due to the troposphere
-        
-        :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public <T extends :class:`~org.orekit.models.earth.troposphere.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> T pathDelay (T elevation, :class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point, T[] parameters, :class:`~org.orekit.time.FieldAbsoluteDate`<T> date)
-        
-            Deprecated.
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
-                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
-        
-            Parameters:
-                elevation (T): the elevation of the satellite, in radians
-                point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                parameters (T[]): tropospheric model parameters at current date
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-        
-            Returns:
-                the path delay due to the troposphere in m
-        
-        """
-        ...
-    @typing.overload
-    def pathDelay(self, t: _pathDelay_1__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_1__T], tArray: typing.List[_pathDelay_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_1__T]) -> _pathDelay_1__T: ...
-    @typing.overload
-    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_2__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_2__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_pathDelay_2__T], tArray: typing.List[_pathDelay_2__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_2__T]) -> FieldTroposphericDelay[_pathDelay_2__T]:
+    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_0__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_0__T], tArray: typing.Union[typing.List[_pathDelay_0__T], jpype.JArray], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_0__T]) -> FieldTroposphericDelay[_pathDelay_0__T]:
         """
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
@@ -1697,7 +1532,6 @@ class FixedTroposphericDelay(DiscreteTroposphericModel, TroposphericModel):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.FieldTrackingCoordinates`<T> trackingCoordinates): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                weather (:class:`~org.orekit.models.earth.weather.FieldPressureTemperatureHumidity`<T> weather): weather parameters for constant default values)
                 parameters (T[]): tropospheric model parameters at current date
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
@@ -1708,17 +1542,38 @@ class FixedTroposphericDelay(DiscreteTroposphericModel, TroposphericModel):
         """
         ...
     @typing.overload
-    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay: ...
+    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.Union[typing.List[float], jpype.JArray], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay:
+        """
+            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
+        
+            All delays are affected to :meth:`~org.orekit.models.earth.troposphere.TroposphericDelay.getZh` and
+            :meth:`~org.orekit.models.earth.troposphere.TroposphericDelay.getSh` delays, the wet delays are arbitrarily set to 0.
+        
+            Specified by:
+                :meth:`~org.orekit.models.earth.troposphere.TroposphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.troposphere.TroposphericModel`
+        
+            Parameters:
+                trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
+                point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
+                parameters (double[]): tropospheric model parameters
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+        
+            Returns:
+                the path delay due to the troposphere
+        
+        """
+        ...
 
-class GlobalMappingFunctionModel(MappingFunction, TroposphereMappingFunction):
+class GlobalMappingFunctionModel(TroposphereMappingFunction):
     """
-    public class GlobalMappingFunctionModel extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.MappingFunction`, :class:`~org.orekit.models.earth.troposphere.TroposphereMappingFunction`
+    public class GlobalMappingFunctionModel extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.TroposphereMappingFunction`
     
         The Global Mapping Function model for radio techniques. This model is an empirical mapping function. It only needs the
         values of the station latitude, longitude, height and the date for the computations.
     
         The Global Mapping Function is based on spherical harmonics up to degree and order of 9. It was developed to be
-        consistent with the :class:`~org.orekit.models.earth.troposphere.ViennaOneModel` mapping function model.
+        consistent with the :class:`~org.orekit.models.earth.troposphere.ViennaOne` mapping function model.
     
         Also see:
             "Boehm, J., A.E. Niell, P. Tregoning, H. Schuh (2006), Global Mapping Functions (GMF): A new empirical mapping function
@@ -1729,31 +1584,10 @@ class GlobalMappingFunctionModel(MappingFunction, TroposphereMappingFunction):
     def __init__(self): ...
     @typing.overload
     def __init__(self, timeScale: org.orekit.time.TimeScale): ...
-    _mappingFactors_2__T = typing.TypeVar('_mappingFactors_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    _mappingFactors_3__T = typing.TypeVar('_mappingFactors_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _mappingFactors_1__T = typing.TypeVar('_mappingFactors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def mappingFactors(self, double: float, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]:
+    def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]:
         """
-            Deprecated.
-            This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
-            having the following form:
-        
-              - double[0] = m :sub:`h` (e) → hydrostatic mapping function
-              - double[1] = m :sub:`w` (e) → wet mapping function
-        
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.MappingFunction.mappingFactors` in
-                interface :class:`~org.orekit.models.earth.troposphere.MappingFunction`
-        
-            Parameters:
-                elevation (double): the elevation of the satellite, in radians
-                point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                a two components array containing the hydrostatic and wet mapping functions.
-        
             This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
             having the following form:
         
@@ -1768,30 +1602,7 @@ class GlobalMappingFunctionModel(MappingFunction, TroposphereMappingFunction):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                weather (:class:`~org.orekit.models.earth.weather.PressureTemperatureHumidity`): weather parameters
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                a two components array containing the hydrostatic and wet mapping functions.
-        
-        :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public <T extends :class:`~org.orekit.models.earth.troposphere.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> T[] mappingFactors (T elevation, :class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point, :class:`~org.orekit.time.FieldAbsoluteDate`<T> date)
-        
-            Deprecated.
-            This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
-            having the following form:
-        
-              - T[0] = m :sub:`h` (e) → hydrostatic mapping function
-              - T[1] = m :sub:`w` (e) → wet mapping function
-        
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.MappingFunction.mappingFactors` in
-                interface :class:`~org.orekit.models.earth.troposphere.MappingFunction`
-        
-            Parameters:
-                elevation (T): the elevation of the satellite, in radians
-                point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
             Returns:
                 a two components array containing the hydrostatic and wet mapping functions.
@@ -1799,11 +1610,7 @@ class GlobalMappingFunctionModel(MappingFunction, TroposphereMappingFunction):
         """
         ...
     @typing.overload
-    def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]: ...
-    @typing.overload
-    def mappingFactors(self, t: _mappingFactors_2__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_2__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_2__T]) -> typing.List[_mappingFactors_2__T]: ...
-    @typing.overload
-    def mappingFactors(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_mappingFactors_3__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_3__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_mappingFactors_3__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_3__T]) -> typing.List[_mappingFactors_3__T]:
+    def mappingFactors(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_mappingFactors_1__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_1__T]) -> typing.MutableSequence[_mappingFactors_1__T]:
         """
             This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
             having the following form:
@@ -1819,7 +1626,6 @@ class GlobalMappingFunctionModel(MappingFunction, TroposphereMappingFunction):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.FieldTrackingCoordinates`<T> trackingCoordinates): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                weather (:class:`~org.orekit.models.earth.weather.FieldPressureTemperatureHumidity`<T> weather): weather parameters
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
             Returns:
@@ -1842,11 +1648,11 @@ class MariniMurray(TroposphericModel):
             "Marini, J.W., and C.W. Murray, correction of Laser Range Tracking Data for Atmospheric Refraction at Elevations Above
             10 degrees, X-591-73-351, NASA GSFC, 1973"
     """
-    def __init__(self, double: float, unit: org.orekit.utils.units.Unit): ...
+    def __init__(self, double: float, unit: org.orekit.utils.units.Unit, pressureTemperatureHumidityProvider: org.orekit.models.earth.weather.PressureTemperatureHumidityProvider): ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _pathDelay_0__T = typing.TypeVar('_pathDelay_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_0__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_0__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_pathDelay_0__T], tArray: typing.List[_pathDelay_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_0__T]) -> FieldTroposphericDelay[_pathDelay_0__T]:
+    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_0__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_0__T], tArray: typing.Union[typing.List[_pathDelay_0__T], jpype.JArray], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_0__T]) -> FieldTroposphericDelay[_pathDelay_0__T]:
         """
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
@@ -1857,7 +1663,6 @@ class MariniMurray(TroposphericModel):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.FieldTrackingCoordinates`<T> trackingCoordinates): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                weather (:class:`~org.orekit.models.earth.weather.FieldPressureTemperatureHumidity`<T> weather): weather parameters for constant default values)
                 parameters (T[]): tropospheric model parameters at current date
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
@@ -1868,7 +1673,7 @@ class MariniMurray(TroposphericModel):
         """
         ...
     @typing.overload
-    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay:
+    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.Union[typing.List[float], jpype.JArray], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay:
         """
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
@@ -1879,7 +1684,6 @@ class MariniMurray(TroposphericModel):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                weather (:class:`~org.orekit.models.earth.weather.PressureTemperatureHumidity`): weather parameters for constant default values)
                 parameters (double[]): tropospheric model parameters
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
         
@@ -1889,43 +1693,26 @@ class MariniMurray(TroposphericModel):
         """
         ...
 
-class MendesPavlisModel(DiscreteTroposphericModel, TroposphericModel, MappingFunction, TroposphereMappingFunction):
-    @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, double4: float): ...
-    @typing.overload
+class MendesPavlisModel(TroposphericModel, TroposphereMappingFunction):
     def __init__(self, pressureTemperatureHumidityProvider: org.orekit.models.earth.weather.PressureTemperatureHumidityProvider, double: float, unit: org.orekit.utils.units.Unit): ...
     _computeZenithDelay_1__T = typing.TypeVar('_computeZenithDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def computeZenithDelay(self, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]: ...
+    def computeZenithDelay(self, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]: ...
     @typing.overload
-    def computeZenithDelay(self, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_computeZenithDelay_1__T], tArray: typing.List[_computeZenithDelay_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_computeZenithDelay_1__T]) -> typing.List[_computeZenithDelay_1__T]: ...
+    def computeZenithDelay(self, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_computeZenithDelay_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_computeZenithDelay_1__T]) -> typing.MutableSequence[_computeZenithDelay_1__T]: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    @typing.overload
-    @staticmethod
-    def getStandardModel(double: float) -> 'MendesPavlisModel': ...
-    @typing.overload
     @staticmethod
     def getStandardModel(double: float, unit: org.orekit.utils.units.Unit) -> 'MendesPavlisModel': ...
-    _mappingFactors_2__T = typing.TypeVar('_mappingFactors_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    _mappingFactors_3__T = typing.TypeVar('_mappingFactors_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _mappingFactors_1__T = typing.TypeVar('_mappingFactors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def mappingFactors(self, double: float, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]: ...
+    def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]: ...
     @typing.overload
-    def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]: ...
+    def mappingFactors(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_mappingFactors_1__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_1__T]) -> typing.MutableSequence[_mappingFactors_1__T]: ...
+    _pathDelay_0__T = typing.TypeVar('_pathDelay_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def mappingFactors(self, t: _mappingFactors_2__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_2__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_2__T]) -> typing.List[_mappingFactors_2__T]: ...
+    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_0__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_0__T], tArray: typing.Union[typing.List[_pathDelay_0__T], jpype.JArray], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_0__T]) -> FieldTroposphericDelay[_pathDelay_0__T]: ...
     @typing.overload
-    def mappingFactors(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_mappingFactors_3__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_3__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_mappingFactors_3__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_3__T]) -> typing.List[_mappingFactors_3__T]: ...
-    _pathDelay_1__T = typing.TypeVar('_pathDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    _pathDelay_2__T = typing.TypeVar('_pathDelay_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def pathDelay(self, double: float, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> float: ...
-    @typing.overload
-    def pathDelay(self, t: _pathDelay_1__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_1__T], tArray: typing.List[_pathDelay_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_1__T]) -> _pathDelay_1__T: ...
-    @typing.overload
-    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_2__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_2__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_pathDelay_2__T], tArray: typing.List[_pathDelay_2__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_2__T]) -> FieldTroposphericDelay[_pathDelay_2__T]: ...
-    @typing.overload
-    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay: ...
+    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.Union[typing.List[float], jpype.JArray], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay: ...
 
 class ModifiedHopfieldModel(TroposphericModel):
     """
@@ -1942,11 +1729,11 @@ class ModifiedHopfieldModel(TroposphericModel):
         Also see:
             "Guochang Xu, GPS - Theory, Algorithms and Applications, Springer, 2007"
     """
-    def __init__(self): ...
+    def __init__(self, pressureTemperatureHumidityProvider: org.orekit.models.earth.weather.PressureTemperatureHumidityProvider): ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _pathDelay_0__T = typing.TypeVar('_pathDelay_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_0__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_0__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_pathDelay_0__T], tArray: typing.List[_pathDelay_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_0__T]) -> FieldTroposphericDelay[_pathDelay_0__T]:
+    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_0__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_0__T], tArray: typing.Union[typing.List[_pathDelay_0__T], jpype.JArray], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_0__T]) -> FieldTroposphericDelay[_pathDelay_0__T]:
         """
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
@@ -1963,7 +1750,6 @@ class ModifiedHopfieldModel(TroposphericModel):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.FieldTrackingCoordinates`<T> trackingCoordinates): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                weather (:class:`~org.orekit.models.earth.weather.FieldPressureTemperatureHumidity`<T> weather): weather parameters for constant default values)
                 parameters (T[]): tropospheric model parameters at current date
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
@@ -1974,7 +1760,7 @@ class ModifiedHopfieldModel(TroposphericModel):
         """
         ...
     @typing.overload
-    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay:
+    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.Union[typing.List[float], jpype.JArray], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay:
         """
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
@@ -1985,7 +1771,6 @@ class ModifiedHopfieldModel(TroposphericModel):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                weather (:class:`~org.orekit.models.earth.weather.PressureTemperatureHumidity`): weather parameters for constant default values)
                 parameters (double[]): tropospheric model parameters
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
         
@@ -1995,9 +1780,9 @@ class ModifiedHopfieldModel(TroposphericModel):
         """
         ...
 
-class ModifiedSaastamoinenModel(TroposphericModel, DiscreteTroposphericModel):
+class ModifiedSaastamoinenModel(TroposphericModel):
     """
-    public class ModifiedSaastamoinenModel extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.TroposphericModel`, :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
+    public class ModifiedSaastamoinenModel extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.TroposphericModel`
     
         The modified Saastamoinen model. Estimates the path delay imposed to electro-magnetic signals by the troposphere
         according to the formula:
@@ -2054,12 +1839,6 @@ class ModifiedSaastamoinenModel(TroposphericModel, DiscreteTroposphericModel):
     
     """
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float): ...
-    @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, string: str): ...
-    @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, string: str, dataProvidersManager: org.orekit.data.DataProvidersManager): ...
-    @typing.overload
     def __init__(self, pressureTemperatureHumidityProvider: org.orekit.models.earth.weather.PressureTemperatureHumidityProvider): ...
     @typing.overload
     def __init__(self, pressureTemperatureHumidityProvider: org.orekit.models.earth.weather.PressureTemperatureHumidityProvider, string: str): ...
@@ -2111,96 +1890,9 @@ class ModifiedSaastamoinenModel(TroposphericModel, DiscreteTroposphericModel):
         
         """
         ...
-    _pathDelay_1__T = typing.TypeVar('_pathDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    _pathDelay_2__T = typing.TypeVar('_pathDelay_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _pathDelay_0__T = typing.TypeVar('_pathDelay_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def pathDelay(self, double: float, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
-        
-            The Saastamoinen model is not defined for altitudes below 0.0. for continuity reasons, we use the value for h = 0 when
-            altitude is negative.
-        
-            There are also numerical issues for elevation angles close to zero. For continuity reasons, elevations lower than a
-            threshold will use the value obtained for the threshold itself.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
-                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
-        
-            Parameters:
-                elevation (double): the elevation of the satellite, in radians
-                point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                parameters (double[]): tropospheric model parameters
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                the path delay due to the troposphere in m
-        
-            Also see:
-                :meth:`~org.orekit.models.earth.troposphere.ModifiedSaastamoinenModel.getLowElevationThreshold`,
-                :meth:`~org.orekit.models.earth.troposphere.ModifiedSaastamoinenModel.setLowElevationThreshold`
-        
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
-        
-            The Saastamoinen model is not defined for altitudes below 0.0. for continuity reasons, we use the value for h = 0 when
-            altitude is negative.
-        
-            There are also numerical issues for elevation angles close to zero. For continuity reasons, elevations lower than a
-            threshold will use the value obtained for the threshold itself.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.TroposphericModel.pathDelay` in
-                interface :class:`~org.orekit.models.earth.troposphere.TroposphericModel`
-        
-            Parameters:
-                trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
-                point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                weather (:class:`~org.orekit.models.earth.weather.PressureTemperatureHumidity`): weather parameters for constant default values)
-                parameters (double[]): tropospheric model parameters
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                the path delay due to the troposphere
-        
-            Also see:
-                :meth:`~org.orekit.models.earth.troposphere.ModifiedSaastamoinenModel.getLowElevationThreshold`,
-                :meth:`~org.orekit.models.earth.troposphere.ModifiedSaastamoinenModel.setLowElevationThreshold`
-        
-        """
-        ...
-    @typing.overload
-    def pathDelay(self, t: _pathDelay_1__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_1__T], tArray: typing.List[_pathDelay_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_1__T]) -> _pathDelay_1__T:
-        """
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
-        
-            The Saastamoinen model is not defined for altitudes below 0.0. for continuity reasons, we use the value for h = 0 when
-            altitude is negative.
-        
-            There are also numerical issues for elevation angles close to zero. For continuity reasons, elevations lower than a
-            threshold will use the value obtained for the threshold itself.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
-                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
-        
-            Parameters:
-                elevation (T): the elevation of the satellite, in radians
-                point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                parameters (T[]): tropospheric model parameters at current date
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-        
-            Returns:
-                the path delay due to the troposphere in m
-        
-            Also see:
-                :meth:`~org.orekit.models.earth.troposphere.ModifiedSaastamoinenModel.getLowElevationThreshold`,
-                :meth:`~org.orekit.models.earth.troposphere.ModifiedSaastamoinenModel.setLowElevationThreshold`
-        
-        """
-        ...
-    @typing.overload
-    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_2__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_2__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_pathDelay_2__T], tArray: typing.List[_pathDelay_2__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_2__T]) -> FieldTroposphericDelay[_pathDelay_2__T]:
+    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_0__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_0__T], tArray: typing.Union[typing.List[_pathDelay_0__T], jpype.JArray], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_0__T]) -> FieldTroposphericDelay[_pathDelay_0__T]:
         """
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
@@ -2217,7 +1909,6 @@ class ModifiedSaastamoinenModel(TroposphericModel, DiscreteTroposphericModel):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.FieldTrackingCoordinates`<T> trackingCoordinates): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                weather (:class:`~org.orekit.models.earth.weather.FieldPressureTemperatureHumidity`<T> weather): weather parameters for constant default values)
                 parameters (T[]): tropospheric model parameters at current date
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
@@ -2232,7 +1923,35 @@ class ModifiedSaastamoinenModel(TroposphericModel, DiscreteTroposphericModel):
         """
         ...
     @typing.overload
-    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay: ...
+    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.Union[typing.List[float], jpype.JArray], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay:
+        """
+            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
+        
+            The Saastamoinen model is not defined for altitudes below 0.0. for continuity reasons, we use the value for h = 0 when
+            altitude is negative.
+        
+            There are also numerical issues for elevation angles close to zero. For continuity reasons, elevations lower than a
+            threshold will use the value obtained for the threshold itself.
+        
+            Specified by:
+                :meth:`~org.orekit.models.earth.troposphere.TroposphericModel.pathDelay` in
+                interface :class:`~org.orekit.models.earth.troposphere.TroposphericModel`
+        
+            Parameters:
+                trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
+                point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
+                parameters (double[]): tropospheric model parameters
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+        
+            Returns:
+                the path delay due to the troposphere
+        
+            Also see:
+                :meth:`~org.orekit.models.earth.troposphere.ModifiedSaastamoinenModel.getLowElevationThreshold`,
+                :meth:`~org.orekit.models.earth.troposphere.ModifiedSaastamoinenModel.setLowElevationThreshold`
+        
+        """
+        ...
     def setLowElevationThreshold(self, double: float) -> None:
         """
             Set the low elevation threshold value for path delay computation.
@@ -2251,9 +1970,9 @@ class ModifiedSaastamoinenModel(TroposphericModel, DiscreteTroposphericModel):
         """
         ...
 
-class NiellMappingFunctionModel(MappingFunction, TroposphereMappingFunction):
+class NiellMappingFunctionModel(TroposphereMappingFunction):
     """
-    public class NiellMappingFunctionModel extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.MappingFunction`, :class:`~org.orekit.models.earth.troposphere.TroposphereMappingFunction`
+    public class NiellMappingFunctionModel extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.TroposphereMappingFunction`
     
         The Niell Mapping Function model for radio wavelengths. This model is an empirical mapping function. It only needs the
         values of the station latitude, height and the date for the computations.
@@ -2269,31 +1988,10 @@ class NiellMappingFunctionModel(MappingFunction, TroposphereMappingFunction):
     def __init__(self): ...
     @typing.overload
     def __init__(self, timeScale: org.orekit.time.TimeScale): ...
-    _mappingFactors_2__T = typing.TypeVar('_mappingFactors_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    _mappingFactors_3__T = typing.TypeVar('_mappingFactors_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _mappingFactors_1__T = typing.TypeVar('_mappingFactors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def mappingFactors(self, double: float, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]:
+    def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]:
         """
-            Deprecated.
-            This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
-            having the following form:
-        
-              - double[0] = m :sub:`h` (e) → hydrostatic mapping function
-              - double[1] = m :sub:`w` (e) → wet mapping function
-        
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.MappingFunction.mappingFactors` in
-                interface :class:`~org.orekit.models.earth.troposphere.MappingFunction`
-        
-            Parameters:
-                elevation (double): the elevation of the satellite, in radians
-                point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                a two components array containing the hydrostatic and wet mapping functions.
-        
             This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
             having the following form:
         
@@ -2308,30 +2006,7 @@ class NiellMappingFunctionModel(MappingFunction, TroposphereMappingFunction):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                weather (:class:`~org.orekit.models.earth.weather.PressureTemperatureHumidity`): weather parameters
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                a two components array containing the hydrostatic and wet mapping functions.
-        
-        :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public <T extends :class:`~org.orekit.models.earth.troposphere.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> T[] mappingFactors (T elevation, :class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point, :class:`~org.orekit.time.FieldAbsoluteDate`<T> date)
-        
-            Deprecated.
-            This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
-            having the following form:
-        
-              - T[0] = m :sub:`h` (e) → hydrostatic mapping function
-              - T[1] = m :sub:`w` (e) → wet mapping function
-        
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.MappingFunction.mappingFactors` in
-                interface :class:`~org.orekit.models.earth.troposphere.MappingFunction`
-        
-            Parameters:
-                elevation (T): the elevation of the satellite, in radians
-                point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
             Returns:
                 a two components array containing the hydrostatic and wet mapping functions.
@@ -2339,11 +2014,7 @@ class NiellMappingFunctionModel(MappingFunction, TroposphereMappingFunction):
         """
         ...
     @typing.overload
-    def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]: ...
-    @typing.overload
-    def mappingFactors(self, t: _mappingFactors_2__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_2__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_2__T]) -> typing.List[_mappingFactors_2__T]: ...
-    @typing.overload
-    def mappingFactors(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_mappingFactors_3__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_3__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_mappingFactors_3__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_3__T]) -> typing.List[_mappingFactors_3__T]:
+    def mappingFactors(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_mappingFactors_1__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_1__T]) -> typing.MutableSequence[_mappingFactors_1__T]:
         """
             This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
             having the following form:
@@ -2359,7 +2030,6 @@ class NiellMappingFunctionModel(MappingFunction, TroposphereMappingFunction):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.FieldTrackingCoordinates`<T> trackingCoordinates): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                weather (:class:`~org.orekit.models.earth.weather.FieldPressureTemperatureHumidity`<T> weather): weather parameters
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
             Returns:
@@ -2433,139 +2103,16 @@ class PythonAzimuthalGradientProvider(AzimuthalGradientProvider):
         """
         ...
 
-class PythonDiscreteTroposphericModel(DiscreteTroposphericModel):
+class PythonTroposphereMappingFunction(TroposphereMappingFunction):
     """
-    :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class PythonDiscreteTroposphericModel extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
-    
-        Deprecated.
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    _getParameters_1__T = typing.TypeVar('_getParameters_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    _getParameters_3__T = typing.TypeVar('_getParameters_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def getParameters(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]: ...
-    @typing.overload
-    def getParameters(self, field: org.hipparchus.Field[_getParameters_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getParameters_1__T]) -> typing.List[_getParameters_1__T]: ...
-    @typing.overload
-    def getParameters(self) -> typing.List[float]:
-        """
-            Deprecated.
-            Get model parameters.
-        
-            Specified by:
-                :meth:`~org.orekit.utils.ParameterDriversProvider.getParameters` in
-                interface :class:`~org.orekit.utils.ParameterDriversProvider`
-        
-            Returns:
-                model parameters, will throw an exception if one PDriver has several values driven. If it's the case (if at least 1
-                PDriver of the model has several values driven) the method
-                :meth:`~org.orekit.utils.ParameterDriversProvider.getParameters` must be used.
-        
-        """
-        ...
-    @typing.overload
-    def getParameters(self, field: org.hipparchus.Field[_getParameters_3__T]) -> typing.List[_getParameters_3__T]:
-        """
-            Deprecated.
-            Get model parameters.
-        
-            Specified by:
-                :meth:`~org.orekit.utils.ParameterDriversProvider.getParameters` in
-                interface :class:`~org.orekit.utils.ParameterDriversProvider`
-        
-            Parameters:
-                field (:class:`~org.orekit.models.earth.troposphere.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
-        
-            Returns:
-                model parameters, will throw an exception if one PDriver of the has several values driven. If it's the case (if at least
-                1 PDriver of the model has several values driven) the method
-                :meth:`~org.orekit.utils.ParameterDriversProvider.getParameters` must be used.
-        
-        
-        """
-        ...
-    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    _pathDelay_1__T = typing.TypeVar('_pathDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def pathDelay(self, double: float, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Deprecated.
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
-                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
-        
-            Parameters:
-                elevation (double): the elevation of the satellite, in radians
-                point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                parameters (double[]): tropospheric model parameters
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                the path delay due to the troposphere in m
-        
-        """
-        ...
-    @typing.overload
-    def pathDelay(self, t: _pathDelay_1__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_1__T], tArray: typing.List[_pathDelay_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_1__T]) -> _pathDelay_1__T:
-        """
-            Deprecated.
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
-                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
-        
-            Parameters:
-                elevation (T): the elevation of the satellite, in radians
-                point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                parameters (T[]): tropospheric model parameters at current date
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-        
-            Returns:
-                the path delay due to the troposphere in m
-        
-        
-        """
-        ...
-    def pythonDecRef(self) -> None:
-        """
-            Deprecated.
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Deprecated.
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Deprecated.
-            Part of JCC Python interface to object
-        """
-        ...
-
-class PythonMappingFunction(MappingFunction):
-    """
-    :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class PythonMappingFunction extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.MappingFunction`
-    
-        Deprecated.
+    public class PythonTroposphereMappingFunction extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.TroposphereMappingFunction`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
     _mappingFactors_1__T = typing.TypeVar('_mappingFactors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def mappingFactors(self, double: float, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]:
+    def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]:
         """
-            Deprecated.
             This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
             having the following form:
         
@@ -2574,11 +2121,11 @@ class PythonMappingFunction(MappingFunction):
         
         
             Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.MappingFunction.mappingFactors` in
-                interface :class:`~org.orekit.models.earth.troposphere.MappingFunction`
+                :meth:`~org.orekit.models.earth.troposphere.TroposphereMappingFunction.mappingFactors` in
+                interface :class:`~org.orekit.models.earth.troposphere.TroposphereMappingFunction`
         
             Parameters:
-                elevation (double): the elevation of the satellite, in radians
+                trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
         
@@ -2588,9 +2135,8 @@ class PythonMappingFunction(MappingFunction):
         """
         ...
     @typing.overload
-    def mappingFactors(self, t: _mappingFactors_1__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_1__T]) -> typing.List[_mappingFactors_1__T]:
+    def mappingFactors(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_mappingFactors_1__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_1__T]) -> typing.MutableSequence[_mappingFactors_1__T]:
         """
-            Deprecated.
             This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
             having the following form:
         
@@ -2599,11 +2145,11 @@ class PythonMappingFunction(MappingFunction):
         
         
             Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.MappingFunction.mappingFactors` in
-                interface :class:`~org.orekit.models.earth.troposphere.MappingFunction`
+                :meth:`~org.orekit.models.earth.troposphere.TroposphereMappingFunction.mappingFactors` in
+                interface :class:`~org.orekit.models.earth.troposphere.TroposphereMappingFunction`
         
             Parameters:
-                elevation (T): the elevation of the satellite, in radians
+                trackingCoordinates (:class:`~org.orekit.utils.FieldTrackingCoordinates`<T> trackingCoordinates): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
@@ -2615,7 +2161,6 @@ class PythonMappingFunction(MappingFunction):
         ...
     def pythonDecRef(self) -> None:
         """
-            Deprecated.
             Part of JCC Python interface to object
         
         """
@@ -2623,7 +2168,6 @@ class PythonMappingFunction(MappingFunction):
     @typing.overload
     def pythonExtension(self) -> int:
         """
-            Deprecated.
             Part of JCC Python interface to object
         
         """
@@ -2631,7 +2175,6 @@ class PythonMappingFunction(MappingFunction):
     @typing.overload
     def pythonExtension(self, long: int) -> None:
         """
-            Deprecated.
             Part of JCC Python interface to object
         """
         ...
@@ -2645,7 +2188,7 @@ class PythonTroposphericModel(TroposphericModel):
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _pathDelay_0__T = typing.TypeVar('_pathDelay_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_0__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_0__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_pathDelay_0__T], tArray: typing.List[_pathDelay_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_0__T]) -> FieldTroposphericDelay[_pathDelay_0__T]:
+    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_0__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_0__T], tArray: typing.Union[typing.List[_pathDelay_0__T], jpype.JArray], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_0__T]) -> FieldTroposphericDelay[_pathDelay_0__T]:
         """
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
@@ -2656,7 +2199,6 @@ class PythonTroposphericModel(TroposphericModel):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.FieldTrackingCoordinates`<T> trackingCoordinates): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                weather (:class:`~org.orekit.models.earth.weather.FieldPressureTemperatureHumidity`<T> weather): weather parameters for constant default values)
                 parameters (T[]): tropospheric model parameters at current date
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
@@ -2667,7 +2209,7 @@ class PythonTroposphericModel(TroposphericModel):
         """
         ...
     @typing.overload
-    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay:
+    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.Union[typing.List[float], jpype.JArray], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay:
         """
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
@@ -2678,7 +2220,6 @@ class PythonTroposphericModel(TroposphericModel):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                weather (:class:`~org.orekit.models.earth.weather.PressureTemperatureHumidity`): weather parameters for constant default values)
                 parameters (double[]): tropospheric model parameters
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
         
@@ -2858,7 +2399,7 @@ class TimeSpanEstimatedModel(TroposphericModel):
         ...
     _extractParameters_1__T = typing.TypeVar('_extractParameters_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def extractParameters(self, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]:
+    def extractParameters(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]:
         """
             Extract the proper parameter drivers' values from the array in input of the
             :meth:`~org.orekit.models.earth.troposphere.TimeSpanEstimatedModel.pathDelay` method. Parameters are filtered given an
@@ -2874,7 +2415,7 @@ class TimeSpanEstimatedModel(TroposphericModel):
         """
         ...
     @typing.overload
-    def extractParameters(self, tArray: typing.List[_extractParameters_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_extractParameters_1__T]) -> typing.List[_extractParameters_1__T]:
+    def extractParameters(self, tArray: typing.Union[typing.List[_extractParameters_1__T], jpype.JArray], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_extractParameters_1__T]) -> typing.MutableSequence[_extractParameters_1__T]:
         """
             Extract the proper parameter drivers' values from the array in input of the
             :meth:`~org.orekit.models.earth.troposphere.TimeSpanEstimatedModel.pathDelay` method. Parameters are filtered given an
@@ -2907,7 +2448,7 @@ class TimeSpanEstimatedModel(TroposphericModel):
         ...
     _pathDelay_0__T = typing.TypeVar('_pathDelay_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_0__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_0__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_pathDelay_0__T], tArray: typing.List[_pathDelay_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_0__T]) -> FieldTroposphericDelay[_pathDelay_0__T]:
+    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_0__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_0__T], tArray: typing.Union[typing.List[_pathDelay_0__T], jpype.JArray], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_0__T]) -> FieldTroposphericDelay[_pathDelay_0__T]:
         """
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
@@ -2918,7 +2459,6 @@ class TimeSpanEstimatedModel(TroposphericModel):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.FieldTrackingCoordinates`<T> trackingCoordinates): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                weather (:class:`~org.orekit.models.earth.weather.FieldPressureTemperatureHumidity`<T> weather): weather parameters for constant default values)
                 parameters (T[]): tropospheric model parameters at current date
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
@@ -2929,7 +2469,7 @@ class TimeSpanEstimatedModel(TroposphericModel):
         """
         ...
     @typing.overload
-    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay:
+    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.Union[typing.List[float], jpype.JArray], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay:
         """
             Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
         
@@ -2940,328 +2480,6 @@ class TimeSpanEstimatedModel(TroposphericModel):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                weather (:class:`~org.orekit.models.earth.weather.PressureTemperatureHumidity`): weather parameters for constant default values)
-                parameters (double[]): tropospheric model parameters
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                the path delay due to the troposphere
-        
-        """
-        ...
-
-class TimeSpanEstimatedTroposphericModel(DiscreteTroposphericModel):
-    """
-    :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class TimeSpanEstimatedTroposphericModel extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
-    
-        Deprecated.
-        as of 12.1, replaced by :class:`~org.orekit.models.earth.troposphere.TimeSpanEstimatedModel`
-        Time span estimated tropospheric model.
-    
-        This class is closely related to :class:`~org.orekit.models.earth.troposphere.package` class.
-    
-    
-        The difference is that it has a :class:`~org.orekit.utils.TimeSpanMap` of
-        :class:`~org.orekit.models.earth.troposphere.EstimatedTroposphericModel` objects as attribute.
-    
-    
-        The idea behind this model is to allow the user to design a tropospheric model that can see its physical parameters
-        (total zenith delay) change with time, at dates chosen by the user.
-    
-    
-    
-        Since:
-            10.2
-    """
-    DATE_BEFORE: typing.ClassVar[str] = ...
-    """
-    public static final :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DATE_BEFORE
-    
-        Deprecated.
-        Prefix for dates before in the tropospheric parameter drivers' name.
-    
-        Also see:
-            :meth:`~constant`
-    
-    
-    """
-    DATE_AFTER: typing.ClassVar[str] = ...
-    """
-    public static final :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DATE_AFTER
-    
-        Deprecated.
-        Prefix for dates after in the tropospheric parameter drivers' name.
-    
-        Also see:
-            :meth:`~constant`
-    
-    
-    """
-    @typing.overload
-    def __init__(self, estimatedTroposphericModel: 'EstimatedTroposphericModel'): ...
-    @typing.overload
-    def __init__(self, estimatedTroposphericModel: 'EstimatedTroposphericModel', timeScale: org.orekit.time.TimeScale): ...
-    def addTroposphericModelValidAfter(self, estimatedTroposphericModel: 'EstimatedTroposphericModel', absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Deprecated.
-            Add a EstimatedTroposphericModel entry valid after a limit date.
-        
-        
-            Using :code:`addTroposphericModelValidAfter(entry, t)` will make :code:`entry` valid in [t, +∞[ (note the closed
-            bracket).
-        
-            Parameters:
-                model (:class:`~org.orekit.models.earth.troposphere.EstimatedTroposphericModel`): EstimatedTroposphericModel entry
-                earliestValidityDate (:class:`~org.orekit.time.AbsoluteDate`): date after which the entry is valid (must be different from **all** dates already used for transitions)
-        
-        
-        """
-        ...
-    def addTroposphericModelValidBefore(self, estimatedTroposphericModel: 'EstimatedTroposphericModel', absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Deprecated.
-            Add an EstimatedTroposphericModel entry valid before a limit date.
-        
-        
-            Using :code:`addTroposphericValidBefore(entry, t)` will make :code:`entry` valid in ]-∞, t[ (note the open bracket).
-        
-            Parameters:
-                model (:class:`~org.orekit.models.earth.troposphere.EstimatedTroposphericModel`): EstimatedTroposphericModel entry
-                latestValidityDate (:class:`~org.orekit.time.AbsoluteDate`): date before which the entry is valid (must be different from **all** dates already used for transitions)
-        
-        
-        """
-        ...
-    _extractParameters_1__T = typing.TypeVar('_extractParameters_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def extractParameters(self, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]:
-        """
-            Deprecated.
-            Extract the proper parameter drivers' values from the array in input of the
-            :meth:`~org.orekit.models.earth.troposphere.TimeSpanEstimatedTroposphericModel.pathDelay` method. Parameters are
-            filtered given an input date.
-        
-            Parameters:
-                parameters (double[]): the input parameters array
-                date (:class:`~org.orekit.time.AbsoluteDate`): the date
-        
-            Returns:
-                the parameters given the date
-        
-        """
-        ...
-    @typing.overload
-    def extractParameters(self, tArray: typing.List[_extractParameters_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_extractParameters_1__T]) -> typing.List[_extractParameters_1__T]:
-        """
-            Deprecated.
-            Extract the proper parameter drivers' values from the array in input of the
-            :meth:`~org.orekit.models.earth.troposphere.TimeSpanEstimatedTroposphericModel.pathDelay` method. Parameters are
-            filtered given an input date.
-        
-            Parameters:
-                parameters (T[]): the input parameters array
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): the date
-        
-            Returns:
-                the parameters given the date
-        
-        
-        """
-        ...
-    def getFirstSpan(self) -> org.orekit.utils.TimeSpanMap.Span['EstimatedTroposphericModel']: ...
-    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    def getTroposphericModel(self, absoluteDate: org.orekit.time.AbsoluteDate) -> 'EstimatedTroposphericModel':
-        """
-            Deprecated.
-            Get the :class:`~org.orekit.models.earth.troposphere.EstimatedTroposphericModel` model valid at a date.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): the date of validity
-        
-            Returns:
-                the EstimatedTroposphericModel model valid at date
-        
-        
-        """
-        ...
-    _pathDelay_1__T = typing.TypeVar('_pathDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def pathDelay(self, double: float, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Deprecated.
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
-                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
-        
-            Parameters:
-                elevation (double): the elevation of the satellite, in radians
-                point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                parameters (double[]): tropospheric model parameters
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                the path delay due to the troposphere in m
-        
-        """
-        ...
-    @typing.overload
-    def pathDelay(self, t: _pathDelay_1__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_1__T], tArray: typing.List[_pathDelay_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_1__T]) -> _pathDelay_1__T:
-        """
-            Deprecated.
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
-                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
-        
-            Parameters:
-                elevation (T): the elevation of the satellite, in radians
-                point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                parameters (T[]): tropospheric model parameters at current date
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-        
-            Returns:
-                the path delay due to the troposphere in m
-        
-        
-        """
-        ...
-
-class TroposphereMappingFunctionAdapter(TroposphereMappingFunction):
-    """
-    :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class TroposphereMappingFunctionAdapter extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.TroposphereMappingFunction`
-    
-        Deprecated.
-        temporary adapter to be removed when :class:`~org.orekit.models.earth.troposphere.MappingFunction` is removed
-        Adapter between :class:`~org.orekit.models.earth.troposphere.MappingFunction` and
-        :class:`~org.orekit.models.earth.troposphere.TroposphereMappingFunction`.
-    
-        This class is a temporary adapter, it will be removed when :class:`~org.orekit.models.earth.troposphere.MappingFunction`
-        is removed.
-    
-        Since:
-            12.1
-    """
-    def __init__(self, mappingFunction: MappingFunction): ...
-    _mappingFactors_1__T = typing.TypeVar('_mappingFactors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]:
-        """
-            Deprecated.
-            This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
-            having the following form:
-        
-              - double[0] = m :sub:`h` (e) → hydrostatic mapping function
-              - double[1] = m :sub:`w` (e) → wet mapping function
-        
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.TroposphereMappingFunction.mappingFactors` in
-                interface :class:`~org.orekit.models.earth.troposphere.TroposphereMappingFunction`
-        
-            Parameters:
-                trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
-                point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                weather (:class:`~org.orekit.models.earth.weather.PressureTemperatureHumidity`): weather parameters
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                a two components array containing the hydrostatic and wet mapping functions.
-        
-        """
-        ...
-    @typing.overload
-    def mappingFactors(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_mappingFactors_1__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_1__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_mappingFactors_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_1__T]) -> typing.List[_mappingFactors_1__T]:
-        """
-            Deprecated.
-            This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
-            having the following form:
-        
-              - T[0] = m :sub:`h` (e) → hydrostatic mapping function
-              - T[1] = m :sub:`w` (e) → wet mapping function
-        
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.TroposphereMappingFunction.mappingFactors` in
-                interface :class:`~org.orekit.models.earth.troposphere.TroposphereMappingFunction`
-        
-            Parameters:
-                trackingCoordinates (:class:`~org.orekit.utils.FieldTrackingCoordinates`<T> trackingCoordinates): tracking coordinates of the satellite
-                point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                weather (:class:`~org.orekit.models.earth.weather.FieldPressureTemperatureHumidity`<T> weather): weather parameters
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-        
-            Returns:
-                a two components array containing the hydrostatic and wet mapping functions.
-        
-        
-        """
-        ...
-
-class TroposphericModelAdapter(TroposphericModel):
-    """
-    :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class TroposphericModelAdapter extends :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.troposphere.TroposphericModel`
-    
-        Deprecated.
-        temporary adapter to be removed when :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel` is removed
-        Adapter between :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel` and
-        :class:`~org.orekit.models.earth.troposphere.TroposphericModel`.
-    
-        This class is a temporary adapter, it will be removed when
-        :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel` is removed.
-    
-        Since:
-            12.1
-    """
-    def __init__(self, discreteTroposphericModel: DiscreteTroposphericModel): ...
-    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    _pathDelay_0__T = typing.TypeVar('_pathDelay_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_0__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_0__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_pathDelay_0__T], tArray: typing.List[_pathDelay_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_0__T]) -> FieldTroposphericDelay[_pathDelay_0__T]:
-        """
-            Deprecated.
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
-        
-            All delays are affected to :meth:`~org.orekit.models.earth.troposphere.FieldTroposphericDelay.getZh` and
-            :meth:`~org.orekit.models.earth.troposphere.FieldTroposphericDelay.getSh` delays, the wet delays are arbitrarily set to
-            0.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.TroposphericModel.pathDelay` in
-                interface :class:`~org.orekit.models.earth.troposphere.TroposphericModel`
-        
-            Parameters:
-                trackingCoordinates (:class:`~org.orekit.utils.FieldTrackingCoordinates`<T> trackingCoordinates): tracking coordinates of the satellite
-                point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                weather (:class:`~org.orekit.models.earth.weather.FieldPressureTemperatureHumidity`<T> weather): weather parameters for constant default values)
-                parameters (T[]): tropospheric model parameters at current date
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-        
-            Returns:
-                the path delay due to the troposphere
-        
-        
-        """
-        ...
-    @typing.overload
-    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay:
-        """
-            Deprecated.
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
-        
-            All delays are affected to :meth:`~org.orekit.models.earth.troposphere.TroposphericDelay.getZh` and
-            :meth:`~org.orekit.models.earth.troposphere.TroposphericDelay.getSh` delays, the wet delays are arbitrarily set to 0.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.TroposphericModel.pathDelay` in
-                interface :class:`~org.orekit.models.earth.troposphere.TroposphericModel`
-        
-            Parameters:
-                trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
-                point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                weather (:class:`~org.orekit.models.earth.weather.PressureTemperatureHumidity`): weather parameters for constant default values)
                 parameters (double[]): tropospheric model parameters
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
         
@@ -3285,184 +2503,6 @@ class ChaoMappingFunction(AbstractChaoMappingFunction):
     """
     def __init__(self): ...
 
-class EstimatedTroposphericModel(EstimatedModel, DiscreteTroposphericModel):
-    """
-    :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class EstimatedTroposphericModel extends :class:`~org.orekit.models.earth.troposphere.EstimatedModel` implements :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
-    
-        Deprecated.
-        as of 12.1, replaced by :class:`~org.orekit.models.earth.troposphere.EstimatedModel`
-        An estimated tropospheric model. The tropospheric delay is computed according to the formula:
-    
-        δ = δ :sub:`h` * m :sub:`h` + (δ :sub:`t` - δ :sub:`h` ) * m :sub:`w`
-    
-        With:
-    
-          - δ :sub:`h` : Tropospheric zenith hydro-static delay.
-          - δ :sub:`t` : Tropospheric total zenith delay.
-          - m :sub:`h` : Hydro-static mapping function.
-          - m :sub:`w` : Wet mapping function.
-    
-    
-        The mapping functions m :sub:`h` (e) and m :sub:`w` (e) are computed thanks to a :code:`EstimatedModel.model`
-        initialized by the user. The user has the possibility to use several mapping function models for the computations: the
-        :class:`~org.orekit.models.earth.troposphere.GlobalMappingFunctionModel`, or the
-        :class:`~org.orekit.models.earth.troposphere.NiellMappingFunctionModel`
-    
-        The tropospheric zenith delay δ :sub:`h` is computed empirically with a
-        :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel` while the tropospheric total zenith delay δ
-        :sub:`t` is estimated as a :class:`~org.orekit.utils.ParameterDriver`, hence the wet part is the difference between the
-        two.
-    """
-    TOTAL_ZENITH_DELAY: typing.ClassVar[str] = ...
-    """
-    public static final :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` TOTAL_ZENITH_DELAY
-    
-        Deprecated.
-        Name of the parameter of this model: the total zenith delay.
-    
-        Also see:
-            :meth:`~constant`
-    
-    
-    """
-    @typing.overload
-    def __init__(self, double: float, double2: float, mappingFunction: MappingFunction, double3: float): ...
-    @typing.overload
-    def __init__(self, discreteTroposphericModel: DiscreteTroposphericModel, mappingFunction: MappingFunction, double: float): ...
-    @typing.overload
-    def __init__(self, mappingFunction: MappingFunction, double: float): ...
-    _pathDelay_1__T = typing.TypeVar('_pathDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    _pathDelay_2__T = typing.TypeVar('_pathDelay_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def pathDelay(self, double: float, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Deprecated.
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
-                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
-        
-            Parameters:
-                elevation (double): the elevation of the satellite, in radians
-                point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                parameters (double[]): tropospheric model parameters
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                the path delay due to the troposphere in m
-        
-        :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public <T extends :class:`~org.orekit.models.earth.troposphere.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> T pathDelay (T elevation, :class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point, T[] parameters, :class:`~org.orekit.time.FieldAbsoluteDate`<T> date)
-        
-            Deprecated.
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
-                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
-        
-            Parameters:
-                elevation (T): the elevation of the satellite, in radians
-                point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                parameters (T[]): tropospheric model parameters at current date
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-        
-            Returns:
-                the path delay due to the troposphere in m
-        
-        
-        """
-        ...
-    @typing.overload
-    def pathDelay(self, t: _pathDelay_1__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_1__T], tArray: typing.List[_pathDelay_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_1__T]) -> _pathDelay_1__T: ...
-    @typing.overload
-    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_2__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_2__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_pathDelay_2__T], tArray: typing.List[_pathDelay_2__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_2__T]) -> FieldTroposphericDelay[_pathDelay_2__T]: ...
-    @typing.overload
-    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay: ...
-
-class MariniMurrayModel(MariniMurray, DiscreteTroposphericModel):
-    """
-    :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class MariniMurrayModel extends :class:`~org.orekit.models.earth.troposphere.MariniMurray` implements :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
-    
-        Deprecated.
-        as of 12.1, replaced by :class:`~org.orekit.models.earth.troposphere.MariniMurray`
-        The Marini-Murray tropospheric delay model for laser ranging.
-    
-        Also see:
-            "Marini, J.W., and C.W. Murray, correction of Laser Range Tracking Data for Atmospheric Refraction at Elevations Above
-            10 degrees, X-591-73-351, NASA GSFC, 1973"
-    """
-    def __init__(self, double: float, double2: float, double3: float, double4: float): ...
-    @staticmethod
-    def getStandardModel(double: float) -> 'MariniMurrayModel':
-        """
-            Deprecated.
-            Create a new Marini-Murray model using a standard atmosphere model.
-        
-              - temperature: 20 degree Celsius
-              - pressure: 1013.25 mbar
-              - humidity: 50%
-        
-        
-            Parameters:
-                lambda (double): laser wavelength (c/f), nm
-        
-            Returns:
-                a Marini-Murray model with standard environmental values
-        
-        
-        """
-        ...
-    _pathDelay_1__T = typing.TypeVar('_pathDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    _pathDelay_2__T = typing.TypeVar('_pathDelay_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def pathDelay(self, double: float, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Deprecated.
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
-                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
-        
-            Parameters:
-                elevation (double): the elevation of the satellite, in radians
-                point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                parameters (double[]): tropospheric model parameters
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                the path delay due to the troposphere in m
-        
-        """
-        ...
-    @typing.overload
-    def pathDelay(self, t: _pathDelay_1__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_1__T], tArray: typing.List[_pathDelay_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_1__T]) -> _pathDelay_1__T:
-        """
-            Deprecated.
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
-                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
-        
-            Parameters:
-                elevation (T): the elevation of the satellite, in radians
-                point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                parameters (T[]): tropospheric model parameters at current date
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-        
-            Returns:
-                the path delay due to the troposphere in m
-        
-        
-        """
-        ...
-    @typing.overload
-    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_2__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_2__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_pathDelay_2__T], tArray: typing.List[_pathDelay_2__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_2__T]) -> FieldTroposphericDelay[_pathDelay_2__T]: ...
-    @typing.overload
-    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay: ...
-
 class PythonAbstractVienna(AbstractVienna):
     """
     public class PythonAbstractVienna extends :class:`~org.orekit.models.earth.troposphere.AbstractVienna`
@@ -3471,8 +2511,10 @@ class PythonAbstractVienna(AbstractVienna):
     def finalize(self) -> None: ...
     _mappingFactors_1__T = typing.TypeVar('_mappingFactors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]:
+    def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]:
         """
+            Description copied from
+            interface: :meth:`~org.orekit.models.earth.troposphere.TroposphereMappingFunction.mappingFactors`
             This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
             having the following form:
         
@@ -3483,7 +2525,6 @@ class PythonAbstractVienna(AbstractVienna):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                weather (:class:`~org.orekit.models.earth.weather.PressureTemperatureHumidity`): weather parameters
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
         
             Returns:
@@ -3492,8 +2533,10 @@ class PythonAbstractVienna(AbstractVienna):
         """
         ...
     @typing.overload
-    def mappingFactors(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_mappingFactors_1__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_1__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_mappingFactors_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_1__T]) -> typing.List[_mappingFactors_1__T]:
+    def mappingFactors(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_mappingFactors_1__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_1__T]) -> typing.MutableSequence[_mappingFactors_1__T]:
         """
+            Description copied from
+            interface: :meth:`~org.orekit.models.earth.troposphere.TroposphereMappingFunction.mappingFactors`
             This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
             having the following form:
         
@@ -3504,7 +2547,6 @@ class PythonAbstractVienna(AbstractVienna):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.FieldTrackingCoordinates`<T> trackingCoordinates): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                weather (:class:`~org.orekit.models.earth.weather.FieldPressureTemperatureHumidity`<T> weather): weather parameters
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
             Returns:
@@ -3547,127 +2589,6 @@ class RevisedChaoMappingFunction(AbstractChaoMappingFunction):
     """
     def __init__(self): ...
 
-class SaastamoinenModel(ModifiedSaastamoinenModel):
-    """
-    :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class SaastamoinenModel extends :class:`~org.orekit.models.earth.troposphere.ModifiedSaastamoinenModel`
-    
-        Deprecated.
-        as of 12.1, replaced by :class:`~org.orekit.models.earth.troposphere.ModifiedSaastamoinenModel`
-        The modified Saastamoinen model.
-    """
-    DELTA_R_FILE_NAME: typing.ClassVar[str] = ...
-    """
-    public static final :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` DELTA_R_FILE_NAME
-    
-        Deprecated.
-        Default file name for δR correction term table.
-    
-        Also see:
-            :meth:`~constant`
-    
-    
-    """
-    DEFAULT_LOW_ELEVATION_THRESHOLD: typing.ClassVar[float] = ...
-    """
-    public static final double DEFAULT_LOW_ELEVATION_THRESHOLD
-    
-        Deprecated.
-        Default lowest acceptable elevation angle [rad].
-    
-        Also see:
-            :meth:`~constant`
-    
-    
-    """
-    @typing.overload
-    def __init__(self, double: float, double2: float, double3: float): ...
-    @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, string: str): ...
-    @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, string: str, dataProvidersManager: org.orekit.data.DataProvidersManager): ...
-    @typing.overload
-    @staticmethod
-    def getStandardModel() -> ModifiedSaastamoinenModel: ...
-    @typing.overload
-    @staticmethod
-    def getStandardModel() -> 'SaastamoinenModel': ...
-    _pathDelay_1__T = typing.TypeVar('_pathDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    _pathDelay_2__T = typing.TypeVar('_pathDelay_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def pathDelay(self, double: float, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Deprecated.
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
-        
-            The Saastamoinen model is not defined for altitudes below 0.0. for continuity reasons, we use the value for h = 0 when
-            altitude is negative.
-        
-            There are also numerical issues for elevation angles close to zero. For continuity reasons, elevations lower than a
-            threshold will use the value obtained for the threshold itself.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
-                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
-        
-            Overrides:
-                :meth:`~org.orekit.models.earth.troposphere.ModifiedSaastamoinenModel.pathDelay` in
-                class :class:`~org.orekit.models.earth.troposphere.ModifiedSaastamoinenModel`
-        
-            Parameters:
-                elevation (double): the elevation of the satellite, in radians
-                point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                parameters (double[]): tropospheric model parameters
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                the path delay due to the troposphere in m
-        
-            Also see:
-                :meth:`~org.orekit.models.earth.troposphere.ModifiedSaastamoinenModel.getLowElevationThreshold`,
-                :meth:`~org.orekit.models.earth.troposphere.ModifiedSaastamoinenModel.setLowElevationThreshold`
-        
-        :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public <T extends :class:`~org.orekit.models.earth.troposphere.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> T pathDelay (T elevation, :class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point, T[] parameters, :class:`~org.orekit.time.FieldAbsoluteDate`<T> date)
-        
-            Deprecated.
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
-        
-            The Saastamoinen model is not defined for altitudes below 0.0. for continuity reasons, we use the value for h = 0 when
-            altitude is negative.
-        
-            There are also numerical issues for elevation angles close to zero. For continuity reasons, elevations lower than a
-            threshold will use the value obtained for the threshold itself.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
-                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
-        
-            Overrides:
-                :meth:`~org.orekit.models.earth.troposphere.ModifiedSaastamoinenModel.pathDelay` in
-                class :class:`~org.orekit.models.earth.troposphere.ModifiedSaastamoinenModel`
-        
-            Parameters:
-                elevation (T): the elevation of the satellite, in radians
-                point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                parameters (T[]): tropospheric model parameters at current date
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-        
-            Returns:
-                the path delay due to the troposphere in m
-        
-            Also see:
-                :meth:`~org.orekit.models.earth.troposphere.ModifiedSaastamoinenModel.getLowElevationThreshold`,
-                :meth:`~org.orekit.models.earth.troposphere.ModifiedSaastamoinenModel.setLowElevationThreshold`
-        
-        
-        """
-        ...
-    @typing.overload
-    def pathDelay(self, t: _pathDelay_1__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_1__T], tArray: typing.List[_pathDelay_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_1__T]) -> _pathDelay_1__T: ...
-    @typing.overload
-    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_2__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_2__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_pathDelay_2__T], tArray: typing.List[_pathDelay_2__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_2__T]) -> FieldTroposphericDelay[_pathDelay_2__T]: ...
-    @typing.overload
-    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay: ...
-
 class ViennaOne(AbstractVienna):
     """
     public class ViennaOne extends :class:`~org.orekit.models.earth.troposphere.AbstractVienna`
@@ -3685,10 +2606,9 @@ class ViennaOne(AbstractVienna):
             doi:10.1029/2005JB003629"
     """
     def __init__(self, viennaAProvider: ViennaAProvider, azimuthalGradientProvider: AzimuthalGradientProvider, troposphericModel: TroposphericModel, timeScale: org.orekit.time.TimeScale): ...
-    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _mappingFactors_1__T = typing.TypeVar('_mappingFactors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]:
+    def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]:
         """
             This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
             having the following form:
@@ -3700,7 +2620,6 @@ class ViennaOne(AbstractVienna):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.TrackingCoordinates`): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                weather (:class:`~org.orekit.models.earth.weather.PressureTemperatureHumidity`): weather parameters
                 date (:class:`~org.orekit.time.AbsoluteDate`): current date
         
             Returns:
@@ -3709,7 +2628,7 @@ class ViennaOne(AbstractVienna):
         """
         ...
     @typing.overload
-    def mappingFactors(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_mappingFactors_1__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_1__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_mappingFactors_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_1__T]) -> typing.List[_mappingFactors_1__T]:
+    def mappingFactors(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_mappingFactors_1__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_1__T]) -> typing.MutableSequence[_mappingFactors_1__T]:
         """
             This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
             having the following form:
@@ -3721,7 +2640,6 @@ class ViennaOne(AbstractVienna):
             Parameters:
                 trackingCoordinates (:class:`~org.orekit.utils.FieldTrackingCoordinates`<T> trackingCoordinates): tracking coordinates of the satellite
                 point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                weather (:class:`~org.orekit.models.earth.weather.FieldPressureTemperatureHumidity`<T> weather): weather parameters
                 date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
         
             Returns:
@@ -3735,211 +2653,12 @@ class ViennaThree(AbstractVienna):
     def __init__(self, viennaAProvider: ViennaAProvider, azimuthalGradientProvider: AzimuthalGradientProvider, troposphericModel: TroposphericModel, timeScale: org.orekit.time.TimeScale): ...
     _mappingFactors_1__T = typing.TypeVar('_mappingFactors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]: ...
+    def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]: ...
     @typing.overload
-    def mappingFactors(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_mappingFactors_1__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_1__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_mappingFactors_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_1__T]) -> typing.List[_mappingFactors_1__T]: ...
-
-class ViennaOneModel(ViennaOne, DiscreteTroposphericModel, MappingFunction):
-    """
-    :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class ViennaOneModel extends :class:`~org.orekit.models.earth.troposphere.ViennaOne` implements :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`, :class:`~org.orekit.models.earth.troposphere.MappingFunction`
-    
-        Deprecated.
-        as of 12.1, replaced by :class:`~org.orekit.models.earth.troposphere.ViennaOne`
-        The Vienna1 tropospheric delay model for radio techniques. The Vienna model data are given with a time interval of 6
-        hours as well as on a global 2.5° * 2.0° grid. This version considered the height correction for the hydrostatic part
-        developed by Niell, 1996.
-    
-        Also see:
-            "Boehm, J., Werl, B., and Schuh, H., (2006), Troposhere mapping functions for GPS and very long baseline interferometry
-            from European Centre for Medium-Range Weather Forecasts operational analysis data, J. Geophy. Res., Vol. 111, B02406,
-            doi:10.1029/2005JB003629"
-    """
-    @typing.overload
-    def __init__(self, doubleArray: typing.List[float], doubleArray2: typing.List[float]): ...
-    @typing.overload
-    def __init__(self, doubleArray: typing.List[float], doubleArray2: typing.List[float], timeScale: org.orekit.time.TimeScale): ...
-    _computeZenithDelay_1__T = typing.TypeVar('_computeZenithDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def computeZenithDelay(self, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]:
-        """
-            Deprecated.
-            This method allows the computation of the zenith hydrostatic and zenith wet delay. The resulting element is an array
-            having the following form:
-        
-              - T[0] = D :sub:`hz` → zenith hydrostatic delay
-              - T[1] = D :sub:`wz` → zenith wet delay
-        
-        
-            Parameters:
-                point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                parameters (double[]): tropospheric model parameters
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                a two components array containing the zenith hydrostatic and wet delays.
-        
-        """
-        ...
-    @typing.overload
-    def computeZenithDelay(self, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_computeZenithDelay_1__T], tArray: typing.List[_computeZenithDelay_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_computeZenithDelay_1__T]) -> typing.List[_computeZenithDelay_1__T]:
-        """
-            Deprecated.
-            This method allows the computation of the zenith hydrostatic and zenith wet delay. The resulting element is an array
-            having the following form:
-        
-              - T[0] = D :sub:`hz` → zenith hydrostatic delay
-              - T[1] = D :sub:`wz` → zenith wet delay
-        
-        
-            Parameters:
-                point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                parameters (T[]): tropospheric model parameters
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-        
-            Returns:
-                a two components array containing the zenith hydrostatic and wet delays.
-        
-        
-        """
-        ...
-    _mappingFactors_2__T = typing.TypeVar('_mappingFactors_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    _mappingFactors_3__T = typing.TypeVar('_mappingFactors_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]: ...
-    @typing.overload
-    def mappingFactors(self, double: float, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]:
-        """
-            Deprecated.
-            This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
-            having the following form:
-        
-              - double[0] = m :sub:`h` (e) → hydrostatic mapping function
-              - double[1] = m :sub:`w` (e) → wet mapping function
-        
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.MappingFunction.mappingFactors` in
-                interface :class:`~org.orekit.models.earth.troposphere.MappingFunction`
-        
-            Parameters:
-                elevation (double): the elevation of the satellite, in radians
-                point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                a two components array containing the hydrostatic and wet mapping functions.
-        
-        :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public <T extends :class:`~org.orekit.models.earth.troposphere.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> T[] mappingFactors (T elevation, :class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point, :class:`~org.orekit.time.FieldAbsoluteDate`<T> date)
-        
-            Deprecated.
-            This method allows the computation of the hydrostatic and wet mapping functions. The resulting element is an array
-            having the following form:
-        
-              - T[0] = m :sub:`h` (e) → hydrostatic mapping function
-              - T[1] = m :sub:`w` (e) → wet mapping function
-        
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.MappingFunction.mappingFactors` in
-                interface :class:`~org.orekit.models.earth.troposphere.MappingFunction`
-        
-            Parameters:
-                elevation (T): the elevation of the satellite, in radians
-                point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-        
-            Returns:
-                a two components array containing the hydrostatic and wet mapping functions.
-        
-        
-        """
-        ...
-    @typing.overload
-    def mappingFactors(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_mappingFactors_2__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_2__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_mappingFactors_2__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_2__T]) -> typing.List[_mappingFactors_2__T]: ...
-    @typing.overload
-    def mappingFactors(self, t: _mappingFactors_3__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_3__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_3__T]) -> typing.List[_mappingFactors_3__T]: ...
-    _pathDelay_1__T = typing.TypeVar('_pathDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    _pathDelay_2__T = typing.TypeVar('_pathDelay_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def pathDelay(self, double: float, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> float:
-        """
-            Deprecated.
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
-                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
-        
-            Parameters:
-                elevation (double): the elevation of the satellite, in radians
-                point (:class:`~org.orekit.bodies.GeodeticPoint`): station location
-                parameters (double[]): tropospheric model parameters
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-        
-            Returns:
-                the path delay due to the troposphere in m
-        
-        :class:`~org.orekit.models.earth.troposphere.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public <T extends :class:`~org.orekit.models.earth.troposphere.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> T pathDelay (T elevation, :class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point, T[] parameters, :class:`~org.orekit.time.FieldAbsoluteDate`<T> date)
-        
-            Deprecated.
-            Calculates the tropospheric path delay for the signal path from a ground station to a satellite.
-        
-            Specified by:
-                :meth:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel.pathDelay` in
-                interface :class:`~org.orekit.models.earth.troposphere.DiscreteTroposphericModel`
-        
-            Parameters:
-                elevation (T): the elevation of the satellite, in radians
-                point (:class:`~org.orekit.bodies.FieldGeodeticPoint`<T> point): station location
-                parameters (T[]): tropospheric model parameters at current date
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-        
-            Returns:
-                the path delay due to the troposphere in m
-        
-        
-        """
-        ...
-    @typing.overload
-    def pathDelay(self, t: _pathDelay_1__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_1__T], tArray: typing.List[_pathDelay_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_1__T]) -> _pathDelay_1__T: ...
-    @typing.overload
-    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_2__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_2__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_pathDelay_2__T], tArray: typing.List[_pathDelay_2__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_2__T]) -> FieldTroposphericDelay[_pathDelay_2__T]: ...
-    @typing.overload
-    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay: ...
-
-class ViennaThreeModel(ViennaThree, DiscreteTroposphericModel, MappingFunction):
-    @typing.overload
-    def __init__(self, doubleArray: typing.List[float], doubleArray2: typing.List[float]): ...
-    @typing.overload
-    def __init__(self, doubleArray: typing.List[float], doubleArray2: typing.List[float], timeScale: org.orekit.time.TimeScale): ...
-    _computeZenithDelay_1__T = typing.TypeVar('_computeZenithDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def computeZenithDelay(self, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]: ...
-    @typing.overload
-    def computeZenithDelay(self, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_computeZenithDelay_1__T], tArray: typing.List[_computeZenithDelay_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_computeZenithDelay_1__T]) -> typing.List[_computeZenithDelay_1__T]: ...
-    _mappingFactors_2__T = typing.TypeVar('_mappingFactors_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    _mappingFactors_3__T = typing.TypeVar('_mappingFactors_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def mappingFactors(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]: ...
-    @typing.overload
-    def mappingFactors(self, double: float, geodeticPoint: org.orekit.bodies.GeodeticPoint, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]: ...
-    @typing.overload
-    def mappingFactors(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_mappingFactors_2__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_2__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_mappingFactors_2__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_2__T]) -> typing.List[_mappingFactors_2__T]: ...
-    @typing.overload
-    def mappingFactors(self, t: _mappingFactors_3__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_3__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_3__T]) -> typing.List[_mappingFactors_3__T]: ...
-    _pathDelay_1__T = typing.TypeVar('_pathDelay_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    _pathDelay_2__T = typing.TypeVar('_pathDelay_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def pathDelay(self, double: float, geodeticPoint: org.orekit.bodies.GeodeticPoint, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> float: ...
-    @typing.overload
-    def pathDelay(self, t: _pathDelay_1__T, fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_1__T], tArray: typing.List[_pathDelay_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_1__T]) -> _pathDelay_1__T: ...
-    @typing.overload
-    def pathDelay(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_pathDelay_2__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_pathDelay_2__T], fieldPressureTemperatureHumidity: org.orekit.models.earth.weather.FieldPressureTemperatureHumidity[_pathDelay_2__T], tArray: typing.List[_pathDelay_2__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_pathDelay_2__T]) -> FieldTroposphericDelay[_pathDelay_2__T]: ...
-    @typing.overload
-    def pathDelay(self, trackingCoordinates: org.orekit.utils.TrackingCoordinates, geodeticPoint: org.orekit.bodies.GeodeticPoint, pressureTemperatureHumidity: org.orekit.models.earth.weather.PressureTemperatureHumidity, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> TroposphericDelay: ...
+    def mappingFactors(self, fieldTrackingCoordinates: org.orekit.utils.FieldTrackingCoordinates[_mappingFactors_1__T], fieldGeodeticPoint: org.orekit.bodies.FieldGeodeticPoint[_mappingFactors_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mappingFactors_1__T]) -> typing.MutableSequence[_mappingFactors_1__T]: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.models.earth.troposphere")``.
 
     AbstractChaoMappingFunction: typing.Type[AbstractChaoMappingFunction]
@@ -3952,44 +2671,33 @@ class __module_protocol__(typing.Protocol):
     ConstantAzimuthalGradientProvider: typing.Type[ConstantAzimuthalGradientProvider]
     ConstantTroposphericModel: typing.Type[ConstantTroposphericModel]
     ConstantViennaAProvider: typing.Type[ConstantViennaAProvider]
-    DiscreteTroposphericModel: typing.Type[DiscreteTroposphericModel]
     DummyMappingFunction: typing.Type[DummyMappingFunction]
     EstimatedModel: typing.Type[EstimatedModel]
-    EstimatedTroposphericModel: typing.Type[EstimatedTroposphericModel]
     FieldAzimuthalGradientCoefficients: typing.Type[FieldAzimuthalGradientCoefficients]
     FieldTroposphericDelay: typing.Type[FieldTroposphericDelay]
     FieldViennaACoefficients: typing.Type[FieldViennaACoefficients]
     FixedTroposphericDelay: typing.Type[FixedTroposphericDelay]
     GlobalMappingFunctionModel: typing.Type[GlobalMappingFunctionModel]
-    MappingFunction: typing.Type[MappingFunction]
     MariniMurray: typing.Type[MariniMurray]
-    MariniMurrayModel: typing.Type[MariniMurrayModel]
     MendesPavlisModel: typing.Type[MendesPavlisModel]
     ModifiedHopfieldModel: typing.Type[ModifiedHopfieldModel]
     ModifiedSaastamoinenModel: typing.Type[ModifiedSaastamoinenModel]
     NiellMappingFunctionModel: typing.Type[NiellMappingFunctionModel]
     PythonAbstractVienna: typing.Type[PythonAbstractVienna]
     PythonAzimuthalGradientProvider: typing.Type[PythonAzimuthalGradientProvider]
-    PythonDiscreteTroposphericModel: typing.Type[PythonDiscreteTroposphericModel]
-    PythonMappingFunction: typing.Type[PythonMappingFunction]
+    PythonTroposphereMappingFunction: typing.Type[PythonTroposphereMappingFunction]
     PythonTroposphericModel: typing.Type[PythonTroposphericModel]
     PythonViennaAProvider: typing.Type[PythonViennaAProvider]
     RevisedChaoMappingFunction: typing.Type[RevisedChaoMappingFunction]
-    SaastamoinenModel: typing.Type[SaastamoinenModel]
     TimeSpanEstimatedModel: typing.Type[TimeSpanEstimatedModel]
-    TimeSpanEstimatedTroposphericModel: typing.Type[TimeSpanEstimatedTroposphericModel]
     TroposphereMappingFunction: typing.Type[TroposphereMappingFunction]
-    TroposphereMappingFunctionAdapter: typing.Type[TroposphereMappingFunctionAdapter]
     TroposphericDelay: typing.Type[TroposphericDelay]
     TroposphericModel: typing.Type[TroposphericModel]
-    TroposphericModelAdapter: typing.Type[TroposphericModelAdapter]
     TroposphericModelUtils: typing.Type[TroposphericModelUtils]
     ViennaACoefficients: typing.Type[ViennaACoefficients]
     ViennaAProvider: typing.Type[ViennaAProvider]
     ViennaModelCoefficientsLoader: typing.Type[ViennaModelCoefficientsLoader]
     ViennaModelType: typing.Type[ViennaModelType]
     ViennaOne: typing.Type[ViennaOne]
-    ViennaOneModel: typing.Type[ViennaOneModel]
     ViennaThree: typing.Type[ViennaThree]
-    ViennaThreeModel: typing.Type[ViennaThreeModel]
-    class-use: org.orekit.models.earth.troposphere.class-use.__module_protocol__
+    iturp834: org.orekit.models.earth.troposphere.iturp834.__module_protocol__

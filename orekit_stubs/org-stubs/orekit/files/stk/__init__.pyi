@@ -1,8 +1,14 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
 import org.orekit.data
 import org.orekit.files.general
-import org.orekit.files.stk.class-use
 import org.orekit.frames
 import org.orekit.time
 import org.orekit.utils
@@ -49,7 +55,7 @@ class STKEphemerisFile(org.orekit.files.general.EphemerisFile[org.orekit.utils.T
         @staticmethod
         def valueOf(string: str) -> 'STKEphemerisFile.STKCoordinateSystem': ...
         @staticmethod
-        def values() -> typing.List['STKEphemerisFile.STKCoordinateSystem']: ...
+        def values() -> typing.MutableSequence['STKEphemerisFile.STKCoordinateSystem']: ...
     class STKEphemeris(org.orekit.files.general.EphemerisFile.SatelliteEphemeris[org.orekit.utils.TimeStampedPVCoordinates, 'STKEphemerisFile.STKEphemerisSegment']):
         def __init__(self, string: str, double: float, list: java.util.List['STKEphemerisFile.STKEphemerisSegment']): ...
         def getId(self) -> str: ...
@@ -113,9 +119,8 @@ class STKEphemerisFileParser(org.orekit.files.general.EphemerisFileParser[STKEph
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.stk")``.
 
     STKEphemerisFile: typing.Type[STKEphemerisFile]
     STKEphemerisFileParser: typing.Type[STKEphemerisFileParser]
-    class-use: org.orekit.files.stk.class-use.__module_protocol__

@@ -1,3 +1,10 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.io
 import java.util
 import typing
@@ -5,7 +12,7 @@ import typing
 
 
 class LocaleServiceProvider:
-    def getAvailableLocales(self) -> typing.List[java.util.Locale]: ...
+    def getAvailableLocales(self) -> typing.MutableSequence[java.util.Locale]: ...
     def isSupportedLocale(self, locale: java.util.Locale) -> bool: ...
 
 class ResourceBundleControlProvider:
@@ -15,14 +22,13 @@ class ResourceBundleProvider:
     def getBundle(self, string: str, locale: java.util.Locale) -> java.util.ResourceBundle: ...
 
 class ToolProvider:
-    def description(self) -> java.util.Optional[str]: ...
     @staticmethod
     def findFirst(string: str) -> java.util.Optional['ToolProvider']: ...
     def name(self) -> str: ...
     @typing.overload
-    def run(self, printWriter: java.io.PrintWriter, printWriter2: java.io.PrintWriter, stringArray: typing.List[str]) -> int: ...
+    def run(self, printWriter: java.io.PrintWriter, printWriter2: java.io.PrintWriter, *string: str) -> int: ...
     @typing.overload
-    def run(self, printStream: java.io.PrintStream, printStream2: java.io.PrintStream, stringArray: typing.List[str]) -> int: ...
+    def run(self, printStream: java.io.PrintStream, printStream2: java.io.PrintStream, *string: str) -> int: ...
 
 class AbstractResourceBundleProvider(ResourceBundleProvider):
     def getBundle(self, string: str, locale: java.util.Locale) -> java.util.ResourceBundle: ...
@@ -52,7 +58,7 @@ class TimeZoneNameProvider(LocaleServiceProvider):
     def getGenericDisplayName(self, string: str, int: int, locale: java.util.Locale) -> str: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("java.util.spi")``.
 
     AbstractResourceBundleProvider: typing.Type[AbstractResourceBundleProvider]

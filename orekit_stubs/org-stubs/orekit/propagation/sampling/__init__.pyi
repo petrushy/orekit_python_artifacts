@@ -1,8 +1,14 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.util
 import org.hipparchus
 import org.orekit.frames
 import org.orekit.propagation
-import org.orekit.propagation.sampling.class-use
 import org.orekit.time
 import org.orekit.utils
 import typing
@@ -334,7 +340,7 @@ class FieldOrekitStepNormalizer(FieldOrekitStepHandler[_FieldOrekitStepNormalize
         It mirrors the :code:`StepNormalizer` interface from `commons-math <http://commons.apache.org/math/>` but provides a
         space-dynamics interface to the methods.
     """
-    def __init__(self, t: _FieldOrekitStepNormalizer__T, fieldOrekitFixedStepHandler: FieldOrekitFixedStepHandler[_FieldOrekitStepNormalizer__T]): ...
+    def __init__(self, t: _FieldOrekitStepNormalizer__T, fieldOrekitFixedStepHandler: typing.Union[FieldOrekitFixedStepHandler[_FieldOrekitStepNormalizer__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement]], None]]): ...
     def finish(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldOrekitStepNormalizer__T]) -> None: ...
     def getFixedStepHandler(self) -> FieldOrekitFixedStepHandler[_FieldOrekitStepNormalizer__T]: ...
     def getFixedTimeStep(self) -> _FieldOrekitStepNormalizer__T:
@@ -364,6 +370,21 @@ class FieldOrekitStepNormalizer(FieldOrekitStepHandler[_FieldOrekitStepNormalize
         """
         ...
 
+_FieldPropagationStepRecorder__T = typing.TypeVar('_FieldPropagationStepRecorder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldPropagationStepRecorder(FieldOrekitStepHandler[_FieldPropagationStepRecorder__T], typing.Generic[_FieldPropagationStepRecorder__T]):
+    """
+    public class FieldPropagationStepRecorder<T extends :class:`~org.orekit.propagation.sampling.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.sampling.FieldOrekitStepHandler`<T>
+    
+        Step handler recording states. Automatically clears them at start of propagation.
+    
+        Since:
+            13.0
+    """
+    def __init__(self): ...
+    def copyStates(self) -> java.util.List[org.orekit.propagation.FieldSpacecraftState[_FieldPropagationStepRecorder__T]]: ...
+    def handleStep(self, fieldOrekitStepInterpolator: FieldOrekitStepInterpolator[_FieldPropagationStepRecorder__T]) -> None: ...
+    def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldPropagationStepRecorder__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldPropagationStepRecorder__T]) -> None: ...
+
 _FieldStepHandlerMultiplexer__T = typing.TypeVar('_FieldStepHandlerMultiplexer__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldStepHandlerMultiplexer(FieldOrekitStepHandler[_FieldStepHandlerMultiplexer__T], typing.Generic[_FieldStepHandlerMultiplexer__T]):
     """
@@ -373,9 +394,9 @@ class FieldStepHandlerMultiplexer(FieldOrekitStepHandler[_FieldStepHandlerMultip
     """
     def __init__(self): ...
     @typing.overload
-    def add(self, t: _FieldStepHandlerMultiplexer__T, fieldOrekitFixedStepHandler: FieldOrekitFixedStepHandler[_FieldStepHandlerMultiplexer__T]) -> None: ...
+    def add(self, t: _FieldStepHandlerMultiplexer__T, fieldOrekitFixedStepHandler: typing.Union[FieldOrekitFixedStepHandler[_FieldStepHandlerMultiplexer__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement]], None]]) -> None: ...
     @typing.overload
-    def add(self, fieldOrekitStepHandler: FieldOrekitStepHandler[_FieldStepHandlerMultiplexer__T]) -> None: ...
+    def add(self, fieldOrekitStepHandler: typing.Union[FieldOrekitStepHandler[_FieldStepHandlerMultiplexer__T], typing.Callable[[FieldOrekitStepInterpolator[org.hipparchus.CalculusFieldElement]], None]]) -> None: ...
     def clear(self) -> None:
         """
             Remove all handlers managed by this multiplexer.
@@ -397,9 +418,9 @@ class FieldStepHandlerMultiplexer(FieldOrekitStepHandler[_FieldStepHandlerMultip
     def handleStep(self, fieldOrekitStepInterpolator: FieldOrekitStepInterpolator[_FieldStepHandlerMultiplexer__T]) -> None: ...
     def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldStepHandlerMultiplexer__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldStepHandlerMultiplexer__T]) -> None: ...
     @typing.overload
-    def remove(self, fieldOrekitFixedStepHandler: FieldOrekitFixedStepHandler[_FieldStepHandlerMultiplexer__T]) -> None: ...
+    def remove(self, fieldOrekitFixedStepHandler: typing.Union[FieldOrekitFixedStepHandler[_FieldStepHandlerMultiplexer__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement]], None]]) -> None: ...
     @typing.overload
-    def remove(self, fieldOrekitStepHandler: FieldOrekitStepHandler[_FieldStepHandlerMultiplexer__T]) -> None: ...
+    def remove(self, fieldOrekitStepHandler: typing.Union[FieldOrekitStepHandler[_FieldStepHandlerMultiplexer__T], typing.Callable[[FieldOrekitStepInterpolator[org.hipparchus.CalculusFieldElement]], None]]) -> None: ...
 
 class MultisatStepNormalizer(MultiSatStepHandler):
     """
@@ -414,7 +435,7 @@ class MultisatStepNormalizer(MultiSatStepHandler):
         Since:
             12.0
     """
-    def __init__(self, double: float, multiSatFixedStepHandler: MultiSatFixedStepHandler): ...
+    def __init__(self, double: float, multiSatFixedStepHandler: typing.Union[MultiSatFixedStepHandler, typing.Callable]): ...
     def finish(self, list: java.util.List[org.orekit.propagation.SpacecraftState]) -> None: ...
     def getFixedStepHandler(self) -> MultiSatFixedStepHandler:
         """
@@ -503,6 +524,52 @@ class OrekitStepNormalizer(OrekitStepHandler):
                     call, so if the instance wants to keep it across all calls (for example to provide at the end of the propagation a
                     continuous model valid throughout the propagation range), it should build a local copy using the clone method and store
                     this copy.
+        
+        
+        """
+        ...
+    def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+        """
+            Initialize step handler at the start of a propagation.
+        
+            This method is called once at the start of the propagation. It may be used by the step handler to initialize some
+            internal data if needed.
+        
+            The default method does nothing
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.init` in
+                interface :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
+        
+            Parameters:
+                s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
+                t (:class:`~org.orekit.time.AbsoluteDate`): target time for the integration
+        
+        
+        """
+        ...
+
+class PropagationStepRecorder(OrekitStepHandler):
+    """
+    public class PropagationStepRecorder extends :class:`~org.orekit.propagation.sampling.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
+    
+        Step handler recording states. Automatically clears them at start of propagation.
+    
+        Since:
+            13.0
+    """
+    def __init__(self): ...
+    def copyStates(self) -> java.util.List[org.orekit.propagation.SpacecraftState]: ...
+    def handleStep(self, orekitStepInterpolator: OrekitStepInterpolator) -> None:
+        """
+            Handle the current step.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.sampling.OrekitStepHandler.handleStep` in
+                interface :class:`~org.orekit.propagation.sampling.OrekitStepHandler`
+        
+            Parameters:
+                interpolator (:class:`~org.orekit.propagation.sampling.OrekitStepInterpolator`): interpolator set up for the current step
         
         
         """
@@ -993,7 +1060,7 @@ class StepHandlerMultiplexer(OrekitStepHandler):
         """
         ...
     @typing.overload
-    def add(self, orekitStepHandler: OrekitStepHandler) -> None:
+    def add(self, orekitStepHandler: typing.Union[OrekitStepHandler, typing.Callable]) -> None:
         """
             Add a handler for variable size step.
         
@@ -1105,16 +1172,17 @@ class StepHandlerMultiplexer(OrekitStepHandler):
         """
         ...
     @typing.overload
-    def remove(self, orekitStepHandler: OrekitStepHandler) -> None: ...
+    def remove(self, orekitStepHandler: typing.Union[OrekitStepHandler, typing.Callable]) -> None: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.propagation.sampling")``.
 
     FieldOrekitFixedStepHandler: typing.Type[FieldOrekitFixedStepHandler]
     FieldOrekitStepHandler: typing.Type[FieldOrekitStepHandler]
     FieldOrekitStepInterpolator: typing.Type[FieldOrekitStepInterpolator]
     FieldOrekitStepNormalizer: typing.Type[FieldOrekitStepNormalizer]
+    FieldPropagationStepRecorder: typing.Type[FieldPropagationStepRecorder]
     FieldStepHandlerMultiplexer: typing.Type[FieldStepHandlerMultiplexer]
     MultiSatFixedStepHandler: typing.Type[MultiSatFixedStepHandler]
     MultiSatStepHandler: typing.Type[MultiSatStepHandler]
@@ -1123,6 +1191,7 @@ class __module_protocol__(typing.Protocol):
     OrekitStepHandler: typing.Type[OrekitStepHandler]
     OrekitStepInterpolator: typing.Type[OrekitStepInterpolator]
     OrekitStepNormalizer: typing.Type[OrekitStepNormalizer]
+    PropagationStepRecorder: typing.Type[PropagationStepRecorder]
     PythonFieldOrekitFixedStepHandler: typing.Type[PythonFieldOrekitFixedStepHandler]
     PythonFieldOrekitStepHandler: typing.Type[PythonFieldOrekitStepHandler]
     PythonFieldOrekitStepInterpolator: typing.Type[PythonFieldOrekitStepInterpolator]
@@ -1132,4 +1201,3 @@ class __module_protocol__(typing.Protocol):
     PythonOrekitStepHandler: typing.Type[PythonOrekitStepHandler]
     PythonOrekitStepInterpolator: typing.Type[PythonOrekitStepInterpolator]
     StepHandlerMultiplexer: typing.Type[StepHandlerMultiplexer]
-    class-use: org.orekit.propagation.sampling.class-use.__module_protocol__

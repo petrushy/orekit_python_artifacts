@@ -1,6 +1,12 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.util
 import org.orekit.gnss.metric.messages
-import org.orekit.gnss.metric.messages.rtcm.class-use
 import org.orekit.gnss.metric.messages.rtcm.correction
 import org.orekit.gnss.metric.messages.rtcm.ephemeris
 import typing
@@ -32,11 +38,10 @@ class RtcmMessage(org.orekit.gnss.metric.messages.ParsedMessage, typing.Generic[
     def getData(self) -> java.util.List[_RtcmMessage__D]: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.gnss.metric.messages.rtcm")``.
 
     RtcmData: typing.Type[RtcmData]
     RtcmMessage: typing.Type[RtcmMessage]
-    class-use: org.orekit.gnss.metric.messages.rtcm.class-use.__module_protocol__
     correction: org.orekit.gnss.metric.messages.rtcm.correction.__module_protocol__
     ephemeris: org.orekit.gnss.metric.messages.rtcm.ephemeris.__module_protocol__

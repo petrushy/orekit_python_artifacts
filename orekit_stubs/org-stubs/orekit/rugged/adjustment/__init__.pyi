@@ -1,3 +1,10 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
 import org
@@ -10,8 +17,8 @@ import typing
 
 
 class AdjustmentContext:
-    def __init__(self, collection: typing.Union[java.util.Collection[org.orekit.rugged.api.Rugged], typing.Sequence[org.orekit.rugged.api.Rugged]], observables: org.orekit.rugged.adjustment.measurements.Observables): ...
-    def estimateFreeParameters(self, collection: typing.Union[java.util.Collection[str], typing.Sequence[str]], int: int, double: float) -> org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer.Optimum: ...
+    def __init__(self, collection: typing.Union[java.util.Collection[org.orekit.rugged.api.Rugged], typing.Sequence[org.orekit.rugged.api.Rugged], typing.Set[org.orekit.rugged.api.Rugged]], observables: org.orekit.rugged.adjustment.measurements.Observables): ...
+    def estimateFreeParameters(self, collection: typing.Union[java.util.Collection[str], typing.Sequence[str], typing.Set[str]], int: int, double: float) -> org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresOptimizer.Optimum: ...
     def setOptimizer(self, optimizerId: 'OptimizerId') -> None: ...
 
 class LeastSquareAdjuster:
@@ -33,14 +40,14 @@ class OptimizerId(java.lang.Enum['OptimizerId']):
     @staticmethod
     def valueOf(string: str) -> 'OptimizerId': ...
     @staticmethod
-    def values() -> typing.List['OptimizerId']: ...
+    def values() -> typing.MutableSequence['OptimizerId']: ...
 
 class GroundOptimizationProblemBuilder(org.orekit.rugged.adjustment.OptimizationProblemBuilder):
     def __init__(self, list: java.util.List[org.orekit.rugged.linesensor.LineSensor], observables: org.orekit.rugged.adjustment.measurements.Observables, rugged: org.orekit.rugged.api.Rugged): ...
     def build(self, int: int, double: float) -> org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem: ...
 
 class InterSensorsOptimizationProblemBuilder(org.orekit.rugged.adjustment.OptimizationProblemBuilder):
-    def __init__(self, list: java.util.List[org.orekit.rugged.linesensor.LineSensor], observables: org.orekit.rugged.adjustment.measurements.Observables, collection: typing.Union[java.util.Collection[org.orekit.rugged.api.Rugged], typing.Sequence[org.orekit.rugged.api.Rugged]]): ...
+    def __init__(self, list: java.util.List[org.orekit.rugged.linesensor.LineSensor], observables: org.orekit.rugged.adjustment.measurements.Observables, collection: typing.Union[java.util.Collection[org.orekit.rugged.api.Rugged], typing.Sequence[org.orekit.rugged.api.Rugged], typing.Set[org.orekit.rugged.api.Rugged]]): ...
     def build(self, int: int, double: float) -> org.hipparchus.optim.nonlinear.vector.leastsquares.LeastSquaresProblem: ...
 
 class PythonOptimizationProblemBuilder(org.orekit.rugged.adjustment.OptimizationProblemBuilder):
@@ -58,7 +65,7 @@ class PythonOptimizationProblemBuilder(org.orekit.rugged.adjustment.Optimization
 class OptimizationProblemBuilder: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.rugged.adjustment")``.
 
     AdjustmentContext: typing.Type[AdjustmentContext]

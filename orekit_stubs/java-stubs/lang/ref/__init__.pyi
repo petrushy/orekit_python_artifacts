@@ -1,3 +1,10 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util.concurrent
 import typing
@@ -10,7 +17,7 @@ class Cleaner:
     def create() -> 'Cleaner': ...
     @typing.overload
     @staticmethod
-    def create(threadFactory: java.util.concurrent.ThreadFactory) -> 'Cleaner': ...
+    def create(threadFactory: typing.Union[java.util.concurrent.ThreadFactory, typing.Callable]) -> 'Cleaner': ...
     def register(self, object: typing.Any, runnable: typing.Union[java.lang.Runnable, typing.Callable]) -> 'Cleaner.Cleanable': ...
     class Cleanable:
         def clean(self) -> None: ...
@@ -23,7 +30,6 @@ class Reference(typing.Generic[_Reference__T]):
     def isEnqueued(self) -> bool: ...
     @staticmethod
     def reachabilityFence(object: typing.Any) -> None: ...
-    def refersTo(self, t: _Reference__T) -> bool: ...
 
 _ReferenceQueue__T = typing.TypeVar('_ReferenceQueue__T')  # <T>
 class ReferenceQueue(typing.Generic[_ReferenceQueue__T]):
@@ -55,7 +61,7 @@ class WeakReference(Reference[_WeakReference__T], typing.Generic[_WeakReference_
     def __init__(self, t: _WeakReference__T, referenceQueue: ReferenceQueue[_WeakReference__T]): ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("java.lang.ref")``.
 
     Cleaner: typing.Type[Cleaner]

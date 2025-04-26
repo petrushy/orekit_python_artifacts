@@ -1,6 +1,8 @@
 # This stubgenj seems to work best under java v11
 # pip index versions stubgenj
-# 
+# or by pixi:
+# pixi exec -s openjdk=11 stubgenj=0.2.4 python download_dependencies.py
+# uv run --with stubgenj=0.2.4 download_dependencies.py
 
 import subprocess, os
 
@@ -37,7 +39,7 @@ for item in items:
     command_javadoc = f"mvn org.apache.maven.plugins:maven-dependency-plugin:2.8:copy -Dartifact=org.hipparchus:{item}:{VERSION}:javadoc -DoutputDirectory={TARGET_DIRECTORY_JAVADOC} -Dmdep.useBaseVersion=true"
     subprocess.call(command_javadoc, shell=True)
 
-command_create_stubs = f"python -m stubgenj --convert-strings --classpath \"../*.jar:../javadoc/*.jar\" org.orekit  org.hipparchus"
+command_create_stubs = f"python -m stubgenj --convert-strings --classpath \"../*.jar:../javadoc/*.jar\" org.orekit  org.hipparchus java"
 # --no-jpackage-stubs ?
 
 backup_directory(STUBS_DIRECTORY)

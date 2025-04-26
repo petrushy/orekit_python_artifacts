@@ -1,9 +1,16 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
+import java.util.function
 import org.hipparchus.geometry.euclidean.threed
 import org.hipparchus.util
 import org.orekit.data
-import org.orekit.files.sinex.class-use
 import org.orekit.frames
 import org.orekit.gnss
 import org.orekit.models.earth.displacement
@@ -13,123 +20,181 @@ import typing
 
 
 
-class Dcb:
+class AbstractSinex:
     """
-    public class Dcb extends :class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    public class AbstractSinex extends :class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
-        Class to store DCB Solution data parsed in the SinexLoader.
-    
-        This class is made to handle both station and satellite DCB data. Bias values are stored in TimeSpanMaps associated with
-        a given pair of observation codes. Those TimeSpanMaps are stored in a Map, which associate a pair of observation code
-        (as a HashSet of ObservationType) to a TimeSpanMap, encapsulated in a DCBCode object.
+        Base container for Solution INdependent EXchange (SINEX) files.
     
         Since:
-            12.0
+            13.0
     """
-    def __init__(self): ...
-    def addDcbLine(self, string: str, string2: str, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, double: float) -> None:
+    def __init__(self, timeScales: org.orekit.time.TimeScales, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, absoluteDate3: org.orekit.time.AbsoluteDate): ...
+    def getCreationDate(self) -> org.orekit.time.AbsoluteDate:
         """
-            Add the content of a DCB line to the DCBSatellite object.
+            Get the creation date of the parsed SINEX file.
         
-            The method check the presence of a Code pair in a map, and add values to the corresponding TimeSpanMap.
-        
-            Parameters:
-                obs1 (:class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): String corresponding to the first code used for the DCB computation
-                obs2 (:class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): String corresponding to the second code used for the DCB computation
-                spanBegin (:class:`~org.orekit.time.AbsoluteDate`): Absolute Date corresponding to the beginning of the validity span for this bias value
-                spanEnd (:class:`~org.orekit.time.AbsoluteDate`): Absolute Date corresponding to the end of the validity span for this bias value
-                biasValue (double): DCB bias value expressed in S.I. units
+            Returns:
+                SINEX file creation date as an AbsoluteDate
         
         
         """
         ...
-    def getAvailableObservationPairs(self) -> java.util.HashSet[org.hipparchus.util.Pair[org.orekit.gnss.ObservationType, org.orekit.gnss.ObservationType]]: ...
-    @typing.overload
-    def getDcb(self, string: str, string2: str, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+    def getFileEpochEndTime(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the value of the Differential Code Bias for a given observation pair and a at a given date.
-        
-            Parameters:
-                obs1 (:class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): string corresponding to the first code used for the DCB computation
-                obs2 (:class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): string corresponding to the second code used for the DCB computation
-                date (:class:`~org.orekit.time.AbsoluteDate`): date at which to obtain the DCB
+            Get the file epoch end time.
         
             Returns:
-                the value of the DCB in S.I. units
-        
-            Get the value of the Differential Code Bias for a given observation pair and a at a given date.
-        
-            Parameters:
-                obs1 (:class:`~org.orekit.gnss.ObservationType`): first observation type
-                obs2 (:class:`~org.orekit.gnss.ObservationType`): second observation type
-                date (:class:`~org.orekit.time.AbsoluteDate`): date at which to obtain the DCB
-        
-            Returns:
-                the value of the DCB in S.I. units
+                the file epoch end time
         
         
         """
         ...
-    @typing.overload
-    def getDcb(self, observationType: org.orekit.gnss.ObservationType, observationType2: org.orekit.gnss.ObservationType, absoluteDate: org.orekit.time.AbsoluteDate) -> float: ...
-    @typing.overload
-    def getMaximumValidDateForObservationPair(self, string: str, string2: str) -> org.orekit.time.AbsoluteDate:
+    def getFileEpochStartTime(self) -> org.orekit.time.AbsoluteDate:
         """
-            Get the maximum valid date for a given observation pair.
-        
-            Parameters:
-                obs1 (:class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): string corresponding to the first code used for the DCB computation
-                obs2 (:class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): string corresponding to the second code used for the DCB computation
+            Get the file epoch start time.
         
             Returns:
-                maximum valid date for the observation pair
-        
-            Get the maximum valid date for a given observation pair.
-        
-            Parameters:
-                obs1 (:class:`~org.orekit.gnss.ObservationType`): first observation type
-                obs2 (:class:`~org.orekit.gnss.ObservationType`): second observation type
-        
-            Returns:
-                maximum valid date for the observation pair
+                the file epoch start time
         
         
         """
         ...
-    @typing.overload
-    def getMaximumValidDateForObservationPair(self, observationType: org.orekit.gnss.ObservationType, observationType2: org.orekit.gnss.ObservationType) -> org.orekit.time.AbsoluteDate: ...
-    @typing.overload
-    def getMinimumValidDateForObservationPair(self, string: str, string2: str) -> org.orekit.time.AbsoluteDate:
+    def getTimeScales(self) -> org.orekit.time.TimeScales:
         """
-            Get the minimum valid date for a given observation pair.
-        
-            Parameters:
-                obs1 (:class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): sString corresponding to the first code used for the DCB computation
-                obs2 (:class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): string corresponding to the second code used for the DCB computation
+            Get the time scales.
         
             Returns:
-                minimum valid date for the observation pair
-        
-            Get the minimum valid date for a given observation pair.
-        
-            Parameters:
-                obs1 (:class:`~org.orekit.gnss.ObservationType`): first observation type
-                obs2 (:class:`~org.orekit.gnss.ObservationType`): second observation type
-        
-            Returns:
-                minimum valid date for the observation pair
+                time scales
         
         
         """
         ...
-    @typing.overload
-    def getMinimumValidDateForObservationPair(self, observationType: org.orekit.gnss.ObservationType, observationType2: org.orekit.gnss.ObservationType) -> org.orekit.time.AbsoluteDate: ...
 
-class DcbDescription:
+_AbstractSinexParser__T = typing.TypeVar('_AbstractSinexParser__T', bound=AbstractSinex)  # <T>
+_AbstractSinexParser__P = typing.TypeVar('_AbstractSinexParser__P', bound='ParseInfo')  # <P>
+class AbstractSinexParser(typing.Generic[_AbstractSinexParser__T, _AbstractSinexParser__P]):
     """
-    public class DcbDescription extends :class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    public abstract class AbstractSinexParser<T extends :class:`~org.orekit.files.sinex.AbstractSinex`, P extends :class:`~org.orekit.files.sinex.ParseInfo`<T>> extends :class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
-        Class to store the DCB description parameters.
+        Base parser for Solution INdependent EXchange (SINEX) files.
+    
+        Since:
+            13.0
+    """
+    def getTimeScales(self) -> org.orekit.time.TimeScales:
+        """
+            Get the time scales.
+        
+            Returns:
+                time scales
+        
+        
+        """
+        ...
+    def parse(self, *dataSource: org.orekit.data.DataSource) -> _AbstractSinexParser__T:
+        """
+            Parse one or more SINEX files.
+        
+            Parameters:
+                sources (:class:`~org.orekit.data.DataSource`...): sources providing the data to parse
+        
+            Returns:
+                parsed file combining all sources
+        
+        
+        """
+        ...
+
+class AntennaKey:
+    """
+    public class AntennaKey extends :class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Key for antenna.
+    
+        Since:
+            13.0
+    """
+    OTHER_RADOME_CODE: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` OTHER_RADOME_CODE
+    
+        Constant matching other radome codes.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    ANY_SERIAL_NUMBER: typing.ClassVar[str] = ...
+    """
+    public static final :class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` ANY_SERIAL_NUMBER
+    
+        Constant matching any serial numbers.
+    
+        Also see:
+            :meth:`~constant`
+    
+    
+    """
+    def __init__(self, string: str, string2: str, string3: str): ...
+    def equals(self, object: typing.Any) -> bool:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+        
+        
+        """
+        ...
+    def getName(self) -> str:
+        """
+            Get the antenna name.
+        
+            Returns:
+                antenna name
+        
+        
+        """
+        ...
+    def getRadomeCode(self) -> str:
+        """
+            Get the radome code.
+        
+            Returns:
+                radome code
+        
+        
+        """
+        ...
+    def getSerialNumber(self) -> str:
+        """
+            Get the serial number.
+        
+            Returns:
+                serial number
+        
+        
+        """
+        ...
+    def hashCode(self) -> int:
+        """
+        
+            Overrides:
+                :meth:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
+                class :class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+        
+        
+        """
+        ...
+    def matchingCandidates(self) -> java.util.List['AntennaKey']: ...
+
+class BiasDescription:
+    """
+    public class BiasDescription extends :class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Class to store the bias description parameters.
     
         This class gives important parameters from the analysis and defines the fields in the block ’BIAS/SOLUTION’ of the
         loaded Sinex file.
@@ -140,7 +205,7 @@ class DcbDescription:
     def __init__(self): ...
     def getBiasMode(self) -> str:
         """
-            Get the bias mode
+            Get the bias mode.
         
             The bias mode describes how the included GNSS bias values have to be interpreted and applied.
         
@@ -188,7 +253,7 @@ class DcbDescription:
         ...
     def getTimeSystem(self) -> org.orekit.gnss.TimeSystem:
         """
-            Get the time system for DCB data.
+            Get the time system for DSB data.
         
             Returns:
                 the time system
@@ -238,7 +303,7 @@ class DcbDescription:
         ...
     def setTimeSystem(self, timeSystem: org.orekit.gnss.TimeSystem) -> None:
         """
-            Set the time system used for DCB data.
+            Set the time system used for DSB data.
         
             Parameters:
                 timeSystem (:class:`~org.orekit.gnss.TimeSystem`): the time system to set
@@ -247,146 +312,250 @@ class DcbDescription:
         """
         ...
 
-class DcbSatellite:
+class DifferentialSignalBias:
     """
-    public class DcbSatellite extends :class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    public class DifferentialSignalBias extends :class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
-        Class based on DCB, used to store the data parsed in :class:`~org.orekit.files.sinex.SinexLoader` for Differential Code
-        Biases computed for satellites.
+        Container for differential signal bias for a single link endpoint (either emitter or receiver).
     
-        Satellites and stations have differentiated classes as stations might have multiple satellite systems. The data are
-        stored in a single DCB object.
+        This class is made to handle both station and satellite DSB data. Bias values are stored in TimeSpanMaps associated with
+        a given pair of observation types. Those TimeSpanMaps are stored in a Map, which associate a pair of observation types
+        to a TimeSpanMap of double values.
     
         Since:
             12.0
     """
-    def __init__(self, string: str): ...
-    def getDcbData(self) -> Dcb:
+    def __init__(self): ...
+    def addBias(self, observationType: org.orekit.gnss.ObservationType, observationType2: org.orekit.gnss.ObservationType, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, double: float) -> None:
         """
-            Get the DCB data for the current satellite.
-        
-            Returns:
-                the DCB data for the current satellite
-        
-        
-        """
-        ...
-    def getDescription(self) -> DcbDescription:
-        """
-            Get the data contained in "DCB/DESCRIPTION" block of the Sinex file.
-        
-            This block gives important parameters from the analysis and defines the fields in the block ’BIAS/SOLUTION’
-        
-            Returns:
-                the "DCB/DESCRIPTION" parameters.
-        
-        
-        """
-        ...
-    def getPRN(self) -> str:
-        """
-            Return the satellite PRN, as a String.
-        
-            Example of satellite PRN: "G01"
-        
-            Returns:
-                the satellite PRN
-        
-        
-        """
-        ...
-    def getSatelliteSytem(self) -> org.orekit.gnss.SatelliteSystem:
-        """
-            Get the satellite sytem corresponding to the satellite.
-        
-            Satellite system is extracted from the first letter of the PRN.
-        
-            Returns:
-                the satellite from which the DCB are extracted.
-        
-        
-        """
-        ...
-    def setDescription(self, dcbDescription: DcbDescription) -> None:
-        """
-            Set the data contained in "DCB/DESCRIPTION" block of the Sinex file.
+            Add a bias.
         
             Parameters:
-                description (:class:`~org.orekit.files.sinex.DcbDescription`): the "DCB/DESCRIPTION" parameters to set
+                obs1 (:class:`~org.orekit.gnss.ObservationType`): first observation used for the DSB computation
+                obs2 (:class:`~org.orekit.gnss.ObservationType`): second observation used for the DSB computation
+                spanBegin (:class:`~org.orekit.time.AbsoluteDate`): beginning of the validity span for this bias value
+                spanEnd (:class:`~org.orekit.time.AbsoluteDate`): end of the validity span for this bias value
+                biasValue (double): DSB bias value (meters for code and cycle for phase)
+        
+        
+        """
+        ...
+    def getAvailableObservationPairs(self) -> java.util.HashSet[org.hipparchus.util.Pair[org.orekit.gnss.ObservationType, org.orekit.gnss.ObservationType]]: ...
+    def getBias(self, observationType: org.orekit.gnss.ObservationType, observationType2: org.orekit.gnss.ObservationType, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+        """
+            Get the value of the Differential Signal Bias for a given observation pair at a given date.
+        
+            Parameters:
+                obs1 (:class:`~org.orekit.gnss.ObservationType`): first observation type
+                obs2 (:class:`~org.orekit.gnss.ObservationType`): second observation type
+                date (:class:`~org.orekit.time.AbsoluteDate`): date at which to obtain the DSB
+        
+            Returns:
+                the value of the DSB (meters for code and cycle for phase)
+        
+        
+        """
+        ...
+    def getMaximumValidDateForObservationPair(self, observationType: org.orekit.gnss.ObservationType, observationType2: org.orekit.gnss.ObservationType) -> org.orekit.time.AbsoluteDate:
+        """
+            Get the maximum valid date for a given observation pair.
+        
+            Parameters:
+                obs1 (:class:`~org.orekit.gnss.ObservationType`): first observation type
+                obs2 (:class:`~org.orekit.gnss.ObservationType`): second observation type
+        
+            Returns:
+                maximum valid date for the observation pair
+        
+        
+        """
+        ...
+    def getMinimumValidDateForObservationPair(self, observationType: org.orekit.gnss.ObservationType, observationType2: org.orekit.gnss.ObservationType) -> org.orekit.time.AbsoluteDate:
+        """
+            Get the minimum valid date for a given observation pair.
+        
+            Parameters:
+                obs1 (:class:`~org.orekit.gnss.ObservationType`): first observation type
+                obs2 (:class:`~org.orekit.gnss.ObservationType`): second observation type
+        
+            Returns:
+                minimum valid date for the observation pair
         
         
         """
         ...
 
-class DcbStation:
+_LineParser__T = typing.TypeVar('_LineParser__T', bound='ParseInfo')  # <T>
+class LineParser(typing.Generic[_LineParser__T]):
     """
-    public class DcbStation extends :class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    public interface LineParser<T extends :class:`~org.orekit.files.sinex.ParseInfo`<?>>
     
-        Class based on DCB, used to store the data parsed in :class:`~org.orekit.files.sinex.SinexLoader` for Differential Code
-        Biases computed for stations.
+        Parser class for one line.
+    
+        Since:
+            13.0
+    """
+    def allowedNextParsers(self, t: _LineParser__T) -> java.lang.Iterable['LineParser'[_LineParser__T]]: ...
+    def parseIfRecognized(self, t: _LineParser__T) -> bool:
+        """
+            Parse a line if recognized.
+        
+            Parameters:
+                parseInfo (:class:`~org.orekit.files.sinex.LineParser`): holder for transient data
+        
+            Returns:
+                true if line was recognized
+        
+        
+        """
+        ...
+
+class ObservableSpecificSignalBias:
+    """
+    public class ObservableSpecificSignalBias extends :class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Container for observation-specific signal bias for a single link endpoint (either emitter or receiver).
+    
+        This class is made to handle both station and satellite OSB data. Bias values are stored in TimeSpanMaps associated with
+        a given observation type. Those TimeSpanMaps are stored in a Map, which associate an observation code to a TimeSpanMap
+        of double values.
+    
+        Since:
+            13.0
+    """
+    def __init__(self): ...
+    def addBias(self, observationType: org.orekit.gnss.ObservationType, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, double: float) -> None:
+        """
+            Add a bias.
+        
+            Parameters:
+                obs (:class:`~org.orekit.gnss.ObservationType`): observation used for the OSB computation
+                spanBegin (:class:`~org.orekit.time.AbsoluteDate`): beginning of the validity span for this bias value
+                spanEnd (:class:`~org.orekit.time.AbsoluteDate`): end of the validity span for this bias value
+                biasValue (double): Observable-specific Signal Bias value (meters for code and cycle for phase)
+        
+        
+        """
+        ...
+    def getAvailableObservations(self) -> java.util.HashSet[org.orekit.gnss.ObservationType]: ...
+    def getBias(self, observationType: org.orekit.gnss.ObservationType, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
+        """
+            Get the value of the Observable-specific Signal Bias for a given observation type at a given date.
+        
+            Parameters:
+                obs (:class:`~org.orekit.gnss.ObservationType`): observation type
+                date (:class:`~org.orekit.time.AbsoluteDate`): date at which to obtain the Observable-specific Signal Bias
+        
+            Returns:
+                the value of the Observable-specific Signal Bias (meters for code and cycle for phase)
+        
+        
+        """
+        ...
+    def getMaximumValidDateForObservation(self, observationType: org.orekit.gnss.ObservationType) -> org.orekit.time.AbsoluteDate:
+        """
+            Get the maximum valid date for a given observation type.
+        
+            Parameters:
+                obs (:class:`~org.orekit.gnss.ObservationType`): observation type
+        
+            Returns:
+                maximum valid date for the observation pair
+        
+        
+        """
+        ...
+    def getMinimumValidDateForObservation(self, observationType: org.orekit.gnss.ObservationType) -> org.orekit.time.AbsoluteDate:
+        """
+            Get the minimum valid date for a given observation type.
+        
+            Parameters:
+                obs (:class:`~org.orekit.gnss.ObservationType`): observation type
+        
+            Returns:
+                minimum valid date for the observation pair
+        
+        
+        """
+        ...
+
+_ParseInfo__T = typing.TypeVar('_ParseInfo__T', bound=AbstractSinex)  # <T>
+class ParseInfo(typing.Generic[_ParseInfo__T]):
+    """
+    public abstract class ParseInfo<T extends :class:`~org.orekit.files.sinex.AbstractSinex`> extends :class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Transient data used for parsing a SINEX file.
+    
+        Since:
+            13.0
+    """
+    ...
+
+class SatelliteDifferentialSignalBias:
+    """
+    public class SatelliteDifferentialSignalBias extends :class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Class based on DSB, used to store the data parsed in :class:`~org.orekit.files.sinex.SinexBiasParser` for Differential
+        Signal Biases computed for satellites.
     
         Satellites and stations have differentiated classes as stations might have multiple satellite systems. The data are
-        stored in a Map of DCB, identified by the :class:`~org.orekit.gnss.SatelliteSystem`
+        stored in a single DSB object.
     
         Since:
             12.0
     """
-    def __init__(self, string: str): ...
-    def addDcb(self, satelliteSystem: org.orekit.gnss.SatelliteSystem, dcb: Dcb) -> None:
+    def __init__(self, satInSystem: org.orekit.gnss.SatInSystem): ...
+    def getDsb(self) -> DifferentialSignalBias:
         """
-            Add the DCB data corresponding to a satellite system.
-        
-            If the instance previously contained DCB data for the satellite system, the old value is replaced.
-        
-            Parameters:
-                satelliteSystem (:class:`~org.orekit.gnss.SatelliteSystem`): satellite system for which the DCB is added
-                dcb (:class:`~org.orekit.files.sinex.Dcb`): DCB data
-        
-        
-        """
-        ...
-    def getAvailableSatelliteSystems(self) -> java.lang.Iterable[org.orekit.gnss.SatelliteSystem]: ...
-    def getDcbData(self, satelliteSystem: org.orekit.gnss.SatelliteSystem) -> Dcb:
-        """
-            Get the DCB data for a given satellite system.
-        
-            Parameters:
-                satelliteSystem (:class:`~org.orekit.gnss.SatelliteSystem`): satellite system
+            Get the DSB data for the current satellite.
         
             Returns:
-                the DCB data corresponding to the satellite system (can be null is no DCB available)
+                the DSB data for the current satellite
         
         
         """
         ...
-    def getDescription(self) -> DcbDescription:
+    def getSatellite(self) -> org.orekit.gnss.SatInSystem:
         """
-            Get the data contained in "DCB/DESCRIPTION" block of the Sinex file.
-        
-            This block gives important parameters from the analysis and defines the fields in the block ’BIAS/SOLUTION’
+            Return the satellite identifier.
         
             Returns:
-                the "DCB/DESCRIPTION" parameters.
+                the satellite identifier
         
         
         """
         ...
-    def getSiteCode(self) -> str:
+
+class SatelliteObservableSpecificSignalBias:
+    """
+    public class SatelliteObservableSpecificSignalBias extends :class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Class based on OSB, used to store the data parsed in :class:`~org.orekit.files.sinex.SinexBiasParser` for Observation
+        Signal Biases computed for satellites.
+    
+        Satellites and stations have differentiated classes as stations might have multiple satellite systems. The data are
+        stored in a single OSB object.
+    
+        Since:
+            13.0
+    """
+    def __init__(self, satInSystem: org.orekit.gnss.SatInSystem): ...
+    def getOsb(self) -> ObservableSpecificSignalBias:
         """
-            Get the site code (station identifier).
+            Get the OSB data for the current satellite.
         
             Returns:
-                the site code
+                the OSB data for the current satellite
         
         
         """
         ...
-    def setDescription(self, dcbDescription: DcbDescription) -> None:
+    def getSatellite(self) -> org.orekit.gnss.SatInSystem:
         """
-            Set the data contained in "DCB/DESCRIPTION" block of the Sinex file.
+            Return the satellite identifier.
         
-            Parameters:
-                description (:class:`~org.orekit.files.sinex.DcbDescription`): the "DCB/DESCRIPTION" parameters to set
+            Returns:
+                the satellite identifier
         
         
         """
@@ -591,147 +760,6 @@ class SinexEopEntry(org.orekit.time.TimeStamped):
         """
         ...
 
-class SinexLoader(org.orekit.frames.EopHistoryLoader):
-    """
-    public class SinexLoader extends :class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.frames.EopHistoryLoader`
-    
-        Loader for Solution INdependent EXchange (SINEX) files.
-    
-        The loader can be used to load several data types contained in Sinex files. The current supported data are: station
-        coordinates, site eccentricities, EOP, and Difference Code Bias (DCB). Several instances of Sinex loader must be created
-        in order to parse different data types.
-    
-        The parsing of EOP parameters for multiple files in different SinexLoader object, fed into the default DataContext might
-        pose a problem in case validity dates are overlapping. As Sinex daily solution files provide a single EOP entry, the
-        Sinex loader will add points at the limits of data dates (startDate, endDate) of the Sinex file, which in case of
-        overlap will lead to inconsistencies in the final EOPHistory object. Multiple files can be parsed using a single
-        SinexLoader with a regex to overcome this issue.
-    
-        Since:
-            10.3
-    """
-    @typing.overload
-    def __init__(self, string: str): ...
-    @typing.overload
-    def __init__(self, string: str, dataProvidersManager: org.orekit.data.DataProvidersManager, timeScales: org.orekit.time.TimeScales): ...
-    @typing.overload
-    def __init__(self, dataSource: org.orekit.data.DataSource): ...
-    @typing.overload
-    def __init__(self, dataSource: org.orekit.data.DataSource, timeScales: org.orekit.time.TimeScales): ...
-    def fillHistory(self, nutationCorrectionConverter: org.orekit.utils.IERSConventions.NutationCorrectionConverter, sortedSet: java.util.SortedSet[org.orekit.frames.EOPEntry]) -> None: ...
-    def getCreationDate(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Get the creation date of the parsed SINEX file.
-        
-            Returns:
-                SINEX file creation date as an AbsoluteDate
-        
-            Since:
-                12.0
-        
-        
-        """
-        ...
-    def getDcbSatellite(self, string: str) -> DcbSatellite:
-        """
-            Get the DCB data for a given satellite identified by its PRN.
-        
-            Parameters:
-                prn (:class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the satellite PRN (e.g. "G01" for GPS 01)
-        
-            Returns:
-                the DCB data for the satellite
-        
-            Since:
-                12.0
-        
-        
-        """
-        ...
-    def getDcbStation(self, string: str) -> DcbStation:
-        """
-            Get the DCB data for a given station.
-        
-            Parameters:
-                siteCode (:class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): site code
-        
-            Returns:
-                DCB data for the station
-        
-            Since:
-                12.0
-        
-        
-        """
-        ...
-    def getFileEpochEndTime(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Get the file epoch end time.
-        
-            Returns:
-                the file epoch end time
-        
-            Since:
-                12.0
-        
-        
-        """
-        ...
-    def getFileEpochStartTime(self) -> org.orekit.time.AbsoluteDate:
-        """
-            Get the file epoch start time.
-        
-            Returns:
-                the file epoch start time
-        
-            Since:
-                12.0
-        
-        
-        """
-        ...
-    def getITRFVersion(self) -> org.orekit.frames.ITRFVersion:
-        """
-            Get the ITRF version used for the EOP entries processing.
-        
-            Returns:
-                the ITRF Version used for the EOP processing.
-        
-            Since:
-                11.2
-        
-        
-        """
-        ...
-    def getParsedEop(self) -> java.util.Map[org.orekit.time.AbsoluteDate, SinexEopEntry]: ...
-    def getStation(self, string: str) -> 'Station':
-        """
-            Get the station corresponding to the given site code.
-        
-            Parameters:
-                siteCode (:class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): site code
-        
-            Returns:
-                the corresponding station
-        
-        
-        """
-        ...
-    def getStations(self) -> java.util.Map[str, 'Station']: ...
-    def setITRFVersion(self, int: int) -> None:
-        """
-            Set the ITRF version used in EOP entries processing.
-        
-            Parameters:
-                year (int): Year of the ITRF Version used for parsing EOP.
-        
-            Since:
-                11.2
-        
-        
-        """
-        ...
-
 class Station:
     """
     public class Station extends :class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
@@ -746,32 +774,15 @@ class Station:
             10.3
     """
     def __init__(self): ...
-    def addAntennaTypeValidAfter(self, string: str, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+    def addAntennaKeyValidBefore(self, antennaKey: AntennaKey, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
-            Add a antenna type entry valid after a limit date.
+            Add a antenna key entry valid before a limit date.
         
         
-            Using :code:`addAntennaTypeValidAfter(entry, t)` will make :code:`entry` valid in [t, +∞[ (note the closed bracket).
+            Using :code:`addAntennaKeyValidBefore(entry, t)` will make :code:`entry` valid in ]-∞, t[ (note the open bracket).
         
             Parameters:
-                entry (:class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): antenna type entry
-                earliestValidityDate (:class:`~org.orekit.time.AbsoluteDate`): date after which the entry is valid (must be different from **all** dates already used for transitions)
-        
-            Since:
-                12.0
-        
-        
-        """
-        ...
-    def addAntennaTypeValidBefore(self, string: str, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Add a antenna type entry valid before a limit date.
-        
-        
-            Using :code:`addAntennaTypeValidBefore(entry, t)` will make :code:`entry` valid in ]-∞, t[ (note the open bracket).
-        
-            Parameters:
-                entry (:class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): antenna type entry
+                entry (:class:`~org.orekit.files.sinex.AntennaKey`): antenna key entry
                 latestValidityDate (:class:`~org.orekit.time.AbsoluteDate`): date before which the entry is valid (must be different from **all** dates already used for transitions)
         
             Since:
@@ -797,24 +808,6 @@ class Station:
         
         """
         ...
-    def addStationEccentricitiesValidAfter(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Add a station eccentricity vector entry valid after a limit date.
-        
-        
-            Using :code:`addStationEccentricitiesValidAfter(entry, t)` will make :code:`entry` valid in [t, +∞[ (note the closed
-            bracket).
-        
-            Parameters:
-                entry (:class:`~org.orekit.files.sinex.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): station eccentricity vector entry
-                earliestValidityDate (:class:`~org.orekit.time.AbsoluteDate`): date after which the entry is valid (must be different from **all** dates already used for transitions)
-        
-            Since:
-                11.1
-        
-        
-        """
-        ...
     def addStationEccentricitiesValidBefore(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
             Add a station eccentricity vector entry valid before a limit date.
@@ -833,23 +826,23 @@ class Station:
         
         """
         ...
-    def getAntennaType(self, absoluteDate: org.orekit.time.AbsoluteDate) -> str:
+    def getAntennaKey(self, absoluteDate: org.orekit.time.AbsoluteDate) -> AntennaKey:
         """
-            Get the antenna type for the given epoch. If there is no antenna types for the given epoch, an exception is thrown.
+            Get the antenna key for the given epoch. If there is no antenna keys for the given epoch, an exception is thrown.
         
             Parameters:
                 date (:class:`~org.orekit.time.AbsoluteDate`): epoch
         
             Returns:
-                antenna type
+                antenna key
         
             Since:
-                12.0
+                13.0
         
         
         """
         ...
-    def getAntennaTypeTimeSpanMap(self) -> org.orekit.utils.TimeSpanMap[str]: ...
+    def getAntennaKeyTimeSpanMap(self) -> org.orekit.utils.TimeSpanMap[AntennaKey]: ...
     def getDomes(self) -> str:
         """
             Get the site DOMES number.
@@ -901,6 +894,8 @@ class Station:
         
         """
         ...
+    def getPhaseCenters(self, absoluteDate: org.orekit.time.AbsoluteDate) -> java.util.Map[org.orekit.gnss.GnssSignal, org.hipparchus.geometry.euclidean.threed.Vector3D]: ...
+    def getPhaseCentersMap(self) -> org.orekit.utils.TimeSpanMap[java.util.Map[org.orekit.gnss.GnssSignal, org.hipparchus.geometry.euclidean.threed.Vector3D]]: ...
     def getPosition(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Get the station position.
@@ -1046,17 +1041,224 @@ class Station:
         @staticmethod
         def valueOf(string: str) -> 'Station.ReferenceSystem': ...
         @staticmethod
-        def values() -> typing.List['Station.ReferenceSystem']: ...
+        def values() -> typing.MutableSequence['Station.ReferenceSystem']: ...
+
+class StationDifferentialSignalBias:
+    """
+    public class StationDifferentialSignalBias extends :class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Container for :class:`~org.orekit.files.sinex.DifferentialSignalBias` associated to one station.
+    
+        Since:
+            12.0
+    """
+    def __init__(self, string: str): ...
+    def getAvailableSatelliteSystems(self) -> java.util.Collection[org.orekit.gnss.SatelliteSystem]: ...
+    def getDsb(self, satelliteSystem: org.orekit.gnss.SatelliteSystem) -> DifferentialSignalBias:
+        """
+            Get the DSB data for a given satellite system.
+        
+            Parameters:
+                satelliteSystem (:class:`~org.orekit.gnss.SatelliteSystem`): satellite system
+        
+            Returns:
+                the DSB data corresponding to the satellite system
+        
+        
+        """
+        ...
+    def getSiteCode(self) -> str:
+        """
+            Get the site code (station identifier).
+        
+            Returns:
+                the site code
+        
+        
+        """
+        ...
+
+class StationObservableSpecificSignalBias:
+    """
+    public class StationObservableSpecificSignalBias extends :class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Class based on OSB, used to store the data parsed in :class:`~org.orekit.files.sinex.SinexBiasParser` for Observation
+        Signal Biases computed for stations.
+    
+        Satellites and stations have differentiated classes as stations might have multiple satellite systems. The data are
+        stored in a Map of OSB, identified by the :class:`~org.orekit.gnss.SatelliteSystem`
+    
+        Since:
+            13.0
+    """
+    def __init__(self, string: str): ...
+    def getAvailableSatelliteSystems(self) -> java.util.Collection[org.orekit.gnss.SatelliteSystem]: ...
+    def getOsb(self, satelliteSystem: org.orekit.gnss.SatelliteSystem) -> ObservableSpecificSignalBias:
+        """
+            Get the OSB data for a given satellite system.
+        
+            Parameters:
+                satelliteSystem (:class:`~org.orekit.gnss.SatelliteSystem`): satellite system
+        
+            Returns:
+                the OSB data corresponding to the satellite system
+        
+        
+        """
+        ...
+    def getSiteCode(self) -> str:
+        """
+            Get the site code (station identifier).
+        
+            Returns:
+                the site code
+        
+        
+        """
+        ...
+
+class Sinex(AbstractSinex):
+    """
+    public class Sinex extends :class:`~org.orekit.files.sinex.AbstractSinex`
+    
+        Container for Solution INdependent EXchange (SINEX) files.
+    
+        Since:
+            13.0
+    """
+    def __init__(self, timeScales: org.orekit.time.TimeScales, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, absoluteDate3: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.gnss.SatInSystem, typing.Union[java.util.Map[org.orekit.gnss.GnssSignal, org.hipparchus.geometry.euclidean.threed.Vector3D], typing.Mapping[org.orekit.gnss.GnssSignal, org.hipparchus.geometry.euclidean.threed.Vector3D]]], typing.Mapping[org.orekit.gnss.SatInSystem, typing.Union[java.util.Map[org.orekit.gnss.GnssSignal, org.hipparchus.geometry.euclidean.threed.Vector3D], typing.Mapping[org.orekit.gnss.GnssSignal, org.hipparchus.geometry.euclidean.threed.Vector3D]]]], map2: typing.Union[java.util.Map[str, Station], typing.Mapping[str, Station]], map3: typing.Union[java.util.Map[org.orekit.time.AbsoluteDate, SinexEopEntry], typing.Mapping[org.orekit.time.AbsoluteDate, SinexEopEntry]]): ...
+    def getEopLoader(self, iTRFVersion: org.orekit.frames.ITRFVersion) -> org.orekit.frames.EopHistoryLoader:
+        """
+            Get the parsed EOP data.
+        
+            Parameters:
+                itrfVersion (:class:`~org.orekit.frames.ITRFVersion`): ITRF version corresponding to the entries
+        
+            Returns:
+                loader for EOP data
+        
+        
+        """
+        ...
+    def getSatellitesPhaseCenters(self) -> java.util.Map[org.orekit.gnss.SatInSystem, java.util.Map[org.orekit.gnss.GnssSignal, org.hipparchus.geometry.euclidean.threed.Vector3D]]: ...
+    def getStations(self) -> java.util.Map[str, Station]: ...
+
+class SinexBias(AbstractSinex):
+    """
+    public class SinexBias extends :class:`~org.orekit.files.sinex.AbstractSinex`
+    
+        Container for Solution INdependent EXchange (SINEX) files.
+    
+        Since:
+            13.0
+    """
+    def __init__(self, timeScales: org.orekit.time.TimeScales, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, absoluteDate3: org.orekit.time.AbsoluteDate, biasDescription: BiasDescription, map: typing.Union[java.util.Map[str, StationDifferentialSignalBias], typing.Mapping[str, StationDifferentialSignalBias]], map2: typing.Union[java.util.Map[org.orekit.gnss.SatInSystem, SatelliteDifferentialSignalBias], typing.Mapping[org.orekit.gnss.SatInSystem, SatelliteDifferentialSignalBias]], map3: typing.Union[java.util.Map[str, StationObservableSpecificSignalBias], typing.Mapping[str, StationObservableSpecificSignalBias]], map4: typing.Union[java.util.Map[org.orekit.gnss.SatInSystem, SatelliteObservableSpecificSignalBias], typing.Mapping[org.orekit.gnss.SatInSystem, SatelliteObservableSpecificSignalBias]]): ...
+    def getDescription(self) -> BiasDescription:
+        """
+            Get the bias description.
+        
+            Returns:
+                bias description
+        
+        
+        """
+        ...
+    def getSatellitesDsb(self) -> java.util.Map[org.orekit.gnss.SatInSystem, SatelliteDifferentialSignalBias]: ...
+    def getSatellitesOsb(self) -> java.util.Map[org.orekit.gnss.SatInSystem, SatelliteObservableSpecificSignalBias]: ...
+    def getStationsDsb(self) -> java.util.Map[str, StationDifferentialSignalBias]: ...
+    def getStationsOsb(self) -> java.util.Map[str, StationObservableSpecificSignalBias]: ...
+
+class SinexBiasParseInfo(ParseInfo[SinexBias]):
+    """
+    public class SinexBiasParseInfo extends :class:`~org.orekit.files.sinex.ParseInfo`<:class:`~org.orekit.files.sinex.SinexBias`>
+    
+        Parse information for Solution INdependent EXchange (SINEX) bias files.
+    
+        Since:
+            13.0
+    """
+    ...
+
+class SinexBiasParser(AbstractSinexParser[SinexBias, SinexBiasParseInfo]):
+    """
+    public class SinexBiasParser extends :class:`~org.orekit.files.sinex.AbstractSinexParser`<:class:`~org.orekit.files.sinex.SinexBias`, :class:`~org.orekit.files.sinex.SinexBiasParseInfo`>
+    
+        Parser for Solution INdependent EXchange (SINEX) bias files.
+    
+        Since:
+            13.0
+    """
+    def __init__(self, timeScales: org.orekit.time.TimeScales, biFunction: typing.Union[java.util.function.BiFunction[org.orekit.gnss.SatelliteSystem, str, org.orekit.gnss.ObservationType], typing.Callable[[org.orekit.gnss.SatelliteSystem, str], org.orekit.gnss.ObservationType]]): ...
+    @staticmethod
+    def defaultTypeBuilder(satelliteSystem: org.orekit.gnss.SatelliteSystem, string: str) -> org.orekit.gnss.ObservationType:
+        """
+            Default type builder.
+        
+            This default type builder directly calls :meth:`~org.orekit.gnss.PredefinedObservationType.valueOf`
+        
+            Parameters:
+                ignoredSystem (:class:`~org.orekit.gnss.SatelliteSystem`): satellite system (ignored here)
+                typeName (:class:`~org.orekit.files.sinex.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the observation type
+        
+            Returns:
+                observation type
+        
+        
+        """
+        ...
+
+class SinexParseInfo(ParseInfo[Sinex]):
+    """
+    public class SinexParseInfo extends :class:`~org.orekit.files.sinex.ParseInfo`<:class:`~org.orekit.files.sinex.Sinex`>
+    
+        Parse information for Solution INdependent EXchange (SINEX) files.
+    
+        Since:
+            13.0
+    """
+    ...
+
+class SinexParser(AbstractSinexParser[Sinex, SinexParseInfo]):
+    """
+    public class SinexParser extends :class:`~org.orekit.files.sinex.AbstractSinexParser`<:class:`~org.orekit.files.sinex.Sinex`, :class:`~org.orekit.files.sinex.SinexParseInfo`>
+    
+        Parser for Solution INdependent EXchange (SINEX) files.
+    
+        The parser can be used to load several data types contained in Sinex files. The current supported data are: station
+        coordinates, site eccentricities, EOP.
+    
+        The parsing of EOP parameters for multiple data sources in different SinexParser objects might pose a problem in case
+        validity dates are overlapping. As Sinex daily solution files provide a single EOP entry, the Sinex parser will add
+        points at the limits of data dates (startDate, endDate) of the Sinex file, which in case of overlap will lead to
+        inconsistencies in the final EOPHistory object. Multiple data sources can be parsed using a single SinexParser to
+        overcome this issue.
+    
+        Since:
+            13.0
+    """
+    def __init__(self, timeScales: org.orekit.time.TimeScales): ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.sinex")``.
 
-    Dcb: typing.Type[Dcb]
-    DcbDescription: typing.Type[DcbDescription]
-    DcbSatellite: typing.Type[DcbSatellite]
-    DcbStation: typing.Type[DcbStation]
+    AbstractSinex: typing.Type[AbstractSinex]
+    AbstractSinexParser: typing.Type[AbstractSinexParser]
+    AntennaKey: typing.Type[AntennaKey]
+    BiasDescription: typing.Type[BiasDescription]
+    DifferentialSignalBias: typing.Type[DifferentialSignalBias]
+    LineParser: typing.Type[LineParser]
+    ObservableSpecificSignalBias: typing.Type[ObservableSpecificSignalBias]
+    ParseInfo: typing.Type[ParseInfo]
+    SatelliteDifferentialSignalBias: typing.Type[SatelliteDifferentialSignalBias]
+    SatelliteObservableSpecificSignalBias: typing.Type[SatelliteObservableSpecificSignalBias]
+    Sinex: typing.Type[Sinex]
+    SinexBias: typing.Type[SinexBias]
+    SinexBiasParseInfo: typing.Type[SinexBiasParseInfo]
+    SinexBiasParser: typing.Type[SinexBiasParser]
     SinexEopEntry: typing.Type[SinexEopEntry]
-    SinexLoader: typing.Type[SinexLoader]
+    SinexParseInfo: typing.Type[SinexParseInfo]
+    SinexParser: typing.Type[SinexParser]
     Station: typing.Type[Station]
-    class-use: org.orekit.files.sinex.class-use.__module_protocol__
+    StationDifferentialSignalBias: typing.Type[StationDifferentialSignalBias]
+    StationObservableSpecificSignalBias: typing.Type[StationObservableSpecificSignalBias]

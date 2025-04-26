@@ -1,6 +1,14 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
 import java.util.function
+import jpype
 import org.hipparchus.complex
 import org.orekit.data
 import org.orekit.files.ccsds.definitions
@@ -9,7 +17,6 @@ import org.orekit.files.ccsds.ndm.adm.acm
 import org.orekit.files.ccsds.ndm.adm.aem
 import org.orekit.files.ccsds.ndm.adm.apm
 import org.orekit.files.ccsds.ndm.cdm
-import org.orekit.files.ccsds.ndm.class-use
 import org.orekit.files.ccsds.ndm.odm
 import org.orekit.files.ccsds.ndm.odm.ocm
 import org.orekit.files.ccsds.ndm.odm.oem
@@ -189,6 +196,15 @@ class CommonPhysicalProperties(org.orekit.files.ccsds.section.CommentsContainer)
     
         Container for common physical properties for both :class:`~org.orekit.files.ccsds.ndm.odm.ocm.OrbitPhysicalProperties`
         and :class:`~org.orekit.files.ccsds.ndm.cdm.AdditionalParameters`.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
     
         Since:
             11.3
@@ -645,7 +661,7 @@ class NdmParser(org.orekit.files.ccsds.utils.parsing.AbstractMessageParser[Ndm])
         Since:
             11.0
     """
-    def __init__(self, parserBuilder: 'ParserBuilder', functionArray: typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]): ...
+    def __init__(self, parserBuilder: 'ParserBuilder', functionArray: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
     def addComment(self, string: str) -> bool:
         """
             Add comment.
@@ -751,7 +767,7 @@ class ParsedUnitsBehavior(java.lang.Enum['ParsedUnitsBehavior']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['ParsedUnitsBehavior']:
+    def values() -> typing.MutableSequence['ParsedUnitsBehavior']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -908,7 +924,7 @@ class ParserBuilder(AbstractBuilder['ParserBuilder']):
         
         """
         ...
-    def getFilters(self) -> typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]: ...
+    def getFilters(self) -> typing.MutableSequence[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]: ...
     def getMu(self) -> float:
         """
             Get the gravitational coefficient.
@@ -1269,7 +1285,7 @@ class WriterBuilder(AbstractBuilder['WriterBuilder']):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.ndm")``.
 
     AbstractBuilder: typing.Type[AbstractBuilder]
@@ -1285,6 +1301,5 @@ class __module_protocol__(typing.Protocol):
     WriterBuilder: typing.Type[WriterBuilder]
     adm: org.orekit.files.ccsds.ndm.adm.__module_protocol__
     cdm: org.orekit.files.ccsds.ndm.cdm.__module_protocol__
-    class-use: org.orekit.files.ccsds.ndm.class-use.__module_protocol__
     odm: org.orekit.files.ccsds.ndm.odm.__module_protocol__
     tdm: org.orekit.files.ccsds.ndm.tdm.__module_protocol__

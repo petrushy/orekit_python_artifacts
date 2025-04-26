@@ -1,3 +1,10 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import datetime
 import java.io
 import java.lang
@@ -54,7 +61,7 @@ class ZoneOffsetTransitionRule(java.io.Serializable):
         @staticmethod
         def valueOf(string: str) -> 'ZoneOffsetTransitionRule.TimeDefinition': ...
         @staticmethod
-        def values() -> typing.List['ZoneOffsetTransitionRule.TimeDefinition']: ...
+        def values() -> typing.MutableSequence['ZoneOffsetTransitionRule.TimeDefinition']: ...
 
 class ZoneRules(java.io.Serializable):
     def equals(self, object: typing.Any) -> bool: ...
@@ -101,7 +108,7 @@ class ZoneRulesProvider:
     def registerProvider(zoneRulesProvider: 'ZoneRulesProvider') -> None: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("java.time.zone")``.
 
     ZoneOffsetTransition: typing.Type[ZoneOffsetTransition]

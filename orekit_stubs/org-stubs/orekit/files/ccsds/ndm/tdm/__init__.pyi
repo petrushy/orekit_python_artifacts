@@ -1,10 +1,17 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
 import java.util.function
+import jpype
 import org.orekit.data
 import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
-import org.orekit.files.ccsds.ndm.tdm.class-use
 import org.orekit.files.ccsds.section
 import org.orekit.files.ccsds.utils
 import org.orekit.files.ccsds.utils.generation
@@ -54,7 +61,7 @@ class AngleType(java.lang.Enum['AngleType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['AngleType']:
+    def values() -> typing.MutableSequence['AngleType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -108,7 +115,7 @@ class CorrectionApplied(java.lang.Enum['CorrectionApplied']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['CorrectionApplied']:
+    def values() -> typing.MutableSequence['CorrectionApplied']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -163,7 +170,7 @@ class DataQuality(java.lang.Enum['DataQuality']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['DataQuality']:
+    def values() -> typing.MutableSequence['DataQuality']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -218,7 +225,7 @@ class IntegrationReference(java.lang.Enum['IntegrationReference']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['IntegrationReference']:
+    def values() -> typing.MutableSequence['IntegrationReference']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -417,7 +424,7 @@ class ObservationType(java.lang.Enum['ObservationType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['ObservationType']:
+    def values() -> typing.MutableSequence['ObservationType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -441,18 +448,23 @@ class ObservationsBlock(org.orekit.files.ccsds.section.CommentsContainer, org.or
     
         The Observations Block class contain metadata and the list of observation data lines.
     
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
+    
         The reason for which the observations have been separated into blocks is that the different data blocks in a TDM file
-        usually refers to different types of observations.
+        usually refers to different types of observations. An observation block is associated with a TDM metadata object and
+        contains a list of observations. At this level, an observation is not an Orekit object, it is a custom object
+        containing:
     
-        An observation block is associated with a TDM metadata object and contains a list of observations.
-    
-        At this level, an observation is not an Orekit object, it is a custom object containing:
-    
-        - a keyword, the type of the observation;
-    
-        - a timetag, the date of the observation;
-    
-        - a measurement, the value of the observation.
+          - a keyword, the type of the observation;
+          - a timetag, the date of the observation;
+          - a measurement, the value of the observation.
     """
     def __init__(self): ...
     @typing.overload
@@ -515,7 +527,7 @@ class RangeMode(java.lang.Enum['RangeMode']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['RangeMode']:
+    def values() -> typing.MutableSequence['RangeMode']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -570,7 +582,7 @@ class RangeUnits(java.lang.Enum['RangeUnits']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['RangeUnits']:
+    def values() -> typing.MutableSequence['RangeUnits']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -731,7 +743,7 @@ class TdmDataKey(java.lang.Enum['TdmDataKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['TdmDataKey']:
+    def values() -> typing.MutableSequence['TdmDataKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1036,7 +1048,7 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
         """
         ...
     def getParticipants(self) -> java.util.Map[int, str]: ...
-    def getPath(self) -> typing.List[int]:
+    def getPath(self) -> typing.MutableSequence[int]:
         """
             Getter for the path.
         
@@ -1046,7 +1058,7 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
         
         """
         ...
-    def getPath1(self) -> typing.List[int]:
+    def getPath1(self) -> typing.MutableSequence[int]:
         """
             Getter for the path1.
         
@@ -1056,7 +1068,7 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
         
         """
         ...
-    def getPath2(self) -> typing.List[int]:
+    def getPath2(self) -> typing.MutableSequence[int]:
         """
             Getter for the path2.
         
@@ -1435,7 +1447,7 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
         """
         ...
     def setParticipants(self, map: typing.Union[java.util.Map[int, str], typing.Mapping[int, str]]) -> None: ...
-    def setPath(self, intArray: typing.List[int]) -> None:
+    def setPath(self, intArray: typing.Union[typing.List[int], jpype.JArray]) -> None:
         """
             Setter for the path.
         
@@ -1445,7 +1457,7 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
         
         """
         ...
-    def setPath1(self, intArray: typing.List[int]) -> None:
+    def setPath1(self, intArray: typing.Union[typing.List[int], jpype.JArray]) -> None:
         """
             Setter for the path1.
         
@@ -1455,7 +1467,7 @@ class TdmMetadata(org.orekit.files.ccsds.section.Metadata):
         
         """
         ...
-    def setPath2(self, intArray: typing.List[int]) -> None:
+    def setPath2(self, intArray: typing.Union[typing.List[int], jpype.JArray]) -> None:
         """
             Setter for the path2.
         
@@ -1723,7 +1735,7 @@ class TdmMetadataKey(java.lang.Enum['TdmMetadataKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['TdmMetadataKey']:
+    def values() -> typing.MutableSequence['TdmMetadataKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1763,7 +1775,7 @@ class TdmParser(org.orekit.files.ccsds.utils.parsing.AbstractConstituentParser[T
         Since:
             9.0
     """
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, rangeUnitsConverter: RangeUnitsConverter, functionArray: typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]): ...
+    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, rangeUnitsConverter: RangeUnitsConverter, functionArray: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
     def build(self) -> Tdm:
         """
             Build the file from parsed entries.
@@ -1994,7 +2006,7 @@ class TimetagReference(java.lang.Enum['TimetagReference']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['TimetagReference']:
+    def values() -> typing.MutableSequence['TimetagReference']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -2048,7 +2060,7 @@ class TrackingMode(java.lang.Enum['TrackingMode']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['TrackingMode']:
+    def values() -> typing.MutableSequence['TrackingMode']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -2180,7 +2192,7 @@ class PythonRangeUnitsConverter(RangeUnitsConverter):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.ndm.tdm")``.
 
     AngleType: typing.Type[AngleType]
@@ -2204,4 +2216,3 @@ class __module_protocol__(typing.Protocol):
     TdmWriter: typing.Type[TdmWriter]
     TimetagReference: typing.Type[TimetagReference]
     TrackingMode: typing.Type[TrackingMode]
-    class-use: org.orekit.files.ccsds.ndm.tdm.class-use.__module_protocol__

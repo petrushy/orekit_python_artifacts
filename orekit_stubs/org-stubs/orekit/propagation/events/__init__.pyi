@@ -1,3 +1,10 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
 import java.util.function
@@ -13,7 +20,6 @@ import org.orekit.models
 import org.orekit.models.earth
 import org.orekit.orbits
 import org.orekit.propagation
-import org.orekit.propagation.events.class-use
 import org.orekit.propagation.events.handlers
 import org.orekit.propagation.events.intervals
 import org.orekit.propagation.sampling
@@ -22,49 +28,6 @@ import org.orekit.utils
 import typing
 
 
-
-class AdaptableInterval:
-    """
-    :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.FunctionalInterface?is` public interface AdaptableInterval
-    
-        This interface represents an event checking interval that depends on state.
-    
-        Since:
-            12.0
-    
-        Also see:
-            :class:`~org.orekit.propagation.events.EventDetector`
-    """
-    def currentInterval(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
-        """
-            Get the current value of maximal time interval between events handler checks.
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): current state
-        
-            Returns:
-                current value of maximal time interval between events handler checks
-        
-        
-        """
-        ...
-    @staticmethod
-    def of(double: float) -> 'AdaptableInterval':
-        """
-            Method creating a constant interval provider.
-        
-            Parameters:
-                constantInterval (double): value of constant interval
-        
-            Returns:
-                adaptable interval ready to be added to an event detector
-        
-            Since:
-                12.1
-        
-        
-        """
-        ...
 
 class EnablingPredicate:
     """
@@ -103,9 +66,9 @@ class EventDetectionSettings:
         Also see:
             :class:`~org.orekit.propagation.events.EventDetector`
     """
-    DEFAULT_MAXCHECK: typing.ClassVar[float] = ...
+    DEFAULT_MAX_CHECK: typing.ClassVar[float] = ...
     """
-    public static final double DEFAULT_MAXCHECK
+    public static final double DEFAULT_MAX_CHECK
     
         Default maximum checking interval (s).
     
@@ -139,7 +102,7 @@ class EventDetectionSettings:
     @typing.overload
     def __init__(self, double: float, double2: float, int: int): ...
     @typing.overload
-    def __init__(self, adaptableInterval: typing.Union[AdaptableInterval, typing.Callable], double: float, int: int): ...
+    def __init__(self, adaptableInterval: typing.Union[org.orekit.propagation.events.intervals.AdaptableInterval, typing.Callable], double: float, int: int): ...
     @staticmethod
     def getDefaultEventDetectionSettings() -> 'EventDetectionSettings':
         """
@@ -151,7 +114,7 @@ class EventDetectionSettings:
         
         """
         ...
-    def getMaxCheckInterval(self) -> AdaptableInterval:
+    def getMaxCheckInterval(self) -> org.orekit.propagation.events.intervals.AdaptableInterval:
         """
             Getter for adaptable interval.
         
@@ -177,6 +140,54 @@ class EventDetectionSettings:
         
             Returns:
                 threshold
+        
+        
+        """
+        ...
+    def withMaxCheckInterval(self, adaptableInterval: typing.Union[org.orekit.propagation.events.intervals.AdaptableInterval, typing.Callable]) -> 'EventDetectionSettings':
+        """
+            Builds a new instance with a new max. check interval.
+        
+            Parameters:
+                newMaxCheckInterval (:class:`~org.orekit.propagation.events.intervals.AdaptableInterval`): new max. check.
+        
+            Returns:
+                new object
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
+    def withMaxIter(self, int: int) -> 'EventDetectionSettings':
+        """
+            Builds a new instance with a new max. iteration count.
+        
+            Parameters:
+                newMaxIterationCount (int): new max iteration count.
+        
+            Returns:
+                new object
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
+    def withThreshold(self, double: float) -> 'EventDetectionSettings':
+        """
+            Builds a new instance with a new threshold value.
+        
+            Parameters:
+                newThreshold (double): detection threshold in seconds
+        
+            Returns:
+                new object
+        
+            Since:
+                13.0
         
         
         """
@@ -268,7 +279,7 @@ class EventDetector:
         
         """
         ...
-    def getMaxCheckInterval(self) -> AdaptableInterval:
+    def getMaxCheckInterval(self) -> org.orekit.propagation.events.intervals.AdaptableInterval:
         """
             Get maximal time interval between switching function checks.
         
@@ -300,16 +311,32 @@ class EventDetector:
         ...
     def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
-            Initialize event handler at the start of a propagation.
+            Initialize event detector at the start of a propagation.
         
             This method is called once at the start of the propagation. It may be used by the event handler to initialize some
             internal data if needed.
         
-            The default implementation does nothing
+            The default implementation initializes the handler.
         
             Parameters:
                 s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
                 t (:class:`~org.orekit.time.AbsoluteDate`): target time for the integration
+        
+        
+        """
+        ...
+    def reset(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+        """
+            Reset the event detector during propagation when the state is modified by an event or an additional data provider.
+        
+            The default implementation does nothing.
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): current state
+                target (:class:`~org.orekit.time.AbsoluteDate`): target time for the integration
+        
+            Since:
+                13.0
         
         
         """
@@ -338,10 +365,44 @@ class EventDetectorsProvider:
     
     
     """
+    def getDateDetector(self, *timeStamped: typing.Union[org.orekit.time.TimeStamped, typing.Callable]) -> 'DateDetector':
+        """
+            Method building dates' detector.
+        
+            Parameters:
+                timeStampeds (:class:`~org.orekit.time.TimeStamped`...): dates to detect
+        
+            Returns:
+                dates detector
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
     @typing.overload
     def getEventDetectors(self) -> java.util.stream.Stream[EventDetector]: ...
     @typing.overload
     def getEventDetectors(self, list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[EventDetector]: ...
+    _getFieldDateDetector__T = typing.TypeVar('_getFieldDateDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    def getFieldDateDetector(self, field: org.hipparchus.Field[_getFieldDateDetector__T], *timeStamped: typing.Union[org.orekit.time.TimeStamped, typing.Callable]) -> 'FieldDateDetector'[_getFieldDateDetector__T]:
+        """
+            Method building dates' detector.
+        
+            Parameters:
+                field (:class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field
+                timeStampeds (:class:`~org.orekit.time.TimeStamped`...): dates to detect
+        
+            Returns:
+                dates detector
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
     _getFieldEventDetectors_0__T = typing.TypeVar('_getFieldEventDetectors_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _getFieldEventDetectors_1__T = typing.TypeVar('_getFieldEventDetectors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
@@ -529,39 +590,6 @@ class EventsLogger:
         def getState(self) -> org.orekit.propagation.SpacecraftState: ...
         def isIncreasing(self) -> bool: ...
 
-_FieldAdaptableInterval__T = typing.TypeVar('_FieldAdaptableInterval__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class FieldAdaptableInterval(typing.Generic[_FieldAdaptableInterval__T]):
-    """
-    :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.FunctionalInterface?is` public interface FieldAdaptableInterval<T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>>
-    
-        This interface represents an event checking interval that depends on state.
-    
-        Since:
-            12.0
-    
-        Also see:
-            :class:`~org.orekit.propagation.events.FieldEventDetector`
-    """
-    def currentInterval(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldAdaptableInterval__T]) -> float: ...
-    _of__T = typing.TypeVar('_of__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @staticmethod
-    def of(double: float) -> 'FieldAdaptableInterval'[_of__T]:
-        """
-            Method creating a constant interval provider.
-        
-            Parameters:
-                constantInterval (double): value of constant interval
-        
-            Returns:
-                adaptable interval ready to be added to an event detector
-        
-            Since:
-                12.1
-        
-        
-        """
-        ...
-
 _FieldEnablingPredicate__T = typing.TypeVar('_FieldEnablingPredicate__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldEnablingPredicate(typing.Generic[_FieldEnablingPredicate__T]):
     """
@@ -588,9 +616,9 @@ class FieldEventDetectionSettings(typing.Generic[_FieldEventDetectionSettings__T
             :class:`~org.orekit.propagation.events.EventDetectionSettings`,
             :class:`~org.orekit.propagation.events.FieldEventDetector`
     """
-    DEFAULT_MAXCHECK: typing.ClassVar[float] = ...
+    DEFAULT_MAX_CHECK: typing.ClassVar[float] = ...
     """
-    public static final double DEFAULT_MAXCHECK
+    public static final double DEFAULT_MAX_CHECK
     
         Default maximum checking interval (s).
     
@@ -626,8 +654,26 @@ class FieldEventDetectionSettings(typing.Generic[_FieldEventDetectionSettings__T
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_FieldEventDetectionSettings__T], eventDetectionSettings: EventDetectionSettings): ...
     @typing.overload
-    def __init__(self, fieldAdaptableInterval: typing.Union[FieldAdaptableInterval[_FieldEventDetectionSettings__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement]], float]], t: _FieldEventDetectionSettings__T, int: int): ...
-    def getMaxCheckInterval(self) -> FieldAdaptableInterval[_FieldEventDetectionSettings__T]: ...
+    def __init__(self, fieldAdaptableInterval: typing.Union[org.orekit.propagation.events.intervals.FieldAdaptableInterval[_FieldEventDetectionSettings__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], bool], float]], t: _FieldEventDetectionSettings__T, int: int): ...
+    _getDefaultEventDetectionSettings__T = typing.TypeVar('_getDefaultEventDetectionSettings__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @staticmethod
+    def getDefaultEventDetectionSettings(field: org.hipparchus.Field[_getDefaultEventDetectionSettings__T]) -> 'FieldEventDetectionSettings'[_getDefaultEventDetectionSettings__T]:
+        """
+            Returns default settings for event detections.
+        
+            Parameters:
+                field (:class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field
+        
+            Returns:
+                default settings
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
+    def getMaxCheckInterval(self) -> org.orekit.propagation.events.intervals.FieldAdaptableInterval[_FieldEventDetectionSettings__T]: ...
     def getMaxIterationCount(self) -> int:
         """
             Getter for max iter.
@@ -658,6 +704,9 @@ class FieldEventDetectionSettings(typing.Generic[_FieldEventDetectionSettings__T
         
         """
         ...
+    def withMaxCheckInterval(self, fieldAdaptableInterval: typing.Union[org.orekit.propagation.events.intervals.FieldAdaptableInterval[_FieldEventDetectionSettings__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], bool], float]]) -> 'FieldEventDetectionSettings'[_FieldEventDetectionSettings__T]: ...
+    def withMaxIter(self, int: int) -> 'FieldEventDetectionSettings'[_FieldEventDetectionSettings__T]: ...
+    def withThreshold(self, t: _FieldEventDetectionSettings__T) -> 'FieldEventDetectionSettings'[_FieldEventDetectionSettings__T]: ...
 
 _FieldEventDetector__T = typing.TypeVar('_FieldEventDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldEventDetector(typing.Generic[_FieldEventDetector__T]):
@@ -697,7 +746,7 @@ class FieldEventDetector(typing.Generic[_FieldEventDetector__T]):
     def g(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldEventDetector__T]) -> _FieldEventDetector__T: ...
     def getDetectionSettings(self) -> FieldEventDetectionSettings[_FieldEventDetector__T]: ...
     def getHandler(self) -> org.orekit.propagation.events.handlers.FieldEventHandler[_FieldEventDetector__T]: ...
-    def getMaxCheckInterval(self) -> FieldAdaptableInterval[_FieldEventDetector__T]: ...
+    def getMaxCheckInterval(self) -> org.orekit.propagation.events.intervals.FieldAdaptableInterval[_FieldEventDetector__T]: ...
     def getMaxIterationCount(self) -> int:
         """
             Get maximal number of iterations in the event time search.
@@ -719,6 +768,7 @@ class FieldEventDetector(typing.Generic[_FieldEventDetector__T]):
         """
         ...
     def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldEventDetector__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldEventDetector__T]) -> None: ...
+    def reset(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldEventDetector__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldEventDetector__T]) -> None: ...
 
 _FieldEventState__EventOccurrence__T = typing.TypeVar('_FieldEventState__EventOccurrence__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 _FieldEventState__D = typing.TypeVar('_FieldEventState__D', bound=FieldEventDetector)  # <D>
@@ -800,12 +850,11 @@ class FieldEventsLogger(typing.Generic[_FieldEventsLogger__T]):
         """
         ...
     def getLoggedEvents(self) -> java.util.List['FieldEventsLogger.FieldLoggedEvent'[_FieldEventsLogger__T]]: ...
-    def monitorDetector(self, fieldEventDetector: FieldEventDetector[_FieldEventsLogger__T]) -> 'FieldAbstractDetector'['FieldEventsLogger.FieldLoggingWrapper', _FieldEventsLogger__T]: ...
+    def monitorDetector(self, fieldEventDetector: FieldEventDetector[_FieldEventsLogger__T]) -> FieldEventDetector[_FieldEventsLogger__T]: ...
     class FieldLoggedEvent(typing.Generic[_FieldEventsLogger__FieldLoggedEvent__T]):
         def getEventDetector(self) -> FieldEventDetector[_FieldEventsLogger__FieldLoggedEvent__T]: ...
         def getState(self) -> org.orekit.propagation.FieldSpacecraftState[_FieldEventsLogger__FieldLoggedEvent__T]: ...
         def isIncreasing(self) -> bool: ...
-    class FieldLoggingWrapper: ...
 
 class FilterType(java.lang.Enum['FilterType']):
     """
@@ -846,7 +895,7 @@ class FilterType(java.lang.Enum['FilterType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['FilterType']:
+    def values() -> typing.MutableSequence['FilterType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -919,7 +968,7 @@ class VisibilityTrigger(java.lang.Enum['VisibilityTrigger']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['VisibilityTrigger']:
+    def values() -> typing.MutableSequence['VisibilityTrigger']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -947,9 +996,9 @@ class AbstractDetector(EventDetector, typing.Generic[_AbstractDetector__T]):
         Also see:
             :meth:`~org.orekit.propagation.Propagator.addEventDetector`
     """
-    DEFAULT_MAXCHECK: typing.ClassVar[float] = ...
+    DEFAULT_MAX_CHECK: typing.ClassVar[float] = ...
     """
-    public static final double DEFAULT_MAXCHECK
+    public static final double DEFAULT_MAX_CHECK
     
         Default maximum checking interval (s).
     
@@ -980,6 +1029,24 @@ class AbstractDetector(EventDetector, typing.Generic[_AbstractDetector__T]):
     
     
     """
+    @staticmethod
+    def checkIfForward(spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> bool:
+        """
+            Check if propagation is forward or not.
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): initial state
+                targetDate (:class:`~org.orekit.time.AbsoluteDate`): target propagation date
+        
+            Returns:
+                forward flag
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
     def getDetectionSettings(self) -> EventDetectionSettings:
         """
             Getter for the settings.
@@ -1008,56 +1075,14 @@ class AbstractDetector(EventDetector, typing.Generic[_AbstractDetector__T]):
         
         """
         ...
-    def getMaxCheckInterval(self) -> AdaptableInterval:
-        """
-            Get maximal time interval between switching function checks.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.getMaxCheckInterval` in
-                interface :class:`~org.orekit.propagation.events.EventDetector`
-        
-            Returns:
-                maximal time interval (s) between switching function checks
-        
-        
-        """
-        ...
-    def getMaxIterationCount(self) -> int:
-        """
-            Get maximal number of iterations in the event time search.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.getMaxIterationCount` in
-                interface :class:`~org.orekit.propagation.events.EventDetector`
-        
-            Returns:
-                maximal number of iterations in the event time search
-        
-        
-        """
-        ...
-    def getThreshold(self) -> float:
-        """
-            Get the convergence threshold in the event time search.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.getThreshold` in
-                interface :class:`~org.orekit.propagation.events.EventDetector`
-        
-            Returns:
-                convergence threshold (s)
-        
-        
-        """
-        ...
     def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
-            Initialize event handler at the start of a propagation.
+            Initialize event detector at the start of a propagation.
         
             This method is called once at the start of the propagation. It may be used by the event handler to initialize some
             internal data if needed.
         
-            The default implementation does nothing
+            The default implementation initializes the handler.
         
             This implementation sets the direction of propagation and initializes the event handler. If a subclass overrides this
             method it should call :code:`super.init(s0, t)`.
@@ -1104,7 +1129,7 @@ class AbstractDetector(EventDetector, typing.Generic[_AbstractDetector__T]):
         
         """
         ...
-    def withHandler(self, eventHandler: org.orekit.propagation.events.handlers.EventHandler) -> _AbstractDetector__T:
+    def withHandler(self, eventHandler: typing.Union[org.orekit.propagation.events.handlers.EventHandler, typing.Callable]) -> _AbstractDetector__T:
         """
             Set up the event handler to call at event occurrences.
         
@@ -1143,7 +1168,7 @@ class AbstractDetector(EventDetector, typing.Generic[_AbstractDetector__T]):
             This will override a maximum checking interval if it has been configured previously.
         
             Parameters:
-                newMaxCheck (:class:`~org.orekit.propagation.events.AdaptableInterval`): maximum checking interval (s)
+                newMaxCheck (:class:`~org.orekit.propagation.events.intervals.AdaptableInterval`): maximum checking interval (s)
         
             Returns:
                 a new detector with updated configuration (the instance is not changed)
@@ -1155,7 +1180,7 @@ class AbstractDetector(EventDetector, typing.Generic[_AbstractDetector__T]):
         """
         ...
     @typing.overload
-    def withMaxCheck(self, adaptableInterval: typing.Union[AdaptableInterval, typing.Callable]) -> _AbstractDetector__T: ...
+    def withMaxCheck(self, adaptableInterval: typing.Union[org.orekit.propagation.events.intervals.AdaptableInterval, typing.Callable]) -> _AbstractDetector__T: ...
     def withMaxIter(self, int: int) -> _AbstractDetector__T:
         """
             Set up the maximum number of iterations in the event time search.
@@ -1193,20 +1218,19 @@ class AbstractDetector(EventDetector, typing.Generic[_AbstractDetector__T]):
         """
         ...
 
-class AdapterDetector(EventDetector):
+class DetectorModifier(EventDetector):
     """
-    public class AdapterDetector extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.EventDetector`
+    public interface DetectorModifier extends :class:`~org.orekit.propagation.events.EventDetector`
     
-        Base class for adapting an existing detector.
+        Base class for modifying an existing detector.
     
         This class is intended to be a base class for changing behaviour of a wrapped existing detector. This base class
         delegates all its methods to the wrapped detector. Classes extending it can therefore override only the methods they
         want to change.
     
         Since:
-            9.3
+            13.0
     """
-    def __init__(self, eventDetector: EventDetector): ...
     def finish(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
         """
             This method finalizes the event detector's job.
@@ -1277,56 +1301,14 @@ class AdapterDetector(EventDetector):
         
         """
         ...
-    def getMaxCheckInterval(self) -> AdaptableInterval:
-        """
-            Get maximal time interval between switching function checks.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.getMaxCheckInterval` in
-                interface :class:`~org.orekit.propagation.events.EventDetector`
-        
-            Returns:
-                maximal time interval (s) between switching function checks
-        
-        
-        """
-        ...
-    def getMaxIterationCount(self) -> int:
-        """
-            Get maximal number of iterations in the event time search.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.getMaxIterationCount` in
-                interface :class:`~org.orekit.propagation.events.EventDetector`
-        
-            Returns:
-                maximal number of iterations in the event time search
-        
-        
-        """
-        ...
-    def getThreshold(self) -> float:
-        """
-            Get the convergence threshold in the event time search.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.getThreshold` in
-                interface :class:`~org.orekit.propagation.events.EventDetector`
-        
-            Returns:
-                convergence threshold (s)
-        
-        
-        """
-        ...
     def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
-            Initialize event handler at the start of a propagation.
+            Initialize event detector at the start of a propagation.
         
             This method is called once at the start of the propagation. It may be used by the event handler to initialize some
             internal data if needed.
         
-            The default implementation does nothing
+            The default implementation initializes the handler.
         
             Specified by:
                 :meth:`~org.orekit.propagation.events.EventDetector.init` in
@@ -1339,6 +1321,208 @@ class AdapterDetector(EventDetector):
         
         """
         ...
+    def reset(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+        """
+            Description copied from interface: :meth:`~org.orekit.propagation.events.EventDetector.reset`
+            Reset the event detector during propagation when the state is modified by an event or an additional data provider.
+        
+            The default implementation does nothing.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.EventDetector.reset` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): current state
+                target (:class:`~org.orekit.time.AbsoluteDate`): target time for the integration
+        
+        
+        """
+        ...
+
+_EventSlopeFilter__T = typing.TypeVar('_EventSlopeFilter__T', bound=EventDetector)  # <T>
+class EventSlopeFilter(EventDetector, typing.Generic[_EventSlopeFilter__T]):
+    """
+    public class EventSlopeFilter<T extends :class:`~org.orekit.propagation.events.EventDetector`> extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.EventDetector`
+    
+        Wrapper used to detect only increasing or decreasing events.
+    
+        This class is heavily based on the class EventFilter from the Hipparchus library. The changes performed consist in
+        replacing raw types (double and double arrays) with space dynamics types (:class:`~org.orekit.time.AbsoluteDate`,
+        :class:`~org.orekit.propagation.SpacecraftState`).
+    
+        General :class:`~org.orekit.propagation.events.EventDetector` are defined implicitly by a
+        :meth:`~org.orekit.propagation.events.EventDetector.g` crossing zero. This function needs to be continuous in the event
+        neighborhood, and its sign must remain consistent between events. This implies that during an orbit propagation, events
+        triggered are alternately events for which the function increases from negative to positive values, and events for which
+        the function decreases from positive to negative values.
+    
+        Sometimes, users are only interested in one type of event (say increasing events for example) and not in the other type.
+        In these cases, looking precisely for all events location and triggering events that will later be ignored is a waste of
+        computing time.
+    
+        Users can wrap a regular :class:`~org.orekit.propagation.events.EventDetector` in an instance of this class and provide
+        this wrapping instance to a :class:`~org.orekit.propagation.Propagator` in order to avoid wasting time looking for
+        uninteresting events. The wrapper will intercept the calls to the :meth:`~org.orekit.propagation.events.EventDetector.g`
+        and to the :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred` method in order to ignore
+        uninteresting events. The wrapped regular :class:`~org.orekit.propagation.events.EventDetector` will then see only the
+        interesting events, i.e. either only :code:`increasing` events or only :code:`decreasing` events. The number of calls to
+        the :meth:`~org.orekit.propagation.events.EventDetector.g` will also be reduced.
+    
+        Also see:
+            :class:`~org.orekit.propagation.events.EventEnablingPredicateFilter`
+    """
+    @typing.overload
+    def __init__(self, eventDetectionSettings: EventDetectionSettings, t: _EventSlopeFilter__T, filterType: FilterType): ...
+    @typing.overload
+    def __init__(self, t: _EventSlopeFilter__T, filterType: FilterType): ...
+    def finish(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
+        """
+            This method finalizes the event detector's job.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.EventDetector.finish` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): state at propagation end
+        
+        
+        """
+        ...
+    def g(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
+        """
+            Compute the value of the switching function. This function must be continuous (at least in its roots neighborhood), as
+            the integrator will need to find its roots to locate the events.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
+        
+            Parameters:
+                s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
+        
+            Returns:
+                value of the switching function
+        
+        
+        """
+        ...
+    def getDetectionSettings(self) -> EventDetectionSettings:
+        """
+            Description copied from interface: :meth:`~org.orekit.propagation.events.EventDetector.getDetectionSettings`
+            Getter for the settings.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.EventDetector.getDetectionSettings` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
+        
+            Returns:
+                detection settings
+        
+        
+        """
+        ...
+    def getDetector(self) -> _EventSlopeFilter__T:
+        """
+            Get the wrapped raw detector.
+        
+            Returns:
+                the wrapped raw detector
+        
+            Since:
+                11.1
+        
+        
+        """
+        ...
+    def getFilter(self) -> FilterType:
+        """
+            Deprecated.
+            since 13.0 (use getFilterType)
+            Get filter type.
+        
+            Returns:
+                filter type
+        
+        
+        """
+        ...
+    def getFilterType(self) -> FilterType:
+        """
+            Get filter type.
+        
+            Returns:
+                filter type
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
+    def getHandler(self) -> org.orekit.propagation.events.handlers.EventHandler:
+        """
+            Get the handler.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.EventDetector.getHandler` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
+        
+            Returns:
+                event handler to call at event occurrences
+        
+        
+        """
+        ...
+    def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+        """
+            Initialize event detector at the start of a propagation.
+        
+            This method is called once at the start of the propagation. It may be used by the event handler to initialize some
+            internal data if needed.
+        
+            The default implementation initializes the handler.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.EventDetector.init` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
+        
+            Parameters:
+                s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
+                t (:class:`~org.orekit.time.AbsoluteDate`): target time for the integration
+        
+        
+        """
+        ...
+    def isForward(self) -> bool:
+        """
+            Check if the current propagation is forward or backward.
+        
+            Returns:
+                true if the current propagation is forward
+        
+        
+        """
+        ...
+    def reset(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+        """
+            Reset the event detector during propagation when the state is modified by an event or an additional data provider.
+        
+            The default implementation does nothing.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.EventDetector.reset` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): current state
+                target (:class:`~org.orekit.time.AbsoluteDate`): target time for the integration
+        
+        
+        """
+        ...
+    def withDetectionSettings(self, eventDetectionSettings: EventDetectionSettings) -> 'EventSlopeFilter'[_EventSlopeFilter__T]: ...
 
 _FieldAbstractDetector__D = typing.TypeVar('_FieldAbstractDetector__D', bound='FieldAbstractDetector')  # <D>
 _FieldAbstractDetector__T = typing.TypeVar('_FieldAbstractDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -1351,9 +1535,9 @@ class FieldAbstractDetector(FieldEventDetector[_FieldAbstractDetector__T], typin
         Also see:
             :meth:`~org.orekit.propagation.Propagator.addEventDetector`
     """
-    DEFAULT_MAXCHECK: typing.ClassVar[float] = ...
+    DEFAULT_MAX_CHECK: typing.ClassVar[float] = ...
     """
-    public static final double DEFAULT_MAXCHECK
+    public static final double DEFAULT_MAX_CHECK
     
         Default maximum checking interval (s).
     
@@ -1384,37 +1568,27 @@ class FieldAbstractDetector(FieldEventDetector[_FieldAbstractDetector__T], typin
     
     
     """
+    _checkIfForward__W = typing.TypeVar('_checkIfForward__W', bound=org.hipparchus.CalculusFieldElement)  # <W>
+    @staticmethod
+    def checkIfForward(fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_checkIfForward__W], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_checkIfForward__W]) -> bool:
+        """
+            Check if propagation is forward or not.
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<W> state): initial state
+                targetDate (:class:`~org.orekit.time.FieldAbsoluteDate`<W> targetDate): target propagation date
+        
+            Returns:
+                forward flag
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
     def getDetectionSettings(self) -> FieldEventDetectionSettings[_FieldAbstractDetector__T]: ...
     def getHandler(self) -> org.orekit.propagation.events.handlers.FieldEventHandler[_FieldAbstractDetector__T]: ...
-    def getMaxCheckInterval(self) -> FieldAdaptableInterval[_FieldAbstractDetector__T]: ...
-    def getMaxIterationCount(self) -> int:
-        """
-            Get maximal number of iterations in the event time search.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.events.FieldEventDetector.getMaxIterationCount` in
-                interface :class:`~org.orekit.propagation.events.FieldEventDetector`
-        
-            Returns:
-                maximal number of iterations in the event time search
-        
-        
-        """
-        ...
-    def getThreshold(self) -> _FieldAbstractDetector__T:
-        """
-            Get the convergence threshold in the event time search.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.events.FieldEventDetector.getThreshold` in
-                interface :class:`~org.orekit.propagation.events.FieldEventDetector`
-        
-            Returns:
-                convergence threshold (s)
-        
-        
-        """
-        ...
     def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldAbstractDetector__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldAbstractDetector__T]) -> None: ...
     def isForward(self) -> bool:
         """
@@ -1430,7 +1604,7 @@ class FieldAbstractDetector(FieldEventDetector[_FieldAbstractDetector__T], typin
         """
         ...
     def withDetectionSettings(self, fieldEventDetectionSettings: FieldEventDetectionSettings[_FieldAbstractDetector__T]) -> _FieldAbstractDetector__D: ...
-    def withHandler(self, fieldEventHandler: org.orekit.propagation.events.handlers.FieldEventHandler[_FieldAbstractDetector__T]) -> _FieldAbstractDetector__D: ...
+    def withHandler(self, fieldEventHandler: typing.Union[org.orekit.propagation.events.handlers.FieldEventHandler[_FieldAbstractDetector__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], FieldEventDetector[org.hipparchus.CalculusFieldElement], bool], org.hipparchus.ode.events.Action]]) -> _FieldAbstractDetector__D: ...
     @typing.overload
     def withMaxCheck(self, double: float) -> _FieldAbstractDetector__D:
         """
@@ -1447,14 +1621,14 @@ class FieldAbstractDetector(FieldEventDetector[_FieldAbstractDetector__T], typin
             Since:
                 12.0
         
-        public :class:`~org.orekit.propagation.events.FieldAbstractDetector` withMaxCheck (:class:`~org.orekit.propagation.events.FieldAdaptableInterval`<:class:`~org.orekit.propagation.events.FieldAbstractDetector`> newMaxCheck)
+        public :class:`~org.orekit.propagation.events.FieldAbstractDetector` withMaxCheck (:class:`~org.orekit.propagation.events.intervals.FieldAdaptableInterval`<:class:`~org.orekit.propagation.events.FieldAbstractDetector`> newMaxCheck)
         
             Set up the maximum checking interval.
         
             This will override a maximum checking interval if it has been configured previously.
         
             Parameters:
-                newMaxCheck (:class:`~org.orekit.propagation.events.FieldAdaptableInterval`<:class:`~org.orekit.propagation.events.FieldAbstractDetector`> newMaxCheck): maximum checking interval (s)
+                newMaxCheck (:class:`~org.orekit.propagation.events.intervals.FieldAdaptableInterval`<:class:`~org.orekit.propagation.events.FieldAbstractDetector`> newMaxCheck): maximum checking interval (s)
         
             Returns:
                 a new detector with updated configuration (the instance is not changed)
@@ -1466,7 +1640,7 @@ class FieldAbstractDetector(FieldEventDetector[_FieldAbstractDetector__T], typin
         """
         ...
     @typing.overload
-    def withMaxCheck(self, fieldAdaptableInterval: typing.Union[FieldAdaptableInterval[_FieldAbstractDetector__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement]], float]]) -> _FieldAbstractDetector__D: ...
+    def withMaxCheck(self, fieldAdaptableInterval: typing.Union[org.orekit.propagation.events.intervals.FieldAdaptableInterval[_FieldAbstractDetector__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], bool], float]]) -> _FieldAbstractDetector__D: ...
     def withMaxIter(self, int: int) -> _FieldAbstractDetector__D:
         """
             Set up the maximum number of iterations in the event time search.
@@ -1504,91 +1678,106 @@ class FieldAbstractDetector(FieldEventDetector[_FieldAbstractDetector__T], typin
         """
         ...
 
-_FieldAdapterDetector__T = typing.TypeVar('_FieldAdapterDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class FieldAdapterDetector(FieldEventDetector[_FieldAdapterDetector__T], typing.Generic[_FieldAdapterDetector__T]):
+_FieldDetectorModifier__T = typing.TypeVar('_FieldDetectorModifier__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldDetectorModifier(FieldEventDetector[_FieldDetectorModifier__T], typing.Generic[_FieldDetectorModifier__T]):
     """
-    public class FieldAdapterDetector<T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.FieldEventDetector`<T>
+    public interface FieldDetectorModifier<T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>
     
-        Base class for adapting an existing detector.
+        Base class for modifying an existing getDetector().
     
-        This class is intended to be a base class for changing behaviour of a wrapped existing detector. This base class
-        delegates all its methods to the wrapped detector. Classes extending it can therefore override only the methods they
-        want to change.
+        This class is intended to be a base class for changing behaviour of a wrapped existing getDetector(). This base class
+        delegates all its methods to the wrapped getDetector(). Classes extending it can therefore override only the methods
+        they want to change.
     
         Since:
-            12.0
+            13.0
     """
-    def __init__(self, fieldEventDetector: FieldEventDetector[_FieldAdapterDetector__T]): ...
-    def finish(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldAdapterDetector__T]) -> None: ...
-    def g(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldAdapterDetector__T]) -> _FieldAdapterDetector__T: ...
-    def getDetectionSettings(self) -> FieldEventDetectionSettings[_FieldAdapterDetector__T]: ...
-    def getDetector(self) -> FieldEventDetector[_FieldAdapterDetector__T]: ...
-    def getHandler(self) -> org.orekit.propagation.events.handlers.FieldEventHandler[_FieldAdapterDetector__T]: ...
-    def getMaxCheckInterval(self) -> FieldAdaptableInterval[_FieldAdapterDetector__T]: ...
-    def getMaxIterationCount(self) -> int:
-        """
-            Get maximal number of iterations in the event time search.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.events.FieldEventDetector.getMaxIterationCount` in
-                interface :class:`~org.orekit.propagation.events.FieldEventDetector`
-        
-            Returns:
-                maximal number of iterations in the event time search
-        
-        
-        """
-        ...
-    def getThreshold(self) -> _FieldAdapterDetector__T:
-        """
-            Get the convergence threshold in the event time search.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.events.FieldEventDetector.getThreshold` in
-                interface :class:`~org.orekit.propagation.events.FieldEventDetector`
-        
-            Returns:
-                convergence threshold (s)
-        
-        
-        """
-        ...
-    def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldAdapterDetector__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldAdapterDetector__T]) -> None: ...
+    def finish(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldDetectorModifier__T]) -> None: ...
+    def g(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldDetectorModifier__T]) -> _FieldDetectorModifier__T: ...
+    def getDetectionSettings(self) -> FieldEventDetectionSettings[_FieldDetectorModifier__T]: ...
+    def getDetector(self) -> FieldEventDetector[_FieldDetectorModifier__T]: ...
+    def getHandler(self) -> org.orekit.propagation.events.handlers.FieldEventHandler[_FieldDetectorModifier__T]: ...
+    def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldDetectorModifier__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldDetectorModifier__T]) -> None: ...
+    def reset(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldDetectorModifier__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldDetectorModifier__T]) -> None: ...
 
-class PythonAdaptableInterval(AdaptableInterval):
+_FieldEventSlopeFilter__D = typing.TypeVar('_FieldEventSlopeFilter__D', bound=FieldEventDetector)  # <D>
+_FieldEventSlopeFilter__T = typing.TypeVar('_FieldEventSlopeFilter__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldEventSlopeFilter(FieldEventDetector[_FieldEventSlopeFilter__T], typing.Generic[_FieldEventSlopeFilter__D, _FieldEventSlopeFilter__T]):
     """
-    public class PythonAdaptableInterval extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.AdaptableInterval`
+    public class FieldEventSlopeFilter<D extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.FieldEventDetector`<T>
+    
+        Wrapper used to detect only increasing or decreasing events.
+    
+        This class is heavily based on the class EventFilter from the Hipparchus library. The changes performed consist in
+        replacing raw types (double and double arrays) with space dynamics types (:class:`~org.orekit.time.FieldAbsoluteDate`,
+        :class:`~org.orekit.propagation.FieldSpacecraftState`).
+    
+        General :class:`~org.orekit.propagation.events.FieldEventDetector` are defined implicitly by a
+        :meth:`~org.orekit.propagation.events.FieldEventDetector.g` crossing zero. This function needs to be continuous in the
+        event neighborhood, and its sign must remain consistent between events. This implies that during an orbit propagation,
+        events triggered are alternately events for which the function increases from negative to positive values, and events
+        for which the function decreases from positive to negative values.
+    
+        Sometimes, users are only interested in one type of event (say increasing events for example) and not in the other type.
+        In these cases, looking precisely for all events location and triggering events that will later be ignored is a waste of
+        computing time.
+    
+        Users can wrap a regular :class:`~org.orekit.propagation.events.FieldEventDetector` in an instance of this class and
+        provide this wrapping instance to a :class:`~org.orekit.propagation.FieldPropagator` in order to avoid wasting time
+        looking for uninteresting events. The wrapper will intercept the calls to the
+        :meth:`~org.orekit.propagation.events.FieldEventDetector.g` and to the
+        :meth:`~org.orekit.propagation.events.handlers.FieldEventHandler.eventOccurred` method in order to ignore uninteresting
+        events. The wrapped regular :class:`~org.orekit.propagation.events.FieldEventDetector` will then see only the
+        interesting events, i.e. either only :code:`increasing` events or only :code:`decreasing` events. The number of calls to
+        the :meth:`~org.orekit.propagation.events.FieldEventDetector.g` will also be reduced.
+    
+        Also see:
+            :class:`~org.orekit.propagation.events.FieldEventEnablingPredicateFilter`
     """
-    def __init__(self): ...
-    def currentInterval(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
+    @typing.overload
+    def __init__(self, fieldEventDetectionSettings: FieldEventDetectionSettings[_FieldEventSlopeFilter__T], d: _FieldEventSlopeFilter__D, filterType: FilterType): ...
+    @typing.overload
+    def __init__(self, d: _FieldEventSlopeFilter__D, filterType: FilterType): ...
+    def finish(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldEventSlopeFilter__T]) -> None: ...
+    def g(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldEventSlopeFilter__T]) -> _FieldEventSlopeFilter__T: ...
+    def getDetectionSettings(self) -> FieldEventDetectionSettings[_FieldEventSlopeFilter__T]: ...
+    def getDetector(self) -> _FieldEventSlopeFilter__D:
         """
-            Get the current value of maximal time interval between events handler checks.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.events.AdaptableInterval.currentInterval` in
-                interface :class:`~org.orekit.propagation.events.AdaptableInterval`
-        
-            Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): current state
+            Get the wrapped raw detector.
         
             Returns:
-                current value of maximal time interval between events handler checks
+                the wrapped raw detector
         
         
         """
         ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None: ...
-    @typing.overload
-    def pythonExtension(self) -> int: ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
+    def getFilterType(self) -> FilterType:
         """
-        public long pythonExtension()
+            Get filter type.
+        
+            Returns:
+                filter type
+        
+            Since:
+                13.0
         
         
         """
         ...
+    def getHandler(self) -> org.orekit.propagation.events.handlers.FieldEventHandler[_FieldEventSlopeFilter__T]: ...
+    def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldEventSlopeFilter__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldEventSlopeFilter__T]) -> None: ...
+    def isForward(self) -> bool:
+        """
+            Check if the current propagation is forward or backward.
+        
+            Returns:
+                true if the current propagation is forward
+        
+        
+        """
+        ...
+    def reset(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldEventSlopeFilter__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldEventSlopeFilter__T]) -> None: ...
+    def withDetectionSettings(self, fieldEventDetectionSettings: FieldEventDetectionSettings[_FieldEventSlopeFilter__T]) -> 'FieldEventSlopeFilter'[_FieldEventSlopeFilter__D, _FieldEventSlopeFilter__T]: ...
 
 class PythonEnablingPredicate(EnablingPredicate):
     """
@@ -1687,7 +1876,7 @@ class PythonEventDetector(EventDetector):
         
         """
         ...
-    def getMaxCheckInterval(self) -> AdaptableInterval:
+    def getMaxCheckInterval(self) -> org.orekit.propagation.events.intervals.AdaptableInterval:
         """
             Get maximal time interval between switching function checks.
         
@@ -1731,12 +1920,12 @@ class PythonEventDetector(EventDetector):
         ...
     def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
-            Initialize event handler at the start of a propagation.
+            Initialize event detector at the start of a propagation.
         
             This method is called once at the start of the propagation. It may be used by the event handler to initialize some
             internal data if needed.
         
-            The default implementation does nothing
+            The default implementation initializes the handler.
         
             Specified by:
                 :meth:`~org.orekit.propagation.events.EventDetector.init` in
@@ -1760,6 +1949,23 @@ class PythonEventDetector(EventDetector):
         
         """
         ...
+    def reset(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+        """
+            Reset the event detector during propagation when the state is modified by an event or an additional data provider.
+        
+            The default implementation does nothing.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.EventDetector.reset` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): current state
+                t (:class:`~org.orekit.time.AbsoluteDate`): target time for the integration
+        
+        
+        """
+        ...
 
 class PythonEventDetectorsProvider(EventDetectorsProvider):
     """
@@ -1777,26 +1983,6 @@ class PythonEventDetectorsProvider(EventDetectorsProvider):
     def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_0__T], list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[FieldEventDetector[_getFieldEventDetectors_0__T]]: ...
     @typing.overload
     def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_1__T]) -> java.util.stream.Stream[FieldEventDetector[_getFieldEventDetectors_1__T]]: ...
-    def pythonDecRef(self) -> None: ...
-    @typing.overload
-    def pythonExtension(self) -> int: ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-        public long pythonExtension()
-        
-        
-        """
-        ...
-
-_PythonFieldAdaptableInterval__T = typing.TypeVar('_PythonFieldAdaptableInterval__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class PythonFieldAdaptableInterval(FieldAdaptableInterval[_PythonFieldAdaptableInterval__T], typing.Generic[_PythonFieldAdaptableInterval__T]):
-    """
-    public class PythonFieldAdaptableInterval<T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.FieldAdaptableInterval`<T>
-    """
-    def __init__(self): ...
-    def currentInterval(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldAdaptableInterval__T]) -> float: ...
-    def finalize(self) -> None: ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
     def pythonExtension(self) -> int: ...
@@ -1838,8 +2024,9 @@ class PythonFieldEventDetector(FieldEventDetector[_PythonFieldEventDetector__T],
     def finalize(self) -> None: ...
     def finish(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldEventDetector__T]) -> None: ...
     def g(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldEventDetector__T]) -> _PythonFieldEventDetector__T: ...
+    def getDetectionSettings(self) -> FieldEventDetectionSettings[_PythonFieldEventDetector__T]: ...
     def getHandler(self) -> org.orekit.propagation.events.handlers.FieldEventHandler[_PythonFieldEventDetector__T]: ...
-    def getMaxCheckInterval(self) -> FieldAdaptableInterval[_PythonFieldEventDetector__T]: ...
+    def getMaxCheckInterval(self) -> org.orekit.propagation.events.intervals.FieldAdaptableInterval[_PythonFieldEventDetector__T]: ...
     def getMaxIterationCount(self) -> int:
         """
             Get maximal number of iterations in the event time search.
@@ -1880,6 +2067,39 @@ class PythonFieldEventDetector(FieldEventDetector[_PythonFieldEventDetector__T],
         
         """
         ...
+    def reset(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldEventDetector__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldEventDetector__T]) -> None: ...
+
+class AdapterDetector(DetectorModifier):
+    """
+    :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class AdapterDetector extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.DetectorModifier`
+    
+        Deprecated.
+        since 13.0. Use :class:`~org.orekit.propagation.events.DetectorModifier` instead.
+        Base class for adapting an existing detector.
+    
+        This class is intended to be a base class for changing behaviour of a wrapped existing detector. This base class
+        delegates all its methods to the wrapped detector. Classes extending it can therefore override only the methods they
+        want to change.
+    
+        Since:
+            9.3
+    """
+    def __init__(self, eventDetector: EventDetector): ...
+    def getDetector(self) -> EventDetector:
+        """
+            Deprecated.
+            Get the wrapped detector.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.DetectorModifier.getDetector` in
+                interface :class:`~org.orekit.propagation.events.DetectorModifier`
+        
+            Returns:
+                wrapped detector
+        
+        
+        """
+        ...
 
 class AlignmentDetector(AbstractDetector['AlignmentDetector']):
     """
@@ -1901,11 +2121,13 @@ class AlignmentDetector(AbstractDetector['AlignmentDetector']):
             :meth:`~org.orekit.propagation.Propagator.addEventDetector`
     """
     @typing.overload
-    def __init__(self, double: float, double2: float, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, double3: float): ...
+    def __init__(self, double: float, double2: float, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], double3: float): ...
     @typing.overload
-    def __init__(self, double: float, orbit: org.orekit.orbits.Orbit, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, double2: float): ...
+    def __init__(self, double: float, orbit: org.orekit.orbits.Orbit, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], double2: float): ...
     @typing.overload
-    def __init__(self, orbit: org.orekit.orbits.Orbit, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, double: float): ...
+    def __init__(self, orbit: org.orekit.orbits.Orbit, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], double: float): ...
+    @typing.overload
+    def __init__(self, eventDetectionSettings: EventDetectionSettings, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], double: float): ...
     def g(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
         """
             Compute the value of the switching function. This function measures the difference between the alignment angle and the
@@ -2022,7 +2244,7 @@ class AngularSeparationDetector(AbstractDetector['AngularSeparationDetector']):
         Also see:
             :meth:`~org.orekit.propagation.Propagator.addEventDetector`
     """
-    def __init__(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, pVCoordinatesProvider2: org.orekit.utils.PVCoordinatesProvider, double: float): ...
+    def __init__(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], pVCoordinatesProvider2: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], double: float): ...
     def g(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
         """
             Compute the value of the switching function.
@@ -2097,7 +2319,7 @@ class AngularSeparationFromSatelliteDetector(AbstractDetector['AngularSeparation
         Also see:
             :meth:`~org.orekit.propagation.Propagator.addEventDetector`
     """
-    def __init__(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, pVCoordinatesProvider2: org.orekit.utils.PVCoordinatesProvider, double: float): ...
+    def __init__(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], pVCoordinatesProvider2: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], double: float): ...
     def g(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
         """
             Compute the value of the switching function.
@@ -2180,7 +2402,7 @@ class ApsideDetector(AbstractDetector['ApsideDetector']):
     @typing.overload
     def __init__(self, orbit: org.orekit.orbits.Orbit): ...
     @typing.overload
-    def __init__(self, adaptableInterval: typing.Union[AdaptableInterval, typing.Callable], double: float, int: int, eventHandler: org.orekit.propagation.events.handlers.EventHandler): ...
+    def __init__(self, eventDetectionSettings: EventDetectionSettings, eventHandler: typing.Union[org.orekit.propagation.events.handlers.EventHandler, typing.Callable]): ...
     def g(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
         """
             Compute the value of the switching function. This function computes the dot product of the 2 vectors :
@@ -2223,10 +2445,10 @@ class BetaAngleDetector(AbstractDetector['BetaAngleDetector']):
     @typing.overload
     def __init__(self, double: float): ...
     @typing.overload
-    def __init__(self, double: float, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, frame: org.orekit.frames.Frame): ...
+    def __init__(self, double: float, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], frame: org.orekit.frames.Frame): ...
     @typing.overload
     @staticmethod
-    def calculateBetaAngle(spacecraftState: org.orekit.propagation.SpacecraftState, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider) -> float:
+    def calculateBetaAngle(spacecraftState: org.orekit.propagation.SpacecraftState, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable]) -> float:
         """
             Calculate the beta angle between the orbit plane and the celestial body.
         
@@ -2254,7 +2476,7 @@ class BetaAngleDetector(AbstractDetector['BetaAngleDetector']):
         ...
     @typing.overload
     @staticmethod
-    def calculateBetaAngle(spacecraftState: org.orekit.propagation.SpacecraftState, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, frame: org.orekit.frames.Frame) -> float: ...
+    def calculateBetaAngle(spacecraftState: org.orekit.propagation.SpacecraftState, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], frame: org.orekit.frames.Frame) -> float: ...
     def g(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
         """
             Compute the value of the switching function. This function must be continuous (at least in its roots neighborhood), as
@@ -2314,7 +2536,7 @@ class BetaAngleDetector(AbstractDetector['BetaAngleDetector']):
         
         """
         ...
-    def withCelestialProvider(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider) -> 'BetaAngleDetector':
+    def withCelestialProvider(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable]) -> 'BetaAngleDetector':
         """
             Create a new instance with the provided coordinate provider.
         
@@ -2376,7 +2598,7 @@ class BooleanDetector(AbstractDetector['BooleanDetector']):
     """
     @typing.overload
     @staticmethod
-    def andCombine(collection: typing.Union[java.util.Collection[EventDetector], typing.Sequence[EventDetector]]) -> 'BooleanDetector':
+    def andCombine(collection: typing.Union[java.util.Collection[EventDetector], typing.Sequence[EventDetector], typing.Set[EventDetector]]) -> 'BooleanDetector':
         """
             Create a new event detector that is the logical AND of the given event detectors.
         
@@ -2433,7 +2655,18 @@ class BooleanDetector(AbstractDetector['BooleanDetector']):
         ...
     @typing.overload
     @staticmethod
-    def andCombine(eventDetectorArray: typing.List[EventDetector]) -> 'BooleanDetector': ...
+    def andCombine(*eventDetector: EventDetector) -> 'BooleanDetector': ...
+    def finish(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
+        """
+            Description copied from interface: :meth:`~org.orekit.propagation.events.EventDetector.finish`
+            This method finalizes the event detector's job.
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): state at propagation end
+        
+        
+        """
+        ...
     def g(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
         """
             Description copied from interface: :meth:`~org.orekit.propagation.events.EventDetector.g`
@@ -2453,12 +2686,12 @@ class BooleanDetector(AbstractDetector['BooleanDetector']):
     def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
             Description copied from class: :meth:`~org.orekit.propagation.events.AbstractDetector.init`
-            Initialize event handler at the start of a propagation.
+            Initialize event detector at the start of a propagation.
         
             This method is called once at the start of the propagation. It may be used by the event handler to initialize some
             internal data if needed.
         
-            The default implementation does nothing
+            The default implementation initializes the handler.
         
             This implementation sets the direction of propagation and initializes the event handler. If a subclass overrides this
             method it should call :code:`super.init(s0, t)`.
@@ -2494,7 +2727,7 @@ class BooleanDetector(AbstractDetector['BooleanDetector']):
                 detector (:class:`~org.orekit.propagation.events.EventDetector`): to negate.
         
             Returns:
-                an new event detector whose g function is the same magnitude but opposite sign of :code:`detector`.
+                a new event detector whose g function is the same magnitude but opposite sign of :code:`detector`.
         
             Also see:
                 :meth:`~org.orekit.propagation.events.BooleanDetector.andCombine`,
@@ -2506,7 +2739,7 @@ class BooleanDetector(AbstractDetector['BooleanDetector']):
         ...
     @typing.overload
     @staticmethod
-    def orCombine(collection: typing.Union[java.util.Collection[EventDetector], typing.Sequence[EventDetector]]) -> 'BooleanDetector':
+    def orCombine(collection: typing.Union[java.util.Collection[EventDetector], typing.Sequence[EventDetector], typing.Set[EventDetector]]) -> 'BooleanDetector':
         """
             Create a new event detector that is the logical OR of the given event detectors.
         
@@ -2563,7 +2796,21 @@ class BooleanDetector(AbstractDetector['BooleanDetector']):
         ...
     @typing.overload
     @staticmethod
-    def orCombine(eventDetectorArray: typing.List[EventDetector]) -> 'BooleanDetector': ...
+    def orCombine(*eventDetector: EventDetector) -> 'BooleanDetector': ...
+    def reset(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+        """
+            Description copied from interface: :meth:`~org.orekit.propagation.events.EventDetector.reset`
+            Reset the event detector during propagation when the state is modified by an event or an additional data provider.
+        
+            The default implementation does nothing.
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): current state
+                target (:class:`~org.orekit.time.AbsoluteDate`): target time for the integration
+        
+        
+        """
+        ...
 
 class CylindricalShadowEclipseDetector(AbstractDetector['CylindricalShadowEclipseDetector']):
     """
@@ -2581,11 +2828,9 @@ class CylindricalShadowEclipseDetector(AbstractDetector['CylindricalShadowEclips
             :class:`~org.orekit.propagation.events.EclipseDetector`
     """
     @typing.overload
-    def __init__(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, double: float, adaptableInterval: typing.Union[AdaptableInterval, typing.Callable], double2: float, int: int, eventHandler: org.orekit.propagation.events.handlers.EventHandler): ...
+    def __init__(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], double: float, eventDetectionSettings: EventDetectionSettings, eventHandler: typing.Union[org.orekit.propagation.events.handlers.EventHandler, typing.Callable]): ...
     @typing.overload
-    def __init__(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, double: float, eventDetectionSettings: EventDetectionSettings, eventHandler: org.orekit.propagation.events.handlers.EventHandler): ...
-    @typing.overload
-    def __init__(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, double: float, eventHandler: org.orekit.propagation.events.handlers.EventHandler): ...
+    def __init__(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], double: float, eventHandler: typing.Union[org.orekit.propagation.events.handlers.EventHandler, typing.Callable]): ...
     def g(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
         """
             Compute the value of the switching function. This function must be continuous (at least in its roots neighborhood), as
@@ -2677,7 +2922,14 @@ class DateDetector(AbstractDetector['DateDetector'], org.orekit.time.TimeStamped
     
     
     """
-    def __init__(self, timeStampedArray: typing.List[org.orekit.time.TimeStamped]): ...
+    @typing.overload
+    def __init__(self, double: float, absoluteDate: org.orekit.time.AbsoluteDate): ...
+    @typing.overload
+    def __init__(self, double: float, *timeStamped: typing.Union[org.orekit.time.TimeStamped, typing.Callable]): ...
+    @typing.overload
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate): ...
+    @typing.overload
+    def __init__(self, *timeStamped: typing.Union[org.orekit.time.TimeStamped, typing.Callable]): ...
     def addEventDate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None: ...
     def g(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
         """
@@ -2711,6 +2963,16 @@ class DateDetector(AbstractDetector['DateDetector'], org.orekit.time.TimeStamped
         """
         ...
     def getDates(self) -> java.util.List[org.orekit.time.TimeStamped]: ...
+    def getMinGap(self) -> float:
+        """
+            Get the minimum gap between added dates.
+        
+            Returns:
+                the minimum gap between added dates (s)
+        
+        
+        """
+        ...
     def withMinGap(self, double: float) -> 'DateDetector':
         """
             Setup minimum gap between added dates.
@@ -2770,7 +3032,7 @@ class EclipseDetector(AbstractDetector['EclipseDetector']):
             :meth:`~org.orekit.propagation.Propagator.addEventDetector`
     """
     @typing.overload
-    def __init__(self, extendedPVCoordinatesProvider: org.orekit.utils.ExtendedPVCoordinatesProvider, double: float, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid): ...
+    def __init__(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], double: float, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid): ...
     @typing.overload
     def __init__(self, occultationEngine: org.orekit.utils.OccultationEngine): ...
     def g(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
@@ -2901,7 +3163,7 @@ class ElevationDetector(AbstractDetector['ElevationDetector']):
     @typing.overload
     def __init__(self, topocentricFrame: org.orekit.frames.TopocentricFrame): ...
     @typing.overload
-    def __init__(self, adaptableInterval: typing.Union[AdaptableInterval, typing.Callable], double: float, topocentricFrame: org.orekit.frames.TopocentricFrame): ...
+    def __init__(self, adaptableInterval: typing.Union[org.orekit.propagation.events.intervals.AdaptableInterval, typing.Callable], double: float, topocentricFrame: org.orekit.frames.TopocentricFrame): ...
     def g(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
         """
             Compute the value of the switching function. This function measures the difference between the current elevation (and
@@ -3007,7 +3269,7 @@ class ElevationDetector(AbstractDetector['ElevationDetector']):
         
         """
         ...
-    def withRefraction(self, atmosphericRefractionModel: org.orekit.models.AtmosphericRefractionModel) -> 'ElevationDetector':
+    def withRefraction(self, atmosphericRefractionModel: typing.Union[org.orekit.models.AtmosphericRefractionModel, typing.Callable]) -> 'ElevationDetector':
         """
             Setup the elevation detector to use an atmospheric refraction model in its calculations.
         
@@ -3090,9 +3352,9 @@ class ElevationExtremumDetector(AbstractDetector['ElevationExtremumDetector']):
         """
         ...
 
-class EventEnablingPredicateFilter(AbstractDetector['EventEnablingPredicateFilter']):
+class EventEnablingPredicateFilter(DetectorModifier):
     """
-    public class EventEnablingPredicateFilter extends :class:`~org.orekit.propagation.events.AbstractDetector`<:class:`~org.orekit.propagation.events.EventEnablingPredicateFilter`>
+    public class EventEnablingPredicateFilter extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.DetectorModifier`
     
         Wrapper used to detect events only when enabled by an external predicated function.
     
@@ -3120,11 +3382,22 @@ class EventEnablingPredicateFilter(AbstractDetector['EventEnablingPredicateFilte
         Also see:
             :class:`~org.orekit.propagation.events.EventSlopeFilter`
     """
-    def __init__(self, eventDetector: EventDetector, enablingPredicate: EnablingPredicate): ...
+    @typing.overload
+    def __init__(self, eventDetectionSettings: EventDetectionSettings, eventDetector: EventDetector, enablingPredicate: typing.Union[EnablingPredicate, typing.Callable]): ...
+    @typing.overload
+    def __init__(self, eventDetector: EventDetector, enablingPredicate: typing.Union[EnablingPredicate, typing.Callable]): ...
     def g(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
         """
             Compute the value of the switching function. This function must be continuous (at least in its roots neighborhood), as
             the integrator will need to find its roots to locate the events.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.DetectorModifier.g` in
+                interface :class:`~org.orekit.propagation.events.DetectorModifier`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -3135,9 +3408,31 @@ class EventEnablingPredicateFilter(AbstractDetector['EventEnablingPredicateFilte
         
         """
         ...
+    def getDetectionSettings(self) -> EventDetectionSettings:
+        """
+            Getter for the settings.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.DetectorModifier.getDetectionSettings` in
+                interface :class:`~org.orekit.propagation.events.DetectorModifier`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.EventDetector.getDetectionSettings` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
+        
+            Returns:
+                detection settings
+        
+        
+        """
+        ...
     def getDetector(self) -> EventDetector:
         """
             Get the wrapped raw detector.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.DetectorModifier.getDetector` in
+                interface :class:`~org.orekit.propagation.events.DetectorModifier`
         
             Returns:
                 the wrapped raw detector
@@ -3148,25 +3443,40 @@ class EventEnablingPredicateFilter(AbstractDetector['EventEnablingPredicateFilte
         
         """
         ...
+    def getHandler(self) -> org.orekit.propagation.events.handlers.EventHandler:
+        """
+            Get the handler.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.DetectorModifier.getHandler` in
+                interface :class:`~org.orekit.propagation.events.DetectorModifier`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.EventDetector.getHandler` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
+        
+            Returns:
+                event handler to call at event occurrences
+        
+        
+        """
+        ...
     def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
-            Initialize event handler at the start of a propagation.
+            Initialize event detector at the start of a propagation.
         
             This method is called once at the start of the propagation. It may be used by the event handler to initialize some
             internal data if needed.
         
-            The default implementation does nothing
+            The default implementation initializes the handler.
         
-            This implementation sets the direction of propagation and initializes the event handler. If a subclass overrides this
-            method it should call :code:`super.init(s0, t)`.
+            Specified by:
+                :meth:`~org.orekit.propagation.events.DetectorModifier.init` in
+                interface :class:`~org.orekit.propagation.events.DetectorModifier`
         
             Specified by:
                 :meth:`~org.orekit.propagation.events.EventDetector.init` in
                 interface :class:`~org.orekit.propagation.events.EventDetector`
-        
-            Overrides:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.init` in
-                class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
                 s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
@@ -3175,10 +3485,54 @@ class EventEnablingPredicateFilter(AbstractDetector['EventEnablingPredicateFilte
         
         """
         ...
+    def isForward(self) -> bool:
+        """
+            Check if the current propagation is forward or backward.
+        
+            Returns:
+                true if the current propagation is forward
+        
+        
+        """
+        ...
+    def reset(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+        """
+            Reset the event detector during propagation when the state is modified by an event or an additional data provider.
+        
+            The default implementation does nothing.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.DetectorModifier.reset` in
+                interface :class:`~org.orekit.propagation.events.DetectorModifier`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.EventDetector.reset` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): current state
+                target (:class:`~org.orekit.time.AbsoluteDate`): target time for the integration
+        
+        
+        """
+        ...
+    def withDetectionSettings(self, eventDetectionSettings: EventDetectionSettings) -> 'EventEnablingPredicateFilter':
+        """
+            Builds a new instance from the input detection settings.
+        
+            Parameters:
+                settings (:class:`~org.orekit.propagation.events.EventDetectionSettings`): event detection settings to be used
+        
+            Returns:
+                a new detector
+        
+        
+        """
+        ...
 
-class EventShifter(AbstractDetector['EventShifter']):
+class EventShifter(DetectorModifier):
     """
-    public class EventShifter extends :class:`~org.orekit.propagation.events.AbstractDetector`<:class:`~org.orekit.propagation.events.EventShifter`>
+    public class EventShifter extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.DetectorModifier`
     
         Wrapper shifting events occurrences times.
     
@@ -3193,11 +3547,22 @@ class EventShifter(AbstractDetector['EventShifter']):
         Also see:
             :meth:`~org.orekit.propagation.Propagator.addEventDetector`, :class:`~org.orekit.propagation.events.EventDetector`
     """
+    @typing.overload
+    def __init__(self, eventDetectionSettings: EventDetectionSettings, eventDetector: EventDetector, boolean: bool, double: float, double2: float): ...
+    @typing.overload
     def __init__(self, eventDetector: EventDetector, boolean: bool, double: float, double2: float): ...
     def g(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
         """
             Compute the value of the switching function. This function must be continuous (at least in its roots neighborhood), as
             the integrator will need to find its roots to locate the events.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.DetectorModifier.g` in
+                interface :class:`~org.orekit.propagation.events.DetectorModifier`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
@@ -3218,15 +3583,55 @@ class EventShifter(AbstractDetector['EventShifter']):
         
         """
         ...
+    def getDetectionSettings(self) -> EventDetectionSettings:
+        """
+            Getter for the settings.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.DetectorModifier.getDetectionSettings` in
+                interface :class:`~org.orekit.propagation.events.DetectorModifier`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.EventDetector.getDetectionSettings` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
+        
+            Returns:
+                detection settings
+        
+        
+        """
+        ...
     def getDetector(self) -> EventDetector:
         """
             Get the detector for the raw unshifted event.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.DetectorModifier.getDetector` in
+                interface :class:`~org.orekit.propagation.events.DetectorModifier`
         
             Returns:
                 the detector for the raw unshifted event
         
             Since:
                 11.1
+        
+        
+        """
+        ...
+    def getHandler(self) -> org.orekit.propagation.events.handlers.EventHandler:
+        """
+            Get the handler.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.DetectorModifier.getHandler` in
+                interface :class:`~org.orekit.propagation.events.DetectorModifier`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.EventDetector.getHandler` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
+        
+            Returns:
+                event handler to call at event occurrences
         
         
         """
@@ -3241,127 +3646,15 @@ class EventShifter(AbstractDetector['EventShifter']):
         
         """
         ...
-    def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+    def withDetectionSettings(self, eventDetectionSettings: EventDetectionSettings) -> 'EventShifter':
         """
-            Initialize event handler at the start of a propagation.
-        
-            This method is called once at the start of the propagation. It may be used by the event handler to initialize some
-            internal data if needed.
-        
-            The default implementation does nothing
-        
-            This implementation sets the direction of propagation and initializes the event handler. If a subclass overrides this
-            method it should call :code:`super.init(s0, t)`.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.init` in
-                interface :class:`~org.orekit.propagation.events.EventDetector`
-        
-            Overrides:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.init` in
-                class :class:`~org.orekit.propagation.events.AbstractDetector`
+            Builds a new instance from the input detection settings.
         
             Parameters:
-                s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
-                t (:class:`~org.orekit.time.AbsoluteDate`): target time for the integration
-        
-        
-        """
-        ...
-
-_EventSlopeFilter__T = typing.TypeVar('_EventSlopeFilter__T', bound=EventDetector)  # <T>
-class EventSlopeFilter(AbstractDetector['EventSlopeFilter'[_EventSlopeFilter__T]], typing.Generic[_EventSlopeFilter__T]):
-    """
-    public class EventSlopeFilter<T extends :class:`~org.orekit.propagation.events.EventDetector`> extends :class:`~org.orekit.propagation.events.AbstractDetector`<:class:`~org.orekit.propagation.events.EventSlopeFilter`<T>>
-    
-        Wrapper used to detect only increasing or decreasing events.
-    
-        This class is heavily based on the class EventFilter from the Hipparchus library. The changes performed consist in
-        replacing raw types (double and double arrays) with space dynamics types (:class:`~org.orekit.time.AbsoluteDate`,
-        :class:`~org.orekit.propagation.SpacecraftState`).
-    
-        General :class:`~org.orekit.propagation.events.EventDetector` are defined implicitly by a
-        :meth:`~org.orekit.propagation.events.EventDetector.g` crossing zero. This function needs to be continuous in the event
-        neighborhood, and its sign must remain consistent between events. This implies that during an orbit propagation, events
-        triggered are alternately events for which the function increases from negative to positive values, and events for which
-        the function decreases from positive to negative values.
-    
-        Sometimes, users are only interested in one type of event (say increasing events for example) and not in the other type.
-        In these cases, looking precisely for all events location and triggering events that will later be ignored is a waste of
-        computing time.
-    
-        Users can wrap a regular :class:`~org.orekit.propagation.events.EventDetector` in an instance of this class and provide
-        this wrapping instance to a :class:`~org.orekit.propagation.Propagator` in order to avoid wasting time looking for
-        uninteresting events. The wrapper will intercept the calls to the :meth:`~org.orekit.propagation.events.EventDetector.g`
-        and to the :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred` method in order to ignore
-        uninteresting events. The wrapped regular :class:`~org.orekit.propagation.events.EventDetector` will then see only the
-        interesting events, i.e. either only :code:`increasing` events or only :code:`decreasing` events. The number of calls to
-        the :meth:`~org.orekit.propagation.events.EventDetector.g` will also be reduced.
-    
-        Also see:
-            :class:`~org.orekit.propagation.events.EventEnablingPredicateFilter`
-    """
-    def __init__(self, t: _EventSlopeFilter__T, filterType: FilterType): ...
-    def g(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
-        """
-            Compute the value of the switching function. This function must be continuous (at least in its roots neighborhood), as
-            the integrator will need to find its roots to locate the events.
-        
-            Parameters:
-                s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
+                settings (:class:`~org.orekit.propagation.events.EventDetectionSettings`): event detection settings to be used
         
             Returns:
-                value of the switching function
-        
-        
-        """
-        ...
-    def getDetector(self) -> _EventSlopeFilter__T:
-        """
-            Get the wrapped raw detector.
-        
-            Returns:
-                the wrapped raw detector
-        
-            Since:
-                11.1
-        
-        
-        """
-        ...
-    def getFilter(self) -> FilterType:
-        """
-            Get filter type.
-        
-            Returns:
-                filter type
-        
-        
-        """
-        ...
-    def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Initialize event handler at the start of a propagation.
-        
-            This method is called once at the start of the propagation. It may be used by the event handler to initialize some
-            internal data if needed.
-        
-            The default implementation does nothing
-        
-            This implementation sets the direction of propagation and initializes the event handler. If a subclass overrides this
-            method it should call :code:`super.init(s0, t)`.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.events.EventDetector.init` in
-                interface :class:`~org.orekit.propagation.events.EventDetector`
-        
-            Overrides:
-                :meth:`~org.orekit.propagation.events.AbstractDetector.init` in
-                class :class:`~org.orekit.propagation.events.AbstractDetector`
-        
-            Parameters:
-                s0 (:class:`~org.orekit.propagation.SpacecraftState`): initial state
-                t (:class:`~org.orekit.time.AbsoluteDate`): target time for the integration
+                a new detector
         
         
         """
@@ -3417,12 +3710,9 @@ class ExtremumApproachDetector(AbstractDetector['ExtremumApproachDetector']):
             :meth:`~org.orekit.propagation.Propagator.addEventDetector`, :class:`~org.orekit.propagation.events.EventSlopeFilter`,
             :class:`~org.orekit.propagation.events.FilterType`
     """
-    def __init__(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider): ...
+    def __init__(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable]): ...
     def computeDeltaPV(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.orekit.utils.PVCoordinates:
         """
-            Deprecated.
-            The output type of this method shall be modified in the future to improve code efficiency (though it will still give
-            access to the relative position and velocity)
             Compute the relative PV between primary and secondary objects.
         
             Parameters:
@@ -3458,6 +3748,25 @@ class ExtremumApproachDetector(AbstractDetector['ExtremumApproachDetector']):
         
         """
         ...
+
+_FieldAdapterDetector__T = typing.TypeVar('_FieldAdapterDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldAdapterDetector(FieldDetectorModifier[_FieldAdapterDetector__T], typing.Generic[_FieldAdapterDetector__T]):
+    """
+    :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public class FieldAdapterDetector<T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.FieldDetectorModifier`<T>
+    
+        Deprecated.
+        since 13.0. Use :class:`~org.orekit.propagation.events.FieldDetectorModifier` instead.
+        Base class for adapting an existing detector.
+    
+        This class is intended to be a base class for changing behaviour of a wrapped existing detector. This base class
+        delegates all its methods to the wrapped detector. Classes extending it can therefore override only the methods they
+        want to change.
+    
+        Since:
+            12.0
+    """
+    def __init__(self, fieldEventDetector: FieldEventDetector[_FieldAdapterDetector__T]): ...
+    def getDetector(self) -> FieldEventDetector[_FieldAdapterDetector__T]: ...
 
 _FieldAltitudeDetector__T = typing.TypeVar('_FieldAltitudeDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldAltitudeDetector(FieldAbstractDetector['FieldAltitudeDetector'[_FieldAltitudeDetector__T], _FieldAltitudeDetector__T], typing.Generic[_FieldAltitudeDetector__T]):
@@ -3539,7 +3848,7 @@ class FieldApsideDetector(FieldAbstractDetector['FieldApsideDetector'[_FieldApsi
     @typing.overload
     def __init__(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_FieldApsideDetector__T]): ...
     @typing.overload
-    def __init__(self, fieldAdaptableInterval: typing.Union[FieldAdaptableInterval[_FieldApsideDetector__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement]], float]], t: _FieldApsideDetector__T, int: int, fieldEventHandler: org.orekit.propagation.events.handlers.FieldEventHandler[_FieldApsideDetector__T]): ...
+    def __init__(self, fieldEventDetectionSettings: FieldEventDetectionSettings[_FieldApsideDetector__T], fieldEventHandler: typing.Union[org.orekit.propagation.events.handlers.FieldEventHandler[_FieldApsideDetector__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], FieldEventDetector[org.hipparchus.CalculusFieldElement], bool], org.hipparchus.ode.events.Action]]): ...
     def g(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldApsideDetector__T]) -> _FieldApsideDetector__T: ...
 
 _FieldBetaAngleDetector__T = typing.TypeVar('_FieldBetaAngleDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -3570,12 +3879,12 @@ class FieldBetaAngleDetector(FieldAbstractDetector['FieldBetaAngleDetector'[_Fie
     @typing.overload
     def __init__(self, t: _FieldBetaAngleDetector__T): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldBetaAngleDetector__T], t: _FieldBetaAngleDetector__T, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_FieldBetaAngleDetector__T], frame: org.orekit.frames.Frame): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldBetaAngleDetector__T], t: _FieldBetaAngleDetector__T, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_FieldBetaAngleDetector__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], frame: org.orekit.frames.Frame): ...
     _calculateBetaAngle_0__T = typing.TypeVar('_calculateBetaAngle_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _calculateBetaAngle_1__T = typing.TypeVar('_calculateBetaAngle_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def calculateBetaAngle(fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_calculateBetaAngle_0__T], fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_calculateBetaAngle_0__T]) -> _calculateBetaAngle_0__T:
+    def calculateBetaAngle(fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_calculateBetaAngle_0__T], fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_calculateBetaAngle_0__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]]) -> _calculateBetaAngle_0__T:
         """
             Calculate the beta angle between the orbit plane and the celestial body.
         
@@ -3592,7 +3901,7 @@ class FieldBetaAngleDetector(FieldAbstractDetector['FieldBetaAngleDetector'[_Fie
         ...
     @typing.overload
     @staticmethod
-    def calculateBetaAngle(fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_calculateBetaAngle_1__T], fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_calculateBetaAngle_1__T], frame: org.orekit.frames.Frame) -> _calculateBetaAngle_1__T:
+    def calculateBetaAngle(fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_calculateBetaAngle_1__T], fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_calculateBetaAngle_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], frame: org.orekit.frames.Frame) -> _calculateBetaAngle_1__T:
         """
             Calculate the beta angle between the orbit plane and the celestial body.
         
@@ -3630,7 +3939,7 @@ class FieldBetaAngleDetector(FieldAbstractDetector['FieldBetaAngleDetector'[_Fie
         """
         ...
     def withBetaThreshold(self, t: _FieldBetaAngleDetector__T) -> 'FieldBetaAngleDetector'[_FieldBetaAngleDetector__T]: ...
-    def withCelestialProvider(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_FieldBetaAngleDetector__T]) -> 'FieldBetaAngleDetector'[_FieldBetaAngleDetector__T]: ...
+    def withCelestialProvider(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_FieldBetaAngleDetector__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]]) -> 'FieldBetaAngleDetector'[_FieldBetaAngleDetector__T]: ...
     def withInertialFrame(self, frame: org.orekit.frames.Frame) -> 'FieldBetaAngleDetector'[_FieldBetaAngleDetector__T]: ...
 
 _FieldBooleanDetector__T = typing.TypeVar('_FieldBooleanDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -3669,10 +3978,11 @@ class FieldBooleanDetector(FieldAbstractDetector['FieldBooleanDetector'[_FieldBo
     _andCombine_1__T = typing.TypeVar('_andCombine_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def andCombine(collection: typing.Union[java.util.Collection[FieldEventDetector[_andCombine_0__T]], typing.Sequence[FieldEventDetector[_andCombine_0__T]]]) -> 'FieldBooleanDetector'[_andCombine_0__T]: ...
+    def andCombine(collection: typing.Union[java.util.Collection[FieldEventDetector[_andCombine_0__T]], typing.Sequence[FieldEventDetector[_andCombine_0__T]], typing.Set[FieldEventDetector[_andCombine_0__T]]]) -> 'FieldBooleanDetector'[_andCombine_0__T]: ...
     @typing.overload
     @staticmethod
-    def andCombine(fieldEventDetectorArray: typing.List[FieldEventDetector[_andCombine_1__T]]) -> 'FieldBooleanDetector'[_andCombine_1__T]: ...
+    def andCombine(*fieldEventDetector: FieldEventDetector[_andCombine_1__T]) -> 'FieldBooleanDetector'[_andCombine_1__T]: ...
+    def finish(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldBooleanDetector__T]) -> None: ...
     def g(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldBooleanDetector__T]) -> _FieldBooleanDetector__T: ...
     def getDetectors(self) -> java.util.List[FieldEventDetector[_FieldBooleanDetector__T]]: ...
     def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldBooleanDetector__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldBooleanDetector__T]) -> None: ...
@@ -3707,10 +4017,11 @@ class FieldBooleanDetector(FieldAbstractDetector['FieldBooleanDetector'[_FieldBo
     _orCombine_1__T = typing.TypeVar('_orCombine_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def orCombine(collection: typing.Union[java.util.Collection[FieldEventDetector[_orCombine_0__T]], typing.Sequence[FieldEventDetector[_orCombine_0__T]]]) -> 'FieldBooleanDetector'[_orCombine_0__T]: ...
+    def orCombine(collection: typing.Union[java.util.Collection[FieldEventDetector[_orCombine_0__T]], typing.Sequence[FieldEventDetector[_orCombine_0__T]], typing.Set[FieldEventDetector[_orCombine_0__T]]]) -> 'FieldBooleanDetector'[_orCombine_0__T]: ...
     @typing.overload
     @staticmethod
-    def orCombine(fieldEventDetectorArray: typing.List[FieldEventDetector[_orCombine_1__T]]) -> 'FieldBooleanDetector'[_orCombine_1__T]: ...
+    def orCombine(*fieldEventDetector: FieldEventDetector[_orCombine_1__T]) -> 'FieldBooleanDetector'[_orCombine_1__T]: ...
+    def reset(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldBooleanDetector__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldBooleanDetector__T]) -> None: ...
 
 _FieldCylindricalShadowEclipseDetector__T = typing.TypeVar('_FieldCylindricalShadowEclipseDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldCylindricalShadowEclipseDetector(FieldAbstractDetector['FieldCylindricalShadowEclipseDetector'[_FieldCylindricalShadowEclipseDetector__T], _FieldCylindricalShadowEclipseDetector__T], typing.Generic[_FieldCylindricalShadowEclipseDetector__T]):
@@ -3730,11 +4041,9 @@ class FieldCylindricalShadowEclipseDetector(FieldAbstractDetector['FieldCylindri
             :class:`~org.orekit.propagation.events.CylindricalShadowEclipseDetector`
     """
     @typing.overload
-    def __init__(self, extendedPositionProvider: org.orekit.utils.ExtendedPositionProvider, t: _FieldCylindricalShadowEclipseDetector__T, fieldAdaptableInterval: typing.Union[FieldAdaptableInterval[_FieldCylindricalShadowEclipseDetector__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement]], float]], t2: _FieldCylindricalShadowEclipseDetector__T, int: int, fieldEventHandler: org.orekit.propagation.events.handlers.FieldEventHandler[_FieldCylindricalShadowEclipseDetector__T]): ...
+    def __init__(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], t: _FieldCylindricalShadowEclipseDetector__T, fieldEventDetectionSettings: FieldEventDetectionSettings[_FieldCylindricalShadowEclipseDetector__T], fieldEventHandler: typing.Union[org.orekit.propagation.events.handlers.FieldEventHandler[_FieldCylindricalShadowEclipseDetector__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], FieldEventDetector[org.hipparchus.CalculusFieldElement], bool], org.hipparchus.ode.events.Action]]): ...
     @typing.overload
-    def __init__(self, extendedPositionProvider: org.orekit.utils.ExtendedPositionProvider, t: _FieldCylindricalShadowEclipseDetector__T, fieldEventDetectionSettings: FieldEventDetectionSettings[_FieldCylindricalShadowEclipseDetector__T], fieldEventHandler: org.orekit.propagation.events.handlers.FieldEventHandler[_FieldCylindricalShadowEclipseDetector__T]): ...
-    @typing.overload
-    def __init__(self, extendedPositionProvider: org.orekit.utils.ExtendedPositionProvider, t: _FieldCylindricalShadowEclipseDetector__T, fieldEventHandler: org.orekit.propagation.events.handlers.FieldEventHandler[_FieldCylindricalShadowEclipseDetector__T]): ...
+    def __init__(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], t: _FieldCylindricalShadowEclipseDetector__T, fieldEventHandler: typing.Union[org.orekit.propagation.events.handlers.FieldEventHandler[_FieldCylindricalShadowEclipseDetector__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], FieldEventDetector[org.hipparchus.CalculusFieldElement], bool], org.hipparchus.ode.events.Action]]): ...
     def g(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldCylindricalShadowEclipseDetector__T]) -> _FieldCylindricalShadowEclipseDetector__T: ...
     def getOccultingBodyRadius(self) -> _FieldCylindricalShadowEclipseDetector__T:
         """
@@ -3814,7 +4123,10 @@ class FieldDateDetector(FieldAbstractDetector['FieldDateDetector'[_FieldDateDete
     
     
     """
-    def __init__(self, field: org.hipparchus.Field[_FieldDateDetector__T], fieldTimeStampedArray: typing.List[org.orekit.time.FieldTimeStamped[_FieldDateDetector__T]]): ...
+    @typing.overload
+    def __init__(self, field: org.hipparchus.Field[_FieldDateDetector__T], *fieldTimeStamped: typing.Union[org.orekit.time.FieldTimeStamped[_FieldDateDetector__T], typing.Callable[[], org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement]]]): ...
+    @typing.overload
+    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldDateDetector__T]): ...
     def addEventDate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldDateDetector__T]) -> None: ...
     def g(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldDateDetector__T]) -> _FieldDateDetector__T: ...
     def getDate(self) -> org.orekit.time.FieldAbsoluteDate[_FieldDateDetector__T]: ...
@@ -3841,7 +4153,7 @@ class FieldEclipseDetector(FieldAbstractDetector['FieldEclipseDetector'[_FieldEc
             :meth:`~org.orekit.propagation.FieldPropagator.addEventDetector`
     """
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldEclipseDetector__T], extendedPVCoordinatesProvider: org.orekit.utils.ExtendedPVCoordinatesProvider, double: float, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldEclipseDetector__T], extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], double: float, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid): ...
     @typing.overload
     def __init__(self, field: org.hipparchus.Field[_FieldEclipseDetector__T], occultationEngine: org.orekit.utils.OccultationEngine): ...
     def g(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldEclipseDetector__T]) -> _FieldEclipseDetector__T: ...
@@ -3958,7 +4270,7 @@ class FieldElevationDetector(FieldAbstractDetector['FieldElevationDetector'[_Fie
         ...
     def withConstantElevation(self, double: float) -> 'FieldElevationDetector'[_FieldElevationDetector__T]: ...
     def withElevationMask(self, elevationMask: org.orekit.utils.ElevationMask) -> 'FieldElevationDetector'[_FieldElevationDetector__T]: ...
-    def withRefraction(self, atmosphericRefractionModel: org.orekit.models.AtmosphericRefractionModel) -> 'FieldElevationDetector'[_FieldElevationDetector__T]: ...
+    def withRefraction(self, atmosphericRefractionModel: typing.Union[org.orekit.models.AtmosphericRefractionModel, typing.Callable]) -> 'FieldElevationDetector'[_FieldElevationDetector__T]: ...
 
 _FieldElevationExtremumDetector__T = typing.TypeVar('_FieldElevationExtremumDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldElevationExtremumDetector(FieldAbstractDetector['FieldElevationExtremumDetector'[_FieldElevationExtremumDetector__T], _FieldElevationExtremumDetector__T], typing.Generic[_FieldElevationExtremumDetector__T]):
@@ -3998,9 +4310,9 @@ class FieldElevationExtremumDetector(FieldAbstractDetector['FieldElevationExtrem
         ...
 
 _FieldEventEnablingPredicateFilter__T = typing.TypeVar('_FieldEventEnablingPredicateFilter__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class FieldEventEnablingPredicateFilter(FieldAbstractDetector['FieldEventEnablingPredicateFilter'[_FieldEventEnablingPredicateFilter__T], _FieldEventEnablingPredicateFilter__T], typing.Generic[_FieldEventEnablingPredicateFilter__T]):
+class FieldEventEnablingPredicateFilter(FieldDetectorModifier[_FieldEventEnablingPredicateFilter__T], typing.Generic[_FieldEventEnablingPredicateFilter__T]):
     """
-    public class FieldEventEnablingPredicateFilter<T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldEventEnablingPredicateFilter`<T>, T>
+    public class FieldEventEnablingPredicateFilter<T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.FieldDetectorModifier`<T>
     
         Wrapper used to detect events only when enabled by an external predicated function.
     
@@ -4029,58 +4341,79 @@ class FieldEventEnablingPredicateFilter(FieldAbstractDetector['FieldEventEnablin
         Also see:
             :class:`~org.orekit.propagation.events.FieldEventSlopeFilter`
     """
-    def __init__(self, fieldEventDetector: FieldEventDetector[_FieldEventEnablingPredicateFilter__T], fieldEnablingPredicate: FieldEnablingPredicate[_FieldEventEnablingPredicateFilter__T]): ...
+    @typing.overload
+    def __init__(self, fieldEventDetectionSettings: FieldEventDetectionSettings[_FieldEventEnablingPredicateFilter__T], fieldEventDetector: FieldEventDetector[_FieldEventEnablingPredicateFilter__T], fieldEnablingPredicate: typing.Union[FieldEnablingPredicate[_FieldEventEnablingPredicateFilter__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], FieldEventDetector[org.hipparchus.CalculusFieldElement], _FieldEventEnablingPredicateFilter__T], bool]]): ...
+    @typing.overload
+    def __init__(self, fieldEventDetector: FieldEventDetector[_FieldEventEnablingPredicateFilter__T], fieldEnablingPredicate: typing.Union[FieldEnablingPredicate[_FieldEventEnablingPredicateFilter__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], FieldEventDetector[org.hipparchus.CalculusFieldElement], _FieldEventEnablingPredicateFilter__T], bool]]): ...
     def g(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldEventEnablingPredicateFilter__T]) -> _FieldEventEnablingPredicateFilter__T: ...
+    def getDetectionSettings(self) -> FieldEventDetectionSettings[_FieldEventEnablingPredicateFilter__T]: ...
     def getDetector(self) -> FieldEventDetector[_FieldEventEnablingPredicateFilter__T]: ...
+    def getHandler(self) -> org.orekit.propagation.events.handlers.FieldEventHandler[_FieldEventEnablingPredicateFilter__T]: ...
     def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldEventEnablingPredicateFilter__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldEventEnablingPredicateFilter__T]) -> None: ...
-
-_FieldEventSlopeFilter__D = typing.TypeVar('_FieldEventSlopeFilter__D', bound=FieldEventDetector)  # <D>
-_FieldEventSlopeFilter__T = typing.TypeVar('_FieldEventSlopeFilter__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class FieldEventSlopeFilter(FieldAbstractDetector['FieldEventSlopeFilter'[_FieldEventSlopeFilter__D, _FieldEventSlopeFilter__T], _FieldEventSlopeFilter__T], typing.Generic[_FieldEventSlopeFilter__D, _FieldEventSlopeFilter__T]):
-    """
-    public class FieldEventSlopeFilter<D extends :class:`~org.orekit.propagation.events.FieldEventDetector`<T>, T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldEventSlopeFilter`<D, T>, T>
-    
-        Wrapper used to detect only increasing or decreasing events.
-    
-        This class is heavily based on the class EventFilter from the Hipparchus library. The changes performed consist in
-        replacing raw types (double and double arrays) with space dynamics types (:class:`~org.orekit.time.FieldAbsoluteDate`,
-        :class:`~org.orekit.propagation.FieldSpacecraftState`).
-    
-        General :class:`~org.orekit.propagation.events.FieldEventDetector` are defined implicitly by a
-        :meth:`~org.orekit.propagation.events.FieldEventDetector.g` crossing zero. This function needs to be continuous in the
-        event neighborhood, and its sign must remain consistent between events. This implies that during an orbit propagation,
-        events triggered are alternately events for which the function increases from negative to positive values, and events
-        for which the function decreases from positive to negative values.
-    
-        Sometimes, users are only interested in one type of event (say increasing events for example) and not in the other type.
-        In these cases, looking precisely for all events location and triggering events that will later be ignored is a waste of
-        computing time.
-    
-        Users can wrap a regular :class:`~org.orekit.propagation.events.FieldEventDetector` in an instance of this class and
-        provide this wrapping instance to a :class:`~org.orekit.propagation.FieldPropagator` in order to avoid wasting time
-        looking for uninteresting events. The wrapper will intercept the calls to the
-        :meth:`~org.orekit.propagation.events.FieldEventDetector.g` and to the
-        :meth:`~org.orekit.propagation.events.handlers.FieldEventHandler.eventOccurred` method in order to ignore uninteresting
-        events. The wrapped regular :class:`~org.orekit.propagation.events.FieldEventDetector` will then see only the
-        interesting events, i.e. either only :code:`increasing` events or only :code:`decreasing` events. The number of calls to
-        the :meth:`~org.orekit.propagation.events.FieldEventDetector.g` will also be reduced.
-    
-        Also see:
-            :class:`~org.orekit.propagation.events.FieldEventEnablingPredicateFilter`
-    """
-    def __init__(self, d: _FieldEventSlopeFilter__D, filterType: FilterType): ...
-    def g(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldEventSlopeFilter__T]) -> _FieldEventSlopeFilter__T: ...
-    def getDetector(self) -> _FieldEventSlopeFilter__D:
+    def isForward(self) -> bool:
         """
-            Get the wrapped raw detector.
+            Check if the current propagation is forward or backward.
         
             Returns:
-                the wrapped raw detector
+                true if the current propagation is forward
         
         
         """
         ...
-    def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldEventSlopeFilter__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldEventSlopeFilter__T]) -> None: ...
+    def reset(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldEventEnablingPredicateFilter__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldEventEnablingPredicateFilter__T]) -> None: ...
+    def withDetectionSettings(self, fieldEventDetectionSettings: FieldEventDetectionSettings[_FieldEventEnablingPredicateFilter__T]) -> 'FieldEventEnablingPredicateFilter'[_FieldEventEnablingPredicateFilter__T]: ...
+
+_FieldEventShifter__T = typing.TypeVar('_FieldEventShifter__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldEventShifter(FieldDetectorModifier[_FieldEventShifter__T], typing.Generic[_FieldEventShifter__T]):
+    """
+    public class FieldEventShifter<T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.FieldDetectorModifier`<T>
+    
+        Wrapper shifting events occurrences times.
+    
+        This class wraps an :class:`~org.orekit.propagation.events.FieldEventDetector` to slightly shift the events occurrences
+        times. A typical use case is for handling operational delays before or after some physical event really occurs.
+    
+        For example, the satellite attitude mode may be switched from sun pointed to spin-stabilized a few minutes before
+        eclipse entry, and switched back to sun pointed a few minutes after eclipse exit. This behavior is handled by wrapping
+        an :class:`~org.orekit.propagation.events.FieldEclipseDetector` into an instance of this class with a positive times
+        shift for increasing events (eclipse exit) and a negative times shift for decreasing events (eclipse entry).
+    
+        Since:
+            13.0
+    
+        Also see:
+            :meth:`~org.orekit.propagation.FieldPropagator.addEventDetector`,
+            :class:`~org.orekit.propagation.events.FieldEventDetector`, :class:`~org.orekit.propagation.events.EventShifter`
+    """
+    @typing.overload
+    def __init__(self, fieldEventDetectionSettings: FieldEventDetectionSettings[_FieldEventShifter__T], fieldEventDetector: FieldEventDetector[_FieldEventShifter__T], boolean: bool, t: _FieldEventShifter__T, t2: _FieldEventShifter__T): ...
+    @typing.overload
+    def __init__(self, fieldEventDetector: FieldEventDetector[_FieldEventShifter__T], boolean: bool, t: _FieldEventShifter__T, t2: _FieldEventShifter__T): ...
+    def g(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldEventShifter__T]) -> _FieldEventShifter__T: ...
+    def getDecreasingTimeShift(self) -> _FieldEventShifter__T:
+        """
+            Get the decreasing events time shift.
+        
+            Returns:
+                decreasing events time shift
+        
+        
+        """
+        ...
+    def getDetectionSettings(self) -> FieldEventDetectionSettings[_FieldEventShifter__T]: ...
+    def getDetector(self) -> FieldEventDetector[_FieldEventShifter__T]: ...
+    def getHandler(self) -> org.orekit.propagation.events.handlers.FieldEventHandler[_FieldEventShifter__T]: ...
+    def getIncreasingTimeShift(self) -> _FieldEventShifter__T:
+        """
+            Get the increasing events time shift.
+        
+            Returns:
+                increasing events time shift
+        
+        
+        """
+        ...
+    def withDetectionSettings(self, fieldEventDetectionSettings: FieldEventDetectionSettings[_FieldEventShifter__T]) -> 'FieldEventShifter'[_FieldEventShifter__T]: ...
 
 _FieldExtremumApproachDetector__T = typing.TypeVar('_FieldExtremumApproachDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldExtremumApproachDetector(FieldAbstractDetector['FieldExtremumApproachDetector'[_FieldExtremumApproachDetector__T], _FieldExtremumApproachDetector__T], typing.Generic[_FieldExtremumApproachDetector__T]):
@@ -4135,9 +4468,9 @@ class FieldExtremumApproachDetector(FieldAbstractDetector['FieldExtremumApproach
             :class:`~org.orekit.propagation.events.FieldEventSlopeFilter`, :class:`~org.orekit.propagation.events.FilterType`
     """
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldExtremumApproachDetector__T], fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_FieldExtremumApproachDetector__T]): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldExtremumApproachDetector__T], fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_FieldExtremumApproachDetector__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]]): ...
     @typing.overload
-    def __init__(self, field: org.hipparchus.Field[_FieldExtremumApproachDetector__T], pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider): ...
+    def __init__(self, field: org.hipparchus.Field[_FieldExtremumApproachDetector__T], pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable]): ...
     def computeDeltaPV(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldExtremumApproachDetector__T]) -> org.orekit.utils.FieldPVCoordinates[_FieldExtremumApproachDetector__T]: ...
     def g(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldExtremumApproachDetector__T]) -> _FieldExtremumApproachDetector__T: ...
     def getSecondaryPVProvider(self) -> org.orekit.utils.FieldPVCoordinatesProvider[_FieldExtremumApproachDetector__T]: ...
@@ -4341,9 +4674,9 @@ class FieldLongitudeRangeCrossingDetector(FieldAbstractDetector['FieldLongitudeR
         ...
 
 _FieldNegateDetector__T = typing.TypeVar('_FieldNegateDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class FieldNegateDetector(FieldAbstractDetector['FieldNegateDetector'[_FieldNegateDetector__T], _FieldNegateDetector__T], typing.Generic[_FieldNegateDetector__T]):
+class FieldNegateDetector(FieldAbstractDetector['FieldNegateDetector'[_FieldNegateDetector__T], _FieldNegateDetector__T], FieldDetectorModifier[_FieldNegateDetector__T], typing.Generic[_FieldNegateDetector__T]):
     """
-    public class FieldNegateDetector<T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldNegateDetector`<T>, T>
+    public class FieldNegateDetector<T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<:class:`~org.orekit.propagation.events.FieldNegateDetector`<T>, T> implements :class:`~org.orekit.propagation.events.FieldDetectorModifier`<T>
     
         An event detector that negates the sign on another event detector's
         :meth:`~org.orekit.propagation.events.FieldEventDetector.g` function.
@@ -4353,6 +4686,7 @@ class FieldNegateDetector(FieldAbstractDetector['FieldNegateDetector'[_FieldNega
     """
     def __init__(self, fieldEventDetector: FieldEventDetector[_FieldNegateDetector__T]): ...
     def g(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldNegateDetector__T]) -> _FieldNegateDetector__T: ...
+    def getDetector(self) -> FieldEventDetector[_FieldNegateDetector__T]: ...
     def getOriginal(self) -> FieldEventDetector[_FieldNegateDetector__T]: ...
     def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldNegateDetector__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldNegateDetector__T]) -> None: ...
 
@@ -4424,9 +4758,9 @@ class FieldOfViewDetector(AbstractDetector['FieldOfViewDetector']):
             :class:`~org.orekit.propagation.events.VisibilityTrigger`
     """
     @typing.overload
-    def __init__(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, double: float, visibilityTrigger: VisibilityTrigger, fieldOfView: org.orekit.geometry.fov.FieldOfView): ...
+    def __init__(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], double: float, visibilityTrigger: VisibilityTrigger, fieldOfView: org.orekit.geometry.fov.FieldOfView): ...
     @typing.overload
-    def __init__(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, fieldOfView: org.orekit.geometry.fov.FieldOfView): ...
+    def __init__(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], fieldOfView: org.orekit.geometry.fov.FieldOfView): ...
     def g(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
         """
             Compute the value of the switching function. This function must be continuous (at least in its roots neighborhood), as
@@ -4632,7 +4966,7 @@ class FieldRelativeDistanceDetector(FieldAbstractDetector['FieldRelativeDistance
         Also see:
             :meth:`~org.orekit.propagation.FieldPropagator.addEventDetector`
     """
-    def __init__(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_FieldRelativeDistanceDetector__T], t: _FieldRelativeDistanceDetector__T): ...
+    def __init__(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_FieldRelativeDistanceDetector__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], t: _FieldRelativeDistanceDetector__T): ...
     def g(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldRelativeDistanceDetector__T]) -> _FieldRelativeDistanceDetector__T: ...
     def getDistanceThreshold(self) -> _FieldRelativeDistanceDetector__T:
         """
@@ -4891,7 +5225,7 @@ class GroundAtNightDetector(AbstractDetector['GroundAtNightDetector']):
         Sun elevation at astronomical dawn/dusk (18° below horizon).
     
     """
-    def __init__(self, topocentricFrame: org.orekit.frames.TopocentricFrame, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, double: float, atmosphericRefractionModel: org.orekit.models.AtmosphericRefractionModel): ...
+    def __init__(self, topocentricFrame: org.orekit.frames.TopocentricFrame, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], double: float, atmosphericRefractionModel: typing.Union[org.orekit.models.AtmosphericRefractionModel, typing.Callable]): ...
     def g(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
         """
             Compute the value of the switching function. This function must be continuous (at least in its roots neighborhood), as
@@ -5039,7 +5373,7 @@ class InterSatDirectViewDetector(AbstractDetector['InterSatDirectViewDetector'])
         Since:
             9.3
     """
-    def __init__(self, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider): ...
+    def __init__(self, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable]): ...
     def g(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
         """
             Compute the value of the switching function. This function must be continuous (at least in its roots neighborhood), as
@@ -5328,12 +5662,12 @@ class LongitudeCrossingDetector(AbstractDetector['LongitudeCrossingDetector']):
         ...
     def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
-            Initialize event handler at the start of a propagation.
+            Initialize event detector at the start of a propagation.
         
             This method is called once at the start of the propagation. It may be used by the event handler to initialize some
             internal data if needed.
         
-            The default implementation does nothing
+            The default implementation initializes the handler.
         
             This implementation sets the direction of propagation and initializes the event handler. If a subclass overrides this
             method it should call :code:`super.init(s0, t)`.
@@ -5495,12 +5829,12 @@ class MagneticFieldDetector(AbstractDetector['MagneticFieldDetector']):
         ...
     def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
-            Initialize event handler at the start of a propagation.
+            Initialize event detector at the start of a propagation.
         
             This method is called once at the start of the propagation. It may be used by the event handler to initialize some
             internal data if needed.
         
-            The default implementation does nothing
+            The default implementation initializes the handler.
         
             This implementation sets the direction of propagation and initializes the event handler. If a subclass overrides this
             method it should call :code:`super.init(s0, t)`.
@@ -5521,9 +5855,9 @@ class MagneticFieldDetector(AbstractDetector['MagneticFieldDetector']):
         """
         ...
 
-class NegateDetector(AbstractDetector['NegateDetector']):
+class NegateDetector(AbstractDetector['NegateDetector'], DetectorModifier):
     """
-    public class NegateDetector extends :class:`~org.orekit.propagation.events.AbstractDetector`<:class:`~org.orekit.propagation.events.NegateDetector`>
+    public class NegateDetector extends :class:`~org.orekit.propagation.events.AbstractDetector`<:class:`~org.orekit.propagation.events.NegateDetector`> implements :class:`~org.orekit.propagation.events.DetectorModifier`
     
         An event detector that negates the sign on another event detector's
         :meth:`~org.orekit.propagation.events.EventDetector.g` function.
@@ -5531,15 +5865,38 @@ class NegateDetector(AbstractDetector['NegateDetector']):
     def __init__(self, eventDetector: EventDetector): ...
     def g(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
         """
-            Description copied from interface: :meth:`~org.orekit.propagation.events.EventDetector.g`
+            Description copied from interface: :meth:`~org.orekit.propagation.events.DetectorModifier.g`
             Compute the value of the switching function. This function must be continuous (at least in its roots neighborhood), as
             the integrator will need to find its roots to locate the events.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.DetectorModifier.g` in
+                interface :class:`~org.orekit.propagation.events.DetectorModifier`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.EventDetector.g` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
         
             Parameters:
                 s (:class:`~org.orekit.propagation.SpacecraftState`): the current state information: date, kinematics, attitude
         
             Returns:
                 value of the switching function
+        
+        
+        """
+        ...
+    def getDetector(self) -> EventDetector:
+        """
+            Description copied from interface: :meth:`~org.orekit.propagation.events.DetectorModifier.getDetector`
+            Get the wrapped detector.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.DetectorModifier.getDetector` in
+                interface :class:`~org.orekit.propagation.events.DetectorModifier`
+        
+            Returns:
+                wrapped detector
         
         
         """
@@ -5560,15 +5917,19 @@ class NegateDetector(AbstractDetector['NegateDetector']):
     def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
             Description copied from class: :meth:`~org.orekit.propagation.events.AbstractDetector.init`
-            Initialize event handler at the start of a propagation.
+            Initialize event detector at the start of a propagation.
         
             This method is called once at the start of the propagation. It may be used by the event handler to initialize some
             internal data if needed.
         
-            The default implementation does nothing
+            The default implementation initializes the handler.
         
             This implementation sets the direction of propagation and initializes the event handler. If a subclass overrides this
             method it should call :code:`super.init(s0, t)`.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.DetectorModifier.init` in
+                interface :class:`~org.orekit.propagation.events.DetectorModifier`
         
             Specified by:
                 :meth:`~org.orekit.propagation.events.EventDetector.init` in
@@ -5727,6 +6088,24 @@ class ParameterDrivenDateIntervalDetector(AbstractDetector['ParameterDrivenDateI
         
         """
         ...
+    @staticmethod
+    def getDefaultDetectionSettings(absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> EventDetectionSettings:
+        """
+            Get default detection settings.
+        
+            Parameters:
+                refStart (:class:`~org.orekit.time.AbsoluteDate`): reference interval start date
+                refStop (:class:`~org.orekit.time.AbsoluteDate`): reference interval stop date
+        
+            Returns:
+                default detection settings
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
     def getDurationDriver(self) -> org.orekit.utils.ParameterDriver:
         """
             Get the driver for duration.
@@ -5858,12 +6237,12 @@ class PositionAngleDetector(AbstractDetector['PositionAngleDetector']):
         ...
     def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
-            Initialize event handler at the start of a propagation.
+            Initialize event detector at the start of a propagation.
         
             This method is called once at the start of the propagation. It may be used by the event handler to initialize some
             internal data if needed.
         
-            The default implementation does nothing
+            The default implementation initializes the handler.
         
             This implementation sets the direction of propagation and initializes the event handler. If a subclass overrides this
             method it should call :code:`super.init(s0, t)`.
@@ -5895,10 +6274,10 @@ class PythonAbstractDetector(AbstractDetector[_PythonAbstractDetector__T], typin
             :meth:`~org.orekit.propagation.Propagator.addEventDetector`
     """
     @typing.overload
-    def __init__(self, double: float, double2: float, int: int, eventHandler: org.orekit.propagation.events.handlers.EventHandler): ...
+    def __init__(self, double: float, double2: float, int: int, eventHandler: typing.Union[org.orekit.propagation.events.handlers.EventHandler, typing.Callable]): ...
     @typing.overload
-    def __init__(self, adaptableInterval: typing.Union[AdaptableInterval, typing.Callable], double: float, int: int, eventHandler: org.orekit.propagation.events.handlers.EventHandler): ...
-    def create(self, adaptableInterval: typing.Union[AdaptableInterval, typing.Callable], double: float, int: int, eventHandler: org.orekit.propagation.events.handlers.EventHandler) -> _PythonAbstractDetector__T:
+    def __init__(self, eventDetectionSettings: EventDetectionSettings, eventHandler: typing.Union[org.orekit.propagation.events.handlers.EventHandler, typing.Callable]): ...
+    def create(self, eventDetectionSettings: EventDetectionSettings, eventHandler: typing.Union[org.orekit.propagation.events.handlers.EventHandler, typing.Callable]) -> _PythonAbstractDetector__T:
         """
             Build a new instance.
         
@@ -5907,9 +6286,7 @@ class PythonAbstractDetector(AbstractDetector[_PythonAbstractDetector__T], typin
                 class :class:`~org.orekit.propagation.events.AbstractDetector`
         
             Parameters:
-                newMaxCheck (:class:`~org.orekit.propagation.events.AdaptableInterval`): maximum checking interval (s)
-                newThreshold (double): convergence threshold (s)
-                newMaxIter (int): maximum number of iterations in the event time search
+                detectionSettings (:class:`~org.orekit.propagation.events.EventDetectionSettings`): detection settings
                 newHandler (:class:`~org.orekit.propagation.events.handlers.EventHandler`): event handler to call at event occurrences
         
             Returns:
@@ -5953,16 +6330,84 @@ class PythonAbstractDetector(AbstractDetector[_PythonAbstractDetector__T], typin
         """
         ...
 
+class PythonDetectorModifier(DetectorModifier):
+    """
+    public class PythonDetectorModifier extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.DetectorModifier`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def getDetector(self) -> EventDetector:
+        """
+            Get the wrapped detector.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.DetectorModifier.getDetector` in
+                interface :class:`~org.orekit.propagation.events.DetectorModifier`
+        
+            Returns:
+                wrapped detector
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
 _PythonFieldAbstractDetector__D = typing.TypeVar('_PythonFieldAbstractDetector__D', bound=FieldAbstractDetector)  # <D>
 _PythonFieldAbstractDetector__T = typing.TypeVar('_PythonFieldAbstractDetector__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldAbstractDetector(FieldAbstractDetector[_PythonFieldAbstractDetector__D, _PythonFieldAbstractDetector__T], typing.Generic[_PythonFieldAbstractDetector__D, _PythonFieldAbstractDetector__T]):
     """
     public class PythonFieldAbstractDetector<D extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<D, T>, T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.FieldAbstractDetector`<D, T>
     """
-    def __init__(self, fieldAdaptableInterval: typing.Union[FieldAdaptableInterval[_PythonFieldAbstractDetector__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement]], float]], t: _PythonFieldAbstractDetector__T, int: int, fieldEventHandler: org.orekit.propagation.events.handlers.FieldEventHandler[_PythonFieldAbstractDetector__T]): ...
-    def create(self, fieldAdaptableInterval: typing.Union[FieldAdaptableInterval[_PythonFieldAbstractDetector__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement]], float]], t: _PythonFieldAbstractDetector__T, int: int, fieldEventHandler: org.orekit.propagation.events.handlers.FieldEventHandler[_PythonFieldAbstractDetector__T]) -> _PythonFieldAbstractDetector__D: ...
+    def __init__(self, fieldEventDetectionSettings: FieldEventDetectionSettings[_PythonFieldAbstractDetector__T], fieldEventHandler: typing.Union[org.orekit.propagation.events.handlers.FieldEventHandler[_PythonFieldAbstractDetector__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], FieldEventDetector[org.hipparchus.CalculusFieldElement], bool], org.hipparchus.ode.events.Action]]): ...
+    def create(self, fieldEventDetectionSettings: FieldEventDetectionSettings[_PythonFieldAbstractDetector__T], fieldEventHandler: typing.Union[org.orekit.propagation.events.handlers.FieldEventHandler[_PythonFieldAbstractDetector__T], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], FieldEventDetector[org.hipparchus.CalculusFieldElement], bool], org.hipparchus.ode.events.Action]]) -> _PythonFieldAbstractDetector__D: ...
     def finalize(self) -> None: ...
     def g(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldAbstractDetector__T]) -> _PythonFieldAbstractDetector__T: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
+_PythonFieldDetectorModifier__T = typing.TypeVar('_PythonFieldDetectorModifier__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class PythonFieldDetectorModifier(FieldDetectorModifier[_PythonFieldDetectorModifier__T], typing.Generic[_PythonFieldDetectorModifier__T]):
+    """
+    public class PythonFieldDetectorModifier<T extends :class:`~org.orekit.propagation.events.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.events.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.FieldDetectorModifier`<T>
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def getDetector(self) -> FieldEventDetector[_PythonFieldDetectorModifier__T]: ...
     def pythonDecRef(self) -> None:
         """
             Part of JCC Python interface to object
@@ -6016,7 +6461,7 @@ class RelativeDistanceDetector(AbstractDetector['RelativeDistanceDetector']):
         Also see:
             :meth:`~org.orekit.propagation.Propagator.addEventDetector`
     """
-    def __init__(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, double: float): ...
+    def __init__(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], double: float): ...
     def g(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float:
         """
             The :code:`g` is positive when the relative distance is larger or equal than the threshold, non-positive otherwise.
@@ -6052,11 +6497,10 @@ class RelativeDistanceDetector(AbstractDetector['RelativeDistanceDetector']):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.propagation.events")``.
 
     AbstractDetector: typing.Type[AbstractDetector]
-    AdaptableInterval: typing.Type[AdaptableInterval]
     AdapterDetector: typing.Type[AdapterDetector]
     AlignmentDetector: typing.Type[AlignmentDetector]
     AltitudeDetector: typing.Type[AltitudeDetector]
@@ -6067,6 +6511,7 @@ class __module_protocol__(typing.Protocol):
     BooleanDetector: typing.Type[BooleanDetector]
     CylindricalShadowEclipseDetector: typing.Type[CylindricalShadowEclipseDetector]
     DateDetector: typing.Type[DateDetector]
+    DetectorModifier: typing.Type[DetectorModifier]
     EclipseDetector: typing.Type[EclipseDetector]
     ElevationDetector: typing.Type[ElevationDetector]
     ElevationExtremumDetector: typing.Type[ElevationExtremumDetector]
@@ -6081,7 +6526,6 @@ class __module_protocol__(typing.Protocol):
     EventsLogger: typing.Type[EventsLogger]
     ExtremumApproachDetector: typing.Type[ExtremumApproachDetector]
     FieldAbstractDetector: typing.Type[FieldAbstractDetector]
-    FieldAdaptableInterval: typing.Type[FieldAdaptableInterval]
     FieldAdapterDetector: typing.Type[FieldAdapterDetector]
     FieldAltitudeDetector: typing.Type[FieldAltitudeDetector]
     FieldApsideDetector: typing.Type[FieldApsideDetector]
@@ -6089,6 +6533,7 @@ class __module_protocol__(typing.Protocol):
     FieldBooleanDetector: typing.Type[FieldBooleanDetector]
     FieldCylindricalShadowEclipseDetector: typing.Type[FieldCylindricalShadowEclipseDetector]
     FieldDateDetector: typing.Type[FieldDateDetector]
+    FieldDetectorModifier: typing.Type[FieldDetectorModifier]
     FieldEclipseDetector: typing.Type[FieldEclipseDetector]
     FieldElevationDetector: typing.Type[FieldElevationDetector]
     FieldElevationExtremumDetector: typing.Type[FieldElevationExtremumDetector]
@@ -6096,6 +6541,7 @@ class __module_protocol__(typing.Protocol):
     FieldEventDetectionSettings: typing.Type[FieldEventDetectionSettings]
     FieldEventDetector: typing.Type[FieldEventDetector]
     FieldEventEnablingPredicateFilter: typing.Type[FieldEventEnablingPredicateFilter]
+    FieldEventShifter: typing.Type[FieldEventShifter]
     FieldEventSlopeFilter: typing.Type[FieldEventSlopeFilter]
     FieldEventState: typing.Type[FieldEventState]
     FieldEventsLogger: typing.Type[FieldEventsLogger]
@@ -6130,16 +6576,15 @@ class __module_protocol__(typing.Protocol):
     ParameterDrivenDateIntervalDetector: typing.Type[ParameterDrivenDateIntervalDetector]
     PositionAngleDetector: typing.Type[PositionAngleDetector]
     PythonAbstractDetector: typing.Type[PythonAbstractDetector]
-    PythonAdaptableInterval: typing.Type[PythonAdaptableInterval]
+    PythonDetectorModifier: typing.Type[PythonDetectorModifier]
     PythonEnablingPredicate: typing.Type[PythonEnablingPredicate]
     PythonEventDetector: typing.Type[PythonEventDetector]
     PythonEventDetectorsProvider: typing.Type[PythonEventDetectorsProvider]
     PythonFieldAbstractDetector: typing.Type[PythonFieldAbstractDetector]
-    PythonFieldAdaptableInterval: typing.Type[PythonFieldAdaptableInterval]
+    PythonFieldDetectorModifier: typing.Type[PythonFieldDetectorModifier]
     PythonFieldEnablingPredicate: typing.Type[PythonFieldEnablingPredicate]
     PythonFieldEventDetector: typing.Type[PythonFieldEventDetector]
     RelativeDistanceDetector: typing.Type[RelativeDistanceDetector]
     VisibilityTrigger: typing.Type[VisibilityTrigger]
-    class-use: org.orekit.propagation.events.class-use.__module_protocol__
     handlers: org.orekit.propagation.events.handlers.__module_protocol__
     intervals: org.orekit.propagation.events.intervals.__module_protocol__

@@ -1,4 +1,12 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.util
+import jpype
 import org.hipparchus
 import org.hipparchus.analysis.differentiation
 import org.hipparchus.geometry.euclidean.threed
@@ -9,7 +17,6 @@ import org.orekit.orbits
 import org.orekit.propagation
 import org.orekit.propagation.analytical
 import org.orekit.propagation.events
-import org.orekit.propagation.integration.class-use
 import org.orekit.time
 import org.orekit.utils
 import typing
@@ -35,9 +42,9 @@ class AbstractGradientConverter:
         
         """
         ...
-    def getParameters(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient], parameterDriversProvider: org.orekit.utils.ParameterDriversProvider) -> typing.List[org.hipparchus.analysis.differentiation.Gradient]: ...
-    def getParametersAtStateDate(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient], parameterDriversProvider: org.orekit.utils.ParameterDriversProvider) -> typing.List[org.hipparchus.analysis.differentiation.Gradient]: ...
-    def getState(self, parameterDriversProvider: org.orekit.utils.ParameterDriversProvider) -> org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient]: ...
+    def getParameters(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient], parameterDriversProvider: typing.Union[org.orekit.utils.ParameterDriversProvider, typing.Callable]) -> typing.MutableSequence[org.hipparchus.analysis.differentiation.Gradient]: ...
+    def getParametersAtStateDate(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient], parameterDriversProvider: typing.Union[org.orekit.utils.ParameterDriversProvider, typing.Callable]) -> typing.MutableSequence[org.hipparchus.analysis.differentiation.Gradient]: ...
+    def getState(self, parameterDriversProvider: typing.Union[org.orekit.utils.ParameterDriversProvider, typing.Callable]) -> org.orekit.propagation.FieldSpacecraftState[org.hipparchus.analysis.differentiation.Gradient]: ...
 
 class AbstractIntegratedPropagator(org.orekit.propagation.AbstractPropagator):
     """
@@ -57,7 +64,7 @@ class AbstractIntegratedPropagator(org.orekit.propagation.AbstractPropagator):
                 11.1
         
             Also see:
-                :meth:`~org.orekit.propagation.AbstractPropagator.addAdditionalStateProvider`
+                :meth:`~org.orekit.propagation.AbstractPropagator.addAdditionalDataProvider`
         
         
         """
@@ -71,7 +78,17 @@ class AbstractIntegratedPropagator(org.orekit.propagation.AbstractPropagator):
         
             Also see:
                 :meth:`~org.orekit.propagation.Propagator.clearEventsDetectors`,
-                :meth:`~org.orekit.propagation.Propagator.getEventsDetectors`
+                :meth:`~org.orekit.propagation.Propagator.getEventDetectors`
+        
+        
+        """
+        ...
+    def clearEphemerisGenerators(self) -> None:
+        """
+            Clear the ephemeris generators.
+        
+            Since:
+                13.0
         
         
         """
@@ -82,7 +99,7 @@ class AbstractIntegratedPropagator(org.orekit.propagation.AbstractPropagator):
         
             Also see:
                 :meth:`~org.orekit.propagation.Propagator.addEventDetector`,
-                :meth:`~org.orekit.propagation.Propagator.getEventsDetectors`
+                :meth:`~org.orekit.propagation.Propagator.getEventDetectors`
         
         
         """
@@ -142,7 +159,7 @@ class AbstractIntegratedPropagator(org.orekit.propagation.AbstractPropagator):
         
         """
         ...
-    def getEventsDetectors(self) -> java.util.Collection[org.orekit.propagation.events.EventDetector]: ...
+    def getEventDetectors(self) -> java.util.Collection[org.orekit.propagation.events.EventDetector]: ...
     def getIntegratorName(self) -> str:
         """
             Get the integrator's name.
@@ -156,20 +173,20 @@ class AbstractIntegratedPropagator(org.orekit.propagation.AbstractPropagator):
         
         """
         ...
-    def getManagedAdditionalStates(self) -> typing.List[str]:
+    def getManagedAdditionalData(self) -> typing.MutableSequence[str]:
         """
-            Get all the names of all managed states.
+            Get all the names of all managed additional data.
         
             Specified by:
-                :meth:`~org.orekit.propagation.Propagator.getManagedAdditionalStates` in
+                :meth:`~org.orekit.propagation.Propagator.getManagedAdditionalData` in
                 interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.getManagedAdditionalStates` in
+                :meth:`~org.orekit.propagation.AbstractPropagator.getManagedAdditionalData` in
                 class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Returns:
-                names of all managed states
+                names of all managed additional data
         
         
         """
@@ -213,33 +230,33 @@ class AbstractIntegratedPropagator(org.orekit.propagation.AbstractPropagator):
         
         """
         ...
-    def isAdditionalStateManaged(self, string: str) -> bool:
+    def isAdditionalDataManaged(self, string: str) -> bool:
         """
-            Check if an additional state is managed.
+            Check if an additional data is managed.
         
-            Managed states are states for which the propagators know how to compute its evolution. They correspond to additional
-            states for which a :class:`~org.orekit.propagation.AdditionalStateProvider` has been registered by calling the
-            :meth:`~org.orekit.propagation.Propagator.addAdditionalStateProvider` method.
+            Managed data are the ones for which the propagators know how to compute its evolution. They correspond to additional
+            data for which a :class:`~org.orekit.propagation.AdditionalDataProvider` has been registered by calling the
+            :meth:`~org.orekit.propagation.Propagator.addAdditionalDataProvider` method.
         
-            Additional states that are present in the :meth:`~org.orekit.propagation.Propagator.getInitialState` but have no
-            evolution method registered are *not* considered as managed states. These unmanaged additional states are not lost
-            during propagation, though. Their value are piecewise constant between state resets that may change them if some event
-            handler :meth:`~org.orekit.propagation.events.handlers.EventHandler.resetState` method is called at an event occurrence
-            and happens to change the unmanaged additional state.
+            Additional data that are present in the :meth:`~org.orekit.propagation.Propagator.getInitialState` but have no evolution
+            method registered are *not* considered as managed data. These unmanaged additional data are not lost during propagation,
+            though. Their value are piecewise constant between state resets that may change them if some event handler
+            :meth:`~org.orekit.propagation.events.handlers.EventHandler.resetState` method is called at an event occurrence and
+            happens to change the unmanaged additional data.
         
             Specified by:
-                :meth:`~org.orekit.propagation.Propagator.isAdditionalStateManaged` in
+                :meth:`~org.orekit.propagation.Propagator.isAdditionalDataManaged` in
                 interface :class:`~org.orekit.propagation.Propagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.AbstractPropagator.isAdditionalStateManaged` in
+                :meth:`~org.orekit.propagation.AbstractPropagator.isAdditionalDataManaged` in
                 class :class:`~org.orekit.propagation.AbstractPropagator`
         
             Parameters:
-                name (:class:`~org.orekit.propagation.integration.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional state
+                name (:class:`~org.orekit.propagation.integration.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional data
         
             Returns:
-                true if the additional state is managed
+                true if the additional data is managed
         
         
         """
@@ -352,7 +369,7 @@ class AbstractIntegratedPropagator(org.orekit.propagation.AbstractPropagator):
         """
         ...
     class MainStateEquations:
-        def computeDerivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]: ...
+        def computeDerivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.MutableSequence[float]: ...
         def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None: ...
 
 class AdditionalDerivativesProvider:
@@ -374,7 +391,7 @@ class AdditionalDerivativesProvider:
         object the sets of parameters which equations can interact on each others states.
     
         This interface is the numerical (read not already integrated) counterpart of the
-        :class:`~org.orekit.propagation.AdditionalStateProvider` interface. It allows to append various additional state
+        :class:`~org.orekit.propagation.AdditionalDataProvider` interface. It allows to append various additional state
         parameters to any :class:`~org.orekit.propagation.numerical.NumericalPropagator` or
         :class:`~org.orekit.propagation.semianalytical.dsst.DSSTPropagator`.
     
@@ -437,7 +454,7 @@ class AdditionalDerivativesProvider:
             Check if this provider should yield so another provider has an opportunity to add missing parts.
         
             Decision to yield is often based on an additional state being
-            :meth:`~org.orekit.propagation.SpacecraftState.hasAdditionalState` in the provided :code:`state` (but it could
+            :meth:`~org.orekit.propagation.SpacecraftState.hasAdditionalData` in the provided :code:`state` (but it could
             theoretically also depend on an additional state derivative being
             :meth:`~org.orekit.propagation.SpacecraftState.hasAdditionalStateDerivative`, or any other criterion). If for example a
             provider needs the state transition matrix, it could implement this method as:
@@ -475,8 +492,8 @@ class CombinedDerivatives:
         Also see:
             :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
     """
-    def __init__(self, doubleArray: typing.List[float], doubleArray2: typing.List[float]): ...
-    def getAdditionalDerivatives(self) -> typing.List[float]:
+    def __init__(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]): ...
+    def getAdditionalDerivatives(self) -> typing.MutableSequence[float]:
         """
             Get the derivatives related to the additional state.
         
@@ -486,7 +503,7 @@ class CombinedDerivatives:
         
         """
         ...
-    def getMainStateDerivativesIncrements(self) -> typing.List[float]:
+    def getMainStateDerivativesIncrements(self) -> typing.MutableSequence[float]:
         """
             Get the derivatives increments related to the main state.
         
@@ -509,13 +526,23 @@ class FieldAbstractIntegratedPropagator(org.orekit.propagation.FieldAbstractProp
     def addAdditionalDerivativesProvider(self, fieldAdditionalDerivativesProvider: 'FieldAdditionalDerivativesProvider'[_FieldAbstractIntegratedPropagator__T]) -> None: ...
     _addEventDetector__D = typing.TypeVar('_addEventDetector__D', bound=org.orekit.propagation.events.FieldEventDetector)  # <D>
     def addEventDetector(self, d: _addEventDetector__D) -> None: ...
+    def clearEphemerisGenerators(self) -> None:
+        """
+            Clear the ephemeris generators.
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
     def clearEventsDetectors(self) -> None:
         """
             Remove all events detectors.
         
             Also see:
                 :meth:`~org.orekit.propagation.FieldPropagator.addEventDetector`,
-                :meth:`~org.orekit.propagation.FieldPropagator.getEventsDetectors`
+                :meth:`~org.orekit.propagation.FieldPropagator.getEventDetectors`
         
         
         """
@@ -545,7 +572,7 @@ class FieldAbstractIntegratedPropagator(org.orekit.propagation.FieldAbstractProp
         """
         ...
     def getEphemerisGenerator(self) -> org.orekit.propagation.FieldEphemerisGenerator[_FieldAbstractIntegratedPropagator__T]: ...
-    def getEventsDetectors(self) -> java.util.Collection[org.orekit.propagation.events.FieldEventDetector[_FieldAbstractIntegratedPropagator__T]]: ...
+    def getEventDetectors(self) -> java.util.Collection[org.orekit.propagation.events.FieldEventDetector[_FieldAbstractIntegratedPropagator__T]]: ...
     def getIntegratorName(self) -> str:
         """
             Get the integrator's name.
@@ -559,20 +586,20 @@ class FieldAbstractIntegratedPropagator(org.orekit.propagation.FieldAbstractProp
         
         """
         ...
-    def getManagedAdditionalStates(self) -> typing.List[str]:
+    def getManagedAdditionalData(self) -> typing.MutableSequence[str]:
         """
-            Get all the names of all managed states.
+            Get all the names of all managed data.
         
             Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.getManagedAdditionalStates` in
+                :meth:`~org.orekit.propagation.FieldPropagator.getManagedAdditionalData` in
                 interface :class:`~org.orekit.propagation.FieldPropagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.FieldAbstractPropagator.getManagedAdditionalStates` in
+                :meth:`~org.orekit.propagation.FieldAbstractPropagator.getManagedAdditionalData` in
                 class :class:`~org.orekit.propagation.FieldAbstractPropagator`
         
             Returns:
-                names of all managed states
+                names of all managed data
         
         
         """
@@ -616,37 +643,37 @@ class FieldAbstractIntegratedPropagator(org.orekit.propagation.FieldAbstractProp
         
         """
         ...
-    def isAdditionalStateManaged(self, string: str) -> bool:
+    def isAdditionalDataManaged(self, string: str) -> bool:
         """
-            Check if an additional state is managed.
+            Check if an additional data is managed.
         
-            Managed states are states for which the propagators know how to compute its evolution. They correspond to additional
-            states for which an :class:`~org.orekit.propagation.FieldAdditionalStateProvider` has been registered by calling the
-            :meth:`~org.orekit.propagation.FieldPropagator.addAdditionalStateProvider` method. If the propagator is an
+            Managed data are the ones for which the propagators know how to compute its evolution. They correspond to additional
+            data for which an :class:`~org.orekit.propagation.FieldAdditionalDataProvider` has been registered by calling the
+            :meth:`~org.orekit.propagation.FieldPropagator.addAdditionalDataProvider` method. If the propagator is an
             :class:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator`, the states for which a set of
             :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider` has been registered by calling the
             :meth:`~org.orekit.propagation.integration.FieldAbstractIntegratedPropagator.addAdditionalDerivativesProvider` method
             are also counted as managed additional states.
         
-            Additional states that are present in the :meth:`~org.orekit.propagation.FieldPropagator.getInitialState` but have no
-            evolution method registered are *not* considered as managed states. These unmanaged additional states are not lost
-            during propagation, though. Their value are piecewise constant between state resets that may change them if some event
-            handler :meth:`~org.orekit.propagation.events.handlers.FieldEventHandler.resetState` method is called at an event
-            occurrence and happens to change the unmanaged additional state.
+            Additional data that are present in the :meth:`~org.orekit.propagation.FieldPropagator.getInitialState` but have no
+            evolution method registered are *not* considered as managed data. These unmanaged additional data are not lost during
+            propagation, though. Their value are piecewise constant between state resets that may change them if some event handler
+            :meth:`~org.orekit.propagation.events.handlers.FieldEventHandler.resetState` method is called at an event occurrence and
+            happens to change the unmanaged additional data.
         
             Specified by:
-                :meth:`~org.orekit.propagation.FieldPropagator.isAdditionalStateManaged` in
+                :meth:`~org.orekit.propagation.FieldPropagator.isAdditionalDataManaged` in
                 interface :class:`~org.orekit.propagation.FieldPropagator`
         
             Overrides:
-                :meth:`~org.orekit.propagation.FieldAbstractPropagator.isAdditionalStateManaged` in
+                :meth:`~org.orekit.propagation.FieldAbstractPropagator.isAdditionalDataManaged` in
                 class :class:`~org.orekit.propagation.FieldAbstractPropagator`
         
             Parameters:
-                name (:class:`~org.orekit.propagation.integration.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional state
+                name (:class:`~org.orekit.propagation.integration.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the additional data
         
             Returns:
-                true if the additional state is managed
+                true if the additional data is managed
         
         
         """
@@ -706,7 +733,7 @@ class FieldAbstractIntegratedPropagator(org.orekit.propagation.FieldAbstractProp
         """
         ...
     class MainStateEquations(typing.Generic[_FieldAbstractIntegratedPropagator__MainStateEquations__T]):
-        def computeDerivatives(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldAbstractIntegratedPropagator__MainStateEquations__T]) -> typing.List[_FieldAbstractIntegratedPropagator__MainStateEquations__T]: ...
+        def computeDerivatives(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldAbstractIntegratedPropagator__MainStateEquations__T]) -> typing.MutableSequence[_FieldAbstractIntegratedPropagator__MainStateEquations__T]: ...
         def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldAbstractIntegratedPropagator__MainStateEquations__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldAbstractIntegratedPropagator__MainStateEquations__T]) -> None: ...
 
 _FieldAdditionalDerivativesProvider__T = typing.TypeVar('_FieldAdditionalDerivativesProvider__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
@@ -730,7 +757,7 @@ class FieldAdditionalDerivativesProvider(typing.Generic[_FieldAdditionalDerivati
         object the sets of parameters which equations can interact on each others states.
     
         This interface is the numerical (read not already integrated) counterpart of the
-        :class:`~org.orekit.propagation.FieldAdditionalStateProvider` interface. It allows to append various additional state
+        :class:`~org.orekit.propagation.FieldAdditionalDataProvider` interface. It allows to append various additional state
         parameters to any :class:`~org.orekit.propagation.numerical.FieldNumericalPropagator` or
         :class:`~org.orekit.propagation.semianalytical.dsst.FieldDSSTPropagator`.
     
@@ -777,8 +804,8 @@ class FieldCombinedDerivatives(typing.Generic[_FieldCombinedDerivatives__T]):
         Also see:
             :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider`
     """
-    def __init__(self, tArray: typing.List[_FieldCombinedDerivatives__T], tArray2: typing.List[_FieldCombinedDerivatives__T]): ...
-    def getAdditionalDerivatives(self) -> typing.List[_FieldCombinedDerivatives__T]:
+    def __init__(self, tArray: typing.Union[typing.List[_FieldCombinedDerivatives__T], jpype.JArray], tArray2: typing.Union[typing.List[_FieldCombinedDerivatives__T], jpype.JArray]): ...
+    def getAdditionalDerivatives(self) -> typing.MutableSequence[_FieldCombinedDerivatives__T]:
         """
             Get the derivatives related to the additional state.
         
@@ -788,7 +815,7 @@ class FieldCombinedDerivatives(typing.Generic[_FieldCombinedDerivatives__T]):
         
         """
         ...
-    def getMainStateDerivativesIncrements(self) -> typing.List[_FieldCombinedDerivatives__T]:
+    def getMainStateDerivativesIncrements(self) -> typing.MutableSequence[_FieldCombinedDerivatives__T]:
         """
             Get the derivatives increments related to the main state.
         
@@ -822,7 +849,8 @@ class FieldIntegratedEphemeris(org.orekit.propagation.analytical.FieldAbstractAn
         Also see:
             :class:`~org.orekit.propagation.numerical.NumericalPropagator`
     """
-    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldIntegratedEphemeris__T], fieldAbsoluteDate2: org.orekit.time.FieldAbsoluteDate[_FieldIntegratedEphemeris__T], fieldAbsoluteDate3: org.orekit.time.FieldAbsoluteDate[_FieldIntegratedEphemeris__T], fieldStateMapper: 'FieldStateMapper'[_FieldIntegratedEphemeris__T], propagationType: org.orekit.propagation.PropagationType, fieldDenseOutputModel: org.hipparchus.ode.FieldDenseOutputModel[_FieldIntegratedEphemeris__T], fieldArrayDictionary: org.orekit.utils.FieldArrayDictionary[_FieldIntegratedEphemeris__T], list: java.util.List[org.orekit.propagation.FieldAdditionalStateProvider[_FieldIntegratedEphemeris__T]], stringArray: typing.List[str], intArray: typing.List[int]): ...
+    def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldIntegratedEphemeris__T], fieldAbsoluteDate2: org.orekit.time.FieldAbsoluteDate[_FieldIntegratedEphemeris__T], fieldAbsoluteDate3: org.orekit.time.FieldAbsoluteDate[_FieldIntegratedEphemeris__T], fieldStateMapper: 'FieldStateMapper'[_FieldIntegratedEphemeris__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, propagationType: org.orekit.propagation.PropagationType, fieldDenseOutputModel: org.hipparchus.ode.FieldDenseOutputModel[_FieldIntegratedEphemeris__T], fieldDataDictionary: org.orekit.utils.FieldDataDictionary[_FieldIntegratedEphemeris__T], list: java.util.List[org.orekit.propagation.FieldAdditionalDataProvider[typing.Any, _FieldIntegratedEphemeris__T]], stringArray: typing.Union[typing.List[str], jpype.JArray], intArray: typing.Union[typing.List[int], jpype.JArray]): ...
+    def basicPropagate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldIntegratedEphemeris__T]) -> org.orekit.propagation.FieldSpacecraftState[_FieldIntegratedEphemeris__T]: ...
     def getFrame(self) -> org.orekit.frames.Frame:
         """
             Description copied from class: :meth:`~org.orekit.propagation.FieldAbstractPropagator.getFrame`
@@ -851,7 +879,9 @@ class FieldIntegratedEphemeris(org.orekit.propagation.analytical.FieldAbstractAn
     def getMaxDate(self) -> org.orekit.time.FieldAbsoluteDate[_FieldIntegratedEphemeris__T]: ...
     def getMinDate(self) -> org.orekit.time.FieldAbsoluteDate[_FieldIntegratedEphemeris__T]: ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
+    def propagateOrbit(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldIntegratedEphemeris__T], tArray: typing.Union[typing.List[_FieldIntegratedEphemeris__T], jpype.JArray]) -> org.orekit.orbits.FieldOrbit[_FieldIntegratedEphemeris__T]: ...
     def resetInitialState(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldIntegratedEphemeris__T]) -> None: ...
+    def updateAdditionalData(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldIntegratedEphemeris__T]) -> org.orekit.propagation.FieldSpacecraftState[_FieldIntegratedEphemeris__T]: ...
 
 _FieldStateMapper__T = typing.TypeVar('_FieldStateMapper__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldStateMapper(typing.Generic[_FieldStateMapper__T]):
@@ -912,15 +942,15 @@ class FieldStateMapper(typing.Generic[_FieldStateMapper__T]):
         ...
     def getReferenceDate(self) -> org.orekit.time.FieldAbsoluteDate[_FieldStateMapper__T]: ...
     @typing.overload
-    def mapArrayToState(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldStateMapper__T], tArray: typing.List[_FieldStateMapper__T], tArray2: typing.List[_FieldStateMapper__T], propagationType: org.orekit.propagation.PropagationType) -> org.orekit.propagation.FieldSpacecraftState[_FieldStateMapper__T]: ...
+    def mapArrayToState(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldStateMapper__T], tArray: typing.Union[typing.List[_FieldStateMapper__T], jpype.JArray], tArray2: typing.Union[typing.List[_FieldStateMapper__T], jpype.JArray], propagationType: org.orekit.propagation.PropagationType) -> org.orekit.propagation.FieldSpacecraftState[_FieldStateMapper__T]: ...
     @typing.overload
-    def mapArrayToState(self, t: _FieldStateMapper__T, tArray: typing.List[_FieldStateMapper__T], tArray2: typing.List[_FieldStateMapper__T], propagationType: org.orekit.propagation.PropagationType) -> org.orekit.propagation.FieldSpacecraftState[_FieldStateMapper__T]: ...
+    def mapArrayToState(self, t: _FieldStateMapper__T, tArray: typing.Union[typing.List[_FieldStateMapper__T], jpype.JArray], tArray2: typing.Union[typing.List[_FieldStateMapper__T], jpype.JArray], propagationType: org.orekit.propagation.PropagationType) -> org.orekit.propagation.FieldSpacecraftState[_FieldStateMapper__T]: ...
     def mapDateToDouble(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldStateMapper__T]) -> _FieldStateMapper__T: ...
     @typing.overload
     def mapDoubleToDate(self, t: _FieldStateMapper__T) -> org.orekit.time.FieldAbsoluteDate[_FieldStateMapper__T]: ...
     @typing.overload
     def mapDoubleToDate(self, t: _FieldStateMapper__T, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldStateMapper__T]) -> org.orekit.time.FieldAbsoluteDate[_FieldStateMapper__T]: ...
-    def mapStateToArray(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldStateMapper__T], tArray: typing.List[_FieldStateMapper__T], tArray2: typing.List[_FieldStateMapper__T]) -> None: ...
+    def mapStateToArray(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldStateMapper__T], tArray: typing.Union[typing.List[_FieldStateMapper__T], jpype.JArray], tArray2: typing.Union[typing.List[_FieldStateMapper__T], jpype.JArray]) -> None: ...
     def setAttitudeProvider(self, attitudeProvider: org.orekit.attitudes.AttitudeProvider) -> None:
         """
             Setter for the attitude provider.
@@ -960,7 +990,29 @@ class IntegratedEphemeris(org.orekit.propagation.analytical.AbstractAnalyticalPr
         Also see:
             :class:`~org.orekit.propagation.numerical.NumericalPropagator`
     """
-    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, absoluteDate3: org.orekit.time.AbsoluteDate, stateMapper: 'StateMapper', propagationType: org.orekit.propagation.PropagationType, denseOutputModel: org.hipparchus.ode.DenseOutputModel, doubleArrayDictionary: org.orekit.utils.DoubleArrayDictionary, list: java.util.List[org.orekit.propagation.AdditionalStateProvider], stringArray: typing.List[str], intArray: typing.List[int]): ...
+    def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, absoluteDate3: org.orekit.time.AbsoluteDate, stateMapper: 'StateMapper', attitudeProvider: org.orekit.attitudes.AttitudeProvider, propagationType: org.orekit.propagation.PropagationType, denseOutputModel: org.hipparchus.ode.DenseOutputModel, dataDictionary: org.orekit.utils.DataDictionary, list: java.util.List[org.orekit.propagation.AdditionalDataProvider[typing.Any]], stringArray: typing.Union[typing.List[str], jpype.JArray], intArray: typing.Union[typing.List[int], jpype.JArray]): ...
+    def basicPropagate(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.propagation.SpacecraftState:
+        """
+            Propagate an orbit without any fancy features.
+        
+            This method is similar in spirit to the
+            :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator.propagate` method, except that it does **not**
+            call any handler during propagation, nor any discrete events, not additional states. It always stops exactly at the
+            specified date.
+        
+            Overrides:
+                :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator.basicPropagate` in
+                class :class:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): target date for propagation
+        
+            Returns:
+                state at specified date
+        
+        
+        """
+        ...
     def getFrame(self) -> org.orekit.frames.Frame:
         """
             Description copied from class: :meth:`~org.orekit.propagation.AbstractPropagator.getFrame`
@@ -1030,6 +1082,23 @@ class IntegratedEphemeris(org.orekit.propagation.analytical.AbstractAnalyticalPr
         
         """
         ...
+    def propagateOrbit(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.orbits.Orbit:
+        """
+            Extrapolate an orbit up to a specific target date.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator.propagateOrbit` in
+                class :class:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): target date for the orbit
+        
+            Returns:
+                extrapolated parameters
+        
+        
+        """
+        ...
     def resetInitialState(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
         """
             Reset the propagator initial state.
@@ -1060,6 +1129,28 @@ class IntegratedEphemeris(org.orekit.propagation.analytical.AbstractAnalyticalPr
         
             Parameters:
                 attitudeProvider (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude provider
+        
+        
+        """
+        ...
+    def updateAdditionalData(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.orekit.propagation.SpacecraftState:
+        """
+            Update state by adding all additional data.
+        
+            Overrides:
+                :meth:`~org.orekit.propagation.AbstractPropagator.updateAdditionalData` in
+                class :class:`~org.orekit.propagation.AbstractPropagator`
+        
+            Parameters:
+                original (:class:`~org.orekit.propagation.SpacecraftState`): original state
+        
+            Returns:
+                updated state, with all additional data included (including
+                :meth:`~org.orekit.propagation.AbstractPropagator.updateUnmanagedData` data)
+        
+            Also see:
+                :meth:`~org.orekit.propagation.AbstractPropagator.addAdditionalDataProvider`,
+                :meth:`~org.orekit.propagation.AbstractPropagator.updateUnmanagedData`
         
         
         """
@@ -1135,7 +1226,7 @@ class StateMapper:
         """
         ...
     @typing.overload
-    def mapArrayToState(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], doubleArray2: typing.List[float], propagationType: org.orekit.propagation.PropagationType) -> org.orekit.propagation.SpacecraftState:
+    def mapArrayToState(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], propagationType: org.orekit.propagation.PropagationType) -> org.orekit.propagation.SpacecraftState:
         """
             Map the raw double components to a spacecraft state.
         
@@ -1163,7 +1254,7 @@ class StateMapper:
         """
         ...
     @typing.overload
-    def mapArrayToState(self, double: float, doubleArray: typing.List[float], doubleArray2: typing.List[float], propagationType: org.orekit.propagation.PropagationType) -> org.orekit.propagation.SpacecraftState: ...
+    def mapArrayToState(self, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], propagationType: org.orekit.propagation.PropagationType) -> org.orekit.propagation.SpacecraftState: ...
     def mapDateToDouble(self, absoluteDate: org.orekit.time.AbsoluteDate) -> float:
         """
             Map a date to a raw double time offset.
@@ -1203,7 +1294,7 @@ class StateMapper:
         ...
     @typing.overload
     def mapDoubleToDate(self, double: float, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.time.AbsoluteDate: ...
-    def mapStateToArray(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[float], doubleArray2: typing.List[float]) -> None:
+    def mapStateToArray(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
             Map a spacecraft state to raw double components.
         
@@ -1284,6 +1375,7 @@ class PythonAbstractGradientConverter(AbstractGradientConverter):
     def extend(self, fieldRotation: org.hipparchus.geometry.euclidean.threed.FieldRotation[org.hipparchus.analysis.differentiation.Gradient], int: int) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[org.hipparchus.analysis.differentiation.Gradient]: ...
     @typing.overload
     def extend(self, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.Gradient], int: int) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.Gradient]: ...
+    def finalize(self) -> None: ...
     def getFreeStateParameters(self) -> int:
         """
             Get the number of free state parameters.
@@ -1296,6 +1388,25 @@ class PythonAbstractGradientConverter(AbstractGradientConverter):
                 number of free state parameters
         
         
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
         """
         ...
 
@@ -1462,7 +1573,7 @@ class PythonAdditionalDerivativesProvider(AdditionalDerivativesProvider):
             Check if this provider should yield so another provider has an opportunity to add missing parts.
         
             Decision to yield is often based on an additional state being
-            :meth:`~org.orekit.propagation.SpacecraftState.hasAdditionalState` in the provided :code:`state` (but it could
+            :meth:`~org.orekit.propagation.SpacecraftState.hasAdditionalData` in the provided :code:`state` (but it could
             theoretically also depend on an additional state derivative being
             :meth:`~org.orekit.propagation.SpacecraftState.hasAdditionalStateDerivative`, or any other criterion). If for example a
             provider needs the state transition matrix, it could implement this method as:
@@ -1579,10 +1690,10 @@ class PythonFieldStateMapper(FieldStateMapper[_PythonFieldStateMapper__T], typin
     def __init__(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldStateMapper__T], t: _PythonFieldStateMapper__T, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType, attitudeProvider: org.orekit.attitudes.AttitudeProvider, frame: org.orekit.frames.Frame): ...
     def finalize(self) -> None: ...
     @typing.overload
-    def mapArrayToState(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldStateMapper__T], tArray: typing.List[_PythonFieldStateMapper__T], tArray2: typing.List[_PythonFieldStateMapper__T], propagationType: org.orekit.propagation.PropagationType) -> org.orekit.propagation.FieldSpacecraftState[_PythonFieldStateMapper__T]: ...
+    def mapArrayToState(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_PythonFieldStateMapper__T], tArray: typing.Union[typing.List[_PythonFieldStateMapper__T], jpype.JArray], tArray2: typing.Union[typing.List[_PythonFieldStateMapper__T], jpype.JArray], propagationType: org.orekit.propagation.PropagationType) -> org.orekit.propagation.FieldSpacecraftState[_PythonFieldStateMapper__T]: ...
     @typing.overload
-    def mapArrayToState(self, t: _PythonFieldStateMapper__T, tArray: typing.List[_PythonFieldStateMapper__T], tArray2: typing.List[_PythonFieldStateMapper__T], propagationType: org.orekit.propagation.PropagationType) -> org.orekit.propagation.FieldSpacecraftState[_PythonFieldStateMapper__T]: ...
-    def mapStateToArray(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldStateMapper__T], tArray: typing.List[_PythonFieldStateMapper__T], tArray2: typing.List[_PythonFieldStateMapper__T]) -> None: ...
+    def mapArrayToState(self, t: _PythonFieldStateMapper__T, tArray: typing.Union[typing.List[_PythonFieldStateMapper__T], jpype.JArray], tArray2: typing.Union[typing.List[_PythonFieldStateMapper__T], jpype.JArray], propagationType: org.orekit.propagation.PropagationType) -> org.orekit.propagation.FieldSpacecraftState[_PythonFieldStateMapper__T]: ...
+    def mapStateToArray(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldStateMapper__T], tArray: typing.Union[typing.List[_PythonFieldStateMapper__T], jpype.JArray], tArray2: typing.Union[typing.List[_PythonFieldStateMapper__T], jpype.JArray]) -> None: ...
     def pythonDecRef(self) -> None:
         """
             Part of JCC Python interface to object
@@ -1610,7 +1721,7 @@ class PythonStateMapper(StateMapper):
     def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType, attitudeProvider: org.orekit.attitudes.AttitudeProvider, frame: org.orekit.frames.Frame): ...
     def finalize(self) -> None: ...
     @typing.overload
-    def mapArrayToState(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], doubleArray2: typing.List[float], propagationType: org.orekit.propagation.PropagationType) -> org.orekit.propagation.SpacecraftState:
+    def mapArrayToState(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], propagationType: org.orekit.propagation.PropagationType) -> org.orekit.propagation.SpacecraftState:
         """
             Map the raw double components to a spacecraft state.
         
@@ -1631,8 +1742,8 @@ class PythonStateMapper(StateMapper):
         """
         ...
     @typing.overload
-    def mapArrayToState(self, double: float, doubleArray: typing.List[float], doubleArray2: typing.List[float], propagationType: org.orekit.propagation.PropagationType) -> org.orekit.propagation.SpacecraftState: ...
-    def mapStateToArray(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[float], doubleArray2: typing.List[float]) -> None:
+    def mapArrayToState(self, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], propagationType: org.orekit.propagation.PropagationType) -> org.orekit.propagation.SpacecraftState: ...
+    def mapStateToArray(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
             Map a spacecraft state to raw double components.
         
@@ -1669,7 +1780,7 @@ class PythonStateMapper(StateMapper):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.propagation.integration")``.
 
     AbstractGradientConverter: typing.Type[AbstractGradientConverter]
@@ -1690,4 +1801,3 @@ class __module_protocol__(typing.Protocol):
     PythonFieldStateMapper: typing.Type[PythonFieldStateMapper]
     PythonStateMapper: typing.Type[PythonStateMapper]
     StateMapper: typing.Type[StateMapper]
-    class-use: org.orekit.propagation.integration.class-use.__module_protocol__

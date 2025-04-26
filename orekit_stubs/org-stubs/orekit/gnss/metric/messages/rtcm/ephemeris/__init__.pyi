@@ -1,6 +1,12 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import org.orekit.gnss.metric.messages.common
 import org.orekit.gnss.metric.messages.rtcm
-import org.orekit.gnss.metric.messages.rtcm.ephemeris.class-use
 import org.orekit.propagation.analytical.gnss.data
 import org.orekit.time
 import typing
@@ -37,7 +43,7 @@ class RtcmEphemerisData(org.orekit.gnss.metric.messages.rtcm.RtcmData):
         
         """
         ...
-    def setAccuracyProvider(self, accuracyProvider: org.orekit.gnss.metric.messages.common.AccuracyProvider) -> None:
+    def setAccuracyProvider(self, accuracyProvider: typing.Union[org.orekit.gnss.metric.messages.common.AccuracyProvider, typing.Callable]) -> None:
         """
             Set the accuracy provider of the ephemeris message.
         
@@ -1078,7 +1084,7 @@ class Rtcm1045Data(RtcmEphemerisData):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.gnss.metric.messages.rtcm.ephemeris")``.
 
     Rtcm1019: typing.Type[Rtcm1019]
@@ -1093,4 +1099,3 @@ class __module_protocol__(typing.Protocol):
     Rtcm1045Data: typing.Type[Rtcm1045Data]
     RtcmEphemerisData: typing.Type[RtcmEphemerisData]
     RtcmEphemerisMessage: typing.Type[RtcmEphemerisMessage]
-    class-use: org.orekit.gnss.metric.messages.rtcm.ephemeris.class-use.__module_protocol__

@@ -1,7 +1,13 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
 import org.orekit.files.ccsds.definitions
-import org.orekit.files.ccsds.section.class-use
 import org.orekit.files.ccsds.utils
 import org.orekit.files.ccsds.utils.generation
 import org.orekit.files.ccsds.utils.lexical
@@ -78,7 +84,7 @@ class HeaderKey(java.lang.Enum['HeaderKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['HeaderKey']:
+    def values() -> typing.MutableSequence['HeaderKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -174,7 +180,7 @@ class KvnStructureKey(java.lang.Enum['KvnStructureKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['KvnStructureKey']:
+    def values() -> typing.MutableSequence['KvnStructureKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -272,7 +278,7 @@ class MetadataKey(java.lang.Enum['MetadataKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['MetadataKey']:
+    def values() -> typing.MutableSequence['MetadataKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -409,7 +415,7 @@ class XmlStructureKey(java.lang.Enum['XmlStructureKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['XmlStructureKey']:
+    def values() -> typing.MutableSequence['XmlStructureKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -584,23 +590,6 @@ class PythonAbstractWriter(AbstractWriter):
     """
     def __init__(self, string: str, string2: str): ...
     def finalize(self) -> None: ...
-    def intArrayToString(self, intArray: typing.List[int]) -> str:
-        """
-            Convert an array of integer to a comma-separated list.
-        
-            Overrides:
-                :meth:`~org.orekit.files.ccsds.section.AbstractWriter.intArrayToString` in
-                class :class:`~org.orekit.files.ccsds.section.AbstractWriter`
-        
-            Parameters:
-                integers (int[]): integers to write
-        
-            Returns:
-                arrays as a string
-        
-        
-        """
-        ...
     def pythonDecRef(self) -> None:
         """
             Part of JCC Python interface to object
@@ -799,6 +788,15 @@ class Metadata(CommentsContainer):
     
         This class gathers the meta-data present in the Navigation Data Message (ADM, ODM and TDM).
     
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
+    
         Since:
             11.0
     """
@@ -886,7 +884,7 @@ class PyhonData(Data):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.section")``.
 
     AbstractWriter: typing.Type[AbstractWriter]
@@ -906,4 +904,3 @@ class __module_protocol__(typing.Protocol):
     Segment: typing.Type[Segment]
     XmlStructureKey: typing.Type[XmlStructureKey]
     XmlStructureProcessingState: typing.Type[XmlStructureProcessingState]
-    class-use: org.orekit.files.ccsds.section.class-use.__module_protocol__

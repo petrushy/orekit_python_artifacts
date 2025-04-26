@@ -1,6 +1,12 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import org.orekit.files.rinex
 import org.orekit.files.rinex.section
-import org.orekit.files.rinex.utils.parsing.class-use
 import org.orekit.time
 import typing
 
@@ -149,7 +155,7 @@ class RinexUtils:
         """
         ...
     @staticmethod
-    def parseVersionFileTypeSatelliteSystem(string: str, string2: str, rinexBaseHeader: org.orekit.files.rinex.section.RinexBaseHeader, doubleArray: typing.List[float]) -> None:
+    def parseVersionFileTypeSatelliteSystem(string: str, string2: str, rinexBaseHeader: org.orekit.files.rinex.section.RinexBaseHeader, *double: float) -> None:
         """
             Parse version, file type and satellite system.
         
@@ -164,8 +170,7 @@ class RinexUtils:
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.rinex.utils.parsing")``.
 
     RinexUtils: typing.Type[RinexUtils]
-    class-use: org.orekit.files.rinex.utils.parsing.class-use.__module_protocol__

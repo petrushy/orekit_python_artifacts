@@ -1,5 +1,13 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
+import jpype
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.bodies
 import org.orekit.data
@@ -8,7 +16,6 @@ import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.ndm.cdm
 import org.orekit.files.ccsds.utils
-import org.orekit.files.ccsds.utils.lexical.class-use
 import org.orekit.time
 import org.orekit.utils.units
 import typing
@@ -336,7 +343,7 @@ class ParseToken:
         
         """
         ...
-    def processAsBoolean(self, booleanConsumer: 'ParseToken.BooleanConsumer') -> bool:
+    def processAsBoolean(self, booleanConsumer: typing.Union['ParseToken.BooleanConsumer', typing.Callable]) -> bool:
         """
             Process the content as a boolean.
         
@@ -349,7 +356,7 @@ class ParseToken:
         
         """
         ...
-    def processAsCenter(self, centerConsumer: 'ParseToken.CenterConsumer', celestialBodies: org.orekit.bodies.CelestialBodies) -> bool:
+    def processAsCenter(self, centerConsumer: typing.Union['ParseToken.CenterConsumer', typing.Callable], celestialBodies: org.orekit.bodies.CelestialBodies) -> bool:
         """
             Process the content as a body center.
         
@@ -363,7 +370,7 @@ class ParseToken:
         
         """
         ...
-    def processAsCenterList(self, centerListConsumer: 'ParseToken.CenterListConsumer', celestialBodies: org.orekit.bodies.CelestialBodies) -> bool:
+    def processAsCenterList(self, centerListConsumer: typing.Union['ParseToken.CenterListConsumer', typing.Callable], celestialBodies: org.orekit.bodies.CelestialBodies) -> bool:
         """
             Process the content as a body center list.
         
@@ -377,7 +384,7 @@ class ParseToken:
         
         """
         ...
-    def processAsDate(self, dateConsumer: 'ParseToken.DateConsumer', contextBinding: org.orekit.files.ccsds.utils.ContextBinding) -> bool:
+    def processAsDate(self, dateConsumer: typing.Union['ParseToken.DateConsumer', typing.Callable], contextBinding: org.orekit.files.ccsds.utils.ContextBinding) -> bool:
         """
             Process the content as a date.
         
@@ -391,7 +398,7 @@ class ParseToken:
         
         """
         ...
-    def processAsDouble(self, unit: org.orekit.utils.units.Unit, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, doubleConsumer: 'ParseToken.DoubleConsumer') -> bool:
+    def processAsDouble(self, unit: org.orekit.utils.units.Unit, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, doubleConsumer: typing.Union['ParseToken.DoubleConsumer', typing.Callable]) -> bool:
         """
             Process the content as a double.
         
@@ -406,7 +413,7 @@ class ParseToken:
         
         """
         ...
-    def processAsDoubleArray(self, unit: org.orekit.utils.units.Unit, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, doubleArrayConsumer: 'ParseToken.DoubleArrayConsumer') -> bool:
+    def processAsDoubleArray(self, unit: org.orekit.utils.units.Unit, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, doubleArrayConsumer: typing.Union['ParseToken.DoubleArrayConsumer', typing.Callable]) -> bool:
         """
             Process the content as an array of doubles.
         
@@ -424,7 +431,7 @@ class ParseToken:
         
         """
         ...
-    def processAsDoublyIndexedDouble(self, int: int, int2: int, unit: org.orekit.utils.units.Unit, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, doublyIndexedDoubleConsumer: 'ParseToken.DoublyIndexedDoubleConsumer') -> bool:
+    def processAsDoublyIndexedDouble(self, int: int, int2: int, unit: org.orekit.utils.units.Unit, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, doublyIndexedDoubleConsumer: typing.Union['ParseToken.DoublyIndexedDoubleConsumer', typing.Callable]) -> bool:
         """
             Process the content as a doubly-indexed double.
         
@@ -442,7 +449,7 @@ class ParseToken:
         """
         ...
     _processAsEnum__T = typing.TypeVar('_processAsEnum__T', bound=java.lang.Enum)  # <T>
-    def processAsEnum(self, class_: typing.Type[_processAsEnum__T], enumConsumer: 'ParseToken.EnumConsumer'[_processAsEnum__T]) -> bool:
+    def processAsEnum(self, class_: typing.Type[_processAsEnum__T], enumConsumer: typing.Union['ParseToken.EnumConsumer'[_processAsEnum__T], typing.Callable[[_processAsEnum__T], None]]) -> bool:
         """
             Process the content as an enum.
         
@@ -457,7 +464,7 @@ class ParseToken:
         """
         ...
     _processAsEnumsList__T = typing.TypeVar('_processAsEnumsList__T', bound=java.lang.Enum)  # <T>
-    def processAsEnumsList(self, class_: typing.Type[_processAsEnumsList__T], enumListConsumer: 'ParseToken.EnumListConsumer'[_processAsEnumsList__T]) -> bool:
+    def processAsEnumsList(self, class_: typing.Type[_processAsEnumsList__T], enumListConsumer: typing.Union['ParseToken.EnumListConsumer'[_processAsEnumsList__T], typing.Callable[[java.util.List[java.lang.Enum]], None]]) -> bool:
         """
             Process the content as a list of enums.
         
@@ -471,7 +478,7 @@ class ParseToken:
         
         """
         ...
-    def processAsFrame(self, frameConsumer: 'ParseToken.FrameConsumer', contextBinding: org.orekit.files.ccsds.utils.ContextBinding, boolean: bool, boolean2: bool, boolean3: bool) -> bool:
+    def processAsFrame(self, frameConsumer: typing.Union['ParseToken.FrameConsumer', typing.Callable], contextBinding: org.orekit.files.ccsds.utils.ContextBinding, boolean: bool, boolean2: bool, boolean3: bool) -> bool:
         """
             Process the content as a frame.
         
@@ -488,7 +495,7 @@ class ParseToken:
         
         """
         ...
-    def processAsFreeTextList(self, stringListConsumer: 'ParseToken.StringListConsumer') -> bool:
+    def processAsFreeTextList(self, stringListConsumer: typing.Union['ParseToken.StringListConsumer', typing.Callable]) -> bool:
         """
             Process the content as a list of free-text strings.
         
@@ -504,7 +511,7 @@ class ParseToken:
         
         """
         ...
-    def processAsFreeTextString(self, stringConsumer: 'ParseToken.StringConsumer') -> bool:
+    def processAsFreeTextString(self, stringConsumer: typing.Union['ParseToken.StringConsumer', typing.Callable]) -> bool:
         """
             Process the content as free text string.
         
@@ -517,7 +524,7 @@ class ParseToken:
         
         """
         ...
-    def processAsIndexedDouble(self, int: int, unit: org.orekit.utils.units.Unit, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, indexedDoubleConsumer: 'ParseToken.IndexedDoubleConsumer') -> bool:
+    def processAsIndexedDouble(self, int: int, unit: org.orekit.utils.units.Unit, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, indexedDoubleConsumer: typing.Union['ParseToken.IndexedDoubleConsumer', typing.Callable]) -> bool:
         """
             Process the content as an indexed double.
         
@@ -533,7 +540,7 @@ class ParseToken:
         
         """
         ...
-    def processAsIndexedDoubleArray(self, int: int, unit: org.orekit.utils.units.Unit, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, indexedDoubleArrayConsumer: 'ParseToken.IndexedDoubleArrayConsumer') -> bool:
+    def processAsIndexedDoubleArray(self, int: int, unit: org.orekit.utils.units.Unit, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, indexedDoubleArrayConsumer: typing.Union['ParseToken.IndexedDoubleArrayConsumer', typing.Callable]) -> bool:
         """
             Process the content as an indexed double array.
         
@@ -552,7 +559,7 @@ class ParseToken:
         
         """
         ...
-    def processAsIndexedInteger(self, int: int, indexedIntConsumer: 'ParseToken.IndexedIntConsumer') -> bool:
+    def processAsIndexedInteger(self, int: int, indexedIntConsumer: typing.Union['ParseToken.IndexedIntConsumer', typing.Callable]) -> bool:
         """
             Process the content as an indexed integer.
         
@@ -569,7 +576,7 @@ class ParseToken:
         
         """
         ...
-    def processAsIndexedNormalizedString(self, int: int, indexedStringConsumer: 'ParseToken.IndexedStringConsumer') -> bool:
+    def processAsIndexedNormalizedString(self, int: int, indexedStringConsumer: typing.Union['ParseToken.IndexedStringConsumer', typing.Callable]) -> bool:
         """
             Process the content as an indexed normalized string.
         
@@ -583,7 +590,7 @@ class ParseToken:
         
         """
         ...
-    def processAsIndexedUppercaseString(self, int: int, indexedStringConsumer: 'ParseToken.IndexedStringConsumer') -> bool:
+    def processAsIndexedUppercaseString(self, int: int, indexedStringConsumer: typing.Union['ParseToken.IndexedStringConsumer', typing.Callable]) -> bool:
         """
             Process the content as an indexed normalized uppercase string.
         
@@ -597,7 +604,7 @@ class ParseToken:
         
         """
         ...
-    def processAsInteger(self, intConsumer: 'ParseToken.IntConsumer') -> bool:
+    def processAsInteger(self, intConsumer: typing.Union['ParseToken.IntConsumer', typing.Callable]) -> bool:
         """
             Process the content as an integer.
         
@@ -610,7 +617,7 @@ class ParseToken:
         
         """
         ...
-    def processAsIntegerArray(self, integerArrayConsumer: 'ParseToken.IntegerArrayConsumer') -> bool:
+    def processAsIntegerArray(self, integerArrayConsumer: typing.Union['ParseToken.IntegerArrayConsumer', typing.Callable]) -> bool:
         """
             Process the content as an array of integers. Spaces are replaced by commas.
         
@@ -623,7 +630,7 @@ class ParseToken:
         
         """
         ...
-    def processAsIntegerArrayNoSpace(self, integerArrayConsumer: 'ParseToken.IntegerArrayConsumer') -> bool:
+    def processAsIntegerArrayNoSpace(self, integerArrayConsumer: typing.Union['ParseToken.IntegerArrayConsumer', typing.Callable]) -> bool:
         """
             Process the content as an array of integers. No spaces between commas are allowed.
         
@@ -636,7 +643,7 @@ class ParseToken:
         
         """
         ...
-    def processAsLabeledDouble(self, char: str, unit: org.orekit.utils.units.Unit, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, labeledDoubleConsumer: 'ParseToken.LabeledDoubleConsumer') -> bool:
+    def processAsLabeledDouble(self, char: str, unit: org.orekit.utils.units.Unit, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, labeledDoubleConsumer: typing.Union['ParseToken.LabeledDoubleConsumer', typing.Callable]) -> bool:
         """
             Process the content as a labeled double.
         
@@ -652,7 +659,7 @@ class ParseToken:
         
         """
         ...
-    def processAsManeuvrableEnum(self, maneuvrableConsumer: 'ParseToken.ManeuvrableConsumer') -> bool:
+    def processAsManeuvrableEnum(self, maneuvrableConsumer: typing.Union['ParseToken.ManeuvrableConsumer', typing.Callable]) -> bool:
         """
             Process the content of the Maneuvrable enum.
         
@@ -665,7 +672,7 @@ class ParseToken:
         
         """
         ...
-    def processAsNormalizedCharacter(self, charConsumer: 'ParseToken.CharConsumer') -> bool:
+    def processAsNormalizedCharacter(self, charConsumer: typing.Union['ParseToken.CharConsumer', typing.Callable]) -> bool:
         """
             Process the content as a normalized character.
         
@@ -678,7 +685,7 @@ class ParseToken:
         
         """
         ...
-    def processAsNormalizedList(self, stringListConsumer: 'ParseToken.StringListConsumer') -> bool:
+    def processAsNormalizedList(self, stringListConsumer: typing.Union['ParseToken.StringListConsumer', typing.Callable]) -> bool:
         """
             Process the content as a list of normalized strings.
         
@@ -691,7 +698,7 @@ class ParseToken:
         
         """
         ...
-    def processAsNormalizedString(self, stringConsumer: 'ParseToken.StringConsumer') -> bool:
+    def processAsNormalizedString(self, stringConsumer: typing.Union['ParseToken.StringConsumer', typing.Callable]) -> bool:
         """
             Process the content as a normalized string.
         
@@ -707,7 +714,7 @@ class ParseToken:
         
         """
         ...
-    def processAsRotationOrder(self, rotationOrderConsumer: 'ParseToken.RotationOrderConsumer') -> bool:
+    def processAsRotationOrder(self, rotationOrderConsumer: typing.Union['ParseToken.RotationOrderConsumer', typing.Callable]) -> bool:
         """
             Process the content as a rotation sequence.
         
@@ -723,7 +730,7 @@ class ParseToken:
         
         """
         ...
-    def processAsTimeSystem(self, timeSystemConsumer: 'ParseToken.TimeSystemConsumer') -> bool:
+    def processAsTimeSystem(self, timeSystemConsumer: typing.Union['ParseToken.TimeSystemConsumer', typing.Callable]) -> bool:
         """
             Process the content as a time system.
         
@@ -736,7 +743,7 @@ class ParseToken:
         
         """
         ...
-    def processAsUnitList(self, unitListConsumer: 'ParseToken.UnitListConsumer') -> bool:
+    def processAsUnitList(self, unitListConsumer: typing.Union['ParseToken.UnitListConsumer', typing.Callable]) -> bool:
         """
             Process the content as a list of units.
         
@@ -749,7 +756,7 @@ class ParseToken:
         
         """
         ...
-    def processAsUppercaseList(self, stringListConsumer: 'ParseToken.StringListConsumer') -> bool:
+    def processAsUppercaseList(self, stringListConsumer: typing.Union['ParseToken.StringListConsumer', typing.Callable]) -> bool:
         """
             Process the content as a list of normalized uppercase strings.
         
@@ -762,7 +769,7 @@ class ParseToken:
         
         """
         ...
-    def processAsUppercaseString(self, stringConsumer: 'ParseToken.StringConsumer') -> bool:
+    def processAsUppercaseString(self, stringConsumer: typing.Union['ParseToken.StringConsumer', typing.Callable]) -> bool:
         """
             Process the content as a normalized uppercase string.
         
@@ -778,7 +785,7 @@ class ParseToken:
         
         """
         ...
-    def processAsVector(self, unit: org.orekit.utils.units.Unit, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, vectorConsumer: 'ParseToken.VectorConsumer') -> bool:
+    def processAsVector(self, unit: org.orekit.utils.units.Unit, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, vectorConsumer: typing.Union['ParseToken.VectorConsumer', typing.Callable]) -> bool:
         """
             Process the content as a vector.
         
@@ -804,7 +811,7 @@ class ParseToken:
     class DateConsumer:
         def accept(self, absoluteDate: org.orekit.time.AbsoluteDate) -> None: ...
     class DoubleArrayConsumer:
-        def accept(self, doubleArray: typing.List[float]) -> None: ...
+        def accept(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
     class DoubleConsumer:
         def accept(self, double: float) -> None: ...
     class DoublyIndexedDoubleConsumer:
@@ -816,7 +823,7 @@ class ParseToken:
     class FrameConsumer:
         def accept(self, frameFacade: org.orekit.files.ccsds.definitions.FrameFacade) -> None: ...
     class IndexedDoubleArrayConsumer:
-        def accept(self, int: int, doubleArray: typing.List[float]) -> None: ...
+        def accept(self, int: int, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None: ...
     class IndexedDoubleConsumer:
         def accept(self, int: int, double: float) -> None: ...
     class IndexedIntConsumer:
@@ -826,7 +833,7 @@ class ParseToken:
     class IntConsumer:
         def accept(self, int: int) -> None: ...
     class IntegerArrayConsumer:
-        def accept(self, intArray: typing.List[int]) -> None: ...
+        def accept(self, intArray: typing.Union[typing.List[int], jpype.JArray]) -> None: ...
     class LabeledDoubleConsumer:
         def accept(self, char: str, double: float) -> None: ...
     class ManeuvrableConsumer:
@@ -892,7 +899,7 @@ class TokenType(java.lang.Enum['TokenType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['TokenType']:
+    def values() -> typing.MutableSequence['TokenType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1233,7 +1240,7 @@ class XmlLexicalAnalyzer(LexicalAnalyzer):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.utils.lexical")``.
 
     KvnLexicalAnalyzer: typing.Type[KvnLexicalAnalyzer]
@@ -1250,4 +1257,3 @@ class __module_protocol__(typing.Protocol):
     UserDefinedXmlTokenBuilder: typing.Type[UserDefinedXmlTokenBuilder]
     XmlLexicalAnalyzer: typing.Type[XmlLexicalAnalyzer]
     XmlTokenBuilder: typing.Type[XmlTokenBuilder]
-    class-use: org.orekit.files.ccsds.utils.lexical.class-use.__module_protocol__

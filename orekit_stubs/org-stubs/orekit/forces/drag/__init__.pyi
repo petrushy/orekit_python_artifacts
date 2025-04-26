@@ -1,9 +1,16 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.util
 import java.util.stream
+import jpype
 import org.hipparchus
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.forces
-import org.orekit.forces.drag.class-use
 import org.orekit.models.earth.atmosphere
 import org.orekit.propagation
 import org.orekit.propagation.events
@@ -122,7 +129,7 @@ class DragSensitive:
         ...
     _dragAcceleration_0__T = typing.TypeVar('_dragAcceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def dragAcceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_dragAcceleration_0__T], t: _dragAcceleration_0__T, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T], tArray: typing.List[_dragAcceleration_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T]:
+    def dragAcceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_dragAcceleration_0__T], t: _dragAcceleration_0__T, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T], tArray: typing.Union[typing.List[_dragAcceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T]:
         """
             Compute the acceleration due to drag.
         
@@ -144,7 +151,7 @@ class DragSensitive:
         """
         ...
     @typing.overload
-    def dragAcceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, double: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def dragAcceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, double: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Compute the acceleration due to drag.
         
@@ -180,7 +187,7 @@ class DragForce(AbstractDragForceModel):
     def __init__(self, atmosphere: org.orekit.models.earth.atmosphere.Atmosphere, dragSensitive: DragSensitive, boolean: bool): ...
     _acceleration_0__T = typing.TypeVar('_acceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], tArray: typing.List[_acceleration_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
+    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], tArray: typing.Union[typing.List[_acceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
         """
             Compute acceleration.
         
@@ -195,7 +202,7 @@ class DragForce(AbstractDragForceModel):
         """
         ...
     @typing.overload
-    def acceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def acceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Compute acceleration.
         
@@ -239,7 +246,7 @@ class IsotropicDrag(DragSensitive):
         This class models isotropic drag effects.
     
         The model of this spacecraft is a simple spherical model, this means that all coefficients are constant and do not
-        depend of the direction.
+        depend on the direction.
     
         Since:
             7.1
@@ -254,7 +261,7 @@ class IsotropicDrag(DragSensitive):
     def __init__(self, double: float, double2: float, double3: float, double4: float): ...
     _dragAcceleration_0__T = typing.TypeVar('_dragAcceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def dragAcceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_dragAcceleration_0__T], t: _dragAcceleration_0__T, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T], tArray: typing.List[_dragAcceleration_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T]:
+    def dragAcceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_dragAcceleration_0__T], t: _dragAcceleration_0__T, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T], tArray: typing.Union[typing.List[_dragAcceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T]:
         """
             Compute the acceleration due to drag.
         
@@ -277,7 +284,7 @@ class IsotropicDrag(DragSensitive):
         """
         ...
     @typing.overload
-    def dragAcceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, double: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def dragAcceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, double: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Compute the acceleration due to drag.
         
@@ -307,7 +314,7 @@ class PythonAbstractDragForceModel(AbstractDragForceModel):
     def __init__(self, atmosphere: org.orekit.models.earth.atmosphere.Atmosphere): ...
     _acceleration_0__T = typing.TypeVar('_acceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], tArray: typing.List[_acceleration_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
+    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], tArray: typing.Union[typing.List[_acceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
         """
             Compute acceleration.
         
@@ -322,7 +329,7 @@ class PythonAbstractDragForceModel(AbstractDragForceModel):
         """
         ...
     @typing.overload
-    def acceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def acceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Compute acceleration.
         
@@ -364,7 +371,7 @@ class PythonDragSensitive(DragSensitive):
     def __init__(self): ...
     _dragAcceleration_0__T = typing.TypeVar('_dragAcceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def dragAcceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_dragAcceleration_0__T], t: _dragAcceleration_0__T, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T], tArray: typing.List[_dragAcceleration_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T]:
+    def dragAcceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_dragAcceleration_0__T], t: _dragAcceleration_0__T, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T], tArray: typing.Union[typing.List[_dragAcceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T]:
         """
             Compute the acceleration due to drag.
         
@@ -387,7 +394,7 @@ class PythonDragSensitive(DragSensitive):
         """
         ...
     @typing.overload
-    def dragAcceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, double: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def dragAcceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, double: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Compute the acceleration due to drag.
         
@@ -439,17 +446,17 @@ class TimeSpanDragForce(AbstractDragForceModel):
     def __init__(self, atmosphere: org.orekit.models.earth.atmosphere.Atmosphere, dragSensitive: DragSensitive, timeScale: org.orekit.time.TimeScale): ...
     _acceleration_0__T = typing.TypeVar('_acceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], tArray: typing.List[_acceleration_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]: ...
+    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], tArray: typing.Union[typing.List[_acceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]: ...
     @typing.overload
-    def acceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    def acceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
     def addDragSensitiveValidAfter(self, dragSensitive: DragSensitive, absoluteDate: org.orekit.time.AbsoluteDate) -> None: ...
     def addDragSensitiveValidBefore(self, dragSensitive: DragSensitive, absoluteDate: org.orekit.time.AbsoluteDate) -> None: ...
     def extractDragSensitiveRange(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate) -> org.orekit.utils.TimeSpanMap[DragSensitive]: ...
     _extractParameters_1__T = typing.TypeVar('_extractParameters_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def extractParameters(self, doubleArray: typing.List[float], absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]: ...
+    def extractParameters(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]: ...
     @typing.overload
-    def extractParameters(self, tArray: typing.List[_extractParameters_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_extractParameters_1__T]) -> typing.List[_extractParameters_1__T]: ...
+    def extractParameters(self, tArray: typing.Union[typing.List[_extractParameters_1__T], jpype.JArray], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_extractParameters_1__T]) -> typing.MutableSequence[_extractParameters_1__T]: ...
     def getDragSensitive(self, absoluteDate: org.orekit.time.AbsoluteDate) -> DragSensitive: ...
     def getDragSensitiveSpan(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.utils.TimeSpanMap.Span[DragSensitive]: ...
     @typing.overload
@@ -466,7 +473,7 @@ class TimeSpanDragForce(AbstractDragForceModel):
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.forces.drag")``.
 
     AbstractDragForceModel: typing.Type[AbstractDragForceModel]
@@ -476,4 +483,3 @@ class __module_protocol__(typing.Protocol):
     PythonAbstractDragForceModel: typing.Type[PythonAbstractDragForceModel]
     PythonDragSensitive: typing.Type[PythonDragSensitive]
     TimeSpanDragForce: typing.Type[TimeSpanDragForce]
-    class-use: org.orekit.forces.drag.class-use.__module_protocol__

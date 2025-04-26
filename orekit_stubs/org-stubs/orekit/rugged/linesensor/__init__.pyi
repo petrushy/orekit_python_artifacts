@@ -1,3 +1,10 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.io
 import java.util.stream
 import org.hipparchus.analysis.differentiation
@@ -86,7 +93,7 @@ class PythonLineDatation(LineDatation):
     def pythonExtension(self, long: int) -> None: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.rugged.linesensor")``.
 
     LineDatation: typing.Type[LineDatation]

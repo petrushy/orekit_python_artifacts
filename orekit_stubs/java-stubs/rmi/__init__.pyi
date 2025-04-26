@@ -1,5 +1,13 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.io
 import java.lang
+import java.rmi.activation
 import java.rmi.dgc
 import java.rmi.registry
 import java.rmi.server
@@ -24,7 +32,7 @@ class Naming:
     @staticmethod
     def bind(string: str, remote: 'Remote') -> None: ...
     @staticmethod
-    def list(string: str) -> typing.List[str]: ...
+    def list(string: str) -> typing.MutableSequence[str]: ...
     @staticmethod
     def lookup(string: str) -> 'Remote': ...
     @staticmethod
@@ -124,7 +132,7 @@ class UnmarshalException(RemoteException):
     def __init__(self, string: str, exception: java.lang.Exception): ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("java.rmi")``.
 
     AccessException: typing.Type[AccessException]
@@ -147,6 +155,7 @@ class __module_protocol__(typing.Protocol):
     UnexpectedException: typing.Type[UnexpectedException]
     UnknownHostException: typing.Type[UnknownHostException]
     UnmarshalException: typing.Type[UnmarshalException]
+    activation: java.rmi.activation.__module_protocol__
     dgc: java.rmi.dgc.__module_protocol__
     registry: java.rmi.registry.__module_protocol__
     server: java.rmi.server.__module_protocol__

@@ -1,11 +1,18 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
 import java.util.function
+import jpype
 import org.hipparchus.linear
 import org.orekit.data
 import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
-import org.orekit.files.ccsds.ndm.odm.class-use
 import org.orekit.files.ccsds.ndm.odm.ocm
 import org.orekit.files.ccsds.ndm.odm.oem
 import org.orekit.files.ccsds.ndm.odm.omm
@@ -27,6 +34,15 @@ class CartesianCovariance(org.orekit.files.ccsds.section.CommentsContainer, org.
     public class CartesianCovariance extends :class:`~org.orekit.files.ccsds.section.CommentsContainer` implements :class:`~org.orekit.files.ccsds.section.Data`
     
         Container for OPM/OMM/OCM Cartesian covariance matrix.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
     
         Since:
             6.1
@@ -189,7 +205,7 @@ class CartesianCovarianceKey(java.lang.Enum['CartesianCovarianceKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['CartesianCovarianceKey']:
+    def values() -> typing.MutableSequence['CartesianCovarianceKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -271,7 +287,7 @@ class CommonMetadataKey(java.lang.Enum['CommonMetadataKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['CommonMetadataKey']:
+    def values() -> typing.MutableSequence['CommonMetadataKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -305,6 +321,15 @@ class KeplerianElements(org.orekit.files.ccsds.section.CommentsContainer, org.or
     public class KeplerianElements extends :class:`~org.orekit.files.ccsds.section.CommentsContainer` implements :class:`~org.orekit.files.ccsds.section.Data`
     
         Container for Keplerian elements.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
     
         Since:
             6.1
@@ -605,7 +630,7 @@ class KeplerianElementsKey(java.lang.Enum['KeplerianElementsKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['KeplerianElementsKey']:
+    def values() -> typing.MutableSequence['KeplerianElementsKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -714,7 +739,7 @@ class OdmMetadataKey(java.lang.Enum['OdmMetadataKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['OdmMetadataKey']:
+    def values() -> typing.MutableSequence['OdmMetadataKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -779,6 +804,15 @@ class SpacecraftParameters(org.orekit.files.ccsds.section.CommentsContainer, org
     public class SpacecraftParameters extends :class:`~org.orekit.files.ccsds.section.CommentsContainer` implements :class:`~org.orekit.files.ccsds.section.Data`
     
         Container for spacecraft parameters.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
     
         Since:
             6.1
@@ -959,7 +993,7 @@ class SpacecraftParametersKey(java.lang.Enum['SpacecraftParametersKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['SpacecraftParametersKey']:
+    def values() -> typing.MutableSequence['SpacecraftParametersKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -993,6 +1027,15 @@ class StateVector(org.orekit.files.ccsds.section.CommentsContainer):
     public class StateVector extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
     
         Container for state vector data.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
     
         Since:
             11.0
@@ -1151,7 +1194,7 @@ class StateVectorKey(java.lang.Enum['StateVectorKey']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['StateVectorKey']:
+    def values() -> typing.MutableSequence['StateVectorKey']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1185,6 +1228,15 @@ class UserDefined(org.orekit.files.ccsds.section.CommentsContainer):
     public class UserDefined extends :class:`~org.orekit.files.ccsds.section.CommentsContainer`
     
         Container for user defined data.
+    
+        Beware that the Orekit getters and setters all rely on SI units. The parsers and writers take care of converting these
+        SI units into CCSDS mandatory units. The :class:`~org.orekit.utils.units.Unit` class provides useful
+        :meth:`~org.orekit.utils.units.Unit.fromSI` and :meth:`~org.orekit.utils.units.Unit.toSI` methods in case the callers
+        already use CCSDS units instead of the API SI units. The general-purpose :class:`~org.orekit.utils.units.Unit` class
+        (without an 's') and the CCSDS-specific :class:`~org.orekit.files.ccsds.definitions.Units` class (with an 's') also
+        provide some predefined units. These predefined units and the :meth:`~org.orekit.utils.units.Unit.fromSI` and
+        :meth:`~org.orekit.utils.units.Unit.toSI` conversion methods are indeed what the parsers and writers use for the
+        conversions.
     
         Since:
             11.0
@@ -1431,7 +1483,7 @@ class PythonOdmParser(OdmParser[_PythonOdmParser__T, _PythonOdmParser__P], typin
     """
     public class PythonOdmParser<T extends :class:`~org.orekit.files.ccsds.ndm.NdmConstituent`<:class:`~org.orekit.files.ccsds.ndm.odm.OdmHeader`, ?>, P extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmParser`<T, ?>> extends :class:`~org.orekit.files.ccsds.ndm.odm.OdmParser`<T, P>
     """
-    def __init__(self, string: str, string2: str, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, double: float, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]]): ...
+    def __init__(self, string: str, string2: str, iERSConventions: org.orekit.utils.IERSConventions, boolean: bool, dataContext: org.orekit.data.DataContext, absoluteDate: org.orekit.time.AbsoluteDate, double: float, parsedUnitsBehavior: org.orekit.files.ccsds.ndm.ParsedUnitsBehavior, functionArray: typing.Union[typing.List[java.util.function.Function[org.orekit.files.ccsds.utils.lexical.ParseToken, java.util.List[org.orekit.files.ccsds.utils.lexical.ParseToken]]], jpype.JArray]): ...
     def build(self) -> _PythonOdmParser__T:
         """
             Build the file from parsed entries.
@@ -1673,7 +1725,7 @@ class PythonOdmParser(OdmParser[_PythonOdmParser__T, _PythonOdmParser__P], typin
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.ndm.odm")``.
 
     CartesianCovariance: typing.Type[CartesianCovariance]
@@ -1697,7 +1749,6 @@ class __module_protocol__(typing.Protocol):
     StateVectorWriter: typing.Type[StateVectorWriter]
     UserDefined: typing.Type[UserDefined]
     UserDefinedWriter: typing.Type[UserDefinedWriter]
-    class-use: org.orekit.files.ccsds.ndm.odm.class-use.__module_protocol__
     ocm: org.orekit.files.ccsds.ndm.odm.ocm.__module_protocol__
     oem: org.orekit.files.ccsds.ndm.odm.oem.__module_protocol__
     omm: org.orekit.files.ccsds.ndm.odm.omm.__module_protocol__

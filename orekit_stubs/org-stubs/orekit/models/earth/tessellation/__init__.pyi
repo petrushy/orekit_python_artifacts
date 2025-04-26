@@ -1,9 +1,16 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.io
 import java.util
+import jpype
 import org.hipparchus.geometry.euclidean.threed
 import org.hipparchus.geometry.spherical.twod
 import org.orekit.bodies
-import org.orekit.models.earth.tessellation.class-use
 import org.orekit.orbits
 import typing
 
@@ -31,7 +38,7 @@ class EllipsoidTessellator:
     def __init__(self, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, tileAiming: 'TileAiming', int: int): ...
     @typing.overload
     @staticmethod
-    def buildSimpleZone(double: float, doubleArray: typing.List[typing.List[float]]) -> org.hipparchus.geometry.spherical.twod.SphericalPolygonsSet:
+    def buildSimpleZone(double: float, *doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.spherical.twod.SphericalPolygonsSet:
         """
             Build a simple zone (connected zone without holes).
         
@@ -56,7 +63,7 @@ class EllipsoidTessellator:
         ...
     @typing.overload
     @staticmethod
-    def buildSimpleZone(double: float, geodeticPointArray: typing.List[org.orekit.bodies.GeodeticPoint]) -> org.hipparchus.geometry.spherical.twod.SphericalPolygonsSet: ...
+    def buildSimpleZone(double: float, *geodeticPoint: org.orekit.bodies.GeodeticPoint) -> org.hipparchus.geometry.spherical.twod.SphericalPolygonsSet: ...
     def sample(self, sphericalPolygonsSet: org.hipparchus.geometry.spherical.twod.SphericalPolygonsSet, double: float, double2: float) -> java.util.List[java.util.List[org.orekit.bodies.GeodeticPoint]]: ...
     def tessellate(self, sphericalPolygonsSet: org.hipparchus.geometry.spherical.twod.SphericalPolygonsSet, double: float, double2: float, double3: float, double4: float, boolean: bool, boolean2: bool) -> java.util.List[java.util.List['Tile']]: ...
 
@@ -106,7 +113,7 @@ class Tile(java.io.Serializable):
         
         """
         ...
-    def getVertices(self) -> typing.List[org.orekit.bodies.GeodeticPoint]:
+    def getVertices(self) -> typing.MutableSequence[org.orekit.bodies.GeodeticPoint]:
         """
             Get the four vertices.
         
@@ -283,7 +290,7 @@ class PythonTileAiming(TileAiming):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.models.earth.tessellation")``.
 
     AlongTrackAiming: typing.Type[AlongTrackAiming]
@@ -293,4 +300,3 @@ class __module_protocol__(typing.Protocol):
     PythonTileAiming: typing.Type[PythonTileAiming]
     Tile: typing.Type[Tile]
     TileAiming: typing.Type[TileAiming]
-    class-use: org.orekit.models.earth.tessellation.class-use.__module_protocol__

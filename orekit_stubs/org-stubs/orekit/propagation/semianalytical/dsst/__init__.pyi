@@ -1,3 +1,10 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.util
 import org.hipparchus
 import org.hipparchus.linear
@@ -5,8 +12,8 @@ import org.hipparchus.ode
 import org.orekit.attitudes
 import org.orekit.orbits
 import org.orekit.propagation
+import org.orekit.propagation.conversion.osc2mean
 import org.orekit.propagation.integration
-import org.orekit.propagation.semianalytical.dsst.class-use
 import org.orekit.propagation.semianalytical.dsst.forces
 import org.orekit.propagation.semianalytical.dsst.utilities
 import org.orekit.utils
@@ -284,12 +291,15 @@ class DSSTPropagator(org.orekit.propagation.integration.AbstractIntegratedPropag
         ...
     @typing.overload
     @staticmethod
-    def computeMeanState(spacecraftState: org.orekit.propagation.SpacecraftState, attitudeProvider: org.orekit.attitudes.AttitudeProvider, collection: typing.Union[java.util.Collection[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel], typing.Sequence[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel]]) -> org.orekit.propagation.SpacecraftState: ...
+    def computeMeanState(spacecraftState: org.orekit.propagation.SpacecraftState, attitudeProvider: org.orekit.attitudes.AttitudeProvider, collection: typing.Union[java.util.Collection[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel], typing.Sequence[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel], typing.Set[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel]]) -> org.orekit.propagation.SpacecraftState: ...
     @typing.overload
     @staticmethod
-    def computeMeanState(spacecraftState: org.orekit.propagation.SpacecraftState, attitudeProvider: org.orekit.attitudes.AttitudeProvider, collection: typing.Union[java.util.Collection[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel], typing.Sequence[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel]], double: float, int: int) -> org.orekit.propagation.SpacecraftState: ...
+    def computeMeanState(spacecraftState: org.orekit.propagation.SpacecraftState, attitudeProvider: org.orekit.attitudes.AttitudeProvider, collection: typing.Union[java.util.Collection[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel], typing.Sequence[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel], typing.Set[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel]], double: float, int: int) -> org.orekit.propagation.SpacecraftState: ...
+    @typing.overload
     @staticmethod
-    def computeOsculatingState(spacecraftState: org.orekit.propagation.SpacecraftState, attitudeProvider: org.orekit.attitudes.AttitudeProvider, collection: typing.Union[java.util.Collection[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel], typing.Sequence[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel]]) -> org.orekit.propagation.SpacecraftState: ...
+    def computeMeanState(spacecraftState: org.orekit.propagation.SpacecraftState, attitudeProvider: org.orekit.attitudes.AttitudeProvider, collection: typing.Union[java.util.Collection[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel], typing.Sequence[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel], typing.Set[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel]], osculatingToMeanConverter: org.orekit.propagation.conversion.osc2mean.OsculatingToMeanConverter) -> org.orekit.propagation.SpacecraftState: ...
+    @staticmethod
+    def computeOsculatingState(spacecraftState: org.orekit.propagation.SpacecraftState, attitudeProvider: org.orekit.attitudes.AttitudeProvider, collection: typing.Union[java.util.Collection[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel], typing.Sequence[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel], typing.Set[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel]]) -> org.orekit.propagation.SpacecraftState: ...
     def getAllForceModels(self) -> java.util.List[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel]: ...
     def getOrbitType(self) -> org.orekit.orbits.OrbitType:
         """
@@ -331,7 +341,7 @@ class DSSTPropagator(org.orekit.propagation.integration.AbstractIntegratedPropag
         ...
     def getSelectedCoefficients(self) -> java.util.Set[str]: ...
     def getShortPeriodTerms(self) -> java.util.List[org.orekit.propagation.semianalytical.dsst.forces.ShortPeriodTerms]: ...
-    def getShortPeriodTermsValue(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]:
+    def getShortPeriodTermsValue(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.MutableSequence[float]:
         """
             Get the short period terms value.
         
@@ -560,62 +570,10 @@ class DSSTPropagator(org.orekit.propagation.integration.AbstractIntegratedPropag
         ...
     @typing.overload
     @staticmethod
-    def tolerances(double: float, double2: float, orbit: org.orekit.orbits.Orbit) -> typing.List[typing.List[float]]:
-        """
-            Estimate tolerance vectors for an AdaptativeStepsizeIntegrator.
-        
-            The errors are estimated from partial derivatives properties of orbits, starting from scalar position and velocity
-            errors specified by the user.
-        
-            The tolerances are only *orders of magnitude*, and integrator tolerances are only local estimates, not global ones. So
-            some care must be taken when using these tolerances. Setting 1mm as a position error does NOT mean the tolerances will
-            guarantee a 1mm error position after several orbits integration.
-        
-            Parameters:
-                dP (double): user specified position error (m)
-                dV (double): user specified velocity error (m/s)
-                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
-        
-            Returns:
-                a two rows array, row 0 being the absolute tolerance error and row 1 being the relative tolerance error
-        
-            Since:
-                10.3
-        
-        
-        """
-        ...
+    def tolerances(double: float, double2: float, orbit: org.orekit.orbits.Orbit) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
     @staticmethod
-    def tolerances(double: float, orbit: org.orekit.orbits.Orbit) -> typing.List[typing.List[float]]:
-        """
-            Estimate tolerance vectors for an AdaptativeStepsizeIntegrator.
-        
-            The errors are estimated from partial derivatives properties of orbits, starting from a scalar position error specified
-            by the user. Considering the energy conservation equation V = sqrt(mu (2/r - 1/a)), we get at constant energy (i.e. on a
-            Keplerian trajectory):
-        
-            .. code-block: java
-            
-              V r² |dV| = mu |dr|
-              
-        
-            So we deduce a scalar velocity error consistent with the position error. From here, we apply orbits Jacobians matrices
-            to get consistent errors on orbital parameters.
-        
-            The tolerances are only *orders of magnitude*, and integrator tolerances are only local estimates, not global ones. So
-            some care must be taken when using these tolerances. Setting 1mm as a position error does NOT mean the tolerances will
-            guarantee a 1mm error position after several orbits integration.
-        
-            Parameters:
-                dP (double): user specified position error (m)
-                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
-        
-            Returns:
-                a two rows array, row 0 being the absolute tolerance error and row 1 being the relative tolerance error
-        
-        """
-        ...
+    def tolerances(double: float, orbit: org.orekit.orbits.Orbit) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
 
 _FieldDSSTPropagator__T = typing.TypeVar('_FieldDSSTPropagator__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldDSSTPropagator(org.orekit.propagation.integration.FieldAbstractIntegratedPropagator[_FieldDSSTPropagator__T], typing.Generic[_FieldDSSTPropagator__T]):
@@ -695,15 +653,19 @@ class FieldDSSTPropagator(org.orekit.propagation.integration.FieldAbstractIntegr
         ...
     _computeMeanState_0__T = typing.TypeVar('_computeMeanState_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _computeMeanState_1__T = typing.TypeVar('_computeMeanState_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _computeMeanState_2__T = typing.TypeVar('_computeMeanState_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def computeMeanState(fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_computeMeanState_0__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, collection: typing.Union[java.util.Collection[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel], typing.Sequence[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel]]) -> org.orekit.propagation.FieldSpacecraftState[_computeMeanState_0__T]: ...
+    def computeMeanState(fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_computeMeanState_0__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, collection: typing.Union[java.util.Collection[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel], typing.Sequence[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel], typing.Set[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel]]) -> org.orekit.propagation.FieldSpacecraftState[_computeMeanState_0__T]: ...
     @typing.overload
     @staticmethod
-    def computeMeanState(fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_computeMeanState_1__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, collection: typing.Union[java.util.Collection[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel], typing.Sequence[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel]], double: float, int: int) -> org.orekit.propagation.FieldSpacecraftState[_computeMeanState_1__T]: ...
+    def computeMeanState(fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_computeMeanState_1__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, collection: typing.Union[java.util.Collection[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel], typing.Sequence[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel], typing.Set[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel]], double: float, int: int) -> org.orekit.propagation.FieldSpacecraftState[_computeMeanState_1__T]: ...
+    @typing.overload
+    @staticmethod
+    def computeMeanState(fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_computeMeanState_2__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, collection: typing.Union[java.util.Collection[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel], typing.Sequence[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel], typing.Set[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel]], osculatingToMeanConverter: org.orekit.propagation.conversion.osc2mean.OsculatingToMeanConverter) -> org.orekit.propagation.FieldSpacecraftState[_computeMeanState_2__T]: ...
     _computeOsculatingState__T = typing.TypeVar('_computeOsculatingState__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @staticmethod
-    def computeOsculatingState(fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_computeOsculatingState__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, collection: typing.Union[java.util.Collection[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel], typing.Sequence[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel]]) -> org.orekit.propagation.FieldSpacecraftState[_computeOsculatingState__T]: ...
+    def computeOsculatingState(fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_computeOsculatingState__T], attitudeProvider: org.orekit.attitudes.AttitudeProvider, collection: typing.Union[java.util.Collection[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel], typing.Sequence[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel], typing.Set[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel]]) -> org.orekit.propagation.FieldSpacecraftState[_computeOsculatingState__T]: ...
     def getAllForceModels(self) -> java.util.List[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel]: ...
     def getOrbitType(self) -> org.orekit.orbits.OrbitType:
         """
@@ -879,70 +841,17 @@ class FieldDSSTPropagator(org.orekit.propagation.integration.FieldAbstractIntegr
     _tolerances_1__T = typing.TypeVar('_tolerances_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def tolerances(t: _tolerances_0__T, t2: _tolerances_0__T, fieldOrbit: org.orekit.orbits.FieldOrbit[_tolerances_0__T]) -> typing.List[typing.List[float]]:
-        """
-            Estimate tolerance vectors for an AdaptativeStepsizeIntegrator.
-        
-            The errors are estimated from partial derivatives properties of orbits, starting from scalar position and velocity
-            errors specified by the user.
-        
-            The tolerances are only *orders of magnitude*, and integrator tolerances are only local estimates, not global ones. So
-            some care must be taken when using these tolerances. Setting 1mm as a position error does NOT mean the tolerances will
-            guarantee a 1mm error position after several orbits integration.
-        
-            Parameters:
-                dP (T): user specified position error (m)
-                dV (T): user specified velocity error (m/s)
-                orbit (:class:`~org.orekit.orbits.FieldOrbit`<T> orbit): reference orbit
-        
-            Returns:
-                a two rows array, row 0 being the absolute tolerance error and row 1 being the relative tolerance error
-        
-            Since:
-                10.3
-        
-        
-        """
-        ...
+    def tolerances(t: _tolerances_0__T, t2: _tolerances_0__T, fieldOrbit: org.orekit.orbits.FieldOrbit[_tolerances_0__T]) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
     @typing.overload
     @staticmethod
-    def tolerances(t: _tolerances_1__T, fieldOrbit: org.orekit.orbits.FieldOrbit[_tolerances_1__T]) -> typing.List[typing.List[float]]:
-        """
-            Estimate tolerance vectors for an AdaptativeStepsizeIntegrator.
-        
-            The errors are estimated from partial derivatives properties of orbits, starting from a scalar position error specified
-            by the user. Considering the energy conservation equation V = sqrt(mu (2/r - 1/a)), we get at constant energy (i.e. on a
-            Keplerian trajectory):
-        
-            .. code-block: java
-            
-              V r² |dV| = mu |dr|
-              
-        
-            So we deduce a scalar velocity error consistent with the position error. From here, we apply orbits Jacobians matrices
-            to get consistent errors on orbital parameters.
-        
-            The tolerances are only *orders of magnitude*, and integrator tolerances are only local estimates, not global ones. So
-            some care must be taken when using these tolerances. Setting 1mm as a position error does NOT mean the tolerances will
-            guarantee a 1mm error position after several orbits integration.
-        
-            Parameters:
-                dP (T): user specified position error (m)
-                orbit (:class:`~org.orekit.orbits.FieldOrbit`<T> orbit): reference orbit
-        
-            Returns:
-                a two rows array, row 0 being the absolute tolerance error and row 1 being the relative tolerance error
-        
-        """
-        ...
+    def tolerances(t: _tolerances_1__T, fieldOrbit: org.orekit.orbits.FieldOrbit[_tolerances_1__T]) -> typing.MutableSequence[typing.MutableSequence[float]]: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.propagation.semianalytical.dsst")``.
 
     DSSTHarvester: typing.Type[DSSTHarvester]
     DSSTPropagator: typing.Type[DSSTPropagator]
     FieldDSSTPropagator: typing.Type[FieldDSSTPropagator]
-    class-use: org.orekit.propagation.semianalytical.dsst.class-use.__module_protocol__
     forces: org.orekit.propagation.semianalytical.dsst.forces.__module_protocol__
     utilities: org.orekit.propagation.semianalytical.dsst.utilities.__module_protocol__

@@ -1,5 +1,11 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import org.orekit.forces.maneuvers
-import org.orekit.forces.maneuvers.jacobians.class-use
 import org.orekit.forces.maneuvers.trigger
 import org.orekit.propagation
 import org.orekit.propagation.integration
@@ -8,9 +14,9 @@ import typing
 
 
 
-class Duration(org.orekit.propagation.AdditionalStateProvider):
+class Duration(org.orekit.propagation.AdditionalDataProvider[typing.MutableSequence[float]]):
     """
-    public class Duration extends :class:`~org.orekit.forces.maneuvers.jacobians.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.AdditionalStateProvider`
+    public class Duration extends :class:`~org.orekit.forces.maneuvers.jacobians.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.AdditionalDataProvider`<double[]>
     
         Generator for one column of a Jacobian matrix for special case of maneuver duration.
     
@@ -24,16 +30,16 @@ class Duration(org.orekit.propagation.AdditionalStateProvider):
             :class:`~org.orekit.forces.maneuvers.jacobians.MedianDate`, :class:`~org.orekit.forces.maneuvers.jacobians.TriggerDate`
     """
     def __init__(self, string: str, string2: str, string3: str): ...
-    def getAdditionalState(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]:
+    def getAdditionalData(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.MutableSequence[float]:
         """
-            Get the additional state.
+            Get the additional data.
         
             Specified by:
-                :meth:`~org.orekit.propagation.AdditionalStateProvider.getAdditionalState` in
-                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
+                :meth:`~org.orekit.propagation.AdditionalDataProvider.getAdditionalData` in
+                interface :class:`~org.orekit.propagation.AdditionalDataProvider`
         
             Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state to which additional state should correspond
+                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state to which additional data should correspond
         
             Returns:
                 additional state corresponding to spacecraft state
@@ -43,17 +49,17 @@ class Duration(org.orekit.propagation.AdditionalStateProvider):
         ...
     def getName(self) -> str:
         """
-            Get the name of the additional state.
+            Get the name of the additional data.
         
-            If a provider just modifies one of the basic elements (orbit, attitude or mass) without adding any new state, it should
+            If a provider just modifies one of the basic elements (orbit, attitude or mass) without adding any new data, it should
             return the empty string as its name.
         
             Specified by:
-                :meth:`~org.orekit.propagation.AdditionalStateProvider.getName` in
-                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
+                :meth:`~org.orekit.propagation.AdditionalDataProvider.getName` in
+                interface :class:`~org.orekit.propagation.AdditionalDataProvider`
         
             Returns:
-                name of the additional state (names containing "orekit" with any case are reserved for the library internal use)
+                name of the additional data (names containing "orekit" with any case are reserved for the library internal use)
         
         
         """
@@ -62,8 +68,8 @@ class Duration(org.orekit.propagation.AdditionalStateProvider):
         """
             Check if this provider should yield so another provider has an opportunity to add missing parts.
         
-            Decision to yield is often based on an additional state being
-            :meth:`~org.orekit.propagation.SpacecraftState.hasAdditionalState` in the provided :code:`state` (but it could
+            Decision to yield is often based on an additional data being
+            :meth:`~org.orekit.propagation.SpacecraftState.hasAdditionalData` in the provided :code:`state` (but it could
             theoretically also depend on an additional state derivative being
             :meth:`~org.orekit.propagation.SpacecraftState.hasAdditionalStateDerivative`, or any other criterion). If for example a
             provider needs the state transition matrix, it could implement this method as:
@@ -71,18 +77,18 @@ class Duration(org.orekit.propagation.AdditionalStateProvider):
             .. code-block: java
             
              public boolean yields(final SpacecraftState state) {
-                 return !state.getAdditionalStates().containsKey("STM");
+                 return !state.hasAdditionalData("STM");
              }
              
         
             The default implementation returns :code:`false`, meaning that state data can be
-            :meth:`~org.orekit.propagation.AdditionalStateProvider.getAdditionalState` immediately.
+            :meth:`~org.orekit.propagation.AdditionalDataProvider.getAdditionalData` immediately.
         
             The column state can be computed only if the start and stop dates columns are available.
         
             Specified by:
-                :meth:`~org.orekit.propagation.AdditionalStateProvider.yields` in
-                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
+                :meth:`~org.orekit.propagation.AdditionalDataProvider.yields` in
+                interface :class:`~org.orekit.propagation.AdditionalDataProvider`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): state to handle
@@ -178,9 +184,9 @@ class MassDepletionDelay(org.orekit.propagation.integration.AdditionalDerivative
         """
         ...
 
-class MedianDate(org.orekit.propagation.AdditionalStateProvider):
+class MedianDate(org.orekit.propagation.AdditionalDataProvider[typing.MutableSequence[float]]):
     """
-    public class MedianDate extends :class:`~org.orekit.forces.maneuvers.jacobians.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.AdditionalStateProvider`
+    public class MedianDate extends :class:`~org.orekit.forces.maneuvers.jacobians.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.AdditionalDataProvider`<double[]>
     
         Generator for one column of a Jacobian matrix for special case of maneuver median date.
     
@@ -194,16 +200,16 @@ class MedianDate(org.orekit.propagation.AdditionalStateProvider):
             :class:`~org.orekit.forces.maneuvers.jacobians.Duration`, :class:`~org.orekit.forces.maneuvers.jacobians.TriggerDate`
     """
     def __init__(self, string: str, string2: str, string3: str): ...
-    def getAdditionalState(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]:
+    def getAdditionalData(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.MutableSequence[float]:
         """
-            Get the additional state.
+            Get the additional data.
         
             Specified by:
-                :meth:`~org.orekit.propagation.AdditionalStateProvider.getAdditionalState` in
-                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
+                :meth:`~org.orekit.propagation.AdditionalDataProvider.getAdditionalData` in
+                interface :class:`~org.orekit.propagation.AdditionalDataProvider`
         
             Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state to which additional state should correspond
+                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state to which additional data should correspond
         
             Returns:
                 additional state corresponding to spacecraft state
@@ -213,17 +219,17 @@ class MedianDate(org.orekit.propagation.AdditionalStateProvider):
         ...
     def getName(self) -> str:
         """
-            Get the name of the additional state.
+            Get the name of the additional data.
         
-            If a provider just modifies one of the basic elements (orbit, attitude or mass) without adding any new state, it should
+            If a provider just modifies one of the basic elements (orbit, attitude or mass) without adding any new data, it should
             return the empty string as its name.
         
             Specified by:
-                :meth:`~org.orekit.propagation.AdditionalStateProvider.getName` in
-                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
+                :meth:`~org.orekit.propagation.AdditionalDataProvider.getName` in
+                interface :class:`~org.orekit.propagation.AdditionalDataProvider`
         
             Returns:
-                name of the additional state (names containing "orekit" with any case are reserved for the library internal use)
+                name of the additional data (names containing "orekit" with any case are reserved for the library internal use)
         
         
         """
@@ -232,8 +238,8 @@ class MedianDate(org.orekit.propagation.AdditionalStateProvider):
         """
             Check if this provider should yield so another provider has an opportunity to add missing parts.
         
-            Decision to yield is often based on an additional state being
-            :meth:`~org.orekit.propagation.SpacecraftState.hasAdditionalState` in the provided :code:`state` (but it could
+            Decision to yield is often based on an additional data being
+            :meth:`~org.orekit.propagation.SpacecraftState.hasAdditionalData` in the provided :code:`state` (but it could
             theoretically also depend on an additional state derivative being
             :meth:`~org.orekit.propagation.SpacecraftState.hasAdditionalStateDerivative`, or any other criterion). If for example a
             provider needs the state transition matrix, it could implement this method as:
@@ -241,18 +247,18 @@ class MedianDate(org.orekit.propagation.AdditionalStateProvider):
             .. code-block: java
             
              public boolean yields(final SpacecraftState state) {
-                 return !state.getAdditionalStates().containsKey("STM");
+                 return !state.hasAdditionalData("STM");
              }
              
         
             The default implementation returns :code:`false`, meaning that state data can be
-            :meth:`~org.orekit.propagation.AdditionalStateProvider.getAdditionalState` immediately.
+            :meth:`~org.orekit.propagation.AdditionalDataProvider.getAdditionalData` immediately.
         
             The column state can be computed only if the start and stop dates columns are available.
         
             Specified by:
-                :meth:`~org.orekit.propagation.AdditionalStateProvider.yields` in
-                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
+                :meth:`~org.orekit.propagation.AdditionalDataProvider.yields` in
+                interface :class:`~org.orekit.propagation.AdditionalDataProvider`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): state to handle
@@ -265,9 +271,9 @@ class MedianDate(org.orekit.propagation.AdditionalStateProvider):
         """
         ...
 
-class TriggerDate(org.orekit.propagation.AdditionalStateProvider, org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter):
+class TriggerDate(org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter, org.orekit.propagation.AdditionalDataProvider[typing.MutableSequence[float]]):
     """
-    public class TriggerDate extends :class:`~org.orekit.forces.maneuvers.jacobians.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.AdditionalStateProvider`, :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter`
+    public class TriggerDate extends :class:`~org.orekit.forces.maneuvers.jacobians.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter`, :class:`~org.orekit.propagation.AdditionalDataProvider`<double[]>
     
         Generator for one column of a Jacobian matrix for special case of trigger dates.
     
@@ -302,7 +308,7 @@ class TriggerDate(org.orekit.propagation.AdditionalStateProvider, org.orekit.for
         \pm f_m(t_1, y_1)\).
     
         As the primary part of the column is generated using a closed-form expression, this generator implements the
-        :class:`~org.orekit.propagation.AdditionalStateProvider` interface and stores the column directly in the primary state
+        :class:`~org.orekit.propagation.AdditionalDataProvider` interface and stores the column directly in the primary state
         during propagation.
     
         As the closed-form expression requires picking \(c_1\) at trigger time \(t_1\), it works only if propagation starts
@@ -333,16 +339,16 @@ class TriggerDate(org.orekit.propagation.AdditionalStateProvider, org.orekit.for
             :class:`~org.orekit.forces.maneuvers.jacobians.MedianDate`, :class:`~org.orekit.forces.maneuvers.jacobians.Duration`
     """
     def __init__(self, string: str, string2: str, boolean: bool, maneuver: org.orekit.forces.maneuvers.Maneuver, double: float): ...
-    def getAdditionalState(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.List[float]:
+    def getAdditionalData(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> typing.MutableSequence[float]:
         """
-            Get the additional state.
+            Get the additional data.
         
             Specified by:
-                :meth:`~org.orekit.propagation.AdditionalStateProvider.getAdditionalState` in
-                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
+                :meth:`~org.orekit.propagation.AdditionalDataProvider.getAdditionalData` in
+                interface :class:`~org.orekit.propagation.AdditionalDataProvider`
         
             Parameters:
-                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state to which additional state should correspond
+                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state to which additional data should correspond
         
             Returns:
                 additional state corresponding to spacecraft state
@@ -362,36 +368,38 @@ class TriggerDate(org.orekit.propagation.AdditionalStateProvider, org.orekit.for
         ...
     def getName(self) -> str:
         """
-            Get the name of the additional state.
+            Get the name of the additional data.
         
-            If a provider just modifies one of the basic elements (orbit, attitude or mass) without adding any new state, it should
+            If a provider just modifies one of the basic elements (orbit, attitude or mass) without adding any new data, it should
             return the empty string as its name.
         
             Specified by:
-                :meth:`~org.orekit.propagation.AdditionalStateProvider.getName` in
-                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
+                :meth:`~org.orekit.propagation.AdditionalDataProvider.getName` in
+                interface :class:`~org.orekit.propagation.AdditionalDataProvider`
         
             Returns:
-                name of the additional state (names containing "orekit" with any case are reserved for the library internal use)
+                name of the additional data (names containing "orekit" with any case are reserved for the library internal use)
         
         
         """
         ...
     def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
-            Initialize the additional state provider at the start of propagation.
+            Initialization method called at propagation start.
+        
+            The default implementation does nothing.
         
             Specified by:
-                :meth:`~org.orekit.propagation.AdditionalStateProvider.init` in
-                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
+                :meth:`~org.orekit.propagation.AdditionalDataProvider.init` in
+                interface :class:`~org.orekit.propagation.AdditionalDataProvider`
         
             Specified by:
                 :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter.init` in
                 interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter`
         
             Parameters:
-                initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial state information at the start of propagation
-                target (:class:`~org.orekit.time.AbsoluteDate`): date of propagation
+                initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial spacecraft state (at the start of propagation).
+                target (:class:`~org.orekit.time.AbsoluteDate`): date of propagation. Not equal to :code:`initialState.getDate()`.
         
         
         """
@@ -437,8 +445,8 @@ class TriggerDate(org.orekit.propagation.AdditionalStateProvider, org.orekit.for
         """
             Check if this provider should yield so another provider has an opportunity to add missing parts.
         
-            Decision to yield is often based on an additional state being
-            :meth:`~org.orekit.propagation.SpacecraftState.hasAdditionalState` in the provided :code:`state` (but it could
+            Decision to yield is often based on an additional data being
+            :meth:`~org.orekit.propagation.SpacecraftState.hasAdditionalData` in the provided :code:`state` (but it could
             theoretically also depend on an additional state derivative being
             :meth:`~org.orekit.propagation.SpacecraftState.hasAdditionalStateDerivative`, or any other criterion). If for example a
             provider needs the state transition matrix, it could implement this method as:
@@ -446,18 +454,18 @@ class TriggerDate(org.orekit.propagation.AdditionalStateProvider, org.orekit.for
             .. code-block: java
             
              public boolean yields(final SpacecraftState state) {
-                 return !state.getAdditionalStates().containsKey("STM");
+                 return !state.hasAdditionalData("STM");
              }
              
         
             The default implementation returns :code:`false`, meaning that state data can be
-            :meth:`~org.orekit.propagation.AdditionalStateProvider.getAdditionalState` immediately.
+            :meth:`~org.orekit.propagation.AdditionalDataProvider.getAdditionalData` immediately.
         
             The column state can be computed only if the State Transition Matrix state is available.
         
             Specified by:
-                :meth:`~org.orekit.propagation.AdditionalStateProvider.yields` in
-                interface :class:`~org.orekit.propagation.AdditionalStateProvider`
+                :meth:`~org.orekit.propagation.AdditionalDataProvider.yields` in
+                interface :class:`~org.orekit.propagation.AdditionalDataProvider`
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): state to handle
@@ -471,11 +479,10 @@ class TriggerDate(org.orekit.propagation.AdditionalStateProvider, org.orekit.for
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.forces.maneuvers.jacobians")``.
 
     Duration: typing.Type[Duration]
     MassDepletionDelay: typing.Type[MassDepletionDelay]
     MedianDate: typing.Type[MedianDate]
     TriggerDate: typing.Type[TriggerDate]
-    class-use: org.orekit.forces.maneuvers.jacobians.class-use.__module_protocol__

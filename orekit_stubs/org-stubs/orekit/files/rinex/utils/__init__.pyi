@@ -1,5 +1,11 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
-import org.orekit.files.rinex.utils.class-use
 import org.orekit.files.rinex.utils.parsing
 import typing
 
@@ -55,7 +61,7 @@ class RinexFileType(java.lang.Enum['RinexFileType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['RinexFileType']:
+    def values() -> typing.MutableSequence['RinexFileType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -74,9 +80,8 @@ class RinexFileType(java.lang.Enum['RinexFileType']):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.rinex.utils")``.
 
     RinexFileType: typing.Type[RinexFileType]
-    class-use: org.orekit.files.rinex.utils.class-use.__module_protocol__
     parsing: org.orekit.files.rinex.utils.parsing.__module_protocol__

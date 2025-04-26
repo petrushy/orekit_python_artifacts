@@ -1,8 +1,15 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.util
 import java.util.stream
+import jpype
 import org.hipparchus
 import org.hipparchus.geometry.euclidean.threed
-import org.orekit.forces.class-use
 import org.orekit.forces.drag
 import org.orekit.forces.empirical
 import org.orekit.forces.gravity
@@ -49,16 +56,16 @@ class BoxAndSolarArraySpacecraft(org.orekit.forces.radiation.RadiationSensitive,
         coefficients.
     """
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, extendedPVCoordinatesProvider: org.orekit.utils.ExtendedPVCoordinatesProvider, double4: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double5: float, double6: float, double7: float, double8: float): ...
+    def __init__(self, double: float, double2: float, double3: float, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], double4: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double5: float, double6: float, double7: float, double8: float): ...
     @typing.overload
     def __init__(self, list: java.util.List['Panel']): ...
     @staticmethod
     def buildBox(double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float) -> java.util.List['Panel']: ...
     @staticmethod
-    def buildPanels(double: float, double2: float, double3: float, extendedPVCoordinatesProvider: org.orekit.utils.ExtendedPVCoordinatesProvider, double4: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double5: float, double6: float, double7: float, double8: float) -> java.util.List['Panel']: ...
+    def buildPanels(double: float, double2: float, double3: float, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], double4: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double5: float, double6: float, double7: float, double8: float) -> java.util.List['Panel']: ...
     _dragAcceleration_0__T = typing.TypeVar('_dragAcceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def dragAcceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_dragAcceleration_0__T], t: _dragAcceleration_0__T, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T], tArray: typing.List[_dragAcceleration_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T]:
+    def dragAcceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_dragAcceleration_0__T], t: _dragAcceleration_0__T, fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T], tArray: typing.Union[typing.List[_dragAcceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_dragAcceleration_0__T]:
         """
             Compute the acceleration due to drag.
         
@@ -81,7 +88,7 @@ class BoxAndSolarArraySpacecraft(org.orekit.forces.radiation.RadiationSensitive,
         """
         ...
     @typing.overload
-    def dragAcceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, double: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def dragAcceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, double: float, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Compute the acceleration due to drag.
         
@@ -107,7 +114,7 @@ class BoxAndSolarArraySpacecraft(org.orekit.forces.radiation.RadiationSensitive,
     def getRadiationParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _radiationPressureAcceleration_0__T = typing.TypeVar('_radiationPressureAcceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def radiationPressureAcceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_radiationPressureAcceleration_0__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_radiationPressureAcceleration_0__T], tArray: typing.List[_radiationPressureAcceleration_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_radiationPressureAcceleration_0__T]:
+    def radiationPressureAcceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_radiationPressureAcceleration_0__T], fieldVector3D: org.hipparchus.geometry.euclidean.threed.FieldVector3D[_radiationPressureAcceleration_0__T], tArray: typing.Union[typing.List[_radiationPressureAcceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_radiationPressureAcceleration_0__T]:
         """
             Compute the acceleration due to radiation pressure.
         
@@ -130,7 +137,7 @@ class BoxAndSolarArraySpacecraft(org.orekit.forces.radiation.RadiationSensitive,
         """
         ...
     @typing.overload
-    def radiationPressureAcceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def radiationPressureAcceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Compute the acceleration due to radiation pressure.
         
@@ -171,7 +178,7 @@ class ForceModel(org.orekit.utils.ParameterDriversProvider, org.orekit.propagati
     """
     _acceleration_0__T = typing.TypeVar('_acceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], tArray: typing.List[_acceleration_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
+    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], tArray: typing.Union[typing.List[_acceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
         """
             Compute acceleration.
         
@@ -189,7 +196,7 @@ class ForceModel(org.orekit.utils.ParameterDriversProvider, org.orekit.propagati
         """
         ...
     @typing.overload
-    def acceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def acceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Compute acceleration.
         
@@ -452,6 +459,140 @@ class FixedPanel(Panel):
         """
         ...
 
+class ForceModelModifier(ForceModel):
+    """
+    public interface ForceModelModifier extends :class:`~org.orekit.forces.ForceModel`
+    
+        Interface to wrap another force model. By default, methods do not modify anything.
+    
+        Since:
+            13.0
+    """
+    _acceleration_0__T = typing.TypeVar('_acceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], tArray: typing.Union[typing.List[_acceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
+        """
+            Compute acceleration.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
+            Parameters:
+                s (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> s): current state information: date, kinematics, attitude
+                parameters (T[]): values of the force model parameters at state date, only 1 value for each parameterDriver
+        
+            Returns:
+                acceleration in same frame as state
+        
+        
+        """
+        ...
+    @typing.overload
+    def acceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Compute acceleration.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.acceleration` in interface :class:`~org.orekit.forces.ForceModel`
+        
+            Parameters:
+                s (:class:`~org.orekit.propagation.SpacecraftState`): current state information: date, kinematics, attitude
+                parameters (double[]): values of the force model parameters at state date, only 1 value for each parameterDriver
+        
+            Returns:
+                acceleration in same frame as state
+        
+        """
+        ...
+    def dependsOnAttitudeRate(self) -> bool:
+        """
+            Check if force model depends on attitude's rotation rate or acceleration at a given, fixed date. If false, it
+            essentially means that at most the attitude's rotation is used when computing the acceleration vector. The default
+            implementation returns false as common forces do not.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.dependsOnAttitudeRate` in interface :class:`~org.orekit.forces.ForceModel`
+        
+            Returns:
+                true if force model depends on attitude derivatives
+        
+        
+        """
+        ...
+    def dependsOnPositionOnly(self) -> bool:
+        """
+            Check if force model depends on position only at a given, fixed date.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.dependsOnPositionOnly` in interface :class:`~org.orekit.forces.ForceModel`
+        
+            Returns:
+                true if force model depends on position only, false if it depends on velocity, either directly or due to a dependency on
+                attitude
+        
+        
+        """
+        ...
+    @typing.overload
+    def getEventDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
+    @typing.overload
+    def getEventDetectors(self, list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
+    _getFieldEventDetectors_0__T = typing.TypeVar('_getFieldEventDetectors_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getFieldEventDetectors_1__T = typing.TypeVar('_getFieldEventDetectors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_0__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_0__T]]: ...
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_1__T], list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_1__T]]: ...
+    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
+    def getUnderlyingModel(self) -> ForceModel:
+        """
+            Get the underlying force model.
+        
+            Returns:
+                underlying model
+        
+        
+        """
+        ...
+    _init_0__T = typing.TypeVar('_init_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_init_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_init_0__T]) -> None:
+        """
+            Initialize the force model at the start of propagation. This method will be called before any calls to
+            :meth:`~org.orekit.forces.ForceModel.addContribution`, :meth:`~org.orekit.forces.ForceModel.addContribution`,
+            :meth:`~org.orekit.forces.ForceModel.acceleration` or :meth:`~org.orekit.forces.ForceModel.acceleration`
+        
+            The default implementation of this method does nothing.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.init` in interface :class:`~org.orekit.forces.ForceModel`
+        
+            Parameters:
+                initialState (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> initialState): spacecraft state at the start of propagation.
+                target (:class:`~org.orekit.time.FieldAbsoluteDate`<T> target): date of propagation. Not equal to :code:`initialState.getDate()`.
+        
+        
+        """
+        ...
+    @typing.overload
+    def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+        """
+            Initialize the force model at the start of propagation. This method will be called before any calls to
+            :meth:`~org.orekit.forces.ForceModel.addContribution`, :meth:`~org.orekit.forces.ForceModel.addContribution`,
+            :meth:`~org.orekit.forces.ForceModel.acceleration` or :meth:`~org.orekit.forces.ForceModel.acceleration`
+        
+            The default implementation of this method does nothing.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModel.init` in interface :class:`~org.orekit.forces.ForceModel`
+        
+            Parameters:
+                initialState (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state at the start of propagation.
+                target (:class:`~org.orekit.time.AbsoluteDate`): date of propagation. Not equal to :code:`initialState.getDate()`.
+        
+        """
+        ...
+
 class PointingPanel(Panel):
     """
     public class PointingPanel extends :class:`~org.orekit.forces.Panel`
@@ -469,7 +610,7 @@ class PointingPanel(Panel):
         Since:
             3.0
     """
-    def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, extendedPVCoordinatesProvider: org.orekit.utils.ExtendedPVCoordinatesProvider, double: float, double2: float, double3: float, double4: float, double5: float): ...
+    def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], double: float, double2: float, double3: float, double4: float, double5: float): ...
     _getNormal_0__T = typing.TypeVar('_getNormal_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def getNormal(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getNormal_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getNormal_0__T]:
@@ -512,7 +653,7 @@ class PythonForceModel(ForceModel):
     def __init__(self): ...
     _acceleration_0__T = typing.TypeVar('_acceleration_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], tArray: typing.List[_acceleration_0__T]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
+    def acceleration(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_acceleration_0__T], tArray: typing.Union[typing.List[_acceleration_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_acceleration_0__T]:
         """
             Compute acceleration.
         
@@ -530,7 +671,7 @@ class PythonForceModel(ForceModel):
         """
         ...
     @typing.overload
-    def acceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def acceleration(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Compute acceleration.
         
@@ -614,11 +755,11 @@ class PythonForceModel(ForceModel):
     _getParameters_1__T = typing.TypeVar('_getParameters_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     _getParameters_3__T = typing.TypeVar('_getParameters_3__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getParameters(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]: ...
+    def getParameters(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]: ...
     @typing.overload
-    def getParameters(self, field: org.hipparchus.Field[_getParameters_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getParameters_1__T]) -> typing.List[_getParameters_1__T]: ...
+    def getParameters(self, field: org.hipparchus.Field[_getParameters_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getParameters_1__T]) -> typing.MutableSequence[_getParameters_1__T]: ...
     @typing.overload
-    def getParameters(self) -> typing.List[float]:
+    def getParameters(self) -> typing.MutableSequence[float]:
         """
             Get model parameters.
         
@@ -634,7 +775,7 @@ class PythonForceModel(ForceModel):
         """
         ...
     @typing.overload
-    def getParameters(self, field: org.hipparchus.Field[_getParameters_3__T]) -> typing.List[_getParameters_3__T]:
+    def getParameters(self, field: org.hipparchus.Field[_getParameters_3__T]) -> typing.MutableSequence[_getParameters_3__T]:
         """
             Get model parameters.
         
@@ -770,18 +911,59 @@ class SlewingPanel(Panel):
         """
         ...
 
+class PythonForceModelModifier(ForceModelModifier):
+    """
+    public class PythonForceModelModifier extends :class:`~org.orekit.forces.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.ForceModelModifier`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def getUnderlyingModel(self) -> ForceModel:
+        """
+            Get the underlying force model.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.ForceModelModifier.getUnderlyingModel` in
+                interface :class:`~org.orekit.forces.ForceModelModifier`
+        
+            Returns:
+                underlying model
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
 
-class __module_protocol__(typing.Protocol):
+
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.forces")``.
 
     BoxAndSolarArraySpacecraft: typing.Type[BoxAndSolarArraySpacecraft]
     FixedPanel: typing.Type[FixedPanel]
     ForceModel: typing.Type[ForceModel]
+    ForceModelModifier: typing.Type[ForceModelModifier]
     Panel: typing.Type[Panel]
     PointingPanel: typing.Type[PointingPanel]
     PythonForceModel: typing.Type[PythonForceModel]
+    PythonForceModelModifier: typing.Type[PythonForceModelModifier]
     SlewingPanel: typing.Type[SlewingPanel]
-    class-use: org.orekit.forces.class-use.__module_protocol__
     drag: org.orekit.forces.drag.__module_protocol__
     empirical: org.orekit.forces.empirical.__module_protocol__
     gravity: org.orekit.forces.gravity.__module_protocol__

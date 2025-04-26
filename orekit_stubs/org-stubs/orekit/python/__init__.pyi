@@ -1,7 +1,13 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.util.function
 import org.hipparchus
 import org.hipparchus.analysis
-import org.orekit.python.class-use
 import typing
 
 
@@ -127,11 +133,10 @@ class PythonUnivariateFunction(org.hipparchus.analysis.UnivariateFunction):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.python")``.
 
     PythonFieldUnivariateFunction: typing.Type[PythonFieldUnivariateFunction]
     PythonFunction: typing.Type[PythonFunction]
     PythonSupplier: typing.Type[PythonSupplier]
     PythonUnivariateFunction: typing.Type[PythonUnivariateFunction]
-    class-use: org.orekit.python.class-use.__module_protocol__

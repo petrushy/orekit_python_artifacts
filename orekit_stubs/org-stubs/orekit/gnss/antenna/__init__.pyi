@@ -1,10 +1,17 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
+import jpype
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.data
 import org.orekit.frames
 import org.orekit.gnss
-import org.orekit.gnss.antenna.class-use
 import org.orekit.gnss.attitude
 import org.orekit.time
 import org.orekit.utils
@@ -24,12 +31,12 @@ class Antenna:
         Also see:
             :class:`~org.orekit.gnss.antenna.ftp:.www.igs.org.pub.station.general.antex14.txt`
     """
-    def getEccentricities(self, frequency: org.orekit.gnss.Frequency) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def getEccentricities(self, radioWave: typing.Union[org.orekit.gnss.RadioWave, typing.Callable]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Get the phase center eccentricities.
         
             Parameters:
-                frequency (:class:`~org.orekit.gnss.Frequency`): frequency of the signal to consider
+                radioWave (:class:`~org.orekit.gnss.RadioWave`): radio wave of the signal to consider
         
             Returns:
                 phase center eccentricities (m)
@@ -37,13 +44,12 @@ class Antenna:
         
         """
         ...
-    def getFrequencies(self) -> java.util.List[org.orekit.gnss.Frequency]: ...
-    def getPattern(self, frequency: org.orekit.gnss.Frequency) -> 'FrequencyPattern':
+    def getPattern(self, radioWave: typing.Union[org.orekit.gnss.RadioWave, typing.Callable]) -> 'FrequencyPattern':
         """
             Get a frequency pattern.
         
             Parameters:
-                frequency (:class:`~org.orekit.gnss.Frequency`): frequency of the signal to consider
+                radioWave (:class:`~org.orekit.gnss.RadioWave`): radio wave of the signal to consider
         
             Returns:
                 pattern for this frequency
@@ -51,12 +57,12 @@ class Antenna:
         
         """
         ...
-    def getPhaseCenterVariation(self, frequency: org.orekit.gnss.Frequency, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> float:
+    def getPhaseCenterVariation(self, radioWave: typing.Union[org.orekit.gnss.RadioWave, typing.Callable], vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> float:
         """
             Get the value of the phase center variation in a signal direction.
         
             Parameters:
-                frequency (:class:`~org.orekit.gnss.Frequency`): frequency of the signal to consider
+                radioWave (:class:`~org.orekit.gnss.RadioWave`): radio wave of the signal to consider
                 direction (:class:`~org.orekit.gnss.antenna.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D?is`): signal direction in antenna reference frame
         
             Returns:
@@ -65,6 +71,7 @@ class Antenna:
         
         """
         ...
+    def getRadioWaves(self) -> java.util.List[org.orekit.gnss.RadioWave]: ...
     def getSinexCode(self) -> str:
         """
             Get the sinex code of the antenna.
@@ -115,7 +122,7 @@ class AntexLoader:
     def __init__(self, string: str, dataProvidersManager: org.orekit.data.DataProvidersManager, timeScale: org.orekit.time.TimeScale): ...
     @typing.overload
     def __init__(self, dataSource: org.orekit.data.DataSource, timeScale: org.orekit.time.TimeScale): ...
-    def findSatelliteAntenna(self, satelliteSystem: org.orekit.gnss.SatelliteSystem, int: int) -> org.orekit.utils.TimeSpanMap['SatelliteAntenna']: ...
+    def findSatelliteAntenna(self, satInSystem: org.orekit.gnss.SatInSystem) -> org.orekit.utils.TimeSpanMap['SatelliteAntenna']: ...
     def getReceiversAntennas(self) -> java.util.List['ReceiverAntenna']: ...
     def getSatellitesAntennas(self) -> java.util.List[org.orekit.utils.TimeSpanMap['SatelliteAntenna']]: ...
 
@@ -142,7 +149,7 @@ class FrequencyPattern:
     
     
     """
-    def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, phaseCenterVariationFunction: 'PhaseCenterVariationFunction'): ...
+    def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, phaseCenterVariationFunction: typing.Union['PhaseCenterVariationFunction', typing.Callable]): ...
     def getEccentricities(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Get the phase center eccentricities.
@@ -195,7 +202,10 @@ class PhaseCenterVariationFunction:
         
             Parameters:
                 polarAngle (double): angle from antenna axial direction (zenith angle for receiver antennas, nadir angle for GNSS satellites antennas)
-                azimuthAngle (double): angle around axial direction
+                azimuthAngle (double): angle around axial direction, counted from +X to +Y (note that this convention is consistent with
+                    :meth:`~org.orekit.gnss.antenna.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D.html?is`,
+                    but it is *different* from :meth:`~org.orekit.utils.TrackingCoordinates.getAzimuth`, so care must be taken when using
+                    this for ground receivers)
         
             Returns:
                 phase center variation in the signal direction (m)
@@ -239,13 +249,14 @@ class SatelliteType(java.lang.Enum['SatelliteType']):
     GLONASS_M: typing.ClassVar['SatelliteType'] = ...
     GLONASS_K1: typing.ClassVar['SatelliteType'] = ...
     GLONASS_K2: typing.ClassVar['SatelliteType'] = ...
-    IRNSS_1GEO: typing.ClassVar['SatelliteType'] = ...
-    IRNSS_1IGSO: typing.ClassVar['SatelliteType'] = ...
+    NAVIC_1GEO: typing.ClassVar['SatelliteType'] = ...
+    NAVIC_2GEO: typing.ClassVar['SatelliteType'] = ...
+    NAVIC_1IGSO: typing.ClassVar['SatelliteType'] = ...
     QZSS: typing.ClassVar['SatelliteType'] = ...
     QZSS_2A: typing.ClassVar['SatelliteType'] = ...
     QZSS_2I: typing.ClassVar['SatelliteType'] = ...
     QZSS_2G: typing.ClassVar['SatelliteType'] = ...
-    def buildAttitudeProvider(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, extendedPVCoordinatesProvider: org.orekit.utils.ExtendedPVCoordinatesProvider, frame: org.orekit.frames.Frame, int: int) -> org.orekit.gnss.attitude.GNSSAttitudeProvider:
+    def buildAttitudeProvider(self, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], frame: org.orekit.frames.Frame, int: int) -> org.orekit.gnss.attitude.GNSSAttitudeProvider:
         """
             Build an attitude provider suitable for this satellite type.
         
@@ -258,7 +269,7 @@ class SatelliteType(java.lang.Enum['SatelliteType']):
             Parameters:
                 validityStart (:class:`~org.orekit.time.AbsoluteDate`): start of validity for this provider
                 validityEnd (:class:`~org.orekit.time.AbsoluteDate`): end of validity for this provider
-                sun (:class:`~org.orekit.utils.ExtendedPVCoordinatesProvider`): provider for Sun position
+                sun (:class:`~org.orekit.utils.ExtendedPositionProvider`): provider for Sun position
                 inertialFrame (:class:`~org.orekit.frames.Frame`): inertial frame where velocity are computed
                 prnNumber (int): number within the satellite system
         
@@ -305,7 +316,7 @@ class SatelliteType(java.lang.Enum['SatelliteType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['SatelliteType']:
+    def values() -> typing.MutableSequence['SatelliteType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -332,7 +343,7 @@ class OneDVariation(PhaseCenterVariationFunction):
         Since:
             9.2
     """
-    def __init__(self, double: float, double2: float, doubleArray: typing.List[float]): ...
+    def __init__(self, double: float, double2: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]): ...
     def value(self, double: float, double2: float) -> float:
         """
             Evaluate phase center variation in one signal direction.
@@ -343,7 +354,10 @@ class OneDVariation(PhaseCenterVariationFunction):
         
             Parameters:
                 polarAngle (double): angle from antenna axial direction (zenith angle for receiver antennas, nadir angle for GNSS satellites antennas)
-                azimuthAngle (double): angle around axial direction
+                azimuthAngle (double): angle around axial direction, counted from +X to +Y (note that this convention is consistent with
+                    :meth:`~org.orekit.gnss.antenna.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D.html?is`,
+                    but it is *different* from :meth:`~org.orekit.utils.TrackingCoordinates.getAzimuth`, so care must be taken when using
+                    this for ground receivers)
         
             Returns:
                 phase center variation in the signal direction (m)
@@ -408,7 +422,7 @@ class ReceiverAntenna(Antenna):
         Also see:
             :class:`~org.orekit.gnss.antenna.ftp:.www.igs.org.pub.station.general.antex14.txt`
     """
-    def __init__(self, string: str, string2: str, map: typing.Union[java.util.Map[org.orekit.gnss.Frequency, FrequencyPattern], typing.Mapping[org.orekit.gnss.Frequency, FrequencyPattern]], string3: str): ...
+    def __init__(self, string: str, string2: str, map: typing.Union[java.util.Map[typing.Union[org.orekit.gnss.RadioWave, typing.Callable], FrequencyPattern], typing.Mapping[typing.Union[org.orekit.gnss.RadioWave, typing.Callable], FrequencyPattern]], string3: str): ...
     def getSerialNumber(self) -> str:
         """
             Get the serial number.
@@ -432,7 +446,7 @@ class SatelliteAntenna(Antenna):
         Also see:
             :class:`~org.orekit.gnss.antenna.ftp:.www.igs.org.pub.station.general.antex14.txt`
     """
-    def __init__(self, string: str, string2: str, map: typing.Union[java.util.Map[org.orekit.gnss.Frequency, FrequencyPattern], typing.Mapping[org.orekit.gnss.Frequency, FrequencyPattern]], satelliteSystem: org.orekit.gnss.SatelliteSystem, int: int, satelliteType: SatelliteType, int2: int, string3: str, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate): ...
+    def __init__(self, string: str, string2: str, map: typing.Union[java.util.Map[typing.Union[org.orekit.gnss.RadioWave, typing.Callable], FrequencyPattern], typing.Mapping[typing.Union[org.orekit.gnss.RadioWave, typing.Callable], FrequencyPattern]], satInSystem: org.orekit.gnss.SatInSystem, satelliteType: SatelliteType, int: int, string3: str, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate): ...
     def getCosparID(self) -> str:
         """
             Get COSPAR ID.
@@ -443,12 +457,15 @@ class SatelliteAntenna(Antenna):
         
         """
         ...
-    def getPrnNumber(self) -> int:
+    def getSatInSystem(self) -> org.orekit.gnss.SatInSystem:
         """
-            Get PRN number.
+            Get satellite in system.
         
             Returns:
-                PRN number
+                satellite in system
+        
+            Since:
+                13.0
         
         
         """
@@ -459,16 +476,6 @@ class SatelliteAntenna(Antenna):
         
             Returns:
                 satellite code
-        
-        
-        """
-        ...
-    def getSatelliteSystem(self) -> org.orekit.gnss.SatelliteSystem:
-        """
-            Get satellite system.
-        
-            Returns:
-                satellite system
         
         
         """
@@ -516,7 +523,7 @@ class TwoDVariation(PhaseCenterVariationFunction):
         Since:
             9.2
     """
-    def __init__(self, double: float, double2: float, double3: float, doubleArray: typing.List[typing.List[float]]): ...
+    def __init__(self, double: float, double2: float, double3: float, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]): ...
     def value(self, double: float, double2: float) -> float:
         """
             Evaluate phase center variation in one signal direction.
@@ -527,7 +534,10 @@ class TwoDVariation(PhaseCenterVariationFunction):
         
             Parameters:
                 polarAngle (double): angle from antenna axial direction (zenith angle for receiver antennas, nadir angle for GNSS satellites antennas)
-                azimuthAngle (double): angle around axial direction
+                azimuthAngle (double): angle around axial direction, counted from +X to +Y (note that this convention is consistent with
+                    :meth:`~org.orekit.gnss.antenna.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Vector3D.html?is`,
+                    but it is *different* from :meth:`~org.orekit.utils.TrackingCoordinates.getAzimuth`, so care must be taken when using
+                    this for ground receivers)
         
             Returns:
                 phase center variation in the signal direction (m)
@@ -537,7 +547,7 @@ class TwoDVariation(PhaseCenterVariationFunction):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.gnss.antenna")``.
 
     Antenna: typing.Type[Antenna]
@@ -550,4 +560,3 @@ class __module_protocol__(typing.Protocol):
     SatelliteAntenna: typing.Type[SatelliteAntenna]
     SatelliteType: typing.Type[SatelliteType]
     TwoDVariation: typing.Type[TwoDVariation]
-    class-use: org.orekit.gnss.antenna.class-use.__module_protocol__

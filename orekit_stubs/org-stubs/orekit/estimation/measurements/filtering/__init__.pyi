@@ -1,7 +1,13 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.util
 import org
 import org.orekit.estimation.measurements
-import org.orekit.estimation.measurements.filtering.class-use
 import org.orekit.files.rinex.observation
 import org.orekit.gnss
 import org.orekit.propagation
@@ -49,8 +55,8 @@ class DualFrequencySmoother:
         """
         ...
     def filterDataSet(self, list: java.util.List[org.orekit.files.rinex.observation.ObservationDataSet], satelliteSystem: org.orekit.gnss.SatelliteSystem, int: int, observationType: org.orekit.gnss.ObservationType, observationType2: org.orekit.gnss.ObservationType) -> None: ...
-    def getFilteredDataMap(self) -> java.util.HashMap[org.orekit.gnss.ObservationType, java.util.List['SmoothedObservationDataSet']]: ...
-    def getMapFilters(self) -> java.util.HashMap[org.orekit.gnss.ObservationType, 'DualFrequencyHatchFilter']: ...
+    def getFilteredDataMap(self) -> java.util.Map[org.orekit.gnss.ObservationType, java.util.List['SmoothedObservationDataSet']]: ...
+    def getMapFilters(self) -> java.util.Map[org.orekit.gnss.ObservationType, 'DualFrequencyHatchFilter']: ...
 
 _MeasurementFilter__T = typing.TypeVar('_MeasurementFilter__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class MeasurementFilter(typing.Generic[_MeasurementFilter__T]):
@@ -111,8 +117,8 @@ class SingleFrequencySmoother:
         """
         ...
     def filterDataSet(self, list: java.util.List[org.orekit.files.rinex.observation.ObservationDataSet], satelliteSystem: org.orekit.gnss.SatelliteSystem, int: int, observationType: org.orekit.gnss.ObservationType) -> None: ...
-    def getFilteredDataMap(self) -> java.util.HashMap[org.orekit.gnss.ObservationType, java.util.List['SmoothedObservationDataSet']]: ...
-    def getMapFilters(self) -> java.util.HashMap[org.orekit.gnss.ObservationType, 'SingleFrequencyHatchFilter']: ...
+    def getFilteredDataMap(self) -> java.util.Map[org.orekit.gnss.ObservationType, java.util.List['SmoothedObservationDataSet']]: ...
+    def getMapFilters(self) -> java.util.Map[org.orekit.gnss.ObservationType, 'SingleFrequencyHatchFilter']: ...
 
 class SmoothedObservationDataSet:
     """
@@ -312,7 +318,7 @@ class SingleFrequencyHatchFilter(org.orekit.estimation.measurements.filtering.Ha
 class HatchFilter: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.estimation.measurements.filtering")``.
 
     DualFrequencyHatchFilter: typing.Type[DualFrequencyHatchFilter]
@@ -326,4 +332,3 @@ class __module_protocol__(typing.Protocol):
     SingleFrequencyHatchFilter: typing.Type[SingleFrequencyHatchFilter]
     SingleFrequencySmoother: typing.Type[SingleFrequencySmoother]
     SmoothedObservationDataSet: typing.Type[SmoothedObservationDataSet]
-    class-use: org.orekit.estimation.measurements.filtering.class-use.__module_protocol__

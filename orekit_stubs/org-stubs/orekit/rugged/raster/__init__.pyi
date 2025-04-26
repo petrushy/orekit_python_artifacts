@@ -1,3 +1,10 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.rugged.utils
@@ -20,7 +27,7 @@ class EarthHemisphere(java.lang.Enum['EarthHemisphere']):
     @staticmethod
     def valueOf(string: str) -> 'EarthHemisphere': ...
     @staticmethod
-    def values() -> typing.List['EarthHemisphere']: ...
+    def values() -> typing.MutableSequence['EarthHemisphere']: ...
 
 _TileFactory__T = typing.TypeVar('_TileFactory__T', bound='Tile')  # <T>
 class TileFactory(typing.Generic[_TileFactory__T]):
@@ -31,7 +38,7 @@ class TileUpdater:
 
 _TilesCache__T = typing.TypeVar('_TilesCache__T', bound='Tile')  # <T>
 class TilesCache(typing.Generic[_TilesCache__T]):
-    def __init__(self, tileFactory: TileFactory[_TilesCache__T], tileUpdater: TileUpdater, int: int, boolean: bool): ...
+    def __init__(self, tileFactory: typing.Union[TileFactory[_TilesCache__T], typing.Callable[[], _TilesCache__T]], tileUpdater: typing.Union[TileUpdater, typing.Callable], int: int, boolean: bool): ...
     def getTile(self, double: float, double2: float) -> _TilesCache__T: ...
 
 class UpdatableTile:
@@ -116,7 +123,7 @@ class Tile(UpdatableTile):
         @staticmethod
         def valueOf(string: str) -> 'Tile.Location': ...
         @staticmethod
-        def values() -> typing.List['Tile.Location']: ...
+        def values() -> typing.MutableSequence['Tile.Location']: ...
 
 class PythonTile(Tile):
     def __init__(self): ...
@@ -180,7 +187,7 @@ class SimpleTile(Tile):
     def tileUpdateCompleted(self) -> None: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.rugged.raster")``.
 
     EarthHemisphere: typing.Type[EarthHemisphere]

@@ -1,4 +1,10 @@
-import org.orekit.propagation.conversion.averaging.elements.class-use
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import typing
 
 
@@ -12,7 +18,7 @@ class AveragedOrbitalElements:
         Since:
             12.1
     """
-    def toArray(self) -> typing.List[float]:
+    def toArray(self) -> typing.MutableSequence[float]:
         """
             Write values from instance into an array of doubles.
         
@@ -97,7 +103,7 @@ class AveragedCircularWithMeanAngle(AveragedOrbitalElements):
         
         """
         ...
-    def toArray(self) -> typing.List[float]:
+    def toArray(self) -> typing.MutableSequence[float]:
         """
             Write values from instance into an array of doubles.
         
@@ -186,7 +192,7 @@ class AveragedEquinoctialWithMeanAngle(AveragedOrbitalElements):
         
         """
         ...
-    def toArray(self) -> typing.List[float]:
+    def toArray(self) -> typing.MutableSequence[float]:
         """
             Write values from instance into an array of doubles.
         
@@ -275,7 +281,7 @@ class AveragedKeplerianWithMeanAngle(AveragedOrbitalElements):
         
         """
         ...
-    def toArray(self) -> typing.List[float]:
+    def toArray(self) -> typing.MutableSequence[float]:
         """
             Write values from instance into an array of doubles.
         
@@ -315,7 +321,7 @@ class PythonAveragedOrbitalElements(AveragedOrbitalElements):
             Part of JCC Python interface to object
         """
         ...
-    def toArray(self) -> typing.List[float]:
+    def toArray(self) -> typing.MutableSequence[float]:
         """
             Write values from instance into an array of doubles.
         
@@ -331,7 +337,7 @@ class PythonAveragedOrbitalElements(AveragedOrbitalElements):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.propagation.conversion.averaging.elements")``.
 
     AveragedCircularWithMeanAngle: typing.Type[AveragedCircularWithMeanAngle]
@@ -339,4 +345,3 @@ class __module_protocol__(typing.Protocol):
     AveragedKeplerianWithMeanAngle: typing.Type[AveragedKeplerianWithMeanAngle]
     AveragedOrbitalElements: typing.Type[AveragedOrbitalElements]
     PythonAveragedOrbitalElements: typing.Type[PythonAveragedOrbitalElements]
-    class-use: org.orekit.propagation.conversion.averaging.elements.class-use.__module_protocol__

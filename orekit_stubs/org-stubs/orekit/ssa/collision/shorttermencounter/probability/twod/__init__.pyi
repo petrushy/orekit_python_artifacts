@@ -1,3 +1,10 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import org.hipparchus
 import org.hipparchus.analysis.integration
@@ -8,7 +15,6 @@ import org.orekit.files.ccsds.ndm.cdm
 import org.orekit.frames.encounter
 import org.orekit.orbits
 import org.orekit.propagation
-import org.orekit.ssa.collision.shorttermencounter.probability.twod.class-use
 import org.orekit.ssa.metrics
 import org.orekit.time
 import org.orekit.utils
@@ -714,7 +720,7 @@ class ShortTermEncounter2DPOCMethodType(java.lang.Enum['ShortTermEncounter2DPOCM
         """
         ...
     @staticmethod
-    def values() -> typing.List['ShortTermEncounter2DPOCMethodType']:
+    def values() -> typing.MutableSequence['ShortTermEncounter2DPOCMethodType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -2418,7 +2424,7 @@ class PythonAbstractShortTermEncounter1DNumerical2DPOCMethod(AbstractShortTermEn
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.ssa.collision.shorttermencounter.probability.twod")``.
 
     AbstractAlfriend1999: typing.Type[AbstractAlfriend1999]
@@ -2438,4 +2444,3 @@ class __module_protocol__(typing.Protocol):
     ShortTermEncounter2DDefinition: typing.Type[ShortTermEncounter2DDefinition]
     ShortTermEncounter2DPOCMethod: typing.Type[ShortTermEncounter2DPOCMethod]
     ShortTermEncounter2DPOCMethodType: typing.Type[ShortTermEncounter2DPOCMethodType]
-    class-use: org.orekit.ssa.collision.shorttermencounter.probability.twod.class-use.__module_protocol__

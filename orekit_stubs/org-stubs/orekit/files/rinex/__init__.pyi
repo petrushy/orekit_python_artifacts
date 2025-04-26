@@ -1,6 +1,12 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.util
 import org.orekit.data
-import org.orekit.files.rinex.class-use
 import org.orekit.files.rinex.clock
 import org.orekit.files.rinex.navigation
 import org.orekit.files.rinex.observation
@@ -170,14 +176,13 @@ class RinexFile(typing.Generic[_RinexFile__T]):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.rinex")``.
 
     AppliedDCBS: typing.Type[AppliedDCBS]
     AppliedPCVS: typing.Type[AppliedPCVS]
     HatanakaCompressFilter: typing.Type[HatanakaCompressFilter]
     RinexFile: typing.Type[RinexFile]
-    class-use: org.orekit.files.rinex.class-use.__module_protocol__
     clock: org.orekit.files.rinex.clock.__module_protocol__
     navigation: org.orekit.files.rinex.navigation.__module_protocol__
     observation: org.orekit.files.rinex.observation.__module_protocol__

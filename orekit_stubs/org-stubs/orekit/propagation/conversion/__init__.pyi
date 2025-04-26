@@ -1,8 +1,17 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
+import jpype
 import org.hipparchus
 import org.hipparchus.analysis
 import org.hipparchus.ode
+import org.hipparchus.ode.nonstiff
 import org.hipparchus.optim.nonlinear.vector.leastsquares
 import org.orekit.attitudes
 import org.orekit.data
@@ -18,7 +27,7 @@ import org.orekit.propagation.analytical
 import org.orekit.propagation.analytical.tle
 import org.orekit.propagation.analytical.tle.generation
 import org.orekit.propagation.conversion.averaging
-import org.orekit.propagation.conversion.class-use
+import org.orekit.propagation.conversion.osc2mean
 import org.orekit.propagation.integration
 import org.orekit.propagation.numerical
 import org.orekit.propagation.semianalytical.dsst
@@ -40,11 +49,26 @@ class FieldODEIntegratorBuilder(typing.Generic[_FieldODEIntegratorBuilder__T]):
             12.0
     """
     @typing.overload
-    def buildIntegrator(self, field: org.hipparchus.Field[_FieldODEIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_FieldODEIntegratorBuilder__T]: ...
+    def buildIntegrator(self, field: org.hipparchus.Field[_FieldODEIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.FieldODEIntegrator[_FieldODEIntegratorBuilder__T]: ...
     @typing.overload
-    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_FieldODEIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_FieldODEIntegratorBuilder__T]: ...
+    def buildIntegrator(self, field: org.hipparchus.Field[_FieldODEIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.FieldODEIntegrator[_FieldODEIntegratorBuilder__T]: ...
     @typing.overload
-    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_FieldODEIntegratorBuilder__T]) -> org.hipparchus.ode.AbstractFieldIntegrator[_FieldODEIntegratorBuilder__T]: ...
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_FieldODEIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.FieldODEIntegrator[_FieldODEIntegratorBuilder__T]: ...
+    @typing.overload
+    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_FieldODEIntegratorBuilder__T]) -> org.hipparchus.ode.FieldODEIntegrator[_FieldODEIntegratorBuilder__T]: ...
+    def toODEIntegratorBuilder(self) -> 'ODEIntegratorBuilder':
+        """
+            Form a non-Field equivalent.
+        
+            Returns:
+                ODE integrator builder
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
 
 class ODEIntegratorBuilder:
     """
@@ -56,8 +80,21 @@ class ODEIntegratorBuilder:
             6.0
     """
     @typing.overload
-    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractIntegrator:
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.ODEIntegrator:
         """
+            Build a first order integrator.
+        
+            Parameters:
+                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
+                orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use
+                angleType (:class:`~org.orekit.orbits.PositionAngleType`): position angle type to use
+        
+            Returns:
+                a first order integrator ready to use
+        
+            Since:
+                13.0
+        
             Build a first order integrator.
         
             Parameters:
@@ -70,7 +107,9 @@ class ODEIntegratorBuilder:
         """
         ...
     @typing.overload
-    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.AbstractIntegrator:
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.ODEIntegrator: ...
+    @typing.overload
+    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.ODEIntegrator:
         """
             Build a first order integrator. Non-orbit version.
         
@@ -79,6 +118,9 @@ class ODEIntegratorBuilder:
         
             Returns:
                 a first order integrator ready to use
+        
+            Since:
+                12.2
         
         
         """
@@ -119,9 +161,9 @@ class PropagatorBuilder(java.lang.Cloneable):
         Since:
             6.0
     """
-    def buildLeastSquaresModel(self, propagatorBuilderArray: typing.List['PropagatorBuilder'], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.AbstractBatchLSModel: ...
+    def buildLeastSquaresModel(self, propagatorBuilderArray: typing.Union[typing.List['PropagatorBuilder'], jpype.JArray], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: typing.Union[org.orekit.estimation.leastsquares.ModelObserver, typing.Callable]) -> org.orekit.estimation.leastsquares.AbstractBatchLSModel: ...
     @typing.overload
-    def buildPropagator(self, doubleArray: typing.List[float]) -> org.orekit.propagation.Propagator:
+    def buildPropagator(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.orekit.propagation.Propagator:
         """
             Build a propagator.
         
@@ -144,15 +186,15 @@ class PropagatorBuilder(java.lang.Cloneable):
         
         """
         ...
-    def copy(self) -> 'PropagatorBuilder':
+    def getAttitudeProvider(self) -> org.orekit.attitudes.AttitudeProvider:
         """
-            Deprecated.
-            as of 12.2, replaced by
-            :meth:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is`
-            Create a new instance identical to this one.
+            Get the attitude provider.
         
             Returns:
-                new instance identical to this one
+                the attitude provider
+        
+            Since:
+                13.0
         
         
         """
@@ -173,6 +215,19 @@ class PropagatorBuilder(java.lang.Cloneable):
         
             Returns:
                 date of the initial orbit
+        
+        
+        """
+        ...
+    def getMass(self) -> float:
+        """
+            Get the initial mass.
+        
+            Returns:
+                the mass (kg)
+        
+            Since:
+                13.0
         
         
         """
@@ -254,7 +309,7 @@ class PropagatorBuilder(java.lang.Cloneable):
         
         """
         ...
-    def getSelectedNormalizedParameters(self) -> typing.List[float]:
+    def getSelectedNormalizedParameters(self) -> typing.MutableSequence[float]:
         """
             Get the current value of selected normalized parameters.
         
@@ -291,7 +346,7 @@ class PropagatorConverter:
             6.0
     """
     @typing.overload
-    def convert(self, list: java.util.List[org.orekit.propagation.SpacecraftState], boolean: bool, stringArray: typing.List[str]) -> org.orekit.propagation.Propagator:
+    def convert(self, list: java.util.List[org.orekit.propagation.SpacecraftState], boolean: bool, *string: str) -> org.orekit.propagation.Propagator:
         """
             Convert a propagator into another one.
         
@@ -336,28 +391,84 @@ class PropagatorConverter:
     @typing.overload
     def convert(self, list: java.util.List[org.orekit.propagation.SpacecraftState], boolean: bool, list2: java.util.List[str]) -> org.orekit.propagation.Propagator: ...
     @typing.overload
-    def convert(self, propagator: org.orekit.propagation.Propagator, double: float, int: int, stringArray: typing.List[str]) -> org.orekit.propagation.Propagator: ...
+    def convert(self, propagator: org.orekit.propagation.Propagator, double: float, int: int, *string: str) -> org.orekit.propagation.Propagator: ...
     @typing.overload
     def convert(self, propagator: org.orekit.propagation.Propagator, double: float, int: int, list: java.util.List[str]) -> org.orekit.propagation.Propagator: ...
 
-_AbstractFieldIntegratorBuilder__T = typing.TypeVar('_AbstractFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class AbstractFieldIntegratorBuilder(FieldODEIntegratorBuilder[_AbstractFieldIntegratorBuilder__T], typing.Generic[_AbstractFieldIntegratorBuilder__T]):
+_AbstractIntegratorBuilder__T = typing.TypeVar('_AbstractIntegratorBuilder__T', bound=org.hipparchus.ode.AbstractIntegrator)  # <T>
+class AbstractIntegratorBuilder(ODEIntegratorBuilder, typing.Generic[_AbstractIntegratorBuilder__T]):
     """
-    public abstract class AbstractFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder`<T>
+    public abstract class AbstractIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.AbstractIntegrator?is`> extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
     
-        Abstract class for :class:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder`.
+        Abstract class for integrator builder.
+    
+        Since:
+            13.0
     """
     def __init__(self): ...
     @typing.overload
-    def buildIntegrator(self, field: org.hipparchus.Field[_AbstractFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_AbstractFieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> _AbstractIntegratorBuilder__T:
+        """
+            Description copied from interface: :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator`
+            Build a first order integrator.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+        
+            Parameters:
+                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
+                orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use
+                angleType (:class:`~org.orekit.orbits.PositionAngleType`): position angle type to use
+        
+            Returns:
+                a first order integrator ready to use
+        
+        """
+        ...
     @typing.overload
-    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_AbstractFieldIntegratorBuilder__T]) -> org.hipparchus.ode.AbstractFieldIntegrator[_AbstractFieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> _AbstractIntegratorBuilder__T:
+        """
+            Description copied from interface: :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator`
+            Build a first order integrator.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+        
+            Parameters:
+                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
+                orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use
+        
+            Returns:
+                a first order integrator ready to use
+        
+        """
+        ...
     @typing.overload
-    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_AbstractFieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_AbstractFieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> _AbstractIntegratorBuilder__T:
+        """
+            Description copied from interface: :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator`
+            Build a first order integrator. Non-orbit version.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+        
+            Parameters:
+                absolutePVCoordinates (:class:`~org.orekit.utils.AbsolutePVCoordinates`): absolute position-velocity vector
+        
+            Returns:
+                a first order integrator ready to use
+        
+        
+        """
+        ...
 
-class AbstractPropagatorBuilder(PropagatorBuilder):
+_AbstractPropagatorBuilder__T = typing.TypeVar('_AbstractPropagatorBuilder__T', bound=org.orekit.propagation.AbstractPropagator)  # <T>
+class AbstractPropagatorBuilder(PropagatorBuilder, typing.Generic[_AbstractPropagatorBuilder__T]):
     """
-    public abstract class AbstractPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+    public abstract class AbstractPropagatorBuilder<T extends :class:`~org.orekit.propagation.AbstractPropagator`> extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
     
         Base class for propagator builders.
     
@@ -377,16 +488,39 @@ class AbstractPropagatorBuilder(PropagatorBuilder):
         
         """
         ...
-    def clone(self) -> 'AbstractPropagatorBuilder':
+    @typing.overload
+    def buildPropagator(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> _AbstractPropagatorBuilder__T:
         """
+            Build a propagator.
         
-            Overrides:
-                :meth:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object.html?is` in
-                class :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+        
+            Parameters:
+                normalizedParameters (double[]): normalized values for the selected parameters
+        
+            Returns:
+                an initialized propagator
+        
+        """
+        ...
+    @typing.overload
+    def buildPropagator(self) -> _AbstractPropagatorBuilder__T:
+        """
+            Build a propagator from current value of selected normalized parameters.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+        
+            Returns:
+                an initialized propagator
         
         
         """
         ...
+    def clone(self) -> 'AbstractPropagatorBuilder'[_AbstractPropagatorBuilder__T]: ...
     def deselectDynamicParameters(self) -> None:
         """
             Deselects orbital and propagation drivers.
@@ -396,6 +530,10 @@ class AbstractPropagatorBuilder(PropagatorBuilder):
     def getAttitudeProvider(self) -> org.orekit.attitudes.AttitudeProvider:
         """
             Get the attitude provider.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getAttitudeProvider` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
                 the attitude provider
@@ -438,8 +576,12 @@ class AbstractPropagatorBuilder(PropagatorBuilder):
         """
             Get the mass.
         
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getMass` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+        
             Returns:
-                the mass
+                the mass (kg)
         
             Since:
                 9.2
@@ -539,7 +681,7 @@ class AbstractPropagatorBuilder(PropagatorBuilder):
         
         """
         ...
-    def getSelectedNormalizedParameters(self) -> typing.List[float]:
+    def getSelectedNormalizedParameters(self) -> typing.MutableSequence[float]:
         """
             Get the current value of selected normalized parameters.
         
@@ -608,11 +750,11 @@ class AbstractPropagatorConverter(PropagatorConverter):
             6.0
     """
     @typing.overload
-    def convert(self, list: java.util.List[org.orekit.propagation.SpacecraftState], boolean: bool, stringArray: typing.List[str]) -> org.orekit.propagation.Propagator: ...
+    def convert(self, list: java.util.List[org.orekit.propagation.SpacecraftState], boolean: bool, *string: str) -> org.orekit.propagation.Propagator: ...
     @typing.overload
     def convert(self, list: java.util.List[org.orekit.propagation.SpacecraftState], boolean: bool, list2: java.util.List[str]) -> org.orekit.propagation.Propagator: ...
     @typing.overload
-    def convert(self, propagator: org.orekit.propagation.Propagator, double: float, int: int, stringArray: typing.List[str]) -> org.orekit.propagation.Propagator: ...
+    def convert(self, propagator: org.orekit.propagation.Propagator, double: float, int: int, *string: str) -> org.orekit.propagation.Propagator: ...
     @typing.overload
     def convert(self, propagator: org.orekit.propagation.Propagator, double: float, int: int, list: java.util.List[str]) -> org.orekit.propagation.Propagator: ...
     def getAdaptedPropagator(self) -> org.orekit.propagation.Propagator:
@@ -646,30 +788,36 @@ class AbstractPropagatorConverter(PropagatorConverter):
         """
         ...
 
-class AbstractVariableStepIntegratorBuilder(ODEIntegratorBuilder):
+class ExplicitRungeKuttaIntegratorBuilder(ODEIntegratorBuilder):
     """
-    public abstract class AbstractVariableStepIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+    public interface ExplicitRungeKuttaIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
     
-        Abstract class for integrator builder using variable step size.
-    
-        Since:
-            12.2
-    """
-    ...
-
-class ClassicalRungeKuttaIntegratorBuilder(ODEIntegratorBuilder):
-    """
-    public class ClassicalRungeKuttaIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
-    
-        Builder for ClassicalRungeKuttaIntegrator.
+        This interface is for builders of explicit Runge-Kutta integrators (adaptive or not).
     
         Since:
-            6.0
+            13.0
+    
+        Also see:
+            
+            class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.ExplicitRungeKuttaIntegrator?is`
     """
-    def __init__(self, double: float): ...
     @typing.overload
-    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.AbstractIntegrator:
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.nonstiff.ExplicitRungeKuttaIntegrator:
         """
+            Build a first order integrator.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+        
+            Parameters:
+                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
+                orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use
+                angleType (:class:`~org.orekit.orbits.PositionAngleType`): position angle type to use
+        
+            Returns:
+                a first order integrator ready to use
+        
             Build a first order integrator.
         
             Specified by:
@@ -683,34 +831,21 @@ class ClassicalRungeKuttaIntegratorBuilder(ODEIntegratorBuilder):
             Returns:
                 a first order integrator ready to use
         
-        
         """
         ...
     @typing.overload
-    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractIntegrator: ...
-
-class EulerIntegratorBuilder(ODEIntegratorBuilder):
-    """
-    public class EulerIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
-    
-        Builder for EulerIntegrator.
-    
-        Since:
-            6.0
-    """
-    def __init__(self, double: float): ...
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.nonstiff.ExplicitRungeKuttaIntegrator: ...
     @typing.overload
-    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.AbstractIntegrator:
+    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.nonstiff.ExplicitRungeKuttaIntegrator:
         """
-            Build a first order integrator.
+            Build a first order integrator. Non-orbit version.
         
             Specified by:
                 :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
                 interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
         
             Parameters:
-                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
-                orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use
+                absolutePVCoordinates (:class:`~org.orekit.utils.AbsolutePVCoordinates`): absolute position-velocity vector
         
             Returns:
                 a first order integrator ready to use
@@ -718,104 +853,60 @@ class EulerIntegratorBuilder(ODEIntegratorBuilder):
         
         """
         ...
-    @typing.overload
-    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractIntegrator: ...
 
-class GillIntegratorBuilder(ODEIntegratorBuilder):
+_FieldAbstractIntegratorBuilder__T = typing.TypeVar('_FieldAbstractIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+_FieldAbstractIntegratorBuilder__W = typing.TypeVar('_FieldAbstractIntegratorBuilder__W', bound=org.hipparchus.ode.AbstractFieldIntegrator)  # <W>
+class FieldAbstractIntegratorBuilder(FieldODEIntegratorBuilder[_FieldAbstractIntegratorBuilder__T], typing.Generic[_FieldAbstractIntegratorBuilder__T, _FieldAbstractIntegratorBuilder__W]):
     """
-    public class GillIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+    public abstract class FieldAbstractIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>, W extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.AbstractFieldIntegrator?is`<T>> extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder`<T>
     
-        Builder for GillIntegrator.
+        This abstract class implements some of the required methods for integrators in propagators conversion.
     
         Since:
-            6.0
+            13.0
     """
-    def __init__(self, double: float): ...
+    def __init__(self): ...
     @typing.overload
-    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.AbstractIntegrator:
+    def buildIntegrator(self, field: org.hipparchus.Field[_FieldAbstractIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> _FieldAbstractIntegratorBuilder__W: ...
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_FieldAbstractIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> _FieldAbstractIntegratorBuilder__W: ...
+    @typing.overload
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_FieldAbstractIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> _FieldAbstractIntegratorBuilder__W: ...
+    @typing.overload
+    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_FieldAbstractIntegratorBuilder__T]) -> _FieldAbstractIntegratorBuilder__W: ...
+
+_FieldExplicitRungeKuttaIntegratorBuilder__T = typing.TypeVar('_FieldExplicitRungeKuttaIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldExplicitRungeKuttaIntegratorBuilder(FieldODEIntegratorBuilder[_FieldExplicitRungeKuttaIntegratorBuilder__T], typing.Generic[_FieldExplicitRungeKuttaIntegratorBuilder__T]):
+    """
+    public interface FieldExplicitRungeKuttaIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder`<T>
+    
+        This interface is the top-level abstraction to build first order integrators for propagators conversion.
+    
+        Since:
+            13.0
+    """
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_FieldExplicitRungeKuttaIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.nonstiff.FieldExplicitRungeKuttaIntegrator[_FieldExplicitRungeKuttaIntegratorBuilder__T]: ...
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_FieldExplicitRungeKuttaIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.nonstiff.FieldExplicitRungeKuttaIntegrator[_FieldExplicitRungeKuttaIntegratorBuilder__T]: ...
+    @typing.overload
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_FieldExplicitRungeKuttaIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.nonstiff.FieldExplicitRungeKuttaIntegrator[_FieldExplicitRungeKuttaIntegratorBuilder__T]: ...
+    @typing.overload
+    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_FieldExplicitRungeKuttaIntegratorBuilder__T]) -> org.hipparchus.ode.nonstiff.FieldExplicitRungeKuttaIntegrator[_FieldExplicitRungeKuttaIntegratorBuilder__T]: ...
+    def toODEIntegratorBuilder(self) -> ExplicitRungeKuttaIntegratorBuilder:
         """
-            Build a first order integrator.
+            Form a non-Field equivalent.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
-                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
-        
-            Parameters:
-                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
-                orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use
+                :meth:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder.toODEIntegratorBuilder` in
+                interface :class:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder`
         
             Returns:
-                a first order integrator ready to use
+                ODE integrator builder
         
         
         """
         ...
-    @typing.overload
-    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractIntegrator: ...
-
-class LutherIntegratorBuilder(ODEIntegratorBuilder):
-    """
-    public class LutherIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
-    
-        Builder for LutherIntegrator.
-    
-        Since:
-            7.1
-    """
-    def __init__(self, double: float): ...
-    @typing.overload
-    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.AbstractIntegrator:
-        """
-            Build a first order integrator.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
-                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
-        
-            Parameters:
-                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
-                orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use
-        
-            Returns:
-                a first order integrator ready to use
-        
-        
-        """
-        ...
-    @typing.overload
-    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractIntegrator: ...
-
-class MidpointIntegratorBuilder(ODEIntegratorBuilder):
-    """
-    public class MidpointIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
-    
-        Builder for MidpointIntegrator.
-    
-        Since:
-            6.0
-    """
-    def __init__(self, double: float): ...
-    @typing.overload
-    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.AbstractIntegrator:
-        """
-            Build a first order integrator.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
-                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
-        
-            Parameters:
-                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
-                orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use
-        
-            Returns:
-                a first order integrator ready to use
-        
-        
-        """
-        ...
-    @typing.overload
-    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractIntegrator: ...
 
 _PythonFieldODEIntegratorBuilder__T = typing.TypeVar('_PythonFieldODEIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class PythonFieldODEIntegratorBuilder(FieldODEIntegratorBuilder[_PythonFieldODEIntegratorBuilder__T], typing.Generic[_PythonFieldODEIntegratorBuilder__T]):
@@ -824,11 +915,13 @@ class PythonFieldODEIntegratorBuilder(FieldODEIntegratorBuilder[_PythonFieldODEI
     """
     def __init__(self): ...
     @typing.overload
-    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_PythonFieldODEIntegratorBuilder__T]) -> org.hipparchus.ode.AbstractFieldIntegrator[_PythonFieldODEIntegratorBuilder__T]: ...
-    @typing.overload
     def buildIntegrator(self, field: org.hipparchus.Field[_PythonFieldODEIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_PythonFieldODEIntegratorBuilder__T]: ...
     @typing.overload
     def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_PythonFieldODEIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_PythonFieldODEIntegratorBuilder__T]: ...
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_PythonFieldODEIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.FieldODEIntegrator[_PythonFieldODEIntegratorBuilder__T]: ...
+    @typing.overload
+    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_PythonFieldODEIntegratorBuilder__T]) -> org.hipparchus.ode.FieldODEIntegrator[_PythonFieldODEIntegratorBuilder__T]: ...
     def finalize(self) -> None: ...
     def pythonDecRef(self) -> None: ...
     @typing.overload
@@ -841,6 +934,22 @@ class PythonFieldODEIntegratorBuilder(FieldODEIntegratorBuilder[_PythonFieldODEI
         
         """
         ...
+    def toODEIntegratorBuilder(self) -> ODEIntegratorBuilder:
+        """
+            Description copied from
+            interface: :meth:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder.toODEIntegratorBuilder`
+            Form a non-Field equivalent.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder.toODEIntegratorBuilder` in
+                interface :class:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder`
+        
+            Returns:
+                ODE integrator builder
+        
+        
+        """
+        ...
 
 class PythonODEIntegratorBuilder(ODEIntegratorBuilder):
     """
@@ -848,7 +957,7 @@ class PythonODEIntegratorBuilder(ODEIntegratorBuilder):
     """
     def __init__(self): ...
     @typing.overload
-    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.AbstractIntegrator:
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractIntegrator:
         """
             Build a first order integrator.
         
@@ -863,11 +972,44 @@ class PythonODEIntegratorBuilder(ODEIntegratorBuilder):
             Returns:
                 a first order integrator ready to use
         
+            Description copied from interface: :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator`
+            Build a first order integrator.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+        
+            Parameters:
+                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
+                orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use
+                angleType (:class:`~org.orekit.orbits.PositionAngleType`): position angle type to use
+        
+            Returns:
+                a first order integrator ready to use
         
         """
         ...
     @typing.overload
-    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractIntegrator: ...
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.ODEIntegrator: ...
+    @typing.overload
+    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.ODEIntegrator:
+        """
+            Description copied from interface: :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator`
+            Build a first order integrator. Non-orbit version.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+        
+            Parameters:
+                absolutePVCoordinates (:class:`~org.orekit.utils.AbsolutePVCoordinates`): absolute position-velocity vector
+        
+            Returns:
+                a first order integrator ready to use
+        
+        
+        """
+        ...
     def finalize(self) -> None: ...
     def pythonDecRef(self) -> None:
         """
@@ -894,11 +1036,11 @@ class PythonPropagatorBuilder(PropagatorBuilder):
     public class PythonPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
     """
     def __init__(self): ...
-    def buildLeastSquaresModel(self, propagatorBuilderArray: typing.List[PropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.AbstractBatchLSModel: ...
+    def buildLeastSquaresModel(self, propagatorBuilderArray: typing.Union[typing.List[PropagatorBuilder], jpype.JArray], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: typing.Union[org.orekit.estimation.leastsquares.ModelObserver, typing.Callable]) -> org.orekit.estimation.leastsquares.AbstractBatchLSModel: ...
     @typing.overload
     def buildPropagator(self) -> org.orekit.propagation.Propagator: ...
     @typing.overload
-    def buildPropagator(self, doubleArray: typing.List[float]) -> org.orekit.propagation.Propagator:
+    def buildPropagator(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.orekit.propagation.Propagator:
         """
             Build a propagator.
         
@@ -915,21 +1057,22 @@ class PythonPropagatorBuilder(PropagatorBuilder):
         
         """
         ...
-    def copy(self) -> PropagatorBuilder:
+    def finalize(self) -> None: ...
+    def getAttitudeProvider(self) -> org.orekit.attitudes.AttitudeProvider:
         """
-            Create a new instance identical to this one.
+            Description copied from interface: :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getAttitudeProvider`
+            Get the attitude provider.
         
             Specified by:
-                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.copy` in
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getAttitudeProvider` in
                 interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
         
             Returns:
-                new instance identical to this one
+                the attitude provider
         
         
         """
         ...
-    def finalize(self) -> None: ...
     def getFrame(self) -> org.orekit.frames.Frame:
         """
             Get the frame in which the orbit is propagated.
@@ -954,6 +1097,21 @@ class PythonPropagatorBuilder(PropagatorBuilder):
         
             Returns:
                 date of the initial orbit
+        
+        
+        """
+        ...
+    def getMass(self) -> float:
+        """
+            Description copied from interface: :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getMass`
+            Get the initial mass.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.getMass` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+        
+            Returns:
+                the mass (kg)
         
         
         """
@@ -1040,7 +1198,7 @@ class PythonPropagatorBuilder(PropagatorBuilder):
         
         """
         ...
-    def getSelectedNormalizedParameters(self) -> typing.List[float]:
+    def getSelectedNormalizedParameters(self) -> typing.MutableSequence[float]:
         """
             Get the current value of selected normalized parameters.
         
@@ -1086,7 +1244,7 @@ class PythonPropagatorConverter(PropagatorConverter):
     """
     def __init__(self): ...
     @typing.overload
-    def convert(self, list: java.util.List[org.orekit.propagation.SpacecraftState], boolean: bool, stringArray: typing.List[str]) -> org.orekit.propagation.Propagator:
+    def convert(self, list: java.util.List[org.orekit.propagation.SpacecraftState], boolean: bool, *string: str) -> org.orekit.propagation.Propagator:
         """
             Convert a propagator into another one.
         
@@ -1143,7 +1301,7 @@ class PythonPropagatorConverter(PropagatorConverter):
     @typing.overload
     def convert(self, list: java.util.List[org.orekit.propagation.SpacecraftState], boolean: bool, list2: java.util.List[str]) -> org.orekit.propagation.Propagator: ...
     @typing.overload
-    def convert(self, propagator: org.orekit.propagation.Propagator, double: float, int: int, stringArray: typing.List[str]) -> org.orekit.propagation.Propagator: ...
+    def convert(self, propagator: org.orekit.propagation.Propagator, double: float, int: int, *string: str) -> org.orekit.propagation.Propagator: ...
     @typing.overload
     def convert(self, propagator: org.orekit.propagation.Propagator, double: float, int: int, list: java.util.List[str]) -> org.orekit.propagation.Propagator: ...
     def finalize(self) -> None: ...
@@ -1167,41 +1325,10 @@ class PythonPropagatorConverter(PropagatorConverter):
         """
         ...
 
-class ThreeEighthesIntegratorBuilder(ODEIntegratorBuilder):
+_AbstractAnalyticalPropagatorBuilder__T = typing.TypeVar('_AbstractAnalyticalPropagatorBuilder__T', bound=org.orekit.propagation.analytical.AbstractAnalyticalPropagator)  # <T>
+class AbstractAnalyticalPropagatorBuilder(AbstractPropagatorBuilder[_AbstractAnalyticalPropagatorBuilder__T], typing.Generic[_AbstractAnalyticalPropagatorBuilder__T]):
     """
-    public class ThreeEighthesIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
-    
-        Builder for ThreeEighthesIntegrator.
-    
-        Since:
-            6.0
-    """
-    def __init__(self, double: float): ...
-    @typing.overload
-    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.AbstractIntegrator:
-        """
-            Build a first order integrator.
-        
-            Specified by:
-                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
-                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
-        
-            Parameters:
-                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
-                orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use
-        
-            Returns:
-                a first order integrator ready to use
-        
-        
-        """
-        ...
-    @typing.overload
-    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractIntegrator: ...
-
-class AbstractAnalyticalPropagatorBuilder(AbstractPropagatorBuilder):
-    """
-    public abstract class AbstractAnalyticalPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder`
+    public abstract class AbstractAnalyticalPropagatorBuilder<T extends :class:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator`> extends :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder`<T>
     
         Abstract class for propagator builders of analytical models (except for ephemeris i.e. interpolated ones).
     
@@ -1218,7 +1345,7 @@ class AbstractAnalyticalPropagatorBuilder(AbstractPropagatorBuilder):
         
         """
         ...
-    def buildLeastSquaresModel(self, propagatorBuilderArray: typing.List[PropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.AbstractBatchLSModel: ...
+    def buildLeastSquaresModel(self, propagatorBuilderArray: typing.Union[typing.List[PropagatorBuilder], jpype.JArray], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: typing.Union[org.orekit.estimation.leastsquares.ModelObserver, typing.Callable]) -> org.orekit.estimation.leastsquares.AbstractBatchLSModel: ...
     def clearImpulseManeuvers(self) -> None:
         """
             Remove all impulse maneuvers.
@@ -1226,118 +1353,71 @@ class AbstractAnalyticalPropagatorBuilder(AbstractPropagatorBuilder):
         """
         ...
 
-_AbstractFixedStepFieldIntegratorBuilder__T = typing.TypeVar('_AbstractFixedStepFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class AbstractFixedStepFieldIntegratorBuilder(AbstractFieldIntegratorBuilder[_AbstractFixedStepFieldIntegratorBuilder__T], typing.Generic[_AbstractFixedStepFieldIntegratorBuilder__T]):
+_AbstractFixedSingleStepIntegratorBuilder__T = typing.TypeVar('_AbstractFixedSingleStepIntegratorBuilder__T', bound=org.hipparchus.ode.nonstiff.FixedStepRungeKuttaIntegrator)  # <T>
+class AbstractFixedSingleStepIntegratorBuilder(AbstractIntegratorBuilder[_AbstractFixedSingleStepIntegratorBuilder__T], ExplicitRungeKuttaIntegratorBuilder, typing.Generic[_AbstractFixedSingleStepIntegratorBuilder__T]):
     """
-    public abstract class AbstractFixedStepFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractFieldIntegratorBuilder`<T>
+    public abstract class AbstractFixedSingleStepIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.FixedStepRungeKuttaIntegrator?is`> extends :class:`~org.orekit.propagation.conversion.AbstractIntegratorBuilder`<T> implements :class:`~org.orekit.propagation.conversion.ExplicitRungeKuttaIntegratorBuilder`
+    
+        Abstract class for fixed-step, single-step integrator builder.
+    
+        Since:
+            13.0
+    
+        Also see:
+            
+            class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.FixedStepRungeKuttaIntegrator?is`
+    """
+    @typing.overload
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> _AbstractFixedSingleStepIntegratorBuilder__T: ...
+    @typing.overload
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.nonstiff.ExplicitRungeKuttaIntegrator: ...
+    @typing.overload
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> _AbstractFixedSingleStepIntegratorBuilder__T: ...
+    @typing.overload
+    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> _AbstractFixedSingleStepIntegratorBuilder__T: ...
+    def getStep(self) -> float:
+        """
+            Getter for the step size.
+        
+            Returns:
+                step
+        
+        
+        """
+        ...
+
+_AbstractFixedStepFieldIntegratorBuilder__T = typing.TypeVar('_AbstractFixedStepFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+_AbstractFixedStepFieldIntegratorBuilder__W = typing.TypeVar('_AbstractFixedStepFieldIntegratorBuilder__W', bound=org.hipparchus.ode.AbstractFieldIntegrator)  # <W>
+class AbstractFixedStepFieldIntegratorBuilder(FieldAbstractIntegratorBuilder[_AbstractFixedStepFieldIntegratorBuilder__T, _AbstractFixedStepFieldIntegratorBuilder__W], typing.Generic[_AbstractFixedStepFieldIntegratorBuilder__T, _AbstractFixedStepFieldIntegratorBuilder__W]):
+    """
+    public abstract class AbstractFixedStepFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>, W extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.AbstractFieldIntegrator?is`<T>> extends :class:`~org.orekit.propagation.conversion.FieldAbstractIntegratorBuilder`<T, W>
     
         Abstract class for integrator builder using fixed step size.
     """
     ...
 
-_AbstractVariableStepFieldIntegratorBuilder__T = typing.TypeVar('_AbstractVariableStepFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class AbstractVariableStepFieldIntegratorBuilder(AbstractFieldIntegratorBuilder[_AbstractVariableStepFieldIntegratorBuilder__T], typing.Generic[_AbstractVariableStepFieldIntegratorBuilder__T]):
+_AbstractIntegratedPropagatorBuilder__T = typing.TypeVar('_AbstractIntegratedPropagatorBuilder__T', bound=org.orekit.propagation.integration.AbstractIntegratedPropagator)  # <T>
+class AbstractIntegratedPropagatorBuilder(AbstractPropagatorBuilder[_AbstractIntegratedPropagatorBuilder__T], typing.Generic[_AbstractIntegratedPropagatorBuilder__T]):
     """
-    public abstract class AbstractVariableStepFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractFieldIntegratorBuilder`<T>
+    public abstract class AbstractIntegratedPropagatorBuilder<T extends :class:`~org.orekit.propagation.integration.AbstractIntegratedPropagator`> extends :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder`<T>
     
-        Abstract class for integrator builder using variable step size.
-    """
-    ...
-
-class AdamsBashforthIntegratorBuilder(AbstractVariableStepIntegratorBuilder):
-    """
-    public class AdamsBashforthIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractVariableStepIntegratorBuilder`
-    
-        Builder for AdamsBashforthIntegrator.
+        Abstract class for builders for integrator-based propagators.
     
         Since:
-            6.0
+            13.0
     """
     @typing.overload
-    def __init__(self, int: int, double: float, double2: float, double3: float): ...
-    @typing.overload
-    def __init__(self, int: int, double: float, double2: float, double3: float, double4: float): ...
-    @typing.overload
-    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.AbstractIntegrator:
-        """
-            Build a first order integrator.
-        
-            Parameters:
-                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
-                orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use
-        
-            Returns:
-                a first order integrator ready to use
-        
-        
-        """
-        ...
-    @typing.overload
-    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractIntegrator: ...
-
-class AdamsMoultonIntegratorBuilder(AbstractVariableStepIntegratorBuilder):
-    """
-    public class AdamsMoultonIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractVariableStepIntegratorBuilder`
-    
-        Builder for AdamsMoultonIntegrator.
-    
-        Since:
-            6.0
-    """
-    @typing.overload
-    def __init__(self, int: int, double: float, double2: float, double3: float): ...
-    @typing.overload
-    def __init__(self, int: int, double: float, double2: float, double3: float, double4: float): ...
-    @typing.overload
-    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.AbstractIntegrator:
-        """
-            Build a first order integrator.
-        
-            Parameters:
-                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
-                orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use
-        
-            Returns:
-                a first order integrator ready to use
-        
-        
-        """
-        ...
-    @typing.overload
-    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractIntegrator: ...
-
-class DSSTPropagatorBuilder(AbstractPropagatorBuilder):
-    """
-    public class DSSTPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder`
-    
-        Builder for DSST propagator.
-    
-        Since:
-            10.0
-    """
-    @typing.overload
-    def __init__(self, orbit: org.orekit.orbits.Orbit, oDEIntegratorBuilder: ODEIntegratorBuilder, double: float, propagationType: org.orekit.propagation.PropagationType, propagationType2: org.orekit.propagation.PropagationType): ...
-    @typing.overload
-    def __init__(self, orbit: org.orekit.orbits.Orbit, oDEIntegratorBuilder: ODEIntegratorBuilder, double: float, propagationType: org.orekit.propagation.PropagationType, propagationType2: org.orekit.propagation.PropagationType, attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
-    def addForceModel(self, dSSTForceModel: org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel) -> None:
-        """
-            Add a force model to the global perturbation model.
-        
-            If this method is not called at all, the integrated orbit will follow a Keplerian evolution only.
-        
-            Parameters:
-                model (:class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`): perturbing :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel` to add
-        
-        
-        """
-        ...
-    def buildLeastSquaresModel(self, propagatorBuilderArray: typing.List[PropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.DSSTBatchLSModel: ...
-    @typing.overload
-    def buildPropagator(self) -> org.orekit.propagation.Propagator: ...
-    @typing.overload
-    def buildPropagator(self, doubleArray: typing.List[float]) -> org.orekit.propagation.semianalytical.dsst.DSSTPropagator:
+    def buildPropagator(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> _AbstractIntegratedPropagatorBuilder__T:
         """
             Build a propagator.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder.buildPropagator` in
+                class :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
@@ -1345,131 +1425,202 @@ class DSSTPropagatorBuilder(AbstractPropagatorBuilder):
             Returns:
                 an initialized propagator
         
-        
         """
         ...
-    def copy(self) -> 'DSSTPropagatorBuilder':
+    @typing.overload
+    def buildPropagator(self) -> _AbstractIntegratedPropagatorBuilder__T:
         """
-            Deprecated.
-            Create a copy of a DSSTPropagatorBuilder object.
+            Build a propagator from current value of selected normalized parameters.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+        
+            Overrides:
+                :meth:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder.buildPropagator` in
+                class :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder`
         
             Returns:
-                Copied version of the DSSTPropagatorBuilder
+                an initialized propagator
         
         
         """
         ...
-    def getAllForceModels(self) -> java.util.List[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel]: ...
     def getIntegratorBuilder(self) -> ODEIntegratorBuilder:
         """
-            Get the integrator builder.
+            Getter for integrator builder.
         
             Returns:
-                the integrator builder
+                builder
         
         
         """
         ...
     def getPropagationType(self) -> org.orekit.propagation.PropagationType:
         """
-            Get the type of the orbit used for the propagation (mean or osculating).
+            Getter for the propagation type.
         
             Returns:
-                the type of the orbit used for the propagation
+                propagation type
         
         
         """
         ...
-    def getStateType(self) -> org.orekit.propagation.PropagationType:
-        """
-            Get the type of the elements used to define the orbital state (mean or osculating).
-        
-            Returns:
-                the type of the elements used to define the orbital state
-        
-        
-        """
-        ...
-    @typing.overload
-    def resetOrbit(self, orbit: org.orekit.orbits.Orbit) -> None:
-        """
-            Reset the orbit in the propagator builder.
-        
-            Parameters:
-                newOrbit (:class:`~org.orekit.orbits.Orbit`): newOrbit New orbit to set in the propagator builder
-                orbitType (:class:`~org.orekit.propagation.PropagationType`): orbit type (MEAN or OSCULATING)
-        
-        
-        """
-        ...
-    @typing.overload
-    def resetOrbit(self, orbit: org.orekit.orbits.Orbit, propagationType: org.orekit.propagation.PropagationType) -> None: ...
 
-class DormandPrince54IntegratorBuilder(AbstractVariableStepIntegratorBuilder):
+_AbstractVariableStepFieldIntegratorBuilder__T = typing.TypeVar('_AbstractVariableStepFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+_AbstractVariableStepFieldIntegratorBuilder__W = typing.TypeVar('_AbstractVariableStepFieldIntegratorBuilder__W', bound=org.hipparchus.ode.nonstiff.AdaptiveStepsizeFieldIntegrator)  # <W>
+class AbstractVariableStepFieldIntegratorBuilder(FieldAbstractIntegratorBuilder[_AbstractVariableStepFieldIntegratorBuilder__T, _AbstractVariableStepFieldIntegratorBuilder__W], typing.Generic[_AbstractVariableStepFieldIntegratorBuilder__T, _AbstractVariableStepFieldIntegratorBuilder__W]):
     """
-    public class DormandPrince54IntegratorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractVariableStepIntegratorBuilder`
+    public abstract class AbstractVariableStepFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>, W extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.AdaptiveStepsizeFieldIntegrator?is`<T>> extends :class:`~org.orekit.propagation.conversion.FieldAbstractIntegratorBuilder`<T, W>
     
-        Builder for DormandPrince54Integrator.
+        Abstract class for integrator builder using variable step size.
+    """
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_AbstractVariableStepFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> _AbstractVariableStepFieldIntegratorBuilder__W: ...
+    @typing.overload
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_AbstractVariableStepFieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> _AbstractVariableStepFieldIntegratorBuilder__W: ...
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_AbstractVariableStepFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> _AbstractVariableStepFieldIntegratorBuilder__W: ...
+    @typing.overload
+    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_AbstractVariableStepFieldIntegratorBuilder__T]) -> _AbstractVariableStepFieldIntegratorBuilder__W: ...
+    def getMaxStep(self) -> float:
+        """
+            Getter for the maximum step.
+        
+            Returns:
+                max stepsize
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
+    def getMinStep(self) -> float:
+        """
+            Getter for the minimum step.
+        
+            Returns:
+                min stepsize
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
+    def getToleranceProvider(self) -> org.orekit.propagation.ToleranceProvider:
+        """
+            Getter for the integration tolerance provider.
+        
+            Returns:
+                tolerance provider
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
+
+_AbstractVariableStepIntegratorBuilder__T = typing.TypeVar('_AbstractVariableStepIntegratorBuilder__T', bound=org.hipparchus.ode.nonstiff.AdaptiveStepsizeIntegrator)  # <T>
+class AbstractVariableStepIntegratorBuilder(AbstractIntegratorBuilder[_AbstractVariableStepIntegratorBuilder__T], typing.Generic[_AbstractVariableStepIntegratorBuilder__T]):
+    """
+    public abstract class AbstractVariableStepIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.AdaptiveStepsizeIntegrator?is`> extends :class:`~org.orekit.propagation.conversion.AbstractIntegratorBuilder`<T>
+    
+        Abstract class for integrator builder using variable step size.
     
         Since:
-            6.0
+            12.2
     """
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float): ...
-    @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, double4: float): ...
-    @typing.overload
-    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.AbstractIntegrator:
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> _AbstractVariableStepIntegratorBuilder__T:
         """
             Build a first order integrator.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.AbstractIntegratorBuilder.buildIntegrator` in
+                class :class:`~org.orekit.propagation.conversion.AbstractIntegratorBuilder`
         
             Parameters:
                 orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
                 orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use
+                angleType (:class:`~org.orekit.orbits.PositionAngleType`): position angle type to use
         
             Returns:
                 a first order integrator ready to use
         
-        
         """
         ...
     @typing.overload
-    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractIntegrator: ...
-
-class DormandPrince853IntegratorBuilder(AbstractVariableStepIntegratorBuilder):
-    """
-    public class DormandPrince853IntegratorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractVariableStepIntegratorBuilder`
-    
-        Builder for DormandPrince853Integrator.
-    
-        Since:
-            6.0
-    """
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> _AbstractVariableStepIntegratorBuilder__T: ...
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float): ...
-    @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, double4: float): ...
-    @typing.overload
-    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.AbstractIntegrator:
+    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> _AbstractVariableStepIntegratorBuilder__T:
         """
-            Build a first order integrator.
+            Build a first order integrator. Non-orbit version.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+        
+            Overrides:
+                :meth:`~org.orekit.propagation.conversion.AbstractIntegratorBuilder.buildIntegrator` in
+                class :class:`~org.orekit.propagation.conversion.AbstractIntegratorBuilder`
         
             Parameters:
-                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
-                orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use
+                absolutePVCoordinates (:class:`~org.orekit.utils.AbsolutePVCoordinates`): absolute position-velocity vector
         
             Returns:
                 a first order integrator ready to use
         
+            Builds an integrator from input absolute and relative tolerances.
+        
+            Parameters:
+                tolerances (double[][]): tolerance array
+        
+            Returns:
+                integrator
+        
+            Since:
+                13.0
+        
         
         """
         ...
-    @typing.overload
-    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractIntegrator: ...
+    def getMaxStep(self) -> float:
+        """
+            Getter for the maximum step.
+        
+            Returns:
+                max stepsize
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
+    def getMinStep(self) -> float:
+        """
+            Getter for the minimum step.
+        
+            Returns:
+                min stepsize
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
 
-class EphemerisPropagatorBuilder(AbstractPropagatorBuilder):
+class EphemerisPropagatorBuilder(AbstractPropagatorBuilder[org.orekit.propagation.analytical.Ephemeris]):
     """
-    public class EphemerisPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder`
+    public class EphemerisPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder`<:class:`~org.orekit.propagation.analytical.Ephemeris`>
     
         Builder for Ephemeris propagator.
     
@@ -1486,30 +1637,27 @@ class EphemerisPropagatorBuilder(AbstractPropagatorBuilder):
     def __init__(self, list: java.util.List[org.orekit.propagation.SpacecraftState], timeInterpolator: org.orekit.time.TimeInterpolator[org.orekit.propagation.SpacecraftState], list2: java.util.List[org.orekit.propagation.StateCovariance], timeInterpolator2: org.orekit.time.TimeInterpolator[org.orekit.time.TimeStampedPair[org.orekit.orbits.Orbit, org.orekit.propagation.StateCovariance]], attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
     @typing.overload
     def __init__(self, list: java.util.List[org.orekit.propagation.SpacecraftState], timeInterpolator: org.orekit.time.TimeInterpolator[org.orekit.propagation.SpacecraftState], attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
-    def buildLeastSquaresModel(self, propagatorBuilderArray: typing.List[PropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.AbstractBatchLSModel: ...
+    def buildLeastSquaresModel(self, propagatorBuilderArray: typing.Union[typing.List[PropagatorBuilder], jpype.JArray], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: typing.Union[org.orekit.estimation.leastsquares.ModelObserver, typing.Callable]) -> org.orekit.estimation.leastsquares.AbstractBatchLSModel: ...
     @typing.overload
-    def buildPropagator(self) -> org.orekit.propagation.Propagator: ...
+    def buildPropagator(self) -> org.orekit.propagation.AbstractPropagator: ...
     @typing.overload
-    def buildPropagator(self, doubleArray: typing.List[float]) -> org.orekit.propagation.Propagator:
+    def buildPropagator(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.orekit.propagation.analytical.Ephemeris:
         """
             Build a propagator..
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder.buildPropagator` in
+                class :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
         
             Returns:
                 an initialized propagator
-        
-        
-        """
-        ...
-    def copy(self) -> 'EphemerisPropagatorBuilder':
-        """
-            Deprecated.
-            Create a new instance identical to this one.
-        
-            Returns:
-                new instance identical to this one
         
         
         """
@@ -1526,68 +1674,6 @@ class FiniteDifferencePropagatorConverter(AbstractPropagatorConverter):
     """
     def __init__(self, propagatorBuilder: PropagatorBuilder, double: float, int: int): ...
 
-class GraggBulirschStoerIntegratorBuilder(AbstractVariableStepIntegratorBuilder):
-    """
-    public class GraggBulirschStoerIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractVariableStepIntegratorBuilder`
-    
-        Builder for GraggBulirschStoerIntegrator.
-    
-        Since:
-            6.0
-    """
-    @typing.overload
-    def __init__(self, double: float, double2: float, double3: float): ...
-    @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, double4: float): ...
-    @typing.overload
-    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.AbstractIntegrator:
-        """
-            Build a first order integrator.
-        
-            Parameters:
-                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
-                orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use
-        
-            Returns:
-                a first order integrator ready to use
-        
-        
-        """
-        ...
-    @typing.overload
-    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractIntegrator: ...
-
-class HighamHall54IntegratorBuilder(AbstractVariableStepIntegratorBuilder):
-    """
-    public class HighamHall54IntegratorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractVariableStepIntegratorBuilder`
-    
-        Builder for HighamHall54Integrator.
-    
-        Since:
-            6.0
-    """
-    @typing.overload
-    def __init__(self, double: float, double2: float, double3: float): ...
-    @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, double4: float): ...
-    @typing.overload
-    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.AbstractIntegrator:
-        """
-            Build a first order integrator.
-        
-            Parameters:
-                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
-                orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use
-        
-            Returns:
-                a first order integrator ready to use
-        
-        
-        """
-        ...
-    @typing.overload
-    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractIntegrator: ...
-
 class JacobianPropagatorConverter(AbstractPropagatorConverter):
     """
     public class JacobianPropagatorConverter extends :class:`~org.orekit.propagation.conversion.AbstractPropagatorConverter`
@@ -1599,109 +1685,25 @@ class JacobianPropagatorConverter(AbstractPropagatorConverter):
     """
     def __init__(self, numericalPropagatorBuilder: 'NumericalPropagatorBuilder', double: float, int: int): ...
 
-class NumericalPropagatorBuilder(AbstractPropagatorBuilder):
+_PythonAbstractPropagatorBuilder__T = typing.TypeVar('_PythonAbstractPropagatorBuilder__T', bound=org.orekit.propagation.AbstractPropagator)  # <T>
+class PythonAbstractPropagatorBuilder(AbstractPropagatorBuilder[_PythonAbstractPropagatorBuilder__T], typing.Generic[_PythonAbstractPropagatorBuilder__T]):
     """
-    public class NumericalPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder`
-    
-        Builder for numerical propagator.
-    
-        Since:
-            6.0
-    """
-    @typing.overload
-    def __init__(self, orbit: org.orekit.orbits.Orbit, oDEIntegratorBuilder: ODEIntegratorBuilder, positionAngleType: org.orekit.orbits.PositionAngleType, double: float): ...
-    @typing.overload
-    def __init__(self, orbit: org.orekit.orbits.Orbit, oDEIntegratorBuilder: ODEIntegratorBuilder, positionAngleType: org.orekit.orbits.PositionAngleType, double: float, attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
-    def addForceModel(self, forceModel: org.orekit.forces.ForceModel) -> None:
-        """
-            Add a force model to the global perturbation model.
-        
-            If this method is not called at all, the integrated orbit will follow a Keplerian evolution only.
-        
-            Parameters:
-                model (:class:`~org.orekit.forces.ForceModel`): perturbing :class:`~org.orekit.forces.ForceModel` to add
-        
-        
-        """
-        ...
-    def addImpulseManeuver(self, impulseManeuver: org.orekit.forces.maneuvers.ImpulseManeuver) -> None:
-        """
-            Add impulse maneuver.
-        
-            Parameters:
-                impulseManeuver (:class:`~org.orekit.forces.maneuvers.ImpulseManeuver`): impulse maneuver
-        
-            Since:
-                12.2
-        
-        
-        """
-        ...
-    def buildLeastSquaresModel(self, propagatorBuilderArray: typing.List[PropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.BatchLSModel: ...
-    @typing.overload
-    def buildPropagator(self) -> org.orekit.propagation.Propagator: ...
-    @typing.overload
-    def buildPropagator(self, doubleArray: typing.List[float]) -> org.orekit.propagation.numerical.NumericalPropagator:
-        """
-            Build a propagator.
-        
-            Parameters:
-                normalizedParameters (double[]): normalized values for the selected parameters
-        
-            Returns:
-                an initialized propagator
-        
-        
-        """
-        ...
-    def clearImpulseManeuvers(self) -> None:
-        """
-            Remove all impulse maneuvers.
-        
-            Since:
-                12.2
-        
-        
-        """
-        ...
-    def copy(self) -> 'NumericalPropagatorBuilder':
-        """
-            Deprecated.
-            Create a copy of a NumericalPropagatorBuilder object.
-        
-            Returns:
-                Copied version of the NumericalPropagatorBuilder
-        
-        
-        """
-        ...
-    def getAllForceModels(self) -> java.util.List[org.orekit.forces.ForceModel]: ...
-    def getIntegratorBuilder(self) -> ODEIntegratorBuilder:
-        """
-            Get the integrator builder.
-        
-            Returns:
-                the integrator builder
-        
-            Since:
-                9.2
-        
-        
-        """
-        ...
-
-class PythonAbstractPropagatorBuilder(AbstractPropagatorBuilder):
-    """
-    public class PythonAbstractPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder`
+    public class PythonAbstractPropagatorBuilder<T extends :class:`~org.orekit.propagation.AbstractPropagator`> extends :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder`<T>
     """
     def __init__(self, orbit: org.orekit.orbits.Orbit, positionAngleType: org.orekit.orbits.PositionAngleType, double: float, boolean: bool): ...
-    def buildLeastSquaresModel(self, propagatorBuilderArray: typing.List[PropagatorBuilder], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: org.orekit.estimation.leastsquares.ModelObserver) -> org.orekit.estimation.leastsquares.AbstractBatchLSModel: ...
+    def buildLeastSquaresModel(self, propagatorBuilderArray: typing.Union[typing.List[PropagatorBuilder], jpype.JArray], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: typing.Union[org.orekit.estimation.leastsquares.ModelObserver, typing.Callable]) -> org.orekit.estimation.leastsquares.AbstractBatchLSModel: ...
     @typing.overload
-    def buildPropagator(self) -> org.orekit.propagation.Propagator: ...
-    @typing.overload
-    def buildPropagator(self, doubleArray: typing.List[float]) -> org.orekit.propagation.Propagator:
+    def buildPropagator(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> _PythonAbstractPropagatorBuilder__T:
         """
             Build a propagator.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder.buildPropagator` in
+                class :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
@@ -1712,16 +1714,8 @@ class PythonAbstractPropagatorBuilder(AbstractPropagatorBuilder):
         
         """
         ...
-    def copy(self) -> PropagatorBuilder:
-        """
-            Create a new instance identical to this one.
-        
-            Returns:
-                new instance identical to this one
-        
-        
-        """
-        ...
+    @typing.overload
+    def buildPropagator(self) -> _PythonAbstractPropagatorBuilder__T: ...
     def finalize(self) -> None: ...
     def pythonDecRef(self) -> None:
         """
@@ -1797,18 +1791,190 @@ class PythonAbstractPropagatorConverter(AbstractPropagatorConverter):
         """
         ...
 
-_AbstractLimitedVariableStepFieldIntegratorBuilder__T = typing.TypeVar('_AbstractLimitedVariableStepFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class AbstractLimitedVariableStepFieldIntegratorBuilder(AbstractVariableStepFieldIntegratorBuilder[_AbstractLimitedVariableStepFieldIntegratorBuilder__T], typing.Generic[_AbstractLimitedVariableStepFieldIntegratorBuilder__T]):
+class PythonExplicitRungeKuttaIntegratorBuilder(ExplicitRungeKuttaIntegratorBuilder):
     """
-    public abstract class AbstractLimitedVariableStepFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractVariableStepFieldIntegratorBuilder`<T>
+    public class PythonExplicitRungeKuttaIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.ExplicitRungeKuttaIntegratorBuilder`
+    """
+    def __init__(self): ...
+    @typing.overload
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.nonstiff.ExplicitRungeKuttaIntegrator:
+        """
+            Build a first order integrator.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.ExplicitRungeKuttaIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ExplicitRungeKuttaIntegratorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+        
+            Parameters:
+                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
+                orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use
+                angleType (:class:`~org.orekit.orbits.PositionAngleType`): position angle type to use
+        
+            Returns:
+                a first order integrator ready to use
+        
+            Build a first order integrator.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.ExplicitRungeKuttaIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ExplicitRungeKuttaIntegratorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+        
+            Parameters:
+                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
+                orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use
+        
+            Returns:
+                a first order integrator ready to use
+        
+        """
+        ...
+    @typing.overload
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.nonstiff.ExplicitRungeKuttaIntegrator: ...
+    @typing.overload
+    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.nonstiff.ExplicitRungeKuttaIntegrator:
+        """
+            Build a first order integrator. Non-orbit version.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.ExplicitRungeKuttaIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ExplicitRungeKuttaIntegratorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+        
+            Parameters:
+                absolutePVCoordinates (:class:`~org.orekit.utils.AbsolutePVCoordinates`): absolute position-velocity vector
+        
+            Returns:
+                a first order integrator ready to use
+        
+        
+        """
+        ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
+_PythonFieldExplicitRungeKuttaIntegratorBuilder__T = typing.TypeVar('_PythonFieldExplicitRungeKuttaIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class PythonFieldExplicitRungeKuttaIntegratorBuilder(FieldExplicitRungeKuttaIntegratorBuilder[_PythonFieldExplicitRungeKuttaIntegratorBuilder__T], typing.Generic[_PythonFieldExplicitRungeKuttaIntegratorBuilder__T]):
+    """
+    public class PythonFieldExplicitRungeKuttaIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder`<T>
+    """
+    def __init__(self): ...
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_PythonFieldExplicitRungeKuttaIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.nonstiff.FieldExplicitRungeKuttaIntegrator[_PythonFieldExplicitRungeKuttaIntegratorBuilder__T]: ...
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_PythonFieldExplicitRungeKuttaIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.nonstiff.FieldExplicitRungeKuttaIntegrator[_PythonFieldExplicitRungeKuttaIntegratorBuilder__T]: ...
+    @typing.overload
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_PythonFieldExplicitRungeKuttaIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.nonstiff.FieldExplicitRungeKuttaIntegrator[_PythonFieldExplicitRungeKuttaIntegratorBuilder__T]: ...
+    @typing.overload
+    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_PythonFieldExplicitRungeKuttaIntegratorBuilder__T]) -> org.hipparchus.ode.nonstiff.FieldExplicitRungeKuttaIntegrator[_PythonFieldExplicitRungeKuttaIntegratorBuilder__T]: ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+    def toODEIntegratorBuilder(self) -> ExplicitRungeKuttaIntegratorBuilder:
+        """
+            Form a non-Field equivalent.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder.toODEIntegratorBuilder` in
+                interface :class:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder.toODEIntegratorBuilder` in
+                interface :class:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder`
+        
+            Returns:
+                ODE integrator builder
+        
+        
+        """
+        ...
+
+_AbstractLimitedVariableStepFieldIntegratorBuilder__T = typing.TypeVar('_AbstractLimitedVariableStepFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+_AbstractLimitedVariableStepFieldIntegratorBuilder__W = typing.TypeVar('_AbstractLimitedVariableStepFieldIntegratorBuilder__W', bound=org.hipparchus.ode.MultistepFieldIntegrator)  # <W>
+class AbstractLimitedVariableStepFieldIntegratorBuilder(AbstractVariableStepFieldIntegratorBuilder[_AbstractLimitedVariableStepFieldIntegratorBuilder__T, _AbstractLimitedVariableStepFieldIntegratorBuilder__W], typing.Generic[_AbstractLimitedVariableStepFieldIntegratorBuilder__T, _AbstractLimitedVariableStepFieldIntegratorBuilder__W]):
+    """
+    public abstract class AbstractLimitedVariableStepFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>, W extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.MultistepFieldIntegrator?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractVariableStepFieldIntegratorBuilder`<T, W>
     
         Abstract class for integrator using a limited number of variable steps.
     """
     ...
 
-class BrouwerLyddanePropagatorBuilder(AbstractAnalyticalPropagatorBuilder):
+class AdamsBashforthIntegratorBuilder(AbstractVariableStepIntegratorBuilder[org.hipparchus.ode.nonstiff.AdamsBashforthIntegrator]):
     """
-    public class BrouwerLyddanePropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractAnalyticalPropagatorBuilder`
+    public class AdamsBashforthIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractVariableStepIntegratorBuilder`<:class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.AdamsBashforthIntegrator?is`>
+    
+        Builder for AdamsBashforthIntegrator.
+    
+        Since:
+            6.0
+    """
+    @typing.overload
+    def __init__(self, int: int, double: float, double2: float, double3: float): ...
+    @typing.overload
+    def __init__(self, int: int, double: float, double2: float, toleranceProvider: org.orekit.propagation.ToleranceProvider): ...
+
+class AdamsMoultonIntegratorBuilder(AbstractVariableStepIntegratorBuilder[org.hipparchus.ode.nonstiff.AdamsMoultonIntegrator]):
+    """
+    public class AdamsMoultonIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractVariableStepIntegratorBuilder`<:class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.AdamsMoultonIntegrator?is`>
+    
+        Builder for AdamsMoultonIntegrator.
+    
+        Since:
+            6.0
+    """
+    @typing.overload
+    def __init__(self, int: int, double: float, double2: float, double3: float): ...
+    @typing.overload
+    def __init__(self, int: int, double: float, double2: float, toleranceProvider: org.orekit.propagation.ToleranceProvider): ...
+
+class BrouwerLyddanePropagatorBuilder(AbstractAnalyticalPropagatorBuilder[org.orekit.propagation.analytical.BrouwerLyddanePropagator]):
+    """
+    public class BrouwerLyddanePropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractAnalyticalPropagatorBuilder`<:class:`~org.orekit.propagation.analytical.BrouwerLyddanePropagator`>
     
         Builder for Brouwer-Lyddane propagator.
     
@@ -1844,28 +2010,25 @@ class BrouwerLyddanePropagatorBuilder(AbstractAnalyticalPropagatorBuilder):
     @typing.overload
     def __init__(self, orbit: org.orekit.orbits.Orbit, unnormalizedSphericalHarmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider, positionAngleType: org.orekit.orbits.PositionAngleType, double: float, attitudeProvider: org.orekit.attitudes.AttitudeProvider, double2: float): ...
     @typing.overload
-    def buildPropagator(self) -> org.orekit.propagation.Propagator: ...
+    def buildPropagator(self) -> org.orekit.propagation.AbstractPropagator: ...
     @typing.overload
-    def buildPropagator(self, doubleArray: typing.List[float]) -> org.orekit.propagation.analytical.BrouwerLyddanePropagator:
+    def buildPropagator(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.orekit.propagation.analytical.BrouwerLyddanePropagator:
         """
             Build a propagator.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder.buildPropagator` in
+                class :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
         
             Returns:
                 an initialized propagator
-        
-        
-        """
-        ...
-    def copy(self) -> 'BrouwerLyddanePropagatorBuilder':
-        """
-            Deprecated.
-            Create a new instance identical to this one.
-        
-            Returns:
-                new instance identical to this one
         
         
         """
@@ -1888,9 +2051,9 @@ class BrouwerLyddanePropagatorBuilder(AbstractAnalyticalPropagatorBuilder):
         ...
 
 _ClassicalRungeKuttaFieldIntegratorBuilder__T = typing.TypeVar('_ClassicalRungeKuttaFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class ClassicalRungeKuttaFieldIntegratorBuilder(AbstractFixedStepFieldIntegratorBuilder[_ClassicalRungeKuttaFieldIntegratorBuilder__T], typing.Generic[_ClassicalRungeKuttaFieldIntegratorBuilder__T]):
+class ClassicalRungeKuttaFieldIntegratorBuilder(AbstractFixedStepFieldIntegratorBuilder[_ClassicalRungeKuttaFieldIntegratorBuilder__T, org.hipparchus.ode.nonstiff.ClassicalRungeKuttaFieldIntegrator[_ClassicalRungeKuttaFieldIntegratorBuilder__T]], FieldExplicitRungeKuttaIntegratorBuilder[_ClassicalRungeKuttaFieldIntegratorBuilder__T], typing.Generic[_ClassicalRungeKuttaFieldIntegratorBuilder__T]):
     """
-    public class ClassicalRungeKuttaFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractFixedStepFieldIntegratorBuilder`<T>
+    public class ClassicalRungeKuttaFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractFixedStepFieldIntegratorBuilder`<T, :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.ClassicalRungeKuttaFieldIntegrator?is`<T>> implements :class:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder`<T>
     
         Builder for ClassicalRungeKuttaFieldIntegrator.
     
@@ -1902,16 +2065,155 @@ class ClassicalRungeKuttaFieldIntegratorBuilder(AbstractFixedStepFieldIntegrator
     @typing.overload
     def __init__(self, t: _ClassicalRungeKuttaFieldIntegratorBuilder__T): ...
     @typing.overload
-    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_ClassicalRungeKuttaFieldIntegratorBuilder__T]) -> org.hipparchus.ode.AbstractFieldIntegrator[_ClassicalRungeKuttaFieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, field: org.hipparchus.Field[_ClassicalRungeKuttaFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator: ...
     @typing.overload
-    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_ClassicalRungeKuttaFieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_ClassicalRungeKuttaFieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_ClassicalRungeKuttaFieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator: ...
     @typing.overload
-    def buildIntegrator(self, field: org.hipparchus.Field[_ClassicalRungeKuttaFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_ClassicalRungeKuttaFieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_ClassicalRungeKuttaFieldIntegratorBuilder__T]) -> org.hipparchus.ode.AbstractFieldIntegrator: ...
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_ClassicalRungeKuttaFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.nonstiff.ClassicalRungeKuttaFieldIntegrator[_ClassicalRungeKuttaFieldIntegratorBuilder__T]: ...
+    def toODEIntegratorBuilder(self) -> 'ClassicalRungeKuttaIntegratorBuilder':
+        """
+            Form a non-Field equivalent.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder.toODEIntegratorBuilder` in
+                interface :class:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder.toODEIntegratorBuilder` in
+                interface :class:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder`
+        
+            Returns:
+                ODE integrator builder
+        
+        
+        """
+        ...
+
+class ClassicalRungeKuttaIntegratorBuilder(AbstractFixedSingleStepIntegratorBuilder[org.hipparchus.ode.nonstiff.ClassicalRungeKuttaIntegrator]):
+    """
+    public class ClassicalRungeKuttaIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractFixedSingleStepIntegratorBuilder`<:class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.ClassicalRungeKuttaIntegrator?is`>
+    
+        Builder for ClassicalRungeKuttaIntegrator.
+    
+        Since:
+            6.0
+    """
+    def __init__(self, double: float): ...
+    @typing.overload
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractIntegrator:
+        """
+            Build a first order integrator.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.ExplicitRungeKuttaIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ExplicitRungeKuttaIntegratorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.AbstractIntegratorBuilder.buildIntegrator` in
+                class :class:`~org.orekit.propagation.conversion.AbstractIntegratorBuilder`
+        
+            Parameters:
+                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
+                orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use
+                angleType (:class:`~org.orekit.orbits.PositionAngleType`): position angle type to use
+        
+            Returns:
+                a first order integrator ready to use
+        
+        
+        """
+        ...
+    @typing.overload
+    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.AbstractIntegrator: ...
+    @typing.overload
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.nonstiff.ClassicalRungeKuttaIntegrator: ...
+
+class DSSTPropagatorBuilder(AbstractIntegratedPropagatorBuilder[org.orekit.propagation.semianalytical.dsst.DSSTPropagator]):
+    """
+    public class DSSTPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractIntegratedPropagatorBuilder`<:class:`~org.orekit.propagation.semianalytical.dsst.DSSTPropagator`>
+    
+        Builder for DSST propagator.
+    
+        Since:
+            10.0
+    """
+    @typing.overload
+    def __init__(self, orbit: org.orekit.orbits.Orbit, oDEIntegratorBuilder: ODEIntegratorBuilder, double: float, propagationType: org.orekit.propagation.PropagationType, propagationType2: org.orekit.propagation.PropagationType): ...
+    @typing.overload
+    def __init__(self, orbit: org.orekit.orbits.Orbit, oDEIntegratorBuilder: ODEIntegratorBuilder, double: float, propagationType: org.orekit.propagation.PropagationType, propagationType2: org.orekit.propagation.PropagationType, attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
+    def addForceModel(self, dSSTForceModel: org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel) -> None:
+        """
+            Add a force model to the global perturbation model.
+        
+            If this method is not called at all, the integrated orbit will follow a Keplerian evolution only.
+        
+            Parameters:
+                model (:class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel`): perturbing :class:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel` to add
+        
+        
+        """
+        ...
+    def buildLeastSquaresModel(self, propagatorBuilderArray: typing.Union[typing.List[PropagatorBuilder], jpype.JArray], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: typing.Union[org.orekit.estimation.leastsquares.ModelObserver, typing.Callable]) -> org.orekit.estimation.leastsquares.DSSTBatchLSModel: ...
+    @typing.overload
+    def buildPropagator(self) -> org.orekit.propagation.integration.AbstractIntegratedPropagator: ...
+    @typing.overload
+    def buildPropagator(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.orekit.propagation.semianalytical.dsst.DSSTPropagator:
+        """
+            Build a propagator.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.AbstractIntegratedPropagatorBuilder.buildPropagator` in
+                class :class:`~org.orekit.propagation.conversion.AbstractIntegratedPropagatorBuilder`
+        
+            Parameters:
+                normalizedParameters (double[]): normalized values for the selected parameters
+        
+            Returns:
+                an initialized propagator
+        
+        
+        """
+        ...
+    def getAllForceModels(self) -> java.util.List[org.orekit.propagation.semianalytical.dsst.forces.DSSTForceModel]: ...
+    def getStateType(self) -> org.orekit.propagation.PropagationType:
+        """
+            Get the type of the elements used to define the orbital state (mean or osculating).
+        
+            Returns:
+                the type of the elements used to define the orbital state
+        
+        
+        """
+        ...
+    @typing.overload
+    def resetOrbit(self, orbit: org.orekit.orbits.Orbit) -> None:
+        """
+            Reset the orbit in the propagator builder.
+        
+            Parameters:
+                newOrbit (:class:`~org.orekit.orbits.Orbit`): newOrbit New orbit to set in the propagator builder
+                orbitType (:class:`~org.orekit.propagation.PropagationType`): orbit type (MEAN or OSCULATING)
+        
+        
+        """
+        ...
+    @typing.overload
+    def resetOrbit(self, orbit: org.orekit.orbits.Orbit, propagationType: org.orekit.propagation.PropagationType) -> None: ...
 
 _DormandPrince54FieldIntegratorBuilder__T = typing.TypeVar('_DormandPrince54FieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class DormandPrince54FieldIntegratorBuilder(AbstractVariableStepFieldIntegratorBuilder[_DormandPrince54FieldIntegratorBuilder__T], typing.Generic[_DormandPrince54FieldIntegratorBuilder__T]):
+class DormandPrince54FieldIntegratorBuilder(AbstractVariableStepFieldIntegratorBuilder[_DormandPrince54FieldIntegratorBuilder__T, org.hipparchus.ode.nonstiff.DormandPrince54FieldIntegrator[_DormandPrince54FieldIntegratorBuilder__T]], FieldExplicitRungeKuttaIntegratorBuilder[_DormandPrince54FieldIntegratorBuilder__T], typing.Generic[_DormandPrince54FieldIntegratorBuilder__T]):
     """
-    public class DormandPrince54FieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractVariableStepFieldIntegratorBuilder`<T>
+    public class DormandPrince54FieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractVariableStepFieldIntegratorBuilder`<T, :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.DormandPrince54FieldIntegrator?is`<T>> implements :class:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder`<T>
     
         Builder for DormandPrince54FieldIntegrator.
     
@@ -1921,18 +2223,74 @@ class DormandPrince54FieldIntegratorBuilder(AbstractVariableStepFieldIntegratorB
     @typing.overload
     def __init__(self, double: float, double2: float, double3: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, double4: float): ...
+    def __init__(self, double: float, double2: float, toleranceProvider: org.orekit.propagation.ToleranceProvider): ...
     @typing.overload
-    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_DormandPrince54FieldIntegratorBuilder__T]) -> org.hipparchus.ode.AbstractFieldIntegrator[_DormandPrince54FieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, field: org.hipparchus.Field[_DormandPrince54FieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator: ...
     @typing.overload
-    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_DormandPrince54FieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_DormandPrince54FieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_DormandPrince54FieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator: ...
     @typing.overload
-    def buildIntegrator(self, field: org.hipparchus.Field[_DormandPrince54FieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_DormandPrince54FieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, field: org.hipparchus.Field[_DormandPrince54FieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.nonstiff.AdaptiveStepsizeFieldIntegrator: ...
+    @typing.overload
+    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_DormandPrince54FieldIntegratorBuilder__T]) -> org.hipparchus.ode.nonstiff.AdaptiveStepsizeFieldIntegrator: ...
+    def toODEIntegratorBuilder(self) -> 'DormandPrince54IntegratorBuilder':
+        """
+            Form a non-Field equivalent.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder.toODEIntegratorBuilder` in
+                interface :class:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder.toODEIntegratorBuilder` in
+                interface :class:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder`
+        
+            Returns:
+                ODE integrator builder
+        
+        
+        """
+        ...
+
+class DormandPrince54IntegratorBuilder(AbstractVariableStepIntegratorBuilder[org.hipparchus.ode.nonstiff.DormandPrince54Integrator], ExplicitRungeKuttaIntegratorBuilder):
+    """
+    public class DormandPrince54IntegratorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractVariableStepIntegratorBuilder`<:class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.DormandPrince54Integrator?is`> implements :class:`~org.orekit.propagation.conversion.ExplicitRungeKuttaIntegratorBuilder`
+    
+        Builder for DormandPrince54Integrator.
+    
+        Since:
+            6.0
+    """
+    @typing.overload
+    def __init__(self, double: float, double2: float, double3: float): ...
+    @typing.overload
+    def __init__(self, double: float, double2: float, toleranceProvider: org.orekit.propagation.ToleranceProvider): ...
+    @typing.overload
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractIntegrator: ...
+    @typing.overload
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.nonstiff.AdaptiveStepsizeIntegrator: ...
+    @typing.overload
+    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.nonstiff.AdaptiveStepsizeIntegrator:
+        """
+            Builds an integrator from input absolute and relative tolerances.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.AbstractVariableStepIntegratorBuilder.buildIntegrator` in
+                class :class:`~org.orekit.propagation.conversion.AbstractVariableStepIntegratorBuilder`
+        
+            Parameters:
+                tolerances (double[][]): tolerance array
+        
+            Returns:
+                integrator
+        
+        
+        """
+        ...
 
 _DormandPrince853FieldIntegratorBuilder__T = typing.TypeVar('_DormandPrince853FieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class DormandPrince853FieldIntegratorBuilder(AbstractVariableStepFieldIntegratorBuilder[_DormandPrince853FieldIntegratorBuilder__T], typing.Generic[_DormandPrince853FieldIntegratorBuilder__T]):
+class DormandPrince853FieldIntegratorBuilder(AbstractVariableStepFieldIntegratorBuilder[_DormandPrince853FieldIntegratorBuilder__T, org.hipparchus.ode.nonstiff.DormandPrince853FieldIntegrator[_DormandPrince853FieldIntegratorBuilder__T]], FieldExplicitRungeKuttaIntegratorBuilder[_DormandPrince853FieldIntegratorBuilder__T], typing.Generic[_DormandPrince853FieldIntegratorBuilder__T]):
     """
-    public class DormandPrince853FieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractVariableStepFieldIntegratorBuilder`<T>
+    public class DormandPrince853FieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractVariableStepFieldIntegratorBuilder`<T, :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.DormandPrince853FieldIntegrator?is`<T>> implements :class:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder`<T>
     
         Builder for DormandPrince853FieldIntegrator.
     
@@ -1942,17 +2300,73 @@ class DormandPrince853FieldIntegratorBuilder(AbstractVariableStepFieldIntegrator
     @typing.overload
     def __init__(self, double: float, double2: float, double3: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, double4: float): ...
+    def __init__(self, double: float, double2: float, toleranceProvider: org.orekit.propagation.ToleranceProvider): ...
     @typing.overload
-    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_DormandPrince853FieldIntegratorBuilder__T]) -> org.hipparchus.ode.AbstractFieldIntegrator[_DormandPrince853FieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, field: org.hipparchus.Field[_DormandPrince853FieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator: ...
     @typing.overload
-    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_DormandPrince853FieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_DormandPrince853FieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_DormandPrince853FieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator: ...
     @typing.overload
-    def buildIntegrator(self, field: org.hipparchus.Field[_DormandPrince853FieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_DormandPrince853FieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, field: org.hipparchus.Field[_DormandPrince853FieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.nonstiff.AdaptiveStepsizeFieldIntegrator: ...
+    @typing.overload
+    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_DormandPrince853FieldIntegratorBuilder__T]) -> org.hipparchus.ode.nonstiff.AdaptiveStepsizeFieldIntegrator: ...
+    def toODEIntegratorBuilder(self) -> 'DormandPrince853IntegratorBuilder':
+        """
+            Form a non-Field equivalent.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder.toODEIntegratorBuilder` in
+                interface :class:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder.toODEIntegratorBuilder` in
+                interface :class:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder`
+        
+            Returns:
+                ODE integrator builder
+        
+        
+        """
+        ...
 
-class EcksteinHechlerPropagatorBuilder(AbstractAnalyticalPropagatorBuilder):
+class DormandPrince853IntegratorBuilder(AbstractVariableStepIntegratorBuilder[org.hipparchus.ode.nonstiff.DormandPrince853Integrator], ExplicitRungeKuttaIntegratorBuilder):
     """
-    public class EcksteinHechlerPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractAnalyticalPropagatorBuilder`
+    public class DormandPrince853IntegratorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractVariableStepIntegratorBuilder`<:class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.DormandPrince853Integrator?is`> implements :class:`~org.orekit.propagation.conversion.ExplicitRungeKuttaIntegratorBuilder`
+    
+        Builder for DormandPrince853Integrator.
+    
+        Since:
+            6.0
+    """
+    @typing.overload
+    def __init__(self, double: float, double2: float, double3: float): ...
+    @typing.overload
+    def __init__(self, double: float, double2: float, toleranceProvider: org.orekit.propagation.ToleranceProvider): ...
+    @typing.overload
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractIntegrator: ...
+    @typing.overload
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.nonstiff.AdaptiveStepsizeIntegrator: ...
+    @typing.overload
+    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.nonstiff.AdaptiveStepsizeIntegrator:
+        """
+            Builds an integrator from input absolute and relative tolerances.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.AbstractVariableStepIntegratorBuilder.buildIntegrator` in
+                class :class:`~org.orekit.propagation.conversion.AbstractVariableStepIntegratorBuilder`
+        
+            Parameters:
+                tolerances (double[][]): tolerance array
+        
+            Returns:
+                integrator
+        
+        
+        """
+        ...
+
+class EcksteinHechlerPropagatorBuilder(AbstractAnalyticalPropagatorBuilder[org.orekit.propagation.analytical.EcksteinHechlerPropagator]):
+    """
+    public class EcksteinHechlerPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractAnalyticalPropagatorBuilder`<:class:`~org.orekit.propagation.analytical.EcksteinHechlerPropagator`>
     
         Builder for Eckstein-Hechler propagator.
     
@@ -1966,11 +2380,19 @@ class EcksteinHechlerPropagatorBuilder(AbstractAnalyticalPropagatorBuilder):
     @typing.overload
     def __init__(self, orbit: org.orekit.orbits.Orbit, unnormalizedSphericalHarmonicsProvider: org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider, positionAngleType: org.orekit.orbits.PositionAngleType, double: float, attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
     @typing.overload
-    def buildPropagator(self) -> org.orekit.propagation.Propagator: ...
+    def buildPropagator(self) -> org.orekit.propagation.AbstractPropagator: ...
     @typing.overload
-    def buildPropagator(self, doubleArray: typing.List[float]) -> org.orekit.propagation.Propagator:
+    def buildPropagator(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.orekit.propagation.analytical.EcksteinHechlerPropagator:
         """
             Build a propagator.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder.buildPropagator` in
+                class :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
@@ -1981,22 +2403,11 @@ class EcksteinHechlerPropagatorBuilder(AbstractAnalyticalPropagatorBuilder):
         
         """
         ...
-    def copy(self) -> 'EcksteinHechlerPropagatorBuilder':
-        """
-            Deprecated.
-            Create a new instance identical to this one.
-        
-            Returns:
-                new instance identical to this one
-        
-        
-        """
-        ...
 
 _EulerFieldIntegratorBuilder__T = typing.TypeVar('_EulerFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class EulerFieldIntegratorBuilder(AbstractFixedStepFieldIntegratorBuilder[_EulerFieldIntegratorBuilder__T], typing.Generic[_EulerFieldIntegratorBuilder__T]):
+class EulerFieldIntegratorBuilder(AbstractFixedStepFieldIntegratorBuilder[_EulerFieldIntegratorBuilder__T, org.hipparchus.ode.nonstiff.EulerFieldIntegrator[_EulerFieldIntegratorBuilder__T]], FieldExplicitRungeKuttaIntegratorBuilder[_EulerFieldIntegratorBuilder__T], typing.Generic[_EulerFieldIntegratorBuilder__T]):
     """
-    public class EulerFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractFixedStepFieldIntegratorBuilder`<T>
+    public class EulerFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractFixedStepFieldIntegratorBuilder`<T, :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.EulerFieldIntegrator?is`<T>> implements :class:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder`<T>
     
         Builder for EulerFieldIntegrator.
     
@@ -2008,16 +2419,79 @@ class EulerFieldIntegratorBuilder(AbstractFixedStepFieldIntegratorBuilder[_Euler
     @typing.overload
     def __init__(self, t: _EulerFieldIntegratorBuilder__T): ...
     @typing.overload
-    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_EulerFieldIntegratorBuilder__T]) -> org.hipparchus.ode.AbstractFieldIntegrator[_EulerFieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, field: org.hipparchus.Field[_EulerFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator: ...
     @typing.overload
-    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_EulerFieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_EulerFieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_EulerFieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator: ...
     @typing.overload
-    def buildIntegrator(self, field: org.hipparchus.Field[_EulerFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_EulerFieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_EulerFieldIntegratorBuilder__T]) -> org.hipparchus.ode.AbstractFieldIntegrator: ...
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_EulerFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.nonstiff.EulerFieldIntegrator[_EulerFieldIntegratorBuilder__T]: ...
+    def toODEIntegratorBuilder(self) -> 'EulerIntegratorBuilder':
+        """
+            Form a non-Field equivalent.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder.toODEIntegratorBuilder` in
+                interface :class:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder.toODEIntegratorBuilder` in
+                interface :class:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder`
+        
+            Returns:
+                ODE integrator builder
+        
+        
+        """
+        ...
+
+class EulerIntegratorBuilder(AbstractFixedSingleStepIntegratorBuilder[org.hipparchus.ode.nonstiff.EulerIntegrator]):
+    """
+    public class EulerIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractFixedSingleStepIntegratorBuilder`<:class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.EulerIntegrator?is`>
+    
+        Builder for EulerIntegrator.
+    
+        Since:
+            6.0
+    """
+    def __init__(self, double: float): ...
+    @typing.overload
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractIntegrator:
+        """
+            Build a first order integrator.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.ExplicitRungeKuttaIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ExplicitRungeKuttaIntegratorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.AbstractIntegratorBuilder.buildIntegrator` in
+                class :class:`~org.orekit.propagation.conversion.AbstractIntegratorBuilder`
+        
+            Parameters:
+                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
+                orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use
+                angleType (:class:`~org.orekit.orbits.PositionAngleType`): position angle type to use
+        
+            Returns:
+                a first order integrator ready to use
+        
+        
+        """
+        ...
+    @typing.overload
+    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.AbstractIntegrator: ...
+    @typing.overload
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.nonstiff.EulerIntegrator: ...
 
 _GillFieldIntegratorBuilder__T = typing.TypeVar('_GillFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class GillFieldIntegratorBuilder(AbstractFixedStepFieldIntegratorBuilder[_GillFieldIntegratorBuilder__T], typing.Generic[_GillFieldIntegratorBuilder__T]):
+class GillFieldIntegratorBuilder(AbstractFixedStepFieldIntegratorBuilder[_GillFieldIntegratorBuilder__T, org.hipparchus.ode.nonstiff.GillFieldIntegrator[_GillFieldIntegratorBuilder__T]], FieldExplicitRungeKuttaIntegratorBuilder[_GillFieldIntegratorBuilder__T], typing.Generic[_GillFieldIntegratorBuilder__T]):
     """
-    public class GillFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractFixedStepFieldIntegratorBuilder`<T>
+    public class GillFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractFixedStepFieldIntegratorBuilder`<T, :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.GillFieldIntegrator?is`<T>> implements :class:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder`<T>
     
         Builder for GillFieldIntegrator.
     
@@ -2029,16 +2503,93 @@ class GillFieldIntegratorBuilder(AbstractFixedStepFieldIntegratorBuilder[_GillFi
     @typing.overload
     def __init__(self, t: _GillFieldIntegratorBuilder__T): ...
     @typing.overload
-    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_GillFieldIntegratorBuilder__T]) -> org.hipparchus.ode.AbstractFieldIntegrator[_GillFieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, field: org.hipparchus.Field[_GillFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator: ...
     @typing.overload
-    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_GillFieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_GillFieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_GillFieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator: ...
     @typing.overload
-    def buildIntegrator(self, field: org.hipparchus.Field[_GillFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_GillFieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_GillFieldIntegratorBuilder__T]) -> org.hipparchus.ode.AbstractFieldIntegrator: ...
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_GillFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.nonstiff.GillFieldIntegrator[_GillFieldIntegratorBuilder__T]: ...
+    def toODEIntegratorBuilder(self) -> 'GillIntegratorBuilder':
+        """
+            Form a non-Field equivalent.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder.toODEIntegratorBuilder` in
+                interface :class:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder.toODEIntegratorBuilder` in
+                interface :class:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder`
+        
+            Returns:
+                ODE integrator builder
+        
+        
+        """
+        ...
+
+class GillIntegratorBuilder(AbstractFixedSingleStepIntegratorBuilder[org.hipparchus.ode.nonstiff.GillIntegrator]):
+    """
+    public class GillIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractFixedSingleStepIntegratorBuilder`<:class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.GillIntegrator?is`>
+    
+        Builder for GillIntegrator.
+    
+        Since:
+            6.0
+    """
+    def __init__(self, double: float): ...
+    @typing.overload
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractIntegrator:
+        """
+            Build a first order integrator.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.ExplicitRungeKuttaIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ExplicitRungeKuttaIntegratorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.AbstractIntegratorBuilder.buildIntegrator` in
+                class :class:`~org.orekit.propagation.conversion.AbstractIntegratorBuilder`
+        
+            Parameters:
+                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
+                orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use
+                angleType (:class:`~org.orekit.orbits.PositionAngleType`): position angle type to use
+        
+            Returns:
+                a first order integrator ready to use
+        
+        
+        """
+        ...
+    @typing.overload
+    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.AbstractIntegrator: ...
+    @typing.overload
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.nonstiff.GillIntegrator: ...
+
+class GraggBulirschStoerIntegratorBuilder(AbstractVariableStepIntegratorBuilder[org.hipparchus.ode.nonstiff.GraggBulirschStoerIntegrator]):
+    """
+    public class GraggBulirschStoerIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractVariableStepIntegratorBuilder`<:class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.GraggBulirschStoerIntegrator?is`>
+    
+        Builder for GraggBulirschStoerIntegrator.
+    
+        Since:
+            6.0
+    """
+    @typing.overload
+    def __init__(self, double: float, double2: float, double3: float): ...
+    @typing.overload
+    def __init__(self, double: float, double2: float, toleranceProvider: org.orekit.propagation.ToleranceProvider): ...
 
 _HighamHall54FieldIntegratorBuilder__T = typing.TypeVar('_HighamHall54FieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class HighamHall54FieldIntegratorBuilder(AbstractVariableStepFieldIntegratorBuilder[_HighamHall54FieldIntegratorBuilder__T], typing.Generic[_HighamHall54FieldIntegratorBuilder__T]):
+class HighamHall54FieldIntegratorBuilder(AbstractVariableStepFieldIntegratorBuilder[_HighamHall54FieldIntegratorBuilder__T, org.hipparchus.ode.nonstiff.HighamHall54FieldIntegrator[_HighamHall54FieldIntegratorBuilder__T]], FieldExplicitRungeKuttaIntegratorBuilder[_HighamHall54FieldIntegratorBuilder__T], typing.Generic[_HighamHall54FieldIntegratorBuilder__T]):
     """
-    public class HighamHall54FieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractVariableStepFieldIntegratorBuilder`<T>
+    public class HighamHall54FieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractVariableStepFieldIntegratorBuilder`<T, :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.HighamHall54FieldIntegrator?is`<T>> implements :class:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder`<T>
     
         Builder for HighamHall54Integrator.
     
@@ -2048,17 +2599,73 @@ class HighamHall54FieldIntegratorBuilder(AbstractVariableStepFieldIntegratorBuil
     @typing.overload
     def __init__(self, double: float, double2: float, double3: float): ...
     @typing.overload
-    def __init__(self, double: float, double2: float, double3: float, double4: float): ...
+    def __init__(self, double: float, double2: float, toleranceProvider: org.orekit.propagation.ToleranceProvider): ...
     @typing.overload
-    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_HighamHall54FieldIntegratorBuilder__T]) -> org.hipparchus.ode.AbstractFieldIntegrator[_HighamHall54FieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, field: org.hipparchus.Field[_HighamHall54FieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator: ...
     @typing.overload
-    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_HighamHall54FieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_HighamHall54FieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_HighamHall54FieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator: ...
     @typing.overload
-    def buildIntegrator(self, field: org.hipparchus.Field[_HighamHall54FieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_HighamHall54FieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, field: org.hipparchus.Field[_HighamHall54FieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.nonstiff.AdaptiveStepsizeFieldIntegrator: ...
+    @typing.overload
+    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_HighamHall54FieldIntegratorBuilder__T]) -> org.hipparchus.ode.nonstiff.AdaptiveStepsizeFieldIntegrator: ...
+    def toODEIntegratorBuilder(self) -> 'HighamHall54IntegratorBuilder':
+        """
+            Form a non-Field equivalent.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder.toODEIntegratorBuilder` in
+                interface :class:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder.toODEIntegratorBuilder` in
+                interface :class:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder`
+        
+            Returns:
+                ODE integrator builder
+        
+        
+        """
+        ...
 
-class KeplerianPropagatorBuilder(AbstractAnalyticalPropagatorBuilder):
+class HighamHall54IntegratorBuilder(AbstractVariableStepIntegratorBuilder[org.hipparchus.ode.nonstiff.HighamHall54Integrator], ExplicitRungeKuttaIntegratorBuilder):
     """
-    public class KeplerianPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractAnalyticalPropagatorBuilder`
+    public class HighamHall54IntegratorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractVariableStepIntegratorBuilder`<:class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.HighamHall54Integrator?is`> implements :class:`~org.orekit.propagation.conversion.ExplicitRungeKuttaIntegratorBuilder`
+    
+        Builder for HighamHall54Integrator.
+    
+        Since:
+            6.0
+    """
+    @typing.overload
+    def __init__(self, double: float, double2: float, double3: float): ...
+    @typing.overload
+    def __init__(self, double: float, double2: float, toleranceProvider: org.orekit.propagation.ToleranceProvider): ...
+    @typing.overload
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractIntegrator: ...
+    @typing.overload
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.nonstiff.AdaptiveStepsizeIntegrator: ...
+    @typing.overload
+    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.nonstiff.AdaptiveStepsizeIntegrator:
+        """
+            Builds an integrator from input absolute and relative tolerances.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.AbstractVariableStepIntegratorBuilder.buildIntegrator` in
+                class :class:`~org.orekit.propagation.conversion.AbstractVariableStepIntegratorBuilder`
+        
+            Parameters:
+                tolerances (double[][]): tolerance array
+        
+            Returns:
+                integrator
+        
+        
+        """
+        ...
+
+class KeplerianPropagatorBuilder(AbstractAnalyticalPropagatorBuilder[org.orekit.propagation.analytical.KeplerianPropagator]):
+    """
+    public class KeplerianPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractAnalyticalPropagatorBuilder`<:class:`~org.orekit.propagation.analytical.KeplerianPropagator`>
     
         Builder for Keplerian propagator.
     
@@ -2070,11 +2677,19 @@ class KeplerianPropagatorBuilder(AbstractAnalyticalPropagatorBuilder):
     @typing.overload
     def __init__(self, orbit: org.orekit.orbits.Orbit, positionAngleType: org.orekit.orbits.PositionAngleType, double: float, attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
     @typing.overload
-    def buildPropagator(self) -> org.orekit.propagation.Propagator: ...
+    def buildPropagator(self) -> org.orekit.propagation.AbstractPropagator: ...
     @typing.overload
-    def buildPropagator(self, doubleArray: typing.List[float]) -> org.orekit.propagation.Propagator:
+    def buildPropagator(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.orekit.propagation.analytical.KeplerianPropagator:
         """
             Build a propagator.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder.buildPropagator` in
+                class :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
@@ -2085,22 +2700,11 @@ class KeplerianPropagatorBuilder(AbstractAnalyticalPropagatorBuilder):
         
         """
         ...
-    def copy(self) -> 'KeplerianPropagatorBuilder':
-        """
-            Deprecated.
-            Create a new instance identical to this one.
-        
-            Returns:
-                new instance identical to this one
-        
-        
-        """
-        ...
 
 _LutherFieldIntegratorBuilder__T = typing.TypeVar('_LutherFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class LutherFieldIntegratorBuilder(AbstractFixedStepFieldIntegratorBuilder[_LutherFieldIntegratorBuilder__T], typing.Generic[_LutherFieldIntegratorBuilder__T]):
+class LutherFieldIntegratorBuilder(AbstractFixedStepFieldIntegratorBuilder[_LutherFieldIntegratorBuilder__T, org.hipparchus.ode.nonstiff.LutherFieldIntegrator[_LutherFieldIntegratorBuilder__T]], FieldExplicitRungeKuttaIntegratorBuilder[_LutherFieldIntegratorBuilder__T], typing.Generic[_LutherFieldIntegratorBuilder__T]):
     """
-    public class LutherFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractFixedStepFieldIntegratorBuilder`<T>
+    public class LutherFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractFixedStepFieldIntegratorBuilder`<T, :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.LutherFieldIntegrator?is`<T>> implements :class:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder`<T>
     
         Builder for LutherFieldIntegrator.
     
@@ -2112,16 +2716,79 @@ class LutherFieldIntegratorBuilder(AbstractFixedStepFieldIntegratorBuilder[_Luth
     @typing.overload
     def __init__(self, t: _LutherFieldIntegratorBuilder__T): ...
     @typing.overload
-    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_LutherFieldIntegratorBuilder__T]) -> org.hipparchus.ode.AbstractFieldIntegrator[_LutherFieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, field: org.hipparchus.Field[_LutherFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator: ...
     @typing.overload
-    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_LutherFieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_LutherFieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_LutherFieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator: ...
     @typing.overload
-    def buildIntegrator(self, field: org.hipparchus.Field[_LutherFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_LutherFieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_LutherFieldIntegratorBuilder__T]) -> org.hipparchus.ode.AbstractFieldIntegrator: ...
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_LutherFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.nonstiff.LutherFieldIntegrator[_LutherFieldIntegratorBuilder__T]: ...
+    def toODEIntegratorBuilder(self) -> 'LutherIntegratorBuilder':
+        """
+            Form a non-Field equivalent.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder.toODEIntegratorBuilder` in
+                interface :class:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder.toODEIntegratorBuilder` in
+                interface :class:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder`
+        
+            Returns:
+                ODE integrator builder
+        
+        
+        """
+        ...
+
+class LutherIntegratorBuilder(AbstractFixedSingleStepIntegratorBuilder[org.hipparchus.ode.nonstiff.LutherIntegrator]):
+    """
+    public class LutherIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractFixedSingleStepIntegratorBuilder`<:class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.LutherIntegrator?is`>
+    
+        Builder for LutherIntegrator.
+    
+        Since:
+            7.1
+    """
+    def __init__(self, double: float): ...
+    @typing.overload
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractIntegrator:
+        """
+            Build a first order integrator.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.ExplicitRungeKuttaIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ExplicitRungeKuttaIntegratorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.AbstractIntegratorBuilder.buildIntegrator` in
+                class :class:`~org.orekit.propagation.conversion.AbstractIntegratorBuilder`
+        
+            Parameters:
+                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
+                orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use
+                angleType (:class:`~org.orekit.orbits.PositionAngleType`): position angle type to use
+        
+            Returns:
+                a first order integrator ready to use
+        
+        
+        """
+        ...
+    @typing.overload
+    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.AbstractIntegrator: ...
+    @typing.overload
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.nonstiff.LutherIntegrator: ...
 
 _MidpointFieldIntegratorBuilder__T = typing.TypeVar('_MidpointFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class MidpointFieldIntegratorBuilder(AbstractFixedStepFieldIntegratorBuilder[_MidpointFieldIntegratorBuilder__T], typing.Generic[_MidpointFieldIntegratorBuilder__T]):
+class MidpointFieldIntegratorBuilder(AbstractFixedStepFieldIntegratorBuilder[_MidpointFieldIntegratorBuilder__T, org.hipparchus.ode.nonstiff.MidpointFieldIntegrator[_MidpointFieldIntegratorBuilder__T]], FieldExplicitRungeKuttaIntegratorBuilder[_MidpointFieldIntegratorBuilder__T], typing.Generic[_MidpointFieldIntegratorBuilder__T]):
     """
-    public class MidpointFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractFixedStepFieldIntegratorBuilder`<T>
+    public class MidpointFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractFixedStepFieldIntegratorBuilder`<T, :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.MidpointFieldIntegrator?is`<T>> implements :class:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder`<T>
     
         Builder for MidpointFieldIntegrator.
     
@@ -2133,15 +2800,153 @@ class MidpointFieldIntegratorBuilder(AbstractFixedStepFieldIntegratorBuilder[_Mi
     @typing.overload
     def __init__(self, t: _MidpointFieldIntegratorBuilder__T): ...
     @typing.overload
-    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_MidpointFieldIntegratorBuilder__T]) -> org.hipparchus.ode.AbstractFieldIntegrator[_MidpointFieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, field: org.hipparchus.Field[_MidpointFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator: ...
     @typing.overload
-    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_MidpointFieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_MidpointFieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_MidpointFieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator: ...
     @typing.overload
-    def buildIntegrator(self, field: org.hipparchus.Field[_MidpointFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_MidpointFieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_MidpointFieldIntegratorBuilder__T]) -> org.hipparchus.ode.AbstractFieldIntegrator: ...
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_MidpointFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.nonstiff.MidpointFieldIntegrator[_MidpointFieldIntegratorBuilder__T]: ...
+    def toODEIntegratorBuilder(self) -> 'MidpointIntegratorBuilder':
+        """
+            Form a non-Field equivalent.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder.toODEIntegratorBuilder` in
+                interface :class:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder.toODEIntegratorBuilder` in
+                interface :class:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder`
+        
+            Returns:
+                ODE integrator builder
+        
+        
+        """
+        ...
 
-class TLEPropagatorBuilder(AbstractAnalyticalPropagatorBuilder):
+class MidpointIntegratorBuilder(AbstractFixedSingleStepIntegratorBuilder[org.hipparchus.ode.nonstiff.MidpointIntegrator]):
     """
-    public class TLEPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractAnalyticalPropagatorBuilder`
+    public class MidpointIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractFixedSingleStepIntegratorBuilder`<:class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.MidpointIntegrator?is`>
+    
+        Builder for MidpointIntegrator.
+    
+        Since:
+            6.0
+    """
+    def __init__(self, double: float): ...
+    @typing.overload
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractIntegrator:
+        """
+            Build a first order integrator.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.ExplicitRungeKuttaIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ExplicitRungeKuttaIntegratorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.AbstractIntegratorBuilder.buildIntegrator` in
+                class :class:`~org.orekit.propagation.conversion.AbstractIntegratorBuilder`
+        
+            Parameters:
+                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
+                orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use
+                angleType (:class:`~org.orekit.orbits.PositionAngleType`): position angle type to use
+        
+            Returns:
+                a first order integrator ready to use
+        
+        
+        """
+        ...
+    @typing.overload
+    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.AbstractIntegrator: ...
+    @typing.overload
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.nonstiff.MidpointIntegrator: ...
+
+class NumericalPropagatorBuilder(AbstractIntegratedPropagatorBuilder[org.orekit.propagation.numerical.NumericalPropagator]):
+    """
+    public class NumericalPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractIntegratedPropagatorBuilder`<:class:`~org.orekit.propagation.numerical.NumericalPropagator`>
+    
+        Builder for numerical propagator.
+    
+        Since:
+            6.0
+    """
+    @typing.overload
+    def __init__(self, orbit: org.orekit.orbits.Orbit, oDEIntegratorBuilder: ODEIntegratorBuilder, positionAngleType: org.orekit.orbits.PositionAngleType, double: float): ...
+    @typing.overload
+    def __init__(self, orbit: org.orekit.orbits.Orbit, oDEIntegratorBuilder: ODEIntegratorBuilder, positionAngleType: org.orekit.orbits.PositionAngleType, double: float, attitudeProvider: org.orekit.attitudes.AttitudeProvider): ...
+    def addForceModel(self, forceModel: org.orekit.forces.ForceModel) -> None:
+        """
+            Add a force model to the global perturbation model.
+        
+            If this method is not called at all, the integrated orbit will follow a Keplerian evolution only.
+        
+            Parameters:
+                model (:class:`~org.orekit.forces.ForceModel`): perturbing :class:`~org.orekit.forces.ForceModel` to add
+        
+        
+        """
+        ...
+    def addImpulseManeuver(self, impulseManeuver: org.orekit.forces.maneuvers.ImpulseManeuver) -> None:
+        """
+            Add impulse maneuver.
+        
+            Parameters:
+                impulseManeuver (:class:`~org.orekit.forces.maneuvers.ImpulseManeuver`): impulse maneuver
+        
+            Since:
+                12.2
+        
+        
+        """
+        ...
+    def buildLeastSquaresModel(self, propagatorBuilderArray: typing.Union[typing.List[PropagatorBuilder], jpype.JArray], list: java.util.List[org.orekit.estimation.measurements.ObservedMeasurement[typing.Any]], parameterDriversList: org.orekit.utils.ParameterDriversList, modelObserver: typing.Union[org.orekit.estimation.leastsquares.ModelObserver, typing.Callable]) -> org.orekit.estimation.leastsquares.BatchLSModel: ...
+    @typing.overload
+    def buildPropagator(self) -> org.orekit.propagation.integration.AbstractIntegratedPropagator: ...
+    @typing.overload
+    def buildPropagator(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.orekit.propagation.numerical.NumericalPropagator:
+        """
+            Build a propagator.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.AbstractIntegratedPropagatorBuilder.buildPropagator` in
+                class :class:`~org.orekit.propagation.conversion.AbstractIntegratedPropagatorBuilder`
+        
+            Parameters:
+                normalizedParameters (double[]): normalized values for the selected parameters
+        
+            Returns:
+                an initialized propagator
+        
+        
+        """
+        ...
+    def clearImpulseManeuvers(self) -> None:
+        """
+            Remove all impulse maneuvers.
+        
+            Since:
+                12.2
+        
+        
+        """
+        ...
+    def getAllForceModels(self) -> java.util.List[org.orekit.forces.ForceModel]: ...
+
+class TLEPropagatorBuilder(AbstractAnalyticalPropagatorBuilder[org.orekit.propagation.analytical.tle.TLEPropagator]):
+    """
+    public class TLEPropagatorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractAnalyticalPropagatorBuilder`<:class:`~org.orekit.propagation.analytical.tle.TLEPropagator`>
     
         Builder for TLEPropagator.
     
@@ -2155,28 +2960,25 @@ class TLEPropagatorBuilder(AbstractAnalyticalPropagatorBuilder):
     @typing.overload
     def __init__(self, tLE: org.orekit.propagation.analytical.tle.TLE, positionAngleType: org.orekit.orbits.PositionAngleType, double: float, tleGenerationAlgorithm: org.orekit.propagation.analytical.tle.generation.TleGenerationAlgorithm): ...
     @typing.overload
-    def buildPropagator(self) -> org.orekit.propagation.Propagator: ...
+    def buildPropagator(self) -> org.orekit.propagation.AbstractPropagator: ...
     @typing.overload
-    def buildPropagator(self, doubleArray: typing.List[float]) -> org.orekit.propagation.analytical.tle.TLEPropagator:
+    def buildPropagator(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.orekit.propagation.analytical.tle.TLEPropagator:
         """
             Build a propagator.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.PropagatorBuilder.buildPropagator` in
+                interface :class:`~org.orekit.propagation.conversion.PropagatorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder.buildPropagator` in
+                class :class:`~org.orekit.propagation.conversion.AbstractPropagatorBuilder`
         
             Parameters:
                 normalizedParameters (double[]): normalized values for the selected parameters
         
             Returns:
                 an initialized propagator
-        
-        
-        """
-        ...
-    def copy(self) -> 'TLEPropagatorBuilder':
-        """
-            Deprecated.
-            Create a new instance identical to this one.
-        
-            Returns:
-                new instance identical to this one
         
         
         """
@@ -2193,9 +2995,9 @@ class TLEPropagatorBuilder(AbstractAnalyticalPropagatorBuilder):
         ...
 
 _ThreeEighthesFieldIntegratorBuilder__T = typing.TypeVar('_ThreeEighthesFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class ThreeEighthesFieldIntegratorBuilder(AbstractFixedStepFieldIntegratorBuilder[_ThreeEighthesFieldIntegratorBuilder__T], typing.Generic[_ThreeEighthesFieldIntegratorBuilder__T]):
+class ThreeEighthesFieldIntegratorBuilder(AbstractFixedStepFieldIntegratorBuilder[_ThreeEighthesFieldIntegratorBuilder__T, org.hipparchus.ode.nonstiff.ThreeEighthesFieldIntegrator[_ThreeEighthesFieldIntegratorBuilder__T]], FieldExplicitRungeKuttaIntegratorBuilder[_ThreeEighthesFieldIntegratorBuilder__T], typing.Generic[_ThreeEighthesFieldIntegratorBuilder__T]):
     """
-    public class ThreeEighthesFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractFixedStepFieldIntegratorBuilder`<T>
+    public class ThreeEighthesFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractFixedStepFieldIntegratorBuilder`<T, :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.ThreeEighthesFieldIntegrator?is`<T>> implements :class:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder`<T>
     
         Builder for ThreeEighthesFieldIntegrator.
     
@@ -2207,16 +3009,79 @@ class ThreeEighthesFieldIntegratorBuilder(AbstractFixedStepFieldIntegratorBuilde
     @typing.overload
     def __init__(self, t: _ThreeEighthesFieldIntegratorBuilder__T): ...
     @typing.overload
-    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_ThreeEighthesFieldIntegratorBuilder__T]) -> org.hipparchus.ode.AbstractFieldIntegrator[_ThreeEighthesFieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, field: org.hipparchus.Field[_ThreeEighthesFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator: ...
     @typing.overload
-    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_ThreeEighthesFieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_ThreeEighthesFieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_ThreeEighthesFieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator: ...
     @typing.overload
-    def buildIntegrator(self, field: org.hipparchus.Field[_ThreeEighthesFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_ThreeEighthesFieldIntegratorBuilder__T]: ...
+    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_ThreeEighthesFieldIntegratorBuilder__T]) -> org.hipparchus.ode.AbstractFieldIntegrator: ...
+    @typing.overload
+    def buildIntegrator(self, field: org.hipparchus.Field[_ThreeEighthesFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.nonstiff.ThreeEighthesFieldIntegrator[_ThreeEighthesFieldIntegratorBuilder__T]: ...
+    def toODEIntegratorBuilder(self) -> 'ThreeEighthesIntegratorBuilder':
+        """
+            Form a non-Field equivalent.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder.toODEIntegratorBuilder` in
+                interface :class:`~org.orekit.propagation.conversion.FieldExplicitRungeKuttaIntegratorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder.toODEIntegratorBuilder` in
+                interface :class:`~org.orekit.propagation.conversion.FieldODEIntegratorBuilder`
+        
+            Returns:
+                ODE integrator builder
+        
+        
+        """
+        ...
+
+class ThreeEighthesIntegratorBuilder(AbstractFixedSingleStepIntegratorBuilder[org.hipparchus.ode.nonstiff.ThreeEighthesIntegrator]):
+    """
+    public class ThreeEighthesIntegratorBuilder extends :class:`~org.orekit.propagation.conversion.AbstractFixedSingleStepIntegratorBuilder`<:class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.ThreeEighthesIntegrator?is`>
+    
+        Builder for ThreeEighthesIntegrator.
+    
+        Since:
+            6.0
+    """
+    def __init__(self, double: float): ...
+    @typing.overload
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractIntegrator:
+        """
+            Build a first order integrator.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.ExplicitRungeKuttaIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ExplicitRungeKuttaIntegratorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.ODEIntegratorBuilder.buildIntegrator` in
+                interface :class:`~org.orekit.propagation.conversion.ODEIntegratorBuilder`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.conversion.AbstractIntegratorBuilder.buildIntegrator` in
+                class :class:`~org.orekit.propagation.conversion.AbstractIntegratorBuilder`
+        
+            Parameters:
+                orbit (:class:`~org.orekit.orbits.Orbit`): reference orbit
+                orbitType (:class:`~org.orekit.orbits.OrbitType`): orbit type to use
+                angleType (:class:`~org.orekit.orbits.PositionAngleType`): position angle type to use
+        
+            Returns:
+                a first order integrator ready to use
+        
+        
+        """
+        ...
+    @typing.overload
+    def buildIntegrator(self, absolutePVCoordinates: org.orekit.utils.AbsolutePVCoordinates) -> org.hipparchus.ode.AbstractIntegrator: ...
+    @typing.overload
+    def buildIntegrator(self, orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType, positionAngleType: org.orekit.orbits.PositionAngleType) -> org.hipparchus.ode.nonstiff.ThreeEighthesIntegrator: ...
 
 _AdamsBashforthFieldIntegratorBuilder__T = typing.TypeVar('_AdamsBashforthFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class AdamsBashforthFieldIntegratorBuilder(AbstractLimitedVariableStepFieldIntegratorBuilder[_AdamsBashforthFieldIntegratorBuilder__T], typing.Generic[_AdamsBashforthFieldIntegratorBuilder__T]):
+class AdamsBashforthFieldIntegratorBuilder(AbstractLimitedVariableStepFieldIntegratorBuilder[_AdamsBashforthFieldIntegratorBuilder__T, org.hipparchus.ode.nonstiff.AdamsBashforthFieldIntegrator[_AdamsBashforthFieldIntegratorBuilder__T]], typing.Generic[_AdamsBashforthFieldIntegratorBuilder__T]):
     """
-    public class AdamsBashforthFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractLimitedVariableStepFieldIntegratorBuilder`<T>
+    public class AdamsBashforthFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractLimitedVariableStepFieldIntegratorBuilder`<T, :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.AdamsBashforthFieldIntegrator?is`<T>>
     
         Builder for AdamsBashforthFieldIntegrator.
     
@@ -2226,18 +3091,22 @@ class AdamsBashforthFieldIntegratorBuilder(AbstractLimitedVariableStepFieldInteg
     @typing.overload
     def __init__(self, int: int, double: float, double2: float, double3: float): ...
     @typing.overload
-    def __init__(self, int: int, double: float, double2: float, double3: float, double4: float): ...
-    @typing.overload
-    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_AdamsBashforthFieldIntegratorBuilder__T]) -> org.hipparchus.ode.AbstractFieldIntegrator[_AdamsBashforthFieldIntegratorBuilder__T]: ...
-    @typing.overload
-    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_AdamsBashforthFieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_AdamsBashforthFieldIntegratorBuilder__T]: ...
-    @typing.overload
-    def buildIntegrator(self, field: org.hipparchus.Field[_AdamsBashforthFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_AdamsBashforthFieldIntegratorBuilder__T]: ...
+    def __init__(self, int: int, double: float, double2: float, toleranceProvider: org.orekit.propagation.ToleranceProvider): ...
+    def toODEIntegratorBuilder(self) -> AdamsBashforthIntegratorBuilder:
+        """
+            Form a non-Field equivalent.
+        
+            Returns:
+                ODE integrator builder
+        
+        
+        """
+        ...
 
 _AdamsMoultonFieldIntegratorBuilder__T = typing.TypeVar('_AdamsMoultonFieldIntegratorBuilder__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class AdamsMoultonFieldIntegratorBuilder(AbstractLimitedVariableStepFieldIntegratorBuilder[_AdamsMoultonFieldIntegratorBuilder__T], typing.Generic[_AdamsMoultonFieldIntegratorBuilder__T]):
+class AdamsMoultonFieldIntegratorBuilder(AbstractLimitedVariableStepFieldIntegratorBuilder[_AdamsMoultonFieldIntegratorBuilder__T, org.hipparchus.ode.nonstiff.AdamsMoultonFieldIntegrator[_AdamsMoultonFieldIntegratorBuilder__T]], typing.Generic[_AdamsMoultonFieldIntegratorBuilder__T]):
     """
-    public class AdamsMoultonFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractLimitedVariableStepFieldIntegratorBuilder`<T>
+    public class AdamsMoultonFieldIntegratorBuilder<T extends :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.propagation.conversion.AbstractLimitedVariableStepFieldIntegratorBuilder`<T, :class:`~org.orekit.propagation.conversion.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.nonstiff.AdamsMoultonFieldIntegrator?is`<T>>
     
         Builder for AdamsMoultonFieldIntegrator.
     
@@ -2247,21 +3116,27 @@ class AdamsMoultonFieldIntegratorBuilder(AbstractLimitedVariableStepFieldIntegra
     @typing.overload
     def __init__(self, int: int, double: float, double2: float, double3: float): ...
     @typing.overload
-    def __init__(self, int: int, double: float, double2: float, double3: float, double4: float): ...
-    @typing.overload
-    def buildIntegrator(self, fieldAbsolutePVCoordinates: org.orekit.utils.FieldAbsolutePVCoordinates[_AdamsMoultonFieldIntegratorBuilder__T]) -> org.hipparchus.ode.AbstractFieldIntegrator[_AdamsMoultonFieldIntegratorBuilder__T]: ...
-    @typing.overload
-    def buildIntegrator(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_AdamsMoultonFieldIntegratorBuilder__T], orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_AdamsMoultonFieldIntegratorBuilder__T]: ...
-    @typing.overload
-    def buildIntegrator(self, field: org.hipparchus.Field[_AdamsMoultonFieldIntegratorBuilder__T], orbit: org.orekit.orbits.Orbit, orbitType: org.orekit.orbits.OrbitType) -> org.hipparchus.ode.AbstractFieldIntegrator[_AdamsMoultonFieldIntegratorBuilder__T]: ...
+    def __init__(self, int: int, double: float, double2: float, toleranceProvider: org.orekit.propagation.ToleranceProvider): ...
+    def toODEIntegratorBuilder(self) -> AdamsMoultonIntegratorBuilder:
+        """
+            Form a non-Field equivalent.
+        
+            Returns:
+                ODE integrator builder
+        
+        
+        """
+        ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.propagation.conversion")``.
 
     AbstractAnalyticalPropagatorBuilder: typing.Type[AbstractAnalyticalPropagatorBuilder]
-    AbstractFieldIntegratorBuilder: typing.Type[AbstractFieldIntegratorBuilder]
+    AbstractFixedSingleStepIntegratorBuilder: typing.Type[AbstractFixedSingleStepIntegratorBuilder]
     AbstractFixedStepFieldIntegratorBuilder: typing.Type[AbstractFixedStepFieldIntegratorBuilder]
+    AbstractIntegratedPropagatorBuilder: typing.Type[AbstractIntegratedPropagatorBuilder]
+    AbstractIntegratorBuilder: typing.Type[AbstractIntegratorBuilder]
     AbstractLimitedVariableStepFieldIntegratorBuilder: typing.Type[AbstractLimitedVariableStepFieldIntegratorBuilder]
     AbstractPropagatorBuilder: typing.Type[AbstractPropagatorBuilder]
     AbstractPropagatorConverter: typing.Type[AbstractPropagatorConverter]
@@ -2283,6 +3158,9 @@ class __module_protocol__(typing.Protocol):
     EphemerisPropagatorBuilder: typing.Type[EphemerisPropagatorBuilder]
     EulerFieldIntegratorBuilder: typing.Type[EulerFieldIntegratorBuilder]
     EulerIntegratorBuilder: typing.Type[EulerIntegratorBuilder]
+    ExplicitRungeKuttaIntegratorBuilder: typing.Type[ExplicitRungeKuttaIntegratorBuilder]
+    FieldAbstractIntegratorBuilder: typing.Type[FieldAbstractIntegratorBuilder]
+    FieldExplicitRungeKuttaIntegratorBuilder: typing.Type[FieldExplicitRungeKuttaIntegratorBuilder]
     FieldODEIntegratorBuilder: typing.Type[FieldODEIntegratorBuilder]
     FiniteDifferencePropagatorConverter: typing.Type[FiniteDifferencePropagatorConverter]
     GillFieldIntegratorBuilder: typing.Type[GillFieldIntegratorBuilder]
@@ -2303,6 +3181,8 @@ class __module_protocol__(typing.Protocol):
     PropagatorConverter: typing.Type[PropagatorConverter]
     PythonAbstractPropagatorBuilder: typing.Type[PythonAbstractPropagatorBuilder]
     PythonAbstractPropagatorConverter: typing.Type[PythonAbstractPropagatorConverter]
+    PythonExplicitRungeKuttaIntegratorBuilder: typing.Type[PythonExplicitRungeKuttaIntegratorBuilder]
+    PythonFieldExplicitRungeKuttaIntegratorBuilder: typing.Type[PythonFieldExplicitRungeKuttaIntegratorBuilder]
     PythonFieldODEIntegratorBuilder: typing.Type[PythonFieldODEIntegratorBuilder]
     PythonODEIntegratorBuilder: typing.Type[PythonODEIntegratorBuilder]
     PythonPropagatorBuilder: typing.Type[PythonPropagatorBuilder]
@@ -2311,4 +3191,4 @@ class __module_protocol__(typing.Protocol):
     ThreeEighthesFieldIntegratorBuilder: typing.Type[ThreeEighthesFieldIntegratorBuilder]
     ThreeEighthesIntegratorBuilder: typing.Type[ThreeEighthesIntegratorBuilder]
     averaging: org.orekit.propagation.conversion.averaging.__module_protocol__
-    class-use: org.orekit.propagation.conversion.class-use.__module_protocol__
+    osc2mean: org.orekit.propagation.conversion.osc2mean.__module_protocol__

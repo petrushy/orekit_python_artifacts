@@ -1,3 +1,10 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.text
 import java.util
 import java.util.spi
@@ -26,14 +33,13 @@ class DecimalFormatSymbolsProvider(java.util.spi.LocaleServiceProvider):
     def getInstance(self, locale: java.util.Locale) -> java.text.DecimalFormatSymbols: ...
 
 class NumberFormatProvider(java.util.spi.LocaleServiceProvider):
-    def getCompactNumberInstance(self, locale: java.util.Locale, style: java.text.NumberFormat.Style) -> java.text.NumberFormat: ...
     def getCurrencyInstance(self, locale: java.util.Locale) -> java.text.NumberFormat: ...
     def getIntegerInstance(self, locale: java.util.Locale) -> java.text.NumberFormat: ...
     def getNumberInstance(self, locale: java.util.Locale) -> java.text.NumberFormat: ...
     def getPercentInstance(self, locale: java.util.Locale) -> java.text.NumberFormat: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("java.text.spi")``.
 
     BreakIteratorProvider: typing.Type[BreakIteratorProvider]

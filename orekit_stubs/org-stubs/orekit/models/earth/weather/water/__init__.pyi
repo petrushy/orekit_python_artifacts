@@ -1,5 +1,11 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import org.hipparchus
-import org.orekit.models.earth.weather.water.class-use
 import typing
 
 
@@ -313,7 +319,7 @@ class Wang1988(WaterVaporPressureProvider):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.models.earth.weather.water")``.
 
     CIPM2007: typing.Type[CIPM2007]
@@ -321,4 +327,3 @@ class __module_protocol__(typing.Protocol):
     PythonWaterVaporPressureProvider: typing.Type[PythonWaterVaporPressureProvider]
     Wang1988: typing.Type[Wang1988]
     WaterVaporPressureProvider: typing.Type[WaterVaporPressureProvider]
-    class-use: org.orekit.models.earth.weather.water.class-use.__module_protocol__

@@ -1,3 +1,10 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
 import java.util.function
@@ -5,7 +12,6 @@ import org.hipparchus.geometry.euclidean.threed
 import org.orekit.attitudes
 import org.orekit.data
 import org.orekit.files.general
-import org.orekit.files.sp3.class-use
 import org.orekit.frames
 import org.orekit.gnss
 import org.orekit.propagation
@@ -94,7 +100,7 @@ class DataUsed(java.lang.Enum['DataUsed']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['DataUsed']:
+    def values() -> typing.MutableSequence['DataUsed']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -250,7 +256,7 @@ class SP3(org.orekit.files.general.EphemerisFile['SP3Coordinate', 'SP3Segment'])
         ...
     def getSatellites(self) -> java.util.Map[str, 'SP3Ephemeris']: ...
     @staticmethod
-    def splice(collection: typing.Union[java.util.Collection['SP3'], typing.Sequence['SP3']]) -> 'SP3': ...
+    def splice(collection: typing.Union[java.util.Collection['SP3'], typing.Sequence['SP3'], typing.Set['SP3']]) -> 'SP3': ...
     def validate(self, boolean: bool, string: str) -> None: ...
 
 class SP3Coordinate(org.orekit.utils.TimeStampedPVCoordinates):
@@ -261,9 +267,6 @@ class SP3Coordinate(org.orekit.utils.TimeStampedPVCoordinates):
     
         Since:
             12.0
-    
-        Also see:
-            :meth:`~serialized`
     """
     DUMMY: typing.ClassVar['SP3Coordinate'] = ...
     """
@@ -424,9 +427,8 @@ class SP3Ephemeris(org.orekit.files.general.EphemerisFile.SatelliteEphemeris[SP3
             Extract the clock model.
         
             There are always 2n+1 :meth:`~org.orekit.time.AggregatedClockModel.getModels` underlying clock models when there are n
-            :meth:`~org.orekit.files.sp3.SP3Ephemeris.getSegments` in the ephemeris. This happens because there are
-            :class:`~org.orekit.utils.TimeSpanMap.Span` with :code:`null` :meth:`~org.orekit.utils.TimeSpanMap.Span.getData` before
-            the first segment, between all regular segments and after last segment.
+            :meth:`~org.orekit.files.sp3.SP3Ephemeris.getSegments` in the ephemeris. This happens because there are spans with
+            :code:`null` data before the first segment, between all regular segments and after last segment.
         
             Returns:
                 extracted clock model
@@ -545,7 +547,7 @@ class SP3FileType(java.lang.Enum['SP3FileType']):
     LEO: typing.ClassVar['SP3FileType'] = ...
     GALILEO: typing.ClassVar['SP3FileType'] = ...
     SBAS: typing.ClassVar['SP3FileType'] = ...
-    IRNSS: typing.ClassVar['SP3FileType'] = ...
+    NAVIC: typing.ClassVar['SP3FileType'] = ...
     COMPASS: typing.ClassVar['SP3FileType'] = ...
     QZSS: typing.ClassVar['SP3FileType'] = ...
     UNDEFINED: typing.ClassVar['SP3FileType'] = ...
@@ -598,7 +600,7 @@ class SP3FileType(java.lang.Enum['SP3FileType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['SP3FileType']:
+    def values() -> typing.MutableSequence['SP3FileType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1068,7 +1070,7 @@ class SP3OrbitType(java.lang.Enum['SP3OrbitType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['SP3OrbitType']:
+    def values() -> typing.MutableSequence['SP3OrbitType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1100,13 +1102,11 @@ class SP3Parser(org.orekit.files.general.EphemerisFileParser[SP3]):
             :class:`~org.orekit.files.sp3.https:.files.igs.org.pub.data.format.sp3c.txt`,
             :class:`~org.orekit.files.sp3.https:.files.igs.org.pub.data.format.sp3d.pdf`
     """
-    SP3_FRAME_CENTER_STRING: typing.ClassVar[str] = ...
+    DEFAULT_INTERPOLATION_SAMPLES: typing.ClassVar[int] = ...
     """
-    :class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public static final :class:`~org.orekit.files.sp3.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` SP3_FRAME_CENTER_STRING
+    public static final int DEFAULT_INTERPOLATION_SAMPLES
     
-        Deprecated.
-        as of 12.1 not used anymore
-        String representation of the center of ephemeris coordinate system.
+        Default number of samples to use when interpolating SP3 coordinates.
     
         Also see:
             :meth:`~constant`
@@ -1119,8 +1119,6 @@ class SP3Parser(org.orekit.files.general.EphemerisFileParser[SP3]):
     def __init__(self, double: float, int: int, function: typing.Union[java.util.function.Function[str, org.orekit.frames.Frame], typing.Callable[[str], org.orekit.frames.Frame]]): ...
     @typing.overload
     def __init__(self, double: float, int: int, function: typing.Union[java.util.function.Function[str, org.orekit.frames.Frame], typing.Callable[[str], org.orekit.frames.Frame]], timeScales: org.orekit.time.TimeScales): ...
-    @staticmethod
-    def guessFrame(string: str) -> org.orekit.frames.Frame: ...
     def parse(self, dataSource: org.orekit.data.DataSource) -> SP3:
         """
             Description copied from interface: :meth:`~org.orekit.files.general.EphemerisFileParser.parse`
@@ -1483,7 +1481,7 @@ class SP3Writer:
     def write(self, sP3: SP3) -> None: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.sp3")``.
 
     DataUsed: typing.Type[DataUsed]
@@ -1499,4 +1497,3 @@ class __module_protocol__(typing.Protocol):
     SP3Segment: typing.Type[SP3Segment]
     SP3Utils: typing.Type[SP3Utils]
     SP3Writer: typing.Type[SP3Writer]
-    class-use: org.orekit.files.sp3.class-use.__module_protocol__

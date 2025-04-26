@@ -1,13 +1,20 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.io
 import java.lang
 import java.net
 import java.nio
 import java.util
 import java.util.regex
+import jpype
 import jpype.protocol
 import org.hipparchus
 import org.orekit.bodies
-import org.orekit.data.class-use
 import org.orekit.forces.gravity.potential
 import org.orekit.frames
 import org.orekit.models.earth
@@ -265,7 +272,7 @@ class DataProvidersManager:
         
         """
         ...
-    def addProvider(self, dataProvider: DataProvider) -> None:
+    def addProvider(self, dataProvider: typing.Union[DataProvider, typing.Callable]) -> None:
         """
             Add a data provider to the supported list.
         
@@ -339,7 +346,7 @@ class DataProvidersManager:
         ...
     def getLoadedDataNames(self) -> java.util.Set[str]: ...
     def getProviders(self) -> java.util.List[DataProvider]: ...
-    def isSupported(self, dataProvider: DataProvider) -> bool:
+    def isSupported(self, dataProvider: typing.Union[DataProvider, typing.Callable]) -> bool:
         """
             Check if some provider is supported.
         
@@ -359,7 +366,7 @@ class DataProvidersManager:
         
         """
         ...
-    def removeProvider(self, dataProvider: DataProvider) -> DataProvider:
+    def removeProvider(self, dataProvider: typing.Union[DataProvider, typing.Callable]) -> DataProvider:
         """
             Remove one provider.
         
@@ -432,9 +439,9 @@ class DataSource:
     @typing.overload
     def __init__(self, string: str): ...
     @typing.overload
-    def __init__(self, string: str, readerOpener: 'DataSource.ReaderOpener'): ...
+    def __init__(self, string: str, readerOpener: typing.Union['DataSource.ReaderOpener', typing.Callable]): ...
     @typing.overload
-    def __init__(self, string: str, streamOpener: 'DataSource.StreamOpener'): ...
+    def __init__(self, string: str, streamOpener: typing.Union['DataSource.StreamOpener', typing.Callable]): ...
     @typing.overload
     def __init__(self, uRI: java.net.URI): ...
     def getName(self) -> str:
@@ -466,9 +473,9 @@ class DataSource:
     class StreamOpener:
         def openOnce(self) -> java.io.InputStream: ...
 
-class DelaunayArguments(org.orekit.time.TimeStamped, java.io.Serializable):
+class DelaunayArguments(org.orekit.time.TimeStamped):
     """
-    public class DelaunayArguments extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public class DelaunayArguments extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`
     
         Delaunay arguments used for nutation or tides.
     
@@ -476,9 +483,6 @@ class DelaunayArguments(org.orekit.time.TimeStamped, java.io.Serializable):
     
         Since:
             6.1
-    
-        Also see:
-            :meth:`~serialized`
     """
     def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, double9: float, double10: float, double11: float, double12: float, double13: float): ...
     def getD(self) -> float:
@@ -789,7 +793,7 @@ class FiltersManager:
             :class:`~org.orekit.data.DataSource`, :class:`~org.orekit.data.DataFilter`
     """
     def __init__(self): ...
-    def addFilter(self, dataFilter: DataFilter) -> None:
+    def addFilter(self, dataFilter: typing.Union[DataFilter, typing.Callable]) -> None:
         """
             Add a data filter.
         
@@ -814,9 +818,9 @@ class FiltersManager:
         """
         ...
 
-class FundamentalNutationArguments(java.io.Serializable):
+class FundamentalNutationArguments:
     """
-    public class FundamentalNutationArguments extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public class FundamentalNutationArguments extends :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
     
         Class computing the fundamental arguments for nutation and tides.
     
@@ -827,17 +831,16 @@ class FundamentalNutationArguments(java.io.Serializable):
     
     
         Also see:
-            :code:`SeriesTerm`, :class:`~org.orekit.data.PoissonSeries`, :class:`~org.orekit.data.BodiesElements`,
-            :meth:`~serialized`
+            :code:`SeriesTerm`, :class:`~org.orekit.data.PoissonSeries`, :class:`~org.orekit.data.BodiesElements`
     """
     @typing.overload
     def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, timeScale: org.orekit.time.TimeScale, inputStream: java.io.InputStream, string: str): ...
     @typing.overload
     def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, timeScale: org.orekit.time.TimeScale, inputStream: java.io.InputStream, string: str, timeScales: org.orekit.time.TimeScales): ...
     @typing.overload
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, timeScale: org.orekit.time.TimeScale, list: java.util.List[typing.List[float]]): ...
+    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, timeScale: org.orekit.time.TimeScale, list: java.util.List[typing.Union[typing.List[float], jpype.JArray]]): ...
     @typing.overload
-    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, timeScale: org.orekit.time.TimeScale, list: java.util.List[typing.List[float]], timeScales: org.orekit.time.TimeScales): ...
+    def __init__(self, iERSConventions: org.orekit.utils.IERSConventions, timeScale: org.orekit.time.TimeScale, list: java.util.List[typing.Union[typing.List[float], jpype.JArray]], timeScales: org.orekit.time.TimeScales): ...
     _evaluateAll_1__T = typing.TypeVar('_evaluateAll_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def evaluateAll(self, absoluteDate: org.orekit.time.AbsoluteDate) -> 'BodiesElements':
@@ -883,11 +886,11 @@ class LineOrientedFilteringReader(java.io.Reader):
     @typing.overload
     def read(self) -> int: ...
     @typing.overload
-    def read(self, charArray: typing.List[str]) -> int: ...
+    def read(self, charArray: typing.Union[typing.List[str], jpype.JArray]) -> int: ...
     @typing.overload
     def read(self, charBuffer: java.nio.CharBuffer) -> int: ...
     @typing.overload
-    def read(self, charArray: typing.List[str], int: int, int2: int) -> int: ...
+    def read(self, charArray: typing.Union[typing.List[str], jpype.JArray], int: int, int2: int) -> int: ...
 
 class PoissonSeries:
     """
@@ -904,7 +907,7 @@ class PoissonSeries:
     """
     def __init__(self, polynomialNutation: 'PolynomialNutation', map: typing.Union[java.util.Map[int, 'SeriesTerm'], typing.Mapping[int, 'SeriesTerm']]): ...
     @staticmethod
-    def compile(poissonSeriesArray: typing.List['PoissonSeries']) -> 'PoissonSeries.CompiledSeries': ...
+    def compile(*poissonSeries: 'PoissonSeries') -> 'PoissonSeries.CompiledSeries': ...
     def getNonPolynomialSize(self) -> int:
         """
             Get the number of different terms in the non-polynomial part.
@@ -956,14 +959,14 @@ class PoissonSeries:
     class CompiledSeries:
         _derivative_1__S = typing.TypeVar('_derivative_1__S', bound=org.hipparchus.CalculusFieldElement)  # <S>
         @typing.overload
-        def derivative(self, bodiesElements: 'BodiesElements') -> typing.List[float]: ...
+        def derivative(self, bodiesElements: 'BodiesElements') -> typing.MutableSequence[float]: ...
         @typing.overload
-        def derivative(self, fieldBodiesElements: 'FieldBodiesElements'[_derivative_1__S]) -> typing.List[_derivative_1__S]: ...
+        def derivative(self, fieldBodiesElements: 'FieldBodiesElements'[_derivative_1__S]) -> typing.MutableSequence[_derivative_1__S]: ...
         _value_1__S = typing.TypeVar('_value_1__S', bound=org.hipparchus.CalculusFieldElement)  # <S>
         @typing.overload
-        def value(self, bodiesElements: 'BodiesElements') -> typing.List[float]: ...
+        def value(self, bodiesElements: 'BodiesElements') -> typing.MutableSequence[float]: ...
         @typing.overload
-        def value(self, fieldBodiesElements: 'FieldBodiesElements'[_value_1__S]) -> typing.List[_value_1__S]: ...
+        def value(self, fieldBodiesElements: 'FieldBodiesElements'[_value_1__S]) -> typing.MutableSequence[_value_1__S]: ...
 
 class PoissonSeriesParser:
     """
@@ -1263,7 +1266,7 @@ class PolynomialNutation(java.io.Serializable):
         Also see:
             :class:`~org.orekit.data.PoissonSeries`, :meth:`~serialized`
     """
-    def __init__(self, doubleArray: typing.List[float]): ...
+    def __init__(self, *double: float): ...
     _derivative_1__T = typing.TypeVar('_derivative_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def derivative(self, double: float) -> float:
@@ -1341,7 +1344,7 @@ class PolynomialParser:
             :code:`SeriesTerm`, :class:`~org.orekit.data.PoissonSeries`, :class:`~org.orekit.data.BodiesElements`
     """
     def __init__(self, char: str, unit: 'PolynomialParser.Unit'): ...
-    def parse(self, string: str) -> typing.List[float]:
+    def parse(self, string: str) -> typing.MutableSequence[float]:
         """
             Parse a polynomial expression.
         
@@ -1370,7 +1373,7 @@ class PolynomialParser:
         @staticmethod
         def valueOf(string: str) -> 'PolynomialParser.Unit': ...
         @staticmethod
-        def values() -> typing.List['PolynomialParser.Unit']: ...
+        def values() -> typing.MutableSequence['PolynomialParser.Unit']: ...
 
 _SimpleTimeStampedTableParser__RowConverter__S = typing.TypeVar('_SimpleTimeStampedTableParser__RowConverter__S', bound=org.orekit.time.TimeStamped)  # <S>
 _SimpleTimeStampedTableParser__T = typing.TypeVar('_SimpleTimeStampedTableParser__T', bound=org.orekit.time.TimeStamped)  # <T>
@@ -1383,10 +1386,10 @@ class SimpleTimeStampedTableParser(typing.Generic[_SimpleTimeStampedTableParser_
         Since:
             6.1
     """
-    def __init__(self, int: int, rowConverter: 'SimpleTimeStampedTableParser.RowConverter'[_SimpleTimeStampedTableParser__T]): ...
+    def __init__(self, int: int, rowConverter: typing.Union['SimpleTimeStampedTableParser.RowConverter'[_SimpleTimeStampedTableParser__T], typing.Callable[[typing.MutableSequence[float]], _SimpleTimeStampedTableParser__T]]): ...
     def parse(self, inputStream: java.io.InputStream, string: str) -> java.util.List[_SimpleTimeStampedTableParser__T]: ...
     class RowConverter(typing.Generic[_SimpleTimeStampedTableParser__RowConverter__S]):
-        def convert(self, doubleArray: typing.List[float]) -> _SimpleTimeStampedTableParser__RowConverter__S: ...
+        def convert(self, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> _SimpleTimeStampedTableParser__RowConverter__S: ...
 
 class SeriesTerm: ...
 
@@ -1448,16 +1451,13 @@ class AbstractListCrawler(DataProvider, typing.Generic[_AbstractListCrawler__T])
         ...
     def getInputs(self) -> java.util.List[_AbstractListCrawler__T]: ...
 
-class BodiesElements(DelaunayArguments, java.io.Serializable):
+class BodiesElements(DelaunayArguments):
     """
-    public final class BodiesElements extends :class:`~org.orekit.data.DelaunayArguments` implements :class:`~org.orekit.data.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public final class BodiesElements extends :class:`~org.orekit.data.DelaunayArguments`
     
         Elements of the bodies having an effect on nutation.
     
         This class is a simple placeholder, it does not provide any processing method.
-    
-        Also see:
-            :meth:`~serialized`
     """
     def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, double9: float, double10: float, double11: float, double12: float, double13: float, double14: float, double15: float, double16: float, double17: float, double18: float, double19: float, double20: float, double21: float, double22: float, double23: float, double24: float, double25: float, double26: float, double27: float, double28: float, double29: float, double30: float, double31: float): ...
     def getLE(self) -> float:
@@ -1665,9 +1665,9 @@ class ClasspathCrawler(DataProvider):
             :class:`~org.orekit.data.DataProvidersManager`
     """
     @typing.overload
-    def __init__(self, classLoader: java.lang.ClassLoader, stringArray: typing.List[str]): ...
+    def __init__(self, classLoader: java.lang.ClassLoader, *string: str): ...
     @typing.overload
-    def __init__(self, stringArray: typing.List[str]): ...
+    def __init__(self, *string: str): ...
     def feed(self, pattern: java.util.regex.Pattern, dataLoader: DataLoader, dataProvidersManager: DataProvidersManager) -> bool:
         """
             Feed a data file loader by browsing the data collection.
@@ -1993,6 +1993,26 @@ class PythonAbstractSelfFeedingLoader(AbstractSelfFeedingLoader):
     public class PythonAbstractSelfFeedingLoader extends :class:`~org.orekit.data.AbstractSelfFeedingLoader`
     """
     def __init__(self, string: str, dataProvidersManager: DataProvidersManager): ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
 
 class PythonDataContext(DataContext):
     """
@@ -2617,7 +2637,7 @@ class FilesListCrawler(AbstractListCrawler[java.io.File]):
         Also see:
             :class:`~org.orekit.data.DataProvidersManager`
     """
-    def __init__(self, fileArray: typing.List[java.io.File]): ...
+    def __init__(self, *file: typing.Union[java.io.File, jpype.protocol.SupportsPath]): ...
 
 class NetworkCrawler(AbstractListCrawler[java.net.URL]):
     """
@@ -2654,7 +2674,7 @@ class NetworkCrawler(AbstractListCrawler[java.net.URL]):
         Also see:
             :class:`~org.orekit.data.DataProvidersManager`
     """
-    def __init__(self, uRLArray: typing.List[java.net.URL]): ...
+    def __init__(self, *uRL: java.net.URL): ...
     def setTimeout(self, int: int) -> None:
         """
             Set the timeout for connection.
@@ -2743,7 +2763,7 @@ class PythonAbstractListCrawler(AbstractListCrawler[_PythonAbstractListCrawler__
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.data")``.
 
     AbstractListCrawler: typing.Type[AbstractListCrawler]
@@ -2788,4 +2808,3 @@ class __module_protocol__(typing.Protocol):
     TruncatingFilter: typing.Type[TruncatingFilter]
     UnixCompressFilter: typing.Type[UnixCompressFilter]
     ZipJarCrawler: typing.Type[ZipJarCrawler]
-    class-use: org.orekit.data.class-use.__module_protocol__

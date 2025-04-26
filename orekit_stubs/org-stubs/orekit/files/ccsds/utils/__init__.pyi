@@ -1,9 +1,15 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util.function
 import org.orekit.data
 import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
-import org.orekit.files.ccsds.utils.class-use
 import org.orekit.files.ccsds.utils.generation
 import org.orekit.files.ccsds.utils.lexical
 import org.orekit.files.ccsds.utils.parsing
@@ -145,7 +151,7 @@ class FileFormat(java.lang.Enum['FileFormat']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['FileFormat']:
+    def values() -> typing.MutableSequence['FileFormat']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -164,12 +170,11 @@ class FileFormat(java.lang.Enum['FileFormat']):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.utils")``.
 
     ContextBinding: typing.Type[ContextBinding]
     FileFormat: typing.Type[FileFormat]
-    class-use: org.orekit.files.ccsds.utils.class-use.__module_protocol__
     generation: org.orekit.files.ccsds.utils.generation.__module_protocol__
     lexical: org.orekit.files.ccsds.utils.lexical.__module_protocol__
     parsing: org.orekit.files.ccsds.utils.parsing.__module_protocol__

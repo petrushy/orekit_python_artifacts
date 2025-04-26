@@ -1,8 +1,14 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.util
 import org.orekit.gnss
 import org.orekit.gnss.metric.messages.common
 import org.orekit.gnss.metric.messages.rtcm
-import org.orekit.gnss.metric.messages.rtcm.correction.class-use
 import typing
 
 
@@ -520,7 +526,7 @@ class RtcmOrbitCorrectionHeader(RtcmCorrectionHeader):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.gnss.metric.messages.rtcm.correction")``.
 
     Rtcm1057: typing.Type[Rtcm1057]
@@ -539,4 +545,3 @@ class __module_protocol__(typing.Protocol):
     RtcmCorrectionMessage: typing.Type[RtcmCorrectionMessage]
     RtcmOrbitCorrectionData: typing.Type[RtcmOrbitCorrectionData]
     RtcmOrbitCorrectionHeader: typing.Type[RtcmOrbitCorrectionHeader]
-    class-use: org.orekit.gnss.metric.messages.rtcm.correction.class-use.__module_protocol__

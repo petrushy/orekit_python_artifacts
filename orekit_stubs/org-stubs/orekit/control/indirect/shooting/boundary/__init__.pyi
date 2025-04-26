@@ -1,4 +1,10 @@
-import org.orekit.control.indirect.shooting.boundary.class-use
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import org.orekit.orbits
 import org.orekit.utils
 import typing
@@ -170,11 +176,10 @@ class NormBasedCartesianConditionChecker(CartesianBoundaryConditionChecker):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.control.indirect.shooting.boundary")``.
 
     CartesianBoundaryConditionChecker: typing.Type[CartesianBoundaryConditionChecker]
     FixedTimeBoundaryOrbits: typing.Type[FixedTimeBoundaryOrbits]
     FixedTimeCartesianBoundaryStates: typing.Type[FixedTimeCartesianBoundaryStates]
     NormBasedCartesianConditionChecker: typing.Type[NormBasedCartesianConditionChecker]
-    class-use: org.orekit.control.indirect.shooting.boundary.class-use.__module_protocol__

@@ -1,5 +1,11 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import com.sun.source.util
-import org.orekit.compiler.plugin.class-use
 import typing
 
 
@@ -37,7 +43,7 @@ class DefaultDataContextPlugin(com.sun.source.util.Plugin, com.sun.source.util.T
         
         """
         ...
-    def init(self, javacTask: com.sun.source.util.JavacTask, stringArray: typing.List[str]) -> None:
+    def init(self, javacTask: com.sun.source.util.JavacTask, *string: str) -> None:
         """
         
             Specified by:
@@ -57,8 +63,7 @@ class DefaultDataContextPlugin(com.sun.source.util.Plugin, com.sun.source.util.T
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.compiler.plugin")``.
 
     DefaultDataContextPlugin: typing.Type[DefaultDataContextPlugin]
-    class-use: org.orekit.compiler.plugin.class-use.__module_protocol__

@@ -1,3 +1,10 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.util
 import java.util.stream
 import org.hipparchus.analysis.differentiation
@@ -61,7 +68,7 @@ class FixedZHomothety(TimeIndependentLOSTransform):
 
 class PolynomialRotation(LOSTransform):
     @typing.overload
-    def __init__(self, string: str, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float]): ...
+    def __init__(self, string: str, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate, *double: float): ...
     @typing.overload
     def __init__(self, string: str, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate, polynomialFunction: org.hipparchus.analysis.polynomials.PolynomialFunction): ...
     def getParametersDrivers(self) -> java.util.stream.Stream[org.orekit.utils.ParameterDriver]: ...
@@ -116,7 +123,7 @@ class PythonTimeIndependentLOSTransform(TimeIndependentLOSTransform):
     def transformLOS(self, int: int, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.rugged.los")``.
 
     FixedRotation: typing.Type[FixedRotation]

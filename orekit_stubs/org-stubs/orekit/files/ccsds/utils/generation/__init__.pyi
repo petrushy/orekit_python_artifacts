@@ -1,11 +1,18 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
 import org.orekit.files.ccsds.definitions
 import org.orekit.files.ccsds.ndm
 import org.orekit.files.ccsds.section
 import org.orekit.files.ccsds.utils
-import org.orekit.files.ccsds.utils.generation.class-use
 import org.orekit.time
+import org.orekit.utils
 import org.orekit.utils.units
 import typing
 
@@ -100,6 +107,16 @@ class Generator(java.lang.AutoCloseable):
         
         """
         ...
+    def getFormatter(self) -> org.orekit.utils.Formatter:
+        """
+            Used to format dates and doubles to string.
+        
+            Returns:
+                formatter
+        
+        
+        """
+        ...
     def getOutputName(self) -> str:
         """
             Get the name of the output (for error messages).
@@ -143,6 +160,8 @@ class Generator(java.lang.AutoCloseable):
     def writeEntry(self, string: str, list: java.util.List[str], boolean: bool) -> None: ...
     @typing.overload
     def writeEntry(self, string: str, timeConverter: org.orekit.files.ccsds.definitions.TimeConverter, absoluteDate: org.orekit.time.AbsoluteDate, boolean: bool, boolean2: bool) -> None: ...
+    @typing.overload
+    def writeEntry(self, string: str, integer: int, boolean: bool) -> None: ...
     @typing.overload
     def writeRawData(self, char: str) -> None: ...
     @typing.overload
@@ -213,7 +232,10 @@ class AbstractGenerator(Generator):
         Since:
             11.0
     """
+    @typing.overload
     def __init__(self, appendable: java.lang.Appendable, string: str, double: float, boolean: bool): ...
+    @typing.overload
+    def __init__(self, appendable: java.lang.Appendable, string: str, double: float, boolean: bool, formatter: org.orekit.utils.Formatter): ...
     def close(self) -> None: ...
     def dateToCalendarString(self, timeConverter: org.orekit.files.ccsds.definitions.TimeConverter, absoluteDate: org.orekit.time.AbsoluteDate) -> str:
         """
@@ -296,6 +318,20 @@ class AbstractGenerator(Generator):
         ...
     def enterSection(self, string: str) -> None: ...
     def exitSection(self) -> str: ...
+    def getFormatter(self) -> org.orekit.utils.Formatter:
+        """
+            Used to format dates and doubles to string.
+        
+            Specified by:
+                :meth:`~org.orekit.files.ccsds.utils.generation.Generator.getFormatter` in
+                interface :class:`~org.orekit.files.ccsds.utils.generation.Generator`
+        
+            Returns:
+                formatter
+        
+        
+        """
+        ...
     def getOutputName(self) -> str:
         """
             Get the name of the output (for error messages).
@@ -331,6 +367,8 @@ class AbstractGenerator(Generator):
     def unitsListToString(self, list: java.util.List[org.orekit.utils.units.Unit]) -> str: ...
     @typing.overload
     def writeEntry(self, string: str, string2: str, unit: org.orekit.utils.units.Unit, boolean: bool) -> None: ...
+    @typing.overload
+    def writeEntry(self, string: str, integer: int, boolean: bool) -> None: ...
     @typing.overload
     def writeEntry(self, string: str, char: str, boolean: bool) -> None: ...
     @typing.overload
@@ -481,7 +519,6 @@ class PythonGenerator(Generator):
     def close(self) -> None: ...
     def dateToCalendarString(self, timeConverter: org.orekit.files.ccsds.definitions.TimeConverter, absoluteDate: org.orekit.time.AbsoluteDate) -> str:
         """
-            Description copied from interface: :meth:`~org.orekit.files.ccsds.utils.generation.Generator.dateToCalendarString`
             Convert a date to calendar string value with high precision.
         
             Specified by:
@@ -535,7 +572,7 @@ class PythonGenerator(Generator):
                 date (:class:`~org.orekit.time.AbsoluteDate`): date to write
         
             Returns:
-                date as a string
+                date as a string (may be either a relative date or a calendar date)
         
         """
         ...
@@ -573,6 +610,20 @@ class PythonGenerator(Generator):
         
             Returns:
                 generated file format
+        
+        
+        """
+        ...
+    def getFormatter(self) -> org.orekit.utils.Formatter:
+        """
+            Used to format dates and doubles to string.
+        
+            Specified by:
+                :meth:`~org.orekit.files.ccsds.utils.generation.Generator.getFormatter` in
+                interface :class:`~org.orekit.files.ccsds.utils.generation.Generator`
+        
+            Returns:
+                formatter
         
         
         """
@@ -623,6 +674,8 @@ class PythonGenerator(Generator):
     def startMessage(self, string: str, string2: str, double: float) -> None: ...
     def unitsListToString(self, list: java.util.List[org.orekit.utils.units.Unit]) -> str: ...
     def writeComments(self, list: java.util.List[str]) -> None: ...
+    @typing.overload
+    def writeEntry(self, string: str, integer: int, boolean: bool) -> None: ...
     @typing.overload
     def writeEntry(self, string: str, char: str, boolean: bool) -> None: ...
     @typing.overload
@@ -722,7 +775,10 @@ class KvnGenerator(AbstractGenerator):
         Since:
             11.0
     """
+    @typing.overload
     def __init__(self, appendable: java.lang.Appendable, int: int, string: str, double: float, int2: int): ...
+    @typing.overload
+    def __init__(self, appendable: java.lang.Appendable, int: int, string: str, double: float, int2: int, formatter: org.orekit.utils.Formatter): ...
     def endMessage(self, string: str) -> None:
         """
             End CCSDS message.
@@ -747,6 +803,8 @@ class KvnGenerator(AbstractGenerator):
         ...
     def startMessage(self, string: str, string2: str, double: float) -> None: ...
     def writeComments(self, list: java.util.List[str]) -> None: ...
+    @typing.overload
+    def writeEntry(self, string: str, integer: int, boolean: bool) -> None: ...
     @typing.overload
     def writeEntry(self, string: str, char: str, boolean: bool) -> None: ...
     @typing.overload
@@ -802,6 +860,8 @@ class PythonAbstractGenerator(AbstractGenerator):
         ...
     def startMessage(self, string: str, string2: str, double: float) -> None: ...
     def writeComments(self, list: java.util.List[str]) -> None: ...
+    @typing.overload
+    def writeEntry(self, string: str, integer: int, boolean: bool) -> None: ...
     @typing.overload
     def writeEntry(self, string: str, string2: str, unit: org.orekit.utils.units.Unit, boolean: bool) -> None: ...
     @typing.overload
@@ -894,7 +954,10 @@ class XmlGenerator(AbstractGenerator):
     
     
     """
+    @typing.overload
     def __init__(self, appendable: java.lang.Appendable, int: int, string: str, double: float, boolean: bool, string2: str): ...
+    @typing.overload
+    def __init__(self, appendable: java.lang.Appendable, int: int, string: str, double: float, boolean: bool, string2: str, formatter: org.orekit.utils.Formatter): ...
     def endMessage(self, string: str) -> None: ...
     def enterSection(self, string: str) -> None: ...
     def exitSection(self) -> str: ...
@@ -910,6 +973,8 @@ class XmlGenerator(AbstractGenerator):
         ...
     def startMessage(self, string: str, string2: str, double: float) -> None: ...
     def writeComments(self, list: java.util.List[str]) -> None: ...
+    @typing.overload
+    def writeEntry(self, string: str, integer: int, boolean: bool) -> None: ...
     @typing.overload
     def writeEntry(self, string: str, char: str, boolean: bool) -> None: ...
     @typing.overload
@@ -930,7 +995,7 @@ class XmlGenerator(AbstractGenerator):
     def writeTwoAttributesElement(self, string: str, string2: str, string3: str, string4: str, string5: str, string6: str) -> None: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.utils.generation")``.
 
     AbstractGenerator: typing.Type[AbstractGenerator]
@@ -943,4 +1008,3 @@ class __module_protocol__(typing.Protocol):
     PythonGenerator: typing.Type[PythonGenerator]
     PythonMessageWriter: typing.Type[PythonMessageWriter]
     XmlGenerator: typing.Type[XmlGenerator]
-    class-use: org.orekit.files.ccsds.utils.generation.class-use.__module_protocol__

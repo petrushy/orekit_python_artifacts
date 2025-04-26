@@ -1,10 +1,18 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.net
 import java.util
+import jpype
 import org.orekit.errors
 import org.orekit.gnss.metric.messages
-import org.orekit.gnss.metric.ntrip.class-use
 import org.orekit.gnss.metric.parser
+import org.orekit.time
 import typing
 
 
@@ -60,7 +68,7 @@ class Authentication(java.lang.Enum['Authentication']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['Authentication']:
+    def values() -> typing.MutableSequence['Authentication']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -129,7 +137,7 @@ class CarrierPhase(java.lang.Enum['CarrierPhase']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['CarrierPhase']:
+    def values() -> typing.MutableSequence['CarrierPhase']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -206,7 +214,7 @@ class DataFormat(java.lang.Enum['DataFormat']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['DataFormat']:
+    def values() -> typing.MutableSequence['DataFormat']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -233,7 +241,7 @@ class GnssData:
         Since:
             11.0
     """
-    def __init__(self, byteArray: typing.List[int], int: int): ...
+    def __init__(self, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes], int: int): ...
     def toString(self) -> str:
         """
         
@@ -377,7 +385,7 @@ class NavigationSystem(java.lang.Enum['NavigationSystem']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['NavigationSystem']:
+    def values() -> typing.MutableSequence['NavigationSystem']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -463,8 +471,8 @@ class NtripClient:
     
     
     """
-    def __init__(self, string: str, int: int): ...
-    def addObserver(self, int: int, string: str, messageObserver: MessageObserver) -> None:
+    def __init__(self, string: str, int: int, timeScales: org.orekit.time.TimeScales): ...
+    def addObserver(self, int: int, string: str, messageObserver: typing.Union[MessageObserver, typing.Callable]) -> None:
         """
             Add an observer for an encoded messages.
         
@@ -523,6 +531,19 @@ class NtripClient:
         
             Returns:
                 source table from the caster
+        
+        
+        """
+        ...
+    def getTimeScales(self) -> org.orekit.time.TimeScales:
+        """
+            Get the known time scales.
+        
+            Returns:
+                known time scales
+        
+            Since:
+                13.0
         
         
         """
@@ -674,7 +695,7 @@ class RecordType(java.lang.Enum['RecordType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['RecordType']:
+    def values() -> typing.MutableSequence['RecordType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -725,7 +746,7 @@ class StreamMonitor(org.orekit.gnss.metric.parser.AbstractEncodedMessage, java.l
             11.0
     """
     def __init__(self, ntripClient: NtripClient, string: str, type: 'Type', boolean: bool, boolean2: bool, double: float, double2: float, int: int): ...
-    def addObserver(self, int: int, messageObserver: MessageObserver) -> None:
+    def addObserver(self, int: int, messageObserver: typing.Union[MessageObserver, typing.Callable]) -> None:
         """
             Add an observer for encoded messages.
         
@@ -807,7 +828,7 @@ class Type(java.lang.Enum['Type']):
     """
     RTCM: typing.ClassVar['Type'] = ...
     IGS_SSR: typing.ClassVar['Type'] = ...
-    def getParser(self, list: java.util.List[int]) -> org.orekit.gnss.metric.parser.MessagesParser: ...
+    def getParser(self, list: java.util.List[int], timeScales: org.orekit.time.TimeScales) -> org.orekit.gnss.metric.parser.MessagesParser: ...
     _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
     @typing.overload
     @staticmethod
@@ -833,7 +854,7 @@ class Type(java.lang.Enum['Type']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['Type']:
+    def values() -> typing.MutableSequence['Type']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1332,7 +1353,7 @@ class PythonMessageObserver(MessageObserver):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.gnss.metric.ntrip")``.
 
     Authentication: typing.Type[Authentication]
@@ -1352,4 +1373,3 @@ class __module_protocol__(typing.Protocol):
     StreamMonitor: typing.Type[StreamMonitor]
     StreamedMessage: typing.Type[StreamedMessage]
     Type: typing.Type[Type]
-    class-use: org.orekit.gnss.metric.ntrip.class-use.__module_protocol__

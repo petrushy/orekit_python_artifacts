@@ -1,3 +1,10 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.util
 import org.orekit.bodies
 import org.orekit.rugged.linesensor
@@ -62,7 +69,7 @@ class SensorToSensorMapping:
     def setBodyConstraintWeight(self, double: float) -> None: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.rugged.adjustment.measurements")``.
 
     Observables: typing.Type[Observables]

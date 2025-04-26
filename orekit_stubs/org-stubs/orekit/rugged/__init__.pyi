@@ -1,3 +1,10 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import org.orekit.rugged.adjustment
 import org.orekit.rugged.api
 import org.orekit.rugged.errors
@@ -10,7 +17,7 @@ import org.orekit.rugged.utils
 import typing
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.rugged")``.
 
     adjustment: org.orekit.rugged.adjustment.__module_protocol__

@@ -1,25 +1,32 @@
-import java.io
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
+import java.util.stream
+import jpype
+import org
 import org.hipparchus
 import org.hipparchus.analysis.differentiation
 import org.hipparchus.geometry.euclidean.threed
 import org.hipparchus.ode.events
-import org.orekit.attitudes.class-use
 import org.orekit.bodies
 import org.orekit.frames
 import org.orekit.propagation
 import org.orekit.propagation.events
-import org.orekit.propagation.events.handlers
 import org.orekit.time
 import org.orekit.utils
 import typing
 
 
 
-class Attitude(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Attitude'], java.io.Serializable):
+class Attitude(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Attitude']):
     """
-    public class Attitude extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.attitudes.Attitude`>, :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`
+    public class Attitude extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.attitudes.Attitude`>
     
         This class handles attitude definition at a given date.
     
@@ -33,7 +40,7 @@ class Attitude(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Attit
         The instance :code:`Attitude` is guaranteed to be immutable.
     
         Also see:
-            :class:`~org.orekit.orbits.Orbit`, :class:`~org.orekit.attitudes.AttitudeProvider`, :meth:`~serialized`
+            :class:`~org.orekit.orbits.Orbit`, :class:`~org.orekit.attitudes.AttitudeProvider`
     """
     @typing.overload
     def __init__(self, frame: org.orekit.frames.Frame, timeStampedAngularCoordinates: org.orekit.utils.TimeStampedAngularCoordinates): ...
@@ -120,6 +127,7 @@ class Attitude(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Attit
         
         """
         ...
+    @typing.overload
     def shiftedBy(self, double: float) -> 'Attitude':
         """
             Get a time-shifted attitude.
@@ -137,9 +145,29 @@ class Attitude(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Attit
             Returns:
                 a new attitude, shifted with respect to the instance (which is immutable)
         
+            Get a time-shifted attitude.
+        
+            The state can be slightly shifted to close dates. This shift is based on a linear extrapolation for attitude taking the
+            spin rate into account. It is *not* intended as a replacement for proper attitude propagation but should be sufficient
+            for either small time shifts or coarse accuracy.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeShiftable.shiftedBy` in interface :class:`~org.orekit.time.TimeShiftable`
+        
+            Parameters:
+                dt (:class:`~org.orekit.time.TimeOffset`): time shift
+        
+            Returns:
+                a new attitude, shifted with respect to the instance (which is immutable)
+        
+            Since:
+                13.0
+        
         
         """
         ...
+    @typing.overload
+    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> 'Attitude': ...
     def withReferenceFrame(self, frame: org.orekit.frames.Frame) -> 'Attitude':
         """
             Get a similar attitude with a specific reference frame.
@@ -173,7 +201,7 @@ class AttitudeBuilder:
     """
     _build_1__T = typing.TypeVar('_build_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def build(self, frame: org.orekit.frames.Frame, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, timeStampedAngularCoordinates: org.orekit.utils.TimeStampedAngularCoordinates) -> Attitude:
+    def build(self, frame: org.orekit.frames.Frame, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], timeStampedAngularCoordinates: org.orekit.utils.TimeStampedAngularCoordinates) -> Attitude:
         """
             Build a filtered attitude.
         
@@ -188,7 +216,7 @@ class AttitudeBuilder:
         """
         ...
     @typing.overload
-    def build(self, frame: org.orekit.frames.Frame, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_build_1__T], timeStampedFieldAngularCoordinates: org.orekit.utils.TimeStampedFieldAngularCoordinates[_build_1__T]) -> 'FieldAttitude'[_build_1__T]:
+    def build(self, frame: org.orekit.frames.Frame, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_build_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], timeStampedFieldAngularCoordinates: org.orekit.utils.TimeStampedFieldAngularCoordinates[_build_1__T]) -> 'FieldAttitude'[_build_1__T]:
         """
             Build a filtered attitude.
         
@@ -228,85 +256,79 @@ class AttitudeInterpolator(org.orekit.time.AbstractTimeInterpolator[Attitude]):
         """
         ...
 
-class AttitudeProvider:
+class AttitudeRotationModel(org.orekit.utils.ParameterDriversProvider):
     """
-    public interface AttitudeProvider
+    public interface AttitudeRotationModel extends :class:`~org.orekit.utils.ParameterDriversProvider`
     
-        This interface represents an attitude provider model set.
+        Interface for (attitude) rotation models taking as inputs a spacecraft state and model parameters. The rotation is
+        defined between a reference frame and the satellite one.
     
-        An attitude provider provides a way to compute an :class:`~org.orekit.attitudes.Attitude` from an date and
-        position-velocity local provider.
+        Since:
+            13.0
+    
+        Also see:
+            :class:`~org.orekit.propagation.SpacecraftState`, :class:`~org.orekit.propagation.FieldSpacecraftState`,
+            :class:`~org.orekit.attitudes.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Rotation?is`,
+            :class:`~org.orekit.attitudes.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldRotation?is`,
+            :class:`~org.orekit.attitudes.Attitude`, :class:`~org.orekit.attitudes.FieldAttitude`,
+            :class:`~org.orekit.forces.maneuvers.Maneuver`
     """
-    _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def getAttitude(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
-        """
-            Compute the attitude corresponding to an orbital state.
-        
-            Parameters:
-                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
-        
-            Returns:
-                attitude on the specified date and position-velocity state
-        
-        """
-        ...
-    @typing.overload
-    def getAttitude(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> 'FieldAttitude'[_getAttitude_1__T]:
-        """
-            Compute the attitude corresponding to an orbital state.
-        
-            Parameters:
-                pvProv (:class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T> pvProv): local position-velocity provider around current date
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
-        
-            Returns:
-                attitude on the specified date and position-velocity state
-        
-            Since:
-                9.0
-        
-        
-        """
-        ...
     _getAttitudeRotation_0__T = typing.TypeVar('_getAttitudeRotation_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitudeRotation(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitudeRotation_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitudeRotation_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_0__T]:
+    def getAttitudeRotation(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getAttitudeRotation_0__T], tArray: typing.Union[typing.List[_getAttitudeRotation_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_0__T]:
         """
-            Compute the attitude-related rotation corresponding to an orbital state.
+            Computed the rotation given the input state and parameters' values.
         
             Parameters:
-                pvProv (:class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T> pvProv): local position-velocity provider around current date
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
+                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
+                parameters (T[]): values for parameter drivers
         
             Returns:
-                rotation on the specified date and position-velocity state
-        
-            Since:
-                12.0
+                attitude's rotation
         
         
         """
         ...
     @typing.overload
-    def getAttitudeRotation(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+    def getAttitudeRotation(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Rotation:
         """
-            Compute the attitude-related rotation corresponding to an orbital state.
+            Computed the rotation given the input state and parameters' values.
         
             Parameters:
-                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
+                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
+                parameters (double[]): values for parameter drivers
         
             Returns:
-                attitude-related rotation on the specified date and position-velocity state
+                attitude's rotation
         
-            Since:
-                12.0
+        """
+        ...
+
+class AttitudeSwitchHandler:
+    """
+    :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.FunctionalInterface?is` public interface AttitudeSwitchHandler
+    
+        Interface for attitude switch notifications.
+    
+        This interface is intended to be implemented by users who want to be notified when an attitude switch occurs.
+    
+        Since:
+            13.0
+    
+        Also see:
+            :code:`AbstractSwitchingAttitudeProvider`
+    """
+    def switchOccurred(self, attitudeProvider: 'AttitudeProvider', attitudeProvider2: 'AttitudeProvider', spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
+        """
+            Method called when attitude is switched from one law to another law.
+        
+            Parameters:
+                preceding (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude law used preceding the switch (i.e. in the past of the switch event for a forward propagation, or in the future
+                    of the switch event for a backward propagation)
+                following (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude law used following the switch (i.e. in the future of the switch event for a forward propagation, or in the past
+                    of the switch event for a backward propagation)
+                state (:class:`~org.orekit.propagation.SpacecraftState`): state at switch time (with attitude computed using the past law)
+        
         
         """
         ...
@@ -355,6 +377,8 @@ class FieldAttitude(org.orekit.time.FieldTimeStamped[_FieldAttitude__T], org.ore
     def getRotation(self) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_FieldAttitude__T]: ...
     def getRotationAcceleration(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldAttitude__T]: ...
     def getSpin(self) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_FieldAttitude__T]: ...
+    @typing.overload
+    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> _FieldAttitude__T: ...
     @typing.overload
     def shiftedBy(self, double: float) -> 'FieldAttitude'[_FieldAttitude__T]: ...
     @typing.overload
@@ -588,12 +612,12 @@ class TargetProvider:
     """
     _getDerivative2TargetDirection_0__T = typing.TypeVar('_getDerivative2TargetDirection_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getDerivative2TargetDirection(self, extendedPositionProvider: org.orekit.utils.ExtendedPositionProvider, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_getDerivative2TargetDirection_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2[_getDerivative2TargetDirection_0__T]]: ...
+    def getDerivative2TargetDirection(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_getDerivative2TargetDirection_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2[_getDerivative2TargetDirection_0__T]]: ...
     @typing.overload
-    def getDerivative2TargetDirection(self, extendedPositionProvider: org.orekit.utils.ExtendedPositionProvider, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.UnivariateDerivative2]: ...
+    def getDerivative2TargetDirection(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.UnivariateDerivative2]: ...
     _getTargetDirection_0__T = typing.TypeVar('_getTargetDirection_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getTargetDirection(self, extendedPositionProvider: org.orekit.utils.ExtendedPositionProvider, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_getTargetDirection_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getTargetDirection_0__T]:
+    def getTargetDirection(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_getTargetDirection_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getTargetDirection_0__T]:
         """
             Get a target vector.
         
@@ -610,7 +634,7 @@ class TargetProvider:
         """
         ...
     @typing.overload
-    def getTargetDirection(self, extendedPositionProvider: org.orekit.utils.ExtendedPositionProvider, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def getTargetDirection(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Get a target vector.
         
@@ -626,6 +650,538 @@ class TargetProvider:
         """
         ...
 
+class AttitudeProvider(org.orekit.propagation.events.EventDetectorsProvider, AttitudeRotationModel):
+    """
+    public interface AttitudeProvider extends :class:`~org.orekit.propagation.events.EventDetectorsProvider`, :class:`~org.orekit.attitudes.AttitudeRotationModel`
+    
+        This interface represents an attitude provider model set.
+    
+        An attitude provider provides a way to compute an :class:`~org.orekit.attitudes.Attitude` from an date and
+        position-velocity local provider.
+    """
+    _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getAttitude(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
+        """
+            Compute the attitude corresponding to an orbital state.
+        
+            Parameters:
+                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
+        
+            Returns:
+                attitude on the specified date and position-velocity state
+        
+        """
+        ...
+    @typing.overload
+    def getAttitude(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
+        """
+            Compute the attitude corresponding to an orbital state.
+        
+            Parameters:
+                pvProv (:class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T> pvProv): local position-velocity provider around current date
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
+                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
+        
+            Returns:
+                attitude on the specified date and position-velocity state
+        
+            Since:
+                9.0
+        
+        
+        """
+        ...
+    _getAttitudeRotation_0__T = typing.TypeVar('_getAttitudeRotation_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getAttitudeRotation_1__T = typing.TypeVar('_getAttitudeRotation_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getAttitudeRotation(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getAttitudeRotation_0__T], tArray: typing.Union[typing.List[_getAttitudeRotation_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_0__T]:
+        """
+            Computed the rotation given the input state and parameters' values. The default implementation is independent of the
+            input parameters as by default there is no driver. Users wanting to use them must override this.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeRotationModel.getAttitudeRotation` in
+                interface :class:`~org.orekit.attitudes.AttitudeRotationModel`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
+                parameters (T[]): values for parameter drivers
+        
+            Returns:
+                attitude's rotation
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
+    @typing.overload
+    def getAttitudeRotation(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitudeRotation_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitudeRotation_1__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_1__T]:
+        """
+            Compute the attitude-related rotation corresponding to an orbital state.
+        
+            Parameters:
+                pvProv (:class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T> pvProv): local position-velocity provider around current date
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
+                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
+        
+            Returns:
+                rotation on the specified date and position-velocity state
+        
+            Since:
+                12.0
+        
+        """
+        ...
+    @typing.overload
+    def getAttitudeRotation(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+        """
+            Compute the attitude-related rotation corresponding to an orbital state.
+        
+            Parameters:
+                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
+        
+            Returns:
+                attitude-related rotation on the specified date and position-velocity state
+        
+            Since:
+                12.0
+        
+            Computed the rotation given the input state and parameters' values. The default implementation is independent of the
+            input parameters as by default there is no driver. Users wanting to use them must override this.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeRotationModel.getAttitudeRotation` in
+                interface :class:`~org.orekit.attitudes.AttitudeRotationModel`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
+                parameters (double[]): values for parameter drivers
+        
+            Returns:
+                attitude's rotation
+        
+            Since:
+                13.0
+        
+        """
+        ...
+    @typing.overload
+    def getAttitudeRotation(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
+    @typing.overload
+    def getEventDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
+    @typing.overload
+    def getEventDetectors(self, list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
+    _getFieldEventDetectors_0__T = typing.TypeVar('_getFieldEventDetectors_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getFieldEventDetectors_1__T = typing.TypeVar('_getFieldEventDetectors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_0__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_0__T]]: ...
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_1__T], list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_1__T]]: ...
+    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
+
+class FixedFrameBuilder(AttitudeBuilder):
+    """
+    public class FixedFrameBuilder extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudeBuilder`
+    
+        Builder that assumes angular coordinates are given in a fixed frame.
+    
+        Since:
+            11.0
+    """
+    def __init__(self, frame: org.orekit.frames.Frame): ...
+    _build_1__T = typing.TypeVar('_build_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def build(self, frame: org.orekit.frames.Frame, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], timeStampedAngularCoordinates: org.orekit.utils.TimeStampedAngularCoordinates) -> Attitude:
+        """
+            Build a filtered attitude.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeBuilder.build` in interface :class:`~org.orekit.attitudes.AttitudeBuilder`
+        
+            Parameters:
+                frame (:class:`~org.orekit.frames.Frame`): reference frame with respect to which attitude must be defined
+                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): provider for spacecraft position and velocity
+                rawAttitude (:class:`~org.orekit.utils.TimeStampedAngularCoordinates`): raw rotation/rotation rate/rotation acceleration
+        
+            Returns:
+                filtered attitude
+        
+        """
+        ...
+    @typing.overload
+    def build(self, frame: org.orekit.frames.Frame, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_build_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], timeStampedFieldAngularCoordinates: org.orekit.utils.TimeStampedFieldAngularCoordinates[_build_1__T]) -> FieldAttitude[_build_1__T]:
+        """
+            Build a filtered attitude.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeBuilder.build` in interface :class:`~org.orekit.attitudes.AttitudeBuilder`
+        
+            Parameters:
+                frame (:class:`~org.orekit.frames.Frame`): reference frame with respect to which attitude must be defined
+                pvProv (:class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T> pvProv): provider for spacecraft position and velocity
+                rawAttitude (:class:`~org.orekit.utils.TimeStampedFieldAngularCoordinates`<T> rawAttitude): raw rotation/rotation rate/rotation acceleration
+        
+            Returns:
+                filtered attitude
+        
+        
+        """
+        ...
+
+class GroundPointTarget(TargetProvider):
+    """
+    public class GroundPointTarget extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.TargetProvider`
+    
+        Ground point target for :class:`~org.orekit.attitudes.AlignedAndConstrained`.
+    
+        Since:
+            12.2
+    """
+    def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
+    _getDerivative2TargetDirection_0__T = typing.TypeVar('_getDerivative2TargetDirection_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getDerivative2TargetDirection(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_getDerivative2TargetDirection_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2[_getDerivative2TargetDirection_0__T]]: ...
+    @typing.overload
+    def getDerivative2TargetDirection(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.UnivariateDerivative2]: ...
+    _getTargetDirection_0__T = typing.TypeVar('_getTargetDirection_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getTargetDirection(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_getTargetDirection_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getTargetDirection_0__T]:
+        """
+            Get a target vector.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.TargetProvider.getTargetDirection` in
+                interface :class:`~org.orekit.attitudes.TargetProvider`
+        
+            Parameters:
+                sun (:class:`~org.orekit.utils.ExtendedPositionProvider`): Sun model
+                earth (:class:`~org.orekit.bodies.OneAxisEllipsoid`): Earth model
+                pv (:class:`~org.orekit.utils.TimeStampedFieldPVCoordinates`<T> pv): spacecraft position and velocity
+                frame (:class:`~org.orekit.frames.Frame`): inertial frame
+        
+            Returns:
+                target direction in the spacecraft state frame
+        
+        
+        """
+        ...
+    @typing.overload
+    def getTargetDirection(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+        """
+            Get a target vector.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.TargetProvider.getTargetDirection` in
+                interface :class:`~org.orekit.attitudes.TargetProvider`
+        
+            Parameters:
+                sun (:class:`~org.orekit.utils.ExtendedPositionProvider`): Sun model
+                earth (:class:`~org.orekit.bodies.OneAxisEllipsoid`): Earth model
+                pv (:class:`~org.orekit.utils.TimeStampedPVCoordinates`): spacecraft position and velocity
+                frame (:class:`~org.orekit.frames.Frame`): inertial frame
+        
+            Returns:
+                target direction in the spacecraft state frame
+        
+        """
+        ...
+
+class PredefinedTarget(java.lang.Enum['PredefinedTarget'], TargetProvider):
+    """
+    public enum PredefinedTarget extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.attitudes.PredefinedTarget`> implements :class:`~org.orekit.attitudes.TargetProvider`
+    
+        Predefined targets for :class:`~org.orekit.attitudes.AlignedAndConstrained`.
+    
+        Since:
+            12.2
+    """
+    SUN: typing.ClassVar['PredefinedTarget'] = ...
+    EARTH: typing.ClassVar['PredefinedTarget'] = ...
+    NADIR: typing.ClassVar['PredefinedTarget'] = ...
+    NORTH: typing.ClassVar['PredefinedTarget'] = ...
+    EAST: typing.ClassVar['PredefinedTarget'] = ...
+    VELOCITY: typing.ClassVar['PredefinedTarget'] = ...
+    MOMENTUM: typing.ClassVar['PredefinedTarget'] = ...
+    _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
+    @typing.overload
+    @staticmethod
+    def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
+    @typing.overload
+    @staticmethod
+    def valueOf(string: str) -> 'PredefinedTarget':
+        """
+            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
+            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
+        
+            Parameters:
+                name (:class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
+        
+            Returns:
+                the enum constant with the specified name
+        
+            Raises:
+                :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
+                :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
+        
+        
+        """
+        ...
+    @staticmethod
+    def values() -> typing.MutableSequence['PredefinedTarget']:
+        """
+            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
+            iterate over the constants as follows:
+        
+            .. code-block: java
+            
+            for (PredefinedTarget c : PredefinedTarget.values())
+                System.out.println(c);
+            
+        
+            Returns:
+                an array containing the constants of this enum type, in the order they are declared
+        
+        
+        """
+        ...
+
+class PythonAttitudeBuilder(AttitudeBuilder):
+    """
+    public class PythonAttitudeBuilder extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudeBuilder`
+    """
+    def __init__(self): ...
+    _build_1__T = typing.TypeVar('_build_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def build(self, frame: org.orekit.frames.Frame, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], timeStampedAngularCoordinates: org.orekit.utils.TimeStampedAngularCoordinates) -> Attitude:
+        """
+            Build a filtered attitude.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeBuilder.build` in interface :class:`~org.orekit.attitudes.AttitudeBuilder`
+        
+            Parameters:
+                frame (:class:`~org.orekit.frames.Frame`): reference frame with respect to which attitude must be defined
+                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): provider for spacecraft position and velocity
+                rawAttitude (:class:`~org.orekit.utils.TimeStampedAngularCoordinates`): raw rotation/rotation rate/rotation acceleration
+        
+            Returns:
+                filtered attitude
+        
+        """
+        ...
+    @typing.overload
+    def build(self, frame: org.orekit.frames.Frame, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_build_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], timeStampedFieldAngularCoordinates: org.orekit.utils.TimeStampedFieldAngularCoordinates[_build_1__T]) -> FieldAttitude[_build_1__T]:
+        """
+            Build a filtered attitude.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeBuilder.build` in interface :class:`~org.orekit.attitudes.AttitudeBuilder`
+        
+            Parameters:
+                frame (:class:`~org.orekit.frames.Frame`): reference frame with respect to which attitude must be defined
+                pvProv (:class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T> pvProv): provider for spacecraft position and velocity
+                rawAttitude (:class:`~org.orekit.utils.TimeStampedFieldAngularCoordinates`<T> rawAttitude): raw rotation/rotation rate/rotation acceleration
+        
+            Returns:
+                filtered attitude
+        
+        
+        """
+        ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
+class PythonAttitudeRotationModel(AttitudeRotationModel):
+    """
+    public class PythonAttitudeRotationModel extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudeRotationModel`
+    
+        Python implementation of the AttitudeRotationModel interface. This class is part of the JCC Python interface and exposes
+        all methods natively.
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    _getAttitudeRotation_0__T = typing.TypeVar('_getAttitudeRotation_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getAttitudeRotation(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getAttitudeRotation_0__T], tArray: typing.Union[typing.List[_getAttitudeRotation_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_0__T]:
+        """
+            Computed the rotation given the input state and parameters' values.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeRotationModel.getAttitudeRotation` in
+                interface :class:`~org.orekit.attitudes.AttitudeRotationModel`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
+                parameters (T[]): values for parameter drivers
+        
+            Returns:
+                attitude's rotation
+        
+        
+        """
+        ...
+    @typing.overload
+    def getAttitudeRotation(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+        """
+            Computed the rotation given the input state and parameters' values.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeRotationModel.getAttitudeRotation` in
+                interface :class:`~org.orekit.attitudes.AttitudeRotationModel`
+        
+            Parameters:
+                state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
+                parameters (double[]): values for parameter drivers
+        
+            Returns:
+                attitude's rotation
+        
+        """
+        ...
+    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
+class PythonAttitudeSwitchHandler(AttitudeSwitchHandler):
+    """
+    public class PythonAttitudeSwitchHandler extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudeSwitchHandler`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+    def switchOccurred(self, attitudeProvider: AttitudeProvider, attitudeProvider2: AttitudeProvider, spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
+        """
+            Description copied from interface: :meth:`~org.orekit.attitudes.AttitudeSwitchHandler.switchOccurred`
+            Method called when attitude is switched from one law to another law.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeSwitchHandler.switchOccurred` in
+                interface :class:`~org.orekit.attitudes.AttitudeSwitchHandler`
+        
+            Parameters:
+                preceding (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude law used preceding the switch (i.e. in the past of the switch event for a forward propagation, or in the future
+                    of the switch event for a backward propagation)
+                following (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude law used following the switch (i.e. in the future of the switch event for a forward propagation, or in the past
+                    of the switch event for a backward propagation)
+                state (:class:`~org.orekit.propagation.SpacecraftState`): state at switch time (with attitude computed using the past law)
+        
+        
+        """
+        ...
+
+class PythonTargetProvider(TargetProvider):
+    """
+    public class PythonTargetProvider extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.TargetProvider`
+    
+        Python implementation of the TargetProvider interface. This class is part of the JCC Python interface and exposes all
+        methods natively.
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    _getTargetDirection_1__T = typing.TypeVar('_getTargetDirection_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getTargetDirection(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D: ...
+    @typing.overload
+    def getTargetDirection(self, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_getTargetDirection_1__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getTargetDirection_1__T]:
+        """
+            Get a target vector.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.TargetProvider.getTargetDirection` in
+                interface :class:`~org.orekit.attitudes.TargetProvider`
+        
+            Parameters:
+                sun (:class:`~org.orekit.utils.ExtendedPositionProvider`): Sun model
+                earth (:class:`~org.orekit.bodies.OneAxisEllipsoid`): Earth model
+                pv (:class:`~org.orekit.utils.TimeStampedFieldPVCoordinates`<T> pv): spacecraft position and velocity
+                frame (:class:`~org.orekit.frames.Frame`): inertial frame
+        
+            Returns:
+                target direction in the spacecraft state frame
+        
+        
+        """
+        ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
 class AlignedAndConstrained(AttitudeProvider):
     """
     public class AlignedAndConstrained extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudeProvider`
@@ -635,10 +1191,13 @@ class AlignedAndConstrained(AttitudeProvider):
         Since:
             12.2
     """
-    def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, targetProvider: TargetProvider, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, targetProvider2: TargetProvider, extendedPositionProvider: org.orekit.utils.ExtendedPositionProvider, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid): ...
+    @typing.overload
+    def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, targetProvider: typing.Union[TargetProvider, typing.Callable], vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, targetProvider2: typing.Union[TargetProvider, typing.Callable], frame: org.orekit.frames.Frame, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid): ...
+    @typing.overload
+    def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, targetProvider: typing.Union[TargetProvider, typing.Callable], vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, targetProvider2: typing.Union[TargetProvider, typing.Callable], extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid): ...
     _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitude(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
+    def getAttitude(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -656,7 +1215,7 @@ class AlignedAndConstrained(AttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitude(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
+    def getAttitude(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -675,8 +1234,30 @@ class AlignedAndConstrained(AttitudeProvider):
         """
         ...
     _getAttitudeRotation_0__T = typing.TypeVar('_getAttitudeRotation_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getAttitudeRotation_2__T = typing.TypeVar('_getAttitudeRotation_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitudeRotation(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitudeRotation_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitudeRotation_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_0__T]:
+    def getAttitudeRotation(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getAttitudeRotation_0__T], tArray: typing.Union[typing.List[_getAttitudeRotation_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_0__T]: ...
+    @typing.overload
+    def getAttitudeRotation(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+        """
+            Compute the attitude-related rotation corresponding to an orbital state.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation` in
+                interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Parameters:
+                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
+        
+            Returns:
+                attitude-related rotation on the specified date and position-velocity state
+        
+        """
+        ...
+    @typing.overload
+    def getAttitudeRotation(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitudeRotation_2__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitudeRotation_2__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_2__T]:
         """
             Compute the attitude-related rotation corresponding to an orbital state.
         
@@ -696,24 +1277,7 @@ class AlignedAndConstrained(AttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitudeRotation(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation:
-        """
-            Compute the attitude-related rotation corresponding to an orbital state.
-        
-            Specified by:
-                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation` in
-                interface :class:`~org.orekit.attitudes.AttitudeProvider`
-        
-            Parameters:
-                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
-        
-            Returns:
-                attitude-related rotation on the specified date and position-velocity state
-        
-        """
-        ...
+    def getAttitudeRotation(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
 
 class AttitudeProviderModifier(AttitudeProvider):
     """
@@ -724,6 +1288,54 @@ class AttitudeProviderModifier(AttitudeProvider):
         Since:
             5.1
     """
+    _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getAttitude(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
+        """
+            Compute the attitude corresponding to an orbital state.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitude` in interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Parameters:
+                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
+        
+            Returns:
+                attitude on the specified date and position-velocity state
+        
+        """
+        ...
+    @typing.overload
+    def getAttitude(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
+        """
+            Compute the attitude corresponding to an orbital state.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitude` in interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Parameters:
+                pvProv (:class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T> pvProv): local position-velocity provider around current date
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
+                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
+        
+            Returns:
+                attitude on the specified date and position-velocity state
+        
+        
+        """
+        ...
+    @typing.overload
+    def getEventDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
+    @typing.overload
+    def getEventDetectors(self, list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
+    _getFieldEventDetectors_0__T = typing.TypeVar('_getFieldEventDetectors_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getFieldEventDetectors_1__T = typing.TypeVar('_getFieldEventDetectors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_0__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_0__T]]: ...
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_1__T], list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_1__T]]: ...
     @staticmethod
     def getFrozenAttitudeProvider(attitudeProvider: AttitudeProvider) -> 'AttitudeProviderModifier':
         """
@@ -742,6 +1354,7 @@ class AttitudeProviderModifier(AttitudeProvider):
         
         """
         ...
+    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def getUnderlyingAttitudeProvider(self) -> AttitudeProvider:
         """
             Get the underlying attitude provider.
@@ -752,244 +1365,6 @@ class AttitudeProviderModifier(AttitudeProvider):
         
         """
         ...
-
-class AttitudesSequence(AttitudeProvider):
-    """
-    public class AttitudesSequence extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudeProvider`
-    
-        This classes manages a sequence of different attitude providers that are activated in turn according to switching
-        events.
-    
-        Only one attitude provider in the sequence is in an active state. When one of the switch event associated with the
-        active provider occurs, the active provider becomes the one specified with the event. A simple example is a provider for
-        the sun lighted part of the orbit and another provider for the eclipse time. When the sun lighted provider is active,
-        the eclipse entry event is checked and when it occurs the eclipse provider is activated. When the eclipse provider is
-        active, the eclipse exit event is checked and when it occurs the sun lighted provider is activated again. This sequence
-        is a simple loop.
-    
-        An active attitude provider may have several switch events and next provider settings, leading to different activation
-        patterns depending on which events are triggered first. An example of this feature is handling switches to safe mode if
-        some contingency condition is met, in addition to the nominal switches that correspond to proper operations. Another
-        example is handling of maneuver mode.
-    
-        Note that this attitude provider is stateful, it keeps in memory the sequence of active underlying providers with their
-        switch dates and the transitions from one provider to the other. This implies that this provider should *not* be shared
-        among different propagators at the same time, each propagator should use its own instance of this provider.
-    
-        The sequence kept in memory is reset when :meth:`~org.orekit.attitudes.AttitudesSequence.resetActiveProvider` is called,
-        and only the specify provider is kept. The sequence is also partially reset each time a propagation starts. If a new
-        propagation is started after a first propagation has been run, all the already computed switches that occur after
-        propagation start for forward propagation or before propagation start for backward propagation will be erased. New
-        switches will be computed and applied properly according to the new propagation settings. The already computed switches
-        that are not in covered are kept in memory. This implies that if a propagation is interrupted and restarted in the same
-        direction, then attitude switches will remain in place, ensuring that even if the interruption occurred in the middle of
-        an attitude transition the second propagation will properly complete the transition that was started by the first
-        propagator.
-    
-        Since:
-            5.1
-    """
-    def __init__(self): ...
-    _addSwitchingCondition__T = typing.TypeVar('_addSwitchingCondition__T', bound=org.orekit.propagation.events.EventDetector)  # <T>
-    def addSwitchingCondition(self, attitudeProvider: AttitudeProvider, attitudeProvider2: AttitudeProvider, t: _addSwitchingCondition__T, boolean: bool, boolean2: bool, double: float, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, switchHandler: 'AttitudesSequence.SwitchHandler') -> None:
-        """
-            Add a switching condition between two attitude providers.
-        
-            The :code:`past` and :code:`future` attitude providers are defined with regard to the natural flow of time. This means
-            that if the propagation is forward, the propagator will switch from :code:`past` provider to :code:`future` provider at
-            event occurrence, but if the propagation is backward, the propagator will switch from :code:`future` provider to
-            :code:`past` provider at event occurrence. The transition between the two attitude laws is not instantaneous, the switch
-            event defines the start of the transition (i.e. when leaving the :code:`past` attitude law and entering the interpolated
-            transition law). The end of the transition (i.e. when leaving the interpolating transition law and entering the
-            :code:`future` attitude law) occurs at switch time plus :code:`transitionTime`.
-        
-            An attitude provider may have several different switch events associated to it. Depending on which event is triggered,
-            the appropriate provider is switched to.
-        
-            The switch events specified here must *not* be registered to the propagator directly. The proper way to register these
-            events is to call :meth:`~org.orekit.attitudes.AttitudesSequence.registerSwitchEvents` once after all switching
-            conditions have been set up. The reason for this is that the events will be wrapped before being registered.
-        
-            If the underlying detector has an event handler associated to it, this handler will be triggered (i.e. its
-            :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred` method will be called), *regardless* of the
-            event really triggering an attitude switch or not. As an example, if an eclipse detector is used to switch from day to
-            night attitude mode when entering eclipse, with :code:`switchOnIncrease` set to :code:`false` and
-            :code:`switchOnDecrease` set to :code:`true`. Then a handler set directly at eclipse detector level would be triggered
-            at both eclipse entry and eclipse exit, but attitude switch would occur *only* at eclipse entry. Note that for the sake
-            of symmetry, the transition start and end dates should match for both forward and backward propagation. This implies
-            that for backward propagation, we have to compensate for the :code:`transitionTime` when looking for the event. An
-            unfortunate consequence is that the :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred` method
-            may appear to be called out of sync with respect to the propagation (it will be called when propagator reaches
-            transition end, despite it refers to transition start, as per :code:`transitionTime` compensation), and if the method
-            returns :meth:`~org.orekit.attitudes.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`, it
-            will stop at the end of the transition instead of at the start. For these reasons, it is not recommended to set up an
-            event handler for events that are used to switch attitude. If an event handler is needed for other purposes, a second
-            handler should be registered to the propagator rather than relying on the side effects of attitude switches.
-        
-            The smoothness of the transition between past and future attitude laws can be tuned using the :code:`transitionTime` and
-            :code:`transitionFilter` parameters. The :code:`transitionTime` parameter specifies how much time is spent to switch
-            from one law to the other law. It should be larger than the event
-            :meth:`~org.orekit.propagation.events.EventDetector.getThreshold` in order to ensure attitude continuity. The
-            :code:`transitionFilter` parameter specifies the attitude time derivatives that should match at the boundaries between
-            past attitude law and transition law on one side, and between transition law and future law on the other side.
-            :meth:`~org.orekit.utils.AngularDerivativesFilter.USE_R` means only the rotation should be identical,
-            :meth:`~org.orekit.utils.AngularDerivativesFilter.USE_RR` means both rotation and rotation rate should be identical,
-            :meth:`~org.orekit.utils.AngularDerivativesFilter.USE_RRA` means both rotation, rotation rate and rotation acceleration
-            should be identical. During the transition, the attitude law is computed by interpolating between past attitude law at
-            switch time and future attitude law at current intermediate time.
-        
-            Parameters:
-                past (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude provider applicable for times in the switch event occurrence past
-                future (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude provider applicable for times in the switch event occurrence future
-                switchEvent (T): event triggering the attitude providers switch
-                switchOnIncrease (boolean): if true, switch is triggered on increasing event
-                switchOnDecrease (boolean): if true, switch is triggered on decreasing event
-                transitionTime (double): duration of the transition between the past and future attitude laws
-                transitionFilter (:class:`~org.orekit.utils.AngularDerivativesFilter`): specification of transition law time derivatives that should match past and future attitude laws
-                handler (:class:`~org.orekit.attitudes.AttitudesSequence.SwitchHandler`): handler to call for notifying when switch occurs (may be null)
-        
-            Since:
-                7.1
-        
-        
-        """
-        ...
-    _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def getAttitude(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
-        """
-            Compute the attitude corresponding to an orbital state.
-        
-            Specified by:
-                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitude` in interface :class:`~org.orekit.attitudes.AttitudeProvider`
-        
-            Parameters:
-                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
-        
-            Returns:
-                attitude on the specified date and position-velocity state
-        
-        """
-        ...
-    @typing.overload
-    def getAttitude(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
-        """
-            Compute the attitude corresponding to an orbital state.
-        
-            Specified by:
-                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitude` in interface :class:`~org.orekit.attitudes.AttitudeProvider`
-        
-            Parameters:
-                pvProv (:class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T> pvProv): local position-velocity provider around current date
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
-        
-            Returns:
-                attitude on the specified date and position-velocity state
-        
-        
-        """
-        ...
-    _getAttitudeRotation_0__T = typing.TypeVar('_getAttitudeRotation_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def getAttitudeRotation(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitudeRotation_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitudeRotation_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_0__T]:
-        """
-            Description copied from interface: :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation`
-            Compute the attitude-related rotation corresponding to an orbital state.
-        
-            Specified by:
-                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation` in
-                interface :class:`~org.orekit.attitudes.AttitudeProvider`
-        
-            Parameters:
-                pvProv (:class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T> pvProv): local position-velocity provider around current date
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
-                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
-        
-            Returns:
-                rotation on the specified date and position-velocity state
-        
-        
-        """
-        ...
-    @typing.overload
-    def getAttitudeRotation(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation:
-        """
-            Compute the attitude-related rotation corresponding to an orbital state.
-        
-            Specified by:
-                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation` in
-                interface :class:`~org.orekit.attitudes.AttitudeProvider`
-        
-            Parameters:
-                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
-        
-            Returns:
-                attitude-related rotation on the specified date and position-velocity state
-        
-        """
-        ...
-    def getSwitches(self) -> java.util.List['AttitudesSequence.Switch']: ...
-    _registerSwitchEvents_0__T = typing.TypeVar('_registerSwitchEvents_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def registerSwitchEvents(self, field: org.hipparchus.Field[_registerSwitchEvents_0__T], fieldPropagator: org.orekit.propagation.FieldPropagator[_registerSwitchEvents_0__T]) -> None:
-        """
-            Register all wrapped switch events to the propagator.
-        
-            This method must be called once before propagation, after the switching conditions have been set up by calls to
-            :meth:`~org.orekit.attitudes.AttitudesSequence.addSwitchingCondition`.
-        
-            Parameters:
-                field (:class:`~org.orekit.attitudes.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the elements belong
-                propagator (:class:`~org.orekit.propagation.FieldPropagator`<T> propagator): propagator that will handle the events
-        
-        
-        """
-        ...
-    @typing.overload
-    def registerSwitchEvents(self, propagator: org.orekit.propagation.Propagator) -> None:
-        """
-            Register all wrapped switch events to the propagator.
-        
-            This method must be called once before propagation, after the switching conditions have been set up by calls to
-            :meth:`~org.orekit.attitudes.AttitudesSequence.addSwitchingCondition`.
-        
-            Parameters:
-                propagator (:class:`~org.orekit.propagation.Propagator`): propagator that will handle the events
-        
-        """
-        ...
-    def resetActiveProvider(self, attitudeProvider: AttitudeProvider) -> None:
-        """
-            Reset the active provider.
-        
-            Calling this method clears all already seen switch history, so it should *not* be used during the propagation itself, it
-            is intended to be used only at start
-        
-            Parameters:
-                provider (:class:`~org.orekit.attitudes.AttitudeProvider`): provider to activate
-        
-        
-        """
-        ...
-    class Switch(org.orekit.propagation.events.EventDetector, org.orekit.propagation.events.handlers.EventHandler):
-        def eventOccurred(self, spacecraftState: org.orekit.propagation.SpacecraftState, eventDetector: org.orekit.propagation.events.EventDetector, boolean: bool) -> org.hipparchus.ode.events.Action: ...
-        def g(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float: ...
-        def getHandler(self) -> org.orekit.propagation.events.handlers.EventHandler: ...
-        def getMaxCheckInterval(self) -> org.orekit.propagation.events.AdaptableInterval: ...
-        def getMaxIterationCount(self) -> int: ...
-        def getThreshold(self) -> float: ...
-        @typing.overload
-        def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate, eventDetector: org.orekit.propagation.events.EventDetector) -> None: ...
-        @typing.overload
-        def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None: ...
-        def resetState(self, eventDetector: org.orekit.propagation.events.EventDetector, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.orekit.propagation.SpacecraftState: ...
-    class SwitchHandler:
-        def switchOccurred(self, attitudeProvider: AttitudeProvider, attitudeProvider2: AttitudeProvider, spacecraftState: org.orekit.propagation.SpacecraftState) -> None: ...
 
 class BoundedAttitudeProvider(AttitudeProvider):
     """
@@ -1049,10 +1424,10 @@ class CelestialBodyPointed(AttitudeProvider):
     
         Instances of this class are guaranteed to be immutable.
     """
-    def __init__(self, frame: org.orekit.frames.Frame, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D3: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
+    def __init__(self, frame: org.orekit.frames.Frame, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D3: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
     _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitude(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
+    def getAttitude(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -1070,7 +1445,7 @@ class CelestialBodyPointed(AttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitude(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
+    def getAttitude(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -1089,8 +1464,30 @@ class CelestialBodyPointed(AttitudeProvider):
         """
         ...
     _getAttitudeRotation_0__T = typing.TypeVar('_getAttitudeRotation_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getAttitudeRotation_2__T = typing.TypeVar('_getAttitudeRotation_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitudeRotation(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitudeRotation_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitudeRotation_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_0__T]:
+    def getAttitudeRotation(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getAttitudeRotation_0__T], tArray: typing.Union[typing.List[_getAttitudeRotation_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_0__T]: ...
+    @typing.overload
+    def getAttitudeRotation(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+        """
+            Compute the attitude-related rotation corresponding to an orbital state.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation` in
+                interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Parameters:
+                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
+        
+            Returns:
+                attitude-related rotation on the specified date and position-velocity state
+        
+        """
+        ...
+    @typing.overload
+    def getAttitudeRotation(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitudeRotation_2__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitudeRotation_2__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_2__T]:
         """
             Compute the attitude-related rotation corresponding to an orbital state.
         
@@ -1110,73 +1507,7 @@ class CelestialBodyPointed(AttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitudeRotation(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation:
-        """
-            Compute the attitude-related rotation corresponding to an orbital state.
-        
-            Specified by:
-                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation` in
-                interface :class:`~org.orekit.attitudes.AttitudeProvider`
-        
-            Parameters:
-                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
-        
-            Returns:
-                attitude-related rotation on the specified date and position-velocity state
-        
-        """
-        ...
-
-class FixedFrameBuilder(AttitudeBuilder):
-    """
-    public class FixedFrameBuilder extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudeBuilder`
-    
-        Builder that assumes angular coordinates are given in a fixed frame.
-    
-        Since:
-            11.0
-    """
-    def __init__(self, frame: org.orekit.frames.Frame): ...
-    _build_1__T = typing.TypeVar('_build_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def build(self, frame: org.orekit.frames.Frame, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, timeStampedAngularCoordinates: org.orekit.utils.TimeStampedAngularCoordinates) -> Attitude:
-        """
-            Build a filtered attitude.
-        
-            Specified by:
-                :meth:`~org.orekit.attitudes.AttitudeBuilder.build` in interface :class:`~org.orekit.attitudes.AttitudeBuilder`
-        
-            Parameters:
-                frame (:class:`~org.orekit.frames.Frame`): reference frame with respect to which attitude must be defined
-                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): provider for spacecraft position and velocity
-                rawAttitude (:class:`~org.orekit.utils.TimeStampedAngularCoordinates`): raw rotation/rotation rate/rotation acceleration
-        
-            Returns:
-                filtered attitude
-        
-        """
-        ...
-    @typing.overload
-    def build(self, frame: org.orekit.frames.Frame, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_build_1__T], timeStampedFieldAngularCoordinates: org.orekit.utils.TimeStampedFieldAngularCoordinates[_build_1__T]) -> FieldAttitude[_build_1__T]:
-        """
-            Build a filtered attitude.
-        
-            Specified by:
-                :meth:`~org.orekit.attitudes.AttitudeBuilder.build` in interface :class:`~org.orekit.attitudes.AttitudeBuilder`
-        
-            Parameters:
-                frame (:class:`~org.orekit.frames.Frame`): reference frame with respect to which attitude must be defined
-                pvProv (:class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T> pvProv): provider for spacecraft position and velocity
-                rawAttitude (:class:`~org.orekit.utils.TimeStampedFieldAngularCoordinates`<T> rawAttitude): raw rotation/rotation rate/rotation acceleration
-        
-            Returns:
-                filtered attitude
-        
-        
-        """
-        ...
+    def getAttitudeRotation(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
 
 class FixedRate(AttitudeProvider):
     """
@@ -1192,7 +1523,7 @@ class FixedRate(AttitudeProvider):
     def __init__(self, attitude: Attitude): ...
     _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitude(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
+    def getAttitude(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -1210,7 +1541,7 @@ class FixedRate(AttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitude(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
+    def getAttitude(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -1229,8 +1560,30 @@ class FixedRate(AttitudeProvider):
         """
         ...
     _getAttitudeRotation_0__T = typing.TypeVar('_getAttitudeRotation_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getAttitudeRotation_2__T = typing.TypeVar('_getAttitudeRotation_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitudeRotation(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitudeRotation_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitudeRotation_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_0__T]:
+    def getAttitudeRotation(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getAttitudeRotation_0__T], tArray: typing.Union[typing.List[_getAttitudeRotation_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_0__T]: ...
+    @typing.overload
+    def getAttitudeRotation(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+        """
+            Compute the attitude-related rotation corresponding to an orbital state.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation` in
+                interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Parameters:
+                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
+        
+            Returns:
+                attitude-related rotation on the specified date and position-velocity state
+        
+        """
+        ...
+    @typing.overload
+    def getAttitudeRotation(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitudeRotation_2__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitudeRotation_2__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_2__T]:
         """
             Compute the attitude-related rotation corresponding to an orbital state.
         
@@ -1250,24 +1603,7 @@ class FixedRate(AttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitudeRotation(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation:
-        """
-            Compute the attitude-related rotation corresponding to an orbital state.
-        
-            Specified by:
-                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation` in
-                interface :class:`~org.orekit.attitudes.AttitudeProvider`
-        
-            Parameters:
-                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
-        
-            Returns:
-                attitude-related rotation on the specified date and position-velocity state
-        
-        """
-        ...
+    def getAttitudeRotation(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
     def getReferenceAttitude(self) -> Attitude:
         """
             Get the reference attitude.
@@ -1295,7 +1631,7 @@ class FrameAlignedProvider(AttitudeProvider):
     def __init__(self, frame: org.orekit.frames.Frame): ...
     _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitude(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
+    def getAttitude(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -1313,7 +1649,7 @@ class FrameAlignedProvider(AttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitude(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
+    def getAttitude(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -1332,8 +1668,30 @@ class FrameAlignedProvider(AttitudeProvider):
         """
         ...
     _getAttitudeRotation_0__T = typing.TypeVar('_getAttitudeRotation_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getAttitudeRotation_2__T = typing.TypeVar('_getAttitudeRotation_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitudeRotation(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitudeRotation_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitudeRotation_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_0__T]:
+    def getAttitudeRotation(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getAttitudeRotation_0__T], tArray: typing.Union[typing.List[_getAttitudeRotation_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_0__T]: ...
+    @typing.overload
+    def getAttitudeRotation(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+        """
+            Compute the attitude-related rotation corresponding to an orbital state.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation` in
+                interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Parameters:
+                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
+        
+            Returns:
+                attitude-related rotation on the specified date and position-velocity state
+        
+        """
+        ...
+    @typing.overload
+    def getAttitudeRotation(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitudeRotation_2__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitudeRotation_2__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_2__T]:
         """
             Compute the attitude-related rotation corresponding to an orbital state.
         
@@ -1353,24 +1711,7 @@ class FrameAlignedProvider(AttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitudeRotation(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation:
-        """
-            Compute the attitude-related rotation corresponding to an orbital state.
-        
-            Specified by:
-                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation` in
-                interface :class:`~org.orekit.attitudes.AttitudeProvider`
-        
-            Parameters:
-                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
-        
-            Returns:
-                attitude-related rotation on the specified date and position-velocity state
-        
-        """
-        ...
+    def getAttitudeRotation(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
     @staticmethod
     def of(frame: org.orekit.frames.Frame) -> AttitudeProvider:
         """
@@ -1394,64 +1735,6 @@ class FrameAlignedProvider(AttitudeProvider):
         """
         ...
 
-class GroundPointTarget(TargetProvider):
-    """
-    public class GroundPointTarget extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.TargetProvider`
-    
-        Ground point target for :class:`~org.orekit.attitudes.AlignedAndConstrained`.
-    
-        Since:
-            12.2
-    """
-    def __init__(self, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
-    _getDerivative2TargetDirection_0__T = typing.TypeVar('_getDerivative2TargetDirection_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def getDerivative2TargetDirection(self, extendedPositionProvider: org.orekit.utils.ExtendedPositionProvider, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_getDerivative2TargetDirection_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.FieldUnivariateDerivative2[_getDerivative2TargetDirection_0__T]]: ...
-    @typing.overload
-    def getDerivative2TargetDirection(self, extendedPositionProvider: org.orekit.utils.ExtendedPositionProvider, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[org.hipparchus.analysis.differentiation.UnivariateDerivative2]: ...
-    _getTargetDirection_0__T = typing.TypeVar('_getTargetDirection_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def getTargetDirection(self, extendedPositionProvider: org.orekit.utils.ExtendedPositionProvider, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_getTargetDirection_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getTargetDirection_0__T]:
-        """
-            Get a target vector.
-        
-            Specified by:
-                :meth:`~org.orekit.attitudes.TargetProvider.getTargetDirection` in
-                interface :class:`~org.orekit.attitudes.TargetProvider`
-        
-            Parameters:
-                sun (:class:`~org.orekit.utils.ExtendedPositionProvider`): Sun model
-                earth (:class:`~org.orekit.bodies.OneAxisEllipsoid`): Earth model
-                pv (:class:`~org.orekit.utils.TimeStampedFieldPVCoordinates`<T> pv): spacecraft position and velocity
-                frame (:class:`~org.orekit.frames.Frame`): inertial frame
-        
-            Returns:
-                target direction in the spacecraft state frame
-        
-        
-        """
-        ...
-    @typing.overload
-    def getTargetDirection(self, extendedPositionProvider: org.orekit.utils.ExtendedPositionProvider, oneAxisEllipsoid: org.orekit.bodies.OneAxisEllipsoid, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
-        """
-            Get a target vector.
-        
-            Specified by:
-                :meth:`~org.orekit.attitudes.TargetProvider.getTargetDirection` in
-                interface :class:`~org.orekit.attitudes.TargetProvider`
-        
-            Parameters:
-                sun (:class:`~org.orekit.utils.ExtendedPositionProvider`): Sun model
-                earth (:class:`~org.orekit.bodies.OneAxisEllipsoid`): Earth model
-                pv (:class:`~org.orekit.utils.TimeStampedPVCoordinates`): spacecraft position and velocity
-                frame (:class:`~org.orekit.frames.Frame`): inertial frame
-        
-            Returns:
-                target direction in the spacecraft state frame
-        
-        """
-        ...
-
 class GroundPointing(AttitudeProvider):
     """
     public abstract class GroundPointing extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudeProvider`
@@ -1468,7 +1751,7 @@ class GroundPointing(AttitudeProvider):
     """
     _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitude(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
+    def getAttitude(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -1486,7 +1769,7 @@ class GroundPointing(AttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitude(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
+    def getAttitude(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -1505,8 +1788,30 @@ class GroundPointing(AttitudeProvider):
         """
         ...
     _getAttitudeRotation_0__T = typing.TypeVar('_getAttitudeRotation_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getAttitudeRotation_2__T = typing.TypeVar('_getAttitudeRotation_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitudeRotation(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitudeRotation_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitudeRotation_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_0__T]:
+    def getAttitudeRotation(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getAttitudeRotation_0__T], tArray: typing.Union[typing.List[_getAttitudeRotation_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_0__T]: ...
+    @typing.overload
+    def getAttitudeRotation(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+        """
+            Compute the attitude-related rotation corresponding to an orbital state.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation` in
+                interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Parameters:
+                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
+        
+            Returns:
+                attitude-related rotation on the specified date and position-velocity state
+        
+        """
+        ...
+    @typing.overload
+    def getAttitudeRotation(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitudeRotation_2__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitudeRotation_2__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_2__T]:
         """
             Compute the attitude-related rotation corresponding to an orbital state.
         
@@ -1526,24 +1831,7 @@ class GroundPointing(AttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitudeRotation(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation:
-        """
-            Compute the attitude-related rotation corresponding to an orbital state.
-        
-            Specified by:
-                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation` in
-                interface :class:`~org.orekit.attitudes.AttitudeProvider`
-        
-            Parameters:
-                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
-        
-            Returns:
-                attitude-related rotation on the specified date and position-velocity state
-        
-        """
-        ...
+    def getAttitudeRotation(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
     def getBodyFrame(self) -> org.orekit.frames.Frame:
         """
             Get the body frame.
@@ -1569,7 +1857,7 @@ class LofOffset(AttitudeProvider):
     def __init__(self, frame: org.orekit.frames.Frame, lOF: org.orekit.frames.LOF, rotationOrder: org.hipparchus.geometry.euclidean.threed.RotationOrder, double: float, double2: float, double3: float): ...
     _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitude(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
+    def getAttitude(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -1587,7 +1875,7 @@ class LofOffset(AttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitude(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
+    def getAttitude(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -1606,8 +1894,30 @@ class LofOffset(AttitudeProvider):
         """
         ...
     _getAttitudeRotation_0__T = typing.TypeVar('_getAttitudeRotation_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getAttitudeRotation_2__T = typing.TypeVar('_getAttitudeRotation_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitudeRotation(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitudeRotation_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitudeRotation_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_0__T]:
+    def getAttitudeRotation(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getAttitudeRotation_0__T], tArray: typing.Union[typing.List[_getAttitudeRotation_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_0__T]: ...
+    @typing.overload
+    def getAttitudeRotation(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+        """
+            Compute the attitude-related rotation corresponding to an orbital state.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation` in
+                interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Parameters:
+                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
+        
+            Returns:
+                attitude-related rotation on the specified date and position-velocity state
+        
+        """
+        ...
+    @typing.overload
+    def getAttitudeRotation(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitudeRotation_2__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitudeRotation_2__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_2__T]:
         """
             Compute the attitude-related rotation corresponding to an orbital state.
         
@@ -1627,24 +1937,7 @@ class LofOffset(AttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitudeRotation(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation:
-        """
-            Compute the attitude-related rotation corresponding to an orbital state.
-        
-            Specified by:
-                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation` in
-                interface :class:`~org.orekit.attitudes.AttitudeProvider`
-        
-            Parameters:
-                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
-        
-            Returns:
-                attitude-related rotation on the specified date and position-velocity state
-        
-        """
-        ...
+    def getAttitudeRotation(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
     def getInertialFrame(self) -> org.orekit.frames.Frame:
         """
             Get the inertial frame.
@@ -1676,129 +1969,6 @@ class LofOffset(AttitudeProvider):
         """
         ...
 
-class PredefinedTarget(java.lang.Enum['PredefinedTarget'], TargetProvider):
-    """
-    public enum PredefinedTarget extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Enum?is`<:class:`~org.orekit.attitudes.PredefinedTarget`> implements :class:`~org.orekit.attitudes.TargetProvider`
-    
-        Predefined targets for :class:`~org.orekit.attitudes.AlignedAndConstrained`.
-    
-        Since:
-            12.2
-    """
-    SUN: typing.ClassVar['PredefinedTarget'] = ...
-    EARTH: typing.ClassVar['PredefinedTarget'] = ...
-    NADIR: typing.ClassVar['PredefinedTarget'] = ...
-    NORTH: typing.ClassVar['PredefinedTarget'] = ...
-    EAST: typing.ClassVar['PredefinedTarget'] = ...
-    VELOCITY: typing.ClassVar['PredefinedTarget'] = ...
-    MOMENTUM: typing.ClassVar['PredefinedTarget'] = ...
-    _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
-    @typing.overload
-    @staticmethod
-    def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
-    @typing.overload
-    @staticmethod
-    def valueOf(string: str) -> 'PredefinedTarget':
-        """
-            Returns the enum constant of this type with the specified name. The string must match *exactly* an identifier used to
-            declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)
-        
-            Parameters:
-                name (:class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): the name of the enum constant to be returned.
-        
-            Returns:
-                the enum constant with the specified name
-        
-            Raises:
-                :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.IllegalArgumentException?is`: if this enum type has no constant with the specified name
-                :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.NullPointerException?is`: if the argument is null
-        
-        
-        """
-        ...
-    @staticmethod
-    def values() -> typing.List['PredefinedTarget']:
-        """
-            Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
-            iterate over the constants as follows:
-        
-            .. code-block: java
-            
-            for (PredefinedTarget c : PredefinedTarget.values())
-                System.out.println(c);
-            
-        
-            Returns:
-                an array containing the constants of this enum type, in the order they are declared
-        
-        
-        """
-        ...
-
-class PythonAttitudeBuilder(AttitudeBuilder):
-    """
-    public class PythonAttitudeBuilder extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudeBuilder`
-    """
-    def __init__(self): ...
-    _build_1__T = typing.TypeVar('_build_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def build(self, frame: org.orekit.frames.Frame, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, timeStampedAngularCoordinates: org.orekit.utils.TimeStampedAngularCoordinates) -> Attitude:
-        """
-            Build a filtered attitude.
-        
-            Specified by:
-                :meth:`~org.orekit.attitudes.AttitudeBuilder.build` in interface :class:`~org.orekit.attitudes.AttitudeBuilder`
-        
-            Parameters:
-                frame (:class:`~org.orekit.frames.Frame`): reference frame with respect to which attitude must be defined
-                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): provider for spacecraft position and velocity
-                rawAttitude (:class:`~org.orekit.utils.TimeStampedAngularCoordinates`): raw rotation/rotation rate/rotation acceleration
-        
-            Returns:
-                filtered attitude
-        
-        """
-        ...
-    @typing.overload
-    def build(self, frame: org.orekit.frames.Frame, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_build_1__T], timeStampedFieldAngularCoordinates: org.orekit.utils.TimeStampedFieldAngularCoordinates[_build_1__T]) -> FieldAttitude[_build_1__T]:
-        """
-            Build a filtered attitude.
-        
-            Specified by:
-                :meth:`~org.orekit.attitudes.AttitudeBuilder.build` in interface :class:`~org.orekit.attitudes.AttitudeBuilder`
-        
-            Parameters:
-                frame (:class:`~org.orekit.frames.Frame`): reference frame with respect to which attitude must be defined
-                pvProv (:class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T> pvProv): provider for spacecraft position and velocity
-                rawAttitude (:class:`~org.orekit.utils.TimeStampedFieldAngularCoordinates`<T> rawAttitude): raw rotation/rotation rate/rotation acceleration
-        
-            Returns:
-                filtered attitude
-        
-        
-        """
-        ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-
 class PythonAttitudeProvider(AttitudeProvider):
     """
     public class PythonAttitudeProvider extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudeProvider`
@@ -1807,7 +1977,7 @@ class PythonAttitudeProvider(AttitudeProvider):
     def finalize(self) -> None: ...
     _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitude(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
+    def getAttitude(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -1825,7 +1995,7 @@ class PythonAttitudeProvider(AttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitude(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
+    def getAttitude(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -1894,7 +2064,7 @@ class TorqueFree(AttitudeProvider):
     def __init__(self, attitude: Attitude, inertia: Inertia): ...
     _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitude(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
+    def getAttitude(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -1912,7 +2082,7 @@ class TorqueFree(AttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitude(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
+    def getAttitude(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -1961,10 +2131,10 @@ class AggregateBoundedAttitudeProvider(BoundedAttitudeProvider):
         Since:
             10.3
     """
-    def __init__(self, collection: typing.Union[java.util.Collection[BoundedAttitudeProvider], typing.Sequence[BoundedAttitudeProvider]]): ...
+    def __init__(self, collection: typing.Union[java.util.Collection[BoundedAttitudeProvider], typing.Sequence[BoundedAttitudeProvider], typing.Set[BoundedAttitudeProvider]]): ...
     _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitude(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
+    def getAttitude(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -1982,7 +2152,7 @@ class AggregateBoundedAttitudeProvider(BoundedAttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitude(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
+    def getAttitude(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -2001,8 +2171,30 @@ class AggregateBoundedAttitudeProvider(BoundedAttitudeProvider):
         """
         ...
     _getAttitudeRotation_0__T = typing.TypeVar('_getAttitudeRotation_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getAttitudeRotation_2__T = typing.TypeVar('_getAttitudeRotation_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitudeRotation(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitudeRotation_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitudeRotation_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_0__T]:
+    def getAttitudeRotation(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getAttitudeRotation_0__T], tArray: typing.Union[typing.List[_getAttitudeRotation_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_0__T]: ...
+    @typing.overload
+    def getAttitudeRotation(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+        """
+            Compute the attitude-related rotation corresponding to an orbital state.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation` in
+                interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Parameters:
+                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
+        
+            Returns:
+                attitude-related rotation on the specified date and position-velocity state
+        
+        """
+        ...
+    @typing.overload
+    def getAttitudeRotation(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitudeRotation_2__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitudeRotation_2__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_2__T]:
         """
             Compute the attitude-related rotation corresponding to an orbital state.
         
@@ -2022,24 +2214,17 @@ class AggregateBoundedAttitudeProvider(BoundedAttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitudeRotation(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation:
-        """
-            Compute the attitude-related rotation corresponding to an orbital state.
-        
-            Specified by:
-                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation` in
-                interface :class:`~org.orekit.attitudes.AttitudeProvider`
-        
-            Parameters:
-                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
-        
-            Returns:
-                attitude-related rotation on the specified date and position-velocity state
-        
-        """
-        ...
+    def getAttitudeRotation(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
+    @typing.overload
+    def getEventDetectors(self, list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
+    @typing.overload
+    def getEventDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
+    _getFieldEventDetectors_0__T = typing.TypeVar('_getFieldEventDetectors_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getFieldEventDetectors_1__T = typing.TypeVar('_getFieldEventDetectors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_0__T], list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_0__T]]: ...
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_1__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_1__T]]: ...
     def getMaxDate(self) -> org.orekit.time.AbsoluteDate:
         """
             Get the last date of the range.
@@ -2069,6 +2254,7 @@ class AggregateBoundedAttitudeProvider(BoundedAttitudeProvider):
         
         """
         ...
+    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
 
 class BodyCenterPointing(GroundPointing):
     """
@@ -2086,7 +2272,7 @@ class BodyCenterPointing(GroundPointing):
     def __init__(self, frame: org.orekit.frames.Frame, ellipsoid: org.orekit.bodies.Ellipsoid): ...
     _getTargetPV_0__T = typing.TypeVar('_getTargetPV_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getTargetPV(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getTargetPV_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTargetPV_0__T], frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_getTargetPV_0__T]:
+    def getTargetPV(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getTargetPV_0__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTargetPV_0__T], frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_getTargetPV_0__T]:
         """
             Compute the target point position/velocity in specified frame.
         
@@ -2105,7 +2291,7 @@ class BodyCenterPointing(GroundPointing):
         """
         ...
     @typing.overload
-    def getTargetPV(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates:
+    def getTargetPV(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates:
         """
             Compute the target point position/velocity in specified frame.
         
@@ -2137,7 +2323,7 @@ class GroundPointingAttitudeModifier(GroundPointing, AttitudeProviderModifier):
     """
     _getBaseState_1__T = typing.TypeVar('_getBaseState_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getBaseState(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
+    def getBaseState(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
         """
             Compute the base system state at given date, without modifications.
         
@@ -2152,7 +2338,7 @@ class GroundPointingAttitudeModifier(GroundPointing, AttitudeProviderModifier):
         """
         ...
     @typing.overload
-    def getBaseState(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getBaseState_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getBaseState_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getBaseState_1__T]:
+    def getBaseState(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getBaseState_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getBaseState_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getBaseState_1__T]:
         """
             Compute the base system state at given date, without modifications.
         
@@ -2169,7 +2355,7 @@ class GroundPointingAttitudeModifier(GroundPointing, AttitudeProviderModifier):
         ...
     _getTargetPV_0__T = typing.TypeVar('_getTargetPV_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getTargetPV(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getTargetPV_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTargetPV_0__T], frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_getTargetPV_0__T]:
+    def getTargetPV(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getTargetPV_0__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTargetPV_0__T], frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_getTargetPV_0__T]:
         """
             Compute the target point position/velocity in specified frame.
         
@@ -2188,7 +2374,7 @@ class GroundPointingAttitudeModifier(GroundPointing, AttitudeProviderModifier):
         """
         ...
     @typing.overload
-    def getTargetPV(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates:
+    def getTargetPV(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates:
         """
             Compute the target point position/velocity in specified frame.
         
@@ -2231,7 +2417,7 @@ class LofOffsetPointing(GroundPointing):
     def __init__(self, frame: org.orekit.frames.Frame, bodyShape: org.orekit.bodies.BodyShape, attitudeProvider: AttitudeProvider, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
     _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitude(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
+    def getAttitude(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -2252,7 +2438,7 @@ class LofOffsetPointing(GroundPointing):
         """
         ...
     @typing.overload
-    def getAttitude(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
+    def getAttitude(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -2274,8 +2460,33 @@ class LofOffsetPointing(GroundPointing):
         """
         ...
     _getAttitudeRotation_0__T = typing.TypeVar('_getAttitudeRotation_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getAttitudeRotation_2__T = typing.TypeVar('_getAttitudeRotation_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitudeRotation(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitudeRotation_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitudeRotation_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_0__T]:
+    def getAttitudeRotation(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getAttitudeRotation_0__T], tArray: typing.Union[typing.List[_getAttitudeRotation_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_0__T]: ...
+    @typing.overload
+    def getAttitudeRotation(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+        """
+            Compute the attitude-related rotation corresponding to an orbital state.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation` in
+                interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Overrides:
+                :meth:`~org.orekit.attitudes.GroundPointing.getAttitudeRotation` in class :class:`~org.orekit.attitudes.GroundPointing`
+        
+            Parameters:
+                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
+        
+            Returns:
+                attitude-related rotation on the specified date and position-velocity state
+        
+        """
+        ...
+    @typing.overload
+    def getAttitudeRotation(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitudeRotation_2__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitudeRotation_2__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_2__T]:
         """
             Compute the attitude-related rotation corresponding to an orbital state.
         
@@ -2298,30 +2509,10 @@ class LofOffsetPointing(GroundPointing):
         """
         ...
     @typing.overload
-    def getAttitudeRotation(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation:
-        """
-            Compute the attitude-related rotation corresponding to an orbital state.
-        
-            Specified by:
-                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation` in
-                interface :class:`~org.orekit.attitudes.AttitudeProvider`
-        
-            Overrides:
-                :meth:`~org.orekit.attitudes.GroundPointing.getAttitudeRotation` in class :class:`~org.orekit.attitudes.GroundPointing`
-        
-            Parameters:
-                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
-        
-            Returns:
-                attitude-related rotation on the specified date and position-velocity state
-        
-        """
-        ...
+    def getAttitudeRotation(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
     _getTargetPV_0__T = typing.TypeVar('_getTargetPV_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getTargetPV(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getTargetPV_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTargetPV_0__T], frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_getTargetPV_0__T]:
+    def getTargetPV(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getTargetPV_0__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTargetPV_0__T], frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_getTargetPV_0__T]:
         """
             Compute the target point position/velocity in specified frame.
         
@@ -2340,7 +2531,7 @@ class LofOffsetPointing(GroundPointing):
         """
         ...
     @typing.overload
-    def getTargetPV(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates:
+    def getTargetPV(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates:
         """
             Compute the target point position/velocity in specified frame.
         
@@ -2375,7 +2566,7 @@ class NadirPointing(GroundPointing):
     def __init__(self, frame: org.orekit.frames.Frame, bodyShape: org.orekit.bodies.BodyShape): ...
     _getTargetPV_0__T = typing.TypeVar('_getTargetPV_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getTargetPV(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getTargetPV_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTargetPV_0__T], frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_getTargetPV_0__T]:
+    def getTargetPV(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getTargetPV_0__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTargetPV_0__T], frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_getTargetPV_0__T]:
         """
             Compute the target point position/velocity in specified frame.
         
@@ -2394,7 +2585,7 @@ class NadirPointing(GroundPointing):
         """
         ...
     @typing.overload
-    def getTargetPV(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates:
+    def getTargetPV(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates:
         """
             Compute the target point position/velocity in specified frame.
         
@@ -2413,7 +2604,7 @@ class NadirPointing(GroundPointing):
         ...
     _getTargetPVViaInterpolation_0__T = typing.TypeVar('_getTargetPVViaInterpolation_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getTargetPVViaInterpolation(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getTargetPVViaInterpolation_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTargetPVViaInterpolation_0__T], frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_getTargetPVViaInterpolation_0__T]:
+    def getTargetPVViaInterpolation(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getTargetPVViaInterpolation_0__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTargetPVViaInterpolation_0__T], frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_getTargetPVViaInterpolation_0__T]:
         """
             Compute target position-velocity-acceleration vector via interpolation (Field version).
         
@@ -2429,7 +2620,7 @@ class NadirPointing(GroundPointing):
         """
         ...
     @typing.overload
-    def getTargetPVViaInterpolation(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates:
+    def getTargetPVViaInterpolation(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates:
         """
             Compute target position-velocity-acceleration vector via interpolation.
         
@@ -2452,12 +2643,16 @@ class PythonAttitudeProviderModifier(AttitudeProviderModifier):
     def finalize(self) -> None: ...
     _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitude(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
+    def getAttitude(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
         """
             Compute the attitude corresponding to an orbital state.
         
             Specified by:
                 :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitude` in interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProviderModifier.getAttitude` in
+                interface :class:`~org.orekit.attitudes.AttitudeProviderModifier`
         
             Parameters:
                 pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
@@ -2470,12 +2665,16 @@ class PythonAttitudeProviderModifier(AttitudeProviderModifier):
         """
         ...
     @typing.overload
-    def getAttitude(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
+    def getAttitude(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
         """
             Compute the attitude corresponding to an orbital state.
         
             Specified by:
                 :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitude` in interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProviderModifier.getAttitude` in
+                interface :class:`~org.orekit.attitudes.AttitudeProviderModifier`
         
             Parameters:
                 pvProv (:class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T> pvProv): local position-velocity provider around current date
@@ -2530,7 +2729,7 @@ class PythonBoundedAttitudeProvider(BoundedAttitudeProvider):
     def finalize(self) -> None: ...
     _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitude(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
+    def getAttitude(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -2548,7 +2747,7 @@ class PythonBoundedAttitudeProvider(BoundedAttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitude(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
+    def getAttitude(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -2622,7 +2821,7 @@ class PythonGroundPointing(GroundPointing):
     def finalize(self) -> None: ...
     _getTargetPV_0__T = typing.TypeVar('_getTargetPV_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getTargetPV(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getTargetPV_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTargetPV_0__T], frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_getTargetPV_0__T]:
+    def getTargetPV(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getTargetPV_0__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTargetPV_0__T], frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_getTargetPV_0__T]:
         """
             Compute the target point position/velocity in specified frame.
         
@@ -2641,7 +2840,7 @@ class PythonGroundPointing(GroundPointing):
         """
         ...
     @typing.overload
-    def getTargetPV(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates:
+    def getTargetPV(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates:
         """
             Compute the target point position/velocity in specified frame.
         
@@ -2678,50 +2877,6 @@ class PythonGroundPointing(GroundPointing):
         """
         ...
 
-class PythonSwitchHandler(AttitudesSequence.SwitchHandler):
-    """
-    public class PythonSwitchHandler extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudesSequence.SwitchHandler`
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def switchOccurred(self, attitudeProvider: AttitudeProvider, attitudeProvider2: AttitudeProvider, spacecraftState: org.orekit.propagation.SpacecraftState) -> None:
-        """
-            Method called when attitude is switched from one law to another law.
-        
-            Specified by:
-                :meth:`~org.orekit.attitudes.AttitudesSequence.SwitchHandler.switchOccurred` in
-                interface :class:`~org.orekit.attitudes.AttitudesSequence.SwitchHandler`
-        
-            Parameters:
-                preceding (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude law used preceding the switch (i.e. in the past of the switch event for a forward propagation, or in the future
-                    of the switch event for a backward propagation)
-                following (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude law used following the switch (i.e. in the future of the switch event for a forward propagation, or in the past
-                    of the switch event for a backward propagation)
-                state (:class:`~org.orekit.propagation.SpacecraftState`): state at switch time (with attitude computed using the :code:`preceding` law)
-        
-        
-        """
-        ...
-
 class SpinStabilized(AttitudeProviderModifier):
     """
     public class SpinStabilized extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.attitudes.AttitudeProviderModifier`
@@ -2737,12 +2892,16 @@ class SpinStabilized(AttitudeProviderModifier):
     def __init__(self, attitudeProvider: AttitudeProvider, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, double: float): ...
     _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitude(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
+    def getAttitude(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
         """
             Compute the attitude corresponding to an orbital state.
         
             Specified by:
                 :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitude` in interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProviderModifier.getAttitude` in
+                interface :class:`~org.orekit.attitudes.AttitudeProviderModifier`
         
             Parameters:
                 pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
@@ -2755,12 +2914,16 @@ class SpinStabilized(AttitudeProviderModifier):
         """
         ...
     @typing.overload
-    def getAttitude(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
+    def getAttitude(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
         """
             Compute the attitude corresponding to an orbital state.
         
             Specified by:
                 :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitude` in interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProviderModifier.getAttitude` in
+                interface :class:`~org.orekit.attitudes.AttitudeProviderModifier`
         
             Parameters:
                 pvProv (:class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T> pvProv): local position-velocity provider around current date
@@ -2774,8 +2937,30 @@ class SpinStabilized(AttitudeProviderModifier):
         """
         ...
     _getAttitudeRotation_0__T = typing.TypeVar('_getAttitudeRotation_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getAttitudeRotation_2__T = typing.TypeVar('_getAttitudeRotation_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitudeRotation(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitudeRotation_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitudeRotation_0__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_0__T]:
+    def getAttitudeRotation(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getAttitudeRotation_0__T], tArray: typing.Union[typing.List[_getAttitudeRotation_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_0__T]: ...
+    @typing.overload
+    def getAttitudeRotation(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+        """
+            Compute the attitude-related rotation corresponding to an orbital state.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation` in
+                interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Parameters:
+                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
+        
+            Returns:
+                attitude-related rotation on the specified date and position-velocity state
+        
+        """
+        ...
+    @typing.overload
+    def getAttitudeRotation(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitudeRotation_2__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitudeRotation_2__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_2__T]:
         """
             Compute the attitude-related rotation corresponding to an orbital state.
         
@@ -2795,24 +2980,7 @@ class SpinStabilized(AttitudeProviderModifier):
         """
         ...
     @typing.overload
-    def getAttitudeRotation(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation:
-        """
-            Compute the attitude-related rotation corresponding to an orbital state.
-        
-            Specified by:
-                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation` in
-                interface :class:`~org.orekit.attitudes.AttitudeProvider`
-        
-            Parameters:
-                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
-        
-            Returns:
-                attitude-related rotation on the specified date and position-velocity state
-        
-        """
-        ...
+    def getAttitudeRotation(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
     def getUnderlyingAttitudeProvider(self) -> AttitudeProvider:
         """
             Get the underlying attitude provider.
@@ -2849,7 +3017,7 @@ class TabulatedLofOffset(BoundedAttitudeProvider):
     def __init__(self, frame: org.orekit.frames.Frame, lOF: org.orekit.frames.LOF, list: java.util.List[org.orekit.utils.TimeStampedAngularCoordinates], int: int, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, absoluteDate: org.orekit.time.AbsoluteDate, absoluteDate2: org.orekit.time.AbsoluteDate): ...
     _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitude(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
+    def getAttitude(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -2867,7 +3035,7 @@ class TabulatedLofOffset(BoundedAttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitude(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
+    def getAttitude(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -2935,7 +3103,7 @@ class TabulatedProvider(BoundedAttitudeProvider):
     def __init__(self, frame: org.orekit.frames.Frame, list: java.util.List[org.orekit.utils.TimeStampedAngularCoordinates], int: int, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter): ...
     _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitude(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
+    def getAttitude(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -2953,7 +3121,7 @@ class TabulatedProvider(BoundedAttitudeProvider):
         """
         ...
     @typing.overload
-    def getAttitude(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
+    def getAttitude(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
         """
             Compute the attitude corresponding to an orbital state.
         
@@ -3022,7 +3190,7 @@ class TargetPointing(GroundPointing):
     def __init__(self, frame: org.orekit.frames.Frame, frame2: org.orekit.frames.Frame, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
     _getTargetPV_0__T = typing.TypeVar('_getTargetPV_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getTargetPV(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getTargetPV_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTargetPV_0__T], frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_getTargetPV_0__T]:
+    def getTargetPV(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getTargetPV_0__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getTargetPV_0__T], frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedFieldPVCoordinates[_getTargetPV_0__T]:
         """
             Compute the target point position/velocity in specified frame.
         
@@ -3041,7 +3209,7 @@ class TargetPointing(GroundPointing):
         """
         ...
     @typing.overload
-    def getTargetPV(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates:
+    def getTargetPV(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.orekit.utils.TimeStampedPVCoordinates:
         """
             Compute the target point position/velocity in specified frame.
         
@@ -3109,12 +3277,16 @@ class YawCompensation(GroundPointingAttitudeModifier, AttitudeProviderModifier):
     def __init__(self, frame: org.orekit.frames.Frame, groundPointing: GroundPointing): ...
     _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitude(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
+    def getAttitude(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
         """
             Compute the attitude corresponding to an orbital state.
         
             Specified by:
                 :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitude` in interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProviderModifier.getAttitude` in
+                interface :class:`~org.orekit.attitudes.AttitudeProviderModifier`
         
             Overrides:
                 :meth:`~org.orekit.attitudes.GroundPointing.getAttitude` in class :class:`~org.orekit.attitudes.GroundPointing`
@@ -3130,12 +3302,16 @@ class YawCompensation(GroundPointingAttitudeModifier, AttitudeProviderModifier):
         """
         ...
     @typing.overload
-    def getAttitude(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
+    def getAttitude(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
         """
             Compute the attitude corresponding to an orbital state.
         
             Specified by:
                 :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitude` in interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProviderModifier.getAttitude` in
+                interface :class:`~org.orekit.attitudes.AttitudeProviderModifier`
         
             Overrides:
                 :meth:`~org.orekit.attitudes.GroundPointing.getAttitude` in class :class:`~org.orekit.attitudes.GroundPointing`
@@ -3153,7 +3329,7 @@ class YawCompensation(GroundPointingAttitudeModifier, AttitudeProviderModifier):
         ...
     _getYawAngle_1__T = typing.TypeVar('_getYawAngle_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getYawAngle(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> float:
+    def getYawAngle(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> float:
         """
             Compute the yaw compensation angle at date.
         
@@ -3168,7 +3344,7 @@ class YawCompensation(GroundPointingAttitudeModifier, AttitudeProviderModifier):
         """
         ...
     @typing.overload
-    def getYawAngle(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getYawAngle_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getYawAngle_1__T], frame: org.orekit.frames.Frame) -> _getYawAngle_1__T:
+    def getYawAngle(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getYawAngle_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getYawAngle_1__T], frame: org.orekit.frames.Frame) -> _getYawAngle_1__T:
         """
             Compute the yaw compensation angle at date.
         
@@ -3213,15 +3389,19 @@ class YawSteering(GroundPointingAttitudeModifier, AttitudeProviderModifier):
         Also see:
             :class:`~org.orekit.attitudes.GroundPointing`
     """
-    def __init__(self, frame: org.orekit.frames.Frame, groundPointing: GroundPointing, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
+    def __init__(self, frame: org.orekit.frames.Frame, groundPointing: GroundPointing, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable], vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D): ...
     _getAttitude_1__T = typing.TypeVar('_getAttitude_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def getAttitude(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
+    def getAttitude(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> Attitude:
         """
             Compute the attitude corresponding to an orbital state.
         
             Specified by:
                 :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitude` in interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProviderModifier.getAttitude` in
+                interface :class:`~org.orekit.attitudes.AttitudeProviderModifier`
         
             Overrides:
                 :meth:`~org.orekit.attitudes.GroundPointing.getAttitude` in class :class:`~org.orekit.attitudes.GroundPointing`
@@ -3237,12 +3417,16 @@ class YawSteering(GroundPointingAttitudeModifier, AttitudeProviderModifier):
         """
         ...
     @typing.overload
-    def getAttitude(self, fieldPVCoordinatesProvider: org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
+    def getAttitude(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitude_1__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitude_1__T], frame: org.orekit.frames.Frame) -> FieldAttitude[_getAttitude_1__T]:
         """
             Compute the attitude corresponding to an orbital state.
         
             Specified by:
                 :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitude` in interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProviderModifier.getAttitude` in
+                interface :class:`~org.orekit.attitudes.AttitudeProviderModifier`
         
             Overrides:
                 :meth:`~org.orekit.attitudes.GroundPointing.getAttitude` in class :class:`~org.orekit.attitudes.GroundPointing`
@@ -3259,10 +3443,327 @@ class YawSteering(GroundPointingAttitudeModifier, AttitudeProviderModifier):
         """
         ...
 
+class AttitudesSequence(org.orekit.attitudes.AbstractSwitchingAttitudeProvider):
+    """
+    public class AttitudesSequence extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        This classes manages a sequence of different attitude providers that are activated in turn according to switching
+        events. It includes non-zero transition durations between subsequent modes.
+    
+        Since:
+            5.1
+    
+        Also see:
+            :class:`~org.orekit.attitudes.AttitudesSwitcher`
+    """
+    def __init__(self): ...
+    _addSwitchingCondition__T = typing.TypeVar('_addSwitchingCondition__T', bound=org.orekit.propagation.events.EventDetector)  # <T>
+    def addSwitchingCondition(self, attitudeProvider: AttitudeProvider, attitudeProvider2: AttitudeProvider, t: _addSwitchingCondition__T, boolean: bool, boolean2: bool, double: float, angularDerivativesFilter: org.orekit.utils.AngularDerivativesFilter, attitudeSwitchHandler: typing.Union[AttitudeSwitchHandler, typing.Callable]) -> None:
+        """
+            Add a switching condition between two attitude providers.
+        
+            The :code:`past` and :code:`future` attitude providers are defined with regard to the natural flow of time. This means
+            that if the propagation is forward, the propagator will switch from :code:`past` provider to :code:`future` provider at
+            event occurrence, but if the propagation is backward, the propagator will switch from :code:`future` provider to
+            :code:`past` provider at event occurrence. The transition between the two attitude laws is not instantaneous, the switch
+            event defines the start of the transition (i.e. when leaving the :code:`past` attitude law and entering the interpolated
+            transition law). The end of the transition (i.e. when leaving the interpolating transition law and entering the
+            :code:`future` attitude law) occurs at switch time plus :code:`transitionTime`.
+        
+            An attitude provider may have several different switch events associated to it. Depending on which event is triggered,
+            the appropriate provider is switched to.
+        
+            If the underlying detector has an event handler associated to it, this handler will be triggered (i.e. its
+            :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred` method will be called), *regardless* of the
+            event really triggering an attitude switch or not. As an example, if an eclipse detector is used to switch from day to
+            night attitude mode when entering eclipse, with :code:`switchOnIncrease` set to :code:`false` and
+            :code:`switchOnDecrease` set to :code:`true`. Then a handler set directly at eclipse detector level would be triggered
+            at both eclipse entry and eclipse exit, but attitude switch would occur *only* at eclipse entry. Note that for the sake
+            of symmetry, the transition start and end dates should match for both forward and backward propagation. This implies
+            that for backward propagation, we have to compensate for the :code:`transitionTime` when looking for the event. An
+            unfortunate consequence is that the :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred` method
+            may appear to be called out of sync with respect to the propagation (it will be called when propagator reaches
+            transition end, despite it refers to transition start, as per :code:`transitionTime` compensation), and if the method
+            returns :meth:`~org.orekit.attitudes.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action.html?is`, it
+            will stop at the end of the transition instead of at the start. For these reasons, it is not recommended to set up an
+            event handler for events that are used to switch attitude. If an event handler is needed for other purposes, a second
+            handler should be registered to the propagator rather than relying on the side effects of attitude switches.
+        
+            The smoothness of the transition between past and future attitude laws can be tuned using the :code:`transitionTime` and
+            :code:`transitionFilter` parameters. The :code:`transitionTime` parameter specifies how much time is spent to switch
+            from one law to the other law. It should be larger than the event
+            :meth:`~org.orekit.propagation.events.EventDetector.getThreshold` in order to ensure attitude continuity. The
+            :code:`transitionFilter` parameter specifies the attitude time derivatives that should match at the boundaries between
+            past attitude law and transition law on one side, and between transition law and future law on the other side.
+            :meth:`~org.orekit.utils.AngularDerivativesFilter.USE_R` means only the rotation should be identical,
+            :meth:`~org.orekit.utils.AngularDerivativesFilter.USE_RR` means both rotation and rotation rate should be identical,
+            :meth:`~org.orekit.utils.AngularDerivativesFilter.USE_RRA` means both rotation, rotation rate and rotation acceleration
+            should be identical. During the transition, the attitude law is computed by interpolating between past attitude law at
+            switch time and future attitude law at current intermediate time.
+        
+            Parameters:
+                past (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude provider applicable for times in the switch event occurrence past
+                future (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude provider applicable for times in the switch event occurrence future
+                switchEvent (T): event triggering the attitude providers switch
+                switchOnIncrease (boolean): if true, switch is triggered on increasing event
+                switchOnDecrease (boolean): if true, switch is triggered on decreasing event
+                transitionTime (double): duration of the transition between the past and future attitude laws
+                transitionFilter (:class:`~org.orekit.utils.AngularDerivativesFilter`): specification of transition law time derivatives that should match past and future attitude laws
+                switchHandler (:class:`~org.orekit.attitudes.AttitudeSwitchHandler`): handler to call for notifying when switch occurs (may be null)
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
+    _getAttitudeRotation_0__T = typing.TypeVar('_getAttitudeRotation_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getAttitudeRotation(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getAttitudeRotation_0__T], tArray: typing.Union[typing.List[_getAttitudeRotation_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_0__T]: ...
+    @typing.overload
+    def getAttitudeRotation(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+        """
+            Compute the attitude-related rotation corresponding to an orbital state.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation` in
+                interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Parameters:
+                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
+        
+            Returns:
+                attitude-related rotation on the specified date and position-velocity state
+        
+        public <T extends :class:`~org.orekit.attitudes.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> :class:`~org.orekit.attitudes.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldRotation?is`<T> getAttitudeRotation (:class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T> pvProv, :class:`~org.orekit.time.FieldAbsoluteDate`<T> date, :class:`~org.orekit.frames.Frame` frame)
+        
+            Description copied from interface: :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation`
+            Compute the attitude-related rotation corresponding to an orbital state.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation` in
+                interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Parameters:
+                pvProv (:class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T> pvProv): local position-velocity provider around current date
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
+                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
+        
+            Returns:
+                rotation on the specified date and position-velocity state
+        
+        
+        """
+        ...
+    @typing.overload
+    def getEventDetectors(self, list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
+    @typing.overload
+    def getEventDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
+    _getFieldEventDetectors_0__T = typing.TypeVar('_getFieldEventDetectors_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getFieldEventDetectors_1__T = typing.TypeVar('_getFieldEventDetectors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_0__T], list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_0__T]]: ...
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_1__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_1__T]]: ...
+    def getSwitches(self) -> java.util.List['AttitudesSequence.Switch']: ...
+    class Switch(org.orekit.attitudes.AbstractSwitchingAttitudeProvider.AbstractAttitudeSwitch):
+        def eventOccurred(self, spacecraftState: org.orekit.propagation.SpacecraftState, eventDetector: org.orekit.propagation.events.EventDetector, boolean: bool) -> org.hipparchus.ode.events.Action: ...
+        def g(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> float: ...
+        @typing.overload
+        def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate, eventDetector: org.orekit.propagation.events.EventDetector) -> None: ...
+        @typing.overload
+        def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None: ...
 
-class __module_protocol__(typing.Protocol):
+class AttitudesSwitcher(org.orekit.attitudes.AbstractSwitchingAttitudeProvider):
+    """
+    public class AttitudesSwitcher extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        This classes manages a sequence of different attitude providers that are activated in turn according to switching
+        events. Changes in attitude mode are instantaneous, so state derivatives need to be reset and the
+        :class:`~org.orekit.attitudes.https:.www.hipparchus.org.apidocs.org.hipparchus.ode.events.Action?is` returned by the
+        event handler is ignored.
+    
+        Since:
+            13.0
+    
+        Also see:
+            :class:`~org.orekit.attitudes.AttitudesSequence`
+    """
+    def __init__(self): ...
+    _addSwitchingCondition__T = typing.TypeVar('_addSwitchingCondition__T', bound=org.orekit.propagation.events.EventDetector)  # <T>
+    def addSwitchingCondition(self, attitudeProvider: AttitudeProvider, attitudeProvider2: AttitudeProvider, t: _addSwitchingCondition__T, boolean: bool, boolean2: bool, attitudeSwitchHandler: typing.Union[AttitudeSwitchHandler, typing.Callable]) -> None:
+        """
+            Add a switching condition between two attitude providers.
+        
+            The :code:`past` and :code:`future` attitude providers are defined with regard to the natural flow of time. This means
+            that if the propagation is forward, the propagator will switch from :code:`past` provider to :code:`future` provider at
+            event occurrence, but if the propagation is backward, the propagator will switch from :code:`future` provider to
+            :code:`past` provider at event occurrence.
+        
+            An attitude provider may have several different switch events associated to it. Depending on which event is triggered,
+            the appropriate provider is switched to.
+        
+            If the underlying detector has an event handler associated to it, this handler will be triggered (i.e. its
+            :meth:`~org.orekit.propagation.events.handlers.EventHandler.eventOccurred` method will be called), *regardless* of the
+            event really triggering an attitude switch or not. As an example, if an eclipse detector is used to switch from day to
+            night attitude mode when entering eclipse, with :code:`switchOnIncrease` set to :code:`false` and
+            :code:`switchOnDecrease` set to :code:`true`. Then a handler set directly at eclipse detector level would be triggered
+            at both eclipse entry and eclipse exit, but attitude switch would occur *only* at eclipse entry.
+        
+            Parameters:
+                past (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude provider applicable for times in the switch event occurrence past
+                future (:class:`~org.orekit.attitudes.AttitudeProvider`): attitude provider applicable for times in the switch event occurrence future
+                switchEvent (T): event triggering the attitude providers switch
+                switchOnIncrease (boolean): if true, switch is triggered on increasing event
+                switchOnDecrease (boolean): if true, switch is triggered on decreasing event
+                switchHandler (:class:`~org.orekit.attitudes.AttitudeSwitchHandler`): handler to call for notifying when switch occurs (may be null)
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
+    _getAttitudeRotation_0__T = typing.TypeVar('_getAttitudeRotation_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getAttitudeRotation(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getAttitudeRotation_0__T], tArray: typing.Union[typing.List[_getAttitudeRotation_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_0__T]: ...
+    @typing.overload
+    def getAttitudeRotation(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+        """
+            Compute the attitude-related rotation corresponding to an orbital state.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation` in
+                interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Parameters:
+                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
+        
+            Returns:
+                attitude-related rotation on the specified date and position-velocity state
+        
+        public <T extends :class:`~org.orekit.attitudes.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> :class:`~org.orekit.attitudes.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.FieldRotation?is`<T> getAttitudeRotation (:class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T> pvProv, :class:`~org.orekit.time.FieldAbsoluteDate`<T> date, :class:`~org.orekit.frames.Frame` frame)
+        
+            Description copied from interface: :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation`
+            Compute the attitude-related rotation corresponding to an orbital state.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation` in
+                interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Parameters:
+                pvProv (:class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T> pvProv): local position-velocity provider around current date
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
+                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
+        
+            Returns:
+                rotation on the specified date and position-velocity state
+        
+        
+        """
+        ...
+    @typing.overload
+    def getEventDetectors(self, list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
+    @typing.overload
+    def getEventDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
+    _getFieldEventDetectors_0__T = typing.TypeVar('_getFieldEventDetectors_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getFieldEventDetectors_1__T = typing.TypeVar('_getFieldEventDetectors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_0__T], list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_0__T]]: ...
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_1__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_1__T]]: ...
+    class InstantaneousSwitch(org.orekit.attitudes.AbstractSwitchingAttitudeProvider.AbstractAttitudeSwitch):
+        def eventOccurred(self, spacecraftState: org.orekit.propagation.SpacecraftState, eventDetector: org.orekit.propagation.events.EventDetector, boolean: bool) -> org.hipparchus.ode.events.Action: ...
+        @typing.overload
+        def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate, eventDetector: org.orekit.propagation.events.EventDetector) -> None: ...
+        @typing.overload
+        def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None: ...
+
+class PythonAbstractSwitchingAttitudeProvider(org.orekit.attitudes.AbstractSwitchingAttitudeProvider):
+    """
+    public class PythonAbstractSwitchingAttitudeProvider extends :class:`~org.orekit.attitudes.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Python implementation of the AbstractSwitchingAttitudeProvider class. This class is part of the JCC Python interface and
+        exposes abstract methods natively.
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    _getAttitudeRotation_0__T = typing.TypeVar('_getAttitudeRotation_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getAttitudeRotation_2__T = typing.TypeVar('_getAttitudeRotation_2__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getAttitudeRotation(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_getAttitudeRotation_0__T], tArray: typing.Union[typing.List[_getAttitudeRotation_0__T], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_0__T]: ...
+    @typing.overload
+    def getAttitudeRotation(self, spacecraftState: org.orekit.propagation.SpacecraftState, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Rotation:
+        """
+            Compute the attitude-related rotation corresponding to an orbital state.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation` in
+                interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Parameters:
+                pvProv (:class:`~org.orekit.utils.PVCoordinatesProvider`): local position-velocity provider around current date
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
+        
+            Returns:
+                attitude-related rotation on the specified date and position-velocity state
+        
+        """
+        ...
+    @typing.overload
+    def getAttitudeRotation(self, fieldPVCoordinatesProvider: typing.Union[org.orekit.utils.FieldPVCoordinatesProvider[_getAttitudeRotation_2__T], typing.Callable[[org.orekit.time.FieldAbsoluteDate[org.hipparchus.CalculusFieldElement], org.orekit.frames.Frame], org.orekit.utils.TimeStampedFieldPVCoordinates[org.hipparchus.CalculusFieldElement]]], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getAttitudeRotation_2__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldRotation[_getAttitudeRotation_2__T]:
+        """
+            Compute the attitude-related rotation corresponding to an orbital state.
+        
+            Specified by:
+                :meth:`~org.orekit.attitudes.AttitudeProvider.getAttitudeRotation` in
+                interface :class:`~org.orekit.attitudes.AttitudeProvider`
+        
+            Parameters:
+                pvProv (:class:`~org.orekit.utils.FieldPVCoordinatesProvider`<T> pvProv): local position-velocity provider around current date
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): current date
+                frame (:class:`~org.orekit.frames.Frame`): reference frame from which attitude is computed
+        
+            Returns:
+                rotation on the specified date and position-velocity state
+        
+        
+        """
+        ...
+    @typing.overload
+    def getAttitudeRotation(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], absoluteDate: org.orekit.time.AbsoluteDate, frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Rotation: ...
+    def pythonDecRef(self) -> None:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self) -> int:
+        """
+            Part of JCC Python interface to object
+        
+        """
+        ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+
+class AbstractSwitchingAttitudeProvider: ...
+
+
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.attitudes")``.
 
+    AbstractSwitchingAttitudeProvider: typing.Type[AbstractSwitchingAttitudeProvider]
     AggregateBoundedAttitudeProvider: typing.Type[AggregateBoundedAttitudeProvider]
     AlignedAndConstrained: typing.Type[AlignedAndConstrained]
     Attitude: typing.Type[Attitude]
@@ -3270,7 +3771,10 @@ class __module_protocol__(typing.Protocol):
     AttitudeInterpolator: typing.Type[AttitudeInterpolator]
     AttitudeProvider: typing.Type[AttitudeProvider]
     AttitudeProviderModifier: typing.Type[AttitudeProviderModifier]
+    AttitudeRotationModel: typing.Type[AttitudeRotationModel]
+    AttitudeSwitchHandler: typing.Type[AttitudeSwitchHandler]
     AttitudesSequence: typing.Type[AttitudesSequence]
+    AttitudesSwitcher: typing.Type[AttitudesSwitcher]
     BodyCenterPointing: typing.Type[BodyCenterPointing]
     BoundedAttitudeProvider: typing.Type[BoundedAttitudeProvider]
     CelestialBodyPointed: typing.Type[CelestialBodyPointed]
@@ -3290,13 +3794,16 @@ class __module_protocol__(typing.Protocol):
     LofOffsetPointing: typing.Type[LofOffsetPointing]
     NadirPointing: typing.Type[NadirPointing]
     PredefinedTarget: typing.Type[PredefinedTarget]
+    PythonAbstractSwitchingAttitudeProvider: typing.Type[PythonAbstractSwitchingAttitudeProvider]
     PythonAttitudeBuilder: typing.Type[PythonAttitudeBuilder]
     PythonAttitudeProvider: typing.Type[PythonAttitudeProvider]
     PythonAttitudeProviderModifier: typing.Type[PythonAttitudeProviderModifier]
+    PythonAttitudeRotationModel: typing.Type[PythonAttitudeRotationModel]
+    PythonAttitudeSwitchHandler: typing.Type[PythonAttitudeSwitchHandler]
     PythonBoundedAttitudeProvider: typing.Type[PythonBoundedAttitudeProvider]
     PythonGroundPointing: typing.Type[PythonGroundPointing]
     PythonGroundPointingAttitudeModifier: typing.Type[PythonGroundPointingAttitudeModifier]
-    PythonSwitchHandler: typing.Type[PythonSwitchHandler]
+    PythonTargetProvider: typing.Type[PythonTargetProvider]
     SpinStabilized: typing.Type[SpinStabilized]
     TabulatedLofOffset: typing.Type[TabulatedLofOffset]
     TabulatedProvider: typing.Type[TabulatedProvider]
@@ -3305,4 +3812,3 @@ class __module_protocol__(typing.Protocol):
     TorqueFree: typing.Type[TorqueFree]
     YawCompensation: typing.Type[YawCompensation]
     YawSteering: typing.Type[YawSteering]
-    class-use: org.orekit.attitudes.class-use.__module_protocol__

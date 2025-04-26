@@ -1,6 +1,13 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
+import jpype
 import org.hipparchus
 import org.hipparchus.geometry.euclidean.threed
-import org.orekit.control.indirect.adjoint.class-use
 import org.orekit.control.indirect.adjoint.cost
 import org.orekit.frames
 import org.orekit.propagation
@@ -11,231 +18,9 @@ import typing
 
 
 
-class AbstractCartesianAdjointDerivativesProvider:
+class CartesianAdjointDerivativesProvider(org.orekit.propagation.integration.AdditionalDerivativesProvider):
     """
-    public class AbstractCartesianAdjointDerivativesProvider extends :class:`~org.orekit.control.indirect.adjoint.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
-    
-        Abstract class defining common things for Cartesian adjoint dynamics between standard and Field versions.
-    
-        Since:
-            12.2
-    
-        Also see:
-            :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`,
-            :class:`~org.orekit.propagation.numerical.NumericalPropagator`
-    """
-    def __init__(self, cartesianCost: org.orekit.control.indirect.adjoint.cost.CartesianCost): ...
-    def getCost(self) -> org.orekit.control.indirect.adjoint.cost.CartesianCost:
-        """
-            Getter for the cost.
-        
-            Returns:
-                cost
-        
-        
-        """
-        ...
-    def getDimension(self) -> int:
-        """
-            Getter for the dimension.
-        
-            Returns:
-                dimension
-        
-        
-        """
-        ...
-    def getName(self) -> str:
-        """
-            Getter for the name.
-        
-            Returns:
-                name
-        
-        
-        """
-        ...
-
-class CartesianAdjointEquationTerm:
-    """
-    public interface CartesianAdjointEquationTerm
-    
-        Interface to define terms in the adjoint equations and Hamiltonian for Cartesian coordinates.
-    
-        Since:
-            12.2
-    
-        Also see:
-            :class:`~org.orekit.control.indirect.adjoint.CartesianAdjointDerivativesProvider`,
-            :class:`~org.orekit.control.indirect.adjoint.FieldCartesianAdjointDerivativesProvider`
-    """
-    _getFieldHamiltonianContribution__T = typing.TypeVar('_getFieldHamiltonianContribution__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldHamiltonianContribution(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getFieldHamiltonianContribution__T], tArray: typing.List[_getFieldHamiltonianContribution__T], tArray2: typing.List[_getFieldHamiltonianContribution__T], frame: org.orekit.frames.Frame) -> _getFieldHamiltonianContribution__T:
-        """
-            Computes the contribution to the Hamiltonian.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date
-                stateVariables (T[]): state variables
-                adjointVariables (T[]): adjoint variables
-                frame (:class:`~org.orekit.frames.Frame`): propagation frame
-        
-            Returns:
-                contribution to the Hamiltonian
-        
-        
-        """
-        ...
-    _getFieldRatesContribution__T = typing.TypeVar('_getFieldRatesContribution__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldRatesContribution(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getFieldRatesContribution__T], tArray: typing.List[_getFieldRatesContribution__T], tArray2: typing.List[_getFieldRatesContribution__T], frame: org.orekit.frames.Frame) -> typing.List[_getFieldRatesContribution__T]:
-        """
-            Computes the contribution to the rates of the adjoint variables.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date
-                stateVariables (T[]): state variables
-                adjointVariables (T[]): adjoint variables
-                frame (:class:`~org.orekit.frames.Frame`): propagation frame
-        
-            Returns:
-                contribution to the adjoint derivative vector
-        
-        
-        """
-        ...
-    def getHamiltonianContribution(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], doubleArray2: typing.List[float], frame: org.orekit.frames.Frame) -> float:
-        """
-            Computes the contribution to the Hamiltonian.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): date
-                stateVariables (double[]): state variables
-                adjointVariables (double[]): adjoint variables
-                frame (:class:`~org.orekit.frames.Frame`): propagation frame
-        
-            Returns:
-                contribution to the Hamiltonian
-        
-        
-        """
-        ...
-    def getRatesContribution(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], doubleArray2: typing.List[float], frame: org.orekit.frames.Frame) -> typing.List[float]:
-        """
-            Computes the contribution to the rates of the adjoint variables.
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): date
-                stateVariables (double[]): state variables
-                adjointVariables (double[]): adjoint variables
-                frame (:class:`~org.orekit.frames.Frame`): propagation frame
-        
-            Returns:
-                contribution to the adjoint derivative vector
-        
-        
-        """
-        ...
-
-class AbstractCartesianAdjointEquationTerm(CartesianAdjointEquationTerm):
-    """
-    public abstract class AbstractCartesianAdjointEquationTerm extends :class:`~org.orekit.control.indirect.adjoint.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm`
-    
-        Abstract class to define terms in the adjoint equations and Hamiltonian for Cartesian coordinates.
-    
-        Since:
-            12.2
-    
-        Also see:
-            :class:`~org.orekit.control.indirect.adjoint.CartesianAdjointDerivativesProvider`,
-            :class:`~org.orekit.control.indirect.adjoint.FieldCartesianAdjointDerivativesProvider`
-    """
-    def __init__(self): ...
-    _getFieldHamiltonianContribution__T = typing.TypeVar('_getFieldHamiltonianContribution__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldHamiltonianContribution(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getFieldHamiltonianContribution__T], tArray: typing.List[_getFieldHamiltonianContribution__T], tArray2: typing.List[_getFieldHamiltonianContribution__T], frame: org.orekit.frames.Frame) -> _getFieldHamiltonianContribution__T:
-        """
-            Computes the contribution to the Hamiltonian.
-        
-            Specified by:
-                :meth:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm.getFieldHamiltonianContribution` in
-                interface :class:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date
-                stateVariables (T[]): state variables
-                adjointVariables (T[]): adjoint variables
-                frame (:class:`~org.orekit.frames.Frame`): propagation frame
-        
-            Returns:
-                contribution to the Hamiltonian
-        
-        
-        """
-        ...
-    _getFieldRatesContribution__T = typing.TypeVar('_getFieldRatesContribution__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldRatesContribution(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getFieldRatesContribution__T], tArray: typing.List[_getFieldRatesContribution__T], tArray2: typing.List[_getFieldRatesContribution__T], frame: org.orekit.frames.Frame) -> typing.List[_getFieldRatesContribution__T]:
-        """
-            Computes the contribution to the rates of the adjoint variables.
-        
-            Specified by:
-                :meth:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm.getFieldRatesContribution` in
-                interface :class:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date
-                stateVariables (T[]): state variables
-                adjointVariables (T[]): adjoint variables
-                frame (:class:`~org.orekit.frames.Frame`): propagation frame
-        
-            Returns:
-                contribution to the adjoint derivative vector
-        
-        
-        """
-        ...
-    def getHamiltonianContribution(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], doubleArray2: typing.List[float], frame: org.orekit.frames.Frame) -> float:
-        """
-            Computes the contribution to the Hamiltonian.
-        
-            Specified by:
-                :meth:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm.getHamiltonianContribution` in
-                interface :class:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): date
-                stateVariables (double[]): state variables
-                adjointVariables (double[]): adjoint variables
-                frame (:class:`~org.orekit.frames.Frame`): propagation frame
-        
-            Returns:
-                contribution to the Hamiltonian
-        
-        
-        """
-        ...
-    def getRatesContribution(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], doubleArray2: typing.List[float], frame: org.orekit.frames.Frame) -> typing.List[float]:
-        """
-            Computes the contribution to the rates of the adjoint variables.
-        
-            Specified by:
-                :meth:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm.getRatesContribution` in
-                interface :class:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): date
-                stateVariables (double[]): state variables
-                adjointVariables (double[]): adjoint variables
-                frame (:class:`~org.orekit.frames.Frame`): propagation frame
-        
-            Returns:
-                contribution to the adjoint derivative vector
-        
-        
-        """
-        ...
-
-class CartesianAdjointDerivativesProvider(AbstractCartesianAdjointDerivativesProvider, org.orekit.propagation.integration.AdditionalDerivativesProvider):
-    """
-    public class CartesianAdjointDerivativesProvider extends :class:`~org.orekit.control.indirect.adjoint.AbstractCartesianAdjointDerivativesProvider` implements :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+    public class CartesianAdjointDerivativesProvider extends :class:`~org.orekit.control.indirect.adjoint.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
     
         Class defining the adjoint dynamics, as defined in the Pontryagin Maximum Principle, in the case where Cartesian
         coordinates in an inertial frame are the dependent variable. The time derivatives of the adjoint variables are obtained
@@ -252,7 +37,7 @@ class CartesianAdjointDerivativesProvider(AbstractCartesianAdjointDerivativesPro
             :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`,
             :class:`~org.orekit.propagation.numerical.NumericalPropagator`
     """
-    def __init__(self, cartesianCost: org.orekit.control.indirect.adjoint.cost.CartesianCost, cartesianAdjointEquationTermArray: typing.List[CartesianAdjointEquationTerm]): ...
+    def __init__(self, cartesianCost: org.orekit.control.indirect.adjoint.cost.CartesianCost, *cartesianAdjointEquationTerm: 'CartesianAdjointEquationTerm'): ...
     def combinedDerivatives(self, spacecraftState: org.orekit.propagation.SpacecraftState) -> org.orekit.propagation.integration.CombinedDerivatives:
         """
             Compute the derivatives related to the additional state (and optionally main state increments).
@@ -284,6 +69,44 @@ class CartesianAdjointDerivativesProvider(AbstractCartesianAdjointDerivativesPro
         
         """
         ...
+    def getCost(self) -> org.orekit.control.indirect.adjoint.cost.CartesianCost:
+        """
+            Getter for the cost.
+        
+            Returns:
+                cost
+        
+        
+        """
+        ...
+    def getDimension(self) -> int:
+        """
+            Getter for the dimension.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getDimension` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+        
+            Returns:
+                dimension
+        
+        
+        """
+        ...
+    def getName(self) -> str:
+        """
+            Getter for the name.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.integration.AdditionalDerivativesProvider.getName` in
+                interface :class:`~org.orekit.propagation.integration.AdditionalDerivativesProvider`
+        
+            Returns:
+                name
+        
+        
+        """
+        ...
     def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
         """
             Initialize the generator at the start of propagation.
@@ -300,10 +123,90 @@ class CartesianAdjointDerivativesProvider(AbstractCartesianAdjointDerivativesPro
         """
         ...
 
-_FieldCartesianAdjointDerivativesProvider__T = typing.TypeVar('_FieldCartesianAdjointDerivativesProvider__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class FieldCartesianAdjointDerivativesProvider(AbstractCartesianAdjointDerivativesProvider, org.orekit.propagation.integration.FieldAdditionalDerivativesProvider[_FieldCartesianAdjointDerivativesProvider__T], typing.Generic[_FieldCartesianAdjointDerivativesProvider__T]):
+class CartesianAdjointEquationTerm:
     """
-    public class FieldCartesianAdjointDerivativesProvider<T extends :class:`~org.orekit.control.indirect.adjoint.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.control.indirect.adjoint.AbstractCartesianAdjointDerivativesProvider` implements :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider`<T>
+    public interface CartesianAdjointEquationTerm
+    
+        Interface to define terms in the adjoint equations and Hamiltonian for Cartesian coordinates.
+    
+        Since:
+            12.2
+    
+        Also see:
+            :class:`~org.orekit.control.indirect.adjoint.CartesianAdjointDerivativesProvider`,
+            :class:`~org.orekit.control.indirect.adjoint.FieldCartesianAdjointDerivativesProvider`
+    """
+    _getFieldHamiltonianContribution__T = typing.TypeVar('_getFieldHamiltonianContribution__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    def getFieldHamiltonianContribution(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getFieldHamiltonianContribution__T], tArray: typing.Union[typing.List[_getFieldHamiltonianContribution__T], jpype.JArray], tArray2: typing.Union[typing.List[_getFieldHamiltonianContribution__T], jpype.JArray], frame: org.orekit.frames.Frame) -> _getFieldHamiltonianContribution__T:
+        """
+            Computes the contribution to the Hamiltonian.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date
+                stateVariables (T[]): state variables
+                adjointVariables (T[]): adjoint variables
+                frame (:class:`~org.orekit.frames.Frame`): propagation frame
+        
+            Returns:
+                contribution to the Hamiltonian
+        
+        
+        """
+        ...
+    _getFieldRatesContribution__T = typing.TypeVar('_getFieldRatesContribution__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    def getFieldRatesContribution(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getFieldRatesContribution__T], tArray: typing.Union[typing.List[_getFieldRatesContribution__T], jpype.JArray], tArray2: typing.Union[typing.List[_getFieldRatesContribution__T], jpype.JArray], frame: org.orekit.frames.Frame) -> typing.MutableSequence[_getFieldRatesContribution__T]:
+        """
+            Computes the contribution to the rates of the adjoint variables.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date
+                stateVariables (T[]): state variables
+                adjointVariables (T[]): adjoint variables
+                frame (:class:`~org.orekit.frames.Frame`): propagation frame
+        
+            Returns:
+                contribution to the adjoint derivative vector
+        
+        
+        """
+        ...
+    def getHamiltonianContribution(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], frame: org.orekit.frames.Frame) -> float:
+        """
+            Computes the contribution to the Hamiltonian.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): date
+                stateVariables (double[]): state variables
+                adjointVariables (double[]): adjoint variables
+                frame (:class:`~org.orekit.frames.Frame`): propagation frame
+        
+            Returns:
+                contribution to the Hamiltonian
+        
+        
+        """
+        ...
+    def getRatesContribution(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], frame: org.orekit.frames.Frame) -> typing.MutableSequence[float]:
+        """
+            Computes the contribution to the rates of the adjoint variables.
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): date
+                stateVariables (double[]): state variables
+                adjointVariables (double[]): adjoint variables
+                frame (:class:`~org.orekit.frames.Frame`): propagation frame
+        
+            Returns:
+                contribution to the adjoint derivative vector
+        
+        
+        """
+        ...
+
+_FieldCartesianAdjointDerivativesProvider__T = typing.TypeVar('_FieldCartesianAdjointDerivativesProvider__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class FieldCartesianAdjointDerivativesProvider(org.orekit.propagation.integration.FieldAdditionalDerivativesProvider[_FieldCartesianAdjointDerivativesProvider__T], typing.Generic[_FieldCartesianAdjointDerivativesProvider__T]):
+    """
+    public class FieldCartesianAdjointDerivativesProvider<T extends :class:`~org.orekit.control.indirect.adjoint.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.control.indirect.adjoint.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider`<T>
     
         Class defining the Field version of the adjoint dynamics for Cartesian coordinates, as defined in the Pontryagin Maximum
         Principle.
@@ -316,10 +219,136 @@ class FieldCartesianAdjointDerivativesProvider(AbstractCartesianAdjointDerivativ
             :class:`~org.orekit.propagation.numerical.FieldNumericalPropagator`,
             :class:`~org.orekit.control.indirect.adjoint.CartesianAdjointDerivativesProvider`
     """
-    def __init__(self, cartesianCost: org.orekit.control.indirect.adjoint.cost.CartesianCost, cartesianAdjointEquationTermArray: typing.List[CartesianAdjointEquationTerm]): ...
+    def __init__(self, fieldCartesianCost: org.orekit.control.indirect.adjoint.cost.FieldCartesianCost[_FieldCartesianAdjointDerivativesProvider__T], *cartesianAdjointEquationTerm: CartesianAdjointEquationTerm): ...
     def combinedDerivatives(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldCartesianAdjointDerivativesProvider__T]) -> org.orekit.propagation.integration.FieldCombinedDerivatives[_FieldCartesianAdjointDerivativesProvider__T]: ...
     def evaluateHamiltonian(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldCartesianAdjointDerivativesProvider__T]) -> _FieldCartesianAdjointDerivativesProvider__T: ...
+    def getCost(self) -> org.orekit.control.indirect.adjoint.cost.FieldCartesianCost[_FieldCartesianAdjointDerivativesProvider__T]: ...
+    def getDimension(self) -> int:
+        """
+            Getter for the dimension.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider.getDimension` in
+                interface :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider`
+        
+            Returns:
+                dimension
+        
+        
+        """
+        ...
+    def getName(self) -> str:
+        """
+            Getter for the name.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider.getName` in
+                interface :class:`~org.orekit.propagation.integration.FieldAdditionalDerivativesProvider`
+        
+            Returns:
+                name
+        
+        
+        """
+        ...
     def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldCartesianAdjointDerivativesProvider__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldCartesianAdjointDerivativesProvider__T]) -> None: ...
+
+class AbstractCartesianAdjointEquationTerm(CartesianAdjointEquationTerm):
+    """
+    public abstract class AbstractCartesianAdjointEquationTerm extends :class:`~org.orekit.control.indirect.adjoint.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm`
+    
+        Abstract class to define terms in the adjoint equations and Hamiltonian for Cartesian coordinates.
+    
+        Since:
+            12.2
+    
+        Also see:
+            :class:`~org.orekit.control.indirect.adjoint.CartesianAdjointDerivativesProvider`,
+            :class:`~org.orekit.control.indirect.adjoint.FieldCartesianAdjointDerivativesProvider`
+    """
+    def __init__(self): ...
+    _getFieldHamiltonianContribution__T = typing.TypeVar('_getFieldHamiltonianContribution__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    def getFieldHamiltonianContribution(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getFieldHamiltonianContribution__T], tArray: typing.Union[typing.List[_getFieldHamiltonianContribution__T], jpype.JArray], tArray2: typing.Union[typing.List[_getFieldHamiltonianContribution__T], jpype.JArray], frame: org.orekit.frames.Frame) -> _getFieldHamiltonianContribution__T:
+        """
+            Computes the contribution to the Hamiltonian.
+        
+            Specified by:
+                :meth:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm.getFieldHamiltonianContribution` in
+                interface :class:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date
+                stateVariables (T[]): state variables
+                adjointVariables (T[]): adjoint variables
+                frame (:class:`~org.orekit.frames.Frame`): propagation frame
+        
+            Returns:
+                contribution to the Hamiltonian
+        
+        
+        """
+        ...
+    _getFieldRatesContribution__T = typing.TypeVar('_getFieldRatesContribution__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    def getFieldRatesContribution(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getFieldRatesContribution__T], tArray: typing.Union[typing.List[_getFieldRatesContribution__T], jpype.JArray], tArray2: typing.Union[typing.List[_getFieldRatesContribution__T], jpype.JArray], frame: org.orekit.frames.Frame) -> typing.MutableSequence[_getFieldRatesContribution__T]:
+        """
+            Computes the contribution to the rates of the adjoint variables.
+        
+            Specified by:
+                :meth:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm.getFieldRatesContribution` in
+                interface :class:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<T> date): date
+                stateVariables (T[]): state variables
+                adjointVariables (T[]): adjoint variables
+                frame (:class:`~org.orekit.frames.Frame`): propagation frame
+        
+            Returns:
+                contribution to the adjoint derivative vector
+        
+        
+        """
+        ...
+    def getHamiltonianContribution(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], frame: org.orekit.frames.Frame) -> float:
+        """
+            Computes the contribution to the Hamiltonian.
+        
+            Specified by:
+                :meth:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm.getHamiltonianContribution` in
+                interface :class:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): date
+                stateVariables (double[]): state variables
+                adjointVariables (double[]): adjoint variables
+                frame (:class:`~org.orekit.frames.Frame`): propagation frame
+        
+            Returns:
+                contribution to the Hamiltonian
+        
+        
+        """
+        ...
+    def getRatesContribution(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], frame: org.orekit.frames.Frame) -> typing.MutableSequence[float]:
+        """
+            Computes the contribution to the rates of the adjoint variables.
+        
+            Specified by:
+                :meth:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm.getRatesContribution` in
+                interface :class:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): date
+                stateVariables (double[]): state variables
+                adjointVariables (double[]): adjoint variables
+                frame (:class:`~org.orekit.frames.Frame`): propagation frame
+        
+            Returns:
+                contribution to the adjoint derivative vector
+        
+        
+        """
+        ...
 
 class AbstractCartesianAdjointGravitationalTerm(AbstractCartesianAdjointEquationTerm):
     """
@@ -334,7 +363,7 @@ class AbstractCartesianAdjointGravitationalTerm(AbstractCartesianAdjointEquation
             :class:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm`
     """
     _getFieldRatesContribution__T = typing.TypeVar('_getFieldRatesContribution__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldRatesContribution(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getFieldRatesContribution__T], tArray: typing.List[_getFieldRatesContribution__T], tArray2: typing.List[_getFieldRatesContribution__T], frame: org.orekit.frames.Frame) -> typing.List[_getFieldRatesContribution__T]:
+    def getFieldRatesContribution(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getFieldRatesContribution__T], tArray: typing.Union[typing.List[_getFieldRatesContribution__T], jpype.JArray], tArray2: typing.Union[typing.List[_getFieldRatesContribution__T], jpype.JArray], frame: org.orekit.frames.Frame) -> typing.MutableSequence[_getFieldRatesContribution__T]:
         """
             Computes the contribution to the rates of the adjoint variables.
         
@@ -368,7 +397,7 @@ class AbstractCartesianAdjointGravitationalTerm(AbstractCartesianAdjointEquation
         
         """
         ...
-    def getRatesContribution(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], doubleArray2: typing.List[float], frame: org.orekit.frames.Frame) -> typing.List[float]:
+    def getRatesContribution(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], frame: org.orekit.frames.Frame) -> typing.MutableSequence[float]:
         """
             Computes the contribution to the rates of the adjoint variables.
         
@@ -408,7 +437,7 @@ class CartesianAdjointInertialTerm(AbstractCartesianAdjointEquationTerm):
             :class:`~org.orekit.forces.inertia.InertialForces`
     """
     def __init__(self, frame: org.orekit.frames.Frame): ...
-    def getAcceleration(self, transform: org.orekit.frames.Transform, doubleArray: typing.List[float]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def getAcceleration(self, transform: org.orekit.frames.Transform, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Compute the acceleration vector.
         
@@ -437,7 +466,7 @@ class CartesianAdjointInertialTerm(AbstractCartesianAdjointEquationTerm):
         """
         ...
     _getFieldRatesContribution__T = typing.TypeVar('_getFieldRatesContribution__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldRatesContribution(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getFieldRatesContribution__T], tArray: typing.List[_getFieldRatesContribution__T], tArray2: typing.List[_getFieldRatesContribution__T], frame: org.orekit.frames.Frame) -> typing.List[_getFieldRatesContribution__T]:
+    def getFieldRatesContribution(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getFieldRatesContribution__T], tArray: typing.Union[typing.List[_getFieldRatesContribution__T], jpype.JArray], tArray2: typing.Union[typing.List[_getFieldRatesContribution__T], jpype.JArray], frame: org.orekit.frames.Frame) -> typing.MutableSequence[_getFieldRatesContribution__T]:
         """
             Computes the contribution to the rates of the adjoint variables.
         
@@ -461,7 +490,7 @@ class CartesianAdjointInertialTerm(AbstractCartesianAdjointEquationTerm):
         
         """
         ...
-    def getRatesContribution(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], doubleArray2: typing.List[float], frame: org.orekit.frames.Frame) -> typing.List[float]:
+    def getRatesContribution(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], frame: org.orekit.frames.Frame) -> typing.MutableSequence[float]:
         """
             Computes the contribution to the rates of the adjoint variables.
         
@@ -525,7 +554,7 @@ class CartesianAdjointJ2Term(AbstractCartesianAdjointGravitationalTerm):
             :class:`~org.orekit.forces.gravity.J2OnlyPerturbation`
     """
     def __init__(self, double: float, double2: float, double3: float, frame: org.orekit.frames.Frame): ...
-    def getAcceleration(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def getAcceleration(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Compute the acceleration vector.
         
@@ -545,7 +574,7 @@ class CartesianAdjointJ2Term(AbstractCartesianAdjointGravitationalTerm):
         """
         ...
     _getFieldAcceleration__T = typing.TypeVar('_getFieldAcceleration__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldAcceleration(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getFieldAcceleration__T], tArray: typing.List[_getFieldAcceleration__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getFieldAcceleration__T]:
+    def getFieldAcceleration(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getFieldAcceleration__T], tArray: typing.Union[typing.List[_getFieldAcceleration__T], jpype.JArray], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getFieldAcceleration__T]:
         """
             Compute the acceleration vector.
         
@@ -574,7 +603,7 @@ class CartesianAdjointJ2Term(AbstractCartesianAdjointGravitationalTerm):
         
         """
         ...
-    def getPositionAdjointContribution(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], doubleArray2: typing.List[float], frame: org.orekit.frames.Frame) -> typing.List[float]:
+    def getPositionAdjointContribution(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], frame: org.orekit.frames.Frame) -> typing.MutableSequence[float]:
         """
             Computes the contribution to position adjoint derivatives.
         
@@ -596,7 +625,7 @@ class CartesianAdjointJ2Term(AbstractCartesianAdjointGravitationalTerm):
         """
         ...
     _getPositionAdjointFieldContribution__T = typing.TypeVar('_getPositionAdjointFieldContribution__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getPositionAdjointFieldContribution(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPositionAdjointFieldContribution__T], tArray: typing.List[_getPositionAdjointFieldContribution__T], tArray2: typing.List[_getPositionAdjointFieldContribution__T], frame: org.orekit.frames.Frame) -> typing.List[_getPositionAdjointFieldContribution__T]:
+    def getPositionAdjointFieldContribution(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPositionAdjointFieldContribution__T], tArray: typing.Union[typing.List[_getPositionAdjointFieldContribution__T], jpype.JArray], tArray2: typing.Union[typing.List[_getPositionAdjointFieldContribution__T], jpype.JArray], frame: org.orekit.frames.Frame) -> typing.MutableSequence[_getPositionAdjointFieldContribution__T]:
         """
             Computes the contribution to position adjoint derivatives.
         
@@ -641,7 +670,7 @@ class AbstractCartesianAdjointNonCentralBodyTerm(AbstractCartesianAdjointNewtoni
         Also see:
             :class:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm`
     """
-    def getPositionAdjointContribution(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], doubleArray2: typing.List[float], frame: org.orekit.frames.Frame) -> typing.List[float]:
+    def getPositionAdjointContribution(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], frame: org.orekit.frames.Frame) -> typing.MutableSequence[float]:
         """
             Computes the contribution to position adjoint derivatives.
         
@@ -663,7 +692,7 @@ class AbstractCartesianAdjointNonCentralBodyTerm(AbstractCartesianAdjointNewtoni
         """
         ...
     _getPositionAdjointFieldContribution__T = typing.TypeVar('_getPositionAdjointFieldContribution__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getPositionAdjointFieldContribution(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPositionAdjointFieldContribution__T], tArray: typing.List[_getPositionAdjointFieldContribution__T], tArray2: typing.List[_getPositionAdjointFieldContribution__T], frame: org.orekit.frames.Frame) -> typing.List[_getPositionAdjointFieldContribution__T]:
+    def getPositionAdjointFieldContribution(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPositionAdjointFieldContribution__T], tArray: typing.Union[typing.List[_getPositionAdjointFieldContribution__T], jpype.JArray], tArray2: typing.Union[typing.List[_getPositionAdjointFieldContribution__T], jpype.JArray], frame: org.orekit.frames.Frame) -> typing.MutableSequence[_getPositionAdjointFieldContribution__T]:
         """
             Computes the contribution to position adjoint derivatives.
         
@@ -700,7 +729,7 @@ class CartesianAdjointKeplerianTerm(AbstractCartesianAdjointNewtonianTerm):
             :class:`~org.orekit.forces.gravity.NewtonianAttraction`
     """
     def __init__(self, double: float): ...
-    def getPositionAdjointContribution(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], doubleArray2: typing.List[float], frame: org.orekit.frames.Frame) -> typing.List[float]:
+    def getPositionAdjointContribution(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], frame: org.orekit.frames.Frame) -> typing.MutableSequence[float]:
         """
             Computes the contribution to position adjoint derivatives.
         
@@ -722,7 +751,7 @@ class CartesianAdjointKeplerianTerm(AbstractCartesianAdjointNewtonianTerm):
         """
         ...
     _getPositionAdjointFieldContribution__T = typing.TypeVar('_getPositionAdjointFieldContribution__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getPositionAdjointFieldContribution(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPositionAdjointFieldContribution__T], tArray: typing.List[_getPositionAdjointFieldContribution__T], tArray2: typing.List[_getPositionAdjointFieldContribution__T], frame: org.orekit.frames.Frame) -> typing.List[_getPositionAdjointFieldContribution__T]:
+    def getPositionAdjointFieldContribution(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getPositionAdjointFieldContribution__T], tArray: typing.Union[typing.List[_getPositionAdjointFieldContribution__T], jpype.JArray], tArray2: typing.Union[typing.List[_getPositionAdjointFieldContribution__T], jpype.JArray], frame: org.orekit.frames.Frame) -> typing.MutableSequence[_getPositionAdjointFieldContribution__T]:
         """
             Computes the contribution to position adjoint derivatives.
         
@@ -760,8 +789,8 @@ class CartesianAdjointSingleBodyTerm(AbstractCartesianAdjointNonCentralBodyTerm)
             :class:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm`,
             :class:`~org.orekit.forces.gravity.SingleBodyAbsoluteAttraction`
     """
-    def __init__(self, double: float, extendedPositionProvider: org.orekit.utils.ExtendedPositionProvider): ...
-    def getAcceleration(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def __init__(self, double: float, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable]): ...
+    def getAcceleration(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Compute the acceleration vector.
         
@@ -781,7 +810,7 @@ class CartesianAdjointSingleBodyTerm(AbstractCartesianAdjointNonCentralBodyTerm)
         """
         ...
     _getFieldAcceleration__T = typing.TypeVar('_getFieldAcceleration__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldAcceleration(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getFieldAcceleration__T], tArray: typing.List[_getFieldAcceleration__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getFieldAcceleration__T]:
+    def getFieldAcceleration(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getFieldAcceleration__T], tArray: typing.Union[typing.List[_getFieldAcceleration__T], jpype.JArray], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getFieldAcceleration__T]:
         """
             Compute the acceleration vector.
         
@@ -815,8 +844,8 @@ class CartesianAdjointThirdBodyTerm(AbstractCartesianAdjointNonCentralBodyTerm):
             :class:`~org.orekit.control.indirect.adjoint.CartesianAdjointEquationTerm`,
             :class:`~org.orekit.forces.gravity.ThirdBodyAttraction`
     """
-    def __init__(self, double: float, extendedPositionProvider: org.orekit.utils.ExtendedPositionProvider): ...
-    def getAcceleration(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
+    def __init__(self, double: float, extendedPositionProvider: typing.Union[org.orekit.utils.ExtendedPositionProvider, typing.Callable]): ...
+    def getAcceleration(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
             Compute the acceleration vector.
         
@@ -836,7 +865,7 @@ class CartesianAdjointThirdBodyTerm(AbstractCartesianAdjointNonCentralBodyTerm):
         """
         ...
     _getFieldAcceleration__T = typing.TypeVar('_getFieldAcceleration__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    def getFieldAcceleration(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getFieldAcceleration__T], tArray: typing.List[_getFieldAcceleration__T], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getFieldAcceleration__T]:
+    def getFieldAcceleration(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_getFieldAcceleration__T], tArray: typing.Union[typing.List[_getFieldAcceleration__T], jpype.JArray], frame: org.orekit.frames.Frame) -> org.hipparchus.geometry.euclidean.threed.FieldVector3D[_getFieldAcceleration__T]:
         """
             Compute the acceleration vector.
         
@@ -857,10 +886,9 @@ class CartesianAdjointThirdBodyTerm(AbstractCartesianAdjointNonCentralBodyTerm):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.control.indirect.adjoint")``.
 
-    AbstractCartesianAdjointDerivativesProvider: typing.Type[AbstractCartesianAdjointDerivativesProvider]
     AbstractCartesianAdjointEquationTerm: typing.Type[AbstractCartesianAdjointEquationTerm]
     AbstractCartesianAdjointGravitationalTerm: typing.Type[AbstractCartesianAdjointGravitationalTerm]
     AbstractCartesianAdjointNewtonianTerm: typing.Type[AbstractCartesianAdjointNewtonianTerm]
@@ -873,5 +901,4 @@ class __module_protocol__(typing.Protocol):
     CartesianAdjointSingleBodyTerm: typing.Type[CartesianAdjointSingleBodyTerm]
     CartesianAdjointThirdBodyTerm: typing.Type[CartesianAdjointThirdBodyTerm]
     FieldCartesianAdjointDerivativesProvider: typing.Type[FieldCartesianAdjointDerivativesProvider]
-    class-use: org.orekit.control.indirect.adjoint.class-use.__module_protocol__
     cost: org.orekit.control.indirect.adjoint.cost.__module_protocol__

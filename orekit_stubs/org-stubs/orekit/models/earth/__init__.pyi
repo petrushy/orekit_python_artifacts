@@ -1,3 +1,10 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.io
 import java.lang
 import java.util
@@ -9,7 +16,6 @@ import org.orekit.forces.gravity.potential
 import org.orekit.frames
 import org.orekit.models
 import org.orekit.models.earth.atmosphere
-import org.orekit.models.earth.class-use
 import org.orekit.models.earth.displacement
 import org.orekit.models.earth.ionosphere
 import org.orekit.models.earth.tessellation
@@ -20,61 +26,6 @@ import org.orekit.utils
 import typing
 
 
-
-class EarthITU453AtmosphereRefraction(org.orekit.models.AtmosphericRefractionModel):
-    """
-    public class EarthITU453AtmosphereRefraction extends :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.AtmosphericRefractionModel`
-    
-        Implementation of refraction model for Earth exponential atmosphere based on ITU-R P.834-7 recommendation.
-    
-        Refraction angle is computed according to the International Telecommunication Union recommendation formula. For
-        reference, see **ITU-R P.834-7** (October 2015).
-    
-        Since:
-            7.1
-    
-        Also see:
-            :meth:`~serialized`
-    """
-    def __init__(self, double: float): ...
-    def getRefraction(self, double: float) -> float:
-        """
-            Description copied from interface: :meth:`~org.orekit.models.AtmosphericRefractionModel.getRefraction`
-            Compute the refraction angle from the true (geometrical) elevation.
-        
-            Specified by:
-                :meth:`~org.orekit.models.AtmosphericRefractionModel.getRefraction` in
-                interface :class:`~org.orekit.models.AtmosphericRefractionModel`
-        
-            Parameters:
-                elevation (double): true elevation (rad)
-        
-            Returns:
-                refraction angle (rad)
-        
-        
-        """
-        ...
-    def getTheta0(self) -> float:
-        """
-            Get the station elevation angle under free-space propagation .
-        
-            Returns:
-                the elevation angle under free-space propagation (rad)
-        
-        
-        """
-        ...
-    def getThetaMin(self) -> float:
-        """
-            Get the station minimal elevation angle.
-        
-            Returns:
-                the minimal elevation angle (rad)
-        
-        
-        """
-        ...
 
 class EarthShape(org.orekit.bodies.BodyShape):
     """
@@ -472,7 +423,7 @@ class GeoMagneticFieldFactory:
         @staticmethod
         def valueOf(string: str) -> 'GeoMagneticFieldFactory.FieldModel': ...
         @staticmethod
-        def values() -> typing.List['GeoMagneticFieldFactory.FieldModel']: ...
+        def values() -> typing.MutableSequence['GeoMagneticFieldFactory.FieldModel']: ...
 
 class GeoMagneticFields:
     """
@@ -605,6 +556,115 @@ class GeoMagneticModelLoader(org.orekit.data.DataLoader):
         """
         ...
 
+class GeoMagneticModelParser:
+    """
+    public class GeoMagneticModelParser extends :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is`
+    
+        Loads geomagnetic field models from a given input stream. A stream may contain multiple models, the loader reads all
+        available models in consecutive order.
+    
+        The format of the expected model file is either:
+    
+          - combined format as used by the geomag software, available from the `IGRF model site
+            <http://www.ngdc.noaa.gov/IAGA/vmod/igrf.html>`; supports multiple epochs per file
+          - original format as used by the `WMM model site <http://www.ngdc.noaa.gov/geomag/WMM/DoDWMM.shtml>`.
+    
+    
+        **Combined Format**
+    
+        .. code-block: java
+        
+             {model name} {epoch} {nMax} {nMaxSec} {nMax3} {validity start} {validity end} {minAlt} {maxAlt} {model name} {line number}
+         {n} {m} {gnm} {hnm} {dgnm} {dhnm} {model name} {line number}
+         
+    
+        Example:
+    
+        .. code-block: java
+        
+            WMM2010  2010.00 12 12  0 2010.00 2015.00   -1.0  600.0          WMM2010   0
+         1  0  -29496.6       0.0      11.6       0.0                        WMM2010   1
+         1  1   -1586.3    4944.4      16.5     -25.9                        WMM2010   2
+         
+    
+        **Original WMM Format**
+    
+        .. code-block: java
+        
+            {epoch} {model name} {validity start}
+         {n} {m} {gnm} {hnm} {dgnm} {dhnm}
+         
+    
+        Example:
+    
+        .. code-block: java
+        
+            2015.0            WMM-2015        12/15/2014
+          1  0  -29438.5       0.0       10.7        0.0
+          1  1   -1501.1    4796.2       17.9      -26.8
+         
+    
+        Since:
+            13.0
+    """
+    def __init__(self): ...
+    def parse(self, dataSource: org.orekit.data.DataSource) -> java.util.List[GeoMagneticField]: ...
+
+class ITURP834AtmosphericRefraction(org.orekit.models.AtmosphericRefractionModel):
+    """
+    public class ITURP834AtmosphericRefraction extends :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.AtmosphericRefractionModel`
+    
+        Implementation of refraction model for Earth exponential atmosphere based on ITU-R P.834 recommendation.
+    
+        This class implements the ray bending part, i.e. section 1 of the recommendation. The excess radio path length part of
+        the model, i.e. section 6 of the recommendation, is implemented in the
+        :class:`~org.orekit.models.earth.troposphere.iturp834.ITURP834PathDelay` class.
+    
+        Since:
+            7.1
+    
+        Also see:
+            :class:`~org.orekit.models.earth.https:.www.itu.int.rec.R`, :meth:`~serialized`
+    """
+    def __init__(self, double: float): ...
+    def getRefraction(self, double: float) -> float:
+        """
+            Compute the refraction angle from the true (geometrical) elevation.
+        
+            Specified by:
+                :meth:`~org.orekit.models.AtmosphericRefractionModel.getRefraction` in
+                interface :class:`~org.orekit.models.AtmosphericRefractionModel`
+        
+            Parameters:
+                elevation (double): true elevation (rad)
+        
+            Returns:
+                refraction angle (rad)
+        
+        
+        """
+        ...
+    def getTheta0(self) -> float:
+        """
+            Get the station elevation angle under free-space propagation .
+        
+            Returns:
+                the elevation angle under free-space propagation (rad)
+        
+        
+        """
+        ...
+    def getThetaMin(self) -> float:
+        """
+            Get the station minimal elevation angle.
+        
+            Returns:
+                the minimal elevation angle (rad)
+        
+        
+        """
+        ...
+
 class Geoid(EarthShape):
     """
     public class Geoid extends :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.EarthShape`
@@ -651,10 +711,6 @@ class Geoid(EarthShape):
             high degree and order normalised associated Legendre functions. Journal of Geodesy, 76(5):279, 2002.
           5.  DMA TR 8350.2. 1984.
           6.  Department of Defense World Geodetic System 1984. 2000. NIMA TR 8350.2 Third Edition, Amendment 1.
-    
-    
-        Also see:
-            :meth:`~serialized`
     """
     def __init__(self, normalizedSphericalHarmonicsProvider: org.orekit.forces.gravity.potential.NormalizedSphericalHarmonicsProvider, referenceEllipsoid: 'ReferenceEllipsoid'): ...
     def getBodyFrame(self) -> org.orekit.frames.Frame:
@@ -979,10 +1035,6 @@ class LazyLoadedGeoMagneticFields(GeoMagneticFields):
 class PythonEarthShape(EarthShape):
     """
     public class PythonEarthShape extends :class:`~org.orekit.models.earth.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.models.earth.EarthShape`
-    
-    
-        Also see:
-            :meth:`~serialized`
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
@@ -1304,10 +1356,6 @@ class ReferenceEllipsoid(org.orekit.bodies.OneAxisEllipsoid, EarthShape):
           2.  Weikko A. Heiskanen, Helmut Moritz. Physical Geodesy. W. H. Freeman and Company, 1967. (especially sections 2.13 and
             equation 2-144)
           3.  Department of Defense World Geodetic System 1984. 2000. NIMA TR 8350.2 Third Edition, Amendment 1.
-    
-    
-        Also see:
-            :meth:`~serialized`
     """
     def __init__(self, double: float, double2: float, frame: org.orekit.frames.Frame, double3: float, double4: float): ...
     def getC2n0(self, int: int) -> float:
@@ -1465,10 +1513,9 @@ class ReferenceEllipsoid(org.orekit.bodies.OneAxisEllipsoid, EarthShape):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.models.earth")``.
 
-    EarthITU453AtmosphereRefraction: typing.Type[EarthITU453AtmosphereRefraction]
     EarthShape: typing.Type[EarthShape]
     EarthStandardAtmosphereRefraction: typing.Type[EarthStandardAtmosphereRefraction]
     GeoMagneticElements: typing.Type[GeoMagneticElements]
@@ -1476,13 +1523,14 @@ class __module_protocol__(typing.Protocol):
     GeoMagneticFieldFactory: typing.Type[GeoMagneticFieldFactory]
     GeoMagneticFields: typing.Type[GeoMagneticFields]
     GeoMagneticModelLoader: typing.Type[GeoMagneticModelLoader]
+    GeoMagneticModelParser: typing.Type[GeoMagneticModelParser]
     Geoid: typing.Type[Geoid]
+    ITURP834AtmosphericRefraction: typing.Type[ITURP834AtmosphericRefraction]
     LazyLoadedGeoMagneticFields: typing.Type[LazyLoadedGeoMagneticFields]
     PythonEarthShape: typing.Type[PythonEarthShape]
     PythonGeoMagneticFields: typing.Type[PythonGeoMagneticFields]
     ReferenceEllipsoid: typing.Type[ReferenceEllipsoid]
     atmosphere: org.orekit.models.earth.atmosphere.__module_protocol__
-    class-use: org.orekit.models.earth.class-use.__module_protocol__
     displacement: org.orekit.models.earth.displacement.__module_protocol__
     ionosphere: org.orekit.models.earth.ionosphere.__module_protocol__
     tessellation: org.orekit.models.earth.tessellation.__module_protocol__

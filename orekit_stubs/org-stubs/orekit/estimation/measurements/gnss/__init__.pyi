@@ -1,17 +1,23 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.io
 import java.lang
 import java.util
+import jpype
 import org.hipparchus.analysis.differentiation
 import org.hipparchus.geometry.euclidean.threed
 import org.hipparchus.linear
 import org.hipparchus.random
 import org.orekit.estimation.measurements
 import org.orekit.estimation.measurements.generation
-import org.orekit.estimation.measurements.gnss.class-use
 import org.orekit.files.rinex.observation
 import org.orekit.gnss
 import org.orekit.propagation
-import org.orekit.propagation.sampling
 import org.orekit.time
 import org.orekit.utils
 import typing
@@ -43,6 +49,48 @@ class AbstractWindUp(org.orekit.estimation.measurements.EstimationModifier[_Abst
         Also see:
             :class:`~org.orekit.estimation.measurements.gnss.https:.gssc.esa.int.navipedia.index.php.Carrier_Phase_Wind`
     """
+    def cacheAngularWindUp(self, timeStampedPVCoordinatesArray: typing.Union[typing.List[org.orekit.utils.TimeStampedPVCoordinates], jpype.JArray], rotation: org.hipparchus.geometry.euclidean.threed.Rotation, rotation2: org.hipparchus.geometry.euclidean.threed.Rotation) -> None:
+        """
+            Cache angular wind-up.
+        
+            Parameters:
+                participants (:class:`~org.orekit.utils.TimeStampedPVCoordinates`[]): particpants to the carrier-phase measurement
+                receiverToInert (:class:`~org.orekit.estimation.measurements.gnss.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Rotation?is`): rotation for receiver to inertial frame
+                emitterToInert (:class:`~org.orekit.estimation.measurements.gnss.https:.www.hipparchus.org.apidocs.org.hipparchus.geometry.euclidean.threed.Rotation?is`): rotation from emitter to inertial frame
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
+    def getAngularWindUp(self) -> float:
+        """
+            Get cached value of angular wind-up.
+        
+            Returns:
+                cached value of angular wind-up
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
+    def getEffectName(self) -> str:
+        """
+            Get the name of the effect modifying the measurement.
+        
+            Specified by:
+                :meth:`~org.orekit.estimation.measurements.EstimationModifier.getEffectName` in
+                interface :class:`~org.orekit.estimation.measurements.EstimationModifier`
+        
+            Returns:
+                name of the effect modifying the measurement
+        
+        
+        """
+        ...
     def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def modifyWithoutDerivatives(self, estimatedMeasurementBase: org.orekit.estimation.measurements.EstimatedMeasurementBase[_AbstractWindUp__T]) -> None: ...
 
@@ -58,7 +106,7 @@ class AmbiguityAcceptance:
         Also see:
             :class:`~org.orekit.estimation.measurements.gnss.AmbiguitySolver`
     """
-    def accept(self, integerLeastSquareSolutionArray: typing.List['IntegerLeastSquareSolution']) -> 'IntegerLeastSquareSolution':
+    def accept(self, integerLeastSquareSolutionArray: typing.Union[typing.List['IntegerLeastSquareSolution'], jpype.JArray]) -> 'IntegerLeastSquareSolution':
         """
             Check if one of the candidate solutions can be accepted.
         
@@ -91,15 +139,6 @@ class AmbiguityCache:
     
         Since:
             12.1
-    """
-    DEFAULT_CACHE: typing.ClassVar['AmbiguityCache'] = ...
-    """
-    :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public static final :class:`~org.orekit.estimation.measurements.gnss.AmbiguityCache` DEFAULT_CACHE
-    
-        Deprecated.
-        this default cache is only a temporary hack for compatibility purposes it will be removed in Orekit 13.0
-        Default cache.
-    
     """
     def __init__(self): ...
     def getAmbiguity(self, string: str, string2: str, double: float) -> 'AmbiguityDriver':
@@ -185,7 +224,7 @@ class AmbiguitySolver:
         Also see:
             :class:`~org.orekit.estimation.measurements.gnss.LambdaMethod`
     """
-    def __init__(self, list: java.util.List[org.orekit.utils.ParameterDriver], integerLeastSquareSolver: 'IntegerLeastSquareSolver', ambiguityAcceptance: AmbiguityAcceptance): ...
+    def __init__(self, list: java.util.List[org.orekit.utils.ParameterDriver], integerLeastSquareSolver: typing.Union['IntegerLeastSquareSolver', typing.Callable], ambiguityAcceptance: AmbiguityAcceptance): ...
     def fixIntegerAmbiguities(self, int: int, list: java.util.List[org.orekit.utils.ParameterDriver], realMatrix: org.hipparchus.linear.RealMatrix) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def getAllAmbiguityDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     def unFixAmbiguity(self, parameterDriver: org.orekit.utils.ParameterDriver) -> None:
@@ -250,7 +289,7 @@ class CombinationType(java.lang.Enum['CombinationType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['CombinationType']:
+    def values() -> typing.MutableSequence['CombinationType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -277,10 +316,7 @@ class CombinedObservationData:
         Since:
             10.1
     """
-    @typing.overload
     def __init__(self, double: float, double2: float, combinationType: CombinationType, measurementType: org.orekit.gnss.MeasurementType, list: java.util.List[org.orekit.files.rinex.observation.ObservationData]): ...
-    @typing.overload
-    def __init__(self, combinationType: CombinationType, measurementType: org.orekit.gnss.MeasurementType, double: float, double2: float, list: java.util.List[org.orekit.files.rinex.observation.ObservationData]): ...
     def getCombinationType(self) -> CombinationType:
         """
             Get the type of the combination of measurements used to build the instance.
@@ -302,20 +338,6 @@ class CombinedObservationData:
         
             Since:
                 12.1
-        
-        
-        """
-        ...
-    def getCombinedMHzFrequency(self) -> float:
-        """
-            Deprecated.
-            as of 12.1, replaced by :meth:`~org.orekit.estimation.measurements.gnss.CombinedObservationData.getCombinedFrequency`
-            Get the value of the combined frequency in MHz.
-        
-            For the single frequency combinations, this method returns the common frequency of both measurements.
-        
-            Returns:
-                value of the combined frequency in MHz
         
         
         """
@@ -407,12 +429,12 @@ class CycleSlipDetectorResults:
         Since:
             10.2
     """
-    def getBeginDate(self, frequency: org.orekit.gnss.Frequency) -> org.orekit.time.AbsoluteDate:
+    def getBeginDate(self, gnssSignal: org.orekit.gnss.GnssSignal) -> org.orekit.time.AbsoluteDate:
         """
             Return the date of validity beginning of the detector.
         
             Parameters:
-                f (:class:`~org.orekit.gnss.Frequency`): frequency
+                signal (:class:`~org.orekit.gnss.GnssSignal`): frequency
         
             Returns:
                 AbsoluteDate
@@ -420,16 +442,16 @@ class CycleSlipDetectorResults:
         
         """
         ...
-    def getCycleSlipMap(self) -> java.util.Map[org.orekit.gnss.Frequency, java.util.List[org.orekit.time.AbsoluteDate]]: ...
-    def getEndDate(self, frequency: org.orekit.gnss.Frequency) -> org.orekit.time.AbsoluteDate:
+    def getCycleSlipMap(self) -> java.util.Map[org.orekit.gnss.GnssSignal, java.util.List[org.orekit.time.AbsoluteDate]]: ...
+    def getEndDate(self, gnssSignal: org.orekit.gnss.GnssSignal) -> org.orekit.time.AbsoluteDate:
         """
             Return the end date at the given frequency.
         
-            For dual-Frequency cycle-slip detector, the :class:`~org.orekit.gnss.Frequency` contained in the map is the higher
-            frequency (e.g. for L1-L2 the frequency in the map will be L1)
+            For dual-Frequency cycle-slip detector, the :class:`~org.orekit.gnss.GnssSignal` contained in the map is the higher
+            frequency (e.g. for L1-L2 the signal in the map will be L1)
         
             Parameters:
-                f (:class:`~org.orekit.gnss.Frequency`): frequency
+                signal (:class:`~org.orekit.gnss.GnssSignal`): frequency
         
             Returns:
                 date of end of validity of the detectors
@@ -541,8 +563,8 @@ class IntegerLeastSquareSolution:
         Since:
             10.0
     """
-    def __init__(self, longArray: typing.List[int], double: float): ...
-    def getSolution(self) -> typing.List[int]:
+    def __init__(self, longArray: typing.Union[typing.List[int], jpype.JArray], double: float): ...
+    def getSolution(self) -> typing.MutableSequence[int]:
         """
             Get the solution array.
         
@@ -575,7 +597,7 @@ class IntegerLeastSquareSolver:
         Also see:
             :class:`~org.orekit.estimation.measurements.gnss.IntegerLeastSquareSolution`
     """
-    def solveILS(self, int: int, doubleArray: typing.List[float], intArray: typing.List[int], realMatrix: org.hipparchus.linear.RealMatrix) -> typing.List[IntegerLeastSquareSolution]:
+    def solveILS(self, int: int, doubleArray: typing.Union[typing.List[float], jpype.JArray], intArray: typing.Union[typing.List[int], jpype.JArray], realMatrix: org.hipparchus.linear.RealMatrix) -> typing.MutableSequence[IntegerLeastSquareSolution]:
         """
             Find the best solutions to an Integer Least Square problem.
         
@@ -905,22 +927,6 @@ class Phase(org.orekit.estimation.measurements.GroundReceiverMeasurement['Phase'
     
     
     """
-    AMBIGUITY_NAME: typing.ClassVar[str] = ...
-    """
-    :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public static final :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` AMBIGUITY_NAME
-    
-        Deprecated.
-        as of 12.1 not used anymore
-        Name for ambiguity driver.
-    
-        Also see:
-            :meth:`~constant`
-    
-    
-    """
-    @typing.overload
-    def __init__(self, groundStation: org.orekit.estimation.measurements.GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, double4: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
-    @typing.overload
     def __init__(self, groundStation: org.orekit.estimation.measurements.GroundStation, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, double4: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite, ambiguityCache: AmbiguityCache): ...
     def getAmbiguityDriver(self) -> AmbiguityDriver:
         """
@@ -955,14 +961,7 @@ class PhaseBuilder(org.orekit.estimation.measurements.generation.AbstractMeasure
         Since:
             10.1
     """
-    @typing.overload
-    def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, groundStation: org.orekit.estimation.measurements.GroundStation, double: float, double2: float, double3: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
-    @typing.overload
     def __init__(self, correlatedRandomVectorGenerator: org.hipparchus.random.CorrelatedRandomVectorGenerator, groundStation: org.orekit.estimation.measurements.GroundStation, double: float, double2: float, double3: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite, ambiguityCache: AmbiguityCache): ...
-    @typing.overload
-    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> org.orekit.estimation.measurements.ObservedMeasurement: ...
-    @typing.overload
-    def build(self, absoluteDate: org.orekit.time.AbsoluteDate, map: typing.Union[java.util.Map[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator], typing.Mapping[org.orekit.estimation.measurements.ObservableSatellite, org.orekit.propagation.sampling.OrekitStepInterpolator]]) -> Phase: ...
 
 class WindUpFactory:
     """
@@ -1013,17 +1012,6 @@ class AbstractDualFrequencyCombination(MeasurementCombination):
     
         Since:
             10.1
-    """
-    MHZ_TO_HZ: typing.ClassVar[float] = ...
-    """
-    public static final double MHZ_TO_HZ
-    
-        Mega Hertz to Hertz converter.
-    
-        Also see:
-            :meth:`~constant`
-    
-    
     """
     @typing.overload
     def combine(self, observationData: org.orekit.files.rinex.observation.ObservationData, observationData2: org.orekit.files.rinex.observation.ObservationData) -> CombinedObservationData:
@@ -1104,7 +1092,7 @@ class AbstractLambdaMethod(IntegerLeastSquareSolver):
             10.0
     """
     def setComparator(self, comparator: typing.Union[java.util.Comparator[IntegerLeastSquareSolution], typing.Callable[[IntegerLeastSquareSolution, IntegerLeastSquareSolution], int]]) -> None: ...
-    def solveILS(self, int: int, doubleArray: typing.List[float], intArray: typing.List[int], realMatrix: org.hipparchus.linear.RealMatrix) -> typing.List[IntegerLeastSquareSolution]:
+    def solveILS(self, int: int, doubleArray: typing.Union[typing.List[float], jpype.JArray], intArray: typing.Union[typing.List[int], jpype.JArray], realMatrix: org.hipparchus.linear.RealMatrix) -> typing.MutableSequence[IntegerLeastSquareSolution]:
         """
             Find the best solutions to an Integer Least Square problem.
         
@@ -1145,7 +1133,7 @@ class AbstractOneWayGNSSMeasurement(AbstractOnBoardMeasurement[_AbstractOneWayGN
         Since:
             12.1
     """
-    def __init__(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, quadraticClockModel: org.orekit.estimation.measurements.QuadraticClockModel, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
+    def __init__(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], quadraticClockModel: org.orekit.estimation.measurements.QuadraticClockModel, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
 
 class AbstractSingleFrequencyCombination(MeasurementCombination):
     """
@@ -1309,9 +1297,9 @@ class PythonAbstractOnBoardMeasurement(AbstractOnBoardMeasurement[_PythonAbstrac
         """
         ...
     @typing.overload
-    def getRemotePV(self, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState], int: int) -> org.orekit.utils.FieldPVCoordinatesProvider[org.hipparchus.analysis.differentiation.Gradient]: ...
+    def getRemotePV(self, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray], int: int) -> org.orekit.utils.FieldPVCoordinatesProvider[org.hipparchus.analysis.differentiation.Gradient]: ...
     @typing.overload
-    def getRemotePV(self, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> org.orekit.utils.PVCoordinatesProvider:
+    def getRemotePV(self, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> org.orekit.utils.PVCoordinatesProvider:
         """
             Description copied from class: :meth:`~org.orekit.estimation.measurements.gnss.AbstractOnBoardMeasurement.getRemotePV`
             Get emitting satellite position/velocity provider.
@@ -1364,8 +1352,8 @@ class PythonAbstractOnBoardMeasurement(AbstractOnBoardMeasurement[_PythonAbstrac
             Part of JCC Python interface to object
         """
         ...
-    def theoreticalEvaluation(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> org.orekit.estimation.measurements.EstimatedMeasurement[_PythonAbstractOnBoardMeasurement__T]: ...
-    def theoreticalEvaluationWithoutDerivatives(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> org.orekit.estimation.measurements.EstimatedMeasurementBase[_PythonAbstractOnBoardMeasurement__T]: ...
+    def theoreticalEvaluation(self, int: int, int2: int, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> org.orekit.estimation.measurements.EstimatedMeasurement[_PythonAbstractOnBoardMeasurement__T]: ...
+    def theoreticalEvaluationWithoutDerivatives(self, int: int, int2: int, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> org.orekit.estimation.measurements.EstimatedMeasurementBase[_PythonAbstractOnBoardMeasurement__T]: ...
 
 _PythonAbstractWindUp__T = typing.TypeVar('_PythonAbstractWindUp__T', bound=org.orekit.estimation.measurements.ObservedMeasurement)  # <T>
 class PythonAbstractWindUp(AbstractWindUp[_PythonAbstractWindUp__T], typing.Generic[_PythonAbstractWindUp__T]):
@@ -1401,7 +1389,7 @@ class PythonAmbiguityAcceptance(AmbiguityAcceptance):
     public class PythonAmbiguityAcceptance extends :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.estimation.measurements.gnss.AmbiguityAcceptance`
     """
     def __init__(self): ...
-    def accept(self, integerLeastSquareSolutionArray: typing.List[IntegerLeastSquareSolution]) -> IntegerLeastSquareSolution:
+    def accept(self, integerLeastSquareSolutionArray: typing.Union[typing.List[IntegerLeastSquareSolution], jpype.JArray]) -> IntegerLeastSquareSolution:
         """
             Check if one of the candidate solutions can be accepted.
         
@@ -1506,7 +1494,7 @@ class PythonIntegerLeastSquareSolver(IntegerLeastSquareSolver):
             Part of JCC Python interface to object
         """
         ...
-    def solveILS(self, int: int, doubleArray: typing.List[float], intArray: typing.List[int], realMatrix: org.hipparchus.linear.RealMatrix) -> typing.List[IntegerLeastSquareSolution]:
+    def solveILS(self, int: int, doubleArray: typing.Union[typing.List[float], jpype.JArray], intArray: typing.Union[typing.List[int], jpype.JArray], realMatrix: org.hipparchus.linear.RealMatrix) -> typing.MutableSequence[IntegerLeastSquareSolution]:
         """
             Find the best solutions to an Integer Least Square problem.
         
@@ -1597,7 +1585,7 @@ class SimpleRatioAmbiguityAcceptance(AmbiguityAcceptance):
             :class:`~org.orekit.estimation.measurements.gnss.AmbiguitySolver`
     """
     def __init__(self, double: float): ...
-    def accept(self, integerLeastSquareSolutionArray: typing.List[IntegerLeastSquareSolution]) -> IntegerLeastSquareSolution:
+    def accept(self, integerLeastSquareSolutionArray: typing.Union[typing.List[IntegerLeastSquareSolution], jpype.JArray]) -> IntegerLeastSquareSolution:
         """
             Check if one of the candidate solutions can be accepted.
         
@@ -1765,22 +1753,6 @@ class InterSatellitesPhase(AbstractInterSatellitesMeasurement['InterSatellitesPh
     
     
     """
-    AMBIGUITY_NAME: typing.ClassVar[str] = ...
-    """
-    :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public static final :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` AMBIGUITY_NAME
-    
-        Deprecated.
-        as of 12.1 not used anymore
-        Name for ambiguity driver.
-    
-        Also see:
-            :meth:`~constant`
-    
-    
-    """
-    @typing.overload
-    def __init__(self, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite, observableSatellite2: org.orekit.estimation.measurements.ObservableSatellite, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, double4: float): ...
-    @typing.overload
     def __init__(self, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite, observableSatellite2: org.orekit.estimation.measurements.ObservableSatellite, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, double4: float, ambiguityCache: AmbiguityCache): ...
     def getAmbiguityDriver(self) -> org.orekit.utils.ParameterDriver:
         """
@@ -1942,23 +1914,7 @@ class OneWayGNSSPhase(AbstractOneWayGNSSMeasurement['OneWayGNSSPhase']):
     
     
     """
-    AMBIGUITY_NAME: typing.ClassVar[str] = ...
-    """
-    :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.Deprecated?is` public static final :class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is` AMBIGUITY_NAME
-    
-        Deprecated.
-        as of 12.1 not used anymore
-        Name for ambiguity driver.
-    
-        Also see:
-            :meth:`~constant`
-    
-    
-    """
-    @typing.overload
-    def __init__(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, double: float, absoluteDate: org.orekit.time.AbsoluteDate, double2: float, double3: float, double4: float, double5: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
-    @typing.overload
-    def __init__(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, string: str, quadraticClockModel: org.orekit.estimation.measurements.QuadraticClockModel, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, double4: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite, ambiguityCache: AmbiguityCache): ...
+    def __init__(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], string: str, quadraticClockModel: org.orekit.estimation.measurements.QuadraticClockModel, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, double4: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite, ambiguityCache: AmbiguityCache): ...
     def getAmbiguityDriver(self) -> AmbiguityDriver:
         """
             Get the driver for phase ambiguity.
@@ -2011,9 +1967,9 @@ class OneWayGNSSRange(AbstractOneWayGNSSMeasurement['OneWayGNSSRange']):
     
     """
     @typing.overload
-    def __init__(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, double: float, absoluteDate: org.orekit.time.AbsoluteDate, double2: float, double3: float, double4: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
+    def __init__(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], double: float, absoluteDate: org.orekit.time.AbsoluteDate, double2: float, double3: float, double4: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
     @typing.overload
-    def __init__(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, quadraticClockModel: org.orekit.estimation.measurements.QuadraticClockModel, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
+    def __init__(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], quadraticClockModel: org.orekit.estimation.measurements.QuadraticClockModel, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
 
 class OneWayGNSSRangeRate(AbstractOneWayGNSSMeasurement['OneWayGNSSRangeRate']):
     """
@@ -2047,9 +2003,9 @@ class OneWayGNSSRangeRate(AbstractOneWayGNSSMeasurement['OneWayGNSSRangeRate']):
     
     """
     @typing.overload
-    def __init__(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, double: float, absoluteDate: org.orekit.time.AbsoluteDate, double2: float, double3: float, double4: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
+    def __init__(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], double: float, absoluteDate: org.orekit.time.AbsoluteDate, double2: float, double3: float, double4: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
     @typing.overload
-    def __init__(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, quadraticClockModel: org.orekit.estimation.measurements.QuadraticClockModel, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
+    def __init__(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], quadraticClockModel: org.orekit.estimation.measurements.QuadraticClockModel, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
 
 class PhaseMinusCodeCombination(AbstractSingleFrequencyCombination):
     """
@@ -2100,24 +2056,6 @@ class PythonAbstractCycleSlipDetector(AbstractCycleSlipDetector):
     """
     public class PythonAbstractCycleSlipDetector extends :class:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector`
     """
-    def cycleSlipDataSet(self, string: str, absoluteDate: org.orekit.time.AbsoluteDate, double: float, frequency: org.orekit.gnss.Frequency) -> None:
-        """
-            Set the data: collect data at the current Date, at the current frequency, for a given satellite, add it within the
-            attributes data and stuff.
-        
-            Overrides:
-                :meth:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector.cycleSlipDataSet` in
-                class :class:`~org.orekit.estimation.measurements.gnss.AbstractCycleSlipDetector`
-        
-            Parameters:
-                nameSat (:class:`~org.orekit.estimation.measurements.gnss.https:.docs.oracle.com.javase.8.docs.api.java.lang.String?is`): name of the satellite (e.g. "GPS - 7")
-                date (:class:`~org.orekit.time.AbsoluteDate`): date of the measurement
-                value (double): measurement at the current date
-                freq (:class:`~org.orekit.gnss.Frequency`): frequency used
-        
-        
-        """
-        ...
     def finalize(self) -> None: ...
     def getMaxTimeBeetween2Measurement(self) -> float:
         """
@@ -2148,7 +2086,6 @@ class PythonAbstractCycleSlipDetector(AbstractCycleSlipDetector):
         """
         ...
     def getResults(self) -> java.util.List[CycleSlipDetectorResults]: ...
-    def getStuffReference(self) -> java.util.List[java.util.Map[org.orekit.gnss.Frequency, 'AbstractCycleSlipDetector.DataForDetection']]: ...
     def manageData(self, observationDataSet: org.orekit.files.rinex.observation.ObservationDataSet) -> None:
         """
             The method is in charge of collecting the measurements, manage them, and call the detection method.
@@ -2207,7 +2144,7 @@ class PythonAbstractDualFrequencyCombination(AbstractDualFrequencyCombination):
     """
     def __init__(self, combinationType: CombinationType, satelliteSystem: org.orekit.gnss.SatelliteSystem): ...
     def finalize(self) -> None: ...
-    def getCombinedFrequency(self, frequency: org.orekit.gnss.Frequency, frequency2: org.orekit.gnss.Frequency) -> float:
+    def getCombinedFrequency(self, gnssSignal: org.orekit.gnss.GnssSignal, gnssSignal2: org.orekit.gnss.GnssSignal) -> float:
         """
             Get the combined frequency of two measurements.
         
@@ -2216,16 +2153,16 @@ class PythonAbstractDualFrequencyCombination(AbstractDualFrequencyCombination):
                 class :class:`~org.orekit.estimation.measurements.gnss.AbstractDualFrequencyCombination`
         
             Parameters:
-                f1 (:class:`~org.orekit.gnss.Frequency`): frequency of the first measurement
-                f2 (:class:`~org.orekit.gnss.Frequency`): frequency of the second measurement
+                s1 (:class:`~org.orekit.gnss.GnssSignal`): frequency of the first measurement
+                s2 (:class:`~org.orekit.gnss.GnssSignal`): frequency of the second measurement
         
             Returns:
-                combined frequency in MHz
+                combined frequency in Hz
         
         
         """
         ...
-    def getCombinedValue(self, double: float, frequency: org.orekit.gnss.Frequency, double2: float, frequency2: org.orekit.gnss.Frequency) -> float:
+    def getCombinedValue(self, double: float, gnssSignal: org.orekit.gnss.GnssSignal, double2: float, gnssSignal2: org.orekit.gnss.GnssSignal) -> float:
         """
             Get the combined observed value of two measurements.
         
@@ -2235,9 +2172,9 @@ class PythonAbstractDualFrequencyCombination(AbstractDualFrequencyCombination):
         
             Parameters:
                 obs1 (double): observed value of the first measurement
-                f1 (:class:`~org.orekit.gnss.Frequency`): frequency of the first measurement
+                s1 (:class:`~org.orekit.gnss.GnssSignal`): frequency of the first measurement
                 obs2 (double): observed value of the second measurement
-                f2 (:class:`~org.orekit.gnss.Frequency`): frequency of the second measurement
+                s2 (:class:`~org.orekit.gnss.GnssSignal`): frequency of the second measurement
         
             Returns:
                 combined observed value
@@ -2291,8 +2228,8 @@ class PythonAbstractInterSatellitesMeasurement(AbstractInterSatellitesMeasuremen
             Part of JCC Python interface to object
         """
         ...
-    def theoreticalEvaluation(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> org.orekit.estimation.measurements.EstimatedMeasurement[_PythonAbstractInterSatellitesMeasurement__T]: ...
-    def theoreticalEvaluationWithoutDerivatives(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> org.orekit.estimation.measurements.EstimatedMeasurementBase[_PythonAbstractInterSatellitesMeasurement__T]: ...
+    def theoreticalEvaluation(self, int: int, int2: int, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> org.orekit.estimation.measurements.EstimatedMeasurement[_PythonAbstractInterSatellitesMeasurement__T]: ...
+    def theoreticalEvaluationWithoutDerivatives(self, int: int, int2: int, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> org.orekit.estimation.measurements.EstimatedMeasurementBase[_PythonAbstractInterSatellitesMeasurement__T]: ...
 
 class PythonAbstractLambdaMethod(AbstractLambdaMethod):
     """
@@ -2372,7 +2309,7 @@ class PythonAbstractOneWayGNSSMeasurement(AbstractOneWayGNSSMeasurement[_PythonA
     """
     public class PythonAbstractOneWayGNSSMeasurement<T extends :class:`~org.orekit.estimation.measurements.ObservedMeasurement`<T>> extends :class:`~org.orekit.estimation.measurements.gnss.AbstractOneWayGNSSMeasurement`<T>
     """
-    def __init__(self, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider, quadraticClockModel: org.orekit.estimation.measurements.QuadraticClockModel, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
+    def __init__(self, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable], quadraticClockModel: org.orekit.estimation.measurements.QuadraticClockModel, absoluteDate: org.orekit.time.AbsoluteDate, double: float, double2: float, double3: float, observableSatellite: org.orekit.estimation.measurements.ObservableSatellite): ...
     def finalize(self) -> None: ...
     def pythonDecRef(self) -> None:
         """
@@ -2393,8 +2330,8 @@ class PythonAbstractOneWayGNSSMeasurement(AbstractOneWayGNSSMeasurement[_PythonA
             Part of JCC Python interface to object
         """
         ...
-    def theoreticalEvaluation(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> org.orekit.estimation.measurements.EstimatedMeasurement[_PythonAbstractOneWayGNSSMeasurement__T]: ...
-    def theoreticalEvaluationWithoutDerivatives(self, int: int, int2: int, spacecraftStateArray: typing.List[org.orekit.propagation.SpacecraftState]) -> org.orekit.estimation.measurements.EstimatedMeasurementBase[_PythonAbstractOneWayGNSSMeasurement__T]: ...
+    def theoreticalEvaluation(self, int: int, int2: int, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> org.orekit.estimation.measurements.EstimatedMeasurement[_PythonAbstractOneWayGNSSMeasurement__T]: ...
+    def theoreticalEvaluationWithoutDerivatives(self, int: int, int2: int, spacecraftStateArray: typing.Union[typing.List[org.orekit.propagation.SpacecraftState], jpype.JArray]) -> org.orekit.estimation.measurements.EstimatedMeasurementBase[_PythonAbstractOneWayGNSSMeasurement__T]: ...
 
 class PythonAbstractSingleFrequencyCombination(AbstractSingleFrequencyCombination):
     """
@@ -2497,7 +2434,7 @@ class IntegerBootstrapping(LambdaMethod):
     def __init__(self, double: float): ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.estimation.measurements.gnss")``.
 
     AbstractCycleSlipDetector: typing.Type[AbstractCycleSlipDetector]
@@ -2561,4 +2498,3 @@ class __module_protocol__(typing.Protocol):
     WideLaneCombination: typing.Type[WideLaneCombination]
     WindUp: typing.Type[WindUp]
     WindUpFactory: typing.Type[WindUpFactory]
-    class-use: org.orekit.estimation.measurements.gnss.class-use.__module_protocol__

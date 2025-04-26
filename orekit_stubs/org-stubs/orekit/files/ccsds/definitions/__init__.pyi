@@ -1,7 +1,13 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import org.orekit.bodies
 import org.orekit.data
-import org.orekit.files.ccsds.definitions.class-use
 import org.orekit.files.ccsds.utils
 import org.orekit.frames
 import org.orekit.ssa.collision.shorttermencounter.probability.twod
@@ -52,7 +58,7 @@ class AdMethodType(java.lang.Enum['AdMethodType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['AdMethodType']:
+    def values() -> typing.MutableSequence['AdMethodType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -276,7 +282,7 @@ class CelestialBodyFrame(java.lang.Enum['CelestialBodyFrame']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['CelestialBodyFrame']:
+    def values() -> typing.MutableSequence['CelestialBodyFrame']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -401,7 +407,7 @@ class CenterName(java.lang.Enum['CenterName']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['CenterName']:
+    def values() -> typing.MutableSequence['CenterName']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -456,7 +462,7 @@ class DutyCycleType(java.lang.Enum['DutyCycleType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['DutyCycleType']:
+    def values() -> typing.MutableSequence['DutyCycleType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -541,7 +547,7 @@ class FrameFacade:
         """
         ...
     @staticmethod
-    def getTransform(frameFacade: 'FrameFacade', frameFacade2: 'FrameFacade', frame3: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinatesProvider: org.orekit.utils.PVCoordinatesProvider) -> org.orekit.frames.Transform:
+    def getTransform(frameFacade: 'FrameFacade', frameFacade2: 'FrameFacade', frame3: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, pVCoordinatesProvider: typing.Union[org.orekit.utils.PVCoordinatesProvider, typing.Callable]) -> org.orekit.frames.Transform:
         """
             Get the transform between :class:`~org.orekit.files.ccsds.definitions.FrameFacade`.
         
@@ -614,9 +620,6 @@ class ModifiedFrame(org.orekit.frames.Frame):
     public class ModifiedFrame extends :class:`~org.orekit.frames.Frame`
     
         A reference frame created from the :code:`REF_FRAME` and :code:`CENTER_NAME` is a CCSDS OPM, OMM, or OEM file.
-    
-        Also see:
-            :meth:`~serialized`
     """
     def __init__(self, frame: org.orekit.frames.Frame, celestialBodyFrame: CelestialBodyFrame, celestialBody2: org.orekit.bodies.CelestialBody, string: str): ...
     def getCenterName(self) -> str:
@@ -734,7 +737,7 @@ class OdMethodType(java.lang.Enum['OdMethodType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['OdMethodType']:
+    def values() -> typing.MutableSequence['OdMethodType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -798,7 +801,7 @@ class OnOff(java.lang.Enum['OnOff']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['OnOff']:
+    def values() -> typing.MutableSequence['OnOff']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -894,7 +897,7 @@ class OrbitRelativeFrame(java.lang.Enum['OrbitRelativeFrame']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['OrbitRelativeFrame']:
+    def values() -> typing.MutableSequence['OrbitRelativeFrame']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1030,7 +1033,7 @@ class PocMethodType(java.lang.Enum['PocMethodType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['PocMethodType']:
+    def values() -> typing.MutableSequence['PocMethodType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1136,7 +1139,7 @@ class SpacecraftBodyFrame:
         @staticmethod
         def valueOf(string: str) -> 'SpacecraftBodyFrame.BaseEquipment': ...
         @staticmethod
-        def values() -> typing.List['SpacecraftBodyFrame.BaseEquipment']: ...
+        def values() -> typing.MutableSequence['SpacecraftBodyFrame.BaseEquipment']: ...
 
 class TimeConverter:
     """
@@ -1284,7 +1287,7 @@ class TimeSystem(java.lang.Enum['TimeSystem']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['TimeSystem']:
+    def values() -> typing.MutableSequence['TimeSystem']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1599,7 +1602,7 @@ class YesNoUnknown(java.lang.Enum['YesNoUnknown']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['YesNoUnknown']:
+    def values() -> typing.MutableSequence['YesNoUnknown']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1618,7 +1621,7 @@ class YesNoUnknown(java.lang.Enum['YesNoUnknown']):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.ccsds.definitions")``.
 
     AdMethodType: typing.Type[AdMethodType]
@@ -1639,4 +1642,3 @@ class __module_protocol__(typing.Protocol):
     TimeSystem: typing.Type[TimeSystem]
     Units: typing.Type[Units]
     YesNoUnknown: typing.Type[YesNoUnknown]
-    class-use: org.orekit.files.ccsds.definitions.class-use.__module_protocol__

@@ -1,14 +1,56 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.util
 import java.util.stream
+import jpype
 import org.hipparchus
-import org.orekit.forces.maneuvers.trigger.class-use
+import org.hipparchus.ode.events
 import org.orekit.propagation
 import org.orekit.propagation.events
+import org.orekit.propagation.events.handlers
 import org.orekit.time
 import org.orekit.utils
 import typing
 
 
+
+_FieldManeuverTriggerDetector__W = typing.TypeVar('_FieldManeuverTriggerDetector__W', bound=org.hipparchus.CalculusFieldElement)  # <W>
+_FieldManeuverTriggerDetector__T = typing.TypeVar('_FieldManeuverTriggerDetector__T', bound=org.orekit.propagation.events.FieldEventDetector)  # <T>
+class FieldManeuverTriggerDetector(org.orekit.propagation.events.FieldDetectorModifier[_FieldManeuverTriggerDetector__W], typing.Generic[_FieldManeuverTriggerDetector__W, _FieldManeuverTriggerDetector__T]):
+    """
+    public class FieldManeuverTriggerDetector<W extends :class:`~org.orekit.forces.maneuvers.trigger.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<W>, T extends :class:`~org.orekit.propagation.events.FieldEventDetector`<W>> extends :class:`~org.orekit.forces.maneuvers.trigger.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.FieldDetectorModifier`<W>
+    
+        Wrapper for event detection triggering maneuvers (Field version).
+    
+        Since:
+            13.0
+    
+        Also see:
+            :class:`~org.orekit.forces.maneuvers.trigger.AbstractManeuverTriggers`,
+            :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggerDetector`
+    """
+    def __init__(self, t: _FieldManeuverTriggerDetector__T, fieldEventHandler: typing.Union[org.orekit.propagation.events.handlers.FieldEventHandler[_FieldManeuverTriggerDetector__W], typing.Callable[[org.orekit.propagation.FieldSpacecraftState[org.hipparchus.CalculusFieldElement], org.orekit.propagation.events.FieldEventDetector[org.hipparchus.CalculusFieldElement], bool], org.hipparchus.ode.events.Action]]): ...
+    def getDetector(self) -> _FieldManeuverTriggerDetector__T:
+        """
+            Description copied from interface: :meth:`~org.orekit.propagation.events.FieldDetectorModifier.getDetector`
+            Getter for wrapped detector.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.FieldDetectorModifier.getDetector` in
+                interface :class:`~org.orekit.propagation.events.FieldDetectorModifier`
+        
+            Returns:
+                detector
+        
+        
+        """
+        ...
+    def getHandler(self) -> org.orekit.propagation.events.handlers.FieldEventHandler[_FieldManeuverTriggerDetector__W]: ...
 
 _FieldManeuverTriggersResetter__T = typing.TypeVar('_FieldManeuverTriggersResetter__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldManeuverTriggersResetter(typing.Generic[_FieldManeuverTriggersResetter__T]):
@@ -27,6 +69,55 @@ class FieldManeuverTriggersResetter(typing.Generic[_FieldManeuverTriggersResette
     def maneuverTriggered(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldManeuverTriggersResetter__T], boolean: bool) -> None: ...
     def resetState(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_FieldManeuverTriggersResetter__T]) -> org.orekit.propagation.FieldSpacecraftState[_FieldManeuverTriggersResetter__T]: ...
 
+_ManeuverTriggerDetector__T = typing.TypeVar('_ManeuverTriggerDetector__T', bound=org.orekit.propagation.events.EventDetector)  # <T>
+class ManeuverTriggerDetector(org.orekit.propagation.events.DetectorModifier, typing.Generic[_ManeuverTriggerDetector__T]):
+    """
+    public class ManeuverTriggerDetector<T extends :class:`~org.orekit.propagation.events.EventDetector`> extends :class:`~org.orekit.forces.maneuvers.trigger.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.propagation.events.DetectorModifier`
+    
+        Wrapper for event detection triggering maneuvers.
+    
+        Since:
+            13.0
+    
+        Also see:
+            :class:`~org.orekit.forces.maneuvers.trigger.AbstractManeuverTriggers`
+    """
+    def __init__(self, t: _ManeuverTriggerDetector__T, eventHandler: typing.Union[org.orekit.propagation.events.handlers.EventHandler, typing.Callable]): ...
+    def getDetector(self) -> _ManeuverTriggerDetector__T:
+        """
+            Description copied from interface: :meth:`~org.orekit.propagation.events.DetectorModifier.getDetector`
+            Get the wrapped detector.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.DetectorModifier.getDetector` in
+                interface :class:`~org.orekit.propagation.events.DetectorModifier`
+        
+            Returns:
+                wrapped detector
+        
+        
+        """
+        ...
+    def getHandler(self) -> org.orekit.propagation.events.handlers.EventHandler:
+        """
+            Description copied from interface: :meth:`~org.orekit.propagation.events.DetectorModifier.getHandler`
+            Get the handler.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.DetectorModifier.getHandler` in
+                interface :class:`~org.orekit.propagation.events.DetectorModifier`
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.events.EventDetector.getHandler` in
+                interface :class:`~org.orekit.propagation.events.EventDetector`
+        
+            Returns:
+                event handler to call at event occurrences
+        
+        
+        """
+        ...
+
 class ManeuverTriggers(org.orekit.utils.ParameterDriversProvider, org.orekit.propagation.events.EventDetectorsProvider):
     """
     public interface ManeuverTriggers extends :class:`~org.orekit.utils.ParameterDriversProvider`, :class:`~org.orekit.propagation.events.EventDetectorsProvider`
@@ -36,29 +127,6 @@ class ManeuverTriggers(org.orekit.utils.ParameterDriversProvider, org.orekit.pro
         Since:
             10.2
     """
-    _addResetter_0__T = typing.TypeVar('_addResetter_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def addResetter(self, field: org.hipparchus.Field[_addResetter_0__T], fieldManeuverTriggersResetter: FieldManeuverTriggersResetter[_addResetter_0__T]) -> None:
-        """
-            Add a resetter.
-        
-            Parameters:
-                field (:class:`~org.orekit.forces.maneuvers.trigger.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the state belongs
-                resetter (:class:`~org.orekit.forces.maneuvers.trigger.FieldManeuverTriggersResetter`<T> resetter): resetter to add
-        
-        
-        """
-        ...
-    @typing.overload
-    def addResetter(self, maneuverTriggersResetter: 'ManeuverTriggersResetter') -> None:
-        """
-            Add a resetter.
-        
-            Parameters:
-                resetter (:class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter`): resetter to add
-        
-        """
-        ...
     def getName(self) -> str:
         """
             Get the maneuver name.
@@ -102,7 +170,7 @@ class ManeuverTriggers(org.orekit.utils.ParameterDriversProvider, org.orekit.pro
         ...
     _isFiring_1__T = typing.TypeVar('_isFiring_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def isFiring(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float]) -> bool:
+    def isFiring(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> bool:
         """
             Find out if the maneuver is firing or not.
         
@@ -116,7 +184,7 @@ class ManeuverTriggers(org.orekit.utils.ParameterDriversProvider, org.orekit.pro
         """
         ...
     @typing.overload
-    def isFiring(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_isFiring_1__T], tArray: typing.List[_isFiring_1__T]) -> bool:
+    def isFiring(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_isFiring_1__T], tArray: typing.Union[typing.List[_isFiring_1__T], jpype.JArray]) -> bool:
         """
             Find out if the maneuver is firing or not.
         
@@ -186,47 +254,52 @@ class ManeuverTriggersResetter:
         """
         ...
 
-class AbstractManeuverTriggers(ManeuverTriggers):
+_PythonFieldManeuverTriggersResetter__T = typing.TypeVar('_PythonFieldManeuverTriggersResetter__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+class PythonFieldManeuverTriggersResetter(FieldManeuverTriggersResetter[_PythonFieldManeuverTriggersResetter__T], typing.Generic[_PythonFieldManeuverTriggersResetter__T]):
     """
-    public abstract class AbstractManeuverTriggers extends :class:`~org.orekit.forces.maneuvers.trigger.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
-    
-        Base class for triggers.
-    
-        Since:
-            11.1
+    public class PythonFieldManeuverTriggersResetter<T extends :class:`~org.orekit.forces.maneuvers.trigger.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.forces.maneuvers.trigger.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.maneuvers.trigger.FieldManeuverTriggersResetter`<T>
     """
-    _addResetter_0__T = typing.TypeVar('_addResetter_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def addResetter(self, field: org.hipparchus.Field[_addResetter_0__T], fieldManeuverTriggersResetter: FieldManeuverTriggersResetter[_addResetter_0__T]) -> None:
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    def maneuverTriggered(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldManeuverTriggersResetter__T], boolean: bool) -> None: ...
+    def pythonDecRef(self) -> None:
         """
-            Add a resetter.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.addResetter` in
-                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
-        
-            Parameters:
-                field (:class:`~org.orekit.forces.maneuvers.trigger.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the state belongs
-                resetter (:class:`~org.orekit.forces.maneuvers.trigger.FieldManeuverTriggersResetter`<T> resetter): resetter to add
-        
+            Part of JCC Python interface to object
         
         """
         ...
     @typing.overload
-    def addResetter(self, maneuverTriggersResetter: ManeuverTriggersResetter) -> None:
+    def pythonExtension(self) -> int:
         """
-            Add a resetter.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.addResetter` in
-                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
-        
-            Parameters:
-                resetter (:class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter`): resetter to add
+            Part of JCC Python interface to object
         
         """
         ...
-    def getFirings(self) -> org.orekit.utils.TimeSpanMap[bool]: ...
+    @typing.overload
+    def pythonExtension(self, long: int) -> None:
+        """
+            Part of JCC Python interface to object
+        """
+        ...
+    def resetState(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldManeuverTriggersResetter__T]) -> org.orekit.propagation.FieldSpacecraftState[_PythonFieldManeuverTriggersResetter__T]: ...
+
+class PythonManeuverTriggers(ManeuverTriggers):
+    """
+    public class PythonManeuverTriggers extends :class:`~org.orekit.forces.maneuvers.trigger.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
+    """
+    def __init__(self): ...
+    def finalize(self) -> None: ...
+    @typing.overload
+    def getEventDetectors(self, list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
+    @typing.overload
+    def getEventDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
+    _getFieldEventDetectors_0__T = typing.TypeVar('_getFieldEventDetectors_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    _getFieldEventDetectors_1__T = typing.TypeVar('_getFieldEventDetectors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_0__T], list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_0__T]]: ...
+    @typing.overload
+    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_1__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_1__T]]: ...
+    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
     _init_0__T = typing.TypeVar('_init_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_init_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_init_0__T]) -> None:
@@ -263,146 +336,9 @@ class AbstractManeuverTriggers(ManeuverTriggers):
         
         """
         ...
-    _isFiring_1__S = typing.TypeVar('_isFiring_1__S', bound=org.hipparchus.CalculusFieldElement)  # <S>
-    @typing.overload
-    def isFiring(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float]) -> bool:
-        """
-            Find out if the maneuver is firing or not.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.isFiring` in
-                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.AbsoluteDate`): current date
-                parameters (double[]): maneuver triggers parameters
-        
-            Returns:
-                true if the maneuver is firing, false otherwise
-        
-        """
-        ...
-    @typing.overload
-    def isFiring(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_isFiring_1__S], sArray: typing.List[_isFiring_1__S]) -> bool:
-        """
-            Find out if the maneuver is firing or not.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.isFiring` in
-                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
-        
-            Parameters:
-                date (:class:`~org.orekit.time.FieldAbsoluteDate`<S> date): current date
-                parameters (S[]): maneuver triggers parameters
-        
-            Returns:
-                true if the maneuver is firing, false otherwise
-        
-        
-        """
-        ...
-
-_PythonFieldManeuverTriggersResetter__T = typing.TypeVar('_PythonFieldManeuverTriggersResetter__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class PythonFieldManeuverTriggersResetter(FieldManeuverTriggersResetter[_PythonFieldManeuverTriggersResetter__T], typing.Generic[_PythonFieldManeuverTriggersResetter__T]):
-    """
-    public class PythonFieldManeuverTriggersResetter<T extends :class:`~org.orekit.forces.maneuvers.trigger.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.forces.maneuvers.trigger.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.maneuvers.trigger.FieldManeuverTriggersResetter`<T>
-    """
-    def __init__(self): ...
-    def finalize(self) -> None: ...
-    def maneuverTriggered(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldManeuverTriggersResetter__T], boolean: bool) -> None: ...
-    def pythonDecRef(self) -> None:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self) -> int:
-        """
-            Part of JCC Python interface to object
-        
-        """
-        ...
-    @typing.overload
-    def pythonExtension(self, long: int) -> None:
-        """
-            Part of JCC Python interface to object
-        """
-        ...
-    def resetState(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_PythonFieldManeuverTriggersResetter__T]) -> org.orekit.propagation.FieldSpacecraftState[_PythonFieldManeuverTriggersResetter__T]: ...
-
-class PythonManeuverTriggers(ManeuverTriggers):
-    """
-    public class PythonManeuverTriggers extends :class:`~org.orekit.forces.maneuvers.trigger.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
-    """
-    def __init__(self): ...
-    _addResetter_0__T = typing.TypeVar('_addResetter_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def addResetter(self, field: org.hipparchus.Field[_addResetter_0__T], fieldManeuverTriggersResetter: FieldManeuverTriggersResetter[_addResetter_0__T]) -> None:
-        """
-            Add a resetter.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.addResetter` in
-                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
-        
-            Parameters:
-                field (:class:`~org.orekit.forces.maneuvers.trigger.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the state belongs
-                resetter (:class:`~org.orekit.forces.maneuvers.trigger.FieldManeuverTriggersResetter`<T> resetter): resetter to add
-        
-        
-        """
-        ...
-    @typing.overload
-    def addResetter(self, maneuverTriggersResetter: ManeuverTriggersResetter) -> None:
-        """
-            Add a resetter.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.addResetter` in
-                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
-        
-            Parameters:
-                resetter (:class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter`): resetter to add
-        
-        """
-        ...
-    def finalize(self) -> None: ...
-    @typing.overload
-    def getEventDetectors(self, list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
-    @typing.overload
-    def getEventDetectors(self) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
-    _getFieldEventDetectors_0__T = typing.TypeVar('_getFieldEventDetectors_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    _getFieldEventDetectors_1__T = typing.TypeVar('_getFieldEventDetectors_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_0__T], list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_0__T]]: ...
-    @typing.overload
-    def getFieldEventDetectors(self, field: org.hipparchus.Field[_getFieldEventDetectors_1__T]) -> java.util.stream.Stream[org.orekit.propagation.events.FieldEventDetector[_getFieldEventDetectors_1__T]]: ...
-    def getParametersDrivers(self) -> java.util.List[org.orekit.utils.ParameterDriver]: ...
-    _init_0__T = typing.TypeVar('_init_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @typing.overload
-    def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_init_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_init_0__T]) -> None: ...
-    @typing.overload
-    def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
-        """
-            Initialization method called at propagation start.
-        
-            The default implementation does nothing.
-        
-            Specified by:
-                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.init` in
-                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
-        
-            Parameters:
-                initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial spacecraft state (at the start of propagation).
-                target (:class:`~org.orekit.time.AbsoluteDate`): date of propagation. Not equal to :code:`initialState.getDate()`.
-        
-        
-        """
-        ...
     _isFiring_1__T = typing.TypeVar('_isFiring_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def isFiring(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float]) -> bool:
+    def isFiring(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> bool:
         """
             Find out if the maneuver is firing or not.
         
@@ -420,7 +356,7 @@ class PythonManeuverTriggers(ManeuverTriggers):
         """
         ...
     @typing.overload
-    def isFiring(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_isFiring_1__T], tArray: typing.List[_isFiring_1__T]) -> bool:
+    def isFiring(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_isFiring_1__T], tArray: typing.Union[typing.List[_isFiring_1__T], jpype.JArray]) -> bool:
         """
             Find out if the maneuver is firing or not.
         
@@ -513,10 +449,159 @@ class PythonManeuverTriggersResetter(ManeuverTriggersResetter):
         """
         ...
 
-_IntervalEventTrigger__T = typing.TypeVar('_IntervalEventTrigger__T', bound=org.orekit.propagation.events.AbstractDetector)  # <T>
+class ResettableManeuverTriggers(ManeuverTriggers):
+    """
+    public interface ResettableManeuverTriggers extends :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
+    
+        Interface for maneuver triggers with resetters.
+    
+        Since:
+            10.2
+    """
+    _addResetter_0__T = typing.TypeVar('_addResetter_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def addResetter(self, field: org.hipparchus.Field[_addResetter_0__T], fieldManeuverTriggersResetter: FieldManeuverTriggersResetter[_addResetter_0__T]) -> None:
+        """
+            Add a resetter.
+        
+            Parameters:
+                field (:class:`~org.orekit.forces.maneuvers.trigger.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the state belongs
+                resetter (:class:`~org.orekit.forces.maneuvers.trigger.FieldManeuverTriggersResetter`<T> resetter): resetter to add
+        
+        
+        """
+        ...
+    @typing.overload
+    def addResetter(self, maneuverTriggersResetter: ManeuverTriggersResetter) -> None:
+        """
+            Add a resetter.
+        
+            Parameters:
+                resetter (:class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter`): resetter to add
+        
+        """
+        ...
+
+class AbstractManeuverTriggers(ResettableManeuverTriggers):
+    """
+    public abstract class AbstractManeuverTriggers extends :class:`~org.orekit.forces.maneuvers.trigger.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.forces.maneuvers.trigger.ResettableManeuverTriggers`
+    
+        Base class for triggers.
+    
+        Since:
+            11.1
+    """
+    _addResetter_0__T = typing.TypeVar('_addResetter_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def addResetter(self, field: org.hipparchus.Field[_addResetter_0__T], fieldManeuverTriggersResetter: FieldManeuverTriggersResetter[_addResetter_0__T]) -> None:
+        """
+            Add a resetter.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.maneuvers.trigger.ResettableManeuverTriggers.addResetter` in
+                interface :class:`~org.orekit.forces.maneuvers.trigger.ResettableManeuverTriggers`
+        
+            Parameters:
+                field (:class:`~org.orekit.forces.maneuvers.trigger.https:.www.hipparchus.org.apidocs.org.hipparchus.Field?is`<T> field): field to which the state belongs
+                resetter (:class:`~org.orekit.forces.maneuvers.trigger.FieldManeuverTriggersResetter`<T> resetter): resetter to add
+        
+        
+        """
+        ...
+    @typing.overload
+    def addResetter(self, maneuverTriggersResetter: ManeuverTriggersResetter) -> None:
+        """
+            Add a resetter.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.maneuvers.trigger.ResettableManeuverTriggers.addResetter` in
+                interface :class:`~org.orekit.forces.maneuvers.trigger.ResettableManeuverTriggers`
+        
+            Parameters:
+                resetter (:class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggersResetter`): resetter to add
+        
+        """
+        ...
+    def getFirings(self) -> org.orekit.utils.TimeSpanMap[bool]: ...
+    _init_0__T = typing.TypeVar('_init_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
+    @typing.overload
+    def init(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_init_0__T], fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_init_0__T]) -> None:
+        """
+            Initialization method called at propagation start.
+        
+            The default implementation does nothing.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.init` in
+                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
+        
+            Parameters:
+                initialState (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> initialState): initial spacecraft state (at the start of propagation).
+                target (:class:`~org.orekit.time.FieldAbsoluteDate`<T> target): date of propagation. Not equal to :code:`initialState.getDate()`.
+        
+        
+        """
+        ...
+    @typing.overload
+    def init(self, spacecraftState: org.orekit.propagation.SpacecraftState, absoluteDate: org.orekit.time.AbsoluteDate) -> None:
+        """
+            Initialization method called at propagation start.
+        
+            The default implementation does nothing.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.init` in
+                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
+        
+            Parameters:
+                initialState (:class:`~org.orekit.propagation.SpacecraftState`): initial spacecraft state (at the start of propagation).
+                target (:class:`~org.orekit.time.AbsoluteDate`): date of propagation. Not equal to :code:`initialState.getDate()`.
+        
+        """
+        ...
+    _isFiring_1__S = typing.TypeVar('_isFiring_1__S', bound=org.hipparchus.CalculusFieldElement)  # <S>
+    @typing.overload
+    def isFiring(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> bool:
+        """
+            Find out if the maneuver is firing or not.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.isFiring` in
+                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): current date
+                parameters (double[]): maneuver triggers parameters
+        
+            Returns:
+                true if the maneuver is firing, false otherwise
+        
+        """
+        ...
+    @typing.overload
+    def isFiring(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_isFiring_1__S], sArray: typing.Union[typing.List[_isFiring_1__S], jpype.JArray]) -> bool:
+        """
+            Find out if the maneuver is firing or not.
+        
+            Specified by:
+                :meth:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers.isFiring` in
+                interface :class:`~org.orekit.forces.maneuvers.trigger.ManeuverTriggers`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.FieldAbsoluteDate`<S> date): current date
+                parameters (S[]): maneuver triggers parameters
+        
+            Returns:
+                true if the maneuver is firing, false otherwise
+        
+        
+        """
+        ...
+
+_IntervalEventTrigger__T = typing.TypeVar('_IntervalEventTrigger__T', bound=org.orekit.propagation.events.EventDetector)  # <T>
 class IntervalEventTrigger(AbstractManeuverTriggers, typing.Generic[_IntervalEventTrigger__T]):
     """
-    public abstract class IntervalEventTrigger<T extends :class:`~org.orekit.propagation.events.AbstractDetector`<T>> extends :class:`~org.orekit.forces.maneuvers.trigger.AbstractManeuverTriggers`
+    public abstract class IntervalEventTrigger<T extends :class:`~org.orekit.propagation.events.EventDetector`> extends :class:`~org.orekit.forces.maneuvers.trigger.AbstractManeuverTriggers`
     
         Maneuver triggers based on a single event detector that defines firing intervals.
     
@@ -529,7 +614,6 @@ class IntervalEventTrigger(AbstractManeuverTriggers, typing.Generic[_IntervalEve
         Also see:
             :class:`~org.orekit.forces.maneuvers.trigger.StartStopEventsTrigger`
     """
-    def __init__(self, t: _IntervalEventTrigger__T): ...
     @typing.overload
     def getEventDetectors(self, list: java.util.List[org.orekit.utils.ParameterDriver]) -> java.util.stream.Stream[org.orekit.propagation.events.EventDetector]: ...
     @typing.overload
@@ -650,11 +734,11 @@ class PythonAbstractManeuverTriggers(AbstractManeuverTriggers):
         """
         ...
 
-_StartStopEventsTrigger__A = typing.TypeVar('_StartStopEventsTrigger__A', bound=org.orekit.propagation.events.AbstractDetector)  # <A>
-_StartStopEventsTrigger__O = typing.TypeVar('_StartStopEventsTrigger__O', bound=org.orekit.propagation.events.AbstractDetector)  # <O>
+_StartStopEventsTrigger__A = typing.TypeVar('_StartStopEventsTrigger__A', bound=org.orekit.propagation.events.EventDetector)  # <A>
+_StartStopEventsTrigger__O = typing.TypeVar('_StartStopEventsTrigger__O', bound=org.orekit.propagation.events.EventDetector)  # <O>
 class StartStopEventsTrigger(AbstractManeuverTriggers, typing.Generic[_StartStopEventsTrigger__A, _StartStopEventsTrigger__O]):
     """
-    public abstract class StartStopEventsTrigger<A extends :class:`~org.orekit.propagation.events.AbstractDetector`<A>, O extends :class:`~org.orekit.propagation.events.AbstractDetector`<O>> extends :class:`~org.orekit.forces.maneuvers.trigger.AbstractManeuverTriggers`
+    public abstract class StartStopEventsTrigger<A extends :class:`~org.orekit.propagation.events.EventDetector`, O extends :class:`~org.orekit.propagation.events.EventDetector`> extends :class:`~org.orekit.forces.maneuvers.trigger.AbstractManeuverTriggers`
     
         Maneuver triggers based on a pair of event detectors that defines firing start and stop.
     
@@ -747,6 +831,8 @@ class DateBasedManeuverTriggers(IntervalEventTrigger[org.orekit.propagation.even
     @typing.overload
     def __init__(self, string: str, absoluteDate: org.orekit.time.AbsoluteDate, double: float): ...
     @typing.overload
+    def __init__(self, string: str, absoluteDate: org.orekit.time.AbsoluteDate, double: float, eventDetectionSettings: org.orekit.propagation.events.EventDetectionSettings): ...
+    @typing.overload
     def __init__(self, absoluteDate: org.orekit.time.AbsoluteDate, double: float): ...
     def getDuration(self) -> float:
         """
@@ -796,18 +882,14 @@ class PythonIntervalEventTrigger(IntervalEventTrigger[_PythonIntervalEventTrigge
     public class PythonIntervalEventTrigger<T extends :class:`~org.orekit.propagation.events.AbstractDetector`<T>> extends :class:`~org.orekit.forces.maneuvers.trigger.IntervalEventTrigger`<T>
     """
     def __init__(self, t: _PythonIntervalEventTrigger__T): ...
-    _convertIntervalDetector__D = typing.TypeVar('_convertIntervalDetector__D', bound=org.orekit.propagation.events.FieldAbstractDetector)  # <D>
+    _convertIntervalDetector__D = typing.TypeVar('_convertIntervalDetector__D', bound=org.orekit.propagation.events.FieldEventDetector)  # <D>
     _convertIntervalDetector__S = typing.TypeVar('_convertIntervalDetector__S', bound=org.hipparchus.CalculusFieldElement)  # <S>
-    def convertIntervalDetector(self, field: org.hipparchus.Field[_convertIntervalDetector__S], t: _PythonIntervalEventTrigger__T) -> org.orekit.propagation.events.FieldAbstractDetector[_convertIntervalDetector__D, _convertIntervalDetector__S]:
+    def convertIntervalDetector(self, field: org.hipparchus.Field[_convertIntervalDetector__S], t: _PythonIntervalEventTrigger__T) -> _convertIntervalDetector__D:
         """
-            Description copied from
-            class: :meth:`~org.orekit.forces.maneuvers.trigger.IntervalEventTrigger.convertIntervalDetector`
             Convert a primitive firing intervals detector into a field firing intervals detector.
         
-            There is not need to set up :meth:`~org.orekit.propagation.events.FieldAbstractDetector.withMaxCheck`,
-            :meth:`~org.orekit.propagation.events.FieldAbstractDetector.withThreshold`, or
-            :meth:`~org.orekit.propagation.events.FieldAbstractDetector.withHandler` in the converted detector, this will be done by
-            caller.
+            The :class:`~org.orekit.propagation.events.FieldEventDetectionSettings` must be set up in conformance with the non-field
+            detector.
         
             A skeleton implementation of this method to convert some :code:`XyzDetector` into :code:`FieldXyzDetector`, considering
             these detectors are created from a date and a number parameter is:
@@ -815,12 +897,12 @@ class PythonIntervalEventTrigger(IntervalEventTrigger[_PythonIntervalEventTrigge
             .. code-block: java
             
                  protected <D extends FieldEventDetector<S>, S extends CalculusFieldElement<S>>
-                     FieldAbstractDetector<D, S> convertIntervalDetector(final Field<S> field, final XyzDetector detector) {
+                     D convertIntervalDetector(final Field<S> field, final XyzDetector detector) {
             
                      final FieldAbsoluteDate<S> date  = new FieldAbsoluteDate<>(field, detector.getDate());
                      final S                    param = field.getZero().newInstance(detector.getParam());
             
-                     final FieldAbstractDetector<D, S> converted = (FieldAbstractDetector<D, S>) new FieldXyzDetector<>(date, param);
+                     D converted = (D) new FieldXyzDetector<>(date, param).withDetectionSettings(field, detector.getDetectionSettings());
                      return converted;
             
                  }
@@ -870,29 +952,28 @@ class PythonStartStopEventsTrigger(StartStopEventsTrigger[_PythonStartStopEvents
     public class PythonStartStopEventsTrigger<A extends :class:`~org.orekit.propagation.events.AbstractDetector`<A>, O extends :class:`~org.orekit.propagation.events.AbstractDetector`<O>> extends :class:`~org.orekit.forces.maneuvers.trigger.StartStopEventsTrigger`<A, O>
     """
     def __init__(self, a: _PythonStartStopEventsTrigger__A, o: _PythonStartStopEventsTrigger__O): ...
-    _convertStartDetector__D = typing.TypeVar('_convertStartDetector__D', bound=org.orekit.propagation.events.FieldAbstractDetector)  # <D>
+    _convertStartDetector__D = typing.TypeVar('_convertStartDetector__D', bound=org.orekit.propagation.events.FieldEventDetector)  # <D>
     _convertStartDetector__S = typing.TypeVar('_convertStartDetector__S', bound=org.hipparchus.CalculusFieldElement)  # <S>
-    def convertStartDetector(self, field: org.hipparchus.Field[_convertStartDetector__S], a: _PythonStartStopEventsTrigger__A) -> org.orekit.propagation.events.FieldAbstractDetector[_convertStartDetector__D, _convertStartDetector__S]:
+    def convertStartDetector(self, field: org.hipparchus.Field[_convertStartDetector__S], a: _PythonStartStopEventsTrigger__A) -> _convertStartDetector__D:
         """
             Convert a primitive firing start detector into a field firing start detector.
         
-            There is not need to set up :meth:`~org.orekit.propagation.events.FieldAbstractDetector.withMaxCheck`,
-            :meth:`~org.orekit.propagation.events.FieldAbstractDetector.withThreshold`, or
-            :meth:`~org.orekit.propagation.events.FieldAbstractDetector.withHandler` in the converted detector, this will be done by
-            caller.
+            The :class:`~org.orekit.propagation.events.FieldEventDetectionSettings` must be set up in conformance with the non-field
+            detector.
         
             A skeleton implementation of this method to convert some :code:`XyzDetector` into :code:`FieldXyzDetector`, considering
-            these detectors are created from a date and a number parameter is:
+            these detectors have a withDetectionSettings method and are created from a date and a number parameter is:
         
             .. code-block: java
             
-                 protected <D extends FieldAbstractDetector<D, S>, S extends CalculusFieldElement<S>>
-                     FieldAbstractDetector<D, S> convertStartDetector(final Field<S> field, final XyzDetector detector) {
+                 protected <D extends FieldEventDetector<S>, S extends CalculusFieldElement<S>>
+                     D convertStartDetector(final Field<S> field, final XyzDetector detector) {
             
                      final FieldAbsoluteDate<S> date  = new FieldAbsoluteDate<>(field, detector.getDate());
                      final S                    param = field.getZero().newInstance(detector.getParam());
             
-                     final FieldAbstractDetector<D, S> converted = (FieldAbstractDetector<D, S>) new FieldXyzDetector<>(date, param);
+                     final D converted = (D) new FieldXyzDetector<>(date, param)
+                     .withDetectionSettings(field, detector.getDetectionSettings());
                      return converted;
             
                  }
@@ -913,29 +994,28 @@ class PythonStartStopEventsTrigger(StartStopEventsTrigger[_PythonStartStopEvents
         
         """
         ...
-    _convertStopDetector__D = typing.TypeVar('_convertStopDetector__D', bound=org.orekit.propagation.events.FieldAbstractDetector)  # <D>
+    _convertStopDetector__D = typing.TypeVar('_convertStopDetector__D', bound=org.orekit.propagation.events.FieldEventDetector)  # <D>
     _convertStopDetector__S = typing.TypeVar('_convertStopDetector__S', bound=org.hipparchus.CalculusFieldElement)  # <S>
-    def convertStopDetector(self, field: org.hipparchus.Field[_convertStopDetector__S], o: _PythonStartStopEventsTrigger__O) -> org.orekit.propagation.events.FieldAbstractDetector[_convertStopDetector__D, _convertStopDetector__S]:
+    def convertStopDetector(self, field: org.hipparchus.Field[_convertStopDetector__S], o: _PythonStartStopEventsTrigger__O) -> _convertStopDetector__D:
         """
             Convert a primitive firing stop detector into a field firing stop detector.
         
-            There is not need to set up :meth:`~org.orekit.propagation.events.FieldAbstractDetector.withMaxCheck`,
-            :meth:`~org.orekit.propagation.events.FieldAbstractDetector.withThreshold`, or
-            :meth:`~org.orekit.propagation.events.FieldAbstractDetector.withHandler` in the converted detector, this will be done by
-            caller.
+            The :class:`~org.orekit.propagation.events.FieldEventDetectionSettings` must be set up in conformance with the non-field
+            detector.
         
             A skeleton implementation of this method to convert some :code:`XyzDetector` into :code:`FieldXyzDetector`, considering
-            these detectors are created from a date and a number parameter is:
+            these detectors have a withDetectionSettings method and are created from a date and a number parameter is:
         
             .. code-block: java
             
-                 protected <D extends FieldAbstractDetector<D, S>, S extends CalculusFieldElement<S>>
-                     FieldAbstractDetector<D, S> convertStopDetector(final Field<S> field, final XyzDetector detector) {
+                 protected <D extends FieldEventDetector<S>, S extends CalculusFieldElement<S>>
+                     D convertEndDetector(final Field<S> field, final XyzDetector detector) {
             
                      final FieldAbsoluteDate<S> date  = new FieldAbsoluteDate<>(field, detector.getDate());
                      final S                    param = field.getZero().newInstance(detector.getParam());
             
-                     final FieldAbstractDetector<D, S> converted = (FieldAbstractDetector<D, S>) new FieldXyzDetector<>(date, param);
+                     final D converted = (D) new FieldXyzDetector<>(date, param)
+                     .withDetectionSettings(field, detector.getDetectionSettings());
                      return converted;
             
                  }
@@ -979,13 +1059,15 @@ class PythonStartStopEventsTrigger(StartStopEventsTrigger[_PythonStartStopEvents
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.forces.maneuvers.trigger")``.
 
     AbstractManeuverTriggers: typing.Type[AbstractManeuverTriggers]
     DateBasedManeuverTriggers: typing.Type[DateBasedManeuverTriggers]
+    FieldManeuverTriggerDetector: typing.Type[FieldManeuverTriggerDetector]
     FieldManeuverTriggersResetter: typing.Type[FieldManeuverTriggersResetter]
     IntervalEventTrigger: typing.Type[IntervalEventTrigger]
+    ManeuverTriggerDetector: typing.Type[ManeuverTriggerDetector]
     ManeuverTriggers: typing.Type[ManeuverTriggers]
     ManeuverTriggersResetter: typing.Type[ManeuverTriggersResetter]
     PythonAbstractManeuverTriggers: typing.Type[PythonAbstractManeuverTriggers]
@@ -994,5 +1076,5 @@ class __module_protocol__(typing.Protocol):
     PythonManeuverTriggers: typing.Type[PythonManeuverTriggers]
     PythonManeuverTriggersResetter: typing.Type[PythonManeuverTriggersResetter]
     PythonStartStopEventsTrigger: typing.Type[PythonStartStopEventsTrigger]
+    ResettableManeuverTriggers: typing.Type[ResettableManeuverTriggers]
     StartStopEventsTrigger: typing.Type[StartStopEventsTrigger]
-    class-use: org.orekit.forces.maneuvers.trigger.class-use.__module_protocol__

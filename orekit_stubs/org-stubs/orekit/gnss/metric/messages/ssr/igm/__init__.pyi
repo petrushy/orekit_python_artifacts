@@ -1,8 +1,14 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.util
 import org.orekit.gnss
 import org.orekit.gnss.metric.messages.common
 import org.orekit.gnss.metric.messages.ssr
-import org.orekit.gnss.metric.messages.ssr.igm.class-use
 import typing
 
 
@@ -706,7 +712,7 @@ class SsrIgm07Header(SsrIgmHeader):
     def __init__(self): ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.gnss.metric.messages.ssr.igm")``.
 
     SsrIgm01: typing.Type[SsrIgm01]
@@ -733,4 +739,3 @@ class __module_protocol__(typing.Protocol):
     SsrIgmData: typing.Type[SsrIgmData]
     SsrIgmHeader: typing.Type[SsrIgmHeader]
     SsrIgmMessage: typing.Type[SsrIgmMessage]
-    class-use: org.orekit.gnss.metric.messages.ssr.igm.class-use.__module_protocol__

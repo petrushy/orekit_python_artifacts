@@ -1,3 +1,10 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.io
 import java.lang
 import java.util
@@ -5,8 +12,8 @@ import org.hipparchus.geometry.euclidean.threed
 import org.orekit.attitudes
 import org.orekit.bodies
 import org.orekit.data
-import org.orekit.files.general.class-use
 import org.orekit.frames
+import org.orekit.orbits
 import org.orekit.propagation
 import org.orekit.propagation.analytical
 import org.orekit.time
@@ -100,9 +107,9 @@ class AttitudeEphemerisFileWriter:
     _write_1__C = typing.TypeVar('_write_1__C', bound=org.orekit.utils.TimeStampedAngularCoordinates)  # <C>
     _write_1__S = typing.TypeVar('_write_1__S', bound=AttitudeEphemerisFile.AttitudeEphemerisSegment)  # <S>
     @typing.overload
-    def write(self, appendable: java.lang.Appendable, attitudeEphemerisFile: AttitudeEphemerisFile[_write_0__C, _write_0__S]) -> None: ...
+    def write(self, appendable: java.lang.Appendable, attitudeEphemerisFile: typing.Union[AttitudeEphemerisFile[_write_0__C, _write_0__S], typing.Callable[[], java.util.Map[str, AttitudeEphemerisFile.SatelliteAttitudeEphemeris[org.orekit.utils.TimeStampedAngularCoordinates, AttitudeEphemerisFile.AttitudeEphemerisSegment]]]]) -> None: ...
     @typing.overload
-    def write(self, string: str, attitudeEphemerisFile: AttitudeEphemerisFile[_write_1__C, _write_1__S]) -> None: ...
+    def write(self, string: str, attitudeEphemerisFile: typing.Union[AttitudeEphemerisFile[_write_1__C, _write_1__S], typing.Callable[[], java.util.Map[str, AttitudeEphemerisFile.SatelliteAttitudeEphemeris[org.orekit.utils.TimeStampedAngularCoordinates, AttitudeEphemerisFile.AttitudeEphemerisSegment]]]]) -> None: ...
 
 _EphemerisFile__EphemerisSegment__C = typing.TypeVar('_EphemerisFile__EphemerisSegment__C', bound=org.orekit.utils.TimeStampedPVCoordinates)  # <C>
 _EphemerisFile__SatelliteEphemeris__C = typing.TypeVar('_EphemerisFile__SatelliteEphemeris__C', bound=org.orekit.utils.TimeStampedPVCoordinates)  # <C>
@@ -191,9 +198,9 @@ class EphemerisFileWriter:
     _write_1__C = typing.TypeVar('_write_1__C', bound=org.orekit.utils.TimeStampedPVCoordinates)  # <C>
     _write_1__S = typing.TypeVar('_write_1__S', bound=EphemerisFile.EphemerisSegment)  # <S>
     @typing.overload
-    def write(self, appendable: java.lang.Appendable, ephemerisFile: EphemerisFile[_write_0__C, _write_0__S]) -> None: ...
+    def write(self, appendable: java.lang.Appendable, ephemerisFile: typing.Union[EphemerisFile[_write_0__C, _write_0__S], typing.Callable[[], java.util.Map[str, EphemerisFile.SatelliteEphemeris[org.orekit.utils.TimeStampedPVCoordinates, EphemerisFile.EphemerisSegment]]]]) -> None: ...
     @typing.overload
-    def write(self, string: str, ephemerisFile: EphemerisFile[_write_1__C, _write_1__S]) -> None: ...
+    def write(self, string: str, ephemerisFile: typing.Union[EphemerisFile[_write_1__C, _write_1__S], typing.Callable[[], java.util.Map[str, EphemerisFile.SatelliteEphemeris[org.orekit.utils.TimeStampedPVCoordinates, EphemerisFile.EphemerisSegment]]]]) -> None: ...
 
 _EphemerisSegmentPropagator__C = typing.TypeVar('_EphemerisSegmentPropagator__C', bound=org.orekit.utils.TimeStampedPVCoordinates)  # <C>
 class EphemerisSegmentPropagator(org.orekit.propagation.analytical.AbstractAnalyticalPropagator, org.orekit.propagation.BoundedPropagator, typing.Generic[_EphemerisSegmentPropagator__C]):
@@ -297,6 +304,24 @@ class EphemerisSegmentPropagator(org.orekit.propagation.analytical.AbstractAnaly
         
             Returns:
                 position of the body (m and)
+        
+        
+        """
+        ...
+    def propagateOrbit(self, absoluteDate: org.orekit.time.AbsoluteDate) -> org.orekit.orbits.Orbit:
+        """
+            Description copied from class: :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator.propagateOrbit`
+            Extrapolate an orbit up to a specific target date.
+        
+            Specified by:
+                :meth:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator.propagateOrbit` in
+                class :class:`~org.orekit.propagation.analytical.AbstractAnalyticalPropagator`
+        
+            Parameters:
+                date (:class:`~org.orekit.time.AbsoluteDate`): target date for the orbit
+        
+            Returns:
+                extrapolated parameters
         
         
         """
@@ -516,9 +541,9 @@ class PythonAttitudeEphemerisFileWriter(AttitudeEphemerisFileWriter):
     _write_0__C = typing.TypeVar('_write_0__C', bound=org.orekit.utils.TimeStampedAngularCoordinates)  # <C>
     _write_0__S = typing.TypeVar('_write_0__S', bound=AttitudeEphemerisFile.AttitudeEphemerisSegment)  # <S>
     @typing.overload
-    def write(self, string: str, attitudeEphemerisFile: AttitudeEphemerisFile[_write_0__C, _write_0__S]) -> None: ...
+    def write(self, string: str, attitudeEphemerisFile: typing.Union[AttitudeEphemerisFile[_write_0__C, _write_0__S], typing.Callable[[], java.util.Map[str, AttitudeEphemerisFile.SatelliteAttitudeEphemeris[org.orekit.utils.TimeStampedAngularCoordinates, AttitudeEphemerisFile.AttitudeEphemerisSegment]]]]) -> None: ...
     @typing.overload
-    def write(self, appendable: java.lang.Appendable, attitudeEphemerisFile: AttitudeEphemerisFile) -> None: ...
+    def write(self, appendable: java.lang.Appendable, attitudeEphemerisFile: typing.Union[AttitudeEphemerisFile, typing.Callable]) -> None: ...
 
 class PythonAttitudeEphemerisSegment(AttitudeEphemerisFile.AttitudeEphemerisSegment):
     """
@@ -741,9 +766,9 @@ class PythonEphemerisFileWriter(EphemerisFileWriter):
         """
         ...
     @typing.overload
-    def write(self, appendable: java.lang.Appendable, ephemerisFile: EphemerisFile) -> None: ...
+    def write(self, appendable: java.lang.Appendable, ephemerisFile: typing.Union[EphemerisFile, typing.Callable]) -> None: ...
     @typing.overload
-    def write(self, string: str, ephemerisFile: EphemerisFile) -> None: ...
+    def write(self, string: str, ephemerisFile: typing.Union[EphemerisFile, typing.Callable]) -> None: ...
 
 class PythonSatelliteAttitudeEphemeris(AttitudeEphemerisFile.SatelliteAttitudeEphemeris):
     """
@@ -830,7 +855,7 @@ class PythonSatelliteAttitudeEphemeris(AttitudeEphemerisFile.SatelliteAttitudeEp
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.files.general")``.
 
     AttitudeEphemerisFile: typing.Type[AttitudeEphemerisFile]
@@ -850,4 +875,3 @@ class __module_protocol__(typing.Protocol):
     PythonEphemerisFileParser: typing.Type[PythonEphemerisFileParser]
     PythonEphemerisFileWriter: typing.Type[PythonEphemerisFileWriter]
     PythonSatelliteAttitudeEphemeris: typing.Type[PythonSatelliteAttitudeEphemeris]
-    class-use: org.orekit.files.general.class-use.__module_protocol__

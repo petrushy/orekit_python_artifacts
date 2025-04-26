@@ -1,9 +1,16 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import org.hipparchus
 import org.orekit.frames
 import org.orekit.orbits
 import org.orekit.propagation
 import org.orekit.propagation.analytical.tle
-import org.orekit.propagation.analytical.tle.generation.class-use
+import org.orekit.propagation.conversion.osc2mean
 import org.orekit.time
 import typing
 
@@ -25,7 +32,7 @@ class TleGenerationAlgorithm:
             Generate a TLE from a given spacecraft state and a template TLE.
         
             The template TLE is only used to get identifiers like satellite number, launch year, etc. In other words, the keplerian
-            elements contained in the generate TLE a based on the provided state and not the template TLE.
+            elements contained in the generated TLE are based on the provided state and not the template TLE.
         
             Parameters:
                 state (:class:`~org.orekit.propagation.FieldSpacecraftState`<T> state): spacecraft state
@@ -43,7 +50,7 @@ class TleGenerationAlgorithm:
             Generate a TLE from a given spacecraft state and a template TLE.
         
             The template TLE is only used to get identifiers like satellite number, launch year, etc. In other words, the keplerian
-            elements contained in the generate TLE a based on the provided state and not the template TLE.
+            elements contained in the generated TLE are based on the provided state and not the template TLE.
         
             Parameters:
                 state (:class:`~org.orekit.propagation.SpacecraftState`): spacecraft state
@@ -156,7 +163,7 @@ class FixedPointTleGenerationAlgorithm(TleGenerationAlgorithm):
             Generate a TLE from a given spacecraft state and a template TLE.
         
             The template TLE is only used to get identifiers like satellite number, launch year, etc. In other words, the keplerian
-            elements contained in the generate TLE a based on the provided state and not the template TLE.
+            elements contained in the generated TLE are based on the provided state and not the template TLE.
         
             Specified by:
                 :meth:`~org.orekit.propagation.analytical.tle.generation.TleGenerationAlgorithm.generate` in
@@ -178,7 +185,7 @@ class FixedPointTleGenerationAlgorithm(TleGenerationAlgorithm):
             Generate a TLE from a given spacecraft state and a template TLE.
         
             The template TLE is only used to get identifiers like satellite number, launch year, etc. In other words, the keplerian
-            elements contained in the generate TLE a based on the provided state and not the template TLE.
+            elements contained in the generated TLE are based on the provided state and not the template TLE.
         
             Specified by:
                 :meth:`~org.orekit.propagation.analytical.tle.generation.TleGenerationAlgorithm.generate` in
@@ -220,6 +227,8 @@ class LeastSquaresTleGenerationAlgorithm(TleGenerationAlgorithm):
     def __init__(self, int: int): ...
     @typing.overload
     def __init__(self, int: int, timeScale: org.orekit.time.TimeScale, frame: org.orekit.frames.Frame): ...
+    @typing.overload
+    def __init__(self, timeScale: org.orekit.time.TimeScale, frame: org.orekit.frames.Frame, leastSquaresConverter: org.orekit.propagation.conversion.osc2mean.LeastSquaresConverter): ...
     _generate_0__T = typing.TypeVar('_generate_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     def generate(self, fieldSpacecraftState: org.orekit.propagation.FieldSpacecraftState[_generate_0__T], fieldTLE: org.orekit.propagation.analytical.tle.FieldTLE[_generate_0__T]) -> org.orekit.propagation.analytical.tle.FieldTLE[_generate_0__T]:
@@ -227,7 +236,7 @@ class LeastSquaresTleGenerationAlgorithm(TleGenerationAlgorithm):
             Generate a TLE from a given spacecraft state and a template TLE.
         
             The template TLE is only used to get identifiers like satellite number, launch year, etc. In other words, the keplerian
-            elements contained in the generate TLE a based on the provided state and not the template TLE.
+            elements contained in the generated TLE are based on the provided state and not the template TLE.
         
             Specified by:
                 :meth:`~org.orekit.propagation.analytical.tle.generation.TleGenerationAlgorithm.generate` in
@@ -249,7 +258,7 @@ class LeastSquaresTleGenerationAlgorithm(TleGenerationAlgorithm):
             Generate a TLE from a given spacecraft state and a template TLE.
         
             The template TLE is only used to get identifiers like satellite number, launch year, etc. In other words, the keplerian
-            elements contained in the generate TLE a based on the provided state and not the template TLE.
+            elements contained in the generated TLE are based on the provided state and not the template TLE.
         
             Specified by:
                 :meth:`~org.orekit.propagation.analytical.tle.generation.TleGenerationAlgorithm.generate` in
@@ -291,7 +300,7 @@ class PythonTleGenerationAlgorithm(TleGenerationAlgorithm):
             Generate a TLE from a given spacecraft state and a template TLE.
         
             The template TLE is only used to get identifiers like satellite number, launch year, etc. In other words, the keplerian
-            elements contained in the generate TLE a based on the provided state and not the template TLE.
+            elements contained in the generated TLE are based on the provided state and not the template TLE.
         
             Specified by:
                 :meth:`~org.orekit.propagation.analytical.tle.generation.TleGenerationAlgorithm.generate` in
@@ -313,7 +322,7 @@ class PythonTleGenerationAlgorithm(TleGenerationAlgorithm):
             Generate a TLE from a given spacecraft state and a template TLE.
         
             The template TLE is only used to get identifiers like satellite number, launch year, etc. In other words, the keplerian
-            elements contained in the generate TLE a based on the provided state and not the template TLE.
+            elements contained in the generated TLE are based on the provided state and not the template TLE.
         
             Specified by:
                 :meth:`~org.orekit.propagation.analytical.tle.generation.TleGenerationAlgorithm.generate` in
@@ -341,7 +350,7 @@ class PythonTleGenerationAlgorithm(TleGenerationAlgorithm):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.propagation.analytical.tle.generation")``.
 
     FixedPointTleGenerationAlgorithm: typing.Type[FixedPointTleGenerationAlgorithm]
@@ -349,4 +358,3 @@ class __module_protocol__(typing.Protocol):
     PythonTleGenerationAlgorithm: typing.Type[PythonTleGenerationAlgorithm]
     TleGenerationAlgorithm: typing.Type[TleGenerationAlgorithm]
     TleGenerationUtil: typing.Type[TleGenerationUtil]
-    class-use: org.orekit.propagation.analytical.tle.generation.class-use.__module_protocol__

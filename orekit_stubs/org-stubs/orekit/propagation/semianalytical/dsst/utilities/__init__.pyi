@@ -1,11 +1,18 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
+import jpype
 import org.hipparchus
 import org.hipparchus.analysis.differentiation
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.frames
 import org.orekit.orbits
-import org.orekit.propagation.semianalytical.dsst.utilities.class-use
 import org.orekit.propagation.semianalytical.dsst.utilities.hansen
 import org.orekit.time
 import typing
@@ -21,36 +28,12 @@ class AuxiliaryElements:
         Most of them are defined in Danielson paper at § 2.1.
     """
     def __init__(self, orbit: org.orekit.orbits.Orbit, int: int): ...
-    def getAlpha(self) -> float:
-        """
-            Deprecated.
-            since 12.2, use :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTGravityContext.getAlpha` instead
-            Get direction cosine α for central body.
-        
-            Returns:
-                α
-        
-        
-        """
-        ...
     def getB(self) -> float:
         """
             Get B = sqrt(1 - e²).
         
             Returns:
                 B
-        
-        
-        """
-        ...
-    def getBeta(self) -> float:
-        """
-            Deprecated.
-            since 12.2, use :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTGravityContext.getBeta` instead
-            Get direction cosine β for central body.
-        
-            Returns:
-                β
         
         
         """
@@ -91,18 +74,6 @@ class AuxiliaryElements:
         
             Returns:
                 the definition frame
-        
-        
-        """
-        ...
-    def getGamma(self) -> float:
-        """
-            Deprecated.
-            since 12.2, use :meth:`~org.orekit.propagation.semianalytical.dsst.forces.DSSTGravityContext.getGamma` instead
-            Get direction cosine γ for central body.
-        
-            Returns:
-                γ
         
         
         """
@@ -371,7 +342,7 @@ class CoefficientsFactory:
     _computeGsHs_1__T = typing.TypeVar('_computeGsHs_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def computeGsHs(double: float, double2: float, double3: float, double4: float, int: int) -> typing.List[typing.List[float]]:
+    def computeGsHs(double: float, double2: float, double3: float, double4: float, int: int) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
             Compute recursively G :sub:`s` and H :sub:`s` polynomials from equation 3.1-(5).
         
@@ -392,7 +363,7 @@ class CoefficientsFactory:
         ...
     @typing.overload
     @staticmethod
-    def computeGsHs(t: _computeGsHs_1__T, t2: _computeGsHs_1__T, t3: _computeGsHs_1__T, t4: _computeGsHs_1__T, int: int, field: org.hipparchus.Field[_computeGsHs_1__T]) -> typing.List[typing.List[_computeGsHs_1__T]]:
+    def computeGsHs(t: _computeGsHs_1__T, t2: _computeGsHs_1__T, t3: _computeGsHs_1__T, t4: _computeGsHs_1__T, int: int, field: org.hipparchus.Field[_computeGsHs_1__T]) -> typing.MutableSequence[typing.MutableSequence[_computeGsHs_1__T]]:
         """
             Compute recursively G :sub:`s` and H :sub:`s` polynomials from equation 3.1-(5).
         
@@ -416,7 +387,7 @@ class CoefficientsFactory:
     _computeQns_1__T = typing.TypeVar('_computeQns_1__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
     @staticmethod
-    def computeQns(double: float, int: int, int2: int) -> typing.List[typing.List[float]]:
+    def computeQns(double: float, int: int, int2: int) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
             Compute the Q :sub:`n,s` coefficients evaluated at γ from the recurrence formula 2.8.3-(2).
         
@@ -435,7 +406,7 @@ class CoefficientsFactory:
         ...
     @typing.overload
     @staticmethod
-    def computeQns(t: _computeQns_1__T, int: int, int2: int) -> typing.List[typing.List[_computeQns_1__T]]:
+    def computeQns(t: _computeQns_1__T, int: int, int2: int) -> typing.MutableSequence[typing.MutableSequence[_computeQns_1__T]]:
         """
             Compute the Q :sub:`n,s` coefficients evaluated at γ from the recurrence formula 2.8.3-(2).
         
@@ -492,36 +463,12 @@ class FieldAuxiliaryElements(typing.Generic[_FieldAuxiliaryElements__T]):
         Most of them are defined in Danielson paper at § 2.1.
     """
     def __init__(self, fieldOrbit: org.orekit.orbits.FieldOrbit[_FieldAuxiliaryElements__T], int: int): ...
-    def getAlpha(self) -> _FieldAuxiliaryElements__T:
-        """
-            Deprecated.
-            since 12.2, use :meth:`~org.orekit.propagation.semianalytical.dsst.forces.FieldDSSTGravityContext.getAlpha` instead
-            Get direction cosine α for central body.
-        
-            Returns:
-                α
-        
-        
-        """
-        ...
     def getB(self) -> _FieldAuxiliaryElements__T:
         """
             Get B = sqrt(1 - e²).
         
             Returns:
                 B
-        
-        
-        """
-        ...
-    def getBeta(self) -> _FieldAuxiliaryElements__T:
-        """
-            Deprecated.
-            since 12.2, use :meth:`~org.orekit.propagation.semianalytical.dsst.forces.FieldDSSTGravityContext.getBeta` instead
-            Get direction cosine β for central body.
-        
-            Returns:
-                β
         
         
         """
@@ -553,18 +500,6 @@ class FieldAuxiliaryElements(typing.Generic[_FieldAuxiliaryElements__T]):
         
             Returns:
                 the definition frame
-        
-        
-        """
-        ...
-    def getGamma(self) -> _FieldAuxiliaryElements__T:
-        """
-            Deprecated.
-            since 12.2, use :meth:`~org.orekit.propagation.semianalytical.dsst.forces.FieldDSSTGravityContext.getGamma` instead
-            Get direction cosine γ for central body.
-        
-            Returns:
-                γ
         
         
         """
@@ -1307,7 +1242,7 @@ class FieldInterpolationGrid(typing.Generic[_FieldInterpolationGrid__T]):
         In the context of DSST propagation, an interpolation grid is used for the computation through interpolation of short
         periodics coefficients
     """
-    def getGridPoints(self, t: _FieldInterpolationGrid__T, t2: _FieldInterpolationGrid__T) -> typing.List[_FieldInterpolationGrid__T]:
+    def getGridPoints(self, t: _FieldInterpolationGrid__T, t2: _FieldInterpolationGrid__T) -> typing.MutableSequence[_FieldInterpolationGrid__T]:
         """
             Get grid points that are within the current step.
         
@@ -1336,7 +1271,7 @@ class FieldLnsCoefficients(typing.Generic[_FieldLnsCoefficients__T]):
     
         L :sub:`n` :sup:`s` (γ) = ( R / a ) :sup:`n` V :sub:`ns` Q :sup:`ns` (γ)
     """
-    def __init__(self, int: int, int2: int, tArray: typing.List[typing.List[_FieldLnsCoefficients__T]], sortedMap: java.util.SortedMap[CoefficientsFactory.NSKey, float], t2: _FieldLnsCoefficients__T, field: org.hipparchus.Field[_FieldLnsCoefficients__T]): ...
+    def __init__(self, int: int, int2: int, tArray: typing.Union[typing.List[typing.MutableSequence[_FieldLnsCoefficients__T]], jpype.JArray], sortedMap: java.util.SortedMap[CoefficientsFactory.NSKey, float], t2: _FieldLnsCoefficients__T, field: org.hipparchus.Field[_FieldLnsCoefficients__T]): ...
     def getLns(self, int: int, int2: int) -> _FieldLnsCoefficients__T:
         """
             Get the value of L :sub:`n` :sup:`s` (γ).
@@ -1382,14 +1317,14 @@ class FieldShortPeriodicsInterpolatedCoefficient(typing.Generic[_FieldShortPerio
         :meth:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldShortPeriodicsInterpolatedCoefficient.value`.
     """
     def __init__(self, int: int): ...
-    def addGridPoint(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldShortPeriodicsInterpolatedCoefficient__T], tArray: typing.List[_FieldShortPeriodicsInterpolatedCoefficient__T]) -> None: ...
+    def addGridPoint(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldShortPeriodicsInterpolatedCoefficient__T], tArray: typing.Union[typing.List[_FieldShortPeriodicsInterpolatedCoefficient__T], jpype.JArray]) -> None: ...
     def clearHistory(self) -> None:
         """
             Clear the recorded values from the interpolation grid.
         
         """
         ...
-    def value(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldShortPeriodicsInterpolatedCoefficient__T]) -> typing.List[_FieldShortPeriodicsInterpolatedCoefficient__T]: ...
+    def value(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldShortPeriodicsInterpolatedCoefficient__T]) -> typing.MutableSequence[_FieldShortPeriodicsInterpolatedCoefficient__T]: ...
 
 class GHIJjsPolynomials:
     """
@@ -1892,7 +1827,7 @@ class InterpolationGrid:
         In the context of DSST propagation, an interpolation grid is used for the computation through interpolation of short
         periodics coefficients
     """
-    def getGridPoints(self, double: float, double2: float) -> typing.List[float]:
+    def getGridPoints(self, double: float, double2: float) -> typing.MutableSequence[float]:
         """
             Get grid points that are within the current step.
         
@@ -1972,7 +1907,7 @@ class JacobiPolynomials:
         """
         ...
     @staticmethod
-    def getValueAndDerivative(int: int, int2: int, int3: int, double: float) -> typing.List[float]:
+    def getValueAndDerivative(int: int, int2: int, int3: int, double: float) -> typing.MutableSequence[float]:
         """
             Returns the value and derivatives of the Jacobi polynomial P :sub:`l` :sup:`v,w` evaluated at γ.
         
@@ -2011,7 +1946,7 @@ class LnsCoefficients:
     
         L :sub:`n` :sup:`s` (γ) = ( R / a ) :sup:`n` V :sub:`ns` Q :sup:`ns` (γ)
     """
-    def __init__(self, int: int, int2: int, doubleArray: typing.List[typing.List[float]], sortedMap: java.util.SortedMap[CoefficientsFactory.NSKey, float], double2: float): ...
+    def __init__(self, int: int, int2: int, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], sortedMap: java.util.SortedMap[CoefficientsFactory.NSKey, float], double2: float): ...
     def getLns(self, int: int, int2: int) -> float:
         """
             Get the value of L :sub:`n` :sup:`s` (γ).
@@ -2107,7 +2042,7 @@ class ShortPeriodicsInterpolatedCoefficient:
         :meth:`~org.orekit.propagation.semianalytical.dsst.utilities.ShortPeriodicsInterpolatedCoefficient.value`.
     """
     def __init__(self, int: int): ...
-    def addGridPoint(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.List[float]) -> None:
+    def addGridPoint(self, absoluteDate: org.orekit.time.AbsoluteDate, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
             Add a point to the interpolation grid.
         
@@ -2124,7 +2059,7 @@ class ShortPeriodicsInterpolatedCoefficient:
         
         """
         ...
-    def value(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.List[float]:
+    def value(self, absoluteDate: org.orekit.time.AbsoluteDate) -> typing.MutableSequence[float]:
         """
             Compute the value of the coefficient.
         
@@ -2233,7 +2168,7 @@ class FieldFixedNumberInterpolationGrid(FieldInterpolationGrid[_FieldFixedNumber
         the points will be far away one from each other
     """
     def __init__(self, field: org.hipparchus.Field[_FieldFixedNumberInterpolationGrid__T], int: int): ...
-    def getGridPoints(self, t: _FieldFixedNumberInterpolationGrid__T, t2: _FieldFixedNumberInterpolationGrid__T) -> typing.List[_FieldFixedNumberInterpolationGrid__T]:
+    def getGridPoints(self, t: _FieldFixedNumberInterpolationGrid__T, t2: _FieldFixedNumberInterpolationGrid__T) -> typing.MutableSequence[_FieldFixedNumberInterpolationGrid__T]:
         """
             Get grid points that are within the current step.
         
@@ -2267,7 +2202,7 @@ class FieldMaxGapInterpolationGrid(FieldInterpolationGrid[_FieldMaxGapInterpolat
             7.1
     """
     def __init__(self, field: org.hipparchus.Field[_FieldMaxGapInterpolationGrid__T], t: _FieldMaxGapInterpolationGrid__T): ...
-    def getGridPoints(self, t: _FieldMaxGapInterpolationGrid__T, t2: _FieldMaxGapInterpolationGrid__T) -> typing.List[_FieldMaxGapInterpolationGrid__T]:
+    def getGridPoints(self, t: _FieldMaxGapInterpolationGrid__T, t2: _FieldMaxGapInterpolationGrid__T) -> typing.MutableSequence[_FieldMaxGapInterpolationGrid__T]:
         """
             Get grid points that are within the current step.
         
@@ -2299,7 +2234,7 @@ class FixedNumberInterpolationGrid(InterpolationGrid):
         the points will be far away one from each other
     """
     def __init__(self, int: int): ...
-    def getGridPoints(self, double: float, double2: float) -> typing.List[float]:
+    def getGridPoints(self, double: float, double2: float) -> typing.MutableSequence[float]:
         """
             Get grid points that are within the current step.
         
@@ -2332,7 +2267,7 @@ class MaxGapInterpolationGrid(InterpolationGrid):
             7.1
     """
     def __init__(self, double: float): ...
-    def getGridPoints(self, double: float, double2: float) -> typing.List[float]:
+    def getGridPoints(self, double: float, double2: float) -> typing.MutableSequence[float]:
         """
             Get grid points that are within the current step.
         
@@ -2360,7 +2295,7 @@ class PythonFieldInterpolationGrid(FieldInterpolationGrid[_PythonFieldInterpolat
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getGridPoints(self, t: _PythonFieldInterpolationGrid__T, t2: _PythonFieldInterpolationGrid__T) -> typing.List[_PythonFieldInterpolationGrid__T]:
+    def getGridPoints(self, t: _PythonFieldInterpolationGrid__T, t2: _PythonFieldInterpolationGrid__T) -> typing.MutableSequence[_PythonFieldInterpolationGrid__T]:
         """
             Description copied from
             interface: :meth:`~org.orekit.propagation.semianalytical.dsst.utilities.FieldInterpolationGrid.getGridPoints`
@@ -2400,7 +2335,7 @@ class PythonInterpolationGrid(InterpolationGrid):
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def getGridPoints(self, double: float, double2: float) -> typing.List[float]:
+    def getGridPoints(self, double: float, double2: float) -> typing.MutableSequence[float]:
         """
             Description copied from
             interface: :meth:`~org.orekit.propagation.semianalytical.dsst.utilities.InterpolationGrid.getGridPoints`
@@ -2435,7 +2370,7 @@ class PythonInterpolationGrid(InterpolationGrid):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.propagation.semianalytical.dsst.utilities")``.
 
     AuxiliaryElements: typing.Type[AuxiliaryElements]
@@ -2464,5 +2399,4 @@ class __module_protocol__(typing.Protocol):
     PythonInterpolationGrid: typing.Type[PythonInterpolationGrid]
     ShortPeriodicsInterpolatedCoefficient: typing.Type[ShortPeriodicsInterpolatedCoefficient]
     UpperBounds: typing.Type[UpperBounds]
-    class-use: org.orekit.propagation.semianalytical.dsst.utilities.class-use.__module_protocol__
     hansen: org.orekit.propagation.semianalytical.dsst.utilities.hansen.__module_protocol__

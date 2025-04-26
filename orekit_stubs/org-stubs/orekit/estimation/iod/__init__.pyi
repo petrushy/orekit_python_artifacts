@@ -1,5 +1,11 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import org.hipparchus.geometry.euclidean.threed
-import org.orekit.estimation.iod.class-use
 import org.orekit.estimation.measurements
 import org.orekit.frames
 import org.orekit.orbits
@@ -210,8 +216,42 @@ class IodGooding:
     @typing.overload
     def estimate(self, frame: org.orekit.frames.Frame, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D3: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D4: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate: org.orekit.time.AbsoluteDate, vector3D5: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate2: org.orekit.time.AbsoluteDate, vector3D6: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate3: org.orekit.time.AbsoluteDate, double: float, double2: float, int: int, boolean: bool) -> org.orekit.orbits.Orbit: ...
     @typing.overload
-    def estimate(self, frame: org.orekit.frames.Frame, angularAzEl: org.orekit.estimation.measurements.AngularAzEl, angularAzEl2: org.orekit.estimation.measurements.AngularAzEl, angularAzEl3: org.orekit.estimation.measurements.AngularAzEl, double: float, double2: float) -> org.orekit.orbits.Orbit:
+    def estimate(self, frame: org.orekit.frames.Frame, angularAzEl: org.orekit.estimation.measurements.AngularAzEl, angularAzEl2: org.orekit.estimation.measurements.AngularAzEl, angularAzEl3: org.orekit.estimation.measurements.AngularAzEl) -> org.orekit.orbits.Orbit:
         """
+            Estimate orbit from three angular (i.e., azimuth - elevation) observations.
+        
+            This method doesn't need initial guesses of range values since they are computed by a Gauss algorithm.
+        
+            Parameters:
+                outputFrame (:class:`~org.orekit.frames.Frame`): inertial frame for observer coordinates and orbit estimate
+                azEl1 (:class:`~org.orekit.estimation.measurements.AngularAzEl`): first angular observation
+                azEl2 (:class:`~org.orekit.estimation.measurements.AngularAzEl`): second angular observation
+                azEl3 (:class:`~org.orekit.estimation.measurements.AngularAzEl`): third angular observation
+        
+            Returns:
+                an estimate of the orbit at the central date (i.e., date of the second angular observation)
+        
+            Since:
+                13.0
+        
+            Estimate orbit from three angular (i.e., azimuth - elevation) observations.
+        
+            This method doesn't need initial guesses of range values since they are computed by a Gauss algorithm.
+        
+            Parameters:
+                outputFrame (:class:`~org.orekit.frames.Frame`): inertial frame for observer coordinates and orbit estimate
+                azEl1 (:class:`~org.orekit.estimation.measurements.AngularAzEl`): first angular observation
+                azEl2 (:class:`~org.orekit.estimation.measurements.AngularAzEl`): second angular observation
+                azEl3 (:class:`~org.orekit.estimation.measurements.AngularAzEl`): third angular observation
+                nRev (int): number of complete revolutions between observation 1 and 3
+                direction (boolean): true if posigrade (short way)
+        
+            Returns:
+                an estimate of the orbit at the central date (i.e., date of the second angular observation)
+        
+            Since:
+                13.0
+        
             Estimate orbit from three angular observations.
         
             This signature assumes there was less than an half revolution between start and final date
@@ -247,6 +287,40 @@ class IodGooding:
         
             Since:
                 11.0
+        
+            Estimate orbit from three angular (i.e., right ascension - declination) observations.
+        
+            This method doesn't need initial guesses of range values since they are computed by a Gauss algorithm.
+        
+            Parameters:
+                outputFrame (:class:`~org.orekit.frames.Frame`): inertial frame for observer coordinates and orbit estimate
+                raDec1 (:class:`~org.orekit.estimation.measurements.AngularRaDec`): first angular observation
+                raDec2 (:class:`~org.orekit.estimation.measurements.AngularRaDec`): second angular observation
+                raDec3 (:class:`~org.orekit.estimation.measurements.AngularRaDec`): third angular observation
+        
+            Returns:
+                an estimate of the orbit at the central date (i.e., date of the second angular observation)
+        
+            Since:
+                13.0
+        
+            Estimate orbit from three angular (i.e., right ascension - declination) observations.
+        
+            This method doesn't need initial guesses of range values since they are computed by a Gauss algorithm.
+        
+            Parameters:
+                outputFrame (:class:`~org.orekit.frames.Frame`): inertial frame for observer coordinates and orbit estimate
+                raDec1 (:class:`~org.orekit.estimation.measurements.AngularRaDec`): first angular observation
+                raDec2 (:class:`~org.orekit.estimation.measurements.AngularRaDec`): second angular observation
+                raDec3 (:class:`~org.orekit.estimation.measurements.AngularRaDec`): third angular observation
+                nRev (int): number of complete revolutions between observation 1 and 3
+                direction (boolean): true if posigrade (short way)
+        
+            Returns:
+                an estimate of the orbit at the central date (i.e., date of the second angular observation)
+        
+            Since:
+                13.0
         
             Estimate orbit from three angular observations.
         
@@ -287,11 +361,19 @@ class IodGooding:
         """
         ...
     @typing.overload
+    def estimate(self, frame: org.orekit.frames.Frame, angularAzEl: org.orekit.estimation.measurements.AngularAzEl, angularAzEl2: org.orekit.estimation.measurements.AngularAzEl, angularAzEl3: org.orekit.estimation.measurements.AngularAzEl, double: float, double2: float) -> org.orekit.orbits.Orbit: ...
+    @typing.overload
     def estimate(self, frame: org.orekit.frames.Frame, angularAzEl: org.orekit.estimation.measurements.AngularAzEl, angularAzEl2: org.orekit.estimation.measurements.AngularAzEl, angularAzEl3: org.orekit.estimation.measurements.AngularAzEl, double: float, double2: float, int: int, boolean: bool) -> org.orekit.orbits.Orbit: ...
+    @typing.overload
+    def estimate(self, frame: org.orekit.frames.Frame, angularAzEl: org.orekit.estimation.measurements.AngularAzEl, angularAzEl2: org.orekit.estimation.measurements.AngularAzEl, angularAzEl3: org.orekit.estimation.measurements.AngularAzEl, int: int, boolean: bool) -> org.orekit.orbits.Orbit: ...
+    @typing.overload
+    def estimate(self, frame: org.orekit.frames.Frame, angularRaDec: org.orekit.estimation.measurements.AngularRaDec, angularRaDec2: org.orekit.estimation.measurements.AngularRaDec, angularRaDec3: org.orekit.estimation.measurements.AngularRaDec) -> org.orekit.orbits.Orbit: ...
     @typing.overload
     def estimate(self, frame: org.orekit.frames.Frame, angularRaDec: org.orekit.estimation.measurements.AngularRaDec, angularRaDec2: org.orekit.estimation.measurements.AngularRaDec, angularRaDec3: org.orekit.estimation.measurements.AngularRaDec, double: float, double2: float) -> org.orekit.orbits.Orbit: ...
     @typing.overload
     def estimate(self, frame: org.orekit.frames.Frame, angularRaDec: org.orekit.estimation.measurements.AngularRaDec, angularRaDec2: org.orekit.estimation.measurements.AngularRaDec, angularRaDec3: org.orekit.estimation.measurements.AngularRaDec, double: float, double2: float, int: int, boolean: bool) -> org.orekit.orbits.Orbit: ...
+    @typing.overload
+    def estimate(self, frame: org.orekit.frames.Frame, angularRaDec: org.orekit.estimation.measurements.AngularRaDec, angularRaDec2: org.orekit.estimation.measurements.AngularRaDec, angularRaDec3: org.orekit.estimation.measurements.AngularRaDec, int: int, boolean: bool) -> org.orekit.orbits.Orbit: ...
     def getRange1(self) -> float:
         """
             Get range for observation (1).
@@ -504,7 +586,7 @@ class IodLaplace:
     def estimate(self, frame: org.orekit.frames.Frame, pVCoordinates: org.orekit.utils.PVCoordinates, absoluteDate: org.orekit.time.AbsoluteDate, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate2: org.orekit.time.AbsoluteDate, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, absoluteDate3: org.orekit.time.AbsoluteDate, vector3D3: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.orekit.orbits.Orbit: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.estimation.iod")``.
 
     IodGauss: typing.Type[IodGauss]
@@ -512,4 +594,3 @@ class __module_protocol__(typing.Protocol):
     IodGooding: typing.Type[IodGooding]
     IodLambert: typing.Type[IodLambert]
     IodLaplace: typing.Type[IodLaplace]
-    class-use: org.orekit.estimation.iod.class-use.__module_protocol__

@@ -1,3 +1,10 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.rugged.api
 import org.orekit.rugged.intersection.duvenhage
@@ -14,7 +21,7 @@ class IntersectionAlgorithm:
     def refineIntersection(self, extendedEllipsoid: org.orekit.rugged.utils.ExtendedEllipsoid, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, normalizedGeodeticPoint: org.orekit.rugged.utils.NormalizedGeodeticPoint) -> org.orekit.rugged.utils.NormalizedGeodeticPoint: ...
 
 class BasicScanAlgorithm(IntersectionAlgorithm):
-    def __init__(self, tileUpdater: org.orekit.rugged.raster.TileUpdater, int: int, boolean: bool): ...
+    def __init__(self, tileUpdater: typing.Union[org.orekit.rugged.raster.TileUpdater, typing.Callable], int: int, boolean: bool): ...
     def getAlgorithmId(self) -> org.orekit.rugged.api.AlgorithmId: ...
     def getElevation(self, double: float, double2: float) -> float: ...
     def intersection(self, extendedEllipsoid: org.orekit.rugged.utils.ExtendedEllipsoid, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D) -> org.orekit.rugged.utils.NormalizedGeodeticPoint: ...
@@ -48,7 +55,7 @@ class PythonIntersectionAlgorithmI(IntersectionAlgorithm):
     def refineIntersection(self, extendedEllipsoid: org.orekit.rugged.utils.ExtendedEllipsoid, vector3D: org.hipparchus.geometry.euclidean.threed.Vector3D, vector3D2: org.hipparchus.geometry.euclidean.threed.Vector3D, normalizedGeodeticPoint: org.orekit.rugged.utils.NormalizedGeodeticPoint) -> org.orekit.rugged.utils.NormalizedGeodeticPoint: ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.rugged.intersection")``.
 
     BasicScanAlgorithm: typing.Type[BasicScanAlgorithm]

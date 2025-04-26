@@ -1,10 +1,18 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.io
 import java.lang
 import java.util
 import java.util.regex
+import jpype
 import org.orekit.gnss
 import org.orekit.gnss.metric.messages
-import org.orekit.gnss.metric.parser.class-use
+import org.orekit.time
 import org.orekit.utils.units
 import typing
 
@@ -19,7 +27,7 @@ class DataField:
         Since:
             11.0
     """
-    def booleanValue(self, encodedMessage: 'EncodedMessage') -> bool:
+    def booleanValue(self, encodedMessage: typing.Union['EncodedMessage', typing.Callable]) -> bool:
         """
             Get the value of the field as a boolean.
         
@@ -32,7 +40,7 @@ class DataField:
         
         """
         ...
-    def doubleValue(self, encodedMessage: 'EncodedMessage') -> float:
+    def doubleValue(self, encodedMessage: typing.Union['EncodedMessage', typing.Callable]) -> float:
         """
             Get the value of the field as a double.
         
@@ -45,7 +53,7 @@ class DataField:
         
         """
         ...
-    def intValue(self, encodedMessage: 'EncodedMessage') -> int:
+    def intValue(self, encodedMessage: typing.Union['EncodedMessage', typing.Callable]) -> int:
         """
             Get the value of the field as an integer.
         
@@ -58,7 +66,7 @@ class DataField:
         
         """
         ...
-    def stringValue(self, encodedMessage: 'EncodedMessage', int: int) -> str:
+    def stringValue(self, encodedMessage: typing.Union['EncodedMessage', typing.Callable], int: int) -> str:
         """
             Get the value of the field as a String.
         
@@ -150,7 +158,7 @@ class DataType(java.lang.Enum['DataType']):
     INT_S_24: typing.ClassVar['DataType'] = ...
     INT_S_27: typing.ClassVar['DataType'] = ...
     INT_S_32: typing.ClassVar['DataType'] = ...
-    def decode(self, encodedMessage: 'EncodedMessage') -> int:
+    def decode(self, encodedMessage: typing.Union['EncodedMessage', typing.Callable]) -> int:
         """
             Decode a piece of data extracted from an encoded message.
         
@@ -188,7 +196,7 @@ class DataType(java.lang.Enum['DataType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['DataType']:
+    def values() -> typing.MutableSequence['DataType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -246,13 +254,14 @@ class MessageType:
         Since:
             11.0
     """
-    def parse(self, encodedMessage: EncodedMessage, int: int) -> org.orekit.gnss.metric.messages.ParsedMessage:
+    def parse(self, encodedMessage: typing.Union[EncodedMessage, typing.Callable], int: int, timeScales: org.orekit.time.TimeScales) -> org.orekit.gnss.metric.messages.ParsedMessage:
         """
             Parse an encoded message.
         
             Parameters:
                 encodedMessage (:class:`~org.orekit.gnss.metric.parser.EncodedMessage`): encoded message to parse
                 messageNumber (int): message number
+                timeScales (:class:`~org.orekit.time.TimeScales`): known time scales
         
             Returns:
                 parsed message
@@ -270,8 +279,7 @@ class MessagesParser:
         Since:
             11.0
     """
-    def __init__(self, list: java.util.List[int]): ...
-    def parse(self, encodedMessage: EncodedMessage, boolean: bool) -> org.orekit.gnss.metric.messages.ParsedMessage:
+    def parse(self, encodedMessage: typing.Union[EncodedMessage, typing.Callable], boolean: bool) -> org.orekit.gnss.metric.messages.ParsedMessage:
         """
             Parse one message.
         
@@ -463,7 +471,7 @@ class IgsSsrDataField(java.lang.Enum['IgsSsrDataField'], DataField):
         """
         ...
     @staticmethod
-    def values() -> typing.List['IgsSsrDataField']:
+    def values() -> typing.MutableSequence['IgsSsrDataField']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -581,7 +589,7 @@ class IgsSsrMessageType(java.lang.Enum['IgsSsrMessageType'], MessageType):
         """
         ...
     @staticmethod
-    def values() -> typing.List['IgsSsrMessageType']:
+    def values() -> typing.MutableSequence['IgsSsrMessageType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -608,14 +616,14 @@ class IgsSsrMessagesParser(MessagesParser):
         Since:
             11.0
     """
-    def __init__(self, list: java.util.List[int]): ...
+    def __init__(self, list: java.util.List[int], timeScales: org.orekit.time.TimeScales): ...
 
 class PythonDataField(DataField):
     """
     public class PythonDataField extends :class:`~org.orekit.gnss.metric.parser.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.gnss.metric.parser.DataField`
     """
     def __init__(self): ...
-    def booleanValue(self, encodedMessage: EncodedMessage) -> bool:
+    def booleanValue(self, encodedMessage: typing.Union[EncodedMessage, typing.Callable]) -> bool:
         """
             Description copied from interface: :meth:`~org.orekit.gnss.metric.parser.DataField.booleanValue`
             Get the value of the field as a boolean.
@@ -688,9 +696,8 @@ class PythonMessageType(MessageType):
     """
     def __init__(self): ...
     def finalize(self) -> None: ...
-    def parse(self, encodedMessage: EncodedMessage, int: int) -> org.orekit.gnss.metric.messages.ParsedMessage:
+    def parse(self, encodedMessage: typing.Union[EncodedMessage, typing.Callable], int: int, timeScales: org.orekit.time.TimeScales) -> org.orekit.gnss.metric.messages.ParsedMessage:
         """
-            Description copied from interface: :meth:`~org.orekit.gnss.metric.parser.MessageType.parse`
             Parse an encoded message.
         
             Specified by:
@@ -700,6 +707,7 @@ class PythonMessageType(MessageType):
             Parameters:
                 encodedMessage (:class:`~org.orekit.gnss.metric.parser.EncodedMessage`): encoded message to parse
                 messageNumber (int): message number
+                timeScales (:class:`~org.orekit.time.TimeScales`): known time scales
         
             Returns:
                 parsed message
@@ -928,7 +936,7 @@ class RtcmDataField(java.lang.Enum['RtcmDataField'], DataField):
         """
         ...
     @staticmethod
-    def values() -> typing.List['RtcmDataField']:
+    def values() -> typing.MutableSequence['RtcmDataField']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1021,7 +1029,7 @@ class RtcmMessageType(java.lang.Enum['RtcmMessageType'], MessageType):
         """
         ...
     @staticmethod
-    def values() -> typing.List['RtcmMessageType']:
+    def values() -> typing.MutableSequence['RtcmMessageType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1048,7 +1056,7 @@ class RtcmMessagesParser(MessagesParser):
         Since:
             11.0
     """
-    def __init__(self, list: java.util.List[int]): ...
+    def __init__(self, list: java.util.List[int], timeScales: org.orekit.time.TimeScales): ...
 
 class ByteArrayEncodedMessage(AbstractEncodedMessage):
     """
@@ -1059,7 +1067,7 @@ class ByteArrayEncodedMessage(AbstractEncodedMessage):
         Since:
             11.0
     """
-    def __init__(self, byteArray: typing.List[int]): ...
+    def __init__(self, byteArray: typing.Union[typing.List[int], jpype.JArray, bytes]): ...
     def start(self) -> None:
         """
             Start message extraction.
@@ -1154,7 +1162,7 @@ class PythonAbstractEncodedMessage(AbstractEncodedMessage):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.gnss.metric.parser")``.
 
     AbstractEncodedMessage: typing.Type[AbstractEncodedMessage]
@@ -1177,4 +1185,3 @@ class __module_protocol__(typing.Protocol):
     RtcmMessageType: typing.Type[RtcmMessageType]
     RtcmMessagesParser: typing.Type[RtcmMessagesParser]
     Units: typing.Type[Units]
-    class-use: org.orekit.gnss.metric.parser.class-use.__module_protocol__

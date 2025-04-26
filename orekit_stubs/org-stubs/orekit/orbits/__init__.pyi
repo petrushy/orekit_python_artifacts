@@ -1,13 +1,19 @@
-import java.io
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.lang
 import java.util
 import java.util.stream
+import jpype
 import org.hipparchus
 import org.hipparchus.analysis.polynomials
 import org.hipparchus.geometry.euclidean.threed
 import org.orekit.bodies
 import org.orekit.frames
-import org.orekit.orbits.class-use
 import org.orekit.propagation
 import org.orekit.propagation.analytical
 import org.orekit.time
@@ -35,11 +41,11 @@ class AbstractFieldOrbitInterpolator(org.orekit.time.AbstractFieldTimeInterpolat
         """
         ...
     @typing.overload
-    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, collection: typing.Union[java.util.Collection[org.orekit.time.FieldTimeStamped], typing.Sequence[org.orekit.time.FieldTimeStamped]]) -> org.orekit.time.FieldTimeStamped: ...
+    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, collection: typing.Union[java.util.Collection[org.orekit.time.FieldTimeStamped], typing.Sequence[org.orekit.time.FieldTimeStamped], typing.Set[org.orekit.time.FieldTimeStamped]]) -> org.orekit.time.FieldTimeStamped: ...
     @typing.overload
     def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, stream: java.util.stream.Stream[org.orekit.time.FieldTimeStamped]) -> org.orekit.time.FieldTimeStamped: ...
     @typing.overload
-    def interpolate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_AbstractFieldOrbitInterpolator__KK], collection: typing.Union[java.util.Collection['FieldOrbit'[_AbstractFieldOrbitInterpolator__KK]], typing.Sequence['FieldOrbit'[_AbstractFieldOrbitInterpolator__KK]]]) -> 'FieldOrbit'[_AbstractFieldOrbitInterpolator__KK]: ...
+    def interpolate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_AbstractFieldOrbitInterpolator__KK], collection: typing.Union[java.util.Collection['FieldOrbit'[_AbstractFieldOrbitInterpolator__KK]], typing.Sequence['FieldOrbit'[_AbstractFieldOrbitInterpolator__KK]], typing.Set['FieldOrbit'[_AbstractFieldOrbitInterpolator__KK]]]) -> 'FieldOrbit'[_AbstractFieldOrbitInterpolator__KK]: ...
     @typing.overload
     def interpolate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_AbstractFieldOrbitInterpolator__KK], stream: java.util.stream.Stream[org.orekit.time.FieldTimeStamped]) -> org.orekit.time.FieldTimeStamped: ...
 
@@ -51,7 +57,7 @@ class AbstractOrbitInterpolator(org.orekit.time.AbstractTimeInterpolator['Orbit'
     """
     def __init__(self, int: int, double: float, frame: org.orekit.frames.Frame): ...
     @staticmethod
-    def checkOrbitsConsistency(collection: typing.Union[java.util.Collection['Orbit'], typing.Sequence['Orbit']]) -> None: ...
+    def checkOrbitsConsistency(collection: typing.Union[java.util.Collection['Orbit'], typing.Sequence['Orbit'], typing.Set['Orbit']]) -> None: ...
     def getOutputInertialFrame(self) -> org.orekit.frames.Frame:
         """
             Get output inertial frame.
@@ -63,7 +69,7 @@ class AbstractOrbitInterpolator(org.orekit.time.AbstractTimeInterpolator['Orbit'
         """
         ...
     @typing.overload
-    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, collection: typing.Union[java.util.Collection['Orbit'], typing.Sequence['Orbit']]) -> 'Orbit': ...
+    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, collection: typing.Union[java.util.Collection['Orbit'], typing.Sequence['Orbit'], typing.Set['Orbit']]) -> 'Orbit': ...
     @typing.overload
     def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, stream: java.util.stream.Stream[org.orekit.time.TimeStamped]) -> org.orekit.time.TimeStamped: ...
 
@@ -900,7 +906,7 @@ class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], or
         Also see:
             :class:`~org.orekit.orbits.Orbit`
     """
-    def addKeplerContribution(self, positionAngleType: 'PositionAngleType', t: _FieldOrbit__T, tArray: typing.List[_FieldOrbit__T]) -> None:
+    def addKeplerContribution(self, positionAngleType: 'PositionAngleType', t: _FieldOrbit__T, tArray: typing.Union[typing.List[_FieldOrbit__T], jpype.JArray]) -> None:
         """
             Add the contribution of the Keplerian motion to parameters derivatives
         
@@ -1083,7 +1089,7 @@ class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], or
         
         """
         ...
-    def getJacobianWrtCartesian(self, positionAngleType: 'PositionAngleType', tArray: typing.List[typing.List[_FieldOrbit__T]]) -> None:
+    def getJacobianWrtCartesian(self, positionAngleType: 'PositionAngleType', tArray: typing.Union[typing.List[typing.MutableSequence[_FieldOrbit__T]], jpype.JArray]) -> None:
         """
             Compute the Jacobian of the orbital parameters with respect to the Cartesian parameters.
         
@@ -1099,7 +1105,7 @@ class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], or
         
         """
         ...
-    def getJacobianWrtParameters(self, positionAngleType: 'PositionAngleType', tArray: typing.List[typing.List[_FieldOrbit__T]]) -> None:
+    def getJacobianWrtParameters(self, positionAngleType: 'PositionAngleType', tArray: typing.Union[typing.List[typing.MutableSequence[_FieldOrbit__T]], jpype.JArray]) -> None:
         """
             Compute the Jacobian of the Cartesian parameters with respect to the orbital parameters.
         
@@ -1247,15 +1253,15 @@ class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], or
         
         """
         ...
-    def hasDerivatives(self) -> bool:
+    def hasNonKeplerianAcceleration(self) -> bool:
         """
-            Check if orbit includes derivatives.
+            Check if orbit includes non-Keplerian rates.
         
             Returns:
-                true if orbit includes derivatives
+                true if orbit includes non-Keplerian derivatives
         
             Since:
-                9.0
+                13.0
         
             Also see:
                 :meth:`~org.orekit.orbits.FieldOrbit.getADot`, :meth:`~org.orekit.orbits.FieldOrbit.getEquinoctialExDot`,
@@ -1267,6 +1273,7 @@ class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], or
         
         """
         ...
+    def inFrame(self, frame: org.orekit.frames.Frame) -> 'FieldOrbit'[_FieldOrbit__T]: ...
     def isElliptical(self) -> bool:
         """
             Returns true if and only if the orbit is elliptical i.e. has a non-negative semi-major axis.
@@ -1284,6 +1291,8 @@ class FieldOrbit(org.orekit.utils.FieldPVCoordinatesProvider[_FieldOrbit__T], or
     def shiftedBy(self, t: _FieldOrbit__T) -> 'FieldOrbit'[_FieldOrbit__T]: ...
     @typing.overload
     def shiftedBy(self, double: float) -> _FieldOrbit__T: ...
+    @typing.overload
+    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> _FieldOrbit__T: ...
     def toOrbit(self) -> 'Orbit':
         """
             Transforms the FieldOrbit instance into an Orbit instance.
@@ -1659,7 +1668,7 @@ class LibrationOrbitFamily(java.lang.Enum['LibrationOrbitFamily']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['LibrationOrbitFamily']:
+    def values() -> typing.MutableSequence['LibrationOrbitFamily']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1713,7 +1722,7 @@ class LibrationOrbitType(java.lang.Enum['LibrationOrbitType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['LibrationOrbitType']:
+    def values() -> typing.MutableSequence['LibrationOrbitType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -1731,9 +1740,9 @@ class LibrationOrbitType(java.lang.Enum['LibrationOrbitType']):
         """
         ...
 
-class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'], java.io.Serializable, org.orekit.utils.PVCoordinatesProvider):
+class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'], org.orekit.utils.PVCoordinatesProvider):
     """
-    public abstract class Orbit extends :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.orbits.Orbit`>, :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.io.Serializable?is`, :class:`~org.orekit.utils.PVCoordinatesProvider`
+    public abstract class Orbit extends :class:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Object?is` implements :class:`~org.orekit.time.TimeStamped`, :class:`~org.orekit.time.TimeShiftable`<:class:`~org.orekit.orbits.Orbit`>, :class:`~org.orekit.utils.PVCoordinatesProvider`
     
         This class handles orbital parameters.
     
@@ -1744,11 +1753,8 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
         probably is inertial and centered on the central body. This information is used for example by some force models.
     
         Instance of this class are guaranteed to be immutable.
-    
-        Also see:
-            :meth:`~serialized`
     """
-    def addKeplerContribution(self, positionAngleType: 'PositionAngleType', double: float, doubleArray: typing.List[float]) -> None:
+    def addKeplerContribution(self, positionAngleType: 'PositionAngleType', double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
             Add the contribution of the Keplerian motion to parameters derivatives
         
@@ -1791,9 +1797,6 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
             Since:
                 9.0
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -1833,9 +1836,6 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
             Since:
                 9.0
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -1862,9 +1862,6 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
             Since:
                 9.0
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -1890,9 +1887,6 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
         
             Since:
                 9.0
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
         
         
         """
@@ -1930,9 +1924,6 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
             Since:
                 9.0
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -1958,9 +1949,6 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
         
             Since:
                 9.0
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
         
         
         """
@@ -1988,13 +1976,10 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
             Since:
                 9.0
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
-    def getJacobianWrtCartesian(self, positionAngleType: 'PositionAngleType', doubleArray: typing.List[typing.List[float]]) -> None:
+    def getJacobianWrtCartesian(self, positionAngleType: 'PositionAngleType', doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> None:
         """
             Compute the Jacobian of the orbital parameters with respect to the Cartesian parameters.
         
@@ -2010,7 +1995,7 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
         
         """
         ...
-    def getJacobianWrtParameters(self, positionAngleType: 'PositionAngleType', doubleArray: typing.List[typing.List[float]]) -> None:
+    def getJacobianWrtParameters(self, positionAngleType: 'PositionAngleType', doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> None:
         """
             Compute the Jacobian of the Cartesian parameters with respect to the orbital parameters.
         
@@ -2073,9 +2058,6 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
             Since:
                 9.0
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -2102,9 +2084,6 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
             Since:
                 9.0
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -2130,9 +2109,6 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
         
             Since:
                 9.0
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
         
         
         """
@@ -2263,15 +2239,15 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
         
         """
         ...
-    def hasDerivatives(self) -> bool:
+    def hasNonKeplerianAcceleration(self) -> bool:
         """
-            Check if orbit includes derivatives.
+            Check if orbit includes non-Keplerian rates.
         
             Returns:
-                true if orbit includes derivatives
+                true if orbit includes non-Keplerian derivatives
         
             Since:
-                9.0
+                13.0
         
             Also see:
                 :meth:`~org.orekit.orbits.Orbit.getADot`, :meth:`~org.orekit.orbits.Orbit.getEquinoctialExDot`,
@@ -2279,6 +2255,23 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
                 :meth:`~org.orekit.orbits.Orbit.getHyDot`, :meth:`~org.orekit.orbits.Orbit.getLEDot`,
                 :meth:`~org.orekit.orbits.Orbit.getLvDot`, :meth:`~org.orekit.orbits.Orbit.getLMDot`,
                 :meth:`~org.orekit.orbits.Orbit.getEDot`, :meth:`~org.orekit.orbits.Orbit.getIDot`
+        
+        
+        """
+        ...
+    def inFrame(self, frame: org.orekit.frames.Frame) -> 'Orbit':
+        """
+            Create a new object representing the same physical orbital state, but attached to a different reference frame. If the
+            new frame is not inertial, an exception will be thrown.
+        
+            Parameters:
+                inertialFrame (:class:`~org.orekit.frames.Frame`): reference frame of output orbit
+        
+            Returns:
+                orbit with different frame
+        
+            Since:
+                13.0
         
         
         """
@@ -2296,6 +2289,7 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
         
         """
         ...
+    @typing.overload
     def shiftedBy(self, double: float) -> 'Orbit':
         """
             Get a time-shifted orbit.
@@ -2314,9 +2308,27 @@ class Orbit(org.orekit.time.TimeStamped, org.orekit.time.TimeShiftable['Orbit'],
             Returns:
                 a new orbit, shifted with respect to the instance (which is immutable)
         
+            Get a time-shifted orbit.
+        
+            The orbit can be slightly shifted to close dates. The shifting model is a Keplerian one if no derivatives are available
+            in the orbit, or Keplerian plus quadratic effect of the non-Keplerian acceleration if derivatives are available.
+            Shifting is *not* intended as a replacement for proper orbit propagation but should be sufficient for small time shifts
+            or coarse accuracy.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeShiftable.shiftedBy` in interface :class:`~org.orekit.time.TimeShiftable`
+        
+            Parameters:
+                dt (:class:`~org.orekit.time.TimeOffset`): time shift
+        
+            Returns:
+                a new orbit, shifted with respect to the instance (which is immutable)
+        
         
         """
         ...
+    @typing.overload
+    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> 'Orbit': ...
 
 class OrbitType(java.lang.Enum['OrbitType']):
     """
@@ -2657,9 +2669,9 @@ class OrbitType(java.lang.Enum['OrbitType']):
         ...
     _mapArrayToOrbit_0__T = typing.TypeVar('_mapArrayToOrbit_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def mapArrayToOrbit(self, tArray: typing.List[_mapArrayToOrbit_0__T], tArray2: typing.List[_mapArrayToOrbit_0__T], positionAngleType: 'PositionAngleType', fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mapArrayToOrbit_0__T], t3: _mapArrayToOrbit_0__T, frame: org.orekit.frames.Frame) -> FieldOrbit[_mapArrayToOrbit_0__T]: ...
+    def mapArrayToOrbit(self, tArray: typing.Union[typing.List[_mapArrayToOrbit_0__T], jpype.JArray], tArray2: typing.Union[typing.List[_mapArrayToOrbit_0__T], jpype.JArray], positionAngleType: 'PositionAngleType', fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_mapArrayToOrbit_0__T], t3: _mapArrayToOrbit_0__T, frame: org.orekit.frames.Frame) -> FieldOrbit[_mapArrayToOrbit_0__T]: ...
     @typing.overload
-    def mapArrayToOrbit(self, doubleArray: typing.List[float], doubleArray2: typing.List[float], positionAngleType: 'PositionAngleType', absoluteDate: org.orekit.time.AbsoluteDate, double3: float, frame: org.orekit.frames.Frame) -> Orbit:
+    def mapArrayToOrbit(self, doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray], positionAngleType: 'PositionAngleType', absoluteDate: org.orekit.time.AbsoluteDate, double3: float, frame: org.orekit.frames.Frame) -> Orbit:
         """
             Convert state array to orbital parameters.
         
@@ -2703,9 +2715,9 @@ class OrbitType(java.lang.Enum['OrbitType']):
         ...
     _mapOrbitToArray_0__T = typing.TypeVar('_mapOrbitToArray_0__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
     @typing.overload
-    def mapOrbitToArray(self, fieldOrbit: FieldOrbit[_mapOrbitToArray_0__T], positionAngleType: 'PositionAngleType', tArray: typing.List[_mapOrbitToArray_0__T], tArray2: typing.List[_mapOrbitToArray_0__T]) -> None: ...
+    def mapOrbitToArray(self, fieldOrbit: FieldOrbit[_mapOrbitToArray_0__T], positionAngleType: 'PositionAngleType', tArray: typing.Union[typing.List[_mapOrbitToArray_0__T], jpype.JArray], tArray2: typing.Union[typing.List[_mapOrbitToArray_0__T], jpype.JArray]) -> None: ...
     @typing.overload
-    def mapOrbitToArray(self, orbit: Orbit, positionAngleType: 'PositionAngleType', doubleArray: typing.List[float], doubleArray2: typing.List[float]) -> None:
+    def mapOrbitToArray(self, orbit: Orbit, positionAngleType: 'PositionAngleType', doubleArray: typing.Union[typing.List[float], jpype.JArray], doubleArray2: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
             Convert orbit to state array.
         
@@ -2789,7 +2801,7 @@ class OrbitType(java.lang.Enum['OrbitType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['OrbitType']:
+    def values() -> typing.MutableSequence['OrbitType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -2807,9 +2819,10 @@ class OrbitType(java.lang.Enum['OrbitType']):
         """
         ...
 
-class PositionAngleBased:
+_PositionAngleBased__T = typing.TypeVar('_PositionAngleBased__T')  # <T>
+class PositionAngleBased(typing.Generic[_PositionAngleBased__T]):
     """
-    public interface PositionAngleBased
+    public interface PositionAngleBased<T>
     
         This interface represent orbit-like trajectory whose definition is based on a so-called position angle.
     
@@ -2832,22 +2845,45 @@ class PositionAngleBased:
         
         """
         ...
-    def hasRates(self) -> bool:
+    def hasNonKeplerianRates(self) -> bool:
         """
-            Tells whether the instance holds rates (first-order time derivatives) for dependent variables.
+            Tells whether the instance holds rates (first-order time derivatives) for dependent variables that are incompatible with
+            Keplerian motion.
         
             Returns:
-                true if and only if holding rates
+                true if and only if holding non-Keplerian rates
+        
+            Since:
+                13.0
         
         
         """
         ...
-    def removeRates(self) -> 'PositionAngleBased':
+    def withCachedPositionAngleType(self, positionAngleType: 'PositionAngleType') -> _PositionAngleBased__T:
         """
-            Create a new instance such that :meth:`~org.orekit.orbits.PositionAngleBased.hasRates` is false.
+            Creates a new instance with the provided type used for caching.
+        
+            Parameters:
+                positionAngleType (:class:`~org.orekit.orbits.PositionAngleType`): position angle type to use for caching value
+        
+            Returns:
+                new object
+        
+            Since:
+                13.0
+        
+        
+        """
+        ...
+    def withKeplerianRates(self) -> _PositionAngleBased__T:
+        """
+            Creates a new instance such that :meth:`~org.orekit.orbits.PositionAngleBased.hasNonKeplerianRates` is false.
         
             Returns:
                 new object without rates
+        
+            Since:
+                13.0
         
         
         """
@@ -2892,7 +2928,7 @@ class PositionAngleType(java.lang.Enum['PositionAngleType']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['PositionAngleType']:
+    def values() -> typing.MutableSequence['PositionAngleType']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -3007,10 +3043,19 @@ class WalkerConstellation:
     
         Builder for orbits of satellites forming a Walker constellation.
     
+        It manages the 2 patterns:
+    
+          - Delta, with ascending nodes distributed over 360°
+          - Star, with ascending nodes distributed over 180°
+    
+    
         Since:
             12.1
     """
+    @typing.overload
     def __init__(self, int: int, int2: int, int3: int): ...
+    @typing.overload
+    def __init__(self, int: int, int2: int, int3: int, pattern: 'WalkerConstellation.Pattern'): ...
     _buildReferenceSlot__O = typing.TypeVar('_buildReferenceSlot__O', bound=Orbit)  # <O>
     def buildReferenceSlot(self, o: _buildReferenceSlot__O) -> 'WalkerConstellationSlot'[_buildReferenceSlot__O]:
         """
@@ -3072,6 +3117,16 @@ class WalkerConstellation:
         
         """
         ...
+    def getPattern(self) -> 'WalkerConstellation.Pattern':
+        """
+            Get the constellation pattern.
+        
+            Returns:
+                constellation pattern
+        
+        
+        """
+        ...
     def getT(self) -> int:
         """
             Get the total number of satellites.
@@ -3082,6 +3137,19 @@ class WalkerConstellation:
         
         """
         ...
+    class Pattern(java.lang.Enum['WalkerConstellation.Pattern']):
+        DELTA: typing.ClassVar['WalkerConstellation.Pattern'] = ...
+        STAR: typing.ClassVar['WalkerConstellation.Pattern'] = ...
+        def getRaanDistribution(self) -> float: ...
+        _valueOf_0__T = typing.TypeVar('_valueOf_0__T', bound=java.lang.Enum)  # <T>
+        @typing.overload
+        @staticmethod
+        def valueOf(class_: typing.Type[_valueOf_0__T], string: str) -> _valueOf_0__T: ...
+        @typing.overload
+        @staticmethod
+        def valueOf(string: str) -> 'WalkerConstellation.Pattern': ...
+        @staticmethod
+        def values() -> typing.MutableSequence['WalkerConstellation.Pattern']: ...
 
 _WalkerConstellationSlot__O = typing.TypeVar('_WalkerConstellationSlot__O', bound=Orbit)  # <O>
 class WalkerConstellationSlot(typing.Generic[_WalkerConstellationSlot__O]):
@@ -3169,7 +3237,7 @@ class CartesianOrbit(Orbit):
     
         Also see:
             :class:`~org.orekit.orbits.Orbit`, :class:`~org.orekit.orbits.KeplerianOrbit`,
-            :class:`~org.orekit.orbits.CircularOrbit`, :class:`~org.orekit.orbits.EquinoctialOrbit`, :meth:`~serialized`
+            :class:`~org.orekit.orbits.CircularOrbit`, :class:`~org.orekit.orbits.EquinoctialOrbit`
     """
     @typing.overload
     def __init__(self, orbit: Orbit): ...
@@ -3177,7 +3245,7 @@ class CartesianOrbit(Orbit):
     def __init__(self, pVCoordinates: org.orekit.utils.PVCoordinates, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, double: float): ...
     @typing.overload
     def __init__(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame, double: float): ...
-    def addKeplerContribution(self, positionAngleType: PositionAngleType, double: float, doubleArray: typing.List[float]) -> None:
+    def addKeplerContribution(self, positionAngleType: PositionAngleType, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
             Add the contribution of the Keplerian motion to parameters derivatives
         
@@ -3225,9 +3293,6 @@ class CartesianOrbit(Orbit):
         
             Returns:
                 semi-major axis derivative (m/s)
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
         
         
         """
@@ -3258,9 +3323,6 @@ class CartesianOrbit(Orbit):
             Returns:
                 eccentricity derivative
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -3289,9 +3351,6 @@ class CartesianOrbit(Orbit):
         
             Returns:
                 first component of the equinoctial eccentricity vector derivative
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
         
         
         """
@@ -3322,9 +3381,6 @@ class CartesianOrbit(Orbit):
             Returns:
                 second component of the equinoctial eccentricity vector derivative
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -3353,9 +3409,6 @@ class CartesianOrbit(Orbit):
         
             Returns:
                 first component of the inclination vector derivative
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
         
         
         """
@@ -3386,9 +3439,6 @@ class CartesianOrbit(Orbit):
             Returns:
                 second component of the inclination vector derivative
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -3417,9 +3467,6 @@ class CartesianOrbit(Orbit):
         
             Returns:
                 inclination derivative (rad/s)
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
         
         
         """
@@ -3450,9 +3497,6 @@ class CartesianOrbit(Orbit):
             Returns:
                 d(E + ω + Ω)/dt eccentric longitude argument derivative (rad/s)
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -3481,9 +3525,6 @@ class CartesianOrbit(Orbit):
         
             Returns:
                 d(M + ω + Ω)/dt mean longitude argument derivative (rad/s)
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
         
         
         """
@@ -3514,9 +3555,6 @@ class CartesianOrbit(Orbit):
             Returns:
                 d(v + ω + Ω)/dt true longitude argument derivative (rad/s)
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -3533,15 +3571,15 @@ class CartesianOrbit(Orbit):
         
         """
         ...
-    def hasDerivatives(self) -> bool:
+    def hasNonKeplerianAcceleration(self) -> bool:
         """
-            Check if orbit includes derivatives.
+            Check if orbit includes non-Keplerian rates.
         
             Overrides:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives` in class :class:`~org.orekit.orbits.Orbit`
+                :meth:`~org.orekit.orbits.Orbit.hasNonKeplerianAcceleration` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                true if orbit includes derivatives
+                true if orbit includes non-Keplerian derivatives
         
             Also see:
                 :meth:`~org.orekit.orbits.Orbit.getADot`, :meth:`~org.orekit.orbits.Orbit.getEquinoctialExDot`,
@@ -3553,6 +3591,24 @@ class CartesianOrbit(Orbit):
         
         """
         ...
+    def inFrame(self, frame: org.orekit.frames.Frame) -> 'CartesianOrbit':
+        """
+            Create a new object representing the same physical orbital state, but attached to a different reference frame. If the
+            new frame is not inertial, an exception will be thrown.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.Orbit.inFrame` in class :class:`~org.orekit.orbits.Orbit`
+        
+            Parameters:
+                inertialFrame (:class:`~org.orekit.frames.Frame`): reference frame of output orbit
+        
+            Returns:
+                orbit with different frame
+        
+        
+        """
+        ...
+    @typing.overload
     def shiftedBy(self, double: float) -> 'CartesianOrbit':
         """
             Get a time-shifted orbit.
@@ -3574,9 +3630,30 @@ class CartesianOrbit(Orbit):
             Returns:
                 a new orbit, shifted with respect to the instance (which is immutable)
         
+            Get a time-shifted orbit.
+        
+            The orbit can be slightly shifted to close dates. The shifting model is a Keplerian one if no derivatives are available
+            in the orbit, or Keplerian plus quadratic effect of the non-Keplerian acceleration if derivatives are available.
+            Shifting is *not* intended as a replacement for proper orbit propagation but should be sufficient for small time shifts
+            or coarse accuracy.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeShiftable.shiftedBy` in interface :class:`~org.orekit.time.TimeShiftable`
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.Orbit.shiftedBy` in class :class:`~org.orekit.orbits.Orbit`
+        
+            Parameters:
+                dt (:class:`~org.orekit.time.TimeOffset`): time shift
+        
+            Returns:
+                a new orbit, shifted with respect to the instance (which is immutable)
+        
         
         """
         ...
+    @typing.overload
+    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> 'CartesianOrbit': ...
     def toString(self) -> str:
         """
             Returns a string representation of this Orbit object.
@@ -3592,9 +3669,9 @@ class CartesianOrbit(Orbit):
         """
         ...
 
-class CircularOrbit(Orbit, PositionAngleBased):
+class CircularOrbit(Orbit, PositionAngleBased['CircularOrbit']):
     """
-    public class CircularOrbit extends :class:`~org.orekit.orbits.Orbit` implements :class:`~org.orekit.orbits.PositionAngleBased`
+    public class CircularOrbit extends :class:`~org.orekit.orbits.Orbit` implements :class:`~org.orekit.orbits.PositionAngleBased`<:class:`~org.orekit.orbits.CircularOrbit`>
     
         This class handles circular orbital parameters.
     
@@ -3619,7 +3696,7 @@ class CircularOrbit(Orbit, PositionAngleBased):
     
         Also see:
             :class:`~org.orekit.orbits.Orbit`, :class:`~org.orekit.orbits.KeplerianOrbit`,
-            :class:`~org.orekit.orbits.CartesianOrbit`, :class:`~org.orekit.orbits.EquinoctialOrbit`, :meth:`~serialized`
+            :class:`~org.orekit.orbits.CartesianOrbit`, :class:`~org.orekit.orbits.EquinoctialOrbit`
     """
     @typing.overload
     def __init__(self, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, double9: float, double10: float, double11: float, double12: float, positionAngleType: PositionAngleType, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, double13: float): ...
@@ -3635,7 +3712,7 @@ class CircularOrbit(Orbit, PositionAngleBased):
     def __init__(self, pVCoordinates: org.orekit.utils.PVCoordinates, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, double: float): ...
     @typing.overload
     def __init__(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame, double: float): ...
-    def addKeplerContribution(self, positionAngleType: PositionAngleType, double: float, doubleArray: typing.List[float]) -> None:
+    def addKeplerContribution(self, positionAngleType: PositionAngleType, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
             Add the contribution of the Keplerian motion to parameters derivatives
         
@@ -3654,10 +3731,6 @@ class CircularOrbit(Orbit, PositionAngleBased):
         
         """
         ...
-    @staticmethod
-    def eccentricToMean(double: float, double2: float, double3: float) -> float: ...
-    @staticmethod
-    def eccentricToTrue(double: float, double2: float, double3: float) -> float: ...
     def getA(self) -> float:
         """
             Get the semi-major axis.
@@ -3687,9 +3760,6 @@ class CircularOrbit(Orbit, PositionAngleBased):
         
             Returns:
                 semi-major axis derivative (m/s)
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
         
         
         """
@@ -3887,9 +3957,6 @@ class CircularOrbit(Orbit, PositionAngleBased):
             Returns:
                 eccentricity derivative
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -3918,9 +3985,6 @@ class CircularOrbit(Orbit, PositionAngleBased):
         
             Returns:
                 first component of the equinoctial eccentricity vector derivative
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
         
         
         """
@@ -3951,9 +4015,6 @@ class CircularOrbit(Orbit, PositionAngleBased):
             Returns:
                 second component of the equinoctial eccentricity vector derivative
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -3982,9 +4043,6 @@ class CircularOrbit(Orbit, PositionAngleBased):
         
             Returns:
                 first component of the inclination vector derivative
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
         
         
         """
@@ -4015,9 +4073,6 @@ class CircularOrbit(Orbit, PositionAngleBased):
             Returns:
                 second component of the inclination vector derivative
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -4046,9 +4101,6 @@ class CircularOrbit(Orbit, PositionAngleBased):
         
             Returns:
                 inclination derivative (rad/s)
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
         
         
         """
@@ -4079,9 +4131,6 @@ class CircularOrbit(Orbit, PositionAngleBased):
             Returns:
                 d(E + ω + Ω)/dt eccentric longitude argument derivative (rad/s)
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -4111,9 +4160,6 @@ class CircularOrbit(Orbit, PositionAngleBased):
             Returns:
                 d(M + ω + Ω)/dt mean longitude argument derivative (rad/s)
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -4142,9 +4188,6 @@ class CircularOrbit(Orbit, PositionAngleBased):
         
             Returns:
                 d(v + ω + Ω)/dt true longitude argument derivative (rad/s)
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
         
         
         """
@@ -4188,34 +4231,59 @@ class CircularOrbit(Orbit, PositionAngleBased):
         
         """
         ...
-    def hasRates(self) -> bool:
+    def hasNonKeplerianAcceleration(self) -> bool:
         """
-            Tells whether the instance holds rates (first-order time derivatives) for dependent variables.
+            Check if orbit includes non-Keplerian rates.
         
-            Specified by:
-                :meth:`~org.orekit.orbits.PositionAngleBased.hasRates` in interface :class:`~org.orekit.orbits.PositionAngleBased`
+            Overrides:
+                :meth:`~org.orekit.orbits.Orbit.hasNonKeplerianAcceleration` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                true if and only if holding rates
+                true if orbit includes non-Keplerian derivatives
+        
+            Also see:
+                :meth:`~org.orekit.orbits.Orbit.getADot`, :meth:`~org.orekit.orbits.Orbit.getEquinoctialExDot`,
+                :meth:`~org.orekit.orbits.Orbit.getEquinoctialEyDot`, :meth:`~org.orekit.orbits.Orbit.getHxDot`,
+                :meth:`~org.orekit.orbits.Orbit.getHyDot`, :meth:`~org.orekit.orbits.Orbit.getLEDot`,
+                :meth:`~org.orekit.orbits.Orbit.getLvDot`, :meth:`~org.orekit.orbits.Orbit.getLMDot`,
+                :meth:`~org.orekit.orbits.Orbit.getEDot`, :meth:`~org.orekit.orbits.Orbit.getIDot`
         
         
         """
         ...
-    @staticmethod
-    def meanToEccentric(double: float, double2: float, double3: float) -> float: ...
-    def removeRates(self) -> 'CircularOrbit':
+    def hasNonKeplerianRates(self) -> bool:
         """
-            Create a new instance such that :meth:`~org.orekit.orbits.PositionAngleBased.hasRates` is false.
+            Tells whether the instance holds rates (first-order time derivatives) for dependent variables that are incompatible with
+            Keplerian motion.
         
             Specified by:
-                :meth:`~org.orekit.orbits.PositionAngleBased.removeRates` in interface :class:`~org.orekit.orbits.PositionAngleBased`
+                :meth:`~org.orekit.orbits.PositionAngleBased.hasNonKeplerianRates` in
+                interface :class:`~org.orekit.orbits.PositionAngleBased`
         
             Returns:
-                new object without rates
+                true if and only if holding non-Keplerian rates
         
         
         """
         ...
+    def inFrame(self, frame: org.orekit.frames.Frame) -> 'CircularOrbit':
+        """
+            Create a new object representing the same physical orbital state, but attached to a different reference frame. If the
+            new frame is not inertial, an exception will be thrown.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.Orbit.inFrame` in class :class:`~org.orekit.orbits.Orbit`
+        
+            Parameters:
+                inertialFrame (:class:`~org.orekit.frames.Frame`): reference frame of output orbit
+        
+            Returns:
+                orbit with different frame
+        
+        
+        """
+        ...
+    @typing.overload
     def shiftedBy(self, double: float) -> 'CircularOrbit':
         """
             Get a time-shifted orbit.
@@ -4237,9 +4305,30 @@ class CircularOrbit(Orbit, PositionAngleBased):
             Returns:
                 a new orbit, shifted with respect to the instance (which is immutable)
         
+            Get a time-shifted orbit.
+        
+            The orbit can be slightly shifted to close dates. The shifting model is a Keplerian one if no derivatives are available
+            in the orbit, or Keplerian plus quadratic effect of the non-Keplerian acceleration if derivatives are available.
+            Shifting is *not* intended as a replacement for proper orbit propagation but should be sufficient for small time shifts
+            or coarse accuracy.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeShiftable.shiftedBy` in interface :class:`~org.orekit.time.TimeShiftable`
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.Orbit.shiftedBy` in class :class:`~org.orekit.orbits.Orbit`
+        
+            Parameters:
+                dt (:class:`~org.orekit.time.TimeOffset`): time shift
+        
+            Returns:
+                a new orbit, shifted with respect to the instance (which is immutable)
+        
         
         """
         ...
+    @typing.overload
+    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> 'CircularOrbit': ...
     def toString(self) -> str:
         """
             Returns a string representation of this Orbit object.
@@ -4254,12 +4343,41 @@ class CircularOrbit(Orbit, PositionAngleBased):
         
         """
         ...
-    @staticmethod
-    def trueToEccentric(double: float, double2: float, double3: float) -> float: ...
+    def withCachedPositionAngleType(self, positionAngleType: PositionAngleType) -> 'CircularOrbit':
+        """
+            Creates a new instance with the provided type used for caching.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.PositionAngleBased.withCachedPositionAngleType` in
+                interface :class:`~org.orekit.orbits.PositionAngleBased`
+        
+            Parameters:
+                positionAngleType (:class:`~org.orekit.orbits.PositionAngleType`): position angle type to use for caching value
+        
+            Returns:
+                new object
+        
+        
+        """
+        ...
+    def withKeplerianRates(self) -> 'CircularOrbit':
+        """
+            Creates a new instance such that :meth:`~org.orekit.orbits.PositionAngleBased.hasNonKeplerianRates` is false.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.PositionAngleBased.withKeplerianRates` in
+                interface :class:`~org.orekit.orbits.PositionAngleBased`
+        
+            Returns:
+                new object without rates
+        
+        
+        """
+        ...
 
-class EquinoctialOrbit(Orbit, PositionAngleBased):
+class EquinoctialOrbit(Orbit, PositionAngleBased['EquinoctialOrbit']):
     """
-    public class EquinoctialOrbit extends :class:`~org.orekit.orbits.Orbit` implements :class:`~org.orekit.orbits.PositionAngleBased`
+    public class EquinoctialOrbit extends :class:`~org.orekit.orbits.Orbit` implements :class:`~org.orekit.orbits.PositionAngleBased`<:class:`~org.orekit.orbits.EquinoctialOrbit`>
     
         This class handles equinoctial orbital parameters, which can support both circular and equatorial orbits.
     
@@ -4286,7 +4404,7 @@ class EquinoctialOrbit(Orbit, PositionAngleBased):
     
         Also see:
             :class:`~org.orekit.orbits.Orbit`, :class:`~org.orekit.orbits.KeplerianOrbit`,
-            :class:`~org.orekit.orbits.CircularOrbit`, :class:`~org.orekit.orbits.CartesianOrbit`, :meth:`~serialized`
+            :class:`~org.orekit.orbits.CircularOrbit`, :class:`~org.orekit.orbits.CartesianOrbit`
     """
     @typing.overload
     def __init__(self, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, double9: float, double10: float, double11: float, double12: float, positionAngleType: PositionAngleType, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, double13: float): ...
@@ -4302,7 +4420,7 @@ class EquinoctialOrbit(Orbit, PositionAngleBased):
     def __init__(self, pVCoordinates: org.orekit.utils.PVCoordinates, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, double: float): ...
     @typing.overload
     def __init__(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame, double: float): ...
-    def addKeplerContribution(self, positionAngleType: PositionAngleType, double: float, doubleArray: typing.List[float]) -> None:
+    def addKeplerContribution(self, positionAngleType: PositionAngleType, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
             Add the contribution of the Keplerian motion to parameters derivatives
         
@@ -4321,10 +4439,6 @@ class EquinoctialOrbit(Orbit, PositionAngleBased):
         
         """
         ...
-    @staticmethod
-    def eccentricToMean(double: float, double2: float, double3: float) -> float: ...
-    @staticmethod
-    def eccentricToTrue(double: float, double2: float, double3: float) -> float: ...
     def getA(self) -> float:
         """
             Get the semi-major axis.
@@ -4354,9 +4468,6 @@ class EquinoctialOrbit(Orbit, PositionAngleBased):
         
             Returns:
                 semi-major axis derivative (m/s)
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
         
         
         """
@@ -4401,9 +4512,6 @@ class EquinoctialOrbit(Orbit, PositionAngleBased):
             Returns:
                 eccentricity derivative
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -4432,9 +4540,6 @@ class EquinoctialOrbit(Orbit, PositionAngleBased):
         
             Returns:
                 first component of the equinoctial eccentricity vector derivative
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
         
         
         """
@@ -4465,9 +4570,6 @@ class EquinoctialOrbit(Orbit, PositionAngleBased):
             Returns:
                 second component of the equinoctial eccentricity vector derivative
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -4496,9 +4598,6 @@ class EquinoctialOrbit(Orbit, PositionAngleBased):
         
             Returns:
                 first component of the inclination vector derivative
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
         
         
         """
@@ -4529,9 +4628,6 @@ class EquinoctialOrbit(Orbit, PositionAngleBased):
             Returns:
                 second component of the inclination vector derivative
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -4560,9 +4656,6 @@ class EquinoctialOrbit(Orbit, PositionAngleBased):
         
             Returns:
                 inclination derivative (rad/s)
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
         
         
         """
@@ -4619,9 +4712,6 @@ class EquinoctialOrbit(Orbit, PositionAngleBased):
             Returns:
                 d(E + ω + Ω)/dt eccentric longitude argument derivative (rad/s)
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -4650,9 +4740,6 @@ class EquinoctialOrbit(Orbit, PositionAngleBased):
         
             Returns:
                 d(M + ω + Ω)/dt mean longitude argument derivative (rad/s)
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
         
         
         """
@@ -4683,9 +4770,6 @@ class EquinoctialOrbit(Orbit, PositionAngleBased):
             Returns:
                 d(v + ω + Ω)/dt true longitude argument derivative (rad/s)
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -4702,34 +4786,59 @@ class EquinoctialOrbit(Orbit, PositionAngleBased):
         
         """
         ...
-    def hasRates(self) -> bool:
+    def hasNonKeplerianAcceleration(self) -> bool:
         """
-            Tells whether the instance holds rates (first-order time derivatives) for dependent variables.
+            Check if orbit includes non-Keplerian rates.
         
-            Specified by:
-                :meth:`~org.orekit.orbits.PositionAngleBased.hasRates` in interface :class:`~org.orekit.orbits.PositionAngleBased`
+            Overrides:
+                :meth:`~org.orekit.orbits.Orbit.hasNonKeplerianAcceleration` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                true if and only if holding rates
+                true if orbit includes non-Keplerian derivatives
+        
+            Also see:
+                :meth:`~org.orekit.orbits.Orbit.getADot`, :meth:`~org.orekit.orbits.Orbit.getEquinoctialExDot`,
+                :meth:`~org.orekit.orbits.Orbit.getEquinoctialEyDot`, :meth:`~org.orekit.orbits.Orbit.getHxDot`,
+                :meth:`~org.orekit.orbits.Orbit.getHyDot`, :meth:`~org.orekit.orbits.Orbit.getLEDot`,
+                :meth:`~org.orekit.orbits.Orbit.getLvDot`, :meth:`~org.orekit.orbits.Orbit.getLMDot`,
+                :meth:`~org.orekit.orbits.Orbit.getEDot`, :meth:`~org.orekit.orbits.Orbit.getIDot`
         
         
         """
         ...
-    @staticmethod
-    def meanToEccentric(double: float, double2: float, double3: float) -> float: ...
-    def removeRates(self) -> 'EquinoctialOrbit':
+    def hasNonKeplerianRates(self) -> bool:
         """
-            Create a new instance such that :meth:`~org.orekit.orbits.PositionAngleBased.hasRates` is false.
+            Tells whether the instance holds rates (first-order time derivatives) for dependent variables that are incompatible with
+            Keplerian motion.
         
             Specified by:
-                :meth:`~org.orekit.orbits.PositionAngleBased.removeRates` in interface :class:`~org.orekit.orbits.PositionAngleBased`
+                :meth:`~org.orekit.orbits.PositionAngleBased.hasNonKeplerianRates` in
+                interface :class:`~org.orekit.orbits.PositionAngleBased`
         
             Returns:
-                new object without rates
+                true if and only if holding non-Keplerian rates
         
         
         """
         ...
+    def inFrame(self, frame: org.orekit.frames.Frame) -> 'EquinoctialOrbit':
+        """
+            Create a new object representing the same physical orbital state, but attached to a different reference frame. If the
+            new frame is not inertial, an exception will be thrown.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.Orbit.inFrame` in class :class:`~org.orekit.orbits.Orbit`
+        
+            Parameters:
+                inertialFrame (:class:`~org.orekit.frames.Frame`): reference frame of output orbit
+        
+            Returns:
+                orbit with different frame
+        
+        
+        """
+        ...
+    @typing.overload
     def shiftedBy(self, double: float) -> 'EquinoctialOrbit':
         """
             Get a time-shifted orbit.
@@ -4751,9 +4860,30 @@ class EquinoctialOrbit(Orbit, PositionAngleBased):
             Returns:
                 a new orbit, shifted with respect to the instance (which is immutable)
         
+            Get a time-shifted orbit.
+        
+            The orbit can be slightly shifted to close dates. The shifting model is a Keplerian one if no derivatives are available
+            in the orbit, or Keplerian plus quadratic effect of the non-Keplerian acceleration if derivatives are available.
+            Shifting is *not* intended as a replacement for proper orbit propagation but should be sufficient for small time shifts
+            or coarse accuracy.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeShiftable.shiftedBy` in interface :class:`~org.orekit.time.TimeShiftable`
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.Orbit.shiftedBy` in class :class:`~org.orekit.orbits.Orbit`
+        
+            Parameters:
+                dt (:class:`~org.orekit.time.TimeOffset`): time shift
+        
+            Returns:
+                a new orbit, shifted with respect to the instance (which is immutable)
+        
         
         """
         ...
+    @typing.overload
+    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> 'EquinoctialOrbit': ...
     def toString(self) -> str:
         """
             Returns a string representation of this equinoctial parameters object.
@@ -4768,8 +4898,37 @@ class EquinoctialOrbit(Orbit, PositionAngleBased):
         
         """
         ...
-    @staticmethod
-    def trueToEccentric(double: float, double2: float, double3: float) -> float: ...
+    def withCachedPositionAngleType(self, positionAngleType: PositionAngleType) -> 'EquinoctialOrbit':
+        """
+            Creates a new instance with the provided type used for caching.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.PositionAngleBased.withCachedPositionAngleType` in
+                interface :class:`~org.orekit.orbits.PositionAngleBased`
+        
+            Parameters:
+                positionAngleType (:class:`~org.orekit.orbits.PositionAngleType`): position angle type to use for caching value
+        
+            Returns:
+                new object
+        
+        
+        """
+        ...
+    def withKeplerianRates(self) -> 'EquinoctialOrbit':
+        """
+            Creates a new instance such that :meth:`~org.orekit.orbits.PositionAngleBased.hasNonKeplerianRates` is false.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.PositionAngleBased.withKeplerianRates` in
+                interface :class:`~org.orekit.orbits.PositionAngleBased`
+        
+            Returns:
+                new object without rates
+        
+        
+        """
+        ...
 
 _FieldCartesianOrbit__T = typing.TypeVar('_FieldCartesianOrbit__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
 class FieldCartesianOrbit(FieldOrbit[_FieldCartesianOrbit__T], typing.Generic[_FieldCartesianOrbit__T]):
@@ -4814,7 +4973,7 @@ class FieldCartesianOrbit(FieldOrbit[_FieldCartesianOrbit__T], typing.Generic[_F
     def __init__(self, fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_FieldCartesianOrbit__T], frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldCartesianOrbit__T], t: _FieldCartesianOrbit__T): ...
     @typing.overload
     def __init__(self, timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldCartesianOrbit__T], frame: org.orekit.frames.Frame, t2: _FieldCartesianOrbit__T): ...
-    def addKeplerContribution(self, positionAngleType: PositionAngleType, t: _FieldCartesianOrbit__T, tArray: typing.List[_FieldCartesianOrbit__T]) -> None:
+    def addKeplerContribution(self, positionAngleType: PositionAngleType, t: _FieldCartesianOrbit__T, tArray: typing.Union[typing.List[_FieldCartesianOrbit__T], jpype.JArray]) -> None:
         """
             Add the contribution of the Keplerian motion to parameters derivatives
         
@@ -5128,15 +5287,15 @@ class FieldCartesianOrbit(FieldOrbit[_FieldCartesianOrbit__T], typing.Generic[_F
         
         """
         ...
-    def hasDerivatives(self) -> bool:
+    def hasNonKeplerianAcceleration(self) -> bool:
         """
-            Check if orbit includes derivatives.
+            Check if orbit includes non-Keplerian rates.
         
-            Specified by:
-                :meth:`~org.orekit.orbits.FieldOrbit.hasDerivatives` in class :class:`~org.orekit.orbits.FieldOrbit`
+            Overrides:
+                :meth:`~org.orekit.orbits.FieldOrbit.hasNonKeplerianAcceleration` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                true if orbit includes derivatives
+                true if orbit includes non-Keplerian derivatives
         
             Also see:
                 :meth:`~org.orekit.orbits.FieldOrbit.getADot`, :meth:`~org.orekit.orbits.FieldOrbit.getEquinoctialExDot`,
@@ -5148,6 +5307,9 @@ class FieldCartesianOrbit(FieldOrbit[_FieldCartesianOrbit__T], typing.Generic[_F
         
         """
         ...
+    def inFrame(self, frame: org.orekit.frames.Frame) -> 'FieldCartesianOrbit'[_FieldCartesianOrbit__T]: ...
+    @typing.overload
+    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> _FieldCartesianOrbit__T: ...
     @typing.overload
     def shiftedBy(self, double: float) -> 'FieldCartesianOrbit'[_FieldCartesianOrbit__T]: ...
     @typing.overload
@@ -5182,9 +5344,9 @@ class FieldCartesianOrbit(FieldOrbit[_FieldCartesianOrbit__T], typing.Generic[_F
         ...
 
 _FieldCircularOrbit__T = typing.TypeVar('_FieldCircularOrbit__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], PositionAngleBased, typing.Generic[_FieldCircularOrbit__T]):
+class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], PositionAngleBased['FieldCircularOrbit'[_FieldCircularOrbit__T]], typing.Generic[_FieldCircularOrbit__T]):
     """
-    public class FieldCircularOrbit<T extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.orbits.FieldOrbit`<T> implements :class:`~org.orekit.orbits.PositionAngleBased`
+    public class FieldCircularOrbit<T extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.orbits.FieldOrbit`<T> implements :class:`~org.orekit.orbits.PositionAngleBased`<:class:`~org.orekit.orbits.FieldCircularOrbit`<T>>
     
         This class handles circular orbital parameters.
     
@@ -5232,7 +5394,7 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], PositionAngleBased,
     def __init__(self, fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_FieldCircularOrbit__T], frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldCircularOrbit__T], t: _FieldCircularOrbit__T): ...
     @typing.overload
     def __init__(self, timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldCircularOrbit__T], frame: org.orekit.frames.Frame, t2: _FieldCircularOrbit__T): ...
-    def addKeplerContribution(self, positionAngleType: PositionAngleType, t: _FieldCircularOrbit__T, tArray: typing.List[_FieldCircularOrbit__T]) -> None:
+    def addKeplerContribution(self, positionAngleType: PositionAngleType, t: _FieldCircularOrbit__T, tArray: typing.Union[typing.List[_FieldCircularOrbit__T], jpype.JArray]) -> None:
         """
             Add the contribution of the Keplerian motion to parameters derivatives
         
@@ -5251,12 +5413,6 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], PositionAngleBased,
         
         """
         ...
-    _eccentricToMean__T = typing.TypeVar('_eccentricToMean__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @staticmethod
-    def eccentricToMean(t: _eccentricToMean__T, t2: _eccentricToMean__T, t3: _eccentricToMean__T) -> _eccentricToMean__T: ...
-    _eccentricToTrue__T = typing.TypeVar('_eccentricToTrue__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @staticmethod
-    def eccentricToTrue(t: _eccentricToTrue__T, t2: _eccentricToTrue__T, t3: _eccentricToTrue__T) -> _eccentricToTrue__T: ...
     def getA(self) -> _FieldCircularOrbit__T:
         """
             Get the semi-major axis.
@@ -5712,15 +5868,15 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], PositionAngleBased,
         
         """
         ...
-    def hasDerivatives(self) -> bool:
+    def hasNonKeplerianAcceleration(self) -> bool:
         """
-            Check if orbit includes derivatives.
+            Check if orbit includes non-Keplerian rates.
         
-            Specified by:
-                :meth:`~org.orekit.orbits.FieldOrbit.hasDerivatives` in class :class:`~org.orekit.orbits.FieldOrbit`
+            Overrides:
+                :meth:`~org.orekit.orbits.FieldOrbit.hasNonKeplerianAcceleration` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                true if orbit includes derivatives
+                true if orbit includes non-Keplerian derivatives
         
             Also see:
                 :meth:`~org.orekit.orbits.FieldOrbit.getADot`, :meth:`~org.orekit.orbits.FieldOrbit.getEquinoctialExDot`,
@@ -5732,23 +5888,24 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], PositionAngleBased,
         
         """
         ...
-    def hasRates(self) -> bool:
+    def hasNonKeplerianRates(self) -> bool:
         """
-            Tells whether the instance holds rates (first-order time derivatives) for dependent variables.
+            Tells whether the instance holds rates (first-order time derivatives) for dependent variables that are incompatible with
+            Keplerian motion.
         
             Specified by:
-                :meth:`~org.orekit.orbits.PositionAngleBased.hasRates` in interface :class:`~org.orekit.orbits.PositionAngleBased`
+                :meth:`~org.orekit.orbits.PositionAngleBased.hasNonKeplerianRates` in
+                interface :class:`~org.orekit.orbits.PositionAngleBased`
         
             Returns:
-                true if and only if holding rates
+                true if and only if holding non-Keplerian rates
         
         
         """
         ...
-    _meanToEccentric__T = typing.TypeVar('_meanToEccentric__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @staticmethod
-    def meanToEccentric(t: _meanToEccentric__T, t2: _meanToEccentric__T, t3: _meanToEccentric__T) -> _meanToEccentric__T: ...
-    def removeRates(self) -> 'FieldCircularOrbit'[_FieldCircularOrbit__T]: ...
+    def inFrame(self, frame: org.orekit.frames.Frame) -> 'FieldCircularOrbit'[_FieldCircularOrbit__T]: ...
+    @typing.overload
+    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> _FieldCircularOrbit__T: ...
     @typing.overload
     def shiftedBy(self, double: float) -> 'FieldCircularOrbit'[_FieldCircularOrbit__T]: ...
     @typing.overload
@@ -5780,14 +5937,13 @@ class FieldCircularOrbit(FieldOrbit[_FieldCircularOrbit__T], PositionAngleBased,
         
         """
         ...
-    _trueToEccentric__T = typing.TypeVar('_trueToEccentric__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @staticmethod
-    def trueToEccentric(t: _trueToEccentric__T, t2: _trueToEccentric__T, t3: _trueToEccentric__T) -> _trueToEccentric__T: ...
+    def withCachedPositionAngleType(self, positionAngleType: PositionAngleType) -> 'FieldCircularOrbit'[_FieldCircularOrbit__T]: ...
+    def withKeplerianRates(self) -> 'FieldCircularOrbit'[_FieldCircularOrbit__T]: ...
 
 _FieldEquinoctialOrbit__T = typing.TypeVar('_FieldEquinoctialOrbit__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], PositionAngleBased, typing.Generic[_FieldEquinoctialOrbit__T]):
+class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], PositionAngleBased['FieldEquinoctialOrbit'[_FieldEquinoctialOrbit__T]], typing.Generic[_FieldEquinoctialOrbit__T]):
     """
-    public class FieldEquinoctialOrbit<T extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.orbits.FieldOrbit`<T> implements :class:`~org.orekit.orbits.PositionAngleBased`
+    public class FieldEquinoctialOrbit<T extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.orbits.FieldOrbit`<T> implements :class:`~org.orekit.orbits.PositionAngleBased`<:class:`~org.orekit.orbits.FieldEquinoctialOrbit`<T>>
     
         This class handles equinoctial orbital parameters, which can support both circular and equatorial orbits.
     
@@ -5837,7 +5993,7 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], PositionAngle
     def __init__(self, fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_FieldEquinoctialOrbit__T], frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldEquinoctialOrbit__T], t: _FieldEquinoctialOrbit__T): ...
     @typing.overload
     def __init__(self, timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldEquinoctialOrbit__T], frame: org.orekit.frames.Frame, t2: _FieldEquinoctialOrbit__T): ...
-    def addKeplerContribution(self, positionAngleType: PositionAngleType, t: _FieldEquinoctialOrbit__T, tArray: typing.List[_FieldEquinoctialOrbit__T]) -> None:
+    def addKeplerContribution(self, positionAngleType: PositionAngleType, t: _FieldEquinoctialOrbit__T, tArray: typing.Union[typing.List[_FieldEquinoctialOrbit__T], jpype.JArray]) -> None:
         """
             Add the contribution of the Keplerian motion to parameters derivatives
         
@@ -5856,12 +6012,6 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], PositionAngle
         
         """
         ...
-    _eccentricToMean__T = typing.TypeVar('_eccentricToMean__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @staticmethod
-    def eccentricToMean(t: _eccentricToMean__T, t2: _eccentricToMean__T, t3: _eccentricToMean__T) -> _eccentricToMean__T: ...
-    _eccentricToTrue__T = typing.TypeVar('_eccentricToTrue__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @staticmethod
-    def eccentricToTrue(t: _eccentricToTrue__T, t2: _eccentricToTrue__T, t3: _eccentricToTrue__T) -> _eccentricToTrue__T: ...
     def getA(self) -> _FieldEquinoctialOrbit__T:
         """
             Get the semi-major axis.
@@ -6197,15 +6347,15 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], PositionAngle
         
         """
         ...
-    def hasDerivatives(self) -> bool:
+    def hasNonKeplerianAcceleration(self) -> bool:
         """
-            Check if orbit includes derivatives.
+            Check if orbit includes non-Keplerian rates.
         
-            Specified by:
-                :meth:`~org.orekit.orbits.FieldOrbit.hasDerivatives` in class :class:`~org.orekit.orbits.FieldOrbit`
+            Overrides:
+                :meth:`~org.orekit.orbits.FieldOrbit.hasNonKeplerianAcceleration` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                true if orbit includes derivatives
+                true if orbit includes non-Keplerian derivatives
         
             Also see:
                 :meth:`~org.orekit.orbits.FieldOrbit.getADot`, :meth:`~org.orekit.orbits.FieldOrbit.getEquinoctialExDot`,
@@ -6217,23 +6367,24 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], PositionAngle
         
         """
         ...
-    def hasRates(self) -> bool:
+    def hasNonKeplerianRates(self) -> bool:
         """
-            Tells whether the instance holds rates (first-order time derivatives) for dependent variables.
+            Tells whether the instance holds rates (first-order time derivatives) for dependent variables that are incompatible with
+            Keplerian motion.
         
             Specified by:
-                :meth:`~org.orekit.orbits.PositionAngleBased.hasRates` in interface :class:`~org.orekit.orbits.PositionAngleBased`
+                :meth:`~org.orekit.orbits.PositionAngleBased.hasNonKeplerianRates` in
+                interface :class:`~org.orekit.orbits.PositionAngleBased`
         
             Returns:
-                true if and only if holding rates
+                true if and only if holding non-Keplerian rates
         
         
         """
         ...
-    _meanToEccentric__T = typing.TypeVar('_meanToEccentric__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @staticmethod
-    def meanToEccentric(t: _meanToEccentric__T, t2: _meanToEccentric__T, t3: _meanToEccentric__T) -> _meanToEccentric__T: ...
-    def removeRates(self) -> 'FieldEquinoctialOrbit'[_FieldEquinoctialOrbit__T]: ...
+    def inFrame(self, frame: org.orekit.frames.Frame) -> 'FieldEquinoctialOrbit'[_FieldEquinoctialOrbit__T]: ...
+    @typing.overload
+    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> _FieldEquinoctialOrbit__T: ...
     @typing.overload
     def shiftedBy(self, double: float) -> 'FieldEquinoctialOrbit'[_FieldEquinoctialOrbit__T]: ...
     @typing.overload
@@ -6265,14 +6416,13 @@ class FieldEquinoctialOrbit(FieldOrbit[_FieldEquinoctialOrbit__T], PositionAngle
         
         """
         ...
-    _trueToEccentric__T = typing.TypeVar('_trueToEccentric__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-    @staticmethod
-    def trueToEccentric(t: _trueToEccentric__T, t2: _trueToEccentric__T, t3: _trueToEccentric__T) -> _trueToEccentric__T: ...
+    def withCachedPositionAngleType(self, positionAngleType: PositionAngleType) -> 'FieldEquinoctialOrbit'[_FieldEquinoctialOrbit__T]: ...
+    def withKeplerianRates(self) -> 'FieldEquinoctialOrbit'[_FieldEquinoctialOrbit__T]: ...
 
 _FieldKeplerianOrbit__T = typing.TypeVar('_FieldKeplerianOrbit__T', bound=org.hipparchus.CalculusFieldElement)  # <T>
-class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], PositionAngleBased, typing.Generic[_FieldKeplerianOrbit__T]):
+class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], PositionAngleBased['FieldKeplerianOrbit'[_FieldKeplerianOrbit__T]], typing.Generic[_FieldKeplerianOrbit__T]):
     """
-    public class FieldKeplerianOrbit<T extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.orbits.FieldOrbit`<T> implements :class:`~org.orekit.orbits.PositionAngleBased`
+    public class FieldKeplerianOrbit<T extends :class:`~org.orekit.orbits.https:.www.hipparchus.org.apidocs.org.hipparchus.CalculusFieldElement?is`<T>> extends :class:`~org.orekit.orbits.FieldOrbit`<T> implements :class:`~org.orekit.orbits.PositionAngleBased`<:class:`~org.orekit.orbits.FieldKeplerianOrbit`<T>>
     
         This class handles traditional Keplerian orbital parameters.
     
@@ -6324,7 +6474,7 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], PositionAngleBase
     def __init__(self, fieldPVCoordinates: org.orekit.utils.FieldPVCoordinates[_FieldKeplerianOrbit__T], frame: org.orekit.frames.Frame, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldKeplerianOrbit__T], t: _FieldKeplerianOrbit__T): ...
     @typing.overload
     def __init__(self, timeStampedFieldPVCoordinates: org.orekit.utils.TimeStampedFieldPVCoordinates[_FieldKeplerianOrbit__T], frame: org.orekit.frames.Frame, t2: _FieldKeplerianOrbit__T): ...
-    def addKeplerContribution(self, positionAngleType: PositionAngleType, t: _FieldKeplerianOrbit__T, tArray: typing.List[_FieldKeplerianOrbit__T]) -> None:
+    def addKeplerContribution(self, positionAngleType: PositionAngleType, t: _FieldKeplerianOrbit__T, tArray: typing.Union[typing.List[_FieldKeplerianOrbit__T], jpype.JArray]) -> None:
         """
             Add the contribution of the Keplerian motion to parameters derivatives
         
@@ -6392,8 +6542,6 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], PositionAngleBase
         """
             Get the anomaly derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
-        
             Parameters:
                 type (:class:`~org.orekit.orbits.PositionAngleType`): type of the angle
         
@@ -6458,8 +6606,6 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], PositionAngleBase
     def getEccentricAnomalyDot(self) -> _FieldKeplerianOrbit__T:
         """
             Get the eccentric anomaly derivative.
-        
-            If the orbit was created without derivatives, the value returned is null.
         
             Returns:
                 eccentric anomaly derivative (rad/s)
@@ -6703,8 +6849,6 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], PositionAngleBase
         """
             Get the mean anomaly derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
-        
             Returns:
                 mean anomaly derivative (rad/s)
         
@@ -6724,8 +6868,6 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], PositionAngleBase
     def getPerigeeArgumentDot(self) -> _FieldKeplerianOrbit__T:
         """
             Get the perigee argument derivative.
-        
-            If the orbit was created without derivatives, the value returned is null.
         
             Returns:
                 perigee argument derivative (rad/s)
@@ -6747,8 +6889,6 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], PositionAngleBase
         """
             Get the right ascension of the ascending node derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
-        
             Returns:
                 right ascension of the ascending node derivative (rad/s)
         
@@ -6769,8 +6909,6 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], PositionAngleBase
         """
             Get the true anomaly derivative.
         
-            If the orbit was created without derivatives, the value returned is null.
-        
             Returns:
                 true anomaly derivative (rad/s)
         
@@ -6790,15 +6928,15 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], PositionAngleBase
         
         """
         ...
-    def hasDerivatives(self) -> bool:
+    def hasNonKeplerianAcceleration(self) -> bool:
         """
-            Check if orbit includes derivatives.
+            Check if orbit includes non-Keplerian rates.
         
-            Specified by:
-                :meth:`~org.orekit.orbits.FieldOrbit.hasDerivatives` in class :class:`~org.orekit.orbits.FieldOrbit`
+            Overrides:
+                :meth:`~org.orekit.orbits.FieldOrbit.hasNonKeplerianAcceleration` in class :class:`~org.orekit.orbits.FieldOrbit`
         
             Returns:
-                true if orbit includes derivatives
+                true if orbit includes non-Keplerian derivatives
         
             Also see:
                 :meth:`~org.orekit.orbits.FieldOrbit.getADot`, :meth:`~org.orekit.orbits.FieldOrbit.getEquinoctialExDot`,
@@ -6810,20 +6948,24 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], PositionAngleBase
         
         """
         ...
-    def hasRates(self) -> bool:
+    def hasNonKeplerianRates(self) -> bool:
         """
-            Tells whether the instance holds rates (first-order time derivatives) for dependent variables.
+            Tells whether the instance holds rates (first-order time derivatives) for dependent variables that are incompatible with
+            Keplerian motion.
         
             Specified by:
-                :meth:`~org.orekit.orbits.PositionAngleBased.hasRates` in interface :class:`~org.orekit.orbits.PositionAngleBased`
+                :meth:`~org.orekit.orbits.PositionAngleBased.hasNonKeplerianRates` in
+                interface :class:`~org.orekit.orbits.PositionAngleBased`
         
             Returns:
-                true if and only if holding rates
+                true if and only if holding non-Keplerian rates
         
         
         """
         ...
-    def removeRates(self) -> 'FieldKeplerianOrbit'[_FieldKeplerianOrbit__T]: ...
+    def inFrame(self, frame: org.orekit.frames.Frame) -> 'FieldKeplerianOrbit'[_FieldKeplerianOrbit__T]: ...
+    @typing.overload
+    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> _FieldKeplerianOrbit__T: ...
     @typing.overload
     def shiftedBy(self, double: float) -> 'FieldKeplerianOrbit'[_FieldKeplerianOrbit__T]: ...
     @typing.overload
@@ -6855,6 +6997,8 @@ class FieldKeplerianOrbit(FieldOrbit[_FieldKeplerianOrbit__T], PositionAngleBase
         
         """
         ...
+    def withCachedPositionAngleType(self, positionAngleType: PositionAngleType) -> 'FieldKeplerianOrbit'[_FieldKeplerianOrbit__T]: ...
+    def withKeplerianRates(self) -> 'FieldKeplerianOrbit'[_FieldKeplerianOrbit__T]: ...
 
 _FieldOrbitBlender__KK = typing.TypeVar('_FieldOrbitBlender__KK', bound=org.hipparchus.CalculusFieldElement)  # <KK>
 class FieldOrbitBlender(AbstractFieldOrbitInterpolator[_FieldOrbitBlender__KK], typing.Generic[_FieldOrbitBlender__KK]):
@@ -6878,11 +7022,11 @@ class FieldOrbitBlender(AbstractFieldOrbitInterpolator[_FieldOrbitBlender__KK], 
     """
     def __init__(self, fieldSmoothStepFunction: org.hipparchus.analysis.polynomials.SmoothStepFactory.FieldSmoothStepFunction[_FieldOrbitBlender__KK], fieldAbstractAnalyticalPropagator: org.orekit.propagation.analytical.FieldAbstractAnalyticalPropagator[_FieldOrbitBlender__KK], frame: org.orekit.frames.Frame): ...
     @typing.overload
-    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, collection: typing.Union[java.util.Collection[org.orekit.time.FieldTimeStamped], typing.Sequence[org.orekit.time.FieldTimeStamped]]) -> org.orekit.time.FieldTimeStamped: ...
+    def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, collection: typing.Union[java.util.Collection[org.orekit.time.FieldTimeStamped], typing.Sequence[org.orekit.time.FieldTimeStamped], typing.Set[org.orekit.time.FieldTimeStamped]]) -> org.orekit.time.FieldTimeStamped: ...
     @typing.overload
     def interpolate(self, absoluteDate: org.orekit.time.AbsoluteDate, stream: java.util.stream.Stream[org.orekit.time.FieldTimeStamped]) -> org.orekit.time.FieldTimeStamped: ...
     @typing.overload
-    def interpolate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldOrbitBlender__KK], collection: typing.Union[java.util.Collection[FieldOrbit[_FieldOrbitBlender__KK]], typing.Sequence[FieldOrbit[_FieldOrbitBlender__KK]]]) -> FieldOrbit[_FieldOrbitBlender__KK]: ...
+    def interpolate(self, fieldAbsoluteDate: org.orekit.time.FieldAbsoluteDate[_FieldOrbitBlender__KK], collection: typing.Union[java.util.Collection[FieldOrbit[_FieldOrbitBlender__KK]], typing.Sequence[FieldOrbit[_FieldOrbitBlender__KK]], typing.Set[FieldOrbit[_FieldOrbitBlender__KK]]]) -> FieldOrbit[_FieldOrbitBlender__KK]: ...
     @typing.overload
     def interpolate(self, abstractFieldTimeInterpolator: org.orekit.time.AbstractFieldTimeInterpolator.InterpolationData) -> FieldOrbit[_FieldOrbitBlender__KK]: ...
     @typing.overload
@@ -6945,9 +7089,9 @@ class HaloOrbit(LibrationOrbit):
     @typing.overload
     def __init__(self, richardsonExpansion: RichardsonExpansion, double: float, librationOrbitFamily: LibrationOrbitFamily): ...
 
-class KeplerianOrbit(Orbit, PositionAngleBased):
+class KeplerianOrbit(Orbit, PositionAngleBased['KeplerianOrbit']):
     """
-    public class KeplerianOrbit extends :class:`~org.orekit.orbits.Orbit` implements :class:`~org.orekit.orbits.PositionAngleBased`
+    public class KeplerianOrbit extends :class:`~org.orekit.orbits.Orbit` implements :class:`~org.orekit.orbits.PositionAngleBased`<:class:`~org.orekit.orbits.KeplerianOrbit`>
     
         This class handles traditional Keplerian orbital parameters.
     
@@ -6976,7 +7120,7 @@ class KeplerianOrbit(Orbit, PositionAngleBased):
     
         Also see:
             :class:`~org.orekit.orbits.Orbit`, :class:`~org.orekit.orbits.CircularOrbit`,
-            :class:`~org.orekit.orbits.CartesianOrbit`, :class:`~org.orekit.orbits.EquinoctialOrbit`, :meth:`~serialized`
+            :class:`~org.orekit.orbits.CartesianOrbit`, :class:`~org.orekit.orbits.EquinoctialOrbit`
     """
     @typing.overload
     def __init__(self, double: float, double2: float, double3: float, double4: float, double5: float, double6: float, double7: float, double8: float, double9: float, double10: float, double11: float, double12: float, positionAngleType: PositionAngleType, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, double13: float): ...
@@ -6992,7 +7136,7 @@ class KeplerianOrbit(Orbit, PositionAngleBased):
     def __init__(self, pVCoordinates: org.orekit.utils.PVCoordinates, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, double: float): ...
     @typing.overload
     def __init__(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame, double: float): ...
-    def addKeplerContribution(self, positionAngleType: PositionAngleType, double: float, doubleArray: typing.List[float]) -> None:
+    def addKeplerContribution(self, positionAngleType: PositionAngleType, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
             Add the contribution of the Keplerian motion to parameters derivatives
         
@@ -7040,9 +7184,6 @@ class KeplerianOrbit(Orbit, PositionAngleBased):
         
             Returns:
                 semi-major axis derivative (m/s)
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
         
         
         """
@@ -7116,9 +7257,6 @@ class KeplerianOrbit(Orbit, PositionAngleBased):
             Returns:
                 eccentricity derivative
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -7171,9 +7309,6 @@ class KeplerianOrbit(Orbit, PositionAngleBased):
             Returns:
                 first component of the equinoctial eccentricity vector derivative
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -7202,9 +7337,6 @@ class KeplerianOrbit(Orbit, PositionAngleBased):
         
             Returns:
                 second component of the equinoctial eccentricity vector derivative
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
         
         
         """
@@ -7235,9 +7367,6 @@ class KeplerianOrbit(Orbit, PositionAngleBased):
             Returns:
                 first component of the inclination vector derivative
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -7266,9 +7395,6 @@ class KeplerianOrbit(Orbit, PositionAngleBased):
         
             Returns:
                 second component of the inclination vector derivative
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
         
         
         """
@@ -7299,9 +7425,6 @@ class KeplerianOrbit(Orbit, PositionAngleBased):
             Returns:
                 inclination derivative (rad/s)
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -7330,9 +7453,6 @@ class KeplerianOrbit(Orbit, PositionAngleBased):
         
             Returns:
                 d(E + ω + Ω)/dt eccentric longitude argument derivative (rad/s)
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
         
         
         """
@@ -7363,9 +7483,6 @@ class KeplerianOrbit(Orbit, PositionAngleBased):
             Returns:
                 d(M + ω + Ω)/dt mean longitude argument derivative (rad/s)
         
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -7394,9 +7511,6 @@ class KeplerianOrbit(Orbit, PositionAngleBased):
         
             Returns:
                 d(v + ω + Ω)/dt true longitude argument derivative (rad/s)
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
         
         
         """
@@ -7509,32 +7623,59 @@ class KeplerianOrbit(Orbit, PositionAngleBased):
         
         """
         ...
-    def hasRates(self) -> bool:
+    def hasNonKeplerianAcceleration(self) -> bool:
         """
-            Tells whether the instance holds rates (first-order time derivatives) for dependent variables.
+            Check if orbit includes non-Keplerian rates.
         
-            Specified by:
-                :meth:`~org.orekit.orbits.PositionAngleBased.hasRates` in interface :class:`~org.orekit.orbits.PositionAngleBased`
+            Overrides:
+                :meth:`~org.orekit.orbits.Orbit.hasNonKeplerianAcceleration` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                true if and only if holding rates
+                true if orbit includes non-Keplerian derivatives
+        
+            Also see:
+                :meth:`~org.orekit.orbits.Orbit.getADot`, :meth:`~org.orekit.orbits.Orbit.getEquinoctialExDot`,
+                :meth:`~org.orekit.orbits.Orbit.getEquinoctialEyDot`, :meth:`~org.orekit.orbits.Orbit.getHxDot`,
+                :meth:`~org.orekit.orbits.Orbit.getHyDot`, :meth:`~org.orekit.orbits.Orbit.getLEDot`,
+                :meth:`~org.orekit.orbits.Orbit.getLvDot`, :meth:`~org.orekit.orbits.Orbit.getLMDot`,
+                :meth:`~org.orekit.orbits.Orbit.getEDot`, :meth:`~org.orekit.orbits.Orbit.getIDot`
         
         
         """
         ...
-    def removeRates(self) -> 'KeplerianOrbit':
+    def hasNonKeplerianRates(self) -> bool:
         """
-            Create a new instance such that :meth:`~org.orekit.orbits.PositionAngleBased.hasRates` is false.
+            Tells whether the instance holds rates (first-order time derivatives) for dependent variables that are incompatible with
+            Keplerian motion.
         
             Specified by:
-                :meth:`~org.orekit.orbits.PositionAngleBased.removeRates` in interface :class:`~org.orekit.orbits.PositionAngleBased`
+                :meth:`~org.orekit.orbits.PositionAngleBased.hasNonKeplerianRates` in
+                interface :class:`~org.orekit.orbits.PositionAngleBased`
         
             Returns:
-                new object without rates
+                true if and only if holding non-Keplerian rates
         
         
         """
         ...
+    def inFrame(self, frame: org.orekit.frames.Frame) -> 'KeplerianOrbit':
+        """
+            Create a new object representing the same physical orbital state, but attached to a different reference frame. If the
+            new frame is not inertial, an exception will be thrown.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.Orbit.inFrame` in class :class:`~org.orekit.orbits.Orbit`
+        
+            Parameters:
+                inertialFrame (:class:`~org.orekit.frames.Frame`): reference frame of output orbit
+        
+            Returns:
+                orbit with different frame
+        
+        
+        """
+        ...
+    @typing.overload
     def shiftedBy(self, double: float) -> 'KeplerianOrbit':
         """
             Get a time-shifted orbit.
@@ -7556,9 +7697,30 @@ class KeplerianOrbit(Orbit, PositionAngleBased):
             Returns:
                 a new orbit, shifted with respect to the instance (which is immutable)
         
+            Get a time-shifted orbit.
+        
+            The orbit can be slightly shifted to close dates. The shifting model is a Keplerian one if no derivatives are available
+            in the orbit, or Keplerian plus quadratic effect of the non-Keplerian acceleration if derivatives are available.
+            Shifting is *not* intended as a replacement for proper orbit propagation but should be sufficient for small time shifts
+            or coarse accuracy.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeShiftable.shiftedBy` in interface :class:`~org.orekit.time.TimeShiftable`
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.Orbit.shiftedBy` in class :class:`~org.orekit.orbits.Orbit`
+        
+            Parameters:
+                dt (:class:`~org.orekit.time.TimeOffset`): time shift
+        
+            Returns:
+                a new orbit, shifted with respect to the instance (which is immutable)
+        
         
         """
         ...
+    @typing.overload
+    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> 'KeplerianOrbit': ...
     def toString(self) -> str:
         """
             Returns a string representation of this Keplerian parameters object.
@@ -7569,6 +7731,37 @@ class KeplerianOrbit(Orbit, PositionAngleBased):
         
             Returns:
                 a string representation of this object
+        
+        
+        """
+        ...
+    def withCachedPositionAngleType(self, positionAngleType: PositionAngleType) -> 'KeplerianOrbit':
+        """
+            Creates a new instance with the provided type used for caching.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.PositionAngleBased.withCachedPositionAngleType` in
+                interface :class:`~org.orekit.orbits.PositionAngleBased`
+        
+            Parameters:
+                positionAngleType (:class:`~org.orekit.orbits.PositionAngleType`): position angle type to use for caching value
+        
+            Returns:
+                new object
+        
+        
+        """
+        ...
+    def withKeplerianRates(self) -> 'KeplerianOrbit':
+        """
+            Creates a new instance such that :meth:`~org.orekit.orbits.PositionAngleBased.hasNonKeplerianRates` is false.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.PositionAngleBased.withKeplerianRates` in
+                interface :class:`~org.orekit.orbits.PositionAngleBased`
+        
+            Returns:
+                new object without rates
         
         
         """
@@ -7708,18 +7901,13 @@ class PythonLibrationOrbit(LibrationOrbit):
 class PythonOrbit(Orbit):
     """
     public class PythonOrbit extends :class:`~org.orekit.orbits.Orbit`
-    
-    
-        Also see:
-            :meth:`~serialized`
     """
     @typing.overload
     def __init__(self, frame: org.orekit.frames.Frame, absoluteDate: org.orekit.time.AbsoluteDate, double: float): ...
     @typing.overload
     def __init__(self, timeStampedPVCoordinates: org.orekit.utils.TimeStampedPVCoordinates, frame: org.orekit.frames.Frame, double: float): ...
-    def addKeplerContribution(self, positionAngleType: PositionAngleType, double: float, doubleArray: typing.List[float]) -> None:
+    def addKeplerContribution(self, positionAngleType: PositionAngleType, double: float, doubleArray: typing.Union[typing.List[float], jpype.JArray]) -> None:
         """
-            Description copied from class: :meth:`~org.orekit.orbits.Orbit.addKeplerContribution`
             Add the contribution of the Keplerian motion to parameters derivatives
         
             This method is used by integration-based propagators to evaluate the part of Keplerian motion to evolution of the
@@ -7737,13 +7925,15 @@ class PythonOrbit(Orbit):
         
         """
         ...
-    def computeJacobianEccentricWrtCartesian(self) -> typing.List[typing.List[float]]:
+    def computeJacobianEccentricWrtCartesian(self) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
             Compute the Jacobian of the orbital parameters with eccentric angle with respect to the Cartesian parameters.
         
             Element :code:`jacobian[i][j]` is the derivative of parameter i of the orbit with respect to Cartesian coordinate j.
             This means each row correspond to one orbital parameter whereas columns 0 to 5 correspond to the Cartesian coordinates
             x, y, z, xDot, yDot and zDot.
+        
+            The array returned by this method will not be modified.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.computeJacobianEccentricWrtCartesian` in class :class:`~org.orekit.orbits.Orbit`
@@ -7752,19 +7942,21 @@ class PythonOrbit(Orbit):
                 6x6 Jacobian matrix
         
             Also see:
-                :meth:`~org.orekit.orbits.PythonOrbit.computeJacobianMeanWrtCartesian`,
-                :meth:`~org.orekit.orbits.PythonOrbit.computeJacobianTrueWrtCartesian`
+                :meth:`~org.orekit.orbits.Orbit.computeJacobianMeanWrtCartesian`,
+                :meth:`~org.orekit.orbits.Orbit.computeJacobianTrueWrtCartesian`
         
         
         """
         ...
-    def computeJacobianMeanWrtCartesian(self) -> typing.List[typing.List[float]]:
+    def computeJacobianMeanWrtCartesian(self) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
             Compute the Jacobian of the orbital parameters with mean angle with respect to the Cartesian parameters.
         
             Element :code:`jacobian[i][j]` is the derivative of parameter i of the orbit with respect to Cartesian coordinate j.
             This means each row correspond to one orbital parameter whereas columns 0 to 5 correspond to the Cartesian coordinates
             x, y, z, xDot, yDot and zDot.
+        
+            The array returned by this method will not be modified.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.computeJacobianMeanWrtCartesian` in class :class:`~org.orekit.orbits.Orbit`
@@ -7773,19 +7965,21 @@ class PythonOrbit(Orbit):
                 6x6 Jacobian matrix
         
             Also see:
-                :meth:`~org.orekit.orbits.PythonOrbit.computeJacobianEccentricWrtCartesian`,
-                :meth:`~org.orekit.orbits.PythonOrbit.computeJacobianTrueWrtCartesian`
+                :meth:`~org.orekit.orbits.Orbit.computeJacobianEccentricWrtCartesian`,
+                :meth:`~org.orekit.orbits.Orbit.computeJacobianTrueWrtCartesian`
         
         
         """
         ...
-    def computeJacobianTrueWrtCartesian(self) -> typing.List[typing.List[float]]:
+    def computeJacobianTrueWrtCartesian(self) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
             Compute the Jacobian of the orbital parameters with true angle with respect to the Cartesian parameters.
         
             Element :code:`jacobian[i][j]` is the derivative of parameter i of the orbit with respect to Cartesian coordinate j.
             This means each row correspond to one orbital parameter whereas columns 0 to 5 correspond to the Cartesian coordinates
             x, y, z, xDot, yDot and zDot.
+        
+            The array returned by this method will not be modified.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.computeJacobianTrueWrtCartesian` in class :class:`~org.orekit.orbits.Orbit`
@@ -7794,8 +7988,8 @@ class PythonOrbit(Orbit):
                 6x6 Jacobian matrix
         
             Also see:
-                :meth:`~org.orekit.orbits.PythonOrbit.computeJacobianMeanWrtCartesian`,
-                :meth:`~org.orekit.orbits.PythonOrbit.computeJacobianEccentricWrtCartesian`
+                :meth:`~org.orekit.orbits.Orbit.computeJacobianMeanWrtCartesian`,
+                :meth:`~org.orekit.orbits.Orbit.computeJacobianEccentricWrtCartesian`
         
         
         """
@@ -7831,12 +8025,6 @@ class PythonOrbit(Orbit):
             Returns:
                 semi-major axis derivative (m/s)
         
-            Since:
-                9.0
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -7866,31 +8054,25 @@ class PythonOrbit(Orbit):
             Returns:
                 eccentricity derivative
         
-            Since:
-                9.0
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
     def getEquinoctialEx(self) -> float:
         """
-            Get the first component of the equinoctial eccentricity vector derivative.
+            Get the first component of the equinoctial eccentricity vector.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getEquinoctialEx` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                first component of the equinoctial eccentricity vector derivative
+                first component of the equinoctial eccentricity vector
         
         
         """
         ...
     def getEquinoctialExDot(self) -> float:
         """
-            Get the first component of the equinoctial eccentricity vector.
+            Get the first component of the equinoctial eccentricity vector derivative.
         
             If the orbit was created without derivatives, the value returned is
             :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
@@ -7899,33 +8081,27 @@ class PythonOrbit(Orbit):
                 :meth:`~org.orekit.orbits.Orbit.getEquinoctialExDot` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                first component of the equinoctial eccentricity vector
-        
-            Since:
-                9.0
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
+                first component of the equinoctial eccentricity vector derivative
         
         
         """
         ...
     def getEquinoctialEy(self) -> float:
         """
-            Get the second component of the equinoctial eccentricity vector derivative.
+            Get the second component of the equinoctial eccentricity vector.
         
             Specified by:
                 :meth:`~org.orekit.orbits.Orbit.getEquinoctialEy` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                second component of the equinoctial eccentricity vector derivative
+                second component of the equinoctial eccentricity vector
         
         
         """
         ...
     def getEquinoctialEyDot(self) -> float:
         """
-            Get the second component of the equinoctial eccentricity vector.
+            Get the second component of the equinoctial eccentricity vector derivative.
         
             If the orbit was created without derivatives, the value returned is
             :meth:`~org.orekit.orbits.https:.docs.oracle.com.javase.8.docs.api.java.lang.Double.html?is`.
@@ -7934,13 +8110,7 @@ class PythonOrbit(Orbit):
                 :meth:`~org.orekit.orbits.Orbit.getEquinoctialEyDot` in class :class:`~org.orekit.orbits.Orbit`
         
             Returns:
-                second component of the equinoctial eccentricity vector
-        
-            Since:
-                9.0
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
+                second component of the equinoctial eccentricity vector derivative
         
         
         """
@@ -7971,12 +8141,6 @@ class PythonOrbit(Orbit):
             Returns:
                 first component of the inclination vector derivative
         
-            Since:
-                9.0
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -8005,12 +8169,6 @@ class PythonOrbit(Orbit):
         
             Returns:
                 second component of the inclination vector derivative
-        
-            Since:
-                9.0
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
         
         
         """
@@ -8041,12 +8199,6 @@ class PythonOrbit(Orbit):
             Returns:
                 inclination derivative (rad/s)
         
-            Since:
-                9.0
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -8075,12 +8227,6 @@ class PythonOrbit(Orbit):
         
             Returns:
                 d(E + ω + Ω)/dt eccentric longitude argument derivative (rad/s)
-        
-            Since:
-                9.0
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
         
         
         """
@@ -8111,12 +8257,6 @@ class PythonOrbit(Orbit):
             Returns:
                 d(M + ω + Ω)/dt mean longitude argument derivative (rad/s)
         
-            Since:
-                9.0
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -8146,12 +8286,6 @@ class PythonOrbit(Orbit):
             Returns:
                 d(v + ω + Ω)/dt true longitude argument derivative (rad/s)
         
-            Since:
-                9.0
-        
-            Also see:
-                :meth:`~org.orekit.orbits.Orbit.hasDerivatives`
-        
         
         """
         ...
@@ -8164,6 +8298,23 @@ class PythonOrbit(Orbit):
         
             Returns:
                 orbit type
+        
+        
+        """
+        ...
+    def inFrame(self, frame: org.orekit.frames.Frame) -> Orbit:
+        """
+            Create a new object representing the same physical orbital state, but attached to a different reference frame. If the
+            new frame is not inertial, an exception will be thrown.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.Orbit.inFrame` in class :class:`~org.orekit.orbits.Orbit`
+        
+            Parameters:
+                inertialFrame (:class:`~org.orekit.frames.Frame`): reference frame of output orbit
+        
+            Returns:
+                orbit with different frame
         
         
         """
@@ -8183,7 +8334,6 @@ class PythonOrbit(Orbit):
         ...
     def initPosition(self) -> org.hipparchus.geometry.euclidean.threed.Vector3D:
         """
-            Description copied from class: :meth:`~org.orekit.orbits.Orbit.initPosition`
             Compute the position coordinates from the canonical parameters.
         
             Specified by:
@@ -8214,6 +8364,7 @@ class PythonOrbit(Orbit):
             Part of JCC Python interface to object
         """
         ...
+    @typing.overload
     def shiftedBy(self, double: float) -> Orbit:
         """
             Get a time-shifted orbit.
@@ -8235,9 +8386,30 @@ class PythonOrbit(Orbit):
             Returns:
                 a new orbit, shifted with respect to the instance (which is immutable)
         
+            Get a time-shifted orbit.
+        
+            The orbit can be slightly shifted to close dates. The shifting model is a Keplerian one if no derivatives are available
+            in the orbit, or Keplerian plus quadratic effect of the non-Keplerian acceleration if derivatives are available.
+            Shifting is *not* intended as a replacement for proper orbit propagation but should be sufficient for small time shifts
+            or coarse accuracy.
+        
+            Specified by:
+                :meth:`~org.orekit.time.TimeShiftable.shiftedBy` in interface :class:`~org.orekit.time.TimeShiftable`
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.Orbit.shiftedBy` in class :class:`~org.orekit.orbits.Orbit`
+        
+            Parameters:
+                dt (:class:`~org.orekit.time.TimeOffset`): time shift
+        
+            Returns:
+                a new orbit, shifted with respect to the instance (which is immutable)
+        
         
         """
         ...
+    @typing.overload
+    def shiftedBy(self, timeOffset: org.orekit.time.TimeOffset) -> Orbit: ...
 
 class PythonPositionAngleBased(PositionAngleBased):
     """
@@ -8259,15 +8431,18 @@ class PythonPositionAngleBased(PositionAngleBased):
         
         """
         ...
-    def hasRates(self) -> bool:
+    def hasNonKeplerianRates(self) -> bool:
         """
-            Tells whether the instance holds rates (first-order time derivatives) for dependent variables.
+            Description copied from interface: :meth:`~org.orekit.orbits.PositionAngleBased.hasNonKeplerianRates`
+            Tells whether the instance holds rates (first-order time derivatives) for dependent variables that are incompatible with
+            Keplerian motion.
         
             Specified by:
-                :meth:`~org.orekit.orbits.PositionAngleBased.hasRates` in interface :class:`~org.orekit.orbits.PositionAngleBased`
+                :meth:`~org.orekit.orbits.PositionAngleBased.hasNonKeplerianRates` in
+                interface :class:`~org.orekit.orbits.PositionAngleBased`
         
             Returns:
-                true if and only if holding rates
+                true if and only if holding non-Keplerian rates
         
         
         """
@@ -8291,12 +8466,32 @@ class PythonPositionAngleBased(PositionAngleBased):
             Part of JCC Python interface to object
         """
         ...
-    def removeRates(self) -> PositionAngleBased:
+    def withCachedPositionAngleType(self, positionAngleType: PositionAngleType) -> typing.Any:
         """
-            Create a new instance such that :meth:`~org.orekit.orbits.PositionAngleBased.hasRates` is false.
+            Description copied from interface: :meth:`~org.orekit.orbits.PositionAngleBased.withCachedPositionAngleType`
+            Creates a new instance with the provided type used for caching.
         
             Specified by:
-                :meth:`~org.orekit.orbits.PositionAngleBased.removeRates` in interface :class:`~org.orekit.orbits.PositionAngleBased`
+                :meth:`~org.orekit.orbits.PositionAngleBased.withCachedPositionAngleType` in
+                interface :class:`~org.orekit.orbits.PositionAngleBased`
+        
+            Parameters:
+                positionAngleType (:class:`~org.orekit.orbits.PositionAngleType`): position angle type to use for caching value
+        
+            Returns:
+                new object
+        
+        
+        """
+        ...
+    def withKeplerianRates(self) -> typing.Any:
+        """
+            Description copied from interface: :meth:`~org.orekit.orbits.PositionAngleBased.withKeplerianRates`
+            Creates a new instance such that :meth:`~org.orekit.orbits.PositionAngleBased.hasNonKeplerianRates` is false.
+        
+            Specified by:
+                :meth:`~org.orekit.orbits.PositionAngleBased.withKeplerianRates` in
+                interface :class:`~org.orekit.orbits.PositionAngleBased`
         
             Returns:
                 new object without rates
@@ -8306,7 +8501,7 @@ class PythonPositionAngleBased(PositionAngleBased):
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.orbits")``.
 
     AbstractFieldOrbitInterpolator: typing.Type[AbstractFieldOrbitInterpolator]
@@ -8347,4 +8542,3 @@ class __module_protocol__(typing.Protocol):
     RichardsonExpansion: typing.Type[RichardsonExpansion]
     WalkerConstellation: typing.Type[WalkerConstellation]
     WalkerConstellationSlot: typing.Type[WalkerConstellationSlot]
-    class-use: org.orekit.orbits.class-use.__module_protocol__

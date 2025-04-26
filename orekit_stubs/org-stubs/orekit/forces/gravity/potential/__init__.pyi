@@ -1,8 +1,15 @@
+
+import sys
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 import java.io
 import java.lang
 import java.util
+import jpype
 import org.orekit.data
-import org.orekit.forces.gravity.potential.class-use
 import org.orekit.time
 import typing
 
@@ -165,7 +172,7 @@ class GravityFieldFactory:
     def getGravityFields() -> 'LazyLoadedGravityFields': ...
     @typing.overload
     @staticmethod
-    def getNormalizedProvider(double: float, double2: float, tideSystem: 'TideSystem', doubleArray: typing.List[typing.List[float]], doubleArray2: typing.List[typing.List[float]]) -> 'NormalizedSphericalHarmonicsProvider':
+    def getNormalizedProvider(double: float, double2: float, tideSystem: 'TideSystem', doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray2: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> 'NormalizedSphericalHarmonicsProvider':
         """
             Create a time-independent :class:`~org.orekit.forces.gravity.potential.NormalizedSphericalHarmonicsProvider` from
             canonical coefficients.
@@ -216,7 +223,7 @@ class GravityFieldFactory:
     @staticmethod
     def getOceanTidesWaves(int: int, int2: int) -> java.util.List['OceanTidesWave']: ...
     @staticmethod
-    def getUnnormalizationFactors(int: int, int2: int) -> typing.List[typing.List[float]]:
+    def getUnnormalizationFactors(int: int, int2: int) -> typing.MutableSequence[typing.MutableSequence[float]]:
         """
             Get a un-normalization factors array.
         
@@ -237,7 +244,7 @@ class GravityFieldFactory:
         ...
     @typing.overload
     @staticmethod
-    def getUnnormalizedProvider(double: float, double2: float, tideSystem: 'TideSystem', doubleArray: typing.List[typing.List[float]], doubleArray2: typing.List[typing.List[float]]) -> 'UnnormalizedSphericalHarmonicsProvider':
+    def getUnnormalizedProvider(double: float, double2: float, tideSystem: 'TideSystem', doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray2: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> 'UnnormalizedSphericalHarmonicsProvider':
         """
             Create a time-independent :class:`~org.orekit.forces.gravity.potential.UnnormalizedSphericalHarmonicsProvider` from
             canonical coefficients.
@@ -398,7 +405,7 @@ class OceanLoadDeformationCoefficients(java.lang.Enum['OceanLoadDeformationCoeff
     IERS_2003: typing.ClassVar['OceanLoadDeformationCoefficients'] = ...
     IERS_2010: typing.ClassVar['OceanLoadDeformationCoefficients'] = ...
     GEGOUT: typing.ClassVar['OceanLoadDeformationCoefficients'] = ...
-    def getCoefficients(self) -> typing.List[float]:
+    def getCoefficients(self) -> typing.MutableSequence[float]:
         """
             Get the load deformation coefficients for ocean tides.
         
@@ -433,7 +440,7 @@ class OceanLoadDeformationCoefficients(java.lang.Enum['OceanLoadDeformationCoeff
         """
         ...
     @staticmethod
-    def values() -> typing.List['OceanLoadDeformationCoefficients']:
+    def values() -> typing.MutableSequence['OceanLoadDeformationCoefficients']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -590,8 +597,8 @@ class OceanTidesWave:
         Also see:
             :class:`~org.orekit.forces.gravity.OceanTides`, :class:`~org.orekit.forces.gravity.potential.OceanTidesReader`
     """
-    def __init__(self, int: int, int2: int, int3: int, doubleArray: typing.List[typing.List[typing.List[float]]]): ...
-    def addContribution(self, bodiesElements: org.orekit.data.BodiesElements, doubleArray: typing.List[typing.List[float]], doubleArray2: typing.List[typing.List[float]]) -> None:
+    def __init__(self, int: int, int2: int, int3: int, doubleArray: typing.Union[typing.List[typing.MutableSequence[typing.MutableSequence[float]]], jpype.JArray]): ...
+    def addContribution(self, bodiesElements: org.orekit.data.BodiesElements, doubleArray: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray], doubleArray2: typing.Union[typing.List[typing.MutableSequence[float]], jpype.JArray]) -> None:
         """
             Add the contribution of the wave to Stokes coefficients.
         
@@ -831,7 +838,7 @@ class TideSystem(java.lang.Enum['TideSystem']):
         """
         ...
     @staticmethod
-    def values() -> typing.List['TideSystem']:
+    def values() -> typing.MutableSequence['TideSystem']:
         """
             Returns an array containing the constants of this enum type, in the order they are declared. This method may be used to
             iterate over the constants as follows:
@@ -2491,7 +2498,7 @@ class PythonUnnormalizedSphericalHarmonicsProvider(UnnormalizedSphericalHarmonic
         ...
 
 
-class __module_protocol__(typing.Protocol):
+class __module_protocol__(Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.orekit.forces.gravity.potential")``.
 
     AstronomicalAmplitudeReader: typing.Type[AstronomicalAmplitudeReader]
@@ -2524,4 +2531,3 @@ class __module_protocol__(typing.Protocol):
     TideSystem: typing.Type[TideSystem]
     TideSystemProvider: typing.Type[TideSystemProvider]
     UnnormalizedSphericalHarmonicsProvider: typing.Type[UnnormalizedSphericalHarmonicsProvider]
-    class-use: org.orekit.forces.gravity.potential.class-use.__module_protocol__
