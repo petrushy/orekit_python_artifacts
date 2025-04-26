@@ -74,7 +74,7 @@ class MyElevationDetector(PythonAbstractDetector):
         tmp = self.topo.getElevation(s.getPVCoordinates().getPosition(), s.getFrame(), s.getDate())-self.elevation
         return tmp
 
-    def create(self, newMaxCheck, newThreshHold, newMaxIter, newHandler):
+    def create(self,detectionSettings, newHandler):
         return MyElevationDetector(self.elevation, self.topo, handler=newHandler)
 
 class AbstractDetectorTest(unittest.TestCase):
