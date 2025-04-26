@@ -45,7 +45,7 @@ from org.orekit.orbits import PositionAngleType
 from org.orekit.time import AbsoluteDate, TimeScalesFactory
 # import org.orekit.time.TimeScalesFactory;
 from org.orekit.estimation.measurements import ObservableSatellite, PV
-from .PVMeasurementCreator import PVMeasurementCreator
+from PVMeasurementCreator import PVMeasurementCreator
 from org.orekit.estimation.iod import IodGibbs
 
 import pathlib, os

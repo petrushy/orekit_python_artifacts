@@ -26,7 +26,7 @@ import unittest
 import orekit
 orekit.initVM()
 
-from .MeasurementCreator import MeasurementCreator
+from MeasurementCreator import MeasurementCreator
 from org.orekit.estimation.measurements import ObservableSatellite, PV
 
 class PVMeasurementCreator(MeasurementCreator):
