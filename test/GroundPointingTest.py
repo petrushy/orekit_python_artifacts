@@ -26,7 +26,7 @@ import unittest
 from org.hipparchus.analysis.differentiation import GradientField, UnivariateDerivative2
 
 
-class TestGroundPointing(PythonGroundPointing):
+class MyGroundPointing(PythonGroundPointing):
     def getTargetPV(self, pvProv, date, frame) -> Union[TimeStampedPVCoordinates,TimeStampedFieldPVCoordinates]:
         if isinstance(pvProv, FieldPVCoordinatesProvider):
             return TimeStampedFieldPVCoordinates(date, FieldPVCoordinates.getZero(date.getField()))
@@ -65,7 +65,7 @@ class GroundPointingTest(unittest.TestCase):
 
     def templateTestGetRotation(self, frame):
         # setup
-        groundPointing = TestGroundPointing(self.INERTIAL_FRAME, self.EARTH_FIXED_FRAME)
+        groundPointing = MyGroundPointing(self.INERTIAL_FRAME, self.EARTH_FIXED_FRAME)
         orbit = self.createPVCoordinatesProvider()
 
         actualRotation = groundPointing.getAttitudeRotation(orbit, orbit.getDate(), frame)
@@ -88,7 +88,7 @@ class GroundPointingTest(unittest.TestCase):
 
     def templateTestGetRotationField(self, field, frame):
         # GIVEN
-        groundPointing = TestGroundPointing(self.INERTIAL_FRAME, self.EARTH_FIXED_FRAME)
+        groundPointing = MyGroundPointing(self.INERTIAL_FRAME, self.EARTH_FIXED_FRAME)
         orbit = self.createPVCoordinatesProvider()
         fieldOrbit = self.convertToField(field, orbit)
         # WHEN
@@ -108,7 +108,7 @@ class GroundPointingTest(unittest.TestCase):
 
 
     def templateTestGetAttitudeField(self, field):
-        groundPointing = TestGroundPointing(self.INERTIAL_FRAME, self.EARTH_FIXED_FRAME)
+        groundPointing = MyGroundPointing(self.INERTIAL_FRAME, self.EARTH_FIXED_FRAME)
         orbit = self.createPVCoordinatesProvider()
         fieldOrbit = self.convertToField(field, orbit)
         actualAttitude = groundPointing.getAttitude(fieldOrbit, fieldOrbit.getDate(), self.OTHER_INERTIAL_FRAME).toAttitude()

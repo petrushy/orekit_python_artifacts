@@ -88,7 +88,7 @@ from org.orekit.utils import IERSConventions
 # from org.orekit.utils.ParameterDriver;
 from org.orekit.propagation import Propagator
 
-from Context import Context
+from .Context import Context
 
 curdir = pathlib.Path(__file__).parent.resolve()
 

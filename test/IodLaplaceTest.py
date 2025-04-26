@@ -53,7 +53,6 @@ from org.orekit.propagation import SpacecraftState
 from org.orekit.time import AbsoluteDate, TimeScalesFactory
 # import org.orekit.time.TimeScalesFactory;
 from org.orekit.estimation.measurements import ObservableSatellite, PV, GroundStation, AngularRaDec
-from PVMeasurementCreator import PVMeasurementCreator
 from org.orekit.estimation.iod import IodLaplace
 from org.orekit.utils import IERSConventions, Constants, AbsolutePVCoordinates
 from org.orekit.bodies import OneAxisEllipsoid, GeodeticPoint
