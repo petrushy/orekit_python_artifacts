@@ -21,15 +21,16 @@ from __future__ import division
 from __future__ import print_function
 
 import shutil
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 
 import math
 import os
 from java.io import File
 from orekit import JArray
 from org.orekit.data import DataProvidersManager, ZipJarCrawler, DirectoryCrawler, DataContext
-from org.orekit.time import TimeScalesFactory, AbsoluteDate
+from org.orekit.time import TimeScalesFactory, AbsoluteDate, TimeOffset
 from org.orekit.utils import ElevationMask
+from java.util.concurrent import TimeUnit
 
 try:
     import urllib.request as urlrequest
@@ -128,48 +129,47 @@ def setup_orekit_curdir(filename='orekit-data.zip', from_pip_library=False):
     DM.resetFiltersToDefault()
     DM.addProvider(crawler)
 
-
-def absolutedate_to_datetime(orekit_absolutedate):
+MICROSECOND_MULTIPLIER = 1000000
+def absolutedate_to_datetime(orekit_absolutedate: AbsoluteDate) -> datetime:
     """ Converts from orekit.AbsoluteDate objects
-    to python datetime objects (utc)"""
+    to python datetime objects (utc).
+    Args:
+        orekit_absolutedate (AbsoluteDate): orekit AbsoluteDate object to convert
+    Returns:
+        datetime: time in python datetime format (UTC)
+    """
 
     utc = TimeScalesFactory.getUTC()
     or_comp = orekit_absolutedate.getComponents(utc)
     or_date = or_comp.getDate()
     or_time = or_comp.getTime()
-    seconds = or_time.getSecond()
-    seconds_int = int(math.floor(seconds))
-    microseconds = int(1000000.0 * (seconds - math.floor(seconds)))
-    if seconds_int > 59:  # This can take the value 60 during a leap second
-        seconds_int = 59
-        microseconds = 999999  # Also modifying microseconds to ensure that the time flow stays monotonic
-
+    us = or_time.getSplitSecond().getRoundedTime(TimeUnit.MICROSECONDS)
     return datetime(or_date.getYear(),
                     or_date.getMonth(),
                     or_date.getDay(),
                     or_time.getHour(),
-                    or_time.getMinute(),
-                    seconds_int,
-                    microseconds)
+                    or_time.getMinute()) + timedelta(microseconds=us)
 
 
-def datetime_to_absolutedate(dt_date):
-    """ Converts from python datetime objects (utc)
-    to orekit.AbsoluteDate objects.
-
+def datetime_to_absolutedate(dt_date: datetime) -> AbsoluteDate:
+    """ Converts from python datetime objects to orekit.AbsoluteDate objects.
     Args:
-        dt_date (datetime): python datetime object to convert
-
+        dt_date (datetime): datetime object to convert
     Returns:
-        AbsoluteDate: time in orekit format"""
+        AbsoluteDate: time in orekit AbsoluteDate format
+    """
+    if dt_date.tzinfo is not None and dt_date.tzinfo.utcoffset(dt_date) is not None:
+        # If the datetime is timezone-aware, convert it to UTC
+        dt_date = dt_date.astimezone(timezone.utc)
 
     utc = TimeScalesFactory.getUTC()
+
     return AbsoluteDate(dt_date.year,
                         dt_date.month,
                         dt_date.day,
                         dt_date.hour,
                         dt_date.minute,
-                        dt_date.second + dt_date.microsecond / 1000000.,
+                        TimeOffset(dt_date.second*MICROSECOND_MULTIPLIER+dt_date.microsecond, TimeOffset.MICROSECOND),
                         utc)
 
 
