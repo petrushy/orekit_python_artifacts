@@ -130,11 +130,13 @@ def setup_orekit_curdir(filename='orekit-data.zip', from_pip_library=False):
     DM.addProvider(crawler)
 
 MICROSECOND_MULTIPLIER = 1000000
-def absolutedate_to_datetime(orekit_absolutedate: AbsoluteDate) -> datetime:
+def absolutedate_to_datetime(orekit_absolutedate: AbsoluteDate, tz_aware=False) -> datetime:
     """ Converts from orekit.AbsoluteDate objects
     to python datetime objects (utc).
+
     Args:
         orekit_absolutedate (AbsoluteDate): orekit AbsoluteDate object to convert
+        tz_aware (bool): If True, the returned datetime will be timezone-aware (UTC). Default is False.
     Returns:
         datetime: time in python datetime format (UTC)
     """
@@ -144,11 +146,14 @@ def absolutedate_to_datetime(orekit_absolutedate: AbsoluteDate) -> datetime:
     or_date = or_comp.getDate()
     or_time = or_comp.getTime()
     us = or_time.getSplitSecond().getRoundedTime(TimeUnit.MICROSECONDS)
-    return datetime(or_date.getYear(),
+    dt = datetime(or_date.getYear(),
                     or_date.getMonth(),
                     or_date.getDay(),
                     or_time.getHour(),
                     or_time.getMinute()) + timedelta(microseconds=us)
+    if tz_aware:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt
 
 
 def datetime_to_absolutedate(dt_date: datetime) -> AbsoluteDate:
