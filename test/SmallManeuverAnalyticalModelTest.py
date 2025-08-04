@@ -52,7 +52,7 @@ from org.orekit.time import DateComponents
 from org.orekit.time import TimeComponents
 from org.orekit.time import TimeScalesFactory
 from org.orekit.utils import Constants
-from org.orekit.utils import PVCoordinates
+from org.orekit.utils import PVCoordinates, BoundedPVCoordinatesProvider
 
 from math import radians
 
@@ -82,7 +82,7 @@ class SmallManeuverAnalyticalModelTest(unittest.TestCase):
 
         self.assertEqual(t0.toString(), model.getDate().toString())
 
-        t = withoutManeuver.getMinDate()
+        t = BoundedPVCoordinatesProvider.cast_(withoutManeuver).getMinDate()
         while t.compareTo(withoutManeuver.getMaxDate()) < 0:
             pvWithout = withoutManeuver.getPVCoordinates(t, leo.getFrame())
             pvWith = withManeuver.getPVCoordinates(t, leo.getFrame())
@@ -124,7 +124,7 @@ class SmallManeuverAnalyticalModelTest(unittest.TestCase):
         model = SmallManeuverAnalyticalModel(withoutManeuver.propagate(t0), dV, isp)
         self.assertEqual(t0.toString(), model.getDate().toString())
 
-        t = withoutManeuver.getMinDate()
+        t = BoundedPVCoordinatesProvider.cast_(withoutManeuver).getMinDate()
         while t.compareTo(withoutManeuver.getMaxDate()) < 0:
             pvWithout = withoutManeuver.getPVCoordinates(t, leo.getFrame())
             pvWith = withManeuver.getPVCoordinates(t, leo.getFrame())
