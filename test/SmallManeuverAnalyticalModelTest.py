@@ -83,7 +83,7 @@ class SmallManeuverAnalyticalModelTest(unittest.TestCase):
         self.assertEqual(t0.toString(), model.getDate().toString())
 
         t = BoundedPVCoordinatesProvider.cast_(withoutManeuver).getMinDate()
-        while t.compareTo(withoutManeuver.getMaxDate()) < 0:
+        while t.compareTo(BoundedPVCoordinatesProvider.cast_(withoutManeuver).getMaxDate()) < 0:
             pvWithout = withoutManeuver.getPVCoordinates(t, leo.getFrame())
             pvWith = withManeuver.getPVCoordinates(t, leo.getFrame())
             pvModel = model.apply(withoutManeuver.propagate(t)).getPVCoordinates(leo.getFrame())
@@ -125,7 +125,7 @@ class SmallManeuverAnalyticalModelTest(unittest.TestCase):
         self.assertEqual(t0.toString(), model.getDate().toString())
 
         t = BoundedPVCoordinatesProvider.cast_(withoutManeuver).getMinDate()
-        while t.compareTo(withoutManeuver.getMaxDate()) < 0:
+        while t.compareTo(BoundedPVCoordinatesProvider.cast_(withoutManeuver).getMaxDate()) < 0:
             pvWithout = withoutManeuver.getPVCoordinates(t, leo.getFrame())
             pvWith = withManeuver.getPVCoordinates(t, leo.getFrame())
             pvModel = model.apply(withoutManeuver.propagate(t).getOrbit()).getPVCoordinates(leo.getFrame())
@@ -168,8 +168,8 @@ class SmallManeuverAnalyticalModelTest(unittest.TestCase):
 
         self.assertEqual(t0.toString(), model.getDate().toString())
 
-        t = withoutManeuver.getMinDate()
-        while t.compareTo(withoutManeuver.getMaxDate()) < 0:
+        t = BoundedPVCoordinatesProvider.cast_(withoutManeuver).getMinDate()
+        while t.compareTo(BoundedPVCoordinatesProvider.cast_(withoutManeuver).getMaxDate()) < 0:
             pvWithout = withoutManeuver.getPVCoordinates(t, heo.getFrame())
             pvWith = withManeuver.getPVCoordinates(t, heo.getFrame())
             pvModel = model.apply(withoutManeuver.propagate(t)).getPVCoordinates(heo.getFrame())
